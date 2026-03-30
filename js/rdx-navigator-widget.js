@@ -17,8 +17,8 @@
 (function() {
   'use strict';
 
-  // Don't run on rad-study.html (it has its own flow)
-  if (window.location.pathname.includes('rad-study.html')) return;
+  // Don't run on simulation-engine.html or rad-study.html (they have their own flow)
+  if (window.location.pathname.includes('simulation-engine') || window.location.pathname.includes('rad-study.html')) return;
   if (window.location.pathname.includes('rad-study-dashboard.html')) return;
 
   // Wait for RdxAgent to be available

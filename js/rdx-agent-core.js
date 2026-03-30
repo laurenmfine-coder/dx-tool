@@ -49,7 +49,7 @@
       mechanismdx:{ name: 'MechanismDx',url: '/mechanism/index.html',     type: 'science',     icon: '\uD83D\uDD2C', desc: 'Pathophysiology and mechanism modules' },
       edboard:    { name: 'ED Board',   url: '/virtual-emr.html',         type: 'simulation',  icon: '\uD83C\uDFE5', desc: 'Emergency department simulation' },
       clinicboard:{ name: 'Clinic Board',url: '/clinic-board.html',       type: 'simulation',  icon: '\uD83D\uDCCB', desc: 'Outpatient clinic simulation' },
-      radstudy:   { name: 'Rad Study',  url: '/rad-study.html',           type: 'study',       icon: '\uD83D\uDDBC\uFE0F', desc: 'Radiology report format study' },
+      radstudy:   { name: 'Simulate',  url: '/case-browser.html',       type: 'simulate',    icon: '\uD83C\uDFAF', desc: 'Full clinical simulation engine' },
       studyhub:   { name: 'Study Hub',  url: '/study-hub.html',           type: 'review',      icon: '\uD83D\uDCDA', desc: 'Spaced repetition and progress tracking' },
       ecg:        { name: 'ECG Trainer',url: '/ecg/index.html',           type: 'skills',      icon: '\u2764\uFE0F', desc: 'ECG interpretation practice' },
     },

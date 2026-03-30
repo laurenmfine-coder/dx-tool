@@ -106,6 +106,7 @@
       <a class="rdx-logo" href="/index.html">Reason<span>Dx</span></a>
       <div class="rdx-nav-links">
         <a class="rdx-nav-link ${isActive('casedx.html')}" href="/casedx.html">CaseDx</a>
+        <a class="rdx-nav-link ${isActive('case-browser')}" href="/case-browser.html">Simulate</a>
         <a class="rdx-nav-link ${isActive('CoachDx')}" href="/CoachDx/index.html">CoachDx</a>
         <div class="rdx-nav-dropdown">
           <button class="rdx-nav-dropdown-btn">MechanismDx</button>

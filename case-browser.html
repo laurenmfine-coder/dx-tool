@@ -3,388 +3,313 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Start a Session — ReasonDx</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>ReasonDx — Case Browser</title>
+<link rel="icon" href="favicon-32x32.png">
+<script src="js/nav-global.js"></script>
+<script src="emr-data/crt-data.js"></script>
+<script src="emr-data/dx-database.js"></script>
+<script src="emr-data/rad-study-dys001.js"></script>
+<script src="emr-data/rad-study-dys002.js"></script>
+<script src="emr-data/rad-study-cough001.js"></script>
+<script src="emr-data/rad-study-chest001.js"></script>
+<script src="emr-data/rad-study-fever001.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#FAF9F7;--cream:#F4F2EE;--surface:#FFF;
-  --text:#1C1C1A;--dim:#706F6A;--dim2:#B0AFA8;
-  --border:#E6E4DF;--border-hi:#CCCAC3;
-  --blue:#2874A6;--blue-dk:#1B4F72;--blue-lt:rgba(40,116,166,.07);
-  --teal:#0D7A67;--violet:#6B28A6;
-  --f-serif:'Playfair Display',Georgia,serif;
-  --f-sans:'DM Sans',-apple-system,sans-serif;
-}
-body{background:var(--bg);color:var(--text);font-family:var(--f-sans);min-height:100vh;-webkit-font-smoothing:antialiased}
-a{color:inherit;text-decoration:none}
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;600&display=swap');
+  :root {
+    --bg: #F8FAFC; --surface: #FFFFFF; --border: #E2E8F0;
+    --text: #1E293B; --text-secondary: #64748B; --text-muted: #94A3B8;
+    --primary: #2874A6; --primary-light: #EBF5FB; --primary-dark: #1B4F72;
+    --danger: #DC2626; --danger-light: #FEF2F2;
+    --success: #059669; --success-light: #ECFDF5;
+    --purple: #7C3AED; --purple-light: #F5F3FF;
+    --orange: #EA580C; --orange-light: #FFF7ED;
+    --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding-top: 52px; }
 
-/* ── NAV ── */
-.nav{background:rgba(250,249,247,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 40px;gap:20px;position:sticky;top:0;z-index:90}
-.nav-logo{display:flex;align-items:center;gap:9px}
-.nav-logo-mark{width:28px;height:28px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--f-serif);font-size:12px;font-weight:500}
-.nav-logo-text{font-family:var(--f-serif);font-size:17px;font-weight:400;color:var(--text)}
-.nav-sep{color:var(--dim2)}
-.nav-page{font-size:13px;font-weight:500;color:var(--dim)}
-.nav-back{margin-left:auto;font-size:13px;color:var(--dim);display:flex;align-items:center;gap:5px;transition:color .15s}
-.nav-back:hover{color:var(--text)}
+  .cb-hero {
+    background: linear-gradient(135deg, #0d2b3e 0%, #1B4F72 50%, #2874A6 100%);
+    padding: 48px 24px 36px; text-align: center; position: relative; overflow: hidden;
+  }
+  .cb-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(133,193,233,.12) 0%, transparent 60%),
+                radial-gradient(circle at 70% 30%, rgba(40,116,166,.15) 0%, transparent 50%);
+  }
+  .cb-hero h1 { font-size: 2rem; font-weight: 700; color: #fff; position: relative; z-index: 1; letter-spacing: -0.02em; }
+  .cb-hero h1 span { color: #85C1E9; }
+  .cb-hero p { font-size: 1rem; color: rgba(255,255,255,.7); margin-top: 8px; position: relative; z-index: 1; }
 
-/* ── PAGE ── */
-.page{max-width:880px;margin:0 auto;padding:56px 32px 80px}
+  .cb-stats {
+    display: flex; gap: 24px; justify-content: center; margin-top: 20px; position: relative; z-index: 1;
+  }
+  .cb-stat { text-align: center; }
+  .cb-stat-num { font-size: 1.5rem; font-weight: 700; color: #85C1E9; font-family: 'JetBrains Mono', monospace; }
+  .cb-stat-label { font-size: .72rem; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .8px; }
 
-.page-eyebrow{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--dim2);margin-bottom:14px;text-align:center}
-.page-title{font-family:var(--f-serif);font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--text);text-align:center;letter-spacing:-.4px;margin-bottom:10px}
-.page-sub{font-size:14px;font-weight:300;color:var(--dim);text-align:center;line-height:1.7;margin-bottom:52px}
+  .cb-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
 
-/* ── STEP ── */
-.step{margin-bottom:48px}
-.step-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.step-num{width:28px;height:28px;border-radius:7px;background:var(--blue);color:#fff;font-size:13px;font-weight:700;font-family:var(--f-sans);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.step-num.done{background:var(--teal)}
-.step-label{font-size:16px;font-weight:600;color:var(--text)}
-.step-sub{font-size:13px;font-weight:300;color:var(--dim);margin-left:auto}
+  /* Filters */
+  .cb-filters {
+    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    padding: 16px 20px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow);
+  }
+  .cb-search {
+    flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid var(--border);
+    border-radius: 8px; font-size: .9rem; font-family: inherit; outline: none;
+    transition: border-color .15s;
+  }
+  .cb-search:focus { border-color: var(--primary); }
+  .cb-filter-btn {
+    padding: 7px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+    background: var(--surface); font-size: .8rem; font-weight: 600; color: var(--text-secondary);
+    cursor: pointer; font-family: inherit; transition: all .15s; white-space: nowrap;
+  }
+  .cb-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
+  .cb-filter-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
 
-/* ── SETTING GRID ── */
-.setting-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
-.setting-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:20px 20px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden}
-.setting-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .18s}
-.setting-card:hover{border-color:var(--border-hi);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.07)}
-.setting-card:hover::before,.setting-card.active::before{opacity:1}
-.setting-card.active{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
-.setting-card[data-color=red]::before{background:#DC2626}
-.setting-card[data-color=blue]::before{background:var(--blue)}
-.setting-card[data-color=violet]::before{background:var(--violet)}
-.setting-card[data-color=teal]::before{background:var(--teal)}
-.setting-card[data-color=amber]::before{background:#C27D0E}
-.setting-card[data-color=green]::before{background:#1A7A4A}
-.setting-card.active[data-color=red]{border-color:#DC2626;box-shadow:0 0 0 3px rgba(220,38,38,.1)}
-.setting-card.active[data-color=blue]{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
-.setting-card.active[data-color=violet]{border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,40,166,.1)}
-.setting-card.active[data-color=teal]{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,103,.1)}
-.setting-card.active[data-color=amber]{border-color:#C27D0E;box-shadow:0 0 0 3px rgba(194,125,14,.1)}
+  /* Featured cases */
+  .cb-section-title {
+    font-size: .8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 12px; margin-top: 8px;
+  }
+  .cb-featured { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; margin-bottom: 28px; }
 
-.s-icon{font-size:24px;margin-bottom:10px}
-.s-name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:3px}
-.s-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.5}
-.s-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;display:none;align-items:center;justify-content:center}
-.setting-card.active .s-check{display:flex}
+  .cb-card {
+    background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 18px 20px; cursor: pointer; transition: all .18s; position: relative; overflow: hidden;
+  }
+  .cb-card:hover { border-color: var(--primary); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+  .cb-card-study { border-left: 4px solid var(--purple); }
 
-/* ── PILLAR GRID ── */
-.pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.pillar-card{background:var(--surface);border:1.5px solid var(--border);border-radius:14px;padding:24px;cursor:pointer;transition:all .18s;position:relative;overflow:hidden;opacity:.5;pointer-events:none}
-.pillar-card.enabled{opacity:1;pointer-events:all}
-.pillar-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .18s}
-.pillar-card[data-c=blue]::before{background:var(--blue)}
-.pillar-card[data-c=teal]::before{background:var(--teal)}
-.pillar-card[data-c=violet]::before{background:var(--violet)}
-.pillar-card.enabled:hover{transform:translateY(-2px)}
-.pillar-card.enabled:hover::before,.pillar-card.active::before{opacity:1}
-.pillar-card.active{border-color:var(--blue)}
-.pillar-card[data-c=teal].active{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,122,103,.1)}
-.pillar-card[data-c=blue].active{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
-.pillar-card[data-c=violet].active{border-color:var(--violet);box-shadow:0 0 0 3px rgba(107,40,166,.1)}
-.p-icon{font-size:24px;margin-bottom:12px}
-.p-tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
-.pt-blue{color:var(--blue)}.pt-teal{color:var(--teal)}.pt-violet{color:var(--violet)}
-.p-name{font-family:var(--f-serif);font-size:18px;font-weight:400;color:var(--text);margin-bottom:6px;letter-spacing:-.2px}
-.p-desc{font-size:12px;font-weight:300;color:var(--dim);line-height:1.6}
-.p-check{position:absolute;top:12px;right:12px;width:20px;height:20px;border-radius:50%;color:#fff;font-size:11px;display:none;align-items:center;justify-content:center}
-.pillar-card[data-c=blue] .p-check{background:var(--blue)}
-.pillar-card[data-c=teal] .p-check{background:var(--teal)}
-.pillar-card[data-c=violet] .p-check{background:var(--violet)}
-.pillar-card.active .p-check{display:flex}
-.pillar-lock{font-size:11px;color:var(--dim2);text-align:center;margin-top:10px;font-style:italic}
+  .cb-card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .cb-card-acuity {
+    width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center;
+    justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .acuity-1 { background: #FEF2F2; color: #DC2626; }
+  .acuity-2 { background: #FFF7ED; color: #EA580C; }
+  .acuity-3 { background: #FEF9C3; color: #A16207; }
+  .acuity-4 { background: #ECFDF5; color: #059669; }
 
-/* ── GO BUTTON ── */
-.go-section{text-align:center;margin-top:16px}
-.go-btn{display:inline-flex;align-items:center;gap:12px;background:var(--blue);color:#fff;font-size:16px;font-weight:600;font-family:var(--f-sans);padding:16px 40px;border-radius:10px;border:none;cursor:pointer;transition:all .2s;opacity:.4;pointer-events:none}
-.go-btn.ready{opacity:1;pointer-events:all}
-.go-btn.ready:hover{background:var(--blue-dk);transform:translateY(-1px);box-shadow:0 8px 24px rgba(40,116,166,.22)}
-.go-btn[data-c=teal].ready{background:var(--teal)}
-.go-btn[data-c=teal].ready:hover{background:#0A6055}
-.go-btn[data-c=violet].ready{background:var(--violet)}
-.go-btn[data-c=violet].ready:hover{background:#5B21B6}
-.go-hint{font-size:12px;font-weight:300;color:var(--dim2);margin-top:10px}
-.go-summary{font-size:13px;color:var(--dim);margin-top:6px}
-.go-summary strong{color:var(--text);font-weight:600}
+  .cb-card-title { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
+  .cb-card-cc { font-size: .82rem; color: var(--text-secondary); margin-top: 2px; }
 
-@media(max-width:640px){
-  .nav{padding:0 20px}
-  .page{padding:36px 16px 60px}
-  .pillar-grid{grid-template-columns:1fr}
-  .setting-grid{grid-template-columns:1fr 1fr}
-  .go-btn{width:100%;justify-content:center}
-}
+  .cb-card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+  .cb-tag {
+    font-size: .68rem; font-weight: 600; padding: 3px 8px; border-radius: 6px;
+    text-transform: uppercase; letter-spacing: .4px;
+  }
+  .cb-tag-cat { background: var(--primary-light); color: var(--primary-dark); }
+  .cb-tag-study { background: var(--purple-light); color: var(--purple); }
+  .cb-tag-time { background: #F1F5F9; color: var(--text-muted); }
+
+  .cb-card-meta { font-size: .72rem; color: var(--text-muted); margin-top: 8px; }
+
+  /* Grid for all cases */
+  .cb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+
+  .cb-count { font-size: .82rem; color: var(--text-muted); margin-bottom: 14px; }
+
+  .cb-empty { text-align: center; padding: 48px; color: var(--text-muted); font-size: .9rem; }
+
+  @media (max-width: 640px) {
+    .cb-featured, .cb-grid { grid-template-columns: 1fr; }
+    .cb-filters { flex-direction: column; }
+    .cb-search { min-width: auto; }
+    .cb-stats { gap: 16px; }
+  }
 </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo">
-    <div class="nav-logo-mark">Rx</div>
-    <span class="nav-logo-text">ReasonDx</span>
+<div class="cb-hero">
+  <h1>Case <span>Browser</span></h1>
+  <p>Select a case to run on the simulation engine</p>
+  <div class="cb-stats">
+    <div class="cb-stat"><div class="cb-stat-num" id="statTotal">0</div><div class="cb-stat-label">Cases</div></div>
+    <div class="cb-stat"><div class="cb-stat-num" id="statCategories">0</div><div class="cb-stat-label">Specialties</div></div>
+    <div class="cb-stat"><div class="cb-stat-num" id="statStudy">5</div><div class="cb-stat-label">Study Cases</div></div>
   </div>
-  <span class="nav-sep">/</span>
-  <span class="nav-page">Start a Session</span>
-  <a class="nav-back" href="index.html">← Home</a>
-</nav>
+</div>
 
-<div class="page">
-  <div class="page-eyebrow">Two Steps</div>
-  <div class="page-title">Where are you, and how do you want to learn?</div>
-  <p class="page-sub">Pick a clinical setting, then choose your mode. That's it.</p>
-
-  <!-- STEP 1: SETTING -->
-  <div class="step" id="step1">
-    <div class="step-hdr">
-      <div class="step-num" id="step1Num">1</div>
-      <div class="step-label">Where are you working today?</div>
-    </div>
-    <div class="setting-grid">
-      <div class="setting-card" data-color="red" data-id="ed" onclick="selectSetting(this)">
-        <div class="s-check">✓</div>
-        <div class="s-icon">🚨</div>
-        <div class="s-name">Emergency Department</div>
-        <div class="s-desc">High-acuity cases, ESI triage, time-sensitive decisions</div>
-      </div>
-      <div class="setting-card" data-color="blue" data-id="floor" onclick="selectSetting(this)">
-        <div class="s-check">✓</div>
-        <div class="s-icon">🏥</div>
-        <div class="s-name">Inpatient Floor</div>
-        <div class="s-desc">Admissions, daily rounds, problem-based management</div>
-      </div>
-      <div class="setting-card" data-color="teal" data-id="clinic" onclick="selectSetting(this)">
-        <div class="s-check">✓</div>
-        <div class="s-icon">🩺</div>
-        <div class="s-name">Outpatient Clinic</div>
-        <div class="s-desc">Allergy, primary care, chronic disease, prevention</div>
-      </div>
-      <div class="setting-card" data-color="violet" data-id="night-float" onclick="selectSetting(this)">
-        <div class="s-check">✓</div>
-        <div class="s-icon">🌙</div>
-        <div class="s-name">Night Float</div>
-        <div class="s-desc">Cross-cover, nurse pages, overnight decompensations</div>
-      </div>
-      <div class="setting-card" data-color="amber" data-id="icu" onclick="selectSetting(this)">
-        <div class="s-check">✓</div>
-        <div class="s-icon">💓</div>
-        <div class="s-name">ICU</div>
-        <div class="s-desc">Critical care, organ systems, hemodynamics, vents</div>
-      </div>
-      <div class="setting-card" data-color="green" data-id="any" onclick="selectSetting(this)">
-        <div class="s-check">✓</div>
-        <div class="s-icon">📚</div>
-        <div class="s-name">Any / Topic-Based</div>
-        <div class="s-desc">Just want to study a concept — no specific setting</div>
-      </div>
-    </div>
+<div class="cb-container">
+  <div class="cb-filters">
+    <input type="text" class="cb-search" id="searchInput" placeholder="Search by diagnosis, chief complaint, or keyword..." oninput="filterCases()">
+    <button class="cb-filter-btn active" data-cat="all" onclick="setCategory('all')">All</button>
+    <button class="cb-filter-btn" data-cat="cardiovascular" onclick="setCategory('cardiovascular')">Cardio</button>
+    <button class="cb-filter-btn" data-cat="pulmonary" onclick="setCategory('pulmonary')">Pulm</button>
+    <button class="cb-filter-btn" data-cat="neurologic" onclick="setCategory('neurologic')">Neuro</button>
+    <button class="cb-filter-btn" data-cat="infectious" onclick="setCategory('infectious')">ID</button>
+    <button class="cb-filter-btn" data-cat="gastrointestinal" onclick="setCategory('gastrointestinal')">GI</button>
+    <button class="cb-filter-btn" data-cat="allergy" onclick="setCategory('allergy')">A&I</button>
+    <button class="cb-filter-btn" data-cat="endocrine" onclick="setCategory('endocrine')">Endo</button>
+    <button class="cb-filter-btn" data-cat="toxicologic" onclick="setCategory('toxicologic')">Tox</button>
   </div>
 
-  <!-- STEP 2: PILLAR -->
-  <div class="step" id="step2">
-    <div class="step-hdr">
-      <div class="step-num" id="step2Num">2</div>
-      <div class="step-label">How do you want to learn?</div>
-      <div class="step-sub" id="step2Sub">Select a setting first</div>
-    </div>
-    <div class="pillar-grid">
-      <div class="pillar-card" data-c="blue" data-pillar="coach" onclick="selectPillar(this)">
-        <div class="p-check">✓</div>
-        <div class="p-icon">🧑‍⚕️</div>
-        <div class="p-tag pt-blue">AI Coaching</div>
-        <div class="p-name">CoachDx</div>
-        <p class="p-desc">Your AI attending asks the questions. Socratic coaching on any topic — adapts to your reasoning gaps.</p>
-      </div>
-      <div class="pillar-card" data-c="teal" data-pillar="cases" onclick="selectPillar(this)">
-        <div class="p-check">✓</div>
-        <div class="p-icon">🩺</div>
-        <div class="p-tag pt-teal">Patient Cases</div>
-        <div class="p-name">ReasonDx Cases</div>
-        <p class="p-desc">Structured patient scenario with chart, labs, imaging, and reasoning checkpoints.</p>
-      </div>
-      <div class="pillar-card" data-c="violet" data-pillar="mechanism" onclick="selectPillar(this)">
-        <div class="p-check">✓</div>
-        <div class="p-icon">🔬</div>
-        <div class="p-tag pt-violet">Pathophysiology</div>
-        <div class="p-name">MechanismDx</div>
-        <p class="p-desc">Visual pathophysiology modules. Understand the mechanism — then apply it to a case.</p>
-      </div>
-    </div>
-    <div class="pillar-lock" id="pillarLock">← Pick a setting above to unlock</div>
+  <!-- Featured / Study Cases -->
+  <div id="featuredSection">
+    <div class="cb-section-title">Radiology Study Cases</div>
+    <div class="cb-featured" id="featuredGrid"></div>
   </div>
 
-  <!-- GO -->
-  <div class="go-section">
-    <button class="go-btn" id="goBtn" data-c="blue" onclick="go()">
-      <span id="goBtnIcon">▶</span>
-      <span id="goBtnText">Start Session</span>
-    </button>
-    <div class="go-summary" id="goSummary"></div>
-    <div class="go-hint" id="goHint">Select a setting and a mode to continue</div>
-  </div>
-
+  <!-- All Cases -->
+  <div class="cb-count" id="caseCount"></div>
+  <div class="cb-grid" id="caseGrid"></div>
+  <div class="cb-empty" id="emptyState" style="display:none">No cases match your search.</div>
 </div>
 
 <script>
-/* ── STATE ── */
-let selectedSetting = null;
-let selectedPillar = null;
+var ALL_CASES = [];
+var activeCategory = 'all';
 
-/* ── ROUTING MAP ── */
-// setting → pillar → destination URL
-const ROUTES = {
-  ed: {
-    coach:     'CoachDx/mentor-chat.html?setting=ed',
-    cases:     'ed-board-v2.html',
-    mechanism: 'mechanism/anaphylaxis-module.html'
-  },
-  floor: {
-    coach:     'CoachDx/mentor-chat.html?setting=inpatient',
-    cases:     'admissions.html',
-    mechanism: 'mechanism/anaphylaxis-module.html'
-  },
-  clinic: {
-    coach:     'CoachDx/mentor-chat.html?setting=clinic',
-    cases:     'virtual-emr.html?setting=clinic',
-    mechanism: 'mechanism/anaphylaxis-module.html'
-  },
-  'night-float': {
-    coach:     'CoachDx/mentor-chat.html?setting=inpatient',
-    cases:     'night-float.html',
-    mechanism: 'mechanism/anaphylaxis-module.html'
-  },
-  icu: {
-    coach:     'CoachDx/mentor-chat.html?setting=icu',
-    cases:     'virtual-emr.html?setting=icu',
-    mechanism: 'mechanism/anaphylaxis-module.html'
-  },
-  any: {
-    coach:     'CoachDx/mentor-chat.html',
-    cases:     'virtual-emr.html',
-    mechanism: 'mechanism/anaphylaxis-module.html'
-  }
-};
+// Featured/study cases (native rad-study format)
+var STUDY_CASES = [
+  { id:'DYS-001', diagnosis:'Hypersensitivity Pneumonitis', cc:'Progressive dyspnea', category:'pulmonary', acuity:2, isStudy:true },
+  { id:'DYS-002', diagnosis:'EVALI (Vaping Lung Injury)', cc:'Dyspnea, cough, fever', category:'pulmonary', acuity:2, isStudy:true },
+  { id:'COUGH-001', diagnosis:'Pulmonary Tuberculosis', cc:'Productive cough, hemoptysis', category:'pulmonary', acuity:2, isStudy:true },
+  { id:'CHEST-001', diagnosis:'Cocaine-Induced Vasospasm', cc:'Chest pain', category:'cardiovascular', acuity:1, isStudy:true },
+  { id:'FEVER-001', diagnosis:'PCP in Undiagnosed HIV', cc:'Fever, dyspnea', category:'infectious', acuity:2, isStudy:true }
+];
 
-const PILLAR_COLORS = { coach:'blue', cases:'teal', mechanism:'violet' };
-const PILLAR_LABELS = {
-  coach: { icon:'🧑‍⚕️', text:'Start CoachDx' },
-  cases: { icon:'🩺',    text:'Open a Case' },
-  mechanism: { icon:'🔬', text:'Explore Mechanisms' }
-};
-const SETTING_LABELS = {
-  ed: 'Emergency Department', floor: 'Inpatient Floor',
-  clinic: 'Outpatient Clinic', 'night-float': 'Night Float',
-  icu: 'ICU', any: 'Any Setting'
-};
-
-/* ── SETTING SELECTION ── */
-function selectSetting(card) {
-  // Deselect all
-  document.querySelectorAll('.setting-card').forEach(c => c.classList.remove('active'));
-  card.classList.add('active');
-  selectedSetting = card.dataset.id;
-
-  // Mark step 1 done
-  document.getElementById('step1Num').classList.add('done');
-
-  // Unlock pillars
-  document.querySelectorAll('.pillar-card').forEach(c => c.classList.add('enabled'));
-  document.getElementById('pillarLock').style.display = 'none';
-  document.getElementById('step2Sub').textContent = SETTING_LABELS[selectedSetting];
-
-  updateGoButton();
+// Normalize categories
+function normCat(c) {
+  c = (c||'other').toLowerCase();
+  if (c === 'cardiology' || c === 'cardiac' || c === 'cardiorenal') return 'cardiovascular';
+  if (c === 'neurology' || c === 'neurological') return 'neurologic';
+  if (c === 'toxicology') return 'toxicologic';
+  if (c === 'hematology') return 'hematologic';
+  if (c === 'allergy_immunology' || c === 'immunologic') return 'allergy';
+  if (c === 'gi') return 'gastrointestinal';
+  if (c === 'surgery' || c === 'surgical') return 'surgical';
+  if (c === 'respiratory') return 'pulmonary';
+  if (c === 'ophthalmologic') return 'ophthalmic';
+  return c;
 }
 
-/* ── PILLAR SELECTION ── */
-function selectPillar(card) {
-  if (!card.classList.contains('enabled')) return;
-  document.querySelectorAll('.pillar-card').forEach(c => c.classList.remove('active'));
-  card.classList.add('active');
-  selectedPillar = card.dataset.pillar;
-  document.getElementById('step2Num').classList.add('done');
-  updateGoButton();
-}
-
-/* ── UPDATE GO BUTTON ── */
-function updateGoButton() {
-  const btn = document.getElementById('goBtn');
-  const hint = document.getElementById('goHint');
-  const summary = document.getElementById('goSummary');
-
-  if (selectedSetting && selectedPillar) {
-    const color = PILLAR_COLORS[selectedPillar];
-    const label = PILLAR_LABELS[selectedPillar];
-    btn.className = `go-btn ready`;
-    btn.dataset.c = color;
-    btn.className = `go-btn ready`;
-    // Apply color via dataset
-    if (color === 'teal') btn.style.background = 'var(--teal)';
-    else if (color === 'violet') btn.style.background = 'var(--violet)';
-    else btn.style.background = 'var(--blue)';
-
-    document.getElementById('goBtnIcon').textContent = label.icon;
-    document.getElementById('goBtnText').textContent = label.text;
-    hint.style.display = 'none';
-    summary.innerHTML = `<strong>${SETTING_LABELS[selectedSetting]}</strong> · ${['CoachDx','ReasonDx Cases','MechanismDx'][['coach','cases','mechanism'].indexOf(selectedPillar)]}`;
-  } else if (selectedSetting) {
-    hint.textContent = 'Now choose how you want to learn';
-    hint.style.display = 'block';
-  }
-}
-
-/* ── GO ── */
-function go() {
-  if (!selectedSetting || !selectedPillar) return;
-  const url = ROUTES[selectedSetting]?.[selectedPillar];
-  if (!url) return;
-
-  // Track
-  try {
-    const queue = JSON.parse(localStorage.getItem('rdx-event-queue') || '[]');
-    queue.push({ type:'session_start', data:{ setting:selectedSetting, pillar:selectedPillar }, ts:new Date().toISOString() });
-    localStorage.setItem('rdx-event-queue', JSON.stringify(queue));
-  } catch(e) {}
-
-  // Animate button
-  const btn = document.getElementById('goBtn');
-  document.getElementById('goBtnText').textContent = 'Loading…';
-  btn.style.opacity = '.7';
-
-  window.location.href = url;
-}
-
-/* ── URL PARAMS ── */
-// Support incoming ?setting=ed or ?topic=anaphylaxis
-window.addEventListener('load', () => {
-  const p = new URLSearchParams(window.location.search);
-  const s = p.get('setting');
-  const t = p.get('topic');
-
-  if (s) {
-    const card = document.querySelector(`.setting-card[data-id="${s}"]`);
-    if (card) selectSetting(card);
+function init() {
+  // Build case list from CRT_DATA
+  if (window.CRT_DATA) {
+    Object.entries(window.CRT_DATA).forEach(function(entry) {
+      var key = entry[0], c = entry[1];
+      ALL_CASES.push({
+        id: key,
+        diagnosis: c.diagnosis || key,
+        cc: c.chiefComplaint || c.presentation || '',
+        category: normCat(c.category),
+        acuity: c.acuity || 3,
+        isStudy: false
+      });
+    });
   }
 
-  // If topic passed (from index search), pre-fill CoachDx
-  if (t) {
-    document.querySelectorAll('.p-desc')[0].textContent = `Coaching session on: ${t}`;
-    // Auto-select "Any" setting and CoachDx pillar if topic provided
-    if (!s) {
-      const anyCard = document.querySelector('.setting-card[data-id="any"]');
-      if (anyCard) selectSetting(anyCard);
+  // Stats
+  var cats = new Set(ALL_CASES.map(function(c){ return c.category; }));
+  STUDY_CASES.forEach(function(s){ cats.add(s.category); });
+  document.getElementById('statTotal').textContent = ALL_CASES.length + STUDY_CASES.length;
+  document.getElementById('statCategories').textContent = cats.size;
+
+  renderFeatured();
+  filterCases();
+}
+
+function renderFeatured() {
+  var html = '';
+  STUDY_CASES.forEach(function(c) {
+    html += renderCard(c, true);
+  });
+  document.getElementById('featuredGrid').innerHTML = html;
+}
+
+function renderCard(c, featured) {
+  var acuityLabel = c.acuity === 1 ? 'ESI 1' : c.acuity === 2 ? 'ESI 2' : c.acuity === 3 ? 'ESI 3' : 'ESI 4';
+  var catDisplay = c.category.charAt(0).toUpperCase() + c.category.slice(1);
+  var timeEst = c.acuity <= 2 ? '25-40 min' : '20-30 min';
+
+  var html = '<div class="cb-card' + (c.isStudy ? ' cb-card-study' : '') + '" onclick="launchCase(\'' + c.id + '\')">';
+  html += '<div class="cb-card-header">';
+  html += '<div class="cb-card-acuity acuity-' + c.acuity + '">' + acuityLabel + '</div>';
+  html += '<div><div class="cb-card-title">' + esc(c.diagnosis) + '</div>';
+  html += '<div class="cb-card-cc">' + esc(c.cc) + '</div></div></div>';
+  html += '<div class="cb-card-tags">';
+  html += '<span class="cb-tag cb-tag-cat">' + esc(catDisplay) + '</span>';
+  if (c.isStudy) html += '<span class="cb-tag cb-tag-study">Research Study</span>';
+  html += '<span class="cb-tag cb-tag-time">\u23F1 ' + timeEst + '</span>';
+  html += '</div>';
+  html += '</div>';
+  return html;
+}
+
+function filterCases() {
+  var query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+  var filtered = ALL_CASES.filter(function(c) {
+    if (activeCategory !== 'all' && c.category !== activeCategory) return false;
+    if (query) {
+      var searchable = (c.diagnosis + ' ' + c.cc + ' ' + c.category + ' ' + c.id).toLowerCase();
+      return searchable.includes(query);
     }
-    const coachCard = document.querySelector('.pillar-card[data-pillar="coach"]');
-    if (coachCard && coachCard.classList.contains('enabled')) {
-      selectPillar(coachCard);
-      // Add topic to route
-      if (selectedSetting) {
-        const orig = ROUTES[selectedSetting].coach;
-        ROUTES[selectedSetting].coach = orig + (orig.includes('?') ? '&' : '?') + 'topic=' + encodeURIComponent(t);
-      }
+    return true;
+  });
+
+  // Sort: acuity 1 first, then alphabetical
+  filtered.sort(function(a, b) {
+    if (a.acuity !== b.acuity) return a.acuity - b.acuity;
+    return a.diagnosis.localeCompare(b.diagnosis);
+  });
+
+  // Show/hide featured section based on filter
+  var featuredEl = document.getElementById('featuredSection');
+  if (activeCategory !== 'all' || query) {
+    // Also filter study cases
+    var studyFiltered = STUDY_CASES.filter(function(c) {
+      if (activeCategory !== 'all' && c.category !== activeCategory) return false;
+      if (query) return (c.diagnosis + ' ' + c.cc + ' ' + c.category).toLowerCase().includes(query);
+      return true;
+    });
+    if (studyFiltered.length > 0) {
+      featuredEl.style.display = 'block';
+      document.getElementById('featuredGrid').innerHTML = studyFiltered.map(function(c) { return renderCard(c, true); }).join('');
+    } else {
+      featuredEl.style.display = 'none';
     }
+  } else {
+    featuredEl.style.display = 'block';
+    renderFeatured();
   }
-});
+
+  // Render grid
+  document.getElementById('caseCount').textContent = filtered.length + ' case' + (filtered.length !== 1 ? 's' : '');
+  var gridHtml = filtered.map(function(c) { return renderCard(c, false); }).join('');
+  document.getElementById('caseGrid').innerHTML = gridHtml;
+  document.getElementById('emptyState').style.display = filtered.length === 0 ? 'block' : 'none';
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cb-filter-btn').forEach(function(btn) {
+    btn.classList.toggle('active', btn.dataset.cat === cat);
+  });
+  filterCases();
+}
+
+function launchCase(caseId) {
+  window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(caseId);
+}
+
+function esc(s) {
+  if (!s) return '';
+  var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 </body>
 </html>
