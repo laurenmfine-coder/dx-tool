@@ -206,6 +206,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="js/rdx-rag.js"></script>
 <script src="js/rdx-advanced.js"></script>
 <script src="js/rdx-rpfs-viz.js"></script>
+<script src="js/rdx-readability.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -451,6 +452,17 @@ async function sendMessage() {
   state.turns.push({ role:'student', content:msg, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:state.turnCount });
   state.conversationMessages.push({ role:'user', content: msg });
   addMessage('student', msg);
+
+  // Track readability of student message
+  if (window.RdxReadability) {
+    var readRecord = window.RdxReadability.trackMessage(msg, state.currentPhase, state.turnCount);
+    // Attach to the turn for per-message analysis
+    state.turns[state.turns.length - 1].readability = {
+      grade: readRecord.consensusGrade,
+      level: readRecord.level,
+      patientAppropriate: readRecord.patientAppropriate
+    };
+  }
 
   // Extract signals
   const signals = extractSignals(msg);
@@ -1548,6 +1560,7 @@ async function exportStudyData() {
     if (A.ExplainableAgent) A.ExplainableAgent.clear();
     if (A.EmotionalAI) A.EmotionalAI.clear();
     if (A.ReasoningTrace) A.ReasoningTrace.clear();
+    if (window.RdxReadability) window.RdxReadability.clear();
     if (A.ExplainableAgent && window.state) {
       A.ExplainableAgent.logDecision({
         phase: 1, type: 'session_start',
@@ -1621,6 +1634,32 @@ async function exportStudyData() {
         window.state.emotionalAIHistory = A.EmotionalAI.getHistory();
         var finalEmotion = A.EmotionalAI.getCurrentState();
         if (finalEmotion) window.state.emotionalAIFinal = finalEmotion;
+      }
+
+      // Attach readability analysis
+      if (window.RdxReadability) {
+        var readSummary = window.RdxReadability.getSessionSummary();
+        window.state.readabilitySummary = readSummary;
+
+        // Also analyze the radiology reports for comparison
+        if (window.caseData && window.caseData.radiologyReports) {
+          var reportComparison = window.RdxReadability.compareTexts(
+            window.caseData.radiologyReports.standard,
+            window.caseData.radiologyReports.simplified,
+            'Standard Report',
+            'Simplified Report'
+          );
+          window.state.reportReadabilityComparison = reportComparison;
+          console.log('Report readability:', reportComparison.interpretation);
+        }
+
+        // Log readability summary
+        if (readSummary) {
+          console.log('Student readability — Overall: grade ' + readSummary.avgGradeAll +
+            ', Patient phase: grade ' + (readSummary.avgGradePatient || 'N/A') +
+            ', Adjusts for patient: ' + readSummary.adjustsLanguageForPatient +
+            ', Patient-appropriate rate: ' + (readSummary.patientAppropriateRate || 'N/A') + '%');
+        }
       }
     }
 
