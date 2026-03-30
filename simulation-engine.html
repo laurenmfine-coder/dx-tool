@@ -688,6 +688,18 @@ async function sendMessage() {
       }
     }
 
+    // Null guard — CRT-adapted cases always have patientScript, but guard defensively
+    if (!ps) {
+      ps = {
+        identity: patName + ', patient.',
+        hpiOnset: caseData.presentation.chiefComplaint || 'I have not been feeling well.',
+        hpiProgression: '', hpiCough: '', hpiAssociatedSymptoms: '',
+        hpiLocationPattern: '', pmh: '', medications: '',
+        allergies: 'No known drug allergies.', familyHistory: '',
+        socialSmokingAlcohol: '', socialOccupation: '', socialTravel: '', ros: ''
+      };
+    }
+
     // Inject full patient script
     systemPrompt += '\nPATIENT DETAILS:\n';
     systemPrompt += 'Identity: ' + ps.identity + '\n';
@@ -888,8 +900,12 @@ async function sendMessage() {
     }
 
   } catch(e) {
+    console.error('sendMessage error:', e);
     removeTyping();
-    addMessage('patel', "I'm sorry, I'm having a technical difficulty. Please try again.");
+    var errMsg = (e && (e.name === 'TypeError' || e.message === 'Failed to fetch'))
+      ? "[System] Connection to the AI server failed. Please check your internet connection and try again. If this persists, refresh the page."
+      : "I'm sorry, I'm having a technical difficulty. Please try again.";
+    addMessage('patel', errMsg);
   }
 
   input.disabled = false;
