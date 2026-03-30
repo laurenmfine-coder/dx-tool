@@ -1801,7 +1801,7 @@ function _applyContBadge(container, caseId, anchorEl) {
   var badge = document.createElement('span');
   badge.className = 'continuity-badge';
   badge.title = 'Prior chart available — ' + chain.patientName;
-  badge.innerHTML = '📋 Prior chart';
+  badge.innerHTML = 'Prior chart';
   badge.style.cssText = 'margin-left:6px;vertical-align:middle;cursor:default;';
 
   // Button
@@ -1943,7 +1943,7 @@ function _renderCasePicker() {
     // Fallback: skeleton loading state while scripts finish
     var html = '<div style="max-width:1100px;margin:0 auto;padding:24px 16px">'
       + '<div style="height:180px;background:linear-gradient(135deg,#0F172A,#1E293B);border-radius:14px;margin-bottom:16px;display:flex;align-items:center;justify-content:center">'
-      + '<div style="text-align:center;color:#94A3B8"><div style="font-size:24px;margin-bottom:8px">🏥</div><div style="font-size:14px">Loading Emergency Department...</div></div>'
+      + '<div style="text-align:center;color:#94A3B8"><div style="font-size:24px;margin-bottom:8px"></div><div style="font-size:14px">Loading Emergency Department...</div></div>'
       + '</div>'
       + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">'
       + '<div style="height:100px;background:linear-gradient(90deg,#1E293B 25%,#2C3E50 50%,#1E293B 75%);background-size:800px 100%;border-radius:12px;animation:rdxShimmer 1.4s ease-in-out infinite"></div>'
@@ -2020,7 +2020,7 @@ function loadCaseData(cb) {
     if (cb) cb();
   };
   s.onerror = function() {
-    document.getElementById('app').innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:48px;margin-bottom:16px">📋</div><h2 style="font-size:20px;font-weight:700;color:#1e293b;margin-bottom:8px">Case Not Available</h2><p style="color:#64748b;font-size:14px;line-height:1.6;margin-bottom:20px">The case data for <strong>' + CASE_ID + '</strong> could not be loaded. This case may still be in development.</p><a href="virtual-emr.html' + (S.clinicalSetting ? '?setting=' + S.clinicalSetting : '') + '" style="display:inline-block;padding:10px 20px;background:#2874A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px">← Back to Case Library</a></div>';
+    document.getElementById('app').innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:48px;margin-bottom:16px"></div><h2 style="font-size:20px;font-weight:700;color:#1e293b;margin-bottom:8px">Case Not Available</h2><p style="color:#64748b;font-size:14px;line-height:1.6;margin-bottom:20px">The case data for <strong>' + CASE_ID + '</strong> could not be loaded. This case may still be in development.</p><a href="virtual-emr.html' + (S.clinicalSetting ? '?setting=' + S.clinicalSetting : '') + '" style="display:inline-block;padding:10px 20px;background:#2874A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px">← Back to Case Library</a></div>';
   };
   document.head.appendChild(s);
 }
@@ -2211,7 +2211,7 @@ function renderDocumentationOnly() {
     ? '<span style="color:var(--success);font-weight:600">✓ Submitted</span>'
     : '<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">' + I.send + ' Submit Documentation</button>';
 
-  var _debrief = submitted ? '<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">✅ Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>' : '';
+  var _debrief = submitted ? '<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>' : '';
 
   var tip = '<div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400E;margin-bottom:12px">'
     + '💡 <strong>Tip:</strong> Each section auto-saves as you type. Write as if this were a real patient encounter note.'
@@ -2258,9 +2258,9 @@ function renderDocumentation(){
       + '</div>'
       + '<div style="display:flex;align-items:center;gap:8px">'
       + '<div style="display:flex;gap:3px;background:rgba(0,0,0,.2);border-radius:10px;padding:2px">'
-      + '<button onclick="setPtDifficulty(\'guided\')" id="ptDiff-guided" style="padding:3px 9px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='guided'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='guided'?'#059669':'rgba(255,255,255,.75)') + '">🌱 Guided</button>'
-      + '<button onclick="setPtDifficulty(\'standard\')" id="ptDiff-standard" style="padding:3px 9px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='standard'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='standard'?'#2874A6':'rgba(255,255,255,.75)') + '">🎯 Standard</button>'
-      + '<button onclick="setPtDifficulty(\'advanced\')" id="ptDiff-advanced" style="padding:3px 9px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='advanced'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='advanced'?'#DC2626':'rgba(255,255,255,.75)') + '">🔥 Advanced</button>'
+      + '<button onclick="setPtDifficulty(\'guided\')" id="ptDiff-guided" style="padding:3px 9px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='guided'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='guided'?'#059669':'rgba(255,255,255,.75)') + '">Guided</button>'
+      + '<button onclick="setPtDifficulty(\'standard\')" id="ptDiff-standard" style="padding:3px 9px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='standard'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='standard'?'#2874A6':'rgba(255,255,255,.75)') + '">Standard</button>'
+      + '<button onclick="setPtDifficulty(\'advanced\')" id="ptDiff-advanced" style="padding:3px 9px;border:none;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer;transition:all .15s;background:' + (window.RDX_DIFFICULTY==='advanced'?'#fff':'transparent') + ';color:' + (window.RDX_DIFFICULTY==='advanced'?'#DC2626':'rgba(255,255,255,.75)') + '">Advanced</button>'
       + '</div>'
       + '<span style="padding:3px 8px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;font-size:11px;font-weight:700">OLDCARTS</span>'
       + '<span style="padding:3px 8px;background:rgba(255,255,255,.15);color:#fff;border-radius:12px;font-size:11px;font-weight:700">ROS</span>'
@@ -2297,7 +2297,7 @@ function renderDocumentation(){
   const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">'+I.send+' Submit Documentation</button>';
   const wc=totalWords();
   var _debrief=(window.RDXIntegration)?RDXIntegration.renderPostSubmitDebrief():'';
-  var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">✅ Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>':'';
+  var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>':'';
   return _interviewCallout + _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+'</div>')+sectionCard("Documentation Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
 }
 
@@ -2490,7 +2490,7 @@ function render(){
   // Wrap each render fn with error boundary
   if(window.RDXErrors){Object.keys(fn).forEach(function(k){fn[k]=RDXErrors.wrap(fn[k],{icon:'⚙️',desc:'This section couldn\'t load. Try switching tabs.',retry:'Try Again',retryFn:'render()'});});}
   const ct=(fn[S.activeTab]||renderDemographics)();
-  const em=role==="admin"?"🔑":role==="faculty"?"👨‍⚕️":"🎓";
+  const em=role==="admin"?"":role==="faculty"?"":"";
   const roleBadge=role==="admin"?"badge-danger":role==="faculty"?"badge-purple":"badge-primary";
 
   // Day progression bar for inpatient/ICU
@@ -2501,7 +2501,7 @@ function render(){
 
   var casesUrl='virtual-emr.html';if(S.clinicalSetting){casesUrl+='?setting='+S.clinicalSetting;if(S.specialty)casesUrl+='&specialty='+S.specialty}
   var settingBadge=getSettingLabel()?'<span class="setting-context-badge">'+getSettingLabel()+'</span>':'';
-  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px;-webkit-tap-highlight-color:transparent">\u2190 Cases</a><a href="virtual-emr.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a>'+(role==='faculty'||role==='admin'?'<a href="faculty-dashboard.html" style="color:rgba(255,255,255,.8);font-size:12px;font-weight:600;text-decoration:none;margin-right:8px;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:5px">📊 Faculty</a>':'')+'<span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button>'+(window.RDXIntegration?RDXIntegration.renderEDTimerButton():'')+' </div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+(new URLSearchParams(location.search).get('as')?'<div style="background:#7C3AED;color:#fff;padding:8px 20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:10px"><span>👁️ Admin View — Viewing session as: '+esc(new URLSearchParams(location.search).get('as'))+'</span><a href="faculty-dashboard.html" style="color:#DDD6FE;font-size:11px;margin-left:auto">← Back to Dashboard</a></div>':'')+dayBarHtml+(window.RDXGuide?RDXGuide.renderNudgeStrip():'')+' <div class="content-layout"><div class="sidebar">'+sb+'</div><div class="main-content" id="main-content">'+renderWorkflowBar(S.activeTab)+ct+'</div></div></div>';
+  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px;-webkit-tap-highlight-color:transparent">\u2190 Cases</a><a href="virtual-emr.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a>'+(role==='faculty'||role==='admin'?'<a href="faculty-dashboard.html" style="color:rgba(255,255,255,.8);font-size:12px;font-weight:600;text-decoration:none;margin-right:8px;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:5px">Faculty</a>':'')+'<span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button>'+(window.RDXIntegration?RDXIntegration.renderEDTimerButton():'')+' </div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+(new URLSearchParams(location.search).get('as')?'<div style="background:#7C3AED;color:#fff;padding:8px 20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:10px"><span>Admin View — Viewing session as: '+esc(new URLSearchParams(location.search).get('as'))+'</span><a href="faculty-dashboard.html" style="color:#DDD6FE;font-size:11px;margin-left:auto">← Back to Dashboard</a></div>':'')+dayBarHtml+(window.RDXGuide?RDXGuide.renderNudgeStrip():'')+' <div class="content-layout"><div class="sidebar">'+sb+'</div><div class="main-content" id="main-content">'+renderWorkflowBar(S.activeTab)+ct+'</div></div></div>';
 }
 
 // ═══ DIFFICULTY POST-RENDER HOOK ═══
@@ -2612,7 +2612,7 @@ function renderStudyHub() {
   // Day evolution summary (if available)
   if (S.dayEvolution) {
     html += '<div style="margin-top:20px;padding:16px;background:var(--surface);border-radius:8px;border:1px solid var(--border-light)">';
-    html += '<h4 style="margin:0 0 8px 0;font-size:14px;">📋 Day ' + S.encounterDay + ' Overnight Summary</h4>';
+    html += '<h4 style="margin:0 0 8px 0;font-size:14px;">Day ' + S.encounterDay + ' Overnight Summary</h4>';
     html += '<div style="font-size:13px;color:var(--text-secondary);white-space:pre-line">' + esc(S.dayEvolution.overnightEvents) + '</div>';
     html += '<div style="margin-top:8px;font-size:12px;color:var(--text-muted)">' + esc(S.dayEvolution.nursingNotes) + '</div>';
     html += '</div>';
@@ -2946,7 +2946,7 @@ function setPtDifficulty(level) {
   });
 
   // Toast confirmation
-  var labels = { guided: '🌱 Guided — patient gives detailed answers', standard: '🎯 Standard — realistic historian', advanced: '🔥 Advanced — vague, requires precise questions' };
+  var labels = { guided: 'Guided — patient gives detailed answers', standard: 'Standard — realistic historian', advanced: 'Advanced — vague, requires precise questions' };
   var toast = document.createElement('div');
   toast.textContent = labels[level] || level;
   toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1e293b;color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:99999;pointer-events:none;opacity:1;transition:opacity .4s';
@@ -3091,10 +3091,10 @@ function extractCoachConcepts(text){
 // ── WORKFLOW PROGRESS BAR ─────────────────────────────────────────────────
 // Maps tab IDs to workflow steps so learners know where they are
 var WORKFLOW_STEPS = [
-  { id:'chart',      label:'Review Chart',  icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'], hint:'Read the chart: labs, meds, imaging, vitals' },
+  { id:'chart',      label:'Review Chart',  icon:'Chart', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'], hint:'Read the chart: labs, meds, imaging, vitals' },
   { id:'interview',  label:'Interview / HPI', icon:'🗣️', tabs:['documentation'], hint:'Take the history — click Documentation to write your HPI' },
-  { id:'reason',     label:'Reason & Plan', icon:'🔍', tabs:['crt','orders','oral'], hint:'Build your differential and order workup' },
-  { id:'coach',      label:'AI Coaching',   icon:'🤖', tabs:['coach','autofeedback','feedback'], hint:'Talk through your reasoning with CoachDx' },
+  { id:'reason',     label:'Reason & Plan', icon:'Dx', tabs:['crt','orders','oral'], hint:'Build your differential and order workup' },
+  { id:'coach',      label:'AI Coaching',   icon:'Coach', tabs:['coach','autofeedback','feedback'], hint:'Talk through your reasoning with CoachDx' },
 ];
 
 function getActiveWorkflowStep(tabId) {
@@ -3125,8 +3125,8 @@ function renderWorkflowBar(activeTab) {
 // ── AI TOOL SWITCHER ──────────────────────────────────────────────────────
 // Shown at the top of AI tabs so learners understand each tool's purpose
 var AI_TOOLS = [
-  { id:'coach',       label:'CoachDx',       icon:'🧠', desc:'Socratic coach — reason it out' },
-  { id:'crt',         label:'ReasonDx CRT',  icon:'🔍', desc:'Step-by-step reasoning trainer' },
+  { id:'coach',       label:'CoachDx',       icon:'Coach', desc:'Socratic coach — reason it out' },
+  { id:'crt',         label:'ReasonDx CRT',  icon:'Dx', desc:'Step-by-step reasoning trainer' },
   { id:'autofeedback',label:'Doc Assessment',icon:'✍️',  desc:'AI feedback on your note' },
 ];
 
@@ -3198,19 +3198,19 @@ function renderMissionCard() {
 
   var quicklinks = [
     { icon:'🧪', label:'Labs',     tab:'labs' },
-    { icon:'💊', label:'Meds',     tab:'medications' },
+    { icon:'Rx', label:'Meds',     tab:'medications' },
     { icon:'🩻', label:'Imaging',  tab:'imaging' },
-    { icon:'📊', label:'Vitals',   tab:'vitals' },
+    { icon:'VS', label:'Vitals',   tab:'vitals' },
     { icon:'🗣️', label:'Write HPI',tab:'documentation' },
-    { icon:'🧠', label:'CoachDx',  tab:'coach' },
+    { icon:'Coach', label:'CoachDx',  tab:'coach' },
   ];
 
   return '<div class="rdx-mission-card">'
-    + '<div class="rdx-mission-badge">🏥 Your Case</div>'
+    + '<div class="rdx-mission-badge">Your Case</div>'
     + '<div class="rdx-mission-cc">' + esc(cc) + '</div>'
     + '<div class="rdx-mission-sub">Review the chart, take the history, build your differential, and present to your AI attending.</div>'
     + '<button class="rdx-mission-begin" onclick="switchTab(\'\1\')">'
-    +   '📋 Start Chart Review →'
+    +   'Start Chart Review →'
     + '</button>'
     + '<div class="rdx-mission-quicklinks">'
     + quicklinks.map(function(q){
@@ -3240,11 +3240,11 @@ function getWorkflowProgress() {
 // Upgraded workflow bar with renamed steps + progress badge
 function renderWorkflowBar(activeTab) {
   var steps = [
-    { id:'chart',    label:'Chart Review',        icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
+    { id:'chart',    label:'Chart Review',        icon:'Chart', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
     { id:'interview',label:'Patient Interview',   icon:'🗣️', tabs:['interview'] },
-    { id:'reason',   label:'Orders & Reasoning',  icon:'⚡', tabs:['crt','orders','oral'] },
-    { id:'coaching', label:'Talk to Attending',   icon:'🧠', tabs:['coach','autofeedback','feedback'] },
-    { id:'document', label:'Documentation',       icon:'📝', tabs:['documentation'] },
+    { id:'reason',   label:'Orders & Reasoning',  icon:'Ord', tabs:['crt','orders','oral'] },
+    { id:'coaching', label:'Talk to Attending',   icon:'Coach', tabs:['coach','autofeedback','feedback'] },
+    { id:'document', label:'Documentation',       icon:'Doc', tabs:['documentation'] },
   ];
   var activeStep = 0;
   steps.forEach(function(s, i){ if(s.tabs.indexOf(activeTab)>=0) activeStep=i; });
@@ -3278,11 +3278,11 @@ function renderWorkflowBar(activeTab) {
 
 // ══ FEATURE 3: COACHDX STARTER CHIPS ══════════════════════════════════════
 var COACH_STARTERS = [
-  { icon:'🔍', text:'Here\'s my differential: I\'m thinking this could be...' },
+  { icon:'Dx', text:'Here\'s my differential: I\'m thinking this could be...' },
   { icon:'❓', text:'I\'m not sure what to make of these vitals/labs...' },
-  { icon:'💊', text:'My plan is to start with... — does that make sense?' },
-  { icon:'📋', text:'Walk me through this case. Where should I start?' },
-  { icon:'⚠️', text:'The finding that concerns me most is...' },
+  { icon:'Rx', text:'My plan is to start with... — does that make sense?' },
+  { icon:'Chart', text:'Walk me through this case. Where should I start?' },
+  { icon:'!', text:'The finding that concerns me most is...' },
 ];
 
 function rdxStartCoach(text) {
@@ -3361,10 +3361,10 @@ function rdxShowLabInsight(el, testName) {
   var popup = document.createElement('div');
   popup.className = 'lab-insight-popup';
   popup.id = 'rdx-lab-popup';
-  popup.innerHTML = '<div class="lab-insight-popup-title">🔬 ' + esc(testName) + '</div>'
+  popup.innerHTML = '<div class="lab-insight-popup-title">Lab: ' + esc(testName) + '</div>'
     + '<div class="lab-insight-popup-sig">' + esc(info.sig) + '</div>'
     + '<div class="lab-insight-popup-mech">📚 Related concept: <strong>' + esc(info.topic) + '</strong></div>'
-    + '<a class="lab-insight-popup-link" href="' + info.mech + '" target="_blank">🧬 Open in MechanismDx →</a>';
+    + '<a class="lab-insight-popup-link" href="' + info.mech + '" target="_blank">Open in MechanismDx →</a>';
   document.body.appendChild(popup);
   _labPopupEl = popup;
   var r = el.getBoundingClientRect();
@@ -3383,7 +3383,7 @@ document.addEventListener('click', function(e) {
 // ══ FEATURE 5: SIDEBAR AI VISUAL SECTION ══════════════════════════════════
 // Inject a wrapping div around AI tool buttons in the sidebar
 function wrapSidebarAISection(sbHtml) {
-  // Find the 🤖 AI Tools divider and wrap everything after it in a styled div
+  // Find the AI Tools divider and wrap everything after it in a styled div
   var marker = 'AI Tools</span></div>';
   var idx = sbHtml.indexOf(marker);
   if (idx < 0) return sbHtml;
@@ -4803,7 +4803,7 @@ function renderOralPresentation() {
       '<div style="margin-top:12px;display:flex;gap:12px;justify-content:flex-end"><button type="button" class="btn-submit" onclick="oralTranscript=document.getElementById(\'manualTranscriptAlt\').value;saveOralPresentation()">Save Transcript</button></div>'
     );
   } else if (isRecording) {
-    html += sectionCard("🔴 Recording Oral Presentation", I.activity,
+    html += sectionCard("Recording Oral Presentation", I.activity,
       '<div style="text-align:center;padding:20px"><div class="recording-pulse"></div><div style="font-size:24px;font-weight:700;color:var(--danger);margin:16px 0" id="recordingTimer">' + formatDuration(recordingDuration) + '</div><div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px">Speak clearly — present the case as you would to an attending</div><button type="button" class="btn-submit" style="background:var(--danger);padding:12px 32px;font-size:14px" onclick="stopRecording()">⏹ Stop Recording</button></div>' +
       '<div style="margin-top:16px"><div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;margin-bottom:6px">Live Transcription <span id="oralWordCount" style="font-weight:400"></span></div><div id="liveTranscript" class="annotated-text" style="min-height:150px;max-height:300px;font-family:\'IBM Plex Sans\',sans-serif;font-size:13px;line-height:1.8">' + esc(oralTranscript) + '</div></div>'
     );
@@ -5147,7 +5147,7 @@ render = function(){
   var PRIMARY_TAB_IDS = window.RDXWorkspace ? RDXWorkspace.getPrimaryTabIds() : ['demographics','labs','medications','vitals','imaging'];
   var sb = tabs.map(function(t){
     if(t.divider && t.groupLabel === 'Support'){
-      return '<div style="border-top:2px solid #EBF4FB;margin:8px 0 4px;padding:6px 16px 2px"><span style="font-size:12px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.8px">🤖 AI Tools</span></div>';
+      return '<div style="border-top:2px solid #EBF4FB;margin:8px 0 4px;padding:6px 16px 2px"><span style="font-size:12px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.8px">AI Tools</span></div>';
     }
     if(t.divider && t.groupLabel === 'Actions'){
       return '<div style="border-top:1px solid var(--border-light);margin:4px 0 2px;padding:6px 16px 2px"><span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px">Actions</span></div>';
@@ -5167,7 +5167,7 @@ render = function(){
   var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
   var overflowHtml='<div class="sidebar-overflow" id="sidebarOverflow"><div class="sidebar-overflow-backdrop" onclick="closeMoreTabs()"></div><div class="sidebar-overflow-sheet"><div class="sheet-handle"></div>'+secTabs.map(function(t){return'<button type="button" class="sheet-btn '+(S.activeTab===t.id?'active':'')+'" onclick="switchTabFromMore(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('')+'</div></div>';
   const ct=(fn[S.activeTab]||renderDemographics)();
-  const em=role==="admin"?"🔑":role==="faculty"?"👨‍⚕️":"🎓";
+  const em=role==="admin"?"":role==="faculty"?"":"";
   const roleBadge=role==="admin"?"badge-danger":role==="faculty"?"badge-purple":"badge-primary";
 
   // Mission Control badge + panel
@@ -5176,7 +5176,7 @@ render = function(){
   var tipHtml = (window.MissionControl && role==='student') ? MissionControl.renderTipBar(S.activeTab) : '';
   var casesUrl='virtual-emr.html';if(S.clinicalSetting){casesUrl+='?setting='+S.clinicalSetting;if(S.specialty)casesUrl+='&specialty='+S.specialty}
   var settingBadge=getSettingLabel()?'<span class="setting-context-badge">'+getSettingLabel()+'</span>':'';
-  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px">\u2190 Cases</a><a href="virtual-emr.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a>'+(role==='faculty'||role==='admin'?'<a href="faculty-dashboard.html" style="color:rgba(255,255,255,.8);font-size:12px;font-weight:600;text-decoration:none;margin-right:8px;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:5px">📊 Faculty</a>':'')+'<span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button>'+(window.RDXIntegration?RDXIntegration.renderEDTimerButton():'')+' </div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+(new URLSearchParams(location.search).get('as')?'<div style="background:#7C3AED;color:#fff;padding:8px 20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:10px"><span>👁️ Admin View — Viewing session as: '+esc(new URLSearchParams(location.search).get('as'))+'</span><a href="faculty-dashboard.html" style="color:#DDD6FE;font-size:11px;margin-left:auto">← Back to Dashboard</a></div>':'')+''+(window.RDXGuide?RDXGuide.renderNudgeStrip():'')+' <div class="content-layout"><div class="sidebar">'+sb+moreBtn+'</div><div class="main-content" id="main-content">'+renderWorkflowBar(S.activeTab)+tipHtml+ct+'</div></div>'+overflowHtml+'</div>'+mcPanel;
+  app.innerHTML='<div class="app-container"><div class="header-bar"><div class="header-logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg><a href="'+casesUrl+'" style="color:rgba(255,255,255,.5);font-size:12px;text-decoration:none;margin-right:8px">\u2190 Cases</a><a href="virtual-emr.html" style="color:rgba(255,255,255,.3);font-size:11px;text-decoration:none;margin-right:8px">Home</a>'+(role==='faculty'||role==='admin'?'<a href="faculty-dashboard.html" style="color:rgba(255,255,255,.8);font-size:12px;font-weight:600;text-decoration:none;margin-right:8px;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:5px">Faculty</a>':'')+'<span class="header-logo-text">Virtual EMR</span><span class="header-logo-sub">SP Encounter System</span>'+settingBadge+mcBadge+'</div><div class="header-user"><span class="header-user-name">'+em+' '+esc(S.currentUser.displayName)+'</span>'+badge(role,roleBadge)+'<button type="button" class="btn-signout" onclick="doSignOut()">Sign Out</button>'+(window.RDXIntegration?RDXIntegration.renderEDTimerButton():'')+' </div></div><div class="patient-banner"><div style="display:flex;align-items:center"><div class="patient-avatar">'+PATIENT.name.split(' ').map(function(w){return w[0]}).join('')+'</div><div class="patient-info"><div class="patient-name">'+esc(PATIENT.name)+'</div><div class="patient-meta">DOB: '+PATIENT.dob+' · '+PATIENT.sex+' · MRN: '+PATIENT.mrn+'</div></div></div><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">'+badge("Allergy: "+ALLERGIES.filter(function(a){return a.allergen!=="NKDA"}).map(function(a){return a.allergen}).join(", "),"badge-danger")+'<span style="color:var(--danger);display:flex;align-items:center;gap:4px;font-size:11px;font-weight:600">'+I.alert+' Severe Allergy Alert</span></div></div>'+(new URLSearchParams(location.search).get('as')?'<div style="background:#7C3AED;color:#fff;padding:8px 20px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:10px"><span>Admin View — Viewing session as: '+esc(new URLSearchParams(location.search).get('as'))+'</span><a href="faculty-dashboard.html" style="color:#DDD6FE;font-size:11px;margin-left:auto">← Back to Dashboard</a></div>':'')+''+(window.RDXGuide?RDXGuide.renderNudgeStrip():'')+' <div class="content-layout"><div class="sidebar">'+sb+moreBtn+'</div><div class="main-content" id="main-content">'+renderWorkflowBar(S.activeTab)+tipHtml+ct+'</div></div>'+overflowHtml+'</div>'+mcPanel;
 };
 
 // Mobile "More" tab overflow menu
