@@ -68,10 +68,10 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
   <h1>Browse ReasonDx</h1>
   <p>One search. Four ways to learn.</p>
   <div class="modes">
-    <button class="mode-btn on" data-mode="simulate" onclick="setMode('simulate')">Simulate<span class="mode-sub">366 patient encounters</span></button>
-    <button class="mode-btn" data-mode="practice" onclick="setMode('practice')">Practice<span class="mode-sub">361 Virtual EMR cases</span></button>
-    <button class="mode-btn" data-mode="coach" onclick="setMode('coach')">Coach<span class="mode-sub">105 Socratic topics</span></button>
-    <button class="mode-btn" data-mode="learn" onclick="setMode('learn')">Learn<span class="mode-sub">38 pathophysiology modules</span></button>
+    <button class="mode-btn on" data-mode="simulate" onclick="setMode('simulate')">Simulate<span class="mode-sub">369 patient encounters</span></button>
+    <button class="mode-btn" data-mode="practice" onclick="setMode('practice')">Practice<span class="mode-sub">364 Virtual EMR cases</span></button>
+    <button class="mode-btn" data-mode="coach" onclick="setMode('coach')">Coach<span class="mode-sub">112 Socratic topics</span></button>
+    <button class="mode-btn" data-mode="learn" onclick="setMode('learn')">Learn<span class="mode-sub">35 pathophysiology modules</span></button>
   </div>
 </div>
 
@@ -225,7 +225,14 @@ var COACH_DATA = [
   {id:'peds-dka',title:'Pediatric DKA',cat:'pediatric',tags:'cerebral edema,new onset t1dm'},
   {id:'falls',title:'Falls & Frailty',cat:'geriatric',tags:'polypharmacy,beers criteria'},
   {id:'dementia',title:'Dementia',cat:'geriatric',tags:'alzheimers,lewy body'},
-  {id:'eol',title:'Palliative & Goals of Care',cat:'geriatric',tags:'hospice,goals of care'}
+  {id:'eol',title:'Palliative & Goals of Care',cat:'geriatric',tags:'hospice,goals of care'},
+  {id:'genetic-testing',title:'Genetic Testing Interpretation',cat:'genetics',tags:'karyotype,microarray,exome,methylation'},
+  {id:'dysmorphology',title:'Recognizing Dysmorphic Features',cat:'genetics',tags:'dysmorphic,gestalt,syndromic,pattern'},
+  {id:'when-suspect-genetic',title:'When to Suspect a Genetic Condition',cat:'genetics',tags:'diagnostic odyssey,rare disease,consanguinity'},
+  {id:'pharmacogenomics',title:'Pharmacogenomics',cat:'genetics',tags:'cyp2d6,cyp2c19,hla-b,drug gene'},
+  {id:'hereditary-cancer',title:'Hereditary Cancer Syndromes',cat:'genetics',tags:'lynch,brca,li-fraumeni,mismatch repair'},
+  {id:'angelman-prader',title:'Angelman & Prader-Willi',cat:'genetics',tags:'imprinting,ube3a,15q11,methylation'},
+  {id:'inborn-errors',title:'Inborn Errors of Metabolism',cat:'genetics',tags:'phenylketonuria,newborn screening,metabolic crisis'}
 ];
 
 // LEARN: 33 MechanismDx modules
@@ -263,12 +270,9 @@ var LEARN_DATA = [
   {id:'psychiatry-module',title:'Psychiatry',cat:'psychiatric'},
   {id:'ob-module',title:'Obstetrics',cat:'obstetric'},
   {id:'clinic-ambulatory-module',title:'Clinic & Ambulatory',cat:'general'},
-  // Genetics — integrated from standalone module
-  {id:'genetics-demo-case',title:'Angelman Syndrome — Diagnostic Odyssey',cat:'genetics',sub:'The child who keeps falling. Rare genetic case.'},
-  {id:'genetics-aadc-case',title:'AADC Deficiency — Rare Disease',cat:'genetics',sub:'The baby who wouldn\'t stop rolling her eyes.'},
-  {id:'genetics-ai-case',title:'HAE & Genetics in Allergy',cat:'genetics',sub:'The swelling that skips generations.'},
-  {id:'cme-lynch-syndrome',title:'Lynch Syndrome — CME Module',cat:'genetics',sub:'Hereditary cancer risk. 6.0 CME credits.'},
-  {id:'cme-pharmacogenomics',title:'Pharmacogenomics — CME Module',cat:'genetics',sub:'Drug-gene interactions. 6.0 CME credits.'}
+  // Genetics CME — integrated from standalone module
+  {id:'cme-lynch-syndrome',title:'Lynch Syndrome — Hereditary Cancer',cat:'genetics'},
+  {id:'cme-pharmacogenomics',title:'Pharmacogenomics — Drug-Gene Interactions',cat:'genetics'}
 ];
 
 // ══════════════════════════════════════════
@@ -278,8 +282,8 @@ var LEARN_DATA = [
 var CAT_SETS = {
   simulate: ['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],
   practice: ['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],
-  coach: ['allergy','cardiovascular','pulmonary','infectious','neurologic','gastrointestinal','renal','endocrine','hematologic','emergency','reasoning','rheumatologic','psychiatric'],
-  learn: ['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','rheumatologic','psychiatric','genetics']
+  coach: ['allergy','cardiovascular','pulmonary','infectious','neurologic','gastrointestinal','renal','endocrine','hematologic','emergency','reasoning','genetics','rheumatologic','psychiatric'],
+  learn: ['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','genetics','rheumatologic','psychiatric']
 };
 var CAT_LABELS = {cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General',genetics:'Genetics'};
 
