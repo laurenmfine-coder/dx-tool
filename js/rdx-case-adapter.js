@@ -70,8 +70,8 @@
     var h = hashCode(caseId);
 
     // Pediatric
-    if (/pediatric|croup|intussusception|kawasaki|pyloric|febrile seizure|bronchiolitis/.test(dx)) return 2 + (h % 8);
-    if (/fpies|neonatal/.test(dx)) return 1;
+    if (/pediatric|croup|intussusception|kawasaki|pyloric|febrile seizure|bronchiolitis|angelman/.test(dx)) return 2 + (h % 8);
+    if (/fpies|neonatal|aadc/.test(dx)) return 1;
     // Young adults
     if (/dka.*type.?1|anorexia|testicular torsion/.test(dx)) return 18 + (h % 12);
     if (/evali|vaping|overdose.*intentional/.test(dx)) return 20 + (h % 15);
@@ -270,6 +270,7 @@
       var age = generateAge(caseId, crt);
       var vitals = crt.initialVitals || {};
       var pmh = (crt.patientSummary && crt.patientSummary.pmh) || [];
+      if (typeof pmh === 'string') pmh = [pmh]; // handle string pmh
       var ccPhrasing = (crt.patientSummary && crt.patientSummary.chiefComplaintPhrasing) || [crt.chiefComplaint];
 
       // Build the case object
