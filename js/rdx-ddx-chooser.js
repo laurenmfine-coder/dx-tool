@@ -63,9 +63,9 @@
       } else {
         this._entries.forEach(function(entry, i) {
           var rank = i + 1;
-          var catColor = entry.category === 'must-not-miss' ? '#DC2626' : '#2874A6';
-          var catBg = entry.category === 'must-not-miss' ? '#FEF2F2' : '#EBF5FB';
-          var catLabel = entry.category === 'must-not-miss' ? 'MUST NOT MISS' : 'LIKELY';
+          var catColor = entry.category === 'must-not-miss' ? '#DC2626' : entry.category === 'both' ? '#9333EA' : '#2874A6';
+          var catBg = entry.category === 'must-not-miss' ? '#FEF2F2' : entry.category === 'both' ? '#F3E8FF' : '#EBF5FB';
+          var catLabel = entry.category === 'must-not-miss' ? 'MUST NOT MISS' : entry.category === 'both' ? 'LIKELY + MNM' : 'LIKELY';
 
           html += '<div style="display:flex;align-items:center;gap:8px;padding:10px 12px;margin-bottom:6px;border:2px solid ' + (rank === 1 ? '#2874A6' : '#E2E8F0') + ';border-radius:8px;background:#fff">';
 
@@ -109,7 +109,7 @@
     },
 
     /**
-     * Search handler — filters diagnosis database.
+     * Search handler — fuzzy scored search across DX_DATABASE + CRT_DATA.
      */
     _onSearch: function(query) {
       var resultsEl = document.getElementById('ddxSearchResults');
@@ -120,58 +120,123 @@
         return;
       }
 
-      var db = window.DX_DATABASE || [];
-      var q = query.toLowerCase();
       var self = this;
+      var q = query.toLowerCase().trim();
       var alreadyAdded = this._entries.map(function(e) { return e.name.toLowerCase(); });
+      var scored = [];
+      var seen = new Set(); // deduplicate
 
-      var matches = db.filter(function(dx) {
-        if (alreadyAdded.indexOf(dx.n.toLowerCase()) !== -1) return false;
-        if (dx.n.toLowerCase().indexOf(q) !== -1) return true;
-        if (dx.a && dx.a.some(function(a) { return a.toLowerCase().indexOf(q) !== -1; })) return true;
-        return false;
-      }).slice(0, 12);
+      // Search DX_DATABASE (primary)
+      (window.DX_DATABASE || []).forEach(function(dx) {
+        if (alreadyAdded.indexOf(dx.n.toLowerCase()) !== -1) return;
+        var score = self._scoreMatch(q, dx.n, dx.a || []);
+        if (score > 0 && !seen.has(dx.n.toLowerCase())) {
+          seen.add(dx.n.toLowerCase());
+          scored.push({ name: dx.n, system: dx.s, score: score, source: 'db' });
+        }
+      });
+
+      // Search CRT_DATA diagnoses (secondary — case-specific variants)
+      if (window.CRT_DATA) {
+        Object.values(window.CRT_DATA).forEach(function(c) {
+          if (!c.diagnosis) return;
+          var dxName = c.diagnosis;
+          if (alreadyAdded.indexOf(dxName.toLowerCase()) !== -1) return;
+          if (seen.has(dxName.toLowerCase())) return;
+          var cat = c.category || c.presentation || 'clinical';
+          var score = self._scoreMatch(q, dxName, []);
+          if (score > 0) {
+            seen.add(dxName.toLowerCase());
+            scored.push({ name: dxName, system: cat.toLowerCase(), score: score - 5, source: 'crt' });
+          }
+        });
+      }
+
+      // Sort by score descending, then alphabetically
+      scored.sort(function(a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.name.localeCompare(b.name);
+      });
+
+      var matches = scored.slice(0, 12);
+      this._lastMatches = matches;
 
       if (matches.length === 0) {
-        // Allow custom entry
         resultsEl.innerHTML = '<div onclick="DdxChooser._addCustom(\'' + self._esc(query) + '\')" style="padding:10px 14px;cursor:pointer;font-size:13px;color:#2874A6;font-weight:600;border-bottom:1px solid #F1F5F9">Add custom: "' + self._esc(query) + '"</div>';
         resultsEl.style.display = 'block';
         return;
       }
 
-      var html = '';
-
-      // System color map
       var sysColors = {
-        cardiovascular: '#DC2626', pulmonary: '#2563EB', infectious: '#D97706',
-        gi: '#059669', renal: '#7C3AED', neuro: '#BE185D', endocrine: '#0891B2',
-        heme: '#9333EA', rheum: '#EA580C', tox: '#4F46E5', psych: '#0D9488',
-        derm: '#DB2777', msk: '#65A30D', obgyn: '#E11D48', ent: '#6366F1', misc: '#6B7280'
+        cardiovascular:'#DC2626', pulmonary:'#2563EB', infectious:'#D97706',
+        gi:'#059669', renal:'#7C3AED', neuro:'#BE185D', endocrine:'#0891B2',
+        heme:'#9333EA', rheum:'#EA580C', tox:'#4F46E5', psych:'#0D9488',
+        derm:'#DB2777', msk:'#65A30D', obgyn:'#E11D48', ent:'#6366F1',
+        clinical:'#6B7280', misc:'#6B7280'
       };
 
-      matches.forEach(function(dx, i) {
-        var sysColor = sysColors[dx.s] || '#6B7280';
-        html += '<div onclick="DdxChooser._addFromDb(' + i + ',\'' + self._esc(query) + '\')" style="padding:10px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid #F1F5F9;display:flex;align-items:center;gap:8px" onmouseover="this.style.background=\'#F8FAFC\'" onmouseout="this.style.background=\'#fff\'">';
+      var html = '';
+      matches.forEach(function(m, i) {
+        var sysColor = sysColors[m.system] || '#6B7280';
+        var sysLabel = m.system.length > 15 ? m.system.substring(0, 12) + '...' : m.system;
+        html += '<div onclick="DdxChooser._addFromDb(' + i + ')" style="padding:10px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid #F1F5F9;display:flex;align-items:center;gap:8px" onmouseover="this.style.background=\'#F8FAFC\'" onmouseout="this.style.background=\'#fff\'">';
         html += '<span style="width:8px;height:8px;border-radius:50%;background:' + sysColor + ';flex-shrink:0"></span>';
-        html += '<span style="flex:1">' + self._esc(dx.n) + '</span>';
-        html += '<span style="font-size:10px;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px">' + self._esc(dx.s) + '</span>';
+        html += '<span style="flex:1">' + self._esc(m.name) + '</span>';
+        html += '<span style="font-size:10px;color:#94A3B8;text-transform:uppercase;letter-spacing:.5px">' + self._esc(sysLabel) + '</span>';
         html += '</div>';
       });
 
-      // Custom entry option at bottom
       html += '<div onclick="DdxChooser._addCustom(\'' + self._esc(query) + '\')" style="padding:10px 14px;cursor:pointer;font-size:12px;color:#64748B;border-top:2px solid #F1F5F9" onmouseover="this.style.background=\'#F8FAFC\'" onmouseout="this.style.background=\'#fff\'">+ Add custom diagnosis: "' + self._esc(query) + '"</div>';
 
       resultsEl.innerHTML = html;
       resultsEl.style.display = 'block';
-
-      // Stash matches for click handler
-      this._lastMatches = matches;
     },
 
-    _addFromDb: function(matchIndex, query) {
+    /**
+     * Fuzzy scoring — same pattern as rdx-order-catalog.js
+     */
+    _scoreMatch: function(query, name, aliases) {
+      var score = 0;
+      var nameLower = name.toLowerCase();
+
+      // Exact match
+      if (nameLower === query) return 100;
+      // Starts with
+      if (nameLower.startsWith(query)) return 80;
+      // Contains
+      if (nameLower.includes(query)) score = Math.max(score, 60);
+
+      // Alias matches
+      for (var i = 0; i < aliases.length; i++) {
+        var a = aliases[i].toLowerCase();
+        if (a === query) return 90;
+        if (a.startsWith(query)) score = Math.max(score, 70);
+        if (a.includes(query)) score = Math.max(score, 50);
+      }
+
+      // Multi-word query — split and score each word
+      if (score === 0 && query.includes(' ')) {
+        var words = query.split(' ').filter(function(w) { return w.length > 1; });
+        var allText = nameLower + ' ' + aliases.join(' ').toLowerCase();
+        var wordMatches = words.filter(function(w) { return allText.includes(w); });
+        if (wordMatches.length > 0) score = Math.round(40 * wordMatches.length / words.length);
+      }
+
+      // Single word partial match on first word of name (e.g., "pul" matches "Pulmonary...")
+      if (score === 0) {
+        var nameWords = nameLower.split(/[\s\-\/\(]+/);
+        for (var j = 0; j < nameWords.length; j++) {
+          if (nameWords[j].startsWith(query)) { score = 55; break; }
+        }
+      }
+
+      return score;
+    },
+
+    _addFromDb: function(matchIndex) {
       var match = this._lastMatches && this._lastMatches[matchIndex];
       if (!match) return;
-      this._entries.push({ name: match.n, category: 'likely', system: match.s });
+      this._entries.push({ name: match.name, category: 'likely', system: match.system });
       document.getElementById('ddxSearchInput').value = '';
       document.getElementById('ddxSearchResults').style.display = 'none';
       this.render();
@@ -189,7 +254,11 @@
 
     _toggleCategory: function(index) {
       if (this._entries[index]) {
-        this._entries[index].category = this._entries[index].category === 'likely' ? 'must-not-miss' : 'likely';
+        // Cycle: likely → must-not-miss → both → likely
+        var current = this._entries[index].category;
+        if (current === 'likely') this._entries[index].category = 'must-not-miss';
+        else if (current === 'must-not-miss') this._entries[index].category = 'both';
+        else this._entries[index].category = 'likely';
         this.render();
         if (this._onChangeCallback) this._onChangeCallback(this._entries);
       }

@@ -167,7 +167,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     </div>
     <div class="input-area">
       <div class="input-row">
-        <input type="text" id="chatInput" placeholder="Type your response..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" disabled>
+        <input type="text" id="chatInput" placeholder="Type your response, or tap 🎤 to speak..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" disabled>
+        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Dictate" style="padding:12px 14px;background:transparent;border:1px solid var(--border-main,#D0D5DD);border-radius:var(--radius,8px);cursor:pointer;font-size:18px;line-height:1" disabled>🎤</button>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Send</button>
       </div>
     </div>
@@ -395,6 +396,8 @@ function startStudy() {
   document.getElementById('intakeOverlay').classList.add('hidden');
   document.getElementById('chatInput').disabled = false;
   document.getElementById('sendBtn').disabled = false;
+  document.getElementById('micBtn').disabled = false;
+  initVoice();
   document.getElementById('statGroup').textContent = groupCode;
   updatePhaseUI();
 
@@ -446,6 +449,7 @@ function startStudy() {
 
 // ── SEND MESSAGE ──
 async function sendMessage() {
+  if (_isListening) stopListening();
   const input = document.getElementById('chatInput');
   const msg = input.value.trim();
   if (!msg || !state) return;
@@ -1341,6 +1345,84 @@ function stripEmotes(text) {
 
   return result;
 }
+// ── VOICE INPUT (Web Speech API) ──
+var _recognition = null;
+var _isListening = false;
+
+function initVoice() {
+  var btn = document.getElementById('micBtn');
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    if (btn) { btn.style.opacity = '0.3'; btn.title = 'Voice input not supported — use Chrome or Edge'; }
+    return;
+  }
+}
+
+function toggleMic() {
+  var btn = document.getElementById('micBtn');
+  if (!btn) return;
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { alert('Voice input requires Chrome or Edge.'); return; }
+
+  if (_isListening) { stopListening(); return; }
+
+  _recognition = new SR();
+  _recognition.continuous = true;
+  _recognition.interimResults = true;
+  _recognition.lang = 'en-US';
+  var accumulated = '';
+
+  _recognition.onstart = function() {
+    _isListening = true;
+    accumulated = '';
+    btn.textContent = '⏹';
+    btn.style.background = '#DC2626';
+    btn.style.color = '#fff';
+    btn.title = 'Listening... tap to stop';
+  };
+
+  _recognition.onresult = function(e) {
+    var inp = document.getElementById('chatInput');
+    if (!inp) return;
+    var interimTxt = '';
+    for (var i = e.resultIndex; i < e.results.length; i++) {
+      var t = e.results[i][0].transcript;
+      if (e.results[i].isFinal) {
+        accumulated += t.charAt(0).toUpperCase() + t.slice(1) + '. ';
+      } else {
+        interimTxt += t;
+      }
+    }
+    inp.value = (accumulated + interimTxt).trim();
+  };
+
+  _recognition.onerror = function(e) {
+    if (e.error === 'not-allowed') alert('Microphone access denied.\n\nAllow microphone access in your browser settings and reload the page.');
+    else if (e.error !== 'no-speech') console.warn('Speech error:', e.error);
+    stopListening();
+  };
+
+  _recognition.onend = function() {
+    if (_isListening) {
+      try { _recognition.start(); } catch(e) { stopListening(); }
+    }
+  };
+
+  try { _recognition.start(); } catch(e) { console.warn('recognition.start failed:', e); stopListening(); }
+}
+
+function stopListening() {
+  _isListening = false;
+  var btn = document.getElementById('micBtn');
+  if (btn) {
+    btn.textContent = '🎤';
+    btn.style.background = 'transparent';
+    btn.style.color = '';
+    btn.title = 'Dictate';
+  }
+  if (_recognition) { try { _recognition.stop(); } catch(e) {} _recognition = null; }
+}
+
 function isPatientResponse(text) {
   var pName = caseData ? caseData.presentation.patientName : 'Patient';
   var namePattern = new RegExp('\\[As (' + pName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '|Ms\\.|Mr\\.|Mrs\\.).*?\\]', 'i');
