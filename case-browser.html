@@ -7,309 +7,202 @@
 <link rel="icon" href="favicon-32x32.png">
 <script src="js/nav-global.js"></script>
 <script src="emr-data/crt-data.js"></script>
-<script src="emr-data/dx-database.js"></script>
-<script src="emr-data/rad-study-dys001.js"></script>
-<script src="emr-data/rad-study-dys002.js"></script>
-<script src="emr-data/rad-study-cough001.js"></script>
-<script src="emr-data/rad-study-chest001.js"></script>
-<script src="emr-data/rad-study-fever001.js"></script>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&display=swap');
   :root {
-    --bg: #F8FAFC; --surface: #FFFFFF; --border: #E2E8F0;
-    --text: #1E293B; --text-secondary: #64748B; --text-muted: #94A3B8;
-    --primary: #2874A6; --primary-light: #EBF5FB; --primary-dark: #1B4F72;
-    --danger: #DC2626; --danger-light: #FEF2F2;
-    --success: #059669; --success-light: #ECFDF5;
-    --purple: #7C3AED; --purple-light: #F5F3FF;
-    --orange: #EA580C; --orange-light: #FFF7ED;
-    --radius: 12px; --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-    --shadow-lg: 0 10px 25px rgba(0,0,0,.08);
+    --bg:#F8FAFC;--surface:#FFFFFF;--border:#E2E8F0;
+    --text:#1E293B;--text-s:#64748B;--text-m:#94A3B8;
+    --primary:#2874A6;--primary-l:#EBF5FB;--primary-d:#1B4F72;
+    --danger:#DC2626;--success:#059669;--purple:#7C3AED;
+    --radius:12px;--shadow:0 1px 3px rgba(0,0,0,.06);
+    --shadow-lg:0 10px 25px rgba(0,0,0,.08);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--bg); color: var(--text); padding-top: 52px; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);padding-top:52px}
 
-  .cb-hero {
-    background: linear-gradient(135deg, #0d2b3e 0%, #1B4F72 50%, #2874A6 100%);
-    padding: 48px 24px 36px; text-align: center; position: relative; overflow: hidden;
-  }
-  .cb-hero::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(133,193,233,.12) 0%, transparent 60%),
-                radial-gradient(circle at 70% 30%, rgba(40,116,166,.15) 0%, transparent 50%);
-  }
-  .cb-hero h1 { font-size: 2rem; font-weight: 700; color: #fff; position: relative; z-index: 1; letter-spacing: -0.02em; }
-  .cb-hero h1 span { color: #85C1E9; }
-  .cb-hero p { font-size: 1rem; color: rgba(255,255,255,.7); margin-top: 8px; position: relative; z-index: 1; }
+  .hero{background:linear-gradient(135deg,#0d2b3e,#1B4F72 50%,#2874A6);padding:40px 24px 32px;text-align:center;position:relative;overflow:hidden}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%,rgba(133,193,233,.1) 0%,transparent 60%)}
+  .hero h1{font-size:1.8rem;font-weight:700;color:#fff;position:relative;z-index:1;letter-spacing:-.02em}
+  .hero p{font-size:.92rem;color:rgba(255,255,255,.65);margin-top:6px;position:relative;z-index:1}
+  .hero-stats{display:flex;gap:28px;justify-content:center;margin-top:16px;position:relative;z-index:1}
+  .hero-stat-num{font-size:1.3rem;font-weight:700;color:#85C1E9}
+  .hero-stat-label{font-size:.68rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px}
 
-  .cb-stats {
-    display: flex; gap: 24px; justify-content: center; margin-top: 20px; position: relative; z-index: 1;
-  }
-  .cb-stat { text-align: center; }
-  .cb-stat-num { font-size: 1.5rem; font-weight: 700; color: #85C1E9; font-family: 'JetBrains Mono', monospace; }
-  .cb-stat-label { font-size: .72rem; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .8px; }
+  .container{max-width:1200px;margin:0 auto;padding:20px}
 
-  .cb-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:18px;box-shadow:var(--shadow)}
+  .search{flex:1;min-width:200px;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;font-family:inherit;outline:none;transition:border .15s}
+  .search:focus{border-color:var(--primary)}
+  .fbtn{padding:6px 12px;border:1.5px solid var(--border);border-radius:8px;background:var(--surface);font-size:.78rem;font-weight:600;color:var(--text-s);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+  .fbtn:hover{border-color:var(--primary);color:var(--primary)}
+  .fbtn.on{background:var(--primary);border-color:var(--primary);color:#fff}
 
-  /* Filters */
-  .cb-filters {
-    display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    padding: 16px 20px; background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); margin-bottom: 20px; box-shadow: var(--shadow);
-  }
-  .cb-search {
-    flex: 1; min-width: 200px; padding: 10px 14px; border: 1.5px solid var(--border);
-    border-radius: 8px; font-size: .9rem; font-family: inherit; outline: none;
-    transition: border-color .15s;
-  }
-  .cb-search:focus { border-color: var(--primary); }
-  .cb-filter-btn {
-    padding: 7px 14px; border: 1.5px solid var(--border); border-radius: 8px;
-    background: var(--surface); font-size: .8rem; font-weight: 600; color: var(--text-secondary);
-    cursor: pointer; font-family: inherit; transition: all .15s; white-space: nowrap;
-  }
-  .cb-filter-btn:hover { border-color: var(--primary); color: var(--primary); }
-  .cb-filter-btn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+  .section-title{font-size:.75rem;font-weight:700;color:var(--text-m);text-transform:uppercase;letter-spacing:.8px;margin:6px 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+  .grid-sm{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
 
-  /* Featured cases */
-  .cb-section-title {
-    font-size: .8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;
-    letter-spacing: 1px; margin-bottom: 12px; margin-top: 8px;
-  }
-  .cb-featured { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; margin-bottom: 28px; }
+  .card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 18px;cursor:pointer;transition:all .18s;position:relative}
+  .card:hover{border-color:var(--primary);box-shadow:var(--shadow-lg);transform:translateY(-1px)}
+  .card-featured{border-left:3px solid var(--purple)}
 
-  .cb-card {
-    background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius);
-    padding: 18px 20px; cursor: pointer; transition: all .18s; position: relative; overflow: hidden;
-  }
-  .cb-card:hover { border-color: var(--primary); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-  .cb-card-study { border-left: 4px solid var(--purple); }
+  .card-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .card-acuity{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+  .esi1{background:#FEF2F2;color:#DC2626}
+  .esi2{background:#FFF7ED;color:#EA580C}
+  .esi3{background:#FEF9C3;color:#A16207}
+  .esi4{background:#ECFDF5;color:#059669}
+  .card-cc{font-size:.95rem;font-weight:700;color:var(--text);line-height:1.3}
+  .card-pres{font-size:.78rem;color:var(--text-s);margin-top:2px}
+  .card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+  .tag{font-size:.65rem;font-weight:600;padding:2px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.3px}
+  .tag-cat{background:var(--primary-l);color:var(--primary-d)}
+  .tag-study{background:#F5F3FF;color:var(--purple)}
 
-  .cb-card-header { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-  .cb-card-acuity {
-    width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center;
-    justify-content: center; font-size: .75rem; font-weight: 700; flex-shrink: 0;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .acuity-1 { background: #FEF2F2; color: #DC2626; }
-  .acuity-2 { background: #FFF7ED; color: #EA580C; }
-  .acuity-3 { background: #FEF9C3; color: #A16207; }
-  .acuity-4 { background: #ECFDF5; color: #059669; }
+  .count{font-size:.8rem;color:var(--text-m);margin-bottom:12px}
+  .empty{text-align:center;padding:48px;color:var(--text-m);font-size:.88rem}
 
-  .cb-card-title { font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
-  .cb-card-cc { font-size: .82rem; color: var(--text-secondary); margin-top: 2px; }
-
-  .cb-card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .cb-tag {
-    font-size: .68rem; font-weight: 600; padding: 3px 8px; border-radius: 6px;
-    text-transform: uppercase; letter-spacing: .4px;
-  }
-  .cb-tag-cat { background: var(--primary-light); color: var(--primary-dark); }
-  .cb-tag-study { background: var(--purple-light); color: var(--purple); }
-  .cb-tag-time { background: #F1F5F9; color: var(--text-muted); }
-
-  .cb-card-meta { font-size: .72rem; color: var(--text-muted); margin-top: 8px; }
-
-  /* Grid for all cases */
-  .cb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
-
-  .cb-count { font-size: .82rem; color: var(--text-muted); margin-bottom: 14px; }
-
-  .cb-empty { text-align: center; padding: 48px; color: var(--text-muted); font-size: .9rem; }
-
-  @media (max-width: 640px) {
-    .cb-featured, .cb-grid { grid-template-columns: 1fr; }
-    .cb-filters { flex-direction: column; }
-    .cb-search { min-width: auto; }
-    .cb-stats { gap: 16px; }
-  }
+  @media(max-width:640px){.grid,.grid-sm{grid-template-columns:1fr}.filters{flex-direction:column}.search{min-width:auto}.hero-stats{gap:16px}}
 </style>
 </head>
 <body>
 
-<div class="cb-hero">
-  <h1>Case <span>Browser</span></h1>
-  <p>Select a case to run on the simulation engine</p>
-  <div class="cb-stats">
-    <div class="cb-stat"><div class="cb-stat-num" id="statTotal">0</div><div class="cb-stat-label">Cases</div></div>
-    <div class="cb-stat"><div class="cb-stat-num" id="statCategories">0</div><div class="cb-stat-label">Specialties</div></div>
-    <div class="cb-stat"><div class="cb-stat-num" id="statStudy">5</div><div class="cb-stat-label">Study Cases</div></div>
+<div class="hero">
+  <h1>Clinical Simulations</h1>
+  <p>Select a case to run a full patient encounter</p>
+  <div class="hero-stats">
+    <div style="text-align:center"><div class="hero-stat-num" id="sTotal">0</div><div class="hero-stat-label">Cases</div></div>
+    <div style="text-align:center"><div class="hero-stat-num" id="sCats">0</div><div class="hero-stat-label">Specialties</div></div>
+    <div style="text-align:center"><div class="hero-stat-num" id="sStudy">5</div><div class="hero-stat-label">Featured</div></div>
   </div>
 </div>
 
-<div class="cb-container">
-  <div class="cb-filters">
-    <input type="text" class="cb-search" id="searchInput" placeholder="Search by diagnosis, chief complaint, or keyword..." oninput="filterCases()">
-    <button class="cb-filter-btn active" data-cat="all" onclick="setCategory('all')">All</button>
-    <button class="cb-filter-btn" data-cat="cardiovascular" onclick="setCategory('cardiovascular')">Cardio</button>
-    <button class="cb-filter-btn" data-cat="pulmonary" onclick="setCategory('pulmonary')">Pulm</button>
-    <button class="cb-filter-btn" data-cat="neurologic" onclick="setCategory('neurologic')">Neuro</button>
-    <button class="cb-filter-btn" data-cat="infectious" onclick="setCategory('infectious')">ID</button>
-    <button class="cb-filter-btn" data-cat="gastrointestinal" onclick="setCategory('gastrointestinal')">GI</button>
-    <button class="cb-filter-btn" data-cat="allergy" onclick="setCategory('allergy')">A&I</button>
-    <button class="cb-filter-btn" data-cat="endocrine" onclick="setCategory('endocrine')">Endo</button>
-    <button class="cb-filter-btn" data-cat="toxicologic" onclick="setCategory('toxicologic')">Tox</button>
+<div class="container">
+  <div class="filters">
+    <input type="text" class="search" id="searchInput" placeholder="Search by chief complaint or specialty..." oninput="filter()">
+    <button class="fbtn on" data-cat="all" onclick="setCat('all')">All</button>
+    <button class="fbtn" data-cat="cardiovascular" onclick="setCat('cardiovascular')">Cardio</button>
+    <button class="fbtn" data-cat="pulmonary" onclick="setCat('pulmonary')">Pulm</button>
+    <button class="fbtn" data-cat="neurologic" onclick="setCat('neurologic')">Neuro</button>
+    <button class="fbtn" data-cat="infectious" onclick="setCat('infectious')">ID</button>
+    <button class="fbtn" data-cat="gastrointestinal" onclick="setCat('gastrointestinal')">GI</button>
+    <button class="fbtn" data-cat="allergy" onclick="setCat('allergy')">Allergy</button>
+    <button class="fbtn" data-cat="endocrine" onclick="setCat('endocrine')">Endo</button>
+    <button class="fbtn" data-cat="toxicologic" onclick="setCat('toxicologic')">Tox</button>
   </div>
 
-  <!-- Featured / Study Cases -->
   <div id="featuredSection">
-    <div class="cb-section-title">Radiology Study Cases</div>
-    <div class="cb-featured" id="featuredGrid"></div>
+    <div class="section-title">Featured Cases</div>
+    <div class="grid" id="featuredGrid"></div>
+    <div style="height:20px"></div>
   </div>
 
-  <!-- All Cases -->
-  <div class="cb-count" id="caseCount"></div>
-  <div class="cb-grid" id="caseGrid"></div>
-  <div class="cb-empty" id="emptyState" style="display:none">No cases match your search.</div>
+  <div class="count" id="caseCount"></div>
+  <div class="grid grid-sm" id="caseGrid"></div>
+  <div class="empty" id="emptyState" style="display:none">No cases match your search.</div>
 </div>
 
 <script>
-var ALL_CASES = [];
-var activeCategory = 'all';
+var ALL = [], activeCat = 'all';
 
-// Featured/study cases (native rad-study format)
-var STUDY_CASES = [
-  { id:'DYS-001', diagnosis:'Hypersensitivity Pneumonitis', cc:'Progressive dyspnea', category:'pulmonary', acuity:2, isStudy:true },
-  { id:'DYS-002', diagnosis:'EVALI (Vaping Lung Injury)', cc:'Dyspnea, cough, fever', category:'pulmonary', acuity:2, isStudy:true },
-  { id:'COUGH-001', diagnosis:'Pulmonary Tuberculosis', cc:'Productive cough, hemoptysis', category:'pulmonary', acuity:2, isStudy:true },
-  { id:'CHEST-001', diagnosis:'Cocaine-Induced Vasospasm', cc:'Chest pain', category:'cardiovascular', acuity:1, isStudy:true },
-  { id:'FEVER-001', diagnosis:'PCP in Undiagnosed HIV', cc:'Fever, dyspnea', category:'infectious', acuity:2, isStudy:true }
+// Featured cases — show CHIEF COMPLAINT, not diagnosis
+var FEATURED = [
+  {id:'DYS-001',cc:'Progressive dyspnea',pres:'6-week worsening SOB with dry cough',cat:'pulmonary',acuity:2,featured:true},
+  {id:'DYS-002',cc:'Dyspnea, cough, fever',pres:'10-day progressive respiratory symptoms in a young adult',cat:'pulmonary',acuity:2,featured:true},
+  {id:'COUGH-001',cc:'Productive cough, hemoptysis',pres:'3-month cough with blood-streaked sputum and weight loss',cat:'pulmonary',acuity:2,featured:true},
+  {id:'CHEST-001',cc:'Chest pain',pres:'Acute onset substernal chest pain in a young adult',cat:'cardiovascular',acuity:1,featured:true},
+  {id:'FEVER-001',cc:'Fever, dyspnea',pres:'Progressive fever and shortness of breath with oral findings',cat:'infectious',acuity:2,featured:true}
 ];
 
-// Normalize categories
 function normCat(c) {
-  c = (c||'other').toLowerCase();
-  if (c === 'cardiology' || c === 'cardiac' || c === 'cardiorenal') return 'cardiovascular';
-  if (c === 'neurology' || c === 'neurological') return 'neurologic';
-  if (c === 'toxicology') return 'toxicologic';
-  if (c === 'hematology') return 'hematologic';
-  if (c === 'allergy_immunology' || c === 'immunologic') return 'allergy';
-  if (c === 'gi') return 'gastrointestinal';
-  if (c === 'surgery' || c === 'surgical') return 'surgical';
-  if (c === 'respiratory') return 'pulmonary';
-  if (c === 'ophthalmologic') return 'ophthalmic';
-  return c;
+  c=(c||'other').toLowerCase().replace(/_/g,' ');
+  var map={cardiology:'cardiovascular',cardiac:'cardiovascular',cardiorenal:'cardiovascular',
+    neurology:'neurologic',neurological:'neurologic',toxicology:'toxicologic',
+    hematology:'hematologic','allergy immunology':'allergy',immunologic:'allergy',
+    gi:'gastrointestinal',surgery:'surgical',surgical:'surgical',respiratory:'pulmonary',
+    ophthalmologic:'ophthalmic',vascular:'cardiovascular'};
+  return map[c]||c;
 }
 
 function init() {
-  // Build case list from CRT_DATA
   if (window.CRT_DATA) {
-    Object.entries(window.CRT_DATA).forEach(function(entry) {
-      var key = entry[0], c = entry[1];
-      ALL_CASES.push({
-        id: key,
-        diagnosis: c.diagnosis || key,
-        cc: c.chiefComplaint || c.presentation || '',
-        category: normCat(c.category),
-        acuity: c.acuity || 3,
-        isStudy: false
+    Object.entries(window.CRT_DATA).forEach(function(e) {
+      var id=e[0],c=e[1];
+      // Chief complaint only — truncate at first "/" to strip lab spoilers
+      var cc = (c.chiefComplaint||c.presentation||'').split('/')[0].trim();
+      ALL.push({
+        id:id, cc:cc,
+        searchText:(c.chiefComplaint||c.presentation||'').toLowerCase(),
+        cat:normCat(c.category), acuity:c.acuity||3, featured:false
       });
     });
   }
-
-  // Stats
-  var cats = new Set(ALL_CASES.map(function(c){ return c.category; }));
-  STUDY_CASES.forEach(function(s){ cats.add(s.category); });
-  document.getElementById('statTotal').textContent = ALL_CASES.length + STUDY_CASES.length;
-  document.getElementById('statCategories').textContent = cats.size;
-
+  var cats=new Set(ALL.map(function(c){return c.cat;}));
+  FEATURED.forEach(function(f){cats.add(f.cat);});
+  document.getElementById('sTotal').textContent=ALL.length+FEATURED.length;
+  document.getElementById('sCats').textContent=cats.size;
   renderFeatured();
-  filterCases();
+  filter();
 }
 
 function renderFeatured() {
-  var html = '';
-  STUDY_CASES.forEach(function(c) {
-    html += renderCard(c, true);
-  });
-  document.getElementById('featuredGrid').innerHTML = html;
+  document.getElementById('featuredGrid').innerHTML=FEATURED.map(function(c){return renderCard(c);}).join('');
 }
 
-function renderCard(c, featured) {
-  var acuityLabel = c.acuity === 1 ? 'ESI 1' : c.acuity === 2 ? 'ESI 2' : c.acuity === 3 ? 'ESI 3' : 'ESI 4';
-  var catDisplay = c.category.charAt(0).toUpperCase() + c.category.slice(1);
-  var timeEst = c.acuity <= 2 ? '25-40 min' : '20-30 min';
-
-  var html = '<div class="cb-card' + (c.isStudy ? ' cb-card-study' : '') + '" onclick="launchCase(\'' + c.id + '\')">';
-  html += '<div class="cb-card-header">';
-  html += '<div class="cb-card-acuity acuity-' + c.acuity + '">' + acuityLabel + '</div>';
-  html += '<div><div class="cb-card-title">' + esc(c.diagnosis) + '</div>';
-  html += '<div class="cb-card-cc">' + esc(c.cc) + '</div></div></div>';
-  html += '<div class="cb-card-tags">';
-  html += '<span class="cb-tag cb-tag-cat">' + esc(catDisplay) + '</span>';
-  if (c.isStudy) html += '<span class="cb-tag cb-tag-study">Research Study</span>';
-  html += '<span class="cb-tag cb-tag-time">\u23F1 ' + timeEst + '</span>';
-  html += '</div>';
-  html += '</div>';
-  return html;
+function renderCard(c) {
+  var acLabel='ESI '+(c.acuity||3);
+  var catLabel=(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1);
+  var h='<div class="card'+(c.featured?' card-featured':'')+'" onclick="launch(\''+c.id+'\')">';
+  h+='<div class="card-top">';
+  h+='<div class="card-acuity esi'+(c.acuity||3)+'">'+acLabel+'</div>';
+  h+='<div><div class="card-cc">'+esc(c.cc)+'</div>';
+  if(c.pres) h+='<div class="card-pres">'+esc(c.pres)+'</div>';
+  h+='</div></div>';
+  h+='<div class="card-tags">';
+  h+='<span class="tag tag-cat">'+esc(catLabel)+'</span>';
+  if(c.featured) h+='<span class="tag tag-study">Featured</span>';
+  h+='</div></div>';
+  return h;
 }
 
-function filterCases() {
-  var query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
-  var filtered = ALL_CASES.filter(function(c) {
-    if (activeCategory !== 'all' && c.category !== activeCategory) return false;
-    if (query) {
-      var searchable = (c.diagnosis + ' ' + c.cc + ' ' + c.category + ' ' + c.id).toLowerCase();
-      return searchable.includes(query);
-    }
+function filter() {
+  var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();
+  var filtered=ALL.filter(function(c){
+    if(activeCat!=='all'&&c.cat!==activeCat) return false;
+    if(q) return (c.searchText||c.cc.toLowerCase()).includes(q)||c.cat.includes(q);
     return true;
   });
+  filtered.sort(function(a,b){return a.acuity!==b.acuity?a.acuity-b.acuity:a.cc.localeCompare(b.cc);});
 
-  // Sort: acuity 1 first, then alphabetical
-  filtered.sort(function(a, b) {
-    if (a.acuity !== b.acuity) return a.acuity - b.acuity;
-    return a.diagnosis.localeCompare(b.diagnosis);
-  });
-
-  // Show/hide featured section based on filter
-  var featuredEl = document.getElementById('featuredSection');
-  if (activeCategory !== 'all' || query) {
-    // Also filter study cases
-    var studyFiltered = STUDY_CASES.filter(function(c) {
-      if (activeCategory !== 'all' && c.category !== activeCategory) return false;
-      if (query) return (c.diagnosis + ' ' + c.cc + ' ' + c.category).toLowerCase().includes(query);
+  // Featured section
+  var fEl=document.getElementById('featuredSection');
+  if(activeCat!=='all'||q){
+    var fFiltered=FEATURED.filter(function(c){
+      if(activeCat!=='all'&&c.cat!==activeCat) return false;
+      if(q) return (c.cc+' '+c.cat+(c.pres||'')).toLowerCase().includes(q);
       return true;
     });
-    if (studyFiltered.length > 0) {
-      featuredEl.style.display = 'block';
-      document.getElementById('featuredGrid').innerHTML = studyFiltered.map(function(c) { return renderCard(c, true); }).join('');
-    } else {
-      featuredEl.style.display = 'none';
-    }
-  } else {
-    featuredEl.style.display = 'block';
-    renderFeatured();
-  }
+    if(fFiltered.length>0){
+      fEl.style.display='block';
+      document.getElementById('featuredGrid').innerHTML=fFiltered.map(function(c){return renderCard(c);}).join('');
+    } else fEl.style.display='none';
+  } else {fEl.style.display='block';renderFeatured();}
 
-  // Render grid
-  document.getElementById('caseCount').textContent = filtered.length + ' case' + (filtered.length !== 1 ? 's' : '');
-  var gridHtml = filtered.map(function(c) { return renderCard(c, false); }).join('');
-  document.getElementById('caseGrid').innerHTML = gridHtml;
-  document.getElementById('emptyState').style.display = filtered.length === 0 ? 'block' : 'none';
+  document.getElementById('caseCount').textContent=filtered.length+' case'+(filtered.length!==1?'s':'');
+  document.getElementById('caseGrid').innerHTML=filtered.map(function(c){return renderCard(c);}).join('');
+  document.getElementById('emptyState').style.display=filtered.length===0?'block':'none';
 }
 
-function setCategory(cat) {
-  activeCategory = cat;
-  document.querySelectorAll('.cb-filter-btn').forEach(function(btn) {
-    btn.classList.toggle('active', btn.dataset.cat === cat);
-  });
-  filterCases();
+function setCat(cat){
+  activeCat=cat;
+  document.querySelectorAll('.fbtn').forEach(function(b){b.classList.toggle('on',b.dataset.cat===cat);});
+  filter();
 }
 
-function launchCase(caseId) {
-  window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(caseId);
-}
+function launch(id){window.location.href='simulation-engine.html?case='+encodeURIComponent(id);}
+function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
-function esc(s) {
-  if (!s) return '';
-  var d = document.createElement('div'); d.textContent = s; return d.innerHTML;
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
-  init();
-}
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init);
+else init();
 </script>
 </body>
 </html>
