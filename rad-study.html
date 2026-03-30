@@ -134,7 +134,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     <div class="form-group" id="cogloadContainer"></div>
     <div class="form-group">
       <label>Assigned Case</label>
-      <select id="intakeCase">
+      <select id="intakeCase" onchange="updateDepthOptions()">
         <option value="DYS-001">DYS-001 — Dyspnea (Environmental)</option>
         <option value="DYS-002">DYS-002 — Dyspnea (Substance Use)</option>
         <option value="COUGH-001">COUGH-001 — Chronic Cough (Travel/Immigration)</option>
@@ -143,6 +143,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
         <option value="random">Random Assignment</option>
       </select>
       <div style="font-size:11px;color:#666;margin-top:4px;">Study coordinators: set via URL parameter <code>?case=DYS-002</code></div>
+    </div>
+    <div class="form-group">
+      <label>Case Version</label>
+      <select id="intakeDepth">
+        <option value="v1">Initial Presentation (standard)</option>
+        <option value="v2" disabled id="depthV2">Follow-Up: Treatment Reassessment</option>
+        <option value="v3" disabled id="depthV3">Follow-Up: Outpatient / Longitudinal</option>
+      </select>
+      <div style="font-size:11px;color:#666;margin-top:4px;">v2/v3 unlock after completing v1 of this case. Coordinators: <code>?depth=v2</code></div>
     </div>
     <button class="intake-btn" onclick="startStudy()">Begin Simulation</button>
   </div>
@@ -232,7 +241,7 @@ const CASE_REGISTRY = {
 };
 const CASE_IDS = Object.keys(CASE_REGISTRY);
 
-// URL parameter override: ?case=DYS-002
+// URL parameter override: ?case=DYS-002&depth=v2
 (function() {
   var params = new URLSearchParams(window.location.search);
   var urlCase = params.get('case');
@@ -240,7 +249,81 @@ const CASE_IDS = Object.keys(CASE_REGISTRY);
     var sel = document.getElementById('intakeCase');
     if (sel) sel.value = urlCase.toUpperCase();
   }
+  var urlDepth = params.get('depth');
+  if (urlDepth && ['v1','v2','v3'].indexOf(urlDepth) !== -1) {
+    var depthSel = document.getElementById('intakeDepth');
+    if (depthSel) {
+      // Enable and select the requested depth
+      var opt = depthSel.querySelector('option[value="' + urlDepth + '"]');
+      if (opt) { opt.disabled = false; depthSel.value = urlDepth; }
+    }
+  }
+  // Check for prior completions to unlock v2/v3
+  setTimeout(function() { updateDepthOptions(); }, 500);
 })();
+
+// Update depth options based on selected case and prior completions
+function updateDepthOptions() {
+  var selectedCase = document.getElementById('intakeCase').value;
+  var v2opt = document.getElementById('depthV2');
+  var v3opt = document.getElementById('depthV3');
+  var depthSel = document.getElementById('intakeDepth');
+  if (!v2opt || !v3opt) return;
+
+  // Reset
+  v2opt.disabled = true; v3opt.disabled = true;
+  depthSel.value = 'v1';
+
+  // Load case to check if depth versions exist
+  var loader = CASE_REGISTRY[selectedCase];
+  if (!loader || selectedCase === 'random') return;
+  var cd = loader();
+  if (!cd || !cd.caseDepth) return;
+
+  // Update labels from case data
+  if (cd.caseDepth.v2) {
+    v2opt.textContent = cd.caseDepth.v2.title || 'Follow-Up: Treatment Reassessment';
+  }
+  if (cd.caseDepth.v3) {
+    v3opt.textContent = cd.caseDepth.v3.title || 'Follow-Up: Outpatient / Longitudinal';
+  }
+
+  // Check localStorage for prior completions of this case
+  var completedV1 = false;
+  var completedV2 = false;
+  try {
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.startsWith('radStudy_')) {
+        var saved = JSON.parse(localStorage.getItem(key));
+        if (saved && saved.caseId === selectedCase) {
+          if (!saved.caseDepthVersion || saved.caseDepthVersion === 'v1') completedV1 = true;
+          if (saved.caseDepthVersion === 'v2') completedV2 = true;
+        }
+      }
+    }
+  } catch(e) {}
+
+  // Also check Supabase if available
+  if (sb) {
+    sb.from('rad_study_sessions').select('session_id').eq('case_id', selectedCase).eq('status', 'complete').limit(1)
+      .then(function(result) {
+        if (result.data && result.data.length > 0) {
+          completedV1 = true;
+          if (cd.caseDepth.v2) { v2opt.disabled = false; }
+        }
+      }).catch(function() {});
+  }
+
+  // Unlock based on completion
+  if (completedV1 && cd.caseDepth.v2) v2opt.disabled = false;
+  if (completedV2 && cd.caseDepth.v3) v3opt.disabled = false;
+
+  // URL override always unlocks
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('depth') === 'v2' && cd.caseDepth.v2) { v2opt.disabled = false; depthSel.value = 'v2'; }
+  if (params.get('depth') === 'v3' && cd.caseDepth.v3) { v3opt.disabled = false; depthSel.value = 'v3'; }
+}
 
 // ── INITIALIZATION ──
 function startStudy() {
@@ -254,6 +337,7 @@ function startStudy() {
   const groupCode = Math.random() < 0.5 ? 'A' : 'B';
 
   // Load selected case
+  // Load selected case with depth version
   var selectedCase = document.getElementById('intakeCase').value;
   if (selectedCase === 'random') {
     selectedCase = CASE_IDS[Math.floor(Math.random() * CASE_IDS.length)];
@@ -263,9 +347,18 @@ function startStudy() {
   caseData = caseLoader();
   window.caseData = caseData; // expose for enhancements
   if (!caseData) { alert('Case data failed to load for: ' + selectedCase); return; }
+
+  // ── CASE DEPTH VERSION ──
+  var depthSelect = document.getElementById('intakeDepth');
+  var depthVersion = depthSelect ? depthSelect.value : 'v1';
+  var isDepthCase = depthVersion !== 'v1' && caseData.caseDepth && caseData.caseDepth[depthVersion];
+  var depthData = isDepthCase ? caseData.caseDepth[depthVersion] : null;
+
   state = {
     sessionId: 'RS-' + Date.now().toString(36) + '-' + Math.random().toString(36).substr(2,6),
     caseId: caseData.caseId,
+    depthVersion: depthVersion,
+    isDepthCase: isDepthCase,
     studentName: name,
     trainingYear: year,
     rotationsCompleted: rotations,
@@ -313,7 +406,31 @@ function startStudy() {
 
   // Deliver Phase 1 opening
   const p = caseData.presentation;
-  const opening = `[As Dr. Patel]\n\nYou're about to see your next patient in clinic. Here's the chart summary:\n\nPatient: ${p.patientName}, ${p.age}-year-old ${p.ethnicity} ${p.sex.toLowerCase()}\nChief Complaint: ${p.chiefComplaint}\nVitals: T ${p.vitals.temp}, HR ${p.vitals.hr}, BP ${p.vitals.bp}, RR ${p.vitals.rr}, SpO\u2082 ${p.vitals.spo2} on room air\nBrief note from triage nurse: "${p.triageNote}"\n\nBefore you see the patient, I'd like you to generate an initial differential diagnosis based on this limited information. What are you thinking, and in what order of priority?`;
+  let opening;
+
+  if (isDepthCase && depthData) {
+    // ── DEPTH CASE: Modified opening for v2/v3 ──
+    var depthScenario = depthData.scenario || 'The patient has returned.';
+    var newDataStr = '';
+    if (depthData.newData) {
+      newDataStr = '\n\nUpdated Data:\n' + Object.entries(depthData.newData).map(function(e) { return e[0] + ': ' + e[1]; }).join('\n');
+    }
+
+    if (depthVersion === 'v2') {
+      // v2: Treatment failure — start at reassessment
+      opening = `[As Dr. Patel]\n\nWelcome back. You saw ${p.patientName} previously. Here's the update:\n\n${depthScenario}${newDataStr}\n\nBased on this update, what's your assessment? Has your thinking changed? Walk me through your current differential and what you want to do differently.`;
+      // Skip to revised differential phase
+      state.currentPhase = PHASES.REVISED_DIFFERENTIAL;
+    } else if (depthVersion === 'v3') {
+      // v3: Outpatient follow-up — start at management/follow-up
+      opening = `[As Dr. Patel]\n\n${p.patientName} is here for their follow-up visit. Here's where things stand:\n\n${depthScenario}${newDataStr}\n\nWalk me through your assessment. How is the patient doing relative to where you expected? What's your plan going forward?`;
+      // Skip to management phase
+      state.currentPhase = PHASES.MANAGEMENT;
+    }
+  } else {
+    // ── STANDARD v1: Initial encounter ──
+    opening = `[As Dr. Patel]\n\nYou're about to see your next patient in clinic. Here's the chart summary:\n\nPatient: ${p.patientName}, ${p.age}-year-old ${p.ethnicity} ${p.sex.toLowerCase()}\nChief Complaint: ${p.chiefComplaint}\nVitals: T ${p.vitals.temp}, HR ${p.vitals.hr}, BP ${p.vitals.bp}, RR ${p.vitals.rr}, SpO\u2082 ${p.vitals.spo2} on room air\nBrief note from triage nurse: "${p.triageNote}"\n\nBefore you see the patient, I'd like you to generate an initial differential diagnosis based on this limited information. What are you thinking, and in what order of priority?`;
+  }
 
   addMessage('patel', opening);
   state.conversationMessages.push({ role: 'assistant', content: opening });
