@@ -1945,7 +1945,7 @@ async function exportStudyData() {
         var opts = { studentEmail: email, caseId: state.caseId, sessionId: state.sessionId };
 
         // Case completed event
-        P.EventBus.emit('case_completed', 'rad_study', {
+        P.EventBus.emit('case_completed', 'simulation_engine', {
           envHistoryScore: state.envHistoryScore,
           totalTurns: state.turnCount,
           groupCode: state.groupCode,
@@ -1956,6 +1956,30 @@ async function exportStudyData() {
             data_integration: (state.detectedBiases || []).some(function(b) { return b.type === 'report_anchoring'; }) ? -0.02 : 0.02
           }
         }));
+
+        // ── PATIENT CONTINUITY — save encounter for follow-up ──
+        try {
+          var continuityKey = 'rdx_continuity_' + (email || 'anon');
+          var existing = JSON.parse(localStorage.getItem(continuityKey) || '[]');
+          existing.push({
+            caseId: state.caseId,
+            patientName: caseData.presentation.patientName,
+            age: caseData.presentation.age,
+            sex: caseData.presentation.sex,
+            diagnosis: caseData.targetDiagnosis,
+            chiefComplaint: caseData.presentation.chiefComplaint,
+            completedAt: new Date().toISOString(),
+            sessionId: state.sessionId,
+            topDiagnosis: state.differentials && state.differentials.revised
+              ? state.differentials.revised[0] && state.differentials.revised[0].diagnosis
+              : null,
+            disposition: 'admitted', // default — could be extracted from management phase
+            returnVisit: caseData.returnVisit || null
+          });
+          // Keep last 20 encounters
+          if (existing.length > 20) existing = existing.slice(-20);
+          localStorage.setItem(continuityKey, JSON.stringify(existing));
+        } catch(e) { console.warn('Continuity save error:', e); }
 
         // Gap events
         (state.identifiedGaps || []).forEach(function(gap) {
