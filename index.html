@@ -142,38 +142,38 @@ body{background:var(--rdx-ocean-deep)}
     <div class="search-wrap">
       <div class="search-box">
         <div class="search-icon">🔍</div>
-        <input class="search-input" id="heroSearch" type="text" placeholder="Search 300+ cases — STEMI, anaphylaxis, sepsis..." autocomplete="off">
+        <input class="search-input" id="heroSearch" type="text" placeholder="Search by chief complaint — chest pain, shortness of breath, fever..." autocomplete="off">
       </div>
       <div class="search-dropdown" id="searchDropdown"></div>
-      <p class="search-hint">Try: "chest pain" · "angioedema" · "DKA" · "rare pediatric"</p>
+      <p class="search-hint">Try: "chest pain" · "shortness of breath" · "abdominal pain" · "altered mental status"</p>
     </div>
 
     <!-- Inline start chooser — dark theme, matches hero -->
     <div class="start-chooser" id="startChooser">
       <div class="start-chooser-inner">
         <a class="start-card" href="/case-browser.html">
-          <div class="start-card-icon">🎯</div>
+          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
           <div>
             <div class="start-card-name">Simulate <span class="start-card-new">NEW</span></div>
             <div class="start-card-desc">366 full clinical simulations with voice input and AI attending</div>
           </div>
         </a>
         <a class="start-card" href="/casedx.html">
-          <div class="start-card-icon">🩺</div>
+          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
           <div>
             <div class="start-card-name">CaseDx</div>
             <div class="start-card-desc">Interactive virtual patients with immediate feedback</div>
           </div>
         </a>
         <a class="start-card" href="/CoachDx/index.html">
-          <div class="start-card-icon">🤖</div>
+          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
           <div>
             <div class="start-card-name">CoachDx</div>
             <div class="start-card-desc">AI Socratic coaching that adapts to your reasoning</div>
           </div>
         </a>
         <a class="start-card" href="/mechanism/index.html">
-          <div class="start-card-icon">🔬</div>
+          <div class="start-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1m15.36-5.36l-4.24 4.24m0-4.24l4.24 4.24M6.64 6.64l4.24 4.24m0-4.24l-4.24 4.24"/></svg></div>
           <div>
             <div class="start-card-name">MechanismDx</div>
             <div class="start-card-desc">Deep pathophysiology with attending conversation</div>
@@ -190,7 +190,7 @@ body{background:var(--rdx-ocean-deep)}
 <div class="page-body">
   <div class="stats-strip">
     <div class="stats-inner">
-      <div class="stat-item"><div class="stat-num">300+</div><div class="stat-label">Clinical Cases</div></div>
+      <div class="stat-item"><div class="stat-num">366</div><div class="stat-label">Clinical Cases</div></div>
       <div class="stat-item"><div class="stat-num">20+</div><div class="stat-label">Specialty Modules</div></div>
       <div class="stat-item"><div class="stat-num">560</div><div class="stat-label">Pathophysiology Topics</div></div>
       <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">AI Reasoning Coaches</div></div>
@@ -292,18 +292,47 @@ body{background:var(--rdx-ocean-deep)}
   </div>
 </div>
 
+<script src="emr-data/crt-data.js"></script>
 <script>
-const CASES=[{name:"STEMI",desc:"Chest pain, ST elevation, troponin rise",cat:"Cardiology",color:"#e74c3c",href:"/simulation-engine.html?case=stemi-v1"},{name:"Anaphylaxis",desc:"Urticaria, hypotension, bronchospasm after exposure",cat:"Allergy/Immunology",color:"#e67e22",href:"/simulation-engine.html?case=anaphylaxis-v1"},{name:"Sepsis",desc:"Fever, tachycardia, altered mental status",cat:"Critical Care",color:"#c0392b",href:"/simulation-engine.html?case=sepsis-v1"},{name:"DKA",desc:"Polyuria, polydipsia, Kussmaul respirations",cat:"Endocrinology",color:"#8e44ad",href:"/simulation-engine.html?case=dka-v1"},{name:"Pulmonary Embolism",desc:"Pleuritic chest pain, tachycardia, hypoxia",cat:"Pulmonology",color:"#2874A6",href:"/simulation-engine.html?case=pe-v1"},{name:"Hereditary Angioedema",desc:"Recurrent swelling without urticaria, family history",cat:"Allergy/Immunology",color:"#148f77",href:"/simulation-engine.html?case=hae-v1"},{name:"Angelman Syndrome",desc:"Hypotonia, happy affect, minimal speech, rare pediatric",cat:"Genetics",color:"#6c3483",href:"/genetics/genetics-demo-case.html"},{name:"Acute Stroke",desc:"Sudden facial droop, arm weakness, speech difficulty",cat:"Neurology",color:"#1a5276",href:"/simulation-engine.html?case=stroke-v1"},{name:"Atrial Fibrillation",desc:"Palpitations, irregular pulse, stroke risk",cat:"Cardiology",color:"#e74c3c",href:"/simulation-engine.html?case=afib-v1"},{name:"Primary Immunodeficiency",desc:"Recurrent sinopulmonary infections, failure to thrive",cat:"Allergy/Immunology",color:"#148f77",href:"/simulation-engine.html?case=cvid-v1"}];
-const input=document.getElementById('heroSearch'),dropdown=document.getElementById('searchDropdown');
-input.addEventListener('input',()=>{
-  const q=input.value.trim().toLowerCase();
+// Dynamic search across all 361+ CRT cases — shows ONLY chief complaint, never diagnosis
+var _searchIndex = [];
+if (window.CRT_DATA) {
+  Object.entries(window.CRT_DATA).forEach(function(e) {
+    var id = e[0], c = e[1];
+    _searchIndex.push({
+      id: id,
+      cc: (c.chiefComplaint || c.presentation || '').split('/')[0].trim(), // show only first phrase, hide lab spoilers
+      searchText: (c.chiefComplaint || c.presentation || '').toLowerCase(), // search full text
+      cat: (c.category || 'other').replace(/_/g,' '),
+      acuity: c.acuity || 3,
+      href: '/simulation-engine.html?case=' + encodeURIComponent(id)
+    });
+  });
+}
+// Add native study cases
+[{id:'DYS-001',cc:'Progressive dyspnea',cat:'pulmonary'},{id:'DYS-002',cc:'Dyspnea, cough, fever',cat:'pulmonary'},{id:'COUGH-001',cc:'Productive cough, hemoptysis',cat:'pulmonary'},{id:'CHEST-001',cc:'Chest pain',cat:'cardiovascular'},{id:'FEVER-001',cc:'Fever, dyspnea',cat:'infectious'}].forEach(function(s) {
+  _searchIndex.push({ id:s.id, cc:s.cc, cat:s.cat, acuity:2, href:'/simulation-engine.html?case='+s.id });
+});
+
+var _catColors = {cardiovascular:'#e74c3c',pulmonary:'#2874A6',infectious:'#D97706',gastrointestinal:'#059669',neurologic:'#BE185D',endocrine:'#0891B2',allergy:'#EA580C',hematologic:'#9333EA',toxicologic:'#4F46E5',psychiatric:'#0D9488',other:'#6B7280'};
+
+var input=document.getElementById('heroSearch'),dropdown=document.getElementById('searchDropdown');
+input.addEventListener('input',function(){
+  var q=input.value.trim().toLowerCase();
   if(q.length<2){dropdown.classList.remove('open');return;}
-  const matches=CASES.filter(c=>c.name.toLowerCase().includes(q)||c.desc.toLowerCase().includes(q)||c.cat.toLowerCase().includes(q)).slice(0,6);
+  var matches=_searchIndex.filter(function(c){
+    var text = (c.searchText || c.cc).toLowerCase();
+    return text.includes(q) || c.cat.toLowerCase().includes(q) || c.id.toLowerCase().includes(q);
+  }).slice(0,8);
   if(!matches.length){dropdown.classList.remove('open');return;}
-  dropdown.innerHTML=matches.map(c=>`<a class="sr-item" href="${c.href}"><div class="sr-dot" style="background:${c.color}"></div><div style="flex:1"><div class="sr-name">${c.name}</div><div class="sr-desc">${c.desc}</div></div><div class="sr-cat">${c.cat}</div></a>`).join('');
+  dropdown.innerHTML=matches.map(function(c){
+    var color=_catColors[c.cat]||_catColors.other;
+    var catLabel=c.cat.charAt(0).toUpperCase()+c.cat.slice(1);
+    return '<a class="sr-item" href="'+c.href+'"><div class="sr-dot" style="background:'+color+'"></div><div style="flex:1"><div class="sr-name">'+c.cc+'</div></div><div class="sr-cat">'+catLabel+'</div></a>';
+  }).join('');
   dropdown.classList.add('open');
 });
-document.addEventListener('click',e=>{if(!e.target.closest('.search-wrap'))dropdown.classList.remove('open');});
+document.addEventListener('click',function(e){if(!e.target.closest('.search-wrap'))dropdown.classList.remove('open');});
 </script>
 <script src="/js/nav-global.js"></script>
 </body>
