@@ -270,13 +270,146 @@
 
 
   // ═══════════════════════════════════════════════════════════════
+  // UNIVERSAL: Readability + Passive Data on ALL Chat Messages
+  // ═══════════════════════════════════════════════════════════════
+  // Works on any page with a chat interface, regardless of module.
+  // Watches for new messages and runs analysis on student messages.
+
+  function hookUniversalAnalysis() {
+    // Skip rad-study page (has its own wiring)
+    if (window.location.pathname.toLowerCase().includes('rad-study') &&
+        !window.location.pathname.toLowerCase().includes('dashboard')) return;
+
+    var turnCount = 0;
+    var module = 'unknown';
+    var path = window.location.pathname.toLowerCase();
+    if (path.includes('mentor-chat') || path.includes('coachdx')) module = 'coachdx';
+    else if (path.includes('virtual-emr')) module = 'ed_board';
+    else if (path.includes('clinic-board')) module = 'clinic_board';
+    else if (path.includes('mechanism')) module = 'mechanismdx';
+    else if (path.includes('casedx')) module = 'casedx';
+
+    // Clear analysis modules for fresh session
+    if (window.RdxReadability) window.RdxReadability.clear();
+    if (window.RdxPassive) window.RdxPassive.clear();
+
+    var observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(m) {
+        m.addedNodes.forEach(function(node) {
+          if (node.nodeType !== 1) return;
+
+          // Detect student/user messages
+          var isUser = node.classList && (
+            node.classList.contains('msg-user') ||
+            node.classList.contains('msg-student') ||
+            node.classList.contains('user-message') ||
+            node.classList.contains('msg-sent')
+          );
+          // Also check for data-role attribute
+          if (!isUser && node.querySelector) {
+            var userEl = node.querySelector('[data-role="user"], [data-role="student"]');
+            if (userEl) isUser = true;
+          }
+
+          if (isUser) {
+            turnCount++;
+            var text = (node.textContent || '').trim();
+            if (text.length < 3) return;
+
+            // Readability analysis
+            if (window.RdxReadability) {
+              var readResult = window.RdxReadability.trackMessage(text, 0, turnCount);
+              // Emit as platform event
+              if (window.RdxPlatform) {
+                window.RdxPlatform.EventBus.emit('readability_measured', module, {
+                  grade: readResult.consensusGrade,
+                  level: readResult.level,
+                  patientAppropriate: readResult.patientAppropriate,
+                  turn: turnCount
+                });
+              }
+            }
+
+            // Passive data analysis
+            if (window.RdxPassive) {
+              window.RdxPassive.analyzeStudentMessage(text, 0, turnCount);
+            }
+          }
+
+          // Detect assistant/agent messages (for patient cue tracking)
+          var isAssistant = node.classList && (
+            node.classList.contains('msg-assistant') ||
+            node.classList.contains('msg-patel') ||
+            node.classList.contains('msg-patient') ||
+            node.classList.contains('msg-received') ||
+            node.classList.contains('assistant-message')
+          );
+
+          if (isAssistant && window.RdxPassive) {
+            var assistText = (node.textContent || '').trim();
+            if (assistText.length > 5) {
+              window.RdxPassive.analyzePatientMessage(assistText, 0, turnCount);
+            }
+          }
+        });
+      });
+    });
+
+    // Find chat containers and observe
+    function findAndObserve() {
+      var containers = document.querySelectorAll(
+        '.chat-messages, .messages-container, #chatMessages, #messages, ' +
+        '[class*="messages"], [class*="chat-body"], [class*="conversation"]'
+      );
+      containers.forEach(function(container) {
+        observer.observe(container, { childList: true, subtree: true });
+      });
+      if (containers.length > 0) {
+        console.log('Universal analysis hooks wired on ' + containers.length + ' chat container(s)');
+      }
+    }
+
+    setTimeout(findAndObserve, 2000);
+    setTimeout(findAndObserve, 5000);
+    setTimeout(findAndObserve, 10000);
+
+    // On page unload, emit session summary
+    window.addEventListener('beforeunload', function() {
+      if (turnCount < 2) return;
+      if (window.RdxPlatform) {
+        var summaryData = {};
+        if (window.RdxReadability) {
+          var rs = window.RdxReadability.getSessionSummary();
+          if (rs) summaryData.readability = rs;
+        }
+        if (window.RdxPassive) {
+          summaryData.passive = window.RdxPassive.getFullSummary();
+        }
+        if (Object.keys(summaryData).length > 0) {
+          window.RdxPlatform.EventBus.emit('session_analysis', module, summaryData, {
+            skillImpacts: summaryData.readability && summaryData.readability.avgGradePatient
+              ? { communication: summaryData.readability.avgGradePatient <= 8 ? 0.02 : -0.01 }
+              : null
+          });
+        }
+      }
+    });
+  }
+
+
+  // ═══════════════════════════════════════════════════════════════
   // INITIALIZE
   // ═══════════════════════════════════════════════════════════════
 
+  function fullInit() {
+    init();
+    hookUniversalAnalysis();
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(init, 1000); });
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(fullInit, 1000); });
   } else {
-    setTimeout(init, 1000);
+    setTimeout(fullInit, 1000);
   }
 
 })();
