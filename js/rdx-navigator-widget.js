@@ -126,7 +126,7 @@
 
       // Quick links
       html += '<div class="rdx-nav-quick">';
-      html += '<a href="/start.html" class="rdx-nav-quick-link">Home</a>';
+      html += '<a href="/browse.html" class="rdx-nav-quick-link">Home</a>';
       html += '<a href="/CoachDx/mentor-chat.html" class="rdx-nav-quick-link">CoachDx</a>';
       html += '<a href="/casedx.html" class="rdx-nav-quick-link">Cases</a>';
       html += '<a href="/mechanism/index.html" class="rdx-nav-quick-link">Mechanisms</a>';
@@ -149,7 +149,7 @@
 
     } catch(e) {
       console.error('Navigator widget error:', e);
-      content.innerHTML = '<div class="rdx-nav-empty">Explore <a href="/start.html">all modules</a> to get started.</div>';
+      content.innerHTML = '<div class="rdx-nav-empty">Explore <a href="/browse.html">all modules</a> to get started.</div>';
     }
   }
 

@@ -8,7 +8,7 @@
       position: fixed; top: 0; left: 0; right: 0; height: 52px;
       background: #0d2b3e; display: flex; align-items: center;
       padding: 0 24px; gap: 8px; z-index: 1000;
-      font-family: -apple-system, 'IBM Plex Sans', sans-serif;
+      font-family: -apple-system, 'DM Sans', sans-serif;
       border-bottom: 1px solid rgba(133,193,233,0.15);
       box-sizing: border-box;
     }
@@ -31,34 +31,6 @@
     #rdx-global-nav .rdx-nav-link.active {
       color: #fff; background: rgba(255,255,255,0.1);
     }
-    #rdx-global-nav .rdx-nav-dropdown { position: relative; display: inline-block; }
-    #rdx-global-nav .rdx-nav-dropdown-btn {
-      font-size: 0.8rem; font-weight: 600;
-      color: rgba(255,255,255,0.72); background: none; border: none;
-      padding: 6px 12px; border-radius: 7px; cursor: pointer;
-      font-family: inherit; transition: all 0.15s; white-space: nowrap;
-    }
-    #rdx-global-nav .rdx-nav-dropdown-btn:hover { color: #fff; background: rgba(255,255,255,0.1); }
-    #rdx-global-nav .rdx-nav-dropdown-btn::after {
-      content: ''; display: inline-block; width: 0; height: 0;
-      border-left: 4px solid transparent; border-right: 4px solid transparent;
-      border-top: 4px solid currentColor; margin-left: 6px; vertical-align: middle; opacity: 0.6;
-    }
-    #rdx-global-nav .rdx-dropdown-menu {
-      display: none; position: absolute; top: calc(100% + 8px); right: 0;
-      background: #fff; border: 1.5px solid #dde4ec; border-radius: 10px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.14); min-width: 230px;
-      padding: 6px; z-index: 400;
-    }
-    #rdx-global-nav .rdx-nav-dropdown:hover .rdx-dropdown-menu { display: block; }
-    #rdx-global-nav .rdx-dropdown-item {
-      display: flex; flex-direction: column; padding: 9px 12px;
-      border-radius: 7px; text-decoration: none; transition: background 0.12s; color: #1a2332;
-    }
-    #rdx-global-nav .rdx-dropdown-item:hover { background: #f8fafc; }
-    #rdx-global-nav .rdx-dropdown-item-title { font-size: 0.82rem; font-weight: 700; color: #1a2332; }
-    #rdx-global-nav .rdx-dropdown-item-sub { font-size: 0.72rem; color: #5d6d7e; margin-top: 1px; }
-    #rdx-global-nav .rdx-dropdown-divider { height: 1px; background: #dde4ec; margin: 4px 0; }
     #rdx-global-nav .rdx-nav-actions { display: flex; gap: 8px; margin-left: 16px; flex-shrink: 0; align-items: center; }
     #rdx-global-nav .rdx-nav-btn {
       font-size: 0.78rem; font-weight: 700; padding: 6px 14px;
@@ -80,10 +52,32 @@
       font-size: 0.72rem; color: rgba(255,255,255,0.45); white-space: nowrap;
       max-width: 160px; overflow: hidden; text-overflow: ellipsis;
     }
+    /* Hamburger */
+    #rdx-global-nav .rdx-hamburger {
+      display: none; background: none; border: none; cursor: pointer; padding: 6px;
+      margin-left: auto; color: rgba(255,255,255,.8);
+    }
+    #rdx-global-nav .rdx-hamburger svg { display: block; }
+    /* Mobile drawer */
+    #rdx-mobile-drawer {
+      display: none; position: fixed; top: 52px; left: 0; right: 0; bottom: 0;
+      background: #0d2b3e; z-index: 999; padding: 16px 24px;
+      flex-direction: column; gap: 4px; overflow-y: auto;
+    }
+    #rdx-mobile-drawer.open { display: flex; }
+    #rdx-mobile-drawer a {
+      font-size: 1rem; font-weight: 600; color: rgba(255,255,255,.8);
+      text-decoration: none; padding: 12px 16px; border-radius: 8px;
+      transition: background .15s;
+    }
+    #rdx-mobile-drawer a:hover, #rdx-mobile-drawer a.active { background: rgba(255,255,255,.1); color: #fff; }
+    #rdx-mobile-drawer .rdx-drawer-divider { height: 1px; background: rgba(255,255,255,.1); margin: 8px 0; }
+    #rdx-mobile-drawer .rdx-drawer-actions { display: flex; gap: 8px; margin-top: 12px; padding: 0 16px; }
     body { padding-top: 52px; }
     @media (max-width: 768px) {
       #rdx-global-nav .rdx-nav-links { display: none; }
-      #rdx-global-nav .rdx-nav-actions { margin-left: auto; }
+      #rdx-global-nav .rdx-nav-actions { display: none; }
+      #rdx-global-nav .rdx-hamburger { display: block; }
       #rdx-global-nav .rdx-user-email { display: none; }
     }
   `;
@@ -112,7 +106,34 @@
         <a class="rdx-nav-link ${isActive('virtual-emr.html')}" href="/virtual-emr.html">ED Board</a>
         <a class="rdx-nav-link ${isActive('genetics')}" href="/genetics/genetics-module.html">Genetics</a>
       </div>
+      <button class="rdx-hamburger" onclick="document.getElementById('rdx-mobile-drawer').classList.toggle('open');this.querySelector('.ham-open').style.display=document.getElementById('rdx-mobile-drawer').classList.contains('open')?'none':'block';this.querySelector('.ham-close').style.display=document.getElementById('rdx-mobile-drawer').classList.contains('open')?'block':'none'" aria-label="Menu">
+        <svg class="ham-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+        <svg class="ham-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
       <div class="rdx-nav-actions">${authActions}</div>
+    `;
+
+    // Build mobile drawer
+    var drawer = document.getElementById('rdx-mobile-drawer');
+    if (!drawer) {
+      drawer = document.createElement('div');
+      drawer.id = 'rdx-mobile-drawer';
+      document.body.appendChild(drawer);
+    }
+    drawer.innerHTML = `
+      <a class="${isActive('browse.html') ? 'active' : ''}" href="/browse.html">Browse All</a>
+      <a class="${isActive('casedx.html') ? 'active' : ''}" href="/casedx.html">CaseDx</a>
+      <a class="${isActive('CoachDx') ? 'active' : ''}" href="/CoachDx/index.html">CoachDx</a>
+      <a class="${isActive('mechanism') ? 'active' : ''}" href="/mechanism/index.html">MechanismDx</a>
+      <a class="${isActive('virtual-emr') ? 'active' : ''}" href="/virtual-emr.html">ED Board</a>
+      <a class="${isActive('genetics') ? 'active' : ''}" href="/genetics/genetics-module.html">Genetics</a>
+      <div class="rdx-drawer-divider"></div>
+      <div class="rdx-drawer-actions">
+        ${userEmail
+          ? '<button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()" style="flex:1">Sign Out</button>'
+          : '<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html" style="flex:1;text-align:center">Sign In</a><a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/register.html" style="flex:1;text-align:center">Sign Up</a>'
+        }
+      </div>
     `;
   }
 
