@@ -214,6 +214,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="emr-data/dx-database.js"></script>
 <script src="js/rdx-ddx-chooser.js"></script>
 <script src="js/rdx-readability.js"></script>
+<script src="js/rdx-passive.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -472,6 +473,16 @@ async function sendMessage() {
       level: readRecord.level,
       patientAppropriate: readRecord.patientAppropriate
     };
+  }
+
+  // Passive data collection (zero student effort)
+  if (window.RdxPassive) {
+    window.RdxPassive.analyzeStudentMessage(msg, state.currentPhase, state.turnCount);
+    // Attach implicit confidence to turn
+    var conf = window.RdxPassive._data.confidence;
+    if (conf.length > 0) {
+      state.turns[state.turns.length - 1].implicitConfidence = conf[conf.length - 1].score;
+    }
   }
 
   // ── TRANSITION CONFIRMATION FLAG ──
@@ -786,6 +797,11 @@ async function sendMessage() {
       // Register patient cues for the signal extractor
       if (window.RdxAgent && window.RdxAgent.SignalExtractor) {
         window.RdxAgent.SignalExtractor.registerCueDelivery(reply, state.turnCount);
+      }
+
+      // Passive: auto-detect patient cues for utilization tracking
+      if (window.RdxPassive) {
+        window.RdxPassive.analyzePatientMessage(reply, state.currentPhase, state.turnCount);
       }
     }
 
@@ -2070,6 +2086,7 @@ async function exportStudyData() {
     if (A.EmotionalAI) A.EmotionalAI.clear();
     if (A.ReasoningTrace) A.ReasoningTrace.clear();
     if (window.RdxReadability) window.RdxReadability.clear();
+    if (window.RdxPassive) window.RdxPassive.clear();
     if (A.ExplainableAgent && window.state) {
       A.ExplainableAgent.logDecision({
         phase: 1, type: 'session_start',
@@ -2157,6 +2174,12 @@ async function exportStudyData() {
           if (peSummary && peSummary.criticalMissed.length > 0) {
             console.log('PE critical systems missed:', peSummary.criticalMissed.join(', '));
           }
+        }
+
+        // Passive data collection summary
+        if (window.RdxPassive) {
+          window.state.passiveData = window.RdxPassive.getFullSummary();
+          console.log('Passive data:', JSON.stringify(window.state.passiveData, null, 2).substring(0, 500));
         }
 
         // Also analyze the radiology reports for comparison
