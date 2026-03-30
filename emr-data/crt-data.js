@@ -1683,6 +1683,32 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "99.2°F",
       "SpO2": "91%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Massive PE — Hemodynamic Collapse",
+        "scenario": "Your patient returned to the ED 4 hours after discharge. BP is now 78/42, HR 128, SpO2 84% on 6L NC. Bedside echo shows RV dilation and septal flattening (D-sign). The patient is diaphoretic and barely responsive.",
+        "newData": {
+          "BP": "78/42",
+          "HR": "128",
+          "SpO2": "84% on 6L NC",
+          "BedSideEcho": "RV dilation, D-sign, McConnell sign positive",
+          "Troponin": "1.84 ng/mL (rising)",
+          "BNP": "1,840 pg/mL"
+        }
+      },
+      "v3": {
+        "title": "Submassive PE — Escalation Decision",
+        "scenario": "3 days into UFH therapy, your patient is hemodynamically stable but SpO2 remains 92% on 4L NC. Repeat echo shows persistent RV hypokinesis. The PESI score is high-risk. The team is debating whether to escalate to catheter-directed thrombolysis.",
+        "newData": {
+          "BP": "104/68",
+          "HR": "102",
+          "SpO2": "92% on 4L NC",
+          "RepeatEcho": "Persistent RV hypokinesis, TAPSE 14mm",
+          "AntiXa": "0.38 IU/mL (therapeutic)",
+          "PESI": "Class IV (high risk)"
+        }
+      }
     }
   },
   "chf-v1": {
@@ -3125,6 +3151,33 @@ window.CRT_DATA = {
       "RR": "32 (deep, labored — Kussmaul pattern)",
       "Temp": "99.4°F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "DKA — Atypical Presentation (No Known Diabetes)",
+        "scenario": "A new patient arrives: 34-year-old with no known diabetes, BMI 31. Glucose 610, anion gap 28, pH 7.18, bicarbonate 8. He has been vomiting for 2 days. No fruity breath odor. HbA1c 11.2%. C-peptide borderline low.",
+        "newData": {
+          "Glucose": "610 mg/dL",
+          "pH": "7.18",
+          "Bicarbonate": "8 mEq/L",
+          "AnionGap": "28",
+          "HbA1c": "11.2%",
+          "CPeptide": "0.4 ng/mL (borderline low)",
+          "GAD65Ab": "Pending"
+        }
+      },
+      "v3": {
+        "title": "DKA — Cerebral Edema (Pediatric)",
+        "scenario": "Your 16-year-old DKA patient was improving on insulin — glucose down to 280, gap closing. 6 hours into treatment, the nurse calls: patient is now confused, GCS dropped from 15 to 11. BP 148/92, HR 58.",
+        "newData": {
+          "GCS": "11 (was 15)",
+          "BP": "148/92",
+          "HR": "58",
+          "Glucose": "280 mg/dL",
+          "Sodium": "132 mEq/L (corrected 138)",
+          "ClinicalNote": "Cushing triad pattern — HTN + bradycardia"
+        }
+      }
     }
   },
   "stroke-v1": {
@@ -3427,6 +3480,31 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4°F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hemorrhagic Transformation Post-tPA",
+        "scenario": "6 hours after tPA administration, your stroke patient's NIHSS worsened from 12 to 18. New complaint: severe headache. BP 196/114. Nurse reports the patient vomited twice and is becoming less responsive.",
+        "newData": {
+          "NIHSS": "18 (was 12 at 3h)",
+          "BP": "196/114",
+          "GCS": "10 (was 14)",
+          "HeadCT": "Pending STAT",
+          "Note": "tPA infusion currently running — decision required immediately"
+        }
+      },
+      "v3": {
+        "title": "Hypertensive ICH — New Presentation",
+        "scenario": "New patient: 61-year-old male with history of poorly controlled hypertension. Presents with sudden worst headache of life, left arm and leg weakness, BP 218/126. Family says symptoms began 45 minutes ago. No anticoagulants.",
+        "newData": {
+          "BP": "218/126",
+          "GCS": "12",
+          "NIHSS": "16",
+          "HeadCT": "Right basal ganglia hyperdensity 3.2cm, IVH present",
+          "INR": "1.1",
+          "Platelets": "198,000"
+        }
+      }
     }
   },
   "tension-ptx": {
