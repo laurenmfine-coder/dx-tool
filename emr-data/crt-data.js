@@ -450,6 +450,19 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.2\u00b0F",
       "SpO2": "89% on 6L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 Diabetes Mellitus",
+        "Hypertension",
+        "Hyperlipidemia",
+        "STEMI \u2014 treated with PCI 4 hours ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was doing okay after the stent and now I can't breathe",
+        "my blood pressure keeps dropping",
+        "something went wrong after the procedure"
+      ]
     }
   },
   "stemi-v3": {
@@ -565,6 +578,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.7\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension",
+        "Prior LBBB \u2014 old ECG unavailable",
+        "Type 2 Diabetes"
+      ],
+      "chiefComplaintPhrasing": [
+        "crushing chest pain and my EKG looks strange",
+        "they're telling me the bundle branch is new",
+        "pressure in my chest for 45 minutes"
+      ]
     }
   },
   "sepsis-v2": {
@@ -681,6 +706,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "39.8\u00b0C",
       "SpO2": "91% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Urosepsis \u2014 admitted 6 hours ago",
+        "Type 2 Diabetes",
+        "CKD Stage 3"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm not getting better on the antibiotics",
+        "my blood pressure keeps dropping despite the fluids",
+        "I need more medication to keep my pressure up"
+      ]
     }
   },
   "sepsis-v3": {
@@ -781,6 +818,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "36.2\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 84 \u2014 dementia \u2014 baseline confusion",
+        "Recurrent UTIs",
+        "Immunosuppressed \u2014 on prednisone for PMR"
+      ],
+      "chiefComplaintPhrasing": [
+        "she's more confused than usual \u2014 that's all",
+        "no fever, no obvious infection source",
+        "her family says she just stopped doing her normal things"
+      ]
     }
   },
   "pericarditis-v1": {
@@ -15927,6 +15976,17 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.8\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension",
+        "Type 2 Diabetes Mellitus"
+      ],
+      "chiefComplaintPhrasing": [
+        "my knee blew up overnight",
+        "it's hot and I can barely bend it",
+        "worst joint pain I've ever had"
+      ]
     }
   },
   "compartment-syndrome": {
@@ -16923,6 +16983,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.3\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Obesity",
+        "Hyperlipidemia",
+        "Prior episode of biliary colic"
+      ],
+      "chiefComplaintPhrasing": [
+        "sharp pain under my right ribs",
+        "it got way worse after I ate",
+        "feels like something is squeezing up here"
+      ]
     }
   },
   "acute-coronary-syndrome": {
@@ -17144,6 +17216,19 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension",
+        "Hyperlipidemia",
+        "Type 2 Diabetes",
+        "Former smoker"
+      ],
+      "chiefComplaintPhrasing": [
+        "pressure in my chest",
+        "tightness that won't go away",
+        "it's spreading to my jaw"
+      ]
     }
   },
   "acute-pancreatitis": {
@@ -17324,6 +17409,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.1\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcohol use disorder",
+        "Gallstones",
+        "Prior pancreatitis episode"
+      ],
+      "chiefComplaintPhrasing": [
+        "pain goes straight through to my back",
+        "worst stomach pain of my life",
+        "nothing makes it better"
+      ]
     }
   },
   "asthma-exacerbation": {
@@ -17525,6 +17622,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Asthma (diagnosed age 12)",
+        "Allergic rhinitis",
+        "Eczema"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't catch my breath",
+        "my chest feels really tight",
+        "my inhaler isn't working"
+      ]
     }
   },
   "chf-exacerbation": {
@@ -17712,6 +17821,19 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "88% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Heart failure with reduced EF (EF 30%)",
+        "Hypertension",
+        "Atrial fibrillation",
+        "Prior MI"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe when I lie flat",
+        "I wake up gasping",
+        "my legs are so swollen I can't get my shoes on"
+      ]
     }
   },
   "sepsisseptic-shock": {
@@ -17962,6 +18084,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.6\u00b0C",
       "SpO2": "92% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 Diabetes",
+        "Chronic kidney disease stage 3",
+        "Recurrent UTIs"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel terrible all over",
+        "I can't stop shaking",
+        "my family says I'm not making sense"
+      ]
     }
   },
   "pneumonia": {
@@ -18160,6 +18294,16 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.7\u00b0C",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "None significant"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've had this cough for a week and now I have fever",
+        "it hurts when I breathe in deep",
+        "I feel exhausted and I'm coughing up green stuff"
+      ]
     }
   },
   "autoimmune-hemolytic-anemia": {
@@ -18341,6 +18485,16 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.2\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior hematologic history"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm exhausted and pale",
+        "my heart is racing just walking to the bathroom",
+        "I look yellow \u2014 my wife noticed it first"
+      ]
     }
   },
   "cardiac-syncope": {
@@ -18521,6 +18675,17 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension",
+        "Known structural heart disease"
+      ],
+      "chiefComplaintPhrasing": [
+        "I just blacked out \u2014 no warning",
+        "one second I was standing, then I was on the floor",
+        "I've had a few dizzy spells lately but this time I went down"
+      ]
     }
   },
   "infective-endocarditis": {
@@ -18719,6 +18884,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "39.2\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "IV drug use",
+        "Prior dental procedure last month",
+        "Mitral valve prolapse"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've had fever for three weeks",
+        "I feel exhausted and I have chills every night",
+        "I noticed spots on my fingertips"
+      ]
     }
   },
   "massive-pe-with-rv-failure": {
@@ -18895,6 +19072,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "98.6\u00b0F",
       "SpO2": "84% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recent long-haul flight",
+        "Immobilization after knee surgery",
+        "Obesity"
+      ],
+      "chiefComplaintPhrasing": [
+        "I suddenly couldn't breathe",
+        "my heart is pounding out of my chest",
+        "I feel like I might pass out"
+      ]
     }
   },
   "migraine": {
@@ -19070,6 +19259,17 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Migraines since age 16",
+        "Oral contraceptive use"
+      ],
+      "chiefComplaintPhrasing": [
+        "throbbing on one side",
+        "light is killing me",
+        "I've had this before but this one is really bad"
+      ]
     }
   },
   "myxedema-coma": {
@@ -19264,6 +19464,18 @@ window.CRT_DATA = {
       "RR": "10",
       "Temp": "34.2\u00b0C",
       "SpO2": "88% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known hypothyroidism \u2014 stopped medications 6 months ago",
+        "Depression",
+        "Constipation"
+      ],
+      "chiefComplaintPhrasing": [
+        "family says she's been 'slowing down' for weeks",
+        "she barely responds to us",
+        "she's been sleeping constantly"
+      ]
     }
   },
   "perforated-peptic-ulcer": {
@@ -19486,6 +19698,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "38.6\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Chronic NSAID use for back pain",
+        "H. pylori treated 2 years ago",
+        "Heavy alcohol use"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden stabbing pain in my stomach \u2014 like a knife",
+        "it hit me out of nowhere",
+        "my whole belly hurts now, not just the top"
+      ]
     }
   },
   "pneumothorax": {
@@ -19677,6 +19901,17 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "91% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Tall thin male",
+        "Cigarette smoker (10 pack-years)"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden sharp chest pain on the left",
+        "it hurts to breathe in",
+        "I felt something pop in my chest"
+      ]
     }
   },
   "pulmonary-embolism-syncope": {
@@ -19874,6 +20109,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "89% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Oral contraceptive use",
+        "Long flight from Asia 4 days ago",
+        "No prior clotting history"
+      ],
+      "chiefComplaintPhrasing": [
+        "I passed out and then couldn't breathe",
+        "I've had chest pain for two days that I ignored",
+        "my heart is racing and I feel faint"
+      ]
     }
   },
   "pyelonephritis-urosepsis": {
@@ -20074,6 +20321,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "39.8\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent UTIs",
+        "Type 2 Diabetes",
+        "Kidney stones"
+      ],
+      "chiefComplaintPhrasing": [
+        "burning when I pee and now I have a fever",
+        "my back hurts on the right side",
+        "I've been having chills and I feel awful"
+      ]
     }
   },
   "renal-colic": {
@@ -20284,6 +20543,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.8\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior kidney stone 2 years ago",
+        "Dehydration",
+        "Gout"
+      ],
+      "chiefComplaintPhrasing": [
+        "the worst pain I've ever felt in my life",
+        "it comes in waves and goes to my groin",
+        "I can't sit still \u2014 nothing helps"
+      ]
     }
   },
   "sle-flare-with-cytopenias": {
@@ -20490,6 +20761,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.4\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known SLE (diagnosed age 24)",
+        "On hydroxychloroquine",
+        "Prior lupus nephritis"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm exhausted and my joints are all swollen",
+        "I've been getting easy bruising",
+        "I stopped my medications a month ago \u2014 I know, I know"
+      ]
     }
   },
   "vasovagal-syncope": {
@@ -20665,6 +20948,17 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No significant PMH",
+        "Prior similar episode in high school"
+      ],
+      "chiefComplaintPhrasing": [
+        "I felt nauseous and sweaty, then I went down",
+        "I had some warning \u2014 tunnel vision first",
+        "I was standing in a hot shower when it happened"
+      ]
     }
   },
   "dress-syndrome": {
@@ -20876,6 +21170,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "39.4\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Started allopurinol 6 weeks ago",
+        "Gout",
+        "Hypertension"
+      ],
+      "chiefComplaintPhrasing": [
+        "this rash started a week ago and keeps spreading",
+        "I have fever and my lymph nodes are swollen",
+        "my face is puffy and I feel terrible"
+      ]
     }
   },
   "sjsten-overlap": {
@@ -21104,6 +21410,17 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "39.8\u00b0C",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "HIV \u2014 not on ART",
+        "Started trimethoprim-sulfamethoxazole 2 weeks ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "blisters in my mouth and all over my skin",
+        "my eyes are stuck shut in the morning",
+        "it started as a rash and now I'm losing skin"
+      ]
     }
   },
   "hereditary-angioedema": {
@@ -21334,6 +21651,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Mother had identical swelling episodes",
+        "No history of allergies or hives",
+        "Prior laryngeal swelling episode age 18"
+      ],
+      "chiefComplaintPhrasing": [
+        "my lips and tongue are swelling",
+        "this happens to me a few times a year",
+        "epinephrine never seems to help when this happens"
+      ]
     }
   },
   "erythema-multiforme-major": {
@@ -21508,6 +21837,17 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.6\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent cold sores",
+        "Prior EM episode 2 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "target-shaped lesions all over my arms",
+        "sores in my mouth that make it hard to eat",
+        "started after my cold sore flared up"
+      ]
     }
   },
   "severe-allergic-reaction": {
@@ -21731,6 +22071,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Shellfish allergy",
+        "Prior anaphylaxis to shrimp",
+        "Carries EpiPen but didn't use it"
+      ],
+      "chiefComplaintPhrasing": [
+        "I ate shrimp and now my throat is closing",
+        "I'm itching everywhere and I feel faint",
+        "I gave myself the EpiPen but I'm still getting worse"
+      ]
     }
   },
   "acquired-c1esterase-inhibitor-deficiency": {
@@ -21934,6 +22286,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "B-cell lymphoma \u2014 on chemotherapy",
+        "No prior history of swelling",
+        "No family history of angioedema"
+      ],
+      "chiefComplaintPhrasing": [
+        "my face and lips keep swelling without warning",
+        "antihistamines don't help at all",
+        "this started around the same time as my cancer diagnosis"
+      ]
     }
   },
   "allergic-angioedema": {
@@ -22154,6 +22518,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known peanut allergy",
+        "Prior anaphylaxis",
+        "Carries EpiPen"
+      ],
+      "chiefComplaintPhrasing": [
+        "my lips are swelling after I ate at a restaurant",
+        "I need my EpiPen right now",
+        "I think there were nuts in the sauce"
+      ]
     }
   },
   "idiopathic-angioedema": {
@@ -22353,6 +22729,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No known allergies",
+        "Normal C1 inhibitor levels",
+        "Prior episodes \u2014 workup unrevealing"
+      ],
+      "chiefComplaintPhrasing": [
+        "my lips swell up randomly \u2014 no trigger I can find",
+        "this is the fourth time this year",
+        "antihistamines help a little but not fully"
+      ]
     }
   },
   "eczema-herpeticum": {
@@ -22558,6 +22946,17 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "39.2\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe atopic dermatitis on dupilumab \u2014 recently stopped",
+        "Prior cold sore contact with sibling"
+      ],
+      "chiefComplaintPhrasing": [
+        "my eczema looks infected \u2014 it's different this time",
+        "punched-out sores on top of the red patches",
+        "fever and the skin looks like it's falling apart"
+      ]
     }
   },
   "fpies-acute": {
@@ -22745,6 +23144,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "37.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Previously reacted to oat cereal",
+        "Normal growth until recently",
+        "No eczema or hives"
+      ],
+      "chiefComplaintPhrasing": [
+        "she vomited 15 times in an hour",
+        "this happens every time she eats oats",
+        "she's pale and floppy \u2014 not acting right"
+      ]
     }
   },
   "mastocytosis": {
@@ -22969,6 +23380,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent flushing episodes for years",
+        "Told it was anxiety",
+        "Unexplained hypotension with bug stings"
+      ],
+      "chiefComplaintPhrasing": [
+        "I passed out after a bee sting and my BP tanked",
+        "I flush and get hives when I drink alcohol",
+        "my tryptase came back elevated"
+      ]
     }
   },
   "acute-urticaria": {
@@ -23160,6 +23583,17 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior history of hives",
+        "Started new antibiotic 3 days ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "hives broke out all over me this morning",
+        "they're moving \u2014 new ones keep appearing",
+        "so itchy I can barely function"
+      ]
     }
   },
   "drug-allergy-vancomycin-rms": {
@@ -23343,6 +23777,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.8\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Orthopedic surgery yesterday",
+        "No prior antibiotic reactions",
+        "Penicillin allergy label \u2014 untested"
+      ],
+      "chiefComplaintPhrasing": [
+        "flushing and my face turned beet red during the IV",
+        "neck and chest are burning and itchy",
+        "they started the vancomycin and then this happened"
+      ]
     }
   },
   "food-allergy-oit-reaction": {
@@ -23535,6 +23981,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Peanut allergy \u2014 on peanut OIT for 4 months",
+        "Dose escalation last week",
+        "Asthma"
+      ],
+      "chiefComplaintPhrasing": [
+        "took my peanut dose and then went for a run",
+        "throat is tightening and I'm wheezing",
+        "my EpiPen auto-injector \u2014 I don't know if I used it right"
+      ]
     }
   },
   "insect-sting-anaphylaxis": {
@@ -23768,6 +24226,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior local reaction to bee sting",
+        "No prior systemic reaction",
+        "No EpiPen prescribed"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got stung and now I can't breathe",
+        "my throat is tightening",
+        "I'm covered in hives and my BP feels low"
+      ]
     }
   },
   "venom-immunotherapy-reaction": {
@@ -23968,6 +24438,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Bee venom anaphylaxis last summer",
+        "Started venom immunotherapy 6 months ago",
+        "On venom immunotherapy \u2014 updosing today"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got my allergy shot and now I'm reacting",
+        "hives and my chest is tight",
+        "this has never happened with my shots before"
+      ]
     }
   },
   "hereditary-angioedema-v2": {
@@ -24168,6 +24650,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known HAE Type I",
+        "Started oral contraceptives last month",
+        "Mother and sister have HAE"
+      ],
+      "chiefComplaintPhrasing": [
+        "my lips and throat are swelling again",
+        "I started the pill for the first time \u2014 could that be it",
+        "epinephrine didn't work last time"
+      ]
     }
   },
   "acquired-c1esterase-inhibitor-deficiency-v2": {
@@ -24348,6 +24842,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "MGUS \u2014 diagnosed 18 months ago",
+        "New-onset angioedema at age 58",
+        "No family history of swelling"
+      ],
+      "chiefComplaintPhrasing": [
+        "this swelling came out of nowhere \u2014 I'm 58",
+        "no allergies, no family history",
+        "antihistamines do absolutely nothing"
+      ]
     }
   },
   "allergic-angioedema-v2": {
@@ -24541,6 +25047,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.6\u00b0F",
       "SpO2": "88% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Obesity \u2014 BMI 42",
+        "Known bee sting anaphylaxis",
+        "Standard EpiPen may be underdosed for weight"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got stung and used my EpiPen but it's not working",
+        "my throat is swelling and I can barely swallow",
+        "I need more epinephrine \u2014 one wasn't enough"
+      ]
     }
   },
   "idiopathic-angioedema-v2": {
@@ -24702,6 +25220,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Idiopathic angioedema \u2014 on omalizumab",
+        "Traveling internationally for work",
+        "Omalizumab injection was 6 weeks ago \u2014 overdue"
+      ],
+      "chiefComplaintPhrasing": [
+        "my face is swelling and I'm traveling \u2014 no access to my doctor",
+        "this happens when my omalizumab is late",
+        "I need to know what to do right now"
+      ]
     }
   },
   "insect-sting-anaphylaxis-v2": {
@@ -24902,6 +25432,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "98.6\u00b0F",
       "SpO2": "86% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Uninsured construction worker",
+        "Prior systemic sting reaction \u2014 untreated",
+        "No epinephrine available"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got stung on the job site and now I can't breathe",
+        "I've reacted before but never had a shot",
+        "someone gave me Benadryl but it's getting worse"
+      ]
     }
   },
   "venom-immunotherapy-reaction-v2": {
@@ -25086,6 +25628,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known bee venom allergy on VIT",
+        "Started ACE inhibitor for hypertension 2 weeks ago",
+        "VIT dose given today"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got my venom shot and reacted way worse than ever",
+        "I started a new blood pressure pill recently",
+        "epinephrine helped but I feel like I need more"
+      ]
     }
   },
   "severe-allergic-reaction-v2": {
@@ -25260,6 +25814,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Contrast allergy \u2014 prior reaction",
+        "Premedicated with prednisone and diphenhydramine",
+        "Needs CT with contrast for cancer staging"
+      ],
+      "chiefComplaintPhrasing": [
+        "I took all the premeds and I'm still reacting",
+        "hives and my throat feels funny",
+        "the radiologist gave me contrast and now this"
+      ]
     }
   },
   "severe-allergic-reaction-v3": {
@@ -25436,6 +26002,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Labeled penicillin allergic since age 4",
+        "College athlete \u2014 needs beta-lactam prophylaxis",
+        "No recall of what the original reaction was"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was told I'm allergic to penicillin but I need to know for sure",
+        "I want to run the test \u2014 I need antibiotics for an upcoming procedure",
+        "I'm nervous but I want to do the delabeling"
+      ]
     }
   },
   "eczema-herpeticum-v2": {
@@ -25610,6 +26188,18 @@ window.CRT_DATA = {
       "RR": "36",
       "Temp": "39.6\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atopic dermatitis since infancy",
+        "Cold sore contact \u2014 father kissed child",
+        "Toddler age 2"
+      ],
+      "chiefComplaintPhrasing": [
+        "her eczema looks totally different \u2014 punched-out sores",
+        "she has a fever and won't eat",
+        "dad had a cold sore last week"
+      ]
     }
   },
   "erythema-multiforme-major-v2": {
@@ -25784,6 +26374,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent HSV \u2014 3+ episodes per year",
+        "Prior EM major triggered by HSV",
+        "Not on HSV suppression"
+      ],
+      "chiefComplaintPhrasing": [
+        "my cold sore triggered this rash again",
+        "target lesions and mouth sores \u2014 same as before",
+        "I need to be on something to prevent this"
+      ]
     }
   },
   "food-allergy-oit-reaction-v2": {
@@ -25958,6 +26560,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "98.6\u00b0F",
       "SpO2": "87% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Peanut allergy on OIT \u2014 stable for 3 months",
+        "Competitive swimmer",
+        "Exercise 2 hours after peanut dose today"
+      ],
+      "chiefComplaintPhrasing": [
+        "I took my peanut dose and then swam and now I can't breathe",
+        "this is different \u2014 I've never reacted to my dose before",
+        "exercise made it worse \u2014 I know that's a thing"
+      ]
     }
   },
   "fpies-acute-v2": {
@@ -26129,6 +26743,18 @@ window.CRT_DATA = {
       "RR": "34",
       "Temp": "37.6\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known FPIES to oats \u2014 carries EpiPen",
+        "At school \u2014 reaction to shared snack",
+        "EpiPen given by school nurse \u2014 still reacting"
+      ],
+      "chiefComplaintPhrasing": [
+        "she vomited over and over at school",
+        "the nurse gave her epinephrine but she's still sick",
+        "pale and lethargic \u2014 not her normal self"
+      ]
     }
   },
   "fpies-chronic-v2": {
@@ -26303,6 +26929,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "37.4\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Failure to thrive \u2014 weight dropped 2 percentiles",
+        "Labeled GERD \u2014 on PPI",
+        "Formula-fed infant age 4 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "he vomits at every formula feeding",
+        "everyone says it's just reflux but it keeps getting worse",
+        "he's not gaining weight and looks miserable"
+      ]
     }
   },
   "mastocytosis-v2": {
@@ -26509,6 +27147,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent episodes for 3 years \u2014 told it was anxiety",
+        "Elevated tryptase \u2014 never followed up",
+        "On three different anxiety medications"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been told this is panic attacks but I know it's not",
+        "I flush, my BP drops, and I get hives \u2014 that's not anxiety",
+        "I found out my tryptase was high \u2014 can we figure this out"
+      ]
     }
   },
   "drug-allergy-vancomycin-rms-v2": {
@@ -26683,6 +27333,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Elderly patient \u2014 labeled vancomycin allergic",
+        "Prior red man syndrome \u2014 not a true allergy",
+        "Needs vancomycin for MRSA bacteremia"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had a reaction to vancomycin years ago \u2014 flushing and redness",
+        "does that mean I can never have it again",
+        "my doctor says I need it now"
+      ]
     }
   },
   "acute-urticaria-v2": {
@@ -26837,6 +27499,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Viral upper respiratory infection 10 days ago",
+        "No new medications",
+        "No known allergies"
+      ],
+      "chiefComplaintPhrasing": [
+        "hives broke out after my cold went away",
+        "I thought it was an allergy but I haven't changed anything",
+        "my doctor wants to do a lot of tests \u2014 is that necessary"
+      ]
     }
   },
   "chronic-spontaneous-urticaria-v2": {
@@ -27010,6 +27684,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "CSU for 2 years \u2014 failed 2nd-gen antihistamines",
+        "Hashimoto thyroiditis",
+        "Anti-TPO positive"
+      ],
+      "chiefComplaintPhrasing": [
+        "hives every day for two years",
+        "I've tried every antihistamine \u2014 nothing works fully",
+        "I read about omalizumab \u2014 can I try that"
+      ]
     }
   },
   "urticarial-vasculitis-v2": {
@@ -27184,6 +27870,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.2\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "SLE \u2014 on hydroxychloroquine",
+        "Hives that last more than 24 hours",
+        "Low complement levels on labs"
+      ],
+      "chiefComplaintPhrasing": [
+        "my hives don't go away like normal \u2014 they leave bruises",
+        "they last for days and hurt more than itch",
+        "I have lupus \u2014 could they be connected"
+      ]
     }
   },
   "cvid-presentation-v2": {
@@ -27357,6 +28055,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.6\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent sinopulmonary infections since age 25",
+        "Insurance denied IVIG",
+        "Works as an elementary school teacher"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've had pneumonia four times this year",
+        "my insurance won't cover my immunoglobulin \u2014 I need help",
+        "I'm always sick and I can't keep doing this"
+      ]
     }
   },
   "nsaid-hypersensitivity-v2": {
@@ -27530,6 +28240,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Chronic sinusitis with nasal polyps",
+        "Anosmia for 3 years",
+        "Aspirin causes severe bronchoconstriction"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm a chef and I can't smell anything anymore",
+        "ibuprofen sends me to the ER \u2014 bronchospasm",
+        "I heard there's a desensitization procedure"
+      ]
     }
   },
   "penicillin-allergy-delabeling-v2": {
@@ -27703,6 +28425,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Labeled penicillin allergic since childhood",
+        "Pregnant \u2014 32 weeks, GBS positive",
+        "Needs effective intrapartum prophylaxis"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm 32 weeks pregnant and I'm told I can't have penicillin",
+        "I'm GBS positive and I don't know what to do",
+        "can we test me now to see if I'm really allergic"
+      ]
     }
   },
   "peanut-allergy-anaphylaxis-v2": {
@@ -27877,6 +28611,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "91% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Labeled peanut allergic since age 3",
+        "Prior anaphylaxis to a cookie \u2014 unclear trigger",
+        "Reaction this time attributed to peas, not peanuts"
+      ],
+      "chiefComplaintPhrasing": [
+        "I reacted after eating peas \u2014 I don't have a pea allergy",
+        "my peanut allergy label may be wrong",
+        "I need to understand what I'm actually allergic to"
+      ]
     }
   },
   "milk-allergy-infant-v2": {
@@ -28051,6 +28797,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "37.8\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Breastfed infant \u2014 mother dairy-free",
+        "Mother believes she's dairy-free but misses hidden sources",
+        "Poor weight gain, bloody stools"
+      ],
+      "chiefComplaintPhrasing": [
+        "she has blood in her stool even though I'm dairy-free",
+        "I cut out milk but she's still reacting",
+        "her pediatrician doesn't know what else to try"
+      ]
     }
   },
   "allergic-conjunctivitis-severe-v2": {
@@ -28224,6 +28982,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "History of severe atopic conjunctivitis",
+        "Contact lens wearer",
+        "Corneal shield ulcer on last exam"
+      ],
+      "chiefComplaintPhrasing": [
+        "my eyes are red and so mucusy I can barely open them",
+        "there's a white spot on my eye that wasn't there before",
+        "contacts make it so much worse"
+      ]
     }
   },
   "allergic-rhinitis-uncontrolled-v2": {
@@ -28397,6 +29167,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Vet tech \u2014 animal dander exposure daily",
+        "Allergic rhinitis \u2014 on multiple OTC meds",
+        "Wants to start immunotherapy"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't control my symptoms at work \u2014 I'm a vet tech",
+        "I've tried every nasal spray and antihistamine",
+        "I want allergy shots so I can do my job"
+      ]
     }
   },
   "atopic-dermatitis-severe-v2": {
@@ -28603,6 +29385,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.0\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe AD since infancy",
+        "Single parent \u2014 limited access to specialist",
+        "School absences due to flares"
+      ],
+      "chiefComplaintPhrasing": [
+        "she scratches until she bleeds every night",
+        "we've tried everything at the pharmacy",
+        "we can't afford the specialist copay"
+      ]
     }
   },
   "contact-dermatitis-occupational-v2": {
@@ -28793,6 +29587,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hairstylist \u2014 15 years",
+        "PPD contact allergy confirmed",
+        "Career threatened by ongoing exposure"
+      ],
+      "chiefComplaintPhrasing": [
+        "my hands and face break out every time I dye hair",
+        "patch testing showed PPD allergy",
+        "I love my job and I don't want to quit"
+      ]
     }
   },
   "eoe-adult-v2": {
@@ -28981,6 +29787,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Food impaction 2 years ago \u2014 scoped, found eosinophils",
+        "Never followed up",
+        "On PPI \u2014 no improvement"
+      ],
+      "chiefComplaintPhrasing": [
+        "food gets stuck every time I eat meat or bread",
+        "I've had this for years and just dealt with it",
+        "I had a scope two years ago \u2014 they found something but never called"
+      ]
     }
   },
   "eoe-pediatric-v2": {
@@ -29154,6 +29972,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Picky eater since age 2",
+        "GERD label \u2014 on PPI for 4 years",
+        "6-year delay to diagnosis"
+      ],
+      "chiefComplaintPhrasing": [
+        "she only eats 4 foods and gags on everything else",
+        "she was labeled GERD but the PPI never helped",
+        "she eats so slowly and says food feels stuck"
+      ]
     }
   },
   "allergic-conjunctivitis-severe": {
@@ -29329,6 +30159,17 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Seasonal allergies since childhood",
+        "Failed topical antihistamine drops"
+      ],
+      "chiefComplaintPhrasing": [
+        "my eyes are red and itching so bad I want to scratch them out",
+        "worse every spring when the trees bloom",
+        "drops barely touch it anymore"
+      ]
     }
   },
   "allergic-rhinitis-uncontrolled": {
@@ -29505,6 +30346,17 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Allergic rhinitis \u2014 on cetirizine and fluticasone",
+        "Cat allergy \u2014 lives with two cats"
+      ],
+      "chiefComplaintPhrasing": [
+        "my nose runs constantly even with my medications",
+        "I can't sleep because I can't breathe at night",
+        "my allergist wants me to get shots"
+      ]
     }
   },
   "atopic-dermatitis-severe": {
@@ -29681,6 +30533,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "37.8\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe eczema since age 3",
+        "Multiple food allergies",
+        "On topical corticosteroids \u2014 partially responsive"
+      ],
+      "chiefComplaintPhrasing": [
+        "the rash is everywhere and I can't sleep from scratching",
+        "it flares every few weeks no matter what I do",
+        "I've been on steroid cream for years"
+      ]
     }
   },
   "chronic-spontaneous-urticaria": {
@@ -29838,6 +30702,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Daily hives for 14 months",
+        "Thyroid peroxidase antibodies positive",
+        "Failed standard antihistamines"
+      ],
+      "chiefComplaintPhrasing": [
+        "hives every single day for over a year",
+        "they come and go \u2014 I never know when",
+        "antihistamines help but never fully control it"
+      ]
     }
   },
   "contact-dermatitis-occupational": {
@@ -30019,6 +30895,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Healthcare worker \u2014 frequent hand washing and glove use",
+        "Latex sensitization",
+        "Nickel allergy"
+      ],
+      "chiefComplaintPhrasing": [
+        "my hands crack and bleed at work",
+        "worse since I started wearing latex gloves",
+        "patch test was positive to multiple things"
+      ]
     }
   },
   "cvid-presentation": {
@@ -30200,6 +31088,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.4\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent pneumonias \u2014 4 in the past 18 months",
+        "IgG level very low",
+        "Male, age 28"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've had pneumonia four times this year",
+        "my immune system just doesn't seem to work",
+        "I've never had bloodwork like this before \u2014 what does it mean"
+      ]
     }
   },
   "eoe-adult": {
@@ -30396,6 +31296,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Solid food dysphagia for 3 years",
+        "Multiple food allergies",
+        "Prior food impaction \u2014 managed conservatively"
+      ],
+      "chiefComplaintPhrasing": [
+        "meat and bread always get stuck",
+        "I chew everything a hundred times and drink water constantly",
+        "I've just been living with this"
+      ]
     }
   },
   "eoe-pediatric": {
@@ -30554,6 +31466,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Failure to thrive",
+        "Persistent reflux symptoms on PPI",
+        "Eosinophils found on scope \u2014 referred to allergy"
+      ],
+      "chiefComplaintPhrasing": [
+        "he only eats soft foods \u2014 anything else he gags",
+        "his reflux meds aren't helping",
+        "the GI doctor found white specs in his esophagus"
+      ]
     }
   },
   "fpies-chronic": {
@@ -30712,6 +31636,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "37.6\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Formula-fed infant \u2014 switched formulas twice",
+        "Weight loss",
+        "Persistent vomiting with every feeding"
+      ],
+      "chiefComplaintPhrasing": [
+        "he vomits with every feeding for two months",
+        "he's losing weight and looks pale after feeds",
+        "we've tried three different formulas"
+      ]
     }
   },
   "milk-allergy-infant": {
@@ -30870,6 +31806,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "37.8\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Infant \u2014 age 3 months",
+        "Introduced cow's milk formula at 6 weeks",
+        "Blood in stool \u2014 two episodes"
+      ],
+      "chiefComplaintPhrasing": [
+        "she has blood in every diaper",
+        "she screams after every formula feeding",
+        "her GI said to try switching formula"
+      ]
     }
   },
   "nsaid-hypersensitivity": {
@@ -31051,6 +31999,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Nasal polyps",
+        "Asthma triggered by aspirin",
+        "Chronic sinusitis \u2014 recurrent"
+      ],
+      "chiefComplaintPhrasing": [
+        "Advil sends me to the ER \u2014 I wheeze badly",
+        "ibuprofen and naproxen both do it",
+        "I was told this is aspirin-exacerbated disease"
+      ]
     }
   },
   "peanut-allergy-anaphylaxis": {
@@ -31248,6 +32208,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "98.6\u00b0F",
       "SpO2": "85% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Peanut allergy \u2014 diagnosed age 2",
+        "Carries EpiPen",
+        "Prior anaphylaxis \u2014 required ER visit"
+      ],
+      "chiefComplaintPhrasing": [
+        "my throat is closing \u2014 I ate something with peanuts",
+        "I used my EpiPen already",
+        "I need help right now"
+      ]
     }
   },
   "penicillin-allergy-delabeling": {
@@ -31422,6 +32394,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Labeled penicillin allergic since childhood \u2014 'rash'",
+        "Recurrent UTIs requiring second-line antibiotics",
+        "No recall of original reaction"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was told I'm allergic to penicillin when I was 5",
+        "I want to know if I actually am \u2014 the label keeps causing problems",
+        "can you test me"
+      ]
     }
   },
   "urticarial-vasculitis": {
@@ -31596,6 +32580,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.0\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hives lasting more than 24 hours",
+        "Joint pain",
+        "Anti-C1q antibodies positive"
+      ],
+      "chiefComplaintPhrasing": [
+        "my hives last for days and leave bruises",
+        "they hurt \u2014 they don't really itch like normal hives",
+        "I've had this workup before \u2014 something came back abnormal"
+      ]
     }
   },
   "anaphylaxis-v2": {
@@ -31779,6 +32775,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "88% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 72 \u2014 bee sting anaphylaxis",
+        "On carvedilol for heart failure",
+        "Prior epinephrine-resistant reaction"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got stung and gave myself epinephrine \u2014 it barely helped",
+        "I'm on a beta-blocker \u2014 could that be why",
+        "I still feel awful and I'm not improving"
+      ]
     }
   },
   "anaphylaxis-v3": {
@@ -31968,6 +32976,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.6\u00b0F",
       "SpO2": "89% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Latex anaphylaxis \u2014 operating room exposure",
+        "Healthcare worker \u2014 surgeon",
+        "Prior unexplained intraop reactions"
+      ],
+      "chiefComplaintPhrasing": [
+        "I reacted during the case \u2014 intraoperatively",
+        "I've had weird reactions with gloves before",
+        "I think it's latex but no one ever tested me"
+      ]
     }
   },
   "anaphylaxis-v4": {
@@ -32148,6 +33168,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Adolescent \u2014 peanut anaphylaxis",
+        "Refuses to carry EpiPen at school",
+        "Anxiety about stigma"
+      ],
+      "chiefComplaintPhrasing": [
+        "I ate something with peanuts at a party",
+        "I didn't have my EpiPen \u2014 I left it home",
+        "I know I should carry it but I keep forgetting"
+      ]
     }
   },
   "anaphylaxis-v5": {
@@ -32340,6 +33372,18 @@ window.CRT_DATA = {
       "RR": "36",
       "Temp": "98.6\u00b0F",
       "SpO2": "87% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 6 \u2014 peanut anaphylaxis",
+        "Language barrier \u2014 Spanish-speaking family",
+        "Family did not recognize anaphylaxis"
+      ],
+      "chiefComplaintPhrasing": [
+        "she ate something at a birthday party and now she's sick",
+        "we didn't know this was an emergency",
+        "she has hives and is breathing funny"
+      ]
     }
   },
   "ace-angioedema-v2": {
@@ -32547,6 +33591,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "African-American female \u2014 CHF on lisinopril",
+        "Started lisinopril 3 months ago",
+        "No prior angioedema"
+      ],
+      "chiefComplaintPhrasing": [
+        "my lips and tongue are swelling",
+        "I'm on a blood pressure medicine \u2014 could that be it",
+        "this started a few months after I changed my heart medication"
+      ]
     }
   },
   "dress-syndrome-v2": {
@@ -32751,6 +33807,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "39.8\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Gout \u2014 started allopurinol 5 weeks ago",
+        "HLA-B*58:01 not tested prior to prescription",
+        "Renal insufficiency \u2014 on dialysis"
+      ],
+      "chiefComplaintPhrasing": [
+        "this rash started after my gout medication",
+        "I have fever and my lymph nodes are swollen all over",
+        "my face is swollen and I look yellow"
+      ]
     }
   },
   "sjs-ten-v2": {
@@ -32950,6 +34018,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "40.1\u00b0C",
       "SpO2": "92% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Epilepsy \u2014 started lamotrigine 3 weeks ago",
+        "No prior drug reactions",
+        "Up-titration too fast"
+      ],
+      "chiefComplaintPhrasing": [
+        "blisters in my mouth and on my skin \u2014 it started as a rash",
+        "my eyes are matted shut and my lips are cracking",
+        "I started a new seizure medication three weeks ago"
+      ]
     }
   },
   "sjsten-overlap-v2": {
@@ -33157,6 +34237,17 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "40.2\u00b0C",
       "SpO2": "91% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "HIV \u2014 CD4 count 120, not on ART",
+        "Trimethoprim-sulfamethoxazole started 12 days ago for PCP prophylaxis"
+      ],
+      "chiefComplaintPhrasing": [
+        "I started a new HIV medication and now I'm losing skin",
+        "blisters everywhere \u2014 mouth, eyes, genitals",
+        "I have HIV and I'm on Bactrim"
+      ]
     }
   },
   "hypertensive-emergency": {
@@ -33298,6 +34389,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension \u2014 non-adherent to medications",
+        "No PCP for 2 years",
+        "Prior hypertensive urgency"
+      ],
+      "chiefComplaintPhrasing": [
+        "worst headache of my life \u2014 started this morning",
+        "I stopped taking my blood pressure pills \u2014 I know",
+        "I can't see straight and I keep vomiting"
+      ]
     }
   },
   "alcohol-withdrawal": {
@@ -33438,6 +34541,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.2\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcohol use disorder \u2014 drinks daily",
+        "Last drink 36 hours ago \u2014 forced stop",
+        "Prior withdrawal seizure 2 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I stopped drinking two days ago and I'm shaking",
+        "my hands won't stop trembling",
+        "I feel like I'm going to have a seizure"
+      ]
     }
   },
   "stroke-v2": {
@@ -33590,6 +34705,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Ischemic stroke \u2014 given tPA 90 minutes ago",
+        "Atrial fibrillation",
+        "On warfarin \u2014 stopped 3 days prior to procedure"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was getting better after the tPA and now I'm worse",
+        "I can't move my right arm anymore",
+        "something happened \u2014 my speech came back and now it's gone again"
+      ]
     }
   },
   "bacterial-meningitis": {
@@ -33744,6 +34871,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "40.2\u00b0C",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "College student \u2014 lives in dormitory",
+        "Unvaccinated against meningococcus",
+        "No prior serious infections"
+      ],
+      "chiefComplaintPhrasing": [
+        "worst headache of my life and my neck is stiff",
+        "I can't stand the light \u2014 it kills me",
+        "I have a rash that isn't going away when I press on it"
+      ]
     }
   },
   "alcoholic-hepatitis": {
@@ -33907,6 +35046,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcohol use disorder \u2014 drinks a fifth daily",
+        "Cirrhosis \u2014 Child-Pugh B",
+        "Prior variceal bleed 6 months ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm yellow and my belly hurts",
+        "I've been drinking heavily and I know I shouldn't",
+        "I feel confused and I can't stop shaking"
+      ]
     }
   },
   "cap-with-sepsis": {
@@ -34051,6 +35202,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "39.8\u00b0C",
       "SpO2": "86% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Asplenic \u2014 remote splenectomy for trauma",
+        "Unvaccinated against pneumococcus",
+        "No prior severe pneumonia"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have pneumonia and I feel like I'm dying",
+        "I'm shaking uncontrollably and my BP is low",
+        "I had my spleen out years ago"
+      ]
     }
   },
   "heart-failure-hfpef": {
@@ -34201,6 +35364,19 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.4\u00b0F",
       "SpO2": "87% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension \u2014 poorly controlled",
+        "Obesity \u2014 BMI 38",
+        "Obstructive sleep apnea \u2014 not using CPAP",
+        "Age 72, female"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't walk to the mailbox without stopping to breathe",
+        "I sleep in a recliner \u2014 can't lie flat",
+        "my ankles are huge and my weight went up 10 pounds this week"
+      ]
     }
   },
   "dka-v2": {
@@ -34365,6 +35541,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 off insulin for 6 months",
+        "BMI 28 \u2014 not obese",
+        "Unclear if LADA vs T2DM"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been vomiting and I can't stop",
+        "my blood sugar is over 400 but I don't feel right",
+        "I was told I have type 2 but something feels different"
+      ]
     }
   },
   "dka-v3": {
@@ -34529,6 +35717,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 1 diabetes \u2014 age 16",
+        "Insulin pump \u2014 occlusion not noticed",
+        "DKA \u2014 now treated for 8 hours \u2014 becoming confused"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been on the drip for hours and now I'm confused",
+        "my head hurts and my vision is blurry",
+        "I was getting better and now I'm worse"
+      ]
     }
   },
   "stroke-v3": {
@@ -34670,6 +35870,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension \u2014 BP frequently above 180",
+        "Non-adherent to antihypertensives",
+        "No anticoagulation"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden worst headache of my life",
+        "I can't move my right side",
+        "it happened when I was lifting something heavy"
+      ]
     }
   },
   "pe-v2": {
@@ -34828,6 +36040,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "98.6\u00b0F",
       "SpO2": "82% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Active malignancy \u2014 pancreatic cancer",
+        "Prior DVT 6 months ago",
+        "On anticoagulation \u2014 missed last 3 doses"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe and my BP is dropping",
+        "I have cancer and my leg swelled last week",
+        "I ran out of my blood thinner and couldn't get to the pharmacy"
+      ]
     }
   },
   "pe-v3": {
@@ -34989,6 +36213,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "90% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Long-haul flight 5 days ago",
+        "Factor V Leiden \u2014 just diagnosed",
+        "No prior clots"
+      ],
+      "chiefComplaintPhrasing": [
+        "sharp pain when I breathe in on the right side",
+        "I've had this since my flight and I kept hoping it would go away",
+        "my heart is racing and I'm short of breath"
+      ]
     }
   },
   "encephalitis": {
@@ -35150,6 +36386,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "39.4\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior neurological history",
+        "Camping in wooded area 2 weeks ago",
+        "No immunocompromise"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have fever and now I'm confused",
+        "I had a seizure at home \u2014 my roommate called 911",
+        "I've been acting strange for days \u2014 I'm not myself"
+      ]
     }
   },
   "pneumonia-on-copd": {
@@ -35308,6 +36556,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "38.6\u00b0C",
       "SpO2": "84% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "COPD \u2014 GOLD Stage III",
+        "Former smoker \u2014 40 pack-years",
+        "On tiotropium and salmeterol/fluticasone"
+      ],
+      "chiefComplaintPhrasing": [
+        "my breathing is way worse than my usual COPD",
+        "I have fever and I'm coughing up green stuff",
+        "my rescue inhaler isn't cutting it"
+      ]
     }
   },
   "chf-exacerbation-v2": {
@@ -35470,6 +36730,18 @@ window.CRT_DATA = {
       "RR": "34",
       "Temp": "98.4\u00b0F",
       "SpO2": "82% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Ischemic cardiomyopathy \u2014 EF 15%",
+        "CRT-D implanted 1 year ago",
+        "Non-adherent to furosemide"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe and my BP is dropping",
+        "I stopped my water pill because I was going to the bathroom too much",
+        "I feel like I'm drowning"
+      ]
     }
   },
   "acute-ischemic-stroke": {
@@ -35633,6 +36905,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atrial fibrillation \u2014 not anticoagulated",
+        "Hypertension",
+        "Prior TIA 6 months ago \u2014 not evaluated"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't get the words out",
+        "my right arm is completely weak",
+        "I woke up and something was wrong"
+      ]
     }
   },
   "brain-abscess": {
@@ -35774,6 +37058,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "39.6\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recent dental extraction 3 weeks ago",
+        "Poorly controlled diabetes",
+        "Immunocompromised \u2014 on prednisone for RA"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've had a headache for 2 weeks and now I have fever",
+        "the pain is getting worse and I feel confused",
+        "my vision seems off on one side"
+      ]
     }
   },
   "alcoholic-ketoacidosis": {
@@ -35919,6 +37215,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "97.8\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcohol use disorder \u2014 last drink 48 hours ago \u2014 vomiting prevented drinking",
+        "Malnutrition",
+        "Prior AKA hospitalization"
+      ],
+      "chiefComplaintPhrasing": [
+        "I stopped drinking because I couldn't keep anything down",
+        "I'm vomiting everything and my stomach is killing me",
+        "I've been through this before \u2014 it feels the same"
+      ]
     }
   },
   "type2-diabetes-outpatient": {
@@ -36084,6 +37392,19 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 diagnosed 3 years ago",
+        "Obesity \u2014 BMI 36",
+        "Hypertension \u2014 on metformin and lisinopril",
+        "A1c 9.8% on last check"
+      ],
+      "chiefComplaintPhrasing": [
+        "my blood sugars have been out of control for months",
+        "my doctor wants me to start insulin but I really don't want to",
+        "I've been reading about the weekly shot \u2014 can we talk about that"
+      ]
     }
   },
   "allergic-rhinitis-immunotherapy": {
@@ -36227,6 +37548,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Allergic rhinitis \u2014 tree and grass pollen",
+        "On SCIT \u2014 buildup phase, week 18",
+        "Prior mild local reactions"
+      ],
+      "chiefComplaintPhrasing": [
+        "I got my allergy shot and now I'm sneezing and my chest is tight",
+        "hives broke out at the injection site and spreading",
+        "this is worse than any reaction I've had before"
+      ]
     }
   },
   "alpha-gal-syndrome": {
@@ -36386,6 +37719,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Frequent tick exposure \u2014 outdoor job",
+        "Delayed reaction to red meat \u2014 4 hours later",
+        "Anaphylaxis \u2014 initially labeled idiopathic"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had steak for dinner and now I'm in anaphylaxis",
+        "this always happens 3-4 hours after eating beef",
+        "I got bit by a tick last summer and this started after"
+      ]
     }
   },
   "acute-ischemic-stroke-tpa": {
@@ -36530,6 +37875,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atrial fibrillation \u2014 non-anticoagulated",
+        "Hypertension",
+        "Arrived within 2 hours of symptom onset"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't speak and my face is drooping",
+        "my right arm is dead \u2014 I can't lift it",
+        "my wife called 911 immediately when I stopped talking"
+      ]
     }
   },
   "new-onset-atrial-fibrillation": {
@@ -36688,6 +38045,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension",
+        "Obstructive sleep apnea \u2014 not treated",
+        "Hyperthyroidism \u2014 new diagnosis"
+      ],
+      "chiefComplaintPhrasing": [
+        "my heart is fluttering and I feel it in my chest",
+        "irregular pounding \u2014 like it's skipping beats",
+        "I can't catch my breath and my heart rate app says 146"
+      ]
     }
   },
   "hemorrhagic-stroke": {
@@ -36834,6 +38203,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension \u2014 untreated for 10 years",
+        "Heavy alcohol use",
+        "No prior neurological events"
+      ],
+      "chiefComplaintPhrasing": [
+        "worst headache of my life \u2014 hit like a thunderclap",
+        "my right side stopped working suddenly",
+        "I was at the gym and it just happened"
+      ]
     }
   },
   "alcohol-withdrawal-seizures": {
@@ -36978,6 +38359,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "38.6\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe alcohol use disorder",
+        "Last drink 48 hours ago",
+        "Prior withdrawal seizure \u2014 3 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was shaking and then I seized \u2014 my wife watched it happen",
+        "I've tried to stop before \u2014 it always gets bad",
+        "I know I need help \u2014 I can't do this alone"
+      ]
     }
   },
   "aki-differential": {
@@ -37137,6 +38530,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Osteoarthritis \u2014 on ibuprofen 800mg TID",
+        "Hypertension on lisinopril",
+        "Age 68 \u2014 CKD Stage 2 at baseline"
+      ],
+      "chiefComplaintPhrasing": [
+        "I haven't urinated much in two days",
+        "I take ibuprofen every day for my knees",
+        "my legs are swelling and I feel off"
+      ]
     }
   },
   "inpatient-diabetes-management": {
@@ -37296,6 +38701,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.2\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 on oral agents outpatient",
+        "Admitted for pneumonia",
+        "No prior insulin use"
+      ],
+      "chiefComplaintPhrasing": [
+        "my blood sugars keep reading over 350 since I got admitted",
+        "I've never needed insulin before",
+        "they say stress from being sick makes it worse"
+      ]
     }
   },
   "type-2-mi": {
@@ -37438,6 +38855,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe iron deficiency anemia \u2014 Hgb 5.8",
+        "Atrial fibrillation with RVR",
+        "No prior coronary artery disease"
+      ],
+      "chiefComplaintPhrasing": [
+        "chest pain and my heart is racing",
+        "I've been so tired and pale for months",
+        "my heart rate is crazy high and now I have chest pressure"
+      ]
     }
   },
   "severe-asthma-biologics": {
@@ -37603,6 +39032,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe eosinophilic asthma \u2014 blood eos 780",
+        "On high-dose ICS/LABA \u2014 still not controlled",
+        "3 oral steroid bursts in the past year"
+      ],
+      "chiefComplaintPhrasing": [
+        "my asthma is never under control no matter what I do",
+        "I've been on steroids three times this year",
+        "I heard there are shots for people like me \u2014 can we talk about them"
+      ]
     }
   },
   "pyelonephritis-sepsis": {
@@ -37764,6 +39205,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.8\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent UTIs \u2014 4 this year",
+        "Type 2 diabetes \u2014 poorly controlled",
+        "Obstructive uropathy \u2014 known"
+      ],
+      "chiefComplaintPhrasing": [
+        "burning when I urinate and my back is killing me",
+        "I have chills and I feel terrible",
+        "my blood pressure is low and I can't stand up straight"
+      ]
     }
   },
   "spontaneous-bacterial-peritonitis": {
@@ -37912,6 +39365,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcoholic cirrhosis \u2014 Child-Pugh C",
+        "Prior SBP episode 8 months ago \u2014 not on prophylaxis",
+        "Large ascites \u2014 last paracentesis 3 months ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "my belly hurts and I have fever",
+        "I've had this before \u2014 the infection in the fluid",
+        "I stopped my antibiotic \u2014 the one for my belly \u2014 months ago"
+      ]
     }
   },
   "adrenal-insufficiency": {
@@ -38072,6 +39537,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.4\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "On prednisone 20mg daily for 3 years for RA",
+        "Recent stressful illness \u2014 flu-like syndrome",
+        "Did not double steroid dose as instructed"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel like I'm going to pass out",
+        "I'm weak and my BP is low",
+        "I take prednisone every day and I forgot to increase it when I got sick"
+      ]
     }
   },
   "acute-aortic-dissection": {
@@ -38212,6 +39689,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension \u2014 on 3 antihypertensives",
+        "Bicuspid aortic valve \u2014 known",
+        "Connective tissue disorder \u2014 Marfan suspected"
+      ],
+      "chiefComplaintPhrasing": [
+        "tearing pain in my chest going straight to my back",
+        "like something ripped inside me",
+        "my right arm blood pressure is different from my left"
+      ]
     }
   },
   "gout-flare": {
@@ -38359,6 +39848,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.0\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Gout \u2014 diagnosed 4 years ago",
+        "On allopurinol \u2014 missed doses last week",
+        "Hypertension \u2014 on hydrochlorothiazide"
+      ],
+      "chiefComplaintPhrasing": [
+        "my big toe is on fire",
+        "I can't put any weight on it",
+        "worst flare I've ever had \u2014 happened overnight"
+      ]
     }
   },
   "malignant-hyperthermia": {
@@ -38526,6 +40027,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "41.8\u00b0C",
       "SpO2": "88% on 100% FiO2"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Family history of anesthetic death \u2014 cousin",
+        "Elective surgery today \u2014 succinylcholine given",
+        "No prior anesthetic complications personally"
+      ],
+      "chiefComplaintPhrasing": [
+        "temperature spiking in the OR \u2014 can't explain it",
+        "muscle rigidity that won't break",
+        "SpO2 dropping and CO2 rising during the case"
+      ]
     }
   },
   "hyperkalemia-with-concurrent-acs": {
@@ -38685,6 +40198,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "ESRD on hemodialysis \u2014 missed last session",
+        "Known CAD",
+        "On dialysis \u2014 skipped 3 sessions"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel weak and my chest is funny",
+        "I skipped dialysis and I know that was wrong",
+        "my EKG looks different than before \u2014 they're very worried"
+      ]
     }
   },
   "deep-vein-thrombosis": {
@@ -38830,6 +40355,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hip replacement 3 weeks ago",
+        "Did not complete compression stocking regimen",
+        "Obesity"
+      ],
+      "chiefComplaintPhrasing": [
+        "my left leg is swollen and tender",
+        "it started two days after I got home from surgery",
+        "the calf is tight and warm \u2014 it hurts when I walk"
+      ]
     }
   },
   "acute-compartment-syndrome": {
@@ -38970,6 +40507,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Tibial fracture \u2014 6 hours ago",
+        "Casted in ED \u2014 cast applied tightly",
+        "No prior orthopedic history"
+      ],
+      "chiefComplaintPhrasing": [
+        "the pain is way worse than a regular fracture \u2014 something is wrong",
+        "I can't wiggle my toes",
+        "it feels like my leg is going to explode from inside"
+      ]
     }
   },
   "acute-hemolytic-transfusion-reaction": {
@@ -39112,6 +40661,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.6\u00b0C",
       "SpO2": "91%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Sickle cell disease \u2014 chronic transfusion program",
+        "Transfusion running now \u2014 30 minutes in",
+        "Two prior transfusions without incident"
+      ],
+      "chiefComplaintPhrasing": [
+        "my back is killing me since the blood started",
+        "I feel hot and I have chills during the transfusion",
+        "my urine looks red \u2014 something is wrong with this blood"
+      ]
     }
   },
   "epidural-abscess": {
@@ -39270,6 +40831,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "39.2\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Lumbar epidural steroid injection 2 weeks ago",
+        "IV drug use",
+        "Diabetes mellitus \u2014 poorly controlled"
+      ],
+      "chiefComplaintPhrasing": [
+        "my back pain is much worse than before the injection",
+        "I have fever and now my legs feel weak",
+        "it was getting better and now it's a lot worse"
+      ]
     }
   },
   "hypoglycemia": {
@@ -39411,6 +40984,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes on insulin \u2014 CKD Stage 4",
+        "Skipped a meal",
+        "Insulin dose not adjusted for declining kidney function"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel shaky and confused",
+        "my wife checked my blood sugar and it was 28",
+        "I didn't eat before my insulin shot"
+      ]
     }
   },
   "upper-gi-bleed": {
@@ -39572,6 +41157,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcoholic cirrhosis \u2014 known varices",
+        "Non-adherent to nadolol",
+        "Recent NSAID use for joint pain"
+      ],
+      "chiefComplaintPhrasing": [
+        "I vomited blood \u2014 a lot of it",
+        "my stool has been black and tarry for two days",
+        "I stopped my nadolol because of the dizziness"
+      ]
     }
   },
   "uremic-encephalopathy": {
@@ -39735,6 +41332,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "ESRD \u2014 missed 4 dialysis sessions",
+        "Hyperkalemia on prior labs",
+        "Lives alone \u2014 no family supervision"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel confused and my hands are shaking strangely",
+        "I missed dialysis for a week \u2014 I know that's bad",
+        "my neighbor found me not making sense"
+      ]
     }
   },
   "viral-meningitis": {
@@ -39896,6 +41505,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.8\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No significant PMH",
+        "No immunocompromise",
+        "Recent hand-foot-mouth outbreak in the community"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have a fever and the worst headache",
+        "my neck is stiff and I hate bright lights",
+        "I've been vomiting and I feel terrible"
+      ]
     }
   },
   "unstable-angina": {
@@ -40056,6 +41677,19 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known CAD \u2014 prior stent 3 years ago",
+        "Hypertension",
+        "Hyperlipidemia",
+        "Stopped clopidogrel 2 months ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "chest tightness that woke me up at rest",
+        "it's happened three times this week",
+        "I stopped one of my heart medications \u2014 could that be it"
+      ]
     }
   },
   "toxic-ingestion": {
@@ -40215,6 +41849,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Depression \u2014 not on treatment",
+        "Acetaminophen \u2014 found empty bottles",
+        "Prior suicide attempt 2 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I took a lot of Tylenol last night \u2014 I didn't want to be here",
+        "I feel sick to my stomach now",
+        "I'm ready to talk to someone"
+      ]
     }
   },
   "exertional-heat-stroke": {
@@ -40359,6 +42005,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "41.8\u00b0C",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Military recruit \u2014 first week of training",
+        "No prior heat illness",
+        "Training in humid 95-degree weather"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was running and I collapsed",
+        "I don't know what happened \u2014 I felt fine and then I was on the ground",
+        "I'm confused and they said my temperature is very high"
+      ]
     }
   },
   "tick-borne-illness": {
@@ -40521,6 +42179,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "39.6\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Removed a tick 10 days ago \u2014 camping trip",
+        "Not on doxycycline prophylaxis",
+        "No prior tick-borne illness"
+      ],
+      "chiefComplaintPhrasing": [
+        "fever and headache since the camping trip",
+        "I feel achy all over and my platelet count is low",
+        "I found a tick attached to me about 10 days ago"
+      ]
     }
   },
   "sepsis-with-rigidity": {
@@ -40684,6 +42354,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "39.8\u00b0C",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Parkinson disease \u2014 on levodopa",
+        "Missed levodopa doses during hospitalization for UTI",
+        "Prior akinetic crisis"
+      ],
+      "chiefComplaintPhrasing": [
+        "fever and I can't move at all",
+        "I missed my Parkinson medications in the hospital",
+        "I'm rigid and my temperature is high \u2014 they think it might be NMS"
+      ]
     }
   },
   "occupational-asthma-isocyanate": {
@@ -40843,6 +42525,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Auto body worker \u2014 12 years",
+        "Asthma onset 3 years into job",
+        "Symptoms improve on weekends and vacations"
+      ],
+      "chiefComplaintPhrasing": [
+        "I wheeze every day at work but I'm fine on weekends",
+        "it started after they switched the paint product",
+        "I think my job is making me sick"
+      ]
     }
   },
   "inducible-urticaria": {
@@ -41002,6 +42696,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Cold urticaria \u2014 confirmed on ice cube test",
+        "Prior cold-induced near-syncope after swimming",
+        "Not on antihistamines prophylactically"
+      ],
+      "chiefComplaintPhrasing": [
+        "I dove into a cold pool and nearly passed out",
+        "hives everywhere and I felt my blood pressure drop",
+        "this only happens with cold \u2014 it's not random"
+      ]
     }
   },
   "anticholinergic-toxicity": {
@@ -41146,6 +42852,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "39.2\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Took multiple diphenhydramine tablets \u2014 possibly intentional",
+        "Also found to have ibuprofen and acetaminophen in home",
+        "No prior overdose history"
+      ],
+      "chiefComplaintPhrasing": [
+        "I took a bunch of Benadryl and I feel weird",
+        "my mouth is totally dry and I see things",
+        "I'm confused \u2014 I don't know where I am"
+      ]
     }
   },
   "hyperthermia-nms": {
@@ -41307,6 +43025,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "41.2\u00b0C",
       "SpO2": "90% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Schizophrenia \u2014 started haloperidol 1 week ago",
+        "Prior NMS episode \u2014 not documented in chart",
+        "Transferred from psychiatric facility"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm rigid and I have a fever \u2014 I can't move",
+        "I started a new medication a week ago",
+        "they said my CPK is over 10,000"
+      ]
     }
   },
   "sympathomimetic-toxicity": {
@@ -41452,6 +43182,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "39.6\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Cocaine use \u2014 most recent 2 hours ago",
+        "Hypertension \u2014 undiagnosed",
+        "Prior cocaine-induced chest pain \u2014 not evaluated"
+      ],
+      "chiefComplaintPhrasing": [
+        "I used cocaine and now my heart is pounding out of my chest",
+        "I'm sweating and my BP is sky high",
+        "I feel like I'm going to have a heart attack"
+      ]
     }
   },
   "mixed-overdose": {
@@ -41595,6 +43337,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "38.4\u00b0C",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Major depressive disorder \u2014 not adherent to treatment",
+        "Found with multiple pill bottles",
+        "Prior overdose attempt \u2014 1 year ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I took a mix of whatever I had \u2014 I wanted to stop feeling this way",
+        "I'm sleepy and my mouth is dry",
+        "I'm ready to get help"
+      ]
     }
   },
   "acute-sma-embolism": {
@@ -41735,6 +43489,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atrial fibrillation \u2014 on warfarin, INR subtherapeutic",
+        "Known peripheral arterial disease",
+        "Prior mesenteric angina \u2014 post-prandial pain for months"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden terrible pain around my belly button",
+        "nothing is helping \u2014 I can't get comfortable",
+        "I've had stomach pain after eating for months but this is completely different"
+      ]
     }
   },
   "phlegmasia-cerulea-dolens": {
@@ -41876,6 +43642,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "38.6\u00b0C",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Pancreatic cancer \u2014 Stage III",
+        "Hypercoagulable state \u2014 Trousseau syndrome",
+        "On anticoagulation \u2014 recently held for procedure"
+      ],
+      "chiefComplaintPhrasing": [
+        "my entire leg is blue and swollen",
+        "the pain is unbearable \u2014 worse than anything I've felt",
+        "it happened while my blood thinners were on hold"
+      ]
     }
   },
   "lethal-catatonia": {
@@ -42017,6 +43795,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "40.8\u00b0C",
       "SpO2": "90% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Bipolar disorder \u2014 off medications",
+        "Prior catatonic episode",
+        "Transferred from psychiatric hospital \u2014 not improving"
+      ],
+      "chiefComplaintPhrasing": [
+        "she stopped moving and stopped eating 3 days ago",
+        "now she has a fever and she's rigid",
+        "she was catatonic and now she seems much sicker"
+      ]
     }
   },
   "severe-hyperkalemia-from-missed-dialysis": {
@@ -42158,6 +43948,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "ESRD on hemodialysis",
+        "Missed 4 sessions due to transportation issues",
+        "Lives alone \u2014 no social support"
+      ],
+      "chiefComplaintPhrasing": [
+        "I haven't been able to get to dialysis",
+        "I feel weak and my heart feels funny",
+        "my neighbor drove me in \u2014 I couldn't drive myself"
+      ]
     }
   },
   "ureterolithiasis": {
@@ -42315,6 +44117,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.8\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior kidney stone \u2014 3 years ago, passed spontaneously",
+        "High oxalate diet",
+        "Inadequate fluid intake"
+      ],
+      "chiefComplaintPhrasing": [
+        "pain in my right side going to my groin",
+        "I've had kidney stones before \u2014 this is exactly what it feels like",
+        "the pain comes in waves and I can't sit still"
+      ]
     }
   },
   "necrotizing-fasciitis": {
@@ -42458,6 +44272,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "40.2\u00b0C",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 poorly controlled, A1c 11%",
+        "Minor skin abrasion 3 days ago",
+        "Immunosuppressed \u2014 on chemotherapy"
+      ],
+      "chiefComplaintPhrasing": [
+        "the pain is way out of proportion to how it looks",
+        "I had a small cut three days ago and now my whole leg looks infected",
+        "I feel terrible \u2014 fever, shaking, I can barely walk"
+      ]
     }
   },
   "gas-gangrene": {
@@ -42600,6 +44426,18 @@ window.CRT_DATA = {
       "RR": "34",
       "Temp": "40.8\u00b0C",
       "SpO2": "88% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Penetrating wound from farming accident",
+        "Delayed presentation \u2014 12 hours",
+        "No prior wound infections"
+      ],
+      "chiefComplaintPhrasing": [
+        "I cut my leg on farm equipment and it smells terrible",
+        "I can feel it crackling when you press on it",
+        "I feel like I'm dying \u2014 fever and the pain is unbearable"
+      ]
     }
   },
   "acute-mi-with-av-block": {
@@ -42740,6 +44578,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "90% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension",
+        "Hyperlipidemia",
+        "No prior cardiac history"
+      ],
+      "chiefComplaintPhrasing": [
+        "crushing chest pain in my jaw and left arm",
+        "I feel faint and my heart is beating slow",
+        "the pain started an hour ago \u2014 I didn't want to bother anyone"
+      ]
     }
   },
   "crohn-flare": {
@@ -42885,6 +44735,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.6\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Crohn disease \u2014 ileocolonic, diagnosed age 22",
+        "On adalimumab \u2014 missed last 2 doses",
+        "Two prior hospitalizations for flares"
+      ],
+      "chiefComplaintPhrasing": [
+        "cramping pain and bloody diarrhea all day",
+        "I missed my biologic \u2014 I couldn't afford the copay",
+        "I'm losing weight and I can barely eat"
+      ]
     }
   },
   "cholelithiasis-cholecystitis": {
@@ -43043,6 +44905,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.8\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known gallstones \u2014 followed conservatively",
+        "Obesity",
+        "Diabetes"
+      ],
+      "chiefComplaintPhrasing": [
+        "RUQ pain and now I'm yellow",
+        "the pain after eating got much worse and I have fever",
+        "my skin and eyes are turning yellow"
+      ]
     }
   },
   "atypical-hus": {
@@ -43186,6 +45060,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.4\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior renal history",
+        "Family member with aHUS",
+        "Recent upper respiratory infection"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm not urinating and my blood counts are off",
+        "I feel weak and I'm bruising easily",
+        "the doctor said my kidney function dropped suddenly"
+      ]
     }
   },
   "superior-vena-cava-syndrome": {
@@ -43344,6 +45230,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Smoker \u2014 40 pack-years",
+        "New lung mass \u2014 biopsy pending",
+        "No prior malignancy"
+      ],
+      "chiefComplaintPhrasing": [
+        "my face and arms are so swollen I don't recognize myself",
+        "my veins on my chest look like they're popping out",
+        "worse when I lean forward or lie down"
+      ]
     }
   },
   "spinal-metastasis": {
@@ -43499,6 +45397,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prostate cancer \u2014 Stage IV",
+        "On androgen deprivation therapy",
+        "Back pain worsening over 3 weeks"
+      ],
+      "chiefComplaintPhrasing": [
+        "my back pain is worse than ever and now my legs are weak",
+        "I have cancer and I think it's spread to my spine",
+        "I lost control of my bladder this morning"
+      ]
     }
   },
   "dementia-with-acute-delirium": {
@@ -43643,6 +45553,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.4\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alzheimer dementia \u2014 moderate stage",
+        "Lives in memory care",
+        "No recent medication changes \u2014 UTI found"
+      ],
+      "chiefComplaintPhrasing": [
+        "she's acting completely different \u2014 more confused than usual",
+        "she's agitated and pulling at things all night",
+        "she has dementia but this is a different kind of confusion"
+      ]
     }
   },
   "cerebral-salt-wasting": {
@@ -43784,6 +45706,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "SAH \u2014 day 4 post-bleed",
+        "Prior hyponatremia \u2014 corrected once already",
+        "Hypervolemic management being used \u2014 may be wrong"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel dizzy and my sodium keeps dropping",
+        "I had the brain bleed 4 days ago and now this",
+        "I've been losing a lot of urine and I'm dehydrated"
+      ]
     }
   },
   "conus-medullaris-syndrome": {
@@ -43922,6 +45856,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.2\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known breast cancer \u2014 metastatic",
+        "Back pain for 6 weeks \u2014 attributed to arthritis",
+        "New bowel and bladder symptoms this morning"
+      ],
+      "chiefComplaintPhrasing": [
+        "I couldn't urinate this morning and my legs are weak",
+        "I have cancer and my back has been bad for weeks",
+        "I felt like I sat on something \u2014 numbness in that area"
+      ]
     }
   },
   "acute-mi": {
@@ -44069,6 +46015,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "98.4\u00b0F",
       "SpO2": "84% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known CAD \u2014 3-vessel disease",
+        "On maximum medical therapy",
+        "Prior CABG 7 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "pressure in my chest and I can't breathe",
+        "I can't lie flat \u2014 I feel like I'm drowning",
+        "I've had heart attacks before but this feels worse"
+      ]
     }
   },
   "hcm": {
@@ -44209,6 +46167,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.6\u00b0F",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior cardiac diagnosis",
+        "First-degree relative died of sudden cardiac death age 38",
+        "Track athlete \u2014 exertional symptoms for 1 month"
+      ],
+      "chiefComplaintPhrasing": [
+        "I blacked out on the track during a race",
+        "I've been getting dizzy when I sprint",
+        "I had a murmur when I was a kid but they said it was innocent"
+      ]
     }
   },
   "cns-infection": {
@@ -44366,6 +46336,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.8\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "HIV \u2014 CD4 count 82, not on ART",
+        "Homeless \u2014 no regular healthcare",
+        "Prior PCP pneumonia 1 year ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have headache and I can't think straight",
+        "I've been confused for a week \u2014 it came on slowly",
+        "I had a seizure at the shelter last night"
+      ]
     }
   },
   "lyme-carditis": {
@@ -44507,6 +46489,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.2\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hiking in Connecticut \u2014 tick bite 3 weeks ago",
+        "Erythema migrans rash \u2014 not treated",
+        "No prior cardiac history"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been dizzy and nearly fainted twice",
+        "my heart feels like it stops and starts",
+        "I had a bullseye rash after camping and ignored it"
+      ]
     }
   },
   "rhabdomyolysisinduced-hyperkalemia": {
@@ -44668,6 +46662,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.4\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Military training \u2014 extreme exertion",
+        "Heat exposure",
+        "No prior muscle or kidney problems"
+      ],
+      "chiefComplaintPhrasing": [
+        "my urine is dark brown \u2014 like tea",
+        "my muscles are incredibly sore from training",
+        "I feel weak and I'm barely urinating"
+      ]
     }
   },
   "temporal-arteritis": {
@@ -44811,6 +46817,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.2\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 72 \u2014 female",
+        "PMR diagnosed 6 months ago \u2014 on prednisone",
+        "New headache \u2014 different from prior headaches"
+      ],
+      "chiefComplaintPhrasing": [
+        "new headache over my temples that's different from anything I've had",
+        "my jaw hurts when I chew",
+        "I'm worried about my vision \u2014 it went dark for a few seconds"
+      ]
     }
   },
   "retinal-detachment": {
@@ -44952,6 +46970,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "High myopia \u2014 strong prescription glasses",
+        "Prior retinal tear \u2014 treated with laser 2 years ago",
+        "No other ocular history"
+      ],
+      "chiefComplaintPhrasing": [
+        "flashing lights and floaters that started this morning",
+        "a curtain is coming down from the top of my vision",
+        "I had a laser procedure on my retina before \u2014 is this related"
+      ]
     }
   },
   "acute-embolic-limb-ischemia": {
@@ -45094,6 +47124,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atrial fibrillation \u2014 on warfarin, INR 1.4",
+        "Known aortic stenosis",
+        "Prior peripheral embolism \u2014 right arm"
+      ],
+      "chiefComplaintPhrasing": [
+        "my left leg went numb and pale suddenly \u2014 about an hour ago",
+        "the foot is ice cold and I can't move it",
+        "it looks completely different from the other leg"
+      ]
     }
   },
   "aortic-aneurysm": {
@@ -45234,6 +47276,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.4\u00b0F",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known 6.2cm AAA \u2014 repair planned in 6 weeks",
+        "Hypertension",
+        "Heavy smoker"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden tearing pain in my back and stomach",
+        "I feel like I'm going to pass out",
+        "I have a known aneurysm and this is different from my usual back pain"
+      ]
     }
   },
   "midgut-volvulus": {
@@ -45375,6 +47429,18 @@ window.CRT_DATA = {
       "RR": "42",
       "Temp": "37.8\u00b0C",
       "SpO2": "91%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Infant \u2014 age 3 weeks",
+        "No prior surgeries",
+        "Born full-term, no prenatal concerns noted"
+      ],
+      "chiefComplaintPhrasing": [
+        "she started vomiting green \u2014 the color of bile",
+        "she was fine and then she wasn't \u2014 very fast",
+        "she's crying and her belly looks bigger"
+      ]
     }
   },
   "pheochromocytoma": {
@@ -45516,6 +47582,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypertension \u2014 difficult to control on 3 agents",
+        "Episodic severe headaches, sweating, palpitations for 2 years",
+        "Family history of MEN2 \u2014 not yet tested"
+      ],
+      "chiefComplaintPhrasing": [
+        "I get these episodes of severe headache and pounding heart",
+        "my blood pressure goes to 220 and then comes back down",
+        "it comes out of nowhere \u2014 stress or sometimes nothing at all"
+      ]
     }
   },
   "siadh": {
@@ -45658,6 +47736,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Depression \u2014 on sertraline for 6 months",
+        "Recent dose increase 3 weeks ago",
+        "No prior sodium problems"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been confused and nauseous for 3 days",
+        "my doctor checked my sodium and said it was critically low",
+        "I increased my antidepressant dose about a month ago"
+      ]
     }
   },
   "incarcerated-inguinal-hernia": {
@@ -45799,6 +47889,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.4\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known inguinal hernia \u2014 refused repair",
+        "Constipation \u2014 chronic",
+        "Prior episode of hernia that reduced itself"
+      ],
+      "chiefComplaintPhrasing": [
+        "my hernia is stuck \u2014 I can't push it back in",
+        "I've been vomiting and I haven't had a bowel movement in 3 days",
+        "it's harder and more tender than usual and I can't reduce it"
+      ]
     }
   },
   "flail-chest": {
@@ -45943,6 +48045,18 @@ window.CRT_DATA = {
       "RR": "36",
       "Temp": "98.4\u00b0F",
       "SpO2": "82% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Motor vehicle accident \u2014 30 minutes ago",
+        "No prior pulmonary history",
+        "No anticoagulants"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was in a car crash and I can't breathe",
+        "every time I try to breathe in my chest goes the wrong way",
+        "it hurts so much I can barely take a breath"
+      ]
     }
   },
   "massive-hemothorax": {
@@ -46089,6 +48203,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "98.4\u00b0F",
       "SpO2": "84% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Stabbing to the left chest \u2014 20 minutes ago",
+        "No PMH",
+        "No medications"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was stabbed and I can't breathe",
+        "I'm losing a lot of blood",
+        "the left side of my chest is completely silent"
+      ]
     }
   },
   "acute-psychosis": {
@@ -46231,6 +48357,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior psychiatric history",
+        "Cannabis use \u2014 daily for 6 months",
+        "Age 22 \u2014 college student"
+      ],
+      "chiefComplaintPhrasing": [
+        "they brought me in \u2014 I didn't think anything was wrong",
+        "I haven't slept in 4 days",
+        "I hear voices and I think people are watching me"
+      ]
     }
   },
   "staphylococcal-scalded-skin-syndrome": {
@@ -46372,6 +48510,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "39.6\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 3 \u2014 previously healthy",
+        "Perioral crusting started 2 days ago",
+        "No prior skin conditions"
+      ],
+      "chiefComplaintPhrasing": [
+        "her skin is peeling off like she has a bad sunburn",
+        "she has fever and she won't let us touch her",
+        "it started around her mouth and spread everywhere"
+      ]
     }
   },
   "vocal-cord-dysfunction": {
@@ -46514,6 +48664,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Competitive swimmer",
+        "Anxiety disorder",
+        "Labeled asthmatic \u2014 inhalers not effective"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe in \u2014 the wheeze is on the way in",
+        "it happens during competition and sometimes at rest",
+        "my inhaler does absolutely nothing for this"
+      ]
     }
   },
   "cervical-artery-dissection": {
@@ -46655,6 +48817,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recent chiropractic manipulation \u2014 yesterday",
+        "Age 34 \u2014 migraines",
+        "No prior vascular history"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden neck pain after my chiropractor visit",
+        "my eyelid is drooping and my pupil looks small",
+        "I had a new kind of headache at the same time"
+      ]
     }
   },
   "gonococcal-arthritis": {
@@ -46798,6 +48972,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.4\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 24 \u2014 sexually active",
+        "New partner 3 weeks ago",
+        "No prior STIs"
+      ],
+      "chiefComplaintPhrasing": [
+        "my wrist and ankle hurt and moved around \u2014 joint to joint",
+        "I have these small skin lesions that appeared with the joint pain",
+        "I also have pain in my tendon near my wrist"
+      ]
     }
   },
   "pseudogout": {
@@ -46940,6 +49126,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "37.8\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 74 \u2014 prior gout attack \u2014 urate normal",
+        "Hyperparathyroidism",
+        "Recent hospitalization \u2014 1 week ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "my knee blew up overnight \u2014 hot and swollen",
+        "I've had gout before but my uric acid is normal",
+        "I was just in the hospital last week for something else"
+      ]
     }
   },
   "acute-viral-hepatitis": {
@@ -47084,6 +49282,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.4\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Ate raw shellfish at a restaurant 4 weeks ago",
+        "No prior liver disease",
+        "Travel to endemic area 6 weeks ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm turning yellow and I'm exhausted",
+        "my urine is dark and my stool is pale",
+        "I ate raw oysters about a month ago"
+      ]
     }
   },
   "anxiety-panic-attack": {
@@ -47228,6 +49438,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Generalized anxiety disorder",
+        "No cardiac history",
+        "Prior panic attacks \u2014 not formally diagnosed"
+      ],
+      "chiefComplaintPhrasing": [
+        "I thought I was having a heart attack \u2014 pounding heart and chest pain",
+        "I can't breathe and my hands are tingling",
+        "it came out of nowhere and I feel like I'm dying"
+      ]
     }
   },
   "copd-exacerbation-niv": {
@@ -47391,6 +49613,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "38.2\u00b0C",
       "SpO2": "82% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "COPD \u2014 GOLD Stage IV",
+        "Hypercapnic at baseline \u2014 PCO2 52 on last ABG",
+        "Two prior intubations \u2014 last 8 months ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe \u2014 worse than usual",
+        "I've been on the BiPAP before \u2014 I'll try anything",
+        "my inhalers aren't touching it and I'm exhausted just talking"
+      ]
     }
   },
   "psychogenic-polydipsia": {
@@ -47533,6 +49767,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Schizophrenia \u2014 in psychiatric facility",
+        "Drinks water compulsively \u2014 noted by staff",
+        "Prior hyponatremia episode 2 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "she had a seizure and her sodium is 114",
+        "she's been drinking water constantly \u2014 staff tried to limit it",
+        "she's on antipsychotics and this has happened before"
+      ]
     }
   },
   "hypothyroidismrelated-hyponatremia": {
@@ -47692,6 +49938,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "96.8\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hypothyroidism \u2014 untreated for years (refused medications)",
+        "TSH recently checked: 68",
+        "Age 74 \u2014 female, lives alone"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been confused and I can't stay warm",
+        "I stopped my thyroid pill years ago because I felt fine",
+        "my sodium is low and my family says I've been slow for months"
+      ]
     }
   },
   "aortic-injury": {
@@ -47833,6 +50091,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "98.4\u00b0F",
       "SpO2": "90% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Motor vehicle accident \u2014 high-speed, restrained driver",
+        "No prior cardiac history",
+        "Age 34"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was in a car accident and my chest and back hurt",
+        "I feel like something is very wrong inside",
+        "the x-ray showed something in my chest"
+      ]
     }
   },
   "acute-anterior-uveitis": {
@@ -47974,6 +50244,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Ankylosing spondylitis \u2014 HLA-B27 positive",
+        "Prior uveitis episode \u2014 same eye",
+        "On naproxen for back pain"
+      ],
+      "chiefComplaintPhrasing": [
+        "my eye is red and it's killing me in the light",
+        "my vision is blurry in the left eye",
+        "I've had this before \u2014 I have the arthritis in my back too"
+      ]
     }
   },
   "dic-from-traumasurgery-with-hemorrhagic": {
@@ -48124,6 +50406,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "37.2\u00b0C",
       "SpO2": "88% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Major trauma \u2014 hit by a car",
+        "Multiple long-bone fractures",
+        "Received 8 units pRBC in the trauma bay"
+      ],
+      "chiefComplaintPhrasing": [
+        "she's bleeding from everywhere \u2014 IV sites, surgical wounds",
+        "we've given blood and she's still not clotting",
+        "her coags are all over the place"
+      ]
     }
   },
   "acute-mi-dyspnea": {
@@ -48266,6 +50560,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "91% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 diabetic autonomic neuropathy",
+        "Age 67 \u2014 female",
+        "Hypertension \u2014 no prior angina"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe \u2014 no chest pain",
+        "I've just been so short of breath since last night",
+        "I feel awful but I don't have the chest pain everyone talks about"
+      ]
     }
   },
   "acute-necrotizing-gallstone-pancreatitis": {
@@ -48415,6 +50721,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.2\u00b0C",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known gallstones \u2014 refused cholecystectomy",
+        "Prior mild pancreatitis",
+        "Obesity \u2014 BMI 42"
+      ],
+      "chiefComplaintPhrasing": [
+        "worst stomach pain I've ever had \u2014 much worse than before",
+        "I had a mild pancreatitis before but this is nothing like that",
+        "I have fever and I can't move without the pain getting worse"
+      ]
     }
   },
   "alcoholrelated-pancreatitis": {
@@ -48575,6 +50893,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.6\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Alcohol use disorder \u2014 8 drinks per day",
+        "Two prior pancreatitis hospitalizations",
+        "Chronic abdominal pain \u2014 attributed to pancreatitis"
+      ],
+      "chiefComplaintPhrasing": [
+        "epigastric pain going to my back \u2014 same as before",
+        "I've been drinking more lately",
+        "nothing makes it better \u2014 lying still barely helps"
+      ]
     }
   },
   "chronic-salicylate-toxicity": {
@@ -48718,6 +51048,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "38.8\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 78 \u2014 takes aspirin and pepto-bismol daily",
+        "Mild dementia",
+        "Tinnitus \u2014 dismissed as age-related"
+      ],
+      "chiefComplaintPhrasing": [
+        "she's been confused for 3 days and we don't know why",
+        "she takes aspirin every day and something called Pepto",
+        "she has ringing in her ears and she's been breathing fast"
+      ]
     }
   },
   "guillain-barre": {
@@ -48859,6 +51201,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Campylobacter gastroenteritis 3 weeks ago",
+        "No prior neurological history",
+        "Age 38 \u2014 otherwise healthy"
+      ],
+      "chiefComplaintPhrasing": [
+        "I started with tingling in my feet and now I can barely walk",
+        "my legs are getting weaker every day \u2014 it started from the bottom",
+        "I had food poisoning about 3 weeks ago"
+      ]
     }
   },
   "febrile-neutropenia": {
@@ -49004,6 +51358,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "39.2\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Breast cancer \u2014 cycle 2 of AC chemotherapy",
+        "ANC nadir on day 10 \u2014 today",
+        "On prophylactic antibiotics \u2014 no prophylaxis ordered this cycle"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have fever and I'm getting chemo",
+        "I know this can be dangerous \u2014 I called right away",
+        "I feel terrible and my temperature is 39.4"
+      ]
     }
   },
   "hypercalcemia": {
@@ -49148,6 +51514,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Squamous cell lung cancer \u2014 diagnosed 2 months ago",
+        "Not on bisphosphonates",
+        "Weight loss 20 lbs in 3 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "I'm confused and constipated and urinating constantly",
+        "I've been nauseous for weeks",
+        "I have lung cancer \u2014 could this be related"
+      ]
     }
   },
   "displaced-femoral-neck-fracture": {
@@ -49291,6 +51669,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 82 \u2014 osteoporosis",
+        "Fell from standing",
+        "On calcium and vitamin D but not bisphosphonate"
+      ],
+      "chiefComplaintPhrasing": [
+        "I fell and I can't move my right leg",
+        "my hip hurts terribly",
+        "my leg looks shorter and turned outward"
+      ]
     }
   },
   "infectious-mononucleosis-with-tonsillar-hypertrophy": {
@@ -49436,6 +51826,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.8\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 19 \u2014 college student",
+        "Kissing contact \u2014 shared drinks",
+        "Received amoxicillin from urgent care for 'strep'"
+      ],
+      "chiefComplaintPhrasing": [
+        "sore throat so bad I can barely swallow",
+        "I have swollen lymph nodes all over",
+        "I took amoxicillin and broke out in a rash everywhere"
+      ]
     }
   },
   "complete-heart-block-v2": {
@@ -49578,6 +51980,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 74 \u2014 Lyme disease endemic area \u2014 untested",
+        "Degenerative conduction system disease",
+        "Fell twice this week \u2014 attributed to orthostasis"
+      ],
+      "chiefComplaintPhrasing": [
+        "I keep blacking out \u2014 three times this week",
+        "my heart feels very slow",
+        "I live near the woods and I've had a lot of tick exposure"
+      ]
     }
   },
   "gastroenteritis": {
@@ -49719,6 +52133,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.2\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No PMH",
+        "Group event \u2014 multiple people ill",
+        "No immunocompromise"
+      ],
+      "chiefComplaintPhrasing": [
+        "vomiting and diarrhea since last night \u2014 8 times",
+        "I can't keep anything down",
+        "multiple people at the party are sick too"
+      ]
     }
   },
   "long-qt-syndrome": {
@@ -49863,6 +52289,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.4\u00b0F",
       "SpO2": "88% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Started azithromycin 2 days ago for pneumonia",
+        "Also on methadone maintenance",
+        "QTc 480 on baseline ECG \u2014 missed"
+      ],
+      "chiefComplaintPhrasing": [
+        "I passed out and my heart was racing",
+        "I'm on methadone and they just gave me a Z-pack",
+        "I've had near-blackouts before but never like this"
+      ]
     }
   },
   "ovarian-pathology": {
@@ -50004,6 +52442,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.0\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior pelvic history",
+        "Age 26 \u2014 regular periods",
+        "BMI 22"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden sharp pain on the right side of my pelvis",
+        "I feel nauseous and I can't find a comfortable position",
+        "it came on out of nowhere while I was sleeping"
+      ]
     }
   },
   "myocarditis": {
@@ -50149,6 +52599,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.4\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 22 \u2014 college athlete",
+        "Viral URI 2 weeks ago",
+        "No prior cardiac history"
+      ],
+      "chiefComplaintPhrasing": [
+        "chest pain and I feel short of breath with exertion",
+        "I had a cold a couple weeks ago and I never fully recovered",
+        "my troponin is elevated and I'm scared"
+      ]
     }
   },
   "nstemiunstable-angina": {
@@ -50290,6 +52752,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known CAD \u2014 prior PCI to LAD 2 years ago",
+        "Hypertension \u2014 poorly controlled",
+        "Stopped aspirin 3 weeks ago \u2014 told by dentist"
+      ],
+      "chiefComplaintPhrasing": [
+        "chest pressure at rest \u2014 happened three times today",
+        "this is different from my usual angina",
+        "I stopped my aspirin before a dental procedure and kept forgetting to restart"
+      ]
     }
   },
   "takotsubo-cardiomyopathy": {
@@ -50431,6 +52905,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Post-menopausal female \u2014 age 63",
+        "Recent death of spouse \u2014 one week ago",
+        "No prior cardiac history"
+      ],
+      "chiefComplaintPhrasing": [
+        "chest pain and shortness of breath",
+        "I've been under extreme stress \u2014 my husband just died",
+        "my echo showed something wrong with my heart that they can't explain with a blockage"
+      ]
     }
   },
   "wpw-syndrome": {
@@ -50571,6 +53057,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "91%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior palpitations \u2014 dismissed",
+        "Age 28 \u2014 no prior cardiac workup",
+        "Athletic \u2014 competitive cyclist"
+      ],
+      "chiefComplaintPhrasing": [
+        "my heart is racing at 220 and I nearly passed out",
+        "this has happened before but never this fast",
+        "it's irregular and I feel terrible"
+      ]
     }
   },
   "druginduced-av-block": {
@@ -50848,6 +53346,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atrial fibrillation \u2014 started diltiazem 5 days ago",
+        "Also on digoxin \u2014 levels not checked",
+        "No prior conduction abnormalities"
+      ],
+      "chiefComplaintPhrasing": [
+        "dizzy and nearly passed out since starting my new medication",
+        "my heart feels like it keeps pausing",
+        "I started a new pill for my heart rhythm 5 days ago"
+      ]
     }
   },
   "new-onset-seizure": {
@@ -50991,6 +53501,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior seizure history",
+        "Alcohol use \u2014 6 drinks per day baseline",
+        "Sleep deprivation \u2014 no sleep in 48 hours"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had a seizure \u2014 my roommate watched the whole thing",
+        "I don't remember anything \u2014 I woke up on the floor",
+        "I was shaking for a couple minutes and then I was confused"
+      ]
     }
   },
   "migraine-with-aura": {
@@ -51132,6 +53654,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Migraines since age 20",
+        "Recent OCP initiation",
+        "Prior transient visual disturbance \u2014 dismissed"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had zigzag lines in my vision for 30 minutes then a terrible headache",
+        "this aura felt different \u2014 longer than usual",
+        "I started birth control last month"
+      ]
     }
   },
   "normal-pressure-hydrocephalus": {
@@ -51274,6 +53808,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 74 \u2014 slowly worsening gait over 2 years",
+        "Diagnosed with Alzheimer \u2014 no improvement on medications",
+        "Prior subarachnoid hemorrhage \u2014 5 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "I shuffle my feet like I'm stuck to the floor",
+        "I'm forgetting things and I keep having accidents with my bladder",
+        "I've been told it's Alzheimer but something feels different"
+      ]
     }
   },
   "simple-sbo": {
@@ -51417,6 +53963,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior appendectomy \u2014 15 years ago",
+        "No prior bowel obstruction",
+        "No hernias"
+      ],
+      "chiefComplaintPhrasing": [
+        "crampy pain all over my belly and I haven't had a bowel movement in 3 days",
+        "I'm vomiting and my abdomen is bloated",
+        "this happened once before after my appendix surgery"
+      ]
     }
   },
   "sbo-with-strangulation": {
@@ -51545,6 +54103,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.2\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior abdominal surgeries \u2014 3 total",
+        "Known adhesive disease",
+        "Prior SBO \u2014 managed conservatively"
+      ],
+      "chiefComplaintPhrasing": [
+        "the pain is constant now \u2014 it was crampy before",
+        "this is different from my last bowel obstruction \u2014 it's much worse",
+        "I have fever and the pain never lets up"
+      ]
     }
   },
   "bacterial-tracheitis": {
@@ -51671,6 +54241,18 @@ window.CRT_DATA = {
       "RR": "40",
       "Temp": "39.8\u00b0C",
       "SpO2": "88% on 10L face mask"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 4 \u2014 croup 5 days ago \u2014 improving",
+        "Now acutely worse",
+        "Previously healthy"
+      ],
+      "chiefComplaintPhrasing": [
+        "he had croup and was getting better, now he's much worse",
+        "high fever and he sounds terrible \u2014 barky and scared",
+        "he looks toxic \u2014 this is different from before"
+      ]
     }
   },
   "severe-croup": {
@@ -51814,6 +54396,18 @@ window.CRT_DATA = {
       "RR": "38",
       "Temp": "38.6\u00b0C",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 2 \u2014 previously healthy",
+        "Woke up with barking cough",
+        "No prior respiratory hospitalizations"
+      ],
+      "chiefComplaintPhrasing": [
+        "she woke up with a barking cough and can barely breathe",
+        "stridor even when she's calm",
+        "she's working so hard to breathe \u2014 I'm terrified"
+      ]
     }
   },
   "submersion-injury": {
@@ -51957,6 +54551,18 @@ window.CRT_DATA = {
       "RR": "36",
       "Temp": "34.8\u00b0C",
       "SpO2": "76% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 6 \u2014 found floating in pool",
+        "Unwitnessed submersion \u2014 duration unknown",
+        "Non-swimmer \u2014 no flotation device"
+      ],
+      "chiefComplaintPhrasing": [
+        "we found her in the pool \u2014 we don't know how long",
+        "she was unconscious when we pulled her out",
+        "she's breathing but she doesn't seem right"
+      ]
     }
   },
   "ruptured-aaa": {
@@ -52098,6 +54704,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.4\u00b0F",
       "SpO2": "92%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known 7.5cm AAA \u2014 repair scheduled next month",
+        "Hypertension \u2014 on 3 agents",
+        "Heavy smoker \u2014 50 pack-years"
+      ],
+      "chiefComplaintPhrasing": [
+        "sudden severe back and abdominal pain",
+        "I have an aneurysm and this feels like it ruptured",
+        "I feel faint and I can feel something pulsing in my belly"
+      ]
     }
   },
   "hip-dislocation": {
@@ -52240,6 +54858,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Total hip arthroplasty \u2014 posterior approach \u2014 6 weeks ago",
+        "Fell sitting down on a low couch",
+        "Physical therapy \u2014 2 sessions completed"
+      ],
+      "chiefComplaintPhrasing": [
+        "I sat down and my hip made a pop and now I can't move it",
+        "the pain is severe \u2014 nothing like normal post-op pain",
+        "my leg looks different \u2014 shorter and rotated inward"
+      ]
     }
   },
   "intertrochanteric-fracture": {
@@ -52383,6 +55013,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 84 \u2014 osteoporosis \u2014 on calcium, not bisphosphonate",
+        "Fell from standing",
+        "Multiple prior falls"
+      ],
+      "chiefComplaintPhrasing": [
+        "I fell getting up from the toilet and I can't get up",
+        "my right hip is in terrible pain",
+        "my leg looks like it's turned out"
+      ]
     }
   },
   "thiazideinduced-hyponatremia": {
@@ -52526,6 +55168,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 76 \u2014 started hydrochlorothiazide 6 weeks ago for blood pressure",
+        "Low body weight",
+        "Drinks a lot of water \u2014 was told to stay hydrated"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been confused since this week",
+        "I started a new blood pressure pill about six weeks ago",
+        "I drink a lot of water \u2014 could that be causing this"
+      ]
     }
   },
   "rhabdomyolysis": {
@@ -52670,6 +55324,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.0\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Completed first CrossFit workout \u2014 extreme exertion",
+        "No prior muscle disease",
+        "Took a statin \u2014 recently started"
+      ],
+      "chiefComplaintPhrasing": [
+        "my urine is dark brown after working out",
+        "I'm so sore I can barely move",
+        "I just started a new fitness program \u2014 the workout was brutal"
+      ]
     }
   },
   "pneumonia-v2": {
@@ -52817,6 +55483,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.4\u00b0C",
       "SpO2": "93% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "COPD \u2014 GOLD Stage II",
+        "Age 65 \u2014 former smoker",
+        "Influenza vaccine \u2014 up to date"
+      ],
+      "chiefComplaintPhrasing": [
+        "fever and cough with yellow sputum for 5 days",
+        "I'm short of breath more than usual",
+        "my COPD is making this feel worse"
+      ]
     }
   },
   "retropharyngeal-abscess": {
@@ -52959,6 +55637,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "39.6\u00b0C",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 5 \u2014 prior URI 1 week ago",
+        "No prior throat infections",
+        "No immunocompromise"
+      ],
+      "chiefComplaintPhrasing": [
+        "fever and he won't turn his neck at all",
+        "he's drooling and can barely swallow",
+        "he sounds muffled and won't eat anything"
+      ]
     }
   },
   "reactive-arthritis": {
@@ -53103,6 +55793,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.2\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 28 \u2014 GI illness 3 weeks ago \u2014 Campylobacter",
+        "HLA-B27 positive \u2014 not previously known",
+        "No prior joint problems"
+      ],
+      "chiefComplaintPhrasing": [
+        "joint pain in my knee and ankle \u2014 3 weeks after my food poisoning",
+        "I also have redness in my eye",
+        "I had bad diarrhea from bad chicken a few weeks ago"
+      ]
     }
   },
   "inherited-coagulopathy": {
@@ -53245,6 +55947,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hemophilia A \u2014 on factor VIII prophylaxis",
+        "Skipped last two factor infusions",
+        "Prior hemarthrosis \u2014 left knee"
+      ],
+      "chiefComplaintPhrasing": [
+        "my right knee swelled up and I can barely bend it",
+        "I missed my factor infusions this week",
+        "I have hemophilia and I know this is a bleed"
+      ]
     }
   },
   "dilutional-coagulopathy": {
@@ -53392,6 +56106,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "36.4\u00b0C",
       "SpO2": "88% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Major trauma \u2014 massive hemorrhage",
+        "Received 12 units pRBC, 4 units FFP",
+        "Now actively bleeding despite transfusion"
+      ],
+      "chiefComplaintPhrasing": [
+        "bleeding from everywhere \u2014 the surgical sites, IVs, everywhere",
+        "we're giving product but she keeps bleeding",
+        "her coags are terrible and getting worse"
+      ]
     }
   },
   "corneal-abrasionkeratitis": {
@@ -53534,6 +56260,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Contact lens worn overnight \u2014 fell asleep with lenses in",
+        "No prior ocular infections",
+        "Daily disposable lenses \u2014 worn for multiple days"
+      ],
+      "chiefComplaintPhrasing": [
+        "my eye is red and incredibly painful",
+        "it feels like something is stuck in my eye",
+        "I slept in my contacts last night and now I can barely open my eye"
+      ]
     }
   },
   "brain-metastasis": {
@@ -53676,6 +56414,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "NSCLC \u2014 Stage IV \u2014 on pembrolizumab",
+        "Known brain metastases \u2014 last MRI 3 months ago",
+        "No prior seizures"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had a seizure \u2014 I have lung cancer",
+        "I've had headaches that are getting worse",
+        "my vision seems off on the right side"
+      ]
     }
   },
   "primary-brain-tumor": {
@@ -53817,6 +56567,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior neurological history",
+        "Age 58 \u2014 no family history of brain tumors",
+        "Progressive cognitive decline for 4 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "my headaches wake me up in the morning",
+        "my right hand is weaker than it used to be",
+        "my family says I'm not myself \u2014 my personality changed"
+      ]
     }
   },
   "cns-lymphoma": {
@@ -53959,6 +56721,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "HIV \u2014 CD4 200",
+        "Not on ART",
+        "Progressive confusion for 3 weeks"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been getting more confused every week",
+        "I have HIV and my CD4 is low",
+        "I can't find words and my balance is off"
+      ]
     }
   },
   "todd-paralysis": {
@@ -54101,6 +56875,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known epilepsy \u2014 focal onset",
+        "Breakthrough seizure \u2014 missed carbamazepine dose",
+        "No prior Todd paralysis"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had a seizure and now I can't move my right arm",
+        "it started after my seizure \u2014 I didn't injure myself",
+        "I missed my seizure medication yesterday"
+      ]
     }
   },
   "optic-neuritis": {
@@ -54244,6 +57030,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior neurological diagnosis",
+        "Age 28 \u2014 female",
+        "Prior brief episode of hand numbness \u2014 dismissed"
+      ],
+      "chiefComplaintPhrasing": [
+        "my vision in the left eye went blurry over 2 days",
+        "it hurts to move my eye",
+        "I'm scared \u2014 this came out of nowhere"
+      ]
     }
   },
   "bilateral-lumbar-radiculopathy": {
@@ -54386,6 +57184,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 68 \u2014 lumbar spinal stenosis on MRI",
+        "Bilateral leg pain with walking",
+        "Prior single-level discectomy \u2014 10 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "my legs hurt and go numb when I walk more than a block",
+        "I have to lean forward on a shopping cart to get relief",
+        "the pain goes from my butt down both legs"
+      ]
     }
   },
   "perianal-abscess": {
@@ -54531,6 +57341,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.2\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 32 \u2014 no prior anorectal surgery",
+        "Crohn disease \u2014 not previously diagnosed",
+        "Recurrent fistula \u2014 first episode"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have a painful lump near my rectum",
+        "it's getting bigger every day \u2014 now I have fever",
+        "I can't sit down \u2014 the pain is unbearable"
+      ]
     }
   },
   "epididymitis": {
@@ -54674,6 +57496,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.0\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 24 \u2014 sexually active",
+        "New partner 2 weeks ago",
+        "No prior STIs"
+      ],
+      "chiefComplaintPhrasing": [
+        "one testicle is swollen and really painful",
+        "it came on gradually over a few days",
+        "I also have burning when I urinate"
+      ]
     }
   },
   "mcas-mast-cell": {
@@ -54817,6 +57651,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent episodes for 4 years \u2014 flushing, hypotension, hives",
+        "Told it was anxiety",
+        "Baseline tryptase 11 \u2014 elevated but not 2x+20"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have these episodes where I flush, get hives, and my BP drops",
+        "they happen with different triggers \u2014 exercise, heat, stress",
+        "multiple ER visits \u2014 they always say it's anxiety"
+      ]
     }
   },
   "hyperkalemic-cardiac-emergency": {
@@ -54961,6 +57807,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Adrenal insufficiency \u2014 on fludrocortisone",
+        "Forgot fludrocortisone for 5 days",
+        "ESRD \u2014 on peritoneal dialysis"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel profoundly weak \u2014 I can barely move my arms",
+        "I forgot my mineralocorticoid for almost a week",
+        "my EKG looks terrible \u2014 they said it's critical"
+      ]
     }
   },
   "autoimmune-blistering-disease": {
@@ -55120,6 +57978,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.0\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 72 \u2014 no prior skin conditions",
+        "Hypertension on furosemide",
+        "Prior pruritic urticarial plaques for 6 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have large blisters all over my body",
+        "they started as itchy hives a few months ago",
+        "I'm elderly and my skin looks like it's covered in blisters"
+      ]
     }
   },
   "orthostatic-hypotension": {
@@ -55279,6 +58149,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Parkinson disease \u2014 on levodopa/carbidopa",
+        "Age 72",
+        "On tamsulosin for BPH"
+      ],
+      "chiefComplaintPhrasing": [
+        "every time I stand up I get dizzy and nearly fall",
+        "I've passed out getting out of bed twice this week",
+        "I'm on several medications \u2014 could they be causing this"
+      ]
     }
   },
   "hypovolemic-shock-from-gastroenteritis": {
@@ -55423,6 +58305,18 @@ window.CRT_DATA = {
       "RR": "38",
       "Temp": "38.2\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 18 months \u2014 previously healthy",
+        "Viral gastroenteritis \u2014 3 days",
+        "Unable to keep anything down including oral rehydration"
+      ],
+      "chiefComplaintPhrasing": [
+        "she's been vomiting and having diarrhea for 3 days",
+        "she won't drink anything and she's barely urinating",
+        "her eyes look sunken and she's not her normal self"
+      ]
     }
   },
   "ibs-management": {
@@ -55566,6 +58460,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "IBS-D for 8 years",
+        "Failed multiple dietary interventions and antispasmodics",
+        "Anxiety \u2014 contributing to flares"
+      ],
+      "chiefComplaintPhrasing": [
+        "cramping and loose stool almost every day",
+        "I know my triggers but I still can't control it",
+        "stress makes it so much worse \u2014 I've missed work because of this"
+      ]
     }
   },
   "complex-migraine": {
@@ -55709,6 +58615,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hemiplegic migraines \u2014 family history",
+        "On topiramate \u2014 partially effective",
+        "Prior stroke workup \u2014 negative"
+      ],
+      "chiefComplaintPhrasing": [
+        "I get a migraine with weakness in my right arm",
+        "it always looks like a stroke \u2014 I've been to the ER many times",
+        "my mother has the same thing"
+      ]
     }
   },
   "structural-lesion": {
@@ -55851,6 +58769,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 52 \u2014 no neurological symptoms",
+        "MRI done for headaches \u2014 incidental finding",
+        "No family history of brain tumors"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had an MRI for headaches and they found something",
+        "they said it lights up with contrast",
+        "I don't have any symptoms \u2014 now I'm terrified"
+      ]
     }
   },
   "vitreous-hemorrhage": {
@@ -55994,6 +58924,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 A1c 10.2%",
+        "Proliferative diabetic retinopathy \u2014 laser not completed",
+        "No prior vitreous hemorrhage"
+      ],
+      "chiefComplaintPhrasing": [
+        "my vision went red suddenly \u2014 like looking through blood",
+        "I see floaters everywhere \u2014 it happened out of nowhere",
+        "I have diabetes and I know my eye disease is bad"
+      ]
     }
   },
   "severe-cellulitis": {
@@ -56140,6 +59082,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "39.0\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior lower extremity cellulitis \u2014 same leg",
+        "Obesity",
+        "Lymphedema \u2014 chronic"
+      ],
+      "chiefComplaintPhrasing": [
+        "the redness is spreading fast \u2014 I drew a line and it's already past it",
+        "I have fever and I feel terrible",
+        "this has happened before but it spread faster this time"
+      ]
     }
   },
   "peritonsillar-abscess-v2": {
@@ -56285,6 +59239,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Recurrent tonsillitis \u2014 4 episodes this year",
+        "Age 22",
+        "No prior peritonsillar abscess"
+      ],
+      "chiefComplaintPhrasing": [
+        "my throat is the worst it's ever been",
+        "it hurts to even open my mouth",
+        "my voice sounds like I have a hot potato in my mouth"
+      ]
     }
   },
   "peritonsillar-cellulitis": {
@@ -56429,6 +59395,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.4\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Tonsillitis 5 days ago \u2014 on amoxicillin",
+        "Improving \u2014 now slightly worse again",
+        "Age 17"
+      ],
+      "chiefComplaintPhrasing": [
+        "throat worse again after getting a little better",
+        "I'm on antibiotics but now it's swelling more on one side",
+        "I can swallow \u2014 it's painful but I can do it"
+      ]
     }
   },
   "submandibular-sialolithiasis-with-secondary-infection": {
@@ -56574,6 +59552,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "39.4\u00b0C",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Dental abscess \u2014 tooth extraction 1 week ago",
+        "Type 2 diabetes \u2014 poorly controlled",
+        "Age 58"
+      ],
+      "chiefComplaintPhrasing": [
+        "my jaw and floor of my mouth are so swollen I can barely open my mouth",
+        "I had a tooth pulled last week and it got infected",
+        "I'm drooling and I can't swallow \u2014 I'm scared about my airway"
+      ]
     }
   },
   "meckel-diverticulum": {
@@ -56716,6 +59706,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "37.8\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 6 \u2014 previously healthy",
+        "Painless bright red rectal bleeding \u2014 2 episodes",
+        "No abdominal pain"
+      ],
+      "chiefComplaintPhrasing": [
+        "she had blood in the toilet \u2014 no pain at all",
+        "this is the second time \u2014 it scared us",
+        "her belly feels fine but there was a lot of blood"
+      ]
     }
   },
   "small-bowel-volvulus": {
@@ -56859,6 +59861,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.2\u00b0C",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior Roux-en-Y gastric bypass \u2014 3 years ago",
+        "Recurrent abdominal pain \u2014 attributed to adhesions",
+        "No prior volvulus"
+      ],
+      "chiefComplaintPhrasing": [
+        "severe crampy pain that won't stop",
+        "I've had abdominal pain before but this is completely different \u2014 constant",
+        "I'm vomiting bile and my belly is swelling"
+      ]
     }
   },
   "dvt-with-phlegmasia": {
@@ -57001,6 +60015,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "38.6\u00b0C",
       "SpO2": "91%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Pancreatic cancer \u2014 hypercoagulable",
+        "On anticoagulation \u2014 recently held for procedure",
+        "Prior DVT \u2014 treated"
+      ],
+      "chiefComplaintPhrasing": [
+        "my entire left leg is swollen, blue, and in agony",
+        "the whole leg \u2014 not just the calf",
+        "my blood thinners were on hold and now this"
+      ]
     }
   },
   "nonocclusive-mesenteric-ischemia": {
@@ -57143,6 +60169,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "38.4\u00b0C",
       "SpO2": "89% on 4L NC"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Cardiogenic shock \u2014 admitted to ICU 2 days ago",
+        "On vasopressors \u2014 norepinephrine",
+        "Low cardiac output \u2014 EF 15%"
+      ],
+      "chiefComplaintPhrasing": [
+        "my belly has been hurting since they put me on the pressors",
+        "I can't tell if I'm making any urine",
+        "I'm in the ICU and the belly pain started yesterday \u2014 it's subtle but concerning"
+      ]
     }
   },
   "xla-brutons": {
@@ -57287,6 +60325,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "39.2\u00b0C",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Male infant \u2014 age 8 months",
+        "4 serious bacterial infections since age 5 months",
+        "No issues prior to age 5 months \u2014 maternal antibodies present"
+      ],
+      "chiefComplaintPhrasing": [
+        "he keeps getting serious bacterial infections",
+        "his tonsils and lymph nodes are basically absent",
+        "he was fine as a newborn but started getting sick at 5 months"
+      ]
     }
   },
   "digeorge-22q11": {
@@ -57430,6 +60480,18 @@ window.CRT_DATA = {
       "RR": "58",
       "Temp": "37.4\u00b0C",
       "SpO2": "82%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Neonate \u2014 tetralogy of Fallot \u2014 cardiac surgery planned",
+        "Hypocalcemia found on routine labs \u2014 day 2 of life",
+        "Dysmorphic features noted by neonatologist"
+      ],
+      "chiefComplaintPhrasing": [
+        "the baby is jittery and having low calcium",
+        "she has a heart defect and she has unusual facial features",
+        "we're worried about her immune system too"
+      ]
     }
   },
   "hypersensitivity-pneumonitis": {
@@ -57574,6 +60636,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "88% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Bird owner \u2014 two cockatiels",
+        "Progressive shortness of breath over 6 months",
+        "Prior diagnosis of 'atypical asthma' \u2014 unresponsive to inhalers"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've been short of breath for 6 months \u2014 getting worse",
+        "my inhalers do nothing",
+        "I feel better when I travel for work \u2014 away from my birds"
+      ]
     }
   },
   "pneumonia-on-copd-v2": {
@@ -57720,6 +60794,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "38.8\u00b0C",
       "SpO2": "82% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "COPD \u2014 GOLD Stage III on home oxygen",
+        "Prior hospitalization for COPD exacerbation 4 months ago",
+        "On home 2L O2 \u2014 now needing more"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe \u2014 much worse than my usual COPD",
+        "fever and I'm coughing up brown stuff",
+        "I turned up my oxygen and it didn't help"
+      ]
     }
   },
   "rheumatoid-arthritis-new": {
@@ -57863,6 +60949,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "37.8\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior joint disease",
+        "Age 42 \u2014 female",
+        "Morning stiffness lasting over 2 hours for 6 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "my hands and wrists are swollen and stiff every morning",
+        "it's symmetric \u2014 both sides at the same time",
+        "it takes more than two hours for the stiffness to get better"
+      ]
     }
   },
   "septic-arthritis-v2": {
@@ -58007,6 +61105,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.8\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Total knee arthroplasty \u2014 8 weeks ago",
+        "Wound healing complication \u2014 superficial infection treated",
+        "Immunocompromised \u2014 on methotrexate for RA"
+      ],
+      "chiefComplaintPhrasing": [
+        "my knee replacement got hot and swollen \u2014 it's different from surgical swelling",
+        "I have fever and the knee is killing me",
+        "I had a skin infection near the incision a few weeks ago"
+      ]
     }
   },
   "delirium-elderly": {
@@ -58154,6 +61264,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.6\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 82 \u2014 admitted 2 days ago for hip fracture",
+        "Baseline mild cognitive impairment",
+        "Foley catheter in place \u2014 UTI suspected"
+      ],
+      "chiefComplaintPhrasing": [
+        "he's not himself since the surgery",
+        "he's trying to pull out his IV and he thinks he's at home",
+        "this confusion started yesterday \u2014 he was fine at admission"
+      ]
     }
   },
   "migraine-management": {
@@ -58297,6 +61419,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Episodic migraines \u2014 8-12 per month",
+        "Failed amitriptyline and topiramate",
+        "Non-adherent to medication diary"
+      ],
+      "chiefComplaintPhrasing": [
+        "I get migraines more than once a week",
+        "the medications I've tried didn't work",
+        "I can't function \u2014 I've missed work 3 times this month"
+      ]
     }
   },
   "musculoskeletal": {
@@ -58439,6 +61573,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior back surgery",
+        "Desk worker \u2014 sedentary",
+        "Lifted a heavy box yesterday"
+      ],
+      "chiefComplaintPhrasing": [
+        "I threw my back out lifting",
+        "sharp pain in my lower back \u2014 can barely stand up straight",
+        "it happened before but usually gets better in a few days"
+      ]
     }
   },
   "fracture-pain": {
@@ -58582,6 +61728,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 74 \u2014 osteoporosis \u2014 not on treatment",
+        "Prior wrist fracture 3 years ago \u2014 Colles fracture",
+        "Minor fall from standing"
+      ],
+      "chiefComplaintPhrasing": [
+        "my back is killing me after a minor fall",
+        "I bent over to pick something up and felt a pop",
+        "I have osteoporosis and it gets worse every year"
+      ]
     }
   },
   "gastric-malignancy": {
@@ -58723,6 +61881,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 62 \u2014 H. pylori treated 10 years ago",
+        "Unintentional weight loss \u2014 25 lbs in 4 months",
+        "Iron deficiency anemia \u2014 new"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've lost 25 pounds without trying",
+        "I feel full after just a few bites",
+        "I have stomach pain and I've been anemic"
+      ]
     }
   },
   "tonsillar-malignancy": {
@@ -58862,6 +62032,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 46 \u2014 non-smoker",
+        "HPV vaccination status \u2014 unvaccinated",
+        "Unilateral neck mass for 2 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "I felt a lump in my neck 2 months ago",
+        "one tonsil is much larger than the other",
+        "I'm a non-smoker but I've heard HPV can cause this"
+      ]
     }
   },
   "meningioma": {
@@ -59002,6 +62184,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 54 \u2014 female",
+        "New-onset seizure \u2014 focal onset",
+        "No prior neurological history"
+      ],
+      "chiefComplaintPhrasing": [
+        "I had a seizure out of nowhere",
+        "I've had mild headaches for months \u2014 I ignored them",
+        "the MRI shows a mass attached to the brain lining"
+      ]
     }
   },
   "ectopic-pregnancy-workup": {
@@ -59142,6 +62336,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 28 \u2014 LMP 7 weeks ago",
+        "Prior ectopic pregnancy \u2014 right tube",
+        "IUD removed 3 months ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "pelvic pain and vaginal bleeding \u2014 I think I might be pregnant",
+        "I've had this before \u2014 I lost a tube",
+        "I feel dizzy and the pain is getting worse fast"
+      ]
     }
   },
   "epididymoorchitis": {
@@ -59285,6 +62491,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.2\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 32 \u2014 sexually active, new partner",
+        "No prior STIs",
+        "Unprotected intercourse 3 weeks ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "my testicle and the tube behind it are very tender",
+        "the swelling came on gradually over 4 days",
+        "I also have some discharge and it burns when I urinate"
+      ]
     }
   },
   "torsion-of-appendix-testis": {
@@ -59424,6 +62642,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 11 \u2014 no prior scrotal problems",
+        "Onset during physical activity",
+        "No nausea or vomiting"
+      ],
+      "chiefComplaintPhrasing": [
+        "sharp pain at the top of my testicle \u2014 started this morning",
+        "it's not as severe as I'd expect \u2014 more like a 5 out of 10",
+        "there's a small blue dot visible through the skin"
+      ]
     }
   },
   "testicular-traumarupture": {
@@ -59564,6 +62794,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 22 \u2014 sports injury \u2014 took a direct blow",
+        "No prior scrotal surgery",
+        "Pain was immediate"
+      ],
+      "chiefComplaintPhrasing": [
+        "I took a shot to the groin during practice",
+        "the swelling came on immediately \u2014 it's massive",
+        "I can't tell where the testicle is anymore"
+      ]
     }
   },
   "lightning-strike-injury": {
@@ -59706,6 +62948,18 @@ window.CRT_DATA = {
       "RR": "0",
       "Temp": "98.4\u00b0F",
       "SpO2": "Undetectable"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No PMH",
+        "Outdoor athletic event \u2014 thunderstorm rolled in",
+        "Multiple victims at same event"
+      ],
+      "chiefComplaintPhrasing": [
+        "she was struck by lightning on the field",
+        "she was unresponsive when we found her",
+        "there are burns and her heart stopped"
+      ]
     }
   },
   "coral-snake-envenomation": {
@@ -59848,6 +63102,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Hiking in Southeast \u2014 coral snake encountered",
+        "Bite occurred 2 hours ago",
+        "Local swelling minimal \u2014 dismissed initially"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was bitten by what I think was a coral snake",
+        "the bite barely hurts \u2014 almost nothing at first",
+        "now I feel weak and my speech is getting slurred"
+      ]
     }
   },
   "aortic-saddle-embolus": {
@@ -59973,6 +63239,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.4\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Atrial fibrillation \u2014 not anticoagulated",
+        "Age 68",
+        "Prior embolic stroke \u2014 right MCA"
+      ],
+      "chiefComplaintPhrasing": [
+        "both legs went numb and painful at the same time",
+        "it happened suddenly \u2014 like a switch was flipped",
+        "neither leg has a pulse"
+      ]
     }
   },
   "acute-sma-thrombosis": {
@@ -60098,6 +63376,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe atherosclerosis \u2014 aortoiliac disease",
+        "Prior mesenteric angina for 6 months \u2014 food fear and weight loss",
+        "Known SMA stenosis \u2014 deferred intervention"
+      ],
+      "chiefComplaintPhrasing": [
+        "my stomach pain after eating has gotten much worse \u2014 now it's constant",
+        "I've lost 30 pounds because I was afraid to eat",
+        "this is different \u2014 it doesn't go away anymore"
+      ]
     }
   },
   "acute-thrombotic-occlusion": {
@@ -60223,6 +63513,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Peripheral arterial disease \u2014 ABI 0.6",
+        "Claudication \u2014 1 block",
+        "Prior femoral-popliteal bypass \u2014 4 years ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "my leg went cold and numb suddenly",
+        "the bypass I had before \u2014 I think it failed",
+        "I can't move my foot and there's no pulse"
+      ]
     }
   },
   "vascular-injury-with-limb-ischemia": {
@@ -60365,6 +63667,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.4\u00b0F",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Gunshot wound to the right thigh \u2014 45 minutes ago",
+        "No prior vascular history",
+        "No anticoagulants"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was shot in the leg and there's no pulse below",
+        "the limb is cold and I can't move it",
+        "there's active bleeding and I don't feel my foot"
+      ]
     }
   },
   "incarcerated-hernia-with-strangulation": {
@@ -60508,6 +63822,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "39.2\u00b0C",
       "SpO2": "95%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Known left inguinal hernia \u2014 refused repair for 3 years",
+        "Chronic constipation",
+        "Age 72"
+      ],
+      "chiefComplaintPhrasing": [
+        "the hernia is stuck and much more painful than usual",
+        "I have fever and the skin over it looks dark",
+        "I can't push it back in and it's been stuck for 8 hours"
+      ]
     }
   },
   "incarcerated-incisional-hernia": {
@@ -60650,6 +63976,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.4\u00b0C",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Prior exploratory laparotomy \u2014 5 years ago",
+        "Obesity \u2014 BMI 44",
+        "Known incisional hernia \u2014 repair deferred"
+      ],
+      "chiefComplaintPhrasing": [
+        "the bulge at my scar is stuck and won't go back in",
+        "I'm vomiting and I haven't had a bowel movement in 4 days",
+        "it's more tender than usual but I don't have fever yet"
+      ]
     }
   },
   "mesenteric-lymphadenitis": {
@@ -60791,6 +64129,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.6\u00b0C",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 9 \u2014 viral URI 2 weeks ago",
+        "No prior abdominal surgery",
+        "No family history of Crohn disease"
+      ],
+      "chiefComplaintPhrasing": [
+        "belly pain on the right side \u2014 we were worried about appendicitis",
+        "fever and the pain isn't as severe as appendicitis sounds",
+        "she had a cold two weeks ago"
+      ]
     }
   },
   "lung-cancer-staging": {
@@ -60933,6 +64283,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "95% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Smoker \u2014 40 pack-years",
+        "Age 64 \u2014 found on CT done for COPD monitoring",
+        "Weight loss \u2014 15 lbs over 3 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "they found a mass in my lung on a CT scan",
+        "I've been coughing for months \u2014 I thought it was my COPD",
+        "I've lost weight without trying and I'm scared"
+      ]
     }
   },
   "lung-cancer-post-obstructive": {
@@ -61075,6 +64437,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.8\u00b0C",
       "SpO2": "91% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Smoker \u2014 35 pack-years",
+        "Age 61",
+        "Recurrent left lower lobe pneumonia \u2014 3rd episode in 18 months"
+      ],
+      "chiefComplaintPhrasing": [
+        "I keep getting pneumonia in the same spot",
+        "antibiotics always help but it comes right back",
+        "they finally did a CT and found something"
+      ]
     }
   },
   "lung-cancer-with-postobstructive-process": {
@@ -61218,6 +64592,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Smoker \u2014 45 pack-years",
+        "Age 67",
+        "Face and arm swelling noticed 2 weeks ago"
+      ],
+      "chiefComplaintPhrasing": [
+        "my face is puffy and my arms are swollen",
+        "the veins on my chest are more visible than usual",
+        "I feel more short of breath and I have a new cough"
+      ]
     }
   },
   "scid-ada": {
@@ -61347,6 +64733,18 @@ window.CRT_DATA = {
       "RR": "58",
       "Temp": "38.8\u00b0C",
       "SpO2": "78% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 3 months \u2014 never gained weight since birth",
+        "Recurrent fungal and bacterial infections",
+        "Maternal family history \u2014 sibling died in infancy of infection"
+      ],
+      "chiefComplaintPhrasing": [
+        "he has PCP pneumonia at 3 months \u2014 he's never thrived",
+        "every time we think he's better he gets another infection",
+        "the immunologist said he has no T cells, no B cells, no NK cells"
+      ]
     }
   },
   "cgd-xlinked": {
@@ -61472,6 +64870,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "39.4\u00b0C",
       "SpO2": "93%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 7 \u2014 recurrent catalase-positive bacterial and fungal infections",
+        "Hepatic abscess \u2014 current admission",
+        "Prior lymphadenitis and osteomyelitis"
+      ],
+      "chiefComplaintPhrasing": [
+        "recurrent abscesses since he was a toddler \u2014 now it's in his liver",
+        "always the weird infections \u2014 Staph, Aspergillus, Serratia",
+        "the infections are deep \u2014 not just skin stuff"
+      ]
     }
   },
   "hypereosinophilic-syndrome": {
@@ -61630,6 +65040,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "38.2\u00b0C",
       "SpO2": "94%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Eosinophilia on CBC for 2 years \u2014 never followed up",
+        "New cardiac symptoms \u2014 dyspnea",
+        "Weight loss and fatigue"
+      ],
+      "chiefComplaintPhrasing": [
+        "my eosinophils have been very high for 2 years and no one explained it",
+        "now I'm short of breath and the echocardiogram showed something",
+        "I have rashes and I feel terrible"
+      ]
     }
   },
   "postconcussion-with-intracranial-hypertension": {
@@ -61773,6 +65195,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Concussion 3 weeks ago \u2014 contact sport",
+        "Headaches worsening despite rest",
+        "Vision changes \u2014 new blurriness"
+      ],
+      "chiefComplaintPhrasing": [
+        "my head is pounding since the concussion \u2014 worse than it should be",
+        "I have blurry vision and it's getting worse",
+        "the eye doctor saw swelling behind my eye"
+      ]
     }
   },
   "musculoskeletal-back-pain": {
@@ -61917,6 +65351,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Chronic low back pain for 3 years",
+        "Failed NSAIDs, PT, and gabapentin",
+        "Unable to work \u2014 on short-term disability"
+      ],
+      "chiefComplaintPhrasing": [
+        "my back has been bad for 3 years and nothing has worked",
+        "I can't work and I'm getting depressed about it",
+        "I need something different \u2014 I'm at my limit"
+      ]
     }
   },
   "pathologic-fracture": {
@@ -62058,6 +65504,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Breast cancer \u2014 Stage IV \u2014 on palliative chemotherapy",
+        "Known bone metastases \u2014 lumbar spine and pelvis",
+        "Minor fall \u2014 stepped off a curb"
+      ],
+      "chiefComplaintPhrasing": [
+        "I stepped off a curb and my hip gave way",
+        "the pain is immediate and severe \u2014 much worse than I'd expect",
+        "I have cancer that spread to my bones"
+      ]
     }
   },
   "pubic-ramus-fracture": {
@@ -62199,6 +65657,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 81 \u2014 osteoporosis",
+        "Ground-level fall \u2014 2 days ago",
+        "Hip x-ray done in the ER was read as normal"
+      ],
+      "chiefComplaintPhrasing": [
+        "I fell and my hip and groin hurt terribly",
+        "the x-ray was normal but I still can't walk",
+        "the pain is in my groin \u2014 I can't put weight on it"
+      ]
     }
   },
   "surgical-bleeding": {
@@ -62343,6 +65813,18 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "36.6\u00b0C",
       "SpO2": "88% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Liver transplant \u2014 18 hours ago",
+        "Coagulopathy \u2014 known baseline low platelets and prolonged INR",
+        "Massive transfusion protocol already initiated once"
+      ],
+      "chiefComplaintPhrasing": [
+        "she's bleeding from the abdominal drains \u2014 doesn't stop",
+        "her INR is 2.8 and platelets are 48,000",
+        "we've given FFP and platelets but she keeps bleeding"
+      ]
     }
   },
   "necrotizing-fasciitis-of-neck": {
@@ -62486,6 +65968,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "40.4\u00b0C",
       "SpO2": "86% on 10L face mask"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Submandibular abscess \u2014 tooth extraction 10 days ago",
+        "Type 2 diabetes \u2014 A1c 12%",
+        "Penicillin allergy \u2014 labeled"
+      ],
+      "chiefComplaintPhrasing": [
+        "my neck is swelling fast \u2014 I can barely open my mouth",
+        "I had a tooth pulled and then an abscess and now this",
+        "I feel terrible \u2014 fever and I can feel something crunchy in my neck"
+      ]
     }
   },
   "abpa-aspergillus": {
@@ -62598,6 +66092,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.2\u00b0C",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Severe persistent asthma \u2014 on high-dose ICS",
+        "Recurrent chest infiltrates \u2014 same areas",
+        "IgE total was checked once \u2014 extremely elevated"
+      ],
+      "chiefComplaintPhrasing": [
+        "I keep having pneumonia in the same spots",
+        "I cough up brown mucus plugs sometimes",
+        "my asthma is so hard to control and no one knows why"
+      ]
     }
   },
   "acne-management": {
@@ -62708,6 +66214,18 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Moderate-severe nodulocystic acne \u2014 3 years",
+        "Failed 2 topical retinoids, oral doxycycline, and minocycline",
+        "Scarring progressing"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've tried everything and my acne keeps scarring",
+        "I've done antibiotics and topical creams \u2014 nothing works long-term",
+        "I heard about Accutane \u2014 I want to understand the risks"
+      ]
     }
   },
   "anxietypanic-attack": {
@@ -62810,6 +66328,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Generalized anxiety disorder \u2014 on sertraline",
+        "Prior workup \u2014 cardiac and pulmonary normal",
+        "Multiple ER visits for identical episodes"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel like I'm having a heart attack \u2014 again",
+        "chest tight, heart racing, I can't breathe",
+        "this has happened before and they always say my heart is fine"
+      ]
     }
   },
   "brain-masstumor": {
@@ -62912,6 +66442,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 55 \u2014 no prior neurological history",
+        "Headaches for 4 months \u2014 progressive",
+        "CT head done in ER \u2014 enhancing mass found"
+      ],
+      "chiefComplaintPhrasing": [
+        "the headaches are worst in the morning",
+        "I'm having trouble with my right hand \u2014 weakness",
+        "my family brought me in because they think I'm acting differently"
+      ]
     }
   },
   "cellulitis": {
@@ -63055,6 +66597,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "38.4\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior skin infections",
+        "Minor trauma \u2014 insect bite 4 days ago",
+        "Peripheral vascular disease \u2014 mild"
+      ],
+      "chiefComplaintPhrasing": [
+        "my leg is red, warm, and tender",
+        "it started after an insect bite and keeps spreading",
+        "I drew a line yesterday and it already crossed it"
+      ]
     }
   },
   "cerebral-contusion": {
@@ -63157,6 +66711,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Motor vehicle collision \u2014 1 hour ago",
+        "GCS 14 on arrival \u2014 now 12",
+        "No anticoagulation"
+      ],
+      "chiefComplaintPhrasing": [
+        "I was in a car accident and I hit my head",
+        "I was briefly confused and now I'm getting worse",
+        "I had a headache and now I can't remember things clearly"
+      ]
     }
   },
   "crswNP-biologics": {
@@ -63259,6 +66825,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "CRS with nasal polyps \u2014 3 prior surgeries",
+        "Asthma \u2014 severe eosinophilic",
+        "Failed dupilumab \u2014 partial response only"
+      ],
+      "chiefComplaintPhrasing": [
+        "I've had three sinus surgeries and they all grew back",
+        "I can't smell anything and I'm congested constantly",
+        "dupilumab helped a little but not enough \u2014 I need something different"
+      ]
     }
   },
   "crswNP-dupilumab": {
@@ -63361,6 +66939,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "CRS with nasal polyps \u2014 refractory",
+        "Moderate-severe atopic dermatitis",
+        "On high-dose ICS nasal spray \u2014 not adequate control"
+      ],
+      "chiefComplaintPhrasing": [
+        "I can't breathe through my nose at all",
+        "my smell is completely gone",
+        "I've tried sprays and surgery \u2014 nothing lasts"
+      ]
     }
   },
   "diffuse-axonal-injury": {
@@ -63463,6 +67053,18 @@ window.CRT_DATA = {
       "RR": "10",
       "Temp": "38.2\u00b0C",
       "SpO2": "88% on 15L NRB"
+    },
+    "patientSummary": {
+      "pmh": [
+        "High-speed motor vehicle accident",
+        "GCS 6 on arrival",
+        "No anticoagulation"
+      ],
+      "chiefComplaintPhrasing": [
+        "she was in a high-speed crash \u2014 she's unconscious",
+        "she opened her eyes briefly but now she's not responding",
+        "the CT looks less bad than her exam"
+      ]
     }
   },
   "giant-cell-arteritis-with-ophthalmic": {
@@ -63565,6 +67167,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "38.0\u00b0C",
       "SpO2": "98%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 68 \u2014 prior PMR \u2014 on prednisone",
+        "ESR 98, CRP 62 \u2014 checked last week",
+        "New headache and jaw pain \u2014 2 weeks"
+      ],
+      "chiefComplaintPhrasing": [
+        "new terrible headache over my temples",
+        "my vision went dark in my right eye for a minute \u2014 it came back",
+        "my jaw hurts so much I stopped eating solid food"
+      ]
     }
   },
   "infiltrative-cardiomyopathy": {
@@ -63707,6 +67321,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "90% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 74 \u2014 age > 60 and male \u2014 increased TTR risk",
+        "HFpEF \u2014 not responding to standard therapy",
+        "Low-voltage ECG despite thick walls on echo"
+      ],
+      "chiefComplaintPhrasing": [
+        "I have heart failure but the medications aren't working",
+        "my echo shows thick walls but my EKG looks small",
+        "carpal tunnel syndrome in both hands \u2014 had surgery twice"
+      ]
     }
   },
   "maria-santos": {
@@ -63809,6 +67435,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "38.7\u00b0C",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "No prior pulmonary history",
+        "Age 58 \u2014 lives in assisted living",
+        "Influenza vaccination \u2014 not received this season"
+      ],
+      "chiefComplaintPhrasing": [
+        "fever and cough for 5 days \u2014 getting worse",
+        "I'm short of breath just walking to the bathroom",
+        "I feel terrible \u2014 more than a cold"
+      ]
     }
   },
   "medication-overdose": {
@@ -63953,6 +67591,18 @@ window.CRT_DATA = {
       "RR": "6",
       "Temp": "96.8\u00b0F",
       "SpO2": "82% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Depression \u2014 recent psychiatric hospitalization",
+        "Found unresponsive by roommate",
+        "Multiple pill bottles found at scene"
+      ],
+      "chiefComplaintPhrasing": [
+        "she was found unconscious \u2014 we don't know what she took",
+        "her roommate said there were lots of pill bottles",
+        "she's been very depressed lately"
+      ]
     }
   },
   "metabolic": {
@@ -64055,6 +67705,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "38.2\u00b0C",
       "SpO2": "96%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Type 2 diabetes \u2014 poorly controlled",
+        "Chronic kidney disease Stage 3",
+        "Recent metformin use \u2014 held during contrast study, not restarted properly"
+      ],
+      "chiefComplaintPhrasing": [
+        "I feel confused and I'm breathing fast",
+        "my blood sugar is high and something else is off",
+        "my doctor checked my labs and said to come in immediately"
+      ]
     }
   },
   "psoriasis-moderate-severe": {
@@ -64164,6 +67826,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Plaque psoriasis for 12 years \u2014 BSA 25%",
+        "Failed methotrexate and cyclosporine",
+        "Psoriatic arthritis \u2014 hands and spine"
+      ],
+      "chiefComplaintPhrasing": [
+        "my psoriasis covers most of my body and it's embarrassing",
+        "the arthritis in my hands is getting worse",
+        "I've been on multiple medications \u2014 none work long-term"
+      ]
     }
   },
   "croup-epiglottitis-ddx": {
@@ -64266,6 +67940,18 @@ window.CRT_DATA = {
       "RR": "36",
       "Temp": "39.2\u00b0C",
       "SpO2": "92% on room air"
+    },
+    "patientSummary": {
+      "pmh": [
+        "Age 3 \u2014 unvaccinated against H. influenzae type b",
+        "Rapid onset \u2014 4 hours",
+        "No prior croup episodes"
+      ],
+      "chiefComplaintPhrasing": [
+        "he was completely fine and now he won't move \u2014 sitting totally still",
+        "he's drooling and won't let us touch him",
+        "he has no barking cough \u2014 this feels different"
+      ]
     }
   },
   "angelman-syndrome": {
