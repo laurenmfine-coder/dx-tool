@@ -332,7 +332,9 @@ window.CRT_DATA = {
       "familyHistory": "My father had a heart attack at 52. He survived but had bypass surgery.",
       "socialSmokingAlcohol": "I smoked a pack a day for 20 years \u2014 quit 5 years ago. I drink a beer or two on weekends.",
       "socialOccupation": "I'm a high school principal. Pretty stressful job."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "stemi-v2": {
     "id": "stemi-v2",
@@ -501,7 +503,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of heart failure.",
       "socialSmokingAlcohol": "I quit smoking 5 years ago. Occasional alcohol.",
       "socialOccupation": "Retired factory worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "stemi-v3": {
     "id": "stemi-v3",
@@ -654,7 +658,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of a heart attack at 60.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sepsis-v2": {
     "id": "sepsis-v2",
@@ -808,7 +814,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had diabetes.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sepsis-v3": {
     "id": "sepsis-v3",
@@ -946,7 +954,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired. Lives in skilled nursing facility."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pericarditis-v1": {
     "id": "pericarditis-v1",
@@ -1232,7 +1242,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink on weekends.",
       "socialOccupation": "Medical student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nstemi-v1": {
     "id": "nstemi-v1",
@@ -1610,7 +1622,9 @@ window.CRT_DATA = {
       "familyHistory": "Strong family history of coronary artery disease.",
       "socialSmokingAlcohol": "Former smoker. I drink occasionally.",
       "socialOccupation": "Retired firefighter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "appendicitis-v1": {
     "id": "appendicitis-v1",
@@ -1890,7 +1904,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "College senior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aaa-v1": {
     "id": "aaa-v1",
@@ -2188,7 +2204,9 @@ window.CRT_DATA = {
       "familyHistory": "My father had something wrong with his aorta.",
       "socialSmokingAlcohol": "Former smoker \u2014 thirty pack-year history. Rare alcohol.",
       "socialOccupation": "Retired plumber."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pe-v1": {
     "id": "pe-v1",
@@ -2507,7 +2525,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had DVT during pregnancy.",
       "socialSmokingAlcohol": "I smoke socially \u2014 weekends. I drink socially.",
       "socialOccupation": "Marketing consultant \u2014 frequent international travel."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "chf-v1": {
     "id": "chf-v1",
@@ -2809,7 +2829,9 @@ window.CRT_DATA = {
       "familyHistory": "Hypertension in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "copd-v1": {
     "id": "copd-v1",
@@ -3175,7 +3197,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung disease in family.",
       "socialSmokingAlcohol": "Quit smoking fifteen years ago \u2014 forty pack-year history. I don't drink.",
       "socialOccupation": "Retired factory worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sah-v1": {
     "id": "sah-v1",
@@ -3461,7 +3485,9 @@ window.CRT_DATA = {
       "familyHistory": "My uncle died of a brain aneurysm.",
       "socialSmokingAlcohol": "I smoke half a pack a day. I drink wine on weekends.",
       "socialOccupation": "High school principal. I was exercising when this hit."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "meningitis-v1": {
     "id": "meningitis-v1",
@@ -3762,7 +3788,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially on weekends. I don't smoke.",
       "socialOccupation": "College sophomore."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dka-v1": {
     "id": "dka-v1",
@@ -4112,7 +4140,9 @@ window.CRT_DATA = {
       "familyHistory": "Aunt has type 1 diabetes.",
       "socialSmokingAlcohol": "I don't smoke. I drink occasionally at parties.",
       "socialOccupation": "College freshman, living in a dorm."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "stroke-v1": {
     "id": "stroke-v1",
@@ -4452,7 +4482,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had a stroke at 75.",
       "socialSmokingAlcohol": "I quit smoking 10 years ago. Occasional wine with dinner.",
       "socialOccupation": "Retired engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "tension-ptx": {
     "id": "tension-ptx",
@@ -4785,7 +4817,9 @@ window.CRT_DATA = {
       "familyHistory": "Non-contributory.",
       "socialSmokingAlcohol": "I smoke. Social drinker.",
       "socialOccupation": "Warehouse worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "epidural-hematoma": {
     "id": "epidural-hematoma",
@@ -5091,7 +5125,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing significant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "College junior. Biochemistry major."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "vt-syncope": {
     "id": "vt-syncope",
@@ -5408,7 +5444,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died suddenly at 55 \u2014 unknown cause.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Elementary school principal."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "gi-bleed-syncope": {
     "id": "gi-bleed-syncope",
@@ -5715,7 +5753,9 @@ window.CRT_DATA = {
       "familyHistory": "Colon cancer in father.",
       "socialSmokingAlcohol": "Former smoker. I drink a glass of wine with dinner.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "status-epilepticus": {
     "id": "status-epilepticus",
@@ -6061,7 +6101,9 @@ window.CRT_DATA = {
       "familyHistory": "Cousin has epilepsy.",
       "socialSmokingAlcohol": "I don't smoke. I had a couple of drinks last night at a party.",
       "socialOccupation": "College student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "new-seizure-mass": {
     "id": "new-seizure-mass",
@@ -6342,7 +6384,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung cancer in father. Mother had breast cancer.",
       "socialSmokingAlcohol": "I smoke a pack a day \u2014 thirty years. I drink on weekends.",
       "socialOccupation": "Advertising executive."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "apap-overdose": {
     "id": "apap-overdose",
@@ -6660,7 +6704,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression and substance use in family.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Barista. Graduate school dropout."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "salicylate-toxicity": {
     "id": "salicylate-toxicity",
@@ -6939,7 +6985,9 @@ window.CRT_DATA = {
       "familyHistory": "Arthritis in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "epiglottitis": {
     "id": "epiglottitis",
@@ -7203,7 +7251,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I vape. I drink occasionally.",
       "socialOccupation": "Teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "intussusception": {
     "id": "intussusception",
@@ -7479,7 +7529,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 10 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cauda-equina": {
     "id": "cauda-equina",
@@ -7731,7 +7783,9 @@ window.CRT_DATA = {
       "familyHistory": "Back problems run in family.",
       "socialSmokingAlcohol": "I smoke half a pack. I drink on weekends.",
       "socialOccupation": "Warehouse supervisor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aortic-dissection-back": {
     "id": "aortic-dissection-back",
@@ -8030,7 +8084,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of aortic dissection. Marfan syndrome suspected in our family.",
       "socialSmokingAlcohol": "I smoke a pack a day. Occasional alcohol.",
       "socialOccupation": "Construction supervisor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anaphylaxis": {
     "id": "anaphylaxis",
@@ -8357,7 +8413,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has food allergies.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Graduate student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ace-angioedema": {
     "id": "ace-angioedema",
@@ -8608,7 +8666,9 @@ window.CRT_DATA = {
       "familyHistory": "No known angioedema in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ectopic-pregnancy": {
     "id": "ectopic-pregnancy",
@@ -8892,7 +8952,9 @@ window.CRT_DATA = {
       "socialSmokingAlcohol": "I smoke occasionally. I drink socially.",
       "socialOccupation": "Nurse assistant.",
       "socialSexualGeneral": "Sexually active, one partner. Not using contraception currently."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eclampsia": {
     "id": "eclampsia",
@@ -9224,7 +9286,9 @@ window.CRT_DATA = {
       "socialSmokingAlcohol": "I don't smoke or drink \u2014 especially during pregnancy.",
       "socialOccupation": "Elementary school teacher. Lives with husband.",
       "substanceSocial": "No tobacco, no alcohol, no recreational drugs."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nms": {
     "id": "nms",
@@ -9506,7 +9570,9 @@ window.CRT_DATA = {
       "familyHistory": "Schizophrenia in family.",
       "socialSmokingAlcohol": "I smoke. I don't drink.",
       "socialOccupation": "Group home resident."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "serotonin-syndrome": {
     "id": "serotonin-syndrome",
@@ -9777,7 +9843,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Occupational therapist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "septic-shock-urosepsis": {
     "id": "septic-shock-urosepsis",
@@ -10118,7 +10186,9 @@ window.CRT_DATA = {
       "familyHistory": "I don't remember.",
       "socialSmokingAlcohol": "I don't smoke or drink. I live at Sunrise Care Center.",
       "socialOccupation": "Retired. I have a daughter who visits on Sundays."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "neutropenic-fever": {
     "id": "neutropenic-fever",
@@ -10431,7 +10501,9 @@ window.CRT_DATA = {
       "familyHistory": "Colon cancer in father.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired firefighter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "angle-closure-glaucoma": {
     "id": "angle-closure-glaucoma",
@@ -10750,7 +10822,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had glaucoma.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "crao": {
     "id": "crao",
@@ -11060,7 +11134,9 @@ window.CRT_DATA = {
       "familyHistory": "Stroke in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired cardiologist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "testicular-torsion": {
     "id": "testicular-torsion",
@@ -11350,7 +11426,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I'm 16. I don't drink or smoke.",
       "socialOccupation": "High school junior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "fournier-gangrene": {
     "id": "fournier-gangrene",
@@ -11654,7 +11732,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes in family.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily.",
       "socialOccupation": "Truck driver."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nec-fasciitis": {
     "id": "nec-fasciitis",
@@ -11958,7 +12038,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes everywhere in my family.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends.",
       "socialOccupation": "Warehouse worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sjs-ten": {
     "id": "sjs-ten",
@@ -12256,7 +12338,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pharmacist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "thyroid-storm": {
     "id": "thyroid-storm",
@@ -12589,7 +12673,9 @@ window.CRT_DATA = {
       "familyHistory": "My mother has thyroid disease.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Yoga instructor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "adrenal-crisis": {
     "id": "adrenal-crisis",
@@ -12935,7 +13021,9 @@ window.CRT_DATA = {
       "familyHistory": "Autoimmune conditions in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Elementary school librarian."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-limb-ischemia": {
     "id": "acute-limb-ischemia",
@@ -13256,7 +13344,9 @@ window.CRT_DATA = {
       "familyHistory": "Vascular disease throughout family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "mesenteric-ischemia": {
     "id": "mesenteric-ischemia",
@@ -13571,7 +13661,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease throughout the family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired schoolteacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hip-fracture-anticoag": {
     "id": "hip-fracture-anticoag",
@@ -13888,7 +13980,9 @@ window.CRT_DATA = {
       "familyHistory": "Osteoporosis in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "subdural-hematoma": {
     "id": "subdural-hematoma",
@@ -14224,7 +14318,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired pharmacist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "heat-stroke": {
     "id": "heat-stroke",
@@ -14531,7 +14627,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't drink during the season. I don't smoke.",
       "socialOccupation": "College football player. Junior year."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-hypothermia": {
     "id": "severe-hypothermia",
@@ -14869,7 +14967,9 @@ window.CRT_DATA = {
       "familyHistory": "I don't know.",
       "socialSmokingAlcohol": "I drink heavily \u2014 vodka. I smoke a pack a day.",
       "socialOccupation": "Homeless \u2014 staying in shelters when space is available."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sbo-strangulation": {
     "id": "sbo-strangulation",
@@ -15186,7 +15286,9 @@ window.CRT_DATA = {
       "familyHistory": "Crohn's disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Emergency medicine nurse practitioner \u2014 I know when obstruction becomes dangerous."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-pancreatitis": {
     "id": "severe-pancreatitis",
@@ -15518,7 +15620,9 @@ window.CRT_DATA = {
       "familyHistory": "Gallstones in mother.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Construction project manager."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cardiac-tamponade": {
     "id": "cardiac-tamponade",
@@ -15828,7 +15932,9 @@ window.CRT_DATA = {
       "familyHistory": "Non-contributory.",
       "socialSmokingAlcohol": "I quit smoking when I was diagnosed 18 months ago. I used to smoke a pack a day for 30 years.",
       "socialOccupation": "Retired teacher. Lives with husband."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "complete-heart-block": {
     "id": "complete-heart-block",
@@ -16173,7 +16279,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Middle school science teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "peritonsillar-abscess": {
     "id": "peritonsillar-abscess",
@@ -16480,7 +16588,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Graduate student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ludwigs-angina": {
     "id": "ludwigs-angina",
@@ -16778,7 +16888,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes in my family.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends.",
       "socialOccupation": "Day laborer. No insurance \u2014 that's why I couldn't see the dentist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ttp": {
     "id": "ttp",
@@ -17121,7 +17233,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pediatric nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dic-massive-transfusion": {
     "id": "dic-massive-transfusion",
@@ -17457,7 +17571,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink \u2014 I'm pregnant.",
       "socialOccupation": "Physical therapist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "septic-arthritis": {
     "id": "septic-arthritis",
@@ -17662,7 +17778,9 @@ window.CRT_DATA = {
       "familyHistory": "Gout in family.",
       "socialSmokingAlcohol": "Former smoker. I drink beer on weekends.",
       "socialOccupation": "Retired plumber."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "compartment-syndrome": {
     "id": "compartment-syndrome",
@@ -17946,7 +18064,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "Physical therapist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hyperkalemia-cardiac": {
     "id": "hyperkalemia-cardiac",
@@ -18239,7 +18359,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes and kidney disease in my family.",
       "socialSmokingAlcohol": "I don't smoke. I have the occasional beer even though I'm not supposed to.",
       "socialOccupation": "Warehouse manager. I have trouble getting to dialysis with my work schedule."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-hyponatremia": {
     "id": "severe-hyponatremia",
@@ -18538,7 +18660,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression in my family. No seizure disorder.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Nurse practitioner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-cholecystitis": {
     "id": "acute-cholecystitis",
@@ -18771,7 +18895,9 @@ window.CRT_DATA = {
       "familyHistory": "Gallstones in mother.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Nurse practitioner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-coronary-syndrome": {
     "id": "acute-coronary-syndrome",
@@ -19030,7 +19156,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had bypass surgery at 58. Brother had a heart attack at 55.",
       "socialSmokingAlcohol": "I smoke a pack a day \u2014 thirty years. I drink beer on weekends.",
       "socialOccupation": "Electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-pancreatitis": {
     "id": "acute-pancreatitis",
@@ -19248,7 +19376,9 @@ window.CRT_DATA = {
       "familyHistory": "Father was an alcoholic.",
       "socialSmokingAlcohol": "I drink heavily \u2014 most days. I smoke a pack a day.",
       "socialOccupation": "Bar manager \u2014 the irony isn't lost on me."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "asthma-exacerbation": {
     "id": "asthma-exacerbation",
@@ -19495,7 +19625,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma in mother.",
       "socialSmokingAlcohol": "I vape \u2014 I know I shouldn't. I don't drink.",
       "socialOccupation": "College student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "chf-exacerbation": {
     "id": "chf-exacerbation",
@@ -19731,7 +19863,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease throughout family.",
       "socialSmokingAlcohol": "Former smoker. I drink a beer occasionally.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sepsisseptic-shock": {
     "id": "sepsisseptic-shock",
@@ -20006,7 +20140,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had diabetes. Father had a stroke.",
       "socialSmokingAlcohol": "I don't smoke. I have a glass of wine occasionally.",
       "socialOccupation": "Retired teacher. Lives with my daughter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pneumonia": {
     "id": "pneumonia",
@@ -20251,7 +20387,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends.",
       "socialOccupation": "Accountant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "autoimmune-hemolytic-anemia": {
     "id": "autoimmune-hemolytic-anemia",
@@ -20466,7 +20604,9 @@ window.CRT_DATA = {
       "familyHistory": "Autoimmune disease throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "High school art teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cardiac-syncope": {
     "id": "cardiac-syncope",
@@ -20682,7 +20822,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died suddenly at 60.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired mail carrier."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "infective-endocarditis": {
     "id": "infective-endocarditis",
@@ -20925,7 +21067,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "IV heroin use. I smoke cigarettes. I drink occasionally.",
       "socialOccupation": "Unemployed. I've been trying to get into a methadone program."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "massive-pe-with-rv-failure": {
     "id": "massive-pe-with-rv-failure",
@@ -21140,7 +21284,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had a blood clot.",
       "socialSmokingAlcohol": "I don't smoke. Social drinker.",
       "socialOccupation": "Accountant. Been mostly immobile since the surgery."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "migraine": {
     "id": "migraine",
@@ -21352,7 +21498,9 @@ window.CRT_DATA = {
       "familyHistory": "Migraines in mother and sister.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine on weekends.",
       "socialOccupation": "Pediatric resident \u2014 on call last night."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "myxedema-coma": {
     "id": "myxedema-coma",
@@ -21584,7 +21732,9 @@ window.CRT_DATA = {
       "familyHistory": "Thyroid disease runs in the family.",
       "socialSmokingAlcohol": "I don't smoke or drink. I live alone \u2014 my son checks on me on Sundays.",
       "socialOccupation": "Retired nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "perforated-peptic-ulcer": {
     "id": "perforated-peptic-ulcer",
@@ -21845,7 +21995,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had stomach ulcers.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink a bottle of wine with dinner most nights.",
       "socialOccupation": "Restaurant owner \u2014 very stressful job."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pneumothorax": {
     "id": "pneumothorax",
@@ -22082,7 +22234,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has Marfan syndrome.",
       "socialSmokingAlcohol": "I smoke \u2014 I know it makes this worse. I don't drink.",
       "socialOccupation": "Computer programmer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pulmonary-embolism-syncope": {
     "id": "pulmonary-embolism-syncope",
@@ -22327,7 +22481,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had a pulmonary embolism.",
       "socialSmokingAlcohol": "I smoke half a pack. I drink on weekends.",
       "socialOccupation": "Sales representative \u2014 frequent long drives."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pyelonephritis-urosepsis": {
     "id": "pyelonephritis-urosepsis",
@@ -22563,7 +22719,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had frequent UTIs.",
       "socialSmokingAlcohol": "I don't smoke. I drink socially.",
       "socialOccupation": "Second-year medical student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "renal-colic": {
     "id": "renal-colic",
@@ -22823,7 +22981,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had kidney stones.",
       "socialSmokingAlcohol": "I drink \u2014 probably not enough water and too much coffee. I don't smoke.",
       "socialOccupation": "Engineer. Flies a lot for work."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sle-flare-with-cytopenias": {
     "id": "sle-flare-with-cytopenias",
@@ -23067,7 +23227,9 @@ window.CRT_DATA = {
       "familyHistory": "Lupus in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Rheumatology nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "vasovagal-syncope": {
     "id": "vasovagal-syncope",
@@ -23280,7 +23442,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has vasovagal syncope.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pre-medical student \u2014 working on the phobia."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dress-syndrome": {
     "id": "dress-syndrome",
@@ -23528,7 +23692,9 @@ window.CRT_DATA = {
       "familyHistory": "I am of Southeast Asian ancestry \u2014 I've since read this is more common in my population.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer occasionally.",
       "socialOccupation": "Restaurant owner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sjsten-overlap": {
     "id": "sjsten-overlap",
@@ -23792,7 +23958,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Medical student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hereditary-angioedema": {
     "id": "hereditary-angioedema",
@@ -24059,7 +24227,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother and maternal uncle have HAE. Maternal uncle died of an airway attack before modern treatments.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Emergency medicine PA."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "erythema-multiforme-major": {
     "id": "erythema-multiforme-major",
@@ -24270,7 +24440,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "College senior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-allergic-reaction": {
     "id": "severe-allergic-reaction",
@@ -24529,7 +24701,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Kindergarten teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acquired-c1esterase-inhibitor-deficiency": {
     "id": "acquired-c1esterase-inhibitor-deficiency",
@@ -24769,7 +24943,9 @@ window.CRT_DATA = {
       "familyHistory": "No family history of angioedema.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired professor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-angioedema": {
     "id": "allergic-angioedema",
@@ -25027,7 +25203,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pharmacist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "idiopathic-angioedema": {
     "id": "idiopathic-angioedema",
@@ -25265,7 +25443,9 @@ window.CRT_DATA = {
       "familyHistory": "No family history of angioedema.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Cardiologist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eczema-herpeticum": {
     "id": "eczema-herpeticum",
@@ -25505,7 +25685,9 @@ window.CRT_DATA = {
       "familyHistory": "Eczema and asthma in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Veterinary technician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "fpies-acute": {
     "id": "fpies-acute",
@@ -25728,7 +25910,9 @@ window.CRT_DATA = {
       "familyHistory": "Food allergies in family.",
       "socialSmokingAlcohol": "She is 7 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "mastocytosis": {
     "id": "mastocytosis",
@@ -25989,7 +26173,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Nurse practitioner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-urticaria": {
     "id": "acute-urticaria",
@@ -26218,7 +26404,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Physical therapist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "drug-allergy-vancomycin-rms": {
     "id": "drug-allergy-vancomycin-rms",
@@ -26439,7 +26627,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired mechanic."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "food-allergy-oit-reaction": {
     "id": "food-allergy-oit-reaction",
@@ -26668,7 +26858,9 @@ window.CRT_DATA = {
       "familyHistory": "Food allergies in family.",
       "socialSmokingAlcohol": "I am 12 years old.",
       "socialOccupation": "Middle school \u2014 seventh grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "insect-sting-anaphylaxis": {
     "id": "insect-sting-anaphylaxis",
@@ -26938,7 +27130,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Landscape architect."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "venom-immunotherapy-reaction": {
     "id": "venom-immunotherapy-reaction",
@@ -27174,7 +27368,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink on weekends.",
       "socialOccupation": "Beekeeper \u2014 yes, I'm aware of the irony."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hereditary-angioedema-v2": {
     "id": "hereditary-angioedema-v2",
@@ -27410,7 +27606,9 @@ window.CRT_DATA = {
       "familyHistory": "Father and grandfather have HAE.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "College sophomore \u2014 far from family support."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acquired-c1esterase-inhibitor-deficiency-v2": {
     "id": "acquired-c1esterase-inhibitor-deficiency-v2",
@@ -27626,7 +27824,9 @@ window.CRT_DATA = {
       "familyHistory": "No family history of angioedema \u2014 this is acquired.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired hematologist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-angioedema-v2": {
     "id": "allergic-angioedema-v2",
@@ -27857,7 +28057,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Office manager."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "idiopathic-angioedema-v2": {
     "id": "idiopathic-angioedema-v2",
@@ -28057,7 +28259,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "International flight attendant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "insect-sting-anaphylaxis-v2": {
     "id": "insect-sting-anaphylaxis-v2",
@@ -28294,7 +28498,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Landscaper. Uninsured \u2014 medications and refills are a financial strain."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "venom-immunotherapy-reaction-v2": {
     "id": "venom-immunotherapy-reaction-v2",
@@ -28514,7 +28720,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I drink occasionally.",
       "socialOccupation": "Retired firefighter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-allergic-reaction-v2": {
     "id": "severe-allergic-reaction-v2",
@@ -28724,7 +28932,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired school principal."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-allergic-reaction-v3": {
     "id": "severe-allergic-reaction-v3",
@@ -28939,7 +29149,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink. NCAA athlete.",
       "socialOccupation": "Division I swimmer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eczema-herpeticum-v2": {
     "id": "eczema-herpeticum-v2",
@@ -29149,7 +29361,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has severe eczema and asthma.",
       "socialSmokingAlcohol": "She is 2 years old.",
       "socialOccupation": "Full-time toddler."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "erythema-multiforme-major-v2": {
     "id": "erythema-multiforme-major-v2",
@@ -29359,7 +29573,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pediatric dentist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "food-allergy-oit-reaction-v2": {
     "id": "food-allergy-oit-reaction-v2",
@@ -29571,7 +29787,9 @@ window.CRT_DATA = {
       "familyHistory": "Food allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm a competitive swimmer.",
       "socialOccupation": "High school junior. Swim team."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "fpies-acute-v2": {
     "id": "fpies-acute-v2",
@@ -29778,7 +29996,9 @@ window.CRT_DATA = {
       "familyHistory": "Eczema and asthma in family.",
       "socialSmokingAlcohol": "He is 6 years old.",
       "socialOccupation": "First grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "fpies-chronic-v2": {
     "id": "fpies-chronic-v2",
@@ -29990,7 +30210,9 @@ window.CRT_DATA = {
       "familyHistory": "Eczema in sister.",
       "socialSmokingAlcohol": "He is 4 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "mastocytosis-v2": {
     "id": "mastocytosis-v2",
@@ -30233,7 +30455,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has similar 'allergic' episodes \u2014 undiagnosed.",
       "socialSmokingAlcohol": "I don't smoke. I've stopped alcohol \u2014 it triggers me.",
       "socialOccupation": "Nurse \u2014 I had to fight the medical system to be believed."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "drug-allergy-vancomycin-rms-v2": {
     "id": "drug-allergy-vancomycin-rms-v2",
@@ -30444,7 +30668,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired machinist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-urticaria-v2": {
     "id": "acute-urticaria-v2",
@@ -30637,7 +30863,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "College freshman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "chronic-spontaneous-urticaria-v2": {
     "id": "chronic-spontaneous-urticaria-v2",
@@ -30849,7 +31077,9 @@ window.CRT_DATA = {
       "familyHistory": "Autoimmune disease throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Rheumatology nurse \u2014 I know what my labs might mean."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "urticarial-vasculitis-v2": {
     "id": "urticarial-vasculitis-v2",
@@ -31060,7 +31290,9 @@ window.CRT_DATA = {
       "familyHistory": "Lupus in aunt.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Rheumatology nurse \u2014 I understand what this pattern suggests."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cvid-presentation-v2": {
     "id": "cvid-presentation-v2",
@@ -31269,7 +31501,9 @@ window.CRT_DATA = {
       "familyHistory": "Brother has a similar immunodeficiency \u2014 undiagnosed.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Kindergarten teacher \u2014 and yes, I know the exposure risk."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nsaid-hypersensitivity-v2": {
     "id": "nsaid-hypersensitivity-v2",
@@ -31479,7 +31713,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma in family.",
       "socialSmokingAlcohol": "I don't smoke. Occasional wine \u2014 I can't taste it anymore anyway.",
       "socialOccupation": "Executive chef \u2014 anosmia devastated my career."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "penicillin-allergy-delabeling-v2": {
     "id": "penicillin-allergy-delabeling-v2",
@@ -31689,7 +31925,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm pregnant.",
       "socialOccupation": "Neonatologist \u2014 I understand what's at stake for neonatal GBS prophylaxis."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "peanut-allergy-anaphylaxis-v2": {
     "id": "peanut-allergy-anaphylaxis-v2",
@@ -31898,7 +32136,9 @@ window.CRT_DATA = {
       "familyHistory": "Multiple food allergies in family.",
       "socialSmokingAlcohol": "I'm 15. I don't drink or smoke.",
       "socialOccupation": "High school sophomore."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "milk-allergy-infant-v2": {
     "id": "milk-allergy-infant-v2",
@@ -32110,7 +32350,9 @@ window.CRT_DATA = {
       "familyHistory": "Food allergies in older sibling \u2014 peanut allergy.",
       "socialSmokingAlcohol": "He is 2 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-conjunctivitis-severe-v2": {
     "id": "allergic-conjunctivitis-severe-v2",
@@ -32319,7 +32561,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma and allergies throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm 16.",
       "socialOccupation": "High school junior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-rhinitis-uncontrolled-v2": {
     "id": "allergic-rhinitis-uncontrolled-v2",
@@ -32530,7 +32774,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Veterinary technician \u2014 career at risk."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "atopic-dermatitis-severe-v2": {
     "id": "atopic-dermatitis-severe-v2",
@@ -32774,7 +33020,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease in both parents.",
       "socialSmokingAlcohol": "He is 7 years old.",
       "socialOccupation": "Second grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "contact-dermatitis-occupational-v2": {
     "id": "contact-dermatitis-occupational-v2",
@@ -33002,7 +33250,9 @@ window.CRT_DATA = {
       "familyHistory": "Eczema in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Hairstylist \u2014 career ending if I can't resolve this."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eoe-adult-v2": {
     "id": "eoe-adult-v2",
@@ -33228,7 +33478,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine with dinner.",
       "socialOccupation": "Gastroenterologist \u2014 yes, the irony is not lost on me."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eoe-pediatric-v2": {
     "id": "eoe-pediatric-v2",
@@ -33439,7 +33691,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has swallowing problems \u2014 undiagnosed.",
       "socialSmokingAlcohol": "He is 9 years old.",
       "socialOccupation": "Fourth grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-conjunctivitis-severe": {
     "id": "allergic-conjunctivitis-severe",
@@ -33652,7 +33906,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Landscape architecture student \u2014 outdoor study is nearly impossible in spring."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-rhinitis-uncontrolled": {
     "id": "allergic-rhinitis-uncontrolled",
@@ -33865,7 +34121,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has allergic rhinitis.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer on weekends.",
       "socialOccupation": "Elementary school teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "atopic-dermatitis-severe": {
     "id": "atopic-dermatitis-severe",
@@ -34080,7 +34338,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Graduate student \u2014 eczema has significantly impacted my studies and relationships."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "chronic-spontaneous-urticaria": {
     "id": "chronic-spontaneous-urticaria",
@@ -34276,7 +34536,9 @@ window.CRT_DATA = {
       "familyHistory": "Autoimmune thyroid disease in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine on weekends.",
       "socialOccupation": "Nurse practitioner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "contact-dermatitis-occupational": {
     "id": "contact-dermatitis-occupational",
@@ -34495,7 +34757,9 @@ window.CRT_DATA = {
       "familyHistory": "Eczema in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "ICU nurse \u2014 frequent latex and disinfectant exposure."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cvid-presentation": {
     "id": "cvid-presentation",
@@ -34713,7 +34977,9 @@ window.CRT_DATA = {
       "familyHistory": "Brother had similar immunodeficiency \u2014 died of pneumonia at 35.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Elementary school teacher \u2014 frequent exposure."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eoe-adult": {
     "id": "eoe-adult",
@@ -34947,7 +35213,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease in family. Father also has swallowing problems \u2014 undiagnosed.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer socially.",
       "socialOccupation": "Attorney."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "eoe-pediatric": {
     "id": "eoe-pediatric",
@@ -35143,7 +35411,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease throughout family. Father has swallowing problems \u2014 undiagnosed.",
       "socialSmokingAlcohol": "He is 10 years old.",
       "socialOccupation": "Fifth grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "fpies-chronic": {
     "id": "fpies-chronic",
@@ -35339,7 +35609,9 @@ window.CRT_DATA = {
       "familyHistory": "Eczema in father. Food allergies in sister.",
       "socialSmokingAlcohol": "He is 5 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "milk-allergy-infant": {
     "id": "milk-allergy-infant",
@@ -35535,7 +35807,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has food allergies.",
       "socialSmokingAlcohol": "She is 3 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nsaid-hypersensitivity": {
     "id": "nsaid-hypersensitivity",
@@ -35752,7 +36026,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pharmacist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "peanut-allergy-anaphylaxis": {
     "id": "peanut-allergy-anaphylaxis",
@@ -35988,7 +36264,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has food allergies.",
       "socialSmokingAlcohol": "I'm 9 years old.",
       "socialOccupation": "Third grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "penicillin-allergy-delabeling": {
     "id": "penicillin-allergy-delabeling",
@@ -36200,7 +36478,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I drink occasionally.",
       "socialOccupation": "Emergency medicine physician \u2014 I know this needs formal evaluation."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "urticarial-vasculitis": {
     "id": "urticarial-vasculitis",
@@ -36411,7 +36691,9 @@ window.CRT_DATA = {
       "familyHistory": "Lupus in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Dermatology nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anaphylaxis-v2": {
     "id": "anaphylaxis-v2",
@@ -36632,7 +36914,9 @@ window.CRT_DATA = {
       "familyHistory": "No known allergies.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired nurse. I know enough to know the beta-blocker is making this worse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anaphylaxis-v3": {
     "id": "anaphylaxis-v3",
@@ -36860,7 +37144,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Operating room nurse, fifteen-year career."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anaphylaxis-v4": {
     "id": "anaphylaxis-v4",
@@ -37078,7 +37364,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has food allergies.",
       "socialSmokingAlcohol": "I'm 16. I don't drink or smoke.",
       "socialOccupation": "High school junior. Peer pressure around food is real."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anaphylaxis-v5": {
     "id": "anaphylaxis-v5",
@@ -37309,7 +37597,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has eczema and food allergies.",
       "socialSmokingAlcohol": "I am 7 years old.",
       "socialOccupation": "Second grade. My family speaks Spanish at home."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ace-angioedema-v2": {
     "id": "ace-angioedema-v2",
@@ -37553,7 +37843,9 @@ window.CRT_DATA = {
       "familyHistory": "Hypertension and heart disease throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired hospital administrator."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dress-syndrome-v2": {
     "id": "dress-syndrome-v2",
@@ -37795,7 +38087,9 @@ window.CRT_DATA = {
       "familyHistory": "My family is from Taiwan \u2014 I've since read that this variant is more common in people of Asian ancestry.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer occasionally.",
       "socialOccupation": "Software engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sjs-ten-v2": {
     "id": "sjs-ten-v2",
@@ -38031,7 +38325,9 @@ window.CRT_DATA = {
       "familyHistory": "Epilepsy in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pediatric nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sjsten-overlap-v2": {
     "id": "sjsten-overlap-v2",
@@ -38274,7 +38570,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I smoke. I drink socially.",
       "socialOccupation": "Restaurant manager."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypertensive-emergency": {
     "id": "hypertensive-emergency",
@@ -38465,7 +38763,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of a stroke.",
       "socialSmokingAlcohol": "I smoke half a pack a day. Occasional alcohol.",
       "socialOccupation": "Construction worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "alcohol-withdrawal": {
     "id": "alcohol-withdrawal",
@@ -38643,7 +38943,9 @@ window.CRT_DATA = {
       "familyHistory": "Father was an alcoholic. Mother had anxiety.",
       "socialSmokingAlcohol": "A fifth of whiskey daily. I smoke a pack a day.",
       "socialOccupation": "Former auto mechanic \u2014 unemployed for two years."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "stroke-v2": {
     "id": "stroke-v2",
@@ -38832,7 +39134,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had stroke.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "bacterial-meningitis": {
     "id": "bacterial-meningitis",
@@ -39039,7 +39343,9 @@ window.CRT_DATA = {
       "socialSmokingAlcohol": "I drink socially on weekends. I don't smoke.",
       "socialOccupation": "Sophomore at university. Live in a dorm with four roommates. One roommate was sick last week.",
       "socialContacts": "One of my roommates had a fever and bad headache last week."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "alcoholic-hepatitis": {
     "id": "alcoholic-hepatitis",
@@ -39239,7 +39545,9 @@ window.CRT_DATA = {
       "familyHistory": "Father was an alcoholic.",
       "socialSmokingAlcohol": "I drink a liter of vodka a day. I smoke two packs.",
       "socialOccupation": "Former restaurant owner \u2014 closed two years ago."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cap-with-sepsis": {
     "id": "cap-with-sepsis",
@@ -39432,7 +39740,9 @@ window.CRT_DATA = {
       "familyHistory": "Non-contributory.",
       "socialSmokingAlcohol": "I quit smoking 5 years ago. Occasional beer.",
       "socialOccupation": "Electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "heart-failure-hfpef": {
     "id": "heart-failure-hfpef",
@@ -39619,7 +39929,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dka-v2": {
     "id": "dka-v2",
@@ -39820,7 +40132,9 @@ window.CRT_DATA = {
       "familyHistory": "Type 1 diabetes in my mother \u2014 I'm wondering now if they got my diagnosis wrong.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Dental hygienist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dka-v3": {
     "id": "dka-v3",
@@ -40021,7 +40335,9 @@ window.CRT_DATA = {
       "familyHistory": "No family history of diabetes or neurological problems.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "High school student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "stroke-v3": {
     "id": "stroke-v3",
@@ -40199,7 +40515,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of a stroke.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily \u2014 at least six drinks a day.",
       "socialOccupation": "Restaurant cook."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pe-v2": {
     "id": "pe-v2",
@@ -40394,7 +40712,9 @@ window.CRT_DATA = {
       "familyHistory": "Not relevant at this point.",
       "socialSmokingAlcohol": "I quit smoking when I got the diagnosis. No alcohol.",
       "socialOccupation": "Retired. My wife is with me."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pe-v3": {
     "id": "pe-v3",
@@ -40593,7 +40913,9 @@ window.CRT_DATA = {
       "familyHistory": "Colon cancer in father.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired contractor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "encephalitis": {
     "id": "encephalitis",
@@ -40803,7 +41125,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "Graduate student in literature. I have a cat."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pneumonia-on-copd": {
     "id": "pneumonia-on-copd",
@@ -40999,7 +41323,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung disease in family.",
       "socialSmokingAlcohol": "Former smoker \u2014 quit ten years ago. I don't drink.",
       "socialOccupation": "Retired miner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "chf-exacerbation-v2": {
     "id": "chf-exacerbation-v2",
@@ -41199,7 +41525,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of heart failure.",
       "socialSmokingAlcohol": "I quit smoking 20 years ago. I don't drink.",
       "socialOccupation": "Retired postal worker. Lives with wife."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-ischemic-stroke": {
     "id": "acute-ischemic-stroke",
@@ -41413,7 +41741,9 @@ window.CRT_DATA = {
       "familyHistory": "My mother had strokes.",
       "socialSmokingAlcohol": "I don't smoke. I have a glass of wine with dinner sometimes.",
       "socialOccupation": "Retired schoolteacher. I live alone \u2014 my daughter lives nearby."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "brain-abscess": {
     "id": "brain-abscess",
@@ -41601,7 +41931,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing significant.",
       "socialSmokingAlcohol": "I smoke marijuana daily. I drink socially.",
       "socialOccupation": "Graphic designer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "alcoholic-ketoacidosis": {
     "id": "alcoholic-ketoacidosis",
@@ -41783,7 +42115,9 @@ window.CRT_DATA = {
       "familyHistory": "Alcohol problems in family.",
       "socialSmokingAlcohol": "I drink heavily \u2014 nearly daily for ten years. I smoke.",
       "socialOccupation": "Day laborer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "type2-diabetes-outpatient": {
     "id": "type2-diabetes-outpatient",
@@ -42000,7 +42334,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes \u2014 father died of complications. Mother on dialysis.",
       "socialSmokingAlcohol": "Former smoker. I drink two beers nightly.",
       "socialOccupation": "High school football coach \u2014 sedentary on game days."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "allergic-rhinitis-immunotherapy": {
     "id": "allergic-rhinitis-immunotherapy",
@@ -42181,7 +42517,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies and asthma throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Veterinary student \u2014 difficult to avoid animal exposure."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "alpha-gal-syndrome": {
     "id": "alpha-gal-syndrome",
@@ -42376,7 +42714,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink on hunting trips.",
       "socialOccupation": "Farmer and avid hunter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-ischemic-stroke-tpa": {
     "id": "acute-ischemic-stroke-tpa",
@@ -42558,7 +42898,9 @@ window.CRT_DATA = {
       "familyHistory": "Brother had a stroke at 70.",
       "socialSmokingAlcohol": "I quit smoking twenty years ago. I don't drink.",
       "socialOccupation": "Retired accountant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "new-onset-atrial-fibrillation": {
     "id": "new-onset-atrial-fibrillation",
@@ -42762,7 +43104,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had atrial fibrillation.",
       "socialSmokingAlcohol": "I don't smoke. I drank more than usual last night \u2014 vacation.",
       "socialOccupation": "Hospital administrator."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hemorrhagic-stroke": {
     "id": "hemorrhagic-stroke",
@@ -42946,7 +43290,9 @@ window.CRT_DATA = {
       "familyHistory": "My mother had a stroke.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends \u2014 maybe more than I should.",
       "socialOccupation": "Construction foreman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "alcohol-withdrawal-seizures": {
     "id": "alcohol-withdrawal-seizures",
@@ -43139,7 +43485,9 @@ window.CRT_DATA = {
       "familyHistory": "Father was an alcoholic. Mother had anxiety.",
       "socialSmokingAlcohol": "I smoke a pack a day. I've been drinking a fifth of vodka daily for two years.",
       "socialOccupation": "Unemployed. Previously a carpenter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aki-differential": {
     "id": "aki-differential",
@@ -43334,7 +43682,9 @@ window.CRT_DATA = {
       "familyHistory": "Kidney disease in family.",
       "socialSmokingAlcohol": "Former smoker. I drink a glass of wine with dinner.",
       "socialOccupation": "Retired engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "inpatient-diabetes-management": {
     "id": "inpatient-diabetes-management",
@@ -43529,7 +43879,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes throughout family.",
       "socialSmokingAlcohol": "Former smoker. I drink wine occasionally.",
       "socialOccupation": "Retired chef."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "type-2-mi": {
     "id": "type-2-mi",
@@ -43708,7 +44060,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-asthma-biologics": {
     "id": "severe-asthma-biologics",
@@ -43911,7 +44265,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Respiratory therapist \u2014 I know exactly how serious this is."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pyelonephritis-sepsis": {
     "id": "pyelonephritis-sepsis",
@@ -44109,7 +44465,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has kidney stones.",
       "socialSmokingAlcohol": "I don't smoke. I drink socially on weekends.",
       "socialOccupation": "Kindergarten teacher. Eight weeks pregnant \u2014 I should mention that."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "spontaneous-bacterial-peritonitis": {
     "id": "spontaneous-bacterial-peritonitis",
@@ -44294,7 +44652,9 @@ window.CRT_DATA = {
       "familyHistory": "Liver disease in family.",
       "socialSmokingAlcohol": "I stopped drinking two years ago. Former heavy drinker. I don't smoke.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "adrenal-insufficiency": {
     "id": "adrenal-insufficiency",
@@ -44490,7 +44850,9 @@ window.CRT_DATA = {
       "familyHistory": "Autoimmune disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Librarian."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-aortic-dissection": {
     "id": "acute-aortic-dissection",
@@ -44678,7 +45040,9 @@ window.CRT_DATA = {
       "familyHistory": "My brother has Marfan syndrome. Father died of aortic aneurysm.",
       "socialSmokingAlcohol": "I smoked for 10 years, quit 5 years ago. Social drinker.",
       "socialOccupation": "Construction contractor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "gout-flare": {
     "id": "gout-flare",
@@ -44864,7 +45228,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had gout.",
       "socialSmokingAlcohol": "I drink beer \u2014 more on weekends. I don't smoke.",
       "socialOccupation": "Restaurant owner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "malignant-hyperthermia": {
     "id": "malignant-hyperthermia",
@@ -45082,7 +45448,9 @@ window.CRT_DATA = {
       "familyHistory": "My father apparently had a problem with anesthesia \u2014 I remember my mother mentioning it. I forgot to tell the anesthesiologist.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "College student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hyperkalemia-with-concurrent-acs": {
     "id": "hyperkalemia-with-concurrent-acs",
@@ -45279,7 +45647,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease and kidney disease.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired factory supervisor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "deep-vein-thrombosis": {
     "id": "deep-vein-thrombosis",
@@ -45462,7 +45832,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had a DVT during pregnancy.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine on weekends.",
       "socialOccupation": "Investment banker \u2014 frequent long flights."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-compartment-syndrome": {
     "id": "acute-compartment-syndrome",
@@ -45639,7 +46011,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "Physical education teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-hemolytic-transfusion-reaction": {
     "id": "acute-hemolytic-transfusion-reaction",
@@ -45820,7 +46194,9 @@ window.CRT_DATA = {
       "familyHistory": "Sickle cell disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "epidural-abscess": {
     "id": "epidural-abscess",
@@ -46016,7 +46392,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer on weekends.",
       "socialOccupation": "HVAC technician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypoglycemia": {
     "id": "hypoglycemia",
@@ -46194,7 +46572,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired. My wife manages my medications."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "upper-gi-bleed": {
     "id": "upper-gi-bleed",
@@ -46405,7 +46785,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had stomach cancer.",
       "socialSmokingAlcohol": "I smoke half a pack a day. I drink \u2014 probably six to eight drinks a night, more on weekends.",
       "socialOccupation": "Construction worker. The ibuprofen is the only thing that gets me through the day."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "uremic-encephalopathy": {
     "id": "uremic-encephalopathy",
@@ -46605,7 +46987,9 @@ window.CRT_DATA = {
       "familyHistory": "Kidney disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "viral-meningitis": {
     "id": "viral-meningitis",
@@ -46805,7 +47189,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "College senior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "unstable-angina": {
     "id": "unstable-angina",
@@ -47003,7 +47389,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had heart attack at 52. Brother had bypass surgery at 57.",
       "socialSmokingAlcohol": "I smoke half a pack a day. I drink on weekends.",
       "socialOccupation": "Construction supervisor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "toxic-ingestion": {
     "id": "toxic-ingestion",
@@ -47200,7 +47588,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression and substance use in family.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm 17.",
       "socialOccupation": "High school senior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "exertional-heat-stroke": {
     "id": "exertional-heat-stroke",
@@ -47383,7 +47773,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't drink or smoke. I'm a Marine recruit.",
       "socialOccupation": "Marine recruit \u2014 first month of boot camp."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "tick-borne-illness": {
     "id": "tick-borne-illness",
@@ -47583,7 +47975,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink on weekends.",
       "socialOccupation": "Wildlife biologist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sepsis-with-rigidity": {
     "id": "sepsis-with-rigidity",
@@ -47783,7 +48177,9 @@ window.CRT_DATA = {
       "familyHistory": "Parkinson's in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired teacher. My wife is my primary caregiver."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "occupational-asthma-isocyanate": {
     "id": "occupational-asthma-isocyanate",
@@ -47978,7 +48374,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I smoke half a pack a day. I drink on weekends.",
       "socialOccupation": "Auto body painter \u2014 eight years."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "inducible-urticaria": {
     "id": "inducible-urticaria",
@@ -48173,7 +48571,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink at parties.",
       "socialOccupation": "College junior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anticholinergic-toxicity": {
     "id": "anticholinergic-toxicity",
@@ -48354,7 +48754,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink occasionally.",
       "socialOccupation": "College freshman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hyperthermia-nms": {
     "id": "hyperthermia-nms",
@@ -48565,7 +48967,9 @@ window.CRT_DATA = {
       "familyHistory": "Schizophrenia in family.",
       "socialSmokingAlcohol": "I smoke heavily. I don't drink.",
       "socialOccupation": "Group home resident."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sympathomimetic-toxicity": {
     "id": "sympathomimetic-toxicity",
@@ -48748,7 +49152,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had a heart attack at 50.",
       "socialSmokingAlcohol": "I smoke. I drink heavily on weekends.",
       "socialOccupation": "Investment banker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "mixed-overdose": {
     "id": "mixed-overdose",
@@ -48928,7 +49334,9 @@ window.CRT_DATA = {
       "familyHistory": "Suicide and depression in family.",
       "socialSmokingAlcohol": "I smoke. I drink when I'm very low.",
       "socialOccupation": "Unemployed \u2014 recently lost her job."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-sma-embolism": {
     "id": "acute-sma-embolism",
@@ -49104,7 +49512,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease on both sides.",
       "socialSmokingAlcohol": "Former smoker \u2014 thirty-year history, quit fifteen years ago. I don't drink.",
       "socialOccupation": "Retired postal worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "phlegmasia-cerulea-dolens": {
     "id": "phlegmasia-cerulea-dolens",
@@ -49283,7 +49693,9 @@ window.CRT_DATA = {
       "familyHistory": "Pancreatic cancer \u2014 father.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "High school art teacher on medical leave."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "lethal-catatonia": {
     "id": "lethal-catatonia",
@@ -49462,7 +49874,9 @@ window.CRT_DATA = {
       "familyHistory": "Schizophrenia in family.",
       "socialSmokingAlcohol": "I smoke. I don't drink.",
       "socialOccupation": "Lives with mother. Previously a grocery store cashier."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-hyperkalemia-from-missed-dialysis": {
     "id": "severe-hyperkalemia-from-missed-dialysis",
@@ -49642,7 +50056,9 @@ window.CRT_DATA = {
       "familyHistory": "Kidney disease and diabetes in my family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Middle school science teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ureterolithiasis": {
     "id": "ureterolithiasis",
@@ -49837,7 +50253,9 @@ window.CRT_DATA = {
       "familyHistory": "Kidney stones in father.",
       "socialSmokingAlcohol": "I drink mainly coffee \u2014 probably dehydrated. I don't smoke.",
       "socialOccupation": "Radiologist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "necrotizing-fasciitis": {
     "id": "necrotizing-fasciitis",
@@ -50028,7 +50446,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes throughout family.",
       "socialSmokingAlcohol": "I smoke half a pack a day. I drink on weekends.",
       "socialOccupation": "High school football coach."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "gas-gangrene": {
     "id": "gas-gangrene",
@@ -50206,7 +50626,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink beer on weekends. I don't smoke.",
       "socialOccupation": "Farmer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-mi-with-av-block": {
     "id": "acute-mi-with-av-block",
@@ -50394,7 +50816,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had a heart attack at 60. Mother had diabetes.",
       "socialSmokingAlcohol": "I smoke half a pack a day. I drink beer on weekends.",
       "socialOccupation": "Postal carrier."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "crohn-flare": {
     "id": "crohn-flare",
@@ -50576,7 +51000,9 @@ window.CRT_DATA = {
       "familyHistory": "Crohn's in father.",
       "socialSmokingAlcohol": "I smoke \u2014 I know it makes Crohn's worse. I don't drink.",
       "socialOccupation": "Freelance graphic designer \u2014 no health insurance."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cholelithiasis-cholecystitis": {
     "id": "cholelithiasis-cholecystitis",
@@ -50772,7 +51198,9 @@ window.CRT_DATA = {
       "familyHistory": "Gallstones in mother and sister.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Accountant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "atypical-hus": {
     "id": "atypical-hus",
@@ -50964,7 +51392,9 @@ window.CRT_DATA = {
       "familyHistory": "A cousin had a kidney transplant for an unknown reason in her thirties.",
       "socialSmokingAlcohol": "I don't smoke or drink \u2014 I'm pregnant.",
       "socialOccupation": "Dental hygienist. Eight weeks pregnant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "superior-vena-cava-syndrome": {
     "id": "superior-vena-cava-syndrome",
@@ -51159,7 +51589,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung cancer in father.",
       "socialSmokingAlcohol": "I smoke a pack a day \u2014 trying to cut down. I don't drink.",
       "socialOccupation": "Retired construction foreman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "spinal-metastasis": {
     "id": "spinal-metastasis",
@@ -51353,7 +51785,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had breast cancer.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired pharmacist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dementia-with-acute-delirium": {
     "id": "dementia-with-acute-delirium",
@@ -51534,7 +51968,9 @@ window.CRT_DATA = {
       "familyHistory": "Alzheimer's in family.",
       "socialSmokingAlcohol": "She doesn't smoke or drink.",
       "socialOccupation": "Retired. Lives with daughter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cerebral-salt-wasting": {
     "id": "cerebral-salt-wasting",
@@ -51712,7 +52148,9 @@ window.CRT_DATA = {
       "familyHistory": "Hypertension in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pediatrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "conus-medullaris-syndrome": {
     "id": "conus-medullaris-syndrome",
@@ -51889,7 +52327,9 @@ window.CRT_DATA = {
       "familyHistory": "Prostate cancer in father and brother.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired contractor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-mi": {
     "id": "acute-mi",
@@ -52087,7 +52527,9 @@ window.CRT_DATA = {
       "familyHistory": "My father had a heart attack at 55 and died. My brother had bypass surgery last year.",
       "socialSmokingAlcohol": "I smoke about a pack a day, have for thirty years. I drink a beer or two on weekends.",
       "socialOccupation": "I'm a long-haul truck driver."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hcm": {
     "id": "hcm",
@@ -52264,7 +52706,9 @@ window.CRT_DATA = {
       "familyHistory": "My cousin died suddenly at 28 during a soccer game \u2014 'heart problem' was listed as cause.",
       "socialSmokingAlcohol": "I don't smoke or drink. Competitive basketball player.",
       "socialOccupation": "Physical education teacher and competitive athlete."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cns-infection": {
     "id": "cns-infection",
@@ -52458,7 +52902,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I smoke. I don't drink.",
       "socialOccupation": "Waiter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "lyme-carditis": {
     "id": "lyme-carditis",
@@ -52635,7 +53081,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Environmental scientist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "rhabdomyolysisinduced-hyperkalemia": {
     "id": "rhabdomyolysisinduced-hyperkalemia",
@@ -52833,7 +53281,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Graduate student. Competitive runner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "temporal-arteritis": {
     "id": "temporal-arteritis",
@@ -53024,7 +53474,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired surgeon."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "retinal-detachment": {
     "id": "retinal-detachment",
@@ -53201,7 +53653,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had retinal detachment.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Architect."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-embolic-limb-ischemia": {
     "id": "acute-embolic-limb-ischemia",
@@ -53391,7 +53845,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired accountant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aortic-aneurysm": {
     "id": "aortic-aneurysm",
@@ -53578,7 +54034,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had aortic aneurysm and died of rupture.",
       "socialSmokingAlcohol": "I smoke half a pack a day \u2014 trying to quit for surgery. Former heavy smoker.",
       "socialOccupation": "Retired firefighter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "midgut-volvulus": {
     "id": "midgut-volvulus",
@@ -53755,7 +54213,9 @@ window.CRT_DATA = {
       "familyHistory": "No known malrotation or volvulus in family.",
       "socialSmokingAlcohol": "He is 3 weeks old.",
       "socialOccupation": "Newborn."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pheochromocytoma": {
     "id": "pheochromocytoma",
@@ -53932,7 +54392,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had pheochromocytoma. Possible MEN2 in the family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Cardiologist \u2014 yes, I recognize the irony of my own presentation."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "siadh": {
     "id": "siadh",
@@ -54111,7 +54573,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Librarian."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "incarcerated-inguinal-hernia": {
     "id": "incarcerated-inguinal-hernia",
@@ -54290,7 +54754,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I drink beer on weekends.",
       "socialOccupation": "Retired longshoreman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "flail-chest": {
     "id": "flail-chest",
@@ -54483,7 +54949,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
       "socialOccupation": "Electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "massive-hemothorax": {
     "id": "massive-hemothorax",
@@ -54666,7 +55134,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing significant.",
       "socialSmokingAlcohol": "I smoke marijuana occasionally. I drink on weekends.",
       "socialOccupation": "College student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-psychosis": {
     "id": "acute-psychosis",
@@ -54844,7 +55314,9 @@ window.CRT_DATA = {
       "familyHistory": "Uncle has schizophrenia. Mother has depression.",
       "socialSmokingAlcohol": "I smoke cannabis daily \u2014 heavily. I drink occasionally.",
       "socialOccupation": "College dropout \u2014 left six months ago. Unemployed."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "staphylococcal-scalded-skin-syndrome": {
     "id": "staphylococcal-scalded-skin-syndrome",
@@ -55022,7 +55494,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 3 years old.",
       "socialOccupation": "Preschool."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "vocal-cord-dysfunction": {
     "id": "vocal-cord-dysfunction",
@@ -55202,7 +55676,9 @@ window.CRT_DATA = {
       "familyHistory": "Anxiety in family.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm 17.",
       "socialOccupation": "High school junior. Varsity cross-country captain."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cervical-artery-dissection": {
     "id": "cervical-artery-dissection",
@@ -55379,7 +55855,9 @@ window.CRT_DATA = {
       "familyHistory": "Migraines in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Yoga instructor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "gonococcal-arthritis": {
     "id": "gonococcal-arthritis",
@@ -55559,7 +56037,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "College senior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pseudogout": {
     "id": "pseudogout",
@@ -55740,7 +56220,9 @@ window.CRT_DATA = {
       "familyHistory": "Gout in family.",
       "socialSmokingAlcohol": "Former smoker. I drink beer occasionally.",
       "socialOccupation": "Retired engineer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-viral-hepatitis": {
     "id": "acute-viral-hepatitis",
@@ -55922,7 +56404,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke. I ate street food throughout Southeast Asia \u2014 shellfish too.",
       "socialOccupation": "Travel journalist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anxiety-panic-attack": {
     "id": "anxiety-panic-attack",
@@ -56105,7 +56589,9 @@ window.CRT_DATA = {
       "familyHistory": "Anxiety and heart disease in family \u2014 I'm worried about which this is.",
       "socialSmokingAlcohol": "I drink too much coffee. I drink alcohol socially. I don't smoke.",
       "socialOccupation": "Financial analyst \u2014 extremely high stress."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "copd-exacerbation-niv": {
     "id": "copd-exacerbation-niv",
@@ -56306,7 +56792,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung disease in family.",
       "socialSmokingAlcohol": "Sixty pack-years \u2014 quit eight years ago. I don't drink.",
       "socialOccupation": "Retired coal miner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "psychogenic-polydipsia": {
     "id": "psychogenic-polydipsia",
@@ -56485,7 +56973,9 @@ window.CRT_DATA = {
       "familyHistory": "Schizophrenia in family.",
       "socialSmokingAlcohol": "I smoke heavily. I don't drink alcohol.",
       "socialOccupation": "Group home resident. I used to work in the mailroom."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypothyroidismrelated-hyponatremia": {
     "id": "hypothyroidismrelated-hyponatremia",
@@ -56681,7 +57171,9 @@ window.CRT_DATA = {
       "familyHistory": "Thyroid disease throughout family.",
       "socialSmokingAlcohol": "She doesn't smoke or drink.",
       "socialOccupation": "Retired. Lives alone \u2014 daughter visits on weekends."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aortic-injury": {
     "id": "aortic-injury",
@@ -56859,7 +57351,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Paramedic."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-anterior-uveitis": {
     "id": "acute-anterior-uveitis",
@@ -57038,7 +57532,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has ankylosing spondylitis.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer on weekends.",
       "socialOccupation": "Physical education teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dic-from-traumasurgery-with-hemorrhagic": {
     "id": "dic-from-traumasurgery-with-hemorrhagic",
@@ -57226,7 +57722,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
       "socialOccupation": "Construction worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-mi-dyspnea": {
     "id": "acute-mi-dyspnea",
@@ -57405,7 +57903,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had heart disease.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-necrotizing-gallstone-pancreatitis": {
     "id": "acute-necrotizing-gallstone-pancreatitis",
@@ -57603,7 +58103,9 @@ window.CRT_DATA = {
       "familyHistory": "Gallstones run in my family. Mother and sister both had their gallbladders out.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine \u2014 maybe two or three glasses a night.",
       "socialOccupation": "Accountant. I've been very stressed at work lately."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "alcoholrelated-pancreatitis": {
     "id": "alcoholrelated-pancreatitis",
@@ -57800,7 +58302,9 @@ window.CRT_DATA = {
       "familyHistory": "Pancreatitis in my father \u2014 also drank.",
       "socialSmokingAlcohol": "I drink heavily \u2014 most evenings, more on weekends. I smoke half a pack.",
       "socialOccupation": "Nurse \u2014 I know what I should be doing differently."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "chronic-salicylate-toxicity": {
     "id": "chronic-salicylate-toxicity",
@@ -57981,7 +58485,9 @@ window.CRT_DATA = {
       "familyHistory": "Arthritis throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "guillain-barre": {
     "id": "guillain-barre",
@@ -58167,7 +58673,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
       "socialOccupation": "High school football coach."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "febrile-neutropenia": {
     "id": "febrile-neutropenia",
@@ -58350,7 +58858,9 @@ window.CRT_DATA = {
       "familyHistory": "Colon cancer in father.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired firefighter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypercalcemia": {
     "id": "hypercalcemia",
@@ -58531,7 +59041,9 @@ window.CRT_DATA = {
       "familyHistory": "Cancer in family.",
       "socialSmokingAlcohol": "I smoke two packs a day \u2014 forty years. I drink beer on weekends.",
       "socialOccupation": "Retired electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "displaced-femoral-neck-fracture": {
     "id": "displaced-femoral-neck-fracture",
@@ -58711,7 +59223,9 @@ window.CRT_DATA = {
       "familyHistory": "Osteoporosis in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired. Lives alone."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "infectious-mononucleosis-with-tonsillar-hypertrophy": {
     "id": "infectious-mononucleosis-with-tonsillar-hypertrophy",
@@ -58893,7 +59407,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "College freshman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "complete-heart-block-v2": {
     "id": "complete-heart-block-v2",
@@ -59072,7 +59588,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "gastroenteritis": {
     "id": "gastroenteritis",
@@ -59252,7 +59770,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 9 years old.",
       "socialOccupation": "Fourth grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "long-qt-syndrome": {
     "id": "long-qt-syndrome",
@@ -59434,7 +59954,9 @@ window.CRT_DATA = {
       "familyHistory": "Sister has recurrent syncope. A cousin died suddenly at 22 \u2014 cause unknown.",
       "socialSmokingAlcohol": "I don't smoke or drink. Competitive track athlete.",
       "socialOccupation": "College sophomore. Track scholarship."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ovarian-pathology": {
     "id": "ovarian-pathology",
@@ -59611,7 +60133,9 @@ window.CRT_DATA = {
       "familyHistory": "Ovarian cysts in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Nursing student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "myocarditis": {
     "id": "myocarditis",
@@ -59795,7 +60319,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink. Division I athlete.",
       "socialOccupation": "College cross-country runner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nstemiunstable-angina": {
     "id": "nstemiunstable-angina",
@@ -59972,7 +60498,9 @@ window.CRT_DATA = {
       "familyHistory": "Strong family history of coronary disease.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired police officer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "takotsubo-cardiomyopathy": {
     "id": "takotsubo-cardiomyopathy",
@@ -60150,7 +60678,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had heart disease.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally \u2014 more this week.",
       "socialOccupation": "Retired schoolteacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "wpw-syndrome": {
     "id": "wpw-syndrome",
@@ -60327,7 +60857,9 @@ window.CRT_DATA = {
       "familyHistory": "WPW in my uncle.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "College athlete \u2014 track."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "druginduced-av-block": {
     "id": "druginduced-av-block",
@@ -60639,7 +61171,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired pharmacist \u2014 I should have caught this."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "new-onset-seizure": {
     "id": "new-onset-seizure",
@@ -60831,7 +61365,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
       "socialOccupation": "Attorney \u2014 major trial preparation."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "migraine-with-aura": {
     "id": "migraine-with-aura",
@@ -61010,7 +61546,9 @@ window.CRT_DATA = {
       "familyHistory": "Migraines in mother and sister.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally \u2014 can trigger migraines.",
       "socialOccupation": "Nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "normal-pressure-hydrocephalus": {
     "id": "normal-pressure-hydrocephalus",
@@ -61191,7 +61729,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired judge."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "simple-sbo": {
     "id": "simple-sbo",
@@ -61372,7 +61912,9 @@ window.CRT_DATA = {
       "familyHistory": "Colon cancer in father.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired school librarian."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "sbo-with-strangulation": {
     "id": "sbo-with-strangulation",
@@ -61537,7 +62079,9 @@ window.CRT_DATA = {
       "familyHistory": "Colon cancer in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired nurse \u2014 I know what constant pain in obstruction means."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "bacterial-tracheitis": {
     "id": "bacterial-tracheitis",
@@ -61700,7 +62244,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 5 years old.",
       "socialOccupation": "Kindergartner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-croup": {
     "id": "severe-croup",
@@ -61880,7 +62426,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma in father.",
       "socialSmokingAlcohol": "He is 2 years old.",
       "socialOccupation": "Toddler."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "submersion-injury": {
     "id": "submersion-injury",
@@ -62060,7 +62608,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 4 years old.",
       "socialOccupation": "Preschool."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ruptured-aaa": {
     "id": "ruptured-aaa",
@@ -62238,7 +62788,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had an aortic aneurysm. Brother had bypass surgery.",
       "socialSmokingAlcohol": "Former smoker \u2014 forty pack-years, quit fifteen years ago. I don't drink.",
       "socialOccupation": "Retired plumber."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hip-dislocation": {
     "id": "hip-dislocation",
@@ -62415,7 +62967,9 @@ window.CRT_DATA = {
       "familyHistory": "Osteoporosis in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "intertrochanteric-fracture": {
     "id": "intertrochanteric-fracture",
@@ -62595,7 +63149,9 @@ window.CRT_DATA = {
       "familyHistory": "Osteoporosis.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired. Lives alone."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "thiazideinduced-hyponatremia": {
     "id": "thiazideinduced-hyponatremia",
@@ -62776,7 +63332,9 @@ window.CRT_DATA = {
       "familyHistory": "Hypertension in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "rhabdomyolysis": {
     "id": "rhabdomyolysis",
@@ -62958,7 +63516,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Physical therapy student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pneumonia-v2": {
     "id": "pneumonia-v2",
@@ -63143,7 +63703,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung disease in family.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired school nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "retropharyngeal-abscess": {
     "id": "retropharyngeal-abscess",
@@ -63321,7 +63883,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "She is 3 years old.",
       "socialOccupation": "Daycare."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "reactive-arthritis": {
     "id": "reactive-arthritis",
@@ -63503,7 +64067,9 @@ window.CRT_DATA = {
       "familyHistory": "HLA-B27 positive in father.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Plumber."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "inherited-coagulopathy": {
     "id": "inherited-coagulopathy",
@@ -63681,7 +64247,9 @@ window.CRT_DATA = {
       "familyHistory": "Hemophilia A in maternal uncle and grandfather.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "College freshman \u2014 athletic trainer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dilutional-coagulopathy": {
     "id": "dilutional-coagulopathy",
@@ -63864,7 +64432,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
       "socialOccupation": "Nurse practitioner."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "corneal-abrasionkeratitis": {
     "id": "corneal-abrasionkeratitis",
@@ -64042,7 +64612,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "Medical resident."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "brain-metastasis": {
     "id": "brain-metastasis",
@@ -64220,7 +64792,9 @@ window.CRT_DATA = {
       "familyHistory": "Breast cancer \u2014 mother and sister.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pediatric dentist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "primary-brain-tumor": {
     "id": "primary-brain-tumor",
@@ -64398,7 +64972,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung cancer in father.",
       "socialSmokingAlcohol": "I smoke two packs a day. I drink on weekends.",
       "socialOccupation": "Financial advisor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cns-lymphoma": {
     "id": "cns-lymphoma",
@@ -64577,7 +65153,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired accountant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "todd-paralysis": {
     "id": "todd-paralysis",
@@ -64757,7 +65335,9 @@ window.CRT_DATA = {
       "familyHistory": "Epilepsy in uncle.",
       "socialSmokingAlcohol": "I don't drink \u2014 it triggers seizures. I don't smoke.",
       "socialOccupation": "Data scientist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "optic-neuritis": {
     "id": "optic-neuritis",
@@ -64950,7 +65530,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Neuropsychology researcher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "bilateral-lumbar-radiculopathy": {
     "id": "bilateral-lumbar-radiculopathy",
@@ -65128,7 +65710,9 @@ window.CRT_DATA = {
       "familyHistory": "Back problems in family.",
       "socialSmokingAlcohol": "Former smoker. I drink occasionally.",
       "socialOccupation": "Retired postal worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "perianal-abscess": {
     "id": "perianal-abscess",
@@ -65311,7 +65895,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink on weekends.",
       "socialOccupation": "Physical education teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "epididymitis": {
     "id": "epididymitis",
@@ -65492,7 +66078,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "College student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "mcas-mast-cell": {
     "id": "mcas-mast-cell",
@@ -65674,7 +66262,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has similar unexplained episodes \u2014 undiagnosed.",
       "socialSmokingAlcohol": "I don't smoke. I've stopped alcohol \u2014 triggers flushing.",
       "socialOccupation": "Emergency medicine physician \u2014 I had to fight to get taken seriously."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hyperkalemic-cardiac-emergency": {
     "id": "hyperkalemic-cardiac-emergency",
@@ -65858,7 +66448,9 @@ window.CRT_DATA = {
       "familyHistory": "Autoimmune conditions in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "High school guidance counselor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "autoimmune-blistering-disease": {
     "id": "autoimmune-blistering-disease",
@@ -66054,7 +66646,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired librarian."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "orthostatic-hypotension": {
     "id": "orthostatic-hypotension",
@@ -66251,7 +66845,9 @@ window.CRT_DATA = {
       "familyHistory": "Hypertension in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired professor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypovolemic-shock-from-gastroenteritis": {
     "id": "hypovolemic-shock-from-gastroenteritis",
@@ -66433,7 +67029,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "She is 14 months old.",
       "socialOccupation": "In daycare \u2014 illness spreading through her class."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ibs-management": {
     "id": "ibs-management",
@@ -66615,7 +67213,9 @@ window.CRT_DATA = {
       "familyHistory": "IBS in mother.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine on weekends.",
       "socialOccupation": "Marketing director \u2014 high-stress role."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "complex-migraine": {
     "id": "complex-migraine",
@@ -66795,7 +67395,9 @@ window.CRT_DATA = {
       "familyHistory": "Migraines in mother.",
       "socialSmokingAlcohol": "I smoke \u2014 I know it's a risk with my OCP. I don't drink.",
       "socialOccupation": "Emergency medicine nurse \u2014 I know I need a stroke workup."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "structural-lesion": {
     "id": "structural-lesion",
@@ -66975,7 +67577,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had lung cancer.",
       "socialSmokingAlcohol": "Former smoker. I drink wine on weekends.",
       "socialOccupation": "Dentist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "vitreous-hemorrhage": {
     "id": "vitreous-hemorrhage",
@@ -67154,7 +67758,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes and blindness in grandfather.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Long-haul truck driver \u2014 this affects my livelihood."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "severe-cellulitis": {
     "id": "severe-cellulitis",
@@ -67337,7 +67943,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink on weekends.",
       "socialOccupation": "High school football coach."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "peritonsillar-abscess-v2": {
     "id": "peritonsillar-abscess-v2",
@@ -67519,7 +68127,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "College senior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "peritonsillar-cellulitis": {
     "id": "peritonsillar-cellulitis",
@@ -67701,7 +68311,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "College sophomore."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "submandibular-sialolithiasis-with-secondary-infection": {
     "id": "submandibular-sialolithiasis-with-secondary-infection",
@@ -67884,7 +68496,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes in family.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink beer most nights.",
       "socialOccupation": "Plumber."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "meckel-diverticulum": {
     "id": "meckel-diverticulum",
@@ -68063,7 +68677,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 4 years old.",
       "socialOccupation": "Preschool."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "small-bowel-volvulus": {
     "id": "small-bowel-volvulus",
@@ -68242,7 +68858,9 @@ window.CRT_DATA = {
       "familyHistory": "Crohn's disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pediatrician \u2014 I know this presentation is dangerous."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "dvt-with-phlegmasia": {
     "id": "dvt-with-phlegmasia",
@@ -68421,7 +69039,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother had blood clots.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Elementary school principal on medical leave."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "nonocclusive-mesenteric-ischemia": {
     "id": "nonocclusive-mesenteric-ischemia",
@@ -68600,7 +69220,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "xla-brutons": {
     "id": "xla-brutons",
@@ -68782,7 +69404,9 @@ window.CRT_DATA = {
       "familyHistory": "Maternal uncle died in childhood of infection \u2014 cause unknown. Two male first cousins with recurrent serious infections.",
       "socialSmokingAlcohol": "He is 2 years old.",
       "socialOccupation": "Toddler."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "digeorge-22q11": {
     "id": "digeorge-22q11",
@@ -68962,7 +69586,9 @@ window.CRT_DATA = {
       "familyHistory": "No known 22q11 deletion in parents \u2014 de novo suspected.",
       "socialSmokingAlcohol": "She is 2 days old.",
       "socialOccupation": "Newborn."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypersensitivity-pneumonitis": {
     "id": "hypersensitivity-pneumonitis",
@@ -69144,7 +69770,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer on weekends.",
       "socialOccupation": "Retired postal worker. Pigeon racing enthusiast \u2014 thirty years."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pneumonia-on-copd-v2": {
     "id": "pneumonia-on-copd-v2",
@@ -69327,7 +69955,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung disease.",
       "socialSmokingAlcohol": "Former smoker \u2014 sixty pack-years. I don't drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "rheumatoid-arthritis-new": {
     "id": "rheumatoid-arthritis-new",
@@ -69509,7 +70139,9 @@ window.CRT_DATA = {
       "familyHistory": "Mother has rheumatoid arthritis.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine on weekends.",
       "socialOccupation": "Surgeon \u2014 hand function is critical to my career."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "septic-arthritis-v2": {
     "id": "septic-arthritis-v2",
@@ -69690,7 +70322,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I drink beer occasionally.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "delirium-elderly": {
     "id": "delirium-elderly",
@@ -69873,7 +70507,9 @@ window.CRT_DATA = {
       "familyHistory": "Dementia in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired. Lives with daughter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "migraine-management": {
     "id": "migraine-management",
@@ -70055,7 +70691,9 @@ window.CRT_DATA = {
       "familyHistory": "Migraines in mother and grandmother.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine \u2014 I know it can trigger migraines.",
       "socialOccupation": "Surgeon \u2014 migraine disability is professionally threatening."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "musculoskeletal": {
     "id": "musculoskeletal",
@@ -70235,7 +70873,9 @@ window.CRT_DATA = {
       "familyHistory": "Back problems run in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink on weekends.",
       "socialOccupation": "Software engineer \u2014 sedentary job."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "fracture-pain": {
     "id": "fracture-pain",
@@ -70416,7 +71056,9 @@ window.CRT_DATA = {
       "familyHistory": "Osteoporosis in mother \u2014 multiple fractures.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "gastric-malignancy": {
     "id": "gastric-malignancy",
@@ -70595,7 +71237,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of stomach cancer.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily \u2014 most evenings.",
       "socialOccupation": "Chef."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "tonsillar-malignancy": {
     "id": "tonsillar-malignancy",
@@ -70771,7 +71415,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink heavily \u2014 wine every night. I don't smoke. I've had multiple sexual partners over the years.",
       "socialOccupation": "Marketing executive."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "meningioma": {
     "id": "meningioma",
@@ -70948,7 +71594,9 @@ window.CRT_DATA = {
       "familyHistory": "Breast cancer in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "High school principal."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "ectopic-pregnancy-workup": {
     "id": "ectopic-pregnancy-workup",
@@ -71126,7 +71774,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pharmacy technician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "epididymoorchitis": {
     "id": "epididymoorchitis",
@@ -71308,7 +71958,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink beer on weekends.",
       "socialOccupation": "Plumber."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "torsion-of-appendix-testis": {
     "id": "torsion-of-appendix-testis",
@@ -71485,7 +72137,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 10 years old.",
       "socialOccupation": "Fifth grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "testicular-traumarupture": {
     "id": "testicular-traumarupture",
@@ -71661,7 +72315,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "Physical education graduate student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "lightning-strike-injury": {
     "id": "lightning-strike-injury",
@@ -71838,7 +72494,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink socially. I don't smoke.",
       "socialOccupation": "Firefighter."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "coral-snake-envenomation": {
     "id": "coral-snake-envenomation",
@@ -72016,7 +72674,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Herpetologist."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aortic-saddle-embolus": {
     "id": "aortic-saddle-embolus",
@@ -72178,7 +72838,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease.",
       "socialSmokingAlcohol": "Former smoker. I drink wine occasionally.",
       "socialOccupation": "Retired judge."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-sma-thrombosis": {
     "id": "acute-sma-thrombosis",
@@ -72339,7 +73001,9 @@ window.CRT_DATA = {
       "familyHistory": "Widespread heart disease in family.",
       "socialSmokingAlcohol": "Former smoker \u2014 fifty pack-years. I don't drink.",
       "socialOccupation": "Retired nurse."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acute-thrombotic-occlusion": {
     "id": "acute-thrombotic-occlusion",
@@ -72501,7 +73165,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease and vascular disease throughout family.",
       "socialSmokingAlcohol": "I smoke one pack a day \u2014 I know I should stop. I don't drink.",
       "socialOccupation": "Retired postal worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "vascular-injury-with-limb-ischemia": {
     "id": "vascular-injury-with-limb-ischemia",
@@ -72679,7 +73345,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Construction laborer."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "incarcerated-hernia-with-strangulation": {
     "id": "incarcerated-hernia-with-strangulation",
@@ -72858,7 +73526,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I drink beer occasionally.",
       "socialOccupation": "Retired longshoreman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "incarcerated-incisional-hernia": {
     "id": "incarcerated-incisional-hernia",
@@ -73037,7 +73707,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "Bookkeeper."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "mesenteric-lymphadenitis": {
     "id": "mesenteric-lymphadenitis",
@@ -73217,7 +73889,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I am 12 years old.",
       "socialOccupation": "Seventh grade."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "lung-cancer-staging": {
     "id": "lung-cancer-staging",
@@ -73397,7 +74071,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of lung cancer.",
       "socialSmokingAlcohol": "I smoke two packs a day \u2014 fifty years. I drink on weekends.",
       "socialOccupation": "Retired electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "lung-cancer-post-obstructive": {
     "id": "lung-cancer-post-obstructive",
@@ -73575,7 +74251,9 @@ window.CRT_DATA = {
       "familyHistory": "Father died of lung cancer.",
       "socialSmokingAlcohol": "I smoke two packs a day. I drink occasionally.",
       "socialOccupation": "Retired electrician."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "lung-cancer-with-postobstructive-process": {
     "id": "lung-cancer-with-postobstructive-process",
@@ -73755,7 +74433,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung cancer in father.",
       "socialSmokingAlcohol": "I smoke two packs a day. I drink on weekends.",
       "socialOccupation": "Retired construction foreman."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "scid-ada": {
     "id": "scid-ada",
@@ -73921,7 +74601,9 @@ window.CRT_DATA = {
       "familyHistory": "Two children from a similar family union \u2014 one died in infancy of infection. Consanguinity raises risk of autosomal recessive conditions.",
       "socialSmokingAlcohol": "She is 6 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cgd-xlinked": {
     "id": "cgd-xlinked",
@@ -74083,7 +74765,9 @@ window.CRT_DATA = {
       "familyHistory": "Maternal uncle died of infection in childhood \u2014 CGD suspected retrospectively.",
       "socialSmokingAlcohol": "He is 4 years old.",
       "socialOccupation": "Preschool."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hypereosinophilic-syndrome": {
     "id": "hypereosinophilic-syndrome",
@@ -74278,7 +74962,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
       "socialOccupation": "High school biology teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "postconcussion-with-intracranial-hypertension": {
     "id": "postconcussion-with-intracranial-hypertension",
@@ -74458,7 +75144,9 @@ window.CRT_DATA = {
       "familyHistory": "Migraines in mother.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm 17.",
       "socialOccupation": "High school junior. Soccer captain."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "musculoskeletal-back-pain": {
     "id": "musculoskeletal-back-pain",
@@ -74640,7 +75328,9 @@ window.CRT_DATA = {
       "familyHistory": "Chronic pain in family.",
       "socialSmokingAlcohol": "I don't smoke. I drink wine nightly \u2014 'for the pain.'",
       "socialOccupation": "Retail manager \u2014 on partial disability."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pathologic-fracture": {
     "id": "pathologic-fracture",
@@ -74818,7 +75508,9 @@ window.CRT_DATA = {
       "familyHistory": "Prostate cancer in father.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired high school principal."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "pubic-ramus-fracture": {
     "id": "pubic-ramus-fracture",
@@ -74997,7 +75689,9 @@ window.CRT_DATA = {
       "familyHistory": "Osteoporosis throughout family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired. Avid gardener."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "surgical-bleeding": {
     "id": "surgical-bleeding",
@@ -75177,7 +75871,9 @@ window.CRT_DATA = {
       "familyHistory": "Heart disease.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "necrotizing-fasciitis-of-neck": {
     "id": "necrotizing-fasciitis-of-neck",
@@ -75356,7 +76052,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes everywhere.",
       "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily.",
       "socialOccupation": "Day laborer. Uninsured."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "abpa-aspergillus": {
     "id": "abpa-aspergillus",
@@ -75507,7 +76205,9 @@ window.CRT_DATA = {
       "familyHistory": "Asthma and allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Elementary school teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "acne-management": {
     "id": "acne-management",
@@ -75655,7 +76355,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had severe cystic acne \u2014 scarred.",
       "socialSmokingAlcohol": "I don't smoke or drink. I'm 17.",
       "socialOccupation": "High school junior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "anxietypanic-attack": {
     "id": "anxietypanic-attack",
@@ -75795,7 +76497,9 @@ window.CRT_DATA = {
       "familyHistory": "Anxiety and depression in family.",
       "socialSmokingAlcohol": "I drink wine \u2014 more than I should lately. I don't smoke.",
       "socialOccupation": "Attorney \u2014 high-stress litigation."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "brain-masstumor": {
     "id": "brain-masstumor",
@@ -75933,7 +76637,9 @@ window.CRT_DATA = {
       "familyHistory": "Lung cancer in father.",
       "socialSmokingAlcohol": "I smoke two packs a day. I drink on weekends.",
       "socialOccupation": "Construction supervisor."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cellulitis": {
     "id": "cellulitis",
@@ -76115,7 +76821,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Retired teacher."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "cerebral-contusion": {
     "id": "cerebral-contusion",
@@ -76254,7 +76962,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
       "socialOccupation": "Construction worker."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "crswNP-biologics": {
     "id": "crswNP-biologics",
@@ -76394,7 +77104,9 @@ window.CRT_DATA = {
       "familyHistory": "Allergies in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Chef \u2014 anosmia ended my culinary career."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "crswNP-dupilumab": {
     "id": "crswNP-dupilumab",
@@ -76533,7 +77245,9 @@ window.CRT_DATA = {
       "familyHistory": "Atopic disease in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Architect."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "diffuse-axonal-injury": {
     "id": "diffuse-axonal-injury",
@@ -76671,7 +77385,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing known.",
       "socialSmokingAlcohol": "Parents say he drinks on weekends. No drugs.",
       "socialOccupation": "College junior."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "giant-cell-arteritis-with-ophthalmic": {
     "id": "giant-cell-arteritis-with-ophthalmic",
@@ -76809,7 +77525,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired ophthalmologist \u2014 I recognized the amaurosis fugax immediately."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "infiltrative-cardiomyopathy": {
     "id": "infiltrative-cardiomyopathy",
@@ -76986,7 +77704,9 @@ window.CRT_DATA = {
       "familyHistory": "Father had heart failure at the same age.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired veterinarian."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "maria-santos": {
     "id": "maria-santos",
@@ -77127,7 +77847,9 @@ window.CRT_DATA = {
       "familyHistory": "Hypertension and diabetes in family.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Home health aide."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "medication-overdose": {
     "id": "medication-overdose",
@@ -77320,7 +78042,9 @@ window.CRT_DATA = {
       "familyHistory": "Depression and anxiety in family.",
       "socialSmokingAlcohol": "I smoke. I drink when I'm really low.",
       "socialOccupation": "Barista. I've been having a very hard time recently."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "metabolic": {
     "id": "metabolic",
@@ -77461,7 +78185,9 @@ window.CRT_DATA = {
       "familyHistory": "Diabetes and kidney disease.",
       "socialSmokingAlcohol": "Former smoker. I don't drink.",
       "socialOccupation": "Retired truck driver."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "psoriasis-moderate-severe": {
     "id": "psoriasis-moderate-severe",
@@ -77609,7 +78335,9 @@ window.CRT_DATA = {
       "familyHistory": "Father has severe psoriasis.",
       "socialSmokingAlcohol": "I smoke half a pack. I drink on weekends.",
       "socialOccupation": "Surgeon \u2014 skin exposure is professionally problematic."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "croup-epiglottitis-ddx": {
     "id": "croup-epiglottitis-ddx",
@@ -77748,7 +78476,9 @@ window.CRT_DATA = {
       "familyHistory": "Nothing relevant.",
       "socialSmokingAlcohol": "He is 3 years old.",
       "socialOccupation": "Preschool."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "angelman-syndrome": {
     "id": "angelman-syndrome",
@@ -77906,7 +78636,9 @@ window.CRT_DATA = {
       "familyHistory": "No known developmental disorders.",
       "socialSmokingAlcohol": "She is 2 years old.",
       "socialOccupation": "Toddler."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "aadc-deficiency": {
     "id": "aadc-deficiency",
@@ -78065,7 +78797,9 @@ window.CRT_DATA = {
       "familyHistory": "Consanguineous parents. A cousin died in infancy with similar symptoms.",
       "socialSmokingAlcohol": "She is 6 months old.",
       "socialOccupation": "Infant."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   },
   "hae-genetics": {
     "id": "hae-genetics",
@@ -78225,6 +78959,8 @@ window.CRT_DATA = {
       "familyHistory": "Mother has HAE. Two maternal cousins have HAE.",
       "socialSmokingAlcohol": "I don't smoke or drink.",
       "socialOccupation": "Pre-med student."
-    }
+    },
+    "imaging": null,
+    "mediaLicense": null
   }
 };

@@ -1047,6 +1047,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <meta name="twitter:title" content="Virtual EMR | ReasonDx">
 <meta name="twitter:description" content="Realistic EMR simulation with 256 patient cases.">
 <script src="js/rdx-difficulty.js"></script>
+<script src="/rdx-email-triggers.js"></script>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
@@ -3579,6 +3580,53 @@ function updateNoteField(id,val){
   if(wc){const w=totalWords();wc.textContent=w?w+" words":""}
 }
 
+// ── Supabase EMR Submission Sync ─────────────────────────────────────────────
+(function(){
+  var SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+  window.EMRCloud = {
+    syncSubmission: async function(studentId, caseId, sub) {
+      try {
+        var caseData = (window.CRT_DATA && caseId) ? window.CRT_DATA[caseId] : null;
+        var payload = {
+          submission_id: studentId + '_' + caseId + '_' + Date.now(),
+          student_id: studentId,
+          case_id: caseId || 'unknown',
+          category: caseData ? (caseData.category || '') : '',
+          diagnosis: caseData ? (caseData.diagnosis || '') : '',
+          acuity: caseData ? (caseData.acuity || null) : null,
+          submitted_at: sub.timestamp || new Date().toISOString(),
+          note_text: sub.text ? sub.text.substring(0, 8000) : '',
+          note_fields: sub.fields ? JSON.stringify(sub.fields).substring(0, 4000) : null,
+          caseframe_score: sub.caseFrameResult ? JSON.stringify(sub.caseFrameResult) : null,
+          order_validation: sub.orderValidationData ? JSON.stringify(sub.orderValidationData) : null,
+          readability_score: (function() {
+            if (window.RdxReadability) {
+              var rs = window.RdxReadability.getSessionSummary();
+              return rs ? JSON.stringify(rs) : null;
+            }
+            return null;
+          })()
+        };
+        await fetch(SB_URL + '/rest/v1/emr_submissions', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SB_KEY,
+            'Authorization': 'Bearer ' + SB_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch(e) {
+        // Silent fail — localStorage is the source of truth
+        console.warn('EMR cloud sync failed:', e);
+      }
+    }
+  };
+})();
+
 function submitDoc(){
   const hasContent=Object.values(S.noteFields).some(v=>v&&v.trim());
   if(!hasContent){showToast("Please write in at least one section before submitting");return}
@@ -3594,7 +3642,20 @@ function submitDoc(){
   dbSet("subs-"+S.currentUser.username,S.submissions);
   // Cloud sync
   if(window.EMRCloud){EMRCloud.syncSubmission(S.currentUser.username,CASE_ID||'',sub)}
-  
+
+  // ── Flodesk performance email trigger ──
+  if(window.RDXEmail && S.currentUser && S.currentUser.username){
+    var _firstEmrKey = 'rdx-first-emr-sent-' + S.currentUser.username;
+    RDXEmail.emrSubmitted({
+      email:     S.currentUser.username,
+      firstName: (S.currentUser.displayName||'').split(' ')[0],
+      caseId:    CASE_ID || '',
+      diagnosis: (window.CRT_DATA && CASE_ID && window.CRT_DATA[CASE_ID])
+                   ? window.CRT_DATA[CASE_ID].diagnosis : '',
+      isFirstEver: !localStorage.getItem(_firstEmrKey),
+    });
+  }
+
   showToast("✓ Documentation submitted successfully");
   render();
 }

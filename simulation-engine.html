@@ -1312,6 +1312,27 @@ function enterPhase(phase) {
               document.getElementById('chatMessages').appendChild(btnDiv);
             }
 
+            // ── FLODESK EMAIL TRIGGER ──
+            if (window.RDXEmail) {
+              var _email = (window.RdxPlatform && window.RdxPlatform.getUserEmail)
+                ? window.RdxPlatform.getUserEmail() : state.studentName;
+              var _ddxAcc = null;
+              if (state.differentials && state.differentials.revised && caseData.targetDiagnosis) {
+                var _revDx = state.differentials.revised.map(function(e){ return (e.diagnosis||e.name||e||'').toLowerCase(); });
+                _ddxAcc = _revDx.includes((caseData.targetDiagnosis||'').toLowerCase()) ? 1 : 0;
+              }
+              RDXEmail.simCompleted({
+                email:      _email,
+                firstName:  (state.studentName||'').split(' ')[0],
+                caseId:     caseData.caseId || '',
+                diagnosis:  caseData.targetDiagnosis || caseData.diagnosis || '',
+                specialty:  caseData.category || '',
+                acuity:     caseData.acuity || 2,
+                ddxAccuracy: _ddxAcc,
+                phasesCompleted: state.currentPhase || 0,
+              });
+            }
+
             // ── CASE EXPLAINER AGENT — personalized learning synthesis ──
             setTimeout(function() {
               if (window.CaseExplainerAgent) {
