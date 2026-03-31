@@ -81,6 +81,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .hidden{display:none}
 </style>
 <script src="/case-explainer-agent.js"></script>
+<script src="/rdx-voice-patient.js"></script>
 </head>
 <body>
 
@@ -800,6 +801,12 @@ async function sendMessage() {
       var pb = caseData.patientPushback.find(function(p) { return new RegExp(p.trigger, 'i').test(msg); });
       if (pb) {
         addMessage('patient', pb.patientResponse);
+
+        // ── Voice Patient — speak the response aloud ──
+        if (window.RDXVoicePatient) {
+          RDXVoicePatient.speak(pb.patientResponse, caseData && caseData.patientScript);
+        }
+
         state.conversationMessages.push({ role: 'assistant', content: pb.patientResponse });
         state.turns.push({ role: 'assistant', content: pb.patientResponse, timestamp: new Date().toISOString(), phase: state.currentPhase, turnNumber: ++state.turnCount, agentSource: 'patient_pushback' });
         // Log pushback
