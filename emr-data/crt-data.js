@@ -64857,6 +64857,18 @@ window.CRT_DATA = {
         "it happened suddenly \u2014 like a switch was flipped",
         "neither leg has a pulse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Bilateral Embolectomy \u2014 Reperfusion Decisions",
+        "scenario": "Bilateral femoral cutdowns, saddle embolus removed. Pulses restored bilaterally. Massive bilateral lower extremity edema developing on table. CK 42,000. Surgeon asks about bilateral prophylactic fasciotomy vs selective.",
+        "newData": {
+          "CK": "42,000 IU/L",
+          "IschemiaTime": ">6 hours",
+          "BilateralEdema": "Developing on table post-reperfusion",
+          "Note": "Bilateral ischemia >6h \u2014 bilateral four-compartment fasciotomy prophylactically; massive K+ and acid load anticipated"
+        }
+      }
     }
   },
   "acute-sma-thrombosis": {
