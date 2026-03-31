@@ -80,6 +80,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .intake-btn:hover{filter:brightness(1.1)}
 .hidden{display:none}
 </style>
+<script src="/case-explainer-agent.js"></script>
 </head>
 <body>
 
@@ -1310,6 +1311,14 @@ function enterPhase(phase) {
                 '</div>';
               document.getElementById('chatMessages').appendChild(btnDiv);
             }
+
+            // ── CASE EXPLAINER AGENT — personalized learning synthesis ──
+            setTimeout(function() {
+              if (window.CaseExplainerAgent) {
+                CaseExplainerAgent.run({ state: state, caseData: caseData, chatEl: chatEl });
+              }
+            }, 800);
+
           });
         }, 1500);
       }

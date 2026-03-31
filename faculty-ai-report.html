@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Faculty Report Agent · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:      #0d1f2d;
+    --blue:     #2874A6;
+    --blue-lt:  #dbeafe;
+    --blue-dk:  #1a4f7a;
+    --gold:     #c9963e;
+    --paper:    #f9f7f4;
+    --rule:     #e2ddd6;
+    --muted:    #6b7280;
+    --success:  #166534;
+    --warn:     #92400e;
+    --danger:   #991b1b;
+    --mono:     'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .hd {
+    background: var(--ink);
+    padding: 18px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .hd-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+  .hd-logo span { color: var(--gold); }
+  .hd-sep { width: 1px; height: 24px; background: #334155; }
+  .hd-sub {
+    font-size: 12px;
+    color: #94a3b8;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .hd-back {
+    margin-left: auto;
+    color: #94a3b8;
+    font-size: 13px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .hd-back:hover { color: #fff; }
+
+  /* ── Layout ── */
+  .shell {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .page-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+
+  /* ── Config panel ── */
+  .config-panel {
+    background: #fff;
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px 24px;
+  }
+  .config-panel .full { grid-column: 1 / -1; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  select, input[type=date], input[type=text] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--rule);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    outline: none;
+    transition: border-color .15s;
+  }
+  select:focus, input:focus { border-color: var(--blue); }
+
+  .btn-gen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 13px 24px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+  }
+  .btn-gen:hover { background: var(--blue-dk); }
+  .btn-gen:active { transform: scale(.98); }
+  .btn-gen:disabled { opacity: .5; cursor: not-allowed; }
+
+  /* ── Stats row ── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .stat-card {
+    background: #fff;
+    border: 1.5px solid var(--rule);
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 34px;
+    color: var(--blue);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-lbl {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    font-weight: 500;
+  }
+
+  /* ── Specialty breakdown ── */
+  .breakdown {
+    background: #fff;
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  .breakdown-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .spec-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .spec-name {
+    font-size: 13px;
+    font-weight: 500;
+    width: 140px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .spec-bar-wrap {
+    flex: 1;
+    background: var(--rule);
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+  }
+  .spec-bar {
+    height: 100%;
+    border-radius: 4px;
+    background: var(--blue);
+    transition: width .6s cubic-bezier(.4,0,.2,1);
+  }
+  .spec-bar.gap { background: #ef4444; }
+  .spec-count {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* ── Report output ── */
+  .report-panel {
+    background: #fff;
+    border: 1.5px solid var(--rule);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .report-header {
+    background: var(--ink);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .report-header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: -0.2px;
+  }
+  .report-status {
+    margin-left: auto;
+    font-size: 12px;
+    color: #94a3b8;
+    font-family: var(--mono);
+  }
+  .report-body {
+    padding: 28px;
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink);
+    min-height: 100px;
+  }
+  .report-body.streaming { position: relative; }
+  .report-body.streaming::after {
+    content: '▋';
+    animation: blink .7s steps(1) infinite;
+    color: var(--blue);
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .report-body h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--blue-dk);
+    margin: 24px 0 8px;
+    border-left: 3px solid var(--gold);
+    padding-left: 12px;
+  }
+  .report-body h3:first-child { margin-top: 0; }
+  .report-body p { margin-bottom: 12px; }
+  .report-body ul { margin: 8px 0 12px 20px; }
+  .report-body li { margin-bottom: 6px; }
+  .report-body strong { color: var(--blue-dk); }
+
+  .report-empty {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 14px;
+  }
+
+  /* ── Actions ── */
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .btn-action {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    border: 1.5px solid var(--rule);
+    background: #fff;
+    color: var(--ink);
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .btn-action:hover { background: var(--paper); border-color: var(--blue); color: var(--blue); }
+  .btn-action.primary {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .btn-action.primary:hover { background: var(--blue-dk); }
+
+  /* ── Pulse loader ── */
+  .pulse-row {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .pulse-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    animation: pdot .9s ease-in-out infinite;
+  }
+  .pulse-dot:nth-child(2) { animation-delay: .15s; }
+  .pulse-dot:nth-child(3) { animation-delay: .3s; }
+  @keyframes pdot { 0%,100%{transform:scale(.6);opacity:.4} 50%{transform:scale(1);opacity:1} }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--ink);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: all .25s;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 680px) {
+    .config-panel { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-sep"></div>
+  <div class="hd-sub">Faculty Report Agent</div>
+  <a href="/faculty-dashboard.html" class="hd-back">← Dashboard</a>
+</div>
+
+<div class="shell">
+  <h1 class="page-title">AI Class Performance Report</h1>
+  <p class="page-sub">Pulls live Supabase data · generates a narrative faculty report via Claude · exports to email or PDF</p>
+
+  <!-- Config -->
+  <div class="config-panel">
+    <div>
+      <label>Date From</label>
+      <input type="date" id="dateFrom">
+    </div>
+    <div>
+      <label>Date To</label>
+      <input type="date" id="dateTo">
+    </div>
+    <div>
+      <label>Cohort / Group</label>
+      <input type="text" id="cohort" placeholder="e.g. KPCAM M2 Block 3">
+    </div>
+    <div>
+      <label>Minimum Sessions</label>
+      <select id="minSessions">
+        <option value="1">Any (≥1 session)</option>
+        <option value="3">≥3 sessions</option>
+        <option value="5" selected>≥5 sessions</option>
+        <option value="10">≥10 sessions</option>
+      </select>
+    </div>
+    <div>
+      <label>Report Focus</label>
+      <select id="focus">
+        <option value="comprehensive">Comprehensive overview</option>
+        <option value="gaps">Gap analysis only</option>
+        <option value="strengths">Strengths + recommendations</option>
+        <option value="assign">Case assignment recommendations</option>
+      </select>
+    </div>
+    <div>
+      <label>Tone</label>
+      <select id="tone">
+        <option value="formal">Formal (institutional report)</option>
+        <option value="collegial">Collegial (team communication)</option>
+        <option value="email">Email to send to students</option>
+      </select>
+    </div>
+    <div class="full">
+      <button class="btn-gen" onclick="runReport()" id="genBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        Generate AI Report
+      </button>
+    </div>
+  </div>
+
+  <!-- Stats row (populated after data pull) -->
+  <div class="stats-row" id="statsRow" style="display:none">
+    <div class="stat-card">
+      <div class="stat-num" id="sSessions">—</div>
+      <div class="stat-lbl">Total Sessions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="sStudents">—</div>
+      <div class="stat-lbl">Unique Students</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="sCompletion">—</div>
+      <div class="stat-lbl">Completion Rate</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="sHistory">—</div>
+      <div class="stat-lbl">Avg History Score</div>
+    </div>
+  </div>
+
+  <!-- Specialty breakdown (populated after data pull) -->
+  <div class="breakdown" id="breakdownPanel" style="display:none">
+    <div class="breakdown-title">Cases by Specialty</div>
+    <div id="specBars"></div>
+  </div>
+
+  <!-- AI Report output -->
+  <div class="report-panel" id="reportPanel" style="display:none">
+    <div class="report-header">
+      <div class="report-header-title">AI-Generated Report</div>
+      <div class="report-status" id="reportStatus">Ready</div>
+    </div>
+    <div class="report-body" id="reportBody">
+      <div class="report-empty">Report will appear here after generation.</div>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions" id="actionsRow" style="display:none">
+    <button class="btn-action primary" onclick="copyReport()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy Report
+    </button>
+    <button class="btn-action" onclick="printReport()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / PDF
+    </button>
+    <button class="btn-action" onclick="runReport()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+      Regenerate
+    </button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── Config ──────────────────────────────────────────────────────────────────
+const SUPABASE_URL  = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+// ── Supabase client ──────────────────────────────────────────────────────────
+let db;
+try {
+  db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+} catch(e) { console.warn('Supabase init failed:', e); }
+
+// ── Date defaults (last 30 days) ─────────────────────────────────────────────
+(function setDefaults() {
+  const now = new Date();
+  const past = new Date(now);
+  past.setDate(past.getDate() - 30);
+  document.getElementById('dateFrom').value = past.toISOString().slice(0, 10);
+  document.getElementById('dateTo').value   = now.toISOString().slice(0, 10);
+})();
+
+// ── State ────────────────────────────────────────────────────────────────────
+let rawData = [];
+let reportMarkdown = '';
+
+// ── Pull Supabase data ────────────────────────────────────────────────────────
+async function fetchData() {
+  if (!db) throw new Error('Supabase not initialized');
+
+  const from   = document.getElementById('dateFrom').value;
+  const to     = document.getElementById('dateTo').value;
+  const minSes = parseInt(document.getElementById('minSessions').value, 10);
+
+  // Pull completed sessions in date range
+  const { data, error } = await db
+    .from('rad_study_sessions')
+    .select([
+      'student_id', 'case_id', 'category', 'acuity', 'diagnosis',
+      'status', 'env_history_score', 'turn_count',
+      'ddx_comparison', 'created_at', 'completed_at'
+    ].join(','))
+    .gte('created_at', from + 'T00:00:00Z')
+    .lte('created_at', to + 'T23:59:59Z')
+    .eq('status', 'complete')
+    .order('created_at', { ascending: false })
+    .limit(2000);
+
+  if (error) throw error;
+  if (!data || data.length === 0) return [];
+
+  // Filter by minSessions per student
+  const byStudent = {};
+  data.forEach(s => {
+    (byStudent[s.student_id] = byStudent[s.student_id] || []).push(s);
+  });
+
+  return Object.entries(byStudent)
+    .filter(([_, sessions]) => sessions.length >= minSes)
+    .flatMap(([_, sessions]) => sessions);
+}
+
+// ── Aggregate for display & prompt ───────────────────────────────────────────
+function aggregate(sessions) {
+  const students = new Set(sessions.map(s => s.student_id));
+  const total    = sessions.length;
+  const complete = sessions.filter(s => s.status === 'complete').length;
+  const avgHist  = sessions.reduce((a, s) => a + (s.env_history_score || 0), 0) / (total || 1);
+
+  // Specialty breakdown
+  const specCounts = {};
+  sessions.forEach(s => {
+    const cat = (s.category || 'uncategorized').toLowerCase();
+    specCounts[cat] = (specCounts[cat] || 0) + 1;
+  });
+  const sortedSpec = Object.entries(specCounts)
+    .sort((a, b) => b[1] - a[1]);
+
+  // Acuity distribution
+  const acuityDist = { 1: 0, 2: 0, 3: 0, 4: 0 };
+  sessions.forEach(s => { acuityDist[s.acuity || 3]++; });
+
+  // DDx accuracy (check if final diagnosis matches target)
+  const ddxAttempts = sessions.filter(s => s.ddx_comparison);
+  const ddxCorrect  = ddxAttempts.filter(s => {
+    try {
+      const d = typeof s.ddx_comparison === 'string'
+        ? JSON.parse(s.ddx_comparison) : s.ddx_comparison;
+      return d && d.correct === true;
+    } catch { return false; }
+  });
+  const ddxRate = ddxAttempts.length
+    ? Math.round(ddxCorrect.length / ddxAttempts.length * 100) : null;
+
+  // Most missed cases (most sessions without ddx correct)
+  const caseMisses = {};
+  sessions.forEach(s => {
+    let correct = false;
+    try {
+      const d = typeof s.ddx_comparison === 'string'
+        ? JSON.parse(s.ddx_comparison) : s.ddx_comparison;
+      correct = d && d.correct === true;
+    } catch {}
+    if (!correct && s.case_id) {
+      caseMisses[s.case_id] = (caseMisses[s.case_id] || { count: 0, diagnosis: s.diagnosis });
+      caseMisses[s.case_id].count++;
+    }
+  });
+  const topGaps = Object.entries(caseMisses)
+    .sort((a, b) => b[1].count - a[1].count)
+    .slice(0, 5)
+    .map(([cid, v]) => ({ caseId: cid, diagnosis: v.diagnosis, misses: v.count }));
+
+  return { students, total, complete, avgHist, sortedSpec, acuityDist, ddxRate, topGaps };
+}
+
+// ── Render stats ─────────────────────────────────────────────────────────────
+function renderStats(agg) {
+  document.getElementById('sSessions').textContent  = agg.total;
+  document.getElementById('sStudents').textContent  = agg.students.size;
+  document.getElementById('sCompletion').textContent =
+    agg.total ? Math.round(agg.complete / agg.total * 100) + '%' : '—';
+  document.getElementById('sHistory').textContent   =
+    agg.avgHist.toFixed(1) + '/2';
+
+  document.getElementById('statsRow').style.display = 'grid';
+
+  // Specialty bars
+  const maxCount = agg.sortedSpec[0]?.[1] || 1;
+  const barsHtml = agg.sortedSpec.slice(0, 10).map(([name, count]) => {
+    const pct = Math.round(count / maxCount * 100);
+    const isLow = pct < 15;
+    return `
+      <div class="spec-row">
+        <div class="spec-name">${cap(name)}</div>
+        <div class="spec-bar-wrap">
+          <div class="spec-bar ${isLow ? 'gap' : ''}" style="width:${pct}%"></div>
+        </div>
+        <div class="spec-count">${count}</div>
+      </div>`;
+  }).join('');
+  document.getElementById('specBars').innerHTML = barsHtml;
+  document.getElementById('breakdownPanel').style.display = 'block';
+}
+
+function cap(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1).replace(/_/g, ' ');
+}
+
+// ── Build prompt for Claude ───────────────────────────────────────────────────
+function buildPrompt(agg, opts) {
+  const { total, students, complete, avgHist, sortedSpec,
+          acuityDist, ddxRate, topGaps } = agg;
+  const cohort = opts.cohort || 'the student cohort';
+  const focus  = opts.focus;
+  const tone   = opts.tone;
+  const from   = opts.from;
+  const to     = opts.to;
+
+  const specSummary = sortedSpec.slice(0, 6)
+    .map(([cat, n]) => `${cap(cat)}: ${n} sessions`).join(', ');
+
+  const gapList = topGaps.length
+    ? topGaps.map((g, i) => `${i+1}. ${g.diagnosis || g.caseId} (missed ${g.misses}×)`).join('\n')
+    : 'No consistent gaps identified.';
+
+  const toneGuide =
+    tone === 'formal'    ? 'Write in formal academic prose suitable for a department chair or accreditation report.' :
+    tone === 'collegial' ? 'Write in warm collegial prose suitable for a faculty team email.' :
+                           'Write as a direct, encouraging email from a faculty member to medical students.';
+
+  const focusGuide =
+    focus === 'gaps'      ? 'Focus primarily on knowledge and reasoning gaps. Be specific about which clinical presentations students struggled with.' :
+    focus === 'strengths' ? 'Lead with genuine strengths, then transition to targeted improvement recommendations.' :
+    focus === 'assign'    ? 'Your primary output is a prioritized list of specific case recommendations for the instructor to assign next.' :
+                            'Provide a comprehensive overview: performance summary, key strengths, primary gaps, and 3 specific action recommendations.';
+
+  return `You are writing a faculty clinical reasoning performance report for ${cohort}.
+${toneGuide}
+${focusGuide}
+
+=== DATA SUMMARY (${from} to ${to}) ===
+Total simulation sessions: ${total}
+Unique students: ${students.size}
+Completion rate: ${total ? Math.round(complete/total*100) : 0}%
+Average history-taking score: ${avgHist.toFixed(2)}/2.0
+DDx accuracy rate: ${ddxRate !== null ? ddxRate + '%' : 'insufficient data'}
+Acuity distribution: Critical ESI-1: ${acuityDist[1]}, Urgent ESI-2: ${acuityDist[2]}, Stable ESI-3: ${acuityDist[3]+acuityDist[4]}
+Case coverage by specialty: ${specSummary}
+
+=== TOP DIAGNOSTIC GAPS ===
+${gapList}
+
+=== FORMAT REQUIREMENTS ===
+Use exactly these section headers (## format):
+## Performance Overview
+## Key Strengths
+## Priority Gaps
+## Recommended Actions
+
+Under "Recommended Actions", include exactly 3 numbered items, each naming:
+- A specific case type or diagnosis to assign
+- Why (what reasoning skill it builds)
+- Suggested acuity level
+
+Keep the entire report under 500 words. Be specific. Cite the data.`;
+}
+
+// ── Stream from Claude API ────────────────────────────────────────────────────
+async function streamClaudeReport(prompt) {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      stream: true,
+      messages: [{ role: 'user', content: prompt }],
+      system: 'You are a clinical medical education analyst writing precise, data-driven faculty reports. Be specific, cite numbers, and avoid vague generalities. Format with the exact markdown headers requested.',
+    }),
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`Claude API: ${response.status} — ${err}`);
+  }
+
+  return response;
+}
+
+// ── Parse markdown to HTML ────────────────────────────────────────────────────
+function md2html(text) {
+  return text
+    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/\n(\d+\.) /g, '</p><p><strong>$1</strong> ')
+    .replace(/\n- /g, '</p><p>• ')
+    .replace(/\n/g, ' ')
+    .replace(/^/, '<p>')
+    .replace(/$/, '</p>');
+}
+
+// ── Main run ──────────────────────────────────────────────────────────────────
+let isRunning = false;
+
+async function runReport() {
+  if (isRunning) return;
+  isRunning = true;
+
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true;
+  btn.innerHTML = `
+    <div class="pulse-row">
+      <div class="pulse-dot"></div>
+      <div class="pulse-dot"></div>
+      <div class="pulse-dot"></div>
+    </div>
+    Pulling data...`;
+
+  const reportPanel = document.getElementById('reportPanel');
+  const reportBody  = document.getElementById('reportBody');
+  const reportStatus = document.getElementById('reportStatus');
+  reportPanel.style.display = 'block';
+  reportBody.innerHTML = '<div class="report-empty">Fetching session data...</div>';
+  reportStatus.textContent = 'Fetching...';
+
+  try {
+    // 1. Pull data
+    rawData = await fetchData();
+
+    if (rawData.length === 0) {
+      reportBody.innerHTML = '<div class="report-empty">No sessions found for the selected date range and filters. Try widening the date range or lowering the minimum sessions threshold.</div>';
+      reportStatus.textContent = 'No data';
+      return;
+    }
+
+    // 2. Aggregate
+    const agg = aggregate(rawData);
+    renderStats(agg);
+
+    // 3. Build prompt
+    btn.innerHTML = `<div class="pulse-row"><div class="pulse-dot"></div><div class="pulse-dot"></div><div class="pulse-dot"></div></div> Generating report...`;
+    reportStatus.textContent = 'Streaming...';
+
+    const prompt = buildPrompt(agg, {
+      cohort: document.getElementById('cohort').value,
+      focus:  document.getElementById('focus').value,
+      tone:   document.getElementById('tone').value,
+      from:   document.getElementById('dateFrom').value,
+      to:     document.getElementById('dateTo').value,
+    });
+
+    // 4. Stream Claude response
+    const response = await streamClaudeReport(prompt);
+    const reader   = response.body.getReader();
+    const decoder  = new TextDecoder();
+
+    let fullText = '';
+    reportBody.innerHTML = '';
+    reportBody.classList.add('streaming');
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+      for (const line of chunk.split('\n')) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          const delta  = parsed.delta?.text || '';
+          if (delta) {
+            fullText += delta;
+            reportBody.innerHTML = md2html(fullText);
+          }
+        } catch {}
+      }
+    }
+
+    reportBody.classList.remove('streaming');
+    reportMarkdown = fullText;
+    reportStatus.textContent = `Generated ${new Date().toLocaleTimeString()}`;
+    document.getElementById('actionsRow').style.display = 'flex';
+
+  } catch (err) {
+    console.error(err);
+    reportBody.innerHTML = `<div class="report-empty">Error: ${err.message}</div>`;
+    reportStatus.textContent = 'Error';
+    toast('Error generating report — check console');
+  } finally {
+    isRunning = false;
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Generate AI Report`;
+  }
+}
+
+// ── Actions ───────────────────────────────────────────────────────────────────
+function copyReport() {
+  if (!reportMarkdown) return;
+  navigator.clipboard.writeText(reportMarkdown)
+    .then(() => toast('Report copied to clipboard'))
+    .catch(() => toast('Copy failed — try selecting and copying manually'));
+}
+
+function printReport() {
+  window.print();
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ── Print styles ──────────────────────────────────────────────────────────────
+const printCss = `
+  @media print {
+    .hd, .config-panel, .btn-gen, .btn-action, .actions, #toast { display: none !important; }
+    body { background: #fff; }
+    .shell { padding: 0; max-width: 100%; }
+    .report-panel { border: none; box-shadow: none; }
+    .report-header { background: #fff; color: #000; border-bottom: 2px solid #000; }
+    .report-header-title { color: #000; }
+  }
+`;
+const styleEl = document.createElement('style');
+styleEl.textContent = printCss;
+document.head.appendChild(styleEl);
+</script>
+</body>
+</html>

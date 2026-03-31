@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Authoring Agent · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:       #0f1117;
+    --surface:  #1a1d27;
+    --surface2: #22263a;
+    --border:   #2e3452;
+    --blue:     #2874A6;
+    --blue-lt:  #60a5fa;
+    --gold:     #f59e0b;
+    --text:     #e2e8f0;
+    --muted:    #64748b;
+    --green:    #34d399;
+    --red:      #f87171;
+    --mono:     'JetBrains Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  .hd {
+    padding: 16px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface);
+  }
+  .hd-logo {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 20px;
+    color: #fff;
+  }
+  .hd-logo span { color: var(--gold); }
+  .hd-badge {
+    padding: 3px 10px;
+    background: rgba(40, 116, 166, .25);
+    border: 1px solid var(--blue);
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--blue-lt);
+  }
+  .hd-back {
+    margin-left: auto;
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+  }
+  .hd-back:hover { color: var(--text); }
+
+  /* ── Two-col layout ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    min-height: calc(100vh - 57px);
+  }
+
+  /* ── Left: form panel ── */
+  .form-panel {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    padding: 28px 24px;
+  }
+
+  .panel-title {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 17px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .panel-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+  label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  label .req { color: var(--gold); margin-left: 2px; }
+
+  input[type=text], textarea, select {
+    width: 100%;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text);
+    outline: none;
+    resize: vertical;
+    transition: border-color .15s;
+  }
+  textarea { min-height: 80px; line-height: 1.55; }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--blue);
+  }
+
+  select option { background: var(--surface2); }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 22px 0;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--blue-lt);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .btn-generate {
+    width: 100%;
+    padding: 13px;
+    background: var(--blue);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background .15s, transform .1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .btn-generate:hover { background: #1a5f8a; }
+  .btn-generate:active { transform: scale(.98); }
+  .btn-generate:disabled { opacity: .45; cursor: not-allowed; }
+
+  .hint {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ── Right: output panel ── */
+  .output-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .output-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    padding: 0 20px;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .tab {
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+    user-select: none;
+  }
+  .tab:hover { color: var(--text); }
+  .tab.active {
+    color: var(--blue-lt);
+    border-bottom-color: var(--blue-lt);
+  }
+
+  .output-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px 28px;
+    position: relative;
+  }
+
+  /* ── Preview tab ── */
+  .preview-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .preview-card-header {
+    background: var(--surface2);
+    padding: 14px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .preview-card-header .tag {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .tag-acuity1 { background: #7f1d1d; color: #fca5a5; }
+  .tag-acuity2 { background: #78350f; color: #fcd34d; }
+  .tag-acuity3 { background: #14532d; color: #86efac; }
+  .preview-card-body { padding: 18px 20px; }
+
+  .preview-diag {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+  .preview-cc {
+    font-size: 14px;
+    color: var(--blue-lt);
+    margin-bottom: 16px;
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .preview-field {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .preview-field-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .preview-field-val {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .preview-section {
+    margin-bottom: 14px;
+  }
+  .preview-section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .preview-section-body {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  /* ── JSON tab ── */
+  .json-wrap {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .json-toolbar {
+    background: var(--surface);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .json-filename {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .btn-copy-json {
+    margin-left: auto;
+    padding: 5px 14px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 12px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .btn-copy-json:hover { background: var(--blue); border-color: var(--blue); }
+
+  .json-body {
+    padding: 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.75;
+    color: #94a3b8;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+  .json-key   { color: var(--blue-lt); }
+  .json-str   { color: #86efac; }
+  .json-num   { color: #f59e0b; }
+  .json-bool  { color: #f87171; }
+  .json-null  { color: var(--muted); }
+
+  /* ── Empty / streaming states ── */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    gap: 16px;
+    color: var(--muted);
+  }
+  .empty-icon {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .5;
+  }
+  .empty-text { font-size: 14px; }
+
+  .stream-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    background: rgba(40, 116, 166, .12);
+    border: 1px solid rgba(40, 116, 166, .3);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--blue-lt);
+  }
+  .dot-spin {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--blue-lt);
+    animation: spin-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes spin-pulse {
+    0%,100%{transform:scale(.5);opacity:.3}
+    50%{transform:scale(1);opacity:1}
+  }
+
+  /* ── Toast ── */
+  #toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all .2s;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 800px) {
+    .two-col { grid-template-columns: 1fr; }
+    .form-panel { border-right: none; border-bottom: 1px solid var(--border); }
+    .output-tabs { padding: 0 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-badge">Case Authoring Agent</div>
+  <a href="/faculty-dashboard.html" class="hd-back">← Dashboard</a>
+</div>
+
+<div class="two-col">
+
+  <!-- ── LEFT: Input form ── -->
+  <div class="form-panel">
+    <div class="panel-title">New Case Generator</div>
+    <p class="panel-sub">Describe a clinical scenario and teaching objective. Claude generates a complete CRT-data entry ready to add to ReasonDx.</p>
+
+    <div class="section-label">Core Details</div>
+
+    <div class="field">
+      <label>Diagnosis <span class="req">*</span></label>
+      <input type="text" id="diagnosis" placeholder="e.g. Spontaneous bacterial peritonitis">
+    </div>
+
+    <div class="field">
+      <label>Chief Complaint <span class="req">*</span></label>
+      <input type="text" id="chiefComplaint" placeholder="e.g. Fever and abdominal pain in a cirrhotic patient">
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Acuity</label>
+        <select id="acuity">
+          <option value="1">ESI 1 — Critical</option>
+          <option value="2" selected>ESI 2 — Urgent</option>
+          <option value="3">ESI 3 — Stable</option>
+          <option value="4">ESI 4 — Outpatient</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Specialty</label>
+        <select id="specialty">
+          <option value="gastroenterology">Gastroenterology</option>
+          <option value="cardiovascular">Cardiovascular</option>
+          <option value="pulmonary">Pulmonary</option>
+          <option value="infectious">Infectious Disease</option>
+          <option value="neurologic">Neurologic</option>
+          <option value="endocrine">Endocrine</option>
+          <option value="renal">Renal</option>
+          <option value="hematologic">Hematologic</option>
+          <option value="allergy">Allergy/Immunology</option>
+          <option value="emergency">Emergency Medicine</option>
+          <option value="rheumatologic">Rheumatologic</option>
+          <option value="obstetric">Obstetric</option>
+          <option value="pediatric">Pediatric</option>
+          <option value="geriatric">Geriatric</option>
+          <option value="surgical">Surgical</option>
+          <option value="psychiatric">Psychiatric</option>
+        </select>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Patient</div>
+
+    <div class="field-row">
+      <div class="field">
+        <label>Age</label>
+        <input type="text" id="age" placeholder="e.g. 58">
+      </div>
+      <div class="field">
+        <label>Sex</label>
+        <select id="sex">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Key PMH / Context</label>
+      <input type="text" id="pmh" placeholder="e.g. Cirrhosis, ascites, no prior SBP">
+    </div>
+
+    <div class="field">
+      <label>Patient Name (optional)</label>
+      <input type="text" id="patientName" placeholder="e.g. Miguel Torres">
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Teaching Design</div>
+
+    <div class="field">
+      <label>Primary Teaching Objective <span class="req">*</span></label>
+      <textarea id="objective" placeholder="What should students learn from this case? e.g. Recognize SBP as a complication of cirrhosis; understand the role of diagnostic paracentesis and empiric antibiotic selection."></textarea>
+    </div>
+
+    <div class="field">
+      <label>Must-Not-Miss DDx (comma-separated)</label>
+      <input type="text" id="mustNotMiss" placeholder="e.g. Hepatic encephalopathy, secondary peritonitis, hepatorenal syndrome">
+    </div>
+
+    <div class="field">
+      <label>Key Clinical Pearls</label>
+      <textarea id="pearls" placeholder="Optional: specific teaching points to embed in case" style="min-height:60px"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Case Depth</label>
+      <select id="depth">
+        <option value="v2only">v2 only (one complication layer)</option>
+        <option value="v2v3" selected>v2 + v3 (full depth progression)</option>
+      </select>
+    </div>
+
+    <button class="btn-generate" onclick="generateCase()" id="genBtn">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polygon points="5 3 19 12 5 21 5 3"/>
+      </svg>
+      Generate Case
+    </button>
+    <p class="hint">Generation takes ~15 seconds. Review the JSON, then paste it into <code>emr-data/crt-data.js</code> under the <code>window.CRT_DATA</code> object.</p>
+  </div>
+
+  <!-- ── RIGHT: Output ── -->
+  <div class="output-panel">
+    <div class="output-tabs">
+      <div class="tab active" onclick="switchTab('preview')" id="tab-preview">Preview</div>
+      <div class="tab" onclick="switchTab('json')" id="tab-json">JSON</div>
+      <div class="tab" onclick="switchTab('patientscript')" id="tab-patientscript">Patient Script</div>
+    </div>
+
+    <div class="output-body" id="outputBody">
+      <div class="empty-state" id="emptyState">
+        <div class="empty-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <line x1="9" y1="15" x2="15" y2="15"/>
+          </svg>
+        </div>
+        <div class="empty-text">Fill in the form and click Generate Case</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── State ─────────────────────────────────────────────────────────────────────
+let generatedCase = null;
+let activeTab = 'preview';
+
+// ── Tab switching ─────────────────────────────────────────────────────────────
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tab).classList.add('active');
+  if (generatedCase) renderOutput();
+}
+
+// ── Build the generation prompt ───────────────────────────────────────────────
+function buildPrompt() {
+  const diagnosis     = document.getElementById('diagnosis').value.trim();
+  const chiefComplaint= document.getElementById('chiefComplaint').value.trim();
+  const acuity        = document.getElementById('acuity').value;
+  const specialty     = document.getElementById('specialty').value;
+  const age           = document.getElementById('age').value.trim() || '55';
+  const sex           = document.getElementById('sex').value;
+  const pmh           = document.getElementById('pmh').value.trim();
+  const patientName   = document.getElementById('patientName').value.trim() || 'Patient';
+  const objective     = document.getElementById('objective').value.trim();
+  const mustNotMiss   = document.getElementById('mustNotMiss').value.trim();
+  const pearls        = document.getElementById('pearls').value.trim();
+  const depth         = document.getElementById('depth').value;
+
+  const caseId = diagnosis.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+    .slice(0, 40);
+
+  const vitalsForAcuity = {
+    '1': '{"BP":"88/52","HR":"118","RR":"22","Temp":"101.8°F","SpO2":"94%"}',
+    '2': '{"BP":"104/68","HR":"102","RR":"20","Temp":"101.2°F","SpO2":"96%"}',
+    '3': '{"BP":"126/78","HR":"88","RR":"16","Temp":"99.1°F","SpO2":"98%"}',
+    '4': '{"BP":"122/76","HR":"74","RR":"14","Temp":"98.6°F","SpO2":"99%"}',
+  };
+
+  return `You are generating a complete ReasonDx CRT-data case entry as a valid JSON object.
+
+CASE PARAMETERS:
+- Diagnosis: ${diagnosis}
+- Chief Complaint: ${chiefComplaint}
+- Acuity: ESI ${acuity}
+- Specialty: ${specialty}
+- Patient: ${age}-year-old ${sex}, name: ${patientName}
+- PMH: ${pmh || 'As clinically appropriate'}
+- Teaching Objective: ${objective}
+- Must-Not-Miss DDx: ${mustNotMiss || 'As clinically appropriate'}
+- Clinical Pearls: ${pearls || 'As clinically appropriate'}
+
+OUTPUT: A single JSON object (no markdown fences, no commentary before or after) with exactly this structure:
+
+{
+  "diagnosis": "${diagnosis}",
+  "acuity": ${acuity},
+  "category": "${specialty}",
+  "chiefComplaint": "${chiefComplaint}",
+  "presentation": {
+    "patientName": "${patientName}",
+    "age": ${parseInt(age) || 55},
+    "sex": "${sex}",
+    "chiefComplaint": "${chiefComplaint}"
+  },
+  "initialVitals": ${vitalsForAcuity[acuity]},
+  "patientSummary": "[2 sentences: presenting complaint + key PMH, from third-person clinical perspective]",
+  "targetDiagnosis": "${diagnosis}",
+  "teachingObjective": "${objective}",
+  "keyLearningPoints": [
+    "[learning point 1 — specific, evidence-based]",
+    "[learning point 2]",
+    "[learning point 3]",
+    "[learning point 4]"
+  ],
+  "mustNotMiss": [
+    "${(mustNotMiss || diagnosis).split(',')[0].trim()}",
+    "[second must-not-miss]",
+    "[third must-not-miss]"
+  ],
+  "commonPitfalls": [
+    "[pitfall 1 — specific diagnostic error students make]",
+    "[pitfall 2]",
+    "[pitfall 3]"
+  ],
+  "treatments": {
+    "orders": [
+      {
+        "id": "order-1",
+        "name": "[correct first-line intervention name]",
+        "group": "Critical",
+        "critical": true,
+        "correct": true,
+        "phase": 1,
+        "teaching": "[why this order matters — 1-2 sentences with mechanism]",
+        "references": [{"source": "[StatPearls or guideline name]", "url": "[open-access URL]", "detail": "[key point]"}]
+      },
+      {
+        "id": "order-2",
+        "name": "[correct second intervention]",
+        "group": "Diagnostic",
+        "critical": true,
+        "correct": true,
+        "phase": 1,
+        "teaching": "[teaching point]",
+        "references": [{"source": "[source]", "url": "[url]", "detail": "[detail]"}]
+      },
+      {
+        "id": "order-3",
+        "name": "[correct third intervention]",
+        "group": "Supportive",
+        "critical": false,
+        "correct": true,
+        "phase": 1,
+        "teaching": "[teaching point]",
+        "references": [{"source": "[source]", "url": "[url]", "detail": "[detail]"}]
+      },
+      {
+        "id": "order-wrong-1",
+        "name": "[plausible but incorrect order — common mistake]",
+        "group": "Supportive",
+        "critical": false,
+        "correct": false,
+        "teaching": "⚠️ [why this is wrong or harmful in this case]",
+        "references": [{"source": "[source]", "url": "[url]", "detail": "[detail]"}]
+      }
+    ],
+    "phases": [
+      {
+        "id": "initial",
+        "label": "Presentation",
+        "auto": true,
+        "vitals": ${vitalsForAcuity[acuity]},
+        "ecg": "[rhythm or 'Not indicated']",
+        "labHighlights": {"[key lab 1]": "[value]", "[key lab 2]": "[value]"},
+        "examNote": "[2-3 sentence physical exam finding summary — include pertinent positives and negatives]",
+        "aiPatientUpdate": null
+      },
+      {
+        "id": "treated",
+        "label": "[Treatment phase label]",
+        "requires": ["order-1", "order-2"],
+        "vitals": {"BP": "[improved]", "HR": "[improved]", "RR": "[improved]", "Temp": "[improved]", "SpO2": "[improved]"},
+        "ecg": "[updated rhythm]",
+        "labHighlights": {"[lab trend]": "[value — improving]"},
+        "examNote": "[exam findings after treatment — show improvement]",
+        "aiPatientUpdate": "[1-2 sentences in patient first-person voice — how they feel after treatment]",
+        "teaching": "✅ [key teaching summary for this phase — what the correct orders accomplished]"
+      }
+    ],
+    "pitfallEvents": []
+  },
+  "patientScript": {
+    "identity": "a ${parseInt(age) || 55}-year-old ${sex} with [brief identity]",
+    "hpiOnset": "[How and when symptoms started — patient voice, first person, plain language, 1-2 sentences]",
+    "hpiProgression": "[How symptoms evolved — 1-2 sentences]",
+    "hpiAssociatedSymptoms": "[Associated symptoms the patient has — 1-2 sentences]",
+    "hpiLocationPattern": "[Location/pattern of main symptom — 1 sentence]",
+    "pmh": "[PMH in patient voice — 1 sentence]",
+    "medications": "[Medications — 1 sentence]",
+    "allergies": "[Allergies or 'No known drug allergies']",
+    "familyHistory": "[Family history — 1 sentence]",
+    "socialSmokingAlcohol": "[Smoking and alcohol in plain language — 1 sentence]",
+    "socialOccupation": "[Occupation — 1 sentence with any relevant context]"
+  },
+  "caseDepth": {
+    "v2": {
+      "title": "[Complication or deterioration scenario title]",
+      "scenario": "[2-3 sentences describing what changed — new finding, complication, or deterioration that arrives]",
+      "newData": {
+        "vitals": {"BP": "[changed]", "HR": "[changed]", "RR": "[changed]", "Temp": "[changed]", "SpO2": "[changed]"},
+        "labHighlights": {"[new lab]": "[value]"},
+        "examNote": "[New exam finding that signals the complication]"
+      }
+    }${depth === 'v2v3' ? `,
+    "v3": {
+      "title": "[Advanced complication or treatment decision scenario]",
+      "scenario": "[2-3 sentences — a further complication or treatment decision point requiring advanced reasoning]",
+      "newData": {
+        "vitals": {"BP": "[further changed]", "HR": "[further changed]", "RR": "[further changed]", "Temp": "[further changed]", "SpO2": "[further changed]"},
+        "labHighlights": {"[critical lab]": "[value]"},
+        "examNote": "[Advanced complication finding]"
+      }
+    }` : ''}
+  }
+}
+
+RULES:
+- Output ONLY the JSON object. Zero text before or after.
+- All open-access URLs only (StatPearls, PMC, major guidelines).
+- Patient voice in patientScript must be plain language, first-person, realistic.
+- Teaching points must cite mechanism, not just restate the diagnosis.
+- All JSON must be valid (escape quotes properly, no trailing commas).`;
+}
+
+// ── Generate ──────────────────────────────────────────────────────────────────
+let isRunning = false;
+
+async function generateCase() {
+  const diagnosis = document.getElementById('diagnosis').value.trim();
+  const objective = document.getElementById('objective').value.trim();
+  if (!diagnosis) { toast('Diagnosis is required'); return; }
+  if (!objective) { toast('Teaching objective is required'); return; }
+  if (isRunning) return;
+
+  isRunning = true;
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true;
+  btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Generating...`;
+
+  // Show streaming indicator
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('outputBody').innerHTML = `
+    <div class="stream-indicator">
+      <div class="dot-spin"></div>
+      Claude is generating the case — this takes about 15 seconds...
+    </div>`;
+
+  try {
+    const prompt = buildPrompt();
+
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        stream: true,
+        messages: [{ role: 'user', content: prompt }],
+        system: 'You are a medical education case author. Output ONLY valid JSON. No markdown code fences. No text before or after. Generate clinically accurate, educationally precise case data.',
+      }),
+    });
+
+    if (!response.ok) {
+      const err = await response.text();
+      throw new Error(`API error ${response.status}: ${err.slice(0, 200)}`);
+    }
+
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullText = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value, { stream: true });
+      for (const line of chunk.split('\n')) {
+        if (!line.startsWith('data: ')) continue;
+        const data = line.slice(6).trim();
+        if (data === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(data);
+          fullText += parsed.delta?.text || '';
+        } catch {}
+      }
+    }
+
+    // Parse JSON
+    let parsed;
+    try {
+      // Strip any accidental markdown fences
+      const clean = fullText
+        .replace(/^```json\n?/, '').replace(/\n?```$/, '').trim();
+      parsed = JSON.parse(clean);
+    } catch(e) {
+      throw new Error('JSON parse failed: ' + e.message + '\n\nRaw output:\n' + fullText.slice(0, 300));
+    }
+
+    generatedCase = parsed;
+    renderOutput();
+    document.getElementById('actionsRow')?.style && (document.getElementById('actionsRow').style.display = 'flex');
+    toast('Case generated successfully');
+
+  } catch (err) {
+    console.error(err);
+    document.getElementById('outputBody').innerHTML = `
+      <div style="padding:20px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;color:#f87171;font-size:13px;font-family:'JetBrains Mono',monospace;white-space:pre-wrap">${err.message}</div>`;
+    toast('Generation failed — see output');
+  } finally {
+    isRunning = false;
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Generate Case`;
+  }
+}
+
+// ── Render output ─────────────────────────────────────────────────────────────
+function renderOutput() {
+  if (!generatedCase) return;
+  const c = generatedCase;
+  const body = document.getElementById('outputBody');
+
+  if (activeTab === 'preview') {
+    const acuityClass = c.acuity === 1 ? 'tag-acuity1' : c.acuity === 2 ? 'tag-acuity2' : 'tag-acuity3';
+    const acuityLabel = c.acuity === 1 ? 'ESI 1 — Critical' : c.acuity === 2 ? 'ESI 2 — Urgent' : 'ESI 3 — Stable';
+    const vitals = c.initialVitals || {};
+    const orders = (c.treatments?.orders || []).filter(o => o.correct);
+    const wrongOrders = (c.treatments?.orders || []).filter(o => !o.correct);
+
+    body.innerHTML = `
+      <div class="preview-card">
+        <div class="preview-card-header">
+          Case Preview
+          <span class="tag ${acuityClass}">${acuityLabel}</span>
+          <span class="tag" style="background:rgba(40,116,166,.2);color:#60a5fa">${cap(c.category || '')}</span>
+        </div>
+        <div class="preview-card-body">
+          <div class="preview-diag">${c.diagnosis}</div>
+          <div class="preview-cc">${c.chiefComplaint}</div>
+          <div class="preview-grid">
+            <div class="preview-field">
+              <div class="preview-field-label">Patient</div>
+              <div class="preview-field-val">${c.presentation?.age || '—'}y ${c.presentation?.sex || ''}, ${c.presentation?.patientName || ''}</div>
+            </div>
+            <div class="preview-field">
+              <div class="preview-field-label">BP / HR</div>
+              <div class="preview-field-val">${vitals.BP || '—'} · ${vitals.HR || '—'}</div>
+            </div>
+            <div class="preview-field">
+              <div class="preview-field-label">SpO₂ / Temp</div>
+              <div class="preview-field-val">${vitals.SpO2 || '—'} · ${vitals.Temp || '—'}</div>
+            </div>
+          </div>
+
+          ${c.patientSummary ? `
+          <div class="preview-section">
+            <div class="preview-section-title">Patient Summary</div>
+            <div class="preview-section-body">${c.patientSummary}</div>
+          </div>` : ''}
+
+          ${c.keyLearningPoints?.length ? `
+          <div class="preview-section">
+            <div class="preview-section-title">Key Learning Points</div>
+            <div class="preview-section-body">
+              ${c.keyLearningPoints.map(p => `<div style="margin-bottom:4px">• ${p}</div>`).join('')}
+            </div>
+          </div>` : ''}
+
+          ${orders.length ? `
+          <div class="preview-section">
+            <div class="preview-section-title">Correct Orders (${orders.length})</div>
+            <div class="preview-section-body">
+              ${orders.map(o => `<div style="margin-bottom:6px">
+                <span style="color:${o.critical ? 'var(--green)' : 'var(--blue-lt)'}">▸</span>
+                <strong style="color:var(--text)">${o.name}</strong>
+                ${o.teaching ? `<div style="color:var(--muted);font-size:12px;margin-top:2px;margin-left:16px">${o.teaching}</div>` : ''}
+              </div>`).join('')}
+            </div>
+          </div>` : ''}
+
+          ${wrongOrders.length ? `
+          <div class="preview-section">
+            <div class="preview-section-title">Distractor Orders</div>
+            <div class="preview-section-body">
+              ${wrongOrders.map(o => `<div style="margin-bottom:4px">
+                <span style="color:var(--red)">✕</span>
+                <span style="color:var(--muted)">${o.name}</span>
+              </div>`).join('')}
+            </div>
+          </div>` : ''}
+
+          ${c.caseDepth?.v2 ? `
+          <div class="preview-section">
+            <div class="preview-section-title">Case Depth — v2: ${c.caseDepth.v2.title}</div>
+            <div class="preview-section-body" style="color:var(--muted)">${c.caseDepth.v2.scenario}</div>
+          </div>` : ''}
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:4px">
+        <button onclick="switchTab('json')" style="flex:1;padding:10px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:inherit;cursor:pointer">View JSON →</button>
+        <button onclick="copyJson()" style="flex:1;padding:10px;background:var(--blue);border:none;border-radius:8px;color:#fff;font-size:13px;font-family:inherit;cursor:pointer;font-weight:600">Copy JSON</button>
+      </div>`;
+
+  } else if (activeTab === 'json') {
+    const json = JSON.stringify(generatedCase, null, 2);
+    body.innerHTML = `
+      <div class="json-wrap">
+        <div class="json-toolbar">
+          <div class="json-filename">emr-data/crt-data.js</div>
+          <button class="btn-copy-json" onclick="copyJson()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy JSON
+          </button>
+        </div>
+        <div class="json-body">${syntaxHighlight(json)}</div>
+      </div>
+      <div style="margin-top:16px;padding:14px 16px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:8px;font-size:12px;color:#fcd34d;line-height:1.6">
+        <strong>To add this case:</strong> Copy the JSON above. In <code>emr-data/crt-data.js</code>, find <code>window.CRT_DATA = {</code> and paste as a new key-value pair inside the object: <code>"${generatedCase.diagnosis?.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,35)}": { ...paste here... },</code>
+      </div>`;
+
+  } else if (activeTab === 'patientscript') {
+    const ps = generatedCase.patientScript || {};
+    body.innerHTML = `
+      <div class="preview-card">
+        <div class="preview-card-header">Patient Voice Script</div>
+        <div class="preview-card-body">
+          ${Object.entries(ps).map(([key, val]) => `
+          <div class="preview-section" style="margin-bottom:12px">
+            <div class="preview-section-title">${formatKey(key)}</div>
+            <div class="preview-section-body" style="font-style:italic;color:#94a3b8">"${val}"</div>
+          </div>`).join('')}
+        </div>
+      </div>`;
+  }
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function cap(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1).replace(/_/g, ' ');
+}
+
+function formatKey(k) {
+  const map = {
+    identity: 'Identity', hpiOnset: 'HPI — Onset', hpiProgression: 'HPI — Progression',
+    hpiAssociatedSymptoms: 'HPI — Associated Symptoms', hpiLocationPattern: 'HPI — Location/Pattern',
+    pmh: 'Past Medical History', medications: 'Medications', allergies: 'Allergies',
+    familyHistory: 'Family History', socialSmokingAlcohol: 'Social — Smoking/Alcohol',
+    socialOccupation: 'Social — Occupation',
+  };
+  return map[k] || k;
+}
+
+function syntaxHighlight(json) {
+  return json
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"([^"]+)":/g, '<span class="json-key">"$1"</span>:')
+    .replace(/: "([^"]*)"/g, ': <span class="json-str">"$1"</span>')
+    .replace(/: (\d+\.?\d*)/g, ': <span class="json-num">$1</span>')
+    .replace(/: (true|false)/g, ': <span class="json-bool">$1</span>')
+    .replace(/: (null)/g, ': <span class="json-null">$1</span>');
+}
+
+function copyJson() {
+  if (!generatedCase) return;
+  navigator.clipboard.writeText(JSON.stringify(generatedCase, null, 2))
+    .then(() => toast('JSON copied to clipboard'))
+    .catch(() => toast('Copy failed'));
+}
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+</script>
+</body>
+</html>
