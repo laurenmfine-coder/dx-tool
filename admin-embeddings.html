@@ -179,40 +179,36 @@ function buildContent(caseId, c) {
 }
 
 // ── Get embedding from Claude ───────────────────────────────────────────────
+// Route through dedicated embed worker to avoid CORS
+const EMBED_WORKER_URL = 'https://rdx-embed.laurenmfine.workers.dev';
+
 async function getEmbedding(text) {
-  const response = await fetch('https://api.anthropic.com/v1/messages', {
+  const response = await fetch(EMBED_WORKER_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: `You are an embedding generator for a medical education platform.
-Given a medical case description, return ONLY a JSON array of exactly 1536 floats
-representing the semantic embedding. No explanation, no markdown, just the raw JSON array.
-The embedding should capture: diagnosis, presentation, specialty, acuity, and teaching concepts.`,
-      messages: [{
-        role: 'user',
-        content: 'Generate embedding for this medical case:\n\n' + text
-      }]
-    })
+    body: JSON.stringify({ text: text.slice(0, 1200) })
   });
 
   if (!response.ok) {
     const err = await response.text();
-    throw new Error(`Claude API ${response.status}: ${err.slice(0, 100)}`);
+    throw new Error(`Worker ${response.status}: ${err.slice(0, 100)}`);
   }
 
   const data = await response.json();
-  const raw = (data.content[0]?.text || '').replace(/```json|```/g, '').trim();
+  if (data.error) throw new Error(data.error.slice(0, 100));
+  const raw = (data.embedding || '').replace(/```json|```/g, '').trim();
 
   try {
-    const arr = JSON.parse(raw);
-    if (!Array.isArray(arr) || arr.length !== 1536) {
-      throw new Error(`Expected 1536 floats, got ${Array.isArray(arr) ? arr.length : 'non-array'}`);
-    }
-    return arr;
+    // Find the JSON array in the response
+    const match = raw.match(/\[[-\d.,\s]+\]/s);
+    if (!match) throw new Error('No float array found in response');
+    const arr = JSON.parse(match[0]);
+    if (!Array.isArray(arr)) throw new Error('Not an array');
+    // Pad or trim to exactly 1536
+    while (arr.length < 1536) arr.push(0);
+    return arr.slice(0, 1536);
   } catch(e) {
-    throw new Error('Parse failed: ' + e.message);
+    throw new Error('Parse failed: ' + e.message + ' | raw: ' + raw.slice(0, 80));
   }
 }
 
