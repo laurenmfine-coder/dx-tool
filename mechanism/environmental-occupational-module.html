@@ -4,15 +4,15 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Pneumonia & Respiratory Infections — MechanismDx | ReasonDx</title>
+<title>Environmental & Occupational Medicine — MechanismDx | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#F0F3F7;--sf:#FFF;--sf2:#F7F9FC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--bld:#1B4F72;--bll:#EBF5FB;--gn:#059669;--gnl:#ECFDF5;--am:#D97706;--aml:#FFFBEB;--rd:#DC2626;--rdl:#FEF2F2;--pu:#7C3AED;--pul:#F5F3FF;--hero1:#1E3A5F;--hero2:#1B4F72;--hero3:#2874A6;--radius:10px;}
+:root{--bg:#F0F3F7;--sf:#FFF;--sf2:#F7F9FC;--bd:#E2E8F0;--bdl:#F1F5F9;--tx:#1E293B;--ts:#64748B;--tm:#94A3B8;--bl:#2874A6;--bld:#1B4F72;--bll:#EBF5FB;--gn:#059669;--gnl:#ECFDF5;--am:#D97706;--aml:#FFFBEB;--rd:#DC2626;--rdl:#FEF2F2;--pu:#7C3AED;--pul:#F5F3FF;--hero1:#064E3B;--hero2:#065F46;--hero3:#059669;--radius:10px;}
 *{margin:0;padding:0;box-sizing:border-box}body{font-family:'IBM Plex Sans',-apple-system,sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;line-height:1.6}a{color:inherit;text-decoration:none}
 .page{max-width:1020px;margin:0 auto;padding:24px 16px 100px}
 .hero{background:linear-gradient(140deg,var(--hero1) 0%,var(--hero2) 45%,var(--hero3) 100%);color:#fff;border-radius:16px;padding:28px 28px 22px;margin-bottom:28px;position:relative;overflow:hidden}
-.hero::after{content:'🫁';position:absolute;right:20px;top:10px;font-size:80px;opacity:.08;pointer-events:none}
+.hero::after{content:'🌿';position:absolute;right:20px;top:10px;font-size:80px;opacity:.08;pointer-events:none}
 .bc{font-size:12px;color:rgba(255,255,255,.5);margin-bottom:10px}.bc a{color:rgba(255,255,255,.65);font-weight:600}
 .hero h1{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:5px}
 .hero-sub{font-size:12.5px;color:rgba(255,255,255,.72);line-height:1.6;max-width:580px;margin-bottom:14px}
@@ -69,16 +69,16 @@
 <body>
 <div class="page">
   <div class="hero">
-    <div class="bc"><a href="../index.html">ReasonDx</a> → <a href="../mechanism/index.html">MechanismDx</a> → Pulmonary</div>
-    <h1>🫁 Pneumonia & Respiratory Infections — MechanismDx</h1>
+    <div class="bc"><a href="../index.html">ReasonDx</a> → <a href="../mechanism/index.html">MechanismDx</a> → Environmental Medicine</div>
+    <h1>🌿 Environmental & Occupational Medicine — MechanismDx</h1>
     <div class="hero-sub">Pick a topic. Your attending meets you there with a question — not a lecture. Bring what you know and see where it goes.</div>
-    <div class="hero-pills"><span class="pill hi">Attending conversation</span><span class="pill">Step 2 CK</span><span class="pill">CURB-65</span><span class="pill">CAP / HAP / VAP</span></div>
+    <div class="hero-pills"><span class="pill hi">Attending conversation</span><span class="pill">Step 2 CK</span><span class="pill">OSHA Standards</span><span class="pill">Occupational Health</span></div>
   </div>
   <div class="gap-banner" id="gapBanner"><span class="gap-banner-icon">⚑</span><div class="gap-banner-text"><strong>Knowledge gap flagged</strong><span id="gapBannerText">You flagged a gap here while working through a case.</span></div><button class="gap-return" id="gapReturnBtn" onclick="returnToSource()">← Return to case</button></div>
-  <div class="sec">Pathophysiology & Patterns</div>
+  <div class="sec">Occupational & Toxic Exposures</div>
   <div class="grid" id="g-pathophys"></div>
-  <div class="sec">Treatment & Complications</div>
-  <div class="grid" id="g-management"></div>
+  <div class="sec">Environmental Emergencies</div>
+  <div class="grid" id="g-clinical"></div>
 </div>
 <button class="return-float" id="returnFloat" onclick="returnToSource()">← Return to case</button>
 <div class="overlay" id="overlay">
@@ -112,86 +112,99 @@
 const refSource=new URLSearchParams(location.search).get('ref'),refCase=new URLSearchParams(location.search).get('case'),refBack=new URLSearchParams(location.search).get('back'),gapTopic=new URLSearchParams(location.search).get('gap');
 const TOPICS=
 pathophys:[
-  {id:'pna-cap-mechanisms',icon:'🫁',color:'#2874A6',
-   title:'CAP Pathophysiology — Lobar to Atypical',
-   vignette:'"28-year-old grad student, 2 weeks of dry cough, low-grade fever, headache, and fatigue. CXR: bilateral interstitial infiltrates. WBC 9,000 — not as high as you expected. Your intern calls it CAP and reaches for azithromycin. You want to know why the presentation is atypical before you agree on the drug."',
-   provocation:'CAP is not one disease — it\'s a spectrum from lobar consolidation to walking pneumonia, each driven by a different pathogen with a different mechanism and different antibiotic requirements. Recognizing the pattern changes your empiric coverage.',
+  {id:'env-occ-lung',icon:'🏭',color:'#0369A1',
+   title:'Occupational Lung Disease — Asbestosis, Silicosis & HP',
+   vignette:'"65-year-old retired shipyard worker, progressive dyspnea over 5 years, basal crackles, bibasilar fibrosis, calcified pleural plaques. His union rep asks if this is work-related. You need to answer that question clinically and legally."',
+   provocation:'Occupational lung disease is missed because we do not ask about work. The exposure history is the diagnosis. Walk me through how asbestosis, silicosis, and HP differ in mechanism, CT pattern, and latency.',
    openingQ:{
-     socratic:"Walking pneumonia, bilateral interstitial infiltrates, WBC 9000. Before antibiotic — what pathogen does this presentation pattern favor, and why does the low WBC actually fit the mechanism rather than arguing against infection?",
-     direct:"Walk me through CAP pathogen patterns: typical bacterial (S. pneumoniae mechanism, lobar consolidation, high WBC), atypical (Mycoplasma, Legionella, Chlamydophila — mechanisms and CXR patterns), and viral (influenza, COVID-19, RSV).",
-     hospitalist:"62-year-old smoker, right lower lobe consolidation, productive cough, WBC 18,000, Na 128, fever 39.4. CURB-65 score 2. Walk me through empiric antibiotic selection and the disposition decision.",
-     subspecialty:"Explain the mechanism of Legionella pneumophila virulence — LCV biogenesis, Dot/Icm type IV secretion system, intracellular survival within alveolar macrophages — and why this explains the extrapulmonary manifestations (hyponatremia, liver enzyme elevation, rhabdomyolysis)."
+     socratic:"Shipyard worker, bibasilar fibrosis, pleural plaques. Before the diagnosis — what questions in the occupational history determine whether this is asbestosis vs IPF, and why does the distinction matter both medically and for workers compensation?",
+     direct:"Walk me through the three major fibrotic occupational lung diseases: asbestosis (latency, CT pattern, malignancy risk), silicosis (acute vs accelerated vs chronic, PMF, TB risk), and hypersensitivity pneumonitis (antigen, subtypes, BAL, treatment).",
+     hospitalist:"A retired welder presents with dyspnea and upper lobe fibrosis. Walk me through the occupational history questions that distinguish silicosis from IPF — and what the CT and PFTs would show in each.",
+     subspecialty:"Explain the immunopathology of hypersensitivity pneumonitis — why does the same antigen cause acute IgG-mediated disease in some patients and chronic Th1/Th17 TGF-beta fibrosis in others, and what determines who progresses?"
    },
-   systemPrompt:`You are a pulmonology/infectious disease attending teaching about community-acquired pneumonia pathophysiology and management.
+   systemPrompt:`You are a pulmonology/occupational medicine attending teaching about occupational lung diseases.
 
 CRITICAL RULES:
 - 2-5 sentences per response, one question at the end. Never lecture unprompted.
 - Wrong: redirect with a question. Right: affirm briefly + deepen.
 
 KEY CONCEPTS:
-- TYPICAL CAP (S. pneumoniae most common): Colonizes nasopharynx -> microaspiration -> alveolar infection. Pneumococcal virulence: polysaccharide capsule (anti-phagocytic), pneumolysin (pore-forming toxin -> RBC/WBC lysis), IgA protease. Lobar consolidation (bronchopneumonia if multiple patchy areas). High WBC (15,000-30,000), productive purulent sputum, pleuritic chest pain. Rapid progression. Gram stain: lancet-shaped diplococci.
-- ATYPICAL PATHOGENS (no cell wall -> beta-lactam resistant):
-  Mycoplasma pneumoniae: cold agglutinins (IgM vs RBC I antigen -> hemolysis, Raynaud's). Gradual onset, dry cough, bilateral interstitial pattern, WBC near-normal. Treat: macrolide or doxycycline.
-  Legionella pneumophila: aerosolized contaminated water (cooling towers, hotel showers). Intracellular pathogen (alveolar macrophages). Extrapulmonary clues: hyponatremia (SIADH-like), high liver enzymes, rhabdomyolysis, GI symptoms, relative bradycardia. Urine antigen (Legionella serogroup 1 — 80% sensitive, highly specific). CXR: unilateral lower lobe, rapidly progressive. Treat: fluoroquinolone or azithromycin (NOT beta-lactam).
-  Chlamydophila pneumoniae: dry cough, gradual onset, sore throat. Treat: macrolide or doxycycline.
-- VIRAL PNEUMONIA: Influenza — fever, myalgias, cough; bacterial superinfection (S. aureus, S. pneumoniae) most dangerous complication. COVID-19 — bilateral ground-glass opacities, Day 7-10 deterioration, IL-6 storm, hypercoagulability. RSV — elderly + immunocompromised, upper then lower tract.
-- CURB-65: Confusion (1), Urea >7mmol (BUN>19 mg/dL) (1), RR >=22 (1), BP <90 systolic or <=60 diastolic (1), Age >=65 (1). 0-1: outpatient, 2: consider admit, 3+: hospitalize, 4-5: consider ICU.`},
+- ASBESTOSIS: Amphibole fibers (crocidolite, amosite) more fibrogenic than chrysotile. Latency 20-40 years. Frustrated phagocytosis -> macrophage activation -> TGF-beta -> subpleural basal fibrosis. CT: bilateral basal subpleural reticulation, honeycombing late, calcified pleural plaques (exposure marker, NOT asbestosis itself). Restriction on PFTs. Risks: mesothelioma (amphibole-specific), lung cancer (synergistic with smoking — multiplicative).
+- SILICOSIS: Free crystalline silica (quartz). Three forms: (1) Chronic: >10yr exposure, upper lobe nodules, eggshell hilar node calcification, progressive massive fibrosis (PMF). (2) Accelerated: 5-10yr, high intensity. (3) Acute silicoproteinosis: massive exposure, months, ground-glass alveolar filling, high mortality. TB risk: silica impairs macrophage killing of mycobacteria — 4x increased TB risk. Screen all silicosis patients for LTBI. No treatment reverses disease.
+- HYPERSENSITIVITY PNEUMONITIS (HP): Antigen inhalation -> T-cell granulomatous inflammation. Common: thermophilic actinomycetes (farmer's lung, AC lung), bird proteins (bird fancier's lung), isocyanates (spray painters). CT: upper/mid lung predominance, mosaic attenuation (air trapping), centrilobular nodules, ground-glass. BAL lymphocytosis (CD4:CD8 <1 in HP vs >1 in sarcoid). Serum precipitins = exposure marker only. Antigen avoidance is the most important treatment. Steroids for acute/subacute. Chronic HP -> irreversible fibrosis.
+- EXPOSURE HISTORY: Job title is not enough. Ask: 'Walk me through a typical workday — what did you actually handle?' Duration, intensity, PPE use, co-workers affected (sentinel cases). Latency: asbestosis 20-40yr, silicosis 10-30yr, HP weeks to years.`},
+  {id:'env-heavy-metals',icon:'⚗️',color:'#7C3AED',
+   title:'Heavy Metal Toxicity — Lead, Mercury & Arsenic',
+   vignette:'"4-year-old, developmental delay, blood lead 45 ug/dL after home renovation. Intern says start chelation. You say not so fast — walk through the decision tree."',
+   provocation:'Chelation clears blood levels but does not necessarily reverse neurologic damage. The chelation decision in lead poisoning is threshold-based, not reflex-based. Walk me through lead, mercury, and arsenic — mechanisms, targets, and when chelation actually helps.',
+   openingQ:{
+     socratic:"Lead 45 ug/dL in a 4-year-old. Before chelation — what is lead's mechanism of neurotoxicity at the molecular level, and why does chelating the blood not guarantee protection of the developing brain?",
+     direct:"Walk me through the three heavy metals: lead (heme synthesis, chelation threshold, pediatric vs adult), mercury (elemental vs organic vs inorganic, Minamata), and arsenic (acute vs chronic, Mees lines, treatment).",
+     hospitalist:"Battery recycling worker, abdominal pain, wrist drop, lead 78 ug/dL. Walk me through the next steps: remove from exposure, chelation agent choice, and monitoring parameters.",
+     subspecialty:"Explain why lead neurotoxicity is disproportionately severe in children — NMDA receptor interference, blood-brain barrier permeability, GABA disruption, and why the developmental window matters more than peak blood level."
+   },
+   systemPrompt:`You are an occupational medicine/toxicology attending teaching about heavy metal toxicity.
+
+CRITICAL RULES:
+- 2-5 sentences per response, one question at the end. Never lecture unprompted.
+
+KEY CONCEPTS:
+- LEAD: Mimics calcium -> disrupts Ca2+-dependent processes. Inhibits heme synthesis (delta-ALA dehydratase, ferrochelatase) -> microcytic anemia, basophilic stippling. Inhibits NMDA receptors -> neurotoxicity. Target organs: CNS (children — IQ loss), PNS (adults — wrist/foot drop), kidney (Fanconi syndrome, gout), GI (lead colic). Chelation: pediatric BLL >=45 ug/dL -> succimer (DMSA, oral). Adult occupational BLL >=50 (OSHA action level 40). Lead encephalopathy: BAL + CaNa2EDTA together. Remove from exposure FIRST.
+- MERCURY: Three forms: (1) Elemental — inhaled vapor, neuropsychiatric (Mad Hatter), acute pulmonary edema. (2) Inorganic salts — ingestion, ATN, GI corrosion. (3) Organic (methylmercury) — fish bioaccumulation, Minamata disease (prenatal: cerebral palsy-like; adult: paresthesias, ataxia, visual field constriction). Chelation: BAL for inorganic, DMSA for methylmercury (controversial).
+- ARSENIC: Acute — rice water stools, garlic breath, QTc prolongation/torsades, pancytopenia. Chronic — Mees lines (transverse white nails), arsenical keratosis (palms/soles), hyperpigmentation (raindrop pattern), peripheral neuropathy, Bowen's disease, cancer (skin/lung/bladder). 24h urine arsenic (>50 ug/g Cr = toxic). Treatment: BAL + DMSA.
+- CHELATION PRINCIPLES: Chelation reduces blood levels — does not reverse neurologic damage already done. Lead encephalopathy: BAL + EDTA together (not EDTA alone — mobilizes lead to brain). Never chelate below threshold — false sense of treatment.`},
 ],
-management:[
-  {id:'pna-empiric-abx',icon:'💊',color:'#059669',
-   title:'Pneumonia Treatment — Empiric Antibiotics by Severity & Setting',
-   vignette:'"You have three patients with pneumonia: a 24-year-old outpatient with interstitial infiltrates, a 68-year-old admitted to the floor with lobar consolidation, and a 55-year-old with mechanical ventilation and purulent ETT secretions. Same diagnosis, three different antibiotic regimens. Walk me through the logic."',
-   provocation:'Pneumonia antibiotic selection is determined by severity, setting, and risk factors for resistant organisms — not the diagnosis of pneumonia itself. CAP, HAP, and VAP have different pathogen profiles and different empiric coverage requirements.',
+clinical:[
+  {id:'env-toxins-systemic',icon:'☣️',color:'#92400E',
+   title:'Environmental Toxins — CO, Cyanide & Organophosphates',
+   vignette:'"Five family members arrive simultaneously — headache, nausea, confusion. Two unresponsive. The dog is also sick. This is not a GI virus. You have 60 seconds."',
+   provocation:'Carbon monoxide kills families invisibly. The diagnosis requires suspicion — and the treatment is time-critical. CO, cyanide, and organophosphates have distinct mechanisms and distinct antidotes. Getting them confused can be fatal.',
    openingQ:{
-     socratic:"Outpatient CAP vs floor CAP vs VAP — same chest film, different antibiotics. Before regimens — what pathogen shifts occur as patients move from community to hospital to ventilator, and why does that change your empiric coverage?",
-     direct:"Walk me through empiric antibiotic selection: outpatient CAP (healthy vs comorbidities), inpatient CAP non-severe (standard coverage), severe CAP/ICU (dual coverage plus when to add MRSA), and VAP (anti-pseudomonal + MRSA coverage).",
-     hospitalist:"Severe CAP, ICU admission, SpO2 84% on 6L NC, requiring NIV. Walk me through your antibiotic selection, the Legionella urine antigen decision, when to add MRSA coverage, and how long to treat.",
-     subspecialty:"Explain why azithromycin is anti-inflammatory beyond its antimicrobial effect in CAP — the non-antibiotic mechanisms (macrolide immunomodulation, NF-kB inhibition, IL-8 reduction, mucociliary enhancement) — and why this may explain outcome benefits even in macrolide-resistant pneumococcal CAP."
+     socratic:"Five simultaneous cases, dog affected. Before CO — what is the complete differential for a shared environmental exposure causing simultaneous neurologic symptoms, and what single test confirms CO within 2 minutes at the bedside?",
+     direct:"Walk me through carbon monoxide: mechanism (COHgb + cytochrome c oxidase), carboxyhemoglobin levels vs symptoms, why pulse ox is unreliable, treatment (100% O2, HBO indications), and delayed neurologic syndrome.",
+     hospitalist:"COHgb 28%, patient confused but awake. Walk me through the next hour: 100% O2, HBO decision criteria, when to discharge, what to tell the family about delayed neurologic syndrome.",
+     subspecialty:"Explain the spectrophotometric reason pulse oximetry is unreliable in CO poisoning — why COHgb and oxyhemoglobin absorb identically at 660nm — and why the patient's SpO2 reads falsely normal while cellular respiration is failing."
    },
-   systemPrompt:`You are an infectious disease/pulmonology attending teaching about pneumonia antibiotic selection.
+   systemPrompt:`You are a toxicology/emergency medicine attending teaching about environmental toxins.
 
 CRITICAL RULES:
 - 2-5 sentences per response, one question at the end. Never lecture unprompted.
 
 KEY CONCEPTS:
-- OUTPATIENT CAP:
-  Healthy, no comorbidities, no abx in past 3 months: azithromycin monotherapy OR doxycycline. (Amoxicillin if atypical coverage not needed and low local resistance.)
-  Comorbidities (COPD, diabetes, heart/liver/renal disease, alcoholism, cancer, asplenia): respiratory fluoroquinolone (levofloxacin, moxifloxacin) OR beta-lactam (amoxicillin-clavulanate or cephalosporin) PLUS macrolide.
-- INPATIENT CAP (non-severe): Beta-lactam (ceftriaxone, ampicillin-sulbactam, or cefotaxime) PLUS macrolide (azithromycin) OR respiratory fluoroquinolone monotherapy. Urine Legionella antigen if severe, ICU, or clinical features (hyponatremia, high LFTs, epidemic setting).
-- SEVERE CAP (ICU): Beta-lactam PLUS macrolide (or fluoroquinolone). Add MRSA coverage (vancomycin or linezolid) if: prior MRSA infection, risk factors (skin/soft tissue infection, IV drug use, post-influenza), or failure of standard therapy. Add anti-pseudomonal if: structural lung disease, recent antibiotics, immunosuppression, or suspected gram-negative.
-- HAP (Hospital-Acquired Pneumonia, >48h admission, NOT intubated): Pseudomonas risk factors -> pip-tazo or cefepime or carbapenem. MRSA risk (prior MRSA, ICU, prior antibiotics) -> add vancomycin or linezolid.
-- VAP (Ventilator-Associated, >48h intubated): ALWAYS cover Pseudomonas (pip-tazo + aminoglycoside or cefepime or carbapenem) + MRSA (vancomycin or linezolid). Cultures before antibiotics — de-escalate at 48-72h based on culture results.
-- DURATION: CAP: 5 days if clinically stable (afebrile x48h, improving). Longer if bacteremia, empyema, Legionella (at least 5-10d), or slow response. VAP: 7-8 days regardless of organism (IDSA 2016) unless non-fermenter (Pseudomonas, Acinetobacter) — may need 14d.`},
-  {id:'pna-complications',icon:'⚠️',color:'#DC2626',
-   title:'Pneumonia Complications — Empyema, Lung Abscess & Respiratory Failure',
-   vignette:'"Day 4 of CAP treatment. Patient still febrile, WBC still elevated, repeat CXR shows new pleural effusion. Your intern says this is a parapneumonic effusion and it will resolve with antibiotics. You look at the film and say — maybe, but you need to know which kind before you wait."',
-   provocation:'Not all parapneumonic effusions are the same. Uncomplicated ones resolve with antibiotics. Complicated ones — with positive culture, low pH, or empyema — require drainage. Missing that distinction costs patients weeks of hospitalization and sometimes a thoracotomy.',
+- CARBON MONOXIDE: Sources: incomplete combustion (furnaces, generators indoors, house fires, car exhaust). Mechanism: (1) CO binds Hgb 240x affinity of O2 -> COHgb -> left-shift O2Hgb curve -> tissue hypoxia. (2) CO binds cytochrome c oxidase -> mitochondrial failure. Pulse ox: COHgb reads as oxyhemoglobin (false normal SpO2). Diagnosis: co-oximetry on ABG. Clinical: COHgb 10-20% headache/nausea; 20-40% confusion; >40% coma/arrhythmia; >60% death. Treatment: 100% O2 (half-life: 5h room air -> 90min 100% O2 -> 20min HBO). HBO indications: COHgb >25%, LOC, neurologic symptoms, pregnancy (any level), cardiac ischemia. Delayed neurologic syndrome: 10-30% of serious cases -> cognitive deficits, parkinsonism 2-4 weeks after recovery.
+- CYANIDE: Sources: house fires (burning synthetics -> HCN), industrial accidents, nitroprusside infusion. Mechanism: binds cytochrome c oxidase (Fe3+) -> stops oxidative phosphorylation -> lactic acidosis despite adequate O2. Histotoxic hypoxia. Clue: fire victim + high lactate + altered mental status. Antidote: hydroxocobalamin (Cyanokit, 5g IV) — first-line in fire victims. Alternative: sodium nitrite + sodium thiosulfate (do NOT use sodium nitrite with concurrent CO — metHgb worsens O2 carrying capacity).
+- ORGANOPHOSPHATES: Pesticides (chlorpyrifos, malathion), nerve agents (sarin, VX). Mechanism: irreversible AChE inhibition -> ACh accumulates at muscarinic (DUMBELS: Defecation, Urination, Miosis, Bronchospasm, Emesis, Lacrimation, Salivation) + nicotinic receptors (weakness, fasciculations, paralysis). Treatment: (1) Decontaminate (PPE). (2) Atropine — block muscarinic effects, titrate to secretion drying (NOT heart rate). Large doses may be needed. (3) Pralidoxime (2-PAM) — regenerates AChE before 'aging.' Aging time: hours for sarin, days for VX.`},
+  {id:'env-heat-illness',icon:'🌡️',color:'#DC2626',
+   title:'Environmental Extremes — Heat Stroke, Hypothermia & Altitude',
+   vignette:'"Marathon runner collapses at mile 23, 94F day. Rectal temp 41.2C. Confused, diaphoretic, hot skin. Intern reaches for cool water. You say — not that kind of cool. The distinction between heat exhaustion and heat stroke changes the intervention immediately."',
+   provocation:'Heat stroke is defined by CNS dysfunction plus temperature, not temperature alone. The treatment — rapid external cooling to <39C within 30 minutes — is the only intervention that saves lives. Everything else is supportive.',
    openingQ:{
-     socratic:"Parapneumonic effusion on day 4. Before thoracentesis — what are the Light criteria, and how do exudative criteria tell you the pleural space is involved versus the fluid just being there from inflammation?",
-     direct:"Walk me through parapneumonic effusions: exudative criteria (Light criteria), simple parapneumonic (antibiotics alone) vs complicated (pH <7.2, glucose <60, LDH >1000, positive gram stain/culture) vs frank empyema — and the drainage decision for each.",
-     hospitalist:"Pleural effusion on day 4 of CAP treatment, still febrile. Walk me through the next steps: diagnostic thoracentesis, the specific results that mandate a chest tube, and the difference between simple drainage vs surgical decortication.",
-     subspecialty:"Explain the pathogenesis of lung abscess formation — aspiration of anaerobes (poor dentition, altered consciousness, dysphagia), tissue necrosis, the role of Fusobacterium nucleatum in synergistic polymicrobial infection, and why CT-guided drainage has largely replaced surgical drainage."
+     socratic:"Runner, core temp 41.2C, confusion. Before treatment — what physiologic mechanism makes heat stroke different from heat exhaustion, and why does CNS dysfunction define the severity more than the number on the thermometer?",
+     direct:"Walk me through the heat illness spectrum: heat cramps, heat syncope, heat exhaustion, and heat stroke — defining criteria, cooling method choice, target temperature, and complications to watch for.",
+     hospitalist:"41.2C, confused runner at the finish line. Walk me through the next 30 minutes: cooling method choice (ice water immersion vs evaporative), target temp, when to stop, IV access, and which lab abnormalities to anticipate.",
+     subspecialty:"Explain the cytokine storm mechanism in severe heat stroke — how hyperthermia causes systemic inflammatory response, endothelial activation, DIC, and multi-organ failure, and the central role of gut mucosal barrier failure with endotoxin translocation."
    },
-   systemPrompt:`You are a pulmonology/thoracic medicine attending teaching about pneumonia complications.
+   systemPrompt:`You are an emergency medicine/sports medicine attending teaching about environmental emergencies.
 
 CRITICAL RULES:
 - 2-5 sentences per response, one question at the end. Never lecture unprompted.
 
 KEY CONCEPTS:
-- PARAPNEUMONIC EFFUSION CLASSIFICATION:
-  Exudative criteria (Light criteria: protein >0.5 fluid/serum ratio, LDH >0.6 ratio, LDH >2/3 upper normal serum). All parapneumonic effusions are exudative.
-  Simple parapneumonic: free-flowing, pH >7.2, glucose >60, LDH <1000, sterile -> antibiotics alone, will resolve.
-  Complicated parapneumonic: pH <7.2, glucose <60, LDH >1000, or positive gram stain/culture -> MUST drain (chest tube).
-  Empyema: frank pus -> chest tube + antibiotics. If loculated or organized (stage 3) -> VATS/surgical decortication.
-- LUNG ABSCESS: Aspiration of oral anaerobes (Fusobacterium, Bacteroides, Prevotella, Peptostreptococcus). Risk: poor dentition, alcoholism, seizures, dysphagia, altered consciousness. CT: thick-walled cavity with air-fluid level, usually dependent segment (posterior upper lobe or superior lower lobe). Foul-smelling sputum (anaerobic). Treatment: amoxicillin-clavulanate or clindamycin (anaerobic coverage). Duration 3-6 weeks until cavity closes or residual thin-walled. Most resolve without drainage.
-- RESPIRATORY FAILURE IN CAP: Criteria for ICU (2009 ATS/IDSA): Major: mechanical ventilation, septic shock. Minor (>=3 of 9): RR >=30, PaO2/FiO2 <=250, multilobar infiltrates, confusion, BUN >=20, WBC <4000, platelets <100k, temp <=36C, SBP <90. NIV (CPAP/BiPAP) for hypoxemia without hypercarbia or hemodynamic instability. High-flow nasal cannula (HFNC) for hypoxic respiratory failure — ROX index >=4.88 at 12h predicts NIV/intubation avoidance.`},
+- HEAT ILLNESS SPECTRUM:
+  Heat cramps: electrolyte/water loss, muscle spasm. Treat: NaCl + rest.
+  Heat syncope: vasodilation + dehydration -> orthostatic. Brief LOC, normal/mild temp, intact CNS. Treat: supine, fluids, cool environment.
+  Heat exhaustion: core temp <40C, INTACT CNS, profuse sweating, weakness, nausea. Treat: cool environment, oral/IV fluids. No rapid cooling needed.
+  Heat stroke: core temp >=40C + CNS dysfunction (confusion, seizure, coma). EMERGENCY. Exertional (young athletes, humid, may sweat) vs Classic (elderly, hot weather, often anhidrotic).
+- HEAT STROKE TREATMENT: Cooling = only treatment that saves lives. Target: core temp <39C within 30 minutes. BEST METHOD: cold water immersion (CWI) in ice water (~0.2C/min cooling rate). Acceptable: ice packs to neck/groin/axillae + evaporative (fans + cool mist). Do NOT use antipyretics (not fever — thermoregulatory failure). Stop cooling at 39C (prevent overshoot). Watch for: rhabdomyolysis (CK, Cr), hepatic failure (LFTs, INR), DIC (coags, fibrinogen), AKI.
+- HYPOTHERMIA: Mild (32-35C): shivering, confusion — passive rewarming. Moderate (28-32C): absent shivering, arrhythmia risk (J/Osborn waves, AF) — active external rewarming. Severe (<28C): VF risk — core rewarming (warm humidified O2, warm IV fluids, ECMO for refractory arrest). 'Not dead until warm and dead.' Handle gently below 30C (movement triggers VF).
+- ALTITUDE: AMS (headache + nausea/fatigue/dizziness above 2500m). HACE (AMS + ataxia/altered consciousness) — cerebral edema. HAPE (exertional -> rest dyspnea, crackles, hypoxia) — non-cardiogenic pulmonary edema, most lethal. Treatment: descent (definitive), O2, acetazolamide (AMS), dexamethasone (HACE), nifedipine/tadalafil (HAPE).`},
 ],
 ;
 let activeTopic=null,activePersona=null,messages=[],isLoading=false,recognition=null,isListening=false;
 document.addEventListener('DOMContentLoaded',()=>{renderCards();initGapBanner();initVoice();document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});});
 function initGapBanner(){if(!refSource&&!gapTopic)return;document.getElementById('gapBanner').classList.add('show');const src=refSource==='coachdx'?'CoachDx':refSource==='casedx'?'a case':'ReasonDx';document.getElementById('gapBannerText').textContent=`You flagged this gap while working through ${src}${refCase?' — '+refCase:''}.`;if(!refBack)document.getElementById('gapReturnBtn').style.display='none';}
 function returnToSource(){if(refBack)window.location.href=decodeURIComponent(refBack);else window.history.back();}
-function renderCards(){const groups={'pathophys':'g-pathophys','management':'g-management'},isGapMode=!!(refSource||gapTopic);for(const[grp,elId]of Object.entries(groups)){const el=document.getElementById(elId);if(!el)continue;el.innerHTML=TOPICS[grp].map(t=>{const saved=loadLocal(t.id),hasSaved=saved?.messages?.length>0,isGapCard=gapTopic===t.id;const hook=isGapMode?`"${t.provocation}"`:t.vignette;let sc=hasSaved?'saved':'',st=hasSaved?'Session saved':'Not started';if(isGapCard){sc='gap-flagged';st='Gap flagged ⚑';}return `<div class="tcard" onclick="openTopic('${grp}','${t.id}')"><div class="tcard-bar" style="background:${t.color}"></div><div class="tcard-body"><div class="tcard-top"><span class="tcard-icon">${t.icon}</span><div><div class="tcard-title">${t.title}</div><div class="tcard-hook">${hook}</div></div></div><div class="tcard-foot"><span class="tcard-status ${sc}">${st}</span><span class="tcard-start">${hasSaved?'Continue →':'Start →'}</span></div></div></div>`;}
+function renderCards(){const groups={'pathophys':'g-pathophys','clinical':'g-clinical'},isGapMode=!!(refSource||gapTopic);for(const[grp,elId]of Object.entries(groups)){const el=document.getElementById(elId);if(!el)continue;el.innerHTML=TOPICS[grp].map(t=>{const saved=loadLocal(t.id),hasSaved=saved?.messages?.length>0,isGapCard=gapTopic===t.id;const hook=isGapMode?`"${t.provocation}"`:t.vignette;let sc=hasSaved?'saved':'',st=hasSaved?'Session saved':'Not started';if(isGapCard){sc='gap-flagged';st='Gap flagged ⚑';}return `<div class="tcard" onclick="openTopic('${grp}','${t.id}')"><div class="tcard-bar" style="background:${t.color}"></div><div class="tcard-body"><div class="tcard-top"><span class="tcard-icon">${t.icon}</span><div><div class="tcard-title">${t.title}</div><div class="tcard-hook">${hook}</div></div></div><div class="tcard-foot"><span class="tcard-status ${sc}">${st}</span><span class="tcard-start">${hasSaved?'Continue →':'Start →'}</span></div></div></div>`;}
 ).join('');}}
 function openTopic(grp,id){const t=TOPICS[grp]?.find(x=>x.id===id);if(!t)return;activeTopic=t;activePersona=null;messages=[];document.getElementById('hdrIcon').textContent=t.icon;document.getElementById('hdrTitle').textContent=t.title;const saved=loadLocal(t.id);if(saved?.messages?.length>0)showResumeBar();else showPersonaScreen();document.getElementById('overlay').classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(){document.getElementById('overlay').classList.remove('open');document.body.style.overflow='';activeTopic=null;activePersona=null;messages=[];stopListening();renderCards();if(refBack)document.getElementById('returnFloat').classList.add('show');}
@@ -215,7 +228,7 @@ function initVoice(){const btn=document.getElementById('micBtn');const SR=window
 function normalizePunctuation(t){return t.replace(/\bperiod\b/gi,'.').replace(/\bcomma\b/gi,',').replace(/\bquestion mark\b/gi,'?');}
 function toggleMic(){const btn=document.getElementById('micBtn');if(btn.classList.contains('unsupported'))return;if(isListening){stopListening();return;}const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return;recognition=new SR();recognition.continuous=true;recognition.interimResults=true;recognition.lang='en-US';let accumulated='';recognition.onstart=function(){isListening=true;accumulated='';btn.classList.add('listening');btn.textContent='⏹';};recognition.onresult=function(e){const inp=document.getElementById('chatInput');if(!inp)return;let interimTxt='';for(let i=e.resultIndex;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)accumulated+=normalizePunctuation(t)+' ';else interimTxt+=t;}inp.value=(accumulated+interimTxt).trim();autoResize(inp);};recognition.onerror=function(e){stopListening();};recognition.onend=function(){if(isListening){try{recognition.start();}catch(e){stopListening();}}};try{recognition.start();}catch(e){stopListening();}}
 function stopListening(){isListening=false;const btn=document.getElementById('micBtn');if(btn){btn.classList.remove('listening');btn.textContent='🎤';}if(recognition){try{recognition.stop();}catch(e){}recognition=null;}}
-function storageKey(id){return `rdx-mecdx-pna-${id}`;}
+function storageKey(id){return `rdx-mecdx-env-${id}`;}
 function saveLocal(){if(!activeTopic)return;localStorage.setItem(storageKey(activeTopic.id),JSON.stringify({persona:activePersona,messages,ts:Date.now()}));}
 function loadLocal(id){try{const r=localStorage.getItem(storageKey(id));return r?JSON.parse(r):null;}catch(e){return null;}}
 function clearLocal(id){localStorage.removeItem(storageKey(id));}
