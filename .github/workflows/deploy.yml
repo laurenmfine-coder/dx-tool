@@ -1,0 +1,21 @@
+name: Deploy to Netlify
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for deploying (optional)'
+        required: false
+        default: 'Manual deploy'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify Deploy
+        run: |
+          echo "Triggering Netlify deploy..."
+          echo "Reason: ${{ github.event.inputs.reason }}"
+          curl -s -X POST "https://api.netlify.com/build_hooks/69cb3024fc80504658772767"
+          echo ""
+          echo "Deploy triggered. Check https://app.netlify.com for build status."
