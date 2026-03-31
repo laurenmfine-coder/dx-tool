@@ -2,20 +2,55 @@
   'use strict';
 
   var MODULE_MAP = {
-    'aki-module':           { caseId:'aki-prerenal',              caseLabel:'AKI Workup',                coachId:'aki' },
-    'anaphylaxis-module':   { caseId:'anaphylaxis',               caseLabel:'Anaphylaxis ED',             coachId:'anaphylaxis' },
-    'copd-module':          { caseId:'copd-v1',                   caseLabel:'COPD Exacerbation',          coachId:'copd-em' },
-    'endocrine-module':     { caseId:'dka-v1',                    caseLabel:'DKA Emergency Dept',         coachId:'dka-em' },
-    'gi-hepatology-module': { caseId:'alcoholic-hepatitis',       caseLabel:'Alcoholic Hepatitis',        coachId:'liver-id' },
-    'heart-failure-module': { caseId:'chf-exacerbation',          caseLabel:'CHF Exacerbation ED',        coachId:'heart-failure' },
-    'hematology-module':    { caseId:'sickle-cell-disease',       caseLabel:'Sickle Cell Crisis',         coachId:'ttp-tma' },
-    'ob-module':            { caseId:'eclampsia',                 caseLabel:'Eclampsia L&D',              coachId:'ob-em' },
-    'psychiatry-module':    { caseId:'alcohol-withdrawal',        caseLabel:'Alcohol Withdrawal',         coachId:'alcohol-withdrawal' },
-    'pulmonary-module':     { caseId:'asthma-exacerbation',       caseLabel:'Asthma Exacerbation',        coachId:'asthma' },
-    'rheumatology-module':  { caseId:'sle-flare-with-cytopenias', caseLabel:'SLE Flare Inpatient',        coachId:'sle-rheum' },
-    'sepsis-module':        { caseId:'sepsisseptic-shock',        caseLabel:'Septic Shock MICU',          coachId:'sepsis-em' },
-    'stroke-module':        { caseId:'stroke-v1',                 caseLabel:'Ischemic Stroke ED',         coachId:'stroke-em' },
-    'toxicology-module':    { caseId:'apap-overdose',             caseLabel:'APAP Overdose ED',           coachId:'tox-em' }
+    'acs-module':                  { caseId:'stemi-v1',                    caseLabel:'STEMI',                          coachId:'stemi' },
+    'afib-module':                 { caseId:'new-onset-atrial-fibrillation',caseLabel:'New-Onset A-Fib',               coachId:'afib' },
+    'aki-module':                  { caseId:'aki-differential',             caseLabel:'AKI Workup',                     coachId:'aki' },
+    'allergen-immunotherapy-module':{ caseId:'allergic-rhinitis-immunotherapy',caseLabel:'Allergy Shot Reaction',       coachId:'allergic-rhinitis' },
+    'anaphylaxis-module':          { caseId:'anaphylaxis',                  caseLabel:'Anaphylaxis',                    coachId:'anaphylaxis' },
+    'asthma-module':               { caseId:'asthma-exacerbation',          caseLabel:'Asthma Exacerbation',            coachId:'asthma' },
+    'atopic-derm-module':          { caseId:'atopic-dermatitis-severe',     caseLabel:'Severe Atopic Dermatitis',       coachId:'atopic-derm' },
+    'cns-infections-gbs-module':   { caseId:'bacterial-meningitis',         caseLabel:'Bacterial Meningitis',           coachId:'meningitis' },
+    'copd-module':                 { caseId:'copd-exacerbation-niv',        caseLabel:'COPD Exacerbation',              coachId:'copd' },
+    'drug-allergy-module':         { caseId:'drug-allergy-vancomycin-rms',  caseLabel:'Drug Allergy — Vancomycin RMS',  coachId:'drug-allergy' },
+    'electrolytes-acidbase-module':{ caseId:'hyperkalemia-with-concurrent-acs',caseLabel:'Hyperkalemia + ACS',          coachId:'hyperkalemia' },
+    'endocrine-module':            { caseId:'dka-v1',                       caseLabel:'DKA',                            coachId:'dka-endo' },
+    'eosinophilia-hp-module':      { caseId:'eoe-adult',                    caseLabel:'EoE Adult',                      coachId:'eosinophilia' },
+    'food-allergy-module':         { caseId:'peanut-allergy-anaphylaxis',   caseLabel:'Peanut Anaphylaxis',             coachId:'food-allergy' },
+    'gi-hepatology-module':        { caseId:'upper-gi-bleed',               caseLabel:'Upper GI Bleed',                 coachId:'gi-bleed' },
+    'heart-failure-module':        { caseId:'chf-exacerbation',             caseLabel:'CHF Exacerbation',               coachId:'heart-failure' },
+    'hematology-module':           { caseId:'autoimmune-hemolytic-anemia',  caseLabel:'Autoimmune Hemolytic Anemia',    coachId:'anemia' },
+    'mastocytosis-mcas-module':    { caseId:'mastocytosis',                 caseLabel:'Mastocytosis / MCAS',            coachId:'mastocytosis' },
+    'ob-module':                   { caseId:'ectopic-pregnancy-workup',     caseLabel:'Ectopic Pregnancy',              coachId:'ectopic' },
+    'pid-module':                  { caseId:'cvid-presentation',            caseLabel:'CVID Workup',                    coachId:'cvid' },
+    'pneumonia-module':            { caseId:'pneumonia',                    caseLabel:'Community-Acquired Pneumonia',   coachId:'pneumonia' },
+    'psychiatry-module':           { caseId:'alcohol-withdrawal',           caseLabel:'Alcohol Withdrawal',             coachId:'substance-use' },
+    'pulmonary-module':            { caseId:'massive-pe-with-rv-failure',   caseLabel:'Massive PE with RV Failure',     coachId:'pe-pulm' },
+    'rheumatology-module':         { caseId:'sle-flare-with-cytopenias',    caseLabel:'SLE Flare',                      coachId:'sle' },
+    'rhinitis-module':             { caseId:'allergic-rhinitis-uncontrolled',caseLabel:'Uncontrolled Allergic Rhinitis',coachId:'allergic-rhinitis' },
+    'seizures-epilepsy-module':    { caseId:'new-onset-seizure',            caseLabel:'New-Onset Seizure',              coachId:'seizure' },
+    'sepsis-module':               { caseId:'sepsisseptic-shock',           caseLabel:'Septic Shock',                   coachId:'sepsis-id' },
+    'stroke-module':               { caseId:'acute-ischemic-stroke',        caseLabel:'Acute Ischemic Stroke',          coachId:'stroke-neuro' },
+    'toxicology-module':           { caseId:'toxic-ingestion',              caseLabel:'Acetaminophen Overdose',         coachId:'overdose' },
+    'urticaria-module':            { caseId:'hereditary-angioedema',        caseLabel:'Hereditary Angioedema',          coachId:'hae' },
+    'ai-basic-science-module':     { caseId:'anaphylaxis',                  caseLabel:'Anaphylaxis',                    coachId:'anaphylaxis' },
+    'ai-diagnostic-methods-module':{ caseId:'penicillin-allergy-delabeling',caseLabel:'PCN Allergy Delabeling',         coachId:'drug-allergy' },
+    'clinic-ambulatory-module':    { caseId:'type2-diabetes-outpatient',    caseLabel:'T2DM Outpatient',                coachId:'diabetes' }
+  };
+
+  var COACH_LABELS = {
+    'stemi':'STEMI','afib':'Atrial Fibrillation','aki':'Acute Kidney Injury',
+    'allergic-rhinitis':'Allergic Rhinitis','anaphylaxis':'Anaphylaxis',
+    'asthma':'Asthma','atopic-derm':'Atopic Dermatitis','meningitis':'Bacterial Meningitis',
+    'copd':'COPD','drug-allergy':'Drug Allergy','hyperkalemia':'Hyperkalemia',
+    'dka-endo':'DKA / HHS','eosinophilia':'Eosinophilia & HES','food-allergy':'Food Allergy',
+    'gi-bleed':'GI Bleed','heart-failure':'Heart Failure','anemia':'Anemia',
+    'mastocytosis':'Mastocytosis / MCAS','ectopic':'Ectopic Pregnancy','cvid':'CVID',
+    'pneumonia':'Community-Acquired Pneumonia','substance-use':'Substance Use Disorders',
+    'pe-pulm':'Pulmonary Embolism','sle':'Systemic Lupus Erythematosus',
+    'seizure':'Seizures & Epilepsy','sepsis-id':'Sepsis & Septic Shock',
+    'stroke-neuro':'Ischemic Stroke','overdose':'Toxicology / Overdose',
+    'hae':'Hereditary Angioedema','diabetes':'Diabetes Management',
+    'afib':'Atrial Fibrillation','mastocytosis':'Mastocytosis / MCAS'
   };
 
   var filename = window.location.pathname.split('/').pop().replace('.html', '');
@@ -25,37 +60,49 @@
   var params = new URLSearchParams(window.location.search);
   if (params.get('ref')) return;
 
+  var coachLabel = COACH_LABELS[rec.coachId] || rec.coachId;
+
   function inject() {
     if (document.getElementById('mech-bridge-footer')) return;
 
     var footer = document.createElement('div');
     footer.id = 'mech-bridge-footer';
-    footer.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,0.97);backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.1);padding:12px 20px;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
+    footer.style.cssText = 'position:fixed;bottom:0;left:0;right:0;background:rgba(13,43,62,0.97);backdrop-filter:blur(12px);border-top:1px solid rgba(133,193,233,.15);padding:12px 24px;z-index:9999;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap';
 
     var label = document.createElement('div');
-    label.style.cssText = 'font-size:12px;color:rgba(255,255,255,.6);flex-shrink:0';
-    label.innerHTML = '\uD83E\uDDE0 <strong style="color:#fff">Ready to apply this?</strong>';
+    label.style.cssText = 'font-size:12px;color:rgba(255,255,255,.55);flex-shrink:0';
+    label.innerHTML = '<strong style="color:#fff;font-size:13px">Ready to apply this?</strong>';
 
     var btns = document.createElement('div');
-    btns.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap';
+    btns.style.cssText = 'display:flex;gap:8px;flex-wrap:wrap;align-items:center';
 
-    var caseLink = document.createElement('a');
-    caseLink.href = '../virtual-emr.html?case=' + rec.caseId;
-    caseLink.style.cssText = 'font-size:12px;font-weight:700;padding:7px 14px;background:#2874A6;color:#fff;border-radius:7px;text-decoration:none;white-space:nowrap';
-    caseLink.textContent = '\uD83C\uDFE5 ' + rec.caseLabel + ' \u2192';
+    var simLink = document.createElement('a');
+    simLink.href = '../simulation-engine.html?case=' + encodeURIComponent(rec.caseId);
+    simLink.style.cssText = 'font-size:12px;font-weight:700;padding:7px 14px;background:#2874A6;color:#fff;border-radius:7px;text-decoration:none;white-space:nowrap';
+    simLink.textContent = 'Simulate \u2014 ' + rec.caseLabel + ' \u2192';
+
+    var emrLink = document.createElement('a');
+    emrLink.href = '../virtual-emr.html?case=' + encodeURIComponent(rec.caseId);
+    emrLink.style.cssText = 'font-size:12px;font-weight:600;padding:7px 14px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);border-radius:7px;text-decoration:none;white-space:nowrap';
+    emrLink.textContent = 'Practice in Virtual EMR';
 
     var coachLink = document.createElement('a');
-    coachLink.href = '../CoachDx/mentor-chat.html?topic=' + rec.coachId;
-    coachLink.style.cssText = 'font-size:12px;font-weight:700;padding:7px 14px;background:transparent;color:#94A3B8;border:1px solid rgba(255,255,255,.15);border-radius:7px;text-decoration:none;white-space:nowrap';
-    coachLink.textContent = '\uD83E\uDD16 Discuss with CoachDx';
+    coachLink.href = '../CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=mechanism&refModule=' + encodeURIComponent(filename);
+    coachLink.style.cssText = 'font-size:12px;font-weight:600;padding:7px 14px;background:rgba(124,58,237,.15);color:#C4B5FD;border:1px solid rgba(124,58,237,.25);border-radius:7px;text-decoration:none;white-space:nowrap';
+    coachLink.textContent = 'Discuss with Coach';
 
     var closeBtn = document.createElement('button');
     closeBtn.type = 'button';
-    closeBtn.style.cssText = 'font-size:11px;padding:7px 10px;background:transparent;color:rgba(255,255,255,.3);border:none;cursor:pointer;flex-shrink:0';
-    closeBtn.textContent = '\u2715';
-    closeBtn.onclick = function() { footer.remove(); };
+    closeBtn.style.cssText = 'font-size:13px;padding:4px 8px;background:transparent;color:rgba(255,255,255,.25);border:none;cursor:pointer;flex-shrink:0;line-height:1';
+    closeBtn.textContent = '\u00d7';
+    closeBtn.onclick = function() {
+      footer.remove();
+      var page = document.querySelector('.page') || document.body;
+      page.style.paddingBottom = '';
+    };
 
-    btns.appendChild(caseLink);
+    btns.appendChild(simLink);
+    btns.appendChild(emrLink);
     btns.appendChild(coachLink);
     btns.appendChild(closeBtn);
     footer.appendChild(label);

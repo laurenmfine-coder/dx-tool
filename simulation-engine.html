@@ -2495,7 +2495,291 @@ async function exportStudyData() {
     };
   }
 
-  // ── DEBRIEF PANEL — renders after simulation completion ──
+  // ── WHAT'S NEXT PANEL — cross-pillar bridge after debrief ──────
+  function buildWhatsNextPanel(caseData) {
+    if (!caseData) return '';
+    var cid = caseData.caseId || '';
+    var cat = (caseData.category || '').toLowerCase().replace(/_/g,' ');
+    var diag = caseData.diagnosis || caseData.targetDiagnosis || '';
+
+    // ── Category → CoachDx topic map ─────────────────────────────
+    var CAT_COACH = {
+      'cardiovascular':'stemi','cardiology':'stemi','cardiac':'stemi',
+      'pulmonary':'copd','respiratory':'copd',
+      'neurologic':'stroke-neuro','neurological':'stroke-neuro','neurology':'stroke-neuro',
+      'infectious':'sepsis-id',
+      'gastrointestinal':'gi-bleed','gi':'gi-bleed',
+      'allergy':'anaphylaxis','allergy_immunology':'anaphylaxis',
+      'endocrine':'dka-endo',
+      'renal':'aki',
+      'hematologic':'anemia','hematology':'anemia',
+      'toxicologic':'overdose','toxicology':'overdose',
+      'musculoskeletal':'gout','orthopedic':'gout',
+      'rheumatologic':'gout',
+      'psychiatric':'delirium',
+      'emergency':'sepsis-em',
+      'vascular':'aortic-dissection',
+      'oncologic':'leukemia-lymphoma','oncology':'leukemia-lymphoma',
+      'pediatric':'fever-peds',
+      'geriatric':'falls',
+      'obstetric':'eclampsia',
+      'ophthalmic':'headache',
+      'trauma':'trauma',
+      'dermatologic':'sjs-ten',
+      'environmental':'overdose',
+      'surgical':'gi-bleed',
+      'urologic':'uti-pyelo'
+    };
+
+    // ── Category → MechanismDx module map ────────────────────────
+    var CAT_MODULE = {
+      'cardiovascular':'acs-module','cardiology':'acs-module','cardiac':'acs-module',
+      'pulmonary':'copd-module','respiratory':'copd-module',
+      'neurologic':'stroke-module','neurological':'stroke-module','neurology':'stroke-module',
+      'infectious':'sepsis-module',
+      'gastrointestinal':'gi-hepatology-module','gi':'gi-hepatology-module',
+      'allergy':'anaphylaxis-module','allergy_immunology':'anaphylaxis-module',
+      'endocrine':'endocrine-module',
+      'renal':'aki-module',
+      'hematologic':'hematology-module','hematology':'hematology-module',
+      'toxicologic':'toxicology-module','toxicology':'toxicology-module',
+      'musculoskeletal':'rheumatology-module','orthopedic':'rheumatology-module',
+      'rheumatologic':'rheumatology-module',
+      'psychiatric':'psychiatry-module',
+      'vascular':'acs-module',
+      'oncologic':'hematology-module','oncology':'hematology-module',
+      'pediatric':'sepsis-module',
+      'geriatric':'electrolytes-acidbase-module',
+      'obstetric':'ob-module',
+      'emergency':'sepsis-module',
+      'ophthalmic':'cns-infections-gbs-module',
+      'trauma':'sepsis-module',
+      'dermatologic':'drug-allergy-module',
+      'environmental':'toxicology-module',
+      'surgical':'gi-hepatology-module',
+      'urologic':'aki-module'
+    };
+
+    // ── Case-specific overrides (highest priority) ────────────────
+    var CASE_COACH = {
+      'stemi-v1':'stemi','stemi-v2':'stemi','stemi-v3':'stemi',
+      'nstemi-v1':'nstemi','acute-coronary-syndrome':'nstemi',
+      'chf-exacerbation':'heart-failure','chf-exacerbation-v2':'heart-failure','heart-failure-hfpef':'heart-failure',
+      'sepsisseptic-shock':'sepsis-id','cap-with-sepsis':'sepsis-id','pyelonephritis-sepsis':'sepsis-id',
+      'sepsis-v2':'sepsis-id','sepsis-v3':'sepsis-id',
+      'pe-v1':'pe-pulm','pe-v2':'pe-pulm','pe-v3':'pe-pulm','massive-pe-with-rv-failure':'pe-pulm',
+      'stroke-v2':'stroke-neuro','stroke-v3':'stroke-neuro','acute-ischemic-stroke':'stroke-neuro','acute-ischemic-stroke-tpa':'stroke-neuro','hemorrhagic-stroke':'stroke-neuro',
+      'dka-v2':'dka-endo','dka-v3':'dka-endo',
+      'bacterial-meningitis':'meningitis','viral-meningitis':'meningitis',
+      'anaphylaxis-v2':'anaphylaxis','anaphylaxis-v3':'anaphylaxis','anaphylaxis-v4':'anaphylaxis','anaphylaxis-v5':'anaphylaxis',
+      'insect-sting-anaphylaxis':'insect-sting','insect-sting-anaphylaxis-v2':'insect-sting',
+      'hereditary-angioedema':'hae','hereditary-angioedema-v2':'hae','hae-genetics':'hae',
+      'asthma-exacerbation':'asthma','severe-asthma-biologics':'asthma',
+      'eoe-adult':'eoe','eoe-pediatric':'eoe','eoe-adult-v2':'eoe','eoe-pediatric-v2':'eoe',
+      'copd-exacerbation-niv':'copd','pneumonia-on-copd':'copd','pneumonia-on-copd-v2':'copd',
+      'new-onset-atrial-fibrillation':'afib',
+      'guillain-barre':'guillain-barre',
+      'upper-gi-bleed':'gi-bleed',
+      'aki-differential':'aki','uremic-encephalopathy':'aki','severe-hyperkalemia-from-missed-dialysis':'hyperkalemia',
+      'hyperkalemia-with-concurrent-acs':'hyperkalemia',
+      'infective-endocarditis':'endocarditis',
+      'acute-aortic-dissection':'aortic-dissection','aortic-aneurysm':'aortic-dissection','ruptured-aaa':'aortic-dissection',
+      'long-qt-syndrome':'vt','acute-mi-with-av-block':'vt',
+      'toxic-ingestion':'overdose','mixed-overdose':'overdose','medication-overdose':'overdose',
+      'malignant-hyperthermia':'overdose','anticholinergic-toxicity':'overdose',
+      'temporal-arteritis':'vasculitis',
+      'sle-flare-with-cytopenias':'sle',
+      'atypical-hus':'ttp-hit',
+      'hyponatremia':'hyponatremia','thiazideinduced-hyponatremia':'hyponatremia','siadh':'hyponatremia','psychogenic-polydipsia':'hyponatremia',
+      'adrenal-insufficiency':'adrenal','myxedema-coma':'thyroid','hypothyroidismrelated-hyponatremia':'thyroid',
+      'hypercalcemia':'hypercalcemia',
+      'pheochromocytoma':'adrenal',
+      'acute-psychosis':'psychosis',
+      'alcohol-withdrawal':'substance-use','alcohol-withdrawal-seizures':'substance-use',
+      'deep-vein-thrombosis':'anticoagulation','phlegmasia-cerulea-dolens':'anticoagulation','dvt-with-phlegmasia':'anticoagulation',
+      'autoimmune-hemolytic-anemia':'anemia','febrile-neutropenia':'leukemia-lymphoma',
+      'dress-syndrome':'sjs-ten','sjsten-overlap':'sjs-ten','sjsten-overlap-v2':'sjs-ten','sjs-ten-v2':'sjs-ten',
+      'fpies-acute':'fpies','fpies-chronic':'fpies','fpies-acute-v2':'fpies','fpies-chronic-v2':'fpies',
+      'cvid-presentation':'cvid','cvid-presentation-v2':'cvid',
+      'migraine':'headache','migraine-with-aura':'headache','complex-migraine':'headache',
+      'encephalitis':'meningitis','brain-abscess':'meningitis',
+      'digeorge-22q11':'when-suspect-genetic','xla-brutons':'primary-immunodef','scid-ada':'primary-immunodef','cgd-xlinked':'primary-immunodef',
+      'ectopic-pregnancy-workup':'ectopic','midgut-volvulus':'ibd',
+      'hypertensive-emergency':'cardiac-syncope','postconcussion-with-intracranial-hypertension':'headache',
+      'rhabdomyolysis':'aki','rhabdomyolysisinduced-hyperkalemia':'hyperkalemia',
+      'spontaneous-bacterial-peritonitis':'liver-cirrhosis','alcoholic-hepatitis':'liver-cirrhosis',
+      'crohn-flare':'ibd','ibs-management':'ibd',
+      'acute-pancreatitis':'pancreatitis','acute-necrotizing-gallstone-pancreatitis':'pancreatitis','alcoholrelated-pancreatitis':'pancreatitis',
+      'acute-viral-hepatitis':'hepatitis',
+      'newonset-seizure':'seizure','new-onset-seizure':'seizure','alcohol-withdrawal-seizures':'seizure',
+      'pneumonia':'pneumonia','pneumonia-v2':'pneumonia','cap-with-sepsis':'pneumonia',
+      'hypoglycemia':'dka-endo','inpatient-diabetes-management':'diabetes','type2-diabetes-outpatient':'diabetes'
+    };
+
+    var CASE_MODULE = {
+      'stemi-v1':'acs-module','stemi-v2':'acs-module','stemi-v3':'acs-module',
+      'nstemi-v1':'acs-module','chf-exacerbation':'heart-failure-module','chf-exacerbation-v2':'heart-failure-module',
+      'new-onset-atrial-fibrillation':'afib-module',
+      'sepsisseptic-shock':'sepsis-module','cap-with-sepsis':'sepsis-module','pyelonephritis-sepsis':'sepsis-module',
+      'pe-v1':'pulmonary-module','pe-v2':'pulmonary-module','pe-v3':'pulmonary-module',
+      'stroke-v2':'stroke-module','stroke-v3':'stroke-module','acute-ischemic-stroke':'stroke-module',
+      'dka-v2':'endocrine-module','dka-v3':'endocrine-module',
+      'bacterial-meningitis':'cns-infections-gbs-module','viral-meningitis':'cns-infections-gbs-module',
+      'guillain-barre':'cns-infections-gbs-module',
+      'anaphylaxis-v2':'anaphylaxis-module','anaphylaxis-v3':'anaphylaxis-module',
+      'insect-sting-anaphylaxis':'anaphylaxis-module','insect-sting-anaphylaxis-v2':'anaphylaxis-module',
+      'hereditary-angioedema':'urticaria-module','hereditary-angioedema-v2':'urticaria-module',
+      'asthma-exacerbation':'asthma-module','severe-asthma-biologics':'asthma-module',
+      'eoe-adult':'eosinophilia-hp-module','eoe-pediatric':'eosinophilia-hp-module',
+      'copd-exacerbation-niv':'copd-module','pneumonia-on-copd':'copd-module',
+      'atypical-hus':'hematology-module','autoimmune-hemolytic-anemia':'hematology-module',
+      'aki-differential':'aki-module','uremic-encephalopathy':'aki-module',
+      'hyperkalemia-with-concurrent-acs':'electrolytes-acidbase-module',
+      'severe-hyperkalemia-from-missed-dialysis':'electrolytes-acidbase-module',
+      'hyponatremia':'electrolytes-acidbase-module','siadh':'electrolytes-acidbase-module',
+      'thiazideinduced-hyponatremia':'electrolytes-acidbase-module',
+      'adrenal-insufficiency':'endocrine-module','myxedema-coma':'endocrine-module',
+      'hypercalcemia':'endocrine-module','pheochromocytoma':'endocrine-module',
+      'acute-psychosis':'psychiatry-module','alcohol-withdrawal':'psychiatry-module',
+      'dress-syndrome':'drug-allergy-module','sjsten-overlap':'drug-allergy-module','sjs-ten-v2':'drug-allergy-module',
+      'fpies-acute':'food-allergy-module','fpies-chronic':'food-allergy-module',
+      'cvid-presentation':'pid-module','xla-brutons':'pid-module','scid-ada':'pid-module','cgd-xlinked':'pid-module',
+      'upper-gi-bleed':'gi-hepatology-module','alcoholic-hepatitis':'gi-hepatology-module',
+      'spontaneous-bacterial-peritonitis':'gi-hepatology-module','crohn-flare':'gi-hepatology-module',
+      'acute-pancreatitis':'gi-hepatology-module',
+      'toxic-ingestion':'toxicology-module','mixed-overdose':'toxicology-module',
+      'malignant-hyperthermia':'toxicology-module','anticholinergic-toxicity':'toxicology-module',
+      'sle-flare-with-cytopenias':'rheumatology-module','temporal-arteritis':'rheumatology-module',
+      'infective-endocarditis':'acs-module',
+      'encephalitis':'cns-infections-gbs-module','brain-abscess':'cns-infections-gbs-module',
+      'digeorge-22q11':'pid-module',
+      'mastocytosis':'mastocytosis-mcas-module',
+      'pneumonia':'pneumonia-module','pneumonia-v2':'pneumonia-module',
+      'rhabdomyolysis':'aki-module','rhabdomyolysisinduced-hyperkalemia':'aki-module'
+    };
+
+    // ── Coach topic label map ─────────────────────────────────────
+    var COACH_LABELS = {
+      'stemi':'STEMI','nstemi':'NSTEMI / ACS','heart-failure':'Heart Failure',
+      'afib':'Atrial Fibrillation','aortic-dissection':'Aortic Dissection',
+      'cardiac-syncope':'Syncope','vt':'Ventricular Tachycardia','pericarditis':'Pericarditis & Tamponade',
+      'copd':'COPD','pneumonia':'Community-Acquired Pneumonia','pe-pulm':'Pulmonary Embolism',
+      'pneumothorax':'Pneumothorax','ards':'ARDS','hypoxia':'Hypoxia & Respiratory Failure',
+      'sepsis-id':'Sepsis & Septic Shock','meningitis':'Bacterial Meningitis',
+      'endocarditis':'Infective Endocarditis','uti-pyelo':'UTI / Pyelonephritis',
+      'stroke-neuro':'Ischemic Stroke','seizure':'Seizures & Epilepsy','headache':'Headache Syndromes',
+      'guillain-barre':'Guillain-Barré Syndrome','altered-ms':'Altered Mental Status',
+      'gi-bleed':'GI Bleed','pancreatitis':'Acute Pancreatitis','liver-cirrhosis':'Cirrhosis & Portal HTN',
+      'ibd':'Inflammatory Bowel Disease','hepatitis':'Hepatitis','appendicitis':'Appendicitis',
+      'aki':'Acute Kidney Injury','hyponatremia':'Hyponatremia','hyperkalemia':'Hyperkalemia',
+      'acid-base':'Acid-Base Disorders',
+      'dka-endo':'DKA / HHS','thyroid':'Thyroid Disorders','adrenal':'Adrenal Disorders',
+      'diabetes':'Diabetes Management','hypercalcemia':'Hypercalcemia',
+      'anemia':'Anemia','anticoagulation':'Anticoagulation & Clotting','ttp-hit':'TTP / HIT',
+      'sickle-cell':'Sickle Cell Disease','leukemia-lymphoma':'Leukemia & Lymphoma',
+      'sepsis-em':'Sepsis (EM)','pe-em':'Pulmonary Embolism (EM)','dka-em':'DKA (EM)',
+      'chest-pain-ddx':'Chest Pain Differential','shock':'Shock — Types & Management',
+      'overdose':'Toxicology / Overdose','trauma':'Trauma & Massive Transfusion',
+      'sle':'SLE','ra':'Rheumatoid Arthritis','vasculitis':'Vasculitis',
+      'gout':'Gout & Crystal Arthropathies','septic-arthritis':'Septic Arthritis',
+      'depression':'Depression','psychosis':'Psychosis & Schizophrenia',
+      'delirium':'Delirium','substance-use':'Substance Use Disorders',
+      'anaphylaxis':'Anaphylaxis','urticaria':'Urticaria & Angioedema','asthma':'Asthma',
+      'food-allergy':'Food Allergy','drug-allergy':'Drug Allergy','allergic-rhinitis':'Allergic Rhinitis',
+      'atopic-derm':'Atopic Dermatitis','insect-sting':'Insect Sting Allergy','hae':'Hereditary Angioedema',
+      'eoe':'Eosinophilic Esophagitis','mastocytosis':'Mastocytosis / MCAS',
+      'cvid':'CVID','sjs-ten':'SJS / TEN','fpies':'FPIES','nsaid-hypersens':'NSAID Hypersensitivity',
+      'primary-immunodef':'Primary Immunodeficiency','eosinophilia':'Eosinophilia & HES',
+      'when-suspect-genetic':'When to Suspect a Genetic Condition',
+      'eclampsia':'Pre-eclampsia & Eclampsia','ectopic':'Ectopic Pregnancy',
+      'fever-peds':'Pediatric Fever','falls':'Falls & Frailty',
+      'ddx-framework':'Building a Differential','cognitive-bias':'Cognitive Bias in Dx',
+      'pretest-prob':'Pre-test Probability'
+    };
+
+    // ── Module label map ──────────────────────────────────────────
+    var MODULE_LABELS = {
+      'acs-module':'Acute Coronary Syndromes','afib-module':'Atrial Fibrillation',
+      'heart-failure-module':'Heart Failure','anaphylaxis-module':'Anaphylaxis',
+      'asthma-module':'Asthma','atopic-derm-module':'Atopic Dermatitis',
+      'drug-allergy-module':'Drug Allergy & Hypersensitivity',
+      'food-allergy-module':'Food Allergy','allergen-immunotherapy-module':'Allergen Immunotherapy',
+      'rhinitis-module':'Rhinitis & CRSwNP','mastocytosis-mcas-module':'Mastocytosis & MCAS',
+      'eosinophilia-hp-module':'Eosinophilic Disorders & HP',
+      'pid-module':'Primary Immunodeficiency','urticaria-module':'Urticaria & Angioedema',
+      'ai-basic-science-module':'A/I Basic Science',
+      'copd-module':'COPD','pulmonary-module':'Pulmonary Medicine',
+      'pneumonia-module':'Pneumonia','sepsis-module':'Sepsis',
+      'cns-infections-gbs-module':'CNS Infections & GBS','stroke-module':'Stroke',
+      'seizures-epilepsy-module':'Seizures & Epilepsy',
+      'aki-module':'Acute Kidney Injury','electrolytes-acidbase-module':'Electrolytes & Acid-Base',
+      'endocrine-module':'Endocrine','gi-hepatology-module':'GI & Hepatology',
+      'hematology-module':'Hematology','toxicology-module':'Toxicology',
+      'rheumatology-module':'Rheumatology','psychiatry-module':'Psychiatry',
+      'ob-module':'Obstetrics','clinic-ambulatory-module':'Clinic & Ambulatory'
+    };
+
+    // Resolve coach topic
+    var coachTopic = CASE_COACH[cid] || CAT_COACH[cat] || 'ddx-framework';
+    var coachLabel = COACH_LABELS[coachTopic] || coachTopic;
+
+    // Resolve module
+    var module = CASE_MODULE[cid] || CAT_MODULE[cat] || 'sepsis-module';
+    var moduleLabel = MODULE_LABELS[module] || module;
+
+    // Short diagnosis label for UI
+    var shortDiag = diag.replace(/\s*[-—].*$/, '').replace(/\s*\(.*\)$/, '').trim();
+    if (shortDiag.length > 40) shortDiag = shortDiag.substring(0, 38) + '…';
+
+    var h = '';
+    h += '<div style="margin-top:20px;border-top:1.5px solid #E2E8F0;padding-top:18px">';
+    h += '<div style="font-size:11px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin-bottom:12px">Keep Going — Build on This Case</div>';
+
+    h += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">';
+
+    // Card 1: Coach
+    h += '<a href="../CoachDx/mentor-chat.html?topic=' + encodeURIComponent(coachLabel) + '&ref=sim&refCase=' + encodeURIComponent(cid) + '"';
+    h += ' style="display:flex;flex-direction:column;gap:6px;padding:14px;background:#F5F3FF;border:1.5px solid #DDD6FE;border-radius:10px;text-decoration:none;transition:all .15s" ';
+    h += ' onmouseover="this.style.borderColor='#7C3AED';this.style.transform='translateY(-1px)'"';
+    h += ' onmouseout="this.style.borderColor='#DDD6FE';this.style.transform=''">';
+    h += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#7C3AED">Coach</div>';
+    h += '<div style="font-size:12px;font-weight:700;color:#3C3489;line-height:1.3">' + coachLabel + '</div>';
+    h += '<div style="font-size:11px;color:#534AB7;margin-top:2px">Discuss with your attending →</div>';
+    h += '</a>';
+
+    // Card 2: Learn
+    h += '<a href="../mechanism/' + module + '.html?return=simulation-engine.html&case=' + encodeURIComponent(cid) + '"';
+    h += ' style="display:flex;flex-direction:column;gap:6px;padding:14px;background:#FFF7ED;border:1.5px solid #FED7AA;border-radius:10px;text-decoration:none;transition:all .15s"';
+    h += ' onmouseover="this.style.borderColor='#EA580C';this.style.transform='translateY(-1px)'"';
+    h += ' onmouseout="this.style.borderColor='#FED7AA';this.style.transform=''">';
+    h += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#EA580C">Learn</div>';
+    h += '<div style="font-size:12px;font-weight:700;color:#9A3412;line-height:1.3">' + moduleLabel + '</div>';
+    h += '<div style="font-size:11px;color:#C2410C;margin-top:2px">Understand the mechanism →</div>';
+    h += '</a>';
+
+    // Card 3: Practice (same case in EMR)
+    h += '<a href="../virtual-emr.html?case=' + encodeURIComponent(cid) + '"';
+    h += ' style="display:flex;flex-direction:column;gap:6px;padding:14px;background:#ECFDF5;border:1.5px solid #A7F3D0;border-radius:10px;text-decoration:none;transition:all .15s"';
+    h += ' onmouseover="this.style.borderColor='#059669';this.style.transform='translateY(-1px)'"';
+    h += ' onmouseout="this.style.borderColor='#A7F3D0';this.style.transform=''">';
+    h += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#059669">Practice</div>';
+    h += '<div style="font-size:12px;font-weight:700;color:#065F46;line-height:1.3">' + shortDiag + '</div>';
+    h += '<div style="font-size:11px;color:#047857;margin-top:2px">Work the chart in Virtual EMR →</div>';
+    h += '</a>';
+
+    h += '</div>';
+
+    // Puzzle teaser
+    h += '<a href="../puzzles.html" style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;transition:background .15s" onmouseover="this.style.background='#EBF5FB'" onmouseout="this.style.background='#F8FAFC'">';
+    h += '<span style="font-size:12px;color:#64748B">🧩 <strong style="color:#1E293B">Daily Reasoning Puzzle</strong> — sharpen your pattern recognition</span>';
+    h += '<span style="font-size:12px;color:#2874A6;font-weight:600">Try today's →</span>';
+    h += '</a>';
+
+    h += '</div>';
+    return h;
+  }
+
+    // ── DEBRIEF PANEL — renders after simulation completion ──
   function renderReasoningDebrief() {
     var chatEl = document.getElementById('chatMessages');
     if (!chatEl) return;
@@ -2575,6 +2859,10 @@ async function exportStudyData() {
     });
     html += '<button onclick="submitAAR()" style="background:#2874A6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Submit Reflection</button>';
     html += '</div>';
+
+
+    // ── What's Next Panel ──────────────────────────────────────────
+    html += buildWhatsNextPanel(caseData);
 
     html += '</div>';
 
