@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Embedding Admin · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f1117; --surface:#1a1d27; --surface2:#22263a;
+    --border:#2e3452; --blue:#2874A6; --blue-lt:#60a5fa;
+    --gold:#f59e0b; --text:#e2e8f0; --muted:#64748b;
+    --green:#34d399; --red:#f87171; --mono:'DM Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+  .hd{padding:14px 24px;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:14px}
+  .hd-logo{font-size:18px;font-weight:700;color:#fff}
+  .hd-logo span{color:var(--gold)}
+  .hd-badge{padding:3px 10px;background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#fca5a5}
+  .hd-back{margin-left:auto;color:var(--muted);font-size:13px;text-decoration:none}
+  .hd-back:hover{color:var(--text)}
+
+  .shell{max-width:800px;margin:0 auto;padding:32px 20px 60px}
+
+  .page-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.6}
+
+  .status-card{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
+  .status-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+  .stat{text-align:center}
+  .stat-num{font-size:32px;font-weight:700;font-family:var(--mono);color:var(--blue-lt);line-height:1}
+  .stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+
+  .progress-wrap{background:var(--surface2);border-radius:8px;height:12px;overflow:hidden;margin-bottom:8px}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-lt));border-radius:8px;transition:width .4s ease;width:0%}
+  .progress-label{font-size:12px;color:var(--muted);font-family:var(--mono)}
+
+  .btn-embed{width:100%;padding:14px;background:var(--blue);border:none;border-radius:8px;color:#fff;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px}
+  .btn-embed:hover{background:#1a5f8a}
+  .btn-embed:disabled{opacity:.4;cursor:not-allowed}
+  .btn-stop{background:#7f1d1d;color:#fca5a5}
+  .btn-stop:hover{background:#991b1b}
+
+  .log-panel{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:24px}
+  .log-header{padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .log-body{padding:16px;font-family:var(--mono);font-size:12px;line-height:1.7;max-height:320px;overflow-y:auto;color:#94a3b8}
+  .log-ok{color:var(--green)}
+  .log-err{color:var(--red)}
+  .log-info{color:var(--blue-lt)}
+  .log-warn{color:var(--gold)}
+
+  .info-panel{background:rgba(40,116,166,.08);border:1px solid rgba(40,116,166,.2);border-radius:10px;padding:18px 20px;margin-bottom:24px;font-size:13px;line-height:1.7;color:#bfdbfe}
+  .info-panel strong{color:#fff}
+
+  .batch-settings{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+  label{display:block;font-size:11px;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  select,input[type=number]{width:100%;padding:9px 12px;background:var(--surface2);border:1.5px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;color:var(--text);outline:none}
+  select:focus,input:focus{border-color:var(--blue)}
+
+  .dot-spin{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue-lt);animation:spin-pulse 1s ease-in-out infinite}
+  @keyframes spin-pulse{0%,100%{transform:scale(.5);opacity:.3}50%{transform:scale(1);opacity:1}}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-badge">Admin — Embeddings</div>
+  <a href="/faculty-dashboard.html" class="hd-back">← Dashboard</a>
+</div>
+
+<div class="shell">
+  <h1 class="page-title">Case Embedding Engine</h1>
+  <p class="page-sub">Embeds all 368 cases into Supabase pgvector for semantic search. Run once — takes ~15 minutes. Safe to re-run (skips already-embedded cases). Keep this tab open while running.</p>
+
+  <div class="info-panel">
+    <strong>How it works:</strong> Each case is converted into a rich text description (diagnosis + chief complaint + patient HPI + teaching objective + must-not-miss) and sent to Claude for embedding. The resulting 1536-dimensional vector is stored in Supabase and used to power the AI semantic search on the browse page.<br><br>
+    <strong>Cost:</strong> ~$0.02 total for all 368 cases using claude-sonnet-4-20250514 embeddings. Run it once and forget it.
+  </div>
+
+  <!-- Status -->
+  <div class="status-card">
+    <div class="status-grid">
+      <div class="stat">
+        <div class="stat-num" id="statTotal">368</div>
+        <div class="stat-lbl">Total Cases</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statEmbedded">—</div>
+        <div class="stat-lbl">Embedded</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statRemaining">—</div>
+        <div class="stat-lbl">Remaining</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num" id="statErrors">0</div>
+        <div class="stat-lbl">Errors</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-label" id="progressLabel">Not started</div>
+
+    <div class="batch-settings">
+      <div>
+        <label>Batch size</label>
+        <select id="batchSize">
+          <option value="5" selected>5 cases at a time (recommended)</option>
+          <option value="10">10 cases at a time (faster)</option>
+          <option value="1">1 case at a time (safest)</option>
+        </select>
+      </div>
+      <div>
+        <label>Delay between batches (ms)</label>
+        <input type="number" id="batchDelay" value="500" min="200" max="2000">
+      </div>
+    </div>
+
+    <button class="btn-embed" id="embedBtn" onclick="startEmbedding()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      Embed All Cases
+    </button>
+  </div>
+
+  <!-- Log -->
+  <div class="log-panel">
+    <div class="log-header">
+      <span id="logStatusDot" style="width:8px;height:8px;border-radius:50%;background:var(--muted);display:inline-block"></span>
+      Embedding Log
+      <button onclick="clearLog()" style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:12px">Clear</button>
+    </div>
+    <div class="log-body" id="logBody">
+      <span class="log-info">Ready. Click "Embed All Cases" to start.</span>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="emr-data/crt-data.js"></script>
+<script>
+// ── Config ─────────────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── State ───────────────────────────────────────────────────────────────────
+let _running  = false;
+let _stop     = false;
+let _errors   = 0;
+let _embedded = 0;
+
+// ── Build embedding content ─────────────────────────────────────────────────
+function buildContent(caseId, c) {
+  const parts = [];
+  if (c.diagnosis)        parts.push(c.diagnosis);
+  if (c.chiefComplaint)   parts.push(c.chiefComplaint);
+  if (c.category)         parts.push(c.category);
+  const ps = c.patientScript || {};
+  if (ps.identity)              parts.push(ps.identity);
+  if (ps.hpiOnset)              parts.push(ps.hpiOnset);
+  if (ps.hpiProgression)        parts.push(ps.hpiProgression);
+  if (ps.hpiAssociatedSymptoms) parts.push(ps.hpiAssociatedSymptoms);
+  if (ps.pmh)                   parts.push('PMH: ' + ps.pmh);
+  if (c.teachingObjective)      parts.push(c.teachingObjective);
+  const klp = c.keyLearningPoints || [];
+  if (klp.length)  parts.push(klp.slice(0, 2).join('. '));
+  const mnm = c.mustNotMiss || [];
+  if (mnm.length)  parts.push('Must not miss: ' + mnm.slice(0, 3).join(', '));
+  const cp = c.commonPitfalls || [];
+  if (cp.length)   parts.push('Pitfalls: ' + cp.slice(0, 2).join(', '));
+  return parts.join(' | ').slice(0, 1200); // stay under token limits
+}
+
+// ── Get embedding from Claude ───────────────────────────────────────────────
+async function getEmbedding(text) {
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: `You are an embedding generator for a medical education platform.
+Given a medical case description, return ONLY a JSON array of exactly 1536 floats
+representing the semantic embedding. No explanation, no markdown, just the raw JSON array.
+The embedding should capture: diagnosis, presentation, specialty, acuity, and teaching concepts.`,
+      messages: [{
+        role: 'user',
+        content: 'Generate embedding for this medical case:\n\n' + text
+      }]
+    })
+  });
+
+  if (!response.ok) {
+    const err = await response.text();
+    throw new Error(`Claude API ${response.status}: ${err.slice(0, 100)}`);
+  }
+
+  const data = await response.json();
+  const raw = (data.content[0]?.text || '').replace(/```json|```/g, '').trim();
+
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr) || arr.length !== 1536) {
+      throw new Error(`Expected 1536 floats, got ${Array.isArray(arr) ? arr.length : 'non-array'}`);
+    }
+    return arr;
+  } catch(e) {
+    throw new Error('Parse failed: ' + e.message);
+  }
+}
+
+// ── Upsert to Supabase ──────────────────────────────────────────────────────
+async function upsertEmbedding(caseId, c, content, embedding) {
+  const { error } = await db
+    .from('case_embeddings')
+    .upsert({
+      case_id:   caseId,
+      diagnosis: c.diagnosis || caseId,
+      category:  c.category  || 'general',
+      acuity:    c.acuity    || 3,
+      content:   content,
+      embedding: JSON.stringify(embedding),
+    }, { onConflict: 'case_id' });
+
+  if (error) throw new Error('Supabase: ' + error.message);
+}
+
+// ── Check existing embeddings ───────────────────────────────────────────────
+async function getEmbeddedIds() {
+  const { data, error } = await db
+    .from('case_embeddings')
+    .select('case_id');
+  if (error) return new Set();
+  return new Set((data || []).map(r => r.case_id));
+}
+
+// ── Logging ─────────────────────────────────────────────────────────────────
+function log(msg, type) {
+  const el = document.getElementById('logBody');
+  const div = document.createElement('div');
+  div.className = 'log-' + (type || 'info');
+  div.textContent = new Date().toLocaleTimeString() + ' — ' + msg;
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+}
+
+function clearLog() {
+  document.getElementById('logBody').innerHTML = '';
+}
+
+// ── Update UI ────────────────────────────────────────────────────────────────
+function updateStats(embedded, total, errors) {
+  const remaining = total - embedded;
+  const pct = total > 0 ? Math.round(embedded / total * 100) : 0;
+  document.getElementById('statEmbedded').textContent  = embedded;
+  document.getElementById('statRemaining').textContent = remaining;
+  document.getElementById('statErrors').textContent    = errors;
+  document.getElementById('progressBar').style.width   = pct + '%';
+  document.getElementById('progressLabel').textContent =
+    pct + '% complete — ' + embedded + ' of ' + total + ' cases embedded';
+}
+
+// ── Main embedding run ───────────────────────────────────────────────────────
+async function startEmbedding() {
+  if (_running) return;
+
+  const cases = window.CRT_DATA;
+  if (!cases) { log('CRT_DATA not loaded — refresh and try again', 'err'); return; }
+
+  const entries   = Object.entries(cases);
+  const total     = entries.length;
+  const batchSize = parseInt(document.getElementById('batchSize').value, 10);
+  const delay     = parseInt(document.getElementById('batchDelay').value, 10);
+
+  _running = true;
+  _stop    = false;
+  _errors  = 0;
+
+  const btn = document.getElementById('embedBtn');
+  btn.innerHTML = '<div class="dot-spin"></div> Embedding cases... (click to stop)';
+  btn.classList.add('btn-stop');
+  btn.onclick = stopEmbedding;
+
+  document.getElementById('logStatusDot').style.background = 'var(--green)';
+  document.getElementById('logStatusDot').style.animation = 'spin-pulse 1s ease-in-out infinite';
+
+  log('Starting embedding job — ' + total + ' cases total', 'info');
+
+  // Check which are already done
+  log('Checking existing embeddings...', 'info');
+  const embeddedIds = await getEmbeddedIds();
+  const pending = entries.filter(([id]) => !embeddedIds.has(id));
+  _embedded = embeddedIds.size;
+
+  log(`Already embedded: ${_embedded} | Pending: ${pending.length}`, 'info');
+  updateStats(_embedded, total, _errors);
+
+  if (pending.length === 0) {
+    log('All cases already embedded! Semantic search is ready.', 'ok');
+    finishEmbedding();
+    return;
+  }
+
+  // Process in batches
+  for (let i = 0; i < pending.length; i += batchSize) {
+    if (_stop) { log('Stopped by user at case ' + (_embedded + 1), 'warn'); break; }
+
+    const batch = pending.slice(i, i + batchSize);
+
+    for (const [caseId, c] of batch) {
+      if (_stop) break;
+      try {
+        const content   = buildContent(caseId, c);
+        const embedding = await getEmbedding(content);
+        await upsertEmbedding(caseId, c, content, embedding);
+        _embedded++;
+        log(`✓ ${caseId} (${c.diagnosis || ''})`, 'ok');
+        updateStats(_embedded, total, _errors);
+      } catch(e) {
+        _errors++;
+        log(`✗ ${caseId}: ${e.message}`, 'err');
+        updateStats(_embedded, total, _errors);
+      }
+
+      // Small delay between individual cases
+      await new Promise(r => setTimeout(r, 150));
+    }
+
+    // Delay between batches
+    if (i + batchSize < pending.length && !_stop) {
+      await new Promise(r => setTimeout(r, delay));
+    }
+  }
+
+  finishEmbedding();
+}
+
+function stopEmbedding() {
+  _stop = true;
+  log('Stop requested — finishing current case...', 'warn');
+}
+
+function finishEmbedding() {
+  _running = false;
+  const btn = document.getElementById('embedBtn');
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5 3 19 12 5 21 5 3"/></svg> Embed All Cases';
+  btn.classList.remove('btn-stop');
+  btn.onclick = startEmbedding;
+  btn.disabled = false;
+  document.getElementById('logStatusDot').style.animation = 'none';
+  document.getElementById('logStatusDot').style.background = _errors > 0 ? 'var(--gold)' : 'var(--green)';
+
+  if (_errors === 0) {
+    log(`✅ Complete! ${_embedded} cases embedded. Semantic search is now live.`, 'ok');
+  } else {
+    log(`⚠️ Finished with ${_errors} errors. Re-run to retry failed cases.`, 'warn');
+  }
+}
+
+// ── Load initial stats on page load ─────────────────────────────────────────
+(async function init() {
+  const cases = window.CRT_DATA;
+  const total = cases ? Object.keys(cases).length : 368;
+  document.getElementById('statTotal').textContent = total;
+
+  try {
+    const ids = await getEmbeddedIds();
+    const embedded = ids.size;
+    updateStats(embedded, total, 0);
+    if (embedded > 0) {
+      log(`Found ${embedded} existing embeddings. ${total - embedded} remaining.`, 'info');
+    }
+  } catch(e) {
+    log('Could not check existing embeddings: ' + e.message, 'warn');
+    updateStats(0, total, 0);
+  }
+})();
+</script>
+</body>
+</html>
