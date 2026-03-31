@@ -40,28 +40,20 @@
     return parts.join(' | ');
   }
 
-  // ── Get embedding from Claude API ─────────────────────────────────────────
+  // ── Get embedding via rdx-embed worker (Cloudflare AI, free) ─────────────
+  var EMBED_WORKER = 'https://rdx-embed.laurenmfine.workers.dev';
+
   async function getEmbedding(text) {
-    // Use Claude's embeddings endpoint directly
-    var res = await fetch('https://api.anthropic.com/v1/messages', {
+    var res = await fetch(EMBED_WORKER, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 100,
-        system: 'Return ONLY a JSON array of 1536 floats representing the semantic embedding of the input text. No other text.',
-        messages: [{
-          role: 'user',
-          content: 'Embed this medical case text: ' + text.slice(0, 800)
-        }]
-      })
+      body: JSON.stringify({ text: text.slice(0, 2000) })
     });
-
-    if (!res.ok) throw new Error('Embedding API failed: ' + res.status);
+    if (!res.ok) throw new Error('Embed worker failed: ' + res.status);
     var data = await res.json();
-    var txt = (data.content[0] && data.content[0].text) || '[]';
-    try { return JSON.parse(txt.replace(/```json|```/g, '').trim()); }
-    catch(e) { throw new Error('Embedding parse failed: ' + e.message); }
+    if (data.error) throw new Error(data.error);
+    if (!Array.isArray(data.embedding)) throw new Error('No embedding returned');
+    return data.embedding;
   }
 
   // ── Upsert embedding to Supabase ──────────────────────────────────────────
