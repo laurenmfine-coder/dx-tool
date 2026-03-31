@@ -319,6 +319,19 @@ window.CRT_DATA = {
           "SgarbossaScore": "Concordant ST elevation \u22651mm = 5 points (positive)"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 58-year-old man with diabetes, high blood pressure, and high cholesterol.",
+      "hpiOnset": "About an hour ago I started feeling this tight, heavy pressure right here in the middle of my chest \u2014 like someone is sitting on me. It came on while I was shoveling snow.",
+      "hpiProgression": "It hasn't gotten better at all. If anything it's getting worse. I took an antacid and it didn't help.",
+      "hpiAssociatedSymptoms": "I'm sweating a lot \u2014 my shirt is soaked. And I feel a little sick to my stomach. My jaw feels kind of achy too.",
+      "hpiLocationPattern": "It's right in the center of my chest. It goes up into my jaw and down my left arm.",
+      "pmh": "Type 2 diabetes for about 10 years. High blood pressure for 8 years. High cholesterol. I had a stress test 3 years ago that was fine.",
+      "medications": "Metformin, lisinopril, atorvastatin. I take aspirin every day too.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "My father had a heart attack at 52. He survived but had bypass surgery.",
+      "socialSmokingAlcohol": "I smoked a pack a day for 20 years \u2014 quit 5 years ago. I drink a beer or two on weekends.",
+      "socialOccupation": "I'm a high school principal. Pretty stressful job."
     }
   },
   "stemi-v2": {
@@ -475,6 +488,19 @@ window.CRT_DATA = {
           "Note": "IABP-SHOCK II: IABP no mortality benefit; Impella provides higher cardiac output; ECMO for refractory; consider early revascularization of all lesions"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 61-year-old man who had a stent placed in his heart 4 hours ago.",
+      "hpiOnset": "I was doing okay right after the procedure \u2014 the chest pain was gone. But about an hour ago I started feeling like I couldn't breathe. Something is wrong.",
+      "hpiProgression": "I'm getting worse. The nurses keep saying my blood pressure is too low. I feel cold and clammy and kind of out of it.",
+      "hpiAssociatedSymptoms": "I'm short of breath. My chest feels heavy again \u2014 different from before, more like pressure with the breathing problem.",
+      "hpiLocationPattern": "It's in my chest \u2014 hard to describe if it's the same as before or something new.",
+      "pmh": "Just had a heart attack and got a stent a few hours ago. I have diabetes and high blood pressure and high cholesterol.",
+      "medications": "They started me on a bunch of new medications today \u2014 aspirin, Plavix, a blood thinner. I'm still on metformin and lisinopril.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father died of heart failure.",
+      "socialSmokingAlcohol": "I quit smoking 5 years ago. Occasional alcohol.",
+      "socialOccupation": "Retired factory worker."
     }
   },
   "stemi-v3": {
@@ -756,6 +782,19 @@ window.CRT_DATA = {
           "Note": "Vasopressin add-on when NE \u22650.25 (VASST trial); hydrocortisone 200mg/day when vasopressor-refractory (APROCCHSS/ADRENAL)"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 68-year-old woman who was admitted to the hospital 6 hours ago for a kidney infection.",
+      "hpiOnset": "I came in this morning with a kidney infection \u2014 they told me I was septic and started IV antibiotics and fluids. But I'm not getting better. My pressure keeps dropping.",
+      "hpiProgression": "They had to start me on medication to keep my blood pressure up. I'm on a lot of IV fluids. I feel worse than when I came in.",
+      "hpiAssociatedSymptoms": "I'm still shaking. I'm having trouble breathing \u2014 they put this mask on me. I feel completely drained. My kidneys feel like they're failing \u2014 the nurse said my urine output is very low.",
+      "hpiLocationPattern": "The back pain from the kidney infection is still there.",
+      "pmh": "Urosepsis \u2014 just diagnosed. Diabetes type 2. Chronic kidney disease stage 3.",
+      "medications": "I'm on IV cefepime, insulin, vasopressors now they told me.",
+      "allergies": "Penicillin \u2014 rash as a child.",
+      "familyHistory": "Mother had diabetes.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Retired teacher."
     }
   },
   "sepsis-v3": {
@@ -1129,6 +1168,31 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "100.4\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Recurrent Pericarditis \u2014 Colchicine Failure",
+        "scenario": "Patient returns 6 weeks after completing NSAIDs and colchicine with recurrent sharp pleuritic chest pain, fever 38.4, and friction rub. Echo unchanged. CRP 64.",
+        "newData": {
+          "CRP": "64 mg/L",
+          "Echo": "trace pericardial effusion, no tamponade",
+          "Temp": "38.4\u00b0C",
+          "Anti-nuclear Ab": "negative",
+          "TSH": "normal",
+          "Blood cultures": "negative"
+        }
+      },
+      "v3": {
+        "title": "Constrictive Pericarditis \u2014 Late Complication",
+        "scenario": "6 months later: progressive dyspnea, lower extremity edema, and Kussmaul's sign on exam. JVP elevated and paradoxically rises on inspiration. CT shows pericardial thickening 6mm.",
+        "newData": {
+          "JVP": "elevated, rises on inspiration (Kussmaul's sign)",
+          "CT pericardium": "6mm thickening, calcification right border",
+          "Echo": "septal bounce, respiratory variation on mitral inflow >25%",
+          "BNP": "410 pg/mL",
+          "Cardiac MRI": "pericardial late gadolinium enhancement"
+        }
+      }
     }
   },
   "nstemi-v1": {
@@ -1737,6 +1801,30 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "100.8\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Perforated Appendicitis \u2014 Peritonitis",
+        "scenario": "Patient initially stable deteriorates over 12 hours with diffuse rebound tenderness, rigidity, and temperature 39.2. WBC now 22,000. CT updated.",
+        "newData": {
+          "WBC": "22,000 with left shift",
+          "Temp": "39.2\u00b0C",
+          "CT abdomen/pelvis": "periappendiceal fat stranding with free air, phlegmon formation",
+          "Abdomen exam": "diffuse guarding, rebound tenderness",
+          "BP": "104/68, HR 118"
+        }
+      },
+      "v3": {
+        "title": "Post-Appendectomy Abscess \u2014 Day 5",
+        "scenario": "Post-operative day 5 after laparoscopic appendectomy. Persistent fever 38.8, rising WBC 16,000, and right lower quadrant pain despite antibiotics.",
+        "newData": {
+          "WBC": "16,000",
+          "Temp": "38.8\u00b0C",
+          "CT abdomen/pelvis": "5cm right lower quadrant fluid collection, rim-enhancing",
+          "Wound": "intact, no erythema",
+          "Blood cultures": "no growth 48h"
+        }
+      }
     }
   },
   "aaa-v1": {
@@ -2946,6 +3034,30 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "99.8\u00b0F",
       "SpO2": "88% on 2L NC"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "COPD Exacerbation \u2014 Respiratory Failure",
+        "scenario": "Despite 24h of bronchodilators and steroids, patient's RR is now 32, PaCO2 rising to 58, pH 7.30. SpO2 88% on 4L NC. Using accessory muscles.",
+        "newData": {
+          "ABG": "pH 7.30, PaCO2 58, PaO2 58, HCO3 28 (acute-on-chronic respiratory acidosis)",
+          "SpO2": "88% on 4L NC",
+          "RR": "32",
+          "CXR": "hyperinflation, no new infiltrate",
+          "Mental status": "increasingly drowsy"
+        }
+      },
+      "v3": {
+        "title": "COPD \u2014 ICU Escalation and NIV Failure",
+        "scenario": "NIV (BiPAP) initiated. After 2 hours: patient removes mask repeatedly, mental status declining, PaCO2 now 72, pH 7.24. Anesthesia called.",
+        "newData": {
+          "ABG on BiPAP": "pH 7.24, PaCO2 72, PaO2 64",
+          "Mental status": "agitated, confused, cannot protect airway",
+          "BiPAP settings": "IPAP 16, EPAP 6, FiO2 40%",
+          "HR": "124",
+          "BP": "142/88"
+        }
+      }
     }
   },
   "sah-v1": {
@@ -3844,6 +3956,19 @@ window.CRT_DATA = {
           "ClinicalNote": "Cushing triad pattern \u2014 HTN + bradycardia"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 19-year-old woman with type 1 diabetes.",
+      "hpiOnset": "I've felt sick for about 3 days. It started with what I thought was the stomach flu \u2014 nausea, vomiting, not wanting to eat. I stopped taking my insulin because I wasn't eating.",
+      "hpiProgression": "I've been getting worse every day. Today I can barely think straight. My roommate found me and brought me in.",
+      "hpiAssociatedSymptoms": "I've been vomiting all day. I'm so thirsty \u2014 I've been drinking water constantly but my mouth is still dry. I've been peeing a lot. My stomach hurts badly.",
+      "hpiLocationPattern": "My stomach pain is all over \u2014 not in one spot.",
+      "pmh": "Type 1 diabetes since I was 12. Depression \u2014 on sertraline. No prior DKA.",
+      "medications": "Insulin glargine at night, insulin lispro with meals \u2014 but I stopped 3 days ago when I got sick. Sertraline.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Aunt has type 1 diabetes.",
+      "socialSmokingAlcohol": "I don't smoke. I drink occasionally at parties.",
+      "socialOccupation": "College freshman, living in a dorm."
     }
   },
   "stroke-v1": {
@@ -4171,6 +4296,19 @@ window.CRT_DATA = {
           "Platelets": "198,000"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 72-year-old man with atrial fibrillation and high blood pressure.",
+      "hpiOnset": "My wife says I was talking fine and then suddenly my words stopped coming out right \u2014 about 45 minutes ago. My face started drooping and I couldn't move my right arm.",
+      "hpiProgression": "It started suddenly and it's been the same since. The arm weakness \u2014 I can barely lift it. The words \u2014 I know what I want to say but it won't come out.",
+      "hpiAssociatedSymptoms": "My face feels numb on the right side. I have a mild headache. I'm not confused \u2014 I understand everything you're saying.",
+      "hpiLocationPattern": "Right arm weakness and right face drooping. Speech problems.",
+      "pmh": "Atrial fibrillation \u2014 my doctor wanted me on a blood thinner but I was worried about bleeding so I said no. High blood pressure. Diabetes. High cholesterol.",
+      "medications": "Metoprolol, lisinopril, atorvastatin, metformin. No blood thinner.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father had a stroke at 75.",
+      "socialSmokingAlcohol": "I quit smoking 10 years ago. Occasional wine with dinner.",
+      "socialOccupation": "Retired engineer."
     }
   },
   "tension-ptx": {
@@ -4491,6 +4629,19 @@ window.CRT_DATA = {
           "Note": "Post-intubation \u2014 confirm tube position AND decompress"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 28-year-old man who was in a motorcycle accident.",
+      "hpiOnset": "I was in a motorcycle accident \u2014 hit by a car. My left chest hit the handlebars. Right after I started having really bad trouble breathing and chest pain.",
+      "hpiProgression": "It's getting worse fast. I could breathe a little at first, now I can barely get air in.",
+      "hpiAssociatedSymptoms": "My whole left chest hurts. I feel like I'm going to pass out. I can't get air in.",
+      "hpiLocationPattern": "Left chest pain. Breathing is the main problem.",
+      "pmh": "Healthy. No prior medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Non-contributory.",
+      "socialSmokingAlcohol": "I smoke. Social drinker.",
+      "socialOccupation": "Warehouse worker."
     }
   },
   "epidural-hematoma": {
@@ -5715,6 +5866,19 @@ window.CRT_DATA = {
           "Note": "NCSE \u2014 EEG required, empiric benzodiazepine trial reasonable"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 22-year-old woman with epilepsy \u2014 currently postictal and unable to give full history.",
+      "hpiOnset": "My roommate called 911. I've been shaking for about 20 minutes. I can hear you but I can't really talk right now.",
+      "hpiProgression": "EMS says the seizure has been going on since before they arrived.",
+      "hpiAssociatedSymptoms": "I can't answer questions well right now. I bit my tongue. I think I wet myself.",
+      "hpiLocationPattern": "Full body shaking.",
+      "pmh": "Epilepsy since I was 16 \u2014 generalized tonic-clonic. Usually well-controlled. Depression.",
+      "medications": "Levetiracetam 1500mg twice daily. Sertraline. I ran out of my levetiracetam 4 days ago.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Cousin has epilepsy.",
+      "socialSmokingAlcohol": "I don't smoke. I had a couple of drinks last night at a party.",
+      "socialOccupation": "College student."
     }
   },
   "new-seizure-mass": {
@@ -7907,6 +8071,19 @@ window.CRT_DATA = {
           "Note": "Consider glucagon, vasopressors, airway decision"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 24-year-old woman with a shellfish allergy and mild asthma.",
+      "hpiOnset": "I was at a restaurant and I told them I was allergic to shellfish but I think there was shrimp in the dish. Within a few minutes my lips started tingling and now my throat is swelling shut.",
+      "hpiProgression": "It's happening really fast. I used my EpiPen about 10 minutes ago and it helped a little but now it's coming back.",
+      "hpiAssociatedSymptoms": "My whole body is itching \u2014 hives everywhere. I feel like I'm going to pass out. I'm having trouble breathing \u2014 it sounds wheezy.",
+      "hpiLocationPattern": "My throat, lips, and tongue are swelling. The hives are all over my chest and arms.",
+      "pmh": "Shellfish allergy \u2014 I had hives before but never this bad. Mild asthma, well-controlled. Eczema.",
+      "medications": "Albuterol inhaler as needed. Carry an EpiPen.",
+      "allergies": "Shellfish \u2014 anaphylaxis today.",
+      "familyHistory": "Mother has food allergies.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Graduate student."
     }
   },
   "ace-angioedema": {
@@ -8415,6 +8592,20 @@ window.CRT_DATA = {
           "Note": "Salpingostomy vs salpingectomy: no difference in intrauterine pregnancy rates (DEMETER trial); salpingostomy higher persistent ectopic risk; with damaged contralateral tube, preserving ipsilateral makes sense; IVF counseling regardless"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 26-year-old woman with severe lower abdominal pain.",
+      "hpiOnset": "About 2 hours ago I got this sudden, really sharp pain on my right side \u2014 it came out of nowhere and dropped me to the floor. Now I feel dizzy and like I might pass out.",
+      "hpiProgression": "The pain was sudden onset and it's been severe since. I've been feeling dizzy and really weak.",
+      "hpiAssociatedSymptoms": "The pain is in my lower belly on the right. I also have this weird pain in my right shoulder \u2014 my friend said that can mean internal bleeding. My period is about 6 weeks late but I didn't think I was pregnant.",
+      "hpiLocationPattern": "Right lower quadrant pain. Shoulder pain on the right.",
+      "pmh": "I had chlamydia two years ago and it was treated. I have endometriosis. No prior pregnancies.",
+      "medications": "Ibuprofen as needed. No regular medications.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Non-contributory.",
+      "socialSmokingAlcohol": "I smoke occasionally. I drink socially.",
+      "socialOccupation": "Nurse assistant.",
+      "socialSexualGeneral": "Sexually active, one partner. Not using contraception currently."
     }
   },
   "eclampsia": {
@@ -8733,6 +8924,20 @@ window.CRT_DATA = {
           "Note": "HELLP with hepatic rupture \u2014 surgical emergency"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 28-year-old woman who is 34 weeks pregnant with her first baby.",
+      "hpiOnset": "My husband says I had a seizure \u2014 I don't remember it. Before it happened I had the worst headache of my life and my vision was doing something strange \u2014 like flashing lights. Now I woke up here.",
+      "hpiProgression": "I've had a headache for the past 3 days that Tylenol hasn't helped at all. My hands and feet have been really swollen. At my last appointment 5 days ago they said my blood pressure was high.",
+      "hpiAssociatedSymptoms": "My head still hurts terribly. My vision is still blurry. I feel confused and scared. My stomach has been hurting in the upper right area since yesterday.",
+      "hpiLocationPattern": "Headache is all over my head. Stomach pain is under my right rib.",
+      "pmh": "First pregnancy \u2014 34 weeks. Obesity. No prior history of seizures or high blood pressure before this pregnancy.",
+      "medications": "Prenatal vitamins. No other medications.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Mother had preeclampsia.",
+      "socialSmokingAlcohol": "I don't smoke or drink \u2014 especially during pregnancy.",
+      "socialOccupation": "Elementary school teacher. Lives with husband.",
+      "substanceSocial": "No tobacco, no alcohol, no recreational drugs."
     }
   },
   "nms": {
@@ -13178,6 +13383,30 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "97.2\u00b0F (hypothermic from floor exposure)",
       "SpO2": "94%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hip Fracture \u2014 Perioperative Anticoagulation Bridge",
+        "scenario": "Patient is on warfarin for AF (CHA2DS2-VASc 5). INR is 2.8. Orthopedic surgery wants to operate within 48 hours. Hematology consulted.",
+        "newData": {
+          "INR": "2.8",
+          "CHA2DS2-VASc score": "5",
+          "Last warfarin dose": "yesterday",
+          "Platelet count": "188,000",
+          "Creatinine": "1.2"
+        }
+      },
+      "v3": {
+        "title": "Post-Op DVT Despite Prophylaxis \u2014 Day 4",
+        "scenario": "Post-operative day 4. Patient reports new right calf swelling and pain. Low-grade fever 38.1. Lower extremity duplex ordered.",
+        "newData": {
+          "Lower extremity duplex": "acute DVT, right posterior tibial vein",
+          "Temp": "38.1\u00b0C",
+          "D-dimer": "4,800",
+          "WBC": "11,200",
+          "Hemoglobin": "9.8 (post-op)"
+        }
+      }
     }
   },
   "subdural-hematoma": {
@@ -15040,6 +15269,19 @@ window.CRT_DATA = {
           "Note": "Malignant pericardial effusion \u2014 pericardial window or intrapericardial sclerotherapy for recurrent disease; prognosis discussion; systemic therapy response determines long-term benefit"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 67-year-old woman with stage IV lung cancer.",
+      "hpiOnset": "For the past week I've been getting more and more short of breath. It's worst when I try to lie down \u2014 I have to sleep sitting up in a chair. I also have this strange muffled feeling in my chest.",
+      "hpiProgression": "It's been slowly worse every day. Today I almost passed out when I stood up. My husband insisted I come in.",
+      "hpiAssociatedSymptoms": "I can only breathe sitting upright. My voice sounds different \u2014 my husband says it sounds weaker. I feel very weak and dizzy when I stand.",
+      "hpiLocationPattern": "Central chest pressure. Worse lying flat. Neck veins feel full.",
+      "pmh": "Stage IV non-small cell lung cancer \u2014 adenocarcinoma. Metastases to brain and bone. Had chemotherapy, but my last scan showed progression. Had brain radiation.",
+      "medications": "Dexamethasone, ondansetron, oxycodone for pain. Recently stopped chemotherapy.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Non-contributory.",
+      "socialSmokingAlcohol": "I quit smoking when I was diagnosed 18 months ago. I used to smoke a pack a day for 30 years.",
+      "socialOccupation": "Retired teacher. Lives with husband."
     }
   },
   "complete-heart-block": {
@@ -15642,6 +15884,30 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "101.8\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "PTA \u2014 Trismus and Airway Concern",
+        "scenario": "Patient returns after 24h of oral antibiotics. Trismus now severe (cannot open mouth more than 1cm). Drooling, muffled voice. SpO2 97% but difficulty managing secretions.",
+        "newData": {
+          "Trismus": "<1cm mouth opening",
+          "SpO2": "97% at rest",
+          "Voice": "muffled, hot potato quality",
+          "Neck exam": "right submandibular swelling, tender",
+          "CT neck": "interval increase in PTA size, 3.2cm, no evidence of parapharyngeal extension"
+        }
+      },
+      "v3": {
+        "title": "PTA Extension \u2014 Parapharyngeal Space",
+        "scenario": "CT neck with contrast shows spread to parapharyngeal space. ENT evaluating for emergent surgical drainage.",
+        "newData": {
+          "CT neck": "PTA with parapharyngeal space extension right side",
+          "Temp": "39.4\u00b0C",
+          "WBC": "21,000",
+          "Blood cultures": "pending",
+          "Neck": "marked rightward deviation of oropharynx, uvula displaced"
+        }
+      }
     }
   },
   "ludwigs-angina": {
@@ -17816,6 +18082,19 @@ window.CRT_DATA = {
         "it got way worse after I ate",
         "feels like something is squeezing up here"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Acute Cholecystitis \u2014 Gangrenous Progression",
+        "scenario": "Patient admitted on IV antibiotics. 12 hours later: temperature 39.8, HR 122, WBC 24,000, worsening RUQ pain with peritoneal signs. Repeat ultrasound ordered.",
+        "newData": {
+          "Temp": "39.8\u00b0C",
+          "HR": "122",
+          "WBC": "24,000 with bandemia 18%",
+          "Repeat US": "gallbladder wall thickening 8mm, pericholecystic fluid, sloughed mucosa",
+          "LFTs": "bilirubin 3.2, ALT 88, AST 72"
+        }
+      }
     }
   },
   "acute-coronary-syndrome": {
@@ -18986,6 +19265,19 @@ window.CRT_DATA = {
         "I can't stop shaking",
         "my family says I'm not making sense"
       ]
+    },
+    "patientScript": {
+      "identity": "a 68-year-old woman with diabetes and kidney disease.",
+      "hpiOnset": "I've felt terrible for the past two days. It started with burning when I pee and pain in my back, and then yesterday I started shaking \u2014 chills I couldn't control. My daughter brought me in because she said I wasn't making sense.",
+      "hpiProgression": "I just keep getting worse. I'm so weak I can barely lift my arms. I'm confused and I know I'm confused which is scary.",
+      "hpiAssociatedSymptoms": "The burning and urinating all the time. I have back pain \u2014 right side. I've been vomiting. I feel cold even though everyone tells me I have a fever.",
+      "hpiLocationPattern": "The pain is in my lower right back, around my kidney area.",
+      "pmh": "Type 2 diabetes for 15 years \u2014 poorly controlled lately. Chronic kidney disease, stage 3. I've had UTIs before but never this bad.",
+      "medications": "Metformin, insulin glargine, lisinopril, amlodipine.",
+      "allergies": "Penicillin \u2014 rash as a child.",
+      "familyHistory": "Mother had diabetes. Father had a stroke.",
+      "socialSmokingAlcohol": "I don't smoke. I have a glass of wine occasionally.",
+      "socialOccupation": "Retired teacher. Lives with my daughter."
     }
   },
   "pneumonia": {
@@ -19194,6 +19486,30 @@ window.CRT_DATA = {
         "it hurts when I breathe in deep",
         "I feel exhausted and I'm coughing up green stuff"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CAP \u2014 Failure to Respond at 72h",
+        "scenario": "Hospital day 3. Patient remains febrile (38.9), WBC 18,000, SpO2 91% on 4L NC. Repeat CXR shows progression. Sputum culture finalized.",
+        "newData": {
+          "Temp": "38.9\u00b0C",
+          "SpO2": "91% on 4L NC",
+          "Repeat CXR": "bilateral lower lobe infiltrates, right-sided parapneumonic effusion",
+          "Sputum culture": "Streptococcus pneumoniae, penicillin-sensitive",
+          "Procalcitonin": "4.8 ng/mL (day 3)"
+        }
+      },
+      "v3": {
+        "title": "Parapneumonic Effusion \u2014 Empyema Assessment",
+        "scenario": "Ultrasound-guided thoracentesis performed. Pleural fluid returns purulent.",
+        "newData": {
+          "Pleural fluid pH": "7.12",
+          "Pleural LDH": "1,820 (serum LDH 280)",
+          "Pleural glucose": "28 mg/dL",
+          "Pleural protein": "5.4 g/dL",
+          "Gram stain": "Gram-positive diplococci"
+        }
+      }
     }
   },
   "autoimmune-hemolytic-anemia": {
@@ -20031,6 +20347,19 @@ window.CRT_DATA = {
           "Note": "Massive PE + hemodynamic collapse: relative vs absolute contraindication weighing \u2014 8 months post-hemorrhagic stroke considered relative by many; surgical embolectomy if CDT delay; alteplase 100mg IV over 2h if no other option and hemodynamic collapse"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 52-year-old woman who had knee surgery two weeks ago.",
+      "hpiOnset": "About an hour ago I was just sitting and suddenly I couldn't breathe. My heart started pounding. I felt like I was going to pass out.",
+      "hpiProgression": "It came on in seconds and hasn't gotten any better. I had to call 911. I've never felt this bad.",
+      "hpiAssociatedSymptoms": "My heart is racing and pounding. I feel lightheaded. My right leg has been swollen since the surgery \u2014 they told me to watch for that. I'm terrified.",
+      "hpiLocationPattern": "Shortness of breath, right-sided chest pain when I breathe in. Right leg is swollen.",
+      "pmh": "Knee replacement two weeks ago. Obesity. High blood pressure. I was supposed to take a blood thinner but ran out and hadn't gotten the refill yet.",
+      "medications": "Lisinopril, atorvastatin. Was on rivaroxaban post-surgery but ran out.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Mother had a blood clot.",
+      "socialSmokingAlcohol": "I don't smoke. Social drinker.",
+      "socialOccupation": "Accountant. Been mostly immobile since the surgery."
     }
   },
   "migraine": {
@@ -20217,6 +20546,19 @@ window.CRT_DATA = {
         "light is killing me",
         "I've had this before but this one is really bad"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Migraine \u2014 Status Migrainosus",
+        "scenario": "Patient returns to ED after 72 continuous hours of migraine unresponsive to oral triptans, NSAIDs, and antiemetics at home. Pain 9/10, unable to tolerate light or sound, vomiting.",
+        "newData": {
+          "Duration": "72 hours continuous",
+          "Oral medications failed": "sumatriptan x2, naproxen, prochlorperazine",
+          "Exam": "no meningismus, no focal deficits, photophobia severe",
+          "Hydration status": "dry mucous membranes, mild tachycardia",
+          "Last CT head": "2 years ago, normal"
+        }
+      }
     }
   },
   "myxedema-coma": {
@@ -21585,6 +21927,31 @@ window.CRT_DATA = {
         "it comes in waves and goes to my groin",
         "I can't sit still \u2014 nothing helps"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Ureteral Stone \u2014 Obstruction with Infection",
+        "scenario": "Patient presents 48h after discharge with rigors, temperature 39.4, and flank pain. UA shows >100 WBC/hpf with bacteria. CT shows 7mm proximal ureteral stone with hydroureteronephrosis.",
+        "newData": {
+          "Temp": "39.4\u00b0C, rigors",
+          "WBC": "18,200",
+          "UA": ">100 WBC/hpf, bacteria 3+, nitrite positive",
+          "CT urogram": "7mm proximal ureteral stone, grade 3 hydronephrosis",
+          "Creatinine": "1.8 (baseline 0.9)"
+        }
+      },
+      "v3": {
+        "title": "Obstructive Uropathy \u2014 Urosepsis",
+        "scenario": "Urology emergently called. Patient now hypotensive BP 88/56, HR 128, lactate 4.2.",
+        "newData": {
+          "BP": "88/56",
+          "HR": "128",
+          "Lactate": "4.2 mmol/L",
+          "Blood cultures": "pending x2",
+          "WBC": "22,000 with 28% bands",
+          "Urine culture": "pending, Gram-negative rods on Gram stain"
+        }
+      }
     }
   },
   "sle-flare-with-cytopenias": {
@@ -22002,6 +22369,20 @@ window.CRT_DATA = {
         "I had some warning \u2014 tunnel vision first",
         "I was standing in a hot shower when it happened"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Recurrent Syncope \u2014 Cardiac Cause Ruled Out?",
+        "scenario": "Patient has 3rd syncope episode in 2 months. This one occurred while sitting, with no prodrome. ECG shows QTc 498ms. Family history: father died suddenly at 48.",
+        "newData": {
+          "QTc": "498ms",
+          "Syncope onset": "abrupt, no prodrome, while seated",
+          "Family history": "paternal sudden death age 48",
+          "Echo": "structurally normal",
+          "Troponin": "negative",
+          "Holter monitor": "ordered"
+        }
+      }
     }
   },
   "dress-syndrome": {
@@ -22927,6 +23308,19 @@ window.CRT_DATA = {
         "sores in my mouth that make it hard to eat",
         "started after my cold sore flared up"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "EM Major \u2014 Progression to SJS Assessment",
+        "scenario": "Day 2: lesions spreading to oral mucosa and conjunctiva. New skin detachment in 2 areas (<10% BSA). Ophthalmology urgently consulted.",
+        "newData": {
+          "BSA involved": "8% with detachment",
+          "Mucous membranes": "oral erosions, bilateral conjunctival injection",
+          "Causative drug": "trimethoprim-sulfamethoxazole (started 12 days ago)",
+          "SCORTEN score": "2 (estimated mortality 12%)",
+          "Ophthalmology": "bilateral symblepharon formation beginning"
+        }
+      }
     }
   },
   "severe-allergic-reaction": {
@@ -23856,6 +24250,20 @@ window.CRT_DATA = {
         "this is the fourth time this year",
         "antihistamines help a little but not fully"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Angioedema \u2014 C1 Inhibitor Deficiency Found",
+        "scenario": "Recurrent angioedema workup returns: C4 markedly low, C1q normal, C1-esterase inhibitor level and function both low. No family history documented initially but brother reports similar episodes.",
+        "newData": {
+          "C4": "4 mg/dL (low)",
+          "C1q": "normal",
+          "C1-INH level": "12 mg/dL (low)",
+          "C1-INH function": "22% (low)",
+          "C1q Ab": "negative",
+          "Diagnosis": "Hereditary Angioedema Type 1 confirmed"
+        }
+      }
     }
   },
   "eczema-herpeticum": {
@@ -24743,6 +25151,20 @@ window.CRT_DATA = {
         "they're moving \u2014 new ones keep appearing",
         "so itchy I can barely function"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Acute Urticaria \u2014 Anaphylaxis Threshold Reached",
+        "scenario": "30 minutes into ED evaluation for urticaria, patient develops throat tightness, voice change, and BP drops to 88/54. Peak flow 60% of baseline.",
+        "newData": {
+          "BP": "88/54",
+          "Voice": "hoarse",
+          "Throat": "stridor audible",
+          "Peak flow": "60% of personal best",
+          "SpO2": "94%",
+          "Prior epinephrine": "none given yet"
+        }
+      }
     }
   },
   "drug-allergy-vancomycin-rms": {
@@ -24938,6 +25360,19 @@ window.CRT_DATA = {
         "neck and chest are burning and itchy",
         "they started the vancomycin and then this happened"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Vancomycin RMS \u2014 True IgE-Mediated Allergy Assessment",
+        "scenario": "After vancomycin infusion slowing and diphenhydramine failed to prevent recurrence, allergy is consulted. Patient needs ongoing MRSA coverage. Skin testing considered.",
+        "newData": {
+          "Skin test (vancomycin intradermal)": "negative",
+          "Tryptase (during reaction)": "4.2 ng/mL (borderline)",
+          "IgE mechanism": "unlikely based on skin test",
+          "Alternate antibiotic considered": "daptomycin, ceftaroline",
+          "MRSA bacteremia confirmed": "yes, blood cultures positive"
+        }
+      }
     }
   },
   "food-allergy-oit-reaction": {
@@ -26451,6 +26886,20 @@ window.CRT_DATA = {
         "this happens when my omalizumab is late",
         "I need to know what to do right now"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Angioedema \u2014 ACE Inhibitor Identified",
+        "scenario": "Careful medication reconciliation reveals patient started lisinopril 6 months ago around the time episodes began. ACE-inhibitor angioedema confirmed.",
+        "newData": {
+          "Lisinopril": "started 6 months ago",
+          "C4": "normal",
+          "C1-INH": "normal",
+          "Bradykinin-mediated": "yes \u2014 ACE-I angioedema does not respond to antihistamines or epinephrine",
+          "Treatment": "discontinue ACE inhibitor, switch to ARB if needed",
+          "Recurrence risk": "episodes resolve within weeks of discontinuation"
+        }
+      }
     }
   },
   "insect-sting-anaphylaxis-v2": {
@@ -27267,6 +27716,20 @@ window.CRT_DATA = {
         "I want to run the test \u2014 I need antibiotics for an upcoming procedure",
         "I'm nervous but I want to do the delabeling"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Allergic Reaction \u2014 Biphasic Anaphylaxis",
+        "scenario": "Patient discharged after initial anaphylaxis treatment. Returns 6 hours later with recurrent urticaria, throat tightness, and wheezing \u2014 without re-exposure to allergen.",
+        "newData": {
+          "Time from initial reaction": "6 hours",
+          "Re-exposure": "none",
+          "Symptoms": "urticaria, throat tightness, wheeze",
+          "BP": "94/60",
+          "Epinephrine doses": "second dose required",
+          "Biphasic anaphylaxis rate": "3-20% of anaphylaxis cases"
+        }
+      }
     }
   },
   "eczema-herpeticum-v2": {
@@ -28240,6 +28703,19 @@ window.CRT_DATA = {
         "everyone says it's just reflux but it keeps getting worse",
         "he's not gaining weight and looks miserable"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "FPIES \u2014 Identifying the Trigger Food",
+        "scenario": "After eliminating milk, vomiting continues. Careful dietary history reveals oat-based formula introduced 3 weeks ago. Atopy patch testing and oral food challenge planned.",
+        "newData": {
+          "Milk elimination": "no improvement",
+          "Oat introduction": "3 weeks ago, coincides with symptom onset",
+          "Weight": "<5th percentile, declining",
+          "Atopy patch test": "positive for oat",
+          "CBC": "eosinophils 6%"
+        }
+      }
     }
   },
   "mastocytosis-v2": {
@@ -28834,6 +29310,20 @@ window.CRT_DATA = {
         "I thought it was an allergy but I haven't changed anything",
         "my doctor wants to do a lot of tests \u2014 is that necessary"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Urticaria \u2014 Chronic Spontaneous Urticaria Transition",
+        "scenario": "Patient returns at 6-week follow-up. Daily urticaria persisting. ANA, thyroid antibodies, CBC all normal. H1 antihistamine dose doubled without response.",
+        "newData": {
+          "Duration": "6 weeks (>6 weeks = chronic)",
+          "ANA": "negative",
+          "Thyroid peroxidase Ab": "negative",
+          "CBC": "normal, no eosinophilia",
+          "H1 antihistamine response": "partial on double dose",
+          "UAS7 score": "28 (moderate-severe)"
+        }
+      }
     }
   },
   "chronic-spontaneous-urticaria-v2": {
@@ -29019,6 +29509,20 @@ window.CRT_DATA = {
         "I've tried every antihistamine \u2014 nothing works fully",
         "I read about omalizumab \u2014 can I try that"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CSU \u2014 Omalizumab Initiation Assessment",
+        "scenario": "After 3 months of high-dose H1 antihistamine (cetirizine 20mg/day) + H2 blocker with inadequate control, AAAAI guidelines reviewed for step-up therapy.",
+        "newData": {
+          "UAS7": "32 (severe)",
+          "H1 antihistamine": "cetirizine 20mg/day x 3 months",
+          "H2 blocker": "famotidine 20mg BID added",
+          "IgE level": "284 IU/mL",
+          "Omalizumab eligibility": "IgE 30-1500 IU/mL = eligible",
+          "Weight": "72kg"
+        }
+      }
     }
   },
   "urticarial-vasculitis-v2": {
@@ -30189,6 +30693,19 @@ window.CRT_DATA = {
         "I cut out milk but she's still reacting",
         "her pediatrician doesn't know what else to try"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Milk Allergy \u2014 Maternal Diet Elimination vs Formula Switch",
+        "scenario": "Breastfed infant with milk protein allergy. Mother reluctant to eliminate dairy. Skin prick testing positive for cow milk. GI symptoms persist. Dietitian consulted.",
+        "newData": {
+          "Skin prick test (cow milk)": "6mm wheal (positive >3mm)",
+          "Specific IgE (casein)": "3.8 kU/L (Class 3)",
+          "Infant weight": "10th percentile, declining",
+          "Maternal diet": "heavy dairy consumer",
+          "Extensively hydrolyzed formula": "offered as alternative"
+        }
+      }
     }
   },
   "allergic-conjunctivitis-severe-v2": {
@@ -30570,6 +31087,19 @@ window.CRT_DATA = {
         "I've tried every nasal spray and antihistamine",
         "I want allergy shots so I can do my job"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Allergic Rhinitis \u2014 Evaluating for Asthma Comorbidity",
+        "scenario": "Despite intranasal corticosteroid + antihistamine, patient reports persistent nighttime cough and exercise-related wheeze. Spirometry with bronchodilator response ordered.",
+        "newData": {
+          "Spirometry": "FEV1/FVC 0.74 (borderline), FEV1 78% predicted",
+          "Bronchodilator response": "FEV1 improves 14% (borderline significant)",
+          "FeNO": "38 ppb (elevated, suggests eosinophilic airway inflammation)",
+          "Skin prick testing": "positive for dust mite, cat, grass pollen",
+          "Total IgE": "412 IU/mL"
+        }
+      }
     }
   },
   "atopic-dermatitis-severe-v2": {
@@ -30788,6 +31318,19 @@ window.CRT_DATA = {
         "we've tried everything at the pharmacy",
         "we can't afford the specialist copay"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Atopic Dermatitis \u2014 Dupilumab Initiation Evaluation",
+        "scenario": "After failure of topical corticosteroids, tacrolimus, and two courses of cyclosporine, patient evaluated for biologic therapy. EASI score 34 (severe).",
+        "newData": {
+          "EASI score": "34 (severe)",
+          "Prior therapies failed": "TCS, tacrolimus, cyclosporine x2",
+          "IgE": "1,840 IU/mL",
+          "Eosinophils": "640 cells/uL",
+          "Dupilumab eligibility": "moderate-severe AD inadequately controlled by topicals"
+        }
+      }
     }
   },
   "contact-dermatitis-occupational-v2": {
@@ -30990,6 +31533,19 @@ window.CRT_DATA = {
         "patch testing showed PPD allergy",
         "I love my job and I don't want to quit"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Occupational Contact Dermatitis \u2014 Patch Testing Results",
+        "scenario": "Patch testing at 48h and 96h returns positive reactions to thiuram mix and carbamates (rubber accelerators). Patient works as a surgeon wearing latex-free but rubber-accelerator containing gloves.",
+        "newData": {
+          "Patch test 48h/96h": "positive to thiuram mix ++ and carbamate mix +",
+          "IgE latex": "negative (not latex allergy)",
+          "Diagnosis": "allergic contact dermatitis to rubber accelerators",
+          "Occupation": "surgeon \u2014 must discuss glove alternatives",
+          "Glove alternative": "accelerator-free nitrile gloves recommended"
+        }
+      }
     }
   },
   "eoe-adult-v2": {
@@ -31190,6 +31746,19 @@ window.CRT_DATA = {
         "I've had this for years and just dealt with it",
         "I had a scope two years ago \u2014 they found something but never called"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "EoE \u2014 Refractory to PPI Trial",
+        "scenario": "After 8-week high-dose PPI trial, repeat endoscopy shows esophageal rings, linear furrows, and whitish exudates. Biopsies: >15 eosinophils/hpf in 3 esophageal levels. PPI-REE excluded.",
+        "newData": {
+          "Repeat EGD": "esophageal rings, furrows, white plaques",
+          "Biopsies (peak eos/hpf)": "22 at proximal, 28 at mid, 18 at distal esophagus",
+          "PPI trial": "omeprazole 40mg BID x 8 weeks",
+          "PPI-REE": "excluded (eos persist on PPI)",
+          "Swallowed fluticasone": "initiated after diagnosis confirmed"
+        }
+      }
     }
   },
   "eoe-pediatric-v2": {
@@ -31375,6 +31944,19 @@ window.CRT_DATA = {
         "she was labeled GERD but the PPI never helped",
         "she eats so slowly and says food feels stuck"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pediatric EoE \u2014 Food Elimination Approach",
+        "scenario": "Parents prefer dietary therapy over swallowed corticosteroids. Allergy testing inconclusive. Gastroenterology and allergy-immunology coordinating six-food elimination diet.",
+        "newData": {
+          "Skin prick test": "positive for milk, wheat, egg",
+          "Specific IgE": "milk 8.4, wheat 3.2, egg 2.1 kU/L",
+          "Six-food elimination": "milk, wheat, egg, soy, nuts, seafood eliminated",
+          "Weight": "maintaining on elimination diet with dietitian support",
+          "Repeat EGD planned": "12 weeks after dietary intervention"
+        }
+      }
     }
   },
   "allergic-conjunctivitis-severe": {
@@ -31561,6 +32143,20 @@ window.CRT_DATA = {
         "worse every spring when the trees bloom",
         "drops barely touch it anymore"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Vernal Keratoconjunctivitis \u2014 Corneal Involvement",
+        "scenario": "Ophthalmology evaluating pediatric patient with severe bilateral eye itching, photophobia, and thick ropy discharge. Shield ulcer identified at superior cornea on slit-lamp examination.",
+        "newData": {
+          "Slit-lamp exam": "giant papillae cobblestoning superior tarsal conjunctiva, shield ulcer superior cornea",
+          "VA": "20/60 affected eye",
+          "Trantas dots": "present at limbus",
+          "Total IgE": "680 IU/mL",
+          "Eosinophils": "580 cells/uL",
+          "Diagnosis": "vernal keratoconjunctivitis with corneal involvement"
+        }
+      }
     }
   },
   "allergic-rhinitis-uncontrolled": {
@@ -31748,6 +32344,19 @@ window.CRT_DATA = {
         "I can't sleep because I can't breathe at night",
         "my allergist wants me to get shots"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Allergic Rhinitis \u2014 Immunotherapy Candidacy",
+        "scenario": "After 12 months of maximal pharmacotherapy (INCS, antihistamine, LTRA) with inadequate control, patient referred to allergist for evaluation. Skin testing completed.",
+        "newData": {
+          "Skin prick test": "4+ reactions to dust mite, grass, ragweed, tree pollen",
+          "Spirometry": "normal (no comorbid asthma)",
+          "Nasal cytology": "eosinophils predominant",
+          "Symptom burden": "TNSS 18/24 despite maximal therapy",
+          "Immunotherapy candidacy": "positive skin tests + inadequate pharmacotherapy response = eligible"
+        }
+      }
     }
   },
   "atopic-dermatitis-severe": {
@@ -31936,6 +32545,20 @@ window.CRT_DATA = {
         "it flares every few weeks no matter what I do",
         "I've been on steroid cream for years"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Atopic Dermatitis \u2014 Infection Complication",
+        "scenario": "Patient with severe AD presents with acute weeping, crusted, honey-colored plaques on face and arms. Temperature 38.2. WBC 13,400. MRSA nasal swab sent.",
+        "newData": {
+          "Temp": "38.2\u00b0C",
+          "WBC": "13,400",
+          "Wound culture": "pending",
+          "MRSA nasal swab": "positive (prior colonization)",
+          "Exam": "extensive impetigo superimposed on AD",
+          "EASI": "38 (severe)"
+        }
+      }
     }
   },
   "chronic-spontaneous-urticaria": {
@@ -32105,6 +32728,20 @@ window.CRT_DATA = {
         "they come and go \u2014 I never know when",
         "antihistamines help but never fully control it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CSU \u2014 H. pylori Association",
+        "scenario": "Basic workup includes H. pylori testing. Urea breath test returns positive. Eradication therapy considered for CSU management.",
+        "newData": {
+          "H. pylori urea breath test": "positive",
+          "H. pylori eradication": "triple therapy planned (amoxicillin, clarithromycin, omeprazole x 14d)",
+          "UAS7 at baseline": "24",
+          "IgE": "normal",
+          "Thyroid antibodies": "negative",
+          "Evidence": "H. pylori eradication associated with CSU improvement in subset of patients"
+        }
+      }
     }
   },
   "contact-dermatitis-occupational": {
@@ -32298,6 +32935,19 @@ window.CRT_DATA = {
         "worse since I started wearing latex gloves",
         "patch test was positive to multiple things"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Occupational CD \u2014 Workers Comp and Accommodation",
+        "scenario": "Patch testing confirms nickel allergy. Patient is a machinist handling nickel-containing metal parts daily. Occupational medicine and allergy coordinating return-to-work plan.",
+        "newData": {
+          "Patch test": "nickel sulfate 5% +++ (strong positive)",
+          "Occupation": "machinist, daily nickel exposure",
+          "DLQI": "18 (severe impact on quality of life)",
+          "Barrier protection": "nitrile gloves inadequate, need nickel-chelating barrier cream",
+          "Work accommodation": "formal occupational medicine evaluation for job modification"
+        }
+      }
     }
   },
   "cvid-presentation": {
@@ -32711,6 +33361,19 @@ window.CRT_DATA = {
         "I chew everything a hundred times and drink water constantly",
         "I've just been living with this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "EoE \u2014 Esophageal Food Bolus Impaction",
+        "scenario": "Patient with known EoE (not yet on treatment) presents to ED with complete esophageal obstruction \u2014 unable to swallow secretions, drooling. Endoscopy urgently needed.",
+        "newData": {
+          "Presentation": "complete dysphagia, drooling, unable to swallow saliva",
+          "Time of impaction": "3 hours",
+          "Chest X-ray": "no aspiration, no free air",
+          "IV access": "obtained, glucagon 1mg given (no relief)",
+          "Urgent EGD": "required \u2014 food impaction on background of EoE rings"
+        }
+      }
     }
   },
   "eoe-pediatric": {
@@ -32881,6 +33544,19 @@ window.CRT_DATA = {
         "his reflux meds aren't helping",
         "the GI doctor found white specs in his esophagus"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pediatric EoE \u2014 Failure to Thrive Assessment",
+        "scenario": "5-year-old with EoE and poor oral intake. Weight has dropped from 50th to 10th percentile over 6 months. Feeding therapy and NG tube nutrition discussed with family.",
+        "newData": {
+          "Weight": "10th percentile (was 50th at 18 months)",
+          "Dietary history": "limited to 6 safe foods, very restricted",
+          "Feeding assessment": "significant oral aversion, food anxiety",
+          "Eosinophils on biopsy": "32/hpf (untreated)",
+          "Feeding team": "speech therapy + occupational therapy + dietitian consultation ordered"
+        }
+      }
     }
   },
   "fpies-chronic": {
@@ -33051,6 +33727,19 @@ window.CRT_DATA = {
         "he's losing weight and looks pale after feeds",
         "we've tried three different formulas"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "FPIES \u2014 Oral Food Challenge Protocol",
+        "scenario": "After 18 months of milk elimination, patient has been symptom-free. Supervised oral food challenge to cow milk protein planned in the allergy office with emergency equipment available.",
+        "newData": {
+          "Age at challenge": "18 months",
+          "Time symptom-free on elimination": "18 months",
+          "OFC protocol": "cow milk 0.06g protein/kg then 0.18g/kg with 2h observation",
+          "Emergency equipment": "epinephrine, IV access, monitoring",
+          "Success criteria": "no vomiting or severe symptoms within 4h"
+        }
+      }
     }
   },
   "milk-allergy-infant": {
@@ -33221,6 +33910,19 @@ window.CRT_DATA = {
         "she screams after every formula feeding",
         "her GI said to try switching formula"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Milk Allergy \u2014 Transition to Elemental Formula",
+        "scenario": "Extensively hydrolyzed formula failed \u2014 ongoing vomiting and poor weight gain. Pediatric GI and allergy recommend amino acid-based elemental formula.",
+        "newData": {
+          "Response to eHF": "insufficient \u2014 vomiting persists",
+          "Weight gain on eHF": "0g over 4 weeks",
+          "Specific IgE (casein)": "5.8 kU/L",
+          "Elemental formula": "amino acid-based (Neocate or EleCare) initiated",
+          "Maternal breastfeeding": "continued with strict dairy elimination"
+        }
+      }
     }
   },
   "nsaid-hypersensitivity": {
@@ -33834,6 +34536,19 @@ window.CRT_DATA = {
         "I want to know if I actually am \u2014 the label keeps causing problems",
         "can you test me"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Penicillin De-labeling \u2014 Direct Oral Challenge",
+        "scenario": "Skin testing negative to penicilloyl-poly-L-lysine (PPL) and minor determinant mixture. Patient now eligible for direct amoxicillin oral challenge.",
+        "newData": {
+          "Skin test (PPL)": "negative",
+          "Skin test (minor determinants)": "negative",
+          "Intradermal (penicillin G)": "negative",
+          "Challenge dose": "amoxicillin 250mg observed x 60 min",
+          "Prior reaction history": "rash at age 8, no anaphylaxis, likely viral exanthem"
+        }
+      }
     }
   },
   "urticarial-vasculitis": {
@@ -35969,6 +36684,19 @@ window.CRT_DATA = {
           "Note": "Severe preeclampsia at 34 weeks \u2014 delivery vs magnesium decision"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 55-year-old man with uncontrolled high blood pressure.",
+      "hpiOnset": "I woke up this morning with the worst headache I've ever had \u2014 right at the back of my head. It started at about 7 AM. I've been vomiting since 8.",
+      "hpiProgression": "The headache is getting worse, not better. About an hour ago my vision started going strange \u2014 blurry and I'm seeing things.",
+      "hpiAssociatedSymptoms": "I keep vomiting. My vision is seriously messed up \u2014 blurry, I'm seeing double. I feel confused.",
+      "hpiLocationPattern": "Headache at the back of my head \u2014 occipital. Feels like pressure.",
+      "pmh": "High blood pressure for 10 years \u2014 I haven't seen a doctor in 2 years and stopped my medications because I couldn't afford them. Prior hypertensive urgency once before.",
+      "medications": "Used to take amlodipine and lisinopril \u2014 stopped 6 months ago.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father died of a stroke.",
+      "socialSmokingAlcohol": "I smoke half a pack a day. Occasional alcohol.",
+      "socialOccupation": "Construction worker."
     }
   },
   "alcohol-withdrawal": {
@@ -36503,6 +37231,20 @@ window.CRT_DATA = {
           "Platelets": "48,000"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 20-year-old college student who lives in a dormitory.",
+      "hpiOnset": "I woke up yesterday with what I thought was the worst hangover of my life \u2014 crushing headache, stiff neck, sensitivity to light. But I haven't been drinking. It's gotten so much worse by this morning.",
+      "hpiProgression": "Over the past 12 hours it's gone from bad to terrifying. The headache is unbearable. I threw up three times. And now I have this rash on my legs that isn't going away when I press on it.",
+      "hpiAssociatedSymptoms": "The light is killing me \u2014 I've had the curtains closed all day. My neck is so stiff I can barely put my chin to my chest. I have a high fever. The rash appeared a few hours ago.",
+      "hpiLocationPattern": "Headache is global \u2014 all over my head. Neck stiffness. Rash on my legs.",
+      "pmh": "Generally healthy. Never vaccinated against meningococcus. No prior serious infections.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Non-contributory.",
+      "socialSmokingAlcohol": "I drink socially on weekends. I don't smoke.",
+      "socialOccupation": "Sophomore at university. Live in a dorm with four roommates. One roommate was sick last week.",
+      "socialContacts": "One of my roommates had a fever and bad headache last week."
     }
   },
   "alcoholic-hepatitis": {
@@ -36870,6 +37612,19 @@ window.CRT_DATA = {
           "Note": "Bacteremic seeding to meninges \u2014 add dexamethasone before/with antibiotics if not already given; continue ceftriaxone at meningitis dosing"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 44-year-old man without a spleen who is very ill.",
+      "hpiOnset": "Two days ago I started with a fever and chills and a cough. I thought it was just pneumonia \u2014 I've had it before. But since yesterday I've been getting really, really sick. I'm shaking uncontrollably.",
+      "hpiProgression": "Yesterday I couldn't get out of bed. Today my wife says I was confused and she brought me straight in.",
+      "hpiAssociatedSymptoms": "I'm shaking with chills. I'm short of breath. My chest hurts when I cough. I've been vomiting. I know I'm really sick \u2014 I know what happens to people without spleens who get pneumonia.",
+      "hpiLocationPattern": "Right chest pain when I breathe and cough. Fever. Shaking.",
+      "pmh": "I had my spleen removed after a car accident about 15 years ago. My doctor told me I was supposed to get a pneumococcal vaccine but I kept putting it off \u2014 I never got it.",
+      "medications": "None regularly.",
+      "allergies": "Sulfa drugs \u2014 rash.",
+      "familyHistory": "Non-contributory.",
+      "socialSmokingAlcohol": "I quit smoking 5 years ago. Occasional beer.",
+      "socialOccupation": "Electrician."
     }
   },
   "heart-failure-hfpef": {
@@ -37420,6 +38175,19 @@ window.CRT_DATA = {
           "Note": "Hypertonic saline (3%, 2-5mL/kg) equally effective \u2014 hold IV fluids, slow insulin, do not continue aggressive fluid replacement"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 16-year-old with type 1 diabetes who has been on an IV drip for several hours.",
+      "hpiOnset": "I had DKA and they started me on the insulin drip like 8 hours ago. I was feeling better for a while but now I have this really bad headache and my vision is blurry. Something is wrong.",
+      "hpiProgression": "The headache started about an hour ago and it keeps getting worse. I was getting better on the drip and now I'm getting worse.",
+      "hpiAssociatedSymptoms": "Bad headache \u2014 pounding. Blurry vision. I feel sleepy and confused \u2014 I know I'm answering your questions but my brain feels slow.",
+      "hpiLocationPattern": "The headache is all over my head.",
+      "pmh": "Type 1 diabetes diagnosed at age 9. On an insulin pump \u2014 there was an occlusion we didn't notice. This is my first hospitalization for DKA.",
+      "medications": "Insulin via pump \u2014 currently on IV insulin drip in the hospital.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "No family history of diabetes or neurological problems.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "High school student."
     }
   },
   "stroke-v3": {
@@ -37767,6 +38535,19 @@ window.CRT_DATA = {
           "Note": "Anticoagulation after lytics: start UFH infusion (no bolus) when aPTT <80 seconds (typically 2-4h post-alteplase); UFH preferred initially for monitoring; transition to DOAC or LMWH once stable; check fibrinogen before starting"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 64-year-old man with pancreatic cancer.",
+      "hpiOnset": "I noticed my left leg was swelling about a week ago and I mentioned it to my oncologist. Now I suddenly can't breathe and my blood pressure is dropping \u2014 the nurse just said.",
+      "hpiProgression": "The leg swelling came on over a week. The breathing problem started in the last hour and is rapidly getting worse.",
+      "hpiAssociatedSymptoms": "My left leg is swollen and painful. I'm having chest pain when I breathe. I feel like I might not survive this.",
+      "hpiLocationPattern": "Left leg swelling. Central chest pressure. Difficulty breathing.",
+      "pmh": "Pancreatic cancer, metastatic. Had a DVT six months ago. Was on rivaroxaban but missed three doses because I couldn't afford the refill.",
+      "medications": "Rivaroxaban \u2014 missed last three doses. Pancreatic enzyme supplements.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Not relevant at this point.",
+      "socialSmokingAlcohol": "I quit smoking when I got the diagnosis. No alcohol.",
+      "socialOccupation": "Retired. My wife is with me."
     }
   },
   "pe-v3": {
@@ -38520,6 +39301,19 @@ window.CRT_DATA = {
           "Note": "VA-ECMO criteria: refractory shock despite 2 vasopressors + MCS; bridge to recovery, transplant, or LVAD; cannulation site decision (femoral vs central)"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 74-year-old man with severe heart failure.",
+      "hpiOnset": "I stopped taking my water pill about 5 days ago because I was going to the bathroom too much and it was embarrassing. Since then I've gained about 10 pounds and I can barely breathe.",
+      "hpiProgression": "I got worse every day. Last night I couldn't lie down at all \u2014 I slept in the recliner. This morning my wife called 911 because I was turning blue.",
+      "hpiAssociatedSymptoms": "I feel like I'm drowning from the inside. I can only breathe when I'm sitting straight up. My legs are so swollen I can't put my shoes on. I'm exhausted.",
+      "hpiLocationPattern": "Breathing problems worst when lying flat. Both legs and feet swollen.",
+      "pmh": "Severe heart failure \u2014 they told me my heart pumps at 15%. Had a defibrillator put in last year. Coronary artery disease. I've been hospitalized for this before.",
+      "medications": "Carvedilol, sacubitril-valsartan, spironolactone. Stopped furosemide 5 days ago.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father died of heart failure.",
+      "socialSmokingAlcohol": "I quit smoking 20 years ago. I don't drink.",
+      "socialOccupation": "Retired postal worker. Lives with wife."
     }
   },
   "acute-ischemic-stroke": {
@@ -39243,6 +40037,32 @@ window.CRT_DATA = {
         "my doctor wants me to start insulin but I really don't want to",
         "I've been reading about the weekly shot \u2014 can we talk about that"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "T2DM \u2014 Intensification After A1c 10.2",
+        "scenario": "Follow-up at 3 months: A1c 10.2% despite metformin 1000mg BID. Ezetimibe added for LDL. GLP-1 agonist or SGLT2 inhibitor now indicated.",
+        "newData": {
+          "A1c": "10.2%",
+          "eGFR": "74 mL/min/1.73m2",
+          "LDL": "128 mg/dL",
+          "BMI": "34",
+          "UACR": "48 mg/g (microalbuminuria)",
+          "Current meds": "metformin 1000mg BID, lisinopril, atorvastatin"
+        }
+      },
+      "v3": {
+        "title": "T2DM \u2014 Diabetic Kidney Disease Progression",
+        "scenario": "2 years later. A1c 8.4% on GLP-1 agonist + metformin. eGFR now 42, UACR 380 mg/g. Finerenone and GLP-1/GIP combination considered.",
+        "newData": {
+          "A1c": "8.4%",
+          "eGFR": "42 mL/min/1.73m2",
+          "UACR": "380 mg/g (overt proteinuria)",
+          "BP": "148/88 on ACE inhibitor",
+          "Finerenone": "FIDELIO-DKD: reduces CKD progression and CV events in T2DM+CKD",
+          "Tirzepatide": "superior A1c reduction, weight loss, renal protection data emerging"
+        }
+      }
     }
   },
   "allergic-rhinitis-immunotherapy": {
@@ -39398,6 +40218,19 @@ window.CRT_DATA = {
         "hives broke out at the injection site and spreading",
         "this is worse than any reaction I've had before"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SCIT \u2014 Local and Systemic Reaction Assessment",
+        "scenario": "After 8th subcutaneous immunotherapy injection, patient develops large local reaction (>25mm induration) plus sneezing and nasal congestion within 30 minutes. No systemic symptoms beyond nose.",
+        "newData": {
+          "Local reaction size": "32mm",
+          "Systemic symptoms": "rhinoconjunctivitis (Grade 1 WAO)",
+          "Time to onset": "20 minutes",
+          "Pre-treatment": "antihistamine given",
+          "Dose": "escalation phase, vial 4 of 4"
+        }
+      }
     }
   },
   "alpha-gal-syndrome": {
@@ -41726,6 +42559,19 @@ window.CRT_DATA = {
           "Note": "Two simultaneous life threats \u2014 pericardiocentesis vs emergent surgery decision"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 45-year-old man with high blood pressure and a known bicuspid aortic valve.",
+      "hpiOnset": "I was lifting something heavy in the garage and suddenly \u2014 the most severe pain I have ever felt in my life. In my chest, going straight through to my back. It felt like something ripped or tore inside me.",
+      "hpiProgression": "It started instantly \u2014 maximum pain right at the onset. It's not going away. It's been 30 minutes.",
+      "hpiAssociatedSymptoms": "I feel like I might pass out. My right arm feels weaker than my left. I can feel my heart pounding.",
+      "hpiLocationPattern": "It started in my chest and goes right through to my upper back between my shoulder blades. My right arm feels numb.",
+      "pmh": "High blood pressure \u2014 on three medications. They found a bicuspid aortic valve years ago and have been monitoring it. My cardiologist mentioned Marfan syndrome but we never fully worked it up.",
+      "medications": "Amlodipine, lisinopril, metoprolol.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "My brother has Marfan syndrome. Father died of aortic aneurysm.",
+      "socialSmokingAlcohol": "I smoked for 10 years, quit 5 years ago. Social drinker.",
+      "socialOccupation": "Construction contractor."
     }
   },
   "gout-flare": {
@@ -41885,6 +42731,20 @@ window.CRT_DATA = {
         "I can't put any weight on it",
         "worst flare I've ever had \u2014 happened overnight"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Gout \u2014 Urate-Lowering Therapy Initiation",
+        "scenario": "After acute flare resolved, uric acid returns at 9.8 mg/dL. Second flare in 12 months. Tophus visible at right ear helix. ULT initiation discussed.",
+        "newData": {
+          "Uric acid": "9.8 mg/dL",
+          "Creatinine": "1.1",
+          "eGFR": "72",
+          "Tophus": "right ear helix, 4mm",
+          "Flares in past year": "2",
+          "Allopurinol": "100mg starting dose for CKD stage 2"
+        }
+      }
     }
   },
   "malignant-hyperthermia": {
@@ -42431,6 +43291,19 @@ window.CRT_DATA = {
         "it started two days after I got home from surgery",
         "the calf is tight and warm \u2014 it hurts when I walk"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "DVT \u2014 Provoked vs Unprovoked \u2014 Duration Decision",
+        "scenario": "Lower extremity DVT confirmed. Patient asks how long to take anticoagulation. Risk factor assessment: recent 8-hour flight, no malignancy, no thrombophilia history, first episode.",
+        "newData": {
+          "DVT location": "left popliteal vein, non-occlusive",
+          "Provoking factor": "8-hour flight (transient reversible)",
+          "D-dimer at baseline": "3,200",
+          "Thrombophilia testing": "pending (do not test while anticoagulated)",
+          "Malignancy workup": "age-appropriate screening up to date"
+        }
+      }
     }
   },
   "acute-compartment-syndrome": {
@@ -46494,6 +47367,19 @@ window.CRT_DATA = {
         "I've had kidney stones before \u2014 this is exactly what it feels like",
         "the pain comes in waves and I can't sit still"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Ureterolithiasis \u2014 Stone >10mm, Failure of Passage",
+        "scenario": "At 4-week follow-up CT: 12mm proximal ureteral stone has not passed. Patient had 3 episodes of severe pain requiring ED visits. Urology consultation for SWL vs ureteroscopy.",
+        "newData": {
+          "Stone size on follow-up CT": "12mm (unchanged)",
+          "Stone location": "proximal ureter",
+          "Spontaneous passage likelihood": "<5% for >10mm stones",
+          "HU density": "920 (high density = SWL less effective)",
+          "Urology recommendation": "ureteroscopy with laser lithotripsy"
+        }
+      }
     }
   },
   "necrotizing-fasciitis": {
@@ -51469,6 +52355,19 @@ window.CRT_DATA = {
         "it happens during competition and sometimes at rest",
         "my inhaler does absolutely nothing for this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "VCD \u2014 Differentiating from Exercise-Induced Asthma",
+        "scenario": "During methacholine challenge, patient develops inspiratory stridor but no significant FEV1 drop. Flow-volume loop shows inspiratory flattening. Pulmonology and speech therapy consulted.",
+        "newData": {
+          "Methacholine challenge": "negative for asthma (FEV1 drop <20%)",
+          "Flow-volume loop": "inspiratory flattening, normal expiratory loop",
+          "Laryngoscopy during exercise": "paradoxical vocal cord adduction on inspiration confirmed",
+          "Spirometry": "normal at rest",
+          "Speech therapy referral": "for VCD breathing techniques"
+        }
+      }
     }
   },
   "cervical-artery-dissection": {
@@ -51954,6 +52853,20 @@ window.CRT_DATA = {
         "I've had gout before but my uric acid is normal",
         "I was just in the hospital last week for something else"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pseudogout \u2014 CPPD Disease \u2014 Metabolic Workup",
+        "scenario": "Second episode of pseudogout in 2 years. Age 52 \u2014 young for CPPD. Metabolic workup initiated for secondary causes.",
+        "newData": {
+          "Calcium": "10.8 mg/dL (elevated)",
+          "PTH": "142 pg/mL (elevated)",
+          "Magnesium": "1.4 mEq/L (low-normal)",
+          "Ferritin": "580 ng/mL",
+          "Iron studies": "transferrin saturation 52%",
+          "Diagnosis": "primary hyperparathyroidism likely \u2014 refer endocrinology; screen for hemochromatosis"
+        }
+      }
     }
   },
   "acute-viral-hepatitis": {
@@ -52279,6 +53192,20 @@ window.CRT_DATA = {
         "I can't breathe and my hands are tingling",
         "it came out of nowhere and I feel like I'm dying"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Panic Disorder \u2014 Ruling Out Cardiac and Thyroid Causes",
+        "scenario": "After 3rd panic attack presentation, comprehensive workup requested by patient. ECG, Holter, thyroid function, and cardiac enzymes ordered.",
+        "newData": {
+          "TSH": "0.4 (low-normal)",
+          "Free T4": "normal",
+          "ECG": "normal sinus, QTc 412ms",
+          "Holter 48h": "occasional PACs, no significant arrhythmia",
+          "Troponin": "negative",
+          "Diagnosis": "panic disorder confirmed after medical exclusion"
+        }
+      }
     }
   },
   "copd-exacerbation-niv": {
@@ -53134,6 +54061,19 @@ window.CRT_DATA = {
         "my vision is blurry in the left eye",
         "I've had this before \u2014 I have the arthritis in my back too"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Anterior Uveitis \u2014 HLA-B27 Association",
+        "scenario": "Ophthalmology confirms anterior uveitis. Patient is a 28-year-old male with 6-month history of low back pain, worse in morning, improves with activity. Rheumatology consulted.",
+        "newData": {
+          "HLA-B27": "positive",
+          "Sacroiliac MRI": "bilateral sacroiliac joint bone marrow edema",
+          "BASDAI score": "4.8 (moderate ankylosing spondylitis activity)",
+          "CRP": "28 mg/L",
+          "Diagnosis": "anterior uveitis as extraarticular manifestation of axial spondyloarthritis"
+        }
+      }
     }
   },
   "dic-from-traumasurgery-with-hemorrhagic": {
@@ -55178,6 +56118,20 @@ window.CRT_DATA = {
         "I can't keep anything down",
         "multiple people at the party are sick too"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Gastroenteritis \u2014 Bloody Diarrhea and E. coli O157:H7",
+        "scenario": "Child returns day 3 with bloody diarrhea, abdominal cramping, WBC 14,000, and hematocrit dropping to 28%. Platelet count 88,000. Creatinine rising 0.6 \u2192 1.4.",
+        "newData": {
+          "Stool culture": "E. coli O157:H7",
+          "Platelet count": "88,000 (declining)",
+          "Hematocrit": "28%",
+          "Creatinine": "1.4 (rising from 0.6)",
+          "Peripheral smear": "schistocytes present",
+          "MAHA": "microangiopathic hemolytic anemia \u2014 HUS confirmed"
+        }
+      }
     }
   },
   "long-qt-syndrome": {
@@ -55668,6 +56622,20 @@ window.CRT_DATA = {
         "I had a cold a couple weeks ago and I never fully recovered",
         "my troponin is elevated and I'm scared"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Myocarditis \u2014 Cardiogenic Shock Progression",
+        "scenario": "Patient initially hemodynamically stable. 24h later: BP 82/50, HR 128, respiratory rate 28. Echo shows EF now 20%, severe global hypokinesis. IABP considered.",
+        "newData": {
+          "BP": "82/50",
+          "HR": "128",
+          "Echo (repeat)": "EF 20%, severe global LV hypokinesis",
+          "Cardiac MRI": "diffuse myocardial edema + late gadolinium enhancement (myocarditis pattern)",
+          "BNP": "3,200 pg/mL",
+          "Troponin trend": "4.2 \u2192 18.6 \u2192 22.4 ng/mL"
+        }
+      }
     }
   },
   "nstemiunstable-angina": {
@@ -56615,6 +57583,30 @@ window.CRT_DATA = {
         "I don't remember anything \u2014 I woke up on the floor",
         "I was shaking for a couple minutes and then I was confused"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "New-Onset Seizure \u2014 Structural Cause Found",
+        "scenario": "MRI brain with contrast: 2cm ring-enhancing lesion in right frontal lobe with surrounding edema. Patient is 45 years old, no prior CNS history. Neurosurgery and oncology consulted.",
+        "newData": {
+          "MRI brain": "2cm ring-enhancing lesion right frontal lobe, 8mm midline shift",
+          "LP": "contraindicated (mass effect)",
+          "HIV test": "negative",
+          "Chest CT": "2cm spiculated right upper lobe nodule",
+          "Differential": "primary CNS lymphoma vs GBM vs metastasis \u2014 tissue biopsy required"
+        }
+      },
+      "v3": {
+        "title": "Brain Biopsy \u2014 GBM Diagnosis",
+        "scenario": "Stereotactic biopsy performed. Pathology returns: IDH-wildtype glioblastoma, MGMT methylated, EGFR amplified.",
+        "newData": {
+          "Pathology": "IDH-wildtype GBM, Grade 4",
+          "MGMT methylation": "positive (better response to temozolomide)",
+          "EGFR": "amplified",
+          "Treatment plan": "Stupp protocol (TMZ + radiation) after resection",
+          "Neurosurgery": "gross total resection planned"
+        }
+      }
     }
   },
   "migraine-with-aura": {
@@ -56768,6 +57760,19 @@ window.CRT_DATA = {
         "this aura felt different \u2014 longer than usual",
         "I started birth control last month"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Migraine With Aura \u2014 Stroke Risk and OCP Counseling",
+        "scenario": "22-year-old female with migraine with aura wants to start combined oral contraceptives. Her neurologist refers her to discuss stroke risk.",
+        "newData": {
+          "Migraine type": "with visual aura",
+          "OCP requested": "combined estrogen-progestin pill",
+          "Stroke risk": "migraine with aura + COC = 6-8x baseline stroke risk",
+          "WHO MEC Category": "4 (unacceptable risk) for combined hormonal contraceptives",
+          "Alternative contraception": "progestin-only pill, IUD, barrier methods"
+        }
+      }
     }
   },
   "normal-pressure-hydrocephalus": {
@@ -56922,6 +57927,20 @@ window.CRT_DATA = {
         "I'm forgetting things and I keep having accidents with my bladder",
         "I've been told it's Alzheimer but something feels different"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "NPH \u2014 High-Volume LP and Gait Assessment",
+        "scenario": "After neuroimaging confirms ventriculomegaly out of proportion to atrophy, a high-volume LP (50mL CSF removal) is performed. Post-LP gait testing shows 30% improvement in timed-up-and-go test.",
+        "newData": {
+          "CSF opening pressure": "160 mmH2O (normal)",
+          "CSF analysis": "normal cell count, protein, glucose",
+          "CSF removed": "50mL",
+          "Post-LP TUG test": "22 seconds \u2192 15 seconds (32% improvement)",
+          "Ventriculomegaly": "Evans index 0.38",
+          "Prediction of shunt response": "positive tap test suggests VP shunt may help"
+        }
+      }
     }
   },
   "simple-sbo": {
@@ -57077,6 +58096,19 @@ window.CRT_DATA = {
         "I'm vomiting and my abdomen is bloated",
         "this happened once before after my appendix surgery"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SBO \u2014 Failure of Non-Operative Management at 48h",
+        "scenario": "48 hours of NGT decompression and IV fluids. Repeat KUB shows persistent dilated loops >6cm, no transition to colon. Patient developing low-grade fever 38.1 and increasing pain.",
+        "newData": {
+          "KUB (48h)": "persistent dilation >6cm, no decolonization pattern",
+          "Temp": "38.1\u00b0C",
+          "WBC": "13,800 (rising from 10,200)",
+          "CT abdomen/pelvis (repeat)": "closed-loop obstruction cannot be excluded, mesenteric haziness",
+          "Clinical decision": "operative intervention \u2014 laparotomy for adhesiolysis"
+        }
+      }
     }
   },
   "sbo-with-strangulation": {
@@ -58364,6 +59396,19 @@ window.CRT_DATA = {
         "I started a new blood pressure pill about six weeks ago",
         "I drink a lot of water \u2014 could that be causing this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Thiazide Hyponatremia \u2014 Rate of Correction Monitoring",
+        "scenario": "Na corrected from 118 to 126 mEq/L over 8 hours. Neurology concerned about ODS risk. Desmopressin 2mcg IV administered to slow further correction.",
+        "newData": {
+          "Na at 8h": "126 mEq/L (rose 8 mEq/L)",
+          "Rate": "1 mEq/L/hr \u2014 approaching safe limit",
+          "Desmopressin": "2mcg IV given to prevent overcorrection",
+          "ODS risk factors": "hypokalemia, malnutrition, alcoholism (patient has none)",
+          "Target": "no more than 8 mEq/L in 24h, 18 mEq/L in 48h"
+        }
+      }
     }
   },
   "rhabdomyolysis": {
@@ -58520,6 +59565,19 @@ window.CRT_DATA = {
         "I'm so sore I can barely move",
         "I just started a new fitness program \u2014 the workout was brutal"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Rhabdomyolysis \u2014 Compartment Syndrome Assessment",
+        "scenario": "After IV fluid resuscitation and CK decline from 82,000 to 28,000, patient reports worsening right lower leg pain, paresthesias, and pain with passive stretch. Compartment pressures measured.",
+        "newData": {
+          "CK trend": "82,000 \u2192 28,000 (improving)",
+          "Creatinine": "2.8 (peaked, now 2.4)",
+          "Right lower leg": "tense, pain with passive dorsiflexion, paresthesias 1st web space",
+          "Compartment pressure": "42 mmHg (MAP 68 = delta pressure 26 mmHg \u2014 at threshold)",
+          "Threshold for fasciotomy": "delta P <30 mmHg with symptoms"
+        }
+      }
     }
   },
   "pneumonia-v2": {
@@ -58679,6 +59737,19 @@ window.CRT_DATA = {
         "I'm short of breath more than usual",
         "my COPD is making this feel worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HAP \u2014 Gram-Negative Coverage and De-escalation",
+        "scenario": "Culture returns: Pseudomonas aeruginosa, sensitive to piperacillin-tazobactam, meropenem, ciprofloxacin, ceftazidime. Patient improving on broad-spectrum therapy. De-escalation planned.",
+        "newData": {
+          "BAL culture": "Pseudomonas aeruginosa, sensitive panel",
+          "Clinical response": "afebrile 24h, WBC trending down",
+          "De-escalation": "narrowing to piperacillin-tazobactam monotherapy",
+          "Procalcitonin day 5": "1.4 (down from 8.2)",
+          "Duration": "7 days total for hospital-acquired pneumonia with clinical response"
+        }
+      }
     }
   },
   "retropharyngeal-abscess": {
@@ -59000,6 +60071,19 @@ window.CRT_DATA = {
         "I also have redness in my eye",
         "I had bad diarrhea from bad chicken a few weeks ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Reactive Arthritis \u2014 HLA-B27 and Axial Involvement",
+        "scenario": "Despite NSAID therapy, patient develops low back pain and morning stiffness >1 hour at week 4. HLA-B27 returns positive. Sacroiliac MRI ordered.",
+        "newData": {
+          "HLA-B27": "positive",
+          "SI joint MRI": "bilateral sacroiliac bone marrow edema \u2014 early sacroiliitis",
+          "CRP": "32 mg/L (persistent)",
+          "Peripheral joints": "oligoarthritis improving",
+          "Ophthalmology": "anterior uveitis developed \u2014 eye drops started"
+        }
+      }
     }
   },
   "inherited-coagulopathy": {
@@ -60150,6 +61234,19 @@ window.CRT_DATA = {
         "it started after my seizure \u2014 I didn't injure myself",
         "I missed my seizure medication yesterday"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Todd's Paralysis \u2014 Stroke Mimic Protocol",
+        "scenario": "ED initiates stroke protocol for left arm weakness post-seizure. MRI DWI shows no acute infarct. Weakness resolves 3 hours after seizure. Neurologist reviews the case.",
+        "newData": {
+          "MRI brain DWI": "no restricted diffusion (rules out acute ischemic stroke)",
+          "Todd's paralysis duration": "3 hours (typical range: minutes to 48h)",
+          "EEG (24h)": "right hemispheric slowing, no ictal activity",
+          "NIHSS at presentation": "4 (arm weakness)",
+          "Anti-seizure medication": "levetiracetam initiated"
+        }
+      }
     }
   },
   "optic-neuritis": {
@@ -60305,6 +61402,31 @@ window.CRT_DATA = {
         "it hurts to move my eye",
         "I'm scared \u2014 this came out of nowhere"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Optic Neuritis \u2014 MS Risk Assessment",
+        "scenario": "After IV methylprednisolone, vision improving. MRI brain shows 3 periventricular T2 lesions. Neurology review: first demyelinating event, at least one dissemination in space criterion met.",
+        "newData": {
+          "MRI brain": "3 periventricular T2 lesions, no gadolinium enhancement",
+          "MRI spine": "negative",
+          "OCT (optical coherence tomography)": "RNFL thinning",
+          "CSF": "2 oligoclonal bands (not in serum), IgG index elevated",
+          "ONTT data": "MRI with >1 lesion: 72% MS risk at 10 years",
+          "McDonald criteria": "clinically isolated syndrome with dissemination in space"
+        }
+      },
+      "v3": {
+        "title": "CIS \u2014 DMT Initiation Decision",
+        "scenario": "After counseling about MS risk and the CHAMPIONS/BENEFIT trials, patient asks whether to start a disease-modifying therapy after first demyelinating event.",
+        "newData": {
+          "McDonald criteria": "CIS \u2014 dissemination in space confirmed, DIT not yet met",
+          "MRI lesion burden": "3 lesions (high lesion burden = higher conversion risk)",
+          "BENEFIT trial": "interferon beta-1b delays second attack and formal MS diagnosis",
+          "CHAMPIONS trial": "early treatment with IM IFN beta-1a reduces conversion risk",
+          "Patient preference": "prefers oral therapy \u2014 dimethyl fumarate or teriflunomide discussed"
+        }
+      }
     }
   },
   "bilateral-lumbar-radiculopathy": {
@@ -60627,6 +61749,19 @@ window.CRT_DATA = {
         "it's getting bigger every day \u2014 now I have fever",
         "I can't sit down \u2014 the pain is unbearable"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Perianal Abscess \u2014 Fistula Assessment",
+        "scenario": "Post I&D day 7. Wound healing poorly. Patient reports intermittent rectal discharge. EUA (exam under anesthesia) finds a fistula-in-ano with internal opening at dentate line.",
+        "newData": {
+          "EUA finding": "fistula-in-ano, transsphincteric tract",
+          "Internal opening": "dentate line, 6 o'clock position",
+          "MRI pelvis": "confirms transphincteric fistula, no Crohn's features",
+          "Fistula rate post-abscess": "30-50% of perianal abscesses develop fistula",
+          "Surgical options": "seton placement vs advancement flap vs LIFT procedure"
+        }
+      }
     }
   },
   "epididymitis": {
@@ -60782,6 +61917,19 @@ window.CRT_DATA = {
         "it came on gradually over a few days",
         "I also have burning when I urinate"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Epididymitis \u2014 Testicular Torsion Mimicry and Orchitis Extension",
+        "scenario": "Despite 48h of antibiotics, pain intensifying. Ultrasound repeated \u2014 epididymis more swollen, now with decreased flow to testicle on Doppler.",
+        "newData": {
+          "Repeat US doppler": "epididymis markedly enlarged, decreased intratesticular flow",
+          "Urology consult": "urgent \u2014 cannot rule out concurrent testicular compromise",
+          "Temp": "38.6\u00b0C",
+          "CRP": "88 mg/L",
+          "Diagnosis concern": "epididymo-orchitis with possible early testicular compromise"
+        }
+      }
     }
   },
   "mcas-mast-cell": {
@@ -60937,6 +62085,20 @@ window.CRT_DATA = {
         "they happen with different triggers \u2014 exercise, heat, stress",
         "multiple ER visits \u2014 they always say it's anxiety"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "MCAS \u2014 Serum Tryptase and Systemic Mastocytosis Exclusion",
+        "scenario": "Baseline serum tryptase returns 28 ng/mL (normal <11.4). MCAS workup: urine histamine, prostaglandin D2, and heparin sent. Bone marrow biopsy considered to exclude systemic mastocytosis.",
+        "newData": {
+          "Baseline serum tryptase": "28 ng/mL (elevated; >20 triggers WHO mastocytosis workup)",
+          "Urine N-methylhistamine": "elevated",
+          "Urine prostaglandin D2": "elevated",
+          "Urine 24h heparin": "elevated",
+          "KIT D816V mutation": "pending bone marrow",
+          "Bone marrow biopsy": "recommended to exclude systemic mastocytosis (WHO criteria)"
+        }
+      }
     }
   },
   "hyperkalemic-cardiac-emergency": {
@@ -61462,6 +62624,19 @@ window.CRT_DATA = {
         "I've passed out getting out of bed twice this week",
         "I'm on several medications \u2014 could they be causing this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Orthostatic Hypotension \u2014 Autonomic Failure Evaluation",
+        "scenario": "Neurogenic OH confirmed (BP drop >20/10 without compensatory HR rise). Workup reveals absence of normal HR response, pointing to autonomic failure. Autonomic testing lab referral made.",
+        "newData": {
+          "Active stand test": "BP 148/88 supine \u2192 102/64 upright; HR change <5 bpm (neurogenic OH)",
+          "Tilt table test": "positive for neurogenic OH, no vasovagal pattern",
+          "24h urine catecholamines": "low norepinephrine supine and upright",
+          "Skin punch biopsy": "reduced intraepidermal nerve fiber density",
+          "Alpha-synuclein skin biopsy": "positive \u2014 raises concern for Parkinson-related autonomic failure"
+        }
+      }
     }
   },
   "hypovolemic-shock-from-gastroenteritis": {
@@ -61786,6 +62961,20 @@ window.CRT_DATA = {
         "I know my triggers but I still can't control it",
         "stress makes it so much worse \u2014 I've missed work because of this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "IBS \u2014 Differentiating from IBD Flare",
+        "scenario": "Patient with IBS-D returns with 3 weeks of new rectal bleeding, 8lb weight loss, and nocturnal diarrhea \u2014 symptoms atypical for IBS. Colonoscopy ordered urgently.",
+        "newData": {
+          "Rectal bleeding": "bright red, with stool",
+          "Weight loss": "8 lbs over 3 weeks",
+          "Nocturnal diarrhea": "present (red flag symptom for IBS \u2014 unusual)",
+          "Fecal calprotectin": "680 mcg/g (elevated, suggests mucosal inflammation)",
+          "CRP": "34 mg/L",
+          "Colonoscopy": "urgent referral \u2014 alarm features necessitate exclusion of IBD or malignancy"
+        }
+      }
     }
   },
   "complex-migraine": {
@@ -62107,6 +63296,19 @@ window.CRT_DATA = {
         "they said it lights up with contrast",
         "I don't have any symptoms \u2014 now I'm terrified"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Structural Lesion \u2014 Tissue Diagnosis Required",
+        "scenario": "CT head shows 3cm ring-enhancing lesion with significant surrounding edema. MRI confirms solitary lesion. Patient is 62M, smoker, no known malignancy. Chest CT and PET ordered before biopsy decision.",
+        "newData": {
+          "MRI brain": "3cm ring-enhancing lesion right parietal, 6mm midline shift",
+          "Chest CT": "3 bilateral lung nodules, largest 1.8cm spiculated",
+          "PET scan": "hypermetabolic activity lung nodule + brain lesion",
+          "Bronchoscopy": "planned for lung nodule \u2014 biopsy lung first (less invasive)",
+          "Differential": "metastatic lung cancer most likely, GBM less likely given lung nodules"
+        }
+      }
     }
   },
   "vitreous-hemorrhage": {
@@ -62768,6 +63970,19 @@ window.CRT_DATA = {
         "I'm on antibiotics but now it's swelling more on one side",
         "I can swallow \u2014 it's painful but I can do it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Peritonsillar Cellulitis \u2192 Abscess Formation",
+        "scenario": "Despite 48h of IV penicillin, patient returns with worsening asymmetric swelling, uvular deviation, and drooling. CT neck with contrast ordered.",
+        "newData": {
+          "CT neck with contrast": "3.1cm peritonsillar fluid collection with rim enhancement \u2014 abscess confirmed",
+          "Uvular deviation": "rightward",
+          "Trismus": "2cm mouth opening",
+          "Temp": "39.1\u00b0C",
+          "ENT": "urgent \u2014 needle aspiration or I&D indicated"
+        }
+      }
     }
   },
   "submandibular-sialolithiasis-with-secondary-infection": {
@@ -63758,6 +64973,19 @@ window.CRT_DATA = {
         "his tonsils and lymph nodes are basically absent",
         "he was fine as a newborn but started getting sick at 5 months"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "XLA \u2014 Recurrent Pneumonia and Bronchiectasis Screening",
+        "scenario": "17-year-old male with XLA on IVIG. Third pneumonia in 18 months. High-resolution CT chest ordered to evaluate for structural lung disease.",
+        "newData": {
+          "HRCT chest": "mild cylindrical bronchiectasis bilateral lower lobes",
+          "Spirometry": "FEV1 78%, FEV1/FVC 0.72 (mild obstruction)",
+          "IgG trough on IVIG": "480 mg/dL (sub-therapeutic target >500-800)",
+          "IVIG dose": "adjusted to achieve trough >600 mg/dL",
+          "Pulmonology": "co-management for bronchiectasis \u2014 airway clearance, rotating antibiotics"
+        }
+      }
     }
   },
   "digeorge-22q11": {
@@ -64081,6 +65309,19 @@ window.CRT_DATA = {
         "my inhalers do nothing",
         "I feel better when I travel for work \u2014 away from my birds"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hypersensitivity Pneumonitis \u2014 Antigen Avoidance Failure",
+        "scenario": "Despite removing the pet bird and deep cleaning, patient remains symptomatic at 6-week follow-up. Repeat HRCT shows progression. Prednisone taper was completed but symptoms recurred.",
+        "newData": {
+          "HRCT (6 weeks)": "interval progression \u2014 new areas of ground glass, fibrotic change developing",
+          "Antigen avoidance": "bird removed, home inspected",
+          "Prednisone course": "40mg x 4 weeks, tapered \u2014 symptoms recurred",
+          "BAL": "lymphocytosis 48% (consistent with HP)",
+          "Possible fibrotic HP": "emerging \u2014 rheumatology and pulmonology co-management"
+        }
+      }
     }
   },
   "pneumonia-on-copd-v2": {
@@ -64406,6 +65647,20 @@ window.CRT_DATA = {
         "it's symmetric \u2014 both sides at the same time",
         "it takes more than two hours for the stiffness to get better"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "RA \u2014 Methotrexate Initiation and Monitoring",
+        "scenario": "After DMARD initiation with methotrexate 15mg/week + folic acid, 3-month labs return: LFTs mildly elevated (AST 52, ALT 68), WBC 3,800.",
+        "newData": {
+          "AST": "52 (ULN 40)",
+          "ALT": "68 (ULN 40)",
+          "WBC": "3,800",
+          "MTX dose": "15mg/week",
+          "Folic acid": "1mg/day",
+          "DAS28": "3.8 (moderate disease activity \u2014 target <2.6)"
+        }
+      }
     }
   },
   "septic-arthritis-v2": {
@@ -64899,6 +66154,20 @@ window.CRT_DATA = {
         "the medications I've tried didn't work",
         "I can't function \u2014 I've missed work 3 times this month"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Chronic Migraine \u2014 Preventive Therapy Optimization",
+        "scenario": "Patient meets criteria for chronic migraine (\u226515 headache days/month, \u22658 with migraine features, for >3 months). Two prior preventives failed (amitriptyline, topiramate). CGRP pathway targeted.",
+        "newData": {
+          "Headache days/month": "18",
+          "Migraine days/month": "12",
+          "Prior preventives failed": "amitriptyline (intolerable sedation), topiramate (cognitive side effects)",
+          "CGRP MAb options": "erenumab, fremanezumab, galcanezumab",
+          "HIT-6 score": "60 (severe impact)",
+          "MOH assessment": "no overuse (triptans <10 days/month)"
+        }
+      }
     }
   },
   "musculoskeletal": {
@@ -65053,6 +66322,19 @@ window.CRT_DATA = {
         "sharp pain in my lower back \u2014 can barely stand up straight",
         "it happened before but usually gets better in a few days"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Musculoskeletal Pain \u2014 Compartment Syndrome Excluded",
+        "scenario": "Patient with tibial stress fracture and severe increasing pain despite immobilization. Ortho urgent consult \u2014 compartment pressures measured to exclude acute compartment syndrome.",
+        "newData": {
+          "Compartment pressure": "18 mmHg (normal <30 mmHg)",
+          "MAP": "72 mmHg",
+          "Delta pressure": "54 mmHg (safe \u2014 threshold for fasciotomy <30 mmHg)",
+          "MRI tibia": "stress fracture confirmed, no cortical disruption",
+          "Pain reassessment": "pain improving with appropriate analgesia and rest"
+        }
+      }
     }
   },
   "fracture-pain": {
@@ -65208,6 +66490,19 @@ window.CRT_DATA = {
         "I bent over to pick something up and felt a pop",
         "I have osteoporosis and it gets worse every year"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Fracture Pain \u2014 Opioid-Sparing Multimodal Analgesia",
+        "scenario": "Patient asking for more opioids at 72h post-fracture. Pain 8/10. Current: oxycodone 5mg q6h + ibuprofen. Opioid risk assessment performed.",
+        "newData": {
+          "DIRE score": "10 (moderate risk)",
+          "ORT (opioid risk tool)": "4 (low risk)",
+          "Current opioid dose": "oxycodone 5mg q6h",
+          "Multimodal additions": "acetaminophen 1g q8h scheduled, nerve block eligibility assessed",
+          "Functional assessment": "ROM limited, PT referral placed"
+        }
+      }
     }
   },
   "gastric-malignancy": {
@@ -66021,6 +67316,20 @@ window.CRT_DATA = {
         "the swelling came on gradually over 4 days",
         "I also have some discharge and it burns when I urinate"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Epididymo-orchitis \u2014 STI Partner Notification",
+        "scenario": "Chlamydia trachomatis confirmed on NAAT. Patient is sexually active with 2 partners in past 60 days. Public health partner notification obligations reviewed.",
+        "newData": {
+          "NAAT result": "Chlamydia trachomatis positive",
+          "Gonorrhea NAAT": "negative",
+          "HIV test": "offered and accepted",
+          "Syphilis RPR": "non-reactive",
+          "Partner notification": "required \u2014 60-day look-back period",
+          "Treatment": "doxycycline 100mg BID x 10 days (chlamydia), single-dose ceftriaxone given"
+        }
+      }
     }
   },
   "torsion-of-appendix-testis": {
@@ -66172,6 +67481,19 @@ window.CRT_DATA = {
         "it's not as severe as I'd expect \u2014 more like a 5 out of 10",
         "there's a small blue dot visible through the skin"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Appendix Testis Torsion \u2014 Management vs Testicular Torsion",
+        "scenario": "Ultrasound confirms appendix testis torsion (avascular nodule at superior pole, normal testicular flow). Pain day 3, no improvement with ibuprofen.",
+        "newData": {
+          "Ultrasound": "avascular appendix testis 5mm at superior pole, normal testicular vascularity",
+          "Diagnosis": "appendix testis torsion confirmed",
+          "Management": "self-limited 7-10 days, NSAIDs + scrotal support",
+          "Surgical option": "excision if pain refractory",
+          "Key teaching": "normal testicular flow rules out testicular torsion \u2014 conservative management appropriate"
+        }
+      }
     }
   },
   "testicular-traumarupture": {
@@ -67760,6 +69082,20 @@ window.CRT_DATA = {
         "fever and the pain isn't as severe as appendicitis sounds",
         "she had a cold two weeks ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Mesenteric Lymphadenitis \u2014 Ruling Out Appendicitis",
+        "scenario": "CT abdomen shows mesenteric lymphadenopathy (lymph nodes 12-15mm) in right lower quadrant with normal appendix. CRP 42, WBC 11,800. Pediatric surgery and pediatric GI consulted.",
+        "newData": {
+          "CT findings": "mesenteric lymph nodes 12-15mm cluster RLQ, appendix normal (7mm, no fat stranding)",
+          "CRP": "42 mg/L",
+          "WBC": "11,800",
+          "Yersinia serology": "sent",
+          "EBV/CMV": "sent",
+          "Management": "observation, analgesia \u2014 no operative intervention"
+        }
+      }
     }
   },
   "lung-cancer-staging": {
@@ -67914,6 +69250,19 @@ window.CRT_DATA = {
         "I've been coughing for months \u2014 I thought it was my COPD",
         "I've lost weight without trying and I'm scared"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "NSCLC Staging \u2014 Mediastinal Node Assessment",
+        "scenario": "PET-CT shows 3.2cm RUL mass (SUV 8.4) and mediastinal node activity (station 4R, SUV 4.2). EBUS-TBNA scheduled to assess N2 disease.",
+        "newData": {
+          "PET-CT": "RUL mass SUV 8.4, station 4R mediastinal node SUV 4.2",
+          "EBUS-TBNA": "malignant cells in station 4R (N2 disease confirmed)",
+          "Stage": "IIIA (T2bN2M0)",
+          "Molecular testing": "EGFR, ALK, ROS1, PD-L1 ordered from biopsy specimen",
+          "Multidisciplinary tumor board": "concurrent chemoradiation vs surgical resection debated"
+        }
+      }
     }
   },
   "lung-cancer-post-obstructive": {
@@ -69053,6 +70402,19 @@ window.CRT_DATA = {
         "I can't work and I'm getting depressed about it",
         "I need something different \u2014 I'm at my limit"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Back Pain \u2014 Red Flags and Spinal Cord Compression",
+        "scenario": "Patient returns week 3 with new lower extremity weakness and urinary retention. Bowel/bladder dysfunction + motor deficit = MRI spine emergent.",
+        "newData": {
+          "MRI spine": "central disc herniation L4-L5 with cauda equina compression, epidural edema",
+          "Lower extremity strength": "3/5 bilateral hip flexion and knee extension",
+          "Bladder scan post-void residual": "480mL",
+          "Perineal sensation": "decreased",
+          "Cauda equina syndrome": "surgical emergency \u2014 neurosurgery called immediately"
+        }
+      }
     }
   },
   "pathologic-fracture": {
@@ -69371,6 +70733,19 @@ window.CRT_DATA = {
         "the x-ray was normal but I still can't walk",
         "the pain is in my groin \u2014 I can't put weight on it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pubic Ramus Fracture \u2014 Urologic Injury Assessment",
+        "scenario": "CT pelvis confirms right superior and inferior pubic ramus fracture. Hematuria present on UA. Retrograde urethrogram ordered before Foley placement.",
+        "newData": {
+          "CT pelvis": "right superior + inferior pubic ramus fracture, no bladder injury on CT",
+          "UA": "50-100 RBC/hpf",
+          "Retrograde urethrogram": "no urethral disruption \u2014 Foley safe to place",
+          "Bladder integrity": "no cystogram extravasation",
+          "Orthopedics": "non-operative management, weight-bearing as tolerated with PT"
+        }
+      }
     }
   },
   "surgical-bleeding": {
@@ -69828,6 +71203,20 @@ window.CRT_DATA = {
         "I cough up brown mucus plugs sometimes",
         "my asthma is so hard to control and no one knows why"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ABPA \u2014 Staging and Steroid Initiation",
+        "scenario": "Diagnosis confirmed: serum IgE 3,200 IU/mL, Aspergillus-specific IgE 12 kU/L, positive Aspergillus skin test, central bronchiectasis on HRCT. Stage III ABPA.",
+        "newData": {
+          "Total IgE": "3,200 IU/mL",
+          "Aspergillus-specific IgE": "12 kU/L (positive)",
+          "Aspergillus skin test": "positive (immediate wheal 7mm)",
+          "HRCT": "central bronchiectasis bilateral upper lobes, mucus plugging",
+          "Stage": "III (exacerbation with central bronchiectasis)",
+          "Prednisone": "0.5mg/kg/day initiated + itraconazole 200mg BID as steroid-sparing"
+        }
+      }
     }
   },
   "acne-management": {
@@ -69950,6 +71339,19 @@ window.CRT_DATA = {
         "I've done antibiotics and topical creams \u2014 nothing works long-term",
         "I heard about Accutane \u2014 I want to understand the risks"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Moderate Acne \u2014 Isotretinoin Candidacy",
+        "scenario": "After 6 months of topical retinoid + benzoyl peroxide + 3 months of doxycycline, patient has moderate-severe persistent nodular acne with scarring. Dermatology evaluating for isotretinoin.",
+        "newData": {
+          "Duration of prior treatment": "6 months topical + 3 months oral antibiotic",
+          "Acne grade": "IGA 3-4 (moderate-severe), nodular, 4 new scars",
+          "iPLED-plus enrollment": "required before prescribing",
+          "Pregnancy test": "negative (required)",
+          "Labs required": "CBC, LFTs, fasting lipids, beta-hCG"
+        }
+      }
     }
   },
   "anxietypanic-attack": {
@@ -70357,6 +71759,20 @@ window.CRT_DATA = {
         "it started after an insect bite and keeps spreading",
         "I drew a line yesterday and it already crossed it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cellulitis \u2014 Non-Response at 72h and MRSA Coverage",
+        "scenario": "After 72h of cephalexin, erythema has expanded 3cm beyond the borders drawn on admission. No fluctuance. WBC still 13,800. MRSA risk factors assessed: prior MRSA, recurrence, failure of beta-lactam.",
+        "newData": {
+          "Erythema expansion": "3cm beyond drawn borders at 72h",
+          "WBC": "13,800 (unchanged)",
+          "Blood cultures": "no growth at 48h",
+          "MRSA risk factors": "prior MRSA colonization (nasal swab positive 6 months ago)",
+          "Wound culture": "no abscess to culture",
+          "Management": "add TMP-SMX or switch to clindamycin for MRSA coverage"
+        }
+      }
     }
   },
   "cerebral-contusion": {
@@ -71707,6 +73123,20 @@ window.CRT_DATA = {
         "the arthritis in my hands is getting worse",
         "I've been on multiple medications \u2014 none work long-term"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Psoriasis \u2014 Biologic Therapy Evaluation",
+        "scenario": "After failure of methotrexate (LFT elevation) and phototherapy (non-adherent), PASI score 18 qualifies for biologic therapy. IL-17, IL-23, and TNF inhibitors reviewed.",
+        "newData": {
+          "PASI score": "18 (severe \u2014 threshold for biologic >10-12)",
+          "Prior therapy": "methotrexate (stopped, LFT elevation), NB-UVB (non-adherent)",
+          "Hepatitis B surface Ag": "negative, surface Ab positive (immune)",
+          "TB QuantiFERON": "negative",
+          "DLQI": "22 (severe quality of life impact)",
+          "Biologic options": "IL-17A inhibitor (secukinumab), IL-23 inhibitor (risankizumab), TNF inhibitor (adalimumab)"
+        }
+      }
     }
   },
   "croup-epiglottitis-ddx": {
@@ -71965,6 +73395,19 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "98.6\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Angelman Syndrome \u2014 Seizure Management in Non-Verbal Patient",
+        "scenario": "14-year-old with Angelman syndrome and refractory epilepsy. Seizures increasing to 4-6/day despite valproate + clonazepam. Caregiver reports post-ictal agitation lasting hours. EEG review requested.",
+        "newData": {
+          "EEG": "characteristic high-amplitude, rhythmic delta with notched waves, occipital predominance (AS pattern)",
+          "Seizure frequency": "4-6/day (clusters)",
+          "Current AEDs": "valproate 30mg/kg/day + clonazepam 0.1mg/kg/day",
+          "Valproate level": "72 mcg/mL (therapeutic)",
+          "Options": "levetiracetam, clobazam, cannabidiol (FDA-approved for Angelman-related epilepsy, 2024 data)"
+        }
+      }
     }
   },
   "aadc-deficiency": {

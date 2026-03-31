@@ -295,25 +295,27 @@
           triageNote: 'Patient presents with ' + (crt.chiefComplaint || crt.presentation).toLowerCase() + '.'
         },
 
-        // Patient script — for CRT-adapted cases, Claude generates responses
-        // based on this combined context rather than pre-scripted segments
-        patientScript: {
-          identity: patientName + ', ' + age + '-year-old ' + sex.toLowerCase() + '.',
-          hpiOnset: ccPhrasing[0] || crt.chiefComplaint,
-          hpiProgression: ccPhrasing.length > 1 ? ccPhrasing.slice(1).join('. ') : '',
-          hpiCough: '',
-          hpiAssociatedSymptoms: '',
-          hpiLocationPattern: '',
-          pmh: pmh.join('. '),
-          medications: '',
-          allergies: 'No known drug allergies.',
-          familyHistory: '',
-          socialSmokingAlcohol: '',
-          socialOccupation: '',
-          socialTravel: '',
-          ros: '',
-          // Combined context for Claude to generate natural responses
-          _crtContext: {
+        // Patient script — use pre-written script from crt-data if present,
+        // otherwise build from chiefComplaintPhrasing + PMH
+        patientScript: (function() {
+          var base = crt.patientScript ? Object.assign({}, crt.patientScript) : {
+            identity: patientName + ', ' + age + '-year-old ' + sex.toLowerCase() + '.',
+            hpiOnset: ccPhrasing[0] || crt.chiefComplaint,
+            hpiProgression: ccPhrasing.length > 1 ? ccPhrasing.slice(1).join('. ') : '',
+            hpiCough: '',
+            hpiAssociatedSymptoms: '',
+            hpiLocationPattern: '',
+            pmh: pmh.join('. '),
+            medications: '',
+            allergies: 'No known drug allergies.',
+            familyHistory: '',
+            socialSmokingAlcohol: '',
+            socialOccupation: '',
+            socialTravel: '',
+            ros: ''
+          };
+          // Always inject _crtContext for Claude's diagnostic guidance
+          base._crtContext = {
             diagnosis: crt.diagnosis,
             chiefComplaint: crt.chiefComplaint,
             presentation: crt.presentation,
@@ -323,8 +325,9 @@
             mustNotMiss: crt.mustNotMiss || [],
             keyLearningPoints: crt.keyLearningPoints || [],
             acuity: crt.acuity
-          }
-        },
+          };
+          return base;
+        }()),
 
         physicalExam: generatePE(crt),
         labResults: extractLabResults(crt),
