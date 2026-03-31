@@ -463,6 +463,18 @@ window.CRT_DATA = {
         "my blood pressure keeps dropping",
         "something went wrong after the procedure"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cardiogenic Shock \u2014 IABP vs Impella Decision",
+        "scenario": "Despite dobutamine and norepinephrine, CI remains 1.6 L/min/m\u00b2. Lactate rising to 5.8. Interventional cardiologist offers IABP or Impella CP. Cardiac surgery available. What does the evidence say and which do you choose?",
+        "newData": {
+          "CI": "1.6 L/min/m\u00b2 (cardiogenic shock <2.2)",
+          "Lactate": "5.8 mmol/L",
+          "Vasopressors": "Norepinephrine 0.3 + dobutamine 10 mcg/kg/min",
+          "Note": "IABP-SHOCK II: IABP no mortality benefit; Impella provides higher cardiac output; ECMO for refractory; consider early revascularization of all lesions"
+        }
+      }
     }
   },
   "stemi-v3": {
@@ -590,6 +602,19 @@ window.CRT_DATA = {
         "they're telling me the bundle branch is new",
         "pressure in my chest for 45 minutes"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Sgarbossa Criteria \u2014 Thrombolysis Decision",
+        "scenario": "LBBB \u2014 concordant ST elevation 2mm in V5-V6 (Sgarbossa positive, 5 points). No cath lab available for 90 minutes. Thrombolytics available at bedside. Patient is 71, BP 148/92, no prior stroke. Do you give lytics or wait for PCI?",
+        "newData": {
+          "Sgarbossa": "5 points \u2014 concordant ST elevation V5-V6",
+          "Cath_ETA": "90 minutes",
+          "BP": "148/92",
+          "Age": "71",
+          "Note": "Sgarbossa-positive LBBB = STEMI equivalent; if PCI >120 min delay, thrombolytics indicated (ACC/AHA); door-to-needle <30 min target; contraindication checklist; transfer for rescue PCI regardless"
+        }
+      }
     }
   },
   "sepsis-v2": {
@@ -1951,6 +1976,19 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "97.8\u00b0F",
       "SpO2": "95%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Open Repair \u2014 Clamp and Sew vs Shunt",
+        "scenario": "Intraoperative: infrarenal aorta clamped. Cross-clamp time now 52 minutes \u2014 surgeon encountering unexpected perirenal involvement. Anesthesia reports: metabolic acidosis worsening pH 7.14, K+ 6.2. Visceral ischemia time mounting.",
+        "newData": {
+          "CrossClampTime": "52 minutes",
+          "pH": "7.14",
+          "K+": "6.2 mEq/L",
+          "IntraopFinding": "Unexpected perirenal involvement",
+          "Note": "Prolonged cross-clamp: renal and visceral ischemia; consider cold renal perfusion; assess for suprarenal clamping need; damage control \u2014 complete anastomosis then restore flow to address acidosis before further dissection"
+        }
+      }
     }
   },
   "pe-v1": {
@@ -7390,6 +7428,30 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Malperfusion \u2014 Spinal Cord Ischemia",
+        "scenario": "Type B dissection managed medically \u2014 BP controlled at 120s. Day 3: patient reports sudden onset bilateral leg weakness and inability to urinate. Exam: paraplegia, T6 sensory level. MRI spine: T5-T8 cord ischemia from intercostal artery compromise.",
+        "newData": {
+          "NewDeficit": "Paraplegia \u2014 bilateral lower extremities",
+          "SensoryLevel": "T6",
+          "MRI": "T5-T8 spinal cord ischemia",
+          "BP": "122/74 (controlled)",
+          "Note": "Paraplegia from TBAD \u2014 consider CSF drainage to reduce cord ischemia; permissive HTN may improve perfusion; TEVAR decision"
+        }
+      },
+      "v3": {
+        "title": "Type B \u2014 Conversion to Open Repair",
+        "scenario": "TEVAR placed 2 days ago. Now: persistent visceral malperfusion \u2014 creatinine 4.2 (rising), lactate 6.1, abdominal pain. CT shows stent covering renal arteries but incomplete false lumen thrombosis. Vascular surgery says TEVAR failed \u2014 open repair needed.",
+        "newData": {
+          "Creatinine": "4.2 mg/dL (rising)",
+          "Lactate": "6.1 mmol/L",
+          "CT": "Renal malperfusion \u2014 stent covers but incomplete seal",
+          "DaysSinceTEVAR": "2",
+          "Note": "TEVAR failure with visceral malperfusion \u2014 open surgical conversion or fenestration procedure"
+        }
+      }
     }
   },
   "anaphylaxis": {
@@ -8190,6 +8252,17 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.2\u00b0F",
       "SpO2": "98%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Salpingectomy vs Salpingostomy \u2014 Fertility Counseling",
+        "scenario": "Hemodynamically stable ruptured ectopic \u2014 repaired with salpingostomy to preserve the tube. Intraoperative: contralateral tube appears fibrotic and scarred. Patient is 32, nulliparous, wants children. Surgeon asks about completing salpingectomy vs attempt at tube preservation.",
+        "newData": {
+          "ContralateralTube": "Fibrotic and scarred \u2014 compromised",
+          "PatientAge": "32 \u2014 nulliparous, desires fertility",
+          "Note": "Salpingostomy vs salpingectomy: no difference in intrauterine pregnancy rates (DEMETER trial); salpingostomy higher persistent ectopic risk; with damaged contralateral tube, preserving ipsilateral makes sense; IVF counseling regardless"
+        }
+      }
     }
   },
   "eclampsia": {
@@ -9319,6 +9392,18 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "103.8\u00b0F",
       "SpO2": "94%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Bacteremia \u2014 Antibiotic De-escalation",
+        "scenario": "Blood cultures: E. coli \u2014 ESBL positive. Started on meropenem. Day 4: BP stable, lactate normal, afebrile. ID calls: can we de-escalate to ertapenem for outpatient completion? What are the criteria?",
+        "newData": {
+          "BloodCulture": "E. coli ESBL positive",
+          "CurrentAntibiotic": "Meropenem \u2014 day 4",
+          "ClinicalStatus": "Stable \u2014 afebrile, lactate normal",
+          "Note": "ESBL de-escalation: ertapenem acceptable for ESBL if source controlled and clinically improved; avoid pip-tazo for ESBL bloodstream infection (inoculum effect); 14 days total for bacteremic UTI; outpatient parenteral antibiotics (OPAT) criteria"
+        }
+      }
     }
   },
   "neutropenic-fever": {
@@ -10721,6 +10806,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "103.4\u00b0F",
       "SpO2": "93%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Colostomy Decision \u2014 Fecal Contamination",
+        "scenario": "First debridement complete. Wound extends from scrotum to perineum, abdominal wall involved. Significant fecal contamination from anorectal involvement. Colorectal surgeon recommends diverting colostomy. Patient is hemodynamically unstable \u2014 BP 74/46.",
+        "newData": {
+          "BP": "74/46",
+          "WoundExtent": "Scrotum to perineum, lower abdominal wall, anorectal involvement",
+          "FecalContamination": "Present \u2014 anorectal involvement",
+          "Note": "Diverting colostomy reduces recontamination \u2014 can be done same OR; hyperbaric oxygen as adjunct if available; damage control mindset in hemodynamically unstable"
+        }
+      }
     }
   },
   "nec-fasciitis": {
@@ -11001,6 +11098,17 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "104.0\u00b0F",
       "SpO2": "95%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Serial Debridement \u2014 Wound Closure Strategy",
+        "scenario": "Third OR visit \u2014 now day 6. Wound 28cm x 18cm, clean granulating base, no new necrosis. Plastic surgery evaluating. Options: vacuum-assisted closure \u2192 split-thickness skin graft vs biological mesh. Patient asking about reconstruction timeline.",
+        "newData": {
+          "WoundSize": "28cm x 18cm \u2014 clean, granulating",
+          "ORVisits": "3",
+          "Note": "NecFasc wound closure: VAC to granulation then STSG standard approach; biological mesh for large defects; negative pressure wound therapy accelerates granulation; typical closure 2-4 weeks post-debridement; mortality risk has passed \u2014 now reconstructive phase"
+        }
+      }
     }
   },
   "sjs-ten": {
@@ -12513,6 +12621,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "99.8\u00b0F",
       "SpO2": "95%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Bowel Infarction \u2014 Non-Operative vs OR",
+        "scenario": "CT angiogram: SMA embolus with pneumatosis intestinalis in 40cm of small bowel. BP 82/50, lactate 8.4. Surgeon says they can take the patient to the OR \u2014 but warns that if >50% of small bowel is infarcted, survival is poor and the patient may be left with short bowel syndrome.",
+        "newData": {
+          "CTA": "SMA embolus, pneumatosis intestinalis 40cm small bowel",
+          "Lactate": "8.4 mmol/L",
+          "BP": "82/50",
+          "Note": "Bowel infarction \u2014 goals of care discussion essential before OR; surgical embolectomy + bowel resection; second look at 48h"
+        }
+      }
     }
   },
   "hip-fracture-anticoag": {
@@ -13386,6 +13506,18 @@ window.CRT_DATA = {
       "RR": "32",
       "Temp": "107.2\u00b0F (41.8\u00b0C) rectal",
       "SpO2": "93%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cooling Overshoot \u2014 Hypothermia and Shivering",
+        "scenario": "Aggressive cooling with ice water immersion. Temperature dropped from 41.8\u00b0C to 35.2\u00b0C in 45 minutes \u2014 overcooled. Patient shivering violently, BP 88/52. When do you stop cooling and how do you manage the overshoot?",
+        "newData": {
+          "Temp": "35.2\u00b0C (overcooled from 41.8\u00b0C)",
+          "ShiveringStatus": "Violent shivering",
+          "BP": "88/52",
+          "Note": "Stop active cooling at 38-39\u00b0C; shivering increases thermogenesis \u2014 buspirone, meperidine, or low-dose propofol to suppress; rewarming passively; monitor for secondary hypothermia complications"
+        }
+      }
     }
   },
   "severe-hypothermia": {
@@ -13699,6 +13831,18 @@ window.CRT_DATA = {
       "RR": "8 (slow, shallow)",
       "Temp": "82.4\u00b0F (28\u00b0C) rectal \u2014 core temp by esophageal probe preferred",
       "SpO2": "Unable to obtain (vasoconstriction \u2014 pulse ox unreliable in hypothermia)"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ECMO Rewarming \u2014 Afterdrop and Rewarming Collapse",
+        "scenario": "Core temp 24\u00b0C, VF on monitor. ECMO team activated \u2014 VA-ECMO for rewarming. Initial afterdrop to 22\u00b0C expected. As rewarming begins, BP falls from 62 to pulseless. Is this expected? What is rewarming collapse and how do you manage it?",
+        "newData": {
+          "CoreTemp": "24\u00b0C \u2014 now dropping to 22\u00b0C",
+          "Rhythm": "VF \u2192 pulseless",
+          "ECMO": "VA-ECMO rewarming initiated",
+          "Note": "Afterdrop: core temp continues falling after rescue as cold peripheral blood returns centrally \u2014 normal and expected; rewarming collapse: hemodynamic instability as vasodilation occurs with rewarming; ECMO maintains perfusion; do not defibrillate until temp >30\u00b0C"
+        }
+      }
     }
   },
   "sbo-strangulation": {
@@ -14575,6 +14719,27 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "98.2\u00b0F",
       "SpO2": "92%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pericardiocentesis Failure \u2014 Surgical Window",
+        "scenario": "Pericardiocentesis attempted \u2014 only 20mL bloody fluid withdrawn, loculated effusion. BP still 68/40. Echo: RV still collapsing. Cardiac surgery is at the bedside. Decision: repeat pericardiocentesis vs surgical pericardial window vs OR for pericardiotomy.",
+        "newData": {
+          "PericardiocentesisResult": "20mL bloody fluid \u2014 loculated, incomplete drainage",
+          "BP": "68/40",
+          "Echo": "RV diastolic collapse persists",
+          "Note": "Loculated malignant effusion \u2014 surgical pericardial window preferred; pericardiocentesis reaccumulates; consider pleuropericardial window for palliation"
+        }
+      },
+      "v3": {
+        "title": "Post-Pericardiocentesis \u2014 Effusion Recurrence",
+        "scenario": "Lung adenocarcinoma. Pericardiocentesis drained 650mL \u2014 immediate hemodynamic recovery. One week later: dyspnea returned. Echo: 450mL reaccumulated. Oncology asking about pericardial sclerosis vs window vs systemic treatment response.",
+        "newData": {
+          "EffusionRecurred": "450mL at 1 week",
+          "Diagnosis": "Metastatic lung adenocarcinoma",
+          "Note": "Malignant pericardial effusion \u2014 pericardial window or intrapericardial sclerotherapy for recurrent disease; prognosis discussion; systemic therapy response determines long-term benefit"
+        }
+      }
     }
   },
   "complete-heart-block": {
@@ -15439,6 +15604,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "103.2\u00b0F",
       "SpO2": "89% on room air \u2192 93% on 15L NRB"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Descending Mediastinitis \u2014 Thoracic Extension",
+        "scenario": "Post-surgical drainage day 3 \u2014 not improving. CT neck and chest: air and fluid tracking to superior mediastinum (T3 level). BP 86/52, febrile 40.1\u00b0C. Thoracic surgery now involved alongside head and neck.",
+        "newData": {
+          "CT": "Descending necrotizing mediastinitis \u2014 fluid/air to T3",
+          "BP": "86/52",
+          "Temp": "40.1\u00b0C",
+          "Note": "Descending mediastinitis carries 40% mortality \u2014 requires thoracic surgical drainage (video-assisted or open); continue broad-spectrum antibiotics including antifungals; highest risk complication of Ludwig angina"
+        }
+      }
     }
   },
   "ttp": {
@@ -16058,6 +16235,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "95.6\u00b0F (hypothermia developing \u2014 lethal triad)",
       "SpO2": "91%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "TXA Window \u2014 Too Late?",
+        "scenario": "Trauma patient, 6 hours post-injury. Ongoing coagulopathic bleeding. Resident asks about tranexamic acid. CRASH-2 trial window is 3 hours \u2014 the patient is now 6 hours out. Do you give TXA?",
+        "newData": {
+          "HoursPostInjury": "6",
+          "BleedingStatus": "Ongoing coagulopathic hemorrhage",
+          "TXA_Status": "Not yet given",
+          "Note": "CRASH-2: TXA benefit only within 3h of injury \u2014 harm if given >3h; do not give TXA at 6h; focus on component therapy, surgical hemostasis, permissive hypotension"
+        }
+      }
     }
   },
   "septic-arthritis": {
@@ -16755,6 +16944,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.0\u00b0F",
       "SpO2": "93%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Insulin-Induced Hypoglycemia \u2014 Overcorrection",
+        "scenario": "Insulin 10U IV + dextrose 50% given for K+ 7.2. 90 minutes later: K+ 5.8 (improved) but glucose now 34 mg/dL \u2014 hypoglycemia from insulin overcorrection. Patient confused. How do you manage both the hypoglycemia and the ongoing hyperkalemia?",
+        "newData": {
+          "K+": "5.8 mEq/L (from 7.2)",
+          "Glucose": "34 mg/dL",
+          "InsulinGiven": "10U IV with D50",
+          "Note": "Insulin-induced hypoglycemia in hyperK treatment \u2014 D50 repeat, check glucose q30min for 3h after insulin; K+ will rebound \u2014 plan for dialysis or continued monitoring; sodium bicarbonate as additive K-lowering without hypoglycemia risk"
+        }
+      }
     }
   },
   "severe-hyponatremia": {
@@ -17029,6 +17230,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Seizure Terminating \u2014 Sodium Target and Rate",
+        "scenario": "Na+ 112 with generalized seizure \u2014 controlled with lorazepam. Now post-ictal. 3% saline bolus 150mL given. Na+ now 118. The resident wants to give another bolus to 'get her safe at 125.' You stop them. Why?",
+        "newData": {
+          "Na_Initial": "112 mEq/L",
+          "Na_After150mL_3%": "118 mEq/L",
+          "SeizureStatus": "Terminated \u2014 post-ictal",
+          "Note": "Correction rate target: 4-6 mEq/L per day in chronic hyponatremia (>48h); up to 8 mEq/L for active seizure; >10 mEq/L risks ODS; Na 118 is adequate symptom control \u2014 stop active correction; switch to fluid restriction or tolvaptan for ongoing management"
+        }
+      }
     }
   },
   "acute-cholecystitis": {
@@ -19325,6 +19538,20 @@ window.CRT_DATA = {
         "my heart is pounding out of my chest",
         "I feel like I might pass out"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Systemic Thrombolysis \u2014 Contraindication Debate",
+        "scenario": "BP 72/44, HR 138, RV dilation confirmed on echo. Patient has had a hemorrhagic stroke 8 months ago \u2014 listed as absolute contraindication to systemic thrombolytics. The PE team says this is a life-or-death situation. Catheter-directed lysis available but 45 minutes away.",
+        "newData": {
+          "BP": "72/44",
+          "HR": "138",
+          "Echo": "RV dilation \u2014 McConnell sign",
+          "Contraindication": "Hemorrhagic stroke 8 months ago",
+          "CDT_ETA": "45 minutes",
+          "Note": "Massive PE + hemodynamic collapse: relative vs absolute contraindication weighing \u2014 8 months post-hemorrhagic stroke considered relative by many; surgical embolectomy if CDT delay; alteplase 100mg IV over 2h if no other option and hemodynamic collapse"
+        }
+      }
     }
   },
   "migraine": {
@@ -21689,6 +21916,18 @@ window.CRT_DATA = {
         "my eyes are stuck shut in the morning",
         "it started as a rash and now I'm losing skin"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Airway Involvement \u2014 ICU Management",
+        "scenario": "BSA 25% detachment, now with respiratory symptoms \u2014 hoarse voice, odynophagia, stridor developing. Pulmonology evaluating for tracheobronchial involvement. SpO2 91% on room air. Anesthesia called.",
+        "newData": {
+          "BSA": "25% detachment",
+          "Airway": "Stridor, hoarse voice \u2014 tracheobronchial involvement suspected",
+          "SpO2": "91% on room air",
+          "Note": "SJS/TEN airway involvement: most serious complication; early intubation before complete obstruction; bronchoscopy to assess tracheobronchial sloughing; high SCORTEN risk; burn center transfer"
+        }
+      }
     }
   },
   "hereditary-angioedema": {
@@ -25327,6 +25566,19 @@ window.CRT_DATA = {
         "my throat is swelling and I can barely swallow",
         "I need more epinephrine \u2014 one wasn't enough"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Underdosing \u2014 Weight-Based Epinephrine",
+        "scenario": "Standard EpiPen (0.3mg) given \u2014 inadequate for 140kg patient. BP still 68/42, stridor worsening. Second EpiPen used \u2014 marginal improvement. Anesthesia is assessing the airway. How do you calculate the appropriate dose and what's the route?",
+        "newData": {
+          "Weight": "140 kg",
+          "EpiPenDoses": "2x standard EpiPen (0.3mg each) \u2014 inadequate",
+          "BP": "68/42",
+          "Stridor": "Worsening",
+          "Note": "Weight-based epi: 0.01mg/kg IM (max 0.5mg); obese patients may need higher dose; IV epinephrine if IM fails; airway backup essential"
+        }
+      }
     }
   },
   "idiopathic-angioedema-v2": {
@@ -25712,6 +25964,18 @@ window.CRT_DATA = {
         "I've reacted before but never had a shot",
         "someone gave me Benadryl but it's getting worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "VIT Access \u2014 Uninsured Patient",
+        "scenario": "Venom immunotherapy is the definitive treatment \u2014 estimated $2,000-4,000/year for 5 years. Patient is uninsured day laborer. Hospital social work available. What resources and alternatives exist, and how do you counsel this patient about their ongoing risk?",
+        "newData": {
+          "TreatmentCost": "$2,000-4,000/year for 3-5 years VIT",
+          "InsuranceStatus": "Uninsured",
+          "WorkingConditions": "Outdoor \u2014 daily hymenoptera exposure",
+          "Note": "VIT access programs: ALK, Stallergenes patient assistance; state Medicaid application; community health center referral; while pursuing coverage \u2014 prescribe EpiPen x2, medical alert bracelet, avoidance counseling; untreated risk of fatal re-sting ~60% without VIT"
+        }
+      }
     }
   },
   "venom-immunotherapy-reaction-v2": {
@@ -26468,6 +26732,17 @@ window.CRT_DATA = {
         "she has a fever and won't eat",
         "dad had a cold sore last week"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Eye Involvement \u2014 Ophthalmology Emergency",
+        "scenario": "Toddler with eczema herpeticum \u2014 on IV acyclovir day 2. New finding: right eye red, photophobic, punched-out corneal lesions on fluorescein exam. Pediatric ophthalmology called urgently.",
+        "newData": {
+          "EyeFinding": "Right eye \u2014 dendritic corneal ulcers on fluorescein, photophobia",
+          "AcyclovirDay": "2",
+          "Note": "Herpetic keratitis \u2014 topical trifluridine or ganciclovir ophthalmic gel; continue systemic acyclovir; do not use topical steroids; urgent ophthalmology; risk of corneal scarring and vision loss"
+        }
+      }
     }
   },
   "erythema-multiforme-major-v2": {
@@ -26840,6 +27115,19 @@ window.CRT_DATA = {
         "this is different \u2014 I've never reacted to my dose before",
         "exercise made it worse \u2014 I know that's a thing"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "COFAR \u2014 Exercise-Triggered Threshold Lowering",
+        "scenario": "Patient on peanut OIT \u2014 stable at maintenance dose for 3 months. Today: exercise 1 hour after peanut dose \u2192 anaphylaxis. BP 74/46, HR 142, wheeze. This is cofactor-augmented food allergy reaction (COFAR). How does this change the OIT protocol going forward?",
+        "newData": {
+          "BP": "74/46",
+          "HR": "142",
+          "Cofactor": "Exercise 1h post-dose \u2014 COFAR reaction",
+          "OIT_Phase": "Maintenance \u2014 3 months stable",
+          "Note": "COFAR: exercise, NSAIDs, alcohol, stress lower reaction threshold; revise OIT protocol \u2014 no exercise 2h before and 2h after dose; dose reduction; cofactor avoidance counseling"
+        }
+      }
     }
   },
   "fpies-acute-v2": {
@@ -34155,6 +34443,19 @@ window.CRT_DATA = {
         "I have fever and my lymph nodes are swollen all over",
         "my face is swollen and I look yellow"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Organ Failure \u2014 Hepatitis and Nephritis",
+        "scenario": "Day 7 in hospital. ALT now 1,840 IU/L, bilirubin 8.2, creatinine 3.6. Allopurinol stopped on admission. Dermatology started systemic steroids. Patient jaundiced with flank tenderness. Transplant hepatology called.",
+        "newData": {
+          "ALT": "1,840 IU/L",
+          "Bilirubin": "8.2 mg/dL",
+          "Creatinine": "3.6 mg/dL",
+          "StereoidsStarted": "Day 5 \u2014 prednisone 1mg/kg",
+          "Note": "DRESS multi-organ involvement \u2014 liver and kidney most serious; systemic steroids indicated; monitor for reactivation of HHV-6/EBV; steroid taper over months"
+        }
+      }
     }
   },
   "sjs-ten-v2": {
@@ -34366,6 +34667,18 @@ window.CRT_DATA = {
         "my eyes are matted shut and my lips are cracking",
         "I started a new seizure medication three weeks ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Burn Unit Transfer \u2014 SCORTEN Prognostication",
+        "scenario": "BSA detachment now 32%. SCORTEN score: age 28, HR 128, glucose 256, BUN 22, BSA 32%, bicarbonate 18, malignancy absent = score 3. Burn center called. Ophthalmology evaluating bilateral eye involvement.",
+        "newData": {
+          "BSA": "32% detachment",
+          "SCORTEN": "3 (predicted mortality ~35%)",
+          "EyeInvolvement": "Bilateral \u2014 pseudomembrane formation",
+          "Note": "SCORTEN 3 = 35% predicted mortality; burn unit care standard; ophthalmology STAT for eye involvement \u2014 topical steroids \u00b1 amniotic membrane; stop causative drug; cyclosporine A controversial; IVIG does not improve outcomes"
+        }
+      }
     }
   },
   "sjsten-overlap-v2": {
@@ -34584,6 +34897,18 @@ window.CRT_DATA = {
         "blisters everywhere \u2014 mouth, eyes, genitals",
         "I have HIV and I'm on Bactrim"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HIV ART Restart \u2014 Drug Selection After TEN",
+        "scenario": "HIV patient recovering from TEN caused by trimethoprim-sulfamethoxazole. CD4 count 82. ART needs to be restarted but patient and ID team worried about drug reactions. How do you approach ART selection and TMP-SMX substitute for PCP prophylaxis?",
+        "newData": {
+          "CD4": "82",
+          "CausativeAgent": "TMP-SMX confirmed by skin biopsy",
+          "ARTStatus": "Held during TEN treatment",
+          "Note": "Post-TEN ART restart: integrase inhibitor-based regimen lowest hypersensitivity risk; avoid abacavir without HLA-B*57:01 testing; PCP prophylaxis: dapsone or atovaquone instead of TMP-SMX; patch test protocol for re-exposure controversial \u2014 do not rechallenge with causative agent"
+        }
+      }
     }
   },
   "hypertensive-emergency": {
@@ -36318,6 +36643,18 @@ window.CRT_DATA = {
         "I can't move my right side",
         "it happened when I was lifting something heavy"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hematoma Expansion \u2014 Restart Anticoagulation Decision",
+        "scenario": "Day 3: repeat CT shows hematoma stable at 3.4cm. Patient has mechanical mitral valve \u2014 was on warfarin INR 3.2 at admission. Neurology and cardiology disagreeing about when to restart anticoagulation.",
+        "newData": {
+          "Hematoma": "Stable 3.4cm on repeat CT",
+          "Indication": "Mechanical mitral valve \u2014 high thrombotic risk",
+          "INR_Admission": "3.2",
+          "Note": "Mechanical valve + ICH: restart anticoagulation 4-6 weeks post-ICH (APACHE-AF trial); bridge with heparin avoided; neurological stability and hematoma stability required; shared decision-making"
+        }
+      }
     }
   },
   "pe-v2": {
@@ -36488,6 +36825,18 @@ window.CRT_DATA = {
         "I have cancer and my leg swelled last week",
         "I ran out of my blood thinner and couldn't get to the pharmacy"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Post-Lytics \u2014 Anticoagulation Timing",
+        "scenario": "Systemic alteplase given 4 hours ago. BP recovered to 108/68. Echo: RV improving. Now: when and how do you start anticoagulation after successful systemic thrombolysis for massive PE?",
+        "newData": {
+          "BP": "108/68 (recovered)",
+          "Echo": "RV improving \u2014 D-sign resolving",
+          "TimeSinceLytics": "4 hours",
+          "Note": "Anticoagulation after lytics: start UFH infusion (no bolus) when aPTT <80 seconds (typically 2-4h post-alteplase); UFH preferred initially for monitoring; transition to DOAC or LMWH once stable; check fibrinogen before starting"
+        }
+      }
     }
   },
   "pe-v3": {
@@ -37202,6 +37551,19 @@ window.CRT_DATA = {
         "I stopped my water pill because I was going to the bathroom too much",
         "I feel like I'm drowning"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ECMO Candidacy \u2014 Refractory Cardiogenic Shock",
+        "scenario": "On norepinephrine 0.4 + dobutamine 10 + Impella CP \u2014 CI still 1.4. Lactate 7.2, mixed venous sat 42%. ECMO team evaluating. Patient is 58, no prior cardiac surgery, no significant comorbidities. What are the ECMO criteria and next steps?",
+        "newData": {
+          "CI": "1.4 L/min/m\u00b2",
+          "Lactate": "7.2 mmol/L",
+          "MVO2": "42%",
+          "Support": "Norepinephrine + dobutamine + Impella CP",
+          "Note": "VA-ECMO criteria: refractory shock despite 2 vasopressors + MCS; bridge to recovery, transplant, or LVAD; cannulation site decision (femoral vs central)"
+        }
+      }
     }
   },
   "acute-ischemic-stroke": {
@@ -37556,6 +37918,28 @@ window.CRT_DATA = {
         "the pain is getting worse and I feel confused",
         "my vision seems off on one side"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Herniation \u2014 Emergent Drainage Decision",
+        "scenario": "Day 4 on antibiotics: GCS dropped from 12 to 7. Repeat CT: abscess enlarged to 4.2cm, 9mm midline shift, effaced cisterns. Neurosurgery is calling. The abscess is in the left temporal lobe adjacent to Broca's area.",
+        "newData": {
+          "GCS": "7 (was 12)",
+          "CT": "Abscess 4.2cm (was 2.8cm), midline shift 9mm, effaced cisterns",
+          "Location": "Left temporal \u2014 near Broca's area",
+          "Note": "Failed medical therapy \u2014 stereotactic aspiration preferred over craniotomy; accept some aphasia risk vs herniation; dexamethasone controversial (may slow antibiotic penetration)"
+        }
+      },
+      "v3": {
+        "title": "Fungal Abscess \u2014 Immunocompromised Host",
+        "scenario": "New patient: liver transplant 3 months ago, on tacrolimus and prednisone. Multiple ring-enhancing lesions \u2014 CT shows 3 lesions. CSF: India ink positive. Cryptococcal antigen 1:1024. What changes about management compared to bacterial abscess?",
+        "newData": {
+          "Lesions": "Multiple ring-enhancing \u2014 3 lesions",
+          "CSF": "India ink positive, cryptococcal antigen 1:1024",
+          "Immunosuppression": "Tacrolimus + prednisone post-liver transplant",
+          "Note": "Cryptococcal CNS disease \u2014 amphotericin B + flucytosine induction; reduce immunosuppression cautiously; serial LP for ICP management; fluconazole maintenance"
+        }
+      }
     }
   },
   "alcoholic-ketoacidosis": {
@@ -38714,6 +39098,19 @@ window.CRT_DATA = {
         "my right side stopped working suddenly",
         "I was at the gym and it just happened"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Surgical Evacuation \u2014 Craniotomy Decision",
+        "scenario": "Repeat CT at 6h: hematoma expanded from 3.2cm to 5.1cm, IVH worsening, GCS now 8. Neurosurgery presenting two options: craniotomy for clot evacuation vs external ventricular drain for IVH only. BP currently 162/96.",
+        "newData": {
+          "GCS": "8 (was 12)",
+          "Hematoma": "5.1cm (expanded from 3.2cm)",
+          "IVH": "Worsening \u2014 bilateral lateral ventricles",
+          "BP": "162/96",
+          "Note": "STICH trial: surgical evacuation no clear benefit in deep ICH; superficial lobar ICH + deterioration may benefit; EVD for obstructive hydrocephalus; MISTIE for minimally invasive approaches"
+        }
+      }
     }
   },
   "alcohol-withdrawal-seizures": {
@@ -38870,6 +39267,30 @@ window.CRT_DATA = {
         "I've tried to stop before \u2014 it always gets bad",
         "I know I need help \u2014 I can't do this alone"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Delirium Tremens \u2014 Refractory Agitation",
+        "scenario": "48 hours later: benzodiazepine requirements escalating \u2014 lorazepam 80mg in 24 hours, still agitated, hallucinating, diaphoretic. CIWA-Ar 34. Intubation being discussed. Phenobarbital added. BP 188/116, HR 136, temperature 38.9\u00b0C.",
+        "newData": {
+          "LorazepamDose": "80mg in 24 hours \u2014 refractory",
+          "CIWA": "34",
+          "Temp": "38.9\u00b0C",
+          "BP": "188/116",
+          "HR": "136",
+          "Note": "Refractory DTs: phenobarbital 10mg/kg IV load; propofol infusion if intubated; dexmedetomidine adjunct; ICU level care"
+        }
+      },
+      "v3": {
+        "title": "Wernicke Encephalopathy \u2014 Missed Thiamine",
+        "scenario": "Day 3 post-seizure: patient now has nystagmus, lateral gaze palsy, ataxia, and confusion \u2014 classic triad. Glucose was given on admission but thiamine was not given first. MRI: mammillary body and thalamic signal changes.",
+        "newData": {
+          "Triad": "Nystagmus, ophthalmoplegia, ataxia \u2014 Wernicke triad",
+          "MRI": "Mammillary body + thalamic T2 hyperintensity",
+          "ThiamineGiven": "No \u2014 glucose given first",
+          "Note": "Wernicke encephalopathy \u2014 thiamine 500mg IV TID x3 days (high dose); glucose before thiamine precipitates in at-risk patients"
+        }
+      }
     }
   },
   "aki-differential": {
@@ -40770,6 +41191,19 @@ window.CRT_DATA = {
         "I skipped dialysis and I know that was wrong",
         "my EKG looks different than before \u2014 they're very worried"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Dual Emergency \u2014 Sequence of Treatment",
+        "scenario": "K+ 7.8 with peaked T waves AND simultaneous STEMI (ST elevation II, III, aVF). Two life-threatening emergencies. Cardiology wants to go to the cath lab immediately. Nephrology wants to dialyze first. You have to decide the sequence.",
+        "newData": {
+          "K+": "7.8 mEq/L",
+          "ECG": "Peaked T waves + ST elevation II/III/aVF",
+          "NephrologyAdvice": "Dialyze first",
+          "CardiologyAdvice": "Cath lab immediately",
+          "Note": "Concurrent STEMI + severe hyperK: treat both simultaneously; calcium gluconate immediately (cardiac protection); heparin, aspirin for STEMI; emergent dialysis can run during or immediately after PCI; do not delay either treatment"
+        }
+      }
     }
   },
   "deep-vein-thrombosis": {
@@ -41245,6 +41679,20 @@ window.CRT_DATA = {
         "I feel hot and I have chills during the transfusion",
         "my urine looks red \u2014 something is wrong with this blood"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "DIC \u2014 Coagulopathy from Hemolysis",
+        "scenario": "Despite stopping the transfusion, urine remains dark red. K+ 6.2, creatinine rising to 3.8. Now: oozing from IV sites, INR 3.2, fibrinogen 68. The hematologist is on the line asking about product replacement strategy.",
+        "newData": {
+          "Urine": "Persistent hemoglobinuria",
+          "K+": "6.2 mEq/L",
+          "Creatinine": "3.8 mg/dL (rising)",
+          "INR": "3.2",
+          "Fibrinogen": "68 mg/dL",
+          "Note": "AHTR \u2192 DIC \u2192 AKI; replace fibrinogen (cryo), FFP, platelets; aggressive hydration for myoglobinuria; treat hyperkalemia"
+        }
+      }
     }
   },
   "epidural-abscess": {
@@ -41954,6 +42402,18 @@ window.CRT_DATA = {
         "I missed dialysis for a week \u2014 I know that's bad",
         "my neighbor found me not making sense"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Dialysis Disequilibrium \u2014 First Session Complication",
+        "scenario": "First hemodialysis session \u2014 3 hours in. Patient suddenly seizes, becomes unresponsive. BP 182/108, HR 52. Dialysis nurse stops the session. What happened and how do you manage it?",
+        "newData": {
+          "SeizureOnset": "During first HD session \u2014 3 hours in",
+          "BP": "182/108",
+          "HR": "52",
+          "Note": "Dialysis disequilibrium syndrome: rapid urea clearance \u2192 cerebral edema; first session highest risk \u2014 use low-efficiency, slow first dialysis (BUN reduction <40%); treat with hypertonic saline or mannitol; shorter sessions for first 2-3 treatments"
+        }
+      }
     }
   },
   "viral-meningitis": {
@@ -42627,6 +43087,20 @@ window.CRT_DATA = {
         "I don't know what happened \u2014 I felt fine and then I was on the ground",
         "I'm confused and they said my temperature is very high"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Multi-Organ Failure \u2014 Rhabdomyolysis and AKI",
+        "scenario": "Core temp normalized after cooling. Now 12 hours later: CK 148,000, creatinine 4.8 (rising), urine output 12mL/hr despite 4L IV fluids. Liver enzymes: AST 2,400, ALT 1,800. Coags: INR 2.2.",
+        "newData": {
+          "CK": "148,000 IU/L",
+          "Creatinine": "4.8 mg/dL",
+          "UO": "12 mL/hr",
+          "AST": "2,400",
+          "INR": "2.2",
+          "Note": "Exertional heat stroke \u2192 multi-organ dysfunction \u2014 rhabdo-AKI (alkalinize urine, aggressive fluids), hepatic injury, DIC; ICU monitoring; dialysis criteria if oliguria persists"
+        }
+      }
     }
   },
   "tick-borne-illness": {
@@ -42976,6 +43450,18 @@ window.CRT_DATA = {
         "I missed my Parkinson medications in the hospital",
         "I'm rigid and my temperature is high \u2014 they think it might be NMS"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Distinguishing Septic NMS-Mimic vs True NMS",
+        "scenario": "ID and neurology disagreeing: is this NMS triggered by missed Parkinson medications (dopamine withdrawal) or a coincidental sepsis with rigidity from PD? CK 8,400. Temp 39.8\u00b0C. How does this distinction change your treatment?",
+        "newData": {
+          "CK": "8,400 IU/L",
+          "Temp": "39.8\u00b0C",
+          "Disagreement": "ID: treat sepsis; Neurology: dopamine withdrawal NMS",
+          "Note": "Distinction matters: dopamine-withdrawal NMS (Parkinson patients) = restart dopaminergic agents; medically manage rigidity; true NMS = stop offending agent; treat sepsis regardless \u2014 both can coexist; fever + rigidity + CK elevation = ICU level care in either case"
+        }
+      }
     }
   },
   "occupational-asthma-isocyanate": {
@@ -44136,6 +44622,17 @@ window.CRT_DATA = {
         "nothing is helping \u2014 I can't get comfortable",
         "I've had stomach pain after eating for months but this is completely different"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Post-Embolectomy \u2014 Short Bowel Outcome",
+        "scenario": "Operative finding: 180cm infarcted bowel resected, 80cm jejunum remaining. Patient in ICU post-op. Family asking about prognosis. TPN started. GI recommends intestinal rehabilitation program. How do you counsel the family about short bowel syndrome?",
+        "newData": {
+          "BowelRemaining": "80cm jejunum \u2014 short bowel syndrome",
+          "TPN": "Started post-op",
+          "Note": "Short bowel syndrome threshold ~100cm; teduglutide for GLP-2 analogue therapy; intestinal transplant consideration; TPN dependency counseling"
+        }
+      }
     }
   },
   "phlegmasia-cerulea-dolens": {
@@ -44289,6 +44786,19 @@ window.CRT_DATA = {
         "the pain is unbearable \u2014 worse than anything I've felt",
         "it happened while my blood thinners were on hold"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Catheter-Directed Thrombolysis \u2014 Bleeding Risk",
+        "scenario": "CDT initiated 12 hours ago \u2014 tPA 0.5mg/hr infusing. Leg improving slightly \u2014 less cyanosis. But: Hgb dropped from 12.1 to 8.6. CT abdomen: retroperitoneal hematoma 6cm. Continue CDT vs stop vs mechanical thrombectomy?",
+        "newData": {
+          "Hgb": "8.6 (was 12.1)",
+          "RetroperitonealHematoma": "6cm on CT",
+          "CDT_Duration": "12 hours",
+          "LegImprovement": "Partial",
+          "Note": "Major bleeding on CDT \u2014 stop tPA; mechanical thrombectomy as alternative; surgical thrombectomy if limb threatened; transfuse; decision based on limb viability vs bleeding severity"
+        }
+      }
     }
   },
   "lethal-catatonia": {
@@ -44442,6 +44952,19 @@ window.CRT_DATA = {
         "now she has a fever and she's rigid",
         "she was catatonic and now she seems much sicker"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ECT Decision \u2014 Benzodiazepine-Refractory Catatonia",
+        "scenario": "Lorazepam 8mg/day \u2014 catatonia partially responsive but autonomic instability persists. Temp 40.2\u00b0C, HR 136, BP labile 90/60 to 180/110. Psychiatry recommending ECT. ICU team concerned about anesthetic risk in hemodynamically unstable patient.",
+        "newData": {
+          "LorazepamDose": "8mg/day \u2014 partial response",
+          "Temp": "40.2\u00b0C",
+          "HR": "136",
+          "BPlabile": "90/60 to 180/110",
+          "Note": "ECT is definitive treatment for benzodiazepine-refractory catatonia \u2014 superior to lorazepam alone; anesthetic risk acceptable given life-threatening presentation; rapid response expected"
+        }
+      }
     }
   },
   "severe-hyperkalemia-from-missed-dialysis": {
@@ -45110,6 +45633,17 @@ window.CRT_DATA = {
         "I can feel it crackling when you press on it",
         "I feel like I'm dying \u2014 fever and the pain is unbearable"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Amputation vs Limb Salvage \u2014 Clostridial Myonecrosis",
+        "scenario": "Intraoperative: extensive myonecrosis of entire lower leg. Crepitus to mid-thigh. Gas in fascial planes on intraop imaging. Vascular surgeon and orthopedics both present. Perfusing tissue ends at mid-thigh. Decision: above-knee amputation vs continued debridement.",
+        "newData": {
+          "IntraopFinding": "Complete lower leg myonecrosis, gas to mid-thigh",
+          "VascularInflow": "Intact at mid-thigh",
+          "Note": "Gas gangrene with extensive myonecrosis \u2014 amputation when viable tissue plane identified; above-knee preferred to ensure clean margins; hyperbaric oxygen if available as adjunct to surgery"
+        }
+      }
     }
   },
   "acute-mi-with-av-block": {
@@ -45262,6 +45796,29 @@ window.CRT_DATA = {
         "I feel faint and my heart is beating slow",
         "the pain started an hour ago \u2014 I didn't want to bother anyone"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pacing Failure \u2014 Transcutaneous to Transvenous",
+        "scenario": "Transcutaneous pacing capturing inconsistently \u2014 patient grimacing with each pace, HR 38 underlying. BP 72/42. Capture threshold 90mA. Cardiology says transvenous pacing needed but fluoroscopy suite is 8 minutes away. What do you do in the meantime?",
+        "newData": {
+          "HR": "38 underlying",
+          "TCPCapture": "Inconsistent \u2014 90mA threshold",
+          "BP": "72/42",
+          "Note": "Atropine 0.5-1mg IV while awaiting transvenous; dopamine/epinephrine if refractory; ensure adequate sedation for TCP; confirm RV infarct \u2014 fluid-sensitive, avoid nitrates"
+        }
+      },
+      "v3": {
+        "title": "RV Infarct \u2014 Volume vs Pressors",
+        "scenario": "Inferior STEMI reperfused \u2014 but STE in V3R/V4R confirms RV infarct. BP 78/44 despite 1.5L IVF. HR 44 (CHB). Patient received furosemide in the field for 'pulmonary edema' \u2014 JVP elevated, lung fields clear on auscultation.",
+        "newData": {
+          "BP": "78/44",
+          "JVP": "Elevated \u2014 14 cmH2O",
+          "LungFields": "Clear bilaterally",
+          "FurosemideGiven": "40mg in field",
+          "Note": "RV infarct: volume-dependent \u2014 diuretics harmful; IVF cautiously; dobutamine for RV failure; avoid anything reducing preload (nitrates, morphine); pacing for CHB"
+        }
+      }
     }
   },
   "crohn-flare": {
@@ -45744,6 +46301,30 @@ window.CRT_DATA = {
         "I feel weak and I'm bruising easily",
         "the doctor said my kidney function dropped suddenly"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Eculizumab Decision \u2014 Cost and Access",
+        "scenario": "Diagnosis confirmed: aHUS, complement-mediated. Hematology recommends eculizumab. Pharmacy calls: cost $500,000/year, insurance authorization pending 3-5 business days. Creatinine 6.8 and rising. Patient needs dialysis today. How do you proceed?",
+        "newData": {
+          "Creatinine": "6.8 mg/dL (rising)",
+          "Diagnosis": "aHUS confirmed \u2014 complement-mediated TMA",
+          "EculizumabStatus": "Authorization pending 3-5 days",
+          "Cost": "$500,000/year",
+          "Note": "Initiate dialysis; contact manufacturer patient access program; do not delay treatment \u2014 renal outcomes worsen with delay; plasmapheresis as bridge is controversial but used"
+        }
+      },
+      "v3": {
+        "title": "Relapse on Eculizumab \u2014 Complement Escape",
+        "scenario": "Patient on eculizumab for 6 months \u2014 doing well. Now: microangiopathic changes recurred \u2014 Hgb 7.2, platelets 48,000, Cr 3.1. Complement level C3 low. Complement gene panel found C3 mutation \u2014 not C5. Why might eculizumab be failing?",
+        "newData": {
+          "Hgb": "7.2 g/dL",
+          "Platelets": "48,000",
+          "Creatinine": "3.1 mg/dL",
+          "GeneticFinding": "C3 gain-of-function mutation",
+          "Note": "Eculizumab targets C5 \u2014 C3 mutations cause upstream escape; ravulizumab (long-acting C5 inhibitor) or avacopan (C5a inhibitor); multidisciplinary rare disease referral"
+        }
+      }
     }
   },
   "superior-vena-cava-syndrome": {
@@ -46081,6 +46662,20 @@ window.CRT_DATA = {
         "I have cancer and I think it's spread to my spine",
         "I lost control of my bladder this morning"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Radiation vs Surgery \u2014 SPORT Trial Application",
+        "scenario": "Known prostate cancer, bone metastases. T10 epidural lesion \u2014 SINS score 14 (unstable). Motor deficits bilateral 3/5, bowel/bladder intact. Radiation oncology offers SBRT in 24 hours. Spine surgery can operate in 6 hours. Dexamethasone given.",
+        "newData": {
+          "Tumor": "Prostate cancer \u2014 radiosensitive",
+          "SINS": "14 (unstable spine)",
+          "MotorDeficit": "Bilateral 3/5 lower extremity",
+          "SBRT_ETA": "24 hours",
+          "Surgery_ETA": "6 hours",
+          "Note": "SPORT trial: surgery then RT superior to RT alone in ambulatory patients with 1 spinal level; radiosensitive tumor (prostate) may respond to RT alone; instability (SINS \u22657) favors surgical stabilization first"
+        }
+      }
     }
   },
   "dementia-with-acute-delirium": {
@@ -46540,6 +47135,20 @@ window.CRT_DATA = {
         "I have cancer and my back has been bad for weeks",
         "I felt like I sat on something \u2014 numbness in that area"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Emergency Decompression \u2014 Timing and Prognosis",
+        "scenario": "MRI confirms epidural metastasis T12-L1 compressing conus \u2014 known breast cancer. Bilateral leg weakness 2/5, saddle anesthesia, urinary retention. Radiation oncology says 24 hours to set up. Spine surgery can operate in 4 hours. Steroids given. Which do you choose?",
+        "newData": {
+          "MRI": "T12-L1 epidural metastasis, conus compression",
+          "Weakness": "Bilateral 2/5",
+          "SaddleAnesthesia": "Present",
+          "StereoRT_ETA": "24 hours",
+          "Surgery_ETA": "4 hours",
+          "Note": "Surgical decompression preferred if <24h deficit onset and surgeon available \u2014 SPORT trial; steroids (dexamethasone 10mg load) while deciding; radiation for radiosensitive tumors"
+        }
+      }
     }
   },
   "acute-mi": {
@@ -47834,6 +48443,29 @@ window.CRT_DATA = {
         "the foot is ice cold and I can't move it",
         "it looks completely different from the other leg"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Post-Embolectomy \u2014 Reperfusion Injury",
+        "scenario": "Successful femoral embolectomy \u2014 Fogarty catheter retrieved large clot, pulses returned. 90 minutes post-op: K+ 6.8, pH 7.18, CK 24,000. Leg becoming tense \u2014 compartment syndrome developing. Two problems, one patient.",
+        "newData": {
+          "K+": "6.8 mEq/L",
+          "pH": "7.18",
+          "CK": "24,000 IU/L",
+          "LegAppearance": "Tense, swollen \u2014 compartment pressure 44 mmHg",
+          "Note": "Reperfusion injury \u2014 hyperkalemia + acidosis + rhabdo + compartment syndrome; fasciotomy + medical management simultaneously"
+        }
+      },
+      "v3": {
+        "title": "Embolus Source \u2014 AF and Long-Term Anticoagulation",
+        "scenario": "Post-embolectomy recovery. Echo shows large thrombus in LAA \u2014 atrial fibrillation confirmed. Vascular surgery asks when to start anticoagulation, and for how long. INR currently 1.1, patient is post-op day 1.",
+        "newData": {
+          "Echo": "Large LAA thrombus \u2014 AF confirmed",
+          "PostOpDay": "1",
+          "INR": "1.1",
+          "Note": "Anticoagulation timing after embolectomy: heparin typically 24-48h post-op if hemostasis adequate; long-term anticoagulation for AF; discussion of DOAC vs warfarin"
+        }
+      }
     }
   },
   "aortic-aneurysm": {
@@ -50882,6 +51514,18 @@ window.CRT_DATA = {
         "I feel like something is very wrong inside",
         "the x-ray showed something in my chest"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "TEVAR \u2014 Endoleak and Spinal Cord Protection",
+        "scenario": "TEVAR placed for Grade III aortic injury. Post-op day 1: patient moves legs, then 4 hours later cannot feel or move either leg. MRI: T6-T9 cord ischemia. CSF drain was not placed pre-op. Surgeon asking about emergent CSF drainage.",
+        "newData": {
+          "NewFinding": "Paraplegia post-TEVAR \u2014 delayed onset",
+          "MRI": "T6-T9 spinal cord ischemia",
+          "CSFDrain": "Not placed pre-op",
+          "Note": "Delayed spinal cord ischemia post-TEVAR \u2014 emergent CSF drainage (target pressure <10 mmHg), permissive HTN (MAP 85-95), avoid hypotension; recovery possible if <12h"
+        }
+      }
     }
   },
   "acute-anterior-uveitis": {
@@ -51197,6 +51841,19 @@ window.CRT_DATA = {
         "we've given blood and she's still not clotting",
         "her coags are all over the place"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Fibrinogen Replacement \u2014 Cryo vs RiaSTAP",
+        "scenario": "DIC panel: fibrinogen 42 mg/dL (critically low), INR 3.8, platelets 38,000. 10 units cryoprecipitate given \u2014 fibrinogen now 88 mg/dL. Still bleeding from all sites. Hematology asking about fibrinogen concentrate vs more cryo.",
+        "newData": {
+          "Fibrinogen_Pre": "42 mg/dL",
+          "Fibrinogen_Post10Cryo": "88 mg/dL",
+          "INR": "3.8",
+          "Platelets": "38,000",
+          "Note": "Target fibrinogen >150 in DIC with hemorrhage; fibrinogen concentrate (RiaSTAP) more predictable dosing than cryo; treat underlying cause \u2014 source control is key"
+        }
+      }
     }
   },
   "acute-mi-dyspnea": {
@@ -51512,6 +52169,30 @@ window.CRT_DATA = {
         "I had a mild pancreatitis before but this is nothing like that",
         "I have fever and I can't move without the pain getting worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Infected Necrosis \u2014 Drainage Decision",
+        "scenario": "Day 12 in ICU. CT: 60% pancreatic necrosis, gas in necrotic collection \u2014 infected necrosis confirmed. WBC 28,000, temperature 39.6\u00b0C. Interventional radiology and surgery both offering options: percutaneous drainage vs step-up endoscopic vs surgical necrosectomy.",
+        "newData": {
+          "CT": "60% pancreatic necrosis, gas \u2014 infected",
+          "WBC": "28,000",
+          "Temp": "39.6\u00b0C",
+          "Day": "12",
+          "Note": "Step-up approach: percutaneous or endoscopic drainage first; surgical necrosectomy if fails; delay surgery to allow walled-off necrosis (>4 weeks)"
+        }
+      },
+      "v3": {
+        "title": "Abdominal Compartment Syndrome",
+        "scenario": "Day 4: massive resuscitation (18L crystalloid). Abdomen tense. Bladder pressure 32 mmHg. Tidal volumes declining on ventilator \u2014 plateau pressure 38. Urine output 8mL/hr. Surgeon says this is ACS \u2014 decompressive laparotomy needed.",
+        "newData": {
+          "BladderPressure": "32 mmHg (ACS >20)",
+          "PlateauPressure": "38 cmH2O",
+          "UO": "8 mL/hr",
+          "Resuscitation": "18L crystalloid over 4 days",
+          "Note": "Abdominal compartment syndrome \u2014 decompressive laparotomy; reassess fluid strategy; temporary abdominal closure"
+        }
+      }
     }
   },
   "alcoholrelated-pancreatitis": {
@@ -56946,6 +57627,17 @@ window.CRT_DATA = {
         "we're giving product but she keeps bleeding",
         "her coags are terrible and getting worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "MTP Ratios \u2014 1:1:1 vs Lab-Guided",
+        "scenario": "Massive transfusion ongoing \u2014 14 units pRBC, 10 units FFP, 2 pheresis platelets so far. TEG/ROTEM now available. Clot amplitude low, fibrinogen 68. Anesthesia asking whether to switch from empiric 1:1:1 to ROTEM-guided therapy.",
+        "newData": {
+          "ProductsGiven": "14 pRBC, 10 FFP, 2 apheresis platelets",
+          "ROTEM": "Low clot amplitude, fibrinogen 68",
+          "Note": "ROTEM-guided MTP reduces FFP overuse; add cryoprecipitate for fibrinogen <150; TXA 1g if within 3h of injury; calcium after every 4 units pRBC"
+        }
+      }
     }
   },
   "corneal-abrasionkeratitis": {
@@ -60729,6 +61421,17 @@ window.CRT_DATA = {
         "I've had abdominal pain before but this is completely different \u2014 constant",
         "I'm vomiting bile and my belly is swelling"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Short Gut Aftermath \u2014 TPN and Rehab",
+        "scenario": "OR: 140cm infarcted bowel resected \u2014 60cm jejunum remaining. Anastomosis created. Patient in SICU day 3. TPN started. GI asking about management of short bowel syndrome and timing of initiation of oral feeds.",
+        "newData": {
+          "BowelRemaining": "60cm jejunum \u2014 short bowel syndrome",
+          "TPN": "Running day 3",
+          "Note": "Short bowel: begin enteral feeds early even in short gut \u2014 promotes adaptation; teduglutide (GLP-2) increases villous height and reduces TPN dependence; close monitoring of electrolytes, vitamins; intestinal rehabilitation program referral; transplant if TPN-dependent long-term"
+        }
+      }
     }
   },
   "dvt-with-phlegmasia": {
@@ -61049,6 +61752,18 @@ window.CRT_DATA = {
         "I can't tell if I'm making any urine",
         "I'm in the ICU and the belly pain started yesterday \u2014 it's subtle but concerning"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Vasopressor Dilemma \u2014 Gut vs Pressure",
+        "scenario": "Patient on norepinephrine 0.5 mcg/kg/min for cardiogenic shock. Bowel ischemia attributed to low-flow state. Intensivist asks: reduce vasopressor to improve splanchnic flow vs maintain MAP for cardiac perfusion. Lactate 6.2.",
+        "newData": {
+          "Norepinephrine": "0.5 mcg/kg/min",
+          "Lactate": "6.2 mmol/L",
+          "MAP": "58 mmHg",
+          "Note": "NOMI management: treat underlying cause (improve CO); vasopressin has less splanchnic vasoconstriction than norepinephrine; avoid vasopressin alone; intra-arterial papaverine via angiography for vasospasm; surgery only if peritonitis or perforation"
+        }
+      }
     }
   },
   "xla-brutons": {
@@ -63841,6 +64556,16 @@ window.CRT_DATA = {
         "she was unresponsive when we found her",
         "there are burns and her heart stopped"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Mass Casualty \u2014 Reverse Triage",
+        "scenario": "5 victims from same lightning strike at athletic event. Two in cardiac arrest (pulseless). Three conscious but confused, with burns. Standard MCI protocol says treat the living first. But lightning arrest is uniquely reversible \u2014 what is the correct triage principle here?",
+        "newData": {
+          "Victims": "5 total \u2014 2 in arrest, 3 conscious",
+          "Note": "Reverse triage for lightning MCI \u2014 treat the apparently dead first; lightning arrest is uniquely survivable with early CPR/defibrillation; those walking away are relatively stable; no ongoing electrical hazard once lightning has passed"
+        }
+      }
     }
   },
   "coral-snake-envenomation": {
@@ -64269,6 +64994,17 @@ window.CRT_DATA = {
         "I've lost 30 pounds because I was afraid to eat",
         "this is different \u2014 it doesn't go away anymore"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Chronic Mesenteric Ischemia \u2014 Staged Revascularization",
+        "scenario": "Acute-on-chronic presentation. CT shows SMA stenosis 95% with acute superimposed thrombus. Vascular surgery says this patient needs revascularization \u2014 endovascular stenting vs surgical bypass. The patient is hemodynamically stable for now. What are the considerations?",
+        "newData": {
+          "CTA": "SMA 95% stenosis + acute thrombus",
+          "Hemodynamics": "Stable \u2014 BP 118/74",
+          "Note": "Acute-on-chronic: endovascular first (lower risk) if no peritonitis; surgical bypass if endovascular fails or if bowel resection needed simultaneously"
+        }
+      }
     }
   },
   "acute-thrombotic-occlusion": {
@@ -64406,6 +65142,18 @@ window.CRT_DATA = {
         "the bypass I had before \u2014 I think it failed",
         "I can't move my foot and there's no pulse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Bypass Occlusion \u2014 Thrombectomy Decision",
+        "scenario": "Femoral-popliteal bypass from 3 years ago \u2014 now occluded. Thrombolysis attempted for 8 hours: ankle-brachial index unchanged at 0.1. Limb cool, paresthesias developing. Vascular surgeon asks: continue lysis vs operative thrombectomy vs amputation.",
+        "newData": {
+          "ABI": "0.1 (critical ischemia)",
+          "ThrombolysisDuration": "8 hours \u2014 no improvement",
+          "LimbFindings": "Cool, paresthetic, motor intact (just)",
+          "Note": "Failed thrombolysis in threatened limb \u2014 operative thrombectomy indicated; amputation only if non-viable on table"
+        }
+      }
     }
   },
   "vascular-injury-with-limb-ischemia": {
@@ -64560,6 +65308,17 @@ window.CRT_DATA = {
         "the limb is cold and I can't move it",
         "there's active bleeding and I don't feel my foot"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Damage Control Vascular \u2014 Shunt vs Definitive Repair",
+        "scenario": "Gunshot wound to right thigh \u2014 SFA transaction. Patient in hemorrhagic shock. BP 62/38 after 2L crystalloid. Vascular surgeon offers: immediate definitive repair (complex) vs damage control shunt + stabilize + return to OR. Orthopedics says there's also a femur fracture.",
+        "newData": {
+          "BP": "62/38",
+          "Injury": "SFA transaction + femur fracture",
+          "Note": "Damage control vascular: temporary intravascular shunt to restore flow; external fixation for fracture; ICU resuscitation to correct coagulopathy/hypothermia/acidosis; definitive repair in 24-48h; warm ischemia time <6h"
+        }
+      }
     }
   },
   "incarcerated-hernia-with-strangulation": {
@@ -64715,6 +65474,17 @@ window.CRT_DATA = {
         "I have fever and the skin over it looks dark",
         "I can't push it back in and it's been stuck for 8 hours"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Non-Viable Bowel \u2014 Resection vs Risk",
+        "scenario": "Intraoperative: 30cm bowel with questionable viability after hernia reduction. BP 74/44 on vasopressors. Surgeon considers resection vs 'warm and watch.' Anesthesia says patient is a poor operative risk \u2014 every additional minute matters.",
+        "newData": {
+          "BowelAppearance": "30cm questionable \u2014 dusky, peristalsis reduced",
+          "BP": "74/44 on vasopressor",
+          "Note": "Questionable bowel viability intraop: warm saline, wait 10 min; doppler assessment; if still questionable in unstable patient \u2014 resect to avoid missed ischemia leading to perforation; damage control if hemodynamically compromised"
+        }
+      }
     }
   },
   "incarcerated-incisional-hernia": {
@@ -65626,6 +66396,18 @@ window.CRT_DATA = {
         "every time we think he's better he gets another infection",
         "the immunologist said he has no T cells, no B cells, no NK cells"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Gene Therapy vs HSCT \u2014 Treatment Decision",
+        "scenario": "ADA-SCID confirmed. Infant 4 months old, no matched sibling donor available. Options: enzyme replacement (PEG-ADA), haploidentical HSCT from parent, or gene therapy (approved in Europe, compassionate use in US). Family asking which to choose.",
+        "newData": {
+          "Diagnosis": "ADA-SCID confirmed",
+          "Age": "4 months",
+          "MatchedSiblingDonor": "None available",
+          "Note": "ADA-SCID: gene therapy (Strimvelis/lentiviral) gold standard if available \u2014 80%+ correction, no GVHD; PEG-ADA bridges to definitive therapy; haploidentical HSCT has high GVHD risk; early treatment before infections improves outcomes"
+        }
+      }
     }
   },
   "cgd-xlinked": {
@@ -66706,6 +67488,17 @@ window.CRT_DATA = {
         "her INR is 2.8 and platelets are 48,000",
         "we've given FFP and platelets but she keeps bleeding"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Factor VIIa \u2014 Off-Label Use Decision",
+        "scenario": "Still bleeding after FFP, cryo, platelets. Hematologist suggests recombinant Factor VIIa (rFVIIa) off-label. Surgeon is asking about thrombotic risk given the patient had a PE 2 months ago and is anticoagulated.",
+        "newData": {
+          "ProductsGiven": "FFP x8, cryo x10, platelets x2 \u2014 still bleeding",
+          "PriorPE": "2 months ago \u2014 on anticoagulation (held for surgery)",
+          "Note": "rFVIIa: effective hemostasis but thrombotic risk 5-10%; prior VTE is relative contraindication; consider only as rescue; correct pH >7.2 and temp >35\u00b0C first for it to work; discuss with hematology and surgery together"
+        }
+      }
     }
   },
   "necrotizing-fasciitis-of-neck": {
@@ -66861,6 +67654,17 @@ window.CRT_DATA = {
         "I had a tooth pulled and then an abscess and now this",
         "I feel terrible \u2014 fever and I can feel something crunchy in my neck"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Tracheostomy \u2014 Airway Commitment",
+        "scenario": "Post-operative day 2. Neck wound open and packing in place. Wound extends to thoracic inlet. Anesthesia says extubation unsafe for at least 2 weeks given ongoing edema and wound proximity to airway. ENT asks: early tracheostomy vs prolonged intubation.",
+        "newData": {
+          "WoundExtent": "Neck to thoracic inlet",
+          "EdemaStatus": "Significant \u2014 airway at risk",
+          "Note": "Early tracheostomy in extended neck NecFasc \u2014 reduces laryngeal injury from prolonged intubation, facilitates wound care, allows earlier sedation wean; percutaneous vs surgical depending on wound proximity"
+        }
+      }
     }
   },
   "abpa-aspergillus": {
@@ -68484,6 +69288,30 @@ window.CRT_DATA = {
         "her roommate said there were lots of pill bottles",
         "she's been very depressed lately"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Toxidrome Identification \u2014 Unknown Agents",
+        "scenario": "GCS 8. Exam: miosis, bradycardia HR 42, RR 8, excessive secretions, bowel sounds hyperactive. Multiple pill bottles found \u2014 none labeled. BP 82/50. Poison control on the line asking for the toxidrome.",
+        "newData": {
+          "GCS": "8",
+          "HR": "42",
+          "RR": "8",
+          "Pupils": "Miotic \u2014 bilateral 2mm",
+          "Secretions": "Excessive \u2014 SLUDGE pattern",
+          "Note": "Cholinergic toxidrome (SLUDGE/DUMBELS) \u2014 organophosphate or carbamate; atropine until secretions dry (may need massive doses); pralidoxime within 24h for organophosphate; intubate for airway secretions"
+        }
+      },
+      "v3": {
+        "title": "Acetaminophen Level \u2014 NAC Nomogram",
+        "scenario": "Labs back: APAP level 280 mcg/mL at 4 hours post-ingestion. INR 1.1, AST 42 (normal). Poison control asks: start NAC now or wait for nomogram confirmation? The Rumack-Matthew nomogram is available.",
+        "newData": {
+          "APAP_Level": "280 mcg/mL at 4h post-ingestion",
+          "INR": "1.1",
+          "AST": "42 (normal)",
+          "Note": "Rumack-Matthew: 280 mcg/mL at 4h = treatment line (>150 = treat); start NAC immediately; normal labs at 4h don't rule out toxicity \u2014 NAC most effective within 8h; 21-hour IV protocol"
+        }
+      }
     }
   },
   "metabolic": {
