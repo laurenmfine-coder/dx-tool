@@ -641,6 +641,19 @@ window.CRT_DATA = {
           "Note": "Sgarbossa-positive LBBB = STEMI equivalent; if PCI >120 min delay, thrombolytics indicated (ACC/AHA); door-to-needle <30 min target; contraindication checklist; transfer for rescue PCI regardless"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 77-year-old man with chest pressure and a known abnormal ECG.",
+      "hpiOnset": "About ninety minutes ago \u2014 pressure in my chest, comes and goes but it's been mostly constant. My cardiologist told me I have a bundle branch block and my ECG always looks abnormal.",
+      "hpiProgression": "The pressure is worse now and it's going to my left shoulder. I'm very short of breath. I've had this ECG abnormality for years but this pain is new.",
+      "hpiAssociatedSymptoms": "Left shoulder pain. Shortness of breath. I feel clammy. My heart failure has been stable for years but something is different today.",
+      "hpiLocationPattern": "Pressure right in the center of my chest, going to the left shoulder. Deep \u2014 not sharp.",
+      "pmh": "Heart failure with reduced EF \u2014 35%. Left bundle branch block for ten years. Hypertension. Type 2 diabetes. Prior CABG fifteen years ago.",
+      "medications": "Carvedilol. Lisinopril. Spironolactone. Furosemide. Aspirin. Insulin glargine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father died of a heart attack at 60.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired engineer."
     }
   },
   "sepsis-v2": {
@@ -2110,6 +2123,19 @@ window.CRT_DATA = {
           "Note": "Prolonged cross-clamp: renal and visceral ischemia; consider cold renal perfusion; assess for suprarenal clamping need; damage control \u2014 complete anastomosis then restore flow to address acidosis before further dissection"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 74-year-old man with sudden tearing abdominal pain.",
+      "hpiOnset": "About an hour ago \u2014 I was just sitting watching television \u2014 and this pain just hit me. In my belly and straight through to my back.",
+      "hpiProgression": "It has not let up at all. It's the worst pain I have ever had in my life. Tearing \u2014 like something is ripping inside me.",
+      "hpiAssociatedSymptoms": "I feel lightheaded. My legs \u2014 the left one feels strange, different from the right. I almost passed out getting into the car.",
+      "hpiLocationPattern": "Right in the middle of my abdomen and straight through to my lower back. Like a knife through the middle.",
+      "pmh": "High blood pressure for twenty years. I smoked for thirty years \u2014 quit fifteen years ago. My doctor found something with my aorta about two years ago and said to watch it.",
+      "medications": "Lisinopril. Atorvastatin. Aspirin.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "My father had something wrong with his aorta.",
+      "socialSmokingAlcohol": "Former smoker \u2014 thirty pack-year history. Rare alcohol.",
+      "socialOccupation": "Retired plumber."
     }
   },
   "pe-v1": {
@@ -3331,6 +3357,19 @@ window.CRT_DATA = {
           "Note": "Rebleed \u2014 20% risk in first 24h, highest before securing aneurysm"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 49-year-old woman who came in because of the worst headache of her life.",
+      "hpiOnset": "I was in the gym \u2014 I was lifting weights \u2014 and this headache just EXPLODED. Like something burst in my head. It was instant. The worst pain I have ever felt.",
+      "hpiProgression": "That was about two hours ago. It hasn't gotten any better. It's still \u2014 I've never felt anything like it before.",
+      "hpiAssociatedSymptoms": "I vomited twice right after it started. And the light in here is killing me. My neck is starting to feel stiff.",
+      "hpiLocationPattern": "It's everywhere \u2014 the whole back of my head and my neck. It came on in a second, like a thunderclap.",
+      "pmh": "High blood pressure \u2014 controlled, my doctor says. I get regular headaches but this is completely different.",
+      "medications": "Lisinopril. Birth control pill.",
+      "allergies": "Codeine \u2014 makes me sick.",
+      "familyHistory": "My uncle died of a brain aneurysm.",
+      "socialSmokingAlcohol": "I smoke half a pack a day. I drink wine on weekends.",
+      "socialOccupation": "High school principal. I was exercising when this hit."
     }
   },
   "meningitis-v1": {
@@ -4935,6 +4974,19 @@ window.CRT_DATA = {
           "Note": "Pediatric skull more elastic \u2014 larger hematoma before fracture visible on XR"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 19-year-old college student brought in after a fall.",
+      "hpiOnset": "I fell off my bike \u2014 hit my head on the pavement. I was out for maybe a minute and then I woke up. I felt fine \u2014 I really felt fine.",
+      "hpiProgression": "But for the last hour the headache has been getting worse and worse. And I just \u2014 something feels wrong. I feel sleepy.",
+      "hpiAssociatedSymptoms": "I vomited once. My right pupil \u2014 the nurse just said something about it. I'm really sleepy.",
+      "hpiLocationPattern": "Right side of my head where I hit. The headache is the worst now \u2014 it's getting worse by the minute.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing significant.",
+      "socialSmokingAlcohol": "I drink socially. I don't smoke.",
+      "socialOccupation": "College junior. Biochemistry major."
     }
   },
   "vt-syncope": {
@@ -6969,6 +7021,19 @@ window.CRT_DATA = {
           "Note": "CICO algorithm \u2014 front of neck access"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 38-year-old man who can barely swallow or speak.",
+      "hpiOnset": "This came on fast \u2014 within hours. I woke up this morning with a sore throat and by noon I couldn't swallow my saliva. I'm drooling because swallowing hurts too much.",
+      "hpiProgression": "My voice has changed \u2014 muffled, like I'm talking with a hot potato in my throat. I'm leaning forward because it's easier to breathe this way.",
+      "hpiAssociatedSymptoms": "High fever. I can hear myself stridor when I breathe in. I'm scared \u2014 this is the worst throat pain I've ever had.",
+      "hpiLocationPattern": "Deep throat pain \u2014 not like a regular sore throat. It's inside, at the back, and swallowing is \u2014 I cannot swallow.",
+      "pmh": "Healthy. No previous throat problems.",
+      "medications": "None.",
+      "allergies": "Amoxicillin \u2014 hives.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I vape. I drink occasionally.",
+      "socialOccupation": "Teacher."
     }
   },
   "intussusception": {
@@ -7757,6 +7822,19 @@ window.CRT_DATA = {
           "Note": "TEVAR failure with visceral malperfusion \u2014 open surgical conversion or fenestration procedure"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 55-year-old man with sudden tearing back pain.",
+      "hpiOnset": "About three hours ago \u2014 out of nowhere \u2014 a tearing pain exploded in my back, between my shoulder blades. Like my back was being split in two. Nothing I do helps it.",
+      "hpiProgression": "It started between my shoulders and has moved down toward my lower back over the past two hours. Both legs started feeling strange about an hour ago.",
+      "hpiAssociatedSymptoms": "Both legs feel weak and numb \u2014 different from each other. I feel lightheaded. The pain is different from any back pain I've had before \u2014 it tears.",
+      "hpiLocationPattern": "Starts between the shoulder blades and goes down the spine to the lower back. Tearing \u2014 not a muscle thing.",
+      "pmh": "High blood pressure for years \u2014 never well controlled. My father had Marfan syndrome and died of an aorta problem.",
+      "medications": "Amlodipine. Metoprolol. I don't always take them.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father died of aortic dissection. Marfan syndrome suspected in our family.",
+      "socialSmokingAlcohol": "I smoke a pack a day. Occasional alcohol.",
+      "socialOccupation": "Construction supervisor."
     }
   },
   "anaphylaxis": {
@@ -9793,6 +9871,19 @@ window.CRT_DATA = {
           "Note": "ESBL de-escalation: ertapenem acceptable for ESBL if source controlled and clinically improved; avoid pip-tazo for ESBL bloodstream infection (inoculum effect); 14 days total for bacteremic UTI; outpatient parenteral antibiotics (OPAT) criteria"
         }
       }
+    },
+    "patientScript": {
+      "identity": "an 81-year-old woman brought in from a nursing home.",
+      "hpiOnset": "I don't feel right. The nurses said I wasn't acting like myself this morning \u2014 I just feel weak and confused.",
+      "hpiProgression": "I've had a bit of burning when I urinate for a few days but I didn't want to bother anyone. Now I feel very cold and shaky.",
+      "hpiAssociatedSymptoms": "I feel dizzy when I sit up. My back hurts. I don't know \u2014 everything feels off today.",
+      "hpiLocationPattern": "Burning with urination and a dull ache in my lower back. And I feel very cold despite the blankets.",
+      "pmh": "Dementia \u2014 mild. Diabetes. A hip replacement two years ago. I use a walker.",
+      "medications": "Metformin. Donepezil. Aspirin. Amlodipine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "I don't remember.",
+      "socialSmokingAlcohol": "I don't smoke or drink. I live at Sunrise Care Center.",
+      "socialOccupation": "Retired. I have a daughter who visits on Sundays."
     }
   },
   "neutropenic-fever": {
@@ -11264,6 +11355,19 @@ window.CRT_DATA = {
           "Note": "Diverting colostomy reduces recontamination \u2014 can be done same OR; hyperbaric oxygen as adjunct if available; damage control mindset in hemodynamically unstable"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 58-year-old man with unbearable pain and swelling in his groin.",
+      "hpiOnset": "It started two days ago with what I thought was a small skin infection in my perineum \u2014 just soreness. But it has spread very rapidly and now the pain is \u2014 I cannot describe it. The skin is breaking down.",
+      "hpiProgression": "The skin has turned dark \u2014 almost black in places. There's a crackling feeling when I touch it \u2014 my wife says it feels like bubble wrap under the skin. I'm very ill \u2014 fever, confusion.",
+      "hpiAssociatedSymptoms": "Rapidly spreading necrosis and crepitus in the perineum. High fever. Confusion. I smell terrible \u2014 the wound smells like death.",
+      "hpiLocationPattern": "Perineum and scrotum \u2014 spreading to the inner thighs. Gas in the tissue \u2014 that crackling.",
+      "pmh": "Poorly controlled type 2 diabetes \u2014 my A1C is above 12. Obesity. Rectal fistula.",
+      "medications": "Metformin. Insulin glargine \u2014 I don't take it consistently.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Diabetes in family.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily.",
+      "socialOccupation": "Truck driver."
     }
   },
   "nec-fasciitis": {
@@ -11555,6 +11659,19 @@ window.CRT_DATA = {
           "Note": "NecFasc wound closure: VAC to granulation then STSG standard approach; biological mesh for large defects; negative pressure wound therapy accelerates granulation; typical closure 2-4 weeks post-debridement; mortality risk has passed \u2014 now reconstructive phase"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 55-year-old man with a leg that looks and feels terrible.",
+      "hpiOnset": "I scraped my leg three days ago \u2014 nothing serious I thought. But yesterday the pain became \u2014 extreme. Way out of proportion. And today it looks like this.",
+      "hpiProgression": "The skin is turning dark and there's a smell \u2014 I don't want to describe it. The pain was unbearable yesterday but today strangely it's less painful \u2014 which scares me.",
+      "hpiAssociatedSymptoms": "I have a high fever and chills. I feel very ill \u2014 sick throughout my whole body, not just the leg. The skin has blistered.",
+      "hpiLocationPattern": "Right lower leg \u2014 where the scrape was. The skin is discolored \u2014 purple, almost black in spots. The pain is now less \u2014 I know that's bad.",
+      "pmh": "Type 2 diabetes \u2014 poorly controlled, my last A1C was 11. Obesity.",
+      "medications": "Metformin. I don't take it consistently.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Diabetes everywhere in my family.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends.",
+      "socialOccupation": "Warehouse worker."
     }
   },
   "sjs-ten": {
@@ -12160,6 +12277,19 @@ window.CRT_DATA = {
           "Note": "Contrast in uncontrolled hyperthyroidism \u2014 Wolf-Chaikoff escape can trigger storm"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 34-year-old woman who feels like her heart is going to jump out of her chest.",
+      "hpiOnset": "I've had an overactive thyroid for two years and I ran out of my medication about a week ago. Today I got a fever and everything just went \u2014 crazy.",
+      "hpiProgression": "I can't stop shaking. My heart is racing so fast I can count it \u2014 it's been like this for hours. I also had diarrhea all morning.",
+      "hpiAssociatedSymptoms": "I'm burning up \u2014 I feel like I'm on fire. And I'm confused \u2014 more than usual. My partner says I'm not making sense.",
+      "hpiLocationPattern": "It's not in one place \u2014 I'm agitated everywhere. Heart pounding, shaking all over, sweating constantly.",
+      "pmh": "Graves disease \u2014 on methimazole until I ran out. Previously had an episode of fast heart rate from my thyroid.",
+      "medications": "Methimazole \u2014 ran out a week ago. Propranolol \u2014 I ran out of that too.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "My mother has thyroid disease.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Yoga instructor."
     }
   },
   "adrenal-crisis": {
@@ -12493,6 +12623,19 @@ window.CRT_DATA = {
           "Note": "Permanent adrenal insufficiency \u2014 stress-dose steroids now, lifelong replacement after"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 42-year-old woman who collapsed at home.",
+      "hpiOnset": "I have been on steroids for years for my rheumatoid arthritis. I had a stomach bug for two days \u2014 vomiting \u2014 and I couldn't keep my steroids down. This morning I collapsed.",
+      "hpiProgression": "I feel \u2014 desperately weak. My blood pressure must be very low because I almost fainted standing up. Severe abdominal pain.",
+      "hpiAssociatedSymptoms": "Vomiting, abdominal cramps, extreme weakness, and confusion \u2014 I feel like I'm shutting down. My husband says I look gray.",
+      "hpiLocationPattern": "Diffuse abdominal pain and profound weakness everywhere. I cannot stand without help.",
+      "pmh": "Rheumatoid arthritis on prednisone 10mg daily for four years. Hypothyroidism. Previous episode of adrenal crisis five years ago.",
+      "medications": "Prednisone 10mg daily \u2014 could not take for two days due to vomiting. Levothyroxine. Methotrexate.",
+      "allergies": "NSAIDs \u2014 stomach bleeding.",
+      "familyHistory": "Autoimmune conditions in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Elementary school librarian."
     }
   },
   "acute-limb-ischemia": {
@@ -13103,6 +13246,19 @@ window.CRT_DATA = {
           "Note": "Bowel infarction \u2014 goals of care discussion essential before OR; surgical embolectomy + bowel resection; second look at 48h"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 75-year-old woman with excruciating abdominal pain.",
+      "hpiOnset": "The pain came on suddenly about three hours ago \u2014 out of nothing. It's severe \u2014 the worst pain in my abdomen I've ever had. It's constant.",
+      "hpiProgression": "The pain is as bad as ever. I had diarrhea \u2014 watery with some blood. I feel very ill \u2014 lightheaded and sweating.",
+      "hpiAssociatedSymptoms": "Periumbilical pain, bloody diarrhea, nausea, lightheadedness. The pain feels \u2014 out of proportion to my physical exam, my doctor told me once that can mean blood flow to the gut.",
+      "hpiLocationPattern": "Around my navel and spreading. Severe \u2014 constant. Not relieved by any position.",
+      "pmh": "Atrial fibrillation \u2014 my anticoagulation has been hard to manage. Recent hospitalization for heart failure. Atherosclerosis.",
+      "medications": "Warfarin \u2014 my last INR was 1.3, which my cardiologist said was low. Metoprolol. Furosemide. Aspirin.",
+      "allergies": "Morphine \u2014 it makes me very confused.",
+      "familyHistory": "Heart disease throughout the family.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired schoolteacher."
     }
   },
   "hip-fracture-anticoag": {
@@ -14024,6 +14180,19 @@ window.CRT_DATA = {
           "Note": "Stop active cooling at 38-39\u00b0C; shivering increases thermogenesis \u2014 buspirone, meperidine, or low-dose propofol to suppress; rewarming passively; monitor for secondary hypothermia complications"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 21-year-old brought in by teammates after collapsing during practice.",
+      "hpiOnset": "I was running \u2014 football practice \u2014 it was very hot today. About forty minutes into drills I just \u2014 went down. My teammates say I stopped making sense before I collapsed.",
+      "hpiProgression": "I'm very confused \u2014 I know I am \u2014 and I feel \u2014 burning from the inside. I cannot stop the confusion.",
+      "hpiAssociatedSymptoms": "I stopped sweating about twenty minutes before I collapsed \u2014 my teammates noticed. I vomited. I feel my heart pounding.",
+      "hpiLocationPattern": "I just feel hot \u2014 everywhere. Inside. And confused.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "Creatine supplements. Pre-workout powder.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I don't drink during the season. I don't smoke.",
+      "socialOccupation": "College football player. Junior year."
     }
   },
   "severe-hypothermia": {
@@ -14349,6 +14518,19 @@ window.CRT_DATA = {
           "Note": "Afterdrop: core temp continues falling after rescue as cold peripheral blood returns centrally \u2014 normal and expected; rewarming collapse: hemodynamic instability as vasodilation occurs with rewarming; ECMO maintains perfusion; do not defibrillate until temp >30\u00b0C"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 58-year-old man found outside in winter.",
+      "hpiOnset": "I was found on the street \u2014 I don't know how long I was out there. I've been drinking and I must have fallen asleep outside. It was below freezing last night.",
+      "hpiProgression": "I can't stop shaking. My thinking is slow. I'm so cold \u2014 from the inside.",
+      "hpiAssociatedSymptoms": "Intense shivering. Confusion \u2014 slow. Slurred speech. My fingers are white and hard.",
+      "hpiLocationPattern": "Cold everywhere. Fingers and toes are numb and changed color.",
+      "pmh": "Alcohol use disorder. Type 2 diabetes. Hypertension.",
+      "medications": "Metformin. Lisinopril. I don't take them consistently.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "I don't know.",
+      "socialSmokingAlcohol": "I drink heavily \u2014 vodka. I smoke a pack a day.",
+      "socialOccupation": "Homeless \u2014 staying in shelters when space is available."
     }
   },
   "sbo-strangulation": {
@@ -16193,6 +16375,19 @@ window.CRT_DATA = {
           "Note": "Descending mediastinitis carries 40% mortality \u2014 requires thoracic surgical drainage (video-assisted or open); continue broad-spectrum antibiotics including antifungals; highest risk complication of Ludwig angina"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 38-year-old man with a jaw and neck swelling that is terrifying him.",
+      "hpiOnset": "I had a bad tooth abscess for two weeks \u2014 I couldn't afford to go to the dentist. The last two days the swelling spread from my jaw to my neck. And now I cannot open my mouth and I'm having trouble breathing.",
+      "hpiProgression": "The swelling has spread rapidly. I can feel pressure building in my neck. My voice sounds strange \u2014 muffled. Breathing in is getting harder.",
+      "hpiAssociatedSymptoms": "High fever. Cannot open mouth. My tongue is being pushed up. I can hear myself stridor when I breathe.",
+      "hpiLocationPattern": "Lower jaw, floor of the mouth \u2014 pushing the tongue up. Neck is hard and swollen, both sides.",
+      "pmh": "No regular medical care. Severe dental disease \u2014 multiple abscesses over the years. Poorly controlled type 2 diabetes.",
+      "medications": "No regular medications. My blood sugar must be very high \u2014 I've been sick for weeks.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Diabetes in my family.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends.",
+      "socialOccupation": "Day laborer. No insurance \u2014 that's why I couldn't see the dentist."
     }
   },
   "ttp": {
@@ -16846,6 +17041,19 @@ window.CRT_DATA = {
           "Note": "CRASH-2: TXA benefit only within 3h of injury \u2014 harm if given >3h; do not give TXA at 6h; focus on component therapy, surgical hemostasis, permissive hypotension"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 38-year-old woman bleeding from everywhere after major trauma.",
+      "hpiOnset": "I was in a car accident \u2014 the paramedics say I lost a lot of blood at the scene. I've had two units of blood in the ambulance. Now I'm bleeding from my IV sites and I feel very confused.",
+      "hpiProgression": "I know I'm bleeding \u2014 I can see it from places it shouldn't be coming from. My gums, my IV sites. I feel like I'm drifting in and out.",
+      "hpiAssociatedSymptoms": "Bleeding from multiple sites. Confusion \u2014 comes and goes. My abdomen hurts from the accident.",
+      "hpiLocationPattern": "The bleeding is from IV sites, gums, nose. The accident was my abdomen and chest.",
+      "pmh": "Healthy. 10 weeks pregnant.",
+      "medications": "Prenatal vitamins.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I don't smoke or drink \u2014 I'm pregnant.",
+      "socialOccupation": "Physical therapist."
     }
   },
   "septic-arthritis": {
@@ -17589,6 +17797,19 @@ window.CRT_DATA = {
           "Note": "Insulin-induced hypoglycemia in hyperK treatment \u2014 D50 repeat, check glucose q30min for 3h after insulin; K+ will rebound \u2014 plan for dialysis or continued monitoring; sodium bicarbonate as additive K-lowering without hypoglycemia risk"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 54-year-old man on dialysis who missed his last two sessions.",
+      "hpiOnset": "I missed dialysis on Monday and Wednesday \u2014 I had work stuff I couldn't get away from. And now today I feel terrible.",
+      "hpiProgression": "My legs feel weak \u2014 I can barely walk from the car. And my heart \u2014 it feels irregular, like it's skipping beats.",
+      "hpiAssociatedSymptoms": "I feel nauseated and very weak. My hands and feet are tingling. I'm scared about my heart.",
+      "hpiLocationPattern": "Weakness is in my legs especially. The heart feeling is right here in my chest \u2014 irregular.",
+      "pmh": "End-stage kidney disease on hemodialysis three times a week. Type 2 diabetes. High blood pressure.",
+      "medications": "Insulin. Amlodipine. Sevelamer. Calcitriol. I didn't take my medicines today.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Diabetes and kidney disease in my family.",
+      "socialSmokingAlcohol": "I don't smoke. I have the occasional beer even though I'm not supposed to.",
+      "socialOccupation": "Warehouse manager. I have trouble getting to dialysis with my work schedule."
     }
   },
   "severe-hyponatremia": {
@@ -17875,6 +18096,19 @@ window.CRT_DATA = {
           "Note": "Correction rate target: 4-6 mEq/L per day in chronic hyponatremia (>48h); up to 8 mEq/L for active seizure; >10 mEq/L risks ODS; Na 118 is adequate symptom control \u2014 stop active correction; switch to fluid restriction or tolvaptan for ongoing management"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 34-year-old woman with a first-ever seizure brought in by her partner.",
+      "hpiOnset": "I started a new antidepressant six weeks ago \u2014 sertraline. I've had increasing headaches and nausea for two weeks. Today I had a seizure \u2014 my first ever.",
+      "hpiProgression": "My partner says I've seemed confused for the past few days and today I had a full tonic-clonic seizure. I feel very confused right now.",
+      "hpiAssociatedSymptoms": "Persistent nausea for two weeks. Headaches. Now confusion. The sertraline seemed to help my depression but these symptoms started after.",
+      "hpiLocationPattern": "Headache diffuse. Nausea is constant. And now I can tell I'm not thinking clearly.",
+      "pmh": "Major depression \u2014 recently started sertraline. No prior seizures. Hypothyroidism on levothyroxine.",
+      "medications": "Sertraline 50mg \u2014 started six weeks ago. Levothyroxine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Depression in my family. No seizure disorder.",
+      "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
+      "socialOccupation": "Nurse practitioner."
     }
   },
   "acute-cholecystitis": {
@@ -20778,6 +21012,19 @@ window.CRT_DATA = {
           "Note": "Myxedema intubation \u2014 macroglossia, difficult airway, high sensitivity to sedatives; have surgical airway backup, use ketamine, avoid etomidate (adrenal suppression possible)"
         }
       }
+    },
+    "patientScript": {
+      "identity": "an 82-year-old woman brought in by her son \u2014 extremely lethargic.",
+      "hpiOnset": "My son says I've been more and more tired for two weeks. Today I wouldn't wake up properly. I have hypothyroidism but I ran out of my thyroid pill about a month ago.",
+      "hpiProgression": "I feel... very slow. Very cold. Everything is an effort. I've been constipated for weeks. My thinking is \u2014 very foggy.",
+      "hpiAssociatedSymptoms": "I'm cold all the time \u2014 even with extra blankets. I've gained weight. My voice sounds different \u2014 hoarse.",
+      "hpiLocationPattern": "I don't really have pain. Just \u2014 profound fatigue and cold.",
+      "pmh": "Hypothyroidism for twenty years. Heart failure. Hypertension.",
+      "medications": "Levothyroxine \u2014 ran out four weeks ago. Furosemide. Metoprolol. Amlodipine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Thyroid disease runs in the family.",
+      "socialSmokingAlcohol": "I don't smoke or drink. I live alone \u2014 my son checks on me on Sundays.",
+      "socialOccupation": "Retired nurse."
     }
   },
   "perforated-peptic-ulcer": {
@@ -21026,6 +21273,19 @@ window.CRT_DATA = {
           "Note": "Source control within 6h associated with improved survival \u2014 resuscitate and OR simultaneously"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 51-year-old man with sudden severe abdominal pain.",
+      "hpiOnset": "It happened all at once \u2014 like a gunshot in my abdomen. I was at work and suddenly I had the worst pain of my life. That was about two hours ago.",
+      "hpiProgression": "The pain is constant \u2014 not coming and going. I cannot move without it getting worse. Any bump in the car on the way here was agony. I'm lying very still.",
+      "hpiAssociatedSymptoms": "The whole abdomen is rigid \u2014 like a board. I feel nauseated. The pain goes up to my right shoulder \u2014 especially when I breathe in.",
+      "hpiLocationPattern": "It started in the upper abdomen and has spread everywhere. My belly is rock hard. Shoulder tip pain when I inhale.",
+      "pmh": "Peptic ulcer disease \u2014 diagnosed two years ago. H. pylori treated. I take ibuprofen regularly for my back.",
+      "medications": "Ibuprofen 600mg three times a day. I stopped my omeprazole a few months ago because I felt fine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father had stomach ulcers.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink a bottle of wine with dinner most nights.",
+      "socialOccupation": "Restaurant owner \u2014 very stressful job."
     }
   },
   "pneumothorax": {
@@ -22869,6 +23129,19 @@ window.CRT_DATA = {
           "Note": "SJS/TEN airway involvement: most serious complication; early intubation before complete obstruction; bronchoscopy to assess tracheobronchial sloughing; high SCORTEN risk; burn center transfer"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 29-year-old woman with spreading skin blistering from a new seizure medication.",
+      "hpiOnset": "My neurologist started lamotrigine six weeks ago for epilepsy. Two weeks ago I developed a rash. It has spread and now I have blisters \u2014 in my mouth, on my eyes, on my genitals.",
+      "hpiProgression": "The rash became blisters that are detaching \u2014 my skin is literally coming off in sheets. I'm in terrible pain. I have a high fever and cannot eat or drink because my mouth is raw.",
+      "hpiAssociatedSymptoms": "Skin detachment over more than 30% of body surface area. Painful mucosal involvement \u2014 mouth, eyes, genitals. High fever. Cannot eat or drink.",
+      "hpiLocationPattern": "Skin blistering everywhere \u2014 started on my trunk and spreading. The mucosal surfaces are the most painful.",
+      "pmh": "Epilepsy \u2014 newly started on lamotrigine. Healthy otherwise.",
+      "medications": "Lamotrigine \u2014 started six weeks ago, titrated up quickly. Levetiracetam.",
+      "allergies": "Now confirmed \u2014 lamotrigine.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Medical student."
     }
   },
   "hereditary-angioedema": {
@@ -26713,6 +26986,19 @@ window.CRT_DATA = {
           "Note": "Weight-based epi: 0.01mg/kg IM (max 0.5mg); obese patients may need higher dose; IV epinephrine if IM fails; airway backup essential"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 52-year-old woman with severe lip and tongue swelling.",
+      "hpiOnset": "About an hour ago my lower lip started swelling \u2014 I ate shellfish at dinner. I'm allergic to shellfish. Within thirty minutes it spread to my tongue and now I'm having trouble swallowing.",
+      "hpiProgression": "The swelling is getting worse \u2014 my tongue is swollen and I'm drooling because I can't swallow well. Breathing in is getting harder.",
+      "hpiAssociatedSymptoms": "Lip and tongue angioedema. Difficulty swallowing. Beginning difficulty with breathing \u2014 stridor on inhalation.",
+      "hpiLocationPattern": "Lips, tongue, throat. The swelling is progressing upward.",
+      "pmh": "Shellfish allergy \u2014 known for years. Obesity \u2014 BMI 44. Hypertension. Obstructive sleep apnea on CPAP.",
+      "medications": "Lisinopril \u2014 I've been on it for five years. Amlodipine. CPAP nightly.",
+      "allergies": "Shellfish \u2014 angioedema. Also on lisinopril which I know can cause angioedema.",
+      "familyHistory": "Allergies in family.",
+      "socialSmokingAlcohol": "I don't smoke. I drink wine occasionally.",
+      "socialOccupation": "Office manager."
     }
   },
   "idiopathic-angioedema-v2": {
@@ -27124,6 +27410,19 @@ window.CRT_DATA = {
           "Note": "VIT access programs: ALK, Stallergenes patient assistance; state Medicaid application; community health center referral; while pursuing coverage \u2014 prescribe EpiPen x2, medical alert bracelet, avoidance counseling; untreated risk of fatal re-sting ~60% without VIT"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 38-year-old landscaper stung while working.",
+      "hpiOnset": "I was stung by a wasp while working \u2014 I've been stung before and had some reactions. But this one is different \u2014 within five minutes my throat started to close.",
+      "hpiProgression": "I don't have an EpiPen \u2014 I couldn't afford to refill it. The reaction is severe \u2014 throat closing, hives everywhere, I feel my blood pressure dropping.",
+      "hpiAssociatedSymptoms": "Throat closure. Generalized urticaria. Severe hypotension \u2014 I feel faint. Chest tightness.",
+      "hpiLocationPattern": "Sting is on my forearm but the reaction is systemic \u2014 throat, all over skin, chest.",
+      "pmh": "Known severe Hymenoptera allergy. Previous hospitalization for wasp sting anaphylaxis three years ago.",
+      "medications": "Cetirizine daily. EpiPen was prescribed but I couldn't afford the refill \u2014 it expired.",
+      "allergies": "Wasp venom \u2014 severe anaphylaxis.",
+      "familyHistory": "Allergies in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Landscaper. Uninsured \u2014 medications and refills are a financial strain."
     }
   },
   "venom-immunotherapy-reaction-v2": {
@@ -27927,6 +28226,19 @@ window.CRT_DATA = {
           "Note": "Herpetic keratitis \u2014 topical trifluridine or ganciclovir ophthalmic gel; continue systemic acyclovir; do not use topical steroids; urgent ophthalmology; risk of corneal scarring and vision loss"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 2-year-old toddler brought in by parents \u2014 speaking through parents.",
+      "hpiOnset": "Our toddler has eczema \u2014 it's been well controlled. But three days ago our older child had a cold sore and was kissing the baby. Now the baby has clusters of blisters all over the eczema patches on her face and neck.",
+      "hpiProgression": "The blisters have spread rapidly \u2014 hundreds of them on her face, neck, and chest. She has a high fever and she won't eat. She's inconsolable.",
+      "hpiAssociatedSymptoms": "High fever 39.8. Widespread punched-out vesicles over eczematous skin. Refusing to eat and drink. Extremely irritable.",
+      "hpiLocationPattern": "Wherever her eczema is \u2014 face, neck, chest, inner elbows. Rapidly spreading.",
+      "pmh": "Moderate-severe atopic dermatitis since 6 months of age. On topical steroids.",
+      "medications": "Hydrocortisone 2.5% cream. Cetirizine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father has severe eczema and asthma.",
+      "socialSmokingAlcohol": "She is 2 years old.",
+      "socialOccupation": "Full-time toddler."
     }
   },
   "erythema-multiforme-major-v2": {
@@ -28323,6 +28635,19 @@ window.CRT_DATA = {
           "Note": "COFAR: exercise, NSAIDs, alcohol, stress lower reaction threshold; revise OIT protocol \u2014 no exercise 2h before and 2h after dose; dose reduction; cofactor avoidance counseling"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 17-year-old competitive swimmer on oral immunotherapy having a reaction.",
+      "hpiOnset": "I've been on peanut OIT for six months \u2014 up-dosing going well. But today I went for a swim practice after taking my dose, which I know I'm not supposed to do. Now I have hives and throat tightening.",
+      "hpiProgression": "The hives came on fast \u2014 fifteen minutes after getting out of the pool. And my throat has started to itch and tighten. I already used my EpiPen but it's not fully resolved.",
+      "hpiAssociatedSymptoms": "Urticaria. Throat tightening and itch. Wheezing starting. EpiPen was used \u2014 partial response only.",
+      "hpiLocationPattern": "Hives all over skin. Throat \u2014 itch and tightening. Chest \u2014 wheezing.",
+      "pmh": "Severe peanut allergy \u2014 on oral immunotherapy for six months. Allergic asthma.",
+      "medications": "Currently dosed peanut OIT. Cetirizine. Albuterol inhaler. EpiPen \u2014 used.",
+      "allergies": "Peanuts \u2014 severe. Tree nuts \u2014 mild.",
+      "familyHistory": "Food allergies in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink. I'm a competitive swimmer.",
+      "socialOccupation": "High school junior. Swim team."
     }
   },
   "fpies-acute-v2": {
@@ -34350,6 +34675,19 @@ window.CRT_DATA = {
           "Note": "Biphasic anaphylaxis \u2014 inadequate observation period"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 9-year-old boy with a severe peanut allergy having a reaction.",
+      "hpiOnset": "I ate a cookie at a birthday party and my throat started itching and closing within five minutes. My mom gave me my EpiPen but I'm still really bad.",
+      "hpiProgression": "The EpiPen helped a little but my throat still feels tight and I have hives everywhere. I'm scared I can't breathe.",
+      "hpiAssociatedSymptoms": "Throat tightness. Hives head to toe. Stomach pain. Vomiting once. My voice sounds different.",
+      "hpiLocationPattern": "Throat \u2014 closing feeling. Hives everywhere. Stomach cramping.",
+      "pmh": "Severe peanut allergy diagnosed at age 2. Previous anaphylaxis requiring hospitalization.",
+      "medications": "EpiPen \u2014 used one already. Cetirizine daily.",
+      "allergies": "Peanuts \u2014 severe anaphylaxis.",
+      "familyHistory": "Mother has food allergies.",
+      "socialSmokingAlcohol": "I'm 9 years old.",
+      "socialOccupation": "Third grade."
     }
   },
   "penicillin-allergy-delabeling": {
@@ -34955,6 +35293,19 @@ window.CRT_DATA = {
           "ICU": "Bed available"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 74-year-old woman having a severe allergic reaction who is not improving with epinephrine.",
+      "hpiOnset": "I was stung by a bee in my garden about twenty minutes ago \u2014 I've never reacted to bees before. My throat started closing very fast. My husband gave me the EpiPen but I'm not getting better.",
+      "hpiProgression": "The EpiPen helped for a few minutes but the throat closing is coming back. I feel like my heart is going to stop. My blood pressure \u2014 I feel it dropping.",
+      "hpiAssociatedSymptoms": "Throat closing. Generalized hives. Very low blood pressure \u2014 I feel it. Chest tightness. Still cannot breathe well after the EpiPen.",
+      "hpiLocationPattern": "Throat \u2014 tightness and closure. Chest \u2014 tight. All over \u2014 hives.",
+      "pmh": "Hypertension. Atrial fibrillation. The beta-blocker \u2014 my heart doctor put me on it last year.",
+      "medications": "Metoprolol \u2014 beta-blocker. Diltiazem. Apixaban. Aspirin.",
+      "allergies": "None known before today. The bee sting has never caused this.",
+      "familyHistory": "No known allergies.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Retired nurse. I know enough to know the beta-blocker is making this worse."
     }
   },
   "anaphylaxis-v3": {
@@ -35170,6 +35521,19 @@ window.CRT_DATA = {
           "Note": "Team communication critical"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 44-year-old operating room nurse having a reaction during a procedure.",
+      "hpiOnset": "I'm a nurse \u2014 I've worked in the OR for fifteen years. During a routine case today I developed a rash and my throat started tightening. No one else touched the medications \u2014 I'm wondering if it's from the surgical gloves.",
+      "hpiProgression": "The rash came first, then throat tightening, now I'm short of breath and I can feel my pressure dropping. I had a similar mild reaction to gloves about a year ago.",
+      "hpiAssociatedSymptoms": "Urticaria on my hands and face. Throat tightening. Shortness of breath. Lightheadedness \u2014 pressure dropping.",
+      "hpiLocationPattern": "Rash started on hands where the gloves are. Now spreading. Throat and breathing affected.",
+      "pmh": "Mild latex sensitivity \u2014 I've been using nitrile gloves but today the circulator accidentally brought latex gloves. Asthma \u2014 mild, well controlled.",
+      "medications": "Albuterol inhaler PRN. Cetirizine daily.",
+      "allergies": "Latex \u2014 now confirmed severe. Sulfa drugs \u2014 rash.",
+      "familyHistory": "Allergies in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Operating room nurse, fifteen-year career."
     }
   },
   "anaphylaxis-v4": {
@@ -35375,6 +35739,19 @@ window.CRT_DATA = {
           "Context": "15-year-old, peer teasing about allergy"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 16-year-old who ate something at a party and is very scared.",
+      "hpiOnset": "Someone handed me a cookie at a party \u2014 I didn't know it had peanuts. I have a peanut allergy. About fifteen minutes later my throat started itching and swelling. I used my EpiPen but I'm still having symptoms.",
+      "hpiProgression": "I used my EpiPen right away but my throat still feels tight. I have hives all over and I feel sick to my stomach. My mom is here \u2014 she's freaking out.",
+      "hpiAssociatedSymptoms": "Throat itch and tightness. Hives. Nausea. Feeling of something wrong in my chest.",
+      "hpiLocationPattern": "Throat \u2014 itching and closing. Hives on my arms and face. Stomach cramps.",
+      "pmh": "Severe peanut allergy since age 3. Previous anaphylaxis requiring hospitalization once before.",
+      "medications": "EpiPen \u2014 used one already. Cetirizine daily.",
+      "allergies": "Peanuts \u2014 severe anaphylaxis.",
+      "familyHistory": "Mother has food allergies.",
+      "socialSmokingAlcohol": "I'm 16. I don't drink or smoke.",
+      "socialOccupation": "High school junior. Peer pressure around food is real."
     }
   },
   "anaphylaxis-v5": {
@@ -35593,6 +35970,19 @@ window.CRT_DATA = {
           "Note": "Time-sensitive \u2014 do not wait for interpreter to give epinephrine"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 7-year-old child brought in by parents, speaking through a translator.",
+      "hpiOnset": "My parents say I ate something at school \u2014 a snack they didn't know had milk in it. I have a milk allergy. My face got puffy and my throat got itchy very fast.",
+      "hpiProgression": "I have hives all over. I'm very scared and I can't breathe well. The school nurse gave me my EpiPen. My parents just arrived and they are very worried.",
+      "hpiAssociatedSymptoms": "Facial swelling. Hives everywhere. Throat tightness. Vomiting once. I'm crying and scared.",
+      "hpiLocationPattern": "My face is swollen. My throat is tight. Hives all over my body.",
+      "pmh": "Severe milk protein allergy. Mild persistent asthma.",
+      "medications": "EpiPen \u2014 used at school. Albuterol inhaler. Montelukast.",
+      "allergies": "Milk \u2014 anaphylaxis. Tree nuts \u2014 hives.",
+      "familyHistory": "Father has eczema and food allergies.",
+      "socialSmokingAlcohol": "I am 7 years old.",
+      "socialOccupation": "Second grade. My family speaks Spanish at home."
     }
   },
   "ace-angioedema-v2": {
@@ -36053,6 +36443,19 @@ window.CRT_DATA = {
           "Note": "DRESS multi-organ involvement \u2014 liver and kidney most serious; systemic steroids indicated; monitor for reactivation of HHV-6/EBV; steroid taper over months"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 55-year-old man with gout whose skin is falling apart three weeks after starting a new medication.",
+      "hpiOnset": "My rheumatologist started allopurinol six weeks ago for my gout. About two weeks ago I developed a rash \u2014 I thought it was a drug allergy but it's spreading everywhere.",
+      "hpiProgression": "The rash has spread to cover most of my body with swelling. I have high fever. My face is swollen. And the doctor who saw me yesterday said my liver tests are very abnormal.",
+      "hpiAssociatedSymptoms": "Diffuse confluent morbilliform rash covering 80% of body surface area. Facial edema. High fever \u2014 39.6. Lymphadenopathy. Jaundice \u2014 my skin is yellow.",
+      "hpiLocationPattern": "The rash is everywhere \u2014 face, trunk, arms, legs. The jaundice is new in the past two days.",
+      "pmh": "Gout. Hypertension. Chronic kidney disease stage 3.",
+      "medications": "Allopurinol started six weeks ago \u2014 dose was 300mg despite my reduced kidney function. Lisinopril. Colchicine.",
+      "allergies": "Now apparently \u2014 allopurinol.",
+      "familyHistory": "My family is from Taiwan \u2014 I've since read that this variant is more common in people of Asian ancestry.",
+      "socialSmokingAlcohol": "I don't smoke. I drink beer occasionally.",
+      "socialOccupation": "Software engineer."
     }
   },
   "sjs-ten-v2": {
@@ -36276,6 +36679,19 @@ window.CRT_DATA = {
           "Note": "SCORTEN 3 = 35% predicted mortality; burn unit care standard; ophthalmology STAT for eye involvement \u2014 topical steroids \u00b1 amniotic membrane; stop causative drug; cyclosporine A controversial; IVIG does not improve outcomes"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 32-year-old woman on lamotrigine whose skin is blistering.",
+      "hpiOnset": "My neurologist started lamotrigine for epilepsy five weeks ago. Two weeks ago a rash started \u2014 I was told to watch it. It has spread to cover most of my body and now I have blisters in my mouth and eyes.",
+      "hpiProgression": "In two days the rash became blistering. Skin is peeling off. I cannot eat or drink \u2014 my mouth is raw. My eyes are stuck together in the morning. I have a high fever.",
+      "hpiAssociatedSymptoms": "Skin detachment on trunk and extremities. Painful mucositis \u2014 mouth, genitals, eyes. High fever. Cannot eat or drink. About 25% of my skin surface is blistered.",
+      "hpiLocationPattern": "Skin \u2014 trunk, arms, legs. Mucous membranes \u2014 mouth, eyes, genitals. All blistering.",
+      "pmh": "Juvenile myoclonic epilepsy \u2014 on levetiracetam for years, lamotrigine added recently.",
+      "medications": "Lamotrigine \u2014 started five weeks ago, titrated rapidly. Levetiracetam.",
+      "allergies": "Confirmed \u2014 lamotrigine causing this.",
+      "familyHistory": "Epilepsy in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Pediatric nurse."
     }
   },
   "sjsten-overlap-v2": {
@@ -36506,6 +36922,19 @@ window.CRT_DATA = {
           "Note": "Post-TEN ART restart: integrase inhibitor-based regimen lowest hypersensitivity risk; avoid abacavir without HLA-B*57:01 testing; PCP prophylaxis: dapsone or atovaquone instead of TMP-SMX; patch test protocol for re-exposure controversial \u2014 do not rechallenge with causative agent"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 28-year-old HIV-positive man with blistering skin and mucous membranes.",
+      "hpiOnset": "I'm HIV-positive with a very low CD4 count \u2014 I was started on Bactrim two weeks ago for PCP prophylaxis. Now I have a severe rash \u2014 blistering \u2014 and my mouth is completely ulcerated.",
+      "hpiProgression": "Started as a rash, now blisters involving my mouth, eyes, and genitals. My skin is sloughing off in sheets over my chest and back. I have a high fever and I feel extremely ill.",
+      "hpiAssociatedSymptoms": "Skin detachment \u2014 35% body surface area. Severe mucosal ulceration \u2014 mouth, eyes, genitals. High fever. Cannot eat, drink, or open my eyes.",
+      "hpiLocationPattern": "Skin everywhere \u2014 blistering and peeling. Mucous membranes \u2014 all three sites affected severely.",
+      "pmh": "HIV \u2014 CD4 count 48, viral load high, recently started ART and Bactrim prophylaxis.",
+      "medications": "TMP-SMX (Bactrim) started two weeks ago. Emtricitabine/tenofovir/efavirenz just started one week ago.",
+      "allergies": "Now confirmed \u2014 sulfonamide (Bactrim).",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I smoke. I drink socially.",
+      "socialOccupation": "Restaurant manager."
     }
   },
   "hypertensive-emergency": {
@@ -37038,6 +37467,19 @@ window.CRT_DATA = {
           "Note": "sICH after tPA: cryoprecipitate 10U IV STAT (target fibrinogen >150); TXA 1g IV; hold all antiplatelets/anticoagulants; neurosurgical evaluation"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 71-year-old man who received tPA an hour ago and is now worse.",
+      "hpiOnset": "I came in with a stroke about three hours ago. I was improving after the tPA \u2014 and then an hour ago the left side weakness got dramatically worse and I developed a severe headache.",
+      "hpiProgression": "The headache is the worst I've ever had. My speech is gone now \u2014 worse than when I came in. And I'm vomiting.",
+      "hpiAssociatedSymptoms": "New severe headache after initial improvement post-tPA. Complete left hemiplegia now. Vomiting. I'm terrified.",
+      "hpiLocationPattern": "The headache is everywhere but worse in the back of my head. Left side is completely gone now.",
+      "pmh": "Hypertension. Atrial fibrillation. Prior TIA two years ago. Now on tPA for ischemic stroke.",
+      "medications": "Rivaroxaban \u2014 held for tPA. Metoprolol. Amlodipine. Atorvastatin.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father had stroke.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired engineer."
     }
   },
   "bacterial-meningitis": {
@@ -38353,6 +38795,19 @@ window.CRT_DATA = {
           "Note": "Mechanical valve + ICH: restart anticoagulation 4-6 weeks post-ICH (APACHE-AF trial); bridge with heparin avoided; neurological stability and hematoma stability required; shared decision-making"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 55-year-old man with a sudden thunderclap headache and left-sided weakness.",
+      "hpiOnset": "The headache came on like a gunshot \u2014 instantaneous. I've never had anything like it. And then within minutes my left arm and leg went weak.",
+      "hpiProgression": "The headache is still severe \u2014 the worst of my life. And the left side is getting weaker. I vomited twice.",
+      "hpiAssociatedSymptoms": "Worst headache of life. Left arm and leg weakness. Vomiting. Neck stiffness starting.",
+      "hpiLocationPattern": "Headache is everywhere \u2014 explosive onset. Left arm and leg affected.",
+      "pmh": "Severe uncontrolled hypertension \u2014 my last blood pressure reading at the pharmacy was 198/120. I've never taken medication consistently.",
+      "medications": "Amlodipine \u2014 prescribed but I take it only sometimes.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father died of a stroke.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily \u2014 at least six drinks a day.",
+      "socialOccupation": "Restaurant cook."
     }
   },
   "pe-v2": {
@@ -38931,6 +39386,19 @@ window.CRT_DATA = {
           "Note": "Anti-NMDAR encephalitis \u2014 ovarian teratoma workup + immunotherapy"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 26-year-old woman brought in by her roommate for confusion and fever.",
+      "hpiOnset": "I had a bad headache and fever starting three days ago \u2014 I thought it was the flu. But my roommate says I've been acting strangely since yesterday.",
+      "hpiProgression": "I know I'm confused \u2014 I keep asking the same questions. I can't remember what happened yesterday. And I've had seizure-like episodes \u2014 my roommate said I shook.",
+      "hpiAssociatedSymptoms": "The fever is high \u2014 I feel burning. Very sensitive to light and sound. And the headache is severe \u2014 neck feels stiff.",
+      "hpiLocationPattern": "Headache everywhere \u2014 behind my eyes especially. Neck stiffness. And my thinking is \u2014 foggy.",
+      "pmh": "Healthy. I had a cold sore flare about two weeks ago \u2014 my lips.",
+      "medications": "Birth control pill. Ibuprofen for the headache.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink socially. I don't smoke.",
+      "socialOccupation": "Graduate student in literature. I have a cat."
     }
   },
   "pneumonia-on-copd": {
@@ -39515,6 +39983,19 @@ window.CRT_DATA = {
           "Note": "Thrombectomy window 0-24h for eligible patients (DAWN/DEFUSE-3 criteria) \u2014 ASPECTS \u22656 supports intervention"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 72-year-old woman who was brought in by her daughter.",
+      "hpiOnset": "I \u2014 I can't \u2014 the words aren't coming right. This started \u2014 maybe an hour ago? I was sitting reading and then \u2014",
+      "hpiProgression": "My daughter says my face dropped and I couldn't hold my coffee cup. I thought it would pass but it's not getting better.",
+      "hpiAssociatedSymptoms": "My right arm feels \u2014 like it belongs to someone else. And the words I want to say \u2014 they're stuck.",
+      "hpiLocationPattern": "It's my right side. And speaking \u2014 it's very hard right now.",
+      "pmh": "Atrial fibrillation. High blood pressure. I had a little stroke two years ago but I recovered completely.",
+      "medications": "Apixaban \u2014 but I forgot to take it for the past three days. Metoprolol. Amlodipine.",
+      "allergies": "Sulfa drugs give me a rash.",
+      "familyHistory": "My mother had strokes.",
+      "socialSmokingAlcohol": "I don't smoke. I have a glass of wine with dinner sometimes.",
+      "socialOccupation": "Retired schoolteacher. I live alone \u2014 my daughter lives nearby."
     }
   },
   "brain-abscess": {
@@ -39690,6 +40171,19 @@ window.CRT_DATA = {
           "Note": "Cryptococcal CNS disease \u2014 amphotericin B + flucytosine induction; reduce immunosuppression cautiously; serial LP for ICP management; fluconazole maintenance"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 33-year-old man with worsening headache and confusion.",
+      "hpiOnset": "Three weeks of headache \u2014 I thought it was migraines. But for the past two days the headache is different \u2014 constant and severe \u2014 and I've been confused.",
+      "hpiProgression": "My partner says I've been not myself for two days. Today I had what sounded like a seizure \u2014 I shook for a few minutes. I have a fever.",
+      "hpiAssociatedSymptoms": "Severe headache, fever, confusion, and now a seizure. I had a dental abscess about five weeks ago that I never got treated.",
+      "hpiLocationPattern": "The headache is on the right side and feels \u2014 deep inside. Not like my usual headaches.",
+      "pmh": "Dental abscess five weeks ago \u2014 I was given antibiotics but took only a few days of them. Congenital heart defect repaired as a child.",
+      "medications": "None currently.",
+      "allergies": "Penicillin \u2014 throat swelling.",
+      "familyHistory": "Nothing significant.",
+      "socialSmokingAlcohol": "I smoke marijuana daily. I drink socially.",
+      "socialOccupation": "Graphic designer."
     }
   },
   "alcoholic-ketoacidosis": {
@@ -40582,6 +41076,19 @@ window.CRT_DATA = {
           "Note": "TICI 0 after first pass \u2014 up to 3 attempts reasonable; ASPECTS 6 + 6h still within range for attempt 2"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 67-year-old man whose right side stopped working.",
+      "hpiOnset": "It was exactly \u2014 my wife says 45 minutes ago. I was eating breakfast and I dropped my fork. Couldn't pick it up.",
+      "hpiProgression": "By the time she called 911 my right arm and leg weren't working and I couldn't get the words out right. Getting here didn't help.",
+      "hpiAssociatedSymptoms": "My face feels droopy on the right side. The words \u2014 I know what I want to say but they come out wrong.",
+      "hpiLocationPattern": "Right side \u2014 arm and leg won't move properly. And speech \u2014 it's not working right.",
+      "pmh": "Atrial fibrillation. High blood pressure. High cholesterol. Type 2 diabetes.",
+      "medications": "Rivaroxaban \u2014 I take it every night with dinner. Metoprolol. Atorvastatin. Metformin.",
+      "allergies": "Aspirin \u2014 it causes stomach bleeding.",
+      "familyHistory": "Brother had a stroke at 70.",
+      "socialSmokingAlcohol": "I quit smoking twenty years ago. I don't drink.",
+      "socialOccupation": "Retired accountant."
     }
   },
   "new-onset-atrial-fibrillation": {
@@ -40944,6 +41451,19 @@ window.CRT_DATA = {
           "Note": "STICH trial: surgical evacuation no clear benefit in deep ICH; superficial lobar ICH + deterioration may benefit; EVD for obstructive hydrocephalus; MISTIE for minimally invasive approaches"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 66-year-old man who suddenly collapsed at home.",
+      "hpiOnset": "I was \u2014 I was on the phone \u2014 and then \u2014 I fell. My head \u2014 the pain was sudden \u2014 I couldn't \u2014",
+      "hpiProgression": "I'm having trouble \u2014 the words \u2014 my wife called 911. The pain is still here. Right here.",
+      "hpiAssociatedSymptoms": "My left side \u2014 I can't move it \u2014 and I feel sick to my stomach. The pain in my head is very bad.",
+      "hpiLocationPattern": "The pain is on the right side of my head \u2014 inside. My left arm and leg won't respond.",
+      "pmh": "Very high blood pressure \u2014 my doctor keeps adjusting my medicines. I've been bad about taking them.",
+      "medications": "Amlodipine. Metoprolol. Hydrochlorothiazide. I ran out of them last week.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "My mother had a stroke.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink on weekends \u2014 maybe more than I should.",
+      "socialOccupation": "Construction foreman."
     }
   },
   "alcohol-withdrawal-seizures": {
@@ -41124,6 +41644,19 @@ window.CRT_DATA = {
           "Note": "Wernicke encephalopathy \u2014 thiamine 500mg IV TID x3 days (high dose); glucose before thiamine precipitates in at-risk patients"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 44-year-old man who has been drinking heavily for years.",
+      "hpiOnset": "I've been drinking a fifth of vodka a day for the past two years. I ran out of money three days ago \u2014 stopped completely. An hour ago I had a seizure.",
+      "hpiProgression": "I woke up on the floor. I bit my tongue. I'm very shaky now \u2014 trembling all over. I've had DTs before \u2014 six years ago \u2014 and I'm scared.",
+      "hpiAssociatedSymptoms": "Severe tremors. Sweating. My heart is racing. I see things \u2014 shadows \u2014 at the edge of my vision. I feel very anxious.",
+      "hpiLocationPattern": "The trembling is everywhere \u2014 my hands especially. The anxiety feels like it's in my chest.",
+      "pmh": "Alcohol use disorder for fifteen years. Previous delirium tremens six years ago. Hepatitis C. Pancreatitis.",
+      "medications": "Nothing currently.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father was an alcoholic. Mother had anxiety.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I've been drinking a fifth of vodka daily for two years.",
+      "socialOccupation": "Unemployed. Previously a carpenter."
     }
   },
   "aki-differential": {
@@ -42029,6 +42562,19 @@ window.CRT_DATA = {
           "Note": "Obstructed infected kidney = urological emergency \u2014 ureteral stent or nephrostomy tube regardless of hemodynamic status; source control is part of resuscitation"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 31-year-old woman with severe back pain and high fever.",
+      "hpiOnset": "For three days I had burning when I urinate and I thought it was just a bladder infection. But yesterday the pain moved to my back and today I have a fever of 103 and chills.",
+      "hpiProgression": "I feel terrible \u2014 worse than this morning. I'm shaking with chills and my back is on fire. I vomited twice on the way here.",
+      "hpiAssociatedSymptoms": "Burning urination, frequent urination, now back pain \u2014 right side. The fever started last night and it's been getting higher.",
+      "hpiLocationPattern": "The pain is in my right flank \u2014 my right side and back. And the burning is when I urinate.",
+      "pmh": "Recurrent urinary tract infections \u2014 this is probably my fourth this year. Otherwise healthy.",
+      "medications": "I took some leftover Bactrim I had from before \u2014 two days of it but it didn't help. Birth control pill.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Mother has kidney stones.",
+      "socialSmokingAlcohol": "I don't smoke. I drink socially on weekends.",
+      "socialOccupation": "Kindergarten teacher. Eight weeks pregnant \u2014 I should mention that."
     }
   },
   "spontaneous-bacterial-peritonitis": {
@@ -42950,6 +43496,19 @@ window.CRT_DATA = {
           "Note": "Rhabdo-induced AKI, hyperkalemia, acidosis \u2014 aggressive IV fluids, treat K+, monitor UO"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 22-year-old woman who had surgery an hour ago \u2014 brought by the anesthesiologist.",
+      "hpiOnset": "I was under general anesthesia for a routine appendectomy. About thirty minutes in, the anesthesiologist noticed something wrong \u2014 my temperature shot up and my muscles went rigid.",
+      "hpiProgression": "I'm barely conscious. The anesthesiologist stopped the surgery. My temperature is \u2014 I heard them say over 41 degrees. My muscles are still rigid.",
+      "hpiAssociatedSymptoms": "I'm barely aware but I know I'm burning from the inside. Very confused. My muscles feel locked.",
+      "hpiLocationPattern": "Full body rigidity and hyperthermia.",
+      "pmh": "Healthy. Appendicitis \u2014 that's why I was in the OR. No prior anesthesia issues that I know of.",
+      "medications": "None routinely.",
+      "allergies": "I don't know. This is my first surgery.",
+      "familyHistory": "My father apparently had a problem with anesthesia \u2014 I remember my mother mentioning it. I forgot to tell the anesthesiologist.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "College student."
     }
   },
   "hyperkalemia-with-concurrent-acs": {
@@ -43134,6 +43693,19 @@ window.CRT_DATA = {
           "Note": "Concurrent STEMI + severe hyperK: treat both simultaneously; calcium gluconate immediately (cardiac protection); heparin, aspirin for STEMI; emergent dialysis can run during or immediately after PCI; do not delay either treatment"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 67-year-old man on dialysis with chest pain and a very high potassium.",
+      "hpiOnset": "I've missed two dialysis sessions \u2014 my access clotted. I came in with weakness and palpitations and now I have this crushing chest pain that started twenty minutes ago.",
+      "hpiProgression": "The chest pain is severe \u2014 going to my left arm. And my heartbeat feels \u2014 irregular, very strange. I know my potassium is high when I miss dialysis but the chest pain is new.",
+      "hpiAssociatedSymptoms": "Crushing chest pain radiating left arm. Palpitations. Extreme leg weakness from hyperkalemia. Sweating.",
+      "hpiLocationPattern": "Chest \u2014 crushing, to the left arm. Leg weakness from the potassium. Both happening at once.",
+      "pmh": "ESRD on hemodialysis. Coronary artery disease \u2014 stent placed two years ago. Type 2 diabetes. Hypertension.",
+      "medications": "Aspirin. Clopidogrel. Atorvastatin. Metoprolol. Insulin glargine. Sevelamer. I have not taken my medications in two days.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease and kidney disease.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired factory supervisor."
     }
   },
   "deep-vein-thrombosis": {
@@ -43468,6 +44040,19 @@ window.CRT_DATA = {
           "Note": "Closure at 48-72h if swelling resolved \u2014 delayed primary if possible; STSG if cannot approximate; VAC to reduce edema and promote granulation"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 26-year-old man with a broken leg and unbearable pain.",
+      "hpiOnset": "I broke my right lower leg playing soccer four hours ago \u2014 they splinted it at the urgent care. But the pain has been getting worse every hour, not better. Now it's beyond what the pain medication touches.",
+      "hpiProgression": "The pain is constant and getting worse \u2014 and it's out of proportion to a broken leg. My foot is tingling and I can barely move my toes.",
+      "hpiAssociatedSymptoms": "The pain is much worse when the nurses try to move my foot. Tingling in my foot. My leg feels like it's going to explode from the inside.",
+      "hpiLocationPattern": "Front of the right lower leg \u2014 it's a pressure pain from inside, not the fracture site. Tingling from the foot.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink socially. I don't smoke.",
+      "socialOccupation": "Physical education teacher."
     }
   },
   "acute-hemolytic-transfusion-reaction": {
@@ -43636,6 +44221,19 @@ window.CRT_DATA = {
           "Note": "AHTR \u2192 DIC \u2192 AKI; replace fibrinogen (cryo), FFP, platelets; aggressive hydration for myoglobinuria; treat hyperkalemia"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 54-year-old woman who started feeling very wrong during a blood transfusion.",
+      "hpiOnset": "About fifteen minutes into this blood transfusion \u2014 I'm here for anemia \u2014 I suddenly felt a burning pain in my back and I got very chilled. I told the nurse immediately.",
+      "hpiProgression": "The back pain is severe. I have chills and feel feverish. I feel like something is very wrong \u2014 a dread I can't explain. My chest tightens.",
+      "hpiAssociatedSymptoms": "Severe low back pain. Chills and fever. Chest tightness. A feeling of impending doom. My urine \u2014 I need to go and I'm afraid what it will look like.",
+      "hpiLocationPattern": "The burning is in my back \u2014 lumbar. And throughout my body \u2014 chills, chest tightness, anxiety.",
+      "pmh": "Sickle cell disease. Multiple prior transfusions. Chronic anemia.",
+      "medications": "Hydroxyurea. Folic acid.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Sickle cell disease in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Nurse."
     }
   },
   "epidural-abscess": {
@@ -43819,6 +44417,19 @@ window.CRT_DATA = {
           "Note": "Neurological deterioration on antibiotics = emergent surgical decompression \u2014 <36h from onset of weakness predicts best recovery"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 48-year-old man with severe back pain who cannot walk.",
+      "hpiOnset": "I've had back pain for a week \u2014 I have chronic back pain so I didn't think much of it. But three days ago it became severe and different. And today my legs are \u2014 I can barely move them.",
+      "hpiProgression": "The pain is now completely debilitating \u2014 worse than anything. And I have weakness in both legs and I've been having trouble urinating. I had a steroid injection in my back two weeks ago.",
+      "hpiAssociatedSymptoms": "Fever for four days \u2014 I thought it was the flu. Severe midline back pain. Bilateral leg weakness. Urinary difficulty.",
+      "hpiLocationPattern": "Midline back pain \u2014 thoracic, around the bra line. Radiates to both legs. It's deep \u2014 not muscular.",
+      "pmh": "Chronic low back pain \u2014 multiple lumbar epidural steroid injections. Type 2 diabetes. Obesity.",
+      "medications": "Metformin. Gabapentin. Ibuprofen. I had an epidural steroid injection two weeks ago.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Diabetes in family.",
+      "socialSmokingAlcohol": "I don't smoke. I drink beer on weekends.",
+      "socialOccupation": "HVAC technician."
     }
   },
   "hypoglycemia": {
@@ -44182,6 +44793,19 @@ window.CRT_DATA = {
           "Note": "Balloon tamponade (Sengstaken-Blakemore) as bridge to TIPS"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 62-year-old man who vomited blood.",
+      "hpiOnset": "About an hour ago I vomited \u2014 there was blood in it. A lot of blood. Dark, like coffee grounds, and some bright red. I've had stomach pain for a week.",
+      "hpiProgression": "This morning it went from stomach pain to vomiting blood. I feel lightheaded now, like I might pass out if I stand up.",
+      "hpiAssociatedSymptoms": "Black tarry stools for the past three days \u2014 I thought it was from something I ate. My belly has been hurting \u2014 burning \u2014 especially at night.",
+      "hpiLocationPattern": "The pain is in the upper middle of my abdomen. The blood was coming from my stomach \u2014 I vomited it.",
+      "pmh": "I take ibuprofen every day for my back \u2014 I've been doing it for years. I drink alcohol more than I should.",
+      "medications": "Ibuprofen 800mg three times a day. Lisinopril for blood pressure.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father had stomach cancer.",
+      "socialSmokingAlcohol": "I smoke half a pack a day. I drink \u2014 probably six to eight drinks a night, more on weekends.",
+      "socialOccupation": "Construction worker. The ibuprofen is the only thing that gets me through the day."
     }
   },
   "uremic-encephalopathy": {
@@ -44369,6 +44993,19 @@ window.CRT_DATA = {
           "Note": "Dialysis disequilibrium syndrome: rapid urea clearance \u2192 cerebral edema; first session highest risk \u2014 use low-efficiency, slow first dialysis (BUN reduction <40%); treat with hypertonic saline or mannitol; shorter sessions for first 2-3 treatments"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 66-year-old man on dialysis who missed sessions and is barely conscious.",
+      "hpiOnset": "My husband missed his last three dialysis sessions \u2014 he was in the hospital for his hip and dialysis was never arranged. He's been getting more confused over three days and today I can't wake him properly.",
+      "hpiProgression": "He's gone from confused to barely responsive. He's been making jerking movements with his arms. His breathing is different \u2014 deep and labored.",
+      "hpiAssociatedSymptoms": "Nearly unresponsive. Myoclonic jerks of the arms. Kussmaul breathing. Extremely pale.",
+      "hpiLocationPattern": "The unresponsiveness is diffuse \u2014 the whole brain. The jerking is arms and legs.",
+      "pmh": "End-stage renal disease on hemodialysis three times weekly. Hypertension. Type 2 diabetes. Recent hip fracture.",
+      "medications": "Insulin glargine. Amlodipine. Sevelamer. Calcitriol. Aspirin.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Kidney disease in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Retired."
     }
   },
   "viral-meningitis": {
@@ -45095,6 +45732,19 @@ window.CRT_DATA = {
           "Note": "Exertional heat stroke \u2192 multi-organ dysfunction \u2014 rhabdo-AKI (alkalinize urine, aggressive fluids), hepatic injury, DIC; ICU monitoring; dialysis criteria if oliguria persists"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 19-year-old Marine recruit who collapsed during training.",
+      "hpiOnset": "We've been drilling in extreme heat for six hours. I felt sick about thirty minutes before I went down \u2014 dizzy and nauseated. Then I stopped making sense according to my sergeant.",
+      "hpiProgression": "I know I'm confused \u2014 I can hear the words but processing is slow. I haven't been sweating even though it's extremely hot.",
+      "hpiAssociatedSymptoms": "I stopped sweating. Confusion. Nausea. My skin is hot and dry. Heart pounding.",
+      "hpiLocationPattern": "The confusion and heat feeling is everywhere \u2014 not localized.",
+      "pmh": "Healthy. No medical problems. I'm in excellent physical condition.",
+      "medications": "None. I've been taking pre-workout supplements.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I don't drink or smoke. I'm a Marine recruit.",
+      "socialOccupation": "Marine recruit \u2014 first month of boot camp."
     }
   },
   "tick-borne-illness": {
@@ -45469,6 +46119,19 @@ window.CRT_DATA = {
           "Note": "Distinction matters: dopamine-withdrawal NMS (Parkinson patients) = restart dopaminergic agents; medically manage rigidity; true NMS = stop offending agent; treat sepsis regardless \u2014 both can coexist; fever + rigidity + CK elevation = ICU level care in either case"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 71-year-old man with Parkinson's disease who is burning up and rigid.",
+      "hpiOnset": "I have Parkinson's disease and I've been on carbidopa-levodopa for years. My wife says I was doing much worse movement-wise for two days \u2014 more rigid. Then today high fever and confusion.",
+      "hpiProgression": "I ran out of my Parkinson's medication five days ago. Since then I've gotten more rigid and now I'm frankly septic \u2014 fever 103, confused. My wife says I'm burning up.",
+      "hpiAssociatedSymptoms": "High fever. Extreme Parkinsonian rigidity from missed medications. Confusion. My wife says I haven't urinated much in two days.",
+      "hpiLocationPattern": "The rigidity is full body \u2014 from the Parkinson's. The fever and illness feel systemic.",
+      "pmh": "Parkinson's disease for ten years. Benign prostatic hyperplasia. Hypertension.",
+      "medications": "Carbidopa-levodopa \u2014 ran out five days ago. Tamsulosin. Amlodipine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Parkinson's in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Retired teacher. My wife is my primary caregiver."
     }
   },
   "occupational-asthma-isocyanate": {
@@ -46199,6 +46862,19 @@ window.CRT_DATA = {
           "Note": "NMS resolution 2-14 days; antipsychotic rechallenge >2 weeks after full resolution, different agent class"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 32-year-old man with schizophrenia who is rigid and burning up.",
+      "hpiOnset": "I was started on haloperidol two weeks ago \u2014 a higher dose than before. For the last three days I've had muscle stiffness that keeps getting worse. Today my temperature shot up.",
+      "hpiProgression": "My muscles are so rigid I can barely move. I'm sweating. I'm very confused \u2014 more than usual. The group home staff brought me in.",
+      "hpiAssociatedSymptoms": "Severe muscle rigidity. High fever \u2014 I heard them say 40.4\u00b0C. Confusion. Inability to move normally.",
+      "hpiLocationPattern": "Rigidity is everywhere \u2014 lead-pipe. The heat feels internal.",
+      "pmh": "Schizophrenia \u2014 ten years. Two prior psychiatric hospitalizations. I've had medication changes several times.",
+      "medications": "Haloperidol \u2014 dose increased to 15mg two weeks ago. Benztropine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Schizophrenia in family.",
+      "socialSmokingAlcohol": "I smoke heavily. I don't drink.",
+      "socialOccupation": "Group home resident."
     }
   },
   "sympathomimetic-toxicity": {
@@ -46699,6 +47375,19 @@ window.CRT_DATA = {
           "Note": "Short bowel syndrome threshold ~100cm; teduglutide for GLP-2 analogue therapy; intestinal transplant consideration; TPN dependency counseling"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 71-year-old man with sudden severe abdominal pain.",
+      "hpiOnset": "About two hours ago \u2014 sudden, severe pain in my abdomen. Not like anything I've had before. It started in the middle of my belly.",
+      "hpiProgression": "The pain was excruciating at first and then \u2014 strangely \u2014 it got a little better. But now it's coming back and worse. I had diarrhea \u2014 watery, some blood.",
+      "hpiAssociatedSymptoms": "Bloody diarrhea. Vomiting. The pain that was so bad and then briefly better \u2014 I've heard that's not a good sign.",
+      "hpiLocationPattern": "Midabdominal pain \u2014 diffuse. And I feel sick all over.",
+      "pmh": "Atrial fibrillation \u2014 I had my heart shock three times. Heart failure. High blood pressure.",
+      "medications": "Warfarin \u2014 but my last INR was 1.4, which my cardiologist said was too low. Metoprolol. Furosemide.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease on both sides.",
+      "socialSmokingAlcohol": "Former smoker \u2014 thirty-year history, quit fifteen years ago. I don't drink.",
+      "socialOccupation": "Retired postal worker."
     }
   },
   "phlegmasia-cerulea-dolens": {
@@ -46865,6 +47554,19 @@ window.CRT_DATA = {
           "Note": "Major bleeding on CDT \u2014 stop tPA; mechanical thrombectomy as alternative; surgical thrombectomy if limb threatened; transfuse; decision based on limb viability vs bleeding severity"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 49-year-old woman whose entire left leg has turned blue-purple.",
+      "hpiOnset": "I have pancreatic cancer \u2014 diagnosed two months ago. My left leg has been swelling for a week. But today it turned a dark blue-purple and the pain is excruciating. I can barely feel my foot.",
+      "hpiProgression": "This happened very rapidly today \u2014 within hours the leg went from swollen-and-painful to purple-and-barely-feeling. The swelling is from my groin all the way to my toes.",
+      "hpiAssociatedSymptoms": "Entire left leg \u2014 purple, massively swollen, exquisitely tender, cold foot with absent sensation. I fear I am losing my leg.",
+      "hpiLocationPattern": "The entire left leg \u2014 groin to toes. Purple, cold, and I cannot feel the foot.",
+      "pmh": "Pancreatic adenocarcinoma \u2014 on gemcitabine. Recently placed a port for chemotherapy.",
+      "medications": "Gemcitabine every two weeks. Ondansetron. Oxycodone for pain.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Pancreatic cancer \u2014 father.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "High school art teacher on medical leave."
     }
   },
   "lethal-catatonia": {
@@ -47031,6 +47733,19 @@ window.CRT_DATA = {
           "Note": "ECT is definitive treatment for benzodiazepine-refractory catatonia \u2014 superior to lorazepam alone; anesthetic risk acceptable given life-threatening presentation; rapid response expected"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 27-year-old woman brought in after days of not moving.",
+      "hpiOnset": "She \u2014 I am having trouble speaking. I have been \u2014 still \u2014 for three days. My mother brought me. I have schizophrenia and I haven't \u2014 I didn't take my medicine for two weeks.",
+      "hpiProgression": "I stopped speaking five days ago. I stopped eating. I stopped moving. My temperature is \u2014 the nurse said it's very high.",
+      "hpiAssociatedSymptoms": "High fever. Rigidity. Not eating or drinking for days. My mother says I have been staring and posturing.",
+      "hpiLocationPattern": "I cannot describe it \u2014 I am locked inside myself.",
+      "pmh": "Schizophrenia since age 22. Two prior psychiatric hospitalizations. No prior catatonia.",
+      "medications": "Risperidone \u2014 stopped two weeks ago because of side effects.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Schizophrenia in family.",
+      "socialSmokingAlcohol": "I smoke. I don't drink.",
+      "socialOccupation": "Lives with mother. Previously a grocery store cashier."
     }
   },
   "severe-hyperkalemia-from-missed-dialysis": {
@@ -47198,6 +47913,19 @@ window.CRT_DATA = {
           "Note": "Bridge to dialysis: calcium gluconate, bicarb, insulin/dextrose, albuterol \u2014 all simultaneously"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 59-year-old woman on dialysis who missed three sessions.",
+      "hpiOnset": "I had a family emergency out of state \u2014 I missed three dialysis sessions this week. I drove back this morning because my legs stopped working properly.",
+      "hpiProgression": "I can barely move my legs. And my heart is doing something strange \u2014 I can feel it. I've been on dialysis for two years and I know when something is wrong.",
+      "hpiAssociatedSymptoms": "Profound leg weakness. Heart pounding and irregular. Nausea. I know my potassium must be very high.",
+      "hpiLocationPattern": "The weakness is in my legs \u2014 I can barely lift them. The heart sensation is right here in my chest.",
+      "pmh": "ESRD on hemodialysis. Type 2 diabetes. High blood pressure. Previous hyperkalemia hospitalization.",
+      "medications": "Insulin glargine. Amlodipine. Sevelamer. Calcitriol. I have not taken anything in three days.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Kidney disease and diabetes in my family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Middle school science teacher."
     }
   },
   "ureterolithiasis": {
@@ -47558,6 +48286,19 @@ window.CRT_DATA = {
           "Note": "Fournier gangrene \u2014 Hinchey staging; fecal diversion often required; testicular salvage possible if tunica albuginea intact"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 48-year-old man with diabetes and a rapidly spreading leg infection.",
+      "hpiOnset": "I scraped my shin on a coffee table five days ago \u2014 minor wound. But the pain around the wound has become extreme \u2014 out of proportion \u2014 and now the skin is turning dark with fluid-filled blisters.",
+      "hpiProgression": "The discoloration and swelling are spreading faster than seems possible \u2014 several centimeters per hour, my wife says. The blisters are gray. And ironically, the pain is decreasing \u2014 which terrifies me.",
+      "hpiAssociatedSymptoms": "Spreading skin necrosis with blistering. Crepitus under the skin \u2014 crackling sensation. Decreasing pain in necrotic area. High fever and systemic illness.",
+      "hpiLocationPattern": "Right lower leg \u2014 from the scrape wound and spreading rapidly in all directions. Crepitus on palpation.",
+      "pmh": "Type 2 diabetes \u2014 A1C 10.8. Obesity. Chronic venous insufficiency.",
+      "medications": "Metformin. Glipizide. Lisinopril.",
+      "allergies": "Amoxicillin \u2014 hives.",
+      "familyHistory": "Diabetes throughout family.",
+      "socialSmokingAlcohol": "I smoke half a pack a day. I drink on weekends.",
+      "socialOccupation": "High school football coach."
     }
   },
   "gas-gangrene": {
@@ -47723,6 +48464,19 @@ window.CRT_DATA = {
           "Note": "Gas gangrene with extensive myonecrosis \u2014 amputation when viable tissue plane identified; above-knee preferred to ensure clean margins; hyperbaric oxygen if available as adjunct to surgery"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 34-year-old farmer with a contaminated wound that is killing his leg.",
+      "hpiOnset": "I cut my right leg on farm equipment yesterday \u2014 a deep wound. I cleaned it and bandaged it. But this morning the pain around it is agonizing and the tissue looks \u2014 wrong. And there is a smell.",
+      "hpiProgression": "Within twelve hours this went from a clean-looking cut to spreading discoloration with gas bubbles I can feel under the skin. I feel extremely ill \u2014 like I have the worst flu of my life.",
+      "hpiAssociatedSymptoms": "Wound site: bronze-brown skin, crepitus, foul smell. High fever. Extreme weakness and confusion. The tissue feels dead under my fingers.",
+      "hpiLocationPattern": "Right lower leg \u2014 the wound site and spreading. Crepitus extends four inches in every direction from the wound.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink beer on weekends. I don't smoke.",
+      "socialOccupation": "Farmer."
     }
   },
   "acute-mi-with-av-block": {
@@ -47898,6 +48652,19 @@ window.CRT_DATA = {
           "Note": "RV infarct: volume-dependent \u2014 diuretics harmful; IVF cautiously; dobutamine for RV failure; avoid anything reducing preload (nitrates, morphine); pacing for CHB"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 63-year-old man with chest pain and a very slow heart rate.",
+      "hpiOnset": "The chest pain started about two hours ago \u2014 pressure, going to my jaw. But I also feel like my heart is barely beating \u2014 very slow, dizzy, almost passed out twice.",
+      "hpiProgression": "The chest pain is still there \u2014 heavy, like something is sitting on me. And I feel lightheaded constantly because my heart is so slow.",
+      "hpiAssociatedSymptoms": "Jaw pain. Nausea. The slow heartbeat makes me feel faint every time I move. I'm sweating.",
+      "hpiLocationPattern": "Pressure in my lower chest and epigastrium \u2014 not quite where I expected. Goes to my jaw.",
+      "pmh": "High blood pressure. High cholesterol. Type 2 diabetes. I was told I have a 'conduction problem' on my ECG.",
+      "medications": "Metformin. Atorvastatin. Lisinopril. Aspirin. Metoprolol \u2014 I took a double dose this morning by mistake.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Father had a heart attack at 60. Mother had diabetes.",
+      "socialSmokingAlcohol": "I smoke half a pack a day. I drink beer on weekends.",
+      "socialOccupation": "Postal carrier."
     }
   },
   "crohn-flare": {
@@ -48429,6 +49196,19 @@ window.CRT_DATA = {
           "Note": "Eculizumab targets C5 \u2014 C3 mutations cause upstream escape; ravulizumab (long-acting C5 inhibitor) or avacopan (C5a inhibitor); multidisciplinary rare disease referral"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 28-year-old woman with kidney failure and bruising who is very confused.",
+      "hpiOnset": "For two weeks I've had fatigue and what I thought was a flu. But the last three days I've been bruising easily everywhere and my urine is dark \u2014 almost brown.",
+      "hpiProgression": "I feel very confused today \u2014 my husband noticed first. And I've barely urinated in two days. No bloody diarrhea \u2014 which is what they asked me about on the phone.",
+      "hpiAssociatedSymptoms": "Widespread bruising, dark urine, decreased urination, confusion, and profound fatigue. No diarrheal illness.",
+      "hpiLocationPattern": "The bruising is all over my arms and legs. The dark urine is new in the past three days.",
+      "pmh": "Healthy. No prior kidney disease. No recent GI illness. I am pregnant \u2014 eight weeks.",
+      "medications": "Prenatal vitamins.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "A cousin had a kidney transplant for an unknown reason in her thirties.",
+      "socialSmokingAlcohol": "I don't smoke or drink \u2014 I'm pregnant.",
+      "socialOccupation": "Dental hygienist. Eight weeks pregnant."
     }
   },
   "superior-vena-cava-syndrome": {
@@ -48792,6 +49572,19 @@ window.CRT_DATA = {
           "Note": "SPORT trial: surgery then RT superior to RT alone in ambulatory patients with 1 spinal level; radiosensitive tumor (prostate) may respond to RT alone; instability (SINS \u22657) favors surgical stabilization first"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 58-year-old woman with breast cancer and new leg weakness.",
+      "hpiOnset": "I was diagnosed with metastatic breast cancer eight months ago. For the past week, the back pain I've had for months suddenly got much worse. And yesterday my legs started to feel weak.",
+      "hpiProgression": "I went from walking to barely walking in two days. Today I couldn't get out of bed without help. And I noticed this morning I haven't urinated since yesterday.",
+      "hpiAssociatedSymptoms": "Mid-back pain \u2014 very different from my usual bone pain, more like pressure. Bilateral leg weakness and numbness. Unable to urinate.",
+      "hpiLocationPattern": "Mid-thoracic back \u2014 a deep pressure. Then weakness going down both legs equally. Loss of bladder sensation.",
+      "pmh": "Metastatic breast cancer (HR+, HER2-) \u2014 on palbociclib and letrozole. Known bone metastases to spine and pelvis.",
+      "medications": "Palbociclib. Letrozole. Zoledronic acid. Oxycodone for bone pain.",
+      "allergies": "Penicillin \u2014 rash.",
+      "familyHistory": "Mother had breast cancer.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Retired pharmacist."
     }
   },
   "dementia-with-acute-delirium": {
@@ -49289,6 +50082,19 @@ window.CRT_DATA = {
           "Note": "Surgical decompression preferred if <24h deficit onset and surgeon available \u2014 SPORT trial; steroids (dexamethasone 10mg load) while deciding; radiation for radiosensitive tumors"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 61-year-old man with known prostate cancer and new leg weakness.",
+      "hpiOnset": "I have prostate cancer that spread to my bones \u2014 they found it six months ago. For the last three days my legs have been getting progressively weaker. And this morning I couldn't urinate.",
+      "hpiProgression": "I went from walking slowly to barely walking in three days. My legs feel numb below the knees. The bladder thing is completely new today \u2014 very alarming.",
+      "hpiAssociatedSymptoms": "Bilateral leg weakness and numbness. Bladder retention \u2014 I cannot urinate. And low back pain that's been getting worse for two weeks.",
+      "hpiLocationPattern": "The weakness is both legs equally. The numbness is in the inner thighs and perineum. Low back pain radiating to both legs.",
+      "pmh": "Prostate cancer with bone metastases \u2014 on hormonal therapy. Hypertension. Osteoporosis.",
+      "medications": "Leuprolide injection monthly. Abiraterone. Lisinopril. Zoledronic acid.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Prostate cancer in father and brother.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired contractor."
     }
   },
   "acute-mi": {
@@ -49474,6 +50280,19 @@ window.CRT_DATA = {
           "DaysSinceSTEMI": "5 (anterior)"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 58-year-old man with crushing chest pain.",
+      "hpiOnset": "It started about 45 minutes ago \u2014 right in the middle of my chest, like something is sitting on it. I'm not a complainer but this scared me.",
+      "hpiProgression": "It's not getting better. The pain keeps going down my left arm and up into my jaw. I've never felt anything like this.",
+      "hpiAssociatedSymptoms": "I'm sweating through my shirt and I feel like I might throw up. I'm also having trouble catching my breath.",
+      "hpiLocationPattern": "It's right here in the center of my chest \u2014 squeezing, like a vice. Goes to my left arm and jaw.",
+      "pmh": "High blood pressure for years. My doctor told me my cholesterol was high but I never took the medicine.",
+      "medications": "Lisinopril for blood pressure. I stopped taking it a few months ago because I felt fine.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "My father had a heart attack at 55 and died. My brother had bypass surgery last year.",
+      "socialSmokingAlcohol": "I smoke about a pack a day, have for thirty years. I drink a beer or two on weekends.",
+      "socialOccupation": "I'm a long-haul truck driver."
     }
   },
   "hcm": {
@@ -50687,6 +51506,19 @@ window.CRT_DATA = {
           "Note": "Anticoagulation timing after embolectomy: heparin typically 24-48h post-op if hemostasis adequate; long-term anticoagulation for AF; discussion of DOAC vs warfarin"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 68-year-old man whose left leg stopped working suddenly.",
+      "hpiOnset": "About two hours ago my left leg went from normal to \u2014 terrible. Sudden pain, ice cold, and I can barely move it. It happened in minutes.",
+      "hpiProgression": "The leg is ice cold from the knee down. I can't move the foot. The pain was severe at first and now it's going numb \u2014 which I know is bad.",
+      "hpiAssociatedSymptoms": "Cold, white, and pulseless left foot. Loss of sensation and movement. The coldness is spreading up toward the knee.",
+      "hpiLocationPattern": "Left leg from the knee down \u2014 cold, pale, pulseless. The line of temperature change is just below the knee.",
+      "pmh": "Atrial fibrillation \u2014 I was just cardioverted two weeks ago. Heart failure. High blood pressure.",
+      "medications": "Metoprolol. Furosemide. Aspirin. My cardiologist said to start warfarin but I hadn't filled it yet.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease in family.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired accountant."
     }
   },
   "aortic-aneurysm": {
@@ -50861,6 +51693,19 @@ window.CRT_DATA = {
           "Note": "Type I = urgent reintervention; Type II = watchful waiting"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 76-year-old man with a known aortic aneurysm in sudden crisis.",
+      "hpiOnset": "I've been followed for a large aortic aneurysm \u2014 my vascular surgeon said 6.2cm last month, surgery was scheduled for next week. An hour ago the pain changed completely \u2014 tearing, from my belly straight through to my back.",
+      "hpiProgression": "This is not my usual back pain \u2014 this is tearing and it doesn't stop. I nearly blacked out getting into the car. My wife is driving. I feel it pulsating in my abdomen.",
+      "hpiAssociatedSymptoms": "Tearing abdominal and back pain. Near-syncope. A pulsating mass I can feel. My left leg feels colder than the right.",
+      "hpiLocationPattern": "Mid-abdomen and through to the lumbar back. Tearing, constant. The pulsation in my belly is new and larger.",
+      "pmh": "Known AAA 6.2cm under surveillance \u2014 elective repair scheduled in 8 days. Hypertension. COPD. Heavy smoking history.",
+      "medications": "Metoprolol. Amlodipine. Aspirin. Atorvastatin. Tiotropium inhaler.",
+      "allergies": "Contrast dye \u2014 anaphylaxis twenty years ago.",
+      "familyHistory": "Father had aortic aneurysm and died of rupture.",
+      "socialSmokingAlcohol": "I smoke half a pack a day \u2014 trying to quit for surgery. Former heavy smoker.",
+      "socialOccupation": "Retired firefighter."
     }
   },
   "midgut-volvulus": {
@@ -51025,6 +51870,19 @@ window.CRT_DATA = {
           "Note": "Second-look laparotomy at 24-48h for borderline bowel \u2014 avoids short bowel syndrome from overly aggressive resection; requires ICU support"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 3-week-old infant brought in by parents \u2014 bilious vomiting.",
+      "hpiOnset": "Our baby started vomiting this morning \u2014 bright green vomit. He's three weeks old and we know green vomit in a newborn means go to the ER immediately. He's been pulling his legs up.",
+      "hpiProgression": "Three episodes of bright green bilious vomiting. He's crying inconsolably and pulling his legs to his chest. His belly looks bigger than normal.",
+      "hpiAssociatedSymptoms": "Bilious vomiting \u2014 bright green. Inconsolable crying. Abdominal distension. He looks pale and very sick.",
+      "hpiLocationPattern": "His whole abdomen appears distended. The vomiting is the alarm sign \u2014 green means bile.",
+      "pmh": "Full-term delivery. Normal prenatal ultrasound. Birth weight 3.5kg. Healthy until today.",
+      "medications": "None.",
+      "allergies": "Unknown \u2014 too young.",
+      "familyHistory": "No known malrotation or volvulus in family.",
+      "socialSmokingAlcohol": "He is 3 weeks old.",
+      "socialOccupation": "Newborn."
     }
   },
   "pheochromocytoma": {
@@ -51701,6 +52559,19 @@ window.CRT_DATA = {
           "Note": "Surgical rib fixation \u2014 evidence for early (<72h) in bilateral flail improving outcomes"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 42-year-old man brought in after a car crash.",
+      "hpiOnset": "I was in a head-on collision about an hour ago. My chest hit the steering wheel. Every breath hurts so much that I'm trying not to breathe \u2014 but then I feel like I'm suffocating.",
+      "hpiProgression": "The right side of my chest \u2014 when I breathe in it goes in instead of out. I know that's not right. I'm working very hard to breathe and I'm getting tired.",
+      "hpiAssociatedSymptoms": "Severe chest pain right side. Paradoxical breathing \u2014 I can feel it. Getting more and more tired breathing.",
+      "hpiLocationPattern": "Right side chest \u2014 where I hit the wheel. Sharp pain with every breath.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
+      "socialOccupation": "Electrician."
     }
   },
   "massive-hemothorax": {
@@ -51871,6 +52742,19 @@ window.CRT_DATA = {
           "Note": "ED thoracotomy \u2014 penetrating trauma + witnessed arrest: survival data supports; blunt trauma + >10 min CPR: not indicated"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 22-year-old man brought in after a stabbing.",
+      "hpiOnset": "I got stabbed \u2014 left side of my chest \u2014 maybe twenty minutes ago. It hurts to breathe and I can feel something wrong.",
+      "hpiProgression": "The pain is getting worse and I can't get a full breath. I feel dizzy \u2014 like I'm going to pass out.",
+      "hpiAssociatedSymptoms": "I'm having trouble breathing \u2014 shallow breaths only. I feel very weak. Lots of blood.",
+      "hpiLocationPattern": "Left chest \u2014 where the knife went in. Pain with every breath.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing significant.",
+      "socialSmokingAlcohol": "I smoke marijuana occasionally. I drink on weekends.",
+      "socialOccupation": "College student."
     }
   },
   "acute-psychosis": {
@@ -53560,6 +54444,19 @@ window.CRT_DATA = {
           "Note": "Osmotic demyelination syndrome risk if >8-10 mEq/L per 24h \u2014 relower with D5W or DDAVP; target <10 mEq/24h in chronic hyponatremia"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 32-year-old man with schizophrenia brought in after a seizure.",
+      "hpiOnset": "My group home staff says I've been drinking water constantly all day \u2014 they tried to stop me but I kept finding more. Then I had a big seizure.",
+      "hpiProgression": "I've been drinking water compulsively \u2014 I can't stop. It's something my illness makes me do sometimes. Now I had a seizure and I'm confused.",
+      "hpiAssociatedSymptoms": "Compulsive water drinking. Nausea. Now confusion and post-ictal state. My medications make me thirsty.",
+      "hpiLocationPattern": "No real pain. Just confusion and the compulsion to drink water.",
+      "pmh": "Schizophrenia since age 20. Previous hospitalizations for psychogenic polydipsia \u2014 twice before. Seizure disorder secondary to hyponatremia.",
+      "medications": "Clozapine 300mg. Benztropine. The clozapine makes me very thirsty.",
+      "allergies": "Haloperidol \u2014 extrapyramidal side effects.",
+      "familyHistory": "Schizophrenia in family.",
+      "socialSmokingAlcohol": "I smoke heavily. I don't drink alcohol.",
+      "socialOccupation": "Group home resident. I used to work in the mailroom."
     }
   },
   "hypothyroidismrelated-hyponatremia": {
@@ -53908,6 +54805,19 @@ window.CRT_DATA = {
           "Note": "Delayed spinal cord ischemia post-TEVAR \u2014 emergent CSF drainage (target pressure <10 mmHg), permissive HTN (MAP 85-95), avoid hypotension; recovery possible if <12h"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 33-year-old motorcyclist after a high-speed crash.",
+      "hpiOnset": "I was on my motorcycle and was hit by a car \u2014 about forty minutes ago. I have chest and back pain. The paramedics said the mechanism was high-energy.",
+      "hpiProgression": "The chest pain is \u2014 different. Not like a rib fracture. It's deep and in my upper back and between my shoulder blades. My blood pressure \u2014 the paramedics kept saying it was unstable.",
+      "hpiAssociatedSymptoms": "Deep chest and inter-scapular pain. I feel faint. Different blood pressure in my arms \u2014 the paramedic said my left arm pressure was much lower than my right.",
+      "hpiLocationPattern": "Upper chest and between shoulder blades \u2014 deep, not the skin. The difference in arm blood pressures is alarming.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
+      "socialOccupation": "Paramedic."
     }
   },
   "acute-anterior-uveitis": {
@@ -54249,6 +55159,19 @@ window.CRT_DATA = {
           "Note": "Target fibrinogen >150 in DIC with hemorrhage; fibrinogen concentrate (RiaSTAP) more predictable dosing than cryo; treat underlying cause \u2014 source control is key"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 44-year-old man who had emergency abdominal surgery after a stabbing.",
+      "hpiOnset": "I was stabbed \u2014 emergency surgery was done. I'm post-op now and I'm bleeding from everywhere \u2014 my incision, my IV sites, my NGT output has blood in it.",
+      "hpiProgression": "The surgical team says I have DIC \u2014 my blood won't clot. I'm losing blood from every surface. I feel extremely weak and confused.",
+      "hpiAssociatedSymptoms": "Bleeding from incision, IV sites, drains, and mucous membranes. Severe hypotension. Confusion.",
+      "hpiLocationPattern": "Diffuse \u2014 bleeding from everywhere simultaneously.",
+      "pmh": "Healthy. No prior bleeding disorders.",
+      "medications": "None prior.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
+      "socialOccupation": "Construction worker."
     }
   },
   "acute-mi-dyspnea": {
@@ -54600,6 +55523,19 @@ window.CRT_DATA = {
           "Note": "Abdominal compartment syndrome \u2014 decompressive laparotomy; reassess fluid strategy; temporary abdominal closure"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 45-year-old woman with severe upper abdominal pain.",
+      "hpiOnset": "It started about six hours ago \u2014 right after a big dinner with fatty foods. The pain in my upper belly went from bad to excruciating within an hour.",
+      "hpiProgression": "It's going straight through to my back \u2014 like a band across my upper belly and into my spine. I cannot find a position that helps.",
+      "hpiAssociatedSymptoms": "I've vomited five or six times \u2014 it doesn't help the pain at all. I have a fever I can feel. I've had gallstones for years.",
+      "hpiLocationPattern": "Upper middle abdomen radiating straight through to my mid-back. It's relentless \u2014 doesn't come in waves, just constant.",
+      "pmh": "Gallstones for three years \u2014 I kept putting off the surgery. High cholesterol. Two previous mild pancreatitis episodes.",
+      "medications": "Atorvastatin. Birth control pill.",
+      "allergies": "Sulfa drugs \u2014 rash.",
+      "familyHistory": "Gallstones run in my family. Mother and sister both had their gallbladders out.",
+      "socialSmokingAlcohol": "I don't smoke. I drink wine \u2014 maybe two or three glasses a night.",
+      "socialOccupation": "Accountant. I've been very stressed at work lately."
     }
   },
   "alcoholrelated-pancreatitis": {
@@ -56301,6 +57237,19 @@ window.CRT_DATA = {
           "Note": "Overdrive pacing (transcutaneous or transvenous) to increase rate and shorten QTc; isoproterenol if congenital LQTS; lidocaine"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 19-year-old woman who collapsed while running.",
+      "hpiOnset": "I was running \u2014 track practice \u2014 and I just collapsed. I came back around quickly and my teammates say I was unconscious for maybe thirty seconds.",
+      "hpiProgression": "I feel okay now but I've had episodes of feeling like my heart was fluttering or stopping since I was young. My sister had the same thing.",
+      "hpiAssociatedSymptoms": "Palpitations \u2014 then sudden blackout. I've had these since I was fourteen. The last one was six months ago \u2014 I thought it was from dehydration.",
+      "hpiLocationPattern": "The heart sensation is \u2014 a flutter or pause, then everything goes dark.",
+      "pmh": "Recurrent syncope since age 14 \u2014 worked up twice as 'vasovagal.' My twin sister also has unexplained syncope.",
+      "medications": "I started azithromycin three days ago for a sinus infection. That's the only new thing.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Sister has recurrent syncope. A cousin died suddenly at 22 \u2014 cause unknown.",
+      "socialSmokingAlcohol": "I don't smoke or drink. Competitive track athlete.",
+      "socialOccupation": "College sophomore. Track scholarship."
     }
   },
   "ovarian-pathology": {
@@ -58261,6 +59210,19 @@ window.CRT_DATA = {
           "Note": "Damage control in physiologically compromised patient \u2014 anastomosis leak risk unacceptably high when BP <90 on pressors"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 63-year-old woman with prior abdominal surgery and severe bowel obstruction.",
+      "hpiOnset": "I've had prior abdominal surgeries \u2014 a hysterectomy and appendectomy. I woke up with cramping abdominal pain four hours ago \u2014 it's been constant and severe. I vomited several times.",
+      "hpiProgression": "The pain was crampy and intermittent at first but now it's constant and worse. I haven't passed gas or had a bowel movement since yesterday. My abdomen is distended and very tender.",
+      "hpiAssociatedSymptoms": "Severe constant abdominal pain. No gas or stool. Distension and direct tenderness \u2014 I can barely let you touch my abdomen.",
+      "hpiLocationPattern": "The pain is all over \u2014 constant now, not the crampy waves of before. The constancy worries me.",
+      "pmh": "Prior hysterectomy and appendectomy \u2014 two prior bowel obstruction hospitalizations from adhesions.",
+      "medications": "Lisinopril. Atorvastatin.",
+      "allergies": "Morphine \u2014 nausea and confusion.",
+      "familyHistory": "Colon cancer in family.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired nurse \u2014 I know what constant pain in obstruction means."
     }
   },
   "bacterial-tracheitis": {
@@ -58745,6 +59707,19 @@ window.CRT_DATA = {
           "Note": "Cold water submersion \u2014 better neurological outcomes; target temperature management 33-36\u00b0C; 'not dead until warm and dead' applies; EEG and CT at 24-48h"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 4-year-old child brought in after near-drowning \u2014 parents speaking.",
+      "hpiOnset": "He was found at the bottom of the pool \u2014 we don't know how long. Maybe two minutes. He was pulled out by my husband. He wasn't breathing at first.",
+      "hpiProgression": "The neighbor started CPR. He started breathing again before the ambulance came. He was crying and then went quiet. Now he's not responding normally and his breathing sounds wrong.",
+      "hpiAssociatedSymptoms": "Brief apnea \u2014 now breathing but labored. Decreased responsiveness after initial consciousness. Vomited pool water once.",
+      "hpiLocationPattern": "The concern is his breathing and his brain \u2014 both affected.",
+      "pmh": "Healthy. No medical problems. Fully vaccinated.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "He is 4 years old.",
+      "socialOccupation": "Preschool."
     }
   },
   "ruptured-aaa": {
@@ -58910,6 +59885,19 @@ window.CRT_DATA = {
           "Note": "Permissive hypotension target SBP 50-70 in oriented patient \u2014 avoid aggressive resuscitation before hemorrhage controlled"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 72-year-old man with a known aortic aneurysm who is deteriorating.",
+      "hpiOnset": "I've had a 5.5 cm aortic aneurysm that my vascular surgeon has been watching. One hour ago the pain suddenly changed \u2014 this is a new, tearing pain going from my abdomen to my back.",
+      "hpiProgression": "I've never had pain like this before. I'm sweating, I feel like I'm going to pass out, and the pain is relentless. I almost lost consciousness in the car.",
+      "hpiAssociatedSymptoms": "Tearing pain. Near-syncope. Sweating. I feel a pulsating mass in my abdomen that seems bigger. My legs \u2014 the left feels weaker.",
+      "hpiLocationPattern": "Abdomen and through to the back \u2014 lower. Pulsating and tearing. Left leg feels different from right.",
+      "pmh": "Known AAA 5.5cm under surveillance. Hypertension. Peripheral vascular disease. COPD. Former heavy smoker.",
+      "medications": "Lisinopril. Metoprolol. Aspirin. Atorvastatin.",
+      "allergies": "Contrast dye \u2014 hives, but this was years ago.",
+      "familyHistory": "Father had an aortic aneurysm. Brother had bypass surgery.",
+      "socialSmokingAlcohol": "Former smoker \u2014 forty pack-years, quit fifteen years ago. I don't drink.",
+      "socialOccupation": "Retired plumber."
     }
   },
   "hip-dislocation": {
@@ -60419,6 +61407,19 @@ window.CRT_DATA = {
           "Note": "ROTEM-guided MTP reduces FFP overuse; add cryoprecipitate for fibrinogen <150; TXA 1g if within 3h of injury; calcium after every 4 units pRBC"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 31-year-old trauma patient bleeding from multiple sites.",
+      "hpiOnset": "I was in a car accident \u2014 significant mechanism. I've received six units of packed red blood cells. Now I'm bleeding from my IV sites and the cuts aren't clotting.",
+      "hpiProgression": "The bleeding keeps coming despite pressure. My surgical team is saying my clotting factors are diluted from the blood transfusions.",
+      "hpiAssociatedSymptoms": "Oozing from IV sites and wound edges. Hypotension returning despite transfusions. Confusion \u2014 worsening.",
+      "hpiLocationPattern": "Diffuse bleeding \u2014 not from one source but everywhere.",
+      "pmh": "Healthy. No medical problems. No prior bleeding disorders.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink occasionally. I don't smoke.",
+      "socialOccupation": "Nurse practitioner."
     }
   },
   "corneal-abrasionkeratitis": {
@@ -62270,6 +63271,19 @@ window.CRT_DATA = {
           "Note": "Sine wave = imminent VF \u2014 calcium, bicarb, dialysis simultaneously"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 62-year-old woman with adrenal insufficiency and high potassium.",
+      "hpiOnset": "I have adrenal insufficiency \u2014 I've been sick with the flu for three days and vomiting so I couldn't take my steroids. Today I feel like I'm dying \u2014 my heart feels wrong and I'm profoundly weak.",
+      "hpiProgression": "No steroids for three days due to vomiting. Now: extreme weakness, heart palpitations, and my blood pressure has been dropping. I've been here before \u2014 this feels like adrenal crisis plus the potassium.",
+      "hpiAssociatedSymptoms": "Profound weakness. Palpitations \u2014 heart feels irregular. Very low blood pressure. Severe nausea.",
+      "hpiLocationPattern": "Weakness is generalized. Heart palpitations in the chest. The hypotension makes me feel faint constantly.",
+      "pmh": "Primary adrenal insufficiency for eight years \u2014 on hydrocortisone and fludrocortisone. Previous adrenal crisis twice.",
+      "medications": "Hydrocortisone 15mg morning, 5mg afternoon \u2014 could not take for three days due to vomiting. Fludrocortisone.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Autoimmune conditions in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "High school guidance counselor."
     }
   },
   "autoimmune-blistering-disease": {
@@ -64153,6 +65167,19 @@ window.CRT_DATA = {
           "Note": "CICO \u2014 surgical airway: 4-step technique (scalpel, bougie, tube, cuff)"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 43-year-old man with jaw swelling that started as a stone.",
+      "hpiOnset": "I've had pain under my tongue that comes on when I eat \u2014 for six months, a stone in my salivary gland. I never got it treated. Now the swelling has exploded in the last three days \u2014 from jaw to neck.",
+      "hpiProgression": "The submandibular swelling is now enormous and hard as a board. My mouth is being pushed up \u2014 I can barely open my jaw. My neck is swelling. High fever and I feel very sick systemically.",
+      "hpiAssociatedSymptoms": "Board-hard submandibular swelling. Trismus \u2014 cannot open mouth. Neck swelling spreading. Drooling \u2014 cannot swallow. High fever. Stridor developing.",
+      "hpiLocationPattern": "Right submandibular space \u2014 spreading to the left and down the neck. The floor of the mouth is being elevated.",
+      "pmh": "Submandibular sialolithiasis confirmed on prior imaging \u2014 never treated. Type 2 diabetes.",
+      "medications": "Metformin.",
+      "allergies": "Penicillin \u2014 swelling (angioedema).",
+      "familyHistory": "Diabetes in family.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink beer most nights.",
+      "socialOccupation": "Plumber."
     }
   },
   "meckel-diverticulum": {
@@ -64485,6 +65512,19 @@ window.CRT_DATA = {
           "Note": "Short bowel: begin enteral feeds early even in short gut \u2014 promotes adaptation; teduglutide (GLP-2) increases villous height and reduces TPN dependence; close monitoring of electrolytes, vitamins; intestinal rehabilitation program referral; transplant if TPN-dependent long-term"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 45-year-old woman with multiple prior surgeries and sudden severe pain.",
+      "hpiOnset": "I've had five abdominal surgeries \u2014 the last one three years ago for an SBO from adhesions. This morning, sudden severe periumbilical pain \u2014 immediately severe, not building up.",
+      "hpiProgression": "The pain is constant and severe. I vomited multiple times. My abdomen is very distended. I haven't passed gas or stool since yesterday.",
+      "hpiAssociatedSymptoms": "Constant severe abdominal pain. Inability to pass gas. Profound distension. Vomiting. I know what obstruction feels like \u2014 this is worse.",
+      "hpiLocationPattern": "Periumbilical constant pain \u2014 worse than my previous obstructions. The distension is dramatic.",
+      "pmh": "Five prior abdominal surgeries. Three prior small bowel obstructions. Crohn's disease in remission.",
+      "medications": "Vedolizumab for Crohn's. Omeprazole.",
+      "allergies": "Morphine \u2014 extreme nausea.",
+      "familyHistory": "Crohn's disease in family.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Pediatrician \u2014 I know this presentation is dangerous."
     }
   },
   "dvt-with-phlegmasia": {
@@ -64651,6 +65691,19 @@ window.CRT_DATA = {
           "Note": "Fasciotomy before definitive amputation may salvage proximal limb; demarcation takes days"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 54-year-old woman with a left leg that has turned purple.",
+      "hpiOnset": "My left leg has been swollen and painful for four days \u2014 I thought it was a pulled muscle. But today it turned dark purple and I can barely move it. The pain is unbearable.",
+      "hpiProgression": "The swelling and color change happened within hours today. From painful and swollen to purple and mottled. I'm terrified I'm going to lose my leg.",
+      "hpiAssociatedSymptoms": "Entire left leg \u2014 swollen, purple, exquisitely painful, cold at the foot. I cannot move the toes.",
+      "hpiLocationPattern": "The entire left leg \u2014 hip to toes. The foot is cold and I can barely feel it.",
+      "pmh": "Ovarian cancer diagnosed three months ago \u2014 on chemotherapy. Recent pelvic surgery four weeks ago.",
+      "medications": "Carboplatin and paclitaxel. Low molecular weight heparin \u2014 I was told to start it but kept forgetting.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Mother had blood clots.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Elementary school principal on medical leave."
     }
   },
   "nonocclusive-mesenteric-ischemia": {
@@ -64817,6 +65870,19 @@ window.CRT_DATA = {
           "Note": "NOMI management: treat underlying cause (improve CO); vasopressin has less splanchnic vasoconstriction than norepinephrine; avoid vasopressin alone; intra-arterial papaverine via angiography for vasospasm; surgery only if peritonitis or perforation"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 71-year-old man in the ICU with new abdominal pain.",
+      "hpiOnset": "I've been in the ICU for two days after my open heart surgery. Today I started having abdominal pain \u2014 cramping \u2014 and the nurses noticed my abdomen is getting more distended.",
+      "hpiProgression": "The pain has been getting worse since this morning. I'm nauseous and haven't had a bowel movement since before the surgery. I feel very unwell.",
+      "hpiAssociatedSymptoms": "Abdominal cramping and distension. Nausea. No bowel movement. My blood pressure has been low since surgery and I'm on vasopressors.",
+      "hpiLocationPattern": "The pain is diffuse \u2014 all over my abdomen. Cramping. And my belly looks bigger.",
+      "pmh": "Coronary artery disease \u2014 just had coronary bypass surgery two days ago. Heart failure. Diabetes. Peripheral vascular disease.",
+      "medications": "Vasopressors \u2014 norepinephrine drip. Aspirin. Metoprolol just restarted. Insulin drip.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired electrician."
     }
   },
   "xla-brutons": {
@@ -67161,6 +68227,19 @@ window.CRT_DATA = {
           "Note": "Hemodynamically unstable ruptured ectopic \u2014 laparotomy preferred over laparoscopy; faster access, better hemorrhage control"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 26-year-old woman with severe right lower abdominal pain and a missed period.",
+      "hpiOnset": "My period is six weeks late \u2014 I took a home pregnancy test and it was positive. But for the past two hours I have severe pain in my right lower abdomen \u2014 sharp, constant, making me bend over.",
+      "hpiProgression": "The pain started suddenly and has gotten worse. I feel lightheaded and I nearly fainted in the bathroom. There's some vaginal spotting.",
+      "hpiAssociatedSymptoms": "Severe right lower quadrant pain. Near-syncope. Light vaginal bleeding. Positive pregnancy test. Shoulder tip pain when I take a deep breath.",
+      "hpiLocationPattern": "Right lower abdomen \u2014 sharp and constant. And a strange pain at my right shoulder when I breathe in.",
+      "pmh": "Prior right fallopian tube surgery for a ruptured cyst. Prior chlamydia infection \u2014 treated.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I don't smoke or drink.",
+      "socialOccupation": "Pharmacy technician."
     }
   },
   "epididymoorchitis": {
@@ -67821,6 +68900,19 @@ window.CRT_DATA = {
           "Note": "Reverse triage for lightning MCI \u2014 treat the apparently dead first; lightning arrest is uniquely survivable with early CPR/defibrillation; those walking away are relatively stable; no ongoing electrical hazard once lightning has passed"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 31-year-old man struck by lightning on a golf course.",
+      "hpiOnset": "I was golfing and the storm came on suddenly. I remember a blinding flash and then \u2014 I was on the ground. I don't know how long I was unconscious.",
+      "hpiProgression": "I woke up and my arm \u2014 the right one \u2014 isn't moving. My chest hurts. My vision is blurry. There's an entry wound on my shoulder.",
+      "hpiAssociatedSymptoms": "Right arm paralysis \u2014 I hope it's temporary. Chest pain. Visual disturbance. Hearing \u2014 one ear doesn't hear well. Headache.",
+      "hpiLocationPattern": "Entry seems to be my right shoulder. My right arm is paralyzed currently. Chest pain and headache.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink socially. I don't smoke.",
+      "socialOccupation": "Firefighter."
     }
   },
   "coral-snake-envenomation": {
@@ -68135,6 +69227,19 @@ window.CRT_DATA = {
           "Note": "Bilateral ischemia >6h \u2014 bilateral four-compartment fasciotomy prophylactically; massive K+ and acid load anticipated"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 66-year-old man whose both legs stopped working at the same time.",
+      "hpiOnset": "One hour ago \u2014 both legs simultaneously went cold and paralyzed. I was just sitting down and suddenly I couldn't feel either leg from the thighs down.",
+      "hpiProgression": "Both legs \u2014 ice cold, white, and I cannot move them at all. It happened at exactly the same time. The pain was agonizing for the first thirty minutes and now it's becoming numb, which I know is worse.",
+      "hpiAssociatedSymptoms": "Bilateral leg paralysis. Both legs cold and white from the thighs down. No pulses I can feel in either leg. Loss of sensation.",
+      "hpiLocationPattern": "Both legs simultaneously \u2014 from the mid-thighs down. Ice cold bilaterally.",
+      "pmh": "Atrial fibrillation \u2014 my anticoagulation has been inconsistent. Heart failure. Prior stroke.",
+      "medications": "Warfarin \u2014 my last INR was 1.3. Metoprolol. Furosemide. Aspirin.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease.",
+      "socialSmokingAlcohol": "Former smoker. I drink wine occasionally.",
+      "socialOccupation": "Retired judge."
     }
   },
   "acute-sma-thrombosis": {
@@ -68283,6 +69388,19 @@ window.CRT_DATA = {
           "Note": "Acute-on-chronic: endovascular first (lower risk) if no peritonitis; surgical bypass if endovascular fails or if bowel resection needed simultaneously"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 78-year-old woman with severe atherosclerosis and sudden abdominal pain.",
+      "hpiOnset": "About four hours ago I developed severe pain in my abdomen \u2014 it came on suddenly and is constant. I have very bad blood vessel disease everywhere \u2014 my cardiologist says my arteries are severely narrowed.",
+      "hpiProgression": "The pain started in the center and has spread. I had bloody diarrhea an hour ago. I feel extremely ill \u2014 lightheaded and sweating.",
+      "hpiAssociatedSymptoms": "Constant midabdominal pain. Bloody diarrhea. Near-syncope. The pain is out of proportion \u2014 I know something is very wrong with my bowel blood supply.",
+      "hpiLocationPattern": "Periumbilical \u2014 constant. The blood in my stool tells me what this probably is.",
+      "pmh": "Severe peripheral arterial disease \u2014 bilateral limb claudication. Prior mesenteric angina after eating. AF. Hypertension. High cholesterol. Diabetes.",
+      "medications": "Aspirin. Clopidogrel. Atorvastatin. Metoprolol. Warfarin \u2014 INR was 1.2 last week, low. Metformin.",
+      "allergies": "Contrast dye \u2014 hives. Morphine \u2014 confusion.",
+      "familyHistory": "Widespread heart disease in family.",
+      "socialSmokingAlcohol": "Former smoker \u2014 fifty pack-years. I don't drink.",
+      "socialOccupation": "Retired nurse."
     }
   },
   "acute-thrombotic-occlusion": {
@@ -68432,6 +69550,19 @@ window.CRT_DATA = {
           "Note": "Failed thrombolysis in threatened limb \u2014 operative thrombectomy indicated; amputation only if non-viable on table"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 62-year-old man with peripheral arterial disease whose right leg is dying.",
+      "hpiOnset": "I've had poor circulation in my legs for years \u2014 I know what claudication feels like. But this morning it's different. The right leg \u2014 sudden, severe pain and it's gone ice cold.",
+      "hpiProgression": "This is not claudication \u2014 this is total loss of blood flow. The leg is white, I cannot feel my foot, and I cannot move the toes. This has been progressing for four hours.",
+      "hpiAssociatedSymptoms": "Right leg: white, cold, pulseless. No sensation below the mid-calf. Cannot dorsiflex the foot. Prior claudication \u2014 this is categorically different.",
+      "hpiLocationPattern": "Right leg \u2014 mid-calf down. Cold, pale, and I cannot feel it.",
+      "pmh": "Peripheral arterial disease \u2014 prior right femoral-popliteal bypass five years ago. Hypertension. Heavy smoking history. Type 2 diabetes.",
+      "medications": "Clopidogrel. Atorvastatin. Amlodipine. Metformin.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease and vascular disease throughout family.",
+      "socialSmokingAlcohol": "I smoke one pack a day \u2014 I know I should stop. I don't drink.",
+      "socialOccupation": "Retired postal worker."
     }
   },
   "vascular-injury-with-limb-ischemia": {
@@ -68597,6 +69728,19 @@ window.CRT_DATA = {
           "Note": "Damage control vascular: temporary intravascular shunt to restore flow; external fixation for fracture; ICU resuscitation to correct coagulopathy/hypothermia/acidosis; definitive repair in 24-48h; warm ischemia time <6h"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 24-year-old man with a stab wound to the right thigh.",
+      "hpiOnset": "I was stabbed in the right thigh about thirty minutes ago. I've been pressing on it to stop the bleeding. But my foot \u2014 it feels cold and strange.",
+      "hpiProgression": "The bleeding is slowing with pressure. But the right foot is getting colder and I can barely move my toes. The leg below the wound is much colder than the other side.",
+      "hpiAssociatedSymptoms": "Active hemorrhage at wound site \u2014 controlled with pressure. Right foot cold, pale, and I'm losing sensation. I can feel my heartbeat in the wound.",
+      "hpiLocationPattern": "Right mid-thigh stab wound. Right foot and lower leg \u2014 ischemia developing.",
+      "pmh": "Healthy. No medical problems.",
+      "medications": "None.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "I drink on weekends. I don't smoke.",
+      "socialOccupation": "Construction laborer."
     }
   },
   "incarcerated-hernia-with-strangulation": {
@@ -68763,6 +69907,19 @@ window.CRT_DATA = {
           "Note": "Questionable bowel viability intraop: warm saline, wait 10 min; doppler assessment; if still questionable in unstable patient \u2014 resect to avoid missed ischemia leading to perforation; damage control if hemodynamically compromised"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 67-year-old man with a hernia that won't go back in.",
+      "hpiOnset": "I've had a hernia on my right groin for years \u2014 it always went back in when I pushed it. But two days ago it got stuck. And now it's very painful and the skin over it looks red and angry.",
+      "hpiProgression": "The pain has gone from uncomfortable to severe. The lump is hard, red, and won't budge. I've been vomiting and I haven't passed gas in a day.",
+      "hpiAssociatedSymptoms": "Severe pain at the hernia site. The overlying skin is red. Vomiting. No bowel movement or gas since yesterday.",
+      "hpiLocationPattern": "Right groin \u2014 where the hernia has always been, but now hard and very tender. Abdominal cramping from the obstruction.",
+      "pmh": "Right inguinal hernia for ten years \u2014 never repaired. High blood pressure. Type 2 diabetes.",
+      "medications": "Metformin. Lisinopril. Aspirin.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Nothing relevant.",
+      "socialSmokingAlcohol": "Former smoker. I drink beer occasionally.",
+      "socialOccupation": "Retired longshoreman."
     }
   },
   "incarcerated-incisional-hernia": {
@@ -69748,6 +70905,19 @@ window.CRT_DATA = {
           "Note": "ADA-SCID: gene therapy (Strimvelis/lentiviral) gold standard if available \u2014 80%+ correction, no GVHD; PEG-ADA bridges to definitive therapy; haploidentical HSCT has high GVHD risk; early treatment before infections improves outcomes"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 6-month-old infant whose parents are terrified \u2014 brought by parents.",
+      "hpiOnset": "Our baby has had three serious infections in the last two months \u2014 two pneumonias and an oral thrush that won't go away. The pediatrician said she's not gaining weight right and her immune system looks wrong on bloodwork.",
+      "hpiProgression": "She's now admitted with another fever and pneumonia \u2014 this is her third. She weighs less than she did at two months old. The labs show almost no lymphocytes.",
+      "hpiAssociatedSymptoms": "Failure to thrive \u2014 weight below birth weight. Recurrent severe infections. Persistent oral and skin candidiasis. Now febrile with respiratory distress.",
+      "hpiLocationPattern": "Lungs \u2014 pneumonia again. Mouth \u2014 thrush. And she's not growing.",
+      "pmh": "Three prior hospitalizations for infections. Failure to thrive. Consanguineous parents \u2014 first cousins.",
+      "medications": "TMP-SMX prophylaxis started after second pneumonia. Fluconazole.",
+      "allergies": "Unknown.",
+      "familyHistory": "Two children from a similar family union \u2014 one died in infancy of infection. Consanguinity raises risk of autosomal recessive conditions.",
+      "socialSmokingAlcohol": "She is 6 months old.",
+      "socialOccupation": "Infant."
     }
   },
   "cgd-xlinked": {
@@ -70913,6 +72083,19 @@ window.CRT_DATA = {
           "Note": "rFVIIa: effective hemostasis but thrombotic risk 5-10%; prior VTE is relative contraindication; consider only as rescue; correct pH >7.2 and temp >35\u00b0C first for it to work; discuss with hematology and surgery together"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 72-year-old woman bleeding after cardiac surgery.",
+      "hpiOnset": "I just had coronary bypass surgery \u2014 three vessels \u2014 and I'm in the ICU. The nurses noticed my chest tube drainage has been increasing for the past hour \u2014 over 200mL in the last hour.",
+      "hpiProgression": "I feel weak and my blood pressure is dropping. The surgical team is at the bedside and they look concerned. I'm confused \u2014 more than this morning.",
+      "hpiAssociatedSymptoms": "Active bleeding through chest tubes. Hypotension developing. Confusion. I feel like I'm losing something.",
+      "hpiLocationPattern": "The bleeding is through my chest tubes. My whole body feels weak from blood loss.",
+      "pmh": "Coronary artery disease \u2014 just had CABG. Hypertension. Type 2 diabetes. Atrial fibrillation \u2014 on warfarin pre-operatively.",
+      "medications": "Warfarin held pre-operatively but INR was 1.8 on admission. Metoprolol resumed post-op. Insulin drip.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Heart disease.",
+      "socialSmokingAlcohol": "Former smoker. I don't drink.",
+      "socialOccupation": "Retired teacher."
     }
   },
   "necrotizing-fasciitis-of-neck": {
@@ -71079,6 +72262,19 @@ window.CRT_DATA = {
           "Note": "Early tracheostomy in extended neck NecFasc \u2014 reduces laryngeal injury from prolonged intubation, facilitates wound care, allows earlier sedation wean; percutaneous vs surgical depending on wound proximity"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 51-year-old man with diabetes and a jaw infection spreading into his neck.",
+      "hpiOnset": "I had a dental abscess for three weeks \u2014 no insurance to get it treated. The swelling spread from my jaw to my neck four days ago. The last 24 hours the neck swelling has become enormous.",
+      "hpiProgression": "The neck swelling is now into my chest \u2014 I can see the skin discoloration going below my collar. My voice is muffled. I'm having trouble breathing and I can feel crackling in my neck.",
+      "hpiAssociatedSymptoms": "Neck and chest wall swelling with crepitus \u2014 crackling gas under the skin. Muffled voice. Stridor developing. Very high fever. Septic \u2014 I know I'm dying.",
+      "hpiLocationPattern": "Floor of mouth, neck, and now spreading into the anterior chest wall. Gas in tissue \u2014 extensive.",
+      "pmh": "Poorly controlled diabetes \u2014 A1C 13. Morbid obesity.",
+      "medications": "Metformin. Insulin glargine \u2014 inconsistently taken.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Diabetes everywhere.",
+      "socialSmokingAlcohol": "I smoke a pack a day. I drink heavily.",
+      "socialOccupation": "Day laborer. Uninsured."
     }
   },
   "abpa-aspergillus": {
@@ -72874,6 +74070,19 @@ window.CRT_DATA = {
           "Note": "Rumack-Matthew: 280 mcg/mL at 4h = treatment line (>150 = treat); start NAC immediately; normal labs at 4h don't rule out toxicity \u2014 NAC most effective within 8h; 21-hour IV protocol"
         }
       }
+    },
+    "patientScript": {
+      "identity": "a 29-year-old woman who took a large number of pills.",
+      "hpiOnset": "I took a lot of pills about an hour ago \u2014 I don't want to say what kind because I don't remember all of them. My roommate found me and called 911.",
+      "hpiProgression": "I'm very confused \u2014 I can't keep my eyes open. I feel very slow. I don't know what I took or how much.",
+      "hpiAssociatedSymptoms": "Extreme drowsiness. Confusion. Slurred speech. I vomited once.",
+      "hpiLocationPattern": "Diffuse \u2014 the overdose is affecting my whole body.",
+      "pmh": "Major depression. Anxiety. Previous suicide attempt two years ago.",
+      "medications": "Sertraline. Quetiapine. Lorazepam PRN. I have multiple medications at home.",
+      "allergies": "No known drug allergies.",
+      "familyHistory": "Depression and anxiety in family.",
+      "socialSmokingAlcohol": "I smoke. I drink when I'm really low.",
+      "socialOccupation": "Barista. I've been having a very hard time recently."
     }
   },
   "metabolic": {
