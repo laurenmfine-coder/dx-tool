@@ -1,21 +1,22 @@
-name: Deploy to Netlify
+# Deploy is now handled automatically by Cloudflare Pages
+# Every push to main auto-deploys via Cloudflare Pages integration
+# This workflow is kept for reference but does nothing
+
+name: Deploy (Cloudflare Pages — auto)
 
 on:
   workflow_dispatch:
     inputs:
       reason:
-        description: 'Reason for deploying (optional)'
+        description: 'Note: deploys now happen automatically via Cloudflare Pages on every push'
         required: false
-        default: 'Manual deploy'
 
 jobs:
-  deploy:
+  note:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Netlify Deploy
+      - name: Deploy info
         run: |
-          echo "Triggering Netlify deploy..."
-          echo "Reason: ${{ github.event.inputs.reason }}"
-          curl -s -X POST "https://api.netlify.com/build_hooks/69cb3024fc80504658772767"
-          echo ""
-          echo "Deploy triggered. Check https://app.netlify.com for build status."
+          echo "✅ Cloudflare Pages auto-deploys on every push to main"
+          echo "   Check: https://dash.cloudflare.com → Workers & Pages → reasondx"
+          echo "   No manual action needed."
