@@ -115,6 +115,105 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <h1 class="hero-headline">One search.<br><em>Four ways to learn.</em></h1>
     <p class="hero-sub">Simulate patient encounters, practice in a virtual EMR, explore reasoning with a Socratic coach, or master the pathophysiology that makes diagnoses stick.</p>
   </div>
+
+  <!-- ── Loops Email Signup Banner ── -->
+  <div id="rdx-signup-banner" style="
+    background: linear-gradient(135deg, #1a3a5c 0%, #2874A6 100%);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin: 0 0 24px 0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  ">
+    <div style="flex:1; min-width: 200px;">
+      <div style="font-size:14px;font-weight:700;color:#fff;margin-bottom:4px">
+        📬 Get your progress reports
+      </div>
+      <div style="font-size:13px;color:#bfdbfe;line-height:1.4">
+        Enter your email to receive case summaries, reasoning gap analysis, and milestone emails from Dr. Fine.
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+      <input type="email" id="rdxSignupEmail" placeholder="your@email.edu"
+        style="padding:10px 14px;border-radius:8px;border:none;font-size:14px;
+               font-family:inherit;width:220px;outline:none;">
+      <button onclick="rdxSignupSubmit()" id="rdxSignupBtn"
+        style="padding:10px 20px;background:#f59e0b;color:#1a1d27;border:none;
+               border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;
+               font-family:inherit;white-space:nowrap;transition:all .15s">
+        Get updates
+      </button>
+    </div>
+    <button onclick="document.getElementById('rdx-signup-banner').style.display='none'"
+      style="background:none;border:none;color:#93c5fd;cursor:pointer;font-size:18px;
+             padding:4px;line-height:1;align-self:flex-start">×</button>
+  </div>
+
+  <script>
+  (function() {
+    // Hide banner if already signed up
+    if (localStorage.getItem('rdx-email-captured')) {
+      var b = document.getElementById('rdx-signup-banner');
+      if (b) b.style.display = 'none';
+    }
+    // Pre-fill if email known from auth
+    if (window.RdxPlatform && window.RdxPlatform.getUserEmail) {
+      var em = window.RdxPlatform.getUserEmail();
+      if (em) {
+        var inp = document.getElementById('rdxSignupEmail');
+        if (inp) inp.value = em;
+      }
+    }
+  })();
+
+  async function rdxSignupSubmit() {
+    var emailEl = document.getElementById('rdxSignupEmail');
+    var btn = document.getElementById('rdxSignupBtn');
+    var email = emailEl ? emailEl.value.trim() : '';
+    if (!email || !email.includes('@')) {
+      emailEl.style.border = '2px solid #ef4444';
+      setTimeout(function(){ emailEl.style.border = 'none'; }, 2000);
+      return;
+    }
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      // Store locally
+      localStorage.setItem('rdx-email-captured', 'true');
+      try {
+        var rdxUser = JSON.parse(localStorage.getItem('rdx_user') || '{}');
+        rdxUser.email = email;
+        localStorage.setItem('rdx_user', JSON.stringify(rdxUser));
+      } catch(e) {}
+
+      // Send to Loops via our worker
+      await fetch('https://rdx-email.laurenmfine.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventType: 'browse_signup',
+          email: email,
+          firstName: '',
+          data: { source: 'browse_page' }
+        })
+      });
+
+      btn.textContent = '✓ You're in!';
+      btn.style.background = '#34d399';
+      setTimeout(function() {
+        document.getElementById('rdx-signup-banner').style.display = 'none';
+      }, 2000);
+    } catch(e) {
+      btn.textContent = 'Get updates';
+      btn.disabled = false;
+    }
+  }
+  </script>
+
   <a href="/puzzles.html" class="puzzle-banner">
     <div class="puzzle-banner-left">
       <span class="puzzle-banner-icon">🧩</span>

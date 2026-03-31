@@ -62,6 +62,7 @@ function resolveEvents(eventType, data) {
   }
   if (eventType === 'emr_submitted' && data.isFirstEver) events.push('emrSubmitted');
   if (eventType === 'reengagement')   events.push('reengagement7Day');
+  if (eventType === 'browse_signup')  events.push('browseSignup');
   if (eventType === 'faculty_weekly') events.push('facultyWeeklyDigest');
   return events;
 }

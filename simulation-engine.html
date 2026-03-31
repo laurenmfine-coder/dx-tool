@@ -107,6 +107,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
       <input type="text" id="intakeName" placeholder="e.g., Robbie">
     </div>
     <div class="form-group">
+      <label>Email <span style="color:#6b7280;font-weight:400;font-size:12px">(for your progress reports)</span></label>
+      <input type="email" id="intakeEmail" placeholder="e.g., jsmith@nova.edu">
+    </div>
+    <div class="form-group">
       <label>Year of Training</label>
       <select id="intakeYear">
         <option value="">Select...</option>
@@ -443,6 +447,20 @@ function startStudy() {
   const year = document.getElementById('intakeYear').value;
   const rotations = document.getElementById('intakeRotations').value.trim();
   const pulm = document.getElementById('intakePulm').value;
+  // Email capture — pre-fill from auth if available
+  var intakeEmailEl = document.getElementById('intakeEmail');
+  var intakeEmail = intakeEmailEl ? intakeEmailEl.value.trim() : '';
+  if (!intakeEmail && window.RdxPlatform && window.RdxPlatform.getUserEmail) {
+    intakeEmail = window.RdxPlatform.getUserEmail() || '';
+    if (intakeEmailEl && intakeEmail) intakeEmailEl.value = intakeEmail;
+  }
+  if (intakeEmail) {
+    try {
+      var rdxUser = JSON.parse(localStorage.getItem('rdx_user') || '{}');
+      rdxUser.email = intakeEmail;
+      localStorage.setItem('rdx_user', JSON.stringify(rdxUser));
+    } catch(e) {}
+  }
   if (!name || !year) { alert('Please fill in your name and training year.'); return; }
 
   // Random group assignment
