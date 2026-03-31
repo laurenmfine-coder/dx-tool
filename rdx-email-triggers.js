@@ -13,7 +13,6 @@
   'use strict';
 
   var EMAIL_WORKER_URL = 'https://rdx-email.laurenmfine.workers.dev';
-  // ^ Update this once the worker is deployed
 
   function fire(eventType, email, firstName, data) {
     if (!email || !email.includes('@')) return; // don't fire for demo/guest users
