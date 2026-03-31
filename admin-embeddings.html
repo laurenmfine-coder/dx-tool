@@ -78,7 +78,7 @@
 
   <div class="info-panel">
     <strong>How it works:</strong> Each case is converted into a rich text description (diagnosis + chief complaint + patient HPI + teaching objective + must-not-miss) and sent to Claude for embedding. The resulting 1536-dimensional vector is stored in Supabase and used to power the AI semantic search on the browse page.<br><br>
-    <strong>Cost:</strong> ~$0.02 total for all 368 cases using claude-sonnet-4-20250514 embeddings. Run it once and forget it.
+    <strong>Cost:</strong> ~$0.02 total for all 368 cases using Voyage AI voyage-3-lite (free tier, 200M tokens/month). Run it once and forget it.
   </div>
 
   <!-- Status -->
@@ -195,21 +195,12 @@ async function getEmbedding(text) {
   }
 
   const data = await response.json();
-  if (data.error) throw new Error(data.error.slice(0, 100));
-  const raw = (data.embedding || '').replace(/```json|```/g, '').trim();
-
-  try {
-    // Find the JSON array in the response
-    const match = raw.match(/\[[-\d.,\s]+\]/s);
-    if (!match) throw new Error('No float array found in response');
-    const arr = JSON.parse(match[0]);
-    if (!Array.isArray(arr)) throw new Error('Not an array');
-    // Pad or trim to exactly 1536
-    while (arr.length < 1536) arr.push(0);
-    return arr.slice(0, 1536);
-  } catch(e) {
-    throw new Error('Parse failed: ' + e.message + ' | raw: ' + raw.slice(0, 80));
+  if (data.error) throw new Error(data.error.slice(0, 150));
+  const arr = data.embedding;
+  if (!Array.isArray(arr) || arr.length === 0) {
+    throw new Error('No embedding array returned');
   }
+  return arr; // Voyage returns proper float array directly
 }
 
 // ── Upsert to Supabase ──────────────────────────────────────────────────────

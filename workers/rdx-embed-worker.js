@@ -1,13 +1,17 @@
 /**
- * rdx-embed-worker.js
- * Cloudflare Worker: proxy for Claude embeddings (bypasses browser CORS)
+ * rdx-embed-worker.js — v2
+ * Uses Voyage AI embeddings (free tier, 200M tokens/month)
+ * which are purpose-built for semantic search and return proper vectors.
+ * 
  * Deploy as: rdx-embed
- * No secrets needed — uses the Anthropic API key from the request
+ * Secret: VOYAGE_API_KEY (get free key at dash.voyageai.com)
+ * 
+ * Voyage AI free tier: 200M tokens/month, no credit card required
+ * Model: voyage-3-lite — 512 dimensions, fast, medical-friendly
  */
 
 export default {
   async fetch(request, env) {
-    // CORS preflight
     if (request.method === 'OPTIONS') {
       return new Response(null, {
         headers: {
@@ -29,40 +33,41 @@ export default {
     const { text } = body;
     if (!text) return new Response('Missing text', { status: 400 });
 
-    const apiKey = env.ANTHROPIC_API_KEY;
-    if (!apiKey) return new Response('ANTHROPIC_API_KEY not configured', { status: 500 });
+    const apiKey = env.VOYAGE_API_KEY;
+    if (!apiKey) return new Response('VOYAGE_API_KEY not configured', { status: 500 });
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('https://api.voyageai.com/v1/embeddings', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
+          'Authorization': `Bearer ${apiKey}`,
         },
         body: JSON.stringify({
-          model: 'claude-haiku-4-5-20251001',
-          max_tokens: 2000,
-          system: 'You are an embedding generator. Given medical case text, return ONLY a valid JSON array of exactly 1536 floats representing its semantic embedding. No explanation, no markdown, just the raw JSON array starting with [ and ending with ].',
-          messages: [{ role: 'user', content: text.slice(0, 1200) }]
+          model: 'voyage-3-lite',
+          input: text.slice(0, 4000),
         })
       });
 
       if (!response.ok) {
         const err = await response.text();
-        return new Response(JSON.stringify({ error: err }), {
+        return new Response(JSON.stringify({ error: `Voyage ${response.status}: ${err}` }), {
           status: response.status,
-          headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
-          }
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
         });
       }
 
       const data = await response.json();
-      const raw  = (data.content?.[0]?.text || '').replace(/```json|```/g, '').trim();
+      const embedding = data.data?.[0]?.embedding;
 
-      return new Response(JSON.stringify({ embedding: raw }), {
+      if (!embedding || !Array.isArray(embedding)) {
+        return new Response(JSON.stringify({ error: 'No embedding in response' }), {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+        });
+      }
+
+      return new Response(JSON.stringify({ embedding }), {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
@@ -72,10 +77,7 @@ export default {
     } catch(err) {
       return new Response(JSON.stringify({ error: err.message }), {
         status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        }
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
       });
     }
   }
