@@ -82,6 +82,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </style>
 <script src="/case-explainer-agent.js"></script>
 <script src="/rdx-voice-patient.js"></script>
+<script src="/rdx-realtime.js"></script>
 </head>
 <body>
 
@@ -528,6 +529,11 @@ function startStudy() {
   document.getElementById('sendBtn').disabled = false;
   document.getElementById('micBtn').disabled = false;
   initVoice();
+
+  // ── Realtime broadcast init ──
+  if (window.RDXRealtime) {
+    RDXRealtime.initStudent(intakeEmail || name, state.caseId);
+  }
   document.getElementById('statGroup').textContent = groupCode;
   updatePhaseUI();
 
@@ -592,6 +598,15 @@ async function sendMessage() {
   state.turns.push({ role:'student', content:msg, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:state.turnCount });
   state.conversationMessages.push({ role:'user', content: msg });
   addMessage('student', msg);
+
+  // ── Broadcast student turn ──
+  if (window.RDXRealtime) {
+    RDXRealtime.broadcastTurn({
+      role: 'student', content: msg,
+      phase: state.currentPhase,
+      turnNumber: state.turnCount,
+    });
+  }
 
   // Track readability of student message
   if (window.RdxReadability) {
@@ -823,6 +838,15 @@ async function sendMessage() {
         // ── Voice Patient — speak the response aloud ──
         if (window.RDXVoicePatient) {
           RDXVoicePatient.speak(pb.patientResponse, caseData && caseData.patientScript);
+        }
+
+        // ── Broadcast patient turn ──
+        if (window.RDXRealtime) {
+          RDXRealtime.broadcastTurn({
+            role: 'patient', content: pb.patientResponse,
+            phase: state.currentPhase,
+            turnNumber: state.turnCount,
+          });
         }
 
         state.conversationMessages.push({ role: 'assistant', content: pb.patientResponse });
@@ -1335,6 +1359,11 @@ function enterPhase(phase) {
                 '<button onclick="copyReceipt()" style="padding:10px 20px;background:#fff;color:#0D7A67;border:2px solid #0D7A67;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;">Copy Performance Receipt</button>' +
                 '</div>';
               document.getElementById('chatMessages').appendChild(btnDiv);
+            }
+
+            // ── REALTIME — stop broadcast ──
+            if (window.RDXRealtime) {
+              RDXRealtime.stopBroadcast({ caseId: state.caseId, turns: state.turnCount });
             }
 
             // ── FLODESK EMAIL TRIGGER ──

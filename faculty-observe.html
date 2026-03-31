@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Observation · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117; --surface: #1a1d27; --border: #2e3452;
+    --blue: #2874A6; --blue-lt: #60a5fa; --gold: #f59e0b;
+    --text: #e2e8f0; --muted: #64748b; --green: #34d399;
+    --red: #f87171; --mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  .hd { padding: 14px 24px; border-bottom: 1px solid var(--border); background: var(--surface); display: flex; align-items: center; gap: 14px; }
+  .hd-logo { font-size: 18px; font-weight: 700; color: #fff; }
+  .hd-logo span { color: var(--gold); }
+  .hd-badge { padding: 3px 10px; background: rgba(40,116,166,.25); border: 1px solid var(--blue); border-radius: 20px; font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase; color: var(--blue-lt); }
+  .hd-back { margin-left: auto; color: var(--muted); font-size: 13px; text-decoration: none; }
+  .hd-back:hover { color: var(--text); }
+
+  .shell { max-width: 900px; margin: 0 auto; padding: 32px 20px 60px; }
+
+  .connect-panel { background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 28px; margin-bottom: 28px; }
+  .connect-title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .connect-sub { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+  .connect-row { display: flex; gap: 10px; }
+  input[type=text] { flex: 1; padding: 10px 14px; background: #0f1117; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--text); outline: none; }
+  input[type=text]:focus { border-color: var(--blue); }
+  .btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer; border: none; transition: all .15s; }
+  .btn-primary { background: var(--blue); color: #fff; }
+  .btn-primary:hover { background: #1a5f8a; }
+  .btn-stop { background: #7f1d1d; color: #fca5a5; }
+
+  .status-bar { display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 20px; font-size: 13px; }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+  .status-dot.live { background: var(--green); animation: pulse-dot 1.5s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:.4} }
+  .status-text { color: var(--muted); }
+  .status-text.live { color: var(--green); font-weight: 600; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 280px; gap: 20px; }
+
+  /* Chat feed */
+  .chat-panel { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .chat-header { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 13px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
+  .chat-feed { padding: 16px; min-height: 400px; max-height: 600px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  .msg { padding: 10px 14px; border-radius: 8px; font-size: 13px; line-height: 1.55; max-width: 85%; }
+  .msg-student { background: #1e3a5f; color: #bfdbfe; align-self: flex-end; }
+  .msg-patient { background: var(--surface); border: 1px solid var(--border); color: var(--text); align-self: flex-start; }
+  .msg-system { background: rgba(245,158,11,.1); border: 1px solid rgba(245,158,11,.2); color: #fcd34d; align-self: center; font-size: 12px; font-style: italic; text-align: center; max-width: 100%; }
+  .msg-time { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+  /* Side panel */
+  .side-panel { display: flex; flex-direction: column; gap: 16px; }
+  .info-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .info-card-title { font-size: 11px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; }
+  .info-label { color: var(--muted); }
+  .info-val { color: var(--text); font-weight: 500; }
+
+  .ddx-list { display: flex; flex-direction: column; gap: 6px; }
+  .ddx-item { padding: 6px 10px; background: #0f1117; border-radius: 6px; font-size: 12px; color: var(--text); border-left: 3px solid var(--blue); }
+
+  .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 300px; gap: 12px; color: var(--muted); }
+  .empty-icon { font-size: 36px; opacity: .4; }
+
+  @media (max-width: 700px) { .two-col { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-badge">Live Observation</div>
+  <a href="/faculty-dashboard.html" class="hd-back">← Dashboard</a>
+</div>
+
+<div class="shell">
+
+  <div class="connect-panel">
+    <div class="connect-title">Observe a Student Simulation</div>
+    <div class="connect-sub">Enter the student's email or name to connect to their live simulation feed.</div>
+    <div class="connect-row">
+      <input type="text" id="studentIdInput" placeholder="Student email or name (e.g. jsmith@nova.edu)">
+      <button class="btn btn-primary" onclick="connect()">Connect</button>
+    </div>
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    <div class="status-dot" id="statusDot"></div>
+    <div class="status-text" id="statusText">Not connected — enter a student ID above</div>
+    <div style="margin-left:auto" id="stopBtn" style="display:none">
+      <button class="btn btn-stop" onclick="disconnect()" style="padding:6px 14px;font-size:12px">Disconnect</button>
+    </div>
+  </div>
+
+  <div class="two-col">
+
+    <div class="chat-panel">
+      <div class="chat-header">Live Conversation Feed</div>
+      <div class="chat-feed" id="chatFeed">
+        <div class="empty-state">
+          <div class="empty-icon">👁</div>
+          <div>Connect to a student to see their simulation live</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-panel">
+      <div class="info-card">
+        <div class="info-card-title">Session Info</div>
+        <div class="info-row"><span class="info-label">Student</span><span class="info-val" id="infoStudent">—</span></div>
+        <div class="info-row"><span class="info-label">Case</span><span class="info-val" id="infoCase">—</span></div>
+        <div class="info-row"><span class="info-label">Phase</span><span class="info-val" id="infoPhase">—</span></div>
+        <div class="info-row"><span class="info-label">Turns</span><span class="info-val" id="infoTurns">0</span></div>
+        <div class="info-row"><span class="info-label">Started</span><span class="info-val" id="infoStart">—</span></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Current DDx</div>
+        <div class="ddx-list" id="ddxList">
+          <div style="font-size:12px;color:var(--muted);font-style:italic">Waiting for differential...</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Share Link</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Share this link with co-observers:</div>
+        <div id="shareLink" style="font-family:var(--mono);font-size:11px;color:var(--blue-lt);word-break:break-all;cursor:pointer" onclick="copyLink()">—</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/rdx-realtime.js"></script>
+<script>
+var _connected = false;
+var _turnCount = 0;
+
+// Check URL for ?observe= param
+(function() {
+  var params = new URLSearchParams(location.search);
+  var obs = params.get('observe');
+  if (obs) {
+    document.getElementById('studentIdInput').value = decodeURIComponent(obs);
+    setTimeout(connect, 500);
+  }
+})();
+
+function connect() {
+  var studentId = document.getElementById('studentIdInput').value.trim();
+  if (!studentId) return;
+
+  setStatus('connecting', 'Connecting to ' + studentId + '...');
+  clearFeed();
+
+  RDXRealtime.initFaculty(studentId, function(event) {
+    handleEvent(event, studentId);
+  });
+
+  _connected = true;
+  document.getElementById('stopBtn').style.display = 'block';
+
+  // Update share link
+  var link = RDXRealtime.getObservationLink(studentId);
+  document.getElementById('shareLink').textContent = link;
+
+  setStatus('waiting', 'Waiting for student to start a simulation...');
+}
+
+function disconnect() {
+  RDXRealtime.stopObserving();
+  _connected = false;
+  _turnCount = 0;
+  setStatus('disconnected', 'Disconnected');
+  document.getElementById('stopBtn').style.display = 'none';
+}
+
+function handleEvent(event, studentId) {
+  var d = event.data;
+
+  if (event.type === 'session_start') {
+    setStatus('live', 'LIVE — ' + studentId + ' started case: ' + (d.caseId || ''));
+    document.getElementById('infoStudent').textContent = d.studentId || studentId;
+    document.getElementById('infoCase').textContent    = d.caseId || '—';
+    document.getElementById('infoStart').textContent  = new Date(d.startedAt).toLocaleTimeString();
+    clearFeed();
+    addSystemMsg('Session started — case: ' + (d.caseId || 'unknown'));
+  }
+
+  if (event.type === 'turn') {
+    _turnCount++;
+    document.getElementById('infoTurns').textContent = _turnCount;
+    document.getElementById('infoPhase').textContent = 'Phase ' + (d.phase || 1);
+    addTurnMsg(d.role, d.content, d.timestamp);
+  }
+
+  if (event.type === 'ddx_update') {
+    updateDDx(d.differentials);
+  }
+
+  if (event.type === 'session_end') {
+    setStatus('ended', 'Session ended');
+    addSystemMsg('Session completed');
+  }
+}
+
+function addTurnMsg(role, content, timestamp) {
+  var feed = document.getElementById('chatFeed');
+  var div  = document.createElement('div');
+  div.className = 'msg msg-' + (role === 'student' ? 'student' : role === 'patient' ? 'patient' : 'system');
+  var time = timestamp ? new Date(timestamp).toLocaleTimeString() : '';
+  div.innerHTML = '<div>' + escHtml(content || '') + '</div>' +
+    (time ? '<div class="msg-time">' + (role === 'student' ? '🧑‍⚕️ Student' : '🤒 Patient') + ' · ' + time + '</div>' : '');
+  feed.appendChild(div);
+  feed.scrollTop = feed.scrollHeight;
+}
+
+function addSystemMsg(text) {
+  var feed = document.getElementById('chatFeed');
+  var div  = document.createElement('div');
+  div.className = 'msg msg-system';
+  div.textContent = text;
+  feed.appendChild(div);
+  feed.scrollTop = feed.scrollHeight;
+}
+
+function updateDDx(differentials) {
+  var list = document.getElementById('ddxList');
+  if (!differentials || !differentials.length) return;
+  list.innerHTML = differentials.slice(0, 5).map(function(d) {
+    var name = typeof d === 'string' ? d : (d.diagnosis || d.name || JSON.stringify(d));
+    return '<div class="ddx-item">' + escHtml(name) + '</div>';
+  }).join('');
+}
+
+function clearFeed() {
+  document.getElementById('chatFeed').innerHTML = '';
+  _turnCount = 0;
+  document.getElementById('infoTurns').textContent = '0';
+}
+
+function setStatus(state, text) {
+  var dot  = document.getElementById('statusDot');
+  var txt  = document.getElementById('statusText');
+  dot.className = 'status-dot' + (state === 'live' ? ' live' : '');
+  txt.className = 'status-text' + (state === 'live' ? ' live' : '');
+  txt.textContent = text;
+}
+
+function copyLink() {
+  var link = document.getElementById('shareLink').textContent;
+  if (link && link !== '—') {
+    navigator.clipboard.writeText(link).then(function() {
+      document.getElementById('shareLink').textContent = '✓ Copied!';
+      setTimeout(function() {
+        document.getElementById('shareLink').textContent = link;
+      }, 2000);
+    });
+  }
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>

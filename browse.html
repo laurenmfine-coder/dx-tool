@@ -10,6 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="js/nav-global.js"></script>
 <script src="emr-data/crt-index.js"></script>
+<script src="/rdx-semantic-search.js"></script>
 <style>
 :root{
   --bg:#F8FAFC;--surface:#fff;--border:#E2E8F0;--text:#1E293B;--ts:#64748B;--tm:#94A3B8;
@@ -256,7 +257,13 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <span class="section-meta" id="sectionMeta">Adaptive 10-phase clinical simulation</span>
   </div>
   <div class="filters">
-    <input type="text" class="search" id="searchInput" placeholder="Search by chief complaint..." oninput="render()" aria-label="Search ReasonDx content">
+    <input type="text" class="search" id="searchInput" placeholder="Search by presentation, symptom, or diagnosis..." oninput="handleSearch()" aria-label="Search ReasonDx content">
+    <button id="semanticToggle" onclick="toggleSemanticMode()" title="Switch to AI semantic search"
+      style="padding:6px 12px;background:transparent;border:1px solid var(--border,#e2e8f0);
+             border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text2,#64748b);
+             white-space:nowrap;transition:all .15s;margin-left:4px">
+      🔍 Keyword
+    </button>
     <button class="fbtn on" data-cat="all" onclick="setCat('all')">All</button>
     <span id="filterBtns"></span>
   </div>
@@ -291,6 +298,116 @@ function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent
 var _initMode=new URLSearchParams(window.location.search).get('mode')||'simulate';
 if(['simulate','practice','coach','learn'].indexOf(_initMode)===-1) _initMode='simulate';
 setMode(_initMode);
+</script>
+
+<div id="semanticResults" style="display:none;padding:0 16px 40px"></div>
+
+<script>
+// ── Semantic Search Integration ───────────────────────────────────────────
+var _semanticMode = false;
+var _semanticTimer = null;
+
+function toggleSemanticMode() {
+  _semanticMode = !_semanticMode;
+  var btn = document.getElementById('semanticToggle');
+  var inp = document.getElementById('searchInput');
+  if (_semanticMode) {
+    btn.textContent = '✨ AI Search';
+    btn.style.background = '#2874A6';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#2874A6';
+    inp.placeholder = 'Describe a presentation... e.g. "elderly confused hyponatremia"';
+  } else {
+    btn.textContent = '🔍 Keyword';
+    btn.style.background = 'transparent';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+    inp.placeholder = 'Search by presentation, symptom, or diagnosis...';
+    document.getElementById('semanticResults').style.display = 'none';
+    document.getElementById('semanticResults').innerHTML = '';
+    render(); // restore keyword results
+  }
+}
+
+function handleSearch() {
+  if (!_semanticMode) { render(); return; }
+  // Debounce semantic search — fire after 800ms pause
+  clearTimeout(_semanticTimer);
+  var q = (document.getElementById('searchInput').value || '').trim();
+  if (q.length < 3) { render(); return; }
+  _semanticTimer = setTimeout(function() { runSemanticSearch(q); }, 800);
+}
+
+async function runSemanticSearch(query) {
+  var resultsEl = document.getElementById('semanticResults');
+  var mainGrid  = document.getElementById('mainGrid') || document.querySelector('.card-grid');
+
+  resultsEl.style.display = 'block';
+  resultsEl.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b">' +
+    '<div style="font-size:24px;margin-bottom:8px">✨</div>' +
+    '<div style="font-size:14px">Finding semantically similar cases...</div></div>';
+  if (mainGrid) mainGrid.style.display = 'none';
+
+  try {
+    if (!window.RDXSemanticSearch) throw new Error('Semantic search not loaded');
+    var results = await RDXSemanticSearch.search(query, { limit: 12 });
+
+    if (!results || results.length === 0) {
+      resultsEl.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b">' +
+        '<div style="font-size:14px">No similar cases found. Try a different description.</div></div>';
+      return;
+    }
+
+    var html = '<div style="margin-bottom:16px">' +
+      '<span style="font-size:13px;color:#64748b;font-weight:500">' +
+      '✨ ' + results.length + ' semantically similar cases for: <em>' + query + '</em></span></div>';
+
+    html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">';
+    results.forEach(function(r) {
+      var c = r.fullCase || {};
+      var acuityColor = r.acuity === 1 ? '#ef4444' : r.acuity === 2 ? '#f59e0b' : '#22c55e';
+      var simPct = r.similarity || 0;
+      html += '<div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;' +
+        'padding:16px;cursor:pointer;transition:all .15s" ' +
+        'onclick="launchCase('' + r.case_id + '')" ' +
+        'onmouseover="this.style.borderColor='#2874A6'" ' +
+        'onmouseout="this.style.borderColor='#e2e8f0'">' +
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">' +
+        '<span style="background:' + acuityColor + ';color:#fff;padding:2px 8px;' +
+        'border-radius:4px;font-size:11px;font-weight:700">ESI ' + (r.acuity||3) + '</span>' +
+        '<span style="font-size:11px;color:#64748b;text-transform:capitalize">' + (r.category||'') + '</span>' +
+        '<span style="margin-left:auto;font-size:11px;color:#2874A6;font-weight:600">' + simPct + '% match</span>' +
+        '</div>' +
+        '<div style="font-size:14px;font-weight:700;color:#0d1f2d;margin-bottom:4px">' +
+        (r.diagnosis || r.case_id) + '</div>' +
+        '<div style="font-size:12px;color:#64748b;line-height:1.4">' +
+        ((c.chiefComplaint || r.content || '').slice(0, 80)) + '</div>' +
+        '</div>';
+    });
+    html += '</div>';
+    resultsEl.innerHTML = html;
+
+  } catch(e) {
+    resultsEl.innerHTML = '<div style="padding:20px;background:#fef2f2;border-radius:8px;' +
+      'color:#991b1b;font-size:13px">Semantic search error: ' + e.message + '<br>' +
+      '<small>Make sure cases are embedded first.</small></div>';
+    console.error('[RDXSemanticSearch]', e);
+  }
+}
+
+function launchCase(caseId) {
+  window.location.href = '/simulation-engine.html?case=' + encodeURIComponent(caseId);
+}
+
+// Restore main grid when semantic results hidden
+var _origRender = typeof render === 'function' ? render : null;
+function render() {
+  var mainGrid = document.getElementById('mainGrid') || document.querySelector('.card-grid');
+  var semanticResults = document.getElementById('semanticResults');
+  if (semanticResults) semanticResults.style.display = 'none';
+  if (mainGrid) mainGrid.style.display = '';
+  if (_origRender) _origRender();
+}
 </script>
 </body>
 </html>
