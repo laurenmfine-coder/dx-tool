@@ -295,7 +295,171 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6°F",
       "SpO2": "94%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cardiogenic Shock Post-PCI",
+        "scenario": "4 hours after successful PCI and stent placement, your patient develops worsening hypotension. BP is now 74/48, HR 118. SpO2 89% on 6L NC. JVP elevated, bilateral crackles. Urine output has dropped to 8mL in the last hour.",
+        "newData": {
+          "BP": "74/48",
+          "HR": "118",
+          "SpO2": "89% on 6L NC",
+          "UO": "8mL/hr",
+          "Lactate": "4.8 mmol/L",
+          "Echo": "EF 20%, no pericardial effusion, no mechanical complication"
+        }
+      },
+      "v3": {
+        "title": "STEMI Equivalent — New LBBB",
+        "scenario": "New patient: 71-year-old male with 90 minutes of crushing substernal chest pain. ECG shows new left bundle branch block. He denies prior cardiac history. No prior ECG on file. BP 148/92, HR 102.",
+        "newData": {
+          "ECG": "New LBBB — concordant ST elevation 2mm in V5-V6",
+          "Troponin": "Pending (drawn on arrival)",
+          "PriorECG": "None on file",
+          "SgarbossaScore": "Concordant ST elevation ≥1mm = 5 points (positive)"
+        }
+      }
     }
+  },
+  "stemi-v2": {
+    "id": "stemi-v2",
+    "diagnosis": "Cardiogenic Shock Post-STEMI",
+    "acuity": 1,
+    "presentation": "Chest Pain",
+    "category": "cardiovascular",
+    "chiefComplaint": "Hypotension and Dyspnea 4h Post-PCI",
+    "treatments": {
+      "orders": [
+        {"id":"vasopressor-cs","name":"Norepinephrine 0.1-0.5 mcg/kg/min IV","group":"Vasopressor","critical":true,"correct":true,"phase":1,"teaching":"First-line vasopressor in cardiogenic shock. Maintains MAP ≥65 while minimizing tachycardia compared to dopamine. Target MAP 65-70 mmHg.","references":[{"source":"Cardiogenic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482255/","detail":"Norepinephrine first-line vasopressor in cardiogenic shock"}]},
+        {"id":"iabp-cs","name":"Intra-Aortic Balloon Pump (IABP)","group":"Mechanical Support","critical":false,"correct":true,"phase":1,"teaching":"IABP augments diastolic pressure and reduces afterload. Consider in refractory cardiogenic shock. IABP-SHOCK II trial showed no mortality benefit, but still widely used as bridge to recovery or definitive therapy.","references":[{"source":"Cardiogenic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482255/","detail":"IABP for refractory cardiogenic shock — IABP-SHOCK II trial"}]},
+        {"id":"echo-urgent-cs","name":"Urgent Bedside Echo (TTE/TEE)","group":"Diagnostics","critical":true,"correct":true,"phase":1,"teaching":"Identify cause: RV failure, acute MR, VSD, free wall rupture. Echo changes management — mechanical complications need emergent surgery, not more pressors.","references":[{"source":"Cardiogenic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482255/","detail":"Echo essential to identify mechanical complications"}]},
+        {"id":"dobutamine-cs","name":"Dobutamine 2-20 mcg/kg/min IV","group":"Inotrope","critical":false,"correct":true,"phase":1,"teaching":"Inotrope for low cardiac output. Increases contractility but can cause tachycardia and arrhythmias. Use with vasopressor if hypotensive. Avoid in severe hypotension (SBP <80).","references":[{"source":"Cardiogenic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482255/","detail":"Dobutamine inotropic support in cardiogenic shock"}]},
+        {"id":"foley-cs","name":"Foley Catheter + Strict I/O","group":"Monitoring","critical":true,"correct":true,"phase":1,"teaching":"Urine output is the best bedside measure of perfusion in shock. Target UO >0.5 mL/kg/hr. Oliguria = inadequate perfusion despite normal BP.","references":[{"source":"Cardiogenic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482255/","detail":"Urine output monitoring for perfusion assessment"}]},
+        {"id":"fluid-bolus-cs","name":"IV Fluid Bolus 500mL NS","group":"Fluids","critical":false,"correct":false,"teaching":"⚠️ DANGEROUS — cardiogenic shock is pump failure, NOT volume depletion. Fluid bolus worsens pulmonary edema and increases myocardial work. Give cautious 250mL if clearly volume-depleted (no crackles, no elevated JVP), but reassess immediately.","references":[{"source":"Cardiogenic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482255/","detail":"Avoid aggressive fluids in cardiogenic shock — worsens pulmonary edema"}]}
+      ]
+    },
+    "keyLearningPoints": [
+      "Cardiogenic shock = pump failure → vasopressors + inotropes, NOT fluids",
+      "Urgent echo is mandatory — mechanical complications (VSD, acute MR, free wall rupture) need surgery, not pressors",
+      "Norepinephrine is first-line vasopressor; dobutamine adds inotropic support",
+      "IABP-SHOCK II showed no mortality benefit for IABP — but mechanical support options (Impella, ECMO) are evolving",
+      "Target MAP ≥65, UO >0.5 mL/kg/hr, lactate clearance as perfusion markers"
+    ],
+    "mustNotMiss": [
+      "Mechanical complication (VSD, acute MR, free wall rupture) — needs emergent surgery",
+      "RV-dominant shock — vasopressors + avoid preload reduction; NO diuretics",
+      "Fluid overload from aggressive resuscitation — worsens pump failure"
+    ],
+    "commonPitfalls": [
+      "Giving IV fluids in cardiogenic shock (pump failure ≠ volume depletion)",
+      "Missing mechanical complications on exam — new murmur = VSD or acute MR until proven otherwise",
+      "Targeting normal BP instead of perfusion markers (UO, lactate, mental status)"
+    ],
+    "initialVitals": {"BP": "74/48", "HR": "118", "RR": "28", "Temp": "98.2°F", "SpO2": "89% on 6L NC"}
+  },
+  "stemi-v3": {
+    "id": "stemi-v3",
+    "diagnosis": "STEMI Equivalent — Left Bundle Branch Block (New LBBB)",
+    "acuity": 1,
+    "presentation": "Chest Pain",
+    "category": "cardiovascular",
+    "chiefComplaint": "Chest Pain with New LBBB — Thrombolysis Decision",
+    "treatments": {
+      "orders": [
+        {"id":"asa-lbbb","name":"Aspirin 325mg PO (chewed)","group":"Antiplatelet","critical":true,"correct":true,"phase":1,"teaching":"Immediate — same as STEMI. New LBBB with ischemic symptoms = STEMI equivalent. ASA reduces mortality regardless of final decision on reperfusion strategy.","references":[{"source":"Left Bundle Branch Block — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK482256/","detail":"ASA as for STEMI in new LBBB with symptoms"}]},
+        {"id":"cath-lbbb","name":"Activate Cath Lab (Code STEMI)","group":"Reperfusion","critical":true,"correct":true,"phase":1,"teaching":"New LBBB + ischemic symptoms = STEMI equivalent per 2013 ACC/AHA guidelines. Activate cath lab immediately. Do NOT wait for serial ECGs or troponin return. Door-to-balloon <90 min applies.","references":[{"source":"2025 ACC/AHA ACS Guideline","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309","detail":"New LBBB + ischemic symptoms = STEMI equivalent; activate cath lab"}]},
+        {"id":"sgarbossa-lbbb","name":"Apply Sgarbossa Criteria","group":"Diagnostics","critical":true,"correct":true,"phase":1,"teaching":"Sgarbossa criteria identify STEMI in LBBB: (1) Concordant ST elevation ≥1mm in leads with positive QRS (+5pts), (2) Concordant ST depression ≥1mm in V1-V3 (+3pts), (3) Discordant ST elevation ≥5mm (+2pts). Score ≥3 = specific for MI. Modified Sgarbossa (Smith) uses ST/S ratio >0.25 — more sensitive.","references":[{"source":"Sgarbossa Criteria — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK459228/","detail":"Sgarbossa criteria for STEMI diagnosis in LBBB"}]},
+        {"id":"heparin-lbbb","name":"Heparin 60u/kg IV bolus + drip","group":"Anticoagulation","critical":true,"correct":true,"phase":1,"teaching":"Anticoagulation as for STEMI while awaiting PCI. Weight-based dosing. Goal aPTT 50-70s.","references":[{"source":"2025 ACC/AHA ACS Guideline","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309","detail":"UFH for STEMI equivalent pending PCI"}]},
+        {"id":"wait-serial-ecg","name":"Serial ECGs only — Observe","group":"Observation","critical":false,"correct":false,"teaching":"⚠️ WRONG — do not wait for serial ECGs in new LBBB with ischemic symptoms. New LBBB = STEMI equivalent. Every minute of delay = more myocardium lost. Activate the cath lab NOW.","references":[{"source":"2025 ACC/AHA ACS Guideline","url":"https://www.ahajournals.org/doi/10.1161/CIR.0000000000001309","detail":"Do not delay reperfusion for serial ECGs in STEMI equivalent"}]}
+      ]
+    },
+    "keyLearningPoints": [
+      "New LBBB + ischemic symptoms = STEMI equivalent — activate cath lab immediately",
+      "Sgarbossa criteria: concordant ST elevation ≥1mm is most specific (score ≥3 = STEMI)",
+      "Modified Sgarbossa (Smith): ST/S ratio >0.25 is more sensitive than original criteria",
+      "Do NOT wait for troponin or serial ECGs — time is muscle",
+      "Old LBBB (known prior) does NOT automatically trigger cath lab — clinical context matters"
+    ],
+    "mustNotMiss": [
+      "Treating new LBBB as old LBBB — always compare to prior ECG if available",
+      "Missing concordant ST changes — the Sgarbossa criteria are frequently underapplied",
+      "Delaying reperfusion for biomarker results in a STEMI equivalent"
+    ],
+    "commonPitfalls": [
+      "Assuming all LBBB is old/chronic — always ask if prior ECG is available",
+      "Over-relying on Sgarbossa without clinical context — symptoms matter as much as ECG criteria",
+      "Serial ECG strategy instead of immediate cath lab activation in symptomatic new LBBB"
+    ],
+    "initialVitals": {"BP": "148/92", "HR": "102", "RR": "20", "Temp": "98.7°F", "SpO2": "95%"}
+  },
+  "sepsis-v2": {
+    "id": "sepsis-v2",
+    "diagnosis": "Septic Shock — Refractory (Vasopressor-Dependent)",
+    "acuity": 1,
+    "presentation": "Fever / Altered Mental Status",
+    "category": "infectious",
+    "chiefComplaint": "Sepsis Not Responding to Initial Resuscitation",
+    "treatments": {
+      "orders": [
+        {"id":"vaso-add-vasopressin","name":"Add Vasopressin 0.03-0.04 units/min IV","group":"Vasopressor","critical":true,"correct":true,"phase":1,"teaching":"Second vasopressor when norepinephrine dose exceeds 0.25 mcg/kg/min. Vasopressin (ADH) works via V1 receptors — different mechanism from catecholamines. VASST trial: vasopressin + norepinephrine improved survival in less severe septic shock.","references":[{"source":"Septic Shock — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430652/","detail":"Vasopressin as second vasopressor in refractory septic shock"}]},
+        {"id":"hydrocort-shock","name":"Hydrocortisone 200mg/day IV (50mg q6h or continuous)","group":"Corticosteroids","critical":true,"correct":true,"phase":1,"teaching":"Relative adrenal insufficiency in septic shock. APROCCHSS trial: hydrocortisone + fludrocortisone reduced 90-day mortality. Give when norepinephrine dose >0.25 mcg/kg/min despite adequate resuscitation. Do NOT do ACTH stimulation test first — treat empirically.","references":[{"source":"Surviving Sepsis Campaign 2021 Guidelines","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486763/","detail":"Hydrocortisone 200mg/day in vasopressor-dependent septic shock"}]},
+        {"id":"source-control","name":"Source Control — Bedside Assessment + Imaging","group":"Source Control","critical":true,"correct":true,"phase":1,"teaching":"Refractory shock = suspect uncontrolled source. Common missed sources: abscess (CT abdomen), empyema (CXR/US), endovascular infection (echo), necrotizing fasciitis (surgical exploration). Source control within 6-12h of diagnosis is a Surviving Sepsis benchmark.","references":[{"source":"Surviving Sepsis Campaign 2021 Guidelines","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486763/","detail":"Source control within 6-12h — key benchmark for refractory septic shock"}]},
+        {"id":"thiamine-shock","name":"Thiamine 200mg IV","group":"Adjunct","critical":false,"correct":true,"phase":1,"teaching":"Thiamine (vitamin B1) deficiency causes lactic acidosis that mimics and worsens septic shock. Treat empirically in patients with alcohol use, malnutrition, or refractory lactic acidosis. Cheap, safe, potentially life-saving.","references":[{"source":"Thiamine Deficiency — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK537204/","detail":"Empiric thiamine for refractory lactic acidosis in septic shock"}]},
+        {"id":"broad-spectrum-escalate","name":"Escalate Antibiotics — Add Antifungal Coverage","group":"Antibiotics","critical":false,"correct":true,"phase":2,"teaching":"Consider fungal source in: immunocompromised, prolonged ICU stay, total parenteral nutrition, broad-spectrum antibiotics >5 days, Candida colonization at multiple sites. Empiric micafungin or caspofungin.","references":[{"source":"Surviving Sepsis Campaign 2021 Guidelines","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486763/","detail":"Consider antifungal coverage in high-risk refractory septic shock"}]}
+      ]
+    },
+    "keyLearningPoints": [
+      "Refractory septic shock: add vasopressin when norepinephrine >0.25 mcg/kg/min",
+      "Hydrocortisone 200mg/day in vasopressor-dependent septic shock — do NOT wait for ACTH stim test",
+      "Refractory shock demands source control reassessment — find what you missed",
+      "Thiamine empirically for unexplained lactic acidosis in at-risk patients",
+      "Surviving Sepsis Campaign benchmarks: 1h bundle, source control <12h, reassess at 6h"
+    ],
+    "mustNotMiss": [
+      "Uncontrolled source (abscess, empyema, necrotizing fasciitis) — reassess when refractory",
+      "Relative adrenal insufficiency — treat with hydrocortisone when vasopressor-dependent",
+      "Thiamine deficiency causing refractory lactic acidosis"
+    ],
+    "commonPitfalls": [
+      "Continuing to escalate norepinephrine without adding vasopressin or steroids",
+      "Not reassessing source control in refractory cases",
+      "Waiting for ACTH stimulation test before giving hydrocortisone in vasopressor-dependent shock"
+    ],
+    "initialVitals": {"BP": "68/40", "HR": "128", "RR": "32", "Temp": "39.8°C", "SpO2": "91% on 15L NRB"}
+  },
+  "sepsis-v3": {
+    "id": "sepsis-v3",
+    "diagnosis": "Sepsis — Atypical Presentation (Elderly / Immunocompromised)",
+    "acuity": 2,
+    "presentation": "Altered Mental Status",
+    "category": "infectious",
+    "chiefComplaint": "Confusion and Functional Decline — No Fever",
+    "treatments": {
+      "orders": [
+        {"id":"pan-culture","name":"Blood Cultures x2 + UA/UC + Consider LP","group":"Diagnostics","critical":true,"correct":true,"phase":1,"teaching":"Pan-culture before antibiotics. Two sets of blood cultures from different sites. Urine culture (sterile technique). LP if meningitis cannot be excluded in altered elderly patient. Culture first — but do NOT delay antibiotics if patient is deteriorating.","references":[{"source":"Sepsis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430685/","detail":"Blood cultures before antibiotics in sepsis; do not delay treatment"}]},
+        {"id":"broad-abx-elderly","name":"Empiric Broad-Spectrum Antibiotics","group":"Antibiotics","critical":true,"correct":true,"phase":1,"teaching":"Elderly and immunocompromised patients with altered mental status and no clear source need broad-spectrum coverage: pip-tazo or meropenem (if high-resistance risk) + vancomycin (for MRSA). Cover gram-negatives including Pseudomonas. Adjust after cultures.","references":[{"source":"Sepsis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430685/","detail":"Broad-spectrum empiric antibiotics within 1h of sepsis recognition"}]},
+        {"id":"ivf-elderly","name":"IV Fluid Resuscitation — Lactated Ringer's 30mL/kg","group":"Resuscitation","critical":true,"correct":true,"phase":1,"teaching":"Standard 30mL/kg LR (preferred over NS — less hyperchloremic acidosis). Reassess after each 500mL bolus in elderly patients — lower threshold for pulmonary edema. Use dynamic measures (pulse pressure variation, passive leg raise) rather than static CVP.","references":[{"source":"Surviving Sepsis Campaign 2021 Guidelines","url":"https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8486763/","detail":"30mL/kg crystalloid bolus; LR preferred over NS in sepsis"}]},
+        {"id":"sepsis-screen-elderly","name":"Lactate, CBC, BMP, LFTs, Coags, Procalcitonin","group":"Diagnostics","critical":true,"correct":true,"phase":1,"teaching":"Lactate ≥2 = sepsis; ≥4 = septic shock regardless of BP. Procalcitonin >0.5 supports bacterial infection (80% sensitivity). CBC may show leukopenia (not just leukocytosis) in elderly/immunocompromised. LFTs for hepatic dysfunction. Coags for DIC.","references":[{"source":"Sepsis — StatPearls","url":"https://www.ncbi.nlm.nih.gov/books/NBK430685/","detail":"Lactate and biomarkers in sepsis assessment"}]}
+      ]
+    },
+    "keyLearningPoints": [
+      "Elderly patients with sepsis frequently present WITHOUT fever — AMS, functional decline, and falls may be the only clues",
+      "Hypothermia in the elderly may indicate sepsis (immune response blunted)",
+      "Lactate ≥2 mmol/L = sepsis, regardless of vital signs — check it in all altered elderly patients",
+      "Immunocompromised patients need broad empiric coverage including anti-Pseudomonal agents",
+      "Urinary tract is the most common source in elderly women — but always look for pneumonia, C. diff, bacteremia"
+    ],
+    "mustNotMiss": [
+      "Sepsis presenting as AMS without fever in elderly — the 'afebrile sepsis' pattern",
+      "Leukopenia (not leukocytosis) in immunocompromised sepsis — WBC count is unreliable",
+      "Occult bacteremia — blood cultures are mandatory even when UA is positive"
+    ],
+    "commonPitfalls": [
+      "Attributing AMS to dementia or medications before ruling out infection",
+      "Reassurance from normal temperature — elderly and immunocompromised may be afebrile in severe sepsis",
+      "Treating the UTI without looking for bacteremia or a second source"
+    ],
+    "initialVitals": {"BP": "104/62", "HR": "96", "RR": "22", "Temp": "36.2°C", "SpO2": "94%"}
   },
   "pericarditis-v1": {
     "id": "pericarditis-v1",
@@ -17288,7 +17452,32 @@ window.CRT_DATA = {
       "Under-resuscitation",
       "Dopamine over norepi",
       "No source ID"
-    ]
+    ],
+    "caseDepth": {
+      "v2": {
+        "title": "Septic Shock — Refractory (Vasopressor-Dependent)",
+        "scenario": "6 hours into resuscitation: 30mL/kg fluids given, norepinephrine now at 0.35 mcg/kg/min. BP remains 68/40, lactate 6.2 and rising. The patient has not made urine in 3 hours. You need to escalate.",
+        "newData": {
+          "BP": "68/40",
+          "Norepinephrine": "0.35 mcg/kg/min",
+          "Lactate": "6.2 mmol/L (rising from 4.1)",
+          "UO": "0 mL in 3 hours",
+          "Echo": "Hyperdynamic LV, IVC collapsible — distributive physiology confirmed"
+        }
+      },
+      "v3": {
+        "title": "Sepsis — Atypical Presentation (Elderly)",
+        "scenario": "New patient: 84-year-old female from nursing home, brought in by family for 'not acting right' for 2 days. No fever. BP 104/62, HR 96, RR 22, Temp 36.2°C. Confused, not following commands. Family says she normally walks and feeds herself independently.",
+        "newData": {
+          "BP": "104/62",
+          "HR": "96",
+          "Temp": "36.2°C (hypothermic for age)",
+          "Lactate": "3.4 mmol/L",
+          "UA": "Cloudy, positive nitrites, >100 WBC",
+          "WBC": "6,200 (borderline — not leukocytosis)"
+        }
+      }
+    }
   },
   "pneumonia": {
     "id": "pneumonia",

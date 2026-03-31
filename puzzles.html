@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx — Daily Puzzle</title>
-<meta name="description" content="30-second clinical reasoning puzzles. One finding, one question, one decision. Build your diagnostic pattern library through daily practice.">
+<meta name="description" content="30 clinical reasoning puzzles across 13 specialties. One finding, one question, one decision. Build your diagnostic pattern library through daily practice.">
 <link rel="icon" href="favicon-32x32.png">
 <script src="js/nav-global.js"></script>
 <style>
@@ -137,13 +137,11 @@ function renderPuzzle() {
   document.getElementById('puzzleFeedback').className = 'puzzle-feedback';
   document.getElementById('puzzleFeedback').style.display = 'none';
   updateStreak();
-}
-
-function submitPuzzle() {
-  var answer = document.getElementById('puzzleAnswer').value.trim();
-  if (!answer) return;
-
-  var p = PUZZLES[currentIndex];
+},
+  // ── EMERGENCY MEDICINE ──
+  {type:'Risk Priority',scenario:'68-year-old male, syncope while standing in line. No prodrome. Found on floor by bystanders. Hx: hypertension, prostate cancer on hormonal therapy. ECG: QTc 512ms.',prompt:'Syncope in an elderly patient has a broad differential. Rank these causes by urgency: vasovagal, orthostatic hypotension, arrhythmia, structural cardiac, pulmonary embolism.',teaching:'Rank by mortality if missed: (1) Arrhythmia — QTc 512ms is a critical finding; prolonged QT can cause torsades de pointes and sudden death. Admit, telemetry, electrolytes, medications review. (2) Structural cardiac (AS, HCM, PE) — exertional or sudden syncope without prodrome = structural until proven otherwise. Echo required. (3) PE — hormonal therapy for prostate cancer is a VTE risk factor; no prodrome + PE-related syncope carries 15% mortality. (4) Orthostatic — likely contributor but lower mortality; treat after ruling out above. (5) Vasovagal — classic prodrome (warmth, nausea, tunnel vision) was absent here. Diagnosis of exclusion.'},
+  {type:'Missing Evidence',scenario:'You are supervising a student who presents a case: 55-year-old male, 3 days of fever, productive cough, right lower lobe infiltrate on CXR, WBC 14,000. The student says: "Community-acquired pneumonia, starting azithromycin."',prompt:'Before you approve the plan, what single piece of history would most change your management — and what would it change to?',teaching:'Immunosuppression status. If this patient is on corticosteroids, is HIV-positive, has received chemotherapy, or is a solid organ transplant recipient, azithromycin alone is dangerously inadequate. Immunocompromised patients with "CAP" can have Pneumocystis jirovecii (PCP), fungal pneumonia (Cryptococcus, Histoplasma, Aspergillus), or atypical mycobacteria — none of which respond to azithromycin. A single question — "Are you on any medications that affect your immune system?" — changes the workup (LDH, beta-glucan, galactomannan, BAL) and treatment entirely. The teaching point: immunosuppression is the most commonly missed contextual factor that converts "straightforward CAP" into a diagnostic emergency.'}
+];
   var fb = document.getElementById('puzzleFeedback');
   fb.className = 'puzzle-feedback show teaching';
   fb.innerHTML = '<div style="font-weight:700;margin-bottom:6px">Expert Analysis</div>' + p.teaching;
