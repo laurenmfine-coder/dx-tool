@@ -83,6 +83,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="/case-explainer-agent.js"></script>
 <script src="/rdx-voice-patient.js"></script>
 <script src="/rdx-realtime.js"></script>
+<script src="/rdx-ecg.js"></script>
 </head>
 <body>
 
@@ -847,6 +848,21 @@ async function sendMessage() {
             phase: state.currentPhase,
             turnNumber: state.turnCount,
           });
+        }
+
+        // ── ECG Image: auto-render if ECG mentioned in exchange ──
+        if (window.RDXEcg && RDXEcg.hasEcg(state.caseId)) {
+          var _ecgTrigger = /12.lead|ecg|ekg|electrocardiogram/i;
+          var _lastStudent = state.turns.length > 0
+            ? (state.turns[state.turns.length - 1].content || '') : '';
+          if (_ecgTrigger.test(_lastStudent) || _ecgTrigger.test(pb.patientResponse)) {
+            // Inject ECG result card into chat
+            var _ecgDiv = document.createElement('div');
+            _ecgDiv.id = 'ecg-result-' + state.caseId;
+            _ecgDiv.style.maxWidth = '520px';
+            document.getElementById('chatMessages').appendChild(_ecgDiv);
+            RDXEcg.renderOrder(state.caseId, 'ecg-result-' + state.caseId);
+          }
         }
 
         state.conversationMessages.push({ role: 'assistant', content: pb.patientResponse });
