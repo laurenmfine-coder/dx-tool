@@ -3513,7 +3513,7 @@ function initInteractiveState(){
   if(!S.studentMeds) S.studentMeds=null; // null=use defaults, array=student modified
   if(!S.studentAllergies) S.studentAllergies=null;
   if(!S.studentProblems) S.studentProblems=null;
-  if(!S.studentVitals) S.studentVitals=null;
+
   if(!S.studentImmunizations) S.studentImmunizations=null;
   if(!S.labOrders) S.labOrders=[];
   if(!S.imgOrders) S.imgOrders=[];
@@ -3530,7 +3530,7 @@ function loadInteractiveData(){
   S.studentMeds=db("student-meds-"+u+"-"+w);
   S.studentAllergies=db("student-allergies-"+u+"-"+w);
   S.studentProblems=db("student-problems-"+u+"-"+w);
-  S.studentVitals=db("student-vitals-"+u+"-"+w);
+
   S.studentImmunizations=db("student-imm-"+u+"-"+w);
   S.labOrders=db("lab-orders-"+u+"-"+w)||[];
   S.imgOrders=db("img-orders-"+u+"-"+w)||[];
@@ -3549,7 +3549,7 @@ function getActiveMeds(){return S.studentMeds||[...MEDICATIONS]}
 function getActiveAllergies(){return S.studentAllergies||[...ALLERGIES]}
 function getActiveProblems(){return S.studentProblems||[...PROBLEMS]}
 function getActiveImmunizations(){return S.studentImmunizations||[...IMMUNIZATIONS]}
-function getCurrentVitals(){return S.studentVitals||null}
+function getCurrentVitals(){return (VITALS&&VITALS.length)?VITALS[0]:null}
 
 // ═══════════════════════════════════════════════════════════════
 // INTERACTIVE MEDICATIONS
@@ -3996,41 +3996,10 @@ function deleteImmunization(idx){
 }
 
 // ═══════════════════════════════════════════════════════════════
-// ENCOUNTER VITALS ENTRY
+// ENCOUNTER VITALS DISPLAY
 // ═══════════════════════════════════════════════════════════════
 function renderVitalsInteractive(){
-  const isStudent=S.currentUser&&S.currentUser.role==="student";
-  const cv=getCurrentVitals();
-
-  // Existing vitals table
-  let vitalsTable=sectionCard("Vitals Trend",I.activity,tableHTML(["Date","Setting","BP","HR","RR","Temp","SpO₂","Wt","BMI"],VITALS.map(v=>'<tr><td style="font-weight:500">'+esc(v.date)+'</td><td>'+badge(v.setting)+'</td><td class="td-mono" style="'+(parseInt(v.bp)>=140?"color:var(--flag-high);font-weight:600":"")+'">'+esc(v.bp)+'</td><td class="td-mono">'+v.hr+'</td><td class="td-mono">'+v.rr+'</td><td class="td-mono">'+esc(v.temp)+'</td><td class="td-mono">'+esc(v.spo2)+'</td><td class="td-mono">'+esc(v.wt)+'</td><td class="td-mono">'+v.bmi+'</td></tr>')));
-
-  let entryForm="";
-  if(isStudent){
-    const vals=cv||{};
-    entryForm=sectionCard("Record Today's Encounter Vitals",I.activity,
-      (cv?'<div style="padding:8px 14px;background:var(--accent-light);border-radius:var(--radius);margin-bottom:12px;font-size:12px;font-weight:600;color:var(--accent)">✓ Vitals recorded for this encounter</div>':'')+
-      '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px"><div><label class="demo-label">Blood Pressure</label><input id="vBP" class="assign-input" style="padding:8px" placeholder="e.g. 138/86" value="'+esc(vals.bp||"")+'"></div><div><label class="demo-label">Heart Rate</label><input id="vHR" class="assign-input" style="padding:8px" placeholder="e.g. 78" value="'+esc(vals.hr||"")+'"></div><div><label class="demo-label">Resp Rate</label><input id="vRR" class="assign-input" style="padding:8px" placeholder="e.g. 16" value="'+esc(vals.rr||"")+'"></div><div><label class="demo-label">Temperature</label><input id="vTemp" class="assign-input" style="padding:8px" placeholder="e.g. 98.6°F" value="'+esc(vals.temp||"")+'"></div><div><label class="demo-label">SpO₂</label><input id="vSpo2" class="assign-input" style="padding:8px" placeholder="e.g. 98%" value="'+esc(vals.spo2||"")+'"></div></div><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px"><div><label class="demo-label">Weight</label><input id="vWt" class="assign-input" style="padding:8px" placeholder="e.g. 187 lbs" value="'+esc(vals.wt||"")+'"></div><div><label class="demo-label">Height</label><input id="vHt" class="assign-input" style="padding:8px" placeholder="e.g. 5\'4&quot;" value="'+esc(vals.ht||"")+'"></div><div><label class="demo-label">BMI</label><input id="vBMI" class="assign-input" style="padding:8px" placeholder="Auto or manual" value="'+esc(vals.bmi||"")+'"></div></div><div style="margin-top:12px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" onclick="saveEncounterVitals()">'+I.check+' Save Vitals</button></div>');
-  }
-
-  return entryForm+vitalsTable;
-}
-
-function saveEncounterVitals(){
-  const vitals={
-    bp:document.getElementById("vBP").value.trim(),
-    hr:document.getElementById("vHR").value.trim(),
-    rr:document.getElementById("vRR").value.trim(),
-    temp:document.getElementById("vTemp").value.trim(),
-    spo2:document.getElementById("vSpo2").value.trim(),
-    wt:document.getElementById("vWt").value.trim(),
-    ht:document.getElementById("vHt").value.trim(),
-    bmi:document.getElementById("vBMI").value.trim(),
-    recordedAt:new Date().toLocaleString(),
-  };
-  S.studentVitals=vitals;
-  saveStudentData("student-vitals",vitals);
-  showToast("✓ Encounter vitals saved");render();
+  return sectionCard("Vitals Trend",I.activity,tableHTML(["Date","Setting","BP","HR","RR","Temp","SpO₂","Wt","BMI"],VITALS.map(v=>'<tr><td style="font-weight:500">'+esc(v.date)+'</td><td>'+badge(v.setting)+'</td><td class="td-mono" style="'+(parseInt(v.bp)>=140?"color:var(--flag-high);font-weight:600":"")+'">'+esc(v.bp)+'</td><td class="td-mono">'+v.hr+'</td><td class="td-mono">'+v.rr+'</td><td class="td-mono">'+esc(v.temp)+'</td><td class="td-mono">'+esc(v.spo2)+'</td><td class="td-mono">'+esc(v.wt)+'</td><td class="td-mono">'+v.bmi+'</td></tr>')));
 }
 
 // Make functions globally available
@@ -4051,7 +4020,6 @@ if(typeof window!=='undefined'){
   window.orderImg=orderImg;window.resultImgOrder=resultImgOrder;window.cancelImgOrder=cancelImgOrder;
   window.placeReferral=placeReferral;window.deleteReferral=deleteReferral;
   window.addImmunization=addImmunization;window.deleteImmunization=deleteImmunization;
-  window.saveEncounterVitals=saveEncounterVitals;
   window.getActiveMeds=getActiveMeds;window.getActiveAllergies=getActiveAllergies;
   window.getActiveProblems=getActiveProblems;window.getActiveImmunizations=getActiveImmunizations;
   window.getCurrentVitals=getCurrentVitals;
