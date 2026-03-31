@@ -868,6 +868,19 @@ window.CRT_DATA = {
         "no fever, no obvious infection source",
         "her family says she just stopped doing her normal things"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cryptic Sepsis \u2014 Lactate-Defined",
+        "scenario": "84F from nursing home. BP 108/64 (her baseline is 'low'), mental status mildly changed from normal. No fever. WBC 5,800 (normal). But lactate 4.2 mmol/L. The EM resident says 'her vitals are fine.' What does the lactate tell you?",
+        "newData": {
+          "BP": "108/64 (baseline unclear)",
+          "Temp": "36.4\u00b0C \u2014 no fever",
+          "WBC": "5,800",
+          "Lactate": "4.2 mmol/L",
+          "Note": "Lactate >4 = tissue hypoperfusion regardless of BP/HR/temp \u2014 this IS septic shock by Sepsis-3 definition; cryptic sepsis (abnormal lactate without hypotension) has same mortality as overt shock; 1-hour bundle applies; look for source (urinary, pulmonary, abdominal)"
+        }
+      }
     }
   },
   "pericarditis-v1": {
@@ -1461,6 +1474,26 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.2\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "NSTEMI \u2014 Cardiogenic Shock During Cath",
+        "scenario": "Coronary angiogram shows 3-vessel disease. As the interventionalist begins the procedure, the patient suddenly becomes hypotensive: BP 72/44, HR 128. Echo: EF drops to 20%. The cardiologist asks: complete revascularization now or staged approach?",
+        "newData": {
+          "BP": "72/44 during PCI",
+          "EF": "20% \u2014 new cardiogenic shock",
+          "Note": "CULPRIT-SHOCK trial: infarct-related artery only during index PCI; complete revascularization staged improves outcomes; Impella or IABP as bridge"
+        }
+      },
+      "v3": {
+        "title": "NSTEMI \u2014 Medical Management Decision",
+        "scenario": "High-risk NSTEMI (GRACE 168), but patient refuses catheterization \u2014 active GI bleed on presentation, Hgb 7.2, scope scheduled tomorrow. Cardiology and GI are at odds. How do you manage simultaneous NSTEMI and active GI bleed?",
+        "newData": {
+          "GRACE": "168 (high-risk)",
+          "Hgb": "7.2 \u2014 active GI bleed",
+          "Note": "Defer PCI until GI bleed controlled; antiplatelet/anticoagulant timing is the critical decision; transfuse to Hgb 8 in NSTEMI with active bleed"
+        }
+      }
     }
   },
   "appendicitis-v1": {
@@ -2572,6 +2605,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "98.2\u00b0F",
       "SpO2": "88%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Acute Flash Pulmonary Edema \u2014 Hypertensive",
+        "scenario": "BP 224/138 on arrival, SpO2 78% on room air. Bilateral crackles to apices. CXR: bilateral infiltrates, cardiomegaly, Kerley B lines. The question: BiPAP now vs intubation, and what is the pathophysiology of hypertensive flash pulmonary edema vs cardiomyopathy-driven?",
+        "newData": {
+          "BP": "224/138",
+          "SpO2": "78%",
+          "CXR": "Bilateral infiltrates, cardiomegaly, Kerley B lines",
+          "Note": "Flash pulmonary edema: diastolic dysfunction + afterload crisis (HTN) \u2192 left-sided congestion without low EF; BiPAP reduces preload + afterload; IV nitroglycerin + furosemide; intubate if BiPAP fails within 20 min or GCS declining"
+        }
+      }
     }
   },
   "copd-v1": {
@@ -3451,6 +3496,17 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "103.6\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Culture Results \u2014 De-escalating Antibiotics",
+        "scenario": "CSF culture day 2: N. meningitidis \u2014 fully sensitive to penicillin. Patient clinically improving. Infectious disease asks: narrow from ceftriaxone + vancomycin to penicillin alone? When can steroids stop? Total duration?",
+        "newData": {
+          "CSFCulture": "N. meningitidis \u2014 penicillin-sensitive",
+          "Day": "2 \u2014 clinically improving",
+          "Note": "De-escalate to penicillin G IV; stop vancomycin; dexamethasone only beneficial if started before/with first antibiotic dose \u2014 if already given, complete 4 days; total duration 7 days for meningococcal meningitis; close contacts get rifampin/ciprofloxacin prophylaxis"
+        }
+      }
     }
   },
   "dka-v1": {
@@ -5020,6 +5076,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Recurrent VT \u2014 ICD Decision",
+        "scenario": "Patient converted to sinus rhythm. Echo: EF 30%, dilated cardiomyopathy. EP study: sustained monomorphic VT induced at 180 bpm. Cardiologist asks about ICD implantation vs antiarrhythmic therapy. Patient asks: 'Will this keep happening?'",
+        "newData": {
+          "EF": "30% (reduced)",
+          "EPStudy": "Sustained monomorphic VT induced",
+          "Diagnosis": "Ischemic cardiomyopathy \u2014 presumed substrate",
+          "Note": "EF <35% + sustained VT = Class I indication for ICD; amiodarone reduces VT burden but does not reduce mortality"
+        }
+      }
     }
   },
   "gi-bleed-syncope": {
@@ -5301,6 +5369,19 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "97.6\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Rebleed \u2014 Intervention Decision",
+        "scenario": "Upper endoscopy: Forrest Ia (spurting) duodenal ulcer. Clipped + epinephrine injection. Discharged to floor. 6 hours later: HR 128, BP 86/52, 300mL frank hematemesis. GI asks: repeat endoscopy vs IR embolization.",
+        "newData": {
+          "BP": "86/52",
+          "HR": "128",
+          "Bleed": "300mL hematemesis 6h post-endoscopy",
+          "EndoscopyNote": "Forrest Ia \u2014 posterior duodenal ulcer, technically difficult",
+          "Note": "Rebleed after endoscopic therapy \u2014 repeat endoscopy if technically feasible; IR embolization if second endoscopy fails or technically challenging"
+        }
+      }
     }
   },
   "status-epilepticus": {
@@ -5890,6 +5971,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "New Brain Tumor \u2014 Seizure Prophylaxis and Biopsy Urgency",
+        "scenario": "48M, first seizure. MRI: ring-enhancing 4cm mass right frontal lobe with significant perilesional edema. Differential: GBM vs metastasis vs abscess. The neurosurgeon can biopsy tomorrow. Dexamethasone started. How urgent is tissue diagnosis?",
+        "newData": {
+          "Mass": "4cm ring-enhancing \u2014 right frontal",
+          "Edema": "Significant perilesional edema",
+          "Diagnosis": "Unknown \u2014 GBM vs met vs abscess",
+          "Note": "Tissue diagnosis urgency: ring-enhancing mass MUST be biopsied (treatment differs radically: GBM vs met vs abscess vs CNS lymphoma vs demyelination); do NOT empirically treat as metastasis without primary; do NOT start steroids before biopsy if CNS lymphoma is possible (steroids cause 'ghost cell' appearance \u2014 may yield false-negative); urgent biopsy within 48-72h"
+        }
+      }
     }
   },
   "apap-overdose": {
@@ -6183,6 +6276,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.8\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "APAP Overdose \u2014 Extended Release and Late Presentation",
+        "scenario": "Patient took extended-release acetaminophen 12 hours ago. Initial 4-hour Rumack-Matthew nomogram level: below treatment line. Second level at 8 hours: 142 mcg/mL (above treatment line on repeat testing). How does extended-release APAP change management?",
+        "newData": {
+          "Formulation": "Extended-release APAP",
+          "FirstLevel_4h": "Below treatment line",
+          "SecondLevel_8h": "142 mcg/mL \u2014 above line",
+          "Note": "Extended-release APAP: absorption is prolonged; single 4-hour level may miss the peak; serial levels required (4h and 8h minimum); treat based on highest level; NAC should be started if any level is above treatment line; do NOT discharge based on low 4h level alone with extended-release formulation"
+        }
+      }
     }
   },
   "salicylate-toxicity": {
@@ -6436,6 +6541,19 @@ window.CRT_DATA = {
       "RR": "28 (deep, rapid \u2014 Kussmaul-type)",
       "Temp": "100.6\u00b0F",
       "SpO2": "98%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hemodialysis Criteria \u2014 When to Call Nephrology",
+        "scenario": "Salicylate level 68 mg/dL. pH 7.32, tachypneic at RR 34. Urine alkalinization started. Altered mental status \u2014 confused and agitated. Toxicology and nephrology on the phone simultaneously.",
+        "newData": {
+          "SalicylateLevel": "68 mg/dL",
+          "pH": "7.32 (acidosis)",
+          "AMS": "Confused and agitated",
+          "RR": "34 (tachypneic)",
+          "Note": "Hemodialysis criteria in salicylate toxicity: level >100 mg/dL acute (or >60 mg/dL chronic), AMS, severe acidosis (pH <7.2), renal or liver failure, pulmonary edema, or failure of supportive care. This patient meets criteria (AMS + acidosis + level 68 in chronic setting). Call nephrology now \u2014 do not wait for level to rise further. Urine alkalinization as bridge."
+        }
+      }
     }
   },
   "epiglottitis": {
@@ -6939,6 +7057,17 @@ window.CRT_DATA = {
       "RR": "30",
       "Temp": "99.4\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Failed Air Enema \u2014 Surgical Decision",
+        "scenario": "Air enema attempted: pressure reached 120 mmHg x3 \u2014 intussusception not reduced. Child remains in pain, vomiting, intermittently drawing up legs. Pediatric surgery called.",
+        "newData": {
+          "AirEnema": "Failed \u2014 3 attempts at 120 mmHg",
+          "ClinicalStatus": "Ongoing pain, vomiting",
+          "Note": "Failed air enema reduction (after 2-3 attempts) = operative laparoscopic or open reduction. Contraindications to enema: peritonitis, perforation, hemodynamic instability. Surgical reduction: manual milking of intussusceptum; if necrotic or not reducible, bowel resection with primary anastomosis. Lead point (Meckel, polyp, lymphoma) more common in children >5 years \u2014 increases risk of recurrence and malignancy."
+        }
+      }
     }
   },
   "cauda-equina": {
@@ -7166,6 +7295,18 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.6\u00b0F",
       "SpO2": "98%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cauda Equina \u2014 Surgical Timing Controversy",
+        "scenario": "Cauda equina syndrome confirmed on MRI (L4-L5 central disc herniation). The patient has saddle anesthesia and urinary retention \u2014 but had symptom onset 36 hours ago. Neurosurgery asks: is there still benefit to emergent decompression at 36 hours?",
+        "newData": {
+          "SymptomOnset": "36 hours ago",
+          "Findings": "Saddle anesthesia + urinary retention",
+          "MRI": "L4-L5 central disc \u2014 cauda equina compression",
+          "Note": "Cauda equina decompression: best outcomes within 48h of acute onset; evidence for benefit up to 48h; >48h outcomes mixed but surgery still indicated \u2014 ongoing compression causes ongoing injury; never refuse surgery based on time alone without neurosurgical input"
+        }
+      }
     }
   },
   "aortic-dissection-back": {
@@ -7993,6 +8134,17 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ACE-I Angioedema \u2014 Mechanism and Safe Alternatives",
+        "scenario": "ACE inhibitor (lisinopril) stopped. Bradykinin-mediated angioedema confirmed \u2014 no response to antihistamines or epinephrine. Cardiologist is asking: what antihypertensive is safe to substitute, and is ARB use safe?",
+        "newData": {
+          "Mechanism": "Bradykinin-mediated \u2014 no response to antihistamines/epi",
+          "ACEIStopped": "Lisinopril discontinued",
+          "Note": "ACE-I angioedema: ARBs have ~0.3-0.5% angioedema risk (lower than ACEI ~1-2%) \u2014 use with caution and inform patient. ARNI (sacubitril/valsartan) increases bradykinin \u2014 higher risk than ARB alone. Safer alternatives: calcium channel blockers, beta-blockers, thiazides. Acute treatment: icatibant (bradykinin B2 antagonist) or FFP for severe attacks. Antihistamines and epinephrine are not effective \u2014 distinguish from IgE-mediated mechanism."
+        }
+      }
     }
   },
   "ectopic-pregnancy": {
@@ -8838,6 +8990,18 @@ window.CRT_DATA = {
       "RR": "26",
       "Temp": "105.2\u00b0F (rectal)",
       "SpO2": "94%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "NMS \u2014 Rhabdomyolysis and Renal Failure",
+        "scenario": "Day 4: Haloperidol stopped, temperature 39.2\u00b0C (improving). CPK 94,000. Creatinine rising 1.1 \u2192 3.8. Urine dark brown. Bromocriptine and dantrolene running. Nephrology evaluating for dialysis.",
+        "newData": {
+          "CPK": "94,000",
+          "Creatinine": "3.8 (was 1.1)",
+          "Urine": "Dark brown \u2014 myoglobinuria",
+          "Note": "NMS rhabdomyolysis: aggressive IVF (target UO >100mL/hr); alkalinize urine with bicarb (reduces myoglobin precipitation); dialysis if oliguria despite fluids or K+ rising; NMS mortality 10-20% untreated; resolution 2-14 days after offending agent stopped"
+        }
+      }
     }
   },
   "serotonin-syndrome": {
@@ -9076,6 +9240,26 @@ window.CRT_DATA = {
       "RR": "24",
       "Temp": "102.8\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Serotonin Syndrome \u2014 Severity Escalation",
+        "scenario": "Hunter criteria positive (clonus + hyperreflexia + agitation). Started on cyproheptadine and benzos. 4 hours later: temperature now 40.6\u00b0C, HR 148, BP 168/104, severe diaphoresis. The ICU is asking about intubation and paralysis.",
+        "newData": {
+          "Temp": "40.6\u00b0C \u2014 rising",
+          "HR": "148",
+          "BP": "168/104",
+          "Note": "Severe serotonin syndrome: if temperature >41\u00b0C \u2192 immediate intubation + NDMB paralysis (to stop muscle activity and heat production); cyproheptadine only mildly effective; cooling measures; benzodiazepines for agitation; avoid succinylcholine (hyperkalemia risk from rhabdomyolysis)"
+        }
+      },
+      "v3": {
+        "title": "SS vs NMS \u2014 Treatment Is Opposite",
+        "scenario": "ICU team debating: is this serotonin syndrome or neuroleptic malignant syndrome? Patient is on both an SSRI (paroxetine) and an antipsychotic (haloperidol added 2 days ago). Both were started within the past 2 weeks. What clinical features distinguish them and why does it matter acutely?",
+        "newData": {
+          "Medications": "Paroxetine (chronic) + haloperidol (added 2 days ago)",
+          "Note": "Key distinction \u2014 onset (SS: hours; NMS: days-weeks), clonus (SS: present; NMS: absent), rigidity (NMS: lead-pipe; SS: mild or absent); treatment opposite: SS = stop serotonergic agents; NMS = stop dopamine antagonist + bromocriptine/dantrolene; getting it wrong wastes critical time"
+        }
+      }
     }
   },
   "septic-shock-urosepsis": {
@@ -9682,6 +9866,28 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "102.2\u00b0F (in ED, rising)",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Febrile Neutropenia \u2014 Culture-Positive \u2014 Gram Negative",
+        "scenario": "Blood cultures return day 2: E. coli, sensitive to ceftazidime. Patient is improving on cefepime monotherapy. Infectious disease asks: de-escalate to ceftazidime? And when can you consider oral step-down in neutropenic fever?",
+        "newData": {
+          "BloodCulture": "E. coli \u2014 ceftazidime sensitive",
+          "Clinical": "Improving on cefepime",
+          "ANC": "Still <500",
+          "Note": "De-escalation once culture-sensitive: step down to narrower agent; oral step-down (ciprofloxacin + amoxicillin-clavulanate) appropriate when: afebrile 48h + hemodynamically stable + ANC recovering + able to tolerate PO \u2014 ASCO/IDSA low-risk criteria"
+        }
+      },
+      "v3": {
+        "title": "Febrile Neutropenia \u2014 Antifungal Escalation",
+        "scenario": "Day 5 of cefepime: still febrile, ANC 40. No source identified on repeat workup. Blood cultures remain negative. Respiratory symptoms have developed: new bilateral nodular opacities on CTA.",
+        "newData": {
+          "Day": "5 of antibiotics \u2014 persistent fever",
+          "ANC": "40",
+          "CT_Chest": "Bilateral nodular opacities \u2014 new",
+          "Note": "Persistent febrile neutropenia >4 days without source: empiric antifungal (micafungin, caspofungin, or voriconazole); CT chest findings in neutropenic patient = Aspergillus until proven otherwise; galactomannan + beta-D-glucan + BAL"
+        }
+      }
     }
   },
   "angle-closure-glaucoma": {
@@ -9976,6 +10182,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Acute Angle-Closure \u2014 Failing Initial Treatment",
+        "scenario": "After timolol, brimonidine, pilocarpine, and IV acetazolamide, IOP still 48 mmHg (was 62). Patient is nauseated and vomiting from pain. Ophthalmologist is available in 90 minutes. The EM attending asks about IV mannitol.",
+        "newData": {
+          "IOP": "48 mmHg (was 62 \u2014 partial response)",
+          "MedsTried": "Timolol, brimonidine, pilocarpine, acetazolamide",
+          "VisionLoss": "Halos, decreased acuity",
+          "Note": "Mannitol 1-2g/kg IV \u2014 hyperosmotic agent reduces vitreous volume, lowers IOP rapidly (onset 30-60 min); avoid if significant renal or cardiac disease; target IOP <30 before LPI; laser peripheral iridotomy is definitive \u2014 corneal edema may require clearing first"
+        }
+      }
     }
   },
   "crao": {
@@ -10262,6 +10480,17 @@ window.CRT_DATA = {
       "RR": "14",
       "Temp": "98.4\u00b0F",
       "SpO2": "98%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CRAO \u2014 Golden Hour Window",
+        "scenario": "Confirmed CRAO on fundoscopy (cherry red spot, retinal whitening). Onset was 2.5 hours ago. The patient asks if there's any treatment. Ophthalmology is evaluating for intraarterial fibrinolysis. What is the evidence and the window?",
+        "newData": {
+          "OnsetTime": "2.5 hours",
+          "FundoscopicFindings": "Cherry red spot, retinal whitening",
+          "Note": "CRAO treatment: no proven effective therapy; IAT with tPA (EAGLE trial 2022) \u2014 no benefit beyond standard care; IOP-lowering maneuvers (massage, paracentesis, timolol) theoretical benefit; immediate carotid/echo/cardiac workup for embolic source; secondary stroke prevention is the priority"
+        }
+      }
     }
   },
   "testicular-torsion": {
@@ -10527,6 +10756,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Testicular Torsion \u2014 Contralateral Orchiopexy",
+        "scenario": "Torsion confirmed surgically \u2014 right testicle detorsed and viable (3 hours ischemia). Urologist asks parent consent for left orchiopexy at the same time. The parents ask 'why fix the normal side?' Explain the reasoning.",
+        "newData": {
+          "IschemiaTime": "3 hours \u2014 testicle viable",
+          "Procedure": "Right detorsion + orchiopexy completed",
+          "Question": "Why orchiopexy the normal contralateral testicle?",
+          "Note": "Bell-clapper deformity is bilateral in 40-80% of cases \u2014 if one testicle twisted, the other is at risk; contralateral orchiopexy is standard of care at the time of surgery; prevents future torsion of the remaining testicle; must be done while patient is already under anesthesia"
+        }
+      }
     }
   },
   "fournier-gangrene": {
@@ -11382,6 +11623,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "102.4\u00b0F",
       "SpO2": "96%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SCORTEN and ICU Transfer Decision",
+        "scenario": "Lamotrigine identified as culprit \u2014 stopped. SCORTEN calculated: age 55, malignancy absent, HR 122, BSA detachment 28%, glucose 162, BUN 18, bicarbonate 17. SCORTEN = 3.",
+        "newData": {
+          "Culprit": "Lamotrigine \u2014 stopped",
+          "SCORTEN": "3 (estimated mortality ~35%)",
+          "BSADetachment": "28%",
+          "Note": "SCORTEN \u22653 = burn unit transfer recommended if available; IVIG (cyclosporine is alternative) \u2014 debated evidence; wound care like burns (non-adherent dressings, silver sulfadiazine); ophthalmology daily (symblepharon prevention); mucosal care; nutrition (NGT if oral intake poor); avoid systemic steroids \u2014 may increase infection risk and delay re-epithelialization."
+        }
+      }
     }
   },
   "thyroid-storm": {
@@ -12331,6 +12584,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.2\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Anticoagulation Source Workup",
+        "scenario": "Acute limb ischemia from embolism treated \u2014 limb saved. Post-op echocardiogram: normal LV function, no visible thrombus. Holter monitor: sinus rhythm throughout. Patient is 55 years old, no known atrial fibrillation. What are the possible sources and required workup?",
+        "newData": {
+          "Echo": "Normal LV, no thrombus",
+          "Holter": "Sinus rhythm x48h",
+          "Age": "55 \u2014 no known AF",
+          "Note": "Embolic source workup in cryptogenic ALI: (1) Extended cardiac monitoring (30-day event monitor \u2014 paroxysmal AF may be missed on short Holter); (2) TEE for LAA thrombus, patent foramen ovale, aortic arch atheroma; (3) Hypercoagulable workup (antiphospholipid syndrome, Factor V Leiden, prothrombin mutation, protein C/S, antithrombin); (4) Malignancy screen (occult cancer is a procoagulant state). Anticoagulate empirically pending workup."
+        }
+      }
     }
   },
   "mesenteric-ischemia": {
@@ -13224,6 +13489,18 @@ window.CRT_DATA = {
       "RR": "16",
       "Temp": "98.4\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Chronic SDH \u2014 Anticoagulation Reversal Decision",
+        "scenario": "74F on apixaban for AF (CHA2DS2-VASc 4). Chronic subdural hematoma found after a fall \u2014 midline shift 4mm, GCS 14. Neurosurgery wants to reverse anticoagulation before burr hole drainage. Cardiology is worried about stroke risk. Sequence the decision.",
+        "newData": {
+          "Anticoagulant": "Apixaban (AF) \u2014 CHA2DS2VASc 4",
+          "MidlineShift": "4mm",
+          "GCS": "14",
+          "Note": "Reverse and drain: andexanet alfa for apixaban reversal (preferred); burr hole drainage; restart anticoagulation 48-72h post-drainage if neurologically stable \u2014 stroke risk from stopping anticoagulation in AF is real but subacute; bridge with heparin only after neurosurgical clearance"
+        }
+      }
     }
   },
   "heat-stroke": {
@@ -14136,6 +14413,17 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "100.8\u00b0F (new \u2014 concerning for strangulation/ischemia)",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Intraoperative Viability \u2014 Second Look Decision",
+        "scenario": "OR: 40cm of dark, non-peristaltic small bowel. After warm saline lavage for 5 minutes, color marginally improved \u2014 possibly viable, possibly not. BP 78/52 on vasopressors. Surgeon asks: resect now vs second-look laparotomy.",
+        "newData": {
+          "BP": "78/52 on vasopressor",
+          "BowelStatus": "Marginally improved after warm saline \u2014 viability uncertain",
+          "Note": "Damage control surgery in hemodynamic instability \u2014 if bowel viability unclear and patient physiologically unstable, resect clearly dead bowel, staple both ends, close abdomen, and perform second-look laparotomy at 24-48h when physiology corrected. Anastomosis in this setting has high leak rate."
+        }
+      }
     }
   },
   "severe-pancreatitis": {
@@ -14443,6 +14731,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "100.4\u00b0F",
       "SpO2": "94%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "WALLED-OFF NECROSIS \u2014 Intervention Timing",
+        "scenario": "Day 28: persistent fever, WBC 18,000, pain. CT shows 8cm walled-off necrosis (WON) with no gas bubbles. Blood cultures negative. Patient not deteriorating rapidly. GI asks: drain now vs wait for further maturation.",
+        "newData": {
+          "CT": "8cm walled-off necrosis",
+          "Day": "28",
+          "BloodCultures": "Negative",
+          "Note": "Walled-off necrosis \u2014 delay intervention until collection is mature (\u22654 weeks from onset); asymptomatic WON can be observed; symptomatic WON without gas = try endoscopic or CT-guided drainage first (step-up approach); gas in collection = infected necrosis, intervene sooner"
+        }
+      }
     }
   },
   "cardiac-tamponade": {
@@ -15061,6 +15361,17 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "98.4\u00b0F",
       "SpO2": "94%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Reversible vs Permanent \u2014 Pacing Decision",
+        "scenario": "Patient converted with transcutaneous pacing. Worked up: Lyme titer positive. Echo: normal EF, no structural disease. Infectious disease says this could be complete heart block from Lyme carditis \u2014 potentially reversible.",
+        "newData": {
+          "LymeSerology": "Positive \u2014 IgM and IgG",
+          "Echo": "Normal EF, no structural disease",
+          "Note": "Lyme carditis \u2014 third-degree AVB may resolve with IV ceftriaxone; avoid permanent pacemaker implantation until antibiotic course complete (3-4 weeks); temporary pacing if needed; PPM only if block persists after treatment"
+        }
+      }
     }
   },
   "peritonsillar-abscess": {
@@ -15924,6 +16235,28 @@ window.CRT_DATA = {
       "RR": "18",
       "Temp": "100.6\u00b0F",
       "SpO2": "97%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "TTP \u2014 Refractory \u2014 Second-Line Agents",
+        "scenario": "Day 5 of plasma exchange: platelets rising slowly (42 \u2192 68 \u2192 58 today \u2014 dropped again). ADAMTS13 activity <5%, inhibitor confirmed. The blood bank asks about caplacizumab. ID asks about rituximab. How do you sequence these?",
+        "newData": {
+          "Platelets": "Dropped to 58 after initial rise",
+          "ADAMTS13_Activity": "<5%",
+          "ADAMTS13_Inhibitor": "Confirmed",
+          "Note": "Refractory TTP: caplacizumab (von Willebrand factor blocker) added when platelets not rising after 2 sessions; rituximab 375mg/m2 weekly x4 for refractory/relapsing disease; both work via different mechanisms; continue plasma exchange throughout"
+        }
+      },
+      "v3": {
+        "title": "TTP vs HUS \u2014 Critical Distinction",
+        "scenario": "New patient: 8-year-old with bloody diarrhea 10 days ago (E. coli O157:H7 confirmed), now with thrombocytopenia (platelets 34), microangiopathic hemolytic anemia, and creatinine 4.2. Is this TTP or HUS and why does it matter for treatment?",
+        "newData": {
+          "Age": "8-year-old",
+          "Preceding": "E. coli O157:H7 diarrhea",
+          "Creatinine": "4.2 \u2014 renal failure prominent",
+          "Note": "D+ HUS (Shiga toxin-associated): plasma exchange is NOT indicated (different pathophysiology than TTP); supportive care + dialysis if needed; antibiotics are controversial (may worsen Shiga toxin release); TTP = ADAMTS13 deficiency; HUS = Shiga toxin or complement dysregulation"
+        }
+      }
     }
   },
   "dic-massive-transfusion": {
@@ -16417,6 +16750,28 @@ window.CRT_DATA = {
         "it's hot and I can barely bend it",
         "worst joint pain I've ever had"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Septic Arthritis \u2014 Culture-Negative Management",
+        "scenario": "Joint aspirate: WBC 78,000 (92% PMN), Gram stain negative. Cultures pending at 48 hours \u2014 still negative. The orthopedic surgeon wants to stop antibiotics. You disagree. What does culture-negative septic arthritis mean and how long do you treat?",
+        "newData": {
+          "JointWBC": "78,000",
+          "GramStain": "Negative",
+          "CultureDay2": "Still negative",
+          "Note": "Culture-negative septic arthritis: up to 25% of septic joints are culture-negative; do NOT stop antibiotics; treat empirically for full course (3-4 weeks); consider fungal or mycobacterial if immunocompromised; NAAT for Neisseria in young sexually active patients"
+        }
+      },
+      "v3": {
+        "title": "Gonococcal Arthritis \u2014 Migratory Polyarthritis",
+        "scenario": "New patient: 24F, sexually active, 5 days of migratory polyarthritis (wrists \u2192 knees), skin pustules on extremities, tenosynovitis. WBC 11,000. ESR 68. Joint aspirate: WBC 42,000, Gram stain negative. What diagnosis fits and how do you confirm and treat?",
+        "newData": {
+          "Age": "24F sexually active",
+          "Pattern": "Migratory polyarthritis + tenosynovitis + skin lesions",
+          "JointWBC": "42,000 \u2014 Gram stain negative",
+          "Note": "Disseminated gonococcal infection (DGI) \u2014 most common cause of septic arthritis in sexually active young adults; NAAT of urethra/cervix/rectum/pharynx; blood cultures often negative; ceftriaxone 1g IV until improvement, then oral step-down; treat partner"
+        }
+      }
     }
   },
   "compartment-syndrome": {
@@ -16676,6 +17031,18 @@ window.CRT_DATA = {
       "RR": "22",
       "Temp": "98.6\u00b0F",
       "SpO2": "99%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Post-Fasciotomy Wound Management",
+        "scenario": "Four-compartment fasciotomy performed. Day 2: wounds open, compartment pressures normal (12 mmHg anterior). Moderate edema remains. Orthopedic team asks: VAC dressing vs bedside wound closure vs formal OR closure at 48-72h.",
+        "newData": {
+          "CompartmentPressures": "12 mmHg (normal)",
+          "WoundStatus": "Open \u2014 moderate edema",
+          "Day": "2 post-fasciotomy",
+          "Note": "Post-fasciotomy wound closure: delayed primary closure at 48-72h when swelling resolves (preferred if skin can be approximated without tension); VAC dressing to reduce edema and promote granulation if closure not yet possible; split-thickness skin graft (STSG) if delayed closure not feasible; never forcibly close \u2014 dehiscence and necrosis risk"
+        }
+      }
     }
   },
   "hyperkalemia-cardiac": {
@@ -17683,6 +18050,18 @@ window.CRT_DATA = {
         "tightness that won't go away",
         "it's spreading to my jaw"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Risk Stratification \u2014 TIMI vs HEART Score",
+        "scenario": "ED evaluation for chest pain. Troponin x2 negative. ECG: non-specific T-wave changes. HEART score 5. Patient is asking to go home.",
+        "newData": {
+          "Troponin": "Negative x2",
+          "ECG": "Non-specific T-wave changes",
+          "HEART": "5 (intermediate)",
+          "Note": "HEART score 4-6 = intermediate risk \u2014 admit for observation, serial troponins at 3-6h intervals, or accelerated diagnostic protocol. HEART >6 = high risk, early invasive. HEART 0-3 = low risk, discharge safe. TIMI >2 + HEART >3 = do not discharge from ED. This patient HEART 5 with non-specific ECG changes requires further evaluation before discharge."
+        }
+      }
     }
   },
   "acute-pancreatitis": {
@@ -17875,6 +18254,19 @@ window.CRT_DATA = {
         "worst stomach pain of my life",
         "nothing makes it better"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Severe Pancreatitis \u2014 BISAP Score and ICU Transfer",
+        "scenario": "Day 2: BISAP score calculated. BUN 28, impaired mental status (mild confusion), SIRS criteria met (HR 108, temp 38.7, WBC 18,000), age 68, pleural effusion on CXR. BISAP = 4.",
+        "newData": {
+          "BISAP": "4 (mortality risk >5%)",
+          "BUN": "28",
+          "SIRS": "Met \u2014 HR 108, temp 38.7, WBC 18,000",
+          "PleuralEffusion": "Present",
+          "Note": "BISAP \u22653 = high risk (>5% mortality), ICU-level care recommended. BISAP components: BUN >25, Impaired mental status, SIRS, Age >60, Pleural effusion. Fluid resuscitation (Lactated Ringer's preferred over NS \u2014 lower SIRS response), NPO initially, pain control, early nutrition (enteral if tolerated by 24-48h)."
+        }
+      }
     }
   },
   "asthma-exacerbation": {
@@ -18088,6 +18480,27 @@ window.CRT_DATA = {
         "my chest feels really tight",
         "my inhaler isn't working"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Severe Asthma \u2014 Magnesium and Heliox",
+        "scenario": "Despite back-to-back albuterol nebs, ipratropium, and 125mg methylprednisolone IV, the patient's peak flow is 28% of predicted. SpO2 91%, speaking in single words. Respiratory therapy asks about magnesium sulfate and heliox.",
+        "newData": {
+          "PeakFlow": "28% predicted",
+          "SpO2": "91%",
+          "TreatmentsGiven": "3 albuterol nebs, ipratropium, IV methylprednisolone",
+          "Note": "Magnesium sulfate 2g IV \u2014 smooth muscle relaxation, evidence in severe exacerbations (NNT ~5); heliox reduces turbulent flow in large airway obstruction; if still failing \u2192 ICU, NIV, consider intubation (high risk in status asthmaticus)"
+        }
+      },
+      "v3": {
+        "title": "Status Asthmaticus \u2014 Intubation Decisions",
+        "scenario": "The patient stopped speaking. SpO2 84%. You have two minutes. Anesthesia says RSI is high risk \u2014 'auto-PEEP will kill them on the vent.' What are the specific peri-intubation risks in status asthmaticus and how do you mitigate them?",
+        "newData": {
+          "SpO2": "84% \u2014 pre-arrest",
+          "Anesthesia": "Warns of auto-PEEP and dynamic hyperinflation",
+          "Note": "Intubation risks in asthma: auto-PEEP \u2192 tension physiology; mitigation: ketamine for induction (bronchodilator), low RR (8-10), long expiratory time, allow permissive hypercapnia; disconnect circuit if sudden hypotension post-intubation"
+        }
+      }
     }
   },
   "chf-exacerbation": {
@@ -18288,6 +18701,29 @@ window.CRT_DATA = {
         "I wake up gasping",
         "my legs are so swollen I can't get my shoes on"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CHF Decompensation \u2014 Cardiorenal Syndrome",
+        "scenario": "After 3 days of IV furosemide, patient has lost 4kg but creatinine rose from 1.2 to 2.8. Urine output now 15mL/hr. The resident wants to stop diuresis. You are less sure \u2014 the patient still has 3+ pitting edema and SpO2 92%.",
+        "newData": {
+          "Creatinine": "2.8 (was 1.2)",
+          "UO": "15mL/hr",
+          "Edema": "3+ pitting \u2014 residual significant",
+          "SpO2": "92%",
+          "Note": "Cardiorenal syndrome \u2014 weigh decongestion benefit vs AKI risk; DOSE trial: continue if hemodynamically stable; oliguria threshold is the decision point"
+        }
+      },
+      "v3": {
+        "title": "HFpEF \u2014 Euvolemia Masking Diastolic Failure",
+        "scenario": "New patient: 74F, hypertension, diabetes, obesity. BNP 680, CXR: pulmonary vascular congestion. Echo: EF 60%, E/e' ratio 18, concentric LVH. The resident says 'EF is normal \u2014 this isn't heart failure.' Correct them.",
+        "newData": {
+          "EF": "60% \u2014 preserved",
+          "BNP": "680",
+          "E_e_ratio": "18 (diastolic dysfunction \u2014 >15 is significant)",
+          "Note": "HFpEF: EF \u226550% with diastolic dysfunction; SGLT2i now evidence-based (EMPEROR-Preserved); ACEi/ARB have minimal evidence; diuretics for congestion"
+        }
+      }
     }
   },
   "sepsisseptic-shock": {
@@ -18949,6 +19385,17 @@ window.CRT_DATA = {
         "my heart is racing just walking to the bathroom",
         "I look yellow \u2014 my wife noticed it first"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AIHA \u2014 Warm vs Cold \u2014 Treatment Diverges",
+        "scenario": "Hgb 6.2, reticulocyte count elevated, spherocytes on smear, positive DAT (IgG warm antibody). The resident starts prednisone and orders a warming blanket. You ask why the warming blanket \u2014 their reasoning reveals a confusion between warm and cold AIHA.",
+        "newData": {
+          "Hgb": "6.2",
+          "DAT": "Positive \u2014 IgG warm antibody",
+          "Note": "Warm AIHA (IgG): prednisone 1-2mg/kg/day is first-line (correct); warming blanket is for COLD agglutinin disease (IgM \u2014 activated by cold, avoid cold exposure); warm AIHA = steroids + rituximab if refractory; cold AIHA = avoid cold, rituximab first-line, steroids ineffective; transfuse if hemodynamically unstable despite DAT incompatibility (no truly compatible blood)"
+        }
+      }
     }
   },
   "cardiac-syncope": {
@@ -19140,6 +19587,18 @@ window.CRT_DATA = {
         "one second I was standing, then I was on the floor",
         "I've had a few dizzy spells lately but this time I went down"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "High-Risk Features \u2014 Admit vs Discharge",
+        "scenario": "Syncope while standing in line. No prodrome. 72-year-old male. BP 118/74, HR 62. ECG: first-degree AVB (PR 0.22). Echo ordered. San Francisco Syncope Rule applied: BNP 380 (ordered), ECG abnormality present.",
+        "newData": {
+          "ECG": "First-degree AVB \u2014 PR 0.22",
+          "BNP": "380 pg/mL",
+          "Age": "72, no prodrome",
+          "Note": "San Francisco Syncope Rule high-risk criteria: (1) Abnormal ECG, (2) Shortness of breath, (3) Hematocrit <30%, (4) Systolic BP <90, (5) History of CHF. This patient has 2 criteria (abnormal ECG + elevated BNP suggesting cardiac cause). ADMIT for monitoring. High-risk syncope requires: continuous telemetry, echocardiogram, and possible EP study. First-degree AVB with syncope may indicate intermittent higher-degree block \u2014 Holter or implantable loop recorder."
+        }
+      }
     }
   },
   "infective-endocarditis": {
@@ -19350,6 +19809,26 @@ window.CRT_DATA = {
         "I feel exhausted and I have chills every night",
         "I noticed spots on my fingertips"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Endocarditis \u2014 Embolic Stroke During Treatment",
+        "scenario": "Day 6 of appropriate antibiotics (ceftriaxone + gentamicin for viridans strep). Patient develops sudden left arm weakness and aphasia \u2014 NIHSS 12. MRI: right MCA infarction. Echo: vegetation still present, 12mm. Surgical team asks about urgent valve replacement.",
+        "newData": {
+          "NIHSS": "12 \u2014 acute ischemic stroke",
+          "Vegetation": "12mm \u2014 persists on day 6",
+          "Note": "IE + stroke: surgery within 72h has better outcomes than delayed (2016 AHA guidelines); risk of perioperative hemorrhagic transformation vs ongoing embolic risk; anticoagulation in IE stroke is controversial; neurological status at time of surgery determines timing"
+        }
+      },
+      "v3": {
+        "title": "IVDU Endocarditis \u2014 Prosthetic Valve Discussion",
+        "scenario": "24M, IVDU, tricuspid valve endocarditis, MSSA. Responding to nafcillin. The infection team recommends against prosthetic valve because of reinfection risk. The patient asks 'what if I stop using drugs?' How do you approach this conversation?",
+        "newData": {
+          "Organism": "MSSA \u2014 tricuspid valve",
+          "PatientAge": "24M, active IVDU",
+          "Note": "IVDU endocarditis: most tricuspid IE can be cured medically (surgery reserved for failure); reinfection risk with prosthetic valve and ongoing use is 40-80%; addiction medicine consultation essential; MOUD (medications for opioid use disorder) improves outcomes; shared decision-making"
+        }
+      }
     }
   },
   "massive-pe-with-rv-failure": {
@@ -20407,6 +20886,28 @@ window.CRT_DATA = {
         "it hurts to breathe in",
         "I felt something pop in my chest"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Persistent Air Leak \u2014 Decision After Chest Tube",
+        "scenario": "Chest tube placed for large spontaneous PTX (35%). Persistent bubbling in water seal chamber on day 3. CXR: lung only 85% re-expanded. Thoracic surgery asks about pleurodesis vs VATS vs continued observation.",
+        "newData": {
+          "Day": "3 post chest tube",
+          "LungExpansion": "85% \u2014 not fully re-expanded",
+          "AirLeak": "Persistent bubbling in water seal",
+          "Note": "Persistent air leak >5 days = surgical indication (VATS + stapling + pleurodesis); current leak at day 3 = watchful waiting if patient stable; chemical pleurodesis reduces recurrence; recurrence risk with PTX #1 = 30%, after #2 = 60%"
+        }
+      },
+      "v3": {
+        "title": "Iatrogenic PTX \u2014 Central Line Complication",
+        "scenario": "30 minutes after right subclavian central line placement, the patient develops pleuritic chest pain and SpO2 drops from 97% to 88%. CXR shows 20% right PTX. The intern asks: does this need a chest tube or just observation?",
+        "newData": {
+          "PTX_Size": "20% right",
+          "Symptom": "Pleuritic chest pain + SpO2 88%",
+          "Setting": "Post-central line placement",
+          "Note": "Symptomatic iatrogenic PTX: chest tube indicated when symptomatic (SpO2 drop, dyspnea) regardless of size; observation only for asymptomatic small (<15%) iatrogenic PTX; treat the symptoms, not the percentage"
+        }
+      }
     }
   },
   "pulmonary-embolism-syncope": {
@@ -20616,6 +21117,29 @@ window.CRT_DATA = {
         "I've had chest pain for two days that I ignored",
         "my heart is racing and I feel faint"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "PE with Syncope \u2014 Massive or Submassive?",
+        "scenario": "CT-PA confirms bilateral PE with right heart strain (McConnell sign). Patient had one syncopal episode but is now alert, BP 96/62, HR 114. PESI class IV. Troponin 1.2, BNP 680. Pulmonology asks: systemic thrombolytics, CDT, or anticoagulation alone?",
+        "newData": {
+          "BP": "96/62 \u2014 borderline",
+          "Troponin": "1.2 (elevated)",
+          "BNP": "680",
+          "PESI": "Class IV",
+          "Note": "Submassive PE (hemodynamically stable but RV strain + elevated biomarkers) \u2014 OPTALYSE trial: CDT at lower alteplase dose vs systemic; anticoagulation alone acceptable if troponin/BNP rise without hemodynamic collapse; PERT team decision"
+        }
+      },
+      "v3": {
+        "title": "PE \u2014 Outpatient Treatment Eligibility",
+        "scenario": "New patient: 42M, PE confirmed on CT-PA. PESI class I (score 52). No RV strain. Troponin and BNP normal. Bilateral but small segmental PE. He asks if he can go home. Is outpatient PE treatment appropriate and what criteria must be met?",
+        "newData": {
+          "PESI": "Class I \u2014 score 52",
+          "RV_Strain": "None",
+          "Biomarkers": "Troponin and BNP normal",
+          "Note": "Outpatient PE treatment: PESI class I or II + no hypoxia + no social barriers + reliable patient + oral anticoagulant access; RIETE and HOME-PE trials support; DOACs preferred (rivaroxaban or apixaban); return precautions essential"
+        }
+      }
     }
   },
   "pyelonephritis-urosepsis": {
@@ -20828,6 +21352,17 @@ window.CRT_DATA = {
         "my back hurts on the right side",
         "I've been having chills and I feel awful"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Complicated UTI \u2014 Duration and Step-Down",
+        "scenario": "Pyelonephritis with bacteremia (E. coli, susceptible to ceftriaxone). Day 3: afebrile, WBC normalizing, able to tolerate PO. IV ceftriaxone infusing. Infectious disease discussing step-down to oral antibiotics.",
+        "newData": {
+          "Day": "3 \u2014 afebrile, WBC normalizing",
+          "BloodCulture": "E. coli \u2014 ceftriaxone susceptible",
+          "Note": "Oral step-down for pyelonephritis with bacteremia: safe when afebrile x24-48h, WBC normalizing, tolerating PO, and no complications (obstruction, abscess). Step down to ciprofloxacin 500mg BID or TMP-SMX DS BID for susceptible organisms. Total duration: 10-14 days for complicated pyelonephritis with bacteremia. Repeat blood culture after 48h of therapy to confirm clearance."
+        }
+      }
     }
   },
   "renal-colic": {
@@ -21268,6 +21803,19 @@ window.CRT_DATA = {
         "I've been getting easy bruising",
         "I stopped my medications a month ago \u2014 I know, I know"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SLE \u2014 Catastrophic Antiphospholipid Syndrome",
+        "scenario": "SLE patient on hydroxychloroquine presents with simultaneous renal failure (Cr 4.2), pulmonary infiltrates, thrombocytopenia (21,000), and a new left MCA stroke. APS antibody panel strongly positive. CAPS diagnostic criteria being evaluated.",
+        "newData": {
+          "Cr": "4.2",
+          "Platelets": "21,000",
+          "Findings": "3 organ systems in <1 week \u2014 renal, pulmonary, CNS",
+          "APSPanel": "Strongly positive",
+          "Note": "Catastrophic APS (CAPS): simultaneous thrombosis in \u22653 organ systems in <1 week + positive APS antibodies; mortality 30-50%; treatment: anticoagulation + high-dose steroids + IVIG or plasma exchange; eculizumab for refractory CAPS; differs from TTP management despite similar features"
+        }
+      }
     }
   },
   "vasovagal-syncope": {
@@ -21677,6 +22225,18 @@ window.CRT_DATA = {
         "I have fever and my lymph nodes are swollen",
         "my face is puffy and I feel terrible"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "DRESS \u2014 Monitoring for Organ Involvement",
+        "scenario": "Suspect DRESS: rash onset 6 weeks after starting allopurinol, facial edema, lymphadenopathy, fever, eosinophilia (1,800). RegiSCAR score being calculated. Labs pending.",
+        "newData": {
+          "Timing": "6 weeks after allopurinol initiation",
+          "Eosinophilia": "1,800",
+          "RegiSCARPending": "Score being calculated",
+          "Note": "DRESS monitoring: check CBC, CMP (LFTs, creatinine), TSH, ferritin, urinalysis, and echo if cardiac involvement suspected. Organ involvement timeline: liver (most common, 80%), kidney (10%), lung, heart. Reactivation of herpesviruses (HHV-6, EBV, CMV) drives organ damage weeks later. HLA-B*58:01 testing for future allopurinol avoidance. RegiSCAR \u22654 = definite DRESS."
+        }
+      }
     }
   },
   "sjsten-overlap": {
@@ -22170,6 +22730,18 @@ window.CRT_DATA = {
         "this happens to me a few times a year",
         "epinephrine never seems to help when this happens"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "C4 and C1-INH \u2014 Confirming the Diagnosis",
+        "scenario": "Patient presents with recurrent episodes of non-pitting, non-urticarial swelling of the lips and hands \u2014 no response to antihistamines or epinephrine. C4 level sent during an acute attack: low (0.04 g/L). C1-inhibitor level pending.",
+        "newData": {
+          "C4": "Low during attack (0.04 g/L)",
+          "AntihistamineEpi": "No response",
+          "Pattern": "Recurrent, non-urticarial, non-pitting swelling",
+          "Note": "HAE diagnosis: C4 is the best screening test (low in 85% of HAE, even between attacks). Confirm with C1-INH quantitative (low in HAE Type I = 85%) and C1-INH functional (low in HAE Type II = 15% with normal level but dysfunctional protein). Normal C1-INH + normal C4 but clinical HAE = consider HAE Type III (estrogen-sensitive, FXII mutation). Treatment: C1-INH concentrate or icatibant for acute attacks; profilaxis with C1-INH concentrate or berotralstat."
+        }
+      }
     }
   },
   "erythema-multiforme-major": {
@@ -22590,6 +23162,17 @@ window.CRT_DATA = {
         "I'm itching everywhere and I feel faint",
         "I gave myself the EpiPen but I'm still getting worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Contrast Reaction \u2014 Post-Reaction Workup",
+        "scenario": "Recovered from contrast reaction (urticaria + bronchospasm). Now stable. Radiologist is insisting the patient needs the contrast CT for clinical decision-making. Can the study be repeated?",
+        "newData": {
+          "Reaction": "Urticaria + bronchospasm \u2014 resolved",
+          "CT_Needed": "Clinically required by radiologist",
+          "Note": "Contrast allergy premedication protocol (if future contrast required): methylprednisolone 32mg PO at 12h and 2h before, plus diphenhydramine 50mg PO/IV 1h before (Greenberger protocol). Use iso-osmolar or low-osmolar contrast instead of high-osmolar. Premedication reduces risk but does not eliminate it \u2014 risk still present. Document clearly and ensure informed consent. MRI without contrast or alternative imaging as first choice if clinically feasible."
+        }
+      }
     }
   },
   "acquired-c1esterase-inhibitor-deficiency": {
@@ -22805,6 +23388,18 @@ window.CRT_DATA = {
         "antihistamines don't help at all",
         "this started around the same time as my cancer diagnosis"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Acquired C1-INH Deficiency \u2014 Finding the Underlying Disease",
+        "scenario": "Acquired C1-INH deficiency confirmed: C1-INH low, C1q low (HAE has normal C1q \u2014 this distinguishes acquired from hereditary). Patient is 62 years old with no prior angioedema episodes until this year. What is the underlying condition?",
+        "newData": {
+          "C1INH": "Low",
+          "C1q": "Low (distinguishes from hereditary HAE)",
+          "Age": "62 \u2014 new onset angioedema",
+          "Note": "Acquired C1-INH deficiency workup: (1) MGUS or B-cell lymphoproliferative disease (most common) \u2014 SPEP, UPEP, bone marrow biopsy; (2) Anti-C1q antibodies \u2014 autoimmune type; (3) SLE; (4) Solid organ malignancy (less common). Treatment: treat the underlying disease (resolves angioedema in many); acute attacks treated identically to HAE (C1-INH concentrate, icatibant, or fresh frozen plasma). Long-term prophylaxis less predictable in acquired form."
+        }
+      }
     }
   },
   "allergic-angioedema": {
@@ -23037,6 +23632,19 @@ window.CRT_DATA = {
         "I need my EpiPen right now",
         "I think there were nuts in the sauce"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Angioedema Location \u2014 Airway Risk Assessment",
+        "scenario": "Allergic angioedema of the lips and tongue. Patient is speaking clearly, swallowing saliva, no stridor. Voice is mildly altered. You are alone in the room making the decision about observation vs intubation.",
+        "newData": {
+          "Location": "Lips + tongue angioedema",
+          "Voice": "Mildly altered",
+          "Stridor": "Absent",
+          "Swallowing": "Intact",
+          "Note": "Airway angioedema risk assessment: tongue involvement increases laryngeal involvement risk significantly. Altered voice suggests pharyngeal involvement. Indicators to prepare for airway now (before stridor): tongue >2/3 of mouth, drooling, stridor, rapidly progressing, or patient anxious. Do not wait for stridor to act \u2014 once stridor begins, you may lose the airway. If any concern: call anesthesia now, administer epinephrine, and be ready for immediate intubation or surgical airway."
+        }
+      }
     }
   },
   "idiopathic-angioedema": {
@@ -23464,6 +24072,17 @@ window.CRT_DATA = {
         "punched-out sores on top of the red patches",
         "fever and the skin looks like it's falling apart"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "EH \u2014 Acyclovir Dosing and Antiviral Duration",
+        "scenario": "Eczema herpeticum confirmed: atopic dermatitis + punched-out erosions + Tzanck smear positive. IV acyclovir started. Day 3: lesions fewer but new ones still appearing.",
+        "newData": {
+          "TzanckSmear": "Positive \u2014 HSV",
+          "Day3": "Still new lesions appearing",
+          "Note": "EH treatment: IV acyclovir 5-10mg/kg q8h (for severe/widespread disease); switch to oral valacyclovir when new lesion formation stops; total duration 7-14 days. New lesions on day 3 are expected \u2014 stop antiviral only when no new lesions for 48h AND existing lesions crusting. Bacterial superinfection common (S. aureus) \u2014 add antibacterials if honey-crusted lesions develop. Prevent future EH: valacyclovir suppression and optimized AD control."
+        }
+      }
     }
   },
   "fpies-acute": {
@@ -23663,6 +24282,17 @@ window.CRT_DATA = {
         "this happens every time she eats oats",
         "she's pale and floppy \u2014 not acting right"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "FPIES \u2014 Oral Food Challenge Protocol",
+        "scenario": "Cow's milk FPIES confirmed. Child is now 18 months old \u2014 allergist says natural resolution often occurs by 3-5 years. Parents want to know if he will outgrow it. Allergist plans an oral food challenge (OFC) at age 2.",
+        "newData": {
+          "Age": "18 months",
+          "Trigger": "Cow's milk FPIES",
+          "Note": "FPIES natural history: most children outgrow by age 3-5 (solid food triggers earlier, liquid milk later). OFC is required to confirm resolution \u2014 never assume outgrowth without supervised OFC. OFC protocol: graded doses in allergist office with IV access and observation period; IV ondansetron available for reaction management; if OFC shows resolution, introduce cow's milk at home gradually. Solid food FPIES (oat, rice, soy) tends to resolve earlier than milk."
+        }
+      }
     }
   },
   "mastocytosis": {
@@ -23899,6 +24529,18 @@ window.CRT_DATA = {
         "I flush and get hives when I drink alcohol",
         "my tryptase came back elevated"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Tryptase Confirmation \u2014 MCAS vs Systemic Mastocytosis",
+        "scenario": "Acute episodic flushing, urticaria, and hypotension. Baseline tryptase: 38 ng/mL (normal <11.4). During acute attack: 62 ng/mL. Bone marrow biopsy pending. Allergy asks: is this MCAS or systemic mastocytosis?",
+        "newData": {
+          "BaselineTryptase": "38 ng/mL (elevated)",
+          "AttackTryptase": "62 ng/mL",
+          "BoneMarrow": "Pending",
+          "Note": "Diagnostic distinction: systemic mastocytosis (SM) requires bone marrow biopsy (\u226525% spindle-shaped mast cells OR KIT D816V mutation OR abnormal mast cell immunophenotype CD25/CD2+). MCAS requires: recurrent mast cell activation symptoms + tryptase rise \u226520% + 2ng/mL above baseline during an event + response to mast cell-targeted therapy. Elevated baseline tryptase (>20) is a minor criterion for SM \u2014 bone marrow is essential to confirm. Treatment overlap: H1+H2 antihistamines, cromolyn, epinephrine for attacks; SM-specific: midostaurin or avapritinib for advanced SM."
+        }
+      }
     }
   },
   "acute-urticaria": {
@@ -24500,6 +25142,18 @@ window.CRT_DATA = {
         "throat is tightening and I'm wheezing",
         "my EpiPen auto-injector \u2014 I don't know if I used it right"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "OIT Reaction \u2014 Dose Adjustment Protocol",
+        "scenario": "Peanut OIT reaction at 800mg dose \u2014 urticaria and vomiting. Reaction resolved with oral antihistamine and observation. No epinephrine required. Allergist asks: continue at same dose, reduce dose, or pause protocol?",
+        "newData": {
+          "OITDose": "800mg peanut protein",
+          "Reaction": "Urticaria + vomiting \u2014 no epinephrine needed",
+          "Resolution": "With antihistamine + observation",
+          "Note": "OIT reaction management: Grade 1-2 reaction (mild) \u2014 reduce dose to last tolerated level, then advance more slowly; Grade 3 reaction (systemic, epinephrine required) \u2014 hold protocol, reassess with allergist before resuming, consider 50% dose reduction. Review cofactors that lowered threshold: exercise, illness, NSAID use, menstruation, sleep deprivation. Modify protocol to avoid cofactors around dosing time."
+        }
+      }
     }
   },
   "insect-sting-anaphylaxis": {
@@ -24745,6 +25399,18 @@ window.CRT_DATA = {
         "my throat is tightening",
         "I'm covered in hives and my BP feels low"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Venom Immunotherapy \u2014 Eligibility and Protocol",
+        "scenario": "After stabilization: systemic allergic reaction to bee sting confirmed. Skin prick testing: strongly positive to Apis (honeybee). Patient asks: 'Can I get shots? I work outdoors.'",
+        "newData": {
+          "SkinTest": "Strongly positive to Apis mellifera",
+          "Occupation": "Outdoor worker",
+          "SystemicReaction": "Confirmed \u2014 urticaria + angioedema + bronchospasm",
+          "Note": "Venom immunotherapy (VIT) indications: systemic allergic reaction in adults (any severity in adults with cardiovascular/pulmonary disease or high occupational risk; moderate-severe systemic reactions in all adults). VIT is 95-98% protective. Protocol: build-up phase (weekly injections, 3-4 months), maintenance phase (monthly x5 years). Duration: 5 years standard; indefinite for high-risk patients (anaphylaxis, mastocytosis, severe sting reactions)."
+        }
+      }
     }
   },
   "venom-immunotherapy-reaction": {
@@ -24957,6 +25623,17 @@ window.CRT_DATA = {
         "hives and my chest is tight",
         "this has never happened with my shots before"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "VIT Reaction \u2014 Premedication Strategy",
+        "scenario": "Systemic reaction at maintenance VIT injection: urticaria + mild bronchospasm. Epinephrine given, resolved fully. Allergist asks: premedicate and continue vs discontinue VIT.",
+        "newData": {
+          "Reaction": "Systemic at maintenance dose \u2014 urticaria + bronchospasm",
+          "Epinephrine": "Given \u2014 resolved",
+          "Note": "VIT reaction management: systemic reaction at maintenance = reduce to last tolerated dose and advance more slowly; premedicate with cetirizine + montelukast before injections; consider omalizumab for facilitated VIT (reduces reaction rate in patients who cannot tolerate build-up); do NOT discontinue VIT \u2014 the risk of future unprotected sting anaphylaxis is very high without completing the protocol."
+        }
+      }
     }
   },
   "hereditary-angioedema-v2": {
@@ -25169,6 +25846,17 @@ window.CRT_DATA = {
         "I started the pill for the first time \u2014 could that be it",
         "epinephrine didn't work last time"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "OCP-Triggered HAE \u2014 Contraception Alternatives",
+        "scenario": "19-year-old female, HAE Type I, started combined oral contraceptive pill (OCP) 3 months ago. Now having monthly severe angioedema attacks. Gynecology asking about safe contraceptive options.",
+        "newData": {
+          "Trigger": "Combined OCP started 3 months ago",
+          "Attacks": "Monthly severe \u2014 increase from baseline",
+          "Note": "Estrogen-containing contraceptives are contraindicated in HAE \u2014 estrogen increases bradykinin production by stimulating hepatic prekallikrein synthesis. Safe contraceptive alternatives: progesterone-only pill, levonorgestrel IUD (Mirena), copper IUD, depo-provera, condoms. Levonorgestrel emergency contraception (Plan B) is also safe. Discontinue combined OCP and switch to progesterone-only or non-hormonal method."
+        }
+      }
     }
   },
   "acquired-c1esterase-inhibitor-deficiency-v2": {
@@ -25361,6 +26049,17 @@ window.CRT_DATA = {
         "no allergies, no family history",
         "antihistamines do absolutely nothing"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "MGUS-Associated Acquired C1-INH \u2014 Monitoring",
+        "scenario": "Acquired C1-INH deficiency with MGUS (IgG kappa). Hematology asks about monitoring frequency and when to treat the MGUS.",
+        "newData": {
+          "Cause": "MGUS (IgG kappa)",
+          "C1INH": "Low \u2014 confirmed acquired",
+          "Note": "MGUS monitoring: SPEP every 6-12 months, CBC annually; evolve to myeloma in ~1%/year; treat the MGUS only if criteria met (hypercalcemia, renal failure, anemia, bone lesions = CRAB criteria). Angioedema management: icatibant or C1-INH concentrate for acute attacks; treating underlying MGUS/lymphoma can improve acquired C1-INH deficiency."
+        }
+      }
     }
   },
   "allergic-angioedema-v2": {
@@ -26172,6 +26871,17 @@ window.CRT_DATA = {
         "I started a new blood pressure pill recently",
         "epinephrine helped but I feel like I need more"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ACE-I Amplifying VIT Reaction \u2014 Drug Interaction",
+        "scenario": "VIT maintenance dose \u2014 severe anaphylaxis requiring 3 epinephrine doses. Patient is on lisinopril for hypertension. Allergist identifies ACE inhibitor as amplifying factor.",
+        "newData": {
+          "Reaction": "Severe anaphylaxis \u2014 3 epinephrine doses",
+          "Lisinopril": "On board",
+          "Note": "ACE inhibitor + VIT interaction: ACE inhibitors block bradykinin degradation, amplifying anaphylaxis severity and reducing epinephrine response (epinephrine indirectly activates ACE to degrade bradykinin). ACE inhibitors are a relative contraindication during VIT \u2014 switch to ARB or alternative antihypertensive before VIT build-up. Discuss with cardiologist: ARB is acceptable; if ACE-I medically necessary, may continue with extreme caution and lower VIT doses."
+        }
+      }
     }
   },
   "severe-allergic-reaction-v2": {
@@ -26358,6 +27068,17 @@ window.CRT_DATA = {
         "hives and my throat feels funny",
         "the radiologist gave me contrast and now this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Premedication Failure \u2014 Risk Assessment for Re-Contrast",
+        "scenario": "Allergy premedication protocol given (methylprednisolone + diphenhydramine). Patient still had urticaria + mild bronchospasm with the contrast agent. CT was clinically essential. Now radiology asking about future contrast.",
+        "newData": {
+          "Premedication": "Methylprednisolone + diphenhydramine \u2014 given",
+          "ReactionDespitePremed": "Urticaria + bronchospasm",
+          "Note": "Premedication reduces but does not eliminate contrast reaction risk. For future contrast: (1) Use iso-osmolar contrast (Isovist, Visipaque) \u2014 lowest reaction rate; (2) Consider gadolinium MRI as alternative; (3) Repeat premedication protocol; (4) Consider allergist evaluation for possible desensitization protocol in high-need patients; (5) Ensure epinephrine, airway equipment, and resuscitation available. Document breakthrough reaction clearly."
+        }
+      }
     }
   },
   "severe-allergic-reaction-v3": {
@@ -26929,6 +27650,17 @@ window.CRT_DATA = {
         "target lesions and mouth sores \u2014 same as before",
         "I need to be on something to prevent this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HSV-Triggered EM \u2014 Antiviral Prophylaxis",
+        "scenario": "HSV-triggered EM major confirmed \u2014 lesions appearing 10 days after labial herpes outbreak. Second episode in 4 months. Dermatology asking about long-term antiviral prophylaxis to prevent recurrent EM.",
+        "newData": {
+          "Trigger": "HSV \u2014 labial herpes preceding EM by 10 days",
+          "Recurrence": "Second episode in 4 months",
+          "Note": "Recurrent HSV-triggered EM: continuous antiviral prophylaxis is highly effective. Valacyclovir 500-1000mg daily or acyclovir 400mg BID prevents HSV reactivation and thus prevents EM recurrence \u2014 maintained for minimum 12 months or indefinitely if recurrences continue. Suppressive therapy reduces EM recurrence by >90%. Distinguish from drug-induced EM (different management, stop offending drug)."
+        }
+      }
     }
   },
   "food-allergy-oit-reaction-v2": {
@@ -27311,6 +28043,17 @@ window.CRT_DATA = {
         "the nurse gave her epinephrine but she's still sick",
         "pale and lethargic \u2014 not her normal self"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "EpiPen Failure in FPIES \u2014 Why It Doesn't Work",
+        "scenario": "Child had FPIES reaction at school, teacher used EpiPen \u2014 no response. Now in ED, still vomiting profusely, pale, lethargic. Parents are confused why epinephrine failed.",
+        "newData": {
+          "EpiPen": "Given at school \u2014 no response",
+          "Condition": "FPIES \u2014 non-IgE mechanism",
+          "Note": "FPIES is non-IgE-mediated \u2014 epinephrine has no role. FPIES mechanism: T-cell and innate immune activation causing profuse vomiting 1-4h post-ingestion, not histamine-mediated. Treatment: IV ondansetron (0.15mg/kg \u2014 most effective antiemetic for FPIES); IV fluids for dehydration; no epinephrine indicated. Update school action plan: epinephrine is not appropriate for FPIES; emphasize ondansetron IM as rescue medication."
+        }
+      }
     }
   },
   "fpies-chronic-v2": {
@@ -27715,6 +28458,18 @@ window.CRT_DATA = {
         "I flush, my BP drops, and I get hives \u2014 that's not anxiety",
         "I found out my tryptase was high \u2014 can we figure this out"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "MCAS \u2014 Diagnostic Criteria and Mediator Testing",
+        "scenario": "3-year diagnostic odyssey. Recurrent flushing, urticaria, hypotension, GI cramping \u2014 all episodic. Tryptase baseline: 12.5 ng/mL (normal <11.4 \u2014 mildly elevated). Bone marrow biopsy: no systemic mastocytosis. Allergy asking about MCAS criteria.",
+        "newData": {
+          "BaselineTryptase": "12.5 (mildly elevated)",
+          "BoneMarrow": "No SM",
+          "Symptoms": "Recurrent flushing, urticaria, hypotension, GI cramping",
+          "Note": "MCAS diagnostic criteria: (1) Episodic symptoms consistent with mast cell mediator release; (2) Tryptase rise \u226520% + 2ng/mL above baseline during a symptomatic event; (3) Response to mast cell-targeted therapy (antihistamines, cromolyn). Treatment trial: cetirizine + famotidine + cromolyn sodium 200mg QID; trigger diary; if response, continue. Mediators to test during an attack: serum tryptase, urinary prostaglandin D2, histamine metabolites."
+        }
+      }
     }
   },
   "drug-allergy-vancomycin-rms-v2": {
@@ -27901,6 +28656,18 @@ window.CRT_DATA = {
         "does that mean I can never have it again",
         "my doctor says I need it now"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Red Man Syndrome \u2014 Drug Allergy Distinction",
+        "scenario": "Nurse called during vancomycin infusion: patient is flushing, pruritic, face and neck erythema. No hypotension, no wheeze. Rash confined to upper body, 20 minutes into infusion. Resident writes in the chart: 'Vancomycin allergy \u2014 do not rechallenge.'",
+        "newData": {
+          "Timing": "During infusion (20 minutes in)",
+          "Reaction": "Flushing + pruritus + erythema (upper body)",
+          "Hemodynamics": "Stable",
+          "Note": "Red man syndrome (RMS) is NOT an allergy \u2014 it is an infusion-rate-dependent, non-immunologic mast cell degranulation reaction. It is NOT a contraindication to future vancomycin. Management: (1) Stop or slow infusion; (2) Diphenhydramine 25-50mg IV; (3) Resume infusion at half the rate after resolution; (4) Pre-medicate with diphenhydramine for future infusions; (5) Correct the chart entry \u2014 documenting 'vancomycin allergy' causes serious harm (avoidance of first-line MRSA treatment in future). RMS \u2260 allergy."
+        }
+      }
     }
   },
   "acute-urticaria-v2": {
@@ -28438,6 +29205,18 @@ window.CRT_DATA = {
         "they last for days and hurt more than itch",
         "I have lupus \u2014 could they be connected"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Urticarial Vasculitis \u2014 Skin Biopsy Interpretation",
+        "scenario": "Urticaria lasting >24 hours per episode, resolving with bruising. Low C4. Derm biopsied \u2014 dermatopathology reports: 'mild perivascular infiltrate, no definitive leukocytoclastic vasculitis.'",
+        "newData": {
+          "UrtLength": ">24 hours with post-inflammatory pigmentation",
+          "C4": "Low",
+          "Biopsy": "Equivocal \u2014 mild perivascular infiltrate",
+          "Note": "Urticarial vasculitis diagnosis: classic UV lesions last >24h (vs ordinary urticaria <24h); leave behind pigmentation/purpura. Equivocal biopsy is common \u2014 repeat biopsy from active lesion <24h old improves yield; direct immunofluorescence (DIF) for complement deposits (C3, IgM along dermal vessels). Low C4 supports hypocomplementemic UV (HUVS). Skin biopsy from a fresh lesion is superior to old lesion."
+        }
+      }
     }
   },
   "cvid-presentation-v2": {
@@ -28623,6 +29402,17 @@ window.CRT_DATA = {
         "my insurance won't cover my immunoglobulin \u2014 I need help",
         "I'm always sick and I can't keep doing this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CVID \u2014 Delayed Diagnosis and Insurance Barriers",
+        "scenario": "CVID confirmed, but patient has been using IVIG from a patient assistance program. Insurance denied subcutaneous IgG coverage. IgG trough levels subtherapeutic (520 mg/dL). What are the advocacy and clinical steps?",
+        "newData": {
+          "IgGTrough": "520 mg/dL (subtherapeutic)",
+          "Insurance": "Denied SCIG coverage",
+          "Note": "CVID insurance advocacy: (1) Appeal denial with clinical documentation (infection burden, hospitalizations, IgG levels); (2) Manufacturer patient assistance programs for IVIG/SCIG; (3) Letters of medical necessity; (4) IDF (Immune Deficiency Foundation) resources; clinical: increase dose or frequency to reach trough >800 mg/dL; document infections prevented as outcomes metric for future appeals."
+        }
+      }
     }
   },
   "nsaid-hypersensitivity-v2": {
@@ -28808,6 +29598,18 @@ window.CRT_DATA = {
         "ibuprofen sends me to the ER \u2014 bronchospasm",
         "I heard there's a desensitization procedure"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AERD \u2014 Anosmia and Nasal Polyposis Impact",
+        "scenario": "Chef with Samter's triad \u2014 anosmia significantly affecting his livelihood. Already on nasal corticosteroids and montelukast. ENT recommending repeat sinus surgery. Allergist discussing aspirin desensitization.",
+        "newData": {
+          "Occupation": "Chef \u2014 anosmia is career-impacting",
+          "Treatment": "Nasal corticosteroids + montelukast",
+          "Surgeries": "Prior sinus surgery",
+          "Note": "AERD with anosmia: aspirin desensitization is particularly beneficial in AERD \u2014 not only for cardiac protection but also reduces nasal polyp burden and may restore sense of smell in 50-60% of patients. Protocol: start 30-40mg aspirin, double dose every 3 days in clinic setting; target 325-650mg/day maintenance. Continuous daily aspirin required to maintain desensitization. Dupilumab also effective for AERD with CRSwNP and anosmia."
+        }
+      }
     }
   },
   "penicillin-allergy-delabeling-v2": {
@@ -28993,6 +29795,18 @@ window.CRT_DATA = {
         "I'm GBS positive and I don't know what to do",
         "can we test me now to see if I'm really allergic"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Delabeling in Pregnancy \u2014 Safe Testing Approach",
+        "scenario": "32-year-old pregnant (28 weeks), GBS-positive on cultures. Documented penicillin allergy (childhood rash after amoxicillin \u2014 details unclear). OB is asking about delabeling to allow penicillin prophylaxis in labor.",
+        "newData": {
+          "Pregnancy": "28 weeks",
+          "GBSStatus": "Positive",
+          "PenicillinAllergy": "Documented \u2014 childhood rash, unclear details",
+          "Note": "Penicillin skin testing is considered safe in pregnancy (no evidence of teratogenicity). Most patients with documented penicillin allergy are actually not allergic (>95% negative skin test). Penicillin is the optimal agent for GBS prophylaxis. Cefazolin (1st-generation cephalosporin) is preferred for PCN-allergic patients without high-risk allergy history. Clindamycin only if isolate is known susceptible. If possible, skin test and delabel before delivery for optimal prophylaxis."
+        }
+      }
     }
   },
   "peanut-allergy-anaphylaxis-v2": {
@@ -29179,6 +29993,16 @@ window.CRT_DATA = {
         "my peanut allergy label may be wrong",
         "I need to understand what I'm actually allergic to"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hidden Allergen \u2014 Food Labeling Review",
+        "scenario": "Anaphylaxis attributed to restaurant meal \u2014 patient reports 'no peanuts.' Review of the dish reveals: satay sauce (ground peanuts). Patient asks: 'How do I prevent this from happening again when eating out?'",
+        "newData": {
+          "TriggerSource": "Hidden peanut in satay sauce",
+          "Note": "Hidden allergen education: (1) FALCPA (Food Allergen Labeling and Consumer Protection Act) requires labeling of top 9 allergens in packaged foods \u2014 does NOT cover restaurants; (2) Restaurant communication skills: tell the chef specifically, ask about shared equipment, avoid cuisines with high peanut risk (Thai, Chinese, West African); (3) Cross-contamination risk in kitchens; (4) 'May contain' labels are voluntary and inconsistent; (5) Carry two epinephrine auto-injectors at all times and have a written anaphylaxis action plan; (6) Medical alert bracelet."
+        }
+      }
     }
   },
   "milk-allergy-infant-v2": {
@@ -29550,6 +30374,17 @@ window.CRT_DATA = {
         "there's a white spot on my eye that wasn't there before",
         "contacts make it so much worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Vernal Keratoconjunctivitis \u2014 Shield Ulcer Management",
+        "scenario": "Shield ulcer confirmed on slit lamp (oval corneal ulcer, superior corneal location). Cyclosporine 2% drops and supratarsal triamcinolone injection being considered. Risk of vision loss if untreated.",
+        "newData": {
+          "Finding": "Shield ulcer \u2014 superior corneal",
+          "Risk": "Permanent corneal scarring",
+          "Note": "Shield ulcer in VKC: managed with (1) Supratarsal triamcinolone injection (rapid reduction of inflammation), (2) Topical cyclosporine 2% or tacrolimus 0.03%, (3) Amniotic membrane transplant for persistent ulcers, (4) Avoid contact lenses. VKC can cause permanent corneal scarring. Ophthalmology subspecialty (cornea/external disease) essential."
+        }
+      }
     }
   },
   "allergic-rhinitis-uncontrolled-v2": {
@@ -31656,6 +32491,18 @@ window.CRT_DATA = {
         "my immune system just doesn't seem to work",
         "I've never had bloodwork like this before \u2014 what does it mean"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CVID \u2014 IgG Replacement Therapy",
+        "scenario": "CVID confirmed: IgG 280 mg/dL, IgA undetectable, IgM 40 mg/dL. History of recurrent sinopulmonary infections. Starting IgG replacement therapy. Patient asks about the difference between IVIG vs SCIG.",
+        "newData": {
+          "IgG": "280 mg/dL (low)",
+          "IgA": "Undetectable",
+          "IgM": "40 mg/dL",
+          "Note": "CVID IgG replacement: (1) IVIG (IV, every 3-4 weeks, infusion center, faster loading): preferred for initial dosing and severe cases; (2) SCIG (subcutaneous, weekly or biweekly self-administration at home): comparable efficacy, more stable IgG levels, preferred for ongoing maintenance. Target trough IgG: \u2265800-1000 mg/dL. Monitor for non-infectious complications: interstitial lung disease, granulomas, autoimmunity. Pneumococcal vaccine response to monitor immune function (poor responder = worse prognosis)."
+        }
+      }
     }
   },
   "eoe-adult": {
@@ -32567,6 +33414,17 @@ window.CRT_DATA = {
         "ibuprofen and naproxen both do it",
         "I was told this is aspirin-exacerbated disease"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AERD \u2014 Aspirin Desensitization Protocol",
+        "scenario": "Samter's triad confirmed (asthma + nasal polyps + aspirin sensitivity). Patient is a 44-year-old cardiologist who needs low-dose aspirin for a cardiac stent placed 6 months ago. GI is asking if he can take aspirin safely.",
+        "newData": {
+          "Diagnosis": "AERD/Samter's triad confirmed",
+          "CardiacNeed": "Coronary stent \u2014 aspirin required for DAPT",
+          "Note": "Aspirin desensitization protocol: begin with very low dose (30mg or lower), gradually increase over 2-3 days under close supervision in allergy clinic; once tolerated, continue daily aspirin to maintain desensitization; cessation requires repeat desensitization. This patient has a compelling indication \u2014 desensitization is appropriate and achieves dual benefit (cardiac protection + reduces nasal polyp burden). Nasal corticosteroids and zileuton as baseline therapy for AERD."
+        }
+      }
     }
   },
   "peanut-allergy-anaphylaxis": {
@@ -33162,6 +34020,18 @@ window.CRT_DATA = {
         "they hurt \u2014 they don't really itch like normal hives",
         "I've had this workup before \u2014 something came back abnormal"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HUV \u2014 Systemic Workup",
+        "scenario": "Urticarial vasculitis confirmed on skin biopsy (leukocytoclastic vasculitis). C3 low, C4 low, anti-C1q antibodies elevated. Hypocomplementemic urticarial vasculitis syndrome (HUVS) suspected. What systemic workup is required?",
+        "newData": {
+          "Biopsy": "Leukocytoclastic vasculitis",
+          "C3C4": "Low (both)",
+          "AntiC1q": "Elevated",
+          "Note": "HUVS workup: ANA, anti-dsDNA (SLE association in 50%), anti-Ro/La, CBC, CMP, urinalysis, chest imaging. HUVS systemic involvement: obstructive lung disease (most common; can be severe), glomerulonephritis, uveitis, arthritis. SLE overlap is common \u2014 distinguish UV from SLE-related urticaria. Treatment: antimalarials (hydroxychloroquine), dapsone, colchicine, or immunosuppression for severe disease."
+        }
+      }
     }
   },
   "anaphylaxis-v2": {
@@ -34227,6 +35097,18 @@ window.CRT_DATA = {
         "I'm on a blood pressure medicine \u2014 could that be it",
         "this started a few months after I changed my heart medication"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ACE-I Angioedema \u2014 Recurrent After ACEi Switch to ARB",
+        "scenario": "Patient with CHF on lisinopril had angioedema \u2014 switched to losartan. Now presenting with second angioedema episode 3 months later. Cardiologist asks: is this still ACE-I related or new ACE-I cross-reactivity?",
+        "newData": {
+          "PriorACEI": "Lisinopril \u2014 angioedema",
+          "CurrentARB": "Losartan 3 months",
+          "NewEpisode": "Second angioedema on ARB",
+          "Note": "ARB-associated angioedema: ~0.3-0.5% risk, also bradykinin-mediated. Stop ARB. For CHF with angioedema to both ACEI and ARB: use sacubitril/valsartan (ARNI) with caution \u2014 higher bradykinin risk \u2014 or switch to hydralazine + nitrates. Beta-blockers, CCBs, and diuretics for BP control are safest."
+        }
+      }
     }
   },
   "dress-syndrome-v2": {
@@ -35239,6 +36121,19 @@ window.CRT_DATA = {
         "my hands won't stop trembling",
         "I feel like I'm going to have a seizure"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CIWA Protocol \u2014 When to Escalate to ICU",
+        "scenario": "CIWA-Ar score 18 (moderate). Lorazepam 2mg given. 2 hours later: CIWA 28, tremors worsening, HR 138, BP 172/106, Temp 38.4, new visual hallucinations. Nurse asks: how much more lorazepam, and when does this patient need ICU?",
+        "newData": {
+          "CIWA": "28 (severe, rising)",
+          "HR": "138",
+          "BP": "172/106",
+          "Hallucinations": "Visual \u2014 new",
+          "Note": "Severe AWS / early DTs \u2014 CIWA \u226520 with hemodynamic instability requires ICU. Symptom-triggered lorazepam: 2-4mg q15-30 min until CIWA <10 (no ceiling in severe AWS). Monitor for respiratory depression. ICU triggers: CIWA \u226520 despite lorazepam, hemodynamic instability, seizures, airway concerns. Phenobarbital adjunct for benzo-refractory cases. Thiamine 500mg IV TID before dextrose."
+        }
+      }
     }
   },
   "stroke-v2": {
@@ -35783,6 +36678,18 @@ window.CRT_DATA = {
         "I've been drinking heavily and I know I shouldn't",
         "I feel confused and I can't stop shaking"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Steroid Eligibility \u2014 Lille Score",
+        "scenario": "Prednisolone 40mg daily started day 1 for Maddrey DF 44. Day 7 Lille score calculated: 0.52 (\u22650.45 = non-responder). Bilirubin barely improved. Hepatology asks about stopping steroids and exploring pentoxifylline or transplant evaluation.",
+        "newData": {
+          "MaddreySF": "44",
+          "LilleScore": "0.52 (non-responder)",
+          "Day7Bilirubin": "Minimal improvement",
+          "Note": "Lille score \u22650.45 at day 7 = steroid non-responder; stop prednisolone (continued steroids increase infection risk without benefit); pentoxifylline is NOT beneficial as rescue therapy (STOPAH trial); early liver transplant evaluation for selected patients at specialized centers"
+        }
+      }
     }
   },
   "cap-with-sepsis": {
@@ -36126,6 +37033,17 @@ window.CRT_DATA = {
         "I sleep in a recliner \u2014 can't lie flat",
         "my ankles are huge and my weight went up 10 pounds this week"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HFpEF \u2014 Differentiating from Constrictive Pericarditis",
+        "scenario": "EF 60% on echo. But the fellow notices: septal bounce, respiratory variation in mitral inflow, elevated E/e' ratio 18. Pulmonologist asks if this could be constrictive pericarditis. The distinction matters for treatment.",
+        "newData": {
+          "EF": "60% (preserved)",
+          "Echo": "E/e' 18, respiratory variation present, septal bounce noted",
+          "Note": "HFpEF vs constrictive pericarditis \u2014 key: in constrictive, medial e' > lateral e' (annulus reversus); CT/CMR shows pericardial thickening; cardiac cath shows equalization of diastolic pressures"
+        }
+      }
     }
   },
   "dka-v2": {
@@ -36302,6 +37220,18 @@ window.CRT_DATA = {
         "my blood sugar is over 400 but I don't feel right",
         "I was told I have type 2 but something feels different"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "LADA \u2014 Autoantibody Confirmation and Insulin Start",
+        "scenario": "GAD65 antibodies returned positive. C-peptide low. The patient has been on metformin + empagliflozin for 'T2DM' for 3 years. The endocrinologist says: stop the SGLT2i immediately. Why, and what replaces it?",
+        "newData": {
+          "GAD65Ab": "Positive",
+          "CPeptide": "Low",
+          "PriorDx": "T2DM \u2014 on metformin + empagliflozin",
+          "Note": "LADA confirmed: SGLT2i must be stopped immediately \u2014 risk of euglycemic DKA in insulin-deficient patients; empagliflozin reduces insulin secretion further; start basal insulin; metformin can continue; reclassify as T1DM/LADA; educate about sick-day rules and ketone monitoring"
+        }
+      }
     }
   },
   "dka-v3": {
@@ -37010,6 +37940,19 @@ window.CRT_DATA = {
         "I've had this since my flight and I kept hoping it would go away",
         "my heart is racing and I'm short of breath"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Submassive PE \u2014 Catheter-Directed Thrombolysis",
+        "scenario": "PERT team met. Unanimous: CDT recommended given intermediate-high risk (PESI IV + echo RV:LV ratio 1.4 + troponin elevated). The procedure is explained to the patient. She asks: 'What are the chances this kills me vs saves me?'",
+        "newData": {
+          "RV_LV_Ratio": "1.4 (abnormal \u2014 >0.9)",
+          "Troponin": "Elevated",
+          "PESI": "IV",
+          "CDT_Decision": "Recommended by PERT",
+          "Note": "CDT mortality benefit: SEATTLE-II trial showed RV:LV ratio improvement and low major bleed rate vs systemic lytics; absolute PE mortality 1-8% in submassive; honest risk communication required"
+        }
+      }
     }
   },
   "encephalitis": {
@@ -37377,6 +38320,19 @@ window.CRT_DATA = {
         "I have fever and I'm coughing up green stuff",
         "my rescue inhaler isn't cutting it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CAP + COPD \u2014 NIV vs Intubation Decision",
+        "scenario": "Despite azithromycin + ceftriaxone and SABA nebs, the patient is worsening. pH 7.30, pCO2 58, PaO2 52 on 4L NC. RR 32. The respiratory therapist and the intensivist disagree about BiPAP vs intubation.",
+        "newData": {
+          "pH": "7.30",
+          "pCO2": "58 mmHg",
+          "PaO2": "52 mmHg",
+          "RR": "32",
+          "Note": "NIV in COPD with respiratory failure: reduces intubation rate and mortality (NICE-SUGAR, multiple RCTs); trial of NIV reasonable if pH \u22657.25 and patient cooperative; intubate if pH <7.25, deteriorating on NIV, or unable to protect airway"
+        }
+      }
     }
   },
   "chf-exacerbation-v2": {
@@ -38097,6 +39053,18 @@ window.CRT_DATA = {
         "I'm vomiting everything and my stomach is killing me",
         "I've been through this before \u2014 it feels the same"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AKA \u2014 Thiamine Before Dextrose",
+        "scenario": "AKA confirmed: AG acidosis, ketones positive, glucose 62. Resident starts D5W drip. You stop them. Why?",
+        "newData": {
+          "Glucose": "62 (low-normal)",
+          "AcidBase": "AG acidosis",
+          "Ketones": "Positive",
+          "Note": "Wernicke's risk: thiamine 500mg IV BEFORE any glucose-containing fluids in alcoholic patients \u2014 dextrose without thiamine can precipitate Wernicke's encephalopathy. After thiamine given: D5W or D5-NS for volume and glucose (AKA resolves with glucose + thiamine \u2014 insulin not required). K+ and Mg++ supplementation essential. Monitor for withdrawal."
+        }
+      }
     }
   },
   "type2-diabetes-outpatient": {
@@ -38601,6 +39569,17 @@ window.CRT_DATA = {
         "this always happens 3-4 hours after eating beef",
         "I got bit by a tick last summer and this started after"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Alpha-Gal \u2014 Avoiding Hidden Sources",
+        "scenario": "Alpha-gal syndrome confirmed (serum alpha-gal IgE positive). Patient is a nurse \u2014 asks about gelatin-containing medications and intravenous products.",
+        "newData": {
+          "AlphaGalIgE": "Positive \u2014 confirmed alpha-gal syndrome",
+          "Occupation": "Nurse",
+          "Note": "Alpha-gal avoidance beyond red meat: (1) Medications containing gelatin (capsule shells, some vaccines \u2014 MMR, varicella, influenza intranasal) \u2014 consider gelatin-free alternatives; (2) Certain IV gelatin plasma expanders (not used in US but used internationally); (3) Cetuximab (anti-EGFR monoclonal \u2014 glycosylated with alpha-gal, causes severe anaphylaxis); (4) Dairy and dairy products \u2014 some patients react, most do not (alpha-gal in dairy is present but lower exposure); (5) Tick re-exposure increases alpha-gal sensitization \u2014 tick prevention is key to preventing worsening."
+        }
+      }
     }
   },
   "acute-ischemic-stroke-tpa": {
@@ -38940,6 +39919,27 @@ window.CRT_DATA = {
         "irregular pounding \u2014 like it's skipping beats",
         "I can't catch my breath and my heart rate app says 146"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AF \u2014 Rate vs Rhythm Control Decision",
+        "scenario": "Hemodynamically stable. Rate controlled to 88 with metoprolol. Now day 2 \u2014 patient asking 'will I have this forever?' Cardiologist offers: cardioversion today vs rate control + anticoagulation + outpatient follow-up. CHA2DS2-VASc = 3.",
+        "newData": {
+          "CHA2DS2VASc": "3 (anticoagulation indicated)",
+          "HeartRate": "88 \u2014 controlled",
+          "Duration": "Unknown onset (>48h possible)",
+          "Note": "EAST-AFNET 4 trial: early rhythm control improves outcomes; TEE before cardioversion if duration unknown; anticoagulation 4 weeks post-cardioversion regardless"
+        }
+      },
+      "v3": {
+        "title": "AF \u2014 Acute Stroke During RVR",
+        "scenario": "2 hours into rate control: patient develops sudden right arm weakness and aphasia \u2014 NIHSS 8. AF with RVR still present. Cardiology wants to cardiovert to restore cardiac output. Neurology wants to treat the stroke. Both are right. Sequence the care.",
+        "newData": {
+          "NIHSS": "8 \u2014 new ischemic stroke",
+          "AF_Rate": "Still 118 bpm",
+          "Note": "Simultaneous AF and acute stroke: anticoagulate for AF (benefit) vs hemorrhagic conversion risk post-tPA; tPA contraindicated if INR >1.7 or on NOAC; thrombectomy if LVO; cardiology and neurology co-management"
+        }
+      }
     }
   },
   "hemorrhagic-stroke": {
@@ -39462,6 +40462,17 @@ window.CRT_DATA = {
         "I take ibuprofen every day for my knees",
         "my legs are swelling and I feel off"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AKI \u2014 Contrast Nephropathy vs True Renal Injury",
+        "scenario": "Creatinine rose from 1.1 to 2.4 after CT with IV contrast 48 hours ago. The resident diagnoses 'contrast nephropathy' and holds all nephrotoxins. Nephrology asks: is CIN actually the cause and how likely is it in 2025?",
+        "newData": {
+          "Cr_Rise": "1.1 \u2192 2.4 after contrast",
+          "Timing": "48 hours post-CT",
+          "Note": "Contrast-induced AKI: modern data (AMACING, PRESERVE trials) suggest true CIN risk is much lower than historically taught (<1-2% in patients without severe CKD); most post-contrast AKI is coincidental; pre-contrast creatinine is the key risk factor; IV saline pre-hydration reduces risk in CKD \u22653b; iodinated contrast in CKD <30 mL/min requires risk-benefit discussion"
+        }
+      }
     }
   },
   "inpatient-diabetes-management": {
@@ -39633,6 +40644,17 @@ window.CRT_DATA = {
         "I've never needed insulin before",
         "they say stress from being sick makes it worse"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Basal-Bolus Insulin \u2014 Hypoglycemia Protocol",
+        "scenario": "T2DM patient on home metformin 1000mg BID and glipizide 10mg BID, admitted for pneumonia. Resident continues home medications and orders sliding scale insulin. Pharmacy flags the order.",
+        "newData": {
+          "HomeMedications": "Metformin + glipizide \u2014 continued inpatient",
+          "InsulnOrder": "Sliding scale only",
+          "Note": "Inpatient diabetes management: (1) Hold metformin (contrast, renal risk, NPO status); (2) Hold sulfonylureas (hypoglycemia risk when eating inconsistently); (3) Use basal-bolus insulin instead: glargine + aspart with meals; (4) Sliding scale (correction only) is inadequate as the sole regimen. Target glucose 140-180 mg/dL inpatient. Blood glucose monitoring before meals and at bedtime."
+        }
+      }
     }
   },
   "type-2-mi": {
@@ -39787,6 +40809,18 @@ window.CRT_DATA = {
         "I've been so tired and pale for months",
         "my heart rate is crazy high and now I have chest pressure"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Demand Ischemia \u2014 Treating the Cause",
+        "scenario": "Transfusion given for hemoglobin 5.8 + AF/RVR corrected with rate control. Troponin now 2.1 but stable on serial. ECG normalized. The question: does this patient also need cath, or does Type 2 MI management differ fundamentally from Type 1?",
+        "newData": {
+          "Troponin": "2.1 (stable \u2014 not rising)",
+          "Hemoglobin": "Post-transfusion 8.4",
+          "HRNow": "72 (rate controlled)",
+          "Note": "Type 2 MI = demand ischemia, not plaque rupture \u2014 treat the precipitant (anemia, tachycardia, sepsis); cath not routinely indicated; antiplatelet therapy decision case-by-case"
+        }
+      }
     }
   },
   "severe-asthma-biologics": {
@@ -39964,6 +40998,19 @@ window.CRT_DATA = {
         "I've been on steroids three times this year",
         "I heard there are shots for people like me \u2014 can we talk about them"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Biologic Selection \u2014 Phenotyping Before Prescribing",
+        "scenario": "Step 5 severe asthma \u2014 on high-dose ICS + LABA + LAMA + oral prednisone 10mg daily. Blood eosinophils: 620/mm\u00b3. Total IgE: 148 IU/mL. FeNO: 52 ppb. Allergist reviewing biologic options: mepolizumab vs dupilumab vs omalizumab.",
+        "newData": {
+          "Eosinophils": "620/mm\u00b3",
+          "IgE": "148 IU/mL",
+          "FeNO": "52 ppb",
+          "OralSteroid": "10mg prednisone daily (OCS-dependent)",
+          "Note": "Biologic selection: eosinophils \u2265300 + OCS-dependent = mepolizumab (anti-IL-5) or benralizumab (anti-IL-5R\u03b1, faster eosinophil depletion); FeNO \u226525 + eosinophils \u2265150 = dupilumab (anti-IL-4/IL-13, also treats comorbid eosinophilic CRS with NP and AD); IgE-mediated allergic asthma = omalizumab. This patient: eosinophil count and OCS dependence favor mepolizumab or benralizumab; dupilumab if comorbid atopic disease present."
+        }
+      }
     }
   },
   "pyelonephritis-sepsis": {
@@ -40309,6 +41356,18 @@ window.CRT_DATA = {
         "I've had this before \u2014 the infection in the fluid",
         "I stopped my antibiotic \u2014 the one for my belly \u2014 months ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SBP Prevention \u2014 Norfloxacin Prophylaxis Indication",
+        "scenario": "E. coli SBP treated successfully. Cirrhosis (Child-Pugh C), total protein <1 g/dL. Hepatology discussing long-term antibiotic prophylaxis.",
+        "newData": {
+          "SBP": "E. coli \u2014 first episode, treated",
+          "AscitesProtein": "<1 g/dL",
+          "ChildPugh": "C",
+          "Note": "SBP secondary prophylaxis: norfloxacin 400mg QD (or ciprofloxacin 500mg QD) recommended after first episode of SBP \u2014 reduces recurrence from 69% to 20% at 1 year. Primary prophylaxis: norfloxacin for ascitic fluid protein <1.5 g/dL + renal dysfunction or hyponatremia. Liver transplant evaluation urgently \u2014 SBP marks decompensated cirrhosis (median survival 1-2 years without transplant)."
+        }
+      }
     }
   },
   "adrenal-insufficiency": {
@@ -40481,6 +41540,17 @@ window.CRT_DATA = {
         "I'm weak and my BP is low",
         "I take prednisone every day and I forgot to increase it when I got sick"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Adrenal Insufficiency \u2014 Steroid Transition After Acute Crisis",
+        "scenario": "Crisis resolved \u2014 BP normalized, mental status cleared. The patient is now asking when she can go home. She was on prednisone 40mg/day for RA before developing AI. The endocrinologist needs to explain sick-day rules and the transition plan.",
+        "newData": {
+          "Resolution": "Crisis resolved \u2014 hemodynamically stable",
+          "PriorSteroid": "Prednisone 40mg/day for RA (iatrogenic AI)",
+          "Note": "Transition after AI crisis: hydrocortisone taper over 1-2 days to maintenance (15-20mg/day hydrocortisone equivalent); sick-day rules: double/triple dose with febrile illness, vomiting, surgery; patient needs medical alert bracelet; IM hydrocortisone kit for home emergencies; never abruptly stop steroids"
+        }
+      }
     }
   },
   "acute-aortic-dissection": {
@@ -42029,6 +43099,18 @@ window.CRT_DATA = {
         "my wife checked my blood sugar and it was 28",
         "I didn't eat before my insulin shot"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Recurrent Hypoglycemia \u2014 Insulin Dose Review",
+        "scenario": "Third admission for severe hypoglycemia in 2 months. Patient is 78M, CKD stage 4, on glipizide 10mg BID + insulin glargine 40 units QHS for type 2 diabetes. Last HbA1c was 6.2%. Endocrinology reviews medications.",
+        "newData": {
+          "HbA1c": "6.2% (over-controlled)",
+          "Medications": "Glipizide 10mg BID + insulin glargine 40U",
+          "CKD": "Stage 4",
+          "Note": "Over-treatment in elderly with CKD \u2014 sulfonylureas (glipizide) have prolonged action in CKD (accumulation) and are high-risk for hypoglycemia; HbA1c target for elderly with CKD = 7.5-8.5%; deprescribe glipizide; reduce glargine; use short-acting agents only when meal is confirmed; goal is safety, not tight control"
+        }
+      }
     }
   },
   "upper-gi-bleed": {
@@ -42587,6 +43669,20 @@ window.CRT_DATA = {
         "my neck is stiff and I hate bright lights",
         "I've been vomiting and I feel terrible"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Distinguishing Viral from Partially Treated Bacterial",
+        "scenario": "LP results: WBC 310 (80% lymphocytes), glucose 58, protein 72, Gram stain negative. Bacterial antigens negative. PCR for enterovirus sent. The patient received amoxicillin from his GP 24 hours before presentation. Can you confidently rule out partially treated bacterial meningitis?",
+        "newData": {
+          "CSF_WBC": "310 (80% lymphocytes)",
+          "CSF_Glucose": "58",
+          "CSF_Protein": "72",
+          "GramStain": "Negative",
+          "Antibiotic": "Amoxicillin 24h prior to LP",
+          "Note": "Partially treated bacterial meningitis \u2014 can have lymphocytic pleocytosis after antibiotics; glucose <45 or glucose ratio <0.5 raises bacterial concern; serum procalcitonin >2 ng/mL supports bacterial. If any doubt, continue empiric antibiotics until culture results at 48-72h"
+        }
+      }
     }
   },
   "unstable-angina": {
@@ -42760,6 +43856,18 @@ window.CRT_DATA = {
         "it's happened three times this week",
         "I stopped one of my heart medications \u2014 could that be it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Troponin-Negative ACS \u2014 Risk Stratification",
+        "scenario": "Three serial troponins negative over 6 hours. ECG: T-wave flattening in V4-V6, dynamic but not clearly positive. TIMI score 4. Patient had typical rest angina x2 today. Cardiologist asks about stress testing vs direct cath.",
+        "newData": {
+          "Troponin": "Negative x3",
+          "ECG": "T-wave flattening V4-V6 \u2014 dynamic",
+          "TIMI": "4 (intermediate-high risk)",
+          "Note": "UA with TIMI \u22653 \u2014 NSTEMI guidelines recommend early invasive strategy; stress testing appropriate only for low-risk (TIMI 0-2, negative biomarkers, no ECG changes)"
+        }
+      }
     }
   },
   "toxic-ingestion": {
@@ -42931,6 +44039,19 @@ window.CRT_DATA = {
         "I feel sick to my stomach now",
         "I'm ready to talk to someone"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hepatic Failure \u2014 King's College Criteria",
+        "scenario": "Acetaminophen overdose \u2014 presentation delayed 18 hours. APAP level 240 mcg/mL at 18h (above Rumack-Matthew line). NAC started. Day 2: ALT 8,400, INR 4.2, creatinine rising, grade II encephalopathy. Hepatology called.",
+        "newData": {
+          "ALT": "8,400",
+          "INR": "4.2",
+          "Creatinine": "Rising",
+          "Encephalopathy": "Grade II",
+          "Note": "Acute liver failure from APAP \u2014 King's College Criteria for transplant listing: (1) pH <7.3 after adequate resuscitation, OR (2) ALL THREE: INR >6.5 + creatinine >3.4 + encephalopathy grade III-IV. This patient does not yet meet criteria but is trending toward them \u2014 contact transplant center for evaluation. Continue NAC (extend beyond standard protocol given ongoing hepatotoxicity). Hepatology + transplant team at bedside."
+        }
+      }
     }
   },
   "exertional-heat-stroke": {
@@ -43275,6 +44396,19 @@ window.CRT_DATA = {
         "I feel achy all over and my platelet count is low",
         "I found a tick attached to me about 10 days ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Ehrlichiosis \u2014 Doxycycline Despite Age",
+        "scenario": "7-year-old with fever, headache, myalgia, 5 days after camping. WBC 2,800, platelets 88,000, AST 142. Tick exposure confirmed. Suspecting ehrlichiosis.",
+        "newData": {
+          "WBC": "2,800 (low)",
+          "Platelets": "88,000",
+          "AST": "142",
+          "Age": "7 years",
+          "Note": "Tick-borne illness empiric treatment: doxycycline is the drug of choice for ehrlichiosis, anaplasmosis, and RMSF \u2014 even in children <8 years old. The risk of dental staining from short-course doxycycline (<21 days) is minimal and not a contraindication. Do NOT use chloramphenicol (inferior for ehrlichiosis) or withhold treatment while awaiting serology (diagnosis is clinical). Start doxycycline immediately when tick-borne illness suspected."
+        }
+      }
     }
   },
   "sepsis-with-rigidity": {
@@ -43633,6 +44767,17 @@ window.CRT_DATA = {
         "it started after they switched the paint product",
         "I think my job is making me sick"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Isocyanate OA \u2014 Compensation and Relocation",
+        "scenario": "Occupational asthma from isocyanate (TDI) confirmed \u2014 serial PEFRs show work-related pattern, immunologic sensitization confirmed. Patient asks if he can continue working in the spray-painting booth with better PPE.",
+        "newData": {
+          "Sensitization": "Confirmed \u2014 immunologic (IgE-mediated TDI)",
+          "WorkPattern": "Confirmed occupational pattern on serial PEFR",
+          "Note": "Isocyanate OA with immunologic sensitization: continued low-level exposure is unacceptable \u2014 even trace exposure triggers reactions. Recommendation: complete removal from exposure. Prognosis better if removed early. Medico-legal documentation: OSHA reporting, workers' compensation claim. Alternative employment in non-isocyanate environment. PPE (respirators) is insufficient once sensitized \u2014 does not prevent immunologic responses. Avoidance is the only cure."
+        }
+      }
     }
   },
   "inducible-urticaria": {
@@ -43804,6 +44949,17 @@ window.CRT_DATA = {
         "hives everywhere and I felt my blood pressure drop",
         "this only happens with cold \u2014 it's not random"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cold Urticaria \u2014 Safe Exposure Testing",
+        "scenario": "Cold urticaria with cold-induced anaphylaxis confirmed (ice cube test positive at 4 minutes). Patient wants to know: can she swim in a lake or ocean this summer?",
+        "newData": {
+          "IceCubeTest": "Positive at 4 minutes",
+          "History": "Cold-induced anaphylaxis",
+          "Note": "Cold urticaria with anaphylaxis history: lake/ocean swimming is HIGH RISK \u2014 total body cold exposure can trigger massive histamine release and cardiac arrest. Contraindications: swimming in cold water, cold food/drink binge (angioedema risk), cold beverages before anesthesia induction. Management: (1) 2nd-generation antihistamine daily (cetirizine, rupatadine); (2) Carry epinephrine auto-injector at all times; (3) Do not swim alone or in cold water; (4) Warn before dental procedures (cold water irrigation); (5) Cyproheptadine for refractory cases."
+        }
+      }
     }
   },
   "anticholinergic-toxicity": {
@@ -43960,6 +45116,18 @@ window.CRT_DATA = {
         "my mouth is totally dry and I see things",
         "I'm confused \u2014 I don't know where I am"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Anticholinergic Toxidrome \u2014 Physostigmine Decision",
+        "scenario": "Diphenhydramine overdose confirmed (200mg ingested). Patient agitated, delirious, HR 138, dry skin, temperature 38.6. The toxicologist is available by phone and mentions physostigmine. The EM attending is hesitant. What is the risk-benefit of physostigmine here?",
+        "newData": {
+          "Ingestion": "Diphenhydramine 200mg",
+          "HR": "138",
+          "ECG": "QRS 98ms (borderline)",
+          "Note": "Physostigmine for anticholinergic toxidrome: highly effective for delirium and agitation; contraindicated if QRS >120ms (risk of bradycardia + seizure from excess cholinergic activity); avoid in TCAs; use when pure anticholinergic agent confirmed and QRS normal; reduces ICU admission and intubation rate"
+        }
+      }
     }
   },
   "hyperthermia-nms": {
@@ -44315,6 +45483,19 @@ window.CRT_DATA = {
         "I'm sweating and my BP is sky high",
         "I feel like I'm going to have a heart attack"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hyperthermia Management \u2014 Benzodiazepines Over Beta-Blockers",
+        "scenario": "Cocaine toxicity. HR 148, BP 186/112, temperature 39.8, severe agitation. Resident reaches for labetalol for hypertension. Toxicology calls to stop them. Why, and what do you use instead?",
+        "newData": {
+          "HR": "148",
+          "BP": "186/112",
+          "Temp": "39.8",
+          "Agitation": "Severe",
+          "Note": "Beta-blockers are CONTRAINDICATED in cocaine toxicity \u2014 unopposed alpha stimulation after beta blockade causes severe vasoconstriction and worsens hypertension. Treatment: benzodiazepines (lorazepam or diazepam) are first-line for all cocaine toxicity manifestations \u2014 agitation, hypertension, tachycardia, hyperthermia. Treat agitation first (the driver of all other symptoms). Cooling measures for hyperthermia. Phentolamine (alpha-blocker) for severe refractory hypertension."
+        }
+      }
     }
   },
   "mixed-overdose": {
@@ -44470,6 +45651,18 @@ window.CRT_DATA = {
         "I'm sleepy and my mouth is dry",
         "I'm ready to get help"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Mixed Overdose \u2014 Prioritizing Toxidrome Treatment",
+        "scenario": "Found unresponsive. Multiple pill bottles: acetaminophen, diphenhydramine, oxycodone. GCS 8, RR 6, miosis, dry skin, urinary retention, tachycardia.",
+        "newData": {
+          "RR": "6",
+          "Miosis": "Present",
+          "DryUrinary": "Dry skin + urinary retention",
+          "Note": "Mixed toxidrome: two competing syndromes. Opioid (miosis + RR 6 + low GCS) takes priority \u2014 naloxone immediately (start low: 0.1-0.4mg IV titrate to respirations, not full reversal in chronic users). Anticholinergic (dry skin + urinary retention + tachycardia) from diphenhydramine \u2014 physostigmine if no TCA on board. APAP level at 4h post-ingestion for NAC decision. Sequence: airway \u2192 naloxone \u2192 APAP level \u2192 NAC if indicated."
+        }
+      }
     }
   },
   "acute-sma-embolism": {
@@ -45976,6 +47169,18 @@ window.CRT_DATA = {
         "I missed my biologic \u2014 I couldn't afford the copay",
         "I'm losing weight and I can barely eat"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Biologic Optimization \u2014 Anti-TNF vs Vedolizumab",
+        "scenario": "Severe Crohn flare despite azathioprine 150mg. CRP 68, endoscopy shows ulceration and pseudopolyps throughout ileum. Gastroenterologist offers adalimumab vs vedolizumab vs combination therapy (anti-TNF + immunomodulator). What guides this choice?",
+        "newData": {
+          "CRP": "68",
+          "Endoscopy": "Ulceration + pseudopolyps \u2014 ileum",
+          "CurrentTherapy": "Azathioprine \u2014 failing",
+          "Note": "Biologic selection: anti-TNF (adalimumab/infliximab) faster onset, better for extraintestinal; vedolizumab gut-selective, preferred if extraintestinal disease absent; combination anti-TNF + immunomodulator reduces immunogenicity; test for TB, hepatitis B, and check vaccinations before starting"
+        }
+      }
     }
   },
   "cholelithiasis-cholecystitis": {
@@ -46146,6 +47351,19 @@ window.CRT_DATA = {
         "the pain after eating got much worse and I have fever",
         "my skin and eyes are turning yellow"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cholangitis \u2014 ERCP vs Surgery Timing",
+        "scenario": "RUQ ultrasound: CBD 12mm, stone visualized. Lab: AST 280, ALT 320, bilirubin 4.8, alkaline phosphatase 380. Now febrile (39.4), right upper quadrant tenderness, mild confusion. Charcot's triad complete. GI and surgery disagree on who should manage this first.",
+        "newData": {
+          "CBD": "12mm dilated, stone visualized",
+          "LFTs": "AST 280, ALT 320, bili 4.8",
+          "Charcot": "Fever + RUQ pain + jaundice",
+          "AlteredMS": "Mild confusion",
+          "Note": "Charcot's triad + confusion = Reynold's pentad \u2014 acute suppurative cholangitis. This is an emergency: urgent ERCP for biliary decompression (within hours, not days); antibiotics first; cholecystectomy after recovery from acute episode; do NOT take this patient to the OR for primary surgery"
+        }
+      }
     }
   },
   "atypical-hus": {
@@ -46495,6 +47713,18 @@ window.CRT_DATA = {
         "my veins on my chest look like they're popping out",
         "worse when I lean forward or lie down"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SVC Syndrome \u2014 Airway Emergency vs Stable",
+        "scenario": "NSCLC with confirmed SVC syndrome. CT: moderate collateral formation, SVC 90% narrowed. Patient has facial edema and JVD but is not in respiratory distress. BP 128/78, SpO2 97%. The radiologist can place a stent today. Oncology suggests starting chemo first. Who is right?",
+        "newData": {
+          "SVCNarrowing": "90%",
+          "Collaterals": "Moderate",
+          "Symptoms": "Facial edema + JVD \u2014 no respiratory distress",
+          "Note": "SVC syndrome management: NOT always an emergency \u2014 assess if airway or CNS compromise present; stable patients can pursue tissue biopsy before stenting; SVC stenting provides immediate relief and is preferred for NSCLC (chemo takes weeks); true emergency = laryngeal edema + CNS symptoms \u2192 stent first, biopsy after"
+        }
+      }
     }
   },
   "spinal-metastasis": {
@@ -46832,6 +48062,18 @@ window.CRT_DATA = {
         "she's agitated and pulling at things all night",
         "she has dementia but this is a different kind of confusion"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Delirium Superimposed on Dementia \u2014 Identifying the Precipitant",
+        "scenario": "Patient with known Alzheimer disease presenting with acute worsening. MMSE 8 (baseline 18). Caregiver reports: 3 days of confusion, new fall, refusing food. Temp 37.2, HR 96, BP 112/68, RR 18, O2 sat 96%.",
+        "newData": {
+          "MMSE": "8 (baseline 18)",
+          "Duration": "3 days worsening",
+          "Falls": "New",
+          "Note": "Acute-on-chronic cognitive decline = delirium until proven otherwise. FIND ME mnemonic for precipitants: Fluid (dehydration \u2014 most common in dementia), Infections (UTI, pneumonia \u2014 often afebrile in elderly), Nutrition (hypoglycemia), Drugs (new medications, polypharmacy), Electrolytes (hyponatremia, hypercalcemia), Metabolic (TSH, B12, glucose), Epilepsy (post-ictal). Work up systematically. Avoid antipsychotics, benzodiazepines, anticholinergics."
+        }
+      }
     }
   },
   "cerebral-salt-wasting": {
@@ -46985,6 +48227,18 @@ window.CRT_DATA = {
         "I had the brain bleed 4 days ago and now this",
         "I've been losing a lot of urine and I'm dehydrated"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CSW vs SIADH \u2014 Treatment Is Opposite",
+        "scenario": "Post-SAH day 3. Sodium 124 mEq/L. The neurology fellow says 'SIADH \u2014 fluid restrict.' The neurosurgeon says 'CSW \u2014 give sodium.' Both cite the sodium level. Who is right and how do you tell them apart?",
+        "newData": {
+          "Sodium": "124 mEq/L",
+          "Setting": "Post-SAH day 3",
+          "Controversy": "SIADH vs CSW \u2014 same Na+, opposite treatment",
+          "Note": "Distinguish by VOLUME STATUS: SIADH = euvolemic; CSW = hypovolemic (weight loss, negative fluid balance, urine Na >20 with volume depletion). In post-SAH: fluid restriction (SIADH treatment) causes vasospasm \u2014 LETHAL. When in doubt, give saline; fludrocortisone for CSW; 3% NaCl if Na+ <130 post-SAH"
+        }
+      }
     }
   },
   "conus-medullaris-syndrome": {
@@ -47486,6 +48740,18 @@ window.CRT_DATA = {
         "I've been getting dizzy when I sprint",
         "I had a murmur when I was a kid but they said it was innocent"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "LVOT Obstruction \u2014 Medical Escalation Decision",
+        "scenario": "Resting LVOT gradient 72 mmHg on echo despite metoprolol 100mg BID. Patient having exertional syncope and functional class III symptoms. Cardiologist presents options: add disopyramide vs refer for septal reduction therapy (alcohol ablation or myectomy).",
+        "newData": {
+          "LVOTGradient": "72 mmHg at rest",
+          "Symptoms": "Exertional syncope + functional class III",
+          "OnMetoprolol": "100mg BID \u2014 inadequate",
+          "Note": "Refractory obstructive HCM \u2014 disopyramide as add-on; if still refractory, septal reduction (myectomy preferred at high-volume centers); ICD for SCD risk stratification"
+        }
+      }
     }
   },
   "cns-infection": {
@@ -47655,6 +48921,18 @@ window.CRT_DATA = {
         "I've been confused for a week \u2014 it came on slowly",
         "I had a seizure at the shelter last night"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CNS Toxoplasmosis \u2014 Empiric Therapy Before Biopsy",
+        "scenario": "HIV+, CD4 48, ring-enhancing lesion right frontal lobe. Toxoplasma IgG positive. Neurosurgery recommending biopsy immediately. Infectious disease recommending empiric pyrimethamine-sulfadiazine first.",
+        "newData": {
+          "CD4": "48",
+          "Lesion": "Ring-enhancing right frontal",
+          "ToxoIgG": "Positive",
+          "Note": "Empiric treatment is standard before biopsy in HIV with CD4 <200, positive toxo IgG, and ring-enhancing lesion. If no response at 2 weeks, then biopsy for CNS lymphoma, TB, fungal. Pyrimethamine-sulfadiazine + leucovorin for 6 weeks (acute), then suppression until CD4 >200 on ART for 6 months. Dexamethasone for mass effect if needed but confounds response assessment."
+        }
+      }
     }
   },
   "lyme-carditis": {
@@ -47808,6 +49086,17 @@ window.CRT_DATA = {
         "my heart feels like it stops and starts",
         "I had a bullseye rash after camping and ignored it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Antibiotic Route \u2014 Oral vs IV in Lyme Carditis",
+        "scenario": "Lyme IgM and IgG positive. First-degree AVB on admission (PR 0.24), now third-degree AVB requiring temporary pacing. Infectious disease asks: IV ceftriaxone vs oral doxycycline, and when is the pacemaker removed?",
+        "newData": {
+          "LymeSerology": "IgM + IgG positive",
+          "AVBlock": "Third-degree \u2014 on temporary pacing",
+          "Note": "Lyme carditis with advanced AVB \u2014 IV ceftriaxone preferred for severe Lyme carditis (third-degree AVB); expect resolution within 1-3 weeks of antibiotics; remove pacemaker when AVB resolves; permanent pacemaker only if AVB persists after full antibiotic course"
+        }
+      }
     }
   },
   "rhabdomyolysisinduced-hyperkalemia": {
@@ -47981,6 +49270,18 @@ window.CRT_DATA = {
         "my muscles are incredibly sore from training",
         "I feel weak and I'm barely urinating"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Rhabdo \u2014 Compartment Syndrome Missed",
+        "scenario": "CK 84,200, K+ 6.8, Cr 3.4 \u2014 all being treated. But the calf is tense and the patient says it's the worst pain of his life. The medicine team says 'that's the rhabdo.' You are not sure. What exam findings would distinguish rhabdomyolysis from compartment syndrome requiring fasciotomy?",
+        "newData": {
+          "CK": "84,200",
+          "PainSeverity": "Severe calf pain \u2014 'worst of my life'",
+          "CallTension": "Tense on palpation",
+          "Note": "Compartment syndrome can CAUSE rhabdomyolysis \u2014 don't assume rhabdo is only from exertion; exam: pain with passive stretch (most sensitive), tense compartment, paresthesias; measure compartment pressure if any doubt; fasciotomy if delta P <30 mmHg; missing compartment syndrome = permanent nerve/muscle damage"
+        }
+      }
     }
   },
   "temporal-arteritis": {
@@ -48136,6 +49437,29 @@ window.CRT_DATA = {
         "my jaw hurts when I chew",
         "I'm worried about my vision \u2014 it went dark for a few seconds"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "GCA \u2014 Visual Loss Despite Steroids",
+        "scenario": "Started prednisone 60mg/day 3 days ago for confirmed GCA (positive temporal artery biopsy). Today: patient reports new visual loss in the right eye \u2014 painless, complete. ESR still 82. What happened and what do you do now?",
+        "newData": {
+          "Prednisone": "60mg/day x 3 days",
+          "NewVisualLoss": "Complete loss right eye",
+          "ESR": "82 (was 110)",
+          "Note": "Vision loss in GCA despite steroids: IV methylprednisolone 1g/day x 3 days may partially restore vision in early cases; add tocilizumab (IL-6 inhibitor) to taper steroid requirement; visual loss is usually irreversible \u2014 the urgency is preventing contralateral eye involvement"
+        }
+      },
+      "v3": {
+        "title": "GCA \u2014 PMR Overlap and Steroid Taper Failure",
+        "scenario": "6 months into steroid taper. Patient was on prednisone 10mg/day. Now: jaw claudication returned, ESR 78, CRP 62. Ophthalmology is concerned. Rheumatology asks about tocilizumab (IL-6 inhibitor) for steroid-sparing.",
+        "newData": {
+          "CurrentDose": "Prednisone 10mg/day \u2014 tapering",
+          "ESR": "78",
+          "CRP": "62",
+          "Symptoms": "Jaw claudication returning \u2014 relapse",
+          "Note": "GCA relapse: increase prednisone to last effective dose; tocilizumab 162mg SC weekly is FDA-approved for steroid-sparing in GCA (GiACTA trial) \u2014 allows faster taper; ophthalmology evaluation before steroid increase change"
+        }
+      }
     }
   },
   "retinal-detachment": {
@@ -48289,6 +49613,17 @@ window.CRT_DATA = {
         "a curtain is coming down from the top of my vision",
         "I had a laser procedure on my retina before \u2014 is this related"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Surgical Timing \u2014 Macula-On vs Macula-Off",
+        "scenario": "Retinal detachment confirmed by ophthalmology: rhegmatogenous, superior bullous detachment. Question: is the macula on or off? Patient has central vision still \u2014 but the bubble is advancing toward the macula.",
+        "newData": {
+          "Type": "Rhegmatogenous \u2014 superior bullous",
+          "MacularStatus": "ON \u2014 central vision preserved, detachment advancing",
+          "Note": "Macula-on retinal detachment = surgical urgency within 24h. Macula-off (already detached) \u2014 surgery still indicated but <72h is acceptable. Visual outcome dramatically better when macula is preserved. Repair options: pneumatic retinopexy (simple breaks, upright-compliant patients), scleral buckle, or vitrectomy. Ophthalmology to OR today."
+        }
+      }
     }
   },
   "acute-embolic-limb-ischemia": {
@@ -48957,6 +50292,17 @@ window.CRT_DATA = {
         "my blood pressure goes to 220 and then comes back down",
         "it comes out of nowhere \u2014 stress or sometimes nothing at all"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pheo Crisis \u2014 Intraoperative Hypertension",
+        "scenario": "Patient in OR for adrenalectomy. Incision made \u2014 BP spikes to 248/142. Anesthesia has nicardipine and phentolamine available. The surgeon is waiting. What happens when you handle the tumor and why must you anticipate the next hemodynamic event?",
+        "newData": {
+          "BP_Spike": "248/142 on incision",
+          "OperativeSetting": "Adrenalectomy in progress",
+          "Note": "Intraoperative pheo crisis: IV nicardipine or phentolamine for BP spike; after tumor removal \u2014 anticipate profound hypotension (catecholamine surge ends); have vasopressors ready; ensure adequate alpha-blockade was given preoperatively (phenoxybenzamine); beta-blocker only after alpha-blockade"
+        }
+      }
     }
   },
   "siadh": {
@@ -49111,6 +50457,18 @@ window.CRT_DATA = {
         "my doctor checked my sodium and said it was critically low",
         "I increased my antidepressant dose about a month ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Persistent SIADH \u2014 Fluid Restriction Failure",
+        "scenario": "Diagnosed SIADH from sertraline. Sodium 122 \u2192 126 after 3 days of 1L/day fluid restriction. Still symptomatic (headache, nausea). ID asks about tolvaptan vs hypertonic saline vs oral urea for chronic SIADH management.",
+        "newData": {
+          "Sodium": "126 (was 122, slow rise)",
+          "FluidRestriction": "1L/day x 3 days \u2014 inadequate response",
+          "Cause": "SIADH \u2014 sertraline (still required for depression)",
+          "Note": "Fluid restriction failure \u2014 consider: (1) oral urea 30g/day (cheap, effective, osmotic urine excretion); (2) tolvaptan (V2 receptor antagonist) \u2014 rapid correction risk, monitoring required, avoid in liver disease; (3) demeclocycline; first choice: stop or reduce the offending drug if safe to do so"
+        }
+      }
     }
   },
   "incarcerated-inguinal-hernia": {
@@ -49264,6 +50622,19 @@ window.CRT_DATA = {
         "I've been vomiting and I haven't had a bowel movement in 3 days",
         "it's harder and more tender than usual and I can't reduce it"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Reduction Attempt \u2014 Timing and Technique",
+        "scenario": "Incarcerated inguinal hernia, 4 hours. Patient has mild RLQ discomfort, no peritoneal signs, no fever. X-ray: no free air, no bowel obstruction pattern yet. Surgery attending asks: attempt manual reduction vs take directly to OR.",
+        "newData": {
+          "Duration": "4 hours",
+          "PeritonealSigns": "Absent",
+          "FreeAir": "None",
+          "Obstruction": "Not established on X-ray",
+          "Note": "Manual reduction (taxis) attempt: appropriate if: no peritoneal signs, no evidence of strangulation (<4-6h, soft bowel), and patient cooperative. Technique: Trendelenburg position, gentle sustained pressure on hernia sac, analgesia and sedation. Never attempt if: bowel discoloration, peritoneal signs, free air, signs of strangulation. After successful reduction: admit for observation (24h) before elective hernia repair; if reduction fails \u2014 OR emergently."
+        }
+      }
     }
   },
   "flail-chest": {
@@ -49768,6 +51139,17 @@ window.CRT_DATA = {
         "I haven't slept in 4 days",
         "I hear voices and I think people are watching me"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "First Episode \u2014 Organic Workup Before Antipsychotics",
+        "scenario": "19M, no prior psychiatric history, brought in by parents for 3 weeks of paranoia, hearing voices, and social withdrawal. No substance use on urine drug screen. Psychiatry resident writes for haloperidol. Attending pauses. What workup must occur first?",
+        "newData": {
+          "Age": "19, no prior psychiatric history",
+          "UDS": "Negative",
+          "Note": "First-episode psychosis requires organic workup before antipsychotics: CBC, CMP, TSH, RPR, HIV, urine drug screen, anti-NMDAR antibody, B12, folate, copper/ceruloplasmin (Wilson disease), head MRI. Anti-NMDAR encephalitis can mimic schizophrenia and requires immunotherapy not antipsychotics. If workup negative, proceed with low-dose antipsychotic and early psychosis program referral."
+        }
+      }
     }
   },
   "staphylococcal-scalded-skin-syndrome": {
@@ -49921,6 +51303,18 @@ window.CRT_DATA = {
         "she has fever and she won't let us touch her",
         "it started around her mouth and spread everywhere"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SSSS vs TEN \u2014 Critical Distinction",
+        "scenario": "2-year-old with widespread erythema and skin peeling. Nikolsky sign positive. No mucosal involvement. You are called to distinguish SSSS from TEN. The treatment and prognosis are completely different.",
+        "newData": {
+          "Age": "2 years",
+          "NikolskySign": "Positive",
+          "MucosalInvolvement": "ABSENT",
+          "Note": "Key distinction: SSSS = exfoliative toxin from S. aureus, cleavage in granular layer (superficial), NO mucosal involvement, good prognosis with IV antibiotics. TEN = drug-induced, cleavage at dermal-epidermal junction (deeper), MUCOSAL involvement, high mortality. Absence of mucosal involvement = SSSS. Treatment: nafcillin/oxacillin (or vancomycin if MRSA risk), fluid support, wound care, good prognosis in children."
+        }
+      }
     }
   },
   "vocal-cord-dysfunction": {
@@ -50228,6 +51622,17 @@ window.CRT_DATA = {
         "my eyelid is drooping and my pupil looks small",
         "I had a new kind of headache at the same time"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Carotid Dissection \u2014 Anticoagulation vs Antiplatelet",
+        "scenario": "MRI confirms right internal carotid dissection with a small intraluminal thrombus. Patient has mild right hemispheric symptoms \u2014 NIHSS 4. The stroke neurologist is debating antithrombotic strategy: anticoagulation vs antiplatelet.",
+        "newData": {
+          "Finding": "Right ICA dissection + intraluminal thrombus",
+          "NIHSS": "4",
+          "Note": "Carotid dissection antithrombotic controversy: CADISS trial showed no significant difference between anticoagulation and antiplatelet (aspirin/clopidogrel) for stroke prevention; most centers use aspirin or aspirin + clopidogrel for 3-6 months; anticoagulation if large thrombus or stroke despite antiplatelet; MRI follow-up at 3 months"
+        }
+      }
     }
   },
   "gonococcal-arthritis": {
@@ -50383,6 +51788,18 @@ window.CRT_DATA = {
         "I have these small skin lesions that appeared with the joint pain",
         "I also have pain in my tendon near my wrist"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "DGI \u2014 Distinguishing from Septic Arthritis",
+        "scenario": "25-year-old sexually active female with polyarthralgia, tenosynovitis of right wrist and ankle, vesiculopustular skin lesions x2 days. WBC 12,000. No purulent joint effusion.",
+        "newData": {
+          "Presentation": "Polyarthralgia + tenosynovitis + skin lesions",
+          "JointEffusion": "None purulent",
+          "Age": "25F, sexually active",
+          "Note": "Disseminated gonococcal infection (DGI): classic triad of migratory arthritis/tenosynovitis + dermatitis + positive gonorrhea cultures. Two presentations: (1) Triad without purulent arthritis (bacteremic phase) \u2014 blood/genital cultures diagnostic; (2) Purulent monoarthritis (joint localized phase) \u2014 joint culture diagnostic. Treatment: ceftriaxone 1g IV daily x7 days; test for concomitant chlamydia; treat sexual partners."
+        }
+      }
     }
   },
   "pseudogout": {
@@ -50693,6 +52110,19 @@ window.CRT_DATA = {
         "my urine is dark and my stool is pale",
         "I ate raw oysters about a month ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Acute Liver Failure \u2014 Transplant Criteria",
+        "scenario": "Hepatitis A confirmed. Day 5: INR 3.8, encephalopathy grade II (confused, asterixis), bilirubin 28. King's College criteria being calculated. Hepatology asks: start NAC and refer to transplant center now, or wait to see if this resolves?",
+        "newData": {
+          "INR": "3.8",
+          "Encephalopathy": "Grade II",
+          "Bilirubin": "28",
+          "King_College_Criteria": "Being evaluated",
+          "Note": "King's College criteria for transplant listing in acute liver failure (non-acetaminophen): INR >6.5, or any 3 of: age <10 or >40, etiology unfavorable, jaundice >7 days before encephalopathy, INR >3.5, bilirubin >300. Hepatitis A is usually self-limited but can cause ALF \u2014 transfer to transplant center when any concern"
+        }
+      }
     }
   },
   "anxiety-panic-attack": {
@@ -51024,6 +52454,19 @@ window.CRT_DATA = {
         "I've been on the BiPAP before \u2014 I'll try anything",
         "my inhalers aren't touching it and I'm exhausted just talking"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "NIV Failure \u2014 Intubation Threshold",
+        "scenario": "BiPAP at IPAP 16/EPAP 6. After 90 minutes: pH 7.28 (was 7.24, improved slightly), pCO2 66 (was 72), RR 28, patient increasingly agitated and trying to remove the mask. The ICU fellow asks: keep trying vs intubate now?",
+        "newData": {
+          "pH": "7.28 (improving but slowly)",
+          "pCO2": "66",
+          "RR": "28",
+          "Agitation": "Increasing \u2014 attempting to remove mask",
+          "Note": "NIV failure criteria: pH <7.25 despite 1-2h of NIV, failure to improve pCO2, agitation, hemodynamic instability, inability to protect airway. This patient is borderline \u2014 intubate before acute decompensation"
+        }
+      }
     }
   },
   "psychogenic-polydipsia": {
@@ -51361,6 +52804,18 @@ window.CRT_DATA = {
         "I stopped my thyroid pill years ago because I felt fine",
         "my sodium is low and my family says I've been slow for months"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hypothyroidism-Induced Hyponatremia \u2014 Correction Rate",
+        "scenario": "TSH 142 (severely elevated), T4 0.2 ng/dL. Sodium 118 \u2014 symptomatic (confusion). Levothyroxine started 50mcg daily. Nephrology asks: how quickly will sodium correct with thyroid treatment alone, and is hypertonic saline needed?",
+        "newData": {
+          "TSH": "142",
+          "Sodium": "118 \u2014 symptomatic confusion",
+          "Levothyroxine": "Started 50mcg",
+          "Note": "Hypothyroidism-induced hyponatremia \u2014 sodium will correct gradually as thyroid function improves (days to weeks); if symptomatic with sodium <120, give hypertonic saline bolus (150mL 3% NaCl) to target 4-6 mEq/L rise; then allow thyroid treatment to complete correction; maintain correction rate <8-10 mEq/L per 24h to avoid ODS"
+        }
+      }
     }
   },
   "aortic-injury": {
@@ -52008,6 +53463,18 @@ window.CRT_DATA = {
         "I've just been so short of breath since last night",
         "I feel awful but I don't have the chest pain everyone talks about"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Atypical NSTEMI \u2014 Not Anchoring to Dyspnea as the Problem",
+        "scenario": "68-year-old diabetic female with dyspnea as the only complaint. No chest pain. Troponin 1.8, ECG: new ST depression V4-V6. Team writing 'pulmonary' in the assessment.",
+        "newData": {
+          "Troponin": "1.8",
+          "ECG": "ST depression V4-V6",
+          "Presentation": "Dyspnea only \u2014 no chest pain",
+          "Note": "Atypical MI presentation in diabetics and women \u2014 dyspnea, fatigue, nausea without chest pain. ECG ST depression + rising troponin = NSTEMI regardless of presentation. Do not anchor on 'atypical symptoms' \u2014 manage as ACS. Activate cardiology, start DAPT + anticoagulation, risk stratify for early invasive approach."
+        }
+      }
     }
   },
   "acute-necrotizing-gallstone-pancreatitis": {
@@ -52365,6 +53832,18 @@ window.CRT_DATA = {
         "I've been drinking more lately",
         "nothing makes it better \u2014 lying still barely helps"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Recurrent Pancreatitis \u2014 Definitive Intervention",
+        "scenario": "Third episode of alcohol-related pancreatitis in 18 months. CT: chronic pancreatitis changes, dilated main pancreatic duct 7mm. Patient says he has quit drinking after this hospitalization. GI asks about endoscopic vs surgical options for recurrent disease.",
+        "newData": {
+          "MPDDialation": "7mm (dilated)",
+          "ChronicChanges": "CT confirms chronic pancreatitis",
+          "EpisodeCount": "Third in 18 months",
+          "Note": "Recurrent alcoholic pancreatitis with dilated MPD \u2014 ERCP with pancreatic duct stenting as first-line; surgical drainage (Puestow procedure) for endoscopic failures or large duct disease; total pancreatectomy with islet autotransplantation for intractable pain with end-stage disease"
+        }
+      }
     }
   },
   "chronic-salicylate-toxicity": {
@@ -52520,6 +53999,19 @@ window.CRT_DATA = {
         "she takes aspirin every day and something called Pepto",
         "she has ringing in her ears and she's been breathing fast"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Chronic Salicylate Toxicity \u2014 Occult Presentation",
+        "scenario": "82-year-old, confused, tinnitus, tachypneic. On aspirin 325mg TID for arthritis. Salicylate level: 42 mg/dL (therapeutic range 10-30). Mixed acid-base: metabolic acidosis + respiratory alkalosis.",
+        "newData": {
+          "SalicylateLevel": "42 mg/dL",
+          "Age": "82",
+          "Presentation": "Confusion + tinnitus + tachypnea",
+          "AcidBase": "Mixed \u2014 metabolic acidosis + respiratory alkalosis",
+          "Note": "Chronic salicylate toxicity: toxic at lower levels than acute overdose; elderly especially susceptible. Classic mixed acid-base: early respiratory alkalosis (direct CNS stimulation) + later metabolic acidosis. Confusion in elderly on aspirin = check salicylate level. Treatment: urine alkalinization (IV bicarb to target urine pH >7.5 \u2014 increases renal excretion); dialysis for level >60 chronic or AMS + acidosis."
+        }
+      }
     }
   },
   "guillain-barre": {
@@ -52673,6 +54165,26 @@ window.CRT_DATA = {
         "my legs are getting weaker every day \u2014 it started from the bottom",
         "I had food poisoning about 3 weeks ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "GBS \u2014 Respiratory Failure Decision",
+        "scenario": "Ascending weakness now at the diaphragm \u2014 FVC 1.2L (was 2.8L on admission). Patient is anxious but alert. Anesthesia is at bedside. The '20-30-40 rule' is invoked. Explain it and whether this patient meets criteria for intubation.",
+        "newData": {
+          "FVC": "1.2L (52% of 2.3L predicted)",
+          "WeaknessLevel": "Diaphragmatic involvement",
+          "Note": "20-30-40 rule: intubate if FVC <20mL/kg OR NIF <-30 cmH2O OR PIP <40 cmH2O; here FVC likely below threshold \u2014 intubate; avoid succinylcholine (hyperkalemia from denervation); use rocuronium; GBS patients can deteriorate rapidly \u2014 do not wait for frank respiratory failure"
+        }
+      },
+      "v3": {
+        "title": "GBS \u2014 Miller Fisher Variant",
+        "scenario": "New patient: 38M, 2 weeks after Campylobacter. Presents with diplopia, bilateral ptosis, ataxia, and areflexia \u2014 no limb weakness. LP: albuminocytologic dissociation. Anti-GQ1b antibody sent. Is this GBS and should you treat?",
+        "newData": {
+          "Symptoms": "Ophthalmoplegia + ataxia + areflexia \u2014 no limb weakness",
+          "LP": "Protein 128, WBC 3 \u2014 albuminocytologic dissociation",
+          "Note": "Miller Fisher syndrome: GBS variant, anti-GQ1b antibody (>85% sensitive); treat with IVIG same as classic GBS; typically self-limiting (good prognosis); watch for overlap with classic GBS (descending weakness can develop); monitor FVC regardless"
+        }
+      }
     }
   },
   "febrile-neutropenia": {
@@ -52830,6 +54342,19 @@ window.CRT_DATA = {
         "I know this can be dangerous \u2014 I called right away",
         "I feel terrible and my temperature is 39.4"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Risk Stratification \u2014 Low vs High Risk (MASCC)",
+        "scenario": "MASCC score calculated: 21 (high risk). Patient has ANC 100, hemodynamically stable, no obvious source, blood cultures negative at 48h. Procalcitonin 1.2. Oncology asks: continue IV antibiotics inpatient vs transition to oral outpatient.",
+        "newData": {
+          "MASCC": "21 (high risk \u2014 <21 = low risk)",
+          "ANC": "100",
+          "BloodCultures": "Negative at 48h",
+          "Procalcitonin": "1.2",
+          "Note": "MASCC score <21 = high risk \u2014 continue IV antibiotics inpatient until ANC >500, afebrile x48h, and clinically improving. MASCC \u226521 = low risk \u2014 oral ciprofloxacin + amoxicillin-clavulanate outpatient may be appropriate. This patient is high-risk \u2014 do not discharge early."
+        }
+      }
     }
   },
   "hypercalcemia": {
@@ -52986,6 +54511,18 @@ window.CRT_DATA = {
         "I've been nauseous for weeks",
         "I have lung cancer \u2014 could this be related"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Malignant Hypercalcemia \u2014 Zoledronic Acid Timing",
+        "scenario": "Ca2+ 14.8 mg/dL (symptomatic \u2014 confusion and weakness). IV saline running. Oncology asks about zoledronic acid. Nephrology notes creatinine is 2.1. How does renal function change your management and what are the options?",
+        "newData": {
+          "Calcium": "14.8 mg/dL",
+          "Creatinine": "2.1",
+          "Symptoms": "Confusion + weakness",
+          "Note": "Zoledronic acid for malignant hypercalcemia: most effective bisphosphonate; dose adjustment needed if CrCl <35 mL/min; denosumab is preferred when bisphosphonate contraindicated (renal failure) \u2014 does not require dose adjustment; IVF first (aggressive hydration); calcitonin for rapid effect (bridges 24-48h); bisphosphonate/denosumab takes 2-4 days for full effect"
+        }
+      }
     }
   },
   "displaced-femoral-neck-fracture": {
@@ -53141,6 +54678,18 @@ window.CRT_DATA = {
         "my hip hurts terribly",
         "my leg looks shorter and turned outward"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hemiarthroplasty vs Total Hip \u2014 Decision Factors",
+        "scenario": "Garden III displaced femoral neck fracture. 72-year-old female, ambulatory at baseline, lives independently, cognitively intact. Orthopedic surgeon offers: cemented hemiarthroplasty vs total hip arthroplasty (THA).",
+        "newData": {
+          "FractureType": "Garden III \u2014 displaced",
+          "PatientBaseline": "Ambulatory, independent, cognitively intact",
+          "Age": "72",
+          "Note": "Displaced femoral neck fracture management: hemiarthroplasty historically standard; THA now preferred for cognitively intact, ambulatory, lower-risk patients with pre-existing hip arthritis (HEALTH trial: THA reduces revision rate at 2 years). Orthopedic exam for pre-existing arthritis guides choice. Surgical timing: within 24-48h improves mortality."
+        }
+      }
     }
   },
   "infectious-mononucleosis-with-tonsillar-hypertrophy": {
@@ -53298,6 +54847,18 @@ window.CRT_DATA = {
         "I have swollen lymph nodes all over",
         "I took amoxicillin and broke out in a rash everywhere"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "EBV Mono \u2014 Tonsillar Obstruction and Steroid Indication",
+        "scenario": "Teenager, tonsils touching midline ('kissing tonsils'), SpO2 93% on room air, drooling, snoring loudly. Monospot positive, EBV confirmed. ENT evaluating for tonsillectomy.",
+        "newData": {
+          "SpO2": "93%",
+          "Tonsils": "Kissing \u2014 touching midline",
+          "Monospot": "Positive",
+          "Note": "Severe tonsillar obstruction in EBV mono: corticosteroids (dexamethasone 0.3mg/kg IV) are indicated for severe airway obstruction \u2014 reduce tonsillar swelling within hours. Tonsillectomy is rarely needed and risks bleeding in EBV mono (increased vascularity). Admit for airway monitoring; avoid contact sports x3-4 weeks (splenic rupture risk); avoid ampicillin/amoxicillin (maculopapular rash in 90%)."
+        }
+      }
     }
   },
   "complete-heart-block-v2": {
@@ -53452,6 +55013,18 @@ window.CRT_DATA = {
         "my heart feels very slow",
         "I live near the woods and I've had a lot of tick exposure"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Permanent Pacemaker \u2014 Class I Indication",
+        "scenario": "Degenerative conduction disease, complete heart block, no reversible cause identified. HR 38, symptomatic (syncope x2). Electrophysiology evaluating pacemaker type.",
+        "newData": {
+          "HR": "38",
+          "Symptoms": "Syncope x2",
+          "Reversible": "None identified",
+          "Note": "Permanent pacemaker: Class I indication for symptomatic third-degree AVB with no reversible cause. Pacemaker selection: DDDR (dual-chamber) preferred over VVIR (single-chamber) \u2014 reduces pacemaker syndrome, preserves AV synchrony, superior in patients with preserved LV function. CRT-P (biventricular) if EF <50% at time of pacemaker. LEADLESS pacemaker (Micra) for isolated ventricular pacing when atrial lead not needed."
+        }
+      }
     }
   },
   "gastroenteritis": {
@@ -53927,6 +55500,17 @@ window.CRT_DATA = {
         "I feel nauseous and I can't find a comfortable position",
         "it came on out of nowhere while I was sleeping"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Ovarian Torsion \u2014 Fertility-Sparing Approach",
+        "scenario": "OR confirms: right adnexal torsion, ovary appears dusky-blue but not necrotic. 22-year-old patient. Surgeon can detorse and see if the ovary recovers OR remove the adnexa now. What is the current evidence on detorsion of a 'necrotic-appearing' ovary?",
+        "newData": {
+          "OvaryAppearance": "Dusky-blue \u2014 necrotic-appearing",
+          "PatientAge": "22F",
+          "Note": "Detorsion first, then assess: even dusky/blue-appearing ovaries recover 93% of the time after detorsion; avoid immediate oophorectomy based on appearance alone; assess after 10-15 minutes post-detorsion (improved color = viable); remove only if clearly necrotic; fertility preservation is the goal in young women"
+        }
+      }
     }
   },
   "myocarditis": {
@@ -54237,6 +55821,17 @@ window.CRT_DATA = {
         "this is different from my usual angina",
         "I stopped my aspirin before a dental procedure and kept forgetting to restart"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "NSTEMI \u2014 Dual Antiplatelet Therapy Choice",
+        "scenario": "NSTEMI confirmed, going to cath lab tomorrow. Cardiologist choosing between ticagrelor vs prasugrel vs clopidogrel for P2Y12 inhibitor. Patient has no prior stroke, no prior bleeding, no anticoagulation.",
+        "newData": {
+          "PCI_Planned": "Elective PCI tomorrow",
+          "NoContraindications": "No prior stroke, no active bleeding",
+          "Note": "P2Y12 inhibitor choice: ticagrelor (preferred if no contraindication \u2014 more potent, reversible, 90mg BID) > clopidogrel (requires CYP2C19 activation \u2014 poor metabolizers have reduced efficacy); prasugrel (most potent, irreversible, 10mg QD \u2014 avoid if prior stroke/TIA, age >75, weight <60kg). ACC/AHA: prefer ticagrelor or prasugrel over clopidogrel for ACS with planned PCI. Start aspirin 325mg loading immediately."
+        }
+      }
     }
   },
   "takotsubo-cardiomyopathy": {
@@ -54390,6 +55985,18 @@ window.CRT_DATA = {
         "I've been under extreme stress \u2014 my husband just died",
         "my echo showed something wrong with my heart that they can't explain with a blockage"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cardiogenic Shock in Takotsubo \u2014 LVOT Obstruction",
+        "scenario": "Takotsubo confirmed on ventriculogram (apical ballooning). However, BP now 82/50 \u2014 cardiogenic shock developing. Echo shows: EF 25%, but also dynamic LVOT obstruction gradient 60 mmHg. Cardiology fellow starts dobutamine. Is this correct?",
+        "newData": {
+          "EF": "25% (acute depression)",
+          "LVOTGradient": "60 mmHg (dynamic obstruction)",
+          "BP": "82/50",
+          "Note": "Critical: inotropes (dobutamine) worsen LVOT obstruction in Takotsubo \u2014 are contraindicated. Treatment: IV fluids, phenylephrine (pure vasoconstrictor), beta-blocker to reduce obstruction"
+        }
+      }
     }
   },
   "wpw-syndrome": {
@@ -54542,6 +56149,18 @@ window.CRT_DATA = {
         "this has happened before but never this fast",
         "it's irregular and I feel terrible"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pre-excited AF \u2014 Defibrillation Decision",
+        "scenario": "Patient in AF with pre-excitation \u2014 HR 210, wide irregular QRS on monitor. BP 88/54, diaphoretic. The resident reaches for adenosine. You stop them. Why, and what do you do instead?",
+        "newData": {
+          "HR": "210",
+          "BP": "88/54",
+          "Rhythm": "AF with pre-excitation \u2014 wide irregular QRS",
+          "Note": "Adenosine/AV nodal blockers (verapamil, diltiazem, beta-blockers, digoxin) are CONTRAINDICATED in pre-excited AF \u2014 block the AVN, forcing all conduction down accessory pathway \u2192 VF. Treatment: synchronized cardioversion if hemodynamically unstable; procainamide or ibutilide if stable"
+        }
+      }
     }
   },
   "druginduced-av-block": {
@@ -54831,6 +56450,16 @@ window.CRT_DATA = {
         "my heart feels like it keeps pausing",
         "I started a new pill for my heart rhythm 5 days ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Drug Withdrawal \u2014 Recovery Timeline",
+        "scenario": "Identified culprit: metoprolol 200mg BID + diltiazem 360mg QD + digoxin 0.25mg QD (triple AV nodal blockade). All three agents stopped. HR now 42, still complete heart block at 24 hours. Cardiologist asks: wait longer vs proceed to pacemaker.",
+        "newData": {
+          "HR": "42 at 24h off all agents",
+          "Note": "Drug-induced CHB \u2014 half-life: metoprolol ~4-6h, diltiazem ~8h, digoxin ~36h; expect recovery within 48-72h of discontinuation; temporary pacing bridge if symptomatic; permanent pacemaker only if block persists beyond drug washout period"
+        }
+      }
     }
   },
   "new-onset-seizure": {
@@ -55738,6 +57367,18 @@ window.CRT_DATA = {
         "high fever and he sounds terrible \u2014 barky and scared",
         "he looks toxic \u2014 this is different from before"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Intubation in Bacterial Tracheitis \u2014 Pseudomembrane Management",
+        "scenario": "Child intubated in OR. Anesthesia confirms: thick yellow-green pseudomembrane visible in trachea. Now on mechanical ventilator, tube occluding intermittently with secretions, high peak airway pressures (50 cmH2O). How do you manage the airway over the next 48-72 hours?",
+        "newData": {
+          "Intubated": "Yes \u2014 pseudomembrane visualized",
+          "PeakPressure": "50 cmH2O \u2014 intermittent tube occlusion",
+          "Organism": "S. aureus (bacterial tracheitis)",
+          "Note": "Bacterial tracheitis airway management: frequent suctioning (q2-4h), serial bronchoscopies to clear pseudomembranes; IV antibiotics (antistaphylococcal coverage \u00b1 MRSA); humidified air reduces mucus viscosity; extubation when febrile course resolves and secretions manageable (avg 3-5 days)"
+        }
+      }
     }
   },
   "severe-croup": {
@@ -55893,6 +57534,18 @@ window.CRT_DATA = {
         "stridor even when she's calm",
         "she's working so hard to breathe \u2014 I'm terrified"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Westley Score 9 \u2014 Heliox and Airway Decision",
+        "scenario": "2-year-old: inspiratory stridor at rest, nasal flaring, suprasternal + subcostal retractions, cyanosis on room air. Westley score 9 (severe). Dexamethasone and racemic epinephrine given. SpO2 88% on 4L NC.",
+        "newData": {
+          "WestleyScore": "9 (severe \u2014 threshold for intervention)",
+          "SpO2": "88% on 4L NC",
+          "Treatment": "Dexamethasone + racemic epinephrine given",
+          "Note": "Severe croup (Westley \u22658): trial of heliox (helium-oxygen 70:30) reduces turbulent flow and work of breathing; consider high-flow nasal cannula (HFNC); if SpO2 not improving after heliox + repeat racemic epi, prepare for intubation (smaller ET tube, have surgeon ready for surgical airway); ICU admission for all Westley \u22656 post-treatment. Racemic epi effect lasts 2h \u2014 observe for rebound."
+        }
+      }
     }
   },
   "submersion-injury": {
@@ -56379,6 +58032,16 @@ window.CRT_DATA = {
         "the pain is severe \u2014 nothing like normal post-op pain",
         "my leg looks different \u2014 shorter and rotated inward"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Avascular Necrosis \u2014 Long-Term Risk Disclosure",
+        "scenario": "Posterior THA dislocation successfully reduced with procedural sedation. Plain films confirm concentric reduction. Patient asks: 'Can I go home? And will this keep happening?'",
+        "newData": {
+          "Reduction": "Successful \u2014 concentric on XR",
+          "Note": "Post-THA dislocation: (1) Admit for observation and abduction pillow immobilization; (2) Hip precautions instruction (avoid flexion >90\u00b0, internal rotation, adduction); (3) Recurrence rate after first dislocation ~15-30%; revision surgery if recurrent; AVN not typically a concern post-THA (prosthetic femoral head); however, native hip dislocation has high AVN risk \u2014 different management"
+        }
+      }
     }
   },
   "intertrochanteric-fracture": {
@@ -56534,6 +58197,18 @@ window.CRT_DATA = {
         "my right hip is in terrible pain",
         "my leg looks like it's turned out"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Perioperative Optimization \u2014 Timing and Anesthesia",
+        "scenario": "Unstable intertrochanteric fracture (AO/OTA 31A3). Patient on warfarin (INR 2.4) and metformin. Orthopedic surgery wants to operate tomorrow morning. Anesthesia asks about reversal and anesthesia type (spinal vs general).",
+        "newData": {
+          "INR": "2.4 (on warfarin)",
+          "Metformin": "Taken today",
+          "SurgeryTarget": "Tomorrow morning",
+          "Note": "Perioperative optimization: (1) Reverse warfarin with 4F-PCC or vitamin K for INR correction; target INR <1.5 for spinal; (2) Hold metformin 24h before surgery (lactic acidosis risk with contrast); (3) Spinal anesthesia preferred over general in hip fracture \u2014 reduces blood loss, DVT, delirium risk; (4) Surgery within 24-48h reduces mortality \u2014 do not delay >48h for anticoagulation reversal alone"
+        }
+      }
     }
   },
   "thiazideinduced-hyponatremia": {
@@ -57158,6 +58833,17 @@ window.CRT_DATA = {
         "he's drooling and can barely swallow",
         "he sounds muffled and won't eat anything"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Descending Mediastinitis Risk \u2014 CT Staging",
+        "scenario": "CT neck with contrast: retropharyngeal collection 3.8cm with ring enhancement. No gas, no descending extension visible. Child is febrile, WBC 28,000, refusing to eat. ENT offers: IV antibiotics alone vs operative drainage.",
+        "newData": {
+          "CTFindings": "Retropharyngeal collection 3.8cm \u2014 no gas, no mediastinal extension",
+          "WBC": "28,000",
+          "Note": "Retropharyngeal abscess >2cm or failure to improve on IV antibiotics in 24-48h = operative drainage; watch for descending mediastinitis (re-image with fever persistence); IV antibiotics: ampicillin-sulbactam or clindamycin; monitor airway carefully"
+        }
+      }
     }
   },
   "reactive-arthritis": {
@@ -57468,6 +59154,17 @@ window.CRT_DATA = {
         "I missed my factor infusions this week",
         "I have hemophilia and I know this is a bleed"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hemophilia A \u2014 Factor VIII Dosing",
+        "scenario": "Hemophilia A, factor VIII level 2% (severe). Acute hemarthrosis right knee. Hematology calculating factor VIII dose.",
+        "newData": {
+          "FactorVIII_Level": "2% (severe hemophilia A)",
+          "Bleeding": "Hemarthrosis right knee",
+          "Note": "Factor VIII dosing: for hemarthrosis (moderate bleed) \u2014 target 50% factor activity. Dose (IU) = weight(kg) \u00d7 desired rise (%) \u00f7 2. For 70kg patient: 70 \u00d7 48 \u00f7 2 = 1,680 IU. Frequency: q12h. Extended half-life products allow less frequent dosing. RICE for joint (Rest, Ice, Compression, Elevation). Prophylaxis in severe hemophilia: primary prophylaxis from age 1-2 prevents hemophilic arthropathy. Emicizumab (bispecific Ab) as subcutaneous prophylaxis."
+        }
+      }
     }
   },
   "dilutional-coagulopathy": {
@@ -57792,6 +59489,17 @@ window.CRT_DATA = {
         "it feels like something is stuck in my eye",
         "I slept in my contacts last night and now I can barely open my eye"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Contact Lens Keratitis \u2014 P. aeruginosa Empiric Coverage",
+        "scenario": "Contact lens wearer with severe red eye, photophobia, mucopurulent discharge, corneal infiltrate. Culture taken. Ophthalmology asking about empiric antibiotic choice.",
+        "newData": {
+          "Contact lens": "Yes \u2014 overnight wear",
+          "Infiltrate": "Corneal \u2014 central",
+          "Note": "Contact lens keratitis \u2014 Pseudomonas is the most common and dangerous organism (can cause corneal perforation in hours). Empiric coverage: fluoroquinolone drops (ciprofloxacin 0.3% or ofloxacin 0.3%) hourly while awake x24-48h then taper. Remove all contact lenses and do not reinsert until healed. Referral to cornea subspecialist for infiltrates >1mm or central location. Fortified tobramycin + cefazolin for severe cases."
+        }
+      }
     }
   },
   "brain-metastasis": {
@@ -57946,6 +59654,17 @@ window.CRT_DATA = {
         "I've had headaches that are getting worse",
         "my vision seems off on the right side"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Brain Mets \u2014 Dexamethasone and Seizure Prophylaxis",
+        "scenario": "NSCLC patient, 2 brain metastases found on surveillance MRI (1.2cm and 0.8cm). Asymptomatic \u2014 no headache, no neurological deficits. The oncologist asks: does this patient need dexamethasone and antiepileptic prophylaxis?",
+        "newData": {
+          "BrainMets": "2 lesions \u2014 1.2cm and 0.8cm",
+          "Symptoms": "Asymptomatic",
+          "Note": "Dexamethasone for brain mets: indicated only for symptomatic edema (headache, neurological deficits); avoid in asymptomatic patients \u2014 no benefit and significant side effects. Antiepileptic prophylaxis: NOT recommended for patients with brain mets who have never had a seizure (AAN guideline); levetiracetam if seizure has occurred"
+        }
+      }
     }
   },
   "primary-brain-tumor": {
@@ -58099,6 +59818,18 @@ window.CRT_DATA = {
         "my right hand is weaker than it used to be",
         "my family says I'm not myself \u2014 my personality changed"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "GBM \u2014 Stupp Protocol and MGMT Significance",
+        "scenario": "GBM, IDH wild-type, MGMT methylated (confirmed). Patient is 59 years old, KPS 80. Neuro-oncology reviewing treatment with patient and family.",
+        "newData": {
+          "Molecular": "IDH wild-type, MGMT methylated",
+          "KPS": "80",
+          "Age": "59",
+          "Note": "Stupp protocol: concurrent temozolomide (TMZ) + radiotherapy (60 Gy / 30 fractions), then adjuvant TMZ x6 cycles. MGMT methylation predicts benefit from alkylating chemotherapy (TMZ) \u2014 MGMT methylated GBM has median survival 21-23 months vs 12-14 months unmethylated. Bevacizumab for recurrence. Tumor treating fields (TTFields, Optune) approved as adjunct. Palliative care involvement at diagnosis improves quality of life."
+        }
+      }
     }
   },
   "cns-lymphoma": {
@@ -58253,6 +59984,18 @@ window.CRT_DATA = {
         "I have HIV and my CD4 is low",
         "I can't find words and my balance is off"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "PCNSL \u2014 MTX-Based Chemotherapy vs Radiation",
+        "scenario": "Periventricular ring-enhancing lesion, biopsy: diffuse large B-cell lymphoma. Patient is 55 years old, ECOG 1, CSF positive for lymphoma cells. Oncology and radiation oncology disagree on first-line treatment.",
+        "newData": {
+          "Biopsy": "DLBCL \u2014 PCNSL",
+          "CSF": "Positive for lymphoma cells",
+          "ECOG": "1",
+          "Note": "PCNSL treatment: high-dose methotrexate (HD-MTX) based chemotherapy is first-line (MATRix or MATRIX regimen). Whole brain radiation (WBRT) causes significant neurocognitive toxicity \u2014 deferred as consolidation or salvage only. Rituximab added to HD-MTX improves outcomes. HIV-negative PCNSL is distinct from HIV-associated (EBV-driven) \u2014 different staging and treatment approach."
+        }
+      }
     }
   },
   "todd-paralysis": {
@@ -58716,6 +60459,17 @@ window.CRT_DATA = {
         "I have to lean forward on a shopping cart to get relief",
         "the pain goes from my butt down both legs"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Central Stenosis \u2014 Surgical Timing Decision",
+        "scenario": "Central lumbar stenosis on MRI with bilateral L4-L5 radiculopathy. Conservative management (PT, epidural steroids) tried for 6 months \u2014 minimal improvement. Now neurogenic claudication limiting walking to 1 block. Neurosurgery consultation.",
+        "newData": {
+          "ConservativeTrials": "PT + 2 epidural steroids \u2014 6 months",
+          "FunctionalLimitation": "1 block walking distance",
+          "Note": "Surgical decompression for lumbar spinal stenosis: indicated after failed conservative care (>6 weeks physical therapy, \u00b1 epidural steroid injections). Laminectomy vs laminotomy vs spinal fusion (fusion added if spondylolisthesis or instability). Surgery superior to continued conservative care for neurogenic claudication (SPORT trial). No emergency unless cauda equina signs develop."
+        }
+      }
     }
   },
   "perianal-abscess": {
@@ -59525,6 +61279,18 @@ window.CRT_DATA = {
         "they started as itchy hives a few months ago",
         "I'm elderly and my skin looks like it's covered in blisters"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pemphigoid vs Pemphigus \u2014 Treatment Difference",
+        "scenario": "Generalized blistering rash: large tense bullae on normal skin. Nikolsky sign negative. Biopsy: subepidermal blister. DIF: IgG linear deposits at BMZ. Diagnosis: bullous pemphigoid. Dermatology starts prednisone. Rheumatology asks about duration and steroid-sparing agents.",
+        "newData": {
+          "Bullae": "Tense on normal skin",
+          "NikolskySign": "Negative",
+          "Biopsy": "Subepidermal \u2014 DIF linear IgG at BMZ",
+          "Note": "Bullous pemphigoid treatment: topical clobetasol 40g/day (equally effective to systemic steroids, less toxic \u2014 Joly trial); systemic prednisone 0.5mg/kg for widespread disease; steroid-sparing: doxycycline + niacinamide (for mild-moderate), azathioprine, mycophenolate, or rituximab for refractory. Distinguish from pemphigus vulgaris (intraepidermal, mucosal involvement, Nikolsky positive \u2014 higher mortality)."
+        }
+      }
     }
   },
   "orthostatic-hypotension": {
@@ -59852,6 +61618,19 @@ window.CRT_DATA = {
         "she won't drink anything and she's barely urinating",
         "her eyes look sunken and she's not her normal self"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Pediatric Dehydration \u2014 Severity Assessment and Rehydration",
+        "scenario": "2-year-old, 3 days of vomiting and diarrhea, last wet diaper 8 hours ago. HR 148, RR 32, capillary refill 3 seconds, eyes sunken, mucous membranes dry, lethargic. Weight 12kg (estimated baseline 14kg).",
+        "newData": {
+          "Weight": "12kg (estimated 14kg baseline \u2014 14% dehydration)",
+          "HR": "148",
+          "CRT": "3 seconds",
+          "Alertness": "Lethargic",
+          "Note": "Severe dehydration (>10% weight loss in pediatric): IV/IO bolus 20mL/kg NS immediately (repeat x3 if persistent shock). After initial resuscitation: replace deficit over 24h with isotonic fluid; monitor glucose (hypoglycemia common in pediatric dehydration); ondansetron for vomiting to facilitate ORT. Hypernatremic dehydration (suspect if prolonged, breastfed infant): slower correction to avoid cerebral edema."
+        }
+      }
     }
   },
   "ibs-management": {
@@ -60162,6 +61941,18 @@ window.CRT_DATA = {
         "it always looks like a stroke \u2014 I've been to the ER many times",
         "my mother has the same thing"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hemiplegic Migraine \u2014 Ruling Out Stroke",
+        "scenario": "Headache resolving after 4h, but left arm weakness persists for 6 hours. MRI brain: no DWI restriction, no hemorrhage. CTA head and neck: normal. MRA: normal. Stroke team and neurology disagree on diagnosis.",
+        "newData": {
+          "MRI": "Normal \u2014 no DWI restriction",
+          "CTA": "Normal",
+          "WeaknessDuration": "6 hours (prolonged aura)",
+          "Note": "Hemiplegic migraine \u2014 aura including motor deficit can last hours to days; family history crucial (familial hemiplegic migraine = CACNA1A/ATP1A2/SCN1A mutations); triptans and ergotamines CONTRAINDICATED in hemiplegic migraine; treat with IV ketorolac + antiemetics; prophylaxis with verapamil or topiramate"
+        }
+      }
     }
   },
   "structural-lesion": {
@@ -60471,6 +62262,17 @@ window.CRT_DATA = {
         "I see floaters everywhere \u2014 it happened out of nowhere",
         "I have diabetes and I know my eye disease is bad"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Vitreous Hemorrhage \u2014 B-Scan Ultrasound for Retinal Detachment",
+        "scenario": "Sudden painless visual loss in 62-year-old diabetic. Dense vitreous hemorrhage \u2014 fundoscopy: unable to view posterior pole. Ophthalmologist ordering B-scan ultrasound.",
+        "newData": {
+          "Fundoscopy": "Blocked \u2014 dense vitreous hemorrhage",
+          "Patient": "62, T2DM, no recent eye exam",
+          "Note": "B-scan ultrasound: essential when vitreous hemorrhage obscures fundoscopy \u2014 can detect underlying retinal detachment (requires urgent vitrectomy) vs no detachment (can observe). Cause in diabetic: proliferative diabetic retinopathy (PDR) is most likely. Management: (1) No retinal detachment \u2014 observe 4-6 weeks for spontaneous resolution; (2) Persistent/non-clearing hemorrhage \u2192 vitrectomy; (3) Retinal detachment detected \u2192 urgent vitrectomy. Anti-VEGF (bevacizumab) may accelerate VH absorption."
+        }
+      }
     }
   },
   "severe-cellulitis": {
@@ -60629,6 +62431,18 @@ window.CRT_DATA = {
         "I have fever and I feel terrible",
         "this has happened before but it spread faster this time"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Cellulitis vs Necrotizing Fasciitis \u2014 Surgical Exploration",
+        "scenario": "Day 2 on IV cefazolin: fever persisting (39.2), pain and erythema extending beyond markers, WBC 22,000. LRINEC score calculated: 8 (high risk). Surgeon says 'I don't think this is NF.' You disagree. How do you make the case for operative exploration?",
+        "newData": {
+          "LRINECScore": "8 (high risk NF)",
+          "Progression": "Erythema extending beyond markers despite IV antibiotics",
+          "WBC": "22,000",
+          "Note": "LRINEC \u22656 = high risk for NF; progression on antibiotics is the key clinical red flag; finger test at the bedside (lack of resistance to blunt dissection = NF); surgical exploration is the ONLY definitive diagnostic and therapeutic intervention \u2014 a negative exploration is acceptable; missed NF is fatal"
+        }
+      }
     }
   },
   "peritonsillar-abscess-v2": {
@@ -60786,6 +62600,18 @@ window.CRT_DATA = {
         "it hurts to even open my mouth",
         "my voice sounds like I have a hot potato in my mouth"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Failed Needle Aspiration \u2014 Next Steps",
+        "scenario": "Needle aspiration yielded only 1mL pus (thick). Patient still unable to swallow, uvula deviating, unable to open mouth >2 finger-widths. ENT asks: repeat aspiration vs incision and drainage vs tonsillectomy.",
+        "newData": {
+          "AspirationYield": "1mL (inadequate drainage)",
+          "Trismus": "<2 finger-widths",
+          "UvulaDeviation": "Present",
+          "Note": "Failed needle aspiration \u2014 proceed to incision and drainage (I&D); quinsy tonsillectomy reserved for recurrent abscess or failure of I&D; post-procedure: IV antibiotics, adequate analgesia, ensure patient can tolerate PO before discharge; return precautions for airway compromise"
+        }
+      }
     }
   },
   "peritonsillar-cellulitis": {
@@ -61266,6 +63092,18 @@ window.CRT_DATA = {
         "this is the second time \u2014 it scared us",
         "her belly feels fine but there was a lot of blood"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Meckel's Rule of 2s \u2014 Surgical Decision",
+        "scenario": "Technetium-99m pertechnetate scan positive \u2014 ectopic gastric mucosa in right lower quadrant consistent with Meckel's diverticulum. 3-year-old male with recurrent painless rectal bleeding. Pediatric surgery asks about operative approach.",
+        "newData": {
+          "TcScan": "Positive \u2014 ectopic gastric mucosa RLQ",
+          "Age": "3 years",
+          "Presentation": "Recurrent painless rectal bleeding",
+          "Note": "Meckel's diverticulum management: symptomatic Meckel's (bleeding, obstruction, intussusception) = surgical resection always indicated. Approach: laparoscopic resection of the diverticulum \u00b1 small bowel segmental resection if the base is broad or if heterotopic mucosa extends to the base. Rule of 2s: 2% of population, 2 feet from ileocecal valve, 2 inches long, 2x more common in males, usually presents in first 2 years. Incidental Meckel's in adults: observation vs prophylactic resection debated."
+        }
+      }
     }
   },
   "small-bowel-volvulus": {
@@ -62075,6 +63913,18 @@ window.CRT_DATA = {
         "she has a heart defect and she has unusual facial features",
         "we're worried about her immune system too"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "DiGeorge \u2014 Beyond T-Cell Deficiency",
+        "scenario": "Diagnosis confirmed: 22q11.2 deletion on FISH. Neonatal hypocalcemia treated. Cardiology sees congenital heart defect (interrupted aortic arch). Immunology evaluating T-cell function. Genetics asks about the full syndrome spectrum.",
+        "newData": {
+          "Genetics": "22q11.2 deletion \u2014 FISH confirmed",
+          "CardiacDefect": "Interrupted aortic arch",
+          "Calcium": "Hypocalcemia treated",
+          "Note": "22q11.2 deletion (DiGeorge/velocardiofacial syndrome): complete workup required: (1) Cardiac: full CHD evaluation (conotruncal defects in 75%); (2) Immunology: T-cell count (thymic aplasia in complete DiGeorge); (3) Calcium/PTH: hypoparathyroidism; (4) Neurodevelopment: learning disabilities in 90%, schizophrenia risk 25% by adulthood; (5) Cleft palate/velopharyngeal insufficiency; (6) Renal ultrasound (structural anomalies). Most live into adulthood with support."
+        }
+      }
     }
   },
   "hypersensitivity-pneumonitis": {
@@ -62389,6 +64239,18 @@ window.CRT_DATA = {
         "fever and I'm coughing up brown stuff",
         "I turned up my oxygen and it didn't help"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HCAP \u2014 Broadening Coverage Decision",
+        "scenario": "Day 2: no improvement on ceftriaxone + azithromycin. New fever, WBC rising to 18,000. Sputum culture growing Gram-negative rods (identification pending). Patient recently hospitalized twice in the past 6 months and on home oxygen.",
+        "newData": {
+          "WBC": "18,000 (rising)",
+          "SputumCulture": "GNR \u2014 identification pending",
+          "RecentHospitalizations": "Twice in 6 months",
+          "Note": "Healthcare-associated risk factors \u2014 broaden coverage to include Pseudomonas (piperacillin-tazobactam or cefepime) + MRSA coverage (vancomycin) pending cultures; de-escalate when final culture and sensitivity available"
+        }
+      }
     }
   },
   "rheumatoid-arthritis-new": {
@@ -62700,6 +64562,18 @@ window.CRT_DATA = {
         "I have fever and the knee is killing me",
         "I had a skin infection near the incision a few weeks ago"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Prosthetic Joint Infection \u2014 Two-Stage vs One-Stage Revision",
+        "scenario": "Chronic knee pain for 3 months post-TKA, now acutely worse. Joint aspiration: WBC 42,000 PMN 90%. Synovial fluid culture: CoNS (coagulase-negative Staphylococcus). Orthopedics presents options: antibiotics alone vs one-stage vs two-stage revision.",
+        "newData": {
+          "JointCulture": "CoNS \u2014 probable prosthetic joint infection",
+          "SynovialWBC": "42,000",
+          "Duration": "3 months (chronic)",
+          "Note": "Chronic PJI (>4 weeks) \u2014 antibiotics alone have low cure rate (<20%); two-stage revision (explant, 6 weeks IV antibiotics, reimplant) is gold standard; one-stage revision acceptable if good bone stock, sensitive organism, and patient fit; DAIR (debridement + implant retention) only for acute PJI <4 weeks"
+        }
+      }
     }
   },
   "delirium-elderly": {
@@ -62859,6 +64733,17 @@ window.CRT_DATA = {
         "he's trying to pull out his IV and he thinks he's at home",
         "this confusion started yesterday \u2014 he was fine at admission"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Hospital-Acquired Delirium \u2014 HELP Bundle",
+        "scenario": "Day 3 post-hip replacement. 78M, now delirious \u2014 pulling at IV lines, trying to get out of bed, unresponsive to verbal redirection. Family at bedside, very distressed. Nurse asks for haloperidol order. The HELP bundle was not ordered on admission.",
+        "newData": {
+          "Setting": "Post-op day 3 \u2014 hip replacement",
+          "Delirium": "Hyperactive \u2014 agitated, pulling at lines",
+          "Note": "HELP bundle components (should have been ordered on admission): hearing aids/glasses in, early mobilization, sleep hygiene, reorientation, fluid/nutrition optimization. Now: non-pharmacologic first (family presence, lighting, familiar objects); haloperidol only if safety risk; avoid benzodiazepines; treat underlying cause (post-op pain, urinary retention, hypoxia)"
+        }
+      }
     }
   },
   "migraine-management": {
@@ -63476,6 +65361,19 @@ window.CRT_DATA = {
         "I feel full after just a few bites",
         "I have stomach pain and I've been anemic"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Alarm Features \u2014 Urgency of Endoscopy",
+        "scenario": "55-year-old with 4-month history of epigastric pain, unintentional 18-pound weight loss, early satiety, and dysphagia. Iron deficiency anemia on CBC. Primary care treated with PPI for 3 months without improvement.",
+        "newData": {
+          "Duration": "4 months alarm symptoms",
+          "WeightLoss": "18 pounds unintentional",
+          "IDA": "Iron deficiency anemia",
+          "PPI": "3 months \u2014 no improvement",
+          "Note": "Alarm features mandate urgent endoscopy (<2 weeks): unintentional weight loss, dysphagia, iron deficiency anemia, persistent vomiting, GI bleeding, palpable mass/lymphadenopathy. PPI trial is inappropriate when alarm features are present. Gastric adenocarcinoma presents late; endoscopy with multiple biopsies (Correa cascade: H. pylori \u2192 atrophic gastritis \u2192 intestinal metaplasia \u2192 dysplasia \u2192 cancer). CT staging after endoscopic diagnosis."
+        }
+      }
     }
   },
   "tonsillar-malignancy": {
@@ -63627,6 +65525,18 @@ window.CRT_DATA = {
         "one tonsil is much larger than the other",
         "I'm a non-smoker but I've heard HPV can cause this"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HPV-Associated Oropharyngeal SCC \u2014 Staging and Prognosis",
+        "scenario": "Painless right tonsillar mass, 2.5cm, with ipsilateral neck node 2.8cm. Biopsy: squamous cell carcinoma. p16 immunostaining: positive (HPV-associated). Patient is 48 years old, non-smoker.",
+        "newData": {
+          "Biopsy": "SCC \u2014 p16 positive (HPV-associated)",
+          "Stage": "T2N1 \u2014 clinical",
+          "Age": "48, non-smoker",
+          "Note": "HPV-associated OSCC (p16 positive): significantly better prognosis than HPV-negative (5-year survival ~85% vs 50%). AJCC 8th edition staging for p16+ OSCC is different \u2014 N1 = same-side single node regardless of size. Treatment: concurrent chemoradiation (cisplatin + IMRT) for most; surgery (TORS) for early stage. De-intensification trials ongoing. Partner and patient HPV vaccination discussion."
+        }
+      }
     }
   },
   "meningioma": {
@@ -63779,6 +65689,18 @@ window.CRT_DATA = {
         "I've had mild headaches for months \u2014 I ignored them",
         "the MRI shows a mass attached to the brain lining"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Symptomatic Meningioma \u2014 Observation vs Surgery vs Radiation",
+        "scenario": "Parasagittal meningioma 3.5cm, presenting with seizure. MRI: extra-axial mass with dural attachment, surrounding edema. Neurosurgery and radiation oncology both consulted.",
+        "newData": {
+          "Size": "3.5cm parasagittal",
+          "Presentation": "New seizure",
+          "Edema": "Surrounding on MRI",
+          "Note": "Symptomatic meningioma management: surgical resection is primary treatment for accessible symptomatic meningiomas \u2014 Simpson grade 1 resection (including dural attachment) has lowest recurrence rate. Parasagittal location risks superior sagittal sinus injury \u2014 pre-op MR venography to assess sinus involvement. SRS (stereotactic radiosurgery) for surgical risks or residual disease. Anti-epileptic for seizure management pre-operatively. WHO grade (pathology) guides surveillance frequency."
+        }
+      }
     }
   },
   "ectopic-pregnancy-workup": {
@@ -64402,6 +66324,17 @@ window.CRT_DATA = {
         "the swelling came on immediately \u2014 it's massive",
         "I can't tell where the testicle is anymore"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Testicular Rupture \u2014 Surgical vs Expectant",
+        "scenario": "Blunt scrotal trauma from soccer ball. Severe pain, swollen hematoma, scrotal echymosis. Ultrasound: disrupted tunica albuginea, heterogeneous testicular parenchyma.",
+        "newData": {
+          "US": "Disrupted tunica albuginea",
+          "Hematoma": "Large \u2014 scrotal",
+          "Note": "Testicular rupture: surgery within 72 hours is associated with >90% testicular salvage rate. Delayed surgery (>72h) reduces salvage rate significantly. OR emergently for testicular exploration, hematoma evacuation, and primary repair of tunica albuginea. Hematocele alone (intact tunica) may be managed expectantly with analgesia and ice, but re-examine at 24-48h."
+        }
+      }
     }
   },
   "lightning-strike-injury": {
@@ -64720,6 +66653,17 @@ window.CRT_DATA = {
         "the bite barely hurts \u2014 almost nothing at first",
         "now I feel weak and my speech is getting slurred"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Delayed Paralysis \u2014 ICU Monitoring Duration",
+        "scenario": "Envenomation 4 hours ago. Currently asymptomatic \u2014 no neurological deficits. Toxicology says admit for observation. Patient wants to go home \u2014 'I feel fine.'",
+        "newData": {
+          "Time": "4 hours post-envenomation",
+          "Symptoms": "None currently",
+          "Note": "Coral snake neurotoxicity has a delayed onset of 8-12 hours \u2014 patients can be completely asymptomatic for hours then develop rapid bulbar paralysis and respiratory failure. Admission for minimum 24-48h observation is mandatory. Antivenom (North American coral snake antivenin) should be given prophylactically if envenomation confirmed \u2014 do not wait for symptoms. Once paralysis begins, antivenom is less effective. Respiratory support may be needed."
+        }
+      }
     }
   },
   "aortic-saddle-embolus": {
@@ -65651,6 +67595,18 @@ window.CRT_DATA = {
         "I'm vomiting and I haven't had a bowel movement in 4 days",
         "it's more tender than usual but I don't have fever yet"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Strangulation vs Simple Obstruction \u2014 CT Interpretation",
+        "scenario": "CT abdomen: incisional hernia containing small bowel loop, narrow neck, minimal fat stranding, no pneumatosis. But: white blood cell count rising, patient looking more unwell hour-by-hour. Surgeon says 'CT looks okay for now.' You are concerned.",
+        "newData": {
+          "CT": "Narrow-neck hernia, minimal fat stranding, no pneumatosis",
+          "WBC": "Rising \u2014 16,000 \u2192 19,000 over 4 hours",
+          "ClinicalTrend": "Worsening",
+          "Note": "CT signs of strangulation lag behind clinical deterioration \u2014 absence of pneumatosis or gas in portal vein does NOT exclude strangulation. Narrow neck + rising WBC + worsening clinical exam = operative exploration. Do not wait for CT to 'look worse.'"
+        }
+      }
     }
   },
   "mesenteric-lymphadenitis": {
@@ -66112,6 +68068,17 @@ window.CRT_DATA = {
         "antibiotics always help but it comes right back",
         "they finally did a CT and found something"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Malignancy Disclosure \u2014 Management Pivot",
+        "scenario": "Bronchoscopy: obstructing mass right mainstem bronchus. Biopsy result: NSCLC adenocarcinoma. CT chest-abdomen-pelvis: mediastinal lymphadenopathy, no distant metastases \u2014 potentially resectable. Oncology and thoracic surgery both want to see the patient today. What does he need to know?",
+        "newData": {
+          "Biopsy": "NSCLC adenocarcinoma",
+          "Stage": "Clinical IIIa pending PET",
+          "Note": "NSCLC disclosure \u2014 staging determines resectability; PET scan required before surgical planning; molecular testing (EGFR, ALK, ROS1, PD-L1) is standard even for potentially resectable disease; multidisciplinary tumor board"
+        }
+      }
     }
   },
   "lung-cancer-with-postobstructive-process": {
@@ -66267,6 +68234,18 @@ window.CRT_DATA = {
         "the veins on my chest are more visible than usual",
         "I feel more short of breath and I have a new cough"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "SVC Syndrome \u2014 Stent vs Radiation",
+        "scenario": "CTA confirms: SVC compression from right hilar lymphadenopathy. Pathology from bronchoscopy pending. The patient has significant facial edema, JVD, and arm swelling. Interventional radiology offers SVC stenting. Oncology wants to wait for tissue diagnosis first.",
+        "newData": {
+          "Imaging": "SVC compression \u2014 right hilar mass",
+          "Symptoms": "Facial edema, JVD, bilateral arm swelling",
+          "Biopsy": "Pending",
+          "Note": "SVC syndrome \u2014 if severe/life-threatening (airway compromise, CNS symptoms), stenting before tissue diagnosis is appropriate; if moderate, wait for tissue to guide treatment (lymphoma responds to steroids + chemo; NSCLC needs targeted therapy)"
+        }
+      }
     }
   },
   "scid-ada": {
@@ -66557,6 +68536,18 @@ window.CRT_DATA = {
         "always the weird infections \u2014 Staph, Aspergillus, Serratia",
         "the infections are deep \u2014 not just skin stuff"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CGD \u2014 Prophylaxis and Stem Cell Transplant",
+        "scenario": "X-linked CGD confirmed (absent respiratory burst on DHR assay). Patient is 6 years old, second episode of Aspergillus pneumonia. Immunology discussing long-term management and curative options.",
+        "newData": {
+          "Diagnosis": "X-linked CGD \u2014 absent DHR",
+          "Age": "6 years",
+          "Aspergillus": "Second pneumonia episode",
+          "Note": "CGD long-term management: (1) TMP-SMX prophylaxis daily (bacterial); (2) Itraconazole or voriconazole prophylaxis (fungal); (3) IFN-gamma (reduces bacterial infections by 70%, not fungal); (4) Avoid decaying organic material (fungal spore exposure); (5) Curative option: allogeneic HSCT \u2014 best outcomes with HLA-matched sibling donor; gene therapy trials for CGD. Active fungal infection must be cleared before HSCT."
+        }
+      }
     }
   },
   "hypereosinophilic-syndrome": {
@@ -66727,6 +68718,18 @@ window.CRT_DATA = {
         "now I'm short of breath and the echocardiogram showed something",
         "I have rashes and I feel terrible"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Organ Damage \u2014 Cardiac Monitoring",
+        "scenario": "Peripheral eosinophilia 12,000/mm\u00b3 for >1 month. Bone marrow: FIP1L1-PDGFRA fusion negative. Echocardiogram: intracardiac thrombus, mild endocardial fibrosis. Hematology diagnosing HES.",
+        "newData": {
+          "Eosinophilia": "12,000 for >1 month",
+          "PDGFRA": "Fusion negative",
+          "Echo": "Intracardiac thrombus, endocardial fibrosis",
+          "Note": "HES with cardiac involvement: initiate anticoagulation immediately (intracardiac thrombus); corticosteroids (prednisone 1mg/kg) for eosinophil reduction; PDGFRA-negative HES \u2014 mepolizumab (anti-IL-5) as steroid-sparing agent; cardiac monitoring with serial echos; Loeffer endocarditis is the major cause of mortality in HES; cardiology consultation for potential endomyocardial biopsy and valve repair if Loeffer's progresses."
+        }
+      }
     }
   },
   "postconcussion-with-intracranial-hypertension": {
@@ -66882,6 +68885,18 @@ window.CRT_DATA = {
         "I have blurry vision and it's getting worse",
         "the eye doctor saw swelling behind my eye"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Post-Concussion ICP \u2014 Idiopathic Intracranial Hypertension",
+        "scenario": "6 weeks post-concussion. Persistent daily headache, pulsatile tinnitus, transient visual obscurations, papilledema on fundoscopy. MRI: bilateral optic nerve sheath dilation, slit-like ventricles. LP opening pressure: 36 cmH2O.",
+        "newData": {
+          "LPOpeningPressure": "36 cmH2O (normal <25)",
+          "Papilledema": "Confirmed on fundoscopy",
+          "MRI": "Optic nerve sheath dilation, small ventricles",
+          "Note": "Idiopathic intracranial hypertension (IIH): post-concussion may be coincident. Treatment: acetazolamide 500-1000mg BID; weight loss if overweight; serial ophthalmology for visual field monitoring. Optic nerve sheath fenestration or CSF shunting for vision-threatening disease. Avoid tetracyclines (worsen IIH). Urgent ophthalmology for papilledema \u2014 visual field testing to detect enlarging blind spot."
+        }
+      }
     }
   },
   "musculoskeletal-back-pain": {
@@ -67191,6 +69206,18 @@ window.CRT_DATA = {
         "the pain is immediate and severe \u2014 much worse than I'd expect",
         "I have cancer that spread to my bones"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Surgical Stabilization vs Radiation \u2014 Mirels Score",
+        "scenario": "Pathologic fracture through lytic metastatic lesion, right femoral diaphysis. Breast cancer primary. CT: >50% cortical destruction, 5cm length. Patient's pain with weight bearing was 9/10 before fracture. Oncology offering radiation; orthopedics offering prophylactic fixation.",
+        "newData": {
+          "Location": "Femoral diaphysis \u2014 right",
+          "CorticialDestruction": ">50%, 5cm",
+          "PrimaryTumor": "Breast cancer",
+          "Note": "Mirels score for impending/actual pathologic fracture: site (lower extremity = 3), nature (lytic = 3), size (>2/3 cortical = 3), pain (functional = 3). Score \u22659 = surgical fixation recommended. This patient scores high. Radiation after surgical fixation is standard (radiation sterilizes tumor bed, prevents progression). Radiation alone for low-risk lesions. Bone-modifying agents (denosumab/zoledronate) to prevent future skeletal events."
+        }
+      }
     }
   },
   "pubic-ramus-fracture": {
@@ -68037,6 +70064,19 @@ window.CRT_DATA = {
         "chest tight, heart racing, I can't breathe",
         "this has happened before and they always say my heart is fine"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Panic Attack \u2014 Cardiac and Pulmonary Exclusion",
+        "scenario": "25-year-old female with palpitations, shortness of breath, chest tightness, derealization, and fear of dying \u2014 lasted 12 minutes, now resolved. She has had 4 episodes in 2 months. Heart rate during episode: 168 (per smart watch). ECG now: normal.",
+        "newData": {
+          "HR_During_Episode": "168 (smart watch)",
+          "CurrentECG": "Normal sinus rhythm",
+          "Episodes": "4 in 2 months",
+          "Age": "25F",
+          "Note": "Panic disorder is a diagnosis of exclusion. Must rule out: (1) Paroxysmal SVT (Holter or event monitor \u2014 HR 168 could be SVT not sinus); (2) Thyrotoxicosis (TSH); (3) Pheochromocytoma (24h urinary metanephrines if episodic hypertension); (4) PE (if dyspnea pattern). Holter monitor is essential before psychiatric diagnosis \u2014 a third of 'panic attacks' prove to be SVT on monitoring. Only after organic causes excluded: CBT + SSRI first-line for panic disorder."
+        }
+      }
     }
   },
   "brain-masstumor": {
@@ -68151,6 +70191,17 @@ window.CRT_DATA = {
         "I'm having trouble with my right hand \u2014 weakness",
         "my family brought me in because they think I'm acting differently"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Brain Metastasis vs Primary Tumor \u2014 Key Imaging Features",
+        "scenario": "MRI: 3 lesions \u2014 one 2.8cm right parietal ring-enhancing mass with surrounding edema, two smaller lesions (0.6cm and 0.4cm) at gray-white junction. Patient is a 58-year-old smoker. No known primary malignancy.",
+        "newData": {
+          "MRI": "3 lesions \u2014 ring-enhancing, gray-white junction distribution",
+          "PatientHistory": "58-year-old smoker, no known malignancy",
+          "Note": "Multiple lesions at gray-white junction in a smoker = metastases until proven otherwise (primary GBM is typically solitary). Priority workup: (1) CT chest-abdomen-pelvis with contrast (find the primary \u2014 NSCLC most common); (2) Brain biopsy if no extracranial primary identified; (3) PET scan for occult primary. Gray-white junction = metastatic (tumor cells lodge at junction where flow slows). Ring enhancement in HIV = toxoplasmosis first (try pyrimethamine-sulfadiazine empirically before biopsy)."
+        }
+      }
     }
   },
   "cellulitis": {
@@ -68420,6 +70471,18 @@ window.CRT_DATA = {
         "I was briefly confused and now I'm getting worse",
         "I had a headache and now I can't remember things clearly"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "ICP Management \u2014 Osmotherapy Decision",
+        "scenario": "Cerebral contusion right frontal-temporal. GCS 9 (was 12 in field). CT: 3cm contusion, no midline shift, surrounding edema. ICP monitoring placed: ICP 28 mmHg, CPP 62 mmHg. Neurosurgery asks: mannitol vs hypertonic saline first-line for ICP reduction.",
+        "newData": {
+          "ICP": "28 mmHg",
+          "CPP": "62 mmHg",
+          "CT": "3cm contusion, surrounding edema, no shift",
+          "Note": "ICP management: goal ICP <20, CPP >60-70. Osmotherapy: mannitol 0.25-1g/kg IV bolus (serum osm target <320) OR 3% NaCl (no strict ceiling, serum Na target 145-155). Hypertonic saline preferred in hypovolemic patients (mannitol is diuretic). Elevate HOB 30\u00b0, normocapnia (pCO2 35-40), normothermia, euvolemia. Decompressive craniectomy if refractory ICP despite medical management."
+        }
+      }
     }
   },
   "crswNP-biologics": {
@@ -68534,6 +70597,19 @@ window.CRT_DATA = {
         "I can't smell anything and I'm congested constantly",
         "dupilumab helped a little but not enough \u2014 I need something different"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CRSwNP After Failed Surgery \u2014 Biologic Selection",
+        "scenario": "Patient has CRSwNP with total opacification on CT (Lund-Mackay 24/24). Prior sinus surgery x2 \u2014 failed. Blood eosinophils 640/mm\u00b3. FeNO 68 ppb. Aspirin-sensitive asthma (AERD) also present. ENT and allergy-immunology discussing biologic therapy.",
+        "newData": {
+          "LundMackay": "24/24 (total opacification)",
+          "Eosinophils": "640/mm\u00b3",
+          "FeNO": "68 ppb",
+          "AERD": "Concurrent aspirin-sensitive asthma",
+          "Note": "CRSwNP biologic selection: dupilumab (anti-IL-4R\u03b1) is FDA-approved for CRSwNP + asthma + eosinophilic dermatitis \u2014 best choice for this patient (triple comorbidity). Omalizumab also FDA-approved for CRSwNP (IgE-mediated mechanism). Mepolizumab approved for eosinophilic CRSwNP. Dupilumab in AERD: reduces polyp burden and improves aspirin sensitivity \u2014 preferred in AERD context."
+        }
+      }
     }
   },
   "crswNP-dupilumab": {
@@ -68648,6 +70724,18 @@ window.CRT_DATA = {
         "my smell is completely gone",
         "I've tried sprays and surgery \u2014 nothing lasts"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Dupilumab Response \u2014 Monitoring and Expectations",
+        "scenario": "Dupilumab started 4 months ago for CRSwNP. Patient reports some improvement in smell but still significant nasal blockage. Follow-up CT shows partial reduction in polyposis (Lund-Mackay now 16/24). ENT asks: continue vs adjust dose vs consider surgery while on biologic?",
+        "newData": {
+          "LundMackay": "16/24 (partial response)",
+          "Duration": "4 months",
+          "SmellImprovement": "Partial",
+          "Note": "Dupilumab response in CRSwNP: full response may take 6-12 months; partial responders at 4 months often show further improvement. Nasal lavage with saline and topical corticosteroids should continue during biologic therapy. Consider revision surgery if residual disease obstructs sinus drainage despite biologic response \u2014 surgery + biologic may achieve better outcomes than either alone. Monitor SNOT-22 score and smell testing (UPSIT) at each visit for objective tracking."
+        }
+      }
     }
   },
   "diffuse-axonal-injury": {
@@ -68762,6 +70850,17 @@ window.CRT_DATA = {
         "she opened her eyes briefly but now she's not responding",
         "the CT looks less bad than her exam"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Prognosis Communication \u2014 Minimally Conscious State",
+        "scenario": "Day 14 post-severe TBI. GCS 6 \u2014 eyes open spontaneously but no command following. MRI: multifocal white matter injury (corpus callosum, brainstem). Family asks: 'Will he wake up? Should we consider withdrawing care?'",
+        "newData": {
+          "GCS": "6 at day 14",
+          "MRI": "Multifocal DAI \u2014 corpus callosum + brainstem",
+          "Note": "DAI prognosis: corpus callosum + brainstem involvement = severe DAI \u2014 worst prognosis category. However, meaningful recovery is possible, especially in young patients; most functional recovery occurs in first 6 months but can continue for 2 years. Prognostication at 2 weeks is premature \u2014 recommend minimum 3-6 months before withdrawal discussions. Refer to neurorehabilitation. Ethics consultation and palliative care for family support."
+        }
+      }
     }
   },
   "giant-cell-arteritis-with-ophthalmic": {
@@ -68876,6 +70975,17 @@ window.CRT_DATA = {
         "my vision went dark in my right eye for a minute \u2014 it came back",
         "my jaw hurts so much I stopped eating solid food"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Vision Loss \u2014 Permanent vs Recoverable",
+        "scenario": "GCA confirmed on biopsy (skip lesions with giant cells). High-dose prednisolone started. Day 3: right eye vision has not improved (still 20/400). Patient asks: 'Will I get my vision back?'",
+        "newData": {
+          "Biopsy": "GCA confirmed \u2014 giant cell arteritis",
+          "Day3Vision": "Right eye unchanged 20/400",
+          "Note": "Visual prognosis in GCA: vision loss from GCA-related ischemic optic neuropathy is usually irreversible \u2014 steroids prevent further loss (including fellow eye) but do not restore lost vision. Be honest but compassionate in disclosure. Main goal of treatment: protect the fellow eye. Risk of bilateral blindness without treatment: 20-50%. Tocilizumab (IL-6 inhibitor) as steroid-sparing agent."
+        }
+      }
     }
   },
   "infiltrative-cardiomyopathy": {
@@ -69030,6 +71140,16 @@ window.CRT_DATA = {
         "my echo shows thick walls but my EKG looks small",
         "carpal tunnel syndrome in both hands \u2014 had surgery twice"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "TTR vs AL Amyloid \u2014 Treatment Divergence",
+        "scenario": "Cardiac biopsy: apple-green birefringence on Congo red. Now the question: TTR amyloid (hereditary/wild-type) vs AL amyloid (plasma cell dyscrasia) \u2014 the treatment is completely different. What workup distinguishes them?",
+        "newData": {
+          "Biopsy": "Amyloid confirmed \u2014 Congo red positive",
+          "Note": "TTR vs AL distinction: serum/urine protein electrophoresis + free light chains for AL; technetium pyrophosphate scan (Tc-PYP) high uptake for ATTR; gene sequencing for hereditary TTR. Treatment: ATTR \u2192 tafamidis; AL \u2192 hematology for plasma cell therapy"
+        }
+      }
     }
   },
   "maria-santos": {
@@ -69144,6 +71264,20 @@ window.CRT_DATA = {
         "I'm short of breath just walking to the bathroom",
         "I feel terrible \u2014 more than a cold"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "CAP \u2014 No Improvement at 48 Hours",
+        "scenario": "Started on ceftriaxone + azithromycin. Day 2: still febrile (38.9), WBC 14,000, O2 requirements not improving. CXR shows consolidation unchanged or slightly worse. Blood culture: no growth at 48h. What is your next step?",
+        "newData": {
+          "Day": "2 \u2014 no clinical improvement",
+          "Temp": "38.9",
+          "WBC": "14,000",
+          "CXR": "Consolidation unchanged",
+          "BloodCulture": "No growth at 48h",
+          "Note": "Non-response at 48h \u2014 consider: (1) resistant organism (add MRSA coverage if risk factors); (2) atypical organism (Legionella \u2014 urine antigen); (3) wrong diagnosis (PE, malignancy, organizing pneumonia); (4) parapneumonic effusion \u2014 tap if present"
+        }
+      }
     }
   },
   "medication-overdose": {
@@ -69438,6 +71572,20 @@ window.CRT_DATA = {
         "my blood sugar is high and something else is off",
         "my doctor checked my labs and said to come in immediately"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Triple Acid-Base Disorder \u2014 Systematic Analysis",
+        "scenario": "ICU patient: pH 7.28, pCO2 28, HCO3 12, AG 28 (corrected 20), albumin 2.8. Respiratory compensation (Winter's formula): expected pCO2 = 1.5(12) + 8 \u00b1 2 = 26-28. Na 138, Cl 98, K 3.8. Glucose 480.",
+        "newData": {
+          "pH": "7.28",
+          "pCO2": "28",
+          "HCO3": "12",
+          "AG": "28 (corrected for albumin: 20)",
+          "Glucose": "480",
+          "Note": "Triple acid-base disorder: (1) High anion gap metabolic acidosis (corrected AG 20 \u2014 diabetic ketoacidosis); (2) Respiratory compensation appropriate (pCO2 28, within expected range); (3) Delta-delta ratio: \u0394AG/\u0394HCO3 = (20-12)/(24-12) = 8/12 = 0.67 (<1 = coexisting non-gap metabolic acidosis). Three disorders: HAGMA + non-HAGMA + respiratory compensation. Treat DKA while identifying source of non-gap acidosis (GI loss? RTA?)."
+        }
+      }
     }
   },
   "psoriasis-moderate-severe": {
@@ -69673,6 +71821,18 @@ window.CRT_DATA = {
         "he's drooling and won't let us touch him",
         "he has no barking cough \u2014 this feels different"
       ]
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "Epiglottitis Confirmed \u2014 Airway Management",
+        "scenario": "Lateral neck X-ray: 'thumb sign' \u2014 swollen epiglottis. Child is drooling, leaning forward, refusing to lie down, audible stridor. ENT has been called. You are in the ED with the child.",
+        "newData": {
+          "XRay": "Thumb sign \u2014 swollen epiglottis",
+          "Drooling": "Present",
+          "Position": "Tripod \u2014 will not lie down",
+          "Note": "Do NOT examine oropharynx or agitate the child before airway team assembled. Optimal management: controlled intubation in OR with ENT/anesthesia present for surgical airway backup; IV antibiotics (ceftriaxone); avoid racemic epinephrine (treats subglottic disease, not supraglottic)"
+        }
+      }
     }
   },
   "angelman-syndrome": {
@@ -69939,6 +72099,18 @@ window.CRT_DATA = {
       "RR": "28",
       "Temp": "36.8\u00b0C",
       "SpO2": "90% on room air"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "AADC Deficiency \u2014 Gene Therapy Era",
+        "scenario": "AADC deficiency confirmed: low CSF HVA and 5-HIAA, undetectable AADC activity on plasma testing. 18-month-old with severe hypotonia, oculogyric crises, autonomic instability. Parents asking about treatment options.",
+        "newData": {
+          "CSF": "Low HVA, low 5-HIAA",
+          "AADC_Activity": "Undetectable",
+          "Symptoms": "Severe hypotonia, oculogyric crises, autonomic instability",
+          "Note": "AADC deficiency treatment: (1) Dopamine agonists (pramipexole, rotigotine \u2014 limited effect); (2) MAO-B inhibitors (selegiline); (3) Pyridoxal phosphate (cofactor, modest benefit); (4) Gene therapy: eladocagene exuparvovec (AAV2-AADC intraputaminal injection) \u2014 FDA-approved 2023, transformative outcomes in clinical trials (walking, reduced oculogyric crises). First disease-specific gene therapy for a neurotransmitter disorder. Refer to specialized center."
+        }
+      }
     }
   },
   "hae-genetics": {
@@ -70074,6 +72246,18 @@ window.CRT_DATA = {
       "RR": "20",
       "Temp": "98.4\u00b0F",
       "SpO2": "96%"
+    },
+    "caseDepth": {
+      "v2": {
+        "title": "HAE Prophylaxis \u2014 Berotralstat vs C1-INH Concentrate",
+        "scenario": "HAE Type I confirmed (C1-INH level 28%, functional 22%). Patient averages 2 attacks per month. Currently using icatibant for acute attacks. Allergist recommends long-term prophylaxis.",
+        "newData": {
+          "C1INH_Level": "28% (low)",
+          "AttackFrequency": "2 per month",
+          "CurrentTreatment": "Icatibant on-demand",
+          "Note": "Long-term HAE prophylaxis options: (1) Berotralstat (oral plasma kallikrein inhibitor, QD) \u2014 well-tolerated, no infusions; (2) C1-INH concentrate IV or SC (Haegarda SC 2x/week) \u2014 gold standard; (3) Lanadelumab (SC monthly injection, anti-kallikrein monoclonal) \u2014 high efficacy. Choice based on route preference, attack severity, access. Trigger avoidance: estrogen-containing OCP, ACE inhibitors, dental/surgical stress (prophylax before procedures)."
+        }
+      }
     }
   }
 };
