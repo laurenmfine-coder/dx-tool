@@ -426,6 +426,9 @@ function loadData() {
   var u = FAC.currentUser;
   var users = getUsers();
 
+  // Preload simulation analytics in background
+  loadSimData();
+
   // Update header
   document.getElementById('facUserName').textContent = u.displayName;
   document.getElementById('facUserRole').textContent = u.role === 'admin' ? 'Administrator' : 'Faculty';
@@ -490,6 +493,9 @@ function renderOverview() {
   var graded = FAC.submissions.filter(function(s){ return hasFeedback(s.studentName, s.week); }).length;
   var ungraded = submitted - graded;
   var pct = submitted > 0 ? Math.round((graded/submitted)*100) : 0;
+  var simSessions = SIM.stats.total || 0;
+  var simCompleted = SIM.stats.completed || 0;
+  var simStudents = SIM.stats.uniqueStudents || 0;
 
   var html = '';
 
@@ -1009,8 +1015,23 @@ window.unassignStudent = function(studentUsername, facultyUsername) {
 function renderAnalytics() {
   var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">📈 Class Analytics</div><div class="fac-section-sub">Performance across your assigned students</div></div></div>';
 
+  // ── Simulation Analytics (Supabase) ──────────────────────────────────────────
+  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">🧠 Simulation Analytics — Last 90 Days</div><div class="fac-section-sub">From rad_study_sessions · Supabase</div></div></div>';
+  html += '<div id="sim-analytics-container">' + renderSimAnalytics() + '</div>';
+
+  // Load sim data if not yet loaded
+  if (!SIM.loaded && !SIM.loading) {
+    loadSimData().then(function() {
+      var el = document.getElementById('sim-analytics-container');
+      if (el) el.innerHTML = renderSimAnalytics();
+    });
+  }
+
+  html += '<div style="height:32px;border-top:1px solid var(--border);margin:24px 0"></div>';
+  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">📝 EMR Documentation Analytics</div><div class="fac-section-sub">From student note submissions · Local session</div></div></div>';
+
   if (FAC.submissions.length === 0) {
-    return html + '<div class="fac-empty"><div class="fac-empty-icon">📊</div><div class="fac-empty-title">No data yet</div><div class="fac-empty-desc">Analytics will appear once students submit their documentation.</div></div>';
+    return html + '<div class="fac-empty"><div class="fac-empty-icon">📊</div><div class="fac-empty-title">No documentation submissions yet</div><div class="fac-empty-desc">EMR analytics appear once students submit notes in the Virtual EMR.</div></div>';
   }
 
   // Calc rubric averages
@@ -1333,6 +1354,179 @@ async function sbQuery(path) {
     if (!r.ok) return null;
     return await r.json();
   } catch(e) { return null; }
+}
+
+// ── Simulation Analytics (rad_study_sessions) ─────────────────────────────────
+var SIM = { loaded: false, loading: false, sessions: [], stats: {} };
+
+async function loadSimData() {
+  if (SIM.loading) return;
+  SIM.loading = true;
+  try {
+    var cutoff = new Date(Date.now() - 90*24*60*60*1000).toISOString();
+    var rows = await sbQuery(
+      'rad_study_sessions?created_at=gte.' + encodeURIComponent(cutoff) +
+      '&select=session_id,student_id,case_id,category,acuity,status,completed_at,' +
+      'initial_ddx,final_ddx,phases_completed,gaps_identified,passive_data,' +
+      'reasoning_tools,readability_summary,ddx_comparison,case_source' +
+      '&order=created_at.desc&limit=2000'
+    );
+    if (!rows || !Array.isArray(rows)) { SIM.loaded = true; SIM.loading = false; return; }
+    SIM.sessions = rows;
+    // Compute aggregate stats
+    var completed = rows.filter(function(r){ return r.status === 'complete'; });
+    var byCategory = {};
+    var ddxAccuracy = [];
+    var phaseCompletion = [];
+    var gapsByCase = {};
+    var acuityDist = {1:0,2:0,3:0,4:0};
+
+    completed.forEach(function(r) {
+      var cat = (r.category || 'unknown').toLowerCase();
+      if (!byCategory[cat]) byCategory[cat] = {count:0, gaps:0};
+      byCategory[cat].count++;
+
+      var gaps = 0;
+      if (r.gaps_identified && Array.isArray(r.gaps_identified)) gaps = r.gaps_identified.length;
+      else if (typeof r.gaps_identified === 'number') gaps = r.gaps_identified;
+      byCategory[cat].gaps += gaps;
+
+      if (r.acuity) acuityDist[r.acuity] = (acuityDist[r.acuity]||0) + 1;
+
+      var phases = parseInt(r.phases_completed) || 0;
+      phaseCompletion.push(phases);
+
+      // DDx accuracy: did final DDx include the correct diagnosis?
+      if (r.ddx_comparison) {
+        try {
+          var dc = typeof r.ddx_comparison === 'string' ? JSON.parse(r.ddx_comparison) : r.ddx_comparison;
+          if (dc && dc.finalContainsTarget !== undefined) ddxAccuracy.push(dc.finalContainsTarget ? 1 : 0);
+        } catch(e) {}
+      }
+
+      if (r.case_id) {
+        if (!gapsByCase[r.case_id]) gapsByCase[r.case_id] = {count:0, gaps:0, caseId:r.case_id};
+        gapsByCase[r.case_id].count++;
+        gapsByCase[r.case_id].gaps += gaps;
+      }
+    });
+
+    var avgPhases = phaseCompletion.length ? Math.round(phaseCompletion.reduce(function(a,b){return a+b;},0)/phaseCompletion.length*10)/10 : 0;
+    var ddxRate = ddxAccuracy.length ? Math.round(ddxAccuracy.reduce(function(a,b){return a+b;},0)/ddxAccuracy.length*100) : null;
+
+    // Top gap cases (most gaps per session)
+    var topGapCases = Object.values(gapsByCase)
+      .filter(function(g){ return g.count >= 2; })
+      .map(function(g){ return {caseId:g.caseId, avgGaps: Math.round(g.gaps/g.count*10)/10, count:g.count}; })
+      .sort(function(a,b){ return b.avgGaps - a.avgGaps; })
+      .slice(0, 8);
+
+    // Top categories by volume
+    var topCats = Object.entries(byCategory)
+      .sort(function(a,b){ return b[1].count - a[1].count; })
+      .slice(0, 8);
+
+    SIM.stats = {
+      total: rows.length,
+      completed: completed.length,
+      completionRate: rows.length ? Math.round(completed.length/rows.length*100) : 0,
+      uniqueStudents: new Set(rows.map(function(r){return r.student_id;})).size,
+      avgPhases: avgPhases,
+      ddxRate: ddxRate,
+      byCategory: byCategory,
+      topCats: topCats,
+      topGapCases: topGapCases,
+      acuityDist: acuityDist
+    };
+
+    SIM.loaded = true;
+  } catch(e) {
+    console.warn('SimData load error:', e);
+  }
+  SIM.loading = false;
+}
+
+function renderSimAnalytics() {
+  var s = SIM.stats;
+  if (!SIM.loaded) return '<div style="padding:32px;text-align:center;color:var(--text-muted);font-size:13px">Loading simulation data…</div>';
+  if (!SIM.sessions.length) return '<div style="padding:32px;text-align:center;color:var(--text-muted);font-size:13px">No simulation sessions in the past 90 days.</div>';
+
+  var html = '';
+
+  // Stat strip
+  html += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px">';
+  var stats = [
+    {val: s.total, label: 'Total Sessions', sub: 'Last 90 days', cls: ''},
+    {val: s.completed, label: 'Completed', sub: s.completionRate + '% completion rate', cls: 'green'},
+    {val: s.uniqueStudents, label: 'Unique Students', sub: 'Active learners', cls: ''},
+    {val: s.avgPhases, label: 'Avg Phases Completed', sub: 'of 10 phases', cls: s.avgPhases >= 7 ? 'green' : 'red'},
+    {val: s.ddxRate !== null ? s.ddxRate + '%' : '—', label: 'DDx Accuracy', sub: 'Final DDx included target', cls: s.ddxRate >= 70 ? 'green' : s.ddxRate !== null ? 'red' : ''}
+  ];
+  stats.forEach(function(st) {
+    html += '<div class="fac-stat ' + st.cls + '">';
+    html += '<div class="fac-stat-val">' + st.val + '</div>';
+    html += '<div class="fac-stat-label">' + st.label + '</div>';
+    html += '<div class="fac-stat-sub">' + st.sub + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Two-column: top categories + top gap cases
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px">';
+
+  // Category breakdown
+  html += '<div class="fac-chart-card">';
+  html += '<div class="fac-chart-title">Sessions by Specialty (Top 8)</div>';
+  var maxCat = s.topCats.length ? s.topCats[0][1].count : 1;
+  s.topCats.forEach(function(c, i) {
+    var pct = Math.round(c[1].count / maxCat * 100);
+    var colors = ['#2874A6','#1B4F72','#2E86AB','#1D6A72','#2874A6','#3B8FCE','#1B5E8A','#0D3B66'];
+    html += '<div class="fac-bar">';
+    html += '<span class="fac-bar-label" style="text-transform:capitalize">' + esc(c[0].substring(0,16)) + '</span>';
+    html += '<div class="fac-bar-track"><div class="fac-bar-fill" style="width:' + pct + '%;background:' + colors[i%8] + '"></div></div>';
+    html += '<span class="fac-bar-val">' + c[1].count + '</span>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Top gap cases
+  html += '<div class="fac-chart-card">';
+  html += '<div class="fac-chart-title">Highest Gap Cases (avg gaps/session)</div>';
+  if (s.topGapCases.length === 0) {
+    html += '<div style="padding:16px;color:var(--text-muted);font-size:12px">No gap data yet.</div>';
+  } else {
+    var maxGap = s.topGapCases[0] ? s.topGapCases[0].avgGaps : 1;
+    s.topGapCases.forEach(function(g) {
+      var pct = maxGap > 0 ? Math.round(g.avgGaps / maxGap * 100) : 0;
+      html += '<div class="fac-bar">';
+      html += '<span class="fac-bar-label" style="font-size:10px">' + esc(g.caseId.replace(/-/g,' ').substring(0,18)) + '</span>';
+      html += '<div class="fac-bar-track"><div class="fac-bar-fill" style="width:' + pct + '%;background:#DC2626"></div></div>';
+      html += '<span class="fac-bar-val">' + g.avgGaps + '</span>';
+      html += '</div>';
+    });
+  }
+  html += '</div>';
+
+  html += '</div>';
+
+  // Acuity distribution
+  html += '<div class="fac-chart-card" style="margin-bottom:0">';
+  html += '<div class="fac-chart-title">Case Acuity Distribution</div>';
+  html += '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-top:4px">';
+  var acuityLabels = {1:'Critical (ESI 1)', 2:'Urgent (ESI 2)', 3:'Moderate (ESI 3)', 4:'Stable (ESI 4)'};
+  var acuityColors = {1:'#DC2626', 2:'#D97706', 3:'#2874A6', 4:'#059669'};
+  [1,2,3,4].forEach(function(lvl) {
+    var cnt = s.acuityDist[lvl] || 0;
+    var pct = s.completed > 0 ? Math.round(cnt/s.completed*100) : 0;
+    html += '<div style="text-align:center;padding:12px;background:var(--surface);border-radius:8px;border:1px solid var(--border)">';
+    html += '<div style="font-size:22px;font-weight:800;color:' + acuityColors[lvl] + '">' + cnt + '</div>';
+    html += '<div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-top:2px">' + acuityLabels[lvl] + '</div>';
+    html += '<div style="font-size:10px;color:var(--text-muted)">' + pct + '% of sessions</div>';
+    html += '</div>';
+  });
+  html += '</div></div>';
+
+  return html;
 }
 
 // ── Coverage state (populated by loadCoverageData) ────────────────────────────
