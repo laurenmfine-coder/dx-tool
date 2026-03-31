@@ -25,14 +25,14 @@ const FLODESK_API = 'https://api.flodesk.com/v1';
 // Fill these in after creating segments in Flodesk dashboard
 // Account Settings → Segments → Create → copy the ID from the URL
 const SEGMENT_IDS = {
-  'rdx-first-sim':         'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-sim-completed':     'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-ddx-struggle':      'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-milestone-10cases': 'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-milestone-25cases': 'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-emr-submitted':     'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-reengagement-7d':   'REPLACE_WITH_FLODESK_SEGMENT_ID',
-  'rdx-faculty-weekly':    'REPLACE_WITH_FLODESK_SEGMENT_ID',
+  'rdx-first-sim':         '69cbcee3a3d44767f8634c78',
+  'rdx-sim-completed':     '69cbced78a4c9fed746a68cf',
+  'rdx-ddx-struggle':      '69cbcecbe9910eb144ab12e9',
+  'rdx-milestone-10cases': '69cbcebe052a921e15aec0dd',
+  'rdx-milestone-25cases': '69cbceb00b53304484d76230',
+  'rdx-emr-submitted':     '69cbcea3260e8257cbac39fc',
+  'rdx-reengagement-7d':   '69cbce92769dd876f093e4ef',
+  'rdx-faculty-weekly':    ''  // create in Flodesk when faculty digest workflow is ready,
 };
 
 /**
