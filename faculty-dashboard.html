@@ -426,8 +426,9 @@ function loadData() {
   var u = FAC.currentUser;
   var users = getUsers();
 
-  // Preload simulation analytics in background
+  // Preload analytics in background
   loadSimData();
+  loadEMRCloudData();
 
   // Update header
   document.getElementById('facUserName').textContent = u.displayName;
@@ -496,6 +497,8 @@ function renderOverview() {
   var simSessions = SIM.stats.total || 0;
   var simCompleted = SIM.stats.completed || 0;
   var simStudents = SIM.stats.uniqueStudents || 0;
+  var emrcTotal = EMRC.stats.total || 0;
+  var emrcStudents = EMRC.stats.uniqueStudents || 0;
 
   var html = '';
 
@@ -517,6 +520,12 @@ function renderOverview() {
   html += '<div class="fac-stat ' + (ungraded > 0 ? 'red' : 'green') + '"><div class="fac-stat-val">' + ungraded + '</div><div class="fac-stat-label">Need Grading</div><div class="fac-stat-sub">' + graded + ' already graded</div></div>';
   html += '<div class="fac-stat"><div class="fac-stat-val">' + submitted + '</div><div class="fac-stat-label">Total Submissions</div><div class="fac-stat-sub">across all cases</div></div>';
   html += '<div class="fac-stat ' + (pct >= 80 ? 'green' : 'amber') + '"><div class="fac-stat-val">' + pct + '%</div><div class="fac-stat-label">Graded</div><div class="fac-stat-sub">completion rate</div></div>';
+  html += '</div>';
+  html += '<div class="fac-stats" style="margin-top:12px">';
+  html += '<div class="fac-stat"><div class="fac-stat-val">' + simSessions + '</div><div class="fac-stat-label">Sim Sessions</div><div class="fac-stat-sub">Last 90 days · live</div></div>';
+  html += '<div class="fac-stat green"><div class="fac-stat-val">' + simStudents + '</div><div class="fac-stat-label">Active Sim Users</div><div class="fac-stat-sub">' + simCompleted + ' completed</div></div>';
+  html += '<div class="fac-stat"><div class="fac-stat-val">' + emrcTotal + '</div><div class="fac-stat-label">EMR Submissions</div><div class="fac-stat-sub">Cloud · last 90 days</div></div>';
+  html += '<div class="fac-stat"><div class="fac-stat-val">' + emrcStudents + '</div><div class="fac-stat-label">EMR Students</div><div class="fac-stat-sub">Unique submitters</div></div>';
   html += '</div>';
 
   // Recent submissions needing grading
@@ -1028,7 +1037,16 @@ function renderAnalytics() {
   }
 
   html += '<div style="height:32px;border-top:1px solid var(--border);margin:24px 0"></div>';
-  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">📝 EMR Documentation Analytics</div><div class="fac-section-sub">From student note submissions · Local session</div></div></div>';
+  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">📝 EMR Submission Analytics — Last 90 Days</div><div class="fac-section-sub">From emr_submissions · Supabase</div></div></div>';
+  html += '<div id="emr-cloud-analytics-container">' + renderEMRCloudAnalytics() + '</div>';
+  if (!EMRC.loaded && !EMRC.loading) {
+    loadEMRCloudData().then(function() {
+      var el = document.getElementById('emr-cloud-analytics-container');
+      if (el) el.innerHTML = renderEMRCloudAnalytics();
+    });
+  }
+  html += '<div style="height:32px;border-top:1px solid var(--border);margin:24px 0"></div>';
+  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">📋 EMR Grading — This Session</div><div class="fac-section-sub">Faculty feedback on student notes · Local session</div></div></div>';
 
   if (FAC.submissions.length === 0) {
     return html + '<div class="fac-empty"><div class="fac-empty-icon">📊</div><div class="fac-empty-title">No documentation submissions yet</div><div class="fac-empty-desc">EMR analytics appear once students submit notes in the Virtual EMR.</div></div>';
@@ -1444,6 +1462,140 @@ async function loadSimData() {
     console.warn('SimData load error:', e);
   }
   SIM.loading = false;
+}
+
+// ── EMR Submissions Analytics (emr_submissions Supabase table) ────────────────
+var EMRC = { loaded: false, loading: false, submissions: [], stats: {} };
+
+async function loadEMRCloudData() {
+  if (EMRC.loading) return;
+  EMRC.loading = true;
+  try {
+    var cutoff = new Date(Date.now() - 90*24*60*60*1000).toISOString();
+    var rows = await sbQuery(
+      'emr_submissions?submitted_at=gte.' + encodeURIComponent(cutoff) +
+      '&select=submission_id,student_id,case_id,category,diagnosis,acuity,' +
+      'submitted_at,caseframe_score,order_validation,readability_score' +
+      '&order=submitted_at.desc&limit=2000'
+    );
+    if (!rows || !Array.isArray(rows)) { EMRC.loaded = true; EMRC.loading = false; return; }
+    EMRC.submissions = rows;
+
+    // Aggregate stats
+    var byCat = {}, byCase = {}, cfScores = [], orderScores = [], readScores = [];
+    var uniqueStudents = new Set();
+
+    rows.forEach(function(r) {
+      uniqueStudents.add(r.student_id);
+      var cat = (r.category || 'unknown').toLowerCase();
+      byCat[cat] = (byCat[cat] || 0) + 1;
+
+      // CaseFrame scores
+      if (r.caseframe_score) {
+        try {
+          var cf = typeof r.caseframe_score === 'string' ? JSON.parse(r.caseframe_score) : r.caseframe_score;
+          if (cf && typeof cf.totalScore === 'number') cfScores.push(cf.totalScore);
+          if (cf && typeof cf.percentage === 'number') cfScores.push(cf.percentage);
+        } catch(e) {}
+      }
+
+      // Order validation
+      if (r.order_validation) {
+        try {
+          var ov = typeof r.order_validation === 'string' ? JSON.parse(r.order_validation) : r.order_validation;
+          if (ov && typeof ov.accuracy === 'number') orderScores.push(ov.accuracy);
+          else if (ov && typeof ov.score === 'number') orderScores.push(ov.score);
+        } catch(e) {}
+      }
+
+      // Readability
+      if (r.readability_score) {
+        try {
+          var rs = typeof r.readability_score === 'string' ? JSON.parse(r.readability_score) : r.readability_score;
+          if (rs && typeof rs.fleschKincaid === 'number') readScores.push(rs.fleschKincaid);
+          else if (rs && typeof rs.score === 'number') readScores.push(rs.score);
+        } catch(e) {}
+      }
+
+      // Per-case breakdown
+      if (r.case_id) {
+        if (!byCase[r.case_id]) byCase[r.case_id] = {count:0, cat:cat, diag:r.diagnosis||r.case_id};
+        byCase[r.case_id].count++;
+      }
+    });
+
+    var avg = function(arr) { return arr.length ? Math.round(arr.reduce(function(a,b){return a+b;},0)/arr.length*10)/10 : null; };
+
+    var topCats = Object.entries(byCat).sort(function(a,b){return b[1]-a[1];}).slice(0,8);
+    var topCases = Object.values(byCase).sort(function(a,b){return b.count-a.count;}).slice(0,8);
+
+    EMRC.stats = {
+      total: rows.length,
+      uniqueStudents: uniqueStudents.size,
+      avgCF: avg(cfScores),
+      avgOrder: avg(orderScores),
+      avgRead: avg(readScores),
+      topCats: topCats,
+      topCases: topCases
+    };
+    EMRC.loaded = true;
+  } catch(e) { console.warn('EMRC load error:', e); }
+  EMRC.loading = false;
+}
+
+function renderEMRCloudAnalytics() {
+  var s = EMRC.stats;
+  if (!EMRC.loaded) return '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">Loading EMR submission data…</div>';
+  if (!EMRC.submissions.length) return '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">No EMR submissions in Supabase yet.</div>';
+
+  var html = '';
+
+  // Stat strip
+  html += '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:20px">';
+  var stats = [
+    {val: s.total, label: 'Total Submissions', sub: 'Last 90 days', cls: ''},
+    {val: s.uniqueStudents, label: 'Unique Students', sub: 'Active in EMR', cls: ''},
+    {val: s.avgCF !== null ? s.avgCF + '%' : '—', label: 'Avg CaseFrame Score', sub: 'Illness script accuracy', cls: s.avgCF >= 70 ? 'green' : s.avgCF !== null ? 'red' : ''},
+    {val: s.avgOrder !== null ? s.avgOrder + '%' : '—', label: 'Avg Order Accuracy', sub: 'Appropriate ordering', cls: s.avgOrder >= 70 ? 'green' : s.avgOrder !== null ? 'red' : ''},
+    {val: s.avgRead !== null ? s.avgRead : '—', label: 'Avg Readability', sub: 'Flesch-Kincaid score', cls: ''}
+  ];
+  stats.forEach(function(st) {
+    html += '<div class="fac-stat ' + st.cls + '">';
+    html += '<div class="fac-stat-val">' + st.val + '</div>';
+    html += '<div class="fac-stat-label">' + st.label + '</div>';
+    html += '<div class="fac-stat-sub">' + st.sub + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Two columns: category breakdown + top cases
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">';
+
+  html += '<div class="fac-chart-card">';
+  html += '<div class="fac-chart-title">Submissions by Specialty</div>';
+  var maxCat = s.topCats.length ? s.topCats[0][1] : 1;
+  s.topCats.forEach(function(c, i) {
+    var pct = Math.round(c[1] / maxCat * 100);
+    var colors = ['#2874A6','#1B4F72','#2E86AB','#1D6A72','#3B8FCE','#1B5E8A','#0D3B66','#2874A6'];
+    html += '<div class="fac-bar"><span class="fac-bar-label" style="text-transform:capitalize">' + esc(c[0].substring(0,16)) + '</span>';
+    html += '<div class="fac-bar-track"><div class="fac-bar-fill" style="width:' + pct + '%;background:' + colors[i%8] + '"></div></div>';
+    html += '<span class="fac-bar-val">' + c[1] + '</span></div>';
+  });
+  html += '</div>';
+
+  html += '<div class="fac-chart-card">';
+  html += '<div class="fac-chart-title">Most Practiced Cases</div>';
+  var maxCase = s.topCases.length ? s.topCases[0].count : 1;
+  s.topCases.forEach(function(c) {
+    var pct = Math.round(c.count / maxCase * 100);
+    html += '<div class="fac-bar"><span class="fac-bar-label" style="font-size:10px">' + esc((c.diag||c.caseId||'').substring(0,20)) + '</span>';
+    html += '<div class="fac-bar-track"><div class="fac-bar-fill" style="width:' + pct + '%;background:#2874A6"></div></div>';
+    html += '<span class="fac-bar-val">' + c.count + '</span></div>';
+  });
+  html += '</div>';
+
+  html += '</div>';
+  return html;
 }
 
 function renderSimAnalytics() {
