@@ -151,6 +151,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);h
         <div class="suggestion" onclick="ask(this.textContent)">Who is missing pivot history elements most often?</div>
       </div>
       <div class="suggestion-group">
+        <div class="sg-title">OSCE Results</div>
+        <div class="suggestion" onclick="ask(this.textContent)">How did the cohort perform on OSCE stations?</div>
+        <div class="suggestion" onclick="ask(this.textContent)">Which students failed critical items on OSCEs?</div>
+        <div class="suggestion" onclick="ask(this.textContent)">Compare OSCE communication scores across students</div>
+      </div>
+      <div class="suggestion-group">
         <div class="sg-title">Communication</div>
         <div class="suggestion" onclick="ask(this.textContent)">Are students adapting their language for patients?</div>
         <div class="suggestion" onclick="ask(this.textContent)">Which students need coaching on empathy behaviors?</div>
@@ -334,6 +340,34 @@ async function tool_at_risk_students() {
   return { atRisk: atRisk, total: (data || []).length };
 }
 
+async function tool_osce_results() {
+  var from = document.getElementById('dateFrom').value;
+  var to   = document.getElementById('dateTo').value;
+  var { data, error } = await db
+    .from('osce_attempts')
+    .select('student_name,training_year,case_id,diagnosis,pct_score,critical_score,communication_score,management_score,completed_at')
+    .gte('completed_at', from + 'T00:00:00Z')
+    .lte('completed_at', to + 'T23:59:59Z')
+    .order('completed_at', { ascending: false })
+    .limit(200);
+  if (error) return { error: error.message };
+  var byStudent = {};
+  (data || []).forEach(function(r) {
+    if (!byStudent[r.student_name]) byStudent[r.student_name] = { attempts: 0, scores: [], critScores: [] };
+    byStudent[r.student_name].attempts++;
+    byStudent[r.student_name].scores.push(r.pct_score || 0);
+    byStudent[r.student_name].critScores.push(r.critical_score || 0);
+  });
+  var studentSummary = Object.entries(byStudent).map(function(e) {
+    var name = e[0]; var s = e[1];
+    var avg = Math.round(s.scores.reduce(function(a,b){return a+b;},0)/s.scores.length);
+    var crit = Math.round(s.critScores.reduce(function(a,b){return a+b;},0)/s.critScores.length);
+    return { name: name, attempts: s.attempts, avgScore: avg, avgCritical: crit, passing: avg >= 70, criticalFail: crit < 80 };
+  });
+  return { attempts: (data||[]).length, students: studentSummary,
+    cohortAvg: studentSummary.length ? Math.round(studentSummary.reduce(function(a,s){return a+s.avgScore;},0)/studentSummary.length) : null };
+}
+
 // ── Tool dispatcher ───────────────────────────────────────────────────
 async function runTools(toolCalls) {
   var results = {};
@@ -345,6 +379,7 @@ async function runTools(toolCalls) {
       if (call.name === 'recent_fingerprints') results[call.name] = await tool_recent_fingerprints();
       if (call.name === 'at_risk_students')    results[call.name] = await tool_at_risk_students();
       if (call.name === 'student_detail')      results[call.name] = await tool_student_detail(call.args && call.args.student_name);
+      if (call.name === 'osce_results')        results[call.name] = await tool_osce_results();
     } catch(e) {
       results[call.name] = { error: e.message };
     }
@@ -391,6 +426,7 @@ YOU HAVE ACCESS TO THESE DATA TOOLS. Use them by including the exact tag in your
 - [TOOL:recent_fingerprints] — recent session-level reasoning fingerprints with bias flags
 - [TOOL:at_risk_students] — students with ≥3 sessions who show concerning cognitive patterns
 - [TOOL:student_detail("student_name"="Jane Smith")] — detailed session history and profile for one student
+- [TOOL:osce_results] — OSCE station scores: per-student pass/fail, critical item rates, communication scores
 
 WHEN TO USE TOOLS:
 - Any question about student performance → use at least one tool

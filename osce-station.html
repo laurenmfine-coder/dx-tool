@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSCE Station · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --ink:#0F172A; --blue:#2874A6; --blue-lt:#EBF5FB; --blue-dk:#1B4F72;
+  --gold:#D97706; --gold-lt:#FEF3C7; --paper:#FAFAF8; --white:#FFFFFF;
+  --rule:#E2E8F0; --muted:#64748B; --surface:#F8FAFC;
+  --green:#059669; --green-lt:#ECFDF5; --red:#DC2626; --red-lt:#FEF2F2;
+  --mono:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* Header */
+.hd{background:var(--ink);padding:14px 28px;display:flex;align-items:center;gap:14px}
+.hd-logo{font-family:'DM Serif Display',serif;font-size:20px;color:#fff}
+.hd-logo span{color:#F59E0B}
+.hd-sep{width:1px;height:20px;background:#334155}
+.hd-sub{font-size:11px;color:#94a3b8;letter-spacing:.8px;text-transform:uppercase;font-weight:500}
+.hd-back{margin-left:auto;color:#94a3b8;font-size:13px;text-decoration:none}
+.hd-back:hover{color:#fff}
+
+/* Timer */
+.timer-bar{background:var(--blue-dk);padding:10px 28px;display:flex;align-items:center;gap:20px}
+.timer-display{font-family:var(--mono);font-size:22px;font-weight:700;color:#fff;letter-spacing:2px;min-width:60px}
+.timer-display.warn{color:#FCD34D}
+.timer-display.danger{color:#F87171;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.timer-label{font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px}
+.phase-indicator{margin-left:auto;display:flex;gap:8px}
+.phase-dot{width:28px;height:6px;border-radius:3px;background:rgba(255,255,255,.2);transition:background .3s}
+.phase-dot.done{background:#34D399}
+.phase-dot.active{background:#F59E0B}
+
+/* Layout */
+.osce-body{max-width:900px;margin:0 auto;padding:28px 28px 80px}
+
+/* Station card */
+.station-card{background:var(--white);border:1px solid var(--rule);border-radius:14px;overflow:hidden;margin-bottom:20px}
+.station-header{background:var(--blue-dk);padding:16px 24px;display:flex;align-items:center;gap:14px}
+.station-phase{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#94a3b8}
+.station-title{font-family:'DM Serif Display',serif;font-size:20px;color:#fff;flex:1}
+.phase-time{font-family:var(--mono);font-size:13px;color:#FCD34D;font-weight:700}
+.station-body{padding:24px}
+
+/* Patient door card */
+.door-card{background:var(--gold-lt);border:1px solid #FCD34D;border-radius:10px;padding:18px 20px;margin-bottom:20px}
+.door-title{font-family:var(--mono);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.door-content{font-size:15px;line-height:1.7;color:var(--ink)}
+.door-content strong{display:block;font-size:17px;font-weight:700;margin-bottom:6px}
+
+/* Checklist */
+.checklist{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border:1.5px solid var(--rule);border-radius:10px;cursor:pointer;transition:all .15s;background:var(--white)}
+.check-item:hover{border-color:var(--blue);background:var(--blue-lt)}
+.check-item.checked{border-color:var(--green);background:var(--green-lt)}
+.check-item.missed{border-color:var(--red);background:var(--red-lt);cursor:default;opacity:.7}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--rule);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;margin-top:1px}
+.check-item.checked .check-box{background:var(--green);border-color:var(--green);color:#fff}
+.check-item.missed .check-box{background:var(--red);border-color:var(--red);color:#fff}
+.check-label{flex:1}
+.check-label strong{font-size:14px;font-weight:600;display:block;margin-bottom:2px}
+.check-label span{font-size:12px;color:var(--muted)}
+.check-critical{font-size:10px;font-weight:700;font-family:var(--mono);padding:2px 6px;border-radius:4px;background:#FEE2E2;color:var(--red);text-transform:uppercase;letter-spacing:.5px;margin-left:6px}
+
+/* Chat */
+.chat-wrap{border:1.5px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:16px}
+.chat-messages{min-height:200px;max-height:360px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.chat-msg{max-width:85%}
+.chat-msg.student{align-self:flex-end}
+.chat-msg.patient{align-self:flex-start}
+.chat-msg .bbl{padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.6}
+.chat-msg.student .bbl{background:var(--blue);color:#fff;border-radius:12px 12px 3px 12px}
+.chat-msg.patient .bbl{background:var(--white);border:1px solid var(--rule);border-radius:12px 12px 12px 3px;color:var(--ink)}
+.chat-msg.system .bbl{background:var(--gold-lt);border:1px solid #FCD34D;border-radius:8px;font-size:12px;color:var(--gold);font-style:italic;align-self:center;max-width:100%}
+.chat-input-row{display:flex;gap:8px;padding:10px;background:var(--white);border-top:1px solid var(--rule)}
+.chat-input{flex:1;padding:10px 13px;border:1.5px solid var(--rule);border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border .15s;resize:none;min-height:42px;max-height:100px}
+.chat-input:focus{border-color:var(--blue)}
+.chat-send{padding:10px 16px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap}
+.chat-send:disabled{opacity:.4;cursor:not-allowed}
+
+/* Typing indicator */
+.typing{display:flex;gap:4px;padding:10px 14px;background:var(--white);border:1px solid var(--rule);border-radius:12px 12px 12px 3px;width:fit-content}
+.typing span{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bounce .9s infinite}
+.typing span:nth-child(2){animation-delay:.15s}
+.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* Score report */
+.score-section{margin-bottom:24px}
+.score-title{font-family:'DM Serif Display',serif;font-size:20px;color:var(--ink);margin-bottom:14px}
+.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.score-card{background:var(--white);border:1px solid var(--rule);border-radius:10px;padding:16px;text-align:center}
+.score-num{font-size:28px;font-weight:700;color:var(--blue);margin-bottom:4px}
+.score-num.pass{color:var(--green)}
+.score-num.borderline{color:var(--gold)}
+.score-num.fail{color:var(--red)}
+.score-lbl{font-size:11px;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.domain-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule)}
+.domain-row:last-child{border-bottom:none}
+.domain-name{width:180px;font-size:13px;font-weight:600}
+.domain-bar-wrap{flex:1;height:8px;background:var(--rule);border-radius:4px;overflow:hidden}
+.domain-bar{height:100%;border-radius:4px;transition:width .5s}
+.domain-pct{width:40px;text-align:right;font-size:13px;font-family:var(--mono);font-weight:600}
+.item-feedback{padding:12px 16px;border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.6}
+.item-feedback.ok{background:var(--green-lt);border-left:3px solid var(--green)}
+.item-feedback.miss{background:var(--red-lt);border-left:3px solid var(--red)}
+.item-feedback.info{background:var(--blue-lt);border-left:3px solid var(--blue)}
+
+/* Navigation buttons */
+.nav-row{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+.nav-btn{padding:12px 24px;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.nav-btn.primary{background:var(--blue);color:#fff}
+.nav-btn.primary:hover{background:var(--blue-dk)}
+.nav-btn.secondary{background:var(--white);border:1.5px solid var(--rule);color:var(--ink)}
+.nav-btn.secondary:hover{border-color:var(--blue);color:var(--blue)}
+.nav-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* Case selector */
+.case-selector{background:var(--white);border:1px solid var(--rule);border-radius:14px;padding:28px;max-width:600px;margin:40px auto}
+.case-selector h2{font-family:'DM Serif Display',serif;font-size:24px;margin-bottom:6px}
+.case-selector p{font-size:14px;color:var(--muted);margin-bottom:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
+.field select,.field input{width:100%;padding:10px 13px;border:1.5px solid var(--rule);border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border .15s;color:var(--ink)}
+.field select:focus,.field input:focus{border-color:var(--blue)}
+.start-btn{width:100%;padding:14px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s}
+.start-btn:hover{background:var(--blue-dk)}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-sep"></div>
+  <div class="hd-sub">OSCE Station</div>
+  <a href="/browse.html" class="hd-back">← Platform</a>
+</div>
+
+<!-- Timer bar (hidden until started) -->
+<div class="timer-bar" id="timerBar" style="display:none">
+  <div>
+    <div class="timer-label">Time Remaining</div>
+    <div class="timer-display" id="timerDisplay">15:00</div>
+  </div>
+  <div style="margin-left:16px">
+    <div class="timer-label">Phase</div>
+    <div style="font-size:13px;color:#fff;font-weight:600" id="phaseName">History</div>
+  </div>
+  <div class="phase-indicator" id="phaseIndicator">
+    <div class="phase-dot active" data-phase="0"></div>
+    <div class="phase-dot" data-phase="1"></div>
+    <div class="phase-dot" data-phase="2"></div>
+    <div class="phase-dot" data-phase="3"></div>
+  </div>
+</div>
+
+<div class="osce-body" id="osceBody">
+
+  <!-- Case selector -->
+  <div class="case-selector" id="caseSelector">
+    <h2>OSCE Station</h2>
+    <p>A structured, timed clinical encounter. You will have a set time for each phase: history-taking, physical examination, and management. Your performance is scored against a validated checklist.</p>
+    <div class="field">
+      <label>Student Name</label>
+      <input type="text" id="studentName" placeholder="Enter your name" />
+    </div>
+    <div class="field">
+      <label>Training Year</label>
+      <select id="trainingYear">
+        <option value="M1">M1</option>
+        <option value="M2">M2</option>
+        <option value="M3" selected>M3</option>
+        <option value="M4">M4</option>
+        <option value="R1">Intern / R1</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Case</label>
+      <select id="caseSelect" onchange="loadCasePreview()">
+        <option value="">Loading cases…</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Station Duration</label>
+      <select id="duration">
+        <option value="10">10 minutes (exam practice)</option>
+        <option value="15" selected>15 minutes (standard)</option>
+        <option value="20">20 minutes (extended)</option>
+      </select>
+    </div>
+    <button class="start-btn" onclick="startOSCE()">Begin OSCE Station →</button>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ── Config ────────────────────────────────────────────────────────────
+const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+var db = null;
+
+// ── Phase config ──────────────────────────────────────────────────────
+// Minutes per phase as fraction of total time
+const PHASE_FRACTIONS = [0.35, 0.25, 0.30, 0.10]; // history, PE, management, closing
+const PHASE_NAMES = ['History', 'Physical Exam', 'Management', 'Closing'];
+const PHASE_LABELS = [
+  'History-Taking — Interview the patient',
+  'Physical Examination — State your findings',
+  'Management — Orders & Plan',
+  'Closing — Counsel the patient'
+];
+
+// ── State ─────────────────────────────────────────────────────────────
+var caseData = null;
+var currentPhase = 0;
+var timerInterval = null;
+var phaseTimeLeft = 0;
+var totalDuration = 15;
+var conversationHistory = [];
+var checkedItems = {}; // itemId -> true
+var phaseChecks = {}; // phase -> { checked: [], total: 0 }
+var empathySignals = { count: 0, turns: 0 };
+var openQCount = 0; var closedQCount = 0;
+var osceStartTime = null;
+var studentName = '';
+var trainingYear = '';
+
+// ── Init ──────────────────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  loadCases();
+});
+
+async function loadCases() {
+  // Load from CRT_DATA if available, else load emr-data/crt-data.js
+  if (!window.CRT_DATA) {
+    var script = document.createElement('script');
+    script.src = 'emr-data/crt-data.js';
+    script.onload = populateCaseSelect;
+    document.head.appendChild(script);
+  } else {
+    populateCaseSelect();
+  }
+}
+
+function populateCaseSelect() {
+  var sel = document.getElementById('caseSelect');
+  sel.innerHTML = '<option value="">Select a case…</option>';
+  if (!window.CRT_DATA) return;
+  var cats = {};
+  Object.entries(window.CRT_DATA).forEach(function(e) {
+    var cat = e[1].category || 'General';
+    if (!cats[cat]) cats[cat] = [];
+    cats[cat].push({ id: e[0], label: e[1].diagnosis || e[1].chiefComplaint || e[0], acuity: e[1].acuity || 3 });
+  });
+  Object.entries(cats).sort().forEach(function(c) {
+    var og = document.createElement('optgroup');
+    og.label = c[0];
+    c[1].slice(0, 8).forEach(function(item) {
+      var opt = document.createElement('option');
+      opt.value = item.id;
+      opt.textContent = item.label + ' (ESI ' + item.acuity + ')';
+      og.appendChild(opt);
+    });
+    sel.appendChild(og);
+  });
+}
+
+// ── Start OSCE ────────────────────────────────────────────────────────
+async function startOSCE() {
+  studentName = document.getElementById('studentName').value.trim() || 'Student';
+  trainingYear = document.getElementById('trainingYear').value;
+  var caseId = document.getElementById('caseSelect').value;
+  totalDuration = parseInt(document.getElementById('duration').value);
+
+  if (!caseId) { alert('Please select a case.'); return; }
+  if (!window.CRT_DATA || !window.CRT_DATA[caseId]) { alert('Case data not loaded.'); return; }
+
+  caseData = window.CRT_DATA[caseId];
+  osceStartTime = new Date().toISOString();
+  currentPhase = 0;
+  checkedItems = {};
+  phaseChecks = {};
+  conversationHistory = [];
+
+  document.getElementById('caseSelector').style.display = 'none';
+  document.getElementById('timerBar').style.display = 'flex';
+
+  renderPhase(0);
+  startPhaseTimer(0);
+}
+
+// ── Phase rendering ───────────────────────────────────────────────────
+function renderPhase(phaseIndex) {
+  currentPhase = phaseIndex;
+  var body = document.getElementById('osceBody');
+
+  // Update phase indicator
+  document.querySelectorAll('.phase-dot').forEach(function(d, i) {
+    d.classList.remove('active', 'done');
+    if (i < phaseIndex) d.classList.add('done');
+    if (i === phaseIndex) d.classList.add('active');
+  });
+  document.getElementById('phaseName').textContent = PHASE_NAMES[phaseIndex];
+
+  var html = '';
+
+  if (phaseIndex === 0) html = renderHistoryPhase();
+  else if (phaseIndex === 1) html = renderPEPhase();
+  else if (phaseIndex === 2) html = renderManagementPhase();
+  else if (phaseIndex === 3) html = renderClosingPhase();
+
+  body.innerHTML = html;
+
+  if (phaseIndex === 0) {
+    initChat(phaseIndex);
+  } else if (phaseIndex === 1) {
+    initPEChat(phaseIndex);
+  } else if (phaseIndex === 3) {
+    initClosingChat(phaseIndex);
+  }
+}
+
+function renderHistoryPhase() {
+  var ps = caseData.patientScript || {};
+  return `
+    <div class="station-card">
+      <div class="station-header">
+        <div>
+          <div class="station-phase">Phase 1 of 4</div>
+          <div class="station-title">${escHtml(PHASE_LABELS[0])}</div>
+        </div>
+        <div class="phase-time" id="phaseTimeLabel"></div>
+      </div>
+      <div class="station-body">
+        <div class="door-card">
+          <div class="door-title">📋 Door Chart</div>
+          <div class="door-content">
+            <strong>${escHtml(caseData.presentation ? caseData.presentation.patientName : 'Patient')}</strong>
+            ${escHtml(caseData.presentation ? caseData.presentation.age + '-year-old ' + caseData.presentation.sex : '')} presenting with
+            <strong>${escHtml(caseData.chiefComplaint || caseData.presentation && caseData.presentation.chiefComplaint || '')}</strong>.
+            Vital signs: ${formatVitals(caseData.initialVitals)}.
+          </div>
+        </div>
+        <div class="chat-wrap">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-row">
+            <textarea class="chat-input" id="chatInput" placeholder="Speak to the patient…"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"
+              oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+            <button class="chat-send" id="chatSend" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button class="nav-btn secondary" onclick="skipToNextPhase()">Skip to PE →</button>
+          <button class="nav-btn primary" onclick="advancePhase()">Done with History → Start PE</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderPEPhase() {
+  return `
+    <div class="station-card">
+      <div class="station-header">
+        <div>
+          <div class="station-phase">Phase 2 of 4</div>
+          <div class="station-title">${escHtml(PHASE_LABELS[1])}</div>
+        </div>
+      </div>
+      <div class="station-body">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px">
+          State which physical examination components you are performing and what you find.
+          Check each component you completed.
+        </p>
+        <div class="checklist" id="peChecklist">${buildPEChecklist()}</div>
+        <div class="chat-wrap">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-row">
+            <textarea class="chat-input" id="chatInput" placeholder="State your exam findings…"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"
+              oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+            <button class="chat-send" id="chatSend" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button class="nav-btn primary" onclick="advancePhase()">Done with PE → Management</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderManagementPhase() {
+  var orders = caseData.treatments && caseData.treatments.orders || [];
+  var criticalOrders = orders.filter(function(o) { return o.critical === true; });
+  var correctOrders  = orders.filter(function(o) { return o.correct === true && !o.critical; });
+  var wrongOrders    = orders.filter(function(o) { return o.correct === false; });
+
+  phaseChecks[2] = { checked: [], total: criticalOrders.length + correctOrders.length };
+
+  var checklistHtml = '';
+  if (criticalOrders.length > 0) {
+    checklistHtml += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:8px;margin-top:4px">Critical Orders</div>';
+    criticalOrders.forEach(function(o) {
+      checklistHtml += buildCheckItem(o, true);
+    });
+  }
+  if (correctOrders.length > 0) {
+    checklistHtml += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:8px;margin-top:12px">Correct Orders</div>';
+    correctOrders.forEach(function(o) { checklistHtml += buildCheckItem(o, false); });
+  }
+  if (wrongOrders.length > 0) {
+    checklistHtml += '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:8px;margin-top:12px">Orders to Avoid</div>';
+    wrongOrders.forEach(function(o) { checklistHtml += buildCheckItem(o, false, true); });
+  }
+
+  return `
+    <div class="station-card">
+      <div class="station-header">
+        <div>
+          <div class="station-phase">Phase 3 of 4</div>
+          <div class="station-title">${escHtml(PHASE_LABELS[2])}</div>
+        </div>
+      </div>
+      <div class="station-body">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px">
+          Select the orders and interventions you would initiate. Check each one you would order.
+        </p>
+        <div class="checklist" id="mgmtChecklist">${checklistHtml}</div>
+        <div class="nav-row">
+          <button class="nav-btn primary" onclick="advancePhase()">Done → Closing</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function renderClosingPhase() {
+  return `
+    <div class="station-card">
+      <div class="station-header">
+        <div>
+          <div class="station-phase">Phase 4 of 4</div>
+          <div class="station-title">${escHtml(PHASE_LABELS[3])}</div>
+        </div>
+      </div>
+      <div class="station-body">
+        <p style="font-size:14px;color:var(--muted);margin-bottom:16px">
+          Counsel the patient. Explain what you think is happening and what happens next. Use plain language.
+        </p>
+        <div class="chat-wrap">
+          <div class="chat-messages" id="chatMessages"></div>
+          <div class="chat-input-row">
+            <textarea class="chat-input" id="chatInput" placeholder="Explain to the patient…"
+              onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}"
+              oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px'"></textarea>
+            <button class="chat-send" id="chatSend" onclick="sendChat()">Send</button>
+          </div>
+        </div>
+        <div class="nav-row">
+          <button class="nav-btn primary" onclick="finishOSCE()">Complete Station → See Results</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── Checklist builders ────────────────────────────────────────────────
+function buildPEChecklist() {
+  var html = '';
+  var components = [
+    { id: 'pe-vitals',   label: 'Review vital signs',            hint: 'BP, HR, RR, Temp, SpO2' },
+    { id: 'pe-general',  label: 'General appearance',            hint: 'Distress, diaphoresis, affect' },
+    { id: 'pe-heent',    label: 'HEENT',                         hint: 'JVD, mucous membranes, sclera' },
+    { id: 'pe-cv',       label: 'Cardiovascular',                hint: 'Heart sounds, murmurs, pulses, edema' },
+    { id: 'pe-resp',     label: 'Respiratory',                   hint: 'Auscultation, percussion, work of breathing' },
+    { id: 'pe-abd',      label: 'Abdomen',                       hint: 'Tenderness, organomegaly, bowel sounds' },
+    { id: 'pe-neuro',    label: 'Neurological',                  hint: 'Focal deficits, orientation, GCS' },
+    { id: 'pe-ext',      label: 'Extremities / Skin',            hint: 'Edema, rashes, perfusion, calf tenderness' },
+    { id: 'pe-focused',  label: 'Focused exam for chief complaint', hint: 'Organ-system specific to presentation' },
+  ];
+  if (!phaseChecks[1]) phaseChecks[1] = { checked: [], total: components.length };
+  components.forEach(function(c) {
+    html += buildCheckItem({ id: c.id, name: c.label, group: c.hint }, false);
+  });
+  return html;
+}
+
+function buildCheckItem(order, isCritical, isWrong) {
+  var checked = checkedItems[order.id] ? 'checked' : '';
+  var critBadge = isCritical ? '<span class="check-critical">Critical</span>' : '';
+  var wrongStyle = isWrong ? 'style="border-color:#FEF3C7;background:#FFFBEB"' : '';
+  return `<div class="check-item ${checked}" ${wrongStyle} data-id="${escHtml(order.id)}" onclick="toggleCheck(this,'${escHtml(order.id)}',${isWrong ? 1 : 0})">
+    <div class="check-box">${checkedItems[order.id] ? '✓' : ''}</div>
+    <div class="check-label">
+      <strong>${escHtml(order.name || order.id)} ${critBadge}</strong>
+      <span>${escHtml(order.group || '')}</span>
+    </div>
+  </div>`;
+}
+
+function toggleCheck(el, itemId, isWrong) {
+  if (el.classList.contains('missed')) return;
+  var checked = el.classList.toggle('checked');
+  el.querySelector('.check-box').textContent = checked ? '✓' : '';
+  if (checked) {
+    checkedItems[itemId] = true;
+    // Penalize wrong order selections
+    if (isWrong) {
+      el.style.background = '#FEF2F2';
+      el.style.borderColor = 'var(--red)';
+    }
+  } else {
+    delete checkedItems[itemId];
+    if (isWrong) {
+      el.style.background = '#FFFBEB';
+      el.style.borderColor = '#FEF3C7';
+    }
+  }
+}
+
+// ── Chat (patient voice via Claude) ──────────────────────────────────
+function initChat(phaseIndex) {
+  var ps = caseData.patientScript || {};
+  var greeting = 'Hello, Doctor. ' + (ps.hpiOnset || 'I haven\'t been feeling well.');
+  appendChatMsg('patient', greeting);
+  conversationHistory.push({ role: 'assistant', content: greeting });
+}
+
+function initPEChat(phaseIndex) {
+  appendChatMsg('system', 'State your physical examination findings. The attending will comment on your technique and findings.');
+}
+
+function initClosingChat(phaseIndex) {
+  appendChatMsg('system', 'The patient is waiting for you to explain the plan. Speak to them directly.');
+  conversationHistory = []; // fresh context for closing
+}
+
+async function sendChat() {
+  var input = document.getElementById('chatInput');
+  var text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('chatSend').disabled = true;
+
+  appendChatMsg('student', text);
+  conversationHistory.push({ role: 'user', content: text });
+
+  // Track empathy signals
+  if (/\b(sorry|understand|must be|that sounds|i can see|i can imagine|difficult|scary|normal|makes sense)\b/i.test(text)) empathySignals.count++;
+  empathySignals.turns++;
+  // Track question types
+  if (/\b(tell me|describe|what|how|explain)\b/i.test(text)) openQCount++;
+  if (/^(do you|have you|are you|did you|is there)\b/i.test(text)) closedQCount++;
+
+  var typing = appendTyping();
+
+  try {
+    var sys = buildPatientSystemPrompt();
+    var resp = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 300,
+        system: sys, messages: conversationHistory.slice(-8) })
+    });
+    var data = await resp.json();
+    var reply = data.content && data.content[0] && data.content[0].text || '…';
+    removeTyping(typing);
+    appendChatMsg('patient', reply);
+    conversationHistory.push({ role: 'assistant', content: reply });
+  } catch(e) {
+    removeTyping(typing);
+    appendChatMsg('system', '⚠ Connection error. Continue with the checklist.');
+  }
+
+  document.getElementById('chatSend').disabled = false;
+  document.getElementById('chatInput').focus();
+}
+
+function buildPatientSystemPrompt() {
+  var ps = caseData.patientScript || {};
+  var phase = currentPhase === 3 ? 'closing' : 'history';
+  return `You are playing a patient in a structured OSCE medical education exercise.
+
+PATIENT IDENTITY: ${ps.identity || 'adult patient'}
+CHIEF COMPLAINT: ${caseData.chiefComplaint || ''}
+HPI: ${ps.hpiOnset || ''} ${ps.hpiProgression || ''}
+ASSOCIATED SYMPTOMS: ${ps.hpiAssociatedSymptoms || ''}
+PMH: ${ps.pmh || ''}
+MEDICATIONS: ${ps.medications || ''}
+
+RULES:
+- Stay fully in character as the patient throughout
+- Use plain, non-medical language (you are not a clinician)
+- Respond to exactly what the student asks — do not volunteer all information at once
+- If asked about symptoms not in your script, answer "no" unless clinically plausible
+- Keep responses to 1-3 sentences
+- ${phase === 'closing' ? 'The student is now counseling you. React naturally — ask one clarifying question after they explain.' : 'Answer questions about your symptoms honestly but in lay terms.'}`;
+}
+
+// ── Timer ─────────────────────────────────────────────────────────────
+function startPhaseTimer(phaseIndex) {
+  clearInterval(timerInterval);
+  var mins = Math.round(totalDuration * PHASE_FRACTIONS[phaseIndex]);
+  phaseTimeLeft = mins * 60;
+  updateTimerDisplay();
+
+  timerInterval = setInterval(function() {
+    phaseTimeLeft--;
+    updateTimerDisplay();
+    if (phaseTimeLeft <= 0) {
+      clearInterval(timerInterval);
+      onPhaseTimeUp();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  var m = Math.floor(phaseTimeLeft / 60);
+  var s = phaseTimeLeft % 60;
+  var display = document.getElementById('timerDisplay');
+  if (!display) return;
+  display.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+  display.className = 'timer-display';
+  if (phaseTimeLeft <= 60) display.classList.add('danger');
+  else if (phaseTimeLeft <= 120) display.classList.add('warn');
+}
+
+function onPhaseTimeUp() {
+  appendSystemMsg('⏱ Time is up for this phase.');
+  setTimeout(advancePhase, 1500);
+}
+
+function advancePhase() {
+  clearInterval(timerInterval);
+  if (currentPhase < 3) {
+    renderPhase(currentPhase + 1);
+    startPhaseTimer(currentPhase);
+  } else {
+    finishOSCE();
+  }
+}
+
+function skipToNextPhase() { advancePhase(); }
+
+// ── Finish and Score ──────────────────────────────────────────────────
+async function finishOSCE() {
+  clearInterval(timerInterval);
+  document.getElementById('timerBar').style.display = 'none';
+
+  var scores = calculateScores();
+  renderScoreReport(scores);
+
+  // Save to Supabase
+  try {
+    await db.from('osce_attempts').insert([{
+      student_name: studentName,
+      training_year: trainingYear,
+      case_id: caseData.id || caseData.diagnosis,
+      diagnosis: caseData.targetDiagnosis || caseData.diagnosis,
+      total_score: scores.total,
+      max_score: scores.max,
+      pct_score: scores.pct,
+      critical_score: scores.critical.pct,
+      history_score: scores.history.pct,
+      communication_score: scores.communication.pct,
+      management_score: scores.management.pct,
+      empathy_density: empathySignals.turns > 0 ? (empathySignals.count / empathySignals.turns).toFixed(2) : 0,
+      open_q_rate: (openQCount + closedQCount) > 0 ? (openQCount / (openQCount + closedQCount)).toFixed(2) : 0,
+      checked_items: JSON.stringify(Object.keys(checkedItems)),
+      started_at: osceStartTime,
+      completed_at: new Date().toISOString()
+    }]);
+  } catch(e) { console.warn('Save failed:', e.message); }
+}
+
+function calculateScores() {
+  var orders = caseData.treatments && caseData.treatments.orders || [];
+  var criticalOrders = orders.filter(function(o) { return o.critical === true; });
+  var correctOrders  = orders.filter(function(o) { return o.correct === true; });
+  var wrongOrders    = orders.filter(function(o) { return o.correct === false; });
+
+  // Critical items score
+  var criticalChecked = criticalOrders.filter(function(o) { return checkedItems[o.id]; }).length;
+  var criticalPct = criticalOrders.length > 0 ? Math.round(criticalChecked / criticalOrders.length * 100) : 100;
+
+  // Management (correct items - penalties for wrong)
+  var correctChecked = correctOrders.filter(function(o) { return checkedItems[o.id]; }).length;
+  var wrongChecked   = wrongOrders.filter(function(o) { return checkedItems[o.id]; }).length;
+  var mgmtScore = Math.max(0, correctChecked - wrongChecked);
+  var mgmtMax   = correctOrders.length;
+  var mgmtPct   = mgmtMax > 0 ? Math.round(mgmtScore / mgmtMax * 100) : 100;
+
+  // PE score (how many PE components checked)
+  var peComponents = ['pe-vitals','pe-general','pe-heent','pe-cv','pe-resp','pe-abd','pe-neuro','pe-ext','pe-focused'];
+  var peChecked = peComponents.filter(function(id) { return checkedItems[id]; }).length;
+  var pePct = Math.round(peChecked / peComponents.length * 100);
+
+  // Communication score (empathy + open question rate)
+  var empathyRate = empathySignals.turns > 0 ? empathySignals.count / empathySignals.turns : 0;
+  var openRate = (openQCount + closedQCount) > 0 ? openQCount / (openQCount + closedQCount) : 0;
+  var commPct = Math.round((empathyRate * 0.5 + openRate * 0.5) * 100);
+
+  // Composite
+  // Weighted: critical 35%, management 30%, PE 20%, communication 15%
+  var total = criticalPct * 0.35 + mgmtPct * 0.30 + pePct * 0.20 + commPct * 0.15;
+  total = Math.round(total);
+
+  return {
+    total: total, max: 100, pct: total,
+    critical: { checked: criticalChecked, total: criticalOrders.length, pct: criticalPct, items: criticalOrders },
+    management: { score: mgmtScore, max: mgmtMax, pct: mgmtPct, wrongChecked: wrongChecked, items: correctOrders },
+    history: { pct: pePct, checked: peChecked, total: peComponents.length },
+    communication: { pct: commPct, empathyRate: Math.round(empathyRate*100), openRate: Math.round(openRate*100) }
+  };
+}
+
+function renderScoreReport(scores) {
+  var passFail = scores.pct >= 70 ? 'pass' : scores.pct >= 55 ? 'borderline' : 'fail';
+  var passLabel = scores.pct >= 70 ? 'PASS' : scores.pct >= 55 ? 'BORDERLINE' : 'FAIL';
+  var critFail = scores.critical.pct < 80;
+
+  var html = `
+    <div class="station-card">
+      <div class="station-header">
+        <div>
+          <div class="station-phase">Station Complete</div>
+          <div class="station-title">Score Report — ${escHtml(caseData.targetDiagnosis || caseData.diagnosis || '')}</div>
+        </div>
+      </div>
+      <div class="station-body">
+        <div class="score-section">
+          <div class="score-grid">
+            <div class="score-card">
+              <div class="score-num ${passFail}">${scores.pct}%</div>
+              <div class="score-lbl">Overall · ${passLabel}</div>
+            </div>
+            <div class="score-card">
+              <div class="score-num ${scores.critical.pct >= 80 ? 'pass' : 'fail'}">${scores.critical.pct}%</div>
+              <div class="score-lbl">Critical Items</div>
+            </div>
+            <div class="score-card">
+              <div class="score-num">${scores.history.pct}%</div>
+              <div class="score-lbl">Phys. Exam</div>
+            </div>
+            <div class="score-card">
+              <div class="score-num">${scores.communication.pct}%</div>
+              <div class="score-lbl">Communication</div>
+            </div>
+          </div>
+
+          ${critFail ? '<div class="item-feedback miss"><strong>⚠ Critical Item Failure:</strong> You missed one or more critical orders. In many OSCE programs, missing critical items is grounds for automatic remediation regardless of overall score.</div>' : ''}
+
+          <div class="score-section">
+            <div class="score-title" style="font-size:16px;margin-bottom:12px">Domain Breakdown</div>
+            ${domainBar('Critical Orders (35%)', scores.critical.pct, scores.critical.pct >= 80)}
+            ${domainBar('Management (30%)', scores.management.pct, scores.management.pct >= 70)}
+            ${domainBar('Physical Exam (20%)', scores.history.pct, scores.history.pct >= 70)}
+            ${domainBar('Communication (15%)', scores.communication.pct, scores.communication.pct >= 60)}
+          </div>
+        </div>
+
+        <div class="score-section">
+          <div class="score-title">Critical Order Review</div>
+          ${scores.critical.items.map(function(o) {
+            var got = checkedItems[o.id];
+            return `<div class="item-feedback ${got ? 'ok' : 'miss'}">
+              <strong>${got ? '✓' : '✗'} ${escHtml(o.name)}</strong><br>
+              ${escHtml(o.teaching || '')}
+              ${o.references && o.references[0] ? '<br><em style="font-size:11px">Source: <a href="' + escHtml(o.references[0].url||'#') + '" target="_blank" style="color:var(--blue)">' + escHtml(o.references[0].source||'') + '</a></em>' : ''}
+            </div>`;
+          }).join('')}
+        </div>
+
+        <div class="score-section">
+          <div class="score-title">Communication</div>
+          <div class="item-feedback info">
+            <strong>Open question rate:</strong> ${scores.communication.openRate}% (target ≥ 40% in history phase — Calgary-Cambridge Guide)<br>
+            <strong>Empathy signals:</strong> ${scores.communication.empathyRate}% of turns (target ≥ 30% — Kalamazoo Consensus)<br>
+            <strong>Interpretation:</strong> ${scores.communication.openRate >= 40 ? 'Good use of open questions to elicit patient narrative.' : 'Consider leading with more open questions ("Tell me more about…") before narrowing to closed questions.'}
+          </div>
+        </div>
+
+        <div class="nav-row">
+          <button class="nav-btn secondary" onclick="window.location.reload()">New Station</button>
+          <button class="nav-btn primary" onclick="window.open('faculty-agent.html','_blank')">Faculty Agent →</button>
+        </div>
+      </div>
+    </div>`;
+
+  document.getElementById('osceBody').innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+function domainBar(label, pct, pass) {
+  var color = pass ? '#059669' : (pct >= 50 ? '#D97706' : '#DC2626');
+  return `<div class="domain-row">
+    <div class="domain-name">${label}</div>
+    <div class="domain-bar-wrap"><div class="domain-bar" style="width:${pct}%;background:${color}"></div></div>
+    <div class="domain-pct" style="color:${color}">${pct}%</div>
+  </div>`;
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────
+function formatVitals(v) {
+  if (!v) return 'See chart';
+  return `BP ${v.BP||'—'}, HR ${v.HR||'—'}, RR ${v.RR||'—'}, Temp ${v.Temp||'—'}, SpO2 ${v.SpO2||'—'}`;
+}
+
+function appendChatMsg(role, text) {
+  var el = document.getElementById('chatMessages');
+  if (!el) return;
+  var div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  var bbl = document.createElement('div');
+  bbl.className = 'bbl';
+  bbl.textContent = text;
+  div.appendChild(bbl);
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+}
+
+function appendSystemMsg(text) {
+  appendChatMsg('system', text);
+}
+
+function appendTyping() {
+  var el = document.getElementById('chatMessages');
+  if (!el) return null;
+  var div = document.createElement('div');
+  div.className = 'chat-msg patient';
+  div.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+  return div;
+}
+
+function removeTyping(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
+
+function escHtml(s) {
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+function loadCasePreview() {} // placeholder
+</script>
+</body>
+</html>
