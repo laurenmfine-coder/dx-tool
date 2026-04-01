@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research Foundations · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0F172A;
+    --ink2: #334155;
+    --muted: #64748B;
+    --rule: #E2E8F0;
+    --blue: #2874A6;
+    --blue-lt: #EBF5FB;
+    --gold: #92400E;
+    --gold-lt: #FEF3C7;
+    --paper: #FAFAF8;
+    --white: #FFFFFF;
+    --serif: 'Libre Baskerville', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+    padding: 18px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo { font-family: var(--sans); font-size: 20px; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .logo span { color: var(--blue); }
+  .nav { margin-left: auto; display: flex; gap: 28px; }
+  .nav a { font-size: 14px; color: var(--muted); text-decoration: none; font-weight: 500; }
+  .nav a:hover { color: var(--blue); }
+
+  /* ── Hero ── */
+  .hero {
+    max-width: 780px;
+    margin: 80px auto 60px;
+    padding: 0 40px;
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+  .hero h1 em { font-style: italic; color: var(--blue); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--ink2);
+    line-height: 1.75;
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+  .hero-meta {
+    display: inline-flex;
+    gap: 24px;
+    padding: 12px 24px;
+    background: var(--blue-lt);
+    border-radius: 8px;
+    font-size: 13px;
+    color: var(--blue);
+    font-weight: 500;
+  }
+  .hero-meta span::before { content: '·'; margin-right: 8px; opacity: .5; }
+  .hero-meta span:first-child::before { display: none; }
+
+  /* ── Layout ── */
+  .page-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px 120px;
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 72px; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-intro {
+    font-size: 16px;
+    color: var(--ink2);
+    line-height: 1.8;
+    margin-bottom: 36px;
+    max-width: 680px;
+  }
+
+  /* ── Framework cards ── */
+  .frameworks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+  @media (max-width: 640px) { .frameworks { grid-template-columns: 1fr; } }
+
+  .framework-card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 24px;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .framework-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 4px 16px rgba(40,116,166,.08);
+  }
+  .fw-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .fw-name {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .fw-desc {
+    font-size: 13px;
+    color: var(--ink2);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+  .fw-cite {
+    font-size: 11px;
+    color: var(--muted);
+    font-family: var(--mono);
+    line-height: 1.5;
+  }
+
+  /* ── Construct table ── */
+  .construct-table { width: 100%; border-collapse: collapse; margin-bottom: 36px; }
+  .construct-table th {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 14px;
+    border-bottom: 2px solid var(--rule);
+    text-align: left;
+    font-weight: 500;
+  }
+  .construct-table td {
+    padding: 14px 14px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 14px;
+    vertical-align: top;
+    line-height: 1.6;
+  }
+  .construct-table tr:last-child td { border-bottom: none; }
+  .construct-table tr:hover td { background: var(--blue-lt); }
+  .ct-name { font-weight: 600; color: var(--ink); }
+  .ct-basis { color: var(--ink2); }
+  .ct-cite { color: var(--muted); font-size: 12px; font-family: var(--mono); }
+  .tag-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+  }
+  .tag-reasoning { background: #DBEAFE; color: #1D4ED8; }
+  .tag-comm { background: #D1FAE5; color: #065F46; }
+  .tag-meta { background: #EDE9FE; color: #5B21B6; }
+  .tag-rag { background: var(--gold-lt); color: var(--gold); }
+
+  /* ── Limitations ── */
+  .limitations {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--blue);
+    border-radius: 8px;
+    padding: 24px 28px;
+  }
+  .limitations h3 {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .limitations ol { padding-left: 20px; }
+  .limitations li {
+    font-size: 14px;
+    color: var(--ink2);
+    margin-bottom: 10px;
+    line-height: 1.65;
+  }
+  .limitations li:last-child { margin-bottom: 0; }
+
+  /* ── Reference list ── */
+  .ref-group { margin-bottom: 32px; }
+  .ref-group-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .ref-item {
+    font-size: 13px;
+    color: var(--ink2);
+    line-height: 1.7;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    text-indent: -20px;
+  }
+  .ref-item a { color: var(--blue); text-decoration: none; }
+  .ref-item a:hover { text-decoration: underline; }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 32px 40px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    background: var(--white);
+  }
+  footer a { color: var(--blue); text-decoration: none; }
+
+  /* ── Divider ── */
+  .divider { border: none; border-top: 1px solid var(--rule); margin: 56px 0; }
+
+  /* ── Callout ── */
+  .callout {
+    background: var(--gold-lt);
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--gold);
+    line-height: 1.65;
+    margin-bottom: 32px;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="/" class="logo">Reason<span>Dx</span></a>
+  <nav class="nav">
+    <a href="/browse.html">Simulate</a>
+    <a href="/how-it-works.html">How It Works</a>
+    <a href="/institutional.html">Institutions</a>
+    <a href="/research.html" style="color:var(--blue)">Research</a>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Academic Foundation</div>
+  <h1>Built on <em>evidence</em>,<br>not intuition</h1>
+  <p class="hero-sub">
+    Every measurement, scoring method, and pedagogical design decision in ReasonDx is grounded in peer-reviewed research from medical education, cognitive psychology, and communication science.
+  </p>
+  <div class="hero-meta">
+    <span>NSU KPCAM</span>
+    <span>Harvard Macy Institute</span>
+    <span>30+ primary citations</span>
+  </div>
+</div>
+
+<div class="page-body">
+
+  <!-- Theoretical Frameworks -->
+  <div class="section">
+    <div class="section-label">Theoretical Frameworks</div>
+    <p class="section-intro">
+      ReasonDx is built on four intersecting bodies of research: how clinicians reason diagnostically, how cognitive biases cause diagnostic errors, how clinical communication is taught and assessed, and how expert knowledge is structured. Each framework directly shapes a platform feature.
+    </p>
+
+    <div class="frameworks">
+      <div class="framework-card">
+        <span class="fw-tag">Diagnostic Reasoning</span>
+        <div class="fw-name">Hypothetico-Deductive Reasoning Model</div>
+        <p class="fw-desc">Clinicians generate a small set of hypotheses early and selectively gather data to test them. ReasonDx's 10-phase structure mirrors this empirically-validated process.</p>
+        <div class="fw-cite">Elstein, Shulman & Sprafka (1978)<br><em>Medical Problem Solving</em> · Harvard University Press</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Cognitive Bias</span>
+        <div class="fw-name">Dual Process Theory</div>
+        <p class="fw-desc">System 1 (fast, intuitive) and System 2 (deliberate, analytical) thinking processes. ReasonDx requires explicit justification to activate System 2 and detect when students anchor prematurely on System 1 responses.</p>
+        <div class="fw-cite">Croskerry (2009)<br><em>Academic Medicine, 84</em>(8), 1022–1028</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Clinical Communication</span>
+        <div class="fw-name">Calgary-Cambridge Guide & Kalamazoo Consensus</div>
+        <p class="fw-desc">The gold-standard frameworks for medical interviewing and communication assessment, defining open-to-closed question sequencing, empathy behaviors, and the essential elements of every clinical encounter.</p>
+        <div class="fw-cite">Silverman, Kurtz & Draper (2005); Makoul et al. (2001)<br><em>Academic Medicine, 76</em>(4), 390–393</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Knowledge Structure</span>
+        <div class="fw-name">Illness Script Theory & Semantic Qualifiers</div>
+        <p class="fw-desc">Expert clinicians organize diagnostic knowledge into illness scripts (enabling conditions, fault, consequences). Richer, contrastive language (semantic qualifiers) predicts diagnostic accuracy. ReasonDx scores articulation quality using these markers.</p>
+        <div class="fw-cite">Schmidt & Rikers (2007) · <em>Med Educ, 41</em>(12)<br>Bordage & Lemieux (1991) · <em>Acad Med, 66</em>(9)</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Diagnostic Error</span>
+        <div class="fw-name">Cognitive Error Taxonomy</div>
+        <p class="fw-desc">Cognitive factors contribute to 74% of diagnostic errors. Premature closure is the single most common cause. ReasonDx detects anchoring bias and premature closure using operationalizations grounded in this taxonomy.</p>
+        <div class="fw-cite">Graber, Franklin & Gordon (2005)<br><em>Arch Intern Med, 165</em>(13), 1493–1499</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Health Literacy</span>
+        <div class="fw-name">Plain Language in Medicine</div>
+        <p class="fw-desc">Provider communication complexity is a modifiable upstream cause of poor health outcomes. The CDC recommends patient materials at 6th–8th grade level. ReasonDx measures reading level of student-patient communication using validated formulas.</p>
+        <div class="fw-cite">Paasche-Orlow & Wolf (2007) · <em>Am J Health Behav</em><br>CDC (2016) · cdc.gov/healthliteracy</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Self-Assessment</span>
+        <div class="fw-name">Confidence Calibration</div>
+        <p class="fw-desc">Self-assessment is systematically inaccurate in medical trainees. Overconfidence is associated with diagnostic error. ReasonDx calibrates student-rated confidence against objective differential accuracy across sessions.</p>
+        <div class="fw-cite">Eva & Regehr (2005) · <em>Acad Med, 80</em>(S10)<br>Berner & Graber (2008) · <em>Am J Med, 121</em>(5)</div>
+      </div>
+
+      <div class="framework-card">
+        <span class="fw-tag">Learning Science</span>
+        <div class="fw-name">Spaced Repetition</div>
+        <p class="fw-desc">Spaced practice produces superior retention compared to massed practice. ReasonDx generates spaced repetition review cards from each student's identified reasoning gaps — personalized to the specific concepts each student missed.</p>
+        <div class="fw-cite">Kerfoot & Brotschi (2009) · <em>Am J Surg, 197</em>(1)<br>Wozniak (1990) · SM-2 Algorithm</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Constructs Measured -->
+  <div class="section">
+    <div class="section-label">Constructs Measured</div>
+    <p class="section-intro">
+      ReasonDx passively collects behavioral data during normal simulation activity — no additional student effort required. Every construct measured maps to a validated theoretical framework.
+    </p>
+
+    <div class="callout">
+      <strong>Important:</strong> All behavioral signals are educational proxies for latent constructs, not clinical assessments. Longitudinal patterns require a minimum of three completed simulations before being reported to any learner.
+    </div>
+
+    <table class="construct-table">
+      <thead>
+        <tr>
+          <th>Construct</th>
+          <th>Domain</th>
+          <th>Grounding</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="ct-name">Differential breadth & accuracy</div><div class="ct-cite">Phases 1, 4, 6–7</div></td>
+          <td><span class="tag-pill tag-reasoning">Reasoning</span></td>
+          <td class="ct-basis">Hypothetico-deductive model (Elstein et al., 1978); illness script theory (Schmidt & Rikers, 2007)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Anchoring bias</div><div class="ct-cite">Cross-phase differential comparison</div></td>
+          <td><span class="tag-pill tag-reasoning">Reasoning</span></td>
+          <td class="ct-basis">Croskerry (2009); Graber et al. (2005); Kunitomo et al. (2022)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Premature closure</div><div class="ct-cite">Post-labs differential change</div></td>
+          <td><span class="tag-pill tag-reasoning">Reasoning</span></td>
+          <td class="ct-basis">Graber et al. (2005) — single most common cognitive error; Berner & Graber (2008)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Evidence integration</div><div class="ct-cite">Phase 4 → Final differential</div></td>
+          <td><span class="tag-pill tag-reasoning">Reasoning</span></td>
+          <td class="ct-basis">Croskerry (2009) debiasing framework — System 2 hypothesis updating</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Reasoning articulation quality</div><div class="ct-cite">0–4 scale per justification response</div></td>
+          <td><span class="tag-pill tag-reasoning">Reasoning</span></td>
+          <td class="ct-basis">Semantic qualifier framework (Bordage & Lemieux, 1991); elaborated knowledge (Bordage, 1994)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">History-taking completeness</div><div class="ct-cite">Critical history elicitation</div></td>
+          <td><span class="tag-pill tag-reasoning">Reasoning</span></td>
+          <td class="ct-basis">Faulty context generation (Graber et al., 2005 taxonomy)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Language complexity (readability)</div><div class="ct-cite">Flesch-Kincaid, SMOG, ARI</div></td>
+          <td><span class="tag-pill tag-comm">Communication</span></td>
+          <td class="ct-basis">Kincaid et al. (1975); McLaughlin (1969); CDC 6th–8th grade benchmark</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Language adaptation for patient</div><div class="ct-cite">Patient vs. attending register</div></td>
+          <td><span class="tag-pill tag-comm">Communication</span></td>
+          <td class="ct-basis">SEGUE Framework (Makoul, 2001); Calgary-Cambridge Guide (Silverman et al., 2005)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Question type sequencing</div><div class="ct-cite">Open/closed/leading/clarifying</div></td>
+          <td><span class="tag-pill tag-comm">Communication</span></td>
+          <td class="ct-basis">Calgary-Cambridge open-to-closed cone; Langewitz et al. (2002) spontaneous talking time</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Empathy & rapport behaviors</div><div class="ct-cite">7 behavioral signals per turn</div></td>
+          <td><span class="tag-pill tag-comm">Communication</span></td>
+          <td class="ct-basis">Kalamazoo Consensus Statement (Makoul et al., 2001); CARE Measure (Mercer et al., 2004)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Implicit confidence language</div><div class="ct-cite">Hedging vs. commitment markers</div></td>
+          <td><span class="tag-pill tag-meta">Metacognition</span></td>
+          <td class="ct-basis">Epistemic markers in clinical reasoning (Lingard et al., 2003)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Confidence calibration</div><div class="ct-cite">5-point Likert vs. accuracy</div></td>
+          <td><span class="tag-pill tag-meta">Metacognition</span></td>
+          <td class="ct-basis">Eva & Regehr (2005, 2008); Berner & Graber (2008); Sætrevik et al. (2024)</td>
+        </tr>
+        <tr>
+          <td><div class="ct-name">Guideline-grounded debrief</div><div class="ct-cite">RAG over open-access guidelines</div></td>
+          <td><span class="tag-pill tag-rag">Evidence</span></td>
+          <td class="ct-basis">Retrieval-Augmented Generation (Lewis et al., 2020); open-access clinical guidelines only</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Limitations -->
+  <div class="section">
+    <div class="section-label">Transparency & Limitations</div>
+    <p class="section-intro">
+      ReasonDx is an educational platform, not a clinical assessment tool. We are committed to transparency about what the platform can and cannot measure.
+    </p>
+    <div class="limitations">
+      <h3>Known limitations</h3>
+      <ol>
+        <li><strong>Text-based simulation fidelity.</strong> Real clinical encounters involve time pressure, physical examination, non-verbal communication, and emotional load that text-based simulation cannot fully replicate. Behavioral signals reflect in-simulation performance only.</li>
+        <li><strong>Proxy measures.</strong> All passive behavioral signals are proxies for latent constructs. They are best interpreted as educational signals, not clinical assessments or competency certifications.</li>
+        <li><strong>AI-generated patient.</strong> The patient voice is generated by a large language model (Claude, Anthropic). Responses are realistic but not drawn from real patient data.</li>
+        <li><strong>Minimum sessions required.</strong> Longitudinal cognitive pattern detection requires a minimum of three completed simulations per student. Single-session data is collected but no patterns are reported until this threshold is met.</li>
+        <li><strong>Self-selected sample.</strong> Students who choose to use ReasonDx may differ from those who do not in ways that affect results (motivation, prior clinical exposure, digital literacy).</li>
+        <li><strong>Open-access sources only.</strong> All clinical guidelines used in AI-generated debriefs are CC-BY, CC-BY-NC, or free-access society publications. The platform does not reproduce or paraphrase copyrighted clinical content.</li>
+      </ol>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Selected References -->
+  <div class="section">
+    <div class="section-label">Selected References</div>
+    <p class="section-intro">
+      The following are primary citations for the platform's core theoretical frameworks. Full evidence base documentation — including operationalizations, thresholds, and limitations for every construct — is maintained in the platform's research documentation.
+    </p>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Diagnostic Reasoning & Cognitive Bias</div>
+      <p class="ref-item">Croskerry, P. (2009). A universal model of diagnostic reasoning. <em>Academic Medicine, 84</em>(8), 1022–1028. <a href="https://doi.org/10.1097/ACM.0b013e3181ace703">doi:10.1097/ACM.0b013e3181ace703</a></p>
+      <p class="ref-item">Elstein, A. S., Shulman, L. S., & Sprafka, S. A. (1978). <em>Medical Problem Solving: An Analysis of Clinical Reasoning.</em> Harvard University Press.</p>
+      <p class="ref-item">Graber, M. L., Franklin, N., & Gordon, R. (2005). Diagnostic error in internal medicine. <em>Archives of Internal Medicine, 165</em>(13), 1493–1499. <a href="https://doi.org/10.1001/archinte.165.13.1493">doi:10.1001/archinte.165.13.1493</a></p>
+      <p class="ref-item">Berner, E. S., & Graber, M. L. (2008). Overconfidence as a cause of diagnostic error in medicine. <em>American Journal of Medicine, 121</em>(5 Suppl), S2–S23.</p>
+      <p class="ref-item">Kunitomo, K., Harada, T., & Watari, T. (2022). Cognitive biases encountered by physicians in the emergency room. <em>BMC Emergency Medicine, 22</em>, 148. <a href="https://doi.org/10.1186/s12873-022-00708-3">doi:10.1186/s12873-022-00708-3</a></p>
+      <p class="ref-item">Sætrevik, B., Seeligmann, V. T., Frotvedt, T. F., & Bondevik, Ø. K. (2024). Anchoring, confirmation and confidence bias among medical decision-makers. <em>Collabra: Psychology, 10</em>(1), 126223. <a href="https://doi.org/10.1525/collabra.126223">doi:10.1525/collabra.126223</a></p>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Knowledge Structure & Articulation</div>
+      <p class="ref-item">Schmidt, H. G., & Rikers, R. M. J. P. (2007). How expertise develops in medicine: knowledge encapsulation and illness script formation. <em>Medical Education, 41</em>(12), 1133–1139.</p>
+      <p class="ref-item">Bordage, G., & Lemieux, M. (1991). Semantic structures and diagnostic thinking of experts and novices. <em>Academic Medicine, 66</em>(9 Suppl), S70–S72.</p>
+      <p class="ref-item">Bordage, G. (1994). Elaborated knowledge: a key to successful diagnostic thinking. <em>Academic Medicine, 69</em>(11), 883–885.</p>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Clinical Communication</div>
+      <p class="ref-item">Makoul, G. et al. (2001). Essential elements of communication in medical encounters: the Kalamazoo Consensus Statement. <em>Academic Medicine, 76</em>(4), 390–393.</p>
+      <p class="ref-item">Silverman, J., Kurtz, S., & Draper, J. (2005). <em>Skills for Communicating with Patients</em> (2nd ed.). Radcliffe Publishing.</p>
+      <p class="ref-item">Mercer, S. W. et al. (2004). The CARE Measure. <em>Family Practice, 21</em>(6), 699–705.</p>
+      <p class="ref-item">Levinson, W., Gorawara-Bhat, R., & Lamb, J. (2000). A study of patient clues and physician responses. <em>JAMA, 284</em>(8), 1021–1027.</p>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Health Literacy & Readability</div>
+      <p class="ref-item">Paasche-Orlow, M. K., & Wolf, M. S. (2007). The causal pathways linking health literacy to health outcomes. <em>American Journal of Health Behavior, 31</em>(S1), S19–S26.</p>
+      <p class="ref-item">Kincaid, J. P. et al. (1975). <em>Derivation of new readability formulas.</em> Naval Air Station Memphis.</p>
+      <p class="ref-item">McLaughlin, G. H. (1969). SMOG grading: a new readability formula. <em>Journal of Reading, 12</em>(8), 639–646.</p>
+      <p class="ref-item">Centers for Disease Control and Prevention. (2016). <em>Health Literacy.</em> <a href="https://www.cdc.gov/healthliteracy/">cdc.gov/healthliteracy</a></p>
+    </div>
+
+    <div class="ref-group">
+      <div class="ref-group-title">Self-Assessment & Confidence Calibration</div>
+      <p class="ref-item">Eva, K. W., & Regehr, G. (2005). Self-assessment in the health professions: a reformulation and research agenda. <em>Academic Medicine, 80</em>(10 Suppl), S46–S54.</p>
+      <p class="ref-item">Wolpaw, T. M., Wolpaw, D. R., & Papp, K. K. (2003). SNAPPS: a learner-centered model for outpatient education. <em>Academic Medicine, 78</em>(9), 893–898.</p>
+      <p class="ref-item">Moulton, C. A. et al. (2007). Slowing down when you should: a new model of expert judgment. <em>Academic Medicine, 82</em>(S10), S109–S116.</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>ReasonDx · Lauren Fine, MD, FAAAAI · NSU Dr. Kiran C. Patel College of Allopathic Medicine</p>
+  <p style="margin-top:6px"><a href="/research.html">Research Foundations</a> · <a href="/institutional.html">Institutional Partnerships</a> · <a href="/terms.html">Terms</a></p>
+</footer>
+
+</body>
+</html>
