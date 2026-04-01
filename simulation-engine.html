@@ -158,6 +158,39 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 // ── INTAKE CASE SEARCH ──
 // ── INITIALIZATION ──
 const RDX_DEBUG = false; // set true for verbose console logging
+
+// ═══════════════════════════════════════════════════════════════
+// RADIOLOGY STUDY ORCHESTRATOR (embedded)
+// ═══════════════════════════════════════════════════════════════
+
+const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+const PHASES = {
+  INITIAL_DIFFERENTIAL:1, JUSTIFICATION:2, HISTORY_TAKING:3,
+  REVISED_DIFFERENTIAL:4, PHYSICAL_EXAM:5, LABS_IMAGING:6,
+  REPORT_COMPARISON:7, REFLECTION:8, MANAGEMENT:9, COMPLETE:10
+};
+const PHASE_LABELS = {
+  1:"Initial Differential", 2:"Differential Justification", 3:"History-Taking",
+  4:"Revised Differential", 5:"Physical Examination", 6:"Labs & Imaging",
+  7:"Report Comparison", 8:"Closing Reflection", 9:"Management Plan", 10:"Complete"
+};
+
+let state = null;
+let caseData = null;
+
+// ── CASE REGISTRY ──
+const CASE_REGISTRY = {
+  'DYS-001':   function() { return typeof CASE_DYS001 !== 'undefined' ? CASE_DYS001 : null; },
+  'DYS-002':   function() { return typeof CASE_DYS002 !== 'undefined' ? CASE_DYS002 : null; },
+  'COUGH-001': function() { return typeof CASE_COUGH001 !== 'undefined' ? CASE_COUGH001 : null; },
+  'CHEST-001': function() { return typeof CASE_CHEST001 !== 'undefined' ? CASE_CHEST001 : null; },
+  'FEVER-001': function() { return typeof CASE_FEVER001 !== 'undefined' ? CASE_FEVER001 : null; }
+};
+const CASE_IDS = Object.keys(CASE_REGISTRY);
 function startStudy() {
   // ── Read identity from localStorage (set by auth/browse) ──
   var rdxUser = {};
