@@ -81,6 +81,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="/rdx-fingerprint.js"></script>
 <script src="/js/rdx-student-model-bus.js"></script>
 <script src="/js/rdx-meta-reasoning.js"></script>
+<script src="/js/rdx-illness-script-tracer.js"></script>
 <script src="/rdx-voice-patient.js"></script>
 <script src="/rdx-realtime.js"></script>
 <script src="/rdx-ecg.js"></script>
@@ -1182,6 +1183,16 @@ function enterPhase(phase) {
       RDXFingerprint.store(state, caseData, reasoningGraph, state._confidenceScore || null);
     } else if (window.RDXFingerprint) {
       RDXFingerprint.store(state, caseData, null, state._confidenceScore || null);
+    }
+
+    // ── ILLNESS SCRIPT TRACER: Capture semantic snapshots of reasoning ──
+    // Agent 1 / Study 4: embeds phase-2, phase-4, and final justification text
+    // via Voyage embed worker, stores to illness_script_sessions for longitudinal
+    // encapsulation tracking (Schmidt & Rikers, 2007).
+    if (window.IllnessScriptTracer && caseData) {
+      window.IllnessScriptTracer.capture(state, caseData).catch(function(e) {
+        console.warn('[IllnessScriptTracer] capture error (non-blocking):', e.message);
+      });
     }
 
     // ── AGENT TOOLS: Post-simulation processing ──
