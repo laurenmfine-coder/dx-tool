@@ -304,27 +304,24 @@ setMode(_initMode);
 <div id="semanticResults" style="display:none;padding:0 16px 40px"></div>
 
 <script>
-// ── Semantic Search ────────────────────────────────────────────────────────
-var _semanticMode = false;
-var _semanticTimer = null;
+var _sem = false;
+var _semTimer = null;
 
 function toggleSemanticMode() {
-  _semanticMode = !_semanticMode;
+  _sem = !_sem;
   var btn = document.getElementById('semanticToggle');
   var inp = document.getElementById('searchInput');
-  if (!btn) return;
-  if (_semanticMode) {
-    btn.textContent = '✨ AI Search';
+  if (!btn || !inp) return;
+  if (_sem) {
+    btn.textContent = 'AI Search';
     btn.style.background = '#2874A6';
     btn.style.color = '#fff';
-    btn.style.borderColor = '#2874A6';
-    if (inp) inp.placeholder = 'Describe a presentation... e.g. "elderly confused low sodium"';
+    inp.placeholder = 'Describe a presentation e.g. elderly confused low sodium';
   } else {
-    btn.textContent = '🔍 Keyword';
-    btn.style.background = 'transparent';
-    btn.style.color = '';
-    btn.style.borderColor = '';
-    if (inp) inp.placeholder = 'Search by presentation, symptom, or diagnosis...';
+    btn.textContent = 'Keyword';
+    btn.style.background = '#f1f5f9';
+    btn.style.color = '#475569';
+    inp.placeholder = 'Search by chief complaint';
     var sr = document.getElementById('semanticResults');
     if (sr) { sr.style.display = 'none'; sr.innerHTML = ''; }
     render();
@@ -332,50 +329,50 @@ function toggleSemanticMode() {
 }
 
 function handleSearch() {
-  if (!_semanticMode) { render(); return; }
-  clearTimeout(_semanticTimer);
+  if (!_sem) { render(); return; }
+  clearTimeout(_semTimer);
   var q = (document.getElementById('searchInput').value || '').trim();
-  if (q.length < 3) { render(); return; }
-  _semanticTimer = setTimeout(function() { runSemanticSearch(q); }, 800);
+  if (q.length < 3) return;
+  _semTimer = setTimeout(function() { doSemanticSearch(q); }, 800);
 }
 
-async function runSemanticSearch(query) {
-  var resultsEl = document.getElementById('semanticResults');
-  if (!resultsEl) return;
-  resultsEl.style.display = 'block';
-  resultsEl.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b"><div style="font-size:24px;margin-bottom:8px">✨</div><div style="font-size:14px">Finding similar cases...</div></div>';
-  try {
-    if (!window.RDXSemanticSearch) throw new Error('Semantic search not loaded');
-    var results = await RDXSemanticSearch.search(query, { limit: 12 });
-    if (!results || results.length === 0) {
-      resultsEl.innerHTML = '<div style="text-align:center;padding:40px;color:#64748b;font-size:14px">No similar cases found. Try a different description.</div>';
+function doSemanticSearch(q) {
+  var el = document.getElementById('semanticResults');
+  if (!el) return;
+  el.style.display = 'block';
+  el.innerHTML = '<p style="padding:20px;color:#64748b;text-align:center">Searching...</p>';
+  if (!window.RDXSemanticSearch) {
+    el.innerHTML = '<p style="padding:20px;color:#991b1b">Semantic search not loaded.</p>';
+    return;
+  }
+  RDXSemanticSearch.search(q, { limit: 10 }).then(function(results) {
+    if (!results || !results.length) {
+      el.innerHTML = '<p style="padding:20px;color:#64748b;text-align:center">No similar cases found.</p>';
       return;
     }
-    var html = '<div style="margin-bottom:16px"><span style="font-size:13px;color:#64748b;font-weight:500">✨ ' + results.length + ' cases matching: <em>' + query + '</em></span></div>';
-    html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">';
-    results.forEach(function(r) {
-      var c = r.fullCase || {};
-      var acuityColor = r.acuity === 1 ? '#ef4444' : r.acuity === 2 ? '#f59e0b' : '#22c55e';
-      var caseUrl = '/simulation-engine.html?case=' + encodeURIComponent(r.case_id);
-      html += '<div onclick="window.location.href='' + caseUrl + ''" '
-            + 'style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:16px;cursor:pointer;transition:all .15s" '
-            + 'onmouseover="this.style.borderColor='#2874A6'" onmouseout="this.style.borderColor='#e2e8f0'">'
-            + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">'
-            + '<span style="background:' + acuityColor + ';color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700">ESI ' + (r.acuity||3) + '</span>'
-            + '<span style="font-size:11px;color:#64748b;text-transform:capitalize">' + (r.category||'') + '</span>'
-            + '<span style="margin-left:auto;font-size:11px;color:#2874A6;font-weight:600">' + (r.similarity||0) + '% match</span>'
-            + '</div>'
-            + '<div style="font-size:14px;font-weight:700;color:#0d1f2d;margin-bottom:4px">' + (r.diagnosis||r.case_id) + '</div>'
-            + '<div style="font-size:12px;color:#64748b">' + ((c.chiefComplaint||r.content||'').slice(0,80)) + '</div>'
-            + '</div>';
-    });
-    html += '</div>';
-    resultsEl.innerHTML = html;
-  } catch(e) {
-    resultsEl.innerHTML = '<div style="padding:16px;background:#fef2f2;border-radius:8px;color:#991b1b;font-size:13px">Search error: ' + e.message + '</div>';
-  }
+    var h = '<p style="padding:8px 0 16px;font-size:13px;color:#64748b">AI found ' + results.length + ' cases similar to: <em>' + q + '</em></p>';
+    h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px">';
+    for (var i = 0; i < results.length; i++) {
+      var r = results[i];
+      var fc = r.fullCase || {};
+      var ac = r.acuity === 1 ? '#ef4444' : r.acuity === 2 ? '#f59e0b' : '#22c55e';
+      var url = '/simulation-engine.html?case=' + encodeURIComponent(r.case_id);
+      h += '<div style="background:#fff;border:1.5px solid #e2e8f0;border-radius:10px;padding:16px;cursor:pointer" onclick="location.href='' + url + ''">';
+      h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">';
+      h += '<span style="background:' + ac + ';color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700">ESI ' + (r.acuity||3) + '</span>';
+      h += '<span style="font-size:11px;color:#64748b">' + (r.category||'') + '</span>';
+      h += '<span style="margin-left:auto;font-size:11px;color:#2874A6;font-weight:600">' + (r.similarity||0) + '%</span>';
+      h += '</div>';
+      h += '<div style="font-weight:700;font-size:14px;margin-bottom:4px">' + (r.diagnosis||r.case_id) + '</div>';
+      h += '<div style="font-size:12px;color:#64748b">' + ((fc.chiefComplaint||'').slice(0,80)) + '</div>';
+      h += '</div>';
+    }
+    h += '</div>';
+    el.innerHTML = h;
+  }).catch(function(e) {
+    el.innerHTML = '<p style="padding:20px;color:#991b1b">Error: ' + e.message + '</p>';
+  });
 }
-
 </script>
 </body>
 </html>
