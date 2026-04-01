@@ -1040,95 +1040,89 @@ function enterPhase(phase) {
               .then(function(debrief) {
                 addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
 
-                // Show RAG guideline sources (live citations from database)
+                // Show RAG guideline sources
                 if (ragContext && ragContext.found && ragContext.sources && ragContext.sources.length > 0) {
                   var ragEl = document.createElement('div');
                   ragEl.className = 'chat-msg msg-system';
                   ragEl.innerHTML = GuidelinesRAG.formatSourcesForDisplay(ragContext.sources);
                   document.getElementById('chatMessages').appendChild(ragEl);
                 } else if (guidelineResults.found) {
-                  // Fallback: static guidelines library if RAG table is empty
                   var guidelineText = 'Recommended reading for this case:\n\n' + guidelineResults.guidelines.slice(0, 3).map(function(g) {
                     return '\u2022 ' + g.title + ' (' + g.journal + ', ' + g.year + ')' + (g.url ? '\n  ' + g.url : '');
                   }).join('\n\n');
                   addMessage('system', guidelineText);
                 }
 
-            // Show SpacedRep cards
-            if (cards.length > 0) {
-              addMessage('system', cards.length + ' review card' + (cards.length > 1 ? 's' : '') + ' generated based on your identified gaps. These will appear in your Study Hub for spaced repetition review.');
-            }
+                // Show SpacedRep cards
+                if (cards.length > 0) {
+                  addMessage('system', cards.length + ' review card' + (cards.length > 1 ? 's' : '') + ' generated based on your identified gaps. These will appear in your Study Hub for spaced repetition review.');
+                }
 
-            // Case recommendation
-            if (state.priorHistory) {
-              var nextCase = AgentTools.recommendNextCase(
-                { found: true, patterns: state.priorHistory },
-                ['DYS-001', 'DYS-002', 'CHEST-001', 'COUGH-001', 'FEVER-001']
-              );
-              if (nextCase.caseId && nextCase.caseId !== caseData.caseId) {
-                addMessage('system', 'Recommended next case: ' + nextCase.caseId + ' (' + nextCase.reason + ')');
-              }
-            }
+                // Case recommendation
+                if (state.priorHistory) {
+                  var nextCase = AgentTools.recommendNextCase(
+                    { found: true, patterns: state.priorHistory },
+                    ['DYS-001', 'DYS-002', 'CHEST-001', 'COUGH-001', 'FEVER-001']
+                  );
+                  if (nextCase.caseId && nextCase.caseId !== caseData.caseId) {
+                    addMessage('system', 'Recommended next case: ' + nextCase.caseId + ' (' + nextCase.reason + ')');
+                  }
+                }
 
-            // ── STUDY TOOLS: Generate study package for NotebookLM ──
-            if (window.RdxStudyTools) {
-              var ST = window.RdxStudyTools;
-              var receipt = ST.PerformanceReceipt.generate(state, caseData);
-              var studyPrompts = ST.StudyPrompts.generate(gaps, caseData, guidelineResults);
-              var guidelineCompilation = ST.GuidelineCompiler.compile(caseData.caseId, caseData.targetDiagnosis, guidelineResults);
-              var studyPackage = ST.NotebookLMBridge.generatePackage(receipt, studyPrompts, guidelineCompilation, caseData);
+                // ── STUDY TOOLS ──
+                if (window.RdxStudyTools) {
+                  var ST = window.RdxStudyTools;
+                  var receipt = ST.PerformanceReceipt.generate(state, caseData);
+                  var studyPrompts = ST.StudyPrompts.generate(gaps, caseData, guidelineResults);
+                  var guidelineCompilation = ST.GuidelineCompiler.compile(caseData.caseId, caseData.targetDiagnosis, guidelineResults);
+                  var studyPackage = ST.NotebookLMBridge.generatePackage(receipt, studyPrompts, guidelineCompilation, caseData);
+                  state._studyPackage = studyPackage;
+                  state._receipt = receipt;
+                  var btnDiv = document.createElement('div');
+                  btnDiv.className = 'chat-msg msg-system';
+                  btnDiv.innerHTML = '<div style="background:#E8F8F5;border-radius:10px;padding:16px;margin:4px 0;">' +
+                    '<div style="font-weight:700;color:#0D7A67;margin-bottom:8px;">\uD83D\uDCDA Study Package Ready</div>' +
+                    '<div style="font-size:13px;color:#333;margin-bottom:12px;">Your performance receipt, study questions, and guideline references have been compiled. Upload this to Google NotebookLM to study the topics you need to review.</div>' +
+                    '<button onclick="downloadStudyPackage()" style="padding:10px 20px;background:#0D7A67;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;margin-right:8px;">Download Study Package</button>' +
+                    '<button onclick="copyReceipt()" style="padding:10px 20px;background:#fff;color:#0D7A67;border:2px solid #0D7A67;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;">Copy Performance Receipt</button>' +
+                    '</div>';
+                  document.getElementById('chatMessages').appendChild(btnDiv);
+                }
 
-              // Store for download
-              state._studyPackage = studyPackage;
-              state._receipt = receipt;
+                // ── REALTIME ──
+                if (window.RDXRealtime) {
+                  RDXRealtime.stopBroadcast({ caseId: state.caseId, turns: state.turnCount });
+                }
 
-              // Add download button to chat
-              var btnDiv = document.createElement('div');
-              btnDiv.className = 'chat-msg msg-system';
-              btnDiv.innerHTML = '<div style="background:#E8F8F5;border-radius:10px;padding:16px;margin:4px 0;">' +
-                '<div style="font-weight:700;color:#0D7A67;margin-bottom:8px;">\uD83D\uDCDA Study Package Ready</div>' +
-                '<div style="font-size:13px;color:#333;margin-bottom:12px;">Your performance receipt, study questions, and guideline references have been compiled. Upload this to Google NotebookLM to study the topics you need to review.</div>' +
-                '<button onclick="downloadStudyPackage()" style="padding:10px 20px;background:#0D7A67;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;margin-right:8px;">Download Study Package</button>' +
-                '<button onclick="copyReceipt()" style="padding:10px 20px;background:#fff;color:#0D7A67;border:2px solid #0D7A67;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;font-family:inherit;">Copy Performance Receipt</button>' +
-                '</div>';
-              document.getElementById('chatMessages').appendChild(btnDiv);
-            }
+                // ── EMAIL TRIGGER ──
+                if (window.RDXEmail) {
+                  var _email = (window.RdxPlatform && window.RdxPlatform.getUserEmail)
+                    ? window.RdxPlatform.getUserEmail() : state.studentName;
+                  var _ddxAcc = null;
+                  if (state.differentials && state.differentials.revised && caseData.targetDiagnosis) {
+                    var _revDx = state.differentials.revised.map(function(e){ return (e.diagnosis||e.name||e||'').toLowerCase(); });
+                    _ddxAcc = _revDx.includes((caseData.targetDiagnosis||'').toLowerCase()) ? 1 : 0;
+                  }
+                  RDXEmail.simCompleted({
+                    email:      _email,
+                    firstName:  (state.studentName||'').split(' ')[0],
+                    caseId:     caseData.caseId || '',
+                    diagnosis:  caseData.targetDiagnosis || caseData.diagnosis || '',
+                    specialty:  caseData.category || '',
+                    acuity:     caseData.acuity || 2,
+                    ddxAccuracy: _ddxAcc,
+                    phasesCompleted: state.currentPhase || 0,
+                  });
+                }
 
-            // ── REALTIME — stop broadcast ──
-            if (window.RDXRealtime) {
-              RDXRealtime.stopBroadcast({ caseId: state.caseId, turns: state.turnCount });
-            }
+                // ── CASE EXPLAINER AGENT ──
+                setTimeout(function() {
+                  if (window.CaseExplainerAgent) {
+                    CaseExplainerAgent.run({ state: state, caseData: caseData, chatEl: chatEl });
+                  }
+                }, 800);
 
-            // ── FLODESK EMAIL TRIGGER ──
-            if (window.RDXEmail) {
-              var _email = (window.RdxPlatform && window.RdxPlatform.getUserEmail)
-                ? window.RdxPlatform.getUserEmail() : state.studentName;
-              var _ddxAcc = null;
-              if (state.differentials && state.differentials.revised && caseData.targetDiagnosis) {
-                var _revDx = state.differentials.revised.map(function(e){ return (e.diagnosis||e.name||e||'').toLowerCase(); });
-                _ddxAcc = _revDx.includes((caseData.targetDiagnosis||'').toLowerCase()) ? 1 : 0;
-              }
-              RDXEmail.simCompleted({
-                email:      _email,
-                firstName:  (state.studentName||'').split(' ')[0],
-                caseId:     caseData.caseId || '',
-                diagnosis:  caseData.targetDiagnosis || caseData.diagnosis || '',
-                specialty:  caseData.category || '',
-                acuity:     caseData.acuity || 2,
-                ddxAccuracy: _ddxAcc,
-                phasesCompleted: state.currentPhase || 0,
-              });
-            }
-
-            // ── CASE EXPLAINER AGENT — personalized learning synthesis ──
-            setTimeout(function() {
-              if (window.CaseExplainerAgent) {
-                CaseExplainerAgent.run({ state: state, caseData: caseData, chatEl: chatEl });
-              }
-            }, 800);
-
-              }); // closes .then(function(debrief)
-            }).catch(function(e) { console.warn('[RAG debrief] non-fatal error:', e); });
+          }).catch(function(e) { console.warn('[RAG debrief] non-fatal error:', e); });
           }); // closes ragPromise.then
         }, 1500);
       }
