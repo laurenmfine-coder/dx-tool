@@ -80,6 +80,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="/rdx-guidelines-rag.js"></script>
 <script src="/rdx-fingerprint.js"></script>
 <script src="/js/rdx-student-model-bus.js"></script>
+<script src="/js/rdx-meta-reasoning.js"></script>
 <script src="/rdx-voice-patient.js"></script>
 <script src="/rdx-realtime.js"></script>
 <script src="/rdx-ecg.js"></script>
@@ -229,6 +230,15 @@ function startStudy() {
   if (!caseData) {
     addMessage('system', 'Case not found: ' + selectedCase + '. <a href="browse.html">Return to Browse</a>.');
     return;
+  }
+
+  // Register case with Meta-Reasoning Agent so it can use case properties
+  // for case selection and bias-targeted sequencing
+  if (window.MetaReasoning) {
+    window.MetaReasoning.registerCase(
+      selectedCase,
+      caseData.source === 'crt_adapter' ? caseData._crtSource || caseData : caseData
+    );
   }
 
   // ── Depth version ──
@@ -465,6 +475,19 @@ async function sendMessage() {
       state.cognitiveProfile || null,
       state.sessionHistory   || []
     );
+
+    // Meta-Reasoning Agent — synthesize theory from updated bus on every turn
+    // Runs after bus update so theory reflects the latest all-layer snapshot.
+    // Synthesis is fast (pure JS scoring, no API call).
+    if (window.MetaReasoning) {
+      var explLog = (window.RdxAdvanced && window.RdxAdvanced.ExplainableAgent)
+        ? window.RdxAdvanced.ExplainableAgent._log : [];
+      var aarData = (window.RdxReasoning && window.RdxReasoning.AAR)
+        ? window.RdxReasoning.AAR.getReview() : null;
+      state._metaTheory = window.MetaReasoning.synthesize(
+        window.StudentModelBus, explLog, aarData
+      );
+    }
   }
 
   // ── TRANSITION CONFIRMATION FLAG ──
@@ -1344,6 +1367,16 @@ function buildSystemPrompt() {
     studentModelBlock = '\n\n' + window.StudentModelBus.getPromptBlock({ role: busRole });
   }
 
+  // ── Meta-Reasoning Agent brief ───────────────────────────────────────────
+  // The supervisory agent's current theory of the student's error mode,
+  // injected as a compact tactical directive for the attending.
+  // Not shown to patient agent (role === 3).
+  var metaBrief = '';
+  if (phase !== 3 && window.MetaReasoning && state && state._metaTheory) {
+    var brief = window.MetaReasoning.getAttendingBrief(state._metaTheory);
+    if (brief) metaBrief = '\n\n' + brief;
+  }
+
   let sys = `You are participating in a clinical reasoning simulation on the ReasonDx medical education platform.
 
 ABSOLUTE RULES (apply to every response):
@@ -1513,6 +1546,9 @@ When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."
 
   // Append student model bus — gives the agent a unified live student model
   sys += studentModelBlock;
+
+  // Append meta-reasoning brief — attending gets supervisory agent's tactical directive
+  sys += metaBrief;
 
   return sys;
 }
@@ -2036,6 +2072,7 @@ async function exportStudyData() {
     ddx_comparison: state._ddxComparison || null,
     reasoning_tools: state._reasoningTools || null,
     student_model_snapshot: state.studentModelSnapshot || null,
+    meta_reasoning_record: state.metaReasoningRecord || null,
     case_source: caseData.source || 'native',
     started_at: state.phaseHistory[0]?.enteredAt || new Date().toISOString(),
     completed_at: new Date().toISOString(),
@@ -2309,6 +2346,8 @@ async function exportStudyData() {
     if (window.RdxReadability) window.RdxReadability.clear();
     if (window.RdxPassive) window.RdxPassive.clear();
     if (window.StudentModelBus) window.StudentModelBus.reset();
+    if (window.MetaReasoning) window.MetaReasoning._state.currentTheory = null;
+    if (window.MetaReasoning) window.MetaReasoning._state.theoryHistory = [];
     if (A.ExplainableAgent && window.state) {
       A.ExplainableAgent.logDecision({
         phase: 1, type: 'session_start',
@@ -2413,6 +2452,12 @@ async function exportStudyData() {
           );
           window.state.studentModelSnapshot = window.StudentModelBus.getResearchSnapshot();
           if(RDX_DEBUG) console.log('Student model snapshot:', JSON.stringify(window.state.studentModelSnapshot, null, 2).substring(0, 400));
+        }
+
+        // Meta-Reasoning Agent — final theory record at session end
+        if (window.MetaReasoning) {
+          window.state.metaReasoningRecord = window.MetaReasoning.getResearchRecord();
+          if(RDX_DEBUG) console.log('Meta-reasoning record:', JSON.stringify(window.state.metaReasoningRecord, null, 2).substring(0, 400));
         }
 
         // Also analyze the radiology reports for comparison

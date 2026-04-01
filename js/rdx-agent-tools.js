@@ -394,9 +394,10 @@ const AgentTools = {
 
   // ═══════════════════════════════════════════════════════════════
   // TOOL 8: CASE RECOMMENDATION ENGINE
-  // Based on the student's performance patterns across sessions,
-  // recommends the next case to assign. This is the SpacedRep
-  // integration at the case level.
+  // Delegates to MetaReasoning.selectCase() when available, which
+  // matches case properties to the student's current error mode for
+  // deliberate productive challenge (Kapur, 2016).
+  // Falls back to heuristic selection when MetaReasoning is not loaded.
   // ═══════════════════════════════════════════════════════════════
 
   recommendNextCase: function(studentHistory, availableCases) {
@@ -405,27 +406,56 @@ const AgentTools = {
     }
 
     var completed = studentHistory.patterns.completedCaseIds || [];
-    var uncompleted = availableCases.filter(function(c) { return completed.indexOf(c) === -1; });
+
+    // ── Primary path: delegate to Meta-Reasoning Agent ───────────────────
+    if (window.MetaReasoning && window.StudentModelBus) {
+      var theory = window.MetaReasoning._state.currentTheory;
+      if (theory) {
+        var rec = window.MetaReasoning.selectCase(theory, availableCases, completed);
+        if (rec.caseId) {
+          return {
+            caseId: rec.caseId,
+            reason: rec.rationale,
+            targetedBias: rec.targetedBias,
+            expectedChallenge: rec.expectedChallenge,
+            theoryCitation: rec.theoryCitation,
+            source: 'meta_reasoning'
+          };
+        }
+      }
+    }
+
+    // ── Fallback: heuristic selection ─────────────────────────────────────
+    var uncompleted = availableCases.filter(function(c) {
+      var cid = (c.caseId || c.id || c);
+      return completed.indexOf(cid) === -1;
+    });
 
     if (uncompleted.length === 0) {
-      return { caseId: null, reason: 'All available cases completed' };
+      return { caseId: null, reason: 'All available cases completed', source: 'heuristic' };
     }
 
     // If student consistently misses environmental history, prioritize
     // cases where environmental exposure is the key differentiator
     if (studentHistory.patterns.missedEnvHistoryRate > 50) {
       var envCases = uncompleted.filter(function(c) {
-        return c.startsWith('DYS-') || c.startsWith('COUGH-') || c.startsWith('RASH-');
+        var cid = (c.caseId || c.id || c);
+        return cid.startsWith('DYS-') || cid.startsWith('COUGH-') || cid.startsWith('RASH-');
       });
       if (envCases.length > 0) {
+        var envId = envCases[0].caseId || envCases[0].id || envCases[0];
         return {
-          caseId: envCases[0],
-          reason: 'Student has missed environmental history in ' + studentHistory.patterns.missedEnvHistoryRate + '% of prior sessions — assigning case with environmental exposure emphasis'
+          caseId: envId,
+          reason: 'Student has missed environmental history in ' +
+            studentHistory.patterns.missedEnvHistoryRate +
+            '% of prior sessions — assigning case with environmental exposure emphasis',
+          source: 'heuristic'
         };
       }
     }
 
-    return { caseId: uncompleted[0], reason: 'Next uncompleted case' };
+    var nextId = uncompleted[0].caseId || uncompleted[0].id || uncompleted[0];
+    return { caseId: nextId, reason: 'Next uncompleted case', source: 'heuristic' };
   }
 };
 

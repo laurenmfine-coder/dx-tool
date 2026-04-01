@@ -368,18 +368,94 @@ async function tool_osce_results() {
     cohortAvg: studentSummary.length ? Math.round(studentSummary.reduce(function(a,s){return a+s.avgScore;},0)/studentSummary.length) : null };
 }
 
+// ── Tool: Meta-Reasoning Summary ─────────────────────────────────────────
+// Queries rad_study_sessions for meta_reasoning_record JSONB to show
+// what error modes the supervisory agent detected across the cohort.
+async function tool_meta_reasoning_summary() {
+  var from = document.getElementById('dateFrom').value;
+  var to   = document.getElementById('dateTo').value;
+  var { data, error } = await db
+    .from('rad_study_sessions')
+    .select('student_name,case_id,started_at,meta_reasoning_record,reasoning_fingerprints(anchoring_detected,premature_closure,target_in_final)')
+    .gte('started_at', from + 'T00:00:00Z')
+    .lte('started_at', to + 'T23:59:59Z')
+    .not('meta_reasoning_record', 'is', null)
+    .order('started_at', { ascending: false })
+    .limit(200);
+  if (error) return { error: error.message };
+
+  var sessions = data || [];
+  if (sessions.length === 0) return { sessions: 0, message: 'No meta-reasoning records in this date range. Ensure the student-model-bus.sql migration has been run and at least one simulation session has been completed.' };
+
+  // Aggregate by student
+  var byStudent = {};
+  var modeCounts = {};
+
+  sessions.forEach(function(s) {
+    var mr = s.meta_reasoning_record || {};
+    var history = mr.dominantModeHistory || [];
+
+    if (!byStudent[s.student_name]) {
+      byStudent[s.student_name] = {
+        sessions: 0, modes: {}, urgentCount: 0, highConfidenceCount: 0
+      };
+    }
+    var st = byStudent[s.student_name];
+    st.sessions++;
+
+    history.forEach(function(h) {
+      var mode = h.mode || 'UNKNOWN';
+      st.modes[mode] = (st.modes[mode] || 0) + 1;
+      modeCounts[mode] = (modeCounts[mode] || 0) + 1;
+      if (h.urgency === 'immediate') st.urgentCount++;
+      if (h.confidence >= 0.75) st.highConfidenceCount++;
+    });
+  });
+
+  var studentSummaries = Object.entries(byStudent).map(function(e) {
+    var name = e[0]; var s = e[1];
+    var topMode = Object.entries(s.modes)
+      .sort(function(a,b){ return b[1]-a[1]; })[0];
+    return {
+      name: name,
+      sessions: s.sessions,
+      dominantMode: topMode ? topMode[0] : 'CALIBRATED',
+      urgentInterventions: s.urgentCount,
+      highConfidenceDetections: s.highConfidenceCount,
+      modeBreakdown: s.modes
+    };
+  }).sort(function(a,b){ return b.urgentInterventions - a.urgentInterventions; });
+
+  // Cohort-level mode frequency
+  var topCohortMode = Object.entries(modeCounts)
+    .filter(function(e){ return e[0] !== 'CALIBRATED'; })
+    .sort(function(a,b){ return b[1]-a[1]; })[0];
+
+  return {
+    totalSessions: sessions.length,
+    totalStudents: studentSummaries.length,
+    cohortDominantMode: topCohortMode ? topCohortMode[0] : 'CALIBRATED',
+    cohortModeCounts: modeCounts,
+    students: studentSummaries,
+    note: 'Meta-Reasoning Agent synthesizes a theory of the student\'s dominant error mode on every turn. ' +
+          'High confidence (≥0.75) = multiple corroborating layers (longitudinal + session + affective + load). ' +
+          'Urgency "immediate" = cognitive overload intervention triggered in real time.'
+  };
+}
+
 // ── Tool dispatcher ───────────────────────────────────────────────────
 async function runTools(toolCalls) {
   var results = {};
   for (var i = 0; i < toolCalls.length; i++) {
     var call = toolCalls[i];
     try {
-      if (call.name === 'cohort_overview')     results[call.name] = await tool_cohort_overview();
-      if (call.name === 'cognitive_profiles')  results[call.name] = await tool_cognitive_profiles();
-      if (call.name === 'recent_fingerprints') results[call.name] = await tool_recent_fingerprints();
-      if (call.name === 'at_risk_students')    results[call.name] = await tool_at_risk_students();
-      if (call.name === 'student_detail')      results[call.name] = await tool_student_detail(call.args && call.args.student_name);
-      if (call.name === 'osce_results')        results[call.name] = await tool_osce_results();
+      if (call.name === 'cohort_overview')          results[call.name] = await tool_cohort_overview();
+      if (call.name === 'cognitive_profiles')       results[call.name] = await tool_cognitive_profiles();
+      if (call.name === 'recent_fingerprints')      results[call.name] = await tool_recent_fingerprints();
+      if (call.name === 'at_risk_students')         results[call.name] = await tool_at_risk_students();
+      if (call.name === 'student_detail')           results[call.name] = await tool_student_detail(call.args && call.args.student_name);
+      if (call.name === 'osce_results')             results[call.name] = await tool_osce_results();
+      if (call.name === 'meta_reasoning_summary')   results[call.name] = await tool_meta_reasoning_summary();
     } catch(e) {
       results[call.name] = { error: e.message };
     }
@@ -427,12 +503,14 @@ YOU HAVE ACCESS TO THESE DATA TOOLS. Use them by including the exact tag in your
 - [TOOL:at_risk_students] — students with ≥3 sessions who show concerning cognitive patterns
 - [TOOL:student_detail("student_name"="Jane Smith")] — detailed session history and profile for one student
 - [TOOL:osce_results] — OSCE station scores: per-student pass/fail, critical item rates, communication scores
+- [TOOL:meta_reasoning_summary] — Meta-Reasoning Agent's theory history: dominant error modes detected per session, confidence levels, urgency flags, and whether the supervisory agent triggered interventions
 
 WHEN TO USE TOOLS:
 - Any question about student performance → use at least one tool
 - Questions about specific students → use student_detail
 - Questions about who needs help → use at_risk_students + cognitive_profiles
 - General cohort questions → use cohort_overview
+- Questions about what error modes the AI detected, or whether interventions fired → use meta_reasoning_summary
 
 AFTER TOOL RESULTS ARE PROVIDED:
 - Synthesize the data into a clear, direct answer
@@ -446,6 +524,17 @@ COGNITIVE BIAS TERMINOLOGY (use correctly):
 - Premature closure: differential stops changing after labs/imaging even when target not reached
 - Missed pivot history: failed to elicit the case-critical contextual history element
 - Evidence integration: positive behavior — differential updated after receiving objective data
+- ERS risk flag: elevated negative arousal during history-taking — meta-reasoning predictor of anchoring
+- CLT peak: cognitive load topography peak phase — where in the encounter arc load was highest
+
+META-REASONING SYSTEM:
+ReasonDx runs a supervisory Meta-Reasoning Agent that watches all other agents and synthesizes a theory
+of the student's dominant error mode on every turn. It selects from 7 error modes:
+ANCHORING, PREMATURE_CLOSURE, HISTORY_GAP, NARROW_OPENER, UNDERCONFIDENT,
+HIGH_COGNITIVE_LOAD, AFFECT_DISRUPTION, CALIBRATED.
+When you see meta_reasoning_record data, interpret it as the AI's confidence-weighted hypothesis
+about what cognitive error was most active during that session. Theory confidence ≥ 0.75 = strong signal.
+Urgency "immediate" = cognitive overload intervention was triggered in real time.
 
 TONE: Direct, collegial, actionable. You are a knowledgeable colleague, not a bureaucratic report generator.
 Acknowledge data limitations honestly. Never fabricate students or numbers.
