@@ -445,15 +445,18 @@
       this.clear();
       var self = this;
 
-      // Add diagnosis nodes from each phase's differential
-      var dxMap = {}; // label -> id
-      Object.entries(state.differentials || {}).forEach(function(entry) {
-        var phaseKey = entry[0];
-        var dxList = entry[1];
-        var phaseNum = parseInt(phaseKey.replace('phase', ''));
+      var studentTurns = (state.turns || []).filter(function(t) { return t.role === 'student'; });
+
+      // ── 1. Diagnosis nodes from each phase's differential ────────────
+      var dxMap = {};
+      var phaseOrder = ['phase1','phase4','phase5','phase6','phase7'];
+      phaseOrder.forEach(function(phaseKey) {
+        var dxList = (state.differentials || {})[phaseKey] || [];
+        var phaseNum = parseInt(phaseKey.replace('phase',''));
         if (Array.isArray(dxList)) {
           dxList.forEach(function(d) {
-            var label = d.diagnosis || d;
+            var label = (d.diagnosis || d.name || d || '').toString().trim();
+            if (!label) return;
             if (!dxMap[label.toLowerCase()]) {
               var id = self.addDiagnosis(label, phaseNum, d.confidence || null, 'student');
               dxMap[label.toLowerCase()] = id;
@@ -462,37 +465,108 @@
         }
       });
 
-      // Add evidence nodes from history flags
-      Object.entries(state.historyFlags || {}).forEach(function(entry) {
-        if (entry[1] === true) {
-          self.addEvidence(entry[0], 'history', 3);
-        }
-      });
-
-      // Add evidence from critical test results mentioned
-      var studentTurns = (state.turns || []).filter(function(t) { return t.role === 'student'; });
-
-      // Scan for imaging-related evidence
-      var mentionedImaging = studentTurns.some(function(t) {
-        return /ct|hrct|x-?ray|imaging|scan/i.test(t.content) && t.phase >= 6;
-      });
-      if (mentionedImaging) {
-        self.addEvidence('Chest imaging ordered', 'imaging', 6);
+      // Mark target diagnosis if present
+      var target = caseData && caseData.targetDiagnosis;
+      if (target) {
+        var targetKey = target.toLowerCase().split(' ')[0];
+        Object.keys(dxMap).forEach(function(k) {
+          if (k.indexOf(targetKey) !== -1) {
+            var node = self._nodes.find(function(n) { return n.id === dxMap[k]; });
+            if (node) node.isTarget = true;
+          }
+        });
       }
 
-      // Scan for lab evidence
-      var labTerms = ['cbc', 'cmp', 'esr', 'crp', 'troponin', 'ldh', 'hiv', 'quantiferon', 'afb', 'procalcitonin'];
-      labTerms.forEach(function(lab) {
-        var mentioned = studentTurns.some(function(t) {
-          return new RegExp('\\b' + lab + '\\b', 'i').test(t.content) && t.phase >= 6;
-        });
-        if (mentioned) {
-          self.addEvidence(lab.toUpperCase(), 'lab', 6);
+      // ── 2. Evidence nodes from history flags ─────────────────────────
+      var histLabels = {
+        askedAboutPets: 'Pets/animals',
+        askedAboutHomeEnvironment: 'Home environment',
+        askedAboutHobbies: 'Hobbies',
+        askedAboutOccupationalExposures: 'Occupational exposures',
+        askedAboutSymptomLocation: 'Symptom location',
+        askedAboutRecentChanges: 'Recent changes'
+      };
+      Object.entries(state.historyFlags || {}).forEach(function(entry) {
+        if (entry[1] === true) {
+          var label = histLabels[entry[0]] || entry[0];
+          self.addEvidence(label, 'history', 3);
         }
       });
 
-      // Auto-connect: evidence mentioned in same turn as diagnosis update
-      // (Simplified heuristic — real RPFS would use NLP)
+      // ── 3. Evidence from pivot history score ─────────────────────────
+      if (state.envHistoryScore === 2) {
+        self.addEvidence('Pivot history: elicited + integrated', 'history', 4);
+      } else if (state.envHistoryScore === 1) {
+        self.addEvidence('Pivot history: elicited (not integrated)', 'history', 4);
+      } else if (state.envHistoryScore === 0) {
+        self.addEvidence('Pivot history: MISSED', 'history', 3);
+      }
+
+      // ── 4. Imaging and labs from student turns ───────────────────────
+      var labTerms = ['cbc','cmp','bmp','esr','crp','troponin','ldh','hiv','quantiferon',
+        'afb','procalcitonin','bnp','d-dimer','lipase','amylase','ck','tsh','hba1c',
+        'uds','drug screen','urinalysis','ua','blood culture','sputum'];
+      labTerms.forEach(function(lab) {
+        var mentioned = studentTurns.some(function(t) {
+          return new RegExp('\\b' + lab.replace(/-/g,'[- ]') + '\\b', 'i').test(t.content) && t.phase >= 6;
+        });
+        if (mentioned) self.addEvidence(lab.toUpperCase(), 'lab', 6);
+      });
+
+      var imagingTerms = ['ct','hrct','x-ray','xray','cxr','mri','echo','echocardiogram',
+        'ultrasound','pet scan','v/q','ventilation'];
+      imagingTerms.forEach(function(img) {
+        var mentioned = studentTurns.some(function(t) {
+          return new RegExp('\\b' + img + '\\b', 'i').test(t.content) && t.phase >= 6;
+        });
+        if (mentioned) self.addEvidence(img.toUpperCase(), 'imaging', 6);
+      });
+
+      // ── 5. Confidence annotations ────────────────────────────────────
+      if (state._confidenceScore) {
+        self.addEvidence('Confidence: ' + state._confidenceScore + '/5', 'metacognition', 8);
+      }
+      // Implicit confidence trajectory from passive data
+      if (window.RdxPassive) {
+        var confSummary = window.RdxPassive.getConfidenceSummary();
+        if (confSummary && confSummary.trajectory) {
+          self.addEvidence('Confidence trajectory: ' + confSummary.trajectory, 'metacognition', 8);
+        }
+      }
+
+      // ── 6. Bias flags as annotation nodes ────────────────────────────
+      // These are set by rdx-fingerprint.js at session end
+      if (state._anchoringDetected) {
+        self.addEvidence('⚠ Anchoring detected', 'bias', 9);
+      }
+      if (state._prematureClosure) {
+        self.addEvidence('⚠ Premature closure', 'bias', 9);
+      }
+
+      // ── 7. Auto-connect: evidence to diagnoses mentioned in same turn ─
+      studentTurns.forEach(function(turn) {
+        var text = turn.content.toLowerCase();
+        var phaseNum = turn.phase || 1;
+        // Find which diagnoses are mentioned in this turn
+        Object.keys(dxMap).forEach(function(dxKey) {
+          var firstWord = dxKey.split(' ')[0];
+          if (firstWord.length > 3 && text.indexOf(firstWord) !== -1) {
+            // Find evidence nodes added in this phase
+            self._nodes.filter(function(n) {
+              return n.type === 'evidence' && Math.abs(n.phase - phaseNum) <= 1;
+            }).forEach(function(evNode) {
+              // Only connect if not already connected
+              var alreadyConnected = self._edges.some(function(e) {
+                return (e.from === evNode.id && e.to === dxMap[dxKey]) ||
+                       (e.to === evNode.id && e.from === dxMap[dxKey]);
+              });
+              if (!alreadyConnected) {
+                self.connect(evNode.id, dxMap[dxKey], 1, 'co-mention in turn ' + turn.turnNumber);
+              }
+            });
+          }
+        });
+      });
 
       return this.getGraph();
     },

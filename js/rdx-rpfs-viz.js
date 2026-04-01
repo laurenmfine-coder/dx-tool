@@ -64,48 +64,98 @@
         }
       });
 
+      // ── Node type colors ─────────────────────────────────────────────
+      var evidenceColors = {
+        history:      '#F0F9FF',  // light blue
+        lab:          '#F0FDF4',  // light green
+        imaging:      '#FFF7ED',  // light orange
+        metacognition:'#F5F3FF',  // light purple
+        bias:         '#FEF2F2'   // light red
+      };
+      var evidenceStrokes = {
+        history:      '#BAE6FD',
+        lab:          '#A7F3D0',
+        imaging:      '#FED7AA',
+        metacognition:'#DDD6FE',
+        bias:         '#FECACA'
+      };
+
       // Draw nodes
       positioned.forEach(function(node) {
-        var isDx = node.type === 'diagnosis';
+        var isDx  = node.type === 'diagnosis';
+        var isBias = node.category === 'bias';
+        var isMeta = node.category === 'metacognition';
         var isActive = node.active !== false;
-        var radius = isDx ? 28 : 18;
-        var fill = isDx
-          ? (isActive ? (phaseColors[node.phase] || '#3498DB') : '#CBD5E1')
-          : '#F0F4F8';
-        var stroke = isDx ? '#1B4F72' : '#94A3B8';
-        var strokeW = isDx ? 2 : 1;
-        var opacity = isActive ? 1 : 0.5;
+        var isTarget = node.isTarget === true;
+        var radius = isDx ? 30 : isBias ? 22 : 18;
+
+        // Fill color
+        var fill, stroke, strokeW;
+        if (isDx) {
+          if (isTarget && isActive) {
+            fill = '#059669';      // green = target reached
+            stroke = '#064E3B';
+          } else if (!isActive) {
+            fill = '#CBD5E1';      // grey = dropped
+            stroke = '#94A3B8';
+          } else {
+            fill = phaseColors[node.phase] || '#3498DB';
+            stroke = '#1B4F72';
+          }
+          strokeW = isTarget ? 3 : 2;
+        } else {
+          fill = evidenceColors[node.category] || '#F0F4F8';
+          stroke = evidenceStrokes[node.category] || '#94A3B8';
+          strokeW = isBias ? 2 : 1;
+        }
+        var opacity = isActive ? 1 : 0.45;
 
         svg += '<g transform="translate(' + node.x + ',' + node.y + ')" opacity="' + opacity + '">';
 
         if (isDx) {
-          // Diagnosis: rounded rectangle
-          svg += '<rect x="' + (-radius) + '" y="' + (-radius/2) + '" width="' + (radius*2) + '" height="' + radius + '" rx="8" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '"/>';
-          if (!isActive) {
-            svg += '<line x1="' + (-radius+4) + '" y1="0" x2="' + (radius-4) + '" y2="0" stroke="#E74C3C" stroke-width="2"/>';
+          // Diagnosis: rounded rectangle; target gets gold ring
+          svg += '<rect x="' + (-radius) + '" y="' + (-radius/2) + '" width="' + (radius*2) + '" height="' + (radius) + '" rx="8" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '"/>';
+          if (isTarget && isActive) {
+            // Gold crown marker above target dx
+            svg += '<text x="0" y="' + (-radius/2 - 4) + '" text-anchor="middle" font-size="10">✓</text>';
           }
+          if (!isActive) {
+            svg += '<line x1="' + (-radius+4) + '" y1="0" x2="' + (radius-4) + '" y2="0" stroke="#E74C3C" stroke-width="1.5"/>';
+          }
+        } else if (isBias) {
+          // Bias: diamond shape
+          var s = radius;
+          svg += '<polygon points="0,' + (-s) + ' ' + s + ',0 0,' + s + ' ' + (-s) + ',0" fill="' + fill + '" stroke="' + stroke + '" stroke-width="2"/>';
         } else {
           // Evidence: circle
           svg += '<circle cx="0" cy="0" r="' + radius + '" fill="' + fill + '" stroke="' + stroke + '" stroke-width="' + strokeW + '"/>';
         }
 
-        // Label
+        // Label — wrap long labels
         var label = node.label || '';
-        if (label.length > 16) label = label.substring(0, 14) + '..';
-        var fontSize = isDx ? 9 : 8;
-        svg += '<text x="0" y="' + (isDx ? 3 : 3) + '" text-anchor="middle" font-family="Arial" font-size="' + fontSize + '" font-weight="' + (isDx ? '700' : '400') + '" fill="' + (isDx ? '#FFF' : '#333') + '">' + this._escSvg(label) + '</text>';
+        if (label.length > 18) label = label.substring(0, 16) + '…';
+        var fontSize = isDx ? 9 : isBias ? 8 : 8;
+        var textColor = (isDx && !isActive) ? '#475569' : (isDx ? '#FFF' : '#334155');
+        svg += '<text x="0" y="3" text-anchor="middle" font-family="Arial" font-size="' + fontSize + '" font-weight="' + (isDx ? '700' : '500') + '" fill="' + textColor + '">' + this._escSvg(label) + '</text>';
 
         svg += '</g>';
       }.bind(this));
 
-      // Stats overlay
+      // Stats overlay — bias flags and confidence
       var stats = graphData.stats || {};
+      var biasNodes = (graphData.nodes || []).filter(function(n) { return n.category === 'bias'; });
+      var confNode  = (graphData.nodes || []).find(function(n) {
+        return n.category === 'metacognition' && n.label && n.label.indexOf('Confidence:') === 0;
+      });
+      var statsLine = (stats.activeDiagnoses || 0) + ' active dx  |  ' +
+        (stats.droppedDiagnoses || 0) + ' dropped  |  ' +
+        (stats.evidenceNodes || 0) + ' evidence';
+      if (biasNodes.length > 0) {
+        statsLine += '  |  ⚠ ' + biasNodes.map(function(n) { return n.label.replace('⚠ ',''); }).join(', ');
+      }
+      if (confNode) statsLine += '  |  ' + confNode.label;
       svg += '<text x="' + (width - 10) + '" y="' + (height - 8) + '" text-anchor="end" font-family="Arial" font-size="9" fill="#94A3B8">' +
-        (stats.activeDiagnoses || 0) + ' active dx | ' +
-        (stats.droppedDiagnoses || 0) + ' dropped | ' +
-        (stats.evidenceNodes || 0) + ' evidence | ' +
-        'complexity: ' + (stats.complexity || 0) +
-        '</text>';
+        statsLine + '</text>';
 
       svg += '</svg>';
 

@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Author v2 · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --bg:#0f1117; --surface:#1a1d27; --surface2:#22263a;
+  --border:#2e3452; --blue:#2874A6; --blue-lt:#60a5fa;
+  --gold:#f59e0b; --text:#e2e8f0; --muted:#64748b;
+  --green:#34d399; --red:#f87171; --mono:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);height:100vh;display:flex;flex-direction:column}
+
+.hd{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;background:var(--surface);flex-shrink:0}
+.hd-logo{font-family:'Libre Baskerville',serif;font-size:20px;color:#fff}
+.hd-logo span{color:var(--gold)}
+.hd-badge{padding:3px 10px;background:rgba(245,158,11,.15);border:1px solid var(--gold);border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--gold)}
+.hd-back{margin-left:auto;color:var(--muted);font-size:13px;text-decoration:none}
+.hd-back:hover{color:var(--text)}
+
+/* Layout */
+.body{display:flex;flex:1;overflow:hidden}
+.chat-col{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.output-col{width:420px;flex-shrink:0;border-left:1px solid var(--border);display:flex;flex-direction:column;background:var(--surface);overflow:hidden}
+
+/* Chat */
+.messages{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:14px}
+.msg{max-width:680px;width:100%}
+.msg-user{align-self:flex-end}
+.msg-user .bubble{background:var(--blue);color:#fff;border-radius:14px 14px 3px 14px;padding:11px 16px;font-size:14px;line-height:1.55}
+.msg-agent{align-self:flex-start}
+.msg-agent .bubble{background:var(--surface2);border:1px solid var(--border);border-radius:14px 14px 14px 3px;padding:14px 18px;font-size:14px;line-height:1.7;color:var(--text)}
+.msg-agent .bubble strong{color:#fff}
+.msg-agent .bubble em{color:var(--muted);font-style:normal}
+.msg-system .bubble{background:rgba(40,116,166,.1);border:1px solid rgba(40,116,166,.25);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--blue-lt)}
+
+/* Quick picks */
+.quick-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 24px 12px}
+.quick-btn{padding:6px 12px;border:1px solid var(--border);border-radius:20px;font-size:12px;color:var(--muted);cursor:pointer;background:transparent;font-family:inherit;transition:all .15s}
+.quick-btn:hover{border-color:var(--blue-lt);color:var(--blue-lt)}
+
+/* Input */
+.input-bar{border-top:1px solid var(--border);padding:14px 24px;background:var(--bg);flex-shrink:0}
+.input-wrap{display:flex;gap:10px;align-items:flex-end}
+.input-field{flex:1;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;color:var(--text);resize:none;outline:none;min-height:46px;max-height:140px;background:var(--surface);transition:border .15s}
+.input-field:focus{border-color:var(--blue)}
+.send-btn{padding:11px 18px;background:var(--blue);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;height:46px;transition:background .15s;white-space:nowrap}
+.send-btn:hover{background:#1a5f8a}
+.send-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* Typing */
+.typing-dots{display:flex;gap:4px;padding:12px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:14px 14px 14px 3px;width:fit-content}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:bounce .9s infinite}
+.dot:nth-child(2){animation-delay:.15s}
+.dot:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+/* Output panel */
+.output-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.output-title{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.output-tabs{display:flex;gap:0;border-bottom:1px solid var(--border)}
+.output-tab{padding:10px 16px;font-size:12px;font-weight:600;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;background:transparent;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.output-tab.active{color:var(--blue-lt);border-bottom-color:var(--blue)}
+.output-body{flex:1;overflow-y:auto;padding:16px 18px}
+
+/* Case preview */
+.case-section{margin-bottom:18px}
+.case-section-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.case-field{font-size:13px;color:var(--text);line-height:1.6;margin-bottom:6px}
+.case-field strong{color:var(--blue-lt);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:2px}
+.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;font-family:var(--mono);margin:2px 3px 2px 0}
+.tag-warn{background:rgba(245,158,11,.15);color:var(--gold)}
+.tag-ok{background:rgba(52,211,153,.15);color:var(--green)}
+.tag-info{background:rgba(96,165,250,.1);color:var(--blue-lt)}
+.tag-red{background:rgba(248,113,113,.15);color:var(--red)}
+
+/* JSON viewer */
+.json-block{font-family:var(--mono);font-size:11px;line-height:1.65;color:#94a3b8;white-space:pre-wrap;word-break:break-all;background:var(--bg);border-radius:8px;padding:14px;border:1px solid var(--border)}
+
+/* Action buttons */
+.action-row{padding:14px 18px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0}
+.act-btn{flex:1;padding:9px;border:1px solid var(--border);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;background:var(--surface2);color:var(--text);transition:all .15s}
+.act-btn:hover{border-color:var(--blue);color:var(--blue-lt)}
+.act-btn.primary{background:var(--blue);border-color:var(--blue);color:#fff}
+.act-btn.primary:hover{background:#1a5f8a}
+.act-btn:disabled{opacity:.35;cursor:not-allowed}
+
+/* Guideline badge */
+.guideline-badge{display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:8px;font-size:12px;color:var(--green);margin-bottom:10px}
+.guideline-badge a{color:var(--green);text-decoration:none;font-weight:600}
+.guideline-badge a:hover{text-decoration:underline}
+
+/* Similarity warning */
+.sim-warn{padding:10px 14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;font-size:12px;color:var(--gold);margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-badge">Case Author v2</div>
+  <a href="/case-author.html" class="hd-back">v1 (form) →</a>
+  <a href="/browse.html" class="hd-back" style="margin-left:12px">← Platform</a>
+</div>
+
+<div class="body">
+
+  <!-- Chat column -->
+  <div class="chat-col">
+    <div class="messages" id="messages">
+      <div class="msg msg-agent">
+        <div class="bubble">
+          <strong>Case Author v2</strong> — conversational, guideline-grounded case generation.<br><br>
+          Tell me about the case you want to build. Start with the <em>diagnosis</em> and <em>teaching objective</em>, and I'll ask clarifying questions before generating. I'll check your case against existing cases for similarity, and ground teaching points in open-access guidelines from the RAG database.
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-row" id="quickRow">
+      <button class="quick-btn" onclick="quickAsk('DKA in a pediatric patient — teaching DKA management and cerebral edema risk')">DKA pediatric</button>
+      <button class="quick-btn" onclick="quickAsk('Pulmonary embolism — teaching Wells criteria and anticoagulation decision')">PE workup</button>
+      <button class="quick-btn" onclick="quickAsk('Septic arthritis — teaching joint fluid analysis and surgical urgency')">Septic arthritis</button>
+      <button class="quick-btn" onclick="quickAsk('Atrial fibrillation with RVR — rate vs rhythm control decision')">AFib RVR</button>
+    </div>
+
+    <div class="input-bar">
+      <div class="input-wrap">
+        <textarea class="input-field" id="input" placeholder="Describe the case you want to build…"
+          onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();send()}"
+          oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,140)+'px'"></textarea>
+        <button class="send-btn" id="sendBtn" onclick="send()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Output column -->
+  <div class="output-col">
+    <div class="output-header">
+      <div class="output-title">Generated Case</div>
+      <div id="statusBadge" style="font-size:11px;color:var(--muted)">Not yet generated</div>
+    </div>
+    <div class="output-tabs">
+      <button class="output-tab active" onclick="switchTab('preview',this)">Preview</button>
+      <button class="output-tab" onclick="switchTab('json',this)">JSON</button>
+      <button class="output-tab" onclick="switchTab('guidelines',this)">Guidelines</button>
+    </div>
+    <div class="output-body" id="outputBody">
+      <div style="text-align:center;padding:40px 20px;color:var(--muted);font-size:13px">
+        <div style="font-size:28px;margin-bottom:12px">📋</div>
+        Case output will appear here after generation.
+      </div>
+    </div>
+    <div class="action-row">
+      <button class="act-btn" id="copyBtn" onclick="copyJson()" disabled>Copy JSON</button>
+      <button class="act-btn primary" id="refineBtn" onclick="refine()" disabled>Refine →</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+const EMBED_WORKER = 'https://rdx-embed.laurenmfine.workers.dev';
+
+var db = null;
+var conversation = [];
+var generatedCase = null;
+var retrievedGuidelines = [];
+var currentTab = 'preview';
+
+window.addEventListener('load', function() {
+  db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+});
+
+// ── Guideline retrieval ───────────────────────────────────────────────
+async function retrieveGuidelines(diagnosisText) {
+  try {
+    var embedRes = await fetch(EMBED_WORKER, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ text: diagnosisText.slice(0, 500) })
+    });
+    var embedData = await embedRes.json();
+    if (!Array.isArray(embedData.embedding)) return [];
+
+    var rpcRes = await fetch(SUPABASE_URL + '/rest/v1/rpc/match_guidelines', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
+      body: JSON.stringify({ query_embedding: embedData.embedding, match_count: 4, min_similarity: 0.35 })
+    });
+    var rows = await rpcRes.json();
+    return Array.isArray(rows) ? rows : [];
+  } catch(e) {
+    console.warn('Guideline retrieval failed:', e.message);
+    return [];
+  }
+}
+
+// ── Similarity check against existing CRT cases ──────────────────────
+async function checkSimilarity(diagnosisText) {
+  try {
+    var embedRes = await fetch(EMBED_WORKER, {
+      method: 'POST', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ text: diagnosisText.slice(0, 500) })
+    });
+    var embedData = await embedRes.json();
+    if (!Array.isArray(embedData.embedding)) return [];
+
+    var rpcRes = await fetch(SUPABASE_URL + '/rest/v1/rpc/match_cases', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY },
+      body: JSON.stringify({ query_embedding: embedData.embedding, match_count: 3, min_similarity: 0.7 })
+    });
+    var rows = await rpcRes.json();
+    return Array.isArray(rows) ? rows : [];
+  } catch(e) {
+    console.warn('Similarity check failed:', e.message);
+    return [];
+  }
+}
+
+// ── System prompt ─────────────────────────────────────────────────────
+function buildSystemPrompt(phase, guidelineContext, similarCases) {
+  var base = `You are an expert medical education case author for ReasonDx, a clinical reasoning simulation platform.
+
+PLATFORM CONTEXT:
+- Cases are used in 10-phase simulated patient encounters
+- Students generate differentials, take history, examine patients, order tests, manage patients
+- Cases must have educational value: a clear teaching objective, a pivot history element, and common pitfalls
+- All clinical content must be evidence-based; teaching points grounded in guidelines when available
+
+OPEN-ACCESS ONLY: All reference URLs must be StatPearls (statpearls.com), PMC (pmc.ncbi.nlm.nih.gov), or major society open-access guidelines. Never cite paywalled content.`;
+
+  if (phase === 'conversation') {
+    base += `
+
+YOUR ROLE IN THIS PHASE: Have a guided conversation to gather the information needed to generate an excellent case.
+Ask ONE question at a time. Prioritize in this order:
+1. Diagnosis (if not given) — what is the final diagnosis?
+2. Teaching objective — what is the single most important thing students should learn?
+3. Key pivot — what is the one piece of history/exam that changes everything?
+4. Must-not-miss — what dangerous alternative must be ruled out?
+5. Patient demographics — age, sex, acuity level (ESI 1-4)
+
+When you have enough to generate (diagnosis + teaching objective + pivot), tell the user you're ready and ask if they want to proceed or add anything.
+
+Keep responses conversational and brief. Never dump a form on the user.`;
+  }
+
+  if (phase === 'generate') {
+    base += `
+
+YOUR ROLE IN THIS PHASE: Generate a complete, high-quality case JSON object.
+
+OUTPUT FORMAT: Respond with EXACTLY two sections:
+1. A brief narrative (2-3 sentences) about the case and what makes it educationally valuable
+2. A valid JSON code block (wrapped in \`\`\`json ... \`\`\`) containing the complete case
+
+The JSON must follow this structure exactly:
+{
+  "diagnosis": "string",
+  "acuity": number (1-4),
+  "category": "string (specialty)",
+  "chiefComplaint": "string",
+  "presentation": { "patientName": "string", "age": number, "sex": "Male|Female", "chiefComplaint": "string" },
+  "initialVitals": { "BP": "string", "HR": "string", "RR": "string", "Temp": "string", "SpO2": "string" },
+  "patientSummary": "string (2 sentences, clinical third-person)",
+  "targetDiagnosis": "string",
+  "teachingObjective": "string",
+  "keyLearningPoints": ["string × 4"],
+  "mustNotMiss": ["string × 3"],
+  "commonPitfalls": ["string × 3"],
+  "patientScript": {
+    "identity": "string",
+    "hpiOnset": "string (patient voice, plain language)",
+    "hpiProgression": "string",
+    "hpiAssociatedSymptoms": "string",
+    "hpiLocationPattern": "string",
+    "pmh": "string",
+    "medications": "string",
+    "allergies": "string",
+    "familyHistory": "string",
+    "socialSmokingAlcohol": "string",
+    "socialOccupation": "string"
+  },
+  "caseDepth": {
+    "v2": {
+      "title": "string",
+      "scenario": "string (2-3 sentences — complication or deterioration)",
+      "newData": { "vitals": {}, "labHighlights": {}, "examNote": "string" }
+    }
+  }
+}`;
+  }
+
+  if (guidelineContext && guidelineContext.length > 0) {
+    base += '\n\nRELEVANT OPEN-ACCESS GUIDELINES (ground teaching points in these):\n';
+    guidelineContext.slice(0, 3).forEach(function(g, i) {
+      base += '\n[Guideline ' + (i+1) + '] Source: ' + g.source + '\n';
+      base += 'URL: ' + (g.url || 'n/a') + '\n';
+      base += 'Content: ' + g.chunk_text.slice(0, 600) + '\n';
+    });
+  }
+
+  if (similarCases && similarCases.length > 0) {
+    base += '\n\nSIMILAR CASES ALREADY IN THE LIBRARY (avoid duplication):\n';
+    similarCases.forEach(function(c) {
+      base += '- ' + (c.case_id || c.id) + ': ' + (c.diagnosis || c.chief_complaint || '') + '\n';
+    });
+    base += 'Differentiate your case meaningfully from the above.\n';
+  }
+
+  return base;
+}
+
+// ── Main send ─────────────────────────────────────────────────────────
+async function send() {
+  var input = document.getElementById('input');
+  var text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('sendBtn').disabled = true;
+  document.getElementById('quickRow').style.display = 'none';
+
+  addMsg('user', text);
+  conversation.push({ role: 'user', content: text });
+
+  var typingEl = showTyping();
+
+  try {
+    // Determine if we should generate or keep conversing
+    var shouldGenerate = detectGenerateIntent(text, conversation);
+
+    var guidelines = retrievedGuidelines;
+    var similar = [];
+
+    if (shouldGenerate || conversation.length >= 5) {
+      // Retrieve guidelines and check similarity in parallel
+      var combined = conversation.map(function(m) { return m.content; }).join(' ');
+      var [gl, sim] = await Promise.all([
+        retrieveGuidelines(combined),
+        checkSimilarity(combined)
+      ]);
+      guidelines = gl;
+      retrievedGuidelines = gl;
+      similar = sim;
+    }
+
+    var phase = shouldGenerate ? 'generate' : 'conversation';
+    var sys = buildSystemPrompt(phase, guidelines, similar);
+
+    var resp = await callClaude(conversation, sys);
+    var reply = resp.content && resp.content[0] && resp.content[0].text || '';
+
+    removeTyping(typingEl);
+
+    // Try to extract JSON from generate responses
+    if (phase === 'generate') {
+      var parsed = tryExtractJson(reply);
+      if (parsed) {
+        generatedCase = parsed;
+        // Strip JSON block from chat reply for cleaner display
+        var narrativeOnly = reply.replace(/```json[\s\S]*?```/g, '').trim();
+        if (narrativeOnly) addMsg('agent', narrativeOnly);
+        renderOutput(guidelines, similar);
+        addMsg('system', '✓ Case generated — see the panel on the right. Use "Refine →" to adjust anything.');
+      } else {
+        addMsg('agent', reply);
+      }
+    } else {
+      addMsg('agent', reply);
+    }
+
+    conversation.push({ role: 'assistant', content: reply });
+
+  } catch(e) {
+    removeTyping(typingEl);
+    addMsg('agent', '⚠️ Error: ' + e.message);
+  }
+
+  document.getElementById('sendBtn').disabled = false;
+  document.getElementById('input').focus();
+}
+
+// ── Detect if user wants to generate ─────────────────────────────────
+function detectGenerateIntent(text, history) {
+  var intent = /\b(generate|create|build|make|write|go ahead|yes|proceed|ready|do it|let's go)\b/i.test(text);
+  var hasDiagnosis = history.some(function(m) {
+    return m.role === 'user' && m.content.length > 20;
+  });
+  // Generate if explicit intent + some context, or if conversation is mature
+  return (intent && hasDiagnosis) || (history.length >= 6 && hasDiagnosis);
+}
+
+// ── Extract JSON from response ────────────────────────────────────────
+function tryExtractJson(text) {
+  var match = text.match(/```json\s*([\s\S]*?)\s*```/);
+  if (!match) match = text.match(/```\s*([\s\S]*?)\s*```/);
+  if (!match) {
+    var start = text.indexOf('{');
+    var end = text.lastIndexOf('}');
+    if (start !== -1 && end !== -1) match = [null, text.slice(start, end+1)];
+  }
+  if (!match) return null;
+  try { return JSON.parse(match[1]); } catch(e) { return null; }
+}
+
+// ── Refine existing case ──────────────────────────────────────────────
+function refine() {
+  if (!generatedCase) return;
+  document.getElementById('input').value = '';
+  document.getElementById('input').focus();
+  addMsg('system', 'Tell me what to change or improve in the generated case. Be specific — e.g. "Make the patient older", "Add a must-not-miss for PE", "The v2 scenario needs to be more dramatic".');
+  conversation.push({
+    role: 'user',
+    content: '[REFINE REQUEST] Here is the current case JSON:\n```json\n' + JSON.stringify(generatedCase, null, 2).slice(0, 3000) + '\n```\nPlease apply the user\'s next requested changes and output a complete updated JSON.'
+  });
+  conversation.push({ role: 'assistant', content: 'Ready to refine. What would you like to change?' });
+}
+
+// ── Render output panel ───────────────────────────────────────────────
+function renderOutput(guidelines, similar) {
+  document.getElementById('copyBtn').disabled = false;
+  document.getElementById('refineBtn').disabled = false;
+  document.getElementById('statusBadge').textContent = '✓ Generated';
+  document.getElementById('statusBadge').style.color = 'var(--green)';
+  renderTab(currentTab, guidelines, similar);
+}
+
+function switchTab(tab, btn) {
+  currentTab = tab;
+  document.querySelectorAll('.output-tab').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  renderTab(tab, retrievedGuidelines, []);
+}
+
+function renderTab(tab, guidelines, similar) {
+  var body = document.getElementById('outputBody');
+  if (!generatedCase) return;
+  var c = generatedCase;
+
+  if (tab === 'json') {
+    body.innerHTML = '<pre class="json-block">' + escHtml(JSON.stringify(c, null, 2)) + '</pre>';
+    return;
+  }
+
+  if (tab === 'guidelines') {
+    if (!guidelines || guidelines.length === 0) {
+      body.innerHTML = '<div style="padding:20px;color:var(--muted);font-size:13px">No guidelines retrieved — embed more sources via the Guidelines Admin page.</div>';
+      return;
+    }
+    var html = '';
+    guidelines.forEach(function(g) {
+      html += '<div class="guideline-badge">📖 <div><a href="' + (g.url||'#') + '" target="_blank" rel="noopener">' + g.source + '</a><br><span style="color:var(--muted);font-size:11px">' + (g.license||'') + ' · similarity: ' + Math.round((g.similarity||0)*100) + '%</span></div></div>';
+      html += '<div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px;padding:0 4px">' + escHtml(g.chunk_text.slice(0, 400)) + '…</div>';
+    });
+    body.innerHTML = html;
+    return;
+  }
+
+  // Preview tab
+  var html = '';
+
+  // Similarity warning
+  if (similar && similar.length > 0) {
+    html += '<div class="sim-warn">⚠ Similar cases already exist: ' + similar.map(function(s) { return '<strong>' + (s.case_id||s.id) + '</strong>'; }).join(', ') + '. Review and differentiate if needed.</div>';
+  }
+
+  // Guideline badge
+  if (guidelines && guidelines.length > 0) {
+    html += '<div class="guideline-badge">✓ ' + guidelines.length + ' guideline chunk' + (guidelines.length > 1 ? 's' : '') + ' grounded teaching points — see Guidelines tab</div>';
+  }
+
+  // Case header
+  html += '<div class="case-section">';
+  html += '<span class="tag tag-info">' + (c.category||'') + '</span>';
+  html += '<span class="tag tag-warn">ESI ' + (c.acuity||'?') + '</span>';
+  html += '</div>';
+
+  html += '<div class="case-section">';
+  html += '<div class="case-field"><strong>Diagnosis</strong>' + escHtml(c.targetDiagnosis || c.diagnosis || '') + '</div>';
+  html += '<div class="case-field"><strong>Chief Complaint</strong>' + escHtml(c.chiefComplaint || '') + '</div>';
+  html += '<div class="case-field"><strong>Patient</strong>' + escHtml((c.presentation && c.presentation.patientName ? c.presentation.patientName + ', ' : '') + (c.presentation ? c.presentation.age + 'yo ' + c.presentation.sex : '')) + '</div>';
+  html += '</div>';
+
+  html += '<div class="case-section">';
+  html += '<div class="case-section-title">Teaching Objective</div>';
+  html += '<div class="case-field">' + escHtml(c.teachingObjective || '') + '</div>';
+  html += '</div>';
+
+  if (c.keyLearningPoints && c.keyLearningPoints.length) {
+    html += '<div class="case-section">';
+    html += '<div class="case-section-title">Key Learning Points</div>';
+    c.keyLearningPoints.forEach(function(p) {
+      html += '<div class="case-field" style="padding-left:10px;border-left:2px solid var(--border);margin-bottom:5px">' + escHtml(p) + '</div>';
+    });
+    html += '</div>';
+  }
+
+  if (c.mustNotMiss && c.mustNotMiss.length) {
+    html += '<div class="case-section">';
+    html += '<div class="case-section-title">Must-Not-Miss</div>';
+    c.mustNotMiss.forEach(function(p) { html += '<span class="tag tag-red">' + escHtml(p) + '</span>'; });
+    html += '</div>';
+  }
+
+  if (c.commonPitfalls && c.commonPitfalls.length) {
+    html += '<div class="case-section">';
+    html += '<div class="case-section-title">Common Pitfalls</div>';
+    c.commonPitfalls.forEach(function(p) {
+      html += '<div class="case-field" style="padding-left:10px;border-left:2px solid rgba(248,113,113,.3);margin-bottom:5px;color:var(--muted)">' + escHtml(p) + '</div>';
+    });
+    html += '</div>';
+  }
+
+  if (c.caseDepth && c.caseDepth.v2) {
+    html += '<div class="case-section">';
+    html += '<div class="case-section-title">v2 Scenario</div>';
+    html += '<div class="case-field"><strong>' + escHtml(c.caseDepth.v2.title || '') + '</strong>' + escHtml(c.caseDepth.v2.scenario || '') + '</div>';
+    html += '</div>';
+  }
+
+  body.innerHTML = html;
+}
+
+// ── Claude API ────────────────────────────────────────────────────────
+async function callClaude(messages, system) {
+  var resp = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 3000,
+      system: system,
+      messages: messages.slice(-10)
+    })
+  });
+  if (!resp.ok) throw new Error('API ' + resp.status);
+  return resp.json();
+}
+
+// ── UI helpers ────────────────────────────────────────────────────────
+function addMsg(role, text) {
+  var el = document.getElementById('messages');
+  var div = document.createElement('div');
+  div.className = 'msg msg-' + role;
+  var bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  if (role === 'agent') {
+    bubble.innerHTML = text
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+      .replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>')
+      .replace(/^/,'<p>').replace(/$/,'</p>');
+  } else if (role === 'system') {
+    bubble.style.cssText = 'background:rgba(40,116,166,.1);border:1px solid rgba(40,116,166,.25);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--blue-lt)';
+    bubble.textContent = text;
+  } else {
+    bubble.textContent = text;
+  }
+  div.appendChild(bubble);
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+}
+
+function showTyping() {
+  var el = document.getElementById('messages');
+  var div = document.createElement('div');
+  div.className = 'msg msg-agent';
+  div.innerHTML = '<div class="typing-dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>';
+  el.appendChild(div);
+  el.scrollTop = el.scrollHeight;
+  return div;
+}
+
+function removeTyping(el) { if (el && el.parentNode) el.parentNode.removeChild(el); }
+
+function quickAsk(text) {
+  document.getElementById('input').value = text;
+  send();
+}
+
+function copyJson() {
+  if (!generatedCase) return;
+  navigator.clipboard.writeText(JSON.stringify(generatedCase, null, 2))
+    .then(function() { showToast('Copied to clipboard'); })
+    .catch(function() { showToast('Copy failed — use JSON tab'); });
+}
+
+function escHtml(s) {
+  return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function showToast(msg) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1E293B;color:#fff;padding:10px 20px;border-radius:8px;font-size:13px;z-index:9999;pointer-events:none';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function() { document.body.removeChild(t); }, 2500);
+}
+</script>
+</body>
+</html>
