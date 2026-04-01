@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSCE Faculty Report — ReasonDx</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --primary: #2874A6; --primary-light: #D6EAF8; --success: #1E8449;
+    --success-light: #D5F5E3; --warning: #B7770D; --warning-light: #FEF9E7;
+    --danger: #922B21; --danger-light: #FDEDEC;
+    --ink: #1B2631; --muted: #5D6D7E; --border: #DCE3EB;
+    --surface: #F8FAFC; --white: #FFFFFF;
+  }
+  body { font-family: Arial, sans-serif; background: #F0F4F8; color: var(--ink); min-height: 100vh; }
+  .topbar { background: var(--primary); color: #fff; padding: 14px 24px; display: flex; align-items: center; gap: 16px; }
+  .topbar-title { font-size: 18px; font-weight: 800; }
+  .topbar-sub { font-size: 13px; opacity: .75; }
+  .topbar-back { margin-left: auto; font-size: 12px; color: rgba(255,255,255,.8); text-decoration: none; font-weight: 600; }
+  .topbar-back:hover { color: #fff; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+  /* Controls */
+  .controls { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+  .ctrl-group { display: flex; flex-direction: column; gap: 4px; }
+  .ctrl-group label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .ctrl-group input, .ctrl-group select { padding: 9px 12px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px; font-family: inherit; background: var(--white); color: var(--ink); }
+  .btn { padding: 10px 20px; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover { background: #1A5276; }
+
+  /* Summary cards */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .card-value { font-size: 32px; font-weight: 900; line-height: 1; margin-bottom: 4px; }
+  .card-label { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .card.danger .card-value { color: var(--danger); }
+  .card.warning .card-value { color: var(--warning); }
+  .card.success .card-value { color: var(--success); }
+  .card.primary .card-value { color: var(--primary); }
+
+  /* Section headers */
+  .section-hdr { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--primary-light); }
+
+  /* Domain breakdown */
+  .domain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .domain-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .domain-name { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
+  .domain-score { font-size: 26px; font-weight: 900; margin-bottom: 6px; }
+  .domain-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .domain-bar-fill { height: 100%; border-radius: 3px; }
+  .domain-desc { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+  /* Student table */
+  .table-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 24px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--primary); color: #fff; }
+  thead th { padding: 11px 14px; text-align: left; font-weight: 700; font-size: 12px; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface); }
+  td { padding: 11px 14px; }
+  .badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .badge-pass { background: var(--success-light); color: var(--success); }
+  .badge-fail { background: var(--danger-light); color: var(--danger); }
+  .badge-warn { background: var(--warning-light); color: var(--warning); }
+  .badge-crit { background: var(--danger-light); color: var(--danger); }
+
+  /* Comm metrics */
+  .comm-bar { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+  .comm-bar-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .comm-bar-fill { height: 100%; border-radius: 3px; background: var(--primary); }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px; }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; }
+
+  /* Loading */
+  .loading { text-align: center; padding: 40px; color: var(--muted); font-size: 14px; }
+  .spinner { width: 28px; height: 28px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto 12px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Trend sparkline area */
+  .trend-row { display: flex; gap: 3px; align-items: flex-end; height: 28px; }
+  .trend-bar { width: 8px; border-radius: 2px 2px 0 0; background: var(--primary); opacity: .7; min-height: 4px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="topbar-title">OSCE Faculty Report</div>
+    <div class="topbar-sub">ReasonDx · NSU KPCAM · Per-student domain scores, critical failures, communication metrics</div>
+  </div>
+  <a href="faculty-dashboard.html" class="topbar-back">← Faculty Dashboard</a>
+</div>
+
+<div class="container">
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="ctrl-group">
+      <label>From</label>
+      <input type="date" id="dateFrom">
+    </div>
+    <div class="ctrl-group">
+      <label>To</label>
+      <input type="date" id="dateTo">
+    </div>
+    <div class="ctrl-group">
+      <label>Student</label>
+      <input type="text" id="filterStudent" placeholder="All students" style="width:180px">
+    </div>
+    <div class="ctrl-group">
+      <label>Case</label>
+      <input type="text" id="filterCase" placeholder="All cases" style="width:160px">
+    </div>
+    <button class="btn btn-primary" onclick="loadData()">Load Report</button>
+  </div>
+
+  <div id="reportArea"><div class="empty"><div class="empty-icon">🏥</div>Set a date range and click Load Report</div></div>
+
+</div>
+
+<script>
+const SUPA_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+const db = supabase.createClient(SUPA_URL, SUPA_KEY);
+
+// Set defaults: last 90 days
+(function() {
+  var to   = new Date();
+  var from = new Date(); from.setDate(from.getDate() - 90);
+  document.getElementById('dateTo').value   = to.toISOString().slice(0,10);
+  document.getElementById('dateFrom').value = from.toISOString().slice(0,10);
+})();
+
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function scoreColor(pct) {
+  return pct >= 80 ? 'var(--success)' : pct >= 65 ? 'var(--warning)' : 'var(--danger)';
+}
+
+async function loadData() {
+  document.getElementById('reportArea').innerHTML = '<div class="loading"><div class="spinner"></div>Loading OSCE data…</div>';
+
+  var from    = document.getElementById('dateFrom').value;
+  var to      = document.getElementById('dateTo').value;
+  var student = document.getElementById('filterStudent').value.trim();
+  var caseF   = document.getElementById('filterCase').value.trim();
+
+  var query = db.from('osce_attempts')
+    .select('*')
+    .gte('completed_at', from + 'T00:00:00Z')
+    .lte('completed_at', to + 'T23:59:59Z')
+    .order('completed_at', { ascending: false })
+    .limit(500);
+
+  if (student) query = query.ilike('student_name', '%' + student + '%');
+  if (caseF)   query = query.ilike('case_id', '%' + caseF + '%');
+
+  var { data, error } = await query;
+  if (error) {
+    document.getElementById('reportArea').innerHTML = '<div class="empty"><div class="empty-icon">⚠️</div>' + esc(error.message) + '</div>';
+    return;
+  }
+  if (!data || data.length === 0) {
+    document.getElementById('reportArea').innerHTML = '<div class="empty"><div class="empty-icon">📋</div>No OSCE attempts found for this date range.<br><small>Run the osce-attempts.sql migration and complete at least one OSCE station.</small></div>';
+    return;
+  }
+
+  render(data);
+}
+
+function render(rows) {
+  // ── Cohort-level aggregates ──────────────────────────────────────────────
+  var total    = rows.length;
+  var avgTotal = Math.round(rows.reduce(function(a,r){ return a+(r.pct_score||0); },0) / total);
+  var avgCrit  = Math.round(rows.reduce(function(a,r){ return a+(r.critical_score||0); },0) / total);
+  var avgComm  = Math.round(rows.reduce(function(a,r){ return a+(r.communication_score||0); },0) / total);
+  var avgMgmt  = Math.round(rows.reduce(function(a,r){ return a+(r.management_score||0); },0) / total);
+  var avgHist  = Math.round(rows.reduce(function(a,r){ return a+(r.history_score||0); },0) / total);
+  var passing  = Math.round(rows.filter(function(r){ return (r.pct_score||0) >= 70; }).length / total * 100);
+  var critFail = Math.round(rows.filter(function(r){ return (r.critical_score||0) < 80; }).length / total * 100);
+  var avgEmp   = (rows.reduce(function(a,r){ return a+(parseFloat(r.empathy_density)||0); },0) / total).toFixed(2);
+  var avgOpenQ = Math.round(rows.reduce(function(a,r){ return a+(parseFloat(r.open_q_rate)||0); },0) / total * 100);
+
+  // ── Per-student aggregates ───────────────────────────────────────────────
+  var byStudent = {};
+  rows.forEach(function(r) {
+    var n = r.student_name || 'Unknown';
+    if (!byStudent[n]) byStudent[n] = { name:n, attempts:[], scores:[], crit:[], comm:[], mgmt:[], hist:[], emp:[], openQ:[], cases:[] };
+    var s = byStudent[n];
+    s.attempts.push(r);
+    s.scores.push(r.pct_score||0);
+    s.crit.push(r.critical_score||0);
+    s.comm.push(r.communication_score||0);
+    s.mgmt.push(r.management_score||0);
+    s.hist.push(r.history_score||0);
+    s.emp.push(parseFloat(r.empathy_density)||0);
+    s.openQ.push(parseFloat(r.open_q_rate)||0);
+    s.cases.push(r.case_id||'?');
+  });
+
+  function avg(arr) { return arr.length ? Math.round(arr.reduce(function(a,v){return a+v;},0)/arr.length) : 0; }
+  function avgF(arr) { return arr.length ? (arr.reduce(function(a,v){return a+v;},0)/arr.length).toFixed(2) : '0.00'; }
+
+  var students = Object.values(byStudent).map(function(s) {
+    return {
+      name:       s.name,
+      n:          s.attempts.length,
+      avgScore:   avg(s.scores),
+      avgCrit:    avg(s.crit),
+      avgComm:    avg(s.comm),
+      avgMgmt:    avg(s.mgmt),
+      avgHist:    avg(s.hist),
+      avgEmp:     avgF(s.emp),
+      avgOpenQ:   Math.round(avg(s.openQ.map(function(v){return v*100;}))),
+      passing:    avg(s.scores) >= 70,
+      critFail:   avg(s.crit) < 80,
+      scores:     s.scores,  // for sparkline
+      cases:      [...new Set(s.cases)]
+    };
+  }).sort(function(a,b){ return a.avgScore - b.avgScore; }); // lowest first (at-risk top)
+
+  // ── Render ──────────────────────────────────────────────────────────────
+  var html = '';
+
+  // Summary cards
+  html += '<div class="cards">';
+  function card(label, val, cls) {
+    return '<div class="card ' + cls + '"><div class="card-value">' + val + '</div><div class="card-label">' + label + '</div></div>';
+  }
+  html += card('Total Attempts', total, 'primary');
+  html += card('Cohort Avg', avgTotal + '%', avgTotal >= 70 ? 'success' : 'danger');
+  html += card('Passing Rate', passing + '%', passing >= 70 ? 'success' : 'warning');
+  html += card('Critical Fails', critFail + '%', critFail > 20 ? 'danger' : 'success');
+  html += card('Avg Empathy Density', avgEmp, 'primary');
+  html += card('Open Question Rate', avgOpenQ + '%', avgOpenQ >= 50 ? 'success' : 'warning');
+  html += '</div>';
+
+  // Domain breakdown
+  html += '<div class="section-hdr">Domain Breakdown — Cohort Average</div>';
+  html += '<div class="domain-grid">';
+  var domains = [
+    { name: 'Critical Items',    score: avgCrit, desc: 'Completion rate for must-do orders and actions' },
+    { name: 'History Quality',   score: avgHist, desc: 'Physical exam completeness (proxy)' },
+    { name: 'Communication',     score: avgComm, desc: 'Empathy + open-question composite' },
+    { name: 'Management Plan',   score: avgMgmt, desc: 'Correct orders minus wrong-order penalties' },
+  ];
+  domains.forEach(function(d) {
+    var c = scoreColor(d.score);
+    html += '<div class="domain-card">';
+    html += '<div class="domain-name">' + esc(d.name) + '</div>';
+    html += '<div class="domain-score" style="color:' + c + '">' + d.score + '%</div>';
+    html += '<div class="domain-bar"><div class="domain-bar-fill" style="width:' + d.score + '%;background:' + c + '"></div></div>';
+    html += '<div class="domain-desc">' + esc(d.desc) + '</div>';
+    html += '</div>';
+  });
+  html += '</div>';
+
+  // Communication detail
+  html += '<div class="section-hdr" style="margin-top:8px">Communication Metrics — Cohort</div>';
+  html += '<div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:24px;display:grid;grid-template-columns:1fr 1fr;gap:16px">';
+  function commRow(label, val, max, unit) {
+    var pct = max > 0 ? Math.round(val/max*100) : Math.round(val);
+    return '<div><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px"><span style="font-weight:600">' + esc(label) + '</span><span style="color:var(--muted)">' + val + (unit||'') + '</span></div>' +
+      '<div class="comm-bar-track"><div class="comm-bar-fill" style="width:' + Math.min(pct,100) + '%;background:' + scoreColor(pct) + '"></div></div></div>';
+  }
+  html += commRow('Empathy Density (signals/turn)', avgEmp, 2, ' signals/turn');
+  html += commRow('Open Question Rate', avgOpenQ, 100, '%');
+  html += commRow('Communication Score', avgComm, 100, '%');
+  html += commRow('Cohort Overall Score', avgTotal, 100, '%');
+  html += '</div>';
+
+  // Per-student table
+  html += '<div class="section-hdr">Per-Student Results <span style="font-size:12px;font-weight:400;color:var(--muted)">Sorted by score (lowest first — at-risk priority)</span></div>';
+  html += '<div class="table-wrap"><table>';
+  html += '<thead><tr>';
+  ['Student','Attempts','Avg Score','Critical','Comm','Mgmt','Empathy','Open Q%','Trend','Status'].forEach(function(h) {
+    html += '<th>' + h + '</th>';
+  });
+  html += '</tr></thead><tbody>';
+
+  students.forEach(function(s) {
+    var statusBadge = s.passing ? '<span class="badge badge-pass">Pass</span>' : '<span class="badge badge-fail">Fail</span>';
+    var critCell    = s.critFail
+      ? '<span class="badge badge-crit">⚠ ' + s.avgCrit + '%</span>'
+      : '<span style="color:var(--success);font-weight:700">' + s.avgCrit + '%</span>';
+
+    // Score trend sparkline
+    var maxS = Math.max.apply(null, s.scores);
+    var trend = '<div class="trend-row">';
+    s.scores.slice(-8).forEach(function(sc) {
+      var h = maxS > 0 ? Math.round((sc/maxS)*28) : 4;
+      trend += '<div class="trend-bar" style="height:' + h + 'px;background:' + scoreColor(sc) + '"></div>';
+    });
+    trend += '</div>';
+
+    html += '<tr>';
+    html += '<td style="font-weight:700">' + esc(s.name) + '</td>';
+    html += '<td style="text-align:center">' + s.n + '</td>';
+    html += '<td style="text-align:center;font-weight:700;color:' + scoreColor(s.avgScore) + '">' + s.avgScore + '%</td>';
+    html += '<td style="text-align:center">' + critCell + '</td>';
+    html += '<td style="text-align:center">' + s.avgComm + '%</td>';
+    html += '<td style="text-align:center">' + s.avgMgmt + '%</td>';
+    html += '<td style="text-align:center">' + s.avgEmp + '</td>';
+    html += '<td style="text-align:center">' + s.avgOpenQ + '%</td>';
+    html += '<td>' + trend + '</td>';
+    html += '<td>' + statusBadge + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+
+  // Critical failure flag list
+  var critStudents = students.filter(function(s){ return s.critFail; });
+  if (critStudents.length > 0) {
+    html += '<div style="background:var(--danger-light);border:1px solid #F1948A;border-radius:12px;padding:20px;margin-bottom:24px">';
+    html += '<div style="font-size:14px;font-weight:800;color:var(--danger);margin-bottom:10px">⚠ Critical Item Failure Flags</div>';
+    html += '<div style="font-size:13px;color:var(--danger)">The following students completed &lt;80% of critical checklist items — immediate faculty follow-up recommended:</div>';
+    html += '<ul style="margin-top:10px;padding-left:20px">';
+    critStudents.forEach(function(s) {
+      html += '<li style="margin-bottom:4px;font-weight:600;color:var(--ink)">' + esc(s.name) + ' — critical score: ' + s.avgCrit + '% (across ' + s.n + ' attempt' + (s.n===1?'':'s') + ')</li>';
+    });
+    html += '</ul></div>';
+  }
+
+  // Footer note
+  html += '<div style="font-size:11px;color:var(--muted);text-align:center;padding:12px">Data from <code>osce_attempts</code> table · ReasonDx · NSU KPCAM · reasondx.com</div>';
+
+  document.getElementById('reportArea').innerHTML = html;
+}
+</script>
+</body>
+</html>

@@ -188,7 +188,18 @@
       ordered_labs:        orderedLabs,
       integrated_evidence: integratedEvidence,
       confidence_score:    confidenceScore || state._confidenceScore || null,
-      reasoning_graph:     reasoningGraph || null
+      reasoning_graph:     reasoningGraph || null,
+
+      // ── Productive Failure Flag (Agent 2 / Study 5) ──────────────────
+      // Kapur (2016): missed diagnosis + rich differential + articulation
+      // = "productive failure event" — hypothesized to improve subsequent
+      // same-specialty performance via deeper schema encoding.
+      // Detection: target_in_final=false AND dx_count_final>=3 AND env_history_score>=1
+      productive_failure_flag: (
+        !inDx(dxFinal, target) &&     // missed the diagnosis
+        dxFinal.length >= 3 &&         // rich differential (breadth)
+        (state.envHistoryScore || 0) >= 1  // engaged with critical history
+      )
     };
   }
 

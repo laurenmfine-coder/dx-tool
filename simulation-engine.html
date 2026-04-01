@@ -2082,7 +2082,15 @@ async function exportStudyData() {
   // Console export (always)
   if(RDX_DEBUG) { console.log('=== STUDY DATA EXPORT ==='); console.log(JSON.stringify(data, null, 2)); }
 
-  // Supabase export
+  // Add consent flag to session record
+  data.consent_given = window._rdxConsentGiven === true;
+
+  // Supabase export — skip if practice-only mode (student declined consent)
+  if (window._rdxPracticeOnly) {
+    console.log('Practice-only mode — session data not saved to Supabase (no consent).');
+    addMessage('system', 'Session complete. (Practice mode — data not recorded.)');
+    return;
+  }
   if (!sb) { console.warn('Supabase not initialized — data saved to console only.'); return; }
   try {
     const { error } = await sb.from('rad_study_sessions').upsert(data, { onConflict: 'session_id' });
@@ -3065,8 +3073,107 @@ async function exportStudyData() {
 <script>
 // ── AUTO-START: defer until all enhancement scripts have loaded and wrapped startStudy ──
 window.addEventListener('load', function() {
-  setTimeout(function() { startStudy(); }, 100);
+  setTimeout(function() { _showConsentThenStart(); }, 100);
 });
+
+// ── IRB CONSENT GATE ─────────────────────────────────────────────────────────
+// Required before any session data can be used for research publication.
+// One-sentence consent per IRB minimal risk exemption criteria.
+// Consent is stored in localStorage (rdx-consent-given) so returning students
+// are not shown it again. The consent flag is also written to rad_study_sessions
+// via state.consentGiven for per-session research records.
+//
+// IRB grounding: 45 CFR 46.104(d)(1) — research involving educational tests and
+// observation of public behavior where subjects cannot be identified. Minimal
+// risk exemption. Consent is informed but not written signatures required.
+function _showConsentThenStart() {
+  // Check if consent already given this browser session
+  var alreadyConsented = false;
+  try { alreadyConsented = localStorage.getItem('rdx-consent-given') === 'true'; } catch(e) {}
+
+  if (alreadyConsented) {
+    startStudy();
+    return;
+  }
+
+  // Build consent modal
+  var overlay = document.createElement('div');
+  overlay.id = 'rdx-consent-overlay';
+  overlay.style.cssText = [
+    'position:fixed;inset:0;background:rgba(15,23,42,0.72);z-index:9999',
+    'display:flex;align-items:center;justify-content:center;padding:20px'
+  ].join(';');
+
+  var modal = document.createElement('div');
+  modal.style.cssText = [
+    'background:#fff;border-radius:16px;padding:36px 40px;max-width:540px;width:100%',
+    'box-shadow:0 24px 64px rgba(0,0,0,.28);font-family:Arial,sans-serif'
+  ].join(';');
+
+  modal.innerHTML = [
+    '<div style="font-size:22px;font-weight:800;color:#1B2631;margin-bottom:6px">Before we begin</div>',
+    '<div style="font-size:13px;color:#5D6D7E;margin-bottom:20px;font-weight:500">ReasonDx · NSU KPCAM</div>',
+
+    '<p style="font-size:14px;line-height:1.7;color:#2C3E50;margin-bottom:16px">',
+    'ReasonDx collects anonymized data about how you reason through clinical cases — ',
+    'including your differential diagnoses, question patterns, and response timing — ',
+    'to improve medical education and conduct research on clinical reasoning.',
+    '</p>',
+
+    '<p style="font-size:14px;line-height:1.7;color:#2C3E50;margin-bottom:20px">',
+    'No personally identifying information is collected or shared. ',
+    'Your participation is voluntary and does not affect your academic standing. ',
+    'You may stop at any time.',
+    '</p>',
+
+    '<div style="background:#EBF5FB;border-left:4px solid #2874A6;border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:24px">',
+    '<label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-size:14px;line-height:1.6;color:#1B4F72;font-weight:600">',
+    '<input type="checkbox" id="rdx-consent-check" style="margin-top:3px;flex-shrink:0;width:16px;height:16px;accent-color:#2874A6">',
+    'I understand that anonymized data from my sessions may be used for educational research at NSU KPCAM.',
+    '</label>',
+    '</div>',
+
+    '<div style="display:flex;gap:12px;justify-content:flex-end">',
+    '<button id="rdx-consent-decline" style="padding:10px 20px;border:1px solid #DCE3EB;border-radius:8px;background:#fff;color:#5D6D7E;font-size:14px;font-weight:600;cursor:pointer">',
+    'Practice only (no data)</button>',
+    '<button id="rdx-consent-agree" disabled style="padding:10px 24px;border:none;border-radius:8px;background:#2874A6;color:#fff;font-size:14px;font-weight:700;cursor:not-allowed;opacity:0.5">',
+    'Begin simulation →</button>',
+    '</div>',
+
+    '<p style="font-size:11px;color:#95A5A6;margin-top:16px;text-align:center">',
+    'Questions? Contact Lauren Fine, MD — l.fine@nova.edu',
+    '</p>'
+  ].join('');
+
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  // Enable agree button only when checkbox checked
+  var checkbox = modal.querySelector('#rdx-consent-check');
+  var agreeBtn = modal.querySelector('#rdx-consent-agree');
+  var declineBtn = modal.querySelector('#rdx-consent-decline');
+
+  checkbox.addEventListener('change', function() {
+    agreeBtn.disabled = !this.checked;
+    agreeBtn.style.opacity = this.checked ? '1' : '0.5';
+    agreeBtn.style.cursor  = this.checked ? 'pointer' : 'not-allowed';
+  });
+
+  agreeBtn.addEventListener('click', function() {
+    try { localStorage.setItem('rdx-consent-given', 'true'); } catch(e) {}
+    window._rdxConsentGiven = true;
+    overlay.remove();
+    startStudy();
+  });
+
+  declineBtn.addEventListener('click', function() {
+    // Practice mode — session runs but data is not stored to Supabase
+    window._rdxConsentGiven = false;
+    window._rdxPracticeOnly = true;
+    overlay.remove();
+    startStudy();
+  });
+}
 </script>
 </body>
 </html>
