@@ -69,15 +69,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .stat-val{font-family:var(--mono);font-weight:700}
 
 /* ── Intake form ── */
-.intake-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-start;justify-content:center;z-index:200;overflow-y:auto;padding:40px 16px}
-.intake-card{background:#fff;border-radius:12px;padding:32px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.2);margin:auto}
-.intake-card h2{font-size:22px;color:var(--primary-dark);margin-bottom:4px}
-.intake-card p{font-size:14px;color:var(--text-muted);margin-bottom:20px}
+
 .form-group{margin-bottom:16px}
 .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:var(--text)}
 .form-group input,.form-group select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:14px}
-.intake-btn{width:100%;padding:14px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius);font-family:var(--font);font-weight:700;font-size:15px;cursor:pointer;margin-top:8px}
-.intake-btn:hover{filter:brightness(1.1)}
+
 .hidden{display:none}
 </style>
 <script src="/case-explainer-agent.js"></script>
@@ -100,59 +96,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   </div>
 </div>
 
-<!-- ── INTAKE FORM ── -->
-<div class="intake-overlay" id="intakeOverlay">
-  <div class="intake-card">
-    <h2>ReasonDx Simulation</h2>
-    <p>Welcome! Please fill in your information before beginning the simulation. This is used for research purposes only.</p>
-    <div class="form-group">
-      <label>Your First Name</label>
-      <input type="text" id="intakeName" placeholder="e.g., Robbie">
-    </div>
-    <div class="form-group">
-      <label>Email <span style="color:#6b7280;font-weight:400;font-size:12px">(for your progress reports)</span></label>
-      <input type="email" id="intakeEmail" placeholder="e.g., jsmith@nova.edu">
-    </div>
-    <div class="form-group">
-      <label>Year of Training</label>
-      <select id="intakeYear">
-        <option value="">Select...</option>
-        <option value="M1">M1</option>
-        <option value="M2">M2</option>
-        <option value="M3">M3</option>
-        <option value="M4">M4</option>
-        <option value="PGY-1">PGY-1</option>
-        <option value="PGY-2">PGY-2</option>
-        <option value="PGY-3">PGY-3</option>
-        <option value="PGY-4">PGY-4</option>
-        <option value="PGY-5">PGY-5</option>
-        <option value="Attending">Attending</option>
-      </select>
-    </div>
-    <div class="form-group" id="cogloadContainer"></div>
-    <div class="form-group">
-      <label>Case</label>
-      <div style="position:relative">
-        <input type="text" id="intakeCaseSearch" placeholder="Search by chief complaint..." autocomplete="off" oninput="searchIntakeCases(this.value)" onfocus="searchIntakeCases(this.value)" style="width:100%;padding:10px 14px;border:1px solid #D0D5DD;border-radius:8px;font-size:14px;font-family:inherit;box-sizing:border-box">
-        <input type="hidden" id="intakeCase" value="">
-        <div id="intakeCaseResults" style="display:none;position:absolute;top:100%;left:0;right:0;max-height:200px;overflow-y:auto;background:#fff;border:1px solid #D0D5DD;border-top:none;border-radius:0 0 8px 8px;z-index:100;box-shadow:0 4px 12px rgba(0,0,0,.1)"></div>
-      </div>
-      <div id="intakeCaseSelected" style="display:none;margin-top:6px;padding:8px 12px;background:#EBF5FB;border-radius:8px;font-size:13px;color:#1B4F72;font-weight:600;display:flex;align-items:center;gap:8px"></div>
-      <div style="font-size:11px;color:#666;margin-top:4px;">Or arrive via <a href="browse.html" style="color:#2874A6">Browse</a> · Coordinators: <code>?case=chf-v1</code></div>
-    </div>
-    <div class="form-group">
-      <label>Case Version</label>
-      <select id="intakeDepth">
-        <option value="v1">Initial Presentation (standard)</option>
-        <option value="v2" disabled id="depthV2">Follow-Up: Treatment Reassessment</option>
-        <option value="v3" disabled id="depthV3">Follow-Up: Outpatient / Longitudinal</option>
-      </select>
-      <div style="font-size:11px;color:#666;margin-top:4px;">v2/v3 unlock after completing v1 of this case. Coordinators: <code>?depth=v2</code></div>
-    </div>
-    <button class="intake-btn" onclick="startStudy()">Begin Simulation</button>
-    <div style="text-align:center;margin-top:12px"><a href="browse.html" style="font-size:13px;color:#64748B;text-decoration:none">&larr; Back to Browse</a></div>
-  </div>
-</div>
 
 <!-- ── MAIN LAYOUT ── -->
 <div class="study-container">
@@ -213,272 +156,46 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="js/rdx-case-adapter.js"></script>
 <script>
 // ── INTAKE CASE SEARCH ──
-var _intakeCases = [];
-// Build search index from featured + CRT cases
-[{id:'DYS-001',cc:'Progressive dyspnea',cat:'pulmonary',featured:true},
- {id:'DYS-002',cc:'Dyspnea, cough, fever',cat:'pulmonary',featured:true},
- {id:'COUGH-001',cc:'Productive cough, hemoptysis',cat:'pulmonary',featured:true},
- {id:'CHEST-001',cc:'Chest pain',cat:'cardiovascular',featured:true},
- {id:'FEVER-001',cc:'Fever, dyspnea',cat:'infectious',featured:true}
-].forEach(function(c){ _intakeCases.push(c); });
-
-if (window.CRT_DATA) {
-  Object.entries(window.CRT_DATA).forEach(function(e) {
-    var id=e[0],c=e[1];
-    _intakeCases.push({
-      id:id,
-      cc:(c.chiefComplaint||c.presentation||'').split('/')[0].trim(),
-      searchText:(c.chiefComplaint||c.presentation||'').toLowerCase(),
-      cat:(c.category||'other').toLowerCase(),
-      featured:false
-    });
-  });
-}
-
-function searchIntakeCases(q) {
-  var box=document.getElementById('intakeCaseResults');
-  if (!q||q.length<2) {
-    // Show featured cases
-    var html=_intakeCases.filter(function(c){return c.featured;}).map(function(c){
-      return '<div onclick="selectIntakeCase(\''+c.id+'\',\''+c.cc.replace(/'/g,"\\'")+'\')" style="padding:8px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid #F1F5F9" onmouseover="this.style.background=\'#F8FAFC\'" onmouseout="this.style.background=\'#fff\'"><strong>'+c.cc+'</strong> <span style="font-size:11px;color:#94A3B8;float:right">Featured</span></div>';
-    }).join('');
-    box.innerHTML=html;
-    box.style.display='block';
-    return;
-  }
-  var ql=q.toLowerCase();
-  var matches=_intakeCases.filter(function(c){
-    return (c.searchText||c.cc.toLowerCase()).includes(ql)||c.cat.includes(ql)||c.id.toLowerCase().includes(ql);
-  }).slice(0,10);
-  if (!matches.length){box.innerHTML='<div style="padding:10px 14px;font-size:13px;color:#94A3B8">No cases found</div>';box.style.display='block';return;}
-  box.innerHTML=matches.map(function(c){
-    var catLabel=c.cat.charAt(0).toUpperCase()+c.cat.slice(1);
-    return '<div onclick="selectIntakeCase(\''+c.id+'\',\''+c.cc.replace(/'/g,"\\'")+'\')" style="padding:8px 14px;cursor:pointer;font-size:13px;border-bottom:1px solid #F1F5F9" onmouseover="this.style.background=\'#F8FAFC\'" onmouseout="this.style.background=\'#fff\'">'+c.cc+' <span style="font-size:11px;color:#94A3B8;float:right">'+catLabel+'</span></div>';
-  }).join('');
-  box.style.display='block';
-}
-
-function selectIntakeCase(id, label) {
-  document.getElementById('intakeCase').value=id;
-  document.getElementById('intakeCaseSearch').value=label;
-  document.getElementById('intakeCaseResults').style.display='none';
-  var sel=document.getElementById('intakeCaseSelected');
-  sel.style.display='block';
-  sel.innerHTML='Selected: <strong>'+label+'</strong> <span style="font-size:11px;color:#94A3B8;margin-left:auto">'+id+'</span>';
-  if (typeof updateDepthOptions==='function') updateDepthOptions();
-}
-
-// Close on outside click
-document.addEventListener('click',function(e){
-  var box=document.getElementById('intakeCaseResults');
-  if (box&&!e.target.closest('#intakeCaseSearch')&&!e.target.closest('#intakeCaseResults')) box.style.display='none';
-});
-
-// URL parameter pre-fill
-(function(){
-  var params=new URLSearchParams(window.location.search);
-  var urlCase=params.get('case');
-  if (urlCase) {
-    var found=_intakeCases.find(function(c){return c.id.toLowerCase()===urlCase.toLowerCase();});
-    if (found) selectIntakeCase(found.id, found.cc);
-    else selectIntakeCase(urlCase, urlCase);
-  }
-})();
-</script>
-<script src="js/rdx-ddx-chooser.js"></script>
-<script src="js/rdx-readability.js"></script>
-<script src="js/rdx-passive.js"></script>
-
-<script>
-// ═══════════════════════════════════════════════════════════════
-// RADIOLOGY STUDY ORCHESTRATOR (embedded)
-// ═══════════════════════════════════════════════════════════════
-
-const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
-const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-const sb = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
-
-const PHASES = {
-  INITIAL_DIFFERENTIAL:1, JUSTIFICATION:2, HISTORY_TAKING:3,
-  REVISED_DIFFERENTIAL:4, PHYSICAL_EXAM:5, LABS_IMAGING:6,
-  REPORT_COMPARISON:7, REFLECTION:8, MANAGEMENT:9, COMPLETE:10
-};
-const PHASE_LABELS = {
-  1:"Initial Differential", 2:"Differential Justification", 3:"History-Taking",
-  4:"Revised Differential", 5:"Physical Examination", 6:"Labs & Imaging",
-  7:"Report Comparison", 8:"Closing Reflection", 9:"Management Plan", 10:"Complete"
-};
-
-let state = null;
-let caseData = null;
-
-// ── CASE REGISTRY ──
-const CASE_REGISTRY = {
-  'DYS-001':   function() { return typeof CASE_DYS001 !== 'undefined' ? CASE_DYS001 : null; },
-  'DYS-002':   function() { return typeof CASE_DYS002 !== 'undefined' ? CASE_DYS002 : null; },
-  'COUGH-001': function() { return typeof CASE_COUGH001 !== 'undefined' ? CASE_COUGH001 : null; },
-  'CHEST-001': function() { return typeof CASE_CHEST001 !== 'undefined' ? CASE_CHEST001 : null; },
-  'FEVER-001': function() { return typeof CASE_FEVER001 !== 'undefined' ? CASE_FEVER001 : null; }
-};
-const CASE_IDS = Object.keys(CASE_REGISTRY);
-
-// URL parameter: depth override (?depth=v2)
-// URL parameter: case pre-selection (?case=stemi-v1) — used by ED board continuity
-(function() {
-  var params = new URLSearchParams(window.location.search);
-  var urlDepth = params.get('depth');
-  if (urlDepth && ['v1','v2','v3'].indexOf(urlDepth) !== -1) {
-    var depthSel = document.getElementById('intakeDepth');
-    if (depthSel) {
-      var opt = depthSel.querySelector('option[value="' + urlDepth + '"]');
-      if (opt) { opt.disabled = false; depthSel.value = urlDepth; }
-    }
-  }
-
-  // Auto-select case from ?case= param (e.g. launched from ED board)
-  var urlCase = params.get('case');
-  if (urlCase) {
-    setTimeout(function() {
-      var caseInput = document.getElementById('intakeCase');
-      var caseSearch = document.getElementById('intakeCaseSearch');
-      var caseSelected = document.getElementById('intakeCaseSelected');
-      if (!caseInput) return;
-      // Try to find the label from _intakeCases
-      var found = (_intakeCases || []).find(function(c) { return c.id === urlCase; });
-      var label = found ? found.label : urlCase;
-      caseInput.value = urlCase;
-      if (caseSearch) caseSearch.value = label;
-      if (caseSelected) {
-        caseSelected.style.display = 'flex';
-        caseSelected.innerHTML = '✓ ' + label + '<span style="margin-left:auto;font-size:11px;opacity:.7">via ED Board</span>';
-      }
-      if (typeof updateDepthOptions === 'function') updateDepthOptions();
-      // Show a subtle banner so the student knows where they came from
-      var overlay = document.getElementById('intakeOverlay');
-      if (overlay) {
-        var banner = document.createElement('div');
-        banner.style.cssText = 'background:#EBF5FB;border:1px solid #AED6F1;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#1B4F72;display:flex;align-items:center;gap:8px';
-        banner.innerHTML = '🏥 <strong>Continuing from ED Board</strong> — case pre-loaded. Fill in your details and start.';
-        var firstChild = overlay.querySelector('.intake-card') || overlay.firstElementChild;
-        if (firstChild) firstChild.insertBefore(banner, firstChild.firstChild);
-      }
-    }, 300);
-  }
-
-  setTimeout(function() { if (typeof updateDepthOptions === 'function') updateDepthOptions(); }, 500);
-})();
-
-// Update depth options based on selected case and prior completions
-function updateDepthOptions() {
-  var selectedCase = document.getElementById('intakeCase').value;
-  var v2opt = document.getElementById('depthV2');
-  var v3opt = document.getElementById('depthV3');
-  var depthSel = document.getElementById('intakeDepth');
-  if (!v2opt || !v3opt) return;
-
-  // Reset
-  v2opt.disabled = true; v3opt.disabled = true;
-  depthSel.value = 'v1';
-
-  // Load case to check if depth versions exist
-  var loader = CASE_REGISTRY[selectedCase];
-  if (!loader || selectedCase === 'random') return;
-  var cd = loader();
-  if (!cd || !cd.caseDepth) return;
-
-  // Update labels from case data
-  if (cd.caseDepth.v2) {
-    v2opt.textContent = cd.caseDepth.v2.title || 'Follow-Up: Treatment Reassessment';
-  }
-  if (cd.caseDepth.v3) {
-    v3opt.textContent = cd.caseDepth.v3.title || 'Follow-Up: Outpatient / Longitudinal';
-  }
-
-  // Check localStorage for prior completions of this case
-  var completedV1 = false;
-  var completedV2 = false;
-  try {
-    for (var i = 0; i < localStorage.length; i++) {
-      var key = localStorage.key(i);
-      if (key && key.startsWith('radStudy_')) {
-        var saved = JSON.parse(localStorage.getItem(key));
-        if (saved && saved.caseId === selectedCase) {
-          if (!saved.caseDepthVersion || saved.caseDepthVersion === 'v1') completedV1 = true;
-          if (saved.caseDepthVersion === 'v2') completedV2 = true;
-        }
-      }
-    }
-  } catch(e) {}
-
-  // Also check Supabase if available
-  if (sb) {
-    sb.from('rad_study_sessions').select('session_id').eq('case_id', selectedCase).eq('status', 'complete').limit(1)
-      .then(function(result) {
-        if (result.data && result.data.length > 0) {
-          completedV1 = true;
-          if (cd.caseDepth.v2) { v2opt.disabled = false; }
-        }
-      }).catch(function() {});
-  }
-
-  // Unlock based on completion
-  if (completedV1 && cd.caseDepth.v2) v2opt.disabled = false;
-  if (completedV2 && cd.caseDepth.v3) v3opt.disabled = false;
-
-  // URL override always unlocks
-  var params = new URLSearchParams(window.location.search);
-  if (params.get('depth') === 'v2' && cd.caseDepth.v2) { v2opt.disabled = false; depthSel.value = 'v2'; }
-  if (params.get('depth') === 'v3' && cd.caseDepth.v3) { v3opt.disabled = false; depthSel.value = 'v3'; }
-}
-
 // ── INITIALIZATION ──
 function startStudy() {
-  const name = document.getElementById('intakeName').value.trim();
-  const year = document.getElementById('intakeYear').value;
+  // ── Read identity from localStorage (set by auth/browse) ──
+  var rdxUser = {};
+  try { rdxUser = JSON.parse(localStorage.getItem('rdx_user') || '{}'); } catch(e) {}
+  var name  = rdxUser.name  || rdxUser.firstName || 'Student';
+  var year  = rdxUser.year  || rdxUser.trainingYear || 'M3';
+  var intakeEmail = rdxUser.email || (window.RdxPlatform && window.RdxPlatform.getUserEmail ? window.RdxPlatform.getUserEmail() : '') || '';
 
-  // Email capture — pre-fill from auth if available
-  var intakeEmailEl = document.getElementById('intakeEmail');
-  var intakeEmail = intakeEmailEl ? intakeEmailEl.value.trim() : '';
-  if (!intakeEmail && window.RdxPlatform && window.RdxPlatform.getUserEmail) {
-    intakeEmail = window.RdxPlatform.getUserEmail() || '';
-    if (intakeEmailEl && intakeEmail) intakeEmailEl.value = intakeEmail;
-  }
-  if (intakeEmail) {
-    try {
-      var rdxUser = JSON.parse(localStorage.getItem('rdx_user') || '{}');
-      rdxUser.email = intakeEmail;
-      localStorage.setItem('rdx_user', JSON.stringify(rdxUser));
-    } catch(e) {}
-  }
-  if (!name || !year) { alert('Please fill in your name and training year.'); return; }
+  // ── Read case + depth from URL params ──
+  var params = new URLSearchParams(window.location.search);
+  var selectedCase = params.get('case') || params.get('caseId') || '';
+  var depthVersion = params.get('depth') || 'v1';
 
-  // Random group assignment
-  const groupCode = Math.random() < 0.5 ? 'A' : 'B';
-
-  // Load selected case
-  // Load selected case with depth version
-  var selectedCase = document.getElementById('intakeCase').value;
   if (!selectedCase) {
-    alert('Please select a case first. Search by chief complaint or use the Case Browser.');
+    // No case in URL — redirect to browse
+    window.location.href = 'browse.html';
     return;
   }
   if (selectedCase === 'random') {
     selectedCase = CASE_IDS[Math.floor(Math.random() * CASE_IDS.length)];
   }
+
+  // Random group assignment
+  const groupCode = Math.random() < 0.5 ? 'A' : 'B';
+
+  // ── Load case data ──
   var caseLoader = CASE_REGISTRY[selectedCase];
   if (caseLoader) {
     caseData = caseLoader();
   } else if (window.CaseAdapter) {
-    // Try CRT adapter for any of the 361 CRT cases
     caseData = CaseAdapter.fromCRT(selectedCase);
   }
-  window.caseData = caseData; // expose for enhancements
-  if (!caseData) { alert('Case not found: ' + selectedCase); return; }
+  window.caseData = caseData;
+  if (!caseData) {
+    addMessage('system', 'Case not found: ' + selectedCase + '. <a href="browse.html">Return to Browse</a>.');
+    return;
+  }
 
-  // ── CASE DEPTH VERSION ──
-  var depthSelect = document.getElementById('intakeDepth');
-  var depthVersion = depthSelect ? depthSelect.value : 'v1';
+  // ── Depth version ──
   var isDepthCase = depthVersion !== 'v1' && caseData.caseDepth && caseData.caseDepth[depthVersion];
   var depthData = isDepthCase ? caseData.caseDepth[depthVersion] : null;
 
@@ -512,7 +229,6 @@ function startStudy() {
     leakDetails: []
   };
 
-  document.getElementById('intakeOverlay').classList.add('hidden');
   document.getElementById('chatInput').disabled = false;
   document.getElementById('sendBtn').disabled = false;
   document.getElementById('micBtn').disabled = false;
@@ -3012,6 +2728,15 @@ async function exportStudyData() {
   }
 
 })();
+</script>
+
+<script>
+// ── AUTO-START: fire as soon as page is ready — no intake form ──
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() { startStudy(); });
+} else {
+  startStudy();
+}
 </script>
 </body>
 </html>
