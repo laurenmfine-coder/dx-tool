@@ -489,9 +489,21 @@
     },
     _log: [],
 
-    init: function(baselineAnxiety) {
+    _patientName: null,
+    _patientFirst: null,
+    _patientLast: null,
+
+    init: function(baselineAnxiety, patientName) {
       this._state = { trust: 5, anxiety: baselineAnxiety || 6, frustration: 0, rapport: 3 };
       this._log = [];
+      // Store patient name for dynamic name recognition
+      // patientName: full name string from caseData.presentation.patientName
+      this._patientName = patientName || null;
+      if (patientName) {
+        var parts = patientName.trim().split(/\s+/);
+        this._patientFirst = parts[0] ? parts[0].toLowerCase() : null;
+        this._patientLast  = parts[parts.length - 1] ? parts[parts.length - 1].toLowerCase() : null;
+      }
     },
 
     /**
@@ -518,8 +530,19 @@
         delta.trust += 0.5;
         delta.rapport += 0.3;
       }
-      // Used patient's name
-      if (/\b(ms\.? reyes|mrs\.? reyes|maria)\b/i.test(msg)) {
+      // Used patient's name — dynamic, not hardcoded
+      // Checks first name, last name, and common honorifics (Mr./Ms./Mrs.)
+      // Grounded in Calgary-Cambridge Guide and Kalamazoo Consensus: using
+      // the patient's name is a validated rapport-building behavior.
+      var usedName = false;
+      if (this._patientFirst && msg.toLowerCase().indexOf(this._patientFirst) !== -1) usedName = true;
+      if (!usedName && this._patientLast && msg.toLowerCase().indexOf(this._patientLast) !== -1) usedName = true;
+      if (!usedName && this._patientName) {
+        // Also accept honorific + last name (Mr. Smith, Ms. Jones)
+        var lastL = this._patientLast;
+        if (lastL && /(mr\.?|ms\.?|mrs\.?|dr\.?)\s*/i.test(msg) && msg.toLowerCase().indexOf(lastL) !== -1) usedName = true;
+      }
+      if (usedName) {
         delta.rapport += 0.3;
       }
 

@@ -2156,7 +2156,9 @@ async function exportStudyData() {
     var cogSel = document.getElementById('intakeCogLoad');
     E.CognitiveLoadManager.init(cogSel ? cogSel.value : 'off', window.state.trainingYear);
     window.state.cognitiveLoadLevel = E.CognitiveLoadManager.getCurrentLevel();
-    E.PatientEmotionModel.init(6);
+    // Pass patient name for dynamic rapport scoring (Calgary-Cambridge / Kalamazoo)
+    var _patientNameForEmotion = (window.caseData && window.caseData.presentation && window.caseData.presentation.patientName) || null;
+    E.PatientEmotionModel.init(6, _patientNameForEmotion);
     window.state._metacogPrompts = [];
     window.state._confidenceLog = [];
     window.state._nearMisses = [];
