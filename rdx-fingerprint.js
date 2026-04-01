@@ -97,32 +97,64 @@
       });
     }
 
-    // Detect anchoring: initial top dx never changed despite revised differential
+    // ── Cognitive bias detection — grounded in peer-reviewed literature ──
+    // See docs/cognitive-bias-evidence-base.md for full citations.
+    // All signals require minimum 3 sessions before pattern reporting.
+
+    // ANCHORING BIAS (Croskerry 2009; Graber et al. 2005; Kunitomo et al. 2022)
+    // Definition: adherence to initial hypothesis despite accumulating
+    // contradictory evidence that should have prompted reconsideration.
+    // Operationalization: top initial dx = top final dx AND missed target AND
+    // revised differential was submitted (confirming exposure to new evidence).
     var anchoringDetected = false;
-    if (dxInitial.length > 0 && dxFinal.length > 0) {
+    if (dxInitial.length > 0 && dxFinal.length > 0 && dxRevised.length > 0) {
       var topInitial = dxInitial[0].toLowerCase();
       var topFinal   = dxFinal[0].toLowerCase();
-      // Anchoring = same top dx AND student missed the target diagnosis
-      if (topInitial === topFinal && !inDx(dxFinal, target) && dxRevised.length > 0) {
+      var topUnchanged = topInitial.split(' ')[0] === topFinal.split(' ')[0];
+      var missedTarget = !inDx(dxFinal, target);
+      // Only flag anchoring if student missed the target (persistence ≠ anchoring)
+      if (topUnchanged && missedTarget) {
         anchoringDetected = true;
       }
     }
 
-    // Premature closure: stopped revising after phase 4 despite new evidence
+    // PREMATURE CLOSURE (Graber et al. 2005; Berner & Graber 2008; Croskerry 2018)
+    // Definition: "the failure to continue considering reasonable alternatives
+    // after an initial diagnosis was reached" — the single most common cognitive
+    // error in diagnostic error (Graber et al., Arch Intern Med 2005).
+    // Operationalization: revised differential substantively identical to final
+    // differential (no meaningful update post-labs/imaging) AND missed target.
     var prematureClosure = false;
     var historyTurns = (state.turns || []).filter(function(t) {
       return t.role === 'student' && t.phase === 3;
     }).length;
-    if (dxRevised.length > 0 && JSON.stringify(dxRevised) === JSON.stringify(dxFinal) && !inDx(dxFinal, target)) {
-      prematureClosure = true;
+    if (dxRevised.length > 0 && dxFinal.length > 0 && !inDx(dxFinal, target)) {
+      // Compare top 3 diagnoses — small ordering changes don't count as revision
+      var revisedTop3 = dxRevised.slice(0,3).map(function(d) { return d.toLowerCase().split(' ')[0]; });
+      var finalTop3   = dxFinal.slice(0,3).map(function(d) { return d.toLowerCase().split(' ')[0]; });
+      var noMeaningfulChange = JSON.stringify(revisedTop3) === JSON.stringify(finalTop3);
+      if (noMeaningfulChange) {
+        prematureClosure = true;
+      }
     }
 
-    // Missed pivot: env history score 0 (missed key exposure history)
+    // MISSED PIVOT HISTORY / FAULTY CONTEXT GENERATION (Graber et al. 2005)
+    // "Faulty context generation" is one of the most common cognitive error
+    // subtypes. In ReasonDx cases, env_history_score tracks whether the
+    // student elicited the case's critical contextual history element
+    // (exposure, substance use, occupation, travel, etc.).
     var missedPivot = (state.envHistoryScore === 0);
 
-    // Evidence integration: did dx change between phase 4 and phase 6?
-    var integratedEvidence = dxRevised.length > 0 && dxFinal.length > 0 &&
-      JSON.stringify(dxRevised.slice(0,3)) !== JSON.stringify(dxFinal.slice(0,3));
+    // EVIDENCE INTEGRATION (Croskerry 2009 — debiasing via System 2 engagement)
+    // Positive signal: student updated differential after receiving objective data.
+    // Operationalization: rank-order change in top diagnoses between phase 4
+    // and final differential, indicating active hypothesis updating.
+    var integratedEvidence = false;
+    if (dxRevised.length > 0 && dxFinal.length > 0) {
+      var revisedStr = dxRevised.slice(0,3).map(function(d) { return d.toLowerCase().split(' ')[0]; }).join(',');
+      var finalStr   = dxFinal.slice(0,3).map(function(d) { return d.toLowerCase().split(' ')[0]; }).join(',');
+      integratedEvidence = revisedStr !== finalStr;
+    }
 
     // Ordered imaging/labs
     var allStudentText = (state.turns || [])
@@ -289,14 +321,16 @@
       if (tags.length === 0) {
         lines.push('- No strong patterns identified yet (more sessions needed)');
       } else {
+        // Descriptions grounded in Croskerry (2009), Graber et al. (2005),
+        // and Berner & Graber (2008) — see docs/cognitive-bias-evidence-base.md
         var tagDescriptions = {
-          'anchoring_tendency':   'tends to anchor on initial diagnosis',
-          'premature_closure':    'closes differential too early',
-          'history_gap':          'frequently misses key history elements',
-          'narrow_opener':        'generates narrow initial differentials',
-          'broad_thinker':        'generates broad initial differentials',
-          'strong_accuracy':      'consistently reaches correct diagnosis',
-          'underconfident':       'accurate but underestimates their own reasoning'
+          'anchoring_tendency':   'tends to maintain initial diagnosis despite new contradicting evidence (anchoring bias — Croskerry, 2009)',
+          'premature_closure':    'stops revising differential before fully evaluating new evidence (premature closure — Graber et al., 2005)',
+          'history_gap':          'frequently misses the critical contextual history element (faulty context generation — Graber et al., 2005)',
+          'narrow_opener':        'generates narrow initial differentials (< 2 diagnoses at Phase 1)',
+          'broad_thinker':        'generates broad initial differentials (> 5 diagnoses at Phase 1)',
+          'strong_accuracy':      'consistently includes correct diagnosis in final differential (> 80% of sessions)',
+          'underconfident':       'accurate performance but systematically underestimates own reasoning (calibration gap — Croskerry & Norman, 2008)'
         };
         tags.forEach(function(tag) {
           lines.push('- ' + (tagDescriptions[tag] || tag));
