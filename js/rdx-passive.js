@@ -194,6 +194,25 @@
         var record = {
           turn: turn, phase: phase, latencyMs: latencyMs,
           latencySeconds: Math.round(latencyMs / 100) / 10,
+          // ── Latency category grounding ──────────────────────────────
+          // Moulton et al. (2007, Acad Med): expert surgeons deliberately
+          // "slow down" at critical decision points — slow response may
+          // indicate appropriate System 2 engagement (Croskerry 2009),
+          // not difficulty. Categories are therefore not evaluative; they
+          // are used to identify patterns (e.g., consistently fast at
+          // history = possible premature closure risk).
+          //
+          // Sweller (1988, Cogn Sci) cognitive load theory: latency is a
+          // proxy for working memory load. Very long latency (>30s) may
+          // indicate cognitive overload at a particular phase.
+          //
+          // IMPORTANT LIMITATION: In a text-based simulation, latency
+          // includes typing time and is confounded by typing speed.
+          // These categories should be treated as rough indicators only.
+          // Absolute thresholds (5s, 15s, 30s) are pragmatic cutpoints
+          // consistent with clinical simulation literature but not
+          // independently validated for text-based digital simulations.
+          // They are reported descriptively, never used for grading.
           category: latencyMs < 5000 ? 'fast' : latencyMs < 15000 ? 'moderate' : latencyMs < 30000 ? 'slow' : 'very_slow',
           timestamp: new Date().toISOString()
         };

@@ -225,17 +225,18 @@ this principle to diagnostic reasoning.
 
 ### Operationalization
 
-| Category | Threshold | Interpretation |
-|---|---|---|
-| Fast | < 5 seconds | Pattern recognition (System 1); may indicate automaticity |
-| Moderate | 5–15 seconds | Typical deliberate reasoning |
-| Slow | 15–30 seconds | Potential System 2 engagement at decision point |
-| Very slow | > 30 seconds | Possible confusion, distraction, or working memory load |
+| Category | Threshold | Interpretation | Basis |
+|---|---|---|---|
+| Fast | < 5 seconds | Pattern recognition (System 1); possible automaticity | Croskerry (2009) System 1 |
+| Moderate | 5–15 seconds | Typical deliberate reasoning; adequate processing time | Pragmatic cutpoint |
+| Slow | 15–30 seconds | Possible deliberate System 2 engagement at a decision point | Moulton et al. (2007) |
+| Very slow | > 30 seconds | Possible cognitive overload or working memory demand | Sweller (1988) |
 
-**Important caveat:** Latency in a text-based simulation includes typing time and
-is therefore confounded by typing speed. ReasonDx latency data is most valid for
-identifying extreme values (very fast or very slow) as potential signals, not for
-precise cognitive load measurement.
+**Critical limitation:** In text-based simulation, latency includes typing time and
+is therefore confounded by typing speed. These thresholds are pragmatic cutpoints
+consistent with simulation literature but have not been independently validated for
+text-based digital platforms. Latency data is reported descriptively only and is
+**never used for grading or competency determination.**
 
 ---
 

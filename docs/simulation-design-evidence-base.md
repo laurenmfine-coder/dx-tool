@@ -90,12 +90,19 @@ additional information (the basis for Phases 1→2 sequencing in ReasonDx).
 The `scoreArticulation` function evaluates the quality of a student's reasoning
 justification on a 0–4 scale using four markers:
 
-| Score Component | Criterion | Theoretical Basis |
-|---|---|---|
-| +1 | Uses causal connectors (because, given that, based on) | Semantic qualifier framework |
-| +1 | References specific clinical finding | Illness script — fault identification |
-| +1 | Considers alternatives (but, however, alternatively) | Hypothetico-deductive model |
-| +1 | Probabilistic language (more likely, rule out) | Bayesian clinical reasoning |
+| Domain | Criterion (keywords) | Theoretical Basis | Primary Citation |
+|---|---|---|---|
+| Causal connectors | because, given that, based on, this suggests, this indicates | Elaborated knowledge — explicit causal linkages mark expert reasoning | Bordage (1994) |
+| Specific finding | named vital sign, lab value, exam finding, imaging result | Illness script fault identification — specific > generic descriptors | Bordage & Lemieux (1991) |
+| Considers alternatives | but, however, alternatively, can't rule out, need to exclude | Hypothetico-deductive model — active testing of competing hypotheses | Elstein et al. (1978) |
+| Probabilistic framing | more likely, less likely, rule out, consistent with, argues for/against | EBM competency; faulty probability = primary cognitive error type | Graber et al. (2005) |
+
+### Elaboration Levels (Bordage, 1994)
+
+Score interpretation maps directly to Bordage's three elaboration levels:
+- **0–1 (Reduced/Dispersed):** Minimal elaboration; global, non-specific descriptors only
+- **2 (Compiled):** Partial linkage; evidence cited but limited discrimination between diagnoses
+- **3–4 (Elaborated):** Rich, contrastive, causally-connected reasoning across multiple domains
 
 ### Semantic Qualifiers
 
@@ -196,19 +203,37 @@ confidence trajectory analysis in `rdx-agent-enhancements.js`.
 
 ### Operationalization
 
-**Overconfidence signal:** High confidence expressed at a point where the correct
-diagnosis is NOT in the student's active differential.
-- Threshold: confidence ≥ 7/10 (or ≥ 4/5 Likert) AND target not in differential
-- Grounding: Berner & Graber (2008) overconfidence definition
+**Overconfidence signal (within-session):**
+High confidence expressed when the correct diagnosis is NOT in the student's differential.
+- Threshold on 1–10 legacy scale: confidence ≥ 7 AND target not in differential
+- Threshold on 1–5 Likert scale (2026): confidence ≥ 4 AND target not in differential
+- Rationale: Berner & Graber (2008) operationalized overconfidence as high stated
+  confidence when evidence does not support the diagnosis. On a 10-point scale, ≥7
+  represents "confident" to "certain" — substantially exceeding what the accuracy
+  warrants. Croskerry & Norman (2008): overconfidence involves placing too much faith
+  in opinions rather than evidence.
 
-**Underconfidence signal (session level):** Low Likert score despite high accuracy.
-- Threshold: avg Likert < 3/5 AND target in final differential > 70% of sessions
-- Grounding: Eva & Regehr (2005, 2008); CRESCAT correlation data
+**Underconfidence signal (within-session):**
+Low confidence expressed when the correct diagnosis IS in the student's differential.
+- Threshold on 1–10 scale: confidence ≤ 3 AND target in differential
+- Threshold on 1–5 Likert scale: confidence ≤ 2 AND target in differential
+- Rationale: Eva & Regehr (2005, 2008) documented that medical trainees systematically
+  underestimate their performance. On a 10-point scale, ≤3 represents "guessing" to
+  "slightly uncertain" despite having the correct diagnosis in the differential.
 
-**Calibration quality:**
-- Good: ≥ 60% of turns show matched confidence-accuracy
-- Overconfident: > 1 turn with high confidence but wrong differential
-- Underconfident: > 1 turn with low confidence but correct differential
+**Well-calibrated zone:**
+- 1–10 scale: confidence 6–10 with correct differential, or 1–4 without
+- 1–5 scale: confidence 3–5 with correct, or 1–2 without
+- Rationale: Sætrevik et al. (2024) preregistered operationalization of good
+  calibration as confidence matching accuracy. The ±1-point band provides
+  reasonable tolerance for self-report measurement imprecision.
+
+**Threshold limitation note:**
+These thresholds are grounded in conceptual definitions from the cited literature
+but the specific cutpoints (7/10 and 3/10) are pragmatic — the cited papers do
+not prescribe exact numeric thresholds on 10-point scales. They should be treated
+as reasonable approximations, not validated cutscores. Future validation against
+expert-rated calibration scores would strengthen this instrument.
 
 ### Teaching Points
 

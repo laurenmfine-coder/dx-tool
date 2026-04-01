@@ -91,20 +91,67 @@
      * Measures: does the student improve at articulating reasoning?
      */
     scoreArticulation: function(responseToPrompt) {
-      // Heuristic scoring based on response quality markers
+      // ── Grounded in Bordage & Lemieux (1991) semantic qualifier theory
+      // and Bordage (1994) elaborated knowledge framework.
+      //
+      // Four scoring domains correspond to the four dimensions of
+      // diagnostic reasoning quality identified in the literature:
+      //
+      // Domain 1 — Causal connectors (Bordage 1994: elaborated knowledge
+      //   is marked by explicit causal links between findings and diagnoses)
+      //
+      // Domain 2 — Specific clinical finding (Bordage & Lemieux 1991:
+      //   expert illness scripts contain specific enabling conditions;
+      //   novices use generic rather than case-specific descriptors)
+      //
+      // Domain 3 — Considers alternatives (Elstein et al. 1978:
+      //   hypothetico-deductive reasoning requires active testing of
+      //   competing hypotheses, not just confirmation of the leading one)
+      //
+      // Domain 4 — Probabilistic framing (Richardson & Glasziou 2015:
+      //   evidence-based clinical reasoning requires explicit likelihood
+      //   estimation; Graber et al. 2005: faulty probability assessment
+      //   is a primary cognitive error type)
+      //
+      // Score interpretation (Bordage 1994 elaboration levels):
+      //   0–1: Reduced/dispersed — minimal elaboration, global descriptors
+      //   2:   Compiled — some linkage, limited discrimination
+      //   3–4: Elaborated — rich, contrastive, causally connected reasoning
+
       var score = 0;
       var msg = responseToPrompt.toLowerCase();
+      var domains = {};
 
-      // Mentions specific evidence
-      if (/because|since|given that|based on|the fact that/i.test(msg)) score += 1;
-      // References a specific finding
-      if (/vitals?|spo2|crackles?|cough|fever|history|exam|lab|imaging/i.test(msg)) score += 1;
-      // Considers alternatives
-      if (/but|however|although|on the other hand|alternatively|if.*(wrong|not)/i.test(msg)) score += 1;
-      // Shows probabilistic thinking
-      if (/more likely|less likely|probability|odds|common|rare|rule out/i.test(msg)) score += 1;
+      // Domain 1: Causal connectors — explicit because/since/given-that linkages
+      domains.causalConnectors = /(because|since|given that|based on|the fact that|which explains|that's why|this suggests|this indicates|this points to|as evidenced by)/i.test(msg);
+      if (domains.causalConnectors) score += 1;
 
-      return { score: score, max: 4, quality: score >= 3 ? 'strong' : score >= 2 ? 'adequate' : 'developing' };
+      // Domain 2: Specific clinical finding — references a concrete finding
+      // (not a generic descriptor). Expanded from original to cover more
+      // case types beyond respiratory.
+      domains.specificFinding = /(vital|spo2|saturation|temp|temperature|heart rate|blood pressure|resp rate|crackle|wheeze|murmur|rub|gallop|tenderness|rigidity|guarding|pupil|reflex|troponin|lactate|wbc|hemoglobin|sodium|potassium|creatinine|bilirubin|lipase|ekg|ecg|st.elev|st.depress|infiltrate|effusion|consolidat|ground.glass|nodule|fracture|abscess|echo|imaging|x.ray|mri|ct)/i.test(msg);
+      if (domains.specificFinding) score += 1;
+
+      // Domain 3: Considers alternatives — contrastive language (Bordage 1991:
+      // experts use semantic qualifiers to distinguish between diagnoses;
+      // the "but/however" pattern is the behavioral marker of this)
+      domains.considersAlternatives = /(but|however|although|on the other hand|alternatively|whereas|unlike|in contrast|if i('m| am) wrong|what if|could also|other possibility|also considering|can't rule out|need to exclude|must not miss)/i.test(msg);
+      if (domains.considersAlternatives) score += 1;
+
+      // Domain 4: Probabilistic framing (evidence-based medicine competency;
+      // Graber et al. 2005 faulty probability assessment error type)
+      domains.probabilisticFraming = /(more likely|less likely|most likely|probability|odds|common|uncommon|rare|classic for|typical|atypical|rule out|high.yield|low probability|pre-test|post-test|likelihood|consistent with|not consistent|argues for|argues against|makes me more|makes me less)/i.test(msg);
+      if (domains.probabilisticFraming) score += 1;
+
+      return {
+        score: score,
+        max: 4,
+        domains: domains,
+        // Bordage (1994) elaboration levels: reduced/compiled/elaborated
+        elaborationLevel: score <= 1 ? 'reduced' : score === 2 ? 'compiled' : 'elaborated',
+        // Keep legacy quality field for backward compatibility
+        quality: score >= 3 ? 'strong' : score >= 2 ? 'adequate' : 'developing'
+      };
     }
   };
 
@@ -142,6 +189,34 @@
     analyze: function(state) {
       var log = state._confidenceLog || [];
       if (log.length < 2) return null;
+
+      // ── Threshold grounding ──────────────────────────────────────────
+      // Overconfidence threshold (confidence ≥ 7/10 with wrong differential):
+      //   Berner & Graber (2008, Am J Med): operationalized overconfidence as
+      //   high stated confidence when evidence does not support the diagnosis.
+      //   On a 10-point scale, ≥7 represents "confident" to "certain" territory.
+      //   Croskerry & Norman (2008): overconfidence involves placing too much
+      //   faith in opinions rather than evidence — flagged when confidence
+      //   substantially exceeds what the accuracy warrants.
+      //   NOTE: On the 1–5 Likert scale (Sætrevik et al. 2024), this maps
+      //   to ≥4; on the legacy 1–10 scale used here, ≥7 is the equivalent.
+      //
+      // Underconfidence threshold (confidence ≤ 3/10 with correct differential):
+      //   Eva & Regehr (2005, Acad Med): underconfidence is systematically
+      //   observed when students have correct diagnoses but low self-assessment.
+      //   On a 10-point scale, ≤3 represents "guessing" to "slightly uncertain"
+      //   despite having the correct diagnosis — a calibration gap in the
+      //   direction identified by Eva & Regehr as common in medical trainees.
+      //
+      // Well-calibrated zone (6–10 with correct, 1–4 without):
+      //   Sætrevik et al. (2024): good calibration = confidence matches accuracy.
+      //   The ±1 band on either side of the threshold provides reasonable
+      //   tolerance for the inherent imprecision of self-report measures.
+      //
+      // Limitation: These thresholds are on a 1–10 scale used in the legacy
+      //   confidence prompt. The Likert widget (1–5) added in 2026 uses
+      //   proportionally adjusted thresholds in rdx-fingerprint.js.
+      //   See docs/simulation-design-evidence-base.md for full rationale.
 
       var overconfident = log.filter(function(l) { return l.confidence >= 7 && !l.correctDxPresent; });
       var underconfident = log.filter(function(l) { return l.confidence <= 3 && l.correctDxPresent; });
