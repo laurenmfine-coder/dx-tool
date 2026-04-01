@@ -129,18 +129,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
         <option value="Attending">Attending</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Clinical Rotations Completed</label>
-      <input type="text" id="intakeRotations" placeholder="e.g., IM, Surgery, Pediatrics">
-    </div>
-    <div class="form-group">
-      <label>Have you taken a pulmonology or respiratory physiology course?</label>
-      <select id="intakePulm">
-        <option value="">Select...</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-    </div>
     <div class="form-group" id="cogloadContainer"></div>
     <div class="form-group">
       <label>Case</label>
@@ -448,8 +436,7 @@ function updateDepthOptions() {
 function startStudy() {
   const name = document.getElementById('intakeName').value.trim();
   const year = document.getElementById('intakeYear').value;
-  const rotations = document.getElementById('intakeRotations').value.trim();
-  const pulm = document.getElementById('intakePulm').value;
+
   // Email capture — pre-fill from auth if available
   var intakeEmailEl = document.getElementById('intakeEmail');
   var intakeEmail = intakeEmailEl ? intakeEmailEl.value.trim() : '';
@@ -502,8 +489,7 @@ function startStudy() {
     isDepthCase: isDepthCase,
     studentName: name,
     trainingYear: year,
-    rotationsCompleted: rotations,
-    hasPulmCourse: pulm === 'yes',
+
     groupCode: groupCode,
     currentPhase: PHASES.INITIAL_DIFFERENTIAL,
     phaseHistory: [{ phase: 1, enteredAt: new Date().toISOString(), exitedAt: null }],
@@ -2123,8 +2109,6 @@ async function exportStudyData() {
     student_name: state.studentName,
     student_email: '',
     training_year: state.trainingYear,
-    rotations_completed: state.rotationsCompleted,
-    has_pulm_course: state.hasPulmCourse,
     case_id: caseData.caseId,
     group_code: state.groupCode,
     first_report_type: state.firstReportType,
