@@ -311,28 +311,25 @@ function toggleSemanticMode() {
   _sem = !_sem;
   var btn = document.getElementById('semanticToggle');
   var inp = document.getElementById('searchInput');
-  if (!btn || !inp) return;
-  var g = document.getElementById('grid');
-  var ct = document.querySelector('.count');
-  var sr = document.getElementById('semanticResults');
+  var sr  = document.getElementById('semanticResults');
+  var g   = document.getElementById('grid');
+  var ct  = document.querySelector('.count');
+  if (!btn) return;
   if (_sem) {
     btn.textContent = 'AI Search';
     btn.style.background = '#2874A6';
     btn.style.color = '#fff';
-    inp.placeholder = 'Describe a presentation e.g. elderly confused low sodium';
-    inp.value = '';
+    if (inp) inp.placeholder = 'Describe a presentation e.g. elderly confused low sodium';
   } else {
     btn.textContent = 'Keyword';
     btn.style.background = '#f1f5f9';
     btn.style.color = '#475569';
-    inp.placeholder = 'Search by chief complaint';
+    if (inp) inp.placeholder = 'Search by chief complaint';
     if (sr) { sr.style.display = 'none'; sr.innerHTML = ''; }
-    if (g)  { g.style.display = ''; }
-    if (ct) { ct.style.display = ''; }
-    inp.value = '';
+    if (g)  g.style.display = '';
+    if (ct) ct.style.display = '';
     render();
   }
-}
 }
 
 function handleSearch() {
@@ -345,17 +342,23 @@ function handleSearch() {
 
 function doSemanticSearch(q) {
   var el = document.getElementById('semanticResults');
+  var g  = document.getElementById('grid');
+  var ct = document.querySelector('.count');
   if (!el) return;
+  if (g)  g.style.display  = 'none';
+  if (ct) ct.style.display = 'none';
   el.style.display = 'block';
-  var ct2 = document.querySelector('.count');
-  var g2 = document.getElementById('grid');
-  if (ct2) ct2.style.display = 'none';
-  if (g2) g2.style.display = 'none';
   el.textContent = 'Searching...';
-  if (!window.RDXSemanticSearch) { el.textContent = 'Semantic search not loaded.'; return; }
+  if (!window.RDXSemanticSearch) {
+    el.textContent = 'Semantic search not loaded.';
+    return;
+  }
   RDXSemanticSearch.search(q, { limit: 10 }).then(function(results) {
     el.innerHTML = '';
-    if (!results || !results.length) { el.textContent = 'No similar cases found.'; return; }
+    if (!results || !results.length) {
+      el.textContent = 'No similar cases found. Try a different description.';
+      return;
+    }
     var info = document.createElement('p');
     info.style.cssText = 'padding:8px 0 16px;font-size:13px;color:#64748b';
     info.textContent = 'AI found ' + results.length + ' cases similar to: ' + q;
@@ -378,7 +381,7 @@ function doSemanticSearch(q) {
       badge.style.cssText = 'background:' + ac + ';color:#fff;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:700';
       badge.textContent = 'ESI ' + (r.acuity||3);
       var cat = document.createElement('span');
-      cat.style.cssText = 'font-size:11px;color:#64748b';
+      cat.style.cssText = 'font-size:11px;color:#64748b;text-transform:capitalize';
       cat.textContent = r.category || '';
       var pct = document.createElement('span');
       pct.style.cssText = 'margin-left:auto;font-size:11px;color:#2874A6;font-weight:600';
@@ -394,7 +397,9 @@ function doSemanticSearch(q) {
       grid.appendChild(card);
     }
     el.appendChild(grid);
-  }).catch(function(e) { el.textContent = 'Error: ' + e.message; });
+  }).catch(function(e) {
+    el.textContent = 'Error: ' + e.message;
+  });
 }
 </script>
 </body>
