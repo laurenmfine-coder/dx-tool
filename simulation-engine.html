@@ -2731,12 +2731,10 @@ async function exportStudyData() {
 </script>
 
 <script>
-// ── AUTO-START: fire as soon as page is ready — no intake form ──
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() { startStudy(); });
-} else {
-  startStudy();
-}
+// ── AUTO-START: defer until all enhancement scripts have loaded and wrapped startStudy ──
+window.addEventListener('load', function() {
+  setTimeout(function() { startStudy(); }, 100);
+});
 </script>
 </body>
 </html>
