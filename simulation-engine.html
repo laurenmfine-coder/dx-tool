@@ -2154,7 +2154,10 @@ async function exportStudyData() {
     _origStart();
     if (!window.state) return;
     var cogSel = document.getElementById('intakeCogLoad');
-    E.CognitiveLoadManager.init(cogSel ? cogSel.value : 'off', window.state.trainingYear);
+    // Intake form removed — default to 'gentle' so students experience
+    // at least occasional interruptions (realistic clinical environment).
+    // Faculty can adjust per cohort via the CognitiveLoadManager API.
+    E.CognitiveLoadManager.init(cogSel ? cogSel.value : 'gentle', window.state.trainingYear);
     window.state.cognitiveLoadLevel = E.CognitiveLoadManager.getCurrentLevel();
     // Pass patient name for dynamic rapport scoring (Calgary-Cambridge / Kalamazoo)
     var _patientNameForEmotion = (window.caseData && window.caseData.presentation && window.caseData.presentation.patientName) || null;
@@ -2840,6 +2843,88 @@ async function exportStudyData() {
     html += '<button onclick="submitAAR()" style="background:#2874A6;color:#fff;border:none;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">Submit Reflection</button>';
     html += '</div>';
 
+
+    // ── Communication Quality Card (passive data) ─────────────────────
+    // Grounded in: Calgary-Cambridge Guide (Silverman et al. 2005),
+    // Kalamazoo Consensus (Makoul et al. 2001), Lingard et al. (2003)
+    if (window.RdxPassive) {
+      var qtSummary  = window.RdxPassive.getQuestionTypeSummary();
+      var empSummary = window.RdxPassive.getEmpathySummary();
+      var confSummary= window.RdxPassive.getConfidenceSummary();
+
+      var hasCommData = qtSummary || empSummary;
+      if (hasCommData) {
+        html += '<div style="margin-bottom:16px">';
+        html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Communication Quality</div>';
+
+        // Question type ratio (Calgary-Cambridge: open-to-closed is expert pattern)
+        if (qtSummary && qtSummary.total > 0) {
+          var openRate = qtSummary.openRate;
+          var openColor = openRate >= 40 ? '#059669' : openRate >= 25 ? '#D97706' : '#DC2626';
+          html += '<div style="margin-bottom:8px">';
+          html += '<div style="font-size:11px;color:#64748B;margin-bottom:4px">Question sequencing — Calgary-Cambridge Guide</div>';
+          html += '<div style="display:flex;align-items:center;gap:8px">';
+          html += '<div style="flex:1;height:6px;background:#E2E8F0;border-radius:3px;overflow:hidden"><div style="height:100%;width:' + openRate + '%;background:' + openColor + ';border-radius:3px"></div></div>';
+          html += '<div style="font-size:12px;font-weight:700;color:' + openColor + ';white-space:nowrap">' + openRate + '% open</div>';
+          html += '</div>';
+          html += '<div style="font-size:11px;color:#64748B;margin-top:3px">' +
+            (qtSummary.expertPattern ? '✓ Expert pattern: led with open questions' : 'Consider leading with open questions (Tell me…, Describe…) before narrowing to closed') + '</div>';
+          if (qtSummary.leadingRate > 0) {
+            html += '<div style="font-size:11px;color:#DC2626;margin-top:2px">⚠ ' + qtSummary.leadingRate + '% leading questions detected — avoid suggesting answers to the patient</div>';
+          }
+          html += '</div>';
+        }
+
+        // Empathy density (Kalamazoo Consensus: essential elements of communication)
+        if (empSummary) {
+          var empColor = empSummary.empathyDensity >= 0.3 ? '#059669' : empSummary.empathyDensity >= 0.1 ? '#D97706' : '#DC2626';
+          html += '<div style="margin-bottom:8px">';
+          html += '<div style="font-size:11px;color:#64748B;margin-bottom:4px">Empathy behaviors — Kalamazoo Consensus</div>';
+          html += '<div style="font-size:13px;color:' + empColor + ';font-weight:600">';
+          html += Math.round(empSummary.empathyDensity * 100) + '% of turns contained empathy signals</div>';
+          if (empSummary.empathyDensity < 0.1) {
+            html += '<div style="font-size:11px;color:#DC2626;margin-top:2px">Low empathy signal rate. Consider: acknowledging emotion, normalizing concerns, using patient name.</div>';
+          }
+          html += '</div>';
+        }
+
+        // Implicit confidence (Lingard et al. 2003 epistemic markers)
+        if (confSummary) {
+          var trajLabel = { increasing: 'Increasing confidence across phases — monitor for anchoring risk (Croskerry, 2009)',
+            decreasing: 'Appropriately decreasing certainty as complexity emerged',
+            stable: 'Stable confidence throughout' };
+          html += '<div style="font-size:11px;color:#64748B">';
+          html += 'Language confidence trajectory: ' + (trajLabel[confSummary.trajectory] || confSummary.trajectory);
+          html += '</div>';
+        }
+
+        html += '</div>';
+        html += '</div>';
+      }
+    }
+
+    // ── Agent Decision Log (ExplainableAgent) — collapsible ───────────
+    if (window.RdxAdvanced && window.RdxAdvanced.ExplainableAgent) {
+      var log = window.RdxAdvanced.ExplainableAgent.getLog();
+      if (log && log.length > 0) {
+        var logId = 'agent-log-' + Date.now();
+        html += '<div style="margin-bottom:16px">';
+        html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Agent Decision Log</div>';
+        html += '<button onclick="document.getElementById(\'' + logId + '\').style.display=document.getElementById(\'' + logId + '\').style.display===\'none\'?\'block\':\'none\'" ' +
+          'style="font-size:11px;color:#2874A6;background:none;border:none;cursor:pointer;padding:0;font-family:inherit">▶ Show ' + log.length + ' agent decisions</button>';
+        html += '<div id="' + logId + '" style="display:none;margin-top:8px;max-height:200px;overflow-y:auto;border:1px solid #E2E8F0;border-radius:8px;padding:10px">';
+        log.slice(-20).forEach(function(entry) {
+          html += '<div style="font-size:11px;border-bottom:1px solid #F1F5F9;padding:4px 0;color:#334155">';
+          html += '<span style="font-family:monospace;color:#94A3B8">T' + entry.turn + ' P' + entry.phase + '</span> ';
+          html += '<strong>' + (entry.type || '') + '</strong>: ' + (entry.action || '');
+          if (entry.reasoning) html += ' <span style="color:#64748B">— ' + entry.reasoning.substring(0, 80) + '</span>';
+          html += '</div>';
+        });
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+      }
+    }
 
     // ── What's Next Panel ──────────────────────────────────────────
     html += buildWhatsNextPanel(caseData);

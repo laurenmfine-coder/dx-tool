@@ -434,6 +434,8 @@ function loadData() {
   // Preload analytics in background
   loadSimData();
   loadEMRCloudData();
+  loadFingerprintData();
+  loadOSCEData();
 
   // Update header
   document.getElementById('facUserName').textContent = u.displayName;
@@ -1051,7 +1053,29 @@ function renderAnalytics() {
     });
   }
   html += '<div style="height:32px;border-top:1px solid var(--border);margin:24px 0"></div>';
-  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">📋 EMR Grading — This Session</div><div class="fac-section-sub">Faculty feedback on student notes · Local session</div></div></div>';
+  html += '<div class="fac-section-hdr" style="margin-top:0;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">🧠 Reasoning Fingerprints — Cognitive Bias Analytics</div><div class="fac-section-sub">From reasoning_fingerprints + student_cognitive_profiles · Supabase · Last 90 days</div></div><a href="faculty-agent.html" style="font-size:11px;color:var(--primary);text-decoration:none;font-weight:600">Full analysis in Faculty Agent →</a></div>';
+  html += '<div id="fp-analytics-container">' + renderFingerprintPanel() + '</div>';
+  if (!FP.loaded && !FP.loading) {
+    loadFingerprintData().then(function() {
+      var el = document.getElementById('fp-analytics-container');
+      if (el) el.innerHTML = renderFingerprintPanel();
+    });
+  } else if (FP.loaded) {
+    setTimeout(function() { var el = document.getElementById('fp-analytics-container'); if (el) el.innerHTML = renderFingerprintPanel(); }, 300);
+  }
+
+  html += '<div class="fac-section-hdr" style="margin-top:16px;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">🏥 OSCE Station Results</div><div class="fac-section-sub">From osce_attempts · Supabase · Last 90 days</div></div><a href="osce-station.html" style="font-size:11px;color:var(--primary);text-decoration:none;font-weight:600">Launch OSCE Station →</a></div>';
+  html += '<div id="osc-analytics-container">' + renderOSCEPanel() + '</div>';
+  if (!OSC.loaded && !OSC.loading) {
+    loadOSCEData().then(function() {
+      var el = document.getElementById('osc-analytics-container');
+      if (el) el.innerHTML = renderOSCEPanel();
+    });
+  } else if (OSC.loaded) {
+    setTimeout(function() { var el = document.getElementById('osc-analytics-container'); if (el) el.innerHTML = renderOSCEPanel(); }, 300);
+  }
+
+  html += '<div class="fac-section-hdr" style="margin-top:16px;margin-bottom:16px"><div><div class="fac-section-title" style="font-size:14px">📋 EMR Grading — This Session</div><div class="fac-section-sub">Faculty feedback on student notes · Local session</div></div></div>';
 
   if (FAC.submissions.length === 0) {
     return html + '<div class="fac-empty"><div class="fac-empty-icon">📊</div><div class="fac-empty-title">No documentation submissions yet</div><div class="fac-empty-desc">EMR analytics appear once students submit notes in the Virtual EMR.</div></div>';
@@ -1791,6 +1815,156 @@ async function loadCoverageData() {
   // Re-render the live section in place
   var el2 = document.getElementById('cov-live-section');
   if (el2) el2.innerHTML = renderCoverageLiveSection();
+}
+
+// ── Reasoning Fingerprint Analytics ──────────────────────────────────────────
+var FP = { loaded: false, loading: false, profiles: [], stats: {} };
+
+async function loadFingerprintData() {
+  if (FP.loading) return;
+  FP.loading = true;
+  try {
+    var cutoff = new Date(Date.now() - 90*24*60*60*1000).toISOString();
+    var profiles = await sbQuery(
+      'student_cognitive_profiles?select=student_name,training_year,total_sessions,' +
+      'anchoring_rate,premature_closure_rate,missed_pivot_rate,avg_target_in_final,' +
+      'pattern_tags,last_session_at&order=total_sessions.desc&limit=100'
+    );
+    var fingerprints = await sbQuery(
+      'reasoning_fingerprints?select=student_name,case_id,target_in_final,' +
+      'anchoring_detected,premature_closure,missed_pivot_history,confidence_score,created_at' +
+      '&created_at=gte.' + encodeURIComponent(cutoff) + '&order=created_at.desc&limit=500'
+    );
+
+    FP.profiles = Array.isArray(profiles) ? profiles : [];
+    var fps = Array.isArray(fingerprints) ? fingerprints : [];
+
+    // Cohort-level bias rates
+    var anchoringTotal = fps.filter(function(f){ return f.anchoring_detected; }).length;
+    var closureTotal   = fps.filter(function(f){ return f.premature_closure; }).length;
+    var pivotTotal     = fps.filter(function(f){ return f.missed_pivot_history; }).length;
+    var targetTotal    = fps.filter(function(f){ return f.target_in_final; }).length;
+
+    FP.stats = {
+      sessions: fps.length,
+      students: FP.profiles.length,
+      cohortAnchoringRate: fps.length ? Math.round(anchoringTotal / fps.length * 100) : null,
+      cohortClosureRate:   fps.length ? Math.round(closureTotal   / fps.length * 100) : null,
+      cohortPivotMissRate: fps.length ? Math.round(pivotTotal     / fps.length * 100) : null,
+      cohortAccuracy:      fps.length ? Math.round(targetTotal    / fps.length * 100) : null,
+      atRisk: FP.profiles.filter(function(p){
+        return p.total_sessions >= 3 && (p.anchoring_rate > 0.4 || p.premature_closure_rate > 0.3 || p.avg_target_in_final < 0.5);
+      })
+    };
+    FP.loaded = true;
+  } catch(e) {
+    console.warn('[FP] Load error:', e);
+  }
+  FP.loading = false;
+}
+
+function renderFingerprintPanel() {
+  if (!FP.loaded) return '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">Loading reasoning fingerprint data… <a href="faculty-agent.html" style="color:var(--primary)">Open Faculty Agent for full analysis →</a></div>';
+  var s = FP.stats;
+  if (!s.sessions) return '<div style="padding:20px;color:var(--text-muted);font-size:13px">No fingerprint data yet. Students need to complete simulations for this data to appear.<br><a href="faculty-agent.html" style="color:var(--primary);font-weight:600">Open Faculty Agent →</a></div>';
+
+  var html = '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">';
+  function statCard(label, val, color) {
+    return '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">' +
+      '<div style="font-size:22px;font-weight:800;color:' + (color||'var(--primary)') + '">' + (val !== null ? val + '%' : '—') + '</div>' +
+      '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">' + label + '</div></div>';
+  }
+  html += statCard('Cohort Accuracy', s.cohortAccuracy, s.cohortAccuracy >= 70 ? 'var(--success)' : 'var(--danger)');
+  html += statCard('Anchoring Rate', s.cohortAnchoringRate, s.cohortAnchoringRate > 30 ? 'var(--danger)' : 'var(--success)');
+  html += statCard('Premature Closure', s.cohortClosureRate, s.cohortClosureRate > 25 ? 'var(--danger)' : 'var(--success)');
+  html += statCard('Missed Pivot', s.cohortPivotMissRate, s.cohortPivotMissRate > 40 ? 'var(--warning)' : 'var(--success)');
+  html += '</div>';
+
+  if (s.atRisk && s.atRisk.length > 0) {
+    html += '<div style="background:var(--danger-light);border:1px solid #FCA5A5;border-radius:10px;padding:14px;margin-bottom:14px">';
+    html += '<div style="font-size:12px;font-weight:700;color:var(--danger);margin-bottom:8px">⚠ Students Flagged for Review (' + s.atRisk.length + ')</div>';
+    s.atRisk.slice(0, 5).forEach(function(p) {
+      var tags = (p.pattern_tags || []).join(', ') || 'no tags yet';
+      html += '<div style="font-size:12px;margin-bottom:4px;color:var(--text)"><strong>' + (p.student_name || 'Unknown') + '</strong> — ' + p.total_sessions + ' sessions · ' + tags + '</div>';
+    });
+    html += '</div>';
+  }
+
+  html += '<div style="margin-top:8px"><a href="faculty-agent.html" style="display:inline-block;padding:10px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">Open Faculty Agent for full analysis →</a></div>';
+  return html;
+}
+
+// ── OSCE Results ─────────────────────────────────────────────────────────────
+var OSC = { loaded: false, loading: false, attempts: [], stats: {} };
+
+async function loadOSCEData() {
+  if (OSC.loading) return;
+  OSC.loading = true;
+  try {
+    var cutoff = new Date(Date.now() - 90*24*60*60*1000).toISOString();
+    var rows = await sbQuery(
+      'osce_attempts?select=student_name,training_year,case_id,diagnosis,pct_score,' +
+      'critical_score,communication_score,management_score,completed_at' +
+      '&completed_at=gte.' + encodeURIComponent(cutoff) + '&order=completed_at.desc&limit=500'
+    );
+    OSC.attempts = Array.isArray(rows) ? rows : [];
+    var byStudent = {};
+    OSC.attempts.forEach(function(r) {
+      if (!byStudent[r.student_name]) byStudent[r.student_name] = { scores: [], critScores: [] };
+      byStudent[r.student_name].scores.push(r.pct_score || 0);
+      byStudent[r.student_name].critScores.push(r.critical_score || 0);
+    });
+    var studentList = Object.entries(byStudent).map(function(e) {
+      var avg  = Math.round(e[1].scores.reduce(function(a,b){return a+b;},0)/e[1].scores.length);
+      var crit = Math.round(e[1].critScores.reduce(function(a,b){return a+b;},0)/e[1].critScores.length);
+      return { name: e[0], attempts: e[1].scores.length, avgScore: avg, avgCritical: crit, passing: avg >= 70, critFail: crit < 80 };
+    });
+    OSC.stats = {
+      attempts: OSC.attempts.length,
+      students: studentList.length,
+      cohortAvg: studentList.length ? Math.round(studentList.reduce(function(a,s){return a+s.avgScore;},0)/studentList.length) : null,
+      passingRate: studentList.length ? Math.round(studentList.filter(function(s){return s.passing;}).length/studentList.length*100) : null,
+      critFailRate: studentList.length ? Math.round(studentList.filter(function(s){return s.critFail;}).length/studentList.length*100) : null,
+      students: studentList
+    };
+    OSC.loaded = true;
+  } catch(e) { console.warn('[OSC] Load error:', e); }
+  OSC.loading = false;
+}
+
+function renderOSCEPanel() {
+  if (!OSC.loaded) return '<div style="padding:20px;text-align:center;color:var(--text-muted);font-size:13px">Loading OSCE data…</div>';
+  var s = OSC.stats;
+  if (!s.attempts) return '<div style="padding:20px;color:var(--text-muted);font-size:13px">No OSCE attempts yet. <a href="osce-station.html" style="color:var(--primary);font-weight:600">Launch OSCE Station →</a></div>';
+
+  var html = '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px">';
+  function sc(label, val, color) {
+    return '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px;text-align:center">' +
+      '<div style="font-size:22px;font-weight:800;color:' + (color||'var(--primary)') + '">' + (val !== null ? val + '%' : '—') + '</div>' +
+      '<div style="font-size:11px;color:var(--text-muted);margin-top:2px">' + label + '</div></div>';
+  }
+  html += sc('Cohort Avg Score', s.cohortAvg, s.cohortAvg >= 70 ? 'var(--success)' : 'var(--danger)');
+  html += sc('Passing Rate', s.passingRate, s.passingRate >= 70 ? 'var(--success)' : 'var(--warning)');
+  html += sc('Critical Item Failures', s.critFailRate, s.critFailRate > 20 ? 'var(--danger)' : 'var(--success)');
+  html += '</div>';
+
+  // Student breakdown table
+  if (s.students && s.students.length > 0) {
+    html += '<table style="width:100%;border-collapse:collapse;font-size:12px">';
+    html += '<tr style="border-bottom:2px solid var(--border)"><th style="text-align:left;padding:6px;color:var(--text-muted)">Student</th><th style="padding:6px;color:var(--text-muted)">Attempts</th><th style="padding:6px;color:var(--text-muted)">Avg Score</th><th style="padding:6px;color:var(--text-muted)">Critical</th><th style="padding:6px;color:var(--text-muted)">Status</th></tr>';
+    s.students.slice(0, 10).forEach(function(st) {
+      var statusBadge = st.passing ? '<span style="color:var(--success);font-weight:600">Pass</span>' : '<span style="color:var(--danger);font-weight:600">Fail</span>';
+      var critBadge   = st.critFail ? '<span style="color:var(--danger)">' + st.avgCritical + '%</span>' : st.avgCritical + '%';
+      html += '<tr style="border-bottom:1px solid var(--border)">' +
+        '<td style="padding:7px 6px;font-weight:600">' + (st.name||'') + '</td>' +
+        '<td style="padding:7px 6px;text-align:center">' + st.attempts + '</td>' +
+        '<td style="padding:7px 6px;text-align:center">' + st.avgScore + '%</td>' +
+        '<td style="padding:7px 6px;text-align:center">' + critBadge + '</td>' +
+        '<td style="padding:7px 6px;text-align:center">' + statusBadge + '</td></tr>';
+    });
+    html += '</table>';
+  }
+  return html;
 }
 
 // Case → domain lookup (subset — top cases by usage likelihood)
