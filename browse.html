@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- ReasonDx browse v2 - semantic search enabled -->
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -325,12 +326,13 @@ function toggleSemanticMode() {
     inp.placeholder = 'Search by presentation, symptom, or diagnosis...';
     document.getElementById('semanticResults').style.display = 'none';
     document.getElementById('semanticResults').innerHTML = '';
+    restoreKeywordMode();
     render(); // restore keyword results
   }
 }
 
 function handleSearch() {
-  if (!_semanticMode) { render(); return; }
+  if (!_semanticMode) { restoreKeywordMode(); render(); return; }
   // Debounce semantic search — fire after 800ms pause
   clearTimeout(_semanticTimer);
   var q = (document.getElementById('searchInput').value || '').trim();
@@ -399,14 +401,12 @@ function launchCase(caseId) {
   window.location.href = '/simulation-engine.html?case=' + encodeURIComponent(caseId);
 }
 
-// Restore main grid when semantic results hidden
-var _origRender = typeof render === 'function' ? render : null;
-function render() {
+// Restore main grid when switching back to keyword mode
+function restoreKeywordMode() {
   var mainGrid = document.getElementById('mainGrid') || document.querySelector('.card-grid');
   var semanticResults = document.getElementById('semanticResults');
   if (semanticResults) semanticResults.style.display = 'none';
   if (mainGrid) mainGrid.style.display = '';
-  if (_origRender) _origRender();
 }
 </script>
 </body>
