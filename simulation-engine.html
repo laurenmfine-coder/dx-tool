@@ -321,6 +321,81 @@ function startStudy() {
   state.turns.push({ role:'assistant', content:opening, timestamp:new Date().toISOString(), phase:1, turnNumber:0 });
 }
 
+// ── LIKERT CONFIDENCE WIDGET ──
+function renderLikertWidget() {
+  var el = document.getElementById('chatMessages');
+  var wrap = document.createElement('div');
+  wrap.className = 'chat-msg msg-system';
+  wrap.id = 'likert-widget-' + Date.now();
+  var wid = wrap.id;
+  var likertLabels = ['Not at all','Slightly','Moderately','Very','Completely'];
+  // Build buttons safely using DOM — no inline onclick needed
+  var outer = document.createElement('div');
+  outer.style.cssText = 'background:linear-gradient(135deg,#EBF5FB,#F0F7FC);border:1px solid rgba(40,116,166,.25);border-radius:12px;padding:16px 20px;margin:4px 0';
+  var title = document.createElement('div');
+  title.style.cssText = 'font-size:13px;font-weight:700;color:#1B4F72;margin-bottom:12px';
+  title.textContent = 'How confident were you in your final diagnosis?';
+  outer.appendChild(title);
+  var btnRow = document.createElement('div');
+  btnRow.style.cssText = 'display:flex;gap:8px;justify-content:space-between;margin-bottom:8px';
+  for (var i = 0; i < 5; i++) {
+    (function(score) {
+      var btn = document.createElement('button');
+      btn.style.cssText = 'flex:1;padding:10px 4px;background:#fff;border:2px solid #D0D5DD;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:600;color:#334155';
+      btn.innerHTML = (score) + '<br><span style="font-size:10px;font-weight:400;color:#64748B">' + likertLabels[score-1] + '</span>';
+      btn.addEventListener('click', function() { submitLikert(score, wid); });
+      btnRow.appendChild(btn);
+    })(i + 1);
+  }
+  outer.appendChild(btnRow);
+  var scale = document.createElement('div');
+  scale.style.cssText = 'display:flex;justify-content:space-between;font-size:10px;color:#94A3B8;padding:0 2px';
+  scale.innerHTML = '<span>Not confident</span><span>Completely confident</span>';
+  outer.appendChild(scale);
+  wrap.appendChild(outer);
+  el.appendChild(wrap);
+  el.scrollTop = el.scrollHeight;
+}
+
+function submitLikert(score, widgetId) {
+  // Record score
+  if (state) state._confidenceScore = score;
+  // Replace widget with confirmation
+  var el = document.getElementById(widgetId);
+  var labels = {1:'Not at all confident',2:'Slightly confident',3:'Moderately confident',4:'Very confident',5:'Completely confident'};
+  if (el) {
+    el.innerHTML = '<div style="background:#EBF5FB;border-radius:8px;padding:10px 14px;font-size:13px;color:#1B4F72">' +
+      '✓ Confidence recorded: <strong>' + score + '/5 — ' + labels[score] + '</strong></div>';
+  }
+  // Push to conversation so Claude acknowledges
+  var msg = 'My confidence in my final diagnosis: ' + score + '/5 (' + labels[score] + ').';
+  state.conversationMessages.push({ role: 'user', content: msg });
+  state.turns.push({ role: 'student', content: msg, timestamp: new Date().toISOString(),
+    phase: state.currentPhase, turnNumber: ++state.turnCount, isLikert: true });
+}
+
+// ── FETCH WITH RETRY (handles transient worker timeouts) ──
+async function fetchWithRetry(url, opts, maxRetries) {
+  maxRetries = maxRetries || 2;
+  var lastErr;
+  for (var attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      var controller = new AbortController();
+      var timeout = setTimeout(function() { controller.abort(); }, 30000); // 30s timeout
+      var resp = await fetch(url, Object.assign({}, opts, { signal: controller.signal }));
+      clearTimeout(timeout);
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      return resp;
+    } catch(e) {
+      lastErr = e;
+      if (attempt < maxRetries && e.name !== 'AbortError') {
+        await new Promise(function(r) { setTimeout(r, 1000 * (attempt + 1)); }); // backoff
+      }
+    }
+  }
+  throw lastErr;
+}
+
 // ── SEND MESSAGE ──
 async function sendMessage() {
   if (_isListening) stopListening();
@@ -643,7 +718,7 @@ async function sendMessage() {
     }
 
     // Standard multi-agent Claude call
-    const resp = await fetch(WORKER_URL, {
+    const resp = await fetchWithRetry(WORKER_URL, {
       method:'POST',
       headers:{'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -653,7 +728,7 @@ async function sendMessage() {
         messages: agentMessages,
         max_tokens: agentMaxTokens
       })
-    });
+    }, 2);
     const data = await resp.json();
     const reply = (data.content && data.content[0] && data.content[0].text) || "I'm having difficulty responding right now.";
 
@@ -705,9 +780,18 @@ async function sendMessage() {
       }
     }
 
-    addMessage(msgType, cleanReply);
-    state.conversationMessages.push({ role:'assistant', content: cleanReply });
-    state.turns.push({ role:'assistant', content:cleanReply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, agentSource: activeAgent });
+    // Strip [SHOW_LIKERT] tag from display text before rendering
+    var showLikert = /\[SHOW_LIKERT\]/i.test(cleanReply);
+    var displayReply = cleanReply.replace(/\[SHOW_LIKERT\]\s*/gi, '').trim();
+
+    addMessage(msgType, displayReply);
+    state.conversationMessages.push({ role:'assistant', content: displayReply });
+    state.turns.push({ role:'assistant', content:displayReply, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount, agentSource: activeAgent });
+
+    // Render Likert confidence scale if Claude triggered it
+    if (showLikert && state.currentPhase === PHASES.REFLECTION) {
+      setTimeout(function() { renderLikertWidget(); }, 400);
+    }
 
     // Store patient response in patient conversation history
     if ((activeAgent === 'patient' || msgType === 'patient') && state._patientMessages) {
@@ -737,10 +821,16 @@ async function sendMessage() {
   } catch(e) {
     console.error('sendMessage error:', e);
     removeTyping();
-    var errMsg = (e && (e.name === 'TypeError' || e.message === 'Failed to fetch'))
-      ? "[System] Connection to the AI server failed. Please check your internet connection and try again. If this persists, refresh the page."
-      : "I'm sorry, I'm having a technical difficulty. Please try again.";
-    addMessage('patel', errMsg);
+    // Show retry button instead of dead error message
+    var errDiv = document.createElement('div');
+    errDiv.className = 'chat-msg msg-system';
+    var isTimeout = e && (e.name === 'AbortError' || e.name === 'TypeError' || e.message === 'Failed to fetch');
+    errDiv.innerHTML = '<div style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:8px;padding:10px 14px;font-size:13px;color:#92400E;display:flex;align-items:center;gap:10px">' +
+      '<span>' + (isTimeout ? '⚡ The AI took too long to respond.' : '⚠️ Connection issue.') + '</span>' +
+      '<button onclick="sendMessage()" style="padding:5px 12px;background:#F59E0B;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">Retry</button>' +
+      '</div>';
+    document.getElementById('chatMessages').appendChild(errDiv);
+    document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
   }
 
   input.disabled = false;
@@ -881,7 +971,7 @@ function checkPhaseTransition(signals) {
       return {
         shouldTransition: true,
         nextPhase: PHASES.REFLECTION,
-        inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's wrap up. I have a few reflection questions for you.\n\nFirst \u2014 what was the single most important piece of information in reaching your diagnosis, and at what point did you get it?\n\nSecond \u2014 looking back, is there anything you wish you had asked earlier or done differently?\n\nThird \u2014 what other diagnoses were you considering, and what helped you narrow your differential?" }
+        inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's take a moment to reflect on this case. What was the single most important piece of information that shaped your final diagnosis, and when did you get it?" }
       };
     }
     // Has radiology reports — move to comparison phase
@@ -895,7 +985,7 @@ function checkPhaseTransition(signals) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.REFLECTION,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's wrap up. I have a few reflection questions for you.\n\nFirst \u2014 what was the single most important piece of information in reaching your final differential, and at what point did you get it?\n\nSecond \u2014 looking back, is there anything you wish you had asked earlier?\n\nThird \u2014 how much weight should a radiology report carry in your diagnostic reasoning when the radiologist doesn't have access to the full clinical history?\n\nFourth \u2014 do you think the language and format of a radiology report affects how you interpret the findings?" }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's take a moment to reflect. What was the single most important piece of information in reaching your diagnosis, and at what point did you get it?" }
     };
   }
   if (phase === PHASES.REFLECTION) {
@@ -905,7 +995,7 @@ function checkPhaseTransition(signals) {
       return {
         shouldTransition: true,
         nextPhase: PHASES.MANAGEMENT,
-        inject: { type:'patel', content:"[As Dr. Patel]\n\nGood. Now let's talk management. Based on your current working diagnosis, what is your plan? Walk me through: immediate interventions, workup to confirm, disposition, and follow-up. Also consider — are there any safety concerns or orders that cannot wait?" }
+        inject: { type:'patel', content:"[As Dr. Patel]\n\nGood. Now let's talk management. What are your most urgent immediate orders for this patient right now?" }
       };
     }
   }
@@ -1060,9 +1150,9 @@ function enterPhase(phase) {
       }
 
       // 4. Generate AI-powered teaching debrief with RAG guideline citations
-      if (gaps.length > 0) {
-        setTimeout(function() {
-          addMessage('system', 'Generating your personalized teaching debrief...');
+      // Always run — debrief works even with 0 case-specific gaps (generates universal performance summary)
+      setTimeout(function() {
+        addMessage('system', 'Generating your personalized teaching debrief...');
 
           // RAG: retrieve relevant guideline chunks, then inject into debrief prompt
           var ragPromise = (window.GuidelinesRAG)
@@ -1158,8 +1248,7 @@ function enterPhase(phase) {
 
           }).catch(function(e) { console.warn('[RAG debrief] non-fatal error:', e); });
           }); // closes ragPromise.then
-        }, 1500);
-      }
+      }, 1500);
     }
   }
   updatePhaseUI();
@@ -1320,7 +1409,16 @@ After delivering results, ask: "Walk me through how you're interpreting the find
     sys += `\n\nYou are Dr. Patel. The student has just seen the second version of the radiology report. Ask: "Did seeing the report in this different format change how you understood the findings? Did it affect your differential? Which version did you find more helpful, and why?" Do not comment on correctness.`;
   }
   else if (phase === PHASES.REFLECTION) {
-    sys += `\n\nYou are Dr. Patel. The student is reflecting on the case. Listen to their reflections and ask follow-up questions about their reasoning process. Do not reveal the diagnosis or correct them — this is self-assessment. When they seem done, say: "Good reflections. Now let's talk about what you would actually DO for this patient."`;
+    // Track which reflection questions have been asked
+    var reflTurns = state.turns.filter(function(t) { return t.phase === PHASES.REFLECTION && t.role === 'assistant'; }).length;
+    var reflQuestions = [
+      null, // Q1 is the inject on phase entry
+      'Looking back at the case, is there anything you wish you had asked or done earlier?',
+      'How confident were you in your final diagnosis by the end? And what was the biggest source of uncertainty?',
+      caseData && caseData.radiologyReports ? 'How much weight do you give a radiology report when the radiologist may not have the full clinical story?' : 'What was the hardest moment to reason through in this case?',
+    ];
+    var nextQ = reflQuestions[Math.min(reflTurns, reflQuestions.length - 1)];
+    sys += `\n\nYou are Dr. Patel in the reflection phase. This is a self-assessment — never correct the student or reveal the diagnosis.\n\nCRITICAL RULES for this phase:\n- Ask exactly ONE question per response. Never ask two questions in the same message.\n- After the student answers, acknowledge briefly (one sentence max) then ask the next question from this sequence:\n  ${nextQ ? '  Next question to ask: "' + nextQ + '"' : '  All reflection questions are done. Say: "Good reflections. Now let\'s talk about what you would actually do for this patient."'}\n- For confidence questions, after the student responds, output exactly this tag on its own line: [SHOW_LIKERT] — the system will render a confidence scale for them.\n- Keep your acknowledgment to one short sentence. Then ask the next question. Nothing more."`;
   }
   else if (phase === PHASES.MANAGEMENT) {
     sys += `\n\nYou are Dr. Patel. The student is proposing a management plan. Evaluate their plan for:
@@ -1342,6 +1440,19 @@ CASE-SPECIFIC SAFETY CONCERNS:\n`;
 If the student's plan is reasonable, ask about one gap they haven't addressed.
 If the student mentions something the patient might refuse or struggle with, introduce the patient pushback: "Actually, ${caseData.presentation.patientName} has some concerns about that plan. How would you handle that?"
 When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."`;
+  }
+
+  // ── CONVERSATION MEMORY: Summarize what student has already stated ──
+  // Prevents Claude from re-asking things the student already answered
+  var studentTurnsInPhase = state.turns.filter(function(t) {
+    return t.role === 'student' && t.phase === phase;
+  });
+  if (studentTurnsInPhase.length > 0) {
+    var memSummary = studentTurnsInPhase.slice(-4).map(function(t) {
+      return 'Student said: "' + t.content.slice(0, 120) + (t.content.length > 120 ? '...' : '') + '"';
+    }).join('\n');
+    sys += '\n\nCONVERSATION MEMORY — student has already stated (do NOT re-ask):\n' + memSummary;
+    sys += '\nDo NOT ask about anything the student already addressed above. Move the conversation forward.';
   }
 
   // ── RAG: Inject verified guideline grounding ──

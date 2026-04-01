@@ -248,8 +248,19 @@ const AgentTools = {
     // ragContext is optional: { found: bool, contextBlock: string, sources: [] }
     // Passed in from simulation-engine.html after GuidelinesRAG.retrieve() resolves.
 
-    if (gaps.length === 0) {
-      return "Excellent work. You identified the key environmental exposure, integrated it with the imaging findings, and arrived at a well-supported differential. No significant reasoning gaps were identified.";
+    // Build performance summary from state even if no case-specific gaps flagged
+    var performanceSummary = '';
+    if (state) {
+      var totalTurns = state.turnCount || 0;
+      var diagnosis = (caseData && caseData.targetDiagnosis) || 'the final diagnosis';
+      var finalDiff = (state.differentials && (state.differentials.phase6 || state.differentials.phase4 || state.differentials.phase1 || []));
+      var gotDiagnosis = finalDiff.some(function(d) {
+        return (d.diagnosis || d.name || d || '').toLowerCase().indexOf((diagnosis || '').toLowerCase().split(' ')[0]) !== -1;
+      });
+      performanceSummary = 'Student completed the case in ' + totalTurns + ' turns. ' +
+        'Target diagnosis: ' + diagnosis + '. ' +
+        'Student included target in differential: ' + (gotDiagnosis ? 'yes' : 'not explicitly') + '. ' +
+        'Training year: ' + (state.trainingYear || 'unknown') + '.';
     }
 
     var gapSummary = gaps.map(function(g) {
@@ -267,19 +278,19 @@ const AgentTools = {
 
     var systemPrompt =
       'You are a medical education coach providing a post-simulation teaching debrief to a ' +
-      state.trainingYear + ' medical student. The student just completed a clinical reasoning ' +
-      'simulation about a case of ' + caseData.targetDiagnosis + '. Based on the gaps identified ' +
-      'during the simulation, provide a warm, constructive, personalized debrief. ' +
+      (state.trainingYear || 'medical') + ' medical student. The student just completed a clinical reasoning ' +
+      'simulation about a case of ' + ((caseData && caseData.targetDiagnosis) || 'an acute presentation') + '. ' +
+      'Provide a warm, constructive, personalized debrief in 2-3 short paragraphs. ' +
       'Do NOT repeat the case details — the student just finished it. ' +
-      'Focus on what they can learn from the specific gaps. ' +
-      'Be encouraging but honest. Use 2-3 short paragraphs. ' +
-      'End with one concrete thing they should do differently next time.' +
+      'If gaps are identified, focus on those specifically. If no gaps were flagged, ' +
+      'comment on what the student did well and one area to sharpen. ' +
+      'Be encouraging but specific. End with one concrete actionable takeaway.' +
       guidelineInstruction;
 
     // Build user message — append RAG context block at bottom so Claude sees it
     var userMessage =
-      "The student's identified reasoning gaps were:\n\n" + gapSummary +
-      "\n\nTheir environmental history score was " + state.envHistoryScore +
+      (gaps.length > 0 ? "The student's identified reasoning gaps were:\n\n" + gapSummary : "No specific reasoning gaps were flagged by the automated system. Use the performance summary to generate a personalised debrief.") +
+      "\n\nPerformance summary: " + performanceSummary +
       "/2. They completed the case in " + state.turnCount + " turns.";
 
     if (ragContext && ragContext.found && ragContext.contextBlock) {
