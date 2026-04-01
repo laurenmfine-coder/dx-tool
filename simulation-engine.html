@@ -79,6 +79,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="/case-explainer-agent.js"></script>
 <script src="/rdx-guidelines-rag.js"></script>
 <script src="/rdx-fingerprint.js"></script>
+<script src="/js/rdx-student-model-bus.js"></script>
 <script src="/rdx-voice-patient.js"></script>
 <script src="/rdx-realtime.js"></script>
 <script src="/rdx-ecg.js"></script>
@@ -454,6 +455,16 @@ async function sendMessage() {
     if (conf.length > 0) {
       state.turns[state.turns.length - 1].implicitConfidence = conf[conf.length - 1].score;
     }
+  }
+
+  // Student Model Bus — update unified context after every passive analysis
+  // This keeps all agents in sync with the live student model
+  if (window.StudentModelBus) {
+    window.StudentModelBus.update(
+      state,
+      state.cognitiveProfile || null,
+      state.sessionHistory   || []
+    );
   }
 
   // ── TRANSITION CONFIRMATION FLAG ──
@@ -1321,6 +1332,18 @@ function hasOrderedImaging(turns) {
 // ── SYSTEM PROMPT BUILDER ──
 function buildSystemPrompt() {
   const phase = state.currentPhase;
+
+  // ── Student Model Bus injection ──────────────────────────────────────────
+  // Gives every agent (attending Dr. Patel, patient voice) a unified,
+  // real-time view of the student's working memory, episodic history,
+  // longitudinal patterns, affective state, and cognitive load.
+  // Different roles receive tailored subsets (see rdx-student-model-bus.js).
+  var studentModelBlock = '';
+  if (window.StudentModelBus) {
+    var busRole = (phase === 3) ? 'patient' : 'attending';
+    studentModelBlock = '\n\n' + window.StudentModelBus.getPromptBlock({ role: busRole });
+  }
+
   let sys = `You are participating in a clinical reasoning simulation on the ReasonDx medical education platform.
 
 ABSOLUTE RULES (apply to every response):
@@ -1487,6 +1510,9 @@ When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."
       }
     }
   }
+
+  // Append student model bus — gives the agent a unified live student model
+  sys += studentModelBlock;
 
   return sys;
 }
@@ -2009,6 +2035,7 @@ async function exportStudyData() {
     health_literacy: state._healthLiteracy || null,
     ddx_comparison: state._ddxComparison || null,
     reasoning_tools: state._reasoningTools || null,
+    student_model_snapshot: state.studentModelSnapshot || null,
     case_source: caseData.source || 'native',
     started_at: state.phaseHistory[0]?.enteredAt || new Date().toISOString(),
     completed_at: new Date().toISOString(),
@@ -2281,6 +2308,7 @@ async function exportStudyData() {
     if (A.ReasoningTrace) A.ReasoningTrace.clear();
     if (window.RdxReadability) window.RdxReadability.clear();
     if (window.RdxPassive) window.RdxPassive.clear();
+    if (window.StudentModelBus) window.StudentModelBus.reset();
     if (A.ExplainableAgent && window.state) {
       A.ExplainableAgent.logDecision({
         phase: 1, type: 'session_start',
@@ -2374,6 +2402,17 @@ async function exportStudyData() {
         if (window.RdxPassive) {
           window.state.passiveData = window.RdxPassive.getFullSummary();
           if(RDX_DEBUG) console.log('Passive data:', JSON.stringify(window.state.passiveData, null, 2).substring(0, 500));
+        }
+
+        // Student Model Bus — final research snapshot at session end
+        if (window.StudentModelBus) {
+          window.StudentModelBus.update(
+            window.state,
+            window.state.cognitiveProfile || null,
+            window.state.sessionHistory   || []
+          );
+          window.state.studentModelSnapshot = window.StudentModelBus.getResearchSnapshot();
+          if(RDX_DEBUG) console.log('Student model snapshot:', JSON.stringify(window.state.studentModelSnapshot, null, 2).substring(0, 400));
         }
 
         // Also analyze the radiology reports for comparison

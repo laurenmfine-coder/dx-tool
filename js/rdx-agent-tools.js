@@ -276,6 +276,13 @@ const AgentTools = {
       var pc = RDXFingerprint.buildProfileContext(state.cognitiveProfile, state.sessionHistory || []);
       if (pc) profileContext = '\n\n' + pc;
     }
+
+    // Inject full Student Model Bus for debrief agent — gives it affective state,
+    // cognitive load topography, and episodic history in addition to the profile
+    var busContext = '';
+    if (window.StudentModelBus) {
+      busContext = '\n\n' + window.StudentModelBus.getPromptBlock({ role: 'debrief' });
+    }
     if (ragContext && ragContext.found && ragContext.contextBlock) {
       guidelineInstruction = '\n\nWhere relevant, reference the clinical guidelines provided below. ' +
         'Cite them inline using the format: (Source, Year). ' +
@@ -292,12 +299,14 @@ const AgentTools = {
       'If gaps are identified, focus on those specifically. If no gaps were flagged, ' +
       'comment on what the student did well and one area to sharpen. ' +
       'Be encouraging but specific. End with one concrete actionable takeaway. ' +
-      'If a student cognitive profile is provided, reference their longitudinal patterns — ' +
-      'e.g. if this is a recurring gap across sessions, name that explicitly. ' +
+      'A full student model is provided below — use it to personalize the debrief. ' +
+      'Reference longitudinal patterns explicitly if this is a recurring gap. ' +
+      'If the ERS risk flag is set, acknowledge that the emotional intensity of the case may have affected reasoning — normalize it briefly. ' +
+      'If cognitive load peaked at a specific phase, mention that as an observation, not a criticism. ' +
       'If this is their first session, focus only on this case.' +
       guidelineInstruction;
 
-    // Build user message — append RAG context block at bottom so Claude sees it
+    // Build user message — append RAG context, cognitive profile, and bus context
     var userMessage =
       (gaps.length > 0 ? "The student's identified reasoning gaps were:\n\n" + gapSummary : "No specific reasoning gaps were flagged by the automated system. Use the performance summary to generate a personalised debrief.") +
       "\n\nPerformance summary: " + performanceSummary +
@@ -309,6 +318,10 @@ const AgentTools = {
     // Append cognitive profile for personalised longitudinal debrief
     if (profileContext) {
       userMessage += profileContext;
+    }
+    // Append full student model bus — affective, load, episodic, procedural
+    if (busContext) {
+      userMessage += busContext;
     }
 
     try {
