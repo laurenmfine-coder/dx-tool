@@ -1,4 +1,1257 @@
 <!DOCTYPE html>
-<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;url=demo-coachdx.html">
-<title>Demo | ReasonDx</title></head>
-<body><script>window.location.replace('demo-coachdx.html');</script></body></html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Platform Architecture Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ocean: #2874A6;
+  --ocean-dark: #1A5276;
+  --ocean-light: #D6EAF8;
+  --teal: #0E6655;
+  --ink: #0D1B2A;
+  --ink-soft: #1B2631;
+  --muted: #5D6D7E;
+  --border: #DCE3EB;
+  --surface: #F8FAFC;
+  --white: #FFFFFF;
+  --success: #1E8449;
+  --success-light: #D5F5E3;
+  --warning: #9A7D0A;
+  --warning-light: #FEF9E7;
+  --danger: #922B21;
+  --danger-light: #FDEDEC;
+  --purple: #6C3483;
+  --purple-light: #F5EEF8;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--ink);
+  color: var(--white);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(40,116,166,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -100px; left: -100px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(14,102,85,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--ocean);
+}
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -3px;
+  margin-bottom: 32px;
+  max-width: 820px;
+}
+.hero-title span { color: var(--ocean); }
+.hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.6);
+  max-width: 600px;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.hero-stat { }
+.hero-stat-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat-l {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 60px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.scroll-hint::after {
+  content: '';
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: rgba(255,255,255,0.15);
+}
+
+/* ── SECTIONS ── */
+.section {
+  padding: 100px 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--ocean);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: attr(data-n);
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+}
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  max-width: 560px;
+  line-height: 1.8;
+  margin-bottom: 64px;
+}
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin: 0;
+}
+
+/* ── ARCHITECTURE DIAGRAM ── */
+.arch-wrap {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 48px;
+  margin-bottom: 40px;
+}
+.arch-row {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
+.arch-row:last-child { margin-bottom: 0; }
+.arch-node {
+  flex: 1;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: default;
+}
+.arch-node:hover {
+  border-color: rgba(40,116,166,0.5);
+  background: rgba(40,116,166,0.06);
+}
+.arch-node-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
+}
+.arch-node-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.3;
+}
+.arch-node-detail {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+.arch-node.ocean { background: rgba(40,116,166,0.12); border-color: rgba(40,116,166,0.3); }
+.arch-node.ocean .arch-node-name { color: #85C1E9; }
+.arch-node.teal { background: rgba(14,102,85,0.1); border-color: rgba(14,102,85,0.3); }
+.arch-node.teal .arch-node-name { color: #73C6B6; }
+.arch-node.purple { background: rgba(108,52,131,0.1); border-color: rgba(108,52,131,0.3); }
+.arch-node.purple .arch-node-name { color: #C39BD3; }
+.arch-node.amber { background: rgba(154,125,10,0.1); border-color: rgba(154,125,10,0.3); }
+.arch-node.amber .arch-node-name { color: #F9E79F; }
+.arch-node.new::after {
+  content: 'NEW';
+  position: absolute;
+  top: 10px; right: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 1.5px;
+  background: var(--ocean);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.arch-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.15);
+  font-size: 18px;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+/* ── DATA FLOW ── */
+.flow-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 2px;
+  margin-bottom: 40px;
+}
+.flow-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 28px 24px;
+  position: relative;
+  transition: background 0.2s;
+}
+.flow-card:first-child { border-radius: 16px 0 0 16px; }
+.flow-card:last-child { border-radius: 0 16px 16px 0; }
+.flow-card:hover { background: rgba(255,255,255,0.05); }
+.flow-n {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.06);
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  line-height: 1;
+}
+.flow-icon {
+  font-size: 20px;
+  margin-bottom: 12px;
+  display: block;
+}
+.flow-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--white);
+}
+.flow-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+}
+.flow-items {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.flow-item {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.3);
+  padding: 4px 8px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.flow-item.highlight { color: #85C1E9; border-color: rgba(40,116,166,0.2); background: rgba(40,116,166,0.06); }
+
+/* ── PASSIVE STREAMS ── */
+.streams-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 40px;
+}
+.stream-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 18px 14px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: default;
+}
+.stream-card:hover {
+  background: rgba(40,116,166,0.08);
+  border-color: rgba(40,116,166,0.3);
+  transform: translateY(-2px);
+}
+.stream-n {
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ocean);
+  margin-bottom: 8px;
+  line-height: 1;
+}
+.stream-name {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.4;
+}
+.stream-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 6px;
+  text-transform: uppercase;
+}
+
+/* ── AGENT TABLE ── */
+.agent-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+.agent-table th {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  text-align: left;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-weight: 400;
+}
+.agent-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  vertical-align: top;
+  color: rgba(255,255,255,0.75);
+  line-height: 1.5;
+}
+.agent-table tr:hover td { background: rgba(255,255,255,0.02); }
+.agent-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+}
+.agent-file {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 3px;
+}
+.pill {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+.pill-blue { background: rgba(40,116,166,0.15); color: #85C1E9; border: 1px solid rgba(40,116,166,0.2); }
+.pill-green { background: rgba(30,132,73,0.15); color: #73C6B6; border: 1px solid rgba(30,132,73,0.2); }
+.pill-amber { background: rgba(154,125,10,0.15); color: #F9E79F; border: 1px solid rgba(154,125,10,0.2); }
+.pill-purple { background: rgba(108,52,131,0.15); color: #C39BD3; border: 1px solid rgba(108,52,131,0.2); }
+.pill-new { background: rgba(40,116,166,0.25); color: #85C1E9; border: 1px solid var(--ocean); }
+
+/* ── STUDY TABLE ── */
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.study-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.2s;
+}
+.study-card.live { border-color: rgba(30,132,73,0.25); background: rgba(30,132,73,0.04); }
+.study-card.collecting { border-color: rgba(40,116,166,0.25); background: rgba(40,116,166,0.04); }
+.study-card.pending { opacity: 0.55; }
+.study-n {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+.study-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.study-meta {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+}
+.study-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .5px;
+}
+.study-status::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+}
+.status-live::before { background: #1E8449; }
+.status-live { color: #73C6B6; }
+.status-collecting::before { background: var(--ocean); animation: pulse 2s infinite; }
+.status-collecting { color: #85C1E9; }
+.status-pending::before { background: rgba(255,255,255,0.2); }
+.status-pending { color: rgba(255,255,255,0.3); }
+@keyframes pulse {
+  0%, 100% { opacity: 1; } 50% { opacity: 0.4; }
+}
+
+/* ── DB SCHEMA ── */
+.db-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.db-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 14px;
+  padding: 20px;
+  font-family: 'DM Mono', monospace;
+}
+.db-card.new-table { border-color: rgba(40,116,166,0.3); background: rgba(40,116,166,0.05); }
+.db-table-name {
+  font-size: 12px;
+  color: #85C1E9;
+  margin-bottom: 12px;
+  font-weight: 500;
+  letter-spacing: .5px;
+}
+.db-table-name span { color: rgba(255,255,255,0.2); font-size: 10px; margin-left: 8px; }
+.db-field {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.db-field:last-child { border-bottom: none; }
+.db-field-name { color: rgba(255,255,255,0.6); }
+.db-field-type { color: rgba(40,116,166,0.7); }
+.db-field.new .db-field-name { color: #85C1E9; }
+.db-field.new .db-field-type { color: rgba(40,116,166,0.9); }
+
+/* ── FOOTER ── */
+.footer {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 48px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: gap;
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.footer-logo span { color: var(--ocean); }
+.footer-meta {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  text-align: right;
+  line-height: 1.8;
+}
+.footer-link {
+  color: var(--ocean);
+  text-decoration: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: .5px;
+}
+.footer-link:hover { color: #85C1E9; }
+
+/* ── INTERACTIVE DATA FLOW DEMO ── */
+.flow-demo {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.flow-demo-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 32px;
+}
+.pipeline {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+.pipe-node {
+  flex-shrink: 0;
+  width: 140px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 14px;
+  position: relative;
+}
+.pipe-node.active {
+  background: rgba(40,116,166,0.12);
+  border-color: rgba(40,116,166,0.4);
+  animation: node-pulse 2s infinite;
+}
+@keyframes node-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(40,116,166,0); }
+  50% { box-shadow: 0 0 0 4px rgba(40,116,166,0.15); }
+}
+.pipe-connector {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  width: 32px;
+  position: relative;
+}
+.pipe-connector::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(40,116,166,0.3), rgba(40,116,166,0.6), rgba(40,116,166,0.3));
+  animation: flow-line 1.5s linear infinite;
+}
+@keyframes flow-line {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+.pipe-connector-arrow {
+  position: absolute;
+  right: 0;
+  color: rgba(40,116,166,0.6);
+  font-size: 12px;
+}
+.pipe-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 6px;
+}
+.pipe-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.3;
+}
+.pipe-node.active .pipe-name { color: #85C1E9; }
+.pipe-detail {
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 5px;
+  line-height: 1.5;
+}
+
+.json-block {
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 20px 24px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.5);
+  overflow-x: auto;
+}
+.json-key { color: #85C1E9; }
+.json-str { color: #ABEBC6; }
+.json-num { color: #F9E79F; }
+.json-bool { color: #C39BD3; }
+.json-new { color: #85C1E9; background: rgba(40,116,166,0.1); padding: 0 3px; border-radius: 3px; }
+
+/* ── ERROR MODES ── */
+.modes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.mode-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 18px 16px;
+  transition: all 0.2s;
+}
+.mode-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.12);
+}
+.mode-card.active { border-color: var(--ocean); background: rgba(40,116,166,0.08); }
+.mode-icon {
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+  filter: grayscale(0.3);
+}
+.mode-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.mode-def {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+.mode-score {
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+}
+.mode-card.active .mode-name { color: #85C1E9; }
+.mode-card.active .mode-score { color: #85C1E9; }
+
+@media (max-width: 900px) {
+  .hero { padding: 60px 24px; }
+  .section { padding: 60px 24px; }
+  .arch-row { flex-wrap: wrap; }
+  .streams-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .flow-wrap { grid-template-columns: 1fr; }
+  .flow-card:first-child, .flow-card:last-child { border-radius: 14px; }
+  .db-grid { grid-template-columns: 1fr; }
+  .modes-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .study-grid { grid-template-columns: 1fr; }
+  .footer { flex-direction: column; gap: 24px; text-align: center; }
+  .footer-meta { text-align: center; }
+  .pipeline { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">ReasonDx · NSU KPCAM · Architecture Overview</div>
+  <h1 class="hero-title">How <span>ReasonDx</span> thinks about every student, every turn</h1>
+  <p class="hero-sub">A cognitive architecture that synthesizes 7 passive data streams, 6 memory layers, and 11 active agents into a unified student model — updating on every message, storing research data automatically.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-n">369</div><div class="hero-stat-l">Simulation cases</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">7</div><div class="hero-stat-l">Passive streams</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">11</div><div class="hero-stat-l">Active agents</div></div>
+    <div class="hero-stat"><div class="hero-stat-n">10</div><div class="hero-stat-l">Research studies</div></div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SECTION 1: ARCHITECTURE ── -->
+<section class="section">
+  <div class="section-label" data-n="01">Architecture</div>
+  <h2 class="section-title">Six layers of memory.<br>All talking to each other.</h2>
+  <p class="section-sub">Before this work, each agent received a fragment of what the system knew. Dr. Patel didn't know the student had anchored in three prior sessions. The patient didn't know rapport was low. The debrief didn't know cognitive load peaked at Phase 3→4. The Student Model Bus fixed that.</p>
+
+  <div class="arch-wrap">
+    <!-- Row 1: Student -->
+    <div class="arch-row">
+      <div class="arch-node ocean" style="flex:3">
+        <div class="arch-node-label">Entry point</div>
+        <div class="arch-node-name">Student — types a message</div>
+        <div class="arch-node-detail">Every message triggers the full passive collection pipeline simultaneously, with zero additional student effort</div>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-arrow">↓</div>
+      <div style="flex:1"></div>
+    </div>
+
+    <!-- Row 2: Passive collectors -->
+    <div class="arch-row">
+      <div class="arch-node teal new" style="flex:1">
+        <div class="arch-node-label">Stream 1–5</div>
+        <div class="arch-node-name">PassiveData collectors</div>
+        <div class="arch-node-detail">Confidence · questions · latency · empathy · cues</div>
+      </div>
+      <div class="arch-arrow">+</div>
+      <div class="arch-node teal new" style="flex:1">
+        <div class="arch-node-label">Stream 6 — Agent 7</div>
+        <div class="arch-node-name">Emotional Reasoning State</div>
+        <div class="arch-node-detail">Valence · arousal · ERS risk flag</div>
+      </div>
+      <div class="arch-arrow">+</div>
+      <div class="arch-node teal new" style="flex:1">
+        <div class="arch-node-label">Stream 7 — Agent 5</div>
+        <div class="arch-node-name">Cognitive Load Topography</div>
+        <div class="arch-node-detail">Per-phase load z-score · burst ratio · peak detection</div>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-arrow">↓</div>
+      <div style="flex:1"></div>
+    </div>
+
+    <!-- Row 3: Student Model Bus -->
+    <div class="arch-row">
+      <div class="arch-node ocean new" style="flex:1; border-width: 2px;">
+        <div class="arch-node-label">Coordination layer — NEW</div>
+        <div class="arch-node-name">Student Model Bus</div>
+        <div class="arch-node-detail">Synthesizes: working memory · episodic (prior sessions) · procedural (pattern_tags) · affective (ERS) · load (CLT) → one unified context object, updated every turn</div>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-arrow">↓</div>
+      <div style="flex:1"></div>
+    </div>
+
+    <!-- Row 4: Meta-Reasoning -->
+    <div class="arch-row">
+      <div class="arch-node purple new" style="flex:1">
+        <div class="arch-node-label">Supervisory agent — NEW</div>
+        <div class="arch-node-name">Meta-Reasoning Agent</div>
+        <div class="arch-node-detail">Reads the bus → scores 8 error modes → synthesizes dominant theory with confidence → selects next case → calibrates difficulty → injects tactical directive into Dr. Patel's system prompt</div>
+      </div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-arrow">↓</div>
+      <div style="flex:1"></div>
+    </div>
+
+    <!-- Row 5: Agents -->
+    <div class="arch-row">
+      <div class="arch-node ocean" style="flex:1">
+        <div class="arch-node-label">Agent A</div>
+        <div class="arch-node-name">Dr. Patel (attending)</div>
+        <div class="arch-node-detail">Receives: all 6 layers + meta-reasoning tactic + RAG guidelines</div>
+      </div>
+      <div class="arch-arrow">·</div>
+      <div class="arch-node ocean" style="flex:1">
+        <div class="arch-node-label">Agent B</div>
+        <div class="arch-node-name">Patient voice</div>
+        <div class="arch-node-detail">Receives: affect + empathy density + question pattern only</div>
+      </div>
+      <div class="arch-arrow">·</div>
+      <div class="arch-node ocean" style="flex:1">
+        <div class="arch-node-label">Agent C</div>
+        <div class="arch-node-name">Debrief generator</div>
+        <div class="arch-node-detail">Receives: full model + ERS/CLT narrative + RAG citations</div>
+      </div>
+      <div class="arch-arrow">·</div>
+      <div class="arch-node ocean" style="flex:1">
+        <div class="arch-node-label">Agent D</div>
+        <div class="arch-node-name">Faculty agent</div>
+        <div class="arch-node-detail">7 Supabase tools · meta-reasoning cohort summary · OSCE report</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SECTION 2: DATA PIPELINE ── -->
+<section class="section">
+  <div class="section-label" data-n="02">Data pipeline</div>
+  <h2 class="section-title">What happens on every<br>student message.</h2>
+  <p class="section-sub">One message triggers a synchronous pipeline: passive collection → bus update → meta-reasoning synthesis → system prompt injection. All within the same turn, before Claude responds.</p>
+
+  <div class="flow-demo">
+    <div class="flow-demo-title">Turn-by-turn execution order</div>
+    <div class="pipeline">
+      <div class="pipe-node">
+        <div class="pipe-label">1 · trigger</div>
+        <div class="pipe-name">Student sends message</div>
+        <div class="pipe-detail">Text, timestamp, phase, turn number</div>
+      </div>
+      <div class="pipe-connector"><div class="pipe-connector-arrow">›</div></div>
+      <div class="pipe-node active">
+        <div class="pipe-label">2 · collect</div>
+        <div class="pipe-name">7 passive streams run</div>
+        <div class="pipe-detail">Simultaneous, zero latency</div>
+      </div>
+      <div class="pipe-connector"><div class="pipe-connector-arrow">›</div></div>
+      <div class="pipe-node active">
+        <div class="pipe-label">3 · synthesize</div>
+        <div class="pipe-name">Bus.update()</div>
+        <div class="pipe-detail">All 6 memory layers refreshed</div>
+      </div>
+      <div class="pipe-connector"><div class="pipe-connector-arrow">›</div></div>
+      <div class="pipe-node active">
+        <div class="pipe-label">4 · reason</div>
+        <div class="pipe-name">MetaReasoning.synthesize()</div>
+        <div class="pipe-detail">Error mode scored, theory updated</div>
+      </div>
+      <div class="pipe-connector"><div class="pipe-connector-arrow">›</div></div>
+      <div class="pipe-node">
+        <div class="pipe-label">5 · inject</div>
+        <div class="pipe-name">buildSystemPrompt()</div>
+        <div class="pipe-detail">Bus block + meta brief appended</div>
+      </div>
+      <div class="pipe-connector"><div class="pipe-connector-arrow">›</div></div>
+      <div class="pipe-node">
+        <div class="pipe-label">6 · respond</div>
+        <div class="pipe-name">Claude API call</div>
+        <div class="pipe-detail">Full context → Dr. Patel or patient voice</div>
+      </div>
+    </div>
+
+    <div class="flow-demo-title">What Dr. Patel's system prompt contains this turn</div>
+    <div class="json-block">
+<span class="json-key">ABSOLUTE RULES</span> (simulation constraints)<br>
+<span class="json-key">PHASE CONTEXT</span> (Phase 4 — Revised Differential)<br>
+<br>
+<span class="json-new">═══ STUDENT MODEL (ReasonDx live context) ═══</span><br>
+Student: <span class="json-str">Sarah Chen (M3)</span> · Phase: <span class="json-str">Revised Differential</span> · Turn: <span class="json-num">12</span><br>
+Current DDx: <span class="json-str">STEMI, ACS, PE</span><br>
+<br>
+Prior sessions: <span class="json-num">3</span><br>
+Recent: DYS-001 ✓ anchored | COUGH-001 ✗ anchored | FEVER-001 ✓ clean<br>
+<br>
+Longitudinal patterns:<br>
+  · <span class="json-str">anchoring_tendency</span> — maintains initial dx despite contradicting evidence<br>
+  · <span class="json-str">history_gap</span> — frequently misses critical contextual history<br>
+<br>
+<span class="json-key">Attending guidance based on patterns:</span><br>
+  → This student anchors. Ask: <span class="json-str">"What single finding would make you reconsider?"</span><br>
+  → History gap detected: prompt social/occupational context if not asked by turn 6.<br>
+<br>
+Affective state: <span class="json-str">negative valence (−0.31)</span>, <span class="json-str">activated arousal (0.71)</span><br>
+⚠ ERS flag: negative high-arousal during history → increased anchoring risk<br>
+  → After history: <span class="json-str">"What made you most uncertain in that interview?"</span><br>
+<br>
+Cognitive load: <span class="json-str">HIGH (z = +1.4)</span> — simplify next question. One thing at a time.<br>
+Load trajectory: escalating → <span class="json-str">"What is your working diagnosis in one sentence?"</span><br>
+<span class="json-new">═══════════════════════════════════</span><br>
+<br>
+<span class="json-new">[Meta-Reasoning: Anchoring Bias detected — high priority]</span><br>
+After initial differential: <span class="json-str">"What single finding would completely change your leading diagnosis?"</span> Force explicit falsification.
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SECTION 3: PASSIVE STREAMS ── -->
+<section class="section">
+  <div class="section-label" data-n="03">Passive collection</div>
+  <h2 class="section-title">7 research-grade streams.<br>Zero extra student effort.</h2>
+  <p class="section-sub">Every stream runs on every student message. No prompts. No surveys. No researcher presence. This is what makes the dataset ecologically valid at a scale that controlled experiments cannot achieve.</p>
+
+  <div class="streams-grid">
+    <div class="stream-card">
+      <div class="stream-n">1</div>
+      <div class="stream-name">Implicit confidence language</div>
+      <div class="stream-label">Lingard 2003</div>
+    </div>
+    <div class="stream-card">
+      <div class="stream-n">2</div>
+      <div class="stream-name">Question type classification</div>
+      <div class="stream-label">Calgary-Cambridge</div>
+    </div>
+    <div class="stream-card">
+      <div class="stream-n">3</div>
+      <div class="stream-name">Response latency per phase</div>
+      <div class="stream-label">Moulton 2007</div>
+    </div>
+    <div class="stream-card">
+      <div class="stream-n">4</div>
+      <div class="stream-name">Empathy & rapport signals</div>
+      <div class="stream-label">Kalamazoo 2001</div>
+    </div>
+    <div class="stream-card">
+      <div class="stream-n">5</div>
+      <div class="stream-name">Patient cue utilization</div>
+      <div class="stream-label">Levinson 2000</div>
+    </div>
+    <div class="stream-card" style="border-color: rgba(40,116,166,0.3); background: rgba(40,116,166,0.05);">
+      <div class="stream-n" style="color: #85C1E9">6</div>
+      <div class="stream-name" style="color: rgba(255,255,255,0.7)">Emotional reasoning state</div>
+      <div class="stream-label">Croskerry 2010</div>
+    </div>
+    <div class="stream-card" style="border-color: rgba(40,116,166,0.3); background: rgba(40,116,166,0.05);">
+      <div class="stream-n" style="color: #85C1E9">7</div>
+      <div class="stream-name" style="color: rgba(255,255,255,0.7)">Cognitive load topography</div>
+      <div class="stream-label">Sweller 1988</div>
+    </div>
+  </div>
+
+  <div class="flow-wrap">
+    <div class="flow-card">
+      <div class="flow-n">01</div>
+      <div class="flow-title">Student sends a message</div>
+      <div class="flow-desc">RdxPassive.analyzeStudentMessage() receives the raw text, current phase number, and turn count</div>
+      <div class="flow-items">
+        <div class="flow-item">text: "I think this is PE because..."</div>
+        <div class="flow-item">phase: 4 (Revised Differential)</div>
+        <div class="flow-item">turn: 12</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-n">02</div>
+      <div class="flow-title">7 classifiers run simultaneously</div>
+      <div class="flow-desc">Pure JS lexicon-based classifiers. No API call. Results available before Claude's response is requested.</div>
+      <div class="flow-items">
+        <div class="flow-item">confidence: +0.62 (committed)</div>
+        <div class="flow-item">questionType: closed</div>
+        <div class="flow-item">latencyMs: 11400</div>
+        <div class="flow-item">empathySignals: 0</div>
+        <div class="flow-item highlight">valence: −0.31 (negative)</div>
+        <div class="flow-item highlight">arousal: 0.71 (activated)</div>
+        <div class="flow-item highlight">loadZ: +1.4 (high)</div>
+      </div>
+    </div>
+    <div class="flow-card">
+      <div class="flow-n">03</div>
+      <div class="flow-title">Written to passive_data JSONB</div>
+      <div class="flow-desc">At session end, getFullSummary() packages all 7 streams and saves to Supabase rad_study_sessions. Study data, not student data.</div>
+      <div class="flow-items">
+        <div class="flow-item">implicitConfidence: {avgScore, byPhase, trend}</div>
+        <div class="flow-item">questionTypes: {openRate, pattern}</div>
+        <div class="flow-item">responseLatency: {byPhase, avgSeconds}</div>
+        <div class="flow-item">empathyAndRapport: {density, signals}</div>
+        <div class="flow-item">cueUtilization: {utilizationRate}</div>
+        <div class="flow-item highlight">emotionalState: {phase3Affect, ersRiskFlag}</div>
+        <div class="flow-item highlight">cognitiveLoad: {phaseSignatures, peakPhase}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SECTION 4: META-REASONING ── -->
+<section class="section">
+  <div class="section-label" data-n="04">Meta-reasoning</div>
+  <h2 class="section-title">The supervisory agent that<br>watches all the others.</h2>
+  <p class="section-sub">Synthesizes the bus on every turn into a theory of the student's dominant error mode. Not rule-based: each mode is scored across all six memory layers simultaneously, with longitudinal pattern detection weighted 3× over single-session signals.</p>
+
+  <div class="modes-grid">
+    <div class="mode-card active">
+      <span class="mode-icon">⚓</span>
+      <div class="mode-name">Anchoring Bias</div>
+      <div class="mode-def">Locks onto initial hypothesis despite contradicting evidence. Triggered by pattern_tags + episodic anchoring + ERS flag.</div>
+      <div class="mode-score">Score 7 · Confidence 0.82 · High urgency</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">🚪</span>
+      <div class="mode-name">Premature Closure</div>
+      <div class="mode-def">Stops revising differential before fully evaluating all evidence. Triggered by top-3 DDx unchanged post-labs.</div>
+      <div class="mode-score">Croskerry 2009 · Graber 2005</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">🔍</span>
+      <div class="mode-name">History Gap</div>
+      <div class="mode-def">Misses critical contextual history (occupation, environment, social). Triggered by missed_pivot_rate + closed_first pattern.</div>
+      <div class="mode-score">Graber 2005 — faulty context generation</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">🎯</span>
+      <div class="mode-name">Narrow Opener</div>
+      <div class="mode-def">Initial DDx has fewer than 2 diagnoses — insufficient breadth at case opening. Elstein (1978): hypothesis set size.</div>
+      <div class="mode-score">Elstein 1978 hypothesis set theory</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">🤷</span>
+      <div class="mode-name">Underconfident</div>
+      <div class="mode-def">Accurate but systematically underestimates own reasoning. Likert &lt;3 despite &gt;70% accuracy across sessions.</div>
+      <div class="mode-score">Berner & Graber 2008 · Eva & Regehr 2005</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">🔥</span>
+      <div class="mode-name">Cognitive Overload</div>
+      <div class="mode-def">Working memory saturated — load z &gt;1 AND trajectory escalating. Overrides all other modes (score = 99). Immediate intervention.</div>
+      <div class="mode-score">Sweller 1988 · Moulton 2007</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">😤</span>
+      <div class="mode-name">Affect Disruption</div>
+      <div class="mode-def">Negative activated affect during history predicts downstream anchoring. ERS risk flag: valence &lt;−0.3 + arousal &gt;0.6 in Phase 3.</div>
+      <div class="mode-score">Croskerry et al. 2010 · Lerner 2015</div>
+    </div>
+    <div class="mode-card">
+      <span class="mode-icon">✓</span>
+      <div class="mode-name">Calibrated</div>
+      <div class="mode-def">No dominant error mode. Student is performing at or above expected level. Response: challenge upward — press for mechanistic reasoning.</div>
+      <div class="mode-score">Eva & Regehr 2005 calibration theory</div>
+    </div>
+  </div>
+
+  <div class="arch-wrap" style="padding: 32px;">
+    <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 20px;">Three output channels per synthesis</div>
+    <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 16px;">
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #85C1E9; margin-bottom: 8px;">Attending tactic</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7;">Appended to Dr. Patel's system prompt every turn. Mode-specific: "What single finding would make you reconsider?" Injected silently — the student never sees it.</div>
+      </div>
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #73C6B6; margin-bottom: 8px;">Case selection</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7;">recommendNextCase() delegates to MetaReasoning.selectCase(). Anchoring mode → case with hasAnchoringTrap property. Overload mode → reduce to guided difficulty.</div>
+      </div>
+      <div>
+        <div style="font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: #C39BD3; margin-bottom: 8px;">Difficulty calibration</div>
+        <div style="font-size: 12px; color: rgba(255,255,255,0.45); line-height: 1.7;">Implements Vygotsky (1978) ZPD targeting. High confidence + CALIBRATED → advance difficulty. Cognitive overload → step down. Kapur (2016) challenge-first sequencing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SECTION 5: DB SCHEMA ── -->
+<section class="section">
+  <div class="section-label" data-n="05">Database schema</div>
+  <h2 class="section-title">What writes to Supabase<br>at the end of every session.</h2>
+  <p class="section-sub">Every completed simulation writes to four tables simultaneously. Three are new from this sprint. All are anonymized, consent-gated, and IRB-ready.</p>
+
+  <div class="db-grid">
+    <div class="db-card">
+      <div class="db-table-name">rad_study_sessions <span>core</span></div>
+      <div class="db-field"><span class="db-field-name">session_id</span><span class="db-field-type">text PK</span></div>
+      <div class="db-field"><span class="db-field-name">student_name</span><span class="db-field-type">text</span></div>
+      <div class="db-field"><span class="db-field-name">target_in_final</span><span class="db-field-type">boolean</span></div>
+      <div class="db-field"><span class="db-field-name">anchoring_detected</span><span class="db-field-type">boolean</span></div>
+      <div class="db-field"><span class="db-field-name">passive_data</span><span class="db-field-type">jsonb</span></div>
+      <div class="db-field"><span class="db-field-name">readability_summary</span><span class="db-field-type">jsonb</span></div>
+      <div class="db-field new"><span class="db-field-name">student_model_snapshot</span><span class="db-field-type">jsonb ✦</span></div>
+      <div class="db-field new"><span class="db-field-name">meta_reasoning_record</span><span class="db-field-type">jsonb ✦</span></div>
+      <div class="db-field new"><span class="db-field-name">consent_given</span><span class="db-field-type">boolean ✦</span></div>
+    </div>
+
+    <div class="db-card">
+      <div class="db-table-name">reasoning_fingerprints <span>study 1–3</span></div>
+      <div class="db-field"><span class="db-field-name">session_id</span><span class="db-field-type">text FK</span></div>
+      <div class="db-field"><span class="db-field-name">embedding</span><span class="db-field-type">vector(512)</span></div>
+      <div class="db-field"><span class="db-field-name">dx_initial[]</span><span class="db-field-type">text[]</span></div>
+      <div class="db-field"><span class="db-field-name">dx_final[]</span><span class="db-field-type">text[]</span></div>
+      <div class="db-field"><span class="db-field-name">anchoring_detected</span><span class="db-field-type">boolean</span></div>
+      <div class="db-field"><span class="db-field-name">confidence_score</span><span class="db-field-type">int 1–5</span></div>
+      <div class="db-field new"><span class="db-field-name">productive_failure_flag</span><span class="db-field-type">boolean ✦</span></div>
+    </div>
+
+    <div class="db-card new-table">
+      <div class="db-table-name">illness_script_sessions <span>study 4 ✦</span></div>
+      <div class="db-field"><span class="db-field-name">session_id</span><span class="db-field-type">text FK</span></div>
+      <div class="db-field"><span class="db-field-name">target_diagnosis</span><span class="db-field-type">text</span></div>
+      <div class="db-field"><span class="db-field-name">snapshot_phase</span><span class="db-field-type">initial|revised|final</span></div>
+      <div class="db-field"><span class="db-field-name">encounter_number</span><span class="db-field-type">int</span></div>
+      <div class="db-field"><span class="db-field-name">embedding</span><span class="db-field-type">vector(512)</span></div>
+      <div class="db-field"><span class="db-field-name">bordage_score</span><span class="db-field-type">int 0–4</span></div>
+      <div class="db-field"><span class="db-field-name">similarity_to_prior</span><span class="db-field-type">float (nightly)</span></div>
+      <div class="db-field"><span class="db-field-name">centroid_distance</span><span class="db-field-type">float (nightly)</span></div>
+    </div>
+
+    <div class="db-card">
+      <div class="db-table-name">student_cognitive_profiles <span>longitudinal</span></div>
+      <div class="db-field"><span class="db-field-name">student_name</span><span class="db-field-type">text PK</span></div>
+      <div class="db-field"><span class="db-field-name">pattern_tags[]</span><span class="db-field-type">text[]</span></div>
+      <div class="db-field"><span class="db-field-name">anchoring_rate</span><span class="db-field-type">float</span></div>
+      <div class="db-field"><span class="db-field-name">avg_target_in_final</span><span class="db-field-type">float</span></div>
+      <div class="db-field new"><span class="db-field-name">productive_failure_events</span><span class="db-field-type">jsonb ✦</span></div>
+    </div>
+
+    <div class="db-card">
+      <div class="db-table-name">osce_attempts <span>study validation</span></div>
+      <div class="db-field"><span class="db-field-name">student_name</span><span class="db-field-type">text</span></div>
+      <div class="db-field"><span class="db-field-name">pct_score</span><span class="db-field-type">int 0–100</span></div>
+      <div class="db-field"><span class="db-field-name">critical_score</span><span class="db-field-type">int</span></div>
+      <div class="db-field"><span class="db-field-name">communication_score</span><span class="db-field-type">int</span></div>
+      <div class="db-field"><span class="db-field-name">empathy_density</span><span class="db-field-type">numeric</span></div>
+      <div class="db-field"><span class="db-field-name">open_q_rate</span><span class="db-field-type">numeric</span></div>
+    </div>
+
+    <div class="db-card">
+      <div class="db-table-name">guidelines_embeddings <span>RAG</span></div>
+      <div class="db-field"><span class="db-field-name">chunk_text</span><span class="db-field-type">text</span></div>
+      <div class="db-field"><span class="db-field-name">embedding</span><span class="db-field-type">vector(512)</span></div>
+      <div class="db-field"><span class="db-field-name">source</span><span class="db-field-type">text</span></div>
+      <div class="db-field"><span class="db-field-name">specialty</span><span class="db-field-type">text</span></div>
+      <div class="db-field"><span class="db-field-name">license</span><span class="db-field-type">CC-BY / open-access only</span></div>
+    </div>
+  </div>
+
+  <div style="font-size: 12px; color: rgba(255,255,255,0.25); font-family: 'DM Mono', monospace; line-height: 2;">
+    Nightly pg_cron jobs at 2am UTC: aggregate_student_profile() → nightly_aggregate_all_profiles()<br>
+    At 3am UTC: nightly_compute_all_encapsulation() → similarity_to_prior + centroid_distance per student × diagnosis
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── SECTION 6: RESEARCH MAP ── -->
+<section class="section">
+  <div class="section-label" data-n="06">Research program</div>
+  <h2 class="section-title">10 publishable studies.<br>One living dataset.</h2>
+  <p class="section-sub">The first meded platform where the data collection infrastructure is the education infrastructure. Students learn. Data accumulates. Studies write themselves.</p>
+
+  <div class="study-grid">
+    <div class="study-card live">
+      <div class="study-n">Study 1</div>
+      <div class="study-title">Cognitive bias prevalence and trajectory</div>
+      <div class="study-meta">Anchoring, premature closure in preclinical students. Data: reasoning_fingerprints · Target: Diagnosis, Academic Medicine</div>
+      <div class="study-status status-live">Collecting</div>
+    </div>
+    <div class="study-card live">
+      <div class="study-n">Study 2</div>
+      <div class="study-title">Confidence calibration vs. diagnostic accuracy</div>
+      <div class="study-meta">Likert score vs. target_in_final, longitudinal. Data: reasoning_fingerprints.confidence_score · Target: Academic Medicine</div>
+      <div class="study-status status-live">Collecting</div>
+    </div>
+    <div class="study-card live">
+      <div class="study-n">Study 3</div>
+      <div class="study-title">Communication quality — readability, question sequencing, empathy</div>
+      <div class="study-meta">3 passive streams. Data: passive_data JSONB · Target: Patient Education and Counseling</div>
+      <div class="study-status status-live">Collecting</div>
+    </div>
+    <div class="study-card collecting">
+      <div class="study-n">Study 4 ✦</div>
+      <div class="study-title">Illness script encapsulation — first computational measurement</div>
+      <div class="study-meta">512-dim Voyage embeddings per phase, cosine similarity trajectory. Data: illness_script_sessions · Target: Medical Education (Wiley)</div>
+      <div class="study-status status-collecting">New — collecting</div>
+    </div>
+    <div class="study-card collecting">
+      <div class="study-n">Study 5 ✦</div>
+      <div class="study-title">Productive failure in clinical simulation</div>
+      <div class="study-meta">Kapur (2016): does missing the diagnosis with rich DDx improve next same-specialty session? Data: productive_failure_flag, cross-session query · Target: Learning and Instruction</div>
+      <div class="study-status status-collecting">New — collecting</div>
+    </div>
+    <div class="study-card pending">
+      <div class="study-n">Study 6</div>
+      <div class="study-title">Transfer Readiness Score — development and OSCE validation</div>
+      <div class="study-meta">Composite of 6 signals validated against osce_attempts. Agent 3 pending. Target: Academic Medicine</div>
+      <div class="study-status status-pending">Pending Agent 3</div>
+    </div>
+    <div class="study-card collecting">
+      <div class="study-n">Study 7 ✦</div>
+      <div class="study-title">Semantic drift as expertise development in written notes</div>
+      <div class="study-meta">CaseFrame note embeddings vs. gold standard. Agent 4 pending. Target: Advances in Health Sciences Education</div>
+      <div class="study-status status-pending">Pending Agent 4</div>
+    </div>
+    <div class="study-card collecting">
+      <div class="study-n">Study 8 ✦</div>
+      <div class="study-title">Cognitive load topography — where reasoning breaks down</div>
+      <div class="study-meta">CLT phase signatures × diagnostic error rates. Data: passive_data.cognitiveLoad · Target: Simulation in Healthcare</div>
+      <div class="study-status status-collecting">New — collecting</div>
+    </div>
+    <div class="study-card pending">
+      <div class="study-n">Study 9</div>
+      <div class="study-title">Dyadic reasoning divergence RCT</div>
+      <div class="study-meta">Collaborative vs. individual simulation. Agent 6 pending. Target: Academic Medicine</div>
+      <div class="study-status status-pending">Pending Agent 6</div>
+    </div>
+    <div class="study-card collecting">
+      <div class="study-n">Study 10 ✦</div>
+      <div class="study-title">Affect-reasoning coupling</div>
+      <div class="study-meta">Does negative arousal during history predict anchoring? Data: passive_data.emotionalState · Target: Patient Education and Counseling</div>
+      <div class="study-status status-collecting">New — collecting</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div>
+    <div class="footer-logo">Reason<span>Dx</span></div>
+    <div style="font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 6px; font-weight: 300;">NSU Dr. Kiran C. Patel College of Allopathic Medicine</div>
+  </div>
+  <div class="footer-meta">
+    <div>Lauren Fine, MD, FAAAAI · l.fine@nova.edu</div>
+    <div style="margin-top: 4px;"><a href="https://reasondx.com" class="footer-link">reasondx.com</a> &nbsp;·&nbsp; <a href="https://github.com/laurenmfine-coder/dx-tool" class="footer-link">github</a></div>
+    <div style="margin-top: 8px; color: rgba(255,255,255,0.15); font-size: 11px;">Architecture sprint · April 2026 · commit de50903a</div>
+  </div>
+</footer>
+
+</body>
+</html>
