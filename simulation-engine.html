@@ -81,6 +81,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .hidden{display:none}
 </style>
 <script src="/case-explainer-agent.js"></script>
+<script src="/rdx-guidelines-rag.js"></script>
 <script src="/rdx-voice-patient.js"></script>
 <script src="/rdx-realtime.js"></script>
 <script src="/rdx-ecg.js"></script>
@@ -1322,20 +1323,34 @@ function enterPhase(phase) {
         if(RDX_DEBUG) console.log('SpacedRep cards generated:', cards.length);
       }
 
-      // 4. Generate AI-powered teaching debrief (after a short pause for the completion message)
+      // 4. Generate AI-powered teaching debrief with RAG guideline citations
       if (gaps.length > 0) {
         setTimeout(function() {
           addMessage('system', 'Generating your personalized teaching debrief...');
-          AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData).then(function(debrief) {
-            addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
 
-            // Show guidelines if available
-            if (guidelineResults.found) {
-              var guidelineText = 'Recommended reading for this case:\n\n' + guidelineResults.guidelines.slice(0, 3).map(function(g) {
-                return '\u2022 ' + g.title + ' (' + g.journal + ', ' + g.year + ')' + (g.url ? '\n  ' + g.url : '');
-              }).join('\n\n');
-              addMessage('system', guidelineText);
-            }
+          // RAG: retrieve relevant guideline chunks, then inject into debrief prompt
+          var ragPromise = (window.GuidelinesRAG)
+            ? GuidelinesRAG.retrieve(caseData.targetDiagnosis, caseData.category)
+            : Promise.resolve({ found: false, contextBlock: '', sources: [] });
+
+          ragPromise.then(function(ragContext) {
+            return AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData, ragContext)
+              .then(function(debrief) {
+                addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
+
+                // Show RAG guideline sources (live citations from database)
+                if (ragContext && ragContext.found && ragContext.sources && ragContext.sources.length > 0) {
+                  var ragEl = document.createElement('div');
+                  ragEl.className = 'chat-msg msg-system';
+                  ragEl.innerHTML = GuidelinesRAG.formatSourcesForDisplay(ragContext.sources);
+                  document.getElementById('chatMessages').appendChild(ragEl);
+                } else if (guidelineResults.found) {
+                  // Fallback: static guidelines library if RAG table is empty
+                  var guidelineText = 'Recommended reading for this case:\n\n' + guidelineResults.guidelines.slice(0, 3).map(function(g) {
+                    return '\u2022 ' + g.title + ' (' + g.journal + ', ' + g.year + ')' + (g.url ? '\n  ' + g.url : '');
+                  }).join('\n\n');
+                  addMessage('system', guidelineText);
+                }
 
             // Show SpacedRep cards
             if (cards.length > 0) {
@@ -1410,7 +1425,9 @@ function enterPhase(phase) {
               }
             }, 800);
 
-          });
+              }); // closes .then(function(debrief)
+            }).catch(function(e) { console.warn('[RAG debrief] non-fatal error:', e); });
+          }); // closes ragPromise.then
         }, 1500);
       }
     }

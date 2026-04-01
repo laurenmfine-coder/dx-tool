@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guidelines RAG Admin · ReasonDx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0f1117; --surface:#1a1d27; --surface2:#22263a;
+    --border:#2e3452; --blue:#2874A6; --blue-lt:#60a5fa;
+    --gold:#f59e0b; --text:#e2e8f0; --muted:#64748b;
+    --green:#34d399; --red:#f87171; --mono:'DM Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+  .hd{padding:14px 24px;border-bottom:1px solid var(--border);background:var(--surface);display:flex;align-items:center;gap:14px}
+  .hd-logo{font-size:18px;font-weight:700;color:#fff}
+  .hd-logo span{color:var(--gold)}
+  .hd-badge{padding:3px 10px;background:rgba(239,68,68,.2);border:1px solid rgba(239,68,68,.4);border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#fca5a5}
+  .hd-back{margin-left:auto;color:var(--muted);font-size:13px;text-decoration:none}
+  .hd-back:hover{color:var(--text)}
+
+  .shell{max-width:900px;margin:0 auto;padding:32px 20px 60px}
+  .page-title{font-size:26px;font-weight:700;color:#fff;margin-bottom:6px}
+  .page-sub{font-size:14px;color:var(--muted);margin-bottom:32px;line-height:1.6}
+
+  /* Stats bar */
+  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+  .stat-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:18px;text-align:center}
+  .stat-num{font-size:28px;font-weight:700;font-family:var(--mono);color:var(--blue-lt)}
+  .stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+
+  /* Section cards */
+  .section{background:var(--surface);border:1.5px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px}
+  .section-title{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+  .section-title .dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+
+  /* Guideline table */
+  .gl-table{width:100%;border-collapse:collapse}
+  .gl-table th{font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);padding:8px 10px;border-bottom:1px solid var(--border);text-align:left;font-weight:600}
+  .gl-table td{font-size:13px;padding:10px 10px;border-bottom:1px solid rgba(46,52,82,.5);vertical-align:top}
+  .gl-table tr:last-child td{border-bottom:none}
+  .gl-table tr:hover td{background:rgba(40,116,166,.04)}
+  .tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:600;background:rgba(40,116,166,.2);color:var(--blue-lt);margin:1px 2px 1px 0}
+  .tag-green{background:rgba(52,211,153,.15);color:var(--green)}
+  .tag-gold{background:rgba(245,158,11,.15);color:var(--gold)}
+  .tag-red{background:rgba(248,113,113,.15);color:var(--red)}
+  .status-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px}
+  .dot-green{background:var(--green)}
+  .dot-gold{background:var(--gold)}
+  .dot-grey{background:var(--muted)}
+
+  /* Buttons */
+  .btn{padding:10px 18px;border:none;border-radius:8px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .15s}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-primary:hover{background:#1a5f8a}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed}
+  .btn-sm{padding:6px 12px;font-size:12px;border-radius:6px}
+  .btn-danger{background:rgba(239,68,68,.15);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+  .btn-danger:hover{background:rgba(239,68,68,.25)}
+  .btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+  .btn-outline:hover{border-color:var(--blue-lt);color:var(--blue-lt)}
+  .btn-group{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+  /* Progress */
+  .progress-wrap{background:var(--surface2);border-radius:8px;height:10px;overflow:hidden;margin:8px 0}
+  .progress-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-lt));border-radius:8px;transition:width .4s ease;width:0%}
+  .progress-label{font-size:12px;color:var(--muted);font-family:var(--mono)}
+
+  /* Log */
+  .log-panel{background:var(--surface2);border-radius:8px;padding:14px;font-family:var(--mono);font-size:12px;line-height:1.75;max-height:280px;overflow-y:auto;margin-top:16px}
+  .log-ok{color:var(--green)}
+  .log-warn{color:var(--gold)}
+  .log-err{color:var(--red)}
+  .log-muted{color:var(--muted)}
+
+  /* Add-source form */
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .form-row.full{grid-template-columns:1fr}
+  label{display:block;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px}
+  input,select,textarea{width:100%;background:var(--surface2);border:1.5px solid var(--border);border-radius:7px;padding:9px 12px;font-size:13px;font-family:inherit;color:var(--text);outline:none;transition:border .15s}
+  input:focus,select:focus,textarea:focus{border-color:var(--blue)}
+  textarea{resize:vertical;min-height:80px;line-height:1.6}
+  select option{background:var(--surface)}
+
+  /* Specialty filter */
+  .filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .filter-tab{padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);transition:all .15s}
+  .filter-tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+  .filter-tab:hover:not(.active){border-color:var(--blue-lt);color:var(--blue-lt)}
+
+  .empty-state{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px}
+  .empty-state .icon{font-size:32px;margin-bottom:10px}
+</style>
+</head>
+<body>
+
+<div class="hd">
+  <div class="hd-logo">Reason<span>Dx</span></div>
+  <div class="hd-badge">Admin</div>
+  <span style="font-size:13px;color:var(--muted)">Guidelines RAG Ingestion</span>
+  <a href="/browse.html" class="hd-back">← Back to Platform</a>
+</div>
+
+<div class="shell">
+  <div class="page-title">📚 Guidelines RAG Admin</div>
+  <div class="page-sub">
+    Manage open-access clinical guidelines embedded in the vector database.<br>
+    Each guideline is chunked (~400 tokens), embedded via BGE-small, and stored in Supabase for retrieval at debrief time.
+    <strong style="color:var(--gold)"> Open-access sources only (CC-BY, CC-BY-NC, or free-access).</strong>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num" id="statTotal">—</div><div class="stat-lbl">Total Chunks</div></div>
+    <div class="stat-card"><div class="stat-num" id="statSources">—</div><div class="stat-lbl">Sources</div></div>
+    <div class="stat-card"><div class="stat-num" id="statSpecialties">—</div><div class="stat-lbl">Specialties</div></div>
+    <div class="stat-card"><div class="stat-num" id="statPending">—</div><div class="stat-lbl">Pending Embed</div></div>
+  </div>
+
+  <!-- Embed All Button -->
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Batch Embed Queue</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px;line-height:1.6">
+      Processes every source in the queue below. Chunks text at ~400 tokens with 50-token overlap, embeds via rdx-embed worker, upserts into Supabase. Rate-limited to avoid worker throttling (300ms between chunks).
+    </p>
+    <div class="progress-wrap"><div class="progress-bar" id="embedProgress"></div></div>
+    <div class="progress-label" id="embedLabel">Ready</div>
+    <div class="btn-group">
+      <button class="btn btn-primary" id="btnEmbedAll" onclick="embedAll()">⚡ Embed All Sources</button>
+      <button class="btn btn-outline" id="btnStop" onclick="stopEmbed()" disabled>■ Stop</button>
+      <button class="btn btn-outline" onclick="loadStats()">↺ Refresh Stats</button>
+      <button class="btn btn-danger btn-sm" onclick="clearAll()" style="margin-left:auto">🗑 Clear Database</button>
+    </div>
+    <div class="log-panel" id="embedLog"><span class="log-muted">Embed log will appear here...</span></div>
+  </div>
+
+  <!-- Add New Source -->
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Add New Source</div>
+    <div class="form-row">
+      <div>
+        <label>Source Name *</label>
+        <input id="fSource" placeholder="e.g. AHA 2022 Heart Failure Guidelines" />
+      </div>
+      <div>
+        <label>Specialty *</label>
+        <select id="fSpecialty">
+          <option value="">— select —</option>
+          <option>cardiology</option>
+          <option>pulmonology</option>
+          <option>infectious-disease</option>
+          <option>neurology</option>
+          <option>gastroenterology</option>
+          <option>nephrology</option>
+          <option>endocrinology</option>
+          <option>hematology</option>
+          <option>oncology</option>
+          <option>emergency-medicine</option>
+          <option>allergy-immunology</option>
+          <option>rheumatology</option>
+          <option>general-medicine</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label>Open-Access URL *</label>
+        <input id="fUrl" placeholder="https://pmc.ncbi.nlm.nih.gov/articles/PMC..." />
+      </div>
+      <div>
+        <label>License *</label>
+        <select id="fLicense">
+          <option value="">— select —</option>
+          <option value="CC-BY">CC-BY</option>
+          <option value="CC-BY-NC">CC-BY-NC</option>
+          <option value="CC-BY-NC-ND">CC-BY-NC-ND</option>
+          <option value="free-access">free-access (society guideline)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div>
+        <label>Diagnosis Tags (comma-separated) *</label>
+        <input id="fTags" placeholder="heart failure, HFpEF, CHF, cardiomyopathy" />
+      </div>
+      <div>
+        <label>Fetch Method</label>
+        <select id="fMethod">
+          <option value="paste">Paste text manually</option>
+          <option value="fetch">Fetch via CORS proxy (PMC)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row full" id="pasteRow">
+      <label>Guideline Text * <span style="color:var(--muted);font-weight:400">(paste full open-access text — will be auto-chunked)</span></label>
+      <textarea id="fText" rows="8" placeholder="Paste the guideline text here. It will be chunked into ~400-token segments with 50-token overlap and embedded automatically."></textarea>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="addSource()">+ Add to Queue</button>
+      <button class="btn btn-outline" onclick="clearForm()">Clear</button>
+    </div>
+    <div id="addMsg" style="margin-top:10px;font-size:13px"></div>
+  </div>
+
+  <!-- Embedded Sources -->
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Embedded Sources</div>
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" onclick="filterSpecialty('all', this)">All</button>
+    </div>
+    <div id="sourcesTable">
+      <div class="empty-state"><div class="icon">📭</div>No sources embedded yet. Add sources above and run Embed All.</div>
+    </div>
+  </div>
+
+  <!-- Starter Pack -->
+  <div class="section">
+    <div class="section-title"><span class="dot"></span>Recommended Starter Sources</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;line-height:1.6">
+      High-yield open-access guidelines covering the most common ReasonDx case specialties. Click <strong style="color:var(--text)">Load</strong> to pre-fill the Add Source form with verified open-access details.
+    </p>
+    <table class="gl-table">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Specialty</th>
+          <th>License</th>
+          <th>Diagnoses</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="starterTable"></tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+var SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+var EMBED_WORKER  = 'https://rdx-embed.laurenmfine.workers.dev';
+
+// ─────────────────────────────────────────────────────────────────────
+// STARTER PACK — verified open-access guidelines
+// ─────────────────────────────────────────────────────────────────────
+var STARTER_SOURCES = [
+  // Cardiology
+  { source:'AHA/ACC 2022 Heart Failure Guidelines', specialty:'cardiology', license:'free-access',
+    url:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001063',
+    tags:'heart failure, HFrEF, HFpEF, CHF, cardiomyopathy, diuretics, GDMT' },
+  { source:'AHA/ACC 2019 STEMI Guidelines', specialty:'cardiology', license:'free-access',
+    url:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000617',
+    tags:'STEMI, myocardial infarction, MI, ACS, reperfusion, thrombolysis, PCI' },
+  { source:'AHA/ACC 2014 NSTEMI/Unstable Angina Guidelines', specialty:'cardiology', license:'free-access',
+    url:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000134',
+    tags:'NSTEMI, unstable angina, ACS, non-ST elevation, troponin, anticoagulation' },
+  { source:'AHA/ACC 2018 Atrial Fibrillation Guidelines', specialty:'cardiology', license:'free-access',
+    url:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000000549',
+    tags:'atrial fibrillation, AFib, anticoagulation, rate control, rhythm control, stroke risk' },
+  // Pulmonology
+  { source:'ATS/IDSA 2007 Community-Acquired Pneumonia Guidelines', specialty:'pulmonology', license:'free-access',
+    url:'https://www.atsjournals.org/doi/10.1164/rccm.200405-644ST',
+    tags:'pneumonia, CAP, community-acquired pneumonia, antibiotics, CURB-65, PSI' },
+  { source:'GOLD 2024 COPD Report', specialty:'pulmonology', license:'free-access',
+    url:'https://goldcopd.org/2024-gold-report/',
+    tags:'COPD, chronic obstructive pulmonary disease, bronchitis, emphysema, exacerbation, inhaler' },
+  { source:'GINA 2024 Asthma Management Guidelines', specialty:'pulmonology', license:'free-access',
+    url:'https://ginasthma.org/2024-gina-main-report/',
+    tags:'asthma, bronchospasm, inhaled corticosteroid, SABA, exacerbation, peak flow' },
+  { source:'ATS 2011 Idiopathic Pulmonary Fibrosis Guidelines', specialty:'pulmonology', license:'CC-BY-NC',
+    url:'https://www.atsjournals.org/doi/10.1164/rccm.2011-0)'],
+    tags:'IPF, interstitial lung disease, ILD, pulmonary fibrosis, honeycombing, antifibrotic' },
+  // Infectious Disease
+  { source:'IDSA 2016 Sepsis & Septic Shock Guidelines (Surviving Sepsis)', specialty:'infectious-disease', license:'CC-BY-NC-ND',
+    url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC4695424/',
+    tags:'sepsis, septic shock, bacteremia, SOFA, qSOFA, broad-spectrum antibiotics, fluid resuscitation' },
+  { source:'IDSA 2021 Clostridioides difficile Guidelines', specialty:'infectious-disease', license:'free-access',
+    url:'https://www.idsociety.org/practice-guideline/clostridium-difficile/',
+    tags:'C. diff, Clostridioides difficile, CDI, colitis, vancomycin, fidaxomicin, fecal transplant' },
+  { source:'IDSA 2011 Urinary Tract Infection Guidelines', specialty:'infectious-disease', license:'free-access',
+    url:'https://www.idsociety.org/practice-guideline/urinary-tract-infection-uti/',
+    tags:'UTI, urinary tract infection, cystitis, pyelonephritis, bacteriuria, nitrofurantoin, TMP-SMX' },
+  // Neurology
+  { source:'AHA/ASA 2019 Acute Ischemic Stroke Guidelines', specialty:'neurology', license:'free-access',
+    url:'https://www.ahajournals.org/doi/10.1161/STR.0000000000000211',
+    tags:'stroke, ischemic stroke, tPA, alteplase, thrombectomy, NIHSS, door-to-needle' },
+  { source:'AAN 2019 Status Epilepticus Guidelines', specialty:'neurology', license:'free-access',
+    url:'https://www.aan.com/Guidelines/home/GuidelineDetail/975',
+    tags:'seizure, status epilepticus, benzodiazepine, lorazepam, levetiracetam, EEG, refractory' },
+  // Emergency Medicine
+  { source:'ACEP 2021 Pulmonary Embolism Clinical Policy', specialty:'emergency-medicine', license:'free-access',
+    url:'https://www.acep.org/patient-care/clinical-policies/pulmonary-embolism/',
+    tags:'pulmonary embolism, PE, DVT, Wells criteria, PERC, CT angiography, anticoagulation, thrombolysis' },
+  { source:'ACEP 2014 Evaluation of Syncope Clinical Policy', specialty:'emergency-medicine', license:'free-access',
+    url:'https://www.acep.org/patient-care/clinical-policies/syncope/',
+    tags:'syncope, presyncope, vasovagal, cardiac syncope, SFSR, San Francisco syncope rule' },
+  // Endocrinology
+  { source:'ADA 2024 Standards of Diabetes Care', specialty:'endocrinology', license:'free-access',
+    url:'https://diabetesjournals.org/care/issue/47/Supplement_1',
+    tags:'diabetes, DKA, diabetic ketoacidosis, HHS, hypoglycemia, insulin, A1C, type 1 diabetes, type 2 diabetes' },
+  { source:'Endocrine Society 2016 Thyroid Nodule Guidelines', specialty:'endocrinology', license:'free-access',
+    url:'https://academic.oup.com/jcem/article/101/5/1580/2804930',
+    tags:'thyroid nodule, thyroid cancer, thyrotoxicosis, hypothyroidism, Hashimoto, biopsy, ultrasound' },
+  // Gastroenterology
+  { source:'ACG 2022 Upper GI Bleeding Guidelines', specialty:'gastroenterology', license:'free-access',
+    url:'https://journals.lww.com/ajg/Fulltext/2021/03000/ACG_Clinical_Guideline__Upper_Gastrointestinal.15.aspx',
+    tags:'GI bleed, upper GI bleeding, hematemesis, melena, peptic ulcer, PPI, endoscopy, Blatchford score' },
+  { source:'AASLD 2018 Hepatic Encephalopathy Guidelines', specialty:'gastroenterology', license:'free-access',
+    url:'https://www.aasld.org/publications/practice-guidelines',
+    tags:'hepatic encephalopathy, cirrhosis, liver failure, lactulose, rifaximin, ammonia, portal hypertension' },
+  // Nephrology
+  { source:'KDIGO 2012 AKI Guidelines', specialty:'nephrology', license:'CC-BY-NC',
+    url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC4089691/',
+    tags:'AKI, acute kidney injury, creatinine, oliguria, dialysis, prerenal, intrinsic, postrenal' },
+  // Allergy/Immunology (mirrors existing static library)
+  { source:'WAO Anaphylaxis Guidance 2020', specialty:'allergy-immunology', license:'CC-BY',
+    url:'https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/',
+    tags:'anaphylaxis, epinephrine, allergic reaction, severe allergy, biphasic, EpiPen' },
+];
+
+// ─────────────────────────────────────────────────────────────────────
+// In-memory queue for sources added this session (not yet embedded)
+// ─────────────────────────────────────────────────────────────────────
+var queue = [];      // { source, specialty, url, license, tags, text }
+var stopFlag = false;
+var currentSpecialty = 'all';
+
+// ─────────────────────────────────────────────────────────────────────
+// SUPABASE HELPERS
+// ─────────────────────────────────────────────────────────────────────
+async function sbFetch(path, opts) {
+  var res = await fetch(SUPABASE_URL + path, Object.assign({
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Prefer': 'return=minimal'
+    }
+  }, opts));
+  return res;
+}
+
+async function sbGet(path) {
+  var res = await sbFetch(path, { method: 'GET' });
+  if (!res.ok) throw new Error('GET ' + path + ' failed: ' + res.status);
+  return res.json();
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// STATS
+// ─────────────────────────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    // Total chunks
+    var r1 = await sbFetch('/rest/v1/guidelines_embeddings?select=id&limit=1', { method: 'GET',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY,
+                 'Prefer': 'count=exact', 'Range-Unit': 'items', 'Range': '0-0' } });
+    var total = parseInt(r1.headers.get('Content-Range')?.split('/')[1] || '0');
+
+    // Sources view
+    var sources = await sbFetch('/rest/v1/guidelines_sources?select=source,specialty', { method: 'GET',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+    var srcData = sources.ok ? await sources.json() : [];
+    var uniqueSources = srcData.length;
+    var specialties = [...new Set(srcData.map(function(s) { return s.specialty; }))].filter(Boolean).length;
+
+    document.getElementById('statTotal').textContent = total;
+    document.getElementById('statSources').textContent = uniqueSources;
+    document.getElementById('statSpecialties').textContent = specialties;
+    document.getElementById('statPending').textContent = queue.length;
+
+    // Build specialty filter tabs
+    buildFilterTabs([...new Set(srcData.map(function(s) { return s.specialty; }))].filter(Boolean).sort());
+
+    // Load sources table
+    if (srcData.length > 0) {
+      renderSourcesTable(srcData);
+    }
+  } catch(e) {
+    document.getElementById('statTotal').textContent = '?';
+    console.warn('Stats load failed:', e);
+  }
+}
+
+function buildFilterTabs(specialties) {
+  var el = document.getElementById('filterTabs');
+  el.innerHTML = '<button class="filter-tab' + (currentSpecialty === 'all' ? ' active' : '') +
+    '" onclick="filterSpecialty(\'all\', this)">All</button>';
+  specialties.forEach(function(sp) {
+    var active = currentSpecialty === sp ? ' active' : '';
+    el.innerHTML += '<button class="filter-tab' + active + '" onclick="filterSpecialty(\'' +
+      sp + '\', this)">' + sp + '</button>';
+  });
+}
+
+async function renderSourcesTable(srcData) {
+  var filtered = currentSpecialty === 'all' ? srcData : srcData.filter(function(s) { return s.specialty === currentSpecialty; });
+  if (filtered.length === 0) {
+    document.getElementById('sourcesTable').innerHTML = '<div class="empty-state"><div class="icon">📭</div>No sources for this specialty yet.</div>';
+    return;
+  }
+  var html = '<table class="gl-table"><thead><tr><th>Source</th><th>Specialty</th><th>License</th><th>Chunks</th><th></th></tr></thead><tbody>';
+  // Get chunk counts
+  var countsRes = await sbFetch('/rest/v1/guidelines_sources?select=source,specialty,url,license,chunk_count', { method: 'GET',
+    headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY } });
+  var counts = countsRes.ok ? await countsRes.json() : [];
+  var countMap = {};
+  counts.forEach(function(c) { countMap[c.source] = c; });
+
+  filtered.forEach(function(s) {
+    var c = countMap[s.source] || {};
+    var licClass = (c.license||'').includes('CC-BY') ? 'tag-green' : 'tag-gold';
+    html += '<tr>';
+    html += '<td><div style="font-weight:600;color:var(--text)">' + s.source + '</div>';
+    if (c.url) html += '<div style="font-size:11px;margin-top:2px"><a href="' + c.url + '" target="_blank" style="color:var(--blue-lt);text-decoration:none">' + c.url.slice(0, 60) + '…</a></div>';
+    html += '</td>';
+    html += '<td><span class="tag">' + (s.specialty || '—') + '</span></td>';
+    html += '<td><span class="tag ' + licClass + '">' + (c.license || '?') + '</span></td>';
+    html += '<td style="font-family:var(--mono);color:var(--blue-lt)">' + (c.chunk_count || '—') + '</td>';
+    html += '<td><button class="btn btn-danger btn-sm" onclick="deleteSource(\'' + s.source.replace(/'/g, "\\'") + '\')">Delete</button></td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('sourcesTable').innerHTML = html;
+}
+
+function filterSpecialty(sp, btn) {
+  currentSpecialty = sp;
+  document.querySelectorAll('.filter-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  loadStats();
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// CHUNKING
+// ─────────────────────────────────────────────────────────────────────
+function chunkText(text, chunkSize, overlap) {
+  chunkSize = chunkSize || 400;  // approximate tokens (~4 chars/token → 1600 chars)
+  overlap   = overlap   || 50;   // token overlap (~200 chars)
+  var charChunk   = chunkSize * 4;
+  var charOverlap = overlap * 4;
+
+  // Split on paragraph boundaries first for cleaner chunks
+  var paragraphs = text.split(/\n\n+/).filter(function(p) { return p.trim().length > 40; });
+  var chunks = [];
+  var current = '';
+
+  for (var i = 0; i < paragraphs.length; i++) {
+    var para = paragraphs[i].trim();
+    if ((current + ' ' + para).length > charChunk && current.length > 0) {
+      chunks.push(current.trim());
+      // Keep overlap: last N chars of current chunk
+      current = current.slice(-charOverlap) + ' ' + para;
+    } else {
+      current = current ? (current + '\n\n' + para) : para;
+    }
+  }
+  if (current.trim().length > 40) chunks.push(current.trim());
+  return chunks;
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// EMBED + UPSERT
+// ─────────────────────────────────────────────────────────────────────
+async function getEmbedding(text) {
+  var res = await fetch(EMBED_WORKER, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text: text.slice(0, 2000) })
+  });
+  if (!res.ok) throw new Error('Embed worker: ' + res.status);
+  var data = await res.json();
+  if (!Array.isArray(data.embedding)) throw new Error('No embedding');
+  return data.embedding;
+}
+
+async function upsertChunk(source, url, license, specialty, diagTags, chunkText, chunkIndex, embedding) {
+  var row = {
+    source: source,
+    url: url || null,
+    license: license || 'verify',
+    specialty: specialty || null,
+    diagnosis_tags: diagTags,
+    chunk_text: chunkText,
+    chunk_index: chunkIndex,
+    embedding: embedding
+  };
+  var res = await sbFetch('/rest/v1/guidelines_embeddings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_KEY,
+      'Prefer': 'resolution=merge-duplicates,return=minimal'
+    },
+    body: JSON.stringify(row)
+  });
+  if (!res.ok) {
+    var err = await res.text();
+    throw new Error('Upsert failed: ' + res.status + ' — ' + err.slice(0, 200));
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// EMBED ALL
+// ─────────────────────────────────────────────────────────────────────
+async function embedAll() {
+  if (queue.length === 0) {
+    log('warn', 'No sources in queue. Add sources above first.');
+    return;
+  }
+  stopFlag = false;
+  document.getElementById('btnEmbedAll').disabled = true;
+  document.getElementById('btnStop').disabled = false;
+  clearLog();
+
+  var allChunks = [];
+  queue.forEach(function(src) {
+    var chunks = chunkText(src.text);
+    chunks.forEach(function(c, i) {
+      allChunks.push({ src: src, text: c, idx: i, total: chunks.length });
+    });
+  });
+
+  var done = 0;
+  var errors = 0;
+  var total = allChunks.length;
+
+  log('muted', 'Processing ' + queue.length + ' source(s) → ' + total + ' chunks total...');
+
+  for (var i = 0; i < allChunks.length; i++) {
+    if (stopFlag) { log('warn', 'Stopped by user at chunk ' + i + '/' + total); break; }
+    var item = allChunks[i];
+    var pct = Math.round((i / total) * 100);
+    setProgress(pct, 'Chunk ' + (i + 1) + '/' + total + ' — ' + item.src.source.slice(0, 50));
+
+    try {
+      var tags = item.src.tags.split(',').map(function(t) { return t.trim().toLowerCase(); }).filter(Boolean);
+      var emb  = await getEmbedding(item.text);
+      await upsertChunk(item.src.source, item.src.url, item.src.license, item.src.specialty, tags, item.text, item.idx, emb);
+      done++;
+      if (item.idx === 0) log('ok', '✓ ' + item.src.source + ' — ' + item.total + ' chunk(s)');
+    } catch(e) {
+      errors++;
+      log('err', '✗ Chunk ' + i + ': ' + e.message);
+    }
+
+    // Rate limit: 300ms between embed calls
+    await new Promise(function(r) { setTimeout(r, 300); });
+  }
+
+  setProgress(100, 'Done — ' + done + ' chunks embedded, ' + errors + ' errors');
+  log(errors === 0 ? 'ok' : 'warn', '━━ Complete: ' + done + '/' + total + ' chunks stored, ' + errors + ' errors ━━');
+
+  // Clear queue and refresh
+  queue = [];
+  document.getElementById('statPending').textContent = '0';
+  document.getElementById('btnEmbedAll').disabled = false;
+  document.getElementById('btnStop').disabled = true;
+  loadStats();
+}
+
+function stopEmbed() {
+  stopFlag = true;
+  document.getElementById('btnStop').disabled = true;
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// ADD SOURCE TO QUEUE
+// ─────────────────────────────────────────────────────────────────────
+function addSource() {
+  var source    = document.getElementById('fSource').value.trim();
+  var specialty = document.getElementById('fSpecialty').value;
+  var url       = document.getElementById('fUrl').value.trim();
+  var license   = document.getElementById('fLicense').value;
+  var tags      = document.getElementById('fTags').value.trim();
+  var text      = document.getElementById('fText').value.trim();
+  var msg       = document.getElementById('addMsg');
+
+  if (!source || !specialty || !license || !tags || !text) {
+    msg.innerHTML = '<span style="color:var(--red)">✗ All fields are required (paste guideline text in the text area).</span>';
+    return;
+  }
+  if (text.length < 200) {
+    msg.innerHTML = '<span style="color:var(--red)">✗ Text is too short — paste the full guideline content.</span>';
+    return;
+  }
+
+  var chunks = chunkText(text);
+  queue.push({ source, specialty, url, license, tags, text });
+  document.getElementById('statPending').textContent = queue.length;
+  msg.innerHTML = '<span style="color:var(--green)">✓ Added "' + source + '" (' + chunks.length + ' chunks preview). Run Embed All to process.</span>';
+  log('ok', '+ Queued: ' + source + ' → ~' + chunks.length + ' chunks');
+  clearForm();
+}
+
+function clearForm() {
+  ['fSource','fUrl','fTags','fText'].forEach(function(id) { document.getElementById(id).value = ''; });
+  document.getElementById('fSpecialty').value = '';
+  document.getElementById('fLicense').value = '';
+  document.getElementById('addMsg').innerHTML = '';
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// DELETE SOURCE
+// ─────────────────────────────────────────────────────────────────────
+async function deleteSource(source) {
+  if (!confirm('Delete all chunks for "' + source + '"?')) return;
+  try {
+    var res = await sbFetch('/rest/v1/guidelines_embeddings?source=eq.' + encodeURIComponent(source), {
+      method: 'DELETE',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+    if (res.ok) {
+      log('ok', 'Deleted all chunks for: ' + source);
+      loadStats();
+    } else {
+      log('err', 'Delete failed: ' + res.status);
+    }
+  } catch(e) {
+    log('err', 'Delete error: ' + e.message);
+  }
+}
+
+async function clearAll() {
+  if (!confirm('Delete ALL guideline embeddings from the database? This cannot be undone.')) return;
+  try {
+    var res = await sbFetch('/rest/v1/guidelines_embeddings?id=gte.0', {
+      method: 'DELETE',
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY }
+    });
+    log(res.ok ? 'warn' : 'err', res.ok ? 'Cleared all guideline embeddings.' : 'Clear failed: ' + res.status);
+    loadStats();
+  } catch(e) {
+    log('err', 'Clear error: ' + e.message);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// STARTER TABLE
+// ─────────────────────────────────────────────────────────────────────
+function buildStarterTable() {
+  var tb = document.getElementById('starterTable');
+  var html = '';
+  STARTER_SOURCES.forEach(function(s, i) {
+    var licClass = s.license.includes('CC-BY') ? 'tag-green' : 'tag-gold';
+    html += '<tr>';
+    html += '<td><div style="font-weight:600;font-size:13px;color:var(--text)">' + s.source + '</div>' +
+            '<div style="font-size:11px;margin-top:2px"><a href="' + s.url + '" target="_blank" rel="noopener" style="color:var(--blue-lt);text-decoration:none">' + s.url.slice(0,55) + '…</a></div></td>';
+    html += '<td><span class="tag">' + s.specialty + '</span></td>';
+    html += '<td><span class="tag ' + licClass + '">' + s.license + '</span></td>';
+    html += '<td style="font-size:12px;color:var(--muted);max-width:200px">' +
+            s.tags.split(',').slice(0,4).map(function(t) { return '<span class="tag">' + t.trim() + '</span>'; }).join('') + '</td>';
+    html += '<td><button class="btn btn-outline btn-sm" onclick="loadStarter(' + i + ')">Load →</button></td>';
+    html += '</tr>';
+  });
+  tb.innerHTML = html;
+}
+
+function loadStarter(i) {
+  var s = STARTER_SOURCES[i];
+  document.getElementById('fSource').value    = s.source;
+  document.getElementById('fSpecialty').value = s.specialty;
+  document.getElementById('fUrl').value       = s.url;
+  document.getElementById('fLicense').value   = s.license;
+  document.getElementById('fTags').value      = s.tags;
+  document.getElementById('fText').value      = '';
+  document.getElementById('addMsg').innerHTML = '<span style="color:var(--gold)">⚡ Form pre-filled. Paste the guideline text in the field above, then click Add to Queue.</span>';
+  document.getElementById('fText').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  document.getElementById('fText').focus();
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// LOG + PROGRESS HELPERS
+// ─────────────────────────────────────────────────────────────────────
+function log(type, msg) {
+  var el = document.getElementById('embedLog');
+  var span = document.createElement('div');
+  var ts = new Date().toLocaleTimeString();
+  span.className = 'log-' + type;
+  span.textContent = '[' + ts + '] ' + msg;
+  el.appendChild(span);
+  el.scrollTop = el.scrollHeight;
+}
+
+function clearLog() {
+  document.getElementById('embedLog').innerHTML = '';
+}
+
+function setProgress(pct, label) {
+  document.getElementById('embedProgress').style.width = pct + '%';
+  document.getElementById('embedLabel').textContent = label;
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────────────
+loadStats();
+buildStarterTable();
+</script>
+</body>
+</html>

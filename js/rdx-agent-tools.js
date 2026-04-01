@@ -244,7 +244,10 @@ const AgentTools = {
   // not part of the assessment.
   // ═══════════════════════════════════════════════════════════════
 
-  generateDebrief: async function(workerUrl, gaps, state, caseData) {
+  generateDebrief: async function(workerUrl, gaps, state, caseData, ragContext) {
+    // ragContext is optional: { found: bool, contextBlock: string, sources: [] }
+    // Passed in from simulation-engine.html after GuidelinesRAG.retrieve() resolves.
+
     if (gaps.length === 0) {
       return "Excellent work. You identified the key environmental exposure, integrated it with the imaging findings, and arrived at a well-supported differential. No significant reasoning gaps were identified.";
     }
@@ -253,9 +256,35 @@ const AgentTools = {
       return g.title + ': ' + g.description;
     }).join('\n\n');
 
-    var systemPrompt = "You are a medical education coach providing a post-simulation teaching debrief to a " + state.trainingYear + " medical student. The student just completed a clinical reasoning simulation about a case of " + caseData.targetDiagnosis + ". Based on the gaps identified during the simulation, provide a warm, constructive, personalized debrief. Do NOT repeat the case details — the student just finished it. Focus on what they can learn from the specific gaps. Be encouraging but honest. Use 2-3 short paragraphs. End with one concrete thing they should do differently next time.";
+    // Build system prompt — inject guideline citations if RAG returned results
+    var guidelineInstruction = '';
+    if (ragContext && ragContext.found && ragContext.contextBlock) {
+      guidelineInstruction = '\n\nWhere relevant, reference the clinical guidelines provided below. ' +
+        'Cite them inline using the format: (Source, Year). ' +
+        'Only cite a guideline if it directly supports a teaching point — do not force citations. ' +
+        'Do not reproduce guideline text verbatim; paraphrase the key principle.';
+    }
 
-    var userMessage = "The student's identified reasoning gaps were:\n\n" + gapSummary + "\n\nTheir environmental history score was " + state.envHistoryScore + "/2. They completed the case in " + state.turnCount + " turns.";
+    var systemPrompt =
+      'You are a medical education coach providing a post-simulation teaching debrief to a ' +
+      state.trainingYear + ' medical student. The student just completed a clinical reasoning ' +
+      'simulation about a case of ' + caseData.targetDiagnosis + '. Based on the gaps identified ' +
+      'during the simulation, provide a warm, constructive, personalized debrief. ' +
+      'Do NOT repeat the case details — the student just finished it. ' +
+      'Focus on what they can learn from the specific gaps. ' +
+      'Be encouraging but honest. Use 2-3 short paragraphs. ' +
+      'End with one concrete thing they should do differently next time.' +
+      guidelineInstruction;
+
+    // Build user message — append RAG context block at bottom so Claude sees it
+    var userMessage =
+      "The student's identified reasoning gaps were:\n\n" + gapSummary +
+      "\n\nTheir environmental history score was " + state.envHistoryScore +
+      "/2. They completed the case in " + state.turnCount + " turns.";
+
+    if (ragContext && ragContext.found && ragContext.contextBlock) {
+      userMessage += '\n\n' + ragContext.contextBlock;
+    }
 
     try {
       var resp = await fetch(workerUrl, {
@@ -266,7 +295,7 @@ const AgentTools = {
           studySystem: systemPrompt,
           studyModel: 'claude-sonnet-4-20250514',
           messages: [{ role: 'user', content: userMessage }],
-          max_tokens: 800
+          max_tokens: 1000
         })
       });
       var data = await resp.json();
