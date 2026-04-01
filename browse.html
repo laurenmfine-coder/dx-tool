@@ -312,20 +312,27 @@ function toggleSemanticMode() {
   var btn = document.getElementById('semanticToggle');
   var inp = document.getElementById('searchInput');
   if (!btn || !inp) return;
+  var g = document.getElementById('grid');
+  var ct = document.querySelector('.count');
+  var sr = document.getElementById('semanticResults');
   if (_sem) {
     btn.textContent = 'AI Search';
     btn.style.background = '#2874A6';
     btn.style.color = '#fff';
     inp.placeholder = 'Describe a presentation e.g. elderly confused low sodium';
+    inp.value = '';
   } else {
     btn.textContent = 'Keyword';
     btn.style.background = '#f1f5f9';
     btn.style.color = '#475569';
     inp.placeholder = 'Search by chief complaint';
-    var sr = document.getElementById('semanticResults');
     if (sr) { sr.style.display = 'none'; sr.innerHTML = ''; }
+    if (g)  { g.style.display = ''; }
+    if (ct) { ct.style.display = ''; }
+    inp.value = '';
     render();
   }
+}
 }
 
 function handleSearch() {
@@ -340,6 +347,10 @@ function doSemanticSearch(q) {
   var el = document.getElementById('semanticResults');
   if (!el) return;
   el.style.display = 'block';
+  var ct2 = document.querySelector('.count');
+  var g2 = document.getElementById('grid');
+  if (ct2) ct2.style.display = 'none';
+  if (g2) g2.style.display = 'none';
   el.textContent = 'Searching...';
   if (!window.RDXSemanticSearch) { el.textContent = 'Semantic search not loaded.'; return; }
   RDXSemanticSearch.search(q, { limit: 10 }).then(function(results) {
