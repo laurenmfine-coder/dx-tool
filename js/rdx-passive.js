@@ -10,6 +10,16 @@
  * 3. Response Latency — time between messages
  * 4. Empathy & Rapport — communication quality signals
  * 5. Cue Utilization — did the student follow up on patient cues
+ * 6. Emotional Reasoning State (Agent 7) — affect valence + arousal
+ *    passive linguistic affect analysis per turn; tests whether
+ *    emotional state modulates diagnostic accuracy (Study 10)
+ *    Grounding: Croskerry et al. (2010) Adv Health Sci Educ;
+ *    Lerner et al. (2015) Annu Rev Psychol; Pennebaker LIWC (2001)
+ * 7. Cognitive Load Topography (Agent 5) — per-phase load signature
+ *    combines latency z-score + burst ratio to map where in the
+ *    10-phase arc cognitive load peaks and correlates with error
+ *    Grounding: Sweller (1988) Cogn Sci; Paas et al. (2003) Educ
+ *    Psychol; Moulton et al. (2007) Acad Med
  * ═══════════════════════════════════════════════════════════════
  */
 
@@ -23,15 +33,23 @@
       questionTypes: [],
       latency: [],
       empathy: [],
-      cueUtilization: []
+      cueUtilization: [],
+      emotionalState: [],   // Agent 7: per-turn affect records
+      cognitiveLoad: []     // Agent 5: per-turn load signatures
     },
     _lastMessageTime: null,
     _patientCuesDelivered: [],
+    _messageTimestamps: [],   // Agent 5: raw timestamps for burst-ratio computation
 
     clear: function() {
-      this._data = { confidence: [], questionTypes: [], latency: [], empathy: [], cueUtilization: [] };
+      this._data = {
+        confidence: [], questionTypes: [], latency: [],
+        empathy: [], cueUtilization: [],
+        emotionalState: [], cognitiveLoad: []
+      };
       this._lastMessageTime = null;
       this._patientCuesDelivered = [];
+      this._messageTimestamps = [];
     },
 
 
@@ -345,15 +363,371 @@
 
 
     // ═══════════════════════════════════════════════════════════
-    // COMBINED ANALYSIS — one call for all passive streams
+    // 6. EMOTIONAL REASONING STATE — Agent 7
+    // ═══════════════════════════════════════════════════════════
+    // Passive linguistic affect analysis: valence (positive/neutral/
+    // negative) and arousal (calm/activated) per student turn.
+    //
+    // Research question (Study 10): Does elevated negative affect
+    // during history-taking (phase 3) predict anchoring or narrowed
+    // differential breadth in the revised differential (phase 4)?
+    //
+    // Lexicon approach: open-license word lists grounded in LIWC
+    // (Pennebaker et al., 2001) and the NRC Emotion Lexicon
+    // (Mohammad & Turney, 2013, free academic use).
+    //
+    // Valence: -1 (very negative) to +1 (very positive)
+    // Arousal:  0 (calm) to 1 (highly activated)
+    //
+    // LIMITATION: text-based simulation cannot capture tone,
+    // prosody, or non-verbal affect. Linguistic markers are proxies
+    // only and should be interpreted at the session aggregate level,
+    // not per-turn. Single-session data is descriptive only.
+    //
+    // Primary citations:
+    //   Croskerry, P., Abbass, A., & Wu, A. W. (2010). Emotional
+    //     influences in patient safety. Adv Health Sci Educ, 15(2),
+    //     261–276. https://doi.org/10.1007/s10459-009-9193-z
+    //   Lerner, J. S. et al. (2015). Emotion and decision making.
+    //     Annu Rev Psychol, 66, 799–823.
+    //   Pennebaker, J. W., Francis, M. E., & Booth, R. J. (2001).
+    //     Linguistic Inquiry and Word Count (LIWC). Lawrence Erlbaum.
+    // ═══════════════════════════════════════════════════════════
+
+    analyzeEmotionalState: function(text, phase, turn) {
+      if (!text || text.trim().length < 5) return null;
+
+      // ── Valence lexicon ──────────────────────────────────────
+      // Positive valence: confidence, reassurance, relief, curiosity
+      var positiveTerms = [
+        'good', 'great', 'excellent', 'perfect', 'right', 'correct', 'clear',
+        'sure', 'confident', 'reassure', 'reassured', 'helpful', 'better',
+        'improving', 'stable', 'okay', 'fine', 'well', 'comfortable',
+        'interesting', 'curious', 'glad', 'happy', 'relieved', 'positive',
+        'promising', 'hopeful', 'thankfully', 'fortunately', 'encouraging'
+      ];
+      // Negative valence: uncertainty distress, concern, frustration
+      var negativeTerms = [
+        'worried', 'concern', 'concerning', 'anxious', 'anxiety', 'scared',
+        'afraid', 'fear', 'terrible', 'awful', 'bad', 'wrong', 'mistake',
+        'missed', 'failed', 'failure', 'problem', 'dangerous', 'critical',
+        'serious', 'severe', 'unfortunate', 'unfortunately', 'difficult',
+        'struggling', 'confused', 'uncertain', 'unsure', 'frustrated',
+        'frustrated', 'overwhelmed', 'stressed', 'distressed', 'worried about'
+      ];
+
+      // ── Arousal lexicon ──────────────────────────────────────
+      // High arousal: urgency, intensity, exclamation markers
+      var highArousalTerms = [
+        'immediately', 'urgent', 'emergent', 'stat', 'now', 'quickly',
+        'rapidly', 'critical', 'emergency', 'must', 'need to', 'have to',
+        'right away', 'asap', 'instruct', 'alert', 'alarming', 'alarmed',
+        'shock', 'crashing', 'deteriorating', 'decompensating', 'acute',
+        'suddenly', 'sudden', 'rapid', 'quickly', 'panic', 'rush'
+      ];
+      // Low arousal: reflective, methodical, deliberate language
+      var lowArousalTerms = [
+        'consider', 'think about', 'reflect', 'review', 'assess', 'evaluate',
+        'systematically', 'carefully', 'methodically', 'gradually', 'slowly',
+        'step by step', 'let me think', 'let\'s think', 'in my assessment',
+        'on reflection', 'upon further', 'taking a moment', 'pause'
+      ];
+
+      var t = text.toLowerCase();
+
+      var posCount  = positiveTerms.filter(function(w) { return t.indexOf(w) !== -1; }).length;
+      var negCount  = negativeTerms.filter(function(w) { return t.indexOf(w) !== -1; }).length;
+      var highCount = highArousalTerms.filter(function(w) { return t.indexOf(w) !== -1; }).length;
+      var lowCount  = lowArousalTerms.filter(function(w) { return t.indexOf(w) !== -1; }).length;
+
+      // Exclamation marks add arousal signal
+      var exclamations = (text.match(/!/g) || []).length;
+      highCount += Math.min(exclamations, 2);
+
+      // Valence score: -1 to +1
+      var valenceTotal = posCount + negCount;
+      var valence = valenceTotal === 0 ? 0 :
+        Math.round(((posCount - negCount) / valenceTotal) * 100) / 100;
+
+      // Arousal score: 0 to 1
+      var arousalTotal = highCount + lowCount;
+      var arousal = arousalTotal === 0 ? 0.3 : // default mid-calm
+        Math.round((highCount / arousalTotal) * 100) / 100;
+
+      // Categorical labels
+      var valenceLabel = valence >  0.2 ? 'positive' :
+                         valence < -0.2 ? 'negative' : 'neutral';
+      var arousalLabel = arousal > 0.6 ? 'activated' :
+                         arousal < 0.3 ? 'calm' : 'moderate';
+
+      var record = {
+        turn: turn,
+        phase: phase,
+        valence: valence,
+        arousal: arousal,
+        valenceLabel: valenceLabel,
+        arousalLabel: arousalLabel,
+        posCount: posCount,
+        negCount: negCount,
+        highArousalCount: highCount,
+        timestamp: new Date().toISOString()
+      };
+
+      this._data.emotionalState.push(record);
+      return record;
+    },
+
+    getEmotionalStateSummary: function() {
+      var ers = this._data.emotionalState;
+      if (ers.length === 0) return null;
+
+      // Per-phase averages
+      var byPhase = {};
+      ers.forEach(function(r) {
+        if (!byPhase[r.phase]) byPhase[r.phase] = { valence: [], arousal: [] };
+        byPhase[r.phase].valence.push(r.valence);
+        byPhase[r.phase].arousal.push(r.arousal);
+      });
+      var phaseAverages = {};
+      Object.keys(byPhase).forEach(function(p) {
+        var vArr = byPhase[p].valence;
+        var aArr = byPhase[p].arousal;
+        phaseAverages[p] = {
+          avgValence: Math.round(vArr.reduce(function(a,v){return a+v;},0)/vArr.length*100)/100,
+          avgArousal: Math.round(aArr.reduce(function(a,v){return a+v;},0)/aArr.length*100)/100
+        };
+      });
+
+      // Overall
+      var avgValence = Math.round(ers.reduce(function(a,r){return a+r.valence;},0)/ers.length*100)/100;
+      var avgArousal = Math.round(ers.reduce(function(a,r){return a+r.arousal;},0)/ers.length*100)/100;
+
+      // Trajectory: compare first-half vs second-half valence
+      // Declining valence = increasing distress as case progresses
+      var mid   = Math.floor(ers.length / 2);
+      var first = ers.slice(0, mid);
+      var last  = ers.slice(mid);
+      var avgFirst = first.length ? first.reduce(function(a,r){return a+r.valence;},0)/first.length : 0;
+      var avgLast  = last.length  ? last.reduce(function(a,r){return a+r.valence;},0)/last.length   : 0;
+      var trajectory = 'stable';
+      if (avgLast < avgFirst - 0.15) trajectory = 'declining';  // increasing distress
+      if (avgLast > avgFirst + 0.15) trajectory = 'improving';
+
+      // Phase 3 (history-taking) affect — primary predictor for Study 10
+      var phase3 = phaseAverages['3'] || null;
+
+      // Flag: negative high-arousal during history (the theorized anchoring trigger)
+      var negHighArousalInPhase3 = ers.filter(function(r) {
+        return r.phase === 3 && r.valenceLabel === 'negative' && r.arousalLabel === 'activated';
+      }).length;
+
+      return {
+        avgValence: avgValence,
+        avgArousal: avgArousal,
+        trajectory: trajectory,
+        phaseAverages: phaseAverages,
+        phase3Affect: phase3,
+        negHighArousalPhase3Count: negHighArousalInPhase3,
+        // Research flag for Study 10 analysis:
+        // true when student shows negative activated affect during history
+        // which the hypothesis predicts correlates with subsequent anchoring
+        ersRiskFlag: negHighArousalInPhase3 >= 2,
+        totalMeasurements: ers.length
+      };
+    },
+
+
+    // ═══════════════════════════════════════════════════════════
+    // 7. COGNITIVE LOAD TOPOGRAPHY — Agent 5
+    // ═══════════════════════════════════════════════════════════
+    // Computes a per-turn cognitive load signature from two signals:
+    //
+    //   (a) Latency z-score: within-student normalized response time.
+    //       High z-score = unusually slow for this student = higher load.
+    //
+    //   (b) Burst ratio: proportion of inter-character gaps < 500ms
+    //       in a message. Low burst ratio (many pauses) = planning
+    //       difficulty = higher load. Approximated via message length
+    //       relative to latency (chars/sec proxy).
+    //
+    // Research question (Study 8): which phase transition carries the
+    // highest and most variable cognitive load, and does that peak
+    // correlate with diagnostic error at that phase?
+    //
+    // LIMITATION: latency in text-based simulation includes typing time
+    // and is confounded by typing speed. The z-score normalization
+    // partially controls for individual differences in typing speed
+    // but cannot fully decouple load from motor speed. Results should
+    // be interpreted at the group level across many sessions.
+    // Absolute thresholds are pragmatic, not clinically validated.
+    //
+    // Primary citations:
+    //   Sweller, J. (1988). Cognitive load during problem solving.
+    //     Cogn Sci, 12(2), 257–285.
+    //   Paas, F., Renkl, A., & Sweller, J. (2003). Cognitive load
+    //     theory and instructional design. Educ Psychol, 38(1), 1–4.
+    //   Moulton, C. A. et al. (2007). Slowing down when you should.
+    //     Acad Med, 82(S10), S109–S116.
+    //   Paas, F., & van Merriënboer, J. (1994). Variability of worked
+    //     examples and transfer of geometrical problem-solving skills.
+    //     J Educ Psychol, 86(1), 122–133.
+    // ═══════════════════════════════════════════════════════════
+
+    recordCognitiveLoad: function(text, phase, turn, latencyMs) {
+      if (!latencyMs || latencyMs <= 0) return null;
+
+      // Track this timestamp for burst-ratio calculation
+      var now = Date.now();
+      this._messageTimestamps.push(now);
+
+      // ── Burst ratio proxy ────────────────────────────────────
+      // True keystroke-level burst ratio requires client-side key
+      // event tracking (future work). Here we use chars-per-second
+      // as a proxy: fast typing (high cps) relative to message
+      // length suggests less planning difficulty.
+      //
+      // Low cps relative to message length → more pauses → higher load
+      var charCount   = (text || '').length;
+      var latencySec  = latencyMs / 1000;
+      var charsPerSec = latencySec > 0 ? charCount / latencySec : 0;
+
+      // Normalize: >15 cps = fluent, <5 cps = many pauses
+      // burstRatio: 0 (very slow/paused) to 1 (very fast/fluent)
+      var burstRatio = Math.min(Math.max(charsPerSec / 15, 0), 1);
+      burstRatio = Math.round(burstRatio * 100) / 100;
+
+      // ── Z-score: computed at summary time once we have all data ─
+      // Store raw latency now; z-score computed in getSummary()
+      var record = {
+        turn: turn,
+        phase: phase,
+        latencyMs: latencyMs,
+        latencySec: Math.round(latencySec * 10) / 10,
+        charCount: charCount,
+        charsPerSec: Math.round(charsPerSec * 10) / 10,
+        burstRatio: burstRatio,
+        // Composite raw load: higher = more load
+        // Will be z-scored in getSummary() relative to session mean
+        rawLoadSignal: latencyMs * (1 - burstRatio),
+        timestamp: new Date().toISOString()
+      };
+
+      this._data.cognitiveLoad.push(record);
+      return record;
+    },
+
+    getCognitiveLoadSummary: function() {
+      var cl = this._data.cognitiveLoad;
+      if (cl.length < 2) return null;
+
+      // ── Compute z-scores for rawLoadSignal ───────────────────
+      var signals = cl.map(function(r) { return r.rawLoadSignal; });
+      var mean = signals.reduce(function(a, v) { return a + v; }, 0) / signals.length;
+      var variance = signals.reduce(function(a, v) { return a + Math.pow(v - mean, 2); }, 0) / signals.length;
+      var sd = Math.sqrt(variance) || 1; // avoid div-by-zero
+
+      var records = cl.map(function(r) {
+        return {
+          turn:          r.turn,
+          phase:         r.phase,
+          latencyMs:     r.latencyMs,
+          burstRatio:    r.burstRatio,
+          loadZ:         Math.round(((r.rawLoadSignal - mean) / sd) * 100) / 100,
+          timestamp:     r.timestamp
+        };
+      });
+
+      // ── Per-phase load signature ──────────────────────────────
+      var byPhase = {};
+      records.forEach(function(r) {
+        if (!byPhase[r.phase]) byPhase[r.phase] = { loadZ: [], latencyMs: [], burstRatio: [] };
+        byPhase[r.phase].loadZ.push(r.loadZ);
+        byPhase[r.phase].latencyMs.push(r.latencyMs);
+        byPhase[r.phase].burstRatio.push(r.burstRatio);
+      });
+
+      var phaseSignatures = {};
+      Object.keys(byPhase).forEach(function(p) {
+        var pd = byPhase[p];
+        var avgZ = pd.loadZ.reduce(function(a,v){return a+v;},0) / pd.loadZ.length;
+        var avgLat = pd.latencyMs.reduce(function(a,v){return a+v;},0) / pd.latencyMs.length;
+        var avgBurst = pd.burstRatio.reduce(function(a,v){return a+v;},0) / pd.burstRatio.length;
+
+        // Load category for this phase
+        var loadCategory = avgZ > 1.0  ? 'high' :
+                           avgZ > 0.3  ? 'elevated' :
+                           avgZ < -0.5 ? 'low' : 'normal';
+
+        phaseSignatures[p] = {
+          avgLoadZ:    Math.round(avgZ * 100) / 100,
+          avgLatencyMs: Math.round(avgLat),
+          avgBurstRatio: Math.round(avgBurst * 100) / 100,
+          loadCategory: loadCategory,
+          nTurns: pd.loadZ.length
+        };
+      });
+
+      // ── Peak load phase ───────────────────────────────────────
+      // The phase with the highest average loadZ — the primary
+      // finding for Study 8 (cognitive load topography)
+      var peakPhase = Object.keys(phaseSignatures).reduce(function(best, p) {
+        return phaseSignatures[p].avgLoadZ > (phaseSignatures[best] ? phaseSignatures[best].avgLoadZ : -Infinity)
+          ? p : best;
+      }, Object.keys(phaseSignatures)[0]);
+
+      // ── High-load turns ───────────────────────────────────────
+      // Turns with loadZ > 1.5 (unusually high for this student)
+      var highLoadTurns = records.filter(function(r) { return r.loadZ > 1.5; })
+        .map(function(r) { return { turn: r.turn, phase: r.phase, loadZ: r.loadZ }; });
+
+      // ── Trajectory ───────────────────────────────────────────
+      var mid = Math.floor(records.length / 2);
+      var firstHalfAvg = records.slice(0, mid).reduce(function(a,r){return a+r.loadZ;},0) / (mid || 1);
+      var secondHalfAvg = records.slice(mid).reduce(function(a,r){return a+r.loadZ;},0) / (records.length - mid || 1);
+      var trajectory = 'stable';
+      if (secondHalfAvg > firstHalfAvg + 0.5) trajectory = 'escalating';
+      if (secondHalfAvg < firstHalfAvg - 0.5) trajectory = 'decreasing';
+
+      return {
+        phaseSignatures: phaseSignatures,
+        peakLoadPhase: peakPhase,
+        peakLoadLabel: {
+          '1':'Initial Differential', '2':'Justification', '3':'History-Taking',
+          '4':'Revised Differential', '5':'Physical Exam', '6':'Labs & Imaging',
+          '7':'Report Comparison',   '8':'Reflection',    '9':'Management'
+        }[peakPhase] || ('Phase ' + peakPhase),
+        highLoadTurns: highLoadTurns,
+        trajectory: trajectory,
+        sessionMeanLatencyMs: Math.round(mean),
+        sessionSdLatencyMs: Math.round(sd),
+        totalMeasurements: cl.length
+      };
+    },
+
+
     // ═══════════════════════════════════════════════════════════
 
     analyzeStudentMessage: function(text, phase, turn) {
+      // Capture latency before recordLatency() resets _lastMessageTime
+      var latencyMs = null;
+      if (this._lastMessageTime) {
+        latencyMs = Date.now() - this._lastMessageTime;
+      }
+
+      // Existing collectors (recordLatency sets _lastMessageTime internally)
       this.recordLatency(phase, turn);
       this.analyzeConfidence(text, phase, turn);
       this.classifyQuestion(text, phase, turn);
       this.analyzeEmpathy(text, phase, turn);
       this.checkCueFollowUp(text, turn);
+
+      // Agent 7: Emotional Reasoning State — passive affect analysis
+      this.analyzeEmotionalState(text, phase, turn);
+
+      // Agent 5: Cognitive Load Topography — latency + burst ratio
+      if (latencyMs !== null && latencyMs > 0) {
+        this.recordCognitiveLoad(text, phase, turn, latencyMs);
+      }
     },
 
     analyzePatientMessage: function(text, phase, turn) {
@@ -371,11 +745,13 @@
 
     getFullSummary: function() {
       return {
-        implicitConfidence: this.getConfidenceSummary(),
-        questionTypes: this.getQuestionTypeSummary(),
-        responseLatency: this.getLatencySummary(),
-        empathyAndRapport: this.getEmpathySummary(),
-        cueUtilization: this.getCueUtilizationSummary()
+        implicitConfidence:  this.getConfidenceSummary(),
+        questionTypes:       this.getQuestionTypeSummary(),
+        responseLatency:     this.getLatencySummary(),
+        empathyAndRapport:   this.getEmpathySummary(),
+        cueUtilization:      this.getCueUtilizationSummary(),
+        emotionalState:      this.getEmotionalStateSummary(),    // Agent 7
+        cognitiveLoad:       this.getCognitiveLoadSummary()      // Agent 5
       };
     }
   };
