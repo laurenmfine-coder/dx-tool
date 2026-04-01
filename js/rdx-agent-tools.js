@@ -269,6 +269,13 @@ const AgentTools = {
 
     // Build system prompt — inject guideline citations if RAG returned results
     var guidelineInstruction = '';
+
+    // Inject longitudinal cognitive profile if available
+    var profileContext = '';
+    if (window.RDXFingerprint && state && state.cognitiveProfile) {
+      var pc = RDXFingerprint.buildProfileContext(state.cognitiveProfile, state.sessionHistory || []);
+      if (pc) profileContext = '\n\n' + pc;
+    }
     if (ragContext && ragContext.found && ragContext.contextBlock) {
       guidelineInstruction = '\n\nWhere relevant, reference the clinical guidelines provided below. ' +
         'Cite them inline using the format: (Source, Year). ' +
@@ -284,7 +291,10 @@ const AgentTools = {
       'Do NOT repeat the case details — the student just finished it. ' +
       'If gaps are identified, focus on those specifically. If no gaps were flagged, ' +
       'comment on what the student did well and one area to sharpen. ' +
-      'Be encouraging but specific. End with one concrete actionable takeaway.' +
+      'Be encouraging but specific. End with one concrete actionable takeaway. ' +
+      'If a student cognitive profile is provided, reference their longitudinal patterns — ' +
+      'e.g. if this is a recurring gap across sessions, name that explicitly. ' +
+      'If this is their first session, focus only on this case.' +
       guidelineInstruction;
 
     // Build user message — append RAG context block at bottom so Claude sees it
@@ -295,6 +305,10 @@ const AgentTools = {
 
     if (ragContext && ragContext.found && ragContext.contextBlock) {
       userMessage += '\n\n' + ragContext.contextBlock;
+    }
+    // Append cognitive profile for personalised longitudinal debrief
+    if (profileContext) {
+      userMessage += profileContext;
     }
 
     try {

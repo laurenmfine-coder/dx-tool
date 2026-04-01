@@ -78,6 +78,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 </style>
 <script src="/case-explainer-agent.js"></script>
 <script src="/rdx-guidelines-rag.js"></script>
+<script src="/rdx-fingerprint.js"></script>
 <script src="/rdx-voice-patient.js"></script>
 <script src="/rdx-realtime.js"></script>
 <script src="/rdx-ecg.js"></script>
@@ -286,6 +287,19 @@ function startStudy() {
         }
       }
     }).catch(function(e) { console.log('Prior history lookup skipped:', e.message); });
+  }
+
+  // ── FINGERPRINT: Load longitudinal cognitive profile ──
+  if (window.RDXFingerprint) {
+    RDXFingerprint.loadProfile(name).then(function(profile) {
+      if (profile) {
+        state.cognitiveProfile = profile;
+        RDXFingerprint.getSessionHistory(name, 5).then(function(history) {
+          state.sessionHistory = history;
+          if(RDX_DEBUG) console.log('[Fingerprint] Profile loaded:', profile.pattern_tags);
+        });
+      }
+    }).catch(function(e) { console.warn('[Fingerprint] Profile load skipped:', e.message); });
   }
 
   // Deliver Phase 1 opening
@@ -1127,6 +1141,14 @@ function enterPhase(phase) {
     }
 
     exportStudyData();
+
+    // ── FINGERPRINT: Store reasoning trace for longitudinal profiling ──
+    if (window.RDXFingerprint && window.RdxAdvanced && window.RdxAdvanced.ReasoningTrace) {
+      var reasoningGraph = window.RdxAdvanced.ReasoningTrace.extractFromState(state, caseData);
+      RDXFingerprint.store(state, caseData, reasoningGraph, state._confidenceScore || null);
+    } else if (window.RDXFingerprint) {
+      RDXFingerprint.store(state, caseData, null, state._confidenceScore || null);
+    }
 
     // ── AGENT TOOLS: Post-simulation processing ──
     if (AgentTools) {
