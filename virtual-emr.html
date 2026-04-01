@@ -1048,6 +1048,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <meta name="twitter:description" content="Realistic EMR simulation with 256 patient cases.">
 <script src="js/rdx-difficulty.js"></script>
 <script src="/rdx-email-triggers.js"></script>
+<script src="js/rdx-semantic-drift.js"></script>
 </head>
 <body>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
@@ -3637,6 +3638,14 @@ function submitDoc(){
   if(window.OrderValidator){sub.orderValidationData=OrderValidator.getAnalytics(S.currentUser?S.currentUser.username:'',CASE_ID);sub.orderCRDAVector=OrderValidator.getCRDAVector(S.currentUser?S.currentUser.username:'',CASE_ID)}
   // Bundle CaseFrame illness script analysis with submission
   if(window.CaseFrame&&CASE_ID){var _cfExtras={labOrders:S.labOrders||[],imgOrders:S.imgOrders||[],referrals:S.referralOrders||[],problems:S.studentProblems||[]};var _cfResult=CaseFrame.score(CASE_ID,S.noteFields,_cfExtras);sub.caseFrameResult=_cfResult;sub.caseFrameVector=CaseFrame.getCaseFrameVector(_cfResult);CaseFrame.saveResult(S.currentUser?S.currentUser.username:'',CASE_ID,_cfResult)}
+  // Agent 4: Semantic Drift Monitor — embed note and compare to gold standard
+  if(window.SemanticDrift&&CASE_ID){
+    var _sdCaseData=(window.CRT_DATA&&window.CRT_DATA[CASE_ID])||null;
+    window.SemanticDrift.captureNote(
+      S.currentUser?S.currentUser.username:'anon',
+      CASE_ID, S.noteFields, _sdCaseData
+    ).catch(function(e){console.warn('[SemanticDrift]',e.message);});
+  }
   S.submissions=[...S.submissions.filter(s=>s.week!==S.encounterWeek),sub];
   S.submitted=true;
   dbSet("subs-"+S.currentUser.username,S.submissions);
@@ -5448,6 +5457,7 @@ submitDoc = function(){
   if(window.OrderValidator){sub.orderValidationData=OrderValidator.getAnalytics(S.currentUser?S.currentUser.username:'',CASE_ID);sub.orderCRDAVector=OrderValidator.getCRDAVector(S.currentUser?S.currentUser.username:'',CASE_ID)}
   // Bundle CaseFrame illness script analysis with submission
   if(window.CaseFrame&&CASE_ID){var _cfExtras2={labOrders:S.labOrders||[],imgOrders:S.imgOrders||[],referrals:S.referralOrders||[],problems:S.studentProblems||[]};var _cfResult2=CaseFrame.score(CASE_ID,S.noteFields,_cfExtras2);sub.caseFrameResult=_cfResult2;sub.caseFrameVector=CaseFrame.getCaseFrameVector(_cfResult2);CaseFrame.saveResult(S.currentUser?S.currentUser.username:'',CASE_ID,_cfResult2)}
+  if(window.SemanticDrift&&CASE_ID){var _sdCaseData2=(window.CRT_DATA&&window.CRT_DATA[CASE_ID])||null;window.SemanticDrift.captureNote(S.currentUser?S.currentUser.username:'anon',CASE_ID,S.noteFields,_sdCaseData2).catch(function(e){console.warn('[SemanticDrift]',e.message);});}
   S.submissions=[...S.submissions.filter(s=>s.week!==S.encounterWeek),sub];
   S.submitted=true;
   dbSet("subs-"+S.currentUser.username,S.submissions);
