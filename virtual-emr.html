@@ -2022,7 +2022,7 @@ function loadCaseData(cb) {
     if (cb) cb();
   };
   s.onerror = function() {
-    document.getElementById('app').innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:48px;margin-bottom:16px"></div><h2 style="font-size:20px;font-weight:700;color:#1e293b;margin-bottom:8px">Case Not Available</h2><p style="color:#64748b;font-size:14px;line-height:1.6;margin-bottom:20px">The case data for <strong>' + CASE_ID + '</strong> could not be loaded. This case may still be in development.</p><a href="virtual-emr.html' + (S.clinicalSetting ? '?setting=' + S.clinicalSetting : '') + '" style="display:inline-block;padding:10px 20px;background:#2874A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px">← Back to Case Library</a></div>';
+    document.getElementById('app').innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:48px;margin-bottom:16px"></div><h2 style="font-size:20px;font-weight:700;color:#1e293b;margin-bottom:8px">Case Not Available</h2><p style="color:#64748b;font-size:14px;line-height:1.6;margin-bottom:20px">The case data for <strong>' + CASE_ID + '</strong> could not be loaded. This case may still be in development.</p><a href="virtual-emr.html' + (_S && _S.clinicalSetting ? '?setting=' + _S.clinicalSetting : '') + '" style="display:inline-block;padding:10px 20px;background:#2874A6;color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:14px">← Back to Case Library</a></div>';
   };
   document.head.appendChild(s);
 }
@@ -5478,6 +5478,7 @@ submitDoc = function(){
 (function(){
   try {
     var _S = (typeof S !== 'undefined') ? S : (window.S || {});
+    console.log('[RDX routing] CASE_ID=', window.CASE_ID, 'setting=', _S.clinicalSetting);
     if (window.EMRShell && (window.CASE_ID || _S.clinicalSetting)) { EMRShell.inject(); }
     if (!window.CASE_ID && !_S.clinicalSetting) {
       // No case selected — send to browse.html Practice tab
@@ -5489,7 +5490,7 @@ submitDoc = function(){
       console.error('bootstrapApp error on case load:', err);
       var app = document.getElementById('app');
       if (app && !app.innerHTML.trim()) {
-        app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Error Loading Case</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (err.message || 'An unexpected error occurred.') + '</p><div style="display:flex;gap:10px;justify-content:center"><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">Reload</a><a href="virtual-emr.html' + (S.clinicalSetting ? '?setting=' + S.clinicalSetting : '') + '" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div>';
+        app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Error Loading Case</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (err.message || 'An unexpected error occurred.') + '</p><div style="display:flex;gap:10px;justify-content:center"><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">Reload</a><a href="virtual-emr.html' + (_S && _S.clinicalSetting ? '?setting=' + _S.clinicalSetting : '') + '" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div>';
       }
     }); }); }
   } catch(e) {
