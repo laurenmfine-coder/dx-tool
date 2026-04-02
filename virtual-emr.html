@@ -1483,10 +1483,11 @@ function requireAuth(){
     return{email:demoStudent.username,name:demoStudent.displayName||demoStudent.username,tier:demoStudent.tier||'student',supabaseId:demoStudent.username,_local:true};
   }
 
-  // 6. No session -- redirect to auth
-  sessionStorage.setItem("reasondx-redirect",location.href);
-  location.replace("auth/login.html");
-  return null;
+  // 6. No session -- create guest session so EMR works without login
+  // (Auth redirect disabled; login is optional for case practice)
+  var guestFallback={email:'guest@reasondx.local',name:'Guest',tier:'free',supabaseId:'guest@reasondx.local',_guest:true};
+  try{localStorage.setItem('emr-current-user',JSON.stringify({username:'guest@reasondx.local',displayName:'Guest',role:'student',tier:'free'}));}catch(e){}
+  return guestFallback;
 }
 
 // Assignment helpers
@@ -5474,47 +5475,48 @@ submitDoc = function(){
 <script src="js/emr-landing.js"></script>
 <script src="js/emr-shell.js"></script>
 <script>
-// === ROUTING -- polls until loadCaseData is defined, then runs ===
+// === ROUTING: poll until loadCaseData is ready, then route ===
 (function() {
-  var _attempts = 0;
-  function _tryRoute() {
-    _attempts++;
-    if (typeof loadCaseData === 'undefined' || typeof bootstrapApp === 'undefined') {
-      if (_attempts < 100) { setTimeout(_tryRoute, 30); return; } // retry up to 3s
-      console.error('[RDX routing] loadCaseData not available after 3s');
+  var _att = 0;
+  function _route() {
+    _att++;
+    if (typeof loadCaseData !== 'function' || typeof bootstrapApp !== 'function') {
+      if (_att < 100) { setTimeout(_route, 30); return; }
+      console.error('[RDX] loadCaseData unavailable after 3s');
       return;
     }
-  (function(){
-  try {
-    var _S = (typeof S !== 'undefined') ? S : (window.S || {});
-    // Read CASE_ID directly from URL as fallback
-    var _urlP = new URLSearchParams(window.location.search);
-    var _caseId = window.CASE_ID || _urlP.get('case') || _urlP.get('cx') || '';
-    console.log('[RDX routing] CASE_ID=', _caseId, 'attempts=', _attempts);
-    if (window.EMRShell && (_caseId || _S.clinicalSetting)) { EMRShell.inject(); }
-    if (!_caseId && !_S.clinicalSetting) {
-      window.location.replace('browse.html?mode=practice');
-      return;
-    }
-    else if (!_caseId && _S.clinicalSetting) { showCasePicker(); }
-    else { if (!window.CASE_ID && _caseId) window.CASE_ID = _caseId; loadCaseData(function() { bootstrapApp().catch(function(err) {
-      console.error('bootstrapApp error on case load:', err);
-      var app = document.getElementById('app');
-      if (app && !app.innerHTML.trim()) {
-        app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Error Loading Case</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (err.message || 'An unexpected error occurred.') + '</p><div style="display:flex;gap:10px;justify-content:center"><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;border:1px solid #2874A6;color:#2874A6;font-weight:600;font-size:13px;text-decoration:none">Reload</a><a href="virtual-emr.html' + (_S && _S.clinicalSetting ? '?setting=' + _S.clinicalSetting : '') + '" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Patient List</a></div></div>';
+    try {
+      var _S = (typeof S !== 'undefined') ? S : {};
+      var _p = new URLSearchParams(window.location.search);
+      var _id = window.CASE_ID || _p.get('case') || _p.get('cx') || '';
+      console.log('[RDX routing] id=', _id, 'setting=', _S.clinicalSetting, 'att=', _att);
+      if (window.EMRShell && (_id || _S.clinicalSetting)) { EMRShell.inject(); }
+      if (!_id && !_S.clinicalSetting) {
+        window.location.replace('browse.html?mode=practice');
+      } else if (!_id && _S.clinicalSetting) {
+        showCasePicker();
+      } else {
+        if (!window.CASE_ID) window.CASE_ID = _id;
+        loadCaseData(function() {
+          bootstrapApp().catch(function(err) {
+            console.error('bootstrapApp error:', err);
+            var app = document.getElementById('app');
+            if (app && !app.innerHTML.trim()) {
+              app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px"><h2 style="color:#1e293b">Error Loading Case</h2><p style="color:#64748b">' + (err.message||'Unexpected error') + '</p><a href="virtual-emr.html" style="background:#2874A6;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none">Patient List</a></div>';
+            }
+          });
+        });
       }
-    }); }); }
-  } catch(e) {
-    console.error('Routing error:', e);
-    var app = document.getElementById('app');
-    if (app) app.innerHTML = '<div style="padding:40px;text-align:center"><h2>Error</h2><p>' + e.message + '</p></div>';
+    } catch(e) {
+      console.error('[RDX routing error]', e);
+      var app = document.getElementById('app');
+      if (app) app.innerHTML = '<div style="padding:40px;text-align:center"><h2>Error</h2><p>' + e.message + '</p></div>';
+    }
   }
-})();
-  } // end _tryRoute body
-  } // end _tryRoute function
-  _tryRoute();
+  _route();
 })();
 </script>
+
 <script src="js/mission-control.js"></script>
 <script src="emr-data/crt-data.js"></script>
 <script src="js/rdx-order-catalog.js"></script>
