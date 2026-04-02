@@ -1,50 +1,50 @@
-/* CASE: chf-v2 — Continuity from chf-v1 — HFpEF + Hypertensive Emergency */
+/* CASE: chf-v2 — William Turner — CHF: Cardiorenal Syndrome + Diuretic Resistance */
 window.CASES = window.CASES || {};
 window.CASES['chf-v2'] = {
-  id: 'chf-v2', name: 'Dorothy Williams', age: '74F', dob: '1952-06-19',
-  mrn: 'RDX-2026-77412', setting: 'CCU / Medicine',
-  chiefComplaint: 'Known HFpEF — admitted for HTN emergency + flash pulmonary edema, now improving but diuresis decision needed',
-  diagnosis: 'HFpEF with Hypertensive Pulmonary Edema — Decongestion vs Overdiuresis Tension',
+  id: 'chf-v2', name: 'William Turner', age: '68M', dob: '1958-06-15',
+  mrn: 'MRN-763589', setting: 'Cardiology Floor — Day 3',
+  chiefComplaint: 'Day 3 heart failure admission — diuresis failing, Cr rising, BNP not improving',
+  diagnosis: 'Decompensated HFrEF with Cardiorenal Syndrome Type 1 — Diuretic Resistance',
   category: 'cardiovascular', acuity: 2,
-  continuityNote: 'chf-v1: Dorothy Williams, 74F with HFpEF (EF 60%), HTN, afib, CKD stage 3. Presented with acute dyspnea, BP 198/116, bilateral pulmonary edema on CXR. Treated with IV furosemide 80mg and nitroglycerin drip. Now 24h later: BP 142/88, SpO2 94% RA, weight down 3.2 kg from admission. Cr 1.8 (up from baseline 1.4).',
+  continuityNote: 'Prior encounter: chf-v1 — William Turner, 68M with HFrEF (EF 25%), HTN, CKD stage 3 (Cr baseline 1.8). Admitted for acute decompensation with orthopnea, 3+ pitting edema, BNP 4,200. Started IV furosemide 80mg BID (2× his home dose of 40mg daily). Day 2: minimal urine output, Cr rising.',
   presentation: {
-    hpi: 'Day 2 admission. Flash pulmonary edema from hypertensive HFpEF improving. BP now controlled. However Cr rose from 1.4 to 1.8 with aggressive diuresis. Still has 2+ pitting edema bilaterally, JVD, 8 kg above dry weight. The question: continue aggressive diuresis (risk worsening Cr) or hold (risk re-accumulation)?',
-    pmh: ['HFpEF (EF 60%)', 'HTN', 'Afib on apixaban', 'CKD stage 3 (baseline Cr 1.4)'],
-    meds: ['Furosemide 80mg IV (admit dose)', 'Metoprolol succinate', 'Apixaban', 'Amlodipine']
+    hpi: 'Day 3 of heart failure hospitalization. Despite IV furosemide 80mg BID for 48h, urine output has been only 800mL/24h (target ≥3L/day for adequate decongestion). Weight unchanged at +18 lbs from dry weight. BNP still 3,800. Cr has risen from 1.8 to 2.6 — cardiorenal syndrome. His legs are still massively edematous. He is clearly not responding to current furosemide regimen.',
+    pmh: ['HFrEF — EF 25%', 'HTN', 'CKD stage 3 (baseline Cr 1.8)', 'T2DM', 'Prior ICD placement (EF <35%)'],
+    meds: ['Furosemide 80mg IV BID (failing)', 'Carvedilol 6.25mg BID', 'Sacubitril-valsartan 24/26mg BID (home — held for hypotension)', 'Spironolactone 25mg daily', 'Empagliflozin 10mg (held — AKI)']
   },
-  vitals: { BP: '142/88', HR: '72 (rate-controlled afib)', RR: '18', Temp: '37.0°C', SpO2: '94% RA' },
+  vitals: { BP: '88/58', HR: '94', RR: '20', Temp: '37.0°C', SpO2: '92% RA → 96% 2L NC' },
   labs: {
-    'BMP (day 2)': 'Cr 1.8 (H — up from baseline 1.4, up from admission 1.6) | BUN 44 | Na 138 | K 3.6 (L — diuresis)',
-    'BNP': '820 pg/mL (H, down from 2,200 on admission — improving but still elevated)',
-    'Daily weights': 'Admission: 88 kg | Day 1: 86.2 kg (−1.8 kg) | Day 2: 84.8 kg (−3.2 kg total) | Dry weight estimate: 80 kg',
-    'CXR (day 2)': 'Improving pulmonary edema. Still some vascular congestion. No effusions.',
-    'Urine Na (spot)': '62 mEq/L (H — suggests diuretic response is adequate, not prerenal)'
+    'BMP': 'Na 132 (dilutional), K 5.1, Cr 2.6 (H — up from 1.8 baseline), BUN 58, Bicarb 19',
+    'BNP': '3,800 pg/mL (H — not improving despite 48h IV diuresis)',
+    'CBC': 'Hgb 10.8 (anemia of CKD/chronic disease)',
+    'Point-of-care echo': 'EF 20-25% (reduced from prior 30% — worsening). IVC plethoric (>2.1cm, <50% collapse with inspiration) = high RA pressure, NOT volume depleted. B-lines on lung US: bilateral, diffuse = pulmonary edema persisting.'
   },
   orders: {
     correct: [
-      { id: 'continue-diuresis', name: 'Continue diuresis — target −0.5 to −1 kg/day until dry weight', rationale: 'Cr rise of 0.3-0.4 mg/dL with diuresis in HFpEF is expected and acceptable (cardiorenal syndrome type 1). DOSE trial: higher-dose diuretics produced more decongestion without worse renal outcomes at 60 days. The greater danger is undertreating congestion — residual congestion predicts 30-day readmission and mortality.' },
-      { id: 'k-repletion', name: 'Potassium chloride 40 mEq PO — K 3.6 with ongoing diuresis', rationale: 'Furosemide causes kaloiuresis. Target K >4.0 in HF (hypokalemia promotes arrhythmias in the setting of digoxin or afib). Replace liberally.' },
-      { id: 'oral-transition', name: 'Transition to oral furosemide at 2× pre-admission dose', rationale: 'TRANSFORM-HF trial principle: oral furosemide at discharge should be higher than pre-admission dose. For patients on 40mg PO daily pre-admit, discharge on 80mg PO daily. Most HF readmissions are from inadequate outpatient diuresis.' },
-      { id: 'gdmt-hfpef', name: 'Add SGLT2 inhibitor (empagliflozin or dapagliflozin) before discharge', rationale: 'EMPEROR-Preserved and DELIVER trials: SGLT2 inhibitors reduce HF hospitalization by 21-25% in HFpEF regardless of diabetes status. Now guideline-recommended for all HFpEF. Add before discharge.' }
+      { id: 'sequential-neph', name: 'Add metolazone 5mg PO 30 min before IV furosemide — sequential nephron blockade', rationale: 'Diuretic resistance: furosemide blocks the loop of Henle, but compensatory sodium reabsorption increases in the distal tubule. Adding a thiazide-type diuretic (metolazone) blocks the distal tubule synergistically = sequential nephron blockade. Produces significant diuresis even in diuretic-resistant HF. Monitor K+ closely — profound hypokalemia risk.' },
+      { id: 'drip-furosemide', name: 'Switch to continuous furosemide infusion 10-20 mg/hr instead of intermittent boluses', rationale: 'Continuous furosemide infusion maintains drug levels above the tubular secretion threshold throughout the day, avoiding the anti-natriuretic rebound between bolus doses. More effective and predictable than intermittent boluses in resistant HF.' },
+      { id: 'cardiology-hf', name: 'Advanced heart failure consult — consider ultrafiltration', rationale: 'Ultrafiltration (aquapheresis) directly removes fluid without hormonal feedback. Indicated when IV diuretics fail. Also: consider inotropic support (dobutamine, milrinone) if low output driving cardiorenal syndrome.' },
+      { id: 'uop-goal', name: 'Titrate diuretics to urine output goal 3-5 mL/kg/hr — reassess q6h', rationale: 'Adequate decongestion target: net negative 1-2L/day, weight loss 0.5-1 kg/day. If UO < 0.5 mL/kg/hr after 2h of IV diuretic: escalate dose.' },
+      { id: 'accept-cr-rise', name: 'Accept modest Cr rise (up to 0.5 above baseline) — congestion worse than azotemia', rationale: 'Cardiorenal syndrome in HF: rising Cr during diuresis ("hemofiltration creatinine") is expected and acceptable. Stopping diuresis to protect kidneys leaves the patient congested and results in worse long-term outcomes. Congestion, not decongestion, damages kidneys in HF.' }
     ],
     incorrect: [
-      { id: 'hold-diuresis-cr', name: 'Hold furosemide — Cr rising, risk of AKI', rationale: 'A Cr rise of 0.3-0.4 with diuresis in congested HF is hemofiltration, not true AKI. Urine Na 62 confirms diuretic response (not prerenal). Stopping diuresis in a patient still 8 kg above dry weight risks re-accumulation and readmission. The DOSE trial showed aggressive diuresis was safe.' },
-      { id: 'no-sglt2-hfpef', name: 'SGLT2i only for HFrEF — this patient has HFpEF', rationale: 'OUTDATED — EMPEROR-Preserved (empagliflozin) and DELIVER (dapagliflozin) trials confirmed SGLT2i benefit in HFpEF. FDA approved both agents for HFpEF. This is now standard of care.' }
+      { id: 'stop-diuresis', name: 'Hold IV furosemide — Cr rising, protect the kidneys', rationale: 'WRONG — stopping diuresis in a congested patient causes worse outcomes. Cardiorenal syndrome in decompensated HF: the kidneys are damaged by venous congestion, not by diuresis. Continue aggressive decongestion; accept modest Cr rise during treatment.' },
+      { id: 'fluid-bolus-hf', name: 'Give 500mL NS bolus — BP 88/58, may be volume depleted', rationale: 'IVC plethoric on echo (high RA pressure) and bilateral B-lines = NOT volume depleted. This patient is wet. IV fluids would worsen pulmonary edema. Low BP in decompensated HFrEF = low output state, not hypovolemia. Inotropic support, not fluids.' }
     ]
   },
   teachingPoints: {
     keyLearning: [
-      'HFpEF management: decongest aggressively — residual congestion is the primary driver of readmission. Cr rise of 0.3-0.5 during diuresis is acceptable (hemofiltration, not AKI) if urine Na is high.',
-      'SGLT2 inhibitors (empagliflozin, dapagliflozin) reduce HF hospitalization in HFpEF by 21-25%. Now guideline-recommended for ALL HFpEF patients regardless of diabetes. Always add before discharge.',
-      'Discharge furosemide dose should be HIGHER than pre-admission dose. TRANSFORM-HF: most readmissions are from inadequate outpatient diuresis. If they came in on 40mg, discharge on 80mg.',
-      'Cardiorenal syndrome type 1: acute heart failure causes AKI. Diuresis usually improves both — decongestion reduces renal venous pressure. Do not let a mild Cr rise stop appropriate diuresis.'
+      'Diuretic resistance in HF: options are (1) sequential nephron blockade (add metolazone 30 min before loop diuretic), (2) continuous infusion, (3) high-dose IV boluses, (4) ultrafiltration. Address from least to most invasive.',
+      'Cardiorenal syndrome type 1: acute HF → AKI. The Cr rise during decongestion is expected — do NOT stop diuresis to "protect kidneys." Congestion is more nephrotoxic than decongestion.',
+      'IVC assessment on bedside echo: plethoric IVC (>2.1cm, collapse <50%) = high RA pressure = patient is still wet regardless of BP. Never give fluids based on BP alone without assessing volume status.',
+      'GDMT in HFrEF: sacubitril-valsartan + SGLT2i + ACEi/ARB + beta-blocker + MRA (spironolactone) = the "fantastic four plus one." Each reduces mortality independently. Do not hold long-term.'
     ],
     boardPearls: [
-      'HFpEF vs HFrEF: HFpEF (EF ≥50%) — primary problem is diastolic dysfunction and volume sensitivity. Loop diuretics, SGLT2i, and blood pressure control. ACEi/ARB/beta-blockers not proven to reduce mortality in HFpEF.',
-      'DOSE trial: high-dose furosemide (2.5× oral dose IV) vs low-dose — more symptom relief, no worse renal outcomes at 60 days. Go higher, not lower.',
-      'Hyponatremia in HF: dilutional from ADH activation. Worsen with diuretics. Fluid restrict to <1.5L/day. Vaptan if severe and refractory.',
-      'Signs of adequate decongestion: JVP <8 cm, no orthopnea, weight at dry weight, clear lungs. BNP trend is useful but should not replace clinical assessment.'
+      'DOSE trial: high-dose furosemide (2.5× oral dose IV) more effective than low-dose; continuous infusion vs bolus: no significant difference in DOSE trial (though many centers still prefer continuous for consistency).',
+      'Metolazone + furosemide: profound diuresis and hypokalemia. Check K+ 4-6h after first metolazone dose. Supplement K+ proactively.',
+      'SGLT2i in HFrEF: empagliflozin and dapagliflozin reduce HF hospitalizations by 25% (EMPEROR-Reduced, DAPA-HF). Mechanism includes mild diuresis + metabolic effects. Hold in AKI but restart when stable.',
+      'Ultrafiltration (CARRESS-HF trial): not superior to stepped diuretic therapy for primary endpoint in cardiorenal syndrome — use when diuretics truly fail, not routinely.'
     ]
   },
-  references: [{ id: 'StatPearls-HFpEF', title: 'Diastolic Heart Failure', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430914/', openAccess: true }]
+  references: [{ id: 'StatPearls-HF', title: 'Heart Failure', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430873/', openAccess: true }]
 };

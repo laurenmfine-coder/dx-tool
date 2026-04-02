@@ -1,47 +1,49 @@
-/* CASE: sah-v2 — SAH: Vasospasm and Delayed Cerebral Ischemia Day 7 */
+/* CASE: sah-v2 — Jennifer Wu — SAH: Delayed Cerebral Ischemia / Vasospasm Day 7 */
 window.CASES = window.CASES || {};
 window.CASES['sah-v2'] = {
-  id: 'sah-v2', name: 'Patricia Moore', age: '52F', dob: '1973-11-14',
-  mrn: 'RDX-2026-58831', setting: 'Neuro ICU',
-  chiefComplaint: 'SAH day 7 — new left arm weakness and confusion — vasospasm vs rebleed?',
-  diagnosis: 'Delayed Cerebral Ischemia from Cerebral Vasospasm (Day 7 post-SAH)',
+  id: 'sah-v2', name: 'Jennifer Wu', age: '42F', dob: '1984-09-16',
+  mrn: 'MRN-510850', setting: 'Neuro ICU — Day 7',
+  chiefComplaint: 'Day 7 post-SAH: new confusion, left arm weakness — delayed cerebral ischemia',
+  diagnosis: 'Subarachnoid Hemorrhage — Delayed Cerebral Ischemia (Vasospasm)',
   category: 'neurologic', acuity: 1,
-  continuityNote: 'sah-v1: Patricia Moore, 52F, thunderclap headache, CT head: diffuse subarachnoid blood in basal cisterns (modified Fisher grade 4 — highest vasospasm risk). Cerebral angiogram confirmed ruptured right posterior communicating artery aneurysm. Coil embolization performed day 1. Nimodipine 60mg q4h started, euvolemia maintained.',
+  continuityNote: 'Prior encounter: sah-v1 — Jennifer Wu, 42F thunderclap headache, CT confirmed SAH, CTA showed 7mm right MCA aneurysm. Underwent successful coil embolization day 1. Post-procedure course: triple-H therapy started (hypertension, hypervolemia, hemodilution — now modified to euvolemia + induced HTN). Nimodipine 60mg q4h started. Day 4: TCD velocities rising (MCA 160 cm/s).',
   presentation: {
-    hpi: 'Day 7 post-SAH, day 7 post-coiling. Nimodipine day 7. New confusion (MMSE 18, was 28 yesterday) and left arm drift on neuro exam. Fever 38.9°C. TCD velocities: right MCA 210 cm/s (normal <120), rising from 160 yesterday. CT head: no new blood, no hydrocephalus.',
-    pmh: ['SAH day 0 (posterior communicating artery aneurysm, coiled)', 'HTN'], meds: ['Nimodipine 60mg q4h', 'Labetalol (BP management)', 'Heparin SQ prophylaxis', 'Levetiracetam'], allergies: ['NKDA']
+    hpi: 'Day 7 post-SAH from right MCA aneurysm (coiled day 1). New this morning: confusion, left arm drift, dysarthria — new focal deficits not present yesterday. TCD today: right MCA velocity 220 cm/s (severe vasospasm threshold >200). BP currently 128/74 — at the lower end of her post-SAH target. This is delayed cerebral ischemia (DCI) from vasospasm — the #1 cause of death and disability after the aneurysm is secured.',
+    pmh: ['SAH — right MCA aneurysm, coiled day 1', 'HTN (baseline BP 138/82)'],
+    meds: ['Nimodipine 60mg PO q4h (calcium channel blocker — ONLY proven drug for SAH vasospasm)', 'Levetiracetam (seizure prophylaxis)', 'Stool softeners', 'DVT prophylaxis (started day 3 post-coiling)']
   },
-  vitals: { BP: '148/88', HR: '94', RR: '16', Temp: '38.9°C', SpO2: '96%', GCS: '13 (E3V4M6)' },
+  vitals: { BP: '128/74', HR: '88', RR: '16', Temp: '37.8°C', SpO2: '98%', GCS: '12 (E3V4M5)' },
   labs: {
-    'CT Head': 'No new hemorrhage. No hydrocephalus. Sulcal effacement right hemisphere — cytotoxic edema (early ischemia).',
-    'TCD (Transcranial Doppler)': 'Right MCA velocity 210 cm/s (vasospasm: >120 moderate, >200 severe). Lindegaard ratio 6.4 (>3 = vasospasm vs hyperemia).',
-    'CTA/CTP': 'Segmental narrowing right MCA. Prolonged time-to-peak right MCA territory. CBF reduced 35% right hemisphere — ischemic penumbra present.',
-    'Labs': 'Na 131 (L — SIADH vs cerebral salt wasting), CBC normal, CRP 68 (H — inflammatory response)'
+    'TCD (transcranial Doppler)': 'Right MCA velocity 220 cm/s (SEVERE vasospasm — >200 cm/s) | Left MCA 140 cm/s (moderate)',
+    'CT perfusion': 'Prolonged Tmax and reduced CBF in right MCA territory — at-risk penumbra. No completed infarct yet.',
+    'CTA': 'Diffuse right MCA M1 and M2 segment narrowing — consistent with severe vasospasm. Coil pack intact, no rebleeding.',
+    'Labs': 'Na 135, Hgb 10.4 (euvolemia maintained), Glucose 118'
   },
   orders: {
     correct: [
-      { id: 'hht-dci', name: 'Hemodynamic augmentation — "Triple-H" modified: euvolemia + induced hypertension', rationale: 'For delayed cerebral ischemia (DCI) from vasospasm: induce hypertension (MAP 90-110, SBP 160-200) to drive perfusion through narrowed vessels. Modern approach: euvolemia (avoid aggressive hypervolemia — no proven benefit, risk of pulmonary edema) + induced HTN. Vasopressors (phenylephrine or norepinephrine) to raise MAP.' },
-      { id: 'ia-vasodilator', name: 'Interventional neuroradiology — intra-arterial verapamil + balloon angioplasty', rationale: 'Severe symptomatic vasospasm (new neuro deficit + TCD >200) despite medical management → interventional treatment. IA verapamil or nicardipine causes local vasodilation. Balloon angioplasty for proximal vessel vasospasm — more durable than pharmacologic alone.' },
-      { id: 'nimodipine-cont', name: 'Continue nimodipine — do NOT increase dose or use IV nimodipine for DCI', rationale: 'Nimodipine reduces DCI outcomes (not angiographic vasospasm) — it is neuroprotective, not a vasodilator. The dose is fixed (60mg q4h × 21 days). Increasing dose or using IV nimodipine (not approved in US) will cause hypotension, worsening cerebral ischemia.' },
-      { id: 'hyponatremia-dci', name: 'Treat hyponatremia with normal saline or fludrocortisone — NOT fluid restriction', rationale: 'Na 131 in SAH: differential = SIADH (euvolemic) vs cerebral salt wasting (hypovolemic). NEVER fluid-restrict in SAH vasospasm — hypovolemia worsens DCI. Give NS if CSW; fludrocortisone helps both. Confirm volume status before restricting fluids.' }
+      { id: 'induce-htn-sah', name: 'Induced hypertension — raise MAP to 100-110 mmHg with norepinephrine', rationale: 'DCI treatment: induced hypertension increases cerebral perfusion pressure through vasospastic segments. Target MAP 100-110 (SBP 160-180) in patients with secured aneurysms. This is safe now that the aneurysm is coiled — could not do this with unsecured aneurysm (rupture risk).' },
+      { id: 'euvolemia-sah', name: 'Maintain euvolemia with IV fluids — avoid hypovolemia', rationale: 'Current evidence: euvolemia (not hypervolemia) is the target. Hypovolemia worsens DCI by reducing cerebral perfusion. Aggressive hypervolemia (the old "triple H") increases complications without benefit.' },
+      { id: 'continue-nimo', name: 'Continue nimodipine 60mg q4h — only proven DCI prevention drug', rationale: 'Nimodipine is the only drug proven to reduce neurological deficits from SAH vasospasm (not vessel diameter, but likely neuroprotective mechanism). Do NOT stop despite hypotension — reduce dose to 30mg q2h if BP drops rather than discontinuing.' },
+      { id: 'ia-verapamil', name: 'Interventional radiology/neuro-IR consult — intra-arterial verapamil or balloon angioplasty for refractory vasospasm', rationale: 'Intra-arterial verapamil or papaverine: direct vasodilation for refractory vasospasm. Balloon angioplasty: mechanical dilation of proximal vasospasm. Reserved for DCI not responding to induced hypertension within 1-2 hours.' },
+      { id: 'neuro-check-sah', name: 'Hourly neurological checks — DCI can progress to completed infarct within hours', rationale: 'DCI is time-critical. Hourly neuro exams to detect new deficits. Any worsening → escalate BP target, call neuro-IR.' }
     ],
     incorrect: [
-      { id: 'fluid-restrict-siadh', name: 'Fluid restrict to 1L/day — SIADH from SAH', rationale: 'CRITICALLY WRONG in SAH vasospasm. Fluid restriction causes hypovolemia → worsens cerebral ischemia → worse DCI outcomes. Never fluid restrict in symptomatic vasospasm. Treat hyponatremia with isotonic saline or fludrocortisone, maintain euvolemia to mild hypervolemia.' },
-      { id: 'increase-nimodipine', name: 'Double nimodipine dose — vasospasm is severe', rationale: 'Nimodipine dose is fixed at 60mg q4h. Increasing causes systemic hypotension, reducing cerebral perfusion pressure and worsening ischemia. Nimodipine is neuroprotective (acts intracellularly), not a vasodilator at clinical doses.' }
+      { id: 'stop-nimo-htn', name: 'Hold nimodipine — causing hypotension, worsening vasospasm', rationale: 'Do NOT stop nimodipine — it is the only proven agent for SAH outcomes. If hypotensive: reduce to 30mg q2h (same total daily dose, smaller individual doses). Discontinuing nimodipine increases risk of poor neurological outcome.' },
+      { id: 'hypervolemia', name: 'Aggressive hypervolemia — 3L NS boluses to increase cerebral perfusion', rationale: 'Outdated triple-H hypervolemia is no longer recommended. Evidence shows euvolemia is equivalent with fewer complications (pulmonary edema, dilutional hyponatremia). Induced hypertension is the active intervention, not hypervolemia.' }
     ]
   },
   teachingPoints: {
     keyLearning: [
-      'DCI (delayed cerebral ischemia) from vasospasm peaks days 4-14 post-SAH (highest risk day 7-10). Risk correlates with clot burden (modified Fisher grade 4 = highest). New neuro deficit + rising TCD = DCI until proven otherwise.',
-      'Modified "Triple-H" therapy: euvolemia + induced hypertension (MAP 90-110). Aggressive hypervolemia is no longer recommended — no proven benefit, increases pulmonary edema risk. Volume status maintenance + MAP augmentation is the current standard.',
-      'NEVER fluid-restrict in SAH vasospasm, even for apparent SIADH. Hyponatremia in SAH may be cerebral salt wasting (hypovolemic) — fluid restriction is catastrophic. Treat with NS or fludrocortisone.',
-      'Nimodipine: fixed dose 60mg q4h × 21 days. Reduces poor outcomes by 34% (Pickard trial) — neuroprotective mechanism, not angiographic vasodilation. Do not increase dose; do not use IV route (not approved in US).'
+      'Delayed cerebral ischemia (DCI) peaks days 4-14 post-SAH. The aneurysm rebleeding window is days 0-3; vasospasm window is days 4-14. Two completely different threats at different times.',
+      'Nimodipine is the ONLY drug proven to improve neurological outcomes in SAH. It does not reliably reverse vasospasm on angiography — the benefit is likely neuroprotective. Never stop it; reduce dose if hypotensive.',
+      'Induced hypertension (MAP 100-110) is first-line treatment for symptomatic DCI in secured aneurysms. Cannot be used for unsecured aneurysm (rebleeding risk).',
+      'TCD monitoring: MCA velocity >120 = mild vasospasm, >160 = moderate, >200 = severe. Rising velocities precede clinical symptoms by 12-24h — opportunity for early intervention.'
     ],
     boardPearls: [
-      'TCD vasospasm criteria: MCA velocity >120 = mild, >160 = moderate, >200 = severe. Lindegaard ratio (MCA/ICA velocity) >3 distinguishes vasospasm from hyperemia.',
-      'Hunt-Hess grade (clinical): I (minimal headache) → V (deep coma). Modified Fisher grade (CT clot burden): 0-4. Both predict vasospasm risk and outcome.',
-      'Rebleeding risk: highest in first 24h (4%). Secure aneurysm (coiling or clipping) ASAP. Tranexamic acid briefly reduces rebleed but increases ischemia — not routine.',
-      'Hydrocephalus in SAH: obstructive (acute — blood in ventricles) or communicating (delayed — impaired CSF absorption). Treat: EVD for acute, VP shunt for chronic. EVD is NOT contraindicated even with aneurysm unsecured — carefully manage ICP.'
+      'SAH grading: Hunt-Hess (clinical) and Fisher scale (CT blood volume predicts vasospasm risk — Fisher grade 3 highest risk).',
+      'Rebleeding: highest risk first 24h (4% per day untreated). Secure aneurysm within 24h to prevent rebleeding.',
+      'Hydrocephalus post-SAH: communicating (blood in subarachnoid space blocking CSF resorption) or obstructive (blood in ventricles). EVD for acute, VP shunt for chronic.',
+      'Cardiac complications of SAH: neurogenic stunned myocardium (Takotsubo-like EF depression), ECG changes (deep T inversions, QTc prolongation, ST changes). Do NOT mistake for primary ACS.'
     ]
   },
   references: [{ id: 'StatPearls-SAH', title: 'Subarachnoid Hemorrhage', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK537064/', openAccess: true }]

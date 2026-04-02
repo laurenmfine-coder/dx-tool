@@ -1,48 +1,49 @@
-/* CASE: copd-v2 — COPD with Hypercapnic Respiratory Failure — NIV Decision */
+/* CASE: copd-v2 — Bernard Collins — COPD: NIV Failure, Intubation Decision */
 window.CASES = window.CASES || {};
 window.CASES['copd-v2'] = {
-  id: 'copd-v2', name: 'Earl Thompson', age: '67M', dob: '1958-09-03',
-  mrn: 'RDX-2026-44211', setting: 'ED → MICU',
-  chiefComplaint: 'Severe COPD exacerbation — pH 7.26, pCO2 78 — intubate or NIV?',
-  diagnosis: 'Acute Hypercapnic Respiratory Failure on COPD — NIV Initiation',
+  id: 'copd-v2', name: 'Bernard Collins', age: '71M', dob: '1955-02-26',
+  mrn: 'MRN-121842', setting: 'ED → Medical ICU',
+  chiefComplaint: 'COPD exacerbation on NIV 2 hours — pH falling, not improving, intubation decision',
+  diagnosis: 'Severe COPD Exacerbation — NIV Failure, Hypercapnic Respiratory Failure',
   category: 'pulmonary', acuity: 1,
-  continuityNote: 'copd-v1: Earl Thompson, 67M, severe COPD (GOLD 3, FEV1 35% predicted), 60 pack-years, on home O2 2L NC. Presented with 3-day worsening dyspnea and purulent sputum. Started on bronchodilators, steroids, antibiotics. Now 2h into treatment: work of breathing increasing, ABG worsening.',
+  continuityNote: 'Prior encounter: copd-v1 — Bernard Collins, 71M GOLD COPD stage D, 40 pack-year smoker. Presented with 3-day worsening dyspnea, increased sputum production. Started bronchodilators, steroids, antibiotics, BiPAP 10/5 initiated 2 hours ago.',
   presentation: {
-    hpi: 'Despite bronchodilators, IV steroids, and azithromycin, Earl is tiring. He is using accessory muscles, RR 32, pursed-lip breathing. ABG on 4L NC: pH 7.26, pCO2 78 (H), PaO2 54, HCO3 34 (chronic compensation). He can still speak in short sentences and follow commands. SpO2 84% → 88% on 4L. He has never been intubated and has expressed a preference to avoid intubation if possible.',
-    pmh: ['COPD GOLD 3 (FEV1 35%)', '60 pack-year smoking history', 'Home O2 2L NC', 'Cor pulmonale'], meds: ['Tiotropium', 'Salmeterol/fluticasone', 'Albuterol PRN', 'Home O2'], allergies: ['NKDA']
+    hpi: 'Bernard Collins, 71M, on BiPAP for 2 hours for severe COPD exacerbation. Repeat ABG now shows: pH 7.26 (down from 7.28), PaCO2 72 (up from 68), PaO2 58 on BiPAP settings IPAP 14/EPAP 6, FiO2 0.45. He is increasingly agitated and pulling at his mask. RR 34. He cannot speak in full sentences. He told his daughter 6 months ago he "never wants a breathing tube." The daughter is at bedside and is asking the team not to intubate per her father\'s wishes. The patient is currently alert enough to make decisions — briefly.',
+    pmh: ['COPD GOLD Stage D', '40 pack-year smoking (quit 5 years ago)', 'Prior intubation for COPD exacerbation 2 years ago — successfully extubated after 4 days'],
+    meds: ['BiPAP 14/6 (not tolerating)', 'Ipratropium + albuterol nebs continuous', 'Methylprednisolone 125mg IV', 'Azithromycin 500mg IV', 'Magnesium sulfate 2g IV']
   },
-  vitals: { BP: '148/92', HR: '112', RR: '32', Temp: '37.8°C', SpO2: '88% on 4L NC' },
+  vitals: { BP: '162/94', HR: '118', RR: '34', Temp: '38.2°C', SpO2: '88% on BiPAP FiO2 45%', GCS: '13 (agitated)' },
   labs: {
-    'ABG (4L NC)': 'pH 7.26 (H), pCO2 78 (H — acute on chronic), PaO2 54 (L), HCO3 34 (compensated chronic CO2 retention)',
-    'CXR': 'Hyperinflation, flattened diaphragms. Right lower lobe infiltrate — pneumonia triggering exacerbation.',
-    'BMP': 'Bicarb 34 (H — chronic CO2 retention), Cr 1.1, K 3.8',
-    'CBC': 'WBC 14.2 (H — infection), Polycythemia (Hgb 17.8 — chronic hypoxia)'
+    'ABG (2h into BiPAP)': 'pH 7.26 (H — WORSENING) | PaCO2 72 mmHg (H, rising) | PaO2 58 mmHg (L) | HCO3 31 (chronic compensation) | SpO2 88%',
+    'Initial ABG (on arrival)': 'pH 7.28, PaCO2 68, PaO2 52 — baseline hypercapnia + acute-on-chronic',
+    'CXR': 'Hyperinflation, flattened diaphragms (chronic). Increased right lower lobe density — possible consolidation/pneumonia as trigger.',
+    'BMP': 'Na 138, K 3.8, Cr 1.1, Bicarb 31 (chronic)'
   },
   orders: {
     correct: [
-      { id: 'niv-copd', name: 'BiPAP — IPAP 12, EPAP 5, FiO2 titrate to SpO2 88-92%', rationale: 'NIV (BiPAP) is the standard of care for COPD exacerbation with hypercapnic respiratory failure (pH 7.26-7.35, pCO2 >45). Reduces intubation rate by 65%, reduces mortality by 50%, reduces ICU stay. IPAP provides ventilatory assistance; EPAP prevents auto-PEEP and stents airways. Target SpO2 88-92% — avoid over-oxygenation (hypoxic drive, Haldane effect).' },
-      { id: 'o2-target-copd', name: 'Oxygen target SpO2 88-92% ONLY — not >95%', rationale: 'Hyperoxia in COPD causes Haldane effect (O2 displaces CO2 from hemoglobin → CO2 unloading → hypercapnia) and suppresses hypoxic drive. Target SpO2 88-92%. This is a critical distinction from most other clinical scenarios.' },
-      { id: 'trial-niv', name: 'NIV trial 1-2h — reassess pH and pCO2', rationale: 'Response to NIV: pH improving toward 7.30+ and pCO2 decreasing = continue. pH worsening or not improving, increasing distress, inability to protect airway, hemodynamic instability = intubate without further delay.' },
-      { id: 'goals-copd', name: 'Discuss goals of care — patient expressed preference to avoid intubation', rationale: 'Earl has expressed a preference to avoid intubation. If NIV fails, this preference must guide the decision. Discuss: NIV as a ceiling of care (comfort-focused) vs intubation as a bridge to recovery. COPD patients can do well post-intubation if they survive the acute exacerbation.' }
+      { id: 'goals-copd', name: 'Immediate goals-of-care conversation with patient — he can still make decisions', rationale: 'Bernard is alert enough to participate in the decision. His prior stated wishes were against intubation, but he was successfully extubated before and may not fully understand that context. Have a direct, brief goals-of-care conversation NOW while he can participate: "Your breathing is getting worse on the mask. A breathing tube may save your life. Is that something you want?" Document his decision.' },
+      { id: 'optimize-niv', name: 'Optimize NIV settings — increase IPAP to 18-20, FiO2 to 0.6, tighter mask fit', rationale: 'Before declaring NIV failure: ensure optimal settings. IPAP 14 may be insufficient — increase to 18-20 cmH2O. Ensure mask fit is airtight. Add heated humidification if not already on.' },
+      { id: 'heliox', name: 'Consider heliox (helium-oxygen) — reduces airway resistance', rationale: 'Heliox (79% helium / 21% O2) reduces gas density and turbulent flow in obstructed airways. Can improve CO2 clearance and buy time for NIV or medications to work. Temporizing measure.' },
+      { id: 'intubation-prep', name: 'Prepare for intubation — if patient agrees or deteriorates to obtundation', rationale: 'NIV failure criteria met (pH worsening, rising PaCO2, agitation, respiratory rate 34). Prepare for intubation with RSI. Use ketamine for induction (bronchodilating). Use rocuronium. Prepare for post-intubation ventilation challenges (auto-PEEP, permissive hypercapnia).' }
     ],
     incorrect: [
-      { id: 'highflow-o2', name: 'High-flow nasal cannula to SpO2 >95% — better oxygenation', rationale: 'DANGEROUS in COPD — hyperoxia causes hypercapnia (Haldane effect, loss of hypoxic drive). Target SpO2 88-92%. High-flow O2 is appropriate for hypoxic (not hypercapnic) respiratory failure; COPD with CO2 retention requires controlled O2 via NIV.' },
-      { id: 'intubate-now', name: 'Intubate now — pH 7.26 is too acidotic for NIV', rationale: 'pH 7.26 with acute on chronic CO2 retention is the ideal NIV candidate. Absolute NIV contraindications: inability to protect airway, hemodynamic instability, inability to fit mask, vomiting. pH alone is not an intubation criterion if NIV can be initiated. A 1-2h NIV trial is appropriate.' }
+      { id: 'no-discuss', name: 'Proceed with intubation — medical emergency, no time for discussion', rationale: 'Bernard is conscious and can participate in decision-making. His previously stated wishes cannot be overridden by family or physician assumption of best interest if he has decisional capacity. The 60 seconds for a goals-of-care conversation is ethically and legally required.' },
+      { id: 'high-o2-copd', name: 'Increase FiO2 to 1.0 — SpO2 88% is too low', rationale: 'Hypercapnic COPD patients: target SpO2 88-92%. Hyperoxia suppresses hypoxic drive and causes hypercapnic respiratory failure (Haldane effect). SpO2 88% in COPD exacerbation is appropriate. Do not over-oxygenate.' }
     ]
   },
   teachingPoints: {
     keyLearning: [
-      'NIV indications in COPD exacerbation: pH 7.26-7.35 + pCO2 >45 + RR >25 + accessory muscle use. Reduces intubation 65%, mortality 50%. Give NIV before intubation if no absolute contraindications.',
-      'Oxygen target in COPD: 88-92% ONLY. Hyperoxia causes hypercapnia via Haldane effect (O2 outcompetes CO2 on hemoglobin) and suppresses hypoxic respiratory drive. This is the opposite of most clinical scenarios.',
-      'NIV failure criteria (→ intubate): pH worsening or not improving after 1-2h, increasing distress, hemodynamic instability, inability to protect airway, GCS declining.',
-      'BiPAP settings: IPAP 12-20 (ventilatory assistance), EPAP 5-8 (stents airways, prevents auto-PEEP). Titrate FiO2 to SpO2 88-92%.'
+      'NIV failure criteria (intubation indicated): worsening acidosis (pH <7.25 or falling despite 2h NIV), rising PaCO2 despite optimal NIV, GCS decline, respiratory arrest, hemodynamic instability, inability to protect airway, NIV intolerance.',
+      'Goals of care in respiratory failure: if patient has decisional capacity, they participate in intubation decisions regardless of urgency. Document conversation and decision. Daughter\'s prior-stated wishes are informative but not binding if patient is competent.',
+      'Post-intubation COPD ventilation: auto-PEEP (breath stacking) is the major hazard — use low respiratory rate (10-12), long expiratory time (I:E 1:4-5), accept permissive hypercapnia (pH ≥7.20). Reconnect to vent slowly after intubation.',
+      'Target SpO2 88-92% in hypercapnic COPD. Hyperoxia causes V/Q mismatch redistribution and Haldane effect → worsens CO2 retention.'
     ],
     boardPearls: [
-      'Auto-PEEP in COPD: air trapping from expiratory flow limitation. Causes dynamic hyperinflation → impairs venous return → hypotension. Treat: reduce respiratory rate, allow longer expiratory time, add external PEEP to match auto-PEEP.',
-      'COPD exacerbation antibiotics: azithromycin or doxycycline for mild-moderate (outpatient). Augmentin or respiratory fluoroquinolone for hospitalized patients. Tailor based on sputum gram stain.',
-      'GOLD E (≥2 exacerbations/year or ≥1 leading to hospitalization): add ICS/LABA + LAMA (triple therapy). IMPACT trial showed mortality benefit.',
-      'Post-intubation ventilation in COPD: low rate (8-10/min), long expiratory time (I:E ratio 1:3 to 1:5), accept permissive hypercapnia. High PEEP is harmful in COPD (worsens auto-PEEP).'
+      'NIV (BiPAP) reduces intubation rate, ICU stay, and mortality in COPD exacerbation with pH 7.25-7.35. Most effective when started early.',
+      'Indications for mechanical ventilation in COPD: pH <7.25 despite NIV, inability to tolerate mask, altered consciousness, cardiovascular instability, pH 7.25-7.35 with NIV failure after 2h.',
+      'Auto-PEEP in ventilated COPD: air trapping from prolonged expiratory time. Causes hemodynamic collapse (reduces venous return). Disconnect from ventilator for 30-60 seconds to allow full exhalation if auto-PEEP suspected.',
+      'Post-exacerbation COPD: escalate maintenance inhaler therapy (LAMA + LABA + ICS for GOLD E). Pulmonary rehabilitation reduces future exacerbation risk. Smoking cessation if still smoking.'
     ]
   },
-  references: [{ id: 'StatPearls-COPD', title: 'COPD Exacerbation', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK559281/', openAccess: true }]
+  references: [{ id: 'StatPearls-COPD', title: 'Chronic Obstructive Pulmonary Disease', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK559281/', openAccess: true }]
 };

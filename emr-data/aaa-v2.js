@@ -1,46 +1,46 @@
-/* CASE: aaa-v2 — Ruptured AAA Survivor: Post-Op EVAR Management */
+/* CASE: aaa-v2 — Ruptured AAA — Permissive Hypotension + OR Decision */
 window.CASES = window.CASES || {};
 window.CASES['aaa-v2'] = {
-  id: 'aaa-v2', name: 'Leonard Harris', age: '72M', dob: '1953-07-06',
-  mrn: 'RDX-2026-91772', setting: 'Vascular Surgery / ICU',
-  chiefComplaint: 'Post-EVAR day 2 for ruptured AAA — endoleak detected on CT, dropping Hgb',
-  diagnosis: 'Type II Endoleak Post-EVAR with Ongoing Sac Expansion',
-  category: 'vascular', acuity: 2,
-  continuityNote: 'aaa-v1: Leonard Harris, 72M, ruptured AAA, BP 82/50 on arrival. Emergency EVAR (endovascular aneurysm repair) performed — technically successful. Now post-op day 2, CT angiogram reveals endoleak.',
+  id: 'aaa-v2', name: 'Robert Fitzgerald', age: '72M', dob: '1954-03-11',
+  mrn: 'RDX-2026-99231', setting: 'ED → OR', category: 'vascular', acuity: 1,
+  chiefComplaint: 'Sudden severe tearing abdominal/back pain + hypotension — known 5.8cm AAA',
+  diagnosis: 'Ruptured Abdominal Aortic Aneurysm',
   presentation: {
-    hpi: 'Post-EVAR day 2. CT angiogram ordered for surveillance shows contrast blush within the aneurysm sac — endoleak present. Sac diameter unchanged at 6.8cm. Hgb 8.2 (down from 9.4 yesterday). BP stable 132/78. Not in active hemorrhage but sac not fully excluded. Vascular surgery needs endoleak classification and management plan.',
-    pmh: ['Ruptured AAA (repaired EVAR day 0)', 'COPD', 'HTN', '45 pack-year smoking history'],
-    meds: ['Aspirin 81mg', 'Clopidogrel 75mg', 'Atorvastatin 80mg', 'Metoprolol'], allergies: ['Contrast — mild (pre-medicated)']
+    hpi: 'Robert Fitzgerald, 72M, known 5.8cm AAA on surveillance (was scheduled for repair next month). Sudden onset severe tearing periumbilical and back pain. BP 78/40 in triage. Pulsatile epigastric mass palpable. The triad is complete: (1) hypotension, (2) pulsatile abdominal mass, (3) severe abdominal/back pain = ruptured AAA until proven otherwise. Bedside US: aneurysm visible, free fluid in abdomen.',
+    pmh: ['5.8cm AAA — known, repair scheduled', 'HTN', 'COPD', '40 pack-year smoking history'],
+    meds: ['Metoprolol', 'Lisinopril', 'Aspirin'], allergies: ['NKDA']
   },
-  vitals: { BP: '132/78', HR: '78', RR: '16', Temp: '37.2°C', SpO2: '96%' },
+  vitals: { BP: '78/40', HR: '124', RR: '24', Temp: '37.0°C', SpO2: '94%' },
   labs: {
-    'CTA Post-EVAR': 'Type II endoleak — contrast fills aneurysm sac via patent inferior mesenteric artery (IMA) and lumbar arteries. Stent graft position: no migration. Sac: 6.8cm (unchanged from pre-op). No type I or III endoleak (high-pressure, require immediate intervention).',
-    'Hgb': '8.2 (H — down from 9.4 yesterday, up from 7.1 post-op)',
-    'Coags': 'INR 1.4, Plt 88 (L — dilutional + consumption post-EVAR)'
+    'Bedside ECHO/FAST': 'Aneurysm visualized. Free intraperitoneal fluid. No pericardial effusion.',
+    'Type and crossmatch': 'O-negative blood ordered — do NOT wait for crossmatch',
+    'Point-of-care labs': 'Hgb 8.2 (L — hemorrhage), Lactate 6.8 (H — shock), INR 1.4'
   },
   orders: {
     correct: [
-      { id: 'classify-endoleak', name: 'Classify endoleak type — dictates urgency and management', rationale: 'Type I (graft attachment site leak — high pressure): URGENT reintervention. Type II (branch vessel backflow — IMA, lumbar): watchful waiting if sac stable. Type III (graft defect — high pressure): urgent. Type IV (graft porosity): rare, resolves. This is Type II — lowest urgency, monitor sac size.' },
-      { id: 'watch-typeii', name: 'Watchful waiting with serial CTA at 1 month, 6 months — Type II endoleak with stable sac', rationale: 'Type II endoleak without sac growth: 60-70% resolve spontaneously. Monitor sac size with serial CTA. Intervention (coil embolization of feeding vessel or laparoscopic ligation) only if sac growing >5mm in 6 months.' },
-      { id: 'surveillance-evar', name: 'Lifelong EVAR surveillance protocol: CTA at 1 month, 12 months, then annually', rationale: 'EVAR requires lifelong surveillance for endoleak, stent migration, and sac expansion. Unlike open repair, EVAR has ongoing failure modes. Many patients undergo secondary interventions within 5 years. Annual imaging is mandatory.' }
+      { id: 'or-stat', name: 'IMMEDIATE vascular surgery activation + transport to OR — do not delay for CT', rationale: 'Ruptured AAA with hypotension: time to OR is the only intervention that saves life. Do NOT delay for CT scan. The diagnosis is clinical (triad + bedside US). CT is only for stable patients with uncertain diagnosis. Every minute in the ED = mortality.' },
+      { id: 'permissive-htn', name: 'Permissive hypotension — target SBP 70-90 mmHg, do NOT aggressively resuscitate', rationale: 'Aggressive fluid resuscitation in ruptured AAA raises BP, disrupts the retroperitoneal tamponade clot, worsens hemorrhage and coagulopathy. Target SBP 70-90 (enough for organ perfusion, low enough to not pop the clot). This is one of the most important and counterintuitive concepts in vascular emergencies.' },
+      { id: 'mtp-aaa', name: 'Activate massive transfusion protocol — 1:1:1 (pRBC:FFP:platelets)', rationale: 'Hemorrhagic shock from ruptured AAA: give blood, not crystalloid. MTP 1:1:1 prevents dilutional coagulopathy. Minimize crystalloid — use only as bridge until blood products available.' },
+      { id: 'txa-aaa', name: 'Tranexamic acid 1g IV — within 3 hours of hemorrhage onset', rationale: 'TXA reduces mortality from hemorrhage (CRASH-2 trial). Give with MTP. First dose within 3 hours — no benefit if given >3h after onset.' }
     ],
     incorrect: [
-      { id: 'emergent-return', name: 'Emergency return to OR — all endoleaks require immediate reintervention', rationale: 'Type II endoleaks are low-pressure (venous backfill), not arterial. 60-70% resolve spontaneously. Immediate intervention has risks exceeding benefits for stable Type II. Reserve intervention for sac growth >5mm over 6 months or conversion to high-pressure endoleak.' }
+      { id: 'ct-first', name: 'CT angiogram to confirm rupture and plan EVAR anatomy', rationale: 'Only for hemodynamically STABLE patients with uncertain diagnosis. BP 78/40 with the clinical triad = ruptured AAA. Taking an unstable patient to CT scanner = death in the scanner. Go to OR.' },
+      { id: 'aggressive-fluids', name: '2L NS bolus — BP 78/40, patient is in shock', rationale: 'Aggressive crystalloid resuscitation worsens outcomes in ruptured AAA: dilutes clotting factors (dilutional coagulopathy), raises BP and disrupts retroperitoneal tamponade, increases hemorrhage. Permissive hypotension + blood products is the correct strategy.' }
     ]
   },
   teachingPoints: {
     keyLearning: [
-      'Endoleak classification: Type I (attachment site, high-pressure, urgent) → Type II (branch vessel backflow, IMA/lumbar, low-pressure, watchful waiting) → Type III (graft defect, urgent) → Type IV (porosity, resolves).',
-      'Type II endoleak management: observe if sac stable. Intervene (coil embolization, branch ligation) if sac expands >5mm over 6 months. 60-70% resolve spontaneously.',
-      'EVAR surveillance is lifelong and mandatory — endoleak, stent migration, sac expansion can occur years later. Annual CTA after initial 1-month and 12-month scans.',
-      'Open AAA repair vs EVAR: EVAR has lower 30-day mortality but equivalent long-term mortality. EVAR requires more reinterventions. Open repair is more durable long-term.'
+      'Ruptured AAA clinical triad: sudden severe abdominal/back pain + pulsatile abdominal mass + hypotension. If all three present → OR immediately. Do not wait for CT.',
+      'Permissive hypotension (SBP 70-90) in ruptured AAA: preserves retroperitoneal tamponade, reduces coagulopathy from aggressive crystalloid. The clot is what is keeping the patient alive — do not wash it away.',
+      'Bedside US can confirm aneurysm presence (not necessarily rupture). Free fluid + aneurysm = rupture until proven otherwise in the right clinical context.',
+      'AAA repair thresholds: ≥5.5cm men, ≥5.0cm women, or growth >0.5cm/6 months → elective repair (EVAR or open). This patient\'s 5.8cm was at repair threshold — the window for elective repair was missed.'
     ],
     boardPearls: [
-      'AAA screening: USPSTF recommends one-time US for men 65-75 who have ever smoked (A recommendation). No recommendation for women or non-smokers.',
-      'AAA rupture triad: sudden severe back/abdominal pain + hypotension + pulsatile abdominal mass. Immediate OR — bedside US to confirm, no CT if unstable.',
-      'AAA repair thresholds: diameter ≥5.5cm (men), ≥5.0cm (women), or growth >0.5cm/6 months. Symptomatic aneurysm (pain, tenderness): repair regardless of size.',
-      'Aortic dissection vs rupture: dissection = tearing/ripping pain radiating to back + BP differential between arms. Rupture = sudden severe pain + hemodynamic collapse. Different management algorithms.'
+      'EVAR (endovascular aneurysm repair) vs open: EVAR has lower 30-day mortality, but similar 2-year mortality. Open repair is more durable long-term. Choice depends on anatomy and patient fitness.',
+      'Screening: one-time US for all men 65-75 who have ever smoked. Women: no routine screening recommendation.',
+      'Risk factors: smoking (strongest), male sex, age >65, family history, HTN, atherosclerosis.',
+      'Inflammatory AAA: rare variant — perianeurysmal fibrosis, retroperitoneal fibrosis, weight loss, elevated ESR. Managed medically (steroids) before repair.'
     ]
   },
-  references: [{ id: 'StatPearls-AAA', title: 'Abdominal Aortic Aneurysm', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430928/', openAccess: true }]
+  references: [{ id: 'StatPearls-AAA', title: 'Abdominal Aortic Aneurysm', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK470237/', openAccess: true }]
 };

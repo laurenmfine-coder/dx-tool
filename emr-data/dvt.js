@@ -1,44 +1,45 @@
-/* emr-data/dvt.js — DVT: Wells Score + DOAC */
+/* emr-data/dvt.js — Deep Vein Thrombosis + Anticoagulation Selection */
 window.CASES = window.CASES || {};
 window.CASES['dvt'] = {
-  id: 'dvt', name: 'Claire Summers', age: '34F', dob: '1991-02-16',
-  mrn: 'RDX-2026-41721', setting: 'ED → Medicine', category: 'hematologic', acuity: 2,
-  chiefComplaint: 'Left leg swelling and pain × 3 days — oral contraceptive user, recent long flight',
-  diagnosis: 'Deep Vein Thrombosis — Proximal Left Lower Extremity',
+  id: 'dvt', name: 'Priya Sharma', age: '44F', dob: '1981-11-22',
+  mrn: 'RDX-2026-39312', setting: 'ED → Vascular/Hematology Clinic', category: 'cardiovascular', acuity: 3,
+  chiefComplaint: 'Left calf and thigh swelling, pain — on oral contraceptives',
+  diagnosis: 'Left Proximal Deep Vein Thrombosis (Femoral-Popliteal) — OCP-Provoked',
   presentation: {
-    hpi: '34F on OCP, returned from 14h flight from Tokyo 4 days ago. 3 days of left calf and thigh swelling, warmth, erythema, tenderness on palpation. Wells score: +1 (active cancer: no) +1 (paralysis/immobilization: no) +1 (bedridden >3d/surgery <12wk: no) +1 (tenderness along DVT distribution: YES) +1 (entire leg swollen: YES) +1 (calf >3cm asymmetry: YES) +1 (pitting edema affected leg: YES) −2 (alternative dx at least as likely: no) = 4 points = HIGH pre-test probability.',
-    pmh: ['OCP (estrogen-containing) × 2 years'], meds: ['Ethinyl estradiol/levonorgestrel'], allergies: ['NKDA']
+    hpi: '44F on combined oral contraceptives for 6 months. 5 days of left calf pain, now extending to left thigh. Left leg 3.5cm larger in circumference than right at calf. Positive Homan\'s sign (low sensitivity/specificity — do not rely on it). Wells score: 3 points (alternative diagnosis less likely + immobility 5 days ago for long-haul flight from India + calf tenderness) = HIGH pre-test probability. Duplex ultrasound: echogenic thrombus in left femoral vein extending to popliteal vein.',
+    pmh: ['Estrogen-containing OCP × 6 months', 'No prior VTE', 'No family history of clotting disorder'],
+    meds: ['OCP (ethinyl estradiol/levonorgestrel)'], allergies: ['Sulfa — rash']
   },
-  vitals: { BP: '118/72', HR: '78', RR: '14', Temp: '37.2°C', SpO2: '99%' },
+  vitals: { BP: '124/78', HR: '82', RR: '14', Temp: '37.0°C', SpO2: '99%' },
   labs: {
-    'Wells Score': '4 = HIGH probability → skip D-dimer, go directly to ultrasound',
-    'Duplex US left leg': 'Non-compressibility of left popliteal and femoral veins. Absent color flow left popliteal. DVT confirmed — proximal (above knee).',
-    'D-dimer': '2,840 ng/mL (H — expected in high-probability DVT, result does NOT change management here)'
+    'Duplex US (left leg)': 'Non-compressible left femoral vein with echogenic thrombus extending to popliteal vein — PROXIMAL DVT confirmed. Calf veins clear.',
+    'D-dimer': 'NOT needed — high pre-test probability. Imaging is diagnostic. D-dimer is for LOW pre-test probability only.',
+    'CBC': 'Normal. Plt 312.', 'BMP': 'Normal. Cr 0.8.',
+    'Thrombophilia workup': 'Consider after treatment complete — acute thrombosis alters most assays. Test after 3 months off anticoagulation if indicated.'
   },
   orders: {
     correct: [
-      { id: 'doac-dvt', name: 'Apixaban 10mg BID × 7 days, then 5mg BID × 3-6 months', rationale: 'DOAC is preferred over LMWH → warfarin for DVT. Apixaban: AMPLIFY trial — non-inferior efficacy, superior safety (less major bleeding). No bridging, no monitoring. Rivaroxaban (15mg BID × 21 days then 20mg daily) is an alternative. Avoid warfarin as initial therapy without bridging.' },
-      { id: 'stop-ocp', name: 'Discontinue OCP — significant thrombotic risk factor', rationale: 'Estrogen-containing OCP increases DVT risk 3-5× (factor V Leiden carriers: 35×). Stop immediately. Switch to progesterone-only or non-hormonal contraception. Inform patient about future estrogen avoidance.' },
-      { id: 'duration-dvt', name: '3 months minimum — provoked DVT (OCP + recent flight)', rationale: 'Provoked DVT (identifiable transient risk factor: OCP + immobility) = 3 months anticoagulation. Unprovoked DVT = 3-6 months minimum, consider indefinite therapy based on recurrence risk and bleeding risk.' },
-      { id: 'compression-dvt', name: 'Compression stockings — reduces post-thrombotic syndrome', rationale: 'Post-thrombotic syndrome (PTS): chronic leg pain, swelling, skin changes from venous insufficiency. Compression stockings (30-40 mmHg) worn for 2 years reduces PTS severity. Start as soon as tolerated.' }
+      { id: 'doac-dvt', name: 'Apixaban 10mg BID × 7 days, then 5mg BID — first-line for DVT', rationale: 'DOACs are first-line for provoked DVT (AMPLIFY trial). Apixaban or rivaroxaban can be started immediately without heparin bridge. Duration: provoked DVT (reversible risk factor like OCP) → 3 months minimum. Stop OCP simultaneously.' },
+      { id: 'stop-ocp', name: 'Stop OCP immediately — significant VTE risk factor, switch to non-estrogen contraception', rationale: 'Estrogen-containing OCPs increase VTE risk 3-4× by increasing clotting factor synthesis. Must stop immediately. Alternative contraception: progestin-only pill, IUD, barrier methods.' },
+      { id: 'duration-dvt', name: 'Anticoagulate 3 months — provoked DVT with reversible risk factor', rationale: 'Provoked DVT (transient risk factor — OCP + travel): 3 months anticoagulation. Unprovoked DVT: minimum 3 months, then reassess for extended anticoagulation (risk vs benefit). Recurrence risk after provoked DVT = 5%/year; after unprovoked = 15%/year.' }
     ],
     incorrect: [
-      { id: 'ddimer-first', name: 'Check D-dimer to rule out DVT — high probability Wells score', rationale: 'D-dimer is only useful to EXCLUDE DVT in LOW probability patients. High Wells score (4) = high probability → proceed directly to ultrasound. D-dimer is universally elevated in high-probability DVT and a positive result adds no information.' },
-      { id: 'warfarin-dvt', name: 'Start warfarin with LMWH bridge — standard anticoagulation', rationale: 'OUTDATED — DOACs are the preferred first-line therapy for VTE per 2021 AHA guidelines. Warfarin requires bridging, INR monitoring, frequent dose adjustments, and multiple food/drug interactions. DOACs have equivalent or superior efficacy and safety with much simpler dosing.' }
+      { id: 'ddimer-first', name: 'Check D-dimer before imaging — rule out DVT if negative', rationale: 'D-dimer is a rule-out test for LOW pre-test probability. Wells score 3 = HIGH pre-test probability. A negative D-dimer in high-pre-test patients is unreliable (too many false negatives). Go directly to imaging.' },
+      { id: 'warfarin-dvt', name: 'Warfarin with heparin bridge — standard anticoagulation for DVT', rationale: 'DOACs are now preferred over warfarin for most DVT (equivalent efficacy, no INR monitoring, no heparin bridge needed). Warfarin remains preferred for: APS, mechanical heart valves, severe CKD (CrCl <15), active cancer (use LMWH or DOAC per cancer-specific guidelines).' }
     ]
   },
   teachingPoints: {
     keyLearning: [
-      'Wells DVT score: HIGH (≥3) → ultrasound directly, skip D-dimer. MODERATE (1-2) → D-dimer, then ultrasound if positive. LOW (≤0) → D-dimer, ultrasound only if D-dimer positive. D-dimer is a rule-out test ONLY in low-to-moderate probability.',
-      'DOACs (apixaban, rivaroxaban) are preferred over warfarin for DVT. No bridging required, no monitoring, fewer interactions. Exception: antiphospholipid syndrome, mechanical valves, pregnancy → warfarin.',
-      'Provoked DVT (identifiable transient risk factor) = 3 months anticoagulation. Unprovoked DVT = 3-6 months minimum with recurrence risk assessment for indefinite therapy.',
-      'OCP + DVT: stop estrogen-containing OCP immediately. Risk factor for both first and recurrent VTE.'
+      'Wells score for DVT: paralysis/paresis/cast (1), bedridden >3 days or surgery within 12 weeks (1), calf tenderness (1), entire leg swollen (1), calf >3cm larger (1), pitting edema (1), collateral superficial veins (1), active malignancy (1), prior DVT (1), alternative diagnosis as likely (-2). Score ≥2 = high probability → imaging directly.',
+      'D-dimer: high sensitivity, low specificity. Use ONLY for low pre-test probability to RULE OUT DVT. Never use to rule in (positive D-dimer in high-risk patients → image directly).',
+      'DOACs first-line for most DVT: apixaban (10mg BID × 7 days → 5mg BID) or rivaroxaban (15mg BID × 21 days → 20mg daily). No heparin bridge needed.',
+      'OCP and VTE: estrogen-containing OCPs 3-4× VTE risk. Stop immediately when DVT diagnosed. Non-estrogen alternatives: progestin-only, IUD, barrier.'
     ],
     boardPearls: [
-      'Factor V Leiden: most common inherited thrombophilia. Heterozygous: 4-7× VTE risk. Homozygous: 80× risk. OCP + FVL heterozygous = 35× VTE risk.',
-      'Thrombophilia testing: defer until 3 months after completing anticoagulation (antithrombin, protein C, protein S are reduced by acute thrombosis and anticoagulation).',
-      'May-Thurner syndrome: left iliac vein compression by right iliac artery → unprovoked left leg DVT in young women. Catheter-directed thrombolysis + iliac stenting.',
-      'Post-thrombotic syndrome (PTS): chronic complication in 20-50% of DVT. Chronic venous insufficiency, leg ulcers. Prevention: compression stockings, adequate anticoagulation.'
+      'Proximal DVT (femoral, popliteal) → anticoagulate (PE risk ~50% without treatment). Isolated distal DVT (calf veins) → controversial; options are anticoagulate or serial imaging × 2 weeks.',
+      'Cancer-associated DVT: LMWH was standard (CLOT trial). DOACs (apixaban, rivaroxaban) now show non-inferiority in most cancer types — except GI/GU cancer (higher bleeding risk with DOACs).',
+      'Extended anticoagulation after first unprovoked DVT: consider indefinitely if low bleeding risk. PE Severity Index, DASH score, Vienna prediction guide decision.',
+      'May-Thurner syndrome: left iliac vein compression by right iliac artery → left-sided DVT in young women. Consider catheter-directed thrombolysis + iliac vein stenting.'
     ]
   },
   references: [{ id: 'StatPearls-DVT', title: 'Deep Vein Thrombosis', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK507708/', openAccess: true }]

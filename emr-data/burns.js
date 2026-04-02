@@ -1,47 +1,46 @@
-/* emr-data/burns.js — Severe Burns: Parkland Formula + Airway */
+/* emr-data/burns.js — Thermal Burns: Fluid Resuscitation + Rule of Nines */
 window.CASES = window.CASES || {};
 window.CASES['burns'] = {
-  id: 'burns', name: 'Kevin Torres', age: '29M', dob: '1996-05-11',
-  mrn: 'RDX-2026-88132', setting: 'ED → Burn ICU', category: 'trauma', acuity: 1,
-  chiefComplaint: 'House fire — 35% TBSA burns, singed nasal hairs, hoarse voice, carbonaceous sputum',
-  diagnosis: 'Major Thermal Burns (35% TBSA) with Inhalation Injury',
+  id: 'burns', name: 'Carlos Ruiz', age: '42M', dob: '1983-07-19',
+  mrn: 'RDX-2026-52218', setting: 'ED → Burn Unit', category: 'surgical', acuity: 2,
+  chiefComplaint: 'House fire — 35% TBSA flame burns, singed eyebrows, hoarse voice',
+  diagnosis: 'Major Thermal Burns (35% TBSA, 2nd + 3rd degree) with Suspected Inhalation Injury',
   presentation: {
-    hpi: '29M, rescued from house fire after 10 minutes entrapment. EMS: singed nasal hairs, eyebrows, carbonaceous (black) sputum, hoarse voice — inhalation injury until proven otherwise. Burns: face, anterior trunk, both arms. Using Rule of Nines: head (9%) + anterior trunk (18%) + both arms (9% each) ≈ 35% TBSA. 2nd degree (blisters, painful) mixed with 3rd degree (waxy/leathery, painless) burns.',
+    hpi: '42M rescued from house fire, smoke inhalation exposure ~20 minutes. Flame burns to bilateral anterior thighs, abdomen, bilateral arms, and face. Singed nasal hairs, hoarse voice, soot in oropharynx. No stridor yet but airway at risk. Rule of Nines: anterior torso (18%) + bilateral arms (9% each) — approx 35% TBSA involved. Mix of blistered partial thickness (2nd degree) and white/insensate full thickness (3rd degree). Weight 80kg.',
     pmh: ['No significant PMH'], meds: ['None'], allergies: ['NKDA']
   },
-  vitals: { BP: '118/76', HR: '108', RR: '22', Temp: '37.8°C', SpO2: '94% RA' },
+  vitals: { BP: '118/76', HR: '116', RR: '22', Temp: '36.8°C', SpO2: '94% RA' },
   labs: {
-    'Rule of Nines': 'Head/neck 9% | Anterior trunk 18% | Posterior trunk 18% | Each arm 9% | Each leg 18% | Perineum 1%',
-    'Parkland Formula': '4 mL × weight (80 kg) × %TBSA (35) = 11,200 mL LR in first 24h. HALF in first 8h from time of burn (not time of arrival) = 5,600 mL/first 8h. Other half over 16h.',
-    'ABG': 'pH 7.38, PaO2 74 on 15L NRB, CO-Hgb 18% (H — carbon monoxide poisoning)',
-    'CXR': 'No infiltrates (yet — inhalation injury may develop over 24-48h)',
-    'COHgb': '18% — significant CO poisoning'
+    'COHb': 'Carboxyhemoglobin 22% (H — CO poisoning from smoke inhalation)',
+    'ABG': 'pH 7.38, PaO2 88 (SpO2 falsely normal on pulse ox with CO poisoning)',
+    'Bronchoscopy': 'Pending — soot below cords, carbonaceous deposits in airways',
+    'CXR': 'No acute infiltrate yet — inhalation injury may manifest 24-48h later as ARDS'
   },
   orders: {
     correct: [
-      { id: 'intubate-burns', name: 'Early intubation — hoarseness + singed hairs + carbonaceous sputum = inhalation injury', rationale: 'DO NOT WAIT for respiratory failure. Upper airway edema from inhalation injury progresses rapidly and can make intubation impossible within hours. Hoarse voice + singed nasal hairs + carbonaceous sputum = intubate immediately. RSI with video laryngoscope preferred (visualize edema).' },
-      { id: 'parkland-burns', name: 'Parkland formula: 4 mL × 80 kg × 35% TBSA = 11,200 mL LR in 24h', rationale: 'First 24h fluid resuscitation: Lactated Ringer\'s (preferred over NS — reduces hyperchloremic acidosis). Half (5,600 mL) over the FIRST 8 HOURS from time of burn (not arrival time). If the burn happened 2h ago, give 5,600 mL over 6h. Remaining half over next 16h. Titrate to UO 0.5-1 mL/kg/hr.' },
-      { id: '100o2-burns', name: '100% O2 via NRB now, then via ETT — carbon monoxide poisoning', rationale: 'COHgb 18% = significant CO poisoning. 100% O2 reduces CO half-life from 5h (room air) to 60-90 min. Intubate and ventilate on 100% FiO2. Hyperbaric O2 if available for severe CO (COHgb >25%, LOC, cardiac involvement).' },
-      { id: 'wound-cover', name: 'Cover burns with clean dry dressings — no ice, no butter', rationale: 'Burns: cover with clean dry gauze or sterile dressings. Do NOT use ice (worsens tissue injury, hypothermia), do NOT use butter or toothpaste (infection risk, impairs assessment). Keep patient warm — burn patients are extremely hypothermia-prone (loss of skin barrier).' }
+      { id: 'airway-burns', name: 'Emergent intubation — inhalation injury with hoarseness = intubate NOW', rationale: 'Hoarse voice + singed hair + soot = inhalation injury. Airway edema progresses rapidly over 24-48h. Intubate EARLY while airway is still manageable. Waiting until stridor develops = difficult or impossible intubation. Use video laryngoscopy + have surgical airway backup ready.' },
+      { id: '100-o2', name: '100% O2 via NRB mask (until intubated) — CO poisoning with COHb 22%', rationale: 'CO poisoning: pulse oximetry is falsely normal (reads COHb as oxyhemoglobin). 100% O2 reduces CO half-life from 4-5h (room air) to 60-90 min. Intubate and ventilate with 100% FiO2. HBO if COHb >25%, LOC, cardiac involvement.' },
+      { id: 'parkland-burns', name: 'Parkland formula: 4 mL/kg × %TBSA (2nd+3rd degree only) in first 24h', rationale: 'Parkland formula: 4 × 80 kg × 35% TBSA = 11,200 mL LR in 24h. Give half in first 8h from time of burn (not arrival), other half over next 16h. LR preferred over NS (hyperchloremic acidosis risk). Titrate to UO 0.5-1 mL/kg/hr.' },
+      { id: 'foley-burns', name: 'Foley catheter — titrate fluids to urine output 0.5-1 mL/kg/hr (30-50 mL/hr)', rationale: 'Urine output is the best clinical indicator of adequate resuscitation in burns. Place Foley immediately. Over-resuscitation (too much fluid) causes abdominal compartment syndrome and worsens edema.' }
     ],
     incorrect: [
-      { id: 'wait-intubate', name: 'Observe — airway looks okay right now, intubate if gets worse', rationale: 'CRITICAL ERROR — progressive upper airway edema from inhalation injury can render intubation impossible within 1-2 hours. The window for safe intubation closes rapidly. Hoarse voice + singed hairs = intubate NOW, not "when it gets worse."' },
-      { id: 'ice-burns', name: 'Apply ice packs to cool the burns', rationale: 'Ice causes additional tissue injury (thermal injury from cold) and systemic hypothermia. Cool the wound with cool (not cold) water for 20 minutes only. Burns patients lose thermoregulation and cool quickly — do not worsen hypothermia.' }
+      { id: 'ice-burns', name: 'Apply ice to burns to reduce pain and inflammation', rationale: 'Ice causes vasoconstriction and can extend burn depth. Correct first aid: cool running water (15-20°C) for 20 minutes. Never ice.' },
+      { id: 'ns-burns', name: '0.9% normal saline for resuscitation', rationale: 'Large-volume NS causes hyperchloremic metabolic acidosis. Lactated Ringer\'s is the preferred resuscitation fluid for major burns (Parkland formula uses LR).' }
     ]
   },
   teachingPoints: {
     keyLearning: [
-      'Inhalation injury signs: singed nasal hairs/eyebrows, hoarse voice, carbonaceous sputum, facial burns, history of enclosed space. Early intubation is mandatory — upper airway edema progresses rapidly and closes the intubation window.',
-      'Parkland formula: 4 mL × kg × %TBSA = total LR for 24h. Half in FIRST 8 HOURS from time of burn. Use Lactated Ringer\'s (not NS). Titrate to UO 0.5-1 mL/kg/hr.',
-      'Rule of Nines: head 9%, each arm 9%, anterior trunk 18%, posterior trunk 18%, each leg 18%, perineum 1%. Exclude 1st degree burns (superficial) from TBSA calculation.',
-      'Carbon monoxide poisoning: COHgb >10% = significant exposure. Pulse oximetry is FALSELY NORMAL (cannot distinguish COHgb from oxyhemoglobin). Treat with 100% O2. Hyperbaric O2 for severe exposure.'
+      'Rule of Nines: head 9%, each arm 9%, chest 18%, abdomen 18%, each leg 18%, perineum 1%. Only 2nd degree (partial thickness — blistered, painful) and 3rd degree (full thickness — white/charred, insensate) count toward TBSA for fluid calculation.',
+      'Airway management in inhalation injury: hoarseness + singed hair + soot = intubate NOW. Edema progresses over 24-48h making late intubation extremely difficult.',
+      'Parkland formula: 4 mL/kg × % TBSA burned in first 24h (LR). Half in first 8h from time of burn. Titrate to UO 0.5-1 mL/kg/hr.',
+      'CO poisoning: pulse ox reads COHb as oxyhemoglobin — SpO2 appears normal despite life-threatening CO. Treat with 100% O2; HBO for COHb >25%, LOC, or cardiac involvement.'
     ],
     boardPearls: [
-      'Escharotomy: circumferential full-thickness burns of extremities or chest cause compartment syndrome from eschar restriction. Escharotomy (not fasciotomy) releases the eschar.',
-      'Burn center transfer criteria: >10% TBSA 2nd/3rd degree, face/hands/feet/genitalia/perineum/major joints, electrical, chemical, inhalation injury, circumferential burns.',
-      'Curling\'s ulcer: stress ulcer from major burns. All major burn patients require PPI or H2 blocker prophylaxis.',
-      'Burn wound sepsis: most common cause of death in major burns after first 48h (after resuscitation phase). Common organisms: Pseudomonas aeruginosa, MRSA, Candida. Topical antimicrobials: silver sulfadiazine, mafenide acetate, bacitracin.'
+      'Transfer to burn center: burns >20% TBSA, full-thickness burns, burns to face/hands/feet/genitalia/major joints, circumferential burns, inhalation injury, electrical burns.',
+      'Escharotomy: circumferential full-thickness burns of extremities → compartment syndrome. Chest escharotomy for ventilatory restriction. Performed at the bedside — no anesthesia needed (3rd degree is insensate).',
+      'Electrical burns: entry and exit wounds underestimate true tissue damage (current travels through body). Cardiac monitoring for 24h. Risk of rhabdomyolysis — aggressive hydration, target UO 1-2 mL/kg/hr.',
+      'Curling\'s ulcer: stress ulcer of duodenum in major burns. Prophylaxis with PPI or H2 blocker for all major burns.'
     ]
   },
-  references: [{ id: 'StatPearls-Burns', title: 'Burn Evaluation and Management', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430741/', openAccess: true }]
+  references: [{ id: 'StatPearls-Burns', title: 'Burns', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430741/', openAccess: true }]
 };
