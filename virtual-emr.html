@@ -5477,13 +5477,14 @@ submitDoc = function(){
 // ═══ ROUTING — runs after all modules are loaded ═══
 (function(){
   try {
-    if (window.EMRShell && (window.CASE_ID || S.clinicalSetting)) { EMRShell.inject(); }
-    if (!window.CASE_ID && !S.clinicalSetting) {
+    var _S = (typeof S !== 'undefined') ? S : (window.S || {});
+    if (window.EMRShell && (window.CASE_ID || _S.clinicalSetting)) { EMRShell.inject(); }
+    if (!window.CASE_ID && !_S.clinicalSetting) {
       // No setting selected — send to casedx.html to pick a case
       window.location.replace('casedx.html');
       return;
     }
-    else if (!window.CASE_ID && S.clinicalSetting) { showCasePicker(); }
+    else if (!window.CASE_ID && _S.clinicalSetting) { showCasePicker(); }
     else { loadCaseData(function() { bootstrapApp().catch(function(err) {
       console.error('bootstrapApp error on case load:', err);
       var app = document.getElementById('app');

@@ -3084,7 +3084,12 @@ async function exportStudyData() {
 <script>
 // ── AUTO-START: defer until all enhancement scripts have loaded and wrapped startStudy ──
 window.addEventListener('load', function() {
-  setTimeout(function() { _showConsentThenStart(); }, 100);
+  // Consent modal disabled — auto-start directly
+  setTimeout(function() {
+    window._rdxConsentGiven = false;
+    window._rdxPracticeOnly = false;
+    startStudy();
+  }, 100);
 });
 
 // ── IRB CONSENT GATE ─────────────────────────────────────────────────────────
