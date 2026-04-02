@@ -289,3 +289,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['hyperkalemia-cardiac'] = {
+  id: 'hyperkalemia-cardiac', name: 'Ahmed Hassan',
+  chiefComplaint: 'Hyperkalemia with EKG Changes — Calcium and Kayexalate vs Patiromer',
+  diagnosis: 'Hyperkalemia with EKG Changes — Calcium and Kayexalate vs Patiromer',
+  orders: {
+    correct: [{ id: 'calcium-gluconate', name: 'IV calcium gluconate 1g (or calcium chloride 1g) — stabilize cardiac membrane immediately', rationale: 'Calcium antagonizes the toxic effects of hyperkalemia on cardiac membrane potential — does NOT lower potassium. Onset within minutes. Duration: 30-60 minutes. Give immediately for K >6.5 or any EKG changes. If no IV access: IM calcium gluconate (NOT calcium chloride — causes tissue necrosis IM). Repeat if EKG changes persist.' },{ id: 'insulin-glucose-hk', name: 'Regular insulin 10 units IV + dextrose 50g — shift K into cells within 15-30 min', rationale: 'Insulin stimulates Na-K-ATPase → shifts K into cells. Onset 15-30 min, duration 2-6h, lowers K by 0.5-1.0 mEq/L. Always give with glucose to prevent hypoglycemia. Check glucose at 1h post-insulin. Monitor for recurrent hyperkalemia as insulin effect wanes.' }],
+    incorrect: [{ id: 'kayexalate', name: 'Sodium polystyrene sulfonate (Kayexalate) — eliminate potassium immediately', rationale: 'Kayexalate has a DELAYED onset (6-24h) — it eliminates K through the GI tract but does not work acutely. Use only for non-emergent hyperkalemia or as part of definitive management after acute stabilization. Also: associated with intestinal necrosis (especially sorbitol preparation, post-operative patients). Patiromer and sodium zirconium cyclosilicate are safer alternatives with similar onset.' },{ id: 'bicarb-hk', name: 'Sodium bicarbonate — lower potassium in acidotic patients', rationale: 'Bicarbonate for hyperkalemia is controversial and less effective than previously thought. In patients with metabolic acidosis: may help shift K intracellularly. In dialysis patients or non-acidotic patients: ineffective. Do NOT rely on bicarb as primary treatment for cardiac-threatening hyperkalemia.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['EKG changes in hyperkalemia (in order of severity): peaked T waves → prolonged PR interval → wide QRS → sine wave pattern → ventricular fibrillation. Peaked T waves begin at K ~5.5-6.5 mEq/L. Sine wave = immediately life-threatening → dialysis.','Hyperkalemia treatment: (1) Cardiac membrane stabilization: calcium. (2) Redistribution: insulin+glucose, albuterol (β2 agonist — shifts K into cells, adjunct, not monotherapy), bicarbonate (in acidotic patients). (3) Elimination: kayexalate/patiromer (GI), furosemide (urine), dialysis (fastest, definitive).','Pseudohyperkalemia: hemolysis during phlebotomy releases intracellular K — always recheck if EKG is normal and level is unexpected. Thrombocytosis and leukocytosis also cause pseudohyperkalemia.'],
+    boardPearls: ['STOP nephrotoxins and K-sparing agents: ACEi, ARBs, NSAIDs, potassium supplements, TMP-SMX (blocks tubular K secretion), heparin (blocks aldosterone), beta-blockers — all worsen hyperkalemia.','Patiromer (Veltassa): potassium binder that exchanges potassium for calcium in the GI tract. Onset 7-12h. Safer than kayexalate (no sorbitol, lower risk of GI necrosis). For outpatient management of chronic hyperkalemia (CKD, HF on ACEi/ARB).','Sodium zirconium cyclosilicate (Lokelma): newer K binder, onset 1-4h (faster than patiromer). Approved for acute and chronic hyperkalemia. Does not require stool for elimination — works in colon.']
+  }
+};

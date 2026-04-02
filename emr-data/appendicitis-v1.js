@@ -235,3 +235,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['appendicitis-v1'] = {
+  id: 'appendicitis-v1', name: 'Tyler Nguyen',
+  chiefComplaint: 'Acute Appendicitis — McBurney Point and Perforation Risk',
+  diagnosis: 'Acute Appendicitis — McBurney Point and Perforation Risk',
+  orders: {
+    correct: [{ id: 'ct-abdomen', name: 'CT abdomen/pelvis with IV contrast — confirms appendicitis', rationale: 'CT sensitivity >95% for appendicitis. Findings: appendix >6mm diameter, periappendiceal fat stranding, appendicolith (20-40%), fluid. Ultrasound in children and pregnant patients first (no radiation). MRI in pregnancy if US equivocal.' },{ id: 'appendectomy', name: 'Laparoscopic appendectomy — surgical consultation for definitive treatment', rationale: 'Laparoscopic appendectomy is the gold standard. For uncomplicated appendicitis: antibiotics alone (non-operative management) is an option per CODA trial — comparable outcomes at 90 days but 30% required appendectomy at 1 year. Most US surgeons still offer surgery.' }],
+    incorrect: [{ id: 'antibiotics-only', name: 'Antibiotics only — avoid surgery for appendicitis', rationale: 'Antibiotics alone (non-operative management) is a valid option for UNCOMPLICATED appendicitis (no perforation, no abscess, no fecalith). CODA trial: non-operative management non-inferior at 90 days. However, 30% crossover to surgery at 1 year. Not appropriate for complicated appendicitis or patient preference.' },{ id: 'observe-peritonitis', name: 'Observe and reassess — the pain will localize more definitively', rationale: 'Classic appendicitis migrates from periumbilical to McBurney point (RLQ) — this migration has already occurred. Observation risks perforation (occurs in 20-30% of cases within 24-72h). Perforation increases morbidity significantly. Act on clinical diagnosis plus imaging.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Classic appendicitis: periumbilical pain migrating to McBurney point (2/3 of the way from umbilicus to ASIS). Anorexia + nausea. Low-grade fever. Rebound tenderness. WBC elevated (75% of cases). Rovsing sign (RLQ pain with LLQ palpation). Psoas sign (hip extension pain). Obturator sign (hip internal rotation pain).','Alvarado score: Migratory pain (1) + Anorexia (1) + Nausea/vomiting (1) + Tenderness RLQ (2) + Rebound tenderness (1) + Temperature >37.3°C (1) + WBC >10 (2) + Shift to left (1). Score ≥7 = high probability, surgery without imaging.','Complicated vs uncomplicated appendicitis: complicated (perforated, gangrenous, abscess) = surgery required. Uncomplicated = non-operative management (NOM) is an evidence-based option (CODA, APPAC trials).'],
+    boardPearls: ['Appendix variants: retrocecal appendix (26%) — pain may be more posterior/flank, psoas sign positive. Pelvic appendix (30%) — pain suprapubic, confused with gynecologic pathology. Subhepatic appendix — rare, RUQ pain.','Fecalith (appendicolith): present in 20-40% on CT. Associated with higher perforation rates and higher failure rates of NOM. Some consider fecalith a relative indication for surgery over NOM.','Perforation risk: increases significantly after 24-36h from symptom onset. Mortality for uncomplicated appendicitis is <1%. Perforated appendicitis mortality: elderly (up to 5-10%).']
+  }
+};

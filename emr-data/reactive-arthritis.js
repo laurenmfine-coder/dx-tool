@@ -197,3 +197,19 @@ window.EMR_DATA = {
     "category": "rheumatologic"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['reactive-arthritis'] = {
+  id: 'reactive-arthritis', name: 'Derek Campbell',
+  chiefComplaint: 'Reactive Arthritis — Chlamydia Trigger and NSAIDs',
+  diagnosis: 'Reactive Arthritis — Chlamydia Trigger and NSAIDs',
+  orders: {
+    correct: [{ id: 'nsaids-rea', name: 'NSAIDs — first-line for joint inflammation', rationale: 'NSAIDs (naproxen, indomethacin) are first-line for reactive arthritis joint symptoms. Treat for weeks to months. For severe or refractory cases: intra-articular corticosteroids, systemic steroids, or DMARDs (sulfasalazine for persistent disease). Do not use steroids as first-line.' },{ id: 'sti-testing', name: 'STI testing and treatment — treat Chlamydia if positive', rationale: 'Chlamydia trachomatis is the most common trigger in developed countries. Test and treat active infection (even if reactive arthritis has started — treating the trigger may reduce disease duration). Doxycycline 100mg BID × 7-10 days for uncomplicated Chlamydia. Treat partner simultaneously.' }],
+    incorrect: [{ id: 'antibiotics-joint', name: 'Antibiotics for joint infection — septic arthritis', rationale: 'Reactive arthritis is a sterile joint inflammation — the pathogen is NOT in the joint (unlike septic arthritis). Antibiotics do not treat the joint inflammation. Arthrocentesis of a reactive arthritis joint: inflammatory fluid (WBC 5,000-50,000) with NEGATIVE gram stain and culture. Treat underlying STI if active, not the joint itself.' },{ id: 'anti-tnf', name: 'Infliximab — start biologic immediately for reactive arthritis', rationale: 'Anti-TNF therapy is reserved for CHRONIC reactive arthritis (>6 months) refractory to conventional therapy. Most reactive arthritis resolves within 3-12 months without biologic therapy. First-line: NSAIDs → DMARDs (sulfasalazine) → biologic only if truly refractory.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Reactive arthritis (formerly Reiter syndrome): asymmetric oligoarthritis + urethritis + conjunctivitis/uveitis + mucocutaneous lesions (keratoderma blennorrhagica on palms/soles, circinate balanitis). Triggered by STI (Chlamydia most common) or enteric infection (Salmonella, Shigella, Campylobacter, Yersinia).','HLA-B27 association: 60-80% of patients with reactive arthritis are HLA-B27 positive. HLA-B27 is also associated with other seronegative spondyloarthropathies (ankylosing spondylitis, psoriatic arthritis, IBD-associated arthritis).','Prognosis: most resolve within 12 months. 15-20% develop chronic disease. 15-20% develop sacroiliitis. Screen for HLA-B27 in chronic cases (predicts ankylosing spondylitis risk).'],
+    boardPearls: ['Classic triggers: Chlamydia (sexually active adults, urogenital reactive arthritis), Salmonella/Shigella/Campylobacter/Yersinia (post-enteric reactive arthritis). Reactive arthritis typically follows infection by 1-4 weeks.','Uveitis in reactive arthritis: anterior uveitis — eye pain, photophobia, redness, blurred vision. Refer to ophthalmology for slit-lamp evaluation and topical steroids. Untreated uveitis causes blindness.','Psoriatic arthritis vs reactive arthritis: both are seronegative spondyloarthropathies with oligoarthritis. Psoriatic: nail changes (pitting, onycholysis), dactylitis (sausage finger), skin psoriasis. Reactive: urethritis/conjunctivitis, triggered by infection, mucocutaneous lesions without psoriasis plaques.']
+  }
+};

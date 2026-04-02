@@ -221,3 +221,19 @@ window.EMR_DATA = {
     "category": "urologic"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['epididymitis'] = {
+  id: 'epididymitis', name: 'Kevin Morales',
+  chiefComplaint: 'Epididymitis — STI-Associated vs Enteric Organism Treatment',
+  diagnosis: 'Epididymitis — STI-Associated vs Enteric Organism Treatment',
+  orders: {
+    correct: [{ id: 'sti-epididymitis', name: 'Ceftriaxone 500mg IM × 1 + doxycycline 100mg BID × 10 days — men <35 or STI risk', rationale: 'STI-associated epididymitis (sexually active men <35): ceftriaxone for gonorrhea + doxycycline for Chlamydia. NSAIDS for pain. Scrotal support and elevation. Test for HIV and other STIs.' },{ id: 'rule-out-torsion', name: 'Ultrasound with Doppler — rule out testicular torsion immediately', rationale: 'Testicular torsion can mimic epididymitis — scrotal ultrasound with Doppler is MANDATORY to confirm blood flow in both testicles. If torsion suspected clinically (acute onset, elevated testicle, horizontal lie, absent cremasteric reflex): go directly to OR — do not wait for ultrasound. Torsion is a 6-hour window for testicular salvage.' }],
+    incorrect: [{ id: 'antibiotic-monotherapy-e', name: 'Doxycycline alone — covers all organisms', rationale: 'Doxycycline alone does not cover gonorrhea (increased resistance). STI-associated epididymitis requires DUAL therapy: ceftriaxone + doxycycline (same as uncomplicated gonorrhea + Chlamydia treatment). Failure to cover gonorrhea results in treatment failure.' },{ id: 'or-torsion', name: 'Immediate surgery — testicular torsion is more likely in young males', rationale: 'In the ABSENCE of clinical torsion signs (sudden onset, horizontal lie, absent cremasteric reflex, extreme pain), ultrasound Doppler is appropriate to differentiate. Epididymitis: increased blood flow on Doppler. Torsion: absent/decreased flow. Clinical presentation determines urgency.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Epididymitis age-based treatment: age <35 or STI risk factors → cover gonorrhea + Chlamydia (ceftriaxone IM + doxycycline). Age >35 or urinary tract instrumentation/urologic abnormality → cover enteric organisms (levofloxacin 500mg QD × 10 days or TMP-SMX).','Epididymo-orchitis: if orchitis is involved (tenderness of the testis itself), treat with same antibiotics but more aggressive course. Mumps orchitis: viral, no antibiotic treatment, supportive care. Bilateral orchitis → infertility risk.','Chronic epididymitis: >6 weeks duration, often non-infectious (post-infectious inflammation, vasitis, idiopathic). NSAIDs, spermatic cord block, nerve ablation for refractory pain.'],
+    boardPearls: ['Fournier gangrene: necrotizing fasciitis of the scrotum/perineum. Rapidly progressive, polymicrobial. WBC very elevated, scrotal skin necrosis, crepitus. EMERGENCY: broad-spectrum antibiotics + emergent surgical debridement. High mortality (15-25%).','Mumps orchitis: unilateral orchitis 4-8 days after parotitis. Adults more severely affected. 30% of affected patients develop testicular atrophy. MMR vaccine prevents.','Epididymitis in children: rare before puberty. Causes: enteric organisms or anatomical anomaly (ectopic ureter). Workup: urinalysis, ultrasound, consider voiding cystourethrogram if < age 10 or recurrent.']
+  }
+};

@@ -46,4 +46,9 @@ window.CASES['dka-v2'] = {
       { id: 'bicarb-dka2', name: 'Give sodium bicarbonate — pH still low', rationale: 'Bicarb is contraindicated in DKA cerebral edema — paradoxical CSF acidosis, rapid osmotic shift. Associated with worse outcomes.' }
     ]
   }
+
+  teachingPoints: {
+    keyLearning: ['Cerebral edema is the most feared DKA complication (0.5-1% of pediatric DKA) with 20-40% mortality. Risk factors: younger age, new-onset DM, severe acidosis (pH <7.1), high BUN, aggressive fluid resuscitation, failure of glucose to fall appropriately.','TREAT FIRST, image second. Mannitol 0.5-1 g/kg IV OR hypertonic saline (3% NaCl 5-10 mL/kg) the moment cerebral edema is suspected (declining GCS, bradycardia, Cushing triad, new headache during treatment). Do NOT wait for CT to treat.','Insulin rate: do NOT reduce insulin rate when glucose falls to 250-300 — add dextrose to the fluid instead (D5 or D10 with NS). Reducing insulin risks DKA relapse. The glucose correction rate should be 50-100 mg/dL/hr — faster drops increase cerebral edema risk.'],
+    boardPearls: ['Paradoxical worsening during DKA treatment = cerebral edema until proven otherwise. The improving acidosis + declining glucose should be accompanied by improving consciousness — deterioration during treatment is an emergency.','Bicarbonate administration in DKA: controversial and generally avoided — may worsen CSF acidosis and worsen cerebral edema risk. Do not give bicarb for pH >6.9.','"Two-bag system" for DKA fluid management: run two bags simultaneously (one NS, one D10-NS) and adjust ratio to maintain glucose 150-250 mg/dL while keeping insulin rate constant.']
+  },
 };

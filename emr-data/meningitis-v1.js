@@ -282,3 +282,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['meningitis-v1'] = {
+  id: 'meningitis-v1', name: 'Emily Johnson',
+  chiefComplaint: 'Viral vs Bacterial Meningitis — CSF Differentiation',
+  diagnosis: 'Viral vs Bacterial Meningitis — CSF Differentiation',
+  orders: {
+    correct: [{ id: 'lp-csf-analysis', name: 'LP with complete CSF analysis — differentiates viral from bacterial', rationale: 'CSF analysis is essential: viral = lymphocytic pleocytosis (100-500 WBC), normal glucose, normal/mildly elevated protein, negative gram stain/culture. Bacterial = PMN pleocytosis (>1000 WBC), low glucose (<45 mg/dL), elevated protein (>100), positive gram stain (50-80%). Cryptococcal: India ink stain, antigen.' },{ id: 'empirical-antibiotics-mv', name: 'Empirical antibiotics + acyclovir — treat until CSF culture results return', rationale: 'When bacterial vs viral meningitis cannot be definitively distinguished clinically: treat empirically with ceftriaxone + vancomycin + dexamethasone (bacterial coverage) + acyclovir (HSV encephalitis). CSF results guide de-escalation. Do not withhold antibiotics while awaiting culture results.' }],
+    incorrect: [{ id: 'discharge-viral', name: 'Discharge home — CSF is viral pattern', rationale: 'Viral meningitis requires admission for symptomatic management (IV fluids, analgesics, antiemetics) and to observe for clinical deterioration or bacterial co-infection. Outpatient management of viral meningitis is only appropriate for mild, immunocompetent patients with clear viral etiology and reliable follow-up.' },{ id: 'no-lp-viral', name: 'No LP needed — clinical signs are viral', rationale: 'Clinical signs CANNOT reliably distinguish viral from bacterial meningitis — LP is required. However, if CT showing contraindications to LP: treat empirically for bacterial meningitis (ceftriaxone + vancomycin + dexamethasone + acyclovir) and proceed to LP as soon as safe.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['CSF comparison table: bacterial: WBC >1000 (PMN), protein >100, glucose <45 (CSF:serum <0.4), positive culture (70-85%). Viral: WBC 100-500 (lymphocytes), protein 50-100, glucose normal, negative culture. TB: lymphocytes, protein very high, glucose very low, AFB smear low sensitivity.','Enteroviruses: most common cause of viral meningitis (85-95%). Peaks in summer/fall. Coxsackievirus, echovirus, enterovirus 71. Self-limited, 7-10 days. HSV-1 and HSV-2: can cause both meningitis (HSV-2, Mollaret meningitis — recurrent) and encephalitis (HSV-1).','Bacterial meningitis mortality: 20-30% even with treatment. Neurological sequelae (hearing loss, cognitive impairment) in 30-50% of survivors. Outcomes worsen with delay in antibiotics — every hour matters.'],
+    boardPearls: ['EBV and CMV meningitis: lymphocytic pleocytosis + atypical lymphocytes + heterophile antibody test (monospot). Less severe than bacterial. Cryptococcal meningitis: India ink positive, cryptococcal antigen, in HIV/immunocompromised patients.','Herpes simplex encephalitis: temporal lobe involvement, fever + altered consciousness + seizures. CSF: lymphocytic pleocytosis, RBCs (hemorrhagic), normal glucose. EEG: periodic lateralizing epileptiform discharges (PLEDs) from temporal lobe. MRI: temporal lobe T2 hyperintensity. Treat with acyclovir 10 mg/kg q8h × 14-21 days.','Listeria meningitis MRI: rhombencephalitis — brainstem + cerebellum involvement. Consider Listeria in elderly, immunocompromised, pregnant — add ampicillin to empirical regimen.']
+  }
+};

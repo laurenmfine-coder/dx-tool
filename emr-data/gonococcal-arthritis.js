@@ -213,3 +213,19 @@ window.EMR_DATA = {
     "category": "infectious"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['gonococcal-arthritis'] = {
+  id: 'gonococcal-arthritis', name: 'Jasmine Williams',
+  chiefComplaint: 'Disseminated Gonococcal Infection — Ceftriaxone and Partner Treatment',
+  diagnosis: 'Disseminated Gonococcal Infection — Ceftriaxone and Partner Treatment',
+  orders: {
+    correct: [{ id: 'ceftriaxone-gca', name: 'Ceftriaxone 1g IV/IM daily — treat empirically for DGI', rationale: 'Empirical ceftriaxone for suspected DGI before culture results. Continue 24-48h after clinical improvement, then step down to oral cefixime (400mg BID) or azithromycin (1g × 1) to complete 7-day course. ALWAYS co-treat for Chlamydia (azithromycin 1g or doxycycline 7 days) — co-infection in up to 40%.' },{ id: 'partner-notification', name: 'Partner notification and treatment — STI contact tracing', rationale: 'All sexual partners within 60 days must be notified, tested, and treated. Gonorrhea is a reportable STI — notify local health department. Expedited Partner Therapy (EPT): prescribe treatment for partner without prior examination where legally permitted.' }],
+    incorrect: [{ id: 'arthroscopy', name: 'Arthroscopic washout — septic joint requires drainage', rationale: 'DGI with septic arthritis rarely requires arthroscopic drainage — unlike non-gonococcal septic arthritis (S. aureus). DGI responds well to antibiotics alone. True gonococcal septic arthritis (large effusion, WBC >50k in joint fluid, culture positive): consider drainage if not responding to antibiotics at 24-48h.' },{ id: 'nsaids-only', name: 'NSAIDs — joint inflammation treated with anti-inflammatories', rationale: 'DGI is a BACTERIAL infection — it requires antibiotics, not just anti-inflammatory treatment. NSAIDs may be used adjunctively for pain, but the primary treatment is bactericidal antibiotics. DGI is one of the most treatable causes of acute bacterial arthritis.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['DGI (disseminated gonococcal infection): two clinical syndromes. (1) Triad: migratory polyarthralgia → tenosynovitis (tendons — not joints) + dermatitis (pustular skin lesions) + bacteremia. Positive blood cultures. (2) Septic arthritis: large joint monoarthritis (knee most common), purulent effusion, positive synovial fluid culture. Most common cause of acute bacterial arthritis in sexually active young adults.','N. gonorrhoeae arthritis features: young sexually active adult, migratory joint pain (progresses from one joint to another), tenosynovitis (tendon sheath inflammation — pathognomonic for DGI), skin lesions (few, pustular, on distal extremities), recent STI exposure or vaginal/urethral symptoms.','Culture tips: highest yield in DGI is from urogenital sites (70-90%), not blood (<50%) or joint fluid (<25%). Culture ALL sites: urethra/cervix, rectum, pharynx. Thayer-Martin medium (chocolate agar + antibiotics). Transport immediately — N. gonorrhoeae dies rapidly.'],
+    boardPearls: ['Gonococcal resistance: resistance to fluoroquinolones is now widespread (do not use ciprofloxacin empirically). Emerging ceftriaxone resistance — monitor local resistance patterns. Ceftriaxone + azithromycin is current standard.','Neisseria gonorrhoeae in LGBTQ patients: pharyngeal gonorrhea is the most common site and most difficult to treat. Pharyngeal cultures needed in patients with oral sex history. Anorectal gonorrhea often asymptomatic.','Septic arthritis differential in young adults: DGI (most common), reactive arthritis (Reiter), Lyme arthritis (knee, migratory, endemic areas), rheumatoid arthritis (bilateral symmetric), crystalline arthropathy (gout, pseudogout).']
+  }
+};

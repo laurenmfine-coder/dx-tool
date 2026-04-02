@@ -216,3 +216,19 @@ window.EMR_DATA = {
     "category": "pulmonary"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['pneumothorax'] = {
+  id: 'pneumothorax', name: 'Tyler Reeves',
+  chiefComplaint: 'Spontaneous Pneumothorax — Primary vs Secondary Management',
+  diagnosis: 'Spontaneous Pneumothorax — Primary vs Secondary Management',
+  orders: {
+    correct: [{ id: 'aspiration-or-tube', name: 'Needle aspiration (primary PTX, small) OR chest tube (secondary or large PTX)', rationale: 'Primary spontaneous PTX (no lung disease, <3cm apex-to-cupula distance): simple aspiration (16g angiocatheter, mid-clavicular 2nd ICS) is equivalent to chest tube. Success rate ~60-80%. Secondary PTX (COPD, CF, asthma): ALWAYS chest tube (less likely to resolve with aspiration, more dangerous). Large PTX (>3cm) or tension: chest tube.' },{ id: 'recurrence-prevention', name: 'VATS pleurodesis — prevent recurrence after second ipsilateral PTX', rationale: 'First PTX: observation (small, asymptomatic) or aspiration/tube. Second ipsilateral PTX: VATS pleurodesis (gold standard). High-risk occupations after first PTX (pilots, divers): VATS pleurodesis after first episode. Chemical pleurodesis (bleomycin, doxycycline) alternative if VATS not available.' }],
+    incorrect: [{ id: 'high-flow-o2', name: 'High-flow oxygen — for shortness of breath', rationale: 'While high-flow O2 is given for hypoxemia, it does NOT treat the pneumothorax itself. However: supplemental O2 increases reabsorption rate of the pneumothorax by ~4-fold (nitrogen washout). Small, asymptomatic primary PTX can be observed + supplemental O2 in hospitalized patients.' },{ id: 'bilateral-tubes', name: 'Bilateral chest tubes — may have bilateral PTX', rationale: 'Treat clinical findings. Bilateral spontaneous PTX is very uncommon (5-7% of cases). Standard approach: treat the symptomatic/large side first. Bilateral tubes only if bilateral clinical or radiographic evidence of significant PTX.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Primary vs secondary PTX: primary = young, tall, thin male, no underlying lung disease, apical blebs. Secondary = underlying lung disease (COPD most common — bullae rupture; CF, TB, PCP, Marfan). Secondary PTX is more dangerous — patients have less reserve. Always treat with chest tube.','Tension PTX: air enters pleural space but cannot exit → progressive pressure → contralateral mediastinal shift → impaired venous return → obstructive shock → cardiac arrest. Clinical diagnosis (no imaging). Needle decompression immediately.','Pneumothorax size: BTS (British): >2cm rim from lung edge to chest wall. ACCP: >3cm apex to cupula on upright CXR. Size determines management approach.'],
+    boardPearls: ['Catamenial PTX: occurs with menses (within 72h of onset), usually right-sided, associated with thoracic endometriosis. Recurrent PTX in women of childbearing age → workup for thoracic endometriosis. Treatment: hormonal therapy + VATS pleurodesis.','Iatrogenic PTX: central line placement (subclavian > internal jugular > femoral), thoracentesis, biopsy, positive pressure ventilation. All patients post-subclavian central line: CXR to confirm no PTX before use.','Reexpansion pulmonary edema: rapid reexpansion of a chronically collapsed lung (>24-72h) can cause ipsilateral pulmonary edema from capillary disruption. Slow, controlled tube drainage for large, chronic PTX.']
+  }
+};

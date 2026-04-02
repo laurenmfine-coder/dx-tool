@@ -269,3 +269,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['serotonin-syndrome'] = {
+  id: 'serotonin-syndrome', name: 'Andrew Chen',
+  chiefComplaint: 'Serotonin Syndrome — Hunter Criteria and Cyproheptadine',
+  diagnosis: 'Serotonin Syndrome — Hunter Criteria and Cyproheptadine',
+  orders: {
+    correct: [{ id: 'cyproheptadine', name: 'Cyproheptadine 12mg PO/NGT — serotonin antagonist, first-line specific treatment', rationale: 'Cyproheptadine is a histamine H1/serotonin 5-HT2A antagonist. It is the only specific antidote for serotonin syndrome. Give 12mg immediately, then 2mg every 2h until symptoms resolve (max 32mg/24h). Also supportive: benzodiazepines for agitation, cooling for hyperthermia, IV fluids.' },{ id: 'discontinue-serotonergic', name: 'Identify and discontinue ALL serotonergic agents immediately', rationale: 'Serotonin syndrome requires stopping all causative agents: SSRIs, SNRIs, MAOIs, TCAs, tramadol, fentanyl (weak serotonergic), linezolid (MAOI activity), methylene blue (MAOI activity), triptans, dextromethorphan, ondansetron (at high doses), St. John Wort, MDMA.' }],
+    incorrect: [{ id: 'dopamine-blockers', name: 'Haloperidol — antipsychotic for agitation in NMS/serotonin syndrome', rationale: 'Do NOT give typical antipsychotics (haloperidol) for serotonin syndrome — they worsen hyperthermia and may cause NMS on top of SS. SS is treated with serotonin antagonists and benzos. Distinguish SS from NMS: SS = fast onset (hours), hyperreflexia, clonus. NMS = slow onset (days), rigidity, hyporeflexia.' },{ id: 'fluids-only', name: 'IV fluids and monitoring — will resolve spontaneously', rationale: 'Mild serotonin syndrome may resolve with drug discontinuation and supportive care, but moderate-severe SS requires cyproheptadine. Life-threatening SS (hyperthermia >41.1°C, severe rigidity, cardiovascular instability): intubation + paralysis (rocuronium — avoid succinylcholine due to rhabdomyolysis/hyperkalemia risk).' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Hunter Criteria for serotonin syndrome (high specificity): patient has taken serotonergic agent AND has ANY of: spontaneous clonus, inducible clonus + agitation or diaphoresis, ocular clonus + agitation or diaphoresis, tremor + hyperreflexia, or hypertonia + temperature >38°C + ocular or inducible clonus.','Serotonin syndrome vs NMS: SS onset hours, neuromuscular hyperactivity (clonus, hyperreflexia, mydriasis), hyperthermia. NMS onset days-weeks, muscle rigidity (lead-pipe), hyporeflexia, bradykinesia, encephalopathy, CK very elevated. Both can cause hyperthermia and rhabdomyolysis.','Linezolid and methylene blue: both have MAOI activity — do NOT combine with serotonergic drugs. Metaxalone (muscle relaxant) has weak serotonergic activity. Ondansetron at standard doses is safe (5-HT3 antagonist actually may reduce SS risk) but can trigger SS in overdose.'],
+    boardPearls: ['Serotonin toxicity spectrum: mild (tremor, tachycardia, diaphoresis), moderate (agitation, hyperreflexia, hyperthermia <40°C, clonus), severe (rigidity, hyperthermia >41°C, rhabdomyolysis, renal failure, DIC).','Temperature >41°C in SS: immediately cool with ice packs, cooling blankets, IV fluids. Life-threatening — associated with seizures, rhabdomyolysis, DIC, death. Intubate and paralyze if severe rigidity.','MAOI + SSRI or any serotonergic: potentially fatal combination. Washout period: fluoxetine (long half-life Prozac) requires 5 weeks before starting MAOI. All other SSRIs: 2 weeks. MAOIs: 2 weeks before starting SSRIs.']
+  }
+};

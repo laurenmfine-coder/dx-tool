@@ -281,3 +281,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['ttp'] = {
+  id: 'ttp', name: 'Amanda Lewis',
+  chiefComplaint: 'TTP — PLASMIC Score and Plasma Exchange',
+  diagnosis: 'TTP — PLASMIC Score and Plasma Exchange',
+  orders: {
+    correct: [{ id: 'plex', name: 'Emergent plasma exchange — do not delay for biopsy', rationale: 'Therapeutic plasma exchange (PLEX/TPE) is the definitive treatment for TTP. Removes ADAMTS13 antibodies and replaces ADAMTS13 enzyme. Start WITHIN HOURS of diagnosis — mortality without PLEX >90%, with PLEX <20%. Do not wait for ADAMTS13 levels to confirm diagnosis before starting PLEX.' },{ id: 'steroids-ttp', name: 'Prednisone 1mg/kg/day — added to PLEX for immune modulation', rationale: 'Glucocorticoids added to PLEX: suppress autoantibody production. Daily PLEX until remission (usually 7-14 days) — defined as platelet count >150,000 for 2 consecutive days after cessation of PLEX.' }],
+    incorrect: [{ id: 'platelets-ttp', name: 'Platelet transfusion — thrombocytopenia needs platelets', rationale: 'AVOID platelet transfusion in TTP — it fuels the microthrombi and can cause acute deterioration and death. There are reports of cardiovascular events and death following platelet transfusion in TTP. Give platelets ONLY for life-threatening hemorrhage.' },{ id: 'heparin-ttp', name: 'Heparin for thrombosis — microthrombi are clots that need anticoagulation', rationale: 'Heparin does NOT treat TTP. The microthrombi in TTP are composed of VWF-platelet aggregates — they form independently of the coagulation cascade that heparin targets. Heparin increases bleeding risk without benefit in TTP.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['TTP pentad (rarely all 5 present): microangiopathic hemolytic anemia (MAHA) + thrombocytopenia + neurologic symptoms + renal dysfunction + fever. Modern teaching: MAHA + thrombocytopenia with no alternative cause = TTP until proven otherwise.','ADAMTS13: VWF-cleaving protease. In TTP, autoantibodies (or congenital deficiency in Upshaw-Schulman syndrome) → ADAMTS13 activity <10% → ultra-large VWF multimers → platelet microthrombi in small vessels.','PLASMIC score: identifies TTP probability in MAHA. Predicts ADAMTS13 <10%: platelet count <30k (1) + hemolysis labs (1) + no active cancer (1) + no stem cell/solid organ transplant (1) + MCV <90 fL (1) + INR <1.5 (1) + Cr <2 mg/dL (1). Score ≥6 = high probability TTP.'],
+    boardPearls: ['HUS vs TTP: HUS = MAHA + thrombocytopenia + predominantly RENAL involvement (Cr usually >2). TTP = MAHA + thrombocytopenia + predominantly NEUROLOGIC involvement. Complement-mediated aHUS: ADAMTS13 normal, complement factor mutations, treat with eculizumab.','Rituximab in TTP: anti-CD20 monoclonal antibody. Used as adjunct to PLEX for refractory/relapsing TTP to reduce ADAMTS13 autoantibody production. Can achieve complete remission in refractory cases.','Congenital TTP (Upshaw-Schulman syndrome): autosomal recessive ADAMTS13 gene mutation. Presents in childhood, triggered by infection or pregnancy. Treat with fresh frozen plasma infusions (replaces ADAMTS13 without needing PLEX).']
+  }
+};

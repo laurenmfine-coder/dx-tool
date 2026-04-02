@@ -196,3 +196,19 @@ window.EMR_DATA = {
     "category": "infectious"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['bacterial-meningitis'] = {
+  id: 'bacterial-meningitis', name: 'Anthony Delgado',
+  chiefComplaint: 'Bacterial Meningitis — LP and Empirical Antibiotics Without Delay',
+  diagnosis: 'Bacterial Meningitis — LP and Empirical Antibiotics Without Delay',
+  orders: {
+    correct: [{ id: 'abx-first-lp', name: 'Empirical antibiotics IMMEDIATELY — do not delay for LP if signs of raised ICP', rationale: 'If signs of raised ICP (papilledema, focal deficits, seizures, GCS <13): blood cultures → CT head → LP → antibiotics. If NO signs of raised ICP: blood cultures → LP (ideally within 30 min) → antibiotics. Do NOT delay antibiotics for CT or LP in a critically ill patient — each hour of delay worsens outcomes.' },{ id: 'lp-interpretation', name: 'LP interpretation: CSF bacterial meningitis pattern', rationale: 'CSF bacterial meningitis: WBC >1000 (PMN predominance), protein >100 mg/dL, glucose <45 (CSF:serum glucose ratio <0.4), positive gram stain (50-80%), positive culture (70-85%). Viral meningitis: WBC 100-500 (lymphocyte predominance), normal protein, normal glucose, negative culture.' }],
+    incorrect: [{ id: 'delay-abx-ct', name: 'Wait for CT before antibiotics — need to rule out contraindications to LP', rationale: 'WRONG PRIORITY. CT is needed before LP only if signs of raised ICP (papilledema, focal deficits, altered consciousness). For ALL patients: get blood cultures and start antibiotics while CT is pending. Delay in antibiotics of even 1-3 hours worsens mortality in bacterial meningitis.' },{ id: 'dexamethasone-after', name: 'Give dexamethasone after confirming organism sensitivity', rationale: 'Dexamethasone should be given BEFORE or WITH the first dose of antibiotics — it reduces the inflammatory cascade triggered by bacterial cell lysis. Give 0.15 mg/kg IV q6h × 4 days. Most benefit seen in pneumococcal meningitis (reduces mortality and neurological sequelae). Less clear benefit in meningococcal meningitis.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Empirical regimen: vancomycin + ceftriaxone (covers S. pneumoniae including PCN-resistant strains, N. meningitidis). Add ampicillin if immunocompromised, age >50, or alcoholism (covers Listeria). Add dexamethasone before or with first antibiotic dose.','Kernig sign: knee extension limited/painful with hip flexed at 90°. Brudzinski sign: passive neck flexion causes involuntary hip/knee flexion. Both have low sensitivity (~50%) but high specificity. Jolt accentuation: worsening headache with rapid horizontal head rotation — higher sensitivity (97%) but lower specificity for meningismus.','Antibiotic dosing for meningitis: HIGH DOSE — ceftriaxone 2g IV q12h (CNS penetration requires high serum levels). Vancomycin 15-20 mg/kg IV q8-12h (target AUC/MIC, not trough). Goal: CSF drug concentrations exceed MIC.'],
+    boardPearls: ['N. meningitidis: petechiae/purpura (meningococcemia — sepsis without meningitis) can occur. NOTIFY public health immediately. Post-exposure prophylaxis for close contacts: rifampin × 2 days, or single-dose ciprofloxacin, or single-dose ceftriaxone IM.','S. pneumoniae meningitis: most common bacterial meningitis in adults. PCN-resistant strains prevalent — use vancomycin + ceftriaxone empirically, adjust based on sensitivities. Dexamethasone most beneficial for this organism.','Listeria meningitis: elderly, immunocompromised, pregnant. NOT covered by cephalosporins — requires ampicillin. MRI: rhombencephalitis pattern (brainstem involvement). CSF: mixed PMN/lymphocyte pleocytosis.']
+  }
+};

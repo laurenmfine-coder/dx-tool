@@ -282,3 +282,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['pericarditis-v1'] = {
+  id: 'pericarditis-v1', name: 'Daniel Okafor',
+  chiefComplaint: 'Pericarditis — NSAID Therapy and Colchicine',
+  diagnosis: 'Pericarditis — NSAID Therapy and Colchicine',
+  orders: {
+    correct: [{ id: 'nsaid-colchicine', name: 'Ibuprofen 600mg TID × 1-2 weeks + colchicine 0.5mg BID × 3 months', rationale: 'NSAIDs are first-line for acute pericarditis. Ibuprofen 600mg TID (with food/PPI) or aspirin 750-1000mg TID. COLCHICINE is added to reduce recurrence (COPE trial, ICAP trial): 0.5mg BID × 3 months (or 0.5mg daily if <70kg). Reduces recurrence rate from 30-50% to 10-15%.' },{ id: 'activity-restriction', name: 'Restrict physical activity until asymptomatic + CRP normalized', rationale: 'Athletes with pericarditis: restrict from competitive sports for minimum 3 months after symptom resolution + CRP normalization. Non-athletes: avoid strenuous activity until asymptomatic. Activity restriction reduces recurrence risk.' }],
+    incorrect: [{ id: 'steroids-pericarditis', name: 'Prednisone — first-line treatment for pericarditis', rationale: 'Corticosteroids are NOT first-line for pericarditis — they increase recurrence rate (COPPS trial showed higher recurrence with corticosteroids). Reserve steroids for: pericarditis refractory to NSAIDs + colchicine, connective tissue disease-associated pericarditis, uremic pericarditis, or specific autoimmune causes.' },{ id: 'antibiotics-pericarditis', name: 'Antibiotics — pericarditis is likely infectious', rationale: 'Most pericarditis in developed countries is viral or idiopathic — antibiotics are NOT indicated. Specific antibiotic indications: bacterial (purulent) pericarditis (rare, <5%), TB pericarditis (endemic areas). Purulent pericarditis requires pericardiocentesis + drainage + IV antibiotics.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['ECG in pericarditis: Stage I (diffuse ST elevation + PR depression — ALL leads except aVR and V1). Stage II (ST returns to baseline). Stage III (T-wave inversions). Stage IV (normalization). Saddle-shaped ST elevation in ALL leads (vs STEMI: localized, concave upward).','Pericarditis vs STEMI distinction: pericarditis — diffuse ST elevation in multiple leads, no reciprocal changes (aVR may have ST depression), PR depression, friction rub, pleuritic chest pain, young age, recent viral illness. STEMI — localized leads, reciprocal changes, no PR depression.','Colchicine mechanism: inhibits microtubule polymerization → inhibits neutrophil migration and cytokine release → reduces pericardial inflammation. Most effective if started at the onset of first episode (ICAP trial: 0.5mg BID × 3 months).'],
+    boardPearls: ['Constrictive pericarditis: fibrocalcific pericardium → impaired ventricular filling. Causes: TB (worldwide), prior cardiac surgery, radiation, idiopathic/viral. Kussmaul sign (JVP rises with inspiration), pericardial knock on auscultation. Treatment: pericardiectomy.','Cardiac tamponade: pericardial effusion → elevated intrapericardial pressure → impaired cardiac filling. Beck Triad: hypotension + muffled heart sounds + distended neck veins. Pulsus paradoxus >10 mmHg. Pericardiocentesis is life-saving.','Elevated CRP in pericarditis: used to monitor treatment response and guide duration. CRP normalization before stopping NSAIDs/colchicine reduces recurrence. Do not stop treatment based on symptoms alone.']
+  }
+};

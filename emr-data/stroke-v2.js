@@ -54,4 +54,9 @@ window.CASES['stroke-v2'] = {
       { id: 'raise-bp-sv2', name: 'Permissive hypertension SBP 160–180 to maintain penumbra', rationale: 'Permissive HTN is for ischemic stroke without tPA. After hemorrhagic conversion, elevated BP drives hematoma expansion — lower it.' }
     ]
   }
+
+  teachingPoints: {
+    keyLearning: ['Hemorrhagic transformation (HT) complicates 3-9% of ischemic strokes treated with tPA. PH2 (parenchymal hematoma > 30% of infarct, with mass effect) is the most dangerous — 50-80% mortality. Risk factors: large infarct, high NIHSS, older age, elevated glucose, AF, anticoagulation prior to tPA.','When HT suspected (sudden headache, BP surge, GCS drop, NIHSS worsening after tPA): STOP tPA infusion immediately. STAT CT head. If PH2 confirmed: cryoprecipitate (fibrinogen replacement), platelets, and consider aminocaproic acid or TXA. Neurosurgery consult for hematoma expansion.','BP management post-tPA hemorrhage: target SBP <140-160. Avoid precipitous drops (cerebral autoregulation impaired). IV labetalol or nicardipine for acute control. Monitor ICP.'],
+    boardPearls: ['tPA absolute contraindications include: prior ICH, active bleeding, platelet <100,000, INR >1.7, BP >185/110 (uncontrolled), blood glucose <50 or >400, major surgery within 14 days.','NIHSS scoring: each 1-point increase in NIHSS = 17% increase in HT risk. NIHSS >20 = very high HT risk.','Hemorrhagic transformation vs hemorrhagic stroke: HT occurs within the ischemic area (petechial or confluent). Primary hemorrhagic stroke occurs without preceding ischemia. CT timing matters — early imaging may miss hemorrhage, especially small petechial HT.']
+  },
 };

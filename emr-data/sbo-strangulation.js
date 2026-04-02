@@ -265,3 +265,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['sbo-strangulation'] = {
+  id: 'sbo-strangulation', name: 'Richard Kowalski',
+  chiefComplaint: 'Small Bowel Obstruction with Strangulation — Emergent Surgery',
+  diagnosis: 'Small Bowel Obstruction with Strangulation — Emergent Surgery',
+  orders: {
+    correct: [{ id: 'emergency-or', name: 'Emergent surgery — strangulation means ischemic bowel', rationale: 'Strangulated SBO (closed-loop obstruction + vascular compromise): emergent surgery is the ONLY treatment. Signs of strangulation: fever, peritoneal signs, free air, pneumatosis intestinalis, portal venous gas on CT, lactate elevation, WBC >15k, pain out of proportion to exam. Bowel ischemia is irreversible — every hour of delay = more bowel loss.' },{ id: 'ngt-ivf-sbo', name: 'NGT decompression + IV fluids while preparing OR', rationale: 'Immediate gastric decompression (NGT) reduces aspiration risk and abdominal distension. Aggressive IV fluid resuscitation for third-spacing and sepsis from translocation. Broad-spectrum antibiotics (piperacillin-tazobactam) for peritonitis. These are concurrent with OR preparation, not alternatives to surgery.' }],
+    incorrect: [{ id: 'conservative-management', name: 'NGT + NPO — trial of non-operative management', rationale: 'Non-operative management is ONLY appropriate for SIMPLE (non-strangulated) partial SBO. Strangulation signs (fever, peritonitis, ischemia on CT, lactate elevation) = EMERGENT SURGERY. No trial of conservative management when strangulation is suspected. Death from bowel gangrene/perforation results from delay.' },{ id: 'water-soluble-contrast', name: 'Gastrografin (water-soluble contrast) — diagnostic and therapeutic for SBO', rationale: 'Gastrografin is therapeutic only for SIMPLE (non-strangulated, adhesive, partial) SBO — works by osmotically drawing fluid into the bowel lumen, facilitating resolution. Do NOT give contrast in strangulated SBO — the bowel cannot handle the osmotic load and perforation risk is increased. CT showing strangulation → OR, not more contrast studies.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['SBO causes: adhesions (60-70%), hernias (10-15%), neoplasms (10-15%), intussusception, volvulus, Meckel diverticulum, IBD. History of abdominal surgery = adhesions until proven otherwise.','Strangulation signs (any = emergent surgery): fever, peritoneal signs (rebound, guarding), WBC >15k, lactate elevation, free air (perforated), portal venous gas (advanced ischemia), pneumatosis intestinalis, mesenteric edema on CT, closed-loop configuration.','Non-operative SBO management (simple, partial): NGT decompression + NPO + IV fluids + serial exams. If no improvement at 24-48h or any deterioration → surgery. Gastrografin water-soluble contrast: therapeutic (osmotic effect) AND diagnostic (if contrast reaches colon within 4-6h = high chance of resolution).'],
+    boardPearls: ['Closed-loop SBO: both proximal and distal points of obstruction (e.g., internal hernia, volvulus) = highest strangulation risk. CT shows C-shaped or U-shaped dilated loop, whirl sign (mesenteric twisting), beak sign.','Adhesion prevention: no effective pharmacologic prevention. Hyaluronate/carboxymethylcellulose (Seprafilm) placed during surgery reduces adhesion formation. Laparoscopic approach reduces de novo adhesion formation.','Richter hernia: lateral wall of bowel herniated (not full circumference) — may not cause complete obstruction but strangulation of the herniated wall can occur silently. Often missed until perforation.']
+  }
+};

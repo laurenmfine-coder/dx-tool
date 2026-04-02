@@ -52,4 +52,9 @@ window.CASES['pe-v2'] = {
       { id: 'fluids-pv2', name: 'Aggressive IV fluids — BP 94, patient looks volume-depleted', rationale: 'The failing RV is already volume-overloaded from back-pressure. Additional fluid worsens RV dilation, shifts septum further left (D-sign), and reduces LV output — a deadly cycle.' }
     ]
   }
+
+  teachingPoints: {
+    keyLearning: ['Submassive (intermediate-high risk) PE: hemodynamically stable (SBP ≥90) BUT evidence of RV dysfunction (RV:LV ratio >0.9 on echo, McConnell sign, septal bowing) AND elevated cardiac biomarkers (troponin, BNP/NT-proBNP). Systemic thrombolysis not routinely given — but PERT (PE response team) activation is appropriate.','Thrombolysis decision for submassive PE: systemic tPA (alteplase 100mg over 2h) reserved for hemodynamic compromise (SBP <90 or drop ≥40 mmHg for >15 min). For submassive: catheter-directed thrombolysis (CDT) or catheter-directed embolectomy may be appropriate at PERT centers. MOPETT, ULTIMA, SEATTLE II trials support CDT safety.','McConnell sign: free wall RV hypokinesis with preserved apex contraction. High specificity (>90%) for acute PE. The preserved apex is because the LV tethers the RV apex — the free wall is not tethered and fails first in acute pressure overload.'],
+    boardPearls: ['RV:LV ratio >0.9 on echo or CT = RV strain = intermediate-high risk. Troponin elevation alone without RV dysfunction = intermediate-low risk.','Anticoagulation despite hemodynamic borderline: immediate anticoagulation with UFH or LMWH is indicated for all PE. For intermediate-high risk: UFH preferred (can be stopped rapidly if thrombolysis needed). Hold DOACs until thrombolysis decision is made.','Recurrent PE on anticoagulation: check adherence first (most common cause). If truly recurrent on therapeutic anticoagulation: thrombophilia workup, switch to LMWH (more reliable levels), IVC filter consideration, oncology workup if no other cause.']
+  },
 };

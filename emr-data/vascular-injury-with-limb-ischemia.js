@@ -196,3 +196,19 @@ window.EMR_DATA = {
     "category": "vascular"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['vascular-injury-with-limb-ischemia'] = {
+  id: 'vascular-injury-with-limb-ischemia', name: 'Andre Jackson',
+  chiefComplaint: 'Acute Limb Ischemia — Six Ps and Heparin',
+  diagnosis: 'Acute Limb Ischemia — Six Ps and Heparin',
+  orders: {
+    correct: [{ id: 'heparin-ali', name: 'IV unfractionated heparin — immediately on clinical diagnosis', rationale: 'Start heparin (70-80 u/kg bolus → 15 u/kg/hr infusion) immediately when acute limb ischemia is recognized — before imaging, before OR. Heparin prevents propagation of clot, reduces risk of venous thrombosis, and preserves collateral perfusion. Do not delay for confirmatory imaging in viable limb.' },{ id: 'ct-angiography-ali', name: 'CTA of affected extremity — confirms diagnosis and identifies level', rationale: 'CTA identifies embolic vs thrombotic cause, level of occlusion, and collateral circulation. Embolic: sharp cut-off, no collaterals, other vessel disease absent. Thrombotic: irregular margins, collaterals present, diffuse atherosclerosis. CT guides intervention (embolectomy vs bypass vs thrombolysis).' }],
+    incorrect: [{ id: 'fasciotomy-immediate', name: 'Fasciotomy immediately — compartment syndrome from ischemia', rationale: 'Fasciotomy is performed AFTER revascularization, not before. Ischemia-reperfusion injury after revascularization causes compartment syndrome — prophylactic 4-compartment fasciotomy of the lower leg is performed at the time of revascularization if ischemia time >4-6h. Fasciotomy before revascularization does not restore flow.' },{ id: 'warfarin-ali', name: 'Start warfarin — long-term anticoagulation for limb ischemia', rationale: 'Warfarin (or DOAC) is used for SECONDARY PREVENTION after revascularization — not for acute treatment. Acute limb ischemia is treated with IV heparin + emergent revascularization (embolectomy, surgical bypass, or catheter-directed thrombolysis). Chronic anticoagulation is started after the acute event is addressed.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Six Ps of acute limb ischemia: Pain, Pallor, Pulselessness, Paresthesias, Paralysis, Poikilothermia. Paresthesias and paralysis indicate irreversible ischemia developing — emergency revascularization.','Viable vs non-viable limb: viable = pain, pallor, pulselessness only (no sensory/motor loss) → revascularization possible. Non-viable = paralysis + paresthesias + muscle rigor + marble skin → primary amputation. Rutherford classification guides management.','Embolism vs thrombosis: embolism (sudden, no prior claudication, atrial fibrillation, sharp cut-off on CTA) = embolectomy (Fogarty catheter). Thrombosis (gradual onset, claudication history, atherosclerosis, collaterals) = catheter-directed thrombolysis or bypass graft.'],
+    boardPearls: ['Reperfusion injury: restored blood flow to ischemic muscle → calcium influx, free radicals, inflammatory mediators → myonecrosis → rhabdomyolysis → hyperkalemia → compartment syndrome. Treat with IV fluids, alkalinize urine, monitor K+ and Cr.','Fasciotomy for compartment syndrome: 4-compartment lower leg (anterior, lateral, posterior superficial, posterior deep). If any compartment pressure >30 mmHg or within 30 mmHg of diastolic BP = fasciotomy. Leave fasciotomy wounds open, close/skin graft at 48-72h.','Embolectomy technique: Fogarty balloon catheter → passed distal to clot → balloon inflated → withdrawn, pulling clot with it. Success depends on time from onset and clot age. Thrombosed popliteal aneurysm: common source of distal emboli — check popliteal artery for aneurysm.']
+  }
+};

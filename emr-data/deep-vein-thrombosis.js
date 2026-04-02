@@ -217,3 +217,19 @@ window.EMR_DATA = {
     "category": "vascular"
   }
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['deep-vein-thrombosis'] = {
+  id: 'deep-vein-thrombosis', name: 'Patricia Duval',
+  chiefComplaint: 'DVT — Wells Score and DOAC Therapy',
+  diagnosis: 'DVT — Wells Score and DOAC Therapy',
+  orders: {
+    correct: [{ id: 'duplex-ultrasound', name: 'Compression duplex ultrasound — first-line imaging for suspected DVT', rationale: 'Lower extremity duplex ultrasound: sensitivity >95% for proximal DVT (popliteal and above). Compress the vein — if compressible = no clot. Non-compressible = DVT. Less sensitive for distal DVT (calf veins). If negative with high pretest probability: repeat in 5-7 days or advance to venography.' },{ id: 'anticoagulation-dvt', name: 'Anticoagulate — DOACs (rivaroxaban or apixaban) preferred for DVT', rationale: 'DOACs (rivaroxaban, apixaban, edoxaban) are first-line for DVT (EINSTEIN, AMPLIFY trials): comparable efficacy to LMWH/warfarin with lower bleeding risk. Rivaroxaban: 15mg BID × 21 days → 20mg daily. Apixaban: 10mg BID × 7 days → 5mg BID. Duration: provoked (3 months), unprovoked (indefinite, individualize).' }],
+    incorrect: [{ id: 'empirical-anticoag', name: 'Anticoagulate based on clinical suspicion alone without imaging', rationale: 'Imaging is required to confirm DVT before initiating anticoagulation — DVT must be confirmed radiographically. Use Wells score to pre-test stratify: low score + negative D-dimer = no DVT, no imaging needed. Moderate-high score: proceed to duplex ultrasound regardless of D-dimer.' },{ id: 'compression-only', name: 'Compression stockings only — DVT does not need anticoagulation', rationale: 'Anticoagulation is required for DVT to prevent PE and extension. Compression stockings alone are used for PTS prevention AFTER anticoagulation is established. The SOX trial showed elastic compression stockings do NOT prevent PTS — routine use for PTS prevention is no longer standard.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Wells DVT score: active cancer (1), paralysis/plaster cast (1), recently bedridden >3 days or surgery <12 weeks (1), localized tenderness along deep venous system (1), entire leg swollen (1), calf swelling >3cm compared to other leg (1), pitting edema (1), collateral superficial veins (1), previously documented DVT (1), alternative diagnosis at least as likely (-2). Score ≥2 = high probability.','D-dimer: highly sensitive but non-specific. A negative D-dimer (<500 ng/mL) with LOW pre-test probability (Wells score <2) essentially rules out DVT (negative predictive value >99%). Elevated in pregnancy, cancer, infection, post-surgery — cannot rule out DVT with positive D-dimer alone.','Duration of anticoagulation: first provoked DVT (transient risk factor like surgery, trauma, immobility) = 3 months. First unprovoked DVT = 3-6 months minimum, then indefinite if low bleeding risk. Recurrent unprovoked DVT = indefinite. Cancer-associated DVT = LMWH or DOAC (edoxaban/rivaroxaban per CARAVAGGIO, Hokusai-VTE Cancer).'],
+    boardPearls: ['Post-thrombotic syndrome (PTS): occurs in 20-50% of proximal DVT. Chronic pain, swelling, skin changes, ulceration. Risk reduced by: adequate anticoagulation, graduated compression stockings (for symptom relief, not prevention per SOX trial). Iliac/femoral DVT highest PTS risk.','Phlegmasia cerulea dolens: massive iliofemoral DVT causing venous gangrene. Extreme swelling, cyanosis, arterial compromise from compartment syndrome. Emergency CDT or surgical thrombectomy.','Superficial thrombophlebitis: inflammation of superficial vein with clot. If <5cm from saphenofemoral junction: treat as DVT (risk of propagation to deep system). Otherwise: NSAIDs, warmth, compression.']
+  }
+};

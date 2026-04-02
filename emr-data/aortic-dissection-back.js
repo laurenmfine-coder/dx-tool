@@ -272,3 +272,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['aortic-dissection-back'] = {
+  id: 'aortic-dissection-back', name: 'Raymond Foster',
+  chiefComplaint: 'Aortic Dissection — Back/Flank Pain Presentation',
+  diagnosis: 'Aortic Dissection — Back/Flank Pain Presentation',
+  orders: {
+    correct: [{ id: 'cta-chest-abd', name: 'CTA chest/abdomen/pelvis with contrast — imaging of choice for dissection', rationale: 'CTA with contrast: 90-100% sensitivity for aortic dissection. Identify: entry tear location (Type A vs B), extent, branch vessel involvement, pericardial effusion, malperfusion. TEE is alternative if contrast contraindicated.' },{ id: 'bp-control', name: 'IV labetalol or esmolol — target SBP <120, HR <60', rationale: 'Anti-impulse therapy: reduce HR first (reduces shear force), then SBP. Labetalol 20mg IV bolus → infusion. Esmolol 500 mcg/kg load → 50-200 mcg/kg/min. Target SBP 100-120, HR <60.' }],
+    incorrect: [{ id: 'thrombolytics', name: 'tPA — treat as PE or MI', rationale: 'CONTRAINDICATED. Thrombolytics in aortic dissection cause catastrophic hemorrhage. The tearing pain radiating to back + BP differential between arms = dissection, not MI. CTA before any intervention.' },{ id: 'anticoagulation-ad', name: 'Heparin infusion — anticoagulate for suspected clot', rationale: 'Anticoagulation is generally CONTRAINDICATED in aortic dissection — increases hemorrhagic risk into the false lumen. Only used selectively for malperfusion syndromes under cardiovascular surgical guidance.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Type A (ascending aorta) dissection: surgical emergency — emergency repair regardless of other factors. Type B (descending only): medical management with anti-impulse therapy; intervention for malperfusion or refractory pain.','Stanford classification: Type A (involves ascending aorta regardless of entry tear location) = surgery. Type B (descending only, distal to subclavian) = medical management first. Mortality: Type A 1-2%/hour without surgery.','Back/flank pain presentation: Type B dissection often presents with back or flank pain mimicking renal colic or musculoskeletal pain. Key clue: tearing quality, hypertension history, pulse deficit.'],
+    boardPearls: ['DeBakey vs Stanford: DeBakey I (ascending + descending), II (ascending only), III (descending only). Stanford A = DeBakey I+II. Stanford B = DeBakey III.','Marfan syndrome: annual aortic root surveillance. Prophylactic repair when ascending aorta >4.5-5.0cm. Beta-blockers and losartan reduce progression rate.','Intramural hematoma (IMH): variant of dissection without intimal tear — blood in the aortic wall. Managed like dissection by location (A=surgery, B=medical). May progress to classic dissection or resolve.']
+  }
+};

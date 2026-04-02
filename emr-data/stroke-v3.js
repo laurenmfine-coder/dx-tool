@@ -50,4 +50,9 @@ window.CASES['stroke-v3'] = {
       { id: 'tpa-af-sv3', name: 'Cardiovert AF — restore sinus rhythm urgently', rationale: 'AF spontaneously terminated. Cardioversion in acute post-stroke period risks thromboembolism and is not indicated for paroxysmal AF that self-terminated.' }
     ]
   }
+
+  teachingPoints: {
+    keyLearning: ['Anticoagulation after hemorrhagic stroke/hemorrhagic transformation: timing is critical. For AF-associated embolic stroke with HT: restart anticoagulation at 4-14 days (typically day 7-10 for intermediate-risk). Risk of recurrent ischemic stroke without anticoagulation > risk of hematoma expansion for most patients after day 7.','Aspiration pneumonia post-stroke: affects 30% of stroke patients with dysphagia. Management: nil-per-mouth until formal SLP swallow evaluation, consider NGT for nutrition, empirical antibiotics covering oral flora (ampicillin-sulbactam), early mobilization.','New-onset AF post-stroke: found in 10-20% of cryptogenic strokes with prolonged monitoring. CHA₂DS₂-VASc ≥ 2 in men or ≥ 3 in women: anticoagulate. Warfarin (target INR 2-3) or DOAC (DOAC preferred unless mechanical valve or significant renal impairment).'],
+    boardPearls: ['Post-stroke AF and hemorrhagic transformation: the dilemma — patient needs anticoagulation for AF (stroke prevention) but just had hemorrhagic conversion. AHA/ASA guidance: defer anticoagulation 4-14 days for PH2. Use the GRASP scoring system or individualize risk-benefit.','Stroke unit care reduces mortality by 18% and dependency by 21% — independent of thrombolysis (Cochrane review). Structured rehab pathway, multidisciplinary rounds, early PT/OT/SLP, and secondary prevention protocols drive outcomes.','Centrally-acting agents post-stroke: amantadine, SSRIs (FLAME trial — fluoxetine improves motor recovery, though FOCUS/EFFECTS trials showed mixed results), avoid first-generation antihistamines and benzodiazepines (impair neuroplasticity).']
+  },
 };

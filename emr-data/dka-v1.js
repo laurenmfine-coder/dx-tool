@@ -308,3 +308,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['dka-v1'] = {
+  id: 'dka-v1', name: 'Alejandro Gutierrez',
+  chiefComplaint: 'DKA — Fluid + Insulin Protocol and Monitoring',
+  diagnosis: 'DKA — Fluid + Insulin Protocol and Monitoring',
+  orders: {
+    correct: [{ id: 'ivf-protocol', name: 'IV fluids — 0.9% NS 1L bolus, then 250-500 mL/hr based on sodium', rationale: '1L 0.9% NS over 30-60 min for initial resuscitation. Then: if corrected Na is normal → continue 0.9% NS. If corrected Na rising → switch to 0.45% NaCl. Add D5 when glucose reaches 200-250 mg/dL. Total fluid deficit 3-6L typically.' },{ id: 'insulin-drip', name: 'Insulin drip 0.1 u/kg/hr — after K ≥3.5', rationale: 'Do NOT start insulin if K <3.5 — risk of fatal hypokalemia as insulin drives K into cells. Replete potassium first. Insulin 0.1 u/kg/hr regular insulin infusion. Goal: glucose falls 50-100 mg/dL/hr. Switch to SQ insulin + overlap with drip for at least 2h before stopping drip to prevent rebound ketosis.' }],
+    incorrect: [{ id: 'insulin-bolus', name: 'Insulin bolus 10 units IV push — rapid correction of hyperglycemia', rationale: 'IV insulin boluses are NOT used in DKA management. Continuous infusion provides controlled glucose reduction (target 50-100 mg/dL/hr). Rapid correction risks cerebral edema (especially in children) and profound hypokalemia.' },{ id: 'bicarb-acidosis', name: 'Sodium bicarbonate for pH <7.3', rationale: 'Bicarbonate is NOT routinely recommended for DKA unless pH <6.9. In children: avoid bicarb entirely — increases cerebral edema risk. Bicarbonate may worsen CNS acidosis (paradoxical CSF acidosis from CO2 diffusion), worsens hypokalemia, and delays ketone clearance. Insulin and fluids correct the acidosis.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['DKA diagnostic criteria: glucose >250 mg/dL + pH <7.3 or HCO3 <18 + positive ketones (serum or urine). Mild: pH 7.25-7.3. Moderate: pH 7.1-7.24. Severe: pH <7.1.','Potassium in DKA: despite total body depletion, serum K is often normal or HIGH initially (acidosis drives K out of cells). As insulin is given and pH corrects, K falls rapidly. Replace K aggressively: if K 3.5-5: 20-40 mEq/hr. If K <3.5: replace before starting insulin. If K >5.5: monitor closely.','Resolution criteria (not glucose): glucose <200 + bicarbonate ≥15 + pH >7.3 + anion gap closed. THEN transition to SQ insulin. Do NOT stop drip without subcutaneous overlap.'],
+    boardPearls: ['Anion gap in DKA: Na - (Cl + HCO3). Normal 8-12 mEq/L. DKA causes elevated AG metabolic acidosis from ketones. As DKA resolves, AG normalizes before pH does (hyperchloremic non-AG acidosis from NS-heavy resuscitation is common during DKA resolution).','HHS (hyperosmolar hyperglycemic state): hyperglycemia >600 + osmolality >320 + NO significant ketosis (pH >7.3, bicarbonate >15) + profound dehydration (average 8-10L deficit). Treat: aggressive fluids (0.9% NS then 0.45% NS), gentle insulin (lower rate than DKA), correct Na and osmolality slowly.','Identify DKA precipitant: infection (30-40%), new-onset DM (20-25%), insulin omission (15-20%), medications (corticosteroids, SGLT2 inhibitors — euglycemic DKA). Treat the precipitant, not just the DKA.']
+  }
+};

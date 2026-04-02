@@ -290,3 +290,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['apap-overdose'] = {
+  id: 'apap-overdose', name: 'Megan Fisher',
+  chiefComplaint: 'Acetaminophen Overdose — NAC and Rumack-Matthew Nomogram',
+  diagnosis: 'Acetaminophen Overdose — NAC and Rumack-Matthew Nomogram',
+  orders: {
+    correct: [{ id: 'nac-oral', name: 'N-acetylcysteine (NAC) — initiate immediately, do not wait for levels if >4h since ingestion', rationale: 'NAC replenishes glutathione, detoxifies NAPQI (the hepatotoxic metabolite). Oral 140mg/kg load → 70mg/kg q4h × 17 doses. IV 150mg/kg over 15 min → 50mg/kg over 4h → 100mg/kg over 16h. Most effective if started <8h post-ingestion but beneficial up to 24h and beyond with hepatotoxicity.' },{ id: 'rumack-nomogram', name: 'Rumack-Matthew nomogram — plot 4h or later APAP level to guide treatment', rationale: '4-hour acetaminophen level on nomogram determines treatment: level above the possible hepatotoxicity line → treat with NAC. Level below the line → can discontinue (if time is accurate). Any uncertainty → treat. Time of ingestion must be known.' }],
+    incorrect: [{ id: 'gastric-lavage', name: 'Gastric lavage — remove ingested pills', rationale: 'Gastric lavage is not routinely recommended for APAP overdose — APAP absorbs rapidly. Activated charcoal (1 g/kg) may be given if ingestion was <1-2h before presentation and patient is not vomiting. Evidence for charcoal is limited.' },{ id: 'wait-liver-failure', name: 'Wait for LFT elevation before treating — only treat if liver is affected', rationale: 'FATAL DELAY. NAC is most effective BEFORE liver injury occurs. By the time LFTs rise (24-72h post-ingestion), significant hepatotoxicity has already begun. Treat based on ingestion history and nomogram level, not on LFT results.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Acetaminophen hepatotoxicity: NAPQI accumulates when glutathione stores depleted (large ingestion, alcohol use, fasting, malnutrition). NAC replenishes glutathione. Most effective <8h but give up to 24h+ if hepatotoxicity present.','Rumack-Matthew nomogram: only valid for single acute ingestion with known time. Plot 4h or later APAP level. Staggered ingestions or chronic overdose: treat empirically with NAC if APAP detectable or if any symptom.','APAP hepatotoxicity stages: Phase I (0-24h) — N/V, malaise. Phase II (24-72h) — LFTs rise, apparent improvement. Phase III (72-96h) — peak hepatotoxicity, jaundice, coagulopathy, renal failure. Phase IV (4 days-2 weeks) — recovery or death.'],
+    boardPearls: ['High-risk groups for hepatotoxicity: chronic alcohol use, fasting/malnutrition, liver disease, enzyme-inducing medications (rifampin, isoniazid, carbamazepine) — all increase NAPQI formation or decrease glutathione.','Extended-release APAP: repeat level at 8h after initial 4h level — levels may continue to rise with ER formulations. May need longer NAC course.','King College Criteria for liver transplant in APAP-induced ALF: pH <7.30 OR all three: creatinine >3.4, PT >100 sec (INR >6.5), grade III/IV encephalopathy.']
+  }
+};

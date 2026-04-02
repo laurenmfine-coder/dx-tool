@@ -272,3 +272,19 @@ window.EMR_DATA = {
     ]
   ]
 };
+
+/* ── CASES format extension ─────────── */
+window.CASES = window.CASES || {};
+window.CASES['sah-v1'] = {
+  id: 'sah-v1', name: 'Jennifer Wu',
+  chiefComplaint: 'Subarachnoid Hemorrhage — Thunderclap Headache and Nimodipine',
+  diagnosis: 'Subarachnoid Hemorrhage — Thunderclap Headache and Nimodipine',
+  orders: {
+    correct: [{ id: 'cta-head', name: 'CT head + LP if CT negative — thunderclap headache workup', rationale: 'CT head (non-contrast): 98% sensitive for SAH if done within 6 hours of onset (100% if high-quality scanner). LP if CT negative: xanthochromia (yellow CSF from RBC breakdown) appears 2-6h after onset, persists 2 weeks. CT angiography for aneurysm identification.' },{ id: 'nimodipine', name: 'Nimodipine 60mg PO q4h × 21 days — reduces vasospasm and improves outcomes', rationale: 'Nimodipine is a calcium channel blocker that specifically reduces cerebral vasospasm and improves neurological outcomes after SAH (BRITISH ANEURYSM NIMODIPINE TRIAL). Give PO (NOT IV nimodipine — different formulation, causes hypotension). Start immediately and continue for 21 days regardless of blood pressure.' }],
+    incorrect: [{ id: 'tpa-sah', name: 'tPA — treat thunderclap headache as ischemic stroke', rationale: 'CONTRAINDICATED. SAH is a hemorrhagic event. tPA would cause catastrophic expansion of the hemorrhage. Thunderclap headache with SAH on CT requires vascular imaging (CTA) to identify the aneurysm, THEN neurosurgical or interventional radiology treatment (coiling or clipping).' },{ id: 'no-lp', name: 'No LP needed — CT shows no blood, patient is fine', rationale: 'CT sensitivity for SAH decreases rapidly after 6 hours: ~98% at 6h, ~93% at 24h, ~80% at 72h. In a patient with thunderclap headache and negative CT, LP is MANDATORY to check for xanthochromia. A negative CT alone does not exclude SAH with sufficient certainty.' }]
+  },
+  teachingPoints: {
+    keyLearning: ['Thunderclap headache: maximal intensity at onset ("worst headache of my life"). SAH is the diagnosis-not-to-miss — 30-40% mortality. Other causes: cerebral venous thrombosis, hypertensive emergency, RCVS (reversible cerebral vasoconstriction syndrome), meningitis, pituitary apoplexy.','Ottawa SAH rule (for alert patients with peak headache): CT + LP if ANY of: age ≥40, neck stiffness/pain, witnessed loss of consciousness, onset during exertion, or thunderclap description. High sensitivity approach.','Hunt and Hess grade: I (mild headache, alert) → II (severe headache, CN palsy) → III (confused, focal deficit) → IV (stuporous, severe deficit) → V (comatose, posturing). Higher grade = worse prognosis.'],
+    boardPearls: ['Aneurysm treatment: endovascular coiling vs surgical clipping. ISAT trial: coiling superior for suitable aneurysms (lower mortality, disability). Clipping preferred for MCA aneurysms, young patients with long life expectancy, or incomplete coiling.','SAH complications: vasospasm (peak 5-14 days, occurs in 70%, symptomatic in 30%), rebleeding (highest risk in first 24h, 20-30% mortality), hydrocephalus (acute 20%, chronic 10-20%), SIADH/cerebral salt wasting, neurogenic pulmonary edema, cardiac dysfunction.','Nimodipine mechanism: orally bioavailable dihydropyridine CCB with preferential cerebral vessel selectivity. Reduces symptomatic vasospasm, improves neurological outcomes. DOES NOT reduce radiographic vasospasm — improves outcomes through other mechanisms (neuroprotection, microcirculation).']
+  }
+};
