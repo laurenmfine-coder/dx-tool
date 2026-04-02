@@ -1,269 +1,48 @@
-/* emr-data/adrenal-crisis.js — Auto-generated EMR case data for Adrenal Crisis */
-window.EMR_DATA = {
-  "patient": {
-    "name": "Margaret Chen",
-  "patientHPI": "I stopped taking my steroid medication five days ago because I was feeling better, but now I feel terrible - I'm dizzy, nauseous, and have this awful stomach pain that won't go away. I think I made a mistake stopping it so suddenly.",
-    "dob": "02/18/1972",
-    "age": "54",
-    "sex": "Female",
-    "pronouns": "she/her",
-    "mrn": "MRN-564292",
-    "language": "English",
-    "race": "Hispanic/Latino",
-    "phone": "(513) 555-2816",
-    "email": "margaret.chen@email.com",
-    "address": "8733 Cedar Blvd, Kansas City, MO 64120",
-    "insurance": "Oscar Health",
-    "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Walgreens — University Blvd",
-    "emergencyContact": {
-      "name": "Alejandro Chen",
-      "phone": "(502) 555-8972",
-      "relationship": "Partner"
-    },
-    "chiefComplaint": "Hypotension, nausea, abdominal pain — recently stopped prednisone abruptly",
-    "diagnosis": "Adrenal Crisis"
+window.CASES = window.CASES || {};
+window.CASES['adrenal-disorders'] = {
+  id: 'adrenal-disorders', name: 'Sandra Obi', age: '44F', dob: '1981-09-12',
+  mrn: 'RDX-2026-81334', setting: 'ED → MICU',
+  chiefComplaint: 'Hypotension refractory to fluids + nausea/vomiting — known Addison disease, out of medication',
+  diagnosis: 'Acute Adrenal Crisis — Primary Adrenal Insufficiency (Addison Disease)',
+  category: 'endocrine', acuity: 1,
+  presentation: {
+    hpi: '44F with Addison disease (primary adrenal insufficiency, on hydrocortisone + fludrocortisone) ran out of medications 5 days ago. Now with nausea/vomiting, severe weakness, abdominal pain, hypotension despite 2L NS in the field (BP still 74/44). She has hyperpigmentation (increased ACTH driving melanocyte-stimulating hormone). Electrolytes: Na 124 (hyponatremia from aldosterone deficiency), K 6.1 (hyperkalemia), glucose 48.',
+    pmh: ['Primary adrenal insufficiency (Addison disease) — diagnosed 3 years ago', 'Autoimmune thyroiditis (associated)'],
+    meds: ['Hydrocortisone 20mg AM/10mg PM (RAN OUT)', 'Fludrocortisone 0.1mg daily (RAN OUT)'],
+    allergies: ['NKDA']
   },
-  "problems": [
-    {
-      "id": "prob-1",
-      "description": "Polymyalgia rheumatica (on chronic prednisone)",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-2",
-      "description": "Stopped prednisone 5 days ago without taper",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    }
-  ],
-  "medications": [
-    {
-      "id": "med-1",
-      "name": "Prednisone",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily (discontinued 5 days ago)",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
-    }
-  ],
-  "allergies": [
-    {
-      "allergen": "NKDA",
-      "reaction": "",
-      "severity": "",
-      "type": "Drug"
-    }
-  ],
-  "vitals": [
-    {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "78/48",
-      "hr": "112",
-      "rr": "20",
-      "temp": "36.2°C",
-      "spo2": "97%",
-      "pain": "7/10",
-      "bmi": "35",
-      "weight": "96 kg"
-    }
-  ],
-  "visits": [
-    {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "Hypotension, nausea, abdominal pain — recently stopped prednisone abruptly",
-      "hpi": "Margaret Chen is a 54-year-old female presenting with hypotension, nausea, abdominal pain — recently stopped prednisone abruptly. Past medical history includes Polymyalgia rheumatica (on chronic prednisone), Stopped prednisone 5 days ago without taper. See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "Adrenal Crisis — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
-    }
-  ],
-  "labs": [
-    {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-876084",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
-        {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "12",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "128",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "5.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "52",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "L"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Cortisol",
-              "value": "1.2",
-              "unit": "mcg/dL",
-              "range": "6-23 (AM)",
-              "flag": "L"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Abdomen",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-637800",
-      "clinical": "Hypotension, nausea, abdominal pain — recently stopped prednisone abruptly",
-      "technique": "Standard protocol",
-      "findings": "Bilateral adrenal glands appear normal. No hemorrhage.",
-      "impression": "Normal adrenals. Clinical correlation for adrenal insufficiency.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    }
-  ],
-  "immunizations": [
-    {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
-    },
-    {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
-    },
-    {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
-    }
-  ],
-  "familyHistory": [
-    "Non-contributory"
-  ],
-  "socialHistory": [
-    [
-      "Steroid use",
-      "On prednisone 20mg daily for 8 months — stopped abruptly 5 days ago on her own"
+  vitals: { BP: '74/44', HR: '126', RR: '22', Temp: '37.8°C', SpO2: '97%' },
+  labs: {
+    'BMP': 'Na 124 (L) | K 6.1 (H) | Glucose 48 (L) | Cr 2.1 (H — prerenal)',
+    'Cortisol (random)': '2.1 mcg/dL (critically low — normal stress response >18)',
+    'ACTH': '840 pg/mL (H — primary adrenal insufficiency: low cortisol + high ACTH)',
+    'CBC': 'WBC 14.2 (eosinophilia — classic in adrenal insufficiency)'
+  },
+  orders: {
+    correct: [
+      { id: 'hydrocort-crisis', name: 'Hydrocortisone 100mg IV STAT, then 50-100mg IV q6-8h', rationale: 'Adrenal crisis is a life-threatening emergency. Give hydrocortisone immediately — do not wait for cortisol results if clinical suspicion high. Hydrocortisone has mineralocorticoid activity at high doses so fludrocortisone not needed acutely.' },
+      { id: 'd50-crisis', name: 'Dextrose 50% 25-50mL IV — glucose 48', rationale: 'Hypoglycemia in adrenal crisis from cortisol deficiency (cortisol is gluconeogenic). Treat immediately with IV dextrose while drawing labs.' },
+      { id: 'ivf-crisis', name: '1L NS bolus, then 0.9% NS at 500mL/hr — Na 124, hypovolemic shock', rationale: 'Normal saline corrects hypovolemia AND hyponatremia (aldosterone deficiency). Avoid hypotonic fluids which worsen hyponatremia. Vasopressors will NOT work until cortisol is replaced.' },
+      { id: 'sick-day-rules', name: 'Discharge with education: sick day rules — double/triple hydrocortisone dose with any illness, IM kit for emergencies', rationale: 'Adrenal crisis prevention: "sick day rules" — double hydrocortisone for fever/illness, triple for vomiting/surgical stress. Must have IM hydrocortisone 100mg kit at home (with injection training for patient and family).' }
     ],
-    [
-      "Primary MD",
-      "Did not consult rheumatologist before stopping"
+    incorrect: [
+      { id: 'vasopressors-first', name: 'Start norepinephrine — BP 74/44 refractory to fluids', rationale: 'Vasopressors without cortisol replacement will fail in adrenal crisis. Cortisol is required for vascular responsiveness to catecholamines. The hypotension will not respond until hydrocortisone is given. Start steroids first.' },
+      { id: 'wait-cortisol', name: 'Wait for cortisol level before giving steroids — must confirm diagnosis', rationale: 'Adrenal crisis is a life-threatening emergency. Draw cortisol and ACTH simultaneously, then give hydrocortisone immediately without waiting for results. If you need to do a cosyntropin stimulation test, give hydrocortisone AFTER the 30/60-min cortisol sample is drawn (it does not cross-react with the assay — dexamethasone is an alternative if you want to test and treat simultaneously).' }
     ]
-  ]
+  },
+  teachingPoints: {
+    keyLearning: [
+      'Adrenal crisis: give hydrocortisone 100mg IV STAT — do not wait for lab results if clinical suspicion high. The classic electrolyte triad: hyponatremia + hyperkalemia + hypoglycemia.',
+      'Primary vs secondary adrenal insufficiency: primary (Addison) = low cortisol + HIGH ACTH + electrolyte abnormalities (aldosterone deficiency) + hyperpigmentation. Secondary (pituitary) = low cortisol + low ACTH + NO electrolyte abnormalities (aldosterone preserved) + no hyperpigmentation.',
+      'Vasopressors require cortisol to work — vascular catecholamine responsiveness depends on cortisol. Give steroids first in refractory shock.',
+      'Sick day rules are lifesaving: all Addison patients need an IM hydrocortisone emergency kit and training on sick day dosing.'
+    ],
+    boardPearls: [
+      'Most common cause of primary adrenal insufficiency in developed world: autoimmune (Addison disease). In developing world: tuberculosis (TB adrenalitis — calcifications on CT).',
+      'Waterhouse-Friderichsen syndrome: bilateral adrenal hemorrhage from meningococcemia → acute adrenal crisis in previously normal patient.',
+      'Cosyntropin (ACTH stimulation) test: baseline cortisol, give 250mcg cosyntropin IV, cortisol at 30 and 60 min. Peak <18 mcg/dL = adrenal insufficiency. Cannot distinguish primary from secondary (both fail to stimulate).',
+      'Autoimmune polyendocrine syndrome type 2 (Schmidt syndrome): Addison + Hashimoto/T1DM + other autoimmune conditions. Screen Addison patients for thyroid disease and DM.'
+    ]
+  },
+  references: [{ id: 'StatPearls-AdrenalCrisis', title: 'Acute Adrenal Crisis', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK441933/', openAccess: true }]
 };

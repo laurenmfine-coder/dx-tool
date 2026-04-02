@@ -1,292 +1,49 @@
-/* emr-data/thyroid-storm.js — Auto-generated EMR case data for Thyroid Storm */
-window.EMR_DATA = {
-  "patient": {
-    "name": "Keandra Williams",
-  "patientHPI": "I've been feeling absolutely terrible for the past few days - I have this high fever that won't break, my heart feels like it's racing all the time, and I can't seem to sit still or calm down. My hands are shaking so bad I can barely hold a cup, and I feel completely agitated and anxious about everything. I'll be honest - I haven't been great about taking my thyroid medication regularly, and now I'm wondering if that's catching up with me.",
-    "dob": "10/24/1983",
-    "age": "43",
-    "sex": "Female",
-    "pronouns": "she/her",
-    "mrn": "MRN-887351",
-    "language": "English",
-    "race": "Asian",
-    "phone": "(313) 555-8682",
-    "email": "keandra.williams@email.com",
-    "address": "4601 Daisy Ave, Phoenix, AZ 85003",
-    "insurance": "Medicaid",
-    "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Rite Aid — Palm Ave",
-    "emergencyContact": {
-      "name": "Anthony Williams",
-      "phone": "(614) 555-5961",
-      "relationship": "Spouse"
-    },
-    "chiefComplaint": "High fever, tachycardia, agitation, tremor — known Graves' disease",
-    "diagnosis": "Thyroid Storm"
+window.CASES = window.CASES || {};
+window.CASES['thyroid-deep-dive'] = {
+  id: 'thyroid-deep-dive', name: 'Maria Chen', age: '38F', dob: '1987-02-14',
+  mrn: 'RDX-2026-39921', setting: 'ED → MICU',
+  chiefComplaint: 'Fever 40.2°C + HR 148 + confusion + known hyperthyroidism post-surgery',
+  diagnosis: 'Thyroid Storm (Burch-Wartofsky Score 60 — Likely Thyroid Storm)',
+  category: 'endocrine', acuity: 1,
+  presentation: {
+    hpi: '38F with Graves disease, underwent thyroid surgery 2 days ago. Now: Temp 40.2°C, HR 148 (atrial fibrillation), confusion (agitated), profuse diaphoresis, diarrhea. Burch-Wartofsky Point Scale (BWPS): temp 40.2°C (20pts) + HR 148 (25pts) + CNS dysfunction — agitated (10pts) + GI symptoms (10pts) = 65 points (≥45 = thyroid storm). TSH undetectable, free T4 >8.0.',
+    pmh: ['Graves disease — on methimazole pre-op (stopped pre-surgery)', 'Post-thyroid surgery day 2'],
+    meds: ['Methimazole (held pre-op and not restarted)'], allergies: ['NKDA']
   },
-  "problems": [
-    {
-      "id": "prob-1",
-      "description": "Graves' disease (non-adherent to methimazole)",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-2",
-      "description": "Atrial fibrillation (new)",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    }
-  ],
-  "medications": [
-    {
-      "id": "med-1",
-      "name": "Methimazole",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "TID (not taking)",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
-    },
-    {
-      "id": "med-2",
-      "name": "Propranolol",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "TID (not taking)",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
-    }
-  ],
-  "allergies": [
-    {
-      "allergen": "PTU",
-      "reaction": "Hepatotoxicity",
-      "severity": "Severe",
-      "type": "Drug"
-    }
-  ],
-  "vitals": [
-    {
-      "date": "03/01/2026",
-      "time": "07:45",
-      "bp": "168/62",
-      "hr": "158",
-      "rr": "28",
-      "temp": "40.2°C",
-      "spo2": "96%",
-      "pain": "5/10",
-      "bmi": "31",
-      "weight": "64 kg"
-    }
-  ],
-  "visits": [
-    {
-      "id": "visit-ed",
-      "type": "Emergency Visit",
-      "date": "03/01/2026",
-      "provider": "Dr. ED Attending",
-      "cc": "High fever, tachycardia, agitation, tremor — known Graves' disease",
-      "hpi": "Keandra Williams is a 43-year-old female presenting with high fever, tachycardia, agitation, tremor — known graves' disease. Past medical history includes Graves' disease (non-adherent to methimazole), Atrial fibrillation (new). See chart for full details.",
-      "exam": "See physical examination documentation.",
-      "assessment": "Thyroid Storm — clinical presentation and workup consistent with diagnosis.",
-      "plan": "See orders and management plan."
-    }
-  ],
-  "labs": [
-    {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-779036",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
-        {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
-        },
-        {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "198",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "11.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": "H"
-            }
-          ]
-        },
-        {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Alt",
-              "value": "82",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "Tsh",
-              "value": "<0.01",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": "L"
-            },
-            {
-              "test": "Free T4",
-              "value": "7.8",
-              "unit": "ng/dL",
-              "range": "0.8-1.8",
-              "flag": "H"
-            },
-            {
-              "test": "Free T3",
-              "value": "18.4",
-              "unit": "pg/mL",
-              "range": "2.3-4.2",
-              "flag": "H"
-            }
-          ]
-        }
-      ]
-    }
-  ],
-  "imaging": [
-    {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-294951",
-      "clinical": "High fever, tachycardia, agitation, tremor — known Graves' disease",
-      "technique": "Standard protocol",
-      "findings": "Atrial fibrillation with rapid ventricular response, rate 158. No ST changes.",
-      "impression": "New-onset atrial fibrillation — likely thyrotoxicosis.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    }
-  ],
-  "immunizations": [
-    {
-      "name": "Influenza",
-      "date": "10/15/2025",
-      "lot": "FL-2025",
-      "site": "Left Deltoid"
-    },
-    {
-      "name": "COVID-19 (Updated)",
-      "date": "09/01/2025",
-      "lot": "CV-2025",
-      "site": "Right Deltoid"
-    },
-    {
-      "name": "Tdap",
-      "date": "03/2020",
-      "lot": "TD-2020",
-      "site": "Left Deltoid"
-    }
-  ],
-  "familyHistory": [
-    "Mother: Hashimoto's thyroiditis"
-  ],
-  "socialHistory": [
-    [
-      "Medication adherence",
-      "Stopped all thyroid meds 3 weeks ago — felt well"
+  vitals: { BP: '168/82', HR: '148 (AF)', RR: '24', Temp: '40.2°C', SpO2: '94%' },
+  labs: {
+    'TSH': 'Undetectable (<0.01 mIU/L)',
+    'Free T4': '>8.0 ng/dL (H — markedly elevated)',
+    'Free T3': '18.4 pg/mL (H)',
+    'CBC': 'WBC 14.8 (H — stress leukocytosis), Hgb 12.4',
+    'BMP': 'Na 132 (L), Glucose 188 (H), Ca 6.8 (L — post-surgical hypoparathyroidism also developing)',
+    'LFTs': 'AST 88, ALT 72 (mildly elevated — thyroid storm hepatopathy)'
+  },
+  orders: {
+    correct: [
+      { id: 'ptu-storm', name: 'Propylthiouracil (PTU) 500-1000mg PO/NG loading, then 250mg q4h — blocks synthesis AND peripheral T4→T3 conversion', rationale: 'PTU is preferred over methimazole in thyroid storm because it also blocks peripheral T4→T3 conversion (methimazole only blocks synthesis). NG tube if cannot swallow. Dose aggressively.' },
+      { id: 'iodine-storm', name: 'Lugol\'s iodine 5-10 drops TID OR SSKI — given ≥1 HOUR AFTER PTU', rationale: 'Iodine (Wolff-Chaikoff effect) blocks thyroid hormone release. MUST be given at least 1 hour after PTU — if given first, iodine provides substrate for MORE hormone synthesis. Wait for PTU to block synthesis first.' },
+      { id: 'betablocker-storm', name: 'Propranolol 60-80mg PO q4h OR IV — controls adrenergic symptoms AND blocks T4→T3 conversion', rationale: 'Beta-blockade rapidly controls tachycardia, hypertension, diaphoresis, tremor. Propranolol specifically also blocks T4→T3 peripheral conversion. Treat HR <100. Use IV if cannot take PO.' },
+      { id: 'hydrocortisone-storm', name: 'Hydrocortisone 300mg IV loading, then 100mg q8h — blocks T4→T3 AND treats relative adrenal insufficiency', rationale: 'Steroids: (1) block peripheral T4→T3 conversion, (2) treat possible relative adrenal insufficiency (thyroid storm increases cortisol demand), (3) may have anti-inflammatory effects. Part of the "four-drug" thyroid storm protocol.' }
     ],
-    [
-      "Trigger",
-      "Had dental extraction yesterday (infection risk)"
+    incorrect: [
+      { id: 'iodine-first', name: 'Start Lugol\'s iodine immediately — it rapidly blocks hormone release', rationale: 'WRONG ORDER — iodine given before a thionamide provides substrate for more thyroid hormone synthesis ("iodine steal" — Jod-Basedow effect). Always give PTU or methimazole ≥1 hour before iodine.' },
+      { id: 'methimazole-storm', name: 'Methimazole 20mg q6h — standard Graves disease treatment', rationale: 'Methimazole is first-line for non-urgent Graves disease, but in thyroid storm, PTU is preferred because it also inhibits peripheral T4→T3 conversion. In pregnancy, PTU is also first-line (first trimester — methimazole causes aplasia cutis).' }
     ]
-  ]
+  },
+  teachingPoints: {
+    keyLearning: [
+      'Thyroid storm Burch-Wartofsky score: temperature (10-30pts) + CNS effects (10-35pts) + GI symptoms (10pts) + cardiovascular (5-25pts) + precipitant (0 or 10pts). Score ≥45 = likely thyroid storm; ≥25 = impending.',
+      'Four-drug thyroid storm protocol: (1) PTU (blocks synthesis + T4→T3 conversion), (2) iodine ≥1h AFTER PTU, (3) beta-blocker (propranolol — also blocks T4→T3), (4) corticosteroids (blocks T4→T3 + relative adrenal insufficiency).',
+      'Iodine must be given AFTER PTU — giving iodine first provides substrate for massive hormone synthesis. Wait ≥1 hour.',
+      'Common precipitants of thyroid storm: surgery, infection, contrast dye, radioactive iodine treatment, trauma, childbirth.'
+    ],
+    boardPearls: [
+      'Graves disease: TSH-receptor stimulating antibodies (TRAb/TSI) → autonomous thyroid stimulation. Triad: hyperthyroidism + exophthalmos + pretibial myxedema.',
+      'Treatment options for Graves: (1) thionamides (PTU or methimazole — not curative), (2) radioactive iodine (RAI — contraindicated in pregnancy, worsens ophthalmopathy), (3) thyroidectomy.',
+      'Myxedema coma: hypothyroidism crisis — hypothermia + bradycardia + altered consciousness. Treatment: IV levothyroxine + IV liothyronine (T3) + hydrocortisone (coexisting adrenal insufficiency).',
+      'Sick euthyroid syndrome: TSH and T4 decreased in critically ill patients — do NOT treat unless true primary thyroid disease. Treatment worsens outcomes.'
+    ]
+  },
+  references: [{ id: 'StatPearls-ThyroidStorm', title: 'Thyroid Storm', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK470224/', openAccess: true }]
 };
