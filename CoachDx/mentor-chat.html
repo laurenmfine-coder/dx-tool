@@ -506,20 +506,23 @@ window.addEventListener('load', async () => {
   renderPicker(TOPICS);
   renderWelcomeChips();
 
-  // Get user for personalization + tracking
-  const sb = getSB();
-  if (sb) {
-    const { data } = await sb.auth.getSession();
-    currentUser = data?.session?.user || null;
-  }
-
-  // Load fingerprint gaps if signed in
-  if (currentUser) await loadFingerprintChips();
-
-  // Check for topic in URL param
+  // Check for topic in URL param FIRST — before any async auth
   const _usp = new URLSearchParams(window.location.search);
   const param = _usp.get('topic') || _usp.get('q');
   if (param) startSession(param, false);
+
+  // Get user for personalization + tracking (non-blocking)
+  try {
+    const sb = getSB();
+    if (sb) {
+      const { data } = await sb.auth.getSession();
+      currentUser = data?.session?.user || null;
+    }
+    // Load fingerprint gaps if signed in
+    if (currentUser) await loadFingerprintChips();
+  } catch(e) {
+    console.warn('CoachDx auth init:', e.message);
+  }
 });
 
 /* ═══════════════════════════════════════════════════════
