@@ -5480,8 +5480,8 @@ submitDoc = function(){
     var _S = (typeof S !== 'undefined') ? S : (window.S || {});
     if (window.EMRShell && (window.CASE_ID || _S.clinicalSetting)) { EMRShell.inject(); }
     if (!window.CASE_ID && !_S.clinicalSetting) {
-      // No setting selected — send to casedx.html to pick a case
-      window.location.replace('casedx.html');
+      // No case selected — send to browse.html Practice tab
+      window.location.replace('browse.html?mode=practice');
       return;
     }
     else if (!window.CASE_ID && _S.clinicalSetting) { showCasePicker(); }
