@@ -504,7 +504,7 @@ let currentUser = null;
 ═══════════════════════════════════════════════════════ */
 window.addEventListener('load', async () => {
   renderPicker(TOPICS);
-  renderWelcomeChips();
+  if (!window._rdxSessionActive) renderWelcomeChips();
 
   // Check for topic in URL param FIRST — before any async auth
   const _usp = new URLSearchParams(window.location.search);
@@ -673,7 +673,8 @@ async function startSession(topicName, isStructured, topicId) {
   url.searchParams.set('topic', topicName);
   window.history.replaceState({}, '', url);
 
-  // Show chat pane
+  // Show chat pane — set flag so nothing else can re-show welcome during this session
+  window._rdxSessionActive = true;
   document.getElementById('welcomeState').style.display = 'none';
   const sess = document.getElementById('chatSession');
   sess.style.display = 'flex';
@@ -1786,6 +1787,7 @@ function endSession() {
 }
 
 function showEndPanel(topic) {
+  window._rdxSessionActive = false;
   document.getElementById('chatSession').style.display = 'none';
   const welcome = document.getElementById('welcomeState');
   welcome.style.display = 'flex';
