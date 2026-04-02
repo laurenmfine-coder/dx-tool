@@ -1,33 +1,12 @@
-/* emr-data/developmental-delay.js — Developmental Delay — Red Flag Workup */
 window.CASES = window.CASES || {};
 window.CASES['developmental-delay'] = {
   id: 'developmental-delay', name: 'Jacob Wilson', age: '24M', dob: '2023-11-30',
-  mrn: 'RDX-2026-77550', setting: 'Dev Peds Clinic', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Developmental Delay — Red Flag Workup',
-  diagnosis: 'Developmental Delay — Red Flag Workup',
-  presentation: {
-    hpi: 'Jacob Wilson, presenting with Developmental Delay — Red Flag Workup. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-developmental-delay', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-developmental-delay', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Developmental Delay — Red Flag Workup available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Developmental Delay — Red Flag Workup available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Developmental Delay — Red Flag Workup', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-70601', setting: 'Dev Peds', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Developmental Delay — Red Flags and Early Intervention', diagnosis: 'Developmental Delay — Red Flags and Early Intervention',
+  presentation: { hpi: '24-month-old male. Parents concerned: no 2-word phrases (should have by 24 months). He says 10 single words, understands simple commands, makes eye contact, plays interactively, shares toys, points to request. Gross motor: walks but not yet running (24-month milestone). He was born at 34 weeks (late preterm) — corrected age is 23 months. No regression. Parents from Spanish-speaking household — bilingual exposure.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HC: '48.5cm (50th %ile)', HR: '100', RR: '22', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Denver Developmental Screening (DDSII)': 'Language: delayed for 24-month uncorrected age, borderline for 23-month corrected age. Other domains: age-appropriate.', 'Hearing screen': 'Passed bilateral (OAE)', 'Lead level': '2 mcg/dL (acceptable)', 'Vision': 'Grossly normal at exam', 'ASD screen (M-CHAT-R)': 'Score 2 — low risk for ASD' },
+  orders: { correct: [{ id: 'corrected-age', name: 'Use CORRECTED gestational age for milestones — born at 34 weeks', rationale: 'Premature infants: use CORRECTED age (chronological age minus weeks premature) for developmental milestone assessment up to 24 months. Born at 34 weeks = 6 weeks premature. At 24 months chronological, corrected age is 23 months. Two-word phrases expected by 24 months — borderline at 23 months corrected. Reassess at 2-month follow-up.' },{ id: 'early-intervention', name: 'Refer to Early Intervention (EI) services — federal program for children <3', rationale: 'Early Intervention is a federally mandated program (IDEA Part C) for children <3 with developmental delays. Referral should happen WITHOUT WAITING FOR DIAGNOSIS. Speech therapy + general developmental therapy. Starting early maximizes outcomes.' }], incorrect: [{ id: 'wait-for-it', name: 'Reassure parents — boys develop language later, bilingualism causes delays', rationale: 'Two common misconceptions: (1) bilingualism does NOT cause language delay — bilingual children meet language milestones when TOTAL word count across both languages is counted; (2) sex differences in language are minor and do not excuse significant delays beyond 1 month. Never use these as reasons to defer evaluation.' },{ id: 'autism-label', name: 'He has autism — limited word use, speech therapy needed', rationale: 'ASD diagnosis requires persistent deficits in social communication PLUS restricted/repetitive behaviors. This child has good eye contact, interactive play, shared attention, and pointing — the core social communication skills are present. M-CHAT-R score of 2 is low risk. Language delay alone ≠ autism.' }] },
+  teachingPoints: { keyLearning: ['Key language milestones: 12mo = 1-2 words, 15mo = 5-10 words, 18mo = 20 words, 24mo = 2-word phrases. ANY regression at ANY age = immediate evaluation.','Premature infants: use CORRECTED age for milestones up to 24 months chronological age. Document both ages in chart.','Bilingualism does NOT cause delay — count TOTAL words across both languages. Bilingual exposure is an asset, not a risk factor.'], boardPearls: ['Early Intervention (EI): federally mandated (IDEA Part C), free for children <3. Speech, OT, PT, developmental therapy. Refer immediately — do not wait for diagnosis.','Red flags requiring immediate referral: no babbling by 12mo, no words by 16mo, no 2-word phrases by 24mo, ANY regression, persistent toe-walking, absence of joint attention.','Global developmental delay: delay in ≥2 developmental domains. Workup: chromosomal microarray (highest yield), fragile X testing, MRI brain, metabolic workup if clinical suspicion.'] },
+  references: [{ id: 'StatPearls', title: 'Developmental Delay — Red Flags and Early Intervention', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK544326/', openAccess: true }]
 };

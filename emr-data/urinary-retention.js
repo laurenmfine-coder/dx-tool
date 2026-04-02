@@ -1,33 +1,12 @@
-/* emr-data/urinary-retention.js — BPH with Urinary Retention — Alpha-Blocker */
 window.CASES = window.CASES || {};
 window.CASES['urinary-retention'] = {
   id: 'urinary-retention', name: 'Richard Hall', age: '68M', dob: '1958-07-14',
-  mrn: 'RDX-2026-30444', setting: 'Urology ED', category: 'urologic', acuity: 2,
-  chiefComplaint: 'BPH with Urinary Retention — Alpha-Blocker',
-  diagnosis: 'BPH with Urinary Retention — Alpha-Blocker',
-  presentation: {
-    hpi: 'Richard Hall, presenting with BPH with Urinary Retention — Alpha-Blocker. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-urinary-retention', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-urinary-retention', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for BPH with Urinary Retention — Alpha-Blocker available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for BPH with Urinary Retention — Alpha-Blocker available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'BPH with Urinary Retention — Alpha-Blocker', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-26561', setting: 'Urology ED', category: 'urologic', acuity: 2,
+  chiefComplaint: 'BPH with Acute Urinary Retention — Alpha-Blocker and TURP', diagnosis: 'BPH with Acute Urinary Retention — Alpha-Blocker and TURP',
+  presentation: { hpi: '68M with known BPH (IPSS score 22 — severe). Found unable to void for 10 hours, severe suprapubic pain. Bladder palpable to umbilicus. Post-void residual on US: 750 mL (acute urinary retention). Precipitating factors: he took diphenhydramine (antihistamine) for allergies yesterday — anticholinergic medications precipitate AUR in BPH. Cr: 1.6 (mild AKI from obstructive uropathy).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '148/94 (pain)', HR: '98', RR: '18', Temp: '37.0°C', SpO2: '98%' },
+  labs: { 'Bladder US': 'Bladder volume 750mL — massively distended. Bilateral mild hydronephrosis.', 'Cr': '1.6 (H — obstructive AKI)', 'UA': 'No infection', 'PSA': '4.2 ng/mL (H — may represent BPH or prostate cancer — discuss after retention resolved)', 'AXR': 'Radiopaque bladder calculus visible — complication of chronic retention' },
+  orders: { correct: [{ id: 'foley-catheter', name: 'Foley catheter — immediate bladder decompression for AUR', rationale: 'Immediate Foley catheter placement (14-16Fr) to decompress the bladder. Drain SLOWLY to prevent hematuria from rapid decompression (post-obstructive diuresis monitoring for first 4 hours). Target: urine output 100-200 mL/hr during decompression.' },{ id: 'alpha-blocker', name: 'Tamsulosin 0.4mg daily — facilitates voiding trial', rationale: 'Alpha-1 blocker (tamsulosin, alfuzosin) relaxes smooth muscle in prostate and bladder neck. Start before voiding trial (in 48-72h). TWOC (trial without catheter): successful in 50-60% after alpha-blocker + catheter drainage × 48-72h. 5-ARI (finasteride) reduces prostate volume long-term but takes 6-12 months.' }], incorrect: [{ id: 'stop-catheter-now', name: 'Remove catheter immediately — voiding will resume once bladder rests', rationale: 'Do NOT remove catheter without a voiding trial (TWOC) and adequate BPH treatment. Alpha-blocker must be started × 48-72h before TWOC. Premature catheter removal in untreated AUR → immediate re-retention.' },{ id: 'iv-furosemide', name: 'Furosemide to increase urine output — will help the bladder empty', rationale: 'Furosemide increases urine PRODUCTION from the kidneys — it does not help the bladder empty against an obstructed outlet. It would worsen the distension. The solution is to DRAIN the bladder mechanically, then treat the obstruction.' }] },
+  teachingPoints: { keyLearning: ['Acute urinary retention (AUR): sudden inability to void. Precipitants: anticholinergic medications (antihistamines, TCAs, antipsychotics), SNS activation (surgery, pain), UTI, alcohol, prostatic infarction.','TWOC (trial without catheter): alpha-blocker × 48-72h → catheter removal → observe 4-6h. Success ~55%. Failed TWOC → TURP (transurethral resection of prostate).','Post-obstructive diuresis: rapid decompression of chronic retention → massive diuresis (may lose 200-500 mL/hr for hours). Monitor urine output, electrolytes, BP. Replace 50-75% of output with IV fluids.'], boardPearls: ['IPSS (International Prostate Symptom Score): 0-7 mild, 8-19 moderate, 20-35 severe. Score guides treatment — lifestyle modifications for mild, medications for moderate, surgery for severe or AUR.','5-ARI (5-alpha reductase inhibitors — finasteride, dutasteride): reduce prostate volume by 20-25% over 6-12 months. Reduce AUR risk and need for surgery. Best for large prostates (PSA >1.5 or volume >40cc).','Prostate cancer vs BPH: PSA alone cannot distinguish. AUA recommends PSA testing discussion for men 40-70. Biopsy if PSA >4 ng/mL or rising PSA velocity >0.75 ng/mL/yr after AUR episode resolves.'] },
+  references: [{ id: 'StatPearls', title: 'BPH with Acute Urinary Retention — Alpha-Blocker and TURP', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK549781/', openAccess: true }]
 };

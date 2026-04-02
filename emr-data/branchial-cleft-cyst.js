@@ -1,33 +1,12 @@
-/* emr-data/branchial-cleft-cyst.js — 2nd Branchial Cleft Cyst — Lateral Neck Mass */
 window.CASES = window.CASES || {};
 window.CASES['branchial-cleft-cyst'] = {
   id: 'branchial-cleft-cyst', name: 'Jordan Lee', age: '12F', dob: '2013-03-15',
-  mrn: 'RDX-2026-76221', setting: 'Peds Surgery', category: 'pediatric', acuity: 2,
-  chiefComplaint: '2nd Branchial Cleft Cyst — Lateral Neck Mass',
-  diagnosis: '2nd Branchial Cleft Cyst — Lateral Neck Mass',
-  presentation: {
-    hpi: 'Jordan Lee, presenting with 2nd Branchial Cleft Cyst — Lateral Neck Mass. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-branchial-cleft-cyst', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-branchial-cleft-cyst', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for 2nd Branchial Cleft Cyst — Lateral Neck Mass available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for 2nd Branchial Cleft Cyst — Lateral Neck Mass available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: '2nd Branchial Cleft Cyst — Lateral Neck Mass', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-67534', setting: 'Peds Surgery', category: 'pediatric', acuity: 3,
+  chiefComplaint: '2nd Branchial Cleft Cyst — Lateral Neck Mass', diagnosis: '2nd Branchial Cleft Cyst — Lateral Neck Mass',
+  presentation: { hpi: '12-year-old female. 2-month history of painless lateral neck swelling left side. Currently 3cm soft cystic mass along anterior border of left sternocleidomastoid muscle (SCM) at the junction of upper and middle thirds. Transilluminates. No fever (not infected). MRI confirms: fluid-filled cystic mass anterior to SCM, posterior to submandibular gland, lateral to carotid space. 2nd branchial cleft cyst — most common branchial cleft anomaly (95%).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '108/68', HR: '76', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'MRI Neck': 'Well-defined fluid-filled cystic mass (3.2cm) anterior to left SCM, posterior to submandibular gland, lateral to carotid space at C2-3 level — 2nd branchial cleft cyst.', 'FNA (if >2cm or uncertain)': 'Cholesterol crystals + lymphocytes in squamous epithelium-lined cyst — confirms branchial cleft cyst' },
+  orders: { correct: [{ id: 'surgical-excision', name: 'Complete surgical excision — curative treatment', rationale: 'Complete surgical excision is the treatment. Must excise the entire cyst AND its tract (which passes between the internal and external carotid arteries and ends near the palatine tonsil). Incomplete excision causes recurrence.' },{ id: 'infection-treatment', name: 'Treat infection first if infected before excision', rationale: 'If the cyst is infected: IV/PO antibiotics to treat the infection → 4-6 weeks to allow inflammation to resolve → then surgical excision. Operating on an infected cyst increases recurrence rate and surgical difficulty significantly.' }], incorrect: [{ id: 'observe', name: 'Observe — painless neck masses in children are always lymph nodes', rationale: 'Painless lateral neck mass that transilluminates + MRI shows fluid-filled cyst in classic location = branchial cleft cyst, not a lymph node. Lymph nodes are solid (not cystic, not transilluminating). This requires surgical excision.' },{ id: 'thyroglossal-dx', name: 'This is a thyroglossal duct cyst — treat with Sistrunk procedure', rationale: 'Thyroglossal duct cysts are MIDLINE and move with swallowing AND tongue protrusion (attached to hyoid bone). 2nd branchial cleft cysts are LATERAL (anterior to SCM) and do NOT move with swallowing or tongue protrusion. Correct localization determines the diagnosis.' }] },
+  teachingPoints: { keyLearning: ['2nd branchial cleft cyst: most common (95% of branchial anomalies). Location: anterior to SCM at upper-mid level, posterior to submandibular gland, lateral to carotid space. Tract passes between internal and external carotid arteries.','Branchial arch derivatives: Arch 1 → mandible + malleus + incus + V nerve. Arch 2 → stapes + styloid + hyoid lesser horn + facial muscles + VII nerve. DiGeorge = 3rd + 4th arch/pouch failure.','Thyroglossal duct cyst vs branchial cleft cyst: thyroglossal = midline + moves with swallowing AND tongue protrusion. Branchial = lateral + does NOT move with tongue protrusion.'], boardPearls: ['1st branchial cleft cyst: near ear/parotid region. Rare. Associated with VII nerve — surgical excision risks facial nerve damage.','3rd/4th branchial pouch cysts: rare. Location near thyroid gland. Often presents as recurrent thyroiditis/thyroid abscess. Piriform sinus fistula on barium swallow is characteristic.','Complete excision includes the tract — must trace from cyst to tonsillar fossa. Incomplete removal → 50-80% recurrence.'] },
+  references: [{ id: 'StatPearls', title: '2nd Branchial Cleft Cyst — Lateral Neck Mass', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK558949/', openAccess: true }]
 };

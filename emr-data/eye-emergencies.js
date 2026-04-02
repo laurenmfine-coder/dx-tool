@@ -1,33 +1,12 @@
-/* emr-data/eye-emergencies.js — Acute Angle-Closure Glaucoma — IOP Emergency */
 window.CASES = window.CASES || {};
 window.CASES['eye-emergencies'] = {
   id: 'eye-emergencies', name: 'Thomas Reed', age: '65M', dob: '1961-04-12',
-  mrn: 'RDX-2026-40713', setting: 'Ophthalmology ED', category: 'ophthalmologic', acuity: 2,
-  chiefComplaint: 'Acute Angle-Closure Glaucoma — IOP Emergency',
-  diagnosis: 'Acute Angle-Closure Glaucoma — IOP Emergency',
-  presentation: {
-    hpi: 'Thomas Reed, presenting with Acute Angle-Closure Glaucoma — IOP Emergency. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-eye-emergencies', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-eye-emergencies', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Acute Angle-Closure Glaucoma — IOP Emergency available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Acute Angle-Closure Glaucoma — IOP Emergency available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Acute Angle-Closure Glaucoma — IOP Emergency', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-15524', setting: 'Ophthalmology ED', category: 'ophthalmologic', acuity: 2,
+  chiefComplaint: 'Acute Angle-Closure Glaucoma — IOP Emergency', diagnosis: 'Acute Angle-Closure Glaucoma — IOP Emergency',
+  presentation: { hpi: '65M with sudden onset right eye pain + blurred vision + halos around lights + nausea/vomiting. Right eye: conjunctival injection, corneal clouding (epithelial edema), mid-dilated and fixed pupil, shallow anterior chamber. IOP: right eye 58 mmHg (normal <21). Left eye IOP 16 mmHg. Provocative factors: watching TV in dark room (pupil dilation), recent use of topiramate (sulfonamide — can cause acute angle closure). Risk factors: hyperopia, Asian ethnicity.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '164/96 (pain response)', HR: '92', RR: '16', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'IOP': 'Right eye 58 mmHg (H — optic nerve ischemia ongoing). Left eye 16 mmHg (normal).', 'Slit lamp': 'Corneal epithelial edema + shallow anterior chamber + closed iridocorneal angle (gonioscopy: Grade 0 — closed).', 'Visual acuity': '20/200 right eye (markedly reduced from 20/20 baseline), 20/20 left eye' },
+  orders: { correct: [{ id: 'lower-iop', name: 'Timolol 0.5% + brimonidine + pilocarpine 1-2% topical + acetazolamide 500mg IV/PO — emergency IOP reduction', rationale: 'Emergency medical IOP reduction: (1) timolol 0.5% (beta-blocker — reduces aqueous production), (2) brimonidine (alpha-2 agonist — reduces production), (3) pilocarpine 1-2% (miotic — pulls iris away from angle), (4) acetazolamide 500mg IV (carbonic anhydrase inhibitor — reduces production). Target IOP <30 within 30 min.' },{ id: 'laser-pi', name: 'Laser peripheral iridotomy (LPI) — definitive treatment + prophylactic LPI fellow eye', rationale: 'LPI creates a hole in the peripheral iris → allows aqueous to flow from posterior to anterior chamber → opens the angle. Performed after IOP is medically controlled. Prophylactic LPI to the FELLOW EYE is mandatory — 50% risk of acute angle closure in the contralateral eye within 5 years.' }], incorrect: [{ id: 'iv-morphine-eye', name: 'IV morphine for pain — opiate analgesia for acute pain', rationale: 'Pain management is secondary — the priority is IOP reduction to prevent optic nerve ischemia and permanent vision loss. Every minute of elevated IOP causes irreversible ganglion cell death. Treat IOP first, pain is managed simultaneously.' },{ id: 'observe-emergency', name: 'Ophthalmology in the morning — this can wait until regular hours', rationale: 'OPHTHALMIC EMERGENCY. Acute angle-closure glaucoma with IOP 58 mmHg causes irreversible optic nerve damage within hours. Vision loss occurs rapidly. Ophthalmology must be contacted immediately for emergency LPI. Do not delay.' }] },
+  teachingPoints: { keyLearning: ['Acute angle-closure glaucoma: emergency! Sudden IOP elevation > 21 (often 40-80 mmHg) from pupillary block → aqueous cannot drain. Optic nerve ischemia begins immediately.','Classic triad: eye pain + halos around lights + fixed mid-dilated pupil + nausea/vomiting. Corneal cloudiness from epithelial edema at IOP >40.','Prophylactic LPI to fellow eye: 50% of patients develop acute angle closure in the contralateral eye within 5 years. Mandatory after acute episode.'], boardPearls: ['Medications that precipitate angle closure: anticholinergics (diphenhydramine, tricyclics, antipsychotics), sympathomimetics (decongestants), sulfonamide-derived (topiramate, acetazolamide paradoxically — via uveal effusion), serotonergic agents.','Pilocarpine contraindicated in inflammatory angle closure (uveitic) — may worsen inflammation and synechia formation.','Open-angle glaucoma (chronic): painless, gradual peripheral vision loss, IOP variable (can be normal in normal-tension glaucoma). Distinguished from acute angle closure by gradual onset and open angles on gonioscopy.'] },
+  references: [{ id: 'StatPearls', title: 'Acute Angle-Closure Glaucoma — IOP Emergency', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK559036/', openAccess: true }]
 };

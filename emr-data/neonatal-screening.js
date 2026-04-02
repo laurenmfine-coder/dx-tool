@@ -1,33 +1,12 @@
-/* emr-data/neonatal-screening.js — Newborn Screening — PKU Positive Result */
 window.CASES = window.CASES || {};
 window.CASES['neonatal-screening'] = {
   id: 'neonatal-screening', name: 'Baby Chen', age: '3d', dob: '2026-03-28',
-  mrn: 'RDX-2026-93874', setting: 'Neonatal Nursery', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Newborn Screening — PKU Positive Result',
-  diagnosis: 'Newborn Screening — PKU Positive Result',
-  presentation: {
-    hpi: 'Baby Chen, presenting with Newborn Screening — PKU Positive Result. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-neonatal-screening', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-neonatal-screening', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Newborn Screening — PKU Positive Result available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Newborn Screening — PKU Positive Result available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Newborn Screening — PKU Positive Result', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-93685', setting: 'Neonatal Nursery', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Newborn Screening — Positive PKU Result Management', diagnosis: 'Newborn Screening — Positive PKU Result Management',
+  presentation: { hpi: '3-day-old male. Routine newborn screen (NBS) blood spot collected at 24h returns elevated phenylalanine — repeat value 18 mg/dL (severely elevated; normal <2 mg/dL). Phenylketonuria (PKU) suspected. Classic PKU: phenylalanine hydroxylase deficiency → phenylalanine accumulates → neurotoxicity → intellectual disability if untreated. This is the reason newborn screening exists — treatment before symptoms prevents all neurological damage.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '142', RR: '38', Temp: '37.0°C', SpO2: '99%', Weight: '3.6kg' },
+  labs: { 'Newborn screen (repeat)': 'Phenylalanine 18 mg/dL (severely elevated — normal <2)', 'Plasma amino acid profile': 'Phenylalanine 1,800 umol/L (markedly H), tyrosine 45 umol/L (L — substrate accumulation)', 'Urine pterin profile': 'Normal pterins (rules out BH4 deficiency — a more severe form requiring additional treatment)', 'BH4 loading test': 'Pending — 10-20% of PKU patients are BH4-responsive (sapropterin-eligible)' },
+  orders: { correct: [{ id: 'phenylalanine-diet', name: 'Immediately start phenylalanine-restricted formula (PKU formula) + breast milk in measured amounts', rationale: 'PKU treatment is dietary restriction of phenylalanine starting immediately. Special PKU formula provides all amino acids EXCEPT phenylalanine. Small measured amounts of breast milk or standard formula provide just enough phenylalanine for protein synthesis. Target phenylalanine 120-360 umol/L (2-6 mg/dL).' },{ id: 'metabolic-team', name: 'Immediate referral to metabolic disease/PKU treatment center', rationale: 'PKU requires lifelong management by a specialized metabolic dietitian + physician team. Phenylalanine levels monitored weekly in infancy, bi-weekly in childhood. Dietary adherence is critical — any lapse causes neurotoxicity. PKU women must be in strict dietary control BEFORE and during pregnancy (maternal PKU syndrome).' }], incorrect: [{ id: 'observe', name: 'Recheck screen in 2 weeks — elevated phenylalanine may normalize', rationale: 'PKU phenylalanine does NOT normalize without treatment. Every day of delay increases phenylalanine-mediated brain injury. Treatment must start IMMEDIATELY. Confirmatory testing is done simultaneously with treatment initiation — do not wait for confirmation.' },{ id: 'normal-diet', name: 'Feed normal infant formula and breast milk until confirmed', rationale: 'Normal formula CONTAINS phenylalanine — it will worsen the elevation and cause brain damage. Phenylalanine-restricted formula must be started immediately. Treatment starts before confirmation in severe elevations.' }] },
+  teachingPoints: { keyLearning: ['PKU: phenylalanine hydroxylase deficiency → phenylalanine accumulation → intellectual disability, seizures, behavioral problems if untreated. COMPLETELY PREVENTED by dietary restriction from birth.','NBS timing: blood spot at 24-48h of life. Early discharge → repeat at first newborn visit. NBS screens 35+ conditions (RUSP) — congenital hypothyroidism, CAH, MCAD, PKU, galactosemia, sickle cell, CCHD.','BH4 (sapropterin)-responsive PKU: 10-20% of classic PKU patients respond to BH4 loading test → can relax dietary restrictions somewhat. Sapropterin (Kuvan) FDA-approved for BH4-responsive PKU.'], boardPearls: ['Maternal PKU: phenylalanine is teratogenic to the fetus. Women with PKU MUST achieve phe <360 umol/L BEFORE conception and throughout pregnancy — uncontrolled maternal PKU causes microcephaly, cardiac defects, intellectual disability in the fetus (even if fetus is unaffected carrier).','MCAD deficiency: medium-chain acyl-CoA dehydrogenase deficiency — detected on NBS. Avoidance of fasting is life-saving. During illness: IV dextrose to prevent crisis (hypoglycemia, encephalopathy, death).','Galactosemia: galactose-1-phosphate uridyltransferase deficiency. Presents with jaundice, liver failure, E. coli sepsis in neonates after breastfeeding. NBS allows immediate galactose-free formula. Emergency in the first week of life.'] },
+  references: [{ id: 'StatPearls', title: 'Newborn Screening — Positive PKU Result Management', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK545955/', openAccess: true }]
 };

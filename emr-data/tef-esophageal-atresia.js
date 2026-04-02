@@ -1,33 +1,12 @@
-/* emr-data/tef-esophageal-atresia.js — Esophageal Atresia with TEF — VACTERL */
 window.CASES = window.CASES || {};
 window.CASES['tef-esophageal-atresia'] = {
   id: 'tef-esophageal-atresia', name: 'Baby Rivera', age: '1d', dob: '2026-03-30',
-  mrn: 'RDX-2026-32444', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Esophageal Atresia with TEF — VACTERL',
-  diagnosis: 'Esophageal Atresia with TEF — VACTERL',
-  presentation: {
-    hpi: 'Baby Rivera, presenting with Esophageal Atresia with TEF — VACTERL. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-tef-esophageal-atresia', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-tef-esophageal-atresia', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Esophageal Atresia with TEF — VACTERL available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Esophageal Atresia with TEF — VACTERL available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Esophageal Atresia with TEF — VACTERL', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-42654', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'TEF/EA — Esophageal Atresia with Distal Fistula', diagnosis: 'TEF/EA — Esophageal Atresia with Distal Fistula',
+  presentation: { hpi: 'Newborn. Excessive oral secretions, drooling from birth. Nurse attempted to pass feeding tube — coils in back of mouth (NGT cannot be passed to stomach). Cyanotic episode with first feed attempt. CXR: NGT coiled in upper esophageal pouch at T2-T3. Gas in stomach (confirms distal TEF — air enters stomach via fistula). This is Type C (most common, 85%): blind-ending esophagus + fistula from trachea to distal esophagus. VACTERL association must be screened.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '168', RR: '48', Temp: '37.0°C', SpO2: '93%' },
+  labs: { 'CXR': 'NGT coiled at T2-T3 in upper esophageal pouch. Air present in stomach (distal TEF confirmed).', 'Echo': 'Ordered — cardiac defects in 30% (VSD most common)', 'Renal US': 'Ordered — renal anomalies in 15%', 'Spine XR': 'Ordered — vertebral anomalies in 70%', 'Anorectal exam': 'Normal — but anorectal malformation in 15%' },
+  orders: { correct: [{ id: 'tef-repair', name: 'Surgical primary repair — esophageal anastomosis + fistula ligation', rationale: 'Surgical repair: ligate tracheoesophageal fistula + primary esophageal anastomosis. Timing depends on gap length and associated anomalies. Long-gap EA (>2 vertebral bodies): delayed repair or esophageal replacement.' },{ id: 'vacterl-screen', name: 'VACTERL screening: echo, renal US, spine XR, anorectal exam, limb exam', rationale: 'VACTERL: Vertebral (70%), Anorectal (15%), Cardiac (30% — VSD most common), Tracheo-Esophageal (defining), Renal (15%), Limb (20%). Screen ALL TEF/EA patients for all VACTERL components at birth.' }], incorrect: [{ id: 'oral-feeding', name: 'Attempt gentle oral feeds — see if he can manage', rationale: 'NEVER attempt oral feeding in TEF/EA — liquid enters blind esophageal pouch, overflows into trachea → aspiration pneumonia. NPO is mandatory. Replogle tube to continuous suction decompresses the pouch.' },{ id: 'skip-vacterl', name: 'VACTERL screening can wait — focus on esophageal repair first', rationale: 'VACTERL screening must happen concurrently with operative planning — not after. Cardiac defects alter anesthetic management and surgical approach. Renal anomalies affect fluid management. All components must be identified before surgery.' }] },
+  teachingPoints: { keyLearning: ['TEF/EA type C (most common 85%): blind esophageal pouch + distal TEF. Gas in stomach on CXR confirms distal fistula. No gas = pure EA without distal fistula (type A, 7%).','VACTERL association: screen all TEF/EA patients — Vertebral, Anorectal, Cardiac, Tracheo-Esophageal, Renal, Limb. Echo is the most critical (cardiac defects change anesthetic management).','H-type TEF (type E): tracheoesophageal fistula WITHOUT atresia. Presents later with recurrent pneumonias and choking — not identified at birth. Bronchoscopy/esophagoscopy to diagnose.'], boardPearls: ['Long-gap EA: >2 vertebral body gap between esophageal ends. Requires delayed repair (6-12 weeks of esophageal stretching techniques or esophageal replacement with stomach/colon).','Post-repair complications: anastomotic leak (10-15%), stricture requiring dilation (40-50%), gastroesophageal reflux (nearly universal), tracheomalacia.','Type A (pure EA, 7%): no gas in stomach on CXR. More common in VACTERL with severe anomalies.'] },
+  references: [{ id: 'StatPearls', title: 'TEF/EA — Esophageal Atresia with Distal Fistula', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK470278/', openAccess: true }]
 };

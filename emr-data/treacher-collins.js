@@ -1,33 +1,12 @@
-/* emr-data/treacher-collins.js — Treacher Collins — Normal Intelligence, Hearing Loss */
 window.CASES = window.CASES || {};
 window.CASES['treacher-collins'] = {
   id: 'treacher-collins', name: 'Ryan Park', age: '6M', dob: '2025-09-30',
-  mrn: 'RDX-2026-53219', setting: 'Genetics Clinic', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Treacher Collins — Normal Intelligence, Hearing Loss',
-  diagnosis: 'Treacher Collins — Normal Intelligence, Hearing Loss',
-  presentation: {
-    hpi: 'Ryan Park, presenting with Treacher Collins — Normal Intelligence, Hearing Loss. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-treacher-collins', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-treacher-collins', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Treacher Collins — Normal Intelligence, Hearing Loss available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Treacher Collins — Normal Intelligence, Hearing Loss available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Treacher Collins — Normal Intelligence, Hearing Loss', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-48221', setting: 'Genetics Clinic', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Treacher Collins Syndrome — Normal Intelligence and Hearing Rehabilitation', diagnosis: 'Treacher Collins Syndrome — Normal Intelligence and Hearing Rehabilitation',
+  presentation: { hpi: '6-month-old male with bilateral malar hypoplasia (flat cheekbones), mandibular hypoplasia, downslanting palpebral fissures, ear anomalies (bilateral microtia + absent external ear canals = bilateral conductive hearing loss), and high-arched palate. Parents most concerned about hearing and school performance. TCOF1 gene mutation confirmed (treacle protein — neural crest cell ribosome biogenesis). Intelligence: NORMAL. Autosomal dominant.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '128', RR: '32', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Hearing evaluation (BAER/ABR)': 'Bilateral severe conductive hearing loss — absent external auditory canals.', 'CT temporal bones': 'Bilateral absence of external auditory canals + malformed middle ear ossicles. Inner ear (cochlea) NORMAL.', 'Genetic testing': 'TCOF1 mutation confirmed (autosomal dominant). Parents: new mutation in most cases (60-70%).', 'Intelligence assessment': 'Normal for developmental milestones — parents reassured' },
+  orders: { correct: [{ id: 'hearing-aids-tc', name: 'Bone-anchored hearing aid (BAHA) — bypasses absent external canals to normal cochlea', rationale: 'Treacher Collins hearing loss is CONDUCTIVE (absent/malformed external and middle ear), NOT sensorineural — the inner ear (cochlea) is normal. Bone-anchored hearing aids (BAHA/Osia/Sophono) transmit sound directly to the cochlea through bone. Dramatically improve language development and school performance. Fit by 6-12 months.' },{ id: 'early-intervention', name: 'Early intervention: speech therapy + auditory-verbal therapy — critical for language development', rationale: 'Early hearing rehabilitation (BAHA by 6-12 months) + speech therapy + auditory-verbal therapy leads to normal language development and age-appropriate academic performance. Most TCS patients attend mainstream schools with appropriate support.' }], incorrect: [{ id: 'cognitive-concerns', name: 'Prepare parents for intellectual disability — craniofacial syndrome affects cognition', rationale: 'WRONG. Intelligence in Treacher Collins syndrome is NORMAL. The malar hypoplasia and hearing loss do NOT affect cognitive development. Hearing loss if untreated WILL delay language — hence the urgency of hearing rehabilitation. Counsel parents that TCS is a structural disorder, not a neurocognitive one.' },{ id: 'cosmetic-only', name: 'Surgical reconstruction is cosmetic only — not medically necessary', rationale: 'While some TCS reconstruction is aesthetic, other components are functional: mandibular distraction for airway/feeding, auricular reconstruction for psychosocial development, BAHA implantation for hearing. These are medically necessary interventions.' }] },
+  teachingPoints: { keyLearning: ['Treacher Collins: bilateral and symmetric (distinguishes from hemifacial microsomia which is unilateral). Autosomal dominant, TCOF1 mutation, neural crest cell apoptosis failure.','Intelligence is NORMAL in Treacher Collins. Hearing loss (conductive) from absent/malformed external + middle ear with normal cochlea. BAHA is the hearing rehabilitation.','Treacher Collins vs hemifacial microsomia: TCS = bilateral, symmetric, TCOF1, normal intelligence. HFM = unilateral, asymmetric, OAV spectrum, variable intelligence.'], boardPearls: ['Reconstruction timeline: BAHA (6-12 months), palate repair (9-12 months), mandibular distraction as needed, auricular reconstruction (6-7 years — after sufficient rib cartilage for grafting), orbital/malar reconstruction (adolescence).','TCOF1 (treacle protein): involved in ribosome biogenesis in neural crest cells. Haploinsufficiency → neural crest cell apoptosis during pharyngeal arch development → absent 1st/2nd arch derivatives.','Prenatal diagnosis: targeted TCOF1 sequencing for families with known mutation. Characteristic US findings (micrognathia, ear anomalies) may prompt amniocentesis.'] },
+  references: [{ id: 'StatPearls', title: 'Treacher Collins Syndrome — Normal Intelligence and Hearing Rehabilitation', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK481284/', openAccess: true }]
 };

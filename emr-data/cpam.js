@@ -1,33 +1,12 @@
-/* emr-data/cpam.js — CPAM — Cystic Lung Lesion + PPB Risk */
 window.CASES = window.CASES || {};
 window.CASES['cpam'] = {
   id: 'cpam', name: 'Ethan Moore', age: '6M', dob: '2025-09-30',
-  mrn: 'RDX-2026-41792', setting: 'Peds Pulm', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'CPAM — Cystic Lung Lesion + PPB Risk',
-  diagnosis: 'CPAM — Cystic Lung Lesion + PPB Risk',
-  presentation: {
-    hpi: 'Ethan Moore, presenting with CPAM — Cystic Lung Lesion + PPB Risk. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-cpam', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-cpam', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for CPAM — Cystic Lung Lesion + PPB Risk available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for CPAM — Cystic Lung Lesion + PPB Risk available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'CPAM — Cystic Lung Lesion + PPB Risk', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-58671', setting: 'Peds Pulm', category: 'pediatric', acuity: 3,
+  chiefComplaint: 'CPAM — Cystic Lung Lesion + Pleuropulmonary Blastoma Risk', diagnosis: 'CPAM — Cystic Lung Lesion + Pleuropulmonary Blastoma Risk',
+  presentation: { hpi: '6-month-old male. Prenatal US at 22 weeks identified large echogenic mass right lower lobe. At birth: mass partially regressed (as often occurs). Postnatal CT chest: residual 3.5cm multicystic lesion right lower lobe — Type I CPAM (large cysts). Parents: \'The doctor said it might go away on its own — can we just watch it?\' Family history: cousin had pleuropulmonary blastoma (PPB) at age 2 — DICER1 syndrome suspected.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { SpO2: '97% RA', HR: '128', RR: '32', Temp: '37.0°C' },
+  labs: { 'CT Chest': 'Type I CPAM — multicystic lesion right lower lobe, 3.5cm. No air-fluid levels (not infected). No mediastinal shift.', 'Family history': 'Cousin with pleuropulmonary blastoma (PPB) — DICER1 syndrome suspected', 'DICER1 germline testing': 'Ordered — PPB family tumor syndrome', 'CXR': 'Visible right lower lobe hyperechoic lesion' },
+  orders: { correct: [{ id: 'elective-lobectomy', name: 'Elective lobectomy — given PPB family history (DICER1 syndrome)', rationale: 'PPB family tumor syndrome (DICER1 mutation): CPAM-like cysts in young children → can transform to Type I PPB (malignant) → Type II/III PPB (highly malignant). Given family history of PPB + CPAM in this infant, elective lobectomy is strongly recommended. DICER1 germline testing essential for the whole family.' },{ id: 'dicer1-testing', name: 'DICER1 germline testing of patient and parents — PPB family tumor syndrome', rationale: 'DICER1 syndrome is autosomal dominant — affects ovaries (SLCT), thyroid (multinodular goiter), lungs (PPB), kidneys (Wilms), pituitary (pituitary blastoma), and other sites. If DICER1 mutation confirmed: surveillance protocol + prophylactic/therapeutic lobectomy for CPAM lesion.' }], incorrect: [{ id: 'watchful-wait-cpam', name: 'Watch — prenatal lesions often regress completely', rationale: 'CPAM can regress prenatally but residual lesion PERSISTS in 50-60% on CT postnatally. Even if radiographically \'resolved,\' residual microscopic disease may remain. With PPB family history and DICER1 concern, watchful waiting is not appropriate — elective resection recommended.' },{ id: 'no-surgery-cpam', name: 'No surgery — asymptomatic lesions do not need resection', rationale: 'In LOW-RISK cases (no PPB family history, small lesion): observation is debated. In HIGH-RISK cases (PPB family history, large lesion, DICER1+): elective resection is recommended. This child has high-risk features and should have surgery.' }] },
+  teachingPoints: { keyLearning: ['CPAM types: Type 0 (acinar dysplasia, lethal), Type I (large cysts >2cm, most common, best prognosis), Type II (small cysts <1cm, associated with other anomalies), Type III (microcystic, echogenic, associated with hydrops), Type IV (peripheral large cysts — highest PPB risk).','PPB (pleuropulmonary blastoma): most common primary lung malignancy in children. Type I PPB = cystic (looks like CPAM). Type II/III = solid (highly malignant). Type I → II/III transformation over years. DICER1 mutation is the genetic driver.','CPAM vs sequestration: CPAM = abnormal airway branching, receives pulmonary artery blood supply. Sequestration = non-functioning lung tissue receiving systemic arterial supply (descending aorta). Doppler US identifies aberrant vessel in sequestration.'], boardPearls: ['DICER1 syndrome surveillance: chest CT every 6 months until age 8 (PPB risk), then annually. Thyroid US annually from childhood. Ovarian US from adolescence.','Prenatal CPAM: most regress prenatally (Doppler-defined involution). Persistent lesions: postnatal CT at 1-3 months. Surgical decision based on size, symptoms, and family/genetic history.','Pulmonary sequestration: intralobar (within visceral pleura — associated with CPAM, no aberrant vessel visible on fetal US) vs extralobar (own pleural covering, left lower lobe most common, systemic arterial supply visible).'] },
+  references: [{ id: 'StatPearls', title: 'CPAM — Cystic Lung Lesion + Pleuropulmonary Blastoma Risk', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK459237/', openAccess: true }]
 };

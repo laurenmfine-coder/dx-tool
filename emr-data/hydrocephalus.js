@@ -1,33 +1,12 @@
-/* emr-data/hydrocephalus.js — Congenital Hydrocephalus — VP Shunt vs ETV */
 window.CASES = window.CASES || {};
 window.CASES['hydrocephalus'] = {
   id: 'hydrocephalus', name: 'Emily Chen', age: '3M', dob: '2025-12-31',
-  mrn: 'RDX-2026-58879', setting: 'Peds Neurosurgery', category: 'neurologic', acuity: 2,
-  chiefComplaint: 'Congenital Hydrocephalus — VP Shunt vs ETV',
-  diagnosis: 'Congenital Hydrocephalus — VP Shunt vs ETV',
-  presentation: {
-    hpi: 'Emily Chen, presenting with Congenital Hydrocephalus — VP Shunt vs ETV. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-hydrocephalus', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-hydrocephalus', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Congenital Hydrocephalus — VP Shunt vs ETV available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Congenital Hydrocephalus — VP Shunt vs ETV available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Congenital Hydrocephalus — VP Shunt vs ETV', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-26568', setting: 'Peds Neurosurgery', category: 'neurologic', acuity: 2,
+  chiefComplaint: 'Congenital Hydrocephalus — VP Shunt vs ETV', diagnosis: 'Congenital Hydrocephalus — VP Shunt vs ETV',
+  presentation: { hpi: '3-month-old female. Head circumference crossing percentiles upward (50th → 99th in 6 weeks). Bulging anterior fontanelle, prominent scalp veins, sunsetting eyes (Parinaud sign — forced downward gaze from tectal plate compression). Irritability. MRI: severe hydrocephalus from aqueductal stenosis. This is non-communicating (obstructive) hydrocephalus — CSF cannot flow from ventricles to subarachnoid space.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HC: '46cm (>99th percentile for age)', HR: '148', RR: '38', Temp: '37.0°C', SpO2: '98%' },
+  labs: { 'MRI Brain': 'Triventricular hydrocephalus — massive lateral + 3rd ventricle dilation. Cerebral aqueduct (Sylvius) stenosed. 4th ventricle normal size. Transependymal edema.', 'HC measurements': 'Crossing percentiles upward — pathological growth velocity', 'OFC growth chart': 'HC 46cm — >99th percentile' },
+  orders: { correct: [{ id: 'etvorcshunt', name: 'ETV (endoscopic third ventriculostomy) preferred for aqueductal stenosis in infants >6 months; VP shunt for younger infants', rationale: 'ETV: endoscopic fenestration of the floor of the 3rd ventricle → creates CSF pathway bypassing aqueduct → avoids shunt. Preferred for aqueductal stenosis in older infants/children. VP shunt preferred for infants <6 months (ETV failure rate higher in young infants — ETV Success Score) or when ETV not feasible.' },{ id: 'shunt-monitor', name: 'VP shunt monitoring — shunt failure is a medical emergency', rationale: 'VP shunt complications: obstruction (most common — headache, vomiting, altered consciousness, papilledema), infection (fever + shunt wound erythema), over-drainage (slit ventricles). Any change in neurological status in a shunted patient = shunt malfunction until proven otherwise. CT head immediately.' }], incorrect: [{ id: 'acetazolamide', name: 'Acetazolamide — medical management of hydrocephalus', rationale: 'Acetazolamide (carbonic anhydrase inhibitor) reduces CSF production. It is a TEMPORIZING measure only (post-hemorrhagic hydrocephalus in premature infants). It does not treat obstructive hydrocephalus and is not a substitute for surgery. Definitive surgical intervention is required.' },{ id: 'observe', name: 'Follow head circumference monthly — hydrocephalus may stabilize', rationale: 'Symptomatic hydrocephalus (sunsetting eyes, crossing percentiles, bulging fontanelle) requires urgent surgical intervention. Observing without intervention causes progressive brain injury, visual loss, and cognitive impairment.' }] },
+  teachingPoints: { keyLearning: ['Obstructive hydrocephalus: block within ventricular system (aqueductal stenosis → triventricular, 4th ventricle normal). Communicating: block at arachnoid granulations (post-meningitis, SAH — all ventricles dilated).','ETV vs VP shunt: ETV preferred in aqueductal stenosis in children >6 months (ETVSS ≥70% success). VP shunt for all infants <6 months, and all types where ETV not possible.','VP shunt failure: headache + vomiting + altered sensorium = emergency. CT head + neurosurgery consult immediately. Shunt tap may be needed.'], boardPearls: ['Normal pressure hydrocephalus (NPH): adults. Hakim-Adams triad: wet (incontinence) + wobbly (magnetic gait) + wacky (dementia). LP large-volume tap → gait improvement = diagnostic + therapeutic.','Chiari II + hydrocephalus: MMC patients. Both ETV and VP shunt used. Brainstem decompression may also be required.','Shunt infection: Staphylococcus epidermidis most common (biofilm). Treatment: externalize shunt + IV antibiotics + internalize after CSF clears.'] },
+  references: [{ id: 'StatPearls', title: 'Congenital Hydrocephalus — VP Shunt vs ETV', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK537140/', openAccess: true }]
 };

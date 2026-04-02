@@ -1,33 +1,12 @@
-/* emr-data/orchidopexy.js — Cryptorchidism — Orchidopexy by 18 Months */
 window.CASES = window.CASES || {};
 window.CASES['orchidopexy'] = {
   id: 'orchidopexy', name: 'Tyler Kim', age: '6M', dob: '2025-09-30',
-  mrn: 'RDX-2026-15906', setting: 'Peds Urology', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Cryptorchidism — Orchidopexy by 18 Months',
-  diagnosis: 'Cryptorchidism — Orchidopexy by 18 Months',
-  presentation: {
-    hpi: 'Tyler Kim, presenting with Cryptorchidism — Orchidopexy by 18 Months. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-orchidopexy', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-orchidopexy', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Cryptorchidism — Orchidopexy by 18 Months available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Cryptorchidism — Orchidopexy by 18 Months available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Cryptorchidism — Orchidopexy by 18 Months', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-91929', setting: 'Peds Urology', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Cryptorchidism — Orchidopexy by 18 Months to Preserve Fertility', diagnosis: 'Cryptorchidism — Orchidopexy by 18 Months to Preserve Fertility',
+  presentation: { hpi: '6-month-old male. Right testis not palpable in scrotum or inguinal canal since birth. Left testis: normal scrotal position, normal size. Ultrasound: right testis identified in right inguinal canal (confirmed undescended, not absent). NOT a retractile testis (which would be palpable in the scrotum at some point). Bilateral undescended: must rule out differences of sex development. Unilateral: less urgent but still requires orchidopexy.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '128', RR: '32', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Physical exam': 'Right testis not palpable in scrotum or inguinal canal. Left testis: normal 2mL, scrotal.', 'Scrotal US': 'Right testis 8×5mm identified in right inguinal canal — undescended.', 'Hormonal test (not routinely needed)': 'Not indicated for unilateral UDT — hCG stimulation for bilateral undescended testes to exclude anorchia' },
+  orders: { correct: [{ id: 'orchidopexy', name: 'Orchidopexy at 6-12 months (latest by 18 months) — optimal timing for fertility preservation', rationale: 'Orchidopexy (surgical placement of testis into scrotum) is the treatment. TIMING IS CRITICAL: delay beyond 12-18 months leads to irreversible germ cell loss. Current AUA guidelines: orchidopexy at 6-12 months. Scrotal location allows: (1) temperature regulation (2-3°C cooler), (2) examination for malignancy, (3) fertility preservation.' },{ id: 'counsel-malignancy', name: 'Counsel: orchidopexy does NOT eliminate cancer risk — testis remains examinable', rationale: 'Undescended testis has 4-10× increased testicular cancer risk (even after orchidopexy). Orchidopexy makes the testis PALPABLE/EXAMINABLE — it does not eliminate the cancer risk. Monthly self-exam from puberty is essential.' }], incorrect: [{ id: 'watch-until-puberty', name: 'Watch until puberty — testis may descend with testosterone surge', rationale: 'Spontaneous descent after 6 months is extremely rare (after 3 months, very unlikely). Waiting until puberty causes irreversible germ cell damage. AUA recommends orchidopexy at 6-12 months.' },{ id: 'hormone-therapy', name: 'hCG or GnRH injections — hormonal therapy to induce descent', rationale: 'Hormonal therapy (hCG, GnRH analogs) is used in some European countries but NOT recommended by AUA. Success rate <20% and does not eliminate cancer risk. Surgery is the standard of care in the US.' }] },
+  teachingPoints: { keyLearning: ['Cryptorchidism: 3% of term males, 30% of premature. 70% resolve by 3 months (due to mini-puberty). Spontaneous descent after 6 months is extremely rare.','Orchidopexy timing: 6-12 months (AUA recommendation). Latest by 18 months. Delay → progressive germ cell loss → infertility risk (bilateral UDT: 50% infertility without early treatment).','Cancer risk: undescended testis → 4-10× increased risk of testicular germ cell tumor (usually seminoma). Orchidopexy makes testis examinable but does NOT eliminate cancer risk.'], boardPearls: ['Retractile testis: intermittently retractable to groin by cremasteric reflex but returns to scrotum spontaneously and is easily manipulated to scrotum. No orchidopexy needed — annual follow-up for spontaneous ascent.','Bilateral undescended testes in a phenotypic male: exclude DSD (differences of sex development), specifically CAH in a virilized 46XX female. Karyotype + electrolytes + 17-OHP.','Non-palpable undescended testis: laparoscopy to locate — may be intra-abdominal (requires staged orchidopexy), atrophic (vanishing testis), or absent (anorchia).'] },
+  references: [{ id: 'StatPearls', title: 'Cryptorchidism — Orchidopexy by 18 Months to Preserve Fertility', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK459313/', openAccess: true }]
 };

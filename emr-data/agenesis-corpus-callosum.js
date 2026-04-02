@@ -1,33 +1,12 @@
-/* emr-data/agenesis-corpus-callosum.js — Agenesis of Corpus Callosum — Aicardi Syndrome */
 window.CASES = window.CASES || {};
 window.CASES['agenesis-corpus-callosum'] = {
   id: 'agenesis-corpus-callosum', name: 'Sofia Kim', age: '3M', dob: '2025-12-31',
-  mrn: 'RDX-2026-36768', setting: 'Peds Neurology', category: 'neurologic', acuity: 2,
-  chiefComplaint: 'Agenesis of Corpus Callosum — Aicardi Syndrome',
-  diagnosis: 'Agenesis of Corpus Callosum — Aicardi Syndrome',
-  presentation: {
-    hpi: 'Sofia Kim, presenting with Agenesis of Corpus Callosum — Aicardi Syndrome. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-agenesis-corpus-callosum', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-agenesis-corpus-callosum', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Agenesis of Corpus Callosum — Aicardi Syndrome available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Agenesis of Corpus Callosum — Aicardi Syndrome available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Agenesis of Corpus Callosum — Aicardi Syndrome', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-41284', setting: 'Peds Neurology', category: 'neurologic', acuity: 2,
+  chiefComplaint: 'Agenesis of Corpus Callosum — Aicardi Syndrome', diagnosis: 'Agenesis of Corpus Callosum — Aicardi Syndrome',
+  presentation: { hpi: '3-month-old female. Infantile spasms (salaam attacks — sudden head drop + arm extension + trunk flexion) started at 8 weeks. EEG: hypsarrhythmia (chaotic high-voltage slow waves) — WEST SYNDROME. MRI: complete agenesis of corpus callosum + periventricular heterotopia + chorioretinal lacunae. This is Aicardi syndrome: ACC + chorioretinal lacunae + infantile spasms. X-linked dominant — only in females (46XX) or 47XXY males.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '138', RR: '32', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'EEG': 'Hypsarrhythmia — chaotic, high-voltage, multifocal slow wave activity = West syndrome', 'MRI Brain': 'Complete ACC — absent corpus callosum. Colpocephaly (dilated posterior horns). Periventricular heterotopia. Parallel lateral ventricles (racing car sign).', 'Ophthalmology': 'BILATERAL CHORIORETINAL LACUNAE — pathognomonic for Aicardi syndrome', 'Karyotype': '46XX (Aicardi occurs in females or 47XXY)' },
+  orders: { correct: [{ id: 'acth-vigabatrin', name: 'ACTH (adrenocorticotropic hormone) or vigabatrin for infantile spasms — West syndrome treatment', rationale: 'West syndrome (infantile spasms + hypsarrhythmia): ACTH or vigabatrin are first-line. ACTH: synthetic ACTH gel (Acthar) — fastest spasm cessation. Vigabatrin: first-line for tuberous sclerosis-associated spasms. Pyridoxine trial: infants <1 year with unknown etiology — brief trial.' },{ id: 'genetics-aicardi', name: 'Genetic counseling — Aicardi syndrome is X-linked dominant', rationale: 'Aicardi syndrome is X-linked dominant — affects only 46XX females or 47XXY males (klinefelter). All cases are de novo mutations (sporadic) — recurrence risk to unaffected parents is extremely low (<1%). Female siblings have normal risk.' }], incorrect: [{ id: 'benzodiazepines', name: 'Lorazepam — treat infantile spasms', rationale: 'Benzodiazepines provide short-term spasm reduction but are NOT first-line for infantile spasms and do not improve long-term outcomes. ACTH or vigabatrin (with ketogenic diet) are the treatments with evidence for reducing long-term neurodevelopmental sequelae.' },{ id: 'isolated-acc', name: 'Isolated ACC — good prognosis, no treatment needed', rationale: 'ISOLATED ACC (no other anomalies) may have normal or near-normal development. But THIS case has Aicardi syndrome — infantile spasms + chorioretinal lacunae + heterotopia — which carries significant neurodevelopmental morbidity. Prognosis is determined by the full syndrome, not the ACC alone.' }] },
+  teachingPoints: { keyLearning: ['Aicardi syndrome: ACC + chorioretinal lacunae (pathognomonic — cream-colored lesions around optic disc) + infantile spasms. X-linked dominant — only in 46XX females.','ACC MRI findings: absent corpus callosum + colpocephaly (dilated posterior horns) + widely separated lateral ventricles (racing car sign) + Probst bundles (aberrant axons running parallel to interhemispheric fissure).','Isolated ACC: 50% have near-normal development. With additional anomalies (heterotopia, lissencephaly, Aicardi): significant intellectual disability.'], boardPearls: ['Corpus callosum development: anterior to posterior (genu → body → splenium). Partial agenesis (posterior) is more common than complete. Isolated partial ACC often has better prognosis.','Infantile spasms (West syndrome): peak onset 4-8 months. Characterized by sudden flexion spasms. Treat urgently — delay worsens long-term outcomes. Hypsarrhythmia on EEG is pathognomonic.','Chorioretinal lacunae: cream-colored circular lesions around optic disc on fundoscopy. PATHOGNOMONIC for Aicardi syndrome. Present in ALL confirmed Aicardi cases.'] },
+  references: [{ id: 'StatPearls', title: 'Agenesis of Corpus Callosum — Aicardi Syndrome', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK558998/', openAccess: true }]
 };

@@ -1,33 +1,12 @@
-/* emr-data/clubfoot.js — Congenital Clubfoot — Ponseti Method */
 window.CASES = window.CASES || {};
 window.CASES['clubfoot'] = {
   id: 'clubfoot', name: 'Liam Park', age: '2d', dob: '2026-03-29',
-  mrn: 'RDX-2026-46901', setting: 'Pediatric Ortho', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Congenital Clubfoot — Ponseti Method',
-  diagnosis: 'Congenital Clubfoot — Ponseti Method',
-  presentation: {
-    hpi: 'Liam Park, presenting with Congenital Clubfoot — Ponseti Method. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-clubfoot', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-clubfoot', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Congenital Clubfoot — Ponseti Method available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Congenital Clubfoot — Ponseti Method available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Congenital Clubfoot — Ponseti Method', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-30220', setting: 'Peds Ortho', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Congenital Clubfoot — Ponseti Method', diagnosis: 'Congenital Clubfoot — Ponseti Method',
+  presentation: { hpi: '2-day-old male. Bilateral congenital talipes equinovarus (clubfoot) noted at birth. CAVE deformity: Cavus (high arch), Adductus (forefoot adduction), Varus (heel varus), Equinus (plantar flexion). No neuromuscular disease. Isolated bilateral clubfoot. Parents counseled — Ponseti method expected >90% correction without major surgery.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: 'Age-appropriate', HR: '138', RR: '38', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Bilateral foot exam': 'CAVE deformity both feet — Cavus + Adductus + Varus + Equinus. Not reducible passively. Skin dimpling posteriorly.', 'Hip US': 'Normal — exclude DDH which is associated', 'Spine US': 'Normal — exclude spinal cord tethering' },
+  orders: { correct: [{ id: 'ponseti', name: 'Serial casting — Ponseti method: weekly casts × 5-7, then tenotomy + brace', rationale: 'Ponseti serial casting: starts within first 2 weeks of life. 5-7 weekly casts progressively correcting deformity (cavus first → adductus → varus → equinus). Percutaneous Achilles tenotomy needed in 90% for final equinus correction. Then Dennis-Brown foot abduction orthosis (brace) worn 23h/day × 3 months, then nights/naps until age 4-5.' },{ id: 'brace-compliance', name: 'Emphasize brace compliance — relapse occurs in >50% without bracing', rationale: 'The Achilles tenotomy and casting correct the deformity, but the brace prevents relapse. Stopping the brace early is the most common cause of recurrence (relapse rate >50% without brace vs <10% with proper bracing). Must wear brace until age 4-5.' }], incorrect: [{ id: 'surgical-release', name: 'Early surgical posteromedial release — correct the deformity surgically', rationale: 'Surgical release (posteromedial release, PMR) has been replaced by Ponseti method as gold standard. PMR has higher complication rates (stiff foot, pain, arthritis, overcorrection) and worse long-term outcomes than Ponseti casting. Surgery reserved for failed Ponseti, relapse, or complex cases.' },{ id: 'stretching-only', name: 'Passive stretching and splinting by parents — avoid medical intervention', rationale: 'Passive stretching alone is insufficient for true clubfoot. Ponseti casting provides sustained corrective forces that stretching cannot replicate. Parent-performed stretching is an adjunct, not a replacement.' }] },
+  teachingPoints: { keyLearning: ['Ponseti method: 5-7 weekly casts → percutaneous Achilles tenotomy (90%) → Dennis-Brown brace until age 4-5. >90% long-term success. BRACE COMPLIANCE is essential.','CAVE mnemonic: Cavus first corrected in casting → Adductus → Varus → Equinus (last). Order matters — correct sequence prevents iatrogenic rocker-bottom foot.','Relapse: most common in ages 1-4 years. If mild: resume casting. If severe: tibialis anterior tendon transfer. Surgical releases are last resort.'], boardPearls: ['Clubfoot associations: isolated bilateral (50%), or associated with arthrogryposis, myelomeningocele, constriction band syndrome. Check spine and hips.','Dennis-Brown bar: foot abduction orthosis — feet set at 70° external rotation (clubfoot side) or 40° bilateral. Must be worn consistently or relapse is near-certain.','Clubfoot genetics: multifactorial. 30% recurrence risk in siblings. 10-fold increased risk if parent affected.'] },
+  references: [{ id: 'StatPearls', title: 'Congenital Clubfoot — Ponseti Method', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK499997/', openAccess: true }]
 };

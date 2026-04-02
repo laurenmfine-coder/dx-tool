@@ -1,33 +1,12 @@
-/* emr-data/myelomeningocele.js — Myelomeningocele — Surgical Repair within 72h */
 window.CASES = window.CASES || {};
 window.CASES['myelomeningocele'] = {
   id: 'myelomeningocele', name: 'Baby Torres', age: '0d', dob: '2026-03-31',
-  mrn: 'RDX-2026-58801', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Myelomeningocele — Surgical Repair within 72h',
-  diagnosis: 'Myelomeningocele — Surgical Repair within 72h',
-  presentation: {
-    hpi: 'Baby Torres, presenting with Myelomeningocele — Surgical Repair within 72h. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-myelomeningocele', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-myelomeningocele', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Myelomeningocele — Surgical Repair within 72h available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Myelomeningocele — Surgical Repair within 72h available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Myelomeningocele — Surgical Repair within 72h', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-51675', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Myelomeningocele — Surgical Closure and Latex Precautions', diagnosis: 'Myelomeningocele — Surgical Closure and Latex Precautions',
+  presentation: { hpi: 'Newborn female delivered after prenatal diagnosis of lumbar myelomeningocele (L3-L4 level). Open neural tube defect with neural tissue visible. Lower extremities: flaccid paralysis and absent sensation below L3. No anal wink (sacral involvement). Bladder: not voiding. Head US: Chiari II malformation + moderate hydrocephalus. Covered with warm moist sterile dressing. Latex-free environment established.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '148', RR: '42', Temp: '36.8°C', SpO2: '97%' },
+  labs: { 'Head US': 'Chiari II — cerebellar herniation through foramen magnum. Moderate lateral ventricular dilation.', 'Lower extremity neurologic exam': 'L3 level — intact hip flexion, absent knee extension, absent ankle/foot movement.', 'Maternal AFP': 'Elevated at 17 weeks (missed opportunity for counseling)', 'MSAFP': 'Elevated — open NTD confirmed by amniocentesis AChE' },
+  orders: { correct: [{ id: 'mmc-closure', name: 'Surgical closure within 72h — MOMS trial standard', rationale: 'Postnatal closure within 72h prevents infection (meningitis), desiccation of neural tissue, and reduces further neurological deterioration. MOMS trial showed prenatal repair has advantages (better motor outcomes, less shunting needed) but postnatal closure remains standard at most centers.' },{ id: 'latex-free', name: 'Universal latex precautions from birth — highest sensitization rate of any population', rationale: 'Myelomeningocele patients have highest latex sensitization rate (18-40%) due to repeated urological/surgical exposures. ALL procedures (OR, catheterization, examination) must use latex-free supplies from birth to prevent sensitization.' },{ id: 'cic-plan', name: 'Plan clean intermittent catheterization — neurogenic bladder universal in MMC', rationale: 'Neurogenic bladder is universal. CIC every 3-4h starting from birth. Prevents high-pressure bladder → upper tract damage. Families must be trained before discharge. Urodynamics at 3-6 months to characterize bladder function.' }], incorrect: [{ id: 'expectant', name: 'Expectant management — severe defect, no meaningful function expected', rationale: 'Myelomeningocele is compatible with meaningful quality of life. Median survival into adulthood with appropriate management. Neurosurgery, urology, orthopedics, physical therapy, and social support significantly improve outcomes. Decision-making requires multidisciplinary counseling.' },{ id: 'latex-okay', name: 'Latex precautions not necessary at this age — sensitization takes time', rationale: 'Sensitization can occur from the FIRST exposure. The OR must be latex-free for the initial closure. There is no safe time to use latex. Establish latex-free environment immediately.' }] },
+  teachingPoints: { keyLearning: ['Repair within 72h standard of care. MOMS trial: prenatal repair (19-26 wks) — better motor outcomes and 40% less shunting needed, but maternal/fetal surgical risks. Still offered at select fetal surgery centers.','Chiari II: ALWAYS present in myelomeningocele (nearly 100%). Causes hydrocephalus via aqueductal stenosis and outlet foraminal obstruction. VP shunt or ETV required in 80%.','Latex allergy: universal precautions from birth. Anaphylaxis during ANY subsequent surgical/urological procedure in unprotected patient is a real risk.'], boardPearls: ['Folic acid prevention: 0.4mg general population preconception; 4mg for high-risk (prior NTD, DM, obesity, anticonvulsants). Must start BEFORE conception (tube closes by day 26).','Tethered cord: progressive neurological deterioration as child grows → surgical release. Scoliosis is common complication.','Arnold-Chiari II vs Chiari I: Chiari II is ALWAYS associated with NTDs. Chiari I (tonsillar herniation >5mm) is NOT associated with NTDs.'] },
+  references: [{ id: 'StatPearls', title: 'Myelomeningocele — Surgical Closure and Latex Precautions', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK559177/', openAccess: true }]
 };

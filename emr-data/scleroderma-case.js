@@ -1,33 +1,12 @@
-/* emr-data/scleroderma-case.js — Scleroderma Renal Crisis — ACEi Life-Saving */
 window.CASES = window.CASES || {};
 window.CASES['scleroderma-case'] = {
-  id: 'scleroderma-case', name: 'Diana Obi', age: '44F', dob: '1981-07-22',
-  mrn: 'RDX-2026-10934', setting: 'Rheumatology', category: 'rheumatologic', acuity: 2,
-  chiefComplaint: 'Scleroderma Renal Crisis — ACEi Life-Saving',
-  diagnosis: 'Scleroderma Renal Crisis — ACEi Life-Saving',
-  presentation: {
-    hpi: 'Diana Obi, presenting with Scleroderma Renal Crisis — ACEi Life-Saving. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-scleroderma-case', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-scleroderma-case', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Scleroderma Renal Crisis — ACEi Life-Saving available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Scleroderma Renal Crisis — ACEi Life-Saving available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Scleroderma Renal Crisis — ACEi Life-Saving', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  id: 'scleroderma-case', name: 'Diana Chen', age: '44F', dob: '1981-07-22',
+  mrn: 'RDX-2026-89613', setting: 'Medicine', category: 'rheumatologic', acuity: 1,
+  chiefComplaint: 'Scleroderma Renal Crisis — ACEi Life-Saving', diagnosis: 'Scleroderma Renal Crisis — ACEi Life-Saving',
+  presentation: { hpi: '44F with diffuse cutaneous systemic sclerosis (dcSSc) — anti-Scl-70 positive, extensive skin thickening (modified Rodnan score 28). On high-dose prednisone (started 2 months ago for myositis). Now: acute hypertension (BP 208/118, baseline 115/70), AKI (Cr 3.8 from 0.9), headache, MAHA on smear (schistocytes), oliguric. Urine: proteinuria 3+. This is scleroderma renal crisis (SRC) — a rheumatologic emergency. High-dose steroids are a major SRC precipitant.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '208/118 (H — acute hypertension)', HR: '108', RR: '20', Temp: '37.2°C', SpO2: '96%' },
+  labs: { 'Cr': '3.8 (H — from 0.9 baseline over 3 weeks)', 'UA': 'Protein 3+ | RBCs 2+ | Casts present', 'CBC': 'Hgb 8.8 (H — MAHA), Plt 88 (H — thrombocytopenia from microangiopathy)', 'Peripheral smear': 'Schistocytes — microangiopathic hemolytic anemia (MAHA)', 'Renin level': '84 ng/mL/h (markedly H — renin-angiotensin activation)' },
+  orders: { correct: [{ id: 'captopril-src', name: 'Captopril (short-acting ACEi) — start immediately, titrate every 8-12h to BP control', rationale: 'ACEi (captopril preferred for rapid titration) is the LIFE-SAVING treatment for scleroderma renal crisis. Blocks the renin-angiotensin system driving SRC. BP target: gradual reduction to 120/80 over 72h — do not lower too rapidly. Continue ACEi even if Cr worsens initially. ACEi use is associated with renal recovery even in dialysis-dependent SRC.' },{ id: 'stop-steroids-src', name: 'Taper prednisone — high-dose steroids precipitated SRC', rationale: 'High-dose corticosteroids (>15mg prednisone/day) are a major SRC precipitant. Taper immediately once ACEi is started. This is one of the most critical lessons in scleroderma management — avoid high-dose steroids in dcSSc whenever possible.' }], incorrect: [{ id: 'avoid-acei-src', name: 'Avoid ACEi — may worsen AKI and hyperkalemia', rationale: 'WRONG AND DANGEROUS. The classic teaching to avoid ACEi in scleroderma is INCORRECT for SRC. ACEi is the ONLY proven treatment for SRC. Without ACEi, mortality approaches 100%. With ACEi, 5-year survival improves to ~60%. Even if Cr rises initially, continue ACEi — kidneys may recover even after dialysis.' },{ id: 'arb-only', name: 'Use ARB instead of ACEi — similar mechanism, less cough', rationale: 'ARBs have NOT been proven to treat SRC the way ACEi have. The evidence base for ACEi (particularly captopril) in SRC is strong. ARBs may be added if ACEi-intolerant but should NOT replace ACEi as primary treatment.' }] },
+  teachingPoints: { keyLearning: ['Scleroderma renal crisis: acute HTN (often severe) + AKI + MAHA in a patient with dcSSc. Anti-RNA polymerase III antibody is highest risk for SRC. High-dose steroids precipitate SRC.','ACEi is MANDATORY in SRC — the old teaching to avoid ACEi in scleroderma is wrong. ACEi is life-saving. Continue even if Cr worsens. Renal recovery possible even after dialysis.','Limited vs diffuse SSc: limited (anti-centromere, CREST, PAH late complication) vs diffuse (anti-Scl-70/topoisomerase I, early ILD and SRC risk). SRC primarily affects diffuse SSc.'], boardPearls: ['Scleroderma ILD: treat with mycophenolate or nintedanib (SENSCIS trial). Monitor PFTs.','Pulmonary arterial hypertension in SSc: right heart catheterization for diagnosis. ERA (bosentan) + PDE5i (sildenafil) + prostacyclins for PAH.','Raynaud phenomenon in SSc: universal. Calcium channel blockers (nifedipine) first-line. Severe digital ischemia: IV prostacyclin (iloprost), PDE5i, sympathectomy.'] },
+  references: [{ id: 'StatPearls', title: 'Scleroderma Renal Crisis — ACEi Life-Saving', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK537135/', openAccess: true }]
 };

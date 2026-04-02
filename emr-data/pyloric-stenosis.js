@@ -1,26 +1,23 @@
-/* emr-data/pyloric-stenosis.js */
 window.CASES = window.CASES || {};
 window.CASES['pyloric-stenosis'] = {
-  id: 'pyloric-stenosis', name: 'Noah Kim', age: '5wk', dob: '2026-02-15',
-  mrn: 'RDX-2026-10378', setting: 'Clinic', category: 'pediatric', acuity: 2,
-  chiefComplaint: '5-week-old male — projectile non-bilious vomiting after every feed × 1 week',
-  diagnosis: 'Hypertrophic Pyloric Stenosis',
-  presentation: { hpi: '5-week-old male. 1 week of projectile non-bilious vomiting immediately after every feed. He is hungry after vomiting (hungry vomiter). Weight loss 400g. Olive-shaped mass palpated in right epigastrium. Metabolic derangement: hypochloremic hypokalemic metabolic alkalosis (classic).', pmh: ['No significant PMH'], meds: ['None'], allergies: ['NKDA'] },
-  vitals: { Temp: '37.2°C', HR: '158', RR: '36', SpO2: '98%', Weight: '3.8kg (birth weight 4.2kg)' },
-  labs: { 'BMP': 'Na 133, K 2.8 (L), Cl 82 (L — loss of HCl from vomiting), HCO3 32 (H — metabolic alkalosis), Cr 0.5', 'Pyloric US': 'Pyloric muscle wall thickness 5mm (>4mm = positive), channel length 20mm (>17mm = positive) — HYPERTROPHIC PYLORIC STENOSIS CONFIRMED' },
+  id: 'pyloric-stenosis', name: 'Noah Kim', age: '5wk', dob: '2026-02-24',
+  mrn: 'RDX-2026-54113', setting: 'Pediatric ED', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Hypertrophic Pyloric Stenosis — Correct Alkalosis Before Surgery', diagnosis: 'Hypertrophic Pyloric Stenosis — Correct Alkalosis Before Surgery',
+  presentation: {
+    hpi: '5-week-old male. 1 week of projectile non-bilious vomiting after every feed — immediately post-feed. \'Hungry vomiter\' — takes breast eagerly again after vomiting. Weight loss 400g from birth weight. Olive-shaped mass palpated in right epigastrium during feed. Ultrasound: pyloric muscle wall thickness 5mm (>4mm = positive), channel length 22mm (>17mm = positive).',
+    pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA']
+  },
+  vitals: { HR: '158', RR: '36', Temp: '37.2°C', SpO2: '98%', Weight: '3.8kg' },
+  labs: { 'Pyloric US': 'Muscle wall thickness 5mm (≥4mm = HPS), channel length 22mm (≥17mm = HPS) — CONFIRMED', 'BMP': 'Na 133 (L) | K 2.8 (L) | Cl 82 (L — HCl loss from vomiting) | HCO3 32 (H — metabolic alkalosis) | pH 7.52' },
   orders: {
-    correct: [
-      { id: 'correct-alk-ps', name: 'IV fluid resuscitation + K+ replacement — CORRECT ALKALOSIS BEFORE SURGERY', rationale: 'CRITICAL: Surgery cannot be performed safely with severe metabolic alkalosis — anesthesia risk (apnea from hypocarbia compensation). Correct electrolytes first: NS + KCl at maintenance rate. Target: Cl >100, K >3.5, HCO3 <30, pH normal. This may take 24-48h.' },
-      { id: 'pyloromyotomy', name: 'Ramstedt pyloromyotomy — once metabolically corrected', rationale: 'Surgical treatment: longitudinal incision through hypertrophied pyloric muscle without entering mucosa. Curative. Feeding can resume 4-6 hours after surgery. Laparoscopic approach is now standard.' }
-    ],
-    incorrect: [
-      { id: 'emergency-or-ps', name: 'Emergency surgery tonight — baby is vomiting and losing weight', rationale: 'Pyloric stenosis is NOT a surgical emergency — it is an urgent condition. Metabolic derangement must be corrected first. Rushing to OR with metabolic alkalosis + hypokalemia increases anesthetic risk dramatically. Correct electrolytes first (usually 24-48h).' },
-      { id: 'formula-change-ps', name: 'Change formula — likely GERD or formula intolerance', rationale: 'Projectile vomiting + olive mass + classic electrolytes = pyloric stenosis. Formula change will not help. Ultrasound is diagnostic.' }
-    ]
+    correct: [{ id: 'correct-alk', name: 'IV fluid resuscitation + KCl to correct hypochloremic hypokalemic metabolic alkalosis BEFORE surgery', rationale: 'CRITICAL: The metabolic alkalosis from HCl loss (vomiting) creates dangerous anesthetic risk. Alkalosis causes respiratory compensation (hypoventilation) → postoperative apnea. Correct first: NS + KCl IV until Cl >100, K >3.5, HCO3 <30. May take 24-48h.' },
+      { id: 'pyloromyotomy', name: 'Ramstedt pyloromyotomy after metabolic correction — laparoscopic or open', rationale: 'Surgical treatment: longitudinal incision through hypertrophied pyloric muscle without entering mucosa (Ramstedt). Curative. Feeding resumes 4-6h post-op. Laparoscopic approach is now standard at most centers.' }],
+    incorrect: [{ id: 'emergency-or', name: 'Emergency surgery tonight — the baby needs his pylorus fixed now', rationale: 'WRONG URGENCY. Pyloric stenosis is urgent but NOT emergent. The metabolic alkalosis + hypokalemia creates anesthetic risk (postoperative apnea). Rushing to OR with K 2.8 and HCO3 32 is dangerous. Correct electrolytes first — surgery is safe to delay 24-48h.' },
+      { id: 'formula-change', name: 'Switch to soy formula — projectile vomiting is likely GERD or milk allergy', rationale: 'Projectile non-bilious vomiting + hungry vomiter + olive mass + classic electrolyte pattern = pyloric stenosis. This is not GERD (GERD rarely causes projectile vomiting + weight loss + the classic metabolic derangement). Ultrasound is diagnostic.' }]
   },
   teachingPoints: {
-    keyLearning: ['Pyloric stenosis presents at 2-8 weeks (not at birth). Projectile non-bilious vomiting + hungry infant + olive mass = pyloric stenosis.', 'Metabolic alkalosis from HCl loss (vomiting): treat electrolytes BEFORE surgery. Alkalosis impairs anesthesia (respiratory compensation = hypocarbia = apnea risk).', 'Paradoxical aciduria: kidney excretes H+ to retain K+ → acidic urine despite systemic alkalosis.'],
-    boardPearls: ['Pyloric stenosis is more common in firstborn males and offspring of mothers who had PS.', 'Palpable olive mass is pathognomonic but US is diagnostic (wall thickness ≥4mm, channel ≥17mm).', 'Post-op: early feeding 4-6h after surgery. Spitting is common for several days — reassure parents.']
+    keyLearning: ['Pyloric stenosis: peaks at 2-8 weeks (not at birth). Projectile non-bilious vomiting + hungry vomiter + olive mass = HPS. Ultrasound is diagnostic.', 'Metabolic derangement: hypochloremic hypokalemic metabolic alkalosis from HCl loss. Paradoxical aciduria: kidney excretes H+ to retain K+ → acidic urine despite systemic alkalosis.', 'CORRECT ALKALOSIS BEFORE SURGERY — not an emergency. Adequate resuscitation with NS + KCl until Cl >100, K >3.5, HCO3 <30 required before safe anesthesia.'],
+    boardPearls: ['Pyloric stenosis: more common in firstborn males, offspring of mothers who had PS. Slight increase in breastfed infants.', 'Post-op: early feeding 4-6h after Ramstedt. Vomiting in first few days post-op is common (mucosal edema) — reassure parents.', 'Differential: GERD (non-projectile, not losing weight, no olive mass), malrotation/volvulus (BILIOUS vomiting — emergency), formula intolerance (bloody stool).']
   },
-  references: [{ id: 'StatPearls-PS', title: 'Pyloric Stenosis', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK499925/', openAccess: true }]
+  references: [{ id: 'StatPearls', title: 'Hypertrophic Pyloric Stenosis — Correct Alkalosis Before Surgery', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK499925/', openAccess: true }]
 };

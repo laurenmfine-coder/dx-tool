@@ -1,33 +1,12 @@
-/* emr-data/imperforate-anus.js — Anorectal Malformation — VACTERL + PSARP */
 window.CASES = window.CASES || {};
 window.CASES['imperforate-anus'] = {
-  id: 'imperforate-anus', name: 'Baby Wilson', age: '0d', dob: '2026-03-31',
-  mrn: 'RDX-2026-21358', setting: 'Peds Surgery', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Anorectal Malformation — VACTERL + PSARP',
-  diagnosis: 'Anorectal Malformation — VACTERL + PSARP',
-  presentation: {
-    hpi: 'Baby Wilson, presenting with Anorectal Malformation — VACTERL + PSARP. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-imperforate-anus', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-imperforate-anus', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Anorectal Malformation — VACTERL + PSARP available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Anorectal Malformation — VACTERL + PSARP available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Anorectal Malformation — VACTERL + PSARP', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  id: 'imperforate-anus', name: 'Baby Johnson', age: '1d', dob: '2026-03-30',
+  mrn: 'RDX-2026-48632', setting: 'Peds Surgery', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Imperforate Anus — VACTERL Screening and Colostomy', diagnosis: 'Imperforate Anus — VACTERL Screening and Colostomy',
+  presentation: { hpi: 'Newborn male. Nursing notes: no meconium passage × 24h. Physical exam: no visible anus — perineum is flat/smooth where anus should be. Flat perineum = high lesion (levator ani above the lesion). Fistula may be present (meconium visible on scrotum = rectourethral fistula). VACTERL screening initiated. Anorectal malformation requires surgical correction — timing depends on lesion height.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '158', RR: '42', Temp: '37.2°C', SpO2: '98%' },
+  labs: { 'Perineal exam': 'No anal opening. Flat perineum (poor prognosis for continence — high lesion). Meconium on scrotum — rectourethral/perineal fistula present.', 'Invertogram XR (after 24h)': 'Air-meconium level >1cm above skin = HIGH lesion (supralevator)', 'Sacral X-ray': 'Sacral ratio normal — better continence prognosis', 'VACTERL screen': 'Echo + renal US + spine XR + esophageal exam ordered' },
+  orders: { correct: [{ id: 'vacterl-screen-am', name: 'VACTERL screening — anorectal malformation is the A in VACTERL', rationale: 'Anorectal malformation IS the defining A in VACTERL. Screen for ALL VACTERL components: Vertebral (spine XR), Anorectal (confirmed), Cardiac (echo — 30%), Tracheo-Esophageal fistula (pass NGT), Renal (US — 30-50%), Limb (physical exam). Especially critical to diagnose TEF and cardiac defects before surgery.' },{ id: 'colostomy-high', name: 'Sigmoid colostomy for high lesion — decompression before definitive PSARP repair', rationale: 'High anorectal malformation (supralevator): diverting sigmoid colostomy in neonatal period → PSARP (posterior sagittal anorectoplasty — Peña procedure) at 3-6 months. Low lesion (infralevator, perineal fistula): primary perineal anoplasty without colostomy in some centers.' }], incorrect: [{ id: 'primary-repair-newborn', name: 'Primary anorectal reconstruction at birth — correct the defect immediately', rationale: 'High anorectal malformation requires staged repair: colostomy first, then definitive PSARP at 3-6 months. Primary repair at birth in a high lesion is technically difficult and associated with worse outcomes. Decompression first, then definitive repair after growth.' },{ id: 'no-vacterl-needed', name: 'VACTERL screening can wait — repair the anorectal malformation first', rationale: 'TEF and cardiac defects must be identified BEFORE anorectal surgery — they change anesthetic management. A missed TEF can cause fatal aspiration during anesthesia. VACTERL screening is concurrent with surgical planning, not sequential.' }] },
+  teachingPoints: { keyLearning: ['Anorectal malformation: high (supralevator) vs low (infralevator). High: flat perineum, may have fistula to bladder/urethra/vagina — staged repair (colostomy → PSARP). Low: visible fistula at perineum → primary anoplasty.','VACTERL: Vertebral + Anorectal + Cardiac + Tracheo-Esophageal + Renal + Limb. ANY of the VACTERL components should trigger workup for the others.','PSARP (posterior sagittal anorectoplasty): Peña procedure. Midline posterior incision → identify levator ani → bring rectum down through center of sphincter complex. Continence depends on sacrum, sphincter anatomy, and levator muscle quality.'], boardPearls: ['Sacral ratio: measures sacral development on XR. Ratio >0.7 = good prognosis for continence. Ratio <0.4 = very poor prognosis. Hemisacrum (currarino triad: sacral agenesis + presacral mass + anorectal malformation) identified on sacral XR.','Hirschsprung vs imperforate anus: both present with failure to pass meconium. Physical exam distinguishes: Hirschsprung has a visible anus (no anal opening on exam = imperforate anus).','Persistent cloaca (females): urethra + vagina + rectum all open into a single channel. Most complex anorectal malformation. Staged repair: posterior sagittal approach + complex reconstruction.'] },
+  references: [{ id: 'StatPearls', title: 'Imperforate Anus — VACTERL Screening and Colostomy', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK544372/', openAccess: true }]
 };

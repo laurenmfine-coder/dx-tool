@@ -1,33 +1,12 @@
-/* emr-data/gyn-oncology.js — Ovarian Cancer — CA-125 + Debulking Surgery */
 window.CASES = window.CASES || {};
 window.CASES['gyn-oncology'] = {
   id: 'gyn-oncology', name: 'Patricia Green', age: '62F', dob: '1963-11-20',
-  mrn: 'RDX-2026-85380', setting: 'Gyn Oncology', category: 'gynecologic', acuity: 2,
-  chiefComplaint: 'Ovarian Cancer — CA-125 + Debulking Surgery',
-  diagnosis: 'Ovarian Cancer — CA-125 + Debulking Surgery',
-  presentation: {
-    hpi: 'Patricia Green, presenting with Ovarian Cancer — CA-125 + Debulking Surgery. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-gyn-oncology', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-gyn-oncology', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Ovarian Cancer — CA-125 + Debulking Surgery available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Ovarian Cancer — CA-125 + Debulking Surgery available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Ovarian Cancer — CA-125 + Debulking Surgery', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-54080', setting: 'Gyn Oncology', category: 'gynecologic', acuity: 2,
+  chiefComplaint: 'Ovarian Cancer — CA-125 Elevation + Debulking Surgery', diagnosis: 'Ovarian Cancer — CA-125 Elevation + Debulking Surgery',
+  presentation: { hpi: '62F, postmenopausal. 3 months of abdominal bloating, early satiety, and 8-lb weight loss. Pelvic exam: right adnexal mass. CT abdomen/pelvis: 9cm right ovarian mass with complex cystic components + ascites + omental caking + peritoneal nodules. CA-125: 2,840 U/mL (markedly elevated). Presentation consistent with advanced epithelial ovarian cancer (likely Stage IIIC — peritoneal involvement). Para-aortic lymphadenopathy noted.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '124/78', HR: '82', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'CT A/P': '9cm right ovarian complex mass + ascites + omental caking + peritoneal nodules + para-aortic LAD — Stage IIIC/IV pattern', 'CA-125': '2,840 U/mL (markedly H — normal <35). Used for treatment monitoring, not screening.', 'Para-centesis cytology': 'Malignant cells — serous papillary adenocarcinoma (high-grade serous)', 'BRCA testing': 'Pending — BRCA1/2 mutation in 15-20% of ovarian cancer' },
+  orders: { correct: [{ id: 'debulking', name: 'Primary cytoreductive surgery (debulking) + staging — gynecologic oncology', rationale: 'Standard treatment: primary debulking surgery aiming for R0 (no visible residual disease) or R1 (<1cm residual). Complete debulking (R0) is the strongest predictor of survival. If neoadjuvant chemotherapy (NACT) is planned: 3 cycles carboplatin/paclitaxel → interval debulking.' },{ id: 'brca-testing', name: 'BRCA1/2 testing + genetic counseling — 15-20% of high-grade serous ovarian cancer', rationale: 'BRCA1/2 mutations in 15-20% of high-grade serous ovarian cancer. BRCA-mutated tumors respond better to platinum-based chemotherapy and PARP inhibitors (olaparib, niraparib). Germline testing has implications for family members. Somatic testing important for PARP inhibitor eligibility.' }], incorrect: [{ id: 'ca125-screening', name: 'CA-125 can be used for ovarian cancer screening in average-risk women', rationale: 'CA-125 is NOT recommended for ovarian cancer screening in average-risk women (USPSTF Grade D). CA-125 has low sensitivity/specificity for early ovarian cancer. It IS used for treatment monitoring and surveillance in diagnosed patients.' },{ id: 'watchful-wait-ovarian', name: 'Observe — ascites may be from other causes', rationale: 'Stage IIIC ovarian cancer with malignant ascites cytology requires immediate treatment. Watchful waiting is not appropriate. The 5-year survival for Stage III ovarian cancer with optimal debulking is 35-45% with appropriate treatment.' }] },
+  teachingPoints: { keyLearning: ['Ovarian cancer: most often presents at advanced stage (III-IV) — bloating, early satiety, abdominal distension, weight loss are LATE symptoms. No effective screening test.','BRCA1/2 in ovarian cancer: germline mutations in 15-20%. BRCA-mutated tumors: better platinum sensitivity and PARP inhibitor benefit. Test ALL high-grade serous ovarian cancer patients.','Debulking surgery: R0 (no visible residual) predicts best survival. Gynecologic oncologist performs en-bloc resection of peritoneal disease. NACT + interval debulking equivalent to primary debulking in selected patients (CHORUS, EORTC).'], boardPearls: ['CA-125: NOT a screening test. Used for treatment monitoring (should fall with chemotherapy) and recurrence detection. Can be elevated in benign conditions (endometriosis, fibroids, pregnancy).','PARP inhibitors for ovarian cancer maintenance: olaparib, niraparib, rucaparib. Indicated for BRCA-mutated and/or HRD (homologous recombination deficiency) positive tumors after platinum-based chemotherapy.','Fallopian tube origin: most high-grade serous ovarian carcinomas likely originate from the fallopian tube fimbriae (STIC — serous tubal intraepithelial carcinoma). Risk-reducing salpingo-oophorectomy for BRCA carriers after childbearing complete.'] },
+  references: [{ id: 'StatPearls', title: 'Ovarian Cancer — CA-125 Elevation + Debulking Surgery', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK567703/', openAccess: true }]
 };

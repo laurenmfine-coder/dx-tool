@@ -1,33 +1,12 @@
-/* emr-data/cvid-ivig.js — CVID — Recurrent Infections + IVIG Replacement */
 window.CASES = window.CASES || {};
 window.CASES['cvid-ivig'] = {
   id: 'cvid-ivig', name: 'Jennifer Park', age: '34F', dob: '1991-02-28',
-  mrn: 'RDX-2026-24653', setting: 'Immunology Clinic', category: 'immunologic', acuity: 2,
-  chiefComplaint: 'CVID — Recurrent Infections + IVIG Replacement',
-  diagnosis: 'CVID — Recurrent Infections + IVIG Replacement',
-  presentation: {
-    hpi: 'Jennifer Park, presenting with CVID — Recurrent Infections + IVIG Replacement. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-cvid-ivig', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-cvid-ivig', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for CVID — Recurrent Infections + IVIG Replacement available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for CVID — Recurrent Infections + IVIG Replacement available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'CVID — Recurrent Infections + IVIG Replacement', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-65006', setting: 'Allergy/Immunology', category: 'immunologic', acuity: 2,
+  chiefComplaint: 'CVID — Recurrent Sinopulmonary Infections + IVIG Replacement', diagnosis: 'CVID — Recurrent Sinopulmonary Infections + IVIG Replacement',
+  presentation: { hpi: '34F with 10+ years of recurrent sinopulmonary infections requiring multiple antibiotic courses annually (≥4-6 courses/year). 2 hospitalizations for pneumonia. Recurrent otitis media as a child. Giardia infection × 1 (encapsulated organism — CVID hallmark). Serum immunoglobulins: IgG 180 mg/dL (H — normal 700-1600), IgA <5 (H — markedly low), IgM 28 (H — low). Vaccine titers undetectable (no response to vaccines). No B cells but normal T cells. Autoimmune cytopenias developing.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '118/72', HR: '80', RR: '14', Temp: '37.4°C', SpO2: '98%' },
+  labs: { 'Serum immunoglobulins': 'IgG 180 (severely low), IgA <5 (undetectable), IgM 28 (low) — CONFIRMS hypogammaglobulinemia', 'B cells (flow cytometry)': 'Present but non-functional (CVID) — distinguishes from XLA (absent B cells)', 'Vaccine titers': 'Undetectable — no antibody response to pneumococcal and tetanus vaccines (diagnostic criterion for CVID)', 'CT chest': 'Bilateral bronchiectasis — sequela of recurrent pneumonias' },
+  orders: { correct: [{ id: 'ivig-replacement', name: 'IVIG 400-600mg/kg q4 weeks OR SCIG weekly — replace missing antibodies', rationale: 'IVIG/SCIG is lifelong replacement therapy for CVID. Trough IgG target: >500-700 mg/dL (adjust to clinical response). SCIG (subcutaneous) is equally effective and can be self-administered weekly — preferred by many patients. Monthly infusions or weekly SCIG both acceptable.' },{ id: 'infection-surveillance', name: 'Annual CT chest, pulmonary function testing — monitor bronchiectasis progression', rationale: 'Bronchiectasis is the major long-term pulmonary complication of CVID. Annual CT chest + spirometry. Airway clearance therapy (vest, flutter valve). Manage exacerbations with antibiotics — prolonged courses often needed.' }], incorrect: [{ id: 'steroids-cvid', name: 'Prednisone — treat recurrent infections with anti-inflammatory therapy', rationale: 'CVID is a B-cell deficiency — the problem is lack of antibodies, NOT inflammation. Steroids would further immunosuppress an already immunodeficient patient without treating the underlying deficit. IVIG/SCIG replacement is the treatment.' },{ id: 'vaccines-cvid', name: 'Catch-up vaccines — she has not responded to previous vaccines', rationale: 'Live vaccines are CONTRAINDICATED in CVID (profound immunodeficiency → risk of vaccine-strain infection). Inactivated vaccines can be given but will NOT generate protective responses (no functional B cells). IVIG provides passive antibody protection.' }] },
+  teachingPoints: { keyLearning: ['CVID diagnosis criteria: (1) IgG markedly low, (2) IgA and/or IgM low, (3) absent vaccine responses, (4) other causes excluded, (5) onset after age 2. B cells present but non-functional.','CVID complications: recurrent sinopulmonary infections → bronchiectasis, Giardia (encapsulated organisms lack opsonizing antibodies), autoimmune disease (ITP, AIHA, IBD-like), granulomatous-lymphocytic ILD, increased lymphoma risk.','XLA (Bruton agammaglobulinemia) vs CVID: XLA = absent B cells (BTK mutation, males), onset in infancy. CVID = present but dysfunctional B cells, onset in 20s-30s, both sexes.'], boardPearls: ['SCIG (subcutaneous IgG) vs IVIG: SCIG is home-administered weekly, more stable IgG levels, fewer systemic side effects (no first-dose reactions). IVIG is monthly infusion center. Both equivalent efficacy.','Trough IgG target: >500 mg/dL minimum; >700 mg/dL for patients with bronchiectasis or frequent infections. Adjust dose to achieve clinical protection.','Splenomegaly + lymphadenopathy + granulomas in CVID: granulomatous-lymphocytic interstitial lung disease (GLILD). Treat with steroids + rituximab.'] },
+  references: [{ id: 'StatPearls', title: 'CVID — Recurrent Sinopulmonary Infections + IVIG Replacement', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK531459/', openAccess: true }]
 };

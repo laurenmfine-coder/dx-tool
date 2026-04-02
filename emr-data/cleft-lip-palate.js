@@ -1,33 +1,12 @@
-/* emr-data/cleft-lip-palate.js — Cleft Lip/Palate — Rule of 10s Repair Timing */
 window.CASES = window.CASES || {};
 window.CASES['cleft-lip-palate'] = {
-  id: 'cleft-lip-palate', name: 'Sophia Lee', age: '3M', dob: '2025-12-31',
-  mrn: 'RDX-2026-93747', setting: 'Craniofacial Clinic', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Cleft Lip/Palate — Rule of 10s Repair Timing',
-  diagnosis: 'Cleft Lip/Palate — Rule of 10s Repair Timing',
-  presentation: {
-    hpi: 'Sophia Lee, presenting with Cleft Lip/Palate — Rule of 10s Repair Timing. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-cleft-lip-palate', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-cleft-lip-palate', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Cleft Lip/Palate — Rule of 10s Repair Timing available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Cleft Lip/Palate — Rule of 10s Repair Timing available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Cleft Lip/Palate — Rule of 10s Repair Timing', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  id: 'cleft-lip-palate', name: 'Baby Williams', age: '1d', dob: '2026-03-30',
+  mrn: 'RDX-2026-76188', setting: 'Craniofacial', category: 'pediatric', acuity: 3,
+  chiefComplaint: 'Cleft Lip and Palate — Surgical Timing and Feeding', diagnosis: 'Cleft Lip and Palate — Surgical Timing and Feeding',
+  presentation: { hpi: 'Newborn male with complete unilateral cleft lip and palate (left side). Bilateral clefts involve both lip and hard/soft palate. Identified on prenatal US at 20 weeks. Parents counseled prenatally. Immediate concern: feeding — cannot generate suction with incomplete palate. Micrognathia excluded (Pierre Robin ruled out). Normal chromosomes (isolated cleft lip and palate — multifactorial inheritance).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '148', RR: '38', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Physical exam': 'Complete unilateral left cleft lip extending to nostril base + complete unilateral cleft palate (hard + soft). No micrognathia. No other dysmorphic features.', 'Genetics': 'Chromosomes normal — isolated cleft lip and palate (multifactorial genetics, not syndromic).', 'Feeding assessment': 'Cannot generate suction — needs specialized nipple' },
+  orders: { correct: [{ id: 'specialized-nipple', name: 'Specialty feeder (Haberman/Pigeon nipple) — cannot generate suction with incomplete palate', rationale: 'Infants with cleft palate cannot generate adequate suction. Specialized feeders (Haberman, Pigeon, Mead-Johnson cleft palate nurser) do not require suction — milk flows with compression or gravity. Cleft palate team nurse should demonstrate feeding technique before discharge. Breastfeeding is very difficult but some mother-infant pairs manage with support.' },{ id: 'surgical-timing', name: 'Lip repair at 3 months (rule of 10s), palate repair at 9-12 months', rationale: 'Rule of 10s for lip repair: weight ≥10 lbs, hemoglobin ≥10 g/dL, age ≥10 weeks. Palate repair: 9-12 months — before major speech development. Earlier palate repair → better speech outcomes but greater midfacial growth restriction risk.' }], incorrect: [{ id: 'breastfeed-standard', name: 'Standard breastfeeding — all infants should be breastfed', rationale: 'Standard breastfeeding is not possible with complete cleft palate — the infant cannot generate negative pressure for suction. Expressed breastmilk via specialized feeder is the alternative. Speech-language pathology and lactation consultant are essential team members.' },{ id: 'early-palate-repair', name: 'Repair palate immediately at birth — prevents speech problems', rationale: 'Early palate repair (before 3 months) is associated with worse midfacial growth restriction (hypoplastic midface). The palatal repair must balance speech development (earlier = better) against midfacial growth (later = better). Consensus: palate repair at 9-12 months optimizes both outcomes.' }] },
+  teachingPoints: { keyLearning: ['Cleft lip repair: 3 months (rule of 10s — 10 lbs, Hgb ≥10, age ≥10 weeks). Palate repair: 9-12 months — critical window before speech development at 12-18 months.','Feeding: specialized nipples (Haberman, Pigeon) that flow without suction. Expressed breastmilk via specialized feeder is an option. Cannot use standard bottle or breastfeed without palate.','Multidisciplinary team: cleft team includes plastic surgery, orthodontics, speech-language pathology, audiology (middle ear effusion/OME common from Eustachian tube dysfunction), genetics.'], boardPearls: ['Van der Woude syndrome: autosomal dominant. IRF6 gene. Lower lip pits + cleft lip/palate. Most common syndromic cause of cleft lip and palate.','Cleft palate alone (without cleft lip): more commonly associated with syndromes (Pierre Robin, Stickler, 22q11, Van der Woude). Cleft lip ± palate: more commonly isolated/multifactorial.','Middle ear effusion: extremely common in cleft palate (nearly universal) — Eustachian tube dysfunction. Bilateral tympanostomy tubes at palate repair surgery. Hearing follow-up annually.'] },
+  references: [{ id: 'StatPearls', title: 'Cleft Lip and Palate — Surgical Timing and Feeding', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK526075/', openAccess: true }]
 };

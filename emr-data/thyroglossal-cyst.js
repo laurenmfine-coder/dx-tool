@@ -1,33 +1,12 @@
-/* emr-data/thyroglossal-cyst.js — Thyroglossal Duct Cyst — Midline, Moves with Swallowing */
 window.CASES = window.CASES || {};
 window.CASES['thyroglossal-cyst'] = {
   id: 'thyroglossal-cyst', name: 'Madison Park', age: '8F', dob: '2018-07-15',
-  mrn: 'RDX-2026-77331', setting: 'Peds Surgery', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Thyroglossal Duct Cyst — Midline, Moves with Swallowing',
-  diagnosis: 'Thyroglossal Duct Cyst — Midline, Moves with Swallowing',
-  presentation: {
-    hpi: 'Madison Park, presenting with Thyroglossal Duct Cyst — Midline, Moves with Swallowing. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-thyroglossal-cyst', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-thyroglossal-cyst', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Thyroglossal Duct Cyst — Midline, Moves with Swallowing available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Thyroglossal Duct Cyst — Midline, Moves with Swallowing available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Thyroglossal Duct Cyst — Midline, Moves with Swallowing', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-90799', setting: 'Peds Surgery', category: 'pediatric', acuity: 3,
+  chiefComplaint: 'Thyroglossal Duct Cyst — Midline, Moves with Swallowing and Tongue Protrusion', diagnosis: 'Thyroglossal Duct Cyst — Midline, Moves with Swallowing and Tongue Protrusion',
+  presentation: { hpi: '8-year-old female. Painless midline neck mass inferior to hyoid bone × 3 months. The mass moves when she swallows AND when she sticks her tongue out (attached to base of tongue via thyroglossal duct remnant, connected to hyoid). Thyroglossal duct cyst is the most common midline neck mass in children. Normal thyroid tissue confirmed on US (must confirm before excision — cyst may contain ectopic thyroid).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '104/66', HR: '80', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Neck US': 'Midline cystic mass at hyoid bone level — thyroid tissue visualized separately in normal position.', 'TSH': '1.8 mIU/L (normal — thyroid function normal)', 'CT/MRI neck': 'Midline cystic tract from foramen cecum of tongue → anterior to hyoid → isthmus of thyroid' },
+  orders: { correct: [{ id: 'sistrunk-procedure', name: 'Sistrunk procedure — excise cyst + middle third of hyoid bone + core of tongue base tissue', rationale: 'Sistrunk procedure is the gold standard — simply removing the cyst results in 50-70% recurrence because the entire thyroglossal duct must be excised including: (1) cyst, (2) middle third of hyoid bone (duct passes through it), (3) core of tissue to foramen cecum at base of tongue.' },{ id: 'confirm-thyroid-first', name: 'Confirm ectopic thyroid is not present before surgery', rationale: 'ALWAYS confirm normal thyroid exists before excising a thyroglossal cyst — the cyst may contain the patient ectopic thyroid tissue (no normal thyroid gland). Excising the only thyroid tissue causes permanent hypothyroidism. Thyroid US is mandatory preoperatively.' }], incorrect: [{ id: 'simple-excision', name: 'Simple cyst excision — remove only the cyst', rationale: 'Simple excision → 50-70% recurrence. The Sistrunk procedure (cyst + middle third of hyoid + core to foramen cecum) reduces recurrence to <5%. Simple excision is not adequate.' },{ id: 'branchial-cleft', name: 'This is a branchial cleft cyst — lateral neck approach', rationale: 'Branchial cleft cysts are LATERAL (anterior to SCM). Thyroglossal duct cysts are MIDLINE and move with TONGUE PROTRUSION (branchial cleft cysts do not move with tongue protrusion). Correct diagnosis prevents wrong surgical approach.' }] },
+  teachingPoints: { keyLearning: ['Thyroglossal duct cyst: most common congenital midline neck mass in children. Remnant of thyroglossal duct from foramen cecum (tongue base) to thyroid gland. Midline, moves with swallowing AND tongue protrusion.','Sistrunk procedure: en-bloc excision of cyst + middle third of hyoid bone + core of tissue to foramen cecum. Only this procedure prevents the 50-70% recurrence seen with simple excision.','Ectopic thyroid in thyroglossal duct: 1% of cases. The cyst may be the only thyroid tissue. US confirmation of normal thyroid gland is MANDATORY before surgery.'], boardPearls: ['Lingual thyroid: thyroid that failed to descend from tongue base. Appears as red-blue midline mass at tongue base. Treat with thyroid hormone suppression; surgery only if obstructive.','Infected thyroglossal cyst: presents as acute midline neck infection. Treat infection with antibiotics → Sistrunk procedure 4-6 weeks later after inflammation resolves.','Thyroglossal duct carcinoma: rare (<1%). Papillary thyroid carcinoma in the cyst. Sistrunk procedure + total thyroidectomy. Excellent prognosis.'] },
+  references: [{ id: 'StatPearls', title: 'Thyroglossal Duct Cyst — Midline, Moves with Swallowing and Tongue Protrusion', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK537031/', openAccess: true }]
 };

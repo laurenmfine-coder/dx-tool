@@ -1,33 +1,12 @@
-/* emr-data/capacity-assessment.js — Decisional Capacity — Refusing Amputation */
 window.CASES = window.CASES || {};
 window.CASES['capacity-assessment'] = {
   id: 'capacity-assessment', name: 'Harold Barnes', age: '72M', dob: '1953-09-15',
-  mrn: 'RDX-2026-75514', setting: 'Medicine Floor', category: 'psychiatric', acuity: 2,
-  chiefComplaint: 'Decisional Capacity — Refusing Amputation',
-  diagnosis: 'Decisional Capacity — Refusing Amputation',
-  presentation: {
-    hpi: 'Harold Barnes, presenting with Decisional Capacity — Refusing Amputation. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-capacity-assessment', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-capacity-assessment', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Decisional Capacity — Refusing Amputation available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Decisional Capacity — Refusing Amputation available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Decisional Capacity — Refusing Amputation', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-40783', setting: 'Medicine Floor', category: 'psychiatric', acuity: 2,
+  chiefComplaint: 'Decision-Making Capacity — Refusing Life-Saving Amputation', diagnosis: 'Decision-Making Capacity — Refusing Life-Saving Amputation',
+  presentation: { hpi: '72M admitted with wet gangrene of right foot from uncontrolled DM. Vascular surgery recommends below-knee amputation as life-saving. Patient refusing: \'I would rather die with two legs than live without one.\' Psychiatric consult requested. Patient appears alert, makes eye contact, engages in conversation. PHQ-9: 18 (moderately severe depression). You must assess decision-making capacity — NOT competency.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '148/88', HR: '94', RR: '18', Temp: '38.8°C (infected foot)', SpO2: '96%' },
+  labs: { 'Infectious workup': 'WBC 21,400, CRP 248 — systemic infection from gangrene', 'PHQ-9': '18 (moderately severe depression — may impair capacity)', 'Foot exam': 'Black necrotic foot, malodorous, extending above ankle — imminent systemic sepsis', 'Delirium assessment (CAM)': 'Negative — patient not delirious' },
+  orders: { correct: [{ id: '4-elements', name: 'Assess all 4 elements of decision-making capacity', rationale: 'Capacity requires ALL 4 elements: (1) UNDERSTANDING — can patient explain what amputation is and why it is recommended? (2) APPRECIATION — does patient understand this applies to THEIR situation? (3) REASONING — can patient reason through consequences of refusing? (4) COMMUNICATION — can patient express a consistent choice? Not having a psychiatric diagnosis does NOT equal lacking capacity.' },{ id: 'treat-depression', name: 'Treat underlying depression — depression may impair reasoning and appreciation', rationale: 'Depression impairs capacity by distorting appreciation (hopelessness prevents patient from seeing any future with quality of life). Treat depression (antidepressant + therapy) and reassess capacity after treatment. If patient still declines after depression is treated → respect autonomous decision.' }], incorrect: [{ id: 'emergency-surgery', name: 'Perform amputation over patient refusal — it is a life-saving procedure', rationale: 'Competent adults with decision-making capacity have the legal and ethical right to refuse even life-saving treatment — including amputation, dialysis, or chemotherapy. Performing surgery over an informed, capacitated refusal is battery. ASSESS CAPACITY FIRST before any action.' },{ id: 'incompetent', name: 'Patient is clearly incompetent — refer to ethics and family', rationale: 'Incompetency is a LEGAL determination made by courts — not by physicians at the bedside. Capacity is a CLINICAL determination. If the patient has capacity (even with depression), their refusal must be honored. Involve ethics, social work, and legal team for complex cases — but do not automatically override a refusal.' }] },
+  teachingPoints: { keyLearning: ['DMC (decision-making capacity) is task-specific and can fluctuate. It is a CLINICAL determination — any physician can assess it. Competency is a LEGAL determination (courts).','Depression and capacity: depression can impair appreciation (cannot envision future with quality of life) → impairs capacity. Treat and reassess. Delirium always impairs capacity.','Informed refusal: a capacitated patient can refuse any treatment. Document: (1) capacity assessment with 4 elements, (2) information provided (diagnosis, prognosis, alternatives), (3) understanding confirmed, (4) voluntary decision. Offer palliative care alternatives.'], boardPearls: ['Surrogate decision-making standards: (1) Substituted judgment — what would patient have wanted? (use when patient previously expressed preferences). (2) Best interest — what is objectively best? (use when no prior preferences known).','Advance directives: living will (specific treatment instructions) + healthcare proxy (designated decision-maker). These only activate when patient LACKS capacity.','Jehovah Witnesses refusing blood: competent adult refusal of transfusion must be honored even if life-threatening. Different standard for minors — court order may be sought.'] },
+  references: [{ id: 'StatPearls', title: 'Decision-Making Capacity — Refusing Life-Saving Amputation', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK538336/', openAccess: true }]
 };

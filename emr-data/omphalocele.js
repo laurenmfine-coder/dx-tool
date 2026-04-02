@@ -1,33 +1,12 @@
-/* emr-data/omphalocele.js — Omphalocele — Genetics Workup Before Surgery */
 window.CASES = window.CASES || {};
 window.CASES['omphalocele'] = {
   id: 'omphalocele', name: 'Baby Adams', age: '0d', dob: '2026-03-31',
-  mrn: 'RDX-2026-54394', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Omphalocele — Genetics Workup Before Surgery',
-  diagnosis: 'Omphalocele — Genetics Workup Before Surgery',
-  presentation: {
-    hpi: 'Baby Adams, presenting with Omphalocele — Genetics Workup Before Surgery. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-omphalocele', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-omphalocele', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Omphalocele — Genetics Workup Before Surgery available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Omphalocele — Genetics Workup Before Surgery available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Omphalocele — Genetics Workup Before Surgery', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-47827', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Omphalocele — Genetics Workup Before Surgery', diagnosis: 'Omphalocele — Genetics Workup Before Surgery',
+  presentation: { hpi: 'Newborn. Prenatal diagnosis: large omphalocele containing liver + bowel. Sac intact at birth (covered by peritoneum + amniotic membrane). Cardiac echo ordered: cardiac defects in 30-50% of omphalocele. Karyotype sent — chromosomal abnormalities in 30-40% (trisomy 13, 18, 21, Turner syndrome). Omphalocele is a midline defect (umbilical ring failure to close), distinct from gastroschisis (right paraumbilical, no sac, typically isolated).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '148', RR: '42', Temp: '36.8°C', SpO2: '97%' },
+  labs: { 'Physical exam': 'Large midline abdominal wall defect, sac intact containing loops of bowel + liver. Umbilical vessels incorporate into sac base.', 'Echo': 'PENDING — 30-50% of omphalocele have cardiac defects', 'Karyotype': 'PENDING — 30-40% chromosomal abnormality', 'Beckwith-Wiedemann screen': 'Check for macroglossia + hemihypertrophy + hypoglycemia (WT2 region)' },
+  orders: { correct: [{ id: 'genetics-first', name: 'Complete genetic workup BEFORE surgery — karyotype + echo + syndrome evaluation', rationale: 'Omphalocele has 30-40% chromosomal abnormality rate and 30-50% cardiac defect rate. Genetic results and cardiac anatomy MUST guide surgical planning and parental counseling. Surgery can be staged or delayed for large omphaloceles. Trisomy 13 or 18 may change the goals of care discussion.' },{ id: 'staged-repair', name: 'Staged reduction — silo technique for large omphaloceles with liver', rationale: 'Large omphaloceles (giant omphalocele — liver-containing): cannot close primarily without intraabdominal hypertension. Options: silo reduction over weeks, prosthetic mesh closure, or topical agents (silver sulfadiazine) to epithelialize sac while infant grows.' }], incorrect: [{ id: 'immediate-closure', name: 'Emergency primary closure — sac is intact, close it immediately', rationale: 'Omphalocele with intact sac is NOT an emergency — it differs from ruptured omphalocele or gastroschisis. The sac protects the bowel. Time is available for genetic workup and cardiac evaluation before surgery. Rushing to OR without knowing the karyotype or cardiac anatomy is a mistake.' },{ id: 'no-genetics', name: 'Genetics can wait — surgical closure is the priority', rationale: 'Chromosomal abnormalities (especially trisomy 13, 18) significantly affect prognosis and parental decision-making about the extent of treatment. These results MUST be available before major surgery. Exception: ruptured omphalocele (emergency) or unstable infant.' }] },
+  teachingPoints: { keyLearning: ['Omphalocele vs gastroschisis: omphalocele = midline, sac present, high genetic/cardiac associations. Gastroschisis = right paraumbilical, no sac, urgent (bowel exposed), typically isolated (low genetic risk).','Beckwith-Wiedemann syndrome: macrosomia + macroglossia + omphalocele + hypoglycemia + hemihypertrophy. WT2 region (11p15). Monitor blood glucose — hypoglycemia is life-threatening in BWS.','Giant omphalocele (liver-containing): high mortality from respiratory failure (liver in chest during repair reduces lung volume). Staged repair or topical therapy to allow sac epithelialization.'], boardPearls: ['Pentalogy of Cantrell: omphalocele + anterior diaphragmatic hernia + sternal defect + cardiac defect (ectopia cordis) + pericardial defect. Rare, high mortality.','Omphalocele recurrence risk: sporadic in most cases. If part of chromosomal syndrome: recurrence depends on karyotype.','Pulmonary hypoplasia in giant omphalocele: liver in abdomen compresses diaphragm → lung hypoplasia. Respiratory failure may persist after repair. Similar to CDH in severity.'] },
+  references: [{ id: 'StatPearls', title: 'Omphalocele — Genetics Workup Before Surgery', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK532269/', openAccess: true }]
 };

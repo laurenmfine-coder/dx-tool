@@ -1,33 +1,12 @@
-/* emr-data/craniosynostosis.js — Sagittal Craniosynostosis — Scaphocephaly */
 window.CASES = window.CASES || {};
 window.CASES['craniosynostosis'] = {
   id: 'craniosynostosis', name: 'Daniel Kim', age: '4M', dob: '2025-11-30',
-  mrn: 'RDX-2026-99379', setting: 'Craniofacial Clinic', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Sagittal Craniosynostosis — Scaphocephaly',
-  diagnosis: 'Sagittal Craniosynostosis — Scaphocephaly',
-  presentation: {
-    hpi: 'Daniel Kim, presenting with Sagittal Craniosynostosis — Scaphocephaly. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-craniosynostosis', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-craniosynostosis', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Sagittal Craniosynostosis — Scaphocephaly available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Sagittal Craniosynostosis — Scaphocephaly available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Sagittal Craniosynostosis — Scaphocephaly', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-21926', setting: 'Craniofacial', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Sagittal Craniosynostosis — Scaphocephaly', diagnosis: 'Sagittal Craniosynostosis — Scaphocephaly',
+  presentation: { hpi: '4-month-old male. Parents noticed elongated, narrow head shape since birth. HC growing along 50th percentile (not concerning in isolation). Physical exam: scaphocephaly (long, narrow skull — boat-shaped). Ridge palpated along the sagittal suture (premature fusion). Fontanelles open and non-bulging. No papilledema. CT head with 3D reconstruction: complete sagittal synostosis. No signs of raised ICP. Sagittal synostosis is the MOST COMMON craniosynostosis (50%).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HC: '42.8cm (50th %ile, following curve normally)', HR: '118', RR: '28', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'CT Head 3D': 'Complete sagittal suture fusion. Scaphocephaly (elongated AP diameter, narrow biparietal diameter). Interhemispheric fissure exaggerated. No evidence of raised ICP (thumb-printing absent).', 'Ophthalmology': 'No papilledema — ICP not elevated at this time', 'Neurologic exam': 'Normal for age' },
+  orders: { correct: [{ id: 'surgical-repair', name: 'Cranial vault remodeling surgery — optimal at 3-6 months for sagittal synostosis', rationale: 'Sagittal synostosis surgical correction: strip craniectomy or total cranial vault remodeling. Optimal timing: 3-6 months of age — skull is most compliant and brain growth can reshape the skull post-surgery. Delays beyond 12 months reduce reshaping potential and increase ICP risk.' },{ id: 'no-helmet', name: 'Helmets are NOT effective for craniosynostosis — surgery is required', rationale: 'Positional plagiocephaly (flat head from positioning) can be treated with repositioning + helmet therapy. TRUE craniosynostosis (premature suture fusion) requires surgery — helmets cannot correct fused sutures. Distinguish these conditions carefully.' }], incorrect: [{ id: 'helmet-therapy', name: 'Cranial molding helmet — reshape the skull without surgery', rationale: 'Helmets are for POSITIONAL plagiocephaly (not craniosynostosis). Positional plagiocephaly: no suture fusion, head is flat (often occipital). Craniosynostosis: suture is FUSED — it cannot be reshaped by helmets. CT shows the fused suture.' },{ id: 'watchful-wait', name: 'HC following the curve — observe until neurological symptoms develop', rationale: 'Waiting for neurological symptoms (papilledema, developmental delay from raised ICP) is too late — irreversible brain injury may have occurred. Optimal surgical window is 3-6 months. ICP elevation is a LATE finding.' }] },
+  teachingPoints: { keyLearning: ['Craniosynostosis: premature fusion of skull suture → restricted growth perpendicular to the fused suture + compensatory growth parallel. Suture determines skull shape.','Suture-shape mnemonic: Sagittal fusion → Scaphocephaly (long-narrow, most common). Coronal (unilateral) → Plagiocephaly. Coronal (bilateral) → Brachycephaly. Metopic → Trigonocephaly (triangular forehead).','Distinguish positional plagiocephaly from craniosynostosis: positional = no fused suture (CT normal), asymmetric flat occiput, ear position anterior. Synostosis = fused suture on CT, ear position posterior (lambdoid).'], boardPearls: ['Syndromic craniosynostosis: Apert (bicoronal + syndactyly, FGFR2), Crouzon (bicoronal + midface hypoplasia, FGFR2), Pfeiffer (bicoronal + broad thumbs, FGFR1/2), Muenke (coronal, FGFR3).','ICP in craniosynostosis: raised ICP occurs in 10-20% of single-suture and >50% of multi-suture synostosis. Papilledema, \'thumb-printing\' on CT (gyral impressions on inner table), developmental delay are signs.','Timing of repair: 3-6 months optimal for most single-suture. Multi-suture: earlier, given higher ICP risk. Syndromic: may require multiple staged surgeries.'] },
+  references: [{ id: 'StatPearls', title: 'Sagittal Craniosynostosis — Scaphocephaly', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430798/', openAccess: true }]
 };

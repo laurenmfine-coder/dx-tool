@@ -1,33 +1,12 @@
-/* emr-data/chiari.js — Chiari I — Occipital Headache + Syringomyelia */
 window.CASES = window.CASES || {};
 window.CASES['chiari'] = {
   id: 'chiari', name: 'Alex Morgan', age: '16M', dob: '2009-09-15',
-  mrn: 'RDX-2026-31691', setting: 'Neurology Clinic', category: 'neurologic', acuity: 2,
-  chiefComplaint: 'Chiari I — Occipital Headache + Syringomyelia',
-  diagnosis: 'Chiari I — Occipital Headache + Syringomyelia',
-  presentation: {
-    hpi: 'Alex Morgan, presenting with Chiari I — Occipital Headache + Syringomyelia. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-chiari', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-chiari', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Chiari I — Occipital Headache + Syringomyelia available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Chiari I — Occipital Headache + Syringomyelia available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Chiari I — Occipital Headache + Syringomyelia', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-52142', setting: 'Neurology', category: 'neurologic', acuity: 2,
+  chiefComplaint: 'Chiari I Malformation — Occipital Headache and Syringomyelia', diagnosis: 'Chiari I Malformation — Occipital Headache and Syringomyelia',
+  presentation: { hpi: '16-year-old male athlete. 8-month history of occipital/posterior cervical headache that worsens with Valsalva (coughing, straining, weightlifting). Recently noticed numbness and loss of pain/temperature sensation in both hands and arms (cape distribution). No weakness. MRI brain/spine: tonsillar herniation 8mm below foramen magnum. C2-T4 syrinx 7mm diameter (syringomyelia). Chiari I malformation diagnosed.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '124/76', HR: '72', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'MRI Brain': 'Cerebellar tonsils 8mm below foramen magnum (>5mm = Chiari I). No other structural abnormality.', 'MRI Cervical/Thoracic Spine': 'C2-T4 syrinx 7mm diameter. Cord normal caliber outside syrinx.', 'Neurologic exam': 'Dissociated sensory loss bilateral upper extremities — loss of pain/temperature (spinothalamic) with intact proprioception/vibration (dorsal columns) = CAPE PATTERN' },
+  orders: { correct: [{ id: 'posterior-fossa-decomp', name: 'Posterior fossa decompression — craniectomy + duraplasty', rationale: 'Chiari I with symptomatic syrinx: surgical decompression is indicated. Posterior fossa craniectomy + C1 laminectomy + duraplasty (dural patch to expand subarachnoid space) allows restoration of CSF flow → syrinx resorbs in most patients. Pain typically improves first; syrinx resolution over months to years.' },{ id: 'no-contact-sports', name: 'Restrict contact sports until surgical evaluation — risk of cord injury', rationale: 'Chiari I with syrinx: avoid activities that increase intracranial pressure (straining, weightlifting) and contact sports (cord contusion risk with syrinx). Neurosurgery evaluation urgently.' }], incorrect: [{ id: 'observe-chiari', name: 'Observe with serial MRI — syrinx may be asymptomatic', rationale: 'This syrinx is SYMPTOMATIC (cape-pattern sensory loss + headache). Symptomatic Chiari I with syrinx requires surgical decompression. Asymptomatic incidental Chiari I without syrinx may be observed, but symptomatic cases with neurological deficits should be treated.' },{ id: 'lpshunt', name: 'LP shunt — drain syrinx with a lumboperitoneal shunt', rationale: 'LP shunts are used for communicating hydrocephalus, not syringomyelia. Syrinx treatment is posterior fossa decompression to restore CSF flow. Direct syrinx shunting (syringosubarachnoid shunt) is a last resort if decompression fails.' }] },
+  teachingPoints: { keyLearning: ['Chiari I: cerebellar tonsils >5mm below foramen magnum. Symptoms from tonsillar herniation: Valsalva-triggered headache, syringomyelia, cranial nerve compression, central sleep apnea.','Syringomyelia: fluid-filled cavity within spinal cord. Cape-pattern sensory loss: bilateral loss of pain and temperature (spinothalamic tract — crosses in cord) with preserved proprioception/vibration (dorsal columns — ascend ipsilaterally). This pattern localizes the lesion to central cord.','Chiari I vs II: Chiari I = isolated tonsillar herniation, NOT associated with NTDs. Chiari II = cerebellar VERMIS + brainstem herniation, ALWAYS associated with myelomeningocele.'], boardPearls: ['Chiari I + hydrocephalus: VP shunt first — hydrocephalus may be driving tonsillar herniation. Posterior fossa decompression if syrinx persists after shunting.','Idiopathic syringomyelia (no Chiari): look for occult tethered cord, spinal arachnoiditis, or spinal cord tumor as cause. MRI entire spine.','Post-operative syrinx: most syringes improve or stabilize after posterior fossa decompression. Cape-pattern sensory loss may partially recover. Pain and headaches typically improve fastest.'] },
+  references: [{ id: 'StatPearls', title: 'Chiari I Malformation — Occipital Headache and Syringomyelia', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK430800/', openAccess: true }]
 };

@@ -1,33 +1,12 @@
-/* emr-data/pierre-robin.js — Pierre Robin Sequence — Airway + Mandibular Growth */
 window.CASES = window.CASES || {};
 window.CASES['pierre-robin'] = {
   id: 'pierre-robin', name: 'Baby Davis', age: '1d', dob: '2026-03-30',
-  mrn: 'RDX-2026-40485', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Pierre Robin Sequence — Airway + Mandibular Growth',
-  diagnosis: 'Pierre Robin Sequence — Airway + Mandibular Growth',
-  presentation: {
-    hpi: 'Baby Davis, presenting with Pierre Robin Sequence — Airway + Mandibular Growth. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-pierre-robin', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-pierre-robin', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Pierre Robin Sequence — Airway + Mandibular Growth available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Pierre Robin Sequence — Airway + Mandibular Growth available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Pierre Robin Sequence — Airway + Mandibular Growth', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-23708', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Pierre Robin Sequence — Airway Management and Mandibular Growth', diagnosis: 'Pierre Robin Sequence — Airway Management and Mandibular Growth',
+  presentation: { hpi: 'Newborn female with micrognathia (small jaw), glossoptosis (tongue falls back), and U-shaped cleft palate — Pierre Robin SEQUENCE (micrognathia causes the cascade, not a primary syndrome). SpO2 82% in supine position — improves to 96% in prone. Stickler syndrome suspected (most common associated syndrome — VACTRL, collagen II defect, myopia, joint laxity). First step: positioning.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { SpO2: '82% supine → 96% prone', HR: '168', RR: '52', Temp: '37.0°C' },
+  labs: { 'Airway assessment': 'Micrognathia severe — jaw appears hypoplastic. U-shaped cleft palate visible. Tongue obstructing pharynx in supine position.', 'Genetics consult': 'Pending — Stickler syndrome (most common association) vs velocardiofacial syndrome (22q11) vs VACTERL', 'Ophthalmology': 'High myopia found — SUPPORTS STICKLER SYNDROME', 'Echo': 'Normal — no cardiac defect' },
+  orders: { correct: [{ id: 'prone-positioning', name: 'Prone positioning — increases airway patency immediately (tongue falls forward with gravity)', rationale: 'First intervention: prone/lateral decubitus positioning. Gravity pulls tongue forward, opening the airway. 70-80% of Pierre Robin sequence infants are manageable with positioning alone. Nasopharyngeal airway (NPA) as next step if positioning inadequate.' },{ id: 'mandibular-distraction', name: 'Mandibular distraction osteogenesis (MDO) if NPA fails — expands mandible gradually', rationale: 'If prone positioning + NPA fails: mandibular distraction osteogenesis — surgically implanted devices gradually lengthen the mandible over 2-3 weeks. As mandible grows, tongue moves forward, airway improves. Catch-up mandibular growth occurs spontaneously in most isolated Pierre Robin by age 2-3.' }], incorrect: [{ id: 'intubation-routine', name: 'Immediate intubation — SpO2 82%', rationale: 'Positioning first — SpO2 82% supine improving to 96% prone indicates positional airway obstruction, not intrinsic airway failure. Intubation is premature. Prone positioning + nasopharyngeal airway can maintain adequate oxygenation in most cases. Reserve intubation for failed positioning and NPA.' },{ id: 'cleft-repair-urgent', name: 'Repair cleft palate immediately — causes the airway obstruction', rationale: 'The cleft palate in Pierre Robin actually helps — it allows the tongue more posterior space. Cleft repair at birth would worsen airway obstruction (removes the space). Cleft palate repair is deferred to 9-12 months after airway and feeding are established.' }] },
+  teachingPoints: { keyLearning: ['Pierre Robin is a SEQUENCE, not a syndrome. Micrognathia is the primary defect → tongue falls back (glossoptosis) → U-shaped cleft palate from tongue blocking palatal shelf fusion.','Management stepwise: prone/lateral → nasopharyngeal airway → tongue-lip adhesion → mandibular distraction osteogenesis → tracheostomy (last resort).','Stickler syndrome: most common associated condition. Autosomal dominant, collagen II (COL2A1) mutation. High myopia (risk of retinal detachment), sensorineural hearing loss, joint hypermobility, Pierre Robin sequence.'], boardPearls: ['U-shaped vs V-shaped cleft palate: Pierre Robin = U-shaped (posterior, tongue prevents palatal shelf fusion). Isolated cleft palate = V-shaped. Bilateral cleft lip + palate = different embryology.','Catch-up mandibular growth: isolated Pierre Robin without syndrome shows significant mandibular catch-up by age 2-3. Syndromic cases (Stickler, 22q11) have less catch-up.','Robin sequence frequency in Stickler: 30% of Stickler syndrome patients have Robin sequence. Screen ALL Robin sequence patients for Stickler (myopia exam, genetic testing).'] },
+  references: [{ id: 'StatPearls', title: 'Pierre Robin Sequence — Airway Management and Mandibular Growth', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK535353/', openAccess: true }]
 };

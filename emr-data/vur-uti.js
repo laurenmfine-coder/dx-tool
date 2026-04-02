@@ -1,33 +1,12 @@
-/* emr-data/vur-uti.js — Vesicoureteral Reflux — Prophylactic Antibiotics */
 window.CASES = window.CASES || {};
 window.CASES['vur-uti'] = {
   id: 'vur-uti', name: 'Emma Park', age: '18M', dob: '2024-09-30',
-  mrn: 'RDX-2026-85760', setting: 'Peds Urology', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Vesicoureteral Reflux — Prophylactic Antibiotics',
-  diagnosis: 'Vesicoureteral Reflux — Prophylactic Antibiotics',
-  presentation: {
-    hpi: 'Emma Park, presenting with Vesicoureteral Reflux — Prophylactic Antibiotics. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-vur-uti', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-vur-uti', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Vesicoureteral Reflux — Prophylactic Antibiotics available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Vesicoureteral Reflux — Prophylactic Antibiotics available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Vesicoureteral Reflux — Prophylactic Antibiotics', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-68050', setting: 'Peds Urology', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Vesicoureteral Reflux — Prophylactic Antibiotics + VCUG', diagnosis: 'Vesicoureteral Reflux — Prophylactic Antibiotics + VCUG',
+  presentation: { hpi: '18-month-old female. Third febrile UTI (E. coli) — treated each time with antibiotics. Evaluated after second UTI with renal US: bilateral mild hydronephrosis. VCUG performed: Grade III VUR bilaterally (reflux into renal pelvis without dilation). DMSA scan: right kidney 40% function (small area of scarring from prior UTI). Parents asking whether to do surgery.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { Temp: '38.8°C', HR: '132', RR: '28', SpO2: '99%' },
+  labs: { 'VCUG': 'Grade III VUR bilateral — urine refluxes into renal pelvis during voiding, no dilation', 'DMSA renal scan': 'Right kidney 40% function (area of cortical scar). Left kidney 60% — normal', 'Urine culture': 'E. coli >100,000 CFU/mL — febrile UTI confirmed', 'BMP': 'Cr 0.3 (age-appropriate), BP: 92/58 (normal)' },
+  orders: { correct: [{ id: 'prophylactic-abx', name: 'Trimethoprim-sulfamethoxazole 2mg/kg/day prophylaxis — reduce UTI recurrence risk', rationale: 'Antibiotic prophylaxis for Grade III VUR with recurrent febrile UTIs and cortical scarring: TMP-SMX (or nitrofurantoin) at prophylactic dose nightly. Controversial for low-grade VUR (RIVUR trial: prophylaxis reduced febrile UTI recurrence but not renal scarring progression). Use for Grade III-IV with recurrent UTIs or scarring.' },{ id: 'follow-up-dmsa', name: 'DMSA scan in 12 months — monitor for new scarring', rationale: 'Follow-up DMSA detects new cortical scars from breakthrough UTIs. If scarring progresses despite prophylaxis → reassess surgical candidacy.' }], incorrect: [{ id: 'immediate-surgery', name: 'Immediate ureteral reimplantation — she has scarring, surgery needed now', rationale: 'Grade III bilateral VUR with stable scarring in an 18-month-old: watchful waiting + prophylaxis is appropriate. VUR spontaneous resolution rates: Grade I 85%, II 80%, III 50% by age 5. Surgery reserved for Grade IV-V, breakthrough UTIs on prophylaxis, or parental preference after counseling.' },{ id: 'no-prophylaxis', name: 'No prophylaxis — RIVUR trial showed limited benefit', rationale: 'RIVUR trial: prophylaxis reduced febrile UTI rate but did NOT reduce renal scarring. However, febrile UTIs CAUSE scars — preventing UTIs is still a valid goal in a child with existing scarring. Grade III + recurrent UTIs + scarring: most guidelines still recommend prophylaxis.' }] },
+  teachingPoints: { keyLearning: ['VUR grading: I (ureter only) → II (ureter + pelvis, no dilation) → III (mild dilation) → IV (moderate dilation, fornix blunting) → V (massive dilation, tortuous ureter).','VCUG is diagnostic for VUR. DMSA detects cortical scarring. Febrile UTIs cause renal scars — preventing UTIs prevents progressive scarring and future hypertension/CKD.','Spontaneous resolution: Grade I-II resolves in most cases. Grade III 50% by age 5. Grade IV-V: surgical correction usually needed.'], boardPearls: ['Endoscopic injection (STING/HIT procedure): subureteric injection of dextranomer/hyaluronic acid (Deflux) — office-based alternative to open reimplantation for lower-grade VUR. 70-80% success rate.','Ureteral reimplantation: open or laparoscopic. 95-98% success. For Grade IV-V, bilateral, or failed medical/endoscopic treatment.','Breakthrough UTI on prophylaxis: consider reimplantation regardless of grade. Change antibiotic if organism resistant.'] },
+  references: [{ id: 'StatPearls', title: 'Vesicoureteral Reflux — Prophylactic Antibiotics + VCUG', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK560518/', openAccess: true }]
 };

@@ -1,33 +1,12 @@
-/* emr-data/urinary-incontinence.js — Stress Urinary Incontinence — Pelvic Floor Therapy */
 window.CASES = window.CASES || {};
 window.CASES['urinary-incontinence'] = {
   id: 'urinary-incontinence', name: 'Linda Foster', age: '58F', dob: '1967-03-22',
-  mrn: 'RDX-2026-68328', setting: 'Urology Clinic', category: 'urologic', acuity: 2,
-  chiefComplaint: 'Stress Urinary Incontinence — Pelvic Floor Therapy',
-  diagnosis: 'Stress Urinary Incontinence — Pelvic Floor Therapy',
-  presentation: {
-    hpi: 'Linda Foster, presenting with Stress Urinary Incontinence — Pelvic Floor Therapy. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-urinary-incontinence', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-urinary-incontinence', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Stress Urinary Incontinence — Pelvic Floor Therapy available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Stress Urinary Incontinence — Pelvic Floor Therapy available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Stress Urinary Incontinence — Pelvic Floor Therapy', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-29266', setting: 'Urology Clinic', category: 'urologic', acuity: 2,
+  chiefComplaint: 'Urinary Incontinence — Stress vs Urge vs Overflow', diagnosis: 'Urinary Incontinence — Stress vs Urge vs Overflow',
+  presentation: { hpi: '58F, postmenopausal. Leaks urine when she coughs, laughs, or sneezes (stress UI) — has been worsening since menopause. Also has sudden urge to urinate that she sometimes cannot control (urgency UI / overactive bladder). She wears 3 pads per day. No continuous dribbling. She is obese (BMI 34) and had 3 vaginal deliveries. No UTI on UA.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '128/78', HR: '74', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'UA': 'No infection, no hematuria', 'Post-void residual (PVR)': '28 mL (normal — rules out overflow)', 'Stress test': 'Urine leakage with Valsalva confirms stress UI', 'Pelvic exam': 'Grade II cystocele, mild anterior vaginal wall prolapse, atrophic vaginitis' },
+  orders: { correct: [{ id: 'pelvic-floor', name: 'Pelvic floor muscle training (PFMT/Kegel exercises) — first-line for stress UI', rationale: 'PFMT is the most effective non-surgical treatment for stress UI. Regular Kegel exercises strengthen the levator ani and urethral sphincter. Success rate 60-70%. Requires consistent training × 12 weeks minimum. Physical therapy with biofeedback can improve outcomes.' },{ id: 'antimuscarinics', name: 'Oxybutynin or mirabegron for urgency UI component — bladder training', rationale: 'Urgency UI (overactive bladder): first-line = bladder training (timed voiding, urge suppression techniques) + antimuscarinic (oxybutynin, solifenacin) or beta-3 agonist (mirabegron — fewer anticholinergic side effects, preferred in elderly). Avoid antimuscarinics in cognitive impairment.' }], incorrect: [{ id: 'surgery-first', name: 'Midurethral sling surgery immediately — best treatment for stress UI', rationale: 'Surgery (midurethral sling — TVT or TOT) is highly effective for stress UI but should follow a trial of conservative therapy (PFMT, weight loss, pessary). The 2013 AUA guidelines recommend behavioral and pharmacologic therapy before surgical options.' },{ id: 'catheter', name: 'Long-term indwelling catheter — avoid embarrassing leaks', rationale: 'Indwelling catheterization is associated with catheter-associated UTI, urethral injury, bladder stones, and significantly worsens quality of life. Reserved only for refractory overflow incontinence or when no other option is available.' }] },
+  teachingPoints: { keyLearning: ['Stress UI: urethral sphincter weakness → leakage with increased abdominal pressure (cough, sneeze, laugh, exercise). Treatment: PFMT, weight loss, pessary, midurethral sling.','Urgency UI / overactive bladder: detrusor overactivity → sudden urge + involuntary leakage. Treatment: bladder training, antimuscarinics (oxybutynin, solifenacin), mirabegron (beta-3 agonist — fewer side effects, preferred in elderly).','Mixed UI: both stress and urgency components. Treat urgency first (usually more bothersome), then address stress component.'], boardPearls: ['Overflow incontinence: high PVR (>300mL) from detrusor underactivity or outlet obstruction. Causes: BPH, diabetic cystopathy, anticholinergic medications. Treatment: CIC or Foley catheter.','Mirabegron vs antimuscarinics: mirabegron (Myrbetriq) is a beta-3 agonist — fewer anticholinergic side effects (dry mouth, constipation, cognitive impairment in elderly). Preferred in older patients and those with cognitive decline risk.','Pessary for pelvic organ prolapse + stress UI: ring pessary reduces anterior wall prolapse, may improve stress UI without surgery. Option for patients who decline surgery or are poor surgical candidates.'] },
+  references: [{ id: 'StatPearls', title: 'Urinary Incontinence — Stress vs Urge vs Overflow', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK559108/', openAccess: true }]
 };

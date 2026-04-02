@@ -1,33 +1,12 @@
-/* emr-data/contraception.js — Contraception Counseling — LARC vs OCP Selection */
 window.CASES = window.CASES || {};
 window.CASES['contraception'] = {
   id: 'contraception', name: 'Ashley Kim', age: '22F', dob: '2003-05-10',
-  mrn: 'RDX-2026-28208', setting: 'Gyn Clinic', category: 'gynecologic', acuity: 2,
-  chiefComplaint: 'Contraception Counseling — LARC vs OCP Selection',
-  diagnosis: 'Contraception Counseling — LARC vs OCP Selection',
-  presentation: {
-    hpi: 'Ashley Kim, presenting with Contraception Counseling — LARC vs OCP Selection. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-contraception', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-contraception', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Contraception Counseling — LARC vs OCP Selection available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Contraception Counseling — LARC vs OCP Selection available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Contraception Counseling — LARC vs OCP Selection', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-44703', setting: 'Gyn Clinic', category: 'gynecologic', acuity: 3,
+  chiefComplaint: 'Contraception Counseling — LARC Superiority and Medical Eligibility', diagnosis: 'Contraception Counseling — LARC Superiority and Medical Eligibility',
+  presentation: { hpi: '22F requesting contraception. Active sexual life with new partner. No current STI. Migraines WITH aura since age 16. Non-smoker. BMI 26. No medical conditions. Heavy menstrual periods (menorrhagia). Discussing options: IUD, implant, combined OCP, progestin-only pill, injection, condoms.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '116/70', HR: '72', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'BP': '116/70 (normal)', 'Pregnancy test': 'Negative', 'STI screen': 'GC/Chlamydia NAAT — results pending', 'Migraine assessment': 'Classic aura: visual scotoma preceding headache — CONTRAINDICATION TO COMBINED ESTROGEN CONTRACEPTIVES' },
+  orders: { correct: [{ id: 'larc', name: 'LNG-IUD (Mirena/Liletta) or copper IUD — most effective + treats menorrhagia', rationale: 'LARC (long-acting reversible contraception) is the most effective contraceptive (>99%). LNG-IUD additionally reduces menstrual blood loss by 80-90% (treats her menorrhagia). Progestin-only (no estrogen) — safe with migraines with aura. Copper IUD: non-hormonal, also most effective EC if inserted within 5 days.' },{ id: 'mec-category4', name: 'Migraines with aura = MEC Category 4 — absolutely contraindicated with estrogen contraceptives', rationale: 'WHO Medical Eligibility Criteria (MEC): MEC 4 = contraindication (risk outweighs benefit). Migraines WITH aura = MEC 4 for combined hormonal contraceptives (CHC — pill, patch, ring). Risk of ischemic stroke is 6× baseline in women with migraine with aura + estrogen contraceptives. ALL forms of combined estrogen are MEC 4.' }], incorrect: [{ id: 'combined-ocp', name: 'Combined OCP — will help with her heavy periods', rationale: 'Combined OCP IS effective for menorrhagia but is CONTRAINDICATED for migraines with aura (MEC Category 4). Use progestin-only alternatives (LNG-IUD — most effective for menorrhagia AND contraception). Never prescribe estrogen-containing contraceptives to patients with migraines with aura.' },{ id: 'abstinence-only', name: 'Abstinence is the most effective contraception', rationale: 'Evidence-based counseling supports patient autonomy and provision of highly effective contraceptive methods. Abstinence-only counseling without discussing available methods is not appropriate reproductive healthcare and leaves the patient without a plan if abstinence is not maintained.' }] },
+  teachingPoints: { keyLearning: ['MEC Category 4 for combined hormonal contraceptives: migraines with aura, history of stroke/VTE, uncontrolled hypertension, smoking >35 years age, SLE with positive antiphospholipid antibodies, breastfeeding <6 weeks, liver disease.','LARC superiority: IUD and implant are >99.9% effective vs typical-use OCP 91% (pill-taking errors). LARC is reversible immediately upon removal — fertility returns promptly.','Copper IUD: non-hormonal, 10-12 year duration, also most effective emergency contraception (insert within 5 days of unprotected intercourse — >99% effective).'], boardPearls: ['Ulipristal acetate (ella): emergency contraception, effective up to 120h, more effective than levonorgestrel in women >165 lbs. Prescription required in US.','Nexplanon (etonogestrel implant): subdermal arm implant, 3-year duration, >99.9% effective, progestin-only (safe with migraine with aura). Irregular bleeding is common side effect.','DMPA (Depo-Provera injection): progestin-only injection every 3 months. Amenorrhea common. Delayed return to fertility (up to 18 months). Safe with migraine with aura.'] },
+  references: [{ id: 'StatPearls', title: 'Contraception Counseling — LARC Superiority and Medical Eligibility', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK537779/', openAccess: true }]
 };

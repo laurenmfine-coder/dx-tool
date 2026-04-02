@@ -1,33 +1,12 @@
-/* emr-data/holoprosencephaly.js — Holoprosencephaly — Trisomy 13 Association */
 window.CASES = window.CASES || {};
 window.CASES['holoprosencephaly'] = {
   id: 'holoprosencephaly', name: 'Baby Kim', age: '1d', dob: '2026-03-30',
-  mrn: 'RDX-2026-35677', setting: 'Neonatal ICU', category: 'neurologic', acuity: 2,
-  chiefComplaint: 'Holoprosencephaly — Trisomy 13 Association',
-  diagnosis: 'Holoprosencephaly — Trisomy 13 Association',
-  presentation: {
-    hpi: 'Baby Kim, presenting with Holoprosencephaly — Trisomy 13 Association. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-holoprosencephaly', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-holoprosencephaly', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Holoprosencephaly — Trisomy 13 Association available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Holoprosencephaly — Trisomy 13 Association available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Holoprosencephaly — Trisomy 13 Association', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-68901', setting: 'Neonatal ICU', category: 'neurologic', acuity: 2,
+  chiefComplaint: 'Holoprosencephaly — Trisomy 13 + Face Predicts Brain', diagnosis: 'Holoprosencephaly — Trisomy 13 + Face Predicts Brain',
+  presentation: { hpi: 'Newborn female. Single median cleft lip + hypotelorism (closely set eyes) + proboscis (fused nose with a single nostril). MRI brain: alobar holoprosencephaly — single monoventricle, fused thalami, absent corpus callosum, absent olfactory bulbs. Karyotype: Trisomy 13 (Patau syndrome). Family counseled: alobar HPE is the most severe form. Associated with Trisomy 13 (most common chromosomal cause), maternal diabetes.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '148', RR: '44', Temp: '36.8°C', SpO2: '92%' },
+  labs: { 'MRI Brain': 'Alobar HPE — single monoventricle, fused thalami, absent interhemispheric fissure, absent corpus callosum. Most severe form.', 'Karyotype': 'Trisomy 13 (Patau syndrome) — confirmed.', 'Facial exam': 'Cyclopia (single eye, proboscis) — most severe HPE facies. Hypotelorism + single nostril also present.', 'Echo': 'VSD + ASD — complex cardiac defects (common in trisomy 13)' },
+  orders: { correct: [{ id: 'comfort-care', name: 'Goals of care discussion — alobar HPE + Trisomy 13 = uniformly fatal prognosis', rationale: 'Alobar HPE with Trisomy 13 has uniformly poor prognosis — median survival is weeks to months. Full palliative/comfort care discussion with family is the priority. Some families choose comfort care, others choose limited medical intervention. Multidisciplinary team (neonatology, genetics, palliative care, chaplaincy) must be involved.' },{ id: 'genetics-counseling', name: 'Genetic counseling — recurrence risk for Trisomy 13', rationale: 'Trisomy 13 recurrence risk: <1% for standard trisomy 13 (de novo nondisjunction). Higher if parent carries Robertsonian translocation. Genetic counseling and parental karyotyping are essential for family planning.' }], incorrect: [{ id: 'surgical-intervention', name: 'Pursue full surgical intervention — correct cardiac defects and ventriculomegaly', rationale: 'Alobar HPE with Trisomy 13 is a lethal condition — median survival is weeks. Cardiac surgery and neurosurgical intervention are not appropriate for alobar HPE with a lethal chromosomal syndrome. Goals of care must be discussed with the family before any surgical planning.' },{ id: 'reassure-mild', name: 'This is mild — the brain can compensate as it develops', rationale: 'ALOBAR HPE is the MOST SEVERE form — there is no separation of cerebral hemispheres, single monoventricle, fused thalami. There is NO compensation. This is incompatible with normal neurological function. Lobar HPE (mildest form) has better prognosis — not this case.' }] },
+  teachingPoints: { keyLearning: ['HPE: failure of prosencephalon to divide. Three types: alobar (most severe, single monoventricle, fused thalami), semilobar, lobar (least severe). The face predicts the brain.','Face predicts brain: cyclopia → alobar HPE. Single nostril + hypotelorism → semilobar. Midface hypoplasia → lobar HPE. Severity of facial midline defect mirrors severity of HPE.','Trisomy 13 is the most common CHROMOSOMAL cause of HPE. Other genetic causes: SHH, ZIC2, SIX3 mutations. Maternal DM increases risk of HPE (non-chromosomal).'], boardPearls: ['Lobar HPE: may have near-normal intelligence in some cases. Associated with SHH mutation. Not associated with fatal chromosomal syndromes in most cases.','Cyclopia: single eye in midline + proboscis. Always associated with alobar HPE. Lethal — incompatible with prolonged survival.','Alobar HPE and feeding: gavage feeding can be provided for comfort. Seizures are universal — benzodiazepines for comfort if seizing.'] },
+  references: [{ id: 'StatPearls', title: 'Holoprosencephaly — Trisomy 13 + Face Predicts Brain', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK563271/', openAccess: true }]
 };

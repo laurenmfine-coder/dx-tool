@@ -1,33 +1,12 @@
-/* emr-data/breast-mass.js — Breast Mass — Triple Assessment (Exam + Imaging + Biopsy) */
 window.CASES = window.CASES || {};
 window.CASES['breast-mass'] = {
   id: 'breast-mass', name: 'Karen Adams', age: '45F', dob: '1980-08-18',
-  mrn: 'RDX-2026-97365', setting: 'Breast Clinic', category: 'surgical', acuity: 2,
-  chiefComplaint: 'Breast Mass — Triple Assessment (Exam + Imaging + Biopsy)',
-  diagnosis: 'Breast Mass — Triple Assessment (Exam + Imaging + Biopsy)',
-  presentation: {
-    hpi: 'Karen Adams, presenting with Breast Mass — Triple Assessment (Exam + Imaging + Biopsy). See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-breast-mass', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-breast-mass', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Breast Mass — Triple Assessment (Exam + Imaging + Biopsy) available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Breast Mass — Triple Assessment (Exam + Imaging + Biopsy) available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Breast Mass — Triple Assessment (Exam + Imaging + Biopsy)', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-13213', setting: 'Breast Clinic', category: 'surgical', acuity: 2,
+  chiefComplaint: 'Breast Mass — Triple Assessment: Exam + Imaging + Biopsy', diagnosis: 'Breast Mass — Triple Assessment: Exam + Imaging + Biopsy',
+  presentation: { hpi: '45F. Self-detected right breast mass 3 weeks ago. Firm, non-tender, 2cm mass in right upper outer quadrant. No skin dimpling, no nipple retraction, no discharge. No axillary lymphadenopathy palpated. Premenopausal, no family history of breast/ovarian cancer. Triple assessment is the systematic approach: (1) clinical examination, (2) imaging (mammogram + US), (3) tissue biopsy.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '118/72', HR: '76', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Mammogram': 'BI-RADS 4B — irregular hyperdense mass with spiculated margins, 2.1cm right UOQ. Suspicious for malignancy — biopsy recommended.', 'Breast US': 'Hypoechoic solid mass with irregular borders, posterior acoustic shadowing — suspicious.', 'Core needle biopsy': 'Infiltrating ductal carcinoma, grade 2, ER+/PR+/HER2- (Luminal A subtype). Ki-67 12% (low)' },
+  orders: { correct: [{ id: 'core-biopsy', name: 'Core needle biopsy (CNB) — tissue diagnosis before any surgery', rationale: 'Core needle biopsy (14-gauge or 12-gauge) under US guidance is mandatory before surgery. Fine needle aspiration (FNA) only provides cytology — cannot assess invasion. CNB gives full histopathology, grade, and receptor status (ER/PR/HER2). NEVER remove a breast mass without tissue diagnosis.' },{ id: 'staging', name: 'Staging workup for confirmed breast cancer — sentinel node biopsy + systemic staging if high-risk', rationale: 'ER+/PR+/HER2-, grade 2, 2cm tumor (T2N0 clinically): lumpectomy + sentinel lymph node biopsy + radiation OR mastectomy. Genomic testing (Oncotype DX/MammaPrint) for intermediate-risk Luminal A to determine chemotherapy benefit.' }], incorrect: [{ id: 'excisional-biopsy', name: 'Excisional biopsy — remove the whole mass to diagnose it', rationale: 'Excisional biopsy as the initial diagnostic procedure is outdated and incorrect. Core needle biopsy is the gold standard — it preserves surgical options (lumpectomy margins), avoids unnecessary surgery if benign, and provides full receptor status for treatment planning.' },{ id: 'observe-3-months', name: 'Observe for 3 months — mass may be hormonal and resolve with menstrual cycle', rationale: 'Firm, spiculated, irregular breast mass in a 45-year-old requires immediate triple assessment — not observation. BI-RADS 4 lesions have 15-95% probability of malignancy and require biopsy. Delay in diagnosis worsens outcomes.' }] },
+  teachingPoints: { keyLearning: ['Triple assessment: (1) clinical exam, (2) mammogram + US, (3) core needle biopsy. All three should agree. If any one is suspicious for malignancy — biopsy.','BI-RADS 4 (suspicious) → biopsy mandatory. BI-RADS 3 (probably benign) → short-term follow-up (6 months) is acceptable. BI-RADS 5 (highly suspicious) → biopsy + plan for malignancy.','Luminal A (ER+/PR+/HER2-, low Ki-67): best prognosis, responds well to hormone therapy, low chemotherapy benefit. Use Oncotype DX to determine whether chemotherapy adds benefit.'], boardPearls: ['Oncotype DX Recurrence Score: 21-gene assay for ER+/HER2- T1-2, N0 breast cancer. Score <26: hormone therapy alone (no chemotherapy benefit). Score ≥26: add chemotherapy (RxPONDER trial: also applies to 1-3 positive nodes in postmenopausal women).','HER2+ treatment: add trastuzumab (and pertuzumab for locally advanced) to chemotherapy. TDM-1 (ado-trastuzumab emtansine) for residual disease after neoadjuvant therapy.','BRCA1/2 in breast cancer: higher prevalence of triple-negative (BRCA1) and Luminal B (BRCA2). PARP inhibitors (olaparib, talazoparib) for metastatic BRCA-mutated HER2- breast cancer.'] },
+  references: [{ id: 'StatPearls', title: 'Breast Mass — Triple Assessment: Exam + Imaging + Biopsy', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK564655/', openAccess: true }]
 };

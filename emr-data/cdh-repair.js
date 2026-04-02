@@ -1,24 +1,12 @@
-/* emr-data/cdh-repair.js */
 window.CASES = window.CASES || {};
 window.CASES['cdh-repair'] = {
-  id: 'cdh-repair', name: 'Baby Martinez', age: '0d', dob: '2026-03-31',
-  mrn: 'RDX-2026-30674', setting: 'Neonatal ICU', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'CDH — Bag-Mask Contraindicated, Delayed Repair',
-  diagnosis: 'CDH — Bag-Mask Contraindicated, Delayed Repair',
-  presentation: {
-    hpi: 'Baby Martinez, presenting with CDH — Bag-Mask Contraindicated, Delayed Repair. See CoachDx topic for full clinical details.',
-    pmh: ['See clinical encounter'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [{ id: 'mgmt', name: 'Evidence-based management — see CoachDx', rationale: 'Full correct order set in CoachDx coaching mode.' }],
-    incorrect: [{ id: 'pitfall', name: 'Common pitfall — see CoachDx', rationale: 'Common errors covered in CoachDx coaching content.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['Key learning for CDH — Bag-Mask Contraindicated, Delayed Repair in CoachDx coaching mode.'],
-    boardPearls: ['Board pearls for CDH — Bag-Mask Contraindicated, Delayed Repair in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'CDH — Bag-Mask Contraindicated, Delayed Repair', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  id: 'cdh-repair', name: 'Baby Smith', age: '0d', dob: '2026-03-31',
+  mrn: 'RDX-2026-51212', setting: 'NICU', category: 'pediatric', acuity: 1,
+  chiefComplaint: 'Congenital Diaphragmatic Hernia — PPHN and Delayed Repair', diagnosis: 'Congenital Diaphragmatic Hernia — PPHN and Delayed Repair',
+  presentation: { hpi: 'Newborn male with CDH diagnosed prenatally. At delivery: severe respiratory distress, barrel chest, scaphoid abdomen. Bowel sounds audible in left chest. CXR: bowel loops in left hemithorax, mediastinum shifted right, absent left lung shadow. Intubated immediately. On HFOV. PPHN (persistent pulmonary hypertension of newborn) is the primary cause of mortality — not the hernia itself. PGE1 started. CDH repair is delayed until PPHN resolves.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '178', RR: 'Ventilated (HFOV)', Temp: '37.0°C', SpO2: '88% right preductal' },
+  labs: { 'CXR': 'Bowel loops in left hemithorax. Right lung expanded but small. Severe mediastinal shift right. Scaphoid abdomen (bowel in chest, not abdomen).', 'Echo': 'SEVERE PPHN — estimated PA pressure 78 mmHg (near systemic). Right-to-left shunting at ductus arteriosus. LV small (underdeveloped).', 'ABG': 'pH 7.18, PaCO2 72, PaO2 42 — severe hypoxemia', 'Pre/postductal SpO2 gradient': 'Right hand 88% (preductal) vs foot 74% (postductal) — confirms right-to-left ductal shunting from PPHN' },
+  orders: { correct: [{ id: 'inhaled-no', name: 'Inhaled nitric oxide (iNO) + HFOV — treat PPHN before surgical repair', rationale: 'PPHN is the primary determinant of CDH mortality — not the hernia. iNO selectively dilates pulmonary vessels (reduces pulmonary vascular resistance) → reduces right-to-left shunting → improves oxygenation. HFOV provides gentle high-frequency ventilation (avoids barotrauma). CDH repair is DELAYED until PPHN resolves (typically 24-72h of stabilization).' },{ id: 'ecmo-cdh', name: 'ECMO consideration if refractory PPHN — bridge to recovery', rationale: 'ECMO (extracorporeal membrane oxygenation) is used for refractory CDH-associated PPHN when conventional management fails (iNO + HFOV + sildenafil). CDH repair can be performed on ECMO or after decannulation. Not all CDH centers have ECMO — transfer if needed.' }], incorrect: [{ id: 'emergency-repair', name: 'Emergency hernia repair now — bowel is in the chest, must be repositioned', rationale: 'WRONG timing. Immediate surgery on a hemodynamically unstable CDH infant with PPHN causes decompensation and death. The hernia is chronic — the bowel has been there since the second trimester. The acute crisis is PPHN from pulmonary hypoplasia. Stabilize PPHN first (24-72h minimum), then repair.' },{ id: 'chest-tube', name: 'Chest tube — decompress the hemothorax', rationale: 'There is NO hemothorax — the density in the chest is bowel loops. A chest tube inserted into herniated bowel would cause bowel perforation and is catastrophically wrong. Identify the content of the chest cavity before any intervention.' }] },
+  teachingPoints: { keyLearning: ['CDH: failure of diaphragm closure (posterolateral Bochdalek defect, left > right). Bowel in chest → lung compression during development → bilateral pulmonary hypoplasia + pulmonary vascular remodeling → PPHN.','CDH mortality is from PPHN and pulmonary hypoplasia — NOT the hernia itself. Repair is delayed until pulmonary hypertension is controlled (gentle ventilation, iNO, sildenafil, ECMO if needed).','Preductal vs postductal SpO2 gradient: preductal (right hand) SpO2 > postductal (feet) = right-to-left shunting at ductus arteriosus from PPHN. Gradient >10% = significant PPHN.'], boardPearls: ['Liver-up CDH (liver in chest): worst prognosis. Associated with contralateral lung hypoplasia. LHR (lung-to-head ratio) on prenatal US predicts severity.','Fetal interventions for CDH: FETO (fetal endoscopic tracheal occlusion) — balloon placed in fetal trachea prevents fluid egress → lung growth. Offered at specialized centers for severe CDH.','Patch repair vs primary closure: small CDH = primary repair. Large defect or liver-up = prosthetic patch (Gore-Tex) required. Patch repairs have higher recurrence rate.'] },
+  references: [{ id: 'StatPearls', title: 'Congenital Diaphragmatic Hernia — PPHN and Delayed Repair', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK534791/', openAccess: true }]
 };

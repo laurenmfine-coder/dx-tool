@@ -1,33 +1,12 @@
-/* emr-data/hypospadias-repair.js — Hypospadias — Never Circumcise Before Repair */
 window.CASES = window.CASES || {};
 window.CASES['hypospadias-repair'] = {
   id: 'hypospadias-repair', name: 'Lucas Torres', age: '3M', dob: '2025-12-31',
-  mrn: 'RDX-2026-27154', setting: 'Peds Urology', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Hypospadias — Never Circumcise Before Repair',
-  diagnosis: 'Hypospadias — Never Circumcise Before Repair',
-  presentation: {
-    hpi: 'Lucas Torres, presenting with Hypospadias — Never Circumcise Before Repair. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-hypospadias-repair', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-hypospadias-repair', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Hypospadias — Never Circumcise Before Repair available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Hypospadias — Never Circumcise Before Repair available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Hypospadias — Never Circumcise Before Repair', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-66261', setting: 'Peds Urology', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Hypospadias — Never Circumcise Before Surgical Repair', diagnosis: 'Hypospadias — Never Circumcise Before Surgical Repair',
+  presentation: { hpi: '3-month-old male. At circumcision referral, pediatrician identifies hypospadias — urethral meatus opens on ventral penile shaft (mid-penile hypospadias). Dorsal hooded foreskin (incomplete foreskin ventrally). Chordee (ventral penile curvature) present. The foreskin is needed for surgical reconstruction. Circumcision must NOT be performed. Parents counseled about repair at 6-18 months.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '118', RR: '28', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'Physical exam': 'Mid-penile hypospadias — meatus at penile shaft. Dorsal foreskin hood. Ventral chordee (30° curvature). No cryptorchidism.', 'Genetics': 'Not indicated for isolated mild-moderate hypospadias. Indicated for: perineal hypospadias + cryptorchidism (DSD workup), severe hypospadias with ambiguous genitalia', 'Testosterone stimulation': 'May be done pre-operatively to increase penile size for easier repair' },
+  orders: { correct: [{ id: 'do-not-circumcise', name: 'CANCEL circumcision — foreskin is essential surgical tissue for repair', rationale: 'CRITICAL: The foreskin is used as tissue for the urethroplasty (Snodgrass/TIP procedure). Circumcision destroys the surgical tissue needed for repair. This is the most important immediate management step. Document the hypospadias and cancel/defer circumcision.' },{ id: 'repair-6-18mo', name: 'Urethroplasty repair at 6-18 months — optimal timing', rationale: 'Hypospadias repair is performed at 6-18 months under general anesthesia. TIP (tubularized incised plate) urethroplasty / Snodgrass procedure: most common technique. Single-stage for most. Multi-stage for severe penoscrotal/perineal hypospadias. Success rate: 85-95%.' }], incorrect: [{ id: 'circumcise-separately', name: 'Circumcise now, repair the hypospadias separately later', rationale: 'WRONG. The foreskin is required for the urethral reconstruction. Circumcising before hypospadias repair destroys the tissue needed for surgery and significantly complicates or makes repair impossible. Cancel the circumcision.' },{ id: 'observe-mild', name: 'Mid-penile hypospadias does not require repair — functional urination is adequate', rationale: 'Repair goals go beyond urination: (1) straight penis for intercourse, (2) cosmetically normal appearance, (3) ability to urinate standing. Untreated hypospadias with chordee causes difficulty with intercourse and psychological distress. Repair is recommended for all symptomatic hypospadias.' }] },
+  teachingPoints: { keyLearning: ['NEVER circumcise with hypospadias — foreskin is surgical tissue for urethroplasty. Cancel circumcision immediately when hypospadias is identified.','TIP/Snodgrass urethroplasty: incise urethral plate → tubularize → advance meatus to glans. Dorsal foreskin transferred ventrally. Most common technique for distal and mid hypospadias.','Severe hypospadias (penoscrotal/perineal) + cryptorchidism: DSD workup mandatory — may be a virilized 46XX female with CAH.'], boardPearls: ['Post-op complications: urethrocutaneous fistula (most common, 5-15%), meatal stenosis, stricture, recurrent chordee. Fistula repair after 6-12 months.','Testosterone stimulation pre-op: for small penis — 3 doses of testosterone cypionate IM or DHT cream increases penile size. Makes repair easier for surgeon, improves outcomes.','Epispadias (urethra opens on DORSAL surface): associated with bladder exstrophy. Much rarer than hypospadias. Requires complete bladder exstrophy reconstruction.'] },
+  references: [{ id: 'StatPearls', title: 'Hypospadias — Never Circumcise Before Surgical Repair', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK448113/', openAccess: true }]
 };

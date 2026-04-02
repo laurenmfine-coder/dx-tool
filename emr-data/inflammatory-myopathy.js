@@ -1,33 +1,12 @@
-/* emr-data/inflammatory-myopathy.js — Dermatomyositis — Heliotrope Rash + ILD */
 window.CASES = window.CASES || {};
 window.CASES['inflammatory-myopathy'] = {
   id: 'inflammatory-myopathy', name: 'Carla Rivera', age: '48F', dob: '1977-06-15',
-  mrn: 'RDX-2026-98465', setting: 'Rheumatology', category: 'rheumatologic', acuity: 2,
-  chiefComplaint: 'Dermatomyositis — Heliotrope Rash + ILD',
-  diagnosis: 'Dermatomyositis — Heliotrope Rash + ILD',
-  presentation: {
-    hpi: 'Carla Rivera, presenting with Dermatomyositis — Heliotrope Rash + ILD. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-inflammatory-myopathy', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-inflammatory-myopathy', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Dermatomyositis — Heliotrope Rash + ILD available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Dermatomyositis — Heliotrope Rash + ILD available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Dermatomyositis — Heliotrope Rash + ILD', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-43292', setting: 'Rheumatology', category: 'rheumatologic', acuity: 2,
+  chiefComplaint: 'Dermatomyositis — Heliotrope Rash + Anti-Jo-1 + ILD', diagnosis: 'Dermatomyositis — Heliotrope Rash + Anti-Jo-1 + ILD',
+  presentation: { hpi: '48F with 6 weeks of proximal muscle weakness (cannot rise from chair, comb hair), heliotrope rash (violaceous periorbital discoloration), Gottron papules (erythematous papules over MCP/PIP joints), mechanic hands (fissured lateral fingers), and new dry cough. CK 4,800. Anti-Jo-1 antibody positive. CT chest: bilateral basal interstitial infiltrates — ILD. Cancer screening: mammogram/pelvic exam/CT ordered (malignancy in 15-20% of DM).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '128/76', HR: '88', RR: '18', Temp: '37.2°C', SpO2: '93% RA (ILD)' },
+  labs: { 'CK': '4,800 U/L (H — myopathy)', 'ANA': '1:320 speckled', 'Anti-Jo-1': 'Positive — antisynthetase syndrome (ILD + myositis + mechanic hands + arthritis + Raynaud)', 'CT chest': 'Bilateral basal ground-glass opacities + traction bronchiectasis — ILD (NSIP pattern)', 'Aldolase': 'Elevated (H)', 'MRI thighs': 'Bilateral symmetrical muscle edema + fatty infiltration of proximal muscles' },
+  orders: { correct: [{ id: 'steroids-dm', name: 'High-dose prednisone 1mg/kg/day — induce remission', rationale: 'Systemic corticosteroids are first-line for dermatomyositis. Start at 1mg/kg/day (max 60-80mg/day). Expect 3-6 months for full effect. Add steroid-sparing agent (azathioprine, methotrexate) early to facilitate taper.' },{ id: 'cancer-screen', name: 'Malignancy screening — DM has 15-20% associated malignancy', rationale: 'Dermatomyositis is a paraneoplastic syndrome in 15-20% of cases. Mandatory screening: CT chest/abdomen/pelvis, mammogram, Pap smear, colonoscopy (if age-appropriate), PSA (males), CA-125 (females). Ovarian, lung, breast, and colon cancer are most commonly associated. Screen within 3 years of diagnosis.' },{ id: 'ild-treatment', name: 'ILD management — anti-Jo-1 positive ILD may respond to immunosuppression', rationale: 'Antisynthetase syndrome (anti-Jo-1) ILD: can progress rapidly. Treat with steroids + mycophenolate or azathioprine. Monitor PFTs (FVC, DLCO) every 6-12 months. ILD is a major cause of morbidity and mortality in antisynthetase syndrome.' }], incorrect: [{ id: 'nsaids-dm', name: 'NSAIDs for muscle pain — myositis management', rationale: 'NSAIDs do not treat the underlying inflammatory myopathy. They may provide mild analgesic benefit but do not reduce inflammation or prevent muscle damage. High-dose corticosteroids are required.' },{ id: 'no-cancer-screen', name: 'Cancer screening not necessary — she is young with no risk factors', rationale: 'Dermatomyositis has 15-20% malignancy association regardless of age or traditional risk factors — the myositis itself is the risk factor. Mandatory screening is part of standard dermatomyositis management for ALL patients.' }] },
+  teachingPoints: { keyLearning: ['Dermatomyositis hallmarks: heliotrope rash (periorbital violaceous), Gottron papules (MCP/PIP), mechanic hands, proximal muscle weakness, elevated CK.','Anti-Jo-1 (antisynthetase syndrome): ILD + inflammatory myositis + mechanic hands + Raynaud + nonerosive arthritis. ILD can be rapidly progressive.','Malignancy screening is MANDATORY in dermatomyositis — 15-20% association. Anti-Mi-2 antibody = lower malignancy risk, better prognosis. Anti-SRP and anti-MDA5 = higher risk of severe disease.'], boardPearls: ['Polymyositis vs DM: PM = no skin findings. DM = heliotrope rash + Gottron papules. Both have proximal weakness + elevated CK.','Anti-MDA5 (clinically amyopathic DM): rapidly progressive ILD, minimal muscle weakness, skin ulcerations, mechanic hands — high mortality from ILD. Aggressive early treatment required.','Inclusion body myositis (IBM): older patients, DISTAL > proximal weakness (finger flexors, knee extensors), CK mildly elevated, does NOT respond to steroids, slow progression.'] },
+  references: [{ id: 'StatPearls', title: 'Dermatomyositis — Heliotrope Rash + Anti-Jo-1 + ILD', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK507884/', openAccess: true }]
 };

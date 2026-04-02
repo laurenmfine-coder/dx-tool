@@ -1,33 +1,12 @@
-/* emr-data/bladder-cancer.js — Bladder Cancer — TURBT + BCG Intravesical Therapy */
 window.CASES = window.CASES || {};
 window.CASES['bladder-cancer'] = {
   id: 'bladder-cancer', name: 'Michael Torres', age: '67M', dob: '1959-01-15',
-  mrn: 'RDX-2026-17420', setting: 'Urology Oncology', category: 'oncologic', acuity: 2,
-  chiefComplaint: 'Bladder Cancer — TURBT + BCG Intravesical Therapy',
-  diagnosis: 'Bladder Cancer — TURBT + BCG Intravesical Therapy',
-  presentation: {
-    hpi: 'Michael Torres, presenting with Bladder Cancer — TURBT + BCG Intravesical Therapy. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-bladder-cancer', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-bladder-cancer', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Bladder Cancer — TURBT + BCG Intravesical Therapy available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Bladder Cancer — TURBT + BCG Intravesical Therapy available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Bladder Cancer — TURBT + BCG Intravesical Therapy', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-49943', setting: 'Urology', category: 'oncologic', acuity: 2,
+  chiefComplaint: 'Bladder Cancer — TURBT and BCG Intravesical Therapy', diagnosis: 'Bladder Cancer — TURBT and BCG Intravesical Therapy',
+  presentation: { hpi: '67M, 40 pack-year smoker. Painless gross hematuria × 2 weeks. CT urogram: 2.5cm posterior bladder wall mass + mild right hydronephrosis. Cystoscopy confirms: sessile papillary tumor at right posterior wall. TURBT (transurethral resection of bladder tumor) performed — pathology: high-grade transitional cell carcinoma, T1 (lamina propria invasion). No muscle invasion. Staging: non-muscle-invasive bladder cancer (NMIBC), high-risk T1 HG.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { BP: '138/84', HR: '76', RR: '14', Temp: '37.0°C', SpO2: '99%' },
+  labs: { 'CT Urogram': '2.5cm posterior bladder wall mass with enhancement. Right ureterovesical junction involvement.', 'Cystoscopy + TURBT pathology': 'High-grade urothelial carcinoma, T1 (invades lamina propria but not muscularis propria). Muscularis propria absent in specimen — NEED RE-RESECTION.', 'Upper tract cytology': 'No upper tract TCC' },
+  orders: { correct: [{ id: 're-turbt', name: 'Re-TURBT within 6 weeks — muscularis propria absent from specimen', rationale: 'High-grade T1 TURBT specimen without muscularis propria: MUST re-resect within 6 weeks. Up to 30-40% of T1 tumors are understaged — may have muscle invasion (T2) that changes management (radical cystectomy vs intravesical therapy). Re-resection also reduces recurrence.' },{ id: 'bcg', name: 'Intravesical BCG immunotherapy × 6 weeks induction — high-risk NMIBC', rationale: 'High-risk NMIBC (T1 HG, CIS, multifocal, large tumor): intravesical BCG (Bacillus Calmette-Guerin) reduces recurrence and delays progression. 6-week induction course + maintenance (3 weeks at 3, 6, 12, 18, 24, 30, 36 months). BCG superior to mitomycin C for high-risk NMIBC.' }], incorrect: [{ id: 'radical-cystectomy-nmibc', name: 'Immediate radical cystectomy — high-grade tumor, must remove bladder', rationale: 'Radical cystectomy is appropriate for NMIBC that recurs after BCG (BCG-unresponsive), or progresses to T2. First-line treatment for high-risk NMIBC is TURBT + BCG — not immediate cystectomy. However, upfront cystectomy is discussed for highest-risk patients (T1 HG with CIS, adverse histology).' },{ id: 'observation', name: 'Observation after TURBT — no further treatment for now', rationale: 'High-risk NMIBC (T1 HG) without BCG has 40-50% recurrence and 20% progression to muscle-invasive disease within 5 years. BCG is MANDATORY after TURBT for high-risk disease to reduce progression risk.' }] },
+  teachingPoints: { keyLearning: ['Bladder cancer: most common urothelial carcinoma. Risk factors: smoking (strongest), occupational aniline dyes, cyclophosphamide, schistosomiasis, chronic UTI.','Non-muscle-invasive (NMIBC, Ta/T1/CIS): TURBT + intravesical BCG. Muscle-invasive (MIBC, T2+): neoadjuvant cisplatin chemotherapy + radical cystectomy (or trimodality — concurrent chemoradiation for bladder preservation).','BCG contraindications: active TB, immunocompromised state, active UTI, traumatic catheterization (absorption risk). Side effects: cystitis, hematuria, flu-like illness, rarely systemic BCG infection (BCGosis).'], boardPearls: ['CIS (carcinoma in situ): high-grade flat lesion, no papillary component. Appears red/velvety on cystoscopy. High risk of progression despite NMIBC staging. BCG is the primary treatment.','Re-resection (re-TURBT): MUST be performed for T1 HG when muscularis propria is absent from specimen. This is a quality metric for bladder cancer care.','Surveillance cystoscopy: every 3 months for 2 years, then every 6 months, then annually for NMIBC. Upper tract imaging (CT urogram) annually for high-risk.'] },
+  references: [{ id: 'StatPearls', title: 'Bladder Cancer — TURBT and BCG Intravesical Therapy', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK470414/', openAccess: true }]
 };

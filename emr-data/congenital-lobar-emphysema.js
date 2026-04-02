@@ -1,24 +1,12 @@
-/* emr-data/congenital-lobar-emphysema.js */
 window.CASES = window.CASES || {};
 window.CASES['congenital-lobar-emphysema'] = {
-  id: 'congenital-lobar-emphysema', name: 'Baby Thompson', age: '2M', dob: '2026-01-31',
-  mrn: 'RDX-2026-54455', setting: 'Peds Pulm', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Congenital Lobar Emphysema — Hyperinflation',
-  diagnosis: 'Congenital Lobar Emphysema — Hyperinflation',
-  presentation: {
-    hpi: 'Baby Thompson, presenting with Congenital Lobar Emphysema — Hyperinflation. See CoachDx topic for full clinical details.',
-    pmh: ['See clinical encounter'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [{ id: 'mgmt', name: 'Evidence-based management — see CoachDx', rationale: 'Full correct order set in CoachDx coaching mode.' }],
-    incorrect: [{ id: 'pitfall', name: 'Common pitfall — see CoachDx', rationale: 'Common errors covered in CoachDx coaching content.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['Key learning for Congenital Lobar Emphysema — Hyperinflation in CoachDx coaching mode.'],
-    boardPearls: ['Board pearls for Congenital Lobar Emphysema — Hyperinflation in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Congenital Lobar Emphysema — Hyperinflation', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  id: 'congenital-lobar-emphysema', name: 'Baby Lee', age: '2wk', dob: '2026-03-16',
+  mrn: 'RDX-2026-70413', setting: 'Peds Pulm', category: 'pediatric', acuity: 2,
+  chiefComplaint: 'Congenital Lobar Emphysema — Progressive Respiratory Distress', diagnosis: 'Congenital Lobar Emphysema — Progressive Respiratory Distress',
+  presentation: { hpi: '2-week-old male. Progressive tachypnea and respiratory distress since day 5 of life. CXR: hyperinflated left upper lobe compressing left lower lobe + shifting mediastinum to right. Initially thought to be pneumothorax — but NO pleural line visible. CT chest confirms: congenital lobar emphysema (CLE) of left upper lobe — air-trapping from ball-valve mechanism at lobar bronchus → progressive overinflation. Cardiorespiratory compromise developing.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { SpO2: '91%', HR: '168', RR: '62', Temp: '37.0°C' },
+  labs: { 'CXR': 'Left upper lobe hyperinflation. Mediastinal shift to right. Left lower lobe atelectasis. NO pleural line (distinguishes from pneumothorax).', 'CT Chest': 'Left upper lobe: severe overinflation with alveolar overdistension. Contralateral mediastinal shift. Left lower lobe compressed. No pneumothorax.', 'Echo': 'No cardiac defect causing external bronchial compression' },
+  orders: { correct: [{ id: 'lobectomy-cle', name: 'Emergent left upper lobe lobectomy — CLE with cardiorespiratory compromise requires surgery', rationale: 'Symptomatic CLE with respiratory distress and mediastinal shift requires urgent lobectomy of the affected lobe. The overinflated lobe is non-functional and compresses normal lung. Lobectomy is curative. Video-assisted thoracoscopic surgery (VATS) is preferred where available.' },{ id: 'avoid-chest-tube', name: 'Do NOT place chest tube — this is NOT a pneumothorax', rationale: 'CLE can be mistaken for pneumothorax. The critical distinction: CLE has no pleural line on CXR (the lung tissue is present but overinflated). A chest tube inserted into an overinflated lobe would puncture the lung and worsen the situation. CT chest confirms the diagnosis before any intervention.' }], incorrect: [{ id: 'chest-tube-ptx', name: 'Place chest tube — hyperinflated hemithorax with mediastinal shift = pneumothorax', rationale: 'DANGEROUS ERROR. CLE is NOT a pneumothorax — it is overinflated lobe with lung tissue present. No pleural line is visible on CXR. CT confirms lung tissue is hyperinflated, not a pleural air collection. Chest tube insertion would puncture the overinflated lobe and cause iatrogenic pneumothorax.' },{ id: 'observe-cle', name: 'Observe and optimize respiratory support — may improve without surgery', rationale: 'Symptomatic CLE with mediastinal shift and SpO2 91% is not a condition where watchful waiting is appropriate. The overinflated lobe is compressing the remaining lung and causing progressive respiratory failure. Surgery is urgent once the diagnosis is confirmed.' }] },
+  teachingPoints: { keyLearning: ['CLE: air-trapping in a lobe (usually upper lobes — left > right) from intrinsic bronchial cartilage deficiency or extrinsic compression → progressive lobar overinflation → compresses surrounding lung → respiratory distress.','CXR: hyperinflated lobe WITHOUT pleural line (distinguishes from pneumothorax). CT chest confirms: lung tissue present but hyperinflated. No pleural air collection.','Lobectomy is curative for symptomatic CLE. VATS approach preferred. Remaining lung compensates (compensatory emphysema) — long-term pulmonary function is normal.'], boardPearls: ['CLE associations: 14% have congenital heart disease (particularly PDA, VSD compressing bronchi). Echo in all CLE patients.','Asymptomatic CLE: incidental finding on imaging without symptoms — observation is acceptable in some cases. Serial imaging to monitor.','CLE vs CPAM Type I: CLE = lobar overinflation (hyperinflated normal alveoli). CPAM = abnormal cystic airway branching. CT distinguishes — CPAM has cysts, CLE has hyperinflated but structurally normal alveoli.'] },
+  references: [{ id: 'StatPearls', title: 'Congenital Lobar Emphysema — Progressive Respiratory Distress', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK537085/', openAccess: true }]
 };

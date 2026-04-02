@@ -1,33 +1,12 @@
-/* emr-data/dandy-walker.js — Dandy-Walker Malformation — 4th Ventricle Cyst */
 window.CASES = window.CASES || {};
 window.CASES['dandy-walker'] = {
   id: 'dandy-walker', name: 'Baby Torres', age: '1d', dob: '2026-03-30',
-  mrn: 'RDX-2026-64279', setting: 'Neonatal ICU', category: 'neurologic', acuity: 2,
-  chiefComplaint: 'Dandy-Walker Malformation — 4th Ventricle Cyst',
-  diagnosis: 'Dandy-Walker Malformation — 4th Ventricle Cyst',
-  presentation: {
-    hpi: 'Baby Torres, presenting with Dandy-Walker Malformation — 4th Ventricle Cyst. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-dandy-walker', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-dandy-walker', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Dandy-Walker Malformation — 4th Ventricle Cyst available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Dandy-Walker Malformation — 4th Ventricle Cyst available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Dandy-Walker Malformation — 4th Ventricle Cyst', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-59483', setting: 'Neonatal ICU', category: 'neurologic', acuity: 2,
+  chiefComplaint: 'Dandy-Walker Malformation — Posterior Fossa Cyst', diagnosis: 'Dandy-Walker Malformation — Posterior Fossa Cyst',
+  presentation: { hpi: 'Newborn female. Prenatal MRI at 22 weeks: enlarged posterior fossa + hypoplastic cerebellar vermis + cystic dilation of 4th ventricle — Dandy-Walker malformation. At birth: prominent occiput, widely split posterior fontanelle. US brain: Dandy-Walker confirmed + associated hydrocephalus (75% of DW cases). Karyotype: normal (trisomy 13, 18 excluded — associated in DW). Head circumference crossing percentiles.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HC: '36.8cm (97th %ile, increasing)', HR: '148', RR: '40', Temp: '37.0°C', SpO2: '97%' },
+  labs: { 'MRI Brain': 'Dandy-Walker malformation: (1) cystic dilation of 4th ventricle, (2) hypoplastic cerebellar vermis, (3) elevated tentorium cerebelli + enlarged posterior fossa. Hydrocephalus with dilated lateral + 3rd ventricles.', 'Karyotype': 'Normal 46XX', 'Associated anomalies screen': 'ACC (agenesis corpus callosum) on MRI — common association' },
+  orders: { correct: [{ id: 'vp-shunt-dw', name: 'VP shunt for hydrocephalus — symptomatic hydrocephalus requires shunting', rationale: '75% of Dandy-Walker malformation patients develop hydrocephalus requiring VP shunting. Head circumference crossing percentiles + imaging showing ventricular dilation = shunt indication. Some centers perform combined VP shunt + cyst shunt, others shunt only the lateral ventricles.' },{ id: 'multidisciplinary-dw', name: 'Multidisciplinary follow-up — neurology, PT, OT, developmental pediatrics', rationale: 'DW prognosis varies widely — depends on associated anomalies, not the posterior fossa malformation itself. Without additional anomalies: normal to near-normal intelligence possible. With ACC or cortical anomalies: significant neurodevelopmental challenges. Early intervention is essential.' }], incorrect: [{ id: 'no-shunt-dw', name: 'No shunt needed — the cyst is the CSF reservoir', rationale: 'The 4th ventricle cyst in DW does not function as an adequate CSF reservoir — it causes obstructive hydrocephalus. Symptomatic hydrocephalus with crossing HC percentiles requires VP shunting.' },{ id: 'lethal-prognosis', name: 'Dandy-Walker is incompatible with meaningful quality of life', rationale: 'DW prognosis is NOT uniformly poor. Classic DW without additional anomalies: ~50% have normal intelligence. Additional cortical anomalies (ACC, heterotopia) worsen prognosis significantly. Do not give uniformly grim prognosis — this varies by associated findings.' }] },
+  teachingPoints: { keyLearning: ['Dandy-Walker triad: (1) cystic dilation of 4th ventricle, (2) hypoplastic or absent cerebellar vermis, (3) enlarged posterior fossa with elevated tentorium.','Distinguish from: mega cisterna magna (normal variant — normal vermis + normal 4th ventricle + large CSF space) and Blake pouch cyst. MRI distinguishes these.','Associated anomalies in DW: agenesis corpus callosum (25%), cortical malformations, cardiac defects, chromosomal abnormalities (trisomy 13, 18, Turner). Prognosis determined by associated anomalies.'], boardPearls: ['DW spectrum: classic Dandy-Walker + DW variant (partial vermian hypoplasia without full posterior fossa enlargement) + mega cisterna magna (normal variant).','Mega cisterna magna: normal variant — do not diagnose as DW. Vermis and 4th ventricle are normal. No treatment needed. Do not cause parental alarm.','DW + hydrocephalus: 75% develop obstructive hydrocephalus requiring VP shunt. Without hydrocephalus: observation for head circumference and development.'] },
+  references: [{ id: 'StatPearls', title: 'Dandy-Walker Malformation — Posterior Fossa Cyst', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK559069/', openAccess: true }]
 };

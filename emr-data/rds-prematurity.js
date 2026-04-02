@@ -1,33 +1,12 @@
-/* emr-data/rds-prematurity.js — RDS in Prematurity — Surfactant + Antenatal Steroids */
 window.CASES = window.CASES || {};
 window.CASES['rds-prematurity'] = {
   id: 'rds-prematurity', name: 'Baby Garcia', age: '28wk', dob: '2026-03-15',
-  mrn: 'RDX-2026-74138', setting: 'NICU', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'RDS in Prematurity — Surfactant + Antenatal Steroids',
-  diagnosis: 'RDS in Prematurity — Surfactant + Antenatal Steroids',
-  presentation: {
-    hpi: 'Baby Garcia, presenting with RDS in Prematurity — Surfactant + Antenatal Steroids. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-rds-prematurity', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-rds-prematurity', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for RDS in Prematurity — Surfactant + Antenatal Steroids available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for RDS in Prematurity — Surfactant + Antenatal Steroids available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'RDS in Prematurity — Surfactant + Antenatal Steroids', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-98444', setting: 'NICU', category: 'pediatric', acuity: 1,
+  chiefComplaint: 'RDS in Prematurity — Surfactant Therapy and Antenatal Steroids', diagnosis: 'RDS in Prematurity — Surfactant Therapy and Antenatal Steroids',
+  presentation: { hpi: 'Premature infant born at 28 weeks gestation (extremely premature). Immediate respiratory distress: grunting, nasal flaring, subcostal retractions, tachypnea (RR 72). SpO2 78% on room air, requiring CPAP then intubation. CXR: diffuse bilateral ground-glass opacity + air bronchograms + low lung volumes = RDS (respiratory distress syndrome / hyaline membrane disease). Surfactant deficiency — type II pneumocytes not mature enough (mature at ~35 weeks).', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { HR: '188', RR: '72', Temp: '36.2°C (preterm hypothermia risk)', SpO2: '78% RA → 94% on CPAP' },
+  labs: { 'CXR': 'Bilateral ground-glass opacity + air bronchograms + low lung volumes — classic RDS pattern', 'Maternal antenatal steroids': 'Betamethasone given 24h before delivery — partial benefit', 'Gestational age': '28+0 weeks by LMP and US', 'Blood gas': 'pH 7.24, PaCO2 64, PaO2 45 — respiratory acidosis from atelectasis' },
+  orders: { correct: [{ id: 'surfactant', name: 'Endotracheal surfactant (beractant or poractant alfa) — immediately post-intubation', rationale: 'Exogenous surfactant: intratracheal instillation immediately after intubation. Dramatically reduces RDS mortality. Mechanism: replaces absent natural surfactant, reduces alveolar surface tension (LaPlace law), prevents atelectasis. INSURE method: INtubate-SURfactant-Extubate (back to CPAP) preferred to minimize ventilator-associated injury.' },{ id: 'cpap-resp', name: 'Nasal CPAP — non-invasive respiratory support if not requiring intubation', rationale: 'CPAP provides positive airway pressure that recruits alveoli and reduces atelectasis. The COIN trial and SUPPORT trial: early CPAP may avoid intubation in many premature infants. Surfactant can be given via LISA/MIST method without intubation in some cases.' }], incorrect: [{ id: 'o2-only', name: 'High-flow O2 via hood or face mask — avoid intubation', rationale: 'Simple O2 delivery cannot recruit atelectatic alveoli in RDS — the problem is surface tension collapse. CPAP or PEEP is required to keep alveoli open. Isolated high-flow O2 without CPAP is insufficient for RDS.' },{ id: 'delay-surfactant', name: 'Wait 24h to see if RDS improves — surfactant is expensive', rationale: 'Delay in surfactant administration worsens lung injury. The longer the atelectasis persists, the more inflammatory injury accumulates. Surfactant within the first hour of life (or as soon as intubated) gives the best outcomes.' }] },
+  teachingPoints: { keyLearning: ['Surfactant deficiency: premature type II pneumocytes cannot produce adequate DPPC (dipalmitoylphosphatidylcholine) before ~35 weeks. Antenatal corticosteroids accelerate maturation — give betamethasone 24h before any anticipated preterm delivery <34 weeks.','INSURE method: Intubate-SURfactant-Extubate to CPAP. Minimizes ventilator-associated lung injury (volutrauma/barotrauma). Preferred approach at many NICUs.','BPD (bronchopulmonary dysplasia): chronic lung disease of prematurity. Diagnosis: supplemental O2 requirement at 36 weeks corrected GA. Risk: prematurity + prolonged ventilation. Prevention: minimize ventilator time, use CPAP early.'], boardPearls: ['Antenatal corticosteroids: betamethasone IM × 2 doses 24h apart for deliveries <34 weeks. Reduces RDS by 40-50%, IVH, NEC. Partial benefit even with <24h before delivery.','ROP (retinopathy of prematurity): O2 toxicity + immature retinal vasculature. Screen premature infants <30 weeks or <1500g. Laser treatment for threshold ROP.','IVH (intraventricular hemorrhage): germinal matrix bleeds in first 72h of life. Grades I-IV. Grade III-IV associated with neurodevelopmental sequelae. Prevention: antenatal steroids, gentle delivery, minimize blood pressure fluctuations.'] },
+  references: [{ id: 'StatPearls', title: 'RDS in Prematurity — Surfactant Therapy and Antenatal Steroids', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK513241/', openAccess: true }]
 };

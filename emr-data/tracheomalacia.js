@@ -1,33 +1,12 @@
-/* emr-data/tracheomalacia.js — Tracheomalacia — Inspiratory Stridor Worse with Crying */
 window.CASES = window.CASES || {};
 window.CASES['tracheomalacia'] = {
   id: 'tracheomalacia', name: 'Lily Chen', age: '3M', dob: '2025-12-31',
-  mrn: 'RDX-2026-66698', setting: 'Peds Pulm', category: 'pediatric', acuity: 2,
-  chiefComplaint: 'Tracheomalacia — Inspiratory Stridor Worse with Crying',
-  diagnosis: 'Tracheomalacia — Inspiratory Stridor Worse with Crying',
-  presentation: {
-    hpi: 'Lily Chen, presenting with Tracheomalacia — Inspiratory Stridor Worse with Crying. See topic page for complete clinical details and pathophysiology.',
-    pmh: ['See clinical encounter for complete PMH'], meds: ['Age/condition-appropriate'], allergies: ['NKDA']
-  },
-  vitals: { BP: 'See encounter', HR: 'See encounter', RR: 'See encounter', Temp: '37.0°C', SpO2: '98%' },
-  labs: { 'Diagnostic workup': 'Key diagnostic findings detailed in topic coaching content' },
-  orders: {
-    correct: [
-      { id: 'mgmt-tracheomalacia', name: 'Evidence-based management — see CoachDx for full framework',
-         rationale: 'Full correct order set with rationale available in CoachDx coaching mode for this topic.' }
-    ],
-    incorrect: [
-      { id: 'pitfall-tracheomalacia', name: 'Common pitfall — see CoachDx for misconceptions',
-         rationale: 'Common errors and dangerous misconceptions covered in CoachDx coaching content.' }
-    ]
-  },
-  teachingPoints: {
-    keyLearning: [
-      'Key learning points for Tracheomalacia — Inspiratory Stridor Worse with Crying available in CoachDx coaching mode.',
-      'Practice this case then discuss with CoachDx for full clinical reasoning framework.'
-    ],
-    boardPearls: ['Board-relevant pearls for Tracheomalacia — Inspiratory Stridor Worse with Crying available in CoachDx.']
-  },
-  references: [{ id: 'StatPearls', title: 'Tracheomalacia — Inspiratory Stridor Worse with Crying', journal: 'StatPearls', year: 2024,
-    url: 'https://www.ncbi.nlm.nih.gov/books/', openAccess: true }]
+  mrn: 'RDX-2026-65957', setting: 'Peds Pulm', category: 'pediatric', acuity: 3,
+  chiefComplaint: 'Tracheomalacia — Inspiratory Stridor Worse with Crying', diagnosis: 'Tracheomalacia — Inspiratory Stridor Worse with Crying',
+  presentation: { hpi: '3-month-old female. Noisy breathing (stridor) since birth — worse when crying, feeding, or agitated. Better when quiet and calm. No SpO2 desaturation at rest. No retractions at rest. The stridor is inspiratory and has a \'seal-bark\' quality. Parents extremely anxious. Born at 37 weeks. Laryngomalacia excluded (no positional improvement). Rigid bronchoscopy confirms: anterior tracheal wall collapses >50% on inspiration — tracheomalacia.', pmh: ['See encounter'], meds: ['See encounter'], allergies: ['NKDA'] },
+  vitals: { SpO2: '98% at rest', HR: '138', RR: '38', Temp: '37.0°C' },
+  labs: { 'Rigid bronchoscopy': 'Tracheal anterior wall collapses >50% on inspiration. Length of collapse: proximal 2/3 of trachea. No extrinsic compression.', 'Flexible nasopharyngoscopy': 'Normal supraglottis (laryngomalacia excluded)', 'CXR': 'Normal. No vascular ring.', 'CT angiography': 'No vascular ring or double aortic arch compressing trachea' },
+  orders: { correct: [{ id: 'parental-reassurance', name: 'Reassurance + prone positioning + monitoring — most resolve spontaneously by 18-24 months', rationale: 'Primary tracheomalacia (intrinsic cartilage weakness) typically resolves spontaneously as tracheal cartilage matures and stiffens by 18-24 months. Reassurance is the most important intervention — parents are very anxious. Prone positioning may improve airflow. Follow clinically.' },{ id: 'aspiration-precautions', name: 'Aspiration precautions + feeding therapy if feeding difficulties', rationale: 'Tracheomalacia can cause feeding difficulties — dynamic airway collapse during feeding causes choking/gagging. Thickened feeds, upright positioning, and feeding therapy may help. Refer to speech-language pathology for feeding evaluation if concerns.' }], incorrect: [{ id: 'nebulized-racemic-epi', name: 'Continuous nebulized racemic epinephrine — treat the stridor', rationale: 'Racemic epinephrine treats INFLAMMATORY stridor (croup). Tracheomalacia stridor is STRUCTURAL — the cartilage is too soft. Epinephrine does not stiffen cartilage and is not appropriate. It will not help and delays appropriate counseling.' },{ id: 'immediate-surgery', name: 'Tracheal stenting or aortopexy — severe tracheomalacia needs surgery', rationale: 'Surgery (aortopexy — anchoring the aorta to pull the trachea forward; CPAP; tracheal stent) is reserved for SEVERE tracheomalacia with significant respiratory compromise (recurrent hospitalizations, cyanosis, ALTE, aspiration). Mild-moderate tracheomalacia resolves spontaneously. This patient has good SpO2 at rest — no surgery needed.' }] },
+  teachingPoints: { keyLearning: ['Primary tracheomalacia: intrinsic tracheal cartilage weakness. Inspiratory stridor worse with agitation/crying. Most resolve by 18-24 months as cartilage matures.','Secondary tracheomalacia: from external compression (vascular ring, mediastinal mass, TEF repair) or prolonged intubation. Identify and treat the underlying cause.','Vascular ring: double aortic arch or anomalous subclavian artery compressing trachea. Symptoms: biphasic stridor + dysphagia. CT angiography diagnoses. Surgical division is curative.'], boardPearls: ['Laryngomalacia vs tracheomalacia: laryngomalacia = inspiratory stridor improving in prone position, worse in supine (supraglottic collapse). Tracheomalacia = variable position effect, confirmed on bronchoscopy.','CPAP for severe tracheomalacia: CPAP at night or during feeds provides positive pressure to stent the airway open. Used for severe cases while awaiting spontaneous resolution.','Aortopexy: surgical anterior fixation of aorta to sternum → pulls anterior tracheal wall forward → prevents collapse. Reserved for life-threatening tracheomalacia.'] },
+  references: [{ id: 'StatPearls', title: 'Tracheomalacia — Inspiratory Stridor Worse with Crying', journal: 'StatPearls', year: 2024, url: 'https://www.ncbi.nlm.nih.gov/books/NBK470389/', openAccess: true }]
 };
