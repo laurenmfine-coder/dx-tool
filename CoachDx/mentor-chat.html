@@ -244,9 +244,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 <script src="../js/rdx-supabase.js"></script>
 
 <script>
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    CONFIG
-═══════════════════════════════════════════════════════ */
+======================================================= */
 const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
 const SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
@@ -259,9 +259,9 @@ function getSB() {
   return _sb;
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    TOPIC LIBRARY
-═══════════════════════════════════════════════════════ */
+======================================================= */
 const TOPICS = [
   // ── Allergy & Immunology — Foundational ──
   { id:'anaphylaxis',       name:'Anaphylaxis',                  icon:'🚨', cat:'A/I Foundational',    tags:['allergy','shock','epinephrine','ige','biphasic'] },
@@ -490,18 +490,18 @@ const TOPICS = [
 
 const FOUNDATIONAL = ['anaphylaxis','urticaria','asthma','food-allergy','drug-allergy','allergic-rhinitis','ddx-framework','cognitive-bias','stemi','sepsis-em','aki','dka-em','stroke-neuro','chest-pain-ddx'];
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    STATE
-═══════════════════════════════════════════════════════ */
+======================================================= */
 let currentTopic = null;
 let messages = [];
 let isLoading = false;
 let sessionId = null;
 let currentUser = null;
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    INIT
-═══════════════════════════════════════════════════════ */
+======================================================= */
 async function _rdxInit() {
   renderPicker(TOPICS);
   if (!window._rdxSessionActive) renderWelcomeChips();
@@ -534,9 +534,9 @@ if (document.readyState === 'complete') {
   window.addEventListener('load', _rdxInit);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    TOPIC PICKER RENDER
-═══════════════════════════════════════════════════════ */
+======================================================= */
 function renderPicker(topics, searchVal) {
   const body = document.getElementById('pickerBody');
   if (!topics.length && searchVal) {
@@ -622,9 +622,9 @@ function launchFromSearch() {
   if (val) startSession(val, false);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    WELCOME CHIPS
-═══════════════════════════════════════════════════════ */
+======================================================= */
 function renderWelcomeChips(gapTopics) {
   const chips = document.getElementById('welcomeChips');
   const foundational = TOPICS.filter(t => FOUNDATIONAL.includes(t.id));
@@ -661,9 +661,9 @@ function startFromWelcome() {
   startSession(val, false);
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    SESSION
-═══════════════════════════════════════════════════════ */
+======================================================= */
 async function startSession(topicName, isStructured, topicId) {
   currentTopic = { name: topicName, id: topicId || topicName.toLowerCase().replace(/\s+/g,'-'), structured: isStructured };
   messages = [];
@@ -1046,9 +1046,9 @@ const TOPIC_CTX = {
 
   'aki-systematic': 'Core framework: AKI workup — three categories: prerenal (FENa <1%, high BUN/Cr ratio >20:1, urine Osm >500, no casts), intrinsic/ATN (FENa >2%, granular muddy brown casts, urine Osm ~300, low Osm), postrenal (renal US: hydronephrosis; post-void residual >300mL). Common ATN causes: nephrotoxins (NSAIDs, aminoglycosides, vancomycin at toxic levels, contrast, cisplatin), ischemia, myoglobinuria. Stop all nephrotoxins in any AKI. Hold ACEi, ARBs, diuretics. Emergent dialysis (AEIOU): Acidosis pH <7.1, Electrolytes K >6.5, Ingestions, Overload, Uremia (pericarditis, encephalopathy). Common misconceptions: FENa can be <1% in ATN from contrast, myoglobinuria, or early obstruction — use FEUrea in these cases; Cr rise during diuresis in cardiogenic AKI is NOT always harmful — cardiorenal syndrome requires individualized management; muddy brown casts = ATN, red cell casts = GN, WBC casts = pyelonephritis or AIN. Strong answer: calculates FENa, interprets urine casts, identifies all nephrotoxins in medication list, applies AEIOU dialysis criteria, distinguishes cardiorenal syndrome from simple AKI. Weak answer: does not calculate FENa or continues nephrotoxins in established AKI.',
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // ==========================================================================
   // TRACK 2: Embryology / Congenital / Pediatric Structural — CoachDx only
-  // ══════════════════════════════════════════════════════════════════════════
+  // ==========================================================================
   'neural-tube-defects': 'Core framework: NTDs result from failure of neural tube closure (days 22-28 post-fertilization). Folic acid 400mcg daily starting 1 month before conception and through first trimester prevents 70% of NTDs. Spina bifida occulta (tuft of hair, dimple — no neurologic deficit) vs meningocele (meninges only, usually no deficit) vs myelomeningocele (cord elements herniated — neurologic deficit below level). Associated: Chiari II malformation (cerebellar herniation causing hydrocephalus). Anencephaly: lethal, absent calvaria + cerebral hemispheres. MSAFP elevated in open NTDs. Common misconceptions: spina bifida occulta rarely causes symptoms — it is the most common and most benign; folic acid must be started BEFORE conception to close the tube by day 28; Chiari I (tonsillar herniation, syringomyelia) is NOT associated with NTDs; myelomeningocele repair is performed within 72h of birth. Strong answer: explains embryologic timing, folic acid dosing for high-risk patients (4mg vs 0.4mg), Chiari II association, AFP screening, and neurosurgical repair timing. Weak answer: cannot distinguish spina bifida types or does not know folic acid timing.',
 
   'hirschsprung-disease': 'Core framework: Failure of neural crest cell migration into the distal colon → aganglionic segment → functional obstruction. Presents in neonates: failure to pass meconium in first 24h + progressive abdominal distension + bilious vomiting. Barium enema: transition zone (aganglionic segment narrower than proximal dilated colon). Rectal suction biopsy: absent ganglion cells in myenteric (Auerbach) and submucosal (Meissner) plexuses = GOLD STANDARD diagnosis. Treatment: pull-through surgery. Complication: Hirschsprung-associated enterocolitis (HAEC) — life-threatening. Common misconceptions: enemas and rectal stimulation do NOT definitively treat Hirschsprung — surgery is required; total colonic Hirschsprung can be missed on barium enema (the entire colon is aganglionic and may not show classic transition zone); always suspect Hirschsprung in Down syndrome with constipation (higher association). Strong answer: explains neural crest cell migration failure, interprets barium enema, knows rectal biopsy criteria, discusses HAEC management, identifies Down syndrome association. Weak answer: mistakes Hirschsprung for functional constipation or confuses diagnostic tests.',
@@ -1184,9 +1184,9 @@ const TOPIC_CTX = {
 
   'gerd-pud-management': 'Core framework: UGIB Glasgow-Blatchford Score: BUN, Hgb, SBP, HR, melena, syncope, hepatic disease — score 0 = safe to discharge. Score ≥1 = hospital management. Pre-endoscopy IV PPI (80mg bolus + 8mg/hr infusion): reduces rebleeding and surgical intervention regardless of source (start before endoscopy). EGD within 24h for hemodynamically significant UGIB; within 12h for ongoing high-risk bleed. Forrest classification: Ia (spurting) = 90% rebleed, IIa (visible vessel) = 43%, IIb (clot) = 22%, III (clean base) = <5%. H. pylori + NSAIDs = synergistic ulcer risk — eradicate H. pylori after hemostasis, confirm with urea breath test (not serology) 4+ weeks after completing antibiotics. Common misconceptions: proton pump inhibitor pre-endoscopy is NOT recommended for ALL upper GI bleeds (it is recommended as standard care); aspirin for cardiovascular protection: restart ASAP after hemostasis (within 3-5 days), do NOT discontinue long-term — cardiac risk of stopping > GI bleeding risk. Strong answer: applies Glasgow-Blatchford for risk stratification, manages high vs low Forrest classification ulcers, confirms H. pylori eradication correctly, restarts aspirin appropriately. Weak answer: delays PPI until after EGD or permanently stops cardiovascular aspirin after GI bleed.',
 
-  // ══════════════════════════════════════════════════════════════════════════
+  // ==========================================================================
   // Remaining clinical content for neither-category topics
-  // ══════════════════════════════════════════════════════════════════════════
+  // ==========================================================================
   'acls-rhythms': 'Core framework: VF/Pulseless VT: unsynchronized defibrillation 200J biphasic → CPR 2 min → epinephrine 1mg q3-5 min → amiodarone 300mg IV → defibrillation → repeat. PEA/Asystole: CPR + epinephrine q3-5 min, treat reversible causes (5Hs/5Ts). Stable VT with pulse: synchronized cardioversion OR amiodarone. SVT: vagal maneuvers → adenosine 6mg → 12mg → cardioversion. Bradycardia with symptoms: atropine 0.5mg → transcutaneous pacing → dopamine or epinephrine infusion. 5Hs: Hypovolemia, Hypoxia, H+ (acidosis), Hypo/Hyperkalemia, Hypothermia. 5Ts: Tamponade, Tension PTX, Thrombosis (PE), Thrombosis (MI), Toxins. Common misconceptions: synchronized cardioversion for VT with pulse; unsynchronized defibrillation for VF; amiodarone 150mg for stable VT vs 300mg for VF arrest; atropine is NOT effective for Mobitz II or complete heart block — go to pacing. Strong answer: distinguishes shockable from non-shockable rhythms, applies correct energy for cardioversion vs defibrillation, treats 5Hs/5Ts, knows adenosine contraindications (pre-excited AF, severe asthma). Weak answer: uses synchronized cardioversion for VF or atropine for complete heart block.',
 
   'acs-workup': 'Core framework: ACS spectrum: STEMI (ST elevation, complete occlusion → PCI within 90 min) → NSTEMI (troponin positive, no ST elevation, partial occlusion → TIMI/GRACE risk stratification, PCI within 24-72h) → unstable angina (no troponin, no ST elevation). Serial troponins: if normal at 0 and 3h with low-risk history → can discharge with stress testing. High-sensitivity troponin: 0/1h rule-out protocol. DAPT: aspirin + P2Y12 (ticagrelor or prasugrel preferred over clopidogrel — PLATO, TRITON-TIMI). Common misconceptions: normal initial troponin does NOT rule out ACS — serial measurement is required; high-sensitivity troponin allows faster rule-out but still requires clinical context; prasugrel is contraindicated in prior stroke/TIA + age >75 + weight <60kg. Strong answer: applies HEART score, distinguishes Type 1 from Type 2 MI, selects DAPT appropriately, discusses troponin assay differences. Weak answer: discharges after single normal troponin or uses clopidogrel for all ACS.',
@@ -1886,9 +1886,9 @@ function resetToWelcome() {
   document.getElementById('topicSearch').value = '';
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    MESSAGING
-═══════════════════════════════════════════════════════ */
+======================================================= */
 function appendMessage(role, content) {
   const container = document.getElementById('messages');
   const isUser = role === 'user';
@@ -2053,9 +2053,9 @@ function showCaseOptions() {
   }
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    ANALYTICS / TRACKING
-═══════════════════════════════════════════════════════ */
+======================================================= */
 async function logEvent(type, data) {
   // Always log to Supabase analytics_events if available
   const sb = getSB();
@@ -2085,9 +2085,9 @@ function fallbackLog(type, data) {
   } catch(e) {}
 }
 
-/* ═══════════════════════════════════════════════════════
+/* =======================================================
    UI HELPERS
-═══════════════════════════════════════════════════════ */
+======================================================= */
 function autoResize(el) {
   el.style.height = 'auto';
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
