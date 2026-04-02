@@ -1709,7 +1709,33 @@ function extractKeywords(text) {
 }
 function loadEDPatients() {
   try {
-    const data = JSON.parse(localStorage.getItem('rdx-ed-patients')||'{}');
+    // Read from both keys: legacy 'rdx-ed-patients' (object) and
+    // current 'rdx-admitted-patients' (array written by ed-board-v2)
+    const legacy = JSON.parse(localStorage.getItem('rdx-ed-patients')||'{}');
+    const current = JSON.parse(localStorage.getItem('rdx-admitted-patients')||'[]');
+
+    // Normalise current (array) into legacy format so the rest of the
+    // function works unchanged.  ED board v2 stores admittedAt ISO string.
+    current.forEach(p => {
+      if (!legacy[p.id]) {
+        legacy[p.id] = {
+          name: p.name,
+          age: p.age,
+          sex: p.sex,
+          cc: p.boardCC || p.dx,
+          dx: p.dx,
+          vitals: p.physicalExam ? p.physicalExam.vitals : {},
+          ordersPlaced: p.edCourse ? p.edCourse.txOrdered : [],
+          dispoCorrect: true,
+          timestamp: new Date(p.admittedAt || Date.now()).getTime(),
+          source: 'ed-board-v2',
+          clinicalHistory: p.clinicalHistory || {},
+          edCourse: p.edCourse || {}
+        };
+      }
+    });
+
+    const data = legacy;
     // If we have ED patients from the current session, offer to add them
     const edPts = Object.values(data).filter(p => Date.now() - p.timestamp < 3600000);
     if(edPts.length > 0) {
@@ -1725,7 +1751,21 @@ function loadEDPatients() {
 
 function addEDPatients() {
   try {
-    const data = JSON.parse(localStorage.getItem('rdx-ed-patients')||'{}');
+    const legacy = JSON.parse(localStorage.getItem('rdx-ed-patients')||'{}');
+    const current = JSON.parse(localStorage.getItem('rdx-admitted-patients')||'[]');
+    current.forEach(p => {
+      if (!legacy[p.id]) {
+        legacy[p.id] = {
+          name: p.name, age: p.age, sex: p.sex,
+          cc: p.boardCC || p.dx, dx: p.dx,
+          vitals: p.physicalExam ? p.physicalExam.vitals : {},
+          ordersPlaced: p.edCourse ? p.edCourse.txOrdered : [],
+          dispoCorrect: true,
+          timestamp: new Date(p.admittedAt || Date.now()).getTime()
+        };
+      }
+    });
+    const data = legacy;
     const edPts = Object.values(data).filter(p => Date.now() - p.timestamp < 3600000);
     const floors = ['4A','5B'];
 
