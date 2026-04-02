@@ -502,14 +502,17 @@ let currentUser = null;
 /* ═══════════════════════════════════════════════════════
    INIT
 ═══════════════════════════════════════════════════════ */
-window.addEventListener('load', async () => {
+async function _rdxInit() {
   renderPicker(TOPICS);
   if (!window._rdxSessionActive) renderWelcomeChips();
 
   // Check for topic in URL param FIRST — before any async auth
   const _usp = new URLSearchParams(window.location.search);
   const param = _usp.get('topic') || _usp.get('q');
-  if (param) startSession(param, false);
+  if (param) {
+    // Small defer so DOM is fully painted before session starts
+    setTimeout(() => startSession(param, false), 50);
+  }
 
   // Get user for personalization + tracking (non-blocking)
   try {
@@ -518,12 +521,18 @@ window.addEventListener('load', async () => {
       const { data } = await sb.auth.getSession();
       currentUser = data?.session?.user || null;
     }
-    // Load fingerprint gaps if signed in
     if (currentUser) await loadFingerprintChips();
   } catch(e) {
     console.warn('CoachDx auth init:', e.message);
   }
-});
+}
+
+// Fire init whether load already happened or not
+if (document.readyState === 'complete') {
+  _rdxInit();
+} else {
+  window.addEventListener('load', _rdxInit);
+}
 
 /* ═══════════════════════════════════════════════════════
    TOPIC PICKER RENDER

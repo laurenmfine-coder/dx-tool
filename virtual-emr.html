@@ -5478,15 +5478,17 @@ submitDoc = function(){
 (function(){
   try {
     var _S = (typeof S !== 'undefined') ? S : (window.S || {});
-    console.log('[RDX routing] CASE_ID=', window.CASE_ID, 'setting=', _S.clinicalSetting);
-    if (window.EMRShell && (window.CASE_ID || _S.clinicalSetting)) { EMRShell.inject(); }
-    if (!window.CASE_ID && !_S.clinicalSetting) {
+    // Read CASE_ID directly from URL as fallback — don't rely on cross-script-block var
+    var _caseId = window.CASE_ID || (new URLSearchParams(window.location.search)).get('case') || (new URLSearchParams(window.location.search)).get('cx') || '';
+    console.log('[RDX routing] CASE_ID=', _caseId, 'setting=', _S.clinicalSetting);
+    if (window.EMRShell && (_caseId || _S.clinicalSetting)) { EMRShell.inject(); }
+    if (!_caseId && !_S.clinicalSetting) {
       // No case selected — send to browse.html Practice tab
       window.location.replace('browse.html?mode=practice');
       return;
     }
-    else if (!window.CASE_ID && _S.clinicalSetting) { showCasePicker(); }
-    else { loadCaseData(function() { bootstrapApp().catch(function(err) {
+    else if (!_caseId && _S.clinicalSetting) { showCasePicker(); }
+    else { if (!window.CASE_ID && _caseId) window.CASE_ID = _caseId; loadCaseData(function() { bootstrapApp().catch(function(err) {
       console.error('bootstrapApp error on case load:', err);
       var app = document.getElementById('app');
       if (app && !app.innerHTML.trim()) {
