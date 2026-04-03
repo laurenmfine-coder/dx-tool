@@ -176,6 +176,24 @@ a{color:inherit;text-decoration:none}
 .export-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
   background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 20px;
   margin-bottom:32px}
+.ilp-banner{background:linear-gradient(135deg,#0f2235 0%,#1a3a5c 100%);
+  border:1px solid rgba(16,185,129,0.35);border-radius:14px;padding:20px 24px;
+  margin-bottom:24px;display:none}
+.ilp-banner-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:#10B981;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.ilp-banner-title::before{content:'';width:7px;height:7px;border-radius:50%;
+  background:#10B981;box-shadow:0 0 6px rgba(16,185,129,0.6);flex-shrink:0}
+.ilp-goals{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.ilp-goal{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  border-radius:8px;padding:12px 14px}
+.ilp-goal-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.ilp-goal-epa{font-size:10px;font-weight:700;padding:2px 7px;border-radius:3px;
+  background:rgba(40,116,166,0.3);color:#85C1E9;border:1px solid rgba(40,116,166,0.3)}
+.ilp-goal-title{font-size:13px;font-weight:600;color:#fff}
+.ilp-activities{margin-top:6px;display:flex;flex-direction:column;gap:3px}
+.ilp-activity{font-size:12px;color:#94A3B8;display:flex;align-items:flex-start;gap:6px}
+.ilp-activity::before{content:'→';color:#2874A6;flex-shrink:0}
+@keyframes ilp-gen{0%,100%{opacity:1}50%{opacity:0.4}}
 .export-label{font-size:13px;color:var(--text-dim)}
 .export-label strong{color:var(--text);font-weight:600}
 
@@ -225,6 +243,19 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 
+  <!-- ILP Banner — appears after generation -->
+  <div class="ilp-banner" id="ilpBanner">
+    <div class="ilp-banner-title">Your Personalized Learning Plan — 4-Week Sprint</div>
+    <div style="font-size:13px;color:#93c5fd;margin-bottom:12px" id="ilpSummary"></div>
+    <div class="ilp-goals" id="ilpGoals"></div>
+    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+      <a id="ilpFullLink" href="/ilp.html" class="btn btn-primary" style="font-size:13px;padding:9px 18px">
+        Open Full ILP →</a>
+      <button class="btn btn-secondary" onclick="document.getElementById('ilpBanner').style.display='none'"
+        style="font-size:12px;padding:8px 14px">Dismiss</button>
+    </div>
+  </div>
+
   <!-- Tab Navigation -->
   <div class="tabs">
     <button class="tab active" onclick="showTab('reasoning')">Reasoning Fingerprint</button>
@@ -235,10 +266,11 @@ a{color:inherit;text-decoration:none}
 
   <!-- Export Bar -->
   <div class="export-bar">
-    <div class="export-label"><strong>Ready for your advisor meeting?</strong> Export your competency evidence as a PDF or share with your program director.</div>
-    <div style="display:flex;gap:8px">
+    <div class="export-label"><strong>Ready to act on your data?</strong> Generate a personalized 4-week learning plan based on your EPA gaps and RPFS weakness.</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary" id="btnGenILP" onclick="generateILP()">🎯 Generate Learning Plan</button>
       <button class="btn btn-secondary" onclick="exportPDF()">📄 Export PDF</button>
-      <button class="btn btn-primary" onclick="shareProfile()">Share Profile</button>
+      <button class="btn btn-secondary" onclick="shareProfile()">Share Profile</button>
     </div>
   </div>
 
@@ -599,6 +631,135 @@ async function init() {
     });
   }
 }
+
+window.generateILP = async function() {
+  var btn = document.getElementById('btnGenILP');
+  btn.textContent = '⏳ Generating...';
+  btn.disabled = true;
+
+  // Gather all available data
+  var rpfs = window.RdxSuperAgent ? RdxSuperAgent.getRPFS() : null;
+  var user = window.RdxSuperAgent ? RdxSuperAgent.getCurrentUser() : null;
+
+  // Get EPA evidence from the page (already computed)
+  var epaWeaknesses = [];
+  var epaCells = document.querySelectorAll('.epa-card');
+  epaCells.forEach(function(card) {
+    var badge = card.querySelector('.epa-level-badge');
+    var title = card.querySelector('.epa-title');
+    var num = card.querySelector('.epa-number');
+    if (badge && title && num) {
+      var lvl = parseInt((badge.textContent || '').replace(/[^0-9]/g,''));
+      if (lvl <= 2) {
+        epaWeaknesses.push((num.textContent || '').trim() + ': ' + (title.textContent || '').trim());
+      }
+    }
+  });
+
+  // Build profile summary for Claude
+  var profileLines = ['STUDENT PERFORMANCE PROFILE:'];
+  if (rpfs && rpfs.weakest) {
+    profileLines.push('Weakest RPFS dimension: ' + rpfs.weakest + ' (' + rpfs.weakestScore + '/100)');
+    var topWeak = Object.entries(rpfs.scores || {})
+      .sort(function(a,b){return a[1]-b[1];}).slice(0,3)
+      .map(function(e){return e[0]+' ('+e[1]+')';}).join(', ');
+    profileLines.push('Bottom 3 dimensions: ' + topWeak);
+  }
+  if (epaWeaknesses.length) {
+    profileLines.push('EPAs at Level 1-2 (need development): ' + epaWeaknesses.slice(0,5).join('; '));
+  }
+  if (!rpfs && !epaWeaknesses.length) {
+    profileLines.push('No performance data yet — generating foundational plan');
+  }
+
+  var systemPrompt = [
+    'You are a medical education advisor generating a personalized 4-week learning plan for a medical student using the ReasonDx platform.',
+    'Based on their performance data, create exactly 3 specific learning goals, each targeting a different weakness.',
+    'Each goal must include: (1) which AAMC EPA it addresses, (2) a clear 1-sentence goal statement,',
+    '(3) exactly 3 specific ReasonDx platform activities with URLs.',
+    '',
+    'Available platform activities and their URLs:',
+    '- Simulation cases: /browse.html?mode=simulate (use ?case=CASEID for specific case)',
+    '- Virtual EMR practice: /browse.html?mode=practice',
+    '- CoachDx topic coaching: /CoachDx/mentor-chat.html?topic=TOPIC_NAME',
+    '- MechanismDx pathophysiology: /mechanism/index.html',
+    '- After-Action Review: built into simulation debrief',
+    '- Cognitive Portrait: /cognitive-portrait.html',
+    '',
+    'Respond ONLY with valid JSON (no markdown, no preamble):',
+    '{',
+    '  "summary": "1-2 sentence explanation of the plan focus",',
+    '  "goals": [',
+    '    {',
+    '      "epa": "EPA1",',
+    '      "epaTitle": "Gather a history and physical examination",',
+    '      "goal": "specific goal statement",',
+    '      "activities": [',
+    '        {"text": "activity description", "url": "/browse.html?mode=simulate", "days": "Week 1"},',
+    '        {"text": "activity description", "url": "/CoachDx/mentor-chat.html?topic=History+Taking", "days": "Week 2"},',
+    '        {"text": "activity description", "url": "/mechanism/index.html", "days": "Week 3-4"}',
+    '      ]',
+    '    }',
+    '  ]',
+    '}'
+  ].join(' ');
+
+  try {
+    var resp = await fetch('https://coachdx-attending.laurenmfine.workers.dev', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        type: 'passthrough',
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 1200,
+        system: systemPrompt,
+        messages: [{role: 'user', content: profileLines.join('\n')}]
+      })
+    });
+    var data = await resp.json();
+    var text = (data.content && data.content[0] && data.content[0].text) || '';
+    text = text.replace(/```json\s*|```\s*/g, '').trim();
+    var plan = JSON.parse(text);
+
+    // Render the banner
+    document.getElementById('ilpSummary').textContent = plan.summary || '';
+    var goalsHTML = (plan.goals || []).map(function(g) {
+      var acts = (g.activities || []).map(function(a) {
+        return '<div class="ilp-activity"><span>' + a.days + ': <a href="' + a.url +
+          '" style="color:#85C1E9;font-weight:600">' + a.text + '</a></span></div>';
+      }).join('');
+      return '<div class="ilp-goal">' +
+        '<div class="ilp-goal-header">' +
+          '<span class="ilp-goal-epa">' + g.epa + '</span>' +
+          '<span class="ilp-goal-title">' + g.goal + '</span>' +
+        '</div>' +
+        '<div class="ilp-activities">' + acts + '</div>' +
+        '</div>';
+    }).join('');
+    document.getElementById('ilpGoals').innerHTML = goalsHTML;
+
+    // Store plan for ILP page to read
+    localStorage.setItem('rdx-generated-ilp', JSON.stringify({
+      plan: plan,
+      rpfsWeakest: rpfs ? rpfs.weakest : null,
+      epaWeaknesses: epaWeaknesses,
+      generatedAt: new Date().toISOString()
+    }));
+
+    // Update ILP link with user context
+    document.getElementById('ilpFullLink').href = '/ilp.html?source=portrait';
+
+    document.getElementById('ilpBanner').style.display = 'block';
+    document.getElementById('ilpBanner').scrollIntoView({behavior: 'smooth', block: 'nearest'});
+
+  } catch(e) {
+    console.error('ILP generation failed:', e);
+    alert('Could not generate plan. Please try again.');
+  }
+
+  btn.textContent = '🎯 Generate Learning Plan';
+  btn.disabled = false;
+};
 
 window.exportPDF = function() {
   window.print();
