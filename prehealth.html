@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Pre-Health Track</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap');
+
+:root {
+  --amber:    #E67E22;
+  --amber-l:  #FEF5E7;
+  --amber-d:  #784212;
+  --blue:     #2874A6;
+  --blue-l:   #EBF5FB;
+  --text:     #1a2332;
+  --muted:    #64748b;
+  --border:   #e2e8f0;
+  --bg:       #FFFDF8;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); }
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(135deg, #784212 0%, #E67E22 60%, #F39C12 100%);
+  color: white;
+  padding: 56px 24px 64px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.hero p {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  max-width: 560px;
+  margin: 0 auto 28px;
+  line-height: 1.6;
+}
+.hero-cta {
+  display: inline-flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-primary {
+  background: white;
+  color: var(--amber-d);
+  border: none;
+  border-radius: 12px;
+  padding: 13px 26px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.1s, box-shadow 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+.btn-secondary {
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-radius: 12px;
+  padding: 11px 22px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.25); }
+
+/* ── Nav ── */
+.page-nav {
+  background: white;
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-logo-mark {
+  background: var(--blue);
+  color: white;
+  font-family: 'DM Serif Display', serif;
+  font-size: 13px;
+  padding: 3px 7px;
+  border-radius: 5px;
+}
+.nav-logo-text { font-size: 14px; font-weight: 700; color: var(--text); }
+.nav-sep { color: var(--border); margin: 0 4px; }
+.nav-current { font-size: 14px; color: var(--muted); }
+
+/* ── Content ── */
+.content { max-width: 900px; margin: 0 auto; padding: 48px 24px; }
+.section-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.6rem;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+.section-sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 28px; line-height: 1.5; }
+
+/* ── Pathway grid ── */
+.pathway-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 48px; }
+.pathway-card {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.pathway-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--card-color, var(--amber));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s;
+}
+.pathway-card:hover {
+  border-color: var(--card-color, var(--amber));
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transform: translateY(-2px);
+}
+.pathway-card:hover::before { transform: scaleX(1); }
+.pc-icon { font-size: 2rem; line-height: 1; }
+.pc-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+.pc-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.5; flex: 1; }
+.pc-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.pc-tag {
+  padding: 3px 8px;
+  border-radius: 20px;
+  background: var(--amber-l);
+  color: var(--amber-d);
+}
+.pc-cases { color: var(--muted); }
+
+/* ── MCAT topics ── */
+.topic-section { margin-bottom: 48px; }
+.topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; }
+.topic-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.15s, background 0.15s;
+}
+.topic-chip:hover { border-color: var(--amber); background: var(--amber-l); }
+.topic-chip-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+/* ── Stats bar ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  background: var(--amber-l);
+  border: 1px solid #FAD7A0;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+.stat-item { text-align: center; }
+.stat-value { font-size: 1.8rem; font-weight: 700; color: var(--amber); line-height: 1; }
+.stat-label { font-size: 0.75rem; color: var(--amber-d); margin-top: 4px; font-weight: 500; }
+
+/* ── Callout ── */
+.callout {
+  background: var(--blue-l);
+  border: 1px solid #AED6F1;
+  border-radius: 14px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.callout-icon { font-size: 1.8rem; flex-shrink: 0; }
+.callout-title { font-size: 1rem; font-weight: 700; color: var(--blue); margin-bottom: 6px; }
+.callout-body { font-size: 0.87rem; color: #1A5276; line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .hero { padding: 40px 16px 48px; }
+  .content { padding: 32px 16px; }
+  .pathway-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="page-nav">
+  <span class="nav-logo-mark">Rx</span>
+  <span class="nav-logo-text">ReasonDx</span>
+  <span class="nav-sep">/</span>
+  <span class="nav-current">Pre-Health Track</span>
+</nav>
+
+<div class="hero">
+  <div class="hero-badge">🔬 Biomedical Sciences & Pre-Health</div>
+  <h1>Build the Reasoning Skills<br>Health Professions Schools Want</h1>
+  <p>ReasonDx Pre-Health bridges the gap between science coursework and clinical thinking — the exact skill the MCAT, interviews, and professional school demand.</p>
+  <div class="hero-cta">
+    <a href="/baseline-assessment.html" class="btn-primary">🧠 Take Baseline Assessment</a>
+    <a href="/browse.html?profession=mbs" class="btn-secondary">Browse Cases →</a>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Stats -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-value" id="stat-cases">80+</div>
+      <div class="stat-label">Curated Cases for Pre-Health</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">6</div>
+      <div class="stat-label">Pathophysiology Modules</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">100%</div>
+      <div class="stat-label">MCAT Content Aligned</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-value">Free</div>
+      <div class="stat-label">No Cost to Get Started</div>
+    </div>
+  </div>
+
+  <!-- Callout -->
+  <div class="callout">
+    <div class="callout-icon">💡</div>
+    <div>
+      <div class="callout-title">Why reasoning training beats content review</div>
+      <div class="callout-body">
+        The MCAT doesn't test whether you memorized a fact — it tests whether you can <em>reason with</em> that fact in a novel context. Most pre-health students over-invest in content and under-invest in reasoning. ReasonDx trains the skill the AAMC says matters most: applying basic science to clinical scenarios you've never seen before.
+      </div>
+    </div>
+  </div>
+
+  <!-- Learning Pathways -->
+  <div class="section-title">Start Here</div>
+  <div class="section-sub">Four curated pathways designed for where you are in your pre-health journey.</div>
+  <div class="pathway-grid">
+
+    <a href="/browse.html?profession=mbs&mode=learn" class="pathway-card" style="--card-color:#E67E22">
+      <div class="pc-icon">⚙️</div>
+      <div class="pc-title">Mechanism First</div>
+      <div class="pc-desc">Start with the "why" — pathophysiology modules that build the mechanistic foundation behind every clinical case.</div>
+      <div class="pc-meta">
+        <span class="pc-tag">Beginner</span>
+        <span class="pc-cases">6 modules</span>
+      </div>
+    </a>
+
+    <a href="/browse.html?profession=mbs&mode=simulate" class="pathway-card" style="--card-color:#2874A6">
+      <div class="pc-icon">🩺</div>
+      <div class="pc-title">Clinical Reasoning Practice</div>
+      <div class="pc-desc">Work through real clinical scenarios step by step — generate hypotheses, request data, refine your differential.</div>
+      <div class="pc-meta">
+        <span class="pc-tag" style="background:var(--blue-l);color:#1A5276">Intermediate</span>
+        <span class="pc-cases">80+ cases</span>
+      </div>
+    </a>
+
+    <a href="/mechanism/cardiovascular-module.html" class="pathway-card" style="--card-color:#C0392B">
+      <div class="pc-icon">❤️</div>
+      <div class="pc-title">Cardio → MCAT</div>
+      <div class="pc-desc">Cardiac physiology, electrophysiology, and heart failure — high-yield for both MCAT Bio/Biochem and clinical reasoning.</div>
+      <div class="pc-meta">
+        <span class="pc-tag" style="background:#FDEDEC;color:#C0392B">MCAT High-Yield</span>
+        <span class="pc-cases">Start here</span>
+      </div>
+    </a>
+
+    <a href="/CoachDx/mentor-chat.html?topic=Building+a+Differential" class="pathway-card" style="--card-color:#1A7A4A">
+      <div class="pc-icon">🤖</div>
+      <div class="pc-title">CoachDx — AI Tutor</div>
+      <div class="pc-desc">Ask the AI attending anything — get Socratic coaching on reasoning, mechanisms, and how to think about clinical problems.</div>
+      <div class="pc-meta">
+        <span class="pc-tag" style="background:#E9F7EF;color:#1A5276">Any Level</span>
+        <span class="pc-cases">Unlimited</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- MCAT-Mapped Topics -->
+  <div class="topic-section">
+    <div class="section-title">MCAT Content Alignment</div>
+    <div class="section-sub">These ReasonDx topics map directly to high-yield MCAT Bio/Biochem and Psychology/Sociology content.</div>
+    <div class="topic-grid" id="mcat-topics">
+      <!-- Populated by JS below -->
+    </div>
+  </div>
+
+  <!-- How It Works -->
+  <div class="section-title">How Pre-Health Students Use ReasonDx</div>
+  <div class="section-sub" style="margin-bottom:20px;">A proven three-phase approach that develops reasoning alongside content knowledge.</div>
+
+  <div style="display:flex;flex-direction:column;gap:14px;margin-bottom:48px;">
+    <div style="display:flex;gap:16px;align-items:flex-start;background:white;border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
+      <div style="font-size:1.5rem;flex-shrink:0">1️⃣</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;font-size:0.95rem">Learn the mechanism</div>
+        <div style="color:var(--muted);font-size:0.85rem;line-height:1.5">Start with a MechanismDx module to understand the pathophysiology. Don't just memorize — understand <em>why</em> this happens at the cellular and systems level.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:flex-start;background:white;border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
+      <div style="font-size:1.5rem;flex-shrink:0">2️⃣</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;font-size:0.95rem">Apply it to a patient</div>
+        <div style="color:var(--muted);font-size:0.85rem;line-height:1.5">Work through a clinical simulation using the same mechanism. This is how the MCAT tests you — a passage about a patient, then questions that require applying basic science.</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;align-items:flex-start;background:white;border:1px solid var(--border);border-radius:12px;padding:18px 20px;">
+      <div style="font-size:1.5rem;flex-shrink:0">3️⃣</div>
+      <div>
+        <div style="font-weight:700;margin-bottom:4px;font-size:0.95rem">Debrief your reasoning</div>
+        <div style="color:var(--muted);font-size:0.85rem;line-height:1.5">After each case, review where your reasoning diverged from expert patterns. This metacognitive step is what turns practice into improvement.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="text-align:center;background:linear-gradient(135deg,#784212,#E67E22);border-radius:20px;padding:40px 24px;color:white;">
+    <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;margin-bottom:10px;">Ready to think like a clinician?</div>
+    <div style="font-size:0.92rem;opacity:0.9;margin-bottom:24px;line-height:1.5;">Take the 8-minute baseline assessment, then start with cases matched to your level.</div>
+    <a href="/baseline-assessment.html" class="btn-primary" style="font-size:1rem;padding:14px 30px;">
+      🧠 Start Baseline Assessment — Free
+    </a>
+  </div>
+
+</div>
+
+<script>
+// ── MCAT Topic Chips ──────────────────────────────────────────────────────────
+const MCAT_TOPICS = [
+  { icon: '❤️', label: 'Cardiac Physiology', href: '/mechanism/cardiovascular-module.html' },
+  { icon: '🫁', label: 'Respiratory Mechanics', href: '/mechanism/pulmonary-module.html' },
+  { icon: '🧠', label: 'Neuroscience', href: '/mechanism/neurology-module.html' },
+  { icon: '🦠', label: 'Immunology', href: '/mechanism/immunology-module.html' },
+  { icon: '🧬', label: 'Genetic Disorders', href: '/genetics/' },
+  { icon: '💊', label: 'Drug Mechanisms', href: '/CoachDx/mentor-chat.html?topic=Pharmacogenomics' },
+  { icon: '⚡', label: 'Acid-Base Balance', href: '/browse.html?mode=coach&q=acid-base' },
+  { icon: '🩸', label: 'Hematology', href: '/mechanism/hematology-module.html' },
+  { icon: '🔥', label: 'Inflammation', href: '/mechanism/immunology-module.html' },
+  { icon: '🏃', label: 'Metabolism', href: '/CoachDx/mentor-chat.html?topic=Inborn+Errors+of+Metabolism' },
+  { icon: '🧪', label: 'Lab Interpretation', href: '/CoachDx/mentor-chat.html?topic=Interpreting+Lab+%26+Imaging' },
+  { icon: '🎯', label: 'Diagnostic Reasoning', href: '/CoachDx/mentor-chat.html?topic=Building+a+Differential' },
+];
+
+const grid = document.getElementById('mcat-topics');
+MCAT_TOPICS.forEach(t => {
+  const chip = document.createElement('a');
+  chip.className = 'topic-chip';
+  chip.href = t.href;
+  chip.innerHTML = `<span class="topic-chip-icon">${t.icon}</span><span>${t.label}</span>`;
+  grid.appendChild(chip);
+});
+
+// ── Load profession and adjust if MBS ─────────────────────────────────────────
+(function() {
+  const user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+  const prof = user.professionProfile;
+  if (prof && prof.professionId === 'mbs') {
+    // Already MBS — no banner needed
+    return;
+  }
+  // Visitor from another profession — show a note
+  if (prof && prof.professionId && prof.professionId !== 'mbs') {
+    const note = document.createElement('div');
+    note.style.cssText = 'position:fixed;bottom:16px;right:16px;background:white;border:1px solid #e2e8f0;border-radius:12px;padding:14px 18px;font-size:0.82rem;color:#64748b;box-shadow:0 4px 16px rgba(0,0,0,0.1);max-width:280px;z-index:999;';
+    note.innerHTML = `<strong style="color:#1a2332">Viewing Pre-Health Track</strong><br>This page is optimized for MBS/pre-health students. <a href="/browse.html" style="color:#2874A6">Return to your track →</a>`;
+    document.body.appendChild(note);
+    setTimeout(() => note.remove(), 6000);
+  }
+})();
+</script>
+
+</body>
+</html>

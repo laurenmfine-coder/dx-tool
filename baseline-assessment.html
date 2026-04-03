@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Baseline Reasoning Assessment</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Serif+Display&display=swap');
+
+:root {
+  --blue:       #2874A6;
+  --blue-l:     #EBF5FB;
+  --blue-d:     #1A5276;
+  --green:      #1A7A4A;
+  --green-l:    #E9F7EF;
+  --amber:      #D4AC0D;
+  --amber-l:    #FEF9E7;
+  --red:        #C0392B;
+  --red-l:      #FDEDEC;
+  --text:       #1a2332;
+  --muted:      #64748b;
+  --border:     #e2e8f0;
+  --bg:         #f8fafc;
+  --radius:     14px;
+  --card-w:     680px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px 64px;
+  color: var(--text);
+}
+
+/* ── Header ── */
+.rdx-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.rdx-logo-mark {
+  background: var(--blue);
+  color: white;
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  padding: 4px 9px;
+  border-radius: 7px;
+}
+.rdx-logo-text { font-size: 17px; font-weight: 700; color: var(--text); }
+
+/* ── Progress bar ── */
+.progress-track {
+  width: 100%;
+  max-width: var(--card-w);
+  margin-bottom: 28px;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.progress-bar {
+  height: 5px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--blue);
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+/* ── Card ── */
+.card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  width: 100%;
+  max-width: var(--card-w);
+  padding: 36px 40px;
+  margin-bottom: 16px;
+}
+
+.section-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--blue-l);
+  color: var(--blue-d);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+
+.card-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.45rem;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.card-subtitle {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ── Vignette ── */
+.vignette-box {
+  background: #f1f5f9;
+  border-left: 4px solid var(--blue);
+  border-radius: 0 10px 10px 0;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.vignette-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--blue);
+  margin-bottom: 6px;
+}
+
+/* ── Questions ── */
+.question-block { margin-bottom: 28px; }
+.question-block:last-child { margin-bottom: 0; }
+
+.question-text {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* SCT scale */
+.sct-scale {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.sct-option {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.sct-btn {
+  width: 100%;
+  padding: 12px 6px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  background: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+}
+.sct-btn:hover { border-color: var(--blue); transform: translateY(-1px); }
+.sct-btn.selected {
+  border-color: var(--blue);
+  background: var(--blue);
+  color: white;
+  transform: translateY(-1px);
+}
+.sct-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Radio options */
+.radio-options { display: flex; flex-direction: column; gap: 8px; }
+.radio-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.radio-option:hover { border-color: var(--blue); background: var(--blue-l); }
+.radio-option.selected {
+  border-color: var(--blue);
+  background: var(--blue-l);
+  font-weight: 600;
+}
+.radio-option input[type="radio"] { margin-top: 3px; accent-color: var(--blue); flex-shrink: 0; }
+
+/* Text input */
+.text-input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text);
+  resize: vertical;
+  min-height: 80px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.text-input:focus { border-color: var(--blue); }
+.char-count { font-size: 0.72rem; color: var(--muted); text-align: right; margin-top: 4px; }
+
+/* ── Navigation ── */
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--card-w);
+  margin-top: 4px;
+}
+.btn-back {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 11px 18px;
+  font-size: 0.88rem;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.btn-back:hover { border-color: var(--text); color: var(--text); }
+.btn-next {
+  background: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 28px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, opacity 0.15s;
+}
+.btn-next:hover:not(:disabled) { background: var(--blue-d); transform: translateY(-1px); }
+.btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ── Intro & Complete screens ── */
+.intro-icon { font-size: 3rem; margin-bottom: 16px; }
+.bullets {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0 28px;
+}
+.bullets li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text);
+}
+.bullet-dot {
+  width: 20px;
+  height: 20px;
+  background: var(--blue-l);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  color: var(--blue);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.complete-icon { font-size: 3.5rem; margin-bottom: 14px; }
+.score-display {
+  background: var(--blue-l);
+  border: 1px solid #AED6F1;
+  border-radius: 14px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  text-align: center;
+}
+.score-value { font-size: 2.5rem; font-weight: 700; color: var(--blue); line-height: 1; }
+.score-label { font-size: 0.82rem; color: var(--muted); margin-top: 4px; }
+
+.dimension-bars { margin: 20px 0; }
+.dim-row { margin-bottom: 14px; }
+.dim-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.dim-bar { height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.dim-fill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.8s ease;
+}
+
+/* ── Disclosure note ── */
+.disclosure {
+  max-width: var(--card-w);
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--amber-l);
+  border: 1px solid #F9E79F;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  color: #7D6608;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+@media (max-width: 520px) {
+  .card { padding: 24px 20px; }
+  .sct-scale { gap: 4px; }
+  .sct-btn { font-size: 0.9rem; padding: 10px 2px; }
+}
+</style>
+</head>
+<body>
+
+<div class="rdx-header">
+  <span class="rdx-logo-mark">Rx</span>
+  <span class="rdx-logo-text">ReasonDx</span>
+</div>
+
+<div class="progress-track">
+  <div class="progress-label">
+    <span id="progress-text">Getting started</span>
+    <span id="progress-pct">0%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+</div>
+
+<div id="screen-container"></div>
+
+<div class="nav-row" id="nav-row">
+  <button class="btn-back" id="btn-back" style="display:none" onclick="prevScreen()">← Back</button>
+  <button class="btn-next" id="btn-next" onclick="nextScreen()">Begin Assessment →</button>
+</div>
+
+<div class="disclosure" id="disclosure">
+  🔒 Your responses are used only to personalize your learning experience and, if you consented during registration, for de-identified educational research. They are never shared with your program or institution.
+</div>
+
+<script>
+// ─── ASSESSMENT STRUCTURE ────────────────────────────────────────────────────
+// Hybrid instrument: SCT (Script Concordance Test) + structured DDx + metacognition
+// Validated against expert panel responses (Delphi method planned for calibration)
+
+const PROFESSION_LABELS = {
+  medicine:'Medicine', pa:'Physician Assistant', pharmacy:'Pharmacy',
+  optometry:'Optometry', dentistry:'Dentistry', pt:'Physical Therapy',
+  ot:'Occupational Therapy', nursing:'Nursing', mbs:'Biomedical Sciences', other:'Other'
+};
+
+// ── VIGNETTES ─────────────────────────────────────────────────────────────────
+// Three cases selected for cross-profession accessibility while testing
+// differential reasoning depth. Scored by expert consensus (SCT method).
+
+const VIGNETTES = [
+  {
+    id: 'v1_chest_pain',
+    title: 'Vignette 1 of 3',
+    profRelevance: 'all',
+    stem: `A 58-year-old man presents with 30 minutes of substernal chest pressure radiating to his left arm, rated 8/10. He is diaphoretic and pale. Vitals: BP 138/88, HR 102, RR 18, SpO2 97% on room air. He has a history of hypertension and smokes 1 ppd. His ECG shows 2mm ST elevation in leads II, III, and aVF.`,
+    questions: [
+      {
+        id: 'v1q1',
+        type: 'sct',
+        dimension: 'hypothesis_generation',
+        text: 'If you are thinking the most likely diagnosis is <strong>inferior STEMI</strong>, and you learn the patient took sildenafil 4 hours ago — this information makes the diagnosis:',
+        scale: [
+          { value: -2, label: 'Much less likely' },
+          { value: -1, label: 'Less likely' },
+          { value:  0, label: 'No change' },
+          { value:  1, label: 'More likely' },
+          { value:  2, label: 'Much more likely' },
+        ],
+        expert: 0, // sildenafil doesn't change the diagnosis, affects management
+        rationale: 'Sildenafil use affects management (nitrates contraindicated) but does not change the diagnostic likelihood of inferior STEMI. Expert consensus: no change to diagnosis.'
+      },
+      {
+        id: 'v1q2',
+        type: 'sct',
+        dimension: 'data_interpretation',
+        text: 'If you are considering <strong>aortic dissection</strong> in the differential, and you learn BP is equal in both arms at 138/88 — this finding makes aortic dissection:',
+        scale: [
+          { value: -2, label: 'Much less likely' },
+          { value: -1, label: 'Less likely' },
+          { value:  0, label: 'No change' },
+          { value:  1, label: 'More likely' },
+          { value:  2, label: 'Much more likely' },
+        ],
+        expert: -1,
+        rationale: 'Equal bilateral BPs makes Type A dissection slightly less likely (unequal pressures are a supporting feature), but does not rule it out. Expert consensus: less likely (-1).'
+      },
+      {
+        id: 'v1q3',
+        type: 'radio',
+        dimension: 'management_reasoning',
+        text: 'What is the single most time-critical next action?',
+        options: [
+          { value: 'a', text: 'Administer aspirin 325mg and activate the cath lab', expert: true },
+          { value: 'b', text: 'Order a CT chest with contrast to rule out dissection' },
+          { value: 'c', text: 'Obtain serial troponins and repeat ECG in 30 minutes' },
+          { value: 'd', text: 'Start heparin infusion and transfer to ICU' },
+        ],
+        rationale: 'STEMI requires immediate reperfusion. With clear ST elevation in a classic distribution, aspirin + cath lab activation is the standard of care. CT chest would dangerously delay treatment and is not indicated with this ECG pattern.'
+      },
+    ]
+  },
+  {
+    id: 'v2_dyspnea',
+    title: 'Vignette 2 of 3',
+    profRelevance: 'all',
+    stem: `A 34-year-old woman presents with 2 weeks of progressive shortness of breath, now at rest. She also notes bilateral leg swelling and 8-lb weight gain. She has no prior cardiac history. She delivered her first child 6 weeks ago via uncomplicated vaginal delivery. Vitals: BP 96/60, HR 118, RR 22, SpO2 91% on room air. Exam shows JVD, bibasilar crackles, and 3+ pitting edema to the thighs.`,
+    questions: [
+      {
+        id: 'v2q1',
+        type: 'sct',
+        dimension: 'illness_script',
+        text: 'If you are thinking the most likely diagnosis is <strong>peripartum cardiomyopathy</strong>, and the echo shows an EF of 25% with a dilated LV — this finding makes the diagnosis:',
+        scale: [
+          { value: -2, label: 'Much less likely' },
+          { value: -1, label: 'Less likely' },
+          { value:  0, label: 'No change' },
+          { value:  1, label: 'More likely' },
+          { value:  2, label: 'Much more likely' },
+        ],
+        expert: 2,
+        rationale: 'Severely reduced EF with dilated LV at 6 weeks postpartum is essentially diagnostic of peripartum cardiomyopathy. Expert consensus: much more likely (+2).'
+      },
+      {
+        id: 'v2q2',
+        type: 'sct',
+        dimension: 'hypothesis_generation',
+        text: 'If you are also considering <strong>massive pulmonary embolism</strong>, and the ECG shows sinus tachycardia without right heart strain — this finding makes massive PE:',
+        scale: [
+          { value: -2, label: 'Much less likely' },
+          { value: -1, label: 'Less likely' },
+          { value:  0, label: 'No change' },
+          { value:  1, label: 'More likely' },
+          { value:  2, label: 'Much more likely' },
+        ],
+        expert: -1,
+        rationale: 'Absence of S1Q3T3 or RV strain makes massive PE less likely, though ECG findings are neither sensitive nor specific. Expert consensus: less likely (-1).'
+      },
+      {
+        id: 'v2q3',
+        type: 'open',
+        dimension: 'metacognition',
+        text: 'What is the most important piece of information you do NOT yet have that would most change your management? Explain briefly.',
+        placeholder: 'e.g., I would want to know... because it would change my approach by...',
+        maxLength: 300,
+        scoringDimension: 'metacognition',
+        rationale: 'Expert anchors: BNP/pro-BNP level, echocardiogram results, NT-proBNP, troponin, coagulation status. This question assesses whether the learner identifies high-yield missing data vs. low-yield testing.'
+      }
+    ]
+  },
+  {
+    id: 'v3_altered_ms',
+    title: 'Vignette 3 of 3',
+    profRelevance: 'all',
+    stem: `An 82-year-old woman with dementia is brought in by her family for 2 days of increasing confusion, agitation, and refusal to eat. Her baseline is mild dementia — she normally recognizes family and performs ADLs independently. Vitals: BP 148/86, HR 96, Temp 38.1°C, RR 16, SpO2 95%. Exam: disoriented, picking at sheets, no focal neuro deficits. UA shows pyuria and bacteriuria.`,
+    questions: [
+      {
+        id: 'v3q1',
+        type: 'sct',
+        dimension: 'anchoring_bias',
+        text: 'If you are thinking the altered mental status is caused by <strong>UTI-related delirium</strong>, and you learn she was started on metoprolol 12.5mg BID 3 days ago — this information makes UTI as the primary cause:',
+        scale: [
+          { value: -2, label: 'Much less likely' },
+          { value: -1, label: 'Less likely' },
+          { value:  0, label: 'No change' },
+          { value:  1, label: 'More likely' },
+          { value:  2, label: 'Much more likely' },
+        ],
+        expert: -1,
+        rationale: 'New metoprolol is a competing explanation — beta-blocker-induced bradycardia/hypoperfusion can cause delirium. Asymptomatic bacteriuria is also common in elderly women. Expert consensus: UTI becomes less likely as the sole cause (-1). This question specifically tests anchoring.'
+      },
+      {
+        id: 'v3q2',
+        type: 'radio',
+        dimension: 'diagnostic_threshold',
+        text: 'The UA shows 15 WBC/hpf and bacteria. What is the most appropriate next step?',
+        options: [
+          { value: 'a', text: 'Treat empirically for UTI with antibiotics — UA is sufficient' },
+          { value: 'b', text: 'Send urine culture before treating; review medication list and check metabolic panel', expert: true },
+          { value: 'c', text: 'Obtain a CT head to rule out intracranial pathology first' },
+          { value: 'd', text: 'Start broad-spectrum antibiotics while pursuing full workup' },
+        ],
+        rationale: 'Asymptomatic bacteriuria is extremely common in elderly women and does not require treatment. A culture + metabolic panel + medication review addresses multiple competing hypotheses simultaneously. Anchoring on the UA without further workup is the classic cognitive error this question targets.'
+      },
+      {
+        id: 'v3q3',
+        type: 'sct',
+        dimension: 'uncertainty_tolerance',
+        text: 'If you have ordered cultures and metabolic panel (pending), and you are considering whether to start antibiotics now vs. awaiting results — the patient\'s age and acuity makes empiric treatment:',
+        scale: [
+          { value: -2, label: 'Much less appropriate' },
+          { value: -1, label: 'Less appropriate' },
+          { value:  0, label: 'Neutral' },
+          { value:  1, label: 'More appropriate' },
+          { value:  2, label: 'Much more appropriate' },
+        ],
+        expert: 0,
+        rationale: 'In an 82-year-old who is not septic or deteriorating, awaiting cultures before empiric treatment is reasonable. The question tests tolerance of diagnostic uncertainty — there is genuine equipoise here. Expert consensus: neutral (0).'
+      }
+    ]
+  }
+];
+
+// ── BACKGROUND QUESTIONS ──────────────────────────────────────────────────────
+const BG_QUESTIONS = [
+  {
+    id: 'bg_prior_clinical',
+    type: 'radio',
+    dimension: 'background',
+    text: 'How much direct patient care experience have you had so far?',
+    options: [
+      { value: 'none', text: 'None yet — I\'m pre-clinical or pre-health' },
+      { value: 'limited', text: 'Limited — shadowing, volunteering, or simulation only' },
+      { value: 'moderate', text: 'Moderate — clinical rotations or 1-2 years of practice' },
+      { value: 'substantial', text: 'Substantial — 3+ years of clinical experience' },
+    ]
+  },
+  {
+    id: 'bg_ddx_confidence',
+    type: 'scale5',
+    dimension: 'background',
+    text: 'How confident are you in your ability to generate a ranked differential diagnosis for an undifferentiated patient?',
+    anchors: ['Not at all confident', 'Extremely confident']
+  },
+  {
+    id: 'bg_learning_style',
+    type: 'multi',
+    dimension: 'background',
+    text: 'When you encounter a clinical problem you don\'t know, what do you typically do first? (Select all that apply)',
+    options: [
+      { value: 'look_up', text: 'Look it up in a textbook or UpToDate' },
+      { value: 'think_mechanism', text: 'Think through the underlying pathophysiology' },
+      { value: 'ask_someone', text: 'Ask a colleague or attending' },
+      { value: 'recall_case', text: 'Try to recall a similar case I\'ve seen' },
+      { value: 'pattern', text: 'Match it to a pattern I recognize' },
+    ]
+  }
+];
+
+// ── SCORING ENGINE ────────────────────────────────────────────────────────────
+
+function scoreSCT(response, expertValue) {
+  // SCT scoring: full credit for expert, partial for adjacent
+  const diff = Math.abs(response - expertValue);
+  if (diff === 0) return 1.0;
+  if (diff === 1) return 0.5;
+  if (diff === 2) return 0.0;
+  return Math.max(0, 1 - diff * 0.3);
+}
+
+function scoreRadio(response, options) {
+  const opt = options.find(o => o.value === response);
+  return opt && opt.expert ? 1.0 : 0.0;
+}
+
+function computeScores(responses) {
+  const dims = {
+    hypothesis_generation: [],
+    data_interpretation: [],
+    management_reasoning: [],
+    illness_script: [],
+    anchoring_bias: [],
+    diagnostic_threshold: [],
+    uncertainty_tolerance: [],
+    metacognition: []
+  };
+
+  VIGNETTES.forEach(v => {
+    v.questions.forEach(q => {
+      const resp = responses[q.id];
+      if (resp === undefined || resp === null || resp === '') return;
+
+      let score = null;
+      if (q.type === 'sct') score = scoreSCT(parseInt(resp), q.expert);
+      else if (q.type === 'radio') score = scoreRadio(resp, q.options);
+      else if (q.type === 'open') score = null; // qualitative only
+
+      if (score !== null && dims[q.dimension]) {
+        dims[q.dimension].push(score);
+      }
+    });
+  });
+
+  // Compute per-dimension averages
+  const result = {};
+  Object.entries(dims).forEach(([k, arr]) => {
+    result[k] = arr.length > 0 ? arr.reduce((a, b) => a + b, 0) / arr.length : null;
+  });
+
+  // Overall composite (exclude metacognition — qualitative)
+  const quantDims = Object.entries(result)
+    .filter(([k, v]) => v !== null && k !== 'metacognition')
+    .map(([, v]) => v);
+  result._composite = quantDims.length > 0
+    ? quantDims.reduce((a, b) => a + b, 0) / quantDims.length
+    : null;
+
+  return result;
+}
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+
+const state = {
+  step: 0,        // 0=intro, 1..3=vignettes, 4=background, 5=complete
+  responses: {},  // { questionId: value }
+  startTime: null,
+  endTime: null,
+  profession: null,
+  track: null,
+};
+
+const TOTAL_STEPS = 5; // intro + 3 vignettes + background + complete
+
+// ── SCREENS ───────────────────────────────────────────────────────────────────
+
+function render() {
+  const container = document.getElementById('screen-container');
+  const nextBtn = document.getElementById('btn-next');
+  const backBtn = document.getElementById('btn-back');
+
+  // Progress
+  const pct = Math.round((state.step / (TOTAL_STEPS)) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '%';
+
+  backBtn.style.display = state.step > 0 && state.step < TOTAL_STEPS ? 'block' : 'none';
+
+  if (state.step === 0) {
+    renderIntro(container, nextBtn);
+  } else if (state.step >= 1 && state.step <= 3) {
+    renderVignette(container, nextBtn, state.step - 1);
+  } else if (state.step === 4) {
+    renderBackground(container, nextBtn);
+  } else if (state.step === TOTAL_STEPS) {
+    renderComplete(container, nextBtn);
+    document.getElementById('disclosure').style.display = 'none';
+    document.getElementById('nav-row').style.display = 'none';
+  }
+}
+
+function renderIntro(container, nextBtn) {
+  document.getElementById('progress-text').textContent = 'Introduction';
+  nextBtn.textContent = 'Begin Assessment →';
+  nextBtn.disabled = false;
+
+  const prof = state.profession ? (PROFESSION_LABELS[state.profession] || 'Health Professions') : 'Health Professions';
+
+  container.innerHTML = `
+    <div class="card">
+      <div class="intro-icon">🧠</div>
+      <div class="card-title">Baseline Reasoning Assessment</div>
+      <div class="card-subtitle">
+        This short assessment helps ReasonDx understand how you currently approach clinical problems — so we can give you the most useful learning experience from day one.
+      </div>
+      <ul class="bullets">
+        <li><span class="bullet-dot">1</span><span><strong>3 clinical vignettes</strong> — short scenarios followed by structured reasoning questions</span></li>
+        <li><span class="bullet-dot">2</span><span><strong>Background questions</strong> — your experience level and learning habits</span></li>
+        <li><span class="bullet-dot">3</span><span><strong>~8 minutes total</strong> — there are no wrong answers, only your honest reasoning</span></li>
+      </ul>
+      <div style="background:var(--green-l);border:1px solid #A9DFBF;border-radius:10px;padding:14px 16px;font-size:0.85rem;color:#1A5276;line-height:1.5;">
+        ✅ <strong>Your results are private.</strong> They are used to personalize your case recommendations and, with your consent, for de-identified educational research. Your program or institution will never see individual results.
+      </div>
+    </div>`;
+}
+
+function renderVignette(container, nextBtn, vIndex) {
+  const v = VIGNETTES[vIndex];
+  document.getElementById('progress-text').textContent = v.title;
+  nextBtn.textContent = vIndex < 2 ? 'Next Vignette →' : 'Final Questions →';
+
+  const questionsHTML = v.questions.map(q => renderQuestion(q)).join('');
+
+  container.innerHTML = `
+    <div class="card">
+      <div class="section-badge">🩺 Clinical Vignette ${vIndex + 1}</div>
+      <div class="vignette-box">
+        <div class="vignette-label">Patient Presentation</div>
+        ${v.stem}
+      </div>
+      <div id="questions-block">${questionsHTML}</div>
+    </div>`;
+
+  // Bind events
+  bindQuestionEvents(v.questions);
+  validateVignette(v, nextBtn);
+}
+
+function renderQuestion(q) {
+  if (q.type === 'sct') {
+    const val = state.responses[q.id];
+    const btns = q.scale.map(s => `
+      <div class="sct-option">
+        <button class="sct-btn ${val == s.value ? 'selected' : ''}"
+                data-qid="${q.id}" data-val="${s.value}"
+                onclick="selectSCT('${q.id}', ${s.value})">
+          ${s.value > 0 ? '+' + s.value : s.value}
+        </button>
+        <span class="sct-label">${s.label}</span>
+      </div>`).join('');
+    return `
+      <div class="question-block" id="qblock-${q.id}">
+        <div class="question-text">${q.text}</div>
+        <div class="sct-scale">${btns}</div>
+      </div>`;
+  }
+
+  if (q.type === 'radio') {
+    const opts = q.options.map(o => `
+      <label class="radio-option ${state.responses[q.id] === o.value ? 'selected' : ''}"
+             onclick="selectRadio('${q.id}', '${o.value}')">
+        <input type="radio" name="${q.id}" value="${o.value}"
+               ${state.responses[q.id] === o.value ? 'checked' : ''}> ${o.text}
+      </label>`).join('');
+    return `
+      <div class="question-block" id="qblock-${q.id}">
+        <div class="question-text">${q.text}</div>
+        <div class="radio-options">${opts}</div>
+      </div>`;
+  }
+
+  if (q.type === 'open') {
+    const val = state.responses[q.id] || '';
+    return `
+      <div class="question-block" id="qblock-${q.id}">
+        <div class="question-text">${q.text}</div>
+        <textarea class="text-input" id="open-${q.id}"
+                  placeholder="${q.placeholder}"
+                  maxlength="${q.maxLength}"
+                  oninput="updateOpen('${q.id}', this.value)">${val}</textarea>
+        <div class="char-count"><span id="cc-${q.id}">${val.length}</span> / ${q.maxLength}</div>
+      </div>`;
+  }
+
+  return '';
+}
+
+function renderBackground(container, nextBtn) {
+  document.getElementById('progress-text').textContent = 'Background Questions';
+  nextBtn.textContent = 'See My Results →';
+
+  const questionsHTML = BG_QUESTIONS.map(q => {
+    if (q.type === 'radio') {
+      const opts = q.options.map(o => `
+        <label class="radio-option ${state.responses[q.id] === o.value ? 'selected' : ''}"
+               onclick="selectRadio('${q.id}', '${o.value}')">
+          <input type="radio" name="${q.id}" value="${o.value}"
+                 ${state.responses[q.id] === o.value ? 'checked' : ''}> ${o.text}
+        </label>`).join('');
+      return `<div class="question-block"><div class="question-text">${q.text}</div>
+              <div class="radio-options">${opts}</div></div>`;
+    }
+
+    if (q.type === 'scale5') {
+      const val = state.responses[q.id];
+      const btns = [1,2,3,4,5].map(n => `
+        <div class="sct-option">
+          <button class="sct-btn ${val == n ? 'selected' : ''}"
+                  onclick="selectSCT('${q.id}', ${n})">${n}</button>
+          ${n === 1 ? `<span class="sct-label">${q.anchors[0]}</span>` : ''}
+          ${n === 5 ? `<span class="sct-label">${q.anchors[1]}</span>` : ''}
+          ${n !== 1 && n !== 5 ? '<span class="sct-label">&nbsp;</span>' : ''}
+        </div>`).join('');
+      return `<div class="question-block"><div class="question-text">${q.text}</div>
+              <div class="sct-scale">${btns}</div></div>`;
+    }
+
+    if (q.type === 'multi') {
+      const selected = state.responses[q.id] || [];
+      const opts = q.options.map(o => `
+        <label class="radio-option ${selected.includes(o.value) ? 'selected' : ''}"
+               onclick="toggleMulti('${q.id}', '${o.value}')">
+          <input type="checkbox" value="${o.value}"
+                 ${selected.includes(o.value) ? 'checked' : ''}> ${o.text}
+        </label>`).join('');
+      return `<div class="question-block"><div class="question-text">${q.text}</div>
+              <div class="radio-options">${opts}</div></div>`;
+    }
+    return '';
+  }).join('');
+
+  container.innerHTML = `
+    <div class="card">
+      <div class="section-badge">📋 Background</div>
+      <div class="card-title">A few quick questions about you</div>
+      <div class="card-subtitle">These help calibrate your results and personalize your learning path.</div>
+      ${questionsHTML}
+    </div>`;
+
+  nextBtn.disabled = false; // background questions are all optional
+}
+
+function renderComplete(container) {
+  state.endTime = Date.now();
+  const scores = computeScores(state.responses);
+  saveResults(scores);
+
+  document.getElementById('progress-text').textContent = 'Complete';
+  document.getElementById('progress-fill').style.width = '100%';
+  document.getElementById('progress-pct').textContent = '100%';
+
+  const composite = scores._composite !== null
+    ? Math.round(scores._composite * 100) : null;
+
+  const DIM_LABELS = {
+    hypothesis_generation: 'Hypothesis Generation',
+    data_interpretation:   'Data Interpretation',
+    management_reasoning:  'Management Reasoning',
+    illness_script:        'Illness Script Activation',
+    anchoring_bias:        'Anchoring Resistance',
+    diagnostic_threshold:  'Diagnostic Threshold',
+    uncertainty_tolerance: 'Uncertainty Tolerance',
+  };
+
+  const DIM_COLORS = {
+    hypothesis_generation: '#2874A6',
+    data_interpretation:   '#1A7A4A',
+    management_reasoning:  '#7B2D8B',
+    illness_script:        '#C0622F',
+    anchoring_bias:        '#C0392B',
+    diagnostic_threshold:  '#D4500A',
+    uncertainty_tolerance: '#2E86AB',
+  };
+
+  const barsHTML = Object.entries(DIM_LABELS).map(([k, label]) => {
+    const val = scores[k];
+    if (val === null) return '';
+    const pct = Math.round(val * 100);
+    return `
+      <div class="dim-row">
+        <div class="dim-label">
+          <span>${label}</span>
+          <span style="color:var(--muted)">${pct}%</span>
+        </div>
+        <div class="dim-bar">
+          <div class="dim-fill" style="width:0%;background:${DIM_COLORS[k]}" data-target="${pct}"></div>
+        </div>
+      </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="card">
+      <div class="complete-icon">✅</div>
+      <div class="card-title">Baseline Complete</div>
+      <div class="card-subtitle">
+        Your reasoning profile has been saved. ReasonDx will use it to recommend cases that target your specific growth areas — and track how your reasoning develops over time.
+      </div>
+      ${composite !== null ? `
+      <div class="score-display">
+        <div class="score-value">${composite}%</div>
+        <div class="score-label">Baseline Reasoning Score (SCT composite)</div>
+      </div>` : ''}
+      <div class="dimension-bars">${barsHTML}</div>
+      <div style="background:var(--blue-l);border-radius:10px;padding:16px;font-size:0.85rem;line-height:1.6;color:var(--blue-d);">
+        💡 <strong>What this means:</strong> This is your starting point, not a grade. Most learners improve significantly within the first month of active platform use. You'll see this profile evolve in your Dashboard.
+      </div>
+    </div>
+    <div style="width:100%;max-width:680px;margin-top:16px;">
+      <button class="btn-next" onclick="goToBrowse()" style="width:100%;padding:16px;">
+        Start Learning with ReasonDx →
+      </button>
+    </div>`;
+
+  // Animate bars after render
+  setTimeout(() => {
+    document.querySelectorAll('.dim-fill').forEach(el => {
+      el.style.transition = 'width 0.9s ease';
+      el.style.width = el.dataset.target + '%';
+    });
+  }, 200);
+}
+
+// ── EVENT HANDLERS ────────────────────────────────────────────────────────────
+
+function selectSCT(qid, val) {
+  state.responses[qid] = val;
+  document.querySelectorAll(`[data-qid="${qid}"]`).forEach(btn => {
+    btn.classList.toggle('selected', parseInt(btn.dataset.val) === val);
+  });
+  validateCurrentStep();
+}
+
+function selectRadio(qid, val) {
+  state.responses[qid] = val;
+  document.querySelectorAll(`label.radio-option`).forEach(label => {
+    const input = label.querySelector('input[type="radio"]');
+    if (input && input.name === qid) {
+      label.classList.toggle('selected', input.value === val);
+    }
+  });
+  validateCurrentStep();
+}
+
+function toggleMulti(qid, val) {
+  if (!state.responses[qid]) state.responses[qid] = [];
+  const arr = state.responses[qid];
+  const idx = arr.indexOf(val);
+  if (idx >= 0) arr.splice(idx, 1);
+  else arr.push(val);
+  // Update UI
+  document.querySelectorAll(`label.radio-option`).forEach(label => {
+    const cb = label.querySelector(`input[value="${val}"]`);
+    if (cb && cb.type === 'checkbox') {
+      label.classList.toggle('selected', arr.includes(val));
+    }
+  });
+}
+
+function updateOpen(qid, val) {
+  state.responses[qid] = val;
+  const cc = document.getElementById('cc-' + qid);
+  if (cc) cc.textContent = val.length;
+}
+
+function bindQuestionEvents(questions) {
+  // Open text areas already bound via oninput
+  // SCT and radio are bound via onclick
+}
+
+function validateVignette(v, nextBtn) {
+  // Require all non-open questions answered
+  const required = v.questions.filter(q => q.type !== 'open');
+  const answered = required.filter(q => state.responses[q.id] !== undefined && state.responses[q.id] !== null);
+  nextBtn.disabled = answered.length < required.length;
+}
+
+function validateCurrentStep() {
+  const nextBtn = document.getElementById('btn-next');
+  if (state.step >= 1 && state.step <= 3) {
+    const v = VIGNETTES[state.step - 1];
+    validateVignette(v, nextBtn);
+  }
+}
+
+function nextScreen() {
+  if (state.step === 0) state.startTime = Date.now();
+  state.step = Math.min(state.step + 1, TOTAL_STEPS);
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function prevScreen() {
+  state.step = Math.max(state.step - 1, 0);
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── PERSISTENCE ───────────────────────────────────────────────────────────────
+
+function saveResults(scores) {
+  const result = {
+    completedAt:  new Date().toISOString(),
+    durationMs:   state.endTime - state.startTime,
+    professionId: state.profession,
+    trackId:      state.track,
+    responses:    state.responses,
+    scores:       scores,
+    version:      '1.0'
+  };
+
+  // Save to localStorage
+  const user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+  user.baselineAssessment = result;
+  user.baselineComplete = true;
+  localStorage.setItem('reasondx-user', JSON.stringify(user));
+  localStorage.setItem('rdx-baseline-complete', '1');
+  localStorage.setItem('rdx-baseline-scores', JSON.stringify(scores));
+
+  // Sync to Supabase if available
+  syncToSupabase(result);
+
+  // Fire event for dashboard / other modules
+  document.dispatchEvent(new CustomEvent('rdx:baselineComplete', { detail: result }));
+}
+
+async function syncToSupabase(result) {
+  if (!window.supabase) return;
+  try {
+    const { data: { user } } = await window.supabase.auth.getUser();
+    if (!user) return;
+    await window.supabase.from('profiles').upsert({
+      id: user.id,
+      baseline_complete:    true,
+      baseline_scores:      result.scores,
+      baseline_responses:   result.responses,
+      baseline_completed_at: result.completedAt,
+      baseline_duration_ms:  result.durationMs,
+      baseline_version:      result.version,
+    }, { onConflict: 'id' });
+  } catch(e) {
+    console.warn('[RDX Baseline] Supabase sync failed:', e);
+  }
+}
+
+function goToBrowse() {
+  const prof = state.profession;
+  const track = state.track;
+  const params = new URLSearchParams();
+  if (prof) params.set('profession', prof);
+  if (track) params.set('track', track);
+  window.location.href = '/browse.html' + (params.toString() ? '?' + params.toString() : '');
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────────
+
+(function init() {
+  // Load profession from localStorage
+  const user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+  const prof = user.professionProfile;
+  if (prof) {
+    state.profession = prof.professionId;
+    state.track = prof.trackId;
+  }
+
+  // If already completed, go straight to browse unless forced
+  const params = new URLSearchParams(window.location.search);
+  if (user.baselineComplete && params.get('retake') !== '1') {
+    window.location.href = '/browse.html';
+    return;
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
