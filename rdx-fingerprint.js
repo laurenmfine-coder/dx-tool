@@ -203,6 +203,190 @@
     };
   }
 
+
+  // ── PROFESSION-SPECIFIC BENCHMARK CALIBRATION ──────────────────────────
+  // Each health profession has different expected competency benchmarks
+  // for the 8 RPFS dimensions based on training stage and scope of practice.
+  // Prevents medicine-centric bias in cross-profession comparisons.
+  // Grounding: Higgs & Jones (2008) Clinical Reasoning for Health Professionals;
+  //   Epstein & Hundert (2002) JAMA; Croskerry (2009) Academic Emergency Medicine
+  // ─────────────────────────────────────────────────────────────────────────
+
+  var PROFESSION_BENCHMARKS = {
+    // Each entry: { dimension: expectedMasteryPct, weight: relativeImportance }
+    // Weights reflect emphasis in accreditation standards and board exams
+    medicine: {
+      diagnostic_accuracy:    { expected: 75, weight: 1.0 },
+      hypothesis_breadth:     { expected: 70, weight: 0.9 },
+      evidence_integration:   { expected: 70, weight: 1.0 },
+      pivoting_ability:       { expected: 65, weight: 0.9 },
+      anchoring_resistance:   { expected: 60, weight: 1.0 },
+      history_thoroughness:   { expected: 80, weight: 1.0 },
+      confidence_calibration: { expected: 65, weight: 0.8 },
+      productive_failure:     { expected: 30, weight: 0.5 }
+    },
+    pa: {
+      diagnostic_accuracy:    { expected: 72, weight: 1.0 },
+      hypothesis_breadth:     { expected: 72, weight: 1.0 },  // generalist scope
+      evidence_integration:   { expected: 68, weight: 0.9 },
+      pivoting_ability:       { expected: 65, weight: 0.9 },
+      anchoring_resistance:   { expected: 60, weight: 1.0 },
+      history_thoroughness:   { expected: 82, weight: 1.0 },  // PA training emphasizes Hx
+      confidence_calibration: { expected: 60, weight: 0.8 },
+      productive_failure:     { expected: 30, weight: 0.5 }
+    },
+    pharmacy: {
+      diagnostic_accuracy:    { expected: 55, weight: 0.7 },  // not primary diagnoser
+      hypothesis_breadth:     { expected: 60, weight: 0.8 },
+      evidence_integration:   { expected: 75, weight: 1.0 },  // lab interpretation high
+      pivoting_ability:       { expected: 55, weight: 0.7 },
+      anchoring_resistance:   { expected: 65, weight: 1.0 },  // drug-class anchoring target
+      history_thoroughness:   { expected: 70, weight: 0.9 },  // med history emphasis
+      confidence_calibration: { expected: 70, weight: 0.9 },  // pharmacists must be confident
+      productive_failure:     { expected: 25, weight: 0.4 }
+    },
+    optometry: {
+      diagnostic_accuracy:    { expected: 70, weight: 1.0 },
+      hypothesis_breadth:     { expected: 65, weight: 0.9 },
+      evidence_integration:   { expected: 70, weight: 1.0 },
+      pivoting_ability:       { expected: 65, weight: 0.9 },
+      anchoring_resistance:   { expected: 68, weight: 1.0 },  // ocular anchoring target
+      history_thoroughness:   { expected: 75, weight: 0.9 },
+      confidence_calibration: { expected: 65, weight: 0.8 },
+      productive_failure:     { expected: 28, weight: 0.5 }
+    },
+    dentistry: {
+      diagnostic_accuracy:    { expected: 70, weight: 1.0 },
+      hypothesis_breadth:     { expected: 60, weight: 0.8 },
+      evidence_integration:   { expected: 65, weight: 0.9 },
+      pivoting_ability:       { expected: 60, weight: 0.8 },
+      anchoring_resistance:   { expected: 65, weight: 1.0 },  // local anchoring target
+      history_thoroughness:   { expected: 78, weight: 1.0 },
+      confidence_calibration: { expected: 65, weight: 0.8 },
+      productive_failure:     { expected: 25, weight: 0.4 }
+    },
+    pt: {
+      diagnostic_accuracy:    { expected: 65, weight: 0.8 },  // screen not diagnose
+      hypothesis_breadth:     { expected: 68, weight: 0.9 },
+      evidence_integration:   { expected: 68, weight: 0.9 },
+      pivoting_ability:       { expected: 68, weight: 1.0 },  // movement analysis
+      anchoring_resistance:   { expected: 65, weight: 1.0 },  // structural anchoring target
+      history_thoroughness:   { expected: 80, weight: 1.0 },  // red flag screen
+      confidence_calibration: { expected: 62, weight: 0.8 },
+      productive_failure:     { expected: 28, weight: 0.5 }
+    },
+    ot: {
+      diagnostic_accuracy:    { expected: 55, weight: 0.6 },  // occupation not diagnosis focus
+      hypothesis_breadth:     { expected: 60, weight: 0.8 },
+      evidence_integration:   { expected: 65, weight: 0.9 },
+      pivoting_ability:       { expected: 65, weight: 0.9 },
+      anchoring_resistance:   { expected: 60, weight: 0.9 },
+      history_thoroughness:   { expected: 78, weight: 1.0 },  // occupational profile
+      confidence_calibration: { expected: 60, weight: 0.8 },
+      productive_failure:     { expected: 25, weight: 0.4 }
+    },
+    nursing: {
+      diagnostic_accuracy:    { expected: 65, weight: 0.8 },
+      hypothesis_breadth:     { expected: 65, weight: 0.9 },
+      evidence_integration:   { expected: 72, weight: 1.0 },  // lab/vital interpretation
+      pivoting_ability:       { expected: 65, weight: 0.9 },
+      anchoring_resistance:   { expected: 62, weight: 0.9 },
+      history_thoroughness:   { expected: 80, weight: 1.0 },
+      confidence_calibration: { expected: 65, weight: 0.9 },
+      productive_failure:     { expected: 28, weight: 0.5 }
+    },
+    mbs: {
+      diagnostic_accuracy:    { expected: 45, weight: 0.7 },  // pre-clinical expected lower
+      hypothesis_breadth:     { expected: 55, weight: 0.9 },
+      evidence_integration:   { expected: 55, weight: 0.9 },
+      pivoting_ability:       { expected: 50, weight: 0.8 },
+      anchoring_resistance:   { expected: 50, weight: 0.8 },
+      history_thoroughness:   { expected: 60, weight: 0.9 },
+      confidence_calibration: { expected: 50, weight: 0.7 },
+      productive_failure:     { expected: 35, weight: 0.6 }   // productive failure higher — learning mode
+    },
+    other: {
+      diagnostic_accuracy:    { expected: 60, weight: 0.8 },
+      hypothesis_breadth:     { expected: 60, weight: 0.8 },
+      evidence_integration:   { expected: 60, weight: 0.8 },
+      pivoting_ability:       { expected: 58, weight: 0.8 },
+      anchoring_resistance:   { expected: 58, weight: 0.8 },
+      history_thoroughness:   { expected: 68, weight: 0.9 },
+      confidence_calibration: { expected: 58, weight: 0.8 },
+      productive_failure:     { expected: 28, weight: 0.5 }
+    }
+  };
+
+  // Compute calibrated score relative to profession benchmark
+  // Returns { raw, expected, calibrated, gap, aboveExpected }
+  function calibrateScore(rawScore, dimension, professionId) {
+    var prof = professionId || 'medicine';
+    var benchmarks = PROFESSION_BENCHMARKS[prof] || PROFESSION_BENCHMARKS['other'];
+    var bench = benchmarks[dimension];
+    if (!bench) return { raw: rawScore, expected: 60, calibrated: rawScore, gap: 0, aboveExpected: rawScore >= 60 };
+
+    var expected = bench.expected;
+    var gap = rawScore - expected;
+    // Calibrated: how far above/below expectation, normalized to 0-100
+    var calibrated = Math.max(0, Math.min(100, 50 + (gap / expected * 50)));
+
+    return {
+      raw: rawScore,
+      expected: expected,
+      calibrated: Math.round(calibrated),
+      gap: Math.round(gap),
+      aboveExpected: gap >= 0,
+      weight: bench.weight
+    };
+  }
+
+  // Add calibrated scores to a fingerprint record
+  function addCalibratedScores(fp, professionId) {
+    if (!fp) return fp;
+    var prof = professionId || 'medicine';
+
+    // Map fingerprint fields to RPFS dimensions
+    var rawScores = {
+      diagnostic_accuracy:    fp.target_in_final ? 100 : (fp.target_in_initial ? 50 : 0),
+      hypothesis_breadth:     Math.min(100, (fp.dx_count_initial || 0) * 20),
+      evidence_integration:   fp.integrated_evidence ? 100 : 0,
+      pivoting_ability:       fp.pivoting_ability || (fp.integrated_evidence && !fp.anchoring_detected ? 80 : 20),
+      anchoring_resistance:   fp.anchoring_detected ? 20 : (fp.premature_closure ? 40 : 85),
+      history_thoroughness:   Math.min(100, (fp.env_history_score || 0) * 50 + (fp.history_turns || 0) * 8),
+      confidence_calibration: fp.confidence_score ? Math.abs(fp.confidence_score - 3) <= 1 ? 80 : 40 : 50,
+      productive_failure:     fp.productive_failure_flag ? 100 : 0
+    };
+
+    fp.calibrated_scores = {};
+    Object.keys(rawScores).forEach(function(dim) {
+      fp.calibrated_scores[dim] = calibrateScore(rawScores[dim], dim, prof);
+    });
+
+    fp.profession_id = prof;
+    fp.calibration_applied = true;
+
+    // Weighted composite score for this profession
+    var benchmarks = PROFESSION_BENCHMARKS[prof] || PROFESSION_BENCHMARKS['other'];
+    var totalWeight = 0, weightedSum = 0;
+    Object.keys(fp.calibrated_scores).forEach(function(dim) {
+      var cs = fp.calibrated_scores[dim];
+      var w = cs.weight || 1;
+      weightedSum += cs.calibrated * w;
+      totalWeight += w;
+    });
+    fp.calibrated_composite = totalWeight > 0 ? Math.round(weightedSum / totalWeight) : null;
+
+    return fp;
+  }
+
+  // Expose calibration API
+  window.RDXBenchmark = {
+    getProfessionBenchmarks: function(profId) { return PROFESSION_BENCHMARKS[profId] || PROFESSION_BENCHMARKS['other']; },
+    calibrateScore: calibrateScore,
+    addCalibratedScores: addCalibratedScores,
+    allProfessions: Object.keys(PROFESSION_BENCHMARKS)
+  };
+
   // ── Build embedding text from fingerprint ─────────────────────
   // Rich text description of reasoning pathway for semantic embedding
 
@@ -235,10 +419,15 @@
      * upserts to Supabase. Non-blocking — errors are logged only.
      */
     store: async function(state, caseData, reasoningGraph, confidenceScore) {
+      // Auto-detect profession for calibration
+      var _profId = 'medicine';
+      try { var _u = JSON.parse(localStorage.getItem('reasondx-user')||'{}'); _profId = (_u.professionProfile&&_u.professionProfile.professionId)||'medicine'; } catch(e) {}
+
       try {
         if (!state || !state.sessionId) return;
 
         var fp = extractFingerprint(state, caseData, reasoningGraph, confidenceScore);
+      fp = addCalibratedScores(fp, _profId); // profession-calibrated RPFS
         var embedText = buildEmbedText(fp);
         var embedding = await getEmbedding(embedText);
 

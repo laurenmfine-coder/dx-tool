@@ -47,6 +47,8 @@
         empathy: [], cueUtilization: [],
         emotionalState: [], cognitiveLoad: []
       };
+      this._professionSignals = [];
+      this._professionId = null;
       this._lastMessageTime = null;
       this._patientCuesDelivered = [];
       this._messageTimestamps = [];
@@ -707,6 +709,200 @@
 
     // ═══════════════════════════════════════════════════════════
 
+
+    // ==========================================================
+    // 8. PROFESSION-SPECIFIC SIGNAL DETECTORS
+    // ==========================================================
+    // Captures reasoning behaviors unique to each health profession.
+    // Auto-detects profession from localStorage; silent if not set.
+    // Grounding: Kassirer (2010) Teaching Clinical Reasoning;
+    //   Bowen (2006) Med Educ; Higgs & Jones (2008) Clinical Reasoning
+    // ==========================================================
+
+    _professionSignals: [],
+    _professionId: null,
+
+    _getProfessionId: function() {
+      if (this._professionId) return this._professionId;
+      try {
+        var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        this._professionId = (u.professionProfile && u.professionProfile.professionId) || 'medicine';
+      } catch(e) { this._professionId = 'medicine'; }
+      return this._professionId;
+    },
+
+    analyzeProfessionSignals: function(text, phase, turn) {
+      var prof = this._getProfessionId();
+      var lower = text.toLowerCase();
+      var signal = { turn: turn, phase: phase, profession: prof, flags: [] };
+
+      // ── PHARMACY: mechanism-first vs drug-name-first ──────────────────────
+      if (prof === 'pharmacy') {
+        // Did student mention mechanism before drug name?
+        var hasMechanism = /receptor|enzyme|inhibit|block|agonist|pathway|phamacokinetic|pk|pd|clearance|half.life|bioavail/i.test(text);
+        var hasDrugName  = /(statin|metformin|lisinopril|amlodipine|atorvastatin|warfarin|heparin|insulin|metoprolol|furosemide|omeprazole|ssri|acei|arb|beta.block|calcium channel)/i.test(text);
+        var hasPatientFactor = /renal|hepatic|creatinine|gfr|liver|allergy|pregnant|age|weight|interaction|contraindic/i.test(text);
+
+        if (hasDrugName && !hasMechanism)  signal.flags.push('drug_name_before_mechanism');
+        if (hasMechanism && !hasDrugName)  signal.flags.push('mechanism_first');
+        if (hasDrugName && !hasPatientFactor && phase >= 6) signal.flags.push('patient_factor_neglect');
+        if (hasPatientFactor)              signal.flags.push('patient_factor_considered');
+        if (/interaction|polypharmacy|med list|all medications/i.test(text)) signal.flags.push('polypharmacy_awareness');
+      }
+
+      // ── PHYSICAL THERAPY: red flag screen + functional frame ─────────────
+      if (prof === 'pt') {
+        var redFlagTerms = /cancer|tumor|fracture|cauda equina|cord compress|infection|fever|weight loss|night pain|bowel|bladder|bilateral|saddle|iv drug|osteoporosis|steroid|anticoagul/i;
+        var mechanicalTerms = /worse with|better with|position|movement|loading|compress|stretch|relax|rest|activity|posture/i;
+        var functionalTerms = /walk|stand|sit|lift|carry|daily|function|work|independ|transfer|gait|balance|adl/i;
+        var referralTerms = /refer|physician|doctor|md|do|specialist|imaging|x.ray|mri|ct scan/i;
+
+        if (redFlagTerms.test(text))        signal.flags.push('red_flag_screened');
+        if (mechanicalTerms.test(text))     signal.flags.push('mechanical_reasoning');
+        if (!redFlagTerms.test(text) && phase <= 3) signal.flags.push('red_flag_not_screened_early');
+        if (functionalTerms.test(text))     signal.flags.push('functional_outcome_framed');
+        if (referralTerms.test(text))       signal.flags.push('referral_threshold_considered');
+      }
+
+      // ── OCCUPATIONAL THERAPY: occupation-first reasoning ─────────────────
+      if (prof === 'ot') {
+        var occupationTerms = /occupation|daily|function|role|meaningful|work|leisure|self.care|adl|iadl|bathe|dress|cook|drive|independ|participat/i;
+        var diagnosisTerms  = /diagnosis|diagnose|condition|disease|disorder|pathology/i;
+        var cogTerms        = /delirium|dementia|cognit|memory|orientat|confused|cam|mmse|moca|attention|executive/i;
+        var envTerms        = /home|environment|modification|adapt|equipment|assist|device|caregiver|support/i;
+
+        if (occupationTerms.test(text))     signal.flags.push('occupation_centered');
+        if (diagnosisTerms.test(text) && !occupationTerms.test(text)) signal.flags.push('diagnosis_without_function');
+        if (cogTerms.test(text))            signal.flags.push('cognitive_screening_considered');
+        if (envTerms.test(text))            signal.flags.push('environmental_context_considered');
+      }
+
+      // ── OPTOMETRY: bidirectional ocular-systemic reasoning ────────────────
+      if (prof === 'optometry') {
+        var ocularTerms   = /retina|disc|optic|cornea|anterior|posterior|fundus|visual field|pressure|iop|acuity|macula|vessel|cup.disc|nerve|vitreous|lens|pupil/i;
+        var systemicTerms = /diabetes|hypertension|multiple sclerosis|lupus|sarcoid|thyroid|hiv|syphilis|lyme|cancer|tumor|anemia|sickle|inflammatory|autoimmune|systemic/i;
+        var bridgeTerms   = /secondary|caused by|associated with|due to|manifestation|window|indicator|sign of/i;
+        var referralTerms = /refer|internist|neurolog|endocrin|rheumatol|physician|md|specialist|systemic workup/i;
+
+        if (ocularTerms.test(text))         signal.flags.push('ocular_finding_noted');
+        if (systemicTerms.test(text))       signal.flags.push('systemic_hypothesis_considered');
+        if (ocularTerms.test(text) && systemicTerms.test(text)) signal.flags.push('bidirectional_reasoning');
+        if (bridgeTerms.test(text))         signal.flags.push('causal_bridge_articulated');
+        if (referralTerms.test(text))       signal.flags.push('systemic_referral_considered');
+        if (ocularTerms.test(text) && !systemicTerms.test(text) && phase >= 4) signal.flags.push('ocular_anchoring_risk');
+      }
+
+      // ── DENTISTRY: local vs referred pain + oral-systemic ────────────────
+      if (prof === 'dentistry') {
+        var localTerms    = /tooth|teeth|pulp|periodon|caries|abscess|tmj|occlus|bite|jaw|oral|gingiv|mucos/i;
+        var referredTerms = /referred|radiating|sinus|cardiac|vascular|neurolog|trigemin|cervical|ear|temporal|migraine/i;
+        var systemicTerms = /diabetes|cardiovascular|immune|hiv|leukemia|blood disorder|clotting|bisphosphonat|anticoagul/i;
+        var drugTerms     = /drug|medication|interaction|warfarin|aspirin|antibiotic|analgesic|nsaid|steroid/i;
+
+        if (localTerms.test(text))          signal.flags.push('local_dental_hypothesis');
+        if (referredTerms.test(text))       signal.flags.push('referred_pain_considered');
+        if (systemicTerms.test(text))       signal.flags.push('oral_systemic_link_noted');
+        if (drugTerms.test(text))           signal.flags.push('pharmacology_considered');
+        if (localTerms.test(text) && !referredTerms.test(text) && phase >= 4) signal.flags.push('local_anchoring_risk');
+      }
+
+      // ── PA / NURSING / MEDICINE: threshold calibration ───────────────────
+      if (['pa', 'nursing', 'medicine'].includes(prof)) {
+        var commitTerms   = /my working diagnosis|most likely|i think this is|leading diagnosis|working dx/i;
+        var hedgeTerms    = /could be|might be|possible|maybe|perhaps|not sure|need more|wait for|pending/i;
+        var independTerms = /i will|i would|my plan|i recommend|i order|i prescribe|i manage/i;
+
+        if (commitTerms.test(text) && phase <= 4)  signal.flags.push('early_commitment');
+        if (hedgeTerms.test(text) && phase >= 6)   signal.flags.push('late_hedging_risk');
+        if (independTerms.test(text))              signal.flags.push('independent_reasoning');
+      }
+
+      // ── MBS / PRE-HEALTH: mechanism-to-clinical bridge ───────────────────
+      if (prof === 'mbs') {
+        var mechTerms     = /mechanism|pathway|receptor|enzyme|protein|gene|cellular|molecular|signaling|cascade|inhibit/i;
+        var clinTerms     = /patient|symptom|present|complain|exam|finding|diagnosis|treatment|clinical/i;
+        var mcatTerms     = /mcat|passage|question|test|exam prep|practice/i;
+
+        if (mechTerms.test(text) && clinTerms.test(text))  signal.flags.push('mechanism_clinical_bridge');
+        if (mechTerms.test(text) && !clinTerms.test(text)) signal.flags.push('mechanism_without_clinical');
+        if (clinTerms.test(text) && !mechTerms.test(text)) signal.flags.push('clinical_without_mechanism');
+        if (mcatTerms.test(text))                          signal.flags.push('mcat_framing');
+      }
+
+      if (signal.flags.length > 0) {
+        this._professionSignals.push(signal);
+      }
+    },
+
+    getProfessionSignalSummary: function() {
+      var signals = this._professionSignals;
+      if (!signals.length) return null;
+
+      var prof = this._getProfessionId();
+      var flagCounts = {};
+      signals.forEach(function(s) {
+        s.flags.forEach(function(f) {
+          flagCounts[f] = (flagCounts[f] || 0) + 1;
+        });
+      });
+
+      // Compute profession-specific composite metrics
+      var summary = {
+        profession: prof,
+        totalSignals: signals.length,
+        flagCounts: flagCounts,
+        keyMetrics: {}
+      };
+
+      if (prof === 'pharmacy') {
+        var total = (flagCounts['drug_name_before_mechanism'] || 0) + (flagCounts['mechanism_first'] || 0);
+        summary.keyMetrics.mechanismFirstRate = total > 0
+          ? Math.round((flagCounts['mechanism_first'] || 0) / total * 100) : null;
+        summary.keyMetrics.patientFactorRate = signals.length > 0
+          ? Math.round(((flagCounts['patient_factor_considered'] || 0) / signals.length) * 100) : null;
+        summary.keyMetrics.polypharmacyAwareness = (flagCounts['polypharmacy_awareness'] || 0) > 0;
+      }
+
+      if (prof === 'pt') {
+        summary.keyMetrics.redFlagScreened = (flagCounts['red_flag_screened'] || 0) > 0;
+        summary.keyMetrics.functionalFrameRate = signals.length > 0
+          ? Math.round(((flagCounts['functional_outcome_framed'] || 0) / signals.length) * 100) : null;
+        summary.keyMetrics.referralThreshold = (flagCounts['referral_threshold_considered'] || 0) > 0;
+      }
+
+      if (prof === 'optometry') {
+        var ocular = flagCounts['ocular_finding_noted'] || 0;
+        var both   = flagCounts['bidirectional_reasoning'] || 0;
+        summary.keyMetrics.bidirectionalRate = ocular > 0
+          ? Math.round(both / ocular * 100) : null;
+        summary.keyMetrics.systemicReferralConsidered = (flagCounts['systemic_referral_considered'] || 0) > 0;
+        summary.keyMetrics.ocularAnchoringRisk = (flagCounts['ocular_anchoring_risk'] || 0) > 0;
+      }
+
+      if (prof === 'ot') {
+        summary.keyMetrics.occupationCenteredRate = signals.length > 0
+          ? Math.round(((flagCounts['occupation_centered'] || 0) / signals.length) * 100) : null;
+        summary.keyMetrics.cognitiveScreeningConsidered = (flagCounts['cognitive_screening_considered'] || 0) > 0;
+      }
+
+      if (prof === 'dentistry') {
+        summary.keyMetrics.referredPainConsidered = (flagCounts['referred_pain_considered'] || 0) > 0;
+        summary.keyMetrics.oralSystemicLinkNoted = (flagCounts['oral_systemic_link_noted'] || 0) > 0;
+        summary.keyMetrics.localAnchoringRisk = (flagCounts['local_anchoring_risk'] || 0) > 0;
+      }
+
+      if (prof === 'mbs') {
+        var bridges = flagCounts['mechanism_clinical_bridge'] || 0;
+        var mechOnly = flagCounts['mechanism_without_clinical'] || 0;
+        var clinOnly = flagCounts['clinical_without_mechanism'] || 0;
+        var total2 = bridges + mechOnly + clinOnly;
+        summary.keyMetrics.bridgingRate = total2 > 0
+          ? Math.round(bridges / total2 * 100) : null;
+      }
+
+      return summary;
+    },
+
     analyzeStudentMessage: function(text, phase, turn) {
       // Capture latency before recordLatency() resets _lastMessageTime
       var latencyMs = null;
@@ -728,6 +924,9 @@
       if (latencyMs !== null && latencyMs > 0) {
         this.recordCognitiveLoad(text, phase, turn, latencyMs);
       }
+
+      // Agent 8: Profession-specific signal detectors
+      this.analyzeProfessionSignals(text, phase, turn);
     },
 
     analyzePatientMessage: function(text, phase, turn) {
@@ -751,7 +950,8 @@
         empathyAndRapport:   this.getEmpathySummary(),
         cueUtilization:      this.getCueUtilizationSummary(),
         emotionalState:      this.getEmotionalStateSummary(),    // Agent 7
-        cognitiveLoad:       this.getCognitiveLoadSummary()      // Agent 5
+        cognitiveLoad:       this.getCognitiveLoadSummary(),     // Agent 5
+        professionSignals:   this.getProfessionSignalSummary()    // Agent 8
       };
     }
   };

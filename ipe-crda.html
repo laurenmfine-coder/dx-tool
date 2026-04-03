@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — IPE Reasoning Divergence</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap');
+:root {
+  --blue:#2874A6;--blue-l:#EBF5FB;--blue-d:#1A5276;
+  --green:#1A7A4A;--green-l:#E9F7EF;
+  --amber:#E67E22;--amber-l:#FEF5E7;
+  --purple:#7B2D8B;--purple-l:#F5EEF8;
+  --red:#C0392B;--red-l:#FDEDEC;
+  --text:#1a2332;--muted:#64748b;--border:#e2e8f0;--bg:#f8fafc;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);}
+
+.page-header{background:linear-gradient(135deg,#1A2332 0%,#2874A6 100%);color:white;padding:32px 24px 40px;position:relative;overflow:hidden;}
+.page-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");}
+.header-inner{max-width:900px;margin:0 auto;position:relative;}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);border-radius:20px;padding:5px 12px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:14px;}
+.header-title{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2;margin-bottom:8px;}
+.header-sub{font-size:0.9rem;opacity:0.85;max-width:560px;line-height:1.6;}
+
+.content{max-width:900px;margin:0 auto;padding:32px 24px;}
+
+/* Case selector */
+.case-selector{background:white;border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px;}
+.cs-title{font-weight:700;font-size:1rem;margin-bottom:14px;}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:16px;}
+.case-chip{padding:10px 14px;border:2px solid var(--border);border-radius:10px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.15s;background:white;text-align:left;}
+.case-chip:hover{border-color:var(--blue);background:var(--blue-l);}
+.case-chip.active{border-color:var(--blue);background:var(--blue);color:white;}
+.case-chip-label{font-weight:700;display:block;font-size:0.82rem;}
+.case-chip-sub{font-size:0.72rem;opacity:0.75;margin-top:2px;}
+
+/* Profession panels */
+.prof-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-bottom:24px;}
+.prof-panel{background:white;border:2px solid var(--border);border-radius:16px;overflow:hidden;transition:border-color 0.15s;}
+.prof-panel.has-response{border-color:var(--color,var(--blue));}
+.prof-panel-header{padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);background:color-mix(in srgb, var(--color, var(--blue)) 6%, white);}
+.prof-icon{font-size:1.4rem;}
+.prof-name{font-weight:700;font-size:0.9rem;}
+.prof-track{font-size:0.72rem;color:var(--muted);}
+.prof-panel-body{padding:16px 18px;}
+.prof-ddx-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:8px;}
+.ddx-list{display:flex;flex-direction:column;gap:5px;}
+.ddx-item{display:flex;align-items:center;gap:8px;font-size:0.82rem;}
+.ddx-rank{width:18px;height:18px;border-radius:50%;background:var(--color,var(--blue));color:white;font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.prof-input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:0.85rem;font-family:'DM Sans',sans-serif;resize:vertical;min-height:70px;outline:none;margin-top:8px;}
+.prof-input:focus{border-color:var(--blue);}
+.prof-submit{margin-top:10px;padding:8px 16px;background:var(--color,var(--blue));color:white;border:none;border-radius:8px;font-size:0.82rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;}
+
+/* Divergence map */
+.divergence-card{background:white;border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:24px;}
+.dc-title{font-family:'DM Serif Display',serif;font-size:1.2rem;margin-bottom:6px;}
+.dc-sub{color:var(--muted);font-size:0.85rem;margin-bottom:20px;}
+
+.convergence-zone{background:var(--green-l);border:1px solid #A9DFBF;border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+.cz-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--green);margin-bottom:8px;}
+.dx-tag{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:600;margin:3px;background:var(--green);color:white;}
+.dx-tag.partial{background:#A9DFBF;color:var(--green-d,#145A32);}
+
+.divergence-zone{background:var(--amber-l);border:1px solid #FAD7A0;border-radius:10px;padding:14px 16px;margin-bottom:14px;}
+.dz-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--amber);margin-bottom:8px;}
+.dz-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;font-size:0.83rem;}
+.dz-prof{font-weight:700;min-width:80px;flex-shrink:0;}
+.dz-dx{color:var(--text);}
+
+/* AI Analysis */
+.ai-analysis{background:linear-gradient(135deg,#1A2332,#2874A6);color:white;border-radius:16px;padding:24px;margin-bottom:24px;}
+.aa-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.aa-icon{font-size:1.4rem;}
+.aa-title{font-family:'DM Serif Display',serif;font-size:1.1rem;}
+.aa-body{font-size:0.9rem;line-height:1.7;opacity:0.92;}
+.aa-loading{display:flex;align-items:center;gap:10px;opacity:0.7;font-size:0.88rem;}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* IPE learning points */
+.ipe-points{background:var(--blue-l);border:1px solid #AED6F1;border-radius:12px;padding:18px 20px;margin-bottom:24px;}
+.ip-title{font-weight:700;font-size:0.9rem;color:var(--blue-d);margin-bottom:12px;}
+.ip-list{display:flex;flex-direction:column;gap:8px;}
+.ip-item{display:flex;align-items:flex-start;gap:10px;font-size:0.85rem;color:var(--blue-d);line-height:1.5;}
+.ip-dot{width:20px;height:20px;border-radius:50%;background:var(--blue);color:white;font-size:0.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+
+/* Research note */
+.research-note{background:#fffbeb;border:1px solid #fcd34d;border-radius:10px;padding:14px 16px;font-size:0.8rem;color:#78350f;line-height:1.5;}
+
+/* Action bar */
+.action-bar{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;}
+.btn-primary{background:var(--blue);color:white;border:none;border-radius:10px;padding:12px 24px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background 0.15s,transform 0.1s;}
+.btn-primary:hover{background:var(--blue-d);transform:translateY(-1px);}
+.btn-secondary{background:white;color:var(--text);border:2px solid var(--border);border-radius:10px;padding:10px 20px;font-size:0.88rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:border-color 0.15s;}
+.btn-secondary:hover{border-color:var(--blue);}
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">🤝 Interprofessional Education</div>
+    <div class="header-title">Collaborative Reasoning Divergence Analysis</div>
+    <div class="header-sub">Run the same clinical case through multiple health professions simultaneously. Discover where reasoning converges, where it diverges — and why professional lens shapes clinical inference.</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- Case Selector -->
+  <div class="case-selector">
+    <div class="cs-title">Select a Clinical Case</div>
+    <div class="case-grid" id="case-grid"></div>
+    <div id="vignette-display" style="display:none;background:#f1f5f9;border-left:4px solid var(--blue);border-radius:0 10px 10px 0;padding:16px 18px;font-size:0.88rem;line-height:1.7;"></div>
+  </div>
+
+  <!-- Profession Panels -->
+  <div class="prof-grid" id="prof-grid"></div>
+
+  <!-- Analyze Button -->
+  <div class="action-bar" id="action-bar" style="display:none">
+    <button class="btn-primary" onclick="runCRDA()">🔬 Analyze Divergence</button>
+    <button class="btn-secondary" onclick="resetAll()">↺ Reset</button>
+  </div>
+
+  <!-- Divergence Map -->
+  <div id="divergence-output" style="display:none">
+    <div class="divergence-card">
+      <div class="dc-title">Reasoning Divergence Map</div>
+      <div class="dc-sub">Where professions converged on the same hypothesis — and where they diverged.</div>
+      <div class="convergence-zone">
+        <div class="cz-label">✅ Convergence — All Professions Agreed</div>
+        <div id="convergence-dx"></div>
+      </div>
+      <div class="divergence-zone">
+        <div class="dz-label">⚡ Divergence — Profession-Specific Hypotheses</div>
+        <div id="divergence-dx"></div>
+      </div>
+    </div>
+
+    <div class="ai-analysis" id="ai-analysis">
+      <div class="aa-header">
+        <span class="aa-icon">🤖</span>
+        <span class="aa-title">IPE Analysis</span>
+      </div>
+      <div class="aa-body" id="aa-body">
+        <div class="aa-loading"><div class="spinner"></div>Analyzing reasoning divergence across professions...</div>
+      </div>
+    </div>
+
+    <div class="ipe-points" id="ipe-points" style="display:none">
+      <div class="ip-title">💡 IPE Learning Points</div>
+      <div class="ip-list" id="ip-list"></div>
+    </div>
+
+    <div class="research-note">
+      🔬 <strong>Research note:</strong> This interaction is contributing to the ReasonDx multi-profession reasoning divergence study. De-identified data on convergence patterns will be used to characterize how professional training shapes clinical inference across health professions programs.
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── IPE CASES ─────────────────────────────────────────────────────────────────
+// Cases selected for maximum cross-profession relevance
+const IPE_CASES = [
+  {
+    id: 'ipe-diabetic-foot',
+    title: 'Diabetic Foot Ulcer',
+    category: 'Endocrine / Infectious / Vascular',
+    vignette: `A 67-year-old man with T2DM (A1c 10.2%), hypertension, and peripheral artery disease presents with a 3-week history of a non-healing wound on the plantar surface of his right foot. The wound measures 2cm × 1.5cm with surrounding erythema, warmth, and foul-smelling discharge. He reports numbness in both feet for 2 years. Vitals: T 38.1°C, BP 148/86, HR 88. His current medications include metformin 1000mg BID, amlodipine 5mg, and atorvastatin 40mg. ABI right 0.62.`,
+    targetDx: 'Infected diabetic foot ulcer with peripheral artery disease',
+    profRelevance: { medicine:'core', pa:'core', pharmacy:'core', pt:'core', nursing:'core', ot:'high', dentistry:'adjacent' }
+  },
+  {
+    id: 'ipe-stroke-rehab',
+    title: 'Post-Stroke Recovery',
+    category: 'Neurologic / Rehabilitation',
+    vignette: `A 72-year-old woman was admitted 5 days ago with an ischemic stroke affecting the left MCA territory. She has right hemiplegia, expressive aphasia, and dysphagia. PMH: Atrial fibrillation (on warfarin, INR today 1.8), hypertension, depression. She lives alone in a 2-story home. Current medications: warfarin, lisinopril, sertraline, aspirin 81mg. On exam: right arm 2/5, right leg 3/5, unable to form full sentences, bedside swallow screen failed.`,
+    targetDx: 'Ischemic stroke with functional impairments requiring multi-disciplinary management',
+    profRelevance: { medicine:'core', pa:'core', pharmacy:'core', pt:'core', ot:'core', nursing:'core', optometry:'adjacent' }
+  },
+  {
+    id: 'ipe-chronic-pain',
+    title: 'Chronic Low Back Pain',
+    category: 'Musculoskeletal / Pain Management',
+    vignette: `A 45-year-old construction worker presents with 8 months of low back pain rated 7/10. The pain is worse with activity and better with rest. He has tried ibuprofen with partial relief. He works 50 hours/week and is concerned about losing his job. He is obese (BMI 34), smokes 1 ppd, and drinks 3-4 beers/night. He has no bowel/bladder changes, no saddle anesthesia, no fever, no night pain, no history of cancer. Straight leg raise negative. Neurological exam normal.`,
+    targetDx: 'Non-specific chronic low back pain with psychosocial yellow flags',
+    profRelevance: { medicine:'core', pa:'core', pharmacy:'core', pt:'core', ot:'high', nursing:'high', dentistry:'adjacent' }
+  },
+  {
+    id: 'ipe-elderly-falls',
+    title: 'Recurrent Falls in Elderly',
+    category: 'Geriatric / Polypharmacy',
+    vignette: `An 84-year-old woman is brought by her daughter following her third fall this month. She lives at home with her husband. She has mild cognitive impairment, hypertension, osteoporosis, and type 2 diabetes. Her medications: lisinopril 10mg, metformin 500mg BID, alendronate 70mg weekly, mirtazapine 15mg QHS, oxybutynin 5mg BID, lorazepam 0.5mg PRN, atorvastatin 20mg. BP sitting 142/78, standing 112/66. Timed Up and Go: 18 seconds.`,
+    targetDx: 'Recurrent falls: polypharmacy, orthostatic hypotension, and cognitive impairment',
+    profRelevance: { medicine:'core', pa:'core', pharmacy:'core', pt:'core', ot:'core', nursing:'core', optometry:'high' }
+  },
+  {
+    id: 'ipe-mental-health',
+    title: 'First Episode Psychosis',
+    category: 'Psychiatric / Neurologic',
+    vignette: `A 22-year-old college student is brought by his parents after 3 weeks of increasingly bizarre behavior: talking to himself, refusing to leave his room, accusing family members of poisoning his food. No prior psychiatric history. He stopped using cannabis 2 weeks ago (heavy daily use × 2 years). He takes no medications. Vitals: normal. Oriented × 3 but with loose associations. Toxicology: negative. Labs: TSH normal, CBC normal, CMP normal. CT head: normal.`,
+    targetDx: 'First episode psychosis — substance-induced vs. primary (schizophrenia spectrum)',
+    profRelevance: { medicine:'core', pa:'core', nursing:'core', pharmacy:'core', ot:'core', pt:'adjacent', dentistry:'adjacent' }
+  }
+];
+
+const PROFESSIONS = [
+  { id:'medicine',  label:'Medicine (MD/DO)',   icon:'🩺', color:'#2874A6' },
+  { id:'pa',        label:'Physician Assistant', icon:'🏥', color:'#1A7A4A' },
+  { id:'pharmacy',  label:'Pharmacy (PharmD)',   icon:'💊', color:'#7B2D8B' },
+  { id:'pt',        label:'Physical Therapy',    icon:'🦴', color:'#D4500A' },
+  { id:'ot',        label:'Occupational Therapy',icon:'🖐️', color:'#5C6BC0' },
+  { id:'nursing',   label:'Nursing',             icon:'💉', color:'#00897B' },
+  { id:'optometry', label:'Optometry',           icon:'👁️', color:'#C0622F' },
+];
+
+const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+
+let selectedCase = null;
+let profResponses = {}; // profId → { ddx: [], reasoning: '' }
+let activeProfessions = []; // professions participating in this session
+
+// ── RENDER CASES ──────────────────────────────────────────────────────────────
+function renderCases() {
+  const grid = document.getElementById('case-grid');
+  grid.innerHTML = IPE_CASES.map(c => `
+    <button class="case-chip ${selectedCase && selectedCase.id === c.id ? 'active' : ''}"
+            onclick="selectCase('${c.id}')">
+      <span class="case-chip-label">${c.title}</span>
+      <span class="case-chip-sub">${c.category}</span>
+    </button>`).join('');
+}
+
+function selectCase(id) {
+  selectedCase = IPE_CASES.find(c => c.id === id);
+  profResponses = {};
+  renderCases();
+
+  const vd = document.getElementById('vignette-display');
+  vd.style.display = 'block';
+  vd.innerHTML = `<strong style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:#2874A6;">Patient Presentation</strong><br><br>${selectedCase.vignette}`;
+
+  renderProfPanels();
+  document.getElementById('divergence-output').style.display = 'none';
+}
+
+// ── RENDER PROFESSION PANELS ──────────────────────────────────────────────────
+function renderProfPanels() {
+  // Determine which professions to show (relevant to this case + user's own)
+  const userProfId = getUserProfession();
+
+  // Show professions with high/core relevance + always show user's profession
+  activeProfessions = PROFESSIONS.filter(p => {
+    const rel = selectedCase && selectedCase.profRelevance[p.id];
+    return rel === 'core' || rel === 'high' || p.id === userProfId;
+  });
+  if (activeProfessions.length < 3) activeProfessions = PROFESSIONS.slice(0, 4);
+
+  const grid = document.getElementById('prof-grid');
+  grid.innerHTML = activeProfessions.map(p => `
+    <div class="prof-panel ${profResponses[p.id] ? 'has-response' : ''}"
+         id="panel-${p.id}" style="--color:${p.color}">
+      <div class="prof-panel-header">
+        <span class="prof-icon">${p.icon}</span>
+        <div>
+          <div class="prof-name">${p.label}</div>
+          <div class="prof-track">${p.id === userProfId ? '← Your profession' : 'IPE participant'}</div>
+        </div>
+      </div>
+      <div class="prof-panel-body">
+        <div class="prof-ddx-label">Top 3 Differential Diagnoses</div>
+        ${profResponses[p.id] ? renderDDxList(p, profResponses[p.id].ddx) : `
+          <textarea class="prof-input" id="ddx-${p.id}"
+                    placeholder="1. Most likely dx&#10;2. Second hypothesis&#10;3. Third hypothesis"
+                    rows="4"></textarea>
+          <div style="margin-top:8px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);">Key Reasoning (optional)</div>
+          <textarea class="prof-input" id="reasoning-${p.id}"
+                    placeholder="What's the most important piece of information you'd want next, and why?"
+                    rows="3"></textarea>
+          <button class="prof-submit" onclick="submitProfResponse('${p.id}')"
+                  style="background:${p.color}">
+            Submit ${p.label.split(' ')[0]} Response
+          </button>`}
+      </div>
+    </div>`).join('');
+
+  checkActionBar();
+}
+
+function renderDDxList(prof, ddx) {
+  return `<div class="ddx-list">` +
+    ddx.slice(0, 3).map((dx, i) => `
+      <div class="ddx-item">
+        <span class="ddx-rank" style="background:${prof.color}">${i+1}</span>
+        <span>${dx}</span>
+      </div>`).join('') +
+    `</div>`;
+}
+
+function submitProfResponse(profId) {
+  const ddxRaw = document.getElementById('ddx-' + profId)?.value || '';
+  const reasoning = document.getElementById('reasoning-' + profId)?.value || '';
+
+  const ddx = ddxRaw.split('\n')
+    .map(l => l.replace(/^\d+[.)]\s*/, '').trim())
+    .filter(l => l.length > 2);
+
+  if (ddx.length === 0) {
+    alert('Please enter at least one differential diagnosis.');
+    return;
+  }
+
+  profResponses[profId] = { ddx, reasoning };
+  renderProfPanels();
+}
+
+function checkActionBar() {
+  const responses = Object.keys(profResponses).length;
+  const bar = document.getElementById('action-bar');
+  bar.style.display = responses >= 2 ? 'flex' : 'none';
+}
+
+// ── CRDA ANALYSIS ─────────────────────────────────────────────────────────────
+function computeDivergence() {
+  const allDx = {}; // normalized dx → [profIds that mentioned it]
+
+  Object.entries(profResponses).forEach(([profId, resp]) => {
+    resp.ddx.forEach(dx => {
+      const key = dx.toLowerCase().split(' ').slice(0, 3).join(' ');
+      if (!allDx[key]) allDx[key] = { label: dx, profs: [] };
+      allDx[key].profs.push(profId);
+    });
+  });
+
+  const total = Object.keys(profResponses).length;
+  const converged = Object.values(allDx).filter(d => d.profs.length === total);
+  const partial   = Object.values(allDx).filter(d => d.profs.length > 1 && d.profs.length < total);
+  const unique    = Object.values(allDx).filter(d => d.profs.length === 1);
+
+  return { converged, partial, unique, allDx, total };
+}
+
+async function runCRDA() {
+  if (Object.keys(profResponses).length < 2) return;
+
+  document.getElementById('action-bar').style.display = 'none';
+  const output = document.getElementById('divergence-output');
+  output.style.display = 'block';
+  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  const div = computeDivergence();
+
+  // Render convergence
+  const convEl = document.getElementById('convergence-dx');
+  if (div.converged.length === 0) {
+    convEl.innerHTML = '<em style="color:var(--muted);font-size:0.85rem">No diagnoses agreed upon by all professions</em>';
+  } else {
+    convEl.innerHTML = div.converged.map(d => `<span class="dx-tag">${d.label}</span>`).join('') +
+      (div.partial.length > 0 ? '<br><br><strong style="font-size:0.72rem;color:var(--muted)">PARTIAL AGREEMENT:</strong><br>' +
+        div.partial.map(d => `<span class="dx-tag partial">${d.label} (${d.profs.length}/${div.total})</span>`).join('') : '');
+  }
+
+  // Render divergence
+  const divEl = document.getElementById('divergence-dx');
+  divEl.innerHTML = div.unique.map(d => {
+    const profInfo = PROFESSIONS.find(p => p.id === d.profs[0]);
+    return `<div class="dz-row">
+      <span class="dz-prof" style="color:${profInfo?.color || '#333'}">${profInfo?.icon || '⚕️'} ${profInfo?.label.split(' ')[0] || d.profs[0]}</span>
+      <span class="dz-dx">${d.label}</span>
+    </div>`;
+  }).join('') || '<em style="color:var(--muted);font-size:0.85rem">All hypotheses were shared across professions</em>';
+
+  // Run AI analysis
+  await runAIAnalysis(div);
+  renderIPEPoints(div);
+  saveResearchData(div);
+}
+
+async function runAIAnalysis(div) {
+  const systemPrompt = [
+    'You are an interprofessional education expert analyzing how different health professions reasoned through the same clinical case.',
+    'Your job: write a 3-paragraph IPE analysis (NOT bullet points) that:',
+    '1. Explains WHY the professions diverged — what training, scope, or lens explains each unique hypothesis',
+    '2. Identifies what the CONVERGENCE tells us about the case (what\'s the "shared clinical truth"?)',
+    '3. Names the single most important IPE learning point from this comparison',
+    '',
+    'Be specific about professions by name. Reference real differences in training.',
+    'Max 200 words total. Write for a faculty debrief context.'
+  ].join('\n');
+
+  const userContent = buildCRDAContext(div);
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        type: 'passthrough',
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 400,
+        system: systemPrompt,
+        messages: [{ role: 'user', content: userContent }]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || null;
+    document.getElementById('aa-body').innerHTML = text
+      ? text.split('\n\n').map(p => `<p style="margin-bottom:10px">${p}</p>`).join('')
+      : '<em>Analysis unavailable — check Cloudflare Worker connectivity.</em>';
+  } catch(e) {
+    document.getElementById('aa-body').innerHTML = '<em>Analysis unavailable.</em>';
+  }
+}
+
+function buildCRDAContext(div) {
+  const lines = ['CASE: ' + (selectedCase?.title || 'unknown')];
+  lines.push('TARGET: ' + (selectedCase?.targetDx || 'unknown'));
+  lines.push('');
+  lines.push('RESPONSES BY PROFESSION:');
+
+  Object.entries(profResponses).forEach(([profId, resp]) => {
+    const p = PROFESSIONS.find(x => x.id === profId);
+    lines.push((p?.label || profId) + ': ' + resp.ddx.join(' | '));
+    if (resp.reasoning) lines.push('  Reasoning: ' + resp.reasoning.slice(0, 150));
+  });
+
+  lines.push('');
+  lines.push('CONVERGENCE (' + div.converged.length + '): ' + div.converged.map(d => d.label).join(', '));
+  lines.push('PARTIAL (' + div.partial.length + '): ' + div.partial.map(d => d.label + ' [' + d.profs.join(',') + ']').join(', '));
+  lines.push('UNIQUE (' + div.unique.length + '): ' + div.unique.map(d => d.label + ' [' + d.profs[0] + ']').join(', '));
+
+  return lines.join('\n');
+}
+
+function renderIPEPoints(div) {
+  const el = document.getElementById('ipe-points');
+  const list = document.getElementById('ip-list');
+  el.style.display = 'block';
+
+  const points = [];
+  if (div.converged.length > 0) points.push('Convergence on "' + div.converged[0].label + '" reflects a shared clinical signal that transcends professional scope — this is likely the diagnosis that patient safety depends on most.');
+  if (div.unique.length > 0) points.push('Unique hypotheses from individual professions reveal how scope-of-practice shapes differential breadth — not just training content, but what each clinician is licensed to treat.');
+  if (div.partial.length > 0) points.push('Partial agreement diagnoses (' + div.partial.map(d => d.label).join(', ') + ') represent the zone of productive IPE discussion — where different professional frameworks reach the same hypothesis through different pathways.');
+  points.push('In real team-based care, divergent hypotheses from different professions protect against premature closure — a phenomenon the CRDA patent formalizes as a measurable outcome of IPE.');
+
+  list.innerHTML = points.slice(0, 4).map((p, i) => `
+    <div class="ip-item">
+      <span class="ip-dot">${i+1}</span>
+      <span>${p}</span>
+    </div>`).join('');
+}
+
+function saveResearchData(div) {
+  const data = {
+    caseId:      selectedCase?.id,
+    professions: Object.keys(profResponses),
+    responses:   profResponses,
+    convergence: div.converged.map(d => d.label),
+    divergence:  div.unique.map(d => ({ label: d.label, profession: d.profs[0] })),
+    partial:     div.partial.map(d => ({ label: d.label, professions: d.profs })),
+    timestamp:   new Date().toISOString()
+  };
+
+  // Save locally
+  const saved = JSON.parse(localStorage.getItem('rdx-crda-sessions') || '[]');
+  saved.push(data);
+  localStorage.setItem('rdx-crda-sessions', JSON.stringify(saved.slice(-20)));
+
+  // TODO: Supabase sync when IPE sessions table is created
+}
+
+function resetAll() {
+  profResponses = {};
+  document.getElementById('divergence-output').style.display = 'none';
+  if (selectedCase) renderProfPanels();
+}
+
+function getUserProfession() {
+  try {
+    const u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    return u.professionProfile?.professionId || 'medicine';
+  } catch(e) { return 'medicine'; }
+}
+
+// Init
+renderCases();
+</script>
+</body>
+</html>

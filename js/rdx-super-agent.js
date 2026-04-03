@@ -357,6 +357,13 @@
   function aiRecommendation(profile) {
     var systemPrompt = [
       'You are the ReasonDx learning orchestrator. Generate a single, specific, actionable learning recommendation.',
+      'CRITICAL: Profession context is source 10. Calibrate ALL recommendations to the learner\'s profession.',
+      'For pharmacy: prioritize mechanism modules and pharmacotherapy CoachDx topics.',
+      'For PT/OT: prioritize musculoskeletal/neurology cases and functional reasoning.',
+      'For optometry: prioritize ocular-systemic bridging cases.',
+      'For PA/nursing: prioritize generalist clinical cases across all systems.',
+      'For MBS/pre-health: prioritize mechanism modules and MCAT-aligned cases.',
+      'Board exam alignment: recommend content that closes gaps toward their specific board target.',
       'You have access to 9 data sources. Synthesize them to find the HIGHEST-LEVERAGE intervention.',
       'Prioritize: (1) declining trajectory, (2) error mode from last session, (3) RPFS weaknesses,',
       '(4) CoachDx gaps, (5) time-of-day fit, (6) days since last session.',
@@ -396,10 +403,74 @@
     .catch(function() { return null; });
   }
 
+
+  // ── PROFESSION CONTEXT COLLECTOR ─────────────────────────────────────────
+  function getProfessionContext() {
+    try {
+      var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+      var pp = u.professionProfile || {};
+      var bs = localStorage.getItem('rdx-baseline-scores');
+      var baselineScores = bs ? JSON.parse(bs) : null;
+      var PROF_LABELS = {
+        medicine:'Medicine (MD/DO)', pa:'Physician Assistant', pharmacy:'Pharmacy (PharmD)',
+        optometry:'Optometry (OD)', dentistry:'Dentistry (DMD/DDS)', pt:'Physical Therapy (DPT)',
+        ot:'Occupational Therapy', nursing:'Nursing (BSN/NP)', mbs:'Biomedical Sciences',
+        other:'Health Professional'
+      };
+      var BOARD_TARGETS = {
+        medicine:'USMLE/COMLEX', pa:'PANCE', pharmacy:'NAPLEX', optometry:'NBEO',
+        dentistry:'NBDE/INBDE', pt:'NPTE', ot:'NBCOT', nursing:'NCLEX/AANP', mbs:'MCAT', other:'varies'
+      };
+      var KNOWN_ERROR_MODES = {
+        medicine:  'anchoring, premature closure, availability bias',
+        pa:        'anchoring on presenting complaint, threshold confusion',
+        pharmacy:  'drug-class anchoring, patient-factor neglect, mechanism-skip',
+        optometry: 'ocular anchoring, missing systemic cause',
+        dentistry: 'local anchoring, systemic miss, pain attribution error',
+        pt:        'structural anchoring, systemic miss, red-flag under-screening',
+        ot:        'functional skip, diagnosis avoidance',
+        nursing:   'protocol anchoring, surveillance-action gap',
+        mbs:       'mechanism fragmentation, clinical bridge gap',
+        other:     'anchoring, premature closure'
+      };
+      if (!pp.professionId) return null;
+      return {
+        professionId: pp.professionId,
+        label: PROF_LABELS[pp.professionId] || pp.professionId,
+        trackId: pp.trackId || null,
+        programName: pp.programName || null,
+        yearOfTraining: pp.yearOfTraining || null,
+        boardTarget: BOARD_TARGETS[pp.professionId] || 'varies',
+        knownErrorModes: KNOWN_ERROR_MODES[pp.professionId] || '',
+        baselineScores: baselineScores,
+        researchConsent: pp.researchConsent || false
+      };
+    } catch(e) { return null; }
+  }
+
   function buildProfileSummary(p) {
-    var lines = ['STUDENT PROFILE (9 sources):'];
+    var lines = ['STUDENT PROFILE (10 sources):']; /* 10th source: profession context */
     if (p.user) lines.push('Student: ' + (p.user.displayName || p.user.username));
     if (p.timing) lines.push('Context: ' + p.timing.timeOfDay + ', ' + p.timing.dayOfWeek);
+
+    if (p.profession) {
+      lines.push('--- PROFESSION CONTEXT ---');
+      lines.push('Profession: ' + p.profession.label);
+      if (p.profession.trackId)        lines.push('Track: ' + p.profession.trackId);
+      if (p.profession.programName)    lines.push('Program: ' + p.profession.programName);
+      if (p.profession.yearOfTraining) lines.push('Year of training: ' + p.profession.yearOfTraining);
+      lines.push('Board exam target: ' + p.profession.boardTarget);
+      lines.push('Known error modes for profession: ' + p.profession.knownErrorModes);
+      if (p.profession.baselineScores && p.profession.baselineScores._composite !== null) {
+        var _bs = p.profession.baselineScores;
+        lines.push('Baseline reasoning composite: ' + Math.round((_bs._composite || 0) * 100) + '%');
+        ['hypothesis_generation','anchoring_bias','uncertainty_tolerance','management_reasoning'].forEach(function(d) {
+          if (_bs[d] !== null && _bs[d] !== undefined)
+            lines.push('  Baseline ' + d.replace(/_/g,' ') + ': ' + Math.round(_bs[d] * 100) + '%');
+        });
+      }
+      lines.push('--- END PROFESSION ---');
+    }
 
     if (p.dueCards > 0) lines.push('Cards due: ' + p.dueCards);
 
@@ -446,6 +517,7 @@
     var user   = getCurrentUser();
     var userId = user ? (user.supabaseId || user.username) : null;
 
+    var profession    = getProfessionContext();
     var rpfs          = getRPFS();
     var dueCards      = getDueCards();
     var recentModules = getRecentModules();
@@ -455,7 +527,7 @@
 
     return Promise.all([getMilestones(userId), getSessions(userId)]).then(function(results) {
       var profile = {
-        user: user, rpfs: rpfs, dueCards: dueCards, recentModules: recentModules,
+        user: user, profession: profession, rpfs: rpfs, dueCards: dueCards, recentModules: recentModules,
         milestones: results[0], sessions: results[1],
         lastTheory: lastTheory, epaGaps: epaGaps, timing: timing
       };
