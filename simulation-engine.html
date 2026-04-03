@@ -578,6 +578,18 @@ async function sendMessage() {
   // Determines which agent responds and uses agent-specific context
   var activeAgent = state.currentPhase === PHASES.HISTORY_TAKING ? 'patient' : 'attending';
   var agentModel = 'claude-sonnet-4-20250514';
+    // Adaptive difficulty: use stored difficulty unless URL explicitly sets one
+    if (!new URLSearchParams(window.location.search).get('difficulty')) {
+      var _storedDiff = localStorage.getItem('rdx-difficulty');
+      if (_storedDiff && ['guided','standard','advanced'].indexOf(_storedDiff) !== -1) {
+        if (!window.state._difficultySet) {
+          window.state._difficultySet = true;
+          console.log('[Adaptive Difficulty] Applying stored difficulty:', _storedDiff);
+          // Apply to state for patient persona
+          if (window.state) window.state.difficulty = _storedDiff;
+        }
+      }
+    }
   var agentMaxTokens = activeAgent === 'patient' ? 300 : 1024;
   var agentMessages = state.conversationMessages.slice(-20);
   var systemPrompt = buildSystemPrompt();
@@ -1193,6 +1205,39 @@ function enterPhase(phase) {
       window.IllnessScriptTracer.capture(state, caseData).catch(function(e) {
         console.warn('[IllnessScriptTracer] capture error (non-blocking):', e.message);
       });
+    }
+
+    // ── Productive Failure + Adaptive Difficulty: persist theory to localStorage ──
+    if (window.MetaReasoning && state._metaTheory) {
+      try {
+        var _theory = state._metaTheory;
+        var _caseList = window.CRT_INDEX ? Object.keys(window.CRT_INDEX) : [];
+        var _completed = JSON.parse(localStorage.getItem('rdx-completed-cases') || '[]');
+        if (caseData && caseData.caseId && _completed.indexOf(caseData.caseId) === -1) {
+          _completed.push(caseData.caseId);
+          localStorage.setItem('rdx-completed-cases', JSON.stringify(_completed.slice(-100)));
+        }
+        // Select next case based on error mode
+        var _next = MetaReasoning.selectCase(_theory, _caseList.map(function(id){return{id:id};}), _completed);
+        // Calibrate difficulty for next session
+        var _curDiff = localStorage.getItem('rdx-difficulty') || 'standard';
+        var _newDiff = MetaReasoning.calibrateDifficulty(_theory, _curDiff);
+        // Store everything
+        localStorage.setItem('rdx-meta-theory', JSON.stringify({
+          mode: _theory.dominantErrorMode,
+          label: _theory.dominantModeLabel || _theory.dominantErrorMode,
+          confidence: _theory.confidence,
+          urgency: _theory.urgency,
+          nextCase: _next,
+          difficulty: _newDiff,
+          sessionAt: new Date().toISOString(),
+          caseDone: caseData ? caseData.caseId : null
+        }));
+        if (_newDiff && _newDiff.difficulty) {
+          localStorage.setItem('rdx-difficulty', _newDiff.difficulty);
+        }
+        console.log('[MetaReasoning] Theory saved. Mode:', _theory.dominantErrorMode, '| Next case:', _next.caseId, '| Difficulty:', _newDiff.difficulty);
+      } catch(e) { console.warn('[MetaReasoning] persist error:', e.message); }
     }
 
     // ── AGENT TOOLS: Post-simulation processing ──
@@ -2327,6 +2372,10 @@ async function exportStudyData() {
       // Peer comparison
       if (sb) {
         var comp = await E.CollaborativeReasoning.compareToAggregates(sb, window.state, window.caseData.caseId);
+        if (comp && comp.insights) {
+          window.state._cohortData = comp;
+          console.log('[CRDA] Cohort comparison loaded:', comp.comparisonN, 'students');
+        }
         if (comp && comp.insights) comp.insights.forEach(function(i) { addMessage('system', i); });
       }
     }
@@ -2876,6 +2925,62 @@ async function exportStudyData() {
     var html = '<div style="background:linear-gradient(135deg,#F8FAFC,#F0F4F8);border:1.5px solid #E2E8F0;border-radius:14px;padding:20px;margin:12px 0">';
     html += '<div style="font-size:15px;font-weight:700;color:#1B4F72;margin-bottom:14px">Clinical Reasoning Debrief</div>';
 
+    // ── Meta-Reasoning Theory Card ───────────────────────────────
+    var _theory = state._metaTheory;
+    if (_theory) {
+      var _modeColors = {
+        ANCHORING:'#EF4444', PREMATURE_CLOSURE:'#F97316', HISTORY_GAP:'#F59E0B',
+        NARROW_OPENER:'#8B5CF6', UNDERCONFIDENT:'#6366F1', HIGH_COGNITIVE_LOAD:'#DC2626',
+        AFFECT_DISRUPTION:'#EC4899', CALIBRATED:'#10B981'
+      };
+      var _modeColor = _modeColors[_theory.dominantErrorMode] || '#2874A6';
+      var _modeNames = {
+        ANCHORING:'Anchoring Bias', PREMATURE_CLOSURE:'Premature Closure',
+        HISTORY_GAP:'Faulty Context Generation', NARROW_OPENER:'Narrow Initial Hypothesis',
+        UNDERCONFIDENT:'Confidence-Competence Gap', HIGH_COGNITIVE_LOAD:'Cognitive Overload',
+        AFFECT_DISRUPTION:'Affect-Reasoning Disruption', CALIBRATED:'Well-Calibrated'
+      };
+      var _modeName = _modeNames[_theory.dominantErrorMode] || _theory.dominantErrorMode;
+      var _tactics = {
+        ANCHORING: 'What single finding would completely change your leading diagnosis?',
+        PREMATURE_CLOSURE: 'What are you still holding on your list that you haven't fully ruled out?',
+        HISTORY_GAP: 'Before we move on — is there anything in this patient's daily life that might be relevant?',
+        NARROW_OPENER: 'Give me three more diagnoses. Even less likely ones. What else could explain every symptom?',
+        UNDERCONFIDENT: 'Stop. You just said something correct. Own the reasoning.',
+        HIGH_COGNITIVE_LOAD: 'Pause. Tell me your working diagnosis in one sentence. Just one.',
+        AFFECT_DISRUPTION: 'Before you finalize — what was most surprising about that interview?',
+        CALIBRATED: 'You've reasoned through the obvious diagnosis. What doesn't fit perfectly — and what does that mean?'
+      };
+      var _tactic = _tactics[_theory.dominantErrorMode] || '';
+      var _isCal = _theory.dominantErrorMode === 'CALIBRATED';
+
+      html += '<div style="background:' + (_isCal ? '#ECFDF5' : '#FFF7ED') + ';border:1.5px solid ' + _modeColor + '33;border-radius:10px;padding:14px 16px;margin-bottom:16px">';
+      html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">';
+      html += '<span style="width:10px;height:10px;border-radius:50%;background:' + _modeColor + ';flex-shrink:0"></span>';
+      html += '<span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:' + _modeColor + '">Reasoning Pattern Detected</span>';
+      html += '<span style="margin-left:auto;font-size:11px;color:#64748B">' + Math.round((_theory.confidence||0)*100) + '% confidence</span>';
+      html += '</div>';
+      html += '<div style="font-size:15px;font-weight:700;color:#1E293B;margin-bottom:6px">' + _modeName + '</div>';
+      if (_theory.narrativeTheory) {
+        html += '<div style="font-size:13px;color:#374151;line-height:1.6;margin-bottom:8px">' + _theory.narrativeTheory + '</div>';
+      }
+      if (_tactic) {
+        html += '<div style="font-size:12px;font-style:italic;color:#6B7280;border-top:1px solid rgba(0,0,0,.06);padding-top:8px;margin-top:4px">';
+        html += '💬 Attending question for next time: <strong>&ldquo;' + _tactic + '&rdquo;</strong></div>';
+      }
+      // EPA connection
+      var _epaMap = {
+        ANCHORING:'EPA 2: Prioritize a differential diagnosis', PREMATURE_CLOSURE:'EPA 2 + EPA 3: DDx and diagnostic testing',
+        HISTORY_GAP:'EPA 1: Gather a complete history', NARROW_OPENER:'EPA 2: Differential diagnosis breadth',
+        UNDERCONFIDENT:'EPA 6: Oral presentation confidence', HIGH_COGNITIVE_LOAD:'EPA 10: Urgent/complex cases',
+        AFFECT_DISRUPTION:'EPA 2: Clinical reasoning under stress', CALIBRATED:'EPA 4 + EPA 10: Advanced management'
+      };
+      if (_epaMap[_theory.dominantErrorMode]) {
+        html += '<div style="font-size:11px;color:#2874A6;margin-top:6px;font-weight:600">📋 AAMC: ' + _epaMap[_theory.dominantErrorMode] + '</div>';
+      }
+      html += '</div>';
+    }
+
     // ── Source Triangulation Status ──
     html += '<div style="margin-bottom:16px">';
     html += '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Evidence Triangulation</div>';
@@ -2906,6 +3011,24 @@ async function exportStudyData() {
         });
         html += '</div>';
       }
+      html += '</div>';
+    }
+
+    // ── Cohort Mirror (CRDA) ──────────────────────────────────────
+    if (window.state && window.state._cohortData) {
+      var cd = window.state._cohortData;
+      html += '<div style="margin-bottom:16px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:14px 16px">';
+      html += '<div style="font-size:12px;font-weight:700;color:#1D4ED8;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">👥 How You Compare — ' + cd.comparisonN + ' Students on This Case</div>';
+      if (cd.insights && cd.insights.length > 0) {
+        cd.insights.forEach(function(insight) {
+          html += '<div style="font-size:13px;color:#1E40AF;margin-bottom:6px;line-height:1.5">› ' + insight + '</div>';
+        });
+      }
+      // Show key stats
+      html += '<div style="display:flex;gap:16px;margin-top:10px;flex-wrap:wrap">';
+      html += '<div style="font-size:12px;color:#3B82F6"><strong>' + cd.pctGotEnv + '%</strong> got the key history element</div>';
+      html += '<div style="font-size:12px;color:#3B82F6"><strong>' + cd.avgTurns + '</strong> avg turns to complete</div>';
+      html += '</div>';
       html += '</div>';
     }
 
