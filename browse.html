@@ -635,5 +635,121 @@ function doSemanticSearch(q) {
   });
 }
 </script>
+
+<!-- ── PROFESSION ONBOARDING + FILTERING ── -->
+<script src="/rdx-profession-onboarding.js"></script>
+<script>
+(function() {
+  // ── Profession-aware banner ──────────────────────────────────────────────
+  var PROF_LABELS = {
+    medicine:'Medicine', pa:'Physician Assistant', pharmacy:'Pharmacy',
+    optometry:'Optometry', dentistry:'Dentistry', pt:'Physical Therapy',
+    ot:'Occupational Therapy', nursing:'Nursing', mbs:'Biomedical Sciences', other:'Health Professional'
+  };
+
+  var PROF_ICONS = {
+    medicine:'🩺', pa:'🏥', pharmacy:'💊', optometry:'👁️', dentistry:'🦷',
+    pt:'🦴', ot:'🖐️', nursing:'💉', mbs:'🔬', other:'⚕️'
+  };
+
+  // Priority case categories per profession (for smart default filter)
+  var PROF_CAT_PRIORITY = {
+    medicine:   null,          // show all
+    pa:         null,          // show all
+    pharmacy:   'pharmacology',
+    optometry:  null,
+    dentistry:  null,
+    pt:         null,
+    ot:         'psychiatric',
+    nursing:    null,
+    mbs:        null,
+    other:      null
+  };
+
+  function getProfProfile() {
+    try {
+      var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+      return u.professionProfile || null;
+    } catch(e) { return null; }
+  }
+
+  function injectProfessionBanner(profile) {
+    if (!profile || !profile.professionId || profile.professionId === 'medicine') return;
+
+    var existing = document.getElementById('rdx-prof-banner');
+    if (existing) return;
+
+    var label = PROF_LABELS[profile.professionId] || 'Health Professional';
+    var icon  = PROF_ICONS[profile.professionId]  || '⚕️';
+    var track = profile.trackId ? (' · ' + profile.trackId.replace(/_/g,' ')) : '';
+
+    var banner = document.createElement('div');
+    banner.id = 'rdx-prof-banner';
+    banner.style.cssText = [
+      'background:#EBF5FB',
+      'border-bottom:1px solid #AED6F1',
+      'padding:8px 20px',
+      'display:flex',
+      'align-items:center',
+      'justify-content:space-between',
+      'gap:12px',
+      'font-family:inherit',
+      'font-size:0.82rem',
+      'color:#1a5276',
+      'flex-wrap:wrap',
+    ].join(';');
+
+    banner.innerHTML = [
+      '<span>',
+        icon + ' <strong>' + label + '</strong>' + track,
+        ' &nbsp;·&nbsp; Cases prioritized for your program',
+      '</span>',
+      '<button onclick="document.location.href=\'/?setup-profession=1\'" ',
+        'style="background:none;border:1px solid #AED6F1;border-radius:6px;',
+        'padding:3px 10px;font-size:0.78rem;cursor:pointer;color:#1a5276;">',
+        'Change profession',
+      '</button>',
+    ].join('');
+
+    // Insert after nav, before main content
+    var nav = document.querySelector('nav, header, .rdx-nav') || document.body.firstElementChild;
+    if (nav && nav.parentNode) {
+      nav.parentNode.insertBefore(banner, nav.nextSibling);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
+  }
+
+  // ── Apply profession context on page load ────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function() {
+    var profile = getProfProfile();
+    if (!profile) return;
+
+    injectProfessionBanner(profile);
+
+    // If URL has ?profession= param, that takes priority (already handled by setMode)
+    var urlProf = new URLSearchParams(window.location.search).get('profession');
+    if (urlProf) return; // URL param wins
+
+    // Auto-surface a relevant category for non-medicine professions
+    var profId = profile.professionId;
+    var catHint = PROF_CAT_PRIORITY[profId];
+    if (catHint && typeof setCat === 'function') {
+      // Give setMode a tick to finish, then apply category filter
+      setTimeout(function() {
+        var btn = document.querySelector('.fbtn[data-cat="' + catHint + '"]');
+        if (btn) { btn.click(); }
+      }, 150);
+    }
+  });
+
+  // ── Listen for profession being set/changed ──────────────────────────────
+  document.addEventListener('rdx:professionSet', function(e) {
+    if (e.detail && e.detail.profile) {
+      injectProfessionBanner(e.detail.profile);
+    }
+  });
+})();
+</script>
 </body>
 </html>

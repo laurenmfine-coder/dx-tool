@@ -133,8 +133,21 @@ async function handleRegister(e) {
   } else {
     showSuccess('Account created! Check your email to confirm, then sign in.');
     document.getElementById('registerForm').style.display = 'none';
+    // Trigger profession onboarding for new accounts
+    if (window.RDX_ProfessionOnboardingModal) {
+      setTimeout(function() {
+        var modal = new RDX_ProfessionOnboardingModal({
+          allowSkip: true,
+          onComplete: function(profile) {
+            if (profile) profile.save();
+          }
+        });
+        modal.inject();
+      }, 800);
+    }
   }
 }
 </script>
+<script src="/rdx-profession-onboarding.js"></script>
 </body>
 </html>
