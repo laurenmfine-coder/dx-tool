@@ -1969,7 +1969,9 @@ async function sendMessage() {
         specialty: currentTopic?.id?.includes('allergy') || currentTopic?.id?.includes('rhinitis') || currentTopic?.id?.includes('asthma') || currentTopic?.id?.includes('urticaria') || currentTopic?.id?.includes('ige') ? 'ai' : 'em',
         caseContext: `Topic: ${currentTopic?.name}. ${TOPIC_SYSTEM_PROMPTS[currentTopic?.id] || 'This is a standalone topic coaching session. Coach using Socratic questioning -- never give the answer directly. Ask what makes the learner find it themselves.'}`,
         patientMode: false,
-        difficulty: 'standard'
+        difficulty: 'standard',
+        profession: (()=>{ try { var u=JSON.parse(localStorage.getItem('reasondx-user')||'{}'); return u.professionProfile?.professionId||'medicine'; } catch(e){return 'medicine';} })(),
+        profTrack:  (()=>{ try { var u=JSON.parse(localStorage.getItem('reasondx-user')||'{}'); return u.professionProfile?.trackId||null; } catch(e){return null;} })()
       })
     });
 
