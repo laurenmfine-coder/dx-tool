@@ -1201,6 +1201,22 @@ function enterPhase(phase) {
     // Agent 1 / Study 4: embeds phase-2, phase-4, and final justification text
     // via Voyage embed worker, stores to illness_script_sessions for longitudinal
     // encapsulation tracking (Schmidt & Rikers, 2007).
+    // Load episodic memory for StudentModelBus cross-session context
+    if (window.StudentModelBus && window.StudentModelBus.loadEpisodic) {
+      try {
+        var _sbClient = window.supabase ? window.supabase.createClient(
+          'https://lpwbiqpojisqgezycupw.supabase.co',
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0'
+        ) : null;
+        var _userId = window.state && window.state.studentName;
+        if (_sbClient && _userId) {
+          window.StudentModelBus.loadEpisodic(_userId, _sbClient).then(function() {
+            console.log('[StudentModelBus] Episodic memory loaded for', _userId);
+          });
+        }
+      } catch(e) { console.warn('[StudentModelBus] Episodic load failed:', e.message); }
+    }
+
     if (window.IllnessScriptTracer && caseData) {
       window.IllnessScriptTracer.capture(state, caseData).catch(function(e) {
         console.warn('[IllnessScriptTracer] capture error (non-blocking):', e.message);
@@ -2415,6 +2431,8 @@ async function exportStudyData() {
     if (window.RdxPassive) window.RdxPassive.clear();
     if (window.StudentModelBus) window.StudentModelBus.reset();
     if (window.MetaReasoning) window.MetaReasoning._state.currentTheory = null;
+    // Record session start time for StudentModelBus timing context
+    if (window.state) window.state.sessionStartTime = new Date().toISOString();
     if (window.MetaReasoning) window.MetaReasoning._state.theoryHistory = [];
     if (A.ExplainableAgent && window.state) {
       A.ExplainableAgent.logDecision({

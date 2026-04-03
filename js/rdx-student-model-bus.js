@@ -1,474 +1,299 @@
 /**
- * rdx-student-model-bus.js — ReasonDx Student Model Bus
+ * rdx-student-model-bus.js — ReasonDx Unified Student Model Bus
  * ═══════════════════════════════════════════════════════════════
- * A unified, real-time student model that every agent reads.
+ * Aggregates ALL live student signals into a single structured
+ * context block injectable into any agent system prompt.
  *
- * PROBLEM IT SOLVES:
- *   Before this module, each agent (Dr. Patel, patient, debrief,
- *   faculty) received a fragment of what the system collectively
- *   knew about the student. The attending didn't know about
- *   longitudinal anchoring patterns. The patient didn't know about
- *   emotional state. The debrief didn't know the cognitive load
- *   peaked at Phase 3→4. This is the coordination bus that fixes
- *   that siloing.
- *
- * ARCHITECTURE:
- *   The bus maintains four memory layers (analogous to cognitive
- *   architecture theory — cf. Anderson et al., ACT-R; Laird, SOAR):
- *
- *   1. Working memory  — live session state (phase, turn, current dx)
- *   2. Episodic memory — prior session history from Supabase
- *   3. Semantic memory — guideline RAG context (already injected separately)
- *   4. Procedural memory — longitudinal cognitive profile (pattern_tags)
- *
- *   Plus two new real-time streams from rdx-passive.js:
- *   5. Affective state  — ERS valence/arousal from Agent 7
- *   6. Load signature   — CLT phase load from Agent 5
- *
- * OUTPUT:
- *   StudentModelBus.getPromptBlock(options)
- *     Returns a compact plain-text block for injection into any
- *     agent's system prompt. Different agents get different subsets:
- *       - Attending: longitudinal patterns + live load + live affect
- *       - Patient:   live affect + empathy density + question pattern
- *       - Debrief:   full model (all 6 layers)
- *       - Faculty:   full model + research flags
- *
- *   StudentModelBus.update(state, profile, sessionHistory)
- *     Called on every turn from simulation-engine.html after
- *     RdxPassive runs. Updates the live layers from fresh data.
- *
- *   StudentModelBus.getResearchSnapshot()
- *     Returns the structured data object for Supabase storage.
- *     Saved alongside passive_data in rad_study_sessions.
- *
- * AGENT AWARENESS TABLE:
- *   Agent          | Working | Episodic | Procedural | Affective | Load
- *   ─────────────────────────────────────────────────────────────────────
- *   Dr. Patel      |   ✓    |    ✓     |     ✓      |     ✓    |  ✓
- *   Patient voice  |   ✓    |    ✗     |     ✗      |     ✓    |  ✗
- *   Debrief agent  |   ✓    |    ✓     |     ✓      |     ✓    |  ✓
- *   Faculty agent  |   ✓    |    ✓     |     ✓      |     ✓    |  ✓
- *   Case selector  |   ✗    |    ✓     |     ✓      |     ✗    |  ✗
- *
- * THEORETICAL GROUNDING:
- *   Anderson, J. R. et al. (2004). An integrated theory of the mind.
- *     Psychol Rev, 111(4), 1036–1060. (ACT-R memory architecture)
- *   Laird, J. E. (2012). The Soar Cognitive Architecture. MIT Press.
- *   Minsky, M. (1986). Society of Mind. Simon & Schuster.
- *     (specialist agents coordinated by a supervisory process)
- *   Croskerry, P. (2009). A universal model of diagnostic reasoning.
- *     Acad Med, 84(8), 1022–1028. (dual process + affect in reasoning)
- * ═══════════════════════════════════════════════════════════════
+ * AUGMENTED v2 — adds: session timing, time-of-day, persistent
+ * diagnostic miss detection, full episodic cross-session patterns,
+ * and stronger tactical attending directives.
  */
 
-(function (window) {
+(function(window) {
   'use strict';
 
-  // ─── Internal state ───────────────────────────────────────────────────────
+  var _phaseLabels = {
+    1:'Initial Differential', 2:'Justification', 3:'History Taking',
+    4:'Revised Differential', 5:'Physical Exam', 6:'Labs & Imaging',
+    7:'Report Comparison', 8:'Reflection', 9:'Management', 10:'Complete'
+  };
 
   var _bus = {
-    // Layer 1: Working memory — updated every turn
     working: {
-      studentName:    null,
-      trainingYear:   null,
-      currentPhase:   null,
-      phaseLabel:     null,
-      turnCount:      0,
-      currentDx:      [],      // top differential right now
-      sessionId:      null,
-      caseId:         null,
-      caseDiagnosis:  null
+      studentName: null, trainingYear: null, currentPhase: null, phaseLabel: null,
+      turnCount: 0, sessionId: null, caseId: null, currentDx: [],
+      sessionStartTime: null, sessionDurationMin: 0, timeOfDay: null
     },
-
-    // Layer 2: Episodic memory — loaded once at session start from Supabase
-    episodic: {
-      totalPriorSessions: 0,
-      recentSessions:     [],  // last 3: { case_id, target_in_final, anchoring_detected, confidence_score }
-      loaded:             false
-    },
-
-    // Layer 3 (handled externally by rdx-fingerprint.js buildProfileContext)
-    // But we store the key tags here for fast access
-    procedural: {
-      patternTags:            [],
-      anchoringRate:          null,
-      prematureClosureRate:   null,
-      missedPivotRate:        null,
-      avgAccuracy:            null,
-      avgConfidence:          null,
-      avgDxBreadth:           null,
-      loaded:                 false
-    },
-
-    // Layer 5: Affective state — updated every turn from RdxPassive
-    affective: {
-      currentValence:     0,       // -1 to +1, most recent turn
-      currentArousal:     0,       // 0 to 1, most recent turn
-      phase3AvgValence:   null,    // avg during history-taking
-      phase3AvgArousal:   null,
-      trajectory:         'stable',
-      ersRiskFlag:        false,   // neg high-arousal in phase 3 ≥ 2 turns
-      empathyDensity:     0,       // avg empathy signals per patient-facing turn
-      questionPattern:    null     // 'open_first', 'closed_first', 'mixed'
-    },
-
-    // Layer 6: Cognitive load — updated every turn from RdxPassive
-    load: {
-      currentPhaseLoadZ:  null,    // z-score for current phase
-      currentLoadCategory:'normal',
-      peakLoadPhase:      null,
-      peakLoadLabel:      null,
-      trajectory:         'stable',
-      highLoadTurns:      0
-    }
+    episodic:  { totalPriorSessions: 0, recentSessions: [], loaded: false },
+    procedural:{ patternTags: [], dominantErrorMode: null, errorModeConfidence: 0, errorModeLabel: null, loaded: false },
+    affective: { currentValence: 0, currentArousal: 0, phase3AvgValence: null, phase3AvgArousal: null,
+                 trajectory: null, ersRiskFlag: false, empathyDensity: 0, questionPattern: null },
+    semantic:  { driftScore: null, anchorStrength: null, framingQuality: null },
+    load:      { currentPhaseLoadZ: null, currentLoadCategory: 'normal', peakLoadPhase: null,
+                 peakLoadLabel: null, trajectory: null, highLoadTurns: 0 }
   };
 
-  var _phaseLabels = {
-    1: 'Initial Differential', 2: 'Justification',   3: 'History-Taking',
-    4: 'Revised Differential', 5: 'Physical Exam',   6: 'Labs & Imaging',
-    7: 'Report Comparison',    8: 'Closing Reflection', 9: 'Management Plan'
-  };
-
-  // ─── update() ─────────────────────────────────────────────────────────────
-  // Called every turn from simulation-engine.html after passive collectors run.
-
-  function update(state, profile, sessionHistory) {
+  function update(state, passiveData, caseData) {
     if (!state) return;
 
     // Layer 1: Working memory
-    _bus.working.studentName   = state.studentName   || null;
-    _bus.working.trainingYear  = state.trainingYear  || null;
-    _bus.working.currentPhase  = state.currentPhase  || null;
-    _bus.working.phaseLabel    = _phaseLabels[state.currentPhase] || null;
-    _bus.working.turnCount     = state.turnCount     || 0;
-    _bus.working.sessionId     = state.sessionId     || null;
-    _bus.working.caseId        = state.caseId        || null;
+    _bus.working.studentName    = state.studentName   || null;
+    _bus.working.trainingYear   = state.trainingYear  || null;
+    _bus.working.currentPhase   = state.currentPhase  || null;
+    _bus.working.phaseLabel     = _phaseLabels[state.currentPhase] || null;
+    _bus.working.turnCount      = state.turnCount     || 0;
+    _bus.working.sessionId      = state.sessionId     || null;
+    _bus.working.caseId         = caseData ? (caseData.caseId || '') : null;
 
-    // Current differential — last submitted differential array
-    var diffs = state.differentials || {};
-    var latestDx = diffs.phase7 || diffs.phase6 || diffs.phase5 ||
-                   diffs.phase4 || diffs.phase1 || [];
-    _bus.working.currentDx = latestDx.slice(0, 3).map(function(d) {
-      return (d && (d.diagnosis || d.name || d)) || '';
-    }).filter(Boolean);
+    if (!_bus.working.sessionStartTime && state.sessionStartTime) {
+      _bus.working.sessionStartTime = state.sessionStartTime;
+    }
+    if (_bus.working.sessionStartTime) {
+      _bus.working.sessionDurationMin = Math.round(
+        (Date.now() - new Date(_bus.working.sessionStartTime).getTime()) / 60000
+      );
+    }
+    var hr = new Date().getHours();
+    _bus.working.timeOfDay = hr < 6 ? 'night' : hr < 12 ? 'morning' : hr < 18 ? 'afternoon' : hr < 22 ? 'evening' : 'night';
 
-    // Layer 2: Episodic memory (from session history)
-    if (sessionHistory && sessionHistory.length > 0 && !_bus.episodic.loaded) {
-      _bus.episodic.totalPriorSessions = sessionHistory.length;
-      _bus.episodic.recentSessions = sessionHistory.slice(0, 3).map(function(s) {
-        return {
-          caseId:            s.case_id || '?',
-          reachedDiagnosis:  !!s.target_in_final,
-          anchoringDetected: !!s.anchoring_detected,
-          confidenceScore:   s.confidence_score || null
-        };
-      });
-      _bus.episodic.loaded = true;
+    var ddxTurns = (state.turns || []).filter(function(t) {
+      return t.role === 'student' && (t.phase === 1 || t.phase === 2 || t.phase === 4);
+    });
+    if (ddxTurns.length > 0) {
+      var lastDDx = ddxTurns[ddxTurns.length - 1].content || '';
+      var dxList = lastDDx.match(/[A-Z][a-z]+(?:\s+[a-z]+)*/g) || [];
+      _bus.working.currentDx = dxList.slice(0, 5);
     }
 
-    // Layer 4: Procedural memory (from cognitive profile)
-    if (profile && !_bus.procedural.loaded) {
-      _bus.procedural.patternTags          = profile.pattern_tags          || [];
-      _bus.procedural.anchoringRate        = profile.anchoring_rate        || null;
-      _bus.procedural.prematureClosureRate = profile.premature_closure_rate || null;
-      _bus.procedural.missedPivotRate      = profile.missed_pivot_rate     || null;
-      _bus.procedural.avgAccuracy          = profile.avg_target_in_final   || null;
-      _bus.procedural.avgConfidence        = profile.avg_confidence        || null;
-      _bus.procedural.avgDxBreadth         = profile.avg_dx_count_initial  || null;
-      _bus.procedural.loaded               = true;
+    // Layer 3: Procedural (MetaReasoning)
+    if (window.MetaReasoning && state._metaTheory) {
+      var theory = state._metaTheory;
+      _bus.procedural.dominantErrorMode   = theory.dominantErrorMode || null;
+      _bus.procedural.errorModeConfidence = theory.confidence || 0;
+      _bus.procedural.errorModeLabel      = theory.dominantModeLabel || theory.dominantErrorMode || null;
+      _bus.procedural.patternTags         = _inferPatternTags(theory);
+      _bus.procedural.loaded              = true;
     }
 
-    // Layer 5: Affective state — pull from RdxPassive
+    // Layer 4: Affective
+    if (passiveData && passiveData.emotionalState) {
+      var es = passiveData.emotionalState;
+      _bus.affective.currentValence  = es.currentValence  || 0;
+      _bus.affective.currentArousal  = es.currentArousal  || 0;
+      _bus.affective.trajectory      = es.trajectory      || null;
+      _bus.affective.ersRiskFlag     = !!es.ersRiskFlag;
+      if (es.phase3AvgValence !== undefined) _bus.affective.phase3AvgValence = es.phase3AvgValence;
+      if (es.phase3AvgArousal !== undefined) _bus.affective.phase3AvgArousal = es.phase3AvgArousal;
+    }
     if (window.RdxPassive) {
-      var ers = _bus.affective;
-      var erData = window.RdxPassive._data.emotionalState;
-      if (erData && erData.length > 0) {
-        var last = erData[erData.length - 1];
-        ers.currentValence = last.valence;
-        ers.currentArousal = last.arousal;
+      var ersSummary = window.RdxPassive.getEmotionalStateSummary ? window.RdxPassive.getEmotionalStateSummary() : null;
+      if (ersSummary) { _bus.affective.trajectory = ersSummary.trajectory; _bus.affective.ersRiskFlag = ersSummary.ersRiskFlag; }
+      var empSummary = window.RdxPassive.getEmpathySummary ? window.RdxPassive.getEmpathySummary() : null;
+      if (empSummary) _bus.affective.empathyDensity = empSummary.empathyDensity || 0;
+      var qtSummary = window.RdxPassive.getQuestionTypeSummary ? window.RdxPassive.getQuestionTypeSummary() : null;
+      if (qtSummary) _bus.affective.questionPattern = qtSummary.openingPattern || null;
+
+      // Layer 6: Cognitive load
+      var clt = window.RdxPassive.getCognitiveLoadSummary ? window.RdxPassive.getCognitiveLoadSummary() : null;
+      if (clt) {
+        var phaseSig = clt.phaseSignatures && clt.phaseSignatures[String(state.currentPhase)];
+        _bus.load.currentPhaseLoadZ   = phaseSig ? phaseSig.avgLoadZ     : null;
+        _bus.load.currentLoadCategory = phaseSig ? phaseSig.loadCategory : 'normal';
+        _bus.load.peakLoadPhase       = clt.peakLoadPhase;
+        _bus.load.peakLoadLabel       = clt.peakLoadLabel;
+        _bus.load.trajectory          = clt.trajectory;
+        _bus.load.highLoadTurns       = (clt.highLoadTurns || []).length;
       }
-
-      // Phase 3 averages (history-taking affect)
-      var phase3Records = (window.RdxPassive._data.emotionalState || [])
-        .filter(function(r) { return r.phase === 3; });
-      if (phase3Records.length > 0) {
-        ers.phase3AvgValence = Math.round(
-          phase3Records.reduce(function(a,r){return a+r.valence;},0) /
-          phase3Records.length * 100) / 100;
-        ers.phase3AvgArousal = Math.round(
-          phase3Records.reduce(function(a,r){return a+r.arousal;},0) /
-          phase3Records.length * 100) / 100;
-      }
-
-      // ERS summary fields
-      var ersSummary = window.RdxPassive.getEmotionalStateSummary
-        ? window.RdxPassive.getEmotionalStateSummary() : null;
-      if (ersSummary) {
-        ers.trajectory  = ersSummary.trajectory;
-        ers.ersRiskFlag = ersSummary.ersRiskFlag;
-      }
-
-      // Empathy and question pattern
-      var empSummary = window.RdxPassive.getEmpathySummary
-        ? window.RdxPassive.getEmpathySummary() : null;
-      if (empSummary) ers.empathyDensity = empSummary.empathyDensity || 0;
-
-      var qtSummary = window.RdxPassive.getQuestionTypeSummary
-        ? window.RdxPassive.getQuestionTypeSummary() : null;
-      if (qtSummary) ers.questionPattern = qtSummary.openingPattern || null;
     }
 
-    // Layer 6: Cognitive load — pull from RdxPassive
-    if (window.RdxPassive && window.RdxPassive.getCognitiveLoadSummary) {
-      var clt = window.RdxPassive.getCognitiveLoadSummary();
-      if (clt) {
-        var currentPhaseKey = String(state.currentPhase);
-        var phaseSig = clt.phaseSignatures && clt.phaseSignatures[currentPhaseKey];
-        _bus.load.currentPhaseLoadZ    = phaseSig ? phaseSig.avgLoadZ     : null;
-        _bus.load.currentLoadCategory  = phaseSig ? phaseSig.loadCategory : 'normal';
-        _bus.load.peakLoadPhase        = clt.peakLoadPhase;
-        _bus.load.peakLoadLabel        = clt.peakLoadLabel;
-        _bus.load.trajectory           = clt.trajectory;
-        _bus.load.highLoadTurns        = (clt.highLoadTurns || []).length;
+    // Layer 5: Semantic drift
+    if (window.RdxSemanticDrift && state.turns) {
+      var driftData = window.RdxSemanticDrift.analyze ? window.RdxSemanticDrift.analyze(state.turns) : null;
+      if (driftData) {
+        _bus.semantic.driftScore     = driftData.driftScore     || null;
+        _bus.semantic.anchorStrength = driftData.anchorStrength || null;
+        _bus.semantic.framingQuality = driftData.framingQuality || null;
       }
     }
   }
 
-  // ─── getPromptBlock() ─────────────────────────────────────────────────────
-  // Returns a compact plain-text block for injection into agent system prompts.
-  // options.role: 'attending' | 'patient' | 'debrief' | 'faculty'
-  // options.verbose: boolean (default false — keep it tight for live agents)
+  function _inferPatternTags(theory) {
+    if (!theory) return [];
+    var tags = [];
+    var mode = theory.dominantErrorMode;
+    var modeMap = {
+      'ANCHORING': 'anchoring_tendency',
+      'PREMATURE_CLOSURE': 'premature_closure',
+      'HISTORY_GAP': 'history_gap',
+      'NARROW_OPENER': 'narrow_opener',
+      'UNDERCONFIDENT': 'underconfident',
+      'HIGH_COGNITIVE_LOAD': 'cognitive_overload',
+      'CALIBRATED': 'strong_accuracy'
+    };
+    if (modeMap[mode]) tags.push(modeMap[mode]);
+    // Cross-session anchoring reinforcement
+    var recent = _bus.episodic.recentSessions || [];
+    if (recent.filter(function(s){return s.anchoringDetected;}).length >= 2 && !tags.includes('anchoring_tendency')) {
+      tags.push('anchoring_tendency');
+    }
+    if (recent.filter(function(s){return !s.reachedDiagnosis;}).length >= 3) {
+      tags.push('persistent_diagnostic_miss');
+    }
+    return tags;
+  }
+
+  function loadEpisodic(userId, sb) {
+    if (!userId || !sb || _bus.episodic.loaded) return Promise.resolve();
+    return sb.from('rad_study_sessions')
+      .select('case_id, diagnosis, env_history_score, history_score, total_turns, completed_at, passive_data, category')
+      .eq('student_name', userId).eq('status', 'complete')
+      .order('completed_at', { ascending: false }).limit(10)
+      .then(function(r) {
+        if (r.error || !r.data) return;
+        _bus.episodic.totalPriorSessions = r.data.length;
+        _bus.episodic.recentSessions = r.data.slice(0, 5).map(function(s) {
+          var passive = null;
+          try { passive = typeof s.passive_data === 'string' ? JSON.parse(s.passive_data) : s.passive_data; } catch(e) {}
+          return {
+            caseId:           s.case_id,
+            diagnosis:        s.diagnosis,
+            reachedDiagnosis: (s.history_score || 0) >= 1,
+            anchoringDetected:passive && passive.emotionalState && passive.emotionalState.ersRiskFlag,
+            category:         s.category || null,
+            date:             s.completed_at ? s.completed_at.slice(0,10) : null
+          };
+        });
+        _bus.episodic.loaded = true;
+      }).catch(function(){});
+  }
 
   function getPromptBlock(options) {
-    var opts   = options || {};
-    var role   = opts.role || 'attending';
-    var lines  = [];
+    var opts = options || {};
+    var role = opts.role || 'attending';
+    var lines = [];
 
-    lines.push('═══ STUDENT MODEL (ReasonDx live context) ═══');
+    lines.push('═══ STUDENT MODEL ═══');
 
-    // ── Working memory: always included ──────────────────────────────────────
     var w = _bus.working;
     if (w.studentName) {
-      lines.push('Student: ' + w.studentName +
-        (w.trainingYear ? ' (' + w.trainingYear + ')' : ''));
+      lines.push('Student: ' + w.studentName + (w.trainingYear ? ' (' + w.trainingYear + ')' : ''));
     }
-    lines.push('Current phase: ' + (w.phaseLabel || 'unknown') +
-      ' (turn ' + w.turnCount + ')');
-    if (w.currentDx.length > 0) {
-      lines.push('Current top differential: ' + w.currentDx.join(', '));
-    }
+    lines.push('Phase: ' + (w.phaseLabel || 'unknown') + ' · Turn ' + w.turnCount +
+      (w.sessionDurationMin > 0 ? ' · ' + w.sessionDurationMin + 'min' : '') +
+      (w.timeOfDay ? ' · ' + w.timeOfDay : ''));
+    if (w.currentDx.length > 0) lines.push('DDx: ' + w.currentDx.join(', '));
 
-    // ── Affective state: attending, patient, debrief, faculty ─────────────────
-    var aff = _bus.affective;
-    var affLines = [];
-
-    if (aff.currentValence !== 0 || aff.currentArousal !== 0) {
-      var valLabel = aff.currentValence >  0.2 ? 'positive' :
-                     aff.currentValence < -0.2 ? 'negative' : 'neutral';
-      var arLabel  = aff.currentArousal > 0.6 ? 'activated' :
-                     aff.currentArousal < 0.3 ? 'calm'      : 'moderate';
-      affLines.push('Current affect: ' + valLabel + ' valence, ' + arLabel + ' arousal');
-    }
-
+    // Patient role: compact
     if (role === 'patient') {
-      // Patient only needs affect + empathy + question pattern
-      if (affLines.length) lines.push(affLines[0]);
-      if (aff.empathyDensity > 0) {
-        lines.push('Empathy density so far: ' + aff.empathyDensity +
-          ' signals/turn — ' + (aff.empathyDensity >= 1.5 ? 'warm rapport' :
-          aff.empathyDensity >= 0.5 ? 'adequate rapport' : 'low rapport detected'));
+      var aff0 = _bus.affective;
+      if (aff0.currentValence !== 0 || aff0.currentArousal !== 0) {
+        var vl0 = aff0.currentValence > 0.2 ? 'positive' : aff0.currentValence < -0.2 ? 'negative' : 'neutral';
+        var al0 = aff0.currentArousal > 0.6 ? 'activated' : aff0.currentArousal < 0.3 ? 'calm' : 'moderate';
+        lines.push('Affect: ' + vl0 + ', ' + al0);
       }
-      if (aff.questionPattern) {
-        lines.push('Question pattern: ' + aff.questionPattern +
-          (aff.questionPattern === 'closed_first'
-            ? ' — consider being slightly less forthcoming; the student should open up the history'
-            : ''));
+      if (aff0.empathyDensity > 0) {
+        lines.push('Empathy: ' + (aff0.empathyDensity >= 1.5 ? 'warm' : aff0.empathyDensity >= 0.5 ? 'adequate' : 'low — be slightly less forthcoming'));
       }
-      lines.push('═══════════════════════════════════');
+      if (aff0.questionPattern === 'closed_first') lines.push('Qs: closed-first — resist slightly');
+      lines.push('═══════════════════');
       return lines.join('\n');
     }
 
-    // ── Attending, debrief, faculty: add episodic + procedural + load ─────────
-
-    // Episodic memory
+    // Episodic
     var ep = _bus.episodic;
     if (ep.totalPriorSessions > 0) {
       lines.push('');
       lines.push('Prior sessions: ' + ep.totalPriorSessions);
       if (ep.recentSessions.length > 0) {
-        var recStr = ep.recentSessions.map(function(s) {
-          return s.caseId + ': ' +
-            (s.reachedDiagnosis ? '✓ dx' : '✗ missed') +
-            (s.anchoringDetected ? ', anchored' : '') +
-            (s.confidenceScore ? ', confidence ' + s.confidenceScore + '/5' : '');
-        }).join(' | ');
-        lines.push('Recent: ' + recStr);
+        lines.push('Recent: ' + ep.recentSessions.map(function(s) {
+          return s.caseId + ':' + (s.reachedDiagnosis ? '✓' : '✗') + (s.anchoringDetected ? '⚓' : '');
+        }).join(' '));
       }
     }
 
-    // Procedural memory (pattern tags)
+    // Procedural + tactics
     var proc = _bus.procedural;
     if (proc.patternTags.length > 0) {
       lines.push('');
-      lines.push('Longitudinal patterns:');
-      var tagMap = {
-        'anchoring_tendency':   'anchoring bias — tends to maintain initial dx despite contradicting evidence',
-        'premature_closure':    'premature closure — stops revising differential too early',
-        'history_gap':          'history gap — frequently misses critical contextual history',
-        'narrow_opener':        'narrow opener — initial differentials < 2 diagnoses',
-        'broad_thinker':        'broad thinker — initial differentials > 5 diagnoses',
-        'strong_accuracy':      'strong accuracy — reaches correct dx in > 80% of sessions',
-        'underconfident':       'underconfident — accurate but systematically underestimates self'
-      };
-      proc.patternTags.forEach(function(tag) {
-        lines.push('  · ' + (tagMap[tag] || tag));
-      });
-
-      // Attending-specific: tactical instructions based on patterns
+      lines.push('Patterns: ' + proc.patternTags.join(', '));
+      if (proc.dominantErrorMode && proc.dominantErrorMode !== 'CALIBRATED') {
+        lines.push('Active mode: ' + (proc.errorModeLabel || proc.dominantErrorMode) +
+          ' (' + Math.round(proc.errorModeConfidence * 100) + '%)');
+      }
       if (role === 'attending') {
-        lines.push('');
-        lines.push('Attending guidance based on patterns:');
-        if (proc.patternTags.includes('anchoring_tendency')) {
-          lines.push('  → This student anchors. When they commit to a diagnosis, ask: "What single finding would make you reconsider?" Do not let them close prematurely.');
-        }
-        if (proc.patternTags.includes('premature_closure')) {
-          lines.push('  → This student closes early. After their revised differential, ask: "What else are you still considering and why?"');
-        }
-        if (proc.patternTags.includes('history_gap')) {
-          lines.push('  → This student frequently misses critical context. If they have not asked about occupational, environmental, or social history, prompt: "Is there anything in the social or occupational history that might be relevant?"');
-        }
-        if (proc.patternTags.includes('narrow_opener')) {
-          lines.push('  → This student opens with narrow differentials. Encourage breadth early: "What else could explain this presentation?"');
-        }
-        if (proc.patternTags.includes('underconfident')) {
-          lines.push('  → This student is underconfident despite good accuracy. When their reasoning is correct, acknowledge it explicitly: "Walk me through why you think that — that reasoning is sound."');
-        }
+        lines.push('Tactics:');
+        var tactics = {
+          'anchoring_tendency':         '  → ANCHOR: "What single finding would completely change your diagnosis?"',
+          'premature_closure':          '  → CLOSURE: "What are you still holding that you haven\'t ruled out?"',
+          'history_gap':                '  → HISTORY: If no occupation/env by turn 6: "Anything in their daily life relevant here?"',
+          'narrow_opener':              '  → NARROW: "Give me three more diagnoses. What else explains ALL the symptoms?"',
+          'underconfident':             '  → CONFIDENCE: "Stop — that reasoning is correct. Own it. Walk me through why."',
+          'cognitive_overload':         '  → OVERLOAD: "Pause. One sentence: what is your working diagnosis right now?"',
+          'persistent_diagnostic_miss': '  → MISS PATTERN: "What evidence do you NEED before you commit to any diagnosis?"'
+        };
+        proc.patternTags.forEach(function(tag) {
+          if (tactics[tag]) lines.push(tactics[tag]);
+        });
       }
     }
 
-    // Affective state (full)
-    if (affLines.length || aff.phase3AvgValence !== null || aff.ersRiskFlag) {
+    // Affective
+    var aff = _bus.affective;
+    if (aff.currentValence !== 0 || aff.currentArousal !== 0 || aff.ersRiskFlag) {
       lines.push('');
-      lines.push('Affective state:');
-      if (affLines.length) lines.push('  ' + affLines[0]);
-      if (aff.phase3AvgValence !== null) {
-        var p3vLabel = aff.phase3AvgValence >  0.2 ? 'positive' :
-                       aff.phase3AvgValence < -0.2 ? 'negative' : 'neutral';
-        lines.push('  History-taking affect: ' + p3vLabel +
-          ' (valence ' + aff.phase3AvgValence + ')');
-      }
-      if (aff.ersRiskFlag) {
-        lines.push('  ⚠ ERS flag: negative high-arousal during history-taking — increased anchoring risk');
-        if (role === 'attending') {
-          lines.push('  → After history, explicitly ask: "What findings made you most uncertain during that interview?"');
-        }
-      }
-      if (aff.empathyDensity !== undefined) {
-        lines.push('  Empathy density: ' + aff.empathyDensity + ' signals/turn' +
-          (aff.empathyDensity < 0.5 && _bus.working.currentPhase >= 3
-            ? ' — low rapport; patient may be less forthcoming' : ''));
-      }
+      var vl = aff.currentValence > 0.2 ? 'positive' : aff.currentValence < -0.2 ? 'negative' : 'neutral';
+      var al = aff.currentArousal > 0.6 ? 'activated' : aff.currentArousal < 0.3 ? 'calm' : 'moderate';
+      lines.push('Affect: ' + vl + ', ' + al + (aff.trajectory ? ', ' + aff.trajectory : '') +
+        (aff.ersRiskFlag ? ' ⚠ ERS risk' : ''));
     }
 
-    // Cognitive load
+    // Load
     var ld = _bus.load;
     if (ld.currentLoadCategory && ld.currentLoadCategory !== 'normal') {
-      lines.push('');
-      lines.push('Cognitive load:');
-      lines.push('  Current phase: ' + ld.currentLoadCategory +
-        (ld.currentPhaseLoadZ !== null ? ' (z=' + ld.currentPhaseLoadZ + ')' : ''));
+      lines.push('Load: ' + ld.currentLoadCategory.toUpperCase() +
+        (ld.trajectory ? ' · ' + ld.trajectory : '') +
+        (ld.highLoadTurns > 0 ? ' · ' + ld.highLoadTurns + ' high turns' : ''));
       if (ld.currentLoadCategory === 'high' && role === 'attending') {
-        lines.push('  → Student appears cognitively loaded at this phase. Simplify your next question. One thing at a time.');
-      }
-      if (ld.peakLoadLabel) {
-        lines.push('  Session peak load: ' + ld.peakLoadLabel);
-      }
-      if (ld.trajectory === 'escalating') {
-        lines.push('  Load trajectory: escalating across session');
-        if (role === 'attending') {
-          lines.push('  → Consider a brief consolidating question: "What is your working diagnosis right now in one sentence?"');
-        }
+        lines.push('  → LOAD: "Pause. One diagnosis, one sentence. Then we rebuild."');
       }
     }
 
-    // Research flags (faculty only)
-    if (role === 'faculty') {
+    // Session fatigue
+    if (role === 'attending' && w.sessionDurationMin > 45) {
       lines.push('');
-      lines.push('Research flags:');
-      lines.push('  ERS risk: ' + (aff.ersRiskFlag ? 'YES — Study 10 candidate' : 'no'));
-      lines.push('  Load trajectory: ' + (ld.trajectory || 'unknown'));
-      lines.push('  Anchoring detected this session: pending');
+      lines.push('Session: ' + w.sessionDurationMin + 'min — watch for fatigue, consider shorter loops.');
     }
 
-    lines.push('═══════════════════════════════════');
+    lines.push('═══════════════════');
     return lines.join('\n');
   }
 
-  // ─── getResearchSnapshot() ────────────────────────────────────────────────
-  // Structured data for Supabase storage alongside passive_data.
-  // Saved at session end.
-
   function getResearchSnapshot() {
     return {
-      working:    _bus.working,
-      episodic: {
-        totalPriorSessions: _bus.episodic.totalPriorSessions,
-        recentSessionCount: _bus.episodic.recentSessions.length
-      },
-      procedural: {
-        patternTags:          _bus.procedural.patternTags,
-        anchoringRate:        _bus.procedural.anchoringRate,
-        prematureClosureRate: _bus.procedural.prematureClosureRate,
-        avgAccuracy:          _bus.procedural.avgAccuracy
-      },
-      affective: {
-        finalValence:       _bus.affective.currentValence,
-        finalArousal:       _bus.affective.currentArousal,
-        phase3AvgValence:   _bus.affective.phase3AvgValence,
-        phase3AvgArousal:   _bus.affective.phase3AvgArousal,
-        ersRiskFlag:        _bus.affective.ersRiskFlag,
-        empathyDensity:     _bus.affective.empathyDensity,
-        questionPattern:    _bus.affective.questionPattern,
-        trajectory:         _bus.affective.trajectory
-      },
-      load: {
-        peakLoadPhase:        _bus.load.peakLoadPhase,
-        peakLoadLabel:        _bus.load.peakLoadLabel,
-        loadTrajectory:       _bus.load.trajectory,
-        highLoadTurnCount:    _bus.load.highLoadTurns,
-        currentLoadCategory:  _bus.load.currentLoadCategory
-      }
+      sessionId: _bus.working.sessionId, caseId: _bus.working.caseId,
+      studentName: _bus.working.studentName, trainingYear: _bus.working.trainingYear,
+      finalPhase: _bus.working.currentPhase, totalTurns: _bus.working.turnCount,
+      sessionDurationMin: _bus.working.sessionDurationMin, timeOfDay: _bus.working.timeOfDay,
+      patternTags: _bus.procedural.patternTags, dominantErrorMode: _bus.procedural.dominantErrorMode,
+      errorModeConfidence: _bus.procedural.errorModeConfidence,
+      finalAffectValence: _bus.affective.currentValence, finalAffectArousal: _bus.affective.currentArousal,
+      ersRiskFlag: _bus.affective.ersRiskFlag, empathyDensity: _bus.affective.empathyDensity,
+      questionPattern: _bus.affective.questionPattern, finalLoadCategory: _bus.load.currentLoadCategory,
+      highLoadTurns: _bus.load.highLoadTurns, semanticDrift: _bus.semantic.driftScore,
+      episodicLoaded: _bus.episodic.loaded, priorSessions: _bus.episodic.totalPriorSessions,
+      capturedAt: new Date().toISOString()
     };
   }
 
-  // ─── getRaw() — for debugging and ExplainableAgent logging ───────────────
-  function getRaw() { return _bus; }
-
-  // ─── reset() — called at simulation start ────────────────────────────────
   function reset() {
-    _bus.working    = { studentName:null, trainingYear:null, currentPhase:null,
-                        phaseLabel:null, turnCount:0, currentDx:[], sessionId:null,
-                        caseId:null, caseDiagnosis:null };
+    _bus.working    = { studentName:null, trainingYear:null, currentPhase:null, phaseLabel:null, turnCount:0, sessionId:null, caseId:null, currentDx:[], sessionStartTime:null, sessionDurationMin:0, timeOfDay:null };
     _bus.episodic   = { totalPriorSessions:0, recentSessions:[], loaded:false };
-    _bus.procedural = { patternTags:[], anchoringRate:null, prematureClosureRate:null,
-                        missedPivotRate:null, avgAccuracy:null, avgConfidence:null,
-                        avgDxBreadth:null, loaded:false };
-    _bus.affective  = { currentValence:0, currentArousal:0, phase3AvgValence:null,
-                        phase3AvgArousal:null, trajectory:'stable', ersRiskFlag:false,
-                        empathyDensity:0, questionPattern:null };
-    _bus.load       = { currentPhaseLoadZ:null, currentLoadCategory:'normal',
-                        peakLoadPhase:null, peakLoadLabel:null, trajectory:'stable',
-                        highLoadTurns:0 };
+    _bus.procedural = { patternTags:[], dominantErrorMode:null, errorModeConfidence:0, errorModeLabel:null, loaded:false };
+    _bus.affective  = { currentValence:0, currentArousal:0, phase3AvgValence:null, phase3AvgArousal:null, trajectory:null, ersRiskFlag:false, empathyDensity:0, questionPattern:null };
+    _bus.semantic   = { driftScore:null, anchorStrength:null, framingQuality:null };
+    _bus.load       = { currentPhaseLoadZ:null, currentLoadCategory:'normal', peakLoadPhase:null, peakLoadLabel:null, trajectory:null, highLoadTurns:0 };
   }
 
-  // ─── Export ───────────────────────────────────────────────────────────────
-  window.StudentModelBus = {
-    update:              update,
-    getPromptBlock:      getPromptBlock,
-    getResearchSnapshot: getResearchSnapshot,
-    getRaw:              getRaw,
-    reset:               reset
-  };
+  window.StudentModelBus = { update:update, getPromptBlock:getPromptBlock, getResearchSnapshot:getResearchSnapshot, loadEpisodic:loadEpisodic, reset:reset, _bus:_bus };
 
 })(window);
