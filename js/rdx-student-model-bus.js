@@ -18,6 +18,59 @@
     7:'Report Comparison', 8:'Reflection', 9:'Management', 10:'Complete'
   };
 
+  // ── PROFESSION ERROR MODE DEFINITIONS ──────────────────────────────────────
+  // Known systematic reasoning errors by profession, grounded in education lit.
+  var PROFESSION_ERROR_MODES = {
+    medicine:  ['anchoring_tendency','premature_closure','availability_bias','commission_bias'],
+    pa:        ['anchoring_tendency','premature_closure','availability_bias','threshold_confusion'],
+    pharmacy:  ['drug_class_anchoring','patient_factor_neglect','mechanism_skip','polypharmacy_tunnel'],
+    optometry: ['ocular_anchoring','systemic_miss','neuro_underweight','bilateral_symmetry_assumption'],
+    dentistry: ['local_anchoring','systemic_miss','pharmacology_gap','pain_attribution_error'],
+    pt:        ['structural_anchoring','systemic_miss','movement_tunnel','red_flag_under_screen'],
+    ot:        ['functional_skip','diagnosis_avoidance','occupational_lens_delay','cognitive_under_screen'],
+    nursing:   ['protocol_anchoring','physician_deference_bias','medication_error_blind','assessment_documentation_gap'],
+    mbs:       ['content_overload','mechanism_fragmentation','clinical_bridge_gap','uncertainty_intolerance'],
+    other:     ['anchoring_tendency','premature_closure']
+  };
+
+  // ── EPA FRAMEWORK BY PROFESSION ────────────────────────────────────────────
+  var PROFESSION_EPA_FRAMEWORKS = {
+    medicine:  { name:'AAMC Core EPAs', count:13, source:'AAMC 2014',
+                 keyEPAs:['Gather history & perform exam','Prioritize DDx','Recommend/interpret tests','Enter orders/prescriptions','Document clinical encounter','Oral presentation','Form clinical questions','Give/receive handover','Collaborate as team member','Recognize urgent situations','Obtain informed consent','Perform general procedures','Identify system failures'] },
+    pa:        { name:'ARC-PA Competencies', count:6, source:'ARC-PA 2020',
+                 keyEPAs:['Medical Knowledge','Interpersonal & Communication Skills','Patient Care','Professionalism','Practice-Based Learning','Systems-Based Practice'] },
+    pharmacy:  { name:'ACPE Standards 2016', count:4, source:'ACPE 2016',
+                 keyEPAs:['Foundational Knowledge','Essentials for Practice','Approach to Practice','Personal/Professional Development'] },
+    optometry: { name:'ACOE Standards', count:4, source:'ACOE 2019',
+                 keyEPAs:['Patient Care','Medical Knowledge','Practice-Based Learning','Interpersonal/Communication'] },
+    dentistry: { name:'CODA Standards', count:5, source:'CODA 2021',
+                 keyEPAs:['Critical Thinking','Professionalism','Communication','Health Promotion','Patient Care'] },
+    pt:        { name:'CAPTE EPAs', count:5, source:'CAPTE 2020',
+                 keyEPAs:['Clinical Reasoning','Examination','Evaluation/Diagnosis','Intervention','Patient Management'] },
+    ot:        { name:'ACOTE Standards', count:5, source:'ACOTE 2018',
+                 keyEPAs:['Occupational Profile','Analysis of Participation','Intervention Planning','Intervention Implementation','Outcomes'] },
+    nursing:   { name:'AACN Essentials', count:10, source:'AACN 2021',
+                 keyEPAs:['Liberal Education','Leadership','Evidence-Based Practice','Information Management','Healthcare Policy','Interprofessional Collaboration','Clinical Prevention','Professionalism','Baccalaureate Generalist Practice'] },
+    mbs:       { name:'MCAT Competencies', count:4, source:'AAMC 2015',
+                 keyEPAs:['Biological/Biochemical Foundations','Chemical/Physical Foundations','Psychological/Social Foundations','Critical Analysis & Reasoning'] },
+    other:     { name:'General Health Professions', count:4, source:'Generic',
+                 keyEPAs:['Clinical Knowledge','Clinical Skills','Communication','Professionalism'] }
+  };
+
+  // ── COACHING LANGUAGE REGISTER BY PROFESSION ──────────────────────────────
+  var PROFESSION_COACHING_REGISTER = {
+    medicine:  { attendingTitle:'Attending Physician', settingDefault:'Emergency Department',   mechanismFrame:'pathophysiology',      actionFrame:'diagnose and treat',         uncertaintyNorm:'tolerate and act' },
+    pa:        { attendingTitle:'Supervising Physician',settingDefault:'Primary Care Clinic',    mechanismFrame:'pathophysiology',      actionFrame:'assess and manage',          uncertaintyNorm:'escalate when needed' },
+    pharmacy:  { attendingTitle:'Clinical Pharmacist',  settingDefault:'Pharmacy Consult',       mechanismFrame:'receptor/enzyme/PK-PD',actionFrame:'optimize pharmacotherapy',   uncertaintyNorm:'verify before dispensing' },
+    optometry: { attendingTitle:'Attending Optometrist',settingDefault:'Eye Clinic',             mechanismFrame:'ocular-systemic pathway',actionFrame:'assess and co-manage',      uncertaintyNorm:'refer when systemic' },
+    dentistry: { attendingTitle:'Attending Dentist',    settingDefault:'Dental Clinic',          mechanismFrame:'oral-systemic pathway', actionFrame:'diagnose and treat/refer',   uncertaintyNorm:'refer when systemic' },
+    pt:        { attendingTitle:'Clinical Instructor',  settingDefault:'Outpatient PT Clinic',   mechanismFrame:'movement & neuromuscular',actionFrame:'examine and treat',        uncertaintyNorm:'screen and refer' },
+    ot:        { attendingTitle:'Supervising OT',       settingDefault:'Rehabilitation Setting', mechanismFrame:'functional & occupational',actionFrame:'evaluate and intervene',  uncertaintyNorm:'screen and refer' },
+    nursing:   { attendingTitle:'Charge Nurse/Preceptor',settingDefault:'Medical-Surgical Floor',mechanismFrame:'pathophysiology',      actionFrame:'assess, monitor, advocate',  uncertaintyNorm:'communicate and escalate' },
+    mbs:       { attendingTitle:'Faculty Mentor',       settingDefault:'Pre-Health Tutorial',    mechanismFrame:'basic science mechanism',actionFrame:'reason and explain',        uncertaintyNorm:'identify the gap' },
+    other:     { attendingTitle:'Clinical Supervisor',  settingDefault:'Clinical Setting',       mechanismFrame:'pathophysiology',      actionFrame:'assess and manage',          uncertaintyNorm:'escalate when needed' }
+  };
+
   var _bus = {
     working: {
       studentName: null, trainingYear: null, currentPhase: null, phaseLabel: null,
@@ -30,7 +83,20 @@
                  trajectory: null, ersRiskFlag: false, empathyDensity: 0, questionPattern: null },
     semantic:  { driftScore: null, anchorStrength: null, framingQuality: null },
     load:      { currentPhaseLoadZ: null, currentLoadCategory: 'normal', peakLoadPhase: null,
-                 peakLoadLabel: null, trajectory: null, highLoadTurns: 0 }
+                 peakLoadLabel: null, trajectory: null, highLoadTurns: 0 },
+    // ── LAYER 7: PROFESSION ────────────────────────────────────────────────
+    professional: {
+      professionId:       null,   // medicine | pa | pharmacy | optometry | dentistry | pt | ot | nursing | mbs | other
+      trackId:            null,   // e.g. pa_clinical, pharmd_p3_p4
+      programName:        null,
+      yearOfTraining:     null,
+      boardExamTarget:    null,
+      epaFramework:       null,   // populated from PROFESSION_EPA_FRAMEWORKS
+      coachingRegister:   null,   // populated from PROFESSION_COACHING_REGISTER
+      knownErrorModes:    [],     // populated from PROFESSION_ERROR_MODES
+      baselineScores:     null,   // from baseline-assessment.html
+      loaded:             false
+    }
   };
 
   function update(state, passiveData, caseData) {
@@ -63,6 +129,28 @@
       var lastDDx = ddxTurns[ddxTurns.length - 1].content || '';
       var dxList = lastDDx.match(/[A-Z][a-z]+(?:\s+[a-z]+)*/g) || [];
       _bus.working.currentDx = dxList.slice(0, 5);
+    }
+
+    // Layer 7: Professional identity (loaded from localStorage)
+    if (!_bus.professional.loaded) {
+      try {
+        var _u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        var _pp = _u.professionProfile || {};
+        var _pid = _pp.professionId || null;
+        if (_pid) {
+          _bus.professional.professionId     = _pid;
+          _bus.professional.trackId          = _pp.trackId || null;
+          _bus.professional.programName      = _pp.programName || null;
+          _bus.professional.yearOfTraining   = _pp.yearOfTraining || null;
+          _bus.professional.epaFramework     = PROFESSION_EPA_FRAMEWORKS[_pid] || PROFESSION_EPA_FRAMEWORKS['other'];
+          _bus.professional.coachingRegister = PROFESSION_COACHING_REGISTER[_pid] || PROFESSION_COACHING_REGISTER['other'];
+          _bus.professional.knownErrorModes  = PROFESSION_ERROR_MODES[_pid] || PROFESSION_ERROR_MODES['other'];
+          _bus.professional.boardExamTarget  = _bus.professional.epaFramework ? _bus.professional.epaFramework.name : null;
+          var _bs = localStorage.getItem('rdx-baseline-scores');
+          _bus.professional.baselineScores   = _bs ? JSON.parse(_bs) : null;
+          _bus.professional.loaded           = true;
+        }
+      } catch(e) {}
     }
 
     // Layer 3: Procedural (MetaReasoning)
@@ -264,6 +352,54 @@
       lines.push('Session: ' + w.sessionDurationMin + 'min — watch for fatigue, consider shorter loops.');
     }
 
+    // Profession context
+    var prof = _bus.professional;
+    if (prof.loaded && prof.professionId) {
+      lines.push('');
+      lines.push('── PROFESSION CONTEXT ──');
+      lines.push('Profession: ' + prof.professionId.toUpperCase() +
+        (prof.trackId ? ' / ' + prof.trackId : '') +
+        (prof.programName ? ' @ ' + prof.programName : ''));
+      if (prof.coachingRegister) {
+        lines.push('Supervisor role: ' + prof.coachingRegister.attendingTitle);
+        lines.push('Mechanism frame: ' + prof.coachingRegister.mechanismFrame);
+        lines.push('Action frame: ' + prof.coachingRegister.actionFrame);
+        lines.push('Uncertainty norm: ' + prof.coachingRegister.uncertaintyNorm);
+      }
+      if (prof.epaFramework) {
+        lines.push('Competency framework: ' + prof.epaFramework.name);
+      }
+      if (prof.knownErrorModes && prof.knownErrorModes.length > 0) {
+        lines.push('Known profession error modes: ' + prof.knownErrorModes.join(', '));
+      }
+      if (prof.baselineScores && prof.baselineScores._composite !== null) {
+        lines.push('Baseline reasoning score: ' + Math.round(prof.baselineScores._composite * 100) + '%');
+        // Flag specific weak dimensions
+        var weakDims = Object.entries(prof.baselineScores)
+          .filter(function(e) { return e[0] !== '_composite' && e[1] !== null && e[1] < 0.5; })
+          .map(function(e) { return e[0].replace(/_/g,' '); });
+        if (weakDims.length > 0) lines.push('Baseline weak dimensions: ' + weakDims.join(', '));
+      }
+      if (role === 'attending' && prof.knownErrorModes) {
+        var profTactics = {
+          drug_class_anchoring:         '  → PHARM-ANCHOR: \"You named the drug class — what patient-specific factor changes that choice?\"',
+          patient_factor_neglect:       '  → PHARM-PATIENT: \"Before the drug: what about THIS patient changes the calculation?\"',
+          mechanism_skip:               '  → PHARM-MECH: \"What receptor or enzyme is this drug actually acting on in this patient right now?\"',
+          ocular_anchoring:             '  → OPT-ANCHOR: \"You found it in the eye — what systemic disease puts this finding on your differential?\"',
+          systemic_miss:                '  → SYSTEMIC: \"What systemic disease presents exactly this way? Have you screened for it?\"',
+          structural_anchoring:         '  → PT-ANCHOR: \"Structure explains the pain — what systemic red flag are you actively ruling out?\"',
+          red_flag_under_screen:        '  → PT-SCREEN: \"Walk me through your red flag screen for this presentation.\"',
+          functional_skip:              '  → OT-FUNCTION: \"How is this impacting their ability to perform their meaningful daily activities?\"',
+          protocol_anchoring:           '  → NURS-PROTOCOL: \"The protocol says X — but what does THIS patient\'s clinical picture say?\"',
+          mechanism_fragmentation:      '  → MBS-CONNECT: \"You know the mechanism — now connect it to what the patient would actually experience.\"',
+          clinical_bridge_gap:          '  → MBS-BRIDGE: \"You explained the science — now walk me through what that means for the patient in front of you.\"'
+        };
+        prof.knownErrorModes.forEach(function(mode) {
+          if (profTactics[mode]) lines.push(profTactics[mode]);
+        });
+      }
+    }
+
     lines.push('═══════════════════');
     return lines.join('\n');
   }
@@ -281,6 +417,17 @@
       questionPattern: _bus.affective.questionPattern, finalLoadCategory: _bus.load.currentLoadCategory,
       highLoadTurns: _bus.load.highLoadTurns, semanticDrift: _bus.semantic.driftScore,
       episodicLoaded: _bus.episodic.loaded, priorSessions: _bus.episodic.totalPriorSessions,
+      // Profession research fields
+      professionId:       _bus.professional.professionId,
+      trackId:            _bus.professional.trackId,
+      programName:        _bus.professional.programName,
+      yearOfTraining:     _bus.professional.yearOfTraining,
+      boardExamTarget:    _bus.professional.boardExamTarget,
+      baselineComposite:  _bus.professional.baselineScores ? _bus.professional.baselineScores._composite : null,
+      baselineWeakDims:   _bus.professional.baselineScores ?
+        Object.entries(_bus.professional.baselineScores)
+          .filter(function(e){ return e[0] !== '_composite' && e[1] !== null && e[1] < 0.5; })
+          .map(function(e){ return e[0]; }) : [],
       capturedAt: new Date().toISOString()
     };
   }
@@ -292,6 +439,7 @@
     _bus.affective  = { currentValence:0, currentArousal:0, phase3AvgValence:null, phase3AvgArousal:null, trajectory:null, ersRiskFlag:false, empathyDensity:0, questionPattern:null };
     _bus.semantic   = { driftScore:null, anchorStrength:null, framingQuality:null };
     _bus.load       = { currentPhaseLoadZ:null, currentLoadCategory:'normal', peakLoadPhase:null, peakLoadLabel:null, trajectory:null, highLoadTurns:0 };
+    // Don't reset professional — it's session-persistent from localStorage
   }
 
   window.StudentModelBus = { update:update, getPromptBlock:getPromptBlock, getResearchSnapshot:getResearchSnapshot, loadEpisodic:loadEpisodic, reset:reset, _bus:_bus };
