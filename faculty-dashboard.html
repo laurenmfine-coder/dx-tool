@@ -208,6 +208,7 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--bg);
     <a href="virtual-emr.html" class="fac-nav-link">← Virtual EMR</a>
     <a href="analytics-dashboard.html" class="fac-nav-link">Analytics</a>
     <a href="cohort-analytics.html" class="fac-nav-link">Cohort</a>
+    <a href="ipe-crda.html" class="fac-nav-link" style="color:#34D399">🤝 IPE Lab</a>
     <a href="faculty-agent.html" class="fac-nav-link" style="color:#f59e0b">✦ Faculty Agent</a>
     <a href="faculty-ai-report.html" class="fac-nav-link" style="color:#f59e0b">✦ AI Report</a>
     <a href="osce-station.html" class="fac-nav-link" style="color:#f59e0b">✦ OSCE Station</a>
@@ -249,12 +250,18 @@ body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--bg);
     <button class="fac-sidebar-btn" onclick="showView('studentview')" id="sb-studentview" style="border-left:3px solid #7C3AED">
       👁️ Student View
     </button>
+    <button class="fac-sidebar-btn" onclick="showView('profession-cohort')" id="sb-profession-cohort" style="border-left:3px solid #1A7A4A">
+      🏥 Profession Cohorts <span class="fac-sb-badge green">NEW</span>
+    </button>
     <div class="fac-sidebar-section" style="margin-top:12px">Quick Actions</div>
     <button class="fac-sidebar-btn" onclick="window.location.href='virtual-emr.html'">
       🏥 Enter EMR
     </button>
     <button class="fac-sidebar-btn" onclick="window.location.href='cohort-analytics.html'">
       🎓 Cohort View
+    </button>
+    <button class="fac-sidebar-btn" onclick="window.location.href='ipe-crda.html'">
+      🤝 IPE Lab
     </button>
   </div>
 
@@ -485,14 +492,15 @@ function showView(view) {
 
   var main = document.getElementById('facMain');
   switch(view) {
-    case 'overview':    main.innerHTML = renderOverview();    break;
-    case 'submissions': main.innerHTML = renderSubmissions(); break;
-    case 'roster':      main.innerHTML = renderRoster();      break;
-    case 'assignments': main.innerHTML = renderAssignments(); break;
-    case 'analytics':   main.innerHTML = renderAnalytics();   break;
-    case 'coverage':    main.innerHTML = renderCoverage();    break;
-    case 'studentview': main.innerHTML = renderStudentView(); break;
-    default:            main.innerHTML = renderOverview();
+    case 'overview':          main.innerHTML = renderOverview();         break;
+    case 'submissions':       main.innerHTML = renderSubmissions();      break;
+    case 'roster':            main.innerHTML = renderRoster();           break;
+    case 'assignments':       main.innerHTML = renderAssignments();      break;
+    case 'analytics':         main.innerHTML = renderAnalytics();        break;
+    case 'coverage':          main.innerHTML = renderCoverage();         break;
+    case 'studentview':       main.innerHTML = renderStudentView();      break;
+    case 'profession-cohort': main.innerHTML = renderProfessionCohort(); break;
+    default:                  main.innerHTML = renderOverview();
   }
 }
 
@@ -2227,6 +2235,225 @@ function renderCoverage() {
   setTimeout(loadCoverageData, 50);
 
   return html;
+}
+
+// ── PROFESSION COHORT VIEW ────────────────────────────────────────────────────
+function renderProfessionCohort() {
+  var SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+  var PROF_LABELS = {
+    medicine:'Medicine',pa:'Physician Assistant',pharmacy:'Pharmacy',
+    optometry:'Optometry',dentistry:'Dentistry',pt:'Physical Therapy',
+    ot:'Occupational Therapy',nursing:'Nursing',mbs:'Biomedical Sciences',other:'Other'
+  };
+  var PROF_ICONS = {
+    medicine:'🩺',pa:'🏥',pharmacy:'💊',optometry:'👁️',dentistry:'🦷',
+    pt:'🦴',ot:'🖐️',nursing:'💉',mbs:'🔬',other:'⚕️'
+  };
+  var PROF_COLORS = {
+    medicine:'#2874A6',pa:'#1A7A4A',pharmacy:'#7B2D8B',optometry:'#C0622F',
+    dentistry:'#2E86AB',pt:'#D4500A',ot:'#5C6BC0',nursing:'#00897B',mbs:'#E67E22',other:'#607D8B'
+  };
+
+  var html = '<div style="padding:24px">';
+  html += '<div style="margin-bottom:24px">';
+  html += '<div style="font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:6px">🏥 Profession Cohort Comparison</div>';
+  html += '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">Reasoning development across health professions programs. Data updates as students complete cases and weekly briefs.</div>';
+
+  // Research study status card
+  html += '<div style="background:linear-gradient(135deg,#1A2332,#2874A6);color:white;border-radius:12px;padding:18px 20px;margin-bottom:20px">';
+  html += '<div style="font-weight:700;margin-bottom:6px">📊 Multi-Profession Research Study</div>';
+  html += '<div style="font-size:12px;opacity:0.85;line-height:1.6">Participants with research consent are contributing to a longitudinal study on clinical reasoning development across health professions. ';
+  html += 'Data is de-identified and exportable via the Research tab. ';
+  html += '<a href="/research.html" style="color:#93C5FD;font-weight:600">View Study Protocol →</a></div>';
+  html += '<div id="pcv-consent-count" style="margin-top:10px;font-size:12px;opacity:0.7">Loading consent statistics...</div>';
+  html += '</div>';
+
+  // Profession summary grid
+  html += '<div id="pcv-prof-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:24px">';
+  html += '<div style="color:var(--text-secondary);font-size:13px;padding:20px;text-align:center">Loading cohort data...</div>';
+  html += '</div>';
+
+  // Dimension comparison table
+  html += '<div style="background:white;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px">';
+  html += '<div style="padding:16px 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px">Reasoning Dimension Comparison by Profession</div>';
+  html += '<div style="overflow-x:auto">';
+  html += '<table style="width:100%;border-collapse:collapse;font-size:12px" id="pcv-dim-table">';
+  html += '<tr style="background:#f8fafc"><th style="padding:10px 14px;text-align:left;font-weight:700;color:var(--text-secondary)">Profession</th>';
+  ['Diagnostic Accuracy','Anchoring Rate','History Score','Premature Closure','Calibrated Score'].forEach(function(h) {
+    html += '<th style="padding:10px 14px;text-align:center;font-weight:700;color:var(--text-secondary)">' + h + '</th>';
+  });
+  html += '</tr>';
+  html += '<tr id="pcv-table-loading"><td colspan="6" style="padding:20px;text-align:center;color:var(--text-secondary)">Loading...</td></tr>';
+  html += '</table></div></div>';
+
+  // Error mode comparison
+  html += '<div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px">';
+  html += '<div style="font-weight:700;font-size:14px;margin-bottom:14px">Dominant Error Modes by Profession</div>';
+  html += '<div id="pcv-error-modes" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px">';
+  html += '<div style="color:var(--text-secondary);font-size:13px">Loading...</div>';
+  html += '</div></div>';
+
+  // CRDA sessions
+  html += '<div style="background:white;border:1px solid var(--border);border-radius:12px;padding:20px">';
+  html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">';
+  html += '<div style="font-weight:700;font-size:14px">Recent IPE CRDA Sessions</div>';
+  html += '<a href="/ipe-crda.html" style="font-size:12px;font-weight:700;color:var(--primary);text-decoration:none;padding:5px 12px;border:1px solid var(--border);border-radius:6px">+ New IPE Session</a>';
+  html += '</div>';
+  html += '<div id="pcv-crda-sessions" style="font-size:13px;color:var(--text-secondary)">Loading CRDA sessions...</div>';
+  html += '</div>';
+
+  html += '</div></div>';
+
+  // Load data async
+  setTimeout(function() { loadProfessionCohortData(SB_URL, SB_KEY, PROF_LABELS, PROF_ICONS, PROF_COLORS); }, 100);
+
+  return html;
+}
+
+async function loadProfessionCohortData(SB_URL, SB_KEY, PROF_LABELS, PROF_ICONS, PROF_COLORS) {
+  var headers = { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY };
+
+  try {
+    // Load profession cohort summary
+    var res = await fetch(SB_URL + '/rest/v1/profiles?select=profession_id,baseline_complete,research_consent&profession_id=not.is.null', { headers: headers });
+    var profiles = await res.json();
+
+    if (!Array.isArray(profiles)) {
+      document.getElementById('pcv-prof-grid').innerHTML = '<div style="color:var(--text-secondary);font-size:13px;padding:20px;grid-column:1/-1">Run Supabase migration to enable cohort data. See auth/profession-coach-migration.sql.</div>';
+      return;
+    }
+
+    // Aggregate by profession
+    var byCohort = {};
+    profiles.forEach(function(p) {
+      var pid = p.profession_id || 'other';
+      if (!byCohort[pid]) byCohort[pid] = { total: 0, baseline: 0, consent: 0 };
+      byCohort[pid].total++;
+      if (p.baseline_complete) byCohort[pid].baseline++;
+      if (p.research_consent)  byCohort[pid].consent++;
+    });
+
+    // Consent count
+    var totalConsent = profiles.filter(function(p) { return p.research_consent; }).length;
+    var ccEl = document.getElementById('pcv-consent-count');
+    if (ccEl) ccEl.textContent = totalConsent + ' of ' + profiles.length + ' participants have consented to research data collection';
+
+    // Profession grid
+    var gridEl = document.getElementById('pcv-prof-grid');
+    if (gridEl && Object.keys(byCohort).length > 0) {
+      gridEl.innerHTML = Object.entries(byCohort).map(function(e) {
+        var pid = e[0], data = e[1];
+        var color = PROF_COLORS[pid] || '#607D8B';
+        var label = PROF_LABELS[pid] || pid;
+        var icon  = PROF_ICONS[pid] || '⚕️';
+        var baselinePct = data.total > 0 ? Math.round(data.baseline / data.total * 100) : 0;
+        return '<div style="background:white;border:2px solid ' + color + '20;border-radius:12px;padding:16px;border-top:4px solid ' + color + '">' +
+          '<div style="font-size:1.4rem;margin-bottom:8px">' + icon + '</div>' +
+          '<div style="font-weight:700;font-size:0.9rem;margin-bottom:10px">' + label + '</div>' +
+          '<div style="font-size:0.78rem;color:var(--text-secondary);line-height:1.8">' +
+            '<div><strong>' + data.total + '</strong> registered</div>' +
+            '<div><strong>' + data.baseline + '</strong> baseline complete (' + baselinePct + '%)</div>' +
+            '<div><strong>' + data.consent + '</strong> research consent</div>' +
+          '</div></div>';
+      }).join('');
+    } else if (gridEl) {
+      gridEl.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;padding:20px;grid-column:1/-1">No profession profile data yet. Students need to complete the profession onboarding.</div>';
+    }
+
+    // Load session data for dimension comparison
+    var sessRes = await fetch(SB_URL + '/rest/v1/rad_study_sessions?select=profession_id,target_in_final,anchoring_detected,premature_closure,env_history_score,calibrated_composite&profession_id=not.is.null&order=created_at.desc&limit=500', { headers: headers });
+    var sessions = await sessRes.json();
+
+    if (Array.isArray(sessions) && sessions.length > 0) {
+      var byProf = {};
+      sessions.forEach(function(s) {
+        var pid = s.profession_id || 'other';
+        if (!byProf[pid]) byProf[pid] = [];
+        byProf[pid].push(s);
+      });
+
+      // Dimension table
+      var tableEl = document.getElementById('pcv-dim-table');
+      if (tableEl) {
+        var rowsHTML = '';
+        Object.entries(byProf).forEach(function(e) {
+          var pid = e[0], ss = e[1];
+          var n = ss.length;
+          var acc = Math.round(ss.filter(function(s){return s.target_in_final;}).length / n * 100);
+          var anch = Math.round(ss.filter(function(s){return s.anchoring_detected;}).length / n * 100);
+          var hist = Math.round(ss.reduce(function(a,s){return a+(s.env_history_score||0);},0) / n * 10) / 10;
+          var clos = Math.round(ss.filter(function(s){return s.premature_closure;}).length / n * 100);
+          var cal = ss.filter(function(s){return s.calibrated_composite;}).length > 0
+            ? Math.round(ss.reduce(function(a,s){return a+(s.calibrated_composite||0);},0) / ss.filter(function(s){return s.calibrated_composite;}).length)
+            : null;
+
+          var color = PROF_COLORS[pid] || '#607D8B';
+          rowsHTML += '<tr style="border-top:1px solid var(--border)">';
+          rowsHTML += '<td style="padding:10px 14px;font-weight:700"><span style="color:' + color + '">' + (PROF_ICONS[pid]||'⚕️') + '</span> ' + (PROF_LABELS[pid]||pid) + ' <span style="color:var(--text-secondary);font-weight:400;font-size:11px">(' + n + ' sessions)</span></td>';
+          rowsHTML += '<td style="padding:10px 14px;text-align:center"><span style="font-weight:700;color:' + (acc>=70?'var(--success)':'var(--danger)') + '">' + acc + '%</span></td>';
+          rowsHTML += '<td style="padding:10px 14px;text-align:center"><span style="font-weight:700;color:' + (anch>30?'var(--danger)':'var(--success)') + '">' + anch + '%</span></td>';
+          rowsHTML += '<td style="padding:10px 14px;text-align:center">' + hist.toFixed(1) + '/2</td>';
+          rowsHTML += '<td style="padding:10px 14px;text-align:center"><span style="font-weight:700;color:' + (clos>25?'var(--danger)':'var(--success)') + '">' + clos + '%</span></td>';
+          rowsHTML += '<td style="padding:10px 14px;text-align:center">' + (cal !== null ? '<strong>' + cal + '</strong>' : '—') + '</td>';
+          rowsHTML += '</tr>';
+        });
+        var loadingRow = tableEl.querySelector('#pcv-table-loading');
+        if (loadingRow) loadingRow.remove();
+        tableEl.innerHTML += rowsHTML;
+      }
+
+      // Error modes per profession (from known error mode mapping)
+      var emEl = document.getElementById('pcv-error-modes');
+      if (emEl) {
+        var KNOWN_ERRORS = {
+          medicine:'Anchoring, Premature Closure',pa:'Threshold Confusion, Anchoring',
+          pharmacy:'Drug-Class Anchoring, Patient Factor Neglect',optometry:'Ocular Anchoring, Systemic Miss',
+          dentistry:'Local Anchoring, Pain Attribution Error',pt:'Structural Anchoring, Red Flag Under-Screen',
+          ot:'Functional Skip, Diagnosis Avoidance',nursing:'Protocol Anchoring, SBAR Under-Use',
+          mbs:'Mechanism Fragmentation, Clinical Bridge Gap',other:'Anchoring, Premature Closure'
+        };
+        emEl.innerHTML = Object.keys(byProf).map(function(pid) {
+          var color = PROF_COLORS[pid] || '#607D8B';
+          var anchRate = Math.round(byProf[pid].filter(function(s){return s.anchoring_detected;}).length / byProf[pid].length * 100);
+          return '<div style="background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:12px 14px;border-left:3px solid ' + color + '">' +
+            '<div style="font-weight:700;font-size:12px;margin-bottom:5px">' + (PROF_ICONS[pid]||'⚕️') + ' ' + (PROF_LABELS[pid]||pid) + '</div>' +
+            '<div style="font-size:11px;color:var(--text-secondary);line-height:1.5">' + (KNOWN_ERRORS[pid]||'General anchoring') + '</div>' +
+            '<div style="font-size:11px;margin-top:5px;color:' + (anchRate>30?'var(--danger)':'var(--success)') + ';font-weight:600">Anchoring detected: ' + anchRate + '% of sessions</div>' +
+            '</div>';
+        }).join('');
+      }
+    }
+
+    // CRDA sessions
+    var crdaRes = await fetch(SB_URL + '/rest/v1/ipe_crda_sessions?select=case_id,professions,convergence,divergence,created_at&order=created_at.desc&limit=5', { headers: headers });
+    var crdaSessions = await crdaRes.json();
+    var crdaEl = document.getElementById('pcv-crda-sessions');
+    if (crdaEl) {
+      if (Array.isArray(crdaSessions) && crdaSessions.length > 0) {
+        crdaEl.innerHTML = crdaSessions.map(function(s) {
+          var profs = (s.professions || []).join(', ');
+          var conv = (s.convergence || []).slice(0,2).join(', ');
+          var date = new Date(s.created_at).toLocaleDateString();
+          return '<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)">' +
+            '<div style="flex:1"><div style="font-weight:600;font-size:13px">' + (s.case_id||'Unknown case') + '</div>' +
+            '<div style="font-size:11px;color:var(--text-secondary);margin-top:2px">Professions: ' + profs + (conv ? ' · Converged: ' + conv : '') + '</div></div>' +
+            '<div style="font-size:11px;color:var(--text-secondary)">' + date + '</div></div>';
+        }).join('');
+      } else {
+        crdaEl.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-secondary)">No IPE sessions yet. <a href="/ipe-crda.html" style="color:var(--primary);font-weight:600">Start your first session →</a></div>';
+      }
+    }
+
+  } catch(err) {
+    console.warn('[ProfessionCohort] Load failed:', err);
+    var els = ['pcv-prof-grid','pcv-dim-table','pcv-error-modes','pcv-crda-sessions'];
+    els.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el) el.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;padding:12px">Run Supabase migrations to enable this view.</div>';
+    });
+  }
 }
 
 // ── Init ─────────────────────────────────────────────────────────────────────

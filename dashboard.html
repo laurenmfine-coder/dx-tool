@@ -117,7 +117,46 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .loc-card:nth-child(4){animation-delay:.2s}
 .loc-card:nth-child(5){animation-delay:.25s}
 .loc-card:nth-child(6){animation-delay:.3s}
-</style>
+
+  /* ── ProfessionCoach Brief Widget ─────────────────────────── */
+  #prof-coach-widget{margin:0 0 28px;display:none}
+  .pcw-card{background:linear-gradient(135deg,#1A2332 0%,#2874A6 100%);border-radius:16px;padding:22px 24px;color:white;position:relative;overflow:hidden}
+  .pcw-card::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+  .pcw-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;position:relative}
+  .pcw-title-row{display:flex;align-items:center;gap:10px}
+  .pcw-icon{font-size:1.3rem}
+  .pcw-title{font-family:'Georgia',serif;font-size:1rem;font-weight:700}
+  .pcw-week{font-size:0.72rem;opacity:0.65;margin-top:1px}
+  .pcw-collapse{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25);border-radius:6px;padding:3px 8px;font-size:0.72rem;cursor:pointer;color:white;font-family:inherit}
+  .pcw-body{font-size:0.85rem;line-height:1.7;opacity:0.92;position:relative}
+  .pcw-body p{margin-bottom:8px}
+  .pcw-body p:last-child{margin-bottom:0}
+  .pcw-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;position:relative}
+  .pcw-btn{padding:7px 14px;border-radius:8px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;text-decoration:none;transition:opacity 0.15s}
+  .pcw-btn-primary{background:white;color:#1A2332;border:none}
+  .pcw-btn-primary:hover{opacity:0.9}
+  .pcw-btn-secondary{background:rgba(255,255,255,0.15);color:white;border:1px solid rgba(255,255,255,0.3)}
+  .pcw-btn-secondary:hover{background:rgba(255,255,255,0.25)}
+  .pcw-loading{display:flex;align-items:center;gap:8px;opacity:0.7;font-size:0.85rem}
+  .pcw-spinner{width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .pcw-error-modes{margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.15);position:relative}
+  .pcw-em-label{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;opacity:0.6;margin-bottom:6px}
+  .pcw-em-tags{display:flex;flex-wrap:wrap;gap:5px}
+  .pcw-em-tag{padding:3px 8px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.2);border-radius:20px;font-size:0.72rem;font-weight:600}
+  .pcw-em-tag.dominant{background:rgba(255,200,100,0.25);border-color:rgba(255,200,100,0.4)}
+
+  /* ── Profession identity banner ───────────────────────────── */
+  #prof-identity-bar{display:none;background:#EBF5FB;border:1px solid #AED6F1;border-radius:10px;padding:10px 16px;margin-bottom:20px;font-size:0.82rem;color:#1A5276;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .pib-left{display:flex;align-items:center;gap:8px}
+  .pib-icon{font-size:1.1rem}
+  .pib-name{font-weight:700}
+  .pib-track{opacity:0.7;font-size:0.78rem}
+  .pib-actions{display:flex;gap:8px}
+  .pib-link{color:#2874A6;font-size:0.78rem;font-weight:600;text-decoration:none;padding:3px 8px;border:1px solid #AED6F1;border-radius:6px}
+  .pib-link:hover{background:#2874A6;color:white}
+
+  </style>
 <link rel="stylesheet" href="mobile.css">
 <meta property="og:title" content="Hospital Dashboard | ReasonDx">
 <meta property="og:description" content="The Virtual Teaching Hospital — choose your clinical setting and start building reasoning skills.">
@@ -131,6 +170,49 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <div class="dash-greeting">Welcome to</div>
     <h1 class="dash-title">The Virtual <span>Teaching Hospital</span></h1>
     <p class="dash-sub">Choose where to go. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">See how everything works</a> Each location offers a different way to build your clinical reasoning skills.</p>
+  </div>
+
+
+  <!-- ProfessionCoach Brief Widget -->
+  <div id="prof-coach-widget">
+    <div class="pcw-card">
+      <div class="pcw-header">
+        <div class="pcw-title-row">
+          <span class="pcw-icon">🧠</span>
+          <div>
+            <div class="pcw-title">Your Weekly Reasoning Brief</div>
+            <div class="pcw-week" id="pcw-week-label">Loading...</div>
+          </div>
+        </div>
+        <button class="pcw-collapse" onclick="toggleBrief()">Collapse ▲</button>
+      </div>
+      <div class="pcw-body" id="pcw-body">
+        <div class="pcw-loading"><div class="pcw-spinner"></div>Generating your coaching brief...</div>
+      </div>
+      <div class="pcw-error-modes" id="pcw-error-modes" style="display:none">
+        <div class="pcw-em-label">Error Modes Detected This Week</div>
+        <div class="pcw-em-tags" id="pcw-em-tags"></div>
+      </div>
+      <div class="pcw-actions" id="pcw-actions" style="display:none">
+        <a class="pcw-btn pcw-btn-primary" id="pcw-primary-btn" href="/browse.html">Top Recommendation →</a>
+        <a class="pcw-btn pcw-btn-secondary" href="/ipe-crda.html">🤝 IPE Session</a>
+        <button class="pcw-btn pcw-btn-secondary" onclick="refreshBrief()">↺ Refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profession Identity Bar -->
+  <div id="prof-identity-bar">
+    <div class="pib-left">
+      <span class="pib-icon" id="pib-icon">⚕️</span>
+      <span class="pib-name" id="pib-name">Health Professional</span>
+      <span class="pib-track" id="pib-track"></span>
+    </div>
+    <div class="pib-actions">
+      <a href="/baseline-assessment.html?retake=1" class="pib-link">Retake Baseline</a>
+      <a href="/ipe-crda.html" class="pib-link">🤝 IPE</a>
+      <a href="/?setup-profession=1" class="pib-link">Change Profession</a>
+    </div>
   </div>
 
   <div class="stats">
@@ -219,10 +301,27 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
   </div>
 
+  <!-- Health Professions -->
+  <div class="loc-section" id="hp-section" style="display:none">
+    <div class="loc-section-title">Health Professions</div>
+    <div class="locations" id="hp-locations">
+      <!-- Populated by JS based on profession -->
+    </div>
+  </div>
+
   <!-- Fellowship & Assessment -->
   <div class="loc-section">
     <div class="loc-section-title">Fellowship & Assessment</div>
     <div class="locations">
+
+      <a href="ipe-crda.html" class="loc-card consult">
+        <div class="loc-icon">🤝</div>
+        <div class="loc-body">
+          <div class="loc-name">IPE Divergence Lab</div>
+          <div class="loc-desc">Run the same clinical case through multiple health professions simultaneously. Discover how professional lens shapes reasoning — convergence, divergence, and why it matters.</div>
+          <div class="loc-badge green">CRDA · IPE</div>
+        </div>
+      </a>
 
       <a href="milestone-tracker.html" class="loc-card milestone">
         <div class="loc-icon">✅</div>
@@ -265,6 +364,188 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
 <script src="js/rdx-analytics-tracker.js"></script>
+<script src="/js/rdx-profession-coach.js"></script>
+<script>
+// ── ProfessionCoach Dashboard Integration ──────────────────────────
+var _briefCollapsed = false;
+
+var PROF_ICONS = {
+  medicine:'🩺',pa:'🏥',pharmacy:'💊',optometry:'👁️',dentistry:'🦷',
+  pt:'🦴',ot:'🖐️',nursing:'💉',mbs:'🔬',other:'⚕️'
+};
+var PROF_LABELS = {
+  medicine:'Medicine',pa:'Physician Assistant',pharmacy:'Pharmacy',
+  optometry:'Optometry',dentistry:'Dentistry',pt:'Physical Therapy',
+  ot:'Occupational Therapy',nursing:'Nursing',mbs:'Biomedical Sciences',other:'Health Professional'
+};
+
+var HP_CARDS = {
+  medicine: [],
+  pa: [
+    { href:'/browse.html?mode=simulate&profession=pa', icon:'🏥', name:'PA Clinical Cases', desc:'Generalist simulation cases across all organ systems. PANCE-aligned with primary care emphasis.', badge:'PANCE prep', cls:'ed' },
+  ],
+  pharmacy: [
+    { href:'/browse.html?mode=coach&profession=pharmacy', icon:'💊', name:'Pharmacotherapy CoachDx', desc:'Mechanism-first coaching on drug selection, interactions, and patient-factor reasoning.', badge:'NAPLEX prep', cls:'consult' },
+    { href:'/mechanism/index.html', icon:'⚙️', name:'Mechanism Modules', desc:'Build the mechanistic foundation: receptor → pathway → clinical effect.', badge:'Foundation', cls:'progress' },
+  ],
+  optometry: [
+    { href:'/browse.html?mode=simulate&profession=optometry', icon:'👁️', name:'Ocular-Systemic Cases', desc:'Bridge ocular findings to systemic disease. Retinal, anterior segment, and neuro-ophthalmology.', badge:'NBEO prep', cls:'consult' },
+  ],
+  pt: [
+    { href:'/browse.html?mode=simulate&profession=pt', icon:'🦴', name:'PT Clinical Cases', desc:'Musculoskeletal, neurologic, and cardiopulmonary cases with red flag screening emphasis.', badge:'NPTE prep', cls:'ed' },
+  ],
+  ot: [
+    { href:'/browse.html?mode=simulate&profession=ot', icon:'🖐️', name:'OT Clinical Cases', desc:'Cognitive assessment, functional evaluation, and occupational performance reasoning.', badge:'NBCOT prep', cls:'consult' },
+  ],
+  nursing: [
+    { href:'/browse.html?mode=simulate&profession=nursing', icon:'💉', name:'Nursing Clinical Cases', desc:'Assessment, medication safety, SBAR communication, and clinical surveillance.', badge:'NCLEX prep', cls:'ed' },
+  ],
+  mbs: [
+    { href:'/prehealth.html', icon:'🔬', name:'Pre-Health Track', desc:'MCAT-aligned pathway: mechanism modules, clinical vignettes, and reasoning skill development.', badge:'MCAT prep', cls:'progress' },
+    { href:'/mechanism/index.html', icon:'⚙️', name:'Pathophysiology Modules', desc:'Cardiovascular, pulmonary, neurology, hematology — connect basic science to clinical presentation.', badge:'Foundation', cls:'sim' },
+  ],
+  dentistry: [
+    { href:'/browse.html?mode=simulate&profession=dentistry', icon:'🦷', name:'Dental Clinical Cases', desc:'Orofacial pain differential, oral-systemic connections, and pharmacology for complex patients.', badge:'INBDE prep', cls:'ed' },
+  ],
+};
+
+function initDashboard() {
+  var user = {};
+  try { user = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+  var prof = user.professionProfile;
+  if (!prof || !prof.professionId) return;
+
+  var profId = prof.professionId;
+  var icon   = PROF_ICONS[profId] || '⚕️';
+  var label  = PROF_LABELS[profId] || profId;
+
+  // Show identity bar
+  var bar = document.getElementById('prof-identity-bar');
+  if (bar) {
+    bar.style.display = 'flex';
+    document.getElementById('pib-icon').textContent = icon;
+    document.getElementById('pib-name').textContent = label;
+    var trackEl = document.getElementById('pib-track');
+    if (prof.trackId) trackEl.textContent = '· ' + prof.trackId.replace(/_/g,' ');
+    if (prof.programName) trackEl.textContent += (prof.trackId ? ' · ' : '· ') + prof.programName;
+  }
+
+  // Show health professions section
+  var cards = HP_CARDS[profId] || [];
+  if (cards.length > 0) {
+    var hpSection = document.getElementById('hp-section');
+    var hpLoc = document.getElementById('hp-locations');
+    if (hpSection && hpLoc) {
+      hpSection.style.display = 'block';
+      hpLoc.innerHTML = cards.map(function(c) {
+        return '<a href="' + c.href + '" class="loc-card ' + (c.cls||'') + '">' +
+          '<div class="loc-icon">' + c.icon + '</div>' +
+          '<div class="loc-body">' +
+            '<div class="loc-name">' + c.name + '</div>' +
+            '<div class="loc-desc">' + c.desc + '</div>' +
+            '<div class="loc-badge' + (c.badgeCls ? ' ' + c.badgeCls : '') + '">' + c.badge + '</div>' +
+          '</div></a>';
+      }).join('');
+    }
+  }
+
+  // Load ProfessionCoach brief
+  loadBrief(profId);
+}
+
+function loadBrief(profId) {
+  var widget = document.getElementById('prof-coach-widget');
+  if (!widget) return;
+  widget.style.display = 'block';
+
+  // Check cache first
+  var cached = window.RDX_ProfessionCoach && window.RDX_ProfessionCoach.getCachedBrief();
+  if (cached) {
+    renderBrief(cached);
+    return;
+  }
+
+  // Generate new brief
+  if (window.RDX_ProfessionCoach) {
+    window.RDX_ProfessionCoach.weeklyBrief().then(function(result) {
+      if (result && !result.error) renderBrief(result);
+      else renderBriefError();
+    }).catch(renderBriefError);
+  }
+}
+
+function renderBrief(result) {
+  var weekLabel = 'Week of ' + new Date(result.weekOf || Date.now()).toLocaleDateString('en-US', { month:'short', day:'numeric' });
+  document.getElementById('pcw-week-label').textContent = weekLabel;
+
+  var bodyEl = document.getElementById('pcw-body');
+  if (result.brief) {
+    bodyEl.innerHTML = result.brief.split('\n\n')
+      .filter(function(p) { return p.trim(); })
+      .map(function(p) { return '<p>' + p + '</p>'; }).join('');
+  } else {
+    bodyEl.innerHTML = '<p>No brief available yet. Complete a few more sessions to generate your weekly coaching summary.</p>';
+  }
+
+  // Error modes
+  if (result.errorModes && result.errorModes.detected && result.errorModes.detected.length > 0) {
+    var emEl = document.getElementById('pcw-error-modes');
+    var tagsEl = document.getElementById('pcw-em-tags');
+    var labels = window.RDX_ProfessionCoach.ERROR_MODE_LABELS || {};
+    tagsEl.innerHTML = result.errorModes.detected.slice(0,4).map(function(m) {
+      var isDominant = m === result.errorModes.dominant;
+      return '<span class="pcw-em-tag' + (isDominant ? ' dominant' : '') + '">' +
+        (labels[m] || m.replace(/_/g,' ')) + (isDominant ? ' ★' : '') + '</span>';
+    }).join('');
+    emEl.style.display = 'block';
+  }
+
+  // Actions
+  var actionsEl = document.getElementById('pcw-actions');
+  actionsEl.style.display = 'flex';
+  var primaryBtn = document.getElementById('pcw-primary-btn');
+  if (result.recommendations && result.recommendations.length > 0) {
+    var rec = result.recommendations[0];
+    primaryBtn.href = rec.url || '/browse.html';
+    primaryBtn.textContent = rec.label + ' →';
+  }
+}
+
+function renderBriefError() {
+  document.getElementById('pcw-body').innerHTML = '<p style="opacity:0.7">Unable to generate brief right now. Your session data is still being collected.</p>';
+  document.getElementById('pcw-actions').style.display = 'flex';
+}
+
+function toggleBrief() {
+  _briefCollapsed = !_briefCollapsed;
+  var body = document.getElementById('pcw-body');
+  var em   = document.getElementById('pcw-error-modes');
+  var acts = document.getElementById('pcw-actions');
+  var btn  = document.querySelector('.pcw-collapse');
+  [body, em, acts].forEach(function(el) { if (el) el.style.display = _briefCollapsed ? 'none' : ''; });
+  if (btn) btn.textContent = _briefCollapsed ? 'Expand ▼' : 'Collapse ▲';
+  if (!_briefCollapsed && acts) acts.style.display = 'flex';
+}
+
+function refreshBrief() {
+  localStorage.removeItem('rdx-last-weekly-brief');
+  document.getElementById('pcw-body').innerHTML = '<div class="pcw-loading"><div class="pcw-spinner"></div>Regenerating brief...</div>';
+  document.getElementById('pcw-actions').style.display = 'none';
+  document.getElementById('pcw-error-modes').style.display = 'none';
+  var user = {};
+  try { user = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+  var profId = user.professionProfile && user.professionProfile.professionId;
+  if (profId) loadBrief(profId);
+}
+
+// Init on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDashboard);
+} else {
+  initDashboard();
+}
+</script>
+
 <script src="/js/nav-global.js"></script>
 </body>
 </html>
