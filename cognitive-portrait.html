@@ -244,7 +244,7 @@ a{color:inherit;text-decoration:none}
   </div>
 
   <!-- ILP Banner — appears after generation -->
-  <div class="ilp-banner" id="ilpBanner">
+  <div class="ilp-banner" id="ilpBanner" style="display:none">
     <div class="ilp-banner-title">Your Personalized Learning Plan — 4-Week Sprint</div>
     <div style="font-size:13px;color:#93c5fd;margin-bottom:12px" id="ilpSummary"></div>
     <div class="ilp-goals" id="ilpGoals"></div>
@@ -760,6 +760,40 @@ window.generateILP = async function() {
   btn.textContent = '🎯 Generate Learning Plan';
   btn.disabled = false;
 };
+
+// Auto-restore previously generated ILP on page load
+(function() {
+  try {
+    var stored = JSON.parse(localStorage.getItem('rdx-generated-ilp') || 'null');
+    if (!stored || !stored.plan) return;
+    // Only restore if generated in last 30 days
+    var age = Date.now() - new Date(stored.generatedAt || 0).getTime();
+    if (age > 30 * 24 * 60 * 60 * 1000) return;
+
+    var plan = stored.plan;
+    document.getElementById('ilpSummary').textContent = plan.summary || '';
+    var goalsHTML = (plan.goals || []).map(function(g) {
+      var acts = (g.activities || []).map(function(a) {
+        return '<div class="ilp-activity"><span>' + a.days + ': <a href="' + a.url +
+          '" style="color:#85C1E9;font-weight:600">' + a.text + '</a></span></div>';
+      }).join('');
+      return '<div class="ilp-goal">' +
+        '<div class="ilp-goal-header">' +
+          '<span class="ilp-goal-epa">' + g.epa + '</span>' +
+          '<span class="ilp-goal-title">' + g.goal + '</span>' +
+        '</div>' +
+        '<div class="ilp-activities">' + acts + '</div>' +
+        '</div>';
+    }).join('');
+    document.getElementById('ilpGoals').innerHTML = goalsHTML;
+    document.getElementById('ilpFullLink').href = '/ilp.html?source=portrait';
+    document.getElementById('ilpBanner').style.display = 'block';
+
+    // Update generate button to say "Regenerate"
+    var btn = document.getElementById('btnGenILP');
+    if (btn) btn.textContent = '🔄 Regenerate Learning Plan';
+  } catch(e) {}
+})();
 
 window.exportPDF = function() {
   window.print();
