@@ -155,6 +155,8 @@ class CaseTagger {
     if (!this.hasProfile) return 1; // neutral if no profession
     const prof = this.professionId;
     const cat = (caseObj.cat || caseObj.category || '').toLowerCase();
+    // Arc cases matching student's profession get highest priority
+    if (caseObj.profession && caseObj.profession === prof && caseObj.arcId) return 5;
     const scores = PROF_CAT_SCORES[prof] || PROF_CAT_SCORES['other'];
     return scores[cat] !== undefined ? scores[cat] : 1;
   }
@@ -383,3 +385,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 })();
+
+// Arc badge helper — called by browse card renderer
+window.RDXArcBadge = function(caseObj) {
+  if (!caseObj || !caseObj.arcId || !caseObj.arcLabel) return null;
+  var icons = {'hip-fracture':'🦴','stroke':'🧠','diabetes':'💉',
+    'heart-failure':'❤️','chronic-pain':'⚡','sepsis':'🔬'};
+  var icon = icons[caseObj.arcId] || '🔗';
+  return icon + ' ' + caseObj.arcLabel + ' · Encounter ' + (caseObj.arcOrder || '');
+};

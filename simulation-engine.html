@@ -1428,18 +1428,28 @@ function hasOrderedImaging(turns) {
 function buildSystemPrompt() {
   const phase = state.currentPhase;
 
-  // ── Profession Question Override ──────────────────────────────────────────
-  // If this is a profession-framed case AND the student's profession matches,
-  // inject the profession-specific clinical question as the attending's opening.
+  // ── Profession Question + Arc Context Override ───────────────────────────
+  // If this is a profession-framed or arc case, inject the professional lens
+  // and arc patient context so attending asks the RIGHT profession's question.
   var _profQuestionOverride = '';
   try {
     var _u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
     var _profId = _u.professionProfile && _u.professionProfile.professionId;
     var _caseEntry = window.CRT_INDEX && caseData && caseData.id && window.CRT_INDEX[caseData.id];
-    if (_caseEntry && _caseEntry.profession && _caseEntry.profQuestion && _profId === _caseEntry.profession) {
-      _profQuestionOverride = '\n\nPROFESSION FRAME: This student is a ' + _profId.toUpperCase() + ' student. ' +
-        'Their professional lens shapes what they prioritize. After presenting the case, your FIRST question should be: ' +
-        '"' + _caseEntry.profQuestion + '" — do not ask a medicine-framed differential question instead.';
+    if (_caseEntry) {
+      // Arc context — tell attending about the full patient arc
+      if (_caseEntry.arcLabel && _caseEntry.arcOrder) {
+        _profQuestionOverride += '\n\nARC CONTEXT: This is Encounter ' + _caseEntry.arcOrder +
+          ' of the ' + _caseEntry.arcLabel + '. The same patient is seen by different health professions ' +
+          'across this arc. This student is seeing the ' + (_caseEntry.profession || 'health professional') +
+          ' encounter. Keep the case framing consistent with this professional scope.';
+      }
+      // Profession question — override the opening clinical question
+      if (_caseEntry.profession && _caseEntry.profQuestion && _profId === _caseEntry.profession) {
+        _profQuestionOverride += '\n\nPROFESSION FRAME: This student is a ' + _profId.toUpperCase() + ' student. ' +
+          'Their professional lens shapes what they prioritize. After presenting the case, your FIRST question should be: ' +
+          '"' + _caseEntry.profQuestion + '" — do not ask a medicine-framed differential question instead.';
+      }
     }
   } catch(e) {}
 
