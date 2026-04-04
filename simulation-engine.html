@@ -1428,6 +1428,21 @@ function hasOrderedImaging(turns) {
 function buildSystemPrompt() {
   const phase = state.currentPhase;
 
+  // ── Profession Question Override ──────────────────────────────────────────
+  // If this is a profession-framed case AND the student's profession matches,
+  // inject the profession-specific clinical question as the attending's opening.
+  var _profQuestionOverride = '';
+  try {
+    var _u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    var _profId = _u.professionProfile && _u.professionProfile.professionId;
+    var _caseEntry = window.CRT_INDEX && caseData && caseData.id && window.CRT_INDEX[caseData.id];
+    if (_caseEntry && _caseEntry.profession && _caseEntry.profQuestion && _profId === _caseEntry.profession) {
+      _profQuestionOverride = '\n\nPROFESSION FRAME: This student is a ' + _profId.toUpperCase() + ' student. ' +
+        'Their professional lens shapes what they prioritize. After presenting the case, your FIRST question should be: ' +
+        '"' + _caseEntry.profQuestion + '" — do not ask a medicine-framed differential question instead.';
+    }
+  } catch(e) {}
+
   // ── Student Model Bus injection ──────────────────────────────────────────
   // Gives every agent (attending Dr. Patel, patient voice) a unified,
   // real-time view of the student's working memory, episodic history,
@@ -1622,7 +1637,7 @@ When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."
   // Append meta-reasoning brief — attending gets supervisory agent's tactical directive
   sys += metaBrief;
 
-  return sys;
+  return sys + _profQuestionOverride + studentModelBlock + metaBrief;
 }
 
 // ── RADIOLOGIST RE-READ ──
