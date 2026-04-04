@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Reasoning Demo</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ocean: #2874A6;
+    --ocean-dark: #1a5276;
+    --ocean-light: #d6eaf8;
+    --gold: #c9a84c;
+    --gold-light: #fdf3dc;
+    --cream: #fafaf7;
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d5c;
+    --mist: #8892a4;
+    --surface: #ffffff;
+    --border: #e8ecf0;
+    --success: #1e8449;
+    --warn: #b7770d;
+    --danger: #922b21;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: linear-gradient(135deg, var(--ocean-dark) 0%, var(--ocean) 60%, #3a8fc7 100%);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 36px 32px 32px;
+    position: relative;
+  }
+  .header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .header-badge::before { content: '⚓'; }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(26px, 4vw, 38px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .header h1 em {
+    font-style: italic;
+    color: #f0d080;
+  }
+  .header-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    max-width: 560px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .header-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
+  .header-stat-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+  }
+
+  /* ── PHASE TRACKER ── */
+  .phase-track {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+  }
+  .phase-track-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .phase-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--mist);
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+    cursor: default;
+  }
+  .phase-step.active {
+    color: var(--ocean);
+    border-bottom-color: var(--ocean);
+  }
+  .phase-step.done {
+    color: var(--success);
+    border-bottom-color: transparent;
+  }
+  .phase-num {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    transition: all .2s;
+  }
+  .phase-step.active .phase-num { background: var(--ocean); color: #fff; }
+  .phase-step.done .phase-num { background: var(--success); color: #fff; }
+  .phase-step.done .phase-num::after { content: '✓'; font-size: 10px; }
+  .phase-step.done .phase-label { display: none; }
+
+  /* ── MAIN ── */
+  .main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 28px 32px 80px;
+  }
+
+  /* ── CLIENT CARD ── */
+  .client-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .client-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--ocean-light), var(--ocean));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .client-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .client-tags {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;
+  }
+  .client-tag {
+    background: var(--ocean-light);
+    color: var(--ocean-dark);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 12px;
+  }
+  .client-tag.gold {
+    background: var(--gold-light);
+    color: #7d5a0a;
+  }
+
+  /* ── PHASE INTRO ── */
+  .phase-intro {
+    background: linear-gradient(135deg, var(--ocean-light) 0%, #eaf4fb 100%);
+    border: 1px solid #bee3f8;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .phase-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .phase-intro h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ocean-dark);
+    margin-bottom: 4px;
+  }
+  .phase-intro p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ── CHAT ── */
+  .chat-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .chat-messages {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 120px;
+    max-height: 420px;
+    overflow-y: auto;
+  }
+  .msg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    animation: fadeUp .25s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-avatar {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .msg.ai   .msg-avatar { background: var(--ocean-light); }
+  .msg.user .msg-avatar { background: var(--gold-light); }
+  .msg-bubble {
+    max-width: 78%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .msg.ai   .msg-bubble { background: #f4f8fc; color: var(--ink); border-radius: 4px 12px 12px 12px; }
+  .msg.user .msg-bubble { background: var(--ocean); color: #fff; border-radius: 12px 4px 12px 12px; }
+  .msg-role {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 4px;
+  }
+  .msg.user .msg-role { text-align: right; }
+  .typing-dot {
+    display: inline-block;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--mist);
+    margin: 0 2px;
+    animation: bounce 1.2s infinite;
+  }
+  .typing-dot:nth-child(2) { animation-delay: .2s; }
+  .typing-dot:nth-child(3) { animation-delay: .4s; }
+  @keyframes bounce {
+    0%,80%,100% { transform: translateY(0); }
+    40% { transform: translateY(-6px); }
+  }
+
+  /* ── INPUT ── */
+  .chat-input-area {
+    border-top: 1px solid var(--border);
+    padding: 14px 16px;
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    background: #fafbfc;
+  }
+  .chat-input {
+    flex: 1;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    resize: none;
+    min-height: 42px;
+    max-height: 120px;
+    outline: none;
+    transition: border-color .2s;
+    background: var(--surface);
+    line-height: 1.4;
+  }
+  .chat-input:focus { border-color: var(--ocean); }
+  .chat-input::placeholder { color: var(--mist); }
+  .send-btn {
+    width: 42px; height: 42px;
+    border-radius: 10px;
+    background: var(--ocean);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all .15s;
+    flex-shrink: 0;
+  }
+  .send-btn:hover:not(:disabled) { background: var(--ocean-dark); transform: translateY(-1px); }
+  .send-btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+
+  /* ── QUICK REPLIES ── */
+  .quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 16px;
+    border-top: 1px solid var(--border);
+    background: #fafbfc;
+  }
+  .quick-label {
+    font-size: 11px;
+    color: var(--mist);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    width: 100%;
+    margin-bottom: 2px;
+  }
+  .qr-btn {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .qr-btn:hover { border-color: var(--ocean); color: var(--ocean); background: var(--ocean-light); }
+
+  /* ── PHASE ADVANCE ── */
+  .phase-advance-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 13px 24px;
+    background: var(--ocean);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .15s;
+    margin-bottom: 20px;
+  }
+  .phase-advance-btn:hover { background: var(--ocean-dark); transform: translateY(-1px); }
+  .phase-advance-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  /* ── DEBRIEF ── */
+  .debrief {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .debrief-header {
+    background: linear-gradient(135deg, var(--ocean-dark), var(--ocean));
+    padding: 20px 24px;
+    color: #fff;
+  }
+  .debrief-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .debrief-header p { font-size: 13px; opacity: .8; }
+  .debrief-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+  .bias-card {
+    border-radius: 10px;
+    padding: 16px 18px;
+    border-left: 4px solid;
+  }
+  .bias-card.danger { background: #fef2f2; border-color: var(--danger); }
+  .bias-card.warn   { background: #fffbeb; border-color: var(--warn); }
+  .bias-card.good   { background: #f0fdf4; border-color: var(--success); }
+  .bias-card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .bias-card.danger h4 { color: var(--danger); }
+  .bias-card.warn   h4 { color: var(--warn); }
+  .bias-card.good   h4 { color: var(--success); }
+  .bias-card p { font-size: 13px; color: var(--ink-soft); line-height: 1.5; }
+
+  .score-ring-wrap {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--gold-light);
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid #e8d5a0;
+  }
+  .score-ring {
+    position: relative;
+    width: 64px; height: 64px;
+    flex-shrink: 0;
+  }
+  .score-ring svg { transform: rotate(-90deg); }
+  .score-ring-num {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ocean-dark);
+  }
+  .score-meta h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .score-meta p { font-size: 13px; color: var(--ink-soft); line-height: 1.4; }
+
+  .reasoning-map {
+    background: #f4f8fc;
+    border-radius: 10px;
+    padding: 16px 18px;
+  }
+  .reasoning-map h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ocean-dark);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: 12px;
+  }
+  .rm-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .rm-label { color: var(--mist); font-weight: 500; min-width: 140px; }
+  .rm-bar-wrap { flex: 1; height: 6px; background: var(--border); border-radius: 3px; }
+  .rm-bar { height: 100%; border-radius: 3px; transition: width 1s ease; }
+  .rm-val { font-weight: 600; color: var(--ink); min-width: 36px; text-align: right; font-size: 12px; }
+
+  .rdx-footer {
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: var(--ocean-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .rdx-footer-text { font-size: 13px; color: var(--ocean-dark); }
+  .rdx-footer-text strong { font-weight: 600; }
+  .rdx-footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ocean-dark);
+  }
+  .rdx-footer-logo span { color: var(--gold); }
+
+  /* ── LOADING OVERLAY ── */
+  #loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+  #loading-overlay.active { display: flex; }
+  .loading-spinner {
+    width: 44px; height: 44px;
+    border: 3px solid var(--border);
+    border-top-color: var(--ocean);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 14px; color: var(--mist); }
+
+  @media (max-width: 600px) {
+    .main { padding: 20px 16px 60px; }
+    .header-inner { padding: 24px 16px; }
+    .phase-track { padding: 0 16px; }
+    .client-card { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<div id="loading-overlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Analyzing your reasoning...</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-badge">ReasonDx · Live Demo</div>
+    <h1>Can you out-reason <em>your own biases</em>?</h1>
+    <p class="header-sub">A live demonstration of reasoning intelligence — using a scenario every travel consultant knows. No medical background needed.</p>
+    <div class="header-meta">
+      <div class="header-stat"><div class="header-stat-dot"></div>10-minute interactive experience</div>
+      <div class="header-stat"><div class="header-stat-dot"></div>AI-powered bias detection</div>
+      <div class="header-stat"><div class="header-stat-dot"></div>Personalized debrief</div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE TRACKER -->
+<div class="phase-track">
+  <div class="phase-track-inner">
+    <div class="phase-step active" id="step-0">
+      <div class="phase-num">1</div>
+      <div class="phase-label">Meet the Client</div>
+    </div>
+    <div class="phase-step" id="step-1">
+      <div class="phase-num">2</div>
+      <div class="phase-label">Initial Recommendation</div>
+    </div>
+    <div class="phase-step" id="step-2">
+      <div class="phase-num">3</div>
+      <div class="phase-label">Gather Information</div>
+    </div>
+    <div class="phase-step" id="step-3">
+      <div class="phase-num">4</div>
+      <div class="phase-label">New Evidence</div>
+    </div>
+    <div class="phase-step" id="step-4">
+      <div class="phase-num">5</div>
+      <div class="phase-label">Final Recommendation</div>
+    </div>
+    <div class="phase-step" id="step-5">
+      <div class="phase-num">6</div>
+      <div class="phase-label">Reasoning Debrief</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- CLIENT CARD -->
+  <div class="client-card" id="client-card">
+    <div class="client-avatar">👩‍💼</div>
+    <div class="client-info">
+      <h3>The Hendersons — New Client Inquiry</h3>
+      <p style="font-size:13px;color:var(--ink-soft);margin-top:4px;line-height:1.5">"Hi, we're thinking about a cruise for our 25th anniversary. We want something really special but we're not sure where to start."</p>
+      <div class="client-tags">
+        <span class="client-tag">Anniversary Trip</span>
+        <span class="client-tag gold">High-Value Client</span>
+        <span class="client-tag">First Inquiry</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHASE INTRO -->
+  <div class="phase-intro" id="phase-intro">
+    <div class="phase-icon">🧭</div>
+    <div>
+      <h4 id="phase-title">Phase 1 — Meet the Client</h4>
+      <p id="phase-desc">You're a cruise consultant. The Hendersons just walked in. You know almost nothing about them yet. Chat with the AI advisor below to start working through this inquiry. The AI will play both the role of the client AND give you coaching guidance.</p>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="chat-box">
+    <div class="chat-messages" id="chat-messages">
+      <div class="msg ai">
+        <div class="msg-avatar">🤖</div>
+        <div>
+          <div class="msg-role">AI Advisor</div>
+          <div class="msg-bubble">Welcome! Let's work through this client inquiry together. The Hendersons are celebrating their 25th anniversary and want something special. Before we go any further — <strong>what's your initial instinct?</strong> What cruise would you recommend for a 25th anniversary couple? Don't overthink it, just go with your gut first.</div>
+        </div>
+      </div>
+    </div>
+    <div class="quick-replies" id="quick-replies">
+      <div class="quick-label">Try one of these or type your own</div>
+      <button class="qr-btn" onclick="sendQuick(this)">Mediterranean — classic anniversary destination</button>
+      <button class="qr-btn" onclick="sendQuick(this)">Caribbean — popular, easy to book</button>
+      <button class="qr-btn" onclick="sendQuick(this)">Alaska — unique and memorable</button>
+      <button class="qr-btn" onclick="sendQuick(this)">I need more information first</button>
+    </div>
+    <div class="chat-input-area">
+      <textarea class="chat-input" id="chat-input" placeholder="Type your response..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
+        oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+      <button class="send-btn" id="send-btn" onclick="sendMessage()">↑</button>
+    </div>
+  </div>
+
+  <!-- PHASE ADVANCE BUTTON (hidden until appropriate) -->
+  <button class="phase-advance-btn" id="advance-btn" style="display:none" onclick="advancePhase()">
+    <span id="advance-label">Continue to Next Phase →</span>
+  </button>
+
+  <!-- DEBRIEF (hidden until phase 6) -->
+  <div class="debrief" id="debrief" style="display:none">
+    <div class="debrief-header">
+      <h3>Your Reasoning Debrief</h3>
+      <p>Here's what the AI observed about how you thought through this decision</p>
+    </div>
+    <div class="debrief-body" id="debrief-body">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+</div>
+
+<script>
+const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+const state = {
+  phase: 0,      // 0=intro, 1=initial, 2=gather, 3=evidence, 4=final, 5=debrief
+  turns: 3,      // turns in current phase
+  messages: [],  // full conversation history for context
+  initialRec: '',
+  finalRec: '',
+  questionsAsked: [],
+  biasFlags: []
+};
+
+// Quick replies per phase
+const phaseQuickReplies = {
+  1: [
+    "Mediterranean — classic anniversary destination",
+    "Caribbean — relaxed and easy to book",
+    "Alaska — unique and different",
+    "I need to ask some questions first"
+  ],
+  2: [
+    "What's your approximate budget?",
+    "Have you cruised before?",
+    "Are you more interested in ports or sea days?",
+    "Any dietary restrictions or health considerations?",
+    "What time of year works for you?"
+  ],
+  3: [
+    "That changes things — let me rethink",
+    "I'd still recommend the same cruise",
+    "I need to ask a few more questions"
+  ],
+  4: [
+    "My final recommendation is Mediterranean on a luxury line",
+    "Actually I think Caribbean makes more sense now",
+    "I'd recommend a river cruise instead"
+  ]
+};
+
+// Phase config
+const phases = [
+  {
+    title: "Phase 1 — Meet the Client",
+    desc: "You're a cruise consultant. The Hendersons just walked in. Chat with the AI to start working through this inquiry.",
+    icon: "🧭",
+    minTurns: 1,
+    advanceLabel: "I've made my initial recommendation →"
+  },
+  {
+    title: "Phase 2 — Gather Information",
+    desc: "Good — you've made a first impression. Now dig deeper. What do you need to know before you're confident in a recommendation?",
+    icon: "🔍",
+    minTurns: 3,
+    advanceLabel: "I have enough information →"
+  },
+  {
+    title: "Phase 3 — New Evidence",
+    desc: "The Hendersons just shared something important you didn't know. How does this change your thinking?",
+    icon: "⚡",
+    minTurns: 1,
+    advanceLabel: "I've processed this new information →"
+  },
+  {
+    title: "Phase 4 — Final Recommendation",
+    desc: "Time to commit. What's your final recommendation for the Hendersons, and why?",
+    icon: "🎯",
+    minTurns: 1,
+    advanceLabel: "That's my final recommendation →"
+  },
+  {
+    title: "Phase 5 — Debrief",
+    desc: "Let's look at how you reasoned through this decision.",
+    icon: "🧠",
+    minTurns: 0,
+    advanceLabel: ""
+  }
+];
+
+// System prompt for the AI
+function buildSystemPrompt() {
+  const phaseInstructions = {
+    0: `You are playing two roles simultaneously: (1) the AI Advisor coaching a cruise consultant, and (2) occasionally voicing "the client" (the Hendersons). 
+
+RIGHT NOW: The consultant has just been introduced to a new client. Ask them for their INITIAL GUT INSTINCT recommendation — before they ask any questions. This is important because you want to capture their first anchoring impression.
+
+The Hendersons: A couple celebrating their 25th anniversary, first contact, budget unknown, preferences unknown. They've never cruised before (but don't reveal this yet).
+
+COACHING TONE: Warm, collaborative, encouraging. Short responses (2-4 sentences max). Keep it conversational.
+At the end of your response, note what bias might be forming based on their answer.`,
+
+    1: `You are an AI Advisor coaching a cruise consultant through a real client scenario.
+
+CURRENT PHASE: The consultant has made their initial recommendation. Now gently challenge them: "Interesting choice — but what do you actually know about this couple so far?" Push them to recognize they may have jumped to conclusions.
+
+KEY REVEAL: When they start asking good questions, reward them. If they ask about budget, reveal: ~$6,000–$8,000 total for both. If they ask about preferences/activities: "We love food, wine, local culture — not really beach people." If they ask about health: "My husband gets motion sickness on rough water."
+
+THE HIDDEN TWIST (don't reveal until Phase 3): One of them uses a wheelchair — Mrs. Henderson had a knee replacement 3 months ago and has mobility limitations. Save this for Phase 3.
+
+WATCH FOR ANCHORING: If they stick to their initial recommendation despite contradicting evidence, gently highlight: "You mentioned [X] initially — how does [new information] affect that thinking?"
+
+Keep responses to 3-5 sentences. Be conversational and warm.`,
+
+    2: `You are an AI Advisor coaching a cruise consultant. 
+
+CURRENT PHASE: New evidence time. Reveal the wheelchair/mobility information now:
+
+"Oh — I should have mentioned earlier. My wife just had a knee replacement three months ago. She gets around well but uses a wheelchair for longer distances. Will that be an issue?"
+
+Then watch how the consultant responds. Do they:
+a) Immediately change their recommendation (good reasoning)
+b) Reassure the client it'll be fine without changing course (confirmation bias / premature closure)  
+c) Ask good follow-up questions about the degree of mobility needed
+
+If they don't acknowledge how this changes things, ask: "Does this new information affect your recommendation at all?"
+
+Keep responses to 3-5 sentences.`,
+
+    3: `You are an AI Advisor coaching a cruise consultant.
+
+CURRENT PHASE: Final recommendation. The consultant should now commit to a specific recommendation that accounts for EVERYTHING they've learned:
+- 25th anniversary (special occasion, splurge-worthy)
+- Budget $6-8k total
+- Loves food, wine, local culture (not beach people)
+- Husband has motion sickness
+- Wife has mobility limitations (wheelchair for distances)
+- They've NEVER cruised before
+
+Good final recommendations that fit all criteria:
+- River cruise (Danube, Rhine, Seine) — no rough water, wheelchair accessible, all-inclusive, cultural ports
+- Norwegian Fjords on a luxury small ship — smooth water, incredible scenery, cultural stops
+- NOT: Caribbean (beach-focused, rough Atlantic crossings), NOT: typical mass-market lines (accessibility varies)
+
+If they recommend something that doesn't fit, gently note the tension without telling them the right answer.
+
+Keep responses to 3-5 sentences.`,
+
+    4: `You have been observing this consultant's reasoning throughout the scenario. Now give a BRIEF transition message that sets up the full debrief. Something like: "Great work getting to a recommendation. Let's now look at your reasoning process — I noticed some interesting patterns worth discussing." Then stop — the full debrief will appear separately.`
+  };
+
+  return phaseInstructions[Math.min(state.phase, 4)] || phaseInstructions[4];
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function addMessage(role, text) {
+  const messages = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = `msg ${role}`;
+  const isAI = role === 'ai';
+  div.innerHTML = `
+    <div class="msg-avatar">${isAI ? '🤖' : '🧑‍💼'}</div>
+    <div>
+      <div class="msg-role">${isAI ? 'AI Advisor' : 'You'}</div>
+      <div class="msg-bubble">${text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
+    </div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function showTyping() {
+  const messages = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'msg ai';
+  div.id = 'typing-indicator';
+  div.innerHTML = `
+    <div class="msg-avatar">🤖</div>
+    <div>
+      <div class="msg-role">AI Advisor</div>
+      <div class="msg-bubble"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>
+    </div>`;
+  messages.appendChild(div);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function removeTyping() {
+  const el = document.getElementById('typing-indicator');
+  if (el) el.remove();
+}
+
+function setQuickReplies(phase) {
+  const qr = document.getElementById('quick-replies');
+  const replies = phaseQuickReplies[phase] || [];
+  if (!replies.length) { qr.style.display = 'none'; return; }
+  qr.style.display = 'flex';
+  qr.innerHTML = '<div class="quick-label">Try one of these or type your own</div>' +
+    replies.map(r => `<button class="qr-btn" onclick="sendQuick(this)">${r}</button>`).join('');
+}
+
+function updatePhaseUI(phase) {
+  // Update tracker
+  for (let i = 0; i <= 5; i++) {
+    const el = document.getElementById(`step-${i}`);
+    if (!el) continue;
+    el.className = 'phase-step' + (i < phase ? ' done' : i === phase ? ' active' : '');
+    if (i < phase) el.querySelector('.phase-num').textContent = '';
+    else el.querySelector('.phase-num').textContent = i + 1;
+  }
+  // Update intro
+  if (phase < phases.length) {
+    const p = phases[phase];
+    document.getElementById('phase-title').textContent = p.title;
+    document.getElementById('phase-desc').textContent = p.desc;
+    document.getElementById('phase-intro').querySelector('.phase-icon').textContent = p.icon;
+  }
+  // Quick replies
+  setQuickReplies(phase + 1);
+  // Advance button
+  const btn = document.getElementById('advance-btn');
+  const adv = phases[phase];
+  if (adv && adv.advanceLabel && phase < 4) {
+    btn.style.display = 'flex';
+    document.getElementById('advance-label').textContent = adv.advanceLabel;
+    btn.disabled = state.turns < (adv.minTurns || 1);
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+// ── SEND ──────────────────────────────────────────────────────────────────
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text || document.getElementById('send-btn').disabled) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  document.getElementById('send-btn').disabled = true;
+  document.getElementById('quick-replies').style.display = 'none';
+
+  addMessage('user', text);
+  state.messages.push({ role: 'user', content: text });
+  state.turns++;
+
+  // Track initial/final recommendation
+  if (state.phase === 0 && !state.initialRec) state.initialRec = text;
+  if (state.phase === 3) state.finalRec = text;
+
+  // Enable advance button after min turns
+  const adv = phases[state.phase];
+  if (adv && state.turns >= (adv.minTurns || 1)) {
+    document.getElementById('advance-btn').disabled = false;
+  }
+
+  showTyping();
+
+  try {
+    const resp = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        studyMode: true,
+        studySystem: buildSystemPrompt(),
+        studyModel: 'claude-sonnet-4-20250514',
+        messages: state.messages.slice(-12),
+        max_tokens: 400
+      })
+    });
+    const data = await resp.json();
+    const reply = (data.content && data.content[0] && data.content[0].text) || "I'm having difficulty responding right now — try again.";
+    removeTyping();
+    addMessage('ai', reply);
+    state.messages.push({ role: 'assistant', content: reply });
+  } catch(e) {
+    removeTyping();
+    addMessage('ai', "Connection issue — please try again in a moment.");
+  }
+
+  document.getElementById('send-btn').disabled = false;
+  setQuickReplies(state.phase + 1);
+}
+
+function sendQuick(btn) {
+  document.getElementById('chat-input').value = btn.textContent;
+  sendMessage();
+}
+
+// ── ADVANCE PHASE ─────────────────────────────────────────────────────────
+async function advancePhase() {
+  state.phase++;
+  state.turns = 0;
+  document.getElementById('advance-btn').disabled = true;
+  updatePhaseUI(state.phase);
+
+  if (state.phase === 4) {
+    // Trigger debrief generation
+    await generateDebrief();
+    return;
+  }
+
+  // Auto-trigger the AI for new phase
+  const phaseMessages = {
+    1: "Great, I've noted your initial instinct. Now let's think about this more carefully — what information do you wish you had before making that recommendation?",
+    2: null, // AI will get triggered by the system prompt change — send a blank context message
+    3: "You've gathered some good information. Now I want to share something the clients just mentioned that you didn't know before...",
+  };
+
+  const msg = phaseMessages[state.phase];
+  if (msg) {
+    showTyping();
+    try {
+      const resp = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          studyMode: true,
+          studySystem: buildSystemPrompt(),
+          studyModel: 'claude-sonnet-4-20250514',
+          messages: [...state.messages, { role: 'user', content: `[PHASE TRANSITION: Moving to phase ${state.phase}. Context so far: Initial recommendation was "${state.initialRec}". Now continue the scenario.]` }],
+          max_tokens: 350
+        })
+      });
+      const data = await resp.json();
+      const reply = (data.content && data.content[0] && data.content[0].text) || msg;
+      removeTyping();
+      addMessage('ai', reply);
+      state.messages.push({ role: 'assistant', content: reply });
+    } catch(e) {
+      removeTyping();
+      addMessage('ai', msg);
+    }
+  }
+}
+
+// ── DEBRIEF ───────────────────────────────────────────────────────────────
+async function generateDebrief() {
+  document.getElementById('loading-overlay').classList.add('active');
+  document.getElementById('advance-btn').style.display = 'none';
+
+  const debriefPrompt = `You are analyzing a cruise consultant's reasoning process. Based on the entire conversation, produce a JSON debrief with this exact structure (respond with ONLY the JSON, no other text):
+
+{
+  "score": <number 0-100>,
+  "scoreLabel": "<short label for score>",
+  "anchoring": {"detected": <bool>, "severity": "<none|mild|moderate|strong>", "evidence": "<brief quote or description>"},
+  "prematureClosure": {"detected": <bool>, "severity": "<none|mild|moderate|strong>", "evidence": "<brief quote or description>"},
+  "pivotBehavior": {"quality": "<poor|developing|good|excellent>", "description": "<what they did well or poorly when new info arrived>"},
+  "informationGathering": {"quality": "<poor|developing|good|excellent>", "keyMissed": "<most important thing they didn't ask>"},
+  "overallStrength": "<1 sentence on strongest reasoning behavior>",
+  "overallGap": "<1 sentence on most important improvement>",
+  "expertComparison": "<2 sentences on how an expert cruise consultant would have approached this differently>"
+}
+
+Context:
+- Initial recommendation: "${state.initialRec}"
+- Final recommendation: "${state.finalRec}"
+- Conversation had ${state.messages.length} turns
+- Key facts available: budget $6-8k, motion sickness, mobility limitations, loves culture/food, never cruised, anniversary`;
+
+  let debriefData = null;
+  try {
+    const resp = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        studyMode: true,
+        studySystem: 'You are a reasoning analyst. Return ONLY valid JSON, no other text.',
+        studyModel: 'claude-sonnet-4-20250514',
+        messages: [
+          ...state.messages,
+          { role: 'user', content: debriefPrompt }
+        ],
+        max_tokens: 800
+      })
+    });
+    const data = await resp.json();
+    const raw = (data.content && data.content[0] && data.content[0].text) || '{}';
+    const clean = raw.replace(/```json|```/g, '').trim();
+    debriefData = JSON.parse(clean);
+  } catch(e) {
+    debriefData = {
+      score: 62,
+      scoreLabel: "Developing Reasoner",
+      anchoring: { detected: true, severity: "moderate", evidence: "Initial recommendation held even as contradicting information emerged" },
+      prematureClosure: { detected: true, severity: "mild", evidence: "Moved toward recommendation before gathering key details" },
+      pivotBehavior: { quality: "developing", description: "Some adjustment when new evidence appeared, but incomplete pivot" },
+      informationGathering: { quality: "developing", keyMissed: "Mobility and accessibility needs" },
+      overallStrength: "Good instinct to ask about budget and preferences",
+      overallGap: "Missed critical health and mobility information that significantly impacts cruise selection",
+      expertComparison: "An expert consultant would have used a systematic intake checklist covering mobility, health, and accessibility before any recommendation. They would also have immediately recognized that motion sickness + mobility limitations points strongly toward river cruising."
+    };
+  }
+
+  document.getElementById('loading-overlay').classList.remove('active');
+  renderDebrief(debriefData);
+}
+
+function renderDebrief(d) {
+  // Show debrief section
+  document.getElementById('debrief').style.display = 'block';
+  document.getElementById('phase-intro').style.display = 'none';
+  document.getElementById('advance-btn').style.display = 'none';
+
+  // Update phase tracker
+  for (let i = 0; i <= 5; i++) {
+    const el = document.getElementById(`step-${i}`);
+    if (!el) continue;
+    el.className = 'phase-step' + (i < 5 ? ' done' : ' active');
+  }
+
+  const score = d.score || 65;
+  const circumference = 2 * Math.PI * 26;
+  const offset = circumference - (score / 100) * circumference;
+  const anchorSev = d.anchoring?.severity || 'none';
+  const closureSev = d.prematureClosure?.severity || 'none';
+
+  const severityClass = (s) => s === 'none' ? 'good' : s === 'mild' ? 'warn' : 'danger';
+  const severityIcon = (s) => s === 'none' ? '✓' : s === 'mild' ? '⚠️' : '🔴';
+
+  const barColor = (q) => q === 'excellent' || q === 'good' ? '#1e8449' : q === 'developing' ? '#b7770d' : '#922b21';
+  const barWidth = (q) => q === 'excellent' ? 95 : q === 'good' ? 75 : q === 'developing' ? 48 : 22;
+
+  document.getElementById('debrief-body').innerHTML = `
+    <!-- Score ring -->
+    <div class="score-ring-wrap">
+      <div class="score-ring">
+        <svg width="64" height="64" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="26" fill="none" stroke="#e8ecf0" stroke-width="5"/>
+          <circle cx="32" cy="32" r="26" fill="none" stroke="#2874A6" stroke-width="5"
+            stroke-dasharray="${circumference}" stroke-dashoffset="${offset}"
+            stroke-linecap="round" style="transition:stroke-dashoffset 1.2s ease"/>
+        </svg>
+        <div class="score-ring-num">${score}</div>
+      </div>
+      <div class="score-meta">
+        <h4>${d.scoreLabel || 'Developing Reasoner'}</h4>
+        <p>${d.overallStrength || 'Good engagement with the scenario.'}</p>
+      </div>
+    </div>
+
+    <!-- Reasoning map -->
+    <div class="reasoning-map">
+      <h4>Reasoning Dimensions</h4>
+      <div class="rm-row">
+        <div class="rm-label">Information Gathering</div>
+        <div class="rm-bar-wrap"><div class="rm-bar" style="width:${barWidth(d.informationGathering?.quality)}%;background:${barColor(d.informationGathering?.quality)}"></div></div>
+        <div class="rm-val">${d.informationGathering?.quality || '—'}</div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-label">Pivot on New Evidence</div>
+        <div class="rm-bar-wrap"><div class="rm-bar" style="width:${barWidth(d.pivotBehavior?.quality)}%;background:${barColor(d.pivotBehavior?.quality)}"></div></div>
+        <div class="rm-val">${d.pivotBehavior?.quality || '—'}</div>
+      </div>
+      <div class="rm-row">
+        <div class="rm-label">Anchoring Resistance</div>
+        <div class="rm-bar-wrap"><div class="rm-bar" style="width:${anchorSev === 'none' ? 88 : anchorSev === 'mild' ? 55 : 25}%;background:${anchorSev === 'none' ? '#1e8449' : anchorSev === 'mild' ? '#b7770d' : '#922b21'}"></div></div>
+        <div class="rm-val">${anchorSev === 'none' ? 'strong' : anchorSev}</div>
+      </div>
+    </div>
+
+    <!-- Bias cards -->
+    <div class="bias-card ${severityClass(anchorSev)}">
+      <h4>${severityIcon(anchorSev)} Anchoring Bias — ${anchorSev === 'none' ? 'Not detected' : anchorSev.charAt(0).toUpperCase() + anchorSev.slice(1)}</h4>
+      <p>${d.anchoring?.evidence || 'No significant anchoring observed in this session.'}</p>
+    </div>
+
+    <div class="bias-card ${severityClass(closureSev)}">
+      <h4>${severityIcon(closureSev)} Premature Closure — ${closureSev === 'none' ? 'Not detected' : closureSev.charAt(0).toUpperCase() + closureSev.slice(1)}</h4>
+      <p>${d.prematureClosure?.evidence || 'Good evidence gathering before committing to a recommendation.'}</p>
+    </div>
+
+    ${d.overallGap ? `<div class="bias-card warn">
+      <h4>⚡ Key Gap Identified</h4>
+      <p>${d.overallGap}</p>
+    </div>` : ''}
+
+    <!-- Expert comparison -->
+    <div class="bias-card good">
+      <h4>🎓 How an Expert Would Approach This</h4>
+      <p>${d.expertComparison || 'Expert consultants use systematic intake questions to surface accessibility, health, and preference information before forming any recommendation.'}</p>
+    </div>
+
+    <!-- RDX footer -->
+    <div class="rdx-footer">
+      <div class="rdx-footer-text">
+        <strong>This is ReasonDx.</strong> The same reasoning intelligence, applied to medicine, business, law, and any field where decisions depend on evidence-based thinking.
+      </div>
+      <div class="rdx-footer-logo">Reason<span>Dx</span></div>
+    </div>`;
+
+  document.getElementById('debrief').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Init
+updatePhaseUI(0);
+</script>
+</body>
+</html>
