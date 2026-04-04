@@ -1292,6 +1292,69 @@ function enterPhase(phase) {
             return AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData, ragContext)
               .then(function(debrief) {
                 addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
+              // Study mode: append labeled bias feedback
+              if (studyMode && _caseEntry && _caseEntry.biasTarget) {
+                var biasLabels = {
+                  anchoring:            'Anchoring Bias — committing to an early diagnosis before all data is in',
+                  premature_closure:    'Premature Closure — stopping the search for alternative explanations too soon',
+                  diagnostic_momentum: 'Diagnostic Momentum — accepting a previous provider\'s label without re-evaluating',
+                  availability:        'Availability Bias — over-weighting diagnoses that come to mind easily',
+                  representativeness:  'Representativeness Bias — matching to a prototype rather than the specific patient'
+                };
+                var biasName = biasLabels[_caseEntry.biasTarget] || _caseEntry.biasTarget;
+                var conflictNote = _caseEntry.scriptConflict
+                  ? '\n\n⚠️ Script Conflict: In this case, a prior professional heuristic can lead reasoning in the wrong direction. Recognizing when your background creates a blind spot is a core debiasing skill.'
+                  : '';
+                setTimeout(function() {
+                  addMessage('system', '🎯 Cognitive Bias Focus: This case was designed to probe <strong>' + biasName + '</strong>.' + conflictNote + '\n\nReflect: Did this pattern appear in your reasoning today?');
+                  // Metacognition 3-item self-report (IMSR-adapted, Wang et al. 2023)
+                  setTimeout(function() {
+                    var metaDiv = document.createElement('div');
+                    metaDiv.style.cssText = 'background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:16px 18px;margin:12px 0;';
+                    metaDiv.innerHTML = `
+                      <div style="font-weight:600;color:#15803D;margin-bottom:12px">📊 Quick Reflection (3 items)</div>
+                      ${[
+                        {id:'meta1', q:'I knew when I had reached a complete understanding of this patient\'s problem.'},
+                        {id:'meta2', q:'I monitored my reasoning as I worked through the case.'},
+                        {id:'meta3', q:'I would approach this case differently if I did it again.'}
+                      ].map(({id,q}) => `
+                        <div style="margin-bottom:12px">
+                          <div style="font-size:0.88rem;color:#1e293b;margin-bottom:6px">${q}</div>
+                          <div style="display:flex;gap:6px">
+                            ${['Strongly disagree','Disagree','Neutral','Agree','Strongly agree'].map((lbl,i) => `
+                              <button onclick="recordMeta('${id}',${i+1},this)"
+                                style="padding:4px 8px;border-radius:6px;border:1px solid #BBF7D0;background:#fff;font-size:0.75rem;cursor:pointer">
+                                ${i+1}
+                              </button>`).join('')}
+                          </div>
+                        </div>`).join('')}
+                      <button onclick="saveMeta()" style="margin-top:4px;padding:6px 14px;background:#16a34a;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem">Save Reflection</button>
+                      <span id="meta-saved" style="display:none;color:#16a34a;font-size:0.82rem;margin-left:8px">✓ Saved</span>
+                    `;
+                    var mc = document.getElementById('messages');
+                    if(mc) mc.appendChild(metaDiv);
+
+                    var metaVals = {};
+                    window.recordMeta = function(id, val, btn) {
+                      metaVals[id] = val;
+                      // highlight selected button
+                      btn.parentElement.querySelectorAll('button').forEach(b => b.style.background='#fff');
+                      btn.style.background = '#DCFCE7';
+                    };
+                    window.saveMeta = function() {
+                      try {
+                        var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+                        if (!u.studyProtocol) u.studyProtocol = {};
+                        if (!u.studyProtocol.caseData) u.studyProtocol.caseData = {};
+                        if (!u.studyProtocol.caseData[selectedCase]) u.studyProtocol.caseData[selectedCase] = {};
+                        u.studyProtocol.caseData[selectedCase].metacognition = metaVals;
+                        localStorage.setItem('reasondx-user', JSON.stringify(u));
+                      } catch(e) {}
+                      document.getElementById('meta-saved').style.display = 'inline';
+                    };
+                  }, 2400);
+                }, 1200);
+              }
 
                 // Show RAG guideline sources
                 if (ragContext && ragContext.found && ragContext.sources && ragContext.sources.length > 0) {
@@ -2672,15 +2735,88 @@ async function exportStudyData() {
         }
       }
 
-      // At completion: notify study-protocol.html if in study mode
-  if (studyMode && window.opener) {
-    try {
-      window.opener.postMessage({
-        type: 'rdx-case-complete',
-        caseId: selectedCase,
-        timestamp: new Date().toISOString()
-      }, '*');
-    } catch(e) {}
+      // At completion: confidence rating + notify study-protocol.html
+  if (studyMode) {
+    // Inject confidence prompt before debrief renders
+    // Free-text diagnosis statement (illness script richness measure)
+    var dxDiv = document.createElement('div');
+    dxDiv.id = 'study-dx-statement';
+    dxDiv.style.cssText = 'background:#F8FAFC;border:1px solid #e2e8f0;border-radius:10px;padding:16px 18px;margin:12px 0;';
+    dxDiv.innerHTML = `
+      <div style="font-weight:600;color:#1e293b;margin-bottom:8px">In one sentence: what is your leading diagnosis, and what single feature most supports it?</div>
+      <textarea id="dx-statement-input" rows="2"
+        style="width:100%;padding:8px;border:1px solid #CBD5E1;border-radius:6px;font-size:0.9rem;resize:vertical"
+        placeholder="e.g. Leading diagnosis is X because of Y..."></textarea>
+      <button onclick="saveDxStatement()" style="margin-top:8px;padding:6px 14px;background:#2874A6;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem">Save →</button>
+      <span id="dx-saved" style="display:none;color:#16a34a;font-size:0.82rem;margin-left:8px">✓ Saved</span>
+    `;
+    if (msgContainer) msgContainer.appendChild(dxDiv);
+
+    window.saveDxStatement = function() {
+      var text = (document.getElementById('dx-statement-input')?.value || '').trim();
+      if (!text) return;
+      try {
+        var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        if (!u.studyProtocol) u.studyProtocol = {};
+        if (!u.studyProtocol.caseData) u.studyProtocol.caseData = {};
+        if (!u.studyProtocol.caseData[selectedCase]) u.studyProtocol.caseData[selectedCase] = {};
+        u.studyProtocol.caseData[selectedCase].dxStatement = text;
+        u.studyProtocol.caseData[selectedCase].dxStatementAt = new Date().toISOString();
+        localStorage.setItem('reasondx-user', JSON.stringify(u));
+      } catch(e) {}
+      document.getElementById('dx-saved').style.display = 'inline';
+    };
+
+    var confDiv = document.createElement('div');
+    confDiv.id = 'study-confidence-prompt';
+    confDiv.style.cssText = 'background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:18px 20px;margin:12px 0;';
+    confDiv.innerHTML = `
+      <div style="font-weight:600;color:#1D4ED8;margin-bottom:10px">Before you see the feedback — how confident were you in your reasoning?</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        ${[1,2,3,4,5].map(n => `
+          <button onclick="recordConfidence(${n})" id="conf-btn-${n}"
+            style="padding:8px 16px;border-radius:8px;border:2px solid #BFDBFE;background:#fff;
+                   cursor:pointer;font-size:0.9rem;transition:all 0.15s"
+            onmouseover="this.style.background='#DBEAFE'" onmouseout="if(!this.classList.contains('selected'))this.style.background='#fff'">
+            ${['1 — Guessing','2 — Uncertain','3 — Somewhat sure','4 — Confident','5 — Very confident'][n-1]}
+          </button>`).join('')}
+      </div>
+      <div id="conf-saved" style="display:none;color:#16a34a;font-size:0.85rem;margin-top:8px">✓ Recorded</div>
+    `;
+    var msgContainer = document.getElementById('messages');
+    if (msgContainer) msgContainer.appendChild(confDiv);
+
+    window.recordConfidence = function(rating) {
+      // Save to studyProtocol in localStorage
+      try {
+        var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        if (!u.studyProtocol) u.studyProtocol = {};
+        if (!u.studyProtocol.caseData) u.studyProtocol.caseData = {};
+        if (!u.studyProtocol.caseData[selectedCase]) u.studyProtocol.caseData[selectedCase] = {};
+        u.studyProtocol.caseData[selectedCase].confidence = rating;
+        u.studyProtocol.caseData[selectedCase].confidenceAt = new Date().toISOString();
+        localStorage.setItem('reasondx-user', JSON.stringify(u));
+      } catch(e) {}
+      // Visual feedback
+      [1,2,3,4,5].forEach(n => {
+        var b = document.getElementById('conf-btn-'+n);
+        if(b) { b.style.background = '#fff'; b.classList.remove('selected'); }
+      });
+      var sel = document.getElementById('conf-btn-'+rating);
+      if(sel) { sel.style.background='#DBEAFE'; sel.style.borderColor='#2874A6'; sel.classList.add('selected'); }
+      document.getElementById('conf-saved').style.display = 'block';
+      // Notify parent
+      if (window.opener) {
+        try {
+          window.opener.postMessage({
+            type: 'rdx-case-complete',
+            caseId: selectedCase,
+            confidence: rating,
+            timestamp: new Date().toISOString()
+          }, '*');
+        } catch(e) {}
+      }
+    };
   }
   // At completion: build debrief panel
       if (phase === PHASES.COMPLETE || phase === 10) {

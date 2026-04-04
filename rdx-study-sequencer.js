@@ -134,13 +134,37 @@ function getSequenceState(profile) {
     layerLabel: 'Cross-Disciplinary Cases'
   };
 
+  // Wave 2: check if 6-month follow-up is due
+  const completedAt = sp.completedAt ? new Date(sp.completedAt) : null;
+  const now = new Date();
+  const sixMonthsMs = 180 * 24 * 60 * 60 * 1000;
+  const wave2Due = completedAt && (now - completedAt) >= sixMonthsMs;
+  const wave2Done = !!sp.wave2CompletedAt;
+
+  if (wave2Due && !wave2Done) {
+    const wave2Completed = new Set(sp.wave2CompletedCases || []);
+    const wave2Remaining = l1.filter(c => !wave2Completed.has(c.id));
+    return {
+      phase: 'wave2',
+      currentLayer: 'wave2',
+      nextCases: wave2Remaining,
+      totalRequired: l1.length,
+      completed: wave2Completed.size,
+      unlocked: true,         // free exploration stays open during wave 2
+      wave2Due: true,
+      layerLabel: '6-Month Follow-Up Assessment'
+    };
+  }
+
   return {
     phase: 'complete',
     currentLayer: null,
     nextCases: [],
     totalRequired: l1.length + l2.length + l3.length,
     completed: completed.size,
-    unlocked: true
+    unlocked: true,
+    wave2Due: wave2Due && !wave2Done,
+    wave2Done: wave2Done
   };
 }
 
@@ -214,6 +238,28 @@ window.RDXStudySequencer = {
   getProgressSummary,
   hasPriorNursing:       () => hasPrior(getUserProfile(),'nursing'),
   hasPriorDental:        () => hasPrior(getUserProfile(),'dental'),
+  markWave2CaseComplete(caseId) {
+    const profile = getUserProfile();
+    if (!profile.studyProtocol) return;
+    const wave2Completed = new Set(profile.studyProtocol.wave2CompletedCases || []);
+    wave2Completed.add(caseId);
+    profile.studyProtocol.wave2CompletedCases = Array.from(wave2Completed);
+    // Check if wave 2 is fully done
+    const l1 = getLayer1Cases();
+    if (l1.every(c => wave2Completed.has(c.id))) {
+      profile.studyProtocol.wave2CompletedAt = new Date().toISOString();
+    }
+    saveUserProfile(profile);
+    return getSequenceState(profile);
+  },
+  // For IRB: force wave2 eligibility check (used in study-protocol.html banner)
+  isWave2Due() {
+    const profile = getUserProfile();
+    const sp = profile.studyProtocol || {};
+    if (!sp.completedAt || sp.wave2CompletedAt) return false;
+    const sixMonthsMs = 180 * 24 * 60 * 60 * 1000;
+    return (new Date() - new Date(sp.completedAt)) >= sixMonthsMs;
+  },
   getLayer1Cases,
   getLayer2Cases:        () => getLayer2Cases(getUserProfile()),
   getLayer3Cases,

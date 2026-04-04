@@ -92,6 +92,18 @@ function markComplete(caseId) {
   render();
 }
 
+function launchWave2Case(caseId) {
+  var url = 'simulation-engine.html?case='+encodeURIComponent(caseId)+'&mode=study&wave=2';
+  var win = window.open(url,'_blank');
+  window.addEventListener('message', function handler(e) {
+    if (e.data && e.data.type==='rdx-case-complete' && e.data.caseId===caseId) {
+      RDXStudySequencer.markWave2CaseComplete(caseId);
+      loadProfile();
+      render();
+      window.removeEventListener('message', handler);
+    }
+  });
+}
 function launchCase(caseId) {
   var url = 'simulation-engine.html?case='+encodeURIComponent(caseId)+'&mode=study';
   var win = window.open(url,'_blank');
@@ -120,12 +132,41 @@ function render() {
 
   document.getElementById('hdr-prog').textContent = done+' / '+total+' complete';
 
+  if (state.phase==='wave2') {
+    // 6-month follow-up due
+    var wave2done = new Set((profile.studyProtocol||{}).wave2CompletedCases||[]);
+    var l1all = RDXStudySequencer.getLayer1Cases();
+    var wave2rem = l1all.filter(c => !wave2done.has(c.id));
+    var w2pct = l1all.length > 0 ? Math.round((wave2done.size/l1all.length)*100) : 0;
+    document.getElementById('hdr-prog').textContent = wave2done.size+' / '+l1all.length+' complete (Wave 2)';
+    var cards = wave2rem.map(function(c,i){
+      var q = c.studyProfQuestion||c.profQuestion||'';
+      return '<div class="card">'+
+        '<div class="case-num">Follow-Up Case '+(i+1)+' of '+l1all.length+'</div>'+
+        '<div class="case-cc">'+c.chiefComplaint+'</div>'+
+        (q?'<div class="case-q">"'+q+'"</div>':'')+
+        '<button class="btn" onclick="launchWave2Case(''+c.id+'')">Begin Case →</button>'+
+        '</div>';
+    }).join('');
+    document.getElementById('sp-body').innerHTML =
+      '<div class="card intro" style="border-color:#FED7AA;background:#FFF7ED">'+
+      '<h2 style="color:#C2410C">📅 6-Month Follow-Up Assessment</h2>'+
+      '<p>Six months have passed since your initial assessment. Please complete the same '+l1all.length+' core cases again. Your reasoning may have changed — work through each case as you normally would.</p>'+
+      '<span class="time-badge" style="background:#FEF3C7;color:#B45309">⏱ Est. 40–50 minutes</span></div>'+
+      '<div class="prog-bar"><div class="prog-fill" style="width:'+w2pct+'%;background:#C2410C"></div></div>'+
+      cards;
+    return;
+  }
   if (state.phase==='complete') {
+    var wave2Note = state.wave2Due
+      ? '<p style="margin-top:12px;padding:10px 14px;background:#FFF7ED;border-radius:8px;border:1px solid #FED7AA;font-size:.88rem;color:#C2410C">📅 Your 6-month follow-up assessment is now available. <a href="study-protocol.html">Return here</a> to complete it.</p>'
+      : '';
     document.getElementById('sp-body').innerHTML =
       '<div class="complete-wrap">'+
       '<div style="font-size:3rem;margin-bottom:14px">✅</div>'+
       '<h2>Assessment Complete</h2>'+
       '<p>You have completed all '+total+' cases in the Clinical Reasoning Assessment Protocol. The full ReasonDx library is now available for free exploration.</p>'+
+      wave2Note+
       '<a href="browse.html" class="btn done-btn" style="display:inline-block;text-decoration:none;margin-top:8px">Explore ReasonDx →</a>'+
       '</div>';
     return;
