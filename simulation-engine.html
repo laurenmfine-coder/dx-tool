@@ -207,6 +207,7 @@ function startStudy() {
   var params = new URLSearchParams(window.location.search);
   var selectedCase = params.get('case') || params.get('caseId') || '';
   var depthVersion = params.get('depth') || 'v1';
+  var studyMode = params.get('mode') === 'study';
 
   if (!selectedCase) {
     // No case in URL — redirect to browse
@@ -1437,6 +1438,11 @@ function buildSystemPrompt() {
     var _profId = _u.professionProfile && _u.professionProfile.professionId;
     var _caseEntry = window.CRT_INDEX && caseData && caseData.id && window.CRT_INDEX[caseData.id];
     if (_caseEntry) {
+      // Study mode: use studyProfQuestion as the standardized opening question
+      if (studyMode && _caseEntry && _caseEntry.studyProfQuestion) {
+        _profQuestionOverride += '\n\nSTUDY PROTOCOL: After presenting the case, your FIRST and ONLY opening question is: ' +
+          '"' + _caseEntry.studyProfQuestion + '" — use this exact framing for all students.';
+      }
       // Arc context — tell attending about the full patient arc
       if (_caseEntry.arcLabel && _caseEntry.arcOrder) {
         _profQuestionOverride += '\n\nARC CONTEXT: This is Encounter ' + _caseEntry.arcOrder +
