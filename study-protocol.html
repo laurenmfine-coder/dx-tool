@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ReasonDx — Clinical Reasoning Assessment</title>
+<link rel="icon" href="favicon.ico">
+<script src="rdx-profession-onboarding.js"></script>
+<script src="emr-data/crt-index.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+         background: #f8fafc; color: #1e293b; min-height: 100vh; }
+  .sp-header { background: #2874A6; color: white; padding: 16px 24px;
+               display: flex; align-items: center; gap: 12px; }
+  .sp-header h1 { font-size: 1.1rem; font-weight: 600; }
+  .sp-header .sp-progress { margin-left: auto; font-size: 0.85rem; opacity: 0.9; }
+  .sp-body { max-width: 780px; margin: 32px auto; padding: 0 20px; }
+  .sp-intro { background: white; border-radius: 12px; padding: 28px;
+              border: 1px solid #e2e8f0; margin-bottom: 24px; }
+  .sp-intro h2 { font-size: 1.25rem; color: #2874A6; margin-bottom: 12px; }
+  .sp-intro p { color: #475569; line-height: 1.6; margin-bottom: 8px; }
+  .sp-intro .sp-time { display: inline-block; background: #EFF6FF; color: #1D4ED8;
+                       padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;
+                       font-weight: 500; margin-top: 8px; }
+  .sp-case-card { background: white; border-radius: 12px; padding: 24px;
+                  border: 1px solid #e2e8f0; margin-bottom: 16px;
+                  transition: box-shadow 0.2s; }
+  .sp-case-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+  .sp-case-num { font-size: 0.75rem; font-weight: 700; color: #64748b;
+                 text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .sp-case-cc { font-size: 1.05rem; font-weight: 600; color: #1e293b; margin-bottom: 8px; }
+  .sp-case-q  { color: #475569; font-size: 0.9rem; line-height: 1.5; margin-bottom: 16px;
+                border-left: 3px solid #2874A6; padding-left: 12px; }
+  .sp-btn { background: #2874A6; color: white; border: none; padding: 10px 20px;
+            border-radius: 8px; font-size: 0.9rem; font-weight: 500; cursor: pointer;
+            transition: background 0.2s; }
+  .sp-btn:hover { background: #1a5c8a; }
+  .sp-btn.sp-btn-done { background: #16a34a; }
+  .sp-badge-done { display: inline-flex; align-items: center; gap: 6px;
+                   color: #16a34a; font-size: 0.85rem; font-weight: 500; }
+  .sp-progress-bar { width: 100%; height: 6px; background: #e2e8f0;
+                     border-radius: 3px; margin: 16px 0; overflow: hidden; }
+  .sp-progress-fill { height: 100%; background: #2874A6;
+                      border-radius: 3px; transition: width 0.4s; }
+  .sp-complete { text-align: center; padding: 48px 24px; }
+  .sp-complete h2 { font-size: 1.5rem; color: #2874A6; margin-bottom: 12px; }
+  .sp-complete p { color: #475569; max-width: 500px; margin: 0 auto 24px; line-height: 1.6; }
+  .sp-locked { background: #f1f5f9; color: #94a3b8; padding: 8px 16px;
+               border-radius: 8px; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+<div class="sp-header">
+  <span style="font-size:1.4rem">🧠</span>
+  <h1>ReasonDx — Clinical Reasoning Assessment</h1>
+  <div class="sp-progress" id="sp-progress-text"></div>
+</div>
+<div class="sp-body">
+  <div id="sp-content"></div>
+</div>
+<script>
+// ── Study Protocol Configuration ──────────────────────────────────────────────
+const STUDY_BLOCKS = {
+  A: 'nursing',
+  B: 'dental',
+  C: 'neutral'
+};
+
+// Get study cases from CRT_INDEX and randomize within blocks
+function getStudyCases() {
+  if (!window.CRT_INDEX) return [];
+  const blocks = {A:[],B:[],C:[]};
+  Object.entries(CRT_INDEX).forEach(([id,c]) => {
+    if (c.studyCase && blocks[c.studyBlock]) {
+      blocks[c.studyBlock].push({id, ...c});
+    }
+  });
+  // Randomize within each block, then interleave A/B/C
+  // Delivery order: neutral first (block C), then A and B interleaved
+  // This prevents front-loading domain-specific cases
+  const shuffle = arr => arr.sort(() => Math.random() - 0.5);
+  const shuffledA = shuffle([...blocks.A]);
+  const shuffledB = shuffle([...blocks.B]);
+  const shuffledC = shuffle([...blocks.C]);
+  // Order: C1, A1, B1, C2, A2, B2, C3, A3, B3... 
+  // (alternating so no block comes all at once)
+  const ordered = [];
+  const maxLen = Math.max(shuffledA.length, shuffledB.length, shuffledC.length);
+  for (let i = 0; i < maxLen; i++) {
+    if (shuffledC[i]) ordered.push(shuffledC[i]);
+    if (shuffledA[i]) ordered.push(shuffledA[i]);
+    if (shuffledB[i]) ordered.push(shuffledB[i]);
+  }
+  return ordered;
+}
+
+// ── State ────────────────────────────────────────────────────────────────────
+let cases = [];
+let completedIds = new Set();
+
+function init() {
+  // Load completed cases from localStorage
+  try {
+    const u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    const completed = (u.studyProtocol || {}).completedCases || [];
+    completedIds = new Set(completed);
+  } catch(e) {}
+  
+  cases = getStudyCases();
+  if (cases.length === 0) {
+    document.getElementById('sp-content').innerHTML =
+      '<div class="sp-intro"><h2>Protocol Loading...</h2><p>Please refresh if this persists.</p></div>';
+    return;
+  }
+  render();
+}
+
+function markComplete(caseId) {
+  completedIds.add(caseId);
+  // Save to localStorage
+  try {
+    const u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    if (!u.studyProtocol) u.studyProtocol = {};
+    u.studyProtocol.completedCases = Array.from(completedIds);
+    if (completedIds.size >= cases.length) {
+      u.studyProtocol.completedAt = new Date().toISOString();
+      u.studyComplete = true;
+    }
+    localStorage.setItem('reasondx-user', JSON.stringify(u));
+  } catch(e) {}
+  render();
+}
+
+function launchCase(caseId) {
+  // Launch in simulation mode — profession override will inject studyProfQuestion
+  const url = `simulation-engine.html?case=${encodeURIComponent(caseId)}&mode=study`;
+  window.open(url, '_blank');
+  // Listen for completion message from sim window
+  window.addEventListener('message', function handler(e) {
+    if (e.data && e.data.type === 'rdx-case-complete' && e.data.caseId === caseId) {
+      markComplete(caseId);
+      window.removeEventListener('message', handler);
+    }
+  });
+  // Also mark as complete after 2 minutes (fallback — sim engine posts message on completion)
+  setTimeout(() => { if (!completedIds.has(caseId)) markComplete(caseId); }, 120000);
+}
+
+function render() {
+  const total = cases.length;
+  const done  = completedIds.size;
+  const pct   = total > 0 ? Math.round((done/total)*100) : 0;
+  
+  document.getElementById('sp-progress-text').textContent = `${done} / ${total} cases complete`;
+  
+  if (done >= total) {
+    document.getElementById('sp-content').innerHTML = `
+      <div class="sp-complete">
+        <div style="font-size:3rem;margin-bottom:16px;">✅</div>
+        <h2>Assessment Complete</h2>
+        <p>You have completed all ${total} clinical reasoning cases. Your responses have been recorded. Your instructor will review aggregate findings with the cohort at the end of the term.</p>
+        <a href="browse.html" class="sp-btn sp-btn-done" style="display:inline-block;text-decoration:none;margin-top:8px;">Continue Learning on ReasonDx →</a>
+      </div>`;
+    return;
+  }
+  
+  const progressBar = `
+    <div class="sp-progress-bar">
+      <div class="sp-progress-fill" style="width:${pct}%"></div>
+    </div>`;
+  
+  const intro = done === 0 ? `
+    <div class="sp-intro">
+      <h2>Clinical Reasoning Assessment Protocol</h2>
+      <p>You will work through <strong>${total} clinical cases</strong> presented as brief vignettes. For each case, read the scenario carefully and respond to the clinical question. Work independently — use your own reasoning.</p>
+      <p>There are no trick questions. We are interested in your natural reasoning process, not memorized answers.</p>
+      <span class="sp-time">⏱ Estimated time: 40–50 minutes</span>
+    </div>` : '';
+  
+  const cards = cases.map((c, idx) => {
+    const isDone = completedIds.has(c.id);
+    // Show studyProfQuestion if available, else fall back to profQuestion
+    const question = c.studyProfQuestion || c.profQuestion || '';
+    // Don't show case ID, block, bias info — blind delivery
+    return `
+      <div class="sp-case-card" id="card-${c.id}">
+        <div class="sp-case-num">Case ${idx + 1} of ${total}</div>
+        <div class="sp-case-cc">${c.chiefComplaint || ''}</div>
+        ${question ? `<div class="sp-case-q">"${question}"</div>` : ''}
+        ${isDone
+          ? `<span class="sp-badge-done">✓ Completed</span>`
+          : `<button class="sp-btn" onclick="launchCase('${c.id}')">Begin Case →</button>`
+        }
+      </div>`;
+  }).join('');
+  
+  document.getElementById('sp-content').innerHTML = intro + progressBar + cards;
+}
+
+window.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

@@ -2666,7 +2666,17 @@ async function exportStudyData() {
         }
       }
 
-      // At completion: build debrief panel
+      // At completion: notify study-protocol.html if in study mode
+  if (studyMode && window.opener) {
+    try {
+      window.opener.postMessage({
+        type: 'rdx-case-complete',
+        caseId: selectedCase,
+        timestamp: new Date().toISOString()
+      }, '*');
+    } catch(e) {}
+  }
+  // At completion: build debrief panel
       if (phase === PHASES.COMPLETE || phase === 10) {
         setTimeout(function() { renderReasoningDebrief(); }, 1500);
       }

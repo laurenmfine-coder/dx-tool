@@ -478,6 +478,20 @@ class ProfessionOnboardingModal {
           </div>
         </div>
 
+        <div class="rdx-po-prior-exp-block" style="margin-bottom:16px;">
+          <div class="rdx-po-consent-text" style="margin-bottom:8px;">
+            <span class="rdx-po-consent-title" style="display:block;font-weight:600;margin-bottom:4px;">Prior Healthcare Experience</span>
+            <span class="rdx-po-consent-desc" style="font-size:0.85em;color:#666;">Select any roles you held before your current program (helps personalize your learning path)</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;">
+            ${['Registered Nurse (RN)','Licensed Practical Nurse (LPN)','Dental Student / DDS / DMD','Dental Hygienist','EMT / Paramedic','Medical Scribe','Pharmacy Technician','CNA / Patient Care Tech','Medical Assistant','Research / Lab','Other Clinical','None'].map(exp => `
+            <label style="display:flex;align-items:center;gap:6px;font-size:0.85em;cursor:pointer;">
+              <input type="checkbox" class="rdx-po-prior-exp-check" value="${exp}"
+                ${(this.selected.priorExperience||[]).includes(exp)?'checked':''}>
+              <span>${exp}</span>
+            </label>`).join('')}
+          </div>
+        </div>
         <div class="rdx-po-consent-block">
           <label class="rdx-po-consent-label">
             <input type="checkbox" id="rdx-po-consent" class="rdx-po-consent-check"
@@ -530,6 +544,13 @@ class ProfessionOnboardingModal {
   }
 
   _bindStep3() {
+    document.querySelectorAll('.rdx-po-prior-exp-check').forEach(cb => {
+      cb.addEventListener('change', () => {
+        this.selected.priorExperience = Array.from(
+          document.querySelectorAll('.rdx-po-prior-exp-check:checked')
+        ).map(c => c.value);
+      });
+    });
     document.getElementById('rdx-po-consent')?.addEventListener('change', e => {
       this.selected.researchConsent = e.target.checked;
     });
