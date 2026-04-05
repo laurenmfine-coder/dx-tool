@@ -296,7 +296,15 @@ function startStudy() {
         state.priorHistory = history.patterns;
         if(RDX_DEBUG) console.log('Prior student history found:', history.patterns);
         if (history.patterns.isRepeatStudent) {
-          addMessage('system', 'Welcome back! This is session ' + (history.patterns.totalCompleted + 1) + ' for you.');
+          // LSCS: show pre-case check-in before simulation begins
+  if (window.RdxLSCS) {
+    RdxLSCS.reset();
+    RdxLSCS.showPreCase(function() {
+      RdxLSCS.scheduleMidCase(5 * 60 * 1000);
+    });
+  }
+
+  addMessage('system', 'Welcome back! This is session ' + (history.patterns.totalCompleted + 1) + ' for you.');
         }
       }
     }).catch(function(e) { console.log('Prior history lookup skipped:', e.message); });
@@ -1312,7 +1320,13 @@ function enterPhase(phase) {
             : Promise.resolve({ found: false, contextBlock: '', sources: [] });
 
           ragPromise.then(function(ragContext) {
-            return AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData, ragContext)
+            return // LSCS post-case check-in before debrief
+    if (window.RdxLSCS) {
+      RdxLSCS.showPostCase(function() {
+        // onComplete: debrief renders after post-case check-in
+      });
+    }
+    AgentTools.generateDebrief(WORKER_URL, gaps, state, caseData, ragContext)
               .then(function(debrief) {
                 addMessage('patel', '[Teaching Debrief — Post-Simulation]\n\n' + debrief);
               // Study mode: append labeled bias feedback
@@ -2267,6 +2281,7 @@ async function exportStudyData() {
     student_model_snapshot: state.studentModelSnapshot || null,
     meta_reasoning_record: state.metaReasoningRecord || null,
     scaffold_condition: state.scaffoldCondition || null,  // Sub-Project 6: RCT arm
+    lscs_data: window.RdxLSCS ? RdxLSCS.getFullData() : null,  // LSCS sub-study
     // Sub-Project 2: NotebookLM closed-loop study
     ...( window.RdxNLMTracker ? RdxNLMTracker.getSessionFields(state.studentName) : {} ),
     case_source: caseData.source || 'native',
