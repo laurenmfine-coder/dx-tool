@@ -968,10 +968,33 @@ function checkPhaseTransition(signals) {
     var pronoun = caseData.presentation.sex === 'Male' ? "He's" : "She's";
     var intro = "[As Dr. Patel]\n\nAlright, let's go see " + patientDisplay + ". " + pronoun + " in exam room 3.\n\n" + patientDisplay + ", this is " + state.studentName + ", a medical student on our team. " + state.studentName + " is going to talk with you and ask some questions.";
 
-    // Training-level scaffolding
+    // ── SCAFFOLDING RCT (Sub-Project 6) ──────────────────────────────────────
+    // For M1-M2 students: randomly assign scaffold vs. no-scaffold condition.
+    // Assignment is deterministic per student (hash-based) so it's consistent
+    // across all sessions in the same study period. Stored in state for Supabase.
+    var scaffoldCondition = null;
     if (year === 'M1' || year === 'M2') {
-      intro += "\n\n" + state.studentName + ", before you start \u2014 take a moment to think about what categories of history you want to cover. Think about the HPI, past medical history, medications, social history, family history, and review of systems. What areas might be especially important given the chief complaint?";
-      intro += "\n\nI'll be right outside. Come find me when you're done.";
+      // Deterministic assignment: odd char sum = scaffold, even = control
+      var nameHash = (state.studentName || '').split('').reduce(function(s,c){ return s + c.charCodeAt(0); }, 0);
+      scaffoldCondition = (nameHash % 2 === 1) ? 'scaffold' : 'control';
+      // Allow override from user profile (research protocol overrides random)
+      if (window.RdxPlatform && RdxPlatform.getScaffoldOverride) {
+        var override = RdxPlatform.getScaffoldOverride();
+        if (override) scaffoldCondition = override;
+      }
+      state.scaffoldCondition = scaffoldCondition;  // saved to Supabase
+    }
+
+    // Training-level scaffolding with RCT condition
+    if (year === 'M1' || year === 'M2') {
+      if (scaffoldCondition === 'scaffold') {
+        // SCAFFOLD arm: metacognitive pre-interview prompt
+        intro += "\n\n" + state.studentName + ", before you start — take a moment. Based on the chief complaint alone, what is your initial hypothesis? What two or three categories of illness could explain this presentation? Start broad, then let the history narrow it.";
+        intro += "\n\nI'll be right outside. Come find me when you're done.";
+      } else {
+        // CONTROL arm: standard instruction, no metacognitive scaffold
+        intro += "\n\n" + state.studentName + ", go ahead and take your history. I'll be right outside — come get me when you're ready to discuss.";
+      }
     } else if (year === 'M3' || year === 'M4') {
       intro += "\n\n" + state.studentName + ", go ahead and take your history. I'll be right outside \u2014 come get me when you're ready to discuss.";
     } else {
@@ -2189,6 +2212,10 @@ window.addEventListener('ddx:submitted', function(e) {
 function downloadStudyPackage() {
   if (!state._studyPackage || !window.RdxStudyTools) return;
   window.RdxStudyTools.NotebookLMBridge.download(state._studyPackage, state.studentName, caseData.caseId);
+  // NLM TRACKER: record download for Sub-Project 2 research
+  if (window.RdxNLMTracker) {
+    RdxNLMTracker.recordDownload(caseData.caseId, state.studentName);
+  }
 }
 
 function copyReceipt() {
@@ -2239,6 +2266,9 @@ async function exportStudyData() {
     reasoning_tools: state._reasoningTools || null,
     student_model_snapshot: state.studentModelSnapshot || null,
     meta_reasoning_record: state.metaReasoningRecord || null,
+    scaffold_condition: state.scaffoldCondition || null,  // Sub-Project 6: RCT arm
+    // Sub-Project 2: NotebookLM closed-loop study
+    ...( window.RdxNLMTracker ? RdxNLMTracker.getSessionFields(state.studentName) : {} ),
     case_source: caseData.source || 'native',
     started_at: state.phaseHistory[0]?.enteredAt || new Date().toISOString(),
     completed_at: new Date().toISOString(),
@@ -2265,6 +2295,8 @@ async function exportStudyData() {
       addMessage('system', 'Data saved locally. (Database sync pending.)');
     } else {
       console.log('Study data saved to Supabase successfully.');
+      // Mark NLM package as consumed by this session
+      if (window.RdxNLMTracker) { RdxNLMTracker.markSessionConsumed(state.studentName); }
       addMessage('system', 'Your session data has been saved.');
 
       // ── PLATFORM EVENTS — feed the unified student model ──
