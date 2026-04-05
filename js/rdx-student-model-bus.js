@@ -400,6 +400,12 @@
       }
     }
 
+    // Inject MechanismDx concept mastery gaps
+    if (window.RdxMechanismMastery) {
+      var _masteryHint = RdxMechanismMastery.getCoachingSummary(_bus.working.studentName || 'anon');
+      if (_masteryHint) lines.push(_masteryHint);
+    }
+
     lines.push('═══════════════════');
     return lines.join('\n');
   }

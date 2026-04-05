@@ -284,10 +284,12 @@ function storageKey(id){return `rdx-mecdx-elytes-${id}`;}
 function saveLocal(){if(!activeTopic)return;const d=JSON.stringify({persona:activePersona,messages,ts:Date.now()});localStorage.setItem(storageKey(activeTopic.id),d);try{window.storage?.set(storageKey(activeTopic.id),d,false);}catch(e){}}
 function loadLocal(id){try{const r=localStorage.getItem(storageKey(id));if(r)return JSON.parse(r);}catch(e){}return null;}
 function clearLocal(id){localStorage.removeItem(storageKey(id));try{window.storage?.delete(storageKey(id),false);}catch(e){}}
-async function hydrateFromPlatform(){for(const grp of Object.values(TOPICS)){for(const t of grp){try{const r=await window.storage?.get(storageKey(t.id),false);if(r?.value)localStorage.setItem(storageKey(t.id),r.value);}catch(e){}}}renderCards();}
+async function hydrateFromPlatform(){for(const grp of Object.values(TOPICS)){for(const t of grp){try{const r=await window.storage?.get(storageKey(t.id),false);if(r?.value)localStorage.setItem(storageKey(t.id),r.value);}catch(e){}}}renderCards();if(window.RdxMechanismMastery){var _sid=((JSON.parse(localStorage.getItem('reasondx-user')||'{}')).email||'anon');RdxMechanismMastery.loadFromSupabase(_sid);}}
 hydrateFromPlatform();
 </script>
 <script src="../js/mechanism-bridge.js"></script>
 <script src="../js/nav-global.js"></script>
+
+<script src="/js/rdx-mechanism-mastery.js"></script>
 </body>
 </html>

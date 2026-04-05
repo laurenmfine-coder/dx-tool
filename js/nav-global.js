@@ -175,7 +175,7 @@
   // ── INJECT AGENT CORE + NAVIGATOR WIDGET ──
   // Loads the intelligent navigation agent on every page
   function injectAgentScripts() {
-    var scripts = ['/js/rdx-platform.js', '/js/rdx-agent-core.js', '/js/rdx-navigator-widget.js', '/js/rdx-module-hooks.js', '/js/rdx-readability.js', '/js/rdx-passive.js', '/js/rdx-voice.js', '/js/rdx-reasoning-tools.js', '/js/rdx-notebooklm-tracker.js'];
+    var scripts = ['/js/rdx-platform.js', '/js/rdx-agent-core.js', '/js/rdx-navigator-widget.js', '/js/rdx-module-hooks.js', '/js/rdx-readability.js', '/js/rdx-passive.js', '/js/rdx-voice.js', '/js/rdx-reasoning-tools.js', '/js/rdx-notebooklm-tracker.js', '/js/rdx-mechanism-mastery.js', '/js/rdx-illness-script-comparator.js'];
     scripts.forEach(function(src) {
       var s = document.createElement('script');
       s.src = src;

@@ -219,10 +219,12 @@ function storageKey(id){return `rdx-mecdx-msk-${id}`;}
 function saveLocal(){if(!activeTopic)return;localStorage.setItem(storageKey(activeTopic.id),JSON.stringify({persona:activePersona,messages,ts:Date.now()}));}
 function loadLocal(id){try{const r=localStorage.getItem(storageKey(id));return r?JSON.parse(r):null;}catch(e){return null;}}
 function clearLocal(id){localStorage.removeItem(storageKey(id));}
-async function hydrateFromPlatform(){renderCards();}
+async function hydrateFromPlatform(){renderCards();if(window.RdxMechanismMastery){var _sid=((JSON.parse(localStorage.getItem('reasondx-user')||'{}')).email||'anon');RdxMechanismMastery.loadFromSupabase(_sid);}}
 hydrateFromPlatform();
 </script>
 <script src="../js/mechanism-bridge.js"></script>
 <script src="../js/nav-global.js"></script>
+
+<script src="/js/rdx-mechanism-mastery.js"></script>
 </body>
 </html>
