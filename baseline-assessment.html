@@ -353,6 +353,23 @@ body {
   .sct-scale { gap: 4px; }
   .sct-btn { font-size: 0.9rem; padding: 10px 2px; }
 }
+
+/* ── PIF MEASURE ── */
+.pif-item { margin-bottom: 24px; padding: 16px; background: #f8fafc; border-radius: 10px; }
+.pif-question { font-size: 0.9rem; color: var(--ink); margin-bottom: 12px; line-height: 1.5; }
+.pif-scale { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.pif-anchor { font-size: 0.72rem; color: var(--muted); flex-shrink: 0; max-width: 90px; line-height: 1.3; }
+.pif-anchor.lo { text-align: right; }
+.pif-anchor.hi { text-align: left; }
+.pif-buttons { display: flex; gap: 6px; flex: 1; justify-content: center; }
+.pif-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 2px solid var(--border); background: #fff;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  transition: all .15s; color: var(--ink-soft);
+}
+.pif-btn:hover { border-color: var(--ocean); color: var(--ocean); }
+.pif-btn.selected { background: var(--ocean); border-color: var(--ocean); color: #fff; }
 </style>
 </head>
 <body>
@@ -650,7 +667,7 @@ function computeScores(responses) {
 // ── STATE ─────────────────────────────────────────────────────────────────────
 
 const state = {
-  step: 0,        // 0=intro, 1..3=vignettes, 4=background, 5=CRT, 6=complete
+  step: 0,        // 0=intro, 1..3=vignettes, 4=background, 5=CRT, 6=PIF, 7=complete
   responses: {},  // { questionId: value }
   startTime: null,
   endTime: null,
@@ -658,7 +675,7 @@ const state = {
   track: null,
 };
 
-const TOTAL_STEPS = 6; // intro + 3 vignettes + background + CRT + complete
+const TOTAL_STEPS = 7; // intro + 3 vignettes + background + CRT + PIF + complete
 
 // ── SCREENS ───────────────────────────────────────────────────────────────────
 
@@ -682,6 +699,8 @@ function render() {
     renderBackground(container, nextBtn);
   } else if (state.step === 5) {
     renderCRT(container, nextBtn);
+  } else if (state.step === 6) {
+    renderPIF(container, nextBtn);
   } else if (state.step === TOTAL_STEPS) {
     renderComplete(container, nextBtn);
     document.getElementById('disclosure').style.display = 'none';
@@ -902,6 +921,90 @@ function renderCRT(container, nextBtn) {
   nextBtn.disabled = false; // CRT is optional for platform use, required for research
 }
 
+
+// ── STEP 6: PROFESSIONAL IDENTITY MEASURE ────────────────────────────────────
+// Adapted from Professional Identity Formation scales (Cruess et al., 2014;
+// Jarvis-Selinger et al., 2012). 4-item measure validated for health professions.
+// Research purpose: distinguish cognitive bias effects from professional identity
+// effects in the prior-profession study (Arm 1 moderator analysis).
+function renderPIF(container, nextBtn) {
+  document.getElementById('progress-text').textContent = 'Step 6 of 6 — Professional Identity';
+  nextBtn.textContent = 'Complete Assessment →';
+
+  const PIF_ITEMS = [
+    {
+      id: 'pif_1',
+      text: 'I think of myself primarily as a member of my health profession (e.g., "I am a medical student," "I am a pharmacy student").',
+      anchor_lo: 'Not at all true for me',
+      anchor_hi: 'Very true for me'
+    },
+    {
+      id: 'pif_2',
+      text: 'I feel a strong sense of responsibility to the values and norms of my profession.',
+      anchor_lo: 'Not at all true for me',
+      anchor_hi: 'Very true for me'
+    },
+    {
+      id: 'pif_3',
+      text: 'My previous healthcare role (if any) continues to shape how I think about clinical problems.',
+      anchor_lo: 'Not at all true for me',
+      anchor_hi: 'Very true for me'
+    },
+    {
+      id: 'pif_4',
+      text: 'I am confident that I will become a skilled member of my current profession.',
+      anchor_lo: 'Not at all true for me',
+      anchor_hi: 'Very true for me'
+    }
+  ];
+
+  // Check completion
+  const allAnswered = () => PIF_ITEMS.every(item => state.responses[item.id] !== undefined);
+  nextBtn.disabled = !allAnswered();
+
+  container.innerHTML = `
+    <div class="screen-card">
+      <div class="screen-icon">🏥</div>
+      <h2 class="screen-title">Professional Identity</h2>
+      <p class="screen-subtitle">Four short questions about how you see yourself as a health professional. There are no right or wrong answers.</p>
+      <div class="pif-items" id="pif-items">
+        ${PIF_ITEMS.map(item => `
+          <div class="pif-item" id="pif-wrap-${item.id}">
+            <div class="pif-question">${item.text}</div>
+            <div class="pif-scale">
+              <span class="pif-anchor lo">${item.anchor_lo}</span>
+              <div class="pif-buttons">
+                ${[1,2,3,4,5].map(v => `
+                  <button class="pif-btn ${state.responses[item.id] === v ? 'selected' : ''}"
+                    onclick="selectPIF('${item.id}', ${v})">${v}</button>
+                `).join('')}
+              </div>
+              <span class="pif-anchor hi">${item.anchor_hi}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-top:20px;text-align:center">
+        Your responses are used only to understand how professional background relates to reasoning development.
+      </p>
+    </div>`;
+}
+
+function selectPIF(itemId, value) {
+  state.responses[itemId] = value;
+  // Update button UI
+  const wrap = document.getElementById('pif-wrap-' + itemId);
+  if (wrap) {
+    wrap.querySelectorAll('.pif-btn').forEach((btn, i) => {
+      btn.classList.toggle('selected', i + 1 === value);
+    });
+  }
+  // Enable next if all answered
+  const PIF_IDS = ['pif_1','pif_2','pif_3','pif_4'];
+  const allAnswered = PIF_IDS.every(id => state.responses[id] !== undefined);
+  document.getElementById('btn-next').disabled = !allAnswered;
+}
+
 function renderComplete(container) {
   state.endTime = Date.now();
   const scores = computeScores(state.responses);
@@ -1066,6 +1169,15 @@ function saveResults(scores) {
     professionId: state.profession,
     trackId:      state.track,
     responses:    state.responses,
+    pifScores:    {
+      pif_1: state.responses.pif_1 || null,
+      pif_2: state.responses.pif_2 || null,
+      pif_3: state.responses.pif_3 || null,
+      pif_4: state.responses.pif_4 || null,
+      pif_mean: ['pif_1','pif_2','pif_3','pif_4']
+        .filter(k => state.responses[k] !== undefined)
+        .reduce((s,k,_,a) => s + state.responses[k]/a.length, 0) || null
+    },
     scores:       scores,
     version:      '1.0'
   };
@@ -1096,6 +1208,7 @@ async function syncToSupabase(result) {
       baseline_scores:      result.scores,
       baseline_responses:   result.responses,
       baseline_completed_at: result.completedAt,
+      pif_scores:           result.pifScores || null,
       baseline_duration_ms:  result.durationMs,
       baseline_version:      result.version,
     }, { onConflict: 'id' });

@@ -537,23 +537,77 @@ function renderIPEPoints(div) {
     </div>`).join('');
 }
 
-function saveResearchData(div) {
-  const data = {
-    caseId:      selectedCase?.id,
-    professions: Object.keys(profResponses),
-    responses:   profResponses,
-    convergence: div.converged.map(d => d.label),
-    divergence:  div.unique.map(d => ({ label: d.label, profession: d.profs[0] })),
-    partial:     div.partial.map(d => ({ label: d.label, professions: d.profs })),
-    timestamp:   new Date().toISOString()
+async function saveResearchData(div) {
+  const SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+  // Get student identity from platform
+  let studentEmail = 'anonymous';
+  let studentProfession = getUserProfession();
+  try {
+    const u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    studentEmail = u.email || u.name || 'anonymous';
+  } catch(e) {}
+
+  // Build full research payload
+  const sessionId = 'crda_' + Date.now() + '_' + Math.random().toString(36).slice(2,8);
+  const payload = {
+    session_id:          sessionId,
+    case_id:             selectedCase?.id || 'unknown',
+    case_title:          selectedCase?.title || '',
+    target_diagnosis:    selectedCase?.targetDx || '',
+    student_email:       studentEmail,
+    student_profession:  studentProfession,
+    professions_present: Object.keys(profResponses),
+    profession_count:    Object.keys(profResponses).length,
+    responses:           profResponses,
+    // Divergence metrics — key research outcomes
+    convergence_dx:      div.converged.map(d => d.label),
+    convergence_count:   div.converged.length,
+    divergence_dx:       div.unique.map(d => ({ label: d.label, profession: d.profs[0] })),
+    divergence_count:    div.unique.length,
+    partial_agreement:   div.partial.map(d => ({ label: d.label, professions: d.profs })),
+    partial_count:       div.partial.length,
+    // Derived metrics
+    convergence_rate:    div.total > 0
+      ? Math.round((div.converged.length / (div.converged.length + div.unique.length + div.partial.length || 1)) * 100)
+      : 0,
+    all_unique:          div.unique.length > 0 && div.converged.length === 0,
+    full_consensus:      div.converged.length > 0 && div.unique.length === 0,
+    completed_at:        new Date().toISOString()
   };
 
-  // Save locally
+  // Save locally always
   const saved = JSON.parse(localStorage.getItem('rdx-crda-sessions') || '[]');
-  saved.push(data);
+  saved.push(payload);
   localStorage.setItem('rdx-crda-sessions', JSON.stringify(saved.slice(-20)));
 
-  // TODO: Supabase sync when IPE sessions table is created
+  // Supabase sync — skip if practice-only / no consent
+  if (window._rdxPracticeOnly) {
+    console.log('[IPE CRDA] Practice mode — session not saved to Supabase.');
+    return;
+  }
+
+  try {
+    const res = await fetch(SB_URL + '/rest/v1/ipe_crda_sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SB_KEY,
+        'Authorization': 'Bearer ' + SB_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (res.ok) {
+      console.log('[IPE CRDA] Session saved to Supabase:', sessionId);
+    } else {
+      const err = await res.text();
+      console.warn('[IPE CRDA] Supabase save failed:', err);
+    }
+  } catch(e) {
+    console.warn('[IPE CRDA] Supabase unavailable — data saved locally only.', e.message);
+  }
 }
 
 function resetAll() {
