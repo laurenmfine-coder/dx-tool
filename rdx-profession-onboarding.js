@@ -145,6 +145,20 @@ const RDX_PROFESSIONS = [
     color: '#F57F17',
   },
   {
+    id: 'vet',
+    label: 'Veterinary Medicine',
+    icon: '🐾',
+    description: 'DVM / VMD student or veterinarian',
+    tracks: [
+      { id: 'vet_preclinical', label: 'Pre-clinical years (Y1–Y2)' },
+      { id: 'vet_clinical', label: 'Clinical rotations (Y3–Y4)' },
+      { id: 'vet_grad', label: 'Practicing veterinarian' },
+    ],
+    boardExam: 'NAVLE',
+    caseTagPriority: ['general', 'internal-medicine', 'pharmacology', 'infectious-disease', 'endocrinology'],
+    color: '#6D4C41',
+  },
+  {
     id: 'other',
     label: 'Other Health Profession',
     icon: '⚕️',
@@ -185,6 +199,8 @@ const RDX_CASE_TAG_MAP = {
                'ob-gyn', 'psychiatry', 'emergency', 'pharmacology'],
   mbs:        ['general', 'internal-medicine', 'pharmacology', 'pathophysiology',
                'cardiology', 'endocrinology', 'neurology', 'infectious-disease'],
+  vet:        ['general', 'internal-medicine', 'pharmacology', 'infectious-disease',
+               'endocrinology', 'cardiology', 'pathophysiology', 'emergency'],
   other:      ['general', 'internal-medicine'],
 };
 
