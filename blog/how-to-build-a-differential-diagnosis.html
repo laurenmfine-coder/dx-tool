@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Build a Differential Diagnosis: A Step-by-Step Framework | ReasonDx</title>
+<meta name="description" content="Learn a systematic framework for building a differential diagnosis from first principles. Stop memorizing lists — start reasoning like a clinician. Includes practical examples and OSCE tips.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "How to Build a Differential Diagnosis: A Step-by-Step Framework",
+  "description": "A systematic framework for building differential diagnoses from first principles for health professions students",
+  "author": {"@type": "Person", "name": "Lauren Fine, MD, FAAAAI"},
+  "publisher": {"@type": "Organization", "name": "ReasonDx", "url": "https://www.reasondx.com"},
+  "datePublished": "2026-04-14",
+  "url": "https://www.reasondx.com/blog/how-to-build-a-differential-diagnosis.html",
+  "educationalLevel": "HigherEducation",
+  "about": {"@type": "Thing", "name": "Clinical Reasoning"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is a differential diagnosis?","acceptedAnswer":{"@type":"Answer","text":"A differential diagnosis is a ranked list of possible conditions that could explain a patient's symptoms and findings. It is generated systematically from the history, physical exam, and clinical context, then narrowed through targeted testing."}},
+    {"@type":"Question","name":"How many diagnoses should be on a differential?","acceptedAnswer":{"@type":"Answer","text":"A working differential typically contains 3-5 conditions ranked by probability. The most likely diagnosis leads, followed by conditions that must not be missed (even if less likely) and other reasonable possibilities."}},
+    {"@type":"Question","name":"What is the difference between a diagnosis and a differential diagnosis?","acceptedAnswer":{"@type":"Answer","text":"A diagnosis is a confirmed single condition. A differential diagnosis is the list of possibilities you consider before sufficient data narrows you to a diagnosis. Good clinicians maintain an open differential until the evidence strongly supports closure."}}
+  ]
+}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-EKCVJ1SMN3');</script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --teal:#2874a6;--teal-dark:#1f5f8b;--teal-light:#d4e8f7;--teal-50:#f0f7fc;
+  --slate-900:#0f172a;--slate-800:#1e293b;--slate-700:#334155;--slate-600:#475569;
+  --slate-400:#94a3b8;--slate-200:#e2e8f0;--slate-100:#f1f5f9;--slate-50:#f8fafc;--white:#fff;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--slate-800);line-height:1.6}
+.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--slate-200);padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'DM Serif Display',serif;font-size:20px;color:var(--teal-dark);text-decoration:none}
+.nav-back{font-size:14px;color:var(--slate-600);text-decoration:none}
+.nav-cta{background:var(--teal);color:#fff;padding:8px 18px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.hero{max-width:720px;margin:56px auto 0;padding:0 24px}
+.breadcrumb{font-size:13px;color:var(--slate-400);margin-bottom:16px}
+.breadcrumb a{color:var(--teal);text-decoration:none}
+.tag{display:inline-block;background:var(--teal-50);color:var(--teal-dark);font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(28px,4vw,42px);font-weight:400;color:var(--slate-900);line-height:1.2;margin-bottom:16px}
+.hero-meta{display:flex;gap:16px;align-items:center;font-size:14px;color:var(--slate-400);margin-bottom:32px;flex-wrap:wrap}
+.hero-meta strong{color:var(--slate-600)}
+.hero-intro{font-size:18px;color:var(--slate-700);line-height:1.7;border-left:3px solid var(--teal);padding-left:20px;margin-bottom:48px}
+article{max-width:720px;margin:0 auto;padding:0 24px 80px}
+article h2{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;color:var(--slate-900);margin:48px 0 16px}
+article h3{font-size:18px;font-weight:700;color:var(--slate-900);margin:32px 0 12px}
+article p{font-size:16px;color:var(--slate-700);line-height:1.8;margin-bottom:20px}
+article ul,article ol{margin:0 0 20px 24px}
+article li{font-size:16px;color:var(--slate-700);line-height:1.8;margin-bottom:8px}
+.callout{background:var(--teal-50);border:1px solid var(--teal-light);border-radius:12px;padding:24px 28px;margin:32px 0}
+.callout-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.callout p{margin:0;font-size:15px;color:var(--slate-700)}
+.step-block{background:var(--slate-50);border:1px solid var(--slate-200);border-radius:12px;padding:24px 28px;margin:24px 0}
+.step-num{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.step-block h3{margin:0 0 8px;font-size:17px}
+.step-block p{margin:0;font-size:15px}
+.case-box{background:var(--slate-900);color:#fff;border-radius:12px;padding:28px 32px;margin:40px 0}
+.case-box .case-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--teal-light);margin-bottom:12px}
+.case-box p{color:#cbd5e1;font-size:15px;line-height:1.7;margin-bottom:0}
+.cta-box{background:var(--teal-dark);color:#fff;border-radius:16px;padding:36px 40px;margin:48px 0;text-align:center}
+.cta-box h3{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;margin-bottom:8px}
+.cta-box p{font-size:15px;opacity:0.85;margin-bottom:24px}
+.cta-box a{background:#fff;color:var(--teal-dark);padding:12px 28px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none;display:inline-block}
+.faq-section{margin:56px 0 0}
+.faq-section h2{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;color:var(--slate-900);margin-bottom:24px}
+.faq-item{border-bottom:1px solid var(--slate-200);padding:20px 0}
+.faq-item h3{font-size:16px;font-weight:600;color:var(--slate-800);margin-bottom:8px}
+.faq-item p{font-size:15px;color:var(--slate-600);line-height:1.6;margin:0}
+.related-articles{background:var(--slate-50);border-top:1px solid var(--slate-200);padding:48px 24px;margin-top:64px}
+.related-inner{max-width:720px;margin:0 auto}
+.related-inner h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--slate-900);margin-bottom:24px}
+.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.related-card{background:var(--white);border:1px solid var(--slate-200);border-radius:12px;padding:20px;text-decoration:none;color:inherit;transition:all .2s}
+.related-card:hover{border-color:var(--teal)}
+.related-card .tag{margin-bottom:8px;font-size:11px}
+.related-card h3{font-size:15px;font-weight:600;color:var(--slate-900);line-height:1.4}
+footer{background:var(--slate-800);color:var(--slate-400);padding:32px 24px;text-align:center;font-size:13px}
+footer a{color:var(--slate-400);text-decoration:none;margin:0 12px}
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="/" class="nav-brand">ReasonDx</a>
+  <a href="/auth/register.html" class="nav-cta">Practice Cases Free →</a>
+</nav>
+
+<div class="hero">
+  <p class="breadcrumb"><a href="/blog/">Blog</a> / Clinical Reasoning</p>
+  <span class="tag">Clinical Reasoning</span>
+  <h1>How to Build a Differential Diagnosis: A Step-by-Step Framework</h1>
+  <div class="hero-meta">
+    <strong>Lauren Fine, MD, FAAAAI</strong>
+    <span>·</span>
+    <span>Associate Professor of Medical Education, NSU KPCAM</span>
+    <span>·</span>
+    <span>8 min read</span>
+    <span>·</span>
+    <span>April 2026</span>
+  </div>
+  <p class="hero-intro">Most students are taught to memorize differentials. The best clinicians build them systematically from first principles. Here's the framework that separates good diagnosticians from great ones — and how to practice it.</p>
+</div>
+
+<article>
+
+  <p>Picture this: a 58-year-old man walks into the emergency department with chest pain. He's diaphoretic, his blood pressure is 90/60, and he's been having the pain for 45 minutes. What's your differential?</p>
+
+  <p>If your brain immediately went to "MI" — that's pattern recognition, not differential diagnosis. Pattern recognition is powerful and usually right. But it's also how diagnostic errors happen. The best clinicians do something different: they build a differential systematically, then use pattern recognition to rank it.</p>
+
+  <p>Here's the framework.</p>
+
+  <h2>Step 1: Anchor on the Presenting Problem, Not the Diagnosis</h2>
+
+  <p>The first rule of differential diagnosis: start with what the patient is telling you, not what you think they have. The presenting problem is chest pain, not "STEMI." This sounds obvious, but it's where most students go wrong — they anchor on the most dramatic or memorable diagnosis and work backwards.</p>
+
+  <p>Before generating your differential, define the presenting problem precisely:</p>
+  <ul>
+    <li>What is the primary symptom? (chest pain, dyspnea, altered mental status)</li>
+    <li>What are its key characteristics? (onset, duration, quality, location, radiation)</li>
+    <li>What makes it better or worse?</li>
+    <li>What are the associated symptoms?</li>
+  </ul>
+
+  <div class="callout">
+    <p class="callout-label">Key Principle</p>
+    <p>The quality of your differential is only as good as the quality of your history. A vague presenting problem yields a vague — and useless — differential.</p>
+  </div>
+
+  <h2>Step 2: Generate by Anatomic or Pathophysiologic Category</h2>
+
+  <p>Don't try to recall a memorized list. Instead, generate your differential systematically by asking: "What structures are in this region, and what can go wrong with them?"</p>
+
+  <p>For chest pain, work through the anatomy of the chest:</p>
+  <ul>
+    <li><strong>Heart:</strong> ACS, pericarditis, myocarditis, cardiac tamponade</li>
+    <li><strong>Aorta:</strong> Aortic dissection</li>
+    <li><strong>Lungs/pleura:</strong> PE, pneumothorax, pneumonia, pleuritis</li>
+    <li><strong>Esophagus/GI:</strong> Esophageal spasm, GERD, peptic ulcer perforation</li>
+    <li><strong>Chest wall/musculoskeletal:</strong> Costochondritis, rib fracture, herpes zoster</li>
+    <li><strong>Referred pain:</strong> Subphrenic abscess, hepatobiliary disease</li>
+    <li><strong>Psychiatric:</strong> Panic disorder, somatic symptom disorder</li>
+  </ul>
+
+  <p>This approach ensures you don't miss an entire category. It also forces you to think about pathophysiology — why would each structure cause this symptom? — which deepens your understanding far beyond memorization.</p>
+
+  <h2>Step 3: Apply the Probability Framework</h2>
+
+  <p>Not all differentials are created equal. Once you've generated a broad list, rank it using three categories:</p>
+
+  <div class="step-block">
+    <p class="step-num">Category 1</p>
+    <h3>Most Likely (the horse)</h3>
+    <p>What's statistically the most common cause of this presentation in this patient? Consider age, sex, comorbidities, risk factors, and epidemiology. For chest pain in a 58-year-old male with diaphoresis and hypotension, ACS leads this list.</p>
+  </div>
+
+  <div class="step-block">
+    <p class="step-num">Category 2</p>
+    <h3>Must Not Miss (the zebra that kills)</h3>
+    <p>What diagnoses, if missed, would be immediately life-threatening? These go on your differential even if they're less likely. For chest pain: aortic dissection, tension pneumothorax, cardiac tamponade. You test for these not because they're common but because missing them is fatal.</p>
+  </div>
+
+  <div class="step-block">
+    <p class="step-num">Category 3</p>
+    <h3>Reasonable Possibilities</h3>
+    <p>Everything else that fits the clinical picture with moderate probability. These guide your workup when the first two categories have been addressed.</p>
+  </div>
+
+  <h2>Step 4: Use the Clinical Data to Narrow</h2>
+
+  <p>A differential is a living document. As you gather more data — physical exam findings, vital signs, initial labs, ECG — you update your probability estimates and narrow your list.</p>
+
+  <p>Think of each piece of clinical data as a likelihood ratio. The ECG showing ST elevations dramatically increases the probability of STEMI and dramatically decreases the probability of esophageal spasm. The physical exam finding of unequal blood pressures in both arms dramatically increases the probability of aortic dissection.</p>
+
+  <div class="case-box">
+    <p class="case-label">Clinical Example</p>
+    <p>Back to our 58-year-old with chest pain. He reports the pain started suddenly and is tearing in quality, radiating to his back. He has a history of hypertension. Blood pressure in the right arm is 160/90; in the left arm, it's 110/70. Your differential just changed dramatically — aortic dissection moved from "must not miss" to "most likely," and you're now ordering a CT angiogram, not activating the cath lab.</p>
+  </div>
+
+  <h2>Step 5: Commit, But Stay Open</h2>
+
+  <p>The final step — and the hardest — is committing to a working diagnosis while maintaining intellectual humility. You need a working diagnosis to drive management. But you also need to stay open to revision when the patient doesn't respond as expected or new data emerges.</p>
+
+  <p>The biggest diagnostic errors happen when clinicians commit too early and stop updating their differential. In the cognitive bias literature, this is called <em>premature closure</em> — anchoring on the first plausible explanation and failing to consider alternatives.</p>
+
+  <p>The antidote is a simple habit: every time you see a patient back, ask yourself — "Is there anything about this presentation that doesn't fit my working diagnosis?" If yes, reopen the differential.</p>
+
+  <div class="callout">
+    <p class="callout-label">The ReasonDx Approach</p>
+    <p>This is exactly the reasoning process that ReasonDx's AI coaching system guides you through — not giving you the answer, but asking the questions that force you to build and defend your differential systematically. Every simulated case is an opportunity to practice these five steps in a low-stakes environment before you're doing it on a real patient.</p>
+  </div>
+
+  <h2>Putting It Together: The One-Minute Differential</h2>
+
+  <p>In practice, experienced clinicians do all five steps in under a minute. Here's how to develop that fluency:</p>
+
+  <ol>
+    <li><strong>State the presenting problem precisely</strong> — "acute-onset tearing chest pain radiating to the back in a hypertensive 58-year-old man"</li>
+    <li><strong>Name your anatomic categories</strong> — cardiac, vascular, pulmonary, GI, musculoskeletal</li>
+    <li><strong>Generate 1-2 conditions per category</strong> — don't try to be exhaustive at this stage</li>
+    <li><strong>Apply the probability framework</strong> — most likely, must not miss, reasonable</li>
+    <li><strong>Identify the one test that will most change your management</strong> — this drives your immediate workup</li>
+  </ol>
+
+  <p>This isn't a formula to follow rigidly — it's a scaffold to internalize. The goal is for it to become automatic, so that even under pressure, your reasoning stays systematic rather than reactive.</p>
+
+  <h2>How to Practice</h2>
+
+  <p>Clinical reasoning is a skill, not knowledge. You improve it the same way you improve any other skill: deliberate practice with feedback. Reading about differential diagnosis helps. Generating differentials on real or simulated patients, then getting coaching on your reasoning — that's what actually builds the skill.</p>
+
+  <p>This is why we built ReasonDx. Not another question bank, not another set of notes to read — a platform where you practice the actual cognitive process of clinical reasoning with an AI coach who asks you the right questions at the right moments.</p>
+
+  <div class="cta-box">
+    <h3>Practice Building Differentials on Real Cases</h3>
+    <p>ReasonDx has 394 simulated patient cases across every specialty. The AI coach guides you through exactly this five-step framework — for free.</p>
+    <a href="/auth/register.html?utm_source=blog&utm_medium=article&utm_campaign=differential-dx">Start Practicing Free →</a>
+  </div>
+
+  <section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>What is a differential diagnosis?</h3>
+      <p>A differential diagnosis is a ranked list of possible conditions that could explain a patient's symptoms and findings. It is generated systematically from the history, physical exam, and clinical context, then narrowed through targeted testing.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How many diagnoses should be on a differential?</h3>
+      <p>A working differential typically contains 3-5 conditions ranked by probability. The most likely diagnosis leads, followed by conditions that must not be missed (even if less likely) and other reasonable possibilities.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is the difference between a diagnosis and a differential diagnosis?</h3>
+      <p>A diagnosis is a confirmed single condition. A differential diagnosis is the list of possibilities you consider before sufficient data narrows you to a diagnosis. Good clinicians maintain an open differential until the evidence strongly supports closure.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What is premature closure in clinical reasoning?</h3>
+      <p>Premature closure is the cognitive bias of stopping the diagnostic process too early — anchoring on the first plausible diagnosis and failing to consider alternatives. It is one of the most common causes of diagnostic error in medicine.</p>
+    </div>
+  </section>
+
+</article>
+
+<section class="related-articles">
+  <div class="related-inner">
+    <h2>Continue Reading</h2>
+    <div class="related-grid">
+      <a href="cognitive-biases-diagnostic-errors.html" class="related-card">
+        <span class="tag">Cognitive Bias</span>
+        <h3>5 Cognitive Biases That Cause the Most Diagnostic Errors</h3>
+      </a>
+      <a href="what-osce-examiners-look-for.html" class="related-card">
+        <span class="tag">OSCE Prep</span>
+        <h3>What OSCE Examiners Are Really Looking For in Clinical Reasoning</h3>
+      </a>
+      <a href="/topics/chest-pain.html" class="related-card">
+        <span class="tag">Topic Module</span>
+        <h3>Chest Pain — Clinical Reasoning Module</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 ReasonDx &nbsp;|&nbsp;
+    <a href="/blog/">Blog</a>
+    <a href="/auth/privacy.html">Privacy</a>
+    <a href="/auth/terms.html">Terms</a>
+    <a href="/">Home</a>
+  </p>
+</footer>
+</body>
+</html>
