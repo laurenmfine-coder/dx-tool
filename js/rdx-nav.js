@@ -66,6 +66,7 @@
         di(R+'tools/ddx-builder.html','🔍','DDx Builder','Differential diagnosis tool')+
       '</div></div>'+
     '</div>'+
+    '<a href="'+R+'blog/" class="rdx-nav-top" style="font-size:12px">Blog</a>'+
     '<div class="rdx-nav-right">'+
       '<button id="rdx-exp-toggle" class="rdx-nav-btn" onclick="window.rdxToggleExp&&window.rdxToggleExp()" style="font-size:11px;font-weight:600;padding:5px 10px;border:1px solid var(--rdx-border,#e2e8f0);border-radius:8px;display:flex;align-items:center;gap:5px;color:#64748b;font-family:inherit"><span id="rdx-exp-dot" style="width:7px;height:7px;border-radius:50%;background:#0E9F6E;display:inline-block"></span><span id="rdx-exp-label">Beginner</span></button>'+
       '<button id="rdx-info-btn" class="rdx-nav-btn" title="About">&#9432;&#xFE0F;</button>'+
