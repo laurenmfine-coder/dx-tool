@@ -1,7 +1,7 @@
 // supabase/functions/weekly-case-email/index.ts
-// Weekly case email for ReasonDx users
+// Weekly case email — 50 cases, profession-tailored
 // Deploy: supabase functions deploy weekly-case-email
-// Schedule: 0 12 * * 1 (every Monday 12:00 UTC = 7:00 AM ET)
+// Schedule: 0 12 * * 1 (Mondays 12:00 UTC = 7am ET)
 
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
@@ -10,231 +10,119 @@ const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
 const SUPABASE_SERVICE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
 const FROM_EMAIL = 'ReasonDx <cases@reasondx.com>';
 
-// Weekly cases — rotate through these
-const WEEKLY_CASES = [
-  {
-    title: "The Diagnostic Pivot",
-    scenario: "A 52-year-old woman with known anxiety presents with palpitations and 'just not feeling right' for 3 weeks. Her primary care physician reassured her twice. Today she's in the ED with a heart rate of 140.",
-    challenge: "What are you most worried about, and what's the one test that changes everything?",
-    tag: "cardiology",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=cardiology"
-  },
-  {
-    title: "The Silent History",
-    scenario: "A 34-year-old male presents with 3 days of severe abdominal pain. He rates it 9/10 but is lying completely still and speaking calmly. His abdomen is rigid. Labs are pending.",
-    challenge: "What does his behavior tell you that his words don't? What's your immediate next step?",
-    tag: "emergency",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=emergency"
-  },
-  {
-    title: "The Atypical Presentation",
-    scenario: "An 80-year-old woman with diabetes is brought in by her daughter for 'acting confused' since this morning. No chest pain, no fever. Blood pressure is 90/60.",
-    challenge: "In elderly diabetic patients, what diagnoses present atypically? Where do you start?",
-    tag: "internal-medicine",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=internal-medicine"
-  },
-  {
-    title: "The Lab That Doesn't Fit",
-    scenario: "A 28-year-old type 1 diabetic presents with vomiting and malaise. Glucose is 210 mg/dL — 'not that high.' pH is 7.18. The intern says it can't be DKA.",
-    challenge: "What's the trap here, and what does the pH tell you that the glucose doesn't?",
-    tag: "endocrinology",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=endocrinology"
-  },
-  {
-    title: "The Drug That Didn't Work",
-    scenario: "A 45-year-old with community-acquired pneumonia was started on azithromycin 3 days ago. He's worse — fever 39.5°C, O2 sat 88% on room air, now requiring 4L O2.",
-    challenge: "What does failure to respond tell you about your initial diagnosis? What are you reconsidering?",
-    tag: "pulmonology",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=pulmonology"
-  },
-  {
-    title: "The Vital Sign You Almost Missed",
-    scenario: "A 67-year-old post-op day 2 after elective hip replacement. Nurse calls because he 'seems off.' Vital signs: HR 104, RR 22, BP 118/76, O2 sat 94%, temp 37.2°C.",
-    challenge: "Which vital sign concerns you most and why? What's on your differential for post-op deterioration?",
-    tag: "surgery",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=surgery"
-  },
-  {
-    title: "The Patient Who Knows Their Diagnosis",
-    scenario: "A 31-year-old woman with 'chronic Lyme disease' presents with fatigue, joint pain, and brain fog for 2 years. She brings a folder of tests. She's been on multiple antibiotics.",
-    challenge: "How do you approach a patient with a self-diagnosis? What might you be missing — and what cognitive bias is at play?",
-    tag: "infectious-disease",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=infectious-disease"
-  },
-  {
-    title: "The Transfer Patient",
-    scenario: "You receive a patient transferred from an outside hospital with the diagnosis of 'COPD exacerbation.' He's on BiPAP. The outside records say he smoked for 40 years. He's 43 years old.",
-    challenge: "What should make you pause before accepting the diagnosis at transfer? What's your first move?",
-    tag: "pulmonology",
-    url: "https://reasondx.com/browse.html?mode=simulate&tag=pulmonology"
-  }
+interface Case { title:string; scenario:string; challenge:string; tag:string; professions:string[]; url:string; }
+
+const WEEKLY_CASES: Case[] = [
+  // UNIVERSAL
+  {title:"The Diagnostic Pivot",scenario:"A 52-year-old woman with known anxiety presents with palpitations for 3 weeks. Her PCP reassured her twice. Today she is in the ED with HR 140.",challenge:"What are you most worried about, and what is the one test that changes everything?",tag:"cardiology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
+  {title:"The Silent History",scenario:"A 34-year-old rates abdominal pain 9/10 but lies completely still and speaks calmly. His abdomen is rigid.",challenge:"What does his behavior tell you that his words do not? What is your immediate next step?",tag:"emergency",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=emergency"},
+  {title:"The Atypical Presentation",scenario:"An 80-year-old woman with diabetes is brought in for acting confused. No chest pain, no fever. BP is 90/60.",challenge:"In elderly diabetic patients, what diagnoses present atypically? Where do you start?",tag:"internal-medicine",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=internal-medicine"},
+  {title:"The Lab That Does Not Fit",scenario:"A 28-year-old type 1 diabetic presents with vomiting. Glucose is 210 mg/dL. pH is 7.18. The intern says it cannot be DKA.",challenge:"What is the trap here, and what does the pH tell you that the glucose does not?",tag:"endocrinology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=endocrinology"},
+  {title:"The Drug That Did Not Work",scenario:"A 45-year-old with CAP was started on azithromycin 3 days ago. He is worse — fever 39.5, O2 sat 88%.",challenge:"What does failure to respond tell you about your initial diagnosis?",tag:"pulmonology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pulmonology"},
+  {title:"The Vital Sign You Almost Missed",scenario:"Post-op day 2 after hip replacement. Nurse calls because patient seems off. HR 104, RR 22, BP 118/76, O2 94%.",challenge:"Which vital sign concerns you most and why? What is on your differential?",tag:"surgery",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=surgery"},
+  {title:"The Transfer Diagnosis",scenario:"You receive a patient transferred with COPD exacerbation on BiPAP. He supposedly smoked 40 pack-years. He is 43 years old.",challenge:"What should make you pause before accepting the diagnosis at transfer?",tag:"pulmonology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pulmonology"},
+  {title:"The Patient Who Knows Their Diagnosis",scenario:"A 31-year-old with chronic Lyme disease presents with fatigue and joint pain for 2 years. She brings a folder of tests.",challenge:"How do you approach a patient with a self-diagnosis? What cognitive bias is at play?",tag:"infectious-disease",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=infectious-disease"},
+  {title:"The Normal Test That Is Not Reassuring",scenario:"A 61-year-old smoker has 2 weeks of exertional dyspnea. CXR normal. O2 sat 96% at rest.",challenge:"Does a normal CXR and resting sat reassure you? What are you still worried about?",tag:"pulmonology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pulmonology"},
+  {title:"The Complaint Behind the Complaint",scenario:"A 44-year-old comes for a routine physical. He mentions almost as an aside that he has lost 12 pounds unintentionally over 3 months.",challenge:"The chief complaint is routine, but the details are not. What are you now investigating?",tag:"internal-medicine",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=internal-medicine"},
+  {title:"The Repeat Visit",scenario:"A 39-year-old woman has been seen in urgent care 3 times in 6 weeks for chest pain. Each workup was negative. She looks exhausted today.",challenge:"What does the pattern of repeat visits tell you? Before ordering more tests, what conversation do you need to have?",tag:"general",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=general"},
+  {title:"The Family That Disagrees",scenario:"An 84-year-old with end-stage dementia is hospitalized with aspiration pneumonia. The advance directive requests comfort care. The son insists on doing everything.",challenge:"How do you navigate this clinical and ethical situation? What is your role?",tag:"general",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=general"},
+  {title:"The Two Diagnoses",scenario:"A 71-year-old on methotrexate develops progressive dyspnea. CT shows bilateral ground-glass opacities. Two diagnoses are plausible and require opposite treatments.",challenge:"How do you reason through which is more likely, and what happens if you are wrong?",tag:"rheumatology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=rheumatology"},
+  {title:"The Pediatric Presentation",scenario:"A 4-year-old has 3 days of fever and refuses to walk. Her right knee is swollen and warm. She was seen last week for a cold.",challenge:"What diagnoses must you distinguish immediately? Which is a same-day emergency and how do you tell them apart?",tag:"pediatrics",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pediatrics"},
+  {title:"The Number That Does Not Match the Patient",scenario:"A 29-year-old woman has a creatinine of 3.2. She is completely asymptomatic with normal blood pressure and no history of kidney disease.",challenge:"What explanations exist for this unexpected finding? Walk through your systematic approach.",tag:"nephrology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=nephrology"},
+  {title:"The Negative Test in a High-Risk Patient",scenario:"A 58-year-old male smoker with hypertension and hyperlipidemia has atypical chest pain. Troponin x2 negative. ECG normal. He wants to go home.",challenge:"How do you counsel him when pre-test probability is high despite negative tests?",tag:"cardiology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
+  {title:"The Medication Error Almost Made",scenario:"You notice metFORMIN 500mg is ordered. The allergy list includes metFORMIN with lactic acidosis noted. The patient has CKD stage 4.",challenge:"Two safety concerns, same drug. Identify both and describe your decision-making before anyone acts on this order.",tag:"pharmacology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  {title:"The Shortness of Breath at 3 AM",scenario:"A 68-year-old with known CHF calls the overnight line — he woke up unable to breathe and had to sit up. His regular diuretic dose is unchanged.",challenge:"What is happening physiologically, and what is your first action over the phone?",tag:"cardiology",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
+  {title:"The Rash That Needed More History",scenario:"A 22-year-old presents with a diffuse maculopapular rash for 4 days. No fever. She started amoxicillin for a sore throat 6 days ago. Monospot was positive.",challenge:"What is the diagnosis and what does it teach you about empiric antibiotic prescribing?",tag:"infectious-disease",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=infectious-disease"},
+  {title:"The Elderly Patient Who Fell",scenario:"A 79-year-old fell from standing. She is alert. Hip X-ray is negative. She refuses to bear weight. The ED physician is ready to discharge her.",challenge:"Why is a negative plain film not the end of your workup? What are you still concerned about?",tag:"emergency",professions:["all"],url:"https://reasondx.com/browse.html?mode=simulate&tag=emergency"},
+  // MEDICINE/PA
+  {title:"The Troponin Trap",scenario:"A 72-year-old septic patient has a mildly elevated troponin. The cardiology fellow says demand ischemia. The patient has no chest pain.",challenge:"How do you distinguish type 1 from type 2 MI here, and does it change management?",tag:"cardiology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
+  {title:"The Sodium That Kept Falling",scenario:"A 58-year-old man is admitted with Na 128. You correct to 134. By morning it is 127 again.",challenge:"Why is the sodium re-falling? What diagnosis are you now reconsidering?",tag:"nephrology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=nephrology"},
+  {title:"The Fever Without a Source",scenario:"Day 7 post-op after bowel resection. Patient develops fever 38.9. Wound looks clean. UA negative. Blood cultures pending.",challenge:"Walk through post-op fever by day. What is most likely at day 7?",tag:"surgery",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=surgery"},
+  {title:"The Thunderclap Headache",scenario:"A 38-year-old wakes from sleep with the worst headache of her life. Peaked in 60 seconds. Normal exam.",challenge:"Why does a normal exam not reassure you? Why can you not stop at a negative CT?",tag:"neurology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=neurology"},
+  {title:"The Rising Creatinine on ACE Inhibitor",scenario:"A 55-year-old with CHF and CKD stage 3 is started on lisinopril. Two weeks later creatinine rises from 1.8 to 2.4.",challenge:"Is this expected, concerning, or a reason to stop? How do you reason through this?",tag:"nephrology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=nephrology"},
+  {title:"The Joint That Did Not Respond to Colchicine",scenario:"A 62-year-old treated for gout flare is no better after 5 days. The joint is hot, swollen, fever 38.5.",challenge:"When gout does not respond to treatment, what diagnosis must you actively exclude?",tag:"rheumatology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=rheumatology"},
+  {title:"The Incidental Adrenal Mass",scenario:"CT for kidney stones shows a 2.1 cm adrenal mass in a 48-year-old. Asymptomatic, normal blood pressure.",challenge:"How do you approach the incidental adrenal mass? What is your workup priority?",tag:"endocrinology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=endocrinology"},
+  {title:"The Young Athlete Who Fainted",scenario:"A 24-year-old athlete has had 3 syncopal episodes during exercise. ECG shows a short PR interval.",challenge:"Exercise-induced syncope in a young athlete — what makes this high-risk?",tag:"cardiology",professions:["medicine","pa"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
+  // NURSING
+  {title:"The Delegation Dilemma",scenario:"A patient's family calls to say their mother is not acting right. The UAP who just checked her says she seems fine. Last vitals were 2 hours ago.",challenge:"How do you respond to the family versus the UAP assessment? What do you do next?",tag:"general",professions:["nursing"],url:"https://reasondx.com/browse.html?mode=simulate&tag=general"},
+  {title:"The Medication Reconciliation Gap",scenario:"A 78-year-old admitted from a nursing facility is on warfarin, metformin, and lisinopril. INR is 4.8. Creatinine is 3.1.",challenge:"Identify the medication safety concerns. What nursing actions are required and in what order?",tag:"pharmacology",professions:["nursing"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  {title:"The SBAR That Was Not Heard",scenario:"You call the overnight resident about urine output of 15 mL/hour for 3 hours. Resident says keep monitoring.",challenge:"How do you escalate when you believe a patient needs more urgent attention than ordered?",tag:"critical-care",professions:["nursing"],url:"https://reasondx.com/browse.html?mode=simulate&tag=critical-care"},
+  {title:"The Post-Op Drain Output",scenario:"Day 1 post-op after laparoscopic cholecystectomy. Pain 8/10. HR 118. Drain output 150 mL in the last hour.",challenge:"What is the drain output telling you? How do you communicate urgency?",tag:"surgery",professions:["nursing"],url:"https://reasondx.com/browse.html?mode=simulate&tag=surgery"},
+  {title:"The Fall That Already Happened",scenario:"A 71-year-old with Morse Fall Score 65 fell getting up to use the bathroom despite bed alarm. No obvious injury.",challenge:"Walk through your post-fall assessment. What are you checking for that is not visible?",tag:"general",professions:["nursing"],url:"https://reasondx.com/browse.html?mode=simulate&tag=general"},
+  // PHARMACY
+  {title:"The Interaction Nobody Caught",scenario:"A 66-year-old on warfarin is started on fluconazole. Three days later INR is 7.2. No active bleeding.",challenge:"Explain the mechanism. What pharmacist interventions should have prevented this?",tag:"pharmacology",professions:["pharmacy"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  {title:"The Renal Dose Adjustment",scenario:"A patient with CrCl 22 is prescribed metformin 1000mg BID, gabapentin 300mg TID, and ciprofloxacin 500mg BID.",challenge:"Review each medication for renal dosing. Which require adjustment and which should be avoided?",tag:"pharmacology",professions:["pharmacy"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  {title:"The Patient Who Will Not Take It",scenario:"A 54-year-old with new Type 2 diabetes refuses metformin because he read it causes lactic acidosis. A1c is 9.8%.",challenge:"How do you counsel this patient? How do you address his concern accurately while motivating adherence?",tag:"endocrinology",professions:["pharmacy"],url:"https://reasondx.com/browse.html?mode=simulate&tag=endocrinology"},
+  {title:"The Antibiotic Stewardship Call",scenario:"A hospitalist orders vancomycin and pip-tazo empirically for pneumonia. No prior MRSA history. Cultures pending.",challenge:"What questions do you ask as clinical pharmacist? How do you approach de-escalation?",tag:"infectious-disease",professions:["pharmacy"],url:"https://reasondx.com/browse.html?mode=simulate&tag=infectious-disease"},
+  {title:"The QT Prolongation Stack",scenario:"A psychiatric patient is on haloperidol, azithromycin (new), and methadone. QTc is 498 ms. She is stable.",challenge:"Identify each drug contribution to QT prolongation. What is your immediate recommendation?",tag:"pharmacology",professions:["pharmacy"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  // PT
+  {title:"The Back Pain Red Flag Screen",scenario:"A 58-year-old referred for low back pain. Pain is constant, worse at night, not relieved by any position. 8-pound unintentional weight loss.",challenge:"These features should stop your musculoskeletal assessment. Why? What is your clinical obligation?",tag:"musculoskeletal",professions:["pt"],url:"https://reasondx.com/browse.html?mode=simulate&tag=musculoskeletal"},
+  {title:"The Cardiac Screen Before Exercise",scenario:"A 62-year-old in cardiac rehab post-MI gets dizzy when walking fast. Resting BP is 98/62.",challenge:"What does exertional dizziness tell you before you begin exercise testing?",tag:"cardiopulmonary",professions:["pt"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiopulmonary"},
+  {title:"The Shoulder That Is Not a Shoulder",scenario:"A 55-year-old has right shoulder pain for 3 weeks pointing to the top of the shoulder. Full pain-free ROM. Resisted testing negative.",challenge:"When shoulder pain does not fit a musculoskeletal pattern, where is this pain actually coming from?",tag:"musculoskeletal",professions:["pt"],url:"https://reasondx.com/browse.html?mode=simulate&tag=musculoskeletal"},
+  // OT
+  {title:"The Discharge That Is Not Safe",scenario:"A 78-year-old post-stroke is medically cleared for discharge home. He lives alone. MMSE 22/30. Daughter lives 2 hours away.",challenge:"What OT assessment drives your discharge recommendation? How do you communicate safety concerns?",tag:"neurology",professions:["ot"],url:"https://reasondx.com/browse.html?mode=simulate&tag=neurology"},
+  {title:"The ADL That Reveals More",scenario:"During dressing assessment with a 64-year-old post-hip replacement, she pauses repeatedly, loses sequence, and becomes frustrated. Surgeon note says cognitively intact.",challenge:"What does functional observation tell you that the note does not? What do you do with this?",tag:"cognitive",professions:["ot"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cognitive"},
+  // DENTISTRY
+  {title:"The Tooth That Is Not the Problem",scenario:"A 48-year-old has severe left mandibular pain. Tooth is non-tender, no caries, no pocketing. Pain is constant and radiates to ear and jaw.",challenge:"When dental pain does not match dental findings, what systemic conditions are on your differential?",tag:"oral-medicine",professions:["dentistry"],url:"https://reasondx.com/browse.html?mode=simulate&tag=oral-medicine"},
+  {title:"The Patient Who Cannot Lie Back",scenario:"A 71-year-old becomes severely short of breath when you recline the dental chair. He sleeps on 3 pillows. Ankles are swollen.",challenge:"Identify the medical condition being telegraphed. How do you modify care and what is your immediate action?",tag:"cardiology",professions:["dentistry"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
+  // OPTOMETRY
+  {title:"The Sudden Visual Loss",scenario:"A 65-year-old has painless sudden vision loss in his right eye 2 hours ago. VA is hand motion only. Fundus shows pale retina with cherry-red spot.",challenge:"What is your diagnosis, your immediate action, and what systemic condition must you urgently screen for?",tag:"ophthalmology",professions:["optometry"],url:"https://reasondx.com/browse.html?mode=simulate&tag=ophthalmology"},
+  {title:"The Headache in the Exam Chair",scenario:"A 74-year-old mentions new headaches, scalp tenderness when brushing hair, and jaw pain when eating. ESR was 88 at last physical.",challenge:"What condition are you urgently suspecting and what is the risk of delay?",tag:"neurology",professions:["optometry"],url:"https://reasondx.com/browse.html?mode=simulate&tag=neurology"},
+  // VETERINARY
+  {title:"The Dog That Will Not Eat",scenario:"A 6-year-old intact male Golden Retriever has 5 days of anorexia, abdominal distension, and weakness. He collapsed briefly. Mucous membranes are pale.",challenge:"What is at the top of your differential and what is your most time-sensitive diagnostic step?",tag:"emergency",professions:["vet"],url:"https://reasondx.com/browse.html?mode=simulate&tag=emergency"},
+  {title:"The Cat With Labored Breathing",scenario:"A 9-year-old cat is mouth breathing and orthopneic. Auscultation reveals muffled heart sounds ventrally and dull lung sounds.",challenge:"Before you do anything else — what is your immediate priority and why?",tag:"cardiopulmonary",professions:["vet"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiopulmonary"},
+  {title:"The Xylitol Ingestion",scenario:"A 2-year-old Labrador ate sugar-free gum containing xylitol 45 minutes ago. She is alert and vomiting.",challenge:"What two organ systems are at risk and on what timeline? Walk through your immediate management.",tag:"pharmacology",professions:["vet"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  // BIOMEDICAL SCIENCES
+  {title:"The Mechanism Behind the Mortality Benefit",scenario:"A patient with heart failure is prescribed both an ACE inhibitor and a loop diuretic. Both lower blood pressure. One improves mortality. One does not.",challenge:"Which one improves mortality and why? Explain the mechanism at the molecular level.",tag:"pharmacology",professions:["mbs"],url:"https://reasondx.com/browse.html?mode=simulate&tag=pharmacology"},
+  {title:"The Pathophysiology Before the Symptom",scenario:"A 45-year-old with 10 years of poorly controlled hypertension develops progressive exertional dyspnea. Echo shows EF 35%.",challenge:"Trace the pathophysiological chain from chronic hypertension to reduced ejection fraction.",tag:"pathophysiology",professions:["mbs"],url:"https://reasondx.com/browse.html?mode=simulate&tag=cardiology"},
 ];
 
-function getWeeklyCase(): typeof WEEKLY_CASES[0] {
+function getCaseForUser(profession) {
+  const eligible = WEEKLY_CASES.filter(c => c.professions.includes("all") || c.professions.includes(profession));
   const weekNumber = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
-  return WEEKLY_CASES[weekNumber % WEEKLY_CASES.length];
+  const profHash = profession.split("").reduce((a, c) => a + c.charCodeAt(0), 0);
+  return eligible[(weekNumber + profHash) % eligible.length];
 }
 
-function buildEmailHtml(user: {
-  full_name: string;
-  email: string;
-  streak_days: number;
-  total_cases_completed: number;
-  engagement_status: string;
-}, weeklyCase: typeof WEEKLY_CASES[0]): string {
-  const firstName = user.full_name?.split(' ')[0] || 'Doctor';
-  const isLapsed = user.engagement_status === 'lapsed';
-  const streakText = user.streak_days > 1
-    ? `🔥 ${user.streak_days}-day streak — keep it going!`
-    : user.total_cases_completed > 0
-    ? `You've completed ${user.total_cases_completed} case${user.total_cases_completed !== 1 ? 's' : ''} so far.`
-    : `Ready for your first case?`;
-
-  const reEngageNote = isLapsed
-    ? `<p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px 16px;font-size:14px;color:#9a3412;margin:0 0 24px">
-        We've missed you! It's been a few days — this week's case is a great one to jump back in with.
-       </p>`
-    : '';
-
-  return `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Weekly Reasoning Case — ReasonDx</title>
-</head>
-<body style="margin:0;padding:0;background:#f1f5f9;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif">
-  <div style="max-width:560px;margin:40px auto;background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08)">
-
-    <!-- Header -->
-    <div style="background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:32px 40px;text-align:center">
-      <div style="font-size:32px;margin-bottom:8px">🩺</div>
-      <div style="font-family:Georgia,serif;font-size:24px;color:#ffffff;font-weight:400;margin-bottom:4px">ReasonDx</div>
-      <div style="font-size:13px;color:rgba(255,255,255,0.75);letter-spacing:1px;text-transform:uppercase">Weekly Reasoning Case</div>
-    </div>
-
-    <!-- Body -->
-    <div style="padding:36px 40px">
-
-      <p style="font-size:16px;color:#1e293b;margin:0 0 8px">Hi ${firstName},</p>
-      <p style="font-size:14px;color:#64748b;margin:0 0 28px">${streakText}</p>
-
-      ${reEngageNote}
-
-      <!-- Case card -->
-      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px;margin-bottom:28px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2874a6;margin-bottom:8px">This Week's Case</div>
-        <div style="font-family:Georgia,serif;font-size:20px;color:#0f172a;margin-bottom:16px;line-height:1.3">${weeklyCase.title}</div>
-        <p style="font-size:15px;color:#334155;line-height:1.7;margin:0 0 20px">${weeklyCase.scenario}</p>
-        <div style="background:#fff;border-left:3px solid #2874a6;padding:12px 16px;border-radius:0 8px 8px 0">
-          <div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#2874a6;margin-bottom:4px">Your Challenge</div>
-          <p style="font-size:14px;color:#475569;margin:0;line-height:1.6">${weeklyCase.challenge}</p>
-        </div>
-      </div>
-
-      <!-- CTA -->
-      <div style="text-align:center;margin-bottom:32px">
-        <a href="${weeklyCase.url}?utm_source=email&utm_medium=weekly_case&utm_campaign=retention"
-           style="display:inline-block;background:#2874a6;color:#ffffff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none">
-          Work Through This Case →
-        </a>
-      </div>
-
-      <p style="font-size:13px;color:#94a3b8;text-align:center;margin:0 0 8px">
-        ReasonDx — Clinical Reasoning Education Platform
-      </p>
-      <p style="font-size:12px;color:#cbd5e1;text-align:center;margin:0">
-        <a href="https://reasondx.com/dashboard.html?unsubscribe=weekly" style="color:#94a3b8">Unsubscribe from weekly cases</a>
-      </p>
-
-    </div>
-  </div>
-</body>
-</html>`;
+function buildEmailHtml(user, weeklyCase) {
+  const firstName = user.full_name?.split(" ")[0] || "Doctor";
+  const isLapsed = user.engagement_status === "lapsed";
+  const profLabels = {medicine:"Medicine",pa:"Physician Assistant",pharmacy:"Pharmacy",nursing:"Nursing",pt:"Physical Therapy",ot:"Occupational Therapy",dentistry:"Dentistry",optometry:"Optometry",mbs:"Biomedical Sciences",vet:"Veterinary Medicine"};
+  const profLabel = profLabels[user.profession] || "Clinical Reasoning";
+  const streakText = user.streak_days > 1 ? `🔥 ${user.streak_days}-day streak — keep it going!` : user.total_cases_completed > 0 ? `You have completed ${user.total_cases_completed} case${user.total_cases_completed !== 1 ? "s" : ""} so far.` : "Ready for your first case?";
+  const reEngageNote = isLapsed ? `<p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:12px 16px;font-size:14px;color:#9a3412;margin:0 0 24px">We have missed you! It has been a few days — this week is a great time to jump back in.</p>` : "";
+  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Weekly Reasoning Case — ReasonDx</title></head><body style="margin:0;padding:0;background:#f1f5f9;font-family:Helvetica,Arial,sans-serif"><div style="max-width:560px;margin:40px auto;background:#fff;border-radius:16px;overflow:hidden"><div style="background:linear-gradient(135deg,#1f5f8b,#2874a6);padding:32px 40px;text-align:center"><div style="font-size:28px;margin-bottom:6px">🩺</div><div style="font-family:Georgia,serif;font-size:22px;color:#fff;font-weight:400;margin-bottom:4px">ReasonDx</div><div style="font-size:11px;color:rgba(255,255,255,0.75);letter-spacing:1px;text-transform:uppercase">Weekly ${profLabel} Case</div></div><div style="padding:36px 40px"><p style="font-size:16px;color:#1e293b;margin:0 0 8px">Hi ${firstName},</p><p style="font-size:14px;color:#64748b;margin:0 0 28px">${streakText}</p>${reEngageNote}<div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:28px;margin-bottom:28px"><div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2874a6;margin-bottom:8px">This Week's Case</div><div style="font-family:Georgia,serif;font-size:20px;color:#0f172a;margin-bottom:16px;line-height:1.3">${weeklyCase.title}</div><p style="font-size:15px;color:#334155;line-height:1.7;margin:0 0 20px">${weeklyCase.scenario}</p><div style="background:#fff;border-left:3px solid #2874a6;padding:12px 16px;border-radius:0 8px 8px 0"><div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#2874a6;margin-bottom:4px">Your Challenge</div><p style="font-size:14px;color:#475569;margin:0;line-height:1.6">${weeklyCase.challenge}</p></div></div><div style="text-align:center;margin-bottom:32px"><a href="${weeklyCase.url}&utm_source=email&utm_medium=weekly_case&utm_campaign=retention" style="display:inline-block;background:#2874a6;color:#fff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none">Work Through This Case →</a></div><p style="font-size:13px;color:#94a3b8;text-align:center;margin:0 0 8px">ReasonDx — Clinical Reasoning Education Platform</p><p style="font-size:12px;color:#cbd5e1;text-align:center;margin:0"><a href="https://reasondx.com/dashboard.html?unsubscribe=weekly" style="color:#94a3b8">Unsubscribe</a></p></div></div></body></html>`;
 }
 
-async function sendEmail(to: string, subject: string, html: string): Promise<boolean> {
+async function sendEmail(to, subject, html) {
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${RESEND_API_KEY}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ from: FROM_EMAIL, to, subject, html })
-    });
+    const res = await fetch("https://api.resend.com/emails", {method:"POST",headers:{"Authorization":`Bearer ${RESEND_API_KEY}`,"Content-Type":"application/json"},body:JSON.stringify({from:FROM_EMAIL,to,subject,html})});
     const data = await res.json();
-    if (!res.ok) {
-      console.error(`Email failed to ${to}:`, data);
-      return false;
-    }
-    console.log(`Email sent to ${to}: ${data.id}`);
+    if (!res.ok) { console.error(`Email failed to ${to}:`, data); return false; }
+    console.log(`Sent to ${to}: ${data.id}`);
     return true;
-  } catch(e) {
-    console.error(`Email error for ${to}:`, e);
-    return false;
-  }
+  } catch(e) { console.error(`Error for ${to}:`, e); return false; }
 }
 
 Deno.serve(async (req) => {
-  // Allow manual test trigger with specific email
-  let testEmail: string | null = null;
-  if (req.method === 'POST') {
-    try {
-      const body = await req.json();
-      testEmail = body?.test_email || null;
-    } catch(e) {}
-  }
-
+  let testEmail = null;
+  if (req.method === "POST") { try { const b = await req.json(); testEmail = b?.test_email || null; } catch(e) {} }
   const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
-  const weeklyCase = getWeeklyCase();
-
-  let users: any[] = [];
-
+  let users = [];
   if (testEmail) {
-    // Test mode — send to specific email only
-    users = [{ 
-      email: testEmail,
-      full_name: 'Test User',
-      streak_days: 5,
-      total_cases_completed: 12,
-      engagement_status: 'active'
-    }];
+    users = [{email:testEmail,full_name:"Test User",streak_days:5,total_cases_completed:12,engagement_status:"active",profession:"medicine"}];
   } else {
-    // Production mode — query eligible users
-    const { data, error } = await supabase
-      .from('weekly_email_eligible')
-      .select('*');
-
-    if (error) {
-      console.error('Query error:', error);
-      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-    }
-    users = data || [];
+    const {data,error} = await supabase.from("weekly_email_eligible").select("*");
+    if (error) return new Response(JSON.stringify({error:error.message}),{status:500});
+    users = (data||[]);
   }
-
-  console.log(`Sending weekly case "${weeklyCase.title}" to ${users.length} users`);
-
-  let sent = 0;
-  let failed = 0;
-
+  let sent=0,failed=0;
   for (const user of users) {
-    const subject = `Your Weekly Case: ${weeklyCase.title} — ReasonDx`;
-    const html = buildEmailHtml(user, weeklyCase);
-    const success = await sendEmail(user.email, subject, html);
+    const profession = user.profession_id || "all";
+    const wc = getCaseForUser(profession);
+    const success = await sendEmail(user.email, `Your Weekly Case: ${wc.title} — ReasonDx`, buildEmailHtml({...user,profession},wc));
     if (success) sent++; else failed++;
-    // Small delay to avoid rate limiting
-    await new Promise(r => setTimeout(r, 100));
+    await new Promise(r=>setTimeout(r,100));
   }
-
-  return new Response(
-    JSON.stringify({ 
-      success: true,
-      case: weeklyCase.title,
-      sent,
-      failed,
-      total: users.length
-    }),
-    { headers: { 'Content-Type': 'application/json' } }
-  );
+  return new Response(JSON.stringify({success:true,sent,failed,total:users.length}),{headers:{"Content-Type":"application/json"}});
 });
