@@ -1,0 +1,13 @@
+name = "rdx-reengage"
+main = "rdx-reengage-worker.js"
+compatibility_date = "2024-01-01"
+
+[triggers]
+crons = ["0 15 * * *"]
+# Runs daily at 15:00 UTC = 10:00 AM ET
+# Targets users inactive exactly 5, 10, or 30 days
+
+[vars]
+# Secrets set via:
+# wrangler secret put RESEND_API_KEY
+# wrangler secret put SUPABASE_ANON_KEY
