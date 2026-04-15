@@ -35,7 +35,7 @@ Return ONLY valid JSON, no markdown, no preamble."""
 
 def get_topic_title(html_path):
     """Extract the H1 title from the topic page."""
-    content = html_path.read_text()
+    content = html_path.read_text(encoding="utf-8", errors="ignore")
     match = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.DOTALL)
     if match:
         return re.sub(r'<[^>]+>', '', match.group(1)).strip()
@@ -44,14 +44,14 @@ def get_topic_title(html_path):
 
 def already_has_seo_block(html_path):
     """Check if page already has our SEO block."""
-    content = html_path.read_text()
+    content = html_path.read_text(encoding="utf-8", errors="ignore")
     return 'rdx-seo-content' in content
 
 def generate_content(topic_name):
     """Call Anthropic API to generate content for a topic."""
     response = requests.post(
         API_URL,
-        headers={"Content-Type": "application/json"},
+        headers={"Content-Type": "application/json", "x-api-key": os.environ.get("ANTHROPIC_API_KEY", ""), "anthropic-version": "2023-06-01"},
         json={
             "model": "claude-sonnet-4-20250514",
             "max_tokens": 1000,
@@ -94,7 +94,7 @@ def build_seo_block(content_data, topic_name):
 
 def inject_into_page(html_path, seo_block):
     """Inject SEO block after the hero section."""
-    content = html_path.read_text()
+    content = html_path.read_text(encoding="utf-8", errors="ignore")
     
     # Insert after the hero section closing tag, before the nav script
     insert_after = '</section>\n<script src="../js/rdx-nav.js"></script>'
@@ -102,14 +102,14 @@ def inject_into_page(html_path, seo_block):
     
     if insert_after in content:
         new_content = content.replace(insert_after, replacement, 1)
-        html_path.write_text(new_content)
+        html_path.write_text(new_content, encoding="utf-8")
         return True
     
     # Fallback: insert before references div
     insert_before = '<div class="rdx-references"'
     if insert_before in content:
         new_content = content.replace(insert_before, f'{seo_block}\n{insert_before}', 1)
-        html_path.write_text(new_content)
+        html_path.write_text(new_content, encoding="utf-8")
         return True
     
     return False
