@@ -11,7 +11,7 @@ import time
 import requests
 from pathlib import Path
 
-TOPICS_DIR = Path("/home/claude/dx-tool/topics")
+TOPICS_DIR = Path(__file__).parent.parent / "topics"
 API_URL = "https://api.anthropic.com/v1/messages"
 
 SYSTEM_PROMPT = """You are a medical education content writer for ReasonDx, a clinical reasoning platform for health professions students. 
