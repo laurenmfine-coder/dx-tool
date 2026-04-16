@@ -1,0 +1,269 @@
+<!-- Interactive Demo Viewer - Add this to browse.html -->
+<style>
+.demo-viewer{
+  max-width:900px;margin:48px auto 0;background:rgba(0,0,0,0.4);
+  border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)
+}
+.demo-tabs{
+  display:flex;background:rgba(0,0,0,0.3);border-bottom:1px solid rgba(255,255,255,0.1);
+  overflow-x:auto;scrollbar-width:none
+}
+.demo-tabs::-webkit-scrollbar{display:none}
+.demo-tab{
+  flex:1;min-width:120px;padding:14px 20px;text-align:center;cursor:pointer;
+  border:none;background:transparent;color:rgba(255,255,255,0.5);
+  font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;
+  transition:all .2s;border-bottom:2px solid transparent;white-space:nowrap
+}
+.demo-tab:hover{color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.03)}
+.demo-tab.active{color:#fff;border-bottom-color:#2874A6;background:rgba(40,116,166,0.1)}
+.demo-stage{
+  position:relative;width:100%;aspect-ratio:16/9;background:#000;
+  display:flex;align-items:center;justify-content:center
+}
+.demo-placeholder{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:linear-gradient(135deg,#0a1929,#1a2f42);
+  cursor:pointer;transition:all .3s
+}
+.demo-placeholder:hover{background:linear-gradient(135deg,#0f2235,#1f3a52)}
+.demo-placeholder-icon{font-size:64px;margin-bottom:16px;opacity:0.7}
+.demo-placeholder-text{
+  font-size:18px;font-weight:700;color:#fff;margin-bottom:8px
+}
+.demo-placeholder-sub{
+  font-size:13px;color:rgba(255,255,255,0.5);max-width:360px;text-align:center;
+  padding:0 20px;line-height:1.5
+}
+.demo-video{width:100%;height:100%;object-fit:cover;display:none}
+.demo-video.active{display:block}
+.demo-overlay{
+  position:absolute;bottom:20px;left:20px;right:20px;
+  background:rgba(0,0,0,0.75);backdrop-filter:blur(10px);
+  border-radius:12px;padding:16px 20px;display:none;
+  border:1px solid rgba(255,255,255,0.1)
+}
+.demo-overlay.active{display:block}
+.demo-overlay-title{font-size:14px;font-weight:700;color:#fff;margin-bottom:6px}
+.demo-overlay-text{font-size:12px;color:rgba(255,255,255,0.7);line-height:1.5}
+.demo-choices{
+  display:flex;gap:8px;margin-top:12px;flex-wrap:wrap
+}
+.demo-choice{
+  padding:8px 16px;background:rgba(40,116,166,0.3);border:1px solid rgba(40,116,166,0.5);
+  border-radius:8px;font-size:12px;font-weight:600;color:#85C1E9;
+  cursor:pointer;transition:all .2s;white-space:nowrap
+}
+.demo-choice:hover{
+  background:rgba(40,116,166,0.5);border-color:#2874A6;color:#fff;
+  transform:translateY(-1px)
+}
+.demo-timestamp{
+  position:absolute;bottom:20px;right:20px;
+  background:rgba(0,0,0,0.8);padding:6px 12px;border-radius:6px;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,0.7);
+  font-family:'DM Mono',monospace
+}
+</style>
+
+<div class="demo-viewer">
+  <div class="demo-tabs">
+    <button class="demo-tab active" onclick="switchDemoTab('browse')">📚 Browse Cases</button>
+    <button class="demo-tab" onclick="switchDemoTab('simulate')">🩺 Start Simulation</button>
+    <button class="demo-tab" onclick="switchDemoTab('voice')">🎤 Voice Input</button>
+    <button class="demo-tab" onclick="switchDemoTab('coach')">💬 AI Coaching</button>
+    <button class="demo-tab" onclick="switchDemoTab('emr')">📋 Virtual EMR</button>
+    <button class="demo-tab" onclick="switchDemoTab('feedback')">📊 Get Feedback</button>
+  </div>
+
+  <div class="demo-stage" id="demoStage">
+    <!-- Browse Demo -->
+    <div class="demo-placeholder" id="demo-browse" onclick="playDemo('browse')">
+      <div class="demo-placeholder-icon">📚</div>
+      <div class="demo-placeholder-text">Browse 394 Clinical Cases</div>
+      <div class="demo-placeholder-sub">
+        Filter by specialty, acuity, or search by presentation. Click to see how browsing works.
+      </div>
+    </div>
+
+    <!-- Simulate Demo -->
+    <div class="demo-placeholder" id="demo-simulate" style="display:none" onclick="playDemo('simulate')">
+      <div class="demo-placeholder-icon">🩺</div>
+      <div class="demo-placeholder-text">10-Phase Clinical Simulation</div>
+      <div class="demo-placeholder-sub">
+        Gather history, examine the patient, build your DDx, order tests, and reach a diagnosis. Click to see the simulation engine.
+      </div>
+    </div>
+
+    <!-- Voice Demo -->
+    <div class="demo-placeholder" id="demo-voice" style="display:none" onclick="playDemo('voice')">
+      <div class="demo-placeholder-icon">🎤</div>
+      <div class="demo-placeholder-text">Talk Through Your Reasoning</div>
+      <div class="demo-placeholder-sub">
+        No typing required — use voice input to build your differential, order tests, and document your thinking. Click to see voice input in action.
+      </div>
+    </div>
+
+    <!-- Coach Demo -->
+    <div class="demo-placeholder" id="demo-coach" style="display:none" onclick="playDemo('coach')">
+      <div class="demo-placeholder-icon">💬</div>
+      <div class="demo-placeholder-text">Socratic AI Coaching</div>
+      <div class="demo-placeholder-sub">
+        Discuss any topic with an AI attending who asks probing questions instead of giving answers. Click to see CoachDx in action.
+      </div>
+    </div>
+
+    <!-- EMR Demo -->
+    <div class="demo-placeholder" id="demo-emr" style="display:none" onclick="playDemo('emr')">
+      <div class="demo-placeholder-icon">📋</div>
+      <div class="demo-placeholder-text">Virtual EMR Practice</div>
+      <div class="demo-placeholder-sub">
+        Review charts, order labs, write notes, and make clinical decisions in a realistic EMR environment. Click to see the virtual EMR.
+      </div>
+    </div>
+
+    <!-- Feedback Demo -->
+    <div class="demo-placeholder" id="demo-feedback" style="display:none" onclick="playDemo('feedback')">
+      <div class="demo-placeholder-icon">📊</div>
+      <div class="demo-placeholder-text">Instant Reasoning Feedback</div>
+      <div class="demo-placeholder-sub">
+        See where your reasoning went off track, identify cognitive biases, and track your progress over time. Click to see the feedback system.
+      </div>
+    </div>
+
+    <!-- Interactive overlays (shown when demo is "playing") -->
+    <div class="demo-overlay" id="overlay-browse">
+      <div class="demo-overlay-title">You're browsing 368 simulation cases</div>
+      <div class="demo-overlay-text">Filter by specialty or search by chief complaint</div>
+      <div class="demo-choices">
+        <div class="demo-choice" onclick="advanceDemo('browse-to-simulate')">Start a Case →</div>
+        <div class="demo-choice" onclick="advanceDemo('browse-filter')">Filter by Cardiology</div>
+      </div>
+    </div>
+
+    <div class="demo-overlay" id="overlay-simulate">
+      <div class="demo-overlay-title">Phase 2: Chief Complaint</div>
+      <div class="demo-overlay-text">"52-year-old woman with palpitations for 3 weeks..."</div>
+      <div class="demo-choices">
+        <div class="demo-choice" onclick="advanceDemo('sim-history')">Ask History Questions</div>
+        <div class="demo-choice" onclick="advanceDemo('sim-voice')">Use Voice Input →</div>
+      </div>
+    </div>
+
+    <div class="demo-overlay" id="overlay-voice">
+      <div class="demo-overlay-title">🎤 Voice input active</div>
+      <div class="demo-overlay-text">Say your differential diagnoses out loud — no typing needed</div>
+      <div class="demo-choices">
+        <div class="demo-choice" onclick="advanceDemo('voice-ddx')">Build DDx with Voice</div>
+        <div class="demo-choice" onclick="advanceDemo('voice-done')">Continue to Orders →</div>
+      </div>
+    </div>
+
+    <div class="demo-overlay" id="overlay-coach">
+      <div class="demo-overlay-title">CoachDx: Discussing Sepsis</div>
+      <div class="demo-overlay-text">"What makes you think sepsis rather than SIRS?"</div>
+      <div class="demo-choices">
+        <div class="demo-choice" onclick="advanceDemo('coach-respond')">Respond to Question</div>
+        <div class="demo-choice" onclick="advanceDemo('coach-new')">Ask New Topic</div>
+      </div>
+    </div>
+
+    <div class="demo-overlay" id="overlay-emr">
+      <div class="demo-overlay-title">Virtual EMR: Chart Review</div>
+      <div class="demo-overlay-text">Review vitals, labs, medications, and past medical history</div>
+      <div class="demo-choices">
+        <div class="demo-choice" onclick="advanceDemo('emr-orders')">Place Orders</div>
+        <div class="demo-choice" onclick="advanceDemo('emr-note')">Write H&P Note</div>
+      </div>
+    </div>
+
+    <div class="demo-overlay" id="overlay-feedback">
+      <div class="demo-overlay-title">Your Reasoning Fingerprint</div>
+      <div class="demo-overlay-text">Detected: Anchoring bias, premature closure on initial diagnosis</div>
+      <div class="demo-choices">
+        <div class="demo-choice" onclick="advanceDemo('feedback-detail')">See Details</div>
+        <div class="demo-choice" onclick="advanceDemo('feedback-next')">Try Another Case</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var currentDemo = 'browse';
+var demoStates = {
+  'browse': {overlays: ['overlay-browse'], duration: 12},
+  'simulate': {overlays: ['overlay-simulate'], duration: 15},
+  'voice': {overlays: ['overlay-voice'], duration: 10},
+  'coach': {overlays: ['overlay-coach'], duration: 12},
+  'emr': {overlays: ['overlay-emr'], duration: 14},
+  'feedback': {overlays: ['overlay-feedback'], duration: 10}
+};
+
+function switchDemoTab(demo) {
+  currentDemo = demo;
+  
+  // Update tabs
+  document.querySelectorAll('.demo-tab').forEach(function(tab, i) {
+    var demos = ['browse','simulate','voice','coach','emr','feedback'];
+    tab.classList.toggle('active', demos[i] === demo);
+  });
+  
+  // Update placeholders
+  document.querySelectorAll('.demo-placeholder').forEach(function(ph) {
+    ph.style.display = 'none';
+  });
+  var target = document.getElementById('demo-' + demo);
+  if (target) target.style.display = 'flex';
+  
+  // Hide all overlays
+  document.querySelectorAll('.demo-overlay').forEach(function(ov) {
+    ov.classList.remove('active');
+  });
+}
+
+function playDemo(demo) {
+  // Hide placeholder
+  var placeholder = document.getElementById('demo-' + demo);
+  if (placeholder) placeholder.style.display = 'none';
+  
+  // Show overlay
+  var state = demoStates[demo];
+  if (state && state.overlays) {
+    state.overlays.forEach(function(overlayId) {
+      var ov = document.getElementById(overlayId);
+      if (ov) ov.classList.add('active');
+    });
+  }
+  
+  // In real implementation, this would start the video
+  // For now, just show the overlay for demo purposes
+  console.log('Playing demo:', demo);
+}
+
+function advanceDemo(action) {
+  console.log('Demo action:', action);
+  
+  // Example transitions
+  if (action === 'browse-to-simulate') {
+    switchDemoTab('simulate');
+    setTimeout(function() { playDemo('simulate'); }, 300);
+  } else if (action === 'sim-voice') {
+    switchDemoTab('voice');
+    setTimeout(function() { playDemo('voice'); }, 300);
+  } else if (action === 'voice-done') {
+    switchDemoTab('feedback');
+    setTimeout(function() { playDemo('feedback'); }, 300);
+  }
+  // Add more transitions as needed
+}
+
+// Auto-advance demo state after duration (optional)
+function startDemoTimer(demo) {
+  var state = demoStates[demo];
+  if (!state) return;
+  
+  setTimeout(function() {
+    // Could auto-advance to next logical demo here
+  }, state.duration * 1000);
+}
+</script>
