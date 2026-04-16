@@ -1,0 +1,474 @@
+<!-- ReasonDx Empty State Helper System -->
+<!-- Use this when a page feels "bare" or users might not know what to do -->
+
+<style>
+/* Empty State Card */
+.rdx-empty-state {
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  border: 2px dashed #cbd5e1;
+  border-radius: 16px;
+  padding: 48px 32px;
+  text-align: center;
+  max-width: 520px;
+  margin: 40px auto;
+  animation: rdx-fade-in 0.5s;
+}
+
+.rdx-empty-state-icon {
+  font-size: 64px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+.rdx-empty-state-title {
+  font-family: 'DM Serif Display', Georgia, serif;
+  font-size: 24px;
+  color: #1e293b;
+  margin-bottom: 12px;
+  font-weight: 400;
+}
+
+.rdx-empty-state-desc {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.rdx-empty-state-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rdx-empty-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.rdx-empty-btn-primary {
+  background: #2874A6;
+  color: #fff;
+}
+
+.rdx-empty-btn-primary:hover {
+  background: #1B4F72;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 116, 166, 0.3);
+}
+
+.rdx-empty-btn-secondary {
+  background: #fff;
+  color: #2874A6;
+  border: 1.5px solid #cbd5e1;
+}
+
+.rdx-empty-btn-secondary:hover {
+  border-color: #2874A6;
+  background: #f8fafc;
+}
+
+/* Floating Help Button (bottom-right) */
+.rdx-help-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #2874A6;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(40, 116, 166, 0.4);
+  z-index: 9999;
+  transition: all 0.3s;
+  border: none;
+}
+
+.rdx-help-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 32px rgba(40, 116, 166, 0.5);
+}
+
+.rdx-help-float-pulse {
+  animation: rdx-pulse-help 2s infinite;
+}
+
+@keyframes rdx-pulse-help {
+  0%, 100% {
+    box-shadow: 0 8px 24px rgba(40, 116, 166, 0.4);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(40, 116, 166, 0.4),
+                0 0 0 12px rgba(40, 116, 166, 0.1);
+  }
+}
+
+/* Getting Started Checklist */
+.rdx-getting-started {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 480px;
+  margin: 32px auto;
+}
+
+.rdx-gs-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rdx-gs-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rdx-gs-item:hover {
+  background: #f8fafc;
+}
+
+.rdx-gs-item.completed {
+  opacity: 0.5;
+}
+
+.rdx-gs-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.rdx-gs-item.completed .rdx-gs-checkbox {
+  background: #10b981;
+  border-color: #10b981;
+}
+
+.rdx-gs-item.completed .rdx-gs-checkbox::after {
+  content: '✓';
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rdx-gs-text {
+  flex: 1;
+}
+
+.rdx-gs-text-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 2px;
+}
+
+.rdx-gs-text-desc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Progress Indicator */
+.rdx-progress-bar {
+  background: #e2e8f0;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 16px;
+}
+
+.rdx-progress-fill {
+  background: linear-gradient(90deg, #2874A6, #5BA8D0);
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.rdx-progress-text {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Suggested Actions (prominent CTAs) */
+.rdx-suggestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.rdx-suggestion-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: block;
+}
+
+.rdx-suggestion-card:hover {
+  border-color: #2874A6;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(40, 116, 166, 0.1);
+}
+
+.rdx-suggestion-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.rdx-suggestion-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.rdx-suggestion-desc {
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+/* Tooltips for UI elements */
+.rdx-inline-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #64748b;
+  margin-left: 8px;
+  cursor: help;
+}
+
+.rdx-inline-hint-icon {
+  width: 16px;
+  height: 16px;
+  background: rgba(40, 116, 166, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #2874A6;
+  font-weight: 700;
+}
+
+@keyframes rdx-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .rdx-empty-state {
+    padding: 32px 20px;
+  }
+  
+  .rdx-help-float {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+  }
+  
+  .rdx-suggestions {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+<!-- USAGE EXAMPLES -->
+
+<!-- Example 1: Empty State (no content yet) -->
+<!--
+<div class="rdx-empty-state">
+  <div class="rdx-empty-state-icon">📚</div>
+  <div class="rdx-empty-state-title">No cases in your library yet</div>
+  <div class="rdx-empty-state-desc">
+    Browse our collection of 394 clinical cases and add your favorites to your library for quick access
+  </div>
+  <div class="rdx-empty-state-actions">
+    <a href="browse.html" class="rdx-empty-btn rdx-empty-btn-primary">
+      Browse Cases →
+    </a>
+    <button onclick="RdxTours.show('browse-cases')" class="rdx-empty-btn rdx-empty-btn-secondary">
+      📺 Watch Demo
+    </button>
+  </div>
+</div>
+-->
+
+<!-- Example 2: Getting Started Checklist -->
+<!--
+<div class="rdx-getting-started">
+  <div class="rdx-gs-title">
+    🎯 Getting Started
+  </div>
+  
+  <div class="rdx-gs-item" onclick="window.location='browse.html'">
+    <div class="rdx-gs-checkbox"></div>
+    <div class="rdx-gs-text">
+      <div class="rdx-gs-text-title">Complete your first case</div>
+      <div class="rdx-gs-text-desc">Try a 5-minute simulation to see how it works</div>
+    </div>
+  </div>
+  
+  <div class="rdx-gs-item" onclick="window.location='baseline-assessment.html'">
+    <div class="rdx-gs-checkbox"></div>
+    <div class="rdx-gs-text">
+      <div class="rdx-gs-text-title">Take the baseline assessment</div>
+      <div class="rdx-gs-text-desc">Establish your reasoning baseline across 8 dimensions</div>
+    </div>
+  </div>
+  
+  <div class="rdx-gs-item" onclick="window.location='auth/login.html'">
+    <div class="rdx-gs-checkbox"></div>
+    <div class="rdx-gs-text">
+      <div class="rdx-gs-text-title">Create an account</div>
+      <div class="rdx-gs-text-desc">Save your progress and track your growth over time</div>
+    </div>
+  </div>
+  
+  <div class="rdx-progress-bar">
+    <div class="rdx-progress-fill" style="width: 0%"></div>
+  </div>
+  <div class="rdx-progress-text">0 of 3 complete</div>
+</div>
+-->
+
+<!-- Example 3: Suggested Actions (when page has minimal UI) -->
+<!--
+<div class="rdx-suggestions">
+  <a href="simulation-engine.html" class="rdx-suggestion-card">
+    <div class="rdx-suggestion-icon">🩺</div>
+    <div class="rdx-suggestion-title">Start a Simulation</div>
+    <div class="rdx-suggestion-desc">Full 10-phase clinical case with AI patient</div>
+  </a>
+  
+  <a href="virtual-emr.html" class="rdx-suggestion-card">
+    <div class="rdx-suggestion-icon">📋</div>
+    <div class="rdx-suggestion-title">Practice in EMR</div>
+    <div class="rdx-suggestion-desc">Review charts and write clinical documentation</div>
+  </a>
+  
+  <a href="CoachDx/mentor-chat.html" class="rdx-suggestion-card">
+    <div class="rdx-suggestion-icon">💬</div>
+    <div class="rdx-suggestion-title">Ask the Coach</div>
+    <div class="rdx-suggestion-desc">Discuss any topic with Socratic AI attending</div>
+  </a>
+</div>
+-->
+
+<!-- Example 4: Floating Help Button (always visible) -->
+<!--
+<button class="rdx-help-float rdx-help-float-pulse" 
+        onclick="RdxTours.show('page-overview')"
+        title="Need help? Click for a quick tour">
+  💡
+</button>
+-->
+
+<!-- Example 5: Inline Hints (next to confusing UI elements) -->
+<!--
+<label>
+  Reasoning Framework
+  <span class="rdx-inline-hint">
+    <span class="rdx-inline-hint-icon">?</span>
+    <span onclick="RdxTours.show('reasoning-frameworks')">What's this?</span>
+  </span>
+</label>
+<select>
+  <option>Analysis of Competing Hypotheses</option>
+  <option>FMEA</option>
+  <!-- ... -->
+</select>
+-->
+
+<script>
+// Getting Started Checklist Logic
+(function() {
+  function initGettingStarted() {
+    var checklist = document.querySelector('.rdx-getting-started');
+    if (!checklist) return;
+    
+    var items = checklist.querySelectorAll('.rdx-gs-item');
+    var completed = JSON.parse(localStorage.getItem('rdx-gs-completed') || '[]');
+    
+    // Mark completed items
+    items.forEach(function(item, i) {
+      if (completed.includes(i)) {
+        item.classList.add('completed');
+      }
+      
+      // Toggle on click
+      item.addEventListener('click', function() {
+        if (!completed.includes(i)) {
+          completed.push(i);
+          localStorage.setItem('rdx-gs-completed', JSON.stringify(completed));
+          item.classList.add('completed');
+          updateProgress();
+        }
+      });
+    });
+    
+    // Update progress bar
+    function updateProgress() {
+      var progress = (completed.length / items.length) * 100;
+      var fill = checklist.querySelector('.rdx-progress-fill');
+      var text = checklist.querySelector('.rdx-progress-text');
+      if (fill) fill.style.width = progress + '%';
+      if (text) text.textContent = completed.length + ' of ' + items.length + ' complete';
+    }
+    
+    updateProgress();
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGettingStarted);
+  } else {
+    initGettingStarted();
+  }
+})();
+</script>
