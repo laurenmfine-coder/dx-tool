@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="description" content="How ReasonDx works — AI Socratic coaching, simulated patient cases, and clinical reasoning frameworks for health professions students. Learn how to build diagnostic expertise.">
+<meta name="description" content="How ReasonDx works — AI-powered patient simulations, Socratic coaching, and clinical reasoning practice for health professions students. Start learning in 60 seconds.">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,8 +17,9 @@ body{background:var(--rdx-bg)}
 .hero-tag::before,.hero-tag::after{content:'';display:block;width:24px;height:1px;background:var(--rdx-ocean-mid);opacity:.5}
 .hero h1{font-family:var(--rdx-font-serif);font-size:clamp(2rem,5vw,3.2rem);color:#fff;line-height:1.1;margin-bottom:18px}
 .hero h1 em{font-style:italic;color:var(--rdx-ocean-mid)}
-.hero p{font-size:1rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:520px;margin:0 auto}
-.hero-wave{display:block;width:100%;margin-top:48px}
+.hero p{font-size:1rem;color:rgba(255,255,255,.65);line-height:1.75;max-width:520px;margin:0 auto 28px}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;background:var(--rdx-accent);color:#fff;padding:14px 28px;border-radius:10px;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
 .main{max-width:900px;margin:0 auto;padding:48px 24px 80px}
 .stats-row{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:40px 0;border-bottom:1px solid var(--rdx-border)}
 .stat{text-align:center}
@@ -38,7 +39,7 @@ body{background:var(--rdx-bg)}
 .cmp-item{font-size:.88rem;color:var(--rdx-text-muted);padding:7px 0;border-bottom:1px solid var(--rdx-border);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
 .cmp-item:last-child{border-bottom:none}
 .journey{position:relative;padding-left:52px;margin-top:28px}
-.journey::before{content:'';position:absolute;left:18px;top:16px;bottom:16px;width:2px;background:linear-gradient(180deg,var(--rdx-danger),var(--rdx-ocean),#6b28a6,var(--rdx-accent),var(--rdx-success));border-radius:1px}
+.journey::before{content:'';position:absolute;left:18px;top:16px;bottom:16px;width:2px;background:linear-gradient(180deg,var(--rdx-ocean),var(--rdx-ocean-dark),#2874A6,var(--rdx-accent));border-radius:1px}
 .step{position:relative;margin-bottom:28px}
 .step:last-child{margin-bottom:0}
 .step-dot{position:absolute;left:-52px;top:8px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:700;color:#fff;z-index:2;box-shadow:0 0 0 4px var(--rdx-bg)}
@@ -46,121 +47,205 @@ body{background:var(--rdx-bg)}
 .step-card:hover{border-color:var(--rdx-ocean-light);transform:translateX(4px);box-shadow:var(--rdx-shadow)}
 .step-title{font-size:1rem;font-weight:700;color:var(--rdx-text);margin-bottom:6px}
 .step-body{font-size:.88rem;color:var(--rdx-text-muted);line-height:1.7}
-.step-example{margin-top:12px;padding:12px 16px;background:var(--rdx-ocean-ghost);border-radius:var(--rdx-radius);border-left:3px solid var(--rdx-ocean);font-size:.84rem;color:var(--rdx-text);line-height:1.65;font-style:italic}
-.step-example strong{color:var(--rdx-ocean-dark);font-style:normal;font-weight:700}
-.phase-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
-.phase{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:20px;transition:all .2s}
-.phase:hover{border-color:var(--rdx-border-hi)}
-.phase-num{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--rdx-ocean);margin-bottom:4px}
-.phase-title{font-size:.95rem;font-weight:700;color:var(--rdx-text);margin-bottom:6px}
-.phase-body{font-size:.82rem;color:var(--rdx-text-muted);line-height:1.6}
-.phase-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-.phase-tag{font-size:.7rem;font-weight:600;padding:3px 8px;border-radius:var(--rdx-radius-sm);background:var(--rdx-surface-2);color:var(--rdx-text-muted);border:1px solid var(--rdx-border)}
-.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
-.mod{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:20px;transition:all .2s;position:relative;overflow:hidden}
+.step-cta{display:inline-flex;align-items:center;gap:6px;margin-top:12px;padding:8px 14px;background:var(--rdx-ocean-ghost);border:1px solid var(--rdx-ocean-light);border-radius:8px;color:var(--rdx-ocean-dark);font-size:.82rem;font-weight:700;text-decoration:none;transition:all .2s}
+.step-cta:hover{background:var(--rdx-ocean);color:#fff;transform:translateX(3px)}
+.phase-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px}
+.phase{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:18px;transition:all .2s;cursor:default}
+.phase:hover{border-color:var(--rdx-ocean-light);transform:translateY(-3px);box-shadow:var(--rdx-shadow-md)}
+.phase-num{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--rdx-ocean);margin-bottom:6px}
+.phase-title{font-size:.85rem;font-weight:700;color:var(--rdx-text);margin-bottom:4px;line-height:1.3}
+.phase-body{font-size:.75rem;color:var(--rdx-text-muted);line-height:1.5}
+.module-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.mod{background:var(--rdx-surface);border:1.5px solid var(--rdx-border);border-radius:var(--rdx-radius-md);padding:20px;transition:all .2s;position:relative;overflow:hidden;text-decoration:none;display:block}
 .mod::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .2s}
 .mod:hover{border-color:var(--rdx-border-hi);transform:translateY(-3px);box-shadow:var(--rdx-shadow-md)}
 .mod:hover::before{opacity:1}
-.mod.c-red::before{background:var(--rdx-danger)}.mod.c-pu::before{background:#6b28a6}.mod.c-blue::before{background:var(--rdx-ocean)}.mod.c-am::before{background:var(--rdx-accent)}.mod.c-green::before{background:var(--rdx-success)}.mod.c-teal::before{background:var(--rdx-info)}
+.mod.c-ocean::before{background:var(--rdx-ocean)}
+.mod.c-accent::before{background:var(--rdx-accent)}
+.mod.c-info::before{background:var(--rdx-info)}
+.mod.c-success::before{background:var(--rdx-success)}
 .mod-icon{font-size:1.6rem;margin-bottom:10px}
 .mod-title{font-size:.9rem;font-weight:700;color:var(--rdx-text);margin-bottom:4px}
 .mod-body{font-size:.78rem;color:var(--rdx-text-muted);line-height:1.55}
 .mod-stat{display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:.7rem;font-weight:600;padding:3px 9px;border-radius:var(--rdx-radius-sm);background:var(--rdx-ocean-ghost);color:var(--rdx-ocean);border:1px solid rgba(40,116,166,.15)}
+.mid-cta{background:linear-gradient(135deg,var(--rdx-ocean-deep),var(--rdx-ocean-dark));border-radius:var(--rdx-radius-lg);padding:36px 40px;text-align:center;margin-top:48px;margin-bottom:48px}
+.mid-cta h3{font-family:var(--rdx-font-serif);font-size:1.5rem;color:#fff;margin-bottom:8px}
+.mid-cta p{font-size:.85rem;color:rgba(255,255,255,.65);margin-bottom:20px}
+.mid-cta-btn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--rdx-ocean-dark);padding:12px 24px;border-radius:8px;font-weight:700;text-decoration:none;transition:all .2s;font-size:.9rem}
+.mid-cta-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
 .cta-block{background:linear-gradient(135deg,var(--rdx-ocean-deep),var(--rdx-ocean-dark));border-radius:var(--rdx-radius-lg);padding:48px 40px;text-align:center;margin-top:64px}
 .cta-block h2{font-family:var(--rdx-font-serif);font-size:1.8rem;color:#fff;margin-bottom:10px}
 .cta-block p{font-size:.9rem;color:rgba(255,255,255,.65);margin-bottom:28px}
 .anim{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .5s ease}
 .anim.vis{opacity:1;transform:translateY(0)}
-@media(max-width:768px){.compare,.phase-grid{grid-template-columns:1fr}.module-grid{grid-template-columns:1fr 1fr}.journey{padding-left:44px}.step-dot{left:-44px;width:30px;height:30px}.main{padding:32px 16px 60px}.hero{padding:48px 20px 40px}}
-@media(max-width:480px){.module-grid{grid-template-columns:1fr}.stats-row{gap:24px}}
+@media(max-width:900px){
+.phase-grid{grid-template-columns:repeat(2,1fr)}
+.module-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+.compare{grid-template-columns:1fr}
+.phase-grid{grid-template-columns:1fr}
+.module-grid{grid-template-columns:1fr}
+.journey{padding-left:42px}
+.journey::before{left:14px}
+.step-dot{left:-42px;width:28px;height:28px;font-size:.75rem}
+}
 </style>
 </head>
 <body>
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">Platform Overview</div>
-    <h1>Learn medicine the way<br>you'll <em>practice it</em></h1>
-    <p>ReasonDx is a virtual teaching hospital. Instead of reading about cases, you work through them — making decisions, ordering tests, treating patients, and learning from the outcomes.</p>
+    <div class="hero-tag">How It Works</div>
+    <h1>Interview patients. Make decisions. <em>Get better.</em></h1>
+    <p>ReasonDx gives you realistic clinical cases with AI patients who respond to your questions. Learn diagnostic reasoning by doing it, not reading about it.</p>
+    <a href="/browse.html" class="hero-cta">Try a 5-Minute Case →</a>
   </div>
-  <svg class="hero-wave" viewBox="0 0 1440 48" preserveAspectRatio="none"><path d="M0,32 C360,56 1080,0 1440,28 L1440,48 L0,48 Z" fill="#f0f4f8"/></svg>
 </div>
 
 <div class="main">
   <div class="stats-row anim">
-    <div class="stat"><div class="stat-n">300+</div><div class="stat-l">Clinical Cases</div></div>
-    <div class="stat"><div class="stat-n">20+</div><div class="stat-l">Specialties</div></div>
-    <div class="stat"><div class="stat-n">13</div><div class="stat-l">Learning Tools</div></div>
-    <div class="stat"><div class="stat-n">6</div><div class="stat-l">Clinical Settings</div></div>
+    <div class="stat"><div class="stat-n">394</div><div class="stat-l">Clinical Cases</div></div>
+    <div class="stat"><div class="stat-n">10</div><div class="stat-l">Health Professions</div></div>
+    <div class="stat"><div class="stat-n">100%</div><div class="stat-l">Free to Use</div></div>
   </div>
 
   <div class="section anim">
     <div class="section-tag">The Problem</div>
-    <h2>Why this exists</h2>
-    <div class="section-sub">Medical students get plenty of knowledge. What they don't get enough of is practice making decisions under uncertainty — the actual skill they'll need on day one of residency.</div>
+    <h2>Most education teaches <em>what</em> to think, not <em>how</em> to think</h2>
+    <div class="section-sub">Traditional learning gives you knowledge. Clinical practice demands reasoning. ReasonDx bridges that gap.</div>
     <div class="compare">
       <div class="cmp-card old">
-        <div class="cmp-label">Traditional Learning</div>
-        <div class="cmp-item">✗ Read about a disease in a textbook</div>
+        <div class="cmp-label">Traditional Approach</div>
+        <div class="cmp-item">✗ Read about diseases in textbooks</div>
         <div class="cmp-item">✗ Memorize diagnostic criteria</div>
-        <div class="cmp-item">✗ Answer MCQs about what you read</div>
+        <div class="cmp-item">✗ Answer multiple choice questions</div>
         <div class="cmp-item">✗ Hope it transfers to real patients</div>
       </div>
       <div class="cmp-card new">
         <div class="cmp-label">ReasonDx Approach</div>
-        <div class="cmp-item">✓ A patient arrives with a chief complaint</div>
-        <div class="cmp-item">✓ You decide what to ask, order, and do</div>
-        <div class="cmp-item">✓ The patient responds to your decisions</div>
-        <div class="cmp-item">✓ You learn from outcomes, not textbooks</div>
+        <div class="cmp-item">✓ Patient arrives with symptoms</div>
+        <div class="cmp-item">✓ You decide what to ask and order</div>
+        <div class="cmp-item">✓ AI patient responds like a real person</div>
+        <div class="cmp-item">✓ You learn from doing, not reading</div>
       </div>
     </div>
   </div>
 
   <div class="section anim">
-    <div class="section-tag">Your Learning Journey</div>
-    <h2>A day in the virtual hospital</h2>
-    <div class="section-sub">Every location teaches a different skill. Here's what a typical session looks like.</div>
+    <div class="section-tag">How It Works</div>
+    <h2>Learn by doing — one case at a time</h2>
+    <div class="section-sub">Pick a case, work through it like a real patient encounter, get feedback. No login required to start.</div>
     <div class="journey">
-      <div class="step anim"><div class="step-dot" style="background:var(--rdx-danger)">1</div><div class="step-card"><div class="step-title">You arrive at the ED</div><div class="step-body">The track board shows patients waiting to be seen. You pick one up — just like a real shift. Each patient has a chief complaint, vitals, and a story that unfolds as you investigate.</div><div class="step-example"><strong>Example:</strong> A 62-year-old woman presents with acute onset chest pain radiating to the jaw, diaphoresis, and nausea. Vitals: BP 168/98, HR 104, SpO2 94%. What do you do first?</div></div></div>
-      <div class="step anim"><div class="step-dot" style="background:var(--rdx-ocean)">2</div><div class="step-card"><div class="step-title">You build a differential</div><div class="step-body">Before ordering anything, you think. What are the most likely diagnoses? What can't you miss? Rank your differential by probability and danger. Clinical reasoning starts not with tests, but with thinking.</div></div></div>
-      <div class="step anim"><div class="step-dot" style="background:#6b28a6">3</div><div class="step-card"><div class="step-title">You take a history and examine the patient</div><div class="step-body">Ask targeted questions. Perform a focused physical exam. Each finding either strengthens or weakens items on your differential — just like a real clinical encounter.</div></div></div>
-      <div class="step anim"><div class="step-dot" style="background:var(--rdx-accent)">4</div><div class="step-card"><div class="step-title">You order workup and treatments</div><div class="step-body">Choose from realistic order sets: labs, imaging, medications, procedures. Every order matters. The patient evolves based on what you do — vitals change, results come back, complications can arise.</div><div class="step-example"><strong>Decision point:</strong> Troponin returns elevated. ECG shows ST depression in V3-V6. Do you activate the cath lab? Start heparin? Call cardiology? Every choice has consequences.</div></div></div>
-      <div class="step anim"><div class="step-dot" style="background:var(--rdx-success)">5</div><div class="step-card"><div class="step-title">You get real-time feedback</div><div class="step-body">After each phase, see what you got right and what you missed. Evidence-based teaching points explain the reasoning behind each decision — with links to open-access guidelines and literature.</div></div></div>
-      <div class="step anim"><div class="step-dot" style="background:var(--rdx-info)">6</div><div class="step-card"><div class="step-title">Your reasoning fingerprint grows</div><div class="step-body">Over time, the platform tracks your reasoning patterns — where you're strong, where you have blind spots, how you handle uncertainty. This isn't just a score. It's a map of how you think clinically.</div></div></div>
+      <div class="step anim">
+        <div class="step-dot" style="background:var(--rdx-ocean)">1</div>
+        <div class="step-card">
+          <div class="step-title">Pick a case from 394 options</div>
+          <div class="step-body">Browse by specialty (cardiology, pulmonary, neuro, etc.), urgency level, or profession. Each case is based on real clinical presentations.</div>
+          <a href="/browse.html" class="step-cta">Browse Cases →</a>
+        </div>
+      </div>
+      <div class="step anim">
+        <div class="step-dot" style="background:var(--rdx-ocean-dark)">2</div>
+        <div class="step-card">
+          <div class="step-title">Interview the AI patient</div>
+          <div class="step-body">Ask questions just like you would in clinic. The AI patient responds naturally based on their case — you won't get cookie-cutter answers. Use voice or type your questions.</div>
+          <a href="/browse.html?mode=simulate" class="step-cta">See How It Works →</a>
+        </div>
+      </div>
+      <div class="step anim">
+        <div class="step-dot" style="background:#2874A6">3</div>
+        <div class="step-card">
+          <div class="step-title">Build your differential, order tests, make decisions</div>
+          <div class="step-body">Work through 10 phases: history, physical exam, differential diagnosis, testing, diagnosis, treatment, disposition. Each phase builds on the last.</div>
+        </div>
+      </div>
+      <div class="step anim">
+        <div class="step-dot" style="background:var(--rdx-accent)">4</div>
+        <div class="step-card">
+          <div class="step-title">Get AI feedback on your reasoning</div>
+          <div class="step-body">After each case, an AI attending reviews your work — not just if you got the diagnosis right, but how you got there. Learn what you did well and what to work on.</div>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="mid-cta anim">
+    <h3>Ready to try it?</h3>
+    <p>No login required • Takes 5 minutes • Completely free</p>
+    <a href="/browse.html" class="mid-cta-btn">Start Your First Case →</a>
   </div>
 
   <div class="section anim">
     <div class="section-tag">Inside a Case</div>
-    <h2>The Clinical Reasoning Trainer</h2>
-    <div class="section-sub">Each case takes you through a structured clinical encounter with multiple phases of decision-making and feedback.</div>
+    <h2>10 phases that mirror real clinical workflow</h2>
+    <div class="section-sub">Each simulation walks you through the complete diagnostic process, from first impression to final disposition.</div>
     <div class="phase-grid">
-      <div class="phase"><div class="phase-num">Phase 1</div><div class="phase-title">Initial Presentation</div><div class="phase-body">Patient arrives with chief complaint, vitals, and initial data. You start forming hypotheses before touching anything.</div><div class="phase-tags"><span class="phase-tag">Chief complaint</span><span class="phase-tag">Vitals</span><span class="phase-tag">Initial labs</span><span class="phase-tag">ECG</span></div></div>
-      <div class="phase"><div class="phase-num">Phase 2</div><div class="phase-title">Order Selection</div><div class="phase-body">Choose from realistic order sets. Some orders are critical, some are correct but not urgent, and some are pitfall traps that teach common mistakes.</div><div class="phase-tags"><span class="phase-tag">4–10 orders per case</span><span class="phase-tag">Pitfall traps</span><span class="phase-tag">Evidence-based</span></div></div>
-      <div class="phase"><div class="phase-num">Phase 3</div><div class="phase-title">Patient Evolves</div><div class="phase-body">Vitals change based on your orders. New labs return. The patient speaks to you. Conditions improve or worsen depending on your decisions.</div><div class="phase-tags"><span class="phase-tag">Dynamic vitals</span><span class="phase-tag">AI patient updates</span><span class="phase-tag">Consequence engine</span></div></div>
-      <div class="phase"><div class="phase-num">Phase 4</div><div class="phase-title">Debrief &amp; Learn</div><div class="phase-body">Detailed feedback on every decision. Key learning points, must-not-miss diagnoses, common pitfalls, and links to open-access clinical references.</div><div class="phase-tags"><span class="phase-tag">Key learning points</span><span class="phase-tag">Must-not-miss</span><span class="phase-tag">Guidelines</span></div></div>
+      <div class="phase">
+        <div class="phase-num">Phase 1-2</div>
+        <div class="phase-title">Intro & History</div>
+        <div class="phase-body">Read the presentation, interview the AI patient</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Phase 3</div>
+        <div class="phase-title">Physical Exam</div>
+        <div class="phase-body">Select exam findings from 18 templates</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Phase 4</div>
+        <div class="phase-title">Differential</div>
+        <div class="phase-body">Build and rank your DDx from 670+ diagnoses</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Phase 5-6</div>
+        <div class="phase-title">Tests & Diagnosis</div>
+        <div class="phase-body">Order workup, interpret results, commit to diagnosis</div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">Phase 7-10</div>
+        <div class="phase-title">Management & Debrief</div>
+        <div class="phase-body">Treatment plan, disposition, AI feedback, reflection</div>
+      </div>
     </div>
   </div>
 
   <div class="section anim">
-    <div class="section-tag">Everything Available</div>
-    <h2>Your learning toolkit</h2>
-    <div class="section-sub">The virtual hospital has different locations for different skills. Use what you need, when you need it.</div>
+    <div class="section-tag">Four Ways to Learn</div>
+    <h2>Use what fits your schedule</h2>
+    <div class="section-sub">Every feature is free. Switch between modes based on what you need right now.</div>
     <div class="module-grid">
-      <div class="mod c-red"><div class="mod-icon">🏥</div><div class="mod-title">Emergency Dept</div><div class="mod-body">Pick up patients from the track board. Full CRT trainers with interactive orders, evolving patients, and evidence-based feedback.</div><div class="mod-stat">300+ cases</div></div>
-      <div class="mod c-pu"><div class="mod-icon">🩺</div><div class="mod-title">Simulation Lab</div><div class="mod-body">Standardized patient encounters. Practice history, physical exam, and clinical communication with AI-powered team members.</div><div class="mod-stat">Interactive SP</div></div>
-      <div class="mod c-blue"><div class="mod-icon">🌙</div><div class="mod-title">Night Float</div><div class="mod-body">Overnight call simulation. Triage pages, manage cross-cover patients, and make decisions under time pressure.</div><div class="mod-stat">On-call scenarios</div></div>
-      <div class="mod c-am"><div class="mod-icon">📋</div><div class="mod-title">Admissions</div><div class="mod-body">Full admissions workflow from ED presentation through assessment, plan, and admission orders.</div><div class="mod-stat">Workflow sim</div></div>
-      <div class="mod c-green"><div class="mod-icon">📞</div><div class="mod-title">Consult Service</div><div class="mod-body">Receive and return consult pages. Practice SBAR communication and structured clinical reasoning.</div><div class="mod-stat">SBAR practice</div></div>
-      <div class="mod c-teal"><div class="mod-icon">📊</div><div class="mod-title">Learning Analytics</div><div class="mod-body">Track your reasoning fingerprint — accuracy, patterns, strengths, blind spots over time.</div><div class="mod-stat">Reasoning fingerprint</div></div>
+      <a href="/browse.html?mode=simulate" class="mod c-ocean">
+        <div class="mod-icon">🩺</div>
+        <div class="mod-title">Simulate</div>
+        <div class="mod-body">Full clinical cases with AI patients. Interview, diagnose, treat. 10-20 minutes per case.</div>
+        <div class="mod-stat">394 cases</div>
+      </a>
+      <a href="/browse.html?mode=practice" class="mod c-accent">
+        <div class="mod-icon">📝</div>
+        <div class="mod-title">Practice EMR</div>
+        <div class="mod-body">Same cases, but practice writing clinical notes. No AI — just documentation skill-building.</div>
+        <div class="mod-stat">SOAP notes</div>
+      </a>
+      <a href="/browse.html?mode=coach" class="mod c-info">
+        <div class="mod-icon">💬</div>
+        <div class="mod-title">Ask CoachDx</div>
+        <div class="mod-body">Chat with an AI attending about any diagnosis or concept. Socratic teaching, not answers.</div>
+        <div class="mod-stat">130 topics</div>
+      </a>
+      <a href="/browse.html?mode=learn" class="mod c-success">
+        <div class="mod-icon">🧬</div>
+        <div class="mod-title">Learn Mechanisms</div>
+        <div class="mod-body">Pathophysiology deep-dives. Understand why diseases work the way they do.</div>
+        <div class="mod-stat">53 modules</div>
+      </a>
     </div>
   </div>
 
   <div class="cta-block anim">
-    <h2>Ready to start?</h2>
-    <p>Pick a patient, make some decisions, and learn from the outcomes.</p>
+    <h2>Start learning in 60 seconds</h2>
+    <p>Pick a case. Interview the patient. See how you did. It's that simple.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="/casedx.html">Enter the Hospital →</a>
-      <a class="rdx-btn rdx-btn-ghost-white" href="/genetics/genetics-demo-case.html">Try a Free Case</a>
+      <a class="rdx-btn rdx-btn-accent rdx-btn-lg" href="/browse.html">Browse All Cases →</a>
+      <a class="rdx-btn rdx-btn-ghost-white" href="/auth/login.html">Create Free Account</a>
     </div>
   </div>
 </div>
