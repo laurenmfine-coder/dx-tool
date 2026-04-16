@@ -914,15 +914,40 @@ grid.innerHTML=displayedItems.map(function(c){
   var iconClass = 'card-icon acuity-' + (c.acuity || 3);
   var iconSymbol = c.acuity === 1 ? '⚠️' : c.acuity === 2 ? '🔸' : c.acuity === 3 ? '◉' : c.acuity === 4 ? '○' : '·';
   
+  // Parse title/subtitle from chiefComplaint
+  var title = c.title || '';
+  var subtitle = c.sub || '';
+  
+  // If title looks like it has age or context mixed in, try to separate
+  if (title && !subtitle) {
+    // Extract age pattern
+    var ageMatch = title.match(/(\d+(?:-\w+)?-?(?:yo|year-old|Week-Old|mo))/i);
+    if (ageMatch) {
+      subtitle = ageMatch[1];
+      // Remove age from title
+      title = title.replace(ageMatch[0], '').replace(/^\s*[\/\-—]\s*/, '').trim();
+    }
+    
+    // If title has " / " split, use first part as title, second as subtitle
+    if (title.includes(' / ') && !subtitle) {
+      var parts = title.split(' / ');
+      title = parts[0];
+      if (parts[1]) subtitle = parts[1];
+    }
+    
+    // Clean up
+    title = title.replace(/^[—\-\s]+/, '').trim();
+  }
+  
   var h='<div class="card" onclick="launch(\''+esc(c.id)+'\')">';
   h+='<div class="card-top">';
   h+='<div class="'+iconClass+'">'+iconSymbol+'</div>';
   h+='<div style="flex:1">';
   h+='<div class="card-title">';
-  h+='<span class="card-title-main">'+esc(c.title)+'</span>';
+  h+='<span class="card-title-main">'+esc(title)+'</span>';
   h+='<span class="card-badge '+badgeClass+'">'+badgeText+'</span>';
   h+='</div>';
-  if(c.sub) h+='<div class="card-sub">'+esc(c.sub)+'</div>';
+  if(subtitle) h+='<div class="card-sub">'+esc(subtitle)+'</div>';
   h+='</div></div>';
   h+='<div class="card-tags">';
   h+='<span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';
