@@ -260,6 +260,9 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         </div>
 
         <div class="demo-stage">
+          <!-- iFrame for animated demos -->
+          <iframe id="demo-frame" style="position:absolute;inset:0;width:100%;height:100%;border:none;display:none;background:#000;z-index:1"></iframe>
+          
           <div class="demo-placeholder" id="demo-browse" onclick="playDemo('browse')">
             <div class="demo-placeholder-icon">📚</div>
             <div class="demo-placeholder-text">Browse 394 Cases</div>
@@ -356,20 +359,50 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       var currentDemo='browse';
       function switchDemoTab(demo){
         currentDemo=demo;
+        // Hide iframe
+        var frame = document.getElementById('demo-frame');
+        if(frame) { frame.style.display = 'none'; frame.src = ''; }
+        // Reset tab states
         document.querySelectorAll('.demo-tab').forEach(function(tab,i){
           var demos=['browse','simulate','voice','coach','emr','feedback'];
           tab.classList.toggle('active',demos[i]===demo);
         });
-        document.querySelectorAll('.demo-placeholder').forEach(function(ph){ph.style.display='none';});
+        // Hide all placeholders
+        document.querySelectorAll('.demo-placeholder').forEach(function(ph){
+          ph.style.display='none';
+          ph.style.opacity='1'; // Reset opacity
+        });
+        // Show target placeholder
         var target=document.getElementById('demo-'+demo);
         if(target)target.style.display='flex';
+        // Hide all overlays
         document.querySelectorAll('.demo-overlay').forEach(function(ov){ov.classList.remove('active');});
       }
       function playDemo(demo){
-        // Don't hide placeholder - keep it as background
-        // Just show the overlay on top
-        var ov=document.getElementById('overlay-'+demo);
-        if(ov)ov.classList.add('active');
+        // Load animated demo in iframe
+        var frame = document.getElementById('demo-frame');
+        var demoFiles = {
+          'browse': '/demos/browse-demo.html',
+          'simulate': '/demos/simulate-demo.html',
+          'voice': '/demos/voice-demo.html',
+          'coach': '/demos/coach-demo.html',
+          'emr': '/demos/emr-demo.html',
+          'feedback': '/demos/feedback-demo.html'
+        };
+        
+        if(demoFiles[demo]) {
+          frame.src = demoFiles[demo];
+          frame.style.display = 'block';
+          // Hide placeholder after short delay
+          setTimeout(function(){
+            var placeholder = document.getElementById('demo-' + demo);
+            if(placeholder) placeholder.style.opacity = '0';
+          }, 500);
+        } else {
+          // Fallback to overlay if demo not available
+          var ov=document.getElementById('overlay-'+demo);
+          if(ov)ov.classList.add('active');
+        }
       }
       function advanceDemo(action){
         if(action==='browse-to-simulate'){switchDemoTab('simulate');setTimeout(function(){playDemo('simulate');},300);}

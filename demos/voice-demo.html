@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+body { margin: 0; padding: 0; background: #000; }
+svg { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1920" height="1080" fill="#0a1929"/>
+  
+  <!-- Center microphone icon (large, pulsing) -->
+  <g id="micIcon">
+    <circle cx="960" cy="400" r="120" fill="#2874A6" opacity="0.2">
+      <animate attributeName="r" values="120;140;120" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.2;0.4;0.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="960" cy="400" r="100" fill="#2874A6">
+      <animate attributeName="r" values="100;110;100" dur="1.5s" begin="0.2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="960" y="430" font-family="Arial, sans-serif" font-size="80" fill="#fff" text-anchor="middle">🎤</text>
+  </g>
+  
+  <!-- Status Text -->
+  <text x="960" y="560" font-family="Arial, sans-serif" font-size="28" fill="#85C1E9" text-anchor="middle" font-weight="bold">
+    Listening...
+    <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+  </text>
+  
+  <!-- Sound waves (animated) -->
+  <g id="soundWaves" opacity="0">
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="1s" fill="freeze"/>
+    <!-- Left waves -->
+    <path d="M 400 400 Q 420 350, 440 400" stroke="#2874A6" stroke-width="4" fill="none" opacity="0.6">
+      <animate attributeName="d" values="M 400 400 Q 420 350, 440 400;M 400 400 Q 420 450, 440 400;M 400 400 Q 420 350, 440 400" dur="1s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 350 400 Q 370 320, 390 400" stroke="#2874A6" stroke-width="4" fill="none" opacity="0.4">
+      <animate attributeName="d" values="M 350 400 Q 370 320, 390 400;M 350 400 Q 370 480, 390 400;M 350 400 Q 370 320, 390 400" dur="1.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 300 400 Q 320 280, 340 400" stroke="#2874A6" stroke-width="4" fill="none" opacity="0.2">
+      <animate attributeName="d" values="M 300 400 Q 320 280, 340 400;M 300 400 Q 320 520, 340 400;M 300 400 Q 320 280, 340 400" dur="1.4s" repeatCount="indefinite"/>
+    </path>
+    
+    <!-- Right waves -->
+    <path d="M 1480 400 Q 1500 350, 1520 400" stroke="#2874A6" stroke-width="4" fill="none" opacity="0.6">
+      <animate attributeName="d" values="M 1480 400 Q 1500 350, 1520 400;M 1480 400 Q 1500 450, 1520 400;M 1480 400 Q 1500 350, 1520 400" dur="1s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 1530 400 Q 1550 320, 1570 400" stroke="#2874A6" stroke-width="4" fill="none" opacity="0.4">
+      <animate attributeName="d" values="M 1530 400 Q 1550 320, 1570 400;M 1530 400 Q 1550 480, 1570 400;M 1530 400 Q 1550 320, 1570 400" dur="1.2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 1580 400 Q 1600 280, 1620 400" stroke="#2874A6" stroke-width="4" fill="none" opacity="0.2">
+      <animate attributeName="d" values="M 1580 400 Q 1600 280, 1620 400;M 1580 400 Q 1600 520, 1620 400;M 1580 400 Q 1600 280, 1620 400" dur="1.4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Transcript appearing (word by word effect) -->
+  <g id="transcript" transform="translate(200, 650)" opacity="0">
+    <animate attributeName="opacity" values="0;1" dur="0.5s" begin="2s" fill="freeze"/>
+    
+    <rect x="0" y="0" width="1520" height="300" rx="16" fill="rgba(26,58,92,0.5)" stroke="#2874A6" stroke-width="2"/>
+    
+    <text x="30" y="40" font-family="Arial, sans-serif" font-size="18" fill="#85C1E9" font-weight="bold">
+      Your Input:
+    </text>
+    
+    <!-- Words appear in sequence -->
+    <text x="30" y="90" font-family="Arial, sans-serif" font-size="24" fill="#fff">
+      <tspan opacity="0">I'm<animate attributeName="opacity" values="0;1" dur="0.1s" begin="2.2s" fill="freeze"/></tspan>
+      <tspan opacity="0"> thinking<animate attributeName="opacity" values="0;1" dur="0.1s" begin="2.4s" fill="freeze"/></tspan>
+      <tspan opacity="0"> this<animate attributeName="opacity" values="0;1" dur="0.1s" begin="2.6s" fill="freeze"/></tspan>
+      <tspan opacity="0"> is<animate attributeName="opacity" values="0;1" dur="0.1s" begin="2.8s" fill="freeze"/></tspan>
+      <tspan opacity="0"> likely<animate attributeName="opacity" values="0;1" dur="0.1s" begin="3s" fill="freeze"/></tspan>
+    </text>
+    <text x="30" y="130" font-family="Arial, sans-serif" font-size="24" fill="#fff">
+      <tspan opacity="0">STEMI<animate attributeName="opacity" values="0;1" dur="0.1s" begin="3.2s" fill="freeze"/></tspan>
+      <tspan opacity="0"> or<animate attributeName="opacity" values="0;1" dur="0.1s" begin="3.4s" fill="freeze"/></tspan>
+      <tspan opacity="0"> unstable<animate attributeName="opacity" values="0;1" dur="0.1s" begin="3.6s" fill="freeze"/></tspan>
+      <tspan opacity="0"> angina.<animate attributeName="opacity" values="0;1" dur="0.1s" begin="3.8s" fill="freeze"/></tspan>
+    </text>
+    <text x="30" y="170" font-family="Arial, sans-serif" font-size="24" fill="#fff">
+      <tspan opacity="0">I'd<animate attributeName="opacity" values="0;1" dur="0.1s" begin="4s" fill="freeze"/></tspan>
+      <tspan opacity="0"> order<animate attributeName="opacity" values="0;1" dur="0.1s" begin="4.2s" fill="freeze"/></tspan>
+      <tspan opacity="0"> ECG,<animate attributeName="opacity" values="0;1" dur="0.1s" begin="4.4s" fill="freeze"/></tspan>
+      <tspan opacity="0"> troponin,<animate attributeName="opacity" values="0;1" dur="0.1s" begin="4.6s" fill="freeze"/></tspan>
+    </text>
+    <text x="30" y="210" font-family="Arial, sans-serif" font-size="24" fill="#fff">
+      <tspan opacity="0">and<animate attributeName="opacity" values="0;1" dur="0.1s" begin="4.8s" fill="freeze"/></tspan>
+      <tspan opacity="0"> chest<animate attributeName="opacity" values="0;1" dur="0.1s" begin="5s" fill="freeze"/></tspan>
+      <tspan opacity="0"> x-ray.<animate attributeName="opacity" values="0;1" dur="0.1s" begin="5.2s" fill="freeze"/></tspan>
+    </text>
+    
+    <!-- Checkmark (success) -->
+    <g opacity="0" transform="translate(1400, 20)">
+      <animate attributeName="opacity" values="0;1" dur="0.3s" begin="5.5s" fill="freeze"/>
+      <circle cx="0" cy="0" r="40" fill="#27AE60"/>
+      <path d="M -15 0 L -5 10 L 15 -10" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+  
+  <!-- Bottom instruction -->
+  <text x="960" y="1020" font-family="Arial, sans-serif" font-size="18" fill="rgba(255,255,255,0.5)" text-anchor="middle" opacity="0">
+    No typing required → Just speak your reasoning
+    <animate attributeName="opacity" values="0;1;0" dur="2s" begin="6s" repeatCount="indefinite"/>
+  </text>
+</svg>
+</body>
+</html>
