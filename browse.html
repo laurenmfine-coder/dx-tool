@@ -117,6 +117,19 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <p class="hero-eyebrow">ReasonDx &middot; Clinical Reasoning Platform</p>
     <h1 class="hero-headline">One search.<br><em>Four ways to learn.</em></h1>
     <p class="hero-sub">Simulate patient encounters, practice in a virtual EMR, explore reasoning with a Socratic coach, or master the pathophysiology that makes diagnoses stick.</p>
+    
+    <!-- Hero CTA -->
+    <div style="margin-top:28px;margin-bottom:16px">
+      <a href="#" id="heroCTA" onclick="startQuickCase();return false" style="
+        display:inline-block;background:#2874A6;color:#fff;padding:16px 40px;
+        border-radius:12px;font-size:18px;font-weight:700;text-decoration:none;
+        transition:all .2s;box-shadow:0 4px 12px rgba(40,116,166,0.3)">
+        Try a 5-Minute Case →
+      </a>
+    </div>
+    <p style="font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:24px">
+      No login required • Create account to save your progress
+    </p>
   </div>
 
 
@@ -448,22 +461,22 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   <div class="stats" id="statStrip">
     <div class="stat active" data-mode="simulate" onclick="setMode('simulate')">
       <div class="stat-num">368</div>
-      <div class="stat-label">Simulate</div>
+      <div class="stat-label">Start Simulation</div>
       <div class="stat-desc">AI patient encounters</div>
     </div>
     <div class="stat" data-mode="practice" onclick="setMode('practice')">
       <div class="stat-num">364</div>
-      <div class="stat-label">Practice</div>
+      <div class="stat-label">Practice Cases</div>
       <div class="stat-desc">Virtual EMR cases</div>
     </div>
     <div class="stat" data-mode="coach" onclick="setMode('coach')">
       <div class="stat-num">176</div>
-      <div class="stat-label">Coach</div>
+      <div class="stat-label">Get Coaching</div>
       <div class="stat-desc">Socratic reasoning topics</div>
     </div>
     <div class="stat" data-mode="learn" onclick="setMode('learn')">
       <div class="stat-num">36</div>
-      <div class="stat-label">Learn</div>
+      <div class="stat-label">Learn Mechanisms</div>
       <div class="stat-desc">Pathophysiology modules</div>
     </div>
     <a href="/cognitive-portrait.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
@@ -585,6 +598,30 @@ function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent
 var _initMode=new URLSearchParams(window.location.search).get('mode')||'simulate';
 if(['simulate','practice','coach','learn'].indexOf(_initMode)===-1) _initMode='simulate';
 setMode(_initMode);
+
+// ── QUICK START FUNCTION FOR HERO CTA ──
+function startQuickCase() {
+  // Set mode to simulate
+  setMode('simulate');
+  
+  // Scroll to first case
+  setTimeout(function() {
+    var firstCard = document.querySelector('.card');
+    if (firstCard) {
+      // Highlight it briefly
+      firstCard.style.border = '3px solid #2874A6';
+      firstCard.style.boxShadow = '0 8px 24px rgba(40,116,166,0.3)';
+      
+      // Scroll to it
+      firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      
+      // Click it after a brief moment
+      setTimeout(function() {
+        firstCard.click();
+      }, 800);
+    }
+  }, 100);
+}
 </script>
 
 <div id="semanticResults" style="display:none;padding:0 16px 40px"></div>
