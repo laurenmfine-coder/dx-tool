@@ -1,0 +1,329 @@
+<!-- ReasonDx Feature Tour System -->
+<!-- Add this to the <head> of every page -->
+<script src="/js/rdx-feature-tours.js"></script>
+
+<!-- USAGE EXAMPLES:
+
+1. Auto-show tour on first visit:
+   <button id="voice-input-btn" data-tour="voice-input">🎤 Voice Input</button>
+   
+2. Manual "Show me how" button:
+   <button onclick="RdxTours.show('ddx-builder')">? How to build DDx</button>
+   
+3. Page-level tour on first load:
+   <script>RdxTours.autoShow('simulation-engine');</script>
+
+-->
+
+<style>
+/* Feature Tour Overlay */
+.rdx-tour-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 9998;
+  display: none;
+  animation: rdx-fade-in 0.3s;
+}
+.rdx-tour-overlay.active { display: block; }
+
+/* Tour Spotlight */
+.rdx-tour-spotlight {
+  position: absolute;
+  border: 3px solid #2874A6;
+  border-radius: 8px;
+  box-shadow: 0 0 0 9999px rgba(0,0,0,0.7), 0 0 20px rgba(40,116,166,0.5);
+  pointer-events: none;
+  z-index: 9999;
+  animation: rdx-pulse 2s infinite;
+}
+
+/* Tour Card */
+.rdx-tour-card {
+  position: fixed;
+  background: #0c1118;
+  border: 1px solid rgba(40,116,166,0.3);
+  border-radius: 16px;
+  padding: 0;
+  max-width: 420px;
+  z-index: 10000;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  animation: rdx-slide-up 0.4s;
+}
+
+.rdx-tour-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+}
+
+.rdx-tour-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rdx-tour-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a1929, #1a2f42);
+  cursor: pointer;
+}
+
+.rdx-tour-placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.rdx-tour-placeholder-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+}
+
+.rdx-tour-content {
+  padding: 20px 24px;
+}
+
+.rdx-tour-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.rdx-tour-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.rdx-tour-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.rdx-tour-btn {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.rdx-tour-btn-primary {
+  background: #2874A6;
+  color: #fff;
+}
+
+.rdx-tour-btn-primary:hover {
+  background: #1B4F72;
+  transform: translateY(-1px);
+}
+
+.rdx-tour-btn-secondary {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.rdx-tour-btn-secondary:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.rdx-tour-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.rdx-tour-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all 0.3s;
+}
+
+.rdx-tour-dot.active {
+  width: 20px;
+  border-radius: 3px;
+  background: #2874A6;
+}
+
+/* Inline Tour Tooltip */
+.rdx-tour-tooltip {
+  position: absolute;
+  background: #0c1118;
+  border: 1px solid rgba(40,116,166,0.4);
+  border-radius: 12px;
+  padding: 12px 16px;
+  max-width: 280px;
+  z-index: 9999;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  animation: rdx-bounce-in 0.4s;
+}
+
+.rdx-tour-tooltip::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #0c1118;
+  border-left: 1px solid rgba(40,116,166,0.4);
+  border-top: 1px solid rgba(40,116,166,0.4);
+  transform: rotate(45deg);
+}
+
+.rdx-tour-tooltip.bottom::before {
+  top: -7px;
+  left: 20px;
+}
+
+.rdx-tour-tooltip.top::before {
+  bottom: -7px;
+  left: 20px;
+  transform: rotate(225deg);
+}
+
+.rdx-tour-tooltip-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.rdx-tour-tooltip-text {
+  font-size: 11px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.rdx-tour-tooltip-action {
+  font-size: 11px;
+  color: #5BA8D0;
+  cursor: pointer;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rdx-tour-tooltip-action:hover {
+  color: #85C1E9;
+}
+
+.rdx-tour-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: rgba(255,255,255,0.5);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.rdx-tour-close:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+/* Animations */
+@keyframes rdx-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rdx-slide-up {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rdx-bounce-in {
+  0% { 
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% { 
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes rdx-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.7), 0 0 20px rgba(40,116,166,0.5);
+  }
+  50% { 
+    box-shadow: 0 0 0 9999px rgba(0,0,0,0.7), 0 0 30px rgba(40,116,166,0.8);
+  }
+}
+
+/* "Show me how" button style */
+.rdx-help-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(40,116,166,0.1);
+  border: 1px solid rgba(40,116,166,0.3);
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #5BA8D0;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rdx-help-btn:hover {
+  background: rgba(40,116,166,0.2);
+  border-color: #2874A6;
+  color: #85C1E9;
+}
+
+@media (max-width: 700px) {
+  .rdx-tour-card {
+    max-width: calc(100vw - 40px);
+    left: 20px !important;
+    right: 20px !important;
+  }
+}
+</style>
