@@ -70,21 +70,21 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .puzzle-link{font-size:.76rem;color:var(--blue);text-decoration:none;font-weight:600;transition:opacity .15s}
 .puzzle-link:hover{opacity:.7}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:11px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
 .empty{text-align:center;padding:60px;color:var(--tm);font-size:.9rem}
 
-.card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 18px;cursor:pointer;transition:all .18s;position:relative}
-.card:hover{border-color:var(--blue);box-shadow:0 8px 24px rgba(40,116,166,.1);transform:translateY(-1px)}
-.card-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
-.card-badge{min-width:38px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700;flex-shrink:0;letter-spacing:.03em}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s;position:relative}
+.card:hover{border-color:var(--blue);box-shadow:0 4px 16px rgba(40,116,166,.08);transform:translateY(-2px)}
+.card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:12px}
+.card-badge{min-width:42px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700;flex-shrink:0;letter-spacing:.04em}
 .badge-sim{background:var(--blue-l);color:var(--blue-d)}
 .badge-prac{background:var(--green-l);color:#065F46}
 .badge-coach{background:var(--purple-l);color:#5B21B6}
 .badge-learn{background:var(--orange-l);color:#9A3412}
-.card-title{font-size:.9rem;font-weight:700;color:var(--text);line-height:1.35}
-.card-sub{font-size:.75rem;color:var(--ts);margin-top:2px;line-height:1.4}
-.card-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:9px}
-.tag{font-size:.61rem;font-weight:600;padding:2px 7px;border-radius:6px;text-transform:uppercase;letter-spacing:.3px;background:#F1F5F9;color:var(--tm)}
+.card-title{font-size:1rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:6px}
+.card-sub{font-size:.82rem;color:var(--ts);line-height:1.5}
+.card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.tag{font-size:.65rem;font-weight:600;padding:4px 10px;border-radius:6px;text-transform:uppercase;letter-spacing:.4px;background:#F1F5F9;color:var(--tm)}
 .tag-cat{background:var(--blue-l);color:var(--blue-d)}
 .tag-featured{background:var(--purple-l);color:#5B21B6}
 .tag-acuity1{background:#FEE2E2;color:#991B1B}
@@ -811,6 +811,13 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   </div>
   <div class="grid" id="grid"></div>
   <div class="empty" id="empty" style="display:none">No results match your search.</div>
+  
+  <!-- Load More Button -->
+  <div id="loadMore" style="display:none;text-align:center;margin:40px 0 60px">
+    <button onclick="window._showAll=true;render();" style="padding:14px 40px;background:#fff;color:#2874A6;border:2px solid #2874A6;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s">
+      Load <span class="load-more-count">0</span> More Cases
+    </button>
+  </div>
 </div>
 
 <script>
@@ -864,12 +871,28 @@ function render(){var q=(document.getElementById('searchInput').value||'').toLow
   if(!a.featured&&b.featured) return 1;
   return (a.acuity||3)!==(b.acuity||3)?(a.acuity||3)-(b.acuity||3):a.title.localeCompare(b.title);
 });}else{filtered.sort(function(a,b){return a.title.localeCompare(b.title);});}
-var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';document.getElementById('count').textContent=filtered.length+' '+noun;var grid=document.getElementById('grid');if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';return;}document.getElementById('empty').style.display='none';grid.innerHTML=filtered.map(function(c){var badgeClass=MODE==='simulate'?'badge-sim':MODE==='practice'?'badge-prac':MODE==='coach'?'badge-coach':'badge-learn';var badgeText=MODE==='simulate'?'ESI '+(c.acuity||3):MODE==='practice'?'EMR':MODE==='coach'?'Coach':'Learn';var h='<div class="card" onclick="launch(\''+esc(c.id)+'\')">';h+='<div class="card-top"><div class="card-badge '+badgeClass+'">'+badgeText+'</div><div><div class="card-title">'+esc(c.title)+'</div>';if(c.sub) h+='<div class="card-sub">'+esc(c.sub)+'</div>';h+='</div></div><div class="card-tags"><span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';if(c.featured) h+='<span class="tag tag-featured">Featured</span>';
+var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';document.getElementById('count').textContent=filtered.length+' '+noun;var grid=document.getElementById('grid');if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';return;}document.getElementById('empty').style.display='none';
+
+// Pagination logic
+var itemsToShow = window._showAll ? filtered.length : Math.min(12, filtered.length);
+var displayedItems = filtered.slice(0, itemsToShow);
+
+grid.innerHTML=displayedItems.map(function(c){var badgeClass=MODE==='simulate'?'badge-sim':MODE==='practice'?'badge-prac':MODE==='coach'?'badge-coach':'badge-learn';var badgeText=MODE==='simulate'?'ESI '+(c.acuity||3):MODE==='practice'?'EMR':MODE==='coach'?'Coach':'Learn';var h='<div class="card" onclick="launch(\''+esc(c.id)+'\')">';h+='<div class="card-top"><div class="card-badge '+badgeClass+'">'+badgeText+'</div><div><div class="card-title">'+esc(c.title)+'</div>';if(c.sub) h+='<div class="card-sub">'+esc(c.sub)+'</div>';h+='</div></div><div class="card-tags"><span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';if(c.featured) h+='<span class="tag tag-featured">Featured</span>';
         if(c.studyCase && window.RDXStudySequencer && !RDXStudySequencer.isCaseFreelyAccessible(c.id)){
           h+='<span class="tag" style="background:#FEF3C7;color:#92400E;font-weight:700;">🔒 Study Protocol</span>';
         }
         if(c.arcId && c.arcLabel){var arcBadge=window.RDXArcBadge&&window.RDXArcBadge(c);if(arcBadge)h+='<span class="tag" style="background:#EDE9FE;color:#5B21B6;font-weight:700;">'+arcBadge+'</span>';}
-        if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS'};h+='<span class="tag" style="background:#ECFDF5;color:#065F46;font-weight:700;">'+( profLabels[c.profession]||c.profession)+' Case</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div></div>';return h;}).join('');}
+        if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS'};h+='<span class="tag" style="background:#ECFDF5;color:#065F46;font-weight:700;">'+( profLabels[c.profession]||c.profession)+' Case</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div></div>';return h;}).join('');
+
+// Show/hide Load More button
+var loadMoreBtn = document.getElementById('loadMore');
+if(filtered.length > 12 && !window._showAll) {
+  loadMoreBtn.style.display = 'block';
+  loadMoreBtn.querySelector('.load-more-count').textContent = (filtered.length - 12);
+} else {
+  loadMoreBtn.style.display = 'none';
+}
+}
 function launch(id){if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='simulation-engine.html?case='+encodeURIComponent(id);else if(MODE==='practice') window.location.href='virtual-emr.html?case='+encodeURIComponent(id);else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}}
 function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 // Show baseline link if not yet complete
