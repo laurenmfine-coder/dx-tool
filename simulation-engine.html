@@ -8,6 +8,8 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/css/rdx-design-system.css?v=2">
 <link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="/rdx-feature-tours.css">
+<script src="/js/rdx-feature-tours.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 :root{--primary:#2874A6;--primary-dark:#1B4F72;--primary-light:#EBF5FB;--teal:#0D7A67;--teal-light:#E8F8F5;--success:#27AE60;--warning:#F39C12;--danger:#E74C3C;--text:#1a1a2e;--text-muted:#4B5563;--bg:#F0F4F8;--card:#fff;--border:#DCE3EB;--font:'DM Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono',monospace;--radius:8px;--shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow-md:0 4px 12px rgba(0,0,0,.08)}
@@ -112,7 +114,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     <div class="input-area">
       <div class="input-row">
         <input type="text" id="chatInput" placeholder="Type your response, or click mic to speak..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" disabled>
-        <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Dictate" style="padding:12px 14px;background:transparent;border:1px solid var(--border-main,#D0D5DD);border-radius:var(--radius,8px);cursor:pointer;font-size:18px;line-height:1" disabled>🎤</button>
+        <button class="mic-btn" id="micBtn" data-tour="voice-input" onclick="toggleMic()" title="Dictate" style="padding:12px 14px;background:transparent;border:1px solid var(--border-main,#D0D5DD);border-radius:var(--radius,8px);cursor:pointer;font-size:18px;line-height:1" disabled>🎤</button>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Send</button>
       </div>
     </div>
@@ -3623,5 +3625,12 @@ function _showConsentThenStart() {
 }
 </script>
 <script src="js/rdx-retention.js"></script>
+
+<!-- Feature Tours -->
+<script>
+// Auto-show simulation tour on first visit
+RdxTours.autoShow('simulation-engine');
+</script>
+
 </body>
 </html>
