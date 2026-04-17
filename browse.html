@@ -914,17 +914,16 @@ grid.innerHTML=displayedItems.map(function(c){
   var iconClass = 'card-icon acuity-' + (c.acuity || 3);
   var iconSymbol = c.acuity === 1 ? '⚠️' : c.acuity === 2 ? '🔸' : c.acuity === 3 ? '◉' : c.acuity === 4 ? '○' : '·';
   
-  // Parse title/subtitle from chiefComplaint
-  var title = c.title || '';
-  var subtitle = c.sub || '';
+  // Use displayTitle/displaySubtitle if available, otherwise fall back to old parsing
+  var title = c.displayTitle || c.title || '';
+  var subtitle = c.displaySubtitle || c.sub || '';
   
-  // If title looks like it has age or context mixed in, try to separate
-  if (title && !subtitle) {
+  // Fallback parsing only if displayTitle is not available
+  if (!c.displayTitle && title && !subtitle) {
     // Extract age pattern
     var ageMatch = title.match(/(\d+(?:-\w+)?-?(?:yo|year-old|Week-Old|mo))/i);
     if (ageMatch) {
       subtitle = ageMatch[1];
-      // Remove age from title
       title = title.replace(ageMatch[0], '').replace(/^\s*[\/\-—]\s*/, '').trim();
     }
     
