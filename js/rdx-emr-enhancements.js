@@ -923,4 +923,188 @@ function _showToast(msg) {
 // Expose rubric builder button for faculty sidebar
 window.openRubricBuilder = function() { window.RDXRubricBuilder.open(); };
 
+// ─── 8. ORDER SELECTIVITY SCORER ────────────────────────────────────────────
+window.RDXOrderScore = {
+
+  score: function(caseId, labOrders, imgOrders) {
+    var rubric = window.RDX_ORDER_RUBRICS && window.RDX_ORDER_RUBRICS[caseId];
+    if (!rubric) return null;
+
+    var allOrders = (labOrders||[]).concat(imgOrders||[]).map(function(o){ return o.id; });
+    var required = rubric.required || [];
+    var recommended = rubric.recommended || [];
+    var avoid = rubric.avoid || [];
+
+    var hit = required.filter(function(id){ return allOrders.indexOf(id) >= 0; });
+    var missed = required.filter(function(id){ return allOrders.indexOf(id) < 0; });
+    var unnecessary = allOrders.filter(function(id){
+      return avoid.indexOf(id) >= 0;
+    });
+    var extra = allOrders.filter(function(id){
+      return required.indexOf(id) < 0 &&
+             recommended.indexOf(id) < 0 &&
+             avoid.indexOf(id) < 0;
+    });
+
+    // Score: required hit = 8 pts each, unnecessary = -5 each, extra = -2 each
+    var baseScore = hit.length * 8;
+    var penalty = (unnecessary.length * 5) + (extra.length * 2);
+    var maxScore = required.length * 8;
+    var raw = Math.max(0, baseScore - penalty);
+    var pct = maxScore > 0 ? Math.round((raw / maxScore) * 100) : 0;
+
+    return {
+      caseId: caseId,
+      required: required,
+      hit: hit,
+      missed: missed,
+      unnecessary: unnecessary,
+      extra: extra,
+      score: raw,
+      maxScore: maxScore,
+      pct: Math.min(100, pct),
+      rubric: rubric,
+    };
+  },
+
+  renderFeedback: function(result) {
+    if (!result) return '';
+    var pct = result.pct;
+    var color = pct >= 80 ? '#059669' : pct >= 55 ? '#D97706' : '#DC2626';
+    var label = pct >= 80 ? 'Excellent — key tests ordered' : pct >= 55 ? 'Developing — some important tests missed' : 'Needs work — key tests missing or inappropriate tests ordered';
+
+    var html = '<div style="background:#F8FAFC;border:1.5px solid #E2E8F0;border-radius:14px;padding:20px;margin:16px 0">';
+    html += '<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">';
+    html += '<div style="width:56px;height:56px;border-radius:50%;background:' + color + '18;border:2.5px solid ' + color + ';display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:' + color + ';flex-shrink:0">' + pct + '</div>';
+    html += '<div><div style="font-size:15px;font-weight:700;color:#1E293B">Order Selectivity</div><div style="font-size:12px;color:#64748B;margin-top:2px">' + label + '</div></div>';
+    html += '</div>';
+
+    // Required tests ordered
+    if (result.hit.length) {
+      html += '<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#059669;margin-bottom:6px">✓ Key Tests Ordered</div>';
+      result.hit.forEach(function(id) {
+        var tp = result.rubric.teaching && result.rubric.teaching[id];
+        html += '<div style="padding:8px 12px;background:#F0FDF4;border-left:3px solid #10B981;border-radius:0 8px 8px 0;margin-bottom:5px;font-size:13px">';
+        html += '<strong>' + _labName(id) + '</strong>';
+        if (tp) html += '<br><span style="font-size:11px;color:#166534;line-height:1.5">' + tp + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+
+    // Missed required tests
+    if (result.missed.length) {
+      html += '<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#D97706;margin-bottom:6px">⚠ Should Have Ordered</div>';
+      result.missed.forEach(function(id) {
+        var tp = result.rubric.teaching && result.rubric.teaching[id];
+        html += '<div style="padding:8px 12px;background:#FFFBEB;border-left:3px solid #F59E0B;border-radius:0 8px 8px 0;margin-bottom:5px;font-size:13px">';
+        html += '<strong>' + _labName(id) + '</strong>';
+        if (tp) html += '<br><span style="font-size:11px;color:#92400E;line-height:1.5">' + tp + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+
+    // Inappropriate tests
+    if (result.unnecessary.length) {
+      html += '<div style="margin-bottom:12px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#DC2626;margin-bottom:6px">✗ Not Indicated</div>';
+      result.unnecessary.forEach(function(id) {
+        var tp = result.rubric.teaching && result.rubric.teaching[id];
+        html += '<div style="padding:8px 12px;background:#FEF2F2;border-left:3px solid #F87171;border-radius:0 8px 8px 0;margin-bottom:5px;font-size:13px">';
+        html += '<strong>' + _labName(id) + '</strong>';
+        if (tp) html += '<br><span style="font-size:11px;color:#991B1B;line-height:1.5">' + tp + '</span>';
+        else html += '<br><span style="font-size:11px;color:#991B1B">Not clinically indicated for this presentation.</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+
+    // Over-ordering note
+    if (result.extra.length > 2) {
+      html += '<div style="padding:10px 14px;background:#EFF6FF;border-radius:8px;font-size:12px;color:#1D4ED8;line-height:1.5">';
+      html += '<strong>Choosing Wisely:</strong> ' + result.extra.length + ' additional tests ordered that were neither required nor inappropriate for this case. ';
+      html += 'Targeted ordering reduces cost, patient burden, and incidental findings. Next time, aim for tests that directly change management.';
+      html += '</div>';
+    }
+
+    html += '</div>';
+    return html;
+  },
+};
+
+// Show order selectivity feedback after note submission
+var _origSubmitNote = null;
+function _patchNoteSubmit() {
+  if (typeof window.submitDocumentation === 'function' && !window.submitDocumentation._orderPatched) {
+    var _orig = window.submitDocumentation;
+    window.submitDocumentation = function() {
+      _orig.apply(this, arguments);
+      // After submission, compute and store order score
+      setTimeout(function() {
+        if (!window.CASE_ID || !window.S) return;
+        var result = window.RDXOrderScore.score(
+          window.CASE_ID,
+          window.S.labOrders || [],
+          window.S.imgOrders || []
+        );
+        if (result) {
+          try {
+            localStorage.setItem('rdx-order-score-' + window.CASE_ID, JSON.stringify(result));
+          } catch(e) {}
+        }
+      }, 200);
+    };
+    window.submitDocumentation._orderPatched = true;
+  }
+}
+setTimeout(_patchNoteSubmit, 900);
+
+// Inject order score into the autofeedback tab
+var _origAutoFeedback = null;
+function _patchAutoFeedback() {
+  if (typeof window.renderAutoFeedback === 'function' && !window.renderAutoFeedback._orderPatched) {
+    var _orig = window.renderAutoFeedback;
+    window.renderAutoFeedback = function() {
+      var base = _orig.call(this);
+      // Append order selectivity section if we have a score
+      try {
+        var stored = JSON.parse(localStorage.getItem('rdx-order-score-' + window.CASE_ID) || 'null');
+        if (stored) {
+          var feedback = window.RDXOrderScore.renderFeedback(stored);
+          if (feedback) {
+            // Inject before the rubric reference section
+            var insertPoint = base.lastIndexOf('<div');
+            if (insertPoint > 0) {
+              base = base.slice(0, insertPoint) + feedback + base.slice(insertPoint);
+            }
+          }
+        }
+      } catch(e) {}
+      return base;
+    };
+    window.renderAutoFeedback._orderPatched = true;
+  }
+}
+setTimeout(_patchAutoFeedback, 900);
+
+// Map common order IDs to readable names
+function _labName(id) {
+  var names = {
+    troponin:'Troponin I', ekg:'12-Lead EKG', cbc:'CBC with Differential',
+    bmp:'Basic Metabolic Panel', cmp:'Comprehensive Metabolic Panel',
+    cta_pe:'CTA Chest (PE Protocol)', cthead:'CT Head without Contrast',
+    ctchest:'CT Chest with Contrast', ctabdomen:'CT Abdomen/Pelvis with Contrast',
+    echo:'Echocardiogram (TTE)', cxr:'Chest X-Ray', us_abdomen:'Ultrasound Abdomen',
+    us_renal:'Ultrasound Renal', doppler_le:'Venous Duplex Lower Extremities',
+    bnp:'BNP / NT-proBNP', pt_inr:'PT/INR', ptt:'PTT', crp:'CRP',
+    bloodculture:'Blood Culture x2', uculture:'Urine Culture', ua:'Urinalysis',
+    tsh:'TSH', ft4:'Free T4', hba1c:'Hemoglobin A1c', lipid:'Lipid Panel',
+    mribrain:'MRI Brain', mrilspine:'MRI Lumbar Spine', dexa:'DEXA Bone Density',
+    mammo:'Mammogram', procalcitonin:'Procalcitonin', lipase:'Lipase',
+    hcg:'Serum hCG (Pregnancy)', esr:'ESR',
+  };
+  return names[id] || id.toUpperCase();
+}
+
+
 })();

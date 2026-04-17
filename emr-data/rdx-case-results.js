@@ -711,5 +711,500 @@ window.RDX_CASE_RESULTS = {
   }
 };
 
+
+/**
+ * RDX_ORDER_RUBRICS — Per-case order selectivity rubrics
+ */
+window.RDX_ORDER_RUBRICS = {
+
+  "stemi-v1": {
+    required: ["troponin","ekg","cbc","bmp","pt_inr"],
+    recommended: ["echo","cxr","lipid"],
+    avoid: ["mribrain","mrilspine","dexa","mammo","ua"],
+    teaching: {
+      troponin: "Serial troponins are the cornerstone of ACS diagnosis. First draw on arrival, repeat at 3h. Rising pattern confirms MI.",
+      ekg: "EKG within 10 minutes of arrival is the first step — ST elevation in contiguous leads defines STEMI and triggers cath lab activation.",
+      echo: "Echo evaluates wall motion abnormalities and EF — important for risk stratification and management.",
+      cxr: "CXR assesses for pulmonary edema and cardiomegaly — markers of decompensated LV function.",
+      lipid: "Lipid panel guides statin intensity post-MI. Draw on admission (levels accurate within 24h of MI).",
+      mribrain: "CT/MRI brain not indicated for STEMI without neurologic symptoms.",
+    }
+  },
+
+  "pe-v1": {
+    required: ["cta_pe","troponin","bnp","pt_inr","cbc"],
+    recommended: ["ekg","cxr","bmp","doppler_le"],
+    avoid: ["mribrain","hba1c","tsh","dexa"],
+    teaching: {
+      cta_pe: "CTA-PE is the gold standard for PE diagnosis when Wells score is intermediate-high or D-dimer elevated.",
+      troponin: "Elevated troponin in PE indicates RV strain — marker of high-risk PE warranting closer monitoring.",
+      bnp: "NT-proBNP >600 pg/mL correlates with RV dysfunction and increased mortality in PE.",
+      ekg: "S1Q3T3, new RBBB, and sinus tachycardia are classic PE patterns.",
+      doppler_le: "Lower extremity Doppler identifies proximal DVT — confirms VTE diagnosis.",
+    }
+  },
+
+  "dka-v1": {
+    required: ["bmp","cbc","ua","hba1c","bloodculture"],
+    recommended: ["cxr","ekg","uculture"],
+    avoid: ["mribrain","echo","doppler_le","dexa","mammo","lipid"],
+    teaching: {
+      bmp: "BMP reveals the anion gap, glucose, potassium, and CO2 — all essential to DKA diagnosis. Calculate anion gap immediately.",
+      ua: "UA shows glucosuria and ketonuria — confirms DKA. Also screens for precipitating UTI.",
+      hba1c: "HbA1c establishes baseline glycemic control and guides outpatient management post-discharge.",
+      ekg: "Hyperkalemia in DKA causes peaked T-waves — EKG essential before insulin (which will drop K rapidly).",
+      cxr: "CXR evaluates for pneumonia as DKA precipitant — even without respiratory symptoms.",
+      bloodculture: "Blood cultures if temperature >38.5 or WBC >25 — infection is the most common DKA precipitant.",
+    }
+  },
+
+  "stroke-v1": {
+    required: ["cthead","cbc","bmp","pt_inr","troponin"],
+    recommended: ["mribrain","ekg","cxr"],
+    avoid: ["dexa","mammo","lipid","ua","hba1c"],
+    teaching: {
+      cthead: "Non-contrast CT head is the first step — rules out hemorrhagic stroke before tPA can be considered.",
+      mribrain: "MRI-DWI is more sensitive for acute ischemic stroke than CT, especially in posterior fossa.",
+      pt_inr: "Coagulation studies required before tPA — INR >1.7 is a contraindication.",
+      ekg: "EKG screens for AFib — the most common cardiac source of cardioembolic stroke.",
+      troponin: "Troponin elevation in stroke suggests demand ischemia from catecholamine surge.",
+    }
+  },
+
+  "pneumonia": {
+    required: ["cbc","bmp","cxr","bloodculture","crp"],
+    recommended: ["ua"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh"],
+    teaching: {
+      cxr: "CXR confirms pneumonia and identifies the lobe — guides antibiotic duration and identifies effusions.",
+      bloodculture: "Blood cultures x2 before antibiotics in moderate-severe CAP (CURB-65 ≥2).",
+      crp: "PCT >0.25 ng/mL supports bacterial etiology. CRP guides antibiotic stewardship.",
+      cbc: "Leukocytosis with left shift confirms bacterial infection. Elevated bands suggest severe infection.",
+    }
+  },
+
+  "septic-shock-urosepsis": {
+    required: ["bmp","cbc","bloodculture","uculture","ua"],
+    recommended: ["cxr","us_renal","pt_inr"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","hba1c"],
+    teaching: {
+      bloodculture: "Blood cultures x2 before first antibiotic — Surviving Sepsis Campaign mandates within 1 hour.",
+      uculture: "Urine culture with sensitivities guides antibiotic de-escalation in urosepsis.",
+      bmp: "Lactate determines sepsis severity — lactate >4 = septic shock, mandatory 30 mL/kg IVF bolus.",
+      us_renal: "Renal ultrasound evaluates for hydronephrosis — obstructed urosepsis requires urgent drainage.",
+    }
+  },
+
+  "meningitis-v1": {
+    required: ["cbc","bmp","bloodculture","cthead"],
+    recommended: ["crp"],
+    avoid: ["echo","doppler_le","dexa","mammo","lipid","tsh"],
+    teaching: {
+      cthead: "CT head before LP if papilledema, focal neuro deficit, or altered mental status.",
+      bloodculture: "Blood cultures before antibiotics. DO NOT delay antibiotics waiting for CT or LP.",
+      cbc: "WBC >20 with left shift in bacterial meningitis. Thrombocytopenia suggests DIC.",
+    }
+  },
+
+  "chf-v1": {
+    required: ["bnp","bmp","cbc","cxr","echo","troponin","ekg"],
+    recommended: ["pt_inr"],
+    avoid: ["bloodculture","ua","mribrain","dexa","lipid","tsh"],
+    teaching: {
+      bnp: "NT-proBNP >900 pg/mL in acute decompensated CHF. Guides diagnosis and diuresis target.",
+      echo: "Echo confirms EF, identifies valvular disease, and pericardial effusion.",
+      troponin: "Mild troponin elevation common in decompensated CHF — trend to rule out concurrent ACS.",
+      ekg: "EKG screens for atrial fibrillation as CHF precipitant and for ischemic changes.",
+      cxr: "CXR shows cardiomegaly, pulmonary edema, effusions — severity of decompensation.",
+    }
+  },
+
+  "appendicitis-v1": {
+    required: ["cbc","bmp","ctabdomen","hcg"],
+    recommended: ["crp","ua","us_abdomen"],
+    avoid: ["echo","mribrain","dexa","lipid","tsh","bloodculture"],
+    teaching: {
+      ctabdomen: "CT abdomen/pelvis with contrast is the gold standard for appendicitis (sens/spec >94%).",
+      hcg: "Beta-hCG must be drawn in any female of reproductive age with RLQ pain — rule out ectopic.",
+      us_abdomen: "Ultrasound first-line in children and pregnancy (avoids radiation).",
+      cbc: "WBC >10 adds Alvarado points. Left shift suggests perforation.",
+    }
+  },
+
+  "hyperkalemia-cardiac": {
+    required: ["bmp","cbc","ekg"],
+    recommended: ["ua","pt_inr"],
+    avoid: ["mribrain","cthead","echo","lipid","tsh","dexa"],
+    teaching: {
+      ekg: "EKG is the most urgent test — peaked T-waves and QRS widening are life-threatening. Calcium gluconate before any other intervention.",
+      bmp: "Repeat K in 1 hour after treatment — confirm response to insulin/D50 and monitor for rebound.",
+    }
+  },
+
+  "acute-cholecystitis": {
+    required: ["cbc","cmp","us_abdomen"],
+    recommended: ["lipase","ua"],
+    avoid: ["mribrain","echo","dexa","bloodculture","tsh"],
+    teaching: {
+      us_abdomen: "Ultrasound is first-line — wall thickening, pericholecystic fluid, and positive sonographic Murphy sign are diagnostic.",
+      cmp: "LFTs — elevated bilirubin and transaminases suggest choledocholithiasis.",
+      lipase: "Lipase differentiates cholecystitis from pancreatitis when epigastric pain dominates.",
+    }
+  },
+
+  "pericarditis-v1": {
+    required: ["troponin","ekg","echo","crp","cbc"],
+    recommended: ["bmp","tsh"],
+    avoid: ["mribrain","ctabdomen","dexa","lipid","bloodculture"],
+    teaching: {
+      ekg: "Diffuse saddle-shaped ST elevation with PR depression is pathognomonic.",
+      echo: "Essential to rule out pericardial effusion and tamponade — even small effusions warrant monitoring.",
+      troponin: "Mildly elevated in myopericarditis — should NOT rise sharply. Serial troponins differentiate from STEMI.",
+      crp: "CRP >3x ULN predicts recurrence risk — drives colchicine decision.",
+    }
+  },
+
+  "deep-vein-thrombosis": {
+    required: ["doppler_le","cbc","pt_inr","bmp"],
+    recommended: ["cta_pe","ekg"],
+    avoid: ["mribrain","cthead","dexa","echo","hba1c","lipid"],
+    teaching: {
+      doppler_le: "Venous duplex ultrasound is the diagnostic standard — non-compressibility confirms thrombosis.",
+      cta_pe: "CTA-PE if pleuritic chest pain, dyspnea, or hypoxia — ~25% of proximal DVT have concurrent PE.",
+      pt_inr: "Baseline coags before anticoagulation.",
+    }
+  },
+
+  "upper-gi-bleed": {
+    required: ["cbc","cmp","pt_inr","bmp"],
+    recommended: ["bloodculture"],
+    avoid: ["dexa","lipid","tsh","doppler_le","mribrain"],
+    teaching: {
+      cbc: "Hemoglobin on arrival — initial Hgb underestimates loss in acute hemorrhage. Repeat at 4-6h.",
+      cmp: "BUN:Cr ratio >20 is classic for UGIB — blood digested as protein load elevates BUN.",
+      pt_inr: "Coagulopathy from liver disease or warfarin — guide reversal before endoscopy.",
+    }
+  },
+
+  "thyroid-storm": {
+    required: ["tsh","ft4","cbc","bmp","ekg"],
+    recommended: ["bloodculture","cxr"],
+    avoid: ["mribrain","echo","dexa","lipid","hba1c","ua"],
+    teaching: {
+      tsh: "TSH <0.01 with markedly elevated FT4/FT3 — biochemical confirmation. Burch-Wartofsky score uses clinical criteria.",
+      ekg: "Rate and rhythm monitoring — propranolol for rate control. AFib in ~10-20%.",
+      bloodculture: "Infection is the most common precipitant — culture before empiric antibiotics.",
+    }
+  },
+
+  "alcohol-withdrawal": {
+    required: ["cmp","cbc","cthead"],
+    recommended: ["bmp","bloodculture"],
+    avoid: ["troponin","echo","doppler_le","dexa","lipid","tsh"],
+    teaching: {
+      cmp: "Magnesium and phosphorus critical — hypomagnesemia lowers seizure threshold. Thiamine before glucose.",
+      cthead: "CT head in first seizure, focal neuro findings, or concerning history — subdural hematoma mimics withdrawal.",
+      cbc: "Macrocytosis and thrombocytopenia — pattern of chronic alcohol use.",
+    }
+  },
+
+  "acute-aortic-dissection": {
+    required: ["ctchest","cbc","bmp","troponin"],
+    recommended: ["pt_inr","ekg","cxr"],
+    avoid: ["mribrain","us_abdomen","echo","dexa","hba1c","lipid"],
+    teaching: {
+      ctchest: "CTA chest is the gold standard — confirms dissection type, extent, complications. DO NOT give tPA before ruling out dissection.",
+      troponin: "Negative troponin argues against primary ACS. Dissection involving coronary ostia can cause positive troponin.",
+      cxr: "Widened mediastinum 80% sensitive for aortic dissection — prompts immediate CTA.",
+    }
+  },
+
+  "cellulitis": {
+    required: ["cbc","bmp","crp"],
+    recommended: ["bloodculture"],
+    avoid: ["troponin","echo","dexa","lipid","tsh","ctabdomen"],
+    teaching: {
+      cbc: "Leukocytosis confirms systemic infection. Mark borders to track progression.",
+      bloodculture: "In immunocompromised or septic presentation — bacteremia in ~2-4% of non-purulent cellulitis.",
+      crp: "CRP >50 suggests deeper infection — consider CT to rule out necrotizing fasciitis.",
+    }
+  },
+
+  "migraine": {
+    required: ["cthead","bmp","cbc"],
+    recommended: [],
+    avoid: ["bloodculture","echo","dexa","lipid","tsh","troponin","bnp"],
+    teaching: {
+      cthead: "CT head in thunderclap onset or worst headache of life — rule out SAH before attributing to migraine.",
+      cbc: "CBC screens for anemia or infection as headache trigger.",
+    }
+  },
+
+  "new-onset-atrial-fibrillation": {
+    required: ["ekg","tsh","bmp","cbc","troponin"],
+    recommended: ["echo","cxr","ft4"],
+    avoid: ["mribrain","dexa","bloodculture","ua","hba1c"],
+    teaching: {
+      ekg: "12-lead EKG confirms AFib, evaluates rate, checks for pre-excitation (WPW).",
+      tsh: "Hyperthyroidism is a common reversible precipitant — mandatory in all new AFib.",
+      troponin: "Screens for ACS as AFib precipitant.",
+      echo: "Evaluates structural heart disease, LA size, LAA thrombus — required if cardioversion planned.",
+      bmp: "Hypokalemia and hypomagnesemia precipitate AFib — replete before cardioversion.",
+    }
+  },
+};
+
 // Inject into each case after loadCaseData resolves (handled in virtual-emr.html)
 // This file is loaded as a static script resource — no dynamic execution needed here.
+
+/**
+ * RDX_ORDER_RUBRICS — Per-case order selectivity rubrics
+ *
+ * Each case defines:
+ *   required:    tests students MUST order (scored)
+ *   recommended: tests that are appropriate but not mandatory
+ *   avoid:       tests inappropriate for this presentation
+ *   teaching:    per-test teaching points for feedback
+ *
+ * Used by rdx-emr-enhancements.js to score order selectivity
+ * and provide feedback after students submit their workup.
+ */
+window.RDX_ORDER_RUBRICS = {
+
+  "stemi-v1": {
+    required: ["troponin","ekg","cbc","bmp","pt_inr"],
+    recommended: ["echo","cxr","lipid"],
+    avoid: ["mribrain","mrilspine","dexa","mammo","ua"],
+    teaching: {
+      troponin: "Serial troponins are the cornerstone of ACS diagnosis. First draw on arrival, repeat at 3h. Rising pattern confirms MI.",
+      ekg: "EKG within 10 minutes of arrival is the first step — ST elevation in contiguous leads defines STEMI and triggers cath lab activation.",
+      echo: "Echo evaluates wall motion abnormalities and EF — important for risk stratification and management.",
+      cxr: "CXR assesses for pulmonary edema and cardiomegaly — markers of decompensated LV function.",
+      lipid: "Lipid panel guides statin intensity post-MI. Draw on admission (levels accurate within 24h of MI).",
+      mribrain: "CT/MRI brain not indicated for STEMI without neurologic symptoms.",
+    }
+  },
+
+  "pe-v1": {
+    required: ["cta_pe","troponin","bnp","pt_inr","cbc"],
+    recommended: ["ekg","cxr","bmp","doppler_le"],
+    avoid: ["mribrain","hba1c","tsh","dexa"],
+    teaching: {
+      cta_pe: "CTA-PE is the gold standard for PE diagnosis when Wells score is intermediate-high or D-dimer elevated. Bilateral emboli require risk stratification.",
+      troponin: "Elevated troponin in PE indicates RV strain and myocyte injury — marker of high-risk PE warranting closer monitoring.",
+      bnp: "NT-proBNP >600 pg/mL correlates with RV dysfunction and increased mortality risk in PE.",
+      ekg: "S1Q3T3, new RBBB, and sinus tachycardia are classic PE patterns — not sensitive but support the diagnosis.",
+      doppler_le: "Lower extremity Doppler identifies proximal DVT — confirms VTE diagnosis and may change anticoagulation duration.",
+    }
+  },
+
+  "dka-v1": {
+    required: ["bmp","cbc","ua","hba1c","bloodculture"],
+    recommended: ["cxr","ekg","uculture"],
+    avoid: ["mribrain","echo","doppler_le","dexa","mammo","lipid"],
+    teaching: {
+      bmp: "BMP reveals the anion gap, glucose, potassium, and CO2 — all essential to DKA diagnosis and management. Calculate anion gap immediately.",
+      ua: "UA shows glucosuria and ketonuria — confirms DKA. Also screens for precipitating UTI.",
+      hba1c: "HbA1c establishes baseline glycemic control and guides outpatient management post-discharge.",
+      ekg: "Hyperkalemia in DKA causes peaked T-waves — EKG is essential before insulin (which will drop K rapidly).",
+      cxr: "CXR evaluates for pneumonia as DKA precipitant — even without respiratory symptoms.",
+      bloodculture: "Blood cultures if temperature >38.5 or WBC >25 — infection is the most common DKA precipitant.",
+    }
+  },
+
+  "stroke-v1": {
+    required: ["cthead","cbc","bmp","pt_inr","troponin"],
+    recommended: ["mribrain","ekg","cxr"],
+    avoid: ["dexa","mammo","lipid","ua","hba1c"],
+    teaching: {
+      cthead: "Non-contrast CT head is the first step — rules out hemorrhagic stroke before tPA can be considered. Done within minutes of arrival.",
+      mribrain: "MRI-DWI is more sensitive for acute ischemic stroke than CT, especially in posterior fossa — but CT is faster in the acute window.",
+      pt_inr: "Coagulation studies required before tPA — INR >1.7 is a contraindication.",
+      ekg: "EKG screens for AFib — the most common cardiac source of cardioembolic stroke.",
+      troponin: "Troponin elevation in stroke suggests demand ischemia from catecholamine surge — also screens for ACS as precipitant.",
+    }
+  },
+
+  "pneumonia": {
+    required: ["cbc","bmp","cxr","bloodculture","crp"],
+    recommended: ["ua","procalcitonin"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh"],
+    teaching: {
+      cxr: "CXR confirms pneumonia and identifies the lobe — guides antibiotic duration and identifies effusions requiring drainage.",
+      bloodculture: "Blood cultures x2 before antibiotics in moderate-severe CAP (CURB-65 ≥2). Positive in ~10% — guides targeted therapy.",
+      procalcitonin: "PCT >0.25 ng/mL supports bacterial etiology. PCT-guided therapy reduces antibiotic overuse.",
+      cbc: "Leukocytosis with left shift confirms bacterial infection. Elevated bands suggest more severe infection.",
+    }
+  },
+
+  "septic-shock-urosepsis": {
+    required: ["bmp","cbc","bloodculture","uculture","ua"],
+    recommended: ["cxr","us_renal","pt_inr"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","hba1c"],
+    teaching: {
+      bloodculture: "Blood cultures x2 before first antibiotic — Surviving Sepsis Campaign mandates within 1 hour. Positive in ~30% of urosepsis.",
+      uculture: "Urine culture with sensitivities guides antibiotic de-escalation in urosepsis.",
+      bmp: "Lactate in BMP panel (or standalone) determines sepsis severity — lactate >4 = septic shock, mandatory 30 mL/kg IVF bolus.",
+      us_renal: "Renal ultrasound evaluates for hydronephrosis — obstructed urosepsis requires urgent urology consult for drainage.",
+    }
+  },
+
+  "meningitis-v1": {
+    required: ["cbc","bmp","bloodculture","cthead"],
+    recommended: ["crp"],
+    avoid: ["echo","doppler_le","dexa","mammo","lipid","tsh"],
+    teaching: {
+      cthead: "CT head before LP if papilledema, focal neuro deficit, immunocompromised, or altered mental status — rules out mass lesion to prevent herniation.",
+      bloodculture: "Blood cultures before antibiotics if LP will be delayed. DO NOT delay antibiotics waiting for CT or LP in suspected bacterial meningitis.",
+      cbc: "WBC >20 with left shift in bacterial meningitis. Thrombocytopenia suggests DIC from sepsis.",
+    }
+  },
+
+  "chf-v1": {
+    required: ["bnp","bmp","cbc","cxr","echo","troponin","ekg"],
+    recommended: ["pt_inr"],
+    avoid: ["bloodculture","ua","mribrain","dexa","lipid","tsh"],
+    teaching: {
+      bnp: "NT-proBNP >900 pg/mL in acute decompensated CHF. Levels guide diagnosis, severity, and guide diuresis target.",
+      echo: "Echo confirms EF, identifies diastolic vs systolic dysfunction, valvular disease, and effusion.",
+      troponin: "Mild troponin elevation common in decompensated CHF (demand ischemia) — trend to rule out concurrent ACS.",
+      ekg: "EKG screens for atrial fibrillation as CHF precipitant and for ischemic changes.",
+      cxr: "CXR shows cardiomegaly, pulmonary edema, effusions — severity correlates with degree of decompensation.",
+    }
+  },
+
+  "appendicitis-v1": {
+    required: ["cbc","bmp","ctabdomen","hcg"],
+    recommended: ["crp","ua","us_abdomen"],
+    avoid: ["echo","mribrain","dexa","lipid","tsh","bloodculture"],
+    teaching: {
+      ctabdomen: "CT abdomen/pelvis with contrast is the gold standard for appendicitis diagnosis (sens/spec >94%). Identifies perforation and alternative diagnoses.",
+      hcg: "Beta-hCG must be drawn in any female of reproductive age with RLQ pain — ectopic pregnancy is life-threatening and mimics appendicitis.",
+      us_abdomen: "Ultrasound is first-line in children and pregnant women (avoids radiation) — non-diagnostic in 30% of adults.",
+      cbc: "WBC >10 adds 2 Alvarado points. Left shift suggests perforation.",
+    }
+  },
+
+  "hyperkalemia-cardiac": {
+    required: ["bmp","cbc","ekg"],
+    recommended: ["ua","pt_inr"],
+    avoid: ["mribrain","cthead","echo","lipid","tsh","dexa"],
+    teaching: {
+      ekg: "EKG is the most urgent test in hyperkalemia — peaked T-waves, QRS widening, sine wave pattern are life-threatening. Calcium gluconate before any other intervention if K >6.5.",
+      bmp: "Full BMP with repeat K in 1 hour after treatment — confirm response to insulin/D50 and monitor for rebound.",
+    }
+  },
+
+  "acute-cholecystitis": {
+    required: ["cbc","cmp","us_abdomen"],
+    recommended: ["lipase","ua"],
+    avoid: ["mribrain","echo","dexa","bloodculture","tsh"],
+    teaching: {
+      us_abdomen: "Ultrasound is first-line for cholecystitis — gallbladder wall thickening, pericholecystic fluid, and positive sonographic Murphy sign are diagnostic.",
+      cmp: "Liver function tests — elevated bilirubin and transaminases suggest choledocholithiasis or Mirizzi syndrome.",
+      lipase: "Lipase differentiates cholecystitis from pancreatitis — critical if epigastric pain dominates.",
+    }
+  },
+
+  "pericarditis-v1": {
+    required: ["troponin","ekg","echo","crp","cbc"],
+    recommended: ["bmp","tsh"],
+    avoid: ["mribrain","ctabdomen","dexa","lipid","bloodculture"],
+    teaching: {
+      ekg: "Diffuse saddle-shaped ST elevation with PR depression is pathognomonic — look in multiple leads. Absence of reciprocal changes distinguishes from STEMI.",
+      echo: "Echo essential to rule out pericardial effusion and tamponade — even small effusions warrant monitoring.",
+      troponin: "Mildly elevated in myopericarditis — should NOT rise sharply like STEMI. Serial troponins differentiate.",
+      crp: "CRP >3x ULN predicts recurrence risk — drives colchicine decision and duration.",
+    }
+  },
+
+  "deep-vein-thrombosis": {
+    required: ["doppler_le","cbc","pt_inr","bmp"],
+    recommended: ["cta_pe","ekg"],
+    avoid: ["mribrain","cthead","dexa","echo","hba1c","lipid"],
+    teaching: {
+      doppler_le: "Venous duplex ultrasound is the diagnostic standard for DVT — non-compressibility and absence of flow confirm thrombosis.",
+      cta_pe: "CTA-PE if pleuritic chest pain, dyspnea, or hypoxia — ~25% of proximal DVT have concurrent PE.",
+      pt_inr: "Baseline coags before anticoagulation — guides choice between heparin bridging and direct oral anticoagulants.",
+    }
+  },
+
+  "upper-gi-bleed": {
+    required: ["cbc","cmp","pt_inr","bmp"],
+    recommended: ["bloodculture"],
+    avoid: ["dexa","lipid","tsh","doppler_le","mribrain"],
+    teaching: {
+      cbc: "Hemoglobin on arrival — but initial Hgb underestimates blood loss in acute hemorrhage due to hemoconcentration. Repeat at 4-6h.",
+      cmp: "BUN:Cr ratio >20 is classic for UGIB — blood digested as protein load elevates BUN selectively.",
+      pt_inr: "Coagulopathy from liver disease or warfarin — guide reversal strategy before endoscopy.",
+    }
+  },
+
+  "thyroid-storm": {
+    required: ["tsh","ft4","cbc","bmp","ekg"],
+    recommended: ["bloodculture","cxr"],
+    avoid: ["mribrain","echo","dexa","lipid","hba1c","ua"],
+    teaching: {
+      tsh: "TSH <0.01 with markedly elevated FT4/FT3 — biochemical confirmation of thyrotoxicosis. Burch-Wartofsky score uses clinical criteria.",
+      ekg: "Rate and rhythm monitoring — sinus tachycardia most common, AFib in ~10-20%. Propranolol for rate control.",
+      bloodculture: "Infection is the most common precipitant of thyroid storm — culture before empiric antibiotics.",
+    }
+  },
+
+  "alcohol-withdrawal": {
+    required: ["cmp","cbc","cthead"],
+    recommended: ["bmp","bloodculture"],
+    avoid: ["troponin","echo","doppler_le","dexa","lipid","tsh"],
+    teaching: {
+      cmp: "Magnesium and phosphorus critical — hypomagnesemia lowers seizure threshold. Replace before giving glucose (which drops Mg further).",
+      cthead: "CT head in alcohol withdrawal with first seizure, focal neuro findings, or concerning history — subdural hematoma mimics withdrawal.",
+      cbc: "Macrocytosis (B12/folate deficiency) and thrombocytopenia (hypersplenism + marrow suppression) — pattern of chronic alcohol use.",
+    }
+  },
+
+  "acute-aortic-dissection": {
+    required: ["ctchest","cbc","bmp","troponin"],
+    recommended: ["pt_inr","ekg","cxr"],
+    avoid: ["mribrain","us_abdomen","echo","dexa","hba1c","lipid"],
+    teaching: {
+      ctchest: "CTA chest is the gold standard — confirms dissection type (Stanford A vs B), extent, and complications. DO NOT give tPA before ruling out dissection.",
+      troponin: "Negative troponin argues against primary ACS. Dissection involving coronary ostia can cause positive troponin — do not give tPA.",
+      cxr: "Widened mediastinum on CXR is 80% sensitive for aortic dissection — must prompt immediate CTA.",
+      ekg: "EKG screens for AMI (can coexist with Type A dissection involving RCA ostium).",
+    }
+  },
+
+  "cellulitis": {
+    required: ["cbc","bmp","crp"],
+    recommended: ["bloodculture"],
+    avoid: ["troponin","echo","dexa","lipid","tsh","ctabdomen"],
+    teaching: {
+      cbc: "Leukocytosis confirms systemic infection. Mark skin borders with pen to track progression over 24-48h.",
+      bloodculture: "Blood cultures in immunocompromised, diabetic with LE cellulitis, or septic presentation — bacteremia in ~2-4% of non-purulent cellulitis.",
+      crp: "CRP >50 suggests deeper infection — necrotizing fasciitis must be ruled out by CT if concern exists.",
+    }
+  },
+
+  "migraine": {
+    required: ["cthead","bmp","cbc"],
+    recommended: [],
+    avoid: ["bloodculture","echo","dexa","lipid","tsh","troponin","bnp"],
+    teaching: {
+      cthead: "CT head in thunderclap onset, worst headache of life, or first severe headache — rule out SAH before attributing to migraine.",
+      cbc: "CBC screens for anemia or infection as headache trigger in atypical presentations.",
+    }
+  },
+
+  "new-onset-atrial-fibrillation": {
+    required: ["ekg","tsh","bmp","cbc","troponin"],
+    recommended: ["echo","cxr","ft4"],
+    avoid: ["mribrain","dexa","bloodculture","ua","hba1c"],
+    teaching: {
+      ekg: "12-lead EKG confirms AFib, evaluates rate, and checks for pre-excitation (WPW) — cardioversion in WPW with AFib is dangerous.",
+      tsh: "Hyperthyroidism is a common reversible precipitant of new AFib — TSH is mandatory in all new AFib.",
+      troponin: "Troponin screens for ACS as AFib precipitant — MI can present as new AFib.",
+      echo: "Echo evaluates structural heart disease, LA size, and LAA thrombus — required if cardioversion planned.",
+      bmp: "Hypokalemia and hypomagnesemia precipitate AFib and must be repleted before cardioversion.",
+    }
+  },
+};
