@@ -80,7 +80,7 @@ SELECT
   AVG(s.env_history_score::float) AS avg_history_score,
   AVG(s.calibrated_composite::float) AS avg_calibrated_score
 FROM profiles p
-JOIN rad_study_sessions s ON s.user_id = p.id
+JOIN rad_study_sessions s ON s.student_email = p.email
 WHERE p.research_consent = true
   AND p.profession_id IS NOT NULL
 GROUP BY 1,2,3,4,5;
