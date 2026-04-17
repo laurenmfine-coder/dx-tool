@@ -64,7 +64,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .section-meta{font-size:.8rem;color:rgba(255,255,255,.4)}
 
 .filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
-.search{flex:1;min-width:220px;padding:10px 16px;border:1.5px solid rgba(255,255,255,.15);border-radius:9px;font-size:.88rem;font-family:inherit;outline:none;background:rgba(255,255,255,.05);color:#fff;transition:border .15s,box-shadow .15s}
+.search{flex:1;min-width:220px;padding:10px 16px;border:1.5px solid rgba(255,255,255,.15);border-radius:9px;font-size:16px;font-family:inherit;outline:none;background:rgba(255,255,255,.05);color:#fff;transition:border .15s,box-shadow .15s} /* 16px prevents iOS auto-zoom */
 .search:focus{border-color:#85C1E9;box-shadow:0 0 0 3px rgba(40,116,166,.15)}
 .search::placeholder{color:rgba(255,255,255,.4)}
 .fbtn{padding:7px 14px;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;background:rgba(255,255,255,.05);font-size:.76rem;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
@@ -947,34 +947,26 @@ setMode(_initMode);
 
 // ── QUICK START FUNCTION FOR HERO CTA ──
 function startQuickCase() {
-  // Track hero CTA click
   if (window.gtag) {
     gtag('event', 'hero_cta_click', {
       event_category: 'engagement',
       event_label: 'try_5_minute_case'
     });
   }
-  
-  // Set mode to simulate
-  setMode('simulate');
-  
-  // Scroll to first case
-  setTimeout(function() {
-    var firstCard = document.querySelector('.card');
-    if (firstCard) {
-      // Highlight it briefly
-      firstCard.style.border = '3px solid #2874A6';
-      firstCard.style.boxShadow = '0 8px 24px rgba(40,116,166,0.3)';
-      
-      // Scroll to it
-      firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      
-      // Click it after a brief moment
-      setTimeout(function() {
-        firstCard.click();
-      }, 800);
-    }
-  }, 100);
+  // Use same day-seeded COTD rotation — direct navigation, no scroll/click theatre
+  var COTD_POOL = [
+    'migraine','vasovagal-syncope','allergic-rhinitis-uncontrolled',
+    'pericarditis-v1','appendicitis-v1','copd-v1','peritonsillar-abscess','gout-flare',
+    'stemi-v1','pe-v1','stroke-v1','dka-v1','septic-shock-urosepsis',
+    'meningitis-v1','pneumonia','anaphylaxis','cellulitis','deep-vein-thrombosis',
+    'new-onset-atrial-fibrillation','alcohol-withdrawal','upper-gi-bleed',
+    'acute-cholecystitis','thyroid-storm','cardiac-tamponade','severe-pancreatitis',
+    'guillain-barre','sle-flare-with-cytopenias','acute-aortic-dissection'
+  ];
+  var now = new Date();
+  var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+  var todayCase = COTD_POOL[dayOfYear % COTD_POOL.length];
+  window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(todayCase);
 }
 </script>
 

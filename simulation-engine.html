@@ -57,7 +57,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 /* ── Input ── */
 .input-area{border-top:1px solid var(--border);padding:16px 24px;background:#fff}
 .input-row{display:flex;gap:8px}
-.input-row input{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:14px;outline:none;transition:border-color .15s}
+.input-row input{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:16px;outline:none;transition:border-color .15s} /* 16px prevents iOS auto-zoom */
 .input-row input:focus{border-color:var(--primary)}
 .input-row input:disabled{background:#f5f5f5;cursor:not-allowed}
 .send-btn{padding:12px 24px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius);font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:filter .15s}
@@ -139,7 +139,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     </div>
     <div class="input-area">
       <div class="input-row">
-        <input type="text" id="chatInput" placeholder="Type your response, or click mic to speak..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" disabled>
+        <input type="text" id="chatInput" placeholder="Type your response..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
         <button class="mic-btn" id="micBtn" data-tour="voice-input" onclick="toggleMic()" title="Dictate" style="padding:12px 14px;background:transparent;border:1px solid var(--border-main,#D0D5DD);border-radius:var(--radius,8px);cursor:pointer;font-size:18px;line-height:1" disabled>🎤</button>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Send</button>
       </div>
