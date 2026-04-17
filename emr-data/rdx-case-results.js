@@ -954,6 +954,394 @@ window.RDX_ORDER_RUBRICS = {
   },
 };
 
+
+// ── BATCH 2: Next-tier case results ──────────────────────────────────────────
+// SAH, NSTEMI, AKI, COPD, Hypertensive Emergency, Sickle Cell Crisis,
+// Acute Pancreatitis, New-Onset Seizure
+
+Object.assign(window.RDX_CASE_RESULTS, {
+
+  "sah-v1": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"12.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"13.8",unit:"g/dL",range:"12.0-16.0",flag:""},
+        {test:"Platelets",value:"218",unit:"x10³/µL",range:"150-400",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"135",unit:"mEq/L",range:"136-145",flag:"L"},
+        {test:"Potassium",value:"3.6",unit:"mEq/L",range:"3.5-5.0",flag:""},
+        {test:"CO2",value:"22",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"16",unit:"mg/dL",range:"7-20",flag:""},
+        {test:"Creatinine",value:"0.8",unit:"mg/dL",range:"0.6-1.2",flag:""},
+        {test:"Glucose",value:"148",unit:"mg/dL",range:"70-100",flag:"H"},
+        {test:"Comment",value:"Hyponatremia early — SIADH develops in 30% of SAH. Monitor closely.",unit:"",range:"",flag:""},
+      ]},
+      pt_inr: {group:"COAGULATION", results:[
+        {test:"PT",value:"12.2",unit:"seconds",range:"11.0-13.5",flag:""},
+        {test:"INR",value:"1.0",unit:"",range:"0.9-1.1",flag:""},
+        {test:"Comment",value:"Coags normal — no anticoagulation reversal needed. Avoid anticoagulation/antiplatelet.",unit:"",range:"",flag:""},
+      ]},
+      troponin: {group:"TROPONIN I", results:[
+        {test:"Troponin I",value:"0.08",unit:"ng/mL",range:"<0.04",flag:"H"},
+        {test:"Comment",value:"Neurogenic troponin elevation in SAH — catecholamine surge, not ACS. Do not anticoagulate.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cthead: {findings:"Hyperdense blood in basal cisterns, sylvian fissures bilaterally, and interpeduncular cistern. Blood tracking along tentorium. No hydrocephalus. No intraparenchymal hemorrhage. No midline shift.",
+               impression:"1. Subarachnoid hemorrhage — classic basal cistern pattern.
+2. No acute hydrocephalus on this scan.
+3. LP for xanthochromia if clinical suspicion high and CT negative.
+4. Urgent neurosurgery/neurology. CTA head for aneurysm."},
+      mribrain: {findings:"FLAIR: hyperintense signal in basal cisterns and sylvian fissures consistent with acute SAH. DWI: no acute ischemic changes. No intraparenchymal hemorrhage. MRA (if acquired): pending read.",
+                 impression:"1. Acute subarachnoid hemorrhage on FLAIR.
+2. No secondary infarction.
+3. Formal MRA/CTA for aneurysm source required."},
+    }
+  },
+
+  "nstemi-v1": {
+    labResults: {
+      troponin: {group:"TROPONIN I (HIGH-SENSITIVITY)", results:[
+        {test:"hs-Troponin I (0h)",value:"680",unit:"ng/L",range:"<52",flag:"H"},
+        {test:"hs-Troponin I (3h)",value:"1,840",unit:"ng/L",range:"<52",flag:"H"},
+        {test:"Comment",value:"Rising pattern — NSTEMI. No ST elevation. Cath within 24h if no high-risk features; urgent if hemodynamically unstable.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"9.8",unit:"x10³/µL",range:"4.5-11.0",flag:""},
+        {test:"Hemoglobin",value:"11.4",unit:"g/dL",range:"12.0-16.0",flag:"L"},
+        {test:"Hematocrit",value:"34.2",unit:"%",range:"36-46",flag:"L"},
+        {test:"Platelets",value:"194",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Anemia — common in older women presenting with NSTEMI. Demand ischemia possible.",unit:"",range:"",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"139",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"4.1",unit:"mEq/L",range:"3.5-5.0",flag:""},
+        {test:"CO2",value:"24",unit:"mEq/L",range:"23-29",flag:""},
+        {test:"BUN",value:"22",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"1.3",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Glucose",value:"162",unit:"mg/dL",range:"70-100",flag:"H"},
+      ]},
+      lipid: {group:"LIPID PANEL", results:[
+        {test:"Total Cholesterol",value:"238",unit:"mg/dL",range:"<200",flag:"H"},
+        {test:"LDL (calc)",value:"158",unit:"mg/dL",range:"<70 in ACS",flag:"H"},
+        {test:"HDL",value:"42",unit:"mg/dL",range:">50 (F)",flag:"L"},
+        {test:"Triglycerides",value:"192",unit:"mg/dL",range:"<150",flag:"H"},
+        {test:"Comment",value:"High-intensity statin immediately (atorvastatin 80mg). LDL target <70 in ACS.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      ekg: {findings:"ST depression 1-1.5mm leads V4-V6, I, aVL. T-wave inversions V4-V6. HR 88, normal axis. No ST elevation. No prior for comparison.",
+            impression:"1. ST depression and T-wave inversions lateral leads — NSTEMI pattern.
+2. No ST elevation — not STEMI criteria.
+3. Serial EKGs q30min. Aspirin + heparin. Cardiology for cath timing."},
+      echo: {findings:"LV: mildly reduced EF 45-50%. Anterolateral wall hypokinesis. RV: normal. Valves: mild MR. No effusion.",
+             impression:"1. Mildly reduced EF 45-50% with anterolateral wall motion abnormality.
+2. Consistent with demand ischemia or NSTEMI territory.
+3. Cardiology — catheterization indicated."},
+    }
+  },
+
+  "aki": {
+    labResults: {
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"136",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"5.6",unit:"mEq/L",range:"3.5-5.0",flag:"H"},
+        {test:"CO2",value:"16",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"68",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"4.2",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Glucose",value:"118",unit:"mg/dL",range:"70-100",flag:"H"},
+        {test:"Anion Gap",value:"18",unit:"mEq/L",range:"8-12",flag:"H"},
+        {test:"Comment",value:"BUN:Cr 16 — intrinsic/postrenal AKI likely. FENa needed. Check urine sediment.",unit:"",range:"",flag:""},
+      ]},
+      ua: {group:"URINALYSIS", results:[
+        {test:"Color",value:"Brown/tea",unit:"",range:"Yellow",flag:"H"},
+        {test:"Protein",value:"2+",unit:"",range:"Negative",flag:"H"},
+        {test:"RBC",value:">50",unit:"/hpf",range:"0-3",flag:"H"},
+        {test:"WBC",value:"8-12",unit:"/hpf",range:"0-5",flag:"H"},
+        {test:"Casts",value:"Muddy brown granular casts",unit:"",range:"None",flag:"H"},
+        {test:"Comment",value:"Muddy brown granular casts = ATN. Brown urine + heavy proteinuria = consider myoglobinuria/rhabdo.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"14.2",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"11.0",unit:"g/dL",range:"12.0-16.0",flag:"L"},
+        {test:"Hematocrit",value:"33.0",unit:"%",range:"36-46",flag:"L"},
+        {test:"Platelets",value:"168",unit:"x10³/µL",range:"150-400",flag:""},
+      ]},
+    },
+    imgResults: {
+      us_renal: {findings:"Right kidney 9.8 cm, increased echogenicity, no hydronephrosis, no calculus. Left kidney 9.6 cm, increased echogenicity, no obstruction. Bladder: small volume, no mass. No perinephric fluid.",
+                 impression:"1. Bilateral increased renal echogenicity — consistent with medical renal disease (ATN, GN).
+2. No hydronephrosis — postrenal obstruction less likely.
+3. Nephrology consult."},
+    }
+  },
+
+  "copd-v1": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"13.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"16.8",unit:"g/dL",range:"13.5-17.5",flag:"H"},
+        {test:"Hematocrit",value:"50.4",unit:"%",range:"40-52",flag:""},
+        {test:"Platelets",value:"228",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Polycythemia secondary to chronic hypoxia — compensatory erythropoiesis.",unit:"",range:"",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"138",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"3.4",unit:"mEq/L",range:"3.5-5.0",flag:"L"},
+        {test:"CO2",value:"34",unit:"mEq/L",range:"23-29",flag:"H"},
+        {test:"BUN",value:"18",unit:"mg/dL",range:"7-20",flag:""},
+        {test:"Creatinine",value:"1.1",unit:"mg/dL",range:"0.7-1.3",flag:""},
+        {test:"Comment",value:"Elevated CO2 = chronic CO2 retention (compensated respiratory acidosis). Do not over-oxygenate — hypoxic drive.",unit:"",range:"",flag:""},
+      ]},
+      abg: {group:"ARTERIAL BLOOD GAS", results:[
+        {test:"pH",value:"7.32",unit:"",range:"7.35-7.45",flag:"L"},
+        {test:"pCO2",value:"68",unit:"mmHg",range:"35-45",flag:"H"},
+        {test:"pO2",value:"52",unit:"mmHg",range:"80-100",flag:"L"},
+        {test:"HCO3",value:"34",unit:"mEq/L",range:"22-26",flag:"H"},
+        {test:"SaO2",value:"84%",unit:"",range:">95%",flag:"L"},
+        {test:"Comment",value:"Acute-on-chronic respiratory acidosis. pCO2 baseline likely ~55 from chronic retention. NIPPV if not improving.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cxr: {findings:"Hyperinflation. Flattened hemidiaphragms. Increased AP diameter (barrel chest configuration). Increased lucency bilateral lower lobes. Peribronchial cuffing. No consolidation. No pneumothorax. No effusion.",
+            impression:"1. Severe hyperinflation consistent with advanced COPD/emphysema.
+2. No acute pneumonia or pneumothorax on this film.
+3. Consider CT chest if concern for pneumothorax or infection not seen on plain film."},
+    }
+  },
+
+  "htn-emergency": {
+    labResults: {
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"138",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"3.2",unit:"mEq/L",range:"3.5-5.0",flag:"L"},
+        {test:"CO2",value:"22",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"32",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"2.8",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Glucose",value:"124",unit:"mg/dL",range:"70-100",flag:"H"},
+        {test:"Comment",value:"Hypertensive nephropathy with AKI. Target SBP reduction 10-25% in first hour — not to normal.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"9.6",unit:"x10³/µL",range:"4.5-11.0",flag:""},
+        {test:"Hemoglobin",value:"10.8",unit:"g/dL",range:"12.0-16.0",flag:"L"},
+        {test:"Hematocrit",value:"32.4",unit:"%",range:"36-46",flag:"L"},
+        {test:"Schistocytes",value:"Present",unit:"",range:"Absent",flag:"H"},
+        {test:"Comment",value:"Microangiopathic hemolytic anemia — schistocytes suggest TMA/hypertensive crisis.",unit:"",range:"",flag:""},
+      ]},
+      ua: {group:"URINALYSIS", results:[
+        {test:"Protein",value:"3+",unit:"",range:"Negative",flag:"H"},
+        {test:"RBC",value:"10-20",unit:"/hpf",range:"0-3",flag:"H"},
+        {test:"Casts",value:"RBC casts present",unit:"",range:"None",flag:"H"},
+        {test:"Comment",value:"RBC casts = glomerular injury from malignant HTN. Nephrology urgent.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cthead: {findings:"No acute intracranial hemorrhage. No mass effect. Periventricular white matter hypodensities — chronic small vessel ischemic changes. No acute ischemia.",
+               impression:"1. No acute intracranial hemorrhage.
+2. Chronic hypertensive white matter changes.
+3. Hypertensive emergency without ICH — IV labetalol or nicardipine. Target 10-25% BP reduction in 1h."},
+      ekg: {findings:"LV hypertrophy by voltage (SV1+RV5 >35mm). ST depression lateral leads. HR 84 regular. No acute ischemic changes. QTc 440ms.",
+            impression:"1. LVH pattern — chronic hypertension effect.
+2. Lateral ST depression — strain pattern vs ischemia.
+3. Serial EKGs if concern for ACS."},
+    }
+  },
+
+  "sickle-cell-crisis": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"16.8",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"6.4",unit:"g/dL",range:"12.0-16.0",flag:"L"},
+        {test:"Hematocrit",value:"19.2",unit:"%",range:"36-46",flag:"L"},
+        {test:"MCV",value:"88",unit:"fL",range:"80-100",flag:""},
+        {test:"Reticulocytes",value:"8.2",unit:"%",range:"0.5-1.5",flag:"H"},
+        {test:"Comment",value:"Baseline Hgb typically 6-9 in SCD. Reticulocytosis confirms compensated hemolysis. Check baseline for comparison.",unit:"",range:"",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"137",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"4.4",unit:"mEq/L",range:"3.5-5.0",flag:""},
+        {test:"CO2",value:"20",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"24",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"1.4",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Bilirubin",value:"4.8",unit:"mg/dL",range:"0.1-1.2",flag:"H"},
+        {test:"LDH",value:"580",unit:"U/L",range:"100-220",flag:"H"},
+        {test:"Comment",value:"Elevated LDH + bilirubin = hemolysis. Elevated Cr suggests sickle nephropathy vs dehydration. Aggressive IVF.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cxr: {findings:"No pulmonary infiltrate. No pleural effusion. Cardiomegaly. Bony changes: vertebral endplate depressions (H-vertebrae pattern) consistent with sickle cell bone changes.",
+            impression:"1. No acute chest syndrome on this film.
+2. Cardiomegaly — chronic anemia.
+3. H-vertebrae — classic sickle cell bony changes.
+4. Serial CXR if ACS suspected (may lag clinically)."},
+    }
+  },
+
+  "acute-pancreatitis": {
+    labResults: {
+      cmp: {group:"COMPREHENSIVE METABOLIC PANEL", results:[
+        {test:"Lipase",value:"1,840",unit:"U/L",range:"<160",flag:"H"},
+        {test:"Amylase",value:"624",unit:"U/L",range:"<100",flag:"H"},
+        {test:"ALT",value:"88",unit:"U/L",range:"7-56",flag:"H"},
+        {test:"AST",value:"72",unit:"U/L",range:"10-40",flag:"H"},
+        {test:"Total Bilirubin",value:"2.4",unit:"mg/dL",range:"0.1-1.2",flag:"H"},
+        {test:"Alk Phos",value:"164",unit:"U/L",range:"44-147",flag:"H"},
+        {test:"Albumin",value:"3.2",unit:"g/dL",range:"3.5-5.5",flag:"L"},
+        {test:"BUN",value:"28",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"1.6",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Calcium",value:"7.8",unit:"mg/dL",range:"8.5-10.5",flag:"L"},
+        {test:"Glucose",value:"218",unit:"mg/dL",range:"70-100",flag:"H"},
+        {test:"Comment",value:"Lipase >3x ULN confirms pancreatitis. Elevated LFTs + bili = gallstone etiology. Low Ca = saponification (severity marker). Ranson + BISAP scoring.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"18.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"15.8",unit:"g/dL",range:"13.5-17.5",flag:""},
+        {test:"Hematocrit",value:"47.4",unit:"%",range:"40-52",flag:""},
+        {test:"Platelets",value:"284",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Hemoconcentration (Hct >44) = SIRS from third-spacing. Aggressive IVF resuscitation required.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      ctabdomen: {findings:"Pancreas: diffusely enlarged, peripancreatic fat stranding extensive, fluid tracking into left anterior pararenal space and lesser sac. No pancreatic necrosis (>30% enhancement). Gallbladder: multiple gallstones, no cholecystitis. CBD 7mm (mildly dilated). No free air.",
+                  impression:"1. Acute interstitial pancreatitis — no necrosis. CT Severity Index: 4 (moderate).
+2. Cholelithiasis — gallstone pancreatitis likely.
+3. Mildly dilated CBD — consider ERCP if jaundice worsens.
+4. Aggressive IVF. NPO. Analgesia. ERCP within 24h if cholangitis."},
+      us_abdomen: {findings:"Gallbladder: multiple stones, largest 1.4 cm. Positive sonographic Murphy sign. Wall 3mm (normal). CBD 7mm. Pancreas partially visualized — head indistinct, echogenicity increased.",
+                   impression:"1. Cholelithiasis — multiple stones.
+2. Mildly dilated CBD — choledocholithiasis not excluded on US.
+3. Pancreatic head edema consistent with pancreatitis.
+4. CT abdomen for full severity assessment."},
+    }
+  },
+
+  "seizure-first": {
+    labResults: {
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"128",unit:"mEq/L",range:"136-145",flag:"L"},
+        {test:"Potassium",value:"3.8",unit:"mEq/L",range:"3.5-5.0",flag:""},
+        {test:"CO2",value:"22",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"10",unit:"mg/dL",range:"7-20",flag:""},
+        {test:"Creatinine",value:"0.7",unit:"mg/dL",range:"0.6-1.2",flag:""},
+        {test:"Glucose",value:"88",unit:"mg/dL",range:"70-100",flag:""},
+        {test:"Comment",value:"Hyponatremia Na 128 — electrolyte seizure. Correct at <0.5 mEq/L/hr. Rapid correction = central pontine myelinolysis.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"8.4",unit:"x10³/µL",range:"4.5-11.0",flag:""},
+        {test:"Hemoglobin",value:"13.6",unit:"g/dL",range:"12.0-16.0",flag:""},
+        {test:"Platelets",value:"224",unit:"x10³/µL",range:"150-400",flag:""},
+      ]},
+      anticonvulsant: {group:"DRUG LEVELS", results:[
+        {test:"Phenytoin level",value:"4.2",unit:"µg/mL",range:"10-20",flag:"L"},
+        {test:"Comment",value:"Subtherapeutic phenytoin — non-compliance vs inadequate dosing. Load IV phenytoin if indicated.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cthead: {findings:"No acute intracranial hemorrhage. No mass or mass effect. No acute infarct. Diffuse cortical atrophy mild. White matter changes mild periventricular — chronic microangiopathy. No encephalomalacia.",
+               impression:"1. No acute intracranial process.
+2. Mild chronic atrophic changes.
+3. Electrolyte etiology most likely (Na 128).
+4. MRI brain with/without contrast if focal findings or concern for structural etiology."},
+    }
+  },
+});
+
+// ── BATCH 2: Order Rubrics ────────────────────────────────────────────────────
+Object.assign(window.RDX_ORDER_RUBRICS, {
+
+  "sah-v1": {
+    required: ["cthead","cbc","bmp","pt_inr","troponin"],
+    recommended: ["mribrain","ekg"],
+    avoid: ["cta_pe","hba1c","lipid","dexa","ua","tsh"],
+    teaching: {
+      cthead: "Non-contrast CT head is the first test — 98% sensitive for SAH within 12h. If negative and thunderclap onset, LP for xanthochromia.",
+      pt_inr: "Coags required — any coagulopathy needs reversal before LP or neurosurgical intervention.",
+      troponin: "Neurogenic troponin elevation in SAH — catecholamine surge injures myocardium. Do NOT anticoagulate based on troponin alone.",
+      mribrain: "FLAIR MRI detects SAH missed by CT, especially >12h. Required if CT negative and LP inconclusive.",
+    }
+  },
+
+  "nstemi-v1": {
+    required: ["troponin","ekg","cbc","bmp","pt_inr"],
+    recommended: ["echo","cxr","lipid"],
+    avoid: ["mribrain","cthead","dexa","ua","hba1c"],
+    teaching: {
+      troponin: "Serial high-sensitivity troponins at 0h and 3h — delta change >20% over 3h confirms Type 1 MI. Rising pattern = NSTEMI.",
+      ekg: "EKG every 30 minutes — ST depression can evolve to elevation (converting NSTEMI to STEMI requiring cath lab activation).",
+      lipid: "Draw on admission — accurate within 24h of ACS. High-intensity statin (atorva 80mg) immediately regardless of LDL.",
+      echo: "Urgent echo if hemodynamically unstable or new murmur — mechanical complication of MI.",
+    }
+  },
+
+  "aki": {
+    required: ["bmp","cbc","ua","us_renal"],
+    recommended: ["pt_inr","uculture"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","ctabdomen"],
+    teaching: {
+      bmp: "Creatinine, BUN, potassium, and acid-base are essential. BUN:Cr ratio guides prerenal vs intrinsic. Anion gap for acidosis.",
+      ua: "Urinalysis with microscopy is the single most important test in AKI — muddy brown casts = ATN, RBC casts = GN, WBC casts = pyelonephritis.",
+      us_renal: "Renal ultrasound rules out obstruction — bilateral hydronephrosis is a reversible emergency.",
+    }
+  },
+
+  "copd-v1": {
+    required: ["cbc","bmp","cxr"],
+    recommended: ["bloodculture","crp"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","hba1c","ctabdomen"],
+    teaching: {
+      cxr: "CXR rules out pneumothorax and pneumonia as exacerbation triggers. Hyperinflation confirms COPD but doesn't change acute management.",
+      bmp: "CO2 and bicarb assess severity and chronicity. Elevated HCO3 = chronic CO2 retention. ABG if SpO2 <88% or altered mental status.",
+      cbc: "Polycythemia suggests chronic hypoxia. Leukocytosis with left shift suggests infectious exacerbation.",
+    }
+  },
+
+  "htn-emergency": {
+    required: ["bmp","cbc","cthead","ua","ekg"],
+    recommended: ["cxr","troponin"],
+    avoid: ["mribrain","echo","dexa","lipid","hba1c"],
+    teaching: {
+      cthead: "CT head rules out ICH or acute stroke — determines whether BP can be lowered aggressively or needs careful management.",
+      ua: "RBC casts = malignant HTN with glomerular injury. Protein = hypertensive nephropathy. Critical for end-organ assessment.",
+      cbc: "Schistocytes on peripheral smear = TMA/MAHA from malignant HTN — nephrology urgent.",
+      ekg: "LVH pattern confirms chronic hypertension. New ischemic changes = hypertensive emergency + ACS.",
+    }
+  },
+
+  "sickle-cell-crisis": {
+    required: ["cbc","bmp","cxr"],
+    recommended: ["bloodculture","ua"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","ctabdomen"],
+    teaching: {
+      cbc: "Compare to patient's baseline — Hgb drop >2 from baseline suggests aplastic crisis (parvovirus B19) or splenic sequestration.",
+      cxr: "Serial CXR essential — acute chest syndrome can appear 24-72h after vaso-occlusive crisis. New infiltrate = ACS = leading cause of death.",
+      bmp: "LDH and bilirubin track hemolysis severity. Creatinine elevation common from sickle nephropathy and dehydration.",
+    }
+  },
+
+  "acute-pancreatitis": {
+    required: ["cmp","cbc","us_abdomen"],
+    recommended: ["ctabdomen","lipid"],
+    avoid: ["mribrain","echo","dexa","tsh","bloodculture","troponin"],
+    teaching: {
+      cmp: "Lipase >3x ULN confirms diagnosis. LFTs + bilirubin distinguish gallstone from alcoholic etiology. Low calcium = saponification, severity marker.",
+      us_abdomen: "Ultrasound identifies gallstones as etiology in ~40% of pancreatitis. Required in all cases to guide ERCP decision.",
+      ctabdomen: "CT not needed initially for diagnosis. Indicated at 48-72h if not improving to grade necrosis and guide management.",
+    }
+  },
+
+  "seizure-first": {
+    required: ["bmp","cbc","cthead"],
+    recommended: ["anticonvulsant","ua","bloodculture"],
+    avoid: ["echo","dexa","lipid","doppler_le","bnp"],
+    teaching: {
+      bmp: "Electrolytes are the most common correctable cause — hyponatremia, hypoglycemia, hypocalcemia. Check immediately before empiric antiepileptics.",
+      cthead: "CT head in all first seizures — rules out structural cause, hemorrhage, tumor, or abscess.",
+      anticonvulsant: "Drug levels if patient on known antiepileptic — subtherapeutic levels are the most common cause of breakthrough seizures.",
+    }
+  },
+});
+
 // Inject into each case after loadCaseData resolves (handled in virtual-emr.html)
 // This file is loaded as a static script resource — no dynamic execution needed here.
 
