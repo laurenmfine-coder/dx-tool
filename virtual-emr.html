@@ -131,7 +131,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 /* Note Template */
 .note-template{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
 .note-section{border-bottom:1px solid var(--border-light)}.note-section:last-child{border-bottom:none}
-.note-section-header{padding:8px 14px;background:var(--surface-alt);font-size:11px;font-weight:700;color:var(--primary-dark);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:6px;transition:background .15s}.note-section:focus-within .note-section-header{background:var(--primary-light);color:var(--primary)}
+.note-section-header{padding:8px 14px;background:var(--surface-alt);font-size:11px;font-weight:700;color:var(--primary-dark);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid var(--border-light);display:flex;align-items:center;justify-content:space-between;gap:6px;transition:background .15s,color .15s}.note-section:focus-within .note-section-header{background:var(--primary-light);color:var(--primary)}
 .note-field{width:100%;border:none;padding:10px 14px;font-size:16px;font-family:'IBM Plex Mono',monospace;line-height:1.65;resize:vertical;min-height:60px;color:var(--text);background:transparent}
 .note-field:focus{background:#FAFBFF;outline:none}
 .note-field:disabled{background:var(--surface-alt);color:var(--text-secondary)}
@@ -185,7 +185,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .empty-state{text-align:center;padding:40px 0;color:var(--text-muted)}
 .week-select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
 .doc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-.word-count{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-weight:500}
+.word-count{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-weight:600;transition:color .3s}
 .toast{position:fixed;bottom:28px;right:24px;padding:12px 20px;background:var(--accent);color:#fff;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:1000;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}.toast.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 @media(max-width:900px){.sidebar{width:56px;overflow:hidden}.sidebar-btn span{display:none}.sidebar-btn{justify-content:center;padding:10px 0}.demo-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
 /* ═══ Interactive Feature Styles ═══ */
@@ -1842,7 +1842,7 @@ function _applyContBadge(container, caseId, anchorEl) {
 // --- HANDOFF RENDERER ---
 function renderHandoff() {
   if (!window.HANDOFF_DATA || !HANDOFF_DATA.hasHandoff(CASE_ID)) {
-    return sectionCard("ED Handoff", I.fileText, '<div class="empty-state"><p>No handoff data available for this case yet.</p></div>');
+    return sectionCard("ED Handoff", I.fileText, '<div style="text-align:center;padding:32px 20px"><div style="font-size:36px;margin-bottom:10px">📋</div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">No Handoff Available</div><div style="font-size:13px;color:var(--text-secondary)">Handoff data will appear here once it is added for this case.</div></div>');
   }
   var h = HANDOFF_DATA.getHandoff(CASE_ID);
   var html = '<div class="handoff-panel">';
@@ -2411,7 +2411,7 @@ function renderDocumentationOnly() {
     '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">'
     + '<div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>' + esc(PATIENT ? PATIENT.name : 'Patient') + '</strong>.</div>' + ws
     + '</div><div class="note-template">' + ns + '</div>'
-    + '<div class="doc-footer"><span class="word-count" id="wordCount">' + (wc ? wc + ' words' : '') + '</span>' + sb + '</div>'
+    + '<div class="doc-footer"><span style="display:flex;align-items:center;gap:8px"><span class="word-count" id="wordCount">'+(wc?wc+' words':'0 words')+'</span>'+(wc<60?'<span style="font-size:11px;color:var(--text-muted)">aim for 150+</span>':wc<150?'<span style="font-size:11px;color:var(--primary)">keep going</span>':'<span style="font-size:11px;color:var(--accent)">✓ complete</span>')+'</span>' + sb + '</div>'
   ) + _debrief;
 }
 
@@ -2509,7 +2509,7 @@ function renderFeedback(){
     if(_sub&&!S.noteFields.hpi&&_sub.fields){S.noteFields=_sub.fields;S.submitted=true;S.encounterWeek=_week;}
   }
   if(!S.submitted)return sectionCard("Feedback -- "+S.encounterWeek,I.star,'<div class="empty-state">'+I.fileText+'<p>Submit your documentation first.</p></div>');
-  if(!S.feedback&&S.annotations.length===0)return sectionCard("Feedback -- "+S.encounterWeek,I.star,'<div class="empty-state">'+I.calendar+'<p>Submitted. Feedback appears here once faculty reviews.</p></div>');
+  if(!S.feedback&&S.annotations.length===0)return sectionCard("Faculty Feedback -- "+S.encounterWeek,I.star,'<div style="text-align:center;padding:32px 20px"><div style="font-size:40px;margin-bottom:12px">⏳</div><div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">Submitted — Awaiting Faculty Review</div><div style="font-size:13px;color:var(--text-secondary);max-width:320px;margin:0 auto 16px;line-height:1.6">Your note has been submitted. While you wait, review your AI feedback — it scores your note by criterion and gives you specific suggestions to improve.</div><button type="button" style="padding:10px 20px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer" onclick="switchTab(\'autofeedback\')">→ View AI Feedback</button></div>');
   let h="";
   if(S.feedback){const fb=S.feedback;h+='<div class="score-banner"><div><div class="score-label">Total Score</div><div class="score-number">'+fb.totalScore+' / '+fb.maxScore+'</div></div><div style="text-align:right"><div style="font-size:12px;color:var(--text-secondary)">Graded by: '+esc(fb.grader)+'</div><div style="font-size:12px;color:var(--text-secondary)">'+new Date(fb.timestamp).toLocaleDateString()+'</div></div></div>';h+=tableHTML(["Criterion","Score","Comment"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+(fb.scores[r.id]||"--")+' / '+r.max+'</td><td class="td-muted">'+(fb.comments[r.id]?esc(fb.comments[r.id]):"--")+'</td></tr>'));if(fb.overallComment)h+='<div style="padding:16px;background:var(--surface-alt);border-radius:var(--radius);border-left:3px solid var(--primary);margin-top:16px"><div style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:6px">Overall Faculty Comments</div><div style="font-size:13px;line-height:1.7;white-space:pre-line">'+esc(fb.overallComment)+'</div></div>'}
   if(S.annotations.length>0){const nt=assembleNoteText();h+='<div style="margin-top:20px"><div style="font-size:13px;font-weight:600;margin-bottom:12px">'+I.highlight+' Inline Annotations ('+S.annotations.length+')</div><div class="annotated-text">'+buildAnnotatedHTML(nt,S.annotations)+'</div><div style="margin-top:12px">';S.annotations.forEach((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];h+='<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span><strong style="font-size:12px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,120))+(a.selectedText.length>120?"...":"")+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div class="annotation-card-meta">'+esc(a.grader)+' · '+new Date(a.timestamp).toLocaleString()+'</div></div>'});h+='</div></div>'}
@@ -2523,13 +2523,13 @@ function renderGrading(){
   var _gradedCount=S.allSubmissions.filter(function(s){return s.feedback&&s.feedback.totalScore!==undefined;}).length;
   let sh;
   if(!S.allSubmissions.length)sh='<div style="text-align:center;padding:40px 20px"><div style="font-size:36px;margin-bottom:12px">📭</div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">No submissions yet</div><div style="font-size:13px;color:var(--text-secondary)">'+(S.currentUser.role==="faculty"?'Students will appear here once they submit a note. Use the Assignments tab to assign students.':'No submissions found.')+'</div></div>';
-  else sh=S.allSubmissions.map((sub,i)=>'<div class="submission-card '+(S.selectedSubmission===i?"selected":"")+'" onclick="selectSubmission('+i+')"><div><span style="font-weight:600">'+esc(sub.studentName)+'</span><span style="color:var(--text-secondary);font-size:13px;margin-left:12px">'+esc(sub.week)+'</span></div><span style="font-size:12px;color:var(--text-muted)">'+new Date(sub.timestamp).toLocaleDateString()+'</span></div>').join("");
+  else sh=S.allSubmissions.map((sub,i)=>{var _wc=(sub.fields?Object.values(sub.fields).reduce(function(t,v){return t+(v?v.split(/\s+/).filter(Boolean).length:0);},0):0);var _graded=sub.feedback&&sub.feedback.totalScore!==undefined;var _pct=_graded?Math.round(sub.feedback.totalScore/(sub.feedback.maxScore||100)*100):null;var _col=_pct===null?'var(--text-muted)':_pct>=80?'var(--accent)':_pct>=60?'var(--warning)':'var(--danger)';return'<div class="submission-card '+(S.selectedSubmission===i?"selected":"")+'" onclick="selectSubmission('+i+')"><div style="flex:1"><div style="display:flex;align-items:center;gap:8px"><span style="font-weight:700">'+esc(sub.studentName)+'</span>'+(_graded?'<span style="padding:2px 7px;border-radius:4px;font-size:10px;font-weight:800;background:'+_col+'18;color:'+_col+'">'+_pct+'%</span>':'<span style="padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;background:var(--warning-light);color:var(--warning)">Ungraded</span>')+'</div><div style="font-size:11px;color:var(--text-muted);margin-top:2px">'+esc(sub.week)+' · '+_wc+' words · '+new Date(sub.timestamp).toLocaleDateString()+'</div></div></div>';}).join("");
   let gh="";
   if(S.selectedSubmission!==null){
     const sub=S.allSubmissions[S.selectedSubmission];
     const nt=sub.fields?assembleNoteText(sub.fields):(sub.text||"");
     const ea=db("annotations-"+sub.studentName+"-"+sub.week)||[];
-    gh+='<div style="background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff;padding:14px 20px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:4px">Now Grading</div><div style="font-size:18px;font-weight:800;letter-spacing:-.3px">'+esc(sub.studentName)+'</div><div style="font-size:12px;opacity:.7;margin-top:2px">'+esc(sub.week)+' · submitted '+new Date(sub.timestamp).toLocaleDateString()+'</div></div><div style="text-align:right"><div style="font-size:11px;opacity:.6;margin-bottom:4px">Words</div><div style="font-size:22px;font-weight:800;font-family:\'IBM Plex Mono\',monospace">'+(nt.trim().split(/\s+/).filter(Boolean).length)+'</div></div></div>';gh+=sectionCard(sub.studentName+" — "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <span style="opacity:.65">Select text to annotate</span><span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
+    gh+='<div style="background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff;padding:14px 20px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:4px">Now Grading</div><div style="font-size:18px;font-weight:800;letter-spacing:-.3px">'+esc(sub.studentName)+'</div><div style="font-size:12px;opacity:.7;margin-top:2px">'+esc(sub.week)+' · submitted '+new Date(sub.timestamp).toLocaleDateString()+'</div></div><div style="text-align:right"><div style="font-size:11px;opacity:.6;margin-bottom:4px">Words</div><div style="font-size:22px;font-weight:800;font-family:\'IBM Plex Mono\',monospace">'+(nt.trim().split(/\s+/).filter(Boolean).length)+'</div></div></div>';gh+=sectionCard(sub.studentName+" — "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <span style="opacity:.7">Highlight any text to add a comment</span><span style="margin-left:auto;display:flex;align-items:center;gap:8px">'+(ea.length?badge(ea.length+' annotations','badge-primary'):'<span style="font-size:11px;color:var(--text-muted)">0 annotations</span>')+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
     const tot=Object.values(S.gradeScores).reduce((a,b)=>a+(parseInt(b)||0),0);
     // Chart Review Summary panel (from tracking module)
     if(window.ChartTracker&&sub.chartReviewData){gh+=ChartTracker.renderSummary(sub.chartReviewData.chartReview)}
@@ -3310,7 +3310,7 @@ function renderWorkflowBar(activeTab) {
     if (i < activeStep) cls = ' done';
     var destTab = step.tabs[0];
     html += '<button class="rdx-wf-step'+cls+'" onclick="switchTab(\''+destTab+'\')" title="'+step.hint+'">'
-      + '<span class="rdx-wf-num">'+(_stepDone ? '✓' : i < activeStep ? '✓' : (i+1))+'</span>'
+      + '<span class="rdx-wf-num">'+(i < activeStep ? '✓' : (i+1))+'</span>'
       + step.icon + ' ' + step.label
       + '</button>';
   });
@@ -3323,7 +3323,7 @@ function renderWorkflowBar(activeTab) {
 var AI_TOOLS = [
   { id:'coach',       label:'CoachDx',       icon:'Coach', desc:'Socratic coach -- reason it out' },
   { id:'crt',         label:'ReasonDx CRT',  icon:'Dx', desc:'Step-by-step reasoning trainer' },
-  { id:'autofeedback',label:'Doc Assessment',icon:'✍️',  desc:'AI feedback on your note' },
+  { id:'autofeedback',label:'AI Feedback',   icon:'🤖',  desc:'AI scores your note by criterion' },
 ];
 
 function renderAISwitcher(activeTab) {
