@@ -2022,6 +2022,20 @@ function loadCaseData(cb) {
     FAMILY_HISTORY = d.familyHistory || [];
     SOCIAL_HISTORY = d.socialHistory || [];
     if(window.CaseFrame&&CASE_ID){CaseFrame.autoRegister(CASE_ID,d)}
+    // ── Override result tables with case-specific data ──
+    // Priority 1: Per-case data in rdx-case-results.js (centralized, 20 priority cases)
+    if (window.RDX_CASE_RESULTS && window.RDX_CASE_RESULTS[CASE_ID]) {
+      var caseRes = window.RDX_CASE_RESULTS[CASE_ID];
+      if (caseRes.labResults) Object.assign(CASE_SPECIFIC_LAB_RESULTS, caseRes.labResults);
+      if (caseRes.imgResults) Object.assign(CASE_SPECIFIC_IMG_RESULTS, caseRes.imgResults);
+    }
+    // Priority 2: Inline data in the case file itself (labResults / imgResults keys)
+    if (window.EMR_DATA && window.EMR_DATA.labResults) {
+      Object.assign(CASE_SPECIFIC_LAB_RESULTS, window.EMR_DATA.labResults);
+    }
+    if (window.EMR_DATA && window.EMR_DATA.imgResults) {
+      Object.assign(CASE_SPECIFIC_IMG_RESULTS, window.EMR_DATA.imgResults);
+    }
     // Write active case to sessionStorage so consult-callback.html can gate access
     try { sessionStorage.setItem('rdx-active-case', CASE_ID); } catch(e) {}
     if (cb) cb();
@@ -5528,6 +5542,7 @@ submitDoc = function(){
 <script src="js/crt-chart.js"></script>
 <script src="js/rdx-rpfs.js"></script>
 <script src="emr-data/dx-database.js"></script>
+<script src="emr-data/rdx-case-results.js"></script>
 <script src="js/ddx-builder.js"></script>
 <script src="rdx-demo-tour.js"></script>
 <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}</script>
