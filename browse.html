@@ -798,6 +798,11 @@ grid.innerHTML=displayedItems.map(function(c){
   h+='</div></div>';
   h+='<div class="card-tags">';
   h+='<span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';
+  
+  // Time estimate based on acuity
+  var timeEst = c.acuity === 1 ? '15-20 min' : c.acuity === 2 ? '12-15 min' : c.acuity === 3 ? '10-12 min' : c.acuity === 4 ? '7-10 min' : '5-7 min';
+  h+='<span class="tag" style="background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.6);border:1px solid rgba(255,255,255,0.1)">⏱️ '+timeEst+'</span>';
+  
   if(c.featured) h+='<span class="tag tag-featured">Featured</span>';
         if(c.studyCase && window.RDXStudySequencer && !RDXStudySequencer.isCaseFreelyAccessible(c.id)){
           h+='<span class="tag" style="background:rgba(251,146,60,.15);color:#FDBA74;font-weight:700;border:1px solid rgba(251,146,60,.25)">🔒 Study</span>';
