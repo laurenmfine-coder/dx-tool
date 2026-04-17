@@ -7,6 +7,9 @@
 <title>ReasonDx — Browse</title>
 <link rel="icon" href="favicon-32x32.png">
 <meta name="description" content="Browse all ReasonDx content. 368 clinical simulations, 364 virtual EMR cases, 176 coaching topics, 36 pathophysiology modules, and 58 daily reasoning puzzles.">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="js/nav-global.js"></script>
@@ -778,6 +781,14 @@ setMode(_initMode);
 
 // ── QUICK START FUNCTION FOR HERO CTA ──
 function startQuickCase() {
+  // Track hero CTA click
+  if (window.gtag) {
+    gtag('event', 'hero_cta_click', {
+      event_category: 'engagement',
+      event_label: 'try_5_minute_case'
+    });
+  }
+  
   // Set mode to simulate
   setMode('simulate');
   
@@ -841,6 +852,14 @@ function handleSearch() {
 }
 
 function doSemanticSearch(q) {
+  // Track search
+  if (window.gtag) {
+    gtag('event', 'search', {
+      search_term: q,
+      event_category: 'engagement'
+    });
+  }
+  
   var el = document.getElementById('semanticResults');
   if (!el) return; // semantic results container not present in this mode
   var g  = document.getElementById('grid');
