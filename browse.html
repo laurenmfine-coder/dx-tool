@@ -6,11 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ReasonDx — Browse</title>
 <link rel="icon" href="favicon-32x32.png">
-<meta name="description" content="Browse all ReasonDx content. 368 clinical simulations, 364 virtual EMR cases, 176 coaching topics, 36 pathophysiology modules, and 58 daily reasoning puzzles.">
+<meta name="description" content="Browse 394 clinical reasoning cases across medicine, nursing, pharmacy, PA, PT, OT, dentistry, and optometry. Free AI-powered patient simulations. No signup required.">
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<meta property="og:image" content="https://reasondx.com/icons/logo-transparent.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="js/nav-global.js"></script>
@@ -578,7 +580,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
         
         <!-- Easy Case -->
-        <a href="/simulation-engine.html?case=URI-PED-01" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'easy',case_id:'URI-PED-01'})" style="
+        <a href="/simulation-engine.html?case=migraine" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'easy',case_id:'migraine'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(134,239,172,0.3);
@@ -604,13 +606,13 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
             </div>
           </div>
           <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5">
-            <strong style="color:#86EFAC">Pediatric URI</strong><br>
-            Learn the simulation interface with a straightforward presentation
+            <strong style="color:#86EFAC">Migraine</strong><br>
+            A common presentation with a clear differential — perfect for your first case
           </div>
         </a>
         
         <!-- Medium Case -->
-        <a href="/simulation-engine.html?case=CHEST-PAIN-01" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'medium',case_id:'CHEST-PAIN-01'})" style="
+        <a href="/simulation-engine.html?case=pericarditis-v1" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'medium',case_id:'pericarditis-v1'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(251,191,36,0.3);
@@ -637,12 +639,12 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
           </div>
           <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5">
             <strong style="color:#FDE047">Chest Pain</strong><br>
-            Build a differential and navigate a classic presentation
+            Chest pain with a twist — practice distinguishing pericarditis from ACS
           </div>
         </a>
         
         <!-- Hard Case -->
-        <a href="/simulation-engine.html?case=ABD-PAIN-COMPLEX" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'hard',case_id:'ABD-PAIN-COMPLEX'})" style="
+        <a href="/simulation-engine.html?case=pe-v1" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'hard',case_id:'pe-v1'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(251,113,133,0.3);
@@ -668,8 +670,8 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
             </div>
           </div>
           <div style="font-size:14px;color:rgba(255,255,255,0.75);line-height:1.5">
-            <strong style="color:#FCA5A5">Abdominal Pain</strong><br>
-            Test your diagnostic reasoning with a complex multi-system case
+            <strong style="color:#FCA5A5">Sudden Shortness of Breath</strong><br>
+            High-stakes respiratory emergency — time-sensitive diagnosis required
           </div>
         </a>
         
@@ -823,7 +825,7 @@ function setCat(c){CAT=c;document.querySelectorAll('.fbtn').forEach(function(b){
 function getData(){if(MODE==='simulate') return SIM_FEATURED.concat(SIM_DATA);if(MODE==='practice') return PRAC_DATA;if(MODE==='coach') return COACH_DATA;if(MODE==='learn') return LEARN_DATA;return [];}
 function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var data=getData();var filtered=data.filter(function(c){if(CAT!=='all'&&c.cat!==CAT) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
   // Profession arc cases first if profession matches
-  var userProf=null;try{var u=JSON.parse(localStorage.getItem('reasondx-user')||'{}');userProf=u.professionProfile&&u.professionProfile.professionId;}catch(e){}
+  var userProf=null;try{var u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProf=(u.professionProfile&&u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
   var aArc=a.arcId&&a.profession&&a.profession===userProf?1:0;
   var bArc=b.arcId&&b.profession&&b.profession===userProf?1:0;
   if(aArc!==bArc) return bArc-aArc;
