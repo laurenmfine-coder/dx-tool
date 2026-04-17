@@ -115,11 +115,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <!-- ── TOPBAR ── -->
 <div class="topbar">
   <div class="topbar-left">
+    <a href="/browse.html" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:6px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='rgba(255,255,255,0.6)'">← Cases</a>
     <div class="topbar-logo">Reason<span>Dx</span></div>
-    <div class="topbar-badge">ReasonDx Simulation Engine</div>
+    <div class="topbar-badge">Simulation</div>
   </div>
   <div class="topbar-right">
-    <span id="phaseLabel" style="font-weight:600">Phase 1 of 8</span>
+    <span id="phaseLabel" style="font-weight:600">Step 1 of 10</span>
     <span id="turnCounter" style="font-family:var(--mono);opacity:.8">Turn 0</span>
   </div>
 </div>
@@ -180,7 +181,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="js/rdx-advanced.js"></script>
 <script src="js/rdx-rpfs-viz.js"></script>
 <script src="emr-data/dx-database.js"></script>
-<script src="emr-data/crt-data.js"></script>
+<!-- crt-data.js removed — CRT_INDEX (crt-index.js via browse/adapter) serves case pairing -->
 <script src="js/rdx-case-adapter.js"></script>
 <script>
 // ── INTAKE CASE SEARCH ──
@@ -3653,14 +3654,8 @@ Happy to share more details if helpful.');
     }
 
     // ── Case Pairing Recommendation ──
-    if (window.CRT_INDEX || window.CRT_DATA) {
-      var index = window.CRT_INDEX || {};
-      if (!window.CRT_INDEX && window.CRT_DATA) {
-        Object.entries(window.CRT_DATA).forEach(function(e) {
-          index[e[0]] = { chiefComplaint: e[1].chiefComplaint || e[1].presentation, category: e[1].category };
-        });
-      }
-      var pair = R.CasePairing.findPair(caseData.caseId, index);
+    if (window.CRT_INDEX) {
+      var pair = R.CasePairing.findPair(caseData.caseId, window.CRT_INDEX);
       if (pair) {
         state._casePairing = pair;
         html += '<div style="margin-bottom:16px">';
@@ -4042,6 +4037,30 @@ if (window.P && window.P.EventBus) {
 }
 </script>
 
+<!-- ── WHO ARE YOU? PROFESSION INTAKE ── -->
+<div id="rdxProfIntake" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:9100;align-items:center;justify-content:center">
+  <div style="background:#1a2740;border:1px solid rgba(40,116,166,0.4);border-radius:16px;padding:32px;max-width:400px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5)">
+    <div style="font-size:26px;text-align:center;margin-bottom:8px">👋</div>
+    <h2 style="color:#fff;font-size:19px;font-weight:700;text-align:center;margin:0 0 6px">Quick question before we start</h2>
+    <p style="color:rgba(255,255,255,0.5);font-size:13px;text-align:center;margin:0 0 24px">This helps us frame the case correctly for you.</p>
+    <p style="color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;margin-bottom:12px">I am a...</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+      <button onclick="selectProfession('medicine','Medical Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">🩺 Medical Student</button>
+      <button onclick="selectProfession('nursing','Nursing Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">🏥 Nursing Student</button>
+      <button onclick="selectProfession('pa','PA Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">⚕️ PA Student</button>
+      <button onclick="selectProfession('pharmacy','Pharmacy Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">💊 Pharmacy Student</button>
+      <button onclick="selectProfession('pt','PT Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">🦿 PT Student</button>
+      <button onclick="selectProfession('ot','OT Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">🙌 OT Student</button>
+      <button onclick="selectProfession('dentistry','Dental Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">🦷 Dental Student</button>
+      <button onclick="selectProfession('optometry','OD Student')" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">👁️ OD Student</button>
+    </div>
+    <div style="grid-column:1/-1;margin-top:8px">
+      <button onclick="selectProfession('attending','Attending/Faculty')" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;padding:12px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;font-family:inherit" onmouseover="this.style.background='rgba(40,116,166,0.3)';this.style.borderColor='#2874A6'" onmouseout="this.style.background='rgba(255,255,255,0.06)';this.style.borderColor='rgba(255,255,255,0.12)'">👩‍⚕️ Attending / Faculty</button>
+    </div>
+    <button onclick="dismissProfIntake()" style="width:100%;margin-top:12px;background:none;border:none;color:rgba(255,255,255,0.3);font-size:12px;cursor:pointer;font-family:inherit">Skip for now</button>
+  </div>
+</div>
+
 <!-- ── FIRST-TIME TUTORIAL OVERLAY ── -->
 <div id="rdxTutorial" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9000;display:flex;align-items:center;justify-content:center">
   <div style="background:#1a2740;border:1px solid rgba(40,116,166,0.4);border-radius:16px;padding:32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5)">
@@ -4092,9 +4111,42 @@ var _tutTotal = 4;
 function showTutorialIfNeeded() {
   if (localStorage.getItem('rdx-tutorial-shown')) return;
   const simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
-  if (simCount > 1) return; // Only for first simulation
-  const overlay = document.getElementById('rdxTutorial');
-  overlay.style.display = 'flex';
+  if (simCount > 1) return;
+
+  // If no profession stored yet, show intake first, then tutorial
+  if (!localStorage.getItem('rdx-profession')) {
+    showProfessionIntake();
+  } else {
+    document.getElementById('rdxTutorial').style.display = 'flex';
+  }
+}
+
+// ── WHO ARE YOU? micro-intake ─────────────────────────────────────────────
+function showProfessionIntake() {
+  document.getElementById('rdxProfIntake').style.display = 'flex';
+}
+
+function selectProfession(prof, label) {
+  localStorage.setItem('rdx-profession', prof);
+  // Also write into rdx_user so simulation engine picks it up
+  try {
+    var u = JSON.parse(localStorage.getItem('rdx_user') || '{}');
+    if (!u.professionProfile) u.professionProfile = {};
+    u.professionProfile.professionId = prof;
+    u.professionProfile.label = label;
+    if (!u.trainingYear) u.trainingYear = prof === 'mbs' ? 'M1' : prof === 'medicine' ? 'M3' : prof;
+    localStorage.setItem('rdx_user', JSON.stringify(u));
+  } catch(e) {}
+  // Hide intake, show tutorial
+  document.getElementById('rdxProfIntake').style.display = 'none';
+  document.getElementById('rdxTutorial').style.display = 'flex';
+  if (window.gtag) gtag('event', 'profession_selected', { profession: prof });
+}
+
+function dismissProfIntake() {
+  document.getElementById('rdxProfIntake').style.display = 'none';
+  document.getElementById('rdxTutorial').style.display = 'flex';
+  localStorage.setItem('rdx-profession', 'medicine'); // default
 }
 
 function tutorialNext() {
