@@ -272,6 +272,7 @@ function startStudy() {
   var selectedCase = params.get('case') || params.get('caseId') || '';
   var depthVersion = params.get('depth') || 'v1';
   var studyMode = params.get('mode') === 'study';
+  var resuming = params.get('resume') === 'true';
 
   if (!selectedCase) {
     // No case in URL — redirect to browse
@@ -280,6 +281,19 @@ function startStudy() {
   }
   if (selectedCase === 'random') {
     selectedCase = CASE_IDS[Math.floor(Math.random() * CASE_IDS.length)];
+  }
+  
+  // ── Check for saved session to resume ──
+  var savedSession = null;
+  if (resuming) {
+    try {
+      savedSession = JSON.parse(localStorage.getItem('rdx-active-session') || 'null');
+      if (!savedSession || savedSession.caseId !== selectedCase) {
+        savedSession = null; // Case mismatch, don't resume
+      }
+    } catch(e) {
+      console.warn('[Resume] Failed to load saved session:', e);
+    }
   }
 
   // Random group assignment
@@ -340,11 +354,87 @@ function startStudy() {
     phaseTiming: {},
     leakDetails: []
   };
+  
+  // ── RESTORE SAVED SESSION if resuming ──
+  if (savedSession) {
+    try {
+      state.currentPhase = savedSession.phase || PHASES.INITIAL_DIFFERENTIAL;
+      state.turnCount = savedSession.turnCount || 0;
+      state.conversationMessages = savedSession.conversationMessages || [];
+      state.differentials = savedSession.differentials || state.differentials;
+      state.depthVersion = savedSession.depthVersion || depthVersion;
+      state.isDepthCase = savedSession.isDepthCase || isDepthCase;
+      
+      // Restore conversation to chat
+      if (state.conversationMessages.length > 0) {
+        state.conversationMessages.forEach(function(msg) {
+          if (msg.role === 'assistant') {
+            addMessage('patel', msg.content);
+          } else if (msg.role === 'user') {
+            addMessage('student', msg.content);
+          }
+        });
+        
+        // Add system message about resume
+        addMessage('system', '📌 Session resumed. You can continue from where you left off.');
+      }
+      
+      if (RDX_DEBUG) console.log('[Resume] Session restored:', savedSession);
+      
+      // Track resume with GA
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'session_restored', {
+          event_category: 'engagement',
+          case_id: caseData.caseId,
+          phase: state.currentPhase
+        });
+      }
+    } catch(e) {
+      console.warn('[Resume] Failed to restore session, starting fresh:', e);
+    }
+  }
 
   document.getElementById('chatInput').disabled = false;
   document.getElementById('sendBtn').disabled = false;
   document.getElementById('micBtn').disabled = false;
   initVoice();
+
+  // ── AUTO-SAVE: Save progress every 30 seconds ──
+  function autoSaveProgress() {
+    try {
+      const saveData = {
+        caseId: state.caseId,
+        caseName: caseData.presentation.chiefComplaint || caseData.caseId,
+        phase: state.currentPhase,
+        phaseLabel: PHASE_LABELS[state.currentPhase] || 'In Progress',
+        turnCount: state.turnCount,
+        conversationMessages: state.conversationMessages.slice(-20), // Last 20 messages
+        differentials: state.differentials,
+        timestamp: Date.now(),
+        depthVersion: depthVersion,
+        isDepthCase: isDepthCase
+      };
+      
+      localStorage.setItem('rdx-active-session', JSON.stringify(saveData));
+      if (RDX_DEBUG) console.log('[Auto-save] Progress saved');
+    } catch(e) {
+      console.warn('[Auto-save] Failed:', e);
+    }
+  }
+  
+  // Save every 30 seconds
+  const autoSaveInterval = setInterval(autoSaveProgress, 30000);
+  
+  // Save on page unload
+  window.addEventListener('beforeunload', function() {
+    autoSaveProgress();
+  });
+  
+  // Clear auto-save interval when case completes
+  window.clearAutoSaveOnComplete = function() {
+    clearInterval(autoSaveInterval);
+    localStorage.removeItem('rdx-active-session');
+  };
 
   // ── Realtime broadcast init ──
   if (window.RDXRealtime) {
@@ -387,42 +477,44 @@ function startStudy() {
     }).catch(function(e) { console.warn('[Fingerprint] Profile load skipped:', e.message); });
   }
 
-  // Deliver Phase 1 opening
-  const p = caseData.presentation;
-  let opening;
+  // Deliver Phase 1 opening (unless resuming)
+  if (!savedSession) {
+    const p = caseData.presentation;
+    let opening;
 
-  if (isDepthCase && depthData) {
-    // ── DEPTH CASE: Modified opening for v2/v3 ──
-    var depthScenario = depthData.scenario || 'The patient has returned.';
-    var newDataStr = '';
-    if (depthData.newData) {
-      newDataStr = '\n\nUpdated Data:\n' + Object.entries(depthData.newData).map(function(e) { return e[0] + ': ' + e[1]; }).join('\n');
+    if (isDepthCase && depthData) {
+      // ── DEPTH CASE: Modified opening for v2/v3 ──
+      var depthScenario = depthData.scenario || 'The patient has returned.';
+      var newDataStr = '';
+      if (depthData.newData) {
+        newDataStr = '\n\nUpdated Data:\n' + Object.entries(depthData.newData).map(function(e) { return e[0] + ': ' + e[1]; }).join('\n');
+      }
+
+      if (depthVersion === 'v2') {
+        // v2: Treatment failure — start at reassessment
+        opening = `[As Dr. Patel]\n\nWelcome back. You saw ${p.patientName} previously. Here's the update:\n\n${depthScenario}${newDataStr}\n\nBased on this update, what's your assessment? Has your thinking changed? Walk me through your current differential and what you want to do differently.`;
+        // Skip to revised differential phase
+        state.currentPhase = PHASES.REVISED_DIFFERENTIAL;
+      } else if (depthVersion === 'v3') {
+        // v3: Outpatient follow-up — start at management/follow-up
+        opening = `[As Dr. Patel]\n\n${p.patientName} is here for their follow-up visit. Here's where things stand:\n\n${depthScenario}${newDataStr}\n\nWalk me through your assessment. How is the patient doing relative to where you expected? What's your plan going forward?`;
+        // Skip to management phase
+        state.currentPhase = PHASES.MANAGEMENT;
+      }
+    } else {
+      // ── STANDARD v1: Initial encounter ──
+      opening = `[As Dr. Patel]\n\nYou're about to see your next patient in clinic. Here's the chart summary:\n\nPatient: ${p.patientName}, ${p.age}-year-old ${p.ethnicity} ${p.sex.toLowerCase()}\nChief Complaint: ${p.chiefComplaint}\nVitals: T ${p.vitals.temp}, HR ${p.vitals.hr}, BP ${p.vitals.bp}, RR ${p.vitals.rr}, SpO\u2082 ${p.vitals.spo2} on room air\nBrief note from triage nurse: "${p.triageNote}"\n\nBefore you see the patient, I'd like you to generate an initial differential diagnosis based on this limited information. What are you thinking, and in what order of priority?`;
     }
 
-    if (depthVersion === 'v2') {
-      // v2: Treatment failure — start at reassessment
-      opening = `[As Dr. Patel]\n\nWelcome back. You saw ${p.patientName} previously. Here's the update:\n\n${depthScenario}${newDataStr}\n\nBased on this update, what's your assessment? Has your thinking changed? Walk me through your current differential and what you want to do differently.`;
-      // Skip to revised differential phase
-      state.currentPhase = PHASES.REVISED_DIFFERENTIAL;
-    } else if (depthVersion === 'v3') {
-      // v3: Outpatient follow-up — start at management/follow-up
-      opening = `[As Dr. Patel]\n\n${p.patientName} is here for their follow-up visit. Here's where things stand:\n\n${depthScenario}${newDataStr}\n\nWalk me through your assessment. How is the patient doing relative to where you expected? What's your plan going forward?`;
-      // Skip to management phase
-      state.currentPhase = PHASES.MANAGEMENT;
+    addMessage('patel', opening);
+    
+    // Track case started
+    if (window.gtag) {
+      gtag('event', 'case_started', {
+        case_id: state.caseId,
+        depth_version: depthVersion || 'v1'
+      });
     }
-  } else {
-    // ── STANDARD v1: Initial encounter ──
-    opening = `[As Dr. Patel]\n\nYou're about to see your next patient in clinic. Here's the chart summary:\n\nPatient: ${p.patientName}, ${p.age}-year-old ${p.ethnicity} ${p.sex.toLowerCase()}\nChief Complaint: ${p.chiefComplaint}\nVitals: T ${p.vitals.temp}, HR ${p.vitals.hr}, BP ${p.vitals.bp}, RR ${p.vitals.rr}, SpO\u2082 ${p.vitals.spo2} on room air\nBrief note from triage nurse: "${p.triageNote}"\n\nBefore you see the patient, I'd like you to generate an initial differential diagnosis based on this limited information. What are you thinking, and in what order of priority?`;
-  }
-
-  addMessage('patel', opening);
-  
-  // Track case started
-  if (window.gtag) {
-    gtag('event', 'case_started', {
-      case_id: state.caseId,
-      depth_version: depthVersion || 'v1'
-    });
   }
   
   // Hide loading overlay now that case is ready
@@ -2431,6 +2523,11 @@ async function exportStudyData() {
             data_integration: (state.detectedBiases || []).some(function(b) { return b.type === 'report_anchoring'; }) ? -0.02 : 0.02
           }
         }));
+        
+        // Clear auto-save since case is complete
+        if (window.clearAutoSaveOnComplete) {
+          window.clearAutoSaveOnComplete();
+        }
 
         // ── EMAIL CAPTURE INTEGRATION ──
         if (window.RDXSessionManager && !window._rdxPracticeOnly) {
