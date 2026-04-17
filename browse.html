@@ -10,6 +10,7 @@
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="js/nav-global.js"></script>
@@ -111,6 +112,9 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .badge-coach{background:rgba(124,58,237,.25);color:#C4B5FD;border:1px solid rgba(124,58,237,.3)}
 .badge-learn{background:rgba(234,88,12,.25);color:#FDBA74;border:1px solid rgba(234,88,12,.3)}
 .card-sub{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.5}
+.card-social-proof{display:flex;gap:12px;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.06);font-size:.72rem;color:rgba(255,255,255,.4);flex-wrap:wrap}
+.card-social-proof span{display:flex;align-items:center;gap:3px}
+.card-social-proof .sp-count{color:rgba(255,255,255,.65);font-weight:600}
 .card-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
 .tag{
   font-size:.68rem;font-weight:600;padding:4px 10px;border-radius:6px;
@@ -739,7 +743,17 @@ grid.innerHTML=displayedItems.map(function(c){
           h+='<span class="tag" style="background:rgba(251,146,60,.15);color:#FDBA74;font-weight:700;border:1px solid rgba(251,146,60,.25)">🔒 Study</span>';
         }
         if(c.arcId && c.arcLabel){var arcBadge=window.RDXArcBadge&&window.RDXArcBadge(c);if(arcBadge)h+='<span class="tag" style="background:rgba(168,85,247,.15);color:#C4B5FD;font-weight:700;border:1px solid rgba(168,85,247,.25)">'+arcBadge+'</span>';}
-        if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS'};h+='<span class="tag" style="background:rgba(5,150,105,.15);color:#6EE7B7;font-weight:700;border:1px solid rgba(5,150,105,.25)">'+( profLabels[c.profession]||c.profession)+'</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div></div>';return h;}).join('');
+        if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS'};h+='<span class="tag" style="background:rgba(5,150,105,.15);color:#6EE7B7;font-weight:700;border:1px solid rgba(5,150,105,.25)">'+( profLabels[c.profession]||c.profession)+'</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div>';
+  if (MODE === 'simulate' && window._socialProof && window._socialProof[c.id]) {
+    var sp = window._socialProof[c.id];
+    var spHtml = '<div class="card-social-proof">';
+    if (sp.completion_count > 0) spHtml += '<span>✅ <span class="sp-count">' + sp.completion_count + '</span> completed</span>';
+    if (sp.avg_time_seconds > 0) { var m=Math.floor(sp.avg_time_seconds/60),s=(sp.avg_time_seconds%60).toString().padStart(2,'0'); spHtml += '<span>⏱ avg ' + m + ':' + s + '</span>'; }
+    if (sp.avg_rating) spHtml += '<span>⭐ ' + parseFloat(sp.avg_rating).toFixed(1) + '</span>';
+    spHtml += '</div>';
+    h += spHtml;
+  }
+  h+='</div>';return h;}).join('');
 
 // Show/hide Load More button
 var loadMoreBtn = document.getElementById('loadMore');
@@ -1042,75 +1056,7 @@ function doSemanticSearch(q) {
   });
 })();
 </script>
-<!-- ── EXIT INTENT POPUP ── -->
-<div id="exit-intent-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center">
-  <div style="background:#fff;border-radius:16px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative">
-    <button onclick="closeExitIntent()" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;color:#94a3b8;cursor:pointer;padding:4px">×</button>
-    
-    <div style="text-align:center">
-      <div style="font-size:32px;margin-bottom:16px">⏰</div>
-      <h3 style="font-size:22px;font-weight:700;color:#1a1d27;margin-bottom:12px">
-        Wait! Try one quick case before you go?
-      </h3>
-      <p style="font-size:15px;color:#64748b;line-height:1.6;margin-bottom:24px">
-        Takes just 5 minutes. No signup required.
-      </p>
-      
-      <button onclick="startRandomEasyCase()" style="width:100%;padding:16px;background:#2874A6;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;transition:all .15s" onmouseover="this.style.background='#1B4F72'" onmouseout="this.style.background='#2874A6'">
-        🎲 Start Random Easy Case (5 min)
-      </button>
-      
-      <button onclick="closeExitIntent()" style="background:none;border:none;color:#94a3b8;font-size:14px;cursor:pointer;padding:8px">
-        No thanks, I'll browse
-      </button>
-    </div>
-  </div>
-</div>
 
-<script>
-let exitIntentShown = false;
-let hasStartedCase = false;
-
-// Track if user has started a case
-try {
-  const history = JSON.parse(localStorage.getItem('rdx-case-history') || '[]');
-  hasStartedCase = history.length > 0;
-} catch(e) {}
-
-// Detect mouse leaving window
-document.addEventListener('mouseleave', function(e) {
-  if (e.clientY < 10 && !exitIntentShown && !hasStartedCase) {
-    exitIntentShown = true;
-    const modal = document.getElementById('exit-intent-modal');
-    modal.style.display = 'flex';
-    
-    // Track analytics
-    if (window.gtag) {
-      gtag('event', 'exit_intent_shown', { location: 'browse_page' });
-    }
-  }
-});
-
-function closeExitIntent() {
-  document.getElementById('exit-intent-modal').style.display = 'none';
-  
-  if (window.gtag) {
-    gtag('event', 'exit_intent_dismissed');
-  }
-}
-
-function startRandomEasyCase() {
-  // Get an easy case (acuity 4 or 5)
-  const easyCases = getData().filter(c => c.acuity >= 4);
-  const randomCase = easyCases[Math.floor(Math.random() * easyCases.length)];
-  
-  if (window.gtag) {
-    gtag('event', 'exit_intent_accepted', { case_id: randomCase.id });
-  }
-  
-  window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(randomCase.id);
-}
-</script>
 
 <!-- ── RESUME SESSION SCRIPT ── -->
 <script>
@@ -1202,13 +1148,36 @@ function dismissResume() {
   if (!exitIntentShown && !hasStartedCase) {
     let exitIntentTriggered = false;
     
+    // Desktop: mouse leaves at top of window
     document.addEventListener('mouseleave', function(e) {
-      // Detect mouse leaving at top of window
       if (e.clientY < 10 && !exitIntentTriggered) {
         exitIntentTriggered = true;
         showExitIntent();
       }
     });
+
+    // Mobile fallback: show after 45 seconds of inactivity if still on page
+    const isMobile = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent);
+    if (isMobile) {
+      let mobileTimer = setTimeout(function() {
+        if (!exitIntentTriggered) {
+          exitIntentTriggered = true;
+          showExitIntent();
+        }
+      }, 45000);
+      // Reset timer on user activity
+      ['touchstart','scroll'].forEach(function(evt) {
+        document.addEventListener(evt, function() {
+          clearTimeout(mobileTimer);
+          mobileTimer = setTimeout(function() {
+            if (!exitIntentTriggered) {
+              exitIntentTriggered = true;
+              showExitIntent();
+            }
+          }, 45000);
+        }, { passive: true });
+      });
+    }
   }
 })();
 
@@ -1266,6 +1235,57 @@ function startRandomEasyCase() {
     startQuickCase();
   }
 }
+</script>
+
+<!-- ── SOCIAL PROOF LOADER ── -->
+<script>
+(function() {
+  const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+  // Cache key: refresh every 6 hours
+  const CACHE_KEY = 'rdx-social-proof-cache';
+  const CACHE_TTL = 6 * 60 * 60 * 1000;
+
+  function injectAndRefresh() {
+    // Inject cached data immediately if available
+    try {
+      const cached = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+      if (cached && cached.ts && (Date.now() - cached.ts) < CACHE_TTL && cached.data) {
+        window._socialProof = cached.data;
+        if (typeof renderGrid === 'function') renderGrid();
+        return; // Fresh enough — no network call needed
+      }
+    } catch(e) {}
+
+    // Fetch from Supabase case_analytics table
+    fetch(SUPABASE_URL + '/rest/v1/case_analytics?select=case_id,completion_count,avg_time_seconds,avg_rating', {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
+      }
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(rows) {
+      if (!Array.isArray(rows)) return;
+      var map = {};
+      rows.forEach(function(r) { if (r.case_id) map[r.case_id] = r; });
+      window._socialProof = map;
+      // Cache it
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: map })); } catch(e) {}
+      // Re-render cards with social proof
+      if (typeof renderGrid === 'function') renderGrid();
+    })
+    .catch(function() {}); // Silently fail — social proof is additive only
+  }
+
+  // Run after page content loads
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectAndRefresh);
+  } else {
+    setTimeout(injectAndRefresh, 800); // Small delay so grid renders first
+  }
+})();
 </script>
 
 </body>

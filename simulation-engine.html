@@ -515,6 +515,9 @@ function startStudy() {
         depth_version: depthVersion || 'v1'
       });
     }
+    // Increment simulation count (used for new-user phase tracker simplification)
+    const _simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
+    localStorage.setItem('rdx-simulation-count', _simCount + 1);
   }
 }
 
@@ -608,6 +611,9 @@ async function sendMessage() {
   state.turns.push({ role:'student', content:msg, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:state.turnCount });
   state.conversationMessages.push({ role:'user', content: msg });
   addMessage('student', msg);
+  
+  // Check micro-achievements
+  if (typeof checkAchievements === 'function') checkAchievements(msg, state.currentPhase);
 
   // ── Broadcast student turn ──
   if (window.RDXRealtime) {
@@ -2304,13 +2310,35 @@ function removeTyping() {
 }
 
 function updatePhaseUI() {
-  document.getElementById('phaseLabel').textContent = 'Phase ' + state.currentPhase + ' of 8';
-  document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
+  const simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
+  const isNewUser = simCount < 3;
   const tracker = document.getElementById('phaseTracker');
-  tracker.innerHTML = '';
-  for (let i = 1; i <= 8; i++) {
-    const cls = i === state.currentPhase ? 'active' : i < state.currentPhase ? 'complete' : '';
-    tracker.innerHTML += `<div class="phase-item ${cls}"><div class="phase-dot"></div>${PHASE_LABELS[i]}</div>`;
+
+  if (isNewUser) {
+    // Simplified view for new users: progress bar + step label only
+    const pct = Math.round(((state.currentPhase - 1) / 9) * 100);
+    const label = PHASE_LABELS[state.currentPhase] || 'In Progress';
+    document.getElementById('phaseLabel').textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
+    document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
+    tracker.innerHTML = `
+      <div style="margin-bottom:6px;font-size:11px;color:var(--text-muted)">${label}</div>
+      <div style="background:rgba(255,255,255,0.1);border-radius:999px;height:6px;overflow:hidden">
+        <div style="background:var(--primary);height:100%;width:${pct}%;border-radius:999px;transition:width .4s ease"></div>
+      </div>
+      <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:right">${pct}% complete</div>
+      <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.35);text-align:center;cursor:pointer" onclick="this.closest('.panel-card').querySelector('.phase-full-list').style.display='block';this.style.display='none'">Show all steps ▾</div>
+      <div class="phase-full-list" style="display:none;margin-top:8px">
+        ${Array.from({length:10},(_,i)=>{const n=i+1;const cls=n===state.currentPhase?'active':n<state.currentPhase?'complete':'';return `<div class="phase-item ${cls}"><div class="phase-dot"></div>${PHASE_LABELS[n]||'Complete'}</div>`;}).join('')}
+      </div>`;
+  } else {
+    // Full tracker for experienced users
+    document.getElementById('phaseLabel').textContent = 'Phase ' + state.currentPhase + ' of 10';
+    document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
+    tracker.innerHTML = '';
+    for (let i = 1; i <= 10; i++) {
+      const cls = i === state.currentPhase ? 'active' : i < state.currentPhase ? 'complete' : '';
+      tracker.innerHTML += `<div class="phase-item ${cls}"><div class="phase-dot"></div>${PHASE_LABELS[i]||'Complete'}</div>`;
+    }
   }
 }
 
@@ -3972,6 +4000,141 @@ if (window.P && window.P.EventBus) {
     showBookmarkPrompt();
   });
 }
+</script>
+
+<!-- ── FIRST-TIME TUTORIAL OVERLAY ── -->
+<div id="rdxTutorial" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9000;display:flex;align-items:center;justify-content:center">
+  <div style="background:#1a2740;border:1px solid rgba(40,116,166,0.4);border-radius:16px;padding:32px;max-width:420px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.5)">
+    <div style="font-size:28px;text-align:center;margin-bottom:8px">🩺</div>
+    <h2 style="color:#fff;font-size:20px;font-weight:700;text-align:center;margin:0 0 6px">Welcome to ReasonDx!</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:13px;text-align:center;margin:0 0 24px">Here's how a simulation works:</p>
+    <div id="tutorialSteps">
+      <div class="tut-step active" data-step="0" style="display:flex;gap:14px;align-items:flex-start;padding:12px;background:rgba(40,116,166,0.15);border-radius:10px;border:1px solid rgba(40,116,166,0.3)">
+        <div style="font-size:22px;flex-shrink:0">📋</div>
+        <div><div style="color:#fff;font-weight:600;font-size:14px;margin-bottom:3px">Read the patient presentation</div><div style="color:rgba(255,255,255,0.55);font-size:12px">You'll see a chief complaint and brief history to orient you.</div></div>
+      </div>
+      <div class="tut-step" data-step="1" style="display:none;gap:14px;align-items:flex-start;padding:12px;background:rgba(40,116,166,0.15);border-radius:10px;border:1px solid rgba(40,116,166,0.3)">
+        <div style="font-size:22px;flex-shrink:0">💬</div>
+        <div><div style="color:#fff;font-weight:600;font-size:14px;margin-bottom:3px">Build your differential</div><div style="color:rgba(255,255,255,0.55);font-size:12px">Start with your best diagnoses before gathering more history.</div></div>
+      </div>
+      <div class="tut-step" data-step="2" style="display:none;gap:14px;align-items:flex-start;padding:12px;background:rgba(40,116,166,0.15);border-radius:10px;border:1px solid rgba(40,116,166,0.3)">
+        <div style="font-size:22px;flex-shrink:0">🔍</div>
+        <div><div style="color:#fff;font-weight:600;font-size:14px;margin-bottom:3px">Interview the patient</div><div style="color:rgba(255,255,255,0.55);font-size:12px">Ask questions, do the exam, order tests — just like the real thing.</div></div>
+      </div>
+      <div class="tut-step" data-step="3" style="display:none;gap:14px;align-items:flex-start;padding:12px;background:rgba(40,116,166,0.15);border-radius:10px;border:1px solid rgba(40,116,166,0.3)">
+        <div style="font-size:22px;flex-shrink:0">🎯</div>
+        <div><div style="color:#fff;font-weight:600;font-size:14px;margin-bottom:3px">Reach a diagnosis & get feedback</div><div style="color:rgba(255,255,255,0.55);font-size:12px">Your attending will guide you to the answer and debrief your reasoning.</div></div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:20px">
+      <div id="tutDots" style="display:flex;gap:6px">
+        <div style="width:8px;height:8px;border-radius:50%;background:#2874A6"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2)"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2)"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2)"></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="dismissTutorial()" style="background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.5);border:none;padding:8px 16px;border-radius:8px;font-size:13px;cursor:pointer">Skip</button>
+        <button id="tutNextBtn" onclick="tutorialNext()" style="background:#2874A6;color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">Next →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MICRO-ACHIEVEMENTS CONTAINER ── -->
+<div id="achievementContainer" style="position:fixed;bottom:80px;right:24px;z-index:2000;display:flex;flex-direction:column;gap:8px;align-items:flex-end;pointer-events:none"></div>
+
+<script>
+// ── TUTORIAL LOGIC ──
+var _tutStep = 0;
+var _tutTotal = 4;
+
+function showTutorialIfNeeded() {
+  if (localStorage.getItem('rdx-tutorial-shown')) return;
+  const simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
+  if (simCount > 1) return; // Only for first simulation
+  const overlay = document.getElementById('rdxTutorial');
+  overlay.style.display = 'flex';
+}
+
+function tutorialNext() {
+  _tutStep++;
+  if (_tutStep >= _tutTotal) { dismissTutorial(); return; }
+  document.querySelectorAll('.tut-step').forEach(function(el, i) {
+    el.style.display = i === _tutStep ? 'flex' : 'none';
+  });
+  const dots = document.querySelectorAll('#tutDots div');
+  dots.forEach(function(d, i) { d.style.background = i === _tutStep ? '#2874A6' : 'rgba(255,255,255,0.2)'; });
+  if (_tutStep === _tutTotal - 1) document.getElementById('tutNextBtn').textContent = "Let's go! 🚀";
+}
+
+function dismissTutorial() {
+  document.getElementById('rdxTutorial').style.display = 'none';
+  localStorage.setItem('rdx-tutorial-shown', 'true');
+}
+
+// ── MICRO-ACHIEVEMENTS LOGIC ──
+var _achievementQueue = [];
+var _achievementShowing = false;
+var _streakCount = parseInt(localStorage.getItem('rdx-streak-count') || '0');
+
+function showAchievement(text, type) {
+  _achievementQueue.push({ text: text, type: type });
+  if (!_achievementShowing) processAchievementQueue();
+}
+
+function processAchievementQueue() {
+  if (_achievementQueue.length === 0) { _achievementShowing = false; return; }
+  _achievementShowing = true;
+  const item = _achievementQueue.shift();
+  const colors = { success: '#059669', info: '#2874A6', fire: '#EA580C', star: '#7C3AED' };
+  const bg = colors[item.type] || colors.info;
+  const el = document.createElement('div');
+  el.style.cssText = 'background:' + bg + ';color:#fff;padding:10px 16px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,0.25);animation:achieveSlide .3s ease-out;white-space:nowrap;opacity:1;transition:opacity .3s';
+  el.textContent = item.text;
+  const container = document.getElementById('achievementContainer');
+  container.appendChild(el);
+  setTimeout(function() { el.style.opacity = '0'; setTimeout(function() { el.remove(); processAchievementQueue(); }, 300); }, 2200);
+}
+
+// Achievement triggers — hooked into the message flow
+var _lastPhaseAchieved = 0;
+var _goodQuestionsAsked = 0;
+
+function checkAchievements(userMsg, phase) {
+  if (!userMsg) return;
+  const msg = userMsg.toLowerCase();
+
+  // Streak on case completion
+  const completedCases = JSON.parse(localStorage.getItem('rdx-completed-cases') || '[]');
+  if (completedCases.length > 0 && completedCases.length % 3 === 0 && completedCases.length !== parseInt(localStorage.getItem('rdx-last-streak-shown') || '0')) {
+    localStorage.setItem('rdx-last-streak-shown', completedCases.length);
+    setTimeout(function() { showAchievement('🔥 ' + completedCases.length + '-case streak!', 'fire'); }, 500);
+  }
+
+  // Good history questions
+  const histKeywords = ['fever','pain','duration','onset','prior','history','medication','allergy','family','travel','sick','contact','weight','fatigue','nausea','vomiting','cough','dyspnea','when did','how long','any other','do you have','have you'];
+  if (phase === 3 && histKeywords.some(function(k) { return msg.includes(k); })) {
+    _goodQuestionsAsked++;
+    if (_goodQuestionsAsked === 3) showAchievement('🎯 Thorough history!', 'success');
+    if (_goodQuestionsAsked === 7) showAchievement('💡 Excellent questioning!', 'star');
+  }
+
+  // Phase milestones
+  if (phase > _lastPhaseAchieved && phase > 1) {
+    _lastPhaseAchieved = phase;
+    const milestones = { 3:'📋 History started', 5:'🔬 Exam complete', 6:'🧪 Ordering workup', 9:'📝 Management phase', 10:'✅ Case complete!' };
+    if (milestones[phase]) setTimeout(function() { showAchievement(milestones[phase], 'success'); }, 400);
+  }
+}
+
+// Inject achievement CSS
+const achieveStyle = document.createElement('style');
+achieveStyle.textContent = '@keyframes achieveSlide { from { transform: translateX(40px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }';
+document.head.appendChild(achieveStyle);
+
+// Show tutorial on first load (after short delay so chat has loaded)
+setTimeout(showTutorialIfNeeded, 1200);
 </script>
 
 </body>
