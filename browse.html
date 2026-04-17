@@ -137,6 +137,21 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   .hero{padding:40px 18px 0}
   .section-header{flex-direction:column;gap:4px}
 }
+
+/* ── Exit Intent Modal ── */
+.exit-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+.exit-modal-overlay.show{display:flex;animation:fadeIn .2s ease-out}
+.exit-modal{background:linear-gradient(135deg,#0f2840 0%,#1a3d5c 100%);border-radius:16px;padding:32px;max-width:480px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.4);border:1.5px solid rgba(40,116,166,.3);position:relative}
+.exit-modal-close{position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(255,255,255,.6);font-size:24px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:6px;transition:all .15s}
+.exit-modal-close:hover{background:rgba(255,255,255,.1);color:#fff}
+.exit-modal-emoji{font-size:48px;text-align:center;margin-bottom:16px}
+.exit-modal-title{font-family:"DM Serif Display",Georgia,serif;font-size:1.8rem;color:#fff;text-align:center;margin-bottom:12px;line-height:1.2}
+.exit-modal-text{font-size:.95rem;color:rgba(255,255,255,.7);text-align:center;line-height:1.6;margin-bottom:24px}
+.exit-modal-btn{display:block;width:100%;background:#2874A6;color:#fff;padding:16px;border-radius:12px;font-size:16px;font-weight:700;border:none;cursor:pointer;transition:all .2s;font-family:inherit;margin-bottom:12px}
+.exit-modal-btn:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 8px 20px rgba(40,116,166,.3)}
+.exit-modal-dismiss{display:block;width:100%;background:transparent;color:rgba(255,255,255,.5);padding:12px;border:none;font-size:14px;cursor:pointer;text-align:center;font-family:inherit;transition:color .15s}
+.exit-modal-dismiss:hover{color:rgba(255,255,255,.8)}
+@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -1137,6 +1152,100 @@ function dismissResume() {
   
   localStorage.removeItem('rdx-active-session');
   document.getElementById('resume-prompt').style.display = 'none';
+}
+</script>
+
+<!-- ── Exit Intent Modal ── -->
+<div class="exit-modal-overlay" id="exitModal">
+  <div class="exit-modal">
+    <button class="exit-modal-close" onclick="dismissExitIntent()">×</button>
+    <div class="exit-modal-emoji">👋</div>
+    <h2 class="exit-modal-title">Wait! Try one quick case?</h2>
+    <p class="exit-modal-text">
+      Just 5 minutes. No signup required. See what ReasonDx is all about.
+    </p>
+    <button class="exit-modal-btn" onclick="startRandomEasyCase()">
+      🎲 Start Random Easy Case (5 min) →
+    </button>
+    <button class="exit-modal-dismiss" onclick="dismissExitIntent()">
+      No thanks, maybe later
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Exit Intent Logic ──
+(function() {
+  let exitIntentShown = sessionStorage.getItem('rdx-exit-intent-shown');
+  let hasStartedCase = localStorage.getItem('rdx-case-history');
+  
+  // Only show if: (1) never shown this session, (2) user hasn't started any cases yet
+  if (!exitIntentShown && !hasStartedCase) {
+    let exitIntentTriggered = false;
+    
+    document.addEventListener('mouseleave', function(e) {
+      // Detect mouse leaving at top of window
+      if (e.clientY < 10 && !exitIntentTriggered) {
+        exitIntentTriggered = true;
+        showExitIntent();
+      }
+    });
+  }
+})();
+
+function showExitIntent() {
+  const modal = document.getElementById('exitModal');
+  if (modal) {
+    modal.classList.add('show');
+    sessionStorage.setItem('rdx-exit-intent-shown', 'true');
+    
+    // Track with GA if available
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'exit_intent_shown', {
+        event_category: 'engagement',
+        event_label: 'browse_page'
+      });
+    }
+  }
+}
+
+function dismissExitIntent() {
+  const modal = document.getElementById('exitModal');
+  if (modal) {
+    modal.classList.remove('show');
+    
+    // Track dismissal
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'exit_intent_dismissed', {
+        event_category: 'engagement',
+        event_label: 'browse_page'
+      });
+    }
+  }
+}
+
+function startRandomEasyCase() {
+  // Track acceptance
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'exit_intent_accepted', {
+      event_category: 'engagement',
+      event_label: 'browse_page'
+    });
+  }
+  
+  // Get all easy cases (acuity 5)
+  const easyCases = CRT_INDEX.filter(function(c) {
+    return c.acuity === 5;
+  });
+  
+  if (easyCases.length > 0) {
+    // Pick random easy case
+    const randomCase = easyCases[Math.floor(Math.random() * easyCases.length)];
+    openCase(randomCase);
+  } else {
+    // Fallback: just start any case
+    startQuickCase();
+  }
 }
 </script>
 
