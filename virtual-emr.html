@@ -170,20 +170,21 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .score-banner{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(135deg,#EBF5FB,#E8F8F5);border-radius:12px;margin-bottom:20px;border:1.5px solid #AED6F1;box-shadow:0 2px 10px rgba(40,116,166,.1)}
 .score-number{font-size:32px;font-weight:800;color:var(--primary-dark);font-family:'IBM Plex Mono',monospace;line-height:1}
 .score-label{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase}
-.grade-input{width:60px;padding:4px 8px;border-radius:4px;border:1px solid var(--border);font-size:16px;font-family:'IBM Plex Mono',monospace}
+.grade-input{width:64px;padding:6px 10px;border-radius:6px;border:1.5px solid var(--border);font-size:15px;font-family:'IBM Plex Mono',monospace;text-align:center;transition:border-color .15s,box-shadow .15s}.grade-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.12);outline:none}
 .comment-input{width:100%;padding:4px 8px;border-radius:4px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
-.grade-total-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--surface-alt);border-radius:var(--radius)}
-.overall-textarea{width:100%;min-height:120px;padding:12px;border-radius:var(--radius);border:1px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;line-height:1.6;resize:vertical}
+.grade-total-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(135deg,#EBF5FB,#E0F2F1);border-radius:var(--radius);border:1px solid #B2DFDB}
+.overall-textarea{width:100%;min-height:120px;padding:12px 14px;border-radius:var(--radius);border:1.5px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;line-height:1.6;resize:vertical;transition:border-color .15s,box-shadow .15s}.overall-textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.08);outline:none}
 .assign-row{display:flex;gap:8px;margin-bottom:20px}
 .assign-input{flex:1;padding:10px 14px;border-radius:var(--radius);border:1px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif}
 .btn-assign{padding:10px 20px;border-radius:var(--radius);border:none;background:var(--primary);color:#fff;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
-.student-card{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:var(--radius);border:1px solid var(--border-light);background:var(--surface-alt);margin-bottom:8px}
+.student-card{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:var(--radius);border:1px solid var(--border-light);background:var(--surface-alt);margin-bottom:8px;transition:border-color .15s}.student-card:hover{border-color:var(--primary)}
 .btn-remove{padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:transparent;font-size:11px;color:var(--text-secondary);cursor:pointer;font-family:'DM Sans',sans-serif}.btn-remove:hover{background:var(--danger-light);color:var(--danger);border-color:var(--danger)}
 .submission-card{padding:12px 16px;border-radius:var(--radius);cursor:pointer;border:1px solid var(--border-light);background:var(--surface);display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;transition:all .2s}
 .submission-card:hover{border-color:var(--primary);background:#F0F7FF;transform:translateX(2px)}.submission-card.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 2px 8px rgba(40,116,166,.15);border-left:4px solid var(--primary)}
 .empty-state{text-align:center;padding:40px 0;color:var(--text-muted)}
 .week-select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
 .doc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.word-count{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-weight:500}
 .toast{position:fixed;bottom:28px;right:24px;padding:12px 20px;background:var(--accent);color:#fff;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:1000;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}.toast.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 @media(max-width:900px){.sidebar{width:56px;overflow:hidden}.sidebar-btn span{display:none}.sidebar-btn{justify-content:center;padding:10px 0}.demo-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}}
 /* ═══ Interactive Feature Styles ═══ */
@@ -416,7 +417,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .rdx-mission-ql:hover{background:rgba(255,255,255,.22)}
 
 /* ── Progress badge on workflow bar ── */
-.rdx-wf-progress{margin-left:auto;display:flex;align-items:center;gap:12px;padding:0 16px;flex-shrink:0}
+.rdx-wf-progress{margin-left:auto;display:flex;align-items:center;gap:14px;padding:0 16px;flex-shrink:0;border-left:1px solid var(--border-light)}
 .rdx-wf-prog-item{font-size:11px;font-weight:600;color:var(--text-muted);display:flex;align-items:center;gap:4px}
 .rdx-wf-prog-item.done{color:var(--accent)}
 .rdx-wf-prog-item.warn{color:#F59E0B}
@@ -449,8 +450,8 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .rdx-workflow-bar{display:flex;align-items:stretch;background:#fff;border-bottom:1px solid var(--border-light);padding:0;overflow-x:auto;flex-shrink:0}
 .rdx-wf-step{display:flex;align-items:center;gap:8px;padding:9px 16px;font-size:11px;font-weight:600;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s;text-decoration:none;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
 .rdx-wf-step:hover{color:var(--primary);background:#F0F7FF}
-.rdx-wf-step.active{color:var(--primary);border-bottom-color:var(--primary);background:#EBF4FB}
-.rdx-wf-step.done{color:var(--accent)}
+.rdx-wf-step.active{color:var(--primary);border-bottom-color:var(--primary);border-bottom-width:3px;background:linear-gradient(180deg,#EBF4FB,#F0F7FF);font-weight:700}
+.rdx-wf-step.done{color:var(--accent);font-weight:600}
 .rdx-wf-num{width:18px;height:18px;border-radius:50%;background:var(--border);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .rdx-wf-step.active .rdx-wf-num{background:var(--primary)}
 .rdx-wf-step.done .rdx-wf-num{background:var(--accent)}
@@ -2397,7 +2398,7 @@ function renderDocumentationOnly() {
   var submitted = S.submitted;
   var sb = submitted
     ? '<span style="color:var(--success);font-weight:600">✓ Submitted</span>'
-    : '<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">' + I.send + ' Submit Documentation</button>';
+    : '<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()" style="padding:12px 28px;font-size:14px;letter-spacing:.01em">' + I.send + ' Submit Note →</button>';
 
   var _debrief = submitted ? buildEMRWhatsNext(CASE_ID) : '';
 
@@ -2514,14 +2515,14 @@ function renderFeedback(){
 // ===============================================================
 function renderGrading(){
   let sh;
-  if(!S.allSubmissions.length)sh='<div class="empty-state">No student submissions available.'+(S.currentUser.role==="faculty"?' Check Assignments tab or ask admin to assign students.':'')+'</div>';
+  if(!S.allSubmissions.length)sh='<div style="text-align:center;padding:40px 20px"><div style="font-size:36px;margin-bottom:12px">📭</div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">No submissions yet</div><div style="font-size:13px;color:var(--text-secondary)">'+(S.currentUser.role==="faculty"?'Students will appear here once they submit a note. Use the Assignments tab to assign students.':'No submissions found.')+'</div></div>';
   else sh=S.allSubmissions.map((sub,i)=>'<div class="submission-card '+(S.selectedSubmission===i?"selected":"")+'" onclick="selectSubmission('+i+')"><div><span style="font-weight:600">'+esc(sub.studentName)+'</span><span style="color:var(--text-secondary);font-size:13px;margin-left:12px">'+esc(sub.week)+'</span></div><span style="font-size:12px;color:var(--text-muted)">'+new Date(sub.timestamp).toLocaleDateString()+'</span></div>').join("");
   let gh="";
   if(S.selectedSubmission!==null){
     const sub=S.allSubmissions[S.selectedSubmission];
     const nt=sub.fields?assembleNoteText(sub.fields):(sub.text||"");
     const ea=db("annotations-"+sub.studentName+"-"+sub.week)||[];
-    gh+=sectionCard(sub.studentName+" -- "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <strong>To annotate:</strong> Select text -> color -> comment<span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
+    gh+=sectionCard(sub.studentName+" -- "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <span style="opacity:.65">Select text to annotate</span><span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
     const tot=Object.values(S.gradeScores).reduce((a,b)=>a+(parseInt(b)||0),0);
     // Chart Review Summary panel (from tracking module)
     if(window.ChartTracker&&sub.chartReviewData){gh+=ChartTracker.renderSummary(sub.chartReviewData.chartReview)}
@@ -3467,11 +3468,11 @@ function renderWorkflowBar(activeTab) {
 
 // == FEATURE 3: COACHDX STARTER CHIPS ======================================
 var COACH_STARTERS = [
-  { icon:'Dx', text:'Here\'s my differential: I\'m thinking this could be...' },
+  { icon:'🧠', text:'Here\'s my differential: I\'m thinking this could be...' },
   { icon:'❓', text:'I\'m not sure what to make of these vitals/labs...' },
-  { icon:'Rx', text:'My plan is to start with... -- does that make sense?' },
-  { icon:'Chart', text:'Walk me through this case. Where should I start?' },
-  { icon:'!', text:'The finding that concerns me most is...' },
+  { icon:'💊', text:'My plan is to start with... — does that make sense?' },
+  { icon:'📋', text:'Walk me through this case. Where should I start?' },
+  { icon:'⚠️', text:'The finding that concerns me most is...' },
 ];
 
 function rdxStartCoach(text) {
@@ -3937,7 +3938,7 @@ function renderProblemsInteractive(){
 
   const rows=problems.map((p,i)=>{
     let actions="";
-    if(isStudent)actions='<td><button type="button" class="btn-remove" style="margin-right:4px" onclick="resolveProblem('+i+')">Resolve</button><button type="button" class="btn-remove" onclick="deleteProblem('+i+')">✕</button></td>';
+    if(isStudent)actions='<td style="white-space:nowrap"><button type="button" class="btn-remove" style="margin-right:4px;color:var(--accent);border-color:var(--accent)" onclick="resolveProblem('+i+')">✓ Resolve</button><button type="button" class="btn-remove" onclick="deleteProblem('+i+')">✕</button></td>';
     return'<tr style="'+(p.status==="Resolved"?"opacity:0.5":"")+'"><td class="td-bold">'+esc(p.problem)+'</td><td>'+badge(p.icd)+'</td><td class="td-muted">'+esc(p.onset)+'</td><td>'+badge(p.status,p.status==="Resolved"?"badge-warning":"badge-accent")+'</td><td class="td-muted">'+esc(p.notes)+'</td>'+actions+'</tr>';
   });
 
@@ -3982,7 +3983,7 @@ function renderOrders(){
   let completedImgs=S.imgOrders.filter(o=>o.resulted);
 
   // Order buttons
-  let html='<div style="display:flex;gap:12px;margin-bottom:16px"><button type="button" class="btn-submit" onclick="showLabOrderDialog()">'+I.flask+' Order Labs</button><button type="button" class="btn-submit" style="background:var(--accent)" onclick="showImgOrderDialog()">'+I.image+' Order Imaging</button><button type="button" class="btn-submit" style="background:#6A1B9A" onclick="showReferralDialog()">'+I.people+' Referral</button></div>';
+  let html='<div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap"><button type="button" class="btn-submit" style="padding:11px 20px;font-size:13px" onclick="showLabOrderDialog()">'+I.flask+' Order Labs</button><button type="button" class="btn-submit" style="background:var(--accent);padding:11px 20px;font-size:13px" onclick="showImgOrderDialog()">'+I.image+' Order Imaging</button><button type="button" class="btn-submit" style="background:#6A1B9A;padding:11px 20px;font-size:13px" onclick="showReferralDialog()">'+I.people+' Consult / Referral</button></div>';
 
   // Pending orders
   if(pendingLabs.length||pendingImgs.length){
