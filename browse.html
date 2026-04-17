@@ -143,6 +143,13 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   .search{min-width:auto}
   .hero{padding:40px 18px 0}
   .section-header{flex-direction:column;gap:4px}
+  /* Mobile: full strip scrolls horizontally, doesn't wrap */
+  #fullStrip .stats{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  #fullStrip .stats::-webkit-scrollbar{display:none}
+  #fullStrip .stat{flex:0 0 auto;min-width:90px}
+  /* New user strip: just two columns, no scroll confusion */
+  #newUserStrip .stats{flex-wrap:nowrap}
+  #newUserStrip .stat:first-child{flex:1}
 }
 
 /* ── Exit Intent Modal ── */
@@ -267,8 +274,10 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 
   <script>
   (function() {
-    // Only show if super agent script loaded
+    // Only show if super agent script loaded AND user has some history
     if (!window.RdxSuperAgent) return;
+    var simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
+    if (simCount < 3) return; // new users don't need personalization yet — reduces spinner confusion
 
     var panel = document.getElementById('rdx-super-panel');
     if (!panel) return;
@@ -416,7 +425,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 
   <!-- Email banner removed - using post-case modal instead -->
 
-  <a href="/puzzles.html" class="puzzle-banner">
+  <a href="/puzzles.html" class="puzzle-banner" id="puzzleBanner" style="display:none">
     <div class="puzzle-banner-left">
       <span class="puzzle-banner-icon">🧩</span>
       <div>
@@ -428,43 +437,92 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   </a>
   <div style="height:16px"></div>
 
-  <div class="stats" id="statStrip">
-    <div class="stat active" data-mode="simulate" onclick="setMode('simulate')">
-      <div class="stat-num">368</div>
-      <div class="stat-label">Start Simulation</div>
-      <div class="stat-desc">AI patient encounters</div>
+  <!-- ── MODE STRIP: simplified for new users, full for experienced ── -->
+  <div id="statStrip">
+
+    <!-- NEW USER VIEW: clean single-mode strip with expandable "More" -->
+    <div id="newUserStrip" style="display:none">
+      <div class="stats">
+        <div class="stat active" data-mode="simulate" onclick="setMode('simulate')">
+          <div class="stat-num">394</div>
+          <div class="stat-label">Clinical Cases</div>
+          <div class="stat-desc">AI patient simulations — start here</div>
+        </div>
+        <div class="stat" onclick="document.getElementById('newUserStrip').style.display='none';document.getElementById('fullStrip').style.display='block';gtag&&gtag('event','explore_modes_click')" style="cursor:pointer;max-width:140px">
+          <div class="stat-num" style="font-size:1.2rem;color:rgba(255,255,255,0.4)">＋</div>
+          <div class="stat-label" style="color:rgba(255,255,255,0.5)">More Modes</div>
+          <div class="stat-desc" style="color:rgba(255,255,255,0.3)">Coach, Learn, EMR</div>
+        </div>
+      </div>
     </div>
-    <div class="stat" data-mode="practice" onclick="setMode('practice')">
-      <div class="stat-num">364</div>
-      <div class="stat-label">Practice Cases</div>
-      <div class="stat-desc">Virtual EMR cases</div>
+
+    <!-- EXPERIENCED USER VIEW: full 7-tab strip -->
+    <div id="fullStrip" style="display:none">
+      <div class="stats">
+        <div class="stat active" data-mode="simulate" onclick="setMode('simulate')">
+          <div class="stat-num">368</div>
+          <div class="stat-label">Simulation</div>
+          <div class="stat-desc">AI patient encounters</div>
+        </div>
+        <div class="stat" data-mode="practice" onclick="setMode('practice')">
+          <div class="stat-num">364</div>
+          <div class="stat-label">Practice</div>
+          <div class="stat-desc">Virtual EMR cases</div>
+        </div>
+        <div class="stat" data-mode="coach" onclick="setMode('coach')">
+          <div class="stat-num">176</div>
+          <div class="stat-label">Coach</div>
+          <div class="stat-desc">Socratic topics</div>
+        </div>
+        <div class="stat" data-mode="learn" onclick="setMode('learn')">
+          <div class="stat-num">36</div>
+          <div class="stat-label">Learn</div>
+          <div class="stat-desc">Pathophysiology</div>
+        </div>
+        <a href="/cognitive-portrait.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+          <div class="stat-num" style="color:#85C1E9;font-size:28px">🧠</div>
+          <div class="stat-label" style="color:rgba(133,193,233,.8)">Portrait</div>
+          <div class="stat-desc">EPA &amp; LCME evidence</div>
+        </a>
+        <a href="/faculty.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+          <div class="stat-num" style="color:#F59E0B;font-size:28px">👩‍⚕️</div>
+          <div class="stat-label" style="color:rgba(245,158,11,.8)">Faculty</div>
+          <div class="stat-desc">Cohort analytics</div>
+        </a>
+        <a href="/ilp.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+          <div class="stat-num" style="color:#10B981;font-size:28px">🎯</div>
+          <div class="stat-label" style="color:rgba(16,185,129,.8)">ILP</div>
+          <div class="stat-desc">Learning plan</div>
+        </a>
+      </div>
     </div>
-    <div class="stat" data-mode="coach" onclick="setMode('coach')">
-      <div class="stat-num">176</div>
-      <div class="stat-label">Get Coaching</div>
-      <div class="stat-desc">Socratic reasoning topics</div>
-    </div>
-    <div class="stat" data-mode="learn" onclick="setMode('learn')">
-      <div class="stat-num">36</div>
-      <div class="stat-label">Learn Mechanisms</div>
-      <div class="stat-desc">Pathophysiology modules</div>
-    </div>
-    <a href="/cognitive-portrait.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
-      <div class="stat-num" style="color:#85C1E9;font-size:28px">🧠</div>
-      <div class="stat-label" style="color:rgba(133,193,233,.8)">Portrait</div>
-      <div class="stat-desc">EPA &amp; LCME evidence</div>
-    </a>
-    <a href="/faculty.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
-      <div class="stat-num" style="color:#F59E0B;font-size:28px">👩‍⚕️</div>
-      <div class="stat-label" style="color:rgba(245,158,11,.8)">Faculty</div>
-      <div class="stat-desc">Cohort analytics</div>
-    </a>
-    <a href="/ilp.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
-      <div class="stat-num" style="color:#10B981;font-size:28px">🎯</div>
-      <div class="stat-label" style="color:rgba(16,185,129,.8)">ILP</div>
-      <div class="stat-desc">Learning plan</div>
-    </a>
-  </div>
+
+  </div><!-- end statStrip -->
+
+  <script>
+  // ── NEW USER vs EXPERIENCED USER experience ──────────────────────────────
+  (function() {
+    var simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
+    var isNew = simCount < 3;
+
+    // Mode strip
+    if (isNew) {
+      document.getElementById('newUserStrip').style.display = 'block';
+    } else {
+      document.getElementById('fullStrip').style.display = 'block';
+    }
+
+    // Puzzle banner — only show to users who have done at least 1 case
+    var puzzleBanner = document.getElementById('puzzleBanner');
+    if (puzzleBanner && simCount >= 1) puzzleBanner.style.display = 'flex';
+
+    // For new users: pre-sort grid to show easy cases first (acuity 4-5)
+    if (isNew) {
+      window._newUserMode = true; // read by renderGrid to sort easiest first
+    }
+  })();
+  </script>
+
 </div>
 
 <div class="container" id="real-cases-section">
@@ -771,6 +829,8 @@ function render(){var q=(document.getElementById('searchInput').value||'').toLow
   if(aArc!==bArc) return bArc-aArc;
   if(a.featured&&!b.featured) return -1;
   if(!a.featured&&b.featured) return 1;
+  // New users see easiest cases first (acuity 4-5 = routine/non-urgent)
+  if(window._newUserMode) return (b.acuity||3)-(a.acuity||3);
   return (a.acuity||3)!==(b.acuity||3)?(a.acuity||3)-(b.acuity||3):a.title.localeCompare(b.title);
 });}else{filtered.sort(function(a,b){return a.title.localeCompare(b.title);});}
 var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';document.getElementById('count').textContent=filtered.length+' '+noun;var grid=document.getElementById('grid');if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';return;}document.getElementById('empty').style.display='none';

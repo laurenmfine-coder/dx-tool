@@ -90,10 +90,31 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       No account. No email. Just click and start learning.
     </p>
     
-    <a href="/browse.html" class="instant-cta" onclick="gtag('event','click_instant_start',{source:'hero'})">
+    <a href="/simulation-engine.html?case=anaphylaxis" id="landingCTA" class="instant-cta" onclick="gtag('event','click_instant_start',{source:'hero'})">
       Start Your First Case
       <span class="arrow">→</span>
     </a>
+
+    <script>
+    // Use the same day-seeded COTD rotation as browse page
+    (function() {
+      var COTD_POOL = [
+        'anaphylaxis','stemi-v1','stroke-v1','pe-v1','dka-v1',
+        'septic-shock-urosepsis','meningitis-v1','acute-aortic-dissection',
+        'pneumonia','sah-v1','ectopic-pregnancy','hyperkalemia-cardiac',
+        'acute-cholecystitis','gout-flare','new-onset-atrial-fibrillation',
+        'migraine','cellulitis','deep-vein-thrombosis','thyroid-storm',
+        'alcohol-withdrawal','upper-gi-bleed','testicular-torsion',
+        'angle-closure-glaucoma','pericarditis-v1','severe-pancreatitis',
+        'guillain-barre','sle-flare-with-cytopenias','cardiac-tamponade'
+      ];
+      var now = new Date();
+      var dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / 86400000);
+      var todayCase = COTD_POOL[dayOfYear % COTD_POOL.length];
+      var btn = document.getElementById('landingCTA');
+      if (btn) btn.href = '/simulation-engine.html?case=' + encodeURIComponent(todayCase);
+    })();
+    </script>
     
     <p class="hero-footnote">
       Free to use • 394 cases • All specialties
