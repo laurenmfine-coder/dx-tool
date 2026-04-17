@@ -138,6 +138,7 @@ window.RDXOrderMode = {
               'class="rdx-order-search-input" ',
               'placeholder="Search orders — e.g. \'troponin\', \'heparin\', \'CT chest\', \'cardiology consult\'…" ',
               'autocomplete="off" ',
+              'autocorrect="off" autocapitalize="off" spellcheck="false" ',
               'oninput="RDXOrderMode._onSearch(this.value,\'' + _esc(caseId) + '\')" ',
               'onkeydown="RDXOrderMode._onSearchKey(event)"',
             '>',
