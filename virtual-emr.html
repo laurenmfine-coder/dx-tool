@@ -99,7 +99,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 
 /* Lab Report */
 .lab-report{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.lab-report-header{background:var(--surface-alt);padding:12px 16px;border-bottom:1px solid var(--border)}
+.lab-report-header{background:linear-gradient(90deg,#F0F7FF,#F8FAFC);padding:12px 16px;border-bottom:2px solid var(--border)}
 .lab-report-title{font-size:14px;font-weight:700}
 .lab-report-meta{font-size:11px;color:var(--text-muted);margin-top:4px;display:grid;grid-template-columns:1fr 1fr;gap:4px}
 .lab-group-header{background:linear-gradient(90deg,#E8F4FD,#F5F6F8);padding:8px 16px;font-size:11px;font-weight:800;color:var(--primary-dark);text-transform:uppercase;letter-spacing:.8px;border-top:1px solid var(--border-light);border-bottom:1px solid var(--border-light)}
@@ -111,11 +111,11 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .lab-value.high{color:var(--flag-high)}.lab-value.low{color:var(--flag-low)}
 .lab-unit{color:var(--text-muted);font-size:11px}.lab-range{color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace}
 .lab-flag{font-weight:700;font-size:11px;text-align:center}.lab-flag.high{color:var(--flag-high)}.lab-flag.low{color:var(--flag-low)}
-.lab-report-footer{background:var(--surface-alt);padding:8px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between}
+.lab-report-footer{background:var(--surface-alt);padding:8px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace}
 
 /* Imaging Report */
 .imaging-report{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:13px}
-.imaging-report-header{background:var(--surface-alt);padding:14px 16px;border-bottom:1px solid var(--border)}
+.imaging-report-header{background:linear-gradient(90deg,#F8FAFC,#fff);padding:14px 18px;border-bottom:1px solid var(--border)}
 .imaging-report-title{font-size:14px;font-weight:700;margin-bottom:8px}
 .imaging-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;font-size:11px}
 .imaging-meta-label{color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.3px}
@@ -418,10 +418,10 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .rdx-mission-ql:hover{background:rgba(255,255,255,.22)}
 
 /* ── Progress badge on workflow bar ── */
-.rdx-wf-progress{margin-left:auto;display:flex;align-items:center;gap:14px;padding:0 16px;flex-shrink:0;border-left:1px solid var(--border-light)}
-.rdx-wf-prog-item{font-size:11px;font-weight:600;color:var(--text-muted);display:flex;align-items:center;gap:4px}
-.rdx-wf-prog-item.done{color:var(--accent)}
-.rdx-wf-prog-item.warn{color:#F59E0B}
+.rdx-wf-progress{margin-left:auto;display:flex;align-items:center;gap:10px;padding:0 14px;flex-shrink:0;border-left:1px solid var(--border-light)}
+.rdx-wf-prog-item{font-size:10px;font-weight:700;color:var(--text-muted);display:flex;align-items:center;gap:3px;padding:3px 7px;border-radius:10px;background:var(--surface-alt);border:1px solid var(--border-light)}
+.rdx-wf-prog-item.done{color:var(--accent);background:#E0F2F1;border-color:#A7F3D0}
+.rdx-wf-prog-item.warn{color:#B45309;background:#FFFBEB;border-color:#FDE68A}
 
 /* ── Sidebar AI section visual strip ── */
 .rdx-sidebar-ai-section{background:linear-gradient(180deg,#EBF4FB 0%,#F0F9FF 100%);border-top:2px solid #2874A6;margin:-2px 0 0;padding:6px 0 4px}
@@ -2415,6 +2415,11 @@ function renderDocumentationOnly() {
   ) + _debrief;
 }
 
+function _updateNoteWC(){
+  var wc=Object.values(S.noteFields||{}).reduce(function(t,v){return t+(v?v.trim().split(/\s+/).filter(Boolean).length:0);},0);
+  var el=document.getElementById('wordCount');
+  if(el){el.textContent=wc+' words';el.style.color=wc>150?'var(--accent)':wc>60?'var(--primary)':'var(--text-muted)';}
+}
 function renderDocumentation(){
   // -- Interview / HPI entry callout (only show when note is empty) ---------
   var _hasContent = Object.values(S.noteFields||{}).some(function(v){ return v && v.trim().length > 0; });
@@ -2481,7 +2486,7 @@ function renderDocumentation(){
   let ns=getActiveNoteTemplate().map(sec=>{
     const v=S.noteFields[sec.id]||"";
     const sc=sec.size?" "+sec.size:"";
-    return'<div class="note-section"><div class="note-section-header">▸ '+esc(sec.label)+'</div><div><textarea class="note-field'+sc+'" id="note-'+sec.id+'" placeholder="'+esc(sec.hint)+'" '+(S.submitted?"disabled":"")+' oninput="updateNoteField(\''+sec.id+'\',this.value)">'+esc(v)+'</textarea></div></div>';
+    return'<div class="note-section"><div class="note-section-header">▸ '+esc(sec.label)+'</div><div><textarea class="note-field'+sc+'" id="note-'+sec.id+'" placeholder="'+esc(sec.hint)+'" '+(S.submitted?"disabled":"")+' oninput="updateNoteField(\''+sec.id+'\',this.value);_updateNoteWC()">'+esc(v)+'</textarea></div></div>';
   }).join("");
   // FIX: Submit button always enabled when role is student, check content in handler
   const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">'+I.send+' Submit Documentation</button>';
@@ -2515,6 +2520,7 @@ function renderFeedback(){
 // GRADING (faculty/admin)
 // ===============================================================
 function renderGrading(){
+  var _gradedCount=S.allSubmissions.filter(function(s){return s.feedback&&s.feedback.totalScore!==undefined;}).length;
   let sh;
   if(!S.allSubmissions.length)sh='<div style="text-align:center;padding:40px 20px"><div style="font-size:36px;margin-bottom:12px">📭</div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">No submissions yet</div><div style="font-size:13px;color:var(--text-secondary)">'+(S.currentUser.role==="faculty"?'Students will appear here once they submit a note. Use the Assignments tab to assign students.':'No submissions found.')+'</div></div>';
   else sh=S.allSubmissions.map((sub,i)=>'<div class="submission-card '+(S.selectedSubmission===i?"selected":"")+'" onclick="selectSubmission('+i+')"><div><span style="font-weight:600">'+esc(sub.studentName)+'</span><span style="color:var(--text-secondary);font-size:13px;margin-left:12px">'+esc(sub.week)+'</span></div><span style="font-size:12px;color:var(--text-muted)">'+new Date(sub.timestamp).toLocaleDateString()+'</span></div>').join("");
@@ -3304,7 +3310,7 @@ function renderWorkflowBar(activeTab) {
     if (i < activeStep) cls = ' done';
     var destTab = step.tabs[0];
     html += '<button class="rdx-wf-step'+cls+'" onclick="switchTab(\''+destTab+'\')" title="'+step.hint+'">'
-      + '<span class="rdx-wf-num">'+(i < activeStep ? '✓' : (i+1))+'</span>'
+      + '<span class="rdx-wf-num">'+(_stepDone ? '✓' : i < activeStep ? '✓' : (i+1))+'</span>'
       + step.icon + ' ' + step.label
       + '</button>';
   });
@@ -3343,11 +3349,11 @@ var _AI_TAB_IDS = ['coach','crt','autofeedback','feedback'];
 var SIDEBAR_TOOLTIPS = {
   'coach':        'CoachDx -- Socratic AI attending. Talk through your differential. Won\'t give answers, asks the right questions.',
   'crt':          'ReasonDx CRT -- Step-by-step clinical reasoning trainer. Builds your diagnostic scaffold systematically.',
-  'autofeedback': 'Doc Assessment -- AI reads your note and gives structured feedback on HPI quality, assessment & plan.',
+  'autofeedback': 'AI Feedback -- AI reads your note and scores it by criterion. Appears automatically after you submit.',
   'feedback':     'Faculty Feedback -- Awaits your attending\'s annotations and score on your submitted note.',
-  'orders':       'Orders & CDS -- Place lab, imaging, and medication orders. Clinical decision support fires automatically.',
-  'oral':         'Oral Presentation -- Practice your 2-minute case presentation. Scored on structure and completeness.',
-  'documentation':'Documentation -- Write your H&P here. Start with the HPI: interview your patient, then document.',
+  'orders':       'Order Tests -- Place labs and imaging. Results arrive automatically. CDS alerts fire in real time.',
+  'oral':         'Present Case -- Practice your 2-minute presentation to your attending. Use the SBAR scaffold to start.',
+  'documentation':'Write Note -- Start with the patient interview, then write your H&P here. AI feedback fires on submit.',
 };
 
 // Inject tooltips into sidebar button builder
@@ -3395,10 +3401,11 @@ function renderMissionCard() {
     { icon:'Coach', label:'CoachDx',  tab:'coach' },
   ];
 
+  var _pq = (window.CRT_DATA && CASE_ID && window.CRT_DATA[CASE_ID] && window.CRT_DATA[CASE_ID].profQuestion) ? window.CRT_DATA[CASE_ID].profQuestion : null;
   return '<div class="rdx-mission-card">'
     + '<div class="rdx-mission-badge">Your Case</div>'
     + '<div class="rdx-mission-cc">' + esc(cc) + '</div>'
-    + '<div class="rdx-mission-sub">Review the chart, take the history, build your differential, and present to your AI attending.</div>'
+    + '<div class="rdx-mission-sub">'+(_pq ? esc(_pq) : 'Review the chart, take the history, build your differential, and present to your AI attending.')+'</div>'
     + '<button class="rdx-mission-begin" onclick="switchTab(\'labs\')">' 
     +   '→ Start Chart Review'
     + '</button>'
@@ -3431,10 +3438,10 @@ function getWorkflowProgress() {
 // Upgraded workflow bar with renamed steps + progress badge
 function renderWorkflowBar(activeTab) {
   var steps = [
-    { id:'chart',    label:'Chart Review',        icon:'Chart', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
+    { id:'chart',    label:'Chart Review',        icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
     { id:'interview',label:'Patient Interview',   icon:'🗣️', tabs:['interview'] },
     { id:'reason',   label:'Orders & Reasoning',  icon:'🔬', tabs:['crt','orders','oral'] },
-    { id:'coaching', label:'Talk to Attending',   icon:'Coach', tabs:['coach','autofeedback','feedback'] },
+    { id:'coaching', label:'Talk to Attending',   icon:'🧠', tabs:['coach','autofeedback','feedback'] },
     { id:'document', label:'Write Note',          icon:'📝', tabs:['documentation'] },
   ];
   var activeStep = 0;
@@ -3469,11 +3476,11 @@ function renderWorkflowBar(activeTab) {
 
 // == FEATURE 3: COACHDX STARTER CHIPS ======================================
 var COACH_STARTERS = [
-  { icon:'🧠', text:'Here\'s my differential: I\'m thinking this could be...' },
-  { icon:'❓', text:'I\'m not sure what to make of these vitals/labs...' },
-  { icon:'💊', text:'My plan is to start with... — does that make sense?' },
-  { icon:'📋', text:'Walk me through this case. Where should I start?' },
-  { icon:'⚠️', text:'The finding that concerns me most is...' },
+  { icon:'🎯', text:'My leading diagnosis is ___ because...' },
+  { icon:'🔬', text:'The lab/imaging finding that changes my thinking most is...' },
+  { icon:'🤔', text:'I considered ___ but ruled it out because...' },
+  { icon:'💊', text:'My plan: I want to start with ___ — does the order make sense?' },
+  { icon:'⚠️', text:'I\'m worried about missing ___ because the vitals show...' },
 ];
 
 function rdxStartCoach(text) {
@@ -4267,9 +4274,7 @@ function deleteImmunization(idx){
 // ===============================================================
 // ENCOUNTER VITALS DISPLAY
 // ===============================================================
-function renderVitalsInteractive(){
-  return sectionCard("Vitals Trend",I.activity,tableHTML(["Date","Setting","BP","HR","RR","Temp","SpO2","Wt","BMI"],VITALS.map(v=>'<tr><td style="font-weight:500">'+esc(v.date)+'</td><td>'+badge(v.setting)+'</td><td class="td-mono" style="'+(parseInt(v.bp)>=140?"color:var(--flag-high);font-weight:600":"")+'">'+esc(v.bp)+'</td><td class="td-mono">'+v.hr+'</td><td class="td-mono">'+v.rr+'</td><td class="td-mono">'+esc(v.temp)+'</td><td class="td-mono">'+esc(v.spo2)+'</td><td class="td-mono">'+esc(v.wt)+'</td><td class="td-mono">'+v.bmi+'</td></tr>')));
-}
+function renderVitalsInteractive(){ return renderVitals(); }
 
 // Make functions globally available
 if(typeof window!=='undefined'){
