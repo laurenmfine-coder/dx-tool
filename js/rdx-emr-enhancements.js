@@ -791,12 +791,12 @@ window.RDXFacultyDashboard = {
           ['Scored', scoredSubs.length, '#D97706'],
           ['Avg Score', avgScore !== null ? avgScore + '/' + maxScore : '—', '#7C3AED'],
         ].map(function(stat) { return `
-          <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:12px;padding:16px;text-align:center">
-            <div style="font-size:24px;font-weight:800;color:${stat[2]};font-family:'IBM Plex Mono',monospace">
+          <div style="background:#fff;border:1.5px solid #E2E8F0;border-radius:12px;padding:16px;text-align:center;border-top:3px solid ${stat[2]};box-shadow:0 2px 8px rgba(0,0,0,.04)">
+            <div style="font-size:26px;font-weight:800;color:${stat[2]};font-family:'IBM Plex Mono',monospace;line-height:1">
               ${stat[1]}
             </div>
             <div style="font-size:11px;font-weight:700;color:#64748B;text-transform:uppercase;
-              letter-spacing:.5px;margin-top:4px">${stat[0]}</div>
+              letter-spacing:.6px;margin-top:6px">${stat[0]}</div>
           </div>`;}).join('')}
       </div>
 

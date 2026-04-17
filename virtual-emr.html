@@ -20,6 +20,7 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
 input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)!important}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
 
 .login-wrapper{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--accent) 100%)}
 .login-card{background:var(--surface);border-radius:16px;padding:48px 40px;max-width:440px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:fadeIn .5s ease}
@@ -170,7 +171,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .score-banner{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(135deg,#EBF5FB,#E8F8F5);border-radius:12px;margin-bottom:20px;border:1.5px solid #AED6F1;box-shadow:0 2px 10px rgba(40,116,166,.1)}
 .score-number{font-size:32px;font-weight:800;color:var(--primary-dark);font-family:'IBM Plex Mono',monospace;line-height:1}
 .score-label{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase}
-.grade-input{width:64px;padding:6px 10px;border-radius:6px;border:1.5px solid var(--border);font-size:15px;font-family:'IBM Plex Mono',monospace;text-align:center;transition:border-color .15s,box-shadow .15s}.grade-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.12);outline:none}
+.grade-input{width:76px;text-align:center;padding:6px 10px;border-radius:6px;border:1.5px solid var(--border);font-size:15px;font-family:'IBM Plex Mono',monospace;text-align:center;transition:border-color .15s,box-shadow .15s}.grade-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.12);outline:none}
 .comment-input{width:100%;padding:4px 8px;border-radius:4px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
 .grade-total-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(135deg,#EBF5FB,#E0F2F1);border-radius:var(--radius);border:1px solid #B2DFDB}
 .overall-textarea{width:100%;min-height:120px;padding:12px 14px;border-radius:var(--radius);border:1.5px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;line-height:1.6;resize:vertical;transition:border-color .15s,box-shadow .15s}.overall-textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.08);outline:none}
@@ -2469,7 +2470,7 @@ function renderDocumentation(){
       + '</div>'
       + '</div>';
   }
-  var docTitle="Encounter Documentation";
+  var docTitle="Encounter Documentation"; var _noteWC=Object.values(S.noteFields||{}).reduce(function(t,v){return t+(v?v.trim().split(/\s+/).filter(Boolean).length:0);},0);
   if(S.clinicalSetting==="inpatient")docTitle="Admission H&P";
   else if(S.clinicalSetting==="consult")docTitle="Consultation Note";
   else if(S.clinicalSetting==="icu")docTitle="ICU Progress Note";
@@ -2522,7 +2523,7 @@ function renderGrading(){
     const sub=S.allSubmissions[S.selectedSubmission];
     const nt=sub.fields?assembleNoteText(sub.fields):(sub.text||"");
     const ea=db("annotations-"+sub.studentName+"-"+sub.week)||[];
-    gh+=sectionCard(sub.studentName+" -- "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <span style="opacity:.65">Select text to annotate</span><span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
+    gh+='<div style="background:linear-gradient(135deg,#1B4F72,#2874A6);color:#fff;padding:14px 20px;border-radius:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between"><div><div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.6;margin-bottom:4px">Now Grading</div><div style="font-size:18px;font-weight:800;letter-spacing:-.3px">'+esc(sub.studentName)+'</div><div style="font-size:12px;opacity:.7;margin-top:2px">'+esc(sub.week)+' · submitted '+new Date(sub.timestamp).toLocaleDateString()+'</div></div><div style="text-align:right"><div style="font-size:11px;opacity:.6;margin-bottom:4px">Words</div><div style="font-size:22px;font-weight:800;font-family:\'IBM Plex Mono\',monospace">'+(nt.trim().split(/\s+/).filter(Boolean).length)+'</div></div></div>';gh+=sectionCard(sub.studentName+" — "+sub.week,I.clipboard,'<div class="annotation-toolbar">'+I.highlight+' <span style="opacity:.65">Select text to annotate</span><span style="margin-left:auto">'+badge(ea.length+" annotations")+'</span></div><div class="annotated-text" id="annotatableDoc" onmouseup="handleTextSelection()">'+buildAnnotatedHTML(nt,ea)+'</div>'+(ea.length?'<div style="margin-top:16px"><div style="font-size:12px;font-weight:600;margin-bottom:8px">Annotations</div>'+ea.map((a,i)=>{const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];return'<div class="annotation-card"><span class="annotation-card-num">'+(i+1)+'</span> <strong style="font-size:11px">'+esc(col.label)+'</strong><div class="annotation-card-quote">"'+esc(a.selectedText.substring(0,100))+'"</div><div class="annotation-card-comment">'+esc(a.comment)+'</div><div style="margin-top:6px"><button type="button" class="btn-remove" onclick="deleteAnnotation('+i+')">Delete</button></div></div>'}).join("")+'</div>':""));
     const tot=Object.values(S.gradeScores).reduce((a,b)=>a+(parseInt(b)||0),0);
     // Chart Review Summary panel (from tracking module)
     if(window.ChartTracker&&sub.chartReviewData){gh+=ChartTracker.renderSummary(sub.chartReviewData.chartReview)}
@@ -3443,7 +3444,7 @@ function renderWorkflowBar(activeTab) {
   var html = '<div class="rdx-workflow-bar" id="rdxWorkflowBar">';
   steps.forEach(function(step, i) {
     if (i > 0) html += '<span class="rdx-wf-arrow">›</span>';
-    var cls = i === activeStep ? ' active' : (i < activeStep ? ' done' : '');
+    var _stepDone = (step.id==='chart' && (prog.labsViewed||prog.noteWords>0)) || (step.id==='document' && prog.noteWords>30) || (step.id==='coaching' && prog.coachStarted) || (step.id==='reason' && prog.ordersPlaced); var cls = i === activeStep ? ' active' : (_stepDone ? ' done' : (i < activeStep ? ' done' : ''));
     var destTab = step.tabs[0];
     html += '<button class="rdx-wf-step'+cls+'" onclick="switchTab(\''+destTab+'\')">'
       + '<span class="rdx-wf-num">'+(i < activeStep ? '✓' : (i+1))+'</span>'
@@ -3987,7 +3988,7 @@ function renderOrders(){
 
   // Pending orders
   if(pendingLabs.length||pendingImgs.length){
-    let pRows=[...pendingLabs.map((o,i)=>'<tr><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+badge("Pending","badge-warning")+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultLabOrder('+i+')">Get Results ↓</button> <button type="button" class="btn-remove" onclick="cancelLabOrder('+i+')">Cancel</button></td></tr>'),...pendingImgs.map((o,i)=>'<tr><td>'+badge("Imaging","badge-purple")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+badge("Pending","badge-warning")+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultImgOrder('+i+')">Get Results ↓</button> <button type="button" class="btn-remove" onclick="cancelImgOrder('+i+')">Cancel</button></td></tr>')];
+    let pRows=[...pendingLabs.map((o,i)=>'<tr><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+'<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;font-size:11px;font-weight:700;color:#92400E"><span style="width:6px;height:6px;border-radius:50%;background:#D97706;animation:pulse 1.2s infinite"></span>Processing</span>'+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultLabOrder('+i+')">↓ Result Now</button> <button type="button" class="btn-remove" onclick="cancelLabOrder('+i+')">Cancel</button></td></tr>'),...pendingImgs.map((o,i)=>'<tr><td>'+badge("Imaging","badge-purple")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+'<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;font-size:11px;font-weight:700;color:#92400E"><span style="width:6px;height:6px;border-radius:50%;background:#D97706;animation:pulse 1.2s infinite"></span>Processing</span>'+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px;background:var(--accent)" onclick="resultImgOrder('+i+')">↓ Result Now</button> <button type="button" class="btn-remove" onclick="cancelImgOrder('+i+')">Cancel</button></td></tr>')];
     html+=sectionCard("Pending Orders ("+pRows.length+")",I.calendar,tableHTML(["Type","Study","Ordered","Status",""],pRows));
   }
 
@@ -4003,7 +4004,7 @@ function renderOrders(){
         });
         detail+='</div></div>';
       }
-      return'<tr onclick="toggleExpand(\'olr-'+idx+'\')" style="cursor:pointer"><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.resultedAt||o.orderedAt)+'</td><td>'+badge("Final","badge-accent")+'</td><td>'+(o.resultData&&o.resultData.results.some(r=>r.flag)?badge("Abnormal","badge-danger"):"")+'</td></tr>'+(isOpen?'<tr><td colspan="5" style="padding:0 12px 12px">'+detail+'</td></tr>':"");
+      return'<tr onclick="toggleExpand(\'olr-'+idx+'\')" style="cursor:pointer"><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.resultedAt||o.orderedAt)+'</td><td>'+badge("Final","badge-accent")+'</td><td>'+(o.resultData&&o.resultData.results.some(r=>r.flag)?'<span style="display:inline-flex;align-items:center;gap:3px;padding:2px 8px;background:#FFEBEE;color:#C62828;border:1px solid #FFCDD2;border-radius:4px;font-size:11px;font-weight:700">▲ Abnormal</span>':"")+'</td></tr>'+(isOpen?'<tr><td colspan="5" style="padding:0 12px 12px">'+detail+'</td></tr>':"");
     }),...completedImgs.map((o,idx)=>{
       const isOpen=S.expanded["oir-"+idx];
       let detail="";
@@ -4027,13 +4028,13 @@ function renderOrders(){
     let alertHTML=alerts.map(a=>{
       const cls=a.type==="danger"?"badge-danger":a.type==="warning"?"badge-warning":"badge-primary";
       const bg=a.type==="danger"?"var(--danger-light)":a.type==="warning"?"var(--warning-light)":"var(--primary-light)";
-      return'<div style="padding:10px 14px;background:'+bg+';border-radius:var(--radius);margin-bottom:8px"><div style="font-size:11px;font-weight:700;margin-bottom:2px">'+badge(a.type.toUpperCase(),cls)+' '+esc(a.title)+'</div><div style="font-size:12px;line-height:1.5">'+esc(a.msg)+'</div></div>';
+      var borderCol=a.type==="danger"?"var(--danger)":a.type==="warning"?"var(--warning)":"var(--primary)";return'<div style="padding:10px 14px;background:'+bg+';border-radius:var(--radius);margin-bottom:8px;border-left:3px solid '+borderCol+'"><div style="font-size:11px;font-weight:700;margin-bottom:2px">'+badge(a.type.toUpperCase(),cls)+' '+esc(a.title)+'</div><div style="font-size:12px;line-height:1.5">'+esc(a.msg)+'</div></div>';
     }).join("");
     html+=sectionCard("Clinical Decision Support ("+alerts.length+")",I.alert,alertHTML);
   }
 
   if(!S.labOrders.length&&!S.imgOrders.length&&!S.referralOrders.length){
-    html+='<div class="empty-state">No orders placed yet. Use the buttons above to order labs, imaging, or referrals.</div>';
+    html+='<div style="text-align:center;padding:32px 20px;color:var(--text-secondary)"><div style="font-size:36px;margin-bottom:10px">🔬</div><div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:6px">No Orders Placed</div><div style="font-size:13px;line-height:1.6;max-width:320px;margin:0 auto">Use <strong>Order Labs</strong> or <strong>Order Imaging</strong> above to build your workup. Results arrive automatically.</div></div>';
   }
 
   return html;
