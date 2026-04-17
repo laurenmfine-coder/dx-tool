@@ -2338,6 +2338,67 @@ async function exportStudyData() {
           }
         }));
 
+        // ── EMAIL CAPTURE INTEGRATION ──
+        if (window.RDXSessionManager && !window._rdxPracticeOnly) {
+          try {
+            // Calculate time spent (in seconds)
+            var timeSpentSeconds = 0;
+            if (state.sessionStartTime) {
+              timeSpentSeconds = Math.floor((new Date() - new Date(state.sessionStartTime)) / 1000);
+            }
+            
+            // Get submitted DDx
+            var ddxList = [];
+            if (state.differentials && state.differentials.revised) {
+              ddxList = state.differentials.revised.map(function(e) {
+                return e.diagnosis || e.name || e || '';
+              }).filter(Boolean);
+            }
+            
+            // Track case completion
+            var history = window.RDXSessionManager.trackCaseCompletion(state.caseId, {
+              score: state.envHistoryScore || null,
+              timeSpent: timeSpentSeconds,
+              ddxSubmitted: ddxList,
+              correctDiagnosis: caseData.targetDiagnosis || 'Unknown'
+            });
+            
+            // Check if we should show email capture modal
+            if (window.RDXSessionManager.shouldShowEmailCapture()) {
+              // Format time display (e.g., "4:23")
+              var mins = Math.floor(timeSpentSeconds / 60);
+              var secs = (timeSpentSeconds % 60).toString().padStart(2, '0');
+              var timeFormatted = mins + ':' + secs;
+              
+              // Show the modal
+              setTimeout(function() {
+                window.RDXEmailCapture.show({
+                  title: 'Great reasoning on this case!',
+                  stats: {
+                    diagnosis: caseData.targetDiagnosis || 'Case completed',
+                    score: state.envHistoryScore || null,
+                    timeSpent: timeFormatted
+                  },
+                  source: history.totalCases === 1 ? 'post-first-case' : 
+                          history.totalCases === 3 ? 'post-third-case' : 
+                          'post-case-milestone',
+                  pitch: history.totalCases === 1 
+                    ? 'Create a free account to track your progress and access ' + (394 - history.totalCases) + ' more cases.'
+                    : 'You\'ve completed ' + history.totalCases + ' cases with ' + (history.averageScore || 0) + '% average! Create an account to save your progress.'
+                });
+                
+                // Handle successful email capture
+                window.RDXEmailCapture.onSuccess = function(email) {
+                  console.log('✓ Email captured:', email);
+                  addMessage('system', '✓ Your progress is now saved to ' + email);
+                };
+              }, 1000); // Small delay so debrief shows first
+            }
+          } catch (emailCaptureError) {
+            console.warn('Email capture error (non-fatal):', emailCaptureError);
+          }
+        }
+
         // ── PATIENT CONTINUITY — save encounter for follow-up ──
         try {
           var continuityKey = 'rdx_continuity_' + (email || 'anon');
