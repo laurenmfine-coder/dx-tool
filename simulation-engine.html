@@ -531,23 +531,23 @@ function startStudy() {
       });
     }
     
-    // Hide loading overlay AFTER first message renders
+    // Hide loading overlay AFTER first message renders (minimum 1 second total)
     setTimeout(function() {
       var overlay = document.getElementById('loadingOverlay');
       if (overlay) {
         overlay.classList.add('fade-out');
         setTimeout(function() { overlay.style.display = 'none'; }, 300);
       }
-    }, 500); // Wait 500ms for message to render
+    }, 1000); // Wait at least 1 second so users see the loading state
   } else {
-    // Resuming - hide loading overlay immediately after messages are restored
+    // Resuming - hide loading overlay after messages are restored (minimum 1 second)
     setTimeout(function() {
       var overlay = document.getElementById('loadingOverlay');
       if (overlay) {
         overlay.classList.add('fade-out');
         setTimeout(function() { overlay.style.display = 'none'; }, 300);
       }
-    }, 500);
+    }, 1000);
   }
 }
 
