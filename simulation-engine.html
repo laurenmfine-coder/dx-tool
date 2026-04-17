@@ -1328,19 +1328,26 @@ function enterPhase(phase) {
   }
   if (phase === PHASES.COMPLETE) {
     // Track case completion
+    const _startTime = state.turns[0]?.timestamp;
+    const _endTime = new Date().toISOString();
+    const _timeSeconds = _startTime ? Math.round((new Date(_endTime) - new Date(_startTime)) / 1000) : null;
+
     if (window.gtag) {
-      const startTime = state.turns[0]?.timestamp;
-      const endTime = new Date().toISOString();
-      const durationMinutes = startTime ? 
-        (new Date(endTime) - new Date(startTime)) / (1000 * 60) : null;
-      
       gtag('event', 'case_completed', {
         case_id: state.caseId,
         turn_count: state.turnCount,
-        duration_minutes: durationMinutes ? Math.round(durationMinutes * 10) / 10 : null
+        duration_minutes: _timeSeconds ? Math.round(_timeSeconds / 6) / 10 : null
       });
     }
-    
+
+    // Write to case_analytics (upsert: increment count, rolling avg time)
+    if (sb && state.caseId && _timeSeconds) {
+      sb.rpc('upsert_case_analytics', {
+        p_case_id: state.caseId,
+        p_time_seconds: _timeSeconds
+      }).catch(function() {}); // Silently fail
+    }
+
     // Clear active session (completed, not abandoned)
     localStorage.removeItem('rdx-active-session');
     
