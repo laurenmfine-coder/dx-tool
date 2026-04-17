@@ -206,6 +206,35 @@ const PHASE_LABELS = {
 let state = null;
 let caseData = null;
 
+// ── AUTO-SAVE & RESUME FUNCTIONALITY ──
+function saveProgress() {
+  if (!state || !caseData) return;
+  
+  const session = {
+    caseId: state.caseId,
+    caseName: caseData.presentation?.chiefComplaint || state.caseId,
+    phase: state.currentPhase,
+    phaseLabel: PHASE_LABELS[state.currentPhase] || 'In Progress',
+    turnCount: state.turnCount,
+    timestamp: Date.now(),
+    state: {
+      conversationMessages: state.conversationMessages,
+      turns: state.turns,
+      differentials: state.differentials,
+      currentPhase: state.currentPhase,
+      turnCount: state.turnCount
+    }
+  };
+  
+  localStorage.setItem('rdx-active-session', JSON.stringify(session));
+}
+
+// Auto-save every 30 seconds
+setInterval(saveProgress, 30000);
+
+// Also save on page unload
+window.addEventListener('beforeunload', saveProgress);
+
 // ── CASE REGISTRY ──
 const CASE_REGISTRY = {
   'DYS-001':   function() { return typeof CASE_DYS001 !== 'undefined' ? CASE_DYS001 : null; },
@@ -372,6 +401,14 @@ function startStudy() {
   }
 
   addMessage('patel', opening);
+  
+  // Track case started
+  if (window.gtag) {
+    gtag('event', 'case_started', {
+      case_id: state.caseId,
+      depth_version: depthVersion || 'v1'
+    });
+  }
   
   // Hide loading overlay now that case is ready
   setTimeout(function() {
@@ -1189,6 +1226,23 @@ function enterPhase(phase) {
     setTimeout(function() { deliverSecondReport(); }, 500);
   }
   if (phase === PHASES.COMPLETE) {
+    // Track case completion
+    if (window.gtag) {
+      const startTime = state.turns[0]?.timestamp;
+      const endTime = new Date().toISOString();
+      const durationMinutes = startTime ? 
+        (new Date(endTime) - new Date(startTime)) / (1000 * 60) : null;
+      
+      gtag('event', 'case_completed', {
+        case_id: state.caseId,
+        turn_count: state.turnCount,
+        duration_minutes: durationMinutes ? Math.round(durationMinutes * 10) / 10 : null
+      });
+    }
+    
+    // Clear active session (completed, not abandoned)
+    localStorage.removeItem('rdx-active-session');
+    
     document.getElementById('chatInput').disabled = true;
     document.getElementById('sendBtn').disabled = true;
     addMessage('system', 'Simulation complete. Thank you for participating. Your responses have been recorded.');

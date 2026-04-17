@@ -432,6 +432,27 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 
 <div class="container" id="real-cases-section">
   
+  <!-- ── 📌 RESUME SESSION Prompt ── -->
+  <div id="resume-prompt" style="display:none;background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);border:2px solid rgba(245,158,11,0.4);border-radius:16px;padding:24px 28px;margin:0 0 24px 0;position:relative">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap">
+      <div style="flex:1;min-width:250px">
+        <div style="font-size:16px;font-weight:700;color:#1a1d27;margin-bottom:6px">
+          📌 Resume your last case?
+        </div>
+        <div id="resume-case-name" style="font-size:14px;color:#78350f;font-weight:600;margin-bottom:4px"></div>
+        <div id="resume-details" style="font-size:13px;color:#92400e;line-height:1.5"></div>
+      </div>
+      <div style="display:flex;gap:10px;flex-shrink:0">
+        <button onclick="resumeSession()" style="padding:12px 24px;background:#1a1d27;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .15s">
+          Resume →
+        </button>
+        <button onclick="dismissResume()" style="padding:12px 20px;background:transparent;color:#78350f;border:2px solid #78350f;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap">
+          Start Fresh
+        </button>
+      </div>
+    </div>
+  </div>
+  
   <!-- ── 🎯 START HERE Section ── -->
   <div style="
     background: linear-gradient(135deg, #1a3a5c 0%, #2874A6 100%);
@@ -462,7 +483,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px">
         
         <!-- Easy Case -->
-        <a href="/simulation-engine.html?case=URI-PED-01" style="
+        <a href="/simulation-engine.html?case=URI-PED-01" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'easy',case_id:'URI-PED-01'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(134,239,172,0.3);
@@ -494,7 +515,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         </a>
         
         <!-- Medium Case -->
-        <a href="/simulation-engine.html?case=CHEST-PAIN-01" style="
+        <a href="/simulation-engine.html?case=CHEST-PAIN-01" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'medium',case_id:'CHEST-PAIN-01'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(251,191,36,0.3);
@@ -526,7 +547,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         </a>
         
         <!-- Hard Case -->
-        <a href="/simulation-engine.html?case=ABD-PAIN-COMPLEX" style="
+        <a href="/simulation-engine.html?case=ABD-PAIN-COMPLEX" onclick="if(window.gtag) gtag('event','start_here_click',{difficulty:'hard',case_id:'ABD-PAIN-COMPLEX'})" style="
           text-decoration:none;
           background:rgba(255,255,255,0.08);
           border:1.5px solid rgba(251,113,133,0.3);
@@ -711,7 +732,19 @@ if(filtered.length > 12 && !window._showAll) {
   loadMoreBtn.style.display = 'none';
 }
 }
-function launch(id){if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='simulation-engine.html?case='+encodeURIComponent(id);else if(MODE==='practice') window.location.href='virtual-emr.html?case='+encodeURIComponent(id);else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}}
+function launch(id){
+  // Track case start
+  if(window.gtag) {
+    gtag('event', 'case_card_click', {
+      case_id: id,
+      mode: MODE,
+      from: 'grid'
+    });
+  }
+  
+  if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='simulation-engine.html?case='+encodeURIComponent(id);else if(MODE==='practice') window.location.href='virtual-emr.html?case='+encodeURIComponent(id);else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}
+}
+
 function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 // Show baseline link if not yet complete
 (function() {
@@ -975,5 +1008,137 @@ function doSemanticSearch(q) {
   });
 })();
 </script>
+<!-- ── EXIT INTENT POPUP ── -->
+<div id="exit-intent-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:16px;padding:32px;max-width:500px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.3);position:relative">
+    <button onclick="closeExitIntent()" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:24px;color:#94a3b8;cursor:pointer;padding:4px">×</button>
+    
+    <div style="text-align:center">
+      <div style="font-size:32px;margin-bottom:16px">⏰</div>
+      <h3 style="font-size:22px;font-weight:700;color:#1a1d27;margin-bottom:12px">
+        Wait! Try one quick case before you go?
+      </h3>
+      <p style="font-size:15px;color:#64748b;line-height:1.6;margin-bottom:24px">
+        Takes just 5 minutes. No signup required.
+      </p>
+      
+      <button onclick="startRandomEasyCase()" style="width:100%;padding:16px;background:#2874A6;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:12px;transition:all .15s" onmouseover="this.style.background='#1B4F72'" onmouseout="this.style.background='#2874A6'">
+        🎲 Start Random Easy Case (5 min)
+      </button>
+      
+      <button onclick="closeExitIntent()" style="background:none;border:none;color:#94a3b8;font-size:14px;cursor:pointer;padding:8px">
+        No thanks, I'll browse
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let exitIntentShown = false;
+let hasStartedCase = false;
+
+// Track if user has started a case
+try {
+  const history = JSON.parse(localStorage.getItem('rdx-case-history') || '[]');
+  hasStartedCase = history.length > 0;
+} catch(e) {}
+
+// Detect mouse leaving window
+document.addEventListener('mouseleave', function(e) {
+  if (e.clientY < 10 && !exitIntentShown && !hasStartedCase) {
+    exitIntentShown = true;
+    const modal = document.getElementById('exit-intent-modal');
+    modal.style.display = 'flex';
+    
+    // Track analytics
+    if (window.gtag) {
+      gtag('event', 'exit_intent_shown', { location: 'browse_page' });
+    }
+  }
+});
+
+function closeExitIntent() {
+  document.getElementById('exit-intent-modal').style.display = 'none';
+  
+  if (window.gtag) {
+    gtag('event', 'exit_intent_dismissed');
+  }
+}
+
+function startRandomEasyCase() {
+  // Get an easy case (acuity 4 or 5)
+  const easyCases = getData().filter(c => c.acuity >= 4);
+  const randomCase = easyCases[Math.floor(Math.random() * easyCases.length)];
+  
+  if (window.gtag) {
+    gtag('event', 'exit_intent_accepted', { case_id: randomCase.id });
+  }
+  
+  window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(randomCase.id);
+}
+</script>
+
+<!-- ── RESUME SESSION SCRIPT ── -->
+<script>
+(function() {
+  try {
+    const session = JSON.parse(localStorage.getItem('rdx-active-session') || 'null');
+    if (!session) return;
+    
+    // Only show if session is less than 24 hours old
+    const hoursSince = (Date.now() - session.timestamp) / (1000 * 60 * 60);
+    if (hoursSince > 24) {
+      localStorage.removeItem('rdx-active-session');
+      return;
+    }
+    
+    // Calculate time ago
+    let timeAgo;
+    if (hoursSince < 1) {
+      const minutes = Math.floor(hoursSince * 60);
+      timeAgo = minutes + ' minute' + (minutes !== 1 ? 's' : '') + ' ago';
+    } else {
+      const hours = Math.floor(hoursSince);
+      timeAgo = hours + ' hour' + (hours !== 1 ? 's' : '') + ' ago';
+    }
+    
+    // Show resume prompt
+    document.getElementById('resume-prompt').style.display = 'block';
+    document.getElementById('resume-case-name').textContent = session.caseName;
+    document.getElementById('resume-details').textContent = 
+      `${session.phaseLabel} • ${session.turnCount} turns • ${timeAgo}`;
+    
+    // Store case ID for resume
+    window._resumeCaseId = session.caseId;
+    
+  } catch(e) {
+    console.warn('Resume session check failed:', e);
+  }
+})();
+
+function resumeSession() {
+  if (window.gtag) {
+    gtag('event', 'session_resumed', {
+      case_id: window._resumeCaseId
+    });
+  }
+  
+  if (window._resumeCaseId) {
+    window.location.href = 'simulation-engine.html?case=' + encodeURIComponent(window._resumeCaseId) + '&resume=true';
+  }
+}
+
+function dismissResume() {
+  if (window.gtag) {
+    gtag('event', 'resume_dismissed', {
+      case_id: window._resumeCaseId
+    });
+  }
+  
+  localStorage.removeItem('rdx-active-session');
+  document.getElementById('resume-prompt').style.display = 'none';
+}
+</script>
+
 </body>
 </html>
