@@ -17,6 +17,7 @@
 <!-- Session Tracking & Email Capture -->
 <script src="/js/rdx-session-manager.js"></script>
 <script src="/js/rdx-email-capture.js"></script>
+<script src="/rdx-email-triggers.js"></script>
 <style>
 :root{--primary:#2874A6;--primary-dark:#1B4F72;--primary-light:#EBF5FB;--teal:#0D7A67;--teal-light:#E8F8F5;--success:#27AE60;--warning:#F39C12;--danger:#E74C3C;--text:#1a1a2e;--text-muted:#4B5563;--bg:#F0F4F8;--card:#fff;--border:#DCE3EB;--font:'DM Sans',-apple-system,sans-serif;--mono:'IBM Plex Mono',monospace;--radius:8px;--shadow-sm:0 1px 3px rgba(0,0,0,.06);--shadow-md:0 4px 12px rgba(0,0,0,.08)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -2612,6 +2613,38 @@ async function exportStudyData() {
             console.warn('Email capture error (non-fatal):', emailCaptureError);
           }
         }
+
+        // ── LOOPS EMAIL EVENTS ─────────────────────────────────────────────
+        if (window.RDXEmail) {
+          try {
+            var _email = (window.RdxPlatform && window.RdxPlatform.getUserEmail && window.RdxPlatform.getUserEmail())
+                      || localStorage.getItem('rdx_user_email')
+                      || localStorage.getItem('rdx-captured-email')
+                      || null;
+            if (_email) {
+              // DDx accuracy: did final differential include the target diagnosis?
+              var _targetDx = (caseData.targetDiagnosis || caseData.diagnosis || '').toLowerCase();
+              var _finalDdx = (state.differentials && state.differentials.revised)
+                ? state.differentials.revised.map(function(e) { return (e.diagnosis || e.name || '').toLowerCase(); })
+                : [];
+              var _ddxAccuracy = (_targetDx && _finalDdx.length)
+                ? (_finalDdx.some(function(d) { return d.includes(_targetDx) || _targetDx.includes(d.split(' ')[0]); }) ? 1 : 0)
+                : null;
+
+              RDXEmail.simCompleted({
+                email:     _email,
+                firstName: localStorage.getItem('rdx_first_name') || '',
+                caseId:    state.caseId,
+                diagnosis: caseData.targetDiagnosis || caseData.diagnosis || '',
+                specialty: caseData.category || caseData.specialty || '',
+                acuity:    caseData.acuity || null,
+                ddxAccuracy:     _ddxAccuracy,
+                phasesCompleted: state.currentPhase || 10,
+              });
+            }
+          } catch(_e) { /* never surface email errors to user */ }
+        }
+        // ── END LOOPS EMAIL EVENTS ────────────────────────────────────────
 
         // ── PATIENT CONTINUITY — save encounter for follow-up ──
         try {
