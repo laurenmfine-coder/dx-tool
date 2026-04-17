@@ -45,7 +45,7 @@ SELECT
   p.baseline_duration_ms,
   p.created_at,
   COUNT(s.id) AS total_sessions,
-  MAX(s.created_at) AS last_session_at
+  MAX(s.completed_at) AS last_session_at
 FROM profiles p
 LEFT JOIN rad_study_sessions s ON s.student_email = p.email
 WHERE p.research_consent = true

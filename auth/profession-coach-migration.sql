@@ -69,14 +69,12 @@ CREATE INDEX IF NOT EXISTS idx_sessions_prof ON rad_study_sessions(profession_id
 -- Cross-profession weekly summary for cohort analysis
 CREATE OR REPLACE VIEW profession_weekly_summary AS
 SELECT
-  DATE_TRUNC('week', s.created_at) AS week_of,
+    DATE_TRUNC('week', s.started_at) AS week_of,
   p.profession_id,
   p.track_id,
   p.program_name,
   p.cohort_id,
   COUNT(s.id) AS sessions,
-  AVG(CASE WHEN s.target_in_final THEN 1.0 ELSE 0.0 END) AS avg_diagnostic_accuracy,
-  AVG(CASE WHEN s.anchoring_detected THEN 1.0 ELSE 0.0 END) AS avg_anchoring_rate,
   AVG(s.env_history_score::float) AS avg_history_score,
   AVG(s.calibrated_composite::float) AS avg_calibrated_score
 FROM profiles p
