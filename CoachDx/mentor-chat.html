@@ -47,7 +47,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 .picker-search{padding:16px 24px;border-bottom:1px solid var(--border);flex-shrink:0}
 .search-box{display:flex;align-items:center;gap:10px;background:var(--bg);border:1.5px solid var(--border);border-radius:9px;padding:10px 14px;transition:all .2s}
 .search-box:focus-within{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
-.search-box input{flex:1;border:none;outline:none;font-size:14px;font-family:var(--f-sans);color:var(--text);background:transparent}
+.search-box input{flex:1;border:none;outline:none;font-size:16px;font-family:var(--f-sans);color:var(--text);background:transparent}
 .search-box input::placeholder{color:var(--dim2)}
 
 /* Topic groups */
@@ -80,7 +80,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 .welcome-title{font-family:var(--f-serif);font-size:28px;font-weight:400;color:var(--text);margin-bottom:12px;letter-spacing:-.3px}
 .welcome-sub{font-size:14px;font-weight:300;color:var(--dim);line-height:1.75;max-width:440px;margin:0 auto 28px}
 .welcome-prompt-row{display:flex;gap:10px;max-width:560px;width:100%;margin:0 auto}
-.welcome-input{flex:1;background:var(--surface);border:1.5px solid var(--border-hi);border-radius:10px;padding:14px 16px;font-size:14px;font-family:var(--f-sans);color:var(--text);outline:none;transition:all .2s}
+.welcome-input{flex:1;background:var(--surface);border:1.5px solid var(--border-hi);border-radius:10px;padding:14px 16px;font-size:16px;font-family:var(--f-sans);color:var(--text);outline:none;transition:all .2s}
 .welcome-input:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
 .welcome-input::placeholder{color:var(--dim2)}
 .welcome-go{background:var(--blue);color:#fff;border:none;padding:14px 22px;border-radius:10px;font-size:14px;font-weight:600;font-family:var(--f-sans);cursor:pointer;transition:background .15s;white-space:nowrap}
@@ -130,7 +130,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 /* Input bar */
 .input-bar{padding:16px 24px;border-top:1px solid var(--border);background:var(--surface);flex-shrink:0}
 .input-row{display:flex;gap:10px;max-width:800px;margin:0 auto}
-.chat-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-size:14px;font-family:var(--f-sans);color:var(--text);outline:none;resize:none;transition:all .2s;min-height:48px;max-height:120px;line-height:1.5}
+.chat-input{flex:1;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 16px;font-size:16px;font-family:var(--f-sans);color:var(--text);outline:none;resize:none;transition:all .2s;min-height:48px;max-height:120px;line-height:1.5}
 .chat-input:focus{border-color:var(--blue);background:var(--surface);box-shadow:0 0 0 3px rgba(40,116,166,.08)}
 .chat-input::placeholder{color:var(--dim2)}
 .send-btn{background:var(--blue);color:#fff;border:none;width:46px;height:46px;border-radius:10px;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;align-self:flex-end}
@@ -176,7 +176,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
     <div class="picker-search">
       <div class="search-box">
         <span style="color:var(--dim2);font-size:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
-        <input type="text" id="topicSearch" placeholder="Search topics..."
+        <input type="text" id="topicSearch" placeholder="Search topics..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
           oninput="filterTopics(this.value)"
           onkeydown="if(event.key==='Enter')launchFromSearch()">
       </div>
@@ -197,7 +197,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
       <p class="welcome-sub">CoachDx doesn't give you answers. It asks the questions that force you to find them — adapting in real time to your reasoning.</p>
 
       <div class="welcome-prompt-row">
-        <input class="welcome-input" id="welcomeInput" type="text"
+        <input class="welcome-input" id="welcomeInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
           placeholder="Type a topic, concept, or what you're struggling with…"
           onkeydown="if(event.key==='Enter')startFromWelcome()">
         <button class="welcome-go" onclick="startFromWelcome()">Start →</button>
@@ -228,7 +228,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 
       <div class="input-bar">
         <div class="input-row">
-          <textarea class="chat-input" id="chatInput"
+          <textarea class="chat-input" id="chatInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
             placeholder="Answer the question, or ask your own…" rows="1"
             onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
             oninput="autoResize(this)"></textarea>
