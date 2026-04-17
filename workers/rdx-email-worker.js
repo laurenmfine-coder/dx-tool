@@ -64,6 +64,7 @@ function resolveEvents(eventType, data) {
   if (eventType === 'reengagement')   events.push('reengagement7Day');
   if (eventType === 'browse_signup')  events.push('browseSignup');
   if (eventType === 'faculty_weekly') events.push('facultyWeeklyDigest');
+  if (eventType === 'quick_bounce')   events.push('quickBounce');
   return events;
 }
 
@@ -78,6 +79,8 @@ function buildContactProps(data) {
   if (data.cohort)      props.cohort      = data.cohort;
   if (data.institution) props.institution = data.institution;
   if (data.role)        props.role        = data.role;
+  if (data.timeOnPageSeconds !== undefined) props.lastBounceSeconds = String(data.timeOnPageSeconds);
+  if (data.page)        props.lastBouncePage = data.page;
   return props;
 }
 

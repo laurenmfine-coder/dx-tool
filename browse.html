@@ -1327,7 +1327,69 @@ function startRandomEasyCase() {
 }
 </script>
 
-<!-- ── SOCIAL PROOF LOADER ── -->
+<!-- ── QUICK BOUNCE DETECTOR ── -->
+<script>
+(function() {
+  var EMAIL_WORKER = 'https://rdx-email.laurenmfine.workers.dev';
+  var BOUNCE_THRESHOLD_MS = 60000; // 60 seconds
+  var COOLDOWN_KEY = 'rdx-bounce-email-sent';
+  var COOLDOWN_MS = 48 * 60 * 60 * 1000; // don't re-send within 48 hours
+
+  var pageLoadTime = Date.now();
+  var caseStarted = false;
+  var fired = false;
+
+  // Mark if user actually starts a case (not a bounce)
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a[href*="simulation-engine"], [onclick*="launch"], [onclick*="openCase"]');
+    if (el) caseStarted = true;
+  });
+
+  function shouldFire() {
+    if (fired) return false;
+    if (caseStarted) return false;
+
+    // Must have a captured email
+    var email = localStorage.getItem('rdx-user-email')
+             || localStorage.getItem('rdx_user_email')
+             || localStorage.getItem('rdx-captured-email');
+    if (!email || !email.includes('@')) return false;
+
+    // Cooldown: don't spam if they bounce repeatedly
+    var lastSent = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0');
+    if (Date.now() - lastSent < COOLDOWN_MS) return false;
+
+    // Must have spent less than threshold
+    if (Date.now() - pageLoadTime >= BOUNCE_THRESHOLD_MS) return false;
+
+    return email;
+  }
+
+  function fireBounce() {
+    var email = shouldFire();
+    if (!email) return;
+    fired = true;
+    localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
+
+    var firstName = localStorage.getItem('rdx_first_name') || '';
+    navigator.sendBeacon
+      ? navigator.sendBeacon(EMAIL_WORKER, JSON.stringify({ eventType: 'quick_bounce', email: email, firstName: firstName, data: { page: 'browse', timeOnPageSeconds: Math.round((Date.now() - pageLoadTime) / 1000) } }))
+      : fetch(EMAIL_WORKER, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ eventType: 'quick_bounce', email: email, firstName: firstName, data: { page: 'browse', timeOnPageSeconds: Math.round((Date.now() - pageLoadTime) / 1000) } }), keepalive: true }).catch(function(){});
+  }
+
+  // Fire on page hide (tab close, navigate away, phone lock)
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') fireBounce();
+  });
+
+  // Fallback for browsers that don't fire visibilitychange reliably
+  window.addEventListener('pagehide', fireBounce);
+  window.addEventListener('beforeunload', fireBounce);
+})();
+</script>
+
+</body>
+
 <script>
 (function() {
   const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';

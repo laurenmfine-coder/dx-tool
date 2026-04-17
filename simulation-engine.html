@@ -4177,5 +4177,67 @@ document.head.appendChild(achieveStyle);
 setTimeout(showTutorialIfNeeded, 1200);
 </script>
 
+<!-- ── QUICK BOUNCE DETECTOR (simulation) ── -->
+<script>
+(function() {
+  var EMAIL_WORKER = 'https://rdx-email.laurenmfine.workers.dev';
+  var BOUNCE_THRESHOLD_MS = 90000; // 90 seconds for sim page (slightly longer)
+  var COOLDOWN_KEY = 'rdx-bounce-email-sent';
+  var COOLDOWN_MS = 48 * 60 * 60 * 1000;
+  var MIN_PHASE_TO_NOT_BOUNCE = 3; // reached history-taking = engaged
+
+  var pageLoadTime = Date.now();
+  var fired = false;
+
+  function shouldFire() {
+    if (fired) return false;
+
+    // If simulation state exists and user reached phase 3+, they engaged
+    if (window.state && window.state.currentPhase >= MIN_PHASE_TO_NOT_BOUNCE) return false;
+
+    // Must have email
+    var email = localStorage.getItem('rdx-user-email')
+             || localStorage.getItem('rdx_user_email')
+             || localStorage.getItem('rdx-captured-email');
+    if (!email || !email.includes('@')) return false;
+
+    // Cooldown
+    var lastSent = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0');
+    if (Date.now() - lastSent < COOLDOWN_MS) return false;
+
+    // Must be under threshold
+    if (Date.now() - pageLoadTime >= BOUNCE_THRESHOLD_MS) return false;
+
+    return email;
+  }
+
+  function fireBounce() {
+    var email = shouldFire();
+    if (!email) return;
+    fired = true;
+    localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
+
+    var firstName = localStorage.getItem('rdx_first_name') || '';
+    var caseId = (window.state && window.state.caseId) || new URLSearchParams(location.search).get('case') || '';
+    var payload = JSON.stringify({
+      eventType: 'quick_bounce',
+      email: email,
+      firstName: firstName,
+      data: { page: 'simulation', caseId: caseId, timeOnPageSeconds: Math.round((Date.now() - pageLoadTime) / 1000) }
+    });
+
+    navigator.sendBeacon
+      ? navigator.sendBeacon(EMAIL_WORKER, payload)
+      : fetch(EMAIL_WORKER, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload, keepalive: true }).catch(function(){});
+  }
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.visibilityState === 'hidden') fireBounce();
+  });
+  window.addEventListener('pagehide', fireBounce);
+  window.addEventListener('beforeunload', fireBounce);
+})();
+</script>
+
 </body>
 </html>
