@@ -520,6 +520,8 @@ function startStudy() {
     }
 
     addMessage('patel', opening);
+    state.conversationMessages.push({ role: 'assistant', content: opening });
+    state.turns.push({ role:'assistant', content:opening, timestamp:new Date().toISOString(), phase:1, turnNumber:0 });
     
     // Track case started
     if (window.gtag) {
@@ -538,9 +540,6 @@ function startStudy() {
       setTimeout(function() { overlay.style.display = 'none'; }, 300);
     }
   }, 100);
-  
-  state.conversationMessages.push({ role: 'assistant', content: opening });
-  state.turns.push({ role:'assistant', content:opening, timestamp:new Date().toISOString(), phase:1, turnNumber:0 });
 }
 
 // ── LIKERT CONFIDENCE WIDGET ──
