@@ -87,6 +87,21 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:4px;color:var(--text)}
 .form-group input,.form-group select{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:14px}
 
+/* ── Bookmark Prompt ── */
+.bookmark-prompt{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#2874A6,#1B4F72);color:#fff;padding:20px 24px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:320px;z-index:1000;display:none;animation:slideUpFade .3s ease-out}
+.bookmark-prompt.show{display:block}
+@keyframes slideUpFade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.bookmark-prompt-title{font-size:16px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.bookmark-prompt-text{font-size:13px;color:rgba(255,255,255,.9);line-height:1.5;margin-bottom:16px}
+.bookmark-prompt-btns{display:flex;gap:8px}
+.bookmark-prompt-btn{flex:1;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;border:none;cursor:pointer;font-family:inherit;transition:all .15s}
+.bookmark-prompt-btn.primary{background:#fff;color:#2874A6}
+.bookmark-prompt-btn.primary:hover{background:#f0f0f0;transform:translateY(-1px)}
+.bookmark-prompt-btn.secondary{background:rgba(255,255,255,.15);color:#fff}
+.bookmark-prompt-btn.secondary:hover{background:rgba(255,255,255,.25)}
+.bookmark-close{position:absolute;top:8px;right:8px;background:none;border:none;color:rgba(255,255,255,.6);font-size:20px;cursor:pointer;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:4px;transition:all .15s}
+.bookmark-close:hover{background:rgba(255,255,255,.1);color:#fff}
+
 .hidden{display:none}
 </style>
 <script src="/case-explainer-agent.js"></script>
@@ -3782,6 +3797,97 @@ RdxTours.autoShow('simulation-engine');
         style="position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#2874A6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 8px 24px rgba(40,116,166,0.4);z-index:9999;transition:all .3s;border:none">
   💡
 </button>
+
+<!-- ── Bookmark Prompt ── -->
+<div class="bookmark-prompt" id="bookmarkPrompt">
+  <button class="bookmark-close" onclick="dismissBookmarkPrompt()">×</button>
+  <div class="bookmark-prompt-title">
+    🎉 Nice work!
+  </div>
+  <div class="bookmark-prompt-text">
+    Want to continue later? Bookmark this page to quickly return to ReasonDx.
+  </div>
+  <div class="bookmark-prompt-btns">
+    <button class="bookmark-prompt-btn primary" onclick="triggerBookmark()">
+      📌 Bookmark
+    </button>
+    <button class="bookmark-prompt-btn secondary" onclick="dismissBookmarkPrompt()">
+      Later
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Bookmark Prompt Logic ──
+function showBookmarkPrompt() {
+  // Only show on first case completion
+  const hasSeenBookmark = localStorage.getItem('rdx-bookmark-prompt-shown');
+  const completedCases = JSON.parse(localStorage.getItem('rdx-completed-cases') || '[]');
+  
+  if (!hasSeenBookmark && completedCases.length === 1) {
+    setTimeout(function() {
+      const prompt = document.getElementById('bookmarkPrompt');
+      if (prompt) {
+        prompt.classList.add('show');
+        localStorage.setItem('rdx-bookmark-prompt-shown', 'true');
+        
+        // Track with GA
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'bookmark_prompt_shown', {
+            event_category: 'engagement',
+            event_label: 'first_case_complete'
+          });
+        }
+      }
+    }, 3000); // Show 3 seconds after case completion
+  }
+}
+
+function dismissBookmarkPrompt() {
+  const prompt = document.getElementById('bookmarkPrompt');
+  if (prompt) {
+    prompt.classList.remove('show');
+    
+    // Track dismissal
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'bookmark_prompt_dismissed', {
+        event_category: 'engagement'
+      });
+    }
+  }
+}
+
+function triggerBookmark() {
+  // Track acceptance
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'bookmark_prompt_accepted', {
+      event_category: 'engagement'
+    });
+  }
+  
+  // Try to trigger browser bookmark dialog
+  if (window.sidebar && window.sidebar.addPanel) {
+    // Firefox
+    window.sidebar.addPanel(document.title, window.location.href, '');
+  } else if (window.external && ('AddFavorite' in window.external)) {
+    // IE
+    window.external.AddFavorite(window.location.href, document.title);
+  } else {
+    // Modern browsers - keyboard shortcut hint
+    alert('Press ' + (navigator.userAgent.indexOf('Mac') != -1 ? 'Cmd' : 'Ctrl') + '+D to bookmark this page!');
+  }
+  
+  dismissBookmarkPrompt();
+}
+
+// Wire into case completion
+// This will be called when case_completed event fires
+if (window.P && window.P.EventBus) {
+  P.EventBus.on('case_completed', function() {
+    showBookmarkPrompt();
+  });
+}
+</script>
 
 </body>
 </html>
