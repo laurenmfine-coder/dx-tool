@@ -1342,6 +1342,348 @@ Object.assign(window.RDX_ORDER_RUBRICS, {
   },
 });
 
+
+// ── BATCH 3: Surgical emergencies + critical care + subspecialty ──────────────
+Object.assign(window.RDX_CASE_RESULTS, {
+
+  "rhabdomyolysis": {
+    labResults: {
+      cmp: {group:"COMPREHENSIVE METABOLIC PANEL + CK", results:[
+        {test:"CK (Creatine Kinase)",value:"48,200",unit:"U/L",range:"22-198",flag:"H"},
+        {test:"Creatinine",value:"3.6",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"BUN",value:"52",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Potassium",value:"6.2",unit:"mEq/L",range:"3.5-5.0",flag:"H"},
+        {test:"Phosphorus",value:"5.8",unit:"mg/dL",range:"2.5-4.5",flag:"H"},
+        {test:"Calcium",value:"7.2",unit:"mg/dL",range:"8.5-10.5",flag:"L"},
+        {test:"Uric Acid",value:"9.4",unit:"mg/dL",range:"2.4-6.0",flag:"H"},
+        {test:"LDH",value:"2,840",unit:"U/L",range:"100-220",flag:"H"},
+        {test:"Comment",value:"CK >10,000 = severe rhabdomyolysis. Hyperkalemia + AKI = high mortality risk. Aggressive IVF 1-1.5L/hr.",unit:"",range:"",flag:""},
+      ]},
+      ua: {group:"URINALYSIS", results:[
+        {test:"Color",value:"Cola/mahogany brown",unit:"",range:"Yellow",flag:"H"},
+        {test:"Dipstick blood",value:"3+",unit:"",range:"Negative",flag:"H"},
+        {test:"RBC on microscopy",value:"0-2",unit:"/hpf",range:"0-3",flag:""},
+        {test:"Comment",value:"Dipstick positive blood with few RBCs = myoglobinuria (not hematuria). Myoglobin not detected on standard dipstick but cross-reacts with heme.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"18.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"14.8",unit:"g/dL",range:"13.5-17.5",flag:""},
+        {test:"Hematocrit",value:"44.4",unit:"%",range:"40-52",flag:""},
+        {test:"Platelets",value:"162",unit:"x10³/µL",range:"150-400",flag:""},
+      ]},
+    },
+    imgResults: {
+      ekg: {findings:"Tall peaked T-waves in precordial leads. QRS duration 108ms (mild widening). PR interval 210ms. HR 96. No significant ST changes. Sinus rhythm.",
+            impression:"1. Hyperkalemia EKG pattern — peaked T-waves and mild QRS widening.
+2. K 6.2 — calcium gluconate IV indicated if K >6.5 or EKG changes worsen.
+3. Continuous cardiac monitoring. Trend K q2h during IVF."},
+    }
+  },
+
+  "ards": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"24.8",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"10.4",unit:"g/dL",range:"12.0-16.0",flag:"L"},
+        {test:"Hematocrit",value:"31.2",unit:"%",range:"36-46",flag:"L"},
+        {test:"Platelets",value:"62",unit:"x10³/µL",range:"150-400",flag:"L"},
+        {test:"Comment",value:"Thrombocytopenia + anemia in ARDS context — DIC or sepsis-associated.",unit:"",range:"",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"142",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"4.8",unit:"mEq/L",range:"3.5-5.0",flag:""},
+        {test:"CO2",value:"18",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"46",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"2.4",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Lactate",value:"5.2",unit:"mmol/L",range:"0.5-2.2",flag:"H"},
+        {test:"Comment",value:"Lactate 5.2 with metabolic acidosis — multi-organ dysfunction (ARDS + AKI). Low tidal volume strategy essential.",unit:"",range:"",flag:""},
+      ]},
+      abg: {group:"ARTERIAL BLOOD GAS (on FiO2 0.8)", results:[
+        {test:"pH",value:"7.24",unit:"",range:"7.35-7.45",flag:"L"},
+        {test:"pCO2",value:"42",unit:"mmHg",range:"35-45",flag:""},
+        {test:"pO2",value:"58",unit:"mmHg",range:"80-100",flag:"L"},
+        {test:"HCO3",value:"17",unit:"mEq/L",range:"22-26",flag:"L"},
+        {test:"FiO2",value:"0.80",unit:"",range:"",flag:""},
+        {test:"P/F Ratio",value:"73",unit:"",range:">300 normal",flag:"H"},
+        {test:"Comment",value:"P/F 73 on FiO2 0.80 = severe ARDS (P/F <100). Low tidal volume 6 mL/kg IBW. PEEP per ARDSnet. Prone positioning if P/F <150.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cxr: {findings:"Bilateral diffuse airspace opacities — ground-glass and consolidative, involving >75% of both lung fields. Air bronchograms. No cardiomegaly. No pleural effusion. Endotracheal tube at carina — repositioned.",
+            impression:"1. Bilateral diffuse pulmonary infiltrates — ARDS pattern.
+2. ETT tip at carina — pull back 3-4cm.
+3. Berlin criteria: bilateral opacities, P/F <100, non-cardiogenic.
+4. ARDSnet protocol: Vt 6 mL/kg IBW, PEEP ≥10."},
+    }
+  },
+
+  "infective-endocarditis": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"16.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"9.8",unit:"g/dL",range:"13.5-17.5",flag:"L"},
+        {test:"Hematocrit",value:"29.4",unit:"%",range:"40-52",flag:"L"},
+        {test:"Platelets",value:"94",unit:"x10³/µL",range:"150-400",flag:"L"},
+        {test:"Comment",value:"Normocytic anemia of chronic infection + thrombocytopenia — immune complex deposition or DIC.",unit:"",range:"",flag:""},
+      ]},
+      cmp: {group:"COMPREHENSIVE METABOLIC PANEL", results:[
+        {test:"BUN",value:"38",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"2.2",unit:"mg/dL",range:"0.7-1.3",flag:"H"},
+        {test:"ESR",value:"88",unit:"mm/hr",range:"0-20",flag:"H"},
+        {test:"CRP",value:"182",unit:"mg/L",range:"<10",flag:"H"},
+        {test:"Comment",value:"Elevated ESR/CRP + renal dysfunction — embolic nephritis (Osler's triad) or immune complex GN. Urine for RBC casts.",unit:"",range:"",flag:""},
+      ]},
+      bloodculture: {group:"BLOOD CULTURES — PRELIMINARY", results:[
+        {test:"BC Set 1 (aerobic)",value:"Gram-positive cocci in clusters",unit:"",range:"",flag:"H"},
+        {test:"BC Set 1 (anaerobic)",value:"No growth at 24h",unit:"",range:"",flag:""},
+        {test:"BC Set 2 (aerobic)",value:"Gram-positive cocci in clusters",unit:"",range:"",flag:"H"},
+        {test:"Suspected organism",value:"S. aureus — MSSA vs MRSA sensitivities pending",unit:"",range:"",flag:""},
+        {test:"Comment",value:"S. aureus bacteremia = endocarditis until proven otherwise. Obtain minimum 3 sets, obtain TEE.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      echo: {findings:"Aortic valve: vegetations on non-coronary cusp measuring 1.8cm. Severe aortic regurgitation. LV: mildly dilated, EF 45%. RV: normal. No perivalvular abscess on TTE (TEE required for better sensitivity). No pericardial effusion.",
+             impression:"1. Large aortic valve vegetation (1.8cm) — active endocarditis.
+2. Severe AR — volume overload on LV.
+3. EF 45% — early valve failure.
+4. TEE urgently: rule out perivalvular abscess, better vegetation characterization.
+5. Cardiothoracic surgery consultation — surgical criteria may be met."},
+    }
+  },
+
+  "hemorrhagic-stroke": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"14.2",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"14.0",unit:"g/dL",range:"13.5-17.5",flag:""},
+        {test:"Hematocrit",value:"42.0",unit:"%",range:"40-52",flag:""},
+        {test:"Platelets",value:"188",unit:"x10³/µL",range:"150-400",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"140",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"3.8",unit:"mEq/L",range:"3.5-5.0",flag:""},
+        {test:"Glucose",value:"188",unit:"mg/dL",range:"70-100",flag:"H"},
+        {test:"Comment",value:"Hyperglycemia in ICH worsens outcomes. Target BG 140-180. Avoid hypoglycemia.",unit:"",range:"",flag:""},
+      ]},
+      pt_inr: {group:"COAGULATION", results:[
+        {test:"PT",value:"21.4",unit:"seconds",range:"11.0-13.5",flag:"H"},
+        {test:"INR",value:"2.4",unit:"",range:"0.9-1.1",flag:"H"},
+        {test:"Comment",value:"Supratherapeutic anticoagulation (warfarin/INR 2.4) — reverse immediately with 4-factor PCC + Vitamin K.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cthead: {findings:"Hyperdense 4.2 x 3.8 x 3.5 cm hemorrhage left basal ganglia with surrounding edema. 8mm leftward midline shift. No subarachnoid extension. Ventricles: mild hydrocephalus right temporal horn. No herniation.",
+               impression:"1. Acute intraparenchymal hemorrhage left basal ganglia — 4.2cm.
+2. Midline shift 8mm — neurosurgery emergent.
+3. Early hydrocephalus — ICP monitoring.
+4. Coagulopathy (INR 2.4) — reverse immediately.
+5. Avoid SBP >160. Nicardipine infusion."},
+    }
+  },
+
+  "bowel-obstruction": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"16.8",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"15.4",unit:"g/dL",range:"13.5-17.5",flag:""},
+        {test:"Hematocrit",value:"46.2",unit:"%",range:"40-52",flag:""},
+        {test:"Platelets",value:"268",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Hemoconcentration (high Hct) from dehydration. Leukocytosis suggests ischemia or closed-loop obstruction.",unit:"",range:"",flag:""},
+      ]},
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"133",unit:"mEq/L",range:"136-145",flag:"L"},
+        {test:"Potassium",value:"2.8",unit:"mEq/L",range:"3.5-5.0",flag:"L"},
+        {test:"CO2",value:"38",unit:"mEq/L",range:"23-29",flag:"H"},
+        {test:"BUN",value:"42",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"1.8",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Lactate",value:"3.2",unit:"mmol/L",range:"0.5-2.2",flag:"H"},
+        {test:"Comment",value:"Hypokalemic metabolic alkalosis from vomiting. Elevated lactate — mesenteric ischemia or strangulation must be excluded.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      ctabdomen: {findings:"Multiple dilated small bowel loops to 5.8cm diameter. Transition point right lower quadrant — adhesion band. No free air. Mesenteric fat stranding at transition point. Distal bowel decompressed. No free fluid. Stool in colon — partial vs complete obstruction.",
+                  impression:"1. Small bowel obstruction at RLQ transition point — adhesion etiology.
+2. Fat stranding at transition — ischemia cannot be excluded.
+3. General surgery consultation urgently.
+4. NG tube decompression, aggressive IVF.
+5. Operative if strangulation signs or failure to resolve within 24-48h."},
+    }
+  },
+
+  "ectopic-pregnancy": {
+    labResults: {
+      hcg: {group:"SERUM hCG", results:[
+        {test:"Quantitative hCG",value:"3,840",unit:"mIU/mL",range:"",flag:""},
+        {test:"Comment",value:"hCG 3,840 mIU/mL above discriminatory zone (~1,500-2,000). Normal IUP should be visible on TV-US at this level. No IUP = ectopic until proven otherwise.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"12.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"8.6",unit:"g/dL",range:"12.0-16.0",flag:"L"},
+        {test:"Hematocrit",value:"25.8",unit:"%",range:"36-46",flag:"L"},
+        {test:"Platelets",value:"288",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Significant anemia with hemodynamic instability — hemoperitoneum from ruptured ectopic.",unit:"",range:"",flag:""},
+      ]},
+      pt_inr: {group:"COAGULATION", results:[
+        {test:"PT",value:"12.8",unit:"seconds",range:"11.0-13.5",flag:""},
+        {test:"INR",value:"1.1",unit:"",range:"0.9-1.1",flag:""},
+        {test:"Comment",value:"Coags normal — pre-operative clearance. Type and screen urgently.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      us_abdomen: {findings:"Uterus: no intrauterine gestational sac identified. Endometrium 14mm thickened — decidual reaction. Right adnexa: heterogeneous 3.2 x 2.8cm mass with ring of fire vascular flow on Doppler. Free fluid pelvis and Morrison's pouch — moderate hemoperitoneum.",
+                   impression:"1. No intrauterine pregnancy.
+2. Right adnexal mass with ring-of-fire sign — ectopic pregnancy.
+3. Moderate hemoperitoneum — ruptured ectopic until proven otherwise.
+4. EMERGENT OBGYN/surgery. Type and cross-match. OR now."},
+    }
+  },
+
+  "status-epilepticus": {
+    labResults: {
+      bmp: {group:"BASIC METABOLIC PANEL", results:[
+        {test:"Sodium",value:"138",unit:"mEq/L",range:"136-145",flag:""},
+        {test:"Potassium",value:"5.4",unit:"mEq/L",range:"3.5-5.0",flag:"H"},
+        {test:"CO2",value:"14",unit:"mEq/L",range:"23-29",flag:"L"},
+        {test:"BUN",value:"22",unit:"mg/dL",range:"7-20",flag:"H"},
+        {test:"Creatinine",value:"2.1",unit:"mg/dL",range:"0.6-1.2",flag:"H"},
+        {test:"Glucose",value:"64",unit:"mg/dL",range:"70-100",flag:"L"},
+        {test:"Lactate",value:"8.4",unit:"mmol/L",range:"0.5-2.2",flag:"H"},
+        {test:"Comment",value:"Hypoglycemia — treat immediately (D50W) before any other intervention. Lactate 8.4 = extreme metabolic stress from prolonged seizure.",unit:"",range:"",flag:""},
+      ]},
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"22.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"13.2",unit:"g/dL",range:"12.0-16.0",flag:""},
+        {test:"Platelets",value:"188",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Leukocytosis from prolonged seizure / stress response — does not confirm CNS infection without other signs.",unit:"",range:"",flag:""},
+      ]},
+      anticonvulsant: {group:"DRUG LEVELS", results:[
+        {test:"Phenytoin level",value:"2.1",unit:"µg/mL",range:"10-20",flag:"L"},
+        {test:"Comment",value:"Critically subtherapeutic — IV fosphenytoin load or levetiracetam IV immediately after benzodiazepine.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      cthead: {findings:"No acute intracranial hemorrhage. No mass effect or midline shift. No acute infarct. No focal lesion. Diffuse cortical edema mild — post-ictal. Ventricles normal.",
+               impression:"1. No acute structural cause for status epilepticus on CT.
+2. Subtherapeutic phenytoin is likely precipitant.
+3. MRI with contrast after stabilization to rule out encephalitis or subtle cortical lesion."},
+    }
+  },
+
+  "testicular-torsion": {
+    labResults: {
+      cbc: {group:"CBC WITH DIFFERENTIAL", results:[
+        {test:"WBC",value:"12.4",unit:"x10³/µL",range:"4.5-11.0",flag:"H"},
+        {test:"Hemoglobin",value:"15.2",unit:"g/dL",range:"13.5-17.5",flag:""},
+        {test:"Platelets",value:"244",unit:"x10³/µL",range:"150-400",flag:""},
+        {test:"Comment",value:"Mild leukocytosis — reactive to ischemia/pain, not infection. Do NOT delay scrotal Doppler for CBC result.",unit:"",range:"",flag:""},
+      ]},
+      ua: {group:"URINALYSIS", results:[
+        {test:"WBC",value:"0-2",unit:"/hpf",range:"0-5",flag:""},
+        {test:"RBC",value:"0-2",unit:"/hpf",range:"0-3",flag:""},
+        {test:"Nitrite",value:"Negative",unit:"",range:"Negative",flag:""},
+        {test:"Comment",value:"Normal UA — does not support epididymitis/orchitis. Testicular torsion more likely. Doppler US urgently.",unit:"",range:"",flag:""},
+      ]},
+    },
+    imgResults: {
+      doppler_le: {findings:"",impression:""},
+      us_abdomen: {findings:"Left testis: 4.2 x 3.1 x 2.8cm. No blood flow on color Doppler. Heterogeneous echotexture — ischemia. Epididymis: enlarged, no flow. Right testis: normal size, normal Doppler flow bilaterally. No hydrocele. Torted cord sign (whirlpool sign) at left internal ring.",
+                   impression:"1. Absent Doppler flow left testis — testicular torsion.
+2. Whirlpool sign confirms torsion at cord level.
+3. EMERGENT urology. OR within 6h of onset for >90% salvage rate.
+4. Manual detorsion attempt while awaiting OR."},
+    }
+  },
+});
+
+// ── BATCH 3: Order Rubrics ────────────────────────────────────────────────────
+Object.assign(window.RDX_ORDER_RUBRICS, {
+
+  "rhabdomyolysis": {
+    required: ["bmp","cbc","ua","ekg"],
+    recommended: ["uculture"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","ctabdomen"],
+    teaching: {
+      bmp: "CK is the key diagnostic test — must order separately or with CMP. CK >10,000 = severe. Follow q6h to track peak and resolution.",
+      ua: "Dipstick blood with few RBCs = myoglobinuria (pathognomonic). Cola-brown urine is the clinical clue.",
+      ekg: "Hyperkalemia from rhabdomyolysis is rapid and severe — EKG immediately for peaked T-waves, QRS widening.",
+    }
+  },
+
+  "ards": {
+    required: ["cbc","bmp","cxr","bloodculture"],
+    recommended: ["pt_inr","crp"],
+    avoid: ["dexa","lipid","tsh","hba1c","doppler_le"],
+    teaching: {
+      cxr: "Bilateral infiltrates on CXR are required for Berlin ARDS definition. CT is more sensitive but not needed for diagnosis.",
+      bmp: "ABG (via BMP or standalone) defines P/F ratio — the severity criterion. Lactate tracks organ failure.",
+      bloodculture: "Identify and treat the precipitating infection — sepsis is the most common ARDS cause.",
+    }
+  },
+
+  "infective-endocarditis": {
+    required: ["bloodculture","cbc","cmp","echo"],
+    recommended: ["pt_inr","ekg","cthead"],
+    avoid: ["dexa","lipid","tsh","hba1c","doppler_le","ua"],
+    teaching: {
+      bloodculture: "Minimum 3 sets from different sites before antibiotics — positive in >90% of IE. Never give antibiotics before cultures.",
+      echo: "TTE first, TEE within 24h for all S. aureus bacteremia or if TTE non-diagnostic. Vegetation size, perivalvular abscess, valve function.",
+      cmp: "Renal function tracks embolic nephritis (immune complex GN). Elevated creatinine = worse prognosis.",
+    }
+  },
+
+  "hemorrhagic-stroke": {
+    required: ["cthead","cbc","pt_inr","bmp"],
+    recommended: ["ekg"],
+    avoid: ["mribrain","cta_pe","dexa","lipid","tsh","hba1c"],
+    teaching: {
+      cthead: "Non-contrast CT head is the FIRST test — hyperdense blood identified immediately. MRI more sensitive for small bleeds but takes longer.",
+      pt_inr: "Anticoagulation reversal is time-critical — INR >1.5 → 4-factor PCC + vitamin K. Do not wait for lab results if anticoagulated.",
+    }
+  },
+
+  "bowel-obstruction": {
+    required: ["cbc","bmp","ctabdomen"],
+    recommended: ["pt_inr"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","bloodculture"],
+    teaching: {
+      ctabdomen: "CT abdomen/pelvis with contrast identifies transition point, grade, and strangulation signs (fat stranding, pneumatosis). Plain films miss 20-40% of SBOs.",
+      bmp: "Lactate identifies ischemia/strangulation — level >2 = surgical urgency. Hypokalemia from vomiting requires aggressive replacement.",
+    }
+  },
+
+  "ectopic-pregnancy": {
+    required: ["hcg","cbc","pt_inr","us_abdomen"],
+    recommended: ["bmp"],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","ctabdomen","bloodculture"],
+    teaching: {
+      hcg: "Quantitative hCG above discriminatory zone (>1,500-2,000 mIU/mL) with no IUP on TV-US = ectopic until proven otherwise.",
+      us_abdomen: "Transvaginal ultrasound (TV-US) is mandatory in any reproductive-age woman with abdominal pain and positive hCG — must rule out ectopic.",
+      cbc: "Type and screen simultaneously — ruptured ectopic requires immediate OR and blood products.",
+    }
+  },
+
+  "status-epilepticus": {
+    required: ["bmp","cbc","cthead","anticonvulsant"],
+    recommended: ["bloodculture","ua"],
+    avoid: ["echo","dexa","lipid","doppler_le","bnp"],
+    teaching: {
+      bmp: "Glucose FIRST — hypoglycemia causes seizures and is immediately reversible. Check point-of-care immediately.",
+      anticonvulsant: "Subtherapeutic drug levels are the most common cause of status epilepticus in known epileptics.",
+      cthead: "CT head after stabilization — rule out structural cause, hemorrhage, abscess. Do not delay treatment for CT.",
+    }
+  },
+
+  "testicular-torsion": {
+    required: ["us_abdomen","cbc","ua"],
+    recommended: [],
+    avoid: ["mribrain","echo","dexa","lipid","tsh","ctabdomen","bloodculture"],
+    teaching: {
+      us_abdomen: "Scrotal Doppler ultrasound (ordered as US abdomen/pelvis or scrotal US) is the gold standard — absent flow confirms torsion. Do NOT delay for labs.",
+      ua: "Normal UA argues against epididymitis/orchitis. Presence of WBCs would suggest infectious etiology.",
+    }
+  },
+});
+
 // Inject into each case after loadCaseData resolves (handled in virtual-emr.html)
 // This file is loaded as a static script resource — no dynamic execution needed here.
 
