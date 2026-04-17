@@ -9,127 +9,199 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="emr-data/rdx-case-results.js"></script>
-<meta name="description" content="ReasonDx EMR Skills Lab — focused practice stations for ordering, documentation, and chart interpretation. 3-5 minutes each.">
+<meta name="description" content="ReasonDx EMR Skills Lab — targeted practice for ordering, note writing, and chart interpretation. 3–5 minutes each.">
 <link rel="canonical" href="https://www.reasondx.com/emr-skills.html">
 <style>
 :root {
-  --ocean:#2874A6; --ocean-d:#1B4F72; --ocean-l:#EBF5FB;
-  --teal:#0D7A67; --teal-l:#E8F8F5;
-  --slate:#1E293B; --slate-m:#475569; --slate-d:#94A3B8;
-  --bg:#F0F4F8; --surface:#fff; --border:#E2E8F0;
-  --green:#059669; --amber:#D97706; --red:#DC2626;
+  --ocean:#2874A6;--ocean-d:#1B4F72;--ocean-l:#EBF5FB;--ocean-xl:#F0F7FF;
+  --teal:#0D7A67;--teal-l:#E8F8F5;
+  --slate:#0F172A;--slate-m:#475569;--slate-d:#94A3B8;
+  --bg:#F0F4F8;--surface:#fff;--border:#E2E8F0;
+  --green:#059669;--green-l:#ECFDF5;
+  --amber:#D97706;--amber-l:#FFFBEB;
+  --red:#DC2626;--red-l:#FEF2F2;
+  --shadow-sm:0 1px 3px rgba(0,0,0,.08);
+  --shadow:0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg:0 8px 32px rgba(0,0,0,.14);
+  --r:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:var(--slate);min-height:100vh}
 
-/* HEADER */
-.header{background:linear-gradient(160deg,#071824 0%,#0d2b3e 60%,#0f3d2e 100%);padding:48px 24px 56px;text-align:center;position:relative;overflow:hidden}
-.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 40% 50%,rgba(40,116,166,.2) 0%,transparent 65%),radial-gradient(ellipse 40% 50% at 70% 40%,rgba(13,122,103,.15) 0%,transparent 60%);pointer-events:none}
-.header-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
-.header-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.5);font-size:13px;font-weight:600;text-decoration:none;margin-bottom:20px;transition:color .15s}
-.header-back:hover{color:rgba(255,255,255,.8)}
-.header-eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:12px}
-.header-h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(2rem,5vw,3rem);color:#fff;line-height:1.1;margin-bottom:14px}
-.header-h1 em{font-style:italic;color:rgba(255,255,255,.6)}
-.header-sub{font-size:1rem;color:rgba(255,255,255,.55);line-height:1.65;max-width:500px;margin:0 auto}
+/* ── HEADER ── */
+.header{
+  background:linear-gradient(160deg,#060F1C 0%,#0D2236 50%,#0A2E22 100%);
+  padding:52px 24px 64px;text-align:center;position:relative;overflow:hidden
+}
+.header::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 60% at 30% 50%,rgba(40,116,166,.18) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 40% at 75% 35%,rgba(13,122,103,.12) 0%,transparent 60%);
+  pointer-events:none
+}
+.header::after{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.018'%3E%3Cpath d='M0 20L20 0L40 20L20 40z'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events:none
+}
+.header-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.header-back{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.4);font-size:13px;font-weight:600;text-decoration:none;margin-bottom:24px;transition:color .15s}
+.header-back:hover{color:rgba(255,255,255,.75)}
+.header-label{font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px}
+.header-h1{font-family:'DM Serif Display',Georgia,serif;font-size:clamp(2.2rem,5vw,3.2rem);color:#fff;line-height:1.08;margin-bottom:16px;letter-spacing:-.02em}
+.header-h1 em{font-style:italic;background:linear-gradient(90deg,#67E8F9,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-sub{font-size:15px;color:rgba(255,255,255,.5);line-height:1.65;max-width:480px;margin:0 auto}
 
-/* STATION GRID */
-.stations{max-width:1080px;margin:-32px auto 0;padding:0 20px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+/* ── STATIONS GRID ── */
+.stations{max-width:1080px;margin:-36px auto 0;padding:0 20px 80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;position:relative;z-index:2}
 
-/* STATION CARD */
-.station-card{background:var(--surface);border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);border:1.5px solid var(--border);transition:transform .2s,box-shadow .2s;cursor:pointer}
-.station-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.12)}
-.station-head{padding:28px 28px 24px;position:relative}
-.station-tag{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px;display:inline-block;padding:3px 10px;border-radius:20px}
-.station-icon{font-size:36px;margin-bottom:14px}
-.station-title{font-family:'DM Serif Display',Georgia,serif;font-size:1.5rem;color:var(--slate);margin-bottom:8px;line-height:1.2}
-.station-desc{font-size:13px;color:var(--slate-m);line-height:1.6;margin-bottom:20px}
-.station-meta{display:flex;gap:16px;flex-wrap:wrap}
-.station-meta-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--slate-d);font-weight:500}
-.station-foot{padding:16px 28px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.station-cta{padding:10px 22px;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+/* ── STATION CARD ── */
+.station-card{
+  background:var(--surface);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);border:1.5px solid var(--border);
+  transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer;
+  display:flex;flex-direction:column;
+}
+.station-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent}
+.station-head{padding:28px 28px 20px;flex:1}
+.station-accent{height:4px;width:100%;border-radius:0}
+.s1-accent{background:linear-gradient(90deg,#2874A6,#0EA5E9)}
+.s2-accent{background:linear-gradient(90deg,#059669,#34D399)}
+.s3-accent{background:linear-gradient(90deg,#D97706,#FB923C)}
+.station-num{font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px}
+.s1-num{background:#EFF6FF;color:#1D4ED8}
+.s2-num{background:#F0FDF4;color:#15803D}
+.s3-num{background:#FFFBEB;color:#B45309}
+.station-icon{font-size:38px;margin-bottom:16px;line-height:1}
+.station-title{font-family:'DM Serif Display',Georgia,serif;font-size:1.55rem;color:var(--slate);margin-bottom:10px;line-height:1.15}
+.station-desc{font-size:13px;color:var(--slate-m);line-height:1.65;margin-bottom:18px}
+.station-chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px}
+.chip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:12px;background:#F1F5F9;color:#475569}
+.station-foot{padding:14px 28px 20px;border-top:1px solid #F1F5F9;display:flex;align-items:center;justify-content:space-between;background:#FAFBFC}
 .station-progress{font-size:12px;color:var(--slate-d);font-weight:500}
+.station-cta{padding:10px 20px;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:6px}
+.s1-cta{background:#2874A6;color:#fff}.s1-cta:hover{background:#1B4F72}
+.s2-cta{background:#059669;color:#fff}.s2-cta:hover{background:#047857}
+.s3-cta{background:#D97706;color:#fff}.s3-cta:hover{background:#B45309}
 
-/* MODAL OVERLAY */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px}
-.modal-box{background:var(--surface);border-radius:20px;max-width:780px;width:100%;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.25)}
-.modal-header{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-.modal-title{font-size:16px;font-weight:700;color:var(--slate)}
-.modal-close{width:32px;height:32px;border:none;background:var(--bg);border-radius:8px;cursor:pointer;font-size:18px;color:var(--slate-m);display:flex;align-items:center;justify-content:center}
+/* ── MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(2px)}
+.modal-box{background:var(--surface);border-radius:20px;max-width:800px;width:100%;max-height:92vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.3)}
+.modal-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:#FAFBFC}
+.modal-title{font-size:15px;font-weight:700;color:var(--slate)}
+.modal-close{width:32px;height:32px;border:none;background:#F1F5F9;border-radius:8px;cursor:pointer;font-size:16px;color:var(--slate-m);transition:background .15s}.modal-close:hover{background:#E2E8F0}
 .modal-body{overflow-y:auto;flex:1;padding:24px}
-.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;background:#F8FAFC}
+.modal-foot{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;background:#F8FAFC}
 
-/* SHARED STATION STYLES */
-.vignette-box{background:linear-gradient(135deg,#0d2b3e,#1a3d5c);border-radius:12px;padding:20px 24px;margin-bottom:20px;color:#fff}
-.vignette-label{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:10px}
-.vignette-text{font-size:15px;line-height:1.65;color:rgba(255,255,255,.9)}
-.vignette-vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-top:14px}
-.vital-item{background:rgba(255,255,255,.08);border-radius:8px;padding:8px 12px;text-align:center}
-.vital-label{font-size:10px;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.04em}
-.vital-val{font-size:16px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#fff;margin-top:2px}
-.vital-val.alert{color:#FCA5A5}
+/* ── VIGNETTE ── */
+.vignette{background:linear-gradient(135deg,#0C2340,#1A3E5C);border-radius:14px;padding:20px 24px;margin-bottom:20px;color:#fff}
+.vignette-label{font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px}
+.vignette-text{font-size:14px;line-height:1.7;color:rgba(255,255,255,.9)}
+.vitals-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:8px;margin-top:14px}
+.vital{background:rgba(255,255,255,.08);border-radius:8px;padding:8px 10px;text-align:center;border:1px solid rgba(255,255,255,.06)}
+.vital-lbl{font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.06em}
+.vital-val{font-size:15px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:#fff;margin-top:3px}
+.vital-val.danger{color:#FCA5A5}
 
-/* STATION 1: ORDER SELECTIVITY */
-.order-catalog{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin-bottom:20px}
-.order-btn{padding:9px 14px;border:1.5px solid var(--border);border-radius:10px;background:var(--surface);font-family:inherit;font-size:13px;font-weight:500;color:var(--slate);cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:8px}
-.order-btn:hover{border-color:var(--ocean);background:var(--ocean-l);color:var(--ocean-d)}
-.order-btn.selected{border-color:var(--ocean);background:var(--ocean-l);color:var(--ocean-d);font-weight:600}
+/* ── ORDER CATALOG ── */
+.order-section-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-d);margin:16px 0 8px;padding:0 2px;display:flex;align-items:center;gap:6px}
+.order-section-label span{padding:2px 8px;border-radius:4px;font-weight:700}
+.cat-cardiac span{background:#FEE2E2;color:#991B1B}
+.cat-chem span{background:#FEF3C7;color:#92400E}
+.cat-heme span{background:#EDE9FE;color:#5B21B6}
+.cat-micro span{background:#D1FAE5;color:#065F46}
+.cat-imaging span{background:#DBEAFE;color:#1E40AF}
+.cat-ua span{background:#FCE7F3;color:#9D174D}
+.order-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:6px;margin-bottom:8px}
+.order-btn{padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;background:#fff;font-family:inherit;font-size:12px;font-weight:500;color:var(--slate);cursor:pointer;text-align:left;transition:all .15s;display:flex;align-items:center;gap:8px}
+.order-btn:hover{border-color:var(--ocean);background:var(--ocean-xl)}
+.order-btn.selected{border-color:var(--ocean);background:var(--ocean-l);font-weight:600;color:var(--ocean-d)}
+.order-check{width:18px;height:18px;border-radius:50%;background:var(--ocean);color:#fff;font-size:10px;font-weight:800;display:none;align-items:center;justify-content:center;flex-shrink:0}
 .order-btn.selected .order-check{display:flex}
-.order-check{display:none;width:18px;height:18px;border-radius:50%;background:var(--ocean);color:#fff;font-size:11px;align-items:center;justify-content:center;flex-shrink:0}
-.order-cat-header{grid-column:1/-1;font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-d);padding:4px 0 2px;border-bottom:1px solid var(--border);margin-bottom:4px}
-.selected-orders{min-height:48px;padding:12px 14px;background:#F8FAFC;border:1.5px dashed var(--border);border-radius:10px;margin-bottom:16px;font-size:13px;color:var(--slate-d)}
-.selected-tag{display:inline-flex;align-items:center;gap:5px;background:var(--ocean-l);color:var(--ocean-d);padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600;margin:2px}
-.selected-tag button{background:none;border:none;cursor:pointer;color:var(--ocean);font-size:14px;line-height:1;padding:0 0 0 2px}
+.selected-bar{min-height:44px;padding:10px 14px;background:#F8FAFC;border:1.5px dashed var(--border);border-radius:10px;margin-bottom:16px;font-size:12px;color:var(--slate-d);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sel-tag{display:inline-flex;align-items:center;gap:4px;background:var(--ocean-l);color:var(--ocean-d);padding:3px 8px;border-radius:10px;font-size:11px;font-weight:600}
+.sel-tag button{background:none;border:none;cursor:pointer;color:var(--ocean);font-size:13px;line-height:1;padding:0}
 
-/* STATION 2: NOTE WRITING */
-.note-field-wrap{margin-bottom:14px}
-.note-field-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ocean-d);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.note-field-label .req{color:var(--red);font-size:10px}
-.note-textarea{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.65;resize:vertical;outline:none;transition:border .15s;color:var(--slate)}
-.note-textarea:focus{border-color:var(--ocean)}
-.note-textarea.small{min-height:60px}
-.note-textarea.med{min-height:100px}
-.note-textarea.large{min-height:140px}
-.chart-data-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.chart-pill{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;font-family:'IBM Plex Mono',monospace}
+/* ── NOTE FIELDS ── */
+.note-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--ocean-d);margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.note-lbl .req{color:var(--red);font-size:10px}
+.note-ta{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'IBM Plex Mono',monospace;font-size:16px;line-height:1.65;resize:vertical;outline:none;transition:border .15s;color:var(--slate);background:#FAFBFC}
+.note-ta:focus{border-color:var(--ocean);background:#fff;box-shadow:0 0 0 3px rgba(40,116,166,.08)}
+.note-ta.sm{min-height:60px}
+.note-ta.md{min-height:100px}
+.note-ta.lg{min-height:140px}
+.wc{font-size:11px;color:var(--slate-d);margin-top:4px;text-align:right}
 
-/* STATION 3: CHART ROUNDS */
-.rounds-question{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:16px}
-.rounds-q-label{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px}
+/* ── CHART DATA ── */
+.chart-pill{display:inline-block;background:#F1F5F9;border:1px solid var(--border);border-radius:6px;padding:3px 8px;font-size:11px;font-family:'IBM Plex Mono',monospace;margin:2px}
+.chart-pill.h{color:var(--red);font-weight:700;background:#FEF2F2;border-color:#FECACA}
+.chart-pill.l{color:#1D4ED8;font-weight:700;background:#EFF6FF;border-color:#BFDBFE}
+
+/* ── ROUNDS ── */
+.rounds-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;transition:border-color .15s}
+.rounds-card:focus-within{border-color:var(--ocean)}
+.rounds-q-num{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ocean);margin-bottom:8px}
 .rounds-q-text{font-size:14px;font-weight:600;color:var(--slate);margin-bottom:12px;line-height:1.45}
-.rounds-textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-family:inherit;font-size:16px;line-height:1.55;resize:vertical;min-height:80px;outline:none;transition:border .15s;color:var(--slate)}
-.rounds-textarea:focus{border-color:var(--ocean)}
+.rounds-ta{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;font-family:inherit;font-size:16px;line-height:1.55;resize:vertical;min-height:80px;outline:none;transition:border .15s;color:var(--slate)}
+.rounds-ta:focus{border-color:var(--ocean)}
 
-/* RESULT PANEL */
+/* ── RESULTS ── */
 .result-panel{animation:slideUp .3s ease}
 @keyframes slideUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.result-score{display:flex;align-items:center;gap:16px;padding:20px;border-radius:14px;margin-bottom:20px}
-.result-circle{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;flex-shrink:0;font-family:'IBM Plex Mono',monospace}
-.result-grade-label{font-size:14px;font-weight:700;color:var(--slate)}
-.result-grade-sub{font-size:12px;color:var(--slate-m);margin-top:3px;line-height:1.5}
-.result-item{padding:12px 14px;border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.55}
+.score-hero{display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:14px;margin-bottom:20px;border:1.5px solid}
+.score-ring{width:68px;height:68px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;flex-shrink:0;font-family:'IBM Plex Mono',monospace;border:3px solid}
+.score-great .score-ring{background:#ECFDF5;color:#059669;border-color:#059669}
+.score-great{background:linear-gradient(135deg,#F0FDF4,#ECFDF5);border-color:#BBF7D0}
+.score-ok .score-ring{background:#FFFBEB;color:#D97706;border-color:#D97706}
+.score-ok{background:linear-gradient(135deg,#FFFBEB,#FEF3C7);border-color:#FDE68A}
+.score-low .score-ring{background:#FEF2F2;color:#DC2626;border-color:#DC2626}
+.score-low{background:linear-gradient(135deg,#FEF2F2,#FEE2E2);border-color:#FECACA}
+.score-label{font-size:15px;font-weight:700;color:var(--slate);margin-bottom:4px}
+.score-sub{font-size:12px;color:var(--slate-m)}
+.result-item{padding:12px 14px;border-radius:9px;margin-bottom:8px;font-size:13px;line-height:1.6;display:flex;gap:10px;align-items:flex-start}
+.ri-icon{font-size:14px;flex-shrink:0;margin-top:1px}
 .result-good{background:#F0FDF4;border-left:3px solid #10B981}
 .result-warn{background:#FFFBEB;border-left:3px solid #F59E0B}
 .result-bad{background:#FEF2F2;border-left:3px solid #F87171}
-.result-tip{background:var(--ocean-l);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ocean-d);line-height:1.6;margin-top:16px}
+.result-tip{background:linear-gradient(135deg,var(--ocean-xl),#EBF5FB);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ocean-d);line-height:1.6;margin-top:16px;border:1px solid #BFDBFE}
+.confetti{font-size:32px;text-align:center;margin-bottom:8px;animation:pop .4s ease}
+@keyframes pop{0%{transform:scale(.5);opacity:0}70%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
 
-/* UTILITIES */
-.btn-primary{padding:12px 24px;background:var(--ocean);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
+/* ── BUTTONS ── */
+.btn-primary{padding:12px 24px;background:var(--ocean);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s;display:inline-flex;align-items:center;gap:6px}
 .btn-primary:hover{background:var(--ocean-d)}
-.btn-secondary{padding:12px 20px;background:var(--bg);color:var(--slate-m);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-secondary{padding:11px 20px;background:#fff;color:var(--slate-m);border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
 .btn-secondary:hover{border-color:var(--slate-m);color:var(--slate)}
-.btn-teal{padding:12px 24px;background:var(--teal);color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
-.btn-teal:hover{background:#0a6155}
-.word-count{font-size:12px;color:var(--slate-d);margin-top:4px}
-.section-divider{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-d);margin:20px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.btn-teal{padding:12px 24px;background:#059669;color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;transition:background .15s}
+.btn-teal:hover{background:#047857}
 
+/* ── DIVIDERS ── */
+.sec-div{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--slate-d);margin:20px 0 10px;padding-bottom:8px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;gap:8px}
+
+/* ── OVERNIGHT EVENTS ── */
+.overnight{padding:12px 16px;background:#FFFBEB;border-radius:10px;border-left:3px solid #F59E0B;font-size:13px;color:#78350F;line-height:1.6;margin-bottom:16px}
+.lab-trend{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px;margin-bottom:20px}
+.trend-item{background:#F8FAFC;border-radius:8px;padding:8px 10px;border:1px solid var(--border)}
+.trend-lbl{font-size:10px;font-weight:700;color:var(--slate-d);text-transform:uppercase;letter-spacing:.04em}
+.trend-val{font-size:14px;font-weight:700;font-family:'IBM Plex Mono',monospace;color:var(--slate);margin-top:2px}
+.trend-val.h{color:var(--red)}.trend-val.l{color:#1D4ED8}
+.trend-prev{font-size:10px;color:var(--slate-d);margin-top:1px}
+.trend-arrow{font-size:11px;margin-left:3px}
+.up{color:var(--red)}.dn{color:#1D4ED8}.eq{color:var(--slate-d)}
+
+/* ── LOADING ── */
+.loading-ring{display:inline-block;width:20px;height:20px;border:2px solid rgba(40,116,166,.2);border-top-color:var(--ocean);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── RESPONSIVE ── */
 @media(max-width:640px){
   .stations{grid-template-columns:1fr;padding:0 12px 60px}
-  .order-catalog{grid-template-columns:1fr 1fr}
+  .order-grid{grid-template-columns:1fr 1fr}
   .modal-box{max-height:100vh;border-radius:16px 16px 0 0;margin-top:auto}
   .modal-overlay{padding:0;align-items:flex-end}
+  .vitals-row{grid-template-columns:repeat(3,1fr)}
 }
 </style>
 </head>
@@ -138,81 +210,75 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 <div class="header">
   <div class="header-inner">
     <a href="virtual-emr.html" class="header-back">← Virtual EMR</a>
-    <div class="header-eyebrow">EMR Skills Lab</div>
+    <div class="header-label">ReasonDx · EMR Skills Lab</div>
     <h1 class="header-h1">Practice the skills.<br><em>Before the wards.</em></h1>
-    <p class="header-sub">Three focused stations — 3 to 5 minutes each. Order the right tests. Write a real note. Interpret a chart mid-rounds.</p>
+    <p class="header-sub">Three focused stations — 3 to 5 minutes each. No setup, no login required.</p>
   </div>
 </div>
 
 <div class="stations">
 
-  <!-- STATION 1: ORDER SELECTIVITY -->
   <div class="station-card" onclick="openStation('orders')">
-    <div class="station-head" style="background:linear-gradient(135deg,#EBF5FB,#F0FDF4)">
-      <div class="station-tag" style="background:#BFDBFE;color:#1D4ED8">Station 1</div>
+    <div class="station-accent s1-accent"></div>
+    <div class="station-head">
+      <div class="station-num s1-num">⬡ Station 1</div>
       <div class="station-icon">🔬</div>
       <div class="station-title">Order Selectivity</div>
-      <div class="station-desc">See a clinical vignette. Choose your labs and imaging. Get scored on appropriateness, selectivity, and over-ordering.</div>
-      <div class="station-meta">
-        <div class="station-meta-item">⏱ 3 minutes</div>
-        <div class="station-meta-item">🎯 Choosing Wisely</div>
-        <div class="station-meta-item">📊 Scored</div>
+      <div class="station-desc">A patient arrives. You have 60 seconds of mental bandwidth. Which labs and imaging actually change your management — and which are over-ordering?</div>
+      <div class="station-chips">
+        <span class="chip">⏱ 3 min</span>
+        <span class="chip">🎯 Choosing Wisely</span>
+        <span class="chip">📊 Scored</span>
       </div>
     </div>
     <div class="station-foot">
-      <div class="station-progress" id="progress-orders">Not started</div>
-      <button class="station-cta" style="background:#2874A6;color:#fff" onclick="event.stopPropagation();openStation('orders')">
-        Start →
-      </button>
+      <div class="station-progress" id="progress-orders">—</div>
+      <button class="station-cta s1-cta" onclick="event.stopPropagation();openStation('orders')">Start →</button>
     </div>
   </div>
 
-  <!-- STATION 2: NOTE WRITING -->
   <div class="station-card" onclick="openStation('notes')">
-    <div class="station-head" style="background:linear-gradient(135deg,#F0FDF4,#FFFBEB)">
-      <div class="station-tag" style="background:#BBF7D0;color:#065F46">Station 2</div>
+    <div class="station-accent s2-accent"></div>
+    <div class="station-head">
+      <div class="station-num s2-num">⬡ Station 2</div>
       <div class="station-icon">📝</div>
-      <div class="station-title">Note Writing</div>
-      <div class="station-desc">Receive a complete patient chart. Write the Assessment & Plan — the hardest part. Get feedback on reasoning quality, not just format.</div>
-      <div class="station-meta">
-        <div class="station-meta-item">⏱ 5 minutes</div>
-        <div class="station-meta-item">🩺 A&P focused</div>
-        <div class="station-meta-item">🤖 AI feedback</div>
+      <div class="station-title">Assessment & Plan</div>
+      <div class="station-desc">The chart is complete, the labs are back. Now write the hardest part — a problem-based A&P that shows your reasoning, not just your data collection.</div>
+      <div class="station-chips">
+        <span class="chip">⏱ 5 min</span>
+        <span class="chip">🩺 Clinical reasoning</span>
+        <span class="chip">🤖 AI feedback</span>
       </div>
     </div>
     <div class="station-foot">
-      <div class="station-progress" id="progress-notes">Not started</div>
-      <button class="station-cta" style="background:#059669;color:#fff" onclick="event.stopPropagation();openStation('notes')">
-        Start →
-      </button>
+      <div class="station-progress" id="progress-notes">—</div>
+      <button class="station-cta s2-cta" onclick="event.stopPropagation();openStation('notes')">Start →</button>
     </div>
   </div>
 
-  <!-- STATION 3: CHART ROUNDS -->
   <div class="station-card" onclick="openStation('rounds')">
-    <div class="station-head" style="background:linear-gradient(135deg,#FEF3C7,#EDE9FE)">
-      <div class="station-tag" style="background:#FDE68A;color:#92400E">Station 3</div>
+    <div class="station-accent s3-accent"></div>
+    <div class="station-head">
+      <div class="station-num s3-num">⬡ Station 3</div>
       <div class="station-icon">🏥</div>
-      <div class="station-title">Chart Rounds</div>
-      <div class="station-desc">It's day 3 of a hospitalization. Review the overnight events and morning labs. Answer three focused clinical questions — like your resident expects you to.</div>
-      <div class="station-meta">
-        <div class="station-meta-item">⏱ 4 minutes</div>
-        <div class="station-meta-item">📋 Inpatient</div>
-        <div class="station-meta-item">🎯 Synthesis</div>
+      <div class="station-title">Morning Rounds</div>
+      <div class="station-desc">It's 6am, you're pre-rounding on Day 3. Overnight events happened. Morning labs are back. Your resident expects you to have a plan — not just a report.</div>
+      <div class="station-chips">
+        <span class="chip">⏱ 4 min</span>
+        <span class="chip">📋 Inpatient synthesis</span>
+        <span class="chip">📖 Model answers</span>
       </div>
     </div>
     <div class="station-foot">
-      <div class="station-progress" id="progress-rounds">Not started</div>
-      <button class="station-cta" style="background:#D97706;color:#fff" onclick="event.stopPropagation();openStation('rounds')">
-        Start →
-      </button>
+      <div class="station-progress" id="progress-rounds">—</div>
+      <button class="station-cta s3-cta" onclick="event.stopPropagation();openStation('rounds')">Start →</button>
     </div>
   </div>
 
 </div>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="stationModal" style="display:none">
+<div class="modal-overlay" id="stationModal" style="display:none" onclick="if(event.target===this)closeStation()">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title" id="modalTitle">Station</div>
@@ -226,480 +292,474 @@ body{font-family:'DM Sans',-apple-system,sans-serif;background:var(--bg);color:v
 <script src="emr-data/crt-index.js"></script>
 <script>
 
-// ── STATION DATA ──────────────────────────────────────────────────────────────
-
-var STATIONS = {
-
-  orders: {
-    title: '🔬 Order Selectivity',
-    cases: [
-      {
-        id: 'chest-pain-mi',
-        vignette: '58F with 45 minutes of crushing substernal chest pain radiating to the left jaw. Diaphoretic. No prior cardiac history. PMH: HTN, DM2.',
-        vitals: {BP:'158/94', HR:'102', RR:'18', SpO2:'96%', Temp:'37.1°C'},
-        rubric: window.RDX_ORDER_RUBRICS && window.RDX_ORDER_RUBRICS['stemi-v1'],
-        diagnosis: 'STEMI / ACS',
-      },
-      {
-        id: 'sob-pe',
-        vignette: '34F with sudden onset sharp pleuritic chest pain and dyspnea. Just returned from a 14-hour international flight. No prior cardiac or pulmonary history. Currently on OCP.',
-        vitals: {BP:'122/76', HR:'108', RR:'22', SpO2:'93%', Temp:'37.4°C'},
-        rubric: window.RDX_ORDER_RUBRICS && window.RDX_ORDER_RUBRICS['pe-v1'],
-        diagnosis: 'Pulmonary Embolism',
-      },
-      {
-        id: 'confusion-dka',
-        vignette: '22M, T1DM, brought in by family for confusion and vomiting. Has not been taking insulin for 3 days. Fruity breath odor.',
-        vitals: {BP:'104/68', HR:'118', RR:'26 (deep)', SpO2:'98%', Temp:'37.8°C'},
-        rubric: window.RDX_ORDER_RUBRICS && window.RDX_ORDER_RUBRICS['dka-v1'],
-        diagnosis: 'DKA',
-      },
-    ],
-    selectedOrders: [],
-    currentCase: null,
-    submitted: false,
-  },
-
-  notes: {
-    title: '📝 Assessment & Plan Writing',
-    cases: [
-      {
-        id: 'chf-ap',
-        patient: '71M with known HFrEF (EF 30%), presenting with 5-day worsening dyspnea, 8 lb weight gain, bilateral ankle edema, orthopnea.',
-        pmh: 'HFrEF EF 30%, CKD stage 3 (baseline Cr 1.6), HTN, AFib on warfarin, T2DM',
-        meds: 'Carvedilol 25mg BID, Lisinopril 5mg daily, Spironolactone 25mg daily, Furosemide 40mg daily, Warfarin (INR 2.1), Metformin 1g BID',
-        pe: 'VS: BP 164/92, HR 88 irregular, RR 24, SpO2 88% RA → 94% on 4L NC. Auscultation: bilateral crackles to mid-lung fields, S3 gallop. Extremities: 3+ pitting edema to thighs.',
-        labs: [
-          {name:'NT-proBNP', val:'8,420 pg/mL', flag:'H'},
-          {name:'Creatinine', val:'2.1 mg/dL', flag:'H'},
-          {name:'BUN', val:'48 mg/dL', flag:'H'},
-          {name:'Sodium', val:'130 mEq/L', flag:'L'},
-          {name:'Potassium', val:'5.4 mEq/L', flag:'H'},
-          {name:'Hemoglobin', val:'10.2 g/dL', flag:'L'},
-        ],
-        imaging: 'CXR: cardiomegaly, bilateral pulmonary edema, bilateral pleural effusions R>L.',
-        prompt: 'Write your Assessment & Plan. Address: primary diagnosis with severity, management priorities, and why the creatinine is elevated.',
-        guidance: ['State the primary problem with mechanism: e.g. "Acute decompensated HFrEF — volume overload"', 'Address the rising creatinine — cardiorenal syndrome vs. over-diuresis', 'Specific diuresis plan with monitoring parameters', 'Address hyperkalemia before starting/continuing spironolactone', 'Goal-directed medical therapy check: is patient on appropriate doses?'],
-      },
-    ],
-    fields: {},
-    submitted: false,
-  },
-
-  rounds: {
-    title: '🏥 Morning Chart Rounds',
-    cases: [
-      {
-        id: 'sepsis-day3',
-        context: 'Hospital Day 3 — Urosepsis / Gram-negative bacteremia',
-        patient: '68F admitted 3 days ago with urosepsis. Initial lactate 3.8. Blood cultures grew E. coli (pan-sensitive). Started on ceftriaxone 1g IV q24h. Responding clinically — HR improving.',
-        overnight: 'Overnight events: UOP dropped to 15 mL/hr × 3 hours at 2am. Nursing gave 500mL IVF bolus → UOP improved to 35 mL/hr. Patient afebrile. BP stable.',
-        morningLabs: [
-          {name:'WBC', val:'11.4', flag:'', prev:'18.4'},
-          {name:'Creatinine', val:'1.8', flag:'H', prev:'1.1'},
-          {name:'BUN', val:'36', flag:'H', prev:'24'},
-          {name:'Sodium', val:'136', flag:'', prev:'134'},
-          {name:'Potassium', val:'4.8', flag:'', prev:'4.2'},
-          {name:'Lactate', val:'1.4', flag:'', prev:'3.8'},
-        ],
-        questions: [
-          {id:'q1', label:'Q1 — Interpret the morning labs', text:'The creatinine rose from 1.1 to 1.8. What is the most likely explanation, and what is your management?'},
-          {id:'q2', label:'Q2 — Antibiotic stewardship', text:'Cultures show pan-sensitive E. coli. She is afebrile and improving. What antibiotic change, if any, do you make and when?'},
-          {id:'q3', label:'Q3 — Anticipatory guidance', text:'What are the two most important things to watch for over the next 24 hours? What are your call-back parameters for nursing?'},
-        ],
-        model: {
-          q1: 'Rising creatinine in the context of sepsis + aggressive IVF + overnight oliguria = AKI (most likely prerenal + sepsis-associated). Hold nephrotoxins, ensure adequate MAP >65, check foley for obstruction, trend q8h. Volume-responsiveness already demonstrated.',
-          q2: 'De-escalate to oral cephalexin or TMP-SMX (based on sensitivities) after 48h of clinical improvement and tolerating POs. Total course 7 days for uncomplicated gram-negative bacteremia.',
-          q3: 'Watch for: (1) further oliguria suggesting worsening AKI — call if UOP <0.5 mL/kg/hr × 2h; (2) fever recurrence suggesting inadequate source control. Call if HR >100, SBP <90, or new rigors.',
-        },
-      },
-    ],
-    answers: {},
-    submitted: false,
-    currentCase: null,
-  },
+/* ── ORDER CATALOG ── */
+var CATALOG = {
+  Cardiac: [
+    {id:'troponin',n:'Troponin I'},
+    {id:'bnp',n:'BNP / NT-proBNP'},
+    {id:'ekg',n:'12-Lead EKG'},
+    {id:'echo',n:'Echocardiogram (TTE)'},
+  ],
+  Chemistry: [
+    {id:'bmp',n:'Basic Metabolic Panel'},
+    {id:'cmp',n:'Comprehensive Metabolic Panel'},
+    {id:'hba1c',n:'Hemoglobin A1c'},
+    {id:'lipid',n:'Lipid Panel'},
+    {id:'tsh',n:'TSH'},
+    {id:'ft4',n:'Free T4'},
+    {id:'crp',n:'CRP'},
+    {id:'magnesium',n:'Magnesium'},
+    {id:'phosphorus',n:'Phosphorus'},
+    {id:'cortisol',n:'Cortisol (AM)'},
+  ],
+  Hematology: [
+    {id:'cbc',n:'CBC with Differential'},
+    {id:'pt_inr',n:'PT / INR'},
+    {id:'ptt',n:'PTT'},
+    {id:'esr',n:'ESR (Sed Rate)'},
+  ],
+  Microbiology: [
+    {id:'bloodculture',n:'Blood Cultures × 2'},
+    {id:'uculture',n:'Urine Culture'},
+  ],
+  Imaging: [
+    {id:'cxr',n:'Chest X-Ray'},
+    {id:'ekg',n:'EKG (Cardiology)'},
+    {id:'cta_pe',n:'CTA Chest – PE Protocol'},
+    {id:'cthead',n:'CT Head w/o Contrast'},
+    {id:'ctchest',n:'CT Chest w/ Contrast'},
+    {id:'ctabdomen',n:'CT Abdomen/Pelvis'},
+    {id:'echo',n:'Echo (TTE)'},
+    {id:'us_abdomen',n:'US Abdomen'},
+    {id:'us_renal',n:'US Renal/Bladder'},
+    {id:'doppler_le',n:'Venous Doppler LE'},
+    {id:'mribrain',n:'MRI Brain'},
+    {id:'dexa',n:'DEXA Bone Density'},
+  ],
+  Urinalysis: [
+    {id:'ua',n:'Urinalysis w/ Micro'},
+    {id:'hcg',n:'Serum hCG (Pregnancy)'},
+  ],
 };
 
-// ── STATION LOGIC ─────────────────────────────────────────────────────────────
+var CAT_STYLE = {
+  Cardiac:'cat-cardiac',Chemistry:'cat-chem',Hematology:'cat-heme',
+  Microbiology:'cat-micro',Imaging:'cat-imaging',Urinalysis:'cat-ua'
+};
 
+var ALL_ORDERS = {};
+Object.values(CATALOG).forEach(function(arr){ arr.forEach(function(o){ ALL_ORDERS[o.id]=o.n; }); });
+
+/* ── CASES ── */
+var CASES = {
+  orders: [
+    { id:'stemi',   dx:'STEMI', rubric:'stemi-v1',
+      vignette:'58F with 45 minutes of crushing substernal chest pain radiating to the left jaw. Diaphoretic, nauseous. No prior cardiac history. PMH: HTN, T2DM.',
+      vitals:{BP:'158/94',HR:'102',RR:'18',SpO2:'96%',Temp:'37.1°C',Pain:'9/10'}, dangerVitals:['HR','SpO2'] },
+    { id:'pe',      dx:'Pulmonary Embolism', rubric:'pe-v1',
+      vignette:'34F with sudden-onset sharp pleuritic chest pain and dyspnea. Just returned from a 14-hour international flight. No cardiac or pulmonary history. On OCP.',
+      vitals:{BP:'122/76',HR:'108',RR:'22',SpO2:'93%',Temp:'37.4°C',Pain:'7/10'}, dangerVitals:['HR','SpO2','RR'] },
+    { id:'dka',     dx:'DKA', rubric:'dka-v1',
+      vignette:'22M with T1DM, brought in by family for confusion and vomiting. Has not taken insulin in 3 days. Fruity breath odor. Family says he was lethargic all morning.',
+      vitals:{BP:'104/68',HR:'118',RR:'26',SpO2:'98%',Temp:'37.8°C',Pain:'5/10'}, dangerVitals:['BP','HR','RR'] },
+    { id:'stroke',  dx:'Acute Ischemic Stroke', rubric:'stroke-v1',
+      vignette:'67M with sudden left-sided weakness and slurred speech × 45 minutes. Wife called 911. PMH: HTN, AFib (not anticoagulated).',
+      vitals:{BP:'188/102',HR:'84',RR:'16',SpO2:'98%',Temp:'37.0°C',Pain:'2/10'}, dangerVitals:['BP'] },
+    { id:'sepsis',  dx:'Septic Shock / Urosepsis', rubric:'septic-shock-urosepsis',
+      vignette:'72F with fever 39.4°C, chills, flank pain, and new confusion. Foley catheter in place × 3 days. BP 84/52 despite 500mL IVF already given.',
+      vitals:{BP:'84/52',HR:'118',RR:'24',SpO2:'94%',Temp:'39.4°C',Pain:'6/10'}, dangerVitals:['BP','HR','RR','SpO2','Temp'] },
+  ],
+  notes: [
+    { id:'chf',
+      title:'Decompensated HFrEF',
+      patient:'71M with known HFrEF (EF 30%), presenting with 5-day worsening dyspnea, 8 lb weight gain, bilateral ankle edema, and orthopnea × 3 nights.',
+      pmh:'HFrEF EF 30%, CKD stage 3 (baseline Cr 1.6), HTN, AFib on warfarin, T2DM',
+      meds:'Carvedilol 25mg BID · Lisinopril 5mg daily · Spironolactone 25mg daily · Furosemide 40mg daily · Warfarin (INR 2.1) · Metformin 1g BID',
+      pe:'VS: BP 164/92, HR 88 irregular, RR 24, SpO2 88% RA → 94% on 4L NC. Bilateral crackles mid-lung fields. S3 gallop. 3+ pitting edema to thighs.',
+      labs:[
+        {n:'NT-proBNP',v:'8,420 pg/mL',f:'H'},{n:'Creatinine',v:'2.1 mg/dL',f:'H'},
+        {n:'BUN',v:'48 mg/dL',f:'H'},{n:'Sodium',v:'130 mEq/L',f:'L'},
+        {n:'Potassium',v:'5.4 mEq/L',f:'H'},{n:'Hemoglobin',v:'10.2 g/dL',f:'L'},
+      ],
+      imaging:'CXR: cardiomegaly, bilateral pulmonary edema, bilateral pleural effusions R>L.',
+      prompt:'Write your Assessment & Plan. Address: (1) primary diagnosis + severity, (2) the rising creatinine — what does it mean and how do you manage it, (3) specific diuresis plan with monitoring parameters, (4) hyperkalemia, (5) are GDMT doses appropriate?',
+      guidance:['State the primary problem with mechanism: "Acute decompensated HFrEF — volume overload"','Cardiorenal syndrome: rising Cr during aggressive diuresis ≠ stop diuretics; target UOP','Specific furosemide dose + IV vs PO decision + daily weight target','K 5.4 + spironolactone + lisinopril = hold spironolactone, dose-reduce ACEi','GDMT check: carvedilol 25mg is on-target; lisinopril 5mg is submaximal'],
+    },
+  ],
+  rounds: [
+    { id:'urosepsis-d3',
+      context:'Hospital Day 3 · Urosepsis / E. coli Bacteremia',
+      patient:'68F admitted 3 days ago with urosepsis. Initial lactate 3.8. Blood cultures grew pan-sensitive E. coli. Started on ceftriaxone 1g IV q24h. Off vasopressors since Day 2.',
+      overnight:'Overnight: UOP dropped to 15 mL/hr × 3h at 2am. Nursing gave 500mL IVF bolus → UOP improved to 35 mL/hr. Afebrile. BP stable throughout.',
+      labs:[
+        {n:'WBC',v:'11.4',f:'',prev:'18.4',unit:'x10³'},{n:'Creatinine',v:'1.8',f:'H',prev:'1.1',unit:'mg/dL'},
+        {n:'BUN',v:'36',f:'H',prev:'24',unit:'mg/dL'},{n:'Lactate',v:'1.4',f:'',prev:'3.8',unit:'mmol/L'},
+        {n:'Sodium',v:'136',f:'',prev:'134',unit:'mEq/L'},{n:'Potassium',v:'4.8',f:'',prev:'4.2',unit:'mEq/L'},
+      ],
+      questions:[
+        {id:'q1',label:'Q1 — Interpret the morning labs',text:'Creatinine rose from 1.1 → 1.8. What is the most likely explanation and what is your management?'},
+        {id:'q2',label:'Q2 — Antibiotic stewardship',text:'Pan-sensitive E. coli, afebrile, improving. What antibiotic change, if any, and when?'},
+        {id:'q3',label:'Q3 — Anticipatory guidance',text:'What are your two top watch items for the next 24h, and what are your nursing call-back parameters?'},
+      ],
+      model:{
+        q1:'AKI (most likely prerenal + sepsis-associated). Oliguria overnight with fluid responsiveness = volume depletion component. Ensure MAP >65, adequate fluid balance, check Foley patency. Trend Cr q8h. Do NOT hold diuretics if being used — reassess daily.',
+        q2:'De-escalate to oral cephalexin or TMP-SMX (per sensitivities) once tolerating POs and clinically stable. Total course 7 days for uncomplicated gram-negative bacteremia. Blood cultures must be negative × 48h before de-escalation.',
+        q3:'Watch for: (1) Worsening AKI (call if UOP <0.5 mL/kg/hr × 2h or Cr >2.5). (2) Fever recurrence suggesting inadequate source control or secondary infection. Call if HR >100, SBP <90, temperature >38.5, or new rigors.',
+      },
+    },
+  ],
+};
+
+/* ── STATE ── */
+var STATE = { selectedOrders:[], currentCase:null, station:null, answers:{} };
+
+/* ── OPEN / CLOSE ── */
 function openStation(id) {
-  var s = STATIONS[id];
+  STATE.station = id;
   document.getElementById('stationModal').style.display = 'flex';
-  document.getElementById('modalTitle').textContent = s.title;
-  if (id === 'orders') renderOrderStation();
-  else if (id === 'notes') renderNoteStation();
-  else if (id === 'rounds') renderRoundsStation();
+  if (id==='orders') renderOrderStation();
+  else if (id==='notes') renderNoteStation();
+  else renderRoundsStation();
 }
-
 function closeStation() {
   document.getElementById('stationModal').style.display = 'none';
+  STATE.selectedOrders = [];
+  STATE.answers = {};
 }
 
-// ── STATION 1: ORDERS ─────────────────────────────────────────────────────────
-
-var LAB_OPTS = [
-  {id:'troponin',name:'Troponin I',cat:'Cardiac'},
-  {id:'bnp',name:'NT-proBNP / BNP',cat:'Cardiac'},
-  {id:'ekg',name:'12-Lead EKG',cat:'Cardiac'},
-  {id:'echo',name:'Echocardiogram',cat:'Cardiac'},
-  {id:'cbc',name:'CBC with Differential',cat:'Hematology'},
-  {id:'bmp',name:'Basic Metabolic Panel',cat:'Chemistry'},
-  {id:'cmp',name:'Comprehensive Metabolic Panel',cat:'Chemistry'},
-  {id:'pt_inr',name:'PT/INR',cat:'Coagulation'},
-  {id:'ptt',name:'PTT',cat:'Coagulation'},
-  {id:'cxr',name:'Chest X-Ray',cat:'Imaging'},
-  {id:'cta_pe',name:'CTA Chest (PE Protocol)',cat:'Imaging'},
-  {id:'cthead',name:'CT Head',cat:'Imaging'},
-  {id:'ctabdomen',name:'CT Abdomen/Pelvis',cat:'Imaging'},
-  {id:'us_abdomen',name:'Ultrasound Abdomen',cat:'Imaging'},
-  {id:'ua',name:'Urinalysis',cat:'Urinalysis'},
-  {id:'bloodculture',name:'Blood Cultures x2',cat:'Microbiology'},
-  {id:'uculture',name:'Urine Culture',cat:'Microbiology'},
-  {id:'hba1c',name:'Hemoglobin A1c',cat:'Chemistry'},
-  {id:'tsh',name:'TSH',cat:'Chemistry'},
-  {id:'lipid',name:'Lipid Panel',cat:'Chemistry'},
-  {id:'crp',name:'CRP',cat:'Chemistry'},
-  {id:'hcg',name:'Serum hCG (Pregnancy)',cat:'Chemistry'},
-  {id:'mribrain',name:'MRI Brain',cat:'Imaging'},
-  {id:'dexa',name:'DEXA Bone Density',cat:'Imaging'},
-  {id:'doppler_le',name:'Venous Doppler LE',cat:'Imaging'},
-];
-
+/* ══════════════════════════════════════════════════════════════
+   STATION 1 — ORDER SELECTIVITY
+══════════════════════════════════════════════════════════════ */
 function renderOrderStation() {
-  var st = STATIONS.orders;
-  var caseIdx = Math.floor(Math.random() * st.cases.length);
-  st.currentCase = st.cases[caseIdx];
-  st.selectedOrders = [];
-  st.submitted = false;
-  _renderOrderUI();
+  var cases = CASES.orders;
+  STATE.currentCase = cases[Math.floor(Math.random() * cases.length)];
+  STATE.selectedOrders = [];
+  document.getElementById('modalTitle').textContent = '🔬 Order Selectivity';
+  _paintOrderUI();
 }
 
-function _renderOrderUI() {
-  var st = STATIONS.orders;
-  var c = st.currentCase;
-
-  var vitalsHtml = Object.entries(c.vitals).map(function(v) {
-    var alert = (v[0]==='SpO2' && parseInt(v[1])<95)||(v[0]==='HR' && parseInt(v[1])>100)||(v[0]==='RR' && parseInt(v[1])>20);
-    return '<div class="vital-item"><div class="vital-label">'+v[0]+'</div><div class="vital-val'+(alert?' alert':'')+'">'+v[1]+'</div></div>';
+function _paintOrderUI() {
+  var c = STATE.currentCase;
+  var vitHtml = Object.entries(c.vitals).map(function(e){
+    var danger = c.dangerVitals && c.dangerVitals.indexOf(e[0]) >= 0;
+    return '<div class="vital"><div class="vital-lbl">'+e[0]+'</div>'
+      +'<div class="vital-val'+(danger?' danger':'')+'">'+e[1]+'</div></div>';
   }).join('');
 
-  // Group by category
-  var cats = {};
-  LAB_OPTS.forEach(function(o){ if(!cats[o.cat])cats[o.cat]=[];cats[o.cat].push(o); });
+  var catalogHtml = Object.entries(CATALOG).map(function(e){
+    var cat = e[0], items = e[1];
+    var rows = items.map(function(o){
+      var sel = STATE.selectedOrders.indexOf(o.id) >= 0;
+      return '<button class="order-btn'+(sel?' selected':'')+'" onclick="toggleOrder(\''+o.id+'\')">'
+        +'<span class="order-check">✓</span>'+o.n+'</button>';
+    }).join('');
+    return '<div class="order-section-label '+CAT_STYLE[cat]+'">'
+      +'<span>'+cat+'</span></div>'
+      +'<div class="order-grid">'+rows+'</div>';
+  }).join('');
 
-  var catalogHtml = '';
-  Object.keys(cats).forEach(function(cat) {
-    catalogHtml += '<div class="order-cat-header">'+cat+'</div>';
-    cats[cat].forEach(function(o) {
-      var sel = st.selectedOrders.indexOf(o.id) >= 0;
-      catalogHtml += '<button class="order-btn'+(sel?' selected':'')+'" onclick="toggleOrder(\''+o.id+'\')">'
-        + '<span class="order-check">✓</span>'
-        + o.name + '</button>';
-    });
-  });
-
-  var selectedHtml = st.selectedOrders.length
-    ? st.selectedOrders.map(function(id) {
-        var o = LAB_OPTS.find(function(x){return x.id===id;});
-        return '<span class="selected-tag">'+(o?o.name:id)+'<button onclick="toggleOrder(\''+id+'\')">×</button></span>';
+  var selHtml = STATE.selectedOrders.length
+    ? STATE.selectedOrders.map(function(id){
+        return '<span class="sel-tag">'+(ALL_ORDERS[id]||id)
+          +'<button onclick="toggleOrder(\''+id+'\')">×</button></span>';
       }).join('')
-    : '<span style="opacity:.5">No orders placed yet — select from the catalog below</span>';
+    : '<span style="opacity:.5">No orders selected yet</span>';
 
   document.getElementById('modalBody').innerHTML =
-    '<div class="vignette-box">'
-    + '<div class="vignette-label">Clinical Vignette</div>'
-    + '<div class="vignette-text">'+c.vignette+'</div>'
-    + '<div class="vignette-vitals">'+vitalsHtml+'</div>'
-    + '</div>'
-    + '<div class="section-divider">Your Orders</div>'
-    + '<div class="selected-orders" id="selectedOrdersDisplay">'+selectedHtml+'</div>'
-    + '<div class="section-divider">Order Catalog — select all that apply</div>'
-    + '<div class="order-catalog" id="orderCatalog">'+catalogHtml+'</div>';
+    '<div class="vignette">'
+    +'<div class="vignette-label">Clinical Scenario — '+c.dx+'</div>'
+    +'<div class="vignette-text">'+c.vignette+'</div>'
+    +'<div class="vitals-row">'+vitHtml+'</div>'
+    +'</div>'
+    +'<div class="sec-div">Your Selected Orders</div>'
+    +'<div class="selected-bar" id="selBar">'+selHtml+'</div>'
+    +'<div class="sec-div">Order Catalog — select all that apply</div>'
+    +catalogHtml;
 
   document.getElementById('modalFoot').innerHTML =
-    '<div style="font-size:13px;color:#64748B">'+st.selectedOrders.length+' orders selected</div>'
-    + '<div style="display:flex;gap:10px">'
-    + '<button class="btn-secondary" onclick="renderOrderStation()">New Case</button>'
-    + '<button class="btn-primary" onclick="submitOrders()">Submit Orders →</button>'
-    + '</div>';
+    '<div style="font-size:12px;color:var(--slate-d)">'+STATE.selectedOrders.length+' orders selected · '+c.dx+'</div>'
+    +'<div style="display:flex;gap:8px">'
+    +'<button class="btn-secondary" onclick="renderOrderStation()">New Case</button>'
+    +'<button class="btn-primary s1-cta" onclick="submitOrders()">Submit Orders →</button>'
+    +'</div>';
 }
 
 function toggleOrder(id) {
-  var st = STATIONS.orders;
-  var idx = st.selectedOrders.indexOf(id);
-  if (idx >= 0) st.selectedOrders.splice(idx, 1);
-  else st.selectedOrders.push(id);
-  _renderOrderUI();
+  var idx = STATE.selectedOrders.indexOf(id);
+  if (idx >= 0) STATE.selectedOrders.splice(idx, 1);
+  else STATE.selectedOrders.push(id);
+  _paintOrderUI();
 }
 
 function submitOrders() {
-  var st = STATIONS.orders;
-  var c = st.currentCase;
-  if (!st.selectedOrders.length) { alert('Select at least one order first.'); return; }
+  if (!STATE.selectedOrders.length) { alert('Select at least one order first.'); return; }
+  var c = STATE.currentCase;
+  var rubric = window.RDX_ORDER_RUBRICS && window.RDX_ORDER_RUBRICS[c.rubric];
+  if (!rubric) { alert('No rubric available for this case — try another.'); return; }
 
-  var rubric = c.rubric;
-  if (!rubric) { alert('No rubric for this case yet — try another.'); return; }
-
-  var required = rubric.required || [];
-  var avoid = rubric.avoid || [];
+  var required    = rubric.required || [];
   var recommended = rubric.recommended || [];
+  var avoid       = rubric.avoid || [];
+  var hit         = required.filter(function(id){ return STATE.selectedOrders.indexOf(id)>=0; });
+  var missed      = required.filter(function(id){ return STATE.selectedOrders.indexOf(id)<0; });
+  var unnecessary = STATE.selectedOrders.filter(function(id){ return avoid.indexOf(id)>=0; });
+  var extra       = STATE.selectedOrders.filter(function(id){
+    return required.indexOf(id)<0 && recommended.indexOf(id)<0 && avoid.indexOf(id)<0;
+  });
 
-  var hit = required.filter(function(id){ return st.selectedOrders.indexOf(id)>=0; });
-  var missed = required.filter(function(id){ return st.selectedOrders.indexOf(id)<0; });
-  var unnecessary = st.selectedOrders.filter(function(id){ return avoid.indexOf(id)>=0; });
-  var extra = st.selectedOrders.filter(function(id){ return required.indexOf(id)<0 && recommended.indexOf(id)<0 && avoid.indexOf(id)<0; });
-
-  var pct = required.length ? Math.min(100, Math.round(((hit.length*8 - unnecessary.length*5 - extra.length*2) / (required.length*8))*100)) : 80;
-  pct = Math.max(0, pct);
-  var color = pct>=80?'#059669':pct>=55?'#D97706':'#DC2626';
-  var label = pct>=80?'Strong ordering — focused and appropriate':'Good effort — see feedback below';
+  var raw  = hit.length*8 - unnecessary.length*5 - extra.length*2;
+  var max  = required.length * 8;
+  var pct  = Math.max(0, Math.min(100, Math.round((raw/max)*100)));
+  var tier = pct>=80?'great':pct>=55?'ok':'low';
+  var label= pct>=80?'Excellent — targeted and evidence-based':pct>=55?'Good effort — a few gaps to address':'Needs work — key tests missed or over-ordered';
 
   var hitHtml = hit.map(function(id){
-    var n = (LAB_OPTS.find(function(o){return o.id===id;})||{name:id}).name;
     var tp = rubric.teaching && rubric.teaching[id];
-    return '<div class="result-item result-good"><strong>✓ '+n+'</strong>'+(tp?'<br><span style="font-size:12px;color:#166534">'+tp+'</span>':'')+'</div>';
+    return '<div class="result-item result-good"><span class="ri-icon">✓</span><div><strong>'+(ALL_ORDERS[id]||id)+'</strong>'+(tp?'<br><span style="font-size:12px;color:#166534">'+tp+'</span>':'')+'</div></div>';
   }).join('');
-
   var missHtml = missed.map(function(id){
-    var n = (LAB_OPTS.find(function(o){return o.id===id;})||{name:id}).name;
     var tp = rubric.teaching && rubric.teaching[id];
-    return '<div class="result-item result-warn"><strong>⚠ Should have ordered: '+n+'</strong>'+(tp?'<br><span style="font-size:12px;color:#92400E">'+tp+'</span>':'')+'</div>';
+    return '<div class="result-item result-warn"><span class="ri-icon">⚠</span><div><strong>Should have ordered: '+(ALL_ORDERS[id]||id)+'</strong>'+(tp?'<br><span style="font-size:12px;color:#92400E">'+tp+'</span>':'')+'</div></div>';
   }).join('');
-
   var avoidHtml = unnecessary.map(function(id){
-    var n = (LAB_OPTS.find(function(o){return o.id===id;})||{name:id}).name;
     var tp = rubric.teaching && rubric.teaching[id];
-    return '<div class="result-item result-bad"><strong>✗ Not indicated: '+n+'</strong>'+(tp?'<br><span style="font-size:12px;color:#991B1B">'+tp+'</span>':'<br><span style="font-size:12px;color:#991B1B">Not appropriate for this presentation.</span>')+'</div>';
+    return '<div class="result-item result-bad"><span class="ri-icon">✗</span><div><strong>Not indicated: '+(ALL_ORDERS[id]||id)+'</strong><br><span style="font-size:12px;color:#991B1B">'+(tp||'Not appropriate for this presentation.')+'</span></div></div>';
   }).join('');
-
   var extraNote = extra.length > 2
-    ? '<div class="result-tip"><strong>Choosing Wisely:</strong> You ordered '+extra.length+' tests outside the recommended list. Each extra test adds cost and risk of incidental findings. Ask: does this result change my management?</div>'
+    ? '<div class="result-tip">💡 <strong>Choosing Wisely:</strong> You ordered '+extra.length+' additional tests that weren\'t clearly indicated. Each extra test adds cost, delays, and the risk of acting on incidental findings. Ask: does this result change my management plan?</div>'
     : '';
+  var celebrate = pct >= 80 ? '<div class="confetti">🎉</div>' : '';
 
   document.getElementById('modalBody').innerHTML =
     '<div class="result-panel">'
-    + '<div class="result-score" style="background:'+color+'12;border:1.5px solid '+color+'40">'
-    + '<div class="result-circle" style="background:'+color+'18;border-color:'+color+';color:'+color+'">'+pct+'</div>'
-    + '<div><div class="result-grade-label">'+label+'</div><div class="result-grade-sub">'+hit.length+' of '+required.length+' key tests ordered — '+c.diagnosis+'</div></div>'
-    + '</div>'
-    + (hitHtml||'') + (missHtml||'') + (avoidHtml||'') + (extraNote||'')
-    + '</div>';
+    +celebrate
+    +'<div class="score-hero score-'+tier+'">'
+    +'<div class="score-ring">'+pct+'</div>'
+    +'<div><div class="score-label">'+label+'</div><div class="score-sub">'+hit.length+' of '+required.length+' key tests ordered · '+c.dx+'</div></div>'
+    +'</div>'
+    +(hitHtml||'')+(missHtml||'')+(avoidHtml||'')+(extraNote||'')
+    +'</div>';
 
   document.getElementById('modalFoot').innerHTML =
-    '<div style="font-size:13px;color:#64748B">Case: '+c.diagnosis+'</div>'
-    + '<button class="btn-primary" onclick="renderOrderStation()">Try Another Case →</button>';
+    '<div style="font-size:12px;color:var(--slate-d)">Score: '+pct+'/100</div>'
+    +'<button class="btn-primary" onclick="renderOrderStation()">Try Another Case →</button>';
 
-  try { localStorage.setItem('rdx-skills-orders', JSON.stringify({pct:pct,ts:Date.now()})); } catch(e){}
   updateProgress('orders', pct);
+  try { localStorage.setItem('rdx-skills-orders',JSON.stringify({pct:pct,ts:Date.now()})); } catch(e){}
 }
 
-// ── STATION 2: NOTE WRITING ────────────────────────────────────────────────────
-
+/* ══════════════════════════════════════════════════════════════
+   STATION 2 — ASSESSMENT & PLAN
+══════════════════════════════════════════════════════════════ */
 function renderNoteStation() {
-  var st = STATIONS.notes;
-  var c = st.cases[0];
-  st.fields = {};
-  st.submitted = false;
+  var c = CASES.notes[0];
+  document.getElementById('modalTitle').textContent = '📝 Assessment & Plan';
 
-  var labsHtml = c.labs.map(function(l){
-    return '<span class="chart-pill" style="'+(l.flag?'color:'+(l.flag==='H'?'#DC2626':'#1565C0')+';font-weight:600':'')+'">'+l.name+': '+l.val+(l.flag?' '+l.flag:'')+'</span>';
+  var labHtml = c.labs.map(function(l){
+    return '<span class="chart-pill'+(l.f?(' '+l.f.toLowerCase()):'')+'">'+l.n+': '+l.v+(l.f?' '+l.f:'')+'</span>';
   }).join('');
-
-  var guidanceHtml = c.guidance.map(function(g){
-    return '<div style="padding:5px 0;border-bottom:1px solid rgba(40,116,166,.1);font-size:12px;color:#1B4F72;display:flex;gap:6px"><span style="color:#2874A6;flex-shrink:0">•</span>'+g+'</div>';
+  var guideHtml = c.guidance.map(function(g){
+    return '<div style="padding:5px 0;border-bottom:1px solid rgba(40,116,166,.1);font-size:12px;color:#1B4F72;display:flex;gap:7px"><span style="color:#2874A6;flex-shrink:0">→</span>'+g+'</div>';
   }).join('');
 
   document.getElementById('modalBody').innerHTML =
-    '<div class="vignette-box">'
-    + '<div class="vignette-label">Patient</div>'
-    + '<div class="vignette-text" style="font-size:14px">'+c.patient+'</div>'
-    + '</div>'
-    + '<details style="margin-bottom:14px"><summary style="cursor:pointer;font-size:13px;font-weight:600;color:#2874A6;padding:8px 0">View Full Chart ▾</summary>'
-    + '<div style="padding:12px 0">'
-    + '<div class="section-divider">PMH / Meds</div>'
-    + '<div style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:10px"><strong>PMH:</strong> '+c.pmh+'</div>'
-    + '<div style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:14px"><strong>Meds:</strong> '+c.meds+'</div>'
-    + '<div class="section-divider">Physical Exam</div>'
-    + '<div style="font-size:13px;color:#475569;line-height:1.7;margin-bottom:14px">'+c.pe+'</div>'
-    + '<div class="section-divider">Morning Labs &amp; Imaging</div>'
-    + '<div class="chart-data-row">'+labsHtml+'</div>'
-    + '<div style="font-size:13px;color:#475569;line-height:1.6;margin-top:8px">'+c.imaging+'</div>'
-    + '</div></details>'
-    + '<div style="background:#EFF6FF;border-radius:10px;padding:14px 16px;margin-bottom:16px">'
-    + '<div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#1D4ED8;margin-bottom:8px">Your Task: '+c.prompt+'</div>'
-    + guidanceHtml + '</div>'
-    + '<div class="note-field-wrap"><div class="note-field-label">Assessment <span class="req">required</span></div>'
-    + '<textarea class="note-textarea large" id="field-assess" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Problem-based assessment. For each active problem: diagnosis, reasoning, severity." oninput="updateWordCount()"></textarea></div>'
-    + '<div class="note-field-wrap"><div class="note-field-label">Plan <span class="req">required</span></div>'
-    + '<textarea class="note-textarea large" id="field-plan" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Specific plan by problem: diagnostics, therapeutics, monitoring, disposition." oninput="updateWordCount()"></textarea></div>'
-    + '<div class="word-count" id="noteWordCount">0 words</div>';
+    '<div class="vignette">'
+    +'<div class="vignette-label">Patient — '+c.title+'</div>'
+    +'<div class="vignette-text">'+c.patient+'</div>'
+    +'</div>'
+    +'<details style="margin-bottom:16px"><summary style="cursor:pointer;font-size:13px;font-weight:600;color:var(--ocean);padding:8px 0;user-select:none">▾ View Full Chart (PMH · Meds · Exam · Labs · Imaging)</summary>'
+    +'<div style="padding:12px 0">'
+    +'<div class="sec-div">PMH / Medications</div>'
+    +'<div style="font-size:13px;color:var(--slate-m);line-height:1.7;margin-bottom:10px"><strong>PMH:</strong> '+c.pmh+'</div>'
+    +'<div style="font-size:13px;color:var(--slate-m);line-height:1.7;margin-bottom:14px"><strong>Meds:</strong> '+c.meds+'</div>'
+    +'<div class="sec-div">Physical Exam</div>'
+    +'<div style="font-size:13px;color:var(--slate-m);line-height:1.7;margin-bottom:14px">'+c.pe+'</div>'
+    +'<div class="sec-div">Morning Labs &amp; Imaging</div>'
+    +'<div style="margin-bottom:8px">'+labHtml+'</div>'
+    +'<div style="font-size:13px;color:var(--slate-m);line-height:1.6">'+c.imaging+'</div>'
+    +'</div></details>'
+    +'<div style="background:var(--ocean-xl);border-radius:10px;padding:14px 16px;margin-bottom:18px;border:1px solid #BFDBFE">'
+    +'<div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#1D4ED8;margin-bottom:8px">Your Task</div>'
+    +'<div style="font-size:13px;color:#1E3A5F;margin-bottom:10px;line-height:1.5">'+c.prompt+'</div>'
+    +guideHtml+'</div>'
+    +'<div style="margin-bottom:14px"><div class="note-lbl">Assessment <span class="req">required</span></div>'
+    +'<textarea class="note-ta lg" id="noteAssess" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Problem-based: diagnosis, reasoning, severity for each active problem." oninput="updateWC()"></textarea></div>'
+    +'<div style="margin-bottom:6px"><div class="note-lbl">Plan <span class="req">required</span></div>'
+    +'<textarea class="note-ta lg" id="notePlan" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Specific plan by problem: diagnostics, therapeutics, monitoring, disposition." oninput="updateWC()"></textarea></div>'
+    +'<div class="wc" id="noteWC">0 words</div>';
 
   document.getElementById('modalFoot').innerHTML =
-    '<div style="font-size:13px;color:#64748B">Assessment &amp; Plan — decompensated CHF</div>'
-    + '<button class="btn-teal" onclick="submitNote()">Submit for Feedback →</button>';
+    '<div style="font-size:12px;color:var(--slate-d)">'+c.title+'</div>'
+    +'<button class="btn-teal" onclick="submitNote()">Submit for AI Feedback →</button>';
 }
 
-function updateWordCount() {
-  var assess = (document.getElementById('field-assess')||{}).value || '';
-  var plan = (document.getElementById('field-plan')||{}).value || '';
-  var wc = (assess + ' ' + plan).trim().split(/\s+/).filter(Boolean).length;
-  var el = document.getElementById('noteWordCount');
+function updateWC() {
+  var a = (document.getElementById('noteAssess')||{}).value||'';
+  var p = (document.getElementById('notePlan')||{}).value||'';
+  var wc = (a+' '+p).trim().split(/\s+/).filter(Boolean).length;
+  var el = document.getElementById('noteWC');
   if (el) el.textContent = wc + ' words';
 }
 
 function submitNote() {
-  var assess = (document.getElementById('field-assess')||{}).value || '';
-  var plan = (document.getElementById('field-plan')||{}).value || '';
-  if (assess.trim().length < 30) { alert('Please write a complete Assessment before submitting.'); return; }
-  if (plan.trim().length < 30) { alert('Please write a complete Plan before submitting.'); return; }
+  var assess = ((document.getElementById('noteAssess')||{}).value||'').trim();
+  var plan   = ((document.getElementById('notePlan')||{}).value||'').trim();
+  if (assess.length < 30) { alert('Write a complete Assessment before submitting.'); return; }
+  if (plan.length < 30)   { alert('Write a complete Plan before submitting.'); return; }
 
-  document.getElementById('modalBody').innerHTML = '<div style="text-align:center;padding:40px"><div style="font-size:32px;margin-bottom:12px">⏳</div><div style="font-size:15px;font-weight:600;color:#1E293B">Analyzing your note...</div><div style="font-size:13px;color:#64748B;margin-top:6px">Evaluating clinical reasoning, completeness, and plan quality</div></div>';
+  document.getElementById('modalBody').innerHTML =
+    '<div style="text-align:center;padding:48px 20px">'
+    +'<span class="loading-ring"></span>'
+    +'<span style="font-size:15px;font-weight:600;color:var(--slate)">Analyzing your clinical reasoning…</span>'
+    +'<div style="font-size:12px;color:var(--slate-d);margin-top:8px">Evaluating problem structure, cardiorenal physiology, and plan specificity</div>'
+    +'</div>';
   document.getElementById('modalFoot').innerHTML = '';
 
-  // Call Claude API for note feedback
   fetch('https://api.anthropic.com/v1/messages', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({
       model:'claude-sonnet-4-20250514',
       max_tokens:1000,
-      system:'You are a clinical educator evaluating a medical student note. Be specific, constructive, and brief. Return feedback as JSON with keys: score (0-100), strengths (array of 2-3 strings), improvements (array of 2-3 strings), tip (one actionable sentence). Respond ONLY with JSON.',
-      messages:[{role:'user',content:'Case: 71M, HFrEF EF 30%, acute decompensation with BNP 8420, Cr 1.8 (up from 1.1), Na 130, K 5.4, Hgb 10.2. CXR: bilateral pulmonary edema.\n\nStudent Assessment:\n'+assess+'\n\nStudent Plan:\n'+plan+'\n\nEvaluate on: (1) problem-based structure (2) recognition of cardiorenal syndrome (3) specific diuresis plan with monitoring (4) hyperkalemia management (5) GDMT review. Return JSON only.'}]
+      system:'You are a clinical educator evaluating a medical student note. Be specific and constructive. Return ONLY a JSON object with keys: score (0-100), strengths (array of 2-3 strings), improvements (array of 2-3 strings), tip (one actionable sentence). No markdown, no backticks, just raw JSON.',
+      messages:[{role:'user',content:'Case: 71M HFrEF EF 30%, acute decompensation. BNP 8420, Cr 2.1 (up from 1.6), Na 130, K 5.4, Hgb 10.2. CXR: bilateral pulmonary edema. On carvedilol, lisinopril, furosemide, spironolactone, warfarin, metformin.\n\nAssessment:\n'+assess+'\n\nPlan:\n'+plan+'\n\nEvaluate on: (1) problem-based structure (2) cardiorenal syndrome recognition + management (3) specific diuresis plan with monitoring (4) hyperkalemia management — effect on spironolactone/ACEi (5) GDMT dose review. Return JSON only.'}]
     })
   })
   .then(function(r){return r.json();})
-  .then(function(data){
-    var text = (data.content||[]).map(function(c){return c.text||'';}).join('');
-    var clean = text.replace(/```json|```/g,'').trim();
-    var fb;
-    try { fb = JSON.parse(clean); } catch(e) { fb = {score:70,strengths:['Note submitted'],improvements:['Add more clinical reasoning detail'],tip:'Structure your A&P by problem with explicit reasoning.'}; }
-    _renderNoteFeedback(fb, assess, plan);
+  .then(function(d){
+    var txt = (d.content||[]).map(function(c){return c.text||'';}).join('');
+    txt = txt.replace(/```json|```/g,'').trim();
+    var fb; try{fb=JSON.parse(txt);}catch(e){fb={score:68,strengths:['Assessment submitted for review'],improvements:['Add more explicit reasoning per problem','Include specific monitoring parameters'],tip:'For each problem, state the diagnosis, your clinical reasoning, then the exact plan.'};}
+    _showNoteFeedback(fb);
   })
-  .catch(function(){
-    _renderNoteFeedback({score:70,strengths:['Assessment submitted'],improvements:['Add specific monitoring parameters','Address cardiorenal physiology explicitly'],tip:'For each problem, state the diagnosis, your reasoning, and then the specific plan.'}, assess, plan);
-  });
+  .catch(function(){ _showNoteFeedback({score:70,strengths:['Assessment submitted'],improvements:['Add specific diuresis target (UOP goal)','Address hyperkalemia impact on current medications'],tip:'State the mechanism of cardiorenal syndrome — then address it directly in the plan.'}); });
 }
 
-function _renderNoteFeedback(fb, assess, plan) {
-  var score = fb.score || 70;
-  var color = score>=80?'#059669':score>=60?'#D97706':'#DC2626';
-
-  var strengthsHtml = (fb.strengths||[]).map(function(s){ return '<div class="result-item result-good">✓ '+s+'</div>'; }).join('');
-  var improvHtml = (fb.improvements||[]).map(function(s){ return '<div class="result-item result-warn">⚠ '+s+'</div>'; }).join('');
+function _showNoteFeedback(fb) {
+  var pct = fb.score||70;
+  var tier = pct>=80?'great':pct>=60?'ok':'low';
+  var celebrate = pct >= 85 ? '<div class="confetti">🎉</div>' : '';
+  var strHtml = (fb.strengths||[]).map(function(s){return '<div class="result-item result-good"><span class="ri-icon">✓</span><div>'+s+'</div></div>';}).join('');
+  var impHtml = (fb.improvements||[]).map(function(s){return '<div class="result-item result-warn"><span class="ri-icon">→</span><div>'+s+'</div></div>';}).join('');
 
   document.getElementById('modalBody').innerHTML =
     '<div class="result-panel">'
-    + '<div class="result-score" style="background:'+color+'12;border:1.5px solid '+color+'40">'
-    + '<div class="result-circle" style="background:'+color+'18;border-color:'+color+';color:'+color+'">'+score+'</div>'
-    + '<div><div class="result-grade-label">AI Feedback — Assessment &amp; Plan</div><div class="result-grade-sub">Decompensated HFrEF</div></div>'
-    + '</div>'
-    + (strengthsHtml||'') + (improvHtml||'')
-    + (fb.tip?'<div class="result-tip"><strong>One thing to try next time:</strong> '+fb.tip+'</div>':'')
-    + '</div>';
+    +celebrate
+    +'<div class="score-hero score-'+tier+'">'
+    +'<div class="score-ring">'+pct+'</div>'
+    +'<div><div class="score-label">AI Feedback — Assessment &amp; Plan</div>'
+    +'<div class="score-sub">Decompensated HFrEF</div></div>'
+    +'</div>'
+    +(strHtml||'')+(impHtml||'')
+    +(fb.tip?'<div class="result-tip">💡 <strong>One thing to try next time:</strong> '+fb.tip+'</div>':'')
+    +'</div>';
 
   document.getElementById('modalFoot').innerHTML =
-    '<div style="font-size:13px;color:#64748B">Score: '+score+'/100</div>'
-    + '<button class="btn-primary" onclick="renderNoteStation()">Try Again →</button>';
+    '<div style="font-size:12px;color:var(--slate-d)">Score: '+pct+'/100</div>'
+    +'<button class="btn-primary" onclick="renderNoteStation()">Try Again →</button>';
 
-  updateProgress('notes', score);
+  updateProgress('notes', pct);
 }
 
-// ── STATION 3: ROUNDS ─────────────────────────────────────────────────────────
-
+/* ══════════════════════════════════════════════════════════════
+   STATION 3 — MORNING ROUNDS
+══════════════════════════════════════════════════════════════ */
 function renderRoundsStation() {
-  var st = STATIONS.rounds;
-  var c = st.cases[0];
-  st.answers = {};
-  st.submitted = false;
-  st.currentCase = c;
+  var c = CASES.rounds[0];
+  document.getElementById('modalTitle').textContent = '🏥 Morning Rounds';
+  STATE.answers = {};
 
-  var trendHtml = c.morningLabs.map(function(l){
-    var trend = l.prev && l.val !== l.prev ? (parseFloat(l.val)>parseFloat(l.prev)?'↑':'↓') : '→';
-    var tcolor = l.flag==='H'?'#DC2626':l.flag==='L'?'#1565C0':'#475569';
-    return '<div class="vital-item"><div class="vital-label">'+l.name+'</div>'
-      + '<div class="vital-val" style="font-size:14px;color:'+tcolor+'">'+l.val+' <span style="font-size:12px;opacity:.7">'+trend+' '+l.prev+'</span></div></div>';
+  var trendHtml = c.labs.map(function(l){
+    var num = parseFloat(l.v);
+    var prev = parseFloat(l.prev);
+    var up = num > prev, dn = num < prev;
+    var arrow = up ? '<span class="trend-arrow up">↑</span>' : dn ? '<span class="trend-arrow dn">↓</span>' : '<span class="trend-arrow eq">→</span>';
+    return '<div class="trend-item">'
+      +'<div class="trend-lbl">'+l.n+'</div>'
+      +'<div class="trend-val'+(l.f?(' '+l.f.toLowerCase()):'')+'">'+l.v+arrow+'</div>'
+      +'<div class="trend-prev">prev: '+l.prev+' '+l.unit+'</div>'
+      +'</div>';
   }).join('');
 
-  var questionsHtml = c.questions.map(function(q){
-    return '<div class="rounds-question">'
-      + '<div class="rounds-q-label">'+q.label+'</div>'
-      + '<div class="rounds-q-text">'+q.text+'</div>'
-      + '<textarea class="rounds-textarea" id="rounds-'+q.id+'" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Your answer..."></textarea>'
-      + '</div>';
+  var questHtml = c.questions.map(function(q){
+    return '<div class="rounds-card">'
+      +'<div class="rounds-q-num">'+q.label+'</div>'
+      +'<div class="rounds-q-text">'+q.text+'</div>'
+      +'<textarea class="rounds-ta" id="rounds-'+q.id+'" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="Your answer…"></textarea>'
+      +'</div>';
   }).join('');
 
   document.getElementById('modalBody').innerHTML =
-    '<div class="vignette-box">'
-    + '<div class="vignette-label">'+c.context+'</div>'
-    + '<div class="vignette-text" style="font-size:13px">'+c.patient+'</div>'
-    + '</div>'
-    + '<div class="section-divider">Overnight Events</div>'
-    + '<div style="padding:12px 16px;background:#FFFBEB;border-radius:10px;border-left:3px solid #F59E0B;font-size:13px;color:#78350F;line-height:1.6;margin-bottom:16px">'+c.overnight+'</div>'
-    + '<div class="section-divider">Morning Labs (↑↓ from admission)</div>'
-    + '<div class="vignette-vitals" style="margin-bottom:20px">'+trendHtml+'</div>'
-    + '<div class="section-divider">Your Rounds Questions</div>'
-    + questionsHtml;
+    '<div class="vignette">'
+    +'<div class="vignette-label">'+c.context+'</div>'
+    +'<div class="vignette-text">'+c.patient+'</div>'
+    +'</div>'
+    +'<div class="sec-div">Overnight Events</div>'
+    +'<div class="overnight">'+c.overnight+'</div>'
+    +'<div class="sec-div">Morning Labs (↑↓ from admission)</div>'
+    +'<div class="lab-trend">'+trendHtml+'</div>'
+    +'<div class="sec-div">Your Rounding Questions</div>'
+    +questHtml;
 
   document.getElementById('modalFoot').innerHTML =
-    '<div style="font-size:13px;color:#64748B">Day 3 rounding — urosepsis</div>'
-    + '<button class="btn-primary" onclick="submitRounds()">Submit for Review →</button>';
+    '<div style="font-size:12px;color:var(--slate-d)">Day 3 · Urosepsis</div>'
+    +'<button class="btn-primary" onclick="submitRounds()">Submit for Debrief →</button>';
 }
 
 function submitRounds() {
-  var c = STATIONS.rounds.cases[0];
+  var c = CASES.rounds[0];
   var answers = {};
-  var hasContent = false;
+  var hasAny = false;
   c.questions.forEach(function(q){
     var el = document.getElementById('rounds-'+q.id);
     answers[q.id] = el ? el.value.trim() : '';
-    if (answers[q.id].length > 10) hasContent = true;
+    if (answers[q.id].length > 5) hasAny = true;
   });
+  if (!hasAny) { alert('Answer at least one question before submitting.'); return; }
 
-  if (!hasContent) { alert('Please answer at least one question before submitting.'); return; }
-
-  var feedbackHtml = c.questions.map(function(q){
+  var debriefHtml = c.questions.map(function(q){
     var ans = answers[q.id];
-    var model = c.model[q.id];
-    var hasAnswer = ans && ans.length > 10;
-    return '<div style="margin-bottom:20px">'
-      + '<div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#1B4F72;margin-bottom:8px">'+q.label+'</div>'
-      + (hasAnswer
-        ? '<div style="padding:10px 14px;background:#F8FAFC;border-radius:8px;font-size:13px;color:#475569;line-height:1.6;margin-bottom:8px;border-left:3px solid #94A3B8"><em>Your answer:</em> '+ans+'</div>'
-        : '<div style="padding:10px 14px;background:#FEF2F2;border-radius:8px;font-size:13px;color:#991B1B;margin-bottom:8px">No answer provided.</div>')
-      + '<div style="padding:10px 14px;background:#F0FDF4;border-radius:8px;font-size:13px;color:#166534;line-height:1.65;border-left:3px solid #10B981"><strong>Model answer:</strong> '+model+'</div>'
-      + '</div>';
+    return '<div style="margin-bottom:22px">'
+      +'<div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--ocean);margin-bottom:8px">'+q.label+'</div>'
+      +(ans.length > 5
+        ? '<div style="padding:10px 14px;background:#F8FAFC;border-radius:8px;font-size:13px;color:var(--slate-m);line-height:1.6;margin-bottom:8px;border-left:3px solid #CBD5E1"><em>Your answer:</em> '+ans+'</div>'
+        : '<div style="padding:10px 14px;background:var(--red-l);border-radius:8px;font-size:13px;color:var(--red);margin-bottom:8px">No answer provided — try answering this one next time.</div>'
+      )
+      +'<div style="padding:12px 14px;background:var(--green-l);border-radius:8px;font-size:13px;color:#166534;line-height:1.65;border-left:3px solid #10B981"><strong>Model answer:</strong> '+c.model[q.id]+'</div>'
+      +'</div>';
   }).join('');
 
   document.getElementById('modalBody').innerHTML =
     '<div class="result-panel">'
-    + '<div style="padding:16px 20px;background:linear-gradient(135deg,#EBF5FB,#F0FDF4);border-radius:12px;margin-bottom:20px">'
-    + '<div style="font-size:15px;font-weight:700;color:#1E293B;margin-bottom:4px">Rounds Debrief</div>'
-    + '<div style="font-size:13px;color:#475569">Compare your answers to the model responses below. Focus on what you missed and why.</div>'
-    + '</div>'
-    + feedbackHtml
-    + '</div>';
+    +'<div style="padding:16px 20px;background:linear-gradient(135deg,var(--ocean-xl),var(--teal-l));border-radius:12px;margin-bottom:20px;border:1.5px solid #BFDBFE">'
+    +'<div style="font-size:15px;font-weight:700;color:var(--slate);margin-bottom:4px">Rounds Debrief</div>'
+    +'<div style="font-size:13px;color:var(--slate-m)">Compare your reasoning to the model answers below. Focus on what you missed and why.</div>'
+    +'</div>'
+    +debriefHtml
+    +'</div>';
 
   document.getElementById('modalFoot').innerHTML =
-    '<div style="font-size:13px;color:#64748B">Urosepsis — Day 3</div>'
-    + '<button class="btn-primary" onclick="renderRoundsStation()">Try Again →</button>';
+    '<div style="font-size:12px;color:var(--slate-d)">Urosepsis Day 3</div>'
+    +'<button class="btn-primary" onclick="renderRoundsStation()">Try Again →</button>';
 
   updateProgress('rounds', 75);
 }
 
-// ── PROGRESS ──────────────────────────────────────────────────────────────────
-
-function updateProgress(stationId, score) {
-  var el = document.getElementById('progress-' + stationId);
+/* ── PROGRESS ── */
+function updateProgress(id, pct) {
+  var el = document.getElementById('progress-'+id);
   if (!el) return;
-  var color = score>=80?'#059669':score>=55?'#D97706':'#DC2626';
-  el.innerHTML = '<span style="color:'+color+';font-weight:700">Score: '+score+'</span>';
+  var color = pct>=80?'var(--green)':pct>=55?'var(--amber)':'var(--red)';
+  el.innerHTML = 'Last: <strong style="color:'+color+'">'+pct+'</strong>';
 }
 
 // Load saved progress
-try {
-  var saved = JSON.parse(localStorage.getItem('rdx-skills-orders')||'null');
-  if (saved) updateProgress('orders', saved.pct);
-} catch(e){}
+(function(){
+  try {
+    var s = JSON.parse(localStorage.getItem('rdx-skills-orders')||'null');
+    if (s) updateProgress('orders', s.pct);
+  } catch(e){}
+})();
 
 </script>
 </body>

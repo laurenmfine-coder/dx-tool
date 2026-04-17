@@ -654,8 +654,8 @@ window.RDXOnboarding = {
       <div style="display:flex;gap:10px;justify-content:center">
         ${i > 0 ? '<button onclick="RDXOnboarding._goToStep('+(i-1)+')" style="padding:10px 20px;border:1.5px solid #E2E8F0;border-radius:10px;background:#fff;font-family:inherit;font-size:14px;font-weight:600;color:#64748B;cursor:pointer">← Back</button>' : ''}
         ${i < steps.length - 1
-          ? '<button onclick="RDXOnboarding._goToStep('+(i+1)+')" style="padding:10px 28px;border:none;border-radius:10px;background:#2874A6;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">${step.cta}</button>'
-          : '<button onclick="RDXOnboarding.dismiss()" style="padding:10px 28px;border:none;border-radius:10px;background:#2874A6;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">' + step.cta + '</button>'
+          ? '<button onclick="RDXOnboarding._goToStep('+(i+1)+')" style="padding:10px 28px;border:none;border-radius:10px;background:#2874A6;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">'+step.cta+'</button>'
+          : '<button onclick="RDXOnboarding.dismiss()" style="padding:10px 28px;border:none;border-radius:10px;background:#2874A6;color:#fff;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer">'+step.cta+'</button>'
         }
       </div>
       <div style="text-align:center;margin-top:14px">
@@ -663,11 +663,7 @@ window.RDXOnboarding = {
           Skip tutorial
         </button>
       </div>`;
-    // Fix the CTA button text dynamically
-    var btns = content.querySelectorAll('button');
-    btns.forEach(function(btn) {
-      if (btn.textContent.includes('${step.cta}')) btn.textContent = step.cta;
-    });
+
   },
 
   _html: function() {
