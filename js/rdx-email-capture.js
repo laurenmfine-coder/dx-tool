@@ -425,8 +425,29 @@ window.RDXEmailCapture = (function() {
     submitBtn.textContent = 'Saving...';
     submitBtn.disabled = true;
     
-    // Capture email
+    // Save to session manager
     const result = await window.RDXSessionManager.captureEmail(email, currentSource);
+    
+    // ALSO send to Loops worker (existing email system)
+    const history = window.RDXSessionManager.getCaseHistory();
+    try {
+      await fetch('https://rdx-email.laurenmfine.workers.dev', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          eventType: 'browse_signup',
+          email: email,
+          firstName: email.split('@')[0], // Extract name from email
+          data: {
+            totalCompleted: history.totalCases,
+            lastCaseId: history.lastCaseId,
+            source: currentSource
+          }
+        })
+      });
+    } catch (loopsError) {
+      console.warn('Loops notification failed (non-fatal):', loopsError);
+    }
     
     if (result.success) {
       // Success!
