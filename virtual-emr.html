@@ -155,7 +155,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .annotation-card-quote{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-secondary);background:var(--surface-alt);padding:6px 8px;border-radius:4px;margin:8px 0;border-left:2px solid var(--primary);line-height:1.5}
 .annotation-card-comment{font-size:12px;line-height:1.5}
 .annotation-card-meta{font-size:11px;color:var(--text-muted);margin-top:6px}
-.annotation-popover{position:fixed;z-index:1000;background:var(--surface);border:1px solid var(--border-light);box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:12px}
+.annotation-popover{position:fixed;z-index:1000;background:var(--surface);border:1px solid var(--border-light);box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:12px;-webkit-transform:translateZ(0);transform:translateZ(0)}
 .annotation-popover.visible{display:block}
 .annotation-popover-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .annotation-popover-title{font-size:12px;font-weight:600}
@@ -194,7 +194,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 /* ═══ Interactive Feature Styles ═══ */
 
 /* Assign/form inputs */
-.assign-input{width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:'DM Sans',sans-serif;background:var(--surface);transition:border-color .15s}
+
 .assign-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
 
 /* Badge variants */
@@ -223,28 +223,28 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .annotation-popover[style*="width: 360px"]{max-width:380px}
 
 /* Grade input */
-.grade-input{width:60px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;font-family:'IBM Plex Mono',monospace;text-align:center}
-.grade-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
-.comment-input{width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:'DM Sans',sans-serif}
-.comment-input:focus{outline:none;border-color:var(--primary)}
+
+
+
+
 
 /* Overall textarea */
-.overall-textarea{width:100%;min-height:100px;padding:12px;border:1px solid var(--border);border-radius:var(--radius);font-size:16px;font-family:'DM Sans',sans-serif;line-height:1.6;resize:vertical}
-.overall-textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+
+
 
 /* Grade total bar */
-.grade-total-bar{margin-top:12px;padding:12px 16px;background:var(--primary-light);border-radius:var(--radius);display:flex;align-items:center}
+
 
 /* Score banner */
-.score-banner{display:flex;justify-content:space-between;align-items:center;padding:20px;background:linear-gradient(135deg,var(--primary-light),#e3f2fd);border-radius:var(--radius);margin-bottom:16px}
-.score-label{font-size:12px;color:var(--text-secondary);text-transform:uppercase;font-weight:600}
+
+
 .score-number{font-size:32px;font-weight:700;color:var(--primary);font-family:'IBM Plex Mono',monospace}
 
 /* Annotation toolbar */
 .annotation-toolbar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--surface-alt);border-radius:var(--radius);margin-bottom:12px;font-size:12px;border:1px dashed var(--border)}
 
 /* Annotation popover */
-.annotation-popover{position:fixed;z-index:1000;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:16px;width:300px;display:none;max-width:calc(100vw - 20px)}
+
 .annotation-popover.visible{display:block}
 .annotation-popover-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
 .annotation-popover-title{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px}
@@ -252,7 +252,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .annotation-color-row{display:flex;gap:6px;margin-bottom:10px}
 .annotation-color-btn{width:28px;height:28px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .15s}
 .annotation-color-btn:hover,.annotation-color-btn.selected{border-color:var(--text-primary);transform:scale(1.15)}
-.annotation-comment-input{width:100%;min-height:60px;padding:8px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;font-family:'DM Sans',sans-serif;margin-bottom:8px;resize:vertical}
+
 .annotation-save-btn{width:100%;padding:8px;background:var(--primary);color:#fff;border:none;border-radius:var(--radius-sm);font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}
 
 /* Annotation highlights in text */
@@ -315,9 +315,9 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 @keyframes coachBounce{to{opacity:.3;transform:translateY(-4px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .coach-input-row{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light);flex-shrink:0;background:var(--surface,#fff);padding-bottom:8px}
-.coach-input{flex:1;padding:10px 14px;border:1px solid var(--border-light);border-radius:10px;font-size:16px;font-family:inherit;resize:none;outline:none;transition:border-color .2s}
+.coach-input{flex:1;padding:10px 14px;border:1px solid var(--border-light);border-radius:10px;font-size:16px !important;font-family:inherit;resize:none;outline:none;transition:border-color .2s}
 .coach-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.12)}
-.coach-send{background:var(--primary);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s}
+.coach-send{background:var(--primary);color:#fff;border:none;border-radius:10px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:background .2s;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .coach-send:hover{background:var(--primary-dark)}
 .coach-send:disabled{background:#ccc;cursor:not-allowed}
 .coach-concepts{margin-top:12px;padding:12px 16px;background:linear-gradient(135deg,#EBF4FB,#F0F7FF);border-radius:10px;border:1px solid #BFDBFE}
@@ -499,10 +499,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 /* Prevent iOS double-tap zoom on buttons */
-button,a,.sidebar-btn,.setting-card,.specialty-card,.module-card,.day-step,.coach-send{
-  touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;
-}
+button,a,.sidebar-btn,.setting-card,.specialty-card,.module-card,.day-step,
 /* iOS momentum scrolling */
 .sidebar,.main-content,.coach-messages,.day-bar-steps{
   -webkit-overflow-scrolling:touch;
@@ -513,10 +510,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   font-size:16px !important;
 }
 /* Fix iOS fixed positioning issues */
-.toast,.annotation-popover{
-  -webkit-transform:translateZ(0);
-  transform:translateZ(0);
-}
+.toast,
 /* Header bar respects safe area */
 .header-bar{
   padding-top:max(0px,env(safe-area-inset-top));
@@ -640,9 +634,9 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   /* CoachDx mobile */
   .coach-container{height:calc(100vh - 240px);min-height:350px}
   .coach-msg{max-width:92%;font-size:12px;padding:10px 12px}
-  .coach-input{font-size:16px !important;padding:10px 12px;border-radius:8px}
-  .coach-send{padding:10px 14px;font-size:12px;border-radius:8px}
-  .coach-header{padding:12px 14px;border-radius:8px}
+  
+  
+  
   .coach-header h3{font-size:14px}
 
   /* Day progression responsive */
