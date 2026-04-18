@@ -1688,6 +1688,34 @@ function enterPhase(phase) {
             score: state.envHistoryScore != null ? state.envHistoryScore : null
           });
           localStorage.setItem('rdx-simulation-history', JSON.stringify(_history.slice(-20)));
+
+          // ── Sync to Supabase for logged-in users ──────────────────────
+          (function() {
+            try {
+              if (!sb) return; // Not authenticated
+              sb.auth.getSession().then(function(r) {
+                if (!r.data || !r.data.session) return; // Guest — skip
+                var userId = r.data.session.user.id;
+                var _record = {
+                  user_id: userId,
+                  case_id: caseData.caseId || selectedCase,
+                  case_name: _caseName,
+                  completed_at: new Date().toISOString(),
+                  turns: state.turnCount || 0,
+                  score: state.envHistoryScore != null ? state.envHistoryScore : null,
+                  phase_reached: state.currentPhase || 10,
+                  time_seconds: state.turns && state.turns[0] ? Math.round((Date.now() - new Date(state.turns[0].timestamp).getTime()) / 1000) : null,
+                  dominant_error_mode: (state._metaTheory && state._metaTheory.dominantErrorMode) ? state._metaTheory.dominantErrorMode : null,
+                  specialty: caseData.category || null
+                };
+                sb.from('simulation_history')
+                  .upsert(_record, { onConflict: 'user_id,case_id,completed_at' })
+                  .then(function(res) {
+                    if (res.error) console.warn('[SimHistory] Supabase sync failed:', res.error.message);
+                  });
+              }).catch(function() {});
+            } catch(e) {}
+          })();
         } catch(e) {}
         // Select next case based on error mode
         var _next = MetaReasoning.selectCase(_theory, _caseList.map(function(id){return{id:id};}), _completed);

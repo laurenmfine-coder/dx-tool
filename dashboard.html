@@ -963,14 +963,51 @@ function rdxShowAllLocations() {
 
 <script>
 function rdxShowFullHistory() {
+  // Try Supabase first for logged-in users, fall back to localStorage
+  var SB = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   var history = [];
   try { history = JSON.parse(localStorage.getItem('rdx-simulation-history') || '[]').reverse(); } catch(e) {}
+  // Show modal immediately with localStorage data, then upgrade with Supabase
+  _rdxRenderHistoryModal(history);
+  // Try to load full history from Supabase
+  try {
+    var _sbClient = window.supabase ? window.supabase.createClient(SB, KEY) : null;
+    if (_sbClient) {
+      _sbClient.auth.getSession().then(function(r) {
+        if (!r.data || !r.data.session) return;
+        _sbClient.from('simulation_history')
+          .select('case_id,case_name,completed_at,turns,score,specialty')
+          .eq('user_id', r.data.session.user.id)
+          .order('completed_at', { ascending: false })
+          .limit(100)
+          .then(function(res) {
+            if (res.data && res.data.length > 0) {
+              // Map Supabase format to local format
+              var sbHistory = res.data.map(function(r) {
+                return { caseId: r.case_id, caseName: r.case_name, completedAt: r.completed_at, turns: r.turns, score: r.score };
+              });
+              // Re-render modal with full history
+              var modal = document.getElementById('rdx-history-modal');
+              if (modal) modal.remove();
+              _rdxRenderHistoryModal(sbHistory);
+            }
+          });
+      });
+    }
+  } catch(e) {}
+}
+
+function _rdxRenderHistoryModal(history) {
   var existing = document.getElementById('rdx-history-modal');
   if (existing) { existing.style.display = 'flex'; return; }
   var modal = document.createElement('div');
   modal.id = 'rdx-history-modal';
   modal.style.cssText = 'position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px';
   modal.onclick = function(e){ if(e.target===modal) modal.style.display='none'; };
+  // Remove existing modal if re-loading with fresh data
+  var existingModal = document.getElementById('rdx-history-modal');
+  if (existingModal) existingModal.remove();
   var rows = history.length ? history.map(function(h) {
     var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}) : '';
     var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#E8F8F5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
