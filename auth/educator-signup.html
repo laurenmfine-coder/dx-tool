@@ -247,7 +247,16 @@ async function handleCallback() {
       pending_institutional: true,
       subscription_tier: 'free',
       signup_source: 'educator_landing'
-    }, { onConflict: 'id', ignoreDuplicates: false });
+    }, { onConflict: 'id', ignoreDuplicates: false }).catch(async function() {
+      // Graceful fallback if migration columns pending
+      await sb.from('profiles').upsert({
+        id: user.id,
+        email: user.email,
+        display_name: user.user_metadata?.full_name || user.email.split('@')[0],
+        role: 'faculty',
+        subscription_tier: 'free'
+      }, { onConflict: 'id', ignoreDuplicates: false });
+    });
 
     if (upsertErr) console.warn('Profile upsert warning:', upsertErr.message);
   } catch (e) {

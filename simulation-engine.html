@@ -119,6 +119,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <link rel="dns-prefetch" href="https://api.anthropic.com">
 </head>
 <body>
+<a href="#chatMessages" style="position:absolute;top:-100px;left:0;background:#2874A6;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:10000;transition:top .15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to conversation</a>
 
 <!-- ── TOPBAR ── -->
 <div class="topbar">
@@ -654,7 +655,7 @@ function submitLikert(score, widgetId) {
     phase: state.currentPhase, turnNumber: ++state.turnCount, isLikert: true });
 }
 
-// ── FETCH WITH RETRY (handles transient worker timeouts) ──
+// ── FETCH WITH RETRY (handles transient worker timeouts + 429 rate limits) ──
 async function fetchWithRetry(url, opts, maxRetries) {
   maxRetries = maxRetries || 2;
   var lastErr;
@@ -664,6 +665,15 @@ async function fetchWithRetry(url, opts, maxRetries) {
       var timeout = setTimeout(function() { controller.abort(); }, 30000); // 30s timeout
       var resp = await fetch(url, Object.assign({}, opts, { signal: controller.signal }));
       clearTimeout(timeout);
+      if (resp.status === 429) {
+        // Rate limited — show user-facing message and wait longer before retry
+        var waitMs = (attempt + 1) * 3000;
+        var _rl = document.getElementById('rdx-responding-label');
+        if (_rl) _rl.textContent = 'Dr. Patel is busy — retrying in ' + Math.round(waitMs/1000) + 's...';
+        await new Promise(function(r) { setTimeout(r, waitMs); });
+        if (_rl) _rl.textContent = 'Dr. Patel is responding...';
+        continue; // retry without throwing
+      }
       if (!resp.ok) throw new Error('HTTP ' + resp.status);
       return resp;
     } catch(e) {

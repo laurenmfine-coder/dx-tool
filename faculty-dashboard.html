@@ -629,14 +629,24 @@ function renderSubmissions() {
 
 function renderSubsList(subs) {
   if (subs.length === 0) return '<div class="fac-empty"><div class="fac-empty-icon">✅</div><div class="fac-empty-title">Nothing here</div><div class="fac-empty-desc">All submissions in this category have been handled.</div></div>';
-  var html = '<div class="fac-queue" style="margin-bottom:24px">';
+  var html = '';
+  // Bulk action bar
+  html += '<div id="rdx-bulk-bar" style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">';
+  html += '<label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer">';
+  html += '<input type="checkbox" id="rdx-select-all" onchange="rdxToggleAllSubs(this.checked)" style="width:15px;height:15px;cursor:pointer"> Select all</label>';
+  html += '<button onclick="rdxMarkSelectedReviewed()" style="padding:6px 14px;background:#059669;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">✓ Mark selected reviewed</button>';
+  html += '<span id="rdx-selected-count" style="font-size:12px;color:var(--text-muted)"></span>';
+  html += '</div>';
+  html += '<div class="fac-queue" style="margin-bottom:24px">';
   subs.forEach(function(sub, i) {
     var graded = hasFeedback(sub.studentName, sub.week);
-    html += '<div class="fac-queue-item ' + (graded?'':'needs-grading') + '" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')">';
-    html += '<div class="fac-queue-avatar">' + esc(initials(sub.studentDisplay||sub.studentName)) + '</div>';
-    html += '<div style="flex:1"><div class="fac-queue-name">' + esc(sub.studentDisplay||sub.studentName) + '</div>';
+    var _subKey = esc(sub.studentName) + '__' + esc(sub.week||'');
+    html += '<div class="fac-queue-item ' + (graded?'':'needs-grading') + '" style="position:relative">';
+    html += '<input type="checkbox" class="rdx-sub-check" data-student="' + esc(sub.studentName) + '" data-week="' + esc(sub.week||'') + '" onclick="event.stopPropagation();rdxUpdateSelectedCount()" style="flex-shrink:0;width:15px;height:15px;cursor:pointer">';
+    html += '<div class="fac-queue-avatar" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')" style="cursor:pointer">' + esc(initials(sub.studentDisplay||sub.studentName)) + '</div>';
+    html += '<div style="flex:1;cursor:pointer" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')"><div class="fac-queue-name">' + esc(sub.studentDisplay||sub.studentName) + '</div>';
     html += '<div class="fac-queue-meta">' + esc(sub.week||'Submission') + ' · submitted ' + relTime(sub.timestamp) + '</div></div>';
-    html += '<div class="fac-queue-right">' + (graded ? '<span class="fac-status-pill graded">✓ Graded</span>' : '<span class="fac-status-pill pending">Grade →</span>') + '</div>';
+    html += '<div class="fac-queue-right" onclick="openGradeById(\'' + esc(sub.studentName) + '\',\'' + esc(sub.week||'') + '\')" style="cursor:pointer">' + (graded ? '<span class="fac-status-pill graded">✓ Graded</span>' : '<span class="fac-status-pill pending">Grade →</span>') + '</div>';
     html += '</div>';
   });
   html += '</div>';
@@ -2708,3 +2718,36 @@ function closeStudentProfile() {
 
 </body>
 </html>
+function rdxToggleAllSubs(checked) {
+  document.querySelectorAll('.rdx-sub-check').forEach(function(cb) { cb.checked = checked; });
+  rdxUpdateSelectedCount();
+}
+function rdxUpdateSelectedCount() {
+  var checked = document.querySelectorAll('.rdx-sub-check:checked').length;
+  var el = document.getElementById('rdx-selected-count');
+  if (el) el.textContent = checked > 0 ? checked + ' selected' : '';
+  var selAll = document.getElementById('rdx-select-all');
+  var total = document.querySelectorAll('.rdx-sub-check').length;
+  if (selAll) selAll.indeterminate = checked > 0 && checked < total;
+}
+function rdxMarkSelectedReviewed() {
+  var checked = document.querySelectorAll('.rdx-sub-check:checked');
+  if (checked.length === 0) { alert('Select at least one submission first.'); return; }
+  if (!confirm('Mark ' + checked.length + ' submission(s) as reviewed?')) return;
+  checked.forEach(function(cb) {
+    var studentName = cb.dataset.student || '';
+    var week = cb.dataset.week || '';
+    if (studentName) {
+      // Mark as reviewed in local storage (same mechanism as existing feedback)
+      var feedbackKey = 'feedback-' + studentName + '-' + week;
+      if (!localStorage.getItem(feedbackKey)) {
+        localStorage.setItem(feedbackKey, JSON.stringify({ reviewed: true, reviewedAt: new Date().toISOString(), note: 'Marked reviewed in bulk' }));
+      }
+    }
+  });
+  // Re-render
+  var main = document.getElementById('main-content');
+  if (main) main.innerHTML = renderSubmissions();
+}
+
+
