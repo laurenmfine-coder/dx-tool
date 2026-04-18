@@ -1378,6 +1378,16 @@ body { background: var(--bg-main); color: var(--text-primary); transition: backg
         
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', () => {
+            // ── Auth gate: redirect to login if not authenticated ──
+            (function() {
+              try {
+                var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+                if (!u || !u.email) {
+                  window.location.href = '/auth/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+                  return;
+                }
+              } catch(e) {}
+            })();
             DxAnalytics.init();
             loadBoardPrepAnalytics();
             renderKnowledgeHeatmap();

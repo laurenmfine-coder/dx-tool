@@ -133,19 +133,26 @@ async function handleRegister(e) {
   } else {
     showSuccess('Account created! Check your email to confirm, then sign in.');
     document.getElementById('registerForm').style.display = 'none';
-    // Trigger profession onboarding for new accounts
+    // Trigger profession onboarding for new accounts, then redirect
     if (window.RDX_ProfessionOnboardingModal) {
       setTimeout(function() {
         var modal = new RDX_ProfessionOnboardingModal({
           allowSkip: true,
           onComplete: function(profile) {
             if (profile) profile.save();
+            setTimeout(function() { window.location.href = '/browse.html'; }, 400);
+          },
+          onSkip: function() {
+            setTimeout(function() { window.location.href = '/browse.html'; }, 200);
           }
         });
         modal.inject();
       }, 800);
     }
   }
+    } else {
+      // No profession modal — redirect directly
+      setTimeout(function() { window.location.href = '/browse.html'; }, 1500);
 }
 </script>
 <script src="/rdx-profession-onboarding.js"></script>
