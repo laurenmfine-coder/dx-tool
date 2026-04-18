@@ -65,18 +65,103 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 .case-subtitle{font-size:13px;color:rgba(255,255,255,.6)}
 
 /* ── FOOTER ── */
-.footer{margin-top:120px;padding:48px 24px;text-align:center;border-top:1px solid rgba(255,255,255,.1)}
-.footer-link{color:rgba(255,255,255,.5);text-decoration:none;margin:0 12px;font-size:13px}
-.footer-link:hover{color:rgba(255,255,255,.8)}
+.footer{margin-top:80px;padding:40px 24px 32px;text-align:center;border-top:1px solid rgba(255,255,255,.12)}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 4px;margin-bottom:20px}
+.footer-link{color:rgba(255,255,255,.65);text-decoration:none;font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;border:1px solid rgba(255,255,255,.1);transition:all .15s}
+.footer-link:hover{color:#fff;background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.footer-credit{font-size:12px;color:rgba(255,255,255,.3);margin-top:8px}
 
 @media(max-width:768px){
   .hero{min-height:auto;padding:80px 20px}
   .instant-cta{padding:16px 32px;font-size:1.1rem}
   .trust-grid{gap:32px}
 }
+
+/* ── TOP NAV ── */
+.rdx-topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 52px;
+  background: rgba(10, 22, 40, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 100;
+}
+.rdx-topnav-logo {
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: -.3px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.rdx-topnav-logo span {
+  display: inline-block;
+  background: linear-gradient(135deg,#2874A6,#0D7A67);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 5px;
+  letter-spacing: .5px;
+}
+.rdx-topnav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.rdx-topnav-link {
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 7px;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.rdx-topnav-link:hover { 
+  color: #fff; 
+  background: rgba(255,255,255,.1);
+}
+.rdx-topnav-link.primary {
+  background: rgba(40,116,166,.35);
+  color: #fff;
+  border: 1px solid rgba(40,116,166,.5);
+}
+.rdx-topnav-link.primary:hover {
+  background: rgba(40,116,166,.55);
+}
+/* Hide desktop-only links on mobile */
+.rdx-topnav-desktop { display: none; }
+@media(min-width: 600px) {
+  .rdx-topnav-desktop { display: inline; }
+}
+/* Push hero content below fixed nav */
+.hero { padding-top: 72px !important; }
+
 </style>
 </head>
 <body>
+
+<nav class="rdx-topnav" role="navigation" aria-label="Main navigation">
+  <a href="/" class="rdx-topnav-logo">
+    <span>Rx</span> ReasonDx
+  </a>
+  <div class="rdx-topnav-links">
+    <a href="/browse.html" class="rdx-topnav-link">Browse Cases</a>
+    <a href="/how-it-works.html" class="rdx-topnav-link rdx-topnav-desktop">How It Works</a>
+    <a href="/for-educators.html" class="rdx-topnav-link rdx-topnav-desktop">Educators</a>
+    <a href="/auth/login.html" class="rdx-topnav-link primary">Sign In</a>
+  </div>
+</nav>
 
 <div class="hero">
   <div class="hero-content">
@@ -168,11 +253,19 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 </div>
 
 <div class="footer">
-  <a href="/platform.html" class="footer-link">About the Platform</a>
-  <a href="/how-it-works.html" class="footer-link">How It Works</a>
-  <a href="/for-educators.html" class="footer-link">For Educators</a>
-  <a href="/browse.html" class="footer-link">Browse Cases</a>
-  <a href="mailto:lauren@reasondx.com" class="footer-link">Contact</a>
+  <div class="footer-links">
+    <a href="/browse.html" class="footer-link">Browse Cases</a>
+    <a href="/virtual-emr.html" class="footer-link">Virtual EMR</a>
+    <a href="/CoachDx/mentor-chat.html" class="footer-link">CoachDx</a>
+    <a href="/puzzles.html" class="footer-link">Daily Puzzle</a>
+    <a href="/how-it-works.html" class="footer-link">How It Works</a>
+    <a href="/for-educators.html" class="footer-link">For Educators</a>
+    <a href="/pricing.html" class="footer-link">Pricing</a>
+    <a href="/research.html" class="footer-link">Research</a>
+    <a href="/auth/login.html" class="footer-link">Sign In</a>
+    <a href="/auth/register.html" class="footer-link">Create Account</a>
+  </div>
+  <p class="footer-credit">ReasonDx · Lauren Fine, MD, FAAAAI · <a href="mailto:lauren@reasondx.com" style="color:inherit">lauren@reasondx.com</a></p>
 </div>
 
 <script src="/js/rdx-accessibility.js" defer></script>
