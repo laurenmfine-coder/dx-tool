@@ -468,21 +468,48 @@ window.toggleAct = function(gi, ai) {
 };
 
 window.removeGoal = function(gi) {
-  if (confirm('Remove this goal?')) { goals.splice(gi, 1); renderGoals(); }
+  // Inline confirm via button swap
+  var btn = event.target;
+  if (btn.dataset.confirming !== '1') {
+    btn.dataset.confirming = '1';
+    btn.textContent = 'Confirm delete?';
+    btn.style.background = '#DC2626';
+    setTimeout(function(){ btn.dataset.confirming='0'; btn.textContent='Remove'; btn.style.background=''; }, 2500);
+    return;
+  }
+  goals.splice(gi, 1); renderGoals();
 };
 
 window.addActivity = function(gi) {
-  var text = prompt('Describe the learning activity (e.g., "Complete 3 AKI cases in simulate mode"):');
-  if (!text) return;
-  var url = prompt('Platform URL (optional, e.g., /browse.html?mode=simulate):') || '';
-  var week = prompt('Timeline (e.g., Week 1, Week 2-3):') || 'Week 1';
+  // Show inline form instead of prompts
+  var existing = document.getElementById('rdx-ilp-add-form');
+  if (existing) { existing.remove(); return; }
+  var form = document.createElement('div');
+  form.id = 'rdx-ilp-add-form';
+  form.style.cssText = 'background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:16px 20px;margin:12px 0;box-shadow:0 4px 16px rgba(0,0,0,.08)';
+  form.innerHTML = '<div style="font-size:14px;font-weight:700;color:#1E293B;margin-bottom:12px">Add Learning Activity</div>' +
+    '<div style="display:flex;flex-direction:column;gap:10px">' +
+    '<input id="ilp-act-text" placeholder="Activity (e.g. Complete 3 AKI cases in simulate mode)" style="padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:13px;font-family:inherit;outline:none" />' +
+    '<input id="ilp-act-url" placeholder="Platform URL (optional, e.g. /browse.html?mode=simulate)" style="padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:13px;font-family:inherit;outline:none" />' +
+    '<input id="ilp-act-week" placeholder="Timeline (e.g. Week 1, Week 2-3)" value="Week 1" style="padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:13px;font-family:inherit;outline:none" />' +
+    '<div style="display:flex;gap:8px">' +
+    '<button onclick="rdxIlpSaveActivity(gi)" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Add Activity</button>' +
+    '<button onclick="document.getElementById('rdx-ilp-add-form').remove()" style="padding:8px 12px;background:#F1F5F9;color:#64748B;border:none;border-radius:8px;font-size:13px;cursor:pointer;font-family:inherit">Cancel</button>' +
+    '</div></div>';
+  // Insert after the goals list
+  var goalsList = document.querySelector('.ilp-goal-list, #goals-list, [class*=goal]');
+  if (goalsList) goalsList.after(form);
+  else document.querySelector('main,body').appendChild(form);
+  document.getElementById('ilp-act-text').focus();
+  return; // early return — save handled by rdxIlpSaveActivity
+  var text = ''; var url = ''; var week = 'Week 1';
   goals[gi].activities.push({ text: text, url: url, week: week, done: false });
   renderGoals();
 };
 
 window.addGoalManual = function() {
   // Show EPA picker
-  var epaNum = prompt(
+  var epaNum = window.prompt(
     'Which AAMC EPA?\n\n' +
     Object.entries(EPA_LABELS).map(function(e){return e[0]+': '+e[1];}).join('\n') +
     '\n\nEnter EPA number (e.g., EPA1):'
@@ -561,6 +588,26 @@ setTimeout(function(){
 <script src="js/nav-global.js"></script>
 <script src="js/rdx-analytics-tracker.js">
 function rdxIlpToast(msg,type){var t=document.createElement('div');t.style.cssText='position:fixed;top:80px;right:20px;z-index:9999;background:'+(type==='error'?'#DC2626':'#059669')+';color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.2)';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
+
+function rdxIlpSaveActivity(gi) {
+  var text = (document.getElementById('ilp-act-text') || {}).value || '';
+  var url  = (document.getElementById('ilp-act-url')  || {}).value || '';
+  var week = (document.getElementById('ilp-act-week') || {}).value || 'Week 1';
+  if (!text.trim()) { document.getElementById('ilp-act-text').style.borderColor='#EF4444'; return; }
+  var goals = loadGoals ? loadGoals() : JSON.parse(localStorage.getItem('rdx-ilp-data')||'{}').goals || [];
+  if (goals[gi]) {
+    goals[gi].activities = goals[gi].activities || [];
+    goals[gi].activities.push({ text: text.trim(), url: url, week: week, done: false, addedAt: new Date().toISOString() });
+    try {
+      var data = JSON.parse(localStorage.getItem('rdx-ilp-data')||'{}');
+      data.goals = goals;
+      localStorage.setItem('rdx-ilp-data', JSON.stringify(data));
+    } catch(e) {}
+  }
+  var form = document.getElementById('rdx-ilp-add-form');
+  if (form) form.remove();
+  if (typeof renderGoals === 'function') renderGoals();
+}
 </script>
 </body>
 </html>
