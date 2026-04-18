@@ -2797,11 +2797,12 @@ function render(){
   if(role==="faculty"||role==="admin"){tabs.push({id:"grading",label:"Grade & Review",icon:I.check});tabs.push({id:"program_settings",label:"Program Settings",icon:I.settings})}
   if(role==="admin"){tabs.push({id:"admin",label:"Admin Panel",icon:I.settings})}
 
-  const sb=tabs.map(t=>{ var _badge=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):''; var _dim=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):''; var _b='<button type="button" '+(SIDEBAR_TOOLTIPS&&SIDEBAR_TOOLTIPS[t.id]?'data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'" ':'')+'class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+_dim+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge+'</button>'; return _b; }).join("")+(window.RDXGuide?RDXGuide.renderSidebarToggle():'');
-  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,interview:renderPatientInterview,documentation:renderDocumentationOnly,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx};
+  const sb=tabs.map(t=>{ var _badge=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):''; var _dim=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):''; var _b='<button type="button" '+(SIDEBAR_TOOLTIPS&&SIDEBAR_TOOLTIPS[t.id]?'data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'" ':'')+'class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+_dim+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge+'</button>'; return _b; }).join("")+(window.RDXGuide?RDXGuide.renderSidebarToggle():'')+(window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderStepper():'');
+  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,interview:renderPatientInterview,documentation:renderDocumentationOnly,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx,guided:function(){return window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderPhase():'<p>Guided mode unavailable.</p>';}};
   // Wrap each render fn with error boundary
   if(window.RDXErrors){Object.keys(fn).forEach(function(k){fn[k]=RDXErrors.wrap(fn[k],{icon:'⚙️',desc:'This section couldn\'t load. Try switching tabs.',retry:'Try Again',retryFn:'render()'});});}
-  const ct=(fn[S.activeTab]||renderDemographics)();
+  if(window.GuidedMode&&GuidedMode.isActive()&&S.activeTab==="demographics"&&!S._guidedStarted){S._guidedStarted=true;S.activeTab="guided";}
+const ct=(fn[S.activeTab]||renderDemographics)();
   const em=role==="admin"?"":role==="faculty"?"":"";
   const roleBadge=role==="admin"?"badge-danger":role==="faculty"?"badge-purple":"badge-primary";
 
@@ -3892,6 +3893,12 @@ async function bootstrapApp() {
   // Initialize Mission Control for students
   if(window.MissionControl&&S.currentUser.role==="student"&&CASE_ID){
     MissionControl.init(S.clinicalSetting,CASE_ID,S.currentUser.role);
+  }
+  // Initialize Guided Mode if case supports it
+  if(window.GuidedMode&&CASE_ID){
+    var _guidedParam=new URLSearchParams(location.search).get('mode')==='guided';
+    if(_guidedParam) GuidedMode._forceMode=true;
+    GuidedMode.tryInit();
   }
   try { render(); } catch(renderErr) {
     console.error('render() error:', renderErr.message, renderErr.stack);
@@ -5494,6 +5501,9 @@ render = function(){
   );
   
   if(role==="student"){
+    if(window.GuidedMode&&GuidedMode.isActive()){
+      tabs.push({id:'guided',label:'Guided Mode',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'});
+    }
     tabs.push({id:'_divider_actions',label:'',icon:'',divider:true,groupLabel:'Actions'});
     tabs.push({id:"documentation",label:"Write Note",icon:I.fileText});
     tabs.push({id:"orders",label:"Order Tests",icon:I.send});
@@ -5524,6 +5534,7 @@ render = function(){
   fn.autofeedback = renderAutoFeedback;
   fn.handoff = renderHandoff;
   fn.coach = renderCoachDx;
+  fn.guided = function(){ return window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderPhase():'<p>Guided mode unavailable.</p>'; };
   fn.crt = function(){ var _sw=(typeof renderAISwitcher==='function')?renderAISwitcher('crt'):''; return _sw + ((window.CRTChart && CRTChart.renderTab) ? CRTChart.renderTab() : '<div style="text-align:center;padding:40px 20px;color:var(--text-muted)"><div style="font-size:32px;margin-bottom:10px">⚡</div><div style="font-size:14px;font-weight:600;color:var(--text)">Loading Clinical Reasoning Trainer…</div></div>'); };
   
   if(role==="student"){
@@ -5565,11 +5576,13 @@ render = function(){
   }).join('');
   if (typeof wrapSidebarAISection === 'function') sb = wrapSidebarAISection(sb);
   if (window.RDXGuide) sb += RDXGuide.renderSidebarToggle();
+  if (window.GuidedMode && GuidedMode.isActive()) sb += GuidedMode.renderStepper();
   var secTabs=tabs.filter(function(t){return !t.divider&&PRIMARY_TAB_IDS.indexOf(t.id)<0});
   var isSecActive=secTabs.some(function(t){return t.id===S.activeTab});
   var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
   var overflowHtml='<div class="sidebar-overflow" id="sidebarOverflow"><div class="sidebar-overflow-backdrop" onclick="closeMoreTabs()"></div><div class="sidebar-overflow-sheet"><div class="sheet-handle"></div>'+secTabs.map(function(t){return'<button type="button" class="sheet-btn '+(S.activeTab===t.id?'active':'')+'" onclick="switchTabFromMore(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('')+'</div></div>';
-  const ct=(fn[S.activeTab]||renderDemographics)();
+  if(window.GuidedMode&&GuidedMode.isActive()&&S.activeTab==="demographics"&&!S._guidedStarted){S._guidedStarted=true;S.activeTab="guided";}
+const ct=(fn[S.activeTab]||renderDemographics)();
   const em=role==="admin"?"":role==="faculty"?"":"";
   const roleBadge=role==="admin"?"badge-danger":role==="faculty"?"badge-purple":"badge-primary";
 
@@ -5678,6 +5691,9 @@ submitDoc = function(){
 
 <script src="js/mission-control.js"></script>
 <script src="js/guest-nudge.js"></script>
+<script src="js/guided-mode.js"></script>
+<script src="js/patient-interview.js"></script>
+<script src="js/exam-builder.js"></script>
 <script src="emr-data/crt-data.js"></script>
 <script src="js/rdx-order-catalog.js"></script>
 <script src="js/rdx-order-mode.js"></script>
