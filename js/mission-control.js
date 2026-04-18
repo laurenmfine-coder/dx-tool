@@ -128,7 +128,7 @@
     s.id = 'rdx-mc-fab-css';
     s.textContent =
       '@keyframes mcFabPulse{0%,100%{box-shadow:0 2px 12px rgba(40,116,166,.35)}50%{box-shadow:0 2px 22px rgba(40,116,166,.75)}}' +
-      '#rdx-mc-fab{position:fixed;bottom:22px;right:18px;z-index:9990}' +
+      '#rdx-mc-fab{position:fixed;bottom:24px;right:24px;z-index:9990}' +
       '#rdx-mc-fab-btn{display:flex;align-items:center;gap:7px;padding:9px 16px 9px 12px;background:#2874A6;color:#fff;border:none;border-radius:24px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 2px 12px rgba(40,116,166,.4);transition:all .18s;-webkit-tap-highlight-color:transparent}' +
       '#rdx-mc-fab-btn:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 4px 18px rgba(40,116,166,.55)}' +
       '#rdx-mc-fab-btn.pulsing{animation:mcFabPulse 2s ease-in-out 4}' +
