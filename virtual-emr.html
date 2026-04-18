@@ -37,7 +37,7 @@
 <link rel="stylesheet" href="mobile.css" media="print" onload="this.media='all'">
 <meta name="description" content="Virtual EMR on ReasonDx. Review patient charts, write clinical notes, and practice clinical documentation in a realistic electronic health record.">
 <meta property="og:title" content="Virtual EMR | ReasonDx">
-<meta property="og:description" content="Realistic EMR simulation with 394 patient cases across 11 health professions.">
+<meta property="og:description" content="Realistic EMR simulation with 500+ patient cases across 11 health professions.">
 <meta property="og:url" content="https://reasondx.com/virtual-emr.html">
 <meta property="og:type" content="website">
 
@@ -47,7 +47,7 @@
 <meta property="og:image" content="https://reasondx.com/icons/og-image.jpg">
 <meta name="twitter:image" content="https://reasondx.com/icons/og-image.jpg">
 <meta name="twitter:title" content="Virtual EMR | ReasonDx">
-<meta name="twitter:description" content="Realistic EMR simulation with 394 patient cases across 11 health professions.">
+<meta name="twitter:description" content="Realistic EMR simulation with 500+ patient cases across 11 health professions.">
 <script src="js/rdx-difficulty.js" defer></script>
 <script src="/rdx-email-triggers.js" defer></script>
 <script src="js/rdx-semantic-drift.js" defer></script>
@@ -66,6 +66,9 @@
   body{background:#fff!important;color:#000!important;font-size:10pt}
 }
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"ReasonDx Virtual EMR","url":"https://www.reasondx.com/virtual-emr.html","description":"Practice clinical documentation in a realistic virtual EMR with 500+ patient cases. Write notes, receive AI feedback, and develop documentation skills across 11 health professions.","applicationCategory":"EducationalApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"educationalLevel":"Medical Student, Health Professional","teaches":"Clinical Documentation, EMR Skills, SOAP Notes, SBAR","provider":{"@type":"Organization","name":"ReasonDx","url":"https://www.reasondx.com"}}
+</script>
 </head>
 <body>
 <script>
@@ -1525,6 +1528,7 @@ function initDB(){
       Object.keys(localStorage).filter(function(k){return k.startsWith(p);}).forEach(function(k){try{localStorage.removeItem(k);}catch(e2){}});
     });
     console.warn('localStorage quota: cleared stale cache');
+    showToast('⚠️ Storage was nearly full — some cached data was cleared. Your notes are safe.');
   }
   if(!db("assignments"))dbSet("assignments",{});
   if(!db("emr-roles"))dbSet("emr-roles",{});
@@ -2680,7 +2684,7 @@ function renderGrading(){
     if(window.OrderValidator){gh+=OrderValidator.renderSummary(sub.studentName,CASE_ID)}
     // CaseFrame Completion Analysis panel (from Phase 3 CaseFrame engine)
     if(window.CaseFrame){var _cfStored=sub.caseFrameResult||null;if(!_cfStored){var _cfLoaded=CaseFrame.loadResult(sub.studentName,CASE_ID);if(_cfLoaded)_cfStored=_cfLoaded.result}if(!_cfStored&&sub.fields){var _cfX={labOrders:S.labOrders||[],imgOrders:S.imgOrders||[]};_cfStored=CaseFrame.score(CASE_ID,sub.fields,_cfX)}if(_cfStored){var _cfCR=null;if(sub.chartReviewData){_cfCR={highValueCoverage:(sub.chartReviewData.chartReview||sub.chartReviewData).highValueCoverage}}var _cfOV=sub.orderValidationData||null;gh+=CaseFrame.renderSummary(_cfStored,{chartReview:_cfCR,orderValidation:_cfOV})}}
-    gh+=sectionCard("Grade & Feedback",I.star,tableHTML(["Criterion","Max","Score","Comment"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono td-muted">'+r.max+'</td><td><input type="number" class="grade-input" min="0" max="'+r.max+'" value="'+(S.gradeScores[r.id]||"")+'" onchange="setGradeScore(\''+r.id+'\',this.value)"></td><td><input type="text" class="comment-input" value="'+esc(S.gradeComments[r.id]||"")+'" placeholder="Comment..." onchange="setGradeComment(\''+r.id+'\',this.value)"></td></tr>'))+'<div class="grade-total-bar"><span style="font-weight:600">Total: <span class="td-mono" style="color:var(--primary)">'+tot+'</span> / '+RUBRIC.reduce((a,b)=>a+b.max,0)+'</span></div><div style="margin-top:16px"><label class="demo-label">Overall Comments</label><textarea class="overall-textarea" placeholder="Detailed narrative feedback..." oninput="S.overallComment=this.value">'+esc(S.overallComment)+'</textarea></div><div style="margin-top:16px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" onclick="saveGrade()">'+I.check+' Save & Share Feedback</button></div>');
+    gh+=sectionCard("Grade & Feedback",I.star,tableHTML(["Criterion","Max","Score","Comment"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono td-muted">'+r.max+'</td><td><input type="number" class="grade-input" min="0" max="'+r.max+'" value="'+(S.gradeScores[r.id]||"")+'" onchange="setGradeScore(\''+r.id+'\',this.value)"></td><td><input type="text" class="comment-input" value="'+esc(S.gradeComments[r.id]||"")+'" placeholder="Comment..." onchange="setGradeComment(\''+r.id+'\',this.value)"></td></tr>'))+'<div class="grade-total-bar"><span style="font-weight:600">Total: <span class="td-mono" style="color:var(--primary)">'+tot+'</span> / '+RUBRIC.reduce((a,b)=>a+b.max,0)+'</span></div><div style="margin-top:16px"><label class="demo-label">Overall Comments</label><textarea class="overall-textarea" aria-label="Detailed narrative feedback" placeholder="Detailed narrative feedback..." oninput="S.overallComment=this.value">'+esc(S.overallComment)+'</textarea></div><div style="margin-top:16px;display:flex;justify-content:flex-end"><button type="button" class="btn-submit" onclick="saveGrade()">'+I.check+' Save & Share Feedback</button></div>');
   }
   return sectionCard("Student Submissions",I.fileText,sh)+gh;
 }
@@ -2786,7 +2790,7 @@ function adminUnassign(student,faculty){
 // ===============================================================
 let pendingSelection=null,selectedAnnotColor="yellow";
 function handleTextSelection(){const sel=window.getSelection();const text=sel.toString().trim();if(!text||text.length<3)return;const range=sel.getRangeAt(0);const rect=range.getBoundingClientRect();pendingSelection={text};showAnnotationPopover(rect)}
-function showAnnotationPopover(rect){const pop=document.getElementById("annotationPopover");let top=rect.bottom+8,left=rect.left;if(left+320>window.innerWidth)left=window.innerWidth-340;if(left<10)left=10;const cb=ANNOT_COLORS.map(c=>'<button type="button" class="annotation-color-btn" style="background:'+c.bg+'" onclick="selectAnnotColor(\''+c.id+'\',this)" title="'+c.label+'" data-color="'+c.id+'"></button>').join("");pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">Add Annotation</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">"'+esc(pendingSelection.text.substring(0,60))+(pendingSelection.text.length>60?"...":"")+'"</div><div style="font-size:11px;font-weight:600;margin-bottom:4px">COLOR</div><div class="annotation-color-row">'+cb+'</div><textarea id="annotCommentInput" class="annotation-comment-input" placeholder="Your comment..."></textarea><div><button type="button" class="annotation-save-btn" onclick="saveAnnotation()">Add Annotation</button></div>';pop.style.top=top+"px";pop.style.left=left+"px";pop.classList.add("visible");setTimeout(()=>selectAnnotColor("yellow",pop.querySelector('[data-color="yellow"]')),10)}
+function showAnnotationPopover(rect){const pop=document.getElementById("annotationPopover");let top=rect.bottom+8,left=rect.left;if(left+320>window.innerWidth)left=window.innerWidth-340;if(left<10)left=10;const cb=ANNOT_COLORS.map(c=>'<button type="button" class="annotation-color-btn" aria-label="'+c.label+'" style="background:'+c.bg+'" onclick="selectAnnotColor(\''+c.id+'\',this)" title="'+c.label+'" data-color="'+c.id+'"></button>').join("");pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">Add Annotation</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div><div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">"'+esc(pendingSelection.text.substring(0,60))+(pendingSelection.text.length>60?"...":"")+'"</div><div style="font-size:11px;font-weight:600;margin-bottom:4px">COLOR</div><div class="annotation-color-row">'+cb+'</div><textarea id="annotCommentInput" class="annotation-comment-input" placeholder="Your comment..."></textarea><div><button type="button" class="annotation-save-btn" onclick="saveAnnotation()">Add Annotation</button></div>';pop.style.top=top+"px";pop.style.left=left+"px";pop.classList.add("visible");setTimeout(()=>selectAnnotColor("yellow",pop.querySelector('[data-color="yellow"]')),10)}
 function selectAnnotColor(id,btn){selectedAnnotColor=id;document.querySelectorAll(".annotation-color-btn").forEach(b=>b.classList.remove("selected"));if(btn)btn.classList.add("selected")}
 function hideAnnotationPopover(){document.getElementById("annotationPopover").classList.remove("visible");pendingSelection=null}
 function saveAnnotation(){if(!pendingSelection)return;const c=document.getElementById("annotCommentInput").value.trim();if(!c){showToast("Please add a comment");return}const sub=S.allSubmissions[S.selectedSubmission];const anns=db("annotations-"+sub.studentName+"-"+sub.week)||[];anns.push({selectedText:pendingSelection.text,comment:c,color:selectedAnnotColor,grader:S.currentUser.displayName,timestamp:new Date().toISOString()});dbSet("annotations-"+sub.studentName+"-"+sub.week,anns);if(window.EMRCloud){EMRCloud.syncAnnotations(sub.studentName,sub.week,CASE_ID||'',anns)}hideAnnotationPopover();showToast("✓ Annotation added");render()}
@@ -5664,7 +5668,7 @@ render = function(){
   if (window.GuidedMode && GuidedMode.isActive()) sb += GuidedMode.renderStepper();
   var secTabs=tabs.filter(function(t){return !t.divider&&PRIMARY_TAB_IDS.indexOf(t.id)<0});
   var isSecActive=secTabs.some(function(t){return t.id===S.activeTab});
-  var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
+  var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" aria-label="'+sec.label+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
   var overflowHtml='<div class="sidebar-overflow" id="sidebarOverflow"><div class="sidebar-overflow-backdrop" onclick="closeMoreTabs()"></div><div class="sidebar-overflow-sheet"><div class="sheet-handle"></div>'+secTabs.map(function(t){return'<button type="button" class="sheet-btn '+(S.activeTab===t.id?'active':'')+'" onclick="switchTabFromMore(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('')+'</div></div>';
   if(window.GuidedMode&&GuidedMode.isActive()&&S.activeTab==="demographics"&&!S._guidedStarted){S._guidedStarted=true;S.activeTab="guided";}
 const ct=(fn[S.activeTab]||renderDemographics)();
@@ -5835,7 +5839,18 @@ if (OSCE_MODE) {
     }, 1000);
   }
   // Start after page fully renders
-  window.addEventListener('load', function() { setTimeout(_osceStartCountdown, 1500); });
+  // Offline detection — show banner if no network
+if (!navigator.onLine) {
+  document.addEventListener('DOMContentLoaded', function() {
+    var b = document.createElement('div');
+    b.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#D97706;color:#fff;text-align:center;padding:8px;font-size:13px;font-weight:700;z-index:9999';
+    b.textContent = '⚠️ You appear to be offline. Case data may not load correctly.';
+    document.body.prepend(b);
+    window.addEventListener('online', function(){ b.remove(); });
+  });
+}
+
+window.addEventListener('load', function() { setTimeout(_osceStartCountdown, 1500); });
 }
 
 </script>
