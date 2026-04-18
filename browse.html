@@ -945,6 +945,8 @@ var CAT_LABELS={cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infe
 var SECTION_COPY={simulate:{title:'Simulate &mdash; <em>AI Patient Encounters</em>',meta:'Adaptive 10-phase clinical simulation'},practice:{title:'Practice &mdash; <em>Virtual EMR</em>',meta:'Chart review · Orders · Documentation · Feedback'},coach:{title:'Coach &mdash; <em>Socratic Reasoning</em>',meta:'Attending-style Socratic dialogue across 25 categories'},learn:{title:'Learn &mdash; <em>Pathophysiology Modules</em>',meta:'Mechanism-first modules with AI attending'}};
 var PLACEHOLDERS={simulate:'Search by chief complaint — chest pain, dyspnea, fever...',practice:'Search cases by chief complaint or diagnosis...',coach:'Search topics — asthma, DDx, sepsis, bias...',learn:'Search pathophysiology modules...'};
 function setMode(m){ window._rdxBatchSize = 24; window._showAll = false; _rdxSort = 'recommended'; var sel = document.getElementById('rdx-sort-select'); if(sel) sel.value='recommended';
+  var _modeNames = {simulate:'Simulation Cases',practice:'Virtual EMR Cases',coach:'CoachDx Topics',learn:'Pathophysiology Modules'};
+  document.title = (_modeNames[m] || 'Browse') + ' | ReasonDx';
   // Lazy-load mode data on first use
   if (m === 'coach' && !_coachDataLoaded) {
     var s = document.createElement('script'); s.src = '/data/coach-data.js';

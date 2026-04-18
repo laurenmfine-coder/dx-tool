@@ -236,7 +236,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
 
       <div class="input-bar">
         <div class="input-row">
-          <textarea class="chat-input" id="chatInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+          <div id="rdx-coach-char-counter" style="display:none;font-size:11px;color:#94A3B8;text-align:right;padding:2px 4px 0"></div>
+          <textarea class="chat-input" id="chatInput" maxlength="1500" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" oninput="rdxCoachCharCount(this)"
             placeholder="Answer the question, or ask your own…" rows="1"
             onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendMessage()}"
             oninput="autoResize(this)"></textarea>
@@ -2310,6 +2311,20 @@ function rdxCopyCoachSummary() {
     var btn = document.querySelector('button[onclick="rdxCopyCoachSummary()"]');
     if (btn) { btn.textContent = '✓ Copied!'; setTimeout(function(){btn.textContent='📋 Copy session summary';}, 2000); }
   } catch(e) {}
+}
+
+
+function rdxCoachCharCount(el) {
+  var cc = document.getElementById('rdx-coach-char-counter');
+  if (!cc) return;
+  var len = el.value.length;
+  if (len > 1200) {
+    cc.style.display = 'block';
+    cc.textContent = len + ' / 1500';
+    cc.style.color = len > 1400 ? '#F87171' : '#94A3B8';
+  } else {
+    cc.style.display = 'none';
+  }
 }
 
 </script>
