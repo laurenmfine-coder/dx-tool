@@ -442,6 +442,46 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   </a>
   <div style="height:16px"></div>
 
+  <!-- ── RESUME CHIP: shows if there is a saved session ── -->
+  <div id="rdx-resume-chip" style="display:none;margin-bottom:14px"></div>
+  <script>
+  (function() {
+    try {
+      var saved = JSON.parse(sessionStorage.getItem('rdx-saved-session') || localStorage.getItem('rdx-case-session') || 'null');
+      if (!saved || !saved.caseId) {
+        // Also check simulation engine session storage
+        var keys = Object.keys(localStorage);
+        for (var i = 0; i < keys.length; i++) {
+          if (keys[i].startsWith('rdx-session-')) {
+            try {
+              var s = JSON.parse(localStorage.getItem(keys[i]) || 'null');
+              if (s && s.caseId && s.turns && s.turns.length > 0) { saved = s; break; }
+            } catch(e) {}
+          }
+        }
+      }
+      if (saved && saved.caseId) {
+        var chip = document.getElementById('rdx-resume-chip');
+        if (!chip) return;
+        var label = saved.caseName || saved.caseId;
+        var phase = saved.currentPhase ? ' · Phase ' + saved.currentPhase + ' of 10' : '';
+        chip.style.display = 'block';
+        chip.innerHTML = '<div style="display:flex;align-items:center;justify-content:space-between;background:linear-gradient(90deg,rgba(40,116,166,.18),rgba(40,116,166,.08));border:1px solid rgba(40,116,166,.3);border-radius:10px;padding:10px 16px;flex-wrap:wrap;gap:8px">' +
+          '<div style="display:flex;align-items:center;gap:10px">' +
+            '<span style="font-size:16px">▶</span>' +
+            '<div><div style="font-size:13px;font-weight:700;color:#fff">Resume: ' + label + '</div>' +
+            '<div style="font-size:11px;color:rgba(255,255,255,.5)">In progress' + phase + '</div></div>' +
+          '</div>' +
+          '<div style="display:flex;gap:8px">' +
+            '<a href="/simulation-engine.html?case=' + encodeURIComponent(saved.caseId) + '" style="padding:6px 14px;background:#2874A6;color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Continue →</a>' +
+            '<button onclick="this.closest('[id=rdx-resume-chip]').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;padding:0 4px">×</button>' +
+          '</div>' +
+        '</div>';
+      }
+    } catch(e) {}
+  })();
+  </script>
+
   <!-- ── MODE STRIP: simplified for new users, full for experienced ── -->
   <div id="statStrip">
 
@@ -708,7 +748,10 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <h2 id="sectionTitle" style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0"></h2>
     <p id="sectionMeta" style="font-size:13px;color:rgba(255,255,255,0.6);margin:0"></p>
   </div>
-  <div class="filters">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+  <button id="rdx-hide-done-btn" onclick="rdxToggleHideDone()" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:5px 12px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,.14)'" onmouseout="this.style.background='rgba(255,255,255,.08)'">Hide completed</button>
+</div>
+<div class="filters">
     <input type="text" class="search" id="searchInput" placeholder="Search by presentation, symptom, or diagnosis..." oninput="handleSearch()" aria-label="Search ReasonDx content">
   </div>
   <div id="filterBtns" style="display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px;"></div>
@@ -721,7 +764,16 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     </div>
   </div>
   <div class="grid" id="grid"></div>
-  <div class="empty" id="empty" style="display:none">No results match your search.</div>
+  <div class="empty" id="empty" style="display:none">
+    <div style="font-size:1.1rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7)">No results match that search</div>
+    <p style="font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:20px">Try a symptom, presentation, or diagnosis name</p>
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px">
+      <button onclick="document.getElementById('searchInput').value='chest pain';handleSearch()" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit">chest pain</button>
+      <button onclick="document.getElementById('searchInput').value='shortness of breath';handleSearch()" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit">shortness of breath</button>
+      <button onclick="document.getElementById('searchInput').value='fever';handleSearch()" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;font-family:inherit">fever</button>
+    </div>
+    <button onclick="document.getElementById('searchInput').value='';CAT='all';render()" style="background:#2874A6;color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Clear filters — browse all 394 cases</button>
+  </div>
   
   <!-- Load More Button -->
   <div id="loadMore" style="display:none;text-align:center;margin:40px 0 60px">
@@ -934,7 +986,7 @@ function setMode(m){MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(
 var allBtn=document.querySelector('.fbtn[data-cat="all"]');if(allBtn)allBtn.classList.add('on');render();}
 function setCat(c){CAT=c;document.querySelectorAll('.fbtn').forEach(function(b){b.classList.toggle('on',b.dataset.cat===c);});render();}
 function getData(){if(MODE==='simulate') return SIM_FEATURED.concat(SIM_DATA);if(MODE==='practice') return PRAC_DATA;if(MODE==='coach') return COACH_DATA;if(MODE==='learn') return LEARN_DATA;return [];}
-function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var data=getData();var filtered=data.filter(function(c){if(CAT!=='all'&&c.cat!==CAT) return false;if(CURRENT_PROF&&c.profession&&c.profession!==CURRENT_PROF) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
+function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var _completedCases=new Set();try{var _cc=JSON.parse(localStorage.getItem('rdx-completed-cases')||'[]');_cc.forEach(function(id){_completedCases.add(id);});}catch(e){}var data=getData();var _hideDone=localStorage.getItem('rdx-hide-done')==='1';var filtered=data.filter(function(c){if(_hideDone&&_completedCases.has(c.id)) return false;if(CAT!=='all'&&c.cat!==CAT) return false;if(CURRENT_PROF&&c.profession&&c.profession!==CURRENT_PROF) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
   // Profession arc cases first if profession matches
   var userProf=null;try{var u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProf=(u.professionProfile&&u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
   var aArc=a.arcId&&a.profession&&a.profession===userProf?1:0;
@@ -984,7 +1036,9 @@ grid.innerHTML=displayedItems.map(function(c){
     title = title.replace(/^[—\-\s]+/, '').trim();
   }
   
-  var h='<div class="card" onclick="launch(\''+esc(c.id)+'\')">';
+  var _isDone = _completedCases.has(c.id);
+  var h='<div class="card" onclick="launch(\''+esc(c.id)+'\')" style="position:relative">';
+  if(_isDone) h+='<div style="position:absolute;top:8px;right:8px;background:#059669;color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:10px;letter-spacing:.04em;z-index:2">✓ Done</div>';
   h+='<div class="card-top">';
   h+='<div class="'+iconClass+'">'+iconSymbol+'</div>';
   h+='<div style="flex:1">';
@@ -1032,6 +1086,23 @@ if(filtered.length > 12 && !window._showAll) {
   loadMoreBtn.style.display = 'none';
 }
 }
+function rdxToggleHideDone() {
+  var current = localStorage.getItem('rdx-hide-done') === '1';
+  localStorage.setItem('rdx-hide-done', current ? '0' : '1');
+  var btn = document.getElementById('rdx-hide-done-btn');
+  if (btn) btn.textContent = current ? 'Hide completed' : 'Show completed';
+  render();
+}
+// Init button label on load
+(function() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.getElementById('rdx-hide-done-btn');
+      if (btn && localStorage.getItem('rdx-hide-done') === '1') btn.textContent = 'Show completed';
+    });
+  }
+})();
+
 function launch(id){
   // Track case start
   if(window.gtag) {

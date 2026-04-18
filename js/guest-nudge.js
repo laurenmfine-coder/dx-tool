@@ -93,7 +93,7 @@
     if (bannerDismissed()) return;
     if (document.getElementById('rdx-guest-banner')) return;
 
-    var registerUrl = (window.location.pathname.indexOf('/auth/') !== -1 ? '' : '') + '/auth/register.html';
+    var registerUrl = '/auth/login.html?next=' + encodeURIComponent(window.location.href);
 
     var banner = document.createElement('div');
     banner.id = 'rdx-guest-banner';
@@ -129,7 +129,7 @@
     _exitFired = true;
     try { sessionStorage.setItem('rdx-exit-dismissed', '1'); } catch (e) {}
 
-    var registerUrl = '/auth/register.html';
+    var registerUrl = '/auth/login.html?next=' + encodeURIComponent(window.location.href);
 
     var backdrop = document.createElement('div');
     backdrop.id = 'rdx-exit-backdrop';

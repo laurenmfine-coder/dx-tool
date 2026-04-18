@@ -4059,20 +4059,27 @@ RdxTours.autoShow('simulation-engine');
 <div class="bookmark-prompt" id="bookmarkPrompt">
   <button class="bookmark-close" onclick="dismissBookmarkPrompt()">×</button>
   <div class="bookmark-prompt-title">
-    🎉 Nice work!
+    🎉 Great first case!
   </div>
   <div class="bookmark-prompt-text">
-    Want to continue later? Bookmark this page to quickly return to ReasonDx.
+    Create a free account to save your progress and come back to any case right where you left off.
   </div>
   <div class="bookmark-prompt-btns">
-    <button class="bookmark-prompt-btn primary" onclick="triggerBookmark()">
-      📌 Bookmark
-    </button>
+    <a id="bookmarkSignUpBtn" href="/auth/login.html" class="bookmark-prompt-btn primary" onclick="localStorage.setItem('rdx-bookmark-prompt-shown','true')">
+      Save My Progress
+    </a>
     <button class="bookmark-prompt-btn secondary" onclick="dismissBookmarkPrompt()">
       Later
     </button>
   </div>
 </div>
+<script>
+// Inject ?next= into the save button href at runtime
+(function() {
+  var btn = document.getElementById('bookmarkSignUpBtn');
+  if (btn) btn.href = '/auth/login.html?next=' + encodeURIComponent(window.location.href);
+})();
+</script>
 
 <script>
 // ── Bookmark Prompt Logic ──
