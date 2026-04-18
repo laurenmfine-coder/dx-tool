@@ -831,6 +831,32 @@ var COACH_DATA=[{id:'anaphylaxis',title:'Anaphylaxis',cat:'allergy',tags:'allerg
   {id:'dental-emergency-triage',title:'Dental Emergency Triage: Urgency Classification',cat:'dental',desc:"Emergent (Ludwig's, abscess with airway risk) versus urgent (irreversible pulpitis, dry socket) versus routine. Triage criteria, appropriate referral pathways, and emergency analgesic regimens."}
 ];
 var LEARN_DATA=[{id:'acs-module',title:'Acute Coronary Syndromes',cat:'cardiovascular'},{id:'afib-module',title:'Atrial Fibrillation',cat:'cardiovascular'},{id:'heart-failure-module',title:'Heart Failure',cat:'cardiovascular'},{id:'anaphylaxis-module',title:'Anaphylaxis',cat:'allergy'},{id:'asthma-module',title:'Asthma',cat:'allergy'},{id:'atopic-derm-module',title:'Atopic Dermatitis',cat:'allergy'},{id:'drug-allergy-module',title:'Drug Allergy & Hypersensitivity',cat:'allergy'},{id:'food-allergy-module',title:'Food Allergy',cat:'allergy'},{id:'allergen-immunotherapy-module',title:'Allergen Immunotherapy',cat:'allergy'},{id:'rhinitis-module',title:'Rhinitis & CRSwNP',cat:'allergy'},{id:'mastocytosis-mcas-module',title:'Mastocytosis & MCAS',cat:'allergy'},{id:'eosinophilia-hp-module',title:'Eosinophilic Disorders & HP',cat:'allergy'},{id:'pid-module',title:'Primary Immunodeficiency',cat:'allergy'},{id:'urticaria-module',title:'Urticaria & Angioedema',cat:'allergy'},{id:'ai-basic-science-module',title:'A/I Basic Science',cat:'allergy'},{id:'ai-diagnostic-methods-module',title:'A/I Diagnostic Methods',cat:'allergy'},{id:'copd-module',title:'COPD',cat:'pulmonary'},{id:'pulmonary-module',title:'Pulmonary Medicine',cat:'pulmonary'},{id:'pneumonia-module',title:'Pneumonia',cat:'infectious'},{id:'sepsis-module',title:'Sepsis',cat:'infectious'},{id:'cns-infections-gbs-module',title:'CNS Infections & GBS',cat:'neurologic'},{id:'stroke-module',title:'Stroke',cat:'neurologic'},{id:'seizures-epilepsy-module',title:'Seizures & Epilepsy',cat:'neurologic'},{id:'aki-module',title:'Acute Kidney Injury',cat:'renal'},{id:'electrolytes-acidbase-module',title:'Electrolytes & Acid-Base',cat:'renal'},{id:'endocrine-module',title:'Endocrine',cat:'endocrine'},{id:'gi-hepatology-module',title:'GI & Hepatology',cat:'gastrointestinal'},{id:'hematology-module',title:'Hematology',cat:'hematologic'},{id:'toxicology-module',title:'Toxicology',cat:'toxicologic'},{id:'rheumatology-module',title:'Rheumatology',cat:'rheumatologic'},{id:'psychiatry-module',title:'Psychiatry',cat:'psychiatric'},{id:'ob-module',title:'Obstetrics',cat:'obstetric'},{id:'clinic-ambulatory-module',title:'Clinic & Ambulatory',cat:'general'},{id:'cme-lynch-syndrome',title:'Lynch Syndrome — Hereditary Cancer',cat:'genetics'},{id:'cme-pharmacogenomics',title:'Pharmacogenomics — Drug-Gene Interactions',cat:'genetics'}];
+// ── Update stat strip numbers from actual data ──────────────────────
+(function() {
+  function _updateStatNums() {
+    var counts = {
+      simulate: SIM_DATA.length,
+      practice: PRAC_DATA.length,
+      coach:    COACH_DATA.length,
+      learn:    LEARN_DATA.length,
+    };
+    document.querySelectorAll('.stat[data-mode]').forEach(function(el) {
+      var mode = el.dataset.mode;
+      if (counts[mode] !== undefined) {
+        var numEl = el.querySelector('.stat-num');
+        if (numEl && /^\d+$/.test(numEl.textContent.trim())) {
+          numEl.textContent = counts[mode];
+        }
+      }
+    });
+  }
+  // Run after DOM ready — data is inline so already available
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _updateStatNums);
+  } else {
+    _updateStatNums();
+  }
+})();
 var CAT_SETS={simulate:['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],practice:['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],coach:['allergy','cardiovascular','pulmonary','infectious','neurologic','gastrointestinal','renal','endocrine','hematologic','emergency','ophthalmology','reasoning','genetics','rheumatologic','psychiatric'],learn:['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','genetics','rheumatologic','psychiatric']};
 var CAT_LABELS={cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General',genetics:'Genetics'};
 var SECTION_COPY={simulate:{title:'Simulate &mdash; <em>AI Patient Encounters</em>',meta:'Adaptive 10-phase clinical simulation'},practice:{title:'Practice &mdash; <em>Virtual EMR</em>',meta:'Chart review · Orders · Documentation · Feedback'},coach:{title:'Coach &mdash; <em>Socratic Reasoning</em>',meta:'Attending-style Socratic dialogue across 25 categories'},learn:{title:'Learn &mdash; <em>Pathophysiology Modules</em>',meta:'Mechanism-first modules with AI attending'}};
