@@ -128,16 +128,14 @@
     var s = document.createElement('style');
     s.id = 'rdx-mc-tab-css';
     s.textContent =
-      /* Tab always visible on right edge */
-      '#rdx-mc-tab-wrap{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:9990;display:flex;align-items:center;}' +
-      '#rdx-mc-tab{display:flex;align-items:center;gap:0;cursor:pointer;background:#2874A6;border:none;border-radius:8px 0 0 8px;padding:0;box-shadow:-2px 0 12px rgba(40,116,166,.35);transition:background .15s;-webkit-tap-highlight-color:transparent;font-family:inherit;}' +
-      '#rdx-mc-tab:hover{background:#1B4F72;}' +
-      /* Rotated text label */
-      '#rdx-mc-tab-label{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:14px 8px;white-space:nowrap;line-height:1;}' +
-      /* Arrow chevron */
-      '#rdx-mc-tab-arrow{color:rgba(255,255,255,.7);font-size:10px;padding-right:5px;padding-left:2px;transition:transform .2s;}' +
-      '#rdx-mc-tab.open #rdx-mc-tab-arrow{transform:rotate(180deg);}' +
-      '@media(max-width:600px){#rdx-mc-tab-label{font-size:9px;padding:10px 6px;}#rdx-mc-tab-arrow{display:none;}}';
+      '#rdx-mc-tab-wrap{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:9990;}' +
+      '#rdx-mc-tab{display:flex;flex-direction:column;align-items:center;gap:0;cursor:pointer;background:#2874A6;border:none;border-radius:10px 0 0 10px;padding:14px 9px 12px;box-shadow:-3px 0 18px rgba(40,116,166,.45);transition:all .15s;-webkit-tap-highlight-color:transparent;font-family:inherit;}' +
+      '#rdx-mc-tab:hover{background:#1B4F72;box-shadow:-4px 0 22px rgba(27,79,114,.55);}' +
+      '#rdx-mc-tab-icon{color:#fff;font-size:15px;line-height:1;margin-bottom:8px;}' +
+      '#rdx-mc-tab-label{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);color:rgba(255,255,255,.92);font-size:11px;font-weight:700;letter-spacing:.12em;white-space:nowrap;line-height:1;}' +
+      '#rdx-mc-tab-arrow{color:rgba(255,255,255,.55);font-size:9px;margin-top:10px;transition:transform .2s;}' +
+      '#rdx-mc-tab.mc-open #rdx-mc-tab-arrow{transform:rotate(180deg);}' +
+      '@media(max-width:600px){#rdx-mc-tab{padding:10px 7px;}#rdx-mc-tab-label{font-size:9px;}#rdx-mc-tab-icon{font-size:13px;}}';
 
     if (!document.getElementById('rdx-mc-tab-css')) document.head.appendChild(s);
 
@@ -145,6 +143,7 @@
     wrap.id = 'rdx-mc-tab-wrap';
     wrap.innerHTML =
       '<button id="rdx-mc-tab" type="button" onclick="MissionControl.toggle();if(window.render)render();" aria-label="Mission Control — toggle navigation panel">' +
+        '<span id="rdx-mc-tab-icon">&#9776;</span>' +
         '<span id="rdx-mc-tab-label">Mission Control</span>' +
         '<span id="rdx-mc-tab-arrow">&#x276E;</span>' +
       '</button>';
@@ -156,10 +155,10 @@
     var arrow = document.getElementById('rdx-mc-tab-arrow');
     if (!tab || !arrow) return;
     if (_state.open) {
-      tab.classList.add('open');
+      tab.classList.add('mc-open');
       arrow.innerHTML = '&#x276F;';  /* › points right = close */
     } else {
-      tab.classList.remove('open');
+      tab.classList.remove('mc-open');
       arrow.innerHTML = '&#x276E;';  /* ‹ points left = open */
     }
   }
