@@ -278,7 +278,7 @@ window.RDXRubricBuilder = {
               autocomplete="off" autocorrect="off" spellcheck="false"
               style="width:100%;padding:10px 12px;border:1.5px solid #E2E8F0;border-radius:8px;
               font-family:inherit;font-size:14px;outline:none"
-              placeholder="e.g. NSU KPCAM Class of 2027">
+              placeholder="e.g. ReasonDx Class of 2027">
           </div>
           <div>
             <label style="display:block;font-size:11px;font-weight:700;color:#475569;
@@ -304,7 +304,7 @@ window.RDXRubricBuilder = {
             autocomplete="off" autocorrect="off" spellcheck="false"
             style="width:100%;padding:10px 12px;border:1.5px solid #E2E8F0;border-radius:8px;
             font-family:inherit;font-size:13px;outline:none;resize:vertical"
-            placeholder="e.g. Welcome to the NSU KPCAM Virtual EMR. Your clerkship director has assigned the following cases for this block...">${cfg.welcomeMessage||''}</textarea>
+            placeholder="e.g. Welcome to the ReasonDx Virtual EMR. Your clerkship director has assigned the following cases for this block...">${cfg.welcomeMessage||''}</textarea>
         </div>
         <div style="padding:12px 14px;background:#F0FDF4;border-radius:8px;
           border:1px solid #BBF7D0;font-size:12px;color:#166534">

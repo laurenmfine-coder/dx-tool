@@ -1,6 +1,6 @@
 /**
  * caseframe-engine.js — CaseFrame Illness Script Scoring Engine
- * ReasonDx · Lauren Fine, MD, FAAAAI · NSU KPCAM
+ * ReasonDx · Lauren Fine, MD, FAAAAI · ReasonDx
  *
  * Scores student documentation across four domains grounded in
  * the illness script and clinical reasoning literature:

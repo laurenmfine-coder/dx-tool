@@ -210,7 +210,7 @@ class ProfessionProfile {
   constructor(data = {}) {
     this.professionId   = data.professionId   || null;
     this.trackId        = data.trackId        || null;
-    this.programName    = data.programName    || null; // e.g. "NSU KPCAM"
+    this.programName    = data.programName    || null; // e.g. "ReasonDx"
     this.institution    = data.institution    || null;
     this.yearOfTraining = data.yearOfTraining || null;
     this.researchConsent= data.researchConsent|| false;
@@ -458,7 +458,7 @@ class ProfessionOnboardingModal {
           <div class="rdx-po-field">
             <label class="rdx-po-field-label">Program / School <span class="rdx-po-optional">(optional)</span></label>
             <input type="text" id="rdx-po-program" class="rdx-po-input"
-                   placeholder="e.g. NSU KPCAM"
+                   placeholder="e.g. ReasonDx"
                    value="${this.selected.programName || ''}">
           </div>
         </div>
