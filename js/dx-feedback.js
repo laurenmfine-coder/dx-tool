@@ -15,6 +15,10 @@
 (function () {
   'use strict';
 
+  // Suppress on pages with their own help system (Mission Control)
+  var _path = window.location.pathname;
+  if (_path.includes('virtual-emr') || _path.includes('simulation-engine')) return;
+
   var STORAGE_KEY = 'rdx-feedback-log';
   var _submitted  = false;
 

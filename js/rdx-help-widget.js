@@ -6,6 +6,9 @@
   'use strict';
 
   const path = window.location.pathname;
+
+  // Suppress on pages that have their own navigation system (Mission Control)
+  if (path.includes('virtual-emr') || path.includes('simulation-engine')) return;
   const isSubdir = path.includes('/cases/') || path.includes('/modules/') || 
                    path.includes('/topics/') || path.includes('/tools/') || 
                    path.includes('/ecg/') || false ||
