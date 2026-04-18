@@ -330,17 +330,37 @@ function updateStreak() {
   document.getElementById('puzzleStreak').innerHTML = streak > 0
     ? 'Current streak: <strong>' + streak + ' day' + (streak !== 1 ? 's' : '') + '</strong>'
     : 'Start your streak today';
+
+  // Post-answer: show related case suggestion
+  var relatedMap = {
+    'Lab Shift': 'stemi-v1', 'Threshold Decision': 'dka-v1', 'Risk Priority': 'septic-shock-urosepsis',
+    'Scope Decision': 'pneumonia', 'Communication': 'stroke-v1', 'Postpartum': 'eclampsia',
+    'Sensory': 'counseling-scenarios', 'Pacing': 'chf-v1'
+  };
+  var relCase = relatedMap[p.type] || 'anaphylaxis';
+  var nexEl = document.getElementById('rdx-post-puzzle-cta');
+  if (!nexEl) {
+    nexEl = document.createElement('div');
+    nexEl.id = 'rdx-post-puzzle-cta';
+    nexEl.style.cssText = 'margin-top:16px;padding:12px 16px;background:#EBF5FB;border-radius:10px;border:1px solid #BEE3F8;font-size:13px;display:flex;align-items:center;justify-content:space-between;gap:12px';
+    document.getElementById('puzzleStreak').after(nexEl);
+  }
+  nexEl.innerHTML = '<span style="color:#1B4F72">Put this into practice:</span>' +
+    '<a href="/simulation-engine.html?case=' + relCase + '" style="background:#2874A6;color:#fff;padding:6px 14px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap">Try related case →</a>';
 }
 
 renderPuzzle();
 </script>
 
-<!-- Floating Help Button -->
-<button onclick="alert('Daily clinical reasoning puzzles across all health professions. Answer one per day to build your diagnostic pattern recognition. Your streak shows consecutive days answered!')" 
-        style="position:fixed;bottom:24px;right:24px;width:56px;height:56px;background:#2874A6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 8px 24px rgba(40,116,166,0.4);z-index:9999;transition:all .3s;border:none;animation:rdx-pulse-help 2s infinite"
-        title="How do puzzles work?">
-  💡
-</button>
+<!-- Help tooltip (replaces alert) -->
+<button onclick="document.getElementById('rdx-puzzle-tip').style.display=document.getElementById('rdx-puzzle-tip').style.display==='block'?'none':'block'" 
+        style="position:fixed;bottom:24px;right:24px;width:44px;height:44px;background:#2874A6;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;box-shadow:0 4px 16px rgba(40,116,166,0.4);z-index:9999;border:none"
+        aria-label="About daily puzzles">?</button>
+<div id="rdx-puzzle-tip" style="display:none;position:fixed;bottom:78px;right:16px;background:#1B4F72;color:#fff;border-radius:12px;padding:14px 18px;max-width:280px;font-size:13px;line-height:1.6;z-index:9999;box-shadow:0 8px 24px rgba(0,0,0,.3)">
+  <strong>Daily Clinical Puzzles</strong><br>
+  One reasoning challenge per day across all health professions. Answer to build your diagnostic pattern recognition. Your streak shows consecutive days answered.
+  <div style="margin-top:8px"><a href="/browse.html" style="color:#85C1E9;font-weight:600;text-decoration:none">Browse all cases →</a></div>
+</div>
 <style>
 @keyframes rdx-pulse-help {
   0%, 100% { box-shadow: 0 8px 24px rgba(40,116,166,0.4); }

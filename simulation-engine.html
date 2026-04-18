@@ -113,6 +113,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="/rdx-realtime.js"></script>
 <script src="/rdx-ecg.js"></script>
 <link rel="canonical" href="https://www.reasondx.com/simulation-engine.html">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://lpwbiqpojisqgezycupw.supabase.co">
+  <link rel="dns-prefetch" href="https://api.anthropic.com">
 </head>
 <body>
 
@@ -139,18 +143,23 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
       <span id="mobileTurnLabel" style="color:var(--text-muted)">Turn 0</span>
     </div>
     <style>@media(max-width:900px){#mobilePhaseStrip{display:flex!important}}</style>
-    <div class="chat-messages" id="chatMessages"></div>
+    <!-- Phase progress bar -->
+    <div style="height:3px;background:rgba(40,116,166,0.12)">
+      <div id="rdx-phase-bar-fill" style="height:100%;background:#2874A6;transition:width .4s ease;width:0%"></div>
+    </div>
+    <div class="chat-messages" id="chatMessages" aria-live="polite" aria-atomic="false" aria-label="Conversation with Dr. Patel"></div>
     <!-- DDx Chooser Panel — shown at Phases 1, 4, 6 -->
     <div id="ddxChooserPanel" style="display:none;padding:12px 16px;background:#F8FAFC;border-top:2px solid #2874A6;max-height:380px;overflow-y:auto">
       <div id="ddxChooserContainer"></div>
     </div>
     <div class="input-area">
       <div class="input-row">
-        <input type="text" id="chatInput" placeholder="Type your response..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" disabled>
+        <input type="text" id="chatInput" placeholder="Type your response..." onkeypress="if(event.key==='Enter'&&!event.shiftKey)sendMessage()" oninput="rdxUpdateCharCount(this)" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" maxlength="2000" disabled>
         <button class="mic-btn" id="micBtn" data-tour="voice-input" onclick="toggleMic()" title="Dictate" style="padding:12px 14px;background:transparent;border:1px solid var(--border-main,#D0D5DD);border-radius:var(--radius,8px);cursor:pointer;font-size:18px;line-height:1" disabled>🎤</button>
         <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Send</button>
       </div>
       <div id="rdx-responding-label" style="display:none;font-size:11px;color:var(--text-muted,#9CA3AF);padding:4px 2px;font-style:italic">Dr. Patel is responding...</div>
+      <div id="rdx-char-counter" style="display:none;font-size:11px;color:#94A3B8;padding:2px 2px;text-align:right"></div>
     </div>
   </div>
 
@@ -457,7 +466,14 @@ function startStudy() {
         isDepthCase: isDepthCase
       };
       
-      localStorage.setItem('rdx-active-session', JSON.stringify(saveData));
+      try {
+        localStorage.setItem('rdx-active-session-' + (state.caseId||selectedCase), JSON.stringify(saveData));
+        localStorage.setItem('rdx-active-session', JSON.stringify(saveData)); // keep canonical key too
+      } catch(e) {
+        if (e.name === 'QuotaExceededError') {
+          addMessage('system', '⚠️ Your browser storage is full. Create a free account to save progress to the cloud — your data won't be lost.');
+        }
+      }
       if (RDX_DEBUG) console.log('[Auto-save] Progress saved');
     } catch(e) {
       console.warn('[Auto-save] Failed:', e);
@@ -1571,7 +1587,8 @@ function enterPhase(phase) {
             caseId: caseData.caseId || selectedCase,
             caseName: _caseName,
             completedAt: new Date().toISOString(),
-            turns: state.turnCount || 0
+            turns: state.turnCount || 0,
+            score: state.envHistoryScore != null ? state.envHistoryScore : null
           });
           localStorage.setItem('rdx-simulation-history', JSON.stringify(_history.slice(-20)));
         } catch(e) {}
@@ -2435,6 +2452,13 @@ function removeTyping() {
 }
 
 function updatePhaseUI() {
+  // Auto-focus input after phase transition (200ms delay)
+  if (state.currentPhase < PHASES.COMPLETE) {
+    setTimeout(function() {
+      var inp = document.getElementById('chatInput');
+      if (inp && !inp.disabled) inp.focus();
+    }, 200);
+  }
   const simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
   const isNewUser = simCount < 3;
   const tracker = document.getElementById('phaseTracker');
@@ -2444,6 +2468,8 @@ function updatePhaseUI() {
     const pct = Math.round(((state.currentPhase - 1) / 9) * 100);
     const label = PHASE_LABELS[state.currentPhase] || 'In Progress';
     document.getElementById('phaseLabel').textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
+  var barFill = document.getElementById('rdx-phase-bar-fill');
+  if (barFill) barFill.style.width = Math.round(((state.currentPhase - 1) / 9) * 100) + '%';
     document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
     var mpl = document.getElementById('mobilePhaseLabel'); if(mpl) mpl.textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
     var mtl = document.getElementById('mobileTurnLabel'); if(mtl) mtl.textContent = 'Turn ' + state.turnCount;
@@ -3595,7 +3621,7 @@ async function exportStudyData() {
   // ── SHARING PANEL — injected after debrief ────────────────────
   function buildSharePanel(caseData) {
     var caseTitle = (caseData && (caseData.title || caseData.caseTitle || caseData.diagnosis || caseData.targetDiagnosis)) || 'a clinical reasoning case';
-    var caseUrl = encodeURIComponent('https://reasondx.com/browse.html?mode=simulate');
+    var caseUrl = encodeURIComponent('https://reasondx.com/simulation-engine.html?case=' + (cid || ''));
     var shareText = encodeURIComponent('I just worked through "' + caseTitle + '" on ReasonDx — free AI-powered clinical reasoning practice. Can you solve it?');
     var emailSubject = encodeURIComponent('Try this clinical reasoning case on ReasonDx');
     var emailBody = encodeURIComponent("I just completed \"" + caseTitle + "\" on ReasonDx \u2014 a free platform for clinical reasoning practice with AI coaching.\n\nTry it here: https://reasondx.com\n\nWorks for medicine, nursing, pharmacy, PA, PT, OT, dentistry, optometry and more.");
@@ -4220,6 +4246,20 @@ function rdxSubmitEmailOptin() {
     modal.querySelector('div > div:last-child').innerHTML = '<div style="text-align:center;padding:8px 0"><div style="font-size:28px;margin-bottom:12px">✅</div><div style="font-size:16px;font-weight:700;color:#1E293B;margin-bottom:6px">You're in!</div><div style="font-size:13px;color:#64748B;margin-bottom:20px">First case arriving Monday. See you then.</div><button onclick="document.getElementById('rdx-email-optin-modal').style.display='none'" style="padding:10px 24px;background:#2874A6;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Continue →</button></div>';
   }
 }
+
+function rdxUpdateCharCount(inp) {
+  var cc = document.getElementById('rdx-char-counter');
+  if (!cc) return;
+  var len = inp.value.length;
+  if (len > 1500) {
+    cc.style.display = 'block';
+    cc.textContent = len + ' / 2000' + (len > 1900 ? ' — keep responses concise' : '');
+    cc.style.color = len > 1900 ? '#F87171' : '#94A3B8';
+  } else {
+    cc.style.display = 'none';
+  }
+}
+
 </script>
 
 <!-- ── WHO ARE YOU? PROFESSION INTAKE ── -->

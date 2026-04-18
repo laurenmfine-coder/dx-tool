@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#2874A6">
 <meta name="description" content="The Virtual Teaching Hospital — choose your clinical setting and start building reasoning skills.">
-<title>Hospital Dashboard | ReasonDx</title>
+<title>Dashboard | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -161,10 +161,14 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
   </style>
 <link rel="stylesheet" href="mobile.css">
-<meta property="og:title" content="Hospital Dashboard | ReasonDx">
+<meta property="og:title" content="Dashboard | ReasonDx">
 <meta property="og:description" content="The Virtual Teaching Hospital — choose your clinical setting and start building reasoning skills.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="icons/og-image.jpg">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://lpwbiqpojisqgezycupw.supabase.co">
+  <link rel="dns-prefetch" href="https://api.anthropic.com">
 </head>
 <body>
 
@@ -350,6 +354,39 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 
     widget.style.display = 'block';
   })();
+  </script>
+
+  <!-- Invite a classmate card -->
+  <div id="rdx-invite-card" style="display:none;background:linear-gradient(135deg,#EBF5FB,#E8F8F5);border:1px solid #BEE3F8;border-radius:16px;padding:20px 28px;margin:0 auto 24px;max-width:900px;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#1B4F72;margin-bottom:4px">🎓 Invite a classmate</div>
+        <div style="font-size:13px;color:#475569">ReasonDx is free. Share it with your study group — it works for medicine, nursing, pharmacy, PT, OT, and more.</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="rdxCopyInviteLink()" id="rdx-invite-copy-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Copy invite link</button>
+        <a href="mailto:?subject=Free clinical reasoning practice&body=I've been using ReasonDx for clinical reasoning practice and thought you might find it useful. It's free and works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry and more.%0A%0Ahttps://reasondx.com" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Email a friend →</a>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function() {
+    var simCount = 0;
+    try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+    if (simCount >= 5) {
+      var card = document.getElementById('rdx-invite-card');
+      if (card) card.style.display = 'block';
+    }
+  })();
+  function rdxCopyInviteLink() {
+    var url = 'https://reasondx.com';
+    try {
+      navigator.clipboard.writeText(url).then(function() {
+        var btn = document.getElementById('rdx-invite-copy-btn');
+        if (btn) { btn.textContent = '✓ Copied!'; setTimeout(function(){ btn.textContent = 'Copy invite link'; }, 2000); }
+      });
+    } catch(e) {}
+  }
   </script>
 
   <!-- Recently Completed Cases strip -->

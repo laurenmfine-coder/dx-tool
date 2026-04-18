@@ -1903,7 +1903,7 @@ function showEndPanel(topic) {
     <div style="display:flex;flex-direction:column;gap:8px">
       ${caseBtn}
       ${mechBtn}
-      <button onclick="rdxCopyCoachSummary()" style="background:transparent;border:1px solid var(--border,#dce3eb);border-radius:8px;color:var(--text,#1e293b);font-size:12px;font-weight:600;cursor:pointer;padding:7px;font-family:inherit">📋 Copy session summary</button>
+      <button id="rdx-copy-summary-btn" onclick="rdxCopyCoachSummary()" style="display:none;background:transparent;border:1px solid var(--border,#dce3eb);border-radius:8px;color:var(--text,#1e293b);font-size:12px;font-weight:600;cursor:pointer;padding:7px;font-family:inherit">📋 Copy session summary</button>
       <button onclick="resetToWelcome()" style="background:transparent;border:none;color:var(--dim,#64748b);font-size:12px;cursor:pointer;padding:8px;text-decoration:underline">Choose a new topic instead</button>
     </div>
   `;
@@ -1932,6 +1932,9 @@ function showEndPanel(topic) {
         if (!Array.isArray(pts) || pts.length === 0) throw new Error('bad');
         var el = document.getElementById('rdx-coach-summary-pts');
         if (!el) return;
+        // Show copy button now that we have content
+        var copyBtn = document.getElementById('rdx-copy-summary-btn');
+        if (copyBtn) copyBtn.style.display = 'block';
         el.innerHTML = '<div style="font-size:11px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Session Teaching Points</div>' +
           pts.slice(0,3).map(function(pt, i) {
             return '<div style="display:flex;gap:8px;margin-bottom:6px">' +
@@ -2244,17 +2247,28 @@ function rdxCoachIsBookmarked(topicId) {
 function rdxCoachToggleBookmark(topicId, topicName) {
   var bookmarks = rdxCoachGetBookmarks();
   var exists = bookmarks.findIndex(function(b) { return b.id === topicId; });
+  var added = false;
   if (exists >= 0) {
     bookmarks.splice(exists, 1);
   } else {
     bookmarks.unshift({ id: topicId, name: topicName, savedAt: Date.now() });
     if (bookmarks.length > 20) bookmarks = bookmarks.slice(0, 20);
+    added = true;
   }
   localStorage.setItem('rdx-coach-bookmarks', JSON.stringify(bookmarks));
   rdxCoachRenderBookmarks();
-  // Update star in current chip list
   var star = document.getElementById('rdx-bm-' + topicId);
   if (star) star.textContent = rdxCoachIsBookmarked(topicId) ? '⭐' : '☆';
+  // Toast feedback
+  rdxCoachToast(added ? '⭐ Topic bookmarked' : 'Removed from bookmarks');
+}
+
+function rdxCoachToast(msg) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1B4F72;color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;pointer-events:none;opacity:1;transition:opacity .3s';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function() { t.style.opacity='0'; setTimeout(function(){ t.remove(); }, 300); }, 1800);
 }
 function rdxCoachRenderBookmarks() {
   var bookmarks = rdxCoachGetBookmarks();
