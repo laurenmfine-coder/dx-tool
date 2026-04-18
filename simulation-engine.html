@@ -456,7 +456,7 @@ function startStudy() {
         addMessage('system', '📌 Session resumed. You can continue from where you left off.');
       }
       
-      if (RDX_DEBUG) console.log('[Resume] Session restored:', savedSession);
+      if (RDX_DEBUG) window.RDX_DEBUG && console.log('[Resume] Session restored:', savedSession);
       
       // Track resume with GA
       if (typeof gtag !== 'undefined') {
@@ -501,7 +501,7 @@ function startStudy() {
           addMessage('system', '⚠️ Your browser storage is full. Create a free account to save progress to the cloud — your data won't be lost.');
         }
       }
-      if (RDX_DEBUG) console.log('[Auto-save] Progress saved');
+      if (RDX_DEBUG) window.RDX_DEBUG && console.log('[Auto-save] Progress saved');
     } catch(e) {
       console.warn('[Auto-save] Failed:', e);
     }
@@ -547,7 +547,7 @@ function startStudy() {
     AgentTools.getStudentHistory(sb, name, year).then(function(history) {
       if (history.found) {
         state.priorHistory = history.patterns;
-        if(RDX_DEBUG) console.log('Prior student history found:', history.patterns);
+        if(RDX_DEBUG) window.RDX_DEBUG && console.log('Prior student history found:', history.patterns);
         if (history.patterns.isRepeatStudent) {
           // LSCS: show pre-case check-in before simulation begins
   if (window.RdxLSCS) {
@@ -560,7 +560,7 @@ function startStudy() {
   addMessage('system', 'Welcome back! This is session ' + (history.patterns.totalCompleted + 1) + ' for you.');
         }
       }
-    }).catch(function(e) { console.log('Prior history lookup skipped:', e.message); });
+    }).catch(function(e) { window.RDX_DEBUG && console.log('Prior history lookup skipped:', e.message); });
   }
 
   // ── FINGERPRINT: Load longitudinal cognitive profile ──
@@ -570,7 +570,7 @@ function startStudy() {
         state.cognitiveProfile = profile;
         RDXFingerprint.getSessionHistory(name, 5).then(function(history) {
           state.sessionHistory = history;
-          if(RDX_DEBUG) console.log('[Fingerprint] Profile loaded:', profile.pattern_tags);
+          if(RDX_DEBUG) window.RDX_DEBUG && console.log('[Fingerprint] Profile loaded:', profile.pattern_tags);
         });
       }
     }).catch(function(e) { console.warn('[Fingerprint] Profile load skipped:', e.message); });
@@ -900,7 +900,7 @@ async function sendMessage() {
       if (_storedDiff && ['guided','standard','advanced'].indexOf(_storedDiff) !== -1) {
         if (!window.state._difficultySet) {
           window.state._difficultySet = true;
-          console.log('[Adaptive Difficulty] Applying stored difficulty:', _storedDiff);
+          window.RDX_DEBUG && console.log('[Adaptive Difficulty] Applying stored difficulty:', _storedDiff);
           // Apply to state for patient persona
           if (window.state) window.state.difficulty = _storedDiff;
         }
@@ -1683,7 +1683,7 @@ function enterPhase(phase) {
         var _userId = window.state && window.state.studentName;
         if (_sbClient && _userId) {
           window.StudentModelBus.loadEpisodic(_userId, _sbClient).then(function() {
-            console.log('[StudentModelBus] Episodic memory loaded for', _userId);
+            window.RDX_DEBUG && console.log('[StudentModelBus] Episodic memory loaded for', _userId);
           });
         }
       } catch(e) { console.warn('[StudentModelBus] Episodic load failed:', e.message); }
@@ -1767,7 +1767,7 @@ function enterPhase(phase) {
         if (_newDiff && _newDiff.difficulty) {
           localStorage.setItem('rdx-difficulty', _newDiff.difficulty);
         }
-        console.log('[MetaReasoning] Theory saved. Mode:', _theory.dominantErrorMode, '| Next case:', _next.caseId, '| Difficulty:', _newDiff.difficulty);
+        window.RDX_DEBUG && console.log('[MetaReasoning] Theory saved. Mode:', _theory.dominantErrorMode, '| Next case:', _next.caseId, '| Difficulty:', _newDiff.difficulty);
       } catch(e) { console.warn('[MetaReasoning] persist error:', e.message); }
     }
 
@@ -1776,20 +1776,20 @@ function enterPhase(phase) {
       // 1. Gap Analysis
       var gaps = AgentTools.analyzeGaps(state, caseData);
       state.identifiedGaps = gaps;
-      if(RDX_DEBUG) console.log('Gaps identified:', gaps.length, gaps.map(function(g) { return g.id; }));
+      if(RDX_DEBUG) window.RDX_DEBUG && console.log('Gaps identified:', gaps.length, gaps.map(function(g) { return g.id; }));
 
       // 2. Guidelines Lookup
       var guidelineResults = AgentTools.lookupGuidelines(caseData.caseId, caseData.targetDiagnosis);
       state.relevantGuidelines = guidelineResults;
       if (guidelineResults.found) {
-        if(RDX_DEBUG) console.log('Relevant guidelines found:', guidelineResults.guidelines.length);
+        if(RDX_DEBUG) window.RDX_DEBUG && console.log('Relevant guidelines found:', guidelineResults.guidelines.length);
       }
 
       // 3. SpacedRep Card Generation
       var cards = AgentTools.generateSpacedRepCards(gaps, state.sessionId, caseData.caseId);
       if (cards.length > 0) {
         try { localStorage.setItem('radStudy_cards_' + state.sessionId, JSON.stringify(cards)); } catch(e) {}
-        if(RDX_DEBUG) console.log('SpacedRep cards generated:', cards.length);
+        if(RDX_DEBUG) window.RDX_DEBUG && console.log('SpacedRep cards generated:', cards.length);
       }
 
       // 4. Generate AI-powered teaching debrief with RAG guideline citations
@@ -2700,7 +2700,7 @@ function saveState() {
   // Auto-save to Supabase every 5 turns
   if (sb && AgentTools && state.turnCount > 0 && state.turnCount % 5 === 0) {
     AgentTools.autoSave(sb, state).then(function(ok) {
-      if (ok) console.log('Auto-saved to Supabase (turn ' + state.turnCount + ')');
+      if (ok) window.RDX_DEBUG && console.log('Auto-saved to Supabase (turn ' + state.turnCount + ')');
     });
   }
 }
@@ -2834,14 +2834,14 @@ async function exportStudyData() {
   };
 
   // Console export (always)
-  if(RDX_DEBUG) { console.log('=== STUDY DATA EXPORT ==='); console.log(JSON.stringify(data, null, 2)); }
+  if(RDX_DEBUG) { window.RDX_DEBUG && console.log('=== STUDY DATA EXPORT ==='); window.RDX_DEBUG && console.log(JSON.stringify(data, null, 2)); }
 
   // Add consent flag to session record
   data.consent_given = window._rdxConsentGiven === true;
 
   // Supabase export — skip if practice-only mode (student declined consent)
   if (window._rdxPracticeOnly) {
-    console.log('Practice-only mode — session data not saved to Supabase (no consent).');
+    window.RDX_DEBUG && console.log('Practice-only mode — session data not saved to Supabase (no consent).');
     addMessage('system', 'Session complete. (Practice mode — data not recorded.)');
     return;
   }
@@ -2852,7 +2852,7 @@ async function exportStudyData() {
       console.error('Supabase save error:', error.message);
       addMessage('system', 'Data saved locally. (Database sync pending.)');
     } else {
-      console.log('Study data saved to Supabase successfully.');
+      window.RDX_DEBUG && console.log('Study data saved to Supabase successfully.');
       // Mark NLM package as consumed by this session
       if (window.RdxNLMTracker) { RdxNLMTracker.markSessionConsumed(state.studentName); }
       addMessage('system', 'Your session data has been saved.');
@@ -2933,7 +2933,7 @@ async function exportStudyData() {
                 
                 // Handle successful email capture
                 window.RDXEmailCapture.onSuccess = function(email) {
-                  console.log('✓ Email captured:', email);
+                  window.RDX_DEBUG && console.log('✓ Email captured:', email);
                   addMessage('system', '✓ Your progress is now saved to ' + email);
                 };
               }, 1000); // Small delay so debrief shows first
@@ -3050,7 +3050,7 @@ async function exportStudyData() {
     if (turnRows.length > 0) {
       const { error: turnError } = await sb.from('rad_study_turns').insert(turnRows);
       if (turnError) console.error('Turn save error:', turnError.message);
-      else console.log(turnRows.length + ' turns saved to Supabase.');
+      else window.RDX_DEBUG && console.log(turnRows.length + ' turns saved to Supabase.');
     }
   } catch(e) {
     console.error('Supabase export failed:', e);
@@ -3173,7 +3173,7 @@ async function exportStudyData() {
         var comp = await E.CollaborativeReasoning.compareToAggregates(sb, window.state, window.caseData.caseId);
         if (comp && comp.insights) {
           window.state._cohortData = comp;
-          console.log('[CRDA] Cohort comparison loaded:', comp.comparisonN, 'students');
+          window.RDX_DEBUG && console.log('[CRDA] Cohort comparison loaded:', comp.comparisonN, 'students');
         }
         if (comp && comp.insights) comp.insights.forEach(function(i) { addMessage('system', i); });
       }
@@ -3194,7 +3194,7 @@ async function exportStudyData() {
     var input = document.getElementById('chatInput');
     if (input && A.EmotionalAI) {
       A.EmotionalAI.attachToInput(input);
-      if(RDX_DEBUG) console.log('EmotionalAI attached to chat input');
+      if(RDX_DEBUG) window.RDX_DEBUG && console.log('EmotionalAI attached to chat input');
     }
   }
   if (document.readyState === 'loading') {
@@ -3282,7 +3282,7 @@ async function exportStudyData() {
       if (A.ExplainableAgent) {
         window.state.agentDecisionLog = A.ExplainableAgent.getLog();
         window.state.agentDecisionSummary = A.ExplainableAgent.getSummary();
-        if(RDX_DEBUG) console.log('Agent decisions logged:', A.ExplainableAgent.getSummary());
+        if(RDX_DEBUG) window.RDX_DEBUG && console.log('Agent decisions logged:', A.ExplainableAgent.getSummary());
       }
 
       // Attach emotional AI data
@@ -3302,14 +3302,14 @@ async function exportStudyData() {
           var peSummary = getPESummary();
           window.state.peExamSummary = peSummary;
           if (peSummary && peSummary.criticalMissed.length > 0) {
-            if(RDX_DEBUG) console.log('PE critical systems missed:', peSummary.criticalMissed.join(', '));
+            if(RDX_DEBUG) window.RDX_DEBUG && console.log('PE critical systems missed:', peSummary.criticalMissed.join(', '));
           }
         }
 
         // Passive data collection summary
         if (window.RdxPassive) {
           window.state.passiveData = window.RdxPassive.getFullSummary();
-          if(RDX_DEBUG) console.log('Passive data:', JSON.stringify(window.state.passiveData, null, 2).substring(0, 500));
+          if(RDX_DEBUG) window.RDX_DEBUG && console.log('Passive data:', JSON.stringify(window.state.passiveData, null, 2).substring(0, 500));
         }
 
         // Student Model Bus — final research snapshot at session end
@@ -3320,13 +3320,13 @@ async function exportStudyData() {
             window.state.sessionHistory   || []
           );
           window.state.studentModelSnapshot = window.StudentModelBus.getResearchSnapshot();
-          if(RDX_DEBUG) console.log('Student model snapshot:', JSON.stringify(window.state.studentModelSnapshot, null, 2).substring(0, 400));
+          if(RDX_DEBUG) window.RDX_DEBUG && console.log('Student model snapshot:', JSON.stringify(window.state.studentModelSnapshot, null, 2).substring(0, 400));
         }
 
         // Meta-Reasoning Agent — final theory record at session end
         if (window.MetaReasoning) {
           window.state.metaReasoningRecord = window.MetaReasoning.getResearchRecord();
-          if(RDX_DEBUG) console.log('Meta-reasoning record:', JSON.stringify(window.state.metaReasoningRecord, null, 2).substring(0, 400));
+          if(RDX_DEBUG) window.RDX_DEBUG && console.log('Meta-reasoning record:', JSON.stringify(window.state.metaReasoningRecord, null, 2).substring(0, 400));
         }
 
         // Also analyze the radiology reports for comparison
@@ -3338,12 +3338,12 @@ async function exportStudyData() {
             'Simplified Report'
           );
           window.state.reportReadabilityComparison = reportComparison;
-          if(RDX_DEBUG) console.log('Report readability:', reportComparison.interpretation);
+          if(RDX_DEBUG) window.RDX_DEBUG && console.log('Report readability:', reportComparison.interpretation);
         }
 
         // Log readability summary
         if (readSummary) {
-          if(RDX_DEBUG) console.log('Student readability — Overall: grade ' + readSummary.avgGradeAll +
+          if(RDX_DEBUG) window.RDX_DEBUG && console.log('Student readability — Overall: grade ' + readSummary.avgGradeAll +
             ', Patient phase: grade ' + (readSummary.avgGradePatient || 'N/A') +
             ', Adjusts for patient: ' + readSummary.adjustsLanguageForPatient +
             ', Patient-appropriate rate: ' + (readSummary.patientAppropriateRate || 'N/A') + '%');

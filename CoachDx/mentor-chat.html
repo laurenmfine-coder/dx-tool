@@ -551,18 +551,18 @@ function _rdxInit() {
   const _usp = new URLSearchParams(window.location.search);
   const param = _usp.get('topic') || _usp.get('q');
   if (param) {
-    console.log('[CoachDx] URL param found:', param, 'readyState:', document.readyState);
+    window.RDX_DEBUG && console.log('[CoachDx] URL param found:', param, 'readyState:', document.readyState);
     // Small defer so DOM is fully painted before session starts
     setTimeout(function() {
       try {
-        console.log('[CoachDx] calling startSession with:', param);
+        window.RDX_DEBUG && console.log('[CoachDx] calling startSession with:', param);
         startSession(param, false);
       } catch(e) {
         console.error('[CoachDx] startSession failed:', e.message, e.stack);
       }
     }, 100);
   } else {
-    console.log('[CoachDx] No URL param. search=', window.location.search);
+    window.RDX_DEBUG && console.log('[CoachDx] No URL param. search=', window.location.search);
   }
 
   // Get user for personalization + tracking (non-blocking promise chain)
