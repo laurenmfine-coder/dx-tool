@@ -115,6 +115,53 @@ a { color: var(--ocean); }
 .auth-card h2 { font-size: 20px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 8px; }
 .auth-card p { font-size: 13px; color: var(--text-light); margin-bottom: 20px; line-height: 1.6; }
 
+/* ── Flow Builder ─────────────────────────────────────────────── */
+.fb-tab-active { background: var(--ocean) !important; color: #fff !important; border-color: var(--ocean) !important; }
+
+.fb-phase-card {
+  display: grid; grid-template-columns: 28px 24px 1fr auto;
+  align-items: center; gap: 10px;
+  padding: 10px 14px; border: 2px solid var(--border); border-radius: 8px;
+  background: var(--white); cursor: grab; user-select: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.fb-phase-card:hover { border-color: var(--ocean); }
+.fb-phase-card.dragging { opacity: .4; border-style: dashed; }
+.fb-phase-card.drag-over { border-color: var(--teal); box-shadow: 0 0 0 2px rgba(13,122,103,.2); }
+.fb-phase-card.fb-disabled { opacity: .45; background: var(--bg); }
+.fb-drag-handle { color: var(--text-light); font-size: 16px; cursor: grab; line-height: 1; }
+.fb-phase-icon { font-size: 18px; text-align: center; }
+.fb-phase-info { min-width: 0; }
+.fb-phase-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.fb-phase-meta { font-size: 11px; color: var(--text-light); margin-top: 1px; }
+.fb-phase-controls { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.fb-rule-card { padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--white); }
+.fb-rule-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.fb-rule-phase-label { font-size: 13px; font-weight: 700; color: var(--ocean-dark); }
+.fb-rule-rows { display: flex; flex-direction: column; gap: 6px; }
+.fb-rule-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.fb-rule-select { padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--sans); font-size: 12px; background: var(--white); color: var(--text); }
+.fb-rule-input { width: 70px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--mono); font-size: 12px; }
+.fb-rule-add { font-size: 11px; color: var(--ocean); cursor: pointer; background: none; border: none; font-family: var(--sans); padding: 2px 0; }
+.fb-rule-del { font-size: 14px; color: var(--text-light); cursor: pointer; background: none; border: none; line-height: 1; padding: 0 2px; }
+.fb-rule-del:hover { color: var(--red); }
+
+.fb-branch-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.fb-branch-head { padding: 12px 16px; background: var(--ocean-light); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.fb-branch-label-input { flex: 1; min-width: 140px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--sans); font-size: 13px; font-weight: 600; }
+.fb-branch-body { padding: 14px 16px; }
+.fb-branch-prof-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.fb-prof-chip { padding: 4px 10px; border: 1px solid var(--border); border-radius: 20px; font-size: 11px; cursor: pointer; transition: all .1s; background: var(--white); color: var(--text-mid); }
+.fb-prof-chip.selected { background: var(--ocean); color: #fff; border-color: var(--ocean); }
+.fb-branch-seq { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; }
+.fb-seq-chip { padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 11px; background: var(--white); cursor: pointer; transition: all .1s; }
+.fb-seq-chip.active { background: var(--ocean-dark); color: #fff; border-color: var(--ocean-dark); }
+.fb-seq-chip.disabled-seq { background: var(--bg); color: var(--text-light); border-style: dashed; }
+
+/* Preview mode banner */
+#fb-preview-banner { display:none; padding:8px 22px; background:var(--gold-light); border-bottom:1px solid var(--gold); font-size:12px; color:#92400E; }
+
 @media (max-width: 600px) {
   .phase-row { grid-template-columns: 28px 1fr; row-gap: 6px; }
   .preset-grid { grid-template-columns: 1fr; }
@@ -234,6 +281,72 @@ a { color: var(--ocean); }
       </div>
     </div>
 
+
+    <!-- Flow Builder V2 -->
+    <div class="section" id="flow-builder-section">
+      <div class="section-head" style="flex-wrap:wrap;gap:8px">
+        <div>
+          <h2 style="display:flex;align-items:center;gap:8px">
+            Flow Builder
+            <span id="fb-tier-badge" style="font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:var(--gold-light);color:var(--gold);border:1px solid var(--gold)">PREMIUM</span>
+          </h2>
+          <p>Drag phases into custom order, define conditional unlock rules, and create branching paths by profession.</p>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button class="btn btn-secondary btn-sm" onclick="FB.switchTab('sequence')" id="fb-tab-sequence">Phase Sequence</button>
+          <button class="btn btn-secondary btn-sm" onclick="FB.switchTab('rules')" id="fb-tab-rules">Unlock Rules</button>
+          <button class="btn btn-secondary btn-sm" onclick="FB.switchTab('branches')" id="fb-tab-branches">Branches</button>
+        </div>
+      </div>
+
+      <!-- Tier gate overlay -->
+      <div id="fb-gate" style="display:none;position:relative">
+        <div style="filter:blur(2px);pointer-events:none;padding:20px 22px;opacity:.45" id="fb-gate-preview"></div>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.82);backdrop-filter:blur(4px);border-radius:0 0 10px 10px;z-index:10">
+          <div style="text-align:center;max-width:380px;padding:32px 24px">
+            <div style="font-size:36px;margin-bottom:12px">🔓</div>
+            <div style="font-size:18px;font-weight:700;color:var(--ocean-dark);margin-bottom:8px">Flow Builder — Institutional Feature</div>
+            <div style="font-size:13px;color:var(--text-mid);line-height:1.7;margin-bottom:20px">
+              The Flow Builder lets you define custom phase sequences, conditional unlock rules, and branching paths for different student cohorts.
+              Available on the Institutional plan.
+            </div>
+            <a href="mailto:lauren@reasondx.com?subject=ReasonDx Institutional License" class="btn btn-primary" style="text-decoration:none;display:inline-block;margin-bottom:10px">Contact Us to Upgrade →</a>
+            <div style="font-size:11px;color:var(--text-light)">Or <a href="#" onclick="FB.enterPreviewMode()" style="color:var(--ocean)">explore in preview mode</a> to see how it works.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flow Builder content -->
+      <div id="fb-content" style="padding:20px 22px">
+
+        <!-- Tab: Phase Sequence -->
+        <div id="fb-panel-sequence">
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:14px">Drag phases into the order you want students to experience them. Disabled phases are dimmed.</p>
+          <div id="fb-phase-list" style="display:flex;flex-direction:column;gap:6px"></div>
+          <div style="margin-top:14px;padding:10px 14px;background:var(--ocean-light);border-radius:8px;font-size:12px;color:var(--ocean-dark)">
+            💡 <strong>Tip:</strong> Reordering phases here overrides the preset template sequence. The unlock rules tab controls what must happen before each phase becomes available.
+          </div>
+        </div>
+
+        <!-- Tab: Unlock Rules -->
+        <div id="fb-panel-rules" style="display:none">
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:14px">Define what must happen before each phase unlocks. Multiple rules are ANDed together.</p>
+          <div id="fb-rules-list" style="display:flex;flex-direction:column;gap:10px"></div>
+        </div>
+
+        <!-- Tab: Branches -->
+        <div id="fb-panel-branches" style="display:none">
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:14px">Route students to different phase sequences based on their registered profession.</p>
+          <div id="fb-branch-list" style="display:flex;flex-direction:column;gap:12px"></div>
+          <button class="btn btn-secondary btn-sm" onclick="FB.addBranch()" style="margin-top:12px">+ Add Branch</button>
+          <div style="margin-top:14px;padding:10px 14px;background:var(--gold-light);border-radius:8px;font-size:12px;color:#92400E;border:1px solid #FFE082">
+            ⚠️ <strong>Note:</strong> Branches require students to have a profession set in their profile. Students without a matching profession fall back to the default sequence.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- Config Preview -->
     <div class="preview">
       <div class="preview-title">Configuration JSON (read-only preview)</div>
@@ -321,6 +434,7 @@ function selectPreset(key) {
   buildPhaseGrid();
   updatePreview();
   document.getElementById('active-preset-label').textContent = preset.label;
+  FB.syncFromConfig();
 }
 
 // ── Build phase grid ──────────────────────────────────────────────
@@ -394,7 +508,7 @@ function updatePreview() {
   if (allowBt !== (preset.allowBacktrack !== false)) _overrides.allowBacktrack = allowBt;
   if (profFr  !== !!preset.professionFraming) _overrides.professionFraming = profFr;
 
-  var config = { preset: _selectedPreset, overrides: _overrides };
+  var config = { preset: _selectedPreset, overrides: _overrides, flowBuilder: FB.extractConfig() };
   document.getElementById('config-preview').textContent = JSON.stringify(config, null, 2);
 
   // Test link
@@ -420,6 +534,8 @@ async function loadProgramConfig() {
       _overrides = c.overrides || {};
       buildPresetGrid();
       buildPhaseGrid();
+      if (c.flowBuilder) FB.applyConfig(c.flowBuilder);
+      FB.show();
       updatePreview();
       setStatus('Loaded from cache', false);
     } else {
@@ -434,7 +550,7 @@ async function saveConfig() {
   var pid = document.getElementById('program-id-input').value.trim();
   if (!pid) { alert('Enter a Program ID before saving.'); return; }
   setStatus('Saving...', false);
-  var ok = await InstitutionalConfig.save(pid, _selectedPreset, _overrides);
+  var ok = await InstitutionalConfig.save(pid, _selectedPreset, Object.assign({}, _overrides, { _flowBuilder: FB.extractConfig() }));
   if (ok) {
     setStatus('✓ Saved successfully', false);
   } else {
@@ -454,6 +570,260 @@ function setStatus(msg, isError) {
   el.className = 'save-status' + (isError ? ' error' : (msg.startsWith('✓') ? ' success' : ''));
 }
 
+// ════════════════════════════════════════════════════════════════
+// FLOW BUILDER — V2
+// ════════════════════════════════════════════════════════════════
+var FB = (function () {
+
+  var ALL_PHASES = [
+    { id:1, key:'cc',         label:'Chief Complaint',  icon:'🩺', desc:'CC-only view' },
+    { id:2, key:'ddx-init',   label:'Initial DDx',      icon:'📋', desc:'First differential' },
+    { id:3, key:'interview',  label:'Patient Interview', icon:'💬', desc:'AI history-taking' },
+    { id:4, key:'exam',       label:'Physical Exam',     icon:'🔍', desc:'Hypothesis-driven exam' },
+    { id:5, key:'ddx-refine', label:'Refined DDx',       icon:'🔄', desc:'Post H&P revision' },
+    { id:6, key:'past-data',  label:'Past Data Review',  icon:'📂', desc:'Historical chart' },
+    { id:7, key:'orders',     label:'New Orders',        icon:'📤', desc:'New diagnostics' },
+    { id:8, key:'note',       label:'Note & Feedback',   icon:'🎯', desc:'Write note + AI' }
+  ];
+  var PROFESSIONS = ['Medicine / DO','Nursing','Pharmacy','Physician Assistant',
+    'Physical Therapy','Occupational Therapy','Optometry','Dentistry',
+    'Paramedicine / EMS','Basic Science (MBS)','Advanced Nursing (NP)'];
+  var RULE_TYPES = [
+    { value:'prior_complete', label:'Prior phase complete' },
+    { value:'coach_done',     label:'CoachDx checkpoint met' },
+    { value:'ddx_minimum',    label:'DDx minimum entries reached' },
+    { value:'time_spent',     label:'Time spent ≥ N minutes' },
+    { value:'exam_minimum',   label:'Exam maneuvers ≥ N performed' }
+  ];
+
+  var _s = {
+    tab:'sequence', sequence:ALL_PHASES.map(function(p){return p.id;}),
+    enabledSet:[1,2,3,4,5,6,7,8], rules:{}, branches:[],
+    dragSrc:null, previewMode:false, licensed:false
+  };
+
+  function _checkTier() {
+    if (new URLSearchParams(location.search).get('tier')==='premium'||
+        new URLSearchParams(location.search).get('tier')==='institutional') {
+      _s.licensed=true; return;
+    }
+    try {
+      var pid = document.getElementById('program-id-input').value.trim();
+      if (pid) {
+        var c = JSON.parse(localStorage.getItem('rdx-program-config-'+pid)||'{}');
+        if (c.tier==='institutional'||c.tier==='premium') { _s.licensed=true; return; }
+      }
+    } catch(e) {}
+    _s.licensed = false;
+  }
+
+  function _gate() {
+    var gate=document.getElementById('fb-gate'), cnt=document.getElementById('fb-content');
+    if (!gate||!cnt) return;
+    if (_s.licensed||_s.previewMode) {
+      gate.style.display='none'; cnt.style.display='block';
+      var b=document.getElementById('fb-tier-badge');
+      if (b) { b.textContent=_s.licensed?'ACTIVE':'PREVIEW';
+        b.style.background=_s.licensed?'var(--teal-light)':'var(--gold-light)';
+        b.style.color=_s.licensed?'var(--teal)':'var(--gold)'; }
+    } else {
+      gate.style.display='block'; cnt.style.display='none';
+      document.getElementById('fb-gate-preview').innerHTML=_seqHTML();
+    }
+  }
+
+  function switchTab(t) {
+    _s.tab=t;
+    ['sequence','rules','branches'].forEach(function(n){
+      var p=document.getElementById('fb-panel-'+n), b=document.getElementById('fb-tab-'+n);
+      if(p) p.style.display=n===t?'block':'none';
+      if(b) b.classList.toggle('fb-tab-active',n===t);
+    });
+    if(t==='sequence') _renderSeq();
+    if(t==='rules')    _renderRules();
+    if(t==='branches') _renderBranches();
+  }
+
+  function enterPreviewMode() {
+    _s.previewMode=true; _gate(); switchTab('sequence');
+    var el=document.getElementById('fb-content');
+    if (el&&!el.querySelector('#fb-prev-note')) {
+      var d=document.createElement('div'); d.id='fb-prev-note';
+      d.style.cssText='padding:8px 12px;margin-bottom:14px;background:var(--gold-light);border:1px solid #FFE082;border-radius:8px;font-size:12px;color:#92400E;text-align:center';
+      d.innerHTML='👁️ <strong>Preview Mode</strong> — Explore freely. Changes won\'t be saved without an Institutional license. <a href="mailto:lauren@reasondx.com?subject=ReasonDx+Institutional" style="color:var(--ocean);font-weight:700">Contact us to unlock →</a>';
+      el.insertBefore(d,el.firstChild);
+    }
+  }
+
+  function syncFromConfig() {
+    var preset=InstitutionalConfig.PRESETS[_selectedPreset];
+    _s.enabledSet=(_overrides.enabledPhases||preset.enabledPhases||[1,2,3,4,5,6,7,8]).slice();
+    if(_s.tab==='sequence') _renderSeq();
+    if(_s.tab==='rules')    _renderRules();
+  }
+
+  function extractConfig() {
+    return { sequence:_s.sequence.slice(), enabledSet:_s.enabledSet.slice(),
+             rules:JSON.parse(JSON.stringify(_s.rules)), branches:JSON.parse(JSON.stringify(_s.branches)) };
+  }
+
+  function applyConfig(c) {
+    if (!c) return;
+    if (c.sequence&&c.sequence.length)   _s.sequence=c.sequence;
+    if (c.enabledSet&&c.enabledSet.length)_s.enabledSet=c.enabledSet;
+    if (c.rules)    _s.rules=c.rules;
+    if (c.branches) _s.branches=c.branches;
+  }
+
+  // ── Sequence tab ─────────────────────────────────────────────
+  function _seqHTML() {
+    return _s.sequence.map(function(pid,idx){
+      var p=ALL_PHASES.find(function(x){return x.id===pid;}); if(!p) return '';
+      var en=_s.enabledSet.indexOf(pid)!==-1;
+      var preset=InstitutionalConfig.PRESETS[_selectedPreset];
+      var cm=(_overrides.coachConfig&&_overrides.coachConfig[pid])||(preset.coachConfig[pid])||'optional';
+      var ci={required:'⚠',optional:'○',available:'◎',hidden:'—'}[cm]||'○';
+      return '<div class="fb-phase-card'+(en?'':' fb-disabled')+'" draggable="true" data-phase-id="'+pid+'" '+
+        'ondragstart="FB._ds(event,'+pid+')" ondragover="FB._dv(event,'+pid+')" '+
+        'ondragleave="FB._dl(event)" ondrop="FB._dp(event,'+pid+')">' +
+        '<span class="fb-drag-handle">⠿</span>'+
+        '<span class="fb-phase-icon">'+p.icon+'</span>'+
+        '<div class="fb-phase-info">'+
+          '<div class="fb-phase-name">'+p.label+'<span style="font-size:10px;color:var(--text-light);font-weight:400;margin-left:6px">#'+(idx+1)+'</span></div>'+
+          '<div class="fb-phase-meta">'+p.desc+' · CoachDx: <strong>'+ci+' '+cm+'</strong></div>'+
+        '</div>'+
+        '<div class="fb-phase-controls">'+
+          '<label class="toggle"><input type="checkbox"'+(en?' checked':'')+
+            ' onchange="FB._te('+pid+',this.checked)"><span class="toggle-track"></span></label>'+
+        '</div></div>';
+    }).join('');
+  }
+  function _renderSeq() { var el=document.getElementById('fb-phase-list'); if(el) el.innerHTML=_seqHTML(); }
+
+  function _ds(e,pid) {
+    _s.dragSrc=pid; e.dataTransfer.effectAllowed='move';
+    setTimeout(function(){ var el=document.querySelector('[data-phase-id="'+pid+'"]'); if(el) el.classList.add('dragging'); },0);
+  }
+  function _dv(e,pid) {
+    e.preventDefault(); e.dataTransfer.dropEffect='move';
+    document.querySelectorAll('.fb-phase-card').forEach(function(el){el.classList.remove('drag-over');});
+    var el=document.querySelector('[data-phase-id="'+pid+'"]');
+    if(el&&pid!==_s.dragSrc) el.classList.add('drag-over');
+  }
+  function _dl(e) { var c=e.target&&e.target.closest&&e.target.closest('.fb-phase-card'); if(c) c.classList.remove('drag-over'); }
+  function _dp(e,tid) {
+    e.preventDefault();
+    document.querySelectorAll('.fb-phase-card').forEach(function(el){el.classList.remove('dragging','drag-over');});
+    if(!_s.dragSrc||_s.dragSrc===tid) return;
+    var si=_s.sequence.indexOf(_s.dragSrc), ti=_s.sequence.indexOf(tid);
+    if(si<0||ti<0) return;
+    var seq=_s.sequence.slice(); seq.splice(si,1); seq.splice(ti,0,_s.dragSrc);
+    _s.sequence=seq; _s.dragSrc=null;
+    _renderSeq(); updatePreview(); setStatus('Unsaved changes',false);
+  }
+  function _te(pid,en) {
+    if(en) { if(_s.enabledSet.indexOf(pid)===-1) _s.enabledSet.push(pid); }
+    else   { _s.enabledSet=_s.enabledSet.filter(function(id){return id!==pid;}); }
+    togglePhase(pid,en); updatePreview();
+  }
+
+  // ── Rules tab ────────────────────────────────────────────────
+  function _ruleValInput(pid,ri,rule) {
+    if(rule.type==='time_spent'||rule.type==='ddx_minimum'||rule.type==='exam_minimum')
+      return '<input type="number" class="fb-rule-input" min="1" max="60" value="'+(rule.value||'')+
+        '" placeholder="N" onchange="FB._ur('+pid+','+ri+',\'value\',this.value)">';
+    if(rule.type==='coach_done') {
+      var opts=ALL_PHASES.filter(function(p){return _s.enabledSet.indexOf(p.id)!==-1;});
+      return '<select class="fb-rule-select" onchange="FB._ur('+pid+','+ri+',\'value\',this.value)">'+
+        opts.map(function(p){return '<option value="'+p.key+'"'+(rule.value===p.key?' selected':'')+'>'+p.label+'</option>';}).join('')+'</select>';
+    }
+    return '<span style="font-size:11px;color:var(--text-light);padding:0 4px">(automatic)</span>';
+  }
+  function _renderRules() {
+    var el=document.getElementById('fb-rules-list'); if(!el) return;
+    var first=true;
+    el.innerHTML=_s.sequence.map(function(pid){
+      var p=ALL_PHASES.find(function(x){return x.id===pid;}); if(!p) return '';
+      if(first){first=false;return '';}  // first phase always unlocked
+      var en=_s.enabledSet.indexOf(pid)!==-1;
+      var rules=_s.rules[pid]||[];
+      var rHTML=rules.map(function(rule,ri){
+        return '<div class="fb-rule-row">'+
+          '<select class="fb-rule-select" onchange="FB._ur('+pid+','+ri+',\'type\',this.value)">'+
+            RULE_TYPES.map(function(rt){return '<option value="'+rt.value+'"'+(rule.type===rt.value?' selected':'')+'>'+rt.label+'</option>';}).join('')+
+          '</select>'+_ruleValInput(pid,ri,rule)+
+          '<button class="fb-rule-del" onclick="FB._rr('+pid+','+ri+')">×</button></div>';
+      }).join('');
+      return '<div class="fb-rule-card'+(en?'':'" style="opacity:.45')+'">' +
+        '<div class="fb-rule-head"><div class="fb-rule-phase-label">'+p.icon+' '+p.label+'</div>'+
+        '<button class="fb-rule-add" onclick="FB._ar('+pid+')">+ Add rule</button></div>'+
+        '<div class="fb-rule-rows">'+(rHTML||'<div style="font-size:11px;color:var(--text-light);font-style:italic">No rules — unlocks after prior phase completes (default).</div>')+'</div></div>';
+    }).filter(Boolean).join('');
+  }
+  function _ar(pid){ if(!_s.rules[pid])_s.rules[pid]=[];_s.rules[pid].push({type:'prior_complete',value:''});_renderRules();updatePreview();}
+  function _rr(pid,i){ if(_s.rules[pid]){_s.rules[pid].splice(i,1);if(!_s.rules[pid].length)delete _s.rules[pid];}; _renderRules();updatePreview();}
+  function _ur(pid,i,f,v){ if(!_s.rules[pid]||!_s.rules[pid][i])return;_s.rules[pid][i][f]=v;if(f==='type')_renderRules();updatePreview();}
+
+  // ── Branches tab ─────────────────────────────────────────────
+  function _renderBranches() {
+    var el=document.getElementById('fb-branch-list'); if(!el) return;
+    if(!_s.branches.length){
+      el.innerHTML='<div style="text-align:center;padding:24px;color:var(--text-light);font-size:13px">No branches defined. All students follow the default sequence.<br><span style="font-size:12px">Click "+ Add Branch" to route specific professions to a custom path.</span></div>';
+      return;
+    }
+    el.innerHTML=_s.branches.map(function(branch,bi){
+      var pChips=PROFESSIONS.map(function(prof){
+        var sel=branch.professions.indexOf(prof)!==-1;
+        return '<span class="fb-prof-chip'+(sel?' selected':'')+'" onclick="FB._tbp('+bi+','+JSON.stringify(prof)+')">'+prof+'</span>';
+      }).join('');
+      var sChips=ALL_PHASES.map(function(p){
+        var inc=branch.sequence.indexOf(p.id)!==-1, pos=branch.sequence.indexOf(p.id);
+        return '<span class="fb-seq-chip'+(inc?' active':' disabled-seq')+'" onclick="FB._tbph('+bi+','+p.id+')" title="'+p.label+'">'+
+          (inc?(pos+1)+'. ':'')+p.icon+' '+p.label+'</span>';
+      }).join('');
+      return '<div class="fb-branch-card">'+
+        '<div class="fb-branch-head">'+
+          '<input type="text" class="fb-branch-label-input" value="'+branch.label+'" placeholder="Branch name" onchange="FB._ubl('+bi+',this.value)">'+
+          '<button class="btn btn-secondary btn-sm" style="margin-left:auto" onclick="FB._rb('+bi+')">Remove</button>'+
+        '</div>'+
+        '<div class="fb-branch-body">'+
+          '<div style="font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Professions in this branch</div>'+
+          '<div class="fb-branch-prof-grid">'+pChips+'</div>'+
+          '<div style="font-size:11px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.8px;margin:14px 0 8px">Phase sequence <span style="font-weight:400;text-transform:none">(click to include/exclude)</span></div>'+
+          '<div class="fb-branch-seq">'+sChips+'</div>'+
+        '</div></div>';
+    }).join('');
+  }
+  function _ab(){ _s.branches.push({id:'b-'+Date.now(),label:'New Branch',professions:[],sequence:_s.sequence.filter(function(id){return _s.enabledSet.indexOf(id)!==-1;})});_renderBranches();updatePreview();}
+  function _rb(i){ _s.branches.splice(i,1);_renderBranches();updatePreview();}
+  function _ubl(i,v){ _s.branches[i].label=v;updatePreview();}
+  function _tbp(i,prof){ var b=_s.branches[i],pos=b.professions.indexOf(prof);if(pos!==-1)b.professions.splice(pos,1);else b.professions.push(prof);_renderBranches();updatePreview();}
+  function _tbph(i,pid){
+    var b=_s.branches[i],pos=b.sequence.indexOf(pid);
+    if(pos!==-1){ b.sequence.splice(pos,1); }
+    else {
+      var ins=0;
+      for(var j=0;j<_s.sequence.length;j++){
+        if(_s.sequence[j]===pid) break;
+        if(b.sequence.indexOf(_s.sequence[j])!==-1) ins++;
+      }
+      b.sequence.splice(ins,0,pid);
+    }
+    _renderBranches();updatePreview();
+  }
+
+  return {
+    switchTab:switchTab, enterPreviewMode:enterPreviewMode,
+    syncFromConfig:syncFromConfig, extractConfig:extractConfig,
+    applyConfig:applyConfig,
+    show:function(){ _checkTier(); _gate(); switchTab('sequence'); },
+    // Event handler aliases
+    _ds:_ds,_dv:_dv,_dl:_dl,_dp:_dp,_te:_te,
+    _ar:_ar,_rr:_rr,_ur:_ur,
+    addBranch:_ab,_rb:_rb,_ubl:_ubl,_tbp:_tbp,_tbph:_tbph
+  };
+})();
+
 // ── Init ──────────────────────────────────────────────────────────
 (function () {
   // Pre-fill program ID from URL or localStorage
@@ -467,6 +837,8 @@ function setStatus(msg, isError) {
   buildPhaseGrid();
   updatePreview();
   document.getElementById('active-preset-label').textContent = InstitutionalConfig.PRESETS[_selectedPreset].label;
+  // Initialize Flow Builder
+  FB.show();
 })();
 </script>
 </body>
