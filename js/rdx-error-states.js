@@ -165,7 +165,7 @@
         + '</div>'
         + '<div style="display:flex;gap:10px;justify-content:center">'
         + '<button onclick="location.reload()" style="padding:10px 20px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">↺ Retry</button>'
-        + '<a href="choose-mode.html" style="padding:10px 20px;background:#F1F5F9;color:#374151;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none">← Pick Another Case</a>'
+        + '<a href="/browse.html" style="padding:10px 20px;background:#F1F5F9;color:#374151;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;text-decoration:none">← Browse Cases</a>'
         + '</div></div>';
     },
 
@@ -247,9 +247,11 @@
       // Check if app element is still empty after 5 seconds (case load failure)
       setTimeout(function() {
         var app = document.getElementById('app');
-        if (app && app.innerHTML.trim() === '') {
-          var params = new URLSearchParams(window.location.search);
-          app.innerHTML = RDXErrors.caseLoadError(params.get('case'));
+        var params = new URLSearchParams(window.location.search);
+        var hasCaseParam = params.get('case') || params.get('cx');
+        // Only show error if a case was actually expected to load
+        if (app && app.innerHTML.trim() === '' && hasCaseParam) {
+          app.innerHTML = RDXErrors.caseLoadError(hasCaseParam);
         }
       }, 5000);
     }, 1000);

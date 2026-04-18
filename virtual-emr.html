@@ -5576,6 +5576,13 @@ submitDoc = function(){
       var _S = (typeof S !== 'undefined') ? S : {};
       var _p = new URLSearchParams(window.location.search);
       var _id = window.CASE_ID || _p.get('case') || _p.get('cx') || '';
+      // If no case ID, wait for EMRLanding to be available
+      if (!_id && typeof window.EMRLanding === 'undefined') {
+        if (_att < 100) { setTimeout(_route, 30); return; }
+        // Fallback after 3s — just redirect to browse
+        window.location.replace('/browse.html');
+        return;
+      }
       console.log('[RDX routing] id=', _id, 'setting=', _S.clinicalSetting, 'att=', _att);
       if (window.EMRShell && _id) { EMRShell.inject(); } // Only inject shell when there's an actual case
       if (!_id && !_S.clinicalSetting) {
