@@ -121,38 +121,51 @@
     role: 'student', setting: 'ed', caseId: '', activeTab: ''
   };
 
-  // ─── Persistent Help FAB ───────────────────────────────────
+  // ─── Persistent Side Tab ──────────────────────────────────
   function _injectHelpFab() {
-    if (document.getElementById('rdx-mc-fab-wrap')) return;
+    if (document.getElementById('rdx-mc-tab-wrap')) return;
+
     var s = document.createElement('style');
-    s.id = 'rdx-mc-fab-css';
+    s.id = 'rdx-mc-tab-css';
     s.textContent =
-      '@keyframes mcFabPulse{0%,100%{box-shadow:0 2px 12px rgba(40,116,166,.35)}50%{box-shadow:0 2px 22px rgba(40,116,166,.75)}}' +
-      '#rdx-mc-fab{position:fixed;bottom:24px;right:24px;z-index:9990}' +
-      '#rdx-mc-fab-btn{display:flex;align-items:center;gap:7px;padding:9px 16px 9px 12px;background:#2874A6;color:#fff;border:none;border-radius:24px;font-size:13px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 2px 12px rgba(40,116,166,.4);transition:all .18s;-webkit-tap-highlight-color:transparent}' +
-      '#rdx-mc-fab-btn:hover{background:#1B4F72;transform:translateY(-2px);box-shadow:0 4px 18px rgba(40,116,166,.55)}' +
-      '#rdx-mc-fab-btn.pulsing{animation:mcFabPulse 2s ease-in-out 4}' +
-      '#rdx-mc-fab-icon{width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}' +
-      '@media(max-width:600px){#rdx-mc-fab-label{display:none}#rdx-mc-fab-btn{padding:11px;border-radius:50%;width:44px;height:44px;justify-content:center}#rdx-mc-fab-icon{display:none}}';
-    if (!document.getElementById('rdx-mc-fab-css')) document.head.appendChild(s);
+      /* Tab always visible on right edge */
+      '#rdx-mc-tab-wrap{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:9990;display:flex;align-items:center;}' +
+      '#rdx-mc-tab{display:flex;align-items:center;gap:0;cursor:pointer;background:#2874A6;border:none;border-radius:8px 0 0 8px;padding:0;box-shadow:-2px 0 12px rgba(40,116,166,.35);transition:background .15s;-webkit-tap-highlight-color:transparent;font-family:inherit;}' +
+      '#rdx-mc-tab:hover{background:#1B4F72;}' +
+      /* Rotated text label */
+      '#rdx-mc-tab-label{writing-mode:vertical-rl;text-orientation:mixed;transform:rotate(180deg);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:14px 8px;white-space:nowrap;line-height:1;}' +
+      /* Arrow chevron */
+      '#rdx-mc-tab-arrow{color:rgba(255,255,255,.7);font-size:10px;padding-right:5px;padding-left:2px;transition:transform .2s;}' +
+      '#rdx-mc-tab.open #rdx-mc-tab-arrow{transform:rotate(180deg);}' +
+      '@media(max-width:600px){#rdx-mc-tab-label{font-size:9px;padding:10px 6px;}#rdx-mc-tab-arrow{display:none;}}';
+
+    if (!document.getElementById('rdx-mc-tab-css')) document.head.appendChild(s);
+
     var wrap = document.createElement('div');
-    wrap.id = 'rdx-mc-fab-wrap';
+    wrap.id = 'rdx-mc-tab-wrap';
     wrap.innerHTML =
-      '<div id="rdx-mc-fab">' +
-        '<button id="rdx-mc-fab-btn" type="button" onclick="MissionControl.toggle();if(window.render)render();" aria-label="Help and navigation">' +
-          '<span id="rdx-mc-fab-icon">?</span>' +
-          '<span id="rdx-mc-fab-label">Help</span>' +
-        '</button>' +
-      '</div>';
+      '<button id="rdx-mc-tab" type="button" onclick="MissionControl.toggle();if(window.render)render();" aria-label="Mission Control — toggle navigation panel">' +
+        '<span id="rdx-mc-tab-label">Mission Control</span>' +
+        '<span id="rdx-mc-tab-arrow">&#x276E;</span>' +
+      '</button>';
     document.body.appendChild(wrap);
   }
 
+  function _updateTabArrow() {
+    var tab = document.getElementById('rdx-mc-tab');
+    var arrow = document.getElementById('rdx-mc-tab-arrow');
+    if (!tab || !arrow) return;
+    if (_state.open) {
+      tab.classList.add('open');
+      arrow.innerHTML = '&#x276F;';  /* › points right = close */
+    } else {
+      tab.classList.remove('open');
+      arrow.innerHTML = '&#x276E;';  /* ‹ points left = open */
+    }
+  }
+
   function _pulseOnce() {
-    var btn = document.getElementById('rdx-mc-fab-btn');
-    if (!btn || localStorage.getItem('rdx-mc-fab-pulsed')) return;
-    btn.classList.add('pulsing');
-    localStorage.setItem('rdx-mc-fab-pulsed', '1');
-    setTimeout(function(){ btn.classList.remove('pulsing'); }, 9000);
+    /* No-op — tab is always visible, no pulse needed */
   }
 
   // ─── Public API ────────────────────────────────────────────
@@ -176,6 +189,7 @@
       } catch(e) {}
       if (this.isFirstCase()) _state.open = true;
       _injectHelpFab();
+      _updateTabArrow();
       setTimeout(_pulseOnce, 1400);
     },
 
@@ -186,6 +200,7 @@
       _state.initialized = true;
       _state.startTime = Date.now();
       _injectHelpFab();
+      _updateTabArrow();
       if (!localStorage.getItem('rdx-mc-guest-seen')) {
         _state.open = true;
         localStorage.setItem('rdx-mc-guest-seen', '1');
@@ -216,6 +231,7 @@
       _state.open = !_state.open;
       if (_state.open && this.isFirstCase()) this.markSeen();
       _injectHelpFab();
+      _updateTabArrow();
     },
     isOpen: function() { return _state.open; },
 
@@ -296,6 +312,7 @@
       var settingLabels = {ed:'ED Encounter',inpatient:'Inpatient Admission',consult:'Consult',clinic:'Clinic Visit',icu:'ICU','post-discharge':'Post-Discharge'};
       var FF = 'font-family:\'DM Sans\',-apple-system,sans-serif;';
 
+      _updateTabArrow();
       var html = '<div style="position:fixed;top:0;right:0;width:380px;max-width:92vw;height:100vh;background:#fff;box-shadow:-4px 0 28px rgba(0,0,0,.16);z-index:9999;overflow-y:auto;animation:mcSlideIn .22s ease;'+FF+'">';
 
       // Header
@@ -303,7 +320,7 @@
       html += '<div style="display:flex;justify-content:space-between;align-items:flex-start">';
       html += '<div><div style="font-size:16px;font-weight:700;color:#0f2d42">\uD83D\uDCCB Mission Control</div>';
       html += '<div style="font-size:11px;color:#718096;margin-top:2px">'+(settingLabels[_state.setting]||'Case Navigator')+'</div></div>';
-      html += '<button type="button" onclick="MissionControl.toggle();if(window.render)render()" style="padding:6px 11px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:16px;'+FF+'color:#5A6178;line-height:1">\u00d7</button>';
+      html += '<button type="button" onclick="MissionControl.toggle();if(window.render)render()" style="padding:6px 13px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer;font-size:14px;font-weight:700;'+FF+'color:#2874A6;line-height:1" title="Collapse panel">&#x276F; Collapse</button>';
       html += '</div>';
       if (ptName) {
         html += '<div style="margin-top:10px;padding:9px 12px;background:#EBF5FB;border-radius:7px;font-size:12px;color:#1B4F72">';
@@ -398,7 +415,7 @@
   (function(){
     if (document.getElementById('mc-animations')) return;
     var s=document.createElement('style'); s.id='mc-animations';
-    s.textContent='@keyframes mcSlideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}';
+    s.textContent='@keyframes mcSlideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes mcTabPulse{0%,100%{background:#2874A6}50%{background:#1B4F72}}';
     document.head.appendChild(s);
   })();
 
