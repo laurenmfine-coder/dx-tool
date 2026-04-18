@@ -195,7 +195,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       if (sub) sub.innerHTML = 'Everything here is free. Start with a case, or explore the tools below. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">How it works →</a>';
     } else if (simCount < 5) {
       if (greet) greet.textContent = name ? 'Welcome back, ' + name : 'Welcome back';
-      if (title) title.innerHTML = 'You've done <span>' + simCount + ' case' + (simCount===1?'':'s') + '</span> — keep going';
+      if (title) title.innerHTML = 'You\'ve done <span>' + simCount + ' case' + (simCount===1?'':'s') + '</span> — keep going';
       if (sub) sub.innerHTML = 'Each case builds a different reasoning skill. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">See how everything works</a>';
     } else {
       if (greet) greet.textContent = name ? 'Welcome back, ' + name : 'Welcome back';
@@ -354,7 +354,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     // CTA message
     var uncovered = entries.filter(function(e) { return e[1].done === 0; });
     if (uncovered.length > 0) {
-      cta.innerHTML = '🎯 You haven't tried a <strong>' + specLabels[uncovered[0][0]] + '</strong> case yet — <a href="/browse.html?cat=' + uncovered[0][0] + '" style="color:#2874A6;font-weight:600">start one →</a>';
+      cta.innerHTML = '🎯 You haven\'t tried a <strong>' + specLabels[uncovered[0][0]] + '</strong> case yet — <a href="/browse.html?cat=' + uncovered[0][0] + '" style="color:#2874A6;font-weight:600">start one →</a>';
     } else if (completedCases.length < 10) {
       cta.textContent = 'Complete ' + (10 - completedCases.length) + ' more cases to unlock your full Reasoning Fingerprint.';
     }
@@ -372,7 +372,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button onclick="rdxCopyInviteLink()" id="rdx-invite-copy-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Copy invite link</button>
-        <a href="mailto:?subject=Free clinical reasoning practice&body=I've been using ReasonDx for clinical reasoning practice and thought you might find it useful. It's free and works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry and more.%0A%0Ahttps://reasondx.com" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Email a friend →</a>
+        <a href="mailto:?subject=Free clinical reasoning practice&body=I've been using ReasonDx for clinical reasoning practice and thought you might find it useful. It\'s free and works for medicine, nursing, pharmacy, PT, OT, dentistry, optometry and more.%0A%0Ahttps://reasondx.com" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Email a friend →</a>
       </div>
     </div>
   </div>
@@ -421,7 +421,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined, {month:'short',day:'numeric'}) : '';
         var label = h.caseName || h.caseId || 'Unknown case';
         var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#e8f8f5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
-        return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId || '') + '" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background='#f0f4f8'" onmouseout="this.style.background='#f8fafc'">' +
+        return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId || '') + '" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background=\'\2\'" onmouseout="this.style.background=\'\2\'">' +
           '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🩺</span><span style="font-size:13px;font-weight:500">' + label + '</span></div>' +
           '<div style="display:flex;align-items:center;gap:10px">' + score + '<span style="font-size:11px;color:#94a3b8">' + date + '</span></div>' +
         '</a>';
@@ -664,7 +664,7 @@ function initDashboard() {
       facBanner = document.createElement('div');
       facBanner.id = 'rdx-faculty-banner';
       facBanner.style.cssText = 'background:linear-gradient(135deg,#1B4F72,#0D7A67);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:inherit;margin-bottom:0;';
-      facBanner.innerHTML = '<div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">🏫</span><div><div style="font-size:14px;font-weight:700">You're signed in as Faculty</div><div style="font-size:12px;opacity:.8">Explore the platform, or go to your Faculty Dashboard to manage students and review submissions.</div></div></div><a href="/faculty-dashboard.html" style="background:#fff;color:#1B4F72;padding:9px 20px;border-radius:9px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;flex-shrink:0">Faculty Dashboard →</a>';
+      facBanner.innerHTML = '<div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">🏫</span><div><div style="font-size:14px;font-weight:700">You\'re signed in as Faculty</div><div style="font-size:12px;opacity:.8">Explore the platform, or go to your Faculty Dashboard to manage students and review submissions.</div></div></div><a href="/faculty-dashboard.html" style="background:#fff;color:#1B4F72;padding:9px 20px;border-radius:9px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;flex-shrink:0">Faculty Dashboard →</a>';
       var main = document.querySelector('main') || document.querySelector('.dashboard-container') || document.body.firstElementChild;
       if (main && main.parentNode) {
         main.parentNode.insertBefore(facBanner, main);
@@ -1013,14 +1013,14 @@ function _rdxRenderHistoryModal(history) {
   var rows = history.length ? history.map(function(h) {
     var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}) : '';
     var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#E8F8F5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
-    return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId||'') + '" onclick="var _m=document.getElementById('rdx-history-modal');_m.remove();try{document.querySelector('[onclick*=rdxShowFullHistory]').focus();}catch(e){}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;transition:background .15s" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='none'">' +
+    return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId||'') + '" onclick="var _m=document.getElementById(\'rdx-history-modal\');_m.remove();try{document.querySelector(\'[onclick*=rdxShowFullHistory]\').focus();}catch(e){}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;transition:background .15s" onmouseover="this.style.background=\'\2\'" onmouseout="this.style.background=\'\2\'">' +
       '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🩺</span><div><div style="font-size:13px;font-weight:600">' + (h.caseName||h.caseId||'Unknown') + '</div><div style="font-size:11px;color:#94A3B8">' + (h.turns||0) + ' turns · ' + date + '</div></div></div>' +
       '<div>' + score + '</div></a>';
   }).join('') : '<div style="text-align:center;padding:32px;color:#94A3B8">No cases completed yet</div>';
   modal.innerHTML = '<div style="background:#fff;border-radius:16px;max-width:560px;width:100%;max-height:80vh;overflow:hidden;display:flex;flex-direction:column">' +
     '<div style="padding:20px 24px;border-bottom:1px solid #E2E8F0;display:flex;align-items:center;justify-content:space-between">' +
       '<div style="font-size:16px;font-weight:700;color:#1E293B">Case History</div>' +
-      '<button onclick="document.getElementById('rdx-history-modal').style.display='none'" style="background:#F1F5F9;border:none;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px">×</button>' +
+      '<button onclick="document.getElementById(\'rdx-history-modal\').style.display=\'none\'" style="background:#F1F5F9;border:none;border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px">×</button>' +
     '</div>' +
     '<div style="overflow-y:auto">' + rows + '</div></div>';
   document.body.appendChild(modal);
