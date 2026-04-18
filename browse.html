@@ -507,8 +507,8 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         </a>
         <a href="/ilp.html" class="stat" title="Opens ILP page" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.15);opacity:0.85;position:relative" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
           <div class="stat-num" style="color:#10B981;font-size:28px">🎯</div>
-          <div class="stat-label" style="color:rgba(16,185,129,.8)">ILP ↗</div>
-          <div class="stat-desc">Learning plan</div>
+          <div class="stat-label" style="color:rgba(16,185,129,.8)">My Learning Plan ↗</div>
+          <div class="stat-desc">Goals & milestones</div>
         </a>
       </div>
     </div>
@@ -906,10 +906,30 @@ function setMode(m){MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(
                     learn:'— mechanism-first pathophysiology'};
     labelEl.textContent = modeDesc[m] || 'below';
   }
-  var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');if(btns)btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');var allBtn=document.querySelector('.fbtn[data-cat="all"]');if(allBtn)allBtn.classList.add('on');render();}
+  var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');if(btns){btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');
+  // Profession filter chip — show if user has a profession set
+  var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'Physical Therapy',ot:'Occupational Therapy',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'MBS'};
+  var userProfId=null;try{var _u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProfId=(_u.professionProfile&&_u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
+  if(userProfId&&userProfId!=='medicine'){
+    var profChip=document.createElement('button');
+    profChip.className='fbtn';profChip.id='prof-filter-chip';
+    profChip.setAttribute('data-prof',userProfId);
+    profChip.textContent='⚕️ '+(profLabels[userProfId]||userProfId)+' Cases';
+    profChip.style.cssText='background:rgba(13,122,103,.18);border-color:rgba(13,122,103,.4);color:#6EE7B7;';
+    profChip.onclick=function(){
+      var active=this.classList.contains('on');
+      document.querySelectorAll('.fbtn').forEach(function(b){b.classList.remove('on');b.style.background='';});
+      if(!active){this.classList.add('on');this.style.background='rgba(13,122,103,.35)';CURRENT_PROF=userProfId;}
+      else{CURRENT_PROF=null;}
+      render();
+    };
+    btns.appendChild(profChip);
+  }
+}
+var allBtn=document.querySelector('.fbtn[data-cat="all"]');if(allBtn)allBtn.classList.add('on');render();}
 function setCat(c){CAT=c;document.querySelectorAll('.fbtn').forEach(function(b){b.classList.toggle('on',b.dataset.cat===c);});render();}
 function getData(){if(MODE==='simulate') return SIM_FEATURED.concat(SIM_DATA);if(MODE==='practice') return PRAC_DATA;if(MODE==='coach') return COACH_DATA;if(MODE==='learn') return LEARN_DATA;return [];}
-function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var data=getData();var filtered=data.filter(function(c){if(CAT!=='all'&&c.cat!==CAT) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
+function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var data=getData();var filtered=data.filter(function(c){if(CAT!=='all'&&c.cat!==CAT) return false;if(CURRENT_PROF&&c.profession&&c.profession!==CURRENT_PROF) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
   // Profession arc cases first if profession matches
   var userProf=null;try{var u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProf=(u.professionProfile&&u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
   var aArc=a.arcId&&a.profession&&a.profession===userProf?1:0;
@@ -971,6 +991,11 @@ grid.innerHTML=displayedItems.map(function(c){
   h+='</div></div>';
   h+='<div class="card-tags">';
   h+='<span class="tag tag-cat">'+esc(CAT_LABELS[c.cat]||(c.cat||'').charAt(0).toUpperCase()+(c.cat||'').slice(1))+'</span>';
+
+  // EMR-compatible badge (show on simulate mode only to avoid clutter)
+  if(MODE==='simulate'&&_EMR_VALID_IDS&&_EMR_VALID_IDS.has(c.id)){
+    h+='<span class="tag" style="background:rgba(40,116,166,.15);color:#85C1E9;border:1px solid rgba(40,116,166,.3);font-size:9px;font-weight:800;letter-spacing:.06em">🏥 EMR</span>';
+  }
   
   // Time estimate based on acuity
   var timeEst = c.acuity === 1 ? '15-20 min' : c.acuity === 2 ? '12-15 min' : c.acuity === 3 ? '10-12 min' : c.acuity === 4 ? '7-10 min' : '5-7 min';

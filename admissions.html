@@ -165,6 +165,19 @@ a{color:var(--accent);text-decoration:none}
 <script src="js/rdx-difficulty.js"></script>
 </head>
 <body>
+<!-- ── Minimal back-nav breadcrumb ── -->
+<div id="rdx-breadcrumb" style="position:sticky;top:0;z-index:200;background:rgba(27,79,114,0.97);backdrop-filter:blur(8px);padding:8px 20px;display:flex;align-items:center;gap:12px;font-family:'DM Sans',-apple-system,sans-serif;">
+  <a href="/browse.html" style="color:rgba(255,255,255,0.8);text-decoration:none;font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;transition:color .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.8)'">← ReasonDx</a>
+  <span style="color:rgba(255,255,255,0.25);font-size:12px">|</span>
+  <span id="rdx-bc-title" style="color:rgba(255,255,255,0.5);font-size:12px"></span>
+</div>
+<script>
+(function(){
+  var t = document.getElementById('rdx-bc-title');
+  if(t) t.textContent = document.title.replace(' | ReasonDx','').replace('ReasonDx','').trim();
+})();
+</script>
+
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 

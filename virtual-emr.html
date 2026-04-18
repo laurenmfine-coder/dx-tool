@@ -2120,6 +2120,14 @@ function loadCaseData(cb) {
       };
     }
     PATIENT = d.patient;
+    // Store active case info for CoachDx context chip
+    try {
+      sessionStorage.setItem('vemr-active-case', JSON.stringify({
+        caseId: CASE_ID,
+        caseName: (d.patient && d.patient.chiefComplaint) ? d.patient.chiefComplaint : CASE_ID,
+        patientName: d.patient ? d.patient.name : ''
+      }));
+    } catch(e) {}
     PROBLEMS = d.problems || [];
     MEDICATIONS = d.medications || [];
     ALLERGIES = d.allergies || [];
@@ -3375,6 +3383,13 @@ function sendCoachMessage(){
     }
     render();
     setTimeout(function(){var el=document.getElementById("coachMessages");if(el)el.scrollTop=el.scrollHeight},50);
+    // Guided Mode: mark coaching complete after 3 user-AI exchanges (min depth)
+    if (window.GuidedMode && GuidedMode.isActive()) {
+      var userMsgs = S.coachMessages.filter(function(m){ return m.role === 'user'; }).length;
+      if (userMsgs >= 3) {
+        GuidedMode.markCoachComplete();
+      }
+    }
   })
   .catch(function(err){
     S.coachLoading=false;

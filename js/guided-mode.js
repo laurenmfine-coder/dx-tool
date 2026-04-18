@@ -280,6 +280,15 @@
       var setting = (window.S && S.clinicalSetting || 'ED').toUpperCase();
       var html = '';
 
+      // Phase header with step count and time estimate
+      html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">';
+      html += '<div style="display:flex;align-items:center;gap:8px">';
+      html += '<span style="background:#2874A6;color:#fff;font-size:10px;font-weight:800;padding:3px 10px;border-radius:12px;text-transform:uppercase;letter-spacing:.06em">Phase 1 of 8</span>';
+      html += '<span style="font-size:13px;font-weight:700;color:#1B4F72">Chief Complaint</span>';
+      html += '</div>';
+      html += '<span style="font-size:12px;color:#718096;background:#F7F9FC;border:1px solid #E2E8F0;padding:4px 10px;border-radius:8px">⏱ Estimated time: 30–45 min total</span>';
+      html += '</div>';
+
       html += '<div style="background:#EBF5FB;border-radius:10px;padding:20px 24px;margin-bottom:20px;border-left:4px solid #2874A6">';
       html += '<div style="font-size:11px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Chief Complaint</div>';
       html += '<div style="font-size:22px;font-weight:700;color:#0f2d42;line-height:1.3;margin-bottom:8px">"' + cc + '"</div>';
