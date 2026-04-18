@@ -1,80 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta name="theme-color" content="#1f5f8b">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<link rel="apple-touch-icon" href="../icons/apple-touch-icon.png">
-<link rel="manifest" href="../manifest.json">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../mobile.css">
-<title>My Account | ReasonDx</title>
-<meta name="description" content="Manage your ReasonDx account settings and subscription.">
-<style>
-:root{--blue:#2874A6;--dark:#1B4F72;--font:'IBM Plex Sans',-apple-system,sans-serif}
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--font);background:#f0f4f8;color:#1e293b}
-.container{max-width:600px;margin:80px auto;padding:0 24px}
-h1{font-size:28px;font-weight:700;margin-bottom:24px}
-.card{background:#fff;border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(0,0,0,.06);margin-bottom:16px}
-.card h2{font-size:18px;font-weight:700;margin-bottom:12px;color:var(--dark)}
-label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;margin-top:12px}
-input{width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:16px;font-family:inherit}
-.btn{padding:10px 20px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:16px}
-.btn:hover{background:var(--dark)}
-.btn-outline{background:none;color:#64748b;border:1px solid #d1d5db}
-.plan-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:700;background:#EBF5FB;color:var(--blue)}
-
-/* Dark mode */
-[data-theme="dark"] body{background:var(--rdx-bg,#0f172a);color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] .card,[data-theme="dark"] .container{background:var(--rdx-bg-card,#1e293b);color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] input,[data-theme="dark"] select{background:#1e293b;color:#e2e8f0;border-color:#334155}
-[data-theme="dark"] h1,[data-theme="dark"] h2,[data-theme="dark"] h3{color:var(--rdx-text,#e2e8f0)}
-[data-theme="dark"] p{color:var(--rdx-text-secondary,#94a3b8)}
-[data-theme="dark"] .subtitle,[data-theme="dark"] .plan-price,[data-theme="dark"] .switch{color:var(--rdx-text-muted,#64748b)}
-[data-theme="dark"] label{color:#94a3b8}
-[data-theme="dark"] .plan{border-color:#334155;background:#1e293b}
-[data-theme="dark"] .plan.active,[data-theme="dark"] .plan:hover{background:rgba(40,116,166,.15);border-color:#5ba3cc}
-[data-theme="dark"] .legal{color:#475569}
-[data-theme="dark"] .badge{background:rgba(217,119,6,.15)}
-[data-theme="dark"] .back{color:#5ba3cc}
-</style>
-<meta name="robots" content="noindex, nofollow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account | ReasonDx</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:'DM Sans',-apple-system,sans-serif;background:#F8FAFC;color:#1E293B;padding-top:52px;min-height:100vh}
+    .container{max-width:520px;margin:40px auto;padding:0 20px}
+    h1{font-size:22px;font-weight:700;margin-bottom:24px;color:#1E293B}
+    .card{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:24px;margin-bottom:16px}
+    .card h2{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748B;margin-bottom:16px}
+    label{display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:4px}
+    input{width:100%;padding:10px 14px;border:1.5px solid #E2E8F0;border-radius:8px;font-size:14px;font-family:inherit;outline:none;transition:border .15s;margin-bottom:14px}
+    input:focus{border-color:#2874A6}
+    input[disabled]{background:#F8FAFC;color:#94A3B8;cursor:not-allowed}
+    .btn{display:inline-block;padding:10px 20px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .15s}
+    .btn-primary{background:#2874A6;color:#fff}
+    .btn-primary:hover{background:#1B5E8A}
+    .btn-danger{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
+    .btn-danger:hover{background:#FEE2E2}
+    .plan-badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:700;background:#EBF5FB;color:#2874A6}
+    .plan-badge.pro{background:#F0FDF4;color:#16A34A}
+    .msg{display:none;padding:10px 14px;border-radius:8px;font-size:13px;margin-top:8px}
+    .msg.success{background:#F0FDF4;color:#16A34A;border:1px solid #BBF7D0}
+    .msg.error{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
+  </style>
 </head>
 <body>
-  <a href="/index.html" style="position:fixed;top:14px;left:20px;font-size:12px;font-weight:600;color:#2874A6;text-decoration:none;z-index:100;background:rgba(255,255,255,.9);padding:4px 10px;border-radius:6px;border:1px solid #e2e8f0">← ReasonDx</a>
-<noscript><div style="padding:40px;text-align:center;font-family:sans-serif"><h2>JavaScript Required</h2><p>ReasonDx requires JavaScript to run. Please enable it in your browser.</p></div></noscript>
-<a href="#main-content" class="rdx-skip-link">Skip to main content</a>
-<div id="main-content"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../js/rdx-supabase.js"></script>
-<script src="../auth/auth-guard.js"></script>
 <div class="container">
   <h1>My Account</h1>
+
   <div class="card">
     <h2>Profile</h2>
-    <label>Name</label><input type="text" id="acct-name" placeholder="Your name">
-    <label>Email</label><input type="email" id="acct-email" placeholder="you@school.edu">
-    <button class="btn" onclick="alert('Profile saved!')">Save Changes</button>
+    <label for="acct-name">Display Name</label>
+    <input type="text" id="acct-name" placeholder="Your name">
+    <label for="acct-email">Email</label>
+    <input type="email" id="acct-email" placeholder="you@school.edu" disabled>
+    <button class="btn btn-primary" onclick="saveProfile()">Save Changes</button>
+    <div id="save-msg" class="msg"></div>
   </div>
+
   <div class="card">
     <h2>Subscription</h2>
-    <p>Current plan: <span class="plan-badge">Free</span></p>
-    <p style="font-size:14px;color:#64748b;margin-top:8px">Upgrade to Pro for learning analytics, spaced repetition, and your full Cognitive Portrait.</p>
-    <button class="btn">Upgrade to Pro — $14.99/mo</button>
+    <p>Current plan: <span id="plan-badge" class="plan-badge">Free</span></p>
+    <p style="font-size:13px;color:#64748B;margin-top:8px;margin-bottom:16px">
+      Free tier includes all 394 cases and all core features.
+    </p>
+    <a href="/pricing.html" class="btn btn-primary">View Plans</a>
   </div>
+
   <div class="card">
-    <h2>Danger Zone</h2>
-    <button class="btn btn-outline" onclick="if(confirm('Log out?')){localStorage.removeItem('reasondx-user');window.location.href='register.html'}">Log Out</button>
+    <h2>Session</h2>
+    <p style="font-size:13px;color:#64748B;margin-bottom:16px">
+      Signing out will preserve your progress — it's saved to your account.
+    </p>
+    <button class="btn btn-danger" onclick="signOut()">Sign Out</button>
   </div>
 </div>
-<script src="../js/rdx-nav.js"></script>
-<script src="../js/rdx-help-widget.js"></script>
-<script>if('serviceWorker' in navigator)navigator.serviceWorker.register('../sw.js').catch(()=>{})</script>
+
+<script src="/js/nav-global.js"></script>
+<script>
+(function() {
+  // Load user data
+  var user = {};
+  try { user = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+
+  if (!user || !user.email) {
+    window.location.replace('/auth/login.html');
+    return;
+  }
+
+  // Populate fields
+  var nameEl = document.getElementById('acct-name');
+  var emailEl = document.getElementById('acct-email');
+  if (nameEl) nameEl.value = user.name || user.displayName || '';
+  if (emailEl) emailEl.value = user.email || '';
+
+  // Show plan
+  var planEl = document.getElementById('plan-badge');
+  if (planEl && (user.tier === 'pro' || user.tier === 'institutional')) {
+    planEl.textContent = user.tier.charAt(0).toUpperCase() + user.tier.slice(1);
+    planEl.className = 'plan-badge pro';
+  }
+})();
+
+function saveProfile() {
+  var nameEl = document.getElementById('acct-name');
+  var msgEl = document.getElementById('save-msg');
+  var name = nameEl ? nameEl.value.trim() : '';
+
+  if (!name) {
+    showMsg('error', 'Please enter a display name.');
+    return;
+  }
+
+  // Update localStorage
+  try {
+    var user = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    user.name = name;
+    user.displayName = name;
+    localStorage.setItem('reasondx-user', JSON.stringify(user));
+    showMsg('success', 'Profile updated.');
+  } catch(e) {
+    showMsg('error', 'Could not save. Please try again.');
+  }
+}
+
+function showMsg(type, text) {
+  var msgEl = document.getElementById('save-msg');
+  if (!msgEl) return;
+  msgEl.className = 'msg ' + type;
+  msgEl.textContent = text;
+  msgEl.style.display = 'block';
+  setTimeout(function() { msgEl.style.display = 'none'; }, 3000);
+}
+
+function signOut() {
+  if (!confirm('Sign out of ReasonDx?')) return;
+  // Clear session data (keep progress data)
+  localStorage.removeItem('reasondx-user');
+  localStorage.removeItem('rdx_user');
+  try { sessionStorage.clear(); } catch(e) {}
+  window.location.href = '/index.html';
+}
+</script>
 </body>
 </html>
