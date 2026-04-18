@@ -173,7 +173,9 @@
       html += '<div style="height:40px;background:#fff;border-bottom:1px solid #DFE1E6;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-size:12px;flex-shrink:0">';
 
       html += '<div style="display:flex;align-items:center;gap:8px">';
-      html += '<a href="virtual-emr.html" style="color:#8C92A4;text-decoration:none;font-weight:500">ReasonDx</a>';
+      html += '<a href="/browse.html" style="color:#8C92A4;text-decoration:none;font-weight:500;display:flex;align-items:center;gap:4px" title="Back to case browser">← Cases</a>';
+      html += '<span style="color:#DFE1E6;margin:0 4px">/</span>';
+      html += '<a href="virtual-emr.html" style="color:#8C92A4;text-decoration:none;font-weight:500">EMR</a>';
       if (dept) {
         html += '<span style="color:#DFE1E6">/</span>';
         html += '<a href="virtual-emr.html?setting=' + setting + '" style="color:#1A1A2E;font-weight:600;text-decoration:none">' + dept.icon + ' ' + dept.label + '</a>';
