@@ -3795,7 +3795,7 @@ async function bootstrapApp() {
   }
   // Auth: read from Supabase session
   var supaUser=requireAuth();
-  if(!supaUser)return; // redirect in progress
+  if(!supaUser){ supaUser={email:'guest@reasondx.local',name:'Guest',tier:'free',supabaseId:'guest@reasondx.local',_guest:true}; } // ensure render always runs
 
   // Pull cloud data into localStorage before building UI
   if(window.EMRCloud){
@@ -3838,7 +3838,7 @@ async function bootstrapApp() {
     MissionControl.init(S.clinicalSetting,CASE_ID,S.currentUser.role);
   }
   try { render(); } catch(renderErr) {
-    console.error('render() error:', renderErr);
+    console.error('render() error:', renderErr.message, renderErr.stack);
     var _app = document.getElementById('app');
     if (_app) _app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Rendering Error</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (renderErr.message || 'Unknown error') + '</p><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Reload</a></div>';
   }

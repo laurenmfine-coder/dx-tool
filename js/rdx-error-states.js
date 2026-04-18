@@ -250,7 +250,9 @@
         var params = new URLSearchParams(window.location.search);
         var hasCaseParam = params.get('case') || params.get('cx');
         // Only show error if a case was actually expected to load
-        if (app && app.innerHTML.trim() === '' && hasCaseParam) {
+        var _appContent = app ? app.innerHTML.trim() : '';
+        var _hasRealContent = _appContent.length > 100 && !_appContent.includes('Loading case');
+        if (app && !_hasRealContent && hasCaseParam) {
           app.innerHTML = RDXErrors.caseLoadError(hasCaseParam);
         }
       }, 15000);
