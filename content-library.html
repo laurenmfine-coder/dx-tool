@@ -418,7 +418,7 @@ Respond ONLY with a JSON object (no markdown, no backticks):
     var all = getAllItems();
     var item = all.find(function(i){ return i.id === id; });
     if (!item) return;
-    if (!item.source) { alert('Cannot approve without a source citation. Edit the item and add one first.'); return; }
+    if (!item.source) { rdxGenToast('Add a source citation before approving'); return; }
     var fbEl = document.getElementById('fb-' + id);
     var updated = Object.assign({}, item, {
       status: 'approved',
@@ -435,7 +435,7 @@ Respond ONLY with a JSON object (no markdown, no backticks):
     if (!item) return;
     var fbEl = document.getElementById('fb-' + id);
     var feedback = fbEl ? fbEl.value.trim() : '';
-    if (!feedback) { alert('Please add editorial feedback before rejecting so the contributor knows what to fix.'); return; }
+    if (!feedback) { rdxGenToast('Add editorial feedback before rejecting'); return; }
     var updated = Object.assign({}, item, {
       status: 'rejected',
       rejectedAt: new Date().toISOString(),
@@ -467,7 +467,9 @@ render();
 })();
 </script>
 
-<script src="js/rdx-nav.js"></script>
+<script src="js/rdx-nav.js">
+function rdxGenToast(msg){var t=document.createElement('div');t.style.cssText='position:fixed;top:80px;right:20px;z-index:9999;background:#1B4F72;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:300px';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
+</script>
 
 </body>
 </html>

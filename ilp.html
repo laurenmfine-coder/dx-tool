@@ -489,7 +489,7 @@ window.addGoalManual = function() {
   );
   if (!epaNum) return;
   epaNum = epaNum.toUpperCase().replace(/[^EPA0-9]/g,'');
-  if (!EPA_LABELS[epaNum]) { alert('Invalid EPA. Try EPA1 through EPA13.'); return; }
+  if (!EPA_LABELS[epaNum]) { rdxIlpToast('Invalid EPA — try EPA1 through EPA13','error'); return; }
 
   var goalText = prompt('Goal statement (e.g., "Improve history-taking completeness to EPA1 Level 3"):');
   if (!goalText) return;
@@ -523,7 +523,7 @@ window.saveILP = function() {
     btn.textContent = '✓ Saved';
     btn.style.background = '#059669';
     setTimeout(function(){ btn.textContent = '💾 Save Plan'; btn.style.background = ''; }, 2000);
-  } catch(e) { alert('Save failed: ' + e.message); }
+  } catch(e) { rdxIlpToast('Save failed: '+e.message,'error'); }
 };
 
 // ── Init ───────────────────────────────────────────────────────
@@ -559,6 +559,8 @@ setTimeout(function(){
 <script src="js/dx-user-bar.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script src="js/nav-global.js"></script>
-<script src="js/rdx-analytics-tracker.js"></script>
+<script src="js/rdx-analytics-tracker.js">
+function rdxIlpToast(msg,type){var t=document.createElement('div');t.style.cssText='position:fixed;top:80px;right:20px;z-index:9999;background:'+(type==='error'?'#DC2626':'#059669')+';color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.2)';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
+</script>
 </body>
 </html>

@@ -125,6 +125,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <div class="topbar">
   <div class="topbar-left">
     <a href="/browse.html" style="color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;font-weight:600;display:flex;align-items:center;gap:4px;padding:4px 8px;border-radius:6px;transition:all .15s" onmouseover="this.style.background='rgba(255,255,255,0.1)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='rgba(255,255,255,0.6)'">← Cases</a>
+    <button onclick="rdxShareCase()" style="background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s;display:flex;align-items:center;gap:4px" onmouseover="this.style.background='rgba(255,255,255,0.18)';this.style.color='#fff'" onmouseout="this.style.background='rgba(255,255,255,0.1)';this.style.color='rgba(255,255,255,0.7)'" title="Share this case">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Share
+    </button>
     <div class="topbar-logo">Reason<span>Dx</span></div>
     <div class="topbar-badge">Simulation</div>
   </div>
@@ -552,6 +556,11 @@ function startStudy() {
 
   // Deliver Phase 1 opening (unless resuming)
   if (!savedSession) {
+    // Set page title to case chief complaint
+    if (caseData && caseData.presentation && caseData.presentation.chiefComplaint) {
+      document.title = caseData.presentation.chiefComplaint + ' — Simulation | ReasonDx';
+    }
+
     // First-time users: show a brief orientation system message
     var simCount = 0;
     try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
@@ -4306,6 +4315,23 @@ function rdxSubmitEmailOptin() {
   var modal = document.getElementById('rdx-email-optin-modal');
   if (modal) {
     modal.querySelector('div > div:last-child').innerHTML = '<div style="text-align:center;padding:8px 0"><div style="font-size:28px;margin-bottom:12px">✅</div><div style="font-size:16px;font-weight:700;color:#1E293B;margin-bottom:6px">You're in!</div><div style="font-size:13px;color:#64748B;margin-bottom:20px">First case arriving Monday. See you then.</div><button onclick="document.getElementById('rdx-email-optin-modal').style.display='none'" style="padding:10px 24px;background:#2874A6;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Continue →</button></div>';
+  }
+}
+
+
+function rdxShareCase() {
+  var cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
+  var url = 'https://reasondx.com/simulation-engine.html?case=' + encodeURIComponent(cid||'');
+  if (navigator.share) {
+    var title = (caseData && caseData.presentation && caseData.presentation.chiefComplaint) || 'Clinical case';
+    navigator.share({ title: title + ' — ReasonDx', text: 'Can you solve this clinical reasoning case?', url: url }).catch(function(){});
+  } else {
+    navigator.clipboard.writeText(url).then(function() {
+      var toast = document.getElementById('toast');
+      if (toast) { toast.textContent = '✓ Case link copied — share it with a classmate!'; toast.classList.add('visible'); setTimeout(function(){ toast.classList.remove('visible'); }, 3000); }
+    }).catch(function() {
+      prompt('Copy this link:', url);
+    });
   }
 }
 

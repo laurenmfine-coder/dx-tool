@@ -213,8 +213,8 @@ window.addMs=function(){
 window.submitScore=function(){
   var scored=Object.keys(selectedLevel).length;
   var selected=Object.keys(selectedMilestones).filter(function(k){return selectedMilestones[k]}).length;
-  if(scored<selected){alert('Please assign a level to all selected milestones.');return}
-  if(scored===0){alert('Please select and score at least one milestone.');return}
+  if(scored<selected){rdxGenToast('Assign a level to all selected milestones');return}
+  if(scored===0){rdxGenToast('Select and score at least one milestone first');return}
   submitted=true;render();
 };
 window.reset=function(){ctx=null;submitted=false;selectedMilestones={};selectedLevel={};render()};
@@ -227,6 +227,8 @@ setTimeout(function(){var l=document.getElementById('rdx-loader');if(l){l.classL
 <script src="js/dx-user-bar.js"></script>
 <script src="js/rdx-help-widget.js"></script>
 <script src="js/rdx-nav.js"></script>
-<script src="js/rdx-analytics-tracker.js"></script>
+<script src="js/rdx-analytics-tracker.js">
+function rdxGenToast(msg){var t=document.createElement('div');t.style.cssText='position:fixed;top:80px;right:20px;z-index:9999;background:#1B4F72;color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:300px';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
+</script>
 </body>
 </html>

@@ -115,7 +115,7 @@ window.selMod=function(m){mod=m;skinPh='select';selAll=[];ofcSubmitted=false;des
   document.getElementById('m-'+m).classList.add('on');render()};
 window.setSkin=function(i){skinIdx=i;skinPh='select';selAll=[];render()};
 window.togAll=function(a){var i=selAll.indexOf(a);if(i>=0)selAll.splice(i,1);else selAll.push(a);render()};
-window.runSkin=function(){if(selAll.length<2){alert('Select at least controls and some allergens');return}skinPh='results';render()};
+window.runSkin=function(){if(selAll.length<2){rdxGenToast('Select at least controls and some allergens');return}skinPh='results';render()};
 window.scoreSkin=function(){skinPh='score';render()};
 window.resetSkin=function(){skinPh='select';selAll=[];render()};
 window.submitOFC=function(){ofcSubmitted=true;render()};

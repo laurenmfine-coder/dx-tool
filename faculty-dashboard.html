@@ -856,7 +856,7 @@ window.setAnnColor = function(btn) {
 window.saveAnnotation = function() {
   if (!_annPending) return;
   var comment = (document.getElementById('annCommentInput')||{}).value || '';
-  if (!comment.trim()) { alert('Please add a comment before saving.'); return; }
+  if (!comment.trim()) { rdxGenToast('Add a comment before saving'); return; }
   var sub = _gradingSub;
   if (!sub) return;
   var week = sub.week || '';
@@ -2732,8 +2732,8 @@ function rdxUpdateSelectedCount() {
 }
 function rdxMarkSelectedReviewed() {
   var checked = document.querySelectorAll('.rdx-sub-check:checked');
-  if (checked.length === 0) { alert('Select at least one submission first.'); return; }
-  if (!confirm('Mark ' + checked.length + ' submission(s) as reviewed?')) return;
+  if (checked.length === 0) { rdxGenToast('Select at least one submission first'); return; }
+  // Proceed directly, show success count
   checked.forEach(function(cb) {
     var studentName = cb.dataset.student || '';
     var week = cb.dataset.week || '';
@@ -2745,9 +2745,12 @@ function rdxMarkSelectedReviewed() {
       }
     }
   });
+  var _markedCount = checked.length;
   // Re-render
   var main = document.getElementById('main-content');
   if (main) main.innerHTML = renderSubmissions();
+  // Show success toast
+  var t=document.createElement('div');t.style.cssText='position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:#059669;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:700;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2)';t.textContent='✓ Marked '+_markedCount+' submission'+(checked.length!==1?'s':'')+' as reviewed';document.body.appendChild(t);setTimeout(function(){t.remove();},2500);
 }
 
 

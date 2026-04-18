@@ -3190,7 +3190,7 @@ function sendPatientMessage(){
   window.toggleVoice = function(inputId, btnId) {
     var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRec) {
-      alert('Voice input requires Chrome or Edge. Try updating your browser.');
+      var _vt=document.getElementById('toast');if(_vt){_vt.textContent='🎤 Voice input requires Chrome or Edge';_vt.classList.add('visible');setTimeout(function(){_vt.classList.remove('visible');},3000);}
       return;
     }
     if (_listening) {

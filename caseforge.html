@@ -505,9 +505,9 @@ window.CF = {
   },
 
   aiParse: async function(){
-    if (!S.attested) { alert('You must complete the de-identification attestation before generating a case.'); return; }
+    if (!S.attested) { rdxForgeToast('Complete the de-identification attestation first', 'error'); return; }
     var text=document.getElementById('aiInput').value.trim();
-    if(!text){alert('Please paste clinical information.');return;}
+    if(!text){ rdxForgeToast('Please paste clinical information first', 'error'); return; }
     // Pre-screen for PHI before sending to AI
     var inputFlags = scanForPHI(text);
     var criticals = inputFlags.filter(function(f){ return f.severity === 'critical'; });
@@ -515,7 +515,7 @@ window.CF = {
       var msg = 'Potential PHI detected in your input — please resolve before submitting:\n\n';
       criticals.forEach(function(f){ msg += '• ' + f.type + ': ' + f.message + '\n'; });
       msg += '\nRemove or replace the flagged items and try again.';
-      alert(msg);
+      rdxForgeToast(msg, 'error');
       return;
     }
     var warnings = inputFlags.filter(function(f){ return f.severity === 'warning'; });
@@ -536,8 +536,8 @@ window.CF = {
         S.caseData=Object.assign(S.caseData, data.data);
         if(dx) S.meta.title=dx;
         S.view='builder'; S.step=0;
-      } else { alert('AI parsing failed: '+(data.error||'Unknown error')); }
-    }catch(e){ alert('Network error: '+e.message); }
+      } else { rdxForgeToast('AI parsing failed: '+(data.error||'Unknown error'), 'error'); }
+    }catch(e){ rdxForgeToast('Network error: '+e.message, 'error'); }
     S.parsing=false; render();
   },
 
@@ -555,30 +555,30 @@ window.CF = {
 
   suggestRefs: async function(){
     var dx=S.caseData.patient.diagnosis;
-    if(!dx){alert('Enter a diagnosis first.');return;}
+    if(!dx){ rdxForgeToast('Enter a diagnosis first', 'error'); return; }
     try{
       var resp=await fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},
         body:JSON.stringify({type:'suggest-references',diagnosis:dx,specialty:S.meta.specialty})});
       var data=await resp.json();
       if(data.success && Array.isArray(data.data)){
         S.caseData.references=data.data;
-        alert('Added '+data.data.length+' suggested references. Review them in the teaching step.');
+        rdxForgeToast('Added '+data.data.length+' suggested references', 'success');
         render();
       }
-    }catch(e){ alert('Error: '+e.message); }
+    }catch(e){ rdxForgeToast('Error: '+e.message, 'error'); }
   },
 
   saveCase: function(){
-    if (!S.attested) { alert('You must complete the de-identification attestation before saving a case.'); return; }
+    if (!S.attested) { rdxForgeToast('Complete the de-identification attestation before saving', 'error'); return; }
     var phiCheck = runPHIScan();
     var criticals = phiCheck.filter(function(f){ return f.severity === 'critical'; });
     if (criticals.length > 0) {
-      alert('Cannot save: ' + criticals.length + ' critical PHI flag(s) detected. Go to the Review step to see details and resolve them.');
+      rdxForgeToast('Cannot save: '+criticals.length+' critical PHI flag(s) detected — go to Review to resolve', 'error');
       return;
     }
     var c={id:'case-'+Date.now(),caseData:JSON.parse(JSON.stringify(S.caseData)),meta:JSON.parse(JSON.stringify(S.meta)),status:'draft',savedAt:new Date().toISOString()};
     S.myCases.push(c); save();
-    alert('Case saved!');
+    rdxForgeToast('Case saved successfully!', 'success');
     S.view='my-cases'; render();
   },
 
@@ -608,6 +608,15 @@ render();
 </script>
 
 <script src="js/rdx-nav.js"></script>
-<script src="js/rdx-analytics-tracker.js"></script>
+<script src="js/rdx-analytics-tracker.js">
+function rdxForgeToast(msg, type) {
+  var t = document.createElement('div');
+  var bg = type === 'success' ? '#059669' : type === 'error' ? '#DC2626' : '#1B4F72';
+  t.style.cssText = 'position:fixed;top:80px;right:20px;z-index:9999;background:'+bg+';color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:340px;line-height:1.5';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(function(){t.remove();},300); }, 3000);
+}
+</script>
 </body>
 </html>

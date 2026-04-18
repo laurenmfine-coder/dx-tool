@@ -715,7 +715,7 @@ function submitRounds() {
     answers[q.id] = el ? el.value.trim() : '';
     if (answers[q.id].length > 5) hasAny = true;
   });
-  if (!hasAny) { alert('Answer at least one question before submitting.'); return; }
+  if (!hasAny) { rdxSkillsToast('Answer at least one question before submitting'); return; }
 
   var debriefHtml = c.questions.map(function(q){
     var ans = answers[q.id];

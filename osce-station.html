@@ -283,8 +283,8 @@ async function startOSCE() {
   var caseId = document.getElementById('caseSelect').value;
   totalDuration = parseInt(document.getElementById('duration').value);
 
-  if (!caseId) { alert('Please select a case.'); return; }
-  if (!window.CRT_DATA || !window.CRT_DATA[caseId]) { alert('Case data not loaded.'); return; }
+  if (!caseId) { rdxGenToast('Please select a case first'); return; }
+  if (!window.CRT_DATA || !window.CRT_DATA[caseId]) { rdxGenToast('Case data not loaded — try refreshing'); return; }
 
   caseData = window.CRT_DATA[caseId];
   osceStartTime = new Date().toISOString();
