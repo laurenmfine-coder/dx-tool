@@ -3794,8 +3794,11 @@ async function bootstrapApp() {
     S.activeTab="handoff";
   }
   // Auth: read from Supabase session
+  function _bsStep(msg) { var a=document.getElementById('app'); if(a) a.innerHTML='<div style="padding:40px;text-align:center;color:#475569;font-family:sans-serif;font-size:13px">'+msg+'</div>'; }
+  _bsStep('BS1: requireAuth...');
   var supaUser=requireAuth();
-  if(!supaUser){ supaUser={email:'guest@reasondx.local',name:'Guest',tier:'free',supabaseId:'guest@reasondx.local',_guest:true}; } // ensure render always runs
+  if(!supaUser){ supaUser={email:'guest@reasondx.local',name:'Guest',tier:'free',supabaseId:'guest@reasondx.local',_guest:true}; }
+  _bsStep('BS2: user=' + (supaUser.email||'none') + ' cloud=' + (!!window.EMRCloud));
 
   // Pull cloud data into localStorage before building UI
   if(window.EMRCloud){
@@ -3837,7 +3840,7 @@ async function bootstrapApp() {
   if(window.MissionControl&&S.currentUser.role==="student"&&CASE_ID){
     MissionControl.init(S.clinicalSetting,CASE_ID,S.currentUser.role);
   }
-  try { render(); } catch(renderErr) {
+  _bsStep('BS4: calling render()...'); try { render(); } catch(renderErr) { _bsStep('BS4 ERROR: ' + renderErr.message);
     console.error('render() error:', renderErr.message, renderErr.stack);
     var _app = document.getElementById('app');
     if (_app) _app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Rendering Error</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (renderErr.message || 'Unknown error') + '</p><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Reload</a></div>';
@@ -5642,15 +5645,18 @@ submitDoc = function(){
     try {
       if (!window.CASE_ID) window.CASE_ID = _id;
       var _app = document.getElementById('app');
-      if (_app) _app.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;font-family:sans-serif;font-size:14px">Loading case...</div>';
-      try { if (window.EMRShell) { EMRShell.inject(); } } catch(shellErr) { console.warn('Shell inject failed:', shellErr); }
+      function _showStep(msg) {
+        var a = document.getElementById('app');
+        if (a) a.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;font-family:sans-serif;font-size:14px">' + msg + '</div>';
+      }
+      _showStep('Step 1: Routing to case ' + _id);
+      try { if (window.EMRShell) { EMRShell.inject(); } } catch(shellErr) { _showStep('Step 1b: Shell error: ' + shellErr.message); }
+      _showStep('Step 2: Loading case data...');
       loadCaseData(function() {
-        var _app2 = document.getElementById('app');
-        if (_app2 && _app2.innerHTML.indexOf('Loading case') >= 0) {
-          _app2.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;font-family:sans-serif;font-size:14px">Case data loaded, starting app...</div>';
-        }
+        _showStep('Step 3: Bootstrapping app...');
         bootstrapApp().catch(function(err) {
           console.error('bootstrapApp error:', err);
+          _showStep('Step 3 ERROR: ' + err.message);
           var app = document.getElementById('app');
           if (app && !app.innerHTML.trim()) {
             app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:sans-serif"><div style="font-size:36px;margin-bottom:12px">🏥</div><h2 style="color:#1e293b;margin-bottom:8px">Case Couldn't Load</h2><p style="color:#64748b;margin-bottom:20px">We couldn't load this patient case. This might be a temporary issue.</p><div style="display:flex;gap:10px;justify-content:center"><button onclick="location.reload()" style="padding:10px 20px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">↺ Retry</button><a href="/browse.html" style="padding:10px 20px;background:#F1F5F9;color:#374151;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">← Browse Cases</a></div></div>';
