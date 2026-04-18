@@ -33,7 +33,7 @@ body{background:var(--bg);font-family:var(--ft);min-height:100vh;display:flex;al
 .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--bd)}
 </style>
 <meta property="og:title" content="Create Account | ReasonDx">
-<meta name="description" content="Create a free ReasonDx account. Access 394 clinical reasoning cases and AI-powered coaching across 11 health professions. Free forever.">
+<meta name="description" content="Create a free ReasonDx account. Access 394 clinical reasoning cases and AI-powered coaching across 11 health professions. Free to use.">
 <link rel="canonical" href="https://www.reasondx.com/auth/register.html">
 </head>
 <body>
@@ -159,7 +159,7 @@ window.addEventListener('load', async function() {
           lastLogin: new Date().toISOString()
         }));
       } catch(e) {}
-      window.location.href = '/browse.html';
+      window.location.href = '/browse.html?welcome=1';
     }
   }
 });
@@ -193,17 +193,17 @@ async function handleRegister(e) {
           allowSkip: true,
           onComplete: function(profile) {
             if (profile) profile.save();
-            setTimeout(function() { window.location.href = '/browse.html'; }, 400);
+            setTimeout(function() { window.location.href = '/browse.html?welcome=1'; }, 400);
           },
           onSkip: function() {
-            setTimeout(function() { window.location.href = '/browse.html'; }, 200);
+            setTimeout(function() { window.location.href = '/browse.html?welcome=1'; }, 200);
           }
         });
         modal.inject();
       }, 800);
     } else {
       // No profession modal — redirect directly
-      setTimeout(function() { window.location.href = '/browse.html'; }, 1500);
+      setTimeout(function() { window.location.href = '/browse.html?welcome=1'; }, 1500);
     }
   }
 }

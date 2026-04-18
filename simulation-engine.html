@@ -156,7 +156,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     <div style="height:3px;background:rgba(40,116,166,0.12)">
       <div id="rdx-phase-bar-fill" style="height:100%;background:#2874A6;transition:width .4s ease;width:0%;min-width:0px;border-radius:0 2px 2px 0"></div>
     </div>
-    <div class="chat-messages" id="chatMessages" aria-live="polite" aria-atomic="false" aria-label="Conversation with Dr. Patel"></div>
+    <div class="chat-messages" id="chatMessages" aria-live="polite" aria-atomic="false" aria-label="Conversation with Dr. Patel">
+      <div id="rdx-chat-loader" style="display:flex;align-items:center;gap:12px;padding:20px 16px;color:var(--text-muted,#94A3B8);font-size:13px">
+        <div class="typing"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
+        <span>Dr. Patel is preparing your case...</span>
+      </div>
+    </div>
     <!-- DDx Chooser Panel — shown at Phases 1, 4, 6 -->
     <div id="ddxChooserPanel" style="display:none;padding:12px 16px;background:#F8FAFC;border-top:2px solid #2874A6;max-height:380px;overflow-y:auto">
       <div id="ddxChooserContainer"></div>
@@ -202,18 +207,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="emr-data/rad-study-chest001.js" defer></script>
 <script src="emr-data/rad-study-fever001.js" defer></script>
 <script src="emr-data/guidelines-library.js" defer></script>
-<script src="js/rdx-agent-tools.js"></script>
-<script src="js/rdx-agent-core.js"></script>
-<script src="js/rdx-agent-enhancements.js"></script>
-<script src="js/rdx-study-tools.js"></script>
-<script src="js/rdx-rag.js"></script>
-<script src="js/rdx-advanced.js"></script>
-<script src="js/rdx-rpfs-viz.js"></script>
-<script src="emr-data/dx-database.js"></script>
+<script src="js/rdx-agent-tools.js" defer></script>
+<script src="js/rdx-agent-core.js" defer></script>
+<script src="js/rdx-agent-enhancements.js" defer></script>
+<script src="js/rdx-study-tools.js" defer></script>
+<script src="js/rdx-rag.js" defer></script>
+<script src="js/rdx-advanced.js" defer></script>
+<script src="js/rdx-rpfs-viz.js" defer></script>
+<script src="emr-data/dx-database.js" defer></script>
 <!-- crt-data.js removed — CRT_INDEX (crt-index.js via browse/adapter) serves case pairing -->
-<script src="js/rdx-passive.js"></script>
-<script src="js/rdx-reasoning-tools.js"></script>
-<script src="js/rdx-case-adapter.js"></script>
+<script src="js/rdx-passive.js" defer></script>
+<script src="js/rdx-reasoning-tools.js" defer></script>
+<script src="js/rdx-case-adapter.js" defer></script>
 <script>
 // ── INTAKE CASE SEARCH ──
 // ── INITIALIZATION ──
@@ -1521,7 +1526,7 @@ function enterPhase(phase) {
           var msgs2 = document.getElementById('chatMessages');
           if (msgs2) { msgs2.appendChild(_rateDiv); msgs2.scrollTop = msgs2.scrollHeight; }
         } catch(e) {}
-      }, 400);
+      }, 10000);
 
       // Show "cases like this one" suggestion grid
       setTimeout(function() {
@@ -2512,6 +2517,9 @@ function isPatientResponse(text) {
 
 // ── UI ──
 function addMessage(type, text) {
+  // Remove loader on first message
+  var _loader = document.getElementById('rdx-chat-loader');
+  if (_loader) _loader.remove();
   const el = document.getElementById('chatMessages');
   const div = document.createElement('div');
   const cssClass = type === 'student' ? 'msg-student' : type === 'patient' ? 'msg-patient' : type === 'report' ? 'msg-report' : type === 'system' ? 'msg-system' : 'msg-patel';
@@ -2547,7 +2555,7 @@ function showTyping() {
   const div = document.createElement('div');
   div.className = 'typing';
   div.id = 'typingIndicator';
-  div.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+  div.innerHTML = '<div style="font-size:10px;font-weight:700;color:var(--text-muted,#94A3B8);margin-bottom:4px;letter-spacing:.3px">Dr. Patel</div><div style="display:flex;gap:4px"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
   el.appendChild(div);
   el.scrollTop = el.scrollHeight;
 }
@@ -4369,21 +4377,34 @@ function rdxSubmitEmailOptin() {
 function rdxReportMsg(btn) {
   var msgText = btn.getAttribute('data-msg') || '';
   var cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
-  var reason = prompt('What was wrong with this response? (optional)');
-  if (reason === null) return; // Cancelled
-  // Save report
+  var msgDiv = btn.closest('.chat-msg');
+  if (!msgDiv) return;
+  // Check if form already open
+  if (msgDiv.querySelector('.rdx-report-form')) { msgDiv.querySelector('.rdx-report-form').remove(); return; }
+  // Build inline form
+  var form = document.createElement('div');
+  form.className = 'rdx-report-form';
+  form.style.cssText = 'margin-top:8px;padding:10px;background:#FFF7ED;border:1px solid #FDE68A;border-radius:8px;font-size:12px';
+  form.innerHTML = '<div style="font-size:11px;font-weight:700;color:#92400E;margin-bottom:6px">What was wrong? (optional)</div>' +
+    '<textarea rows="2" placeholder="e.g. incorrect drug dose, wrong diagnosis..." style="width:100%;padding:6px;border:1px solid #FDE68A;border-radius:6px;font-size:12px;font-family:inherit;resize:none;outline:none;box-sizing:border-box" id="rdx-report-textarea"></textarea>' +
+    '<div style="display:flex;gap:6px;margin-top:6px">' +
+      '<button onclick="rdxSubmitReport(this,'' + msgText.replace(/'/g,"\'").substring(0,200) + '','' + cid + '')" style="padding:4px 12px;background:#D97706;color:#fff;border:none;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;font-family:inherit">Send report</button>' +
+      '<button onclick="this.closest('.rdx-report-form').remove()" style="padding:4px 10px;background:none;border:1px solid #FDE68A;border-radius:6px;font-size:11px;cursor:pointer;font-family:inherit;color:#92400E">Cancel</button>' +
+    '</div>';
+  msgDiv.appendChild(form);
+  setTimeout(function(){ var ta=form.querySelector('textarea');if(ta)ta.focus(); }, 50);
+}
+function rdxSubmitReport(btn, msgText, cid) {
+  var form = btn.closest('.rdx-report-form');
+  var reason = form ? (form.querySelector('textarea') || {}).value || '' : '';
   var SB = 'https://lpwbiqpojisqgezycupw.supabase.co';
   var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   fetch(SB + '/rest/v1/case_reports', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Prefer': 'return=minimal' },
-    body: JSON.stringify({ case_id: cid, message_text: msgText.substring(0,500), reason: reason || '', reported_at: new Date().toISOString(), phase: state ? state.currentPhase : null })
+    body: JSON.stringify({ case_id: cid, message_text: msgText.substring(0,500), reason: reason, reported_at: new Date().toISOString(), phase: state ? state.currentPhase : null })
   }).catch(function() {});
-  // Visual feedback
-  btn.textContent = '✓';
-  btn.style.color = '#059669';
-  btn.title = 'Reported — thank you';
-  btn.onclick = null;
+  if (form) { form.innerHTML = '<div style="color:#059669;font-weight:600;padding:4px 0">✓ Reported — thank you!</div>'; setTimeout(function(){ form.remove(); }, 2000); }
 }
 
 function rdxHoverStars(n) {
