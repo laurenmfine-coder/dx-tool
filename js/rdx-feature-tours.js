@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 // ReasonDx Feature Tours System
 // Contextual onboarding that shows help when users need it
 
@@ -248,7 +251,7 @@
   RdxTours.reset = function() {
     localStorage.removeItem('rdx-tours-seen');
     seenTours = {};
-    console.log('All tours reset');
+    rdxLog('All tours reset');
   };
 
   // Check if tour has been seen

@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-realtime.js
  * Supabase Realtime — faculty live observation of student simulations.
@@ -16,8 +19,8 @@
 (function(window) {
   'use strict';
 
-  var SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  var SUPABASE_URL = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SUPABASE_KEY = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
 
   var _client   = null;
   var _channel  = null;
@@ -51,7 +54,7 @@
 
       _channel.subscribe(function(status) {
         if (status === 'SUBSCRIBED') {
-          console.log('[RDXRealtime] Broadcasting on channel:', channel);
+          rdxLog('[RDXRealtime] Broadcasting on channel:', channel);
           // Announce session start
           _channel.send({
             type: 'broadcast',
@@ -155,7 +158,7 @@
           if (_onTurn) _onTurn({ type: 'session_end', data: payload.payload });
         })
         .subscribe(function(status) {
-          console.log('[RDXRealtime] Faculty subscribed to', studentId, '— status:', status);
+          rdxLog('[RDXRealtime] Faculty subscribed to', studentId, '— status:', status);
         });
     } catch(e) {
       console.warn('[RDXRealtime] Faculty init failed:', e.message);

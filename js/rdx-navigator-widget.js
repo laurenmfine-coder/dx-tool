@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * ═══════════════════════════════════════════════════════════════
  * ReasonDx Navigator Widget — rdx-navigator-widget.js
@@ -24,7 +27,7 @@
   // Wait for RdxAgent to be available
   function init() {
     if (!window.RdxAgent) {
-      console.log('Navigator widget: RdxAgent not loaded, skipping.');
+      rdxLog('Navigator widget: RdxAgent not loaded, skipping.');
       return;
     }
 

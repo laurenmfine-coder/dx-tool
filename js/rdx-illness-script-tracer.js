@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-illness-script-tracer.js — Agent 1: Illness Script Evolution Tracer
  * ═══════════════════════════════════════════════════════════════
@@ -52,8 +55,8 @@
 (function (window) {
   'use strict';
 
-  var SUPABASE_URL  = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  var SUPABASE_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  var SUPABASE_URL  = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SUPABASE_KEY  = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   var EMBED_WORKER  = 'https://rdx-embed.laurenmfine.workers.dev';
 
   // ── Supabase helpers ──────────────────────────────────────────────────────
@@ -258,7 +261,7 @@
       try {
         var result = await sbPost('/rest/v1/illness_script_sessions', row);
         if (result.ok) {
-          console.log('[IllnessScriptTracer] Stored ' + snap.phase + ' snapshot for', diagnosis,
+          rdxLog('[IllnessScriptTracer] Stored ' + snap.phase + ' snapshot for', diagnosis,
             '(encounter #' + encounterNum + ', Bordage=' + bScore + ')');
         } else {
           console.warn('[IllnessScriptTracer] Store failed for phase ' + snap.phase + ':', result.status);
@@ -268,7 +271,7 @@
       }
     }
 
-    console.log('[IllnessScriptTracer] All snapshots processed for session', sessionId);
+    rdxLog('[IllnessScriptTracer] All snapshots processed for session', sessionId);
   }
 
   // ── getTrajectory() ───────────────────────────────────────────────────────

@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-notebooklm-tracker.js — NotebookLM Study Package Research Tracker
  * ═══════════════════════════════════════════════════════════════════════
@@ -56,7 +59,7 @@
     // Keep last 20 records per student
     if (data[key].length > 20) data[key] = data[key].slice(-20);
     _save(data);
-    console.log('[NLM Tracker] Download recorded:', caseId, studentId);
+    rdxLog('[NLM Tracker] Download recorded:', caseId, studentId);
   }
 
   /**

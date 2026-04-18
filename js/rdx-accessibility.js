@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-accessibility.js — WCAG Contrast & Accessibility Runtime Monitor
  * 
@@ -95,7 +98,7 @@
     });
 
     if (violations.length === 0) {
-      console.log('%c✅ RDXAccessibility: No contrast violations found', 'color:green;font-weight:bold');
+      rdxLog('%c✅ RDXAccessibility: No contrast violations found', 'color:green;font-weight:bold');
       return violations;
     }
 
@@ -105,7 +108,7 @@
         v.selector + ' — ratio ' + v.ratio + ':1 (need ' + v.threshold + ':1)\n' +
         'Text: "' + v.text + '"'
       );
-      console.log(v.el);
+      rdxLog(v.el);
     });
     console.groupEnd();
 

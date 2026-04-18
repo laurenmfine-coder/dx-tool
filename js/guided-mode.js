@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /* js/guided-mode.js — ReasonDx Guided Case Mode Phase Engine
  * Manages phase state, lock/unlock logic, progression, and phase UI rendering.
  * Reads case guided{} block and optional institutional config.
@@ -693,7 +696,7 @@
       var caseId = (window.S && S.caseId) || (window.CASE_ID) || '';
       var initialized = this.init(caseId, null);
       if (initialized) {
-        console.log('[GuidedMode] Active — Phase', _state.currentPhase);
+        rdxLog('[GuidedMode] Active — Phase', _state.currentPhase);
       }
       return initialized;
     }

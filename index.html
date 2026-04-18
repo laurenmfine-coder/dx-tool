@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/js/rdx-config.js"></script>
+
 <meta name="google-site-verification" content="EI-36lT-WDLC2QRrWx6tJmmp2bb5hbJD6IAbRV_TDyQ" />
 <meta name="description" content="ReasonDx — Try a clinical case in 30 seconds. No signup. No email. Just click and start learning.">
 <meta property="og:title" content="ReasonDx — Try It Now">
@@ -184,8 +186,8 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
       if (window.supabase && window.supabase.createClient) {
         try {
           var sb = window.supabase.createClient(
-            'https://lpwbiqpojisqgezycupw.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0'
+            (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co',
+            (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0'
           );
           sb.auth.getSession().then(function(r) {
             var link = document.getElementById('navAuthLink');

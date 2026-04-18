@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-semantic-drift.js — Agent 4: Semantic Drift Monitor
  * ═══════════════════════════════════════════════════════════════
@@ -51,8 +54,8 @@
 (function (window) {
   'use strict';
 
-  var SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  var SUPABASE_URL = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SUPABASE_KEY = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   var EMBED_WORKER = 'https://rdx-embed.laurenmfine.workers.dev';
 
   // ─── Helpers ──────────────────────────────────────────────────────────────
@@ -238,7 +241,7 @@
 
     var result = await sbPost('/rest/v1/note_embeddings', row);
     if (result.ok) {
-      console.log('[SemanticDrift] Gold standard stored for:', caseId, diagnosis);
+      rdxLog('[SemanticDrift] Gold standard stored for:', caseId, diagnosis);
       _goldStandardCache[caseId] = row;
       return row;
     }
@@ -309,7 +312,7 @@
 
     var result = await sbPost('/rest/v1/note_embeddings', row);
     if (result.ok) {
-      console.log('[SemanticDrift] Note captured for', studentName, caseId,
+      rdxLog('[SemanticDrift] Note captured for', studentName, caseId,
         '| Bordage=' + bScore +
         ' | GoldSim=' + (goldSimilarity !== null ? goldSimilarity.toFixed(3) : 'n/a') +
         ' | Encounter #' + encounterNum);

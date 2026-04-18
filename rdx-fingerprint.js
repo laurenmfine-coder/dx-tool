@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-fingerprint.js
  * ReasonDx — Reasoning Fingerprint System
@@ -24,8 +27,8 @@
 (function(window) {
   'use strict';
 
-  var SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  var SUPABASE_URL = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SUPABASE_KEY = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   var EMBED_WORKER  = 'https://rdx-embed.laurenmfine.workers.dev';
 
   // ── Helpers ──────────────────────────────────────────────────
@@ -437,7 +440,7 @@
 
         var res = await sbPost('/rest/v1/reasoning_fingerprints', row);
         if (res.ok) {
-          console.log('[RDXFingerprint] Stored fingerprint for session:', state.sessionId);
+          rdxLog('[RDXFingerprint] Stored fingerprint for session:', state.sessionId);
         } else {
           var err = await res.text();
           console.warn('[RDXFingerprint] Store failed:', res.status, err.slice(0, 200));
@@ -461,7 +464,7 @@
           '/rest/v1/student_cognitive_profiles?student_name=eq.' + encoded + '&limit=1'
         );
         if (Array.isArray(data) && data.length > 0) {
-          console.log('[RDXFingerprint] Profile loaded for:', studentName, data[0].pattern_tags);
+          rdxLog('[RDXFingerprint] Profile loaded for:', studentName, data[0].pattern_tags);
           return data[0];
         }
         return null;

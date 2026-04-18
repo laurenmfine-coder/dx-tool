@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _cl=console.log;console.log=function(){};}
 /* emr-supabase.js — ReasonDx Cloud Sync (Real Implementation)
  * Syncs submissions, feedback, and annotations to Supabase
@@ -6,8 +9,8 @@
 (function() {
   'use strict';
 
-  var SUPABASE_URL      = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  var SUPABASE_URL      = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SUPABASE_ANON_KEY = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
 
   // ── Supabase REST helper ────────────────────────────────────────────────────
   async function sbFetch(path, opts) {
@@ -171,7 +174,7 @@
           patient: sub.patient || '',
           submitted_at: sub.timestamp || new Date().toISOString()
         });
-        console.log('EMRCloud: submission synced for', studentId);
+        rdxLog('EMRCloud: submission synced for', studentId);
         return true;
       } catch(e) {
         console.warn('EMRCloud.syncSubmission failed:', e);
@@ -198,7 +201,7 @@
           grader: fb.grader || '',
           graded_at: fb.timestamp || new Date().toISOString()
         });
-        console.log('EMRCloud: feedback synced for', studentId, week);
+        rdxLog('EMRCloud: feedback synced for', studentId, week);
         return true;
       } catch(e) {
         console.warn('EMRCloud.syncFeedback failed:', e);
@@ -232,7 +235,7 @@
           });
           await upsert('emr_annotations', rows);
         }
-        console.log('EMRCloud: annotations synced for', studentId, week);
+        rdxLog('EMRCloud: annotations synced for', studentId, week);
         return true;
       } catch(e) {
         console.warn('EMRCloud.syncAnnotations failed:', e);

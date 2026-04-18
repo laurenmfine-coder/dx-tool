@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _cl=console.log;console.log=function(){};}
 /* js/rdx-analytics-tracker.js — Auto-instrumentation for ReasonDx
  * ═══════════════════════════════════════════════════════════════
@@ -29,7 +32,7 @@ var _tracked = {};  // prevent duplicate events
 
 function log(msg) {
   if (window.location.search.indexOf('debug=1') >= 0) {
-    console.log('[Tracker] ' + msg);
+    rdxLog('[Tracker] ' + msg);
   }
 }
 

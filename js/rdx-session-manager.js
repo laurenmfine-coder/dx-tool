@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * RDX Session Manager - Anonymous Session Tracking
  * 
@@ -173,7 +176,7 @@ window.RDXSessionManager = (function() {
     
     // Also log to console in development
     if (window.location.hostname === 'localhost') {
-      console.log('📊 Event:', eventName, params);
+      rdxLog('📊 Event:', eventName, params);
     }
   }
 

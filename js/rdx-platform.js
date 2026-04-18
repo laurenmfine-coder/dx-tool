@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * ═══════════════════════════════════════════════════════════════
  * ReasonDx Platform Intelligence — rdx-platform.js
@@ -18,8 +21,8 @@
 (function() {
   'use strict';
 
-  const SUPABASE_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  const SUPABASE_URL = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  const SUPABASE_ANON_KEY = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   const WORKER_URL = 'https://coachdx-attending.laurenmfine.workers.dev';
 
   let sb = null;
@@ -53,7 +56,7 @@
       options = options || {};
       var email = options.studentEmail || getUserEmail();
       if (!email && !options.allowAnonymous) {
-        console.log('Platform event skipped (no user):', eventType);
+        rdxLog('Platform event skipped (no user):', eventType);
         return false;
       }
 
@@ -113,7 +116,7 @@
         var result = await sb.from('learning_events').insert(queue);
         if (!result.error) {
           localStorage.setItem('rdx_event_queue', '[]');
-          console.log('Flushed ' + queue.length + ' queued events');
+          rdxLog('Flushed ' + queue.length + ' queued events');
         }
       } catch(e) {}
     }

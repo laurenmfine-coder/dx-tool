@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _cl=console.log;console.log=function(){};}
 /**
  * rdx-cme-engine.js — ReasonDx CME Module Engine
@@ -434,7 +437,7 @@ class RdxCmeEngine {
     btn.disabled = true;
     btn.style.background = 'var(--rdx-success)';
     // In production: POST to Supabase, trigger email certificate
-    console.log('CME credit claimed:', {
+    rdxLog('CME credit claimed:', {
       module: this.data.id,
       score: this.state.caseScore,
       date: new Date().toISOString()

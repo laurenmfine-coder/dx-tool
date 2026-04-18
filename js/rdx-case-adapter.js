@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * ═══════════════════════════════════════════════════════════════
  * ReasonDx CRT Case Adapter — js/rdx-case-adapter.js
@@ -388,5 +391,5 @@
     }
   };
 
-  console.log('CaseAdapter loaded. CRT cases available:', window.CRT_DATA ? Object.keys(window.CRT_DATA).length : 0);
+  rdxLog('CaseAdapter loaded. CRT cases available:', window.CRT_DATA ? Object.keys(window.CRT_DATA).length : 0);
 })();

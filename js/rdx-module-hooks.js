@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * ═══════════════════════════════════════════════════════════════
  * ReasonDx Module Event Hooks — rdx-module-hooks.js
@@ -113,7 +116,7 @@
       }
     });
 
-    console.log('CoachDx hooks wired');
+    rdxLog('CoachDx hooks wired');
   }
 
 
@@ -166,7 +169,7 @@
       }
     });
 
-    console.log('ED Board hooks wired');
+    rdxLog('ED Board hooks wired');
   }
 
 
@@ -204,7 +207,7 @@
       };
     }
 
-    console.log('Clinic Board hooks wired');
+    rdxLog('Clinic Board hooks wired');
   }
 
 
@@ -245,7 +248,7 @@
       }
     });
 
-    console.log('MechanismDx hooks wired');
+    rdxLog('MechanismDx hooks wired');
   }
 
 
@@ -265,7 +268,7 @@
       }
     });
 
-    console.log('CaseDx hooks wired');
+    rdxLog('CaseDx hooks wired');
   }
 
 
@@ -365,7 +368,7 @@
         observer.observe(container, { childList: true, subtree: true });
       });
       if (containers.length > 0) {
-        console.log('Universal analysis hooks wired on ' + containers.length + ' chat container(s)');
+        rdxLog('Universal analysis hooks wired on ' + containers.length + ' chat container(s)');
       }
     }
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="en">
 <head>
+<script src="/js/rdx-config.js"></script>
+
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Create Account | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
@@ -130,8 +132,8 @@ async function signInGoogle() {
   const btn = document.getElementById('btnGoogle');
   btn.disabled = true;
   btn.textContent = 'Redirecting to Google…';
-  const SUPABASE_URL  = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  const SUPABASE_URL  = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  const SUPABASE_ANON = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   const sb = window.supabase && window.supabase.createClient
     ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON) : null;
   if (!sb) { showError('Auth unavailable. Please try again.'); btn.disabled = false; btn.textContent = 'Continue with Google'; return; }
@@ -145,8 +147,8 @@ async function signInGoogle() {
 // Handle OAuth callback
 window.addEventListener('load', async function() {
   if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) {
-    const SUPABASE_URL  = 'https://lpwbiqpojisqgezycupw.supabase.co';
-    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+    const SUPABASE_URL  = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+    const SUPABASE_ANON = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
     if (!window.supabase) return;
     const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
     const { data } = await sb.auth.getSession();

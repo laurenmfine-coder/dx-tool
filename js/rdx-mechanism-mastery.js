@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /**
  * rdx-mechanism-mastery.js — MechanismDx Concept Mastery Persistence
  * ════════════════════════════════════════════════════════════════════
@@ -31,8 +34,8 @@
 (function(window) {
   'use strict';
 
-  var SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
-  var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  var SB_URL = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
+  var SB_KEY = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
   var LOCAL_KEY = 'rdx_concept_mastery';
 
   // ── MASTERY LEVELS ─────────────────────────────────────────────────────────
@@ -297,7 +300,7 @@
         // Merge remote into local (remote wins for each concept)
         Object.assign(profile.concepts, rows[0].concepts);
         _saveProfile(profile);
-        console.log('[MasteryProfile] Loaded from Supabase:', Object.keys(rows[0].concepts).length, 'concepts');
+        rdxLog('[MasteryProfile] Loaded from Supabase:', Object.keys(rows[0].concepts).length, 'concepts');
       }
     } catch(e) {
       console.warn('[MasteryProfile] Could not load from Supabase:', e.message);

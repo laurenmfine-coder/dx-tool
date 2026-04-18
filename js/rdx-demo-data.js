@@ -1,3 +1,6 @@
+/* eslint-disable no-console */
+var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(console) : function(){};
+
 /* eslint-disable no-console */ if(typeof window!=='undefined'&&!window.RDX_DEV){var _ce=console.error;console.error=function(){};}
 /* rdx-demo-data.js — Injects realistic demo data for faculty dashboard testing
  * Run from browser console: RDXDemoData.inject()
@@ -207,7 +210,7 @@
       // Write a student session too for the EMR student-simulation tab
       // (stored separately so each tab can have its own user context via URL ?as= param)
 
-      console.log('[RDXDemoData] ✅ Demo data injected. Reloading faculty dashboard...');
+      rdxLog('[RDXDemoData] ✅ Demo data injected. Reloading faculty dashboard...');
       setTimeout(function(){ window.location.reload(); }, 400);
     },
 
@@ -221,7 +224,7 @@
         }
       }
       keys.forEach(function(k){ localStorage.removeItem(k); });
-      console.log('[RDXDemoData] Cleared ' + keys.length + ' demo keys');
+      rdxLog('[RDXDemoData] Cleared ' + keys.length + ' demo keys');
       setTimeout(function(){ window.location.reload(); }, 200);
     }
   };
@@ -230,7 +233,7 @@
   if (window.location.search.indexOf('demo=1') >= 0) {
     window.addEventListener('DOMContentLoaded', function() {
       if (!localStorage.getItem('emr-users')) {
-        console.log('[RDXDemoData] Auto-injecting demo data...');
+        rdxLog('[RDXDemoData] Auto-injecting demo data...');
         RDXDemoData.inject();
       }
     });
