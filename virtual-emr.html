@@ -169,6 +169,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 
 .btn-submit{padding:10px 24px;border-radius:var(--radius);border:none;background:var(--primary);color:#fff;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .2s;box-shadow:0 2px 6px rgba(40,116,166,.2)}
 .btn-submit:hover{background:var(--primary-dark);box-shadow:0 4px 12px rgba(40,116,166,.25)}.btn-submit:active{transform:translateY(1px);box-shadow:none}.btn-submit:disabled{background:var(--border-light);color:var(--text-muted);cursor:default}
+.btn-secondary{padding:10px 20px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--surface);color:var(--text-secondary);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s}.btn-secondary:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
 .score-banner{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(135deg,#EBF5FB,#E8F8F5);border-radius:12px;margin-bottom:20px;border:1.5px solid #AED6F1;box-shadow:0 2px 10px rgba(40,116,166,.1)}
 .score-number{font-size:32px;font-weight:800;color:var(--primary-dark);font-family:'IBM Plex Mono',monospace;line-height:1}
 .score-label{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase}
@@ -186,7 +187,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .empty-state{text-align:center;padding:36px 20px;color:var(--text-muted);font-size:13px;line-height:1.6}
 .week-select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
 .doc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
-.word-count{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-weight:600;transition:color .3s}
+.word-count{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-weight:700;transition:color .4s ease;letter-spacing:.02em}
 .toast{position:fixed;bottom:28px;right:24px;padding:12px 20px;background:var(--accent);color:#fff;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:1000;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}.toast.visible{opacity:1;transform:translateY(0);pointer-events:auto}
 @media(max-width:900px){.sidebar{width:56px;overflow:hidden}.sidebar-btn span{display:none}.sidebar-btn{justify-content:center;padding:10px 0}.demo-grid{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.rdx-wf-progress{display:none}.rdx-wf-step{padding:8px 10px;font-size:10px}}
 /* ═══ Interactive Feature Styles ═══ */
@@ -2504,7 +2505,7 @@ function renderDocumentation(){
   const wc=totalWords();
   var _debrief=(window.RDXIntegration)?RDXIntegration.renderPostSubmitDebrief():'';
   var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending -- get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx -></a></div></div>':'';
-  return _interviewCallout + _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+'</div>')+sectionCard("Documentation Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
+  return _interviewCallout + _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+'</div>')+sectionCard("Grading Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
 }
 
 function buildAnnotatedHTML(text,anns){if(!anns||!anns.length)return esc(text);const sorted=[...anns].map((a,i)=>({...a,idx:i}));sorted.sort((a,b)=>text.indexOf(a.selectedText)-text.indexOf(b.selectedText));let result="",last=0;sorted.forEach(a=>{const p=text.indexOf(a.selectedText,last);if(p===-1)return;const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];result+=esc(text.substring(last,p));result+='<span class="annotation-highlight '+col.css+'" title="'+esc(a.comment)+'">'+esc(a.selectedText)+'<span class="annotation-marker">'+(a.idx+1)+'</span></span>';last=p+a.selectedText.length});result+=esc(text.substring(last));return result}
@@ -2915,8 +2916,8 @@ function renderCoachDx(){
   var _concepts = (window.RDXIntegration) ? RDXIntegration.renderConceptSidebar() : '';
   return _aiSwitch + '<div class="coach-container">'+
     '<div class="coach-header">'+
-      '<h3>\uD83E\uDDE0 CoachDx \u2014 '+esc(personaTitle)+'</h3>'+
-      '<p>Socratic reasoning coach. I won\u2019t give you the answer \u2014 I\u2019ll ask the question that helps you find it.</p>'+
+      '<h3>🧠 CoachDx</h3>'+
+      '<p>Your AI attending. Present your reasoning — I\'ll push back with the right question.</p>'+
       '<span class="coach-setting-tag">'+esc(settingLabel)+'</span>'+
     '</div>'+
     '<div class="coach-messages" id="coachMessages">'+msgsHtml+'</div>'+_starters+
@@ -3298,10 +3299,10 @@ function extractCoachConcepts(text){
 // -- WORKFLOW PROGRESS BAR -------------------------------------------------
 // Maps tab IDs to workflow steps so learners know where they are
 var WORKFLOW_STEPS = [
-  { id:'chart',      label:'Review Chart',  icon:'Chart', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'], hint:'Read the chart: labs, meds, imaging, vitals' },
+  { id:'chart',      label:'Review Chart',  icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'], hint:'Read the chart: labs, meds, imaging, vitals' },
   { id:'interview',  label:'Interview / HPI', icon:'🗣️', tabs:['documentation'], hint:'Take the history -- click Documentation to write your HPI' },
-  { id:'reason',     label:'Reason & Plan', icon:'Dx', tabs:['crt','orders','oral'], hint:'Build your differential and order workup' },
-  { id:'coach',      label:'AI Coaching',   icon:'Coach', tabs:['coach','autofeedback','feedback'], hint:'Talk through your reasoning with CoachDx' },
+  { id:'reason',     label:'Reason & Plan', icon:'🔬', tabs:['crt','orders','oral'], hint:'Build your differential and order workup' },
+  { id:'coach',      label:'AI Coaching',   icon:'🧠', tabs:['coach','autofeedback','feedback'], hint:'Talk through your reasoning with CoachDx' },
 ];
 
 function getActiveWorkflowStep(tabId) {
@@ -3405,11 +3406,11 @@ function renderMissionCard() {
 
   var quicklinks = [
     { icon:'🧪', label:'Labs',     tab:'labs' },
-    { icon:'Rx', label:'Meds',     tab:'medications' },
+    { icon:'💊', label:'Meds',     tab:'medications' },
     { icon:'🩻', label:'Imaging',  tab:'imaging' },
     { icon:'VS', label:'Vitals',   tab:'vitals' },
     { icon:'🗣️', label:'Write HPI',tab:'documentation' },
-    { icon:'Coach', label:'CoachDx',  tab:'coach' },
+    { icon:'🧠', label:'CoachDx',  tab:'coach' },
   ];
 
   var _pq = (window.CRT_DATA && CASE_ID && window.CRT_DATA[CASE_ID] && window.CRT_DATA[CASE_ID].profQuestion) ? window.CRT_DATA[CASE_ID].profQuestion : null;
@@ -4096,10 +4097,14 @@ function showImgOrderDialog(){
 }
 
 function showReferralDialog(){
-  const pop=document.getElementById("annotationPopover");
-  let listHTML='<div style="margin-bottom:10px"><label class="demo-label">Specialty</label><select id="refSpecialty" class="week-select" style="width:100%;padding:8px">'+REFERRAL_TYPES.map(r=>'<option>'+r+'</option>').join("")+'</select></div><div style="margin-bottom:10px"><label class="demo-label">Reason for Referral</label><textarea id="refReason" class="annotation-comment-input" style="min-height:50px" placeholder="Clinical indication for referral..."></textarea></div><div style="margin-bottom:10px"><label class="demo-label">Urgency</label><select id="refUrgency" class="week-select" style="width:100%;padding:8px"><option>Routine</option><option>Urgent</option><option>STAT</option></select></div><button type="button" class="btn-submit" style="width:100%" onclick="placeReferral()">Place Referral</button>';
-  pop.innerHTML='<div class="annotation-popover-header"><span class="annotation-popover-title">'+I.people+' Referral Order</span><button type="button" class="annotation-popover-close" onclick="hideAnnotationPopover()">✕</button></div>'+listHTML;
-  pop.style.top="100px";pop.style.left=Math.max(10,(window.innerWidth-340)/2)+"px";pop.style.width="340px";pop.classList.add("visible");
+  var listHTML='<div style="margin-bottom:12px"><label class="demo-label">Specialty</label><select id="refSpecialty" class="week-select" style="width:100%;padding:10px 12px;font-size:13px">'+REFERRAL_TYPES.map(r=>'<option>'+r+'</option>').join("")+'</select></div>'
+    +'<div style="margin-bottom:12px"><label class="demo-label">Reason for Referral</label><textarea id="refReason" style="width:100%;min-height:70px;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;resize:vertical;outline:none" placeholder="Clinical indication for referral..."></textarea></div>'
+    +'<div style="margin-bottom:16px"><label class="demo-label">Urgency</label><div style="display:flex;gap:8px">'
+    +'<label style="flex:1;display:flex;align-items:center;gap:6px;padding:8px 12px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px"><input type="radio" name="refUrgency" value="Routine" checked> Routine</label>'
+    +'<label style="flex:1;display:flex;align-items:center;gap:6px;padding:8px 12px;border:1.5px solid var(--warning);border-radius:8px;cursor:pointer;font-size:13px;color:var(--warning)"><input type="radio" name="refUrgency" value="Urgent"> Urgent</label>'
+    +'<label style="flex:1;display:flex;align-items:center;gap:6px;padding:8px 12px;border:1.5px solid var(--danger);border-radius:8px;cursor:pointer;font-size:13px;color:var(--danger)"><input type="radio" name="refUrgency" value="STAT"> STAT</label>'
+    +'</div></div>';
+  _openOrderModal(I.people+' Consult / Referral', listHTML+'<button type="button" class="btn-submit" style="width:100%;padding:12px;font-size:14px;margin-top:4px" onclick="placeReferral();closeOrderModal()">Place Referral Order</button>');
 }
 
 function orderLab(id){
@@ -5483,6 +5488,9 @@ function switchTabFromMore(id){
 function renderLabsInteractive(){
   let html = renderLabs();
   const completedStudentLabs = S.labOrders.filter(o=>o.resulted);
+  if(!completedStudentLabs.length && !S.labOrders.filter(o=>!o.resulted).length){
+    html += '<div style="margin-top:16px;padding:12px 16px;background:var(--surface-alt);border-radius:10px;border:1px dashed var(--border);font-size:12px;color:var(--text-muted)">📋 Use <strong>Order Tests</strong> to order labs and imaging. Your results will appear here automatically.</div>';
+  }
   if(completedStudentLabs.length){
     html += '<div style="margin-top:24px;padding-top:16px;border-top:2px dashed var(--border)"><div style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px">'+I.flask+' Your Ordered Lab Results</div>';
     completedStudentLabs.forEach((o,idx)=>{
