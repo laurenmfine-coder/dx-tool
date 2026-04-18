@@ -13,6 +13,88 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/rdx-feature-tours.css">
 <script src="/js/rdx-feature-tours.js" defer></script>
+
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
+<script src="emr-supabase.js" defer></script>
+<script src="emr-chart-tracking.js" defer></script>
+<script src="order-validation.js"></script>
+<script src="emr-caseframe.js" defer></script>
+<script src="emr-data/handoff-data.js"></script>
+<script src="emr-data/auto-handoff.js" defer></script>
+<!-- case-specialty-map loaded dynamically below -->
+<script src="emr-data/day-progression.js" defer></script>
+<script src="emr-data/day-evolution.js" defer></script>
+<script src="emr-data/coachdx-analytics.js" defer></script>
+<script src="caseframe-engine.js"></script>
+<script src="caseframe-integration.js" defer></script>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="/css/rdx-design-system.css?v=2">
+<link rel="stylesheet" href="css/rdx-theme.css">
+<link rel="stylesheet" href="mobile.css">
+<meta name="description" content="Virtual EMR on ReasonDx. Review patient charts, write clinical notes, and practice clinical documentation in a realistic electronic health record.">
+<meta property="og:title" content="Virtual EMR | ReasonDx">
+<meta property="og:description" content="Realistic EMR simulation with 394 patient cases across 11 health professions.">
+<meta property="og:url" content="https://reasondx.com/virtual-emr.html">
+<meta property="og:type" content="website">
+
+<link rel="canonical" href="https://www.reasondx.com/virtual-emr.html">
+<meta name="robots" content="index, follow">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://reasondx.com/icons/og-image.jpg">
+<meta name="twitter:image" content="https://reasondx.com/icons/og-image.jpg">
+<meta name="twitter:title" content="Virtual EMR | ReasonDx">
+<meta name="twitter:description" content="Realistic EMR simulation with 394 patient cases across 11 health professions.">
+<script src="js/rdx-difficulty.js" defer></script>
+<script src="/rdx-email-triggers.js" defer></script>
+<script src="js/rdx-semantic-drift.js" defer></script>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+</head>
+<body>
+<script>
+// Immediate redirect — runs before anything else loads
+(function() {
+  var p = new URLSearchParams(window.location.search);
+  if (!p.get('case') && !p.get('cx')) {
+    window.location.replace('/browse.html?mode=practice');
+  }
+})();
+</script>
+<style>
+#rdx-boot-loader{position:fixed;inset:0;background:#EEF1F5;display:flex;align-items:center;justify-content:center;z-index:9999;font-family:'DM Sans',-apple-system,sans-serif}
+#rdx-boot-loader.hidden{display:none}
+.rdx-boot-inner{text-align:center;color:#2874A6}
+.rdx-boot-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdx-spin .8s linear infinite;margin:0 auto 16px}
+@keyframes rdx-spin{to{transform:rotate(360deg)}}
+.rdx-boot-label{font-size:14px;font-weight:600;color:#475569}
+</style>
+<div id="rdx-boot-loader">
+  <div class="rdx-boot-inner">
+    <div class="rdx-boot-spinner"></div>
+    <div class="rdx-boot-label">Loading ReasonDx...</div>
+  </div>
+</div>
+<script>
+// Hide loader once app has content
+(function() {
+  var _check = setInterval(function() {
+    var app = document.getElementById('app');
+    if (app && app.innerHTML.trim().length > 50) {
+      var loader = document.getElementById('rdx-boot-loader');
+      if (loader) loader.className = 'hidden';
+      clearInterval(_check);
+    }
+  }, 100);
+  // Force hide after 20s regardless
+  setTimeout(function() {
+    var loader = document.getElementById('rdx-boot-loader');
+    if (loader) loader.className = 'hidden';
+  }, 20000);
+})();
+</script>
 <style>
 :root{--bg:#EEF1F5;--success:#059669;--surface:#FFF;--surface-alt:#F7F8FA;--primary:#2874A6;--primary-dark:#1B5E8A;--primary-light:#E3F2FD;--accent:#00897B;--accent-light:#E0F2F1;--danger:#C62828;--danger-light:#FFEBEE;--warning:#F57F17;--warning-light:#FFF8E1;--text:#1A1A2E;--text-secondary:#5A6178;--text-muted:#8C92A4;--border:#DFE1E6;--border-light:#ECEEF2;--flag-high:#C62828;--flag-low:#1565C0;--radius:8px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -1016,87 +1098,7 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 .rdx-result-missed  { background: #FFFBEB; border-left: 3px solid #F59E0B; }
 
 </style>
-<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
-<script src="emr-supabase.js"></script>
-<script src="emr-chart-tracking.js" defer></script>
-<script src="order-validation.js"></script>
-<script src="emr-caseframe.js" defer></script>
-<script src="emr-data/handoff-data.js"></script>
-<script src="emr-data/auto-handoff.js"></script>
-<!-- case-specialty-map loaded dynamically below -->
-<script src="emr-data/day-progression.js"></script>
-<script src="emr-data/day-evolution.js"></script>
-<script src="emr-data/coachdx-analytics.js" defer></script>
-<script src="caseframe-engine.js"></script>
-<script src="caseframe-integration.js" defer></script>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="/css/rdx-design-system.css?v=2">
-<link rel="stylesheet" href="css/rdx-theme.css">
-<link rel="stylesheet" href="mobile.css">
-<meta name="description" content="Virtual EMR on ReasonDx. Review patient charts, write clinical notes, and practice clinical documentation in a realistic electronic health record.">
-<meta property="og:title" content="Virtual EMR | ReasonDx">
-<meta property="og:description" content="Realistic EMR simulation with 394 patient cases across 11 health professions.">
-<meta property="og:url" content="https://reasondx.com/virtual-emr.html">
-<meta property="og:type" content="website">
 
-<link rel="canonical" href="https://www.reasondx.com/virtual-emr.html">
-<meta name="robots" content="index, follow">
-<meta name="twitter:card" content="summary_large_image">
-<meta property="og:image" content="https://reasondx.com/icons/og-image.jpg">
-<meta name="twitter:image" content="https://reasondx.com/icons/og-image.jpg">
-<meta name="twitter:title" content="Virtual EMR | ReasonDx">
-<meta name="twitter:description" content="Realistic EMR simulation with 394 patient cases across 11 health professions.">
-<script src="js/rdx-difficulty.js" defer></script>
-<script src="/rdx-email-triggers.js" defer></script>
-<script src="js/rdx-semantic-drift.js" defer></script>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-</head>
-<body>
-<script>
-// Immediate redirect — runs before anything else loads
-(function() {
-  var p = new URLSearchParams(window.location.search);
-  if (!p.get('case') && !p.get('cx')) {
-    window.location.replace('/browse.html?mode=practice');
-  }
-})();
-</script>
-<style>
-#rdx-boot-loader{position:fixed;inset:0;background:#EEF1F5;display:flex;align-items:center;justify-content:center;z-index:9999;font-family:'DM Sans',-apple-system,sans-serif}
-#rdx-boot-loader.hidden{display:none}
-.rdx-boot-inner{text-align:center;color:#2874A6}
-.rdx-boot-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdx-spin .8s linear infinite;margin:0 auto 16px}
-@keyframes rdx-spin{to{transform:rotate(360deg)}}
-.rdx-boot-label{font-size:14px;font-weight:600;color:#475569}
-</style>
-<div id="rdx-boot-loader">
-  <div class="rdx-boot-inner">
-    <div class="rdx-boot-spinner"></div>
-    <div class="rdx-boot-label">Loading ReasonDx...</div>
-  </div>
-</div>
-<script>
-// Hide loader once app has content
-(function() {
-  var _check = setInterval(function() {
-    var app = document.getElementById('app');
-    if (app && app.innerHTML.trim().length > 50) {
-      var loader = document.getElementById('rdx-boot-loader');
-      if (loader) loader.className = 'hidden';
-      clearInterval(_check);
-    }
-  }, 100);
-  // Force hide after 20s regardless
-  setTimeout(function() {
-    var loader = document.getElementById('rdx-boot-loader');
-    if (loader) loader.className = 'hidden';
-  }, 20000);
-})();
-</script>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;align-items:center;justify-content:space-between;font-family:'DM Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
