@@ -244,7 +244,7 @@
   document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
       wrapRenderFunctions();
-      // Check if app element is still empty after 5 seconds (case load failure)
+      // Check if app element is still empty after 15 seconds (case load failure)
       setTimeout(function() {
         var app = document.getElementById('app');
         var params = new URLSearchParams(window.location.search);
@@ -253,7 +253,7 @@
         if (app && app.innerHTML.trim() === '' && hasCaseParam) {
           app.innerHTML = RDXErrors.caseLoadError(hasCaseParam);
         }
-      }, 5000);
+      }, 15000);
     }, 1000);
   });
 

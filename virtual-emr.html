@@ -3762,8 +3762,13 @@ async function bootstrapApp() {
 
   // Pull cloud data into localStorage before building UI
   if(window.EMRCloud){
-    try{ await EMRCloud.init(supaUser.email||supaUser.supabaseId); }
-    catch(e){ console.warn('Cloud sync failed, using local cache:', e); }
+    try{
+      await Promise.race([
+        EMRCloud.init(supaUser.email||supaUser.supabaseId),
+        new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('timeout')); }, 3000); })
+      ]);
+    }
+    catch(e){ console.warn('Cloud sync skipped:', e.message); }
   }
 
   S.currentUser=buildCurrentUser(supaUser);
@@ -5599,8 +5604,14 @@ submitDoc = function(){
     }
     try {
       if (!window.CASE_ID) window.CASE_ID = _id;
-      if (window.EMRShell) { EMRShell.inject(); }
+      var _app = document.getElementById('app');
+      if (_app) _app.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;font-family:sans-serif;font-size:14px">Loading case...</div>';
+      try { if (window.EMRShell) { EMRShell.inject(); } } catch(shellErr) { console.warn('Shell inject failed:', shellErr); }
       loadCaseData(function() {
+        var _app2 = document.getElementById('app');
+        if (_app2 && _app2.innerHTML.indexOf('Loading case') >= 0) {
+          _app2.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;font-family:sans-serif;font-size:14px">Case data loaded, starting app...</div>';
+        }
         bootstrapApp().catch(function(err) {
           console.error('bootstrapApp error:', err);
           var app = document.getElementById('app');
