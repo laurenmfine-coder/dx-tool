@@ -659,8 +659,14 @@
       if (isRequired) html += ' <span style="font-size:10px;background:' + (coachDone ? '#1B7A3D' : '#C49A1A') + ';color:#fff;padding:1px 6px;border-radius:3px;margin-left:4px">' + (coachDone ? 'DONE' : 'REQUIRED') + '</span>';
       html += '</div>';
       html += '<div style="font-size:11px;color:#718096;margin-top:2px">';
-      if (isRequired && !coachDone) html += 'Present your reasoning before advancing.';
-      else if (coachDone) html += 'Coaching complete for this phase.';
+      if (isRequired && !coachDone) {
+        // Show exchange progress toward 3
+        var _coachMsgs = (window.S && S.coachMessages) ? S.coachMessages.filter(function(m){return m.role==='user';}).length : 0;
+        var _needed = Math.max(0, 3 - _coachMsgs);
+        if (_coachMsgs === 0) html += 'Discuss your reasoning before advancing (3 exchanges required).';
+        else if (_needed > 0) html += '✓ ' + _coachMsgs + '/3 exchanges — ' + _needed + ' more to unlock next phase.';
+        else html += '✓ 3 exchanges done — marking complete...';
+      } else if (coachDone) html += '✅ Coaching complete for this phase.';
       else html += 'Optional — discuss your reasoning with your AI attending.';
       html += '</div>';
       html += '</div>';

@@ -532,6 +532,10 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     var puzzleBanner = document.getElementById('puzzleBanner');
     if (puzzleBanner && simCount >= 1) puzzleBanner.style.display = 'flex';
 
+    // Show start-here section for new users only
+    var startHereEl = document.getElementById('start-here-section');
+    if (startHereEl) startHereEl.style.display = isNew ? '' : 'none';
+
     // For new users: pre-sort grid to show easy cases first (acuity 4-5)
     if (isNew) {
       window._newUserMode = true; // read by renderGrid to sort easiest first
@@ -566,6 +570,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   
   <!-- ── 🎯 START HERE Section ── -->
   <div id="start-here-section" style="
+    display:none;
     background: linear-gradient(135deg, #1a3a5c 0%, #2874A6 100%);
     border: 2px solid rgba(40,116,166,0.4);
     border-radius: 16px;
