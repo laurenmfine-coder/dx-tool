@@ -252,9 +252,10 @@
         // Only show error if a case was actually expected to load
         var _appContent = app ? app.innerHTML.trim() : '';
         var _hasRealContent = _appContent.length > 100 && !_appContent.includes('Loading case');
-        if (app && !_hasRealContent && hasCaseParam) {
-          app.innerHTML = RDXErrors.caseLoadError(hasCaseParam);
-        }
+        // TIMER DISABLED FOR DEBUGGING
+        // if (app && !_hasRealContent && hasCaseParam) {
+        //   app.innerHTML = RDXErrors.caseLoadError(hasCaseParam);
+        // }
       }, 15000);
     }, 1000);
   });

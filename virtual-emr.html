@@ -3844,11 +3844,14 @@ async function bootstrapApp() {
     S.activeTab="handoff";
   }
   // Auth: read from Supabase session
-  function _bsStep(msg) { var a=document.getElementById('app'); if(a) a.innerHTML='<div style="padding:40px;text-align:center;color:#475569;font-family:sans-serif;font-size:13px">'+msg+'</div>'; }
-  _bsStep('BS1: requireAuth...');
+  function _bsStep(msg) {
+    var a=document.getElementById('app');
+    if(a) a.innerHTML='<div style="padding:40px 20px;color:#475569;font-family:sans-serif;font-size:13px;max-width:400px;margin:0 auto"><b>EMR Diagnostics</b><br><br>' + msg + '</div>';
+  }
+  _bsStep('BS1: Checking auth...<br>CASE_ID=' + (window.CASE_ID||'?') + '<br>S.clinicalSetting=' + (window.S&&S.clinicalSetting||'?'));
   var supaUser=requireAuth();
   if(!supaUser){ supaUser={email:'guest@reasondx.local',name:'Guest',tier:'free',supabaseId:'guest@reasondx.local',_guest:true}; }
-  _bsStep('BS2: user=' + (supaUser.email||'none') + ' cloud=' + (!!window.EMRCloud));
+  _bsStep('BS2: Auth done<br>user=' + (supaUser.email||'none') + '<br>guest=' + (!!supaUser._guest) + '<br>EMRCloud=' + (!!window.EMRCloud));
 
   // Pull cloud data into localStorage before building UI
   if(window.EMRCloud){
