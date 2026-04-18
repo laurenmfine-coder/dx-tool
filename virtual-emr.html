@@ -28,7 +28,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .login-title{font-size:24px;font-weight:800;text-align:center;letter-spacing:-.3px}
 .login-subtitle{font-size:14px;color:var(--text-secondary);text-align:center;margin-top:8px}
 .login-label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.login-input{width:100%;padding:12px 14px;border-radius:var(--radius);border:1.5px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;transition:border-color .15s,box-shadow .15s}.login-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.login-input{width:100%;padding:12px 14px;border-radius:var(--radius);border:1.5px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;transition:border-color .15s,box-shadow .15s}.login-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.1);outline:none}
 .login-buttons{display:flex;gap:12px;margin-top:20px}
 .btn-student,.btn-faculty{flex:1;padding:14px;border-radius:var(--radius);font-size:14px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn-student{border:none;background:var(--primary);color:#fff}.btn-student:hover{background:var(--primary-dark)}
@@ -73,13 +73,13 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 
 .data-table{width:100%;border-collapse:collapse;font-size:13px}
 .data-table thead tr{border-bottom:2px solid var(--border)}
-.data-table th{text-align:left;padding:8px 12px;font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.data-table th{text-align:left;padding:9px 12px;font-size:10px;font-weight:800;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
 .data-table tbody tr{border-bottom:1px solid var(--border-light);transition:background .15s}.data-table tbody tr:nth-child(even){background:#FAFBFC}.data-table tbody tr:nth-child(even){background:#FAFBFC}
-.data-table tbody tr:hover{background:var(--surface-alt)}
+.data-table tbody tr:hover{background:var(--primary-light)}
 .data-table td{padding:10px 12px}
 .td-bold{font-weight:600}.td-muted{color:var(--text-secondary);font-size:12px}.td-mono{font-family:'IBM Plex Mono',monospace}
 
-.expandable-header{cursor:pointer;display:flex;justify-content:space-between;align-items:center}.expandable-header:hover{opacity:.85}
+.expandable-header{cursor:pointer;display:flex;justify-content:space-between;align-items:center}.expandable-header:hover{background:var(--surface-alt)}
 .expand-icon{transition:transform .2s;color:var(--text-muted)}.expand-icon.open{transform:rotate(180deg)}
 .expand-body{margin-top:16px;display:none;animation:fadeIn .3s ease}.expand-body.open{display:block}
 .visit-section-label{font-size:10px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;margin-top:16px;padding-bottom:5px;border-bottom:1.5px solid var(--primary-light);display:flex;align-items:center;gap:6px}
@@ -111,6 +111,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .lab-value.high{color:var(--flag-high)}.lab-value.low{color:var(--flag-low)}
 .lab-unit{color:var(--text-muted);font-size:11px}.lab-range{color:var(--text-muted);font-size:11px;font-family:'IBM Plex Mono',monospace}
 .lab-flag{font-weight:700;font-size:11px;text-align:center}.lab-flag.high{color:var(--flag-high)}.lab-flag.low{color:var(--flag-low)}
+.lab-insight-popup{position:absolute;left:0;right:0;top:100%;z-index:100;background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 14px;box-shadow:0 4px 16px rgba(0,0,0,.12);font-size:12px;line-height:1.5;pointer-events:none;max-width:320px}
 .lab-report-footer{background:var(--surface-alt);padding:8px 16px;border-top:1px solid var(--border);font-size:11px;color:var(--text-muted);display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace}
 
 /* Imaging Report */
@@ -154,7 +155,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .annotation-card-quote{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--text-secondary);background:var(--surface-alt);padding:6px 8px;border-radius:4px;margin:8px 0;border-left:2px solid var(--primary);line-height:1.5}
 .annotation-card-comment{font-size:12px;line-height:1.5}
 .annotation-card-meta{font-size:11px;color:var(--text-muted);margin-top:6px}
-.annotation-popover{position:fixed;z-index:1000;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 24px rgba(0,0,0,.15);padding:12px;width:320px;animation:fadeIn .15s ease;display:none}
+.annotation-popover{position:fixed;z-index:1000;background:var(--surface);border:1px solid var(--border-light);box-shadow:0 8px 32px rgba(0,0,0,.15);border-radius:12px}
 .annotation-popover.visible{display:block}
 .annotation-popover-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .annotation-popover-title{font-size:12px;font-weight:600}
@@ -163,7 +164,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .annotation-color-btn{width:24px;height:24px;border-radius:50%;border:2px solid transparent;cursor:pointer;transition:all .15s}
 .annotation-color-btn:hover{transform:scale(1.15)}
 .annotation-color-btn.selected{border-color:var(--text);box-shadow:0 0 0 2px var(--surface),0 0 0 4px var(--text)}
-.annotation-comment-input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;resize:vertical;min-height:60px}
+.annotation-comment-input{width:100%;padding:8px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;resize:vertical;min-height:60px;transition:border-color .15s}.annotation-comment-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-light)}
 .annotation-save-btn{margin-top:8px;padding:6px 16px;border:none;border-radius:6px;background:var(--primary);color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif}.annotation-save-btn:hover{background:var(--primary-dark)}
 .annotation-toolbar{padding:10px 16px;background:var(--surface-alt);border-bottom:1px solid var(--border-light);display:flex;align-items:center;gap:12px;font-size:12px;color:var(--text-secondary)}
 
@@ -172,20 +173,20 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .btn-secondary{padding:10px 20px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--surface);color:var(--text-secondary);font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .15s}.btn-secondary:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-light)}
 .score-banner{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;background:linear-gradient(135deg,#EBF5FB,#E8F8F5);border-radius:12px;margin-bottom:20px;border:1.5px solid #AED6F1;box-shadow:0 2px 10px rgba(40,116,166,.1)}
 .score-number{font-size:32px;font-weight:800;color:var(--primary-dark);font-family:'IBM Plex Mono',monospace;line-height:1}
-.score-label{font-size:12px;color:var(--primary);font-weight:600;text-transform:uppercase}
+.score-label{font-size:10px;color:var(--primary);font-weight:800;text-transform:uppercase;letter-spacing:.1em}
 .grade-input{width:76px;text-align:center;padding:6px 10px;border-radius:6px;border:1.5px solid var(--border);font-size:15px;font-family:'IBM Plex Mono',monospace;text-align:center;transition:border-color .15s,box-shadow .15s}.grade-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.12);outline:none}
-.comment-input{width:100%;padding:4px 8px;border-radius:4px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
-.grade-total-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:linear-gradient(135deg,#EBF5FB,#E0F2F1);border-radius:var(--radius);border:1px solid #B2DFDB}
+.comment-input{width:100%;padding:6px 8px;border-radius:6px;border:1.5px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif;transition:border-color .15s}.comment-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px var(--primary-light)}
+.grade-total-bar{margin-top:16px;display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:linear-gradient(135deg,#EBF5FB,#E0F2F1);border-radius:10px;border:1.5px solid #B2DFDB;box-shadow:0 2px 8px rgba(0,135,123,.08)}
 .overall-textarea{width:100%;min-height:120px;padding:12px 14px;border-radius:var(--radius);border:1.5px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;line-height:1.6;resize:vertical;transition:border-color .15s,box-shadow .15s}.overall-textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.08);outline:none}
 .assign-row{display:flex;gap:8px;margin-bottom:20px}
-.assign-input{flex:1;padding:10px 14px;border-radius:var(--radius);border:1px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif}
-.btn-assign{padding:10px 20px;border-radius:var(--radius);border:none;background:var(--primary);color:#fff;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer}
+.assign-input{flex:1;padding:10px 14px;border-radius:var(--radius);border:1.5px solid var(--border);font-size:16px;font-family:'DM Sans',sans-serif;transition:border-color .15s}.assign-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.btn-assign{padding:10px 20px;border-radius:var(--radius);border:none;background:var(--primary);color:#fff;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;box-shadow:0 2px 6px rgba(40,116,166,.2);transition:all .15s}.btn-assign:hover{background:var(--primary-dark);box-shadow:0 4px 12px rgba(40,116,166,.25)}
 .student-card{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-radius:var(--radius);border:1px solid var(--border-light);background:var(--surface-alt);margin-bottom:8px;transition:border-color .15s}.student-card:hover{border-color:var(--primary)}
 .btn-remove{padding:4px 10px;border-radius:4px;border:1px solid var(--border);background:transparent;font-size:11px;color:var(--text-secondary);cursor:pointer;font-family:'DM Sans',sans-serif}.btn-remove:hover{background:var(--danger-light);color:var(--danger);border-color:var(--danger)}
 .submission-card{padding:12px 16px;border-radius:var(--radius);cursor:pointer;border:1px solid var(--border-light);background:var(--surface);display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;transition:all .2s}
 .submission-card:hover{border-color:var(--primary);background:#F0F7FF;transform:translateX(2px)}.submission-card.selected{border-color:var(--primary);background:var(--primary-light);box-shadow:0 2px 8px rgba(40,116,166,.15);border-left:4px solid var(--primary)}
 .empty-state{text-align:center;padding:36px 20px;color:var(--text-muted);font-size:13px;line-height:1.6}
-.week-select{padding:6px 10px;border-radius:6px;border:1px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif}
+.week-select{padding:6px 10px;border-radius:6px;border:1.5px solid var(--border);font-size:12px;font-family:'DM Sans',sans-serif;transition:border-color .15s}.week-select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
 .doc-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
 .word-count{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono',monospace;font-weight:700;transition:color .4s ease;letter-spacing:.02em}
 .toast{position:fixed;bottom:28px;right:24px;padding:12px 20px;background:var(--accent);color:#fff;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:1000;opacity:0;transform:translateY(8px);pointer-events:none;transition:opacity .25s ease,transform .25s ease}.toast.visible{opacity:1;transform:translateY(0);pointer-events:auto}
@@ -2407,7 +2408,7 @@ function renderDocumentationOnly() {
     return '<div class="note-section"><div class="note-section-header">▸ ' + esc(sec.label) + '</div>'
       + '<textarea class="note-field" id="field-' + sec.id + '" placeholder="' + esc(sec.placeholder||'') + '" ' 
       + 'oninput="saveField(\'' + sec.id + '\')" rows="4">' + esc(noteFields[sec.id]||'') + '</textarea></div>';
-  }).join('') : '<div class="empty-state">No template loaded</div>';
+  }).join('') : '<div style="text-align:center;padding:24px 16px;color:var(--text-muted)"><div style="font-size:28px;margin-bottom:8px">📄</div><div style="font-size:13px;font-weight:600">No note template loaded</div></div>';
 
   var submitted = S.submitted;
   var sb = submitted
@@ -2521,7 +2522,7 @@ function renderFeedback(){
     if(!S.annotations||!S.annotations.length){try{var _an=localStorage.getItem('annotations-'+_asUid+'-'+_week);if(_an)S.annotations=JSON.parse(_an);}catch(e){}}
     if(_sub&&!S.noteFields.hpi&&_sub.fields){S.noteFields=_sub.fields;S.submitted=true;S.encounterWeek=_week;}
   }
-  if(!S.submitted)return sectionCard("Faculty Feedback — "+S.encounterWeek,I.star,'<div class="empty-state">'+I.fileText+'<p>Submit your documentation first.</p></div>');
+  if(!S.submitted)return sectionCard("Faculty Feedback — "+S.encounterWeek,I.star,'<div style="text-align:center;padding:32px 20px"><div style="font-size:36px;margin-bottom:10px">📝</div><div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:6px">Write Your Note First</div><div style="font-size:12px;color:var(--text-secondary);line-height:1.6">Go to <strong>Write Note</strong> and submit your documentation. Faculty feedback will appear here once your attending reviews it.</div><button style="margin-top:14px;padding:9px 18px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer" onclick="switchTab(\'documentation\')">→ Write Note</button></div>');
   if(!S.feedback&&S.annotations.length===0)return sectionCard("Faculty Feedback — "+S.encounterWeek,I.star,'<div style="text-align:center;padding:32px 20px"><div style="font-size:40px;margin-bottom:12px">⏳</div><div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">Submitted — Awaiting Faculty Review</div><div style="font-size:13px;color:var(--text-secondary);max-width:320px;margin:0 auto 16px;line-height:1.6">Your note has been submitted. While you wait, review your AI feedback — it scores your note by criterion and gives you specific suggestions to improve.</div><button type="button" style="padding:10px 20px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer" onclick="switchTab(\'autofeedback\')">→ View AI Feedback</button></div>');
   let h="";
   if(S.feedback){const fb=S.feedback;var _pctGrade=Math.round(fb.totalScore/fb.maxScore*100);var _grd=_pctGrade>=90?'A':_pctGrade>=80?'B':_pctGrade>=70?'C':_pctGrade>=60?'D':'F';var _gCol=_pctGrade>=80?'var(--accent)':_pctGrade>=70?'var(--primary)':_pctGrade>=60?'var(--warning)':'var(--danger)';h+='<div class="score-banner"><div><div class="score-label">Score</div><div class="score-number" style="color:'+_gCol+'">'+fb.totalScore+' / '+fb.maxScore+' <span style="font-size:16px;opacity:.7">('+_grd+')</span></div></div><div style="text-align:right"><div style="font-size:22px;font-weight:900;color:'+_gCol+';font-family:\'IBM Plex Mono\',monospace">'+_grd+'</div><div style="font-size:11px;color:var(--text-muted)">'+esc(fb.grader)+' · '+new Date(fb.timestamp).toLocaleDateString()+'</div></div></div>';h+=tableHTML(["Criterion","Score","Comment"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+(fb.scores[r.id]||"--")+' / '+r.max+'</td><td class="td-muted">'+(fb.comments[r.id]?esc(fb.comments[r.id]):"--")+'</td></tr>'));if(fb.overallComment)h+='<div style="padding:16px;background:var(--surface-alt);border-radius:var(--radius);border-left:3px solid var(--primary);margin-top:16px"><div style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;margin-bottom:6px">Overall Faculty Comments</div><div style="font-size:13px;line-height:1.7;white-space:pre-line">'+esc(fb.overallComment)+'</div></div>'}
@@ -2691,7 +2692,7 @@ function render(){
     {id:"history",label:"FH / SH",icon:I.home}
   );
   if(role==="student"){tabs.push({id:"interview",label:"Patient Interview",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'},{id:"documentation",label:"Documentation",icon:I.fileText},{id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'},{id:"feedback",label:"Feedback",icon:I.star})}
-  if(role==="faculty"||role==="admin"){tabs.push({id:"grading",label:"Grading",icon:I.check});tabs.push({id:"program_settings",label:"Program Settings",icon:I.settings})}
+  if(role==="faculty"||role==="admin"){tabs.push({id:"grading",label:"Grade & Review",icon:I.check});tabs.push({id:"program_settings",label:"Program Settings",icon:I.settings})}
   if(role==="admin"){tabs.push({id:"admin",label:"Admin Panel",icon:I.settings})}
 
   const sb=tabs.map(t=>{ var _badge=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):''; var _dim=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):''; var _b='<button type="button" '+(SIDEBAR_TOOLTIPS&&SIDEBAR_TOOLTIPS[t.id]?'data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'" ':'')+'class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+_dim+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge+'</button>'; return _b; }).join("")+(window.RDXGuide?RDXGuide.renderSidebarToggle():'');
@@ -2858,7 +2859,7 @@ function renderCoachDx(){
   if(S.currentUser && S.currentUser._demo){
     return '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;min-height:400px">'
       +'<div style="font-size:48px;margin-bottom:20px">💬</div>'
-      +'<h2 style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:10px">CoachDx -- AI Attending</h2>'
+      +'<h2 style="font-size:22px;font-weight:800;color:var(--text);margin-bottom:10px">CoachDx — AI Attending</h2>'
       +'<p style="font-size:14px;color:var(--text-secondary);line-height:1.7;max-width:420px;margin-bottom:8px">CoachDx is a Socratic AI coach that questions your reasoning in real time. <em>"Why did you anchor on PE before calculating the Wells score?"</em></p>'
       +'<p style="font-size:13px;color:var(--text-muted);max-width:400px;margin-bottom:28px">Available on free and Pro accounts. Create a free account to unlock CoachDx, spaced repetition, and your progress dashboard.</p>'
       +'<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">'
@@ -5415,7 +5416,7 @@ render = function(){
   fn.autofeedback = renderAutoFeedback;
   fn.handoff = renderHandoff;
   fn.coach = renderCoachDx;
-  fn.crt = function(){ var _sw=(typeof renderAISwitcher==='function')?renderAISwitcher('crt'):''; return _sw + ((window.CRTChart && CRTChart.renderTab) ? CRTChart.renderTab() : '<p>Clinical Reasoning Trainer loading...</p>'); };
+  fn.crt = function(){ var _sw=(typeof renderAISwitcher==='function')?renderAISwitcher('crt'):''; return _sw + ((window.CRTChart && CRTChart.renderTab) ? CRTChart.renderTab() : '<div style="text-align:center;padding:40px 20px;color:var(--text-muted)"><div style="font-size:32px;margin-bottom:10px">⚡</div><div style="font-size:14px;font-weight:600;color:var(--text)">Loading Clinical Reasoning Trainer…</div></div>'); };
   
   if(role==="student"){
     fn.problems = renderProblemsInteractive;
@@ -5513,6 +5514,9 @@ function renderLabsInteractive(){
 function renderImagingInteractive(){
   let html = renderImaging();
   const completedStudentImgs = S.imgOrders.filter(o=>o.resulted);
+  if(!completedStudentImgs.length && !S.imgOrders.filter(o=>!o.resulted).length){
+    html += '<div style=\"margin-top:16px;padding:12px 16px;background:var(--surface-alt);border-radius:10px;border:1px dashed var(--border);font-size:12px;color:var(--text-muted)\">🩻 Use <strong>Order Imaging</strong> above to order X-rays, CT, MRI and more.</div>';
+  }
   if(completedStudentImgs.length){
     html += '<div style="margin-top:24px;padding-top:16px;border-top:2px dashed var(--border)"><div style="font-size:14px;font-weight:700;color:var(--primary);margin-bottom:12px">'+I.image+' Your Ordered Imaging Results</div>';
     completedStudentImgs.forEach((o,idx)=>{

@@ -606,26 +606,26 @@ window.RDXOnboarding = {
   _steps: [
     {
       icon: '📋',
-      title: 'Step 1 — Read the Chart',
+      title: 'Step 1 — Review the Chart',
       body: 'Start with the patient\'s Demographics, then work through Problems, Medications, Allergies, Labs, and Imaging. Get to know your patient before you see them — just like in a real clinical setting.',
       cta: 'Got it →',
     },
     {
       icon: '🗣️',
       title: 'Step 2 — Interview & Examine',
-      body: 'Use the <strong>Documentation</strong> tab to write your History of Present Illness. The patient\'s story is there to help you. You can also order labs and imaging under <strong>Orders</strong>.',
+      body: 'Use the <strong>Write Note</strong> tab to write your H&P. Interview the patient first, then document. Use <strong>Order Tests</strong> to order labs and imaging. The patient\'s story is there to help you. You can also order labs and imaging under <strong>Orders</strong>.',
       cta: 'Next →',
     },
     {
       icon: '🩺',
       title: 'Step 3 — Build Your Assessment',
-      body: 'Under <strong>Documentation</strong>, write your Assessment & Plan. List the most likely diagnosis, your differential, and your reasoning. Use the rubric panel (below the note) to see how you\'ll be graded.',
+      body: 'In <strong>Write Note</strong>, your Assessment & Plan is most important — state your leading diagnosis, differential, and clinical reasoning. The rubric below the note shows how you'll be graded. Use the rubric panel (below the note) to see how you\'ll be graded.',
       cta: 'Next →',
     },
     {
       icon: '🤖',
       title: 'Step 4 — Get Feedback',
-      body: 'After submitting, click <strong>Doc Assessment</strong> to get instant AI feedback on your note. Or talk through your reasoning with <strong>CoachDx</strong> — your AI attending who asks Socratic questions instead of giving you the answer.',
+      body: 'After submitting your note, <strong>AI Feedback</strong> fires automatically with criterion-by-criterion scores. Talk through your reasoning with <strong>CoachDx</strong> — your AI attending who asks questions instead of giving you the answer.',
       cta: 'Start the Case →',
     },
   ],
