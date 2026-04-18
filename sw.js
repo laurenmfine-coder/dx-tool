@@ -1,24 +1,67 @@
-/* sw.js — ReasonDx Service Worker */
-const CACHE_NAME = 'rdx-v6';
-const PRECACHE = ['/index.html', '/css/rdx-theme.css', '/mobile.css'];
+// ReasonDx Service Worker — shell caching + offline fallback
+const CACHE_NAME = 'rdx-shell-v1';
+const SHELL_ASSETS = [
+  '/',
+  '/browse.html',
+  '/index.html',
+  '/simulation-engine.html',
+  '/dashboard.html',
+  '/js/nav-global.js',
+  '/mobile.css',
+  '/offline.html'
+];
 
-self.addEventListener('install', e => {
-  e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(PRECACHE)).then(() => self.skipWaiting()));
+self.addEventListener('install', function(e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(SHELL_ASSETS.filter(function(url) {
+        return url !== '/offline.html'; // optional, won't fail if missing
+      }));
+    }).catch(function() {}) // Never block install
+  );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys =>
-    Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-  ).then(() => self.clients.claim()));
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    caches.keys().then(function(keys) {
+      return Promise.all(keys.filter(function(k) { return k !== CACHE_NAME; })
+        .map(function(k) { return caches.delete(k); }));
+    })
+  );
+  self.clients.claim();
 });
 
-self.addEventListener('fetch', e => {
+self.addEventListener('fetch', function(e) {
+  // Only handle GET requests for same-origin HTML/JS/CSS
   if (e.request.method !== 'GET') return;
+  var url = new URL(e.request.url);
+  if (url.origin !== self.location.origin) return;
+
+  // Network-first for API calls, cache-first for assets
+  var isAPI = url.pathname.includes('/rest/v1') || url.pathname.includes('/functions/v1') || url.hostname.includes('supabase') || url.hostname.includes('anthropic');
+  if (isAPI) return; // Let API calls through unmodified
+
   e.respondWith(
-    fetch(e.request).then(r => {
-      const clone = r.clone();
-      caches.open(CACHE_NAME).then(c => c.put(e.request, clone));
-      return r;
-    }).catch(() => caches.match(e.request))
+    fetch(e.request).then(function(response) {
+      // Cache successful HTML responses
+      if (response.ok && (e.request.headers.get('accept') || '').includes('text/html')) {
+        var clone = response.clone();
+        caches.open(CACHE_NAME).then(function(cache) { cache.put(e.request, clone); });
+      }
+      return response;
+    }).catch(function() {
+      // Network failed — try cache
+      return caches.match(e.request).then(function(cached) {
+        if (cached) return cached;
+        // Return offline page for HTML requests
+        if ((e.request.headers.get('accept') || '').includes('text/html')) {
+          return caches.match('/offline.html') || new Response(
+            '<html><body style="font-family:sans-serif;text-align:center;padding:60px"><h2>You\'re offline</h2><p>ReasonDx needs a connection. Your completed cases are saved locally.</p><a href="/browse.html">Try again</a></body></html>',
+            { headers: { 'Content-Type': 'text/html' } }
+          );
+        }
+      });
+    })
   );
 });

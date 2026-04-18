@@ -5638,7 +5638,7 @@ render = function(){
     var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):''; 
     var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
     var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
-    return '<button type="button"'+_tip+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+pinned+' '+_dim2+'" data-priority="'+pri+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+    return '<button type="button"'+_tip+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+pinned+' '+_dim2+'" data-priority="'+pri+'" aria-label="'+t.label+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
   }).join('');
   if (typeof wrapSidebarAISection === 'function') sb = wrapSidebarAISection(sb);
   if (window.RDXGuide) sb += RDXGuide.renderSidebarToggle();
