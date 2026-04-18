@@ -1053,6 +1053,15 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
 <script src="js/rdx-semantic-drift.js" defer></script>
 </head>
 <body>
+<script>
+// Immediate redirect — runs before anything else loads
+(function() {
+  var p = new URLSearchParams(window.location.search);
+  if (!p.get('case') && !p.get('cx')) {
+    window.location.replace('/browse.html?mode=practice');
+  }
+})();
+</script>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;align-items:center;justify-content:space-between;font-family:'DM Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
