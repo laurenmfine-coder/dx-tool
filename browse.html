@@ -52,7 +52,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .stat{flex:1;padding:20px 24px;border-right:1px solid rgba(255,255,255,.08);cursor:pointer;transition:background .18s}
 .stat:last-child{border-right:none}
 .stat:hover{background:rgba(255,255,255,.04)}
-.stat.active{background:rgba(40,116,166,.25);border-bottom:2px solid #3B8FCE}
+.stat.active{background:rgba(40,116,166,.35);border-bottom:3px solid #60A5FA;color:#fff}.stat.active .stat-label{color:#fff!important;font-weight:700}.stat.active .stat-num{color:#60A5FA!important}
 .stat-num{font-family:"DM Serif Display",Georgia,serif;font-size:1.9rem;color:#fff;line-height:1;margin-bottom:4px}
 .stat-label{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .stat-desc{font-size:.75rem;color:rgba(255,255,255,.3);margin-top:2px;line-height:1.3}
@@ -486,24 +486,25 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
           <div class="stat-label">Learn</div>
           <div class="stat-desc">Pathophysiology</div>
         </div>
-        <a href="/cognitive-portrait.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+        <a href="/cognitive-portrait.html" class="stat" title="Opens Portrait page" style="text-decoration:none;border-left:2px solid rgba(255,255,255,0.2);opacity:0.85;position:relative" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <div style="position:absolute;top:4px;left:8px;font-size:8px;font-weight:700;color:rgba(255,255,255,0.35);text-transform:uppercase;letter-spacing:.1em">Tools</div>
           <div class="stat-num" style="color:#85C1E9;font-size:28px">🧠</div>
-          <div class="stat-label" style="color:rgba(133,193,233,.8)">Portrait</div>
+          <div class="stat-label" style="color:rgba(133,193,233,.8)">Portrait ↗</div>
           <div class="stat-desc">EPA &amp; LCME evidence</div>
         </a>
-        <a href="/emr-skills.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+        <a href="/emr-skills.html" class="stat" title="Opens Skills Lab page" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.15);opacity:0.85;position:relative" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
           <div class="stat-num" style="color:#34D399;font-size:28px">🎯</div>
-          <div class="stat-label" style="color:rgba(52,211,153,.8)">Skills Lab</div>
+          <div class="stat-label" style="color:rgba(52,211,153,.8)">Skills Lab ↗</div>
           <div class="stat-desc">3 focused stations</div>
         </a>
-        <a href="/faculty.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+        <a href="/faculty.html" class="stat" title="Opens Faculty page" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.15);opacity:0.85;position:relative" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
           <div class="stat-num" style="color:#F59E0B;font-size:28px">👩‍⚕️</div>
-          <div class="stat-label" style="color:rgba(245,158,11,.8)">Faculty</div>
+          <div class="stat-label" style="color:rgba(245,158,11,.8)">Faculty ↗</div>
           <div class="stat-desc">Cohort analytics</div>
         </a>
-        <a href="/ilp.html" class="stat" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.1)">
+        <a href="/ilp.html" class="stat" title="Opens ILP page" style="text-decoration:none;border-left:1px solid rgba(255,255,255,0.15);opacity:0.85;position:relative" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
           <div class="stat-num" style="color:#10B981;font-size:28px">🎯</div>
-          <div class="stat-label" style="color:rgba(16,185,129,.8)">ILP</div>
+          <div class="stat-label" style="color:rgba(16,185,129,.8)">ILP ↗</div>
           <div class="stat-desc">Learning plan</div>
         </a>
       </div>
@@ -561,7 +562,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   </div>
   
   <!-- ── 🎯 START HERE Section ── -->
-  <div style="
+  <div id="start-here-section" style="
     background: linear-gradient(135deg, #1a3a5c 0%, #2874A6 100%);
     border: 2px solid rgba(40,116,166,0.4);
     border-radius: 16px;
@@ -689,12 +690,16 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       
       <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.15)">
         <p style="font-size:13px;color:rgba(255,255,255,0.6);margin:0">
-          Or browse all <strong style="color:#85C1E9">394 cases</strong> below by specialty, difficulty, or search
+          Or browse all <strong style="color:#85C1E9" id="browse-count-text">394 cases</strong> <span id="browse-mode-label">below by specialty, difficulty, or search</span>
         </p>
       </div>
     </div>
   </div>
   
+  <div id="mode-header" style="display:none;padding:0 0 16px 0">
+    <h2 id="sectionTitle" style="font-size:20px;font-weight:700;color:#fff;margin:0 0 4px 0"></h2>
+    <p id="sectionMeta" style="font-size:13px;color:rgba(255,255,255,0.6);margin:0"></p>
+  </div>
   <div class="filters">
     <input type="text" class="search" id="searchInput" placeholder="Search by presentation, symptom, or diagnosis..." oninput="handleSearch()" aria-label="Search ReasonDx content">
   </div>
@@ -830,7 +835,27 @@ var CAT_SETS={simulate:['cardiovascular','pulmonary','neurologic','infectious','
 var CAT_LABELS={cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General',genetics:'Genetics'};
 var SECTION_COPY={simulate:{title:'Simulate &mdash; <em>AI Patient Encounters</em>',meta:'Adaptive 10-phase clinical simulation'},practice:{title:'Practice &mdash; <em>Virtual EMR</em>',meta:'Chart review · Orders · Documentation · Feedback'},coach:{title:'Coach &mdash; <em>Socratic Reasoning</em>',meta:'Attending-style Socratic dialogue across 25 categories'},learn:{title:'Learn &mdash; <em>Pathophysiology Modules</em>',meta:'Mechanism-first modules with AI attending'}};
 var PLACEHOLDERS={simulate:'Search by chief complaint — chest pain, dyspnea, fever...',practice:'Search cases by chief complaint or diagnosis...',coach:'Search topics — asthma, DDx, sepsis, bias...',learn:'Search pathophysiology modules...'};
-function setMode(m){MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');document.querySelector('.fbtn[data-cat="all"]').classList.add('on');render();}
+function setMode(m){MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});
+  // Hide start-here section when switching away from simulate
+  var startHere = document.getElementById('start-here-section');
+  if (startHere) startHere.style.display = (m === 'simulate') ? '' : 'none';
+  // Show mode header for non-simulate modes
+  var modeHeader = document.getElementById('mode-header');
+  if (modeHeader) modeHeader.style.display = (m === 'simulate') ? 'none' : 'block';
+  // Scroll to the grid
+  var grid = document.getElementById('grid');
+  if (grid && m !== 'simulate') setTimeout(function(){ grid.scrollIntoView({behavior:'smooth',block:'start'}); }, 100);
+  // Update browse-all label
+  var modeLabels = {simulate:'cases',practice:'EMR cases',coach:'coaching topics',learn:'pathophysiology modules'};
+  var countEl = document.getElementById('browse-count-text');
+  var labelEl = document.getElementById('browse-mode-label');
+  if (labelEl) {
+    var modeDesc = {simulate:'below by specialty, difficulty, or search',
+                    practice:'— full chart, orders, and documentation',
+                    coach:'— Socratic reasoning across all specialties',
+                    learn:'— mechanism-first pathophysiology'};
+    labelEl.textContent = modeDesc[m] || 'below';
+  }});var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');document.querySelector('.fbtn[data-cat="all"]').classList.add('on');render();}
 function setCat(c){CAT=c;document.querySelectorAll('.fbtn').forEach(function(b){b.classList.toggle('on',b.dataset.cat===c);});render();}
 function getData(){if(MODE==='simulate') return SIM_FEATURED.concat(SIM_DATA);if(MODE==='practice') return PRAC_DATA;if(MODE==='coach') return COACH_DATA;if(MODE==='learn') return LEARN_DATA;return [];}
 function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var data=getData();var filtered=data.filter(function(c){if(CAT!=='all'&&c.cat!==CAT) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
