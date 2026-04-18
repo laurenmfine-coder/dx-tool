@@ -2105,6 +2105,10 @@ const S={
 if (URL_SETTING) {
   S.clinicalSetting = URL_SETTING;
   try { sessionStorage.setItem('rdx-last-setting', URL_SETTING); } catch(e) {}
+} else if (CASE_ID && !S.clinicalSetting) {
+  // Case loaded directly with no setting param — default to ED
+  S.clinicalSetting = 'ed';
+  try { sessionStorage.setItem('rdx-last-setting', 'ed'); } catch(e) {}
 } else if (!CASE_ID) {
   // Returning user: restore last setting so they skip the landing page
   try { var _lastSetting = sessionStorage.getItem('rdx-last-setting'); if (_lastSetting) { S.clinicalSetting = _lastSetting; } } catch(e) {}
@@ -2675,6 +2679,8 @@ function render(){
   if(!S.currentUser){app.innerHTML=renderAuth();return}
   // If no setting chosen yet and no case loaded, show setting selector
   if(!S.clinicalSetting && !CASE_ID){app.innerHTML=renderSettingSelector();return}
+  // If launched directly with a case but no setting, default to ED
+  if(!S.clinicalSetting && CASE_ID){S.clinicalSetting='ed';}
   const role=S.currentUser.role;
   const tabs=[
     {id:"demographics",label:"Patient Info",icon:I.user},
