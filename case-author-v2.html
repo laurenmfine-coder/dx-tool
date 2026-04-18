@@ -100,6 +100,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);hei
 /* Similarity warning */
 .sim-warn{padding:10px 14px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);border-radius:8px;font-size:12px;color:var(--gold);margin-bottom:10px}
 </style>
+<script>
+// Auth gate — must be logged in to access
+(function() {
+  try {
+    var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    if (!u || !u.email) { window.location.replace('/auth/login.html?next=' + encodeURIComponent(location.pathname)); }
+  } catch(e) { window.location.replace('/auth/login.html'); }
+})();
+</script>
 </head>
 <body>
 

@@ -436,6 +436,15 @@
     .output-tabs { padding: 0 12px; }
   }
 </style>
+<script>
+// Auth gate — must be logged in to access
+(function() {
+  try {
+    var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    if (!u || !u.email) { window.location.replace('/auth/login.html?next=' + encodeURIComponent(location.pathname)); }
+  } catch(e) { window.location.replace('/auth/login.html'); }
+})();
+</script>
 </head>
 <body>
 

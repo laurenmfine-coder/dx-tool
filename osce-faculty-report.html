@@ -87,6 +87,14 @@
   .trend-row { display: flex; gap: 3px; align-items: flex-end; height: 28px; }
   .trend-bar { width: 8px; border-radius: 2px 2px 0 0; background: var(--primary); opacity: .7; min-height: 4px; }
 </style>
+<script>
+(function() {
+  try {
+    var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    if (!u || !u.email) { window.location.replace('/auth/login.html'); }
+  } catch(e) { window.location.replace('/auth/login.html'); }
+})();
+</script>
 </head>
 <body>
 

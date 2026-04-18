@@ -91,7 +91,8 @@
 
   function buildNav(userEmail) {
     const authActions = userEmail
-      ? `<span class="rdx-user-email">${userEmail}</span>
+      ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/browse.html">Browse</a>
+         <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/dashboard.html">Dashboard</a>
          <button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()">Sign Out</button>`
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html">Sign In</a>
          <a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/register.html">Sign Up</a>`;

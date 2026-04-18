@@ -358,6 +358,14 @@
     .stats-row { grid-template-columns: 1fr 1fr; }
   }
 </style>
+<script>
+(function() {
+  try {
+    var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    if (!u || !u.email) { window.location.replace('/auth/login.html'); }
+  } catch(e) { window.location.replace('/auth/login.html'); }
+})();
+</script>
 </head>
 <body>
 
