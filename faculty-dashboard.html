@@ -603,7 +603,23 @@ function renderSubmissions() {
   var pending = FAC.submissions.filter(function(s){ return !hasFeedback(s.studentName, s.week); });
   var graded  = FAC.submissions.filter(function(s){ return  hasFeedback(s.studentName, s.week); });
 
-  var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">📝 Submission Queue</div><div class="fac-section-sub">' + pending.length + ' pending · ' + graded.length + ' graded</div></div></div>';
+  // Cohort health summary cards
+  var _inactive = FAC.students ? FAC.students.filter(function(s){
+    var last = s.lastActive || s.last_active_at;
+    if (!last) return false;
+    return (Date.now() - new Date(last).getTime()) > 7*24*60*60*1000;
+  }).length : 0;
+  var _avgCases = 0;
+  if (FAC.students && FAC.students.length) {
+    _avgCases = Math.round(FAC.students.reduce(function(t,s){ return t+(s.totalCases||s.total_cases_completed||0);},0)/FAC.students.length);
+  }
+  var html = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-bottom:20px">';
+  html += '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px"><div style="font-size:24px;font-weight:800;color:' + (pending.length > 0 ? '#DC2626':'#059669') + '">' + pending.length + '</div><div style="font-size:11px;font-weight:600;color:var(--text-muted)">Awaiting review</div></div>';
+  html += '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px"><div style="font-size:24px;font-weight:800;color:' + (_inactive > 0 ? '#D97706':'#059669') + '">' + _inactive + '</div><div style="font-size:11px;font-weight:600;color:var(--text-muted)">Inactive 7+ days</div></div>';
+  html += '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px"><div style="font-size:24px;font-weight:800;color:#2874A6">' + (FAC.students?FAC.students.length:0) + '</div><div style="font-size:11px;font-weight:600;color:var(--text-muted)">Enrolled students</div></div>';
+  html += '<div style="background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px"><div style="font-size:24px;font-weight:800;color:#2874A6">' + _avgCases + '</div><div style="font-size:11px;font-weight:600;color:var(--text-muted)">Avg cases / student</div></div>';
+  html += '</div>';
+  html += '<div class="fac-section-hdr"><div><div class="fac-section-title">📝 Submission Queue</div><div class="fac-section-sub">' + pending.length + ' pending · ' + graded.length + ' graded</div></div></div>';
   html += '<div class="fac-tabs"><button class="fac-tab active" onclick="filterSubs(\'pending\',this)">Needs Grading (' + pending.length + ')</button><button class="fac-tab" onclick="filterSubs(\'graded\',this)">Graded (' + graded.length + ')</button><button class="fac-tab" onclick="filterSubs(\'all\',this)">All (' + FAC.submissions.length + ')</button></div>';
   html += '<div id="subsList">';
   html += renderSubsList(pending);
@@ -2670,6 +2686,15 @@ function openStudentProfile(username, displayName) {
     });
     body += '</div>';
   }
+  body += '</div>';
+
+  // ── Send message button ──────────────────────────────────
+  var _mailHref = 'mailto:' + encodeURIComponent(username||'') +
+    '?subject=' + encodeURIComponent('ReasonDx — Feedback for ' + (displayName||'')) +
+    '&body=' + encodeURIComponent('Hi ' + ((displayName||'').split(' ')[0]||'') + ',\n\nI wanted to share some feedback on your recent ReasonDx work:\n\n');
+  body += '<div style="border-top:1px solid #F1F5F9;padding-top:16px;margin-top:4px;display:flex;gap:8px;flex-wrap:wrap">';
+  body += '<a href="' + _mailHref + '" style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:#F0F7FC;border:1px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:600;color:#1B4F72;text-decoration:none">✉ Send message</a>';
+  body += '<button onclick="closeStudentProfile()" style="padding:9px 16px;background:#F1F5F9;border:none;border-radius:8px;font-size:13px;font-weight:600;color:#64748B;cursor:pointer;font-family:inherit">Close</button>';
   body += '</div>';
 
   document.getElementById('rdx-stp-body').innerHTML = body;

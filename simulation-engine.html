@@ -1473,6 +1473,49 @@ function enterPhase(phase) {
         '</div>';
       var msgs = document.getElementById('chatMessages');
       if (msgs) { msgs.appendChild(actDiv); msgs.scrollTop = msgs.scrollHeight; }
+
+      // Show "cases like this one" suggestion grid
+      setTimeout(function() {
+        try {
+          var _cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
+          var _cat = caseData && caseData.category ? caseData.category : '';
+          var _acuity = caseData && caseData.acuity ? caseData.acuity : 2;
+          var _completed = JSON.parse(localStorage.getItem('rdx-completed-cases') || '[]');
+
+          // Find similar cases from CRT_INDEX
+          var similar = [];
+          if (window.CRT_INDEX) {
+            Object.entries(CRT_INDEX).forEach(function(e) {
+              var id = e[0], c = e[1];
+              if (id === _cid) return;
+              if (_completed.indexOf(id) >= 0) return;
+              var sameCat = c.category && c.category.toLowerCase() === _cat.toLowerCase();
+              var closeAcuity = Math.abs((c.acuity||3) - _acuity) <= 1;
+              if (sameCat && closeAcuity) similar.push({ id: id, c: c });
+            });
+          }
+          similar = similar.slice(0, 3);
+          if (similar.length === 0) return;
+
+          var gridDiv = document.createElement('div');
+          gridDiv.className = 'chat-msg msg-system';
+          gridDiv.style.maxWidth = '96%';
+          var gridHtml = '<div style="font-size:12px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">More cases in this area</div>';
+          gridHtml += '<div style="display:flex;flex-direction:column;gap:8px">';
+          similar.forEach(function(s) {
+            var timeEst = s.c.acuity === 1 ? '15-20 min' : s.c.acuity === 2 ? '12-15 min' : '10-12 min';
+            gridHtml += '<a href="/simulation-engine.html?case=' + encodeURIComponent(s.id) + '" style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;text-decoration:none;color:#1E293B;transition:border-color .15s" onmouseover="this.style.borderColor='#2874A6'" onmouseout="this.style.borderColor='#E2E8F0'">';
+            gridHtml += '<div><div style="font-size:13px;font-weight:600">' + (s.c.chiefComplaint || s.id) + '</div>';
+            gridHtml += '<div style="font-size:11px;color:#94A3B8;margin-top:2px">' + (s.c.diagnosis || '') + '</div></div>';
+            gridHtml += '<span style="font-size:11px;color:#94A3B8;white-space:nowrap">⏱ ' + timeEst + '</span>';
+            gridHtml += '</a>';
+          });
+          gridHtml += '</div>';
+          gridDiv.innerHTML = gridHtml;
+          var msgs2 = document.getElementById('chatMessages');
+          if (msgs2) { msgs2.appendChild(gridDiv); msgs2.scrollTop = msgs2.scrollHeight; }
+        } catch(e) {}
+      }, 1200);
     }, 600);
 
     // ── COMMUNICATION QUALITY REPORT ──
