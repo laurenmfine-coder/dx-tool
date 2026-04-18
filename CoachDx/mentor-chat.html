@@ -150,6 +150,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
   .input-bar{padding:12px 16px}
 }
 </style>
+
+<link rel="canonical" href="https://reasondx.com/CoachDx/mentor-chat.html">
 </head>
 <body>
 
@@ -179,6 +181,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
       <div style="font-size:10px;font-weight:700;color:var(--dim2,#94A3B8);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">⭐ Bookmarked</div>
       <div id="rdx-coach-bookmarks-list" style="display:flex;flex-wrap:wrap;gap:6px"></div>
     </div>
+
+    <!-- Resume last topic chip -->
+    <div id="rdx-coach-resume" style="display:none;padding:8px 16px;border-bottom:1px solid var(--border,#E2E8F0)"></div>
+    <script>
+    (function() {
+      try {
+        var last = JSON.parse(localStorage.getItem('rdx-coach-last-topic') || 'null');
+        if (last && last.name && last.topicId) {
+          var chip = document.getElementById('rdx-coach-resume');
+          if (!chip) return;
+          chip.style.display = 'block';
+          chip.innerHTML = '<div style="font-size:11px;font-weight:700;color:var(--dim2,#94A3B8);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Last session</div>' +
+            '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+              '<button onclick="startSession(\'' + last.name.replace(/'/g,"\'") + '\', true, \'' + last.topicId.replace(/'/g,"\'") + '\')" ' +
+              'style="display:flex;align-items:center;gap:6px;background:var(--primary-light,rgba(40,116,166,.08));color:var(--primary,#2874A6);border:1px solid rgba(40,116,166,.2);padding:5px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">' +
+              '▶ Resume: ' + last.name + '</button>' +
+              '<button onclick="document.getElementById('rdx-coach-resume').style.display='none'" ' +
+              'style="background:none;border:none;color:var(--dim,#94A3B8);font-size:16px;cursor:pointer;padding:0 4px">×</button>' +
+            '</div>';
+        }
+      } catch(e) {}
+    })();
+    </script>
 
     <div class="picker-search">
       <div class="search-box">
@@ -717,6 +742,8 @@ function startFromWelcome() {
 ======================================================= */
 async function startSession(topicName, isStructured, topicId) {
   currentTopic = { name: topicName, id: topicId || topicName.toLowerCase().replace(/\s+/g,'-'), structured: isStructured };
+  // Save as last topic for resume chip
+  try { localStorage.setItem('rdx-coach-last-topic', JSON.stringify({ name: topicName, topicId: topicId || currentTopic.id, savedAt: Date.now() })); } catch(e) {}
   messages = [];
   sessionId = 'sess_' + Date.now();
 

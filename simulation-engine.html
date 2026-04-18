@@ -60,6 +60,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .input-row input{flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius);font-family:var(--font);font-size:16px;outline:none;transition:border-color .15s} /* 16px prevents iOS auto-zoom */
 .input-row input:focus{border-color:var(--primary)}
 .input-row input:disabled{background:#f5f5f5;cursor:not-allowed}
+  .input-row input{font-size:16px}/* iOS: prevent auto-zoom on focus */
 .send-btn{padding:12px 24px;background:var(--teal);color:#fff;border:none;border-radius:var(--radius);font-family:var(--font);font-weight:600;font-size:14px;cursor:pointer;transition:filter .15s}
 .send-btn:hover{filter:brightness(1.1)}
 .send-btn:disabled{opacity:.4;cursor:not-allowed}
@@ -117,6 +118,9 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://lpwbiqpojisqgezycupw.supabase.co">
   <link rel="dns-prefetch" href="https://api.anthropic.com">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LearningResource","name":"ReasonDx Clinical Simulation","description":"AI-powered clinical reasoning practice with Dr. Patel — 394 cases across all health professions","educationalLevel":"Medical Student, Resident, Health Professional","teaches":"Clinical Reasoning, Diagnostic Reasoning, Differential Diagnosis","provider":{"@type":"Organization","name":"ReasonDx","url":"https://reasondx.com"},"isAccessibleForFree":true}
+</script>
 </head>
 <body>
 <a href="#chatMessages" style="position:absolute;top:-100px;left:0;background:#2874A6;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:10000;transition:top .15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to conversation</a>
@@ -150,7 +154,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
     <style>@media(max-width:900px){#mobilePhaseStrip{display:flex!important}}</style>
     <!-- Phase progress bar -->
     <div style="height:3px;background:rgba(40,116,166,0.12)">
-      <div id="rdx-phase-bar-fill" style="height:100%;background:#2874A6;transition:width .4s ease;width:0%"></div>
+      <div id="rdx-phase-bar-fill" style="height:100%;background:#2874A6;transition:width .4s ease;width:0%;min-width:0px;border-radius:0 2px 2px 0"></div>
     </div>
     <div class="chat-messages" id="chatMessages" aria-live="polite" aria-atomic="false" aria-label="Conversation with Dr. Patel"></div>
     <!-- DDx Chooser Panel — shown at Phases 1, 4, 6 -->
@@ -1475,7 +1479,10 @@ function enterPhase(phase) {
     
     document.getElementById('chatInput').disabled = true;
     document.getElementById('sendBtn').disabled = true;
-    addMessage('system', '✅ Case complete! Review your feedback below.');
+    var _caseTitleMsg = (caseData && caseData.presentation && caseData.presentation.chiefComplaint) ? caseData.presentation.chiefComplaint : 'this case';
+    addMessage('system', '✅ Great work on ' + _caseTitleMsg + '! Scroll down for your teaching debrief.');
+    // Haptic feedback on mobile
+    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
     // Show post-case action buttons
     setTimeout(function() {
       var cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
@@ -1492,6 +1499,29 @@ function enterPhase(phase) {
         '</div>';
       var msgs = document.getElementById('chatMessages');
       if (msgs) { msgs.appendChild(actDiv); msgs.scrollTop = msgs.scrollHeight; }
+
+      // Star rating widget
+      setTimeout(function() {
+        try {
+          var _rateDiv = document.createElement('div');
+          _rateDiv.className = 'chat-msg msg-system';
+          _rateDiv.style.maxWidth = '96%';
+          var _cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
+          _rateDiv.innerHTML =
+            '<div style="font-size:12px;font-weight:600;color:#64748B;margin-bottom:8px">How was this case?</div>' +
+            '<div style="display:flex;gap:6px;align-items:center" id="rdx-rating-stars">' +
+              [1,2,3,4,5].map(function(n) {
+                return '<button onclick="rdxRateCase(' + n + ',\'' + _cid + '\')" ' +
+                  'style="background:none;border:none;font-size:22px;cursor:pointer;padding:2px;transition:transform .1s;line-height:1" ' +
+                  'onmouseover="rdxHoverStars(' + n + ')" onmouseout="rdxHoverStars(0)" ' +
+                  'title="' + ['','Poor','Fair','Good','Great','Excellent'][n] + '">☆</button>';
+              }).join('') +
+            '</div>' +
+            '<div id="rdx-rating-thanks" style="display:none;font-size:12px;color:#059669;margin-top:4px">Thanks for the feedback!</div>';
+          var msgs2 = document.getElementById('chatMessages');
+          if (msgs2) { msgs2.appendChild(_rateDiv); msgs2.scrollTop = msgs2.scrollHeight; }
+        } catch(e) {}
+      }, 400);
 
       // Show "cases like this one" suggestion grid
       setTimeout(function() {
@@ -2490,7 +2520,13 @@ function addMessage(type, text) {
   let clean = text.replace(/\[As [^\]]+\]\s*/gi, '');
   var patientLabel = caseData ? getPatientDisplayName() : 'Patient';
   if (type === 'patel') {
-    div.innerHTML = '<div class="msg-label">Dr. Patel</div>' + escHtml(clean);
+    var _msgId = 'rdx-msg-' + Date.now();
+    div.setAttribute('data-msg-id', _msgId);
+    div.innerHTML = '<div class="msg-label">Dr. Patel' +
+      '<button onclick="rdxReportMsg(this)" data-msg="' + clean.replace(/"/g,'&quot;').substring(0,300) + '" ' +
+      'style="margin-left:8px;background:none;border:none;font-size:10px;color:rgba(0,0,0,.25);cursor:pointer;padding:1px 4px;border-radius:4px;font-family:inherit;transition:color .15s" ' +
+      'onmouseover="this.style.color='#DC2626'" onmouseout="this.style.color='rgba(0,0,0,.25)'" title="Report a problem with this response">⚑</button>' +
+      '</div>' + escHtml(clean);
   } else if (type === 'patient') {
     div.innerHTML = '<div class="msg-label">' + patientLabel + '</div>' + escHtml(clean);
   } else if (type === 'report') {
@@ -2536,9 +2572,18 @@ function updatePhaseUI() {
     // Simplified view for new users: progress bar + step label only
     const pct = Math.round(((state.currentPhase - 1) / 9) * 100);
     const label = PHASE_LABELS[state.currentPhase] || 'In Progress';
-    document.getElementById('phaseLabel').textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
+    // For cases without radiology, rename Report Comparison phase
+    var _displayLabel = label;
+    if (state.currentPhase === 7 && caseData && !caseData.radiologyReports) {
+      _displayLabel = 'Clinical Synthesis';
+    }
+    document.getElementById('phaseLabel').textContent = 'Step ' + state.currentPhase + ' of 10: ' + _displayLabel;
   var barFill = document.getElementById('rdx-phase-bar-fill');
-  if (barFill) barFill.style.width = Math.round(((state.currentPhase - 1) / 9) * 100) + '%';
+  if (barFill) {
+    var _pct = Math.round(((state.currentPhase - 1) / 9) * 100);
+    barFill.style.width = _pct + '%';
+    barFill.style.minWidth = state.currentPhase > 0 ? '8px' : '0px';
+  }
     document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
     var mpl = document.getElementById('mobilePhaseLabel'); if(mpl) mpl.textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
     var mtl = document.getElementById('mobileTurnLabel'); if(mtl) mtl.textContent = 'Turn ' + state.turnCount;
@@ -4318,6 +4363,54 @@ function rdxSubmitEmailOptin() {
   }
 }
 
+
+
+
+function rdxReportMsg(btn) {
+  var msgText = btn.getAttribute('data-msg') || '';
+  var cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
+  var reason = prompt('What was wrong with this response? (optional)');
+  if (reason === null) return; // Cancelled
+  // Save report
+  var SB = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  fetch(SB + '/rest/v1/case_reports', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY, 'Prefer': 'return=minimal' },
+    body: JSON.stringify({ case_id: cid, message_text: msgText.substring(0,500), reason: reason || '', reported_at: new Date().toISOString(), phase: state ? state.currentPhase : null })
+  }).catch(function() {});
+  // Visual feedback
+  btn.textContent = '✓';
+  btn.style.color = '#059669';
+  btn.title = 'Reported — thank you';
+  btn.onclick = null;
+}
+
+function rdxHoverStars(n) {
+  var stars = document.querySelectorAll('#rdx-rating-stars button');
+  stars.forEach(function(btn, i) { btn.textContent = i < n ? '⭐' : '☆'; });
+}
+function rdxRateCase(rating, caseId) {
+  // Hide the widget, show thanks
+  var stars = document.getElementById('rdx-rating-stars');
+  var thanks = document.getElementById('rdx-rating-thanks');
+  if (stars) stars.style.display = 'none';
+  if (thanks) thanks.style.display = 'block';
+  // Save to Supabase case_analytics
+  var SB = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  fetch(SB + '/rest/v1/rpc/upsert_case_rating', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY },
+    body: JSON.stringify({ p_case_id: caseId, p_rating: rating })
+  }).catch(function() {}); // Silent fail
+  // Also store locally
+  try {
+    var ratings = JSON.parse(localStorage.getItem('rdx-case-ratings') || '{}');
+    ratings[caseId] = rating;
+    localStorage.setItem('rdx-case-ratings', JSON.stringify(ratings));
+  } catch(e) {}
+}
 
 function rdxShareCase() {
   var cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;

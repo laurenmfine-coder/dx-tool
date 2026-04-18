@@ -226,6 +226,25 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
     </a>
 
     <script>
+    // Detect returning user and update hero copy
+    (function() {
+      try {
+        var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+        var simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
+        if ((u && u.email) || simCount > 0) {
+          var badge = document.querySelector('.hero-badge');
+          var h1 = document.querySelector('.hero-h1');
+          var sub = document.querySelector('.hero-subtitle');
+          var name = (u && u.name) ? u.name.split(' ')[0] : '';
+          if (badge) badge.textContent = simCount > 0 ? '🔥 ' + simCount + ' case' + (simCount!==1?'s':'') + ' completed' : '👋 Welcome back';
+          if (h1) h1.textContent = name ? 'Welcome back, ' + name : 'Welcome back';
+          if (sub) sub.textContent = 'Pick up where you left off — your reasoning fingerprint and case history are waiting.';
+          var cta = document.getElementById('landingCTA');
+          if (cta && simCount > 0) { cta.textContent = 'Continue learning →'; }
+        }
+      } catch(e) {}
+    })();
+
     // Use the same day-seeded COTD rotation as browse page
     (function() {
       var COTD_POOL = [

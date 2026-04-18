@@ -4,9 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ReasonDx — Browse</title>
+<title>Clinical Reasoning Cases — Free AI Practice | ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<meta name="description" content="Browse 394 clinical reasoning cases across medicine, nursing, pharmacy, PA, PT, OT, dentistry, and optometry. Free AI-powered patient simulations. No signup required.">
+<meta name="description" content="Practice clinical reasoning with 394 free AI-powered cases across all health professions. Simulation, Virtual EMR, Socratic coaching, and more. No signup required. across medicine, nursing, pharmacy, PA, PT, OT, dentistry, and optometry. Free AI-powered patient simulations. No signup required.">
 <meta property="og:title" content="Browse Clinical Cases | ReasonDx">
 <meta property="og:description" content="Browse 394 clinical reasoning cases across medicine, nursing, pharmacy, PA, PT, OT, dentistry, and optometry. Free AI-powered patient simulations. No signup required.">
 <link rel="canonical" href="https://www.reasondx.com/browse.html">
@@ -190,6 +190,9 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .exit-modal-dismiss:hover{color:rgba(255,255,255,.8)}
 @keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ItemList","name":"Clinical Reasoning Cases","description":"394 free AI-powered clinical reasoning cases for medical students and health professionals","numberOfItems":394,"itemListElement":[{"@type":"ListItem","position":1,"name":"Simulation Cases","url":"https://reasondx.com/browse.html?mode=simulate"},{"@type":"ListItem","position":2,"name":"Virtual EMR Cases","url":"https://reasondx.com/browse.html?mode=practice"},{"@type":"ListItem","position":3,"name":"CoachDx Topics","url":"https://reasondx.com/browse.html?mode=coach"}]}
+</script>
 </head>
 <body>
 <a href="#rdx-main" style="position:absolute;top:-100px;left:0;background:#2874A6;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:10000;transition:top .15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to main content</a>
@@ -466,7 +469,18 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   <script>
   (function() {
     try {
-      var saved = JSON.parse(localStorage.getItem('rdx-active-session') || sessionStorage.getItem('rdx-saved-session') || localStorage.getItem('rdx-case-session') || 'null');
+      // Check canonical key first, then scan for any namespaced session key
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem('rdx-active-session') || 'null'); } catch(e) {}
+      if (!saved || !saved.caseId) {
+        try {
+          var _sessionKeys = Object.keys(localStorage).filter(function(k){ return k.startsWith('rdx-active-session-'); });
+          for (var _ki = 0; _ki < _sessionKeys.length; _ki++) {
+            var _s = JSON.parse(localStorage.getItem(_sessionKeys[_ki]) || 'null');
+            if (_s && _s.caseId && _s.turnCount > 0) { saved = _s; break; }
+          }
+        } catch(e) {}
+      }
       // rdx-active-session is the canonical key from simulation-engine.html
       if (saved && saved.caseId) {
         var chip = document.getElementById('rdx-resume-chip');
@@ -569,7 +583,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     var simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
     var isNew = simCount < 3;
     // Auto-focus search on desktop
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 1024 && !window.matchMedia('(pointer: coarse)').matches) {
       setTimeout(function() {
         var s = document.getElementById('searchInput');
         if (s) s.focus();
@@ -971,17 +985,22 @@ var CAT_LABELS={cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infe
 var SECTION_COPY={simulate:{title:'Simulate &mdash; <em>AI Patient Encounters</em>',meta:'Adaptive 10-phase clinical simulation'},practice:{title:'Practice &mdash; <em>Virtual EMR</em>',meta:'Chart review · Orders · Documentation · Feedback'},coach:{title:'Coach &mdash; <em>Socratic Reasoning</em>',meta:'Attending-style Socratic dialogue across 25 categories'},learn:{title:'Learn &mdash; <em>Pathophysiology Modules</em>',meta:'Mechanism-first modules with AI attending'}};
 var PLACEHOLDERS={simulate:'Search by chief complaint — chest pain, dyspnea, fever...',practice:'Search cases by chief complaint or diagnosis...',coach:'Search topics — asthma, DDx, sepsis, bias...',learn:'Search pathophysiology modules...'};
 function setMode(m){ window._rdxBatchSize = 24; window._showAll = false; _rdxSort = 'recommended'; var sel = document.getElementById('rdx-sort-select'); if(sel) sel.value='recommended';
+  // Sync hide-done button label on mode change
+  var _hdBtn = document.getElementById('rdx-hide-done-btn');
+  if (_hdBtn) _hdBtn.textContent = localStorage.getItem('rdx-hide-done') === '1' ? 'Show completed' : 'Hide completed';
   var _modeNames = {simulate:'Simulation Cases',practice:'Virtual EMR Cases',coach:'CoachDx Topics',learn:'Pathophysiology Modules'};
   document.title = (_modeNames[m] || 'Browse') + ' | ReasonDx';
   // Lazy-load mode data on first use
   if (m === 'coach' && !_coachDataLoaded) {
     var s = document.createElement('script'); s.src = '/data/coach-data.js';
     s.onload = function() { _coachDataLoaded = true; render(); };
+    s.onerror = function() { _coachDataLoaded = true; if(typeof rdxGenToast==='function') rdxGenToast('Could not load coaching topics — please refresh'); render(); };
     document.head.appendChild(s); return;
   }
   if (m === 'learn' && !_learnDataLoaded) {
     var s = document.createElement('script'); s.src = '/data/learn-data.js';
     s.onload = function() { _learnDataLoaded = true; render(); };
+    s.onerror = function() { _learnDataLoaded = true; if(typeof rdxGenToast==='function') rdxGenToast('Could not load modules — please refresh'); render(); };
     document.head.appendChild(s); return;
   }MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(function(b){var isMActive=b.dataset.mode===m; b.classList.toggle('active',isMActive); if(b.getAttribute('role')==='tab') b.setAttribute('aria-selected',isMActive?'true':'false');});
   // Hide start-here section when switching away from simulate
