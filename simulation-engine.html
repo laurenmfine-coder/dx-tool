@@ -628,6 +628,22 @@ function startStudy() {
     // Increment simulation count (used for new-user phase tracker simplification)
     const _simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0');
     localStorage.setItem('rdx-simulation-count', _simCount + 1);
+    // First-ever case complete — nudge to create account
+    if (_simCount === 0) {
+      setTimeout(function() {
+        var _isLoggedIn = false;
+        try { _isLoggedIn = !!(JSON.parse(localStorage.getItem('reasondx-user')||'{}').id || JSON.parse(localStorage.getItem('reasondx-user')||'{}').email); } catch(e) {}
+        if (_isLoggedIn) return; // Already has an account
+        var nudge = document.createElement('div');
+        nudge.style.cssText = 'position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1B4F72,#0D7A67);color:#fff;padding:16px 20px;border-radius:14px;max-width:300px;box-shadow:0 8px 32px rgba(0,0,0,.25);z-index:8000;font-family:inherit';
+        nudge.innerHTML = '<button onclick="this.parentNode.remove()" style="position:absolute;top:8px;right:10px;background:none;border:none;color:rgba(255,255,255,.6);font-size:16px;cursor:pointer">×</button>' +
+          '<div style="font-size:13px;font-weight:700;margin-bottom:6px">🎉 First case complete!</div>' +
+          '<div style="font-size:12px;opacity:.85;line-height:1.5;margin-bottom:12px">Create a free account to save your progress and track your reasoning patterns over time.</div>' +
+          '<a href="/auth/register.html?next=' + encodeURIComponent(window.location.href) + '" style="display:block;background:#fff;color:#1B4F72;text-align:center;padding:8px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Create free account →</a>';
+        document.body.appendChild(nudge);
+        setTimeout(function(){ if(nudge.parentNode) nudge.remove(); }, 12000);
+      }, 5000); // Show 5s after completion
+    }
   }
 }
 

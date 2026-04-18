@@ -1011,7 +1011,7 @@ function _rdxRenderHistoryModal(history) {
   var rows = history.length ? history.map(function(h) {
     var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}) : '';
     var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#E8F8F5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
-    return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId||'') + '" onclick="document.getElementById('rdx-history-modal').style.display='none'" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;transition:background .15s" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='none'">' +
+    return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId||'') + '" onclick="var _m=document.getElementById('rdx-history-modal');_m.remove();try{document.querySelector('[onclick*=rdxShowFullHistory]').focus();}catch(e){}" style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-bottom:1px solid #F1F5F9;text-decoration:none;color:#1E293B;transition:background .15s" onmouseover="this.style.background='#F8FAFC'" onmouseout="this.style.background='none'">' +
       '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🩺</span><div><div style="font-size:13px;font-weight:600">' + (h.caseName||h.caseId||'Unknown') + '</div><div style="font-size:11px;color:#94A3B8">' + (h.turns||0) + ' turns · ' + date + '</div></div></div>' +
       '<div>' + score + '</div></a>';
   }).join('') : '<div style="text-align:center;padding:32px;color:#94A3B8">No cases completed yet</div>';
@@ -1022,6 +1022,20 @@ function _rdxRenderHistoryModal(history) {
     '</div>' +
     '<div style="overflow-y:auto">' + rows + '</div></div>';
   document.body.appendChild(modal);
+  // Focus trap
+  var focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  if (focusable.length) focusable[0].focus();
+  modal.addEventListener('keydown', function(e) {
+    if (e.key !== 'Tab') return;
+    var els = Array.from(modal.querySelectorAll('button, [href], input, [tabindex]:not([tabindex="-1"])'));
+    if (!els.length) return;
+    var first = els[0], last = els[els.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
 }
 </script>
 </body>
