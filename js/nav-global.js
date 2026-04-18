@@ -125,7 +125,7 @@
     if (!drawer) {
       drawer = document.createElement('div');
       drawer.id = 'rdx-mobile-drawer';
-      document.body.appendChild(drawer);
+      if (document.body) document.body.appendChild(drawer);
     }
     drawer.innerHTML = `
       <div class="rdx-drawer-actions">

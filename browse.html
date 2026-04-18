@@ -436,19 +436,19 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 
       var headlines = {
         ANCHORING: 'This case will test your anchoring bias',
-        PREMATURE_CLOSURE: 'This case has dual pathology — don't stop early',
+        PREMATURE_CLOSURE: 'This case has dual pathology \u2014 don\'t stop early',
         HISTORY_GAP: 'This case turns on a critical history question',
         NARROW_OPENER: 'This case rewards a broad initial differential',
-        UNDERCONFIDENT: 'You're ready for this — trust your reasoning',
+        UNDERCONFIDENT: 'You\'re ready for this \u2014 trust your reasoning',
         HIGH_COGNITIVE_LOAD: 'A focused case to rebuild your confidence',
         AFFECT_DISRUPTION: 'A case to practice controlled reasoning',
-        CALIBRATED: 'You're ready for a harder challenge'
+        CALIBRATED: 'You\'re ready for a harder challenge'
       };
 
       var reasons = {
         ANCHORING: 'Last session showed anchoring — you held your first diagnosis despite contradicting evidence. This case has a compelling mimic designed to pull you off the right track.',
         PREMATURE_CLOSURE: 'You closed your differential before fully evaluating all the evidence. This case has two problems — you need to find both.',
-        HISTORY_GAP: 'You missed critical contextual history last session. The diagnosis in this case depends entirely on a question most students don't think to ask.',
+        HISTORY_GAP: 'You missed critical contextual history last session. The diagnosis in this case depends entirely on a question most students don\'t think to ask.',
         NARROW_OPENER: 'Your initial differential was too narrow. This case needs 4+ diagnoses on your list from the start.',
         UNDERCONFIDENT: 'Your reasoning was correct but your commitment was hesitant. This case rewards decisive, justified conclusions.',
         HIGH_COGNITIVE_LOAD: 'High cognitive load was detected last session. This case is scoped to rebuild systematic reasoning.',
@@ -521,7 +521,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
           '</div>' +
           '<div style="display:flex;gap:8px">' +
             '<a href="/simulation-engine.html?case=' + encodeURIComponent(saved.caseId) + '" style="padding:6px 14px;background:#2874A6;color:#fff;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none">Continue →</a>' +
-            '<button onclick="this.closest('[id=rdx-resume-chip]').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;padding:0 4px">×</button>' +
+            '<button onclick="document.getElementById(\'rdx-resume-chip\').style.display=\'none\'" style="background:none;border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;padding:0 4px">×</button>' +
           '</div>' +
         '</div>';
       }
@@ -631,7 +631,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         var tip = document.createElement('div');
         tip.id = 'rdx-mode-tip';
         tip.style.cssText = 'position:fixed;top:100px;left:50%;transform:translateX(-50%);z-index:9000;background:#1B4F72;color:#fff;border-radius:12px;padding:14px 20px;font-size:13px;line-height:1.6;max-width:380px;width:90%;box-shadow:0 8px 24px rgba(0,0,0,.3);text-align:center;cursor:pointer';
-        tip.innerHTML = '🎉 <strong>You've unlocked all study modes!</strong><br><span style="opacity:.8;font-size:12px">Simulation = Dr. Patel conversation · Practice = Virtual EMR · Coach = Socratic AI · Learn = Pathophysiology</span><br><span style="opacity:.5;font-size:11px;margin-top:6px;display:block">Click to dismiss</span>';
+        tip.innerHTML = '🎉 <strong>You\'ve unlocked all study modes!</strong><br><span style="opacity:.8;font-size:12px">Simulation = Dr. Patel conversation · Practice = Virtual EMR · Coach = Socratic AI · Learn = Pathophysiology</span><br><span style="opacity:.5;font-size:11px;margin-top:6px;display:block">Click to dismiss</span>';
         tip.onclick = function() { tip.remove(); };
         document.body.appendChild(tip);
         setTimeout(function() { if (tip.parentNode) tip.remove(); }, 6000);
@@ -970,7 +970,7 @@ if(window.CRT_INDEX){Object.entries(CRT_INDEX).forEach(function(e){var id=e[0],c
     _sub = _sub ? _sub + ' · ' + c.diagnosis : c.diagnosis;
   }
   SIM_DATA.push({id:id,title:(c.chiefComplaint||'').split('/')[0].trim(),sub:_sub,search:(c.chiefComplaint||'').toLowerCase(),cat:normCat(c.category),acuity:c.acuity||3,profession:c.profession||null,arcId:c.arcId||null,arcOrder:c.arcOrder||null,arcLabel:c.arcLabel||null,profQuestion:c.profQuestion||null});
-});}"
+});}
 
 var _EMR_VALID_IDS = new Set(['aaa-v1','abpa-aspergillus','ace-angioedema','ace-angioedema-v2','acne-management','acquired-c1esterase-inhibitor-deficiency','acquired-c1esterase-inhibitor-deficiency-v2','acute-cholecystitis','acute-coronary-syndrome','acute-ischemic-stroke-tpa','acute-limb-ischemia','acute-pancreatitis','acute-psychosis','acute-urticaria','acute-urticaria-v2','adrenal-crisis','aki-differential','alcohol-withdrawal','allergic-angioedema','allergic-angioedema-v2','allergic-conjunctivitis-severe','allergic-conjunctivitis-severe-v2','allergic-rhinitis-immunotherapy','allergic-rhinitis-uncontrolled','allergic-rhinitis-uncontrolled-v2','alpha-gal-syndrome','anaphylaxis','anaphylaxis-v2','anaphylaxis-v3','anaphylaxis-v4','anaphylaxis-v5','angle-closure-glaucoma','aortic-dissection-back','apap-overdose','appendicitis-v1','asthma-exacerbation','atopic-dermatitis-severe','atopic-dermatitis-severe-v2','autoimmune-hemolytic-anemia','cardiac-syncope','cardiac-tamponade','cauda-equina','cgd-xlinked','chf-exacerbation','chf-v1','chronic-spontaneous-urticaria','chronic-spontaneous-urticaria-v2','compartment-syndrome','complete-heart-block','contact-dermatitis-occupational','contact-dermatitis-occupational-v2','copd-exacerbation-niv','copd-v1','crao','croup-epiglottitis-ddx','crswNP-biologics','cvid-presentation','cvid-presentation-v2','delirium-elderly','dic-massive-transfusion','digeorge-22q11','dka-v1','dka-v2','dka-v3','dress-syndrome','dress-syndrome-v2','drug-allergy-vancomycin-rms','drug-allergy-vancomycin-rms-v2','eclampsia','ectopic-pregnancy','ectopic-pregnancy-workup','eczema-herpeticum','eczema-herpeticum-v2','eoe-adult','eoe-adult-v2','eoe-pediatric','eoe-pediatric-v2','epidural-hematoma','epiglottitis','erythema-multiforme-major','erythema-multiforme-major-v2','febrile-neutropenia','food-allergy-oit-reaction','food-allergy-oit-reaction-v2','fournier-gangrene','fpies-acute','fpies-acute-v2','fpies-chronic','fpies-chronic-v2','gi-bleed-syncope','guillain-barre','heart-failure-hfpef','heat-stroke','hereditary-angioedema','hereditary-angioedema-v2','hip-fracture-anticoag','hypercalcemia','hypereosinophilic-syndrome','hyperkalemia-cardiac','hypersensitivity-pneumonitis','hypertensive-emergency','ibs-management','idiopathic-angioedema','idiopathic-angioedema-v2','inducible-urticaria','infective-endocarditis','inpatient-diabetes-management','insect-sting-anaphylaxis','insect-sting-anaphylaxis-v2','intussusception','ludwigs-angina','lung-cancer-staging','massive-pe-with-rv-failure','mastocytosis','mastocytosis-v2','mcas-mast-cell','meningitis-v1','mesenteric-ischemia','migraine','migraine-management','milk-allergy-infant','milk-allergy-infant-v2','myxedema-coma','nec-fasciitis','neutropenic-fever','new-onset-atrial-fibrillation','new-onset-seizure','new-seizure-mass','nms','nsaid-hypersensitivity','nsaid-hypersensitivity-v2','nstemi-v1','occupational-asthma-isocyanate','pe-v1','pe-v2','pe-v3','peanut-allergy-anaphylaxis','peanut-allergy-anaphylaxis-v2','penicillin-allergy-delabeling','penicillin-allergy-delabeling-v2','perforated-peptic-ulcer','pericarditis-v1','peritonsillar-abscess','pneumonia','pneumonia-on-copd','pneumothorax','psoriasis-moderate-severe','pulmonary-embolism-syncope','pyelonephritis-sepsis','pyelonephritis-urosepsis','renal-colic','rhabdomyolysis','rheumatoid-arthritis-new','sah-v1','salicylate-toxicity','sbo-strangulation','scid-ada','sepsisseptic-shock','septic-arthritis','septic-shock-urosepsis','serotonin-syndrome','severe-allergic-reaction','severe-allergic-reaction-v2','severe-allergic-reaction-v3','severe-asthma-biologics','severe-hyponatremia','severe-hypothermia','severe-pancreatitis','sjs-ten','sjs-ten-v2','sjsten-overlap','sjsten-overlap-v2','sle-flare-with-cytopenias','status-epilepticus','stemi-v1','stroke-v1','stroke-v2','stroke-v3','subdural-hematoma','tension-ptx','testicular-torsion','thyroid-storm','ttp','type2-diabetes-outpatient','upper-gi-bleed','urticarial-vasculitis','urticarial-vasculitis-v2','vasovagal-syncope','venom-immunotherapy-reaction','venom-immunotherapy-reaction-v2','vocal-cord-dysfunction','vt-syncope','xla-brutons']);
 var PRAC_DATA=SIM_DATA.filter(function(c){ return _EMR_VALID_IDS.has(c.id); }).map(function(c){
@@ -1851,8 +1851,8 @@ function startRandomEasyCase() {
       '<div style="display:flex;align-items:center;gap:12px">' +
         '<span style="font-size:22px">🏫</span>' +
         '<div>' +
-          '<div style="font-size:14px;font-weight:700;margin-bottom:2px">Welcome to ReasonDx — You're signed in as Faculty</div>' +
-          '<div style="font-size:12px;opacity:.85">Explore the full platform freely. When you're ready to set up your program, visit the Faculty Dashboard.</div>' +
+          '<div style="font-size:14px;font-weight:700;margin-bottom:2px">Welcome to ReasonDx \u2014 You\'re signed in as Faculty</div>' +
+          '<div style="font-size:12px;opacity:.85">Explore the full platform freely. When you\'re ready to set up your program, visit the Faculty Dashboard.</div>' +
         '</div>' +
       '</div>' +
       '<div style="display:flex;gap:10px;flex-shrink:0">' +
