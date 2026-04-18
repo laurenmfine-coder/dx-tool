@@ -870,7 +870,10 @@ var LEARN_DATA=[{id:'acs-module',title:'Acute Coronary Syndromes',cat:'cardiovas
   // Run after DOM ready — data is inline so already available
   function _initBrowse() {
     _updateStatNums();
-    setMode('simulate'); // Render the grid on page load
+    // Respect ?mode= URL param, default to simulate
+    var _m = new URLSearchParams(window.location.search).get('mode') || 'simulate';
+    if (['simulate','practice','coach','learn'].indexOf(_m) === -1) _m = 'simulate';
+    setMode(_m); // Render the grid on page load
   }
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', _initBrowse);
@@ -1023,9 +1026,7 @@ function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent
   } catch(e) {}
 })();
 
-var _initMode=new URLSearchParams(window.location.search).get('mode')||'simulate';
-if(['simulate','practice','coach','learn'].indexOf(_initMode)===-1) _initMode='simulate';
-setMode(_initMode);
+// Mode set by _initBrowse on DOMContentLoaded (respects ?mode= param)
 
 // ── QUICK START FUNCTION FOR HERO CTA ──
 function startQuickCase() {
