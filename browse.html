@@ -37,7 +37,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 
 .hero{
   background:linear-gradient(160deg,#071824 0%,#0d2b3e 45%,#1a3d5c 100%);
-  padding:52px 24px 0;position:relative;overflow:hidden
+  padding:52px 24px 24px;position:relative;overflow:hidden
 }
 .hero::before{
   content:"";position:absolute;inset:0;
@@ -234,6 +234,25 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <p style="font-size:13px;color:rgba(255,255,255,0.65);margin-bottom:24px">
       No login required • Create account to save your progress
     </p>
+
+    <!-- What you can do here — fills space for new users, hidden for experienced users -->
+    <div id="rdx-hero-features" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px;margin-bottom:8px">
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85)">
+        <span style="font-size:18px">🩺</span> 500+ AI Patient Simulations
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85)">
+        <span style="font-size:18px">🏥</span> Virtual EMR &amp; Notes
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85)">
+        <span style="font-size:18px">💬</span> Socratic AI Coaching
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85)">
+        <span style="font-size:18px">🧩</span> Daily Puzzles
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 16px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85)">
+        <span style="font-size:18px">🔬</span> Pathophysiology Modules
+      </div>
+    </div>
   </div>
 
 
@@ -593,6 +612,10 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
         if (s) s.focus();
       }, 300);
     }
+
+    // Hide feature strip for experienced users (they see personalized panels)
+    var featStrip = document.getElementById('rdx-hero-features');
+    if (featStrip && !isNew) featStrip.style.display = 'none';
 
     // Mode strip
     if (isNew) {
