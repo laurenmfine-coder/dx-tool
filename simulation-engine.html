@@ -4503,7 +4503,9 @@ function rdxShareCase() {
       var toast = document.getElementById('toast');
       if (toast) { toast.textContent = '✓ Case link copied — share it with a classmate!'; toast.classList.add('visible'); setTimeout(function(){ toast.classList.remove('visible'); }, 3000); }
     }).catch(function() {
-      prompt('Copy this link:', url);
+      // Clipboard fallback — show toast with manual copy
+      var toast = document.getElementById('toast');
+      if (toast) { toast.textContent = '🔗 Copy: ' + url; toast.classList.add('visible'); setTimeout(function(){ toast.classList.remove('visible'); }, 5000); }
     });
   }
 }

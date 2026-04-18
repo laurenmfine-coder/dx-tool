@@ -508,30 +508,38 @@ window.addActivity = function(gi) {
 };
 
 window.addGoalManual = function() {
-  // Show EPA picker
-  var epaNum = window.prompt(
-    'Which AAMC EPA?\n\n' +
-    Object.entries(EPA_LABELS).map(function(e){return e[0]+': '+e[1];}).join('\n') +
-    '\n\nEnter EPA number (e.g., EPA1):'
-  );
-  if (!epaNum) return;
-  epaNum = epaNum.toUpperCase().replace(/[^EPA0-9]/g,'');
-  if (!EPA_LABELS[epaNum]) { rdxIlpToast('Invalid EPA — try EPA1 through EPA13','error'); return; }
-
-  var goalText = prompt('Goal statement (e.g., "Improve history-taking completeness to EPA1 Level 3"):');
-  if (!goalText) return;
-
-  goals.push({
-    id: 'g' + Date.now(),
-    epa: epaNum,
-    epaTitle: EPA_LABELS[epaNum],
-    lcme: epaToLCME(epaNum),
-    title: goalText,
-    targetLevel: 3,
-    activities: []
-  });
-  renderGoals();
+  // Inline form — no prompts
+  var existing = document.getElementById('rdx-ilp-goal-form');
+  if (existing) { existing.remove(); return; }
+  var form = document.createElement('div');
+  form.id = 'rdx-ilp-goal-form';
+  form.style.cssText = 'background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:20px;margin:12px 0;box-shadow:0 4px 16px rgba(0,0,0,.1)';
+  var epaOpts = Object.entries(EPA_LABELS).map(function(e){ return '<option value="'+e[0]+'">'+e[0]+': '+e[1]+'</option>'; }).join('');
+  form.innerHTML = '<div style="font-size:15px;font-weight:700;color:#1E293B;margin-bottom:14px">Add Learning Goal</div>' +
+    '<div style="display:flex;flex-direction:column;gap:10px">' +
+    '<div><label style="font-size:12px;font-weight:600;color:#64748B;display:block;margin-bottom:4px">AAMC EPA</label>' +
+    '<select id="ilp-epa-sel" style="width:100%;padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:14px;font-family:inherit"><option value="">Select EPA...</option>'+epaOpts+'</select></div>' +
+    '<div><label style="font-size:12px;font-weight:600;color:#64748B;display:block;margin-bottom:4px">Goal statement</label>' +
+    '<input id="ilp-goal-text" placeholder="e.g. Improve history-taking to EPA1 Level 3" style="width:100%;padding:8px 12px;border:1px solid #CBD5E0;border-radius:8px;font-size:14px;font-family:inherit;box-sizing:border-box"></div>' +
+    '<div style="display:flex;gap:8px;margin-top:4px">' +
+    '<button onclick="rdxIlpSaveGoal()" style="padding:9px 18px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Add Goal</button>' +
+    '<button onclick="document.getElementById('rdx-ilp-goal-form').remove()" style="padding:9px 14px;background:#F1F5F9;color:#64748B;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-family:inherit">Cancel</button>' +
+    '</div></div>';
+  var container = document.getElementById('goals-section') || document.querySelector('[id*=goal]') || document.body;
+  container.prepend(form);
+  document.getElementById('ilp-epa-sel').focus();
 };
+
+function rdxIlpSaveGoal() {
+  var epaNum = (document.getElementById('ilp-epa-sel')||{}).value||'';
+  var goalText = ((document.getElementById('ilp-goal-text')||{}).value||'').trim();
+  if (!epaNum) { var s=document.getElementById('ilp-epa-sel'); if(s)s.style.borderColor='#EF4444'; return; }
+  if (!goalText) { var i=document.getElementById('ilp-goal-text'); if(i)i.style.borderColor='#EF4444'; return; }
+  document.getElementById('rdx-ilp-goal-form').remove();
+  goals.push({ id:'g'+Date.now(), epa:epaNum, epaLabel:EPA_LABELS[epaNum]||epaNum,
+    text:goalText, level:1, targetLevel:3, activities:[], createdAt:new Date().toISOString() });
+  save(); renderGoals();
+}
 
 window.saveILP = function() {
   try {
@@ -588,6 +596,32 @@ setTimeout(function(){
 <script src="js/nav-global.js"></script>
 <script src="js/rdx-analytics-tracker.js">
 function rdxIlpToast(msg,type){var t=document.createElement('div');t.style.cssText='position:fixed;top:80px;right:20px;z-index:9999;background:'+(type==='error'?'#DC2626':'#059669')+';color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 16px rgba(0,0,0,.2)';t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2500);}
+
+
+function rdxIlpSaveGoal() {
+  var epaNum = (document.getElementById('ilp-epa-sel')||{}).value||'';
+  var goalText = (document.getElementById('ilp-goal-text')||{}).value||'';
+  if (!epaNum) { var s = document.getElementById('ilp-epa-sel'); if(s) s.style.borderColor='#EF4444'; return; }
+  if (!goalText.trim()) { var i = document.getElementById('ilp-goal-text'); if(i) i.style.borderColor='#EF4444'; return; }
+  var form = document.getElementById('rdx-ilp-goal-form');
+  if (form) form.remove();
+  // Save via existing mechanism
+  var newGoal = {
+    epa: epaNum,
+    epaLabel: (typeof EPA_LABELS !== 'undefined') ? EPA_LABELS[epaNum] : epaNum,
+    text: goalText.trim(),
+    level: 1, targetLevel: 3,
+    activities: [],
+    createdAt: new Date().toISOString()
+  };
+  try {
+    var data = JSON.parse(localStorage.getItem('rdx-ilp-data')||'{}');
+    data.goals = data.goals || [];
+    data.goals.push(newGoal);
+    localStorage.setItem('rdx-ilp-data', JSON.stringify(data));
+  } catch(e) {}
+  if (typeof renderGoals === 'function') renderGoals();
+}
 
 function rdxIlpSaveActivity(gi) {
   var text = (document.getElementById('ilp-act-text') || {}).value || '';

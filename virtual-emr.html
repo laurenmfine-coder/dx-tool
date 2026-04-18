@@ -2758,7 +2758,7 @@ function adminChangeRole(username,newRole){
 }
 
 function adminDeleteUser(username){
-  if(!confirm("Remove user '"+username+"' from EMR? This cannot be undone."))return;
+  if(!window.confirm("Remove user '"+username+"' from EMR? This cannot be undone."))return;
   const users=getUsers();delete users[username];dbSet("emr-users",users);
   // Clean assignments
   const a=getAssignments();Object.keys(a).forEach(f=>{a[f]=a[f].filter(s=>s!==username)});
