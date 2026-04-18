@@ -1814,7 +1814,7 @@ function _applyContBadge(container, caseId, anchorEl) {
   // Badge
   var badge = document.createElement('span');
   badge.className = 'continuity-badge';
-  badge.title = 'Prior chart available -- ' + chain.patientName;
+  badge.title = 'Prior chart available — ' + chain.patientName;
   badge.innerHTML = 'Prior chart';
   badge.style.cssText = 'margin-left:6px;vertical-align:middle;cursor:default;';
 
@@ -2204,7 +2204,7 @@ function renderPatientInterview() {
     "Patient Interview — " + _ptName,
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
     '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;padding:10px 14px;background:var(--surface-alt);border-radius:8px;border-left:3px solid var(--primary)">'
-    + '<strong>How this works:</strong> Ask ' + esc(_ptName) + ' questions to take the history. Type in the box below -- '
+    + '<strong>How this works:</strong> Ask ' + esc(_ptName) + ' questions to take the history. Type in the box below — '
     + esc(_ptName) + ' will respond as if in a real clinical encounter. When you\'re ready, switch to <strong>Documentation</strong> to write your H&amp;P.</div>'
     + _buildInterviewUI(_ptName, cc)
   );
@@ -2330,7 +2330,7 @@ function buildEMRWhatsNext(cid) {
     'asthma':'Asthma','hae':'Hereditary Angioedema','eoe':'Eosinophilic Esophagitis',
     'cvid':'CVID','sjs-ten':'SJS / TEN','fpies':'FPIES',
     'fever-peds':'Pediatric Fever','falls':'Falls & Frailty','eclampsia':'Pre-eclampsia',
-    'sepsis-em':'Sepsis (EM)','shock':'Shock -- Types & Management',
+    'sepsis-em':'Sepsis (EM)','shock':'Shock — Types & Management',
     'ddx-framework':'Building a Differential','cognitive-bias':'Cognitive Bias in Dx'
   };
   var MODULE_LABELS = {
@@ -3094,7 +3094,7 @@ function sendPatientMessage(){
     };
 
     _recognition.onerror = function(e) {
-      if (e.error === 'not-allowed') showToast('🎙 Microphone access denied -- allow microphone in your browser settings, then reload the page.');
+      if (e.error === 'not-allowed') showToast('🎙 Microphone access denied — allow microphone in your browser settings, then reload the page.');
       else if (e.error !== 'aborted' && e.error !== 'no-speech') console.warn('Voice error:', e.error);
       _stopVoice();
     };
@@ -3345,7 +3345,7 @@ function renderAISwitcher(activeTab) {
   });
   html += '</div><div style="padding:6px 16px 10px;font-size:11px;color:var(--text-muted)">';
   var current = AI_TOOLS.find(function(t){ return t.id === activeTab; });
-  if (current) html += '<strong>'+current.label+'</strong> -- '+current.desc;
+  if (current) html += '<strong>'+current.label+'</strong> — '+current.desc;
   html += '</div>';
   return html;
 }
@@ -3543,7 +3543,7 @@ var LAB_INSIGHTS = {
   'BNP':           { sig:'Elevated BNP -> ventricular wall stress. Helps differentiate cardiac vs. pulmonary dyspnea.', mech:'pathway.html?topic=heart-failure', topic:'Heart Failure' },
   'D-dimer':       { sig:'Elevated D-dimer -> fibrin degradation. Sensitive for PE but not specific.', mech:'pathway.html?topic=pe', topic:'Pulmonary Embolism' },
   // Allergy-specific
-  'Tryptase':      { sig:'Elevated tryptase confirms mast cell activation -- key diagnostic marker for anaphylaxis.', mech:'pathway.html?topic=anaphylaxis', topic:'Anaphylaxis Mechanism' },
+  'Tryptase':      { sig:'Elevated tryptase confirms mast cell activation — key diagnostic marker for anaphylaxis.', mech:'pathway.html?topic=anaphylaxis', topic:'Anaphylaxis Mechanism' },
   'IgE':           { sig:'Total IgE: nonspecific. Specific IgE (RAST): identifies allergen sensitization.', mech:'pathway.html?topic=allergy', topic:'IgE-Mediated Allergy' },
   // ABG
   'pH':            { sig:'pH <7.35 = acidosis, >7.45 = alkalosis. Determine primary vs. compensatory.', mech:'pathway.html?topic=acid-base', topic:'Acid-Base Disorders' },
@@ -4115,7 +4115,7 @@ function orderLab(id){
         _placeLabOrder(id,cat,vResult,'overridden');
       },function(){
         OrderValidator.log(vResult,'cancelled',S.currentUser?S.currentUser.username:'',CASE_ID);
-        showToast('Order cancelled -- safety conflict');
+        showToast('Order cancelled — safety conflict');
       });
       return;
     }
@@ -4165,7 +4165,7 @@ function orderImg(id){
         _placeImgOrder(id,cat,vResult,'overridden');
       },function(){
         OrderValidator.log(vResult,'cancelled',S.currentUser?S.currentUser.username:'',CASE_ID);
-        showToast('Order cancelled -- safety conflict');
+        showToast('Order cancelled — safety conflict');
       });
       return;
     }
@@ -4364,7 +4364,7 @@ const ORAL_RUBRIC = [
     "Identifies patient (age, sex, relevant context)","States CC clearly and concisely","Sets the stage for the presentation","Appropriate length (not too brief or verbose)"
   ]},
   {id:"oral_hpi",label:"HPI Delivery",max:15,category:"Content",criteria:[
-    "Chronological/logical narrative flow","OLDCARTS elements covered","Pertinent positives woven in naturally","Pertinent negatives stated","Associated symptoms mentioned","Not reading a list -- tells a clinical story","Appropriate detail level","Timeline clear"
+    "Chronological/logical narrative flow","OLDCARTS elements covered","Pertinent positives woven in naturally","Pertinent negatives stated","Associated symptoms mentioned","Not reading a list — tells a clinical story","Appropriate detail level","Timeline clear"
   ]},
   {id:"oral_pmhma",label:"PMH / Meds / Allergies",max:10,category:"Content",criteria:[
     "Relevant PMH presented (not exhaustive if not relevant)","Key medications with doses","Allergies with reaction type","Surgical history if relevant","Presented efficiently without unnecessary detail"
@@ -4471,12 +4471,12 @@ function analyzeDocumentation(fields) {
   if (cc.trim().length > 0) {
     ccScore += 2;
     if (cc.length < 200) { ccScore += 1; ccStrengths.push("Concise and focused"); }
-    else ccFeedback.push("CC is overly long -- aim for 1-2 sentences");
+    else ccFeedback.push("CC is overly long — aim for 1-2 sentences");
     if (textContains(cc, ["57","year","female","woman"])) { ccScore += 1; ccStrengths.push("Includes patient identifiers"); }
     else ccFeedback.push("Include age/sex in CC for context");
     if (textContains(cc, EXPECTED.cc_terms)) { ccScore += 1; ccStrengths.push("Reason for visit clearly stated"); }
     else ccFeedback.push("Specify the reason for visit (follow-up HTN, DM, anxiety)");
-  } else { ccFeedback.push("Chief complaint is empty -- this is essential"); }
+  } else { ccFeedback.push("Chief complaint is empty — this is essential"); }
   results.doc_cc = { score: Math.min(ccScore, 5), max: 5, feedback: ccFeedback, strengths: ccStrengths };
 
   // --- HPI Analysis ---
@@ -4487,39 +4487,39 @@ function analyzeDocumentation(fields) {
     const oldcarts = { onset: textContains(hpi, ["onset","started","began","since","x","for"]), location: textContains(hpi, ["right","left","bilateral","frontal","temporal","head"]), duration: textContains(hpi, ["days","weeks","months","years","x","episode"]), character: textContains(hpi, ["throbbing","dull","sharp","constant","intermittent","aching"]), aggravating: textContains(hpi, ["worse","worsened","aggravat","trigger","exacerbat"]), relieving: textContains(hpi, ["relief","improve","better","resolve","help"]), timing: textContains(hpi, ["daily","weekly","monthly","frequency","often","times per"]), severity: textContains(hpi, ["/10","severity","mild","moderate","severe","rated"]) };
     const oldcartsCount = Object.values(oldcarts).filter(Boolean).length;
     if (oldcartsCount >= 5) { hpiScore += 3; hpiStrengths.push("Good OLDCARTS framework coverage (" + oldcartsCount + "/8)"); }
-    else if (oldcartsCount >= 3) { hpiScore += 2; hpiFeedback.push("Partial OLDCARTS coverage (" + oldcartsCount + "/8) -- consider adding: " + Object.entries(oldcarts).filter(([,v]) => !v).map(([k]) => k).join(", ")); }
-    else { hpiScore += 1; hpiFeedback.push("Minimal OLDCARTS elements -- HPI needs more structured history taking"); }
+    else if (oldcartsCount >= 3) { hpiScore += 2; hpiFeedback.push("Partial OLDCARTS coverage (" + oldcartsCount + "/8) — consider adding: " + Object.entries(oldcarts).filter(([,v]) => !v).map(([k]) => k).join(", ")); }
+    else { hpiScore += 1; hpiFeedback.push("Minimal OLDCARTS elements — HPI needs more structured history taking"); }
 
     // Pertinent positives
     const ppCount = countMatches(hpi, EXPECTED.hpi_pertinent_pos);
     if (ppCount >= 3) { hpiScore += 3; hpiStrengths.push("Good pertinent positives (" + ppCount + " key findings)"); }
     else if (ppCount >= 1) { hpiScore += 1; hpiFeedback.push("Include more pertinent positives: " + findMissing(hpi, EXPECTED.hpi_pertinent_pos).slice(0, 3).join(", ")); }
-    else hpiFeedback.push("Missing pertinent positives -- document key symptoms the patient IS experiencing");
+    else hpiFeedback.push("Missing pertinent positives — document key symptoms the patient IS experiencing");
 
     // Pertinent negatives
     const pnCount = countMatches(hpi, EXPECTED.hpi_pertinent_neg);
     if (pnCount >= 3) { hpiScore += 3; hpiStrengths.push("Excellent pertinent negatives documented"); }
     else if (pnCount >= 1) { hpiScore += 1; hpiFeedback.push("More pertinent negatives needed (chest pain, SOB, vision changes, palpitations for this case)"); }
-    else hpiFeedback.push("No pertinent negatives -- always document what the patient denies");
+    else hpiFeedback.push("No pertinent negatives — always document what the patient denies");
 
     // Narrative quality
     if (hpi.length > 200) { hpiScore += 2; hpiStrengths.push("Detailed narrative"); }
-    else hpiFeedback.push("HPI could use more detail -- expand the clinical narrative");
+    else hpiFeedback.push("HPI could use more detail — expand the clinical narrative");
 
     // Check for misplaced content
     const ros = fields.ros || "";
     if (ros && textContains(ros, ["headache","dizziness","blood sugar","glucose"])) {
       hpiScore -= 1;
-      hpiFeedback.push("⚠ Some HPI content appears in the ROS -- symptoms directly related to the chief complaint belong in the HPI, not the ROS");
+      hpiFeedback.push("⚠ Some HPI content appears in the ROS — symptoms directly related to the chief complaint belong in the HPI, not the ROS");
     }
 
     // Narrative vs list
     if (hpi.split("\n").length > 10 && !textContains(hpi, [". ",", ","and ","but ","however","although"])) {
-      hpiFeedback.push("HPI reads like a list -- aim for a coherent narrative paragraph");
+      hpiFeedback.push("HPI reads like a list — aim for a coherent narrative paragraph");
     } else {
       hpiStrengths.push("Written as a narrative");
     }
-  } else { hpiFeedback.push("HPI is empty -- this is the most critical section of the note"); }
+  } else { hpiFeedback.push("HPI is empty — this is the most critical section of the note"); }
   results.doc_hpi = { score: Math.min(Math.max(hpiScore, 0), 15), max: 15, feedback: hpiFeedback, strengths: hpiStrengths };
 
   // --- PMH/PSH Analysis ---
@@ -4530,11 +4530,11 @@ function analyzeDocumentation(fields) {
     const missing = findMissing(pmh, ["hypertension","diabetes","hyperlipidemia","obesity","migraine","anxiety","vitamin D"]);
     if (problemsFound >= 6) { pmhScore += 4; pmhStrengths.push("Comprehensive problem list (" + problemsFound + " conditions documented)"); }
     else if (problemsFound >= 3) { pmhScore += 2; pmhFeedback.push("Missing conditions: " + missing.slice(0, 4).join(", ")); }
-    else { pmhScore += 1; pmhFeedback.push("Incomplete PMH -- document all active conditions from the chart"); }
+    else { pmhScore += 1; pmhFeedback.push("Incomplete PMH — document all active conditions from the chart"); }
     
     if (textContains(pmh, ["surgical","surgery","surger","procedure","appendectomy","cholecystectomy","C-section","no prior","denies surg"])) {
       pmhScore += 1; pmhStrengths.push("Surgical history addressed");
-    } else pmhFeedback.push("Surgical history not documented -- include PSH or 'denies prior surgeries'");
+    } else pmhFeedback.push("Surgical history not documented — include PSH or 'denies prior surgeries'");
   } else pmhFeedback.push("PMH section is too brief or empty");
   results.doc_pmh = { score: Math.min(pmhScore, 5), max: 5, feedback: pmhFeedback, strengths: pmhStrengths };
 
@@ -4557,15 +4557,15 @@ function analyzeDocumentation(fields) {
     
     if (medsFound >= 7) { medScore += 4; medStrengths.push("All/most medications documented (" + medsFound + "/8)"); }
     else if (medsFound >= 4) { medScore += 2; medFeedback.push("Missing medications: check chart for complete list (" + medsFound + "/8 found)"); }
-    else { medScore += 1; medFeedback.push("Incomplete medication list -- only " + medsFound + "/8 found"); }
+    else { medScore += 1; medFeedback.push("Incomplete medication list — only " + medsFound + "/8 found"); }
     
     if (dosesFound >= 6) { medScore += 3; medStrengths.push("Doses documented for most medications"); }
     else if (dosesFound >= 3) { medScore += 1; medFeedback.push("Some medications missing doses"); }
-    else medFeedback.push("Most medications missing doses -- always include dose");
+    else medFeedback.push("Most medications missing doses — always include dose");
     
     if (freqFound >= 6) { medScore += 3; medStrengths.push("Frequencies documented"); }
     else if (freqFound >= 3) { medScore += 1; medFeedback.push("Some medications missing frequency"); }
-    else medFeedback.push("Frequencies missing -- include for each medication");
+    else medFeedback.push("Frequencies missing — include for each medication");
     
     // Check for common misspellings
     const commonMisspellings = [["lisinopril","lysinopril","lisiopril","lisinipril"],["metformin","metaformin","metphormin"],["atorvastatin","atorvistatin","atorvastin"],["sertraline","sertralene","sertriline"],["sumatriptan","sumatriptin","sumitriptan"]];
@@ -4578,7 +4578,7 @@ function analyzeDocumentation(fields) {
         }
       });
     });
-  } else medFeedback.push("Medication section is empty or minimal -- complete medication reconciliation is essential");
+  } else medFeedback.push("Medication section is empty or minimal — complete medication reconciliation is essential");
   results.doc_meds = { score: Math.min(Math.max(medScore, 0), 10), max: 10, feedback: medFeedback, strengths: medStrengths };
 
   // --- Allergies Analysis ---
@@ -4587,8 +4587,8 @@ function analyzeDocumentation(fields) {
   if (allg.trim().length > 5) {
     const allergiesFound = countMatches(allg, EXPECTED.allergies_expected);
     if (allergiesFound >= 4) { allgScore += 3; allgStrengths.push("All major allergies documented"); }
-    else if (allergiesFound >= 2) { allgScore += 1; allgFeedback.push("Missing allergies -- patient has 5 documented"); }
-    else allgFeedback.push("Incomplete allergy list -- check chart for all documented allergies");
+    else if (allergiesFound >= 2) { allgScore += 1; allgFeedback.push("Missing allergies — patient has 5 documented"); }
+    else allgFeedback.push("Incomplete allergy list — check chart for all documented allergies");
     
     let reactionsDocumented = 0;
     Object.entries(EXPECTED.allergy_reactions).forEach(([allergen, rxTerms]) => {
@@ -4596,8 +4596,8 @@ function analyzeDocumentation(fields) {
     });
     if (reactionsDocumented >= 3) { allgScore += 2; allgStrengths.push("Reaction types documented"); }
     else if (reactionsDocumented >= 1) { allgScore += 1; allgFeedback.push("Include reaction type for each allergy"); }
-    else allgFeedback.push("Reaction types missing -- always document the specific reaction");
-  } else allgFeedback.push("Allergies section empty -- critical for patient safety");
+    else allgFeedback.push("Reaction types missing — always document the specific reaction");
+  } else allgFeedback.push("Allergies section empty — critical for patient safety");
   results.doc_allergies = { score: Math.min(allgScore, 5), max: 5, feedback: allgFeedback, strengths: allgStrengths };
 
   // --- FH/SH Analysis ---
@@ -4606,7 +4606,7 @@ function analyzeDocumentation(fields) {
   const fhCount = countMatches(fhsh, EXPECTED.fh_terms);
   const shCount = countMatches(fhsh, EXPECTED.sh_terms);
   if (fhCount >= 5) { fhshScore += 2; fhshStrengths.push("Relevant family history documented"); }
-  else if (fhCount >= 2) { fhshScore += 1; fhshFeedback.push("Family history incomplete -- include conditions and age of onset for first-degree relatives"); }
+  else if (fhCount >= 2) { fhshScore += 1; fhshFeedback.push("Family history incomplete — include conditions and age of onset for first-degree relatives"); }
   else fhshFeedback.push("Family history missing or minimal");
   if (shCount >= 5) { fhshScore += 3; fhshStrengths.push("Comprehensive social history"); }
   else if (shCount >= 2) { fhshScore += 1; fhshFeedback.push("Social history needs more detail (occupation, substances, exercise, diet, stress)"); }
@@ -4620,7 +4620,7 @@ function analyzeDocumentation(fields) {
     const systemsCovered = countMatches(ros, EXPECTED.ros_systems);
     if (systemsCovered >= 10) { rosScore += 5; rosStrengths.push("Comprehensive multi-system review (" + systemsCovered + " systems)"); }
     else if (systemsCovered >= 6) { rosScore += 3; rosStrengths.push(systemsCovered + " systems reviewed"); rosFeedback.push("Consider reviewing additional systems for completeness"); }
-    else { rosScore += 1; rosFeedback.push("Only " + systemsCovered + " systems reviewed -- aim for 10+"); }
+    else { rosScore += 1; rosFeedback.push("Only " + systemsCovered + " systems reviewed — aim for 10+"); }
     
     if (textContains(ros, ["denies","negative","no ","absent"])) { rosScore += 2; rosStrengths.push("Pertinent negatives documented"); }
     else rosFeedback.push("Include pertinent negatives per system");
@@ -4631,9 +4631,9 @@ function analyzeDocumentation(fields) {
     // Check for misplaced HPI content
     if (textContains(ros, ["headache 3 day","persistent headache","blood sugar","fasting glucose"])) {
       rosScore -= 2;
-      rosFeedback.push("⚠ Chief complaint symptoms in ROS -- these belong in the HPI. ROS should capture symptoms NOT already discussed in HPI");
+      rosFeedback.push("⚠ Chief complaint symptoms in ROS — these belong in the HPI. ROS should capture symptoms NOT already discussed in HPI");
     }
-  } else rosFeedback.push("ROS is empty or too brief -- document pertinent positives and negatives by organ system");
+  } else rosFeedback.push("ROS is empty or too brief — document pertinent positives and negatives by organ system");
   results.doc_ros = { score: Math.min(Math.max(rosScore, 0), 10), max: 10, feedback: rosFeedback, strengths: rosStrengths };
 
   // --- Physical Exam Analysis ---
@@ -4647,14 +4647,14 @@ function analyzeDocumentation(fields) {
     });
     if (systemsCovered >= 8) { peScore += 5; peStrengths.push("Comprehensive exam (" + systemsCovered + "/10 systems)"); }
     else if (systemsCovered >= 5) { peScore += 3; peStrengths.push(systemsCovered + "/10 systems examined"); peFeedback.push("Consider documenting additional systems"); }
-    else { peScore += 1; peFeedback.push("Only " + systemsCovered + "/10 systems -- exam needs more detail"); }
+    else { peScore += 1; peFeedback.push("Only " + systemsCovered + "/10 systems — exam needs more detail"); }
     
     // WNL/normal check -- THIS IS CRITICAL
     const badTermsUsed = EXPECTED.pe_bad_terms.filter(t => pe.toLowerCase().includes(t.toLowerCase()));
-    if (badTermsUsed.length === 0) { peScore += 4; peStrengths.push("Excellent -- no vague terms like 'normal' or 'WNL' used"); }
+    if (badTermsUsed.length === 0) { peScore += 4; peStrengths.push("Excellent — no vague terms like 'normal' or 'WNL' used"); }
     else {
       peScore += 1;
-      peFeedback.push("⚠ Non-specific terms used: " + badTermsUsed.map(t => '"' + t + '"').join(", ") + " -- replace with specific findings (e.g., 'RRR, no murmurs/gallops/rubs' instead of 'CV: normal')");
+      peFeedback.push("⚠ Non-specific terms used: " + badTermsUsed.map(t => '"' + t + '"').join(", ") + " — replace with specific findings (e.g., 'RRR, no murmurs/gallops/rubs' instead of 'CV: normal')");
     }
     
     // Bilateral check
@@ -4668,7 +4668,7 @@ function analyzeDocumentation(fields) {
     // Detail level
     if (pe.length > 400) { peScore += 2; peStrengths.push("Detailed exam documentation"); }
     else if (pe.length > 200) { peScore += 1; }
-    else peFeedback.push("Physical exam could be more detailed -- document specific findings for each system");
+    else peFeedback.push("Physical exam could be more detailed — document specific findings for each system");
   } else peFeedback.push("Physical exam section is too brief or empty");
   results.doc_pe = { score: Math.min(Math.max(peScore, 0), 15), max: 15, feedback: peFeedback, strengths: peStrengths };
 
@@ -4688,18 +4688,18 @@ function analyzeDocumentation(fields) {
     
     // DDx
     if (textContains(assess, EXPECTED.ddx_terms)) { assessScore += 3; assessStrengths.push("Differential diagnosis considered"); }
-    else assessFeedback.push("Include a differential diagnosis -- even for known conditions, consider alternative explanations");
+    else assessFeedback.push("Include a differential diagnosis — even for known conditions, consider alternative explanations");
     
     // Clinical reasoning
     if (textContains(assess, ["because","given","consistent with","supported by","evidenced by","suggests","concerning for","likely","due to"])) {
       assessScore += 3; assessStrengths.push("Clinical reasoning articulated");
-    } else assessFeedback.push("Explicitly state your clinical reasoning -- WHY is this your assessment?");
+    } else assessFeedback.push("Explicitly state your clinical reasoning — WHY is this your assessment?");
     
     // Summary statement
     if (textContains(assess, ["summary","in summary","this is a","year old","presenting"])) {
       assessScore += 3; assessStrengths.push("Summary statement included");
     } else assessFeedback.push("Begin assessment with a concise summary statement (1-3 sentences capturing the key clinical picture)");
-  } else assessFeedback.push("Assessment section is too brief or empty -- this is a critical reasoning section");
+  } else assessFeedback.push("Assessment section is too brief or empty — this is a critical reasoning section");
   results.doc_assess = { score: Math.min(Math.max(assessScore, 0), 15), max: 15, feedback: assessFeedback, strengths: assessStrengths };
 
   // --- Plan Analysis ---
@@ -4718,8 +4718,8 @@ function analyzeDocumentation(fields) {
     
     // Over-testing check
     const overtests = countMatches(plan, EXPECTED.plan_overtesting);
-    if (overtests === 0) { planScore += 2; planStrengths.push("Appropriate test utilization -- no unnecessary advanced imaging"); }
-    else planFeedback.push("⚠ Consider if " + findMissing("", EXPECTED.plan_overtesting.filter(t => textContains(plan, [t]))).join(", ") + " is truly indicated -- practice cost-conscious care");
+    if (overtests === 0) { planScore += 2; planStrengths.push("Appropriate test utilization — no unnecessary advanced imaging"); }
+    else planFeedback.push("⚠ Consider if " + findMissing("", EXPECTED.plan_overtesting.filter(t => textContains(plan, [t]))).join(", ") + " is truly indicated — practice cost-conscious care");
     
     // Follow-up
     if (textContains(plan, ["follow up","follow-up","return","RTC","recheck","weeks","months"])) {
@@ -4738,7 +4738,7 @@ function analyzeDocumentation(fields) {
   const sectionsFilled = getActiveNoteTemplate().filter(s => fields[s.id] && fields[s.id].trim().length > 10).length;
   if (sectionsFilled >= 10) { orgScore += 3; orgStrengths.push("All major sections completed"); }
   else if (sectionsFilled >= 7) { orgScore += 2; orgFeedback.push("Some sections incomplete"); }
-  else { orgScore += 1; orgFeedback.push("Multiple sections incomplete -- aim for completeness"); }
+  else { orgScore += 1; orgFeedback.push("Multiple sections incomplete — aim for completeness"); }
   
   if (allText.length > 1500) { orgScore += 1; orgStrengths.push("Sufficient detail throughout"); }
   else orgFeedback.push("Overall documentation could be more detailed");
@@ -4952,7 +4952,7 @@ function initSpeechRecognition() {
     if (e.error === 'no-speech') return; // Ignore no-speech
     console.error('Speech recognition error:', e.error);
     if (e.error === 'not-allowed') {
-      showToast("Microphone access denied -- check browser permissions");
+      showToast("Microphone access denied — check browser permissions");
       stopRecording();
     }
   };
@@ -4989,7 +4989,7 @@ function formatDuration(seconds) {
 function startRecording() {
   if (!recognition) recognition = initSpeechRecognition();
   if (!recognition) {
-    showToast("Speech recognition not supported in this browser -- try Chrome");
+    showToast("Speech recognition not supported in this browser — try Chrome");
     return;
   }
   oralTranscript = "";
@@ -5099,7 +5099,7 @@ function renderOralPresentation() {
     const hasSaved = saved && saved.transcript;
     html += sectionCard("Present Case — " + S.encounterWeek, I.activity,
       _buildOralScaffold() + '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:16px">Present the case of <strong>' + esc(PATIENT.name) + '</strong> as you would to an attending physician. The system will transcribe, analyze, and provide structured feedback on your presentation.</div>' +
-      (hasSaved ? '<div style="padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:600;color:var(--accent)">✓ Presentation saved -- ' + saved.wordCount + ' words, ' + formatDuration(saved.duration) + '</span><span style="font-size:11px;color:var(--text-muted)">' + new Date(saved.timestamp).toLocaleString() + '</span></div>' : '') +
+      (hasSaved ? '<div style="padding:10px 14px;background:var(--accent-light);border-radius:var(--radius);margin-bottom:16px;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:600;color:var(--accent)">✓ Presentation saved — ' + saved.wordCount + ' words, ' + formatDuration(saved.duration) + '</span><span style="font-size:11px;color:var(--text-muted)">' + new Date(saved.timestamp).toLocaleString() + '</span></div>' : '') +
       '<div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button type="button" class="btn-submit" style="padding:12px 24px;font-size:14px" onclick="startRecording()">🎙 ' + (hasSaved ? 'Re-record' : 'Start Recording') + '</button>' +
       (hasSaved ? '<button type="button" class="btn-submit" style="background:var(--accent);padding:12px 24px" onclick="runOralAnalysis()">' + I.star + ' Analyze Presentation</button>' : '') + '</div>' +
       (hasSaved ? '<div style="margin-top:16px"><div style="font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;margin-bottom:6px">Saved Transcript</div><div class="annotated-text" style="font-family:\'IBM Plex Sans\',sans-serif;font-size:13px;line-height:1.8">' + esc(saved.transcript) + '</div></div>' : '') +
@@ -5205,7 +5205,7 @@ function renderRubricReference(rubric, title) {
   );
   const totalPts = rubric.reduce((a, b) => a + b.max, 0);
   return sectionCard(title + " (" + totalPts + " pts)", I.clipboard,
-    '<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">Reference rubric -- ' + totalPts + ' points total</div>' +
+    '<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">Reference rubric — ' + totalPts + ' points total</div>' +
     tableHTML(["Criterion", "Pts", "Category", "Key Expectations"], rows)
   );
 }
