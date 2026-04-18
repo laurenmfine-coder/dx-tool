@@ -529,6 +529,35 @@
       var p5 = _state.ddxPhase5;
       var html = '';
 
+      // ── Case Debrief Header ────────────────────────────────
+      html += '<div style="background:linear-gradient(135deg,#1B4F72,#0D7A67);border-radius:12px;padding:20px 24px;margin-bottom:20px;color:#fff">';
+      html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;opacity:.7;margin-bottom:6px">Case Complete — Phase 8 of 8</div>';
+      html += '<div style="font-size:18px;font-weight:800;margin-bottom:4px">Case Debrief</div>';
+      html += '<div style="font-size:13px;opacity:.8">Review your reasoning journey before writing your final note.</div>';
+      html += '</div>';
+
+      // ── Phase completion timeline ─────────────────────────
+      var phaseSummary = [
+        { key:'cc',         label:'Chief Complaint',   icon:'🩺' },
+        { key:'ddx-init',   label:'Initial DDx',       icon:'📋' },
+        { key:'interview',  label:'Patient Interview',  icon:'💬' },
+        { key:'exam',       label:'Physical Exam',      icon:'🔍' },
+        { key:'ddx-refine', label:'Refined DDx',        icon:'🔄' },
+        { key:'past-data',  label:'Past Data',          icon:'📂' },
+        { key:'orders',     label:'Orders',             icon:'📤' }
+      ];
+      html += '<div style="display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap">';
+      phaseSummary.forEach(function(p) {
+        var done = !!_state.completed[p.key];
+        html += '<div style="flex:1;min-width:70px;text-align:center;padding:8px 4px;background:' +
+          (done ? '#E8F5E9' : '#f8fafc') + ';border-radius:8px;border:1px solid ' +
+          (done ? '#A5D6A7' : '#e2ecf4') + '">';
+        html += '<div style="font-size:14px">' + p.icon + (done ? '✅' : '') + '</div>';
+        html += '<div style="font-size:9px;color:' + (done ? '#1B7A3D' : '#94a3b8') + ';font-weight:700;margin-top:2px">' + p.label + '</div>';
+        html += '</div>';
+      });
+      html += '</div>';
+
       // DDx comparison summary if available
       if (p2.length > 0 && p5.length > 0) {
         html += '<div style="background:#f8fafc;border:1px solid #e2ecf4;border-radius:10px;padding:16px;margin-bottom:16px">';
@@ -557,6 +586,20 @@
           html += '<div style="margin-top:10px;padding:8px 12px;background:#FDF6E3;border-radius:6px;font-size:12px;color:#92400E">';
           html += '⚠️ <strong>Anchoring signal:</strong> Your differential didn\'t change between Phases 2 and 5. Discuss with CoachDx.';
           html += '</div>';
+        }
+        html += '</div>';
+      }
+
+      // ── Bias detection teaching moment ────────────────────
+      var totalExamDone = _state.examDone ? _state.examDone.length : 0;
+      var hadCoachDx = _state.coachDone && Object.keys(_state.coachDone).length > 0;
+      if (totalExamDone === 0 || !hadCoachDx) {
+        html += '<div style="background:#FDF6E3;border:1px solid #F59E0B;border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:12px;color:#92400E">';
+        if (totalExamDone === 0) {
+          html += '<strong>⚠️ Physical exam skipped</strong> — Your note will have limited examination findings. This may affect your feedback score.';
+        }
+        if (!hadCoachDx) {
+          html += (totalExamDone === 0 ? '<br>' : '') + '<strong>💡 Tip:</strong> CoachDx coaching wasn't used this session. Try it on your next case for deeper reasoning feedback.';
         }
         html += '</div>';
       }

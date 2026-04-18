@@ -1437,7 +1437,24 @@ function enterPhase(phase) {
     
     document.getElementById('chatInput').disabled = true;
     document.getElementById('sendBtn').disabled = true;
-    addMessage('system', 'Simulation complete. Thank you for participating. Your responses have been recorded.');
+    addMessage('system', '✅ Case complete! Review your feedback below.');
+    // Show post-case action buttons
+    setTimeout(function() {
+      var cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
+      var cnm = (caseData && caseData.presentation && caseData.presentation.chiefComplaint) ? caseData.presentation.chiefComplaint : (cid || 'this case');
+      var actDiv = document.createElement('div');
+      actDiv.className = 'chat-msg msg-system';
+      actDiv.style.cssText = 'max-width:96%;padding:16px;';
+      actDiv.innerHTML =
+        '<div style="font-size:13px;font-weight:700;color:#1B4F72;margin-bottom:12px">What would you like to do next?</div>' +
+        '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
+          '<a href="/browse.html" style="padding:9px 18px;background:#2874A6;color:#fff;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Browse more cases →</a>' +
+          '<a href="/simulation-engine.html?case=' + encodeURIComponent(cid) + '" style="padding:9px 18px;background:#fff;color:#2874A6;border:1.5px solid #2874A6;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">🔄 Replay this case</a>' +
+          '<a href="/virtual-emr.html?case=' + encodeURIComponent(cid) + '" style="padding:9px 18px;background:#f8fafc;color:#1B4F72;border:1px solid #d0dce8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">🏥 Try in Virtual EMR</a>' +
+        '</div>';
+      var msgs = document.getElementById('chatMessages');
+      if (msgs) { msgs.appendChild(actDiv); msgs.scrollTop = msgs.scrollHeight; }
+    }, 600);
 
     // ── COMMUNICATION QUALITY REPORT ──
     if (window.RdxReadability) {
@@ -1541,6 +1558,20 @@ function enterPhase(phase) {
           _completed.push(caseData.caseId);
           localStorage.setItem('rdx-completed-cases', JSON.stringify(_completed.slice(-100)));
         }
+        // Also write to rdx-simulation-history for the dashboard Recent Cases strip
+        try {
+          var _history = JSON.parse(localStorage.getItem('rdx-simulation-history') || '[]');
+          var _caseName = (caseData.presentation && caseData.presentation.chiefComplaint)
+            ? caseData.presentation.chiefComplaint
+            : (caseData.caseId || selectedCase);
+          _history.push({
+            caseId: caseData.caseId || selectedCase,
+            caseName: _caseName,
+            completedAt: new Date().toISOString(),
+            turns: state.turnCount || 0
+          });
+          localStorage.setItem('rdx-simulation-history', JSON.stringify(_history.slice(-20)));
+        } catch(e) {}
         // Select next case based on error mode
         var _next = MetaReasoning.selectCase(_theory, _caseList.map(function(id){return{id:id};}), _completed);
         // Calibrate difficulty for next session
