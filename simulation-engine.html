@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="css/rdx-theme.css">
 <link rel="stylesheet" href="/rdx-feature-tours.css">
 <script src="/js/rdx-feature-tours.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" async></script>
 <!-- Session Tracking & Email Capture -->
 <script src="/js/rdx-session-manager.js" defer></script>
 <script src="/js/rdx-email-capture.js" defer></script>
@@ -50,6 +50,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 .msg-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;opacity:.7}
 .typing{align-self:flex-start;background:var(--primary-light);padding:12px 20px;border-radius:12px;border-bottom-left-radius:4px}
 .typing-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary);margin:0 2px;animation:typingBounce .6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.typing-dot{animation:none;opacity:.5}#rdx-phase-bar-fill{transition:none}.chat-msg{animation:none}}
 .typing-dot:nth-child(2){animation-delay:.15s}
 .typing-dot:nth-child(3){animation-delay:.3s}
 @keyframes typingBounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
@@ -121,6 +122,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"LearningResource","name":"ReasonDx Clinical Simulation","description":"AI-powered clinical reasoning practice with Dr. Patel — 394 cases across all health professions","educationalLevel":"Medical Student, Resident, Health Professional","teaches":"Clinical Reasoning, Diagnostic Reasoning, Differential Diagnosis","provider":{"@type":"Organization","name":"ReasonDx","url":"https://reasondx.com"},"isAccessibleForFree":true}
 </script>
+
+<link rel="stylesheet" href="/mobile.css">
 </head>
 <body>
 <a href="#chatMessages" style="position:absolute;top:-100px;left:0;background:#2874A6;color:#fff;padding:8px 16px;border-radius:0 0 8px 0;font-size:14px;font-weight:700;text-decoration:none;z-index:10000;transition:top .15s" onfocus="this.style.top='0'" onblur="this.style.top='-100px'">Skip to conversation</a>
@@ -304,8 +307,16 @@ const CASE_REGISTRY = {
 const CASE_IDS = Object.keys(CASE_REGISTRY);
 function startStudy() {
   // ── Read identity from localStorage (set by auth/browse) ──
+  // Standardise on 'reasondx-user' — migrate from rdx_user if needed
+  (function() {
+    try {
+      var old = localStorage.getItem('rdx_user');
+      var current = localStorage.getItem('reasondx-user');
+      if (old && !current) { localStorage.setItem('reasondx-user', old); localStorage.removeItem('rdx_user'); }
+    } catch(e) {}
+  })();
   var rdxUser = {};
-  try { rdxUser = JSON.parse(localStorage.getItem('rdx_user') || '{}'); } catch(e) {}
+  try { rdxUser = JSON.parse(localStorage.getItem('reasondx-user') || localStorage.getItem('rdx_user') || '{}'); } catch(e) {}
   var name  = rdxUser.name  || rdxUser.firstName || 'Student';
   var year  = rdxUser.year  || rdxUser.trainingYear || 'M3';
   var intakeEmail = rdxUser.email || (window.RdxPlatform && window.RdxPlatform.getUserEmail ? window.RdxPlatform.getUserEmail() : '') || '';
@@ -1514,9 +1525,11 @@ function enterPhase(phase) {
           var _cid = (caseData && caseData.caseId) ? caseData.caseId : selectedCase;
           _rateDiv.innerHTML =
             '<div style="font-size:12px;font-weight:600;color:#64748B;margin-bottom:8px">How was this case?</div>' +
-            '<div style="display:flex;gap:6px;align-items:center" id="rdx-rating-stars">' +
+            '<div role="group" aria-label="Rate this case" style="display:flex;gap:6px;align-items:center" id="rdx-rating-stars">' +
               [1,2,3,4,5].map(function(n) {
+                var labels = ['','Poor','Fair','Good','Great','Excellent'];
                 return '<button onclick="rdxRateCase(' + n + ',\'' + _cid + '\')" ' +
+                  'aria-label="Rate ' + n + ' star' + (n!==1?'s':'') + ': ' + labels[n] + '" ' +
                   'style="background:none;border:none;font-size:22px;cursor:pointer;padding:2px;transition:transform .1s;line-height:1" ' +
                   'onmouseover="rdxHoverStars(' + n + ')" onmouseout="rdxHoverStars(0)" ' +
                   'title="' + ['','Poor','Fair','Good','Great','Excellent'][n] + '">☆</button>';
@@ -4217,8 +4230,8 @@ function _showConsentThenStart() {
   });
 }
 </script>
-<script src="js/rdx-retention.js"></script>
-<script src="js/rdx-funnel-agent.js"></script>
+<script src="js/rdx-retention.js" defer></script>
+<script src="js/rdx-funnel-agent.js" defer></script>
 
 <!-- Feature Tours -->
 <script>
@@ -4590,7 +4603,7 @@ function selectProfession(prof, label) {
     u.professionProfile.professionId = prof;
     u.professionProfile.label = label;
     if (!u.trainingYear) u.trainingYear = prof === 'mbs' ? 'M1' : prof === 'medicine' ? 'M3' : prof;
-    localStorage.setItem('rdx_user', JSON.stringify(u));
+    localStorage.setItem('reasondx-user', JSON.stringify(u));
   } catch(e) {}
   // Hide intake, show tutorial
   document.getElementById('rdxProfIntake').style.display = 'none';

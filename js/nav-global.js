@@ -98,6 +98,8 @@
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/dashboard.html">Dashboard</a>`;
     const authActions = userEmail
       ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/browse.html">Browse</a>
+         <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/CoachDx/mentor-chat.html">CoachDx</a>
+         <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/puzzles.html">Puzzles</a>
          ${dashLink}
          <button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()">Sign Out</button>`
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html">Sign In</a>
