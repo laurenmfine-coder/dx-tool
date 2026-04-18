@@ -845,7 +845,7 @@ function render(){var q=(document.getElementById('searchInput').value||'').toLow
   if(window._newUserMode) return (b.acuity||3)-(a.acuity||3);
   return (a.acuity||3)!==(b.acuity||3)?(a.acuity||3)-(b.acuity||3):a.title.localeCompare(b.title);
 });}else{filtered.sort(function(a,b){return a.title.localeCompare(b.title);});}
-var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';document.getElementById('count').textContent=filtered.length+' '+noun;var grid=document.getElementById('grid');if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';return;}document.getElementById('empty').style.display='none';
+var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';document.getElementById('count').textContent=filtered.length+' '+noun;var grid=document.getElementById('grid');if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';if(window.RDXFunnelAgent&&document.getElementById('searchInput').value.trim()){RDXFunnelAgent.searchZeroResults(document.getElementById('searchInput').value.trim(),MODE);}return;}document.getElementById('empty').style.display='none';
 
 // Pagination logic
 var itemsToShow = window._showAll ? filtered.length : Math.min(12, filtered.length);
@@ -1452,6 +1452,7 @@ function startRandomEasyCase() {
 })();
 </script>
 
+<script src="/js/rdx-accessibility.js" defer></script>
 </body>
 
 <script>

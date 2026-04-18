@@ -6393,7 +6393,7 @@ window.CRT_DATA = {
     "diagnosis": "Acetaminophen Overdose (Intentional)",
     "acuity": 2,
     "presentation": "Toxicologic Emergency",
-    "category": "toxicology",
+    "category": "toxicologic",
     "chiefComplaint": "Ingestion / Nausea",
     "treatments": {
       "orders": [
@@ -6713,7 +6713,7 @@ window.CRT_DATA = {
     "diagnosis": "Salicylate Toxicity (Chronic)",
     "acuity": 2,
     "presentation": "Toxicologic Emergency",
-    "category": "toxicology",
+    "category": "toxicologic",
     "chiefComplaint": "Ear Ringing / Confusion",
     "treatments": {
       "orders": [
@@ -10510,7 +10510,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Angle-Closure Glaucoma",
     "acuity": 2,
     "presentation": "Eye Emergency",
-    "category": "ophthalmologic",
+    "category": "ophthalmic",
     "chiefComplaint": "Eye Pain / Vision Change",
     "treatments": {
       "orders": [
@@ -10831,7 +10831,7 @@ window.CRT_DATA = {
     "diagnosis": "Central Retinal Artery Occlusion (CRAO)",
     "acuity": 2,
     "presentation": "Eye Emergency",
-    "category": "ophthalmologic",
+    "category": "ophthalmic",
     "chiefComplaint": "Sudden Vision Loss",
     "treatments": {
       "orders": [
@@ -15629,7 +15629,7 @@ window.CRT_DATA = {
     "diagnosis": "Cardiac Tamponade (Malignant Pericardial Effusion)",
     "acuity": 1,
     "presentation": "Cardiac Emergency",
-    "category": "cardiac",
+    "category": "cardiovascular",
     "chiefComplaint": "Shortness of Breath / Chest Pressure",
     "treatments": {
       "orders": [
@@ -15941,7 +15941,7 @@ window.CRT_DATA = {
     "diagnosis": "Complete (Third-Degree) Heart Block",
     "acuity": 2,
     "presentation": "Cardiac Emergency",
-    "category": "cardiac",
+    "category": "cardiovascular",
     "chiefComplaint": "Near-Syncope / Dizziness",
     "treatments": {
       "orders": [
@@ -18669,7 +18669,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Cholecystitis",
     "acuity": 3,
     "presentation": "Abdominal Pain",
-    "category": "gi",
+    "category": "gastrointestinal",
     "chiefComplaint": "RUQ Abdominal Pain",
     "treatments": {
       "orders": [
@@ -18904,7 +18904,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Coronary Syndrome (NSTEMI/UA)",
     "acuity": 2,
     "presentation": "Chest Pain",
-    "category": "cardiology",
+    "category": "cardiovascular",
     "chiefComplaint": "Chest Pain",
     "treatments": {
       "orders": [
@@ -19165,7 +19165,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Pancreatitis",
     "acuity": 2,
     "presentation": "Abdominal Pain",
-    "category": "gi",
+    "category": "gastrointestinal",
     "chiefComplaint": "Epigastric Pain to Back",
     "treatments": {
       "orders": [
@@ -19634,7 +19634,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Decompensated Heart Failure",
     "acuity": 2,
     "presentation": "Dyspnea",
-    "category": "cardiology",
+    "category": "cardiovascular",
     "chiefComplaint": "SOB/Leg Swelling",
     "treatments": {
       "orders": [
@@ -20396,7 +20396,7 @@ window.CRT_DATA = {
     "diagnosis": "Autoimmune Hemolytic Anemia",
     "acuity": 2,
     "presentation": "Hematologic",
-    "category": "hematology",
+    "category": "hematologic",
     "chiefComplaint": "Fatigue/Jaundice",
     "treatments": {
       "orders": [
@@ -20613,7 +20613,7 @@ window.CRT_DATA = {
     "diagnosis": "Cardiac Syncope",
     "acuity": 2,
     "presentation": "Syncope",
-    "category": "cardiology",
+    "category": "cardiovascular",
     "chiefComplaint": "Syncope/LOC",
     "treatments": {
       "orders": [
@@ -21293,7 +21293,7 @@ window.CRT_DATA = {
     "diagnosis": "Migraine",
     "acuity": 4,
     "presentation": "Headache",
-    "category": "neurology",
+    "category": "neurologic",
     "chiefComplaint": "Severe Headache",
     "treatments": {
       "orders": [
@@ -21741,7 +21741,7 @@ window.CRT_DATA = {
     "diagnosis": "Perforated Peptic Ulcer",
     "acuity": 1,
     "presentation": "Abdominal Pain",
-    "category": "surgery",
+    "category": "surgical",
     "chiefComplaint": "Sudden Severe Epigastric Pain",
     "treatments": {
       "orders": [
@@ -22990,7 +22990,7 @@ window.CRT_DATA = {
     "diagnosis": "SLE Flare with Cytopenias",
     "acuity": 2,
     "presentation": "Hematologic",
-    "category": "hematology",
+    "category": "hematologic",
     "chiefComplaint": "Fatigue/Joint Pain/Rash",
     "treatments": {
       "orders": [
@@ -23236,7 +23236,7 @@ window.CRT_DATA = {
     "diagnosis": "Vasovagal Syncope",
     "acuity": 4,
     "presentation": "Syncope",
-    "category": "cardiology",
+    "category": "cardiovascular",
     "chiefComplaint": "Syncope/LOC",
     "treatments": {
       "orders": [
@@ -38772,7 +38772,7 @@ window.CRT_DATA = {
     "diagnosis": "Alcohol Withdrawal Syndrome (CIWA-Ar 22)",
     "acuity": 2,
     "presentation": "Tremor / Agitation",
-    "category": "toxicology",
+    "category": "toxicologic",
     "chiefComplaint": "Tremor and Agitation \u2014 Last Drink 36h Ago",
     "treatments": {
       "orders": [
@@ -43299,7 +43299,7 @@ window.CRT_DATA = {
     "diagnosis": "Alcohol Withdrawal Seizure \u2014 High Risk for DTs",
     "acuity": 1,
     "presentation": "GTC Seizure 48h Post Last Drink",
-    "category": "toxicology",
+    "category": "toxicologic",
     "chiefComplaint": "First Seizure / Last Drink 2 Days Ago / Prior DTs History",
     "treatments": {
       "orders": [
@@ -47398,7 +47398,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Acetaminophen Overdose",
     "acuity": 2,
     "presentation": "Intentional Overdose / APAP Level Elevated",
-    "category": "toxicology",
+    "category": "toxicologic",
     "chiefComplaint": "Intentional Acetaminophen Ingestion 6 Hours Ago",
     "treatments": {
       "orders": [
@@ -51794,7 +51794,7 @@ window.CRT_DATA = {
     "diagnosis": "Acute Delirium Superimposed on Dementia",
     "acuity": 2,
     "presentation": "Acute AMS / Confusion / Agitation / Elderly Patient",
-    "category": "neurological",
+    "category": "neurologic",
     "chiefComplaint": "Sudden Confusion / Agitation / Baseline Dementia / Family Concerned",
     "treatments": {
       "orders": [
@@ -61555,7 +61555,7 @@ window.CRT_DATA = {
     "diagnosis": "Normal Pressure Hydrocephalus",
     "acuity": 3,
     "presentation": "Gait Apraxia / Cognitive Decline / Urinary Incontinence / Enlarged Ventricles",
-    "category": "neurological",
+    "category": "neurologic",
     "chiefComplaint": "Shuffling Gait / Forgetfulness / Urinary Urgency / CT Enlarged Ventricles",
     "treatments": {
       "orders": [
@@ -76506,7 +76506,7 @@ window.CRT_DATA = {
     "diagnosis": "Brain Mass \u2014 Differential Workup",
     "acuity": 2,
     "presentation": "Key Teaching Points \u2014 Brain Mass \u2014 Differential Workup",
-    "category": "neurological",
+    "category": "neurologic",
     "chiefComplaint": "Clinical Presentation: Brain Mass \u2014 Differential Workup",
     "treatments": {
       "orders": [

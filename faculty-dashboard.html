@@ -2461,6 +2461,50 @@ async function loadProfessionCohortData(SB_URL, SB_KEY, PROF_LABELS, PROF_ICONS,
 document.addEventListener('DOMContentLoaded', init);
 </script>
 <script src="js/rdx-demo-data.js"></script>
+
+<!-- Content Gap Report -->
+<div id="content-gap-section" style="max-width:1100px;margin:32px auto;padding:0 16px">
+  <div style="background:#fff;border:1px solid #E2E8F0;border-radius:14px;padding:24px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <div>
+        <h3 style="font-size:16px;font-weight:700;color:#1E293B;margin:0 0 4px">📊 Platform Content Coverage</h3>
+        <p style="font-size:12px;color:#64748B;margin:0">Specialties with fewer than 10 cases — for curriculum planning</p>
+      </div>
+    </div>
+    <div id="rdx-gap-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px"></div>
+  </div>
+</div>
+<script>
+(function() {
+  var gaps = [
+    {cat:'Pediatric',count:4,p:'high'},{cat:'Rheumatologic',count:4,p:'high'},
+    {cat:'Allergy / Immunology',count:4,p:'high'},{cat:'Orthopedic',count:4,p:'high'},
+    {cat:'Obstetric',count:3,p:'high'},{cat:'Geriatric',count:3,p:'high'},
+    {cat:'ENT',count:2,p:'high'},{cat:'Ophthalmic',count:8,p:'medium'},
+    {cat:'Urologic',count:8,p:'medium'},{cat:'Psychiatric',count:7,p:'medium'},
+    {cat:'Trauma',count:7,p:'medium'},{cat:'Surgical',count:5,p:'medium'},
+    {cat:'Dermatologic',count:6,p:'medium'},{cat:'Environmental',count:5,p:'medium'},
+  ];
+  document.addEventListener('DOMContentLoaded', function() {
+    var g = document.getElementById('rdx-gap-grid');
+    if (!g) return;
+    var h = '';
+    gaps.forEach(function(x) {
+      var bg = x.p==='high'?'#FEF2F2':'#FFF7ED';
+      var bd = x.p==='high'?'#FECACA':'#FED7AA';
+      var lbl = x.p==='high'?'Critical gap':'Low coverage';
+      h += '<div style="background:'+bg+';border:1px solid '+bd+';border-radius:8px;padding:10px 12px">' +
+        '<div style="font-size:11px;font-weight:700;color:#1E293B;margin-bottom:4px">'+x.cat+'</div>' +
+        '<div style="font-size:20px;font-weight:800;color:#1E293B;line-height:1">'+x.count+'</div>' +
+        '<div style="font-size:10px;color:#64748B;margin-top:2px">cases &middot; '+lbl+'</div>' +
+        '</div>';
+    });
+    g.innerHTML = h;
+  });
+})();
+</script>
+
+<script src="/js/rdx-accessibility.js" defer></script>
 <script src="/js/nav-global.js"></script>
 </body>
 </html>
