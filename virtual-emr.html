@@ -5577,11 +5577,23 @@ submitDoc = function(){
       var _p = new URLSearchParams(window.location.search);
       var _id = window.CASE_ID || _p.get('case') || _p.get('cx') || '';
       console.log('[RDX routing] id=', _id, 'setting=', _S.clinicalSetting, 'att=', _att);
-      if (window.EMRShell && (_id || _S.clinicalSetting)) { EMRShell.inject(); }
+      if (window.EMRShell && _id) { EMRShell.inject(); } // Only inject shell when there's an actual case
       if (!_id && !_S.clinicalSetting) {
-        window.location.replace('browse.html?mode=practice');
+        // Show the EMR landing page (two-path CTAs)
+        if (window.EMRLanding) {
+          var app = document.getElementById('app');
+          if (app) app.innerHTML = EMRLanding.render();
+        } else {
+          window.location.replace('/browse.html');
+        }
       } else if (!_id && _S.clinicalSetting) {
-        showCasePicker();
+        // Stale setting but no case — show landing page
+        if (window.EMRLanding) {
+          var app = document.getElementById('app');
+          if (app) app.innerHTML = EMRLanding.render();
+        } else {
+          showCasePicker();
+        }
       } else {
         if (!window.CASE_ID) window.CASE_ID = _id;
         loadCaseData(function() {
