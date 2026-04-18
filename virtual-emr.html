@@ -59,7 +59,15 @@
 (function() {
   var p = new URLSearchParams(window.location.search);
   if (!p.get('case') && !p.get('cx')) {
-    window.location.replace('/browse.html?mode=practice');
+    var setting = p.get('setting');
+    if (setting) {
+      // Has a setting but no case — launch a default case for that setting
+      var defaults = { ed: 'stemi-v1', inpatient: 'chf-exacerbation', clinic: 'pneumonia', icu: 'sepsis-shock' };
+      var defaultCase = defaults[setting] || 'stemi-v1';
+      window.location.replace('/virtual-emr.html?case=' + defaultCase + '&setting=' + setting);
+    } else {
+      window.location.replace('/browse.html?mode=practice');
+    }
   }
 })();
 </script>
