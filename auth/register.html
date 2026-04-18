@@ -133,7 +133,6 @@ async function handleRegister(e) {
   } else {
     showSuccess('Account created! Check your email to confirm, then sign in.');
     document.getElementById('registerForm').style.display = 'none';
-    // Trigger profession onboarding for new accounts, then redirect
     if (window.RDX_ProfessionOnboardingModal) {
       setTimeout(function() {
         var modal = new RDX_ProfessionOnboardingModal({
@@ -148,12 +147,13 @@ async function handleRegister(e) {
         });
         modal.inject();
       }, 800);
-    }
-  }
     } else {
       // No profession modal — redirect directly
       setTimeout(function() { window.location.href = '/browse.html'; }, 1500);
+    }
+  }
 }
+
 </script>
 <script src="/rdx-profession-onboarding.js"></script>
 </body>
