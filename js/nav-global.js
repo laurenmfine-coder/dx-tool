@@ -145,7 +145,7 @@
       } else if (window.supabase) {
         const url = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
         const key = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-        const client = window.supabase.createClient(url, key);
+        const client = window._rdxSbClient || (window._rdxSbClient = window.supabase.createClient(url, key));
         await client.auth.signOut();
       }
     } catch(e) { console.warn('Sign out error:', e); }
@@ -167,7 +167,7 @@
       } else if (window.supabase) {
         const url = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
         const key = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
-        const client = window.supabase.createClient(url, key);
+        const client = window._rdxSbClient || (window._rdxSbClient = window.supabase.createClient(url, key));
         client.auth.getSession().then(({ data }) => {
           const email = data?.session?.user?.email || null;
           buildNav(email);

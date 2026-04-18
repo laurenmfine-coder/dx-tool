@@ -29,7 +29,7 @@
   var SB_KEY     = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
 
   function getSB() {
-    if (window.supabase && window.supabase.createClient) return window.supabase.createClient(SB_URL, SB_KEY);
+    if (window.supabase && window.supabase.createClient) return window._rdxSbClient || (window._rdxSbClient = window.supabase.createClient(SB_URL, SB_KEY);))
     return null;
   }
 

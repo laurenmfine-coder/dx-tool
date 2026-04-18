@@ -13,4 +13,15 @@
   // Convenience aliases
   window.SUPABASE_URL = window.RDX_CONFIG.SUPABASE_URL;
   window.SUPABASE_ANON_KEY = window.RDX_CONFIG.SUPABASE_ANON_KEY;
+  // Singleton Supabase client — prevents GoTrueClient multiple instance warnings
+  if (window.supabase && window.supabase.createClient && !window._rdxSbClient) {
+    window.addEventListener('load', function() {
+      if (!window._rdxSbClient && window.supabase) {
+        window._rdxSbClient = window.supabase.createClient(
+          window.RDX_CONFIG.SUPABASE_URL, 
+          window.RDX_CONFIG.SUPABASE_ANON_KEY
+        );
+      }
+    });
+  }
 })();
