@@ -703,6 +703,7 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
   <div class="filters">
     <input type="text" class="search" id="searchInput" placeholder="Search by presentation, symptom, or diagnosis..." oninput="handleSearch()" aria-label="Search ReasonDx content">
   </div>
+  <div id="filterBtns" style="display:flex;flex-wrap:wrap;gap:6px;padding:0 0 12px;"></div>
   <div class="count-bar">
     <span class="count" id="count"></span>
     <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -864,10 +865,14 @@ var LEARN_DATA=[{id:'acs-module',title:'Acute Coronary Syndromes',cat:'cardiovas
     });
   }
   // Run after DOM ready — data is inline so already available
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', _updateStatNums);
-  } else {
+  function _initBrowse() {
     _updateStatNums();
+    setMode('simulate'); // Render the grid on page load
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', _initBrowse);
+  } else {
+    _initBrowse();
   }
 })();
 var CAT_SETS={simulate:['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],practice:['cardiovascular','pulmonary','neurologic','infectious','gastrointestinal','allergy','endocrine','toxicologic'],coach:['allergy','cardiovascular','pulmonary','infectious','neurologic','gastrointestinal','renal','endocrine','hematologic','emergency','ophthalmology','reasoning','genetics','rheumatologic','psychiatric'],learn:['allergy','cardiovascular','pulmonary','infectious','neurologic','renal','endocrine','gastrointestinal','hematologic','genetics','rheumatologic','psychiatric']};
@@ -894,7 +899,7 @@ function setMode(m){MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(
                     coach:'— Socratic reasoning across all specialties',
                     learn:'— mechanism-first pathophysiology'};
     labelEl.textContent = modeDesc[m] || 'below';
-  }});var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');document.querySelector('.fbtn[data-cat="all"]').classList.add('on');render();}
+  }});var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');if(btns)btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');var allBtn=document.querySelector('.fbtn[data-cat="all"]');if(allBtn)allBtn.classList.add('on');render();}
 function setCat(c){CAT=c;document.querySelectorAll('.fbtn').forEach(function(b){b.classList.toggle('on',b.dataset.cat===c);});render();}
 function getData(){if(MODE==='simulate') return SIM_FEATURED.concat(SIM_DATA);if(MODE==='practice') return PRAC_DATA;if(MODE==='coach') return COACH_DATA;if(MODE==='learn') return LEARN_DATA;return [];}
 function render(){var q=(document.getElementById('searchInput').value||'').toLowerCase().trim();var data=getData();var filtered=data.filter(function(c){if(CAT!=='all'&&c.cat!==CAT) return false;if(q){var s=(c.title+' '+(c.sub||'')+' '+c.cat+' '+(c.tags||'')+' '+(c.search||'')).toLowerCase();return s.includes(q);}return true;});if(MODE==='simulate'||MODE==='practice'){filtered.sort(function(a,b){
