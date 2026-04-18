@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Program Configuration</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ocean: #2874A6; --ocean-dark: #1B4F72; --ocean-deep: #0f2d42;
+  --ocean-light: #EBF5FB; --teal: #0D7A67; --teal-light: #E6F4F1;
+  --gold: #C49A1A; --gold-light: #FDF6E3;
+  --red: #C0392B; --red-light: #FDEDEC;
+  --text: #1a2332; --text-mid: #4a5568; --text-light: #718096;
+  --bg: #f0f4f8; --white: #ffffff; --border: #d0dce8;
+  --mono: 'DM Mono', 'Courier New', monospace;
+  --sans: 'DM Sans', -apple-system, sans-serif;
+}
+body { font-family: var(--sans); background: var(--bg); color: var(--text); min-height: 100vh; }
+a { color: var(--ocean); }
+
+/* Header */
+.header { background: var(--ocean-deep); padding: 0 32px; height: 52px; display: flex; align-items: center; justify-content: space-between; }
+.header-brand { display: flex; align-items: center; gap: 10px; color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; }
+.header-brand span { opacity: .5; font-weight: 400; font-size: 12px; margin-left: 6px; }
+.header-nav a { color: rgba(255,255,255,.6); font-size: 12px; text-decoration: none; margin-left: 16px; }
+.header-nav a:hover { color: #fff; }
+
+/* Layout */
+.layout { max-width: 960px; margin: 0 auto; padding: 32px 24px; }
+.page-title { font-size: 24px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 4px; }
+.page-sub { font-size: 14px; color: var(--text-light); margin-bottom: 32px; }
+
+/* Section */
+.section { background: var(--white); border-radius: 10px; border: 1px solid var(--border); margin-bottom: 20px; overflow: hidden; }
+.section-head { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.section-head h2 { font-size: 15px; font-weight: 700; color: var(--text); }
+.section-head p { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+.section-body { padding: 20px 22px; }
+
+/* Program ID bar */
+.prog-bar { background: var(--ocean-light); border: 1px solid #b8d4e8; border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.prog-bar label { font-size: 12px; font-weight: 700; color: var(--ocean-dark); white-space: nowrap; }
+.prog-bar input { flex: 1; min-width: 180px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--mono); font-size: 13px; background: var(--white); color: var(--text); }
+.prog-bar input:focus { outline: none; border-color: var(--ocean); box-shadow: 0 0 0 3px rgba(40,116,166,.12); }
+.btn { padding: 8px 18px; border: none; border-radius: 7px; font-family: var(--sans); font-size: 13px; font-weight: 700; cursor: pointer; transition: all .15s; white-space: nowrap; }
+.btn-primary { background: var(--ocean); color: #fff; }
+.btn-primary:hover { background: var(--ocean-dark); }
+.btn-secondary { background: var(--white); color: var(--ocean); border: 1px solid var(--ocean); }
+.btn-secondary:hover { background: var(--ocean-light); }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+
+/* Preset cards */
+.preset-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.preset-card { border: 2px solid var(--border); border-radius: 10px; padding: 16px; cursor: pointer; transition: all .15s; background: var(--white); }
+.preset-card:hover { border-color: var(--ocean); background: var(--ocean-light); }
+.preset-card.selected { border-color: var(--ocean); background: var(--ocean-light); }
+.preset-card.selected .preset-check { opacity: 1; }
+.preset-icon { font-size: 24px; margin-bottom: 8px; }
+.preset-label { font-size: 14px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 4px; }
+.preset-desc { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+.preset-check { width: 18px; height: 18px; border-radius: 50%; background: var(--ocean); display: flex; align-items: center; justify-content: center; float: right; margin-top: -4px; opacity: 0; transition: opacity .15s; }
+.preset-check::after { content: '✓'; color: #fff; font-size: 11px; font-weight: 700; }
+
+/* Phase toggles */
+.phase-grid { display: flex; flex-direction: column; gap: 10px; }
+.phase-row { display: grid; grid-template-columns: 28px 1fr 120px 180px 100px; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px; background: var(--white); }
+.phase-row.disabled-row { opacity: .45; }
+.phase-num { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--ocean); }
+.phase-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.phase-desc-small { font-size: 11px; color: var(--text-light); }
+
+/* Toggle switch */
+.toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-track { position: absolute; inset: 0; background: #CBD5E0; border-radius: 11px; cursor: pointer; transition: background .2s; }
+.toggle input:checked + .toggle-track { background: var(--ocean); }
+.toggle-track::after { content: ''; position: absolute; height: 16px; width: 16px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: transform .2s; }
+.toggle input:checked + .toggle-track::after { transform: translateX(18px); }
+
+/* Coach select */
+.coach-select { padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--sans); font-size: 12px; background: var(--white); color: var(--text); cursor: pointer; }
+.coach-select:focus { outline: none; border-color: var(--ocean); }
+
+/* Time input */
+.time-input { width: 80px; padding: 5px 8px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--mono); font-size: 12px; background: var(--white); color: var(--text); }
+
+/* DDx minimum */
+.ddx-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
+.ddx-row:last-child { border-bottom: none; }
+.ddx-row label { font-size: 13px; font-weight: 600; color: var(--text); flex: 1; }
+.ddx-row .sub { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+.ddx-val { width: 60px; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--mono); font-size: 14px; font-weight: 700; color: var(--ocean-dark); text-align: center; }
+
+/* Preview panel */
+.preview { background: var(--ocean-deep); border-radius: 10px; padding: 16px 20px; margin-top: 20px; }
+.preview-title { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.preview-json { font-family: var(--mono); font-size: 11px; color: #7EC8E3; line-height: 1.7; white-space: pre-wrap; word-break: break-all; }
+
+/* Save bar */
+.save-bar { position: sticky; bottom: 0; background: var(--white); border-top: 1px solid var(--border); padding: 14px 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; box-shadow: 0 -2px 12px rgba(0,0,0,.08); }
+.save-status { font-size: 12px; color: var(--text-light); }
+.save-status.success { color: var(--teal); font-weight: 600; }
+.save-status.error   { color: var(--red); font-weight: 600; }
+
+/* Test link */
+.test-link { font-family: var(--mono); font-size: 12px; background: var(--ocean-light); border: 1px solid var(--border); border-radius: 6px; padding: 8px 14px; color: var(--ocean); margin-top: 12px; display: block; text-decoration: none; word-break: break-all; }
+.test-link:hover { background: var(--white); }
+
+/* Auth gate */
+#auth-gate { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--bg); }
+.auth-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 36px; max-width: 380px; width: 90%; text-align: center; }
+.auth-card h2 { font-size: 20px; font-weight: 700; color: var(--ocean-dark); margin-bottom: 8px; }
+.auth-card p { font-size: 13px; color: var(--text-light); margin-bottom: 20px; line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .phase-row { grid-template-columns: 28px 1fr; row-gap: 6px; }
+  .preset-grid { grid-template-columns: 1fr; }
+  .layout { padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<div id="auth-gate" style="display:none;">
+  <div class="auth-card">
+    <div style="font-size:36px;margin-bottom:12px">🔒</div>
+    <h2>Faculty / Admin Access</h2>
+    <p>This page is for program administrators. Sign in with your faculty account to configure Guided Mode for your program.</p>
+    <a href="../auth/login.html?redirect=/admin/program-config.html" class="btn btn-primary" style="display:block;margin-top:4px;text-decoration:none;text-align:center">Sign In</a>
+  </div>
+</div>
+
+<div id="main-app" style="display:none;">
+
+  <div class="header">
+    <a class="header-brand" href="../index.html">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>
+      ReasonDx <span>Program Configuration</span>
+    </a>
+    <nav class="header-nav">
+      <a href="../faculty-dashboard.html">Faculty Dashboard</a>
+      <a href="../analytics-dashboard.html">Analytics</a>
+      <a href="#" onclick="doSignOut()">Sign Out</a>
+    </nav>
+  </div>
+
+  <div class="layout">
+    <h1 class="page-title">Guided Mode Configuration</h1>
+    <p class="page-sub">Customize how students experience the clinical reasoning workflow for your program.</p>
+
+    <!-- Program ID -->
+    <div class="prog-bar">
+      <label>Program ID</label>
+      <input type="text" id="program-id-input" placeholder="e.g. nsu-kpcam-m3" />
+      <button class="btn btn-secondary btn-sm" onclick="loadProgramConfig()">Load</button>
+    </div>
+
+    <!-- Preset Templates -->
+    <div class="section">
+      <div class="section-head">
+        <div>
+          <h2>Preset Template</h2>
+          <p>Choose a starting point. You can override individual settings below.</p>
+        </div>
+        <span id="active-preset-label" style="font-size:12px;color:var(--ocean);font-weight:600"></span>
+      </div>
+      <div class="section-body">
+        <div class="preset-grid" id="preset-grid"></div>
+      </div>
+    </div>
+
+    <!-- Phase Toggles -->
+    <div class="section">
+      <div class="section-head">
+        <div>
+          <h2>Phase Settings</h2>
+          <p>Enable/disable phases and configure CoachDx requirements and time limits.</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div style="display:grid;grid-template-columns:28px 1fr 80px 180px 120px;gap:12px;padding:0 14px 10px;font-size:10px;font-weight:700;color:var(--text-light);text-transform:uppercase;letter-spacing:.8px;">
+          <span>#</span><span>Phase</span><span>Enabled</span><span>CoachDx Mode</span><span>Time Limit</span>
+        </div>
+        <div class="phase-grid" id="phase-grid"></div>
+      </div>
+    </div>
+
+    <!-- Advanced Options -->
+    <div class="section">
+      <div class="section-head">
+        <div><h2>Advanced Options</h2><p>DDx entry requirements and navigation behavior.</p></div>
+      </div>
+      <div class="section-body">
+        <div class="ddx-row">
+          <div>
+            <label>Minimum DDx Entries</label>
+            <div class="sub">Students must enter at least this many diagnoses to advance from DDx phases.</div>
+          </div>
+          <input type="number" class="ddx-val" id="ddx-min" min="1" max="5" value="2" oninput="updatePreview()" />
+        </div>
+        <div class="ddx-row">
+          <div>
+            <label>Allow Backtracking</label>
+            <div class="sub">Students can return to prior phases after advancing.</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="allow-backtrack" checked onchange="updatePreview()">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+        <div class="ddx-row">
+          <div>
+            <label>Profession Framing (IPE)</label>
+            <div class="sub">CoachDx uses profession-specific language. Requires student profession to be set.</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="profession-framing" onchange="updatePreview()">
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Test Link -->
+    <div class="section">
+      <div class="section-head"><div><h2>Test Configuration</h2><p>Preview the guided case with your current settings.</p></div></div>
+      <div class="section-body">
+        <p style="font-size:13px;color:var(--text-mid);margin-bottom:10px">Use this link to test the STEMI case with your current program config applied:</p>
+        <a id="test-link" class="test-link" href="#" target="_blank">Loading...</a>
+        <p style="font-size:11px;color:var(--text-light);margin-top:8px">Config is applied via the program ID in the URL. Students see the same experience when enrolled in your program.</p>
+      </div>
+    </div>
+
+    <!-- Config Preview -->
+    <div class="preview">
+      <div class="preview-title">Configuration JSON (read-only preview)</div>
+      <pre class="preview-json" id="config-preview">Loading...</pre>
+    </div>
+
+    <div style="height:80px"></div>
+  </div>
+
+  <!-- Save bar -->
+  <div class="save-bar">
+    <span class="save-status" id="save-status">Unsaved changes</span>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-secondary" onclick="resetToPreset()">Reset to Preset</button>
+      <button class="btn btn-primary" onclick="saveConfig()">Save Configuration</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="../js/institutional-config.js"></script>
+<script>
+// ── Auth check ───────────────────────────────────────────────────
+(function () {
+  var user = null;
+  try { user = JSON.parse(localStorage.getItem('reasondx-user')); } catch (e) {}
+  var role = user && user.role;
+  if (role === 'faculty' || role === 'admin') {
+    document.getElementById('auth-gate').style.display = 'none';
+    document.getElementById('main-app').style.display = 'block';
+  } else {
+    // Dev mode: allow access if ?dev=1
+    if (new URLSearchParams(location.search).get('dev') === '1') {
+      document.getElementById('auth-gate').style.display = 'none';
+      document.getElementById('main-app').style.display = 'block';
+    } else {
+      document.getElementById('auth-gate').style.display = 'flex';
+    }
+  }
+})();
+
+function doSignOut() {
+  localStorage.removeItem('reasondx-user');
+  window.location.href = '../auth/login.html';
+}
+
+// ── State ────────────────────────────────────────────────────────
+var _selectedPreset = 'clerkship';
+var _overrides = {};
+var PHASES = [
+  { id: 1, key: 'cc',          label: 'Chief Complaint',   desc: 'CC-only view, no chart data' },
+  { id: 2, key: 'ddx-init',    label: 'Initial DDx',       desc: 'Build differential from CC' },
+  { id: 3, key: 'interview',   label: 'Patient Interview', desc: 'AI-powered history taking' },
+  { id: 4, key: 'exam',        label: 'Physical Exam',     desc: 'Hypothesis-driven exam' },
+  { id: 5, key: 'ddx-refine',  label: 'Refined DDx',       desc: 'Post H&P differential revision' },
+  { id: 6, key: 'past-data',   label: 'Past Data Review',  desc: 'Historical labs, imaging, meds' },
+  { id: 7, key: 'orders',      label: 'New Orders',        desc: 'Order new diagnostics' },
+  { id: 8, key: 'note',        label: 'Note & Feedback',   desc: 'Write note + AI coaching' }
+];
+
+// ── Build preset grid ─────────────────────────────────────────────
+function buildPresetGrid() {
+  var grid = document.getElementById('preset-grid');
+  var presets = InstitutionalConfig.PRESETS;
+  grid.innerHTML = Object.keys(presets).map(function (key) {
+    var p = presets[key];
+    return '<div class="preset-card' + (_selectedPreset === key ? ' selected' : '') + '" onclick="selectPreset(\'' + key + '\')">' +
+      '<div class="preset-check"></div>' +
+      '<div class="preset-icon">' + p.icon + '</div>' +
+      '<div class="preset-label">' + p.label + '</div>' +
+      '<div class="preset-desc">' + p.description + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+function selectPreset(key) {
+  _selectedPreset = key;
+  _overrides = {};
+  var preset = InstitutionalConfig.PRESETS[key];
+  // Reset advanced options to preset values
+  document.getElementById('ddx-min').value = preset.ddxMinEntries || 2;
+  document.getElementById('allow-backtrack').checked = preset.allowBacktrack !== false;
+  document.getElementById('profession-framing').checked = !!preset.professionFraming;
+  buildPresetGrid();
+  buildPhaseGrid();
+  updatePreview();
+  document.getElementById('active-preset-label').textContent = preset.label;
+}
+
+// ── Build phase grid ──────────────────────────────────────────────
+function buildPhaseGrid() {
+  var preset = InstitutionalConfig.PRESETS[_selectedPreset];
+  var grid = document.getElementById('phase-grid');
+  grid.innerHTML = PHASES.map(function (p) {
+    var enabled = ((_overrides.enabledPhases || preset.enabledPhases || [1,2,3,4,5,6,7,8]).indexOf(p.id) !== -1);
+    var coachCfg = (_overrides.coachConfig && _overrides.coachConfig[p.id]) ||
+                   (preset.coachConfig && preset.coachConfig[p.id]) || 'optional';
+    var timeLimit = (_overrides.timeLimits && _overrides.timeLimits[p.id]) ||
+                    (preset.timeLimits && preset.timeLimits[p.id]) || '';
+
+    return '<div class="phase-row' + (!enabled ? ' disabled-row' : '') + '" id="phase-row-' + p.id + '">' +
+      '<span class="phase-num">' + p.id + '</span>' +
+      '<div><div class="phase-name">' + p.label + '</div><div class="phase-desc-small">' + p.desc + '</div></div>' +
+      '<label class="toggle"><input type="checkbox" ' + (enabled ? 'checked' : '') +
+        ' onchange="togglePhase(' + p.id + ', this.checked)"><span class="toggle-track"></span></label>' +
+      '<select class="coach-select" onchange="setCoachMode(' + p.id + ', this.value)">' +
+        ['optional','required','available','hidden'].map(function (m) {
+          return '<option value="' + m + '"' + (coachCfg === m ? ' selected' : '') + '>' +
+            { optional: 'Optional', required: '⚠ Required', available: 'On-demand', hidden: 'Hidden' }[m] + '</option>';
+        }).join('') +
+      '</select>' +
+      '<input type="number" class="time-input" placeholder="None" min="30" max="3600" value="' + (timeLimit || '') + '"' +
+        ' onchange="setTimeLimit(' + p.id + ', this.value)" title="Time limit in seconds (blank = none)">' +
+    '</div>';
+  }).join('');
+}
+
+function togglePhase(phaseId, enabled) {
+  var preset = InstitutionalConfig.PRESETS[_selectedPreset];
+  var current = (_overrides.enabledPhases || preset.enabledPhases || [1,2,3,4,5,6,7,8]).slice();
+  if (enabled && current.indexOf(phaseId) === -1) current.push(phaseId);
+  if (!enabled) current = current.filter(function (id) { return id !== phaseId; });
+  _overrides.enabledPhases = current.sort(function (a, b) { return a - b; });
+  var row = document.getElementById('phase-row-' + phaseId);
+  if (row) row.classList.toggle('disabled-row', !enabled);
+  updatePreview();
+}
+
+function setCoachMode(phaseId, mode) {
+  if (!_overrides.coachConfig) _overrides.coachConfig = {};
+  _overrides.coachConfig[phaseId] = mode;
+  updatePreview();
+}
+
+function setTimeLimit(phaseId, val) {
+  if (!_overrides.timeLimits) _overrides.timeLimits = {};
+  var num = parseInt(val);
+  if (num > 0) _overrides.timeLimits[phaseId] = num;
+  else delete _overrides.timeLimits[phaseId];
+  updatePreview();
+}
+
+function resetToPreset() {
+  _overrides = {};
+  buildPhaseGrid();
+  updatePreview();
+  setStatus('Reset to preset defaults', false);
+}
+
+// ── Preview + test link ───────────────────────────────────────────
+function updatePreview() {
+  var preset = InstitutionalConfig.PRESETS[_selectedPreset];
+  var ddxMin = parseInt(document.getElementById('ddx-min').value) || 2;
+  var allowBt = document.getElementById('allow-backtrack').checked;
+  var profFr  = document.getElementById('profession-framing').checked;
+
+  if (ddxMin !== preset.ddxMinEntries) _overrides.ddxMinEntries = ddxMin;
+  if (allowBt !== (preset.allowBacktrack !== false)) _overrides.allowBacktrack = allowBt;
+  if (profFr  !== !!preset.professionFraming) _overrides.professionFraming = profFr;
+
+  var config = { preset: _selectedPreset, overrides: _overrides };
+  document.getElementById('config-preview').textContent = JSON.stringify(config, null, 2);
+
+  // Test link
+  var pid = document.getElementById('program-id-input').value.trim() || 'preview';
+  var testUrl = window.location.origin + '/virtual-emr.html?case=stemi-v1&mode=guided&program=' + encodeURIComponent(pid);
+  var link = document.getElementById('test-link');
+  link.href = testUrl;
+  link.textContent = testUrl;
+
+  setStatus('Unsaved changes', false);
+}
+
+// ── Load / Save ───────────────────────────────────────────────────
+async function loadProgramConfig() {
+  var pid = document.getElementById('program-id-input').value.trim();
+  if (!pid) { alert('Enter a Program ID first.'); return; }
+  setStatus('Loading...', false);
+  try {
+    var cached = localStorage.getItem('rdx-program-config-' + pid);
+    if (cached) {
+      var c = JSON.parse(cached);
+      _selectedPreset = c.preset || 'clerkship';
+      _overrides = c.overrides || {};
+      buildPresetGrid();
+      buildPhaseGrid();
+      updatePreview();
+      setStatus('Loaded from cache', false);
+    } else {
+      setStatus('No config found for this program — using defaults', false);
+    }
+  } catch (e) {
+    setStatus('Error loading config', true);
+  }
+}
+
+async function saveConfig() {
+  var pid = document.getElementById('program-id-input').value.trim();
+  if (!pid) { alert('Enter a Program ID before saving.'); return; }
+  setStatus('Saving...', false);
+  var ok = await InstitutionalConfig.save(pid, _selectedPreset, _overrides);
+  if (ok) {
+    setStatus('✓ Saved successfully', false);
+  } else {
+    // localStorage fallback
+    try {
+      localStorage.setItem('rdx-program-config-' + pid, JSON.stringify({ preset: _selectedPreset, overrides: _overrides }));
+      setStatus('✓ Saved locally (Supabase unavailable)', false);
+    } catch (e) {
+      setStatus('Error saving — check console', true);
+    }
+  }
+}
+
+function setStatus(msg, isError) {
+  var el = document.getElementById('save-status');
+  el.textContent = msg;
+  el.className = 'save-status' + (isError ? ' error' : (msg.startsWith('✓') ? ' success' : ''));
+}
+
+// ── Init ──────────────────────────────────────────────────────────
+(function () {
+  // Pre-fill program ID from URL or localStorage
+  var urlPid = new URLSearchParams(location.search).get('program');
+  var storedUser = null;
+  try { storedUser = JSON.parse(localStorage.getItem('reasondx-user')); } catch (e) {}
+  var pid = urlPid || (storedUser && storedUser.programId) || '';
+  if (pid) document.getElementById('program-id-input').value = pid;
+
+  buildPresetGrid();
+  buildPhaseGrid();
+  updatePreview();
+  document.getElementById('active-preset-label').textContent = InstitutionalConfig.PRESETS[_selectedPreset].label;
+})();
+</script>
+</body>
+</html>
