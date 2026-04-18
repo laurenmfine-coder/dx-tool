@@ -3820,6 +3820,45 @@ function submitDoc(){
   // Cloud sync
   if(window.EMRCloud){EMRCloud.syncSubmission(S.currentUser.username,CASE_ID||'',sub)}
 
+  // ── Notify assigned faculty via edge function ──────────────────────────
+  (function() {
+    try {
+      var _facultyEmail = '';
+      var _facultyName = '';
+      // Find faculty assigned to this student
+      var _assigns = JSON.parse(localStorage.getItem('emr-assignments') || '{}');
+      Object.entries(_assigns).forEach(function(entry) {
+        var fEmail = entry[0]; var students = entry[1];
+        if (Array.isArray(students) && students.indexOf(S.currentUser.username) >= 0) {
+          _facultyEmail = fEmail;
+          var _users = JSON.parse(localStorage.getItem('emr-users') || '{}');
+          if (_users[fEmail]) _facultyName = _users[fEmail].displayName || fEmail;
+        }
+      });
+      if (!_facultyEmail) return; // No faculty assigned — skip
+
+      var _wordCount = 0;
+      try { _wordCount = Object.values(S.noteFields).reduce(function(t,v){return t+(v?v.trim().split(/\s+/).filter(Boolean).length:0);},0); } catch(e){}
+
+      var SB_URL = 'https://lpwbiqpojisqgezycupw.supabase.co';
+      var SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+      fetch(SB_URL + '/functions/v1/notify-faculty-submission', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + SB_KEY },
+        body: JSON.stringify({
+          studentName: S.currentUser.displayName || S.currentUser.username,
+          studentEmail: S.currentUser.username,
+          caseName: (PATIENT && PATIENT.chiefComplaint) ? PATIENT.chiefComplaint : (CASE_ID || 'Case'),
+          caseId: CASE_ID || '',
+          facultyEmail: _facultyEmail,
+          facultyName: _facultyName,
+          noteWordCount: _wordCount,
+          submittedAt: new Date().toISOString()
+        })
+      }).catch(function() {}); // Silent fail — never block the student flow
+    } catch(e) {}
+  })();
+
   // -- Flodesk performance email trigger --
   if(window.RDXEmail && S.currentUser && S.currentUser.username){
     var _firstEmrKey = 'rdx-first-emr-sent-' + S.currentUser.username;

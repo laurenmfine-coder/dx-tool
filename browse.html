@@ -775,12 +775,8 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
     <button onclick="document.getElementById('searchInput').value='';CAT='all';render()" style="background:#2874A6;color:#fff;border:none;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Clear filters — browse all 394 cases</button>
   </div>
   
-  <!-- Load More Button -->
-  <div id="loadMore" style="display:none;text-align:center;margin:40px 0 60px">
-    <button onclick="window._showAll=true;render();" style="padding:14px 40px;background:#fff;color:#2874A6;border:2px solid #2874A6;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s">
-      Load <span class="load-more-count">0</span> More Cases
-    </button>
-  </div>
+  <!-- Infinite scroll sentinel -->
+  <div id="loadMore" style="height:60px;margin-bottom:20px"></div>
 </div>
 
 <script>
@@ -942,7 +938,7 @@ var CAT_SETS={simulate:['cardiovascular','pulmonary','neurologic','infectious','
 var CAT_LABELS={cardiovascular:'Cardio',pulmonary:'Pulm',neurologic:'Neuro',infectious:'ID',gastrointestinal:'GI',allergy:'Allergy',endocrine:'Endo',toxicologic:'Tox',reasoning:'Reasoning',renal:'Renal',hematologic:'Heme',emergency:'EM',rheumatologic:'Rheum',psychiatric:'Psych',obstetric:'OB',pediatric:'Peds',geriatric:'Geri',general:'General',genetics:'Genetics'};
 var SECTION_COPY={simulate:{title:'Simulate &mdash; <em>AI Patient Encounters</em>',meta:'Adaptive 10-phase clinical simulation'},practice:{title:'Practice &mdash; <em>Virtual EMR</em>',meta:'Chart review · Orders · Documentation · Feedback'},coach:{title:'Coach &mdash; <em>Socratic Reasoning</em>',meta:'Attending-style Socratic dialogue across 25 categories'},learn:{title:'Learn &mdash; <em>Pathophysiology Modules</em>',meta:'Mechanism-first modules with AI attending'}};
 var PLACEHOLDERS={simulate:'Search by chief complaint — chest pain, dyspnea, fever...',practice:'Search cases by chief complaint or diagnosis...',coach:'Search topics — asthma, DDx, sepsis, bias...',learn:'Search pathophysiology modules...'};
-function setMode(m){MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});
+function setMode(m){ window._rdxBatchSize = 24; window._showAll = false;MODE=m;CAT='all';document.querySelectorAll('.stat').forEach(function(b){b.classList.toggle('active',b.dataset.mode===m);});
   // Hide start-here section when switching away from simulate
   var startHere = document.getElementById('start-here-section');
   if (startHere) startHere.style.display = (m === 'simulate') ? '' : 'none';
@@ -1001,7 +997,7 @@ function render(){var q=(document.getElementById('searchInput').value||'').toLow
 var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';document.getElementById('count').textContent=filtered.length+' '+noun;var grid=document.getElementById('grid');if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';if(window.RDXFunnelAgent&&document.getElementById('searchInput').value.trim()){RDXFunnelAgent.searchZeroResults(document.getElementById('searchInput').value.trim(),MODE);}return;}document.getElementById('empty').style.display='none';
 
 // Pagination logic
-var itemsToShow = window._showAll ? filtered.length : Math.min(12, filtered.length);
+var _batchSize = window._rdxBatchSize || 24; var itemsToShow = window._showAll ? filtered.length : Math.min(_batchSize, filtered.length);
 var displayedItems = filtered.slice(0, itemsToShow);
 
 grid.innerHTML=displayedItems.map(function(c){
@@ -1077,15 +1073,25 @@ grid.innerHTML=displayedItems.map(function(c){
   }
   h+='</div>';return h;}).join('');
 
-// Show/hide Load More button
-var loadMoreBtn = document.getElementById('loadMore');
-if(filtered.length > 12 && !window._showAll) {
-  loadMoreBtn.style.display = 'block';
-  loadMoreBtn.querySelector('.load-more-count').textContent = (filtered.length - 12);
-} else {
-  loadMoreBtn.style.display = 'none';
+// Infinite scroll: show sentinel if more items remain
+window._rdxHasMore = !window._showAll && filtered.length > (window._rdxBatchSize || 24);
 }
-}
+
+// ── Infinite scroll with IntersectionObserver ─────────────────────────────
+(function() {
+  if (window._rdxScrollObserver) window._rdxScrollObserver.disconnect();
+  var sentinel = document.getElementById('loadMore');
+  if (!sentinel) return;
+  window._rdxScrollObserver = new IntersectionObserver(function(entries) {
+    if (!entries[0].isIntersecting) return;
+    if (!window._rdxHasMore) return;
+    // Load 24 more
+    window._rdxBatchSize = (window._rdxBatchSize || 24) + 24;
+    if (window._rdxBatchSize >= 9999) window._showAll = true;
+    render();
+  }, { rootMargin: '200px' });
+  window._rdxScrollObserver.observe(sentinel);
+})();
 function rdxToggleHideDone() {
   var current = localStorage.getItem('rdx-hide-done') === '1';
   localStorage.setItem('rdx-hide-done', current ? '0' : '1');
@@ -1186,7 +1192,7 @@ function toggleSemanticMode() {
   }
 }
 
-function handleSearch() {
+function handleSearch() { window._rdxBatchSize = 24;
   if (!_sem) { render(); return; }
   clearTimeout(_semTimer);
   var q = (document.getElementById('searchInput').value || '').trim();

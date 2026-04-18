@@ -4154,6 +4154,72 @@ if (window.P && window.P.EventBus) {
     showBookmarkPrompt();
   });
 }
+
+// Email opt-in after 3rd case (guests only)
+(function() {
+  try {
+    var _cc = JSON.parse(localStorage.getItem('rdx-completed-cases') || '[]');
+    if (_cc.length >= 3) {
+      setTimeout(rdxShowEmailOptinModal, 8000); // 8s after completion
+    }
+  } catch(e) {}
+})();
+</script>
+
+
+<!-- ── EMAIL OPT-IN MODAL (shown after 3rd case for guests) ── -->
+<div id="rdx-email-optin-modal" style="display:none;position:fixed;inset:0;z-index:9200;background:rgba(0,0,0,.65);align-items:center;justify-content:center;padding:20px">
+  <div style="background:#fff;border-radius:18px;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.25);overflow:hidden">
+    <div style="background:linear-gradient(135deg,#1B4F72,#2874A6);padding:24px 28px">
+      <div style="font-size:28px;margin-bottom:8px">📬</div>
+      <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:4px">Get a case every Monday</div>
+      <div style="font-size:13px;color:rgba(255,255,255,.75)">We'll send one clinical case per week — matched to your specialty and level.</div>
+    </div>
+    <div style="padding:24px 28px">
+      <input type="email" id="rdx-email-optin-input" placeholder="you@institution.edu"
+        style="width:100%;padding:12px 14px;border:1.5px solid #CBD5E0;border-radius:10px;font-size:15px;font-family:inherit;outline:none;box-sizing:border-box;margin-bottom:12px"
+        onfocus="this.style.borderColor='#2874A6'" onblur="this.style.borderColor='#CBD5E0'">
+      <button onclick="rdxSubmitEmailOptin()" style="width:100%;padding:12px;background:#2874A6;color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;margin-bottom:10px">Yes, send me cases →</button>
+      <button onclick="document.getElementById('rdx-email-optin-modal').style.display='none';localStorage.setItem('rdx-email-optin-seen','1')" style="width:100%;padding:10px;background:transparent;color:#94A3B8;border:none;font-size:13px;cursor:pointer;font-family:inherit">No thanks</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function rdxShowEmailOptinModal() {
+  // Only show for guests (not logged in) and only once
+  if (localStorage.getItem('rdx-email-optin-seen')) return;
+  try {
+    var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
+    if (u && u.email) return; // Already has account
+  } catch(e) {}
+  localStorage.setItem('rdx-email-optin-seen', '1');
+  var modal = document.getElementById('rdx-email-optin-modal');
+  if (modal) { modal.style.display = 'flex'; }
+}
+
+function rdxSubmitEmailOptin() {
+  var email = document.getElementById('rdx-email-optin-input').value.trim();
+  if (!email || !email.includes('@')) {
+    document.getElementById('rdx-email-optin-input').style.borderColor = '#F87171';
+    return;
+  }
+  // Save to Supabase email_subscribers (best-effort)
+  var SUPA = 'https://lpwbiqpojisqgezycupw.supabase.co';
+  var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+  fetch(SUPA + '/rest/v1/email_subscribers', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': KEY, 'Authorization': 'Bearer ' + KEY },
+    body: JSON.stringify({ email: email, source: 'sim_completion', subscribed_at: new Date().toISOString() })
+  }).catch(function(){});
+  // Store locally
+  try { localStorage.setItem('reasondx-user', JSON.stringify({ email: email, name: email.split('@')[0] })); } catch(e) {}
+  // Show success state
+  var modal = document.getElementById('rdx-email-optin-modal');
+  if (modal) {
+    modal.querySelector('div > div:last-child').innerHTML = '<div style="text-align:center;padding:8px 0"><div style="font-size:28px;margin-bottom:12px">✅</div><div style="font-size:16px;font-weight:700;color:#1E293B;margin-bottom:6px">You're in!</div><div style="font-size:13px;color:#64748B;margin-bottom:20px">First case arriving Monday. See you then.</div><button onclick="document.getElementById('rdx-email-optin-modal').style.display='none'" style="padding:10px 24px;background:#2874A6;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Continue →</button></div>';
+  }
+}
 </script>
 
 <!-- ── WHO ARE YOU? PROFESSION INTAKE ── -->
