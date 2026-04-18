@@ -64,43 +64,47 @@
 })();
 </script>
 <script>
-// === ROUTING: simple — redirect if no case, load if case ===
+// === ROUTING: load case if ID present, redirect to browse if not ===
 (function() {
   var _p = new URLSearchParams(window.location.search);
-  var _id = window.CASE_ID || _p.get('case') || _p.get('cx') || '';
+  var _id = window.CASE_ID || _p.get("case") || _p.get("cx") || "";
 
   if (!_id) {
-    // No case to load — go to browse
-    window.location.replace('/browse.html?mode=practice');
+    window.location.replace("/browse.html?mode=practice");
     return;
   }
 
-  // Has a case ID — poll until loadCaseData + bootstrapApp are ready, then load
   var _att = 0;
   function _route() {
     _att++;
-    if (typeof loadCaseData !== 'function' || typeof bootstrapApp !== 'function') {
-      if (_att < 100) { setTimeout(_route, 30); return; }
-      console.error('[RDX] loadCaseData unavailable after 3s');
+    if (typeof loadCaseData !== "function" || typeof bootstrapApp !== "function") {
+      if (_att < 150) { setTimeout(_route, 30); return; }
+      console.error("[RDX] Functions unavailable after 4.5s");
       return;
     }
     try {
       if (!window.CASE_ID) window.CASE_ID = _id;
-      var _app = document.getElementById('app');
-      try { if (window.EMRShell) { EMRShell.inject(); } } catch(shellErr) { console.warn('Shell inject failed:', shellErr); }
+      try { if (window.EMRShell) { EMRShell.inject(); } } catch(e) { console.warn("Shell:", e); }
       loadCaseData(function() {
-        _showStep('Step 3: Bootstrapping app...');
         bootstrapApp().catch(function(err) {
-          console.error('bootstrapApp error:', err);
-          _showStep('Step 3 ERROR: ' + err.message);
-          var app = document.getElementById('app');
+          console.error("bootstrapApp error:", err);
+          var app = document.getElementById("app");
           if (app && !app.innerHTML.trim()) {
-            app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:sans-serif"><div style="font-size:36px;margin-bottom:12px">🏥</div><h2 style="color:#1e293b;margin-bottom:8px">Case Couldn't Load</h2><p style="color:#64748b;margin-bottom:20px">We couldn't load this patient case. This might be a temporary issue.</p><div style="display:flex;gap:10px;justify-content:center"><button onclick="location.reload()" style="padding:10px 20px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">↺ Retry</button><a href="/browse.html" style="padding:10px 20px;background:#F1F5F9;color:#374151;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">← Browse Cases</a></div></div>';
+            app.innerHTML = [
+              "<div style='max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:sans-serif'>",
+              "<div style='font-size:36px;margin-bottom:12px'>&#x1F3E5;</div>",
+              "<h2 style='color:#1e293b;margin-bottom:8px'>Case Could Not Load</h2>",
+              "<p style='color:#64748b;margin-bottom:20px'>We could not load this patient case.</p>",
+              "<div style='display:flex;gap:10px;justify-content:center'>",
+              "<button onclick='location.reload()' style='padding:10px 20px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer'>Retry</button>",
+              "<a href='/browse.html' style='padding:10px 20px;background:#F1F5F9;color:#374151;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none'>Browse Cases</a>",
+              "</div></div>"
+            ].join("");
           }
         });
       });
     } catch(e) {
-      console.error('[RDX routing error]', e);
+      console.error("[RDX routing error]", e);
     }
   }
   _route();
