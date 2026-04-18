@@ -174,6 +174,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--f-sans);-webkit-fo
       <div class="picker-sub">Search or pick a topic — or type anything in the chat</div>
     </div>
 
+    <!-- Bookmarks strip -->
+    <div id="rdx-coach-bookmarks" style="display:none;padding:10px 16px 6px;border-bottom:1px solid var(--border,#E2E8F0)">
+      <div style="font-size:10px;font-weight:700;color:var(--dim2,#94A3B8);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">⭐ Bookmarked</div>
+      <div id="rdx-coach-bookmarks-list" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+    </div>
+
     <div class="picker-search">
       <div class="search-box">
         <span style="color:var(--dim2);font-size:14px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
@@ -585,6 +591,7 @@ function renderPicker(topics, searchVal) {
           onclick="startSession('${t.name}', true, '${t.id}')">
           <span class="chip-dot" style="background:${catColor(t.cat)}"></span>
           ${t.name}
+          <span onclick="event.stopPropagation();rdxCoachToggleBookmark('${t.id}','${t.name}')" style="margin-left:4px;opacity:.5;cursor:pointer;font-size:10px" title="Bookmark this topic" id="rdx-bm-${t.id}">${rdxCoachIsBookmarked('${t.id}') ? '⭐' : '☆'}</span>
         </span>
       `).join('')}</div>
     </div>
@@ -2177,6 +2184,54 @@ RdxTours.autoShow('coach-dx');
     showEMRContext();
   }
 })();
+
+// ── CoachDx Topic Bookmarks ───────────────────────────────
+function rdxCoachGetBookmarks() {
+  try { return JSON.parse(localStorage.getItem('rdx-coach-bookmarks') || '[]'); } catch(e) { return []; }
+}
+function rdxCoachIsBookmarked(topicId) {
+  return rdxCoachGetBookmarks().some(function(b) { return b.id === topicId; });
+}
+function rdxCoachToggleBookmark(topicId, topicName) {
+  var bookmarks = rdxCoachGetBookmarks();
+  var exists = bookmarks.findIndex(function(b) { return b.id === topicId; });
+  if (exists >= 0) {
+    bookmarks.splice(exists, 1);
+  } else {
+    bookmarks.unshift({ id: topicId, name: topicName, savedAt: Date.now() });
+    if (bookmarks.length > 20) bookmarks = bookmarks.slice(0, 20);
+  }
+  localStorage.setItem('rdx-coach-bookmarks', JSON.stringify(bookmarks));
+  rdxCoachRenderBookmarks();
+  // Update star in current chip list
+  var star = document.getElementById('rdx-bm-' + topicId);
+  if (star) star.textContent = rdxCoachIsBookmarked(topicId) ? '⭐' : '☆';
+}
+function rdxCoachRenderBookmarks() {
+  var bookmarks = rdxCoachGetBookmarks();
+  var section = document.getElementById('rdx-coach-bookmarks');
+  var list = document.getElementById('rdx-coach-bookmarks-list');
+  if (!section || !list) return;
+  if (bookmarks.length === 0) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  list.innerHTML = bookmarks.map(function(b) {
+    return '<span onclick="startSession(\'' + b.name.replace(/'/g,"\'") + '\', true, \'' + b.id + '\')" ' +
+      'style="display:inline-flex;align-items:center;gap:4px;background:var(--blue-bg,rgba(40,116,166,.08));' +
+      'color:var(--blue,#2874A6);border:1px solid rgba(40,116,166,.2);padding:4px 10px;border-radius:12px;' +
+      'font-size:12px;font-weight:600;cursor:pointer">' +
+      '⭐ ' + b.name +
+      '<span onclick="event.stopPropagation();rdxCoachToggleBookmark(\'' + b.id + '\',\'' + b.name.replace(/'/g,"\'") + '\')" ' +
+      'style="opacity:.5;margin-left:2px;font-size:10px" title="Remove bookmark">×</span>' +
+    '</span>';
+  }).join('');
+}
+// Init bookmarks on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', rdxCoachRenderBookmarks);
+} else {
+  rdxCoachRenderBookmarks();
+}
+
 </script>
 </body>
 </html>

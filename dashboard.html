@@ -564,20 +564,42 @@ function loadBrief(profId) {
   if (!widget) return;
   widget.style.display = 'block';
 
-  // Check cache first
-  var cached = window.RDX_ProfessionCoach && window.RDX_ProfessionCoach.getCachedBrief();
-  if (cached) {
-    renderBrief(cached);
-    return;
-  }
+  // ── Try localStorage cache FIRST (no JS dependency, instant) ──
+  try {
+    var raw = localStorage.getItem('rdx-last-weekly-brief');
+    if (raw) {
+      var data = JSON.parse(raw);
+      // Use cache if < 24h old (show stale content, refresh silently if < 7d)
+      if (data && data.result && Date.now() - data.cachedAt < 24 * 60 * 60 * 1000) {
+        renderBrief(data.result);
+        // Silently refresh in background if > 6h
+        if (Date.now() - data.cachedAt > 6 * 60 * 60 * 1000) {
+          setTimeout(function() {
+            if (window.RDX_ProfessionCoach) {
+              window.RDX_ProfessionCoach.weeklyBrief().then(function(result) {
+                if (result && !result.error) renderBrief(result);
+              }).catch(function(){});
+            }
+          }, 2000);
+        }
+        return;
+      }
+    }
+  } catch(e) {}
 
-  // Generate new brief
-  if (window.RDX_ProfessionCoach) {
-    window.RDX_ProfessionCoach.weeklyBrief().then(function(result) {
-      if (result && !result.error) renderBrief(result);
-      else renderBriefError();
-    }).catch(renderBriefError);
+  // ── No cache — wait for coach module then generate ──
+  function _generate() {
+    if (window.RDX_ProfessionCoach) {
+      window.RDX_ProfessionCoach.weeklyBrief().then(function(result) {
+        if (result && !result.error) renderBrief(result);
+        else renderBriefError();
+      }).catch(renderBriefError);
+    } else {
+      // Module not loaded yet — retry in 500ms
+      setTimeout(_generate, 500);
+    }
   }
+  _generate();
 }
 
 function renderBrief(result) {
