@@ -146,7 +146,7 @@ function render() {
         '<div class="case-num">Follow-Up Case '+(i+1)+' of '+l1all.length+'</div>'+
         '<div class="case-cc">'+c.chiefComplaint+'</div>'+
         (q?'<div class="case-q">"'+q+'"</div>':'')+
-        '<button class="btn" onclick="launchWave2Case(''+c.id+'')">Begin Case →</button>'+
+        '<button class="btn" onclick="launchWave2Case(this.dataset.id)">Begin Case →</button>'+
         '</div>';
     }).join('');
     document.getElementById('sp-body').innerHTML =
@@ -222,7 +222,7 @@ function render() {
       (q ? '<div class="case-q">"'+q+'"</div>' : '')+
       (isDone
         ? '<span class="badge-done">✓ Completed</span>'
-        : '<button class="btn" onclick="launchCase(''+c.id+'')">Begin Case →</button>'
+        : '<button class="btn" onclick="launchCase(this.dataset.id)">Begin Case →</button>'
       )+
       '</div>';
   }).join('');

@@ -111,7 +111,7 @@
 </div>
 <script>
 const refSource=new URLSearchParams(location.search).get('ref'),refCase=new URLSearchParams(location.search).get('case'),refBack=new URLSearchParams(location.search).get('back'),gapTopic=new URLSearchParams(location.search).get('gap');
-const TOPICS=
+const TOPICS={
 pathophys:[
   {id:'env-occ-lung',icon:'🏭',color:'#0369A1',
    title:'Occupational Lung Disease — Asbestosis, Silicosis & HP',
@@ -199,8 +199,8 @@ KEY CONCEPTS:
 - HEAT STROKE TREATMENT: Cooling = only treatment that saves lives. Target: core temp <39C within 30 minutes. BEST METHOD: cold water immersion (CWI) in ice water (~0.2C/min cooling rate). Acceptable: ice packs to neck/groin/axillae + evaporative (fans + cool mist). Do NOT use antipyretics (not fever — thermoregulatory failure). Stop cooling at 39C (prevent overshoot). Watch for: rhabdomyolysis (CK, Cr), hepatic failure (LFTs, INR), DIC (coags, fibrinogen), AKI.
 - HYPOTHERMIA: Mild (32-35C): shivering, confusion — passive rewarming. Moderate (28-32C): absent shivering, arrhythmia risk (J/Osborn waves, AF) — active external rewarming. Severe (<28C): VF risk — core rewarming (warm humidified O2, warm IV fluids, ECMO for refractory arrest). 'Not dead until warm and dead.' Handle gently below 30C (movement triggers VF).
 - ALTITUDE: AMS (headache + nausea/fatigue/dizziness above 2500m). HACE (AMS + ataxia/altered consciousness) — cerebral edema. HAPE (exertional -> rest dyspnea, crackles, hypoxia) — non-cardiogenic pulmonary edema, most lethal. Treatment: descent (definitive), O2, acetazolamide (AMS), dexamethasone (HACE), nifedipine/tadalafil (HAPE).`},
-],
-;
+]};
+
 let activeTopic=null,activePersona=null,messages=[],isLoading=false,recognition=null,isListening=false;
 document.addEventListener('DOMContentLoaded',()=>{renderCards();initGapBanner();initVoice();document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});});
 function initGapBanner(){if(!refSource&&!gapTopic)return;document.getElementById('gapBanner').classList.add('show');const src=refSource==='coachdx'?'CoachDx':refSource==='casedx'?'a case':'ReasonDx';document.getElementById('gapBannerText').textContent=`You flagged this gap while working through ${src}${refCase?' — '+refCase:''}.`;if(!refBack)document.getElementById('gapReturnBtn').style.display='none';}

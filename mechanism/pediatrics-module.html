@@ -111,7 +111,7 @@
 </div>
 <script>
 const refSource=new URLSearchParams(location.search).get('ref'),refCase=new URLSearchParams(location.search).get('case'),refBack=new URLSearchParams(location.search).get('back'),gapTopic=new URLSearchParams(location.search).get('gap');
-const TOPICS=
+const TOPICS={
 pathophys:[
   {id:'pna-cap-mechanisms',icon:'🫁',color:'#2874A6',
    title:'CAP Pathophysiology — Lobar to Atypical',
@@ -186,8 +186,8 @@ KEY CONCEPTS:
   Empyema: frank pus -> chest tube + antibiotics. If loculated or organized (stage 3) -> VATS/surgical decortication.
 - LUNG ABSCESS: Aspiration of oral anaerobes (Fusobacterium, Bacteroides, Prevotella, Peptostreptococcus). Risk: poor dentition, alcoholism, seizures, dysphagia, altered consciousness. CT: thick-walled cavity with air-fluid level, usually dependent segment (posterior upper lobe or superior lower lobe). Foul-smelling sputum (anaerobic). Treatment: amoxicillin-clavulanate or clindamycin (anaerobic coverage). Duration 3-6 weeks until cavity closes or residual thin-walled. Most resolve without drainage.
 - RESPIRATORY FAILURE IN CAP: Criteria for ICU (2009 ATS/IDSA): Major: mechanical ventilation, septic shock. Minor (>=3 of 9): RR >=30, PaO2/FiO2 <=250, multilobar infiltrates, confusion, BUN >=20, WBC <4000, platelets <100k, temp <=36C, SBP <90. NIV (CPAP/BiPAP) for hypoxemia without hypercarbia or hemodynamic instability. High-flow nasal cannula (HFNC) for hypoxic respiratory failure — ROX index >=4.88 at 12h predicts NIV/intubation avoidance.`},
-],
-;
+]};
+
 let activeTopic=null,activePersona=null,messages=[],isLoading=false,recognition=null,isListening=false;
 document.addEventListener('DOMContentLoaded',()=>{renderCards();initGapBanner();initVoice();document.getElementById('overlay').addEventListener('click',e=>{if(e.target===document.getElementById('overlay'))closeModal();});});
 function initGapBanner(){if(!refSource&&!gapTopic)return;document.getElementById('gapBanner').classList.add('show');const src=refSource==='coachdx'?'CoachDx':refSource==='casedx'?'a case':'ReasonDx';document.getElementById('gapBannerText').textContent=`You flagged this gap while working through ${src}${refCase?' — '+refCase:''}.`;if(!refBack)document.getElementById('gapReturnBtn').style.display='none';}
