@@ -11,6 +11,7 @@ window.EMR_DATA = {
     "pcp": "Dr. Michael Torres, MD",
     "pharmacy": "CVS Pharmacy \u2014 1340 Oak St, Hollywood, FL",
     "language": "English",
+    "chiefComplaint": "Chest pain and shortness of breath",
     "race": "Multiracial",
     "address": "4799 Oak St, Fort Lauderdale, FL 33537",
     "phone": "(954) 555-4264",
@@ -418,5 +419,84 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Chest Pain",
     "category": "cardiovascular"
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jennifer is a 50-year-old woman who is visibly uncomfortable and slightly diaphoretic. She is cooperative but answers questions tersely because talking makes her chest pain worse. She minimizes symptoms initially — she almost didn't come in today because she thought it was indigestion. She will mention the jaw tightness only if directly asked about associated symptoms. She is anxious underneath but trying to stay calm.",
+    "interviewQuestions": [
+      "Tell me what brought you in today.",
+      "When did the chest pain start?",
+      "Can you describe the pain — sharp, pressure, burning?",
+      "Does it go anywhere — arm, jaw, back, neck?",
+      "What were you doing when it started?",
+      "What makes it better or worse?",
+      "Have you had this before?",
+      "Any shortness of breath?",
+      "Any nausea or vomiting?",
+      "Any sweating or feeling clammy?",
+      "Any recent illness, fever, or cough?",
+      "Any history of heart disease or heart attacks?",
+      "Does anyone in your family have heart disease?",
+      "Do you smoke or use tobacco?",
+      "What medications are you taking?",
+      "Any allergies?"
+    ],
+    "patientResponses": {
+      "default": "Jennifer shifts uncomfortably. 'I'm not sure how to describe it. Can we hurry? I really don't feel well.'",
+      "chest pain start": "About two hours ago. I thought it would go away.",
+      "describe the pain": "It's like... pressure. Like something heavy sitting on my chest. Not sharp.",
+      "go anywhere": "My left arm feels heavy. And now that you mention it — my jaw has been tight for a while. I forgot about that.",
+      "doing when it started": "I was just sitting at my desk. Nothing. That's what scared me.",
+      "better or worse": "Nothing makes it better. I took Tums thinking it was heartburn. Didn't help.",
+      "had this before": "No. Never like this.",
+      "shortness of breath": "A little. Not terrible.",
+      "nausea": "Yes. I felt like I might throw up in the car.",
+      "sweating": "Yes. I noticed I was sweaty and I hadn't done anything.",
+      "heart disease": "My dad had a heart attack at 58. I always thought I had more time.",
+      "smoke": "I quit five years ago. Smoked for about fifteen years before that.",
+      "medications": "Metformin, lisinopril, atorvastatin. I take them every day.",
+      "allergies": "Penicillin. I got a rash as a kid."
+    },
+    "examManeuvers": [
+      "General appearance",
+      "Vital signs review",
+      "Cardiovascular — auscultation",
+      "Cardiovascular — JVD assessment",
+      "Pulmonary — auscultation",
+      "Abdomen — inspection and palpation",
+      "Extremities — edema assessment",
+      "Skin — diaphoresis, color, temperature",
+      "Neurological — brief screen"
+    ],
+    "examFindings": {
+      "General appearance": "Patient is a 50-year-old woman appearing her stated age, visibly uncomfortable, diaphoretic, sitting forward slightly. She is awake, alert, and oriented x3 but anxious.",
+      "Vital signs review": "BP 172/102 mmHg, HR 105 bpm (regular), RR 18, SpO2 96% on room air, Temp 99.0°F. Notably elevated BP and mild tachycardia.",
+      "Cardiovascular — auscultation": "Regular rate and rhythm. S1 and S2 present. No murmurs, rubs, or gallops appreciated. No S3 or S4.",
+      "Cardiovascular — JVD assessment": "JVD not elevated at 30 degrees. No hepatojugular reflux.",
+      "Pulmonary — auscultation": "Clear to auscultation bilaterally. No wheezes, rales, or rhonchi. Good air entry.",
+      "Abdomen — inspection and palpation": "Soft, non-tender, non-distended. No organomegaly. Bowel sounds present and normal.",
+      "Extremities — edema assessment": "No peripheral edema bilaterally. Distal pulses 2+ and symmetric. Cap refill < 2 seconds.",
+      "Skin — diaphoresis, color, temperature": "Diaphoretic. Skin is pale and cool to touch. No rash or lesions.",
+      "Neurological — brief screen": "Alert and oriented x3. No focal deficits. Pupils equal, round, reactive to light."
+    },
+    "ddxTargets": [
+      "ST-Elevation Myocardial Infarction (STEMI)",
+      "Non-ST Elevation ACS (NSTEMI / Unstable Angina)",
+      "Aortic Dissection",
+      "Pulmonary Embolism",
+      "Stable Angina",
+      "GERD / Esophageal Spasm",
+      "Musculoskeletal Chest Pain"
+    ],
+    "biasFlags": {
+      "anchoring": "If STEMI remains the only entry from Phase 2 through Phase 5 without documentation of aortic dissection consideration, flag anchoring. Dissection must be considered given the presentation.",
+      "prematureClosure": "If aortic dissection never appears on any DDx despite the hypertension, radiation pattern, and acute onset, flag premature closure.",
+      "availabilityBias": "If student over-weights GERD or musculoskeletal without adequate cardiac risk factor consideration, flag availability bias."
+    },
+    "coachPrompts": {
+      "phase2": "The student has submitted their initial differential based only on the chief complaint of chest pain and shortness of breath. Coach them on the breadth of their differential — are all life-threatening causes of chest pain represented? Do not give the diagnosis.",
+      "phase5": "The student has now completed history and physical exam. Their Phase 2 differential was: {{ddx2}}. Their refined differential is: {{ddx5}}. Compare them. If anchoring is present, challenge it through Socratic questioning. Ask about the finding that should have most changed their thinking.",
+      "finalDebrief": "The final diagnosis is STEMI. The student's DDx progression was: Phase 2: {{ddx2}} → Phase 5: {{ddx5}} → Final: {{ddxFinal}}. Walk them through what they got right, what cognitive biases were present if any, and what the key teaching points of this case are."
+    }
   }
 };
