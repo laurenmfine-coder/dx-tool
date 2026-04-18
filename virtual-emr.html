@@ -302,7 +302,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .coach-header h3{margin:0 0 4px;font-size:16px;font-weight:700}
 .coach-header p{margin:0;font-size:12px;opacity:.85}
 .coach-setting-tag{display:inline-block;background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-top:8px}
-.coach-messages{overflow-y:auto;padding:8px 0;display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 380px);min-height:200px}
+.coach-messages{overflow-y:auto;padding:8px 0;display:flex;flex-direction:column;gap:12px;max-height:clamp(240px,calc(100vh - 400px),600px);min-height:200px}
 .coach-msg{max-width:85%;padding:12px 16px;border-radius:16px;font-size:13px;line-height:1.6}
 .coach-msg-user{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;align-self:flex-end;border-bottom-right-radius:4px;box-shadow:0 2px 8px rgba(40,116,166,.25)}
 .coach-msg-assistant{background:linear-gradient(135deg,#F0FDF4,#E8F5E9);color:#14532D;align-self:flex-start;border-bottom-left-radius:4px;border:1px solid #BBF7D0;box-shadow:0 1px 4px rgba(5,150,105,.08)}
@@ -312,6 +312,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .coach-typing span:nth-child(2){animation-delay:.2s}
 .coach-typing span:nth-child(3){animation-delay:.4s}
 @keyframes coachBounce{to{opacity:.3;transform:translateY(-4px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 .coach-input-row{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border-light);flex-shrink:0;background:var(--surface,#fff);padding-bottom:8px}
 .coach-input{flex:1;padding:10px 14px;border:1px solid var(--border-light);border-radius:10px;font-size:16px;font-family:inherit;resize:none;outline:none;transition:border-color .2s}
 .coach-input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(40,116,166,.12)}
@@ -337,7 +338,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .specialty-card.unavail{opacity:.35;cursor:not-allowed;pointer-events:none}
 .specialty-card-icon{font-size:20px}
 .specialty-card-label{font-size:13px;font-weight:600;color:#fff}
-.specialty-card-sub{font-size:11px;color:var(--text-muted);margin-top:1px}
+.specialty-card-sub{font-size:11px;color:rgba(255,255,255,.4);margin-top:1px}
 .setting-btn-row{display:flex;gap:12px;justify-content:flex-end}
 .btn-setting{padding:11px 24px;border-radius:8px;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;border:none}
 .btn-setting-primary{background:linear-gradient(135deg,#2874A6,#1B4F72);color:#fff;box-shadow:0 4px 14px rgba(40,116,166,.35)}
@@ -2416,7 +2417,7 @@ function renderDocumentationOnly() {
   var _debrief = submitted ? buildEMRWhatsNext(CASE_ID) : '';
 
   var tip = '<div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:8px;padding:10px 14px;font-size:12px;color:#92400E;margin-bottom:12px">'
-    + '💡 <strong>Tip:</strong> Each section auto-saves as you type. Write as if this were a real patient encounter note.'
+    + '💡 <strong>Tip:</strong> Each section auto-saves as you type. Write as if presenting to your attending — specific, reasoned, complete.'
     + '</div>';
 
   return tip + sectionCard("Write Note — " + (S.encounterWeek||'Week 1'), I.fileText,
@@ -2442,7 +2443,7 @@ function renderDocumentation(){
     var _ptName = (typeof PATIENT !== 'undefined' && PATIENT) ? PATIENT.name.split(' ')[0] : 'Patient';
     var _ptMsgsHtml = '';
     if (_ptMsgs.length === 0) {
-      _ptMsgsHtml = '<div style="text-align:center;padding:20px 0;color:#94a3b8;font-size:13px">Start by introducing yourself -- ask ' + _ptName + ' what brings them in today.</div>';
+      _ptMsgsHtml = '<div style="text-align:center;padding:20px 0;color:#94a3b8;font-size:13px">Start by introducing yourself — ask ' + _ptName + ' what brings them in today.</div>';
     } else {
       _ptMsgsHtml = _ptMsgs.map(function(m) {
         var isUser = m.role === 'user';
@@ -2487,7 +2488,7 @@ function renderDocumentation(){
       + '</div>'
       + '</div>';
   }
-  var docTitle="Encounter Documentation"; var _noteWC=Object.values(S.noteFields||{}).reduce(function(t,v){return t+(v?v.trim().split(/\s+/).filter(Boolean).length:0);},0);
+  var docTitle="Write Note"; var _noteWC=Object.values(S.noteFields||{}).reduce(function(t,v){return t+(v?v.trim().split(/\s+/).filter(Boolean).length:0);},0);
   if(S.clinicalSetting==="inpatient")docTitle="Admission H&P";
   else if(S.clinicalSetting==="consult")docTitle="Consultation Note";
   else if(S.clinicalSetting==="icu")docTitle="ICU Progress Note";
@@ -2612,7 +2613,7 @@ function renderAdmin(){
     tableHTML(["Name","Email","Role","Change Role","Joined"],userRows))+
     sectionCard("Faculty -> Student Assignments",I.settings,
       '<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">Assign students to faculty graders. Faculty can only see submissions from their assigned students. Admins can see all.</div>'+
-      (faculty.length?assignHTML:'<div class="empty-state">No faculty accounts yet. Promote a user to Faculty in the roster above.</div>'));
+      (faculty.length?assignHTML:'<div style="text-align:center;padding:24px 16px"><div style="font-size:32px;margin-bottom:8px">👩‍🏫</div><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px">No faculty yet</div><div style="font-size:12px;color:var(--text-secondary)">Promote a user to Faculty in the roster above.</div></div>'));
 }
 
 function adminChangeRole(username,newRole){
@@ -3512,7 +3513,7 @@ function renderCoachStarters() {
   if (S.coachMessages && S.coachMessages.length > 0) return ''; // already talking
   var cc = PATIENT ? PATIENT.chiefComplaint : '';
   return '<div class="rdx-coach-starters">'
-    + '<div class="rdx-coach-starter-label">💬 Tap to start your reasoning</div>'
+    + '<div class="rdx-coach-starter-label">💬 Start your reasoning</div>'
     + COACH_STARTERS.map(function(s) {
         var txt = s.text;
         return '<button class="rdx-coach-chip" onclick="rdxStartCoach('+JSON.stringify(txt)+')">'
@@ -3667,6 +3668,8 @@ function updateNoteField(id,val){
 })();
 
 function submitDoc(){
+  var _sb=document.getElementById('submitBtn');
+  if(_sb){_sb.disabled=true;_sb.innerHTML='<span style="display:inline-flex;align-items:center;gap:8px"><span style="width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block"></span>Submitting…</span>';}
   const hasContent=Object.values(S.noteFields).some(v=>v&&v.trim());
   if(!hasContent){showToast("Please write in at least one section before submitting");return}
   const sub={week:S.encounterWeek,fields:{...S.noteFields},text:assembleNoteText(),timestamp:new Date().toISOString(),patient:PATIENT.name};
@@ -5088,7 +5091,7 @@ function renderOralPresentation() {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if (!SR) {
     html += sectionCard("Oral Presentation Trainer", I.activity,
-      '<div class="empty-state"><p style="color:var(--warning)">⚠ Speech recognition requires <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong>.</p><p>You can also type/paste your presentation below for analysis.</p></div>' +
+      '<div style="background:var(--warning-light);border:1px solid #FDE68A;border-radius:10px;padding:14px 16px;display:flex;gap:10px;align-items:flex-start;margin-bottom:4px"><span style="font-size:18px;flex-shrink:0">⚠️</span><div><div style="font-size:13px;font-weight:700;color:var(--warning);margin-bottom:2px">Use Chrome or Edge for voice recording</div><div style="font-size:12px;color:#92400E;line-height:1.5">Speech recognition requires Google Chrome or Microsoft Edge. You can still type or paste your transcript below.</div></div></div>' +
       '<textarea id="manualTranscript" class="overall-textarea" style="min-height:200px" placeholder="Type or paste your oral presentation transcript here...">' + esc(oralTranscript || (saved ? saved.transcript : "")) + '</textarea>' +
       '<div style="margin-top:12px;display:flex;gap:12px;justify-content:flex-end"><button type="button" class="btn-submit" onclick="oralTranscript=document.getElementById(\'manualTranscriptAlt\').value;saveOralPresentation()">Save Transcript</button></div>'
     );
