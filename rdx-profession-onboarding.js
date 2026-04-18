@@ -360,7 +360,7 @@ class ProfessionOnboardingModal {
           <div class="rdx-po-footer">
             <button class="rdx-po-btn-back" id="rdx-po-back" style="display:none">← Back</button>
             <div class="rdx-po-footer-right">
-              ${this.allowSkip ? '<button class="rdx-po-btn-skip" id="rdx-po-skip">Set up later</button>' : ''}
+              ${this.allowSkip ? '<button class="rdx-po-btn-skip" id="rdx-po-skip">Skip — explore everything</button>' : ''}
               <button class="rdx-po-btn-next" id="rdx-po-next" disabled>Continue →</button>
             </div>
           </div>
@@ -394,7 +394,7 @@ class ProfessionOnboardingModal {
       this._bindStep2();
     } else if (step === 3) {
       body.innerHTML = this._buildStep3();
-      nextBtn.textContent = 'Start Learning →';
+      nextBtn.textContent = 'Explore All Cases →';
       nextBtn.disabled = false;
       this._bindStep3();
     }
@@ -414,7 +414,7 @@ class ProfessionOnboardingModal {
     return `
       <div class="rdx-po-step" id="rdx-po-step-1">
         <h2 class="rdx-po-title">What's your health profession?</h2>
-        <p class="rdx-po-subtitle">We'll personalize your case library and reasoning pathways to match your training.</p>
+        <p class="rdx-po-subtitle">We'll surface cases relevant to your training first. You can always explore every specialty — nothing is hidden.</p>
         <div class="rdx-po-prof-grid">
           ${cards}
         </div>

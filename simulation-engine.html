@@ -317,6 +317,8 @@ function startStudy() {
     caseData = CaseAdapter.fromCRT(selectedCase);
   }
   window.caseData = caseData;
+  // Fire funnel: case started
+  if (window.RDXFunnelAgent) RDXFunnelAgent.caseStarted(selectedCase, new URLSearchParams(window.location.search).get('source') || 'direct');
   // Trigger onboarding overlay for first-run users
   if (isFirstRun && window.RDXOnboarding && window.RDXOnboarding.shouldShow()) {
     setTimeout(function() { RDXOnboarding.show(); }, 2000);
@@ -451,6 +453,10 @@ function startStudy() {
         phase_label: PHASE_LABELS[state.currentPhase],
         turn_count: state.turnCount
       });
+    }
+    // Funnel agent: track abandonment
+    if (window.RDXFunnelAgent && state && state.currentPhase !== PHASES.COMPLETE) {
+      RDXFunnelAgent.caseAbandoned(state.caseId || selectedCase, state.currentPhase, PHASE_LABELS[state.currentPhase]);
     }
   });
   
@@ -1296,6 +1302,10 @@ function checkPhaseTransition(signals) {
 }
 
 function enterPhase(phase) {
+  // Funnel: track phase entry
+  if (window.RDXFunnelAgent && window.caseData) {
+    RDXFunnelAgent.phaseEntered(selectedCase, phase, PHASE_LABELS[phase]);
+  }
   const now = new Date().toISOString();
   const prev = state.phaseHistory[state.phaseHistory.length - 1];
   if (prev) {
@@ -2359,7 +2369,7 @@ function updatePhaseUI() {
         <div style="background:var(--primary);height:100%;width:${pct}%;border-radius:999px;transition:width .4s ease"></div>
       </div>
       <div style="font-size:10px;color:var(--text-muted);margin-top:4px;text-align:right">${pct}% complete</div>
-      <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.35);text-align:center;cursor:pointer" onclick="this.closest('.panel-card').querySelector('.phase-full-list').style.display='block';this.style.display='none'">Show all steps ▾</div>
+      <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.6);text-align:center;cursor:pointer" onclick="this.closest('.panel-card').querySelector('.phase-full-list').style.display='block';this.style.display='none'">Show all steps ▾</div>
       <div class="phase-full-list" style="display:none;margin-top:8px">
         ${Array.from({length:10},(_,i)=>{const n=i+1;const cls=n===state.currentPhase?'active':n<state.currentPhase?'complete':'';return `<div class="phase-item ${cls}"><div class="phase-dot"></div>${PHASE_LABELS[n]||'Complete'}</div>`;}).join('')}
       </div>`;
@@ -2612,7 +2622,8 @@ async function exportStudyData() {
               
               // Show the modal
               setTimeout(function() {
-                window.RDXEmailCapture.show({
+                if (window.RDXFunnelAgent) RDXFunnelAgent.caseCompleted(selectedCase, state.currentPhase, null);
+              window.RDXEmailCapture.show({
                   title: 'Great reasoning on this case!',
                   stats: {
                     diagnosis: caseData.targetDiagnosis || 'Case completed',
@@ -3955,6 +3966,7 @@ function _showConsentThenStart() {
 }
 </script>
 <script src="js/rdx-retention.js"></script>
+<script src="js/rdx-funnel-agent.js"></script>
 
 <!-- Feature Tours -->
 <script>

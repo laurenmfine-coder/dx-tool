@@ -331,6 +331,7 @@ window.RDXEmailCapture = (function() {
     
     // Show modal
     modal.style.display = 'flex';
+    if (window.RDXFunnelAgent) RDXFunnelAgent.emailCaptureShown(currentSource || '', 'debrief');
     document.body.style.overflow = 'hidden';
     
     // Focus email input
@@ -450,6 +451,8 @@ window.RDXEmailCapture = (function() {
     }
     
     if (result.success) {
+      // Funnel: email capture converted
+      if (window.RDXFunnelAgent) RDXFunnelAgent.emailCaptureConverted(currentSource || '');
       // Success!
       submitBtn.textContent = '✓ Saved!';
       submitBtn.style.background = '#10b981';
