@@ -492,10 +492,10 @@ function toggleOrder(id) {
 }
 
 function submitOrders() {
-  if (!STATE.selectedOrders.length) { alert('Select at least one order first.'); return; }
+  if (!STATE.selectedOrders.length) { rdxSkillsToast('Please select at least one order first'); return; }
   var c = STATE.currentCase;
   var rubric = window.RDX_ORDER_RUBRICS && window.RDX_ORDER_RUBRICS[c.rubric];
-  if (!rubric) { alert('No rubric available for this case — try another.'); return; }
+  if (!rubric) { rdxSkillsToast('No rubric available for this case — try another'); return; }
 
   var required    = rubric.required || [];
   var recommended = rubric.recommended || [];
@@ -604,8 +604,8 @@ function updateWC() {
 function submitNote() {
   var assess = ((document.getElementById('noteAssess')||{}).value||'').trim();
   var plan   = ((document.getElementById('notePlan')||{}).value||'').trim();
-  if (assess.length < 30) { alert('Write a complete Assessment before submitting.'); return; }
-  if (plan.length < 30)   { alert('Write a complete Plan before submitting.'); return; }
+  if (assess.length < 30) { rdxSkillsToast('Write a complete Assessment before submitting'); return; }
+  if (plan.length < 30)   { rdxSkillsToast('Write a complete Plan before submitting'); return; }
 
   document.getElementById('modalBody').innerHTML =
     '<div style="text-align:center;padding:48px 20px">'
@@ -761,6 +761,14 @@ function updateProgress(id, pct) {
   } catch(e){}
 })();
 
+
+function rdxSkillsToast(msg) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#1B4F72;color:#fff;padding:10px 20px;border-radius:20px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2)';
+  t.textContent = '⚠️ ' + msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(function(){ t.remove(); }, 300); }, 2500);
+}
 </script>
 </body>
 </html>

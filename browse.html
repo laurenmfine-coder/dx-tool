@@ -82,6 +82,24 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px}
 .empty{text-align:center;padding:60px;color:rgba(255,255,255,.4);font-size:.9rem}
 
+@keyframes rdx-shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+.rdx-skeleton-card {
+  background: rgba(255,255,255,0.06);
+  border-radius: 12px;
+  padding: 20px;
+  animation: rdx-shimmer 1.4s ease infinite;
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.1) 40px, rgba(255,255,255,0.04) 80px);
+  background-size: 400px 100%;
+}
+.rdx-skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 8px;
+}
 .card{
   background:linear-gradient(135deg,#0f2840 0%,#1a3d5c 100%);
   border:1.5px solid rgba(40,116,166,.2);
@@ -781,7 +799,15 @@ body{font-family:"DM Sans",-apple-system,sans-serif;background:var(--bg);color:v
       <a href="/baseline-assessment.html" id="baseline-link" style="display:none;font-size:11px;font-weight:700;color:#784212;background:#FEF5E7;border:1px solid #FAD7A0;border-radius:6px;padding:3px 8px;text-decoration:none" title="Take baseline assessment">🧠 Baseline</a>
     </div>
   </div>
-  <div class="grid" id="grid"></div>
+  <div class="grid" id="grid">
+    <!-- Skeleton cards shown before data loads -->
+    <div class="rdx-skeleton-card" id="rdx-skel-1"><div class="rdx-skeleton-line" style="width:60%"></div><div class="rdx-skeleton-line" style="width:40%"></div><div class="rdx-skeleton-line" style="width:80%;margin-top:12px"></div></div>
+    <div class="rdx-skeleton-card" id="rdx-skel-2"><div class="rdx-skeleton-line" style="width:55%"></div><div class="rdx-skeleton-line" style="width:35%"></div><div class="rdx-skeleton-line" style="width:70%;margin-top:12px"></div></div>
+    <div class="rdx-skeleton-card" id="rdx-skel-3"><div class="rdx-skeleton-line" style="width:65%"></div><div class="rdx-skeleton-line" style="width:45%"></div><div class="rdx-skeleton-line" style="width:75%;margin-top:12px"></div></div>
+    <div class="rdx-skeleton-card" id="rdx-skel-4"><div class="rdx-skeleton-line" style="width:50%"></div><div class="rdx-skeleton-line" style="width:38%"></div><div class="rdx-skeleton-line" style="width:65%;margin-top:12px"></div></div>
+    <div class="rdx-skeleton-card" id="rdx-skel-5"><div class="rdx-skeleton-line" style="width:70%"></div><div class="rdx-skeleton-line" style="width:42%"></div><div class="rdx-skeleton-line" style="width:78%;margin-top:12px"></div></div>
+    <div class="rdx-skeleton-card" id="rdx-skel-6"><div class="rdx-skeleton-line" style="width:58%"></div><div class="rdx-skeleton-line" style="width:36%"></div><div class="rdx-skeleton-line" style="width:72%;margin-top:12px"></div></div>
+  </div>
   <div class="empty" id="empty" style="display:none">
     <div style="font-size:1.1rem;font-weight:700;margin-bottom:8px;color:rgba(255,255,255,.7)">No results match that search</div>
     <p style="font-size:.85rem;color:rgba(255,255,255,.4);margin-bottom:20px">Try a symptom, presentation, or diagnosis name</p>
@@ -1028,7 +1054,7 @@ if (_rdxSort === 'az') {
 } else if (_rdxSort === 'hardest') {
   filtered.sort(function(a,b){ return (a.acuity||3)-(b.acuity||3); }); // lower acuity = harder
 }
-if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';if(window.RDXFunnelAgent&&document.getElementById('searchInput').value.trim()){RDXFunnelAgent.searchZeroResults(document.getElementById('searchInput').value.trim(),MODE);}return;}document.getElementById('empty').style.display='none';
+if(filtered.length===0){grid.innerHTML='';document.getElementById('empty').style.display='block';document.getElementById('loadMore').style.display='none';if(window.RDXFunnelAgent&&document.getElementById('searchInput').value.trim()){RDXFunnelAgent.searchZeroResults(document.getElementById('searchInput').value.trim(),MODE);}return;}document.getElementById('empty').style.display='none'; for(var _si=1;_si<=6;_si++){var _sk=document.getElementById('rdx-skel-'+_si);if(_sk)_sk.remove();}
 
 // Pagination logic
 var _batchSize = window._rdxBatchSize || 24; var itemsToShow = window._showAll ? filtered.length : Math.min(_batchSize, filtered.length);

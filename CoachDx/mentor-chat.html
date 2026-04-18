@@ -556,6 +556,20 @@ if (document.readyState === 'complete') {
    TOPIC PICKER RENDER
 ======================================================= */
 function renderPicker(topics, searchVal) {
+  // Sort: bookmarks first, then popular, then alphabetical
+  var _bookmarks = rdxCoachGetBookmarks ? rdxCoachGetBookmarks().map(function(b){ return b.id; }) : [];
+  var _popular = ['sepsis-id','stemi','heart-failure','stroke-neuro','dka-endo','pe-pulm','afib','pneumonia','cognitive-bias','ddx-framework','aki','chest-pain-ddx','shock','anaphylaxis'];
+  if (!searchVal) {
+    topics = topics.slice().sort(function(a, b) {
+      var aBook = _bookmarks.indexOf(a.id) >= 0, bBook = _bookmarks.indexOf(b.id) >= 0;
+      if (aBook && !bBook) return -1;
+      if (!aBook && bBook) return 1;
+      var aPop = _popular.indexOf(a.id), bPop = _popular.indexOf(b.id);
+      var aRank = aPop >= 0 ? aPop : 999, bRank = bPop >= 0 ? bPop : 999;
+      if (aRank !== bRank) return aRank - bRank;
+      return a.title.localeCompare(b.title);
+    });
+  }
   const body = document.getElementById('pickerBody');
   if (!topics.length && searchVal) {
     body.innerHTML = renderNoMatch(searchVal);

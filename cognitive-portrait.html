@@ -755,7 +755,7 @@ window.generateILP = async function() {
 
   } catch(e) {
     console.error('ILP generation failed:', e);
-    alert('Could not generate plan. Please try again.');
+    rdxPortraitToast('Could not generate plan — please try again');
   }
 
   btn.textContent = '🎯 Generate Learning Plan';
@@ -804,7 +804,7 @@ window.shareProfile = function() {
     navigator.share({ title: 'My ReasonDx Cognitive Portrait', url: window.location.href });
   } else {
     navigator.clipboard.writeText(window.location.href).then(function() {
-      alert('Link copied to clipboard');
+    rdxPortraitToast('✓ Link copied to clipboard', 'success');
     });
   }
 };
@@ -814,6 +814,15 @@ if (document.readyState === 'complete') { init(); }
 else { window.addEventListener('load', init); }
 
 })();
+
+function rdxPortraitToast(msg, type) {
+  var t = document.createElement('div');
+  var bg = type === 'success' ? '#059669' : '#1B4F72';
+  t.style.cssText = 'position:fixed;top:80px;right:20px;background:'+bg+';color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,.2);max-width:300px';
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.style.opacity='0'; t.style.transition='opacity .3s'; setTimeout(function(){ t.remove(); }, 300); }, 2500);
+}
 </script>
 </body>
 </html>
