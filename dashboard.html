@@ -461,6 +461,24 @@ var HP_CARDS = {
 function initDashboard() {
   var user = {};
   try { user = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+
+  // Faculty / admin: show a prominent banner pointing to the faculty dashboard
+  if (user && (user.role === 'faculty' || user.role === 'admin' || user.role === 'program_director')) {
+    var facBanner = document.getElementById('rdx-faculty-banner');
+    if (!facBanner) {
+      facBanner = document.createElement('div');
+      facBanner.id = 'rdx-faculty-banner';
+      facBanner.style.cssText = 'background:linear-gradient(135deg,#1B4F72,#0D7A67);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:inherit;margin-bottom:0;';
+      facBanner.innerHTML = '<div style="display:flex;align-items:center;gap:12px"><span style="font-size:20px">🏫</span><div><div style="font-size:14px;font-weight:700">You're signed in as Faculty</div><div style="font-size:12px;opacity:.8">Explore the platform, or go to your Faculty Dashboard to manage students and review submissions.</div></div></div><a href="/faculty-dashboard.html" style="background:#fff;color:#1B4F72;padding:9px 20px;border-radius:9px;font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap;flex-shrink:0">Faculty Dashboard →</a>';
+      var main = document.querySelector('main') || document.querySelector('.dashboard-container') || document.body.firstElementChild;
+      if (main && main.parentNode) {
+        main.parentNode.insertBefore(facBanner, main);
+      } else {
+        document.body.insertBefore(facBanner, document.body.firstChild);
+      }
+    }
+  }
+
   var prof = user.professionProfile;
   if (!prof || !prof.professionId) return;
 

@@ -90,9 +90,15 @@
   nav.id = 'rdx-global-nav';
 
   function buildNav(userEmail) {
+    var role = '';
+    try { var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); role = u.role || ''; } catch(e) {}
+    var isFaculty = role === 'faculty' || role === 'admin' || role === 'program_director';
+    const dashLink = isFaculty
+      ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/faculty-dashboard.html">Faculty Dashboard</a>`
+      : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/dashboard.html">Dashboard</a>`;
     const authActions = userEmail
       ? `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/browse.html">Browse</a>
-         <a class="rdx-nav-btn rdx-nav-btn-ghost" href="/dashboard.html">Dashboard</a>
+         ${dashLink}
          <button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()">Sign Out</button>`
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html">Sign In</a>
          <a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/register.html">Sign Up</a>`;

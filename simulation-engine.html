@@ -286,7 +286,7 @@ function startStudy() {
     try {
       savedSession = JSON.parse(localStorage.getItem('rdx-active-session') || 'null');
       if (!savedSession || savedSession.caseId !== selectedCase) {
-        savedSession = null; // Case mismatch, don&#39;t resume
+        savedSession = null; // Case mismatch, don't resume
       }
     } catch(e) {
       console.warn('[Resume] Failed to load saved session:', e);
@@ -304,7 +304,7 @@ function startStudy() {
     // If CRT_DATA not loaded yet, load it dynamically then retry
     if (!window.CRT_DATA || !window.CRT_DATA[selectedCase]) {
       if (document.querySelector('script[src*="crt-data.js"]')) {
-        // Already loading or loaded — case genuinely doesn&#39;t exist
+        // Already loading or loaded — case genuinely doesn't exist
         addMessage('system', 'Case not found: ' + selectedCase + '. <a href="browse.html">Browse all cases</a>.');
         return;
       }
@@ -523,18 +523,18 @@ function startStudy() {
 
       if (depthVersion === 'v2') {
         // v2: Treatment failure — start at reassessment
-        opening = `[As Dr. Patel]\n\nWelcome back. You saw ${p.patientName} previously. Here&#39;s the update:\n\n${depthScenario}${newDataStr}\n\nBased on this update, what&#39;s your assessment? Has your thinking changed? Walk me through your current differential and what you want to do differently.`;
+        opening = `[As Dr. Patel]\n\nWelcome back. You saw ${p.patientName} previously. Here's the update:\n\n${depthScenario}${newDataStr}\n\nBased on this update, what's your assessment? Has your thinking changed? Walk me through your current differential and what you want to do differently.`;
         // Skip to revised differential phase
         state.currentPhase = PHASES.REVISED_DIFFERENTIAL;
       } else if (depthVersion === 'v3') {
         // v3: Outpatient follow-up — start at management/follow-up
-        opening = `[As Dr. Patel]\n\n${p.patientName} is here for their follow-up visit. Here&#39;s where things stand:\n\n${depthScenario}${newDataStr}\n\nWalk me through your assessment. How is the patient doing relative to where you expected? What&#39;s your plan going forward?`;
+        opening = `[As Dr. Patel]\n\n${p.patientName} is here for their follow-up visit. Here's where things stand:\n\n${depthScenario}${newDataStr}\n\nWalk me through your assessment. How is the patient doing relative to where you expected? What's your plan going forward?`;
         // Skip to management phase
         state.currentPhase = PHASES.MANAGEMENT;
       }
     } else {
       // ── STANDARD v1: Initial encounter ──
-      opening = `[As Dr. Patel]\n\nYou&#39;re about to see your next patient in clinic. Here&#39;s the chart summary:\n\nPatient: ${p.patientName}, ${p.age}-year-old ${p.ethnicity} ${p.sex.toLowerCase()}\nChief Complaint: ${p.chiefComplaint}\nVitals: T ${p.vitals.temp}, HR ${p.vitals.hr}, BP ${p.vitals.bp}, RR ${p.vitals.rr}, SpO\u2082 ${p.vitals.spo2} on room air\nBrief note from triage nurse: "${p.triageNote}"\n\nBefore you see the patient, I&#39;d like you to generate an initial differential diagnosis based on this limited information. What are you thinking, and in what order of priority?`;
+      opening = `[As Dr. Patel]\n\nYou're about to see your next patient in clinic. Here's the chart summary:\n\nPatient: ${p.patientName}, ${p.age}-year-old ${p.ethnicity} ${p.sex.toLowerCase()}\nChief Complaint: ${p.chiefComplaint}\nVitals: T ${p.vitals.temp}, HR ${p.vitals.hr}, BP ${p.vitals.bp}, RR ${p.vitals.rr}, SpO\u2082 ${p.vitals.spo2} on room air\nBrief note from triage nurse: "${p.triageNote}"\n\nBefore you see the patient, I'd like you to generate an initial differential diagnosis based on this limited information. What are you thinking, and in what order of priority?`;
     }
 
     addMessage('patel', opening);
@@ -703,7 +703,7 @@ async function sendMessage() {
 
   // ── TRANSITION CONFIRMATION FLAG ──
   // If the orchestrator injected a transition message last turn,
-  // the student&#39;s response (even "ok") confirms the transition
+  // the student's response (even "ok") confirms the transition
   if (state._pendingTransition) {
     var pending = state._pendingTransition;
     state._pendingTransition = null;
@@ -713,7 +713,7 @@ async function sendMessage() {
       state.conversationMessages.push({ role:'assistant', content: pending.inject.content });
       state.turns.push({ role:'assistant', content:pending.inject.content, timestamp:new Date().toISOString(), phase:state.currentPhase, turnNumber:++state.turnCount });
     }
-    // Don&#39;t return — let the message also be processed normally
+    // Don't return — let the message also be processed normally
   }
 
   // ── PHASE TIMEOUT GUARDRAIL ──
@@ -1001,7 +1001,7 @@ async function sendMessage() {
       })
     }, 2);
     const data = await resp.json();
-    const reply = (data.content && data.content[0] && data.content[0].text) || "I&#39;m having difficulty responding right now.";
+    const reply = (data.content && data.content[0] && data.content[0].text) || "I'm having difficulty responding right now.";
 
     // Leak check
     checkForLeaks(reply);
@@ -1026,8 +1026,8 @@ async function sendMessage() {
     }
 
     // ── RESPONSE-SIDE TRANSITION DETECTION ──
-    // If Claude (as Dr. Patel) says "let&#39;s go see the patient" or similar,
-    // set a pending transition so the student&#39;s next message auto-advances.
+    // If Claude (as Dr. Patel) says "let's go see the patient" or similar,
+    // set a pending transition so the student's next message auto-advances.
     if (msgType === 'patel' && !state._pendingTransition) {
       if (state.currentPhase === PHASES.INITIAL_DIFFERENTIAL || state.currentPhase === PHASES.JUSTIFICATION) {
         if (/let'?s (go )?see (the patient|Ms\.|Mr\.)|let'?s go to (the|exam)|let me take you to/i.test(reply)) {
@@ -1069,7 +1069,7 @@ async function sendMessage() {
       state._patientMessages.push({ role: 'assistant', content: reply });
 
       // Track patient confusion (indicates student used jargon)
-      if (/not sure what.*mean|don&#39;t understand|can you explain|what does that mean|what&#39;s that|in english/i.test(reply)) {
+      if (/not sure what.*mean|don't understand|can you explain|what does that mean|what's that|in english/i.test(reply)) {
         if (state._healthLiteracy) state._healthLiteracy.patientConfusionCount++;
       }
 
@@ -1131,7 +1131,7 @@ function extractSignals(msg) {
     historyMatches: {}
   };
 
-  // Check each critical history element against the case&#39;s keyword map
+  // Check each critical history element against the case's keyword map
   if (caseData && caseData.keywordMap) {
     var critHist = (caseData.signals && caseData.signals.criticalHistory) || [];
     critHist.forEach(function(element) {
@@ -1174,12 +1174,12 @@ function checkPhaseTransition(signals) {
     // Build training-level-appropriate transition
     var year = state.trainingYear || 'M3';
     var patientDisplay = getPatientDisplayName();
-    var pronoun = caseData.presentation.sex === 'Male' ? "He&#39;s" : "She&#39;s";
-    var intro = "[As Dr. Patel]\n\nAlright, let&#39;s go see " + patientDisplay + ". " + pronoun + " in exam room 3.\n\n" + patientDisplay + ", this is " + state.studentName + ", a medical student on our team. " + state.studentName + " is going to talk with you and ask some questions.";
+    var pronoun = caseData.presentation.sex === 'Male' ? "He's" : "She's";
+    var intro = "[As Dr. Patel]\n\nAlright, let's go see " + patientDisplay + ". " + pronoun + " in exam room 3.\n\n" + patientDisplay + ", this is " + state.studentName + ", a medical student on our team. " + state.studentName + " is going to talk with you and ask some questions.";
 
     // ── SCAFFOLDING RCT (Sub-Project 6) ──────────────────────────────────────
     // For M1-M2 students: randomly assign scaffold vs. no-scaffold condition.
-    // Assignment is deterministic per student (hash-based) so it&#39;s consistent
+    // Assignment is deterministic per student (hash-based) so it's consistent
     // across all sessions in the same study period. Stored in state for Supabase.
     var scaffoldCondition = null;
     if (year === 'M1' || year === 'M2') {
@@ -1199,16 +1199,16 @@ function checkPhaseTransition(signals) {
       if (scaffoldCondition === 'scaffold') {
         // SCAFFOLD arm: metacognitive pre-interview prompt
         intro += "\n\n" + state.studentName + ", before you start — take a moment. Based on the chief complaint alone, what is your initial hypothesis? What two or three categories of illness could explain this presentation? Start broad, then let the history narrow it.";
-        intro += "\n\nI&#39;ll be right outside. Come find me when you&#39;re done.";
+        intro += "\n\nI'll be right outside. Come find me when you're done.";
       } else {
         // CONTROL arm: standard instruction, no metacognitive scaffold
-        intro += "\n\n" + state.studentName + ", go ahead and take your history. I&#39;ll be right outside — come get me when you&#39;re ready to discuss.";
+        intro += "\n\n" + state.studentName + ", go ahead and take your history. I'll be right outside — come get me when you're ready to discuss.";
       }
     } else if (year === 'M3' || year === 'M4') {
-      intro += "\n\n" + state.studentName + ", go ahead and take your history. I&#39;ll be right outside \u2014 come get me when you&#39;re ready to discuss.";
+      intro += "\n\n" + state.studentName + ", go ahead and take your history. I'll be right outside \u2014 come get me when you're ready to discuss.";
     } else {
       // PGY+ / Attending — minimal
-      intro += "\n\nGo ahead. I&#39;ll check back in a few minutes.";
+      intro += "\n\nGo ahead. I'll check back in a few minutes.";
     }
 
     return {
@@ -1222,7 +1222,7 @@ function checkPhaseTransition(signals) {
     const askedAny = critHist.some(function(h) { return state.historyFlags[h]; });
     if (!askedAny && !state.historyFlags.genericPromptDelivered) {
       state.historyFlags.genericPromptDelivered = true;
-      return { inject: { type:'patel', content:"[As Dr. Patel]\n\nIs there anything else you&#39;d like to ask the patient before we move on to the physical exam?" } };
+      return { inject: { type:'patel', content:"[As Dr. Patel]\n\nIs there anything else you'd like to ask the patient before we move on to the physical exam?" } };
     }
     // Score: 0 = no critical history, 1 = some critical history, 2 = key exposure found
     var critAskedCount = critHist.filter(function(h) { return state.historyFlags[h]; }).length;
@@ -1233,9 +1233,9 @@ function checkPhaseTransition(signals) {
     var shortName = patientName.length > 1 ? (caseData.presentation.sex === 'Male' ? 'Mr. ' : 'Ms. ') + patientName[patientName.length - 1] : caseData.presentation.patientName;
     var returnMsg = "[As Dr. Patel]\n\n";
     if (state.trainingYear === 'M1' || state.trainingYear === 'M2') {
-      returnMsg += "Good work in there. Let&#39;s step into the hallway for a moment.\n\nTell me what you learned from " + shortName + ". What categories did you cover? And how has your differential changed from your initial list? Walk me through what moved and why.";
+      returnMsg += "Good work in there. Let's step into the hallway for a moment.\n\nTell me what you learned from " + shortName + ". What categories did you cover? And how has your differential changed from your initial list? Walk me through what moved and why.";
     } else if (state.trainingYear === 'M3' || state.trainingYear === 'M4') {
-      returnMsg += "Alright, you&#39;ve had a chance to talk with " + shortName + ". How has your differential changed? Walk me through your revised list and tell me what moved and why.";
+      returnMsg += "Alright, you've had a chance to talk with " + shortName + ". How has your differential changed? Walk me through your revised list and tell me what moved and why.";
     } else {
       returnMsg += "What are you thinking after the history?";
     }
@@ -1249,7 +1249,7 @@ function checkPhaseTransition(signals) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.PHYSICAL_EXAM,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nOkay. What physical exam would you like to perform? Tell me what you&#39;re looking for and what you expect to find." }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nOkay. What physical exam would you like to perform? Tell me what you're looking for and what you expect to find." }
     };
   }
   if (phase === PHASES.PHYSICAL_EXAM && signals.readyToMoveOn) {
@@ -1265,7 +1265,7 @@ function checkPhaseTransition(signals) {
       return {
         shouldTransition: true,
         nextPhase: PHASES.REFLECTION,
-        inject: { type:'patel', content:"[As Dr. Patel]\n\nLet&#39;s take a moment to reflect on this case. What was the single most important piece of information that shaped your final diagnosis, and when did you get it?" }
+        inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's take a moment to reflect on this case. What was the single most important piece of information that shaped your final diagnosis, and when did you get it?" }
       };
     }
     // Has radiology reports — move to comparison phase
@@ -1279,7 +1279,7 @@ function checkPhaseTransition(signals) {
     return {
       shouldTransition: true,
       nextPhase: PHASES.REFLECTION,
-      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet&#39;s take a moment to reflect. What was the single most important piece of information in reaching your diagnosis, and at what point did you get it?" }
+      inject: { type:'patel', content:"[As Dr. Patel]\n\nLet's take a moment to reflect. What was the single most important piece of information in reaching your diagnosis, and at what point did you get it?" }
     };
   }
   if (phase === PHASES.REFLECTION) {
@@ -1289,7 +1289,7 @@ function checkPhaseTransition(signals) {
       return {
         shouldTransition: true,
         nextPhase: PHASES.MANAGEMENT,
-        inject: { type:'patel', content:"[As Dr. Patel]\n\nGood. Now let&#39;s talk management. What are your most urgent immediate orders for this patient right now?" }
+        inject: { type:'patel', content:"[As Dr. Patel]\n\nGood. Now let's talk management. What are your most urgent immediate orders for this patient right now?" }
       };
     }
   }
@@ -1341,18 +1341,18 @@ function enterPhase(phase) {
     if (ddxPanel) ddxPanel.style.display = 'none';
   }
   if (phase === PHASES.PHYSICAL_EXAM) {
-    // Don&#39;t auto-deliver — Dr. Patel asks what the student wants to examine
+    // Don't auto-deliver — Dr. Patel asks what the student wants to examine
     state._peRequested = {};  // track which systems were requested
     state._peDelivered = {};  // track which systems were delivered
     setTimeout(function() {
       var year = state.trainingYear || 'M3';
       var prompt = "[As Dr. Patel]\n\n";
       if (year === 'M1' || year === 'M2') {
-        prompt += "Now let&#39;s do the physical exam. Tell me which systems you want to examine and what you&#39;re looking for in each one. Think about what findings would support or refute your differential.";
+        prompt += "Now let's do the physical exam. Tell me which systems you want to examine and what you're looking for in each one. Think about what findings would support or refute your differential.";
       } else if (year === 'M3' || year === 'M4') {
         prompt += "Go ahead with your physical exam. What are you examining and what do you expect to find?";
       } else {
-        prompt += "What&#39;s your focused exam?";
+        prompt += "What's your focused exam?";
       }
       addMessage('patel', prompt);
       state.conversationMessages.push({ role: 'assistant', content: prompt });
@@ -1741,8 +1741,8 @@ function deliverSecondReport() {
   const reportType = state.secondReportType;
   const report = caseData.radiologyReports[reportType];
   const intro = reportType === 'simplified'
-    ? "[As Dr. Patel]\n\nI&#39;d also like to show you an alternative version of this radiology report, written in more accessible language. Take a look and tell me whether it changes anything about your interpretation or differential."
-    : "[As Dr. Patel]\n\nHere&#39;s the original technical version of the radiology report. Take a look and tell me whether it changes anything about your interpretation or differential.";
+    ? "[As Dr. Patel]\n\nI'd also like to show you an alternative version of this radiology report, written in more accessible language. Take a look and tell me whether it changes anything about your interpretation or differential."
+    : "[As Dr. Patel]\n\nHere's the original technical version of the radiology report. Take a look and tell me whether it changes anything about your interpretation or differential.";
 
   addMessage('patel', intro);
   addMessage('report', report);
@@ -1760,7 +1760,7 @@ function buildSystemPrompt() {
 
   // ── Profession Question + Arc Context Override ───────────────────────────
   // If this is a profession-framed or arc case, inject the professional lens
-  // and arc patient context so attending asks the RIGHT profession&#39;s question.
+  // and arc patient context so attending asks the RIGHT profession's question.
   var _profQuestionOverride = '';
   try {
     var _u = JSON.parse(localStorage.getItem('reasondx-user') || '{}');
@@ -1790,7 +1790,7 @@ function buildSystemPrompt() {
 
   // ── Student Model Bus injection ──────────────────────────────────────────
   // Gives every agent (attending Dr. Patel, patient voice) a unified,
-  // real-time view of the student&#39;s working memory, episodic history,
+  // real-time view of the student's working memory, episodic history,
   // longitudinal patterns, affective state, and cognitive load.
   // Different roles receive tailored subsets (see rdx-student-model-bus.js).
   var studentModelBlock = '';
@@ -1800,7 +1800,7 @@ function buildSystemPrompt() {
   }
 
   // ── Meta-Reasoning Agent brief ───────────────────────────────────────────
-  // The supervisory agent&#39;s current theory of the student&#39;s error mode,
+  // The supervisory agent's current theory of the student's error mode,
   // injected as a compact tactical directive for the attending.
   // Not shown to patient agent (role === 3).
   var metaBrief = '';
@@ -1814,7 +1814,7 @@ function buildSystemPrompt() {
 ABSOLUTE RULES (apply to every response):
 - NEVER introduce a diagnosis, disease category, or clinical concept the student has not already mentioned.
 - NEVER name specific exposures, organisms, animals, or environmental triggers.
-- NEVER teach. If the student says "I don&#39;t know," say "That&#39;s okay, work with what you know."
+- NEVER teach. If the student says "I don't know," say "That's okay, work with what you know."
 - NEVER use evaluative praise (excellent, great, good thinking, beautiful, spot on). Use ONLY: "Okay," "Tell me more," "Walk me through that," "What else?"
 - NEVER use emoji, bullet points, headers, or formatted lists. Speak conversationally.
 - Respond in 1-3 short paragraphs. Keep it natural.
@@ -1822,7 +1822,7 @@ ABSOLUTE RULES (apply to every response):
 - NEVER reference the simulation, the format, the exercise, or that this is a training scenario. You are in a REAL clinical encounter. If you cannot fulfill a request, redirect naturally as a real attending would.`;
 
   if (phase === PHASES.INITIAL_DIFFERENTIAL || phase === PHASES.JUSTIFICATION) {
-    sys += `\n\nYou are Dr. Patel, a neutral attending physician. The student just provided their differential or justification. Ask them to walk through their reasoning for diagnoses THEY listed. Do NOT introduce new diagnoses. If they haven&#39;t mentioned the SpO2, you may ask: "Is there anything in the vitals that stands out?" When discussion feels adequate, say: "Okay. Let&#39;s go see the patient."`;
+    sys += `\n\nYou are Dr. Patel, a neutral attending physician. The student just provided their differential or justification. Ask them to walk through their reasoning for diagnoses THEY listed. Do NOT introduce new diagnoses. If they haven't mentioned the SpO2, you may ask: "Is there anything in the vitals that stands out?" When discussion feels adequate, say: "Okay. Let's go see the patient."`;
   }
   else if (phase === PHASES.HISTORY_TAKING) {
     sys += `\n\nThe student is now in the exam room with the patient. You play ${caseData.presentation.patientName} — respond in character as the patient to every question the student asks.
@@ -1853,7 +1853,7 @@ ${(ctx.keyLearningPoints || []).join('\n')}
 Must-not-miss considerations (these are things the student should rule out — respond truthfully if asked about related symptoms):
 ${(ctx.mustNotMiss || []).join('\n')}
 
-If the student asks about something not covered above, respond as a realistic patient would — it&#39;s okay to say "I don&#39;t think so" or "Not that I can remember" for things that aren&#39;t part of this presentation.`;
+If the student asks about something not covered above, respond as a realistic patient would — it's okay to say "I don't think so" or "Not that I can remember" for things that aren't part of this presentation.`;
     } else {
       // Native rad-study case: use pre-scripted patient segments
       sys += `Identity: ${ps.identity}\nHPI: ${ps.hpiOnset} ${ps.hpiProgression} ${ps.hpiCough} ${ps.hpiAssociatedSymptoms}\n`;
@@ -1901,7 +1901,7 @@ When the student orders a test, provide REALISTIC results consistent with ${ctx.
 For example: if the student orders a CBC, give a full CBC with realistic values. If they order a troponin for an MI case, give an elevated troponin. If they order a test that would be normal in this condition, give a normal result.
 
 ${labText ? 'Some pre-defined results:\n' + labText + '\n' : ''}
-After delivering results, ask: "Walk me through how you&#39;re interpreting those findings."`;
+After delivering results, ask: "Walk me through how you're interpreting those findings."`;
     } else {
       // Native case: use pre-defined results
       sys += `\n\nYou are Dr. Patel. The student is ordering workup. Provide results ONLY for tests they specifically order. Do NOT volunteer results for tests they did not ask for.
@@ -1912,7 +1912,7 @@ ${labText}
 ${caseData.radiologyReports ? `If the student orders chest imaging (CT, HRCT, chest X-ray), say: "The imaging is back." Then provide the image link: ${caseData.radiologyReports.imageUrl || ''}
 The radiology report will be delivered separately by the system — do NOT generate a radiology report yourself.` : ''}
 
-After delivering results, ask: "Walk me through how you&#39;re interpreting the findings. What does your differential look like now?"`;
+After delivering results, ask: "Walk me through how you're interpreting the findings. What does your differential look like now?"`;
     }
   }
   else if (phase === PHASES.REPORT_COMPARISON) {
@@ -1946,8 +1946,8 @@ CASE-SPECIFIC SAFETY CONCERNS:\n`;
         sys += `CRITICAL ACTIONS (must be included in plan):\n` + caseData.management.criticalActions.map(function(c) { return '- ' + c; }).join('\n') + '\n';
       }
     }
-    sys += `\nIf the student proposes something dangerous, push back firmly: "I&#39;d stop you there — tell me why that might be a problem with this patient."
-If the student&#39;s plan is reasonable, ask about one gap they haven&#39;t addressed.
+    sys += `\nIf the student proposes something dangerous, push back firmly: "I'd stop you there — tell me why that might be a problem with this patient."
+If the student's plan is reasonable, ask about one gap they haven't addressed.
 If the student mentions something the patient might refuse or struggle with, introduce the patient pushback: "Actually, ${caseData.presentation.patientName} has some concerns about that plan. How would you handle that?"
 When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."`;
   }
@@ -1979,7 +1979,7 @@ When the plan is adequate, say: "Okay, I think we have a solid plan. Well done."
   // Append student model bus — gives the agent a unified live student model
   sys += studentModelBlock;
 
-  // Append meta-reasoning brief — attending gets supervisory agent&#39;s tactical directive
+  // Append meta-reasoning brief — attending gets supervisory agent's tactical directive
   sys += metaBrief;
 
   return sys + _profQuestionOverride + studentModelBlock + metaBrief;
@@ -2065,7 +2065,7 @@ function checkForLeaks(response) {
 
 // ── HELPERS ──
 function hasKeyExposure() {
-  // Check if the student found the case&#39;s key diagnostic element
+  // Check if the student found the case's key diagnostic element
   // Uses the first 2 elements of criticalHistoryElements as "key"
   var keyElements = (caseData.scoringCriteria.criticalHistoryElements || []).slice(0, 2);
   return keyElements.some(function(elem) {
@@ -2178,7 +2178,7 @@ function matchAndDeliverPE(msg) {
   // Build the findings message
   var findingsText = 'You perform the examination.\n\n' + newFindings.join('\n\n');
 
-  // Count what&#39;s been examined vs what&#39;s available
+  // Count what's been examined vs what's available
   var totalSystems = Object.keys(examMap).length;
   var examinedCount = Object.keys(state._peDelivered).length;
 
@@ -3222,7 +3222,7 @@ async function exportStudyData() {
     };
   }
 
-  // ── WHAT&#39;S NEXT PANEL — cross-pillar bridge after debrief ──────
+  // ── WHAT'S NEXT PANEL — cross-pillar bridge after debrief ──────
   function buildWhatsNextPanel(caseData) {
     if (!caseData) return '';
     var cid = caseData.caseId || '';
@@ -3497,9 +3497,9 @@ async function exportStudyData() {
     h += '</div>';
 
     // Puzzle teaser
-    h += '<a href="/puzzles.html" style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;transition:background .15s" onmouseover="this.style.background=&#39;#EBF5FB&#39;" onmouseout="this.style.background=&#39;#F8FAFC&#39;">';
+    h += '<a href="/puzzles.html" style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:10px 14px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;text-decoration:none;transition:background .15s" onmouseover="this.style.background='#EBF5FB'" onmouseout="this.style.background='#F8FAFC'">';
     h += '<span style="font-size:12px;color:#64748B">🧩 <strong style="color:#1E293B">Daily Reasoning Puzzle</strong> — sharpen your pattern recognition</span>';
-    h += '<span style="font-size:12px;color:#2874A6;font-weight:600">Try today&#39;s →</span>';
+    h += '<span style="font-size:12px;color:#2874A6;font-weight:600">Try today's →</span>';
     h += '</a>';
 
     h += '</div>';
@@ -3590,13 +3590,13 @@ async function exportStudyData() {
       var _modeName = _modeNames[_theory.dominantErrorMode] || _theory.dominantErrorMode;
       var _tactics = {
         ANCHORING: 'What single finding would completely change your leading diagnosis?',
-        PREMATURE_CLOSURE: 'What are you still holding on your list that you haven&#39;t fully ruled out?',
-        HISTORY_GAP: 'Before we move on — is there anything in this patient&#39;s daily life that might be relevant?',
+        PREMATURE_CLOSURE: 'What are you still holding on your list that you haven't fully ruled out?',
+        HISTORY_GAP: 'Before we move on — is there anything in this patient's daily life that might be relevant?',
         NARROW_OPENER: 'Give me three more diagnoses. Even less likely ones. What else could explain every symptom?',
         UNDERCONFIDENT: 'Stop. You just said something correct. Own the reasoning.',
         HIGH_COGNITIVE_LOAD: 'Pause. Tell me your working diagnosis in one sentence. Just one.',
         AFFECT_DISRUPTION: 'Before you finalize — what was most surprising about that interview?',
-        CALIBRATED: 'You&#39;ve reasoned through the obvious diagnosis. What doesn&#39;t fit perfectly — and what does that mean?'
+        CALIBRATED: 'You've reasoned through the obvious diagnosis. What doesn't fit perfectly — and what does that mean?'
       };
       var _tactic = _tactics[_theory.dominantErrorMode] || '';
       var _isCal = _theory.dominantErrorMode === 'CALIBRATED';
@@ -3793,7 +3793,7 @@ async function exportStudyData() {
       }
     }
 
-    // ── What&#39;s Next Panel ──────────────────────────────────────────
+    // ── What's Next Panel ──────────────────────────────────────────
     html += buildWhatsNextPanel(caseData);
     html += buildSharePanel(caseData);
 
@@ -4184,7 +4184,7 @@ function tutorialNext() {
   });
   const dots = document.querySelectorAll('#tutDots div');
   dots.forEach(function(d, i) { d.style.background = i === _tutStep ? '#2874A6' : 'rgba(255,255,255,0.2)'; });
-  if (_tutStep === _tutTotal - 1) document.getElementById('tutNextBtn').textContent = "Let&#39;s go! 🚀";
+  if (_tutStep === _tutTotal - 1) document.getElementById('tutNextBtn').textContent = "Let's go! 🚀";
 }
 
 function dismissTutorial() {
