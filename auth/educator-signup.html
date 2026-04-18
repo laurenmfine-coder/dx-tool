@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Educator Access | ReasonDx</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ocean:#2874A6;--ocean-dark:#1B4F72;--ocean-light:#EBF5FB;
+  --text:#1a2332;--text-mid:#4a5568;--text-light:#718096;
+  --border:#E2E8F0;--bg:#F0F4F8;--white:#fff;
+  --font:'DM Sans',-apple-system,sans-serif;
+}
+body{background:var(--bg);font-family:var(--font);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+
+.card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:20px;box-shadow:0 4px 32px rgba(0,0,0,.07);
+  width:100%;max-width:460px;padding:48px 44px;
+}
+
+/* Logo */
+.brand{text-align:center;margin-bottom:36px}
+.brand-name{font-size:28px;font-weight:800;color:var(--ocean-dark);letter-spacing:-.5px}
+.brand-name span{color:var(--ocean)}
+
+/* Hero copy */
+.hero-title{font-size:22px;font-weight:700;color:var(--text);text-align:center;margin-bottom:8px;line-height:1.3}
+.hero-sub{font-size:14px;color:var(--text-light);text-align:center;margin-bottom:32px;line-height:1.6}
+
+/* Google button */
+.btn-google{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  width:100%;padding:16px 20px;
+  background:var(--white);color:var(--text);
+  font-size:16px;font-weight:600;font-family:var(--font);
+  border:1.5px solid var(--border);border-radius:12px;
+  cursor:pointer;transition:all .15s;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+.btn-google:hover{background:#f8fafc;border-color:#CBD5E0;box-shadow:0 4px 16px rgba(0,0,0,.12);transform:translateY(-1px)}
+.btn-google:active{transform:translateY(0)}
+.btn-google:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+/* Value props */
+.value-list{margin:28px 0 0;list-style:none}
+.value-list li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:var(--text-mid);line-height:1.5;
+  padding:6px 0;
+}
+.value-list li::before{
+  content:'✓';font-weight:700;color:var(--ocean);
+  flex-shrink:0;margin-top:1px;
+}
+
+/* Divider */
+.divider{
+  text-align:center;font-size:12px;color:var(--text-light);
+  margin:24px 0 0;position:relative;
+}
+
+/* Footer links */
+.footer-links{margin-top:20px;text-align:center;font-size:13px;color:var(--text-light);line-height:2}
+.footer-links a{color:var(--ocean);font-weight:600;text-decoration:none}
+.footer-links a:hover{text-decoration:underline}
+
+/* Messages */
+.msg{
+  padding:12px 16px;border-radius:10px;font-size:13px;
+  margin-bottom:20px;display:none;line-height:1.5;
+}
+.msg.show{display:block}
+.msg-error{background:#FEF2F2;border:1px solid #FECACA;color:#991B1B}
+.msg-info{background:var(--ocean-light);border:1px solid #BEE3F8;color:var(--ocean-dark)}
+
+/* Loading spinner overlay */
+.loading-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(255,255,255,.8);
+  align-items:center;justify-content:center;
+  z-index:100;flex-direction:column;gap:12px;
+}
+.loading-overlay.show{display:flex}
+.spinner{
+  width:36px;height:36px;border:3px solid var(--border);
+  border-top-color:var(--ocean);border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{font-size:14px;color:var(--text-mid);font-weight:500}
+
+/* Institutional note at bottom */
+.inst-note{
+  margin-top:28px;padding:14px 16px;
+  background:var(--ocean-light);border-radius:10px;
+  font-size:12px;color:var(--ocean-dark);line-height:1.6;
+  border-left:3px solid var(--ocean);
+}
+.inst-note strong{display:block;margin-bottom:2px}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Setting up your account…</div>
+</div>
+
+<div class="card">
+  <div class="brand">
+    <div class="brand-name">Reason<span>Dx</span></div>
+  </div>
+
+  <div class="hero-title">Explore ReasonDx for Your Program</div>
+  <div class="hero-sub">Sign in with Google to access the full platform — free, no IT setup required.</div>
+
+  <div class="msg msg-error" id="msgError"></div>
+  <div class="msg msg-info" id="msgInfo"></div>
+
+  <button class="btn-google" id="btnGoogle" onclick="signInWithGoogle()">
+    <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+      <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+      <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+      <path d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/>
+      <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 6.294C4.672 4.169 6.656 3.58 9 3.58z" fill="#EA4335"/>
+    </svg>
+    Continue with Google
+  </button>
+
+  <ul class="value-list">
+    <li>Full access to 394+ clinical reasoning cases across 11 health professions</li>
+    <li>AI-powered CoachDx attending and note feedback</li>
+    <li>OSCE and IPE case libraries included</li>
+    <li>Free to explore — institutional licensing available for program-wide deployment</li>
+  </ul>
+
+  <div class="inst-note">
+    <strong>Have an institutional account?</strong>
+    Your program director will provide a program code. Use the standard <a href="/auth/login.html" style="color:var(--ocean);font-weight:600">sign-in page</a> with your institutional credentials.
+  </div>
+
+  <div class="footer-links">
+    <a href="/auth/login.html">Already have an account? Sign in</a><br>
+    <a href="/for-educators.html" style="color:var(--text-light);font-weight:400">← Back to ReasonDx for Educators</a>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/rdx-supabase.js"></script>
+<script>
+const SUPABASE_URL  = 'https://lpwbiqpojisqgezycupw.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+
+let _sb = null;
+function getSB() {
+  if (_sb) return _sb;
+  if (window.supabase?.createClient) {
+    _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    return _sb;
+  }
+  return null;
+}
+
+function showError(msg) {
+  const el = document.getElementById('msgError');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+function showInfo(msg) {
+  const el = document.getElementById('msgInfo');
+  el.textContent = msg;
+  el.classList.add('show');
+}
+
+function setLoading(isLoading) {
+  const btn = document.getElementById('btnGoogle');
+  const overlay = document.getElementById('loadingOverlay');
+  btn.disabled = isLoading;
+  btn.textContent = isLoading ? 'Redirecting to Google…' : 'Continue with Google';
+  if (isLoading) {
+    // Re-add the Google icon
+    btn.innerHTML = isLoading
+      ? 'Redirecting to Google…'
+      : `<svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+          <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+          <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
+          <path d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/>
+          <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 6.294C4.672 4.169 6.656 3.58 9 3.58z" fill="#EA4335"/>
+        </svg>Continue with Google`;
+  }
+}
+
+/* ── GOOGLE SIGN-IN ── */
+async function signInWithGoogle() {
+  const sb = getSB();
+  if (!sb) { showError('Auth service unavailable. Please try again.'); return; }
+
+  setLoading(true);
+
+  const { error } = await sb.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.origin + '/auth/educator-signup.html',
+      queryParams: { access_type: 'offline', prompt: 'consent' }
+    }
+  });
+
+  if (error) {
+    setLoading(false);
+    showError(error.message || 'Google sign-in failed. Please try again.');
+  }
+  // On success Supabase redirects to Google — nothing more needed here
+}
+
+/* ── HANDLE OAUTH CALLBACK ── */
+async function handleCallback() {
+  const sb = getSB();
+  if (!sb) return;
+
+  showInfo('Signing you in…');
+  document.getElementById('loadingOverlay').classList.add('show');
+
+  const { data, error } = await sb.auth.getSession();
+
+  if (error || !data.session) {
+    document.getElementById('loadingOverlay').classList.remove('show');
+    showError('Sign-in failed. Please try again.');
+    return;
+  }
+
+  const session = data.session;
+  const user = session.user;
+
+  // ── Upsert profile with faculty role ──────────────────────────
+  try {
+    const { error: upsertErr } = await sb.from('profiles').upsert({
+      id: user.id,
+      email: user.email,
+      display_name: user.user_metadata?.full_name || user.email.split('@')[0],
+      role: 'faculty',
+      pending_institutional: true,
+      subscription_tier: 'free',
+      signup_source: 'educator_landing'
+    }, { onConflict: 'id', ignoreDuplicates: false });
+
+    if (upsertErr) console.warn('Profile upsert warning:', upsertErr.message);
+  } catch (e) {
+    console.warn('Profile upsert error:', e);
+  }
+
+  // ── Bridge session to localStorage ───────────────────────────
+  try {
+    localStorage.setItem('reasondx-user', JSON.stringify({
+      email: user.email,
+      name: user.user_metadata?.full_name || user.email.split('@')[0],
+      supabaseId: user.id,
+      role: 'faculty',
+      lastLogin: new Date().toISOString()
+    }));
+    localStorage.setItem('vemr-session', JSON.stringify({
+      displayName: user.user_metadata?.full_name || user.email.split('@')[0],
+      email: user.email
+    }));
+  } catch (e) {}
+
+  // ── Redirect to browse page ───────────────────────────────────
+  window.location.href = '/browse.html?welcome=educator';
+}
+
+/* ── ON LOAD ── */
+window.addEventListener('load', async () => {
+  // Returning from Google OAuth
+  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) {
+    await handleCallback();
+    return;
+  }
+
+  // Already signed in — skip this page
+  const sb = getSB();
+  if (sb) {
+    const { data } = await sb.auth.getSession();
+    if (data.session) {
+      window.location.href = '/browse.html';
+    }
+  }
+});
+</script>
+</body>
+</html>
