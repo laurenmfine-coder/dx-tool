@@ -5562,8 +5562,18 @@ submitDoc = function(){
 <script src="js/emr-landing.js"></script>
 <script src="js/emr-shell.js"></script>
 <script>
-// === ROUTING: poll until loadCaseData is ready, then route ===
+// === ROUTING: simple — redirect if no case, load if case ===
 (function() {
+  var _p = new URLSearchParams(window.location.search);
+  var _id = window.CASE_ID || _p.get('case') || _p.get('cx') || '';
+
+  if (!_id) {
+    // No case to load — go to browse
+    window.location.replace('/browse.html?mode=practice');
+    return;
+  }
+
+  // Has a case ID — poll until loadCaseData + bootstrapApp are ready, then load
   var _att = 0;
   function _route() {
     _att++;
@@ -5573,50 +5583,19 @@ submitDoc = function(){
       return;
     }
     try {
-      var _S = (typeof S !== 'undefined') ? S : {};
-      var _p = new URLSearchParams(window.location.search);
-      var _id = window.CASE_ID || _p.get('case') || _p.get('cx') || '';
-      // If no case ID, wait for EMRLanding to be available
-      if (!_id && typeof window.EMRLanding === 'undefined') {
-        if (_att < 100) { setTimeout(_route, 30); return; }
-        // Fallback after 3s — just redirect to browse
-        window.location.replace('/browse.html');
-        return;
-      }
-      console.log('[RDX routing] id=', _id, 'setting=', _S.clinicalSetting, 'att=', _att);
-      if (window.EMRShell && _id) { EMRShell.inject(); } // Only inject shell when there's an actual case
-      if (!_id && !_S.clinicalSetting) {
-        // Show the EMR landing page (two-path CTAs)
-        if (window.EMRLanding) {
+      if (!window.CASE_ID) window.CASE_ID = _id;
+      if (window.EMRShell) { EMRShell.inject(); }
+      loadCaseData(function() {
+        bootstrapApp().catch(function(err) {
+          console.error('bootstrapApp error:', err);
           var app = document.getElementById('app');
-          if (app) app.innerHTML = EMRLanding.render();
-        } else {
-          window.location.replace('/browse.html');
-        }
-      } else if (!_id && _S.clinicalSetting) {
-        // Stale setting but no case — show landing page
-        if (window.EMRLanding) {
-          var app = document.getElementById('app');
-          if (app) app.innerHTML = EMRLanding.render();
-        } else {
-          showCasePicker();
-        }
-      } else {
-        if (!window.CASE_ID) window.CASE_ID = _id;
-        loadCaseData(function() {
-          bootstrapApp().catch(function(err) {
-            console.error('bootstrapApp error:', err);
-            var app = document.getElementById('app');
-            if (app && !app.innerHTML.trim()) {
-              app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px"><h2 style="color:#1e293b">Error Loading Case</h2><p style="color:#64748b">' + (err.message||'Unexpected error') + '</p><a href="virtual-emr.html" style="background:#2874A6;color:#fff;padding:10px 20px;border-radius:8px;text-decoration:none">Patient List</a></div>';
-            }
-          });
+          if (app && !app.innerHTML.trim()) {
+            app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:sans-serif"><div style="font-size:36px;margin-bottom:12px">🏥</div><h2 style="color:#1e293b;margin-bottom:8px">Case Couldn't Load</h2><p style="color:#64748b;margin-bottom:20px">We couldn't load this patient case. This might be a temporary issue.</p><div style="display:flex;gap:10px;justify-content:center"><button onclick="location.reload()" style="padding:10px 20px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit">↺ Retry</button><a href="/browse.html" style="padding:10px 20px;background:#F1F5F9;color:#374151;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none">← Browse Cases</a></div></div>';
+          }
         });
-      }
+      });
     } catch(e) {
       console.error('[RDX routing error]', e);
-      var app = document.getElementById('app');
-      if (app) app.innerHTML = '<div style="padding:40px;text-align:center"><h2>Error</h2><p>' + e.message + '</p></div>';
     }
   }
   _route();
