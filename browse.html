@@ -1119,7 +1119,7 @@ function render(){var q=(document.getElementById('searchInput').value||'').toLow
   if(window._newUserMode) return (b.acuity||3)-(a.acuity||3);
   return (a.acuity||3)!==(b.acuity||3)?(a.acuity||3)-(b.acuity||3):a.title.localeCompare(b.title);
 });}else{filtered.sort(function(a,b){return a.title.localeCompare(b.title);});}
-var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';var _showing=Math.min(itemsToShow,filtered.length);var _countLabel=_showing<filtered.length?'Showing '+_showing+' of '+filtered.length+' '+noun:filtered.length+' '+noun;document.getElementById('count').textContent=_countLabel;var grid=document.getElementById('grid');// Apply user-selected sort
+var _batchSizeEarly = window._rdxBatchSize || 24; var itemsToShowEarly = window._showAll ? filtered.length : Math.min(_batchSizeEarly, filtered.length);var noun=MODE==='coach'?'topics':MODE==='learn'?'modules':'cases';var _showing=Math.min(itemsToShowEarly,filtered.length);var _countLabel=_showing<filtered.length?'Showing '+_showing+' of '+filtered.length+' '+noun:filtered.length+' '+noun;document.getElementById('count').textContent=_countLabel;var grid=document.getElementById('grid');// Apply user-selected sort
 if (_rdxSort === 'az') {
   filtered.sort(function(a,b){ return (a.title||'').localeCompare(b.title||''); });
 } else if (_rdxSort === 'quickest') {
