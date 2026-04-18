@@ -237,7 +237,7 @@ const IPE_CASES = [
     id: 'ipe-chronic-pain-team',
     title: 'Chronic Pain: The Biopsychosocial Challenge',
     category: 'Musculoskeletal / Pharmacotherapy / Rehabilitation',
-    vignette: `Kevin Torres is a 44-year-old construction worker with 9 months of chronic low back pain after a lifting injury. Pain 7/10 daily. Tampa Scale for Kinesiophobia: 48 (high fear-avoidance). He has been on escalating opioids: oxycodone now 30mg/day — prescribed by three different providers. He stopped working 6 months ago and has a pending disability claim. BMI 34. MRI: mild L4-5 degenerative disc disease. His wife reports he barely leaves the house. He says he tried PT once but it made his pain worse and he won&#39;t go back. His ORT score is 8 (high risk).`,
+    vignette: `Kevin Torres is a 44-year-old construction worker with 9 months of chronic low back pain after a lifting injury. Pain 7/10 daily. Tampa Scale for Kinesiophobia: 48 (high fear-avoidance). He has been on escalating opioids: oxycodone now 30mg/day — prescribed by three different providers. He stopped working 6 months ago and has a pending disability claim. BMI 34. MRI: mild L4-5 degenerative disc disease. His wife reports he barely leaves the house. He says he tried PT once but it made his pain worse and he won't go back. His ORT score is 8 (high risk).`,
     targetDx: 'Chronic non-specific LBP: biopsychosocial assessment, opioid risk management, graded exercise therapy, fear-avoidance rehabilitation, work modification, and multimodal pain management',
     profRelevance: { medicine:'core', pa:'core', pharmacy:'core', pt:'core', ot:'core', nursing:'high', optometry:'adjacent' }
   },
@@ -334,10 +334,10 @@ function selectCase(id) {
 
 // ── RENDER PROFESSION PANELS ──────────────────────────────────────────────────
 function renderProfPanels() {
-  // Determine which professions to show (relevant to this case + user&#39;s own)
+  // Determine which professions to show (relevant to this case + user's own)
   const userProfId = getUserProfession();
 
-  // Show professions with high/core relevance + always show user&#39;s profession
+  // Show professions with high/core relevance + always show user's profession
   activeProfessions = PROFESSIONS.filter(p => {
     const rel = selectedCase && selectedCase.profRelevance[p.id];
     return rel === 'core' || rel === 'high' || p.id === userProfId;
@@ -363,7 +363,7 @@ function renderProfPanels() {
                     rows="4"></textarea>
           <div style="margin-top:8px;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);">Key Reasoning (optional)</div>
           <textarea class="prof-input" id="reasoning-${p.id}"
-                    placeholder="What&#39;s the most important piece of information you&#39;d want next, and why?"
+                    placeholder="What's the most important piece of information you'd want next, and why?"
                     rows="3"></textarea>
           <button class="prof-submit" onclick="submitProfResponse('${p.id}')"
                   style="background:${p.color}">
