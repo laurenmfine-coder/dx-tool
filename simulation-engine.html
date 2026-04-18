@@ -268,6 +268,7 @@ function startStudy() {
   var depthVersion = params.get('depth') || 'v1';
   var studyMode = params.get('mode') === 'study';
   var resuming = params.get('resume') === 'true';
+  var isFirstRun = params.get('onboarding') === '1';
 
   if (!selectedCase) {
     // No case in URL — redirect to browse
@@ -316,6 +317,10 @@ function startStudy() {
     caseData = CaseAdapter.fromCRT(selectedCase);
   }
   window.caseData = caseData;
+  // Trigger onboarding overlay for first-run users
+  if (isFirstRun && window.RDXOnboarding && window.RDXOnboarding.shouldShow()) {
+    setTimeout(function() { RDXOnboarding.show(); }, 2000);
+  }
   if (!caseData) {
     addMessage('system', 'Case not found: ' + selectedCase + '. <a href="browse.html">Return to Browse</a>.');
     return;
