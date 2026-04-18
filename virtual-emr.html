@@ -1065,6 +1065,38 @@ textarea,input[type="text"],input[type="email"],input[type="password"],select{
   }
 })();
 </script>
+<style>
+#rdx-boot-loader{position:fixed;inset:0;background:#EEF1F5;display:flex;align-items:center;justify-content:center;z-index:9999;font-family:'DM Sans',-apple-system,sans-serif}
+#rdx-boot-loader.hidden{display:none}
+.rdx-boot-inner{text-align:center;color:#2874A6}
+.rdx-boot-spinner{width:40px;height:40px;border:3px solid #E2E8F0;border-top-color:#2874A6;border-radius:50%;animation:rdx-spin .8s linear infinite;margin:0 auto 16px}
+@keyframes rdx-spin{to{transform:rotate(360deg)}}
+.rdx-boot-label{font-size:14px;font-weight:600;color:#475569}
+</style>
+<div id="rdx-boot-loader">
+  <div class="rdx-boot-inner">
+    <div class="rdx-boot-spinner"></div>
+    <div class="rdx-boot-label">Loading ReasonDx...</div>
+  </div>
+</div>
+<script>
+// Hide loader once app has content
+(function() {
+  var _check = setInterval(function() {
+    var app = document.getElementById('app');
+    if (app && app.innerHTML.trim().length > 50) {
+      var loader = document.getElementById('rdx-boot-loader');
+      if (loader) loader.className = 'hidden';
+      clearInterval(_check);
+    }
+  }, 100);
+  // Force hide after 20s regardless
+  setTimeout(function() {
+    var loader = document.getElementById('rdx-boot-loader');
+    if (loader) loader.className = 'hidden';
+  }, 20000);
+})();
+</script>
 <a href="#main-content" class="rdx-skip-link">Skip to main content</a>
 <noscript><div style="background:#FEF9E7;color:#92400E;padding:16px;text-align:center;font-family:sans-serif;font-size:14px;border-bottom:2px solid #D97706">ReasonDx requires JavaScript to run. Please enable JavaScript in your browser settings.</div></noscript>
 <div id="demo-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1B4F72,#2874A6);color:#fff;padding:10px 20px;align-items:center;justify-content:space-between;font-family:'DM Sans',-apple-system,sans-serif;font-size:13px;gap:12px">
