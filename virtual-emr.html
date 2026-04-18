@@ -1237,21 +1237,21 @@ function generateAlerts(meds, allergies, problems, vitals) {
   meds.forEach(m => {
     const mn = m.name.toLowerCase();
     if ((mn.includes("amoxicillin") || mn.includes("ampicillin") || mn.includes("penicillin")) && allergenNames.includes("penicillin")) {
-      alerts.push({type:"danger",title:"Drug-Allergy Interaction",msg:""+m.name+" -- Patient has documented Penicillin allergy (Rash, urticaria). Consider cross-reactivity risk."});
+      alerts.push({type:"danger",title:"Drug-Allergy Interaction",msg:""+m.name+" — Patient has documented Penicillin allergy (Rash, urticaria). Consider cross-reactivity risk."});
     }
     if ((mn.includes("sulfamethoxazole") || mn.includes("bactrim") || mn.includes("septra")) && allergenNames.includes("sulfa drugs")) {
-      alerts.push({type:"danger",title:"Drug-Allergy Interaction",msg:""+m.name+" -- Patient allergic to Sulfa Drugs."});
+      alerts.push({type:"danger",title:"Drug-Allergy Interaction",msg:""+m.name+" — Patient allergic to Sulfa Drugs."});
     }
   });
 
   // ACE-I + K monitoring
   if (medNames.some(m => m.includes("lisinopril") || m.includes("enalapril") || m.includes("ramipril"))) {
-    alerts.push({type:"info",title:"Monitoring Reminder",msg:"Patient on ACE inhibitor -- monitor potassium and renal function periodically."});
+    alerts.push({type:"info",title:"Monitoring Reminder",msg:"Patient on ACE inhibitor — monitor potassium and renal function periodically."});
   }
 
   // Metformin + renal
   if (medNames.some(m => m.includes("metformin"))) {
-    alerts.push({type:"info",title:"Monitoring Reminder",msg:"Metformin -- verify eGFR >30. Current eGFR 82 (adequate). Contraindicated if eGFR <30."});
+    alerts.push({type:"info",title:"Monitoring Reminder",msg:"Metformin — verify eGFR >30. Current eGFR 82 (adequate). Contraindicated if eGFR <30."});
   }
 
   // Statin + diabetes
@@ -1266,7 +1266,7 @@ function generateAlerts(meds, allergies, problems, vitals) {
 
   // Overdue screenings
   alerts.push({type:"warning",title:"Overdue: Colonoscopy",msg:"Last colonoscopy 2019 with tubular adenomas. Surveillance due per guidelines (3-5 year interval)."});
-  alerts.push({type:"info",title:"Immunization Due",msg:"Pneumovax 23 (PPSV23) -- recommended for adults with diabetes. Not yet administered."});
+  alerts.push({type:"info",title:"Immunization Due",msg:"Pneumovax 23 (PPSV23) — recommended for adults with diabetes. Not yet administered."});
 
   return alerts;
 }
@@ -1667,7 +1667,7 @@ function renderSettingSelector() {
   if (S.clinicalSetting && window.EMRLanding) {
     // Setting already known -- go straight to case picker, skip marketing page
     setTimeout(function() { showCasePicker(); }, 0);
-    return '<div style="display:flex;align-items:center;justify-content:center;min-height:60vh"><div style="text-align:center;color:#64748B;font-size:14px">Loading cases...</div></div>';
+    return '<div style="display:flex;align-items:center;justify-content:center;min-height:60vh"><div style="text-align:center;color:#64748B;font-size:14px">Loading cases…</div></div>';
   }
   // Use EMR Landing page (rich overview) if available
   if (window.EMRLanding) {
@@ -1957,7 +1957,7 @@ function _renderCasePicker() {
     // Fallback: skeleton loading state while scripts finish
     var html = '<div style="max-width:1100px;margin:0 auto;padding:24px 16px">'
       + '<div style="height:180px;background:linear-gradient(135deg,#0F172A,#1E293B);border-radius:14px;margin-bottom:16px;display:flex;align-items:center;justify-content:center">'
-      + '<div style="text-align:center;color:#94A3B8"><div style="font-size:24px;margin-bottom:8px"></div><div style="font-size:14px">Loading Emergency Department...</div></div>'
+      + '<div style="text-align:center;color:#94A3B8"><div style="font-size:24px;margin-bottom:8px"></div><div style="font-size:14px">Loading Emergency Department…</div></div>'
       + '</div>'
       + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px">'
       + '<div style="height:100px;background:linear-gradient(90deg,#1E293B 25%,#2C3E50 50%,#1E293B 75%);background-size:800px 100%;border-radius:12px;animation:rdxShimmer 1.4s ease-in-out infinite"></div>'
@@ -2857,7 +2857,7 @@ function renderCoachDx(){
       +'<p style="font-size:14px;color:var(--text-secondary);line-height:1.7;max-width:420px;margin-bottom:8px">CoachDx is a Socratic AI coach that questions your reasoning in real time. <em>"Why did you anchor on PE before calculating the Wells score?"</em></p>'
       +'<p style="font-size:13px;color:var(--text-muted);max-width:400px;margin-bottom:28px">Available on free and Pro accounts. Create a free account to unlock CoachDx, spaced repetition, and your progress dashboard.</p>'
       +'<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">'
-      +'<a href="auth/login.html" style="display:inline-flex;align-items:center;gap:8px;background:#2874A6;color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none">Sign In / Create Account -></a>'
+      +'<a href="auth/login.html" style="display:inline-flex;align-items:center;gap:8px;background:#2874A6;color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:10px;text-decoration:none">Sign In / Create Account →</a>'
       +'<a href="auth/login.html" style="display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);font-weight:600;font-size:14px;padding:13px 24px;border-radius:10px;border:1px solid var(--border);text-decoration:none">Sign In</a>'
       +'</div>'
       +'<p style="font-size:11px;color:var(--text-muted);margin-top:20px">Free forever · No credit card required</p>'
