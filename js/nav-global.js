@@ -154,7 +154,7 @@
 
   // Build nav initially (no user)
   buildNav(null);
-  document.body.insertBefore(nav, document.body.firstChild);
+  if (nav && document.body) document.body.insertBefore(nav, document.body.firstChild);
 
   // Update nav once auth state is known
   function updateNavAuth() {

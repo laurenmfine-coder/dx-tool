@@ -1014,7 +1014,7 @@ var LEARN_DATA=[];var _learnDataLoaded=false;
     setTimeout(function() {
       var banner = document.createElement('div');
       banner.style.cssText = 'position:fixed;top:64px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#1B4F72,#0D7A67);color:#fff;padding:12px 24px;border-radius:12px;font-size:13px;font-weight:700;z-index:8000;box-shadow:0 4px 20px rgba(0,0,0,.25);display:flex;align-items:center;gap:12px;white-space:nowrap';
-      banner.innerHTML = '<span>👋 Welcome to ReasonDx! Start with today's case below ↓</span><button onclick="this.parentNode.remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:6px;padding:2px 8px;cursor:pointer;font-family:inherit;font-size:12px">×</button>';
+      banner.innerHTML = '<span>👋 Welcome to ReasonDx! Start with today\'s case below ↓</span><button onclick="this.parentNode.remove()" style="background:rgba(255,255,255,.2);border:none;color:#fff;border-radius:6px;padding:2px 8px;cursor:pointer;font-family:inherit;font-size:12px">×</button>';
       document.body.appendChild(banner);
       // Scroll to COTD box
       var cotd = document.getElementById('cotd-box');
@@ -1562,11 +1562,13 @@ function doSemanticSearch(q) {
       timeAgo = hours + ' hour' + (hours !== 1 ? 's' : '') + ' ago';
     }
     
-    // Show resume prompt
-    document.getElementById('resume-prompt').style.display = 'block';
-    document.getElementById('resume-case-name').textContent = session.caseName;
-    document.getElementById('resume-details').textContent = 
-      `${session.phaseLabel} • ${session.turnCount} turns • ${timeAgo}`;
+    // Show resume prompt — guard against missing elements
+    var _rp = document.getElementById('resume-prompt');
+    var _rn = document.getElementById('resume-case-name');
+    var _rd = document.getElementById('resume-details');
+    if (_rp) _rp.style.display = 'block';
+    if (_rn) _rn.textContent = session.caseName;
+    if (_rd) _rd.textContent = (session.phaseLabel || '') + ' • ' + (session.turnCount || 0) + ' turns • ' + timeAgo;
     
     // Store case ID for resume
     window._resumeCaseId = session.caseId;
@@ -1857,7 +1859,7 @@ function startRandomEasyCase() {
       '</div>' +
       '<div style="display:flex;gap:10px;flex-shrink:0">' +
         '<a href="/faculty-dashboard.html" style="background:#fff;color:#1B4F72;padding:8px 18px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">Faculty Dashboard →</a>' +
-        '<button onclick="this.closest('#rdx-faculty-welcome').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">×</button>' +
+        '<button onclick="document.getElementById(\'rdx-faculty-welcome\').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">×</button>' +
       '</div>';
     var hero = document.querySelector('.hero') || document.querySelector('[class*="hero"]') || document.body.firstElementChild;
     if (hero && hero.parentNode) {
