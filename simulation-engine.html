@@ -299,6 +299,15 @@ function startStudy() {
   if (caseLoader) {
     caseData = caseLoader();
   } else if (window.CaseAdapter) {
+    // If CRT_DATA not loaded yet, load it dynamically then retry
+    if (!window.CRT_DATA || !window.CRT_DATA[selectedCase]) {
+      var _crtScript = document.createElement('script');
+      _crtScript.src = 'emr-data/crt-data.js';
+      _crtScript.onload = function() { startStudy(); };
+      _crtScript.onerror = function() { addMessage('system', 'Could not load case data. Please refresh.'); };
+      document.head.appendChild(_crtScript);
+      return; // will retry via onload
+    }
     caseData = CaseAdapter.fromCRT(selectedCase);
   }
   window.caseData = caseData;

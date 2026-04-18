@@ -60,10 +60,21 @@
       html += 'A virtual EMR with real patient data, clinical reasoning tools, AI coaching, and documentation practice \u2014 all in one integrated environment.';
       html += '</p>';
 
-      // CTA buttons
-      html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fadeInDown .6s .3s both">';
-      html += '<button type="button" onclick="EMRLanding._enter()" style="padding:14px 32px;border-radius:10px;background:linear-gradient(135deg,#2874A6,#1B5E8A);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:inherit;letter-spacing:-.2px;box-shadow:0 4px 20px rgba(40,116,166,.35);transition:all .2s" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 8px 30px rgba(40,116,166,.45)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'0 4px 20px rgba(40,116,166,.35)\'">Enter the EMR \u2192</button>';
-      html += '<a href="#features" style="padding:14px 24px;border-radius:10px;border:1px solid rgba(255,255,255,.12);color:#94A3B8;font-size:14px;font-weight:500;text-decoration:none;font-family:inherit;transition:all .2s" onmouseover="this.style.borderColor=\'rgba(255,255,255,.25)\';this.style.color=\'#E2E8F0\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,.12)\';this.style.color=\'#94A3B8\'">See what\u2019s inside \u2193</a>';
+      // CTA buttons — two paths
+      html += '<div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeInDown .6s .3s both">';
+
+      // Path 1: Guided (new users)
+      html += '<div style="display:flex;flex-direction:column;align-items:center;gap:8px">';
+      html += '<button type="button" onclick="EMRLanding._enterGuided()" style="padding:16px 32px;border-radius:12px;background:linear-gradient(135deg,#2874A6,#1B5E8A);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:inherit;letter-spacing:-.2px;box-shadow:0 4px 20px rgba(40,116,166,.4);transition:all .2s" onmouseover="this.style.transform=\'translateY(-2px)\';this.style.boxShadow=\'0 8px 30px rgba(40,116,166,.5)\'" onmouseout="this.style.transform=\'none\';this.style.boxShadow=\'0 4px 20px rgba(40,116,166,.4)\'">\uD83C\uDFAF New here? Try a case \u2192</button>';
+      html += '<span style="font-size:11px;color:#4B6FA0;letter-spacing:.3px">Guided · Step-by-step · 15 min</span>';
+      html += '</div>';
+
+      // Path 2: Explore (returning users)
+      html += '<div style="display:flex;flex-direction:column;align-items:center;gap:8px">';
+      html += '<button type="button" onclick="EMRLanding._enter()" style="padding:16px 28px;border-radius:12px;background:rgba(255,255,255,.06);color:#E2E8F0;font-size:15px;font-weight:600;border:1px solid rgba(255,255,255,.15);cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.background=\'rgba(255,255,255,.1)\';this.style.borderColor=\'rgba(255,255,255,.3)\'" onmouseout="this.style.background=\'rgba(255,255,255,.06)\';this.style.borderColor=\'rgba(255,255,255,.15)\'">\uD83D\uDDFA\uFE0F Explore on your own \u2192</button>';
+      html += '<span style="font-size:11px;color:#4B6FA0;letter-spacing:.3px">Full case library · All tools</span>';
+      html += '</div>';
+
       html += '</div>';
       html += '</div>';
 
@@ -187,7 +198,10 @@
       html += '</div>';
 
       // Big CTA
-      html += '<button type="button" onclick="EMRLanding._enter()" style="padding:16px 40px;border-radius:12px;background:linear-gradient(135deg,#2874A6,#1B5E8A);color:#fff;font-size:16px;font-weight:700;border:none;cursor:pointer;font-family:inherit;letter-spacing:-.3px;box-shadow:0 4px 24px rgba(40,116,166,.35);transition:all .2s" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'none\'">Enter the EMR \u2192</button>';
+      html += '<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">';
+      html += '<button type="button" onclick="EMRLanding._enterGuided()" style="padding:16px 32px;border-radius:12px;background:linear-gradient(135deg,#2874A6,#1B5E8A);color:#fff;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:inherit;box-shadow:0 4px 24px rgba(40,116,166,.35);transition:all .2s" onmouseover="this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.transform=\'none\'">\uD83C\uDFAF Try a case \u2192</button>';
+      html += '<button type="button" onclick="EMRLanding._enter()" style="padding:16px 28px;border-radius:12px;background:rgba(255,255,255,.08);color:#E2E8F0;font-size:15px;font-weight:600;border:1px solid rgba(255,255,255,.2);cursor:pointer;font-family:inherit;transition:all .2s" onmouseover="this.style.background=\'rgba(255,255,255,.14)\'" onmouseout="this.style.background=\'rgba(255,255,255,.08)\'">Explore on your own \u2192</button>';
+      html += '</div>';
 
       html += '</div></section>';
 
@@ -215,6 +229,12 @@
 
       html += '</div>';
       return html;
+    },
+
+    _enterGuided: function() {
+      // Send new users into the EMR with a known working first case
+      try { sessionStorage.setItem('rdx-last-setting', 'ed'); } catch(e) {}
+      window.location.href = 'virtual-emr.html?case=stemi-v1&setting=ed&onboarding=1';
     },
 
     _enter: function() {
