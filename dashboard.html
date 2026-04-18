@@ -169,11 +169,33 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <body>
 
 <div class="dash">
-  <div class="dash-header">
-    <div class="dash-greeting">Welcome to</div>
-    <h1 class="dash-title">The Virtual <span>Teaching Hospital</span></h1>
-    <p class="dash-sub">Choose where to go. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">See how everything works</a> Each location offers a different way to build your clinical reasoning skills.</p>
+  <div class="dash-header" id="rdx-dash-header">
+    <div class="dash-greeting" id="rdx-dash-greeting">Welcome back</div>
+    <h1 class="dash-title" id="rdx-dash-title">Your Clinical <span>Reasoning Dashboard</span></h1>
+    <p class="dash-sub" id="rdx-dash-sub">Choose where to go. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">See how everything works</a></p>
   </div>
+  <script>
+  (function() {
+    var simCount = 0; var name = '';
+    try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+    try { var u = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); name = (u.name || '').split(' ')[0]; } catch(e) {}
+    var greet = document.getElementById('rdx-dash-greeting');
+    var title = document.getElementById('rdx-dash-title');
+    var sub = document.getElementById('rdx-dash-sub');
+    if (simCount === 0) {
+      if (greet) greet.textContent = 'Welcome to ReasonDx';
+      if (title) title.innerHTML = 'Start Building Your <span>Clinical Reasoning</span>';
+      if (sub) sub.innerHTML = 'Everything here is free. Start with a case, or explore the tools below. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">How it works →</a>';
+    } else if (simCount < 5) {
+      if (greet) greet.textContent = name ? 'Welcome back, ' + name : 'Welcome back';
+      if (title) title.innerHTML = 'You've done <span>' + simCount + ' case' + (simCount===1?'':'s') + '</span> — keep going';
+      if (sub) sub.innerHTML = 'Each case builds a different reasoning skill. <a href="how-it-works.html" style="color:var(--blue-light);font-size:14px;text-decoration:underline;text-underline-offset:3px">See how everything works</a>';
+    } else {
+      if (greet) greet.textContent = name ? 'Welcome back, ' + name : 'Welcome back';
+      // title stays as-is for experienced users
+    }
+  })();
+  </script>
 
 
   <!-- ProfessionCoach Brief Widget -->

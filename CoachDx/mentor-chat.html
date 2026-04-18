@@ -1890,16 +1890,65 @@ function showEndPanel(topic) {
   const panel = document.createElement('div');
   panel.id = 'endPanel';
   panel.style.cssText = 'background:linear-gradient(135deg,#f0f7ff,#fafbff);border:1.5px solid var(--border,#dce3eb);border-radius:14px;padding:20px;margin-bottom:20px;max-width:480px;width:100%';
+  // Build AI-powered session summary (3 bullet teaching points)
+  var _aiSummaryHtml = '<div id="rdx-coach-summary-pts" style="margin-bottom:14px"><div style="font-size:11px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Session Teaching Points</div><div style="font-size:12px;color:#94A3B8;font-style:italic">Generating summary…</div></div>';
+
   panel.innerHTML = `
-    <div style="font-weight:700;font-size:15px;margin-bottom:4px">${topic.name} — session complete</div>
-    ${summaryHtml}
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <div style="font-weight:700;font-size:15px">${topic.name} — session complete</div>
+      <span style="font-size:11px;color:var(--dim,#64748b)">${turnCount} exchanges</span>
+    </div>
+    ${_aiSummaryHtml}
     <div style="font-size:12px;color:var(--dim,#64748b);margin-bottom:14px">Apply what you practiced with a full patient simulation.</div>
     <div style="display:flex;flex-direction:column;gap:8px">
       ${caseBtn}
       ${mechBtn}
+      <button onclick="rdxCopyCoachSummary()" style="background:transparent;border:1px solid var(--border,#dce3eb);border-radius:8px;color:var(--text,#1e293b);font-size:12px;font-weight:600;cursor:pointer;padding:7px;font-family:inherit">📋 Copy session summary</button>
       <button onclick="resetToWelcome()" style="background:transparent;border:none;color:var(--dim,#64748b);font-size:12px;cursor:pointer;padding:8px;text-decoration:underline">Choose a new topic instead</button>
     </div>
   `;
+
+  // Generate AI teaching points from session
+  (function() {
+    var lastMsgs = messages.slice(-20); // Last 20 messages for context
+    var transcript = lastMsgs.map(function(m) {
+      return (m.role === 'user' ? 'Student: ' : 'Attending: ') + m.content;
+    }).join('\n');
+
+    fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 400,
+        system: 'You are a clinical educator reviewing a Socratic coaching session. Extract exactly 3 key teaching points the student engaged with or learned. Format as a JSON array of 3 strings, each under 20 words. No preamble, no markdown, just valid JSON array like ["point 1","point 2","point 3"].',
+        messages: [{ role: 'user', content: 'Topic: ' + topic.name + '\n\nTranscript (last 20 messages):\n' + transcript + '\n\nExtract 3 teaching points as JSON array.' }]
+      })
+    }).then(function(r) { return r.json(); }).then(function(data) {
+      var text = (data.content && data.content[0] && data.content[0].text) || '[]';
+      try {
+        var clean = text.replace(/```json|```/g, '').trim();
+        var pts = JSON.parse(clean);
+        if (!Array.isArray(pts) || pts.length === 0) throw new Error('bad');
+        var el = document.getElementById('rdx-coach-summary-pts');
+        if (!el) return;
+        el.innerHTML = '<div style="font-size:11px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Session Teaching Points</div>' +
+          pts.slice(0,3).map(function(pt, i) {
+            return '<div style="display:flex;gap:8px;margin-bottom:6px">' +
+              '<span style="flex-shrink:0;width:18px;height:18px;border-radius:50%;background:#EBF5FB;color:#2874A6;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center">' + (i+1) + '</span>' +
+              '<span style="font-size:13px;color:#1E293B;line-height:1.5">' + pt + '</span>' +
+            '</div>';
+          }).join('') +
+          '<div id="rdx-coach-pts-text" style="display:none">' + pts.slice(0,3).map(function(pt,i){return (i+1)+'. '+pt}).join('\n') + '</div>';
+      } catch(e) {
+        var el = document.getElementById('rdx-coach-summary-pts');
+        if (el) el.style.display = 'none';
+      }
+    }).catch(function() {
+      var el = document.getElementById('rdx-coach-summary-pts');
+      if (el) el.style.display = 'none';
+    });
+  })();
 
   // Insert before the topic picker
   const picker = document.getElementById('topicPicker') || welcome.querySelector('.topic-grid') || welcome.firstChild;
@@ -2230,6 +2279,23 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', rdxCoachRenderBookmarks);
 } else {
   rdxCoachRenderBookmarks();
+}
+
+
+function rdxCopyCoachSummary() {
+  var ptsEl = document.getElementById('rdx-coach-pts-text');
+  var topicName = document.querySelector('#endPanel div')?.textContent?.split(' — ')[0] || 'CoachDx Session';
+  var text = topicName + ' — Session Summary\n\n' + (ptsEl ? ptsEl.textContent.trim() : 'No summary available');
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    var btn = document.querySelector('button[onclick="rdxCopyCoachSummary()"]');
+    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(function(){btn.textContent='📋 Copy session summary';}, 2000); }
+  } catch(e) {}
 }
 
 </script>

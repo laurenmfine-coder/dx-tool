@@ -101,10 +101,20 @@
          ${dashLink}
          <button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()">Sign Out</button>`
       : `<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html">Sign In</a>
-         <a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/register.html">Sign Up</a>`;
+         <a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/login.html?tab=signup">Sign Up</a>`;
+
+    // What's New changelog
+    var _whatsNewSeen = '';
+    try { _whatsNewSeen = localStorage.getItem('rdx-changelog-seen') || ''; } catch(e) {}
+    var _changelogId = '2026-04'; // Update monthly
+    var _showDot = _whatsNewSeen !== _changelogId;
+    var _whatsNewBtn = `<button onclick="rdxShowChangelog()" style="position:relative;background:none;border:none;cursor:pointer;padding:6px 8px;color:rgba(255,255,255,.6);font-size:12px;font-weight:600;font-family:inherit;transition:color .15s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'" title="What's new">
+      What's new${_showDot ? '<span style="position:absolute;top:4px;right:4px;width:7px;height:7px;background:#F87171;border-radius:50%;border:1.5px solid #0d2b3e"></span>' : ''}
+    </button>`;
 
     nav.innerHTML = `
       <a class="rdx-logo" href="/browse.html">Reason<span>Dx</span></a>
+      ${_whatsNewBtn}
       <div class="rdx-nav-actions" style="margin-left:auto">${authActions}</div>
     `;
 
@@ -119,7 +129,7 @@
       <div class="rdx-drawer-actions">
         ${userEmail
           ? '<button class="rdx-nav-btn rdx-nav-btn-danger" onclick="rdxSignOut()" style="flex:1">Sign Out</button>'
-          : '<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html" style="flex:1;text-align:center">Sign In</a><a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/register.html" style="flex:1;text-align:center">Sign Up</a>'
+          : '<a class="rdx-nav-btn rdx-nav-btn-ghost" href="/auth/login.html" style="flex:1;text-align:center">Sign In</a><a class="rdx-nav-btn rdx-nav-btn-primary" href="/auth/login.html?tab=signup" style="flex:1;text-align:center">Sign Up</a>'
         }
       </div>
     `;
@@ -192,4 +202,54 @@
   }
   // Small delay to avoid competing with page load
   setTimeout(injectAgentScripts, 1500);
+
+// ── What's New changelog ──────────────────────────────────
+function rdxShowChangelog() {
+  try { localStorage.setItem('rdx-changelog-seen', '2026-04'); } catch(e) {}
+  // Remove dot
+  document.querySelectorAll('#rdx-global-nav button span[style*="background:#F87171"]').forEach(function(el){el.remove();});
+
+  var existing = document.getElementById('rdx-changelog-modal');
+  if (existing) { existing.style.display = 'flex'; return; }
+
+  var modal = document.createElement('div');
+  modal.id = 'rdx-changelog-modal';
+  modal.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;padding:20px';
+  modal.onclick = function(e) { if (e.target === modal) modal.style.display = 'none'; };
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:18px;max-width:480px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2);overflow:hidden">
+      <div style="background:linear-gradient(135deg,#1B4F72,#2874A6);padding:22px 28px;display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.6);margin-bottom:4px">April 2026</div>
+          <div style="font-size:18px;font-weight:800;color:#fff">What's new in ReasonDx</div>
+        </div>
+        <button onclick="document.getElementById('rdx-changelog-modal').style.display='none'" style="background:rgba(255,255,255,.15);border:none;border-radius:8px;width:32px;height:32px;color:#fff;font-size:16px;cursor:pointer">×</button>
+      </div>
+      <div style="padding:24px 28px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;gap:12px">
+            <span style="font-size:20px;flex-shrink:0">🏥</span>
+            <div><div style="font-size:14px;font-weight:700;color:#1E293B;margin-bottom:2px">Virtual EMR — Guided Mode</div><div style="font-size:13px;color:#64748B;line-height:1.5">8-phase guided workflow with phase-specific coaching, DDx comparison, and anchoring detection.</div></div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <span style="font-size:20px;flex-shrink:0">🏆</span>
+            <div><div style="font-size:14px;font-weight:700;color:#1E293B;margin-bottom:2px">OSCE Mode</div><div style="font-size:13px;color:#64748B;line-height:1.5">8-minute timed sessions graded on OSCE rubric. Add ?mode=osce to any Virtual EMR URL.</div></div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <span style="font-size:20px;flex-shrink:0">🧠</span>
+            <div><div style="font-size:14px;font-weight:700;color:#1E293B;margin-bottom:2px">CoachDx Session Summaries</div><div style="font-size:13px;color:#64748B;line-height:1.5">AI-generated teaching points at the end of every coaching session, plus topic bookmarking.</div></div>
+          </div>
+          <div style="display:flex;gap:12px">
+            <span style="font-size:20px;flex-shrink:0">✅</span>
+            <div><div style="font-size:14px;font-weight:700;color:#1E293B;margin-bottom:2px">Completed case badges on browse</div><div style="font-size:13px;color:#64748B;line-height:1.5">Cases you've finished now show a ✓ Done badge. Toggle "Hide completed" to find new cases faster.</div></div>
+          </div>
+        </div>
+        <a href="/browse.html" onclick="document.getElementById('rdx-changelog-modal').style.display='none'" style="display:block;margin-top:20px;padding:12px;background:#2874A6;color:#fff;border-radius:10px;font-size:14px;font-weight:700;text-decoration:none;text-align:center">Browse cases →</a>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(modal);
+}
+window.rdxShowChangelog = rdxShowChangelog;
+
 })();
