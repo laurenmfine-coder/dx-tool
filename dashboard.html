@@ -265,6 +265,93 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
   <div id="rdx-next-case-widget"></div>
 
+  <!-- Goal / specialty coverage widget -->
+  <div id="rdx-goal-widget" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 28px;margin:0 auto 24px;max-width:900px;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="font-size:13px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.06em">Specialty Coverage</div>
+      <a href="/browse.html" style="font-size:12px;color:#2874A6;font-weight:600;text-decoration:none">Browse all →</a>
+    </div>
+    <div id="rdx-goal-bars" style="display:flex;flex-direction:column;gap:8px"></div>
+    <div id="rdx-goal-cta" style="margin-top:14px;font-size:13px;color:#64748b"></div>
+  </div>
+
+  <script>
+  (function() {
+    var simCount = 0;
+    try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+    if (simCount < 3) return; // Don't show to brand-new users
+
+    var completedCases = [];
+    try { completedCases = JSON.parse(localStorage.getItem('rdx-completed-cases') || '[]'); } catch(e) {}
+    if (completedCases.length === 0) return;
+
+    // Map case IDs to specialties using simple keyword matching
+    var specialties = {
+      cardiovascular: ['stemi','nstemi','afib','heart-failure','aortic-dissection','pericarditis','cardiac','chf','vt-syncope','pe-v','hyperkalemia'],
+      pulmonary: ['pneumonia','copd','pneumothorax','pe-v1','pe-v2','pe-v3','asthma','ards'],
+      neurologic: ['stroke','meningitis','seizure','guillain','sah','headache','migraine'],
+      infectious: ['sepsis','endocarditis','cdiff','lyme','hiv','uti','neutropenic'],
+      emergency: ['trauma','overdose','anaphylaxis','dka','eclampsia'],
+      gastrointestinal: ['gi-bleed','pancreatitis','appendicitis','cirrhosis','ibd'],
+      endocrine: ['dka','thyroid','adrenal','diabetes','hypercalcemia'],
+      renal: ['aki','ckd','hyponatremia','hyperkalemia','nephrotic']
+    };
+
+    var coverage = {};
+    Object.keys(specialties).forEach(function(spec) {
+      var keywords = specialties[spec];
+      var done = completedCases.filter(function(id) {
+        return keywords.some(function(kw) { return id.toLowerCase().includes(kw); });
+      }).length;
+      coverage[spec] = { done: done, total: keywords.length };
+    });
+
+    var specLabels = {
+      cardiovascular: 'Cardiovascular', pulmonary: 'Pulmonary',
+      neurologic: 'Neurologic', infectious: 'Infectious Disease',
+      emergency: 'Emergency', gastrointestinal: 'GI',
+      endocrine: 'Endocrine', renal: 'Renal/Nephrology'
+    };
+
+    var widget = document.getElementById('rdx-goal-widget');
+    var bars = document.getElementById('rdx-goal-bars');
+    var cta = document.getElementById('rdx-goal-cta');
+    if (!widget || !bars) return;
+
+    // Show top 4 specialties by coverage gap
+    var entries = Object.entries(coverage).sort(function(a, b) {
+      var aPct = a[1].done / a[1].total;
+      var bPct = b[1].done / b[1].total;
+      return aPct - bPct; // least covered first
+    }).slice(0, 4);
+
+    bars.innerHTML = entries.map(function(entry) {
+      var spec = entry[0]; var data = entry[1];
+      var pct = Math.min(100, Math.round(data.done / data.total * 100));
+      var color = pct >= 70 ? '#059669' : pct >= 30 ? '#2874A6' : '#94A3B8';
+      return '<div>' +
+        '<div style="display:flex;justify-content:space-between;margin-bottom:4px">' +
+          '<span style="font-size:13px;color:#1e293b;font-weight:500">' + specLabels[spec] + '</span>' +
+          '<span style="font-size:12px;color:#94a3b8">' + data.done + ' case' + (data.done!==1?'s':'') + '</span>' +
+        '</div>' +
+        '<div style="height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden">' +
+          '<div style="height:100%;width:' + pct + '%;background:' + color + ';border-radius:3px;transition:width .5s"></div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // CTA message
+    var uncovered = entries.filter(function(e) { return e[1].done === 0; });
+    if (uncovered.length > 0) {
+      cta.innerHTML = '🎯 You haven't tried a <strong>' + specLabels[uncovered[0][0]] + '</strong> case yet — <a href="/browse.html?cat=' + uncovered[0][0] + '" style="color:#2874A6;font-weight:600">start one →</a>';
+    } else if (completedCases.length < 10) {
+      cta.textContent = 'Complete ' + (10 - completedCases.length) + ' more cases to unlock your full Reasoning Fingerprint.';
+    }
+
+    widget.style.display = 'block';
+  })();
+  </script>
+
   <!-- Recently Completed Cases strip -->
   <div id="rdx-recent-cases" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin:0 auto 24px;max-width:900px;width:100%">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
