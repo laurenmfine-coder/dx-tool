@@ -910,7 +910,28 @@ function renderRoster() {
   var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">👥 Student Roster</div><div class="fac-section-sub">' + FAC.students.length + ' students assigned to you</div></div></div>';
 
   if (FAC.students.length === 0) {
-    return html + '<div class="fac-empty"><div class="fac-empty-icon">👥</div><div class="fac-empty-title">No students assigned</div><div class="fac-empty-desc">Ask your administrator to assign students to your account, or use the Assignments tab if you have admin access.</div></div>';
+    return html +
+      '<div style="background:#f0f7fc;border:1.5px solid #d4e8f7;border-radius:14px;padding:28px 32px;max-width:640px;margin:0 auto">' +
+        '<div style="font-size:22px;font-weight:800;color:#1B4F72;margin-bottom:6px">Get started with ReasonDx for your program</div>' +
+        '<div style="font-size:13px;color:#4a5568;margin-bottom:24px;line-height:1.6">No students are assigned yet. Follow these three steps to set up your program:</div>' +
+        '<div style="display:flex;flex-direction:column;gap:16px">' +
+          '<div style="display:flex;align-items:flex-start;gap:14px">' +
+            '<div style="width:28px;height:28px;border-radius:50%;background:#2874A6;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">1</div>' +
+            '<div><div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:2px">Create a program code</div><div style="font-size:13px;color:#64748b">Go to the <strong>Assignments</strong> tab → create a cohort and copy your program code.</div></div>' +
+          '</div>' +
+          '<div style="display:flex;align-items:flex-start;gap:14px">' +
+            '<div style="width:28px;height:28px;border-radius:50%;background:#2874A6;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">2</div>' +
+            '<div><div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:2px">Share the code with students</div><div style="font-size:13px;color:#64748b">Students enter it when creating their free account at <strong>reasondx.com/auth/register.html</strong></div></div>' +
+          '</div>' +
+          '<div style="display:flex;align-items:flex-start;gap:14px">' +
+            '<div style="width:28px;height:28px;border-radius:50%;background:#2874A6;color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">3</div>' +
+            '<div><div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:2px">Assign cases</div><div style="font-size:13px;color:#64748b">Once students are enrolled, use the <strong>Assignments</strong> tab to assign specific cases to your cohort.</div></div>' +
+          '</div>' +
+        '</div>' +
+        '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #d4e8f7">' +
+          '<a href="mailto:reasondxeducation@gmail.com?subject=Program Setup Help" style="font-size:13px;color:#2874A6;font-weight:600;text-decoration:none">Questions? Email us →</a>' +
+        '</div>' +
+      '</div>';
   }
 
   html += '<div class="fac-roster">';

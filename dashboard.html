@@ -243,6 +243,45 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
   <div id="rdx-next-case-widget"></div>
 
+  <!-- Recently Completed Cases strip -->
+  <div id="rdx-recent-cases" style="display:none;background:#fff;border:1px solid #e2e8f0;border-radius:16px;padding:20px 24px;margin:0 auto 24px;max-width:900px;width:100%">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+      <div style="font-size:13px;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.06em">Recently Completed</div>
+      <a href="/browse.html" style="font-size:12px;color:#2874A6;font-weight:600;text-decoration:none">Browse all →</a>
+    </div>
+    <div id="rdx-recent-list" style="display:flex;flex-direction:column;gap:8px"></div>
+  </div>
+  <script>
+  (function() {
+    function renderRecentCases() {
+      var history = [];
+      try {
+        var raw = localStorage.getItem('rdx-simulation-history');
+        if (raw) history = JSON.parse(raw).slice(-5).reverse();
+      } catch(e) {}
+      if (!history.length) return;
+      var container = document.getElementById('rdx-recent-cases');
+      var list = document.getElementById('rdx-recent-list');
+      if (!container || !list) return;
+      container.style.display = 'block';
+      list.innerHTML = history.map(function(h) {
+        var date = h.completedAt ? new Date(h.completedAt).toLocaleDateString(undefined, {month:'short',day:'numeric'}) : '';
+        var label = h.caseName || h.caseId || 'Unknown case';
+        var score = h.score != null ? '<span style="font-size:12px;font-weight:700;color:#0D7A67;background:#e8f8f5;padding:2px 8px;border-radius:6px">' + h.score + '%</span>' : '';
+        return '<a href="/simulation-engine.html?case=' + encodeURIComponent(h.caseId || '') + '" style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;background:#f8fafc;border-radius:8px;text-decoration:none;color:#1e293b;transition:background .15s" onmouseover="this.style.background='#f0f4f8'" onmouseout="this.style.background='#f8fafc'">' +
+          '<div style="display:flex;align-items:center;gap:10px"><span style="font-size:16px">🩺</span><span style="font-size:13px;font-weight:500">' + label + '</span></div>' +
+          '<div style="display:flex;align-items:center;gap:10px">' + score + '<span style="font-size:11px;color:#94a3b8">' + date + '</span></div>' +
+        '</a>';
+      }).join('');
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderRecentCases);
+    } else {
+      renderRecentCases();
+    }
+  })();
+  </script>
+
   <div class="stats">
     <div class="stat"><div class="stat-num" data-rdx-stat="cases">&ndash;</div><div class="stat-label">Clinical Cases</div></div>
     <div class="stat"><div class="stat-num" data-rdx-stat="specialties">&ndash;</div><div class="stat-label">Specialties</div></div>
@@ -623,9 +662,25 @@ if (document.readyState === 'loading') {
       if (bar) bar.style.display = 'flex';
       if (window.RDXRetention) {
         window.RDXRetention.init().then(function(stats) {
-          if (stats && stats.streak > 0) {
-            var badge = document.getElementById('rdx-streak-badge');
-            if (badge) badge.style.display = 'flex';
+          var badge = document.getElementById('rdx-streak-badge');
+          if (badge) {
+            badge.style.display = 'flex';
+            if (stats && stats.streak > 0) {
+              var cnt = document.getElementById('rdx-streak-count');
+              if (cnt) cnt.textContent = stats.streak;
+            } else {
+              // No active streak — show motivational zero state
+              var cnt = document.getElementById('rdx-streak-count');
+              if (cnt) cnt.textContent = '0';
+              var lbl = badge.querySelector('[style*="Day Streak"]');
+              if (lbl) lbl.textContent = 'Start a streak today 🔥';
+              badge.style.background = 'linear-gradient(135deg,#f8fafc,#f1f5f9)';
+              badge.style.border = '1px solid #e2e8f0';
+              var fire = badge.querySelector('span');
+              if (fire) { fire.style.opacity = '0.4'; }
+              var num = document.getElementById('rdx-streak-count');
+              if (num) num.style.color = '#94a3b8';
+            }
           }
           window.RDXRetention.renderNextCaseWidget('rdx-next-case-widget');
         });

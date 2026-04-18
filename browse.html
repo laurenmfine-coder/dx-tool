@@ -1579,5 +1579,47 @@ function startRandomEasyCase() {
 })();
 </script>
 
+
+<script>
+// ── Faculty welcome banner ────────────────────────────────────
+// Shows when a faculty user arrives (from educator-signup, or any time role=faculty)
+(function() {
+  function showFacultyBanner() {
+    var params = new URLSearchParams(window.location.search);
+    var isWelcome = params.get('welcome') === 'educator';
+    var user = {};
+    try { user = JSON.parse(localStorage.getItem('reasondx-user') || '{}'); } catch(e) {}
+    var isFaculty = user.role === 'faculty' || user.role === 'admin' || user.role === 'program_director';
+    if (!isWelcome && !isFaculty) return;
+    if (document.getElementById('rdx-faculty-welcome')) return;
+    var banner = document.createElement('div');
+    banner.id = 'rdx-faculty-welcome';
+    banner.style.cssText = 'background:linear-gradient(135deg,#1B4F72 0%,#0D7A67 100%);color:#fff;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:"DM Sans",-apple-system,sans-serif;position:relative;z-index:10;';
+    banner.innerHTML =
+      '<div style="display:flex;align-items:center;gap:12px">' +
+        '<span style="font-size:22px">🏫</span>' +
+        '<div>' +
+          '<div style="font-size:14px;font-weight:700;margin-bottom:2px">Welcome to ReasonDx — You're signed in as Faculty</div>' +
+          '<div style="font-size:12px;opacity:.85">Explore the full platform freely. When you're ready to set up your program, visit the Faculty Dashboard.</div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:10px;flex-shrink:0">' +
+        '<a href="/faculty-dashboard.html" style="background:#fff;color:#1B4F72;padding:8px 18px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none;">Faculty Dashboard →</a>' +
+        '<button onclick="this.closest('#rdx-faculty-welcome').remove()" style="background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;">×</button>' +
+      '</div>';
+    var hero = document.querySelector('.hero') || document.querySelector('[class*="hero"]') || document.body.firstElementChild;
+    if (hero && hero.parentNode) {
+      hero.parentNode.insertBefore(banner, hero);
+    } else {
+      document.body.insertBefore(banner, document.body.firstChild);
+    }
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', showFacultyBanner);
+  } else {
+    showFacultyBanner();
+  }
+})();
+</script>
 </body>
 </html>

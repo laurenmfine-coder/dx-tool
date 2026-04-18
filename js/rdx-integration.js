@@ -346,7 +346,7 @@
     var timerActive = sessionStorage.getItem('rdx-ed-timer-active') === '1';
 
     if (!timerActive) {
-      return '<button id="rdx-timer-btn" onclick="RDXIntegration.startTimer()" style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">⏱️ Start Timer</button>';
+      return '<button id="rdx-timer-btn" onclick="RDXIntegration.startTimer()" title="Optional: time yourself to practice under OSCE conditions" aria-label="Start optional OSCE practice timer" style="display:flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit">⏱️ Start Timer</button>';
     }
 
     var elapsed = startedAt ? Math.floor((Date.now() - startedAt) / 1000) : 0;

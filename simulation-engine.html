@@ -133,6 +133,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <!-- ── MAIN LAYOUT ── -->
 <div class="study-container">
   <div class="chat-panel">
+    <!-- Mobile phase strip: visible only when side panel hidden (<900px) -->
+    <div id="mobilePhaseStrip" style="display:none;align-items:center;justify-content:space-between;padding:8px 16px;background:var(--primary-light);border-bottom:1px solid var(--border);font-size:12px;flex-shrink:0;">
+      <span id="mobilePhaseLabel" style="font-weight:700;color:var(--primary)">Step 1 of 10</span>
+      <span id="mobileTurnLabel" style="color:var(--text-muted)">Turn 0</span>
+    </div>
+    <style>@media(max-width:900px){#mobilePhaseStrip{display:flex!important}}</style>
     <div class="chat-messages" id="chatMessages"></div>
     <!-- DDx Chooser Panel — shown at Phases 1, 4, 6 -->
     <div id="ddxChooserPanel" style="display:none;padding:12px 16px;background:#F8FAFC;border-top:2px solid #2874A6;max-height:380px;overflow-y:auto">
@@ -213,6 +219,23 @@ const PHASE_LABELS = {
   4:"Revised Differential", 5:"Physical Examination", 6:"Labs & Imaging",
   7:"Report Comparison", 8:"Closing Reflection", 9:"Management Plan", 10:"Complete"
 };
+const PHASE_PLACEHOLDERS = {
+  1:"List your initial differential diagnosis...",
+  2:"Justify each diagnosis — what findings support it?",
+  3:"Ask the patient a question...",
+  4:"How has your differential changed?",
+  5:"Which exam maneuver would you like to perform?",
+  6:"What labs or imaging would you order, and why?",
+  7:"Compare your working diagnosis to the report...",
+  8:"Reflect on your reasoning — what would you do differently?",
+  9:"What is your management plan?",
+  10:"Type your response..."
+};
+function updateInputPlaceholder() {
+  var inp = document.getElementById('chatInput');
+  if (!inp || !state) return;
+  inp.placeholder = PHASE_PLACEHOLDERS[state.currentPhase] || "Type your response...";
+}
 
 let state = null;
 let caseData = null;
@@ -415,6 +438,7 @@ function startStudy() {
   document.getElementById('sendBtn').disabled = false;
   document.getElementById('micBtn').disabled = false;
   initVoice();
+  updateInputPlaceholder();
 
   // ── AUTO-SAVE: Save progress every 30 seconds ──
   function autoSaveProgress() {
@@ -510,6 +534,12 @@ function startStudy() {
 
   // Deliver Phase 1 opening (unless resuming)
   if (!savedSession) {
+    // First-time users: show a brief orientation system message
+    var simCount = 0;
+    try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+    if (simCount === 0) {
+      addMessage('system', '🩺 Welcome to ReasonDx. You're about to work through a simulated patient encounter. Play the role of the medical student — Dr. Patel will guide you. Type your answers naturally, as you would on rounds.');
+    }
     const p = caseData.presentation;
     let opening;
 
@@ -1315,6 +1345,23 @@ function enterPhase(phase) {
   }
   state.currentPhase = phase;
   state.phaseHistory.push({ phase, enteredAt:now, exitedAt:null });
+  updateInputPlaceholder();
+
+  // Phase transition system messages
+  var _phaseMessages = {
+    2: '📝 Phase 2 — Justify your differential. Walk Dr. Patel through your reasoning for each diagnosis.',
+    3: '🗣️ Phase 3 — Patient Interview. Ask the patient questions directly.',
+    4: '🔄 Phase 4 — Revise your differential based on what you just learned.',
+    5: '🩺 Phase 5 — Physical Exam. Tell Dr. Patel which maneuvers you want to perform.',
+    6: '🧪 Phase 6 — Labs & Imaging. Decide what to order and explain your reasoning.',
+    7: '📊 Phase 7 — Compare your working diagnosis to the results.',
+    8: '🤔 Phase 8 — Closing Reflection. Look back at your reasoning process.',
+    9: '💊 Phase 9 — Management Plan. How would you treat and follow up this patient?',
+    10:'✅ Case Complete. Great work — review your feedback below.'
+  };
+  if (_phaseMessages[phase] && phase > 1) {
+    setTimeout(function() { addMessage('system', _phaseMessages[phase]); }, 200);
+  }
 
   if (phase === PHASES.HISTORY_TAKING) {
     document.getElementById('historyCard').style.display = 'block';
@@ -2364,6 +2411,8 @@ function updatePhaseUI() {
     const label = PHASE_LABELS[state.currentPhase] || 'In Progress';
     document.getElementById('phaseLabel').textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
     document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
+    var mpl = document.getElementById('mobilePhaseLabel'); if(mpl) mpl.textContent = 'Step ' + state.currentPhase + ' of 10: ' + label;
+    var mtl = document.getElementById('mobileTurnLabel'); if(mtl) mtl.textContent = 'Turn ' + state.turnCount;
     tracker.innerHTML = `
       <div style="margin-bottom:6px;font-size:11px;color:var(--text-muted)">${label}</div>
       <div style="background:rgba(255,255,255,0.1);border-radius:999px;height:6px;overflow:hidden">
@@ -2378,6 +2427,8 @@ function updatePhaseUI() {
     // Full tracker for experienced users
     document.getElementById('phaseLabel').textContent = 'Phase ' + state.currentPhase + ' of 10';
     document.getElementById('turnCounter').textContent = 'Turn ' + state.turnCount;
+    var mpl2 = document.getElementById('mobilePhaseLabel'); if(mpl2) mpl2.textContent = PHASE_LABELS[state.currentPhase] || ('Phase ' + state.currentPhase);
+    var mtl2 = document.getElementById('mobileTurnLabel'); if(mtl2) mtl2.textContent = 'Turn ' + state.turnCount;
     tracker.innerHTML = '';
     for (let i = 1; i <= 10; i++) {
       const cls = i === state.currentPhase ? 'active' : i < state.currentPhase ? 'complete' : '';
