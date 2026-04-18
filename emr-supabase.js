@@ -279,6 +279,79 @@
       localSet('emr-users', users);
     },
 
+
+    // ── Sync guided session to Supabase ────────────────────────────────────────
+    // Called after every phase transition and on submission.
+    // Upserts into guided_sessions using (student_id, case_id) as the unique key.
+    syncGuidedSession: async function(studentId, caseId, sessionData) {
+      if (!studentId || !caseId) return false;
+      try {
+        var row = {
+          student_id:          studentId,
+          case_id:             caseId,
+          program_id:          sessionData.programId          || null,
+          setting:             sessionData.setting            || 'ed',
+          profession:          sessionData.profession         || null,
+          current_phase:       sessionData.currentPhase       || 1,
+          completed_phases:    JSON.stringify(sessionData.completedPhases  || []),
+          coach_done:          JSON.stringify(sessionData.coachDone        || {}),
+          ddx_phase2:          JSON.stringify(sessionData.ddxPhase2        || []),
+          ddx_phase5:          JSON.stringify(sessionData.ddxPhase5        || []),
+          ddx_final:           JSON.stringify(sessionData.ddxFinal         || []),
+          bias_detected:       JSON.stringify(sessionData.biasDetected     || []),
+          anchoring_score:     sessionData.anchoringScore     || null,
+          premature_closure:   sessionData.prematureClosure   || false,
+          correct_dx_in_ddx2:  sessionData.correctDxInDdx2   || null,
+          correct_dx_in_ddx5:  sessionData.correctDxInDdx5   || null,
+          phase_timings:       JSON.stringify(sessionData.phaseTimings     || {}),
+          total_time_sec:      sessionData.totalTimeSec       || null,
+          interview_turns:     sessionData.interviewTurns     || 0,
+          exam_maneuvers:      JSON.stringify(sessionData.examManeuvers    || []),
+          note_submitted:      sessionData.noteSubmitted      || false,
+          note_word_count:     sessionData.noteWordCount      || null,
+          feedback_received:   sessionData.feedbackReceived   || false,
+          updated_at:          new Date().toISOString()
+        };
+        if (sessionData.completedAt) row.completed_at = sessionData.completedAt;
+
+        var ok = await upsert('guided_sessions', row);
+
+        // Mirror to localStorage as offline cache
+        try {
+          localStorage.setItem(
+            'rdx-guided-session-' + studentId + '-' + caseId,
+            JSON.stringify(Object.assign({}, row, { _saved: Date.now() }))
+          );
+        } catch(e2) {}
+
+        return !!ok;
+      } catch(e) {
+        console.warn('EMRCloud.syncGuidedSession failed:', e);
+        return false;
+      }
+    },
+
+    // Load a previously saved guided session from cache or Supabase
+    loadGuidedSession: async function(studentId, caseId) {
+      if (!studentId || !caseId) return null;
+      // Try localStorage first (instant)
+      try {
+        var cached = localStorage.getItem('rdx-guided-session-' + studentId + '-' + caseId);
+        if (cached) return JSON.parse(cached);
+      } catch(e) {}
+      // Fall back to Supabase
+      try {
+        var rows = await sbFetch(
+          'guided_sessions?student_id=eq.' + encodeURIComponent(studentId) +
+          '&case_id=eq.'   + encodeURIComponent(caseId) + '&limit=1',
+          { method: 'GET' }
+        );
+        return (rows && rows[0]) ? rows[0] : null;
+      } catch(e) {
+        return null;
+      }
+    },
+
     // Legacy save/load kept for compatibility
     save: async function(caseId, data) {
       return this.syncSessionData(this._uid, 'rdx-emr-' + this._uid + '-' + caseId, caseId, data);

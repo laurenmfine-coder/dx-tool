@@ -3793,6 +3793,7 @@ function submitDoc(){
   }
   S.submissions=[...S.submissions.filter(s=>s.week!==S.encounterWeek),sub];
   S.submitted=true;
+  document.dispatchEvent(new CustomEvent('rdx-submission-complete',{detail:{wordCount:(function(){try{return Object.values(S.noteFields).reduce(function(s,v){return s+(v?v.split(/\s+/).filter(Boolean).length:0);},0);}catch(e){return null;}}())}}));
   dbSet("subs-"+S.currentUser.username,S.submissions);
   // Cloud sync
   if(window.EMRCloud){EMRCloud.syncSubmission(S.currentUser.username,CASE_ID||'',sub)}
@@ -3816,6 +3817,10 @@ function submitDoc(){
   setTimeout(function() {
     if (typeof runDocAnalysis === 'function') {
       runDocAnalysis();
+      // Notify guided session sync that feedback was received
+      setTimeout(function() {
+        document.dispatchEvent(new CustomEvent('rdx-feedback-received'));
+      }, 3000);
     }
     // Switch to AI Feedback tab so student sees results immediately
     setTimeout(function() {
@@ -5696,6 +5701,7 @@ submitDoc = function(){
 <script src="js/exam-builder.js"></script>
 <script src="js/ddx-compare.js"></script>
 <script src="js/institutional-config.js"></script>
+<script src="js/guided-session-sync.js"></script>
 <script src="emr-data/crt-data.js"></script>
 <script src="js/rdx-order-catalog.js"></script>
 <script src="js/rdx-order-mode.js"></script>
