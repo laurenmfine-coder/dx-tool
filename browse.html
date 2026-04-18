@@ -1191,7 +1191,7 @@ grid.innerHTML=displayedItems.map(function(c){
         if(c.studyCase && window.RDXStudySequencer && !RDXStudySequencer.isCaseFreelyAccessible(c.id)){
           h+='<span class="tag" style="background:rgba(251,146,60,.15);color:#FDBA74;font-weight:700;border:1px solid rgba(251,146,60,.25)">🔒 Study</span>';
         }
-        if(c.arcId && c.arcLabel){var arcBadge=window.RDXArcBadge&&window.RDXArcBadge(c);if(arcBadge)h+='<span class="tag" style="background:rgba(168,85,247,.15);color:#C4B5FD;font-weight:700;border:1px solid rgba(168,85,247,.25)">'+arcBadge+'</span>';}
+        if(c.arcId && c.arcOrder){h+='<span class="tag" style="background:rgba(168,85,247,.15);color:#C4B5FD;font-weight:700;border:1px solid rgba(168,85,247,.25)">📚 Series · Case '+(c.arcOrder||1)+'</span>';}
         if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS'};h+='<span class="tag" style="background:rgba(5,150,105,.15);color:#6EE7B7;font-weight:700;border:1px solid rgba(5,150,105,.25)">'+( profLabels[c.profession]||c.profession)+'</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div>';
   if (MODE === 'simulate' && window._socialProof && window._socialProof[c.id]) {
     var sp = window._socialProof[c.id];
