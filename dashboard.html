@@ -311,8 +311,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 
   <!-- Clinical Practice -->
-  <div class="loc-section">
-    <div class="loc-section-title">Clinical Practice</div>
+  <div class="loc-section" id="rdx-loc-section">
+    <div class="loc-section-title" style="display:flex;align-items:center;justify-content:space-between">
+      <span>Clinical Practice</span>
+      <button id="rdx-show-all-locs" onclick="rdxShowAllLocations()" style="display:none;background:none;border:none;color:var(--blue-light);font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;padding:0">Show all →</button>
+    </div>
     <div class="locations">
 
       <a href="browse.html?mode=practice" class="loc-card ed">
@@ -709,6 +712,49 @@ if (document.readyState === 'loading') {
       }
     }, 500);
   });
+</script>
+
+<script>
+(function() {
+  var simCount = 0;
+  try { simCount = parseInt(localStorage.getItem('rdx-simulation-count') || '0'); } catch(e) {}
+  if (simCount >= 5) return; // Experienced users see everything
+
+  // Hide non-primary location cards for new users
+  var cards = document.querySelectorAll('.loc-card');
+  var shown = 0;
+  var hidden = [];
+  cards.forEach(function(card) {
+    var name = card.querySelector('.loc-name');
+    var primary = ['Emergency Department','Clinical Simulation','CoachDx Attending'].some(function(n) {
+      return name && name.textContent.trim().includes(n.split(' ')[0]);
+    });
+    if (shown < 3 || primary) {
+      shown++;
+    } else {
+      card.setAttribute('data-rdx-hidden', '1');
+      card.style.display = 'none';
+      hidden.push(card);
+    }
+  });
+
+  if (hidden.length > 0) {
+    var btn = document.getElementById('rdx-show-all-locs');
+    if (btn) {
+      btn.style.display = 'inline-block';
+      btn.textContent = 'Show all ' + (shown + hidden.length) + ' locations →';
+    }
+  }
+})();
+
+function rdxShowAllLocations() {
+  document.querySelectorAll('[data-rdx-hidden="1"]').forEach(function(el) {
+    el.style.display = '';
+    el.removeAttribute('data-rdx-hidden');
+  });
+  var btn = document.getElementById('rdx-show-all-locs');
+  if (btn) btn.style.display = 'none';
+}
 </script>
 </body>
 </html>

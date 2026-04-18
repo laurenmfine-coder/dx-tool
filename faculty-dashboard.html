@@ -974,7 +974,43 @@ function renderAssignments() {
     return !Object.values(assignments).some(function(arr){ return arr.indexOf(s.username)>=0; });
   });
 
+  // ── Generate or retrieve program code ──
+  var _progCode = (function() {
+    try {
+      var stored = localStorage.getItem('rdx-program-code');
+      if (stored) return stored;
+      // Generate a new one based on faculty email
+      var email = FAC.currentUser.username || '';
+      var prefix = email.split('@')[0].replace(/[^a-zA-Z]/g,'').toUpperCase().slice(0,4) || 'FAC';
+      var year = new Date().getFullYear();
+      var rand = Math.floor(1000 + Math.random() * 9000);
+      var code = prefix + '-' + year + '-' + rand;
+      localStorage.setItem('rdx-program-code', code);
+      return code;
+    } catch(e) { return 'FAC-2026'; }
+  })();
+
+  var _inviteUrl = 'https://reasondx.com/auth/login.html?code=' + encodeURIComponent(_progCode);
+  var _inviteMsg = 'Join my ReasonDx program!\n\nCreate your free account at:\n' + _inviteUrl + '\n\nProgram code: ' + _progCode;
+
   var html = '<div class="fac-section-hdr"><div><div class="fac-section-title">🔗 Student Assignments</div><div class="fac-section-sub">Assign students to faculty members for grading</div></div></div>';
+
+  // ── Invite card ──
+  html += '<div style="background:linear-gradient(135deg,#EBF5FB,#E8F4FD);border:1.5px solid #BEE3F8;border-radius:14px;padding:20px 24px;margin-bottom:24px">';
+  html += '<div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">';
+  html += '<div>';
+  html += '<div style="font-size:13px;font-weight:700;color:#1B4F72;margin-bottom:4px">Your Program Code</div>';
+  html += '<div style="font-size:26px;font-weight:800;color:#1B4F72;letter-spacing:.08em;font-family:\'IBM Plex Mono\',monospace">' + _progCode + '</div>';
+  html += '<div style="font-size:12px;color:#4A5568;margin-top:4px">Share this code with students — they enter it when creating their free account</div>';
+  html += '</div>';
+  html += '<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">';
+  html += '<button onclick="(function(){var t=document.createElement(\'textarea\');t.value=\'' + _inviteUrl.replace(/'/g,"\'") + '\';document.body.appendChild(t);t.select();document.execCommand(\'copy\');document.body.removeChild(t);var b=document.getElementById(\'rdx-copy-link-btn\');b.textContent=\'✓ Copied!\';setTimeout(function(){b.textContent=\'Copy invite link\'},2000)})()" id="rdx-copy-link-btn" style="padding:8px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Copy invite link</button>';
+  html += '<button onclick="(function(){var t=document.createElement(\'textarea\');t.value=\'' + _inviteMsg.replace(/
+/g,'\\n').replace(/'/g,"\'") + '\';document.body.appendChild(t);t.select();document.execCommand(\'copy\');document.body.removeChild(t);var b=document.getElementById(\'rdx-copy-msg-btn\');b.textContent=\'✓ Copied!\';setTimeout(function(){b.textContent=\'Copy full message\'},2000)})()" id="rdx-copy-msg-btn" style="padding:8px 16px;background:#fff;color:#2874A6;border:1.5px solid #BEE3F8;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit">Copy full message</button>';
+  html += '<button onclick="localStorage.removeItem(\'rdx-program-code\');showView(\'assignments\')" style="padding:8px 12px;background:transparent;color:#94A3B8;border:1px solid #E2E8F0;border-radius:8px;font-size:12px;cursor:pointer;font-family:inherit" title="Generate a new code">↻ New code</button>';
+  html += '</div>';
+  html += '</div>';
+  html += '</div>';
 
   // Unassigned alert
   if (unassigned.length > 0) {
