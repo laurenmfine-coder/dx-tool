@@ -87,13 +87,7 @@
     try {
       if (!window.CASE_ID) window.CASE_ID = _id;
       var _app = document.getElementById('app');
-      function _showStep(msg) {
-        var a = document.getElementById('app');
-        if (a) a.innerHTML = '<div style="padding:40px;text-align:center;color:#64748b;font-family:sans-serif;font-size:14px">' + msg + '</div>';
-      }
-      _showStep('Step 1: Routing to case ' + _id);
-      try { if (window.EMRShell) { EMRShell.inject(); } } catch(shellErr) { _showStep('Step 1b: Shell error: ' + shellErr.message); }
-      _showStep('Step 2: Loading case data...');
+      try { if (window.EMRShell) { EMRShell.inject(); } } catch(shellErr) { console.warn('Shell inject failed:', shellErr); }
       loadCaseData(function() {
         _showStep('Step 3: Bootstrapping app...');
         bootstrapApp().catch(function(err) {
@@ -3844,14 +3838,8 @@ async function bootstrapApp() {
     S.activeTab="handoff";
   }
   // Auth: read from Supabase session
-  function _bsStep(msg) {
-    var a=document.getElementById('app');
-    if(a) a.innerHTML='<div style="padding:40px 20px;color:#475569;font-family:sans-serif;font-size:13px;max-width:400px;margin:0 auto"><b>EMR Diagnostics</b><br><br>' + msg + '</div>';
-  }
-  _bsStep('BS1: Checking auth...<br>CASE_ID=' + (window.CASE_ID||'?') + '<br>S.clinicalSetting=' + (window.S&&S.clinicalSetting||'?'));
   var supaUser=requireAuth();
   if(!supaUser){ supaUser={email:'guest@reasondx.local',name:'Guest',tier:'free',supabaseId:'guest@reasondx.local',_guest:true}; }
-  _bsStep('BS2: Auth done<br>user=' + (supaUser.email||'none') + '<br>guest=' + (!!supaUser._guest) + '<br>EMRCloud=' + (!!window.EMRCloud));
 
   // Pull cloud data into localStorage before building UI
   if(window.EMRCloud){
@@ -3893,7 +3881,7 @@ async function bootstrapApp() {
   if(window.MissionControl&&S.currentUser.role==="student"&&CASE_ID){
     MissionControl.init(S.clinicalSetting,CASE_ID,S.currentUser.role);
   }
-  _bsStep('BS4: calling render()...'); try { render(); } catch(renderErr) { _bsStep('BS4 ERROR: ' + renderErr.message);
+  try { render(); } catch(renderErr) {
     console.error('render() error:', renderErr.message, renderErr.stack);
     var _app = document.getElementById('app');
     if (_app) _app.innerHTML = '<div style="max-width:480px;margin:80px auto;text-align:center;padding:24px;font-family:-apple-system,sans-serif"><div style="font-size:40px;margin-bottom:12px">\u26A0\uFE0F</div><h2 style="font-size:18px;font-weight:700;color:#1e293b;margin-bottom:8px">Rendering Error</h2><p style="color:#64748b;font-size:13px;line-height:1.6;margin-bottom:16px">' + (renderErr.message || 'Unknown error') + '</p><a href="javascript:location.reload()" style="padding:10px 20px;border-radius:8px;background:#2874A6;color:#fff;font-weight:600;font-size:13px;text-decoration:none">Reload</a></div>';
@@ -5175,7 +5163,7 @@ function _buildOralScaffold() {
 
   return '<div style="background:linear-gradient(135deg,#0d2b3e,#1B4F72);border-radius:12px;padding:18px 20px;margin-bottom:16px;color:#fff">'
     + '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)">SBAR Scaffold</span><span style="padding:2px 7px;background:rgba(255,255,255,.1);border-radius:10px;font-size:10px;font-weight:700;color:rgba(255,255,255,.6)">case-specific</span></div>'
-    + '<div style="font-size:12px;line-height:1.9;font-family:'IBM Plex Mono',monospace;opacity:.9">'
+    + '<div style="font-size:12px;line-height:1.9;font-family:"IBM Plex Mono",monospace;opacity:.9">'
     + '"This is a <strong>' + age + '-year-old ' + sex + '</strong> with '
     + (pmh !== 'no significant PMH' ? 'a history of ' + pmh : 'no significant past medical history') + ','
     + ' presenting with <strong>' + (cc || '___') + '</strong>."<br>'
