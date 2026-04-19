@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ReasonDx — Clinical reasoning, practiced</title>
+<meta name="description" content="Practice real clinical reasoning on 311 AI-powered EMR cases. Chart review, AI patient interview, differential diagnosis, orders, debrief. Free, no signup.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://www.reasondx.com/welcome.html">
+<meta property="og:title" content="ReasonDx — Clinical reasoning, practiced">
+<meta property="og:description" content="Practice real clinical reasoning on 311 AI-powered EMR cases. Free, no signup.">
+<meta property="og:image" content="https://reasondx.com/icons/og-image.jpg">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EKCVJ1SMN3"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-EKCVJ1SMN3");</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --ocean:#2874A6;
+  --ocean-dark:#1e5a7a;
+  --ocean-mid:#85C1E9;
+  --teal:#0D7A67;
+  --navy-0:#07131f;
+  --navy-1:#0a1628;
+  --navy-2:#122846;
+  --navy-3:#1e3a5f;
+  --ink:#fff;
+  --ink-dim:rgba(255,255,255,.7);
+  --ink-faint:rgba(255,255,255,.45);
+  --line:rgba(255,255,255,.08);
+  --f-body:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --f-display:'DM Serif Display',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--f-body);
+  background:var(--navy-0);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.55;
+}
+body::before{
+  content:"";
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 55% at 75% -10%, rgba(40,116,166,.28) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 10% 95%, rgba(13,122,103,.18) 0%, transparent 65%),
+    linear-gradient(180deg, var(--navy-1) 0%, var(--navy-0) 70%);
+  z-index:-1;
+  pointer-events:none;
+}
+
+/* ── TOP NAV ── */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 32px;
+  position:relative;z-index:10;
+}
+.logo{
+  font-family:var(--f-display);
+  font-size:22px;
+  color:var(--ink);
+  text-decoration:none;
+  letter-spacing:-.5px;
+}
+.logo em{font-style:italic;color:var(--ocean-mid);font-weight:400}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{
+  color:var(--ink-dim);text-decoration:none;font-size:14px;font-weight:500;
+  transition:color .15s;
+}
+.nav-links a:hover{color:var(--ink)}
+.nav-skip{
+  font-size:13px;font-weight:600;color:var(--ink-faint);
+  padding:8px 16px;border:1px solid var(--line);border-radius:8px;
+  background:transparent;font-family:inherit;cursor:pointer;
+  transition:all .18s;text-decoration:none;
+}
+.nav-skip:hover{color:var(--ink);border-color:rgba(255,255,255,.25)}
+
+@media(max-width:640px){
+  .nav{padding:14px 20px}
+  .nav-links{display:none}
+}
+
+/* ── HERO ── */
+.hero{
+  max-width:920px;margin:0 auto;
+  padding:60px 32px 36px;
+  text-align:center;
+  position:relative;
+}
+.hero-eyebrow{
+  display:inline-block;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ocean-mid);
+  margin-bottom:22px;
+  padding:6px 14px;
+  border:1px solid rgba(133,193,233,.25);
+  border-radius:100px;
+  background:rgba(133,193,233,.06);
+}
+.hero h1{
+  font-family:var(--f-display);
+  font-size:clamp(34px,5.5vw,62px);
+  line-height:1.02;
+  font-weight:400;
+  letter-spacing:-.015em;
+  margin-bottom:20px;
+  max-width:820px;margin-left:auto;margin-right:auto;
+}
+.hero h1 em{
+  font-style:italic;
+  color:var(--ocean-mid);
+}
+.hero-sub{
+  font-size:clamp(16px,2vw,19px);
+  color:var(--ink-dim);
+  max-width:580px;margin:0 auto 36px;
+  line-height:1.5;
+}
+.cta-row{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;align-items:center;
+  margin-bottom:18px;
+}
+.cta-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);
+  color:#fff;
+  padding:16px 32px;
+  border-radius:12px;
+  font-size:16px;font-weight:700;
+  text-decoration:none;
+  border:none;font-family:inherit;cursor:pointer;
+  transition:transform .18s, box-shadow .18s;
+  box-shadow:0 8px 24px rgba(40,116,166,.4);
+}
+.cta-primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 32px rgba(40,116,166,.55);
+}
+.cta-primary svg{width:16px;height:16px;transition:transform .2s}
+.cta-primary:hover svg{transform:translateX(3px)}
+.cta-secondary{
+  color:var(--ink-dim);text-decoration:none;
+  font-size:14px;font-weight:500;
+  padding:16px 20px;
+  border-radius:12px;
+  transition:color .15s;
+}
+.cta-secondary:hover{color:var(--ink)}
+.hero-meta{
+  font-size:13px;color:var(--ink-faint);
+  margin-top:4px;
+}
+
+/* ── EXPLAINER (animated 5-step workflow) ── */
+.explainer{
+  max-width:980px;margin:0 auto;
+  padding:40px 32px 80px;
+}
+.explainer-frame{
+  background:
+    linear-gradient(180deg, rgba(40,116,166,.08) 0%, rgba(13,122,103,.04) 100%);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:32px 24px;
+  position:relative;
+  overflow:hidden;
+}
+.explainer-frame::before{
+  content:"";position:absolute;
+  top:-1px;left:50%;transform:translateX(-50%);
+  width:240px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--ocean-mid),transparent);
+  opacity:.6;
+}
+.explainer-label{
+  text-align:center;
+  font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:22px;
+}
+.explainer-label .live-dot{
+  display:inline-block;width:7px;height:7px;border-radius:50%;
+  background:var(--ocean-mid);margin-right:8px;
+  animation:pulse-dot 1.6s ease-in-out infinite;
+}
+@keyframes pulse-dot{
+  0%,100%{opacity:.4;transform:scale(.8)}
+  50%{opacity:1;transform:scale(1.1)}
+}
+
+/* steps — 5 icons connected by a line, with a "moving" highlight */
+.steps{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:0;
+  position:relative;
+  margin-bottom:28px;
+}
+.steps::before{
+  content:"";position:absolute;
+  top:28px;left:10%;right:10%;height:2px;
+  background:linear-gradient(90deg,
+    rgba(40,116,166,.15) 0%,
+    rgba(40,116,166,.5) 50%,
+    rgba(40,116,166,.15) 100%);
+  z-index:0;
+}
+.step{
+  display:flex;flex-direction:column;align-items:center;
+  position:relative;z-index:1;
+  padding:0 6px;
+  animation:step-in .6s ease both;
+}
+.step:nth-child(1){animation-delay:.05s}
+.step:nth-child(2){animation-delay:.18s}
+.step:nth-child(3){animation-delay:.31s}
+.step:nth-child(4){animation-delay:.44s}
+.step:nth-child(5){animation-delay:.57s}
+@keyframes step-in{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.step-circle{
+  width:56px;height:56px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--navy-2),var(--navy-3));
+  border:1.5px solid rgba(133,193,233,.3);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--ocean-mid);
+  margin-bottom:12px;
+  position:relative;
+  transition:all .3s;
+}
+.step.highlighted .step-circle{
+  background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);
+  border-color:var(--ocean-mid);
+  color:#fff;
+  box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4);
+  transform:scale(1.08);
+}
+.step-circle svg{width:24px;height:24px}
+.step-num{
+  position:absolute;top:-4px;right:-4px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--navy-0);border:1.5px solid rgba(133,193,233,.35);
+  font-size:10px;font-weight:700;color:var(--ocean-mid);
+  display:flex;align-items:center;justify-content:center;
+}
+.step.highlighted .step-num{
+  background:var(--ocean);border-color:#fff;color:#fff;
+}
+.step-title{
+  font-size:13px;font-weight:600;color:var(--ink);
+  text-align:center;line-height:1.3;
+  margin-bottom:4px;
+}
+.step-desc{
+  font-size:11px;color:var(--ink-faint);
+  text-align:center;line-height:1.4;
+  max-width:130px;
+}
+
+/* step cycling animation via CSS (no JS needed for auto-loop) */
+@keyframes step-cycle{
+  0%,14%{transform:scale(1);box-shadow:none}
+  2%,12%{transform:scale(1.08);box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4)}
+}
+
+.step:nth-child(1) .step-circle{
+  animation:s1 10s ease infinite;
+}
+.step:nth-child(2) .step-circle{animation:s2 10s ease infinite}
+.step:nth-child(3) .step-circle{animation:s3 10s ease infinite}
+.step:nth-child(4) .step-circle{animation:s4 10s ease infinite}
+.step:nth-child(5) .step-circle{animation:s5 10s ease infinite}
+
+@keyframes s1{0%,14%,100%{background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);border-color:var(--ocean-mid);color:#fff;box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4);transform:scale(1.08)} 20%,94%{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));border-color:rgba(133,193,233,.3);color:var(--ocean-mid);box-shadow:none;transform:scale(1)}}
+@keyframes s2{0%,15%,40%,100%{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));border-color:rgba(133,193,233,.3);color:var(--ocean-mid);box-shadow:none;transform:scale(1)} 22%,34%{background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);border-color:var(--ocean-mid);color:#fff;box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4);transform:scale(1.08)}}
+@keyframes s3{0%,35%,60%,100%{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));border-color:rgba(133,193,233,.3);color:var(--ocean-mid);box-shadow:none;transform:scale(1)} 42%,54%{background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);border-color:var(--ocean-mid);color:#fff;box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4);transform:scale(1.08)}}
+@keyframes s4{0%,55%,80%,100%{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));border-color:rgba(133,193,233,.3);color:var(--ocean-mid);box-shadow:none;transform:scale(1)} 62%,74%{background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);border-color:var(--ocean-mid);color:#fff;box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4);transform:scale(1.08)}}
+@keyframes s5{0%,75%,100%{background:linear-gradient(135deg,var(--navy-2),var(--navy-3));border-color:rgba(133,193,233,.3);color:var(--ocean-mid);box-shadow:none;transform:scale(1)} 82%,94%{background:linear-gradient(135deg,var(--ocean) 0%,var(--teal) 100%);border-color:var(--ocean-mid);color:#fff;box-shadow:0 0 0 6px rgba(40,116,166,.15), 0 6px 18px rgba(40,116,166,.4);transform:scale(1.08)}}
+
+/* narration strip — synchronized text changes */
+.narration{
+  text-align:center;
+  min-height:48px;
+  position:relative;
+  margin-top:4px;
+}
+.narration-line{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:var(--ink-dim);
+  font-style:italic;
+  opacity:0;
+  padding:0 16px;
+  line-height:1.4;
+}
+.narration-line:nth-child(1){animation:n1 10s ease infinite}
+.narration-line:nth-child(2){animation:n2 10s ease infinite}
+.narration-line:nth-child(3){animation:n3 10s ease infinite}
+.narration-line:nth-child(4){animation:n4 10s ease infinite}
+.narration-line:nth-child(5){animation:n5 10s ease infinite}
+
+@keyframes n1{0%,14%,100%{opacity:1} 16%,99%{opacity:0}}
+@keyframes n2{0%,19%,40%,100%{opacity:0} 22%,34%{opacity:1}}
+@keyframes n3{0%,39%,60%,100%{opacity:0} 42%,54%{opacity:1}}
+@keyframes n4{0%,59%,80%,100%{opacity:0} 62%,74%{opacity:1}}
+@keyframes n5{0%,79%,100%{opacity:0} 82%,94%{opacity:1}}
+
+@media(max-width:680px){
+  .steps{grid-template-columns:repeat(5,1fr);gap:0}
+  .step-circle{width:44px;height:44px}
+  .step-circle svg{width:18px;height:18px}
+  .step-title{font-size:11px}
+  .step-desc{display:none}
+  .steps::before{top:22px}
+  .narration-line{font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){
+  .step-circle, .narration-line, .live-dot{animation:none!important}
+  .step-circle{background:linear-gradient(135deg,var(--navy-2),var(--navy-3))!important;border-color:rgba(133,193,233,.3)!important;color:var(--ocean-mid)!important;box-shadow:none!important;transform:none!important}
+  .narration-line{opacity:1;position:relative;margin-bottom:6px}
+  .narration{min-height:auto}
+}
+
+/* ── PEDAGOGY SECTION ── */
+.pedagogy{
+  max-width:780px;margin:0 auto;
+  padding:40px 32px 60px;
+}
+.pedagogy h2{
+  font-family:var(--f-display);
+  font-size:clamp(24px,3.5vw,34px);
+  line-height:1.15;
+  font-weight:400;
+  margin-bottom:28px;
+  text-align:center;
+}
+.pedagogy h2 em{font-style:italic;color:var(--ocean-mid)}
+.ped-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.ped-card{
+  padding:22px 22px 24px;
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--line);
+  border-radius:14px;
+  transition:border-color .2s,background .2s;
+}
+.ped-card:hover{
+  border-color:rgba(133,193,233,.25);
+  background:rgba(255,255,255,.05);
+}
+.ped-icon{
+  width:34px;height:34px;
+  border-radius:9px;
+  background:rgba(40,116,166,.15);
+  color:var(--ocean-mid);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.ped-icon svg{width:18px;height:18px}
+.ped-title{
+  font-size:15px;font-weight:700;color:var(--ink);
+  margin-bottom:8px;
+}
+.ped-body{
+  font-size:13.5px;color:var(--ink-dim);line-height:1.55;
+}
+@media(max-width:680px){
+  .ped-grid{grid-template-columns:1fr;gap:14px}
+}
+
+/* ── FINAL CTA BLOCK ── */
+.closer{
+  max-width:780px;margin:0 auto;
+  padding:40px 32px 60px;
+  text-align:center;
+}
+.closer-h{
+  font-family:var(--f-display);
+  font-size:clamp(22px,3vw,30px);
+  font-weight:400;
+  margin-bottom:8px;
+}
+.closer-sub{
+  font-size:15px;color:var(--ink-dim);
+  margin-bottom:26px;
+}
+.closer-meta{
+  margin-top:18px;
+  font-size:13px;color:var(--ink-faint);
+}
+.closer-meta a{color:var(--ocean-mid);text-decoration:none;font-weight:500}
+.closer-meta a:hover{text-decoration:underline}
+
+/* ── FOOTER ── */
+.foot{
+  border-top:1px solid var(--line);
+  padding:28px 32px 36px;
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;
+  max-width:1100px;margin:0 auto;
+  font-size:13px;color:var(--ink-faint);
+}
+.foot-links{display:flex;gap:22px;flex-wrap:wrap}
+.foot-links a{color:var(--ink-faint);text-decoration:none;transition:color .15s}
+.foot-links a:hover{color:var(--ink-dim)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="/" class="logo">Reason<em>Dx</em></a>
+  <div class="nav-links">
+    <a href="/browse.html">Browse cases</a>
+    <a href="/for-educators.html">For educators</a>
+  </div>
+  <a href="/browse.html" class="nav-skip">Skip intro →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eyebrow">Clinical reasoning, practiced</span>
+  <h1>Read the chart. Talk to the patient. <em>Build the differential.</em></h1>
+  <p class="hero-sub">311 free AI-powered EMR cases that teach the reasoning process, not the answer key. No signup. Works in your browser.</p>
+
+  <div class="cta-row">
+    <a href="/virtual-emr.html?case=stemi-v1" class="cta-primary" id="primaryCTA">
+      Start your first case
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+    </a>
+    <a href="/browse.html" class="cta-secondary">or browse all 311 cases →</a>
+  </div>
+  <p class="hero-meta">~10 minutes · STEMI · 50F presenting to the ED</p>
+</section>
+
+<!-- EXPLAINER — animated 5-step workflow -->
+<section class="explainer">
+  <div class="explainer-frame">
+    <div class="explainer-label"><span class="live-dot"></span>How a case works</div>
+
+    <div class="steps" aria-label="Five-step case workflow">
+      <!-- 1. Chart review -->
+      <div class="step">
+        <div class="step-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="3" width="14" height="18" rx="2"/>
+            <path d="M9 8h6M9 12h6M9 16h4"/>
+          </svg>
+          <span class="step-num">1</span>
+        </div>
+        <div class="step-title">Chart review</div>
+        <div class="step-desc">Read the EMR like you would on shift</div>
+      </div>
+      <!-- 2. Patient interview -->
+      <div class="step">
+        <div class="step-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="8" r="3.5"/>
+            <path d="M5 21c0-4 3-7 7-7s7 3 7 7"/>
+            <path d="M16 5.5l1.5-1.5"/>
+          </svg>
+          <span class="step-num">2</span>
+        </div>
+        <div class="step-title">Interview the patient</div>
+        <div class="step-desc">Ask anything — the AI patient stays in character</div>
+      </div>
+      <!-- 3. Differential -->
+      <div class="step">
+        <div class="step-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 3v18M3 12h18"/>
+          </svg>
+          <span class="step-num">3</span>
+        </div>
+        <div class="step-title">Build your differential</div>
+        <div class="step-desc">Commit at four checkpoints, not just the end</div>
+      </div>
+      <!-- 4. Orders & note -->
+      <div class="step">
+        <div class="step-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7h18M3 12h18M3 17h12"/>
+            <circle cx="19" cy="17" r="2.5"/>
+          </svg>
+          <span class="step-num">4</span>
+        </div>
+        <div class="step-title">Order workup &amp; document</div>
+        <div class="step-desc">Labs, imaging, note — graded against a rubric</div>
+      </div>
+      <!-- 5. Debrief -->
+      <div class="step">
+        <div class="step-circle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 11c0 4-4 7-9 7-1.5 0-3-.3-4-.8L3 19l1-4c-.7-1.2-1-2.5-1-4 0-4 4-7 9-7s9 3 9 7z"/>
+          </svg>
+          <span class="step-num">5</span>
+        </div>
+        <div class="step-title">Socratic debrief</div>
+        <div class="step-desc">Not right-or-wrong — why you moved a dx up or down</div>
+      </div>
+    </div>
+
+    <div class="narration" aria-live="polite">
+      <div class="narration-line">Start with real vitals, trending labs, and the problem list.</div>
+      <div class="narration-line">The AI patient answers in their own voice — ask open or pointed questions.</div>
+      <div class="narration-line">Commit a differential four times. Watch it evolve with new information.</div>
+      <div class="narration-line">Place orders and write the note. The AI grades what you could actually know.</div>
+      <div class="narration-line">Get feedback on your reasoning — the moves you made, not just the answer.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PEDAGOGY: why this, not a question bank -->
+<section class="pedagogy">
+  <h2>A question bank tests recall. <em>ReasonDx tests how you think.</em></h2>
+  <div class="ped-grid">
+    <div class="ped-card">
+      <div class="ped-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg>
+      </div>
+      <div class="ped-title">Cases that don't pattern-match</div>
+      <div class="ped-body">Chief complaints don't hand over the diagnosis. No &ldquo;tearing pain&rdquo; or &ldquo;worst headache of my life.&rdquo; You work for it.</div>
+    </div>
+    <div class="ped-card">
+      <div class="ped-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5M3 18l9 5 9-5"/></svg>
+      </div>
+      <div class="ped-title">Four differential checkpoints</div>
+      <div class="ped-body">Commit after the chart, after the interview, after the exam, after results. See your reasoning evolve — or not.</div>
+    </div>
+    <div class="ped-card">
+      <div class="ped-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 00-4 4v2a6 6 0 1012 0V6a4 4 0 00-4-4h-4z"/><path d="M9 14v3a3 3 0 106 0v-3"/></svg>
+      </div>
+      <div class="ped-title">Named cognitive bias</div>
+      <div class="ped-body">Anchoring, premature closure, availability bias — called out when they happen, not left for you to guess.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="closer">
+  <h2 class="closer-h">Ready when you are.</h2>
+  <p class="closer-sub">Your first case is a 50-year-old woman with chest pain. Takes about 10 minutes.</p>
+  <a href="/virtual-emr.html?case=stemi-v1" class="cta-primary">
+    Start the case
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+  </a>
+  <p class="closer-meta">Or <a href="/browse.html">browse all 311 cases</a> &middot; <a href="/for-educators.html">for educators</a> &middot; <a href="mailto:ReasonDxEducation@gmail.com">feedback</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div>© ReasonDx. Built by Lauren Fine, MD.</div>
+  <div class="foot-links">
+    <a href="/browse.html">Browse</a>
+    <a href="/for-educators.html">Educators</a>
+    <a href="/research.html">Research</a>
+    <a href="/how-it-works.html">How it works</a>
+  </div>
+</footer>
+
+<script>
+// Set the first-visit flag so redirect logic doesn't bounce them back here.
+try {
+  localStorage.setItem('rdx-seen-welcome', '1');
+} catch(e) { /* localStorage disabled — fine */ }
+
+// Attach analytics click tracking to the primary CTA (best effort).
+document.addEventListener('click', function(e) {
+  var a = e.target.closest('a.cta-primary');
+  if (a && typeof gtag === 'function') {
+    gtag('event', 'welcome_cta_click', { destination: a.href });
+  }
+});
+</script>
+
+</body>
+</html>
