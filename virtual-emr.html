@@ -4004,9 +4004,9 @@ function wrapSidebarAISection(sbHtml) {
 // Step unlock hints — what a student sees when clicking a locked step
 var _STEP_UNLOCK_HINTS = {
   interview: 'Complete Chart Review first — review the Problem List, Medications, Allergies, and Vitals before interviewing the patient.',
-  ddx:       'Interview the patient first — take the history before building your differential. The DDx tab will unlock after the interview.',
-  orders:    'Build your initial differential first — enter at least one diagnosis before placing orders.',
-  debrief:   'Complete ordering and write your note first — the Debrief step unlocks after you have placed orders and started your H&P.',
+  ddx:       'Interview the patient first — take the history before building your differential. The DDx tab will unlock after you have started the interview.',
+  orders:    'Build your differential first — enter at least one diagnosis in My Differential before placing orders.',
+  debrief:   'Write your note first — the Debrief & Present step unlocks after you have written your H&P and submitted it.',
 };
 
 function _showStepLocked(tabId) {
@@ -5664,7 +5664,7 @@ function runDocAnalysis() {
     'The patient is ' + ptName + ' presenting with: ' + ptCC + '. ' +
     (diagnosis ? 'The correct diagnosis is: ' + diagnosis + '. ' : '') +
     'Setting: ' + setting + '. ' +
-    'Give feedback in JSON with this exact structure: ' +
+    'Specifically evaluate whether orders placed match what is documented in the Plan section — flag inconsistencies. ' + 'Give feedback in JSON with this exact structure: ' +
     '{"overallScore":0-100,"grade":"A/B/C/D/F","summary":"2-3 sentence overall assessment",' +
     '"strengths":["specific strength 1","specific strength 2"],' +
     '"improvements":["specific improvement 1","specific improvement 2"],' +
@@ -5689,7 +5689,19 @@ function runDocAnalysis() {
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
       system: systemPrompt,
-      messages: [{ role: 'user', content: 'Here is the student\'s note:\n\n' + noteText }]
+      messages: [{ role: 'user', content: (function() {
+        var _ordersPlaced = [];
+        if (window.S) {
+          (S.labOrders||[]).forEach(function(o){ _ordersPlaced.push('Lab: ' + (o.name||o.id)); });
+          (S.imgOrders||[]).forEach(function(o){ _ordersPlaced.push('Imaging: ' + (o.name||o.id)); });
+          (S.referralOrders||[]).forEach(function(o){ _ordersPlaced.push('Consult: ' + (o.specialty||o.name||'')); });
+        }
+        var _ordersStr = _ordersPlaced.length
+          ? '\n\nORDERS PLACED BY STUDENT:\n' + _ordersPlaced.join('\n')
+          : '\n\nORDERS PLACED BY STUDENT: None';
+        return 'Here is the student\'s note:\n\n' + noteText + _ordersStr
+          + '\n\nAlso evaluate ORDER-PLAN CONSISTENCY: flag any orders placed but not mentioned in the Plan, and any items in the Plan that were not ordered. Include this analysis in the plan section feedback.';
+      })() }]
     })
   })
   .then(function(r){ return r.json(); })
@@ -6188,8 +6200,26 @@ render = function(){
   };
   var _STEP_ORDER = ['chart','interview','ddx','orders','debrief'];
   var _STEP_LABELS = {chart:'① Chart Review',interview:'② Patient Interview',ddx:'③ My Differential',orders:'④ Order & Document',debrief:'⑤ Debrief & Present'};
-  var _curStepIdx = 0;
-  _STEP_ORDER.forEach(function(s,i){ if(_STEP_TABS[s].indexOf(S.activeTab)>=0) _curStepIdx=i; });
+  // Compute highest UNLOCKED step based on completion, not just activeTab
+  // Each step unlocks the next when its core tasks are done
+  var _hasInterview  = (S.ptMessages && S.ptMessages.length >= 2);
+  var _hasDdx        = (window.MissionControl && MissionControl.getDdxEntries &&
+                         MissionControl.getDdxEntries().length >= 1);
+  var _hasOrders     = ((S.labOrders && S.labOrders.length > 0) ||
+                         (S.imgOrders && S.imgOrders.length > 0) ||
+                         (S.referralOrders && S.referralOrders.length > 0));
+  var _hasNote       = S.submitted || Object.values(S.noteFields||{}).some(function(v){
+                         return v && v.trim().length > 50; });
+  // Unlock levels: 0=chart always, 1=after chart, 2=after interview, 3=after ddx, 4=after orders+note
+  var _unlockedStepIdx = 0;
+  if (_hasInterview || _hasDdx) _unlockedStepIdx = Math.max(_unlockedStepIdx, 1);
+  if (_hasDdx)                  _unlockedStepIdx = Math.max(_unlockedStepIdx, 2);
+  if (_hasOrders || _hasNote)   _unlockedStepIdx = Math.max(_unlockedStepIdx, 3);
+  if (_hasNote)                 _unlockedStepIdx = Math.max(_unlockedStepIdx, 4);
+  // Current active step
+  var _activeStepIdx = 0;
+  _STEP_ORDER.forEach(function(s,i){ if(_STEP_TABS[s].indexOf(S.activeTab)>=0) _activeStepIdx=i; });
+  var _curStepIdx = Math.max(_activeStepIdx, _unlockedStepIdx);
   function _getTabStepIdx(tabId) {
     for(var s=0;s<_STEP_ORDER.length;s++){ if(_STEP_TABS[_STEP_ORDER[s]].indexOf(tabId)>=0) return s; }
     return 0;
