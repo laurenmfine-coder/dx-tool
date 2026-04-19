@@ -2202,6 +2202,7 @@ function loadCaseData(cb) {
 }
 const RUBRIC=[{id:"cc",label:"Chief Complaint",max:5,desc:"Clear, concise presenting concern"},{id:"hpi",label:"HPI Quality",max:15,desc:"OLDCARTS, pertinent pos/neg, timeline"},{id:"pmh",label:"PMH/PSH",max:5,desc:"Relevant conditions documented"},{id:"meds",label:"Meds & Allergies",max:5,desc:"Complete medication reconciliation"},{id:"fsh",label:"FH & SH",max:5,desc:"Relevant details per context"},{id:"ros",label:"Review of Systems",max:10,desc:"Pertinent systems with pos/neg"},{id:"pe",label:"Physical Exam",max:15,desc:"Organized, appropriate, clear findings"},{id:"assess",label:"Assessment",max:15,desc:"Problem list with reasoning/DDx"},{id:"plan",label:"Plan",max:15,desc:"Evidence-based, specific per problem"},{id:"prof",label:"Professionalism",max:10,desc:"Organized, legible, proper terminology"}];
 const NOTE_SECTIONS=[{id:"cc",label:"CHIEF COMPLAINT",hint:"e.g. \"Chest pain and shortness of breath\" — quote the patient's own words",size:""},{id:"hpi",label:"HISTORY OF PRESENT ILLNESS",hint:"OLDCARTS framework:\nOnset: When did it start?\nLocation: Where exactly?\nDuration: Constant or intermittent?\nCharacter: Sharp, dull, pressure, burning?\nAssociating symptoms: What else?\nRelieving/Aggravating: What makes it better or worse?\nTiming: Any prior episodes?\nSeverity: Rate 1–10\n\nEnd with pertinent positives and negatives.",size:"xlarge"},{id:"pmh",label:"PAST MEDICAL HISTORY",hint:"List active diagnoses, prior hospitalizations, chronic conditions\ne.g. Type 2 DM (dx 2018), Hypertension, Hyperlipidemia",size:""},{id:"psh",label:"PAST SURGICAL HISTORY",hint:"e.g. Appendectomy 2015, Cesarean section 2019 — include year if known",size:""},{id:"meds",label:"MEDICATIONS",hint:"Drug name — dose — route — frequency\ne.g. Metformin 1000mg PO BID, Lisinopril 10mg PO daily",size:"large"},{id:"allergies",label:"ALLERGIES",hint:"Drug/substance — reaction type — severity\ne.g. Penicillin — rash — moderate; NKDA if none",size:""},{id:"fhx",label:"FAMILY HISTORY",hint:"Focus on what is relevant to this presentation\ne.g. Father: MI age 52, Mother: DM2, Sister: healthy",size:""},{id:"shx",label:"SOCIAL HISTORY",hint:"Tobacco: pack-year history\nAlcohol: drinks/week\nSubstance use\nOccupation and exposures\nLiving situation\nSexual history if relevant",size:""},{id:"ros",label:"REVIEW OF SYSTEMS",hint:"Document pertinent positives AND negatives by system:\nConstitutional: fever, chills, weight loss, fatigue\nCV: chest pain, palpitations, edema\nResp: dyspnea, cough, hemoptysis\nGI: nausea, vomiting, abdominal pain, bowel changes\nGU: dysuria, frequency, discharge\nNeuro: headache, syncope, weakness, numbness\nMSK: joint pain, swelling",size:"large"},{id:"pe",label:"PHYSICAL EXAMINATION",hint:"Organize by system:\nGeneral: Alert, oriented x3, NAD or describe distress\nVitals: (see chart)\nHEENT: Normocephalic, atraumatic, PERRL\nNeck: Supple, no lymphadenopathy, no JVD\nCV: RRR, no murmurs/rubs/gallops\nResp: CTA bilaterally or describe findings\nAbdomen: Soft, NT/ND, +BS, no organomegaly\nExtremities: No edema, pulses intact\nNeuro: Grossly intact",size:"xlarge"},{id:"assess",label:"ASSESSMENT",hint:"Base your assessment on available results:\n1. [Primary diagnosis] — [supporting evidence from history + resulted labs/imaging]\n   DDx: [alternative 1] — less likely because [refuting evidence]\n2. [Secondary problem]\n\nOnly reference results that have come back. If an EKG showed ST elevations, say so. If troponin resulted, include the value.",size:"large"},{id:"plan",label:"PLAN",hint:"Address each problem. Distinguish between resulted and pending tests:\n1. [Primary diagnosis]:\n   - Completed: EKG → [findings], CXR → [findings]\n   - Awaiting: Troponin I (pending ~2 min) — will escalate to cath lab if positive\n   - Treatment: [medications, procedures started]\n   - Consults: Cardiology (ordered, pending)\n2. [Secondary problem]:\n\nFor each pending test, state what you will do based on the result.",size:"large"}];
+window.NOTE_SECTIONS = NOTE_SECTIONS;
 const ANNOT_COLORS=[{id:"yellow",label:"Note",css:"",bg:"rgba(255,235,59,.35)"},{id:"green",label:"Strength",css:"color-green",bg:"rgba(76,175,80,.25)"},{id:"orange",label:"Needs Work",css:"color-orange",bg:"rgba(255,152,0,.3)"},{id:"red",label:"Critical Issue",css:"color-red",bg:"rgba(239,83,80,.25)"},{id:"blue",label:"Question",css:"color-blue",bg:"rgba(66,165,245,.25)"}];
 
 // ICONS
@@ -4577,6 +4578,11 @@ function deleteProblem(idx){
 // CLINICAL ORDERS (Labs + Imaging)
 // ===============================================================
 function renderOrders(){
+  // Guard against uninitialized state
+  if (!window.S) return '';
+  S.labOrders     = S.labOrders     || [];
+  S.imgOrders     = S.imgOrders     || [];
+  S.referralOrders = S.referralOrders || [];
   // Live refresh: re-render every 10s while orders are pending (keeps countdown current)
   if (!window._orderRefreshTimer) {
     var _hasPending = S.labOrders.some(function(o){ return !o.resulted; }) ||
@@ -5164,6 +5170,7 @@ const EXPECTED = {
   plan_appropriate: ["EKG","electrocardiogram","troponin","aspirin","cardiology","heparin","anticoagul","cath","PCI","NPO","IV access","monitoring","telemetry","oxygen"],
   plan_overtesting: ["MRI brain","colonoscopy","thyroid","pap smear"],
 };
+window.EXPECTED = EXPECTED;
 
 // ===============================================================
 // DOCUMENTATION ANALYZER
@@ -5943,6 +5950,8 @@ function _buildOralScaffold() {
 // CASE COMPLETE SCREEN
 // ================================================================
 function renderCaseComplete() {
+  var S = window.S || (typeof S !== 'undefined' ? S : null);
+  if (!S) return '';
   // Compute what's done
   var _hasAnalysis  = !!(typeof db==="function" && S.currentUser &&
                          db("doc-analysis-" + S.currentUser.username + "-" + S.encounterWeek));
@@ -6082,6 +6091,7 @@ function renderCaseComplete() {
 
 
 function renderOralPresentation() {
+  if (!window.S || !S.currentUser) return sectionCard('Present Case', '🎤', '<div style="padding:20px;text-align:center;color:var(--text-muted)">Sign in to use this feature.</div>');
   const saved = db("oral-presentation-" + S.currentUser.username + "-" + S.encounterWeek);
   const analysis = db("oral-analysis-" + S.currentUser.username + "-" + S.encounterWeek);
   const facultyValidation = db("oral-validation-" + S.currentUser.username + "-" + S.encounterWeek);
@@ -6128,6 +6138,7 @@ function renderOralPresentation() {
 // RENDER: Automated Doc Feedback Tab
 // ===============================================================
 function renderAutoFeedback() {
+  if (!window.S || !S.currentUser) return sectionCard('AI Feedback', '🎯', '<div style="padding:20px;text-align:center;color:var(--text-muted)">Sign in to view AI feedback.</div>');
   const analysis = db("doc-analysis-" + S.currentUser.username + "-" + S.encounterWeek);
   const facultyValidation = db("doc-validation-" + S.currentUser.username + "-" + S.encounterWeek);
   
