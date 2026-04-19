@@ -173,8 +173,8 @@
     if (allPoints.length === 1) return renderBasicVitalsSparkline(window.VITALS ? VITALS[0] : null);
 
     var n = allPoints.length;
-    var W = 800, H = 80;
-    var PAD_L = 36, PAD_R = 16, PAD_T = 10, PAD_B = 32; // leave room for x-axis labels
+    var W = 800, H = 60;
+    var PAD_L = 36, PAD_R = 16, PAD_T = 8, PAD_B = 22; // leave room for x-axis labels
     var cW = W - PAD_L - PAD_R;
     var cH = H - PAD_T - PAD_B;
 
@@ -212,13 +212,12 @@
         var x = ptX(i);
         // Short label: if date format MM/DD/YYYY → MM/DD, else truncate to 8 chars
         var lbl = pt.date || pt.label || '';
-        if (/^\d{2}\/\d{2}\/\d{4}$/.test(lbl)) lbl = lbl.substring(0,5);
-        else lbl = lbl.substring(0, 8);
-        // Alternate above/below to avoid overlap when many points
-        var yOffset = H - PAD_B + 13;
+        // Use full MM/DD/YYYY — font-size handles readability
+        if (lbl.length > 10) lbl = lbl.substring(0, 10);
+        var yOffset = H - PAD_B + 12;
         parts.push(
           '<text x="' + x.toFixed(1) + '" y="' + yOffset + '" text-anchor="middle"' +
-          ' style="font-size:9px;fill:#94A3B8;">' + lbl + '</text>'
+          ' style="font-size:7.5px;fill:#94A3B8;">' + lbl + '</text>'
         );
       });
       return parts.join('');
@@ -249,7 +248,7 @@
     html += '<div style="font-size:13px;font-weight:700;color:#1B3A5C">📈 Vitals Trend</div>';
     html += '<div style="font-size:11px;color:#64748B">' + n + ' time point' + (n>1?'s':'') + ' · hover dots for values</div>';
     html += '</div>';
-    html += '<div style="padding:12px 16px;display:flex;flex-direction:column;gap:16px">';
+    html += '<div style="padding:10px 16px;display:flex;flex-direction:column;gap:10px">';
 
     // HR chart
     html += '<div>';
