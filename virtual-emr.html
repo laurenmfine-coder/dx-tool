@@ -5629,11 +5629,102 @@ function runOralAnalysis() {
 }
 
 function runDocAnalysis() {
-  if (!S.submitted) { showToast("Submit documentation first"); return; }
-  const analysis = analyzeDocumentation(S.noteFields);
-  saveStudentData("doc-analysis", analysis);
-  showToast("✓ Documentation analyzed");
+  if (!S.submitted) { showToast('Submit documentation first'); return; }
+
+  // First run local rule-based analysis as a baseline
+  const localAnalysis = analyzeDocumentation(S.noteFields);
+  saveStudentData('doc-analysis', localAnalysis);
   render();
+
+  // Then enhance with Claude AI for case-specific, narrative feedback
+  var noteText = assembleNoteText(S.noteFields);
+  if (!noteText || noteText.trim().length < 50) {
+    showToast('✓ Documentation analyzed');
+    return;
+  }
+
+  var ptName    = (window.PATIENT && PATIENT.name) ? PATIENT.name : 'the patient';
+  var ptCC      = (window.PATIENT && PATIENT.chiefComplaint) ? PATIENT.chiefComplaint : '';
+  var diagnosis = (window.CRT_DATA && CASE_ID && CRT_DATA[CASE_ID]) ? (CRT_DATA[CASE_ID].diagnosis || '') : '';
+  var setting   = (window.S && S.clinicalSetting) ? S.clinicalSetting.toUpperCase() : 'ED';
+
+  var systemPrompt = 'You are a clinical faculty member giving feedback on a medical student\'s H&P note. ' +
+    'Be specific, constructive, and educational. Focus on clinical reasoning quality, not just documentation style. ' +
+    'The patient is ' + ptName + ' presenting with: ' + ptCC + '. ' +
+    (diagnosis ? 'The correct diagnosis is: ' + diagnosis + '. ' : '') +
+    'Setting: ' + setting + '. ' +
+    'Give feedback in JSON with this exact structure: ' +
+    '{"overallScore":0-100,"grade":"A/B/C/D/F","summary":"2-3 sentence overall assessment",' +
+    '"strengths":["specific strength 1","specific strength 2"],' +
+    '"improvements":["specific improvement 1","specific improvement 2"],' +
+    '"sections":{"cc":{"score":0-5,"feedback":"specific feedback"},' +
+    '"hpi":{"score":0-15,"feedback":"specific feedback"},' +
+    '"pmh":{"score":0-5,"feedback":""},' +
+    '"meds":{"score":0-5,"feedback":""},' +
+    '"fhsh":{"score":0-5,"feedback":""},' +
+    '"ros":{"score":0-10,"feedback":""},' +
+    '"pe":{"score":0-15,"feedback":""},' +
+    '"assess":{"score":0-15,"feedback":""},' +
+    '"plan":{"score":0-15,"feedback":""},' +
+    '"prof":{"score":0-10,"feedback":""}' +
+    '}}. Return ONLY valid JSON, no other text.';
+
+  showToast('🤖 Generating AI feedback...');
+
+  fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: systemPrompt,
+      messages: [{ role: 'user', content: 'Here is the student\'s note:\n\n' + noteText }]
+    })
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data) {
+    try {
+      var raw = data.content && data.content[0] ? data.content[0].text : '';
+      var clean = raw.replace(/```json|```/g,'').trim();
+      var aiFb = JSON.parse(clean);
+
+      // Merge AI scores into the local analysis structure
+      var merged = Object.assign({}, localAnalysis);
+      var secs = aiFb.sections || {};
+      var mapping = {doc_cc:'cc',doc_hpi:'hpi',doc_pmh:'pmh',doc_meds:'meds',
+                     doc_fhsh:'fhsh',doc_ros:'ros',doc_pe:'pe',doc_assess:'assess',
+                     doc_plan:'plan',doc_prof:'prof'};
+      Object.keys(mapping).forEach(function(docKey) {
+        var aiKey = mapping[docKey];
+        if (secs[aiKey] && merged[docKey]) {
+          merged[docKey].score   = secs[aiKey].score || merged[docKey].score;
+          if (secs[aiKey].feedback) merged[docKey].feedback = [secs[aiKey].feedback];
+        }
+      });
+      // Add AI narrative summary
+      merged._aiSummary   = aiFb.summary || '';
+      merged._aiStrengths = aiFb.strengths || [];
+      merged._aiImprovements = aiFb.improvements || [];
+      merged._total = { score: aiFb.overallScore || merged._total.score,
+                        max: 100, grade: aiFb.grade || '' };
+
+      saveStudentData('doc-analysis', merged);
+      showToast('✓ AI feedback ready — check the AI Feedback tab');
+      switchTab('autofeedback');
+      render();
+    } catch(e) {
+      console.warn('[AI Feedback] parse error:', e.message);
+      showToast('✓ Documentation analyzed');
+      switchTab('autofeedback');
+      render();
+    }
+  })
+  .catch(function(e) {
+    console.warn('[AI Feedback] API error:', e.message);
+    showToast('✓ Documentation analyzed (local scoring)');
+    switchTab('autofeedback');
+    render();
+  });
 }
 
 // ===============================================================
@@ -5751,6 +5842,24 @@ function renderAnalysisResults(analysis, rubric, title, validation) {
   
   let html = '<div class="score-banner" style="margin-top:20px"><div><div class="score-label">' + (hasValidation ? '✓ Faculty-Validated' : 'Automated') + ' Score</div><div class="score-number" style="color:' + gradeColor + '">' + total.score + ' / ' + total.max + ' <span style="font-size:20px">(' + grade + ')</span></div></div><div style="text-align:right"><div style="font-size:12px;color:var(--text-secondary)">' + title + ' Assessment</div><div style="font-size:11px;color:var(--text-muted)">' + new Date(analysis._timestamp).toLocaleString() + '</div>' + (hasValidation ? '<div style="font-size:11px;color:var(--accent);font-weight:600;margin-top:4px">Validated by ' + esc(validation.validatedBy) + '</div>' : '') + '</div></div>';
   
+  // AI narrative summary (if available from Claude API feedback)
+  if (analysis._aiSummary) {
+    html += '<div style="margin-top:16px;padding:16px;background:linear-gradient(135deg,#EBF5FB,#F0F9FF);border-radius:10px;border-left:4px solid #2874A6">';
+    html += '<div style="font-size:11px;font-weight:700;color:#2874A6;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">🤖 AI Faculty Assessment</div>';
+    html += '<div style="font-size:13px;color:#1B3A5C;line-height:1.65;margin-bottom:12px">' + analysis._aiSummary + '</div>';
+    if (analysis._aiStrengths && analysis._aiStrengths.length) {
+      html += '<div style="margin-bottom:8px"><div style="font-size:11px;font-weight:700;color:#059669;margin-bottom:4px">✓ Strengths</div>';
+      analysis._aiStrengths.forEach(function(s){ html += '<div style="font-size:12px;color:#065F46;padding:2px 0">• ' + s + '</div>'; });
+      html += '</div>';
+    }
+    if (analysis._aiImprovements && analysis._aiImprovements.length) {
+      html += '<div><div style="font-size:11px;font-weight:700;color:#DC2626;margin-bottom:4px">↑ Areas to Improve</div>';
+      analysis._aiImprovements.forEach(function(s){ html += '<div style="font-size:12px;color:#7F1D1D;padding:2px 0">• ' + s + '</div>'; });
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+
   // Criterion-by-criterion
   rubric.forEach(r => {
     const res = analysis[r.id];
