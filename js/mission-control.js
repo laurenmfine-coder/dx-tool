@@ -14,7 +14,7 @@
       { id: 'review-meds',      label: 'Review medications',         group: 'review', autoTab: 'medications',  autoTime: 3 },
       { id: 'review-allergies', label: 'Check allergies',            group: 'review', autoTab: 'allergies',    autoTime: 2 },
       // Phase 2: Initial DDx before interview
-      { id: 'initial-ddx',      label: 'Form initial differential (before interview)', group: 'reason', check: '_checkInitialDdx' },
+      { id: 'initial-ddx',      label: 'Form initial differential (before interview)', group: 'reason', check: '_checkInitialDdx', autoTab: 'ddx', autoTime: 5 },
       // Phase 3: Take the history
       { id: 'interview-patient',label: 'Interview the patient',      group: 'reason', autoTab: 'interview',    autoTime: 5 },
       // Phase 4: Revise DDx after history
@@ -117,6 +117,9 @@
     documentation: { icon:'✏️', heading:'Step 6 / 9 — Documentation',
       body:'First use: write your HPI and initial differential BEFORE ordering. Second use (after orders): complete your Assessment & Plan incorporating results. Show your reasoning — not just your conclusion.',
       nextLabel:'Place targeted orders →', nextTab:'orders' },
+    ddx: { icon:'🧠', heading:'My Differential Diagnosis',
+      body:'Use this tab twice. First BEFORE the interview to commit your initial thinking based on the chart alone. Then REVISE it after taking the history. Rank diagnoses by likelihood. Tag must-not-miss diagnoses. Add supporting and refuting evidence for each entry.',
+      nextLabel:'Now interview the patient →', nextTab:'interview' },
     orders: { icon:'📤', heading:'Step 7 — Place Orders',
       body:'Order only what will change your management. Each order should be tied to a diagnostic question. Blind ordering without a differential is a pattern the AI tracks. Results will appear in Labs and Imaging after submission.',
       nextLabel:'Review results →', nextTab:'labs' },
@@ -373,16 +376,22 @@
       html += '<div style="margin:14px 16px 0;padding:12px 12px 8px;background:#f8fafc;border-radius:10px;border:1px solid #e2ecf4">';
       html += '<div style="font-size:10px;font-weight:700;color:#9aafbf;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Navigate the Chart</div>';
       var navItems=[
+        // Chart Review
         {tab:'demographics',label:'Patient Info',         icon:'\uD83D\uDC64'},
         {tab:'problems',    label:'Problem List',         icon:'\uD83D\uDCCB'},
         {tab:'medications', label:'Medications',          icon:'\uD83D\uDC8A'},
         {tab:'vitals',      label:'Vitals',               icon:'\uD83D\uDCCA'},
-        {tab:'visits',      label:'Visit History / HPI',  icon:'\uD83D\uDCDD'},
+        {tab:'visits',      label:'Visit History',        icon:'\uD83D\uDCDD'},
         {tab:'labs',        label:'Labs',                 icon:'\uD83E\uDDEA'},
         {tab:'imaging',     label:'Imaging',              icon:'\uD83E\uDE7B'},
+        // Clinical Actions (in order)
+        {tab:'interview',   label:'Patient Interview',    icon:'\uD83D\uDCAC'},
+        {tab:'ddx',         label:'My Differential',      icon:'\uD83E\uDDE0'},
+        {tab:'orders',      label:'Order Tests',          icon:'\uD83D\uDCE4'},
         {tab:'documentation',label:'Write Note',          icon:'\u270F\uFE0F'},
-        {tab:'grading',     label:'AI Feedback',          icon:'\uD83C\uDFAF'},
-        {tab:'coach',       label:'CoachDx Attending',    icon:'\uD83E\uDDE0'}
+        // Debrief
+        {tab:'coach',       label:'CoachDx Attending',    icon:'\uD83E\uDDE0'},
+        {tab:'autofeedback',label:'AI Feedback',          icon:'\uD83C\uDFAF'}
       ];
       navItems.forEach(function(item){
         var isActive = item.tab===activeTab;

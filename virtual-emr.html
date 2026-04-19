@@ -3665,11 +3665,11 @@ function getWorkflowProgress() {
 // Upgraded workflow bar with renamed steps + progress badge
 function renderWorkflowBar(activeTab) {
   var steps = [
-    { id:'chart',    label:'Chart Review',        icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
-    { id:'interview',label:'Patient Interview',   icon:'🗣️', tabs:['interview'] },
-    { id:'reason',   label:'Orders & Reasoning',  icon:'🔬', tabs:['crt','orders','oral'] },
-    { id:'coaching', label:'Talk to Attending',   icon:'🧠', tabs:['coach','autofeedback','feedback'] },
-    { id:'document', label:'Write Note',          icon:'📝', tabs:['documentation'] },
+    { id:'chart',    label:'Chart Review',      icon:'📋', tabs:['demographics','problems','visits','medications','allergies','labs','imaging','vitals','immunizations','history'] },
+    { id:'interview',label:'Patient Interview', icon:'🗣️', tabs:['interview'] },
+    { id:'ddx',      label:'My Differential',   icon:'🧠', tabs:['ddx','crt'] },
+    { id:'orders',   label:'Order & Document',  icon:'📝', tabs:['orders','documentation'] },
+    { id:'debrief',  label:'Debrief & Present', icon:'🎯', tabs:['coach','autofeedback','feedback','oral'] },
   ];
   var activeStep = 0;
   steps.forEach(function(s, i){ if(s.tabs.indexOf(activeTab)>=0) activeStep=i; });
@@ -5659,9 +5659,13 @@ render = function(){
     if(window.GuidedMode&&GuidedMode.isActive()){
       tabs.push({id:'guided',label:'Guided Mode',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'});
     }
-    tabs.push({id:'_divider_actions',label:'',icon:'',divider:true,groupLabel:'Actions'});
-    tabs.push({id:"documentation",label:"Write Note",icon:I.fileText});
+    tabs.push({id:'_divider_actions',label:'',icon:'',divider:true,groupLabel:'Clinical Actions'});
+    tabs.push({id:"interview",label:"Patient Interview",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'});
+    tabs.push({id:"ddx",label:"My Differential",icon:I.clipboard});
     tabs.push({id:"orders",label:"Order Tests",icon:I.send});
+    tabs.push({id:"documentation",label:"Write Note",icon:I.fileText});
+    tabs.push({id:"oral",label:"Present Case",icon:I.activity});
+    // Keep crt as hidden alias — remove from sidebar but keep fn.crt mapped
     tabs.push({id:"crt",label:"My Reasoning",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'});
     tabs.push({id:"oral",label:"Present Case",icon:I.activity});
     tabs.push({id:'_divider_support',label:'',icon:'',divider:true,groupLabel:'Support'});
@@ -5679,6 +5683,8 @@ render = function(){
   const fn = {};
   fn.demographics = renderDemographics;
   fn.interview = renderPatientInterview;
+  fn.ddx = function(){ return (window.DdxBuilder && typeof DdxBuilder.renderTab === 'function') ? DdxBuilder.renderTab() : '<div style="text-align:center;padding:40px;color:var(--text-muted)">DDx builder loading...</div>'; };
+  fn.crt = fn.ddx;
   fn.visits = renderVisits;
   fn.history = renderHistory;
   fn.documentation = renderDocumentation;
