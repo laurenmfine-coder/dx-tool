@@ -1347,13 +1347,13 @@
           } else {
             // Parent with sub-items
             var isSubExp = !!_subExpanded[m.name];
-            var safeM = m.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            var safeM = JSON.stringify(m.name);
             var subSelCount = m.subs.filter(function (s) { return _selected[s]; }).length;
 
             html += '<div style="margin-bottom:6px;border:1px solid ' + (subSelCount > 0 ? '#BFD7ED' : '#E9EFF5') + ';border-radius:6px;overflow:hidden">';
             html += '<div style="display:flex;align-items:center;gap:0;background:' + (subSelCount > 0 ? '#F0F7FF' : '#FAFBFC') + '">';
             // Parent toggle (select/deselect the parent name itself)
-            html += '<button type="button" onclick="_rdxExamToggle(\'' + safeM + '\')" ';
+            html += '<button type="button" onclick="_rdxExamToggle(' + safeM + ')" ';
             html += 'style="display:flex;align-items:center;gap:7px;padding:7px 10px;border:none;cursor:pointer;';
             html += 'background:transparent;font-size:12px;font-weight:600;color:' + (_selected[m.name] ? '#2874A6' : '#374151') + ';font-family:inherit;text-align:left;flex:1">';
             html += '<span style="width:14px;height:14px;border-radius:3px;border:2px solid ';
@@ -1365,7 +1365,7 @@
             if (subSelCount > 0) html += ' <span style="font-size:10px;background:#2874A6;color:#fff;padding:0 5px;border-radius:8px;margin-left:4px">' + subSelCount + '</span>';
             html += '</button>';
             // Sub-items expand toggle
-            html += '<button type="button" onclick="_rdxExamToggleSub(\'' + safeM + '\')" ';
+            html += '<button type="button" onclick="_rdxExamToggleSub(' + safeM + ')" ';
             html += 'style="padding:7px 12px;border:none;border-left:1px solid #E4EEF6;background:transparent;cursor:pointer;font-size:11px;color:#64748B;font-family:inherit;white-space:nowrap">';
             html += (isSubExp ? '▲ Hide' : '▼ Specific tests') + '</button>';
             html += '</div>';
