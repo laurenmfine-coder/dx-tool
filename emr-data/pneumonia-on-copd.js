@@ -48,14 +48,14 @@ window.EMR_DATA = {
     },
     {
       "problem": "Atrial Flutter — Chronic",
-      "icd": "I48.92",
+      "icd": "I48.4",
       "onset": "2022",
       "status": "Active",
       "notes": "Rate-controlled with diltiazem; on apixaban; not a candidate for ablation per EP"
     },
     {
       "problem": "Chronic Respiratory Failure with Hypoxia and Hypercapnia",
-      "icd": "J96.11",
+      "icd": "J96.10",
       "onset": "2022",
       "status": "Active",
       "notes": "Continuous O2 therapy; baseline SpO2 88-90% on 2L; baseline ABG: pH 7.36, pCO2 52, pO2 62, HCO3 30"

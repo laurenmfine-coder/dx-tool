@@ -41,7 +41,7 @@ window.EMR_DATA = {
     },
     {
       "problem": "Ascending Aortic Dilation",
-      "icd": "I71.01",
+      "icd": "I71.2",
       "onset": "2018",
       "status": "Active",
       "notes": "4.2 cm on last CT (07/2025); surveillance imaging q12 months; threshold for surgery 5.0-5.5 cm"

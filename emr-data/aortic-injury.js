@@ -27,7 +27,7 @@ window.EMR_DATA = {
   "problems": [
     {
       "problem": "No significant past medical history",
-      "icd": "Z87.898",
+      "icd": "Z03.89",
       "onset": "2025",
       "status": "Active",
       "notes": "Healthy prior to trauma"

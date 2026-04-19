@@ -34,7 +34,7 @@ window.EMR_DATA = {
     },
     {
       "problem": "Contact Lens Overwear — History",
-      "icd": "T18.9XXA",
+      "icd": "H18.829",
       "onset": "2022",
       "status": "Resolved",
       "notes": "Corneal neovascularization noted by optometrist 2022; counseled on proper wear and removal schedule"

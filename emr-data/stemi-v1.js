@@ -24,7 +24,7 @@ window.EMR_DATA = {
   "problems": [
     {
       "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
+      "icd": "E11.9",
       "onset": "2015",
       "status": "Active",
       "notes": ""

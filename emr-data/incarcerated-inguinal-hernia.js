@@ -34,7 +34,7 @@ window.EMR_DATA = {
     },
     {
       "problem": "Right Inguinal Hernia — Incarcerated",
-      "icd": "K40.30",
+      "icd": "K40.10",
       "onset": "2025",
       "status": "Active",
       "notes": "Current presentation"

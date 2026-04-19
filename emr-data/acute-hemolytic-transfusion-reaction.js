@@ -62,7 +62,7 @@ window.EMR_DATA = {
     },
     {
       "problem": "Red Cell Alloantibodies — anti-E, anti-Kell",
-      "icd": "D59.0",
+      "icd": "D59.8",
       "onset": "2024",
       "status": "Active",
       "notes": "Identified on antibody screen 06/2024; requires antigen-negative crossmatch-compatible blood"
