@@ -40,7 +40,7 @@ window.CASES['dka-v3'] = {
       { id: 'add-insulin-dka3', name: 'Increase glargine dose to 24 units — HbA1c 12.4%', rationale: 'Increasing dose when patient is already rationing insulin will worsen hypoglycemia risk. Fix access first, then titrate.' },
       { id: 'discharge-dka3', name: 'Discharge with same plan — patient is stable today', rationale: 'Same plan = fourth DKA. The system failed this patient. Root cause intervention (CGM appeal, insulin access, education, social work) is mandatory before this visit ends.' }
     ]
-  }
+  },
 
   teachingPoints: {
     keyLearning: ['Recurrent DKA is most commonly caused by insulin omission — which in adolescents is often driven by: cost/access barriers (insulin rationing), technology access (denied CGM), psychosocial factors (depression, disordered eating), or lack of sick day rule education. Address the social determinants of health, not just the physiology.','Sick day rules are life-saving and must be explicitly taught: (1) NEVER stop insulin during illness even if not eating. (2) Check glucose every 2-4h during illness. (3) Check ketones when glucose >240. (4) 20-30% carbohydrate replacement if not eating. (5) When to call/come in: vomiting, ketones >1.5, glucose >300 despite correction.','Emergency insulin access: in the US, Regular insulin (Humulin R) and NPH are available OTC at Walmart for $25/vial without prescription. This is a safety net option for insulin-rationing patients — teach families this exists.'],

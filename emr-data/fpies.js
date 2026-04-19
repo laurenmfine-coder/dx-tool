@@ -8,7 +8,7 @@ window.CASES['fpies']={
     hpi:'8-month-old male. Third episode: profuse repetitive vomiting (10-15 times) starting 1-2 hours after eating oatmeal cereal. Each episode: vomiting 90-120 minutes then resolves. No hives, no wheeze, no anaphylaxis. Appears pale and lethargic during episodes. Previous episodes with oatmeal at 5 months and 7 months — oatmeal avoided, then re-introduced. No skin findings. IgE testing negative.',
     pmh:['Three FPIES episodes — all oat-triggered'],meds:['None'],allergies:['Oats — FPIES']
   },
-  vitals:{Temp:'37.4°C',HR:'148',RR:'36',SpO2:'98%',BP:'82/52',Weight:'8.2kg},
+  vitals:{Temp:'37.4°C',HR:'148',RR:'36',SpO2:'98%',BP:'82/52',Weight:'8.2kg'},
   labs:{
     'CBC':'WBC 18,400 (H — neutrophilia in FPIES episode)',
     'BMP':'Na 136, K 3.6, Cr 0.3 — mild dehydration',

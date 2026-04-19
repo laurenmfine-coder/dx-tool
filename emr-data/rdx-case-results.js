@@ -989,14 +989,9 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cthead: {findings:"Hyperdense blood in basal cisterns, sylvian fissures bilaterally, and interpeduncular cistern. Blood tracking along tentorium. No hydrocephalus. No intraparenchymal hemorrhage. No midline shift.",
-               impression:"1. Subarachnoid hemorrhage — classic basal cistern pattern.
-2. No acute hydrocephalus on this scan.
-3. LP for xanthochromia if clinical suspicion high and CT negative.
-4. Urgent neurosurgery/neurology. CTA head for aneurysm."},
+               impression:"1. Subarachnoid hemorrhage — classic basal cistern pattern.\n2. No acute hydrocephalus on this scan.\n3. LP for xanthochromia if clinical suspicion high and CT negative.\n4. Urgent neurosurgery/neurology. CTA head for aneurysm."},
       mribrain: {findings:"FLAIR: hyperintense signal in basal cisterns and sylvian fissures consistent with acute SAH. DWI: no acute ischemic changes. No intraparenchymal hemorrhage. MRA (if acquired): pending read.",
-                 impression:"1. Acute subarachnoid hemorrhage on FLAIR.
-2. No secondary infarction.
-3. Formal MRA/CTA for aneurysm source required."},
+                 impression:"1. Acute subarachnoid hemorrhage on FLAIR.\n2. No secondary infarction.\n3. Formal MRA/CTA for aneurysm source required."},
     }
   },
 
@@ -1032,13 +1027,9 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       ekg: {findings:"ST depression 1-1.5mm leads V4-V6, I, aVL. T-wave inversions V4-V6. HR 88, normal axis. No ST elevation. No prior for comparison.",
-            impression:"1. ST depression and T-wave inversions lateral leads — NSTEMI pattern.
-2. No ST elevation — not STEMI criteria.
-3. Serial EKGs q30min. Aspirin + heparin. Cardiology for cath timing."},
+            impression:"1. ST depression and T-wave inversions lateral leads — NSTEMI pattern.\n2. No ST elevation — not STEMI criteria.\n3. Serial EKGs q30min. Aspirin + heparin. Cardiology for cath timing."},
       echo: {findings:"LV: mildly reduced EF 45-50%. Anterolateral wall hypokinesis. RV: normal. Valves: mild MR. No effusion.",
-             impression:"1. Mildly reduced EF 45-50% with anterolateral wall motion abnormality.
-2. Consistent with demand ischemia or NSTEMI territory.
-3. Cardiology — catheterization indicated."},
+             impression:"1. Mildly reduced EF 45-50% with anterolateral wall motion abnormality.\n2. Consistent with demand ischemia or NSTEMI territory.\n3. Cardiology — catheterization indicated."},
     }
   },
 
@@ -1071,9 +1062,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       us_renal: {findings:"Right kidney 9.8 cm, increased echogenicity, no hydronephrosis, no calculus. Left kidney 9.6 cm, increased echogenicity, no obstruction. Bladder: small volume, no mass. No perinephric fluid.",
-                 impression:"1. Bilateral increased renal echogenicity — consistent with medical renal disease (ATN, GN).
-2. No hydronephrosis — postrenal obstruction less likely.
-3. Nephrology consult."},
+                 impression:"1. Bilateral increased renal echogenicity — consistent with medical renal disease (ATN, GN).\n2. No hydronephrosis — postrenal obstruction less likely.\n3. Nephrology consult."},
     }
   },
 
@@ -1105,9 +1094,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cxr: {findings:"Hyperinflation. Flattened hemidiaphragms. Increased AP diameter (barrel chest configuration). Increased lucency bilateral lower lobes. Peribronchial cuffing. No consolidation. No pneumothorax. No effusion.",
-            impression:"1. Severe hyperinflation consistent with advanced COPD/emphysema.
-2. No acute pneumonia or pneumothorax on this film.
-3. Consider CT chest if concern for pneumothorax or infection not seen on plain film."},
+            impression:"1. Severe hyperinflation consistent with advanced COPD/emphysema.\n2. No acute pneumonia or pneumothorax on this film.\n3. Consider CT chest if concern for pneumothorax or infection not seen on plain film."},
     }
   },
 
@@ -1138,13 +1125,9 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cthead: {findings:"No acute intracranial hemorrhage. No mass effect. Periventricular white matter hypodensities — chronic small vessel ischemic changes. No acute ischemia.",
-               impression:"1. No acute intracranial hemorrhage.
-2. Chronic hypertensive white matter changes.
-3. Hypertensive emergency without ICH — IV labetalol or nicardipine. Target 10-25% BP reduction in 1h."},
+               impression:"1. No acute intracranial hemorrhage.\n2. Chronic hypertensive white matter changes.\n3. Hypertensive emergency without ICH — IV labetalol or nicardipine. Target 10-25% BP reduction in 1h."},
       ekg: {findings:"LV hypertrophy by voltage (SV1+RV5 >35mm). ST depression lateral leads. HR 84 regular. No acute ischemic changes. QTc 440ms.",
-            impression:"1. LVH pattern — chronic hypertension effect.
-2. Lateral ST depression — strain pattern vs ischemia.
-3. Serial EKGs if concern for ACS."},
+            impression:"1. LVH pattern — chronic hypertension effect.\n2. Lateral ST depression — strain pattern vs ischemia.\n3. Serial EKGs if concern for ACS."},
     }
   },
 
@@ -1171,10 +1154,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cxr: {findings:"No pulmonary infiltrate. No pleural effusion. Cardiomegaly. Bony changes: vertebral endplate depressions (H-vertebrae pattern) consistent with sickle cell bone changes.",
-            impression:"1. No acute chest syndrome on this film.
-2. Cardiomegaly — chronic anemia.
-3. H-vertebrae — classic sickle cell bony changes.
-4. Serial CXR if ACS suspected (may lag clinically)."},
+            impression:"1. No acute chest syndrome on this film.\n2. Cardiomegaly — chronic anemia.\n3. H-vertebrae — classic sickle cell bony changes.\n4. Serial CXR if ACS suspected (may lag clinically)."},
     }
   },
 
@@ -1204,15 +1184,9 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       ctabdomen: {findings:"Pancreas: diffusely enlarged, peripancreatic fat stranding extensive, fluid tracking into left anterior pararenal space and lesser sac. No pancreatic necrosis (>30% enhancement). Gallbladder: multiple gallstones, no cholecystitis. CBD 7mm (mildly dilated). No free air.",
-                  impression:"1. Acute interstitial pancreatitis — no necrosis. CT Severity Index: 4 (moderate).
-2. Cholelithiasis — gallstone pancreatitis likely.
-3. Mildly dilated CBD — consider ERCP if jaundice worsens.
-4. Aggressive IVF. NPO. Analgesia. ERCP within 24h if cholangitis."},
+                  impression:"1. Acute interstitial pancreatitis — no necrosis. CT Severity Index: 4 (moderate).\n2. Cholelithiasis — gallstone pancreatitis likely.\n3. Mildly dilated CBD — consider ERCP if jaundice worsens.\n4. Aggressive IVF. NPO. Analgesia. ERCP within 24h if cholangitis."},
       us_abdomen: {findings:"Gallbladder: multiple stones, largest 1.4 cm. Positive sonographic Murphy sign. Wall 3mm (normal). CBD 7mm. Pancreas partially visualized — head indistinct, echogenicity increased.",
-                   impression:"1. Cholelithiasis — multiple stones.
-2. Mildly dilated CBD — choledocholithiasis not excluded on US.
-3. Pancreatic head edema consistent with pancreatitis.
-4. CT abdomen for full severity assessment."},
+                   impression:"1. Cholelithiasis — multiple stones.\n2. Mildly dilated CBD — choledocholithiasis not excluded on US.\n3. Pancreatic head edema consistent with pancreatitis.\n4. CT abdomen for full severity assessment."},
     }
   },
 
@@ -1239,10 +1213,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cthead: {findings:"No acute intracranial hemorrhage. No mass or mass effect. No acute infarct. Diffuse cortical atrophy mild. White matter changes mild periventricular — chronic microangiopathy. No encephalomalacia.",
-               impression:"1. No acute intracranial process.
-2. Mild chronic atrophic changes.
-3. Electrolyte etiology most likely (Na 128).
-4. MRI brain with/without contrast if focal findings or concern for structural etiology."},
+               impression:"1. No acute intracranial process.\n2. Mild chronic atrophic changes.\n3. Electrolyte etiology most likely (Na 128).\n4. MRI brain with/without contrast if focal findings or concern for structural etiology."},
     }
   },
 });
@@ -1374,9 +1345,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       ekg: {findings:"Tall peaked T-waves in precordial leads. QRS duration 108ms (mild widening). PR interval 210ms. HR 96. No significant ST changes. Sinus rhythm.",
-            impression:"1. Hyperkalemia EKG pattern — peaked T-waves and mild QRS widening.
-2. K 6.2 — calcium gluconate IV indicated if K >6.5 or EKG changes worsen.
-3. Continuous cardiac monitoring. Trend K q2h during IVF."},
+            impression:"1. Hyperkalemia EKG pattern — peaked T-waves and mild QRS widening.\n2. K 6.2 — calcium gluconate IV indicated if K >6.5 or EKG changes worsen.\n3. Continuous cardiac monitoring. Trend K q2h during IVF."},
     }
   },
 
@@ -1410,10 +1379,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cxr: {findings:"Bilateral diffuse airspace opacities — ground-glass and consolidative, involving >75% of both lung fields. Air bronchograms. No cardiomegaly. No pleural effusion. Endotracheal tube at carina — repositioned.",
-            impression:"1. Bilateral diffuse pulmonary infiltrates — ARDS pattern.
-2. ETT tip at carina — pull back 3-4cm.
-3. Berlin criteria: bilateral opacities, P/F <100, non-cardiogenic.
-4. ARDSnet protocol: Vt 6 mL/kg IBW, PEEP ≥10."},
+            impression:"1. Bilateral diffuse pulmonary infiltrates — ARDS pattern.\n2. ETT tip at carina — pull back 3-4cm.\n3. Berlin criteria: bilateral opacities, P/F <100, non-cardiogenic.\n4. ARDSnet protocol: Vt 6 mL/kg IBW, PEEP ≥10."},
     }
   },
 
@@ -1443,11 +1409,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       echo: {findings:"Aortic valve: vegetations on non-coronary cusp measuring 1.8cm. Severe aortic regurgitation. LV: mildly dilated, EF 45%. RV: normal. No perivalvular abscess on TTE (TEE required for better sensitivity). No pericardial effusion.",
-             impression:"1. Large aortic valve vegetation (1.8cm) — active endocarditis.
-2. Severe AR — volume overload on LV.
-3. EF 45% — early valve failure.
-4. TEE urgently: rule out perivalvular abscess, better vegetation characterization.
-5. Cardiothoracic surgery consultation — surgical criteria may be met."},
+             impression:"1. Large aortic valve vegetation (1.8cm) — active endocarditis.\n2. Severe AR — volume overload on LV.\n3. EF 45% — early valve failure.\n4. TEE urgently: rule out perivalvular abscess, better vegetation characterization.\n5. Cardiothoracic surgery consultation — surgical criteria may be met."},
     }
   },
 
@@ -1473,11 +1435,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cthead: {findings:"Hyperdense 4.2 x 3.8 x 3.5 cm hemorrhage left basal ganglia with surrounding edema. 8mm leftward midline shift. No subarachnoid extension. Ventricles: mild hydrocephalus right temporal horn. No herniation.",
-               impression:"1. Acute intraparenchymal hemorrhage left basal ganglia — 4.2cm.
-2. Midline shift 8mm — neurosurgery emergent.
-3. Early hydrocephalus — ICP monitoring.
-4. Coagulopathy (INR 2.4) — reverse immediately.
-5. Avoid SBP >160. Nicardipine infusion."},
+               impression:"1. Acute intraparenchymal hemorrhage left basal ganglia — 4.2cm.\n2. Midline shift 8mm — neurosurgery emergent.\n3. Early hydrocephalus — ICP monitoring.\n4. Coagulopathy (INR 2.4) — reverse immediately.\n5. Avoid SBP >160. Nicardipine infusion."},
     }
   },
 
@@ -1502,11 +1460,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       ctabdomen: {findings:"Multiple dilated small bowel loops to 5.8cm diameter. Transition point right lower quadrant — adhesion band. No free air. Mesenteric fat stranding at transition point. Distal bowel decompressed. No free fluid. Stool in colon — partial vs complete obstruction.",
-                  impression:"1. Small bowel obstruction at RLQ transition point — adhesion etiology.
-2. Fat stranding at transition — ischemia cannot be excluded.
-3. General surgery consultation urgently.
-4. NG tube decompression, aggressive IVF.
-5. Operative if strangulation signs or failure to resolve within 24-48h."},
+                  impression:"1. Small bowel obstruction at RLQ transition point — adhesion etiology.\n2. Fat stranding at transition — ischemia cannot be excluded.\n3. General surgery consultation urgently.\n4. NG tube decompression, aggressive IVF.\n5. Operative if strangulation signs or failure to resolve within 24-48h."},
     }
   },
 
@@ -1531,10 +1485,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       us_abdomen: {findings:"Uterus: no intrauterine gestational sac identified. Endometrium 14mm thickened — decidual reaction. Right adnexa: heterogeneous 3.2 x 2.8cm mass with ring of fire vascular flow on Doppler. Free fluid pelvis and Morrison's pouch — moderate hemoperitoneum.",
-                   impression:"1. No intrauterine pregnancy.
-2. Right adnexal mass with ring-of-fire sign — ectopic pregnancy.
-3. Moderate hemoperitoneum — ruptured ectopic until proven otherwise.
-4. EMERGENT OBGYN/surgery. Type and cross-match. OR now."},
+                   impression:"1. No intrauterine pregnancy.\n2. Right adnexal mass with ring-of-fire sign — ectopic pregnancy.\n3. Moderate hemoperitoneum — ruptured ectopic until proven otherwise.\n4. EMERGENT OBGYN/surgery. Type and cross-match. OR now."},
     }
   },
 
@@ -1563,9 +1514,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     },
     imgResults: {
       cthead: {findings:"No acute intracranial hemorrhage. No mass effect or midline shift. No acute infarct. No focal lesion. Diffuse cortical edema mild — post-ictal. Ventricles normal.",
-               impression:"1. No acute structural cause for status epilepticus on CT.
-2. Subtherapeutic phenytoin is likely precipitant.
-3. MRI with contrast after stabilization to rule out encephalitis or subtle cortical lesion."},
+               impression:"1. No acute structural cause for status epilepticus on CT.\n2. Subtherapeutic phenytoin is likely precipitant.\n3. MRI with contrast after stabilization to rule out encephalitis or subtle cortical lesion."},
     }
   },
 
@@ -1587,10 +1536,7 @@ Object.assign(window.RDX_CASE_RESULTS, {
     imgResults: {
       doppler_le: {findings:"",impression:""},
       us_abdomen: {findings:"Left testis: 4.2 x 3.1 x 2.8cm. No blood flow on color Doppler. Heterogeneous echotexture — ischemia. Epididymis: enlarged, no flow. Right testis: normal size, normal Doppler flow bilaterally. No hydrocele. Torted cord sign (whirlpool sign) at left internal ring.",
-                   impression:"1. Absent Doppler flow left testis — testicular torsion.
-2. Whirlpool sign confirms torsion at cord level.
-3. EMERGENT urology. OR within 6h of onset for >90% salvage rate.
-4. Manual detorsion attempt while awaiting OR."},
+                   impression:"1. Absent Doppler flow left testis — testicular torsion.\n2. Whirlpool sign confirms torsion at cord level.\n3. EMERGENT urology. OR within 6h of onset for >90% salvage rate.\n4. Manual detorsion attempt while awaiting OR."},
     }
   },
 });

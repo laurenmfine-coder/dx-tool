@@ -53,7 +53,7 @@ window.CASES['stroke-v2'] = {
       { id: 'tpa-redose-sv2', name: 'Redose tPA — NIHSS worsening suggests re-occlusion', rationale: 'FATAL ERROR — worsening NIHSS after tPA is hemorrhagic conversion until proven otherwise. Never redose without non-contrast CT.' },
       { id: 'raise-bp-sv2', name: 'Permissive hypertension SBP 160–180 to maintain penumbra', rationale: 'Permissive HTN is for ischemic stroke without tPA. After hemorrhagic conversion, elevated BP drives hematoma expansion — lower it.' }
     ]
-  }
+  },
 
   teachingPoints: {
     keyLearning: ['Hemorrhagic transformation (HT) complicates 3-9% of ischemic strokes treated with tPA. PH2 (parenchymal hematoma > 30% of infarct, with mass effect) is the most dangerous — 50-80% mortality. Risk factors: large infarct, high NIHSS, older age, elevated glucose, AF, anticoagulation prior to tPA.','When HT suspected (sudden headache, BP surge, GCS drop, NIHSS worsening after tPA): STOP tPA infusion immediately. STAT CT head. If PH2 confirmed: cryoprecipitate (fibrinogen replacement), platelets, and consider aminocaproic acid or TXA. Neurosurgery consult for hematoma expansion.','BP management post-tPA hemorrhage: target SBP <140-160. Avoid precipitous drops (cerebral autoregulation impaired). IV labetalol or nicardipine for acute control. Monitor ICP.'],

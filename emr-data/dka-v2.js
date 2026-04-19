@@ -45,7 +45,7 @@ window.CASES['dka-v2'] = {
       { id: 'bolus-fluids-dka2', name: 'Give another NS bolus — patient looks dehydrated', rationale: 'DANGEROUS — aggressive fluid administration is the #1 cause of cerebral edema in DKA. Slow fluids, do not bolus.' },
       { id: 'bicarb-dka2', name: 'Give sodium bicarbonate — pH still low', rationale: 'Bicarb is contraindicated in DKA cerebral edema — paradoxical CSF acidosis, rapid osmotic shift. Associated with worse outcomes.' }
     ]
-  }
+  },
 
   teachingPoints: {
     keyLearning: ['Cerebral edema is the most feared DKA complication (0.5-1% of pediatric DKA) with 20-40% mortality. Risk factors: younger age, new-onset DM, severe acidosis (pH <7.1), high BUN, aggressive fluid resuscitation, failure of glucose to fall appropriately.','TREAT FIRST, image second. Mannitol 0.5-1 g/kg IV OR hypertonic saline (3% NaCl 5-10 mL/kg) the moment cerebral edema is suspected (declining GCS, bradycardia, Cushing triad, new headache during treatment). Do NOT wait for CT to treat.','Insulin rate: do NOT reduce insulin rate when glucose falls to 250-300 — add dextrose to the fluid instead (D5 or D10 with NS). Reducing insulin risks DKA relapse. The glucose correction rate should be 50-100 mg/dL/hr — faster drops increase cerebral edema risk.'],

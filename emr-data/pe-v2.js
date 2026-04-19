@@ -51,7 +51,7 @@ window.CASES['pe-v2'] = {
       { id: 'continue-apixaban-pv2', name: 'Continue apixaban — just increase to therapeutic dose', rationale: 'Cannot reliably establish therapeutic anticoagulation with oral agents in unstable submassive PE. UFH with continuous infusion and aPTT monitoring is required for reliable, reversible anticoagulation.' },
       { id: 'fluids-pv2', name: 'Aggressive IV fluids — BP 94, patient looks volume-depleted', rationale: 'The failing RV is already volume-overloaded from back-pressure. Additional fluid worsens RV dilation, shifts septum further left (D-sign), and reduces LV output — a deadly cycle.' }
     ]
-  }
+  },
 
   teachingPoints: {
     keyLearning: ['Submassive (intermediate-high risk) PE: hemodynamically stable (SBP ≥90) BUT evidence of RV dysfunction (RV:LV ratio >0.9 on echo, McConnell sign, septal bowing) AND elevated cardiac biomarkers (troponin, BNP/NT-proBNP). Systemic thrombolysis not routinely given — but PERT (PE response team) activation is appropriate.','Thrombolysis decision for submassive PE: systemic tPA (alteplase 100mg over 2h) reserved for hemodynamic compromise (SBP <90 or drop ≥40 mmHg for >15 min). For submassive: catheter-directed thrombolysis (CDT) or catheter-directed embolectomy may be appropriate at PERT centers. MOPETT, ULTIMA, SEATTLE II trials support CDT safety.','McConnell sign: free wall RV hypokinesis with preserved apex contraction. High specificity (>90%) for acute PE. The preserved apex is because the LV tethers the RV apex — the free wall is not tethered and fails first in acute pressure overload.'],

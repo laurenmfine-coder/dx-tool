@@ -515,6 +515,7 @@
   function mount() {
     injectCSS();
 
+    var _onEMR = window.location.pathname.indexOf('virtual-emr') !== -1;
     if (!_onEMR && !document.getElementById('rdx-ws-gear')) {
       var g = document.createElement('button');
       g.id = 'rdx-ws-gear'; g.title = 'Customize workspace'; g.innerHTML = '⚙';

@@ -43,7 +43,7 @@ window.CASES['pe-v3'] = {
       { id: 'doac-pv3', name: 'Switch to apixaban — easier than warfarin, no INR checks', rationale: 'DOACs are specifically contraindicated in triple-positive APS. TRAPS trial (rivaroxaban) and RAPS trial both showed higher recurrence rates vs warfarin. FDA label warns against DOAC use in APS.' },
       { id: 'ivc-filter-pv3', name: 'Place IVC filter — additional protection against PE recurrence', rationale: 'IVC filters do NOT reduce PE mortality and increase DVT risk long-term. They are indicated only when anticoagulation is absolutely contraindicated — which is not the case here.' }
     ]
-  }
+  },
 
   teachingPoints: {
     keyLearning: ['Antiphospholipid syndrome (APS) diagnosis requires: (1) clinical criterion — arterial or venous thrombosis OR pregnancy morbidity, AND (2) laboratory criterion — positive lupus anticoagulant, anti-cardiolipin (IgG/IgM >40 GPL/MPL), or anti-β2-glycoprotein I (IgG/IgM >40 U/mL) on two occasions ≥12 weeks apart. Triple positivity = highest thrombotic risk.','APS anticoagulation: warfarin (INR 2-3) is the ONLY approved anticoagulant for APS with thrombosis. DOACs are INFERIOR in APS and associated with higher rates of recurrent thrombosis (TRAPS trial — rivaroxaban inferior to warfarin in triple-positive APS). Lifelong anticoagulation for confirmed APS with thrombosis.','Duration of anticoagulation: unprovoked PE without APS = 3 months minimum, then individualize (recurrence risk, bleeding risk). APS with triple positivity = LIFELONG anticoagulation. The question "can I stop?" in triple-positive APS = no.'],

@@ -23,7 +23,7 @@ window.CASES['coarctation-of-aorta'] = {
   },
   teachingPoints: {
     keyLearning: ['Coarctation: upper extremity hypertension + absent/weak femoral pulses + BP differential (arm > leg >20 mmHg) = coarctation until proven otherwise. Check all 4 limb BPs in any infant with shock or heart murmur.', 'Critical coarctation = ductal-dependent: PGE1 must be started immediately and maintained until surgical repair.', 'Bicuspid aortic valve: associated in 50-85% of coarctation. Lifelong surveillance for aortic stenosis/regurgitation and ascending aortic dilation (even after coarctation repair).'],
-    boardPearls: ['Rib notching on CXR: intercostal collateral vessels erode inferior rib margins. Takes years to develop — seen in older children and adults, not neonates.', '''3 sign'' on CXR: indentation at the site of coarctation with pre- and post-stenotic dilation — looks like the number 3 on the aortic knuckle.', 'Adult coarctation: headaches, arm hypertension, leg claudication, reduced exercise tolerance. Check 4-limb BPs in any young hypertensive.']
+    boardPearls: ['Rib notching on CXR: intercostal collateral vessels erode inferior rib margins. Takes years to develop — seen in older children and adults, not neonates.', '\'3 sign\' on CXR: indentation at the site of coarctation with pre- and post-stenotic dilation — looks like the number 3 on the aortic knuckle.', 'Adult coarctation: headaches, arm hypertension, leg claudication, reduced exercise tolerance. Check 4-limb BPs in any young hypertensive.']
   },
   references: [{ id: 'StatPearls', title: 'Critical Coarctation of Aorta — Ductal Dependent', journal: 'StatPearls', year: 2024,
     url: 'https://www.ncbi.nlm.nih.gov/books/NBK430727/', openAccess: true }]
