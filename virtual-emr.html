@@ -2392,27 +2392,65 @@ function renderHistory(){return'<div class="two-col">'+sectionCard("Family Histo
 
 // -- PATIENT INTERVIEW TAB (standalone) ----------------------------------
 function renderPatientInterview() {
-  var _ptName  = (PATIENT && PATIENT.name)            ? PATIENT.name.split(' ')[0] : 'the patient';
-  var _fullName= (PATIENT && PATIENT.name)            ? PATIENT.name               : 'Patient';
-  var cc       = (PATIENT && PATIENT.chiefComplaint)  ? PATIENT.chiefComplaint     : '';
-  var age      = (PATIENT && PATIENT.age)             ? PATIENT.age                : '';
-  var sex      = (PATIENT && PATIENT.sex)             ? PATIENT.sex                : '';
+  var _ptName   = (PATIENT && PATIENT.name)           ? PATIENT.name.split(' ')[0] : 'the patient';
+  var _fullName = (PATIENT && PATIENT.name)           ? PATIENT.name               : 'Patient';
+  var cc        = (PATIENT && PATIENT.chiefComplaint)  ? PATIENT.chiefComplaint     : '';
+  var age       = (PATIENT && PATIENT.age)             ? PATIENT.age                : '';
+  var sex       = (PATIENT && PATIENT.sex)             ? PATIENT.sex                : '';
 
-  // Compact patient context bar — not the interview content itself
-  var _context = '<div style="padding:10px 14px 12px;background:linear-gradient(135deg,#EBF5FB,#F0F9FF);border-bottom:1px solid var(--border);border-radius:8px 8px 0 0;margin:-2px -2px 14px -2px">'
+  var _ptMsgs = S.ptMessages || [];
+  var _ptMsgsHtml = '';
+  if (_ptMsgs.length === 0) {
+    _ptMsgsHtml = '<div style="text-align:center;padding:30px 0;color:#94a3b8;font-size:13px">Start by introducing yourself — ask ' + esc(_ptName) + ' what brings them in today.</div>';
+  } else {
+    _ptMsgsHtml = _ptMsgs.map(function(m) {
+      var isUser = m.role === 'user';
+      return '<div style="display:flex;gap:8px;margin-bottom:10px;' + (isUser ? 'flex-direction:row-reverse' : '') + '">'
+        + '<div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:' + (isUser ? '#2874A6' : '#E8F5E9') + ';display:flex;align-items:center;justify-content:center;font-size:14px">'
+        + (isUser ? '👨‍⚕️' : '🤒') + '</div>'
+        + '<div style="max-width:80%;padding:10px 14px;border-radius:12px;background:' + (isUser ? '#EBF5FB' : '#fff') + ';border:1px solid ' + (isUser ? '#AED6F1' : '#E2E8F0') + ';font-size:13px;line-height:1.5;color:#1a202c">'
+        + esc(m.content) + '</div></div>';
+    }).join('');
+  }
+  var _ptLoadingHtml = S.ptLoading ? '<div style="display:flex;gap:8px;margin-bottom:10px"><div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:#E8F5E9;display:flex;align-items:center;justify-content:center;font-size:14px">🤒</div><div style="padding:10px 14px;background:#fff;border:1px solid #E2E8F0;border-radius:12px"><span class="coach-typing"><span></span><span></span><span></span></span></div></div>' : '';
+
+  // Context bar
+  var _ctx = '<div style="padding:10px 16px 12px;background:linear-gradient(135deg,#EBF5FB,#F0F9FF);border-bottom:1px solid var(--border)">'
     + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
     + '<span style="font-size:13px;font-weight:700;color:#1B4F72">' + esc(_fullName) + '</span>'
-    + (age ? '<span style="font-size:11px;color:#4a6280;background:#D6EAF8;padding:2px 8px;border-radius:10px">' + esc(String(age)) + (sex?' · '+esc(sex):'') + '</span>' : '')
+    + (age ? '<span style="font-size:11px;color:#4a6280;background:#D6EAF8;padding:2px 8px;border-radius:10px">' + esc(String(age)) + (sex ? ' · ' + esc(sex) : '') + '</span>' : '')
     + (cc  ? '<span style="font-size:12px;color:#2874A6;font-style:italic">CC: &ldquo;' + esc(cc) + '&rdquo;</span>' : '')
     + '</div>'
-    + '<div style="font-size:11px;color:#5D7A8A;margin-top:5px">Ask open-ended questions to take the history. '
-    + _ptName + ' will respond in character. Form your differential as you listen — before opening Labs.</div>'
+    // Difficulty selector
+    + '<div style="display:flex;align-items:center;gap:8px;margin-top:8px">'
+    + '<span style="font-size:10px;color:#718096;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Mode:</span>'
+    + '<div style="display:flex;gap:2px;background:#E2E8F0;border-radius:8px;padding:2px">'
+    + '<button onclick="setPtDifficulty(&quot;guided&quot;)"   id="ptDiff-guided"   style="padding:3px 9px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;background:' + (!S.ptDifficulty||S.ptDifficulty==='guided'?'#2874A6':'transparent') + ';color:' + (!S.ptDifficulty||S.ptDifficulty==='guided'?'#fff':'#718096') + '">Guided</button>'
+    + '<button onclick="setPtDifficulty(&quot;standard&quot;)" id="ptDiff-standard" style="padding:3px 9px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;background:' + (S.ptDifficulty==='standard'?'#2874A6':'transparent') + ';color:' + (S.ptDifficulty==='standard'?'#fff':'#718096') + '">Standard</button>'
+    + '<button onclick="setPtDifficulty(&quot;advanced&quot;)" id="ptDiff-advanced" style="padding:3px 9px;border:none;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:inherit;background:' + (S.ptDifficulty==='advanced'?'#2874A6':'transparent') + ';color:' + (S.ptDifficulty==='advanced'?'#fff':'#718096') + '">Advanced</button>'
+    + '</div>'
+    + '<span style="font-size:10px;color:#94A3B8;font-style:italic">Guided = helpful · Standard = realistic · Advanced = guarded</span>'
+    + '</div>'
     + '</div>';
+
+  var _messages = '<div id="ptChatMessages" style="padding:14px 16px;min-height:200px;max-height:420px;overflow-y:auto;background:#F8FAFC">'
+    + _ptMsgsHtml + _ptLoadingHtml
+    + '</div>';
+
+  var _input = '<div style="padding:10px 14px;border-top:1px solid #E2E8F0;background:#fff;display:flex;gap:8px">'
+    + '<button type="button" id="ptMicBtn" onclick="toggleVoice(&quot;ptInput&quot;,&quot;ptMicBtn&quot;)" class="mic-btn" title="Voice input" style="padding:8px;border:none;background:transparent;cursor:pointer;font-size:16px;flex-shrink:0">🎙</button>'
+    + '<input id="ptInput" type="text" placeholder="Ask Jennifer a question..." '
+    + 'style="flex:1;padding:9px 12px;border:1px solid #CBD5E1;border-radius:8px;font-size:14px;font-family:inherit;outline:none" '
+    + 'onkeydown="if(event.key===&quot;Enter&quot; && !event.shiftKey){event.preventDefault();sendPatientMessage()}">'
+    + '<button onclick="sendPatientMessage()" style="padding:9px 16px;background:#2874A6;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap"'
+    + (S.ptLoading ? ' disabled' : '') + '>Ask →</button>'
+    + '</div>'
+    + '<div style="padding:4px 14px 8px;font-size:10px;color:#94A3B8;background:#fff">Press Enter to send · Switch to the <strong>Write Note</strong> tab to document what you learn</div>';
 
   return sectionCard(
     'Patient Interview',
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-    _context + _buildInterviewUI(_ptName, cc)
+    _ctx + _messages + _input
   );
 }
 
@@ -2708,7 +2746,7 @@ const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button
   const wc=totalWords();
   var _debrief=(window.RDXIntegration)?RDXIntegration.renderPostSubmitDebrief():'';
   var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>':'';
-  return _interviewCallout + _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+' '+printBtn+'</div>')+sectionCard("Grading Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
+  return _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+' '+printBtn+'</div>')+sectionCard("Grading Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
 }
 
 function buildAnnotatedHTML(text,anns){if(!anns||!anns.length)return esc(text);const sorted=[...anns].map((a,i)=>({...a,idx:i}));sorted.sort((a,b)=>text.indexOf(a.selectedText)-text.indexOf(b.selectedText));let result="",last=0;sorted.forEach(a=>{const p=text.indexOf(a.selectedText,last);if(p===-1)return;const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];result+=esc(text.substring(last,p));result+='<span class="annotation-highlight '+col.css+'" title="'+esc(a.comment)+'">'+esc(a.selectedText)+'<span class="annotation-marker">'+(a.idx+1)+'</span></span>';last=p+a.selectedText.length});result+=esc(text.substring(last));return result}
