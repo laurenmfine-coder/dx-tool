@@ -621,6 +621,17 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .rdx-wf-title{font-size:11px;font-weight:600;line-height:1.2}
 .rdx-wf-sub{font-size:9px;font-weight:400;opacity:.7;text-transform:lowercase;letter-spacing:.01em;display:block}
 .rdx-wf-step.active .rdx-wf-sub{opacity:.85}
+.rdx-sidebar-step-header{padding:7px 14px 4px;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:6px;margin-top:4px}
+.rdx-sidebar-step-header .step-num{width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0}
+.rdx-sidebar-step-done .step-num{background:#10B981;color:#fff}
+.rdx-sidebar-step-active .step-num{background:#2874A6;color:#fff}
+.rdx-sidebar-step-future .step-num{background:#E2E8F0;color:#94A3B8}
+.rdx-sidebar-step-done{color:#10B981}
+.rdx-sidebar-step-active{color:#2874A6}
+.rdx-sidebar-step-future{color:#94A3B8}
+.sidebar-btn.rdx-step-future{opacity:.45;pointer-events:none}
+.sidebar-btn.rdx-step-done{color:#10B981}
+.sidebar-btn.rdx-step-done.active{color:#2874A6}
 /* sidebar AI tool descriptions on hover */
 .sidebar-btn[data-ai-desc]{position:relative}
 .sidebar-btn[data-ai-desc]:hover::after{
@@ -5852,22 +5863,22 @@ render = function(){
   );
   
   if(role==="student"){
-    if(window.GuidedMode&&GuidedMode.isActive()){
-      tabs.push({id:'guided',label:'Guided Mode',icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>'});
-    }
-    tabs.push({id:'_divider_actions',label:'',icon:'',divider:true,groupLabel:'Clinical Actions'});
-    tabs.push({id:"interview",label:"Patient Interview",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'});
-    tabs.push({id:"ddx",label:"My Differential",icon:I.clipboard});
-    tabs.push({id:"orders",label:"Order Tests",icon:I.send});
-    tabs.push({id:"documentation",label:"Write Note",icon:I.fileText});
-    tabs.push({id:"oral",label:"Present Case",icon:I.activity});
-    // Keep crt as hidden alias — remove from sidebar but keep fn.crt mapped
-    tabs.push({id:"crt",label:"My Reasoning",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'});
-    tabs.push({id:"oral",label:"Present Case",icon:I.activity});
-    tabs.push({id:'_divider_support',label:'',icon:'',divider:true,groupLabel:'Support'});
-    tabs.push({id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>'});
-    tabs.push({id:"autofeedback",label:"AI Feedback",icon:I.star});
-    tabs.push({id:"feedback",label:"Faculty Feedback",icon:I.check});
+    // ── Step 2: Patient Interview ──
+    tabs.push({id:'_divider_interview',label:'',icon:'',divider:true,groupLabel:'Interview',stepId:'interview',stepNum:2});
+    tabs.push({id:"interview",label:"Patient Interview",icon:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',stepId:'interview'});
+    // ── Step 3: My Differential ──
+    tabs.push({id:'_divider_ddx',label:'',icon:'',divider:true,groupLabel:'DDx',stepId:'ddx',stepNum:3});
+    tabs.push({id:"ddx",label:"My Differential",icon:I.clipboard,stepId:'ddx'});
+    // ── Step 4: Order & Document ──
+    tabs.push({id:'_divider_orders',label:'',icon:'',divider:true,groupLabel:'Orders',stepId:'orders',stepNum:4});
+    tabs.push({id:"orders",label:"Order Tests",icon:I.send,stepId:'orders'});
+    tabs.push({id:"documentation",label:"Write Note",icon:I.fileText,stepId:'orders'});
+    // ── Step 5: Debrief & Present ──
+    tabs.push({id:'_divider_debrief',label:'',icon:'',divider:true,groupLabel:'Debrief',stepId:'debrief',stepNum:5});
+    tabs.push({id:"oral",label:"Present Case",icon:I.activity,stepId:'debrief'});
+    tabs.push({id:"coach",label:"CoachDx",icon:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',stepId:'debrief'});
+    tabs.push({id:"autofeedback",label:"AI Feedback",icon:I.star,stepId:'debrief'});
+    tabs.push({id:"feedback",label:"Faculty Feedback",icon:I.check,stepId:'debrief'});
   }
   if(role==="faculty"||role==="admin"){
     tabs.push({id:"grading",label:"Grading",icon:I.check});
@@ -5937,20 +5948,47 @@ render = function(){
   // -- Workspace: filter tabs + get primary IDs -------------------------
   if (window.RDXWorkspace) { tabs = RDXWorkspace.filterTabs(tabs); }
   var PRIMARY_TAB_IDS = window.RDXWorkspace ? RDXWorkspace.getPrimaryTabIds() : ['demographics','labs','medications','vitals','imaging'];
+  // Compute current workflow step from activeTab
+  var _STEP_TABS = {
+    chart:     ['demographics','problems','visits','medications','allergies','vitals','labs','imaging','immunizations','history'],
+    interview: ['interview'],
+    ddx:       ['ddx','crt'],
+    orders:    ['orders','documentation'],
+    debrief:   ['coach','autofeedback','feedback','oral']
+  };
+  var _STEP_ORDER = ['chart','interview','ddx','orders','debrief'];
+  var _STEP_LABELS = {chart:'① Chart Review',interview:'② Patient Interview',ddx:'③ My Differential',orders:'④ Order & Document',debrief:'⑤ Debrief & Present'};
+  var _curStepIdx = 0;
+  _STEP_ORDER.forEach(function(s,i){ if(_STEP_TABS[s].indexOf(S.activeTab)>=0) _curStepIdx=i; });
+  function _getTabStepIdx(tabId) {
+    for(var s=0;s<_STEP_ORDER.length;s++){ if(_STEP_TABS[_STEP_ORDER[s]].indexOf(tabId)>=0) return s; }
+    return 0;
+  }
   var sb = tabs.map(function(t){
-    if(t.divider && t.groupLabel === 'Support'){
-      return '<div class="rdx-section-label" style="border-top:2px solid #DBEAFE;margin:8px 0 4px;padding:8px 16px 2px;background:linear-gradient(90deg,#EFF6FF,transparent)"><span style="font-size:10px;font-weight:800;color:#1D4ED8;text-transform:uppercase;letter-spacing:1.2px">🤖 AI Coaching</span></div>';
+    if(t.divider && t.stepId){
+      var stepIdx = _STEP_ORDER.indexOf(t.stepId);
+      var state = stepIdx < _curStepIdx ? 'done' : stepIdx === _curStepIdx ? 'active' : 'future';
+      var label = _STEP_LABELS[t.stepId] || t.groupLabel || '';
+      var cBorder = state==='done'?'#10B981':state==='active'?'#2874A6':'#E2E8F0';
+      var cBg     = state==='done'?'linear-gradient(90deg,#F0FDF4,transparent)':state==='active'?'linear-gradient(90deg,#EBF5FB,transparent)':'linear-gradient(90deg,#F8FAFC,transparent)';
+      var cText   = state==='done'?'#059669':state==='active'?'#2874A6':'#94A3B8';
+      var cNum    = state==='done'?'#10B981':state==='active'?'#2874A6':'#E2E8F0';
+      var numContent = state==='done'?'✓':(t.stepNum||'');
+      return '<div class="rdx-section-label rdx-sidebar-step-header" style="border-top:2px solid '+cBorder+';background:'+cBg+'">'
+        + '<span class="step-num" style="background:'+cNum+';color:'+(state==='future'?'#94A3B8':'#fff')+'">'+numContent+'</span>'
+        + '<span style="font-size:10px;font-weight:700;color:'+cText+';letter-spacing:.04em">'+label+'</span>'
+        + '</div>';
     }
-    if(t.divider && t.groupLabel === 'Actions'){
-      return '<div class="rdx-section-label" style="border-top:2px solid var(--border);margin:6px 0 2px;padding:8px 16px 2px;background:linear-gradient(90deg,#F8FAFC,transparent)"><span style="font-size:10px;font-weight:800;color:var(--primary);text-transform:uppercase;letter-spacing:1.2px">→ Clinical Actions</span></div>';
-    }
-    if(t.divider){return '<div style="border-top:1px solid var(--border-light);margin:4px 12px;padding-top:4px"><span style="font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.8px;padding:0 4px">'+(t.groupLabel||'')+'</span></div>';}
+    if(t.divider){ return ''; }
+    var stepIdx2 = _getTabStepIdx(t.id);
+    var stepState = stepIdx2 < _curStepIdx ? 'done' : stepIdx2 === _curStepIdx ? 'current' : 'future';
+    var _stepCls = stepState==='future' ? ' rdx-step-future' : stepState==='done' ? ' rdx-step-done' : '';
     var pri=PRIMARY_TAB_IDS.indexOf(t.id)>=0?'primary':'secondary';
     var pinned=(window.RDXWorkspace&&(RDXWorkspace.load().emr_pinned||[]).indexOf(t.id)>=0)?'pinned':'';
-    var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):''; 
+    var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):'';
     var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
     var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
-    return '<button type="button"'+_tip+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+pinned+' '+_dim2+'" data-priority="'+pri+'" aria-label="'+t.label+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+    return '<button type="button"'+_tip+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+' '+pinned+' '+_dim2+'" onclick="switchTab(\''+t.id+'\')" data-tab="'+t.id+'">'+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
   }).join('');
   if (typeof wrapSidebarAISection === 'function') sb = wrapSidebarAISection(sb);
   if (window.RDXGuide) sb += RDXGuide.renderSidebarToggle();
