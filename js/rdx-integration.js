@@ -285,7 +285,12 @@
     html += '</div>'; // grid
 
     // Current vitals strip
-    html += '<div style="padding:8px 16px 10px;background:#F8FAFC;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px">';
+    var _lastLabel = lastPt.date || lastPt.label || '';
+    var _lastTime = lastPt.time || '';
+    var _dateDisplay = _lastLabel + (_lastTime ? ' · ' + _lastTime : '');
+    html += '<div style="padding:6px 16px 10px;background:#F8FAFC;border-top:1px solid var(--border)">';
+    html += '<div style="font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">Most recent vitals' + (_dateDisplay ? ' &nbsp;·&nbsp; <span style=\"font-weight:500;text-transform:none\">' + _dateDisplay + '</span>' : '') + '</div>';
+    html += '<div style="display:flex;flex-wrap:wrap;gap:8px">';
     [
       { label:'BP', val: lastPt.bp, abn: function(){ var s=parseInt(lastPt.bp)||0; return s>=140||s<90; } },
       { label:'HR', val: hrCurrent+' bpm', abn: function(){ return hrCurrent>100||hrCurrent<60; } },
@@ -299,7 +304,8 @@
       html += '<span style="font-size:13px;font-weight:700;color:' + (isAbn?'#EF4444':'#1B3A5C') + '">' + c.val + '</span>';
       html += '</div>';
     });
-    html += '</div>';
+    html += '</div>'; // vitals chips
+    html += '</div>'; // strip
 
     html += '</div>'; // card
     return html;
