@@ -1,0 +1,146 @@
+'use strict';
+/**
+ * ReasonDx Platform Audit
+ * Checks all major HTML pages and JS modules for structural issues.
+ * Run: node tests/platform-audit.js
+ */
+const fs   = require('fs');
+const path = require('path');
+const root = path.join(__dirname, '..');
+
+let pass=0, fail=0, warn=0;
+const FAILS=[], WARNS=[];
+function P(f,m){ pass++; }
+function F(f,m){ fail++; FAILS.push('['+path.basename(f)+'] '+m); }
+function W(f,m){ warn++; WARNS.push('['+path.basename(f)+'] '+m); }
+
+// ── 1. Key HTML pages exist ──────────────────────────────────────────────
+const KEY_PAGES = [
+  'virtual-emr.html','browse.html','simulation-engine.html',
+  'casedx.html','faculty-dashboard.html','admissions.html',
+  'choose-mode.html','analytics-dashboard.html'
+];
+console.log('\n[1] Key HTML pages exist');
+KEY_PAGES.forEach(p => {
+  const fp = path.join(root, p);
+  if (fs.existsSync(fp)) { P(fp,'exists'); console.log('  ✓ '+p+' ('+Math.round(fs.statSync(fp).size/1024)+'KB)'); }
+  else { F(fp,'MISSING page: '+p); console.log('  ✗ '+p+' MISSING'); }
+});
+
+// ── 2. Key JS modules exist ──────────────────────────────────────────────
+const KEY_SCRIPTS = [
+  'js/mission-control.js','js/ddx-builder.js','js/exam-builder.js',
+  'js/ddx-checkpoints.js','js/rdx-guide.js','js/rdx-integration.js'
+];
+console.log('\n[2] Key JS modules exist');
+KEY_SCRIPTS.forEach(s => {
+  const fp = path.join(root, s);
+  if (fs.existsSync(fp)) {
+    // Node syntax check
+    try {
+      require('child_process').execSync('node --check "'+fp+'"', {stdio:'pipe'});
+      P(fp,'valid'); console.log('  ✓ '+s);
+    } catch(e) { F(fp,'SYNTAX ERROR: '+e.stderr.toString().split('\n')[0]); }
+  } else { F(fp,'MISSING: '+s); console.log('  ✗ MISSING: '+s); }
+});
+
+// ── 3. virtual-emr.html structural checks ───────────────────────────────
+console.log('\n[3] virtual-emr.html structural checks');
+const emrPath = path.join(root,'virtual-emr.html');
+if (fs.existsSync(emrPath)) {
+  const emr = fs.readFileSync(emrPath,'utf8');
+
+  const checks = [
+    ['Mission card',              'renderMissionCard'],
+    ['Case complete screen',      'renderCaseComplete'],
+    ['DDx checkpoints wired',     'DDxCheckpoints.render'],
+    ['Patient interview',         'renderPatientInterview'],
+    ['Documentation render',      'renderDocumentation'],
+    ['Orders render',             'renderOrders'],
+    ['AI feedback render',        'renderAutoFeedback'],
+    ['Oral presentation',         'renderOralPresentation'],
+    ['Submit function',           'function submitDoc'],
+    ['Run analysis function',     'function runDocAnalysis'],
+    ['Step unlock hints',         '_STEP_UNLOCK_HINTS'],
+    ['Completion-based unlock',   '_unlockedStepIdx'],
+    ['Results context panel',     '_resultsPanel'],
+    ['No orders warning',         'No orders placed yet'],
+    ['Bottom submit CTA',         'Submit & Get AI Feedback'],
+    ['Null guard: renderOrders',  'S.labOrders     = S.labOrders     ||'],
+    ['Null guard: renderAutoFb',  'if (!window.S || !S.currentUser)'],
+    ['Case data context in AI',   '_caseCtxStr'],
+    ['STEMI EXPECTED terms',      "cc_terms: [\"chest pain\""],
+    ['Anthropic API call',        'api.anthropic.com/v1/messages'],
+    ['ddx-checkpoints.js loaded', 'ddx-checkpoints.js'],
+
+    ['FH/SH DDx prompt',          'Form Initial DDx'],
+    ['Done interviewing CTA',     'Done with the interview'],
+  ];
+
+  // Additional direct checks
+  const expectedBlock = emr.slice(emr.indexOf('const EXPECTED = {'), emr.indexOf('window.EXPECTED = EXPECTED'));
+  if (!expectedBlock.includes('follow-up')) { P(emrPath,'EXPECTED: no clinic terms'); console.log('  ✓ EXPECTED: no clinic patient terms'); }
+  else { F(emrPath,'EXPECTED still has clinic terms'); console.log('  ✗ EXPECTED has clinic terms'); }
+  if (!emr.includes('RDXGuide.renderNudgeStrip()')) { P(emrPath,'Nudge strip not called in render'); console.log('  ✓ Nudge strip not called in render'); }
+  else { F(emrPath,'Nudge strip still called in render'); console.log('  ✗ Nudge strip still in render'); }
+
+  checks.forEach(([label, search]) => {
+    const isNegative = search.includes(' not in emr');
+    const actualSearch = isNegative ? search.replace(' not in emr','') : search;
+    const found = emr.includes(actualSearch);
+    const ok = isNegative ? !found : found;
+    if (ok) { P(emrPath,label); console.log('  ✓ '+label); }
+    else { F(emrPath,label+(isNegative?' still present':' MISSING')); console.log('  ✗ '+label); }
+  });
+
+  // Size check — warn if unreasonably large
+  const sizeKB = Math.round(fs.statSync(emrPath).size/1024);
+  if (sizeKB > 2000) W(emrPath,'very large: '+sizeKB+'KB — consider splitting');
+  else P(emrPath,'size OK: '+sizeKB+'KB'); 
+  console.log('  ℹ size: '+sizeKB+'KB');
+}
+
+// ── 4. EMR case data spot checks ─────────────────────────────────────────
+console.log('\n[4] Key EMR cases validate');
+const KEY_CASES = ['stemi-v1','sepsisseptic-shock','pe-v1','acute-aortic-dissection','chf-exacerbation'];
+KEY_CASES.forEach(cid => {
+  const fp = path.join(root,'emr-data',cid+'.js');
+  if (!fs.existsSync(fp)) { W(fp,'case file missing: '+cid); return; }
+  global.EMR_DATA = undefined; global.window = global;
+  try {
+    eval(fs.readFileSync(fp,'utf8'));
+    const d = global.EMR_DATA;
+    if (!d) { F(fp,'EMR_DATA not defined'); return; }
+    const issues = [];
+    if (!d.patient?.chiefComplaint) issues.push('no chiefComplaint');
+    if (!d.meta?.diagnosis)         issues.push('no meta.diagnosis');
+    if (!d.vitals?.length)          issues.push('no vitals');
+    if (!d.guided?.supported)       issues.push('guided not supported');
+    if (issues.length) { W(fp,cid+': '+issues.join(', ')); console.log('  🟡 '+cid+' — '+issues.join(', ')); }
+    else { P(fp,cid+' OK'); console.log('  ✓ '+cid); }
+  } catch(e) { F(fp,cid+' parse error: '+e.message); }
+});
+
+// ── 5. node-test.js passes ───────────────────────────────────────────────
+console.log('\n[5] Core unit tests (node-test.js)');
+const nodeTestPath = path.join(root,'node-test.js');
+if (fs.existsSync(nodeTestPath)) {
+  try {
+    const result = require('child_process').execSync('node "'+nodeTestPath+'"',{stdio:'pipe',timeout:10000});
+    const out = result.toString();
+    const m = out.match(/TOTAL: (\d+) pass, (\d+) fail/);
+    if (m && parseInt(m[2]) === 0) {
+      P(nodeTestPath,'unit tests: '+m[1]+'/'+m[1]+' pass');
+      console.log('  ✓ '+m[1]+'/'+m[1]+' unit tests pass');
+    } else {
+      F(nodeTestPath,'unit tests failing: '+(m?m[0]:'unknown result'));
+    }
+  } catch(e) { F(nodeTestPath,'unit test runner failed'); }
+} else { W(nodeTestPath,'node-test.js not found'); }
+
+// ── Summary ───────────────────────────────────────────────────────────────
+console.log('\n'+'='.repeat(55));
+console.log('PLATFORM AUDIT: '+pass+' pass, '+warn+' warn, '+fail+' fail');
+if (fail) { console.log('\n🔴 FAILURES:'); FAILS.forEach(f=>console.log('  '+f)); }
+if (warn) { console.log('\n🟡 WARNINGS:'); WARNS.forEach(w=>console.log('  '+w)); }
+process.exit(fail > 0 ? 1 : 0);
