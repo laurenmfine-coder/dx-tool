@@ -138,6 +138,79 @@ if (fs.existsSync(nodeTestPath)) {
   } catch(e) { F(nodeTestPath,'unit test runner failed'); }
 } else { W(nodeTestPath,'node-test.js not found'); }
 
+// ── 6. Opaque case-ID token system ───────────────────────────────────────
+console.log('\n[6] Token system (case-tokens.js)');
+const crypto = require('crypto');
+const tokensPath = path.join(root,'emr-data','case-tokens.js');
+const crtPath    = path.join(root,'emr-data','crt-index.js');
+if (!fs.existsSync(tokensPath)) {
+  F(tokensPath,'emr-data/case-tokens.js missing');
+} else {
+  try {
+    const tokSrc  = fs.readFileSync(tokensPath,'utf8');
+    const tokData = JSON.parse(tokSrc.match(/window\.RDX_CASE_TOKENS\s*=\s*(\{[\s\S]+\});/)[1]);
+    const s2t = tokData.slugToToken, t2s = tokData.tokenToSlug;
+    const slugs = Object.keys(s2t), tokens = Object.values(s2t);
+
+    // a. Collision-free
+    if (new Set(tokens).size !== tokens.length)
+      F(tokensPath,'token collisions detected'); 
+    else { P(tokensPath,'no collisions'); console.log('  ✓ no collisions ('+slugs.length+' tokens)'); }
+
+    // b. Bidirectional consistency
+    const bad = slugs.filter(s => t2s[s2t[s]] !== s);
+    if (bad.length) F(tokensPath,'bidirectional mismatch: '+bad.slice(0,3).join(', '));
+    else { P(tokensPath,'bidirectional OK'); console.log('  ✓ bidirectional maps consistent'); }
+
+    // c. All CRT slugs have tokens
+    if (fs.existsSync(crtPath)) {
+      const crtData = JSON.parse(fs.readFileSync(crtPath,'utf8')
+        .match(/window\.CRT_INDEX\s*=\s*(\{[\s\S]+\});/)[1]);
+      const missing = Object.keys(crtData).filter(s => !s2t[s]);
+      if (missing.length)
+        F(tokensPath,'CRT slugs missing tokens: '+missing.slice(0,5).join(', '));
+      else { P(tokensPath,'all CRT slugs tokenised'); console.log('  ✓ all '+Object.keys(crtData).length+' CRT slugs have tokens'); }
+    }
+
+    // d. Token format correct (4-dash-4 hex)
+    const malformed = tokens.filter(t => !/^[a-f0-9]{4}-[a-f0-9]{4}$/.test(t));
+    if (malformed.length) F(tokensPath,'malformed tokens: '+malformed.slice(0,3).join(', '));
+    else { P(tokensPath,'token format OK'); console.log('  ✓ all tokens 4-dash-4 hex format'); }
+
+    // e. Determinism spot-check (10 slugs)
+    const SALT = 'rdx-v1-2026';
+    function rederive(slug){ const h=crypto.createHmac('sha256',SALT).update(slug).digest('hex'); return h.slice(0,4)+'-'+h.slice(4,8); }
+    const sample = slugs.slice(0,5).concat(slugs.slice(-5));
+    const driftSlugs = sample.filter(s => rederive(s) !== s2t[s]);
+    if (driftSlugs.length) F(tokensPath,'token drift (salt changed?): '+driftSlugs.join(', '));
+    else { P(tokensPath,'tokens deterministic'); console.log('  ✓ determinism check passed (10 spot samples)'); }
+
+    // f. No unguarded ?case= leaks in key entry-point files
+    const entryPoints = ['virtual-emr.html','browse.html','simulation-engine.html',
+      'casedx.html','welcome.html','index.html','crt-hub.html','dashboard.html'];
+    let leakCount = 0;
+    for (const ep of entryPoints) {
+      const epPath = path.join(root,ep);
+      if (!fs.existsSync(epPath)) continue;
+      const epSrc = fs.readFileSync(epPath,'utf8');
+      // An unguarded leak = ?case= present on a line that has no RDX_CASE_TOKENS
+      // and is not a fallback ternary branch and is not the resolver itself
+      const lines = epSrc.split('\n');
+      for (const line of lines) {
+        if (!line.includes('virtual-emr.html') || !line.includes('?case=')) continue;
+        if (line.includes('RDX_CASE_TOKENS')) continue;  // guarded
+        if (line.includes("'?case='") || line.includes('"?case="')) continue; // string literal / ternary rhs
+        if (line.includes('defaultCase') || line.includes('CASE_ID')) continue; // internal resolver
+        if (line.includes('return=virtual-emr')) continue; // return-URL param
+        leakCount++;
+        W(epPath, ep+': possible unguarded ?case= — '+line.trim().slice(0,80));
+      }
+    }
+    if (!leakCount) { P(tokensPath,'no unguarded ?case= leaks'); console.log('  ✓ no unguarded ?case= leaks in entry-point files'); }
+
+  } catch(e) { F(tokensPath,'token audit error: '+e.message); }
+}
+
 // ── Summary ───────────────────────────────────────────────────────────────
 console.log('\n'+'='.repeat(55));
 console.log('PLATFORM AUDIT: '+pass+' pass, '+warn+' warn, '+fail+' fail');
