@@ -2155,6 +2155,10 @@ function loadCaseData(cb) {
       };
     }
     PATIENT = d.patient;
+    // Gen1 case fallback: derive chiefComplaint from meta.presentation if missing
+    if (PATIENT && !PATIENT.chiefComplaint && d.meta && d.meta.presentation) {
+      PATIENT.chiefComplaint = d.meta.presentation;
+    }
     if (PATIENT && PATIENT.name) {
       document.title = PATIENT.name + ' — Virtual EMR | ReasonDx';
     }
