@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Fernandez",
-    "patientHPI": "The pain in the front of my right shin is absolutely unbearable - it feels like someone is crushing my leg and it's getting worse by the hour.",
+    "patientHPI": "The pain in the front of my right shin is severe and getting worse by the hour — it feels like intense pressure building up inside my leg, and nothing I do makes it better.",
     "dob": "06/15/2002",
     "age": "24",
     "sex": "Male",
@@ -73,7 +73,7 @@ window.EMR_DATA = {
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
       "cc": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
-      "hpi": "Mateo Fernandez is a 24-year-old male presenting with the pain in my shin is unbearable right leg — anterior compartment (anterior shin). Past medical history includes None — healthy 26-year-old. See chart for full details.",
+      "hpi": "Mateo Fernandez is a 24-year-old male presenting with severe right shin pain. Past medical history includes None — healthy 26-year-old. See chart for full details.",
       "exam": "See physical examination documentation.",
       "assessment": "Acute Compartment Syndrome (Tibial Fracture) — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
@@ -331,8 +331,8 @@ window.EMR_DATA = {
     ],
     "patientResponses": {
       "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started The pain in the front of my right shin is absolutely unbearable - it feels like .'",
-      "character": "'It's the pain in my shin is unbearable right leg — anterior compartment (anterior shin) — it's been bothering me quite a bit.'",
+      "onset": "The pain started a few hours after my fall and cast, and it's been getting worse by the hour.",
+      "character": "A deep, intense pressure in my shin — it feels like it's building up inside.",
       "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
       "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
       "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",

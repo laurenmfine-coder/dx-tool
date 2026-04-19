@@ -96,7 +96,7 @@ window.EMR_DATA = {
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
       "cc": "Sudden-onset pleuritic chest pain and dyspnea",
-      "hpi": "Christina Park is a 42-year-old female presenting with sudden-onset pleuritic chest pain and dyspnea. Past medical history includes Oral contraceptive use, Recent long-haul flight (12 hours), BMI 32. See chart for full details.",
+      "hpi": "Christina Park is a 42-year-old female presenting with shortness of breath. Past medical history includes Oral contraceptive use, Recent long-haul flight (12 hours), BMI 32. See chart for full details.",
       "exam": "See physical examination documentation.",
       "assessment": "Pulmonary Embolism — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."

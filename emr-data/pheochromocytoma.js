@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Carlos Medina",
-  "patientHPI": "These episodes have been getting much worse over the past few months - they used to happen maybe once or twice a month, but now it's 3-4 times a week. When they hit, I get this crushing headache, I'm drenched in sweat, my heart pounds like crazy, my chest feels tight, and I feel like I'm going to die - each one lasts about 15 minutes and leaves me completely drained.",
+    "patientHPI": "These episodes have been getting much worse over the past few months — they used to happen maybe once or twice a month, but now it's 3-4 times a week. When they hit, I get this pounding headache, I'm drenched in sweat, my heart pounds like crazy, my chest feels tight, and I feel like I'm going to die — each one lasts about 15 minutes and leaves me completely drained.",
     "dob": "08/09/1979",
     "age": 45,
     "sex": "Male",
@@ -205,46 +205,166 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "L" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "10.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "30", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "30",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "PLASMA FREE METANEPHRINES",
           "results": [
-            { "test": "Normetanephrine, Plasma", "value": "892", "unit": "pg/mL", "range": "<148", "flag": "H" },
-            { "test": "Metanephrine, Plasma", "value": "418", "unit": "pg/mL", "range": "<57", "flag": "H" }
+            {
+              "test": "Normetanephrine, Plasma",
+              "value": "892",
+              "unit": "pg/mL",
+              "range": "<148",
+              "flag": "H"
+            },
+            {
+              "test": "Metanephrine, Plasma",
+              "value": "418",
+              "unit": "pg/mL",
+              "range": "<57",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "THYROID PANEL",
           "results": [
-            { "test": "TSH", "value": "1.8", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "1.8",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ALDOSTERONE / RENIN",
           "results": [
-            { "test": "Aldosterone", "value": "8", "unit": "ng/dL", "range": "1-16", "flag": "" },
-            { "test": "Plasma Renin Activity", "value": "2.4", "unit": "ng/mL/hr", "range": "0.25-5.82", "flag": "" },
-            { "test": "Aldo/PRA Ratio", "value": "3.3", "unit": "", "range": "<30", "flag": "" }
+            {
+              "test": "Aldosterone",
+              "value": "8",
+              "unit": "ng/dL",
+              "range": "1-16",
+              "flag": ""
+            },
+            {
+              "test": "Plasma Renin Activity",
+              "value": "2.4",
+              "unit": "ng/mL/hr",
+              "range": "0.25-5.82",
+              "flag": ""
+            },
+            {
+              "test": "Aldo/PRA Ratio",
+              "value": "3.3",
+              "unit": "",
+              "range": "<30",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "9.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "16.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "50.2", "unit": "%", "range": "38.3-48.6", "flag": "H" },
-            { "test": "Platelet Count", "value": "242", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "9.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "16.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "50.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "H"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "242",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -321,15 +441,42 @@ window.EMR_DATA = {
     "Maternal uncle: Died suddenly at age 44 (cause unknown)"
   ],
   "socialHistory": [
-    ["Occupation", "Commercial real estate broker — high-stress"],
-    ["Marital", "Married — 18 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 2-3 drinks/week"],
-    ["Drugs", "Denies; no energy drinks or stimulants"],
-    ["Exercise", "Was exercising 4x/week but has reduced due to episodes provoked by exertion"],
-    ["Housing", "Lives with wife and 2 children in single-family home"],
-    ["Safety", "Denies concerns; wears seatbelt"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Commercial real estate broker — high-stress"
+    ],
+    [
+      "Marital",
+      "Married — 18 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies; no energy drinks or stimulants"
+    ],
+    [
+      "Exercise",
+      "Was exercising 4x/week but has reduced due to episodes provoked by exertion"
+    ],
+    [
+      "Housing",
+      "Lives with wife and 2 children in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies concerns; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "pheochromocytoma",
@@ -342,73 +489,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Carlos Medina is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did endocrine emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did endocrine emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started These episodes have been getting much worse over the past few months - they used.'",
-        "character": "'It's endocrine emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Pheochromocytoma.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 40mg daily; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Escitalopram 10mg daily; Sumatriptan 100mg PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Hypertension, T2DM, alive at 70  Mother: Thyroid nodule (benign), alive at 68  Brother: MEN2A syndrome (diagnosed age 38 \u2014 medullary thyroid cancer + pheochromocytoma), alive at 48",
-        "social": "Occupation: Commercial real estate broker \u2014 high-stress  Marital: Married \u2014 18 years  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 drinks/week  Drugs: Denies; no energy drinks or stimulants"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started These episodes have been getting much worse over the past few months - they used.'",
+      "character": "'It's endocrine emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Pheochromocytoma.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Lisinopril 40mg daily; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Escitalopram 10mg daily; Sumatriptan 100mg PRN.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Father: Hypertension, T2DM, alive at 70  Mother: Thyroid nodule (benign), alive at 68  Brother: MEN2A syndrome (diagnosed age 38 — medullary thyroid cancer + pheochromocytoma), alive at 48",
+      "social": "Occupation: Commercial real estate broker — high-stress  Marital: Married — 18 years  Tobacco: Never smoker  Alcohol: Social — 2-3 drinks/week  Drugs: Denies; no energy drinks or stimulants"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Pheochromocytoma. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Pheochromocytoma (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Pheochromocytoma (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Pheochromocytoma, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Pheochromocytoma, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Pheochromocytoma based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Pheochromocytoma, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Pheochromocytoma, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Pheochromocytoma based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Carlos Medina's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Pheochromocytoma. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Carlos Medina's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Pheochromocytoma. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Raymond Foster",
-    "patientHPI": "I was just sitting at home watching TV when suddenly I felt this horrible ripping pain in my chest that shot straight through to my back. It was the worst pain I've ever felt in my life - like someone was tearing me apart from the inside. I've never experienced anything like this before and I knew something was terribly wrong.",
+    "patientHPI": "I was just sitting at home watching TV when suddenly I felt this horrible sharp pain in my chest that shot straight through to my back. I've never experienced anything like this before and I knew something was terribly wrong.",
     "dob": "02/18/1959",
     "age": "67",
     "sex": "Male",
@@ -87,7 +87,7 @@ window.EMR_DATA = {
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
       "cc": "Sudden tearing chest pain radiating to back",
-      "hpi": "Raymond Foster is a 67-year-old male presenting with sudden tearing chest pain radiating to back. Past medical history includes Hypertension (poorly controlled), Marfan habitus, Bicuspid aortic valve. See chart for full details.",
+      "hpi": "Raymond Foster is a 67-year-old male presenting with abrupt onset chest pain. Past medical history includes Hypertension (poorly controlled), Marfan habitus, Bicuspid aortic valve. See chart for full details.",
       "exam": "See physical examination documentation.",
       "assessment": "Aortic Dissection — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."

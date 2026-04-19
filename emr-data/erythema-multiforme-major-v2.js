@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Kevin Park",
-  "patientHPI": "I keep getting these weird rashes that look like bullseyes on my hands and arms, and my mouth gets really sore with painful sores. This is the third time in a year, and it always seems to happen about a week after I get a cold sore on my lip. The rash spreads and my eyes get red and irritated too.",
+      "patientHPI": "I keep getting these weird rashes that look like bullseyes on my hands and arms, and my mouth gets really sore with painful sores. This is the third time in a year, and it always seems to happen about a week after I get a cold sore on my lip. The rash spreads and my eyes get red and irritated too.",
       "dob": "06/16/2006",
       "age": "20",
       "sex": "Male",
@@ -855,7 +855,7 @@ window.EMR_DATA = {
       "date": "03/02/2026",
       "provider": "Dr. Attending",
       "cc": "20yo with targetoid rash and oral erosions — 3rd episode in 12 months, always preceded by cold sore",
-      "hpi": "20M college student with 3rd episode of targetoid rash + oral erosions in 12 months. Each episode preceded by cold sore 7-10 days prior. Classic presentation: target lesions on extremities, oral mucosal erosions, mild conjunctival injection. HSV-triggered EM major. KEY: This is NOT SJS/TEN — EM and SJS are different diseases. EM: targetoid with mucosal involvement, usually HSV-triggered, self-limited. SJS: widespread detachment, usually drug-triggered, potentially fatal. He should have been started on HSV suppression after the 2nd episode — daily valacyclovir would prevent both HSV outbreaks and subsequent EM.",
+      "hpi": "20M college student with 3rd episode of ringed rash + oral erosions in 12 months. Each episode preceded by cold sore 7-10 days prior. Presentation: round rings on extremities with central dusky color, oral mucosal erosions, mild conjunctival injection. HSV-triggered. KEY: This is NOT SJS/TEN — distinction matters for management.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -997,93 +997,93 @@ window.EMR_DATA = {
       "School",
       "College junior — missing exams during flares"
     ]
-  ]
-,"references":[
-  {
-    "id": "EM-HSV-Prevention",
-    "title": "Erythema multiforme: recognition, treatment, and prevention",
-    "authors": "Sokumbi O, Wetter DA.",
-    "journal": "Cleve Clin J Med",
-    "year": 2012,
-    "doi": "10.3949/ccjm.79a.11118",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/22473726/",
-    "openAccess": true,
-    "validates": [
-      "HSV triggers >70% recurrent EM",
-      "Valacyclovir 500mg daily prevents recurrence",
-      "EM vs SJS = different diseases"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "EM-HSV-Prevention",
+      "title": "Erythema multiforme: recognition, treatment, and prevention",
+      "authors": "Sokumbi O, Wetter DA.",
+      "journal": "Cleve Clin J Med",
+      "year": 2012,
+      "doi": "10.3949/ccjm.79a.11118",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22473726/",
+      "openAccess": true,
+      "validates": [
+        "HSV triggers >70% recurrent EM",
+        "Valacyclovir 500mg daily prevents recurrence",
+        "EM vs SJS = different diseases"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
     "patientPersona": "Kevin Park is alert and cooperative, clearly concerned but provides a clear history.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your symptoms start and how?",
+      "Describe the main symptom — location, character, severity.",
+      "What makes it worse? What makes it better?",
+      "Any other symptoms you've noticed?",
+      "Any prior similar episodes?",
+      "Tell me about your medical history.",
+      "What medications are you currently taking?",
+      "Any medication allergies?",
+      "Relevant family history?",
+      "Tell me about your lifestyle."
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Valacyclovir; Prednisone; Magic mouthwash.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Context: Recurrent EM from recurrent HSV \u2014 3rd episode in 12 months  Trigger: Every EM episode preceded by cold sore outbreak  Issue: Not on HSV suppression \u2014 EM could be prevented with daily valacyclovir  School: College junior \u2014 missing exams during flares"
+      "default": "He pauses. 'Can you clarify what you mean?'",
+      "onset": "'Gradually — over the past several days.'",
+      "character": "'The symptom has been significant and affecting my ability to function.'",
+      "location": "'The main problem is in the expected area for my condition.'",
+      "severity": "'Six or seven out of ten.'",
+      "aggravating": "'Activity and movement worsen it.'",
+      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+      "associated": "'Some associated symptoms consistent with this condition.'",
+      "denies": "'No fever, chills, or unexplained weight loss.'",
+      "history": "'I have not had exactly this before.'",
+      "medications": "'I take Valacyclovir; Prednisone; Magic mouthwash.'",
+      "allergies": "'My allergies: NKDA.'",
+      "family": "Non-contributory",
+      "social": "Context: Recurrent EM from recurrent HSV — 3rd episode in 12 months  Trigger: Every EM episode preceded by cold sore outbreak  Issue: Not on HSV suppression — EM could be prevented with daily valacyclovir  School: College junior — missing exams during flares"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance",
+      "Vital signs",
+      "Cardiovascular",
+      "Pulmonary",
+      "Abdominal",
+      "Extremities",
+      "Skin",
+      "Targeted exam"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance": "Finding consistent with this condition.",
+      "Vital signs": "Finding consistent with this condition.",
+      "Cardiovascular": "Finding consistent with this condition.",
+      "Pulmonary": "Finding consistent with this condition.",
+      "Abdominal": "Finding consistent with this condition.",
+      "Extremities": "Finding consistent with this condition.",
+      "Skin": "Finding consistent with this condition.",
+      "Targeted exam": "Finding consistent with this condition."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "this condition (correct)",
+      "Most likely alternative",
+      "Third differential",
+      "Must-not-miss 1",
+      "Must-not-miss 2",
+      "Common mimic 1",
+      "Common mimic 2"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Consider the full differential for this condition.",
+      "prematureClosure": "Complete your workup before narrowing focus.",
+      "availabilityBias": "Apply systematic clinical reasoning."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Kevin Park: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before interviewing Kevin Park: what does the chart suggest? Top 3 diagnoses?",
+      "phase5": "After history and exam: how has your differential changed?",
+      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
     }
-}
+  }
 };

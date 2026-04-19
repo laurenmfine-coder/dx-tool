@@ -458,7 +458,7 @@ window.EMR_DATA = {
     "patientResponses": {
       "default": "'Just — just a second.' (grimaces) 'Okay. Go ahead.'",
       "onset": "'Exactly 45 minutes ago. I was in my garage, not doing anything strenuous. Then it hit me like nothing I've ever felt. Like an explosion in my chest.'",
-      "character": "'Tearing. That's the word. Like someone is tearing my chest apart from the inside. I've never felt anything like it. I've had kidney stones — this is worse.'",
+      "character": "Sharp and deep. Like nothing I've ever felt. I've had kidney stones — this is worse. It feels like it's inside, not on the surface.",
       "location": "'Started right here in the front — center of the chest. Then immediately — within seconds — it moved to between my shoulder blades. Both places at once now.'",
       "severity": "'Ten out of ten. Absolute ten. I almost called 911 because I couldn't walk.'",
       "aggravating": "'Just existing makes it worse. Any movement. Even breathing deeply.'",

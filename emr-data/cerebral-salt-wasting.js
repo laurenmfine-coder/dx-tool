@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Victor Ramírez",
-  "patientHPI": "I was working out at the gym when suddenly I got hit with the worst headache of my life - like someone took a baseball bat to my skull. I threw up right there and my wife said I passed out for a few seconds. The light hurts my eyes and my neck feels really stiff.",
+    "patientHPI": "I was working out at the gym when suddenly I got hit with a severe headache — it came on in seconds. I threw up right there and my wife said I passed out for a few seconds. The light hurts my eyes and my neck feels really stiff.",
     "dob": "09/15/1972",
     "age": 52,
     "sex": "Male",
@@ -107,42 +107,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "02/24/2025",
-        "bp": "98/62",
-        "hr": 104,
-        "rr": 18,
-        "temp": "98.8\u00b0F",
-        "spo2": "97%",
-        "wt": "172 lbs",
-        "ht": "5'8\"",
-        "bmi": 26.1,
-        "setting": "ED"
+      "date": "02/24/2025",
+      "bp": "98/62",
+      "hr": 104,
+      "rr": 18,
+      "temp": "98.8°F",
+      "spo2": "97%",
+      "wt": "172 lbs",
+      "ht": "5'8\"",
+      "bmi": 26.1,
+      "setting": "ED"
     },
     {
-        "date": "02/19/2025",
-        "bp": "128/78",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "99%",
-        "wt": "178 lbs",
-        "ht": "5'8\"",
-        "bmi": 27.1,
-        "setting": "Rehab Facility"
+      "date": "02/19/2025",
+      "bp": "128/78",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "178 lbs",
+      "ht": "5'8\"",
+      "bmi": 27.1,
+      "setting": "Rehab Facility"
     },
     {
-        "date": "02/14/2025",
-        "bp": "192/108",
-        "hr": 88,
-        "rr": 20,
-        "temp": "99.0\u00b0F",
-        "spo2": "98%",
-        "wt": "182 lbs",
-        "ht": "5'8\"",
-        "bmi": 27.7,
-        "setting": "ED (initial SAH presentation)"
+      "date": "02/14/2025",
+      "bp": "192/108",
+      "hr": 88,
+      "rr": 20,
+      "temp": "99.0°F",
+      "spo2": "98%",
+      "wt": "182 lbs",
+      "ht": "5'8\"",
+      "bmi": 27.7,
+      "setting": "ED (initial SAH presentation)"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -182,38 +182,140 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "128", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "Sodium", "value": "118", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "3.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "L" },
-            { "test": "Chloride", "value": "86", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Uric Acid", "value": "2.1", "unit": "mg/dL", "range": "3.5-7.2", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "118",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "86",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Uric Acid",
+              "value": "2.1",
+              "unit": "mg/dL",
+              "range": "3.5-7.2",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "SERUM OSMOLALITY",
           "results": [
-            { "test": "Serum Osmolality", "value": "248", "unit": "mOsm/kg", "range": "275-295", "flag": "L" }
+            {
+              "test": "Serum Osmolality",
+              "value": "248",
+              "unit": "mOsm/kg",
+              "range": "275-295",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "URINE STUDIES",
           "results": [
-            { "test": "Urine Sodium", "value": "148", "unit": "mEq/L", "range": "<20 (hypovolemic)", "flag": "H" },
-            { "test": "Urine Osmolality", "value": "420", "unit": "mOsm/kg", "range": "300-900", "flag": "" },
-            { "test": "Urine Output (24h estimate)", "value": "4.2", "unit": "L/day", "range": "0.8-2.0", "flag": "H" },
-            { "test": "Urine Specific Gravity", "value": "1.018", "unit": "", "range": "1.005-1.030", "flag": "" }
+            {
+              "test": "Urine Sodium",
+              "value": "148",
+              "unit": "mEq/L",
+              "range": "<20 (hypovolemic)",
+              "flag": "H"
+            },
+            {
+              "test": "Urine Osmolality",
+              "value": "420",
+              "unit": "mOsm/kg",
+              "range": "300-900",
+              "flag": ""
+            },
+            {
+              "test": "Urine Output (24h estimate)",
+              "value": "4.2",
+              "unit": "L/day",
+              "range": "0.8-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "Urine Specific Gravity",
+              "value": "1.018",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "9.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "46.2", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "212", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "9.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "46.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "212",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -238,10 +340,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL862T", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Moderna, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV891K", "mfr": "Moderna" },
-    { "vaccine": "Tdap (Adacel)", "date": "09/2021", "site": "Left deltoid IM", "lot": "TA194R", "mfr": "Sanofi" },
-    { "vaccine": "Shingrix (1st dose)", "date": "11/2023", "site": "Left deltoid IM", "lot": "SH198P", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL862T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Moderna, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV891K",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "09/2021",
+      "site": "Left deltoid IM",
+      "lot": "TA194R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "Shingrix (1st dose)",
+      "date": "11/2023",
+      "site": "Left deltoid IM",
+      "lot": "SH198P",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother (age 78): Hypertension, stroke at age 72 (recovered)",
@@ -250,15 +376,42 @@ window.EMR_DATA = {
     "Family history SIGNIFICANT for cerebral aneurysms (father died of rupture)"
   ],
   "socialHistory": [
-    ["Occupation", "Electrician — union member; currently on medical leave"],
-    ["Marital", "Married x 25 years; wife Elena is primary support"],
-    ["Tobacco", "Former — quit 5 years ago; previously 1 PPD x 20 years"],
-    ["Alcohol", "Social — 3-4 beers/week; abstaining since hospitalization"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Previously active — gym 3x/week; currently in rehab"],
-    ["Housing", "Single-family home with wife and teenage daughter"],
-    ["Safety", "No firearms"],
-    ["Advance Directive", "Healthcare proxy: Elena Ramírez (wife)"]
+    [
+      "Occupation",
+      "Electrician — union member; currently on medical leave"
+    ],
+    [
+      "Marital",
+      "Married x 25 years; wife Elena is primary support"
+    ],
+    [
+      "Tobacco",
+      "Former — quit 5 years ago; previously 1 PPD x 20 years"
+    ],
+    [
+      "Alcohol",
+      "Social — 3-4 beers/week; abstaining since hospitalization"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Previously active — gym 3x/week; currently in rehab"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife and teenage daughter"
+    ],
+    [
+      "Safety",
+      "No firearms"
+    ],
+    [
+      "Advance Directive",
+      "Healthcare proxy: Elena Ramírez (wife)"
+    ]
   ],
   "meta": {
     "caseId": "cerebral-salt-wasting",
@@ -269,75 +422,75 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Victor Ram\u00edrez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Victor Ramírez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was working out at the gym when suddenly I got hit with the worst headache of .'",
-        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 10mg daily; Nimodipine 60mg Q4h; Levetiracetam 500mg BID; Atorvastatin 40mg QHS; Metformin 1000mg BID.'",
-        "allergies": "'My allergies are Phenytoin.'",
-        "family": "Mother (age 78): Hypertension, stroke at age 72 (recovered)  Father: Deceased at 65 \u2014 ruptured cerebral aneurysm  Brother (age 49): Hypertension, pre-diabetes",
-        "social": "Occupation: Electrician \u2014 union member; currently on medical leave  Marital: Married x 25 years; wife Elena is primary support  Tobacco: Former \u2014 quit 5 years ago; previously 1 PPD x 20 years  Alcohol: Social \u2014 3-4 beers/week; abstaining since hospitalization  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "About ten days ago I had a sudden severe headache at the gym — I was admitted and they found bleeding. Now I'm back in the hospital because I've been getting weaker and more confused.",
+      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Amlodipine 10mg daily; Nimodipine 60mg Q4h; Levetiracetam 500mg BID; Atorvastatin 40mg QHS; Metformin 1000mg BID.'",
+      "allergies": "'My allergies are Phenytoin.'",
+      "family": "Mother (age 78): Hypertension, stroke at age 72 (recovered)  Father: Deceased at 65 — ruptured cerebral aneurysm  Brother (age 49): Hypertension, pre-diabetes",
+      "social": "Occupation: Electrician — union member; currently on medical leave  Marital: Married x 25 years; wife Elena is primary support  Tobacco: Former — quit 5 years ago; previously 1 PPD x 20 years  Alcohol: Social — 3-4 beers/week; abstaining since hospitalization  Drugs: Denies"
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Level of consciousness and GCS",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Sensory testing",
+      "Coordination and cerebellar testing",
+      "Gait assessment if applicable",
+      "Meningeal signs",
+      "Vital signs"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe."
+      "Level of consciousness and GCS": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Cranial nerve examination": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Motor strength testing": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Sensory testing": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Coordination and cerebellar testing": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Gait assessment if applicable": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Meningeal signs": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Victor Ram\u00edrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Cerebral Salt Wasting Syndrome \u2014 Post-SAH Day 10, Severe Hyponatremia (118 mEq/L) with Volume Depletion and Excessive Renal Sodium Loss. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Victor Ramírez's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Cerebral Salt Wasting Syndrome — Post-SAH Day 10, Severe Hyponatremia (118 mEq/L) with Volume Depletion and Excessive Renal Sodium Loss. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

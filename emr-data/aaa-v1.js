@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Jensen",
-    "patientHPI": "I was just sitting at home when this horrible tearing pain hit me right in my belly and shot straight through to my back - I've never felt anything like it, it's like someone is ripping me apart from the inside and I can barely stand it.",
+    "patientHPI": "I was just sitting at home when this awful pain hit me right in my belly and went straight through to my back — I've never felt anything like it, it's incredibly sharp and I can barely stand it.",
     "dob": "06/15/1954",
     "age": "72",
     "sex": "Male",
@@ -112,7 +112,7 @@ window.EMR_DATA = {
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
       "cc": "Tearing Belly and back, feels like it goes straight through",
-      "hpi": "Harold Jensen is a 72-year-old male presenting with tearing belly and back, feels like it goes straight through. Past medical history includes Hypertension, Known 4.5cm AAA, Hyperlipidemia, COPD. See chart for full details.",
+      "hpi": "Harold Jensen is a 72-year-old male presenting with sudden severe abdominal pain. Past medical history includes Hypertension, Known 4.5cm AAA, Hyperlipidemia, COPD. See chart for full details.",
       "exam": "See physical examination documentation.",
       "assessment": "Ruptured Abdominal Aortic Aneurysm — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
@@ -388,10 +388,10 @@ window.EMR_DATA = {
     ],
     "patientResponses": {
       "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I was just sitting at home when this horrible tearing pain hit me right in my be.'",
-      "character": "'It's tearing belly and back, feels like it goes straight through — it's been bothering me quite a bit.'",
+      "onset": "It came on suddenly about an hour ago while I was just sitting at home — nothing set it off, it just hit me.",
+      "character": "Sharp and deep — I feel it in my belly and in my back at the same time, like it goes all the way through.",
       "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "severity": "Nine out of ten. It's the worst pain I can remember.",
       "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
       "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
       "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",

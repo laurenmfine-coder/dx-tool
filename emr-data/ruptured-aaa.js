@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Kowalski",
-  "patientHPI": "I came in because I've been having this terrible tearing pain in my back and belly that started suddenly about an hour ago - it's the worst pain I've ever felt. I'm feeling dizzy and nauseous, and I'm really scared something is seriously wrong.",
+    "patientHPI": "I came in because I've been having terrible sharp pain in my back and belly that started suddenly about an hour ago — I'm feeling dizzy and nauseous, and I'm really scared something is seriously wrong.",
     "dob": "04/12/1953",
     "age": 72,
     "sex": "Male",
@@ -242,35 +242,149 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "104", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "eGFR", "value": "56", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "24", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "104",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "eGFR",
+              "value": "56",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "40.2", "unit": "%", "range": "38.0-50.0", "flag": "" },
-            { "test": "Platelet Count", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.2",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "168", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "72", "unit": "mg/dL", "range": "<100", "flag": "" },
-            { "test": "HDL Cholesterol", "value": "44", "unit": "mg/dL", "range": ">40", "flag": "" },
-            { "test": "Triglycerides", "value": "162", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "168",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "72",
+              "unit": "mg/dL",
+              "range": "<100",
+              "flag": ""
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "44",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "162",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -361,15 +475,42 @@ window.EMR_DATA = {
     "Sister: Hypertension, Type 2 Diabetes Mellitus, alive at 66"
   ],
   "socialHistory": [
-    ["Occupation", "Retired electrician (IBEW); retired 2018"],
-    ["Marital", "Married 48 years; wife Diane, age 70"],
-    ["Tobacco", "Former smoker — quit 2012; 40 pack-year history (1 PPD x 40 years)"],
-    ["Alcohol", "1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 15-20 min daily; limited by claudication"],
-    ["Housing", "Single-family home with wife"],
-    ["Safety", "Denies IPV; seatbelt always; fall risk screening negative"],
-    ["Advance Directive", "POLST on file — Full Code; HCP: wife Diane Kowalski"]
+    [
+      "Occupation",
+      "Retired electrician (IBEW); retired 2018"
+    ],
+    [
+      "Marital",
+      "Married 48 years; wife Diane, age 70"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2012; 40 pack-year history (1 PPD x 40 years)"
+    ],
+    [
+      "Alcohol",
+      "1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 15-20 min daily; limited by claudication"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always; fall risk screening negative"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code; HCP: wife Diane Kowalski"
+    ]
   ],
   "meta": {
     "caseId": "ruptured-aaa",
@@ -382,73 +523,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Robert Kowalski appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did abdominal pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did abdominal pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I came in because I've been having this terrible tearing pain in my back and bel.'",
-        "character": "'It's abdominal pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Ruptured Abdominal Aortic Aneurysm.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 10mg daily; Metoprolol Succinate 50mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Tiotropium 18mcg INH daily; Albuterol 90mcg INH PRN; Cilostazol 100mg BID.'",
-        "allergies": "'My allergies are ACE Inhibitors (Lisinopril), Iodine Contrast.'",
-        "family": "Father: AAA (surgical repair at age 70), MI at age 74 (deceased)  Mother: Hypertension, stroke at age 80 (deceased)  Brother: COPD, PAD, alive at 68",
-        "social": "Occupation: Retired electrician (IBEW); retired 2018  Marital: Married 48 years; wife Diane, age 70  Tobacco: Former smoker \u2014 quit 2012; 40 pack-year history (1 PPD x 40 years)  Alcohol: 1-2 beers on weekends  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "Suddenly, about an hour ago. I was just at home, not doing anything in particular, and then it hit.",
+      "character": "Sharp and deep — it's in my back and my belly at the same time.",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Ruptured Abdominal Aortic Aneurysm.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Amlodipine 10mg daily; Metoprolol Succinate 50mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Tiotropium 18mcg INH daily; Albuterol 90mcg INH PRN; Cilostazol 100mg BID.'",
+      "allergies": "'My allergies are ACE Inhibitors (Lisinopril), Iodine Contrast.'",
+      "family": "Father: AAA (surgical repair at age 70), MI at age 74 (deceased)  Mother: Hypertension, stroke at age 80 (deceased)  Brother: COPD, PAD, alive at 68",
+      "social": "Occupation: Retired electrician (IBEW); retired 2018  Marital: Married 48 years; wife Diane, age 70  Tobacco: Former smoker — quit 2012; 40 pack-year history (1 PPD x 40 years)  Alcohol: 1-2 beers on weekends  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Ruptured Abdominal Aortic Aneurysm. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Ruptured Abdominal Aortic Aneurysm (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Ruptured Abdominal Aortic Aneurysm (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ruptured Abdominal Aortic Aneurysm, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Ruptured Abdominal Aortic Aneurysm, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Ruptured Abdominal Aortic Aneurysm based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ruptured Abdominal Aortic Aneurysm, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Ruptured Abdominal Aortic Aneurysm, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Ruptured Abdominal Aortic Aneurysm based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Robert Kowalski's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Ruptured Abdominal Aortic Aneurysm. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Robert Kowalski's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Ruptured Abdominal Aortic Aneurysm. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

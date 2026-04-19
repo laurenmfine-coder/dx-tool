@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Talia Brennan",
-  "patientHPI": "I have these strange circular rashes on my hands and arms that look like targets, and my mouth is full of painful sores that make it hard to eat or drink. I had a cold sore on my lip about ten days ago, and now this is happening again like it did before.",
+      "patientHPI": "I have these strange circular rashes on my hands and arms that look like targets, and my mouth is full of painful sores that make it hard to eat or drink. I had a cold sore on my lip about ten days ago, and now this is happening again like it did before.",
       "dob": "01/13/2007",
       "age": "19",
       "sex": "Female",
@@ -914,7 +914,7 @@ window.EMR_DATA = {
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
       "cc": "Target lesions on hands, forearms with oral mucosal erosions",
-      "hpi": "Talia Brennan is a 19-year-old female presenting with target lesions on hands, forearms with oral mucosal erosions. Past medical history includes Recurrent herpes labialis, Recent cold sore 10 days ago. See chart for full details.",
+      "hpi": "Talia Brennan is a 19-year-old female presenting with a rash on her hands and forearms with mouth sores. Past medical history includes Recurrent herpes labialis, Recent cold sore 10 days ago. See chart for full details.",
       "exam": "See physical examination documentation.",
       "assessment": "Erythema Multiforme Major — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
@@ -1081,25 +1081,24 @@ window.EMR_DATA = {
       "Tobacco",
       "Never"
     ]
-  ]
-,"references":[
-  {
-    "id": "EM-HSV-Prevention",
-    "title": "Erythema multiforme: recognition, treatment, and prevention",
-    "authors": "Sokumbi O, Wetter DA.",
-    "journal": "Cleve Clin J Med",
-    "year": 2012,
-    "doi": "10.3949/ccjm.79a.11118",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/22473726/",
-    "openAccess": true,
-    "validates": [
-      "HSV triggers >70% recurrent EM",
-      "Valacyclovir 500mg daily prevents recurrence",
-      "EM vs SJS = different diseases"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "EM-HSV-Prevention",
+      "title": "Erythema multiforme: recognition, treatment, and prevention",
+      "authors": "Sokumbi O, Wetter DA.",
+      "journal": "Cleve Clin J Med",
+      "year": 2012,
+      "doi": "10.3949/ccjm.79a.11118",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/22473726/",
+      "openAccess": true,
+      "validates": [
+        "HSV triggers >70% recurrent EM",
+        "Valacyclovir 500mg daily prevents recurrence",
+        "EM vs SJS = different diseases"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "EM major is caused by infections (HSV #1 in adults, Mycoplasma pneumoniae #1 in children), NOT drugs. This distinguishes it from SJS/TEN which is drug-caused. Classic target lesions (3 zones: pale dusky center, dark edematous ring, red periphery) are the hallmark — present in acral distribution (palms, soles, dorsal hands, face).",
@@ -1120,73 +1119,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Talia Brennan appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did target lesions on hands, forearms with oral mucosal erosions start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did target lesions on hands, forearms with oral mucosal erosions start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Talia Brennan is a 19-year-old female presenting with target lesions on hands, f.'",
-        "character": "'It's target lesions on hands, forearms with oral mucosal erosions \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Valacyclovir.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "HSV history: 3-4 outbreaks per year, last cold sore 10 days ago  Tobacco: Never"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "The spots on my hands appeared about a week ago, right after a cold sore cleared up, and then the mouth sores started.",
+      "character": "The spots are round with rings — a dark center with lighter circles around it. Mostly on my hands and forearms. My mouth is sore too.",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Valacyclovir.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Non-contributory",
+      "social": "HSV history: 3-4 outbreaks per year, last cold sore 10 days ago  Tobacco: Never"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Working diagnosis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Talia Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Talia Brennan's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jennifer Wu",
-    "patientHPI": "I was just sitting at my desk when suddenly I got hit with the most excruciating headache of my entire life - it felt like someone struck me with a baseball bat. It came on instantly and I've never experienced anything like this before, I'm terrified.",
+    "patientHPI": "I was just sitting at my desk when suddenly I got hit with an incredibly severe headache — it came on in seconds. I've never experienced anything like this before, I'm terrified.",
     "dob": "09/16/1984",
     "age": "42",
     "sex": "Female",
@@ -87,7 +87,7 @@ window.EMR_DATA = {
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
       "cc": "Worst headache of my life — sudden onset thunderclap",
-      "hpi": "Jennifer Wu is a 42-year-old female presenting with worst headache of my life — sudden onset thunderclap. Past medical history includes Hypertension, Smoker, Family history of aneurysms. See chart for full details.",
+      "hpi": "Jennifer Wu is a 42-year-old female presenting with sudden severe headache. Past medical history includes Hypertension, Smoker, Family history of aneurysms. See chart for full details.",
       "exam": "See physical examination documentation.",
       "assessment": "Subarachnoid Hemorrhage — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
