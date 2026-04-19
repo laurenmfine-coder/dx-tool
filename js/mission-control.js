@@ -8,15 +8,22 @@
 
   var TASKS_BY_SETTING = {
     ed: [
-      { id: 'review-vitals',   label: 'Review vitals',              group: 'review', autoTab: 'vitals',      autoTime: 5 },
-      { id: 'review-labs',     label: 'Review labs',                group: 'review', autoTab: 'labs',        autoTime: 3 },
-      { id: 'review-meds',     label: 'Review medications',         group: 'review', autoTab: 'medications', autoTime: 3 },
-      { id: 'review-allergies',label: 'Check allergies',            group: 'review', autoTab: 'allergies',   autoTime: 2 },
-      { id: 'review-history',  label: 'Review history',             group: 'review', autoTab: 'history',     autoTime: 3 },
-      { id: 'place-orders',    label: 'Place orders',               group: 'action', check: '_checkOrders'      },
-      { id: 'build-ddx',       label: 'Build differential diagnosis',group:'action', check: '_checkDdx'         },
-      { id: 'write-note',      label: 'Write documentation',        group: 'action', check: '_checkNote'        },
-      { id: 'submit',          label: 'Submit encounter',           group: 'action', check: '_checkSubmitted'   }
+      // Phase 1: Chart review
+      { id: 'review-vitals',    label: 'Review vitals',              group: 'review', autoTab: 'vitals',       autoTime: 5 },
+      { id: 'review-problems',  label: 'Review problem list',        group: 'review', autoTab: 'problems',     autoTime: 3 },
+      { id: 'review-meds',      label: 'Review medications',         group: 'review', autoTab: 'medications',  autoTime: 3 },
+      { id: 'review-allergies', label: 'Check allergies',            group: 'review', autoTab: 'allergies',    autoTime: 2 },
+      // Phase 2: Initial DDx before interview
+      { id: 'initial-ddx',      label: 'Form initial differential (before interview)', group: 'reason', check: '_checkInitialDdx' },
+      // Phase 3: Take the history
+      { id: 'interview-patient',label: 'Interview the patient',      group: 'reason', autoTab: 'interview',    autoTime: 5 },
+      // Phase 4: Revise DDx after history
+      { id: 'revised-ddx',      label: 'Revise differential after history',            group: 'reason', check: '_checkRevisedDdx'  },
+      // Phase 5: Orders (informed by DDx + history)
+      { id: 'place-orders',     label: 'Place targeted orders',      group: 'action', check: '_checkOrders'       },
+      // Phase 6: Documentation
+      { id: 'write-note',       label: 'Write H&P with Assessment & Plan', group: 'action', check: '_checkNote' },
+      { id: 'submit',           label: 'Submit encounter',           group: 'action', check: '_checkSubmitted'    }
     ],
     inpatient: [
       { id: 'read-handoff',  label: 'Receive ED handoff',                  group: 'review', autoTab: 'handoff',     autoTime: 5 },
@@ -73,49 +80,52 @@
   };
 
   // Context-aware guidance shown per tab inside the Help panel
+  // Context-aware guidance shown per tab inside the Help panel
+  // Reflects the correct clinical reasoning workflow:
+  // Chart review → Initial DDx → Interview → Revised DDx → Orders → Note → Submit
   var TAB_GUIDANCE = {
-    demographics: { icon:'\uD83D\uDC64', heading:'You\u2019re on: Patient Info',
-      body:'Note the age, sex, allergies, and contact details. Then check the Problem List to understand baseline health before looking at today\u2019s data.',
+    demographics: { icon:'👤', heading:'Step 1 — Patient Info',
+      body:'Note age, sex, setting, and allergies. This context shapes every diagnosis you consider. Then review the Problem List before opening any data.',
       nextLabel:'Next: Problem List', nextTab:'problems' },
-    problems: { icon:'\uD83D\uDCCB', heading:'You\u2019re on: Problem List',
-      body:'Review active and chronic conditions. How might each relate to the current chief complaint? Patterns between diagnoses are often the key.',
+    problems: { icon:'📋', heading:'Step 2 — Problem List',
+      body:'Review active and chronic conditions. Each one is a lens for interpreting today\'s presentation. How might HTN, DM, or prior diagnoses relate to the chief complaint?',
       nextLabel:'Next: Medications', nextTab:'medications' },
-    medications: { icon:'\uD83D\uDC8A', heading:'You\u2019re on: Medications',
-      body:'Review each current medication: dose, frequency, prescriber. Ask: interactions? Side effects explaining symptoms? In inpatient settings, reconcile each med.',
+    medications: { icon:'💊', heading:'Step 3 — Medications',
+      body:'Review dose, frequency, and prescriber for each med. Ask: could any medication cause or worsen today\'s symptoms? Any interactions with possible new treatments?',
       nextLabel:'Next: Vitals', nextTab:'vitals' },
-    allergies: { icon:'\u26A0\uFE0F', heading:'You\u2019re on: Allergies',
-      body:'Confirm allergy type and reaction before writing orders. Drug allergy vs. intolerance has different clinical implications.',
+    allergies: { icon:'⚠️', heading:'Review Allergies',
+      body:'Confirm allergy type and reaction severity before writing any orders. Drug allergy vs. intolerance has different clinical implications.',
       nextLabel:'Next: Vitals', nextTab:'vitals' },
-    vitals: { icon:'\uD83D\uDCCA', heading:'You\u2019re on: Vitals',
-      body:'Look for patterns across time, not just the current set. Tachycardia, hypotension, hypoxia, and fever each narrow or expand your differential.',
-      nextLabel:'Next: Visit History / HPI', nextTab:'visits' },
-    visits: { icon:'\uD83D\uDCDD', heading:'You\u2019re on: Visit History',
-      body:'This shows past visit notes. For the current encounter, get the HPI directly from the patient \u2014 use the Patient Interview tab to take the history yourself. Reviewing the chart first biases your reasoning.',
-      nextLabel:'Interview the patient \u2192', nextTab:'interview' },
-    interview: { icon:'\uD83D\uDCAC', heading:'You\u2019re on: Patient Interview',
-      body:'Take the history here \u2014 don\u2019t read it from the chart. Ask open-ended questions first, then clarify with OPQRST. Your differential should be forming before you open a single lab. Resist the data until you have a story.',
-      nextLabel:'Build your initial DDx \u2192', nextTab:'documentation' },
-    labs: { icon:'\uD83E\uDDEA', heading:'You\u2019re on: Labs',
-      body:'Compare results to your differential. Red = above range, blue = below. Ask: does this confirm, refute, or redirect your thinking?',
+    vitals: { icon:'📊', heading:'Step 4 — Vitals',
+      body:'Look at trends, not just the latest values. What does tachycardia with hypoxia tell you? What does improving BP after fluids tell you? Build your first impressions here.',
+      nextLabel:'Form your initial differential →', nextTab:'documentation' },
+    visits: { icon:'📝', heading:'Visit History — Context Only',
+      body:'This shows past notes and previous encounters. Use it to understand the patient\'s baseline — NOT as a substitute for taking the history yourself. Prior diagnoses can anchor your thinking — be aware of that bias.',
+      nextLabel:'Now interview the patient →', nextTab:'interview' },
+    interview: { icon:'💬', heading:'Step 5 — Take the History',
+      body:'This is where the HPI happens. Start open-ended: "Tell me what\'s going on." Then clarify: onset, quality, severity, radiation, timing, modifying factors, associated symptoms. Your differential should be actively forming as you listen.',
+      nextLabel:'Revise your differential →', nextTab:'documentation' },
+    labs: { icon:'🧪', heading:'Step 7 — Interpret Labs',
+      body:'Compare each result against your working differential — not against normal ranges in isolation. Ask: does this confirm my leading diagnosis? Refute it? Open a new branch? Order patterns are tracked.',
       nextLabel:'Next: Imaging', nextTab:'imaging' },
-    imaging: { icon:'\uD83E\uDE7B', heading:'You\u2019re on: Imaging',
-      body:'Read the impression first, then the report body. Consider how imaging confirms or changes your differential.',
-      nextLabel:'Next: Write your note', nextTab:'documentation' },
-    history: { icon:'\uD83D\uDCC2', heading:'You\u2019re on: Past Medical History',
-      body:'Social history (smoking, alcohol, travel, occupation) and family history often hold the key to atypical presentations.',
+    imaging: { icon:'🩻', heading:'Step 8 — Imaging',
+      body:'Read the impression first, then the full report. How does this change your differential? Does it confirm what you expected, or redirect you?',
+      nextLabel:'Now write your note →', nextTab:'documentation' },
+    history: { icon:'📂', heading:'Family & Social History',
+      body:'Social history — smoking, alcohol, occupation, travel, drugs — and family history often hold the key to atypical presentations and risk stratification.',
       nextLabel:'Next: Labs', nextTab:'labs' },
-    documentation: { icon:'\u270F\uFE0F', heading:'You\u2019re on: Documentation',
-      body:'Write your full clinical note. Include CC, HPI, Assessment and Plan. Note quality directly affects AI feedback depth \u2014 be specific and show your reasoning.',
-      nextLabel:'Submit for AI feedback', nextTab:'grading' },
-    grading: { icon:'\uD83C\uDFAF', heading:'You\u2019re on: Grading & Feedback',
-      body:'Click \u201cSubmit for AI Feedback\u201d to receive coaching on diagnostic accuracy, reasoning framework, documentation, cognitive bias patterns, and evidence-based management.',
+    documentation: { icon:'✏️', heading:'Step 6 / 9 — Documentation',
+      body:'First use: write your HPI and initial differential BEFORE ordering. Second use (after orders): complete your Assessment & Plan incorporating results. Show your reasoning — not just your conclusion.',
+      nextLabel:'Place targeted orders →', nextTab:'orders' },
+    orders: { icon:'📤', heading:'Step 7 — Place Orders',
+      body:'Order only what will change your management. Each order should be tied to a diagnostic question. Blind ordering without a differential is a pattern the AI tracks. Results will appear in Labs and Imaging after submission.',
+      nextLabel:'Review results →', nextTab:'labs' },
+    grading: { icon:'🎯', heading:'AI Feedback',
+      body:'Submit for AI coaching on diagnostic accuracy, reasoning framework, documentation quality, cognitive bias patterns (anchoring, premature closure), and evidence-based management.',
       nextLabel: null, nextTab: null },
-    coach: { icon:'\uD83E\uDDE0', heading:'You\u2019re on: CoachDx Attending',
-      body:'State the patient, CC, your differential, and your reasoning. Your AI attending will ask Socratic questions to help you reason more deeply.',
-      nextLabel: null, nextTab: null },
-    orders: { icon:'\uD83D\uDCE4', heading:'You\u2019re on: Orders',
-      body:'Place labs, imaging, and consult orders. Think before ordering \u2014 which result would most change your management? Order patterns are tracked as part of your reasoning assessment.',
-      nextLabel:'Return to Labs', nextTab:'labs' }
+    coach: { icon:'🧠', heading:'CoachDx Attending',
+      body:'Present your case: patient, CC, differential with reasoning. Your AI attending will push your thinking with Socratic questions — not give you the answer. Use this before and after ordering.',
+      nextLabel: null, nextTab: null }
   };
 
   var _state = {
@@ -183,10 +193,11 @@
       try {
         var saved = JSON.parse(localStorage.getItem('mc-' + _state.caseId));
         if (saved) {
-          _state.completed = saved.completed || {};
-          _state.tabDwell  = saved.tabDwell  || {};
-          _state.startTime = saved.startTime || _state.startTime;
-          _state.ddxEntries= saved.ddxEntries|| [];
+          _state.completed    = saved.completed    || {};
+          _state.tabDwell     = saved.tabDwell     || {};
+          _state.startTime    = saved.startTime    || _state.startTime;
+          _state.ddxEntries   = saved.ddxEntries   || [];
+          _state.ddxRevisedAt = saved.ddxRevisedAt || null;
         }
       } catch(e) {}
       if (this.isFirstCase()) _state.open = true;
@@ -212,7 +223,7 @@
 
     save: function() {
       if (!_state.caseId) return;
-      try { localStorage.setItem('mc-' + _state.caseId, JSON.stringify({ completed: _state.completed, tabDwell: _state.tabDwell, startTime: _state.startTime, ddxEntries: _state.ddxEntries })); } catch(e) {}
+      try { localStorage.setItem('mc-' + _state.caseId, JSON.stringify({ completed: _state.completed, tabDwell: _state.tabDwell, startTime: _state.startTime, ddxEntries: _state.ddxEntries, ddxRevisedAt: _state.ddxRevisedAt })); } catch(e) {}
     },
 
     isFirstCase: function() { return !localStorage.getItem('rdx-mc-seen'); },
@@ -258,7 +269,9 @@
       return Object.values(S.noteFields).filter(function(v){return v&&v.trim().length>20;}).length>=4 && words>=150;
     },
     _checkMedRecon:  function() { return window.S&&S.medReconStatus&&window.MEDICATIONS&&Object.keys(S.medReconStatus).length>=MEDICATIONS.length; },
-    _checkDdx:       function() { return _state.ddxEntries&&_state.ddxEntries.length>=2; },
+    _checkInitialDdx: function() { return _state.ddxEntries&&_state.ddxEntries.length>=1; },
+    _checkRevisedDdx: function() { return _state.ddxEntries&&_state.ddxEntries.length>=2&&!!_state.ddxRevisedAt; },
+    _checkDdx:        function() { return _state.ddxEntries&&_state.ddxEntries.length>=2; },
     _checkSubmitted: function() { return window.S&&S.submitted; },
     _autoCheckReviewTasks: function() {
       (TASKS_BY_SETTING[_state.setting]||TASKS_BY_SETTING.ed).forEach(function(t) {
@@ -281,6 +294,7 @@
     getDdxEntries:    function()    { return _state.ddxEntries||[]; },
     setDdxEntries:    function(e)   { _state.ddxEntries=e; this.save(); },
     addDdxEntry:      function(e)   { _state.ddxEntries.push(e); this.save(); },
+    markDdxRevised:   function()    { _state.ddxRevisedAt = Date.now(); this.save(); },
     removeDdxEntry:   function(i)   { _state.ddxEntries.splice(i,1); this.save(); },
     updateDdxEntry:   function(i,e) { _state.ddxEntries[i]=e; this.save(); },
 
@@ -390,8 +404,18 @@
         html += '<div style="font-size:10px;font-weight:700;color:#9aafbf;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Encounter Progress</div>';
         html += '<div style="display:flex;justify-content:space-between;margin-bottom:5px"><span style="font-size:11px;color:#4a5568">'+done2+' / '+total2+' tasks \u00b7 '+this.getElapsed()+'</span><span style="font-size:11px;color:#2874A6;font-weight:600">'+pct2+'%</span></div>';
         html += '<div style="height:5px;background:#E2ECF4;border-radius:3px;overflow:hidden;margin-bottom:11px"><div style="height:100%;width:'+pct2+'%;background:#2874A6;border-radius:3px;transition:width .3s"></div></div>';
+        var _phaseLabels = {
+          'review-vitals':    '— CHART REVIEW —',
+          'initial-ddx':      '— REASON: INITIAL DDx —',
+          'interview-patient':'— HISTORY —',
+          'revised-ddx':      '— REASON: REVISE DDx —',
+          'place-orders':     '— ORDER & DOCUMENT —'
+        };
         tasks.forEach(function(t){
-          html += '<div style="padding:5px 0;font-size:12px;display:flex;align-items:center;gap:8px;'+(t.done?'color:#1B7A3D;':'color:#2d3748;')+'"><span style="font-size:13px;flex-shrink:0">'+(t.done?'\u2705':'\u25cb')+'</span><span'+(t.done?' style="text-decoration:line-through;opacity:.65"':'')+'>'+t.label+'</span></div>';
+          if (_phaseLabels[t.id]) {
+            html += '<div style="font-size:9px;font-weight:700;color:#9aafbf;text-transform:uppercase;letter-spacing:.07em;margin:8px 0 3px;padding-left:2px">' + _phaseLabels[t.id] + '</div>';
+          }
+          html += '<div style="padding:4px 0;font-size:12px;display:flex;align-items:center;gap:8px;'+(t.done?'color:#1B7A3D;':'color:#2d3748;')+'"><span style="font-size:13px;flex-shrink:0">'+(t.done?'\u2705':'\u25cb')+'</span><span'+(t.done?' style="text-decoration:line-through;opacity:.65"':'')+'>'+t.label+'</span></div>';
         });
         var rbg=readiness.level==='green'?'#E8F5E9':readiness.level==='yellow'?'#FFF8E1':'#FFEBEE';
         html += '</div><div style="margin:10px 16px 0;padding:10px 12px;background:'+rbg+';border-radius:8px;display:flex;align-items:center;gap:8px"><span style="font-size:16px">'+readiness.emoji+'</span><span style="font-size:12px;font-weight:500;color:#333">'+readiness.label+'</span></div>';
