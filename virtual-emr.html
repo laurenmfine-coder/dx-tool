@@ -2388,15 +2388,27 @@ function renderHistory(){return'<div class="two-col">'+sectionCard("Family Histo
 
 // -- PATIENT INTERVIEW TAB (standalone) ----------------------------------
 function renderPatientInterview() {
-  var _ptName = (PATIENT && PATIENT.name) ? PATIENT.name.split(' ')[0] : 'the patient';
-  var cc = PATIENT ? (PATIENT.chiefComplaint || 'their concern') : 'their concern';
+  var _ptName  = (PATIENT && PATIENT.name)            ? PATIENT.name.split(' ')[0] : 'the patient';
+  var _fullName= (PATIENT && PATIENT.name)            ? PATIENT.name               : 'Patient';
+  var cc       = (PATIENT && PATIENT.chiefComplaint)  ? PATIENT.chiefComplaint     : '';
+  var age      = (PATIENT && PATIENT.age)             ? PATIENT.age                : '';
+  var sex      = (PATIENT && PATIENT.sex)             ? PATIENT.sex                : '';
+
+  // Compact patient context bar — not the interview content itself
+  var _context = '<div style="padding:10px 14px 12px;background:linear-gradient(135deg,#EBF5FB,#F0F9FF);border-bottom:1px solid var(--border);border-radius:8px 8px 0 0;margin:-2px -2px 14px -2px">'
+    + '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'
+    + '<span style="font-size:13px;font-weight:700;color:#1B4F72">' + esc(_fullName) + '</span>'
+    + (age ? '<span style="font-size:11px;color:#4a6280;background:#D6EAF8;padding:2px 8px;border-radius:10px">' + esc(String(age)) + (sex?' · '+esc(sex):'') + '</span>' : '')
+    + (cc  ? '<span style="font-size:12px;color:#2874A6;font-style:italic">CC: &ldquo;' + esc(cc) + '&rdquo;</span>' : '')
+    + '</div>'
+    + '<div style="font-size:11px;color:#5D7A8A;margin-top:5px">Ask open-ended questions to take the history. '
+    + _ptName + ' will respond in character. Form your differential as you listen — before opening Labs.</div>'
+    + '</div>';
+
   return sectionCard(
-    "Patient Interview — " + _ptName,
+    'Patient Interview',
     '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-    '<div style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;padding:10px 14px;background:var(--surface-alt);border-radius:8px;border-left:3px solid var(--primary)">'
-    + '<strong>How this works:</strong> Ask ' + esc(_ptName) + ' questions to take the history. Type in the box below — '
-    + esc(_ptName) + ' will respond as if in a real clinical encounter. When you\'re ready, switch to <strong>Documentation</strong> to write your H&amp;P.</div>'
-    + _buildInterviewUI(_ptName, cc)
+    _context + _buildInterviewUI(_ptName, cc)
   );
 }
 
@@ -2883,7 +2895,7 @@ function render(){
   if(role==="admin"){tabs.push({id:"admin",label:"Admin Panel",icon:I.settings})}
 
   const sb=tabs.map(t=>{ var _badge=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):''; var _dim=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):''; var _b='<button type="button" '+(SIDEBAR_TOOLTIPS&&SIDEBAR_TOOLTIPS[t.id]?'data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'" ':'')+'class="sidebar-btn '+(S.activeTab===t.id?'active':'')+' '+_dim+'" onclick="switchTab(\''+t.id+'\')">'+ t.icon+'<span>'+t.label+'</span>'+_badge+'</button>'; return _b; }).join("")+(window.RDXGuide?RDXGuide.renderSidebarToggle():'')+(window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderStepper():'');
-  const fn={demographics:renderDemographics,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,interview:renderPatientInterview,documentation:renderDocumentationOnly,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx,guided:function(){return window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderPhase():'<p>Guided mode unavailable.</p>';}};
+  const fn={demographics:renderDemographics,interview:renderPatientInterview,problems:renderProblems,visits:renderVisits,medications:renderMedications,allergies:renderAllergies,labs:renderLabs,imaging:renderImaging,vitals:renderVitals,immunizations:renderImmunizations,history:renderHistory,interview:renderPatientInterview,documentation:renderDocumentationOnly,feedback:renderFeedback,grading:renderGrading,admin:renderAdmin,handoff:renderHandoff,coach:renderCoachDx,guided:function(){return window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderPhase():'<p>Guided mode unavailable.</p>';}};
   // Wrap each render fn with error boundary
   if(window.RDXErrors){Object.keys(fn).forEach(function(k){fn[k]=RDXErrors.wrap(fn[k],{icon:'⚙️',desc:'This section couldn\'t load. Try switching tabs.',retry:'Try Again',retryFn:'render()'});});}
   if(window.GuidedMode&&GuidedMode.isActive()&&S.activeTab==="demographics"&&!S._guidedStarted){S._guidedStarted=true;S.activeTab="guided";}
@@ -5666,6 +5678,7 @@ render = function(){
 
   const fn = {};
   fn.demographics = renderDemographics;
+  fn.interview = renderPatientInterview;
   fn.visits = renderVisits;
   fn.history = renderHistory;
   fn.documentation = renderDocumentation;
