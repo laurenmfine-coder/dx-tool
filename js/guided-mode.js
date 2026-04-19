@@ -385,9 +385,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
     // ── Phase 4: Physical Exam ────────────────────────────────
     _renderExam: function () {
       var html = '';
-      html += '<div style="background:#EBF5FB;border-radius:8px;padding:12px 16px;margin-bottom:16px;font-size:13px;color:#1B4F72">';
-      html += '🔍 <strong>Select examination maneuvers.</strong> Choose what to examine based on your current differential. ';
-      html += 'Results reflect the case findings. Be deliberate — your choices are tracked.</div>';
+      var examCount = (window.ExamBuilder && ExamBuilder.getSelectedCount) ? ExamBuilder.getSelectedCount() : _state.examDone.length;
 
       if (window.ExamBuilder) {
         html += ExamBuilder.render();
@@ -398,17 +396,17 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
         html += '</div>';
       }
 
-      var examCount = _state.examDone.length;
-      html += '<div style="margin-top:20px;padding-top:16px;border-top:1px solid #e2ecf4;display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
+      html += '<div id="guided-phase-content" style="display:none"></div>';
+      html += '<div style="margin-top:20px;padding:14px 16px;background:#F8FAFC;border-top:1px solid #E2ECF4;border-radius:0 0 10px 10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
       if (examCount < 2) {
-        html += '<div style="font-size:12px;color:#718096;font-style:italic">Perform at least 2 exam maneuvers to advance.</div>';
+        html += '<div style="font-size:12px;color:#718096;font-style:italic">Select and examine at least 2 maneuvers to advance.</div>';
       }
       html += '<button type="button" ' +
         (examCount >= 2 ? '' : 'disabled ') +
         'onclick="GuidedMode.completeCurrentPhase({examDone: GuidedMode.getExamDone()})" ' +
-        'style="padding:10px 22px;background:' + (examCount >= 2 ? '#2874A6' : '#CBD5E0') + ';color:#fff;border:none;border-radius:8px;' +
-        'font-size:13px;font-weight:700;font-family:inherit;cursor:' + (examCount >= 2 ? 'pointer' : 'default') + '">' +
-        'Exam Complete — Refine DDx →</button>';
+        'style="padding:10px 24px;background:' + (examCount >= 2 ? '#2874A6' : '#CBD5E0') + ';color:#fff;border:none;border-radius:8px;' +
+        'font-size:13px;font-weight:700;font-family:inherit;cursor:' + (examCount >= 2 ? 'pointer' : 'not-allowed') + ';transition:background .2s">' +
+        (examCount >= 2 ? '✓ Exam Complete — Refine DDx →' : 'Exam Complete — Refine DDx →') + '</button>';
       html += '</div>';
 
       return html;
