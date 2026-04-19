@@ -1303,6 +1303,39 @@ window.EMR_DATA = {
       "AR-asthma link: unified airway. Treat both — AR treatment reduces asthma exacerbation risk."
     ]
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Derek Patel appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did year-round nasal congestion, sneezing, post-nasal drip despite multiple medications start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started Derek Patel presents with year-round nasal congestion, sneezing, post-nasal drip.'",
+        "character": "'It's year-round nasal congestion, sneezing, post-nasal drip despite multiple medications \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Fluticasone nasal; Cetirizine; Montelukast; Azelastine nasal.'",
+        "allergies": "'My allergies are Dust mites, Cat dander, Mold (Alternaria).'",
+        "family": "Mother: allergic rhinitis  Father: asthma",
+        "social": "Environment: Has a cat at home, carpeted bedroom  Impact: Poor sleep quality due to congestion, impaired work performance  Immunotherapy discussion: Candidate for SCIT or SLIT for dust mite/cat"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -1341,82 +1374,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Derek Patel's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Derek appears frustrated and exhausted from chronic symptoms that significantly impact his sleep and work performance. He is cooperative and forthcoming about his medical history, expressing disappointment that multiple medications haven't provided adequate relief.",
-    "interviewQuestions": [
-        "When did your nasal congestion first start and has it gotten worse over time?",
-        "Are your symptoms worse at certain times of day or in specific locations?",
-        "Do you notice your symptoms are worse when you're around your cat or in your bedroom?",
-        "How would you rate your nasal congestion on a scale of 1-10?",
-        "What makes your symptoms better or worse?",
-        "Do you have any facial pain, pressure, or headaches?",
-        "Have you noticed any changes in your sense of smell or taste?",
-        "Do you get nosebleeds or have any colored nasal discharge?",
-        "How is your sleep quality affected by these symptoms?",
-        "Do you have any breathing difficulties or wheezing?",
-        "What medications are you currently taking for these symptoms?",
-        "Have you ever been tested for allergies?",
-        "Does anyone in your family have similar problems with allergies or asthma?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Could you rephrase that? My main problem is just this constant stuffy nose.",
-        "onset": "I've had nasal congestion for about 8 years now. It started gradually but has become much worse over the past 2-3 years, especially since we got our cat.",
-        "character": "It's a constant feeling of being completely blocked up, like my nose is stuffed with cotton. I also get a lot of sneezing fits and this annoying post-nasal drip.",
-        "location": "It's mainly in both sides of my nose, though the left side seems worse. Sometimes I feel pressure around my cheeks and forehead.",
-        "severity": "I'd say it's about a 7 or 8 out of 10. It's really affecting my sleep - I can barely breathe through my nose at night, and I'm exhausted at work.",
-        "aggravating": "It's definitely worse when I'm at home, especially in the bedroom. Dusty areas make it terrible, and being around my cat seems to trigger sneezing fits.",
-        "relieving": "The medications help a little bit, but not nearly enough. Sometimes a hot shower gives me temporary relief, but it comes right back.",
-        "associated": "I have this constant post-nasal drip that makes me clear my throat a lot. Sometimes I wheeze a little, especially when my nose is really bad. My eyes get itchy too.",
-        "denies": "No fever, no thick colored discharge, no severe facial pain, no nosebleeds. I don't think I have any sinus infections right now.",
-        "history": "I've always had some seasonal allergies, but this year-round congestion is relatively new. I've had a few sinus infections over the years.",
-        "medications": "Fluticasone nasal; Cetirizine; Montelukast; Azelastine nasal",
-        "allergies": "Dust mites, Cat dander, Mold (Alternaria)",
-        "family": "My mom has really bad seasonal allergies and my dad has asthma. I think I got the worst of both worlds.",
-        "social": "I work in an office as an accountant. I don't smoke and rarely drink alcohol. We have a cat at home that my wife loves, and our bedroom is carpeted."
-    },
-    "examManeuvers": [
-        "External nasal inspection",
-        "Anterior rhinoscopy",
-        "Nasal patency assessment",
-        "Palpation of sinuses",
-        "Examination of conjunctiva",
-        "Oropharyngeal examination",
-        "Cervical lymph node palpation",
-        "Pulmonary auscultation",
-        "Nasal endoscopy findings review"
-    ],
-    "examFindings": {
-        "External nasal inspection": "No external nasal deformity, mild erythema around nares from frequent nose blowing",
-        "Anterior rhinoscopy": "Bilateral turbinate hypertrophy with pale, boggy nasal mucosa. Clear rhinorrhea present bilaterally",
-        "Nasal patency assessment": "Severely reduced airflow through both nares, left > right",
-        "Palpation of sinuses": "Mild tenderness over maxillary sinuses bilaterally, no frontal sinus tenderness",
-        "Examination of conjunctiva": "Mild conjunctival erythema and injection consistent with allergic conjunctivitis",
-        "Oropharyngeal examination": "Posterior pharyngeal cobblestoning consistent with chronic post-nasal drip",
-        "Cervical lymph node palpation": "No significant cervical lymphadenopathy",
-        "Pulmonary auscultation": "Clear to auscultation bilaterally, no wheezing at rest",
-        "Nasal endoscopy findings review": "Significant bilateral inferior turbinate hypertrophy with contact points, clear secretions in middle meatus"
-    },
-    "ddxTargets": [
-        "Perennial allergic rhinitis with turbinate hypertrophy (correct diagnosis)",
-        "Chronic rhinosinusitis without nasal polyps",
-        "Mixed allergic and non-allergic rhinitis",
-        "Nasal polyps",
-        "Septal deviation with turbinate hypertrophy",
-        "Medication-induced rhinitis",
-        "Vasomotor rhinitis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'allergy medication failure' and missing structural component (turbinate hypertrophy) requiring procedural intervention",
-        "prematureClosure": "Risk of stopping at allergic rhinitis diagnosis without recognizing severe turbinate hypertrophy that may need surgical management",
-        "availabilityBias": "May focus too heavily on medication optimization while missing that structural abnormalities are preventing medical therapy success"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several reasonable possibilities for chronic nasal congestion. As you interview Derek, pay particular attention to environmental triggers, medication response patterns, and how his symptoms impact his daily functioning. What specific questions will help you differentiate between allergic and structural causes?",
-        "phase5": "Your physical exam reveals significant turbinate hypertrophy along with classic allergic findings. Consider how the structural abnormalities you found might explain why his current medical regimen isn't providing adequate relief. What does this suggest about his treatment needs moving forward?",
-        "finalDebrief": "This case illustrates how perennial allergic rhinitis can lead to chronic inflammation and secondary turbinate hypertrophy. Derek's poor response to appropriate medical therapy, combined with your physical exam findings, suggests he needs both continued allergen avoidance/immunotherapy AND consideration of procedural intervention for the structural component. How might you counsel him about next steps?"
     }
 }
 };

@@ -301,6 +301,39 @@ window.EMR_DATA = {
     "presentation": "Vascular Emergency",
     "category": "vascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Nikolai Petrov is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did vascular emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 57-year-old male with cholelithiasis, severe hypertriglyceridemia, and heavy alc.'",
+        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Pancreatitis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Fenofibrate 145mg daily; Atorvastatin 20mg QHS; Lisinopril 20mg daily; Omeprazole 20mg daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Father: Alcoholic liver disease, deceased at 62  Mother: Gallstones, cholecystectomy at age 55; alive at 84  Brother: Hyperlipidemia, pancreatitis at age 50, alive",
+        "social": "Occupation: Restaurant owner/chef  Marital: Married  Tobacco: Former \u2014 10 pack-years; quit 2010  Alcohol: Heavy \u2014 4-6 drinks daily (beer and vodka); 30+ year history  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -339,84 +372,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Nikolai Petrov's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Pancreatitis (Vascular Complication). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Nikolai appears anxious and uncomfortable, frequently shifting in his chair and holding his abdomen. He's moderately forthcoming but somewhat defensive about his alcohol consumption and dietary compliance, showing visible distress when discussing his symptoms.",
-    "interviewQuestions": [
-        "Can you describe the pain you're experiencing right now?",
-        "When did this pain first start and how did it begin?",
-        "Where exactly is the pain located and does it go anywhere else?",
-        "On a scale of 1-10, how severe is your pain?",
-        "What makes the pain better or worse?",
-        "Have you had any nausea, vomiting, or changes in appetite?",
-        "Have you noticed any changes in your bowel movements or urine?",
-        "Have you had episodes like this before?",
-        "Tell me about your alcohol consumption - how much and how often?",
-        "Have you been following your diet recommendations and taking medications as prescribed?",
-        "Any recent changes in your weight or eating habits?",
-        "Have you had any fever, chills, or feeling unwell?",
-        "Any chest pain, shortness of breath, or heart palpitations?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble focusing with this pain. Could you repeat that?",
-        "onset": "The pain started about 6 hours ago, right after I finished a large meal at my restaurant. It came on gradually at first, then got much worse over the past 2 hours.",
-        "character": "It's a deep, gnawing pain that feels like someone is boring into my stomach. It's constant and severe.",
-        "location": "The pain is in my upper abdomen, mostly in the center and left side, and it goes straight through to my back between my shoulder blades.",
-        "severity": "Right now it's about an 8 out of 10. I can barely sit still, and it's definitely the worst abdominal pain I've ever had.",
-        "aggravating": "Eating makes it much worse, and lying flat is unbearable. Even taking deep breaths seems to make it worse.",
-        "relieving": "Leaning forward helps a little bit, and I tried some antacids but they didn't help at all. The pain medicine they gave me here helped some.",
-        "associated": "I've been nauseous and vomited twice - mostly just bile. I feel sweaty and weak, and I have no appetite whatsoever.",
-        "denies": "No fever that I know of, no chest pain, no shortness of breath, no diarrhea, and my bowel movements have been normal.",
-        "history": "I had something similar about 2 years ago, but not this severe. That time it went away after a day or two of not eating.",
-        "medications": "Fenofibrate 145mg daily; Atorvastatin 20mg QHS; Lisinopril 20mg daily; Omeprazole 20mg daily",
-        "allergies": "NKDA",
-        "family": "My father died from liver problems related to drinking, and my mother had gallstones. My brother actually had pancreatitis when he was 50.",
-        "social": "I own and work as a chef in a Russian restaurant. I'm married. I used to smoke but quit in 2010. I'll be honest - I drink heavily, about 4-6 drinks daily, mostly beer and vodka, for over 30 years."
-    },
-    "examManeuvers": [
-        "General appearance and vital signs assessment",
-        "Abdominal inspection for distention or discoloration",
-        "Abdominal palpation for tenderness and masses",
-        "Murphy's sign",
-        "Assessment for Cullen's sign",
-        "Assessment for Grey Turner's sign",
-        "Bowel sounds auscultation",
-        "Cardiovascular examination including peripheral pulses",
-        "Pulmonary examination",
-        "Neurological assessment for confusion or altered mental status"
-    ],
-    "examFindings": {
-        "General appearance and vital signs assessment": "Patient appears uncomfortable and restless, lying in left lateral decubitus position. Vital signs show mild hypertension at 138/86, otherwise stable.",
-        "Abdominal inspection for distention or discoloration": "Abdomen appears mildly distended. Notable bluish discoloration around the umbilicus consistent with Cullen's sign.",
-        "Abdominal palpation for tenderness and masses": "Severe epigastric and left upper quadrant tenderness with guarding. No obvious masses palpated. Tenderness extends to the left costovertebral angle.",
-        "Murphy's sign": "Negative Murphy's sign - no arrest of inspiration with right subcostal palpation.",
-        "Assessment for Cullen's sign": "Positive - periumbilical bluish discoloration present, indicating retroperitoneal hemorrhage.",
-        "Assessment for Grey Turner's sign": "Positive - bluish-gray discoloration noted in the left flank area.",
-        "Bowel sounds auscultation": "Hypoactive bowel sounds throughout all quadrants.",
-        "Cardiovascular examination including peripheral pulses": "Regular rate and rhythm, no murmurs. Peripheral pulses intact but patient appears volume depleted.",
-        "Pulmonary examination": "Clear to auscultation bilaterally, no adventitious sounds. Patient taking shallow breaths due to abdominal pain.",
-        "Neurological assessment for confusion or altered mental status": "Alert and oriented but appears anxious and in significant distress. No focal neurological deficits."
-    },
-    "ddxTargets": [
-        "Acute Pancreatitis (Vascular Complication) (correct diagnosis)",
-        "Acute cholangitis",
-        "Perforated peptic ulcer",
-        "Mesenteric ischemia",
-        "Ruptured abdominal aortic aneurysm",
-        "Acute cholecystitis",
-        "Gastroesophageal perforation"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on the patient's known cholelithiasis and assuming this is biliary colic or cholecystitis, missing the more serious vascular complication of pancreatitis.",
-        "prematureClosure": "The combination of alcohol history and abdominal pain might lead to quick assumption of simple acute pancreatitis without recognizing the hemorrhagic complications indicated by Cullen's and Grey Turner's signs.",
-        "availabilityBias": "Recent cases of routine gallbladder disease might overshadow recognition of this more serious presentation with retroperitoneal bleeding."
-    },
-    "coachPrompts": {
-        "phase2": "Looking at this 57-year-old male with his risk factors, what are you most concerned about with his presentation? Think about his alcohol history, previous pancreatitis, and current symptoms. What questions will help you differentiate between the most likely diagnoses?",
-        "phase5": "You've identified severe epigastric pain with radiation to the back in a patient with significant alcohol use. But I want you to focus on those physical exam findings - specifically the Cullen's and Grey Turner's signs. What do these findings tell you about the severity and potential complications of his condition?",
-        "finalDebrief": "This case illustrates how acute pancreatitis can present with life-threatening vascular complications. The presence of Cullen's and Grey Turner's signs indicated retroperitoneal hemorrhage, transforming this from routine pancreatitis management to a vascular emergency requiring immediate intervention. How did your differential diagnosis evolve as you gathered more clinical information?"
     }
 }
 };

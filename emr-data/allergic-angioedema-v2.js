@@ -1108,6 +1108,39 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Priscilla Moreno appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did 42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep \u2014 obese, epi dosing question start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 42F restaurant cook with angioedema of lips and tongue + diffuse urticaria after.'",
+        "character": "'It's 42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep \u2014 obese, epi dosing question \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Epinephrine; Epinephrine repeat; Diphenhydramine; Methylprednisolone.'",
+        "allergies": "'My allergies are Shrimp.'",
+        "family": "Mother: chronic urticaria",
+        "social": "Context: Restaurant worker \u2014 shellfish exposure occupational + dietary  Comorbidity: Obesity BMI 38 \u2014 epi dose questions  Language: Spanish-only  Issue: Episode at work \u2014 workers comp vs personal insurance"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -1146,84 +1179,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Priscilla Moreno's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Priscilla appears anxious and short of breath, frequently touching her swollen lips and speaking in rapid, worried Spanish. She's cooperative but distressed about her breathing and concerned about missing work. Her affect shows fear mixed with frustration about her occupational exposure dilemma.",
-    "interviewQuestions": [
-        "When did your lip and tongue swelling start today?",
-        "What were you doing right before the swelling began?",
-        "Have you had this type of reaction before?",
-        "Do you carry an EpiPen or epinephrine injector?",
-        "Did you use your EpiPen today, and if so, how many times?",
-        "Are you having any trouble breathing or swallowing?",
-        "Do you have hives or rash anywhere on your body?",
-        "What medications have you taken today for this reaction?",
-        "How long have you been working in the restaurant?",
-        "Do you normally avoid eating shrimp due to your allergy?",
-        "Have your reactions been getting worse over time?",
-        "Do you have any other food allergies?",
-        "Has anyone in your family had severe allergic reactions?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I don't understand. I'm having trouble breathing and my mouth is very swollen.",
-        "onset": "It started about 30 minutes ago while I was cleaning and preparing shrimp for the lunch rush at the restaurant.",
-        "character": "My lips and tongue feel huge and swollen, like they're going to burst. The itching all over is driving me crazy.",
-        "location": "The swelling is worst in my lips and tongue, but I have these red itchy bumps everywhere - my arms, chest, back.",
-        "severity": "The swelling is maybe 7 out of 10, but I'm really scared because it's hard to swallow and breathe - that's a 9.",
-        "aggravating": "It seems to get worse when I try to talk a lot or when I touch the hives - they get more red and itchy.",
-        "relieving": "I used my EpiPen twice but I'm still swollen. The cold water I've been sipping helps my throat a little.",
-        "associated": "I feel dizzy and nauseous, my heart is racing, and I have these hives everywhere. My throat feels tight.",
-        "denies": "No chest pain, no vomiting, no diarrhea, no fever. I'm not wheezing but breathing feels hard.",
-        "history": "Yes, this has happened three times before with shrimp, but never this bad. It's getting worse each time.",
-        "medications": "Epinephrine; Epinephrine repeat; Diphenhydramine; Methylprednisolone",
-        "allergies": "Shrimp",
-        "family": "My mother has chronic hives that come and go, but nothing like this.",
-        "social": "I've been a cook at the seafood restaurant for 5 years. I don't eat shrimp but handle it daily. I don't smoke or drink much."
-    },
-    "examManeuvers": [
-        "Inspect lips and perioral area",
-        "Examine tongue and oropharynx",
-        "Assess voice quality and stridor",
-        "Inspect skin for urticaria pattern",
-        "Palpate neck for lymphadenopathy",
-        "Auscultate lungs for wheezing",
-        "Assess respiratory effort and accessory muscle use",
-        "Check capillary refill and peripheral perfusion",
-        "Examine conjunctiva for injection",
-        "Assess mental status and anxiety level"
-    ],
-    "examFindings": {
-        "Inspect lips and perioral area": "Marked bilateral lip edema with asymmetric upper lip swelling, no cyanosis, lips appear tense and erythematous",
-        "Examine tongue and oropharynx": "Tongue edema present but not severely protruding, oropharynx patent, no uvular swelling visible",
-        "Assess voice quality and stridor": "Voice slightly muffled but clear, no audible stridor at rest, no hoarseness",
-        "Inspect skin for urticaria pattern": "Diffuse raised erythematous wheals on arms, chest, and back, ranging 5-15mm, blanching with pressure",
-        "Palpate neck for lymphadenopathy": "No cervical lymphadenopathy, no neck swelling or induration",
-        "Auscultate lungs for wheezing": "Clear breath sounds bilaterally, no wheezing or rales, good air movement",
-        "Assess respiratory effort and accessory muscle use": "Mild tachypnea but no accessory muscle use, no retractions",
-        "Check capillary refill and peripheral perfusion": "Capillary refill 3 seconds, hands cool but pink, pulses strong",
-        "Examine conjunctiva for injection": "Mild bilateral conjunctival erythema and tearing present",
-        "Assess mental status and anxiety level": "Alert and oriented, anxious but appropriate, following commands"
-    },
-    "ddxTargets": [
-        "Anaphylaxis with angioedema (correct diagnosis)",
-        "Isolated angioedema",
-        "Hereditary angioedema",
-        "Laryngeal edema with airway compromise",
-        "Anaphylactic shock",
-        "Contact dermatitis with urticaria",
-        "ACE inhibitor induced angioedema"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on 'just angioedema' and miss systemic anaphylaxis signs like hypotension and tachycardia requiring immediate treatment",
-        "prematureClosure": "Risk of stopping at urticaria/angioedema without recognizing this is anaphylaxis needing aggressive management and observation",
-        "availabilityBias": "May focus only on airway concerns and miss the obesity-related epinephrine dosing considerations that could affect treatment efficacy"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified angioedema and urticaria as key features. Before interviewing the patient, consider: What systemic signs would differentiate simple allergic reaction from anaphylaxis? What specific historical details about symptom progression and prior episodes will guide your management urgency?",
-        "phase5": "Now that you have the history and exam findings, think about this patient's presentation systematically. She has mucocutaneous involvement with cardiovascular signs - how does this change your diagnosis and immediate management priorities? Also consider what unique factors about this patient might affect standard treatment protocols.",
-        "finalDebrief": "This case demonstrates classic anaphylaxis with mucocutaneous and cardiovascular involvement. Key teaching points: recognizing anaphylaxis vs simple allergic reaction, obesity considerations for epinephrine dosing, occupational allergy management, and the importance of biphasic reaction monitoring. How did your differential evolve as you gathered more objective data?"
     }
 }
 };

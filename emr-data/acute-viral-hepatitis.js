@@ -225,6 +225,39 @@ window.EMR_DATA = {
     "presentation": "Toxicologic Emergency",
     "category": "gastrointestinal"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Rafael Guzm\u00e1n appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did toxicologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I'm here for my regular checkup - I've been working hard on eating better and ge.'",
+        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Hepatitis A.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Metformin 500mg BID; Vitamin D3 2000 IU daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Father: T2DM, NAFLD \u2192 NASH cirrhosis (diagnosed age 58), alive at 66  Mother: Obesity, HTN, alive at 64  Brother: Healthy, alive at 32",
+        "social": "Occupation: Restaurant line cook at seafood restaurant in Hollywood; handles raw shellfish regularly  Marital: Married 8 years; 2 children (ages 4 and 6)  Tobacco: Never smoker  Alcohol: 2-3 beers on weekends; stopped for weight loss attempt  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -263,84 +296,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Rafael Guzm\u00e1n's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Hepatitis A (Foodborne \u2014 Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD, Presenting with Jaundice, Transaminitis >2000, and Coagulopathy). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Rafael appears mildly confused and uncomfortable, with slight yellow tinting to his sclera and skin that he seems unaware of. He maintains a cooperative demeanor but shows mild fatigue and keeps mentioning feeling 'off' lately, attributing it to work stress rather than recognizing the severity of his symptoms.",
-    "interviewQuestions": [
-        "Can you tell me about any abdominal pain or discomfort you've been having?",
-        "Have you noticed any changes in the color of your skin or eyes recently?",
-        "What about your urine - has it been darker than usual?",
-        "Have you had any nausea, vomiting, or changes in appetite?",
-        "Tell me about your work - what exactly do you do with the shellfish?",
-        "When did you last eat raw or undercooked shellfish, either at work or elsewhere?",
-        "Have you been vaccinated against Hepatitis A?",
-        "Has anyone else at work or in your family been sick recently?",
-        "Have you had any fever, chills, or feeling generally unwell?",
-        "Any changes in your bowel movements or stool color?",
-        "Have you been taking any new medications or supplements?",
-        "Any recent travel or exposure to contaminated water?",
-        "Tell me about your alcohol use - has it changed recently?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure what you mean by that. I've just been feeling a bit tired and off lately, but I thought it was from working extra shifts.",
-        "onset": "I started feeling really tired and nauseous about 5-6 days ago. The stomach pain started maybe 3 days ago, right here under my ribs on the right side.",
-        "character": "It's this constant, dull ache in my upper belly, kind of like a deep bruise. Sometimes it gets sharper when I move around or cough.",
-        "location": "Right here, under my right ribs. Sometimes it seems to go toward my back, especially when it gets worse.",
-        "severity": "Maybe a 6 out of 10 most of the time, but it can spike to an 8 when it's really bad. It's definitely affecting my work - I had to leave early yesterday.",
-        "aggravating": "It gets worse when I eat anything greasy or when I'm moving around a lot in the kitchen. Even just taking deep breaths makes it ache more.",
-        "relieving": "I tried some Tylenol but it didn't really help. Sitting still and not eating seems to be the only thing that helps a little.",
-        "associated": "I've been really nauseous, especially in the mornings. Lost my appetite completely - even the smell of food at work makes me want to throw up. I've been exhausted, more than usual.",
-        "denies": "No, I haven't been vomiting, no diarrhea, no chest pain. I don't think I've had a fever, but I've been feeling kind of chilly.",
-        "history": "Nothing like this before. I mean, I've had some stomach issues with my weight and blood sugar problems, but never pain like this or feeling this sick.",
-        "medications": "Metformin 500mg BID; Vitamin D3 2000 IU daily",
-        "allergies": "NKDA",
-        "family": "My dad has liver problems - started with fatty liver like mine but got worse, turned into cirrhosis. He also has diabetes. My mom's pretty healthy except for high blood pressure.",
-        "social": "I work as a line cook at a seafood place in Hollywood. I'm handling raw oysters and clams all day, shucking them, cleaning them. I've been there about 3 years now. I'm married with two kids. I used to drink a few beers on weekends but stopped recently to lose weight. Never smoked, no drugs."
-    },
-    "examManeuvers": [
-        "Inspection of sclera and skin for jaundice",
-        "Abdominal inspection for distension or discoloration",
-        "Right upper quadrant palpation",
-        "Murphy's sign assessment",
-        "Hepatomegaly assessment via percussion and palpation",
-        "Splenomegaly assessment",
-        "Lymphadenopathy examination (cervical, axillary)",
-        "Assessment for ascites (shifting dullness, fluid wave)",
-        "Vital signs including temperature",
-        "Assessment for asterixis (hepatic flap)"
-    ],
-    "examFindings": {
-        "Inspection of sclera and skin for jaundice": "Obvious icterus of sclera bilaterally, mild jaundice of skin most apparent in natural light",
-        "Abdominal inspection for distension or discoloration": "Mild abdominal distension, no obvious discoloration or visible masses",
-        "Right upper quadrant palpation": "Marked tenderness in RUQ with guarding, palpable liver edge 4cm below costal margin",
-        "Murphy's sign assessment": "Negative Murphy's sign - no inspiratory arrest with RUQ palpation",
-        "Hepatomegaly assessment via percussion and palpation": "Hepatomegaly confirmed, liver span 16cm in mid-clavicular line, smooth and tender",
-        "Splenomegaly assessment": "Mild splenomegaly, spleen tip just palpable below left costal margin",
-        "Lymphadenopathy examination (cervical, axillary)": "No significant lymphadenopathy detected",
-        "Assessment for ascites (shifting dullness, fluid wave)": "No evidence of ascites on examination",
-        "Vital signs including temperature": "BP 118/74, HR 88, Temperature 101.2°F, SpO2 98% on room air",
-        "Assessment for asterixis (hepatic flap)": "Mild asterixis present with sustained wrist extension"
-    },
-    "ddxTargets": [
-        "Acute Hepatitis A (Foodborne — Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD, Presenting with Jaundice, Transaminitis >2000, and Coagulopathy) (correct diagnosis)",
-        "Acute cholangitis with biliary obstruction",
-        "Acute hepatitis B or C infection",
-        "Drug-induced liver injury (DILI) from acetaminophen or other hepatotoxins",
-        "Acute fatty liver of pregnancy (if female) or acute fatty liver decompensation",
-        "Acute cholecystitis with Mirizzi syndrome",
-        "Viral hepatitis (EBV, CMV) or autoimmune hepatitis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on patient's known NAFLD and dismissing acute presentation as chronic disease progression, or focusing solely on gallbladder pathology due to RUQ pain",
-        "prematureClosure": "May stop investigation after finding hepatomegaly and jaundice without exploring occupational exposure history and vaccination status thoroughly",
-        "availabilityBias": "Recent cases of cholecystitis or drug-induced liver injury might overshadow consideration of foodborne hepatitis A in unvaccinated food service worker"
-    },
-    "coachPrompts": {
-        "phase2": "Looking at this 35-year-old male with RUQ pain and what appears to be jaundice, what key historical elements would help you differentiate between the various causes of acute hepatitis? Think about his occupation and what exposures that might entail.",
-        "phase5": "Now you have a clearer picture - acute hepatitis with significant transaminitis in a food service worker with shellfish exposure. How does his occupational history and vaccination status change your differential diagnosis? What specific type of hepatitis should you be most concerned about?",
-        "finalDebrief": "This case highlights the importance of detailed occupational history in food service workers. Hepatitis A is highly endemic in shellfish, especially bivalves like oysters and clams that filter-feed in contaminated waters. The combination of occupational exposure, lack of vaccination, and the clinical presentation of acute hepatitis with significant transaminitis should have pointed toward HAV. How might his underlying NAFLD have complicated both the presentation and clinical course?"
     }
 }
 };

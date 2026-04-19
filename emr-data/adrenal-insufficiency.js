@@ -258,6 +258,39 @@ window.EMR_DATA = {
     "presentation": "Renal / Electrolyte Emergency",
     "category": "endocrine"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Diane Charpentier is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been doing well on my usual medications and my energy has been stable, but .'",
+        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Adrenal Crisis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM \u2014 Emergency Kit.'",
+        "allergies": "'My allergies are Prednisone.'",
+        "family": "Mother (age 82): Hashimoto thyroiditis, pernicious anemia  Father (age 84): Type 2 Diabetes, CAD  Sister (age 53): Graves disease, vitiligo",
+        "social": "Occupation: Freelance translator (French/English) \u2014 works from home  Marital: Married x 28 years; husband Philippe is aware of sick-day rules and emergency injection  Tobacco: Never  Alcohol: Rare \u2014 occasional glass of wine  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -296,80 +329,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Diane Charpentier's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia \u2014 Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Diane appears confused and somewhat disoriented, speaking slowly with flat affect and appearing increasingly weak during the interview. She seems cooperative but has difficulty concentrating and may not fully grasp the severity of her condition, though she's forthcoming about her symptoms when directly questioned.",
-    "interviewQuestions": [
-        "Can you tell me about your symptoms that brought you here today?",
-        "When did you first start feeling unwell, and how have things progressed?",
-        "Have you had any nausea, vomiting, or diarrhea recently?",
-        "Have you been taking your hydrocortisone and fludrocortisone as prescribed?",
-        "When was the last time you took your medications?",
-        "Have you been sick with any infection or illness in the past few days?",
-        "Are you experiencing any abdominal pain or cramping?",
-        "Have you noticed any dizziness, especially when standing up?",
-        "Have you had any episodes where you felt like you might pass out?",
-        "How has your appetite and food intake been recently?",
-        "Have you been more tired or weak than usual?",
-        "Have you had any cravings for salty foods lately?",
-        "Do you have your emergency injection kit with you, and when did you last check it?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble focusing right now. Could you repeat that or ask it a different way?",
-        "onset": "I started feeling really tired and weak about 3 days ago, but yesterday I got hit with terrible nausea and vomiting. This morning I could barely get out of bed and felt so dizzy I almost fainted.",
-        "character": "It's this overwhelming weakness and fatigue, like my whole body is shutting down. The nausea comes in waves and I feel like I'm going to collapse.",
-        "location": "The weakness is everywhere, but I have this deep aching pain in my lower back and abdomen that's been getting worse.",
-        "severity": "The weakness is probably a 9 out of 10 - I can barely function. The nausea is about 8 out of 10. I haven't felt this sick since I was first diagnosed.",
-        "aggravating": "Standing up makes me feel like I'm going to pass out. Any movement makes the nausea worse. I can't keep anything down.",
-        "relieving": "Lying down helps a little with the dizziness, but nothing really helps. I keep craving salt and tried eating some crackers but threw them up.",
-        "associated": "I've been vomiting since yesterday, had diarrhea for 2 days, terrible abdominal cramps, dizziness when I stand, and I've been craving salt like crazy. I also feel confused and it's hard to think clearly.",
-        "denies": "No fever, no chest pain, no shortness of breath at rest, no urinary symptoms, no headache.",
-        "history": "I had something similar when I was first diagnosed with Addison's disease 8 years ago, but not quite this severe. I've been stable since then on my medications.",
-        "medications": "Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM — Emergency Kit",
-        "allergies": "Prednisone",
-        "family": "My mother has Hashimoto's thyroiditis and pernicious anemia. My father has diabetes and heart disease. My sister has Graves' disease and vitiligo like me.",
-        "social": "I work as a freelance translator from home, so usually low stress. I'm married and my husband Philippe knows about my condition. I don't smoke and rarely drink alcohol."
-    },
-    "examManeuvers": [
-        "Orthostatic vital signs",
-        "Cardiovascular examination",
-        "Abdominal examination",
-        "Skin examination for hyperpigmentation",
-        "Neurological assessment including mental status",
-        "Assessment for dehydration",
-        "Examination of mucous membranes",
-        "Lymph node examination"
-    ],
-    "examFindings": {
-        "Orthostatic vital signs": "Significant orthostatic hypotension with BP dropping to 65/40 and HR increasing to 130 upon standing; patient nearly faints",
-        "Cardiovascular examination": "Tachycardic regular rhythm, weak pulse, no murmurs, prolonged capillary refill >3 seconds",
-        "Abdominal examination": "Diffuse tenderness without guarding or rebound, hypoactive bowel sounds, no organomegaly",
-        "Skin examination for hyperpigmentation": "Prominent hyperpigmentation of palmar creases, buccal mucosa, and old surgical scars; patches of vitiligo on hands and neck",
-        "Neurological assessment including mental status": "Altered mental status with mild confusion, decreased concentration, no focal deficits, reflexes diminished",
-        "Assessment for dehydration": "Severe dehydration with poor skin turgor, sunken eyes, dry mucous membranes",
-        "Examination of mucous membranes": "Dry mucous membranes with hyperpigmentation of buccal mucosa and gum line",
-        "Lymph node examination": "No lymphadenopathy"
-    },
-    "ddxTargets": [
-        "Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia — Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement (correct diagnosis)",
-        "Severe gastroenteritis with dehydration",
-        "Diabetic ketoacidosis",
-        "Sepsis with hemodynamic compromise",
-        "Acute myocardial infarction",
-        "Hypovolemic shock from GI losses",
-        "Acute thyroid storm"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on gastroenteritis given the GI symptoms without considering the underlying endocrine emergency in a patient with known Addison's disease",
-        "prematureClosure": "May stop thinking after identifying dehydration from GI illness without recognizing the life-threatening adrenal crisis requiring immediate steroid replacement",
-        "availabilityBias": "Common GI illnesses may overshadow the rare but critical adrenal crisis, especially if provider has limited experience with Addisonian crisis"
-    },
-    "coachPrompts": {
-        "phase2": "Looking at your differential, I notice you're considering several possibilities. Given that this patient has a known history of Addison's disease and is presenting with this constellation of symptoms, what specific complications should you be most concerned about? How might her underlying condition affect your approach to this acute presentation?",
-        "phase5": "Excellent work gathering the history and physical findings. You've identified significant orthostatic changes, dehydration, and altered mental status in a patient with known adrenal insufficiency who's been having GI illness. What does the combination of hyperpigmentation, profound hypotension, and her recent inability to keep medications down suggest about her current physiologic state?",
-        "finalDebrief": "This case illustrates how patients with adrenal insufficiency can rapidly decompensate during physiologic stress like GI illness. The key teaching points are recognizing adrenal crisis in patients with known Addison's disease during intercurrent illness, understanding that stress-dose steroids are critical, and that the hyperpigmentation, profound hypotension, and electrolyte abnormalities form a classic triad. Early recognition and immediate IV hydrocortisone can be life-saving."
     }
 }
 };

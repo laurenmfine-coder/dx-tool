@@ -1127,6 +1127,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Walter Brennan is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take C1-INH concentrate; Icatibant.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "No family history of angioedema (distinguishes acquired from hereditary)",
+        "social": "Key: Angioedema starting at age 68 \u2014 NO family history (acquired, not hereditary)  Comorbidity: Monoclonal gammopathy (MGUS) found on workup \u2014 driving the acquired C1-INH consumption  Distinction: HAE = low C1-INH from birth + family history; Acquired = low C1-INH from underlying lymphoproliferative/autoimmune disease"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1165,84 +1196,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Walter Brennan: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Mr. Brennan appears anxious and somewhat tired from dealing with recurrent episodes. He is very forthcoming about his symptoms, having learned to describe them clearly after multiple ED visits. He shows visible concern when discussing throat swelling episodes.",
-    "interviewQuestions": [
-        "When did you first start having these swelling episodes?",
-        "Can you describe what the swelling looks like and where it occurs?",
-        "How long do these episodes typically last?",
-        "On a scale of 1-10, how severe is the swelling at its worst?",
-        "Have you ever had throat or tongue swelling that made it hard to breathe or swallow?",
-        "What seems to trigger these episodes, if anything?",
-        "Does anything help make the swelling go down?",
-        "Do you have any other symptoms with the swelling like hives, itching, or difficulty breathing?",
-        "Has anyone in your family ever had similar swelling episodes?",
-        "Have you been diagnosed with any blood disorders or cancer recently?",
-        "What medications are you currently taking for this condition?",
-        "Do you have any known allergies?",
-        "Have you started any new medications in the past few years?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Can you rephrase that?",
-        "onset": "It started about 3 years ago when I was 68. Before that, I never had anything like this in my whole life.",
-        "character": "It's a deep, non-pitting swelling, not like regular swelling from an injury. My lips get really puffy and sometimes my throat feels tight.",
-        "location": "Mainly my lips and sometimes around my eyes. The scary part is when my throat and tongue swell - that's when I go to the ER.",
-        "severity": "The lip swelling is maybe a 6 out of 10, but when my throat swells it's a 9 or 10 - I can barely swallow and get really scared I can't breathe.",
-        "aggravating": "I can't really identify any specific triggers. It seems to happen randomly, which is frustrating.",
-        "relieving": "The doctors give me some kind of IV medication in the ER that helps. Sometimes it takes hours to go down on its own.",
-        "associated": "No hives or itching, which the doctors say is unusual. Sometimes I feel anxious, but I think that's just from being scared about my airway.",
-        "denies": "No hives, no itching, no rash anywhere. No wheezing. No abdominal pain.",
-        "history": "I've had maybe 8-10 episodes over the past 3 years. A few times I've needed to go to the ER because of throat swelling.",
-        "medications": "C1-INH concentrate; Icatibant",
-        "allergies": "NKDA",
-        "family": "No one in my family has ever had anything like this. My parents lived into their 80s and never had swelling episodes.",
-        "social": "I'm retired from construction work. I don't smoke anymore - quit 10 years ago. I have maybe one beer with dinner. No drugs."
-    },
-    "examManeuvers": [
-        "Inspect lips and perioral area",
-        "Inspect periorbital area for swelling",
-        "Palpate face and neck for asymmetric swelling",
-        "Examine oral cavity and tongue",
-        "Inspect throat and assess airway patency",
-        "Auscultate lungs for wheezing or stridor",
-        "Inspect skin for urticaria or rash",
-        "Palpate lymph nodes",
-        "Abdominal examination",
-        "Assess overall appearance and respiratory distress"
-    ],
-    "examFindings": {
-        "Inspect lips and perioral area": "Mild residual asymmetric swelling of the lower lip, non-erythematous, non-tender",
-        "Inspect periorbital area for swelling": "No current periorbital edema",
-        "Palpate face and neck for asymmetric swelling": "Soft, non-pitting swelling of lower lip, no neck swelling currently",
-        "Examine oral cavity and tongue": "Tongue appears normal size, no current swelling, good mobility",
-        "Inspect throat and assess airway patency": "Oropharynx clear, no current laryngeal edema, voice normal",
-        "Auscultate lungs for wheezing or stridor": "Clear breath sounds bilaterally, no wheeze or stridor",
-        "Inspect skin for urticaria or rash": "No urticaria, petechiae, or rash anywhere on body",
-        "Palpate lymph nodes": "No significant lymphadenopathy",
-        "Abdominal examination": "Soft, non-tender, no organomegaly",
-        "Assess overall appearance and respiratory distress": "Well-appearing, no acute distress, speaking in full sentences"
-    },
-    "ddxTargets": [
-        "Acquired C1-INH deficiency (correct diagnosis)",
-        "Hereditary angioedema",
-        "ACE inhibitor-induced angioedema",
-        "Anaphylaxis",
-        "Airway obstruction from other causes",
-        "Allergic angioedema",
-        "Idiopathic angioedema"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on 'angioedema' and assume allergic cause, missing the late onset and lack of urticaria that suggest C1-INH deficiency",
-        "prematureClosure": "Might stop at 'hereditary angioedema' without considering the key differences: late onset, no family history, and low C1q levels",
-        "availabilityBias": "More likely to consider common allergic angioedema or ACE inhibitor-induced rather than rare acquired C1-INH deficiency"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you're thinking about angioedema - that's right. What key historical features would help you distinguish between hereditary, acquired, and allergic causes of angioedema?",
-        "phase5": "Interesting findings. You've noted the late onset, absence of urticaria, and lack of family history. How do these findings help narrow your differential? What's the significance of the associated MGUS diagnosis?",
-        "finalDebrief": "This case highlights acquired C1-INH deficiency versus hereditary angioedema. The key distinguishing features are: late onset (age 68), no family history, and low C1q levels. The underlying MGUS consumes C1-INH, leading to acquired deficiency. How did your thinking evolve as you gathered more information?"
     }
 }
 };

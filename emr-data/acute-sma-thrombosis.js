@@ -337,6 +337,39 @@ window.EMR_DATA = {
     "presentation": "Vascular Emergency",
     "category": "vascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Walter Simmons appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did vascular emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started Every time I eat, about 20 or 30 minutes later I get terrible cramping pain arou.'",
+        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Superior Mesenteric Artery Thrombosis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg QHS; Lisinopril 40mg daily; Amlodipine 10mg daily; Metformin 1000mg BID; Cilostazol 100mg BID; Nitroglycerin 0.4mg SL PRN.'",
+        "allergies": "'My allergies are Iodinated Contrast.'",
+        "family": "Father: MI at age 58 (deceased at 62)  Mother: PAD, amputation at age 72 (deceased at 76)  Brother: CAD, CABG at age 60, alive",
+        "social": "Occupation: Retired plumber  Marital: Married  Tobacco: Current smoker \u2014 1 PPD x 50 years (50 pack-years)  Alcohol: Former \u2014 quit 2015; prior heavy use  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -375,84 +408,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Walter Simmons's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Superior Mesenteric Artery Thrombosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Walter appears anxious and mildly distressed, sitting forward slightly and occasionally touching his abdomen. He's cooperative but clearly frustrated by his worsening symptoms and weight loss, expressing genuine fear about eating meals.",
-    "interviewQuestions": [
-        "Can you describe exactly when the pain starts in relation to eating?",
-        "How would you characterize the quality of this abdominal pain?",
-        "Can you point to where the pain is located and does it spread anywhere?",
-        "On a scale of 1-10, how severe is this pain at its worst?",
-        "Have you noticed any foods that make the pain worse or better?",
-        "Is there anything that helps relieve the pain once it starts?",
-        "Have you experienced any nausea, vomiting, or changes in bowel movements?",
-        "How much weight have you lost and over what time period?",
-        "Have you had similar episodes before, and if so, how have they progressed?",
-        "Any chest pain, shortness of breath, or leg pain with walking?",
-        "What medications are you currently taking?",
-        "Do you have any known allergies?",
-        "Tell me about your family history of heart or vascular problems?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking - could you rephrase that? I'm mainly worried about this belly pain after eating.",
-        "onset": "This has been going on for about 6 months, but it's gotten much worse in the past month. It started as just some discomfort after big meals, but now even small amounts of food trigger it.",
-        "character": "It's a deep, cramping pain - like someone is twisting my gut from the inside. Sometimes it feels like a vise is squeezing my belly.",
-        "location": "Right here around my belly button, and sometimes it seems to spread across my whole abdomen. It doesn't really go to my back or anywhere else.",
-        "severity": "At its worst, it's easily an 8 or 9 out of 10. I've had to double over and can't do anything until it passes. It's debilitating.",
-        "aggravating": "Any food makes it worse, but fatty foods seem to be the absolute worst. Even a normal-sized meal brings it on every single time.",
-        "relieving": "Nothing really helps much. I've tried antacids, sitting, lying down, walking - the pain just has to run its course over several hours.",
-        "associated": "I've lost about 20 pounds in the past 3 months because I'm afraid to eat. Sometimes I feel a bit nauseous when the pain is bad, but no vomiting. My bowel movements are normal.",
-        "denies": "No fever, no blood in my stool, no chest pain with the episodes. The pain isn't sharp or stabbing, and it's not constant - only after eating.",
-        "history": "I've had some mild indigestion after big meals for years, but nothing like this. This severe cramping pain is new and getting progressively worse.",
-        "medications": "Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg QHS; Lisinopril 40mg daily; Amlodipine 10mg daily; Metformin 1000mg BID; Cilostazol 100mg BID; Nitroglycerin 0.4mg SL PRN",
-        "allergies": "Iodinated Contrast",
-        "family": "My father had a heart attack at 58 and died at 62. My mother had bad circulation problems in her legs and had to have an amputation at 72. My brother had bypass surgery at 60.",
-        "social": "I'm a retired plumber, married for 45 years. I still smoke about a pack a day - I know I should quit. I used to drink heavily but stopped in 2015. No illegal drugs."
-    },
-    "examManeuvers": [
-        "Abdominal inspection",
-        "Abdominal auscultation for bowel sounds and bruits",
-        "Abdominal palpation for tenderness and masses",
-        "Assessment of peripheral pulses",
-        "Cardiac examination",
-        "Assessment for signs of weight loss or malnutrition",
-        "Examination for abdominal distension or guarding",
-        "Assessment for rebound tenderness or peritoneal signs",
-        "Evaluation for organomegaly",
-        "Assessment of capillary refill and skin perfusion"
-    ],
-    "examFindings": {
-        "Abdominal inspection": "Abdomen appears slightly scaphoid consistent with weight loss, no visible distension or masses, no surgical scars",
-        "Abdominal auscultation for bowel sounds and bruits": "Normal bowel sounds present, prominent abdominal bruit heard in epigastric region",
-        "Abdominal palpation for tenderness and masses": "Mild periumbilical tenderness without guarding, no palpable masses, no organomegaly",
-        "Assessment of peripheral pulses": "Diminished dorsalis pedis and posterior tibial pulses bilaterally, femoral pulses weak but palpable",
-        "Cardiac examination": "Regular rate and rhythm, no murmurs or gallops, S1 and S2 normal",
-        "Assessment for signs of weight loss or malnutrition": "Visible temporal wasting, loose-fitting clothes, appears cachectic for stated weight",
-        "Examination for abdominal distension or guarding": "No distension, no voluntary or involuntary guarding, abdomen soft",
-        "Assessment for rebound tenderness or peritoneal signs": "No rebound tenderness, no McBurney's point tenderness, no peritoneal signs",
-        "Evaluation for organomegaly": "No hepatomegaly or splenomegaly appreciated, liver edge not palpable",
-        "Assessment of capillary refill and skin perfusion": "Capillary refill slightly delayed at 3 seconds, skin cool to touch distally"
-    },
-    "ddxTargets": [
-        "Acute Superior Mesenteric Artery Thrombosis (correct diagnosis)",
-        "Chronic Mesenteric Ischemia with acute thrombosis",
-        "Peptic Ulcer Disease",
-        "Mesenteric Artery Embolism",
-        "Abdominal Aortic Aneurysm with impending rupture",
-        "Gastroparesis",
-        "Chronic Pancreatitis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'abdominal pain after eating' as simple gastroparesis or peptic ulcer disease without considering vascular etiology in this high-risk patient",
-        "prematureClosure": "May stop at chronic mesenteric ischemia diagnosis without recognizing acute thrombotic component requiring emergent intervention",
-        "availabilityBias": "More common GI causes like peptic ulcer disease or gastritis may overshadow consideration of rare but life-threatening mesenteric ischemia"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several possible causes for postprandial abdominal pain. Given this patient's extensive cardiovascular risk factors and the progressive nature of his symptoms, what vascular considerations should be high on your differential? How might his existing medications provide clues to his underlying conditions?",
-        "phase5": "Now that you've completed your history and physical, let's synthesize the findings. You have a patient with significant atherosclerotic disease, postprandial pain, weight loss, and an abdominal bruit. How does this constellation of findings narrow your differential? What's the most concerning possibility that requires immediate intervention?",
-        "finalDebrief": "This case illustrates the progression from chronic mesenteric ischemia (intestinal angina) to acute mesenteric artery thrombosis. The key was recognizing that postprandial pain in a patient with extensive atherosclerotic disease represents 'intestinal claudication.' How did the physical findings, particularly the abdominal bruit and evidence of peripheral vascular disease, support the vascular etiology over more common GI causes?"
     }
 }
 };

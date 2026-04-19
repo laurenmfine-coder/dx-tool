@@ -357,6 +357,39 @@ window.EMR_DATA = {
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Gloria Hernandez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did shortness of breath start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been getting more and more tired over the past few months, and now I can ba.'",
+        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Myocardial Infarction.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Amlodipine 10mg daily; Atorvastatin 40mg QHS; Aspirin 81mg daily; Gabapentin 300mg TID.'",
+        "allergies": "'My allergies are Codeine, Shellfish.'",
+        "family": "Father: Myocardial infarction (age 58, fatal), Type 2 diabetes, hypertension  Mother: Type 2 diabetes, stroke (age 72), deceased age 75  Brother: Type 2 diabetes, coronary artery disease (stent at age 62), age 71",
+        "social": "Occupation: Retired school cafeteria worker (30 years). Sedentary since retirement.  Marital: Married, lives with husband. He is also diabetic and has mobility issues.  Tobacco: Never smoker  Alcohol: Rare \u2014 occasional glass of wine at holidays  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and hemodynamic assessment",
         "Vital signs review",
@@ -395,82 +428,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Gloria Hernandez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Myocardial Infarction (Dyspnea-Predominant Presentation). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Gloria appears somewhat anxious and fatigued, speaking in a slightly breathless manner even at rest. She is forthcoming about her symptoms but tends to downplay their severity, attributing them to 'getting older' and her diabetes. She shows moderate distress when describing her functional decline.",
-    "interviewQuestions": [
-        "Can you tell me more about when this shortness of breath started?",
-        "What does the shortness of breath feel like?",
-        "On a scale of 1-10, how would you rate your shortness of breath?",
-        "What activities make your breathing worse?",
-        "Is there anything that helps your breathing?",
-        "Have you had any chest pain or chest discomfort?",
-        "Tell me about the swelling in your ankles",
-        "Have you been waking up short of breath at night?",
-        "Have you had any nausea, sweating, or jaw pain?",
-        "Have you ever had symptoms like this before?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family's medical history"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
-        "onset": "It's been gradually getting worse over the past 3-4 months, but this past week it's gotten much worse. I used to be able to do my housework, but now I get winded just walking across the room.",
-        "character": "It feels like I just can't catch my breath, like I've been running even when I'm just sitting. Sometimes it feels heavy in my chest, like there's a weight on it.",
-        "location": "It's mainly just feeling short of breath, but sometimes I feel pressure across my whole chest, not really pain exactly.",
-        "severity": "Right now I'd say it's about a 7 out of 10. It's really limiting what I can do. I can't even make dinner without having to sit down.",
-        "aggravating": "Any activity makes it worse - walking, climbing stairs, even talking for too long. Lying flat at night makes it worse too.",
-        "relieving": "Sitting down and resting helps some, and I've been sleeping propped up on extra pillows. Nothing really makes it go away completely though.",
-        "associated": "My ankles swell up every day now, and I've been so tired. Sometimes I feel a little nauseous, and I've been sweating more than usual, especially at night.",
-        "denies": "I haven't had any sharp chest pain or pain going down my arm. No coughing up blood or fever.",
-        "history": "I've never had anything like this before. I mean, I get tired because of my diabetes, but this is completely different.",
-        "medications": "Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Amlodipine 10mg daily; Atorvastatin 40mg QHS; Aspirin 81mg daily; Gabapentin 300mg TID",
-        "allergies": "Codeine, Shellfish",
-        "family": "My father died of a heart attack when he was only 58. My mother had diabetes like me and had a stroke. My brother has diabetes too and had to get a stent in his heart a few years ago.",
-        "social": "I worked in the school cafeteria for 30 years but retired a few years ago. I've been pretty sedentary since then. I never smoked and hardly ever drink alcohol, maybe a glass of wine at Christmas."
-    },
-    "examManeuvers": [
-        "Cardiovascular examination - heart sounds",
-        "Cardiovascular examination - murmurs and gallops",
-        "Pulmonary examination - lung sounds",
-        "Extremity examination - edema assessment",
-        "Jugular venous pressure assessment",
-        "Abdominal examination - hepatomegaly",
-        "Skin examination - diaphoresis and color",
-        "Vital signs assessment",
-        "Orthostatic vital signs"
-    ],
-    "examFindings": {
-        "Cardiovascular examination - heart sounds": "S1 and S2 present, regular rate and rhythm",
-        "Cardiovascular examination - murmurs and gallops": "S3 gallop present, no murmurs appreciated",
-        "Pulmonary examination - lung sounds": "Bilateral fine crackles in lower lung fields, decreased breath sounds at bases",
-        "Extremity examination - edema assessment": "2+ pitting edema bilateral lower extremities to mid-calf",
-        "Jugular venous pressure assessment": "JVP elevated to 8 cm above sternal angle",
-        "Abdominal examination - hepatomegaly": "Liver edge palpable 2 cm below costal margin, mild tenderness",
-        "Skin examination - diaphoresis and color": "Skin cool and clammy, mild pallor noted",
-        "Vital signs assessment": "BP 168/98, HR 88, irregular rhythm noted on palpation, SpO2 95% on room air",
-        "Orthostatic vital signs": "No significant orthostatic changes, patient too dyspneic to stand for prolonged measurement"
-    },
-    "ddxTargets": [
-        "Acute Myocardial Infarction (Dyspnea-Predominant Presentation) (correct diagnosis)",
-        "Acute heart failure exacerbation",
-        "Pneumonia with heart failure",
-        "Pulmonary embolism",
-        "Unstable angina",
-        "Chronic obstructive pulmonary disease exacerbation",
-        "Diabetic ketoacidosis with volume overload"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on diabetes complications or typical heart failure presentation, missing atypical MI presentation in elderly diabetic female",
-        "prematureClosure": "May stop at heart failure diagnosis without considering underlying acute coronary syndrome as precipitating cause",
-        "availabilityBias": "May focus on more common presentations of MI with chest pain, overlooking dyspnea-predominant presentation common in elderly diabetic women"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several reasonable possibilities. Given this patient's demographic and risk factors, what presentations of acute coronary syndrome should you specifically consider in elderly diabetic women? How might they differ from classic presentations?",
-        "phase5": "Your exam reveals signs of volume overload and heart failure. What could precipitate acute heart failure in a patient with multiple cardiac risk factors? What specific diagnostic tests would help differentiate between your top differentials?",
-        "finalDebrief": "This case illustrates the atypical presentation of MI in elderly diabetic women, who often present with dyspnea rather than chest pain. The combination of new heart failure symptoms, multiple cardiac risk factors, and diabetic neuropathy masking pain should raise suspicion for silent MI. How did your thinking evolve as you gathered more information?"
     }
 }
 };

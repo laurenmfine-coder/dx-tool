@@ -320,6 +320,39 @@ window.EMR_DATA = {
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Gloria Fontaine appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did hematologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I came in for my regular blood transfusion yesterday and felt fine during it, bu.'",
+        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Hemolytic Transfusion Reaction.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 5mg daily; Metformin 500mg BID; Deferasirox 360mg daily; Folic Acid 1mg daily; Acetaminophen 650mg PRN.'",
+        "allergies": "'My allergies are Ibuprofen, IV Contrast (Iodinated).'",
+        "family": "Mother: Sickle cell trait, HTN, deceased at 72 (stroke)  Father: T2DM, prostate cancer, deceased at 70  Sister: Breast cancer at age 60, alive",
+        "social": "Occupation: Retired nurse  Marital: Widowed; lives with son  Tobacco: Never smoker  Alcohol: Denies \u2014 stopped due to MDS  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and pallor",
         "Vital signs",
@@ -358,84 +391,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Gloria Fontaine's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Hemolytic Transfusion Reaction (ABO Incompatibility). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Gloria appears anxious and frightened, particularly about her dark urine and the severity of her symptoms. As a retired nurse, she's medically knowledgeable and forthcoming with details, but clearly distressed about what went wrong with her routine transfusion. She maintains composure but shows visible concern about potential complications.",
-    "interviewQuestions": [
-        "Can you describe exactly when your symptoms started after the transfusion?",
-        "What did you feel during the actual blood transfusion yesterday?",
-        "Tell me more about the back pain - where exactly and how severe?",
-        "Can you describe the color of your urine this morning?",
-        "Have you had any fever or chills since yesterday?",
-        "Are you experiencing any nausea, vomiting, or abdominal pain?",
-        "How many transfusions have you received for your MDS?",
-        "Have you ever had a reaction to blood products before?",
-        "Are you having any shortness of breath or chest pain?",
-        "Have you noticed any changes in your urine output?",
-        "What medications are you currently taking?",
-        "Do you have any known drug allergies?",
-        "Have you taken any new medications or supplements recently?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking - could you explain that differently?",
-        "onset": "The symptoms started about six hours after my transfusion finished yesterday evening. I felt completely fine during the actual transfusion, but then suddenly felt terrible with chills, fever, and severe back pain all at once.",
-        "character": "The back pain is a deep, intense aching pain, and the chills felt like I couldn't get warm no matter what. The nausea comes in waves and makes me feel like I might vomit.",
-        "location": "The pain is mainly in my lower back, kind of in the kidney area on both sides. It doesn't really radiate anywhere else.",
-        "severity": "The back pain is about an 8 out of 10 - it's really severe and nothing seems to help it. The whole experience has been pretty debilitating.",
-        "aggravating": "Moving around seems to make the back pain worse, and I feel more nauseous when I try to drink anything.",
-        "relieving": "I tried some acetaminophen but it barely touched the pain. Lying still helps a little bit, but not much.",
-        "associated": "I had chills, fever, severe nausea, and this morning I noticed my urine was very dark - almost like tea or cola colored, which really scared me.",
-        "denies": "I haven't had any chest pain, shortness of breath, or actual vomiting. No rash or itching either.",
-        "history": "I've been getting regular transfusions for about two years for my MDS, usually every 3-4 weeks. I've never had anything like this happen before, though I do have some antibodies they always have to work around.",
-        "medications": "Amlodipine 5mg daily; Metformin 500mg BID; Deferasirox 360mg daily; Folic Acid 1mg daily; Acetaminophen 650mg PRN",
-        "allergies": "Ibuprofen, IV Contrast (Iodinated)",
-        "family": "My mother had sickle cell trait and high blood pressure. My father had diabetes like me. There's no family history of transfusion reactions that I know of.",
-        "social": "I'm a retired nurse, so I know this isn't normal. I'm widowed and live with my son now. I stopped drinking alcohol after my MDS diagnosis and never smoked."
-    },
-    "examManeuvers": [
-        "Vital signs assessment",
-        "General appearance and skin color",
-        "Cardiovascular examination",
-        "Pulmonary examination",
-        "Abdominal examination",
-        "Costovertebral angle tenderness",
-        "Lymph node examination",
-        "Neurological assessment",
-        "Skin and mucous membrane examination",
-        "Urinalysis examination"
-    ],
-    "examFindings": {
-        "Vital signs assessment": "BP 145/85 (elevated from baseline), HR 108 (tachycardic), Temp 100.4°F (low-grade fever), RR 20, SpO2 96% on room air",
-        "General appearance and skin color": "Patient appears ill and uncomfortable, mild pallor consistent with chronic anemia, no jaundice or cyanosis",
-        "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, gallops, or rubs. No JVD or peripheral edema",
-        "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi. No respiratory distress",
-        "Abdominal examination": "Soft, non-tender, non-distended. No hepatosplenomegaly or masses palpated. Normal bowel sounds",
-        "Costovertebral angle tenderness": "Positive bilateral CVA tenderness, more prominent on the right side",
-        "Lymph node examination": "No palpable lymphadenopathy in cervical, axillary, or inguinal regions",
-        "Neurological assessment": "Alert and oriented x3, no focal deficits, reflexes symmetric and normal",
-        "Skin and mucous membrane examination": "No rash, petechiae, or purpura. Mucous membranes slightly pale but moist",
-        "Urinalysis examination": "Dark amber/tea-colored urine, positive for blood and protein, negative nitrites and leukocyte esterase"
-    },
-    "ddxTargets": [
-        "Acute Hemolytic Transfusion Reaction (ABO Incompatibility) (correct diagnosis)",
-        "Delayed Hemolytic Transfusion Reaction",
-        "Acute Kidney Injury (transfusion-related)",
-        "Sepsis/Transfusion-Related Bacterial Contamination",
-        "Transfusion-Related Acute Lung Injury (TRALI)",
-        "Febrile Non-Hemolytic Transfusion Reaction",
-        "Acute Pyelonephritis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on the patient's chronic anemia and MDS, potentially attributing symptoms to her underlying condition rather than recognizing the acute transfusion reaction",
-        "prematureClosure": "Risk of stopping at febrile transfusion reaction without recognizing the hemolytic component, especially given the delayed presentation",
-        "availabilityBias": "May focus on more common febrile reactions since acute hemolytic reactions are rare, or conversely overweight ABO incompatibility if recently encountered"
-    },
-    "coachPrompts": {
-        "phase2": "This patient with MDS had symptoms starting 6 hours after transfusion. What specific features in her presentation would help you differentiate between the various types of transfusion reactions? Think about the timing, symptom constellation, and what additional history might be crucial.",
-        "phase5": "Now that you have the history and physical findings, let's focus on the key clinical clues: post-transfusion onset, back pain, dark urine, and CVA tenderness. How do these findings help narrow your differential? What's the most concerning possibility you need to rule out immediately?",
-        "finalDebrief": "This case highlights the importance of recognizing acute hemolytic transfusion reactions, even with delayed presentation. The triad of back pain, hemoglobinuria, and post-transfusion fever should immediately raise suspicion. How did your differential evolve as you gathered more information, and what safeguards could prevent this type of reaction?"
     }
 }
 };

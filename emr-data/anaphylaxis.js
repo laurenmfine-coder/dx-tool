@@ -1098,6 +1098,39 @@ window.EMR_DATA = {
       "Discharge: EpiPen × 2, anaphylaxis action plan, allergist referral, medical alert ID."
     ]
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Priya Sharma appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did lip/tongue swelling, diffuse hives, throat tightness after eating shrimp start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 28F presenting with acute anaphylaxis after accidental shellfish exposure at res.'",
+        "character": "'It's lip/tongue swelling, diffuse hives, throat tightness after eating shrimp \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Albuterol; Combined OCP.'",
+        "allergies": "'My allergies are Shellfish, Tree nuts.'",
+        "family": "Mother: seasonal allergies  Brother: peanut allergy",
+        "social": "Tobacco: Never  Alcohol: Social  Occupation: Software developer  EpiPen: Had EpiPen but expired 6 months ago"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -1136,84 +1169,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Priya Sharma's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Priya appears anxious and distressed, speaking in short sentences due to throat tightness and difficulty breathing. She is cooperative but clearly frightened by her worsening symptoms and frustrated that her EpiPen expired. She keeps touching her swollen lips and looks visibly uncomfortable with generalized itching.",
-    "interviewQuestions": [
-        "Can you tell me exactly what you ate and when your symptoms started?",
-        "Have you used your EpiPen or any emergency medications today?",
-        "Are you having any difficulty breathing or swallowing?",
-        "Can you describe the throat tightness you're experiencing?",
-        "Where did the hives first appear and how have they spread?",
-        "Have you had reactions like this before to shellfish?",
-        "Are you experiencing any chest pain, dizziness, or nausea?",
-        "What medications do you normally take?",
-        "Do you have any other known allergies besides shellfish?",
-        "Have you vomited or had any diarrhea?",
-        "Did you take any Benadryl or other antihistamines?",
-        "Are you feeling lightheaded or like you might pass out?",
-        "Has anyone in your family had severe allergic reactions?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble concentrating... can you repeat that? My throat feels really tight.",
-        "onset": "I was at dinner about 20 minutes ago and accidentally ate some shrimp in a sauce. My lips started tingling almost immediately, then swelling within minutes.",
-        "character": "My throat feels like it's closing up, and there's this scratchy, tight feeling. The hives are so itchy I can't stop scratching.",
-        "location": "It started with my lips and tongue swelling, then hives broke out on my arms and chest, and now they're everywhere. The throat tightness is the scariest part.",
-        "severity": "This is definitely a 9 out of 10 - I can barely swallow and I'm really scared. It's much worse than my previous reactions.",
-        "aggravating": "The symptoms just keep getting worse on their own. Moving around seems to make me more short of breath.",
-        "relieving": "Nothing is helping. I wish I had my EpiPen but it expired 6 months ago. I've been too busy with work to replace it.",
-        "associated": "I feel dizzy and lightheaded, my heart is racing, and I'm having trouble catching my breath. I also feel nauseous.",
-        "denies": "No chest pain, no vomiting yet, no diarrhea. I haven't lost consciousness but I feel like I might.",
-        "history": "I've had shellfish reactions before but never this severe. Usually just some hives and mild lip swelling that goes away with Benadryl.",
-        "medications": "Albuterol; Combined OCP",
-        "allergies": "Shellfish, Tree nuts",
-        "family": "My mother has seasonal allergies and my brother has a severe peanut allergy - he's been hospitalized for it before.",
-        "social": "I'm a software developer, pretty stressful job. I never smoke, drink socially on weekends. I've been working long hours lately and haven't been great about managing my health."
-    },
-    "examManeuvers": [
-        "Inspection of lips and tongue",
-        "Examination of skin for urticaria",
-        "Auscultation of lungs",
-        "Auscultation of heart",
-        "Assessment of upper airway/voice changes",
-        "Palpation of neck for lymphadenopathy",
-        "Abdominal examination",
-        "Assessment of mental status and anxiety level",
-        "Inspection of conjunctiva and face for angioedema",
-        "Assessment of peripheral pulses and capillary refill"
-    ],
-    "examFindings": {
-        "Inspection of lips and tongue": "Significant bilateral lip swelling and tongue edema, patient appears anxious",
-        "Examination of skin for urticaria": "Diffuse raised erythematous wheals across chest, arms, and abdomen with active scratching marks",
-        "Auscultation of lungs": "Bilateral expiratory wheeze, decreased air movement, use of accessory muscles",
-        "Auscultation of heart": "Tachycardic regular rhythm, no murmurs, gallops, or rubs",
-        "Assessment of upper airway/voice changes": "Hoarse voice, audible stridor, patient reports throat tightness",
-        "Palpation of neck for lymphadenopathy": "No lymphadenopathy, mild neck swelling consistent with angioedema",
-        "Abdominal examination": "Soft, non-tender, normal bowel sounds, no organomegaly",
-        "Assessment of mental status and anxiety level": "Alert and oriented but anxious, appropriate responses to questions",
-        "Inspection of conjunctiva and face for angioedema": "Mild periorbital edema, conjunctiva slightly injected",
-        "Assessment of peripheral pulses and capillary refill": "Weak peripheral pulses, capillary refill 3-4 seconds, cool extremities"
-    },
-    "ddxTargets": [
-        "Anaphylaxis (correct diagnosis)",
-        "Severe allergic reaction without anaphylaxis",
-        "Angioedema (hereditary or acquired)",
-        "Acute asthma exacerbation",
-        "Vocal cord dysfunction",
-        "Food poisoning with allergic component",
-        "Panic attack with somatic symptoms"
-    ],
-    "biasFlags": {
-        "anchoring": "Don't anchor on 'just another allergic reaction' - the hypotension and respiratory symptoms indicate life-threatening anaphylaxis requiring immediate epinephrine",
-        "prematureClosure": "Avoid stopping at 'allergic reaction' without assessing for systemic involvement and anaphylaxis criteria - this patient meets multiple organ system involvement",
-        "availabilityBias": "Don't be influenced by seeing many mild food allergies - this presentation with cardiovascular and respiratory compromise represents true anaphylaxis"
-    },
-    "coachPrompts": {
-        "phase2": "Looking at this presentation of post-prandial lip swelling and throat tightness, what key historical elements will help you differentiate between a localized allergic reaction versus systemic anaphylaxis? Consider what questions about timing, progression, and associated symptoms would be most critical.",
-        "phase5": "Now that you've gathered your history and physical findings, let's think systematically about anaphylaxis. This patient has clear mucocutaneous involvement and respiratory symptoms - what other organ system involvement do her vital signs suggest? How does this change your assessment of severity and urgency?",
-        "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement: mucocutaneous (urticaria, angioedema), respiratory (bronchospasm, stridor), and cardiovascular (hypotension, tachycardia). Notice how the expired EpiPen detail highlights the importance of patient education about emergency preparedness. What does this teach us about recognizing anaphylaxis criteria versus isolated allergic reactions?"
     }
 }
 };

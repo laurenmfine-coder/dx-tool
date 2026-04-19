@@ -763,6 +763,39 @@ window.EMR_DATA = {
       "Dermatographism: most common physical urticaria. Stroking skin → wheal-and-flare within 5 min. H1 antihistamine effective."
     ]
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Sofia Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did widespread hives for 3 hours after starting new antibiotic start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started Sofia Gutierrez presents with widespread hives for 3 hours after starting new an.'",
+        "character": "'It's widespread hives for 3 hours after starting new antibiotic \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take TMP-SMX.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Mother: chronic urticaria",
+        "social": "Trigger: TMP-SMX started 3 hours ago for UTI  Tobacco: Never"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -801,84 +834,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Sofia Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Sofia appears anxious and uncomfortable, frequently scratching at her arms and torso while speaking. She is cooperative and detailed in her responses, clearly concerned about the sudden onset of symptoms and worried this might be related to her new medication.",
-    "interviewQuestions": [
-        "Can you describe exactly when your symptoms started in relation to taking the antibiotic?",
-        "What do the hives look like and where are they located on your body?",
-        "Are you experiencing any itching, burning, or pain with the rash?",
-        "Have you had any difficulty breathing, swallowing, or throat tightness?",
-        "Any swelling of your face, lips, tongue, or throat?",
-        "Have you experienced any nausea, vomiting, or abdominal cramping?",
-        "Any dizziness, lightheadedness, or feeling faint?",
-        "Have you ever had hives or allergic reactions before?",
-        "Have you taken TMP-SMX or sulfa antibiotics previously?",
-        "Any recent changes in soaps, detergents, foods, or other medications?",
-        "Are you taking any other medications or supplements currently?",
-        "Any family history of drug allergies or skin reactions?",
-        "How would you rate your current discomfort on a scale of 1-10?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you repeat that? I'm having trouble focusing because of all this itching.",
-        "onset": "The hives started about 3 hours ago, maybe 2-3 hours after I took my first dose of the antibiotic this morning around 8 AM.",
-        "character": "They're raised, red, bumpy welts that are really itchy. Some are small like mosquito bites, others are larger patches that seem to connect together.",
-        "location": "They started on my arms and chest, but now they're spreading everywhere - my back, stomach, legs, even a few on my face and neck.",
-        "severity": "The itching is probably a 7 out of 10 - it's really hard to not scratch. It's definitely interfering with my ability to focus at work.",
-        "aggravating": "The itching seems worse when I'm warm or when I scratch them. Moving around and stress seem to make it more noticeable.",
-        "relieving": "I tried taking a cool shower which helped temporarily, and I put some lotion on but it didn't do much. The itching comes right back.",
-        "associated": "Just the itching and the rash. I feel a little anxious about it, but no trouble breathing or swallowing. No nausea or dizziness.",
-        "denies": "No trouble breathing, no swelling of my face or throat, no chest pain, no vomiting or diarrhea, no fever or chills.",
-        "history": "I've never had hives like this before. I had some mild skin irritation from a new laundry detergent once, but nothing this widespread or severe.",
-        "medications": "Just the TMP-SMX I started today for my UTI. I don't take any other regular medications.",
-        "allergies": "NKDA - at least I didn't think I had any allergies until today. I've never taken this antibiotic before.",
-        "family": "My mother has chronic hives, but the doctors never figured out what causes hers. She's had them for years and takes antihistamines.",
-        "social": "I work as a teacher, I've never smoked, drink wine occasionally on weekends, no drugs. Nothing new in my environment or routine except this medication."
-    },
-    "examManeuvers": [
-        "Inspect skin for distribution and morphology of lesions",
-        "Assess for angioedema of face, lips, and throat",
-        "Examine oral cavity and throat",
-        "Palpate neck for lymphadenopathy",
-        "Auscultate lungs for wheezing or stridor",
-        "Assess vital signs and hemodynamic stability",
-        "Examine for dermographism",
-        "Assess mucous membranes",
-        "Evaluate for urticarial vasculitis features",
-        "Document lesion characteristics and photograph if possible"
-    ],
-    "examFindings": {
-        "Inspect skin for distribution and morphology of lesions": "Multiple raised, erythematous, well-demarcated urticarial plaques of varying sizes (0.5-5 cm) distributed across arms, chest, abdomen, back, and legs with scattered lesions on neck and face",
-        "Assess for angioedema of face, lips, and throat": "No evidence of angioedema; lips, eyelids, and facial features appear normal without swelling",
-        "Examine oral cavity and throat": "Oral mucosa and oropharynx appear normal without erythema, swelling, or lesions",
-        "Palpate neck for lymphadenopathy": "No cervical, supraclavicular, or axillary lymphadenopathy palpated",
-        "Auscultate lungs for wheezing or stridor": "Clear breath sounds bilaterally, no wheezing, rhonchi, or stridor",
-        "Assess vital signs and hemodynamic stability": "Stable vital signs: BP 122/76, HR 88, normal perfusion and mental status",
-        "Examine for dermographism": "Positive dermographism noted - linear wheal formation within 2-3 minutes of firm stroking",
-        "Assess mucous membranes": "Mucous membranes pink and moist, no pallor or cyanosis",
-        "Evaluate for urticarial vasculitis features": "Lesions are typical urticarial wheals, blanch with pressure, no purpura or fixed pigmentation",
-        "Document lesion characteristics and photograph if possible": "Lesions are pruritic, transient wheals with central pallor and surrounding erythema, typical of acute urticaria"
-    },
-    "ddxTargets": [
-        "Acute urticaria secondary to TMP-SMX allergy (correct diagnosis)",
-        "Non-allergic drug reaction",
-        "Viral exanthem",
-        "Anaphylaxis",
-        "Angioedema",
-        "Contact dermatitis",
-        "Chronic idiopathic urticaria"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on the recent antibiotic start without considering other potential triggers or causes of acute urticaria",
-        "prematureClosure": "Risk of immediately assuming drug allergy without adequately assessing for systemic symptoms or other urticaria triggers",
-        "availabilityBias": "May focus on dramatic anaphylaxis presentation due to recent training, potentially missing the more common isolated urticaria presentation"
-    },
-    "coachPrompts": {
-        "phase2": "Good start identifying the temporal relationship with the antibiotic. As you interview Sofia, what key questions will help you distinguish between a localized allergic reaction versus early signs of a systemic reaction? What other potential triggers should you explore?",
-        "phase5": "You've gathered excellent information about the timeline and characteristics of Sofia's reaction. Looking at your physical exam findings, how do they support or refine your differential diagnosis? What features would make you more or less concerned about progression to anaphylaxis?",
-        "finalDebrief": "This case illustrates acute urticaria from TMP-SMX allergy. Notice how the temporal relationship, morphology of lesions, and absence of systemic symptoms helped narrow the diagnosis. What was key in distinguishing this from anaphylaxis? How did the family history of chronic urticaria factor into your assessment, and what are the next steps for Sofia's care?"
     }
 }
 };

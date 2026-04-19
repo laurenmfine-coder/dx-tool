@@ -351,6 +351,39 @@ window.EMR_DATA = {
     "presentation": "Vascular Emergency",
     "category": "vascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Gloria Menendez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did vascular emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started Doctor, I woke up this morning and my right leg felt completely different - it's.'",
+        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Embolic Limb Ischemia.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Warfarin 5mg daily; Carvedilol 25mg BID; Sacubitril/Valsartan 49/51mg BID; Spironolactone 25mg daily; Furosemide 40mg daily; Metformin 1000mg BID; Atorvastatin 80mg QHS; Cilostazol 100mg BID.'",
+        "allergies": "'My allergies are ACE Inhibitors (Enalapril), Aspirin.'",
+        "family": "Father: MI at age 60 (deceased at 65)  Mother: Stroke at age 75, T2DM (deceased at 82)  Brother: CAD, CABG at age 64, alive",
+        "social": "Occupation: Retired elementary school teacher  Marital: Widowed (husband deceased 2019)  Tobacco: Former \u2014 15 pack-years; quit 2004  Alcohol: Rare \u2014 occasional glass of wine with family  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -389,84 +422,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Gloria Menendez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Embolic Limb Ischemia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Gloria appears anxious and uncomfortable, frequently shifting in bed due to severe leg pain. She is cooperative and articulate despite her distress, but seems frightened by the sudden nature of her symptoms and their severity.",
-    "interviewQuestions": [
-        "When exactly did you first notice the leg pain and coldness?",
-        "How would you describe the quality of the pain in your leg?",
-        "On a scale of 1-10, how severe is your pain right now?",
-        "Can you feel me touching your toes and foot normally?",
-        "Have you noticed any color changes in your leg?",
-        "Are you able to move your toes and ankle normally?",
-        "Have you had any chest pain, palpitations, or irregular heartbeats recently?",
-        "Have you been taking your blood thinner as prescribed?",
-        "Have you ever had similar sudden leg pain before?",
-        "Have you had any recent injuries, procedures, or long periods of immobility?",
-        "Are you experiencing any shortness of breath or chest discomfort?",
-        "Have you noticed any weakness in your leg?",
-        "What medications are you currently taking?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking - could you explain that differently? I'm having trouble concentrating with this pain.",
-        "onset": "I woke up around 6 AM to use the bathroom and immediately noticed the pain and coldness. It came on completely suddenly - my leg was fine when I went to bed last night.",
-        "character": "It's a severe, constant aching pain, almost like my leg is being crushed. There's also a burning sensation, and it feels like the blood isn't flowing properly.",
-        "location": "The pain is throughout my entire right leg, from my hip down to my toes, but it's worst in my calf and foot.",
-        "severity": "This is easily a 9 out of 10 - it's excruciating and I can barely think about anything else. I can't put any weight on it.",
-        "aggravating": "Any movement makes it worse, even just trying to lift my leg slightly. Even the bed sheets touching my leg increases the pain.",
-        "relieving": "Nothing seems to help. I tried elevating it, but that didn't do anything. The pain medications I have at home aren't touching this.",
-        "associated": "My leg feels ice cold and looks very pale, almost white. I can barely feel my toes when I try to wiggle them, and my foot feels numb and tingly.",
-        "denies": "No chest pain right now, no shortness of breath, no nausea or vomiting. My other leg feels completely normal.",
-        "history": "I've had some leg pain with walking due to my circulation problems, but nothing like this. This came on suddenly while I was sleeping, which has never happened before.",
-        "medications": "Warfarin 5mg daily; Carvedilol 25mg BID; Sacubitril/Valsartan 49/51mg BID; Spironolactone 25mg daily; Furosemide 40mg daily; Metformin 1000mg BID; Atorvastatin 80mg QHS; Cilostazol 100mg BID",
-        "allergies": "ACE Inhibitors (Enalapril), Aspirin",
-        "family": "My father had a heart attack at 60, and my mother had a stroke. My brother has heart disease too and needed bypass surgery.",
-        "social": "I'm a retired elementary school teacher, widowed since 2019. I used to smoke but quit in 2004 after smoking for about 15 years. I rarely drink alcohol, maybe a glass of wine occasionally with family."
-    },
-    "examManeuvers": [
-        "Palpation of dorsalis pedis pulse",
-        "Palpation of posterior tibial pulse",
-        "Palpation of popliteal pulse",
-        "Assessment of capillary refill time",
-        "Inspection of skin color and temperature",
-        "Assessment of motor function and strength",
-        "Assessment of sensation to light touch",
-        "Cardiac auscultation for rhythm irregularities",
-        "Assessment of ankle-brachial index",
-        "Evaluation of collateral circulation"
-    ],
-    "examFindings": {
-        "Palpation of dorsalis pedis pulse": "Absent dorsalis pedis pulse on right foot, normal strong pulse palpated on left foot",
-        "Palpation of posterior tibial pulse": "Absent posterior tibial pulse on right leg, normal pulse present on left",
-        "Palpation of popliteal pulse": "Significantly diminished popliteal pulse on right, normal on left",
-        "Assessment of capillary refill time": "Capillary refill greater than 5 seconds in right foot, normal <2 seconds in left foot",
-        "Inspection of skin color and temperature": "Right leg markedly pale and cold to touch compared to left leg, with clear demarcation at mid-thigh level",
-        "Assessment of motor function and strength": "Severely limited active movement in right foot and toes, weakness in ankle dorsiflexion and plantarflexion",
-        "Assessment of sensation to light touch": "Markedly diminished sensation in right foot and lower leg compared to normal sensation on left",
-        "Cardiac auscultation for rhythm irregularities": "Irregular heart rhythm consistent with atrial fibrillation, no murmurs or gallops",
-        "Assessment of ankle-brachial index": "Unable to obtain measurable ankle pressure on right due to absent pulses, left ABI 0.7 indicating baseline PAD",
-        "Evaluation of collateral circulation": "Poor collateral flow evident, no palpable collateral vessels, dependent rubor absent"
-    },
-    "ddxTargets": [
-        "Acute Embolic Limb Ischemia (correct diagnosis)",
-        "Acute Thrombotic Limb Ischemia",
-        "Acute Arterial Thrombosis",
-        "Acute Myocardial Infarction with Cardiogenic Shock",
-        "Aortic Dissection with Branch Vessel Involvement",
-        "Severe Peripheral Arterial Disease Exacerbation",
-        "Deep Vein Thrombosis with Phlegmasia Cerulea Dolens"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on chronic PAD history and missing the acute embolic nature - the sudden onset and severity distinguish this from chronic PAD progression",
-        "prematureClosure": "Risk of stopping workup after confirming absent pulses without considering embolic source and need for emergent intervention vs chronic disease management",
-        "availabilityBias": "May focus on more common chronic PAD exacerbation rather than recognizing acute limb-threatening embolic event requiring immediate vascular surgery consultation"
-    },
-    "coachPrompts": {
-        "phase2": "Given this 72-year-old woman's presentation of sudden severe leg pain and coldness, what key historical features will help you distinguish between acute embolic ischemia, thrombotic occlusion, and chronic PAD progression? Consider her cardiac history - what might be the source of an embolus?",
-        "phase5": "Your exam confirms acute limb ischemia with absent pulses and sensorimotor changes. How does the sudden onset in this patient with atrial fibrillation help narrow your differential? What's the most critical next step - is this limb viable or immediately threatened?",
-        "finalDebrief": "This case illustrates acute embolic limb ischemia from her atrial fibrillation despite anticoagulation. The key was recognizing the sudden onset, complete vascular compromise, and cardiac source. Early recognition and emergent vascular surgery consultation are crucial for limb salvage. How did the physical findings help you differentiate this from chronic PAD progression?"
     }
 }
 };

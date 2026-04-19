@@ -933,6 +933,39 @@ window.EMR_DATA = {
       "Airway angioedema: tongue/uvular/laryngeal — epinephrine IM first, prepare for intubation, ENT/anesthesia early involvement."
     ]
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Priya Nair appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did lip swelling and hives after ibuprofen start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started Priya Nair presents with lip swelling and hives after ibuprofen.'",
+        "character": "'It's lip swelling and hives after ibuprofen \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take no medications.'",
+        "allergies": "'My allergies are Aspirin, Ibuprofen.'",
+        "family": "Father: aspirin sensitivity",
+        "social": "Tobacco: Never"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -971,84 +1004,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Priya Nair's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Priya is anxious and concerned about her swollen appearance, speaking quickly and touching her face frequently. She is very forthcoming about details, worried this might happen again, and rates her distress as moderate due to the visible swelling affecting her confidence.",
-    "interviewQuestions": [
-        "When exactly did you first notice the lip swelling and hives?",
-        "How long after taking the ibuprofen did your symptoms start?",
-        "Can you describe exactly what the swelling and hives look like?",
-        "Have you ever had a reaction like this to any medication before?",
-        "What dose of ibuprofen did you take and why did you take it?",
-        "Are you having any difficulty breathing or swallowing?",
-        "Do you have any throat tightness or voice changes?",
-        "Have you taken any other medications or eaten anything unusual recently?",
-        "Do you have any known allergies to medications?",
-        "Has anyone in your family had similar reactions to medications?",
-        "Have you tried anything to treat the swelling or hives?",
-        "Are the symptoms getting better, worse, or staying the same?",
-        "Do you have any other medical conditions or take any regular medications?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure what you mean. Could you ask that differently? I'm mostly worried about my face being so swollen.",
-        "onset": "The swelling started about 45 minutes after I took two ibuprofen tablets for a headache. The hives appeared shortly after, maybe within an hour.",
-        "character": "My lips feel tight and puffy, especially the lower lip. The hives are raised, red welts that are really itchy all over my arms and chest.",
-        "location": "The swelling is mainly in my lower lip, though my upper lip is a bit puffy too. The hives are on my arms, chest, and some on my back.",
-        "severity": "I'd say the discomfort is about a 6 out of 10. The itching is really bothersome and I'm worried about how I look. I can still eat and drink normally.",
-        "aggravating": "Touching or rubbing the areas seems to make the itching worse. I'm worried that moving around might be making it spread.",
-        "relieving": "I tried putting a cold compress on my lip which helped a little with the swelling. Nothing seems to help much with the itching.",
-        "associated": "Just the swelling and hives. No trouble breathing, but I keep checking because I'm worried it might get worse.",
-        "denies": "No difficulty breathing, no throat tightness, no nausea or vomiting, no dizziness, and my voice sounds normal to me.",
-        "history": "I had a similar reaction to aspirin about three years ago, but it was milder. Just some hives on my arms, no facial swelling like this.",
-        "medications": "no medications",
-        "allergies": "Aspirin, Ibuprofen",
-        "family": "My father has an aspirin sensitivity. He gets stomach upset and some skin reactions when he takes it.",
-        "social": "I work as a graphic designer, mostly at a computer. I don't smoke, drink alcohol maybe once a week socially, and don't use any recreational drugs."
-    },
-    "examManeuvers": [
-        "Inspect lips and perioral area",
-        "Examine skin for urticarial lesions",
-        "Assess airway patency and voice quality",
-        "Palpate neck for lymphadenopathy",
-        "Auscultate lungs for wheezing",
-        "Examine oral cavity and tongue",
-        "Assess for conjunctival swelling",
-        "Check capillary refill and perfusion",
-        "Palpate for facial tenderness",
-        "Assess extent and distribution of rash"
-    ],
-    "examFindings": {
-        "Inspect lips and perioral area": "Moderate non-pitting edema of lower lip, mild edema of upper lip, no cyanosis",
-        "Examine skin for urticarial lesions": "Multiple raised erythematous wheals 0.5-2cm diameter on bilateral arms, chest, and upper back",
-        "Assess airway patency and voice quality": "Voice clear, no stridor, no respiratory distress, airway patent",
-        "Palpate neck for lymphadenopathy": "No cervical, supraclavicular, or submandibular lymphadenopathy",
-        "Auscultate lungs for wheezing": "Clear breath sounds bilaterally, no wheezes, rales, or rhonchi",
-        "Examine oral cavity and tongue": "Tongue normal size and color, no oral mucosal swelling, teeth and gums normal",
-        "Assess for conjunctival swelling": "No periorbital edema, conjunctiva normal, no chemosis",
-        "Check capillary refill and perfusion": "Capillary refill less than 2 seconds, good peripheral perfusion",
-        "Palpate for facial tenderness": "Mild tenderness over swollen lip areas, no sinus tenderness",
-        "Assess extent and distribution of rash": "Urticarial rash limited to arms, chest, and upper back, sparing face, legs, and abdomen"
-    },
-    "ddxTargets": [
-        "NSAID-induced angioedema (correct diagnosis)",
-        "Hereditary angioedema",
-        "ACE inhibitor-induced angioedema",
-        "Anaphylaxis",
-        "Acute allergic reaction with laryngeal edema",
-        "Contact dermatitis with secondary angioedema",
-        "Idiopathic urticaria and angioedema"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on the obvious ibuprofen connection and miss exploring other potential triggers or underlying conditions like hereditary angioedema",
-        "prematureClosure": "Might quickly diagnose drug allergy without fully assessing severity or considering progression to anaphylaxis",
-        "availabilityBias": "Recent cases of anaphylaxis might lead to over-estimation of severity, or common drug allergies might lead to under-estimation of this patient's risk"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. Before you interview the patient, think about what key historical features would help you distinguish between a localized allergic reaction and a more systemic process like anaphylaxis. What timeline questions will be most important?",
-        "phase5": "Now that you have the full history and exam, consider how the timing, pattern of symptoms, and physical findings help narrow your differential. What features make you more or less concerned about airway compromise? How does the family history influence your thinking?",
-        "finalDebrief": "This case highlights the importance of cross-reactivity between NSAIDs and the spectrum of allergic reactions from localized urticaria to life-threatening anaphylaxis. How did the patient's stable vital signs, clear airway exam, and localized findings help you gauge severity? What would make you more concerned about progression?"
     }
 }
 };

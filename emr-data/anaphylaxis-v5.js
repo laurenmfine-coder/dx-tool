@@ -1233,6 +1233,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Amira Hassan is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Epinephrine; Albuterol; Diphenhydramine; Dexamethasone.'",
+        "allergies": "'My allergies: Sesame, Eggs.'",
+        "family": "Father: asthma  Mother: sesame allergy",
+        "social": "Living: Recent immigrant family from Syria \u2014 in US 2 years  Language: Parents speak Arabic only \u2014 patient speaks English learned at school  Diet: Middle Eastern diet heavy in sesame/tahini \u2014 major dietary disruption  Religion: Muslim \u2014 halal dietary requirements intersect with allergy avoidance  School: 3rd grade \u2014 504 plan in place"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1271,84 +1302,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Amira Hassan: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Amira appears anxious and distressed, with visible facial swelling and audible wheezing, but trying to be brave. She is cooperative and forthcoming with answers despite her respiratory distress, occasionally looking to her parents who appear very worried and speak in Arabic to each other.",
-    "interviewQuestions": [
-        "What did you eat before you started feeling sick?",
-        "When did you first notice your face starting to swell?",
-        "Are you having trouble breathing or does your chest feel tight?",
-        "Have you used your rescue inhaler today?",
-        "Did anyone give you your EpiPen after you ate the hummus?",
-        "Is your throat feeling tight or scratchy?",
-        "Are you feeling dizzy or like you might faint?",
-        "Do you have any itching on your skin or hives?",
-        "Have you thrown up or felt nauseous?",
-        "When was the last time you had a reaction like this to sesame?",
-        "Do you have any belly pain or cramping?",
-        "Did your parents know the hummus had sesame in it?",
-        "How long after eating the hummus did you start feeling sick?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure... it's hard to think right now because I feel really sick",
-        "onset": "I ate the hummus about 30 minutes ago and my lips started tingling right away, then my face got puffy",
-        "character": "My chest feels really tight and it's hard to breathe, like someone is squeezing me",
-        "location": "My face is swollen, especially around my eyes and lips, and my chest feels tight all over",
-        "severity": "This is like an 8 out of 10 - I'm really scared and it's hard to breathe",
-        "aggravating": "It keeps getting worse even though we came to the hospital",
-        "relieving": "My dad gave me my EpiPen in the car but I still feel bad",
-        "associated": "My skin is really itchy, I feel dizzy, and my stomach hurts a little bit",
-        "denies": "I haven't thrown up and I don't have a fever, but everything else feels bad",
-        "history": "I had a really bad reaction to sesame when I was 6 and had to go to the hospital then too",
-        "medications": "Epinephrine; Albuterol; Diphenhydramine; Dexamethasone",
-        "allergies": "Sesame, Eggs",
-        "family": "My mom is allergic to sesame too and my dad has asthma like me",
-        "social": "I'm in 3rd grade and we moved here from Syria. My parents don't speak English very well and didn't know the hummus had tahini in it"
-    },
-    "examManeuvers": [
-        "Assess airway patency and voice quality",
-        "Inspect face and lips for angioedema",
-        "Auscultate lungs for wheezing or stridor",
-        "Examine skin for urticaria or flushing",
-        "Assess cardiovascular status and perfusion",
-        "Evaluate mental status and anxiety level",
-        "Inspect oropharynx and tongue",
-        "Assess work of breathing and accessory muscle use",
-        "Palpate lymph nodes",
-        "Examine abdomen for tenderness"
-    ],
-    "examFindings": {
-        "Assess airway patency and voice quality": "Voice is slightly hoarse, no stridor, airway patent but patient appears anxious about breathing",
-        "Inspect face and lips for angioedema": "Significant periorbital and lip swelling, more pronounced on the left side",
-        "Auscultate lungs for wheezing or stridor": "Bilateral expiratory wheeze throughout all lung fields, good air movement",
-        "Examine skin for urticaria or flushing": "Diffuse urticarial rash on trunk and arms, skin appears flushed",
-        "Assess cardiovascular status and perfusion": "Tachycardic, hypotensive, capillary refill 3 seconds, pulses present but thready",
-        "Evaluate mental status and anxiety level": "Alert and oriented, anxious but appropriate, no altered mental status",
-        "Inspect oropharynx and tongue": "Tongue appears mildly swollen, uvula visible, no obvious obstruction",
-        "Assess work of breathing and accessory muscle use": "Mild accessory muscle use, speaking in short sentences due to dyspnea",
-        "Palpate lymph nodes": "No lymphadenopathy palpated",
-        "Examine abdomen for tenderness": "Soft, mild diffuse tenderness, no guarding or rebound"
-    },
-    "ddxTargets": [
-        "Anaphylaxis secondary to sesame exposure (correct diagnosis)",
-        "Severe asthma exacerbation",
-        "Acute allergic reaction without anaphylaxis",
-        "Angioedema (hereditary or acquired)",
-        "Food poisoning or gastroenteritis",
-        "Viral upper respiratory infection with reactive airway",
-        "Anxiety or panic attack"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on asthma given her known history and wheezing, potentially missing the systemic signs of anaphylaxis",
-        "prematureClosure": "May focus only on respiratory symptoms and miss cardiovascular involvement and full anaphylaxis criteria",
-        "availabilityBias": "Might be influenced by recent cases of asthma exacerbation rather than recognizing multi-system anaphylactic reaction"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several possible diagnoses. Given that this patient has known food allergies and recent exposure, what specific historical details would help you differentiate between a severe allergic reaction and anaphylaxis? What timeline questions might be most important?",
-        "phase5": "Now that you've gathered your history and physical exam findings, let's think about the criteria for anaphylaxis. What systems are involved in this patient's presentation? How does this help narrow your differential diagnosis, and what immediate interventions should you consider?",
-        "finalDebrief": "This case highlights the importance of recognizing anaphylaxis as a multi-system emergency rather than focusing only on respiratory symptoms. The cultural and language barriers added complexity to prevention. How did your thinking evolve from considering asthma exacerbation to recognizing systemic anaphylaxis? What social determinants of health factors contributed to this emergency?"
     }
 }
 };

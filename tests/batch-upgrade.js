@@ -161,16 +161,57 @@ async function callAPI(prompt, retries = MAX_RETRIES) {
   }
 }
 
-// ── Patch case file ───────────────────────────────────────────────────────
+// ── Patch case file (structural: parse → mutate → serialize → validate) ──
+// We do NOT do regex-based text surgery on the case file. We parse it, set
+// data.guided = guided on the object, serialize the whole object back as
+// JSON, re-wrap in `window.EMR_DATA = {...};`, and preserve the original
+// preamble (comments, header) byte-for-byte. Then we syntax-check the
+// resulting file and only commit the write if it parses. If anything fails,
+// the original file is left untouched.
+const vm = require('vm');
+
 function patchCase(fp, guided) {
-  let src = fs.readFileSync(fp, 'utf8');
-  // Remove existing guided block
-  src = src.replace(/,?\s*"guided"\s*:\s*\{[\s\S]*?\n(\s{2,4})\}/m, '');
-  // Insert before closing };
-  const insertAt = src.lastIndexOf('\n};');
-  if (insertAt < 0) throw new Error('Cannot find closing }; in ' + path.basename(fp));
-  src = src.slice(0, insertAt) + ',\n  "guided": ' + JSON.stringify(guided, null, 4) + src.slice(insertAt);
-  fs.writeFileSync(fp, src, 'utf8');
+  const original = fs.readFileSync(fp, 'utf8');
+
+  // 1. Parse the original file to get the EMR_DATA object.
+  //    Use a fresh VM context so stray globals from other cases don't leak.
+  const sandbox = { window: {}, console: console };
+  sandbox.window.EMR_DATA = undefined;
+  try {
+    vm.runInNewContext(original, sandbox, { filename: fp, timeout: 2000 });
+  } catch (e) {
+    throw new Error('original file does not parse: ' + e.message);
+  }
+  const data = sandbox.window.EMR_DATA;
+  if (!data || typeof data !== 'object') {
+    throw new Error('original file has no window.EMR_DATA');
+  }
+
+  // 2. Attach/replace the guided block structurally.
+  data.guided = guided;
+
+  // 3. Preserve the original preamble (everything before `window.EMR_DATA`).
+  //    This keeps header comments intact across formats (// or /* */).
+  const marker = original.search(/window\s*\.\s*EMR_DATA\s*=/);
+  const preamble = marker > 0 ? original.slice(0, marker) : '';
+
+  // 4. Serialize the whole object. 2-space indent matches existing files.
+  const body = 'window.EMR_DATA = ' + JSON.stringify(data, null, 2) + ';\n';
+  const output = preamble + body;
+
+  // 5. Syntax-check BEFORE writing. If this throws, the original file is
+  //    untouched on disk — no partial/corrupt writes possible.
+  try {
+    new vm.Script(output, { filename: fp + ' (post-patch)' });
+  } catch (e) {
+    throw new Error('patched output has syntax error (file NOT written): ' + e.message);
+  }
+
+  // 6. Atomic write: write to a temp file then rename, so a process kill
+  //    mid-write cannot leave a half-written case file on disk.
+  const tmp = fp + '.tmp';
+  fs.writeFileSync(tmp, output, 'utf8');
+  fs.renameSync(tmp, fp);
 }
 
 // ── Progress file ─────────────────────────────────────────────────────────
@@ -262,4 +303,9 @@ async function main() {
   if (failed > 0) console.log(`Check tests/.upgrade-progress.json for failed cases`);
 }
 
-main().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
+if (require.main === module) {
+  main().catch(e => { console.error('Fatal:', e.message); process.exit(1); });
+}
+
+// Expose for testing
+module.exports = { patchCase };

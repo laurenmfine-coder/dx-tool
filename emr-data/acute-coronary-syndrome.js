@@ -337,6 +337,39 @@ window.EMR_DATA = {
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Harold Desmond is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did shortness of breath start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 67M with T2DM, HTN, CKD 3a presents for quarterly check.'",
+        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Coronary Syndrome.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Gabapentin 300mg TID.'",
+        "allergies": "'My allergies are Sulfonamides, Shellfish.'",
+        "family": "Father: MI at age 62 (deceased at 64 from second MI)  Mother: T2DM, HTN, CVA at age 74, alive at 88  Brother: T2DM, coronary stenting at age 59, alive at 64",
+        "social": "Occupation: Retired postal worker (37 years); sedentary since retirement 2023  Marital: Married 40 years  Tobacco: Former smoker \u2014 20 pack-years; quit 2019  Alcohol: Occasional \u2014 1-2 beers on weekends  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and hemodynamic assessment",
         "Vital signs review",
@@ -375,82 +408,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Harold Desmond's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea \u2014 Anginal Equivalent in Diabetic Patient). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Harold appears mildly anxious but cooperative, initially downplaying his symptoms as \"just getting older\" and being out of shape. He becomes more forthcoming when asked direct questions but tends to minimize the significance of his fatigue and breathing difficulties.",
-    "interviewQuestions": [
-        "Can you tell me more about your shortness of breath?",
-        "When did you first notice the breathing problems?",
-        "What activities trigger your shortness of breath?",
-        "Do you have any chest pain or pressure?",
-        "Have you noticed any swelling in your legs or feet?",
-        "Any nausea, sweating, or jaw pain recently?",
-        "How has your energy level been lately?",
-        "Any changes in your sleep patterns or need to sleep propped up?",
-        "Have you had any palpitations or irregular heartbeats?",
-        "Any recent weight gain?",
-        "How well controlled has your diabetes been?",
-        "Any changes in your usual activities or exercise tolerance?",
-        "Have you experienced anything like this before?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
-        "onset": "I first noticed feeling more tired about two months ago, maybe a bit longer. The breathing thing started maybe 3-4 weeks ago, just when I go upstairs or walk up hills.",
-        "character": "It's like I just can't catch my breath, like I've been running but I'm just walking up stairs. Sometimes I feel heavy, like there's weight on my chest, but not really pain.",
-        "location": "Mostly just feel it in my chest and I'm breathing hard. Sometimes my left arm feels a bit heavy too, but I figured that was from yard work.",
-        "severity": "Maybe a 4 or 5 out of 10 for the breathing, but the tiredness is really getting to me - probably a 7. I used to be able to do things around the house without problem.",
-        "aggravating": "Going upstairs definitely makes it worse, walking uphill, carrying groceries. Even getting dressed in the morning sometimes leaves me winded.",
-        "relieving": "If I sit down and rest for a few minutes, it gets better. I haven't really tried anything else.",
-        "associated": "I've been really tired lately, more than usual. Sometimes I feel a bit nauseous, especially in the mornings. My wife says I've been sweating more at night.",
-        "denies": "No sharp chest pain, no dizziness or fainting. No cough or fever. Haven't noticed any leg swelling.",
-        "history": "Nothing exactly like this before. I had some chest tightness a few years ago but the doctor said it was just heartburn.",
-        "medications": "Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Gabapentin 300mg TID",
-        "allergies": "Sulfonamides, Shellfish",
-        "family": "My dad had heart attacks - first one at 62, and it killed him two years later. My mom had diabetes and a stroke. My younger brother had to get stents in his heart a few years back.",
-        "social": "I worked for the postal service for 37 years, just retired last year. I used to smoke about a pack a day for 20 years but quit in 2019. I have a couple beers on weekends. Since I retired, I don't get around as much as I used to."
-    },
-    "examManeuvers": [
-        "Cardiac auscultation",
-        "Pulmonary auscultation",
-        "Jugular venous distension assessment",
-        "Lower extremity edema assessment",
-        "Peripheral pulse examination",
-        "Blood pressure measurement",
-        "Heart rate and rhythm assessment",
-        "Abdominal examination for hepatomegaly",
-        "Skin examination for diaphoresis or cyanosis"
-    ],
-    "examFindings": {
-        "Cardiac auscultation": "S1 and S2 present, S4 gallop noted, no murmurs or rubs appreciated",
-        "Pulmonary auscultation": "Bilateral fine crackles at lung bases, otherwise clear",
-        "Jugular venous distension assessment": "JVD mildly elevated at 8 cm H2O",
-        "Lower extremity edema assessment": "Trace bilateral pedal edema, no calf tenderness",
-        "Peripheral pulse examination": "Diminished dorsalis pedis pulses bilaterally, radial pulses 2+ and regular",
-        "Blood pressure measurement": "Elevated at 168/94 mmHg, consistent with given vitals",
-        "Heart rate and rhythm assessment": "Regular rate at 98 bpm, no irregular rhythm detected",
-        "Abdominal examination for hepatomegaly": "Soft, obese abdomen, liver edge not palpable, no tenderness",
-        "Skin examination for diaphoresis or cyanosis": "Mild diaphoresis on forehead, no cyanosis, skin warm and dry elsewhere"
-    },
-    "ddxTargets": [
-        "Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea — Anginal Equivalent in Diabetic Patient) (correct diagnosis)",
-        "Congestive Heart Failure - acute exacerbation",
-        "Pulmonary Embolism",
-        "Acute ST-elevation Myocardial Infarction",
-        "Aortic Dissection",
-        "Pneumonia with respiratory compromise",
-        "Deconditioning with hypertensive crisis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'routine visit' and 'deconditioning' explanation, missing the cardiac nature of dyspnea in this diabetic patient with multiple risk factors",
-        "prematureClosure": "May stop at heart failure diagnosis without considering active coronary syndrome, or dismiss symptoms as routine diabetes complications",
-        "availabilityBias": "Recent cases of simple deconditioning or routine diabetes visits may overshadow the subtle presentation of ACS in diabetic patients who often lack classic chest pain"
-    },
-    "coachPrompts": {
-        "phase2": "This is a 67-year-old diabetic man presenting with what he describes as shortness of breath and fatigue. Given his risk factors and family history, what are you most concerned about? How might diabetes affect the typical presentation of certain cardiovascular conditions?",
-        "phase5": "You've identified several concerning findings - the S4 gallop, elevated JVD, and bilateral crackles suggest cardiac involvement. Combined with his diabetes, family history, and atypical presentation of dyspnea rather than chest pain, what does this constellation suggest? What's the next most important step?",
-        "finalDebrief": "This case illustrates the classic 'anginal equivalent' presentation of NSTEMI in diabetic patients. The autonomic neuropathy from diabetes often masks typical chest pain, presenting instead as dyspnea, fatigue, or nausea. The key was recognizing that new-onset exertional dyspnea in a high-risk diabetic patient should trigger suspicion for ACS, not just heart failure or deconditioning."
     }
 }
 };

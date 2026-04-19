@@ -351,6 +351,39 @@ window.EMR_DATA = {
     "presentation": "Cardiac Emergency",
     "category": "cardiovascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Raymond Brooks appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did cardiac emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been having trouble catching my breath when I climb stairs or walk more tha.'",
+        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Inferior STEMI with Complete Heart Block.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Aspirin 81mg daily; Atorvastatin 80mg QHS; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Insulin Glargine 24 units QHS; Metformin 1000mg BID; Gabapentin 300mg TID; Nitroglycerin 0.4mg SL PRN.'",
+        "allergies": "'My allergies are Clopidogrel, IV Contrast Dye.'",
+        "family": "Father: Fatal MI at age 54 (deceased)  Mother: T2DM, HTN, Stroke at 70, deceased at 76  Brother: CAD (CABG age 58), alive at 62",
+        "social": "Occupation: Retired postal worker; retired 2023  Marital: Married 40 years; wife Diane, age 65  Tobacco: Former smoker \u2014 quit 2010; 20 pack-year history  Alcohol: Rare; 1-2 beers on weekends  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and hemodynamic assessment",
         "Vital signs review",
@@ -389,84 +422,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Raymond Brooks's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Inferior STEMI with Complete Heart Block. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Raymond is anxious and concerned about his worsening symptoms, particularly given his family history of heart disease. He appears uncomfortable and slightly short of breath but is cooperative and forthcoming with information, though he minimizes the severity of his symptoms.",
-    "interviewQuestions": [
-        "Can you describe exactly what you mean by trouble catching your breath?",
-        "Tell me more about this jaw tightness - when does it happen and what does it feel like?",
-        "How far could you walk before without getting short of breath?",
-        "Do you ever have chest pain or pressure?",
-        "Have you noticed any swelling in your legs or feet?",
-        "Do you get short of breath when lying flat at night?",
-        "Have you had any nausea, vomiting, or sweating with these episodes?",
-        "Do you ever feel dizzy or lightheaded?",
-        "Have you been taking your nitroglycerin? Does it help?",
-        "Any recent changes in your energy level or ability to do daily activities?",
-        "Have you had any palpitations or irregular heartbeat?",
-        "When was your last stress test or heart catheterization?",
-        "Have you been checking your blood sugars regularly?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Can you ask that differently?",
-        "onset": "This started about 3 weeks ago, gradually getting worse. The jaw tightness started maybe 10 days ago.",
-        "character": "It's like I can't get enough air, like my lungs won't fill up completely. The jaw feels heavy and tight, like someone's squeezing it.",
-        "location": "The breathing is just everywhere in my chest. The jaw tightness is mostly on the left side but sometimes both sides.",
-        "severity": "The breathing trouble is maybe a 6 out of 10 when I'm walking. The jaw thing is about a 4 or 5. I have to stop and rest now when I never did before.",
-        "aggravating": "Walking uphill, climbing stairs, carrying groceries. Even just walking to the mailbox sometimes.",
-        "relieving": "Sitting down and resting helps. I haven't tried my nitroglycerin spray yet - didn't think I needed it.",
-        "associated": "I've been more tired lately, and sometimes I feel a little sweaty when the jaw gets tight. My wife says I look pale sometimes.",
-        "denies": "No sharp chest pain, no leg swelling that I've noticed, no fainting or falling down.",
-        "history": "I had some chest pressure a few months ago but it went away. Never had the jaw thing before or this kind of breathing trouble.",
-        "medications": "Aspirin 81mg daily; Atorvastatin 80mg QHS; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Insulin Glargine 24 units QHS; Metformin 1000mg BID; Gabapentin 300mg TID; Nitroglycerin 0.4mg SL PRN",
-        "allergies": "Clopidogrel, IV Contrast Dye",
-        "family": "My father died of a heart attack at 54, and my brother had bypass surgery at 58. My mother had diabetes and high blood pressure like me.",
-        "social": "I just retired from the post office last year. Been married to Diane for 40 years. I quit smoking in 2010 after 20 years of a pack a day. I only drink maybe one or two beers on the weekend."
-    },
-    "examManeuvers": [
-        "Cardiac auscultation",
-        "Pulmonary auscultation",
-        "JVD assessment",
-        "Lower extremity edema check",
-        "Peripheral pulse palpation",
-        "Blood pressure in both arms",
-        "Capillary refill",
-        "Heart rate and rhythm assessment",
-        "S3/S4 gallop assessment",
-        "Hepatojugular reflux"
-    ],
-    "examFindings": {
-        "Cardiac auscultation": "Bradycardic regular rhythm, rate 58, no murmurs, rubs, or gallops audible",
-        "Pulmonary auscultation": "Bilateral fine crackles at lung bases, otherwise clear",
-        "JVD assessment": "Jugular venous distention to 8 cm at 45 degrees",
-        "Lower extremity edema check": "Trace bilateral pedal edema, no pitting",
-        "Peripheral pulse palpation": "Diminished dorsalis pedis bilaterally, radial pulses present but weak",
-        "Blood pressure in both arms": "Right arm 132/78, Left arm 128/76",
-        "Capillary refill": "Sluggish at 3-4 seconds in fingernails",
-        "Heart rate and rhythm assessment": "Bradycardic at 58 bpm, regular rhythm",
-        "S3/S4 gallop assessment": "Faint S4 gallop present",
-        "Hepatojugular reflux": "Positive hepatojugular reflux"
-    },
-    "ddxTargets": [
-        "Acute Inferior STEMI with Complete Heart Block",
-        "Acute coronary syndrome without ST elevation",
-        "Congestive heart failure exacerbation",
-        "Pulmonary embolism",
-        "Aortic dissection",
-        "Stable angina progression",
-        "Pneumonia with cardiac stress"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on chronic conditions (diabetes, known CAD) and missing acute coronary event, especially given subtle presentation",
-        "prematureClosure": "May stop at CHF exacerbation without considering underlying acute ischemic cause, particularly with jaw symptoms",
-        "availabilityBias": "Recent cases of CHF or respiratory complaints may overshadow recognition of atypical MI presentation in diabetic patient"
-    },
-    "coachPrompts": {
-        "phase2": "Given Mr. Brooks' risk factors and symptom constellation, what key historical elements will help you differentiate between heart failure exacerbation and an acute coronary syndrome? Consider his diabetic status and how that might affect symptom presentation.",
-        "phase5": "You've identified concerning cardiac findings including bradycardia and signs of volume overload. How do the jaw symptoms, timeline, and examination findings help narrow your differential? What's the most critical next diagnostic step?",
-        "finalDebrief": "This case illustrates how acute MI can present atypically in diabetic patients, with jaw discomfort rather than classic chest pain. The complete heart block explains the bradycardia despite acute ischemia. How did the combination of new exertional symptoms, jaw discomfort, and cardiac exam findings point toward acute coronary syndrome rather than just CHF exacerbation?"
     }
 }
 };

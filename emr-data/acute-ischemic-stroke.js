@@ -389,6 +389,39 @@ window.EMR_DATA = {
     "presentation": "Altered Mental Status",
     "category": "neurologic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Eugene Washington appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did altered mental status start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My wife says I was acting strange this morning - I couldn't get the words out ri.'",
+        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Ischemic Stroke.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 80mg QHS.'",
+        "allergies": "'My allergies are Warfarin, Sulfa Drugs.'",
+        "family": "Father: Stroke at age 62 (deceased), Hypertension, T2DM  Mother: Hypertension, CHF, deceased at 80  Brother: MI at age 58, AFib, alive at 64",
+        "social": "Occupation: Retired bus driver (Broward County Transit); retired 2023  Marital: Married 40 years; wife Barbara, age 65  Tobacco: Former smoker \u2014 quit 2010; 20 pack-year history  Alcohol: Occasional, 1-2 beers on weekends  Drugs: Denies"
+    },
     "examManeuvers": [
         "Level of consciousness and GCS",
         "Cranial nerve examination",
@@ -427,84 +460,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Eugene Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Ischemic Stroke (Cardioembolic). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Eugene appears frustrated and distressed, frequently pausing mid-sentence as he struggles to find the right words. He becomes visibly upset when his speech comes out garbled, but remains cooperative and eager to communicate, often gesturing with his right hand to compensate. His wife Barbara is present and appears anxious, frequently finishing his sentences or clarifying what he's trying to say.",
-    "interviewQuestions": [
-        "When exactly did you first notice these symptoms this morning?",
-        "Can you describe what your speech difficulties feel like?",
-        "Tell me about the weakness in your left arm and leg - when did that start?",
-        "Have you had any headache, dizziness, or vision changes?",
-        "Did you have any chest pain, palpitations, or shortness of breath?",
-        "Have you experienced anything like this before?",
-        "Have you been taking all your medications as prescribed?",
-        "When was your last INR or blood work checked?",
-        "Did you fall or hit your head recently?",
-        "Have you had any nausea, vomiting, or loss of consciousness?",
-        "Are you having any numbness or tingling anywhere?",
-        "Have you noticed any changes in your vision or double vision?",
-        "Has your heart rhythm felt irregular lately?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble... the words aren't coming out right. Can you ask that differently?",
-        "onset": "Barbara woke me up around 7 AM because I was talking funny. She says it started when I was trying to ask for coffee but the words came out all wrong.",
-        "character": "It's like I know exactly what I want to say in my head, but when I try to speak it comes out jumbled or backwards. My left hand keeps dropping things - I can't grip properly.",
-        "location": "My whole left side feels heavy and clumsy - my arm, my leg, even my face feels droopy on that side.",
-        "severity": "The speech problem is really frustrating, maybe 8 out of 10 for how much it bothers me. The weakness is maybe 6 out of 10 - I can still move but it's very clumsy.",
-        "aggravating": "When I get frustrated or try to talk fast, the speech gets worse. Trying to use my left hand for fine movements is impossible.",
-        "relieving": "Taking my time helps a little with speaking, but nothing really makes the weakness better. Barbara helping me talk helps my frustration.",
-        "associated": "My face feels numb on the left side, and I think I'm drooling a little. No headache though, which surprises me.",
-        "denies": "No chest pain, no headache, no dizziness, haven't fallen, no vision problems, no nausea or vomiting, no loss of consciousness.",
-        "history": "Never had anything like this before. I've had some dizzy spells but nothing like this speech and weakness problem.",
-        "medications": "Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 80mg QHS",
-        "allergies": "Warfarin, Sulfa Drugs",
-        "family": "My father had a stroke when he was 62 and died from it. He also had high blood pressure and diabetes like me. My brother had a heart attack and has AFib too.",
-        "social": "I just retired last year from driving bus for Broward County. Married to Barbara for 40 years. I quit smoking in 2010 after 20 years of smoking. I have a couple beers on weekends but that's it."
-    },
-    "examManeuvers": [
-        "Neurological assessment - cranial nerves",
-        "Motor strength testing bilateral upper and lower extremities",
-        "Deep tendon reflexes bilateral",
-        "Coordination testing - finger-to-nose, heel-to-shin",
-        "Speech assessment - fluency, comprehension, repetition",
-        "Facial symmetry and facial nerve function",
-        "Gait assessment",
-        "Sensory testing - light touch, pinprick bilateral",
-        "Cardiac examination - heart rate, rhythm, murmurs",
-        "NIHSS stroke scale assessment"
-    ],
-    "examFindings": {
-        "Neurological assessment - cranial nerves": "Left facial droop with inability to fully close left eye or smile symmetrically. Cranial nerves II, III, IV, VI intact bilaterally. Tongue deviates to left on protrusion.",
-        "Motor strength testing bilateral upper and lower extremities": "Right side 5/5 throughout. Left upper extremity 3/5 proximally, 2/5 distally. Left lower extremity 4/5 proximally, 3/5 distally.",
-        "Deep tendon reflexes bilateral": "Hyperreflexic on left side (3+), normal (2+) on right. Left Babinski positive.",
-        "Coordination testing - finger-to-nose, heel-to-shin": "Right side intact. Left side impaired with dysmetria and intention tremor.",
-        "Speech assessment - fluency, comprehension, repetition": "Expressive aphasia present - comprehension intact, speech non-fluent with word-finding difficulty. Repetition impaired.",
-        "Facial symmetry and facial nerve function": "Left central facial palsy with forehead sparing. Unable to puff cheeks or whistle on left side.",
-        "Gait assessment": "Unable to ambulate independently due to left hemiparesis. Requires assistance.",
-        "Sensory testing - light touch, pinprick bilateral": "Diminished sensation to light touch and pinprick on entire left side compared to right.",
-        "Cardiac examination - heart rate, rhythm, murmurs": "Irregularly irregular rhythm consistent with atrial fibrillation. Rate 88 bpm. No murmurs appreciated.",
-        "NIHSS stroke scale assessment": "NIHSS score 12 - moderate stroke severity with points for facial palsy, motor deficits, sensory loss, and aphasia."
-    },
-    "ddxTargets": [
-        "Acute Ischemic Stroke (Cardioembolic) (correct diagnosis)",
-        "Acute Hemorrhagic Stroke",
-        "Transient Ischemic Attack (TIA)",
-        "Hypoglycemia",
-        "Seizure with Todd's paralysis",
-        "Migraine with aura (complex migraine)",
-        "Conversion disorder/Functional neurological disorder"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on atrial fibrillation history and assuming cardioembolic stroke without considering hemorrhage, especially given hypertension and anticoagulation status",
-        "prematureClosure": "May rush to stroke diagnosis based on obvious focal deficits without considering metabolic causes like hypoglycemia in diabetic patient on multiple medications",
-        "availabilityBias": "Recent exposure to stroke cases might lead to overconfidence in diagnosis while missing other acute neurological emergencies requiring different management"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several reasonable possibilities for acute neurological symptoms. Given this patient's specific risk factors and the acuity of presentation, what key historical details would help you differentiate between these diagnoses? What would be your biggest concern that requires immediate evaluation?",
-        "phase5": "Your examination reveals clear focal neurological deficits. How does the pattern of deficits help localize the lesion? Given the patient's medication list, what are the implications for your leading diagnosis and immediate management decisions?",
-        "finalDebrief": "This case illustrates a classic cardioembolic stroke presentation in a patient with multiple stroke risk factors. Notice how the acute onset, specific pattern of deficits (left hemiparesis with aphasia suggesting MCA territory), and atrial fibrillation history supported the diagnosis. The key learning point is recognizing that anticoagulated patients can still have embolic strokes, and time-sensitive interventions remain critical regardless of anticoagulation status."
     }
 }
 };

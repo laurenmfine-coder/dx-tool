@@ -1263,6 +1263,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Maria Santos-Reyes is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Epinephrine; Albuterol; Methylprednisolone; Diphenhydramine.'",
+        "allergies": "'My allergies: Penicillin, Latex.'",
+        "family": "Mother: asthma  Grandmother: died from asthma attack",
+        "social": "Tobacco: Never  Alcohol: Rare  Occupation: House cleaner \u2014 chemical exposures  Insurance: Uninsured \u2014 works 2 jobs, no employer coverage  Living: Shares apartment with 3 roommates, no AC"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1301,84 +1332,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Maria Santos-Reyes: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Maria appears anxious and somewhat embarrassed about her financial situation, speaking in slightly breathless sentences due to her respiratory distress. She is cooperative and forthcoming about her symptoms but hesitant to discuss her inability to afford medications, worried about judgment from healthcare providers.",
-    "interviewQuestions": [
-        "Can you describe exactly what happened at work today?",
-        "How quickly did your symptoms develop after the latex exposure?",
-        "What specific symptoms are you experiencing right now?",
-        "Have you had reactions like this to latex before?",
-        "Tell me about the EpiPen you used - when did you get it?",
-        "Are you having any trouble breathing or swallowing?",
-        "Do you feel dizzy or like you might pass out?",
-        "What medications are you currently taking?",
-        "Do you have any known allergies?",
-        "How is your asthma usually controlled?",
-        "Has anyone in your family had severe allergic reactions?",
-        "What type of work do you do and how often are you exposed to latex?",
-        "Have you been able to see a doctor regularly for your asthma?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble focusing right now because I'm still feeling short of breath and scared",
-        "onset": "It started about 20 minutes after I put on the latex cleaning gloves at my client's house. My lips started tingling first, then swelling",
-        "character": "My lips and face feel swollen and tight, and I'm wheezing badly - worse than my usual asthma",
-        "location": "The swelling is in my lips and I can feel it in my face. The breathing trouble is in my chest",
-        "severity": "This is about an 8 out of 10 - I was really scared I was going to pass out at work",
-        "aggravating": "Any latex exposure makes it worse. Stress and not having my inhaler makes my breathing worse",
-        "relieving": "The old EpiPen helped a little bit, and sitting upright helps with breathing",
-        "associated": "I feel dizzy, nauseous, and my heart is racing. I also have this feeling of doom like something terrible is happening",
-        "denies": "No chest pain, no vomiting, no rash on my body, no throat closing feeling right now",
-        "history": "Yes, I've had latex reactions before but never this bad. I had one similar episode two years ago but couldn't afford to come to the hospital",
-        "medications": "Epinephrine; Albuterol; Methylprednisolone; Diphenhydramine",
-        "allergies": "Penicillin, Latex",
-        "family": "My mother has asthma, and my grandmother actually died from a bad asthma attack when I was young",
-        "social": "I work as a house cleaner and I'm exposed to latex gloves and cleaning chemicals daily. I don't smoke, rarely drink. I'm uninsured and work two jobs just to get by"
-    },
-    "examManeuvers": [
-        "Inspect face and lips for angioedema",
-        "Examine oropharynx and assess airway",
-        "Auscultate lungs for wheezing/stridor",
-        "Check vital signs and pulse quality",
-        "Assess skin for urticaria or flushing",
-        "Evaluate level of consciousness and mental status",
-        "Palpate for lymphadenopathy",
-        "Assess capillary refill and peripheral perfusion",
-        "Check peak flow or spirometry if stable",
-        "Examine for signs of respiratory distress"
-    ],
-    "examFindings": {
-        "Inspect face and lips for angioedema": "Moderate lip swelling with mild perioral edema, no tongue or uvular swelling visible",
-        "Examine oropharynx and assess airway": "Oropharynx clear, no stridor, airway patent but patient appears anxious about breathing",
-        "Auscultate lungs for wheezing/stridor": "Bilateral expiratory wheeze throughout lung fields, decreased air entry bilaterally",
-        "Check vital signs and pulse quality": "BP 96/58, HR 118 regular, weak but palpable pulse, appears mildly hypotensive",
-        "Assess skin for urticaria or flushing": "Mild flushing of face and neck, no obvious urticarial rash on exposed skin",
-        "Evaluate level of consciousness and mental status": "Alert and oriented but anxious, no confusion or altered mental status",
-        "Palpate for lymphadenopathy": "No lymphadenopathy palpated",
-        "Assess capillary refill and peripheral perfusion": "Capillary refill 3 seconds, hands slightly cool and clammy",
-        "Check peak flow or spirometry if stable": "Peak flow 60% of predicted, consistent with moderate airway obstruction",
-        "Examine for signs of respiratory distress": "Mild accessory muscle use, speaking in full sentences but appears dyspneic on minimal exertion"
-    },
-    "ddxTargets": [
-        "Anaphylaxis secondary to latex exposure (correct diagnosis)",
-        "Severe asthma exacerbation",
-        "Angioedema (hereditary or ACE-inhibitor induced)",
-        "Vocal cord dysfunction or laryngeal edema",
-        "Acute coronary syndrome with pulmonary edema",
-        "Anxiety/panic attack with hyperventilation",
-        "Food-induced allergic reaction"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'asthma exacerbation' and missing the systemic anaphylactic features like hypotension and facial swelling",
-        "prematureClosure": "May focus only on respiratory symptoms and miss the multi-system involvement indicating anaphylaxis rather than isolated bronchospasm",
-        "availabilityBias": "Common to see asthma in ED, may not immediately consider anaphylaxis despite clear latex exposure history and systemic symptoms"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you're considering both respiratory and allergic causes. As you interview this patient, pay particular attention to the timeline of symptom onset and any systemic features beyond just the breathing difficulty. What specific questions will help you distinguish between a severe asthma attack versus a more systemic allergic reaction?",
-        "phase5": "Excellent history and physical exam. You've identified key features including the latex exposure, systemic symptoms, and physical findings. Looking at your examination findings of facial swelling, hypotension, and bronchospasm all occurring after latex exposure - how does this constellation of findings help narrow your differential diagnosis? What's the most likely unifying diagnosis here?",
-        "finalDebrief": "This case highlights the importance of recognizing anaphylaxis as a multi-system reaction rather than just bronchospasm. The combination of known latex allergy, occupational exposure, rapid onset of facial swelling, hypotension, and bronchospasm clearly points to anaphylaxis. Notice how this could easily be mistaken for asthma exacerbation if you anchored on the wheezing and history of asthma. The key distinguishing features were the systemic involvement (hypotension, facial swelling) and temporal relationship to latex exposure. This also emphasizes important social determinants - her inability to afford fresh epinephrine and controller medications puts her at higher risk for severe reactions."
     }
 }
 };

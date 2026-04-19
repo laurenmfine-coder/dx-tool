@@ -1208,6 +1208,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Destiny Johnson is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Epinephrine; Diphenhydramine; Methylprednisolone.'",
+        "allergies": "'My allergies: Peanut, Tree nuts.'",
+        "family": "Mother: eczema, food allergies  Brother (12): peanut allergy",
+        "social": "Tobacco: Never  Alcohol: Denies  School: 11th grade, cheerleader  Social: Ate unlabeled cookie at school event \u2014 didn't want to ask about ingredients in front of friends  Mental health: Anxiety about food allergies \u2014 avoids eating at social events"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1246,84 +1277,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Destiny Johnson: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Destiny appears anxious and embarrassed, speaking quietly and avoiding eye contact when discussing her decision not to ask about cookie ingredients. She becomes more animated and distressed when describing her throat symptoms, frequently touching her neck, and shows visible hives on her arms and face.",
-    "interviewQuestions": [
-        "Can you tell me exactly what happened at the school event today?",
-        "What did you eat and when did you eat it?",
-        "Did you ask about the ingredients in the cookie?",
-        "When did your symptoms start after eating?",
-        "What symptoms did you notice first?",
-        "How did your throat feel and how has it changed?",
-        "Where is your EpiPen and why didn't you use it?",
-        "Have you had reactions like this before?",
-        "What happened during your previous allergic reactions?",
-        "Are you having any trouble breathing or swallowing?",
-        "Do you have any chest pain or nausea?",
-        "What medications do you normally carry?",
-        "Have you taken anything for these symptoms today?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm still feeling pretty scared and my throat is tight. Can you repeat that?",
-        "onset": "I ate the cookie about 20 minutes ago at the cheerleading fundraiser. My throat started feeling scratchy maybe 10 minutes later, then got tight really fast.",
-        "character": "My throat feels like it's closing up and swollen inside. It's hard to swallow and feels scratchy and tight.",
-        "location": "The tightness is mainly in my throat and neck area. I can feel it when I try to swallow.",
-        "severity": "The throat tightness is like an 8 out of 10 - it's really scary. The itching is maybe a 6.",
-        "aggravating": "It seems to be getting worse as time goes on. Trying to swallow makes me more aware of how tight it feels.",
-        "relieving": "Nothing has helped. I was too scared to use my EpiPen because it was in my locker and I wasn't sure if I really needed it.",
-        "associated": "I have these itchy red bumps all over my arms and face, and I feel kind of dizzy and my heart is racing.",
-        "denies": "I'm not having chest pain or throwing up, but I do feel a little nauseous and shaky.",
-        "history": "I've had bad reactions before but not this bad. Usually I catch it early, but this time I didn't have my EpiPen with me.",
-        "medications": "Epinephrine; Diphenhydramine; Methylprednisolone",
-        "allergies": "Peanut, Tree nuts",
-        "family": "My mom has food allergies and eczema too, and my little brother also has a peanut allergy. My mom is always on us about carrying our EpiPens.",
-        "social": "I'm a junior in high school and on the cheerleading team. I don't smoke or drink. I was at our fundraiser and didn't want to be that weird girl asking about ingredients in front of everyone."
-    },
-    "examManeuvers": [
-        "Inspect face and neck for angioedema",
-        "Examine skin for urticaria distribution",
-        "Auscultate lungs for wheezing or stridor",
-        "Inspect oropharynx and tongue",
-        "Palpate neck for lymphadenopathy or swelling",
-        "Assess voice quality and speech",
-        "Check capillary refill and peripheral perfusion",
-        "Auscultate heart for rate and rhythm",
-        "Assess level of consciousness and anxiety",
-        "Examine abdomen for tenderness or distension"
-    ],
-    "examFindings": {
-        "Inspect face and neck for angioedema": "Mild periorbital edema and slight lip swelling noted, no obvious tongue or uvular swelling",
-        "Examine skin for urticaria distribution": "Diffuse urticarial rash on bilateral arms, chest, and face with raised erythematous wheals",
-        "Auscultate lungs for wheezing or stridor": "Mild expiratory wheeze bilaterally, no stridor, decreased air movement in bases",
-        "Inspect oropharynx and tongue": "Oropharynx erythematous, tongue appears normal size, no obvious swelling of uvula",
-        "Palpate neck for lymphadenopathy or swelling": "No lymphadenopathy, soft tissue feels slightly edematous",
-        "Assess voice quality and speech": "Voice slightly hoarse and muffled, patient able to speak in full sentences",
-        "Check capillary refill and peripheral perfusion": "Capillary refill 3 seconds, hands cool and slightly mottled",
-        "Auscultate heart for rate and rhythm": "Tachycardia at 122 bpm, regular rhythm, no murmurs",
-        "Assess level of consciousness and anxiety": "Alert and oriented, anxious and restless, following commands appropriately",
-        "Examine abdomen for tenderness or distension": "Soft, non-distended, mild diffuse tenderness, active bowel sounds"
-    },
-    "ddxTargets": [
-        "Anaphylaxis (correct diagnosis)",
-        "Severe allergic reaction without anaphylaxis",
-        "Angioedema",
-        "Laryngeal edema",
-        "Acute asthma exacerbation",
-        "Anxiety/panic attack",
-        "Food poisoning with urticaria"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on 'known peanut allergy' and assume mild reaction, missing the systemic signs of anaphylaxis including hypotension and tachycardia",
-        "prematureClosure": "Might stop at 'allergic reaction' without recognizing this meets criteria for anaphylaxis requiring immediate epinephrine",
-        "availabilityBias": "May recall recent cases of anxiety in teenagers and underestimate the severity of allergic symptoms"
-    },
-    "coachPrompts": {
-        "phase2": "Before you interview Destiny, consider what specific criteria define anaphylaxis versus a severe allergic reaction. What key historical details and timeline will help you differentiate? Think about what systemic symptoms you need to explore.",
-        "phase5": "Now that you've gathered your history and physical findings, walk me through what makes this anaphylaxis rather than just a severe allergic reaction. What do her vital signs tell you about her cardiovascular status? How does this change your urgency?",
-        "finalDebrief": "This case highlights how anaphylaxis can present in adolescents with psychosocial factors affecting compliance. Notice how her initial reluctance to ask about ingredients and embarrassment about her EpiPen created a perfect storm. How did your differential evolve from possible anxiety to confirmed anaphylaxis based on the constellation of findings?"
     }
 }
 };

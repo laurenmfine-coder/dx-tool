@@ -1009,6 +1009,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Samantha O'Brien is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take no medications.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Mother: asthma  Father: allergic rhinitis",
+        "social": "Context: Failed 5 medications \u2014 still miserable, affecting work and sleep  Comorbidity: Asthma \u2014 undertreated, rhinitis and asthma are one airway  Occupational: Veterinary technician \u2014 animal dander exposure 8h/day is THE trigger  Dilemma: Loves her job, animals are her trigger \u2014 immunotherapy candidate?  Sleep: OSA screening positive \u2014 nasal congestion contributing to mouth breathing and snoring"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1047,84 +1078,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Samantha O'Brien: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Samantha appears frustrated and exhausted, with dark circles under her eyes from poor sleep. She's very forthcoming about her symptoms, almost desperate for help after failing multiple treatments. Despite her distress, she maintains professional composure but becomes emotional when discussing how her condition affects her beloved career with animals.",
-    "interviewQuestions": [
-        "Can you describe your main symptoms and how they're affecting you?",
-        "When did these symptoms first start and how have they progressed?",
-        "What specific nasal symptoms are you experiencing?",
-        "Are you having any breathing difficulties or chest symptoms?",
-        "What triggers make your symptoms worse?",
-        "What treatments have you tried and how did they work?",
-        "How is this affecting your sleep and daily activities?",
-        "Tell me about your work environment and animal exposure",
-        "Are you experiencing any eye symptoms along with the nasal symptoms?",
-        "Do you have any sinus pressure, headaches, or facial pain?",
-        "Have you noticed any patterns to when symptoms are better or worse?",
-        "Are you having any snoring or sleep disruption?",
-        "How long have you been working as a veterinary technician?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you rephrase that? I'm just so tired and congested it's hard to focus sometimes.",
-        "onset": "My allergies started in childhood but became severe about 3 years ago when I started working at the veterinary clinic. It's gotten progressively worse despite trying everything.",
-        "character": "Constant nasal congestion, runny nose with clear discharge, and terrible sneezing fits. My nose feels completely blocked most of the time.",
-        "location": "Mainly my nose and sinuses, but it affects my whole face. The congestion makes my head feel heavy and pressure builds up around my eyes.",
-        "severity": "I'd say 8 out of 10. It's ruining my life - I can barely sleep, I'm exhausted at work, and I'm worried I might have to change careers.",
-        "aggravating": "Being at work around the animals is the worst trigger. Dogs and cats especially. Even after I shower and change clothes, I'm still congested for hours.",
-        "relieving": "Nothing really works anymore. Antihistamines barely touch it. I've tried nasal sprays, decongestants, even tried staying away from work for a week but it didn't fully clear.",
-        "associated": "I'm wheezing more lately, especially at work. I snore terribly now and wake up with dry mouth. My eyes get itchy and watery too. I'm constantly tired.",
-        "denies": "No fever, no colored nasal discharge, no facial pain that feels like a sinus infection. No skin rashes or hives.",
-        "history": "I had mild seasonal allergies as a kid, but nothing like this. This started when I began working with animals and has just gotten worse each year.",
-        "medications": "no medications",
-        "allergies": "NKDA",
-        "family": "My mom has asthma and my dad has bad allergies too, so I guess I got both genes. Mom's asthma is pretty severe - she's been hospitalized before.",
-        "social": "I'm a veterinary technician and I love it, but I'm around cats and dogs 8 hours a day. I don't smoke or drink much. This job is my passion but it's literally making me sick."
-    },
-    "examManeuvers": [
-        "Nasal inspection and speculum exam",
-        "Palpation of sinuses and face",
-        "Examination of conjunctiva and eyes",
-        "Lung auscultation",
-        "Peak flow measurement",
-        "Examination of nasal turbinates",
-        "Assessment of nasal voice quality",
-        "Inspection of throat and posterior pharynx",
-        "Palpation of cervical lymph nodes",
-        "Assessment of allergic shiners and facial appearance"
-    ],
-    "examFindings": {
-        "Nasal inspection and speculum exam": "Bilateral nasal congestion with swollen, pale bluish nasal mucosa. Clear, watery discharge visible. Nasal breathing significantly impaired.",
-        "Palpation of sinuses and face": "Mild tenderness over maxillary sinuses bilaterally. No significant frontal sinus tenderness. Facial fullness noted.",
-        "Examination of conjunctiva and eyes": "Mild conjunctival injection and chemosis. Some periorbital edema. Allergic shiners present under both eyes.",
-        "Lung auscultation": "Mild expiratory wheeze in lower lobes bilaterally. Decreased air movement. No crackles or rhonchi.",
-        "Peak flow measurement": "280 L/min (expected ~450 for age/height), suggesting underlying airway obstruction.",
-        "Examination of nasal turbinates": "Markedly swollen and pale inferior turbinates bilaterally, nearly obstructing nasal passages.",
-        "Assessment of nasal voice quality": "Obvious hyponasal speech quality due to nasal obstruction.",
-        "Inspection of throat and posterior pharynx": "Mild erythema of posterior pharynx. Evidence of mouth breathing with dry mucous membranes.",
-        "Palpation of cervical lymph nodes": "Small, mobile, non-tender lymph nodes palpable bilaterally - consistent with allergic response.",
-        "Assessment of allergic shiners and facial appearance": "Dark circles under eyes, mouth breathing posture, chronically fatigued appearance consistent with allergic rhinitis."
-    },
-    "ddxTargets": [
-        "Severe allergic rhinitis with occupational triggers (correct diagnosis)",
-        "Allergic rhinitis with concomitant asthma",
-        "Chronic rhinosinusitis",
-        "Nasal polyposis",
-        "Occupational asthma",
-        "Vasomotor rhinitis",
-        "Medication overuse rhinitis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'just allergies' and missing the severity, occupational component, and concomitant asthma that requires comprehensive management including immunotherapy consideration.",
-        "prematureClosure": "May quickly diagnose allergic rhinitis without fully exploring the occupational trigger severity, sleep disruption, and underlying asthma that makes this a complex case requiring subspecialty management.",
-        "availabilityBias": "Common to see simple seasonal allergies, but this severe occupational allergic rhinitis with asthma and sleep disruption represents a much more complex case requiring different management approach."
-    },
-    "coachPrompts": {
-        "phase2": "You're thinking about allergic conditions, which makes sense given the presentation. As you interview her, pay special attention to the severity, specific triggers, treatment failures, and any associated respiratory symptoms. What questions will help you determine if this is simple seasonal allergies or something more complex?",
-        "phase5": "You've identified severe allergic rhinitis, but consider the bigger picture here. What does her occupational exposure pattern tell you? How do the treatment failures and associated symptoms change your management approach? What subspecialty considerations might be needed?",
-        "finalDebrief": "This case illustrates how 'simple' allergic rhinitis can be complex when occupational triggers, treatment failures, and concomitant asthma converge. The key learning points are recognizing severe allergic rhinitis requiring immunotherapy, understanding the one-airway concept linking rhinitis and asthma, and the challenging decision-making when someone's passion (veterinary work) conflicts with their health."
     }
 }
 };

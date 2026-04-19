@@ -305,6 +305,39 @@ window.EMR_DATA = {
     "presentation": "Psychiatric Emergency",
     "category": "toxicologic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Derek Hanson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did psychiatric emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I haven't been able to have a bowel movement in four days even though I'm taking.'",
+        "character": "'It's psychiatric emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Olanzapine 20mg QHS; Benztropine 2mg BID; Diphenhydramine 50mg QHS PRN; Docusate Sodium 100mg BID; Senna 8.6mg QHS PRN.'",
+        "allergies": "'My allergies are Haloperidol.'",
+        "family": "Mother (age 54): Major depressive disorder, hypothyroidism  Father (age 56): Alcohol use disorder \u2014 in recovery x 10 years; hypertension  Maternal aunt (age 48): Bipolar disorder type I",
+        "social": "Occupation: Part-time warehouse associate; works 20 hrs/week  Marital: Single; lives alone in apartment  Tobacco: Cigarettes \u2014 0.5 PPD x 4 years  Alcohol: Occasional \u2014 2-3 beers on weekends  Drugs: Cannabis \u2014 3-4x/week for sleep; denies other substances"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -343,84 +376,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Derek Hanson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Derek appears confused, agitated, and restless with visible dry mouth and flushed skin. He seems disoriented to time and has difficulty focusing on questions, often giving rambling or tangential responses. While cooperative, his altered mental status makes him an unreliable historian who may not fully comprehend the severity of his condition.",
-    "interviewQuestions": [
-        "Can you tell me exactly how many diphenhydramine tablets you've been taking each night?",
-        "When did you first notice feeling confused or having trouble thinking clearly?",
-        "Have you been experiencing dry mouth, blurred vision, or difficulty urinating?",
-        "When was your last bowel movement and have you increased any medications for constipation?",
-        "Are you seeing or hearing things that others don't see or hear?",
-        "Have you been taking your psychiatric medications as prescribed?",
-        "Do you feel hot or have you been sweating less than usual?",
-        "Have you had any falls, accidents, or injuries recently due to confusion?",
-        "Who brought you to the hospital today and were they concerned about your behavior?",
-        "Have you taken any over-the-counter medications or changed doses recently?",
-        "Are you having trouble remembering things from today or yesterday?",
-        "Have you been picking at your skin or clothes, or feeling restless?",
-        "Do you know what day it is and where you are right now?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, what was the question again? My mind feels kind of foggy right now and it's hard to focus.",
-        "onset": "I think it started maybe two or three days ago... or was it yesterday? Time feels weird. I just started feeling really confused and hot, and my mouth got really dry.",
-        "character": "It's like my brain is wrapped in cotton - everything feels fuzzy and far away. My thoughts keep jumping around and I can't concentrate on anything.",
-        "location": "It's mostly in my head - like confusion and feeling disconnected. But my whole body feels hot and uncomfortable too.",
-        "severity": "Maybe a 7 or 8 out of 10? It's really scary not being able to think straight, and I feel like something bad might happen to me.",
-        "aggravating": "Being in bright lights makes it worse, and when people talk fast I get more confused. Moving around makes me feel dizzy.",
-        "relieving": "Nothing really helps. I tried to sleep but I keep having weird dreams and waking up more confused.",
-        "associated": "Yeah, my mouth is really dry no matter how much water I drink, and my vision is blurry. I can't pee very well either, and I feel really hot.",
-        "denies": "No chest pain, no shortness of breath, no nausea or vomiting. I'm not hearing voices from my schizophrenia right now.",
-        "history": "I've never felt like this before. Even when my schizophrenia was bad, this is different - more physical and confused.",
-        "medications": "Olanzapine 20mg QHS; Benztropine 2mg BID; Diphenhydramine 50mg QHS PRN; Docusate Sodium 100mg BID; Senna 8.6mg QHS PRN",
-        "allergies": "Haloperidol",
-        "family": "My mom has depression and my aunt has bipolar disorder, but nobody in my family has had anything like this confusion thing.",
-        "social": "I work part-time at a warehouse, about 20 hours a week. I smoke about half a pack a day and drink a few beers on weekends. I use cannabis a few times a week to help me sleep."
-    },
-    "examManeuvers": [
-        "Mental status examination and orientation assessment",
-        "Pupillary examination and light reflex testing",
-        "Skin examination for temperature, moisture, and flushing",
-        "Mucous membrane examination for dryness",
-        "Cardiac examination and rhythm assessment",
-        "Neurological examination including reflexes and tone",
-        "Abdominal examination for bowel sounds and distension",
-        "Assessment for psychomotor agitation and restlessness",
-        "Speech pattern and thought process evaluation",
-        "Bladder palpation and urinary retention assessment"
-    ],
-    "examFindings": {
-        "Mental status examination and orientation assessment": "Disoriented to time and place, knows his name but unsure of date. MMSE significantly impaired with attention and memory deficits. Confused and easily distractible.",
-        "Pupillary examination and light reflex testing": "Pupils are dilated (6mm bilaterally) and sluggishly reactive to light. No accommodation present.",
-        "Skin examination for temperature, moisture, and flushing": "Skin is hot, dry, and flushed throughout. No diaphoresis present despite elevated temperature.",
-        "Mucous membrane examination for dryness": "Severe dry mouth with sticky saliva, dry conjunctivae. Mucous membranes appear dehydrated.",
-        "Cardiac examination and rhythm assessment": "Tachycardic at 128 bpm, regular rhythm. No murmurs appreciated. Elevated blood pressure at 148/92.",
-        "Neurological examination including reflexes and tone": "Hyperreflexia present. Mild tremor in hands. Muscle tone slightly increased. No focal neurological deficits.",
-        "Abdominal examination for bowel sounds and distension": "Hypoactive bowel sounds, mild abdominal distension. No masses or tenderness. Consistent with constipation.",
-        "Assessment for psychomotor agitation and restlessness": "Restless, fidgety, picking at bedsheets and clothing. Unable to remain still during examination.",
-        "Speech pattern and thought process evaluation": "Speech is rapid and pressured. Thought process is tangential and disorganized. Difficulty maintaining coherent conversation.",
-        "Bladder palpation and urinary retention assessment": "Palpable bladder, patient reports difficulty initiating urination and decreased urine output."
-    },
-    "ddxTargets": [
-        "Anticholinergic Toxidrome — Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine) (correct diagnosis)",
-        "Neuroleptic Malignant Syndrome",
-        "Serotonin Syndrome",
-        "Bacterial Meningitis",
-        "Sepsis with Encephalopathy",
-        "Acute Psychotic Episode",
-        "Substance Intoxication (Stimulants)"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on psychiatric history and dismissing physical symptoms as purely psychiatric, missing the toxicologic cause of altered mental status",
-        "prematureClosure": "May prematurely diagnose psychiatric exacerbation without considering medication interactions and cumulative anticholinergic effects from multiple agents",
-        "availabilityBias": "Recent cases of psychiatric emergencies might overshadow consideration of toxidromes, especially when patient has known psychiatric illness"
-    },
-    "coachPrompts": {
-        "phase2": "Before you interview Derek, consider his medication regimen carefully. What do you notice about the anticholinergic properties of his medications? How might his recent increased use of diphenhydramine interact with his existing psychiatric medications?",
-        "phase5": "You've gathered excellent history and physical findings. Let's think systematically about toxidromes - what classic constellation of findings are you seeing? How does the 'hot as a hare, blind as a bat, dry as a bone, red as a beet, mad as a hatter' mnemonic apply here?",
-        "finalDebrief": "This case beautifully illustrates cumulative anticholinergic toxicity. Derek's baseline anticholinergic load from olanzapine and benztropine, combined with excessive diphenhydramine use, created a perfect storm. How will this change your approach to patients with psychiatric conditions who present with altered mental status?"
     }
 }
 };

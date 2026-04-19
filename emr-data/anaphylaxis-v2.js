@@ -1241,6 +1241,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Robert Chen is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Epinephrine; Glucagon; Diphenhydramine; NS bolus.'",
+        "allergies": "'My allergies: Bee venom.'",
+        "family": "Wife: no allergies  Son: asthma",
+        "social": "Tobacco: Former (40 pack-years, quit 10y ago)  Alcohol: None  Occupation: Retired teacher  Medications: Takes metoprolol 50mg BID and lisinopril \u2014 beta-blocker masks tachycardia  Living: Lives alone, wife deceased 2 years ago"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1279,84 +1310,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Robert Chen: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Mr. Chen appears anxious and mildly confused, speaking in short sentences due to dyspnea. He is cooperative but seems concerned about his worsening symptoms and mentions feeling 'different' than usual. Despite his distress, he tries to provide clear answers but occasionally needs prompting due to his lightheadedness.",
-    "interviewQuestions": [
-        "Can you tell me exactly what happened when you were stung?",
-        "How quickly did your symptoms start after the bee sting?",
-        "Describe the lightheadedness - is the room spinning or do you feel faint?",
-        "Tell me about the flushing - where on your body do you notice it?",
-        "Are you having any trouble breathing or chest tightness?",
-        "Do you have any itching, hives, or skin changes?",
-        "Have you ever been stung by a bee before? What happened?",
-        "Are you having any nausea, vomiting, or stomach cramping?",
-        "Tell me about your current medications, especially for your blood pressure",
-        "Any swelling of your face, lips, tongue, or throat?",
-        "Are you having any chest pain or heart palpitations?",
-        "Have you ever had an allergic reaction like this before?",
-        "Did you take anything or do anything after you were stung?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm feeling a bit confused right now. Could you ask that differently?",
-        "onset": "I was stung about 30 minutes ago while working in my garden. Within maybe 5-10 minutes I started feeling dizzy and flushed all over.",
-        "character": "The lightheadedness feels like I might faint - not spinning, just weak and unsteady. The flushing feels hot and tingly.",
-        "location": "The sting is on my right forearm, but the flushing is everywhere - my face, chest, arms. The dizziness is just general.",
-        "severity": "The dizziness is maybe 7 out of 10 - I had to sit down immediately. The breathing difficulty is about 6 out of 10.",
-        "aggravating": "Standing up makes the dizziness much worse. I feel like I might pass out if I try to walk.",
-        "relieving": "Sitting down helps a little with the dizziness, but nothing is really making me feel better.",
-        "associated": "I'm having trouble breathing, feel flushed and hot all over, and my stomach feels queasy. No chest pain though.",
-        "denies": "No hives or itchy rash, no swelling of my face or throat, no chest pain, and my heart doesn't feel like it's racing.",
-        "history": "I've been stung before about 5 years ago and had a bad reaction - hives and swelling. That's when I found out I was allergic.",
-        "medications": "Epinephrine; Glucagon; Diphenhydramine; NS bolus",
-        "allergies": "Bee venom",
-        "family": "My son has asthma, and my late wife never had any allergies that I know of.",
-        "social": "I'm a retired teacher, live alone since my wife passed two years ago. I used to smoke heavily for 30 years but quit 10 years ago. I don't drink alcohol."
-    },
-    "examManeuvers": [
-        "Vital signs assessment",
-        "Cardiovascular examination",
-        "Pulmonary examination",
-        "Skin examination for flushing and hives",
-        "Head and neck examination for angioedema",
-        "Examination of sting site",
-        "Neurologic assessment for altered mental status",
-        "Abdominal examination",
-        "Assessment of peripheral perfusion",
-        "Orthostatic vital signs"
-    ],
-    "examFindings": {
-        "Vital signs assessment": "BP 92/54 (hypotensive), HR 58 (inappropriately normal for shock state), Temp 36.6°C, SpO2 91%, RR 22",
-        "Cardiovascular examination": "Regular rate and rhythm, no murmurs, weak peripheral pulses, delayed capillary refill >3 seconds",
-        "Pulmonary examination": "Mild expiratory wheeze bilaterally, increased work of breathing, no stridor",
-        "Skin examination for flushing and hives": "Diffuse erythema and warmth across face, neck, chest and arms, no urticaria present",
-        "Head and neck examination for angioedema": "No facial, lip, tongue, or throat swelling noted, voice clear",
-        "Examination of sting site": "Small puncture wound on right forearm with minimal local swelling, no surrounding cellulitis",
-        "Neurologic assessment for altered mental status": "Alert but appears anxious, follows commands appropriately, mild confusion with complex tasks",
-        "Abdominal examination": "Soft, mild diffuse tenderness, normal bowel sounds, no organomegaly",
-        "Assessment of peripheral perfusion": "Cool extremities, weak distal pulses, prolonged capillary refill",
-        "Orthostatic vital signs": "Unable to obtain due to patient instability and risk of syncope"
-    },
-    "ddxTargets": [
-        "Anaphylaxis - beta-blocker blunted (correct diagnosis)",
-        "Vasovagal reaction",
-        "Acute coronary syndrome",
-        "Cardiogenic shock",
-        "Septic shock",
-        "Large local allergic reaction",
-        "Anxiety/panic attack"
-    ],
-    "biasFlags": {
-        "anchoring": "The normal heart rate may anchor thinking away from anaphylaxis, as tachycardia is expected in shock states",
-        "prematureClosure": "The absence of classic hives and the normal heart rate may lead to premature closure on a less severe allergic reaction",
-        "availabilityBias": "Recent cases of vasovagal reactions or cardiac events in elderly patients may bias away from considering anaphylaxis"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you're thinking about several possibilities. Given this patient's presentation after a bee sting, what key features would help you distinguish between a severe allergic reaction and other causes of his symptoms? What's particularly noteworthy about his vital signs?",
-        "phase5": "Excellent work gathering the history and physical. Now synthesize what you've found: hypotension, flushing, dyspnea after a known allergen exposure, but notably no tachycardia. What medication in his history might explain this vital sign pattern? How does this change your leading diagnosis?",
-        "finalDebrief": "This case highlights beta-blocker blunted anaphylaxis - a critical diagnosis that can be missed. The patient had classic anaphylaxis with hypotension and systemic symptoms, but metoprolol masked the expected tachycardic response. Remember: anaphylaxis can present without hives, and beta-blockers can blunt the typical cardiovascular response, making recognition more challenging but treatment even more urgent."
     }
 }
 };

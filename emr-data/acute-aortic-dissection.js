@@ -327,6 +327,39 @@ window.EMR_DATA = {
     "presentation": "Back Pain",
     "category": "cardiovascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard is pale, diaphoretic, and in severe pain. He speaks in clipped sentences and grips the bed rail. He is a stoic retired engineer who describes symptoms precisely but is clearly terrified. He keeps asking 'What's wrong with me?' between answers.",
+    "interviewQuestions": [
+        "Tell me about this pain \u2014 when did it start and exactly where is it?",
+        "How would you describe the pain \u2014 is it tearing, ripping, sharp, or pressure?",
+        "Did it come on suddenly or gradually?",
+        "Does the pain go anywhere \u2014 to your back, arm, or neck?",
+        "Have you ever had pain like this before?",
+        "Any history of heart problems or high blood pressure?",
+        "Any history of aortic aneurysm in yourself or your family?",
+        "Do you have any numbness, weakness, or paralysis anywhere?",
+        "Any difficulty urinating or change in urine output?",
+        "Are you on any blood pressure medications?",
+        "Any recent trauma or strenuous activity before this?",
+        "Have you had any dizziness or near-fainting?"
+    ],
+    "patientResponses": {
+        "default": "'Just \u2014 just a second.' (grimaces) 'Okay. Go ahead.'",
+        "onset": "'Exactly 45 minutes ago. I was in my garage, not doing anything strenuous. Then it hit me like nothing I've ever felt. Like an explosion in my chest.'",
+        "character": "'Tearing. That's the word. Like someone is tearing my chest apart from the inside. I've never felt anything like it. I've had kidney stones \u2014 this is worse.'",
+        "location": "'Started right here in the front \u2014 center of the chest. Then immediately \u2014 within seconds \u2014 it moved to between my shoulder blades. Both places at once now.'",
+        "severity": "'Ten out of ten. Absolute ten. I almost called 911 because I couldn't walk.'",
+        "aggravating": "'Just existing makes it worse. Any movement. Even breathing deeply.'",
+        "relieving": "'Nothing. I tried nitroglycerin \u2014 my wife had some from her heart condition. Did absolutely nothing.'",
+        "associated": "'I feel dizzy. My left arm feels a little weak \u2014 I don't know if that's from the pain. I'm sweating through my shirt.'",
+        "denies": "'No fever. No cough. No shortness of breath. No prior chest pain.'",
+        "history": "'Never anything like this. I've had high blood pressure for years \u2014 been bad at taking my medications, I'll admit. My cardiologist keeps yelling at me about it.'",
+        "medications": "'Amlodipine \u2014 I take it most days. And the water pill \u2014 hydrochlorothiazide. I forget sometimes.'",
+        "allergies": "'None that I know of.'",
+        "family": "'My father had an aortic aneurysm \u2014 they found it on a scan and watched it. He died of something else. My brother has a bicuspid aortic valve like me.'",
+        "social": "'Retired civil engineer. Married 35 years. I smoked for 25 years, quit 10 years ago. Drink maybe two beers a week. I walk the dog but otherwise not very active.'"
+    },
     "examManeuvers": [
         "General appearance",
         "Blood pressure \u2014 bilateral arms simultaneously",
@@ -365,84 +398,6 @@ window.EMR_DATA = {
         "phase2": "Richard has hypertension, a bicuspid aortic valve, and a family history of aortic disease. He presents with sudden severe chest pain. What three diagnoses are most time-critical? Why is the character of the pain \u2014 'tearing' vs 'pressure' \u2014 diagnostically important here?",
         "phase5": "You've found a 32 mmHg BP differential and an aortic regurgitation murmur. Richard's left arm is slightly weak. What does this constellation tell you about the extent of dissection? Why is the next step CT-angiography urgently and NOT anticoagulation?",
         "finalDebrief": "Type A aortic dissection requiring emergency surgery. How did your DDx handle the STEMI vs dissection dilemma? The BP differential was the key physical exam finding \u2014 did you check both arms? What's the mortality difference between thrombolytics given to a dissection vs delayed CT-A?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Richard appears uncomfortable and restless, frequently shifting position in his chair and occasionally grimacing with pain. He's initially somewhat stoic due to his construction background, but as the pain intensifies, he becomes more forthcoming about his symptoms and shows visible distress. He maintains good eye contact and provides clear answers when asked directly, though he seems frustrated by the severity of this 'different' pain compared to his usual aches.",
-    "interviewQuestions": [
-        "Can you describe exactly when this pain started and how it developed?",
-        "You mentioned the pain feels different - can you describe the quality or character of this pain?",
-        "Can you show me exactly where the pain is located and if it travels anywhere?",
-        "On a scale of 1-10, how severe is your pain right now?",
-        "Is there anything that makes the pain worse or better?",
-        "Have you experienced any other symptoms along with this pain?",
-        "Have you ever had pain like this before?",
-        "What medications are you currently taking?",
-        "Do you have any drug allergies?",
-        "Tell me about your family history, especially any heart or blood vessel problems",
-        "You mentioned you're a smoker - can you tell me about your tobacco use?",
-        "Have you had any recent injuries, falls, or trauma to your chest or back?",
-        "Have you noticed any weakness, numbness, or changes in your arms or legs?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you repeat that? This pain is really distracting me right now.",
-        "onset": "It started suddenly this morning around 8 AM - I was just having my coffee and reading the paper when it hit me like a lightning bolt. The pain has been constant since then, maybe getting slightly worse.",
-        "character": "It's like nothing I've ever felt before - a sharp, tearing sensation that goes right through me. It's not like a muscle pull or even when I threw out my back. It feels like something is ripping inside.",
-        "location": "It started right between my shoulder blades and now it's moved down into my back. Sometimes I feel it in my chest too, kind of under my breastbone.",
-        "severity": "Right now it's easily a 9 out of 10. I've broken bones before and this is worse. It's hard to concentrate on anything else.",
-        "aggravating": "Moving around seems to make it worse, and when I take a deep breath it really shoots through me. Lying flat is impossible.",
-        "relieving": "Nothing helps. I tried some ibuprofen and even sat in my recliner, but nothing touches this pain.",
-        "associated": "I feel a bit short of breath, and I've been sweating more than usual even though I'm not hot. My wife said I look pale.",
-        "denies": "No nausea or vomiting. No chest pounding or racing heart. No arm pain like you hear about with heart attacks. No leg weakness or numbness.",
-        "history": "Never had anything like this before. I've had the usual aches and pains from construction work, but this is completely different.",
-        "medications": "Amlodipine 10mg daily; Losartan 100mg daily; Metoprolol Succinate 100mg daily; Atorvastatin 40mg QHS; Tiotropium 18mcg inhaled daily; Albuterol MDI PRN",
-        "allergies": "ACE Inhibitors (Lisinopril)",
-        "family": "My father had an aortic aneurysm repaired when he was 68, and my brother was diagnosed with a bicuspid aortic valve a few years back. Both my parents had high blood pressure, and my mother had a stroke.",
-        "social": "I'm a retired construction foreman - just retired this year after 40 years of hard work. I'm married to Janet for 38 years. I smoke about a pack a day and have for over 40 years - I know I should quit. I have a couple beers most evenings to unwind."
-    },
-    "examManeuvers": [
-        "Blood pressure in both arms",
-        "Cardiac auscultation",
-        "Pulmonary auscultation",
-        "Abdominal palpation",
-        "Peripheral pulse examination",
-        "Neurological assessment of extremities",
-        "Assessment for pulse deficits",
-        "Auscultation for aortic regurgitation murmur",
-        "Inspection for signs of heart failure",
-        "Assessment of perfusion and skin color"
-    ],
-    "examFindings": {
-        "Blood pressure in both arms": "Right arm: 178/102 mmHg, Left arm: 142/88 mmHg (>20 mmHg systolic difference)",
-        "Cardiac auscultation": "New grade 3/6 diastolic murmur best heard at left sternal border, regular rate and rhythm",
-        "Pulmonary auscultation": "Decreased breath sounds bilaterally at bases, consistent with COPD, no acute changes",
-        "Abdominal palpation": "Soft, non-tender, no masses or pulsatile masses palpated",
-        "Peripheral pulse examination": "Right radial pulse strong, left radial pulse diminished compared to right",
-        "Neurological assessment of extremities": "Normal motor and sensory function in all extremities",
-        "Assessment for pulse deficits": "Diminished left radial pulse compared to right, femoral pulses present bilaterally",
-        "Auscultation for aortic regurgitation murmur": "Grade 3/6 diastolic murmur at left sternal border, consistent with acute aortic regurgitation",
-        "Inspection for signs of heart failure": "No peripheral edema, no jugular venous distension, no S3 gallop",
-        "Assessment of perfusion and skin color": "Skin cool and diaphoretic, mild pallor noted"
-    },
-    "ddxTargets": [
-        "Acute Aortic Dissection (Stanford Type A) (correct diagnosis)",
-        "Myocardial Infarction",
-        "Pulmonary Embolism",
-        "Aortic Aneurysm Rupture",
-        "Acute Pericarditis",
-        "Musculoskeletal Pain",
-        "Esophageal Rupture"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'back pain' or musculoskeletal cause given patient's construction background and initial presentation of shoulder blade pain",
-        "prematureClosure": "Risk of stopping evaluation after finding hypertension and COPD, missing the acute dissection given patient's chronic conditions",
-        "availabilityBias": "Risk of focusing on more common causes like MI or musculoskeletal pain rather than considering aortic dissection, despite classic risk factors"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several possibilities including aortic dissection. Given this patient's risk factors - what specific historical features and physical exam findings would help you differentiate between these diagnoses? What's the most important thing to remember about aortic dissection presentation?",
-        "phase5": "Let's discuss your findings - you noted a significant blood pressure difference between arms and a new diastolic murmur. How do these findings, combined with the patient's sudden tearing pain and family history, influence your diagnostic thinking? What's your next most critical step?",
-        "finalDebrief": "This case illustrates classic Stanford Type A aortic dissection with the triad of sudden tearing pain, pulse differential, and new aortic regurgitation. Notice how the family history of aortic aneurysm and bicuspid valve, combined with poorly controlled hypertension, created the perfect setup. The key was recognizing that 'different' quality of pain and not anchoring on musculoskeletal causes despite his occupational history."
     }
 }
 };

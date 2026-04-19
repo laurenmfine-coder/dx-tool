@@ -369,6 +369,39 @@ window.EMR_DATA = {
       "Lives with wife"
     ]
   ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Harold Jensen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did tearing belly and back, feels like it goes straight through start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I was just sitting at home when this horrible tearing pain hit me right in my be.'",
+        "character": "'It's tearing belly and back, feels like it goes straight through \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine; Lisinopril; Atorvastatin.'",
+        "allergies": "'My allergies are Sulfa drugs.'",
+        "family": "Father died of ruptured aneurysm at 68  Brother had AAA repair at 70",
+        "social": "Tobacco: Quit 5 years ago, 40 pack-year history  Alcohol: 1-2 beers daily  Drugs: Denies  Occupation: Retired mechanic  Living: Lives with wife"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -407,84 +440,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Harold Jensen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Harold is visibly distressed and diaphoretic, clutching his abdomen and appearing restless due to severe pain. He is cooperative but struggles to speak in full sentences, frequently grimacing and describing the pain as the worst he's ever experienced. Given his known AAA history, he seems anxious and worried this might be \"the big one.\"",
-    "interviewQuestions": [
-        "Can you describe exactly when this pain started?",
-        "On a scale of 1-10, how would you rate your pain?",
-        "Can you show me exactly where the pain is located?",
-        "Does the pain move or radiate anywhere?",
-        "What does the pain feel like - sharp, dull, tearing, cramping?",
-        "Is there anything that makes the pain better or worse?",
-        "Have you had any nausea, vomiting, or changes in bowel movements?",
-        "Have you noticed any weakness, dizziness, or feeling faint?",
-        "Have you had any similar episodes of pain before?",
-        "When was your last CT scan or ultrasound for your aneurysm?",
-        "Are you taking all your regular medications?",
-        "Have you had any recent trauma or heavy lifting?",
-        "Do you have any allergies to medications?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble focusing with this pain - can you ask that again?",
-        "onset": "It started about an hour ago, just suddenly while I was sitting in my chair watching TV - came out of nowhere like a lightning bolt",
-        "character": "It's this horrible tearing sensation, like someone is ripping me apart from the inside - I've never felt anything like it",
-        "location": "Right here in my belly button area and it goes straight through to my back, like it's going right through me",
-        "severity": "This is easily a 10 out of 10 - it's the worst pain I've ever had and I can barely think straight",
-        "aggravating": "Any movement makes it worse, even trying to shift positions - I just want to curl up but that doesn't help either",
-        "relieving": "Nothing helps - I tried changing positions, nothing touches this pain",
-        "associated": "I feel really lightheaded and dizzy, and I think I might have thrown up once when it first started",
-        "denies": "No chest pain, no trouble breathing more than usual, no leg pain or numbness",
-        "history": "Never had pain like this before - I've had some back pain but nothing even close to this severity",
-        "medications": "Amlodipine; Lisinopril; Atorvastatin",
-        "allergies": "Sulfa drugs",
-        "family": "My father died from a ruptured aneurysm when he was 68, and my brother had to have his aneurysm repaired when he was 70",
-        "social": "I'm a retired mechanic, quit smoking 5 years ago but smoked for 40 years, I have a couple beers most nights, no drugs"
-    },
-    "examManeuvers": [
-        "Vital signs assessment",
-        "Abdominal inspection",
-        "Abdominal palpation",
-        "Pulsatile abdominal mass assessment",
-        "Peripheral pulse examination",
-        "Cardiovascular examination",
-        "Back examination",
-        "Neurological assessment of lower extremities",
-        "Skin examination for mottling",
-        "Orthostatic vital signs"
-    ],
-    "examFindings": {
-        "Vital signs assessment": "BP 88/54, HR 124, irregular and thready pulse, RR 22, temp 36.6°C, SpO2 95% on room air",
-        "Abdominal inspection": "Abdomen appears distended with visible pulsation in epigastric region, patient guarding and appears uncomfortable",
-        "Abdominal palpation": "Tender to palpation in epigastric and periumbilical regions, patient cannot tolerate deep palpation due to pain",
-        "Pulsatile abdominal mass assessment": "Palpable pulsatile mass in epigastric region, approximately 6-7cm, tender to touch",
-        "Peripheral pulse examination": "Femoral pulses present but diminished bilaterally, dorsalis pedis and posterior tibial pulses weak",
-        "Cardiovascular examination": "Tachycardic, irregular rhythm, no murmurs appreciated, JVP difficult to assess due to patient position",
-        "Back examination": "Tenderness to palpation over lumbar spine region, no obvious deformity",
-        "Neurological assessment of lower extremities": "Sensation intact, motor strength difficult to assess due to patient discomfort, reflexes present",
-        "Skin examination for mottling": "Skin pale and diaphoretic, no obvious mottling of extremities at this time",
-        "Orthostatic vital signs": "Patient unable to stand due to severe pain and dizziness"
-    },
-    "ddxTargets": [
-        "Ruptured abdominal aortic aneurysm (correct diagnosis)",
-        "Acute myocardial infarction",
-        "Pulmonary embolism",
-        "Aortic dissection",
-        "Mesenteric ischemia",
-        "Nephrolithiasis",
-        "Acute pancreatitis"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on known AAA history and immediately assume rupture without considering other acute causes of abdominal pain",
-        "prematureClosure": "The classic presentation might lead to premature closure without considering other vascular emergencies like aortic dissection",
-        "availabilityBias": "Recent cases of back pain or renal stones might inappropriately influence thinking despite the hemodynamic instability"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several serious conditions in your differential. Given this patient's known AAA and current presentation, what key historical elements and risk factors should you specifically explore? What findings would help you differentiate between your top differentials?",
-        "phase5": "Now you have your history and physical findings. Walk me through how the combination of his hemodynamic instability, known AAA history, pain character, and physical exam findings help narrow your differential. What's the most likely diagnosis and what's your next step?",
-        "finalDebrief": "This case illustrates the classic triad of ruptured AAA: abdominal/back pain, hypotension, and pulsatile abdominal mass. Notice how the patient's known AAA history, family history, and risk factors all supported this diagnosis. What clinical pearls will you remember about recognizing and managing this surgical emergency?"
     }
 }
 };

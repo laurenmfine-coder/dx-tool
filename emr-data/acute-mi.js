@@ -342,6 +342,39 @@ window.EMR_DATA = {
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Gloria Vasquez appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did shortness of breath start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I can still walk about a block before I get winded, which is my usual.'",
+        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Myocardial Infarction.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Insulin Glargine 28 units QHS; Metformin 500mg BID; Losartan 100mg daily; Amlodipine 5mg daily; Metoprolol Succinate 50mg daily; Rosuvastatin 20mg QHS; Apixaban 5mg BID; Furosemide 40mg daily.'",
+        "allergies": "'My allergies are Lisinopril, Codeine.'",
+        "family": "Father: MI at age 68 (deceased), T2DM  Mother: Hypertension, stroke at age 80, alive at 92  Brother: T2DM, CABG at age 65, alive at 71",
+        "social": "Occupation: Retired school cafeteria manager; retired 2017  Marital: Widowed (husband deceased 2021 \u2014 lung cancer); lives with son's family  Tobacco: Never smoker  Alcohol: Rare \u2014 wine at family gatherings only  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and hemodynamic assessment",
         "Vital signs review",
@@ -380,82 +413,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Gloria Vasquez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema \u2014 Presenting as Sudden-Onset Dyspnea in Known HFrEF). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Gloria appears anxious and is speaking in short phrases due to her breathing difficulty. She is cooperative but seems confused about why her usual shortness of breath brought her to the ED today, as she feels this is 'normal' for her heart condition.",
-    "interviewQuestions": [
-        "When did this shortness of breath start or get worse?",
-        "How does this breathing difficulty compare to your usual shortness of breath?",
-        "Are you having any chest pain, pressure, or discomfort?",
-        "Have you noticed any swelling in your legs, ankles, or feet?",
-        "Are you having any nausea, sweating, or dizziness?",
-        "How many pillows do you sleep with, and has this changed recently?",
-        "Have you been waking up short of breath at night?",
-        "Are you having any palpitations or irregular heartbeats?",
-        "Have you been taking all your medications as prescribed?",
-        "Have you had any recent changes in your weight?",
-        "Are you having any cough or producing any sputum?",
-        "Have you had any similar episodes like this before?",
-        "What were you doing when this episode started?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Could you ask that differently?",
-        "onset": "It started suddenly about 2 hours ago while I was watching TV. I was fine, then all of a sudden I couldn't catch my breath.",
-        "character": "It feels like I can't get enough air in, like I'm drowning or suffocating. It's much worse than my usual shortness of breath.",
-        "location": "It's all in my chest and throat area. I don't have chest pain exactly, just this awful feeling like I can't breathe.",
-        "severity": "This is about an 8 out of 10. I've never had my breathing this bad before, even with my heart problems.",
-        "aggravating": "Lying flat makes it much worse. Even talking makes me more short of breath.",
-        "relieving": "Sitting up helps a little bit, but nothing really makes it go away completely.",
-        "associated": "I feel a little nauseous and I'm sweating some. I feel like my heart is racing too.",
-        "denies": "No chest pain, no arm pain, no back pain. No cough really. No fever. My legs aren't any more swollen than usual.",
-        "history": "I've never had breathing this bad before. I get short of breath walking, but this came on while I was just sitting.",
-        "medications": "Insulin Glargine 28 units QHS; Metformin 500mg BID; Losartan 100mg daily; Amlodipine 5mg daily; Metoprolol Succinate 50mg daily; Rosuvastatin 20mg QHS; Apixaban 5mg BID; Furosemide 40mg daily",
-        "allergies": "Lisinopril, Codeine",
-        "family": "My father had a heart attack at 68 and died from it. He also had diabetes like me. My mother had high blood pressure and a stroke.",
-        "social": "I'm a retired school cafeteria manager. I live with my son's family since my husband passed away in 2021. I never smoked and only drink wine occasionally at family gatherings."
-    },
-    "examManeuvers": [
-        "Cardiovascular examination - heart sounds",
-        "Pulmonary examination - lung sounds",
-        "Extremity examination - edema assessment",
-        "Jugular venous pressure assessment",
-        "Vital signs assessment including oxygen saturation",
-        "General appearance and distress level",
-        "Skin examination for diaphoresis or cyanosis",
-        "Abdominal examination for hepatomegaly",
-        "Neurologic assessment - mental status"
-    ],
-    "examFindings": {
-        "Cardiovascular examination - heart sounds": "Tachycardic irregular rhythm, S3 gallop present, no murmurs appreciated",
-        "Pulmonary examination - lung sounds": "Bilateral fine crackles extending halfway up both lung fields, decreased air movement at bases",
-        "Extremity examination - edema assessment": "Mild bilateral lower extremity edema, unchanged from baseline per patient",
-        "Jugular venous pressure assessment": "Elevated JVP at 12 cm with patient at 45 degrees",
-        "Vital signs assessment including oxygen saturation": "BP 92/58, HR 112 irregular, RR 24, SpO2 88% on room air, improves to 92% on 4L nasal cannula",
-        "General appearance and distress level": "Patient appears acutely ill, sitting upright, using accessory muscles, speaking in 2-3 word sentences",
-        "Skin examination for diaphoresis or cyanosis": "Mild diaphoresis present, no obvious cyanosis but appears pale",
-        "Abdominal examination for hepatomegaly": "Soft, non-tender, liver edge not palpable, no ascites appreciated",
-        "Neurologic assessment - mental status": "Alert and oriented x3, anxious but appropriate, no focal deficits"
-    },
-    "ddxTargets": [
-        "Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema — Presenting as Sudden-Onset Dyspnea in Known HFrEF) (correct diagnosis)",
-        "Acute heart failure exacerbation",
-        "Pulmonary embolism",
-        "Pneumonia",
-        "Acute coronary syndrome without STEMI",
-        "Pneumothorax",
-        "Sepsis with respiratory failure"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on patient's known heart failure and dismissing acute onset as just an exacerbation rather than considering acute MI as precipitant",
-        "prematureClosure": "May stop at heart failure exacerbation diagnosis without investigating underlying precipitant like acute MI, especially given atypical presentation without chest pain",
-        "availabilityBias": "Recent cases of heart failure exacerbation may lead to overlooking that acute MI can present primarily with dyspnea in elderly patients with known HFrEF"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several reasonable possibilities for acute dyspnea. Given this patient's cardiac history and the sudden onset of symptoms, what specific questions might help you distinguish between a heart failure exacerbation and an acute coronary event? Consider that elderly patients with known heart disease may present atypically.",
-        "phase5": "Your examination reveals findings consistent with acute heart failure, but the sudden onset in a patient with stable chronic HFrEF should raise additional concerns. What precipitants of acute heart failure should you be considering? How might the patient's cardiac risk factors and family history influence your diagnostic approach?",
-        "finalDebrief": "This case illustrates how acute MI can present primarily with dyspnea rather than chest pain, especially in elderly patients with known heart failure. The key learning points are recognizing that sudden onset dyspnea in stable HFrEF warrants investigation for precipitants, understanding that MI presentation varies with age and comorbidities, and maintaining a broad differential even when findings seem to fit a familiar diagnosis."
     }
 }
 };

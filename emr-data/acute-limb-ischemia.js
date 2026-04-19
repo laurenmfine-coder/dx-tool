@@ -377,6 +377,39 @@ window.EMR_DATA = {
       "Lives with wife"
     ]
   ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Harold Jennings appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did my right leg went cold and painful suddenly right lower leg and foot \u2014 sudden onset start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I was sitting in my chair watching TV when suddenly my right leg went ice cold a.'",
+        "character": "'It's my right leg went cold and painful suddenly right lower leg and foot \u2014 sudden onset \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Warfarin; Metoprolol; Furosemide; Lisinopril; Metformin.'",
+        "allergies": "'My allergies are Heparin.'",
+        "family": "Father: peripheral artery disease  Brother: MI at 62",
+        "social": "Tobacco: 40 pack-years, quit 10 years ago  Alcohol: Rare  Drugs: Denies  Occupation: Retired truck driver  Living: Lives with wife"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -415,84 +448,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Harold Jennings's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Harold appears anxious and distressed, frequently looking down at his pale right leg with obvious concern. He is very forthcoming about his symptoms and eager to describe the sudden onset, speaking quickly due to fear that something serious is happening to his leg.",
-    "interviewQuestions": [
-        "Can you describe exactly when and how your leg symptoms started?",
-        "What does the pain in your leg feel like?",
-        "Where exactly is the pain and does it go anywhere else?",
-        "On a scale of 1-10, how severe is the pain?",
-        "Is there anything that makes the pain better or worse?",
-        "Have you noticed any other symptoms besides the pain and coldness?",
-        "Have you ever had anything like this happen before?",
-        "Can you tell me about your current medications?",
-        "Do you have any drug allergies?",
-        "What medical problems do you have?",
-        "Has anyone in your family had problems with their blood vessels or circulation?",
-        "Can you tell me about your smoking history?",
-        "Have you been taking your blood thinner as prescribed?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm not sure what you mean. I'm just really worried about my leg - it's never been this cold and painful before.",
-        "onset": "I was just sitting in my recliner watching the evening news about an hour ago when it hit me like a lightning bolt. One second I was fine, the next second my leg went ice cold and the pain started.",
-        "character": "It's a deep, severe aching pain, like someone is squeezing my leg in a vise. The coldness is the strangest part - it feels like my leg is made of ice.",
-        "location": "The pain and coldness starts in my right calf and goes all the way down to my toes. My foot feels completely numb now.",
-        "severity": "The pain is easily an 8 out of 10. I can barely stand to put any weight on it, and I'm terrified something terrible is happening.",
-        "aggravating": "Any movement makes it worse, and when I try to walk on it the pain shoots up. Even just touching my leg hurts.",
-        "relieving": "Nothing helps. I tried elevating it, rubbing it, nothing. The pain just won't go away and my leg stays cold as ice.",
-        "associated": "My leg looks really pale, almost white, and I can't feel my toes at all. I feel a bit short of breath from the pain and worry.",
-        "denies": "No chest pain, no back pain, no recent injuries or falls. The other leg feels completely normal.",
-        "history": "Never had anything like this before. My leg circulation has always been fine, though I know my heart rhythm is irregular.",
-        "medications": "Warfarin; Metoprolol; Furosemide; Lisinopril; Metformin",
-        "allergies": "Heparin",
-        "family": "My father had bad circulation problems in his legs when he got older, and my brother had a heart attack at 62.",
-        "social": "I'm a retired long-haul truck driver. I smoked for many years but quit 10 years ago - about 2 packs a day for 20 years. I hardly drink alcohol and live with my wife."
-    },
-    "examManeuvers": [
-        "Palpation of right dorsalis pedis pulse",
-        "Palpation of right posterior tibial pulse",
-        "Palpation of right popliteal pulse",
-        "Palpation of right femoral pulse",
-        "Assessment of right lower extremity color and temperature",
-        "Assessment of right lower extremity sensation",
-        "Assessment of right lower extremity motor function",
-        "Capillary refill time in right foot",
-        "Cardiac auscultation for rhythm and murmurs",
-        "Comparison of bilateral lower extremity pulses and appearance"
-    ],
-    "examFindings": {
-        "Palpation of right dorsalis pedis pulse": "Absent",
-        "Palpation of right posterior tibial pulse": "Absent",
-        "Palpation of right popliteal pulse": "Absent",
-        "Palpation of right femoral pulse": "Present but diminished",
-        "Assessment of right lower extremity color and temperature": "Pale, mottled, and markedly cool to touch from mid-calf distally",
-        "Assessment of right lower extremity sensation": "Decreased sensation to light touch and pinprick in foot and distal calf",
-        "Assessment of right lower extremity motor function": "Weakness with dorsiflexion and plantarflexion of foot",
-        "Capillary refill time in right foot": "Greater than 5 seconds",
-        "Cardiac auscultation for rhythm and murmurs": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs",
-        "Comparison of bilateral lower extremity pulses and appearance": "Left lower extremity has palpable pulses and normal color/temperature, stark contrast to right"
-    },
-    "ddxTargets": [
-        "Acute arterial embolism (correct diagnosis)",
-        "Acute arterial thrombosis",
-        "Acute deep vein thrombosis",
-        "Compartment syndrome",
-        "Aortic dissection with limb ischemia",
-        "Severe peripheral artery disease exacerbation",
-        "Neurologic cause (stroke affecting limb)"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on the patient's diabetes and assume diabetic complications rather than considering acute vascular emergency requiring immediate intervention",
-        "prematureClosure": "May jump to chronic PAD given smoking history and age without recognizing the acute nature requiring emergent revascularization",
-        "availabilityBias": "May focus on more common conditions like DVT rather than the acute arterial emergency suggested by the absent pulses and pale, cold extremity"
-    },
-    "coachPrompts": {
-        "phase2": "Given this patient's atrial fibrillation and sudden onset of unilateral leg symptoms, what vascular emergencies should be at the top of your differential? How might his cardiac rhythm relate to potential embolic phenomena?",
-        "phase5": "You found absent distal pulses with a pale, cold extremity in a patient with atrial fibrillation. What does this constellation of findings suggest about the underlying pathophysiology? How does this change your diagnostic priorities?",
-        "finalDebrief": "This case demonstrates acute arterial embolism, likely cardioembolic from atrial fibrillation despite anticoagulation. The key was recognizing the sudden onset, absent pulses, and classic '5 P's' of acute limb ischemia. How did your differential evolve from considering chronic conditions to recognizing this vascular emergency requiring immediate intervention?"
     }
 }
 };

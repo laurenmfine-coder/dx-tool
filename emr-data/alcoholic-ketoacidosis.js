@@ -342,6 +342,39 @@ window.EMR_DATA = {
     "presentation": "Altered Mental Status",
     "category": "metabolic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "James Brennan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did altered mental status start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been sober for about six weeks now after I relapsed back in October, and I'.'",
+        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Alcoholic Ketoacidosis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily; Omeprazole 20mg daily; Sertraline 100mg daily; Pancrelipase 10,000 units with meals.'",
+        "allergies": "'My allergies are Disulfiram.'",
+        "family": "Father: Alcohol use disorder, Liver cirrhosis, deceased at 62  Mother: Depression, Hypertension, alive at 72  Brother: Alcohol use disorder (in recovery), alive at 49",
+        "social": "Occupation: Unemployed; formerly auto mechanic; last worked 2024  Marital: Divorced (2020); no children  Tobacco: Current smoker \u2014 1 PPD x 20 years (20 pack-year)  Alcohol: Severe AUD \u2014 binge pattern; vodka primarily; currently 6 weeks sober  Drugs: Denies current; prior marijuana use"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -380,82 +413,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed James Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Alcoholic Ketoacidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "James appears anxious and somewhat confused, with periods of disorientation but cooperative when engaged directly. He demonstrates genuine concern about his symptoms but shows some shame regarding his alcohol history, becoming more forthcoming when approached with empathy. His speech is slightly slow and he occasionally loses track of questions, requiring gentle redirection.",
-    "interviewQuestions": [
-        "Can you tell me what brought you here today and when these symptoms started?",
-        "Have you been drinking alcohol recently, and if so, when was your last drink?",
-        "Are you experiencing any nausea, vomiting, or stomach pain?",
-        "Have you been eating and drinking fluids normally over the past few days?",
-        "Are you having any trouble breathing or chest pain?",
-        "Have you had any fevers, chills, or signs of infection?",
-        "Are you experiencing any abdominal pain, and if so, where?",
-        "Have you been taking your prescribed medications regularly?",
-        "Have you had episodes like this before?",
-        "Are you having any visual changes or hallucinations?",
-        "Have you been more tired or weak than usual lately?",
-        "Are you having any urinary symptoms or changes in urination?",
-        "Have you used any other substances or medications not prescribed to you?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble focusing right now. Could you repeat that question?",
-        "onset": "I started feeling really confused and weak yesterday morning. My sister brought me in because she said I wasn't making sense when she called.",
-        "character": "I feel really foggy and confused, like my brain isn't working right. Everything feels hazy and I'm having trouble thinking clearly.",
-        "location": "It's not really located anywhere specific - it's more like my whole body feels off and my mind feels cloudy.",
-        "severity": "I'd say it's about a 7 out of 10 for how worried I am. I can't think straight and that's really scary. I can barely concentrate on what you're saying.",
-        "aggravating": "I think it gets worse when I try to stand up or move around too much. Also when there's a lot of noise or activity around me.",
-        "relieving": "Sitting still and closing my eyes helps a little, but nothing really makes it go away completely.",
-        "associated": "I've been feeling nauseous and threw up a couple times yesterday. My stomach hurts too, especially up here under my ribs. I've been really tired and weak.",
-        "denies": "No fever, no chest pain, no trouble breathing. I haven't been drinking - I'm six weeks sober now. No hallucinations or seeing things.",
-        "history": "Yeah, I've had some confusion before when I was drinking heavily, but this feels different. This happened even though I've been sober.",
-        "medications": "Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily; Omeprazole 20mg daily; Sertraline 100mg daily; Pancrelipase 10,000 units with meals",
-        "allergies": "Disulfiram",
-        "family": "My dad had problems with alcohol too and died young from liver problems. My mom deals with depression. My brother is in recovery like me.",
-        "social": "I'm unemployed right now, used to be an auto mechanic. I'm divorced, no kids. I still smoke about a pack a day. I've been sober for six weeks after a relapse, going to AA meetings three times a week."
-    },
-    "examManeuvers": [
-        "Mental status examination",
-        "Vital signs assessment",
-        "HEENT examination",
-        "Cardiovascular examination",
-        "Pulmonary examination",
-        "Abdominal examination",
-        "Neurological examination",
-        "Assessment for dehydration",
-        "Skin examination"
-    ],
-    "examFindings": {
-        "Mental status examination": "Alert but confused and disoriented to time, oriented to person and place. Slow speech, difficulty with concentration and memory. No hallucinations or delusions present.",
-        "Vital signs assessment": "BP 132/78, HR 76, RR 22 and slightly deep, Temp 98.4°F, SpO2 98%. Mild tachypnea with Kussmaul-type breathing pattern.",
-        "HEENT examination": "Mucous membranes dry, poor dentition consistent with chronic alcohol use. No icterus. Pupils equal and reactive.",
-        "Cardiovascular examination": "Regular rate and rhythm, no murmurs, gallops, or rubs. No peripheral edema. Capillary refill 3 seconds.",
-        "Pulmonary examination": "Clear to auscultation bilaterally, slightly increased respiratory effort with deep breathing pattern. No wheezes or crackles.",
-        "Abdominal examination": "Soft but tender in epigastric region, no rebound or guarding. Bowel sounds present. No hepatosplenomegaly appreciated. No masses.",
-        "Neurological examination": "Cranial nerves II-XII intact. No focal neurological deficits. Mild asterixis present. Reflexes 2+ throughout.",
-        "Assessment for dehydration": "Skin tenting present, dry mucous membranes, orthostatic changes with mild dizziness on standing.",
-        "Skin examination": "Dry skin with poor turgor. No rash or jaundice. Some signs of chronic malnutrition with muscle wasting."
-    },
-    "ddxTargets": [
-        "Alcoholic Ketoacidosis (correct diagnosis)",
-        "Diabetic Ketoacidosis",
-        "Starvation Ketosis",
-        "Sepsis with Encephalopathy",
-        "Hepatic Encephalopathy",
-        "Alcohol Withdrawal",
-        "Wernicke Encephalopathy"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on alcohol history and assuming acute intoxication or withdrawal, missing the metabolic ketoacidosis component despite patient being sober for 6 weeks",
-        "prematureClosure": "May stop investigating after identifying alcohol use disorder without considering metabolic complications that can occur during periods of sobriety and poor oral intake",
-        "availabilityBias": "Common presentations of alcohol-related altered mental status (intoxication, withdrawal, hepatic encephalopathy) may overshadow less common but important diagnosis of alcoholic ketoacidosis"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you're thinking about alcohol-related causes given his history. What metabolic complications might you consider in someone with severe alcohol use disorder who has been sober but may have poor nutritional intake? How might his recent sobriety and eating patterns factor into your differential?",
-        "phase5": "Excellent history and physical. You've identified altered mental status in a patient with alcohol use disorder who's been sober for 6 weeks, with associated GI symptoms and signs of dehydration. What does the breathing pattern suggest to you? How does the timeline of sobriety versus symptom onset help narrow your differential?",
-        "finalDebrief": "This case illustrates how alcoholic ketoacidosis can occur paradoxically during sobriety when poor oral intake triggers ketosis. Notice how the history of recent sobriety, rather than active drinking, was actually the key clue. The Kussmaul breathing, dehydration, and altered mental status formed the classic triad. How did your differential evolve as you gathered more information about the timeline and associated symptoms?"
     }
 }
 };

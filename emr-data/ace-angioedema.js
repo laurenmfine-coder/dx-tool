@@ -977,6 +977,39 @@ window.EMR_DATA = {
       "Resolution: after ACEi discontinuation, angioedema typically resolves within 48–72h but may rarely persist weeks."
     ]
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Darnell Washington appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did lip/tongue swelling without urticaria start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started Darnell Washington presents with lip/tongue swelling without urticaria.'",
+        "character": "'It's lip/tongue swelling without urticaria \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Lisinopril; Amlodipine.'",
+        "allergies": "'My allergies are ACE Inhibitors (now).'",
+        "family": "Non-contributory",
+        "social": "Tobacco: Never  Race: African American"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -1015,84 +1048,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Darnell Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Darnell appears anxious and concerned about his facial swelling, frequently touching his lips and tongue. He is cooperative and forthcoming with information but speaks with slight difficulty due to the swelling. He seems worried this might be something serious given how quickly it developed.",
-    "interviewQuestions": [
-        "When did you first notice the lip and tongue swelling?",
-        "How quickly did the swelling develop - over minutes, hours, or days?",
-        "Have you noticed any difficulty breathing or swallowing?",
-        "Do you have any itching, rash, or hives anywhere on your body?",
-        "Have you been exposed to any new foods, medications, or substances recently?",
-        "Have you had any recent dental work or facial trauma?",
-        "Is this the first time you've experienced this type of swelling?",
-        "Have you had any recent changes to your medications?",
-        "Do you have any abdominal pain or cramping?",
-        "Have you noticed your voice changing or becoming hoarse?",
-        "Any family history of similar swelling episodes?",
-        "Have you ever been told you're allergic to any blood pressure medications?",
-        "How long have you been taking your current medications?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure what you mean by that, doc. Can you ask me in a different way?",
-        "onset": "I woke up this morning and noticed my lips felt funny, then over the next few hours my tongue started swelling too. It's been about 6 hours now.",
-        "character": "It's just swollen and puffy, like someone inflated my lips and tongue. No burning or stinging, just feels thick and heavy.",
-        "location": "Mainly my upper and lower lips, and the front part of my tongue. Nothing else on my face is swollen.",
-        "severity": "Maybe a 6 out of 10 for concern - it's not painful but it's getting in the way of talking and eating normally.",
-        "aggravating": "I haven't noticed anything that makes it worse. It just seems to be staying the same or maybe getting a little bigger.",
-        "relieving": "Nothing I've tried helps. I took some Benadryl but it didn't do anything. Ice made it feel a little better temporarily.",
-        "associated": "No, just the swelling. No trouble breathing, no rash, no stomach problems. Maybe my voice sounds a little different.",
-        "denies": "No itching, no hives, no difficulty breathing, no throat tightness, no stomach pain, no recent illness or fever.",
-        "history": "Never had anything like this before in my life. This is completely new for me.",
-        "medications": "Lisinopril; Amlodipine",
-        "allergies": "ACE Inhibitors (now)",
-        "family": "Nothing like this runs in my family that I know of. My parents both had high blood pressure but no weird swelling.",
-        "social": "I work in an office, don't smoke or drink much. Just beer on weekends sometimes. No drugs or anything unusual."
-    },
-    "examManeuvers": [
-        "Inspect lips and perioral area",
-        "Examine tongue and floor of mouth",
-        "Palpate neck for lymphadenopathy",
-        "Assess airway patency and voice quality",
-        "Examine skin for urticaria or rash",
-        "Auscultate heart and lungs",
-        "Palpate abdomen for tenderness",
-        "Assess peripheral pulses and edema",
-        "Examine throat and uvula",
-        "Check blood pressure in both arms"
-    ],
-    "examFindings": {
-        "Inspect lips and perioral area": "Marked non-pitting edema of upper and lower lips, asymmetric with more prominent swelling of the upper lip. No erythema or urticaria.",
-        "Examine tongue and floor of mouth": "Significant edema of the anterior tongue with mild asymmetry. Floor of mouth appears normal. No dental pathology visible.",
-        "Palpate neck for lymphadenopathy": "No cervical, submandibular, or submental lymphadenopathy. No neck masses or thyromegaly.",
-        "Assess airway patency and voice quality": "Airway patent with no stridor. Voice slightly muffled due to tongue swelling but no hoarseness. No respiratory distress.",
-        "Examine skin for urticaria or rash": "No urticaria, rash, or other skin lesions anywhere on the body. No other areas of angioedema.",
-        "Auscultate heart and lungs": "Regular rate and rhythm, no murmurs. Lungs clear to auscultation bilaterally, no wheezing.",
-        "Palpate abdomen for tenderness": "Soft, non-tender, non-distended. No masses or organomegaly. Normal bowel sounds.",
-        "Assess peripheral pulses and edema": "Distal pulses intact. No peripheral edema in hands, feet, or legs.",
-        "Examine throat and uvula": "Uvula and posterior pharynx appear normal without edema. Tonsils normal size.",
-        "Check blood pressure in both arms": "Elevated at 152/88 in both arms, consistent with provided vitals."
-    },
-    "ddxTargets": [
-        "ACE inhibitor-induced angioedema (correct diagnosis)",
-        "Hereditary angioedema",
-        "Allergic angioedema",
-        "Anaphylaxis",
-        "Angioedema with airway compromise",
-        "Cellulitis",
-        "Dental abscess"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'allergy' and looking for typical allergic triggers while missing medication-induced angioedema, especially since patient has been on ACE inhibitor chronically",
-        "prematureClosure": "Risk of stopping evaluation after ruling out anaphylaxis due to lack of urticaria and respiratory symptoms, missing the ACE inhibitor connection",
-        "availabilityBias": "May focus on acute allergic reactions since they're more commonly discussed, while ACE inhibitor angioedema is less familiar despite being common in practice"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential diagnosis. Looking at this 58-year-old African American male with isolated lip and tongue swelling, what specific questions about his medication history might be most crucial? Also, what's the significance of the absence of urticaria in this presentation?",
-        "phase5": "Excellent work gathering the history and physical exam findings. You've identified isolated angioedema without urticaria in a patient on chronic ACE inhibitor therapy. How does this pattern of swelling help you narrow your differential? What's the most likely diagnosis and what's your next step in management?",
-        "finalDebrief": "This case illustrates classic ACE inhibitor-induced angioedema - note how it can occur even after years of stable therapy, occurs more frequently in African Americans, and presents as isolated angioedema without urticaria. The key learning points are recognizing this pattern, knowing it can be delayed after starting ACE inhibitors, and understanding that immediate discontinuation is required with contraindication to all ACE inhibitors going forward."
     }
 }
 };
