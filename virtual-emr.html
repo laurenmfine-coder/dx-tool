@@ -2535,7 +2535,7 @@ function renderDocumentationOnly() {
   var noteFields = S.noteFields || {};
   var wc = Object.values(noteFields).reduce(function(a,v){ return a + (v ? v.split(/\s+/).filter(Boolean).length : 0); }, 0);
   var ws = wc > 0 ? '<span style="font-size:11px;color:var(--text-muted)">' + wc + ' words</span>' : '';
-  var ns = TEMPLATE ? TEMPLATE.sections.map(function(sec){
+  var ns = (TEMPLATE && TEMPLATE.sections) ? TEMPLATE.sections.map(function(sec){
     return '<div class="note-section"><div class="note-section-header">▸ ' + esc(sec.label) + '</div>'
       + '<textarea class="note-field" id="field-' + sec.id + '" placeholder="' + esc(sec.placeholder||'') + '" ' 
       + 'oninput="saveField(\'' + sec.id + '\')" rows="4">' + esc(noteFields[sec.id]||'') + '</textarea></div>';
@@ -2628,7 +2628,7 @@ function renderDocumentation(){
   else if(S.clinicalSetting==="post-discharge")docTitle="Post-Discharge Follow-Up Note";
   const wo=Array.from({length:16},(_,i)=>{const w="Week "+(i+1);return'<option '+(w===S.encounterWeek?"selected":"")+'>'+w+'</option>'}).join("");
   const ws=S.submitted?"":' <select class="week-select" onchange="changeWeek(this.value)">'+wo+'</select>';
-  let ns=getActiveNoteTemplate().map(sec=>{
+  let ns=(getActiveNoteTemplate()||[]).map(sec=>{
     const v=S.noteFields[sec.id]||"";
     const sc=sec.size?" "+sec.size:"";
     return'<div class="note-section"><div class="note-section-header">▸ '+esc(sec.label)+'</div><div><textarea class="note-field'+sc+'" id="note-'+sec.id+'" placeholder="'+esc(sec.hint)+'" '+(S.submitted?"disabled":"")+' oninput="updateNoteField(\''+sec.id+'\',this.value);_updateNoteWC()">'+esc(v)+'</textarea></div></div>';
@@ -3947,7 +3947,7 @@ async function bootstrapApp() {
   if(window.EMRCloud){
     try{
       await Promise.race([
-        EMRCloud.init(supaUser.email||supaUser.supabaseId),
+        (typeof EMRCloud.init==='function'?EMRCloud.init(supaUser.email||supaUser.supabaseId):Promise.resolve()),
         new Promise(function(_,rej){ setTimeout(function(){ rej(new Error('timeout')); }, 3000); })
       ]);
     }
@@ -5569,6 +5569,7 @@ render = function(){
   const app=document.getElementById("app");
   if(!S.currentUser){app.innerHTML=renderAuth();return}
   if(!S.clinicalSetting && !CASE_ID){app.innerHTML=renderSettingSelector();return}
+  if(!S.clinicalSetting && CASE_ID){S.clinicalSetting='ed';}
   const role=S.currentUser.role;
   
   const tabs=[
@@ -5668,7 +5669,7 @@ render = function(){
   if (window.GuidedMode && GuidedMode.isActive()) sb += GuidedMode.renderStepper();
   var secTabs=tabs.filter(function(t){return !t.divider&&PRIMARY_TAB_IDS.indexOf(t.id)<0});
   var isSecActive=secTabs.some(function(t){return t.id===S.activeTab});
-  var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" aria-label="'+sec.label+'" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
+  var moreBtn='<button type="button" class="sidebar-more-btn'+(isSecActive?' active':'')+'" aria-label="More tabs" onclick="toggleMoreTabs()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></svg><span>More</span></button>';
   var overflowHtml='<div class="sidebar-overflow" id="sidebarOverflow"><div class="sidebar-overflow-backdrop" onclick="closeMoreTabs()"></div><div class="sidebar-overflow-sheet"><div class="sheet-handle"></div>'+secTabs.map(function(t){return'<button type="button" class="sheet-btn '+(S.activeTab===t.id?'active':'')+'" onclick="switchTabFromMore(\''+t.id+'\')">'+t.icon+'<span>'+t.label+'</span></button>'}).join('')+'</div></div>';
   if(window.GuidedMode&&GuidedMode.isActive()&&S.activeTab==="demographics"&&!S._guidedStarted){S._guidedStarted=true;S.activeTab="guided";}
 const ct=(fn[S.activeTab]||renderDemographics)();
