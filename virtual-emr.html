@@ -2822,7 +2822,18 @@ function renderDocumentation(){
 const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button" class="btn-submit" id="submitBtn" onclick="submitDoc()">'+I.send+' Submit Note</button>';
   const wc=totalWords();
   var _debrief=(window.RDXIntegration)?RDXIntegration.renderPostSubmitDebrief():'';
-  var _sbarCta=S.submitted?'<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px"><div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">Documentation submitted</div><div style="font-size:12px;color:#475569;margin-bottom:12px">Debrief with your AI attending — get challenged on your reasoning, differential, and plan.</div><div style="display:flex;gap:8px;flex-wrap:wrap"><a href="CoachDx/index.html" style="background:#2874A6;color:#fff;font-size:12px;font-weight:700;padding:8px 16px;border-radius:8px;text-decoration:none">Debrief with CoachDx →</a></div></div>':'';
+  var _hasAnalysis = !!(typeof db==='function' && db('doc-analysis-' + (S.currentUser ? S.currentUser.username : '') + '-' + S.encounterWeek));
+  var _sbarCta = S.submitted ? (
+    '<div style="background:linear-gradient(135deg,#f0f7fc,#e8f4fd);border:1px solid rgba(40,116,166,.2);border-radius:14px;padding:18px 20px;margin-top:16px">'
+    + '<div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:4px">✓ Documentation submitted</div>'
+    + '<div style="font-size:12px;color:#475569;margin-bottom:12px">Your note has been submitted. Click below to get AI feedback on your documentation and clinical reasoning.</div>'
+    + '<div style="display:flex;gap:8px;flex-wrap:wrap">'
+    + '<button type="button" onclick="runDocAnalysis()" style="background:#2874A6;color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-family:inherit">'
+    + (_hasAnalysis ? '🔄 Re-run AI Feedback' : '🤖 Get AI Feedback') + '</button>'
+    + (_hasAnalysis ? '<button type="button" onclick="switchTab(\'autofeedback\')" style="background:#10B981;color:#fff;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-family:inherit">📊 View Results →</button>' : '')
+    + '<button type="button" onclick="switchTab(\'coach\')" style="background:transparent;color:#2874A6;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;border:2px solid #2874A6;cursor:pointer;font-family:inherit">🧠 Debrief with CoachDx</button>'
+    + '</div></div>'
+  ) : '';
   return _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+' '+printBtn+'</div>')+sectionCard("Grading Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
 }
 
