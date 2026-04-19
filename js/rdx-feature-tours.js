@@ -16,7 +16,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
       description: 'This is a 10-phase adaptive clinical simulation. Watch how to gather history, build your differential, and get instant feedback.',
       video: '/demos/simulation-overview.mp4',
       steps: [
-        { title: 'Chief Complaint', desc: 'Start by reading the patient's chief complaint' },
+        { title: 'Chief Complaint', desc: 'Start by reading the patient\'s chief complaint' },
         { title: 'History & Exam', desc: 'Ask questions and perform physical exam' },
         { title: 'Build DDx', desc: 'Build your differential diagnosis list' },
         { title: 'Order Tests', desc: 'Order labs, imaging, or procedures' },
@@ -46,7 +46,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
     },
     'reasoning-frameworks': {
       title: '8 Reasoning Frameworks',
-      description: 'Use structured approaches like Analysis of Competing Hypotheses, FMEA, or Devil's Advocate to strengthen your reasoning.',
+      description: 'Use structured approaches like Analysis of Competing Hypotheses, FMEA, or Devil\'s Advocate to strengthen your reasoning.',
       video: '/demos/reasoning-frameworks.mp4'
     },
     'cognitive-portrait': {

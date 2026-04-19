@@ -619,7 +619,7 @@ window.RDXOnboarding = {
     {
       icon: '🩺',
       title: 'Step 3 — Build Your Assessment',
-      body: 'In <strong>Write Note</strong>, your Assessment & Plan is most important — state your leading diagnosis, differential, and clinical reasoning. The rubric below the note shows how you'll be graded. Use the rubric panel (below the note) to see how you\'ll be graded.',
+      body: 'In <strong>Write Note</strong>, your Assessment & Plan is most important — state your leading diagnosis, differential, and clinical reasoning. The rubric below the note shows how you\'ll be graded. Use the rubric panel (below the note) to see how you\'ll be graded.',
       cta: 'Next →',
     },
     {

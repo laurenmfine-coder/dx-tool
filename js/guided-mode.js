@@ -602,7 +602,7 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
           html += '<strong>⚠️ Physical exam skipped</strong> — Your note will have limited examination findings. This may affect your feedback score.';
         }
         if (!hadCoachDx) {
-          html += (totalExamDone === 0 ? '<br>' : '') + '<strong>💡 Tip:</strong> CoachDx coaching wasn't used this session. Try it on your next case for deeper reasoning feedback.';
+          html += (totalExamDone === 0 ? '<br>' : '') + '<strong>💡 Tip:</strong> CoachDx coaching wasn\'t used this session. Try it on your next case for deeper reasoning feedback.';
         }
         html += '</div>';
       }
