@@ -629,7 +629,7 @@ input:focus,textarea:focus,select:focus{outline:none;border-color:var(--primary)
 .rdx-sidebar-step-done{color:#10B981}
 .rdx-sidebar-step-active{color:#2874A6}
 .rdx-sidebar-step-future{color:#94A3B8}
-.sidebar-btn.rdx-step-future{opacity:.45;pointer-events:none}
+.sidebar-btn.rdx-step-future{opacity:.45;cursor:not-allowed}
 .sidebar-btn.rdx-step-done{color:#10B981}
 .sidebar-btn.rdx-step-done.active{color:#2874A6}
 /* sidebar AI tool descriptions on hover */
@@ -3990,6 +3990,32 @@ function wrapSidebarAISection(sbHtml) {
 }
 
 
+// Step unlock hints — what a student sees when clicking a locked step
+var _STEP_UNLOCK_HINTS = {
+  interview: 'Complete Chart Review first — review the Problem List, Medications, Allergies, and Vitals before interviewing the patient.',
+  ddx:       'Interview the patient first — take the history before building your differential. The DDx tab will unlock after the interview.',
+  orders:    'Build your initial differential first — enter at least one diagnosis before placing orders.',
+  debrief:   'Complete ordering and write your note first — the Debrief step unlocks after you have placed orders and started your H&P.',
+};
+
+function _showStepLocked(tabId) {
+  // Find which step this tab belongs to
+  var stepMap = {
+    interview:'interview', ddx:'ddx', crt:'ddx',
+    orders:'orders', documentation:'orders',
+    oral:'debrief', coach:'debrief', autofeedback:'debrief', feedback:'debrief'
+  };
+  var stepId = stepMap[tabId] || tabId;
+  var hint = _STEP_UNLOCK_HINTS[stepId];
+  if (!hint) return;
+  // Show as a toast notification
+  var toast = document.createElement('div');
+  toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1B3A5C;color:#fff;padding:14px 20px;border-radius:10px;font-size:13px;line-height:1.5;max-width:420px;text-align:center;z-index:99999;box-shadow:0 4px 20px rgba(0,0,0,.35);animation:fadeIn .2s ease';
+  toast.innerHTML = '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#AED6F1;margin-bottom:5px">🔒 Step not yet unlocked</div>' + hint;
+  document.body.appendChild(toast);
+  setTimeout(function(){ toast.style.opacity='0'; toast.style.transition='opacity .4s'; setTimeout(function(){ if(toast.parentNode) toast.parentNode.removeChild(toast); }, 400); }, 4000);
+}
+
 function switchTab(id){document.dispatchEvent(new CustomEvent('rdx-tab-switch',{detail:{tab:id}}));if(window.RDXGuide)RDXGuide.trackTabVisit(id);if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackSection(id)}if(window.MissionControl&&S.currentUser&&S.currentUser.role==="student"){MissionControl.trackTab(id);MissionControl.addDwell(id,3)}S.activeTab=id;if(S.currentUser)loadUserData();render()}
 function toggleExpand(k){var wasOpen=S.expanded[k];S.expanded[k]=!S.expanded[k];if(window.ChartTracker&&S.currentUser&&S.currentUser.role==="student"){ChartTracker.trackExpand(k,!wasOpen)}render()}
 function changeWeek(w){S.encounterWeek=w;loadUserData();render()}
@@ -6072,7 +6098,8 @@ render = function(){
     var _tip=(typeof SIDEBAR_TOOLTIPS!=='undefined'&&SIDEBAR_TOOLTIPS[t.id])?(' data-ai-desc="'+SIDEBAR_TOOLTIPS[t.id]+'"'):'';
     var _badge2=(window.RDXIntegration)?RDXIntegration.getSidebarTabBadge(t.id):'';
     var _dim2=(window.RDXGuide)?RDXGuide.getTabDimClass(t.id):'';
-    return '<button type="button"'+_tip+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+' '+pinned+' '+_dim2+'" onclick="switchTab(\''+t.id+'\')" data-tab="'+t.id+'">'+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
+    var _onclick = stepState==='future' ? 'onclick="_showStepLocked(\''+t.id+'\')"' : 'onclick="switchTab(\''+t.id+'\')"';
+    return '<button type="button"'+_tip+' '+_onclick+' class="sidebar-btn '+(S.activeTab===t.id?'active':'')+_stepCls+' '+pinned+' '+_dim2+'" data-tab="'+t.id+'" title="'+(stepState==='future'?'Complete earlier steps first':'')+'">'+(stepState==='future'?'<span style="font-size:10px;margin-right:2px;opacity:.5">🔒</span>':'')+t.icon+'<span>'+t.label+'</span>'+_badge2+'</button>';
   }).join('');
   if (typeof wrapSidebarAISection === 'function') sb = wrapSidebarAISection(sb);
   if (window.RDXGuide) sb += RDXGuide.renderSidebarToggle();
