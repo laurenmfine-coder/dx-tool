@@ -5691,7 +5691,23 @@ render = function(){
   fn.handoff = renderHandoff;
   fn.coach = renderCoachDx;
   fn.guided = function(){ return window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderPhase():'<p>Guided mode unavailable.</p>'; };
-  fn.crt = function(){ var _sw=(typeof renderAISwitcher==='function')?renderAISwitcher('crt'):''; return _sw + ((window.CRTChart && CRTChart.renderTab) ? CRTChart.renderTab() : '<div style="text-align:center;padding:40px 20px;color:var(--text-muted)"><div style="font-size:32px;margin-bottom:10px">⚡</div><div style="font-size:14px;font-weight:600;color:var(--text)">Loading Clinical Reasoning Trainer…</div></div>'); };
+  fn.crt = function(){
+    var _sw = (typeof renderAISwitcher==='function') ? renderAISwitcher('crt') : '';
+    var _crtHtml = '';
+    try {
+      if (window.CRTChart && typeof CRTChart.renderTab === 'function') {
+        _crtHtml = CRTChart.renderTab();
+      }
+    } catch(e) {
+      console.warn('[CRT] renderTab error:', e.message);
+    }
+    if (!_crtHtml) {
+      // Fallback: show DDx builder + orders inline
+      var _ddx = (window.DdxBuilder && typeof DdxBuilder.renderTab === 'function') ? DdxBuilder.renderTab() : '';
+      _crtHtml = _ddx + renderOrders();
+    }
+    return _sw + _crtHtml;
+  };
   
   if(role==="student"){
     fn.problems = renderProblemsInteractive;
