@@ -2201,7 +2201,7 @@ function loadCaseData(cb) {
   document.head.appendChild(s);
 }
 const RUBRIC=[{id:"cc",label:"Chief Complaint",max:5,desc:"Clear, concise presenting concern"},{id:"hpi",label:"HPI Quality",max:15,desc:"OLDCARTS, pertinent pos/neg, timeline"},{id:"pmh",label:"PMH/PSH",max:5,desc:"Relevant conditions documented"},{id:"meds",label:"Meds & Allergies",max:5,desc:"Complete medication reconciliation"},{id:"fsh",label:"FH & SH",max:5,desc:"Relevant details per context"},{id:"ros",label:"Review of Systems",max:10,desc:"Pertinent systems with pos/neg"},{id:"pe",label:"Physical Exam",max:15,desc:"Organized, appropriate, clear findings"},{id:"assess",label:"Assessment",max:15,desc:"Problem list with reasoning/DDx"},{id:"plan",label:"Plan",max:15,desc:"Evidence-based, specific per problem"},{id:"prof",label:"Professionalism",max:10,desc:"Organized, legible, proper terminology"}];
-const NOTE_SECTIONS=[{id:"cc",label:"CHIEF COMPLAINT",hint:"e.g. \"Chest pain and shortness of breath\" — quote the patient's own words",size:""},{id:"hpi",label:"HISTORY OF PRESENT ILLNESS",hint:"OLDCARTS framework:\nOnset: When did it start?\nLocation: Where exactly?\nDuration: Constant or intermittent?\nCharacter: Sharp, dull, pressure, burning?\nAssociating symptoms: What else?\nRelieving/Aggravating: What makes it better or worse?\nTiming: Any prior episodes?\nSeverity: Rate 1–10\n\nEnd with pertinent positives and negatives.",size:"xlarge"},{id:"pmh",label:"PAST MEDICAL HISTORY",hint:"List active diagnoses, prior hospitalizations, chronic conditions\ne.g. Type 2 DM (dx 2018), Hypertension, Hyperlipidemia",size:""},{id:"psh",label:"PAST SURGICAL HISTORY",hint:"e.g. Appendectomy 2015, Cesarean section 2019 — include year if known",size:""},{id:"meds",label:"MEDICATIONS",hint:"Drug name — dose — route — frequency\ne.g. Metformin 1000mg PO BID, Lisinopril 10mg PO daily",size:"large"},{id:"allergies",label:"ALLERGIES",hint:"Drug/substance — reaction type — severity\ne.g. Penicillin — rash — moderate; NKDA if none",size:""},{id:"fhx",label:"FAMILY HISTORY",hint:"Focus on what is relevant to this presentation\ne.g. Father: MI age 52, Mother: DM2, Sister: healthy",size:""},{id:"shx",label:"SOCIAL HISTORY",hint:"Tobacco: pack-year history\nAlcohol: drinks/week\nSubstance use\nOccupation and exposures\nLiving situation\nSexual history if relevant",size:""},{id:"ros",label:"REVIEW OF SYSTEMS",hint:"Document pertinent positives AND negatives by system:\nConstitutional: fever, chills, weight loss, fatigue\nCV: chest pain, palpitations, edema\nResp: dyspnea, cough, hemoptysis\nGI: nausea, vomiting, abdominal pain, bowel changes\nGU: dysuria, frequency, discharge\nNeuro: headache, syncope, weakness, numbness\nMSK: joint pain, swelling",size:"large"},{id:"pe",label:"PHYSICAL EXAMINATION",hint:"Organize by system:\nGeneral: Alert, oriented x3, NAD or describe distress\nVitals: (see chart)\nHEENT: Normocephalic, atraumatic, PERRL\nNeck: Supple, no lymphadenopathy, no JVD\nCV: RRR, no murmurs/rubs/gallops\nResp: CTA bilaterally or describe findings\nAbdomen: Soft, NT/ND, +BS, no organomegaly\nExtremities: No edema, pulses intact\nNeuro: Grossly intact",size:"xlarge"},{id:"assess",label:"ASSESSMENT",hint:"Numbered problem list with reasoning:\n1. [Primary diagnosis] — [supporting evidence]\n   DDx: [alternative 1], [alternative 2]\n2. [Secondary problem]\n\nExplain why you reached this assessment.",size:"large"},{id:"plan",label:"PLAN",hint:"Address each problem from Assessment:\n1. [Primary diagnosis]:\n   - Diagnostics: [labs, imaging ordered]\n   - Treatment: [medications, procedures]\n   - Monitoring: [parameters to follow]\n   - Consults: [if applicable]\n2. [Secondary problem]: ...",size:"large"}];
+const NOTE_SECTIONS=[{id:"cc",label:"CHIEF COMPLAINT",hint:"e.g. \"Chest pain and shortness of breath\" — quote the patient's own words",size:""},{id:"hpi",label:"HISTORY OF PRESENT ILLNESS",hint:"OLDCARTS framework:\nOnset: When did it start?\nLocation: Where exactly?\nDuration: Constant or intermittent?\nCharacter: Sharp, dull, pressure, burning?\nAssociating symptoms: What else?\nRelieving/Aggravating: What makes it better or worse?\nTiming: Any prior episodes?\nSeverity: Rate 1–10\n\nEnd with pertinent positives and negatives.",size:"xlarge"},{id:"pmh",label:"PAST MEDICAL HISTORY",hint:"List active diagnoses, prior hospitalizations, chronic conditions\ne.g. Type 2 DM (dx 2018), Hypertension, Hyperlipidemia",size:""},{id:"psh",label:"PAST SURGICAL HISTORY",hint:"e.g. Appendectomy 2015, Cesarean section 2019 — include year if known",size:""},{id:"meds",label:"MEDICATIONS",hint:"Drug name — dose — route — frequency\ne.g. Metformin 1000mg PO BID, Lisinopril 10mg PO daily",size:"large"},{id:"allergies",label:"ALLERGIES",hint:"Drug/substance — reaction type — severity\ne.g. Penicillin — rash — moderate; NKDA if none",size:""},{id:"fhx",label:"FAMILY HISTORY",hint:"Focus on what is relevant to this presentation\ne.g. Father: MI age 52, Mother: DM2, Sister: healthy",size:""},{id:"shx",label:"SOCIAL HISTORY",hint:"Tobacco: pack-year history\nAlcohol: drinks/week\nSubstance use\nOccupation and exposures\nLiving situation\nSexual history if relevant",size:""},{id:"ros",label:"REVIEW OF SYSTEMS",hint:"Document pertinent positives AND negatives by system:\nConstitutional: fever, chills, weight loss, fatigue\nCV: chest pain, palpitations, edema\nResp: dyspnea, cough, hemoptysis\nGI: nausea, vomiting, abdominal pain, bowel changes\nGU: dysuria, frequency, discharge\nNeuro: headache, syncope, weakness, numbness\nMSK: joint pain, swelling",size:"large"},{id:"pe",label:"PHYSICAL EXAMINATION",hint:"Organize by system:\nGeneral: Alert, oriented x3, NAD or describe distress\nVitals: (see chart)\nHEENT: Normocephalic, atraumatic, PERRL\nNeck: Supple, no lymphadenopathy, no JVD\nCV: RRR, no murmurs/rubs/gallops\nResp: CTA bilaterally or describe findings\nAbdomen: Soft, NT/ND, +BS, no organomegaly\nExtremities: No edema, pulses intact\nNeuro: Grossly intact",size:"xlarge"},{id:"assess",label:"ASSESSMENT",hint:"Base your assessment on available results:\n1. [Primary diagnosis] — [supporting evidence from history + resulted labs/imaging]\n   DDx: [alternative 1] — less likely because [refuting evidence]\n2. [Secondary problem]\n\nOnly reference results that have come back. If an EKG showed ST elevations, say so. If troponin resulted, include the value.",size:"large"},{id:"plan",label:"PLAN",hint:"Address each problem. Distinguish between resulted and pending tests:\n1. [Primary diagnosis]:\n   - Completed: EKG → [findings], CXR → [findings]\n   - Awaiting: Troponin I (pending ~2 min) — will escalate to cath lab if positive\n   - Treatment: [medications, procedures started]\n   - Consults: Cardiology (ordered, pending)\n2. [Secondary problem]:\n\nFor each pending test, state what you will do based on the result.",size:"large"}];
 const ANNOT_COLORS=[{id:"yellow",label:"Note",css:"",bg:"rgba(255,235,59,.35)"},{id:"green",label:"Strength",css:"color-green",bg:"rgba(76,175,80,.25)"},{id:"orange",label:"Needs Work",css:"color-orange",bg:"rgba(255,152,0,.3)"},{id:"red",label:"Critical Issue",css:"color-red",bg:"rgba(239,83,80,.25)"},{id:"blue",label:"Question",css:"color-blue",bg:"rgba(66,165,245,.25)"}];
 
 // ICONS
@@ -2834,7 +2834,69 @@ const sb=S.submitted?badge("✓ Submitted","badge-accent"):'<button type="button
     + '<button type="button" onclick="switchTab(\'coach\')" style="background:transparent;color:#2874A6;font-size:13px;font-weight:700;padding:10px 20px;border-radius:8px;border:2px solid #2874A6;cursor:pointer;font-family:inherit">🧠 Debrief with CoachDx</button>'
     + '</div></div>'
   ) : '';
-  return _sbarCta + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+' '+printBtn+'</div>')+sectionCard("Grading Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
+  // ── Results Context Panel ──────────────────────────────────────────
+  var _resultsPanel = '';
+  if (!S.submitted) {
+    var _resulted = [];
+    var _pending  = [];
+    (S.labOrders||[]).forEach(function(o){
+      if (o.resulted) _resulted.push({name:o.name, type:'Lab', resultedAt:o.resultedAt});
+      else _pending.push({name:o.name, type:'Lab', eta: o.etaMs ? o.etaMs : null});
+    });
+    (S.imgOrders||[]).forEach(function(o){
+      if (o.resulted) _resulted.push({name:o.name, type:'Imaging', resultedAt:o.resultedAt});
+      else _pending.push({name:o.name, type:'Imaging', eta: o.etaMs ? o.etaMs : null});
+    });
+    (S.referralOrders||[]).forEach(function(o){
+      _pending.push({name:(o.specialty||o.name||'Consult'), type:'Consult', eta:null});
+    });
+
+    if (!_resulted.length && !_pending.length) {
+      // No orders at all
+      _resultsPanel = '<div style="background:#FFF8E1;border:1px solid #F59E0B;border-radius:10px;padding:14px 16px;margin-bottom:16px">'
+        + '<div style="font-size:13px;font-weight:700;color:#92400E;margin-bottom:6px">⚠️ No orders placed yet</div>'
+        + '<div style="font-size:12px;color:#78350F;line-height:1.65">In real clinical practice, you should order tests <strong>before</strong> writing your note — results directly inform your Assessment and Plan. '
+        + 'Go to <strong>Order Tests</strong> first, wait for results, then return here to document.</div>'
+        + '<button type="button" onclick="switchTab(&quot;orders&quot;)" style="margin-top:10px;padding:7px 16px;background:#F59E0B;color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">→ Place Orders First</button>'
+        + '</div>';
+    } else {
+      var _panelRows = '';
+      if (_resulted.length) {
+        _panelRows += '<div style="margin-bottom:12px">'
+          + '<div style="font-size:10px;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">✅ Results Available — incorporate into your Assessment</div>';
+        _resulted.forEach(function(o){
+          _panelRows += '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #E2F5EE">'
+            + '<span style="font-size:10px;background:#D1FAE5;color:#065F46;padding:1px 7px;border-radius:8px;font-weight:700">' + o.type + '</span>'
+            + '<span style="font-size:12px;font-weight:600;color:#065F46">' + esc(o.name) + '</span>'
+            + '<span style="font-size:11px;color:#6EE7B7;margin-left:auto">resulted ' + esc(o.resultedAt||'') + '</span>'
+            + '</div>';
+        });
+        _panelRows += '<div style="font-size:11px;color:#059669;font-style:italic;margin-top:5px">→ Check Labs/Imaging tabs for values. Reference these findings in your Assessment.</div>'
+          + '</div>';
+      }
+      if (_pending.length) {
+        _panelRows += '<div>'
+          + '<div style="font-size:10px;font-weight:700;color:#D97706;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px">⏳ Pending — results not back yet — include in your Plan</div>';
+        _pending.forEach(function(o){
+          var _eta = o.eta ? _fmtRemaining(o.eta - Date.now()) : 'scheduled';
+          _panelRows += '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #FEF3C7">'
+            + '<span style="font-size:10px;background:#FEF3C7;color:#92400E;padding:1px 7px;border-radius:8px;font-weight:700">' + o.type + '</span>'
+            + '<span style="font-size:12px;color:#78350F">' + esc(o.name) + '</span>'
+            + '<span style="font-size:11px;color:#D97706;margin-left:auto">~' + _eta + ' remaining</span>'
+            + '</div>';
+        });
+        _panelRows += '<div style="font-size:11px;color:#D97706;font-style:italic;margin-top:5px">→ Acknowledge these in your Plan: "Awaiting [test] — will [action] based on results."</div>'
+          + '</div>';
+      }
+      _resultsPanel = '<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-bottom:16px">'
+        + '<div style="font-size:12px;font-weight:700;color:#1B3A5C;margin-bottom:10px">📋 Order Status — document accordingly</div>'
+        + _panelRows
+        + '</div>';
+    }
+  }
+  // ────────────────────────────────────────────────────────────────────────────
+
+  return _sbarCta + _resultsPanel + sectionCard(docTitle+" — "+S.encounterWeek,I.fileText,'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><div style="font-size:12px;color:var(--text-secondary)">Document your encounter with <strong>'+esc(PATIENT.name)+'</strong>. Each section auto-saves as you type.</div>'+ws+'</div><div class="note-template">'+ns+'</div><div class="doc-footer"><span class="word-count" id="wordCount">'+(wc?wc+" words":"")+'</span>'+sb+' '+printBtn+'</div>')+sectionCard("Grading Rubric",I.star,'<div style="font-size:12px;color:var(--text-secondary);margin-bottom:12px">100 points total:</div>'+tableHTML(["Criterion","Pts","Description"],RUBRIC.map(r=>'<tr><td style="font-weight:500">'+esc(r.label)+'</td><td class="td-mono">'+r.max+'</td><td class="td-muted">'+esc(r.desc)+'</td></tr>')))+_debrief;
 }
 
 function buildAnnotatedHTML(text,anns){if(!anns||!anns.length)return esc(text);const sorted=[...anns].map((a,i)=>({...a,idx:i}));sorted.sort((a,b)=>text.indexOf(a.selectedText)-text.indexOf(b.selectedText));let result="",last=0;sorted.forEach(a=>{const p=text.indexOf(a.selectedText,last);if(p===-1)return;const col=ANNOT_COLORS.find(c=>c.id===a.color)||ANNOT_COLORS[0];result+=esc(text.substring(last,p));result+='<span class="annotation-highlight '+col.css+'" title="'+esc(a.comment)+'">'+esc(a.selectedText)+'<span class="annotation-marker">'+(a.idx+1)+'</span></span>';last=p+a.selectedText.length});result+=esc(text.substring(last));return result}
