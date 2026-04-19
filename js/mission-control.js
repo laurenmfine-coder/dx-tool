@@ -98,7 +98,7 @@
       nextLabel:'Next: Vitals', nextTab:'vitals' },
     vitals: { icon:'📊', heading:'Step 4 — Vitals',
       body:'Look at trends, not just the latest values. What does tachycardia with hypoxia tell you? What does improving BP after fluids tell you? Build your first impressions here.',
-      nextLabel:'Form your initial differential →', nextTab:'documentation' },
+      nextLabel:'Form your initial differential →', nextTab:'ddx' },
     visits: { icon:'📝', heading:'Visit History — Context Only',
       body:'This shows past notes and previous encounters. Use it to understand the patient\'s baseline — NOT as a substitute for taking the history yourself. Prior diagnoses can anchor your thinking — be aware of that bias.',
       nextLabel:'Now interview the patient →', nextTab:'interview' },
@@ -133,7 +133,7 @@
 
   var _state = {
     open: false, startTime: null, tabDwell: {}, completed: {},
-    dismissed: false, ddxEntries: [], initialized: false,
+    dismissed: false, ddxEntries: [], ddxSnapshots: [], initialized: false,
     role: 'student', setting: 'ed', caseId: '', activeTab: ''
   };
 
@@ -200,7 +200,8 @@
           _state.tabDwell     = saved.tabDwell     || {};
           _state.startTime    = saved.startTime    || _state.startTime;
           _state.ddxEntries   = saved.ddxEntries   || [];
-          _state.ddxRevisedAt = saved.ddxRevisedAt || null;
+          _state.ddxRevisedAt  = saved.ddxRevisedAt  || null;
+          _state.ddxSnapshots = saved.ddxSnapshots || [];
         }
       } catch(e) {}
       // MC starts closed — students open it intentionally
@@ -228,7 +229,7 @@
 
     save: function() {
       if (!_state.caseId) return;
-      try { localStorage.setItem('mc-' + _state.caseId, JSON.stringify({ completed: _state.completed, tabDwell: _state.tabDwell, startTime: _state.startTime, ddxEntries: _state.ddxEntries, ddxRevisedAt: _state.ddxRevisedAt })); } catch(e) {}
+      try { localStorage.setItem('mc-' + _state.caseId, JSON.stringify({ completed: _state.completed, tabDwell: _state.tabDwell, startTime: _state.startTime, ddxEntries: _state.ddxEntries, ddxRevisedAt: _state.ddxRevisedAt, ddxSnapshots: _state.ddxSnapshots })); } catch(e) {}
     },
 
     isFirstCase: function() { return !localStorage.getItem('rdx-mc-seen'); },
@@ -300,6 +301,23 @@
     setDdxEntries:    function(e)   { _state.ddxEntries=e; this.save(); },
     addDdxEntry:      function(e)   { _state.ddxEntries.push(e); this.save(); },
     markDdxRevised:   function()    { _state.ddxRevisedAt = Date.now(); this.save(); },
+    takeSnapshot:     function(checkpoint) {
+      // checkpoint: 'initial' | 'post-interview' | 'post-exam' | 'post-results'
+      var snap = {
+        checkpoint: checkpoint,
+        timestamp:  Date.now(),
+        entries:    JSON.parse(JSON.stringify(_state.ddxEntries || []))
+      };
+      // Remove any existing snapshot for this checkpoint
+      _state.ddxSnapshots = (_state.ddxSnapshots || []).filter(function(s){ return s.checkpoint !== checkpoint; });
+      _state.ddxSnapshots.push(snap);
+      this.save();
+      return snap;
+    },
+    getDdxSnapshots:  function() { return _state.ddxSnapshots || []; },
+    getSnapshot:      function(checkpoint) {
+      return (_state.ddxSnapshots || []).find(function(s){ return s.checkpoint === checkpoint; }) || null;
+    },
     removeDdxEntry:   function(i)   { _state.ddxEntries.splice(i,1); this.save(); },
     updateDdxEntry:   function(i,e) { _state.ddxEntries[i]=e; this.save(); },
 
