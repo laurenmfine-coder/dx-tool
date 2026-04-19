@@ -304,6 +304,39 @@ window.EMR_DATA = {
     "presentation": "Geriatric Emergency",
     "category": "neurological"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Eleanor Whitfield is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did geriatric emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started For the past three months, I've been waking up every morning with these terrible.'",
+        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Brain Mass/Tumor.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 5mg daily; Levothyroxine 75mcg daily; Denosumab (Prolia) 60mg SC q6months; Calcium-Vitamin D 600mg/400IU BID; Acetaminophen 1000mg TID PRN.'",
+        "allergies": "'My allergies are Sulfa drugs.'",
+        "family": "Mother: Breast cancer (age 64), deceased at 78 (CHF)  Father: Lung cancer, deceased at 70  Sister: Breast cancer (age 58), alive at 72 \u2014 BRCA negative",
+        "social": "Occupation: Retired high school English teacher  Marital: Widowed \u2014 husband deceased 2019 (MI)  Tobacco: Never smoker  Alcohol: Rare \u2014 glass of wine at holidays  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -342,84 +375,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Eleanor Whitfield's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Brain Mass/Tumor (Metastatic Breast Cancer). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Eleanor appears tired and concerned, rubbing her temples frequently during conversation. She's cooperative and articulate but clearly distressed by the persistent headaches that have significantly impacted her quality of life. Given her history of breast cancer, she seems worried this might be related but hasn't voiced this fear directly.",
-    "interviewQuestions": [
-        "Can you describe exactly when these headaches started and how they've progressed?",
-        "What do the headaches feel like - throbbing, pressure, sharp pain?",
-        "Where exactly do you feel the pain in your head?",
-        "On a scale of 1-10, how severe are these headaches?",
-        "What makes the headaches better or worse?",
-        "Have you noticed any changes in your vision or hearing?",
-        "Any weakness, numbness, or difficulty with coordination?",
-        "Have you had any seizures or episodes of confusion?",
-        "Any changes in your personality or memory recently?",
-        "Have you experienced any nausea or vomiting with the headaches?",
-        "When was your last breast cancer follow-up and what were the results?",
-        "What medications are you currently taking?",
-        "Do you have any drug allergies I should know about?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you repeat that? These headaches make it hard to concentrate sometimes.",
-        "onset": "They started about three months ago, very gradually at first. Now they happen every single morning when I wake up, and they're getting worse each week.",
-        "character": "It feels like intense pressure all around my head, like someone is squeezing it in a vice. Not throbbing like migraines I've heard about, just constant, dull pressure.",
-        "location": "All over my head really, but it seems worst in the back and on the left side. Sometimes I feel it behind my left eye too.",
-        "severity": "They're about a 7 or 8 out of 10 when I first wake up. By afternoon they usually settle to about a 4 or 5, but they never completely go away anymore.",
-        "aggravating": "They're definitely worst first thing in the morning. Bending over to pick something up makes them much worse, and coughing or sneezing is terrible.",
-        "relieving": "The Tylenol helps a little bit, but not much anymore. Lying flat seems to help somewhat, but I can't stay in bed all day.",
-        "associated": "Yes, I've been nauseous almost every morning, especially when the headache is at its worst. I've vomited a few times. I've also been more tired than usual.",
-        "denies": "No fever, no changes in my vision that I've noticed, no weakness in my arms or legs, and no seizures or fainting spells.",
-        "history": "Never had headaches like this before in my life. I occasionally got mild headaches during my cancer treatment, but nothing like this.",
-        "medications": "Amlodipine 5mg daily; Levothyroxine 75mcg daily; Denosumab (Prolia) 60mg SC q6months; Calcium-Vitamin D 600mg/400IU BID; Acetaminophen 1000mg TID PRN",
-        "allergies": "Sulfa drugs",
-        "family": "My mother and sister both had breast cancer. My mother passed away from heart failure, and my sister is doing well. We tested negative for BRCA mutations.",
-        "social": "I'm a retired English teacher, widowed since 2019. I live alone but my daughter checks on me. I've never smoked and barely drink - maybe a glass of wine at holidays. No drugs."
-    },
-    "examManeuvers": [
-        "Fundoscopic examination",
-        "Cranial nerve testing (CN II-XII)",
-        "Motor strength testing (upper and lower extremities)",
-        "Deep tendon reflexes",
-        "Sensory examination",
-        "Cerebellar testing (finger-to-nose, heel-to-shin)",
-        "Gait assessment",
-        "Mental status examination",
-        "Neck stiffness/meningeal signs",
-        "Palpation for lymphadenopathy"
-    ],
-    "examFindings": {
-        "Fundoscopic examination": "Mild papilledema present bilaterally, disc margins slightly blurred, no hemorrhages or exudates",
-        "Cranial nerve testing (CN II-XII)": "Subtle left facial weakness (CN VII), otherwise cranial nerves intact",
-        "Motor strength testing (upper and lower extremities)": "Mild weakness in right upper extremity (4+/5), otherwise strength normal",
-        "Deep tendon reflexes": "Hyperreflexic on the right side compared to left, upgoing Babinski on the right",
-        "Sensory examination": "Decreased sensation to light touch on right side of body",
-        "Cerebellar testing (finger-to-nose, heel-to-shin)": "Mild dysmetria on right side during finger-to-nose testing",
-        "Gait assessment": "Slightly unsteady, favors right side, no obvious ataxia",
-        "Mental status examination": "Alert and oriented x3, mild difficulty with word-finding, otherwise normal",
-        "Neck stiffness/meningeal signs": "No neck stiffness, negative Kernig's and Brudzinski's signs",
-        "Palpation for lymphadenopathy": "No palpable lymphadenopathy in neck, axilla, or supraclavicular regions"
-    },
-    "ddxTargets": [
-        "Brain Mass/Tumor (Metastatic Breast Cancer) (correct diagnosis)",
-        "Primary brain tumor (glioblastoma)",
-        "Medication overuse headache",
-        "Meningitis",
-        "Subdural hematoma",
-        "Tension-type headache",
-        "Hypertensive headache"
-    ],
-    "biasFlags": {
-        "anchoring": "May anchor on 'headache' as primary complaint and miss neurological signs, or conversely anchor immediately on cancer history without considering other causes",
-        "prematureClosure": "Risk of stopping at 'tension headache' or 'medication overuse' without fully exploring red flags like morning onset, nausea, and cancer history",
-        "availabilityBias": "Recent cases of simple headaches might make provider less likely to consider serious intracranial pathology in elderly patient"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified some concerning features already. Given Mrs. Whitfield's age, new-onset morning headaches, and past medical history, what specific red flags should you be exploring in your history? What questions will help you differentiate between benign and serious causes?",
-        "phase5": "Now that you have both history and physical exam findings, let's think systematically. You found some focal neurological signs along with the classic morning headache pattern. How do these findings change your differential diagnosis? What's the most likely anatomical location of pathology?",
-        "finalDebrief": "This case highlights the importance of red flag recognition in headache evaluation. Mrs. Whitfield presented with the classic triad for increased intracranial pressure: morning headaches, nausea/vomiting, and papilledema. Combined with her breast cancer history and focal neurological findings, this pointed strongly toward metastatic disease. How might your approach differ if she had no cancer history?"
     }
 }
 };

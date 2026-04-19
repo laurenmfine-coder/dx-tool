@@ -1327,6 +1327,37 @@ window.EMR_DATA = {
     ]
   }
 ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Elijah Crawford is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Cephalexin; Mupirocin 2%; Hydrocortisone 2.5%; Cetirizine.'",
+        "allergies": "'My allergies: Egg, Milk.'",
+        "family": "Mother: asthma, eczema  Father: allergic rhinitis  Sister (7): peanut allergy",
+        "social": "Living: Public housing \u2014 roach and mold exposure  Environmental: Heavy dust mite, cockroach, and mold exposure in apartment  Childcare: Daycare \u2014 frequent skin infections from other children  Family stress: Single mother, 2 jobs, difficulty maintaining complex skin regimen  Sleep: Scratches through the night \u2014 mother sleeps next to him to hold his hands"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1365,84 +1396,6 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Elijah Crawford: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Elijah is feverish, irritable, and clingy to his mother due to discomfort from widespread infected eczema. His mother appears exhausted and overwhelmed, struggling to manage his complex care routine as a single parent while working two jobs. She is very forthcoming about their challenges but shows high distress about his worsening condition.",
-    "interviewQuestions": [
-        "When did you first notice the fever and how high has it gotten?",
-        "Has the eczema been getting worse over the past few days or weeks?",
-        "Are there any new crusty, honey-colored areas on his skin?",
-        "Has he been scratching more than usual recently?",
-        "Have you noticed any red streaking or rapidly spreading redness?",
-        "Has he been eating and drinking normally?",
-        "Any changes in his energy level or playfulness?",
-        "Have you been able to keep up with his usual skin care routine?",
-        "Has he been around other children with skin infections recently?",
-        "Are you still using all of his prescribed medications regularly?",
-        "Have there been any recent changes in your living situation or environment?",
-        "Has he had any similar episodes with fever and skin infection before?",
-        "Any family history of severe eczema or frequent skin infections?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm not sure what you mean. Can you ask that differently? I'm just so worried about him.",
-        "onset": "The fever started yesterday morning, and I noticed the crusty spots getting worse over the past 3-4 days. His regular eczema has been bad for weeks though.",
-        "character": "The skin looks angry and red, with these honey-colored crusty areas that are spreading. The fever makes him so miserable and clingy.",
-        "location": "The worst crusty areas are in his elbow creases and around his neck where he scratches the most, but the eczema covers most of his body.",
-        "severity": "His discomfort is a 9 out of 10 - he can't sleep, won't eat much, and just cries. This is the worst his skin has ever been.",
-        "aggravating": "The heat makes it worse, and he can't stop scratching even with mittens on. The dust and roaches in our apartment don't help either.",
-        "relieving": "The prescription creams help a little, but it's hard to keep up with the routine with my work schedule. Cool baths seem to calm him temporarily.",
-        "associated": "He's been more tired than usual, not eating as much, and the fever comes and goes. He's also been extra fussy and clingy.",
-        "denies": "No vomiting, no diarrhea, no trouble breathing. The rash isn't spreading in streaks, and he doesn't have swollen glands that I can feel.",
-        "history": "He's had infected eczema before but never with fever like this. Usually the antibiotic cream clears up the crusty parts in a week or so.",
-        "medications": "Cephalexin; Mupirocin 2%; Hydrocortisone 2.5%; Cetirizine",
-        "allergies": "Egg, Milk",
-        "family": "I have asthma and had bad eczema as a child. His father has allergies, and his older sister has a peanut allergy. Skin problems run in both families.",
-        "social": "We live in public housing with roach and mold problems. I work two jobs so sometimes I can't do all his skin care. He goes to daycare where kids share germs."
-    },
-    "examManeuvers": [
-        "General appearance and vital signs assessment",
-        "Skin inspection for distribution and extent of eczema",
-        "Assessment of impetiginous lesions (honey crusts)",
-        "Palpation for lymphadenopathy",
-        "Assessment for cellulitis signs (warmth, induration, streaking)",
-        "Evaluation of conjunctiva and mucous membranes",
-        "Abdominal examination",
-        "Assessment of hydration status",
-        "Examination of unaffected skin areas",
-        "Documentation of SCORAD severity scoring"
-    ],
-    "examFindings": {
-        "General appearance and vital signs assessment": "Ill-appearing, feverish 4-year-old, irritable but consolable, HR 128, Temp 38.2°C",
-        "Skin inspection for distribution and extent of eczema": "Diffuse excoriated eczematous plaques covering approximately 60% BSA, predominantly flexural areas",
-        "Assessment of impetiginous lesions (honey crusts)": "Honey-crusted lesions with satellite pustules in bilateral antecubital fossae and neck creases",
-        "Palpation for lymphadenopathy": "Mildly enlarged, tender cervical and axillary lymph nodes bilaterally",
-        "Assessment for cellulitis signs (warmth, induration, streaking)": "Localized warmth and mild induration around crusted areas, no lymphangitic streaking",
-        "Evaluation of conjunctiva and mucous membranes": "Pale conjunctiva consistent with chronic illness, moist mucous membranes",
-        "Abdominal examination": "Soft, non-tender abdomen, no organomegaly",
-        "Assessment of hydration status": "Adequate skin turgor, moist mucous membranes, normal capillary refill",
-        "Examination of unaffected skin areas": "Xerotic, hyperpigmented areas consistent with chronic atopic dermatitis",
-        "Documentation of SCORAD severity scoring": "SCORAD approximately 65 indicating severe atopic dermatitis with secondary bacterial infection"
-    },
-    "ddxTargets": [
-        "Impetiginized eczema (correct diagnosis)",
-        "Cellulitis",
-        "Contact dermatitis with secondary infection",
-        "Staphylococcal scalded skin syndrome",
-        "Herpes simplex virus (eczema herpeticum)",
-        "Seborrheic dermatitis",
-        "Scabies with secondary infection"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'eczema' from chief complaint and missing the significance of fever and secondary bacterial infection requiring systemic antibiotics",
-        "prematureClosure": "May assume this is routine eczema flare and miss impetiginization, or conversely assume cellulitis without recognizing underlying atopic dermatitis",
-        "availabilityBias": "Recent cases of simple eczema or cellulitis may bias toward those diagnoses rather than recognizing the combination of both conditions"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you're considering both infectious and inflammatory skin conditions. As you interview this patient, pay particular attention to the timeline of symptoms and what specifically has changed recently. What key historical features would help you distinguish between your top differentials?",
-        "phase5": "Excellent history and physical examination. You've identified both the underlying atopic dermatitis and the superimposed bacterial infection. How does the presence of fever and honey-crusted lesions change your management approach compared to a simple eczema flare? What are your thoughts on the social determinants affecting this case?",
-        "finalDebrief": "This case illustrates how chronic conditions like severe atopic dermatitis can be complicated by secondary bacterial infections. The key was recognizing that fever with honey-crusted lesions indicated impetiginization requiring systemic antibiotics, not just topical therapy. The social factors - housing conditions, single parent with complex regimen, daycare exposure - all contributed to this presentation and must be addressed for successful management."
     }
 }
 };

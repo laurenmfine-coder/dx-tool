@@ -362,6 +362,39 @@ window.EMR_DATA = {
       "Lives with spouse"
     ]
   ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Frances Yamamoto appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did back pain shooting down both legs low back, radiating down both legs \u2014 back of thighs and into calves start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My lower back is killing me, and now the pain is shooting down the back of both .'",
+        "character": "'It's back pain shooting down both legs low back, radiating down both legs \u2014 back of thighs and into calves \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Ibuprofen; Cyclobenzaprine; Hydrochlorothiazide.'",
+        "allergies": "'My allergies are Morphine.'",
+        "family": "Father: degenerative disc disease  No cancer history",
+        "social": "Tobacco: Current smoker, 15 pack-years  Alcohol: 2-3 beers daily  Drugs: Denies  Occupation: Warehouse supervisor \u2014 on modified duty for back pain  Living: Lives with spouse"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -400,84 +433,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Frances Yamamoto's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Frances appears uncomfortable and frustrated, frequently shifting position in her chair and occasionally grimacing when describing her pain. She is very forthcoming about her symptoms, clearly motivated to get help, and expresses significant concern that her back condition is worsening and affecting her ability to work.",
-    "interviewQuestions": [
-        "When did this radiating leg pain first start, and how has it progressed?",
-        "Can you describe the quality of the pain - is it sharp, burning, aching, or electric-like?",
-        "Does the pain radiate all the way down to your feet or stop at your calves?",
-        "On a scale of 1-10, how would you rate your pain right now?",
-        "What makes the pain worse - walking, sitting, standing, coughing, or bending?",
-        "What positions or activities provide relief from the pain?",
-        "Have you noticed any numbness, tingling, or weakness in your legs?",
-        "Are you having any bowel or bladder problems?",
-        "How does this compare to your previous back pain episodes?",
-        "Have your current medications been helping with this new pain?",
-        "Have you had any recent falls, injuries, or heavy lifting?",
-        "Are you able to perform your usual work duties and daily activities?",
-        "Have you noticed the pain being worse in one leg compared to the other?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Can you explain that differently? I just know my back and legs are really hurting.",
-        "onset": "This leg pain started about 5 days ago and has been getting progressively worse. It started as just my usual lower back ache, but then the shooting pain down my legs began and hasn't let up.",
-        "character": "It's a sharp, shooting pain that feels like electricity going down the back of both my legs. Sometimes it's also a deep aching pain in my lower back.",
-        "location": "The pain starts in my lower back, right in the center, and shoots down the back of both thighs and into my calves. The right leg seems a bit worse than the left.",
-        "severity": "Right now it's about an 8 out of 10. I can barely concentrate at work, and I'm having trouble sleeping because I can't find a comfortable position.",
-        "aggravating": "Sitting makes it much worse, especially at my desk at work. Coughing or sneezing sends a sharp pain down both legs. Bending forward is almost impossible.",
-        "relieving": "Walking around slowly seems to help a little bit. Lying flat on my back with my knees bent gives me some relief, but not much. My usual medications aren't really touching this pain.",
-        "associated": "I've noticed some tingling in both feet, especially when I first wake up. My legs feel a bit weak when I'm walking, like they might give out on me.",
-        "denies": "No bowel or bladder problems, no fever, no recent falls or injuries. I haven't had any numbness in my groin area.",
-        "history": "I've had back pain on and off for years from my disc herniation, but it's never gone down into my legs like this before. Usually it's just lower back pain that gets better with rest and my medications.",
-        "medications": "Ibuprofen; Cyclobenzaprine; Hydrochlorothiazide",
-        "allergies": "Morphine",
-        "family": "My father had degenerative disc disease and eventually needed back surgery. He had similar leg pain problems in his later years.",
-        "social": "I work as a warehouse supervisor but I'm on modified duty because of my back. I've been smoking for about 20 years, maybe a pack and a half a day. I have a couple beers most evenings to help with the pain and stress."
-    },
-    "examManeuvers": [
-        "Straight leg raise test (bilateral)",
-        "Crossed straight leg raise test",
-        "Lumbar spine range of motion assessment",
-        "Lower extremity strength testing (hip flexion, knee extension, ankle dorsiflexion/plantarflexion)",
-        "Lower extremity deep tendon reflexes (patellar and Achilles)",
-        "Sensory examination of lower extremities (L4, L5, S1 dermatomes)",
-        "Lumbar spine palpation for tenderness and muscle spasm",
-        "Femoral nerve stretch test",
-        "Assessment of gait and stance",
-        "Rectal examination for sphincter tone"
-    ],
-    "examFindings": {
-        "Straight leg raise test (bilateral)": "Positive bilaterally at 30-40 degrees, reproducing radiating leg pain down posterior thighs to calves",
-        "Crossed straight leg raise test": "Positive - raising left leg reproduces pain in right leg and vice versa",
-        "Lumbar spine range of motion assessment": "Severely limited flexion and extension due to pain, lateral bending restricted bilaterally",
-        "Lower extremity strength testing (hip flexion, knee extension, ankle dorsiflexion/plantarflexion)": "Mild weakness (4/5) in ankle dorsiflexion bilaterally, other muscle groups 5/5",
-        "Lower extremity deep tendon reflexes (patellar and Achilles)": "Diminished Achilles reflexes bilaterally, patellar reflexes normal",
-        "Sensory examination of lower extremities (L4, L5, S1 dermatomes)": "Decreased sensation to light touch in L5 distribution bilaterally (lateral legs and dorsal feet)",
-        "Lumbar spine palpation for tenderness and muscle spasm": "Significant tenderness over L4-L5 region with bilateral paravertebral muscle spasm",
-        "Femoral nerve stretch test": "Negative bilaterally",
-        "Assessment of gait and stance": "Antalgic gait with forward-leaning posture, difficulty with heel walking",
-        "Rectal examination for sphincter tone": "Normal sphincter tone, no saddle anesthesia"
-    },
-    "ddxTargets": [
-        "Central lumbar spinal stenosis (correct diagnosis)",
-        "Lumbar disc herniation with bilateral radiculopathy",
-        "Cauda equina syndrome",
-        "Peripheral arterial disease with claudication",
-        "Epidural abscess or malignancy",
-        "Piriformis syndrome",
-        "Diabetic peripheral neuropathy"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on patient's known history of lumbar disc herniation and assuming this is simply worsening disc disease rather than considering spinal stenosis",
-        "prematureClosure": "Risk of stopping evaluation after finding positive straight leg raises and assuming simple radiculopathy without considering bilateral nature and central stenosis",
-        "availabilityBias": "Risk of focusing on more commonly seen unilateral disc herniation rather than recognizing the classic bilateral neurogenic claudication pattern of spinal stenosis"
-    },
-    "coachPrompts": {
-        "phase2": "Good differential diagnosis list. I notice you included several spine-related conditions. Before you interview the patient, think about what specific historical features would help you distinguish between central spinal stenosis and lateral disc herniation. Also consider what red flag symptoms you absolutely need to rule out given the bilateral nature of her symptoms.",
-        "phase5": "Excellent work on the history and physical exam. You've identified bilateral radicular symptoms with positive straight leg raises and some neurologic deficits. Now consider the pattern of her symptoms - bilateral leg pain that's worse with sitting and forward flexion. How does this clinical picture help you narrow down between your differential diagnoses? What does the bilateral nature and specific aggravating factors suggest?",
-        "finalDebrief": "This case illustrates how central spinal stenosis can present similarly to disc herniation but with key distinguishing features. The bilateral nature of symptoms, pain worse with sitting/forward flexion, positive crossed straight leg raise, and the patient's demographic profile all pointed toward central stenosis rather than simple disc herniation. Remember that stenosis often develops in patients with pre-existing disc disease, so the history of disc herniation was actually a risk factor rather than a red herring."
     }
 }
 };

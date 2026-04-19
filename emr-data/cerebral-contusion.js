@@ -304,6 +304,39 @@ window.EMR_DATA = {
     "presentation": "Trauma",
     "category": "trauma"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Dwayne Jackson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did trauma start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been having these headaches on and off, and I feel tired during the day eve.'",
+        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Cerebral Contusion.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 10mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Atorvastatin 20mg QHS; Aspirin 81mg daily.'",
+        "allergies": "'My allergies are Sulfonamides.'",
+        "family": "Father: T2DM, HTN, stroke at age 62 (deceased at 68)  Mother: HTN, hyperlipidemia, alive at 70  Brother: T2DM, age 42",
+        "social": "Occupation: Warehouse supervisor  Marital: Single  Tobacco: 1 PPD x 25 years (25 pack-years)  Alcohol: 6-8 beers/week, mostly weekends  Drugs: Denies; remote marijuana use in 20s"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -342,84 +375,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Dwayne Jackson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Cerebral Contusion. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Dwayne appears anxious and somewhat confused, with mild difficulty concentrating during the interview. He is cooperative but seems frustrated by his inability to clearly remember details about his head injury, and shows some embarrassment about the circumstances that led to his trauma.",
-    "interviewQuestions": [
-        "Can you tell me exactly what happened when you were injured?",
-        "Did you lose consciousness or have any period where you don't remember what happened?",
-        "How long ago did this injury occur?",
-        "Have you had any nausea or vomiting since the injury?",
-        "Are you experiencing any vision changes or dizziness?",
-        "How would you rate your headache pain on a scale of 1 to 10?",
-        "Have you noticed any weakness or numbness in your arms or legs?",
-        "Are you having any trouble with balance or coordination?",
-        "Have you had any seizures or episodes where you felt confused?",
-        "What makes your headache better or worse?",
-        "Have you been taking your regular medications since the injury?",
-        "Have you had any head injuries in the past?",
-        "Were you drinking alcohol before this happened?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble concentrating right now. Could you repeat that question?",
-        "onset": "It happened about 6 hours ago. I was moving some heavy equipment at work and I slipped and hit my head on a concrete floor pretty hard.",
-        "character": "It's a constant, dull aching pain that's worse than my usual headaches. It feels like pressure building up inside my head.",
-        "location": "The pain is mostly on the right side of my head where I hit it, but it's spreading to the front and back too.",
-        "severity": "I'd say it's about a 7 out of 10 right now. It's making it hard for me to think straight and I feel pretty nauseous.",
-        "aggravating": "The headache gets worse when I move my head quickly or when there are bright lights. Bending over makes it much worse.",
-        "relieving": "I took some ibuprofen about 2 hours ago but it barely helped. Lying still in a dark room helps a little bit.",
-        "associated": "I've been feeling nauseous and threw up once about an hour ago. I'm also feeling dizzy when I stand up and everything seems a bit foggy.",
-        "denies": "I haven't had any seizures or major weakness in my arms or legs. My vision seems okay, no double vision or anything like that.",
-        "history": "I've never had a head injury like this before. I've had some minor bumps over the years but nothing that knocked me down like this.",
-        "medications": "Amlodipine 10mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Atorvastatin 20mg QHS; Aspirin 81mg daily",
-        "allergies": "Sulfonamides",
-        "family": "My dad had a stroke when he was 62, and both my parents have high blood pressure. My brother has diabetes too.",
-        "social": "I'm a warehouse supervisor, been doing physical work for years. I smoke about a pack a day and have a few beers on weekends. I wasn't drinking when this happened - it was during my work shift."
-    },
-    "examManeuvers": [
-        "Glasgow Coma Scale assessment",
-        "Pupillary examination",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Deep tendon reflexes",
-        "Cerebellar function testing",
-        "Romberg test",
-        "Inspection of head for external trauma",
-        "Palpation of skull for deformities",
-        "Neck examination for rigidity"
-    ],
-    "examFindings": {
-        "Glasgow Coma Scale assessment": "GCS 14 (Eyes 4, Verbal 4, Motor 6) - mild confusion with delayed responses to questions",
-        "Pupillary examination": "Pupils equal, round, reactive to light bilaterally, 3mm each, no relative afferent pupillary defect",
-        "Cranial nerve examination": "Cranial nerves II-XII grossly intact, mild difficulty with rapid alternating movements",
-        "Motor strength testing": "5/5 strength in all extremities, no focal motor deficits appreciated",
-        "Deep tendon reflexes": "2+ and symmetric throughout, no pathologic reflexes present",
-        "Cerebellar function testing": "Mild ataxia on finger-to-nose testing bilaterally, heel-to-shin intact",
-        "Romberg test": "Positive with mild swaying, patient requires slight assistance to maintain balance",
-        "Inspection of head for external trauma": "3cm laceration over right parietal area with surrounding edema and ecchymosis",
-        "Palpation of skull for deformities": "No palpable skull deformities or step-offs, tender over right parietal region",
-        "Neck examination for rigidity": "No nuchal rigidity, full range of motion with mild discomfort"
-    },
-    "ddxTargets": [
-        "Cerebral Contusion (correct diagnosis)",
-        "Epidural Hematoma",
-        "Subdural Hematoma",
-        "Diffuse Axonal Injury",
-        "Intracranial Hemorrhage",
-        "Post-concussive Syndrome",
-        "Tension Headache"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on the patient's chronic headaches and attributing symptoms to medication non-compliance rather than acute trauma",
-        "prematureClosure": "May prematurely diagnose simple concussion without considering more serious intracranial injury given the mechanism and ongoing symptoms",
-        "availabilityBias": "Common workplace injuries might lead to underestimating the severity of head trauma in occupational settings"
-    },
-    "coachPrompts": {
-        "phase2": "You've identified several concerning possibilities for head trauma. What key historical details will help you differentiate between these diagnoses? Think about the timeline, mechanism of injury, and red flag symptoms that might indicate increased intracranial pressure.",
-        "phase5": "Your history and physical exam reveal several important findings. How does the patient's Glasgow Coma Scale score and neurological examination help narrow your differential? What is your biggest concern given the mechanism of injury and current symptoms?",
-        "finalDebrief": "This case demonstrates how cerebral contusion can present with subtle but important neurological changes. Notice how the combination of mechanism, timeline, and examination findings pointed away from simple concussion toward more significant brain injury. What clinical decision rules or imaging criteria would you apply next?"
     }
 }
 };

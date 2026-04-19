@@ -315,6 +315,39 @@ window.EMR_DATA = {
     "presentation": "Headache",
     "category": "neurologic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Ricardo Jimenez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did headache start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I started having this really bad headache about 10 days ago, right across my for.'",
+        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Brain Abscess.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Metformin 1000mg BID; Lisinopril 20mg daily; Fluticasone 50mcg nasal spray BID; Amoxicillin-Clavulanate 875mg/125mg BID; Atorvastatin 20mg QHS.'",
+        "allergies": "'My allergies are Sulfonamides.'",
+        "family": "Mother: T2DM, HTN, alive at 72  Father: Stroke at age 64, deceased at 68  Brother: T2DM, age 50",
+        "social": "Occupation: Construction foreman  Marital: Married, 2 children  Tobacco: Former smoker \u2014 10 pack-years; quit 2017  Alcohol: Social, 3-4 beers on weekends  Drugs: Denies"
+    },
     "examManeuvers": [
         "Level of consciousness and GCS",
         "Cranial nerve examination",
@@ -353,82 +386,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Ricardo Jimenez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Brain Abscess (Secondary to Sinusitis with Contiguous Spread). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Ricardo appears visibly uncomfortable and slightly confused, holding his head frequently and squinting at bright lights. He's cooperative but seems fatigued and worried that his headache isn't improving despite antibiotics. He speaks slowly and occasionally pauses mid-sentence as if having difficulty concentrating.",
-    "interviewQuestions": [
-        "Can you describe exactly when and how your headache started?",
-        "What does the headache feel like - throbbing, sharp, pressure?",
-        "Where exactly is the pain located and does it move anywhere?",
-        "On a scale of 1-10, how severe is your headache now?",
-        "What makes your headache worse or better?",
-        "Have you had any nausea, vomiting, or vision changes?",
-        "Any fever, chills, or feeling generally unwell?",
-        "Have you noticed any weakness, numbness, or difficulty speaking?",
-        "Tell me about your sinus problems - how long have you had them?",
-        "Have you had any recent dental problems or procedures?",
-        "What medications are you currently taking?",
-        "Do you have any drug allergies?",
-        "Any family history of stroke, brain tumors, or neurological problems?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you repeat that? This headache is making it hard for me to concentrate.",
-        "onset": "It started about 10 days ago, gradually at first, but then it really ramped up over the last few days. At first I thought it was just my usual sinus headache, but this feels different - much worse.",
-        "character": "It's like a deep, constant pressure that throbs with my heartbeat. Sometimes it feels like my head is going to explode. It's not like my usual sinus pressure at all.",
-        "location": "It's mainly across my forehead and around my right eye and cheek area, but now it's spreading to the whole right side of my head. Sometimes I feel it behind my right ear too.",
-        "severity": "Right now it's probably an 8 out of 10. I can barely function. I had to leave work yesterday because I couldn't think straight. Even simple tasks feel overwhelming.",
-        "aggravating": "Bright lights make it much worse, and bending over or coughing sends shooting pain through my head. Even just moving my head quickly makes me feel dizzy and nauseous.",
-        "relieving": "Nothing really helps anymore. I've tried ibuprofen, acetaminophen, even my wife's migraine medicine. Maybe it takes the edge off slightly, but the pain is still there.",
-        "associated": "I've been feeling nauseous for the past 3 days, and I threw up twice yesterday. I feel feverish and just generally awful. My thinking feels foggy, like I'm in a haze.",
-        "denies": "No vision problems or double vision, no weakness in my arms or legs, no trouble speaking, though I do feel confused sometimes. No rash or neck stiffness.",
-        "history": "I've had chronic sinus problems for years, but this is completely different. My usual sinus headaches are more of a dull ache, and they respond to decongestants. This is way worse.",
-        "medications": "Metformin 1000mg BID; Lisinopril 20mg daily; Fluticasone 50mcg nasal spray BID; Amoxicillin-Clavulanate 875mg/125mg BID; Atorvastatin 20mg QHS",
-        "allergies": "Sulfonamides",
-        "family": "My father had a stroke when he was 64 and died a few years later. My mom and brother both have diabetes like me. No family history of brain tumors or anything like that that I know of.",
-        "social": "I'm a construction foreman, so I'm used to working through aches and pains, but this knocked me flat. I quit smoking about 7 years ago. I have a few beers on weekends, nothing excessive. No illegal drugs."
-    },
-    "examManeuvers": [
-        "General appearance and mental status assessment",
-        "Vital signs including temperature",
-        "Fundoscopic examination",
-        "Cranial nerve examination",
-        "Motor and sensory neurological examination",
-        "Cerebellar testing (finger-to-nose, heel-to-shin, gait)",
-        "Neck examination for meningeal signs",
-        "Sinus palpation and percussion",
-        "Lymph node examination"
-    ],
-    "examFindings": {
-        "General appearance and mental status assessment": "Patient appears ill and uncomfortable, mild confusion with delayed responses to complex questions, oriented to person and place but uncertain of exact date",
-        "Vital signs including temperature": "BP 142/88, HR 92, Temp 100.8°F, RR 18, SpO2 97% on room air",
-        "Fundoscopic examination": "Mild papilledema present bilaterally, suggesting increased intracranial pressure",
-        "Cranial nerve examination": "Right-sided facial numbness in V2 distribution, otherwise cranial nerves intact",
-        "Motor and sensory neurological examination": "Subtle right-sided weakness (4+/5 strength in right upper extremity), normal reflexes, no sensory deficits",
-        "Cerebellar testing (finger-to-nose, heel-to-shin, gait)": "Mild dysmetria on right side, gait slightly unsteady but stable",
-        "Neck examination for meningeal signs": "No nuchal rigidity, negative Kernig's and Brudzinski's signs",
-        "Sinus palpation and percussion": "Tenderness over right maxillary and frontal sinuses with percussion, purulent nasal discharge",
-        "Lymph node examination": "No significant lymphadenopathy"
-    },
-    "ddxTargets": [
-        "Brain Abscess (Secondary to Sinusitis with Contiguous Spread) (correct diagnosis)",
-        "Bacterial Meningitis",
-        "Complicated Sinusitis with Intracranial Extension",
-        "Subdural Empyema",
-        "Brain Tumor (Primary or Metastatic)",
-        "Severe Migraine with Status Migrainosus",
-        "Temporal Arteritis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on 'sinus headache' diagnosis given patient's chronic sinusitis history and current antibiotic treatment, missing the serious intracranial complication",
-        "prematureClosure": "Risk of attributing symptoms to treatment-resistant sinusitis without considering intracranial complications, especially given the neurological findings and fever",
-        "availabilityBias": "Tendency to think of common headache causes (tension, migraine, sinusitis) rather than rare but serious causes like brain abscess in a patient with risk factors"
-    },
-    "coachPrompts": {
-        "phase2": "This patient has a headache that's worsening despite antibiotic treatment for presumed sinusitis. What specific historical features would help you distinguish between complicated and uncomplicated sinusitis? What red flags should you be looking for that might suggest intracranial involvement?",
-        "phase5": "You've found some concerning neurological findings including papilledema, focal neurological deficits, and altered mental status in a patient with chronic sinusitis. How do these findings change your differential diagnosis? What's the most serious possibility you need to rule out, and what would be your next diagnostic step?",
-        "finalDebrief": "This case illustrates how common conditions like sinusitis can lead to life-threatening complications through contiguous spread. The key learning points are recognizing when a 'routine' headache has red flags like neurological deficits, altered mental status, and papilledema. The combination of chronic sinusitis, diabetes, and dental disease created the perfect setup for brain abscess formation. Early recognition and imaging are crucial for preventing devastating outcomes."
     }
 }
 };

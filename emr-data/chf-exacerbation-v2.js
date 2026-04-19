@@ -337,6 +337,39 @@ window.EMR_DATA = {
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Evelyn Carter appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did shortness of breath start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started This past week I've been getting more and more short of breath, and now I can ba.'",
+        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Decompensated Heart Failure.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Sacubitril-Valsartan (Entresto) 49-51mg BID; Carvedilol 12.5mg BID; Furosemide 80mg BID; Spironolactone 25mg daily; Apixaban 5mg BID; Empagliflozin 10mg daily; Metformin 500mg BID; Potassium Chloride 20mEq daily.'",
+        "allergies": "'My allergies are Lisinopril, Morphine.'",
+        "family": "Mother: Congestive heart failure (dilated cardiomyopathy), hypertension, deceased age 72  Father: Hypertension, stroke (age 68), deceased age 70  Sister: Hypertension, heart failure, age 74",
+        "social": "Occupation: Retired registered nurse (35 years at Memorial Regional Hospital)  Marital: Widowed (husband deceased 2016). Lives alone. Daughter visits 3x/week.  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and hemodynamic assessment",
         "Vital signs review",
@@ -375,84 +408,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Evelyn Carter's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Decompensated Heart Failure (HFrEF Exacerbation). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Mrs. Carter appears anxious and mildly distressed, sitting upright and speaking in short phrases due to her breathing difficulty. As a retired nurse, she is very forthcoming with detailed medical information and uses appropriate terminology, though she seems worried about her worsening condition.",
-    "interviewQuestions": [
-        "Can you tell me more about when your shortness of breath started?",
-        "How has your breathing changed over the past few weeks?",
-        "Have you noticed any swelling in your legs, ankles, or feet?",
-        "How many pillows do you need to sleep comfortably now?",
-        "Have you had any chest pain or pressure?",
-        "Have you been taking all your heart medications as prescribed?",
-        "Have you had any recent changes to your diet or salt intake?",
-        "Have you been weighing yourself regularly?",
-        "Do you have a cough, and if so, what does it sound like?",
-        "Have you had any episodes of waking up gasping for air?",
-        "Have you had any recent illnesses or infections?",
-        "Have you been more tired or fatigued than usual?",
-        "Have you had any nausea, vomiting, or loss of appetite?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you rephrase that? Being a nurse, I want to make sure I give you the right information.",
-        "onset": "It's been gradually getting worse over the past 3 weeks, but this past week it's really gotten bad. I'd say it started getting noticeable about 3 weeks ago.",
-        "character": "It feels like I just can't get enough air in, like I'm breathing through a straw. It's worse when I try to do anything - even just walking across the room.",
-        "location": "It's mainly the breathing difficulty, centered in my chest. I don't have chest pain, just this feeling like I can't get a deep breath.",
-        "severity": "I'd say it's about a 7 out of 10 now. I can barely walk to the bathroom without getting winded, and I used to be able to do my housework just fine.",
-        "aggravating": "Any activity makes it worse - walking, climbing stairs, even talking for too long. Lying flat is impossible now.",
-        "relieving": "Sitting upright helps some, and I've been sleeping in my recliner the past few nights. Rest helps a little but not much.",
-        "associated": "My legs are swollen up to my knees, I've gained 14 pounds in three weeks, and I wake up gasping for air. I have a dry cough that's gotten worse, especially at night.",
-        "denies": "No chest pain, no fever, no recent illness. I haven't had any palpitations that I've noticed, and no dizziness or fainting.",
-        "history": "I was hospitalized about 8 months ago for heart failure, but I'd been doing pretty well since then until these past few weeks.",
-        "medications": "Sacubitril-Valsartan (Entresto) 49-51mg BID; Carvedilol 12.5mg BID; Furosemide 80mg BID; Spironolactone 25mg daily; Apixaban 5mg BID; Empagliflozin 10mg daily; Metformin 500mg BID; Potassium Chloride 20mEq daily",
-        "allergies": "Lisinopril, Morphine",
-        "family": "My mother had heart failure too - dilated cardiomyopathy - and died at 72. My father had high blood pressure and a stroke. My sister also has heart failure, she's 74 now.",
-        "social": "I'm a retired registered nurse, worked 35 years at Memorial Regional. I've been widowed since 2016 and live alone, though my daughter visits three times a week. I never smoked and don't drink alcohol."
-    },
-    "examManeuvers": [
-        "Cardiovascular examination (heart sounds, murmurs, gallops)",
-        "Pulmonary examination (breath sounds, crackles, wheeze)",
-        "Assessment for jugular venous distension (JVD)",
-        "Lower extremity edema assessment",
-        "Abdominal examination (hepatomegaly, ascites)",
-        "Vital signs assessment and orthostatic measurements",
-        "General appearance and respiratory distress assessment",
-        "Peripheral pulse examination",
-        "Assessment for hepatojugular reflux",
-        "Weight measurement and comparison to baseline"
-    ],
-    "examFindings": {
-        "Cardiovascular examination (heart sounds, murmurs, gallops)": "S1 and S2 present, irregular rhythm consistent with atrial fibrillation, prominent S3 gallop heard at apex, no murmurs appreciated",
-        "Pulmonary examination (breath sounds, crackles, wheeze)": "Bilateral fine crackles heard up to mid-lung fields bilaterally, diminished breath sounds at bases, no wheeze",
-        "Assessment for jugular venous distension (JVD)": "JVD elevated to 12 cm H2O at 45 degrees, visible pulsations",
-        "Lower extremity edema assessment": "3+ pitting edema bilateral lower extremities extending to mid-shins, skin warm and intact",
-        "Abdominal examination (hepatomegaly, ascites)": "Soft, non-tender, liver edge palpable 2 cm below right costal margin, no ascites appreciated",
-        "Vital signs assessment and orthostatic measurements": "BP 148/92, HR 94 irregular, RR 24, SpO2 90% on room air, no significant orthostatic changes",
-        "General appearance and respiratory distress assessment": "Elderly female in mild respiratory distress, sitting upright, speaking in short phrases, appears tired",
-        "Peripheral pulse examination": "Radial pulses 2+ bilateral, irregular, pedal pulses 1+ bilateral, no peripheral cyanosis",
-        "Assessment for hepatojugular reflux": "Positive hepatojugular reflux with sustained elevation of JVD with abdominal pressure",
-        "Weight measurement and comparison to baseline": "Current weight 168 lbs, patient reports baseline weight of 154 lbs (14 lb gain over 3 weeks)"
-    },
-    "ddxTargets": [
-        "Acute Decompensated Heart Failure (HFrEF Exacerbation) (correct diagnosis)",
-        "COPD exacerbation",
-        "Pneumonia",
-        "Pulmonary embolism",
-        "Acute coronary syndrome",
-        "Pneumothorax",
-        "Anxiety/panic disorder"
-    ],
-    "biasFlags": {
-        "anchoring": "Students may anchor on the patient's known heart failure history and miss other serious causes of acute dyspnea, or conversely anchor on respiratory symptoms and underestimate cardiac causes",
-        "prematureClosure": "The clear history of heart failure with classic symptoms may lead to premature closure without considering other serious causes like PE or pneumonia in this elderly patient",
-        "availabilityBias": "Recent experiences with respiratory infections or asthma may inappropriately influence diagnosis despite clear evidence of volume overload"
-    },
-    "coachPrompts": {
-        "phase2": "You're considering heart failure exacerbation, which makes sense given her history. What other serious conditions could present with acute dyspnea in a 77-year-old? Think about what you need to ask to differentiate between cardiac and pulmonary causes.",
-        "phase5": "You've identified classic signs of volume overload - the S3 gallop, JVD, bilateral crackles, and significant weight gain. How do these findings help you narrow your differential? What additional testing would you want to confirm your suspected diagnosis?",
-        "finalDebrief": "This case demonstrates classic acute decompensated heart failure with reduced ejection fraction. The key was recognizing the constellation of volume overload signs: orthopnea, PND, weight gain, bilateral crackles, S3 gallop, JVD, and peripheral edema. How did your thinking evolve from the initial presentation to the final diagnosis?"
     }
 }
 };

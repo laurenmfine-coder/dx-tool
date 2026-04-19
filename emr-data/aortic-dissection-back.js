@@ -271,6 +271,37 @@ window.EMR_DATA = {
       "Unemployed"
     ]
   ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Raymond Foster is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Hydrochlorothiazide.'",
+        "allergies": "'My allergies: ACE Inhibitors.'",
+        "family": "Father: aortic aneurysm repair  Mother: hypertension",
+        "social": "Tobacco: Current, 30 pack-years  Cocaine: Admits to crack cocaine use last night  Occupation: Unemployed"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -394,84 +425,6 @@ window.CASES['aortic-dissection-back'] = {
         "phase2": "Before interviewing Raymond Foster \u2014 what are your top 3 diagnoses from chart review?",
         "phase5": "How has your differential changed after history and exam?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Raymond is visibly distressed and anxious, clutching his chest and appearing pale and diaphoretic. He is highly forthcoming about his symptoms due to the severity of pain, speaking rapidly and urgently. He shows some embarrassment about his cocaine use but readily admits it when directly asked.",
-    "interviewQuestions": [
-        "Can you describe exactly when this pain started?",
-        "How would you characterize the quality of this pain?",
-        "Where exactly do you feel the pain and does it go anywhere else?",
-        "On a scale of 1-10, how severe is this pain?",
-        "Does anything make the pain better or worse?",
-        "Are you experiencing any shortness of breath, nausea, or sweating?",
-        "Have you ever had chest pain like this before?",
-        "What medications are you currently taking?",
-        "Do you have any known drug allergies?",
-        "Tell me about your family history of heart or blood vessel problems",
-        "Do you use tobacco, alcohol, or any recreational drugs?",
-        "How well controlled has your blood pressure been lately?",
-        "Have you noticed any changes in your voice or difficulty swallowing?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble focusing because of this terrible pain in my chest. Can you repeat that?",
-        "onset": "It started about 2 hours ago, completely out of nowhere. I was just sitting on my couch watching TV when it hit me like a lightning bolt.",
-        "character": "It's a sharp, tearing, ripping sensation - like someone is literally tearing my chest apart from the inside. I've never felt anything like it.",
-        "location": "It started right in the center of my chest and immediately shot straight through to my back between my shoulder blades. The pain goes all the way through me.",
-        "severity": "This is easily a 10 out of 10 - the worst pain I've ever experienced in my life. I can barely think straight because of it.",
-        "aggravating": "Moving around seems to make it worse, and taking deep breaths is really difficult. Nothing I do seems to help it.",
-        "relieving": "Nothing helps at all. I've tried changing positions, but the pain is constant and unrelenting.",
-        "associated": "I'm sweating profusely and feel short of breath. I also feel nauseous and like I might pass out. My heart is racing.",
-        "denies": "I'm not having any numbness or tingling in my arms. No crushing sensation, just this tearing pain. No fever or chills.",
-        "history": "Never anything like this before. I've had some chest discomfort with exertion before, but nothing even close to this severity.",
-        "medications": "Hydrochlorothiazide",
-        "allergies": "ACE Inhibitors",
-        "family": "My father had to have his aorta repaired when he was in his 70s - some kind of aneurysm. My mother has high blood pressure too.",
-        "social": "I'm unemployed right now. I smoke about a pack a day for 30 years. I'll be honest with you - I used crack cocaine last night. I know I shouldn't have, but I did."
-    },
-    "examManeuvers": [
-        "Blood pressure in both arms",
-        "Cardiac auscultation",
-        "Pulmonary auscultation",
-        "Abdominal palpation for pulsatile masses",
-        "Peripheral pulse examination",
-        "Neurological assessment of extremities",
-        "Inspection for Marfanoid features",
-        "Aortic regurgitation murmur assessment",
-        "Assessment for pulse deficits",
-        "Evaluation for signs of shock"
-    ],
-    "examFindings": {
-        "Blood pressure in both arms": "Right arm 198/110, Left arm 170/95 - significant difference of 28 mmHg systolic",
-        "Cardiac auscultation": "Tachycardic at 110 bpm, new harsh diastolic murmur heard best at left sternal border consistent with aortic regurgitation",
-        "Pulmonary auscultation": "Clear to auscultation bilaterally, no rales or evidence of pulmonary edema",
-        "Abdominal palpation for pulsatile masses": "No palpable abdominal aortic aneurysm, abdomen soft and non-tender",
-        "Peripheral pulse examination": "Diminished left radial and brachial pulses compared to right, femoral pulses present bilaterally",
-        "Neurological assessment of extremities": "No focal neurological deficits, sensation and motor function intact in all extremities",
-        "Inspection for Marfanoid features": "Tall, thin build with long extremities, arachnodactyly present, high-arched palate",
-        "Aortic regurgitation murmur assessment": "Grade 3/6 diastolic murmur at left sternal border, new compared to prior exams",
-        "Assessment for pulse deficits": "Pulse deficit noted in left upper extremity with weaker pulses compared to right side",
-        "Evaluation for signs of shock": "Diaphoretic and anxious appearing but mentating well, skin cool and clammy"
-    },
-    "ddxTargets": [
-        "Acute aortic dissection (correct diagnosis)",
-        "ST-elevation myocardial infarction",
-        "Pulmonary embolism",
-        "Aortic aneurysm rupture",
-        "Tension pneumothorax",
-        "Esophageal rupture",
-        "Cocaine-induced coronary vasospasm"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on cocaine use and assuming cocaine-induced MI rather than considering structural aortic pathology given family history and Marfanoid habitus",
-        "prematureClosure": "Risk of stopping evaluation at chest pain workup without considering the tearing quality, back pain radiation, and pulse differentials that suggest aortic dissection",
-        "availabilityBias": "Recent exposure to cocaine cases or MI presentations may overshadow the classic presentation of aortic dissection with its distinctive tearing pain and pulse deficits"
-    },
-    "coachPrompts": {
-        "phase2": "Before you interview the patient, consider what historical features would help differentiate between your differential diagnoses. What specific characteristics of chest pain would point toward each condition? How might this patient's risk factors influence your questioning approach?",
-        "phase5": "Now that you've completed your history and physical exam, what key findings stand out? Pay particular attention to the blood pressure differences between arms and the new murmur. How do these findings, combined with the patient's description of pain, help narrow your differential diagnosis?",
-        "finalDebrief": "This case illustrates how aortic dissection can present with classic features - tearing chest pain radiating to the back, pulse deficits, and blood pressure differentials between arms. The patient's Marfanoid habitus, family history, poorly controlled hypertension, and cocaine use were all significant risk factors. How did your differential diagnosis evolve as you gathered more information? What findings were most crucial in reaching the correct diagnosis?"
     }
 }
 };

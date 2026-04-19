@@ -334,6 +334,39 @@ window.EMR_DATA = {
     "presentation": "Allergic Reaction",
     "category": "pulmonary"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Deshawn Carter is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did allergic reaction start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 24-year-old male with moderate persistent asthma presenting for follow-up.'",
+        "character": "'It's allergic reaction \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Severe Asthma Exacerbation.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Fluticasone/Salmeterol 250/50mcg INH BID; Montelukast 10mg QHS; Albuterol 90mcg INH PRN; Omeprazole 20mg daily; Cetirizine 10mg daily.'",
+        "allergies": "'My allergies are Aspirin, NSAIDs (Ibuprofen), Cockroach.'",
+        "family": "Mother: Asthma, Obesity, alive at 48  Father: Hypertension, alive at 50  Brother: Asthma (childhood, outgrown), alive at 22",
+        "social": "Occupation: Warehouse associate (Amazon)  Marital: Single  Tobacco: Denies cigarettes; occasional marijuana 1-2x/month (smoked)  Alcohol: Social, 2-3 drinks on weekends  Drugs: Marijuana as above; denies other substances"
+    },
     "examManeuvers": [
         "General appearance and respiratory effort",
         "Vital signs and pulse oximetry",
@@ -372,84 +405,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Deshawn Carter's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Severe Asthma Exacerbation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Deshawn appears moderately distressed and is breathing with visible effort, sitting forward slightly. He's cooperative but speaks in short phrases due to dyspnea, and admits somewhat sheepishly to not taking his controller medication consistently.",
-    "interviewQuestions": [
-        "Can you tell me what brought you in today?",
-        "When did these breathing problems start?",
-        "How would you describe your breathing right now?",
-        "What does your chest feel like?",
-        "On a scale of 1-10, how bad is your breathing?",
-        "What makes your breathing worse?",
-        "What helps your breathing?",
-        "Have you been using your rescue inhaler?",
-        "Are you taking your daily asthma medications?",
-        "Have you had any recent exposures or triggers?",
-        "Any fever, chest pain, or coughing up blood?",
-        "Have you had asthma attacks this severe before?",
-        "Any recent upper respiratory infections?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, I'm having trouble breathing right now. Can you ask that differently?",
-        "onset": "It started getting bad yesterday afternoon at work. I was moving boxes in a dusty warehouse section and started wheezing more than usual.",
-        "character": "I can't catch my breath. I'm wheezing really bad and feel like I can't get enough air in.",
-        "location": "My whole chest feels tight, like someone's squeezing it. It's not on one side, it's everywhere.",
-        "severity": "Right now it's like an 8 out of 10. I can barely talk without getting short of breath. I haven't felt this bad in over a year.",
-        "aggravating": "Lying flat makes it worse. Moving around or talking too much. The dust at work definitely triggered it.",
-        "relieving": "Sitting up helps a little. I've been using my albuterol every few hours but it's not helping as much as usual.",
-        "associated": "I'm wheezing a lot, coughing up some clear phlegm, and my chest feels really tight. I feel anxious because I can't breathe well.",
-        "denies": "No fever, no chest pain like heart pain, no blood in my spit. No swelling in my legs.",
-        "history": "I've had asthma since I was a kid. Had a few bad attacks in high school but nothing this severe in the past couple years since I got on the daily medications.",
-        "medications": "Fluticasone/Salmeterol 250/50mcg INH BID; Montelukast 10mg QHS; Albuterol 90mcg INH PRN; Omeprazole 20mg daily; Cetirizine 10mg daily",
-        "allergies": "Aspirin, NSAIDs (Ibuprofen), Cockroach",
-        "family": "My mom has asthma too, pretty bad. My little brother had it as a kid but grew out of it. My dad just has high blood pressure.",
-        "social": "I work at Amazon warehouse, lots of dust and cardboard. I'm single. I don't smoke cigarettes but I smoke weed maybe once or twice a month. I drink socially on weekends."
-    },
-    "examManeuvers": [
-        "General appearance and respiratory distress assessment",
-        "Vital signs including oxygen saturation",
-        "Pulmonary inspection",
-        "Chest percussion",
-        "Pulmonary auscultation",
-        "Peak flow measurement",
-        "Cardiac auscultation",
-        "Extremity examination for cyanosis and clubbing",
-        "Neck examination for accessory muscle use",
-        "Skin examination for eczema or allergic signs"
-    ],
-    "examFindings": {
-        "General appearance and respiratory distress assessment": "Patient appears in moderate respiratory distress, sitting upright, speaking in 3-4 word sentences, using accessory muscles",
-        "Vital signs including oxygen saturation": "BP 138/82, HR 112, RR 28, Temp 99.4°F, SpO2 90% on room air",
-        "Pulmonary inspection": "Increased anteroposterior diameter, intercostal retractions, use of accessory muscles including sternocleidomastoids",
-        "Chest percussion": "Hyperresonant throughout all lung fields bilaterally",
-        "Pulmonary auscultation": "Diffuse expiratory wheeze bilaterally with prolonged expiratory phase, decreased air movement in bases",
-        "Peak flow measurement": "Peak flow 240 L/min (normal predicted ~550 L/min for his age/height)",
-        "Cardiac auscultation": "Tachycardic regular rhythm, no murmurs, rubs, or gallops",
-        "Extremity examination for cyanosis and clubbing": "No cyanosis or clubbing, capillary refill <2 seconds",
-        "Neck examination for accessory muscle use": "Active use of sternocleidomastoid and scalene muscles, no JVD",
-        "Skin examination for eczema or allergic signs": "Mild eczematous patches on flexural surfaces, consistent with atopic dermatitis"
-    },
-    "ddxTargets": [
-        "Acute Severe Asthma Exacerbation (correct diagnosis)",
-        "Pneumonia with bronchospasm",
-        "COPD exacerbation",
-        "Pulmonary embolism",
-        "Pneumothorax",
-        "Vocal cord dysfunction",
-        "Anaphylaxis"
-    ],
-    "biasFlags": {
-        "anchoring": "The chief complaint of 'allergic reaction' might anchor thinking toward anaphylaxis, missing that this is actually severe asthma triggered by occupational dust exposure",
-        "prematureClosure": "The known asthma history might lead to immediate assumption of simple asthma exacerbation without considering pneumonia or other serious causes of acute dyspnea",
-        "availabilityBias": "Recent cases of anaphylaxis or the dramatic presentation might bias toward more exotic diagnoses rather than severe asthma exacerbation"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you included both allergic/anaphylactic causes and respiratory causes. As you interview this patient, pay close attention to the timeline, triggers, and how this compares to his baseline asthma. What specific questions will help you distinguish between anaphylaxis and asthma exacerbation?",
-        "phase5": "Excellent history and physical. You've identified key findings like the occupational trigger, medication non-adherence, and the classic exam findings. How does his peak flow measurement help you assess severity? What vital sign is most concerning, and how does this change your differential diagnosis priority?",
-        "finalDebrief": "This case highlights how chief complaints can be misleading - 'allergic reaction' led us initially toward anaphylaxis, but the history revealed classic asthma triggers and non-adherence. The key learning points are recognizing severe asthma by objective measures like peak flow and oxygen saturation, identifying occupational triggers, and understanding how medication non-adherence contributes to poor control. How might you address his medication adherence in your treatment plan?"
     }
 }
 };

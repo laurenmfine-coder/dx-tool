@@ -246,6 +246,39 @@ window.EMR_DATA = {
     "presentation": "Toxicologic Emergency",
     "category": "gastrointestinal"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Natasha Pierre-Louis is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did toxicologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I keep getting these awful pains in my upper right side, especially after I eat .'",
+        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Calculous Cholecystitis with Choledocholithiasis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 5mg daily; Acetaminophen 500mg PRN; Omeprazole 20mg daily.'",
+        "allergies": "'My allergies are Erythromycin.'",
+        "family": "Mother: Gallstones \u2014 cholecystectomy at age 40; HTN; alive at 68  Father: Sickle cell trait; T2DM; alive at 72  Sister: Gallstones; sickle cell trait; alive at 40",
+        "social": "Occupation: Administrative assistant at law firm; full-time, sedentary work  Marital: Married 16 years; 2 children (ages 8 and 11)  Tobacco: Never smoker  Alcohol: Rare \u2014 occasional wine at holidays  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -284,84 +317,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Natasha Pierre-Louis's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone with Obstructive Jaundice \u2014 Patient Who Deferred Elective Cholecystectomy, Sickle Cell Trait with Pigmented Stones). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Natasha appears anxious and uncomfortable, frequently shifting position and placing her hand over her right upper abdomen. She is forthcoming about her symptoms but admits she's been avoiding surgery despite previous recommendations, expressing fear about the procedure and concern about missing work.",
-    "interviewQuestions": [
-        "Can you describe exactly when this current episode of pain started?",
-        "How would you characterize the quality of your pain - sharp, dull, cramping?",
-        "Where exactly is the pain located and does it radiate anywhere?",
-        "On a scale of 1-10, how severe is your pain right now?",
-        "What seems to trigger these episodes of pain?",
-        "Have you noticed any changes in your urine or bowel movements?",
-        "Have you experienced any nausea, vomiting, or fever with this episode?",
-        "You mentioned this has happened before - can you tell me about those previous episodes?",
-        "Have you ever been told you have gallstones or been recommended for surgery?",
-        "What medications are you currently taking?",
-        "Do you have any known allergies to medications?",
-        "Is there any family history of gallbladder problems?",
-        "Have you noticed any yellowing of your eyes or skin recently?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
-        "onset": "This current episode started yesterday evening after dinner, but it's been much worse than my previous episodes and hasn't gone away like they usually do.",
-        "character": "It's a sharp, stabbing pain that comes in waves, but now it's become more constant and achy. It's definitely the worst I've ever felt it.",
-        "location": "It's right here under my right ribs, and it shoots straight through to my back between my shoulder blades. Sometimes I feel it in my right shoulder too.",
-        "severity": "Right now it's about an 8 out of 10. The previous episodes were maybe a 6, but this is much worse and it's not going away.",
-        "aggravating": "Eating anything fatty or greasy definitely triggers it. Even thinking about food makes me nauseous right now. Moving around or taking deep breaths makes it worse too.",
-        "relieving": "Usually these episodes would go away after an hour or so if I didn't eat, but this time nothing is helping. I tried acetaminophen but it barely touched it.",
-        "associated": "I've been very nauseous and threw up twice yesterday. I feel feverish and weak. I think my urine might be darker than usual, and I'm not sure but my husband said my eyes look a little yellow.",
-        "denies": "I haven't had any chest pain, difficulty breathing, or diarrhea. No blood in my vomit or stool.",
-        "history": "I've had three similar episodes in the past few months, but they were milder and went away on their own. About two years ago, my doctor found gallstones on an ultrasound and recommended surgery, but I kept putting it off because I was scared and couldn't afford to miss work.",
-        "medications": "Amlodipine 5mg daily; Acetaminophen 500mg PRN; Omeprazole 20mg daily",
-        "allergies": "Erythromycin",
-        "family": "My mother had her gallbladder removed when she was 40, and my sister has gallstones too. Both my father and I have sickle cell trait, and my sister does as well.",
-        "social": "I work full-time as an administrative assistant at a law firm - it's mostly desk work. I'm married with two kids. I don't smoke, and I only drink wine occasionally during holidays. I don't use any recreational drugs."
-    },
-    "examManeuvers": [
-        "Murphy's sign",
-        "Inspection for jaundice (scleral icterus)",
-        "Right upper quadrant palpation",
-        "Percussion of liver span",
-        "Assessment for Charcot's triad",
-        "Vital signs review",
-        "Abdominal inspection for distension",
-        "Auscultation of bowel sounds",
-        "Assessment for rebound tenderness",
-        "Evaluation for hepatomegaly"
-    ],
-    "examFindings": {
-        "Murphy's sign": "Positive - patient demonstrates inspiratory arrest and severe pain when palpating under right costal margin during deep inspiration",
-        "Inspection for jaundice (scleral icterus)": "Mild scleral icterus present bilaterally, subtle yellowing of skin noted",
-        "Right upper quadrant palpation": "Marked tenderness in RUQ with voluntary guarding, possible palpable gallbladder (Courvoisier's sign negative as gallbladder is not enlarged)",
-        "Percussion of liver span": "Liver span approximately 12 cm at midclavicular line, upper border of dullness elevated suggesting hepatomegaly",
-        "Assessment for Charcot's triad": "Two of three components present: RUQ pain and jaundice; fever of 102.4°F completes the triad",
-        "Vital signs review": "Tachycardic at 104 bpm, hypertensive at 148/92, febrile at 102.4°F, oxygen saturation normal at 97%",
-        "Abdominal inspection for distension": "Mild abdominal distension, patient splinting and favoring right side",
-        "Auscultation of bowel sounds": "Hypoactive bowel sounds throughout all quadrants",
-        "Assessment for rebound tenderness": "Mild rebound tenderness in RUQ, patient exhibits significant discomfort",
-        "Evaluation for hepatomegaly": "Liver edge palpable 2-3 cm below right costal margin, smooth and tender"
-    },
-    "ddxTargets": [
-        "Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone with Obstructive Jaundice — Patient Who Deferred Elective Cholecystitis, Sickle Cell Trait with Pigmented Stones) (correct diagnosis)",
-        "Acute cholangitis",
-        "Acute pancreatitis",
-        "Acute myocardial infarction",
-        "Hepatic abscess",
-        "Peptic ulcer disease with perforation",
-        "Right-sided pneumonia with pleuritis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on the patient's known gallstone history and missing the CBD stone component or underestimating severity of current presentation",
-        "prematureClosure": "May stop investigation after confirming cholecystitis without recognizing concurrent choledocholithiasis and need for emergent intervention",
-        "availabilityBias": "Common presentation may lead to routine disposition without recognizing Charcot's triad and potential for ascending cholangitis"
-    },
-    "coachPrompts": {
-        "phase2": "This patient has a known history of gallstones but has presented with what seems to be a more severe episode. What specific historical elements and associated symptoms would help you differentiate between simple biliary colic, acute cholecystitis, and more serious complications like choledocholithiasis or cholangitis?",
-        "phase5": "You've identified key findings including fever, RUQ tenderness, and jaundice. How do these findings fit together, and what does this constellation of symptoms suggest about the anatomy and pathophysiology involved? Consider the patient's sickle cell trait and its relationship to gallstone composition.",
-        "finalDebrief": "This case demonstrates the progression from simple cholelithiasis to acute cholecystitis with CBD stone obstruction. The patient's sickle cell trait predisposed her to pigmented stone formation. Discuss how Charcot's triad guided your diagnosis and why early recognition of choledocholithiasis is crucial for preventing progression to life-threatening cholangitis. Consider how patient factors like fear of surgery can delay necessary treatment."
     }
 }
 };

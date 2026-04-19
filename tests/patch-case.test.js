@@ -3,8 +3,9 @@ const vm = require('vm');
 const { execSync } = require('child_process');
 const path = require('path');
 
-const { patchCase } = require(path.resolve('tests/batch-upgrade.js'));
+const { patchCase, isGen2 } = require(path.resolve('tests/batch-upgrade.js'));
 if (!patchCase) { console.error('patchCase not found'); process.exit(1); }
+if (!isGen2) { console.error('isGen2 not found'); process.exit(1); }
 
 const baseGuided = {
   supported: true, patientPersona: "Test persona",
@@ -64,6 +65,83 @@ run('real pre-upgrade case from git → patched correctly', () => {
   if (!sb.window.EMR_DATA.guided) throw new Error('guided not attached');
   if (sb.window.EMR_DATA.patient.name !== 'Harold Jensen') throw new Error('patient data lost');
   if (!sb.window.EMR_DATA.vitals?.[0]) throw new Error('vitals lost');
+});
+
+// ── isGen2 tests: detect template content vs real AI content ───────────────
+run('isGen2 rejects template ddxTargets with placeholder slot names', () => {
+  const templateData = {
+    guided: {
+      supported: true,
+      patientResponses: { default:'', onset:'', character:'', location:'', severity:'', aggravating:'', relieving:'', associated:'' },
+      ddxTargets: [
+        'Acute Myocardial Infarction (correct diagnosis)',
+        'Most likely alternative diagnosis',
+        'Third differential diagnosis',
+        'Must-not-miss diagnosis',
+        'Common clinical mimic'
+      ],
+      biasFlags: { anchoring: 'real stuff' }
+    }
+  };
+  if (isGen2(templateData)) throw new Error('should have rejected template ddxTargets');
+});
+
+run('isGen2 rejects template biasFlags referencing "Working diagnosis"', () => {
+  const templateData = {
+    guided: {
+      supported: true,
+      patientResponses: { default:'', onset:'', character:'', location:'', severity:'', aggravating:'', relieving:'', associated:'' },
+      ddxTargets: ['Real Dx', 'Other Dx', 'Third Dx'],
+      biasFlags: { anchoring: 'Students may anchor on Working diagnosis', prematureClosure: 'x', availabilityBias: 'y' }
+    }
+  };
+  if (isGen2(templateData)) throw new Error('should have rejected Working-diagnosis bias flag');
+});
+
+run('isGen2 rejects stringified-HPI onset response (template pattern)', () => {
+  const templateData = {
+    guided: {
+      supported: true,
+      patientResponses: {
+        default: 'x', onset: "'The symptoms started yesterday and were severe.'",
+        character:'', location:'', severity:'', aggravating:'', relieving:'', associated:''
+      },
+      ddxTargets: ['Real Dx', 'Another', 'Third'],
+      biasFlags: { anchoring: 'real' }
+    }
+  };
+  if (isGen2(templateData)) throw new Error('should have rejected stringified-HPI onset');
+});
+
+run('isGen2 accepts real AI-generated content', () => {
+  const realData = {
+    guided: {
+      supported: true,
+      patientResponses: {
+        default: 'I\'m not sure what you mean.',
+        onset: 'About 2 hours ago while I was watching TV.',
+        character: 'A crushing, tight pressure in my chest.',
+        location: 'Center of my chest, radiating to my left arm.',
+        severity: 'Probably 9 out of 10.',
+        aggravating: 'Anything makes it worse.',
+        relieving: 'Nothing helps.',
+        associated: 'I\'m nauseous and sweating.'
+      },
+      ddxTargets: [
+        'ST-Elevation Myocardial Infarction',
+        'Unstable Angina',
+        'Aortic Dissection',
+        'Pulmonary Embolism',
+        'Pericarditis'
+      ],
+      biasFlags: {
+        anchoring: 'Student may anchor on ACS given classic presentation and miss aortic dissection.',
+        prematureClosure: 'After ECG shows STEMI, may skip further workup for complications.',
+        availabilityBias: 'If recent STEMI cases were all anterior, may miss inferior MI patterns.'
+      }
+    }
+  };
+  if (!isGen2(realData)) throw new Error('should have accepted real AI content');
 });
 
 console.log('\nAll tests passed ✓');

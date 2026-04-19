@@ -256,6 +256,39 @@ window.EMR_DATA = {
     "presentation": "Trauma",
     "category": "trauma"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Marcus Rivera appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did trauma start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I'm here for my yearly check-up and feeling great overall.'",
+        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Blunt Traumatic Aortic Injury.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Cetirizine 10mg daily; Ibuprofen 400mg PRN.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Father: Hypertension, alive at 62  Mother: Hyperlipidemia, alive at 58  Paternal grandfather: MI at age 70 (deceased)",
+        "social": "Occupation: Construction project manager  Marital: Married  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 beers/week  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -294,84 +327,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Marcus Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Blunt Traumatic Aortic Injury. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Marcus appears calm but slightly anxious about being in the trauma bay, occasionally touching his chest area and shifting positions carefully. He's cooperative and forthcoming with information, though there's a disconnect between his stated reason for being here (yearly check-up) and the trauma setting. He maintains good eye contact but shows subtle signs of discomfort when taking deep breaths.",
-    "interviewQuestions": [
-        "Can you tell me exactly what happened that brought you to the trauma center today?",
-        "Were you in any kind of accident - motor vehicle, fall, or other trauma?",
-        "Are you experiencing any chest pain or discomfort right now?",
-        "Have you noticed any difficulty breathing or shortness of breath?",
-        "Do you have any back pain, particularly between your shoulder blades?",
-        "Have you felt dizzy, lightheaded, or like you might pass out?",
-        "Are you having any abdominal pain or tenderness?",
-        "Have you noticed any changes in your voice or difficulty swallowing?",
-        "Do you have any numbness, tingling, or weakness in your arms or legs?",
-        "Have you coughed up any blood or noticed blood anywhere else?",
-        "When did these symptoms first start in relation to the incident?",
-        "On a scale of 1-10, how would you rate any pain or discomfort you're feeling?",
-        "Have you ever had any heart problems or chest injuries before?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you mean. Could you ask that differently? I'm still a bit shaken up from everything.",
-        "onset": "It happened about 2 hours ago when my car got rear-ended at high speed on the highway. The pain in my chest started right after the impact, and it's been constant since then.",
-        "character": "It's a deep, tearing kind of pain in my chest - not like anything I've felt before. It's almost like something ripped inside.",
-        "location": "The pain is right here in the center of my chest, and it goes straight through to my back between my shoulder blades. It feels like it's deep inside.",
-        "severity": "I'd say it's about a 7 out of 10. It's making it hard to concentrate and I have to be careful how I move or breathe deeply.",
-        "aggravating": "It gets worse when I take deep breaths, move around too much, or try to lie flat. Even turning my head sometimes makes it worse.",
-        "relieving": "Nothing really helps. I tried changing positions but that doesn't do much. The pain is just constant.",
-        "associated": "I've been feeling a bit short of breath and my voice sounds a little hoarse to me. I also feel lightheaded when I stand up quickly.",
-        "denies": "I haven't coughed up any blood, no nausea or vomiting, no numbness in my arms or legs, and no loss of consciousness during the accident.",
-        "history": "Never had anything like this before. I've never had chest pain or heart problems, and I've never been in a serious accident.",
-        "medications": "Cetirizine 10mg daily; Ibuprofen 400mg PRN",
-        "allergies": "NKDA",
-        "family": "My dad has high blood pressure and my grandfather had a heart attack in his 70s, but no family history of aortic problems that I know of.",
-        "social": "I work in construction management so I'm usually pretty active. I'm married, never smoked, and only drink socially - maybe 2-3 beers a week. No drugs."
-    },
-    "examManeuvers": [
-        "Blood pressure in both arms",
-        "Pulse examination in all extremities",
-        "Cardiac auscultation",
-        "Pulmonary auscultation",
-        "Chest wall inspection and palpation",
-        "Abdominal examination",
-        "Neurological assessment of upper and lower extremities",
-        "Assessment for signs of external trauma",
-        "Evaluation for murmurs or bruits",
-        "Assessment of jugular venous pressure"
-    ],
-    "examFindings": {
-        "Blood pressure in both arms": "Right arm 124/78, Left arm 108/65 - notable difference of >15mmHg systolic between arms",
-        "Pulse examination in all extremities": "Right upper extremity pulses strong, left upper extremity pulses slightly diminished. Lower extremity pulses symmetric and strong bilaterally",
-        "Cardiac auscultation": "New harsh systolic murmur heard best at left sternal border, not present on prior exams. Regular rate and rhythm otherwise",
-        "Pulmonary auscultation": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi. Breath sounds equal bilaterally",
-        "Chest wall inspection and palpation": "Seatbelt sign visible across chest. No obvious deformity, tenderness to palpation over sternum. No crepitus",
-        "Abdominal examination": "Soft, non-distended, mild tenderness in epigastrium, no masses or organomegaly, bowel sounds present",
-        "Neurological assessment of upper and lower extremities": "Motor and sensory function intact bilaterally. No focal deficits. Reflexes symmetric",
-        "Assessment for signs of external trauma": "Seatbelt contusion across chest and shoulder. No other obvious external injuries. No head trauma",
-        "Evaluation for murmurs or bruits": "New systolic murmur as noted. No carotid bruits. No abdominal bruits appreciated",
-        "Assessment of jugular venous pressure": "JVP normal, estimated 6-8 cm H2O. No jugular venous distention"
-    },
-    "ddxTargets": [
-        "Blunt Traumatic Aortic Injury (correct diagnosis)",
-        "Myocardial contusion",
-        "Pulmonary contusion",
-        "Aortic dissection",
-        "Cardiac tamponade",
-        "Pneumothorax",
-        "Musculoskeletal chest wall injury"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on the patient's initial statement about 'yearly check-up' and normal vital signs, missing the trauma history and subtle cardiovascular findings",
-        "prematureClosure": "Risk of stopping at musculoskeletal injury given seatbelt sign and chest pain, without fully investigating cardiovascular causes in trauma setting",
-        "availabilityBias": "May focus on more common trauma injuries like rib fractures or pneumothorax rather than considering rare but lethal aortic injury"
-    },
-    "coachPrompts": {
-        "phase2": "I notice there's an interesting disconnect in this case. The patient mentions a yearly check-up, but he's in a trauma bay. What questions would help you reconcile this discrepancy, and what are you most concerned about in a young, healthy person presenting to trauma?",
-        "phase5": "You've identified some concerning cardiovascular findings in the setting of high-energy trauma. The blood pressure differential and new murmur are particularly significant. What anatomical structure connects these findings, and what imaging would be most appropriate to evaluate your suspicion?",
-        "finalDebrief": "This case highlights how traumatic aortic injury can present subtly with seemingly stable vital signs. The key clues were the mechanism (high-speed rear-end collision), blood pressure differential between arms, and new murmur. How did your differential diagnosis evolve as you gathered more information, and what cognitive biases might have led you astray?"
     }
 }
 };

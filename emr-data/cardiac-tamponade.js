@@ -353,6 +353,39 @@ window.EMR_DATA = {
       "Lives with wife and adult daughter"
     ]
   ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Patricia Moreno appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did i can't breathe chest \u2014 pressure/fullness sensation, diffuse start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I can't catch my breath and there's this heavy pressure feeling all across my ch.'",
+        "character": "'It's i can't breathe chest \u2014 pressure/fullness sensation, diffuse \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Dexamethasone; Levetiracetam; Ondansetron; Oxycodone.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Father: lung cancer (smoker)",
+        "social": "Tobacco: 30 pack-years, quit at diagnosis 1 year ago  Alcohol: None since diagnosis  Drugs: Denies  Occupation: On disability \u2014 former construction supervisor  Living: Lives with wife and adult daughter"
+    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -391,84 +424,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Patricia Moreno's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Patricia appears anxious and mildly short of breath while speaking, frequently pausing mid-sentence to catch her breath. She is cooperative and forthcoming about her symptoms, expressing clear concern about her breathing difficulties given her cancer history. Her distress level is moderate to high, with visible worry about what these new symptoms might mean for her prognosis.",
-    "interviewQuestions": [
-        "When did you first notice the breathing difficulty and chest pressure?",
-        "Can you describe exactly what the chest pressure feels like?",
-        "Does the pressure or breathing difficulty worsen with lying down or improve when sitting up?",
-        "On a scale of 1-10, how would you rate your breathing difficulty right now?",
-        "Have you noticed any swelling in your legs, ankles, or abdomen?",
-        "Are you experiencing any chest pain, and if so, what does it feel like?",
-        "Have you had any coughing, and if so, are you bringing anything up?",
-        "Have you noticed your heart racing or pounding?",
-        "Have you had any episodes like this before?",
-        "What medications are you currently taking?",
-        "Do you have any known allergies to medications?",
-        "Has anyone in your family had heart problems or lung cancer?",
-        "Can you tell me about your smoking history and current lifestyle?"
-    ],
-    "patientResponses": {
-        "default": "I'm sorry, could you explain what you mean? I'm having trouble concentrating with this breathing problem.",
-        "onset": "It started about 3 days ago, gradually at first, but it's gotten much worse since yesterday. I woke up this morning feeling like I was drowning.",
-        "character": "It's like someone is sitting on my chest, this heavy, full feeling that won't go away. It's not a sharp pain, just constant pressure that makes every breath feel incomplete.",
-        "location": "The pressure is all across my chest, from one side to the other. It doesn't seem to move anywhere else, just sits right here on my chest.",
-        "severity": "The breathing difficulty is about an 8 out of 10 right now. I can barely walk to the bathroom without getting completely winded, and I used to be pretty active despite my cancer.",
-        "aggravating": "It definitely gets worse when I try to lie flat - I've been sleeping in my recliner for two nights. Any activity, even just talking, seems to make the breathing harder.",
-        "relieving": "Sitting upright helps a little bit, but nothing really makes it go away. Even my pain medication doesn't touch this feeling.",
-        "associated": "My heart feels like it's racing all the time, and I've been feeling dizzy when I stand up. I'm also more tired than usual, which is saying something given my treatments.",
-        "denies": "I don't have any sharp chest pain, no fever, and I'm not coughing up blood or anything like that. No nausea or vomiting either.",
-        "history": "I've never had anything like this before, even during my chemotherapy treatments. This is completely new and scary for me.",
-        "medications": "Dexamethasone; Levetiracetam; Ondansetron; Oxycodone",
-        "allergies": "NKDA",
-        "family": "My father died of lung cancer - he was a heavy smoker his whole life. I don't know of any family history of heart problems.",
-        "social": "I'm on disability now, used to supervise construction crews. I smoked for about 30 years, quit when I got my cancer diagnosis a year ago. I stopped drinking when I got sick, and I've never used drugs. I live with my wife and adult daughter who help take care of me."
-    },
-    "examManeuvers": [
-        "Jugular venous distension assessment",
-        "Heart sounds auscultation",
-        "Lung auscultation",
-        "Peripheral edema examination",
-        "Hepatojugular reflux test",
-        "Point of maximal impulse palpation",
-        "Pulsus paradoxus measurement",
-        "Lower extremity examination for swelling",
-        "Abdominal examination for ascites",
-        "Assessment of heart rate and rhythm"
-    ],
-    "examFindings": {
-        "Jugular venous distension assessment": "Elevated JVD to 8-9 cm above the sternal angle, visible even when patient is sitting upright at 45 degrees",
-        "Heart sounds auscultation": "Distant, muffled heart sounds with rapid rate, difficult to clearly distinguish S1 and S2, no obvious murmurs appreciated",
-        "Lung auscultation": "Clear breath sounds bilaterally with decreased air entry at bases, no rales, wheezes, or rhonchi",
-        "Peripheral edema examination": "Mild bilateral lower extremity pitting edema, 1+ at ankles extending to mid-calf",
-        "Hepatojugular reflux test": "Positive hepatojugular reflux - JVD increases significantly with abdominal pressure",
-        "Point of maximal impulse palpation": "PMI difficult to palpate, appears diffuse and displaced, weak impulse",
-        "Pulsus paradoxus measurement": "Pulsus paradoxus of 18 mmHg (abnormal, >10 mmHg suggests cardiac tamponade)",
-        "Lower extremity examination for swelling": "Bilateral pitting edema 1+ at ankles, skin warm and intact, pulses present but weak",
-        "Abdominal examination for ascites": "Mild abdominal distension, no obvious fluid wave, liver edge possibly palpable 2 cm below costal margin",
-        "Assessment of heart rate and rhythm": "Tachycardic at 118 bpm, regular rhythm, weak peripheral pulses"
-    },
-    "ddxTargets": [
-        "Cardiac tamponade (correct diagnosis)",
-        "Congestive heart failure",
-        "Pulmonary embolism",
-        "Superior vena cava syndrome",
-        "Tension pneumothorax",
-        "Pleural effusion",
-        "Pneumonia with sepsis"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on cancer history and assuming all symptoms are disease progression rather than considering acute cardiac emergency requiring immediate intervention",
-        "prematureClosure": "May quickly assume CHF or cancer-related dyspnea without recognizing the classic triad of tamponade (elevated JVD, muffled heart sounds, hypotension) and narrow pulse pressure",
-        "availabilityBias": "Recent cases of CHF or pulmonary embolism might overshadow the less common but life-threatening diagnosis of cardiac tamponade in cancer patients"
-    },
-    "coachPrompts": {
-        "phase2": "Given this patient's cancer history and acute presentation, what life-threatening cardiovascular emergencies should you specifically consider? How might her narrow pulse pressure of 16 mmHg guide your thinking about the underlying pathophysiology?",
-        "phase5": "You've identified several key findings: elevated JVD, muffled heart sounds, narrow pulse pressure, and pulsus paradoxus. How do these findings fit together pathophysiologically? What does Beck's triad suggest, and what might be the underlying cause in this cancer patient?",
-        "finalDebrief": "Cardiac tamponade in cancer patients often results from malignant pericardial effusion. Notice how the narrow pulse pressure and pulsus paradoxus were key early clues that distinguished this from CHF. How did recognizing Beck's triad help narrow your differential? What made you initially consider other diagnoses, and what clinical reasoning led you to the correct diagnosis?"
     }
 }
 };

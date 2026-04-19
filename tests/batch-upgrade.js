@@ -46,7 +46,36 @@ function loadCase(fp) {
 
 function isGen2(data) {
   const g = data && data.guided;
-  return !!(g && g.supported && g.patientResponses && Object.keys(g.patientResponses).length >= 8);
+  if (!g || !g.supported || !g.patientResponses) return false;
+  if (Object.keys(g.patientResponses).length < 8) return false;
+
+  // Reject template placeholder content — these strings indicate a
+  // non-AI-generated template block that should be upgraded.
+  const templateMarkers = [
+    'Working diagnosis',
+    'Most likely alternative diagnosis',
+    'Second most likely',
+    'Third differential',
+    'Must-not-miss diagnosis',
+    'Common clinical mimic',
+    'Alternative presentation',
+    '(correct diagnosis)',   // appears in BOTH template and real AI output — so also check...
+  ];
+  // ddxTargets should contain the actual diagnosis name, not generic slots
+  const ddxStr = (g.ddxTargets || []).join(' | ');
+  if (/Most likely alternative|Third differential|Common clinical mimic|Alternative presentation to consider/i.test(ddxStr)) {
+    return false;
+  }
+  // patientResponses.onset should not be a quoted stringified HPI dump
+  const onset = (g.patientResponses.onset || '').trim();
+  if (onset.startsWith("'The symptoms started") || onset.startsWith('"The symptoms started')) {
+    return false;
+  }
+  // biasFlags should describe the case, not use generic "Working diagnosis" placeholder
+  const biasStr = JSON.stringify(g.biasFlags || {});
+  if (/Working diagnosis/i.test(biasStr)) return false;
+
+  return true;
 }
 
 function extractInfo(data, fp) {
@@ -308,4 +337,4 @@ if (require.main === module) {
 }
 
 // Expose for testing
-module.exports = { patchCase };
+module.exports = { patchCase, isGen2, loadCase };

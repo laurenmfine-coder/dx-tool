@@ -286,6 +286,39 @@ window.EMR_DATA = {
     "presentation": "Headache",
     "category": "neurologic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Danielle Pierre-Louis is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did headache start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started About a week ago I went to my chiropractor for my usual neck adjustment, and a f.'",
+        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Internal Carotid Artery Dissection.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Sumatriptan 50mg PRN; Escitalopram 10mg daily; Ibuprofen 400mg PRN; Oral Contraceptive (Norethindrone 0.35mg daily).'",
+        "allergies": "'My allergies are Codeine, Latex.'",
+        "family": "Mother: Ehlers-Danlos Syndrome (hypermobility type), migraines, alive at 64  Father: HTN, T2DM, alive at 66  Sister: Migraines, age 35",
+        "social": "Occupation: Physical therapist  Marital: Married, 1 child (age 4)  Tobacco: Never smoker  Alcohol: Occasional, 1-2 glasses of wine per week  Drugs: Denies"
+    },
     "examManeuvers": [
         "Level of consciousness and GCS",
         "Cranial nerve examination",
@@ -324,84 +357,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Danielle Pierre-Louis's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Danielle appears mildly anxious and somewhat puzzled by her symptoms, as this headache feels different from her usual migraines. She's articulate and cooperative, providing detailed responses about her symptoms and medical history. She seems concerned but not panicked, though there's an underlying worry that something might be wrong since her usual migraine treatments aren't helping.",
-    "interviewQuestions": [
-        "Can you describe exactly when this headache started in relation to your chiropractic visit?",
-        "How is this headache different from your usual migraines?",
-        "Can you describe the quality and character of the pain?",
-        "Where exactly is the pain located and does it radiate anywhere?",
-        "On a scale of 1-10, how would you rate the pain?",
-        "Have you noticed any vision changes, weakness, or numbness?",
-        "What type of neck manipulation did your chiropractor perform?",
-        "Have you tried your usual migraine medications for this headache?",
-        "Have you had any nausea, vomiting, or sensitivity to light with this headache?",
-        "Any dizziness, balance problems, or difficulty speaking?",
-        "Have you had any similar episodes in the past after chiropractic treatments?",
-        "Tell me about your Ehlers-Danlos syndrome - when were you diagnosed?",
-        "What medications are you currently taking?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure what you mean by that. Could you ask it a different way?",
-        "onset": "It started about 3-4 days after my chiropractic adjustment last week. I went in on a Tuesday, and by Friday evening I was noticing this constant ache starting up.",
-        "character": "It's this dull, constant aching pain - not throbbing like my migraines usually are. It feels more like a deep, nagging ache that just won't go away.",
-        "location": "It starts in the right side of my neck, just below my ear, and goes up behind my ear and into the right side of my head. Sometimes I feel it along my jawline too.",
-        "severity": "I'd say it's about a 4 or 5 out of 10 for pain, but it's the constant nature that's really bothering me. It's not severe enough to stop me from working, but it's always there.",
-        "aggravating": "Turning my head to the right seems to make it worse, and I've noticed it gets more intense when I'm stressed or concentrating at work.",
-        "relieving": "Ibuprofen helps a little bit, but not like it usually does. Heat packs give me some temporary relief. My usual sumatriptan doesn't touch this at all.",
-        "associated": "I've been feeling a bit dizzy when I stand up quickly, and sometimes I feel like my balance is slightly off. No nausea though, which is weird because I usually get nauseous with my migraines.",
-        "denies": "No vision changes, no weakness in my arms or legs, no trouble speaking or swallowing. No numbness or tingling anywhere.",
-        "history": "I've never had a headache quite like this before. My migraines are usually throbbing, on the left side, and come with nausea and light sensitivity. This is completely different.",
-        "medications": "Sumatriptan 50mg PRN; Escitalopram 10mg daily; Ibuprofen 400mg PRN; Oral Contraceptive (Norethindrone 0.35mg daily)",
-        "allergies": "Codeine, Latex",
-        "family": "My mom has Ehlers-Danlos like me and gets migraines too. My sister also has migraines. My dad has high blood pressure and diabetes.",
-        "social": "I'm a physical therapist, so I understand body mechanics pretty well. I'm married with a 4-year-old. I don't smoke, maybe have a glass of wine once or twice a week. No drugs."
-    },
-    "examManeuvers": [
-        "Neurologic examination (cranial nerves, motor, sensory)",
-        "Neck palpation and range of motion assessment",
-        "Fundoscopic examination",
-        "Carotid artery auscultation",
-        "Assessment of joint hypermobility (Beighton score)",
-        "Temporal artery palpation",
-        "Assessment for meningeal signs",
-        "Blood pressure in both arms",
-        "Cerebellar function testing",
-        "Assessment for Horner's syndrome"
-    ],
-    "examFindings": {
-        "Neurologic examination (cranial nerves, motor, sensory)": "Cranial nerves II-XII intact, motor strength 5/5 throughout, sensation intact to light touch and pinprick bilaterally",
-        "Neck palpation and range of motion assessment": "Tenderness along right sternocleidomastoid muscle, mild restriction of right lateral rotation, no lymphadenopathy",
-        "Fundoscopic examination": "Normal optic discs bilaterally, no papilledema, normal vessel caliber",
-        "Carotid artery auscultation": "No bruits appreciated bilaterally",
-        "Assessment of joint hypermobility (Beighton score)": "Positive findings: thumbs touch forearms, palms flat on floor with straight knees, elbows hyperextend >10°, consistent with EDS",
-        "Temporal artery palpation": "Non-tender, normal caliber bilateral temporal arteries",
-        "Assessment for meningeal signs": "Negative Kernig's and Brudzinski's signs, no nuchal rigidity",
-        "Blood pressure in both arms": "Right arm 118/72, Left arm 122/74 - no significant difference",
-        "Cerebellar function testing": "Finger-to-nose intact, heel-to-shin intact, slightly unsteady on tandem gait",
-        "Assessment for Horner's syndrome": "Subtle right-sided ptosis noted, pupils equal and reactive, no obvious anisocoria"
-    },
-    "ddxTargets": [
-        "Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome) (correct diagnosis)",
-        "Vertebral Artery Dissection",
-        "Cervical Strain/Myofascial Pain",
-        "Acute Ischemic Stroke",
-        "Subarachnoid Hemorrhage",
-        "Tension-Type Headache",
-        "Atypical Migraine"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on migraine history and dismissing this as just another headache variant, missing the key differences in character and associated symptoms",
-        "prematureClosure": "Risk of stopping at cervical strain after chiropractic visit without considering vascular complications, especially given EDS predisposition",
-        "availabilityBias": "Common presentations like tension headache or migraine may overshadow the rare but serious possibility of arterial dissection in an EDS patient"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. Now think specifically about this patient's connective tissue disorder and recent neck manipulation. What vascular complications should you be particularly concerned about in someone with Ehlers-Danlos syndrome? How might this change your interview focus?",
-        "phase5": "You've gathered excellent history and exam findings. The subtle ptosis is a key finding here. Given her EDS, the recent chiropractic manipulation, and the character of her headache, what vascular emergency should be at the top of your differential? What imaging would be most appropriate?",
-        "finalDebrief": "This case highlights the importance of recognizing arterial dissection risk factors, particularly connective tissue disorders like EDS and recent neck trauma. The subtle ptosis suggesting partial Horner's syndrome, combined with the neck pain and headache after manipulation, should raise immediate concern for carotid dissection. How did your thinking evolve from common headache causes to this vascular emergency?"
     }
 }
 };

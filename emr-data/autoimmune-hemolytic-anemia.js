@@ -271,6 +271,39 @@ window.EMR_DATA = {
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
   },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Nadine Toussaint is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did hematologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 49-year-old female with CLL (watch-and-wait) presents with 1 week of progressive.'",
+        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Warm Autoimmune Hemolytic Anemia.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Levothyroxine 75mcg daily; Omeprazole 20mg daily; Calcium Carbonate 600mg with Vitamin D 400 IU BID.'",
+        "allergies": "'My allergies are Aspirin, Shellfish.'",
+        "family": "Mother: Breast cancer at 62, alive at 76  Father: CLL diagnosed at 70, deceased at 78  Sister: Hashimoto thyroiditis, age 45",
+        "social": "Occupation: Elementary school teacher  Marital: Married, 2 children (ages 18 and 15)  Tobacco: Never smoker  Alcohol: Occasional wine, 1-2/week  Drugs: Denies"
+    },
     "examManeuvers": [
         "General appearance and pallor",
         "Vital signs",
@@ -309,82 +342,6 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Nadine Toussaint's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Warm Autoimmune Hemolytic Anemia (CLL-Associated). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
-    }
-},
-  "guided": {
-    "supported": true,
-    "patientPersona": "Nadine appears anxious and fatigued, speaking in short phrases due to mild dyspnea. She is cooperative but worried about her worsening symptoms, particularly given her known CLL diagnosis. She maintains good eye contact despite obvious pallor and appears relieved to be seeking medical attention.",
-    "interviewQuestions": [
-        "Can you describe when your fatigue and shortness of breath first started?",
-        "Have you noticed any changes in your urine color recently?",
-        "Has anyone commented on changes in your skin or eye color?",
-        "Are you experiencing any chest pain or heart palpitations?",
-        "Have you had any fevers, chills, or night sweats?",
-        "Any abdominal pain or feeling of fullness?",
-        "Have you noticed any unusual bruising or bleeding?",
-        "When was your last visit with your hematologist for your CLL?",
-        "Have you started any new medications or supplements recently?",
-        "Any recent infections or illnesses?",
-        "Are you having any nausea, vomiting, or loss of appetite?",
-        "Have you experienced similar episodes in the past?",
-        "What medications are you currently taking?"
-    ],
-    "patientResponses": {
-        "default": "I'm not sure I understand what you're asking. Could you rephrase that? I'm feeling pretty tired right now.",
-        "onset": "The fatigue started gradually about a week ago, but it's gotten much worse over the past 3-4 days. The shortness of breath started when I was climbing stairs at school about 3 days ago.",
-        "character": "It's an overwhelming exhaustion, like I've never felt before. Even simple tasks like getting dressed leave me breathless and my heart racing.",
-        "location": "The fatigue is all over my body, and I feel the shortness of breath mainly when I try to do anything physical, even walking across a room.",
-        "severity": "I'd say the fatigue is about an 8 out of 10. I had to call in sick to work yesterday because I couldn't even get out of bed properly.",
-        "aggravating": "Any physical activity makes the shortness of breath and fatigue much worse. Even talking for too long makes me feel winded.",
-        "relieving": "Rest helps a little, but even when I'm sitting still, I don't feel normal. Nothing really makes it go away completely.",
-        "associated": "My husband noticed my eyes look yellow starting about 3 days ago, and my urine has been very dark brown, almost like cola. I've also been feeling dizzy when I stand up.",
-        "denies": "No chest pain, no bleeding that I've noticed, no unusual bruising. No nausea or vomiting, though my appetite has been poor.",
-        "history": "I've never had anything like this before. My CLL has been stable on watch-and-wait since diagnosis 2 years ago.",
-        "medications": "Levothyroxine 75mcg daily; Omeprazole 20mg daily; Calcium Carbonate 600mg with Vitamin D 400 IU BID",
-        "allergies": "Aspirin, Shellfish",
-        "family": "My father had CLL too, diagnosed at 70. My mother had breast cancer. My sister has thyroid problems like me.",
-        "social": "I'm an elementary school teacher, married with two teenagers. I don't smoke, maybe have a glass of wine once or twice a week. No drugs."
-    },
-    "examManeuvers": [
-        "General appearance and pallor assessment",
-        "Scleral icterus examination",
-        "Cardiovascular examination including heart rate and murmurs",
-        "Pulmonary examination",
-        "Abdominal examination for splenomegaly",
-        "Lymph node examination",
-        "Skin examination for jaundice and petechiae",
-        "Orthostatic vital signs",
-        "Conjunctival pallor assessment"
-    ],
-    "examFindings": {
-        "General appearance and pallor assessment": "Patient appears fatigued and notably pale, with pale nail beds and palm creases",
-        "Scleral icterus examination": "Mild scleral icterus present bilaterally",
-        "Cardiovascular examination including heart rate and murmurs": "Tachycardia at 104 bpm, grade 2/6 systolic flow murmur at LLSB, regular rhythm",
-        "Pulmonary examination": "Clear to auscultation bilaterally, mild tachypnea at rest",
-        "Abdominal examination for splenomegaly": "Mild splenomegaly palpable 2 cm below left costal margin, non-tender",
-        "Lymph node examination": "Small, mobile, non-tender lymphadenopathy in cervical and axillary regions consistent with known CLL",
-        "Skin examination for jaundice and petechiae": "Mild jaundice noted, no petechiae or purpura observed",
-        "Orthostatic vital signs": "Mild orthostatic changes: lying 136/82 HR 104, standing 142/88 HR 118",
-        "Conjunctival pallor assessment": "Marked conjunctival pallor present"
-    },
-    "ddxTargets": [
-        "Warm Autoimmune Hemolytic Anemia (CLL-Associated) (correct diagnosis)",
-        "CLL progression with cytopenias",
-        "Drug-induced hemolytic anemia",
-        "Acute leukemia transformation",
-        "Sepsis with hemolysis",
-        "Iron deficiency anemia with concurrent illness",
-        "Viral syndrome with anemia of chronic disease"
-    ],
-    "biasFlags": {
-        "anchoring": "Risk of anchoring on known CLL diagnosis and assuming all symptoms are due to disease progression rather than considering secondary autoimmune complications",
-        "prematureClosure": "May stop diagnostic workup after identifying anemia without recognizing the hemolytic component and autoimmune etiology",
-        "availabilityBias": "Recent cases of simple anemia or viral illnesses may overshadow the classic presentation of hemolytic anemia with jaundice and dark urine"
-    },
-    "coachPrompts": {
-        "phase2": "Good start on your differential. I notice you've identified several causes of anemia and fatigue. Given this patient's presentation of fatigue, dyspnea, and the husband's observation about eye color changes, what specific questions might help you distinguish between different types of anemia? What would you want to know about her urine?",
-        "phase5": "Excellent history and physical exam. You've identified key findings including pallor, scleral icterus, splenomegaly, and the patient's report of dark urine. How do these findings help narrow your differential? What type of anemia typically presents with this constellation of findings, and why might this patient with CLL be particularly susceptible?",
-        "finalDebrief": "This case illustrates warm autoimmune hemolytic anemia secondary to CLL - a classic but serious complication. The key was recognizing the hemolytic picture: anemia + jaundice + dark urine + splenomegaly. CLL patients have a 5-10% risk of developing AIHA due to immune dysregulation. How did your thinking evolve from considering simple anemia to recognizing the hemolytic component? What clinical clues were most important in making this distinction?"
     }
 }
 };
