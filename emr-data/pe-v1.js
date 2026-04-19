@@ -387,5 +387,6 @@ window.EMR_DATA = {
         "phase5": "You've found right calf swelling and decreased breath sounds at the right base. SpO2 is 93%. How does the Wells PE score apply here? What's your next step \u2014 CT-PA or empiric anticoagulation first? Why?",
         "finalDebrief": "Confirmed PE with concurrent DVT. Your OCP-using patient who just flew 14 hours had a 100% Wells score. How did your DDx change from chart review to exam? Did you have PE at the top from the start, or did it emerge? What would you do differently next time?"
     }
-}
+},
+  "meta": {"diagnosis": "Pulmonary Embolism", "caseId": "pe-v1", "acuity": 2, "category": "pulmonary"}
 };

@@ -1,6 +1,7 @@
 
 window.EMR_DATA = {
   "patient": {
+    "chiefComplaint": "Fever, confusion, and urinary symptoms",
     "name": "Reginald Baptiste",
     "dob": "12/25/1955",
     "age": 69,

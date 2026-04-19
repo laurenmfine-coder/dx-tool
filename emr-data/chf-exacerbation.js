@@ -1,6 +1,7 @@
 
 window.EMR_DATA = {
   "patient": {
+    "chiefComplaint": "Progressive dyspnea, orthopnea, and leg swelling",
     "name": "Winston Carmichael",
     "dob": "06/30/1960",
     "age": 65,

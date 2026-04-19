@@ -4,6 +4,7 @@
 
 window.EMR_DATA = {
   "patient": {
+    "chiefComplaint": "Sudden tearing chest and back pain",
     "name": "Richard Thornton",
   "patientHPI": "I've been having this nagging ache between my shoulder blades on and off, figured I pulled something, but today it's really bothering me and feels different somehow - sharper and more intense than usual muscle pain.",
     "dob": "03/18/1961",
