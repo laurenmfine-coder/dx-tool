@@ -398,10 +398,8 @@ var rdxLog = (window.RDX_CONFIG && window.RDX_CONFIG.DEBUG) ? console.log.bind(c
 
       html += '<div id="guided-phase-content" style="display:none"></div>';
       html += '<div style="margin-top:20px;padding:14px 16px;background:#F8FAFC;border-top:1px solid #E2ECF4;border-radius:0 0 10px 10px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">';
-      if (examCount < 2) {
-        html += '<div style="font-size:12px;color:#718096;font-style:italic">Select and examine at least 2 maneuvers to advance.</div>';
-      }
-      html += '<button type="button" ' +
+      html += '<div id="rdx-exam-hint" style="font-size:12px;color:#718096;font-style:italic' + (examCount >= 2 ? ';display:none' : '') + '">Select and examine at least 2 maneuvers to advance.</div>';
+      html += '<button type="button" id="rdx-exam-advance-btn" ' +
         (examCount >= 2 ? '' : 'disabled ') +
         'onclick="GuidedMode.completeCurrentPhase({examDone: GuidedMode.getExamDone()})" ' +
         'style="padding:10px 24px;background:' + (examCount >= 2 ? '#2874A6' : '#CBD5E0') + ';color:#fff;border:none;border-radius:8px;' +

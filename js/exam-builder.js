@@ -1229,13 +1229,10 @@
     } else {
       _selected[key] = true;
     }
-    _save(); _rerender();
+    _save();
     if (window.GuidedMode) window.GuidedMode._examDoneOverride = Object.keys(_selected);
-    if (window.GuidedMode && GuidedMode.isActive()) {
-      var ph = document.getElementById('guided-phase-content');
-      if (ph) { ph.innerHTML = GuidedMode.renderPhase(); }
-      else if (window.render) render();
-    }
+    _rerender();       // re-render exam builder only — no GuidedMode.renderPhase() call
+    _updateExamBtn();  // update just the advance button state
   };
 
   window._rdxExamReveal = function (key) {
@@ -1246,6 +1243,20 @@
   function _rerender() {
     var el = document.getElementById('rdx-exam-builder');
     if (el) el.innerHTML = _buildInner();
+  }
+
+  // Update just the advance button — avoids rebuilding the entire phase
+  function _updateExamBtn() {
+    var btn = document.getElementById('rdx-exam-advance-btn');
+    if (!btn) return;
+    var count = Object.keys(_selected).length;
+    var ready = count >= 2;
+    btn.disabled = !ready;
+    btn.style.background = ready ? '#2874A6' : '#CBD5E0';
+    btn.style.cursor = ready ? 'pointer' : 'not-allowed';
+    btn.textContent = ready ? '✓ Exam Complete — Refine DDx →' : 'Exam Complete — Refine DDx →';
+    var hint = document.getElementById('rdx-exam-hint');
+    if (hint) hint.style.display = ready ? 'none' : '';
   }
 
   function _buildManeuverRow(key, indent) {
