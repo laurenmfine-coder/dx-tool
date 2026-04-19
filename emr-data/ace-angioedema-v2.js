@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Evelyn Washington-Carter",
-  "patientHPI": "About six hours ago my tongue just started swelling up out of nowhere and now it's so big I can't even swallow my own spit properly - I sound funny when I try to talk and my tongue feels like it's taking up my whole mouth.",
+      "patientHPI": "About six hours ago my tongue just started swelling up out of nowhere and now it's so big I can't even swallow my own spit properly - I sound funny when I try to talk and my tongue feels like it's taking up my whole mouth.",
       "dob": "06/27/1958",
       "age": "68",
       "sex": "Female",
@@ -887,7 +887,7 @@ window.EMR_DATA = {
       "phone": "(630) 555-1256",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "68yo with tongue swelling and difficulty speaking — on lisinopril x8 years, first episode of angioedema",
+    "chiefComplaint": "Tongue swelling",
     "diagnosis": "ACE Inhibitor Angioedema"
   },
   "problems": [
@@ -1148,95 +1148,95 @@ window.EMR_DATA = {
       "ARB question",
       "Can she take losartan? Cross-reactivity risk is 2-10%"
     ]
-  ]
-,"references":[
-  {
-    "id": "ACE-AE-Byrd-2006",
-    "title": "ACE inhibitor-associated angioedema",
-    "authors": "Byrd JB, Adam A, Brown NJ.",
-    "journal": "Immunol Allergy Clin North Am",
-    "year": 2006,
-    "doi": "10.1016/j.iac.2006.08.001",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4039077/",
-    "openAccess": true,
-    "validates": [
-      "3-5x higher risk in African Americans",
-      "Late-onset possible years after starting",
-      "Bradykinin mechanism",
-      "ARB cross-reactivity 2-10%",
-      "Icatibant for ACE angioedema"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "ACE-AE-Byrd-2006",
+      "title": "ACE inhibitor-associated angioedema",
+      "authors": "Byrd JB, Adam A, Brown NJ.",
+      "journal": "Immunol Allergy Clin North Am",
+      "year": 2006,
+      "doi": "10.1016/j.iac.2006.08.001",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4039077/",
+      "openAccess": true,
+      "validates": [
+        "3-5x higher risk in African Americans",
+        "Late-onset possible years after starting",
+        "Bradykinin mechanism",
+        "ARB cross-reactivity 2-10%",
+        "Icatibant for ACE angioedema"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
     "patientPersona": "Evelyn Washington-Carter is alert and cooperative, clearly concerned but provides a clear history.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your symptoms start and how?",
+      "Describe the main symptom — location, character, severity.",
+      "What makes it worse? What makes it better?",
+      "Any other symptoms you've noticed?",
+      "Any prior similar episodes?",
+      "Tell me about your medical history.",
+      "What medications are you currently taking?",
+      "Any medication allergies?",
+      "Relevant family history?",
+      "Tell me about your lifestyle."
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Icatibant; Epinephrine; Dexamethasone; Lisinopril.'",
-        "allergies": "'My allergies: ACE inhibitors.'",
-        "family": "Sister: also had ACE inhibitor angioedema",
-        "social": "Race: African American \u2014 3-5x higher risk of ACE angioedema  Comorbidity: CHF with EF 35% \u2014 ACE inhibitors are guideline-directed therapy, losing them hurts  Timing: On lisinopril for 8 YEARS \u2014 late-onset ACE angioedema (can occur years after starting)  ARB question: Can she take losartan? Cross-reactivity risk is 2-10%"
+      "default": "He pauses. 'Can you clarify what you mean?'",
+      "onset": "'Gradually — over the past several days.'",
+      "character": "'The symptom has been significant and affecting my ability to function.'",
+      "location": "'The main problem is in the expected area for my condition.'",
+      "severity": "'Six or seven out of ten.'",
+      "aggravating": "'Activity and movement worsen it.'",
+      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+      "associated": "'Some associated symptoms consistent with this condition.'",
+      "denies": "'No fever, chills, or unexplained weight loss.'",
+      "history": "'I have not had exactly this before.'",
+      "medications": "'I take Icatibant; Epinephrine; Dexamethasone; Lisinopril.'",
+      "allergies": "'My allergies: ACE inhibitors.'",
+      "family": "Sister: also had ACE inhibitor angioedema",
+      "social": "Race: African American — 3-5x higher risk of ACE angioedema  Comorbidity: CHF with EF 35% — ACE inhibitors are guideline-directed therapy, losing them hurts  Timing: On lisinopril for 8 YEARS — late-onset ACE angioedema (can occur years after starting)  ARB question: Can she take losartan? Cross-reactivity risk is 2-10%"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance",
+      "Vital signs",
+      "Cardiovascular",
+      "Pulmonary",
+      "Abdominal",
+      "Extremities",
+      "Skin",
+      "Targeted exam"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance": "Finding consistent with this condition.",
+      "Vital signs": "Finding consistent with this condition.",
+      "Cardiovascular": "Finding consistent with this condition.",
+      "Pulmonary": "Finding consistent with this condition.",
+      "Abdominal": "Finding consistent with this condition.",
+      "Extremities": "Finding consistent with this condition.",
+      "Skin": "Finding consistent with this condition.",
+      "Targeted exam": "Finding consistent with this condition."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "this condition (correct)",
+      "Most likely alternative",
+      "Third differential",
+      "Must-not-miss 1",
+      "Must-not-miss 2",
+      "Common mimic 1",
+      "Common mimic 2"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Consider the full differential for this condition.",
+      "prematureClosure": "Complete your workup before narrowing focus.",
+      "availabilityBias": "Apply systematic clinical reasoning."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Evelyn Washington-Carter: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before interviewing Evelyn Washington-Carter: what does the chart suggest? Top 3 diagnoses?",
+      "phase5": "After history and exam: how has your differential changed?",
+      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
     }
-}
+  }
 };

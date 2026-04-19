@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Noah Williams",
-  "patientHPI": "My little boy's skin condition got much worse after my sister visited and gave him kisses on his face. Now he has these awful sores and blisters all over his face and body, and he's running a high fever and seems really sick.",
+      "patientHPI": "My little boy's skin condition got much worse after my sister visited and gave him kisses on his face. Now he has these awful sores and blisters all over his face and body, and he's running a high fever and seems really sick.",
       "dob": "01/18/2024",
       "age": "2",
       "sex": "Male",
@@ -851,7 +851,7 @@ window.EMR_DATA = {
       "phone": "(615) 555-5012",
       "relationship": "Parent"
     },
-    "chiefComplaint": "2yo with severe eczema and new punched-out vesicles/erosions — febrile after exposure to adult with cold sore",
+    "chiefComplaint": "Worsening rash",
     "diagnosis": "Eczema Herpeticum"
   },
   "problems": [
@@ -1103,95 +1103,95 @@ window.EMR_DATA = {
       "Comorbidity",
       "Severe underlying AD — SCORAD 58"
     ]
-  ]
-,"references":[
-  {
-    "id": "AAD-AD-2023",
-    "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
-    "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
-    "journal": "J Am Acad Dermatol",
-    "year": 2023,
-    "doi": "10.1016/j.jaad.2022.12.029",
-    "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCORAD scoring",
-      "TCS potency ladder",
-      "Wet wrap therapy",
-      "Simplified regimens",
-      "Eczema herpeticum as emergency"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "AAD-AD-2023",
+      "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
+      "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
+      "journal": "J Am Acad Dermatol",
+      "year": 2023,
+      "doi": "10.1016/j.jaad.2022.12.029",
+      "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCORAD scoring",
+        "TCS potency ladder",
+        "Wet wrap therapy",
+        "Simplified regimens",
+        "Eczema herpeticum as emergency"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
     "patientPersona": "Noah Williams is alert and cooperative, clearly concerned but provides a clear history.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your symptoms start and how?",
+      "Describe the main symptom — location, character, severity.",
+      "What makes it worse? What makes it better?",
+      "Any other symptoms you've noticed?",
+      "Any prior similar episodes?",
+      "Tell me about your medical history.",
+      "What medications are you currently taking?",
+      "Any medication allergies?",
+      "Relevant family history?",
+      "Tell me about your lifestyle."
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Acyclovir; IV Fluids; Acetaminophen.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Mother: severe eczema",
-        "social": "Context: 2yo with severe eczema kissed by aunt who had active cold sore  Risk: HSV dissemination into eczematous skin \u2014 dermatologic emergency  Severity: Punched-out erosions across face, neck, trunk \u2014 febrile, toxic-appearing  Comorbidity: Severe underlying AD \u2014 SCORAD 58"
+      "default": "He pauses. 'Can you clarify what you mean?'",
+      "onset": "'Gradually — over the past several days.'",
+      "character": "'The symptom has been significant and affecting my ability to function.'",
+      "location": "'The main problem is in the expected area for my condition.'",
+      "severity": "'Six or seven out of ten.'",
+      "aggravating": "'Activity and movement worsen it.'",
+      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+      "associated": "'Some associated symptoms consistent with this condition.'",
+      "denies": "'No fever, chills, or unexplained weight loss.'",
+      "history": "'I have not had exactly this before.'",
+      "medications": "'I take Acyclovir; IV Fluids; Acetaminophen.'",
+      "allergies": "'My allergies: NKDA.'",
+      "family": "Mother: severe eczema",
+      "social": "Context: 2yo with severe eczema kissed by aunt who had active cold sore  Risk: HSV dissemination into eczematous skin — dermatologic emergency  Severity: Punched-out erosions across face, neck, trunk — febrile, toxic-appearing  Comorbidity: Severe underlying AD — SCORAD 58"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance",
+      "Vital signs",
+      "Cardiovascular",
+      "Pulmonary",
+      "Abdominal",
+      "Extremities",
+      "Skin",
+      "Targeted exam"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance": "Finding consistent with this condition.",
+      "Vital signs": "Finding consistent with this condition.",
+      "Cardiovascular": "Finding consistent with this condition.",
+      "Pulmonary": "Finding consistent with this condition.",
+      "Abdominal": "Finding consistent with this condition.",
+      "Extremities": "Finding consistent with this condition.",
+      "Skin": "Finding consistent with this condition.",
+      "Targeted exam": "Finding consistent with this condition."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "this condition (correct)",
+      "Most likely alternative",
+      "Third differential",
+      "Must-not-miss 1",
+      "Must-not-miss 2",
+      "Common mimic 1",
+      "Common mimic 2"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Consider the full differential for this condition.",
+      "prematureClosure": "Complete your workup before narrowing focus.",
+      "availabilityBias": "Apply systematic clinical reasoning."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Noah Williams: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before interviewing Noah Williams: what does the chart suggest? Top 3 diagnoses?",
+      "phase5": "After history and exam: how has your differential changed?",
+      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Noah Sullivan",
-  "patientHPI": "My son's skin rash suddenly got much worse with these painful open sores and blisters appearing everywhere, and now he has a fever and seems really unwell.",
+      "patientHPI": "My son's skin rash suddenly got much worse with these painful open sores and blisters appearing everywhere, and now he has a fever and seems really unwell.",
       "dob": "11/07/2023",
       "age": "3",
       "sex": "Male",
@@ -677,7 +677,7 @@ window.EMR_DATA = {
       "phone": "(513) 555-8381",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Acute worsening of eczema with punched-out erosions, vesicles, and fever",
+    "chiefComplaint": "Worsening rash",
     "diagnosis": "Eczema Herpeticum"
   },
   "problems": [
@@ -851,27 +851,26 @@ window.EMR_DATA = {
       "Urgent",
       "Requires IV acyclovir — can disseminate"
     ]
-  ]
-,"references":[
-  {
-    "id": "AAD-AD-2023",
-    "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
-    "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
-    "journal": "J Am Acad Dermatol",
-    "year": 2023,
-    "doi": "10.1016/j.jaad.2022.12.029",
-    "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCORAD scoring",
-      "TCS potency ladder",
-      "Wet wrap therapy",
-      "Simplified regimens",
-      "Eczema herpeticum as emergency"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "AAD-AD-2023",
+      "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
+      "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
+      "journal": "J Am Acad Dermatol",
+      "year": 2023,
+      "doi": "10.1016/j.jaad.2022.12.029",
+      "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCORAD scoring",
+        "TCS potency ladder",
+        "Wet wrap therapy",
+        "Simplified regimens",
+        "Eczema herpeticum as emergency"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Eczema herpeticum (EH) is a potentially life-threatening disseminated HSV infection in patients with AD or other skin barrier defects. Deficient cathelicidin (LL-37) and β-defensin production in AD skin → impaired innate antiviral defense → HSV spreads beyond initial inoculation site.",
@@ -892,73 +891,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Noah Sullivan appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did acute worsening of eczema with punched-out erosions, vesicles, and fever start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did acute worsening of eczema with punched-out erosions, vesicles, and fever start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Noah Sullivan presents with acute worsening of eczema with punched-out erosions,.'",
-        "character": "'It's acute worsening of eczema with punched-out erosions, vesicles, and fever \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrocortisone 2.5% ointment.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: eczema",
-        "social": "Exposure: Daycare classmate had cold sores 5 days ago  Key finding: Monomorphic punched-out vesicles and erosions superimposed on eczematous skin  Urgent: Requires IV acyclovir \u2014 can disseminate"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started Noah Sullivan presents with acute worsening of eczema with punched-out erosions,.'",
+      "character": "'It's acute worsening of eczema with punched-out erosions, vesicles, and fever — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Hydrocortisone 2.5% ointment.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Mother: eczema",
+      "social": "Exposure: Daycare classmate had cold sores 5 days ago  Key finding: Monomorphic punched-out vesicles and erosions superimposed on eczematous skin  Urgent: Requires IV acyclovir — can disseminate"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Working diagnosis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Noah Sullivan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Noah Sullivan's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

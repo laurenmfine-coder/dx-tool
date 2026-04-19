@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Fernandez",
-  "patientHPI": "The pain in the front of my right shin is absolutely unbearable - it feels like someone is crushing my leg and it's getting worse by the hour.",
+    "patientHPI": "The pain in the front of my right shin is absolutely unbearable - it feels like someone is crushing my leg and it's getting worse by the hour.",
     "dob": "06/15/2002",
     "age": "24",
     "sex": "Male",
@@ -15,19 +15,19 @@ window.EMR_DATA = {
     "address": "4362 Ash St, Minneapolis, MN 55407",
     "insurance": "Medicare",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
+    "pharmacy": "CVS Pharmacy — Federal Hwy",
     "emergencyContact": {
       "name": "Diana Bailey",
       "phone": "(404) 555-1823",
       "relationship": "Parent"
     },
-    "chiefComplaint": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",
+    "chiefComplaint": "Severe shin pain",
     "diagnosis": "Acute Compartment Syndrome (Tibial Fracture)"
   },
   "problems": [
     {
       "id": "prob-1",
-      "description": "None \u2014 healthy 26-year-old",
+      "description": "None — healthy 26-year-old",
       "status": "Active",
       "onset": "Chronic",
       "icd10": ""
@@ -59,7 +59,7 @@ window.EMR_DATA = {
       "bp": "158/92 (pain-induced hypertension)",
       "hr": "118",
       "rr": "22",
-      "temp": "37.0\u00b0C",
+      "temp": "37.0°C",
       "spo2": "99%",
       "pain": "10/10",
       "bmi": "29",
@@ -72,10 +72,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",
-      "hpi": "Mateo Fernandez is a 24-year-old male presenting with the pain in my shin is unbearable right leg \u2014 anterior compartment (anterior shin). Past medical history includes None \u2014 healthy 26-year-old. See chart for full details.",
+      "cc": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
+      "hpi": "Mateo Fernandez is a 24-year-old male presenting with the pain in my shin is unbearable right leg — anterior compartment (anterior shin). Past medical history includes None — healthy 26-year-old. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Compartment Syndrome (Tibial Fracture) \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Compartment Syndrome (Tibial Fracture) — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -97,7 +97,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "9.1",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -118,7 +118,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "190",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -225,7 +225,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-874022",
-      "clinical": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",
+      "clinical": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
       "technique": "Standard protocol",
       "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
       "impression": "No acute cardiopulmonary process.",
@@ -242,10 +242,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-492295",
-      "clinical": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",
+      "clinical": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
       "technique": "Standard protocol",
       "findings": "Transverse fracture of the right tibial shaft at the junction of the middle and distal thirds. Minimally displaced. Associated distal fibula fracture. No intra-articular extension. Adequate alignment in splint.",
-      "impression": "Right tibial shaft fracture with distal fibula fracture. No gross malalignment. Clinical concern for compartment syndrome \u2014 measurement of compartment pressures recommended.",
+      "impression": "Right tibial shaft fracture with distal fibula fracture. No gross malalignment. Clinical concern for compartment syndrome — measurement of compartment pressures recommended.",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -259,10 +259,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-339048",
-      "clinical": "The pain in my shin is unbearable Right leg \u2014 anterior compartment (anterior shin)",
+      "clinical": "The pain in my shin is unbearable Right leg — anterior compartment (anterior shin)",
       "technique": "Standard 12-lead",
       "findings": "Sinus tachycardia at 118 bpm. Normal intervals",
-      "impression": "Sinus tachycardia \u2014 pain",
+      "impression": "Sinus tachycardia — pain",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -316,73 +316,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Mateo Fernandez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did the pain in my shin is unbearable right leg \u2014 anterior compartment (anterior shin) start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did the pain in my shin is unbearable right leg — anterior compartment (anterior shin) start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started The pain in the front of my right shin is absolutely unbearable - it feels like .'",
-        "character": "'It's the pain in my shin is unbearable right leg \u2014 anterior compartment (anterior shin) \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take None.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Social smoker  Alcohol: Social, was not intoxicated at time of accident  Drugs: Denies  Occupation: Firefighter  Living: Lives with partner"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started The pain in the front of my right shin is absolutely unbearable - it feels like .'",
+      "character": "'It's the pain in my shin is unbearable right leg — anterior compartment (anterior shin) — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take None.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Non-contributory",
+      "social": "Tobacco: Social smoker  Alcohol: Social, was not intoxicated at time of accident  Drugs: Denies  Occupation: Firefighter  Living: Lives with partner"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Working diagnosis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Mateo Fernandez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Mateo Fernandez's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

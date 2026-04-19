@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "James O'Connell",
-  "patientHPI": "I keep breaking out in these huge welts all over my body almost every day for the past four months, and sometimes my lips swell up too. I've tried different allergy medicines but nothing seems to work, and I notice it gets worse when I'm wearing my work gear or when I'm stressed about these constant breakouts.",
+      "patientHPI": "I keep breaking out in these huge welts all over my body almost every day for the past four months, and sometimes my lips swell up too. I've tried different allergy medicines but nothing seems to work, and I notice it gets worse when I'm wearing my work gear or when I'm stressed about these constant breakouts.",
       "dob": "01/28/1971",
       "age": "55",
       "sex": "Male",
@@ -921,7 +921,7 @@ window.EMR_DATA = {
       "phone": "(702) 555-9056",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Severe urticaria flare with angioedema — 3rd ED visit this month, feels like he's going crazy",
+    "chiefComplaint": "Recurrent hives",
     "diagnosis": "Chronic Spontaneous Urticaria"
   },
   "problems": [
@@ -1188,94 +1188,94 @@ window.EMR_DATA = {
       "Prior treatment",
       "Failed cetirizine, fexofenadine, hydroxyzine — still breaking out daily"
     ]
-  ]
-,"references":[
-  {
-    "id": "EAACI-Urticaria-2022",
-    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
-    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15090",
-    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
-    "openAccess": true,
-    "validates": [
-      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
-      "UAS7 scoring",
-      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
-      "Post-viral urticaria in children: no allergy testing needed"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "EAACI-Urticaria-2022",
+      "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+      "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15090",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+      "openAccess": true,
+      "validates": [
+        "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+        "UAS7 scoring",
+        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Post-viral urticaria in children: no allergy testing needed"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
     "patientPersona": "James O'Connell is alert and cooperative, clearly concerned but provides a clear history.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your symptoms start and how?",
+      "Describe the main symptom — location, character, severity.",
+      "What makes it worse? What makes it better?",
+      "Any other symptoms you've noticed?",
+      "Any prior similar episodes?",
+      "Tell me about your medical history.",
+      "What medications are you currently taking?",
+      "Any medication allergies?",
+      "Relevant family history?",
+      "Tell me about your lifestyle."
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Diphenhydramine; Methylprednisolone; Cetirizine.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Sister: thyroid disease",
-        "social": "Tobacco: Never  Alcohol: 2-3 beers daily  Occupation: Construction foreman \u2014 physical urticaria component (pressure, heat)  Stress: Going through divorce, custody battle  Mental health: Not sleeping due to itch \u2014 affecting job performance"
+      "default": "He pauses. 'Can you clarify what you mean?'",
+      "onset": "'Gradually — over the past several days.'",
+      "character": "'The symptom has been significant and affecting my ability to function.'",
+      "location": "'The main problem is in the expected area for my condition.'",
+      "severity": "'Six or seven out of ten.'",
+      "aggravating": "'Activity and movement worsen it.'",
+      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+      "associated": "'Some associated symptoms consistent with this condition.'",
+      "denies": "'No fever, chills, or unexplained weight loss.'",
+      "history": "'I have not had exactly this before.'",
+      "medications": "'I take Diphenhydramine; Methylprednisolone; Cetirizine.'",
+      "allergies": "'My allergies: NKDA.'",
+      "family": "Sister: thyroid disease",
+      "social": "Tobacco: Never  Alcohol: 2-3 beers daily  Occupation: Construction foreman — physical urticaria component (pressure, heat)  Stress: Going through divorce, custody battle  Mental health: Not sleeping due to itch — affecting job performance"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance",
+      "Vital signs",
+      "Cardiovascular",
+      "Pulmonary",
+      "Abdominal",
+      "Extremities",
+      "Skin",
+      "Targeted exam"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance": "Finding consistent with this condition.",
+      "Vital signs": "Finding consistent with this condition.",
+      "Cardiovascular": "Finding consistent with this condition.",
+      "Pulmonary": "Finding consistent with this condition.",
+      "Abdominal": "Finding consistent with this condition.",
+      "Extremities": "Finding consistent with this condition.",
+      "Skin": "Finding consistent with this condition.",
+      "Targeted exam": "Finding consistent with this condition."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "this condition (correct)",
+      "Most likely alternative",
+      "Third differential",
+      "Must-not-miss 1",
+      "Must-not-miss 2",
+      "Common mimic 1",
+      "Common mimic 2"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Consider the full differential for this condition.",
+      "prematureClosure": "Complete your workup before narrowing focus.",
+      "availabilityBias": "Apply systematic clinical reasoning."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing James O'Connell: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before interviewing James O'Connell: what does the chart suggest? Top 3 diagnoses?",
+      "phase5": "After history and exam: how has your differential changed?",
+      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
     }
-}
+  }
 };

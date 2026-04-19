@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Thomas Reeves",
-  "patientHPI": "My lips are swollen again today - this is the eighth time in two years that different parts of my body have puffed up like this, including my face, hands, feet, and once even my throat. Nobody can figure out what's causing it.",
+      "patientHPI": "My lips are swollen again today - this is the eighth time in two years that different parts of my body have puffed up like this, including my face, hands, feet, and once even my throat. Nobody can figure out what's causing it.",
       "dob": "06/01/1978",
       "age": "48",
       "sex": "Male",
@@ -816,7 +816,7 @@ window.EMR_DATA = {
       "phone": "(702) 555-5566",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative",
+    "chiefComplaint": "Recurrent lip swelling",
     "diagnosis": "Idiopathic Angioedema"
   },
   "problems": [
@@ -1068,96 +1068,95 @@ window.EMR_DATA = {
       "Career",
       "Sales representative — canceled 3 business trips due to fear of episode away from hospital"
     ]
-  ]
-,
+  ],
   "references": [
-  {
-    "id": "REF-AE-004",
-    "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
-    "doi": "10.1186/1865-1380-5-39",
-    "pmid": "23131076",
-    "access": "Open Access (CC BY)",
-    "validates": [
-      "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
-      "C4 screening to distinguish HAE from other causes",
-      "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
-      "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
-      "Anti-C1-INH autoantibodies in acquired form"
-    ]
-  }
-],
+    {
+      "id": "REF-AE-004",
+      "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
+      "doi": "10.1186/1865-1380-5-39",
+      "pmid": "23131076",
+      "access": "Open Access (CC BY)",
+      "validates": [
+        "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
+        "C4 screening to distinguish HAE from other causes",
+        "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
+        "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
+        "Anti-C1-INH autoantibodies in acquired form"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
     "patientPersona": "Thomas Reeves appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 48yo with recurrent idiopathic angioedema \u2014 8th episode, lip swelling, no trigger identified, extensive workup negative start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did 48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 48M with 8th episode of angioedema in 2 years.'",
-        "character": "'It's 48yo with recurrent idiopathic angioedema \u2014 8th episode, lip swelling, no trigger identified, extensive workup negative \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Diphenhydramine; Famotidine; Methylprednisolone.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "History: 8 episodes of angioedema in 2 years \u2014 no trigger identified despite extensive workup  Workup: C4 normal, C1-INH normal, tryptase normal, no ACE inhibitor \u2014 truly idiopathic  Mental health: Anxiety about unpredictable episodes \u2014 afraid to travel or be alone  Career: Sales representative \u2014 canceled 3 business trips due to fear of episode away from hospital"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started 48M with 8th episode of angioedema in 2 years.'",
+      "character": "'It's 48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Diphenhydramine; Famotidine; Methylprednisolone.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Non-contributory",
+      "social": "History: 8 episodes of angioedema in 2 years — no trigger identified despite extensive workup  Workup: C4 normal, C1-INH normal, tryptase normal, no ACE inhibitor — truly idiopathic  Mental health: Anxiety about unpredictable episodes — afraid to travel or be alone  Career: Sales representative — canceled 3 business trips due to fear of episode away from hospital"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Working diagnosis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Thomas Reeves's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Thomas Reeves's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };
