@@ -3777,6 +3777,7 @@ function renderWorkflowBar(activeTab) {
 // -- AI TOOL SWITCHER ------------------------------------------------------
 // Shown at the top of AI tabs so learners understand each tool's purpose
 var AI_TOOLS = [
+  { id:'oral',        label:'Present Case',   icon:'🎤', desc:'Practice your oral presentation — SBAR format, recorded or typed' },
   { id:'coach',       label:'CoachDx',        icon:'🧠', desc:'Socratic AI attending — reason it out with Socratic questions' },
   { id:'autofeedback',label:'AI Feedback',    icon:'🎯', desc:'AI scores your submitted note section by section' },
   { id:'feedback',    label:'Faculty Feedback',icon:'📋', desc:'Your faculty\'s annotations and grade on your note' },
@@ -3823,7 +3824,7 @@ function renderOrderDocSwitcher(activeTab) {
 }
 
 // Patch: AI tabs prepend the switcher
-var _AI_TAB_IDS = ['coach','autofeedback','feedback'];
+var _AI_TAB_IDS = ['oral','coach','autofeedback','feedback'];
 
 // Sidebar tooltip text for AI tools
 var SIDEBAR_TOOLTIPS = {
@@ -3940,7 +3941,7 @@ function renderWorkflowBar(activeTab) {
     { id:'interview',label:'Patient Interview', icon:'🗣️', tabs:['interview'] },
     { id:'ddx',      label:'My Differential',   icon:'🧠', tabs:['ddx','crt'] },
     { id:'orders',   label:'Order & Document',  icon:'📝', tabs:['orders','documentation'] },
-    { id:'debrief',  label:'Debrief & Present', icon:'🎯', tabs:['coach','autofeedback','feedback','oral'] },
+    { id:'debrief',  label:'Debrief & Present', icon:'🎯', tabs:['oral','coach','autofeedback','feedback'] },
   ];
   var activeStep = 0;
   steps.forEach(function(s, i){ if(s.tabs.indexOf(activeTab)>=0) activeStep=i; });
@@ -5938,6 +5939,148 @@ function _buildOralScaffold() {
     + '</div>';
 }
 
+// ================================================================
+// CASE COMPLETE SCREEN
+// ================================================================
+function renderCaseComplete() {
+  // Compute what's done
+  var _hasAnalysis  = !!(typeof db==="function" && S.currentUser &&
+                         db("doc-analysis-" + S.currentUser.username + "-" + S.encounterWeek));
+  var _hasOral      = !!(typeof db==="function" && S.currentUser &&
+                         db("oral-presentation-" + S.currentUser.username + "-" + S.encounterWeek));
+  var _snaps        = (window.MissionControl && MissionControl.getDdxSnapshots) ? MissionControl.getDdxSnapshots() : [];
+  var _analysis     = _hasAnalysis && typeof db==="function" && S.currentUser
+                        ? db("doc-analysis-" + S.currentUser.username + "-" + S.encounterWeek) : null;
+  var _score        = _analysis && _analysis._total ? _analysis._total.score : null;
+  var _grade        = _analysis && _analysis._total ? _analysis._total.grade : null;
+  var _diagnosis    = (window.CRT_DATA && window.CASE_ID && CRT_DATA[CASE_ID])
+                        ? CRT_DATA[CASE_ID].diagnosis : '';
+  var _ptName       = (window.PATIENT && PATIENT.name) ? PATIENT.name : 'the patient';
+
+  // Only show if note is submitted
+  if (!S.submitted) return "";
+
+  var html = "";
+
+  // ── Completion banner ──────────────────────────────────────────
+  html += '<div style="background:linear-gradient(135deg,#0d2b3e,#1B4F72,#2874A6);border-radius:14px;padding:24px 24px 20px;margin-bottom:20px;color:#fff">';
+  html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:8px">Case Complete</div>';
+  html += '<div style="font-size:22px;font-weight:800;margin-bottom:6px">🏁 ' + esc(_ptName) + '</div>';
+  html += '<div style="font-size:13px;opacity:.8;margin-bottom:16px">Chest pain and shortness of breath · ED Encounter</div>';
+
+  // Checklist of completed steps
+  var steps = [
+    { label:"Chart Review",       done: true },
+    { label:"Patient Interview",  done: !!(window.S && S.ptMessages && S.ptMessages.length >= 2) },
+    { label:"Differential Dx",    done: _snaps.length >= 1 },
+    { label:"Orders Placed",      done: !!(window.S && ((S.labOrders&&S.labOrders.length)||(S.imgOrders&&S.imgOrders.length))) },
+    { label:"Note Written",       done: S.submitted },
+    { label:"AI Feedback",        done: _hasAnalysis },
+    { label:"Oral Presentation",  done: _hasOral },
+  ];
+  html += '<div style="display:flex;flex-wrap:wrap;gap:8px">';
+  steps.forEach(function(s) {
+    html += '<div style="padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;'
+      + 'background:' + (s.done ? 'rgba(16,185,129,.25)' : 'rgba(255,255,255,.1)') + ';'
+      + 'color:' + (s.done ? '#6EE7B7' : 'rgba(255,255,255,.4)') + ';'
+      + 'border:1px solid ' + (s.done ? 'rgba(16,185,129,.4)' : 'rgba(255,255,255,.15)') + '">'
+      + (s.done ? '✓ ' : '○ ') + s.label + '</div>';
+  });
+  html += '</div></div>';
+
+  // ── Score card ─────────────────────────────────────────────────
+  if (_score !== null) {
+    var pct = _score;
+    var gradeColor = pct>=90?"#10B981":pct>=80?"#059669":pct>=70?"#F59E0B":pct>=60?"#D97706":"#EF4444";
+    html += '<div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;'
+      + 'background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin-bottom:16px">';
+    html += '<div style="text-align:center">';
+    html += '<div style="font-size:42px;font-weight:800;color:' + gradeColor + ';line-height:1">' + (_grade||'?') + '</div>';
+    html += '<div style="font-size:12px;color:var(--text-muted)">' + pct + ' / 100</div>';
+    html += '</div>';
+    html += '<div>';
+    html += '<div style="font-size:13px;font-weight:700;color:#1B3A5C;margin-bottom:6px">Documentation Score</div>';
+    if (_analysis && _analysis._aiSummary) {
+      html += '<div style="font-size:12px;color:#374151;line-height:1.6">' + esc(_analysis._aiSummary) + '</div>';
+    }
+    html += '</div></div>';
+  }
+
+  // ── Correct diagnosis reveal ───────────────────────────────────
+  if (_diagnosis) {
+    html += '<div style="background:#FEF3C7;border:1px solid #FDE68A;border-left:4px solid #F59E0B;border-radius:10px;padding:14px 18px;margin-bottom:16px">';
+    html += '<div style="font-size:10px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px">Confirmed Diagnosis</div>';
+    html += '<div style="font-size:16px;font-weight:800;color:#78350F;margin-bottom:4px">' + esc(_diagnosis) + '</div>';
+    html += '<div style="font-size:11px;color:#92400E;line-height:1.5">Compare this to your final differential. Was your leading diagnosis correct? Did you include it from the start?</div>';
+    html += '</div>';
+  }
+
+  // ── DDx progression ────────────────────────────────────────────
+  if (_snaps.length) {
+    html += '<div style="background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:16px">';
+    html += '<div style="font-size:12px;font-weight:700;color:#1B3A5C;margin-bottom:10px">📊 Your DDx Progression</div>';
+    var SNAP_LABELS = {
+      "initial":"① Initial (chart only)",
+      "post-interview":"② Post-Interview",
+      "post-exam":"③ Post-Exam",
+      "post-results":"④ Post-Results"
+    };
+    _snaps.forEach(function(snap) {
+      var label = SNAP_LABELS[snap.checkpoint] || snap.checkpoint;
+      html += '<div style="margin-bottom:10px;padding:8px 12px;background:#fff;border-radius:6px;border:1px solid var(--border-light)">';
+      html += '<div style="font-size:10px;font-weight:700;color:#2874A6;margin-bottom:4px">' + label + '</div>';
+      if (snap.entries && snap.entries.length) {
+        snap.entries.forEach(function(e, i) {
+          var isMNM = e.category === "must-not-miss";
+          html += '<div style="font-size:11px;color:#374151;padding:2px 0">'
+            + '<span style="color:#94A3B8;margin-right:4px">#' + (i+1) + '</span>'
+            + esc(e.diagnosis||"")
+            + (isMNM ? ' <span style="color:#DC2626;font-size:10px">[MNM]</span>' : '')
+            + ' <span style="color:#94A3B8">(' + (e.confidence||50) + '%)</span>'
+            + '</div>';
+        });
+      } else {
+        html += '<div style="font-size:11px;color:#94A3B8;font-style:italic">No entries</div>';
+      }
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  // ── What to do next ────────────────────────────────────────────
+  var _todos = [];
+  if (!_hasAnalysis)  _todos.push({ icon:"🎯", label:"Get AI Feedback", action:"switchTab('autofeedback')" });
+  if (!_hasOral)      _todos.push({ icon:"🎤", label:"Practice Oral Presentation", action:"switchTab('oral')" });
+  if (!_snaps.find(function(s){return s.checkpoint==='post-results';}))
+    _todos.push({ icon:"🧠", label:"Commit your final DDx", action:"switchTab('ddx')" });
+
+  if (_todos.length) {
+    html += '<div style="background:#EBF5FB;border:1px solid rgba(40,116,166,.2);border-radius:10px;padding:14px 18px;margin-bottom:16px">';
+    html += '<div style="font-size:12px;font-weight:700;color:#1B3A5C;margin-bottom:10px">Still to complete:</div>';
+    html += '<div style="display:flex;flex-direction:column;gap:8px">';
+    _todos.forEach(function(t) {
+      html += '<button type="button" onclick="' + t.action + '" '
+        + 'style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border:1px solid rgba(40,116,166,.2);'
+        + 'border-radius:8px;cursor:pointer;font-family:inherit;text-align:left">'
+        + '<span style="font-size:18px">' + t.icon + '</span>'
+        + '<span style="font-size:13px;font-weight:600;color:#1B3A5C">' + t.label + '</span>'
+        + '<span style="margin-left:auto;font-size:12px;color:#2874A6">→</span>'
+        + '</button>';
+    });
+    html += '</div></div>';
+  } else {
+    // Fully complete
+    html += '<div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:10px;padding:14px 18px;margin-bottom:16px;text-align:center">';
+    html += '<div style="font-size:24px;margin-bottom:6px">🎉</div>';
+    html += '<div style="font-size:14px;font-weight:700;color:#065F46;margin-bottom:4px">Case fully complete!</div>';
+    html += '<div style="font-size:12px;color:#047857">You have completed all steps for this encounter. Review your AI feedback and DDx progression above.</div>';
+    html += '</div>';
+  }
+
+  return sectionCard("Case Summary — " + esc(_ptName), "🏁", html);
+}
+
+
 function renderOralPresentation() {
   const saved = db("oral-presentation-" + S.currentUser.username + "-" + S.encounterWeek);
   const analysis = db("oral-analysis-" + S.currentUser.username + "-" + S.encounterWeek);
@@ -6305,10 +6448,22 @@ render = function(){
   fn.grading = function(){ return renderGrading() + renderFacultyValidation(); };
   fn.admin = renderAdmin;
   fn.program_settings = function(){ return '<div style="padding:4px"><div style="font-size:16px;font-weight:700;color:#1E293B;margin-bottom:16px">Program Settings</div>' + (typeof RDXFacultyDashboard !== "undefined" ? '<button onclick="RDXRubricBuilder.open()" style="padding:12px 24px;background:#2874A6;color:#fff;border:none;border-radius:10px;font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;margin-bottom:12px">📋 Edit Program Rubric</button><br>' : "") + '<p style="font-size:13px;color:#64748B;line-height:1.6">Configure your program name, grading rubric, and accent color. Changes apply immediately for all students in your program.</p></div>'; };
-  fn.oral = renderOralPresentation;
-  fn.autofeedback = renderAutoFeedback;
+  fn.oral = function() {
+    var _sw = (typeof renderAISwitcher==='function') ? renderAISwitcher('oral') : '';
+    var _cc = (typeof renderCaseComplete==='function' && window.S && S.submitted) ? renderCaseComplete() : '';
+    return _sw + _cc + renderOralPresentation();
+  };
+  fn.autofeedback = function() {
+    var _sw = (typeof renderAISwitcher==='function') ? renderAISwitcher('autofeedback') : '';
+    var _cc = (typeof renderCaseComplete==='function' && window.S && S.submitted) ? renderCaseComplete() : '';
+    return _sw + _cc + renderAutoFeedback();
+  };
   fn.handoff = renderHandoff;
-  fn.coach = renderCoachDx;
+  fn.coach = function() {
+    var _sw = (typeof renderAISwitcher==='function') ? renderAISwitcher('coach') : '';
+    var _cc = (typeof renderCaseComplete==='function' && window.S && S.submitted) ? renderCaseComplete() : '';
+    return _sw + _cc + renderCoachDx();
+  };
   fn.guided = function(){ return window.GuidedMode&&GuidedMode.isActive()?GuidedMode.renderPhase():'<p>Guided mode unavailable.</p>'; };
   fn.crt = function(){
     var _sw = (typeof renderAISwitcher==='function') ? renderAISwitcher('crt') : '';
