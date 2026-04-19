@@ -926,37 +926,6 @@ window.EMR_DATA = {
     ]
   }
 ],
-  "guided": {
-    "supported": true,
-    "patientPersona": "Jasmine Cooper is alert and cooperative, clearly concerned but provides a clear history.",
-    "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
-    ],
-    "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Cetirizine; Diphenhydramine.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Context: Post-viral urticaria \u2014 parents think it's food allergy and want extensive testing  Viral illness: URI 5 days ago, now diffuse hives for 3 days  Parental anxiety: Parents restricting diet to rice and chicken \u2014 unnecessary food restriction  Issue: Overdiagnosis \u2014 post-viral urticaria does NOT need allergy workup, but parents demanding it"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -995,6 +964,84 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Jasmine Cooper: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jasmine is a tired but cooperative 5-year-old who seems uncomfortable from the itching but is not in distress. She answers questions simply and honestly, occasionally scratching at the raised bumps on her skin.",
+    "interviewQuestions": [
+        "When did you first notice the bumps on your skin?",
+        "Can you show me where the bumps are on your body?",
+        "Do the bumps itch or hurt?",
+        "Have you been sick recently with a cold or fever?",
+        "Have you eaten any new foods in the past week?",
+        "Have you taken any new medicines recently?",
+        "Do you have trouble breathing or swallowing?",
+        "Is your face or lips swollen?",
+        "Do the bumps stay in the same place or do they move around?",
+        "Have you been stung by any bugs or bees?",
+        "Have you used any new soaps, lotions, or detergents?",
+        "Have you had bumps like this before?",
+        "What medicines are you taking now for the bumps?"
+    ],
+    "patientResponses": {
+        "default": "I don't understand what you mean. Can you ask me differently?",
+        "onset": "The bumps started three days ago. They came up all over and were really itchy.",
+        "character": "They're raised bumps that are red and really itchy. They look like mosquito bites but bigger.",
+        "location": "They're all over - on my arms, legs, back, and tummy. They move around to different places.",
+        "severity": "The itching is about a 7 out of 10. It's really bothering me and I can't stop scratching.",
+        "aggravating": "They seem worse when I get warm or when I scratch them. They itch more at night.",
+        "relieving": "The medicine mommy gives me helps a little bit. Cool baths make them feel better too.",
+        "associated": "I don't have any other problems now. I was sick with a runny nose and felt hot a few days before the bumps came.",
+        "denies": "My face isn't swollen and I can breathe fine. My throat doesn't hurt and I can swallow okay.",
+        "history": "I've never had bumps like this before. This is the first time.",
+        "medications": "Cetirizine; Diphenhydramine",
+        "allergies": "NKDA",
+        "family": "Nobody in my family gets bumps like this. Mommy and daddy don't have allergies.",
+        "social": "I go to kindergarten. I haven't been around any new animals or been anywhere different lately."
+    },
+    "examManeuvers": [
+        "Inspect skin for distribution and morphology of lesions",
+        "Assess for angioedema of face, lips, and eyelids",
+        "Examine oral cavity and throat",
+        "Palpate neck for lymphadenopathy",
+        "Auscultate lungs for wheezing",
+        "Assess work of breathing and respiratory distress",
+        "Check capillary refill and peripheral perfusion",
+        "Assess overall appearance and level of distress",
+        "Examine individual wheals for blanching",
+        "Document vital signs stability"
+    ],
+    "examFindings": {
+        "Inspect skin for distribution and morphology of lesions": "Multiple raised, erythematous wheals of varying sizes (0.5-3cm) distributed over trunk, arms, and legs. Individual lesions have pale centers with raised erythematous borders.",
+        "Assess for angioedema of face, lips, and eyelids": "No facial, lip, or eyelid swelling. Normal facial symmetry.",
+        "Examine oral cavity and throat": "Oral cavity and oropharynx appear normal without swelling or erythema.",
+        "Palpate neck for lymphadenopathy": "No cervical lymphadenopathy palpated.",
+        "Auscultate lungs for wheezing": "Clear breath sounds bilaterally without wheezing, stridor, or other adventitious sounds.",
+        "Assess work of breathing and respiratory distress": "Normal work of breathing, no use of accessory muscles, speaking in full sentences.",
+        "Check capillary refill and peripheral perfusion": "Capillary refill <2 seconds, warm extremities with good perfusion.",
+        "Assess overall appearance and level of distress": "Alert, interactive child in no acute distress. Occasionally scratches at lesions but otherwise comfortable.",
+        "Examine individual wheals for blanching": "Individual wheals blanch with pressure and have raised borders typical of urticaria.",
+        "Document vital signs stability": "Vital signs stable and age-appropriate: HR 108, Temp 37.2°C, SpO2 99%."
+    },
+    "ddxTargets": [
+        "Post-viral acute urticaria (correct diagnosis)",
+        "Food-induced urticaria",
+        "Contact dermatitis",
+        "Anaphylaxis (must-not-miss diagnosis 1)",
+        "Angioedema (must-not-miss diagnosis 2)",
+        "Viral exanthem (common mimic 1)",
+        "Insect bite reaction (common mimic 2)"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on parental concern about food allergy and ordering unnecessary extensive allergy testing despite low pre-test probability.",
+        "prematureClosure": "Risk of stopping evaluation once hives are confirmed without considering post-viral etiology and inappropriately attributing to food allergy.",
+        "availabilityBias": "Risk of overestimating food allergy likelihood due to parental anxiety and recent media attention to food allergies in children."
+    },
+    "coachPrompts": {
+        "phase2": "Good start on your differential. As you interview this patient, pay particular attention to the timeline of symptoms and any recent illnesses. Also consider: what's the most common cause of acute urticaria in children? How does this differ from chronic urticaria?",
+        "phase5": "Excellent history and physical. You've established this is acute urticaria without systemic symptoms. Now think critically: what does the timeline tell you about the likely trigger? The parents want extensive allergy testing - is this indicated given your findings?",
+        "finalDebrief": "This case highlights post-viral acute urticaria, the most common cause of hives in children. The key teaching points: 1) Temporal relationship between viral URI and hives, 2) Acute urticaria (<6 weeks) rarely needs extensive workup, 3) 'Allergy panels' have poor specificity and lead to unnecessary dietary restrictions when pre-test probability is low. How will you counsel the parents about avoiding overdiagnosis while addressing their concerns?"
     }
 }
 };

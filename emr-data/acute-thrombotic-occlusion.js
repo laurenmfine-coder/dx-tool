@@ -329,39 +329,6 @@ window.EMR_DATA = {
     "presentation": "Vascular Emergency",
     "category": "vascular"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Richard Hawkins is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My right leg is getting worse again - the muscle cramps up after just half a blo.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Thrombotic Arterial Occlusion.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Insulin Glargine 28 units QHS; Metformin 1000mg BID; Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg QHS; Lisinopril 40mg daily; Amlodipine 10mg daily; Pregabalin 75mg BID.'",
-        "allergies": "'My allergies are Ciprofloxacin.'",
-        "family": "Father: PAD, below-knee amputation age 68 (deceased at 72)  Mother: T2DM, stroke at 74 (deceased at 78)  Brother: MI at age 58, alive",
-        "social": "Occupation: Retired electrician  Marital: Married  Tobacco: Former \u2014 35 pack-years (1.5 PPD x ~23 years); quit 2020  Alcohol: Rare \u2014 1-2 drinks/month  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -400,6 +367,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Richard Hawkins's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Thrombotic Arterial Occlusion. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard appears anxious and frustrated, frequently shifting his weight and favoring his right leg. He's cooperative but expresses disappointment about his worsening symptoms despite previous interventions, showing moderate distress about potential implications for his mobility.",
+    "interviewQuestions": [
+        "Can you describe exactly what you mean by muscle cramps - where do you feel them?",
+        "How far could you walk before without stopping, compared to now?",
+        "When did you first notice the cramping getting worse again?",
+        "Tell me about the coldness in your right foot - when do you notice it most?",
+        "What procedure did you have last year, and when exactly?",
+        "Do you have any pain in your right leg or foot at rest?",
+        "Have you noticed any color changes in your right leg or foot?",
+        "Any numbness or tingling that's different from your usual neuropathy?",
+        "Have you been taking all your medications as prescribed?",
+        "Any recent injuries, prolonged sitting, or travel?",
+        "Do you have chest pain, shortness of breath, or heart palpitations?",
+        "Have you noticed any weakness in your right leg?",
+        "Any swelling in either leg?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure I understand what you're asking - can you explain that differently?",
+        "onset": "The cramping has been getting progressively worse over the past 2-3 weeks, but really bad since yesterday morning when I could barely make it to my mailbox.",
+        "character": "It's a severe cramping pain in my right calf muscle, like a charley horse that won't let up when I walk. Sharp and tight.",
+        "location": "The cramping is mainly in my right calf, but sometimes I feel it in my thigh too. The coldness is definitely in my right foot.",
+        "severity": "The pain is about an 8 out of 10 when it hits. I have to stop walking and wait for it to ease up before I can continue.",
+        "aggravating": "Any walking makes it worse - even just a few steps now. Cold weather seems to make the foot feel even colder.",
+        "relieving": "I have to stop and rest for the cramping to go away. Sitting down helps, but it comes right back when I start walking again.",
+        "associated": "My right foot feels noticeably colder than my left, and sometimes it looks a bit paler. I've been more tired lately too.",
+        "denies": "No chest pain, no shortness of breath at rest, no swelling in my legs, no recent falls or injuries.",
+        "history": "I had similar symptoms about 18 months ago that led to an angioplasty with stent placement in my right leg. It helped for a while, but this feels like it's coming back.",
+        "medications": "Insulin Glargine 28 units QHS; Metformin 1000mg BID; Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg QHS; Lisinopril 40mg daily; Amlodipine 10mg daily; Pregabalin 75mg BID",
+        "allergies": "Ciprofloxacin",
+        "family": "My father had bad circulation problems and ended up losing his leg below the knee when he was 68. My mother had diabetes and a stroke.",
+        "social": "I'm a retired electrician, been married for 40 years. I quit smoking in 2020 after smoking about a pack and a half a day for over 20 years. I barely drink - maybe a beer or two a month."
+    },
+    "examManeuvers": [
+        "Palpation of femoral pulses bilaterally",
+        "Palpation of popliteal pulses bilaterally",
+        "Palpation of dorsalis pedis pulses bilaterally",
+        "Palpation of posterior tibial pulses bilaterally",
+        "Assessment of skin temperature in both feet",
+        "Inspection of skin color and appearance of both legs",
+        "Capillary refill testing in both feet",
+        "Ankle-brachial index measurement",
+        "Assessment of hair growth on lower extremities",
+        "Examination of toenails for changes"
+    ],
+    "examFindings": {
+        "Palpation of femoral pulses bilaterally": "Left femoral pulse 2+, right femoral pulse 1+ and slightly diminished",
+        "Palpation of popliteal pulses bilaterally": "Left popliteal pulse 1+, right popliteal pulse barely palpable",
+        "Palpation of dorsalis pedis pulses bilaterally": "Left dorsalis pedis 1+, right dorsalis pedis absent",
+        "Palpation of posterior tibial pulses bilaterally": "Left posterior tibial 1+, right posterior tibial absent",
+        "Assessment of skin temperature in both feet": "Right foot noticeably cooler than left foot to palpation",
+        "Inspection of skin color and appearance of both legs": "Right foot appears pale compared to left, with mild mottling. Bilateral hairless shins.",
+        "Capillary refill testing in both feet": "Left foot capillary refill 2 seconds, right foot capillary refill >4 seconds",
+        "Ankle-brachial index measurement": "Left ABI 0.7, right ABI 0.4",
+        "Assessment of hair growth on lower extremities": "Bilateral absence of hair on lower legs and feet",
+        "Examination of toenails for changes": "Bilateral thick, dystrophic toenails consistent with chronic ischemia"
+    },
+    "ddxTargets": [
+        "Acute Thrombotic Arterial Occlusion (correct diagnosis)",
+        "Acute arterial embolism",
+        "Chronic limb-threatening ischemia progression",
+        "Acute compartment syndrome",
+        "Acute deep vein thrombosis",
+        "Severe claudication from restenosis",
+        "Diabetic peripheral neuropathy exacerbation"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on diabetic neuropathy given his known diabetes, missing the acute vascular emergency requiring immediate intervention",
+        "prematureClosure": "May stop at 'worsening PAD' without recognizing the acute thrombotic component that makes this limb-threatening",
+        "availabilityBias": "Recent cases of diabetic complications might overshadow the acute arterial pathology requiring urgent revascularization"
+    },
+    "coachPrompts": {
+        "phase2": "You've identified some reasonable possibilities for leg pain in a diabetic patient with PAD. Before you interview Richard, think about the timeline he's describing - what does 'getting worse again' after a previous procedure suggest? How might you differentiate between chronic progression versus an acute change?",
+        "phase5": "Your physical exam reveals some concerning findings. Look at the pattern of absent pulses and the ABI results - what do these suggest about the level and severity of arterial compromise? Given his symptom progression over 2-3 weeks, how does this change your diagnostic thinking?",
+        "finalDebrief": "This case illustrates the importance of recognizing acute-on-chronic arterial disease. Richard's acute thrombotic occlusion likely occurred at his previous stent site. The key differentiating features were the rapid symptom progression, absent distal pulses, and severely reduced ABI. Early recognition is crucial as this represents a limb-threatening emergency requiring urgent vascular intervention."
     }
 }
 };

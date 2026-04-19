@@ -324,39 +324,6 @@ window.EMR_DATA = {
     "presentation": "Vascular Emergency",
     "category": "vascular"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Dorothy Chambers appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm worried about when I can start my blood thinner again after being in the hos.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Superior Mesenteric Artery Embolism.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 12.5mg daily; Metformin 500mg BID; Pantoprazole 40mg BID; Atorvastatin 40mg QHS.'",
-        "allergies": "'My allergies are Sulfa drugs (Trimethoprim-Sulfamethoxazole).'",
-        "family": "Father: Stroke at age 72 (deceased)  Mother: HTN, CHF, deceased at 80  Sister: Atrial fibrillation, DVT, alive at 74",
-        "social": "Occupation: Retired postal worker  Marital: Widowed (husband deceased 2016)  Tobacco: Never smoker  Alcohol: None \u2014 lifelong abstainer  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -395,6 +362,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Dorothy Chambers's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Superior Mesenteric Artery Embolism. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Dorothy appears anxious and worried, frequently touching her abdomen and shifting uncomfortably in her chair. She is forthcoming about her symptoms but seems more focused on her concerns about restarting her blood thinner than her current abdominal pain. She displays moderate distress, speaking in a slightly hurried manner and asking repeated questions about her medications.",
+    "interviewQuestions": [
+        "Can you tell me about your current abdominal pain?",
+        "When did this abdominal pain start?",
+        "How would you describe the quality of the pain?",
+        "Where exactly is the pain located and does it go anywhere?",
+        "On a scale of 1-10, how severe is your pain?",
+        "What makes the pain worse or better?",
+        "Have you had any nausea, vomiting, or changes in bowel movements?",
+        "Have you had any fever, chills, or other symptoms?",
+        "Tell me about your recent hospitalization for stomach bleeding",
+        "When did you stop taking your blood thinner?",
+        "Have you ever had pain like this before?",
+        "What medications are you currently taking?",
+        "Do you have any drug allergies?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, I'm having trouble focusing on anything other than this pain and my worry about my heart medication. Could you repeat that?",
+        "onset": "The pain started about 6 hours ago, maybe around 2 AM. It woke me up from sleep and has been getting worse since then. It started suddenly, like someone stabbed me.",
+        "character": "It's a terrible cramping pain, like someone is twisting my insides. It comes and goes but when it hits, it takes my breath away. I've never felt anything quite like this before.",
+        "location": "It's mainly around my belly button and the middle of my stomach. Sometimes it feels like it spreads across my whole belly, but it's worst right in the center.",
+        "severity": "Right now it's about a 7 or 8 out of 10. When it really cramps up, it's definitely a 9. It's making it hard for me to sit still or think about anything else.",
+        "aggravating": "It seems to get worse when I try to eat anything. Even sips of water seem to make the cramping worse. Moving around doesn't seem to help or hurt it.",
+        "relieving": "Nothing really helps. I tried some Tylenol but it didn't touch it. I've been trying to curl up in different positions but nothing gives me relief.",
+        "associated": "I've been feeling nauseous and I vomited twice this morning - just clear fluid. I feel like I need to have a bowel movement but when I try, nothing much comes out. I'm also feeling dizzy when I stand up.",
+        "denies": "No fever that I know of, no chest pain right now, no blood in my vomit this time. The black stools from my stomach bleeding stopped about a week ago.",
+        "history": "I've never had abdominal pain like this before. My recent stomach bleeding was different - more of a dull ache and I was seeing black stools. This is completely different.",
+        "medications": "Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 12.5mg daily; Metformin 500mg BID; Pantoprazole 40mg BID; Atorvastatin 40mg QHS",
+        "allergies": "Sulfa drugs (Trimethoprim-Sulfamethoxazole)",
+        "family": "My father had a stroke and my sister has blood clots and the same heart rhythm problem I do. My mother had heart failure like me. I'm worried about clots since I've been off my blood thinner for two weeks.",
+        "social": "I'm a retired postal worker, been widowed for about 8 years now. I've never smoked and don't drink alcohol at all. I try to stay active but this pain is really limiting me today."
+    },
+    "examManeuvers": [
+        "Abdominal inspection",
+        "Auscultation of bowel sounds",
+        "Light palpation of abdomen",
+        "Deep palpation of abdomen",
+        "Assessment for peritoneal signs",
+        "Palpation of peripheral pulses",
+        "Cardiovascular examination",
+        "Assessment for signs of dehydration",
+        "Digital rectal examination",
+        "Assessment of extremities for embolic phenomena"
+    ],
+    "examFindings": {
+        "Abdominal inspection": "Abdomen appears mildly distended with no visible masses, scars from previous surgery, or skin changes",
+        "Auscultation of bowel sounds": "Bowel sounds are diminished throughout all quadrants with occasional high-pitched sounds",
+        "Light palpation of abdomen": "Mild tenderness to light palpation in the periumbilical and epigastric regions without guarding",
+        "Deep palpation of abdomen": "Moderate tenderness in the periumbilical region with deep palpation, no masses palpable, patient grimaces with deeper pressure",
+        "Assessment for peritoneal signs": "No rebound tenderness or rigid abdomen, negative Murphy's sign, no McBurney's point tenderness",
+        "Palpation of peripheral pulses": "Peripheral pulses are diminished but palpable bilaterally, no obvious asymmetry",
+        "Cardiovascular examination": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs, rubs, or gallops",
+        "Assessment for signs of dehydration": "Mild tachycardia, dry mucous membranes, skin tenting suggests mild dehydration",
+        "Digital rectal examination": "No blood, normal sphincter tone, no masses palpable",
+        "Assessment of extremities for embolic phenomena": "No obvious signs of peripheral emboli, capillary refill slightly delayed at 3 seconds"
+    },
+    "ddxTargets": [
+        "Acute Superior Mesenteric Artery Embolism (correct diagnosis)",
+        "Acute mesenteric ischemia (thrombotic)",
+        "Small bowel obstruction",
+        "Acute myocardial infarction",
+        "Pulmonary embolism",
+        "Peptic ulcer disease with complications",
+        "Acute cholangitis"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on recent GI bleeding and focusing only on gastric causes while missing the embolic etiology in a patient with untreated atrial fibrillation",
+        "prematureClosure": "May prematurely close on common causes of abdominal pain in elderly patients without considering vascular emergency given her cardiac risk factors",
+        "availabilityBias": "Recent experience with more common GI conditions may overshadow consideration of rare but life-threatening mesenteric ischemia"
+    },
+    "coachPrompts": {
+        "phase2": "You've identified some reasonable initial differentials. Now, before you interview the patient, take a moment to consider this patient's specific risk factors. What underlying conditions might predispose her to certain types of emergencies? How might her recent medication changes affect your differential?",
+        "phase5": "You've gathered good history and physical exam findings. The patient has severe abdominal pain that seems out of proportion to your physical findings, along with some concerning risk factors. What does the combination of atrial fibrillation, recent anticoagulation cessation, and this pain pattern suggest to you?",
+        "finalDebrief": "This case highlights the importance of considering embolic complications in patients with atrial fibrillation, especially when anticoagulation is interrupted. The classic presentation of severe pain out of proportion to physical findings, combined with her cardiac risk factors, should have pointed toward mesenteric ischemia. How did your differential evolve as you gathered more information about her cardiac history and medication timeline?"
     }
 }
 };

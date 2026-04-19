@@ -308,39 +308,6 @@ window.EMR_DATA = {
     "presentation": "GI Emergency",
     "category": "gastrointestinal"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Terrence Jackson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm still drinking heavily - about a pint of vodka and six beers a day - and I k.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Alcohol-Related Acute Pancreatitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Omeprazole 40mg daily; Pancrelipase (Creon) 36,000 units TID; Folic acid 1mg daily; Thiamine 100mg daily; Multivitamin daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: T2DM, hypertension, alive at 70  Father: Alcohol use disorder, cirrhosis, deceased at 56  Sister: Healthy, age 42",
-        "social": "Occupation: Unemployed; former warehouse worker \u2014 lost job due to absenteeism  Marital: Divorced \u2014 2020  Tobacco: Current smoker \u2014 1 PPD x 24 years (24 pack-years)  Alcohol: Heavy daily use \u2014 approximately 1 pint vodka + 6 beers daily x 15+ years; prior detox x2 without sustained sobriety  Drugs: Denies current; remote marijuana use"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -379,6 +346,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Terrence Jackson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Alcohol-Related Acute Pancreatitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Terrence appears anxious and uncomfortable, shifting frequently due to abdominal pain. He's forthright about his continued drinking but shows some defensiveness about his alcohol use. His distress is evident through grimacing and holding his abdomen while speaking.",
+    "interviewQuestions": [
+        "Can you describe the pain you're experiencing right now?",
+        "When did this current episode of pain begin?",
+        "On a scale of 1-10, how severe is your pain?",
+        "Does the pain radiate anywhere else in your body?",
+        "What makes the pain worse or better?",
+        "Have you had any nausea or vomiting?",
+        "Tell me about your current alcohol consumption",
+        "When was your last drink?",
+        "Have you noticed any changes in your bowel movements?",
+        "Are you taking your prescribed medications regularly?",
+        "Have you had episodes like this before?",
+        "Any fever, chills, or weight loss recently?",
+        "Have you eaten anything unusual or different lately?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, could you ask that differently? The pain is making it hard to concentrate.",
+        "onset": "This flare started about 8 hours ago, right after I had some greasy fast food for lunch. It came on gradually but got much worse over the past few hours.",
+        "character": "It's a deep, boring pain that feels like someone is stabbing me with a hot knife. It's constant and gnawing.",
+        "location": "The pain is right here in my upper belly, but it goes straight through to my back like a band around me.",
+        "severity": "Right now it's about an 8 out of 10. I can barely sit still and it's making me feel sick to my stomach.",
+        "aggravating": "Eating makes it much worse, especially anything fatty or greasy. Lying flat on my back is unbearable. Even drinking alcohol makes it worse now.",
+        "relieving": "Leaning forward helps a little bit. I tried some ibuprofen but it didn't touch it. Nothing really makes it go away completely.",
+        "associated": "I've been nauseous and threw up a few times this morning. My stools are still loose and greasy, floating in the toilet. I feel weak and have no appetite.",
+        "denies": "No chest pain, no trouble breathing, no blood in my vomit or stool. No yellowing of my skin that I've noticed.",
+        "history": "I've had similar episodes before, but this one seems worse. I was hospitalized about 6 months ago for the same thing. I keep having these flares every few months.",
+        "medications": "Omeprazole 40mg daily; Pancrelipase (Creon) 36,000 units TID; Folic acid 1mg daily; Thiamine 100mg daily; Multivitamin daily",
+        "allergies": "NKDA",
+        "family": "My father died from complications of drinking - he had cirrhosis. My mother has diabetes and high blood pressure but she's still alive.",
+        "social": "I lost my warehouse job last year because I kept missing work. I'm divorced as of 2020. I smoke about a pack a day and I'm still drinking heavily - about a pint of vodka and six beers every day. I know I need to stop but it's hard."
+    },
+    "examManeuvers": [
+        "Abdominal inspection",
+        "Abdominal palpation",
+        "Epigastric tenderness assessment",
+        "Murphy's sign",
+        "Cullen's sign assessment",
+        "Grey Turner's sign assessment",
+        "Bowel sounds auscultation",
+        "CVA tenderness",
+        "Jaundice assessment",
+        "Assessment for abdominal distension"
+    ],
+    "examFindings": {
+        "Abdominal inspection": "Abdomen appears mildly distended, patient guarding and appears uncomfortable",
+        "Abdominal palpation": "Marked epigastric tenderness with voluntary guarding, no rebound tenderness",
+        "Epigastric tenderness assessment": "Severe tenderness in epigastrium with radiation to back",
+        "Murphy's sign": "Negative",
+        "Cullen's sign assessment": "Absent - no periumbilical ecchymosis",
+        "Grey Turner's sign assessment": "Absent - no flank ecchymosis",
+        "Bowel sounds auscultation": "Hypoactive bowel sounds throughout",
+        "CVA tenderness": "Negative bilaterally",
+        "Jaundice assessment": "No scleral icterus or skin jaundice noted",
+        "Assessment for abdominal distension": "Mild distension present, no visible masses"
+    },
+    "ddxTargets": [
+        "Alcohol-Related Acute Pancreatitis (correct diagnosis)",
+        "Acute cholangitis",
+        "Peptic ulcer disease with perforation",
+        "Myocardial infarction",
+        "Mesenteric ischemia",
+        "Acute cholecystitis",
+        "Gastritis/GERD exacerbation"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on chronic pancreatitis history and missing acute exacerbation or complications like pancreatic necrosis or pseudocyst formation",
+        "prematureClosure": "May prematurely attribute all symptoms to known chronic pancreatitis without considering acute complications or alternative diagnoses like biliary obstruction",
+        "availabilityBias": "Recent cases of gallbladder disease or peptic ulcer disease may inappropriately influence diagnosis despite classic pancreatitis presentation"
+    },
+    "coachPrompts": {
+        "phase2": "You've identified several possibilities for epigastric pain. Given this patient's specific history and risk factors, what key historical elements will help you differentiate between pancreatitis, biliary disease, and other causes? What red flags should you specifically ask about?",
+        "phase5": "Now that you have the full clinical picture, let's think systematically about your findings. The patient has epigastric pain radiating to the back, triggered by fatty food, in someone with chronic alcohol use. How do these findings support or refute your differential diagnoses? What's missing from your exam that might be important?",
+        "finalDebrief": "This case demonstrates classic acute-on-chronic pancreatitis in an alcohol-dependent patient. Notice how the patient's ongoing alcohol use, characteristic pain pattern, and associated GI symptoms pointed toward pancreatic pathology. What clinical clues helped you distinguish this from biliary causes? How might this patient's prognosis and management differ from someone with a first episode of pancreatitis?"
     }
 }
 };

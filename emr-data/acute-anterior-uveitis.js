@@ -265,39 +265,6 @@ window.EMR_DATA = {
     "presentation": "Eye Emergency",
     "category": "ophthalmologic"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Marcus Williams appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My back has been getting stiff again over the past couple weeks, especially in t.'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Anterior Uveitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Adalimumab (Humira) 40mg SQ every 2 weeks; Naproxen 500mg BID PRN; Omeprazole 20mg daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Psoriasis, alive at 62  Father: HTN, T2DM, alive at 65  Brother: HLA-B27 positive, asymptomatic, age 33",
-        "social": "Occupation: Graphic designer \u2014 remote work  Marital: Single  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks on weekends  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -336,6 +303,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Marcus Williams's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Anterior Uveitis (HLA-B27-Associated, Recurrent, in Ankylosing Spondylitis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Marcus appears anxious and is squinting frequently, holding his hand up to shield his left eye from the room lights. He's cooperative and articulate about his symptoms, clearly frustrated that his eye problem has returned despite being on treatment for his ankylosing spondylitis.",
+    "interviewQuestions": [
+        "When did your eye symptoms start and how did they develop?",
+        "Can you describe the eye pain - is it sharp, dull, aching?",
+        "Is the pain worse with bright lights or eye movement?",
+        "Have you noticed any changes in your vision or blurriness?",
+        "You mentioned this happened before - when was that and how was it treated?",
+        "How has your back stiffness been recently compared to usual?",
+        "Are you taking your medications as prescribed?",
+        "Have you had any recent infections, injuries, or stress?",
+        "Any discharge from the eye or crusting of the eyelids?",
+        "Any headache, nausea, or feeling unwell overall?",
+        "Have you noticed any other joint pain or swelling recently?",
+        "Any skin rashes or changes in bowel habits?",
+        "Any recent travel or new exposures?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure what you mean by that - could you ask it differently? I'm mainly worried about my eye right now.",
+        "onset": "The eye pain started yesterday morning when I woke up, and it's gotten progressively worse. My back stiffness has been building up over the past two weeks.",
+        "character": "The eye pain is a deep, aching pain that gets much sharper when I'm in bright light. It feels like there's pressure behind my eye.",
+        "location": "It's definitely my left eye - the same eye that had problems about three years ago. The pain is deep inside the eye, not on the surface.",
+        "severity": "The eye pain is about an 8 out of 10 in bright light, maybe a 5 or 6 in dim light. It's really affecting my ability to work on the computer.",
+        "aggravating": "Bright lights make it so much worse - even normal room lighting bothers me. Looking at my computer screen is almost impossible right now.",
+        "relieving": "Staying in a dark room helps some. I tried some over-the-counter eye drops but they didn't help at all.",
+        "associated": "My back has been really stiff in the mornings, taking longer to loosen up than usual. The eye is definitely red and teary.",
+        "denies": "No discharge from my eye, no headache, no nausea, no fever. My vision seems okay when the pain isn't too bad.",
+        "history": "This same thing happened about three years ago in the same eye. I saw an eye doctor who said it was related to my ankylosing spondylitis and gave me steroid eye drops.",
+        "medications": "Adalimumab (Humira) 40mg SQ every 2 weeks; Naproxen 500mg BID PRN; Omeprazole 20mg daily",
+        "allergies": "NKDA",
+        "family": "My mom has psoriasis and my brother tested positive for the same genetic marker I have - HLA-B27 - but he doesn't have any symptoms. My dad has diabetes and high blood pressure.",
+        "social": "I'm a graphic designer and work from home mostly. I don't smoke, drink socially on weekends, and don't use drugs. This eye problem is really impacting my work since I can't look at screens."
+    },
+    "examManeuvers": [
+        "Visual acuity testing",
+        "Pupillary light reflex and relative afferent pupillary defect",
+        "Slit-lamp examination of anterior chamber",
+        "Conjunctival and scleral examination",
+        "Intraocular pressure measurement",
+        "Fundoscopic examination",
+        "Extraocular muscle movement testing",
+        "Spinal range of motion and Schober test",
+        "Sacroiliac joint compression tests",
+        "General skin examination for rashes"
+    ],
+    "examFindings": {
+        "Visual acuity testing": "20/25 OD, 20/30 OS (slightly decreased due to inflammation)",
+        "Pupillary light reflex and relative afferent pupillary defect": "Left pupil smaller and irregular, painful constriction to light, no RAPD",
+        "Slit-lamp examination of anterior chamber": "Left eye shows ciliary flush, cells and flare in anterior chamber, fibrinous deposits",
+        "Conjunctival and scleral examination": "Left eye with ciliary injection (deep redness around cornea), mild conjunctival erythema",
+        "Intraocular pressure measurement": "Normal IOP both eyes (14 mmHg OD, 16 mmHg OS)",
+        "Fundoscopic examination": "Normal optic disc and retina bilaterally, no posterior segment involvement",
+        "Extraocular muscle movement testing": "Full range of motion both eyes, but movement causes increased pain in left eye",
+        "Spinal range of motion and Schober test": "Limited lumbar flexion, positive Schober test indicating reduced spinal mobility",
+        "Sacroiliac joint compression tests": "Positive bilateral sacroiliac compression causing lower back discomfort",
+        "General skin examination for rashes": "No psoriasiform rashes, erythema nodosum, or other skin manifestations"
+    },
+    "ddxTargets": [
+        "Acute Anterior Uveitis (HLA-B27-Associated, Recurrent, in Ankylosing Spondylitis) (correct diagnosis)",
+        "Acute angle-closure glaucoma",
+        "Bacterial conjunctivitis",
+        "Corneal abrasion or foreign body",
+        "Scleritis/episcleritis",
+        "Viral conjunctivitis",
+        "Migraine with ocular symptoms"
+    ],
+    "biasFlags": {
+        "anchoring": "May anchor on 'red eye' and consider only common causes like conjunctivitis, missing the systemic connection to ankylosing spondylitis",
+        "prematureClosure": "Given the obvious eye redness and pain, may stop investigation before exploring the recurrent nature and HLA-B27 association",
+        "availabilityBias": "Acute angle-closure glaucoma may come to mind due to severity of photophobia and pain, potentially overshadowing the inflammatory etiology"
+    },
+    "coachPrompts": {
+        "phase2": "You've identified several possibilities for acute eye pain and redness. Given this patient's age and the severity of photophobia, what key historical elements should you explore? What might his past medical history tell you about the underlying pathophysiology?",
+        "phase5": "Your examination shows classic signs of anterior chamber inflammation. How do the slit-lamp findings combined with his HLA-B27 positive ankylosing spondylitis history change your diagnostic reasoning? What's the significance of the recurrent nature in the same eye?",
+        "finalDebrief": "This case illustrates the importance of considering systemic inflammatory conditions in ocular presentations. The combination of HLA-B27 positivity, ankylosing spondylitis, recurrent unilateral anterior uveitis, and acute onset with photophobia creates a classic pattern. How might this diagnosis influence both immediate treatment and long-term monitoring strategies?"
     }
 }
 };

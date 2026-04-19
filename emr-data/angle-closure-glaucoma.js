@@ -319,39 +319,6 @@ window.EMR_DATA = {
       "Lives with husband"
     ]
   ],
-  "guided": {
-    "supported": true,
-    "patientPersona": "Dolores Eriksen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did my right eye is killing me right eye \u2014 deep, severe pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My right eye is killing me with this deep, terrible pain that just came on sudde.'",
-        "character": "'It's my right eye is killing me right eye \u2014 deep, severe pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine; Omeprazole; Diphenhydramine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Sister: glaucoma (type unknown)  Mother: cataracts",
-        "social": "Tobacco: Never  Alcohol: Social  Drugs: Denies  Occupation: Retired secretary  Living: Lives with husband"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -390,6 +357,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Dolores Eriksen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Dolores is visibly distressed and holding her right eye, appearing nauseous and uncomfortable. She is very forthcoming about her severe pain and eager for relief, frequently mentioning how unbearable the pain is. Her anxiety is palpable as she describes feeling like something is terribly wrong with her eye.",
+    "interviewQuestions": [
+        "When did this eye pain start and how quickly did it come on?",
+        "Can you describe the quality of the pain in your right eye?",
+        "On a scale of 1-10, how severe is your eye pain right now?",
+        "Are you experiencing any nausea or vomiting along with the eye pain?",
+        "Have you noticed any changes in your vision, such as blurriness or halos around lights?",
+        "Is your vision worse in dim lighting or bright lighting?",
+        "Have you had any recent eye trauma or injury?",
+        "Do you have any headache along with the eye pain?",
+        "Have you ever had episodes like this before?",
+        "Have you started any new medications or eye drops recently?",
+        "Do you have any family history of eye problems?",
+        "Are you experiencing any discharge or tearing from the affected eye?",
+        "Does the eye pain worsen when you move your eye or touch around it?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, I'm having trouble focusing because of this terrible pain in my eye. Can you repeat that?",
+        "onset": "It started about 2 hours ago very suddenly while I was watching TV. One minute I was fine, then this excruciating pain just hit my right eye out of nowhere.",
+        "character": "It's a deep, throbbing, intense pain - like someone is pushing on my eyeball from behind. It's the worst pain I've ever felt in my eye.",
+        "location": "It's definitely my right eye, deep inside, and the pain seems to go back into my head on that side.",
+        "severity": "It's easily a 9 out of 10. I can barely function with this pain. I've never felt anything like it.",
+        "aggravating": "Any light makes it much worse. Even this room light is bothering me. Moving around also seems to make the nausea worse.",
+        "relieving": "Nothing helps. I tried closing my eyes, putting a cold compress on it, even took some Tylenol, but nothing touches this pain.",
+        "associated": "I feel very nauseous and almost threw up in the car on the way here. My vision is blurry and I'm seeing rainbow halos around lights, which is really strange.",
+        "denies": "No discharge from my eye, no recent injury or trauma, no headache separate from the eye pain, no fever.",
+        "history": "I've never had anything like this before. I've had some minor eye irritation with my contacts, but nothing even close to this severe.",
+        "medications": "Amlodipine; Omeprazole; Diphenhydramine",
+        "allergies": "NKDA",
+        "family": "My sister has glaucoma, though I don't know what type, and my mother had cataracts. I've been worried about eye problems because of that.",
+        "social": "I'm a retired secretary, live with my husband. I don't smoke, drink socially on weekends, and don't use any drugs."
+    },
+    "examManeuvers": [
+        "Visual acuity testing",
+        "Pupillary light reflex and RAPD testing",
+        "Intraocular pressure measurement (tonometry)",
+        "Slit lamp examination of anterior chamber",
+        "Fundoscopic examination",
+        "Corneal examination for clarity and edema",
+        "Conjunctival examination",
+        "Extraocular movement testing",
+        "Visual field testing by confrontation",
+        "Gonioscopy assessment of anterior chamber angle"
+    ],
+    "examFindings": {
+        "Visual acuity testing": "Right eye 20/60, Left eye 20/30 (baseline with hyperopia)",
+        "Pupillary light reflex and RAPD testing": "Right pupil mid-dilated (5mm), poorly reactive to light, no RAPD present",
+        "Intraocular pressure measurement (tonometry)": "Right eye IOP 45 mmHg, Left eye IOP 16 mmHg",
+        "Slit lamp examination of anterior chamber": "Right eye shows shallow anterior chamber with mild chamber reaction",
+        "Fundoscopic examination": "Right optic disc appears cupped with possible early glaucomatous changes",
+        "Corneal examination for clarity and edema": "Right corneal edema present with loss of corneal clarity",
+        "Conjunctival examination": "Right conjunctiva shows mild injection and chemosis",
+        "Extraocular movement testing": "Full range of motion bilaterally, no restriction",
+        "Visual field testing by confrontation": "Subtle peripheral visual field defect in right eye",
+        "Gonioscopy assessment of anterior chamber angle": "Narrow to closed anterior chamber angles in right eye"
+    },
+    "ddxTargets": [
+        "Acute angle-closure glaucoma (correct diagnosis)",
+        "Acute anterior uveitis",
+        "Corneal abrasion or ulcer",
+        "Optic neuritis",
+        "Retinal detachment",
+        "Migraine with visual aura",
+        "Cluster headache"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'eye pain' and considering only common causes like conjunctivitis or dry eyes, missing the acute nature and severity suggesting angle-closure glaucoma",
+        "prematureClosure": "Risk of stopping at 'eye strain' or 'migraine' given the patient's age and hyperopia history, without considering the constellation of nausea, halos, and acute severe pain",
+        "availabilityBias": "Risk of being influenced by more commonly seen conditions like conjunctivitis or dry eyes, rather than considering the less common but sight-threatening acute angle-closure glaucoma"
+    },
+    "coachPrompts": {
+        "phase2": "Before you interview the patient, consider what key historical features would help you differentiate between the various causes of acute severe eye pain. What associated symptoms would be most concerning for sight-threatening conditions?",
+        "phase5": "Now that you have your history and physical findings, let's think about how the combination of acute severe eye pain, nausea, visual halos, elevated IOP, and shallow anterior chamber fit together. What does this constellation of findings suggest?",
+        "finalDebrief": "This case demonstrates how acute angle-closure glaucoma can present dramatically with the classic triad of severe eye pain, nausea/vomiting, and visual disturbances. Notice how the family history of glaucoma, hyperopia, and sudden onset in dim lighting all fit the typical risk profile. What key examination findings confirmed your diagnosis and why is this considered an ophthalmologic emergency?"
     }
 }
 };

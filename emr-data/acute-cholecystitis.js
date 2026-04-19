@@ -284,39 +284,6 @@ window.EMR_DATA = {
     "presentation": "GI Emergency",
     "category": "gastrointestinal"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Maria Elena Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 44-year-old female with known cholelithiasis presenting after third episode of p.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Cholecystitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Atorvastatin 20mg daily; Norgestimate-Ethinyl Estradiol 0.25mg/35mcg daily; Ibuprofen 600mg PRN.'",
-        "allergies": "'My allergies are Sulfa drugs.'",
-        "family": "Mother: Cholelithiasis (cholecystectomy age 48), T2DM, alive at 68  Father: Hypertension, hyperlipidemia, alive at 70  Sister: Gallstones (cholecystectomy age 40), alive at 46",
-        "social": "Occupation: Office manager at law firm  Marital: Married \u2014 18 years  Tobacco: Never smoker  Alcohol: Social \u2014 1-2 glasses wine on weekends  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -355,6 +322,83 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Maria Elena Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Cholecystitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Maria appears uncomfortable and slightly anxious, holding her right side intermittently. She's cooperative and detailed in her responses, clearly frustrated that the pain episodes are becoming more frequent and severe. She seems worried about missing work and the impact on her family.",
+    "interviewQuestions": [
+        "Can you tell me about the pain you're experiencing?",
+        "When did this current episode of pain begin?",
+        "How would you describe the quality of the pain?",
+        "Where exactly is the pain located and does it go anywhere else?",
+        "On a scale of 1-10, how severe is the pain?",
+        "What makes the pain worse or better?",
+        "Have you noticed any nausea, vomiting, or fever?",
+        "Have you had episodes like this before?",
+        "What were you doing or eating when the pain started?",
+        "Have you noticed any changes in your bowel movements or urine?",
+        "What medications are you currently taking?",
+        "Do you have any known allergies to medications?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, could you rephrase that? I'm having trouble concentrating with this pain.",
+        "onset": "This episode started about 6 hours ago, maybe around 2 PM, about an hour after I had lunch. But I've been having similar attacks for the past 6 months, and they're getting worse.",
+        "character": "It's a sharp, crampy pain that comes in waves. Sometimes it feels like someone is squeezing my ribs really tight, and other times it's more of a constant ache.",
+        "location": "The pain is mainly in my right upper belly, just below my ribs. Sometimes it shoots around to my back and up to my right shoulder blade.",
+        "severity": "Right now it's about a 7 out of 10. During the worst part earlier, it was definitely a 9. I couldn't even stand up straight. It's much worse than my previous episodes.",
+        "aggravating": "Fatty or fried foods definitely trigger it. Deep breathing makes it worse, and any movement or pressure on my right side is terrible. Even wearing a bra is uncomfortable.",
+        "relieving": "I've been taking ibuprofen which helps a little, but not much. Sitting hunched forward seems to help somewhat. Heat doesn't really do anything.",
+        "associated": "I've been feeling nauseous since the pain started, and I vomited once about an hour ago. I feel a bit feverish and have chills. I'm also feeling really tired.",
+        "denies": "No diarrhea, no blood in vomit or stool, no burning when I urinate, no chest pain or shortness of breath. The pain isn't related to my menstrual cycle.",
+        "history": "Yes, I've had two other episodes in the past 6 months. The first was mild and lasted about 2 hours. The second was worse and lasted about 4 hours. This one is definitely the worst and longest.",
+        "medications": "Atorvastatin 20mg daily; Norgestimate-Ethinyl Estradiol 0.25mg/35mcg daily; Ibuprofen 600mg PRN",
+        "allergies": "Sulfa drugs",
+        "family": "My mother had gallstones and had her gallbladder removed when she was 48. My sister also had gallstones and surgery at 40. My mother also has diabetes.",
+        "social": "I work as an office manager at a law firm, so I sit a lot. I'm married for 18 years with two kids. I never smoked, and I only drink a glass or two of wine on weekends. No drugs."
+    },
+    "examManeuvers": [
+        "Murphy's sign",
+        "Right upper quadrant palpation",
+        "Rovsing's sign",
+        "Psoas sign",
+        "Obturator sign",
+        "Rebound tenderness assessment",
+        "Bowel sounds auscultation",
+        "Costovertebral angle tenderness",
+        "Jaundice assessment (sclera and skin)",
+        "Abdominal inspection"
+    ],
+    "examFindings": {
+        "Murphy's sign": "Positive - patient experiences severe pain and inspiratory arrest when palpating RUQ during deep inspiration",
+        "Right upper quadrant palpation": "Moderate to severe tenderness with voluntary guarding, possible palpable gallbladder fullness",
+        "Rovsing's sign": "Negative - no RUQ pain with LLQ palpation",
+        "Psoas sign": "Negative - no increased pain with right hip flexion against resistance",
+        "Obturator sign": "Negative - no pain with internal rotation of flexed right hip",
+        "Rebound tenderness assessment": "Mild rebound tenderness in RUQ, less pronounced than with appendicitis",
+        "Bowel sounds auscultation": "Hypoactive bowel sounds, consistent with ileus from inflammation",
+        "Costovertebral angle tenderness": "Negative bilaterally - no flank tenderness",
+        "Jaundice assessment (sclera and skin)": "No jaundice noted in sclera or skin",
+        "Abdominal inspection": "Slight distension, patient guards RUQ, no visible masses or surgical scars"
+    },
+    "ddxTargets": [
+        "Acute Cholecystitis (correct diagnosis)",
+        "Biliary Colic/Choledocholithiasis",
+        "Acute Pancreatitis",
+        "Myocardial Infarction",
+        "Pulmonary Embolism",
+        "Peptic Ulcer Disease",
+        "Acute Appendicitis"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on known cholelithiasis history and assuming this is just another episode of biliary colic rather than recognizing progression to acute cholecystitis",
+        "prematureClosure": "May stop evaluation after confirming gallbladder pathology without considering complications like choledocholithiasis or ruling out cardiac causes in this demographic",
+        "availabilityBias": "Recent cases of appendicitis or gastritis might influence thinking away from biliary pathology, or conversely, obvious gallbladder history might prevent consideration of other serious causes"
+    },
+    "coachPrompts": {
+        "phase2": "Given this patient's presentation of RUQ pain, what key features in the history would help you differentiate between biliary colic and acute cholecystitis? What red flags should you specifically ask about given her demographics and risk factors?",
+        "phase5": "Your physical exam reveals a positive Murphy's sign with RUQ tenderness. How does this change your differential diagnosis? What additional findings would suggest complications of gallbladder disease, and what must-not-miss diagnoses should still be considered in a 44-year-old woman with chest/upper abdominal pain?",
+        "finalDebrief": "This case demonstrates the natural progression from biliary colic to acute cholecystitis. Notice how the patient's symptoms evolved from intermittent postprandial pain to persistent pain with fever and positive Murphy's sign. What clinical features helped distinguish this from simple biliary colic, and how did the family history and risk factors support your diagnosis?"
     }
 }
 };

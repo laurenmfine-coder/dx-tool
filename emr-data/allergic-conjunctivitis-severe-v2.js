@@ -995,37 +995,6 @@ window.EMR_DATA = {
     ]
   }
 ],
-  "guided": {
-    "supported": true,
-    "patientPersona": "Jayden Thomas is alert and cooperative, clearly concerned but provides a clear history.",
-    "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
-    ],
-    "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Olopatadine 0.2%; Prednisolone acetate 1%; Cold compresses; Cetirizine.'",
-        "allergies": "'My allergies: Grass pollen, Dust mite.'",
-        "family": "Mother: seasonal allergies  Father: eczema",
-        "social": "Context: Vernal keratoconjunctivitis (VKC) \u2014 severe form of allergic eye disease, not simple seasonal allergies  Risk: Giant papillae on tarsal conjunctiva \u2014 can cause corneal shield ulcers and permanent vision loss  Impact: Missing school \u2014 eyes swollen shut some mornings, photophobia  Comorbidity: Asthma and eczema \u2014 atopic triad"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -1064,6 +1033,84 @@ window.EMR_DATA = {
         "phase2": "Before interviewing Jayden Thomas: what does the chart suggest? Top 3 diagnoses?",
         "phase5": "After history and exam: how has your differential changed?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jayden is anxious and uncomfortable, frequently rubbing his eyes despite being told not to. He's frustrated about missing school and appears photophobic, squinting and preferring dimmed lighting. His mother accompanies him and helps provide history as he becomes tired from the discomfort.",
+    "interviewQuestions": [
+        "Can you tell me when your eye problems started getting worse?",
+        "What does the discharge from your eyes look like?",
+        "Are both eyes affected or just one?",
+        "How bad is the itching on a scale of 1-10?",
+        "Does bright light bother your eyes?",
+        "Have you been rubbing your eyes a lot?",
+        "Are you having any trouble seeing clearly?",
+        "Have you had eye problems like this before?",
+        "What medications are you currently using for your eyes?",
+        "Do you have any known allergies?",
+        "Have your asthma or eczema been acting up recently?",
+        "How many days of school have you missed because of this?",
+        "Is the eye pain worse in the morning or evening?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure... my eyes just really hurt and itch. Can you ask my mom?",
+        "onset": "It's been getting really bad over the past week, but I've had eye problems on and off for a couple years now",
+        "character": "There's this really thick, stringy stuff coming out of my eyes - it's gross and sticky",
+        "location": "Both eyes are affected, but my right eye seems worse and more swollen",
+        "severity": "The itching is like a 9 out of 10 - I can't stop wanting to rub them even though it makes it worse",
+        "aggravating": "Being outside makes it worse, and bright lights really hurt. Rubbing makes the itching worse but I can't help it",
+        "relieving": "The cold washcloths help a little bit, and staying in dark rooms. My eye drops help some",
+        "associated": "My eyes are really swollen, I can't see well, and bright light really hurts. My nose has been stuffy too",
+        "denies": "No fever, no headache, no ear pain, no sore throat. My asthma is okay right now",
+        "history": "Yeah, this happens every spring and summer. Last year was bad too but not this bad",
+        "medications": "Olopatadine 0.2%; Prednisolone acetate 1%; Cold compresses; Cetirizine",
+        "allergies": "Grass pollen, Dust mite",
+        "family": "My mom gets watery eyes in spring, and my dad has eczema like me",
+        "social": "I'm in 4th grade but I've missed 5 days of school this month because my eyes are swollen shut in the morning"
+    },
+    "examManeuvers": [
+        "Visual acuity assessment",
+        "External eye inspection",
+        "Upper eyelid eversion to examine tarsal conjunctiva",
+        "Lower conjunctival examination",
+        "Limbal examination for Horner-Trantas dots",
+        "Corneal examination with fluorescein staining",
+        "Pupillary light reflex testing",
+        "Assessment of conjunctival discharge",
+        "Lymph node palpation",
+        "Skin examination for atopic dermatitis"
+    ],
+    "examFindings": {
+        "Visual acuity assessment": "Reduced visual acuity 20/40 OD, 20/30 OS due to discharge and corneal involvement",
+        "External eye inspection": "Severe upper eyelid edema bilaterally, more pronounced OD, with thick ropy mucoid discharge",
+        "Upper eyelid eversion to examine tarsal conjunctiva": "Giant papillae with cobblestone appearance on upper tarsal conjunctiva bilaterally",
+        "Lower conjunctival examination": "Mild conjunctival injection and chemosis, less severe than upper lids",
+        "Limbal examination for Horner-Trantas dots": "White-gray gelatinous nodules at superior limbus consistent with Horner-Trantas dots",
+        "Corneal examination with fluorescein staining": "Small epithelial defect at superior cornea OD consistent with early shield ulcer formation",
+        "Pupillary light reflex testing": "Pupils reactive but patient exhibits marked photophobia with bright light",
+        "Assessment of conjunctival discharge": "Thick, ropy, mucoid discharge that can be pulled into long strings",
+        "Lymph node palpation": "No preauricular or cervical lymphadenopathy",
+        "Skin examination for atopic dermatitis": "Mild eczematous changes on antecubital fossae consistent with atopic dermatitis"
+    },
+    "ddxTargets": [
+        "Vernal keratoconjunctivitis with corneal shield ulcer (correct diagnosis)",
+        "Atopic keratoconjunctivitis",
+        "Severe allergic conjunctivitis",
+        "Bacterial conjunctivitis with secondary corneal involvement",
+        "Viral keratoconjunctivitis",
+        "Seasonal allergic conjunctivitis",
+        "Contact dermatitis with secondary conjunctivitis"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'allergic conjunctivitis' and missing the severity of VKC with corneal complications requiring urgent ophthalmology referral",
+        "prematureClosure": "Risk of stopping at simple seasonal allergies without recognizing giant papillae and shield ulcer development that threatens vision",
+        "availabilityBias": "May think of common seasonal allergies rather than rare but serious VKC, especially if recently saw simple allergic conjunctivitis cases"
+    },
+    "coachPrompts": {
+        "phase2": "You mentioned allergic conjunctivitis in your differential. What specific historical features would help you distinguish between simple seasonal allergies versus more severe forms of allergic eye disease? What complications should you be concerned about in severe cases?",
+        "phase5": "You found giant papillae and corneal involvement. How does this change your assessment of disease severity? What's the most concerning finding that requires immediate subspecialty referral, and why is this not just simple seasonal allergies?",
+        "finalDebrief": "This case illustrates how vernal keratoconjunctivitis can be mistaken for simple allergic conjunctivitis. The key differentiators were the giant papillae, Horner-Trantas dots, and most importantly the corneal shield ulcer. How did your differential evolve as you recognized these sight-threatening complications?"
     }
 }
 };

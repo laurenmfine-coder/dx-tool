@@ -356,39 +356,6 @@ window.EMR_DATA = {
     "presentation": "GI Emergency",
     "category": "gastrointestinal"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Claudette Pierre is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having some stomach trouble after I eat - it feels full and bloated up.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Necrotizing Gallstone Pancreatitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 20mg daily; Amlodipine 10mg daily; Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg daily; Fenofibrate 145mg daily.'",
-        "allergies": "'My allergies are Codeine, Shellfish.'",
-        "family": "Mother: T2DM, stroke at age 68, deceased at 72  Father: Hypertension, gallstones, alive at 88  Sister: T2DM, cholelithiasis, alive at 64",
-        "social": "Occupation: Retired home health aide  Marital: Widowed \u2014 husband deceased 2018  Tobacco: Former smoker \u2014 10 pack-years; quit 2015  Alcohol: Denies current use  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -427,6 +394,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Claudette Pierre's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Acute Necrotizing Gallstone Pancreatitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Claudette appears uncomfortable but tries to downplay her symptoms, describing them as 'just indigestion.' She's cooperative and forthcoming but initially minimizes the severity, possibly due to her healthcare background as a former home health aide.",
+    "interviewQuestions": [
+        "Can you describe exactly where you feel this discomfort?",
+        "When did you first notice these symptoms?",
+        "Does the pain travel anywhere else in your body?",
+        "On a scale of 1-10, how would you rate your discomfort?",
+        "What foods seem to trigger these episodes?",
+        "Have you had any nausea or vomiting?",
+        "Any fever or chills recently?",
+        "Does the pain come in waves or is it constant?",
+        "Have you noticed any changes in your bowel movements or urine?",
+        "Any shortness of breath or chest pain?",
+        "Have you had similar episodes before?",
+        "What medications are you currently taking?",
+        "Do you have any known allergies?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure what you mean by that, doctor. Could you ask it a different way?",
+        "onset": "It's been going on for about 3-4 months now, but it's gotten worse this past week. The discomfort used to be just after big meals, but now it happens with smaller portions too.",
+        "character": "It's like a deep, gnawing ache that sometimes feels like pressure. Not sharp like a knife, more like someone's pressing hard under my ribs.",
+        "location": "Right here under my right ribcage, and sometimes it goes straight through to my back between my shoulder blades. That back pain is actually pretty intense when it happens.",
+        "severity": "I'd say it's about a 6 out of 10 most times, but when it goes to my back it can be an 8. It definitely stops me from doing things around the house.",
+        "aggravating": "Fatty foods definitely make it worse - fried chicken, pizza, even avocados. Large meals too. And lying flat sometimes makes it more uncomfortable.",
+        "relieving": "Sitting up and leaning forward helps a little. I've been taking some antacids but they don't really help much. Heat on my back gives some relief.",
+        "associated": "I've had some nausea, especially after eating. No vomiting yet, but I've felt close to it a few times. I've been feeling more tired than usual too.",
+        "denies": "No fever that I've noticed, no chest pain, no shortness of breath. My bowel movements have been normal, no blood or anything unusual.",
+        "history": "I've had some gallbladder issues before - my doctor found stones on an ultrasound about two years ago. My sister had her gallbladder out last year for the same thing.",
+        "medications": "Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 20mg daily; Amlodipine 10mg daily; Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg daily; Fenofibrate 145mg daily",
+        "allergies": "Codeine, Shellfish",
+        "family": "My father had gallstones too, and my sister just had her gallbladder removed last year. Lots of diabetes in the family - my mother and sister both have it.",
+        "social": "I'm a retired home health aide, been widowed since 2018. I quit smoking about 8 years ago after smoking for about 15 years. I don't drink alcohol and never used drugs."
+    },
+    "examManeuvers": [
+        "Murphy's sign",
+        "Epigastric palpation",
+        "Right upper quadrant palpation",
+        "Cullen's sign assessment",
+        "Grey Turner's sign assessment",
+        "Bowel sounds auscultation",
+        "Abdominal percussion",
+        "Costovertebral angle tenderness",
+        "Abdominal inspection",
+        "Vital signs reassessment"
+    ],
+    "examFindings": {
+        "Murphy's sign": "Positive - patient demonstrates inspiratory arrest during deep palpation of RUQ",
+        "Epigastric palpation": "Moderate tenderness with deep palpation, no masses or pulsation felt",
+        "Right upper quadrant palpation": "Significant tenderness with guarding, no palpable gallbladder",
+        "Cullen's sign assessment": "Negative - no periumbilical ecchymosis present",
+        "Grey Turner's sign assessment": "Negative - no flank ecchymosis noted",
+        "Bowel sounds auscultation": "Hypoactive bowel sounds in all quadrants",
+        "Abdominal percussion": "Tympanic throughout, no shifting dullness",
+        "Costovertebral angle tenderness": "Negative bilaterally",
+        "Abdominal inspection": "Mild distension, no visible masses or pulsations, no skin changes",
+        "Vital signs reassessment": "BP 148/92, HR 88, Temp 99.1°F - slight elevation from initial"
+    },
+    "ddxTargets": [
+        "Acute Necrotizing Gallstone Pancreatitis (correct diagnosis)",
+        "Acute Cholangitis",
+        "Acute Cholecystitis",
+        "Myocardial Infarction",
+        "Bowel Obstruction",
+        "Gastroesophageal Reflux Disease",
+        "Peptic Ulcer Disease"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'indigestion' and known cholelithiasis, potentially missing progression to pancreatitis and need for urgent intervention",
+        "prematureClosure": "May stop at cholecystitis diagnosis without considering pancreatic involvement given the back pain and systemic symptoms",
+        "availabilityBias": "Common presentation of 'stomach trouble' might bias toward benign diagnoses, overlooking severity indicators"
+    },
+    "coachPrompts": {
+        "phase2": "You've identified several possible diagnoses. Given this patient's risk factors and presentation, what specific historical details would help you differentiate between gallbladder pathology and other serious conditions? What red flags should you be listening for?",
+        "phase5": "Interesting findings on your exam. The combination of RUQ tenderness, positive Murphy's sign, and back pain in a patient with known gallstones is concerning. What complications of gallstone disease should you be considering, and what additional workup might be indicated?",
+        "finalDebrief": "This case demonstrates how cholelithiasis can progress to serious complications. The key was recognizing that 'indigestion' with back pain radiation, positive Murphy's sign, and systemic symptoms suggested more than simple cholecystitis. How did your differential evolve as you gathered more information, and what clinical pearls will help you recognize necrotizing pancreatitis earlier?"
     }
 }
 };
