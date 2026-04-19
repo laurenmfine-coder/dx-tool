@@ -387,7 +387,8 @@ function renderCases(){
     html += '<div class="case-category">'+esc(c.category)+'</div>';
     html += '<div class="case-tier" style="color:'+MD.tiers[c.tier].color+'">T'+c.tier+'</div>';
     html += '<div class="case-subs">'+c.sub.map(function(s){return '<span class="case-sub-tag">'+s+'</span>'}).join('')+'</div>';
-    html += '<div class="case-open"><a href="virtual-emr.html?case='+id+'&setting=ed" style="color:var(--blue)">Open →</a></div>';
+    var _mtTok=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[id]:null;
+    html += '<div class="case-open"><a href="virtual-emr.html?'+(_mtTok?'cx='+_mtTok:'case='+id)+'&setting=ed" style="color:var(--blue)">Open →</a></div>';
     html += '</div>';
   });
   html += '</div>';

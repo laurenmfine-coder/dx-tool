@@ -275,6 +275,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:
 <script src="emr-data/manifest.js"></script>
 <script src="emr-data/case-specialty-map.js"></script>
 <script src="emr-data/patient-names.js"></script>
+<script src="emr-data/case-tokens.js"></script>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
@@ -318,7 +319,7 @@ function initCases(){
 
 function pickRandom(arr){return arr[Math.floor(Math.random()*arr.length)]}
 function pickUniqueName(pool){var avail=pool.filter(function(n){return!usedNames.has(n)});if(!avail.length){usedNames.clear();avail=pool}var name=avail[Math.floor(Math.random()*avail.length)];usedNames.add(name);return name}
-function encCase(id){return btoa(id).replace(/=/g,'')}
+function encCase(id){var t=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[id]:null;return t?t:btoa(id).replace(/=/g,'');}
 
 function generatePatient(){
   var c=null;

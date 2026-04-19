@@ -651,7 +651,7 @@ window.backToChart=function(){
   var params=new URLSearchParams(window.location.search);
   var caseId=params.get('case');
   var setting=params.get('setting')||'ed';
-  if(caseId)window.location.href='virtual-emr.html?setting='+setting+'&case='+caseId;
+  if(caseId)window.location.href=((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[caseId])?('virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[caseId]+'&setting='+setting):('virtual-emr.html?setting='+setting+'&case='+caseId));
   else window.location.href='virtual-emr.html?setting='+setting;
 };
 

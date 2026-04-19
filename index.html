@@ -257,7 +257,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
   </div>
   <div class="pillars-grid">
 
-    <a href="/virtual-emr.html?case=stemi-v1" class="pillar">
+    <a href="/virtual-emr.html?cx=0238-e580" class="pillar">
       <div class="pillar-icon">📋</div>
       <div class="pillar-title">Work the chart</div>
       <p class="pillar-body">A real EMR with vitals, labs, notes, and orders. Not a toy — a realistic patient record you navigate the way you would on rounds.</p>
@@ -284,7 +284,7 @@ body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-seri
 <div class="footer">
   <div class="footer-links">
     <a href="/browse.html" class="footer-link">Browse Cases</a>
-    <a href="/virtual-emr.html?case=stemi-v1" class="footer-link">Virtual EMR</a>
+    <a href="/virtual-emr.html?cx=0238-e580" class="footer-link">Virtual EMR</a>
     <a href="/CoachDx/mentor-chat.html" class="footer-link">CoachDx</a>
     <a href="/puzzles.html" class="footer-link">Daily Puzzle</a>
     <a href="/how-it-works.html" class="footer-link">How It Works</a>
@@ -408,7 +408,7 @@ function resetProfession(ev) {
 function startPrimaryCase(ev) {
   if (ev) ev.preventDefault();
   try { gtag('event','click_instant_start',{source:'hero_emr_first', profession: CURRENT_PROF || 'default', case: CURRENT_CASE}); } catch(e) {}
-  window.location.href = '/virtual-emr.html?case=' + encodeURIComponent(CURRENT_CASE);
+  window.location.href = (window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[CURRENT_CASE])?('/virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[CURRENT_CASE]):('/virtual-emr.html?case='+encodeURIComponent(CURRENT_CASE));
 }
 
 /* ─────────────────────────────────────────────────────────────

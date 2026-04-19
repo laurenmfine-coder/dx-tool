@@ -234,7 +234,7 @@
     _enterGuided: function() {
       // Send new users into the EMR with a known working first case
       try { sessionStorage.setItem('rdx-last-setting', 'ed'); } catch(e) {}
-      window.location.href = 'virtual-emr.html?case=stemi-v1&setting=ed&onboarding=1';
+      window.location.href = 'virtual-emr.html?cx=0238-e580&setting=ed&onboarding=1';
     },
 
     _enter: function() {

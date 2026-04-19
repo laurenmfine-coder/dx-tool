@@ -82,7 +82,7 @@
     simLink.textContent = 'Simulate \u2014 ' + rec.caseLabel + ' \u2192';
 
     var emrLink = document.createElement('a');
-    emrLink.href = '../virtual-emr.html?case=' + encodeURIComponent(rec.caseId);
+    emrLink.href = ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[rec.caseId])?('../virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[rec.caseId]):('../virtual-emr.html?case='+encodeURIComponent(rec.caseId)));
     emrLink.style.cssText = 'font-size:12px;font-weight:600;padding:7px 14px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.15);border-radius:7px;text-decoration:none;white-space:nowrap';
     emrLink.textContent = 'Practice in Virtual EMR';
 

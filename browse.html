@@ -24,6 +24,7 @@
 <script src="js/nav-global.js"></script>
 <script src="js/rdx-super-agent.js"></script>
 <script src="emr-data/crt-index.js"></script>
+<script src="emr-data/case-tokens.js"></script>
 <script src="/rdx-semantic-search.js"></script>
 <style>
 :root{
@@ -1263,7 +1264,7 @@ function launch(id){
     });
   }
   
-  if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='simulation-engine.html?case='+encodeURIComponent(id);else if(MODE==='practice') window.location.href='virtual-emr.html?case='+encodeURIComponent(id);else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}
+  if(window.RdxSuperAgent&&window.RdxAgent&&window.RdxAgent.Navigator)window.RdxAgent.Navigator.trackModuleVisit(MODE);if(MODE==='simulate') window.location.href='simulation-engine.html?case='+encodeURIComponent(id);else if(MODE==='practice'){var _tok=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[id]:null;window.location.href='virtual-emr.html?'+(_tok?'cx='+_tok:'case='+encodeURIComponent(id));}else if(MODE==='coach'){var topic=COACH_DATA.find(function(t){return t.id===id;});var name=topic?topic.title:id;window.location.href='CoachDx/mentor-chat.html?topic='+encodeURIComponent(name);}else if(MODE==='learn'){if(id.startsWith('genetics-')||id.startsWith('cme-')) window.location.href='genetics/'+id+'.html';else window.location.href='mechanism/'+id+'.html';}
 }
 
 function esc(s){if(!s)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}

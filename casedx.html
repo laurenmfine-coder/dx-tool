@@ -274,7 +274,7 @@ a{color:inherit;text-decoration:none}
       + '<span style="font-size:10px;font-weight:700;color:' + j.color + '">Start &rarr;</span>'
       + '</div>';
     (function(first, color) {
-      card.onclick = function() { window.location.href = 'virtual-emr.html?case=' + first; };
+      card.onclick = function() { window.location.href = ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[first])?("virtual-emr.html?cx="+window.RDX_CASE_TOKENS.slugToToken[first]):("virtual-emr.html?case="+first)); };
       card.onmouseover = function() { card.style.borderColor = color; card.style.boxShadow = '0 2px 12px rgba(0,0,0,.08)'; };
       card.onmouseout  = function() { card.style.borderColor = '#E2E8F0'; card.style.boxShadow = 'none'; };
     })(j.first, j.color);
@@ -436,10 +436,10 @@ document.getElementById("todayTitle").innerHTML =
   + ' <span id="todayRevealHint" style="font-size:12px;opacity:.7;font-weight:400">Show dx</span>';
 document.getElementById("todaySub").textContent=td.sub;
 document.getElementById("todayChips").innerHTML='<span class="tchip red">'+AL[td.acuity]+'</span><span class="tchip">Virtual EMR</span><span class="tchip">Note + SBAR</span>';
-function startToday(){localStorage.setItem("rdx-last-case",JSON.stringify({id:td.id,title:td.title,ts:Date.now()}));window.location.href="virtual-emr.html?case="+td.id;}
+function startToday(){localStorage.setItem("rdx-last-case",JSON.stringify({id:td.id,title:td.title,ts:Date.now()}));window.location.href=((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[td.id])?("virtual-emr.html?cx="+window.RDX_CASE_TOKENS.slugToToken[td.id]):("virtual-emr.html?case="+td.id));}
 
 // Resume
-try{var lc=JSON.parse(localStorage.getItem("rdx-last-case")||"null");if(lc&&(Date.now()-lc.ts)<259200000){document.getElementById("resumeBar").classList.add("show");var h=Math.round((Date.now()-lc.ts)/3600000);document.getElementById("resumeName").textContent=lc.title+(h<1?" (just now)":" ("+h+"h ago)");document.getElementById("resumeBtn").onclick=function(){window.location.href="virtual-emr.html?case="+lc.id;};}}catch(e){}
+try{var lc=JSON.parse(localStorage.getItem("rdx-last-case")||"null");if(lc&&(Date.now()-lc.ts)<259200000){document.getElementById("resumeBar").classList.add("show");var h=Math.round((Date.now()-lc.ts)/3600000);document.getElementById("resumeName").textContent=lc.title+(h<1?" (just now)":" ("+h+"h ago)");document.getElementById("resumeBtn").onclick=function(){window.location.href=((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[lc.id])?("virtual-emr.html?cx="+window.RDX_CASE_TOKENS.slugToToken[lc.id]):("virtual-emr.html?case="+lc.id));};}}catch(e){}
 
 function setF(type,val,el){F[type]=val;el.closest(".fchips").querySelectorAll(".fc").forEach(function(b){b.classList.remove("on");});el.classList.add("on");render();}
 function render(){
@@ -479,7 +479,7 @@ function render(){
   document.getElementById("casesWrap").innerHTML=out||'<div class="no-results"><span style="font-size:14px">Search</span><p>No cases match your filters. <a href="#" onclick="resetF();return false" style="color:#2874A6">Reset filters</a></p></div>';
   document.getElementById("fstats").textContent=total+" case"+(total!==1?"s":"")+" shown";
 }
-function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));try{sessionStorage.removeItem('rdx-order-mode');}catch(e){}window.location.href="virtual-emr.html?case="+id;}
+function openCase(id,name){localStorage.setItem("rdx-last-case",JSON.stringify({id:id,title:name,ts:Date.now()}));try{sessionStorage.removeItem('rdx-order-mode');}catch(e){}window.location.href=((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[id])?("virtual-emr.html?cx="+window.RDX_CASE_TOKENS.slugToToken[id]):("virtual-emr.html?case="+id));}
 function revealDx(el,cid){
   el.style.filter='none';el.style.cursor='default';
   el.style.background='transparent';el.style.border='none';

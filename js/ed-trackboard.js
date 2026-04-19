@@ -809,7 +809,7 @@
         pt.status = 'active';
       }
       // Navigate to chart
-      window.location.href = 'virtual-emr.html?setting=ed&case=' + caseId;
+      window.location.href = ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[caseId])?('virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[caseId]+'&setting=ed'):('virtual-emr.html?setting=ed&case='+caseId));
     },
 
     // Called by the EMR when learner confirms a diagnosis

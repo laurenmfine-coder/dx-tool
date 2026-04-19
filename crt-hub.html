@@ -69,6 +69,7 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
 </style>
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="if(window.RDXSupabaseInit)RDXSupabaseInit()"></script>
 <script src="js/rdx-supabase.js"></script>
+<script src="emr-data/case-tokens.js"></script>
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="stylesheet" href="css/rdx-theme.css">
 <link rel="stylesheet" href="mobile.css">
@@ -78,7 +79,7 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
 <div class="header">
   <a href="index.html" class="logo"><img src="icons/logo-transparent.png" alt="ReasonDx" style="height:24px;width:auto"></a>
   <div style="display:flex;gap:8px">
-    <a href="virtual-emr.html?case=stemi-v1" style="padding:6px 14px;border-radius:8px;font-size:12px;color:#64748B;text-decoration:none;font-weight:500;border:1px solid #E2E8F0">Virtual EMR</a>
+    <a href="virtual-emr.html?cx=0238-e580" style="padding:6px 14px;border-radius:8px;font-size:12px;color:#64748B;text-decoration:none;font-weight:500;border:1px solid #E2E8F0">Virtual EMR</a>
   </div>
 </div>
 
@@ -94,7 +95,7 @@ body { font-family: 'IBM Plex Sans', -apple-system, sans-serif; background: var(
 </div>
 
 <div class="container">
-  <a href="virtual-emr.html?case=stemi-v1" class="back-link">&larr; Back to Virtual EMR</a>
+  <a href="virtual-emr.html?cx=0238-e580" class="back-link">&larr; Back to Virtual EMR</a>
 
   <!-- Immersive Simulations -->
   <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--brand);margin-bottom:10px">Immersive Simulations</div>
@@ -245,7 +246,7 @@ function renderCases() {
       // Spoiler-free: mask diagnosis, show patient name + presentation as fallback
       var SF = window.SpoilerFree;
       var displayName = SF ? SF.mask(c.diagnosis, c.name + ' \u2014 ' + pres, c.id) : c.diagnosis;
-      html += '<a href="virtual-emr.html?case=' + c.id + '&setting=ed" class="case-card">';
+      var _cTok=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[c.id]:null;html += '<a href="virtual-emr.html?' + (_cTok?'cx='+_cTok:'case='+encodeURIComponent(c.id)) + '&setting=ed" class="case-card">';
       html += '<div class="case-icon" style="background:' + info.color + '">' + info.icon + '</div>';
       html += '<div class="case-info">';
       html += '<div class="case-name">' + displayName + '</div>';

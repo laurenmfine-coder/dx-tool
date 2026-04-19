@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <script src="/js/rdx-config.js"></script>
+<script src="emr-data/case-tokens.js"></script>
+<script src="emr-data/crt-index.js"></script>
 
 <meta name="theme-color" content="#1f5f8b">
 <!-- Google Analytics (ReasonDx) -->
@@ -1665,8 +1667,46 @@ function getStudentFaculty(studentUsername){
 // ===============================================================
 var PATIENT, PROBLEMS, MEDICATIONS, ALLERGIES, VITALS, VISITS, LABS, IMAGING, IMMUNIZATIONS, FAMILY_HISTORY, SOCIAL_HISTORY;
 var _urlParams = new URLSearchParams(window.location.search);
-var _cxRaw = _urlParams.get('cx') || '';
-var CASE_ID = _cxRaw ? (function(){try{var s=_cxRaw;while(s.length%4)s+='=';return atob(s)}catch(e){return _cxRaw}})() : (_urlParams.get('case') || '');
+// ---- Opaque case ID resolver (Phase 2) ----
+// Priority order:
+//   1. ?cx=<token>  — opaque token (preferred, new format)
+//   2. ?cx=<base64> — legacy base64 from ed-3d.html (backward compat)
+//   3. ?case=<slug> — old slug links (bookmarks, LinkedIn posts)
+// After resolving, silently rewrite the URL bar to ?cx=<token> if a map exists.
+var CASE_ID = (function() {
+  var tokens = (typeof window.RDX_CASE_TOKENS !== 'undefined') ? window.RDX_CASE_TOKENS : null;
+  var cxRaw  = _urlParams.get('cx')   || '';
+  var legacy = _urlParams.get('case') || '';
+
+  var slug = '';
+
+  if (cxRaw) {
+    if (tokens && tokens.tokenToSlug && tokens.tokenToSlug[cxRaw]) {
+      // Path 1: opaque token → slug
+      slug = tokens.tokenToSlug[cxRaw];
+    } else {
+      // Path 2: try legacy base64 decode
+      try { var s = cxRaw; while (s.length % 4) s += '='; slug = atob(s); }
+      catch(e) { slug = cxRaw; }
+    }
+  } else if (legacy) {
+    // Path 3: plain ?case=slug
+    slug = legacy;
+  }
+
+  // Silently rewrite to ?cx=<token> so the slug never shows in the address bar
+  if (slug && tokens && tokens.slugToToken && tokens.slugToToken[slug]) {
+    var token = tokens.slugToToken[slug];
+    if (!cxRaw || cxRaw !== token) {
+      var newUrl = window.location.pathname + '?cx=' + token;
+      var keepParams = ['setting','specialty','mode','demo'];
+      keepParams.forEach(function(k){ var v=_urlParams.get(k); if(v) newUrl += '&'+k+'='+encodeURIComponent(v); });
+      try { window.history.replaceState(null, '', newUrl); } catch(e) {}
+    }
+  }
+
+  return slug;
+})();
 var URL_SETTING = _urlParams.get('setting') || '';
 var URL_SPECIALTY = _urlParams.get('specialty') || '';
 var OSCE_MODE = _urlParams.get('mode') === 'osce';
@@ -1696,7 +1736,9 @@ var OSCE_MODE = _urlParams.get('mode') === 'osce';
       // Update banner text to reflect the actual case being previewed
       var caseNameEl = banner.querySelector('[data-case-name]');
       if(caseNameEl && CASE_ID) {
-        var niceName = CASE_ID.replace(/-v\d+$/,'').replace(/-/g,' ').replace(/\w/g,function(c){return c.toUpperCase();});
+        // Use chiefComplaint from CRT_INDEX -- avoids leaking the diagnosis slug
+        var _crtEntry = (typeof window.CRT_INDEX !== 'undefined' && window.CRT_INDEX[CASE_ID]) ? window.CRT_INDEX[CASE_ID] : null;
+        var niceName = (_crtEntry && _crtEntry.chiefComplaint) ? _crtEntry.chiefComplaint : 'Case';
         caseNameEl.textContent = niceName;
       }
       banner.style.display='flex';
@@ -1964,7 +2006,7 @@ function _applyContBadge(container, caseId, anchorEl) {
   btn.onclick = function(e) {
     e.stopPropagation();
     var targetCase = nextCaseId || caseId;
-    window.location.href = 'virtual-emr.html?case=' + encodeURIComponent(targetCase);
+    var _tcTok=(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken)?window.RDX_CASE_TOKENS.slugToToken[targetCase]:null; window.location.href='virtual-emr.html?'+(_tcTok?'cx='+_tcTok:'case='+encodeURIComponent(targetCase));
   };
 
   // Insert: try to find a footer/action area in the card, otherwise append

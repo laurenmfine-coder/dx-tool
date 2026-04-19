@@ -183,7 +183,7 @@
         filtered.forEach(function(c, idx) {
           var ai = ACUITY[c.acuity] || ACUITY[3], ci = CATEGORIES[c.category] || { label: c.category, emoji: '', color: '#607D8B' };
           var st = _getStatus(c.id), sb = st === 'completed' ? '\u2705' : st === 'started' ? '\u23F3' : '\u{1F195}', sl = st === 'completed' ? 'Done' : st === 'started' ? 'Active' : 'New';
-          var url = 'virtual-emr.html?case=' + c.id + (setting ? '&setting=' + setting : '') + (specialty ? '&specialty=' + specialty : '');
+          var url = ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[c.id])?('virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[c.id]):('virtual-emr.html?case='+c.id))+(setting?'&setting='+setting:'')+(specialty?'&specialty='+specialty:'');
           var dx = _filter.hideDx ? c.presentation + ' \u2014 Case ' + (idx + 1) : c.diagnosis;
           var ini = c.name.split(' ').map(function(w) { return w[0]; }).join('').substring(0, 2);
           var bg = idx % 2 === 0 ? '#fff' : '#FAFBFC';

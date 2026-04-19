@@ -1529,7 +1529,7 @@ function enterPhase(phase) {
         '<div style="display:flex;gap:8px;flex-wrap:wrap">' +
           '<a href="/browse.html" style="padding:9px 18px;background:#2874A6;color:#fff;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">Browse more cases →</a>' +
           '<a href="/simulation-engine.html?case=' + encodeURIComponent(cid) + '" style="padding:9px 18px;background:#fff;color:#2874A6;border:1.5px solid #2874A6;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">🔄 Replay this case</a>' +
-          '<a href="/virtual-emr.html?case=' + encodeURIComponent(cid) + '" style="padding:9px 18px;background:#f8fafc;color:#1B4F72;border:1px solid #d0dce8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">🏥 Try in Virtual EMR</a>' +
+          '<a href="' + ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[cid])?('/virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[cid]):('/virtual-emr.html?case='+encodeURIComponent(cid))) + '" style="padding:9px 18px;background:#f8fafc;color:#1B4F72;border:1px solid #d0dce8;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none">🏥 Try in Virtual EMR</a>' +
         '</div>';
       var msgs = document.getElementById('chatMessages');
       if (msgs) { msgs.appendChild(actDiv); msgs.scrollTop = msgs.scrollHeight; }
@@ -3777,7 +3777,7 @@ async function exportStudyData() {
     h += '</a>';
 
     // Card 3: Practice (same case in EMR)
-    h += '<a href="/virtual-emr.html?case=' + encodeURIComponent(cid) + '"';
+    h += '<a href="' + ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[cid])?('/virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[cid]):('/virtual-emr.html?case='+encodeURIComponent(cid))) + '"';
     h += ' style="display:flex;flex-direction:column;gap:6px;padding:14px;background:#ECFDF5;border:1.5px solid #A7F3D0;border-radius:10px;text-decoration:none;transition:all .15s"';
     h += ' onmouseover="this.style.borderColor=\'#059669\';this.style.transform=\'translateY(-1px)\'"';
     h += ' onmouseout="this.style.borderColor=\'\2\';this.style.transform=\'\'">';

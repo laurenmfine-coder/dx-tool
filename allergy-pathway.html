@@ -275,7 +275,7 @@ function render() {
   
   const hideDx = (window.SpoilerFree && SpoilerFree.isHidden()) || window._allergyHideDx || false;
   grid.innerHTML = filtered.map((c, idx) => {
-    const url = 'virtual-emr.html?case=' + c.id + '&setting=' + (c.setting||'ed') + (diff!=='standard'?'&difficulty='+diff:'');
+    const url = ((window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[c.id])?('virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[c.id]):('virtual-emr.html?case='+c.id))+'&setting='+(c.setting||'ed')+(diff!=='standard'?'&difficulty='+diff:'');
     const sub = SUBTYPES.find(s=>s.id===c.allergySubtype);
     const displayDx = hideDx ? (c.presentation || 'A/I Case') + ' \u2014 Case ' + (idx+1) : c.dx;
     const displayCc = hideDx ? 'Click to begin' : (c.cc || c.presentation);

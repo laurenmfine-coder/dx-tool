@@ -883,7 +883,7 @@ function renderPatientList() {
         </div>
         ${p.pages && p.pages.length ? `<div class="ipass-actions">
           <button type="button" class="ipass-btn primary" onclick="event.stopPropagation();openScenario(${i},0)">📟 View Active Page Scenario</button>
-          ${p._caseId ? `<a class="ipass-btn" href="virtual-emr.html?case=${p._caseId}" target="_blank" onclick="event.stopPropagation()" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">🏥 View in EMR</a>` : ''}
+          ${p._caseId ? `<a class="ipass-btn" href="${(window.RDX_CASE_TOKENS&&window.RDX_CASE_TOKENS.slugToToken&&window.RDX_CASE_TOKENS.slugToToken[p._caseId])?'virtual-emr.html?cx='+window.RDX_CASE_TOKENS.slugToToken[p._caseId]:'virtual-emr.html?case='+p._caseId}" target="_blank" onclick="event.stopPropagation()" style="text-decoration:none;display:inline-flex;align-items:center;gap:4px">🏥 View in EMR</a>` : ''}
         </div>` : ''}
         ${getVitalsHTML(p)}
       </div>`;
