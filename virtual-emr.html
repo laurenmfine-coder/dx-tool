@@ -4268,6 +4268,23 @@ function deleteProblem(idx){
 // CLINICAL ORDERS (Labs + Imaging)
 // ===============================================================
 function renderOrders(){
+  // Live refresh: re-render every 10s while orders are pending (keeps countdown current)
+  if (!window._orderRefreshTimer) {
+    var _hasPending = S.labOrders.some(function(o){ return !o.resulted; }) ||
+                      S.imgOrders.some(function(o){ return !o.resulted; });
+    if (_hasPending) {
+      window._orderRefreshTimer = setInterval(function() {
+        var _stillPending = (window.S) && (
+          S.labOrders.some(function(o){ return !o.resulted; }) ||
+          S.imgOrders.some(function(o){ return !o.resulted; }));
+        if (!_stillPending) {
+          clearInterval(window._orderRefreshTimer);
+          window._orderRefreshTimer = null;
+        }
+        if (window.S && S.activeTab === 'orders' && window.render) render();
+      }, 10000);
+    }
+  }
   // Pending & completed orders
   let pendingLabs=S.labOrders.filter(o=>!o.resulted);
   let completedLabs=S.labOrders.filter(o=>o.resulted);
@@ -4279,7 +4296,23 @@ function renderOrders(){
 
   // Pending orders
   if(pendingLabs.length||pendingImgs.length){
-    let pRows=[...pendingLabs.map((o,i)=>'<tr><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+'<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;font-size:11px;font-weight:700;color:#92400E"><span style="width:6px;height:6px;border-radius:50%;background:#D97706;animation:pulse 1.2s infinite"></span>Processing</span>'+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px" onclick="resultLabOrder('+i+')">↓ Result Now</button> <button type="button" class="btn-remove" onclick="cancelLabOrder('+i+')">Cancel</button></td></tr>'),...pendingImgs.map((o,i)=>'<tr><td>'+badge("Imaging","badge-purple")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+'<span style="display:inline-flex;align-items:center;gap:5px;padding:3px 8px;background:#FFFBEB;border:1px solid #FDE68A;border-radius:4px;font-size:11px;font-weight:700;color:#92400E"><span style="width:6px;height:6px;border-radius:50%;background:#D97706;animation:pulse 1.2s infinite"></span>Processing</span>'+'</td><td><button type="button" class="btn-submit" style="padding:4px 12px;font-size:11px;background:var(--accent)" onclick="resultImgOrder('+i+')">↓ Result Now</button> <button type="button" class="btn-remove" onclick="cancelImgOrder('+i+')">Cancel</button></td></tr>')];
+    // Build ETA display for each pending order
+    function _getEtaDisplay(o) {
+      if (!o.etaMs) return '<span style="font-size:11px;color:#92400E;font-weight:600">Pending</span>';
+      var remaining = o.etaMs - Date.now();
+      if (remaining <= 0) return '<span style="color:#10B981;font-weight:700;font-size:11px">⏳ Due any moment</span>';
+      var rem = _fmtRemaining(remaining);
+      var pct = Math.max(0, Math.min(100, Math.round(((o.tatMs - remaining) / o.tatMs) * 100)));
+      var cat = (LAB_CATALOG.concat(IMG_CATALOG)).find(function(c){ return c.id===o.id; });
+      var tatLabel = cat ? cat.tat : '';
+      return '<div style="min-width:120px">' +
+        '<div style="display:flex;justify-content:space-between;font-size:10px;color:#64748B;margin-bottom:3px">' +
+        '<span>⏱ ' + rem + ' remaining</span><span style="color:#94A3B8">' + (tatLabel ? tatLabel + ' TAT' : '') + '</span></div>' +
+        '<div style="height:4px;background:#E2ECF4;border-radius:2px;overflow:hidden">' +
+        '<div style="height:100%;width:' + pct + '%;background:' + (pct>75?'#10B981':pct>40?'#F59E0B':'#2874A6') + ';border-radius:2px;transition:width .5s"></div>' +
+        '</div></div>';
+    }
+    let pRows=[...pendingLabs.map((o,i)=>'<tr><td>'+badge("Lab")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+_getEtaDisplay(o)+'</td><td><button type="button" class="btn-remove" style="font-size:10px;padding:3px 8px" onclick="resultLabOrder('+i+')" title="Skip wait — show results now">Skip wait</button> <button type="button" class="btn-remove" onclick="cancelLabOrder('+i+')">Cancel</button></td></tr>'),...pendingImgs.map((o,i)=>'<tr><td>'+badge("Imaging","badge-purple")+'</td><td class="td-bold">'+esc(o.name)+'</td><td class="td-muted">'+esc(o.orderedAt)+'</td><td>'+_getEtaDisplay(o)+'</td><td><button type="button" class="btn-remove" style="font-size:10px;padding:3px 8px" onclick="resultImgOrder('+i+')" title="Skip wait — show results now">Skip wait</button> <button type="button" class="btn-remove" onclick="cancelImgOrder('+i+')">Cancel</button></td></tr>')];
     html+=sectionCard("Pending Orders ("+pRows.length+")",I.calendar,tableHTML(["Type","Study","Ordered","Status",""],pRows));
   }
 
@@ -4325,7 +4358,7 @@ function renderOrders(){
   }
 
   if(!S.labOrders.length&&!S.imgOrders.length&&!S.referralOrders.length){
-    html+='<div style="text-align:center;padding:32px 20px"><div style="font-size:40px;margin-bottom:12px">🔬</div><div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">No Orders Placed Yet</div><div style="font-size:13px;line-height:1.6;max-width:340px;margin:0 auto;color:var(--text-secondary)">Use <strong>Order Labs</strong> or <strong>Order Imaging</strong> above. Results appear automatically with simulated TAT — EKG in ~8s, BMP in ~20s, CT in ~30s.</div></div>';
+    html+='<div style="text-align:center;padding:32px 20px"><div style="font-size:40px;margin-bottom:12px">🔬</div><div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px">No Orders Placed Yet</div><div style="font-size:13px;line-height:1.6;max-width:340px;margin:0 auto;color:var(--text-secondary)">Use <strong>Order Labs</strong> or <strong>Order Imaging</strong> above. Results arrive automatically based on simulated turnaround time. In ED mode: EKG ~30 sec, troponin ~2 min, BMP ~2 min, CT ~4 min, MRI ~48 min. Clinic mode takes longer. Write your note while you wait — just like real practice.</div></div>';
   }
 
   return html;
@@ -4398,10 +4431,98 @@ function orderLab(id){
   }
   _placeLabOrder(id,cat,null,'placed');
 }
+// ── TAT Simulation ───────────────────────────────────────────────────────────
+// Converts a real-world TAT string to simulation milliseconds, scaled by setting.
+// ED: compressed ~30x  |  Inpatient: ~20x  |  Clinic: ~10x  |  Outpatient: 24hr+ → manual only
+function _parseTATtoMs(tatStr, setting) {
+  var s = (tatStr || '').toLowerCase().trim();
+  var realMinutes = 0;
+  if (s.indexOf('min') >= 0) realMinutes = parseInt(s) || 15;
+  else if (s.indexOf('hr') >= 0) realMinutes = (parseInt(s) || 1) * 60;
+  else if (s.indexOf('day') >= 0) realMinutes = (parseInt(s) || 1) * 60 * 24;
+  else realMinutes = 60; // default 1 hour
+
+  // Setting-based compression factor
+  var factor;
+  switch (setting || 'ed') {
+    case 'ed':       factor = 30;  break; // 1 hr → 2 min, 15 min → 30 sec
+    case 'inpatient':
+    case 'icu':      factor = 20;  break; // 1 hr → 3 min
+    case 'consult':  factor = 20;  break;
+    case 'clinic':   factor = 10;  break; // 1 hr → 6 min
+    default:         factor = 15;
+  }
+  return Math.round((realMinutes / factor) * 60 * 1000); // milliseconds
+}
+
+// Format remaining ms for display
+function _fmtRemaining(ms) {
+  if (ms <= 0) return 'Ready';
+  var sec = Math.ceil(ms / 1000);
+  if (sec < 60) return sec + 's';
+  var min = Math.floor(sec / 60), s = sec % 60;
+  return min + 'm' + (s > 0 ? ' ' + s + 's' : '');
+}
+
+function _scheduleAutoResult(orderType, idx) {
+  // orderType: 'lab' or 'img'
+  var orders = orderType === 'lab' ? S.labOrders : S.imgOrders;
+  var order = orders[idx];
+  if (!order || order.resulted) return;
+  var cat = orderType === 'lab'
+    ? (LAB_CATALOG.find(function(l){ return l.id === order.id; }))
+    : (IMG_CATALOG.find(function(i){ return i.id === order.id; }));
+  var tatStr = (cat && cat.tat) ? cat.tat : '1 hr';
+  var setting = (window.S && S.clinicalSetting) || 'ed';
+  var delayMs = _parseTATtoMs(tatStr, setting);
+  order.tatMs = delayMs;
+  order.orderedAtMs = Date.now();
+  order.etaMs = Date.now() + delayMs;
+  var timerId = setTimeout(function() {
+    if (orderType === 'lab') resultLabOrder_auto(idx);
+    else resultImgOrder_auto(idx);
+  }, delayMs);
+  order._timerId = timerId;
+  saveStudentData(orderType === 'lab' ? 'lab-orders' : 'img-orders', orders);
+}
+
+function resultLabOrder_auto(idx) {
+  if (idx >= S.labOrders.length) return;
+  var order = S.labOrders[idx];
+  if (!order || order.resulted) return;
+  var result = CASE_SPECIFIC_LAB_RESULTS[order.id] || generateNormalLabResult(order.id);
+  order.resulted = true;
+  order.resultData = result;
+  order.resultedAt = new Date().toLocaleString();
+  saveStudentData('lab-orders', S.labOrders);
+  showToast('📋 Lab results ready: ' + order.name);
+  render();
+}
+
+function resultImgOrder_auto(idx) {
+  if (idx >= S.imgOrders.length) return;
+  var order = S.imgOrders[idx];
+  if (!order || order.resulted) return;
+  var result = CASE_SPECIFIC_IMG_RESULTS[order.id] || generateNormalImgResult(order.id);
+  order.resulted = true;
+  order.resultData = result;
+  order.resultedAt = new Date().toLocaleString();
+  saveStudentData('img-orders', S.imgOrders);
+  showToast('🩻 Imaging results ready: ' + order.name);
+  render();
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 function _placeLabOrder(id,cat,vResult,action){
-  S.labOrders.push({id,name:cat.name,orderedAt:new Date().toLocaleString(),resulted:false,resultData:null,validation:vResult?{status:vResult.status,alertCount:vResult.alerts.length}:null});
+  var newOrder = {id:id, name:cat.name, orderedAt:new Date().toLocaleString(),
+    resulted:false, resultData:null,
+    validation:vResult?{status:vResult.status,alertCount:vResult.alerts.length}:null};
+  S.labOrders.push(newOrder);
+  var newIdx = S.labOrders.length - 1;
   saveStudentData("lab-orders",S.labOrders);
-  showToast("✓ "+cat.name+" ordered");render();
+  showToast("✓ "+cat.name+" ordered");
+  _scheduleAutoResult('lab', newIdx);
+  render();
   hideAnnotationPopover();
 }
 
@@ -4449,9 +4570,15 @@ function orderImg(id){
   _placeImgOrder(id,cat,null,'placed');
 }
 function _placeImgOrder(id,cat,vResult,action){
-  S.imgOrders.push({id,name:cat.name,orderedAt:new Date().toLocaleString(),resulted:false,resultData:null,validation:vResult?{status:vResult.status,alertCount:vResult.alerts.length}:null});
+  var newOrder = {id:id, name:cat.name, orderedAt:new Date().toLocaleString(),
+    resulted:false, resultData:null,
+    validation:vResult?{status:vResult.status,alertCount:vResult.alerts.length}:null};
+  S.imgOrders.push(newOrder);
+  var newIdx = S.imgOrders.length - 1;
   saveStudentData("img-orders",S.imgOrders);
-  showToast("✓ "+cat.name+" ordered");render();
+  showToast("✓ "+cat.name+" ordered");
+  _scheduleAutoResult('img', newIdx);
+  render();
   hideAnnotationPopover();
 }
 
