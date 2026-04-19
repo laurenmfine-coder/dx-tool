@@ -135,7 +135,7 @@ HPI: ${info.hpi||'not available'}
 // ── API call ──────────────────────────────────────────────────────────────
 async function callAPI(prompt, retries = MAX_RETRIES) {
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  const headers = { 'Content-Type': 'application/json' };
+  const headers = { 'Content-Type': 'application/json', 'anthropic-version': '2023-06-01' };
   if (apiKey) headers['x-api-key'] = apiKey;
 
   for (let attempt = 0; attempt <= retries; attempt++) {
