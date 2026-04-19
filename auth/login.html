@@ -2,92 +2,98 @@
 <html lang="en">
 <head>
 <script src="/js/rdx-config.js"></script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sign In — ReasonDx</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<meta property="og:title" content="Sign In | ReasonDx">
+<meta name="description" content="Sign in or create a free ReasonDx account to save your progress and Reasoning Fingerprint.">
+<link rel="canonical" href="https://www.reasondx.com/auth/login.html">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#060a10;--card:#0c1118;--border:rgba(255,255,255,.06);--border-hi:rgba(255,255,255,.12);
-  --text:#e0e0e0;--dim:rgba(255,255,255,.4);--dim2:rgba(255,255,255,.22);
+  --text:#e0e0e0;--dim:rgba(255,255,255,.45);--dim2:rgba(255,255,255,.25);
   --blue:#2874A6;--blue-bg:rgba(40,116,166,.08);--blue-bd:rgba(40,116,166,.2);
   --blue-light:#5BA8D0;--error:#EF4444;--success:#10B981;
 }
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',system-ui,sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;position:relative;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* Ambient */
+/* Ambient background */
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(40,116,166,.07) 0%,transparent 70%);pointer-events:none}
-
-/* Card */
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:420px;overflow:hidden;position:relative;z-index:1}
-
-/* Header */
-.card-hdr{padding:32px 32px 24px;text-align:center;border-bottom:1px solid var(--border)}
-.logo-mark{width:44px;height:44px;background:var(--blue);border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;margin-bottom:16px}
-.card-title{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:6px}
-.card-sub{font-size:13px;color:var(--dim);line-height:1.5}
-
-/* Body */
-.card-body{padding:28px 32px 32px}
-
-/* Google button */
-.btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:16px 20px;background:#fff;color:#1a1a1a;font-size:16px;font-weight:600;font-family:'DM Sans',sans-serif;border:none;border-radius:12px;cursor:pointer;transition:all .15s;text-decoration:none;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.btn-google:hover{background:#f5f5f5;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
-.btn-google:active{transform:translateY(0)}
-.btn-google svg{flex-shrink:0}
-
-/* Divider */
-.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--dim2);font-size:12px}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
-
-/* Email form */
-.field{margin-bottom:14px}
-.field label{display:block;font-size:12px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
-.field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:16px;font-family:'DM Sans',sans-serif;color:var(--text);outline:none;transition:all .15s}
-.field input:focus{border-color:rgba(40,116,166,.5);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
-.field input::placeholder{color:var(--dim2)}
-
-/* Buttons */
-.btn-primary{width:100%;padding:13px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;border:none;border-radius:10px;cursor:pointer;transition:all .15s;margin-top:4px}
-.btn-primary:hover{background:#1B4F72;transform:translateY(-1px)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
-
-.btn-ghost{width:100%;padding:11px;background:transparent;color:var(--dim);font-size:13px;font-weight:500;font-family:'DM Sans',sans-serif;border:1px solid var(--border);border-radius:10px;cursor:pointer;transition:all .15s;margin-top:8px}
-.btn-ghost:hover{border-color:var(--border-hi);color:var(--text)}
-.btn-magic{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px 20px;background:#F8FAFC;color:var(--text);font-size:15px;font-weight:600;font-family:'DM Sans',sans-serif;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all .15s;margin-bottom:12px}
-.btn-magic:hover{background:#F0F4F8;border-color:#94A3B8}
-
-/* Toggle tabs */
-.tabs{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:3px;margin-bottom:20px;gap:2px}
-.tab{flex:1;padding:8px;text-align:center;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .15s;color:var(--dim);border:none;background:transparent;font-family:'DM Sans',sans-serif}
-.tab.active{background:var(--blue);color:#fff}
-
-/* Messages */
-.msg{padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:14px;display:none}
-.msg.show{display:block}
-.msg-error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#FCA5A5}
-.msg-success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#6EE7B7}
-.msg-info{background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue-light)}
-
-/* Footer */
-.card-ftr{padding:16px 32px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--dim2)}
-.card-ftr a{color:var(--dim);text-decoration:none}
-.card-ftr a:hover{color:var(--text)}
 
 /* Back link */
 .back{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--dim);text-decoration:none;margin-bottom:24px;transition:color .15s;position:relative;z-index:1}
 .back:hover{color:var(--text)}
 
-/* Loading spinner */
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+/* Card */
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;width:100%;max-width:420px;overflow:hidden;position:relative;z-index:1}
+.card-hdr{padding:32px 32px 20px;text-align:center;border-bottom:1px solid var(--border)}
+.logo-mark{width:44px;height:44px;background:var(--blue);border-radius:11px;display:inline-flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;margin-bottom:16px}
+.card-title{font-family:'DM Serif Display',serif;font-size:24px;font-weight:400;color:#fff;margin-bottom:6px}
+.card-sub{font-size:13px;color:var(--dim);line-height:1.5}
+.card-body{padding:24px 32px 28px}
+.card-ftr{padding:16px 32px;border-top:1px solid var(--border);text-align:center;font-size:12px;color:var(--dim2)}
+.card-ftr a{color:var(--dim);text-decoration:none}
+.card-ftr a:hover{color:var(--text)}
+
+/* Mode toggle (Sign in / Sign up) */
+.mode-toggle{display:flex;background:rgba(255,255,255,.04);border-radius:10px;padding:3px;margin-bottom:20px;gap:2px}
+.mode-btn{flex:1;padding:9px;text-align:center;font-size:13px;font-weight:600;border-radius:8px;cursor:pointer;transition:all .15s;color:var(--dim);border:none;background:transparent;font-family:inherit}
+.mode-btn.active{background:var(--blue);color:#fff}
+
+/* Primary Google button */
+.btn-google{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:14px 20px;background:#fff;color:#1a1a1a;font-size:15px;font-weight:600;font-family:inherit;border:none;border-radius:12px;cursor:pointer;transition:all .15s;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.btn-google:hover{background:#f5f5f5;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.btn-google:active{transform:translateY(0)}
+.btn-google:disabled{opacity:.6;cursor:not-allowed;transform:none}
+
+/* Divider */
+.divider{display:flex;align-items:center;gap:12px;margin:18px 0;color:var(--dim2);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Fields */
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11px;font-weight:600;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.field input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:16px;font-family:inherit;color:var(--text);outline:none;transition:all .15s}
+.field input:focus{border-color:rgba(40,116,166,.5);background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(40,116,166,.1)}
+.field input::placeholder{color:var(--dim2)}
+
+/* Buttons */
+.btn-primary{width:100%;padding:13px;background:var(--blue);color:#fff;font-size:14px;font-weight:700;font-family:inherit;border:none;border-radius:10px;cursor:pointer;transition:all .15s;margin-top:4px}
+.btn-primary:hover{background:#1B4F72;transform:translateY(-1px)}
+.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+.btn-text{background:none;border:none;color:var(--dim);font-size:12px;font-family:inherit;cursor:pointer;padding:4px;text-decoration:underline;text-underline-offset:2px}
+.btn-text:hover{color:var(--text)}
+
+/* Magic-link collapse */
+.magic-wrap{margin-top:10px;text-align:center}
+.magic-form{display:none;margin-top:10px;padding:14px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:10px}
+.magic-form.open{display:block}
+
+/* Messages */
+.msg{padding:10px 14px;border-radius:9px;font-size:13px;margin-bottom:14px;display:none;line-height:1.4}
+.msg.show{display:block}
+.msg-error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.25);color:#FCA5A5}
+.msg-success{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:#6EE7B7}
+.msg-info{background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue-light)}
+
+/* Forgot link */
+.forgot-row{text-align:right;margin-top:4px}
+.forgot-row a{font-size:12px;color:var(--dim);text-decoration:none}
+.forgot-row a:hover{color:var(--text);text-decoration:underline}
+
+/* Spinner */
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(0,0,0,.2);border-top-color:#1a1a1a;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:8px}
+.btn-primary .spinner{border-color:rgba(255,255,255,.3);border-top-color:#fff}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* Small print */
+.legal{margin-top:14px;font-size:11px;color:var(--dim2);text-align:center;line-height:1.5}
+.legal a{color:var(--dim);text-decoration:underline;text-underline-offset:2px}
 </style>
-<meta property="og:title" content="Sign In | ReasonDx">
-<meta name="description" content="Sign in to your ReasonDx account to continue your clinical reasoning training.">
-<link rel="canonical" href="https://www.reasondx.com/auth/login.html">
 </head>
 <body>
 
@@ -96,53 +102,33 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 <div class="card">
   <div class="card-hdr">
     <div class="logo-mark">Rx</div>
-    <div class="card-title">Welcome back</div>
-    <div class="card-sub">Sign in to save your Reasoning Fingerprint and track your progress</div>
+    <div class="card-title" id="cardTitle">Welcome back</div>
+    <div class="card-sub" id="cardSub">Sign in to save your progress and Reasoning Fingerprint</div>
   </div>
 
   <div class="card-body">
 
-    <!-- Error / success messages -→
+    <div class="mode-toggle" role="tablist">
+      <button class="mode-btn active" id="modeSignIn" onclick="setMode('signin')" type="button">Sign in</button>
+      <button class="mode-btn" id="modeSignUp" onclick="setMode('signup')" type="button">Create account</button>
+    </div>
+
     <div class="msg msg-error" id="msgError"></div>
     <div class="msg msg-success" id="msgSuccess"></div>
     <div class="msg msg-info" id="msgInfo"></div>
 
-    <!-- Google Sign-In (Prominent) -→
-    <button class="btn-google" id="btnGoogle" onclick="signInGoogle()">
-      <svg width="20" height="20" viewBox="0 0 18 18" fill="none">
+    <button class="btn-google" id="btnGoogle" type="button" onclick="signInGoogle()">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
         <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 01-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
         <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 009 18z" fill="#34A853"/>
         <path d="M3.964 10.706A5.41 5.41 0 013.682 9c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 000 9c0 1.452.348 2.827.957 4.038l3.007-2.332z" fill="#FBBC05"/>
         <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 00.957 4.962L3.964 6.294C4.672 4.169 6.656 3.58 9 3.58z" fill="#EA4335"/>
       </svg>
-      Continue with Google
+      <span id="btnGoogleLabel">Continue with Google</span>
     </button>
 
-    <!-- Email magic link — peer of Google, good for mobile -->
-    <button class="btn-magic" id="btnMagicLink" onclick="showMagicLinkForm()">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,12 2,6"/></svg>
-      Sign in with email link
-    </button>
+    <div class="divider">or</div>
 
-    <!-- Magic link form (hidden by default) -->
-    <div id="magicLinkForm" style="display:none">
-      <div class="field" style="margin-top:4px">
-        <input type="email" id="mlEmail" placeholder="you@email.com" autocomplete="email"
-          onkeydown="if(event.key==='Enter')doMagicLink()">
-      </div>
-      <button class="btn-primary" id="btnMagicSend" onclick="doMagicLink()">Send link →</button>
-      <button class="btn-ghost" onclick="hideMagicLinkForm()" style="margin-top:6px">Use password instead</button>
-    </div>
-
-    <div class="divider" id="passwordDivider">or use password</div>
-
-    <!-- Sign In / Sign Up tabs -->
-    <div class="tabs">
-      <button class="tab active" id="tabSignIn" onclick="switchTab('signin')">Sign In</button>
-      <button class="tab" id="tabSignUp" onclick="switchTab('signup')">Create Account</button>
-    </div>
-
-    <!-- Sign In form -→
     <div id="formSignIn">
       <div class="field">
         <label for="siEmail">Email</label>
@@ -152,286 +138,353 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
         <label for="siPassword">Password</label>
         <input type="password" id="siPassword" placeholder="••••••••" autocomplete="current-password"
           onkeydown="if(event.key==='Enter')doSignIn()">
-        <div style="text-align:right;margin-top:6px">
-          <a href="#" onclick="showForgotPassword();return false" style="font-size:12px;color:var(--dim);text-decoration:none">Forgot password?</a>
-        </div>
+        <div class="forgot-row"><a href="#" onclick="doForgotPassword();return false">Forgot password?</a></div>
       </div>
-      <button class="btn-primary" id="btnSignIn" onclick="doSignIn()">Sign In</button>
+      <button class="btn-primary" id="btnSignIn" type="button" onclick="doSignIn()">Sign In</button>
 
+      <div class="magic-wrap">
+        <button class="btn-text" type="button" onclick="toggleMagic()">Email me a sign-in link instead</button>
+      </div>
     </div>
 
-    <!-- Sign Up form -->
     <div id="formSignUp" style="display:none">
-      <div class="field">
-        <label for="suName">Full Name</label>
-        <input type="text" id="suName" placeholder="Your name" autocomplete="name">
-      </div>
       <div class="field">
         <label for="suEmail">Email</label>
         <input type="email" id="suEmail" placeholder="you@email.com" autocomplete="email">
       </div>
       <div class="field">
         <label for="suPassword">Password</label>
-        <input type="password" id="suPassword" placeholder="8+ characters" autocomplete="new-password"
+        <input type="password" id="suPassword" placeholder="Minimum 8 characters" autocomplete="new-password"
           onkeydown="if(event.key==='Enter')doSignUp()">
       </div>
-      <button class="btn-primary" id="btnSignUp" onclick="doSignUp()">Create Free Account</button>
+      <button class="btn-primary" id="btnSignUp" type="button" onclick="doSignUp()">Create free account</button>
+
+      <div class="legal">
+        By creating an account you agree to our
+        <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.
+      </div>
+    </div>
+
+    <div class="magic-form" id="magicForm">
+      <div class="field" style="margin-bottom:10px">
+        <label for="mlEmail">Email for sign-in link</label>
+        <input type="email" id="mlEmail" placeholder="you@email.com" autocomplete="email"
+          onkeydown="if(event.key==='Enter')doMagicLink()">
+      </div>
+      <button class="btn-primary" id="btnMagic" type="button" onclick="doMagicLink()">Send link</button>
     </div>
 
   </div>
 
   <div class="card-ftr">
-    No account required to use ReasonDx — <a href="../index.html">continue without signing in</a>
+    No account required to try ReasonDx — <a href="../index.html">continue as guest</a>
   </div>
 </div>
 
-<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../js/rdx-supabase.js"></script>
 <script>
-/* ── INIT ── */
-const SUPABASE_URL  = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_URL)||'https://lpwbiqpojisqgezycupw.supabase.co';
-const SUPABASE_ANON = (window.RDX_CONFIG&&window.RDX_CONFIG.SUPABASE_ANON_KEY)||'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxwd2JpcXBvamlzcWdlenljdXB3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAzMjIzMTMsImV4cCI6MjA4NTg5ODMxM30.wxf6gMaPxqB3gX8JmKBdbviCAu5RjWelfOIcUff8Js0';
+/* ── CONFIG ── */
+var SUPABASE_URL  = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_URL)  || 'https://lpwbiqpojisqgezycupw.supabase.co';
+var SUPABASE_ANON = (window.RDX_CONFIG && window.RDX_CONFIG.SUPABASE_ANON_KEY) || '';
 
-let _sb = null;
+var _sb = null;
 function getSB() {
   if (_sb) return _sb;
+  if (window._rdxSbClient) { _sb = window._rdxSbClient; return _sb; }
   if (window.supabase && window.supabase.createClient) {
     _sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
   }
   return _sb;
 }
 
-/* ── REDIRECT AFTER AUTH ── */
+/* ── REDIRECT TARGET (preserves ?next=) ── */
 function getRedirectTarget() {
-  const p = new URLSearchParams(window.location.search);
-  return p.get('next') || '../index.html';
-}
-
-/* ── CHECK EXISTING SESSION ── */
-async function checkSession() {
-  const sb = getSB();
-  if (!sb) return;
-  const { data } = await sb.auth.getSession();
-  if (data.session) {
-    // Already signed in
-    window.location.href = getRedirectTarget();
-  }
-}
-
-/* ── HANDLE OAUTH CALLBACK (hash fragment on return from Google) ── */
-async function handleCallback() {
-  const sb = getSB();
-  if (!sb) return false;
-  // Supabase auto-handles #access_token in hash
-  const { data, error } = await sb.auth.getSession();
-  if (data.session) {
-    bridgeSession(data.session);
-    window.location.href = getRedirectTarget();
-    return true;
-  }
-  return false;
-}
-
-/* ── BRIDGE SESSION to localStorage for legacy inline guards ── */
-function bridgeSession(session) {
+  var p = new URLSearchParams(window.location.search);
+  var next = p.get('next');
+  if (!next) return '../index.html';
+  // Only allow same-origin redirects
   try {
+    var u = new URL(next, window.location.origin);
+    if (u.origin === window.location.origin) return u.pathname + u.search + u.hash;
+  } catch(e) {}
+  return '../index.html';
+}
+
+/* Build a redirectTo URL that preserves ?next= through the OAuth round-trip */
+function authRedirectUrl() {
+  var next = new URLSearchParams(window.location.search).get('next');
+  var base = window.location.origin + window.location.pathname;
+  return next ? (base + '?next=' + encodeURIComponent(next)) : base;
+}
+
+/* ── LOCALSTORAGE BRIDGE (other pages read these keys) ── */
+function bridgeSession(session) {
+  if (!session || !session.user) return;
+  try {
+    var u = session.user;
+    var displayName = (u.user_metadata && u.user_metadata.full_name)
+                   || (u.user_metadata && u.user_metadata.name)
+                   || (u.email ? u.email.split('@')[0] : 'User');
     localStorage.setItem('reasondx-user', JSON.stringify({
-      email: session.user.email,
-      name: session.user.user_metadata?.full_name || session.user.email.split('@')[0],
-      supabaseId: session.user.id,
+      email: u.email,
+      name: displayName,
+      supabaseId: u.id,
       lastLogin: new Date().toISOString()
     }));
-    // Also set vemr-session so dx-user-bar picks it up
     localStorage.setItem('vemr-session', JSON.stringify({
-      displayName: session.user.user_metadata?.full_name || session.user.email.split('@')[0],
-      email: session.user.email
+      displayName: displayName,
+      email: u.email
     }));
   } catch(e) {}
 }
 
 /* ── UI HELPERS ── */
 function showMsg(type, text) {
-  ['Error','Success','Info'].forEach(t => {
-    const el = document.getElementById('msg' + t);
-    el.classList.remove('show');
-    el.textContent = '';
+  ['Error','Success','Info'].forEach(function(t) {
+    var el = document.getElementById('msg' + t);
+    if (el) { el.classList.remove('show'); el.textContent = ''; }
   });
-  const el = document.getElementById('msg' + type);
-  el.textContent = text;
-  el.classList.add('show');
+  if (!text) return;
+  var el = document.getElementById('msg' + type);
+  if (el) { el.textContent = text; el.classList.add('show'); }
 }
 
-function setLoading(btnId, loading, text) {
-  const btn = document.getElementById(btnId);
+function setLoading(btnId, loading, label) {
+  var btn = document.getElementById(btnId);
+  if (!btn) return;
   btn.disabled = loading;
-  btn.innerHTML = loading ? `<span class="spinner"></span>${text}` : text;
+  if (loading) {
+    btn.innerHTML = '<span class="spinner"></span>' + label;
+  } else {
+    btn.textContent = label;
+  }
 }
 
-function switchTab(tab) {
-  const isSignIn = tab === 'signin';
-  document.getElementById('tabSignIn').classList.toggle('active', isSignIn);
-  document.getElementById('tabSignUp').classList.toggle('active', !isSignIn);
+/* ── MODE TOGGLE ── */
+function setMode(mode) {
+  var isSignIn = mode === 'signin';
+  document.getElementById('modeSignIn').classList.toggle('active', isSignIn);
+  document.getElementById('modeSignUp').classList.toggle('active', !isSignIn);
   document.getElementById('formSignIn').style.display = isSignIn ? '' : 'none';
   document.getElementById('formSignUp').style.display = isSignIn ? 'none' : '';
-  showMsg('Info', ''); // clear messages
+  document.getElementById('cardTitle').textContent = isSignIn ? 'Welcome back' : 'Create your account';
+  document.getElementById('cardSub').textContent = isSignIn
+    ? 'Sign in to save your progress and Reasoning Fingerprint'
+    : 'Free — no credit card, all cases unlocked';
+  document.getElementById('btnGoogleLabel').textContent = isSignIn
+    ? 'Continue with Google'
+    : 'Sign up with Google';
+  // Close magic form when switching modes
+  document.getElementById('magicForm').classList.remove('open');
+  showMsg('Error', '');
 }
 
-/* ── MAGIC LINK FORM TOGGLE ── */
-function showMagicLinkForm() {
-  document.getElementById('magicLinkForm').style.display = 'block';
-  document.getElementById('btnMagicLink').style.display = 'none';
-  document.getElementById('passwordDivider').style.display = 'block';
-  document.getElementById('mlEmail').focus();
-}
-function hideMagicLinkForm() {
-  document.getElementById('magicLinkForm').style.display = 'none';
-  document.getElementById('btnMagicLink').style.display = 'flex';
-}
-
-/* ── GOOGLE SIGN-IN ── */
-async function signInGoogle() {
-  const sb = getSB();
-  if (!sb) { showMsg('Error', 'Auth service unavailable. Please try again.'); return; }
-
-  setLoading('btnGoogle', true, 'Redirecting to Google…');
-
-  const { error } = await sb.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: window.location.origin + window.location.pathname,
-      queryParams: { access_type: 'offline', prompt: 'consent' }
-    }
-  });
-
-  if (error) {
-    setLoading('btnGoogle', false, 'Continue with Google');
-    showMsg('Error', error.message || 'Google sign-in failed. Please try again.');
+/* ── MAGIC LINK TOGGLE ── */
+function toggleMagic() {
+  var el = document.getElementById('magicForm');
+  el.classList.toggle('open');
+  if (el.classList.contains('open')) {
+    var ml = document.getElementById('mlEmail');
+    var si = document.getElementById('siEmail');
+    if (si && si.value && ml && !ml.value) ml.value = si.value;
+    if (ml) ml.focus();
   }
-  // On success, Supabase redirects — nothing more needed here
+}
+
+/* ── GOOGLE ── */
+async function signInGoogle() {
+  var sb = getSB();
+  if (!sb) { showMsg('Error', 'Auth service unavailable. Please refresh and try again.'); return; }
+
+  var btn = document.getElementById('btnGoogle');
+  btn.disabled = true;
+  document.getElementById('btnGoogleLabel').innerHTML = '<span class="spinner"></span>Redirecting…';
+
+  try {
+    var res = await sb.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: authRedirectUrl(),
+        queryParams: { access_type: 'offline', prompt: 'select_account' }
+      }
+    });
+    if (res.error) throw res.error;
+    // Supabase performs the redirect
+  } catch (err) {
+    btn.disabled = false;
+    document.getElementById('btnGoogleLabel').textContent = 'Continue with Google';
+    var msg = (err && err.message) ? err.message : 'Google sign-in failed. Please try again.';
+    if (/provider.*not.*enabled/i.test(msg)) {
+      msg = 'Google sign-in is temporarily unavailable. Use email below to sign in.';
+    }
+    showMsg('Error', msg);
+  }
 }
 
 /* ── EMAIL SIGN IN ── */
 async function doSignIn() {
-  const sb = getSB();
+  var sb = getSB();
   if (!sb) { showMsg('Error', 'Auth service unavailable.'); return; }
 
-  const email = document.getElementById('siEmail').value.trim();
-  const password = document.getElementById('siPassword').value;
+  var email = (document.getElementById('siEmail').value || '').trim();
+  var password = document.getElementById('siPassword').value;
 
-  if (!email || !password) { showMsg('Error', 'Please enter your email and password.'); return; }
+  if (!email) { showMsg('Error', 'Please enter your email.'); return; }
+  if (!password) { showMsg('Error', 'Please enter your password.'); return; }
 
   setLoading('btnSignIn', true, 'Signing in…');
 
-  const { data, error } = await sb.auth.signInWithPassword({ email, password });
-
-  if (error) {
+  try {
+    var res = await sb.auth.signInWithPassword({ email: email, password: password });
+    if (res.error) throw res.error;
+    if (res.data && res.data.session) {
+      bridgeSession(res.data.session);
+      window.location.href = getRedirectTarget();
+      return;
+    }
+    showMsg('Error', 'Unexpected response. Please try again.');
     setLoading('btnSignIn', false, 'Sign In');
-    const msg = error.message.includes('Invalid login') ? 'Incorrect email or password.' : error.message;
-    showMsg('Error', msg);
-    return;
-  }
-
-  if (data.session) {
-    bridgeSession(data.session);
-    window.location.href = getRedirectTarget();
+  } catch (err) {
+    setLoading('btnSignIn', false, 'Sign In');
+    var m = err && err.message ? err.message : 'Sign-in failed.';
+    if (/invalid login/i.test(m)) m = 'Incorrect email or password.';
+    if (/email not confirmed/i.test(m)) m = 'Please confirm your email first — check your inbox.';
+    showMsg('Error', m);
   }
 }
 
-/* ── EMAIL SIGN UP ── */
+/* ── EMAIL SIGN UP (no name required) ── */
 async function doSignUp() {
-  const sb = getSB();
+  var sb = getSB();
   if (!sb) { showMsg('Error', 'Auth service unavailable.'); return; }
 
-  const name  = document.getElementById('suName').value.trim();
-  const email = document.getElementById('suEmail').value.trim();
-  const pass  = document.getElementById('suPassword').value;
+  var email = (document.getElementById('suEmail').value || '').trim();
+  var password = document.getElementById('suPassword').value;
 
-  if (!name)  { showMsg('Error', 'Please enter your name.'); return; }
   if (!email) { showMsg('Error', 'Please enter your email.'); return; }
-  if (pass.length < 8) { showMsg('Error', 'Password must be at least 8 characters.'); return; }
+  if (!password || password.length < 8) { showMsg('Error', 'Password must be at least 8 characters.'); return; }
 
   setLoading('btnSignUp', true, 'Creating account…');
 
-  const { data, error } = await sb.auth.signUp({
-    email,
-    password: pass,
-    options: {
-      data: { full_name: name },
-      emailRedirectTo: window.location.origin + '/auth/login.html'
+  try {
+    var res = await sb.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        emailRedirectTo: authRedirectUrl()
+      }
+    });
+    if (res.error) throw res.error;
+
+    if (res.data && res.data.session) {
+      // Auto-confirmed: straight in
+      bridgeSession(res.data.session);
+      window.location.href = getRedirectTarget();
+      return;
     }
-  });
-
-  setLoading('btnSignUp', false, 'Create Free Account');
-
-  if (error) { showMsg('Error', error.message); return; }
-
-  if (data.user && !data.session) {
-    // Email confirmation required
-    showMsg('Success', '✓ Check your email to confirm your account, then sign in.');
-  } else if (data.session) {
-    bridgeSession(data.session);
-    window.location.href = getRedirectTarget();
+    if (res.data && res.data.user) {
+      setLoading('btnSignUp', false, 'Create free account');
+      showMsg('Success', '✓ Check your email to confirm your account, then sign in.');
+      return;
+    }
+    setLoading('btnSignUp', false, 'Create free account');
+    showMsg('Error', 'Could not create account. Please try again.');
+  } catch (err) {
+    setLoading('btnSignUp', false, 'Create free account');
+    var m = err && err.message ? err.message : 'Sign-up failed.';
+    if (/already registered|user already/i.test(m)) m = 'That email already has an account — try signing in.';
+    showMsg('Error', m);
   }
 }
 
 /* ── MAGIC LINK ── */
 async function doMagicLink() {
-  const sb = getSB();
+  var sb = getSB();
   if (!sb) { showMsg('Error', 'Auth service unavailable.'); return; }
 
-  const email = document.getElementById('mlEmail').value || document.getElementById('siEmail').value.trim();
-  if (!email) { showMsg('Error', 'Enter your email above first.'); return; }
+  var mlEl = document.getElementById('mlEmail');
+  var siEl = document.getElementById('siEmail');
+  var email = ((mlEl && mlEl.value) || (siEl && siEl.value) || '').trim();
+  if (!email) { showMsg('Error', 'Enter your email first.'); if (mlEl) mlEl.focus(); return; }
 
-  const { error} = await sb.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: window.location.origin + '/auth/login.html?next=' + encodeURIComponent(getRedirectTarget()) }
-  });
+  setLoading('btnMagic', true, 'Sending…');
 
-  if (error) { showMsg('Error', error.message); return; }
-  showMsg('Success', '✓ Magic link sent — check your email.');
+  try {
+    var res = await sb.auth.signInWithOtp({
+      email: email,
+      options: { emailRedirectTo: authRedirectUrl() }
+    });
+    if (res.error) throw res.error;
+    setLoading('btnMagic', false, 'Send link');
+    showMsg('Success', '✓ Check your email for a sign-in link.');
+  } catch (err) {
+    setLoading('btnMagic', false, 'Send link');
+    showMsg('Error', (err && err.message) || 'Could not send link.');
+  }
 }
 
 /* ── FORGOT PASSWORD ── */
-async function showForgotPassword() {
-  const email = document.getElementById('siEmail').value.trim();
+async function doForgotPassword() {
+  var email = (document.getElementById('siEmail').value || '').trim();
   if (!email) {
-    showMsg('Info', 'Enter your email address above, then click "Forgot password?" again.');
+    showMsg('Info', 'Enter your email above, then click "Forgot password?" again.');
     document.getElementById('siEmail').focus();
     return;
   }
 
-  const confirmed = confirm(`Send password reset email to ${email}?`);
-  if (!confirmed) return;
-
-  const sb = getSB();
+  var sb = getSB();
   if (!sb) { showMsg('Error', 'Auth service unavailable.'); return; }
 
   setLoading('btnSignIn', true, 'Sending reset email…');
 
-  const { error } = await sb.auth.resetPasswordForEmail(email, {
-    redirectTo: window.location.origin + '/auth/reset-password.html'
-  });
-
-  setLoading('btnSignIn', false, 'Sign In');
-
-  if (error) { 
-    showMsg('Error', error.message); 
-    return; 
+  try {
+    var res = await sb.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + '/auth/reset-password.html'
+    });
+    setLoading('btnSignIn', false, 'Sign In');
+    if (res.error) throw res.error;
+    showMsg('Success', '✓ Password reset email sent. Check your inbox.');
+  } catch (err) {
+    setLoading('btnSignIn', false, 'Sign In');
+    showMsg('Error', (err && err.message) || 'Could not send reset email.');
   }
-
-  showMsg('Success', '✓ Password reset email sent! Check your inbox and click the link to reset your password.');
 }
 
-/* ── ON LOAD ── */
-window.addEventListener('load', async () => {
-  // If returning from Google OAuth (hash contains access_token)
-  if (window.location.hash.includes('access_token') || window.location.search.includes('code=')) {
-    await handleCallback();
+/* ── OAUTH CALLBACK / EXISTING SESSION ── */
+async function handleLoadState() {
+  var sb = getSB();
+  if (!sb) return;
+
+  var hasHashToken = window.location.hash.indexOf('access_token') !== -1;
+  var hasCodeParam = window.location.search.indexOf('code=') !== -1;
+
+  async function check() {
+    var r = await sb.auth.getSession();
+    if (r.data && r.data.session) {
+      bridgeSession(r.data.session);
+      window.location.href = getRedirectTarget();
+      return true;
+    }
+    return false;
+  }
+
+  if (hasHashToken || hasCodeParam) {
+    // Brief retry loop — lets supabase-js parse the hash/code on return
+    for (var i = 0; i < 5; i++) {
+      if (await check()) return;
+      await new Promise(function(r){ setTimeout(r, 150); });
+    }
+    if (hasHashToken) history.replaceState(null, '', window.location.pathname + window.location.search);
+    showMsg('Error', 'We could not complete sign-in. Please try again.');
     return;
   }
-  await checkSession();
-});
+
+  // Otherwise, bounce already-signed-in users to their destination
+  await check();
+}
+
+window.addEventListener('load', handleLoadState);
 </script>
 </body>
 </html>
