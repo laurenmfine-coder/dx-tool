@@ -2372,7 +2372,7 @@ function renderDemographics(){
   // On first load for students (no note yet), show the mission card full-screen
   var _hasNote = Object.values(S.noteFields||{}).some(function(v){return v&&v.trim().length>10;});
   var _isStudent = S.currentUser && S.currentUser.role === 'student';
-  if (_mc && _isStudent && !_hasNote) return _mc;
+  // Show mission card only on very first tab visit; otherwise show card + demographics
 
   // CDS alerts — show in chart review so students see clinical reminders
   // while reviewing the chart, before ordering
@@ -3779,10 +3779,10 @@ function renderMissionCard() {
   var quicklinks = [
     { icon:'📋', label:'Problems',  tab:'problems' },
     { icon:'💊', label:'Meds',      tab:'medications' },
+    { icon:'⚠️', label:'Allergies', tab:'allergies' },
     { icon:'📊', label:'Vitals',    tab:'vitals' },
     { icon:'🧪', label:'Labs',      tab:'labs' },
     { icon:'🩻', label:'Imaging',   tab:'imaging' },
-    { icon:'💬', label:'Interview', tab:'interview' },
   ];
 
   var _pq = (window.CRT_DATA && CASE_ID && window.CRT_DATA[CASE_ID] && window.CRT_DATA[CASE_ID].profQuestion) ? window.CRT_DATA[CASE_ID].profQuestion : null;
@@ -3790,7 +3790,7 @@ function renderMissionCard() {
     + '<div class="rdx-mission-badge">Your Case</div>'
     + '<div class="rdx-mission-cc">' + esc(cc) + '</div>'
     + '<div class="rdx-mission-sub">'+(_pq ? esc(_pq) : 'Review the chart, take the history, build your differential, and present to your AI attending.')+'</div>'
-    + '<button class="rdx-mission-begin" onclick="switchTab(\'labs\')">' 
+    + '<button class="rdx-mission-begin" onclick="switchTab(\'problems\')">' 
     +   '→ Start Chart Review'
     + '</button>'
     + '<div class="rdx-mission-quicklinks">'
