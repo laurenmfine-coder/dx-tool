@@ -3776,13 +3776,17 @@ function renderMissionCard() {
   var role = S.currentUser ? S.currentUser.role : 'student';
   if (role !== 'student') return '';
 
+  // Quicklinks mirror exactly what is under Chart Review in the sidebar
   var quicklinks = [
-    { icon:'📋', label:'Problems',  tab:'problems' },
-    { icon:'💊', label:'Meds',      tab:'medications' },
-    { icon:'⚠️', label:'Allergies', tab:'allergies' },
-    { icon:'📊', label:'Vitals',    tab:'vitals' },
-    { icon:'🧪', label:'Labs',      tab:'labs' },
-    { icon:'🩻', label:'Imaging',   tab:'imaging' },
+    { icon:'📋', label:'Problems',      tab:'problems'      },
+    { icon:'📅', label:'Visit History', tab:'visits'        },
+    { icon:'💊', label:'Medications',   tab:'medications'   },
+    { icon:'⚠️', label:'Allergies',    tab:'allergies'     },
+    { icon:'📊', label:'Vitals',        tab:'vitals'        },
+    { icon:'🧪', label:'Labs',          tab:'labs'          },
+    { icon:'🩻', label:'Imaging',       tab:'imaging'       },
+    { icon:'💉', label:'Immunizations', tab:'immunizations' },
+    { icon:'🏠', label:'FH / SH',       tab:'history'       },
   ];
 
   var _pq = (window.CRT_DATA && CASE_ID && window.CRT_DATA[CASE_ID] && window.CRT_DATA[CASE_ID].profQuestion) ? window.CRT_DATA[CASE_ID].profQuestion : null;
@@ -3798,7 +3802,7 @@ function renderMissionCard() {
         return '<button class="rdx-mission-ql" onclick="switchTab(\'' + q.tab + '\')">'
           + q.icon + ' ' + q.label + '</button>';
       }).join('')
-    + '<a href="emr-skills.html" class="rdx-mission-ql" style="text-decoration:none">🎯 Skills Lab</a>'
+
     + '</div>'
     + '</div>';
 }
