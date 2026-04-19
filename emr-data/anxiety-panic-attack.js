@@ -267,39 +267,6 @@ window.EMR_DATA = {
     "presentation": "Shortness of Breath",
     "category": "psychiatric"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Sofia Delgado appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started These panic episodes are getting worse and happening way more often now, like th.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Panic Attack with Hyperventilation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Escitalopram 10mg daily; Ferrous Sulfate 325mg daily; Lorazepam 0.5mg PRN; Norethindrone-Ethinyl Estradiol (Junel 1/20).'",
-        "allergies": "'My allergies are Amoxicillin.'",
-        "family": "Mother: Generalized anxiety disorder, panic disorder, hypothyroidism, age 56, alive  Father: Hypertension, hyperlipidemia, age 60, alive  Maternal grandmother: Depression, died age 78 (stroke)",
-        "social": "Occupation: Marketing coordinator at a tech startup. High-stress environment, long hours.  Marital: Single, lives alone in apartment  Tobacco: Never smoker  Alcohol: Social \u2014 wine 2-3 glasses on weekends  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -338,6 +305,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Sofia Delgado's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Panic Attack with Hyperventilation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Sofia appears anxious and somewhat distressed, speaking rapidly and frequently touching her chest while describing her symptoms. She is cooperative and forthcoming about her symptoms but becomes visibly more anxious when discussing the frequency and intensity of her recent episodes.",
+    "interviewQuestions": [
+        "Can you describe exactly what happens during these episodes?",
+        "How long do these episodes typically last?",
+        "What seems to trigger these episodes?",
+        "Do you have any chest pain during these episodes?",
+        "Have you noticed any specific situations that make them worse?",
+        "What helps you feel better when this happens?",
+        "Have you had any recent changes in your work or personal stress?",
+        "Are you taking your medications as prescribed?",
+        "Have you had any recent changes in your menstrual cycle?",
+        "Do you have any family history of heart problems?",
+        "Have you experienced any recent weight loss or gain?",
+        "Do you drink caffeine regularly?",
+        "Have you had any recent medical procedures or tests?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, I'm not sure I understand what you're asking. Could you rephrase that?",
+        "onset": "These episodes started about two years ago, but they've gotten much worse in the past two months. They used to happen maybe once a month, but now it's three or four times a week.",
+        "character": "It feels like I can't get enough air, like I'm suffocating. My chest gets really tight and I feel like I need to breathe faster and deeper, but it doesn't help.",
+        "location": "The tightness is right here in my chest, kind of in the center, and sometimes it feels like it spreads to my throat.",
+        "severity": "During the episode it's like an 8 or 9 out of 10 - it's terrifying. I can't focus on anything else and I feel like something really bad is going to happen.",
+        "aggravating": "Work stress definitely makes it worse. Big presentations, tight deadlines, or when my boss is being particularly demanding. Also when I'm alone at night sometimes.",
+        "relieving": "The Lorazepam helps when I remember to take it, but sometimes the episode is so intense I can't think clearly enough to get it. Deep breathing sometimes helps if I can calm down enough to do it properly.",
+        "associated": "My hands and lips get tingly and numb, my heart races, I get sweaty, sometimes I feel dizzy, and I have this overwhelming sense of dread like something terrible is about to happen.",
+        "denies": "No actual chest pain, no nausea or vomiting, no fainting, no recent weight changes, no palpitations outside of the episodes.",
+        "history": "Yes, I was diagnosed with panic disorder about two years ago after my first few episodes. I also have generalized anxiety disorder and some heart thing called mitral valve prolapse.",
+        "medications": "Escitalopram 10mg daily; Ferrous Sulfate 325mg daily; Lorazepam 0.5mg PRN; Norethindrone-Ethinyl Estradiol (Junel 1/20)",
+        "allergies": "Amoxicillin",
+        "family": "My mom has panic disorder and generalized anxiety disorder too, so I guess it runs in the family. My grandmother had depression. No family history of heart attacks or sudden death.",
+        "social": "I work as a marketing coordinator at a tech startup - it's really high stress with long hours and unrealistic deadlines. I'm single and live alone. I don't smoke, drink wine socially on weekends, and don't use any drugs."
+    },
+    "examManeuvers": [
+        "General appearance and mental status",
+        "Cardiac auscultation",
+        "Pulmonary auscultation",
+        "Vital signs assessment",
+        "Extremity examination for cyanosis or edema",
+        "Neurologic assessment including reflexes",
+        "Thyroid palpation",
+        "Assessment of respiratory effort and pattern",
+        "Orthostatic vital signs",
+        "Peak flow or pulse oximetry"
+    ],
+    "examFindings": {
+        "General appearance and mental status": "Alert, oriented, appears mildly anxious but cooperative, no acute distress at rest",
+        "Cardiac auscultation": "Regular rate and rhythm, mild midsystolic click consistent with known MVP, no murmurs, rubs, or gallops",
+        "Pulmonary auscultation": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi",
+        "Vital signs assessment": "BP 112/70, HR 78, Temp 98.4°F, SpO2 99% on room air, RR 16 at rest",
+        "Extremity examination for cyanosis or edema": "No cyanosis, clubbing, or peripheral edema, capillary refill <2 seconds",
+        "Neurologic assessment including reflexes": "Deep tendon reflexes 2+ and symmetric, no focal deficits",
+        "Thyroid palpation": "Thyroid normal size, no nodules or tenderness",
+        "Assessment of respiratory effort and pattern": "Unlabored breathing at rest, normal respiratory pattern",
+        "Orthostatic vital signs": "No significant orthostatic changes",
+        "Peak flow or pulse oximetry": "Peak flow normal for age and height, oxygen saturation 99%"
+    },
+    "ddxTargets": [
+        "Panic Attack with Hyperventilation (correct diagnosis)",
+        "Generalized Anxiety Disorder exacerbation",
+        "Hyperthyroidism",
+        "Pulmonary embolism",
+        "Myocardial infarction",
+        "Asthma or reactive airway disease",
+        "Mitral valve prolapse with arrhythmia"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on psychiatric history and missing organic causes like PE, MI, or thyroid dysfunction in a young woman with known anxiety",
+        "prematureClosure": "May quickly assume psychiatric cause given known panic disorder without adequately ruling out medical emergencies",
+        "availabilityBias": "Recent cases of PE or MI in young patients, or overemphasis on cardiac causes due to known MVP"
+    },
+    "coachPrompts": {
+        "phase2": "Good start on your differential. Given this patient's age, gender, and presenting symptoms, what life-threatening conditions do you need to rule out first, even in someone with known panic disorder? How will your history help distinguish between organic and psychiatric causes?",
+        "phase5": "Now that you've completed your assessment, how do the normal vital signs and physical exam findings help narrow your differential? What key historical features support your leading diagnosis, and what red flags did you specifically look for and rule out?",
+        "finalDebrief": "This case illustrates the challenge of evaluating patients with known psychiatric conditions who present with somatic symptoms. Notice how the patient's normal vital signs, lack of cardiac or pulmonary findings, and classic panic symptom constellation supported the diagnosis, while her increased episode frequency pointed to worsening anxiety rather than new organic disease. What strategies will you use to avoid both missing organic disease and over-testing patients with established psychiatric diagnoses?"
     }
 }
 };

@@ -301,39 +301,6 @@ window.EMR_DATA = {
     "presentation": "Fever/Sepsis",
     "category": "infectious"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Walter Higgins is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did fever/sepsis start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been managing my breathing problems and other health issues pretty well lat.'",
-        "character": "'It's fever/sepsis \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia with Sepsis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone-Salmeterol (Advair Diskus) 250/50 BID; Tiotropium (Spiriva HandiHaler) 18mcg daily; Albuterol HFA 90mcg PRN; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Aspirin 81mg daily; Atorvastatin 40mg QHS; Metformin 1000mg BID.'",
-        "allergies": "'My allergies are Sulfa drugs (Trimethoprim-Sulfamethoxazole).'",
-        "family": "Mother: CHF, COPD, deceased at 78  Father: MI at 62, T2DM, deceased at 70  Brother: COPD, CAD, alive at 71",
-        "social": "Occupation: Retired electrician (IBEW)  Marital: Married, 3 adult children  Tobacco: Former smoker \u2014 40 pack-years; quit 2015  Alcohol: 1-2 beers on weekends  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and toxicity",
         "Vital signs with temperature",
@@ -372,6 +339,82 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Walter Higgins's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae, CURB-65 Score 3). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Walter appears mildly anxious and concerned about his worsening symptoms, speaking in measured sentences but breathing somewhat laboriously. He is cooperative and forthcoming with information, though downplaying the severity of his illness due to chronic respiratory issues. Despite visible distress, he maintains composure and describes symptoms matter-of-factly, having learned to adapt to chronic breathing problems.",
+    "interviewQuestions": [
+        "When did you first notice your breathing getting worse than usual?",
+        "Have you had any fever or chills recently?",
+        "Are you coughing more than normal, and if so, what does it look like?",
+        "Have you had any chest pain or tightness?",
+        "How would you rate your shortness of breath on a scale of 1-10?",
+        "What makes your breathing worse or better right now?",
+        "Have you had any nausea, vomiting, or changes in appetite?",
+        "Any confusion, dizziness, or feeling lightheaded?",
+        "Have you been taking your inhalers as prescribed?",
+        "Any recent travel, sick contacts, or hospitalizations?",
+        "How has your energy level been lately?",
+        "Any urinary symptoms or changes in urination?",
+        "Have you had pneumonia or similar infections before?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure I understand what you're asking. Could you be more specific about my breathing or how I'm feeling?",
+        "onset": "I started feeling worse about 3 days ago. At first I thought it was just my usual COPD acting up, but then I got the chills and fever yesterday.",
+        "character": "My breathing feels much heavier than usual, like I'm working harder to get air in. It's different from my normal shortness of breath - more like drowning.",
+        "location": "The breathing trouble is all over my chest. I have some aching on my right side when I take deep breaths or cough.",
+        "severity": "I'd say my breathing is about a 7 out of 10 right now. I can barely walk to the bathroom without getting winded, which is much worse than my usual.",
+        "aggravating": "Any movement makes it worse. Even sitting up straight is hard work. The coughing really wipes me out.",
+        "relieving": "My rescue inhaler isn't helping much this time. Sitting still helps a little, but not like it usually does.",
+        "associated": "I've had fever and chills since yesterday, been coughing up thick yellow-green stuff, and I feel completely exhausted. Lost my appetite too.",
+        "denies": "No chest pain like my heart problems before. No nausea or vomiting. Haven't been confused, though I feel pretty weak.",
+        "history": "I had pneumonia about 8 years ago and it felt similar to this, but not quite as bad as I feel now.",
+        "medications": "Fluticasone-Salmeterol (Advair Diskus) 250/50 BID; Tiotropium (Spiriva HandiHaler) 18mcg daily; Albuterol HFA 90mcg PRN; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Aspirin 81mg daily; Atorvastatin 40mg QHS; Metformin 1000mg BID",
+        "allergies": "Sulfa drugs (Trimethoprim-Sulfamethoxazole)",
+        "family": "My mother had COPD and died from breathing problems. My father had heart attacks and diabetes like me.",
+        "social": "I'm a retired electrician, been married 45 years. Smoked for 30 years but quit about 9 years ago. I have a couple beers on weekends but nothing more."
+    },
+    "examManeuvers": [
+        "General appearance and mental status",
+        "Vital signs including oxygen saturation",
+        "Pulmonary auscultation",
+        "Percussion of chest",
+        "Tactile fremitus",
+        "Cardiac examination",
+        "Assessment for jugular venous distension",
+        "Peripheral perfusion and capillary refill",
+        "Lower extremity edema assessment"
+    ],
+    "examFindings": {
+        "General appearance and mental status": "Ill-appearing elderly male in mild respiratory distress, alert and oriented, using accessory muscles, speaking in short phrases",
+        "Vital signs including oxygen saturation": "BP 128/74, HR 68, Temp 98.4°F, RR 24, SpO2 94% on room air",
+        "Pulmonary auscultation": "Diminished breath sounds at right base with inspiratory crackles, scattered expiratory wheezes bilaterally consistent with underlying COPD",
+        "Percussion of chest": "Dullness to percussion over right lower lobe, hyperresonance elsewhere consistent with COPD",
+        "Tactile fremitus": "Increased tactile fremitus over right lower lobe consolidation",
+        "Cardiac examination": "Regular rate and rhythm, no murmurs, rubs, or gallops, well-healed sternotomy scar present",
+        "Assessment for jugular venous distension": "JVP not elevated, no signs of right heart failure",
+        "Peripheral perfusion and capillary refill": "Capillary refill <3 seconds, pulses present, no cyanosis of extremities",
+        "Lower extremity edema assessment": "Trace bilateral lower extremity edema, unchanged from baseline per patient"
+    },
+    "ddxTargets": [
+        "Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae, CURB-65 Score 3) (correct diagnosis)",
+        "COPD exacerbation with bacterial superinfection",
+        "Congestive heart failure exacerbation",
+        "Pulmonary embolism",
+        "Myocardial infarction with pulmonary edema",
+        "Viral pneumonia or bronchitis",
+        "Pneumothorax"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on COPD exacerbation given patient's extensive pulmonary history, potentially missing signs of pneumonia and sepsis requiring urgent antibiotic therapy",
+        "prematureClosure": "May stop investigation after identifying respiratory symptoms in COPD patient without fully assessing for pneumonia consolidation and systemic signs of infection",
+        "availabilityBias": "Recent experience with COPD exacerbations may lead to underestimating this as pneumonia with sepsis, missing the higher acuity and need for aggressive treatment"
+    },
+    "coachPrompts": {
+        "phase2": "Good start on your differential. I see you're thinking about this 74-year-old with COPD and worsening dyspnea. As you interview him, pay particular attention to what might differentiate a simple COPD exacerbation from something more serious. What specific questions will help you assess for infection versus other causes of his decompensation?",
+        "phase5": "You've gathered good history and exam findings. His CURB-65 criteria put him at higher risk - he's over 65, has confusion or altered mental status, and meets other clinical criteria. The consolidation on exam with systemic symptoms suggests this isn't just a COPD flare. What does this clinical picture tell you about the urgency of treatment?",
+        "finalDebrief": "This case illustrates how chronic conditions like COPD can mask acute infections. Walter had community-acquired pneumonia with sepsis, not just a COPD exacerbation. The key differentiators were the consolidation findings, purulent sputum, systemic symptoms, and CURB-65 score of 3 indicating high mortality risk. How did your thinking evolve from initial presentation to final diagnosis?"
     }
 }
 };

@@ -350,39 +350,6 @@ window.EMR_DATA = {
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Winston speaks slowly and with great effort, pausing frequently to catch his breath. He is a retired music teacher who is embarrassed and frustrated \u2014 he knows his condition well and feels he has 'failed' by ending up in the ER again. He is cooperative but fatigued, and his wife is present and provides additional history.",
-    "interviewQuestions": [
-        "Walk me through what's been happening over the past week.",
-        "How many pillows are you sleeping with? Can you lie flat?",
-        "Have you been waking up at night short of breath?",
-        "How far can you walk before you have to stop?",
-        "Have you been weighing yourself at home? How much have you gained?",
-        "Have you been taking all your medications \u2014 especially the furosemide?",
-        "Have you been sticking to your fluid and salt restrictions?",
-        "Have you had any fevers, infections, or illnesses recently?",
-        "Any chest pain or palpitations?",
-        "Have you noticed your heart racing or beating irregularly?",
-        "Any new medications recently \u2014 including over-the-counter?",
-        "When were you last hospitalized?"
-    ],
-    "patientResponses": {
-        "default": "(takes a slow breath) 'Give me just a moment.' (pauses) 'Okay. Yes, so...'",
-        "onset": "'It started about five days ago. I noticed I was more short of breath than usual. Then the legs started swelling. And the last two nights I couldn't sleep \u2014 I had to sit straight up. This morning I couldn't get across the room without stopping.'",
-        "character": "'It's like... breathing through a wet blanket. Heavy. Tight. Especially when I lie down. My wife made me sleep in the recliner but even that wasn't enough.'",
-        "location": "'The shortness of breath is everywhere. And the legs \u2014 both legs, up to my knees, real tight and heavy.'",
-        "severity": "'At rest, maybe a six. Trying to walk, nine. I've been through this before but this feels worse than last time.'",
-        "aggravating": "'Lying flat is the worst. Any activity at all. Even getting dressed left me breathless this morning.'",
-        "relieving": "'Sitting up helps a little. I've been sleeping in the chair for three nights.'",
-        "associated": "'The swelling in my legs. I've gained about eight pounds this week \u2014 I weigh myself every morning like they told me. I've been coughing at night \u2014 I thought it was a cold but it's not going away. And I've been going to the bathroom less.'",
-        "denies": "'No fever. No chest pain right now. No coughing up blood. I haven't had any new infections that I know of.'",
-        "history": "'I have heart failure \u2014 known for six years now. I've been hospitalized three times. Last time was eight months ago. They told me my ejection fraction is 25 percent.'",
-        "medications": "'Carvedilol twice a day. Furosemide 80 once a day \u2014 though I'll admit I took it late a few days this week. The sacubitril-valsartan twice a day. Spironolactone. Rivaroxaban for my atrial fibrillation. And insulin at night.'",
-        "allergies": "'Penicillin. I had anaphylaxis years ago \u2014 throat closed up. It's in my chart.'",
-        "family": "'Father had heart disease. Mother had diabetes. Brother has heart failure too, actually.'",
-        "social": "'I'm retired \u2014 I was a music teacher for 32 years. Married to Renata for 40 years. Non-smoker. I don't drink. I try to follow the low-salt diet but I'll be honest \u2014 Renata made a big pot of soup last weekend and I had more than I should have.'"
-    },
     "examManeuvers": [
         "General appearance and work of breathing",
         "Vital signs review",
@@ -421,6 +388,84 @@ window.EMR_DATA = {
         "phase2": "Winston has known HFrEF with EF 25% and has been through this before. Before you speak with him \u2014 what are the five most common precipitating triggers of CHF decompensation? Which triggers are you most concerned about in his specific case based on the chart alone?",
         "phase5": "JVP 14 cm, S3 gallop, bilateral rales, 3+ pitting edema, SpO2 88% on room air. He's in atrial fibrillation. What is the Stevenson profile for this patient (wet/dry, warm/cold)? How does that change your initial management? And what are you checking on the troponin and BNP?",
         "finalDebrief": "Acute decompensated HFrEF \u2014 precipitated by dietary indiscretion and medication non-adherence. His Stevenson profile was 'wet and cold' \u2014 volume overloaded with poor perfusion. How did your management plan account for both? How would you counsel him before discharge to prevent the next admission?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Winston appears tired and short of breath even at rest, speaking in brief phrases between breaths. He's cooperative but anxious about his worsening symptoms, openly expressing concern about whether his heart is 'giving out' despite being compliant with his medications.",
+    "interviewQuestions": [
+        "Can you tell me more about your shortness of breath - when did it get worse?",
+        "How many pillows do you sleep on now compared to your usual?",
+        "Have you noticed any swelling in your legs, ankles, or feet?",
+        "Any chest pain, pressure, or discomfort?",
+        "Have you had any palpitations or racing heart?",
+        "Any recent weight gain or changes in your appetite?",
+        "How has your urination been - frequency, amount, any changes?",
+        "Have you been taking all your heart medications as prescribed?",
+        "Any recent medication changes or missed doses?",
+        "Have you had any recent infections, illnesses, or dietary indiscretions?",
+        "Any nausea, vomiting, or abdominal discomfort?",
+        "How far can you walk now compared to a few weeks ago?",
+        "Any lightheadedness, dizziness, or fainting spells?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, could you ask that again? I'm having trouble catching my breath and concentrating.",
+        "onset": "My breathing has been getting worse over the past 2-3 weeks. I used to be able to walk to the mailbox, but now I get winded just getting dressed in the morning.",
+        "character": "It feels like I can't get enough air, like I'm drowning from the inside. Sometimes I feel like there's a weight on my chest.",
+        "location": "The shortness of breath is everywhere - my whole chest feels tight. Sometimes I feel it more when I lie down flat.",
+        "severity": "The breathing is about an 8 out of 10 when I try to do anything. Even sitting here talking to you is making me short of breath.",
+        "aggravating": "Any activity makes it worse - walking, climbing stairs, even bending over. Lying flat is terrible - I have to sleep sitting up in my recliner now.",
+        "relieving": "Sitting upright helps a little, and sometimes the extra water pill helps, but not like it used to. Rest doesn't help as much anymore.",
+        "associated": "My legs and ankles are really swollen - worse than usual. I've gained about 8 pounds in the last two weeks. I'm urinating less despite taking my water pills.",
+        "denies": "No chest pain or crushing feeling. No fever or cough with colored sputum. Haven't had any ICD shocks recently.",
+        "history": "I've been hospitalized twice in the past year for heart failure flare-ups, but this feels worse than those times. My symptoms have been gradually getting worse over months.",
+        "medications": "Sacubitril/Valsartan (Entresto) 49/51mg BID; Carvedilol 12.5mg BID; Spironolactone 25mg daily; Furosemide 80mg BID; Metolazone 2.5mg PRN; Dapagliflozin (Farxiga) 10mg daily; Insulin Glargine 22 units QHS; Metformin 500mg BID",
+        "allergies": "ACE Inhibitors (class), Iodinated Contrast",
+        "family": "My father had heart failure and died young from a heart attack at 62. My mother has high blood pressure and diabetes. My brother has heart disease too - had stents put in.",
+        "social": "I'm retired from warehouse work - had to stop in 2019 when my heart got bad. I quit smoking after my bypass surgery in 2017 - smoked for 30 years before that. Stopped drinking completely when I was diagnosed with heart failure."
+    },
+    "examManeuvers": [
+        "Jugular venous pressure assessment",
+        "Cardiac auscultation - heart sounds and murmurs",
+        "Pulmonary auscultation",
+        "Lower extremity edema assessment",
+        "Abdominal examination for hepatomegaly/ascites",
+        "Point of maximal impulse palpation",
+        "Hepatojugular reflux test",
+        "Assessment for S3 gallop",
+        "Pulse assessment - rate, rhythm, quality",
+        "Blood pressure measurement"
+    ],
+    "examFindings": {
+        "Jugular venous pressure assessment": "JVP elevated to 12-14 cm H2O, visible even when patient sitting upright at 45 degrees",
+        "Cardiac auscultation - heart sounds and murmurs": "S1 and S2 present, prominent S3 gallop, grade 2/6 systolic murmur at apex consistent with functional mitral regurgitation",
+        "Pulmonary auscultation": "Bilateral fine crackles extending halfway up both lung fields, diminished breath sounds at bases",
+        "Lower extremity edema assessment": "3+ pitting edema bilaterally to mid-shin level, chronic venous stasis changes present",
+        "Abdominal examination for hepatomegaly/ascites": "Liver edge palpable 3 cm below right costal margin, mild ascites with shifting dullness",
+        "Point of maximal impulse palpation": "PMI displaced laterally to 6th intercostal space, midaxillary line, diffuse and sustained",
+        "Hepatojugular reflux test": "Positive - JVP rises >3 cm with sustained abdominal pressure",
+        "Assessment for S3 gallop": "Prominent S3 gallop present, best heard at apex with patient in left lateral decubitus position",
+        "Pulse assessment - rate, rhythm, quality": "Heart rate 104 bpm, irregularly irregular rhythm suggesting atrial fibrillation, weak peripheral pulses",
+        "Blood pressure measurement": "Hypotensive at 98/62 mmHg, narrow pulse pressure consistent with reduced stroke volume"
+    },
+    "ddxTargets": [
+        "Acute Decompensated Heart Failure (HFrEF NYHA IV — Volume Overload with Diuretic Resistance and Cardiorenal Syndrome) (correct diagnosis)",
+        "Acute coronary syndrome with cardiogenic shock",
+        "Pneumonia with acute heart failure exacerbation",
+        "Pulmonary embolism",
+        "Acute myocardial infarction",
+        "Chronic obstructive pulmonary disease exacerbation",
+        "Renal failure with volume overload"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'routine heart failure follow-up' and missing the severity of decompensation and development of cardiorenal syndrome requiring urgent intervention",
+        "prematureClosure": "May stop at 'heart failure exacerbation' without recognizing diuretic resistance, NYHA IV status, and need for advanced heart failure interventions",
+        "availabilityBias": "Recent exposure to typical heart failure cases may lead to underestimating this patient's progression to end-stage disease with multiorgan involvement"
+    },
+    "coachPrompts": {
+        "phase2": "This patient has a complex cardiac history and is presenting for 'routine' follow-up. What specific aspects of his heart failure history and current presentation would be most important to explore? Consider how you'll assess disease progression and identify any red flags that suggest this isn't routine.",
+        "phase5": "You've identified significant volume overload in a patient with established HFrEF. Given his examination findings, vital signs, and clinical presentation, how would you categorize the severity of his current decompensation? What additional complications might be developing that could affect your management approach?",
+        "finalDebrief": "This case illustrates the progression from compensated to decompensated heart failure with cardiorenal syndrome. Notice how the combination of worsening symptoms despite optimal medical therapy, diuretic resistance, hypotension, and reduced urine output pointed toward advanced heart failure requiring specialized intervention. What clues suggested this was beyond a typical exacerbation?"
     }
 }
 };

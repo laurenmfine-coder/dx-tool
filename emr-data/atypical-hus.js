@@ -318,39 +318,6 @@ window.EMR_DATA = {
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Camila Restrepo is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been feeling completely exhausted for the past few days, and my urine looks.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Atypical Hemolytic Uremic Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydroxychloroquine 200mg BID; Mycophenolate Mofetil 1000mg BID; Prednisone 5mg daily; Losartan 50mg daily; Aspirin 81mg daily; Cholecalciferol 2000 IU daily; Calcium Carbonate 600mg BID.'",
-        "allergies": "'My allergies are Trimethoprim-Sulfamethoxazole.'",
-        "family": "Mother: SLE, Sj\u00f6gren syndrome, alive at 60  Father: HTN, T2DM, alive at 64  Sister: Hypothyroidism (autoimmune), age 30",
-        "social": "Occupation: Marketing manager \u2014 office work  Marital: Married, no children  Tobacco: Never smoker  Alcohol: Rare \u2014 avoids due to medications  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and pallor",
         "Vital signs",
@@ -389,6 +356,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Camila Restrepo's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Camila appears anxious and worried, frequently touching her abdomen and looking pale. She's very forthcoming about her symptoms and eager to provide details, clearly distressed by the dramatic change in her urine color and the sudden appearance of bruising.",
+    "interviewQuestions": [
+        "Can you describe exactly when you first noticed the dark urine?",
+        "Have you had any fever or chills recently?",
+        "Tell me more about these bruises - where are they and when did they appear?",
+        "Have you noticed any bleeding from your gums or nose?",
+        "How has your energy level changed over the past week?",
+        "Any recent changes in your lupus symptoms or flares?",
+        "Have you had any abdominal pain or cramping?",
+        "Any changes in your vision or confusion?",
+        "Have you been taking all your medications as prescribed?",
+        "Any recent infections or illnesses?",
+        "How much fluid have you been drinking, and how much are you urinating?",
+        "Any recent medication changes or new medications?",
+        "Have you experienced any shortness of breath or chest pain?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure I understand what you're asking. Can you explain that differently?",
+        "onset": "The dark urine started about 3 days ago - it was really shocking, like the color of Coca-Cola. The fatigue has been building up over the past week, getting worse each day.",
+        "character": "The urine is really dark brown, almost black sometimes. The fatigue isn't just being tired - I feel completely drained, like I can barely get out of bed.",
+        "location": "The headache is mainly in my forehead and temples. The bruises are scattered on my arms and shins, just random spots.",
+        "severity": "The fatigue is about an 8 out of 10 - I can barely function at work. The headache is maybe a 5, but constant and nagging.",
+        "aggravating": "The headache gets worse when I stand up quickly. The fatigue is worse in the morning, and any physical activity makes me feel completely wiped out.",
+        "relieving": "Nothing really helps the fatigue. Tylenol takes the edge off the headache a little bit, but it doesn't go away completely.",
+        "associated": "I've been nauseous on and off, especially in the mornings. I'm definitely urinating less than normal, maybe half as much. No fever that I've noticed.",
+        "denies": "No chest pain, no shortness of breath, no rash or new joint pain. No bleeding from my gums or nose. No abdominal pain or cramping.",
+        "history": "I've never had anything like this before. My lupus has been pretty well controlled recently - no major flares in the past few months.",
+        "medications": "Hydroxychloroquine 200mg BID; Mycophenolate Mofetil 1000mg BID; Prednisone 5mg daily; Losartan 50mg daily; Aspirin 81mg daily; Cholecalciferol 2000 IU daily; Calcium Carbonate 600mg BID",
+        "allergies": "Trimethoprim-Sulfamethoxazole",
+        "family": "My mother has lupus and Sjögren's syndrome - she's 60 now. My father has high blood pressure and diabetes. My younger sister has autoimmune thyroid problems.",
+        "social": "I work in marketing, mostly desk work. I'm married, no kids yet. I don't smoke and rarely drink alcohol because of my medications. No recreational drugs."
+    },
+    "examManeuvers": [
+        "Conjunctival and palmar pallor assessment",
+        "Petechial rash examination",
+        "Lymphadenopathy assessment",
+        "Abdominal examination for splenomegaly",
+        "Neurologic assessment including mental status",
+        "Cardiovascular examination",
+        "Blood pressure measurement",
+        "Fundoscopic examination",
+        "Assessment for edema",
+        "Skin examination for lupus manifestations"
+    ],
+    "examFindings": {
+        "Conjunctival and palmar pallor assessment": "Marked conjunctival pallor and pale palmar creases, consistent with significant anemia",
+        "Petechial rash examination": "Scattered petechiae on bilateral lower extremities and forearms, non-blanching",
+        "Lymphadenopathy assessment": "No significant lymphadenopathy palpated",
+        "Abdominal examination for splenomegaly": "Mild splenomegaly, spleen tip palpable 2cm below left costal margin",
+        "Neurologic assessment including mental status": "Alert and oriented, mild difficulty with concentration, no focal neurologic deficits",
+        "Cardiovascular examination": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+        "Blood pressure measurement": "Elevated at 148/92 mmHg, consistent with provided vitals",
+        "Fundoscopic examination": "Mild arteriovenous nicking, no hemorrhages or exudates visualized",
+        "Assessment for edema": "Trace bilateral lower extremity edema",
+        "Skin examination for lupus manifestations": "No active malar rash, well-healed discoid lesions on scalp"
+    },
+    "ddxTargets": [
+        "Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE) (correct diagnosis)",
+        "Thrombotic Thrombocytopenic Purpura (TTP)",
+        "Lupus Nephritis Flare with Secondary TMA",
+        "Disseminated Intravascular Coagulation (DIC)",
+        "Antiphospholipid Syndrome with Thrombosis",
+        "Drug-Induced Hemolytic Anemia",
+        "Idiopathic Thrombocytopenic Purpura (ITP)"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on lupus nephritis flare given established SLE history, potentially missing the acute TMA component requiring immediate plasma exchange",
+        "prematureClosure": "May stop investigation after identifying hemolysis and thrombocytopenia without distinguishing between TTP and aHUS, which have different treatments",
+        "availabilityBias": "Tendency to consider more common lupus complications rather than the rare but critical complement-mediated TMA in SLE patients"
+    },
+    "coachPrompts": {
+        "phase2": "You've identified some concerning possibilities in your differential. Before you interview the patient, think about what specific historical features would help you distinguish between TTP, aHUS, and lupus-related TMA. What timeline and associated symptoms would be most concerning for each condition?",
+        "phase5": "Your history and physical have revealed the classic pentad findings. Now consider the patient's underlying SLE and antiphospholipid antibodies. How does this change your diagnostic thinking about the type of TMA? What would be your next most critical diagnostic steps?",
+        "finalDebrief": "This case demonstrates how complement-mediated TMA can complicate SLE, creating a diagnostic challenge that requires recognizing both the acute TMA features and the underlying autoimmune trigger. How did your differential evolve from considering typical TMA causes to recognizing this as aHUS secondary to SLE complement activation?"
     }
 }
 };

@@ -234,37 +234,6 @@ window.EMR_DATA = {
       "College student"
     ]
   ],
-  "guided": {
-    "supported": true,
-    "patientPersona": "Tyler Nguyen is alert and cooperative, clearly concerned but provides a clear history.",
-    "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
-    ],
-    "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Occupation: College student"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -388,6 +357,84 @@ window.CASES['appendicitis-v1'] = {
         "phase2": "Before interviewing Tyler Nguyen \u2014 what are your top 3 diagnoses from chart review?",
         "phase5": "How has your differential changed after history and exam?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Tyler appears uncomfortable and anxious, frequently shifting positions and holding his right side. He's cooperative and forthcoming with information, clearly distressed by the increasing pain intensity. He seems worried this might be something serious and wants answers quickly.",
+    "interviewQuestions": [
+        "Can you describe exactly when this pain started and how it has changed?",
+        "What does the pain feel like - sharp, dull, cramping, burning?",
+        "On a scale of 1-10, how would you rate your pain right now?",
+        "What makes the pain worse - moving, coughing, eating?",
+        "Have you found anything that helps relieve the pain?",
+        "Besides nausea and vomiting, have you had any other symptoms?",
+        "Have you had any changes in your bowel movements or urination?",
+        "Have you had any fever or chills?",
+        "Have you ever had pain like this before?",
+        "What have you eaten in the last 24-48 hours?",
+        "Are you taking any medications or have any allergies?",
+        "Has anyone in your family had appendicitis or similar abdominal problems?",
+        "Have you been sexually active recently?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure what you mean by that - can you ask it differently? This pain is really bothering me.",
+        "onset": "It started yesterday afternoon around my belly button, just felt like a dull ache. But overnight it moved down to my lower right side and got much sharper.",
+        "character": "Right now it's a sharp, constant pain that gets worse when I move. It was more of a dull cramping feeling when it first started.",
+        "location": "It's definitely in my lower right side now, kind of between my hip and belly button. Sometimes it feels like it goes toward my back a little.",
+        "severity": "Right now it's about a 7 out of 10. When I first came in it was maybe a 4 or 5, but it keeps getting worse.",
+        "aggravating": "Moving makes it much worse, especially if I try to walk or cough. Even laughing hurts. Lying still is the only thing that doesn't make it worse.",
+        "relieving": "Nothing really helps. I tried some Tylenol this morning but it didn't touch it. Lying very still helps a little bit.",
+        "associated": "I've been nauseous since yesterday and threw up once this morning. I feel a little feverish and haven't wanted to eat anything today.",
+        "denies": "No diarrhea, no blood in my urine or stool, no burning when I urinate. No chest pain or trouble breathing.",
+        "history": "Never had anything like this before. I hardly ever get sick - maybe just colds here and there.",
+        "medications": "no medications",
+        "allergies": "NKDA",
+        "family": "Not really sure about my family history. My parents are pretty healthy. I don't think anyone has had appendicitis that I know of.",
+        "social": "I'm a college student, pretty healthy lifestyle. I don't smoke or do drugs. I drink occasionally at parties but not much."
+    },
+    "examManeuvers": [
+        "General appearance and vital signs assessment",
+        "Abdominal inspection",
+        "Auscultation of bowel sounds",
+        "Light palpation of abdomen",
+        "Deep palpation of RLQ (McBurney's point)",
+        "Rovsing's sign",
+        "Psoas sign",
+        "Obturator sign",
+        "Rebound tenderness assessment",
+        "Percussion of abdomen"
+    ],
+    "examFindings": {
+        "General appearance and vital signs assessment": "Patient appears uncomfortable, guarding right side, low-grade fever 38.4°C, mild tachycardia",
+        "Abdominal inspection": "No obvious distension, patient guards right lower quadrant, no visible masses or hernias",
+        "Auscultation of bowel sounds": "Hypoactive bowel sounds, no bruits",
+        "Light palpation of abdomen": "Soft in most areas, voluntary guarding in RLQ, no masses palpated",
+        "Deep palpation of RLQ (McBurney's point)": "Severe tenderness at McBurney's point with involuntary guarding",
+        "Rovsing's sign": "Positive - palpation of LLQ causes increased pain in RLQ",
+        "Psoas sign": "Positive - passive extension of right hip increases RLQ pain",
+        "Obturator sign": "Positive - passive internal rotation of flexed right hip increases RLQ pain",
+        "Rebound tenderness assessment": "Positive rebound tenderness in RLQ",
+        "Percussion of abdomen": "Percussion tenderness over RLQ, tympanic in other areas"
+    },
+    "ddxTargets": [
+        "Acute appendicitis (correct diagnosis)",
+        "Mesenteric lymphadenitis",
+        "Gastroenteritis with reactive pain",
+        "Testicular torsion",
+        "Bowel obstruction",
+        "Ureterolithiasis",
+        "Inflammatory bowel disease"
+    ],
+    "biasFlags": {
+        "anchoring": "The classic presentation may lead to immediate anchoring on appendicitis without considering other causes of RLQ pain in young males",
+        "prematureClosure": "Risk of stopping evaluation after positive appendiceal signs without considering atypical presentations of other serious conditions",
+        "availabilityBias": "Appendicitis is commonly taught and discussed, potentially overshadowing consideration of less common but serious diagnoses like testicular torsion"
+    },
+    "coachPrompts": {
+        "phase2": "Good start on your differential. What key historical features would help you distinguish between appendicitis and other causes of RLQ pain? Think about the classic progression and associated symptoms that would support or refute your leading diagnosis.",
+        "phase5": "Excellent work gathering the history and physical findings. You've identified several positive appendiceal signs. How do these findings change your probability assessment for each diagnosis on your differential? What's your most likely diagnosis now and why?",
+        "finalDebrief": "This case demonstrates the classic presentation of acute appendicitis with periumbilical pain migrating to the RLQ, fever, and positive appendiceal signs. Notice how the DDx evolved from a broader list to a focused assessment once you gathered the characteristic history and physical findings. What clinical decision rule or scoring system might help quantify the probability of appendicitis in cases like this?"
     }
 }
 };

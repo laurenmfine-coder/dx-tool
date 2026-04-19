@@ -289,37 +289,6 @@ window.EMR_DATA = {
       "Denies other co-ingestants, no SI currently"
     ]
   ],
-  "guided": {
-    "supported": true,
-    "patientPersona": "Megan Fisher is alert and cooperative, clearly concerned but provides a clear history.",
-    "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
-    ],
-    "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Sertraline; Alprazolam.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Family hx depression",
-        "social": "Suicide attempt: Intentional overdose after argument with boyfriend  Alcohol: Had 3 glasses of wine  Safety: Denies other co-ingestants, no SI currently"
-    },
     "examManeuvers": [
         "General appearance",
         "Vital signs",
@@ -443,6 +412,84 @@ window.CASES['apap-overdose'] = {
         "phase2": "Before interviewing Megan Fisher \u2014 what are your top 3 diagnoses from chart review?",
         "phase5": "How has your differential changed after history and exam?",
         "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Megan appears emotionally fragile but cooperative, with a flat affect and some tearfulness when discussing the overdose. She expresses genuine remorse about her impulsive decision and anxiety about potential consequences, showing good insight into the severity of her actions.",
+    "interviewQuestions": [
+        "Can you tell me exactly how many acetaminophen tablets you took and what strength they were?",
+        "What time exactly did you take the acetaminophen, and have you taken any since then?",
+        "Did you take anything else with the acetaminophen - other medications, alcohol, or substances?",
+        "Are you having any nausea, vomiting, or abdominal pain right now?",
+        "Have you had any confusion, dizziness, or changes in your thinking?",
+        "Are you currently having thoughts of hurting yourself or ending your life?",
+        "Have you attempted to harm yourself before, either recently or in the past?",
+        "What made you decide to come to the hospital today?",
+        "Can you tell me about your current medications and how you've been taking them?",
+        "How much alcohol did you drink and when did you drink it in relation to taking the pills?",
+        "Do you have any medical problems, particularly with your liver?",
+        "Are you allergic to any medications?",
+        "Is there anyone we can call to support you during this time?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, I'm having trouble focusing right now. Could you ask that differently?",
+        "onset": "I took the whole bottle around 8 hours ago, maybe around 2 PM. I just grabbed the bottle and swallowed all the pills at once when I was crying.",
+        "character": "I don't really feel sick right now, maybe a little queasy, but I'm mostly just scared about what I did to myself.",
+        "location": "I don't have any specific pain anywhere, just feeling anxious and worried in my chest and stomach.",
+        "severity": "Physically I'd say like a 2 out of 10, but emotionally I'm probably an 8 - I'm really scared about liver damage.",
+        "aggravating": "Thinking about what I might have done to my body makes me feel worse, and I keep replaying the fight with my boyfriend.",
+        "relieving": "Talking to people helps a little, and knowing I came to get help. I've been trying to drink water.",
+        "associated": "I feel a bit nauseous and my stomach feels unsettled, but no vomiting. I'm anxious and having trouble concentrating.",
+        "denies": "No stomach pain, no vomiting, no confusion or dizziness, no yellow color to my eyes or skin that I can tell.",
+        "history": "I've never overdosed before, but I've had thoughts about hurting myself during really bad times with my depression.",
+        "medications": "Sertraline; Alprazolam",
+        "allergies": "NKDA",
+        "family": "My mom has depression and my grandmother did too. No liver problems that I know of in my family.",
+        "social": "I work as a graphic designer, don't smoke, and I had about 3 glasses of wine before I took the pills. I don't usually drink much or use other drugs."
+    },
+    "examManeuvers": [
+        "General appearance and mental status",
+        "Abdominal examination",
+        "Liver palpation and percussion",
+        "Scleral icterus assessment",
+        "Skin examination for jaundice",
+        "Neurological assessment including orientation",
+        "Cardiovascular examination",
+        "Lymph node examination",
+        "Right upper quadrant tenderness assessment",
+        "Overall toxicity assessment"
+    ],
+    "examFindings": {
+        "General appearance and mental status": "Alert, cooperative, appears sad with flat affect, no acute distress, coherent speech",
+        "Abdominal examination": "Soft, non-distended, normal bowel sounds, no masses palpated",
+        "Liver palpation and percussion": "Liver not palpable below costal margin, normal span by percussion",
+        "Scleral icterus assessment": "Sclerae clear, no icterus present",
+        "Skin examination for jaundice": "Normal skin color, no jaundice or pallor noted",
+        "Neurological assessment including orientation": "Alert and oriented x3, no confusion, normal speech and cognition",
+        "Cardiovascular examination": "Regular rate and rhythm, no murmurs, normal S1/S2",
+        "Lymph node examination": "No cervical, supraclavicular, or axillary lymphadenopathy",
+        "Right upper quadrant tenderness assessment": "No RUQ tenderness, negative Murphy's sign",
+        "Overall toxicity assessment": "Patient appears well with no signs of acute toxicity at this time"
+    },
+    "ddxTargets": [
+        "Acetaminophen poisoning (correct diagnosis)",
+        "Acute hepatotoxicity from other cause",
+        "Mixed drug overdose",
+        "Alcohol poisoning/toxicity",
+        "Acute hepatitis",
+        "Gastroenteritis",
+        "Panic disorder exacerbation"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on the psychiatric presentation and minimizing the serious medical toxicity risk, especially since patient appears well currently",
+        "prematureClosure": "Risk of focusing only on suicide risk assessment and missing the critical time-sensitive nature of acetaminophen poisoning requiring immediate antidote",
+        "availabilityBias": "May underestimate severity because patient is alert and not appearing acutely ill, unlike dramatic presentations of other overdoses recently seen"
+    },
+    "coachPrompts": {
+        "phase2": "Good start thinking about overdose. What specific concerns do you have about acetaminophen toxicity, and what key historical details do you need to assess the risk? Think about timing and dose-dependent effects.",
+        "phase5": "The patient appears well now, but what do you know about the timeline of acetaminophen toxicity? How does the 8-hour timeframe influence your assessment and management urgency?",
+        "finalDebrief": "This case highlights how acetaminophen poisoning can present deceptively well in the first 24 hours. What did you learn about the importance of not being reassured by a normal exam when the history suggests significant ingestion? How did the timing influence your diagnostic thinking?"
     }
 }
 };

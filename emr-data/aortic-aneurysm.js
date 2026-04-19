@@ -336,39 +336,6 @@ window.EMR_DATA = {
     "presentation": "Back Pain",
     "category": "cardiovascular"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Frank DiMaggio is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having this dull ache in my lower back for the past few weeks that som.'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Symptomatic Abdominal Aortic Aneurysm.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Clopidogrel 75mg daily; Cilostazol 100mg BID.'",
-        "allergies": "'My allergies are Iodinated Contrast Dye.'",
-        "family": "Father: AAA (ruptured at age 72, deceased), HTN  Mother: Stroke at 78, HTN, deceased at 82  Brother: Peripheral artery disease, alive at 70",
-        "social": "Occupation: Retired postal carrier; retired 2017  Marital: Married 48 years; wife Maria, age 71  Tobacco: Former smoker \u2014 quit 2016; 45 pack-year history  Alcohol: Occasional, 1 glass wine with dinner  Drugs: Denies"
-    },
     "examManeuvers": [
         "General appearance and hemodynamic assessment",
         "Vital signs review",
@@ -407,6 +374,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Frank DiMaggio's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Symptomatic Abdominal Aortic Aneurysm. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Frank appears anxious and uncomfortable, frequently shifting position during the interview. He's forthcoming with information but seems worried about his symptoms, especially given his father's history of ruptured AAA. He demonstrates moderate distress when describing his pain and fatigue.",
+    "interviewQuestions": [
+        "Can you describe when this back pain first started?",
+        "What does the pain feel like - sharp, dull, throbbing, or burning?",
+        "Where exactly is the pain located and does it spread anywhere?",
+        "On a scale of 1-10, how would you rate the pain?",
+        "What makes the pain worse or better?",
+        "Have you noticed any other symptoms like nausea, vomiting, or changes in urination?",
+        "Have you had any episodes of dizziness or feeling faint?",
+        "Any numbness, tingling, or weakness in your legs?",
+        "Have you experienced similar pain episodes before?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family's medical history, especially heart or blood vessel problems",
+        "What's your smoking and alcohol history?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
+        "onset": "It started about 3 weeks ago, just gradually came on. I didn't do anything to cause it - no lifting or strain. It's been pretty constant since then, sometimes worse than others.",
+        "character": "It's a deep, dull ache most of the time. Sometimes it feels like a gnawing sensation, and occasionally it throbs a bit. It's different from any back pain I've had before.",
+        "location": "It's mainly in my lower back, around my belt line, but sometimes it wraps around to my left side and into my belly. It's hard to pinpoint exactly where it hurts worst.",
+        "severity": "I'd say it's about a 6 out of 10 most days. It's not excruciating, but it's definitely affecting my sleep and I find myself avoiding activities I usually enjoy.",
+        "aggravating": "It seems worse when I'm walking for longer periods or when I bend forward. Sometimes it's worse in the morning when I first get up.",
+        "relieving": "Rest helps a little, and I've tried some ibuprofen which takes the edge off. Heat pads don't seem to do much. Nothing really makes it go away completely.",
+        "associated": "I've been more tired than usual, and I feel like I get winded easier when walking up stairs. No nausea or vomiting, but I have felt a little lightheaded a few times.",
+        "denies": "No fever, no problems with urination, no numbness or tingling in my legs. Haven't had any chest pain or shortness of breath at rest.",
+        "history": "I've had some back stiffness over the years, but nothing like this. This feels completely different - deeper and more constant.",
+        "medications": "Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Clopidogrel 75mg daily; Cilostazol 100mg BID",
+        "allergies": "Iodinated Contrast Dye",
+        "family": "My father had an abdominal aortic aneurysm that ruptured when he was 72 - he didn't make it. Both my parents had high blood pressure. My brother has circulation problems in his legs.",
+        "social": "I'm a retired postal carrier, quit working in 2017. Been married to Maria for 48 years. I smoked for about 30 years but quit in 2016 - probably about 45 pack-years total. I have an occasional glass of wine with dinner, maybe 2-3 times a week."
+    },
+    "examManeuvers": [
+        "Abdominal inspection",
+        "Abdominal palpation for masses and pulsation",
+        "Abdominal auscultation for bruits",
+        "Back inspection and palpation",
+        "Peripheral pulse examination",
+        "Blood pressure in both arms",
+        "Cardiac examination",
+        "Neurological examination of lower extremities",
+        "Straight leg raise test",
+        "Assessment for abdominal tenderness and guarding"
+    ],
+    "examFindings": {
+        "Abdominal inspection": "Visible pulsatile mass in epigastrium, no obvious distension or discoloration",
+        "Abdominal palpation for masses and pulsation": "Palpable expansile pulsatile mass approximately 6cm in diameter at the level of the umbilicus, non-tender to gentle palpation",
+        "Abdominal auscultation for bruits": "Audible bruit over the abdominal aorta in the epigastric region",
+        "Back inspection and palpation": "No visible deformity, mild tenderness over L3-L4 region without muscle spasm",
+        "Peripheral pulse examination": "Diminished femoral pulses bilaterally, weak dorsalis pedis and posterior tibial pulses",
+        "Blood pressure in both arms": "Right arm 138/82, Left arm 135/80",
+        "Cardiac examination": "Regular rate and rhythm, no murmurs, rubs, or gallops appreciated",
+        "Neurological examination of lower extremities": "Intact sensation, normal strength, reflexes 2+ and symmetric",
+        "Straight leg raise test": "Negative bilaterally, no radicular pain reproduction",
+        "Assessment for abdominal tenderness and guarding": "No tenderness to light palpation, no guarding or rigidity, no rebound tenderness"
+    },
+    "ddxTargets": [
+        "Symptomatic Abdominal Aortic Aneurysm (correct diagnosis)",
+        "Lumbar disc herniation with radiculopathy",
+        "Lumbar spinal stenosis",
+        "Ruptured abdominal aortic aneurysm",
+        "Aortic dissection",
+        "Musculoskeletal back strain",
+        "Renal colic or nephrolithiasis"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'back pain' and pursuing purely musculoskeletal causes without considering vascular etiology, especially given the patient's age and risk factors",
+        "prematureClosure": "Risk of stopping investigation after finding benign back examination, missing the need for abdominal examination and vascular assessment",
+        "availabilityBias": "Back pain is very common in elderly patients, leading to assumption of mechanical cause rather than considering life-threatening vascular pathology"
+    },
+    "coachPrompts": {
+        "phase2": "Before you interview Mr. DiMaggio, consider his age, significant vascular comorbidities, and strong family history of AAA. What specific questions would help you differentiate between mechanical back pain and pain from vascular causes? Think about the character and location of pain that might suggest aortic pathology.",
+        "phase5": "You've gathered comprehensive history and exam findings. Focus on the combination of his risk factors, the palpable pulsatile mass, and the character of his pain. How does this clinical picture fit together? What's the most concerning diagnosis that explains all of his findings, and what immediate actions are needed?",
+        "finalDebrief": "This case highlights how symptomatic AAA can present with back pain rather than classic abdominal pain. The key teaching points are: recognizing that back pain in elderly patients with vascular risk factors requires abdominal examination, understanding that symptomatic AAA represents a surgical emergency even when stable, and appreciating how family history significantly increases risk. The pulsatile mass and bruit were critical physical findings that distinguished this from mechanical back pain."
     }
 }
 };

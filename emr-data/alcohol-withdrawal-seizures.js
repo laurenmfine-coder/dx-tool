@@ -294,39 +294,6 @@ window.EMR_DATA = {
     "presentation": "Seizure",
     "category": "toxicologic"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Michael Brennan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been drinking about 12 to 18 beers every day and I haven't been taking thos.'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Alcohol Withdrawal Seizure.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 20mg daily; Omeprazole 20mg daily; Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother (age 72): Hypertension, anxiety disorder  Father: Deceased at age 58 \u2014 alcohol-related cirrhosis, variceal hemorrhage  Brother (age 50): History of alcohol use disorder \u2014 in recovery x 5 years",
-        "social": "Occupation: Unemployed \u2014 formerly worked in landscaping; lost job due to drinking  Marital: Divorced x 6 years; lives alone in efficiency apartment; brother nearby  Tobacco: 1 PPD x 25 years  Alcohol: 12-18 beers daily x 15 years; last drink approximately 48 hours ago (stopped when he ran out)  Drugs: Denies current illicit drug use; remote history of cocaine use (stopped 2015)"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -365,6 +332,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Michael Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Alcohol Withdrawal Seizure (GTC) \u2014 48 Hours Post-Cessation with High Risk for Delirium Tremens (Prior DTs History, Kindling). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Michael appears anxious and tremulous, with visible hand tremors and diaphoresis. He is cooperative but restless, occasionally looking over his shoulder as if hearing something, and admits he's scared about having another seizure like he did two years ago.",
+    "interviewQuestions": [
+        "Can you describe what happened when you had the seizure?",
+        "When did you have your last drink, and how much were you drinking daily?",
+        "Have you tried to quit drinking before, and what happened?",
+        "Are you experiencing any tremors, sweating, nausea, or anxiety right now?",
+        "Are you seeing or hearing things that others don't see or hear?",
+        "Have you had seizures before, and if so, under what circumstances?",
+        "Are you taking any medications regularly, including vitamins?",
+        "Have you been eating and drinking fluids normally over the past few days?",
+        "Do you have any family history of alcohol problems or seizures?",
+        "Are you having any chest pain, shortness of breath, or heart palpitations?",
+        "Have you hit your head or injured yourself during the seizure?",
+        "Are you experiencing any confusion or memory problems right now?",
+        "Have you used any other substances recently besides alcohol?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, I'm having trouble focusing right now. Can you ask that again?",
+        "onset": "The seizure happened about 6 hours ago. My neighbor found me on the floor and called 911. I don't remember much about it, but I woke up confused and my tongue was bleeding.",
+        "character": "I don't remember the actual seizure, but people said I was shaking all over and my eyes rolled back. I felt really confused and weak afterward.",
+        "location": "It wasn't in any specific place - my whole body was shaking according to my neighbor who saw it happen.",
+        "severity": "I can't rate the seizure itself since I don't remember it, but I feel terrible now - maybe 7 out of 10. I'm scared it's going to happen again.",
+        "aggravating": "I think not drinking is what caused this. The shaking and anxiety get worse when I try to move around or when it's loud.",
+        "relieving": "Nothing really helps. I tried to have just one beer yesterday to stop the shaking, but I didn't have any left.",
+        "associated": "I've been sweating a lot, shaking, feeling nauseous, and really anxious. I think I might have seen some shadows moving earlier, but I'm not sure if that was real.",
+        "denies": "No chest pain, no shortness of breath, no headache, no stiff neck. I don't think I hit my head during the seizure.",
+        "history": "Yes, I had seizures before when I tried to quit drinking about 2 years ago. That time I ended up in the ICU for almost a week because I got really sick with the DTs - delirium tremens they called it.",
+        "medications": "Lisinopril 20mg daily; Omeprazole 20mg daily; Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily",
+        "allergies": "NKDA",
+        "family": "My father died from drinking - he had cirrhosis and bled to death from his esophagus. My brother had a drinking problem too but he's been sober for 5 years now. My mom has high blood pressure and anxiety.",
+        "social": "I'm unemployed - lost my landscaping job because of my drinking. I'm divorced and live alone, but my brother checks on me sometimes. I smoke a pack a day and was drinking 12 to 18 beers daily until I ran out 2 days ago. I used to use cocaine but stopped in 2015."
+    },
+    "examManeuvers": [
+        "Vital signs assessment",
+        "Neurological examination including mental status",
+        "Assessment for tremor and autonomic instability",
+        "CIWA-Ar scale assessment",
+        "Cardiovascular examination",
+        "Abdominal examination for hepatomegaly",
+        "Skin examination for stigmata of chronic liver disease",
+        "Gait and coordination testing",
+        "Fundoscopic examination",
+        "Assessment for signs of head trauma"
+    ],
+    "examFindings": {
+        "Vital signs assessment": "BP 172/108, HR 118, Temp 100.8°F, RR 20, SpO2 96% on room air - hypertensive and tachycardic with low-grade fever",
+        "Neurological examination including mental status": "Alert and oriented x3 but appears anxious and hypervigilant. Occasional startled responses to normal sounds. No focal neurological deficits.",
+        "Assessment for tremor and autonomic instability": "Coarse tremor of bilateral hands, worse with arms extended. Diaphoretic with flushed skin. Pupils slightly dilated and reactive.",
+        "CIWA-Ar scale assessment": "Score of 18 - moderate withdrawal with tremor (2), anxiety (3), agitation (2), tactile disturbances (1), auditory disturbances (2), visual disturbances (1), headache (1), orientation (0), nausea/vomiting (2), diaphoresis (3)",
+        "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, rubs, or gallops. No peripheral edema. Strong peripheral pulses.",
+        "Abdominal examination for hepatomegaly": "Soft, non-tender. Liver edge palpable 2cm below right costal margin. No splenomegaly or ascites.",
+        "Skin examination for stigmata of chronic liver disease": "No jaundice, spider angiomata, or palmar erythema noted. Multiple small ecchymoses on arms and legs.",
+        "Gait and coordination testing": "Slightly unsteady gait. Finger-to-nose testing shows mild intention tremor bilaterally.",
+        "Fundoscopic examination": "Normal optic discs, no papilledema, no retinal hemorrhages",
+        "Assessment for signs of head trauma": "Small healing laceration on lateral tongue consistent with bite injury. No scalp lacerations or hematomas."
+    },
+    "ddxTargets": [
+        "Alcohol Withdrawal Seizure (GTC) — 48 Hours Post-Cessation with High Risk for Delirium Tremens (Prior DTs History, Kindling) (correct diagnosis)",
+        "Alcohol withdrawal syndrome without seizure",
+        "Metabolic encephalopathy (hyponatremia, hypoglycemia, hepatic encephalopathy)",
+        "CNS infection (meningitis, encephalitis)",
+        "Intracranial hemorrhage or mass lesion",
+        "Epilepsy or idiopathic seizure disorder",
+        "Toxic ingestion or drug withdrawal"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'just another drunk' without recognizing the high-risk withdrawal pattern and history of delirium tremens requiring aggressive management",
+        "prematureClosure": "Risk of diagnosing simple alcohol withdrawal without appreciating the seizure component and elevated risk for progression to delirium tremens",
+        "availabilityBias": "Risk of being influenced by recent cases of uncomplicated alcohol withdrawal rather than recognizing this patient's specific high-risk features"
+    },
+    "coachPrompts": {
+        "phase2": "Before you interview this patient, think about the spectrum of alcohol withdrawal. What specific historical features would help you risk-stratify this patient? Consider the timeline since last drink and what complications you need to screen for.",
+        "phase5": "You've identified alcohol withdrawal with seizure. Now consider this patient's risk factors - what specific elements in his history suggest he's at high risk for progression to delirium tremens? How does the kindling phenomenon apply here?",
+        "finalDebrief": "This case demonstrates the importance of recognizing high-risk alcohol withdrawal. The combination of withdrawal seizure, prior DT history, and current CIWA score creates a perfect storm. How did the timeline, prior episodes, and current presentation guide your thinking about the kindling effect and escalating withdrawal severity?"
     }
 }
 };

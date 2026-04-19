@@ -1195,39 +1195,6 @@ window.EMR_DATA = {
       "Bleach baths: 0.005% sodium hypochlorite (½ tsp/full tub) × 2–3/week → reduces S. aureus colonization → reduces AD flares. Evidence-based."
     ]
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Zara Thompson appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did widespread eczema refractory to topical steroids, affecting sleep and school performance start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Zara Thompson presents with widespread eczema refractory to topical steroids, af.'",
-        "character": "'It's widespread eczema refractory to topical steroids, affecting sleep and school performance \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Triamcinolone 0.1% ointment; Tacrolimus 0.03% ointment; Cetirizine; Fluticasone nasal.'",
-        "allergies": "'My allergies are Peanut, Egg.'",
-        "family": "Mother: asthma  Father: eczema (childhood)  Brother: peanut allergy",
-        "social": "SCORAD: 62 (severe)  Sleep: Wakes 3-4x/night scratching  Quality of life: Missing school, avoids social activities  Prior treatment: Failed medium-potency topicals, tacrolimus, and short course of cyclosporine"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -1266,6 +1233,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Zara Thompson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Zara appears tired and self-conscious, frequently touching her affected skin areas and avoiding direct eye contact. She seems frustrated but cooperative, speaking quietly about how the condition has impacted her social life and academic performance. She demonstrates visible distress when discussing the appearance of her skin and sleep disruption.",
+    "interviewQuestions": [
+        "Can you describe when your current flare-up started and how it's different from your usual eczema?",
+        "Which areas of your body are most affected by the rash right now?",
+        "How would you rate your itching on a scale of 1-10, and how is it affecting your daily activities?",
+        "What treatments have you tried recently and how well have they worked?",
+        "How many times do you wake up at night due to itching or discomfort?",
+        "Have you noticed any new triggers or changes in your environment recently?",
+        "Are you experiencing any fever, joint pain, or feeling generally unwell?",
+        "How has this affected your school attendance and social activities?",
+        "Have you had any recent infections or been more prone to getting sick?",
+        "What moisturizers or skincare products are you currently using?",
+        "Have you noticed any areas where the skin looks different - thicker, infected, or discolored?",
+        "Are there any new stressors in your life that might be contributing to the flare-up?",
+        "Have you been following any dietary restrictions for your food allergies?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure what you mean... could you ask that differently? This has all been really overwhelming.",
+        "onset": "This flare started about 6 weeks ago and it's been the worst it's ever been. It started on my arms and face but now it's everywhere.",
+        "character": "It's this intense, constant itching that feels like burning sometimes. The skin is really red, dry, and cracked in some places.",
+        "location": "It's mainly on my face, neck, arms, and behind my knees, but it's spreading to my back and chest too. My eyelids are really bad right now.",
+        "severity": "The itching is easily a 9 out of 10. I can barely concentrate in class and I've missed like 8 days of school in the past month.",
+        "aggravating": "Stress definitely makes it worse, and I think the weather changing has been bad. Even my usual clothes feel irritating now.",
+        "relieving": "Nothing really helps anymore. The creams my doctor gave me used to work but they're not doing much now. Cool compresses help a tiny bit.",
+        "associated": "I'm exhausted all the time from not sleeping. My eyes have been watery and my nose is stuffy. I feel like I'm getting sick more often too.",
+        "denies": "No fever, no joint pain. I haven't had any obvious skin infections, but some areas look different than usual.",
+        "history": "I've had eczema since I was a baby, but it usually gets better with the prescription creams. This is definitely the worst it's been in years.",
+        "medications": "Triamcinolone 0.1% ointment; Tacrolimus 0.03% ointment; Cetirizine; Fluticasone nasal",
+        "allergies": "Peanut, Egg",
+        "family": "My dad had really bad eczema when he was little, and my mom has asthma. My brother is allergic to peanuts too.",
+        "social": "I'm in 11th grade but I've been missing a lot of school. I don't really want to hang out with friends because I'm embarrassed about how I look. I don't smoke or drink."
+    },
+    "examManeuvers": [
+        "Inspect face and periorbital area",
+        "Examine flexural areas (antecubital and popliteal fossae)",
+        "Assess neck and postauricular areas",
+        "Inspect hands and wrists",
+        "Examine trunk and back",
+        "Check for signs of secondary infection",
+        "Assess for lichenification",
+        "Evaluate nail changes",
+        "Inspect conjunctiva and nasal mucosa",
+        "Palpate lymph nodes"
+    ],
+    "examFindings": {
+        "Inspect face and periorbital area": "Erythematous, edematous eyelids with fine scaling. Perioral sparing noted. Excoriation marks on cheeks.",
+        "Examine flexural areas (antecubital and popliteal fossae)": "Severe erythema with lichenification and fissuring in bilateral antecubital and popliteal fossae. Active weeping in some areas.",
+        "Assess neck and postauricular areas": "Confluent erythematous plaques with scaling around neck. Postauricular fissuring present bilaterally.",
+        "Inspect hands and wrists": "Dorsal hand eczema with scaling and erythema. Wrist involvement with linear excoriations from scratching.",
+        "Examine trunk and back": "Scattered erythematous, scaly patches on chest and upper back. Some areas show early lichenification.",
+        "Check for signs of secondary infection": "No obvious purulence or honey-crusting. Some areas appear inflamed but without clear signs of bacterial superinfection.",
+        "Assess for lichenification": "Significant lichenification in chronic areas, particularly antecubital fossae and posterior neck.",
+        "Evaluate nail changes": "Mild nail pitting and shine from chronic rubbing. No significant dystrophy.",
+        "Inspect conjunctiva and nasal mucosa": "Mild conjunctival injection bilaterally. Nasal mucosa appears boggy and pale.",
+        "Palpate lymph nodes": "Mild bilateral cervical and axillary lymphadenopathy, likely reactive."
+    },
+    "ddxTargets": [
+        "Severe atopic dermatitis with treatment resistance (correct diagnosis)",
+        "Allergic contact dermatitis",
+        "Seborrheic dermatitis",
+        "Cutaneous T-cell lymphoma (mycosis fungoides)",
+        "Immunodeficiency disorder",
+        "Psoriasis",
+        "Scabies"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'refractory eczema' without considering that treatment resistance in adolescence may signal need for systemic therapy or alternative diagnoses like early cutaneous lymphoma",
+        "prematureClosure": "Risk of assuming this is just a severe flare without exploring why topical treatments have failed or considering systemic causes of treatment resistance",
+        "availabilityBias": "Common presentation may lead to missing rare but serious causes of treatment-resistant dermatitis in adolescents, particularly early mycosis fungoides"
+    },
+    "coachPrompts": {
+        "phase2": "This 16-year-old has 'refractory' eczema affecting her quality of life significantly. Before you interview her, consider: what factors might make atopic dermatitis truly refractory to standard treatment? What red flags should you explore? How does the adolescent age group change your differential considerations?",
+        "phase5": "Your exam reveals severe, widespread atopic dermatitis with significant lichenification and treatment resistance. The SCORAD of 62 indicates severe disease. What factors might explain why her usual treatments aren't working? When should we consider systemic therapy in adolescent atopic dermatitis? What concerning features would prompt you to consider alternative diagnoses?",
+        "finalDebrief": "This case illustrates severe atopic dermatitis requiring systemic management. Key learning points: recognizing when topical therapy is insufficient, understanding SCORAD scoring for severity assessment, considering systemic treatments like dupilumab or methotrexate in adolescents, and the importance of addressing quality of life impacts. The apparent 'refractoriness' likely reflects undertreated severe disease rather than treatment resistance."
     }
 }
 };

@@ -327,39 +327,6 @@ window.EMR_DATA = {
     "presentation": "Back Pain",
     "category": "neurologic"
   },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Patricia Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started The shooting pain down both my legs has been getting much worse over the past mo.'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Bilateral Lumbar Radiculopathy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Gabapentin 600mg TID; Duloxetine 60mg daily; Meloxicam 15mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Acetaminophen 500mg q6h PRN.'",
-        "allergies": "'My allergies are Tramadol, Sulfa Drugs.'",
-        "family": "Father: T2DM, Spinal stenosis (surgery age 65), deceased at 78  Mother: HTN, Osteoarthritis, alive at 82  Sister: T2DM, Obesity, alive at 54",
-        "social": "Occupation: School cafeteria supervisor; on medical leave x 4 weeks for back pain  Marital: Married 30 years; husband Carlos, age 58  Tobacco: Never smoker  Alcohol: Rare; social occasions only  Drugs: Denies"
-    },
     "examManeuvers": [
         "Level of consciousness and GCS",
         "Cranial nerve examination",
@@ -398,6 +365,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed Patricia Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "Patricia appears anxious and frustrated, frequently shifting in her chair to find a comfortable position. She's clearly distressed about her worsening symptoms and worried about her ability to return to work, but remains cooperative and provides detailed responses when asked specific questions.",
+    "interviewQuestions": [
+        "Can you describe exactly where your pain is located and where it travels?",
+        "When did you first notice the foot drop or weakness in your left foot?",
+        "How would you rate your pain on a scale of 1-10, both at rest and with activity?",
+        "What specific activities make your symptoms worse?",
+        "Have you noticed any bowel or bladder problems recently?",
+        "Do you have any numbness or tingling, and if so, where exactly?",
+        "How far can you walk before the pain becomes unbearable?",
+        "Have you noticed any weakness in your legs or feet, especially when walking?",
+        "Are your current medications helping with the pain?",
+        "Have you had any recent falls or noticed yourself tripping?",
+        "Do you have pain in your back itself, or mainly in your legs?",
+        "Have your symptoms been getting progressively worse, better, or staying the same?",
+        "Do you have any pain or symptoms when you cough or sneeze?"
+    ],
+    "patientResponses": {
+        "default": "I'm not sure I understand what you're asking. Could you explain that differently? My main problem is this terrible shooting pain down my legs.",
+        "onset": "The leg pain started about 6 weeks ago, but it's gotten much worse in the past month. The foot drop on the left side - I first noticed that about 3 weeks ago when I started tripping over my own feet.",
+        "character": "It's a sharp, shooting, burning pain that goes down both legs. Sometimes it feels like electricity running down my legs, and other times it's a deep aching pain that never goes away.",
+        "location": "The pain starts in my lower back and shoots down the outside of both legs, all the way to my feet. The left side is definitely worse than the right, and I'm getting numbness in my left foot and toes.",
+        "severity": "Right now sitting here it's about a 6, but when I try to walk any distance it shoots up to an 8 or 9. I can barely make it to the mailbox anymore without having to stop and rest.",
+        "aggravating": "Walking makes it much worse, especially going downhill or standing for more than a few minutes. Bending forward actually helps a little, like when I lean on a shopping cart.",
+        "relieving": "Sitting down helps, and leaning forward like on a shopping cart gives me some relief. My medications help take the edge off but don't make it go away completely.",
+        "associated": "I'm having numbness and tingling in both feet, worse on the left. My left foot feels weak - I've tripped several times because I can't lift my foot up properly when I walk.",
+        "denies": "No bowel or bladder problems, no fever, no recent injuries or falls before this started. No pain in my arms or upper back.",
+        "history": "I've had back problems for years with some leg pain, but nothing like this. This is much worse and the foot drop is completely new for me.",
+        "medications": "Gabapentin 600mg TID; Duloxetine 60mg daily; Meloxicam 15mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Acetaminophen 500mg q6h PRN",
+        "allergies": "Tramadol, Sulfa Drugs",
+        "family": "My father had spinal stenosis and needed surgery when he was 65. He also had diabetes like me. My mother has arthritis and high blood pressure.",
+        "social": "I work as a school cafeteria supervisor, but I've been on medical leave for 4 weeks because I can't stand for long periods. I've never smoked and rarely drink alcohol. I'm married to Carlos for 30 years."
+    },
+    "examManeuvers": [
+        "Dorsiflexion strength testing (bilateral)",
+        "Plantar flexion strength testing (bilateral)",
+        "Straight leg raise test (bilateral)",
+        "Sensory testing L4, L5, S1 dermatomes",
+        "Patellar reflex (L4)",
+        "Achilles reflex (S1)",
+        "Gait assessment",
+        "Lumbar spine flexion/extension range of motion",
+        "Neurogenic claudication assessment (walking tolerance)",
+        "Babinski reflex testing"
+    ],
+    "examFindings": {
+        "Dorsiflexion strength testing (bilateral)": "Left dorsiflexion 3/5 strength with visible foot drop, right dorsiflexion 4/5 strength",
+        "Plantar flexion strength testing (bilateral)": "Left plantar flexion 4/5, right plantar flexion 4+/5",
+        "Straight leg raise test (bilateral)": "Positive at 45 degrees bilaterally, reproducing radiating leg pain, left worse than right",
+        "Sensory testing L4, L5, S1 dermatomes": "Decreased sensation in L5 distribution bilaterally (lateral leg, dorsal foot), left more pronounced than right",
+        "Patellar reflex (L4)": "Diminished bilaterally, 1+ reflexes",
+        "Achilles reflex (S1)": "Present but diminished bilaterally, 1+ reflexes",
+        "Gait assessment": "Antalgic gait with left foot drop, patient unable to heel walk on left side, steppage gait pattern",
+        "Lumbar spine flexion/extension range of motion": "Limited extension due to pain, flexion provides mild symptom relief",
+        "Neurogenic claudication assessment (walking tolerance)": "Patient cannot walk more than 50 feet without stopping due to leg pain and numbness",
+        "Babinski reflex testing": "Negative bilaterally, downgoing toes"
+    },
+    "ddxTargets": [
+        "Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop) (correct diagnosis)",
+        "Lumbar spinal stenosis with neurogenic claudication",
+        "L4-L5 or L5-S1 disc herniation with nerve root compression",
+        "Cauda equina syndrome",
+        "Spinal cord compression or myelopathy",
+        "Peripheral neuropathy (diabetic or other causes)",
+        "Peripheral arterial disease with claudication"
+    ],
+    "biasFlags": {
+        "anchoring": "Risk of anchoring on 'typical back pain' and missing the progressive neurological deficits, particularly the foot drop which indicates significant nerve compression requiring urgent evaluation",
+        "prematureClosure": "Risk of stopping at 'chronic back pain' diagnosis without recognizing the acute worsening and new neurological symptoms that suggest nerve root compromise",
+        "availabilityBias": "May focus on common mechanical back pain rather than recognizing the pattern of neurogenic claudication and radiculopathy that requires neurological workup"
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing the patient, consider what key historical elements would help you differentiate between mechanical back pain, radiculopathy, and more serious causes of neurological symptoms. What red flag symptoms should you specifically ask about given her presentation?",
+        "phase5": "Now that you've completed your history and exam, what specific neurological findings are most concerning? How do the patient's symptoms and your physical exam findings help localize the level of nerve involvement? What does the combination of radicular pain and foot drop tell you about the urgency of this case?",
+        "finalDebrief": "This case illustrates how chronic conditions like spinal stenosis can progress to cause acute neurological deficits. The key was recognizing that new foot drop in the setting of worsening radicular symptoms represents significant nerve compression. How did your differential diagnosis evolve as you gathered more information about the neurological deficits versus the chronic back pain history?"
     }
 }
 };

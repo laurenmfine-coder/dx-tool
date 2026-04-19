@@ -401,39 +401,6 @@ window.EMR_DATA = {
       "Lives with adult daughter"
     ]
   ],
-  "guided": {
-    "supported": true,
-    "patientPersona": "William Turner appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
-    "interviewQuestions": [
-        "Tell me what brought you in today. When did can't breathe when i lay down no specific spot \u2014 just can't breathe start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
-    ],
-    "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I just can't breathe when I try to lay down flat anymore - it's not pain anywher.'",
-        "character": "'It's can't breathe when i lay down no specific spot \u2014 just can't breathe \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Furosemide; Lisinopril; Carvedilol; Apixaban; Metformin.'",
-        "allergies": "'My allergies are ACE inhibitors.'",
-        "family": "Mother died of heart failure at 72  Father had MI at 60",
-        "social": "Tobacco: Quit 5 years ago, 20 pack-years  Alcohol: Stopped drinking 3 years ago at diagnosis  Drugs: Denies  Occupation: Retired bus driver  Living: Lives with adult daughter"
-    },
     "examManeuvers": [
         "General appearance and level of distress",
         "Vital signs review",
@@ -472,6 +439,84 @@ window.EMR_DATA = {
         "phase2": "You've reviewed William Turner's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
         "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
         "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+},
+  "guided": {
+    "supported": true,
+    "patientPersona": "William appears anxious and fatigued, sitting upright and leaning forward slightly. He's cooperative and forthcoming with information but shows visible distress when discussing his breathing difficulties. His concern is evident as he frequently mentions how the symptoms are affecting his sleep and daily activities.",
+    "interviewQuestions": [
+        "When did you first notice you couldn't breathe when lying down?",
+        "How many pillows do you need to sleep comfortably now?",
+        "Have you noticed any swelling in your legs, ankles, or feet?",
+        "Do you wake up at night gasping for air or short of breath?",
+        "Have you had any chest pain or pressure?",
+        "How far can you walk before getting short of breath?",
+        "Have you gained any weight recently?",
+        "Are you taking all your medications as prescribed?",
+        "Have you had any recent changes to your medications?",
+        "Do you have a persistent cough, especially at night?",
+        "Have you noticed your belly getting bigger or feeling bloated?",
+        "Have you been to the hospital for breathing problems before?",
+        "Are you following a low-salt diet as recommended?"
+    ],
+    "patientResponses": {
+        "default": "I'm sorry, could you explain that differently? I'm mainly worried about not being able to breathe when I lie down.",
+        "onset": "This has been getting worse over the past 3 weeks. At first I just needed an extra pillow, but now I need to sleep almost sitting up.",
+        "character": "It's not really pain, more like I just can't get enough air. Like I'm suffocating or drowning when I try to lay flat.",
+        "location": "It's not in any specific spot - it's just my whole chest and breathing that feels wrong when I lie down.",
+        "severity": "I'd say it's about a 7 out of 10 when I try to lie flat. I haven't had a good night's sleep in weeks.",
+        "aggravating": "Lying flat makes it much worse. Even slight activity like walking to the mailbox makes me short of breath now.",
+        "relieving": "Sitting up helps a lot. I've been sleeping in my recliner chair most nights.",
+        "associated": "My legs have been more swollen lately, and I've been coughing more at night. I think I've gained some weight too.",
+        "denies": "No chest pain, no fever, no nausea. The cough doesn't bring up blood or anything like that.",
+        "history": "I was in the hospital about 8 months ago for similar breathing problems, but not this bad.",
+        "medications": "Furosemide; Lisinopril; Carvedilol; Apixaban; Metformin",
+        "allergies": "ACE inhibitors",
+        "family": "My mother died from heart failure when she was 72, and my father had a heart attack at 60.",
+        "social": "I'm a retired bus driver. I quit smoking 5 years ago after my heart attack - smoked about a pack a day for 20 years. Stopped drinking 3 years ago when they diagnosed my heart failure. I live with my daughter who helps take care of me."
+    },
+    "examManeuvers": [
+        "Inspect for peripheral edema",
+        "Assess jugular venous distention",
+        "Auscultate heart sounds",
+        "Auscultate lung sounds",
+        "Palpate for hepatomegaly",
+        "Check for ascites",
+        "Assess capillary refill",
+        "Palpate pedal pulses",
+        "Measure weight if possible",
+        "Assess respiratory effort and positioning"
+    ],
+    "examFindings": {
+        "Inspect for peripheral edema": "3+ pitting edema bilateral lower extremities to mid-calf",
+        "Assess jugular venous distention": "JVD elevated to 12 cm at 45 degrees",
+        "Auscultate heart sounds": "Irregularly irregular rhythm, S3 gallop present, no murmurs",
+        "Auscultate lung sounds": "Bilateral fine crackles at lung bases, extending halfway up posterior chest",
+        "Palpate for hepatomegaly": "Liver edge palpable 2 cm below costal margin, tender",
+        "Check for ascites": "Mild abdominal distention, possible fluid wave",
+        "Assess capillary refill": "Capillary refill 3 seconds",
+        "Palpate pedal pulses": "Weak but palpable bilateral dorsalis pedis and posterior tibial pulses",
+        "Measure weight if possible": "Patient reports 8-pound weight gain over past month",
+        "Assess respiratory effort and positioning": "Patient prefers sitting upright, mild accessory muscle use"
+    },
+    "ddxTargets": [
+        "Acute decompensated heart failure (correct diagnosis)",
+        "Pneumonia",
+        "Pulmonary embolism",
+        "Acute coronary syndrome",
+        "Pneumothorax",
+        "COPD exacerbation",
+        "Medication noncompliance"
+    ],
+    "biasFlags": {
+        "anchoring": "Don't anchor solely on the orthopnea - consider other causes of dyspnea even with clear heart failure history",
+        "prematureClosure": "Avoid assuming it's just medication noncompliance without exploring other precipitating factors for decompensation",
+        "availabilityBias": "Recent cases of pneumonia or PE might make you overlook the classic presentation of heart failure exacerbation"
+    },
+    "coachPrompts": {
+        "phase2": "Looking at this 68-year-old with orthopnea and his cardiac history, what key historical elements will help you differentiate between heart failure decompensation and other serious causes of dyspnea? Consider both precipitating factors and associated symptoms that would support your leading diagnosis.",
+        "phase5": "Now that you have his history and physical findings, how do the exam findings of JVD, S3 gallop, bilateral crackles, and peripheral edema fit with your differential diagnosis? What might have precipitated this decompensation in a patient with known heart failure?",
+        "finalDebrief": "This case demonstrates classic acute decompensated heart failure with orthopnea as the presenting complaint. Notice how the history of progressive orthopnea, weight gain, and physical findings of volume overload all supported this diagnosis. What precipitating factors should we investigate, and how might his medication regimen need adjustment?"
     }
 }
 };
