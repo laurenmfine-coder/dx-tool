@@ -282,7 +282,78 @@ window.EMR_DATA = {
       "Occupation",
       "Construction worker"
     ]
-  ]
+  ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Michael Chang is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Levetiracetam; Lacosamide.'",
+        "allergies": "'My allergies: Phenytoin.'",
+        "family": "Brother: epilepsy",
+        "social": "Tobacco: Current smoker  Alcohol: 6-pack beer daily  Medication adherence: Stopped taking seizure meds 2 weeks ago \u2014 felt fine  Occupation: Construction worker"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Michael Chang: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -298,5 +369,74 @@ window.CASES['status-epilepticus'] = {
   teachingPoints: {
     keyLearning: ['SE treatment timeline: 0-5 min (airway, IV access, glucose check) → 5 min (lorazepam/midazolam/diazepam) → 10-20 min (if not stopped, repeat benzo once) → 20-30 min (2nd-line: levetiracetam or valproate or fosphenytoin) → 30-40 min (refractory SE — intubation + midazolam or propofol infusion).','Refractory status epilepticus (RSE): fails 2 agents. Super-refractory SE: fails propofol/midazolam × 24h. RSE treatment: midazolam infusion (0.05-0.2 mg/kg/hr), propofol infusion, ketamine, pentobarbital coma. Continuous EEG monitoring required for RSE.','Identify and treat underlying cause simultaneously: hypoglycemia (always check glucose first!), electrolyte abnormalities (hyponatremia — do NOT correct too rapidly), CNS infection (empirical antibiotics if any suspicion of meningitis), stroke, toxins (isoniazid → pyridoxine 5g IV), medication non-compliance, AED toxicity.'],
     boardPearls: ['Non-convulsive status epilepticus (NCSE): altered consciousness without motor activity — diagnosed by EEG only. Must consider in any unexplained altered consciousness. Treat as convulsive SE once confirmed on EEG.','Pyridoxine (B6) for status epilepticus: give empirically if isoniazid toxicity suspected (SLUD toxidrome absent, refractory to benzos). Dose 5g IV or equal to estimated INH ingestion.','Ketamine for RSE: 0.5-1 mg/kg IV bolus → 0.3-0.5 mg/kg/hr infusion. Dissociative anesthetic with NMDA receptor antagonism — anticonvulsant mechanism different from GABA-ergic agents. May be effective when benzodiazepines/propofol/barbiturates fail. Does not increase ICP when used in mechanically ventilated patients.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Michael Chang is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Levetiracetam; Lacosamide.'",
+        "allergies": "'My allergies: Phenytoin.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with working diagnosis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with working diagnosis."
+    },
+    "ddxTargets": [
+        "working diagnosis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for working diagnosis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Michael Chang \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };

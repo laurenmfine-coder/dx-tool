@@ -1132,4 +1132,76 @@ window.EMR_DATA = {
       "75% tolerate baked milk by age 1"
     ]
   }
-]};
+],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Grace Okafor is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Maternal dairy elimination; Iron supplement.'",
+        "allergies": "'My allergies: Cow milk protein.'",
+        "family": "Mother: lactose intolerance (different mechanism \u2014 mother confuses this with baby's allergy)",
+        "social": "Feeding: Breastfed \u2014 mother has NOT eliminated dairy from own diet despite pediatrician's recommendation  Mother misconception: Mother thinks her lactose intolerance = baby's milk allergy (different mechanisms)  WIC: On WIC program \u2014 hypoallergenic formula expensive even with WIC  Growth: Falling off growth curve \u2014 now <5th percentile weight  Social: First-time mother, 19 years old, limited support system"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Grace Okafor: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
+};

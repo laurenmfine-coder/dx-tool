@@ -379,5 +379,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Headache",
     "category": "cardiovascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Claudette Baptiste is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did headache start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My blood pressure pills aren't working like they should, and I'll be honest - I .'",
+        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Hypertensive Emergency with End-Organ Damage.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
+        "allergies": "'My allergies are Lisinopril, Shellfish.'",
+        "family": "Mother: HTN, stroke at age 70, deceased at 75  Father: HTN, T2DM, MI at age 65, deceased at 68  Sister: HTN, CKD, alive at 65",
+        "social": "Occupation: Retired home health aide  Marital: Widowed; lives with daughter  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and hemodynamic assessment",
+        "Vital signs review",
+        "Jugular venous pressure",
+        "Cardiovascular auscultation",
+        "Peripheral pulses and perfusion",
+        "Pulmonary auscultation",
+        "Lower extremity edema",
+        "Skin perfusion and temperature"
+    ],
+    "examFindings": {
+        "General appearance and hemodynamic assessment": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Jugular venous pressure": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Peripheral pulses and perfusion": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Lower extremity edema": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+        "Skin perfusion and temperature": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Hypertensive Emergency with End-Organ Damage (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hypertensive Emergency with End-Organ Damage, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Hypertensive Emergency with End-Organ Damage, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Hypertensive Emergency with End-Organ Damage based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Claudette Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Hypertensive Emergency with End-Organ Damage (Encephalopathy, CKD Progression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

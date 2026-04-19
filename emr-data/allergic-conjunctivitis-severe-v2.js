@@ -994,4 +994,76 @@ window.EMR_DATA = {
       "Shield ulcers → permanent corneal scarring"
     ]
   }
-]};
+],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jayden Thomas is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Olopatadine 0.2%; Prednisolone acetate 1%; Cold compresses; Cetirizine.'",
+        "allergies": "'My allergies: Grass pollen, Dust mite.'",
+        "family": "Mother: seasonal allergies  Father: eczema",
+        "social": "Context: Vernal keratoconjunctivitis (VKC) \u2014 severe form of allergic eye disease, not simple seasonal allergies  Risk: Giant papillae on tarsal conjunctiva \u2014 can cause corneal shield ulcers and permanent vision loss  Impact: Missing school \u2014 eyes swollen shut some mornings, photophobia  Comorbidity: Asthma and eczema \u2014 atopic triad"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Jayden Thomas: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
+};

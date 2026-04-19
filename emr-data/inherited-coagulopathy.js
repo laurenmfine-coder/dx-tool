@@ -282,5 +282,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Ethan Goldberg is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did hematologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I was playing basketball yesterday when I landed wrong and felt something pop in.'",
+        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Hemophilia A with Acute Hemorrhagic Episode.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Emicizumab (Hemlibra) 150mg SQ every 2 weeks; Recombinant Factor VIII (Advate) 2000 IU IV PRN; Acetaminophen 500mg PRN.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Mother: Hemophilia A carrier (Factor VIII 48%), alive at 50  Maternal uncle: Hemophilia A, severe (FVIII <1%), alive at 55 \u2014 on prophylaxis  Maternal grandfather: Hemophilia A, deceased at 62 (intracranial hemorrhage)",
+        "social": "Occupation: College student (sophomore, pre-med biology)  Marital: Single  Tobacco: Never  Alcohol: Rare \u2014 avoids due to bleeding risk  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and pallor",
+        "Vital signs",
+        "Skin for pallor, jaundice, petechiae, or purpura",
+        "Lymph node assessment",
+        "Spleen palpation",
+        "Liver assessment",
+        "Cardiovascular auscultation",
+        "Neurological assessment"
+    ],
+    "examFindings": {
+        "General appearance and pallor": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Vital signs": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Lymph node assessment": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Spleen palpation": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Liver assessment": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
+        "Neurological assessment": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Hemophilia A with Acute Hemorrhagic Episode (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hemophilia A with Acute Hemorrhagic Episode, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Hemophilia A with Acute Hemorrhagic Episode, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Hemophilia A with Acute Hemorrhagic Episode based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Ethan Goldberg's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Hemophilia A with Acute Hemorrhagic Episode. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

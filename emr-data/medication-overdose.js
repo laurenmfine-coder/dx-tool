@@ -259,5 +259,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Renal / Electrolyte Emergency",
     "category": "iatrogenic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Patricia Langston is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My legs have been so swollen lately and I'm having trouble catching my breath wh.'",
+        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Iatrogenic Hyperkalemia.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Lisinopril 40mg daily; Spironolactone 50mg daily; Furosemide 40mg daily; Amlodipine 10mg daily; Glipizide 10mg BID; Potassium Chloride 20mEq daily.'",
+        "allergies": "'My allergies are Metformin.'",
+        "family": "Mother: Deceased at 88 \u2014 CHF, CKD  Father: Deceased at 76 \u2014 MI  Sister (age 71): Hypertension, Type 2 Diabetes",
+        "social": "Occupation: Retired \u2014 former elementary school teacher  Marital: Married x 50 years; husband Robert assists with medications and appointments  Tobacco: Never  Alcohol: Rare  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Iatrogenic Hyperkalemia. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Iatrogenic Hyperkalemia (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Iatrogenic Hyperkalemia, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Iatrogenic Hyperkalemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Iatrogenic Hyperkalemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Patricia Langston's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Iatrogenic Hyperkalemia (7.4 mEq/L) from ACE-Inhibitor + Spironolactone Dose Increase + Continued KCl Supplementation in CKD 3b \u2014 Medication Safety Error. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

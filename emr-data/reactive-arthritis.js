@@ -195,7 +195,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Musculoskeletal Emergency",
     "category": "rheumatologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Derek Campbell is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The musculoskeletal emergency has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with Reactive Arthritis.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Ibuprofen 400mg PRN.'",
+        "allergies": "'My allergies: Amoxicillin.'",
+        "family": "Mother: Psoriasis, alive at 56  Father: Ankylosing spondylitis (HLA-B27 positive), alive at 60  Sister: Healthy, age 26",
+        "social": "Occupation: Software developer \u2014 desk job; works from home 3 days/week  Marital: Single; sexually active with male and female partners  Tobacco: Denies  Alcohol: Social, 3-4 drinks on weekends  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Joint inspection",
+        "Joint palpation",
+        "Range of motion",
+        "Extra-articular",
+        "Skin",
+        "Neurological"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with Reactive Arthritis.",
+        "Vital signs": "Finding consistent with Reactive Arthritis.",
+        "Joint inspection": "Finding consistent with Reactive Arthritis.",
+        "Joint palpation": "Finding consistent with Reactive Arthritis.",
+        "Range of motion": "Finding consistent with Reactive Arthritis.",
+        "Extra-articular": "Finding consistent with Reactive Arthritis.",
+        "Skin": "Finding consistent with Reactive Arthritis.",
+        "Neurological": "Finding consistent with Reactive Arthritis."
+    },
+    "ddxTargets": [
+        "Reactive Arthritis (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Reactive Arthritis.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Derek Campbell: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is Reactive Arthritis (Post-Campylobacter, HLA-B27-Associated) \u2014 Classic Triad: Arthritis, Conjunctivitis, Urethritis. How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -211,5 +282,74 @@ window.CASES['reactive-arthritis'] = {
   teachingPoints: {
     keyLearning: ['Reactive arthritis (formerly Reiter syndrome): asymmetric oligoarthritis + urethritis + conjunctivitis/uveitis + mucocutaneous lesions (keratoderma blennorrhagica on palms/soles, circinate balanitis). Triggered by STI (Chlamydia most common) or enteric infection (Salmonella, Shigella, Campylobacter, Yersinia).','HLA-B27 association: 60-80% of patients with reactive arthritis are HLA-B27 positive. HLA-B27 is also associated with other seronegative spondyloarthropathies (ankylosing spondylitis, psoriatic arthritis, IBD-associated arthritis).','Prognosis: most resolve within 12 months. 15-20% develop chronic disease. 15-20% develop sacroiliitis. Screen for HLA-B27 in chronic cases (predicts ankylosing spondylitis risk).'],
     boardPearls: ['Classic triggers: Chlamydia (sexually active adults, urogenital reactive arthritis), Salmonella/Shigella/Campylobacter/Yersinia (post-enteric reactive arthritis). Reactive arthritis typically follows infection by 1-4 weeks.','Uveitis in reactive arthritis: anterior uveitis — eye pain, photophobia, redness, blurred vision. Refer to ophthalmology for slit-lamp evaluation and topical steroids. Untreated uveitis causes blindness.','Psoriatic arthritis vs reactive arthritis: both are seronegative spondyloarthropathies with oligoarthritis. Psoriatic: nail changes (pitting, onycholysis), dactylitis (sausage finger), skin psoriasis. Reactive: urethritis/conjunctivitis, triggered by infection, mucocutaneous lesions without psoriasis plaques.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Derek Campbell is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like reactive arthritis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Ibuprofen 400mg PRN.'",
+        "allergies": "'My allergies: Amoxicillin.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with Reactive Arthritis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with Reactive Arthritis."
+    },
+    "ddxTargets": [
+        "Reactive Arthritis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Reactive Arthritis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Derek Campbell \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is Reactive Arthritis (Post-Campylobacter, HLA-B27-Associated) \u2014 Classic Triad: Arthritis, Conjunctivitis, Urethritis. How did your reasoning evolve?"
+    }
+}
 };

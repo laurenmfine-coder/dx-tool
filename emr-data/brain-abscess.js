@@ -314,5 +314,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Headache",
     "category": "neurologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Ricardo Jimenez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did headache start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I started having this really bad headache about 10 days ago, right across my for.'",
+        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Brain Abscess.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Metformin 1000mg BID; Lisinopril 20mg daily; Fluticasone 50mcg nasal spray BID; Amoxicillin-Clavulanate 875mg/125mg BID; Atorvastatin 20mg QHS.'",
+        "allergies": "'My allergies are Sulfonamides.'",
+        "family": "Mother: T2DM, HTN, alive at 72  Father: Stroke at age 64, deceased at 68  Brother: T2DM, age 50",
+        "social": "Occupation: Construction foreman  Marital: Married, 2 children  Tobacco: Former smoker \u2014 10 pack-years; quit 2017  Alcohol: Social, 3-4 beers on weekends  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "Level of consciousness and GCS",
+        "Cranial nerve examination",
+        "Motor strength testing",
+        "Sensory testing",
+        "Coordination and cerebellar testing",
+        "Gait assessment if applicable",
+        "Meningeal signs",
+        "Vital signs"
+    ],
+    "examFindings": {
+        "Level of consciousness and GCS": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Cranial nerve examination": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Motor strength testing": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Sensory testing": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Coordination and cerebellar testing": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Gait assessment if applicable": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Meningeal signs": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
+        "Vital signs": "Clinical finding consistent with Brain Abscess. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Brain Abscess (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Brain Abscess, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Brain Abscess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Brain Abscess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Ricardo Jimenez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Brain Abscess (Secondary to Sinusitis with Contiguous Spread). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

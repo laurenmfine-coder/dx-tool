@@ -293,5 +293,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Seizure",
     "category": "toxicologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Michael Brennan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did seizure start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been drinking about 12 to 18 beers every day and I haven't been taking thos.'",
+        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Alcohol Withdrawal Seizure.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Lisinopril 20mg daily; Omeprazole 20mg daily; Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Mother (age 72): Hypertension, anxiety disorder  Father: Deceased at age 58 \u2014 alcohol-related cirrhosis, variceal hemorrhage  Brother (age 50): History of alcohol use disorder \u2014 in recovery x 5 years",
+        "social": "Occupation: Unemployed \u2014 formerly worked in landscaping; lost job due to drinking  Marital: Divorced x 6 years; lives alone in efficiency apartment; brother nearby  Tobacco: 1 PPD x 25 years  Alcohol: 12-18 beers daily x 15 years; last drink approximately 48 hours ago (stopped when he ran out)  Drugs: Denies current illicit drug use; remote history of cocaine use (stopped 2015)"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Alcohol Withdrawal Seizure (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Alcohol Withdrawal Seizure, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Alcohol Withdrawal Seizure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Alcohol Withdrawal Seizure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Michael Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Alcohol Withdrawal Seizure (GTC) \u2014 48 Hours Post-Cessation with High Risk for Delirium Tremens (Prior DTs History, Kindling). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

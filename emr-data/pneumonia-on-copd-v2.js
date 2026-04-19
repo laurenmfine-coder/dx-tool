@@ -362,5 +362,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Shortness of Breath",
     "category": "pulmonary"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Walter Briggs appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did shortness of breath start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been coughing up thick green stuff for about four days now, and it's gettin.'",
+        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia Superimposed on Severe COPD.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Fluticasone-Salmeterol (Advair) 250/50 INH BID; Albuterol 90mcg MDI PRN; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Furosemide 40mg daily; Alendronate 70mg weekly.'",
+        "allergies": "'My allergies are Azithromycin, Iodinated Contrast.'",
+        "family": "Father: COPD, lung cancer (diagnosed age 70, deceased age 73). Smoker.  Mother: Congestive heart failure, hypertension, deceased age 84  Brother: Emphysema, current smoker, age 70",
+        "social": "Occupation: Retired electrician (40 years). Occupational asbestos exposure possible.  Marital: Married, lives with wife. She is primary caregiver.  Tobacco: Former smoker \u2014 quit 2018. 50 pack-year history (1.5 PPD x 33 years).  Alcohol: Rare \u2014 1-2 beers per month  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and respiratory effort",
+        "Vital signs and pulse oximetry",
+        "Pulmonary auscultation",
+        "Percussion of lung fields",
+        "Accessory muscle use",
+        "Cardiovascular auscultation",
+        "Lower extremity DVT assessment",
+        "Tracheal position"
+    ],
+    "examFindings": {
+        "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+        "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Community-Acquired Pneumonia Superimposed on Severe COPD (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia Superimposed on Severe COPD, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Community-Acquired Pneumonia Superimposed on Severe COPD, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia Superimposed on Severe COPD based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Walter Briggs's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Community-Acquired Pneumonia Superimposed on Severe COPD. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

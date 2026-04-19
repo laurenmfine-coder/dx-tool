@@ -280,7 +280,78 @@ window.EMR_DATA = {
       "Exercise",
       "Runs 3-4x/week"
     ]
-  ]
+  ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Daniel Okafor is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take no medications.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Non-contributory",
+        "social": "Tobacco: Never  Alcohol: Social  Occupation: Graduate student  Exercise: Runs 3-4x/week"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Daniel Okafor: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -296,5 +367,74 @@ window.CASES['pericarditis-v1'] = {
   teachingPoints: {
     keyLearning: ['ECG in pericarditis: Stage I (diffuse ST elevation + PR depression — ALL leads except aVR and V1). Stage II (ST returns to baseline). Stage III (T-wave inversions). Stage IV (normalization). Saddle-shaped ST elevation in ALL leads (vs STEMI: localized, concave upward).','Pericarditis vs STEMI distinction: pericarditis — diffuse ST elevation in multiple leads, no reciprocal changes (aVR may have ST depression), PR depression, friction rub, pleuritic chest pain, young age, recent viral illness. STEMI — localized leads, reciprocal changes, no PR depression.','Colchicine mechanism: inhibits microtubule polymerization → inhibits neutrophil migration and cytokine release → reduces pericardial inflammation. Most effective if started at the onset of first episode (ICAP trial: 0.5mg BID × 3 months).'],
     boardPearls: ['Constrictive pericarditis: fibrocalcific pericardium → impaired ventricular filling. Causes: TB (worldwide), prior cardiac surgery, radiation, idiopathic/viral. Kussmaul sign (JVP rises with inspiration), pericardial knock on auscultation. Treatment: pericardiectomy.','Cardiac tamponade: pericardial effusion → elevated intrapericardial pressure → impaired cardiac filling. Beck Triad: hypotension + muffled heart sounds + distended neck veins. Pulsus paradoxus >10 mmHg. Pericardiocentesis is life-saving.','Elevated CRP in pericarditis: used to monitor treatment response and guide duration. CRP normalization before stopping NSAIDs/colchicine reduces recurrence. Do not stop treatment based on symptoms alone.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Daniel Okafor is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take no medications.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with working diagnosis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with working diagnosis."
+    },
+    "ddxTargets": [
+        "working diagnosis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for working diagnosis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Daniel Okafor \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };

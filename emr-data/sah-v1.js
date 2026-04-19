@@ -270,7 +270,78 @@ window.EMR_DATA = {
       "Cocaine",
       "Denies"
     ]
-  ]
+  ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jennifer Wu is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Lisinopril.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Mother: ruptured aneurysm at age 48",
+        "social": "Tobacco: Current, 25 pack-years  Cocaine: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Jennifer Wu: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -286,5 +357,74 @@ window.CASES['sah-v1'] = {
   teachingPoints: {
     keyLearning: ['Thunderclap headache: maximal intensity at onset ("worst headache of my life"). SAH is the diagnosis-not-to-miss — 30-40% mortality. Other causes: cerebral venous thrombosis, hypertensive emergency, RCVS (reversible cerebral vasoconstriction syndrome), meningitis, pituitary apoplexy.','Ottawa SAH rule (for alert patients with peak headache): CT + LP if ANY of: age ≥40, neck stiffness/pain, witnessed loss of consciousness, onset during exertion, or thunderclap description. High sensitivity approach.','Hunt and Hess grade: I (mild headache, alert) → II (severe headache, CN palsy) → III (confused, focal deficit) → IV (stuporous, severe deficit) → V (comatose, posturing). Higher grade = worse prognosis.'],
     boardPearls: ['Aneurysm treatment: endovascular coiling vs surgical clipping. ISAT trial: coiling superior for suitable aneurysms (lower mortality, disability). Clipping preferred for MCA aneurysms, young patients with long life expectancy, or incomplete coiling.','SAH complications: vasospasm (peak 5-14 days, occurs in 70%, symptomatic in 30%), rebleeding (highest risk in first 24h, 20-30% mortality), hydrocephalus (acute 20%, chronic 10-20%), SIADH/cerebral salt wasting, neurogenic pulmonary edema, cardiac dysfunction.','Nimodipine mechanism: orally bioavailable dihydropyridine CCB with preferential cerebral vessel selectivity. Reduces symptomatic vasospasm, improves neurological outcomes. DOES NOT reduce radiographic vasospasm — improves outcomes through other mechanisms (neuroprotection, microcirculation).']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jennifer Wu is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Lisinopril.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with working diagnosis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with working diagnosis."
+    },
+    "ddxTargets": [
+        "working diagnosis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for working diagnosis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Jennifer Wu \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };

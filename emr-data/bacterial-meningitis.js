@@ -194,7 +194,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Fever/Sepsis",
     "category": "infectious"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Anthony Delgado is critically ill, in severe distress.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Suddenly \u2014 within the past few hours.'",
+        "character": "'The fever/sepsis has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Eight or nine out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with Acute Bacterial Meningitis.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Fluticasone Propionate 50mcg nasal spray BID PRN.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Mother: Asthma, alive at 48  Father: HTN, T2DM, alive at 52  Sister: Healthy, age 16",
+        "social": "Occupation: College student (junior) \u2014 lives in dormitory  Marital: Single  Tobacco: Denies  Alcohol: Social, weekends; binge drinking occasionally at parties  Drugs: Marijuana \u2014 occasional"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Skin/lymph nodes",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Source-specific",
+        "Neurological screen"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with Acute Bacterial Meningitis.",
+        "Vital signs": "Finding consistent with Acute Bacterial Meningitis.",
+        "Skin/lymph nodes": "Finding consistent with Acute Bacterial Meningitis.",
+        "Cardiovascular": "Finding consistent with Acute Bacterial Meningitis.",
+        "Pulmonary": "Finding consistent with Acute Bacterial Meningitis.",
+        "Abdominal": "Finding consistent with Acute Bacterial Meningitis.",
+        "Source-specific": "Finding consistent with Acute Bacterial Meningitis.",
+        "Neurological screen": "Finding consistent with Acute Bacterial Meningitis."
+    },
+    "ddxTargets": [
+        "Acute Bacterial Meningitis (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Acute Bacterial Meningitis.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Anthony Delgado: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is Acute Bacterial Meningitis (Neisseria meningitidis Serogroup B). How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -210,5 +281,74 @@ window.CASES['bacterial-meningitis'] = {
   teachingPoints: {
     keyLearning: ['Empirical regimen: vancomycin + ceftriaxone (covers S. pneumoniae including PCN-resistant strains, N. meningitidis). Add ampicillin if immunocompromised, age >50, or alcoholism (covers Listeria). Add dexamethasone before or with first antibiotic dose.','Kernig sign: knee extension limited/painful with hip flexed at 90°. Brudzinski sign: passive neck flexion causes involuntary hip/knee flexion. Both have low sensitivity (~50%) but high specificity. Jolt accentuation: worsening headache with rapid horizontal head rotation — higher sensitivity (97%) but lower specificity for meningismus.','Antibiotic dosing for meningitis: HIGH DOSE — ceftriaxone 2g IV q12h (CNS penetration requires high serum levels). Vancomycin 15-20 mg/kg IV q8-12h (target AUC/MIC, not trough). Goal: CSF drug concentrations exceed MIC.'],
     boardPearls: ['N. meningitidis: petechiae/purpura (meningococcemia — sepsis without meningitis) can occur. NOTIFY public health immediately. Post-exposure prophylaxis for close contacts: rifampin × 2 days, or single-dose ciprofloxacin, or single-dose ceftriaxone IM.','S. pneumoniae meningitis: most common bacterial meningitis in adults. PCN-resistant strains prevalent — use vancomycin + ceftriaxone empirically, adjust based on sensitivities. Dexamethasone most beneficial for this organism.','Listeria meningitis: elderly, immunocompromised, pregnant. NOT covered by cephalosporins — requires ampicillin. MRI: rhombencephalitis pattern (brainstem involvement). CSF: mixed PMN/lymphocyte pleocytosis.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Anthony Delgado is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like acute bacterial meningitis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Fluticasone Propionate 50mcg nasal spray BID PRN.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with Acute Bacterial Meningitis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with Acute Bacterial Meningitis."
+    },
+    "ddxTargets": [
+        "Acute Bacterial Meningitis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Acute Bacterial Meningitis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Anthony Delgado \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is Acute Bacterial Meningitis (Neisseria meningitidis Serogroup B). How did your reasoning evolve?"
+    }
+}
 };

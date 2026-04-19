@@ -367,5 +367,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Abdominal Pain",
     "category": "gastrointestinal"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Isabella Reyes appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did abdominal pain start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been having really bad stomach cramps for the past few weeks, especially ar.'",
+        "character": "'It's abdominal pain \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Crohn's Disease Flare.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Adalimumab 40mg SubQ every 2 weeks; Ferrous Sulfate 325mg BID; Cholecalciferol 2000 IU daily; Sertraline 50mg daily; Ondansetron 4mg PRN.'",
+        "allergies": "'My allergies are Sulfasalazine, Latex.'",
+        "family": "Mother: Ulcerative colitis, alive at 54  Father: Type 2 Diabetes Mellitus, Hypertension, alive at 58  Maternal grandmother: Colon cancer at age 68 (deceased)",
+        "social": "Occupation: Elementary school teacher  Marital: Single, in a relationship  Tobacco: Never smoker  Alcohol: Occasional, 1-2 drinks/month; avoids during flares  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Abdominal inspection",
+        "Abdominal auscultation",
+        "Abdominal palpation light and deep",
+        "Rebound and guarding assessment",
+        "Rectal examination if indicated",
+        "Skin for jaundice or stigmata"
+    ],
+    "examFindings": {
+        "General appearance": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Vital signs": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Abdominal inspection": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Abdominal auscultation": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Abdominal palpation light and deep": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Rebound and guarding assessment": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Rectal examination if indicated": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
+        "Skin for jaundice or stigmata": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Crohn's Disease Flare (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Crohn's Disease Flare, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Crohn's Disease Flare, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Crohn's Disease Flare based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Isabella Reyes's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Crohn's Disease Flare. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

@@ -263,7 +263,78 @@ window.EMR_DATA = {
       "Surgical history",
       "Appendectomy age 25, cholecystectomy age 52"
     ]
-  ]
+  ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard Kowalski is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Lisinopril; Aspirin.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Non-contributory",
+        "social": "Surgical history: Appendectomy age 25, cholecystectomy age 52"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Richard Kowalski: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -279,5 +350,74 @@ window.CASES['sbo-strangulation'] = {
   teachingPoints: {
     keyLearning: ['SBO causes: adhesions (60-70%), hernias (10-15%), neoplasms (10-15%), intussusception, volvulus, Meckel diverticulum, IBD. History of abdominal surgery = adhesions until proven otherwise.','Strangulation signs (any = emergent surgery): fever, peritoneal signs (rebound, guarding), WBC >15k, lactate elevation, free air (perforated), portal venous gas (advanced ischemia), pneumatosis intestinalis, mesenteric edema on CT, closed-loop configuration.','Non-operative SBO management (simple, partial): NGT decompression + NPO + IV fluids + serial exams. If no improvement at 24-48h or any deterioration → surgery. Gastrografin water-soluble contrast: therapeutic (osmotic effect) AND diagnostic (if contrast reaches colon within 4-6h = high chance of resolution).'],
     boardPearls: ['Closed-loop SBO: both proximal and distal points of obstruction (e.g., internal hernia, volvulus) = highest strangulation risk. CT shows C-shaped or U-shaped dilated loop, whirl sign (mesenteric twisting), beak sign.','Adhesion prevention: no effective pharmacologic prevention. Hyaluronate/carboxymethylcellulose (Seprafilm) placed during surgery reduces adhesion formation. Laparoscopic approach reduces de novo adhesion formation.','Richter hernia: lateral wall of bowel herniated (not full circumference) — may not cause complete obstruction but strangulation of the herniated wall can occur silently. Often missed until perforation.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard Kowalski is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Lisinopril; Aspirin.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with working diagnosis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with working diagnosis."
+    },
+    "ddxTargets": [
+        "working diagnosis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for working diagnosis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Richard Kowalski \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };

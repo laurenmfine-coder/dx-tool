@@ -272,5 +272,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Syncope",
     "category": "cardiovascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Giselle Laurent appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did syncope start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've had this sinus infection that just won't quit - thick green stuff coming ou.'",
+        "character": "'It's syncope \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Citalopram 40mg daily; Hydroxyzine 25mg PRN; Amlodipine 5mg daily; Omeprazole 20mg daily; Azithromycin 250mg (Z-pack); Potassium Chloride 20mEq daily.'",
+        "allergies": "'My allergies are Amoxicillin.'",
+        "family": "Mother: Hypertension, T2DM, deceased at 78 (heart failure)  Father: Unknown \u2014 emigrated from Haiti, deceased young (details limited)  Sister: Depression, anxiety, alive at 60",
+        "social": "Occupation: Medical records technician at hospital; full-time  Marital: Married 28 years  Tobacco: Never smoker  Alcohol: Rare \u2014 occasional glass of wine at social events  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and hemodynamic assessment",
+        "Vital signs review",
+        "Jugular venous pressure",
+        "Cardiovascular auscultation",
+        "Peripheral pulses and perfusion",
+        "Pulmonary auscultation",
+        "Lower extremity edema",
+        "Skin perfusion and temperature"
+    ],
+    "examFindings": {
+        "General appearance and hemodynamic assessment": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Jugular venous pressure": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Peripheral pulses and perfusion": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Lower extremity edema": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+        "Skin perfusion and temperature": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Drug-Induced Long QT Syndrome with Torsades de Pointes (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Drug-Induced Long QT Syndrome with Torsades de Pointes, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Drug-Induced Long QT Syndrome with Torsades de Pointes, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Drug-Induced Long QT Syndrome with Torsades de Pointes based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Giselle Laurent's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Drug-Induced Long QT Syndrome with Torsades de Pointes (Citalopram 40mg + Azithromycin + Hypokalemia + Hypomagnesemia \u2014 Synergistic QT Prolongation Causing Polymorphic VT and Syncope). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

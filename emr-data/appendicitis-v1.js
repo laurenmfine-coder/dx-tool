@@ -233,7 +233,78 @@ window.EMR_DATA = {
       "Occupation",
       "College student"
     ]
-  ]
+  ],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Tyler Nguyen is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The symptom has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with this condition.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take no medications.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Non-contributory",
+        "social": "Tobacco: Never  Occupation: College student"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Extremities",
+        "Skin",
+        "Targeted exam"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with this condition.",
+        "Vital signs": "Finding consistent with this condition.",
+        "Cardiovascular": "Finding consistent with this condition.",
+        "Pulmonary": "Finding consistent with this condition.",
+        "Abdominal": "Finding consistent with this condition.",
+        "Extremities": "Finding consistent with this condition.",
+        "Skin": "Finding consistent with this condition.",
+        "Targeted exam": "Finding consistent with this condition."
+    },
+    "ddxTargets": [
+        "this condition (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for this condition.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Tyler Nguyen: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -249,5 +320,74 @@ window.CASES['appendicitis-v1'] = {
   teachingPoints: {
     keyLearning: ['Classic appendicitis: periumbilical pain migrating to McBurney point (2/3 of the way from umbilicus to ASIS). Anorexia + nausea. Low-grade fever. Rebound tenderness. WBC elevated (75% of cases). Rovsing sign (RLQ pain with LLQ palpation). Psoas sign (hip extension pain). Obturator sign (hip internal rotation pain).','Alvarado score: Migratory pain (1) + Anorexia (1) + Nausea/vomiting (1) + Tenderness RLQ (2) + Rebound tenderness (1) + Temperature >37.3°C (1) + WBC >10 (2) + Shift to left (1). Score ≥7 = high probability, surgery without imaging.','Complicated vs uncomplicated appendicitis: complicated (perforated, gangrenous, abscess) = surgery required. Uncomplicated = non-operative management (NOM) is an evidence-based option (CODA, APPAC trials).'],
     boardPearls: ['Appendix variants: retrocecal appendix (26%) — pain may be more posterior/flank, psoas sign positive. Pelvic appendix (30%) — pain suprapubic, confused with gynecologic pathology. Subhepatic appendix — rare, RUQ pain.','Fecalith (appendicolith): present in 20-40% on CT. Associated with higher perforation rates and higher failure rates of NOM. Some consider fecalith a relative indication for surgery over NOM.','Perforation risk: increases significantly after 24-36h from symptom onset. Mortality for uncomplicated appendicitis is <1%. Perforated appendicitis mortality: elderly (up to 5-10%).']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Tyler Nguyen is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take no medications.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with working diagnosis.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with working diagnosis."
+    },
+    "ddxTargets": [
+        "working diagnosis (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for working diagnosis.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Tyler Nguyen \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+    }
+}
 };

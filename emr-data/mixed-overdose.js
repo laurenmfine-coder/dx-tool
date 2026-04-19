@@ -223,5 +223,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Toxicologic Emergency",
     "category": "toxicologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Brianna Torres appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did toxicologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I came in for my yearly visit and things have been okay mostly, just the usual u.'",
+        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Intentional Mixed Overdose.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Sertraline 150mg daily; Buspirone 10mg BID; Ortho Tri-Cyclen Lo (norgestimate-ethinyl estradiol) daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Mother: Depression, anxiety, alive at 48  Father: Alcohol use disorder (estranged; left family when patient was 8), alive at 52  Maternal grandmother: Bipolar disorder, suicide attempt (survived), alive at 72",
+        "social": "Occupation: Part-time barista at coffee shop; community college student (stopped attending classes 2 months ago)  Marital: Single; recent breakup with boyfriend (1 week ago) \u2014 described as 'volatile' relationship  Tobacco: Social vaping (JUUL) \u2014 'a few times a week'  Alcohol: Increasing \u2014 reports drinking wine 'a few glasses' most evenings over past month; tonight's ingestion included approximately half a bottle of vodka  Drugs: Denies illicit drugs; occasional marijuana edibles ('a couple times a month')"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Intentional Mixed Overdose (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Intentional Mixed Overdose, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Intentional Mixed Overdose, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Intentional Mixed Overdose based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Brianna Torres's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Intentional Mixed Overdose (Acetaminophen ~15g + Diphenhydramine ~1.5g + Alcohol \u2014 Suicidal Intent in Patient with MDD, BPD, Prior SA, and Recent Relationship Crisis; Rumack-Matthew Nomogram Indicates NAC Treatment Required). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

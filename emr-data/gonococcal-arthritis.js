@@ -211,7 +211,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Musculoskeletal Emergency",
     "category": "infectious"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jasmine Williams is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The musculoskeletal emergency has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Sertraline 50mg daily; Levonorgestrel IUD (Mirena) \u2014 in situ.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Mother: HTN, T2DM, alive at 52  Father: Unknown \u2014 not involved  Sister: Healthy, age 22",
+        "social": "Occupation: Retail sales associate  Marital: Single; sexually active with new partner (3 months)  Tobacco: Denies  Alcohol: Social, 2-3 drinks on weekends  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Skin/lymph nodes",
+        "Cardiovascular",
+        "Pulmonary",
+        "Abdominal",
+        "Source-specific",
+        "Neurological screen"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Vital signs": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Skin/lymph nodes": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Cardiovascular": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Pulmonary": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Abdominal": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Source-specific": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Neurological screen": "Finding consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee."
+    },
+    "ddxTargets": [
+        "Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Jasmine Williams: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee (Neisseria gonorrhoeae). How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -227,5 +298,74 @@ window.CASES['gonococcal-arthritis'] = {
   teachingPoints: {
     keyLearning: ['DGI (disseminated gonococcal infection): two clinical syndromes. (1) Triad: migratory polyarthralgia → tenosynovitis (tendons — not joints) + dermatitis (pustular skin lesions) + bacteremia. Positive blood cultures. (2) Septic arthritis: large joint monoarthritis (knee most common), purulent effusion, positive synovial fluid culture. Most common cause of acute bacterial arthritis in sexually active young adults.','N. gonorrhoeae arthritis features: young sexually active adult, migratory joint pain (progresses from one joint to another), tenosynovitis (tendon sheath inflammation — pathognomonic for DGI), skin lesions (few, pustular, on distal extremities), recent STI exposure or vaginal/urethral symptoms.','Culture tips: highest yield in DGI is from urogenital sites (70-90%), not blood (<50%) or joint fluid (<25%). Culture ALL sites: urethra/cervix, rectum, pharynx. Thayer-Martin medium (chocolate agar + antibiotics). Transport immediately — N. gonorrhoeae dies rapidly.'],
     boardPearls: ['Gonococcal resistance: resistance to fluoroquinolones is now widespread (do not use ciprofloxacin empirically). Emerging ceftriaxone resistance — monitor local resistance patterns. Ceftriaxone + azithromycin is current standard.','Neisseria gonorrhoeae in LGBTQ patients: pharyngeal gonorrhea is the most common site and most difficult to treat. Pharyngeal cultures needed in patients with oral sex history. Anorectal gonorrhea often asymptomatic.','Septic arthritis differential in young adults: DGI (most common), reactive arthritis (Reiter), Lyme arthritis (knee, migratory, endemic areas), rheumatoid arthritis (bilateral symmetric), crystalline arthropathy (gout, pseudogout).']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Jasmine Williams is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like disseminated gonococcal infection with septic arthritis \u2014 right knee \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Sertraline 50mg daily; Levonorgestrel IUD (Mirena) \u2014 in situ.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee."
+    },
+    "ddxTargets": [
+        "Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Jasmine Williams \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is Disseminated Gonococcal Infection with Septic Arthritis \u2014 Right Knee (Neisseria gonorrhoeae). How did your reasoning evolve?"
+    }
+}
 };

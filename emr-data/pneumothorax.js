@@ -214,7 +214,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Shortness of Breath",
     "category": "pulmonary"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Tyler Reeves is visibly uncomfortable and anxious, cooperative but pauses due to discomfort.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Suddenly \u2014 over the past day or two.'",
+        "character": "'The shortness of breath has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Eight or nine out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with Primary Spontaneous Pneumothorax.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Sertraline 50mg daily; Albuterol 90mcg MDI PRN.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Father: Marfan syndrome suspected but never diagnosed, tall (6'5\"), mild mitral valve prolapse, age 52, alive  Mother: Anxiety disorder, migraines, age 50, alive  Brother: Healthy, age 20",
+        "social": "Occupation: College student (senior) at State University, studying exercise science  Marital: Single, lives with roommate in off-campus apartment  Tobacco: No cigarette smoking. Daily nicotine vaping (5% pods) since age 18. Approximately 1 pod per day.  Alcohol: Social \u2014 weekends, 4-6 drinks  Drugs: Occasional marijuana (edibles, 1-2x/month)"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs and oximetry",
+        "Pulmonary auscultation",
+        "Percussion",
+        "Accessory muscles",
+        "Cardiovascular auscultation",
+        "DVT check",
+        "Trachea"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "Vital signs and oximetry": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "Pulmonary auscultation": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "Percussion": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "Accessory muscles": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "Cardiovascular auscultation": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "DVT check": "Finding consistent with Primary Spontaneous Pneumothorax.",
+        "Trachea": "Finding consistent with Primary Spontaneous Pneumothorax."
+    },
+    "ddxTargets": [
+        "Primary Spontaneous Pneumothorax (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Primary Spontaneous Pneumothorax.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Tyler Reeves: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is Primary Spontaneous Pneumothorax. How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -230,5 +301,74 @@ window.CASES['pneumothorax'] = {
   teachingPoints: {
     keyLearning: ['Primary vs secondary PTX: primary = young, tall, thin male, no underlying lung disease, apical blebs. Secondary = underlying lung disease (COPD most common — bullae rupture; CF, TB, PCP, Marfan). Secondary PTX is more dangerous — patients have less reserve. Always treat with chest tube.','Tension PTX: air enters pleural space but cannot exit → progressive pressure → contralateral mediastinal shift → impaired venous return → obstructive shock → cardiac arrest. Clinical diagnosis (no imaging). Needle decompression immediately.','Pneumothorax size: BTS (British): >2cm rim from lung edge to chest wall. ACCP: >3cm apex to cupula on upright CXR. Size determines management approach.'],
     boardPearls: ['Catamenial PTX: occurs with menses (within 72h of onset), usually right-sided, associated with thoracic endometriosis. Recurrent PTX in women of childbearing age → workup for thoracic endometriosis. Treatment: hormonal therapy + VATS pleurodesis.','Iatrogenic PTX: central line placement (subclavian > internal jugular > femoral), thoracentesis, biopsy, positive pressure ventilation. All patients post-subclavian central line: CXR to confirm no PTX before use.','Reexpansion pulmonary edema: rapid reexpansion of a chronically collapsed lung (>24-72h) can cause ipsilateral pulmonary edema from capillary disruption. Slow, controlled tube drainage for large, chronic PTX.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Tyler Reeves is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like primary spontaneous pneumothorax \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Sertraline 50mg daily; Albuterol 90mcg MDI PRN.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with Primary Spontaneous Pneumothorax.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with Primary Spontaneous Pneumothorax."
+    },
+    "ddxTargets": [
+        "Primary Spontaneous Pneumothorax (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Primary Spontaneous Pneumothorax.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Tyler Reeves \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is Primary Spontaneous Pneumothorax. How did your reasoning evolve?"
+    }
+}
 };

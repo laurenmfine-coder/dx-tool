@@ -343,5 +343,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Abdominal Pain",
     "category": "gynecologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Marie-Claire Jean-Baptiste appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did abdominal pain start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been having this dull, crampy pain on my right side that comes and goes - i.'",
+        "character": "'It's abdominal pain \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Ovarian Torsion.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Levothyroxine 75mcg daily; Ibuprofen 600mg PRN; Sumatriptan 50mg PRN.'",
+        "allergies": "'My allergies are Codeine, Shellfish.'",
+        "family": "Mother: Uterine fibroids (hysterectomy at 45), Hypertension, alive at 60  Father: Type 2 Diabetes Mellitus, alive at 63  Sister: Ovarian cyst (resolved), alive at 29",
+        "social": "Occupation: Registered Nurse (hospital med-surg unit)  Marital: Single, in a relationship  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Ovarian Torsion (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ovarian Torsion, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Ovarian Torsion, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Ovarian Torsion based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Marie-Claire Jean-Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Ovarian Torsion. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

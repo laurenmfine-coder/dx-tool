@@ -332,5 +332,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Altered Mental Status",
     "category": "neurologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Hyun-Soo Kim appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did altered mental status start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I'm here for my regular visit to check on my blood pressure and diabetes - I kno.'",
+        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Hemorrhagic Stroke.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
+        "allergies": "'My allergies are Clonidine.'",
+        "family": "Father: Hemorrhagic stroke at age 68 (deceased), Hypertension  Mother: Hypertension, T2DM, alive at 88  Brother: Hypertension, alive at 62",
+        "social": "Occupation: Dry cleaning business owner; works 60+ hrs/week  Marital: Married 38 years; wife Minji, age 63  Tobacco: Former smoker \u2014 quit 2005; 15 pack-year history  Alcohol: Social, 2-3 drinks/week; occasional soju  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "Level of consciousness and GCS",
+        "Cranial nerve examination",
+        "Motor strength testing",
+        "Sensory testing",
+        "Coordination and cerebellar testing",
+        "Gait assessment if applicable",
+        "Meningeal signs",
+        "Vital signs"
+    ],
+    "examFindings": {
+        "Level of consciousness and GCS": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Cranial nerve examination": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Motor strength testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Sensory testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Coordination and cerebellar testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Gait assessment if applicable": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Meningeal signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+        "Vital signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Hemorrhagic Stroke (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hemorrhagic Stroke, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Hemorrhagic Stroke, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Hemorrhagic Stroke based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Hyun-Soo Kim's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Hemorrhagic Stroke (Hypertensive Intracerebral Hemorrhage). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

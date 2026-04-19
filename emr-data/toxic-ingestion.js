@@ -338,5 +338,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Altered Mental Status",
     "category": "toxicologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Megan Sullivan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did altered mental status start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been struggling a lot over the past few months with feeling really down and.'",
+        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Toxic Ingestion.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Sertraline 150mg daily; Buspirone 10mg TID; Rizatriptan 10mg PRN; Dicyclomine 20mg QID PRN; Oral Contraceptive (Ethinyl Estradiol/Norgestimate).'",
+        "allergies": "'My allergies are Codeine, Latex.'",
+        "family": "Mother: Major depression, Anxiety disorder, alive at 55  Father: Alcohol use disorder (in recovery), alive at 58  Brother: ADHD, alive at 25",
+        "social": "Occupation: Marketing coordinator at tech startup; high stress  Marital: Single; recently ended 3-year relationship (11/2025)  Tobacco: Never smoker  Alcohol: Social, 2-4 drinks/week; increased since breakup  Drugs: Denies illicit drugs"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Toxic Ingestion. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Toxic Ingestion (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Toxic Ingestion, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Toxic Ingestion, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Toxic Ingestion based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Megan Sullivan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Toxic Ingestion (Acute Acetaminophen Overdose). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

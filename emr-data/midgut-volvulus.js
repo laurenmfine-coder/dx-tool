@@ -239,5 +239,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Pediatric Emergency",
     "category": "surgical"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Mateo Rivera appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did pediatric emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My parents brought me in for my regular checkup - I've been eating well and they.'",
+        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Vitamin D 400 IU drops daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Mother (age 24): Healthy, no significant medical history  Father (age 27): Childhood appendectomy; otherwise healthy  Maternal grandmother (age 52): Type 2 Diabetes, hypertension",
+        "social": "Guardian: Lives with both parents; first child  Childcare: Cared for at home by mother (on maternity leave)  Tobacco Exposure: None \u2014 no smokers in household  Pets: One small dog (Chihuahua)  Home Environment: Apartment; infant sleeps in crib in parent bedroom"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Mateo Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

@@ -283,5 +283,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "GI Emergency",
     "category": "gastrointestinal"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Maria Elena Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did gi emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 44-year-old female with known cholelithiasis presenting after third episode of p.'",
+        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Acute Cholecystitis.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Atorvastatin 20mg daily; Norgestimate-Ethinyl Estradiol 0.25mg/35mcg daily; Ibuprofen 600mg PRN.'",
+        "allergies": "'My allergies are Sulfa drugs.'",
+        "family": "Mother: Cholelithiasis (cholecystectomy age 48), T2DM, alive at 68  Father: Hypertension, hyperlipidemia, alive at 70  Sister: Gallstones (cholecystectomy age 40), alive at 46",
+        "social": "Occupation: Office manager at law firm  Marital: Married \u2014 18 years  Tobacco: Never smoker  Alcohol: Social \u2014 1-2 glasses wine on weekends  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Abdominal inspection",
+        "Abdominal auscultation",
+        "Abdominal palpation light and deep",
+        "Rebound and guarding assessment",
+        "Rectal examination if indicated",
+        "Skin for jaundice or stigmata"
+    ],
+    "examFindings": {
+        "General appearance": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Vital signs": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Abdominal inspection": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Abdominal auscultation": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Abdominal palpation light and deep": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Rebound and guarding assessment": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Rectal examination if indicated": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
+        "Skin for jaundice or stigmata": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Acute Cholecystitis (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Cholecystitis, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Acute Cholecystitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Acute Cholecystitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Maria Elena Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Acute Cholecystitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

@@ -215,7 +215,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Musculoskeletal Emergency",
     "category": "vascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Patricia Duval is alert and cooperative, clearly concerned but provides a clear history.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Gradually \u2014 over the past several days.'",
+        "character": "'The musculoskeletal emergency has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Six or seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Ethinyl Estradiol/Norgestimate (Sprintec) daily; Lisinopril 10mg daily; Vitamin D3 2000 IU daily.'",
+        "allergies": "'My allergies: Sulfa drugs.'",
+        "family": "Mother: DVT at age 50 (provoked \u2014 post-surgical), HTN, alive at 70  Father: T2DM, CAD, alive at 72  Sister: Factor V Leiden heterozygous (diagnosed during pregnancy), alive at 41",
+        "social": "Occupation: Office manager \u2014 sedentary desk job; 8+ hours sitting daily  Marital: Married, 2 children (ages 10, 7)  Tobacco: Never smoker  Alcohol: Social, 1-2 glasses of wine on weekends  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Bilateral arm BP",
+        "Peripheral pulses",
+        "Cardiovascular",
+        "Abdominal auscultation",
+        "Extremity perfusion",
+        "Skin",
+        "Neurological screen"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Bilateral arm BP": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Peripheral pulses": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Cardiovascular": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Abdominal auscultation": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Extremity perfusion": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Skin": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Neurological screen": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein."
+    },
+    "ddxTargets": [
+        "Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Patricia Duval: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel). How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -231,5 +302,74 @@ window.CASES['deep-vein-thrombosis'] = {
   teachingPoints: {
     keyLearning: ['Wells DVT score: active cancer (1), paralysis/plaster cast (1), recently bedridden >3 days or surgery <12 weeks (1), localized tenderness along deep venous system (1), entire leg swollen (1), calf swelling >3cm compared to other leg (1), pitting edema (1), collateral superficial veins (1), previously documented DVT (1), alternative diagnosis at least as likely (-2). Score ≥2 = high probability.','D-dimer: highly sensitive but non-specific. A negative D-dimer (<500 ng/mL) with LOW pre-test probability (Wells score <2) essentially rules out DVT (negative predictive value >99%). Elevated in pregnancy, cancer, infection, post-surgery — cannot rule out DVT with positive D-dimer alone.','Duration of anticoagulation: first provoked DVT (transient risk factor like surgery, trauma, immobility) = 3 months. First unprovoked DVT = 3-6 months minimum, then indefinite if low bleeding risk. Recurrent unprovoked DVT = indefinite. Cancer-associated DVT = LMWH or DOAC (edoxaban/rivaroxaban per CARAVAGGIO, Hokusai-VTE Cancer).'],
     boardPearls: ['Post-thrombotic syndrome (PTS): occurs in 20-50% of proximal DVT. Chronic pain, swelling, skin changes, ulceration. Risk reduced by: adequate anticoagulation, graduated compression stockings (for symptom relief, not prevention per SOX trial). Iliac/femoral DVT highest PTS risk.','Phlegmasia cerulea dolens: massive iliofemoral DVT causing venous gangrene. Extreme swelling, cyanosis, arterial compromise from compartment syndrome. Emergency CDT or surgical thrombectomy.','Superficial thrombophlebitis: inflammation of superficial vein with clot. If <5cm from saphenofemoral junction: treat as DVT (risk of propagation to deep system). Otherwise: NSAIDs, warmth, compression.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Patricia Duval is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like acute proximal deep vein thrombosis \u2014 left femoral vein \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Ethinyl Estradiol/Norgestimate (Sprintec) daily; Lisinopril 10mg daily; Vitamin D3 2000 IU daily.'",
+        "allergies": "'My allergies: Sulfa drugs.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein."
+    },
+    "ddxTargets": [
+        "Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Patricia Duval \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel). How did your reasoning evolve?"
+    }
+}
 };

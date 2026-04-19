@@ -395,5 +395,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Chest Pain",
     "category": "cardiovascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Nadine Charles is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did chest pain start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've been feeling so exhausted lately, and even walking to get my mail makes me .'",
+        "character": "'It's chest pain \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Type 2 Myocardial Infarction.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Apixaban 5mg BID; Metoprolol succinate 100mg daily; Losartan 100mg daily; Atorvastatin 40mg daily; Budesonide/Formoterol 160/4.5mcg MDI BID; Tiotropium 18mcg daily; Ferrous sulfate 325mg BID; Acetaminophen 500mg PRN.'",
+        "allergies": "'My allergies are Aspirin, NSAIDs.'",
+        "family": "Mother: Hypertension, stroke at 70, deceased at 74  Father: Unknown \u2014 emigrated from Haiti, limited records  Sister: Hypertension, T2DM, alive at 78",
+        "social": "Occupation: Retired home health aide  Marital: Widowed since 2012  Tobacco: Former smoker \u2014 quit 2016; 40 pack-year history (1 PPD x 40 years)  Alcohol: Denies  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and hemodynamic assessment",
+        "Vital signs review",
+        "Jugular venous pressure",
+        "Cardiovascular auscultation",
+        "Peripheral pulses and perfusion",
+        "Pulmonary auscultation",
+        "Lower extremity edema",
+        "Skin perfusion and temperature"
+    ],
+    "examFindings": {
+        "General appearance and hemodynamic assessment": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Jugular venous pressure": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Peripheral pulses and perfusion": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Lower extremity edema": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+        "Skin perfusion and temperature": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Type 2 Myocardial Infarction (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Type 2 Myocardial Infarction, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Type 2 Myocardial Infarction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Type 2 Myocardial Infarction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Nadine Charles's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Type 2 Myocardial Infarction (Demand Ischemia \u2014 Severe Anemia with AFib/RVR). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

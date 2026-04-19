@@ -335,5 +335,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Cardiac Emergency",
     "category": "cardiovascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Edith Marchetti appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did cardiac emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I'm getting so winded just getting dressed or taking a shower now, and twice in .'",
+        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Complete Heart Block.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Amlodipine 5mg daily; Losartan 50mg daily; Levothyroxine 50mcg daily; Denosumab 60mg SubQ q6months; Calcium/Vitamin D 600mg/400IU BID; Acetaminophen 500mg q6h PRN.'",
+        "allergies": "'My allergies are Beta-Blockers (Metoprolol), NSAIDs.'",
+        "family": "Father: Aortic stenosis (valve replacement age 78), deceased at 82  Mother: HTN, Osteoporosis, deceased at 88  Sister: Pacemaker at age 80, alive at 86",
+        "social": "Occupation: Retired school librarian; retired 2001  Marital: Widowed (2019); husband deceased of heart failure  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and hemodynamic assessment",
+        "Vital signs review",
+        "Jugular venous pressure",
+        "Cardiovascular auscultation",
+        "Peripheral pulses and perfusion",
+        "Pulmonary auscultation",
+        "Lower extremity edema",
+        "Skin perfusion and temperature"
+    ],
+    "examFindings": {
+        "General appearance and hemodynamic assessment": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Jugular venous pressure": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Peripheral pulses and perfusion": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Lower extremity edema": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
+        "Skin perfusion and temperature": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Complete Heart Block (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Complete Heart Block, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Complete Heart Block, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Complete Heart Block based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Edith Marchetti's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Complete Heart Block (Degenerative Conduction Disease with Severe Aortic Stenosis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

@@ -325,5 +325,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Shortness of Breath",
     "category": "pulmonary"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard Fontaine appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did shortness of breath start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've had this awful cough for about two weeks now that just keeps getting worse,.'",
+        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer with Post-Obstructive Pneumonia.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Albuterol 90mcg MDI PRN; Lisinopril 20mg daily; Omeprazole 20mg daily; Aspirin 81mg daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Father: Lung cancer (small cell, diagnosed age 62, deceased age 63). Heavy smoker.  Mother: COPD, deceased age 78 (respiratory failure)  Brother: Bladder cancer (age 65, in remission), smoker",
+        "social": "Occupation: Auto mechanic (45 years). Occupational exposure to asbestos (brake linings), solvents, and exhaust fumes. Currently semi-retired, works 2 days/week.  Marital: Married, lives with wife  Tobacco: Active smoker \u2014 1 PPD x 55 years (55 pack-years). Multiple quit attempts, always returns within weeks.  Alcohol: Social \u2014 2-3 beers daily  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and respiratory effort",
+        "Vital signs and pulse oximetry",
+        "Pulmonary auscultation",
+        "Percussion of lung fields",
+        "Accessory muscle use",
+        "Cardiovascular auscultation",
+        "Lower extremity DVT assessment",
+        "Tracheal position"
+    ],
+    "examFindings": {
+        "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Percussion of lung fields": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Accessory muscle use": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+        "Tracheal position": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Lung Cancer with Post-Obstructive Pneumonia (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer with Post-Obstructive Pneumonia, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Lung Cancer with Post-Obstructive Pneumonia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Lung Cancer with Post-Obstructive Pneumonia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Richard Fontaine's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Lung Cancer with Post-Obstructive Pneumonia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

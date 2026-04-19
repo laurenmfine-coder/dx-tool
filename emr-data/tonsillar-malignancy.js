@@ -326,5 +326,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "ENT / Airway Emergency",
     "category": "oncologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard Parsons appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did ent / airway emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started I've had this stubborn sore throat on my right side for about two months now tha.'",
+        "character": "'It's ent / airway emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Tonsillar Malignancy.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Lisinopril 20mg daily; Omeprazole 40mg daily; Aspirin 81mg daily.'",
+        "allergies": "'My allergies are NKDA.'",
+        "family": "Father: Lung cancer (smoker), deceased at 62  Mother: Hypertension, alive at 86  Brother: GERD, Barrett's esophagus, alive at 67",
+        "social": "Occupation: Auto mechanic \u2014 38 years; solvent and chemical exposure  Marital: Married \u2014 35 years  Tobacco: Current smoker \u2014 1 PPD x 46 years (46 pack-years); multiple failed quit attempts  Alcohol: 3-4 drinks nightly \u2014 beer and whiskey; CAGE 2/4  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Tonsillar Malignancy (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Tonsillar Malignancy, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Tonsillar Malignancy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Tonsillar Malignancy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Richard Parsons's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Tonsillar Malignancy (Oropharyngeal Squamous Cell Carcinoma). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

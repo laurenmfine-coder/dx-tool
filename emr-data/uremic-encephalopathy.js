@@ -344,5 +344,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Toxicologic Emergency",
     "category": "renal"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Harold Jenkins is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did toxicologic emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My car broke down two weeks ago and I can't afford to fix it, so I've missed som.'",
+        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Uremic Encephalopathy.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Insulin Glargine 28 units SQ QHS; Insulin Lispro Sliding Scale with meals; Amlodipine 10mg daily; Carvedilol 25mg BID; Hydralazine 50mg TID; Clonidine 0.2mg BID; Aspirin 81mg daily; Atorvastatin 40mg QHS.'",
+        "allergies": "'My allergies are ACE Inhibitors (class), IV Contrast (iodinated).'",
+        "family": "Father: HTN, CKD (non-dialysis), deceased at 68 (stroke)  Mother: T2DM, HTN, deceased at 74 (MI)  Brother: T2DM, ESRD on dialysis, alive at 62",
+        "social": "Occupation: Disabled; formerly worked as bus driver for Broward County Transit; on SSDI since 2022  Marital: Divorced (2015); lives alone; ex-wife still involved as emergency contact  Tobacco: Former \u2014 20 pack-years; quit 2018 (after PCI)  Alcohol: Denies current use; prior social drinking  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Uremic Encephalopathy. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Uremic Encephalopathy (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Uremic Encephalopathy, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Uremic Encephalopathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Uremic Encephalopathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Harold Jenkins's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Uremic Encephalopathy (Missed Dialysis x4 Sessions \u2014 ESRD with BUN >120, Hyperkalemia 6.8, Metabolic Acidosis, Volume Overload, Uremic Pericarditis, AMS with Asterixis in Non-Adherent HD Patient with Transportation Barriers). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

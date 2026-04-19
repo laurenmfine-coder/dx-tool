@@ -353,5 +353,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Vascular Emergency",
     "category": "vascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Edna Marshall appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did vascular emergency start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started My daughter brought me in because I've been so tired and confused this past week.'",
+        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Nonocclusive Mesenteric Ischemia.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Apixaban 2.5mg BID; Carvedilol 12.5mg BID; Sacubitril/Valsartan 24/26mg BID; Furosemide 80mg BID; Spironolactone 12.5mg daily; Insulin Glargine 18 units QHS; Epoetin Alfa 10,000 units SQ weekly; Atorvastatin 40mg QHS.'",
+        "allergies": "'My allergies are Penicillin, NSAIDs (Ibuprofen).'",
+        "family": "Father: CHF, deceased at 72  Mother: HTN, stroke, deceased at 78  Sister: T2DM, CHF, deceased at 76",
+        "social": "Occupation: Retired home health aide  Marital: Widowed  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Nonocclusive Mesenteric Ischemia (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Nonocclusive Mesenteric Ischemia, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Nonocclusive Mesenteric Ischemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Nonocclusive Mesenteric Ischemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Edna Marshall's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Nonocclusive Mesenteric Ischemia (NOMI). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

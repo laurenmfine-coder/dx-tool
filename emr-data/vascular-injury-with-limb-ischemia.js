@@ -194,7 +194,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Musculoskeletal Emergency",
     "category": "vascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Andre Jackson is critically ill, in severe distress.",
+    "interviewQuestions": [
+        "When did your symptoms start and how?",
+        "Describe the main symptom \u2014 location, character, severity.",
+        "What makes it worse? What makes it better?",
+        "Any other symptoms you've noticed?",
+        "Any prior similar episodes?",
+        "Tell me about your medical history.",
+        "What medications are you currently taking?",
+        "Any medication allergies?",
+        "Relevant family history?",
+        "Tell me about your lifestyle."
+    ],
+    "patientResponses": {
+        "default": "He pauses. 'Can you clarify what you mean?'",
+        "onset": "'Suddenly \u2014 within the past few hours.'",
+        "character": "'The musculoskeletal emergency has been significant and affecting my ability to function.'",
+        "location": "'The main problem is in the expected area for my condition.'",
+        "severity": "'Eight or nine out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
+        "associated": "'Some associated symptoms consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.'",
+        "denies": "'No fever, chills, or unexplained weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Albuterol HFA 90mcg PRN.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "Mother: HTN, T2DM, alive at 62  Father: CAD (stent at 58), HTN, alive at 65  Brother: Healthy, age 33",
+        "social": "Occupation: Construction project manager  Marital: Married, 2 children (ages 5, 3)  Tobacco: Never smoker  Alcohol: Social, 2-3 beers on weekends  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Bilateral arm BP",
+        "Peripheral pulses",
+        "Cardiovascular",
+        "Abdominal auscultation",
+        "Extremity perfusion",
+        "Skin",
+        "Neurological screen"
+    ],
+    "examFindings": {
+        "General appearance": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Bilateral arm BP": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Peripheral pulses": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Cardiovascular": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Abdominal auscultation": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Extremity perfusion": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Skin": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Neurological screen": "Finding consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg."
+    },
+    "ddxTargets": [
+        "Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg (correct)",
+        "Most likely alternative",
+        "Third differential",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "prematureClosure": "Complete your workup before narrowing focus.",
+        "availabilityBias": "Apply systematic clinical reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Andre Jackson: what does the chart suggest? Top 3 diagnoses?",
+        "phase5": "After history and exam: how has your differential changed?",
+        "finalDebrief": "The diagnosis is Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg (Post-Supracondylar Femur Fracture, High-Speed MVC). How did your reasoning evolve?"
+    }
+}
 };
 
 /* ── CASES format extension ─────────── */
@@ -210,5 +281,74 @@ window.CASES['vascular-injury-with-limb-ischemia'] = {
   teachingPoints: {
     keyLearning: ['Six Ps of acute limb ischemia: Pain, Pallor, Pulselessness, Paresthesias, Paralysis, Poikilothermia. Paresthesias and paralysis indicate irreversible ischemia developing — emergency revascularization.','Viable vs non-viable limb: viable = pain, pallor, pulselessness only (no sensory/motor loss) → revascularization possible. Non-viable = paralysis + paresthesias + muscle rigor + marble skin → primary amputation. Rutherford classification guides management.','Embolism vs thrombosis: embolism (sudden, no prior claudication, atrial fibrillation, sharp cut-off on CTA) = embolectomy (Fogarty catheter). Thrombosis (gradual onset, claudication history, atherosclerosis, collaterals) = catheter-directed thrombolysis or bypass graft.'],
     boardPearls: ['Reperfusion injury: restored blood flow to ischemic muscle → calcium influx, free radicals, inflammatory mediators → myonecrosis → rhabdomyolysis → hyperkalemia → compartment syndrome. Treat with IV fluids, alkalinize urine, monitor K+ and Cr.','Fasciotomy for compartment syndrome: 4-compartment lower leg (anterior, lateral, posterior superficial, posterior deep). If any compartment pressure >30 mmHg or within 30 mmHg of diastolic BP = fasciotomy. Leave fasciotomy wounds open, close/skin graft at 48-72h.','Embolectomy technique: Fogarty balloon catheter → passed distal to clot → balloon inflated → withdrawn, pulling clot with it. Success depends on time from onset and clot age. Thrombosed popliteal aneurysm: common source of distal emboli — check popliteal artery for aneurysm.']
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Andre Jackson is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
+    "interviewQuestions": [
+        "When did your symptoms start?",
+        "Describe the main symptom.",
+        "How severe is it?",
+        "What makes it worse or better?",
+        "Any other symptoms?",
+        "Any prior episodes?",
+        "What medications do you take?",
+        "Any allergies?"
+    ],
+    "patientResponses": {
+        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
+        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
+        "character": "'It feels like popliteal artery injury with acute limb ischemia \u2014 left leg \u2014 fairly significant.'",
+        "location": "'The problem is primarily in the affected area.'",
+        "severity": "'About a seven out of ten.'",
+        "aggravating": "'Activity and movement worsen it.'",
+        "relieving": "'Rest helps somewhat.'",
+        "associated": "'I have some associated symptoms consistent with my condition.'",
+        "denies": "'No fever, chills, or weight loss.'",
+        "history": "'I have not had exactly this before.'",
+        "medications": "'I take Albuterol HFA 90mcg PRN.'",
+        "allergies": "'My allergies: NKDA.'",
+        "family": "'No significant family history relevant to this presentation.'",
+        "social": "'I am a working adult. Non-smoker. Social drinker.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Vital signs",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted examination"
+    ],
+    "examFindings": {
+        "General appearance": "Patient appears consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
+        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
+        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
+        "Abdominal examination": "Abdomen as appropriate.",
+        "Extremity assessment": "Extremities as appropriate.",
+        "Skin examination": "Skin as appropriate.",
+        "Targeted examination": "Targeted findings consistent with Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg."
+    },
+    "ddxTargets": [
+        "Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg (correct)",
+        "Alternative diagnosis 1",
+        "Alternative diagnosis 2",
+        "Must-not-miss 1",
+        "Must-not-miss 2",
+        "Common mimic 1",
+        "Common mimic 2"
+    ],
+    "biasFlags": {
+        "anchoring": "Consider the full differential for Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg.",
+        "prematureClosure": "Complete your workup even after forming a hypothesis.",
+        "availabilityBias": "Apply systematic reasoning."
+    },
+    "coachPrompts": {
+        "phase2": "Before interviewing Andre Jackson \u2014 what are your top 3 diagnoses from chart review?",
+        "phase5": "How has your differential changed after history and exam?",
+        "finalDebrief": "The diagnosis is Popliteal Artery Injury with Acute Limb Ischemia \u2014 Left Leg (Post-Supracondylar Femur Fracture, High-Speed MVC). How did your reasoning evolve?"
+    }
+}
 };

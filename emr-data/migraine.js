@@ -292,5 +292,78 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Headache",
     "category": "neurologic"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Isabella Vargas-Chen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did headache start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 29-year-old female presents with 3 months of increasing migraine frequency, now .'",
+        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with Chronic Migraine with Aura and Medication Overuse Headache.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Venlafaxine XR 75mg daily; Rizatriptan 10mg PRN; Ferrous Sulfate 325mg daily; Naproxen 500mg PRN; Ondansetron 4mg ODT PRN.'",
+        "allergies": "'My allergies are Metoclopramide, Peanuts.'",
+        "family": "Mother: Migraine with aura, anxiety disorder, alive at 56  Father: HTN, alive at 60  Maternal grandmother: Migraine, stroke at age 78 (deceased)",
+        "social": "Occupation: Graduate student (public health) and part-time research assistant  Marital: Single, lives with roommate  Tobacco: Never smoker  Alcohol: Occasional, 1-2 drinks socially on weekends; notes alcohol triggers migraine  Drugs: Denies"
+    },
+    "examManeuvers": [
+        "Level of consciousness and GCS",
+        "Cranial nerve examination",
+        "Motor strength testing",
+        "Sensory testing",
+        "Coordination and cerebellar testing",
+        "Gait assessment if applicable",
+        "Meningeal signs",
+        "Vital signs"
+    ],
+    "examFindings": {
+        "Level of consciousness and GCS": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Cranial nerve examination": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Motor strength testing": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Sensory testing": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Coordination and cerebellar testing": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Gait assessment if applicable": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Meningeal signs": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe.",
+        "Vital signs": "Clinical finding consistent with Chronic Migraine with Aura and Medication Overuse Headache. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Chronic Migraine with Aura and Medication Overuse Headache (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Chronic Migraine with Aura and Medication Overuse Headache, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Chronic Migraine with Aura and Medication Overuse Headache, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Chronic Migraine with Aura and Medication Overuse Headache based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Isabella Vargas-Chen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is Chronic Migraine with Aura and Medication Overuse Headache. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };

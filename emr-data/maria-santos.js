@@ -12,5 +12,78 @@ window.EMR_DATA = {
   imaging: [{date:"07/22/2024",study:"CT HEAD WITHOUT CONTRAST",accession:"IMG-2024-07221",status:"FINAL",orderedBy:"Dr. Kevin Tran, MD",readBy:"Dr. Sarah Mitchell, MD (Radiology)",facility:"Memorial Regional — Emergency Radiology",priority:"STAT",clinical:"57F with 3-day persistent headache, nausea, photophobia. Hx migraines. R/O intracranial hemorrhage.",technique:"Non-contrast helical CT of the head with 5mm axial sections from skull base through vertex.",findings:"Cerebral Parenchyma: No acute intra- or extra-axial hemorrhage. No mass effect or midline shift. Gray-white differentiation preserved. No acute territorial infarct.\n\nVentricular System: Symmetric, normal size. No hydrocephalus.\n\nExtra-axial Spaces: No epidural or subdural collections. Age-appropriate sulci and cisterns.\n\nSinuses: Mild mucosal thickening bilateral maxillary sinuses. Other sinuses clear.\n\nCalvarium: No fracture or lytic/blastic lesion.",impression:"1. No acute intracranial hemorrhage, mass, or midline shift.\n2. No evidence of acute infarct.\n3. Mild bilateral maxillary sinus mucosal thickening.\n4. Otherwise unremarkable.",dictated:"07/22/2024 14:32",verified:"07/22/2024 15:01"},{date:"03/18/2024",study:"BILATERAL SCREENING MAMMOGRAM (TOMO)",accession:"IMG-2024-03182",status:"FINAL",orderedBy:"Dr. Angela Reyes, MD",readBy:"Dr. Elizabeth Park, MD (Breast Imaging)",facility:"ReasonDx Medical Center — Women's Imaging",priority:"Routine",clinical:"57F annual screening. No palpable masses or discharge.",technique:"Standard CC and MLO with tomosynthesis. CAD utilized.",findings:"Breast Composition: Heterogeneously dense (ACR Category C).\n\nRight Breast: No suspicious masses, distortion, or calcifications.\n\nLeft Breast: Stable benign lymph node in axillary tail. No suspicious findings.\n\nComparison: Stable vs 03/2023 and 03/2022.",impression:"BIRADS 1 — NEGATIVE\n\nNo mammographic evidence of malignancy. Dense tissue (Category C). Routine annual screening in 12 months.",dictated:"03/18/2024 11:15",verified:"03/18/2024 14:22"},{date:"01/08/2024",study:"CHEST XR PA AND LATERAL",accession:"IMG-2024-01081",status:"FINAL",orderedBy:"Dr. Angela Reyes, MD",readBy:"Dr. James Chen, MD (Radiology)",facility:"ReasonDx Medical Center Imaging",priority:"Routine",clinical:"57F preoperative evaluation. PMH: HTN, DM2, obesity.",technique:"PA and lateral views, upright, full inspiration.",findings:"Heart: Normal size. No pericardial effusion.\n\nMediastinum: Normal contours. Aorta unfolded, age-appropriate.\n\nLungs: Clear bilaterally. No consolidation, mass, effusion, or pneumothorax.\n\nBones: No acute fracture. Mild thoracic spondylosis.",impression:"1. Normal chest radiograph.\n2. No acute cardiopulmonary process.",dictated:"01/08/2024 10:44",verified:"01/08/2024 13:18"},{date:"11/12/2024",study:"DEXA BONE DENSITY SCAN",accession:"IMG-2024-11121",status:"FINAL",orderedBy:"Dr. Angela Reyes, MD",readBy:"Dr. James Chen, MD (Radiology)",facility:"ReasonDx Medical Center Imaging",priority:"Routine",clinical:"57F postmenopausal screening. Vitamin D deficiency (treated).",technique:"DEXA of lumbar spine (L1-L4) and left proximal femur. GE Lunar Prodigy.",findings:"Lumbar Spine (L1-L4):\n  BMD: 0.942 g/cm² | T-score: -1.3 (osteopenia) | Z-score: -0.6\n\nLeft Femoral Neck:\n  BMD: 0.812 g/cm² | T-score: -0.8 (normal) | Z-score: -0.1\n\nLeft Total Hip:\n  BMD: 0.948 g/cm² | T-score: -0.4 (normal) | Z-score: 0.2\n\nFRAX®: 10-yr major osteoporotic fracture 9.2% | Hip fracture 1.4%",impression:"1. Osteopenia lumbar spine (T-score -1.3).\n2. Normal femoral neck and total hip.\n3. Below pharmacologic treatment threshold.\n4. Calcium 1200mg/day, vitamin D, weight-bearing exercise. Repeat 2 years.",dictated:"11/12/2024 14:08",verified:"11/12/2024 16:33"}],
   immunizations: [{vaccine:"Influenza (Quadrivalent)",date:"09/12/2024",site:"Left deltoid IM",lot:"FL2024-881",mfr:"Sanofi Pasteur"},{vaccine:"COVID-19 (Pfizer 2024-25)",date:"10/15/2024",site:"Right deltoid IM",lot:"CV2024-223",mfr:"Pfizer"},{vaccine:"Tdap (Boostrix)",date:"03/2015",site:"Left deltoid IM",lot:"—",mfr:"GSK"},{vaccine:"Shingrix (1/2)",date:"06/2023",site:"Left deltoid IM",lot:"SX23-441",mfr:"GSK"},{vaccine:"Shingrix (2/2)",date:"08/2023",site:"Left deltoid IM",lot:"SX23-607",mfr:"GSK"},{vaccine:"PPSV23",date:"DUE — not administered",site:"—",lot:"—",mfr:"—"}],
   familyHistory: ["Mother: T2DM (dx 52), HTN, died 74 (CVA)","Father: CAD, MI at 61, died 68","Sister (54): Hypothyroidism, MDD","Brother (50): Healthy","Mat. Grandmother: T2DM, Breast Ca (dx 70, died 78)"],
-  socialHistory: [["Occupation","Admin assistant, law firm x 12 yrs"],["Marital","Married x 30 yrs"],["Children","2 adult (28, 25)"],["Tobacco","Never"],["Alcohol","Social, 1-2 glasses wine/wk"],["Drugs","Denies"],["Exercise","Walks 2-3x/wk 20 min; sedentary"],["Diet","Difficulty limiting carbs; skips breakfast"],["Housing","Single-family home w/ husband"],["Stress","Moderate — work, finances"],["Safety","Denies IPV; seatbelt; smoke detectors"],["Advance Directive","None — discussed"]]
+  socialHistory: [["Occupation","Admin assistant, law firm x 12 yrs"],["Marital","Married x 30 yrs"],["Children","2 adult (28, 25)"],["Tobacco","Never"],["Alcohol","Social, 1-2 glasses wine/wk"],["Drugs","Denies"],["Exercise","Walks 2-3x/wk 20 min; sedentary"],["Diet","Difficulty limiting carbs; skips breakfast"],["Housing","Single-family home w/ husband"],["Stress","Moderate — work, finances"],["Safety","Denies IPV; seatbelt; smoke detectors"],["Advance Directive","None — discussed"]],
+  "guided": {
+    "supported": true,
+    "patientPersona": "Maria Santos appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "interviewQuestions": [
+        "Tell me what brought you in today. When did your symptoms start?",
+        "Can you describe exactly how it started \u2014 sudden or gradual?",
+        "Where is the problem located? Does it spread anywhere?",
+        "How would you rate the severity on a scale of 1 to 10?",
+        "What makes it worse? What makes it better?",
+        "Do you have any other symptoms along with this?",
+        "Have you had anything like this before?",
+        "Tell me about your medical history \u2014 any chronic conditions?",
+        "What medications are you currently taking?",
+        "Do you have any allergies to medications?",
+        "Tell me about your family medical history.",
+        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+    ],
+    "patientResponses": {
+        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
+        "onset": "'The symptoms started 57-year-old female presenting for routine follow-up of hypertension, type 2 diab.'",
+        "character": "'It's a significant symptom \u2014 it's been bothering me quite a bit.'",
+        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
+        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+        "medications": "'I take Lisinopril 20mg; Metformin 1000mg; Atorvastatin 40mg; Sertraline 50mg; Cetirizine 10mg; Sumatriptan 50mg; Vitamin D3 2000 IU; Ibuprofen 400mg.'",
+        "allergies": "'My allergies are Penicillin, Sulfa Drugs, Shellfish, Dust Mites, Latex.'",
+        "family": "Mother: T2DM (dx 52), HTN, died 74 (CVA)  Father: CAD, MI at 61, died 68  Sister (54): Hypothyroidism, MDD",
+        "social": "Occupation: Admin assistant, law firm x 12 yrs  Marital: Married x 30 yrs  Children: 2 adult (28, 25)  Tobacco: Never  Alcohol: Social, 1-2 glasses wine/wk"
+    },
+    "examManeuvers": [
+        "General appearance and level of distress",
+        "Vital signs review",
+        "Cardiovascular auscultation",
+        "Pulmonary auscultation",
+        "Abdominal examination",
+        "Extremity assessment",
+        "Skin examination",
+        "Targeted system examination"
+    ],
+    "examFindings": {
+        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
+        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+    },
+    "ddxTargets": [
+        "Working diagnosis (correct diagnosis)",
+        "Most likely alternative diagnosis",
+        "Third differential diagnosis",
+        "Must-not-miss diagnosis",
+        "Second must-not-miss",
+        "Common clinical mimic",
+        "Alternative presentation to consider"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
+        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed Maria Santos's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+    }
+}
 };
