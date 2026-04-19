@@ -3589,6 +3589,30 @@ function renderAISwitcher(activeTab) {
   return html;
 }
 
+// Order & Document sub-tab switcher
+var _ORDER_DOC_TOOLS = [
+  { id:'orders',        label:'Order Tests',  icon:'🧪', desc:'Place labs, imaging, and consult orders' },
+  { id:'documentation', label:'Write Note',   icon:'📝', desc:'Write your H&P with Assessment & Plan' },
+];
+
+function renderOrderDocSwitcher(activeTab) {
+  var html = '<div class="rdx-ai-switcher">';
+  _ORDER_DOC_TOOLS.forEach(function(t) {
+    var active = t.id === activeTab ? ' active' : '';
+    html += '<button class="rdx-ai-pill'+active+'" onclick="switchTab(\''+t.id+'\')">'
+      + '<span class="rdx-ai-pill-icon">'+t.icon+'</span>'
+      + t.label
+      + '</button>';
+  });
+  html += '</div>';
+  var current = _ORDER_DOC_TOOLS.find(function(t){ return t.id === activeTab; });
+  if (current) {
+    html += '<div style="padding:4px 16px 10px;font-size:11px;color:var(--text-muted)">'
+      + '<strong>'+current.label+'</strong> — '+current.desc+'</div>';
+  }
+  return html;
+}
+
 // Patch: AI tabs prepend the switcher
 var _AI_TAB_IDS = ['coach','crt','autofeedback','feedback'];
 
@@ -5859,7 +5883,9 @@ render = function(){
   fn.crt = fn.ddx;
   fn.visits = renderVisits;
   fn.history = renderHistory;
-  fn.documentation = renderDocumentation;
+  fn.documentation = function() {
+    return renderOrderDocSwitcher('documentation') + renderDocumentation();
+  };
   fn.feedback = renderFeedback;
   fn.grading = function(){ return renderGrading() + renderFacultyValidation(); };
   fn.admin = renderAdmin;
@@ -5895,7 +5921,9 @@ render = function(){
     fn.immunizations = renderImmunizationsInteractive;
     fn.labs = renderLabsInteractive;
     fn.imaging = renderImagingInteractive;
-    fn.orders = renderOrders;
+    fn.orders = function() {
+      return renderOrderDocSwitcher('orders') + renderOrders();
+    };
   } else {
     fn.problems = renderProblems;
     fn.medications = renderMedications;
