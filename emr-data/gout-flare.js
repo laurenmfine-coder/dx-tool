@@ -99,30 +99,30 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-      "date": "10/30/2024",
-      "bp": "142/90",
-      "hr": 76,
-      "rr": 14,
-      "temp": "98.6°F",
-      "spo2": "98%",
-      "wt": "198 lbs",
-      "ht": "5'8\"",
-      "bmi": 30.1,
-      "setting": "PCP Office"
+        "date": "10/30/2024",
+        "bp": "142/90",
+        "hr": 76,
+        "rr": 14,
+        "temp": "98.6\u00b0F",
+        "spo2": "98%",
+        "wt": "198 lbs",
+        "ht": "5'8\"",
+        "bmi": 30.1,
+        "setting": "PCP Office"
     },
     {
-      "date": "04/18/2024",
-      "bp": "138/86",
-      "hr": 72,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "98%",
-      "wt": "195 lbs",
-      "ht": "5'8\"",
-      "bmi": 29.7,
-      "setting": "PCP Office"
+        "date": "04/18/2024",
+        "bp": "138/86",
+        "hr": 72,
+        "rr": 14,
+        "temp": "98.4\u00b0F",
+        "spo2": "98%",
+        "wt": "195 lbs",
+        "ht": "5'8\"",
+        "bmi": 29.6,
+        "setting": "PCP Office"
     }
-  ],
+],
   "visits": [
     {
       "id": "V001",

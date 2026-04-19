@@ -117,154 +117,195 @@
   // Replaces flat vitals table with a mini trend visualization
   // ══════════════════════════════════════════════════════════════════════════
   function renderVitalsSparkline() {
+    // Use ALL historical vitals from the chart (VITALS array) + live CRT phases
+    var allPoints = [];
+
+    // 1. Historical vitals (from patient chart, oldest → newest)
+    if (window.VITALS && VITALS.length > 0) {
+      // VITALS are stored newest-first — reverse for chronological order
+      var sorted = VITALS.slice().reverse();
+      sorted.forEach(function(v) {
+        var tempStr = String(v.temp || '');
+        var tempNum = parseFloat(tempStr) || 0;
+        if (tempStr.indexOf('C') >= 0) tempNum = tempNum * 9/5 + 32;
+        allPoints.push({
+          label: v.date || '',
+          date:  v.date || '',
+          bp:    v.bp || '',
+          hr:    parseInt(v.hr)  || 0,
+          rr:    parseInt(v.rr)  || 0,
+          spo2:  parseInt(v.spo2) || 0,
+          temp:  v.temp || '',
+          tempF: tempNum,
+          wt:    v.wt || '',
+          setting: v.setting || '',
+          source: 'chart'
+        });
+      });
+    }
+
+    // 2. CRT encounter phases (live treatment phases, appended as "Presentation" etc.)
     var crt = getCRTData();
-    var baseVitals = (window.VITALS && VITALS.length > 0) ? VITALS[0] : null;
-    if (!baseVitals) return '';
-
-    // Collect all vitals data points: base + CRT phases
-    var dataPoints = [];
-
-    // Base chart vitals
-    dataPoints.push({
-      label: 'Arrival',
-      bp: baseVitals.bp || '',
-      hr: parseInt(baseVitals.hr) || 0,
-      rr: parseInt(baseVitals.rr) || 0,
-      spo2: parseInt(baseVitals.spo2) || 0,
-      temp: baseVitals.temp || ''
-    });
-
-    // Add CRT phase vitals if available
     if (crt && crt.treatments && crt.treatments.phases) {
       var crtState = getCRTState();
       var currentPhase = crtState ? crtState.currentPhase : 0;
       crt.treatments.phases.forEach(function(phase, i) {
         if (i <= currentPhase && phase.vitals) {
-          dataPoints.push({
+          var tempStr = String(phase.vitals.Temp || '');
+          var tempNum = parseFloat(tempStr) || 0;
+          if (tempStr.indexOf('C') >= 0) tempNum = tempNum * 9/5 + 32;
+          allPoints.push({
             label: phase.label || ('Phase ' + (i+1)),
-            bp: phase.vitals.BP || '',
-            hr: parseInt(phase.vitals.HR) || 0,
-            rr: parseInt(phase.vitals.RR) || 0,
-            spo2: parseInt(phase.vitals.SpO2) || 0,
-            temp: phase.vitals.Temp || ''
+            date:  phase.label || ('Phase ' + (i+1)),
+            bp:    phase.vitals.BP || '',
+            hr:    parseInt(phase.vitals.HR) || 0,
+            rr:    parseInt(phase.vitals.RR) || 0,
+            spo2:  parseInt(phase.vitals.SpO2) || 0,
+            temp:  phase.vitals.Temp || '',
+            tempF: tempNum,
+            source: 'encounter'
           });
         }
       });
     }
 
-    if (dataPoints.length < 2) return renderBasicVitalsSparkline(baseVitals);
+    if (allPoints.length === 0) return '';
+    if (allPoints.length === 1) return renderBasicVitalsSparkline(window.VITALS ? VITALS[0] : null);
 
-    // Build sparkline SVG for HR and SpO2
-    var maxHR = Math.max.apply(null, dataPoints.map(function(d){ return d.hr; }).filter(Boolean));
-    var minHR = Math.min.apply(null, dataPoints.map(function(d){ return d.hr; }).filter(Boolean));
-    var n = dataPoints.length;
-    var w = 200, h = 50;
+    var n = allPoints.length;
+    var W = 420, H = 72;
+    var PAD_L = 32, PAD_R = 12, PAD_T = 8, PAD_B = 28; // leave room for x-axis labels
+    var cW = W - PAD_L - PAD_R;
+    var cH = H - PAD_T - PAD_B;
 
-    function sparkPath(values, minV, maxV) {
+    function ptX(i) { return PAD_L + (n > 1 ? (i / (n-1)) * cW : cW/2); }
+    function ptY(val, minV, maxV) {
       var range = maxV - minV || 1;
-      return values.map(function(v, i) {
-        var x = (i / (n-1)) * w;
-        var y = h - ((v - minV) / range) * (h - 8) - 4;
-        return (i === 0 ? 'M' : 'L') + x.toFixed(1) + ',' + y.toFixed(1);
-      }).join(' ');
+      return PAD_T + cH - ((val - minV) / range) * cH;
     }
 
-    var hrVals = dataPoints.map(function(d){ return d.hr; });
-    var spo2Vals = dataPoints.map(function(d){ return d.spo2; });
+    function sparkLine(vals, minV, maxV, color, abnormalFn) {
+      var points = vals.map(function(v, i) { return ptX(i).toFixed(1) + ',' + ptY(v, minV, maxV).toFixed(1); });
+      var path = 'M' + points.join('L');
+      var svgParts = [];
+      // Reference line area fill (subtle)
+      svgParts.push('<path d="' + path + '" fill="none" stroke="' + color + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>');
+      // Dots with tooltips
+      vals.forEach(function(v, i) {
+        var x = ptX(i), y = ptY(v, minV, maxV);
+        var pt = allPoints[i];
+        var abn = abnormalFn(v);
+        var dotColor = abn ? '#EF4444' : color;
+        var tipText = (pt.date || pt.label) + ': ' + v + (color === '#10B981' ? '%' : ' bpm');
+        svgParts.push(
+          '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + (i===n-1?4:3) + '"' +
+          ' fill="' + dotColor + '" stroke="white" stroke-width="1.5">' +
+          '<title>' + tipText + '</title></circle>'
+        );
+      });
+      return svgParts.join('');
+    }
 
-    var hrPath = sparkPath(hrVals, minHR - 10, maxHR + 10);
-    var spo2Path = sparkPath(spo2Vals,
-      Math.min.apply(null, spo2Vals) - 5,
-      Math.max.apply(null, spo2Vals) + 5
-    );
+    function xAxisLabels() {
+      var parts = [];
+      allPoints.forEach(function(pt, i) {
+        var x = ptX(i);
+        // Short label: if date format MM/DD/YYYY → MM/DD, else truncate to 8 chars
+        var lbl = pt.date || pt.label || '';
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(lbl)) lbl = lbl.substring(0,5);
+        else lbl = lbl.substring(0, 8);
+        // Alternate above/below to avoid overlap when many points
+        var yOffset = (i % 2 === 0) ? H - PAD_B + 11 : H - PAD_B + 20;
+        parts.push(
+          '<text x="' + x.toFixed(1) + '" y="' + yOffset + '" text-anchor="middle"' +
+          ' style="font-size:8px;fill:#94A3B8;">' + lbl + '</text>'
+        );
+      });
+      return parts.join('');
+    }
 
-    // Trend direction
+    // Value ranges
+    var hrVals  = allPoints.map(function(d){ return d.hr; });
+    var spo2Vals = allPoints.map(function(d){ return d.spo2; });
+    var minHR = Math.min.apply(null, hrVals.filter(Boolean));
+    var maxHR = Math.max.apply(null, hrVals.filter(Boolean));
+    var minSpo2 = Math.min.apply(null, spo2Vals.filter(Boolean));
+    var maxSpo2 = Math.max.apply(null, spo2Vals.filter(Boolean));
+
+    // Trend helper
     function trendIcon(vals) {
       var first = vals[0], last = vals[vals.length-1];
-      if (last < first) return '<span style="color:#10B981">↓ improving</span>';
-      if (last > first) return '<span style="color:#EF4444">↑ worsening</span>';
+      if (last < first - 2) return '<span style="color:#10B981">↓ improving</span>';
+      if (last > first + 2) return '<span style="color:#EF4444">↑ worsening</span>';
       return '<span style="color:#94A3B8">→ stable</span>';
     }
 
-    var html = '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px">';
-    html += '<div style="padding:12px 16px;background:linear-gradient(135deg,#F0F9FF,#EBF4FB);border-bottom:1px solid #DBEAFE;display:flex;align-items:center;justify-content:space-between">';
-    html += '<div style="font-size:13px;font-weight:700;color:#1B3A5C">📈 Vitals Trend</div>';
-    html += '<div style="font-size:11px;color:#64748B">' + dataPoints.length + ' time points</div>';
-    html += '</div>';
-    html += '<div style="padding:14px 16px;display:grid;grid-template-columns:1fr 1fr;gap:16px">';
+    var lastPt = allPoints[allPoints.length - 1];
+    var hrCurrent = hrVals[hrVals.length-1];
+    var spo2Current = spo2Vals[spo2Vals.length-1];
 
-    // HR sparkline
-    html += '<div>';
-    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">';
-    html += '<span style="font-size:11px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:.4px">Heart Rate</span>';
-    html += '<span style="font-size:12px;font-weight:700;color:' + (hrVals[hrVals.length-1] > 100 ? '#EF4444' : '#10B981') + '">' + hrVals[hrVals.length-1] + ' bpm</span>';
+    var html = '<div style="background:#fff;border-radius:12px;border:1px solid var(--border);overflow:hidden;margin-bottom:16px">';
+    html += '<div style="padding:10px 16px;background:linear-gradient(135deg,#F0F9FF,#EBF4FB);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">';
+    html += '<div style="font-size:13px;font-weight:700;color:#1B3A5C">📈 Vitals Trend</div>';
+    html += '<div style="font-size:11px;color:#64748B">' + n + ' time point' + (n>1?'s':'') + ' · hover dots for values</div>';
     html += '</div>';
-    html += '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" style="width:100%;height:auto">';
-    html += '<path d="' + hrPath + '" fill="none" stroke="' + (hrVals[hrVals.length-1] > 100 ? '#EF4444' : '#2874A6') + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
-    // Dots at each point
-    dataPoints.forEach(function(d, i) {
-      if (!d.hr) return;
-      var range = (maxHR + 10) - (minHR - 10) || 1;
-      var x = (i / (n-1)) * w;
-      var y = h - ((d.hr - (minHR-10)) / range) * (h-8) - 4;
-      html += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="' + (i===n-1?'#2874A6':'#93C5FD') + '"/>';
-    });
+    html += '<div style="padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:12px">';
+
+    // HR chart
+    html += '<div>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
+    html += '<span style="font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">Heart Rate</span>';
+    html += '<span style="font-size:13px;font-weight:700;color:' + (hrCurrent>100?'#EF4444':hrCurrent<60?'#F59E0B':'#2874A6') + '">' + hrCurrent + ' bpm' + (hrCurrent>100?' ▲':hrCurrent<60?' ▼':'') + '</span>';
+    html += '</div>';
+    html += '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;overflow:visible">';
+    // Normal range band
+    var hrNormY1 = ptY(100, minHR-10, maxHR+10), hrNormY2 = ptY(60, minHR-10, maxHR+10);
+    html += '<rect x="' + PAD_L + '" y="' + hrNormY1.toFixed(1) + '" width="' + cW + '" height="' + (hrNormY2-hrNormY1).toFixed(1) + '" fill="#F0FDF4" opacity="0.6"/>';
+    html += sparkLine(hrVals, minHR-10, maxHR+10, '#2874A6', function(v){ return v>100||v<60; });
+    html += xAxisLabels();
     html += '</svg>';
     html += '<div style="font-size:10px;color:#94A3B8;margin-top:2px">' + trendIcon(hrVals) + '</div>';
     html += '</div>';
 
-    // SpO2 sparkline
+    // SpO2 chart
     html += '<div>';
-    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">';
-    html += '<span style="font-size:11px;font-weight:600;color:#64748B;text-transform:uppercase;letter-spacing:.4px">SpO₂</span>';
-    html += '<span style="font-size:12px;font-weight:700;color:' + (spo2Vals[spo2Vals.length-1] < 95 ? '#EF4444' : '#10B981') + '">' + spo2Vals[spo2Vals.length-1] + '%</span>';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">';
+    html += '<span style="font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em">SpO₂</span>';
+    html += '<span style="font-size:13px;font-weight:700;color:' + (spo2Current<95?'#EF4444':spo2Current<98?'#F59E0B':'#10B981') + '">' + spo2Current + '%' + (spo2Current<95?' ▼':'') + '</span>';
     html += '</div>';
-    html += '<svg width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + ' ' + h + '" style="width:100%;height:auto">';
-    html += '<path d="' + spo2Path + '" fill="none" stroke="' + (spo2Vals[spo2Vals.length-1] < 95 ? '#EF4444' : '#10B981') + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
-    dataPoints.forEach(function(d, i) {
-      if (!d.spo2) return;
-      var minV = Math.min.apply(null,spo2Vals)-5, maxV = Math.max.apply(null,spo2Vals)+5;
-      var range = maxV - minV || 1;
-      var x = (i / (n-1)) * w;
-      var y = h - ((d.spo2 - minV) / range) * (h-8) - 4;
-      html += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="' + (i===n-1?'#10B981':'#6EE7B7') + '"/>';
-    });
+    html += '<svg width="' + W + '" height="' + H + '" viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;overflow:visible">';
+    // Normal range band (95-100%)
+    var spo2NormY = ptY(95, minSpo2-2, Math.max(maxSpo2+2, 100));
+    html += '<rect x="' + PAD_L + '" y="' + PAD_T + '" width="' + cW + '" height="' + (spo2NormY - PAD_T).toFixed(1) + '" fill="#F0FDF4" opacity="0.6"/>';
+    html += sparkLine(spo2Vals, minSpo2-2, Math.max(maxSpo2+2,100), '#10B981', function(v){ return v<95; });
+    html += xAxisLabels();
     html += '</svg>';
     html += '<div style="font-size:10px;color:#94A3B8;margin-top:2px">' + trendIcon(spo2Vals) + '</div>';
     html += '</div>';
 
-    html += '</div>';
+    html += '</div>'; // grid
 
-    // Timeline labels
-    html += '<div style="padding:0 16px 12px;display:flex;justify-content:space-between">';
-    dataPoints.forEach(function(d) {
-      html += '<span style="font-size:9px;color:#94A3B8;text-align:center;flex:1">' + esc(d.label.substring(0,12)) + '</span>';
-    });
-    html += '</div>';
-
-    // Vital summary row
-    var last = dataPoints[dataPoints.length-1];
-    html += '<div style="padding:10px 16px;background:#F8FAFC;border-top:1px solid var(--border);display:flex;gap:16px;flex-wrap:wrap">';
-    var vitalChips = [
-      { label:'BP', val: last.bp, warn: function(v){ return parseInt(v) < 90 || parseInt(v) > 160; } },
-      { label:'HR', val: last.hr + ' bpm', warn: function(v){ return last.hr > 100 || last.hr < 60; } },
-      { label:'RR', val: last.rr + '/min', warn: function(v){ return last.rr > 20 || last.rr < 12; } },
-      { label:'SpO₂', val: last.spo2 + '%', warn: function(v){ return last.spo2 < 95; } },
-      { label:'Temp', val: last.temp, warn: function(){ return false; } },
-    ];
-    vitalChips.forEach(function(c) {
-      if (!c.val || c.val === '0' || c.val === '0%' || c.val === '0/min') return;
-      var abnormal = c.warn(c.val);
-      html += '<div style="display:flex;flex-direction:column;align-items:center">';
-      html += '<span style="font-size:10px;color:#94A3B8;font-weight:600;text-transform:uppercase;letter-spacing:.4px">' + c.label + '</span>';
-      html += '<span style="font-size:13px;font-weight:700;color:' + (abnormal ? '#EF4444' : '#1B3A5C') + '">' + esc(String(c.val)) + '</span>';
+    // Current vitals strip
+    html += '<div style="padding:8px 16px 10px;background:#F8FAFC;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:8px">';
+    [
+      { label:'BP', val: lastPt.bp, abn: function(){ var s=parseInt(lastPt.bp)||0; return s>=140||s<90; } },
+      { label:'HR', val: hrCurrent+' bpm', abn: function(){ return hrCurrent>100||hrCurrent<60; } },
+      { label:'RR', val: (lastPt.rr||'—')+'/min', abn: function(){ return (lastPt.rr||0)>20||(lastPt.rr||0)<12; } },
+      { label:'SpO₂', val: spo2Current+'%', abn: function(){ return spo2Current<95; } },
+      { label:'Temp', val: lastPt.temp||'—', abn: function(){ return (lastPt.tempF||0)>=100.4||(lastPt.tempF||0)<96.8; } },
+    ].forEach(function(c) {
+      var isAbn = c.abn();
+      html += '<div style="display:flex;flex-direction:column;align-items:center;min-width:52px">';
+      html += '<span style="font-size:9px;color:#94A3B8;font-weight:700;text-transform:uppercase;letter-spacing:.05em">' + c.label + '</span>';
+      html += '<span style="font-size:13px;font-weight:700;color:' + (isAbn?'#EF4444':'#1B3A5C') + '">' + c.val + '</span>';
       html += '</div>';
     });
     html += '</div>';
-    html += '</div>';
 
+    html += '</div>'; // card
     return html;
   }
+
 
   function renderBasicVitalsSparkline(v) {
     // Single time point — just show a nicely formatted card instead of table

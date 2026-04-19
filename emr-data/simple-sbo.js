@@ -91,42 +91,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-      "date": "12/12/2024",
-      "bp": "126/78",
-      "hr": 72,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "98%",
-      "wt": "192 lbs",
-      "ht": "5'10\"",
-      "bmi": 27.6,
-      "setting": "PCP Office"
+        "date": "12/12/2024",
+        "bp": "126/78",
+        "hr": 72,
+        "rr": 14,
+        "temp": "98.4\u00b0F",
+        "spo2": "98%",
+        "wt": "192 lbs",
+        "ht": "5'10\"",
+        "bmi": 27.5,
+        "setting": "PCP Office"
     },
     {
-      "date": "06/08/2024",
-      "bp": "128/80",
-      "hr": 74,
-      "rr": 14,
-      "temp": "98.6°F",
-      "spo2": "99%",
-      "wt": "190 lbs",
-      "ht": "5'10\"",
-      "bmi": 27.3,
-      "setting": "PCP Office"
+        "date": "06/08/2024",
+        "bp": "128/80",
+        "hr": 74,
+        "rr": 14,
+        "temp": "98.6\u00b0F",
+        "spo2": "99%",
+        "wt": "190 lbs",
+        "ht": "5'10\"",
+        "bmi": 27.3,
+        "setting": "PCP Office"
     },
     {
-      "date": "12/06/2023",
-      "bp": "130/82",
-      "hr": 76,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "98%",
-      "wt": "188 lbs",
-      "ht": "5'10\"",
-      "bmi": 27.0,
-      "setting": "PCP Office"
+        "date": "12/06/2023",
+        "bp": "130/82",
+        "hr": 76,
+        "rr": 14,
+        "temp": "98.4\u00b0F",
+        "spo2": "98%",
+        "wt": "188 lbs",
+        "ht": "5'10\"",
+        "bmi": 27.0,
+        "setting": "PCP Office"
     }
-  ],
+],
   "visits": [
     {
       "id": "V001",

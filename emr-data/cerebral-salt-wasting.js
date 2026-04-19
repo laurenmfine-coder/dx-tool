@@ -107,42 +107,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-      "date": "02/24/2025",
-      "bp": "98/62",
-      "hr": 104,
-      "rr": 18,
-      "temp": "98.8°F",
-      "spo2": "97%",
-      "wt": "172 lbs",
-      "ht": "5'8\"",
-      "bmi": 26.2,
-      "setting": "ED"
+        "date": "02/24/2025",
+        "bp": "98/62",
+        "hr": 104,
+        "rr": 18,
+        "temp": "98.8\u00b0F",
+        "spo2": "97%",
+        "wt": "172 lbs",
+        "ht": "5'8\"",
+        "bmi": 26.1,
+        "setting": "ED"
     },
     {
-      "date": "02/19/2025",
-      "bp": "128/78",
-      "hr": 76,
-      "rr": 14,
-      "temp": "98.4°F",
-      "spo2": "99%",
-      "wt": "178 lbs",
-      "ht": "5'8\"",
-      "bmi": 27.1,
-      "setting": "Rehab Facility"
+        "date": "02/19/2025",
+        "bp": "128/78",
+        "hr": 76,
+        "rr": 14,
+        "temp": "98.4\u00b0F",
+        "spo2": "99%",
+        "wt": "178 lbs",
+        "ht": "5'8\"",
+        "bmi": 27.1,
+        "setting": "Rehab Facility"
     },
     {
-      "date": "02/14/2025",
-      "bp": "192/108",
-      "hr": 88,
-      "rr": 20,
-      "temp": "99.0°F",
-      "spo2": "98%",
-      "wt": "182 lbs",
-      "ht": "5'8\"",
-      "bmi": 27.7,
-      "setting": "ED (initial SAH presentation)"
+        "date": "02/14/2025",
+        "bp": "192/108",
+        "hr": 88,
+        "rr": 20,
+        "temp": "99.0\u00b0F",
+        "spo2": "98%",
+        "wt": "182 lbs",
+        "ht": "5'8\"",
+        "bmi": 27.7,
+        "setting": "ED (initial SAH presentation)"
     }
-  ],
+],
   "visits": [
     {
       "id": "V001",
