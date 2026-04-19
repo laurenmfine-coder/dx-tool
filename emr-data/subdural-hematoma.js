@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Pemberton",
-  "patientHPI": "My wife says I haven't been myself for about two weeks now - I've been confused and clumsy, and today it's gotten much worse. I've had this dull headache on both sides of my head, and I know I've been falling more lately which worries her.",
+    "patientHPI": "My wife says I haven't been myself for about two weeks now - I've been confused and clumsy, and today it's gotten much worse. I've had this dull headache on both sides of my head, and I know I've been falling more lately which worries her.",
     "dob": "06/15/1948",
     "age": "78",
     "sex": "Male",
@@ -15,13 +15,13 @@ window.EMR_DATA = {
     "address": "2243 Cottonwood Ave, Columbus, OH 43211",
     "insurance": "Medicaid",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
+    "pharmacy": "Walmart Pharmacy — Pines Blvd",
     "emergencyContact": {
       "name": "Thomas Mitchell",
       "phone": "(212) 555-6464",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+    "chiefComplaint": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
     "diagnosis": "Acute-on-Chronic Subdural Hematoma"
   },
   "problems": [
@@ -105,7 +105,7 @@ window.EMR_DATA = {
       "bp": "162/88",
       "hr": "78 (irregularly irregular)",
       "rr": "16",
-      "temp": "36.9\u00b0C",
+      "temp": "36.9°C",
       "spo2": "97%",
       "pain": "/10",
       "bmi": "24",
@@ -118,10 +118,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
-      "hpi": "Walter Pemberton is a 78-year-old male presenting with wife: 'he's not himself \u2014 confused and clumsy for 2 weeks, much worse today' bilateral headache, diffuse, dull. Past medical history includes Atrial fibrillation, Hypertension, Falls, Chronic alcohol use, BPH. See chart for full details.",
+      "cc": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+      "hpi": "Walter Pemberton is a 78-year-old male presenting with wife: 'he's not himself — confused and clumsy for 2 weeks, much worse today' bilateral headache, diffuse, dull. Past medical history includes Atrial fibrillation, Hypertension, Falls, Chronic alcohol use, BPH. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute-on-Chronic Subdural Hematoma \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute-on-Chronic Subdural Hematoma — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -143,7 +143,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "5.4",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -164,7 +164,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "148",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": "L"
             }
@@ -264,7 +264,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-280463",
-      "clinical": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+      "clinical": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
       "technique": "Standard protocol",
       "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
       "impression": "No acute cardiopulmonary process.",
@@ -281,7 +281,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-395248",
-      "clinical": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+      "clinical": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
       "technique": "Standard protocol",
       "findings": "LARGE LEFT-SIDED ACUTE-ON-CHRONIC SUBDURAL HEMATOMA. Mixed-density crescent-shaped collection over the left convexity measuring 18mm maximal thickness. Hyperdense (acute) component layered posteriorly within a hypodense (chronic) collection. MIDLINE SHIFT 11mm to the right. LEFT LATERAL VENTRICLE compressed. Early subfalcine herniation. No subarachnoid hemorrhage. Mild generalized cortical atrophy. Periventricular white matter changes.",
       "impression": "LARGE ACUTE-ON-CHRONIC LEFT SUBDURAL HEMATOMA with 11mm midline shift and early herniation signs. EMERGENT NEUROSURGICAL CONSULTATION for evacuation. Reverse anticoagulation IMMEDIATELY.",
@@ -298,10 +298,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-897573",
-      "clinical": "Wife: 'He's not himself \u2014 confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
+      "clinical": "Wife: 'He's not himself — confused and clumsy for 2 weeks, much worse today' Bilateral headache, diffuse, dull",
       "technique": "Standard 12-lead",
       "findings": "Atrial fibrillation at 78 bpm. No ST changes. Normal intervals",
-      "impression": "Chronic AFib \u2014 patient on anticoagulation that contributed to SDH",
+      "impression": "Chronic AFib — patient on anticoagulation that contributed to SDH",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -354,75 +354,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Walter Pemberton appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Walter appears mildly confused and somewhat anxious, frequently looking to his wife for confirmation of details. He's cooperative but clearly distressed by his cognitive changes, often saying 'I'm not usually like this' and becoming frustrated when he can't remember things clearly.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did wife: 'he's not himself \u2014 confused and clumsy for 2 weeks, much worse today' bilateral headache, diffuse, dull start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about when these symptoms first started?",
+      "Describe the headache - where exactly do you feel it and what does it feel like?",
+      "Have you had any recent falls or head injuries?",
+      "Are you having any nausea or vomiting with the headache?",
+      "Have you noticed any weakness or numbness anywhere?",
+      "Any vision changes or difficulty speaking?",
+      "Tell me about your recent falls - when did they happen?",
+      "Are you taking all your medications as prescribed?",
+      "Have you had any bleeding from anywhere recently?",
+      "Any seizures or loss of consciousness?",
+      "How has your balance and coordination been?",
+      "Have you had headaches like this before?",
+      "Any recent changes to your medications?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My wife says I haven't been myself for about two weeks now - I've been confused .'",
-        "character": "'It's wife: 'he's not himself \u2014 confused and clumsy for 2 weeks, much worse today' bilateral headache, diffuse, dull \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban; Lisinopril; Tamsulosin.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: stroke  No bleeding disorders",
-        "social": "Tobacco: Quit 20 years ago  Alcohol: 2-3 drinks daily for decades  Drugs: Denies  Occupation: Retired professor (history department)  Living: Lives with wife of 48 years"
+      "default": "I'm sorry, I'm having trouble thinking clearly right now. Can you ask that a different way?",
+      "onset": "My wife noticed I wasn't quite right about two weeks ago, but it's gotten much worse over the past few days, especially today.",
+      "character": "It's a dull, constant ache - not sharp or throbbing, just this persistent pressure feeling all over my head.",
+      "location": "It's on both sides of my head, kind of all over really. Not focused in one spot.",
+      "severity": "Maybe a 5 or 6 out of 10 for pain, but it's the confusion that really bothers me. I can't think straight.",
+      "aggravating": "Moving around seems to make me more unsteady, and bright lights bother me a bit.",
+      "relieving": "Tylenol hasn't helped much. Lying down quietly helps a little.",
+      "associated": "I've been more clumsy, having trouble with balance, and my wife says I'm walking differently. Sometimes I feel a bit nauseated.",
+      "denies": "No vision changes, no trouble speaking that I know of, no numbness or tingling anywhere specific.",
+      "history": "I get occasional headaches but nothing like this. This is different - it's the confusion that scares me.",
+      "medications": "Apixaban; Lisinopril; Tamsulosin",
+      "allergies": "NKDA",
+      "family": "My father had a stroke when he was in his 80s. No one in the family has bleeding problems that I know of.",
+      "social": "I'm a retired history professor. I still have 2-3 drinks most evenings - have for years. Quit smoking 20 years ago. I live with my wife."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Neurological assessment including mental status",
+      "Fundoscopic examination",
+      "Gait assessment",
+      "Coordination testing (finger-to-nose, heel-to-shin)",
+      "Deep tendon reflexes",
+      "Cranial nerve examination",
+      "Assessment for focal neurological deficits",
+      "Head and neck examination for trauma",
+      "Cardiovascular examination",
+      "Blood pressure in both arms"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Neurological assessment including mental status": "Mild cognitive impairment with short-term memory deficits, oriented to person and place but unsure of date, MMSE 24/30",
+      "Fundoscopic examination": "Bilateral papilledema with blurred disc margins and venous engorgement",
+      "Gait assessment": "Unsteady, wide-based gait with tendency to drift, requires assistance to maintain balance",
+      "Coordination testing (finger-to-nose, heel-to-shin)": "Bilateral dysmetria, more pronounced on right side",
+      "Deep tendon reflexes": "Hyperreflexia bilaterally, more prominent in lower extremities",
+      "Cranial nerve examination": "CN II-XII grossly intact except for mild bilateral papilledema on fundoscopy",
+      "Assessment for focal neurological deficits": "Subtle right-sided weakness, pronator drift positive on right",
+      "Head and neck examination for trauma": "No obvious external trauma, no Battle's sign or raccoon eyes",
+      "Cardiovascular examination": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs",
+      "Blood pressure in both arms": "Elevated bilaterally: right 162/88, left 158/86"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Chronic subdural hematoma (correct diagnosis)",
+      "Acute stroke/TIA",
+      "Normal pressure hydrocephalus",
+      "Intracranial mass lesion",
+      "Acute subdural hematoma",
+      "Medication-related cognitive impairment",
+      "Alcohol-related encephalopathy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'headache' as primary complaint and pursue migraine or tension headache, missing the cognitive changes and anticoagulation context",
+      "prematureClosure": "Risk of stopping at 'elderly confusion' or attributing symptoms to alcohol use without considering structural causes",
+      "availabilityBias": "Recent cases of stroke might lead to immediate focus on acute cerebrovascular events, potentially missing chronic subdural hematoma"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Walter Pemberton's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities. Given Walter's age, medication history, and the constellation of cognitive changes with headache, what specific risk factors should you explore? What key historical details might help you narrow your differential?",
+      "phase5": "Excellent work gathering the history and exam findings. The combination of papilledema, cognitive changes, gait instability, and subtle focal findings in an anticoagulated patient with fall history is very telling. What does this clinical picture suggest to you?",
+      "finalDebrief": "This case highlights how chronic subdural hematoma can present insidiously in anticoagulated patients. The key was recognizing that the 'confusion' wasn't just delirium, but part of a syndrome including increased intracranial pressure. How did your thinking evolve as you gathered the fall history and noted the papilledema?"
     }
-}
+  }
 };

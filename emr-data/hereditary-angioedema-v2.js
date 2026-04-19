@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Tiffany Brooks",
-  "patientHPI": "I keep having these scary episodes where my face and throat swell up really bad - it's happened five times in two years and I always end up in the ER because I can't breathe properly. The weird thing is nothing they give me there ever seems to help, and I never get any rashes or hives like they expect. It's been getting so much worse since I started birth control pills two months ago - now it happens almost every week and I'm terrified something really bad is going to happen to me.",
+      "patientHPI": "I keep having these scary episodes where my face and throat swell up really bad - it's happened five times in two years and I always end up in the ER because I can't breathe properly. The weird thing is nothing they give me there ever seems to help, and I never get any rashes or hives like they expect. It's been getting so much worse since I started birth control pills two months ago - now it happens almost every week and I'm terrified something really bad is going to happen to me.",
       "dob": "09/03/2007",
       "age": "19",
       "sex": "Female",
@@ -1120,95 +1120,102 @@ window.EMR_DATA = {
       "Mental health",
       "Skipping classes to stay near hospital"
     ]
-  ]
-,"references":[
-  {
-    "id": "WAO-HAE-2022",
-    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
-    "authors": "Maurer M, Magerl M, Betschel S, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15214",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
-    "openAccess": true,
-    "validates": [
-      "HAE diagnosis: C4 screening, C1-INH level/function",
-      "C1q distinguishes acquired from hereditary",
-      "On-demand icatibant",
-      "Lanadelumab prophylaxis",
-      "Estrogen triggers: OCPs contraindicated"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "WAO-HAE-2022",
+      "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+      "authors": "Maurer M, Magerl M, Betschel S, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15214",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+      "openAccess": true,
+      "validates": [
+        "HAE diagnosis: C4 screening, C1-INH level/function",
+        "C1q distinguishes acquired from hereditary",
+        "On-demand icatibant",
+        "Lanadelumab prophylaxis",
+        "Estrogen triggers: OCPs contraindicated"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Tiffany Brooks is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Tiffany appears frustrated and anxious after multiple ER visits without answers. She's cooperative but shows visible distress about missing classes and fears another dismissive encounter. Her affect is worried but hopeful someone will finally figure out what's wrong.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what happens during these episodes of swelling?",
+      "Where specifically do you experience the swelling?",
+      "Do you ever develop a rash or hives with the swelling?",
+      "What triggers seem to bring on these episodes?",
+      "How long do the episodes typically last?",
+      "Has epinephrine or steroids ever helped your symptoms?",
+      "When did you start birth control pills?",
+      "Tell me about your abdominal pain during these episodes.",
+      "Has anyone in your family had similar episodes of swelling?",
+      "What happened to your grandmother who died from airway swelling?",
+      "How have these episodes affected your daily life?",
+      "Have any of your previous doctors mentioned checking complement levels?",
+      "Do you have any warning signs before an episode starts?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Morphine; IV Fluids.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Mother: recurrent undiagnosed swelling  Maternal grandmother: died airway swelling age 42",
-        "social": "College: Freshman, 3 hours from home  OCP: Started 2 months ago \u2014 exacerbating HAE  Diagnosis delay: 5 ER visits in 2 years \u2014 treated as allergic each time, epi/steroids never worked  Mental health: Skipping classes to stay near hospital"
+      "default": "I'm not sure what you mean. Can you ask that differently?",
+      "onset": "These episodes started about 2 years ago in high school. They seem to come out of nowhere, usually starting with tingling in my face or stomach cramping.",
+      "character": "The swelling is deep and doughy, not itchy at all. My face gets really puffy, especially around my eyes and lips. The abdominal pain is severe cramping that doubles me over.",
+      "location": "Mainly my face - eyes, lips, sometimes my tongue. I also get terrible stomach pain that feels like my intestines are being squeezed.",
+      "severity": "The pain is easily 8-9 out of 10. I can't function at all during episodes. I've missed so many classes I'm failing two courses.",
+      "aggravating": "They seem worse since I started birth control two months ago. Stress might make them worse too. The episodes are happening weekly now instead of every few months.",
+      "relieving": "Nothing helps. They've given me epinephrine, steroids, antihistamines - nothing works. The episodes just have to run their course over 2-3 days.",
+      "associated": "Severe abdominal cramping, nausea, sometimes vomiting. My voice gets hoarse when my throat swells. Never any itching or rash.",
+      "denies": "No hives ever, no itching, no known food or environmental triggers, no recent medication changes except birth control.",
+      "history": "This is my 5th ER visit in 2 years. Every time they treat me for allergic reactions, but nothing ever helps. The episodes are getting more frequent.",
+      "medications": "Epinephrine; Morphine; IV Fluids",
+      "allergies": "NKDA",
+      "family": "My mom has had unexplained swelling episodes too, but not as bad as mine. My grandmother on my mom's side died when she was 42 from throat swelling - they never figured out why.",
+      "social": "I'm a college freshman, about 3 hours from home. I started birth control pills 2 months ago. I don't smoke or drink much. I'm so scared of these episodes I try to stay close to the hospital."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect face and lips for angioedema",
+      "Examine oral cavity and tongue for swelling",
+      "Palpate neck for lymphadenopathy",
+      "Auscultate lungs for wheezing or stridor",
+      "Inspect skin for urticaria or rash",
+      "Abdominal inspection for distension",
+      "Abdominal palpation for tenderness",
+      "Auscultate bowel sounds",
+      "Check extremities for swelling",
+      "Assess airway patency and voice quality"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect face and lips for angioedema": "Asymmetric periorbital edema and mild lip swelling, non-pitting, non-erythematous",
+      "Examine oral cavity and tongue for swelling": "Mild tongue edema present, no uvular swelling currently visible",
+      "Palpate neck for lymphadenopathy": "No lymphadenopathy, no neck swelling currently",
+      "Auscultate lungs for wheezing or stridor": "Clear breath sounds bilaterally, no wheezing or stridor",
+      "Inspect skin for urticaria or rash": "No urticaria, rash, or skin lesions anywhere on body",
+      "Abdominal inspection for distension": "Mild abdominal distension present",
+      "Abdominal palpation for tenderness": "Diffuse abdominal tenderness, more pronounced in epigastrium, no rebound or guarding",
+      "Auscultate bowel sounds": "Hypoactive bowel sounds in all quadrants",
+      "Check extremities for swelling": "No peripheral edema in hands or feet",
+      "Assess airway patency and voice quality": "Voice slightly hoarse, airway patent, no respiratory distress"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Hereditary Angioedema (HAE) (correct diagnosis)",
+      "Acquired angioedema",
+      "ACE inhibitor-induced angioedema",
+      "Anaphylaxis",
+      "Superior vena cava syndrome",
+      "Allergic angioedema",
+      "Idiopathic angioedema"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Previous ER visits treated as allergic reactions may anchor thinking toward allergic causes despite lack of response to treatment",
+      "prematureClosure": "Tendency to stop at 'allergic angioedema' without considering why epinephrine and steroids never work",
+      "availabilityBias": "HAE is rare, so more common allergic causes may seem more likely despite clinical evidence pointing toward HAE"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Tiffany Brooks: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview the patient, think about why someone might have recurrent angioedema that doesn't respond to standard allergic treatments. What key historical features would help you distinguish between different causes of angioedema?",
+      "phase5": "Now that you've gathered the history and physical findings, consider the pattern you're seeing: recurrent angioedema without urticaria, no response to epinephrine or steroids, family history of similar episodes, and worsening with OCPs. What specific laboratory test would help confirm your leading diagnosis?",
+      "finalDebrief": "This case highlights how rare diseases like HAE can be misdiagnosed when we anchor on more common conditions. The key clues were the lack of urticaria, no response to standard treatments, strong family history, and exacerbation with estrogen. What complement levels should be checked to confirm HAE, and how would you counsel this patient about trigger avoidance?"
     }
-}
+  }
 };

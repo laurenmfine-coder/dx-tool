@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jasmine Toussaint",
-  "patientHPI": "I've been managing my migraines pretty well with the medication - they're down to maybe two or three a month, and my anxiety has been much better since starting the antidepressant. The iron pills are helping but they still upset my stomach sometimes.",
+    "patientHPI": "I've been managing my migraines pretty well with the medication - they're down to maybe two or three a month, and my anxiety has been much better since starting the antidepressant. The iron pills are helping but they still upset my stomach sometimes.",
     "dob": "04/12/1998",
     "age": 26,
     "sex": "Female",
@@ -141,7 +141,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "192 lbs",
       "ht": "5'6\"",
-      "bmi": 31.0,
+      "bmi": 31,
       "setting": "PCP Office"
     },
     {
@@ -208,33 +208,135 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.8", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "76.2", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "310", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "76.2",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "310",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron, Serum", "value": "38", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "TIBC", "value": "420", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "12", "unit": "ng/mL", "range": "12-150", "flag": "" },
-            { "test": "Transferrin Saturation", "value": "9", "unit": "%", "range": "20-50", "flag": "L" }
+            {
+              "test": "Iron, Serum",
+              "value": "38",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "420",
+              "unit": "µg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Ferritin",
+              "value": "12",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": ""
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "9",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "10", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "10",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -296,15 +398,42 @@ window.EMR_DATA = {
     "Paternal grandfather: HTN, T2DM, alive at 80"
   ],
   "socialHistory": [
-    ["Occupation", "Registered nurse (medical-surgical unit)"],
-    ["Marital", "Single"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional — 1-2 glasses wine/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 3x/week; occasional yoga"],
-    ["Housing", "Lives alone in apartment"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Registered nurse (medical-surgical unit)"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional — 1-2 glasses wine/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 3x/week; occasional yoga"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "postconcussion-with-intracranial-hypertension",
@@ -315,75 +444,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jasmine Toussaint is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Jasmine appears anxious and slightly disoriented, frequently touching her head and speaking more slowly than usual. She's cooperative but sometimes needs questions repeated, showing mild cognitive difficulties that concern her as a healthcare professional. Despite her nursing background, she seems genuinely worried about her persistent symptoms following her recent head injury.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did trauma start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me about what happened when you were injured?",
+      "When did this injury occur and how are you feeling now compared to right after it happened?",
+      "What specific symptoms are you experiencing since the injury?",
+      "How would you rate your current headache pain on a scale of 1-10?",
+      "Are you experiencing any nausea, vomiting, or vision changes?",
+      "Have you noticed any problems with your memory, concentration, or thinking clearly?",
+      "Are you having any trouble sleeping or feeling more tired than usual?",
+      "Have you had any seizures or episodes where you lost consciousness since the injury?",
+      "How do bright lights or loud noises affect you right now?",
+      "Have you been able to work or perform your normal daily activities?",
+      "Did you seek medical attention immediately after the injury, and what treatment did you receive?",
+      "Are your current symptoms similar to your usual migraines or different?",
+      "What medications are you currently taking, including anything new since the injury?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been managing my migraines pretty well with the medication - they're down t.'",
-        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Post-Concussion Syndrome with Intracranial Hypertension.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sertraline 100mg daily; Sumatriptan 50mg PRN; Norgestimate/Ethinyl Estradiol (Sprintec) daily; Ferrous Sulfate 325mg BID; Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies are Erythromycin, Shellfish.'",
-        "family": "Mother: Migraines, HTN, alive at 52  Father: T2DM, alive at 55  Sister: Migraines, age 24",
-        "social": "Occupation: Registered nurse (medical-surgical unit)  Marital: Single  Tobacco: Never smoker  Alcohol: Occasional \u2014 1-2 glasses wine/week  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble concentrating and my head is really bothering me right now.",
+      "onset": "I was in a car accident about 10 days ago - got rear-ended pretty hard and hit my head on the side window. I was dazed but didn't lose consciousness. The symptoms have actually gotten worse over the past week instead of better.",
+      "character": "This headache is different from my usual migraines. It's more of a constant, dull pressure that feels like my head might explode. It's not the typical throbbing I get with migraines, and my usual migraine medications aren't helping much.",
+      "location": "The pain is all over my head, but it's worst in the back where I hit the window. Sometimes it feels like pressure behind my eyes too.",
+      "severity": "Right now it's about a 7 out of 10, and it's been consistently between 6-8 all week. It's bad enough that I had to call in sick to work, which I never do.",
+      "aggravating": "Bending over makes it much worse, and even coughing or sneezing sends shooting pain through my head. Bright lights and loud noises are unbearable - much worse than with my regular migraines.",
+      "relieving": "Nothing really helps. I've tried my sumatriptan, ibuprofen, even lying in a dark quiet room. The pain medication from the ER helped a little initially but not anymore.",
+      "associated": "I've been really nauseous, especially in the mornings, and I've thrown up a few times. My vision seems a bit blurry, and I'm having trouble remembering things at work. I feel dizzy when I stand up quickly, and I'm exhausted even though I can't sleep well.",
+      "denies": "I haven't had any seizures or lost consciousness since the accident. No fever, no neck stiffness that I can tell, and no weakness in my arms or legs.",
+      "history": "I've had migraines since I was a teenager, but they're usually manageable with my medications and I know my triggers. This is completely different - it's constant and nothing touches it.",
+      "medications": "Sertraline 100mg daily; Sumatriptan 50mg PRN; Norgestimate/Ethinyl Estradiol (Sprintec) daily; Ferrous Sulfate 325mg BID; Ibuprofen 400mg PRN",
+      "allergies": "Erythromycin, Shellfish",
+      "family": "My mom and sister both have migraines like I do, but nothing like this. My mom has high blood pressure too.",
+      "social": "I'm a registered nurse on a med-surg unit, single, never smoked. I usually have a glass or two of wine on weekends but haven't had any alcohol since the accident because of the pain medications."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Neurological assessment including Glasgow Coma Scale",
+      "Fundoscopic examination for papilledema",
+      "Cranial nerve examination",
+      "Motor and sensory examination",
+      "Deep tendon reflexes and pathological reflexes",
+      "Cerebellar testing (finger-to-nose, heel-to-shin, gait)",
+      "Neck examination for nuchal rigidity",
+      "Valsalva maneuver or cough test",
+      "Cognitive assessment (orientation, memory, attention)",
+      "Balance and coordination testing"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Post-Concussion Syndrome with Intracranial Hypertension. Document specifically what you observe."
+      "Neurological assessment including Glasgow Coma Scale": "GCS 15, alert and oriented to person, place, and time, but slow to respond and appears mildly confused",
+      "Fundoscopic examination for papilledema": "Bilateral papilledema present with blurred optic disc margins and venous engorgement",
+      "Cranial nerve examination": "CN II-XII grossly intact, mild photophobia noted, no obvious focal deficits",
+      "Motor and sensory examination": "Motor strength 5/5 in all extremities, sensation intact to light touch and pinprick",
+      "Deep tendon reflexes and pathological reflexes": "DTRs 2+ and symmetric throughout, Babinski negative bilaterally",
+      "Cerebellar testing (finger-to-nose, heel-to-shin, gait)": "Mild dysmetria on finger-to-nose testing, slightly unsteady gait but able to tandem walk",
+      "Neck examination for nuchal rigidity": "No nuchal rigidity, full range of motion without meningeal signs",
+      "Valsalva maneuver or cough test": "Patient reports significant worsening of headache with Valsalva maneuver",
+      "Cognitive assessment (orientation, memory, attention)": "Oriented x3 but demonstrates mild short-term memory impairment and difficulty with concentration tasks",
+      "Balance and coordination testing": "Mild postural instability, positive Romberg test"
     },
     "ddxTargets": [
-        "Post-Concussion Syndrome with Intracranial Hypertension (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Post-Concussion Syndrome with Intracranial Hypertension",
+      "Chronic Subdural Hematoma",
+      "Post-Traumatic Migraine",
+      "Intracranial Mass Lesion",
+      "Subarachnoid Hemorrhage (delayed)",
+      "Medication Overuse Headache",
+      "Tension-Type Headache"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Post-Concussion Syndrome with Intracranial Hypertension, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Post-Concussion Syndrome with Intracranial Hypertension, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Post-Concussion Syndrome with Intracranial Hypertension based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's history of migraines and assuming this is just a severe migraine episode, missing the trauma-related intracranial hypertension",
+      "prematureClosure": "May stop investigating after hearing about migraine history without fully exploring the post-traumatic nature and worsening pattern of symptoms",
+      "availabilityBias": "Recent cases of migraine patients may lead to assuming this is migraine-related rather than recognizing the serious post-concussion complications"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jasmine Toussaint's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Post-Concussion Syndrome with Intracranial Hypertension. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has a significant history of migraines, but she's presenting after recent head trauma. What key features in her history would help you distinguish between her typical migraines and potential post-traumatic complications? What red flags should you specifically explore?",
+      "phase5": "You've identified some concerning findings including papilledema and cognitive changes in a post-trauma patient. How do these findings change your differential diagnosis? What's the most likely explanation for her symptom progression, and what immediate actions does this warrant?",
+      "finalDebrief": "This case illustrates how easily we can anchor on existing diagnoses like migraine when evaluating headache patients. The key differentiators were the post-traumatic onset, worsening rather than improving course, papilledema on exam, and cognitive symptoms. Post-concussion syndrome with intracranial hypertension requires urgent imaging and possible neurosurgical intervention - a very different management approach than treating another migraine episode."
     }
-}
+  }
 };

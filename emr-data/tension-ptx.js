@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan O'Brien",
-  "patientHPI": "I was just sitting in class when I suddenly couldn't catch my breath and got this sharp, stabbing pain on the left side of my chest that shoots around to my back. It feels like someone is squeezing my chest really tight, and the pain gets much worse when I try to take a deep breath.",
+    "patientHPI": "I was just sitting in class when I suddenly couldn't catch my breath and got this sharp, stabbing pain on the left side of my chest that shoots around to my back. It feels like someone is squeezing my chest really tight, and the pain gets much worse when I try to take a deep breath.",
     "dob": "06/15/1998",
     "age": "28",
     "sex": "Male",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "8709 Hickory Rd, Minneapolis, MN 55410",
     "insurance": "Medicaid",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
+    "pharmacy": "Walmart Pharmacy — Federal Hwy",
     "emergencyContact": {
       "name": "Charles Nelson",
       "phone": "(704) 555-8837",
@@ -49,7 +49,7 @@ window.EMR_DATA = {
       "bp": "82/58",
       "hr": "132",
       "rr": "34",
-      "temp": "36.6\u00b0C",
+      "temp": "36.6°C",
       "spo2": "84%",
       "pain": "10/10",
       "bmi": "26",
@@ -65,7 +65,7 @@ window.EMR_DATA = {
       "cc": "Can't breathe Left chest and back, worse on the left side",
       "hpi": "Ryan O'Brien is a 28-year-old male presenting with can't breathe left chest and back, worse on the left side. Past medical history includes None significant. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Tension Pneumothorax \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Tension Pneumothorax — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -87,7 +87,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "15.4",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
@@ -108,7 +108,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "242",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -225,14 +225,14 @@ window.EMR_DATA = {
       "clinical": "Can't breathe Left chest and back, worse on the left side",
       "technique": "Standard protocol",
       "findings": "Large left-sided pneumothorax with complete lung collapse. Mediastinal shift to the right. Flattening of the left hemidiaphragm. Multiple left rib fractures (ribs 4-7).",
-      "impression": "TENSION PNEUMOTHORAX \u2014 emergent needle decompression / chest tube required",
+      "impression": "TENSION PNEUMOTHORAX — emergent needle decompression / chest tube required",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
     {
       "id": "img-2",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 Lung",
+      "study": "POCUS – Lung",
       "status": "Final",
       "priority": "STAT",
       "orderedBy": "Dr. ED Physician",
@@ -249,7 +249,7 @@ window.EMR_DATA = {
     {
       "id": "img-3",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 FAST Exam",
+      "study": "POCUS – FAST Exam",
       "status": "Final",
       "priority": "Routine",
       "orderedBy": "Dr. ED Physician",
@@ -259,7 +259,7 @@ window.EMR_DATA = {
       "clinical": "Can't breathe Left chest and back, worse on the left side",
       "technique": "Standard protocol",
       "findings": "No free fluid in Morrison pouch, splenorenal recess, or pelvis. No pericardial effusion.",
-      "impression": "Negative FAST \u2014 no hemoperitoneum",
+      "impression": "Negative FAST — no hemoperitoneum",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -276,7 +276,7 @@ window.EMR_DATA = {
       "clinical": "Can't breathe Left chest and back, worse on the left side",
       "technique": "Standard 12-lead",
       "findings": "Sinus tachycardia at 132 bpm. Low voltage in limb leads. Right axis deviation. No ST changes",
-      "impression": "Sinus tachycardia with low voltage \u2014 consistent with tension pneumothorax",
+      "impression": "Sinus tachycardia with low voltage — consistent with tension pneumothorax",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -328,75 +328,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Ryan O'Brien appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Ryan appears anxious and mildly distressed, sitting upright and favoring his left side. He is cooperative and forthcoming with information, speaking in short sentences due to mild shortness of breath. His distress level is moderate - clearly uncomfortable but not in severe distress.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did can't breathe left chest and back, worse on the left side start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did your symptoms start and what were you doing?",
+      "Can you describe the chest pain - is it sharp, dull, crushing, or stabbing?",
+      "Where exactly is the pain and does it move anywhere else?",
+      "On a scale of 1-10, how severe is your pain and breathing difficulty?",
+      "What makes your symptoms worse or better?",
+      "Have you had any similar episodes before?",
+      "Do you have any other symptoms like lightheadedness, nausea, or sweating?",
+      "Have you had any recent trauma, surgery, or long periods of immobility?",
+      "Do you have any ongoing medical conditions or take any medications?",
+      "Any family history of heart or lung problems?",
+      "Tell me about your smoking history - how much and for how long?",
+      "Have you used any drugs, particularly cocaine or stimulants?",
+      "Any recent travel or flights?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was just sitting in class when I suddenly couldn't catch my breath and got thi.'",
-        "character": "'It's can't breathe left chest and back, worse on the left side \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Social smoker, a few cigarettes a week  Alcohol: 3-4 beers on weekends  Drugs: Denies  Occupation: Construction worker  Living: Lives with girlfriend"
+      "default": "I'm sorry, I'm having trouble focusing because of this chest pain and breathing trouble. Can you ask that again?",
+      "onset": "It started suddenly about 30 minutes ago while I was sitting in my construction safety class. I wasn't doing anything physical, just sitting there listening.",
+      "character": "It's a really sharp, stabbing pain that feels like someone is sticking a knife in my chest. It's definitely not dull or crushing.",
+      "location": "The pain is on the left side of my chest, kind of toward the outside, and it wraps around to my left shoulder blade in the back.",
+      "severity": "The pain is probably a 7 out of 10, and my breathing difficulty is maybe a 6. I can't take deep breaths without the pain getting much worse.",
+      "aggravating": "Taking deep breaths makes it way worse. Moving around or changing positions doesn't seem to help or hurt much.",
+      "relieving": "Nothing really helps. I tried sitting up straight, leaning forward, but nothing makes it better.",
+      "associated": "I feel a little dizzy and lightheaded, probably because I can't catch my breath. No nausea or sweating really.",
+      "denies": "No, I haven't had any chest pounding or racing heart that I noticed. No arm pain or jaw pain. No coughing up blood.",
+      "history": "Never had anything like this before. I've never had chest pain or breathing problems.",
+      "medications": "no medications",
+      "allergies": "NKDA",
+      "family": "No family history of heart attacks or lung problems that I know of. My parents are both healthy.",
+      "social": "I work construction, so I'm pretty active. I smoke maybe 3-4 cigarettes a week socially, have been doing that for about 5 years. I drink a few beers on weekends. No drugs at all."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Vital signs assessment",
+      "General appearance and respiratory effort",
+      "Chest inspection and symmetry",
+      "Chest percussion",
+      "Pulmonary auscultation",
+      "Cardiac auscultation",
+      "Neck vein assessment",
+      "Peripheral pulse examination",
+      "Chest wall palpation",
+      "Abdominal examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Vital signs assessment": "BP 82/58, HR 132, RR 24, SpO2 84% on room air, afebrile at 36.6°C",
+      "General appearance and respiratory effort": "Alert, anxious-appearing male in mild respiratory distress, sitting upright, speaking in short sentences",
+      "Chest inspection and symmetry": "Decreased chest wall movement on the left side, chest appears slightly asymmetric",
+      "Chest percussion": "Hyperresonant to percussion over the left chest, normal resonance on the right",
+      "Pulmonary auscultation": "Markedly diminished breath sounds on the left side, clear breath sounds on the right",
+      "Cardiac auscultation": "Tachycardic regular rhythm, no murmurs, gallops, or rubs appreciated",
+      "Neck vein assessment": "Jugular veins not distended, no tracheal deviation appreciated",
+      "Peripheral pulse examination": "Weak but palpable radial pulses bilaterally, no pulse paradox",
+      "Chest wall palpation": "No chest wall tenderness, no crepitus, no point tenderness over ribs",
+      "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Primary spontaneous pneumothorax (correct diagnosis)",
+      "Pulmonary embolism",
+      "Pleuritis/pleurisy",
+      "Tension pneumothorax",
+      "Myocardial infarction",
+      "Musculoskeletal chest pain",
+      "Panic attack/anxiety"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Young healthy male presenting with chest pain may anchor on anxiety/panic attack or musculoskeletal causes, missing the respiratory etiology",
+      "prematureClosure": "The classic presentation and smoking history may lead to quick diagnosis without considering more serious complications like tension pneumothorax",
+      "availabilityBias": "Recent exposure to MI cases in training may bias toward cardiac causes in young patients with chest pain"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Ryan O'Brien's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're thinking about both cardiac and pulmonary causes. Given this patient's age and presentation, what key historical elements would help you differentiate between these? What would you specifically want to know about the onset and character of his symptoms?",
+      "phase5": "Excellent work on your history and physical. Your exam findings are quite revealing - you found diminished breath sounds and hyperresonance on the left. How do these findings, combined with his sudden onset and risk factors, help narrow your differential? What's the most likely diagnosis now?",
+      "finalDebrief": "This case demonstrates how primary spontaneous pneumothorax classically presents in young, tall, thin males who smoke. Notice how your differential appropriately evolved from the broad 'chest pain in a young male' to focus on the respiratory findings. The key teaching points are recognizing the classic demographics, the sudden onset pleuritic chest pain, and the physical exam findings of diminished breath sounds with hyperresonance."
     }
-}
+  }
 };

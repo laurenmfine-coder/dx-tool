@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Daniel Castillo-Perez",
-  "patientHPI": "This is the third time in two months that my face has swollen up like this, and I have no idea what's triggering it or making it happen.",
+      "patientHPI": "This is the third time in two months that my face has swollen up like this, and I have no idea what's triggering it or making it happen.",
       "dob": "01/07/1986",
       "age": "40",
       "sex": "Male",
@@ -951,27 +951,24 @@ window.EMR_DATA = {
       "Prior workup",
       "Skin prick testing negative, C4 normal x2"
     ]
-  ]
-,
+  ],
   "references": [
-  {
-    "id": "REF-AE-004",
-    "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
-    "doi": "10.1186/1865-1380-5-39",
-    "pmid": "23131076",
-    "access": "Open Access (CC BY)",
-    "validates": [
-      "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
-      "C4 screening to distinguish HAE from other causes",
-      "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
-      "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
-      "Anti-C1-INH autoantibodies in acquired form"
-    ]
-  }
-]
-,
-
+    {
+      "id": "REF-AE-004",
+      "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
+      "doi": "10.1186/1865-1380-5-39",
+      "pmid": "23131076",
+      "access": "Open Access (CC BY)",
+      "validates": [
+        "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
+        "C4 screening to distinguish HAE from other causes",
+        "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
+        "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
+        "Anti-C1-INH autoantibodies in acquired form"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Idiopathic angioedema (histaminergic vs non-histaminergic subtypes): histaminergic type responds to antihistamines and often has concurrent urticaria. Non-histaminergic idiopathic angioedema resembles HAE clinically but has normal complement — may be bradykinin-mediated.",
@@ -989,75 +986,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Daniel Castillo-Perez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Daniel appears anxious and frustrated about the recurring facial swelling episodes, particularly concerned about the unpredictable nature and lack of identified triggers. He is very forthcoming with information, eager to find answers, and demonstrates mild distress about the impact on his daily activities and appearance.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did third episode facial swelling in 2 months \u2014 no trigger identified start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happens when your face swells?",
+      "Where specifically does the swelling occur on your face?",
+      "How quickly does the swelling develop and how long does it last?",
+      "Have you noticed any patterns or potential triggers between episodes?",
+      "Do you experience any difficulty breathing, swallowing, or throat tightness?",
+      "Are there any other symptoms that accompany the facial swelling?",
+      "What medications are you currently taking for this condition?",
+      "Have you started any new medications, foods, or products recently?",
+      "Do you have any known allergies?",
+      "How severe is the swelling on a scale of 1-10?",
+      "What treatments have you tried and how effective were they?",
+      "Has anyone in your family experienced similar episodes?",
+      "Do you have any other medical conditions or take any other medications?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Daniel Castillo-Perez presents with third episode facial swelling in 2 months \u2014 .'",
-        "character": "'It's third episode facial swelling in 2 months \u2014 no trigger identified \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cetirizine; Famotidine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Prior workup: Skin prick testing negative, C4 normal x2"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that? I just want to figure out why my face keeps swelling up.",
+      "onset": "The first episode was about 2 months ago. This current episode started yesterday morning when I woke up. Each time it just appears suddenly, usually overnight or in the morning.",
+      "character": "It's a puffy, swollen feeling, like my face is inflated. The skin feels tight and stretched. It's not really painful, more uncomfortable and embarrassing.",
+      "location": "Mainly around my eyes and lips. Sometimes my cheeks get puffy too. It's always on both sides of my face, never just one side.",
+      "severity": "I'd say it's about a 6 out of 10 in terms of how it affects me. It's not painful but it's very noticeable and makes me self-conscious about going to work or being in public.",
+      "aggravating": "I honestly can't identify anything that makes it worse. That's what's so frustrating - there doesn't seem to be any pattern or trigger I can avoid.",
+      "relieving": "The antihistamine seems to help somewhat, and it does go away on its own after a day or two. Ice packs provide some comfort but don't really reduce the swelling.",
+      "associated": "No, just the facial swelling. No rash, no itching, no hives anywhere else on my body. No breathing problems or throat symptoms, thank goodness.",
+      "denies": "No difficulty breathing, no throat tightness, no tongue swelling, no rash or hives, no abdominal pain, no recent illness or fever, no joint pain.",
+      "history": "This is the third episode in two months. The previous two episodes were similar - sudden onset facial swelling that lasted about 1-2 days each time before resolving on their own.",
+      "medications": "Cetirizine; Famotidine",
+      "allergies": "NKDA",
+      "family": "No one in my family has ever had anything like this. No known allergies or autoimmune conditions in the family that I'm aware of.",
+      "social": "I work in accounting, mostly desk work. I don't smoke, drink alcohol occasionally on weekends, no recreational drugs. No recent travel or exposure to new environments."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect face and periorbital region",
+      "Palpate facial swelling for pitting",
+      "Examine oral cavity and tongue",
+      "Inspect skin for urticaria or rash",
+      "Auscultate lungs",
+      "Examine neck for lymphadenopathy",
+      "Check for hand and foot swelling",
+      "Assess mucous membranes",
+      "Palpate thyroid",
+      "Examine conjunctiva"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect face and periorbital region": "Bilateral periorbital edema and lip swelling, asymmetric with more pronounced swelling of upper lip, no erythema or warmth",
+      "Palpate facial swelling for pitting": "Non-pitting edema, soft and compressible, no tenderness to palpation",
+      "Examine oral cavity and tongue": "Tongue normal size and appearance, no mucosal swelling, no oral lesions",
+      "Inspect skin for urticaria or rash": "No urticaria, wheals, or rash on face, neck, arms, or visible skin surfaces",
+      "Auscultate lungs": "Clear to auscultation bilaterally, no wheezing or stridor",
+      "Examine neck for lymphadenopathy": "No cervical, submandibular, or supraclavicular lymphadenopathy",
+      "Check for hand and foot swelling": "No edema of hands, fingers, feet, or ankles",
+      "Assess mucous membranes": "Mucous membranes pink and moist, no pallor or cyanosis",
+      "Palpate thyroid": "Thyroid normal size, no nodules or enlargement palpated",
+      "Examine conjunctiva": "Conjunctiva clear, no injection or chemosis"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Idiopathic Angioedema (correct diagnosis)",
+      "Hereditary Angioedema",
+      "ACE inhibitor-induced Angioedema",
+      "Anaphylaxis",
+      "Superior Vena Cava Syndrome",
+      "Allergic Contact Dermatitis",
+      "Cellulitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the previous diagnosis of idiopathic angioedema without considering that recurrent episodes might suggest hereditary angioedema or other underlying causes",
+      "prematureClosure": "Risk of stopping investigation after confirming angioedema without exploring why it's recurring despite treatment, or missing hereditary angioedema workup",
+      "availabilityBias": "Risk of immediately thinking of common allergic reactions or drug-induced angioedema rather than considering less common causes like C1 esterase inhibitor deficiency"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Daniel Castillo-Perez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You're seeing recurrent facial swelling in a 40-year-old male. What are the key distinguishing features you need to explore between different types of angioedema? Think about the significance of the recurrent, unprovoked nature of these episodes.",
+      "phase5": "You've identified angioedema without urticaria in a patient with recurrent episodes. What does the absence of wheals and the recurrent pattern suggest about the underlying mechanism? What additional workup might be indicated given the clinical presentation?",
+      "finalDebrief": "This case illustrates the challenge of recurrent idiopathic angioedema. Note how the absence of urticaria, normal C4 levels, and negative allergy testing helped narrow the differential. Consider when recurrent episodes might warrant C1 esterase inhibitor testing to rule out hereditary angioedema, and discuss the management approach for idiopathic cases."
     }
-}
+  }
 };

@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Giovanna DeLuca",
-  "patientHPI": "I've been having this pressure in my chest on and off for about six hours now - it comes and goes but it's really bothering me and I've never felt anything quite like this before.",
+    "patientHPI": "I've been having this pressure in my chest on and off for about six hours now - it comes and goes but it's really bothering me and I've never felt anything quite like this before.",
     "dob": "03/06/1963",
     "age": "63",
     "sex": "Female",
@@ -328,75 +328,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Giovanna DeLuca appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Ms. DeLuca appears anxious and concerned about her symptoms, frequently touching her chest while speaking. She is forthcoming with information but seems worried this might be related to her mother's heart attack, though she tries to downplay the severity of her discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did intermittent chest pressure for 6 hours start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what this chest pressure feels like?",
+      "Where specifically do you feel the pressure, and does it go anywhere else?",
+      "On a scale of 1-10, how would you rate the discomfort?",
+      "What were you doing when this first started?",
+      "Does anything make the pressure better or worse?",
+      "Have you noticed any shortness of breath, nausea, or sweating?",
+      "How long does each episode last when it comes on?",
+      "Have you ever experienced anything like this before?",
+      "Are you having any arm pain, jaw pain, or back pain?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Has anyone in your family had heart problems?",
+      "Have you been more stressed or active than usual lately?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having this pressure in my chest on and off for about six hours now - .'",
-        "character": "'It's intermittent chest pressure for 6 hours \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine; Metoprolol Succinate; Clopidogrel; Insulin Glargine.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Mother: MI at age 65  Father: Stroke at age 70",
-        "social": "Tobacco: Never  Alcohol: Rare  Occupation: Retired teacher  Living: Lives alone, independent ADLs"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently?",
+      "onset": "It started around 2 PM today while I was doing some light cleaning around the house. It just came on gradually at first.",
+      "character": "It feels like someone is pressing down on my chest, like a heavy weight or tight band across it. Not really sharp, just this constant pressure.",
+      "location": "Right here in the center of my chest, and sometimes I feel it going up toward my left shoulder and down my left arm a little.",
+      "severity": "I'd say it's about a 6 out of 10 when it's at its worst. It's uncomfortable enough that I had to sit down and it made me worry.",
+      "aggravating": "It seems to get worse when I try to do anything physical, even just walking up my stairs makes it more noticeable.",
+      "relieving": "Resting seems to help a little bit, and I tried some antacids thinking it might be heartburn, but that didn't really do much.",
+      "associated": "I have been feeling a little short of breath, especially when the pressure is worse, and I've been sweating more than usual even though I'm not hot.",
+      "denies": "No sharp stabbing pain, no fever, no vomiting, and the pain doesn't change when I breathe deeply or move around.",
+      "history": "I've never had chest pain like this before. Sometimes I get heartburn, but this feels completely different from that.",
+      "medications": "Amlodipine; Metoprolol Succinate; Clopidogrel; Insulin Glargine",
+      "allergies": "Penicillin",
+      "family": "My mother had a heart attack when she was 65, and my father had a stroke at 70. That's actually part of why I'm so worried about this.",
+      "social": "I'm a retired teacher, I've never smoked, and I rarely drink alcohol. I live alone but I'm pretty independent with everything I need to do."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Cardiac auscultation",
+      "Lung auscultation",
+      "Blood pressure both arms",
+      "Peripheral pulse examination",
+      "Jugular venous distension assessment",
+      "Lower extremity edema check",
+      "Abdominal examination",
+      "Chest wall palpation",
+      "Carotid pulse assessment",
+      "General appearance and distress level"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Cardiac auscultation": "Regular rate and rhythm, normal S1 and S2, no murmurs, rubs, or gallops",
+      "Lung auscultation": "Clear to auscultation bilaterally, no crackles, wheezes, or rhonchi",
+      "Blood pressure both arms": "Right arm 148/88, Left arm 145/86",
+      "Peripheral pulse examination": "Distal pulses intact bilaterally, no peripheral edema",
+      "Jugular venous distension assessment": "JVP normal, no distension at 45 degrees",
+      "Lower extremity edema check": "No pedal edema, no calf tenderness",
+      "Abdominal examination": "Soft, non-tender, no masses or organomegaly",
+      "Chest wall palpation": "No chest wall tenderness, no reproducible pain with palpation",
+      "Carotid pulse assessment": "Carotid upstrokes normal bilaterally, no bruits",
+      "General appearance and distress level": "Appears mildly anxious but in no acute distress, alert and oriented"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Unstable Angina (correct diagnosis)",
+      "Non-ST elevation myocardial infarction",
+      "Gastroesophageal reflux disease",
+      "ST-elevation myocardial infarction",
+      "Pulmonary embolism",
+      "Chest wall pain/costochondritis",
+      "Anxiety/panic disorder"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on GERD given patient's trial of antacids and atypical presentation in older diabetic female",
+      "prematureClosure": "May stop investigating after normal physical exam despite high-risk patient profile with multiple cardiac risk factors",
+      "availabilityBias": "Tendency to consider more common diagnoses like GERD or anxiety rather than ACS in patients with atypical presentations"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Giovanna DeLuca's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, I see you're considering several possibilities. Given this patient's risk factors - diabetes, hypertension, CKD, prior TIA, and strong family history - which conditions would you want to rule out first? What specific questions might help you distinguish between cardiac and non-cardiac causes?",
+      "phase5": "Your history and physical exam findings are thorough. The patient has intermittent chest pressure with radiation, associated dyspnea, and multiple cardiac risk factors, but a relatively normal physical exam. How does this constellation of findings influence your differential? What would be your next steps in evaluation?",
+      "finalDebrief": "This case highlights the challenge of diagnosing unstable angina, particularly in high-risk patients like Ms. DeLuca with diabetes and multiple cardiovascular risk factors. Her presentation with exertional chest pressure, radiation to the arm, and associated dyspnea was classic despite her normal physical exam. How did your thinking evolve as you gathered more information, and what key features ultimately pointed you toward the cardiac diagnosis?"
     }
-}
+  }
 };

@@ -529,75 +529,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Dorothy Campbell is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Mrs. Campbell appears anxious and somewhat embarrassed about her recurring episodes, occasionally becoming tearful when discussing how these episodes frighten her daughter. She is cooperative but tends to minimize her symptoms and express guilt about 'not taking better care' of her diabetes since her husband passed away.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did altered mental status start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me more about what happened when your daughter found you this morning?",
+      "How has your appetite and eating pattern changed recently?",
+      "Are you taking your insulin doses as prescribed even when you're not eating much?",
+      "Have you noticed any changes in your blood sugar readings at home?",
+      "Tell me about your typical daily meals - what and when do you usually eat?",
+      "Have you had any recent illness, vomiting, or changes in your kidney function?",
+      "Are you experiencing any symptoms of kidney problems like swelling or changes in urination?",
+      "Have you had any medication changes recently?",
+      "Do you ever skip meals or forget to eat after taking your insulin?",
+      "Have you noticed these episodes happening at particular times of day?",
+      "Are you experiencing any stress or depression since your husband passed?",
+      "Have you had any recent lab work or doctor visits?",
+      "Do you check your blood sugar regularly at home?"
     ],
     "patientResponses": {
-      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started My daughter found me confused and sweaty last month, and they said my blood suga.'",
-      "character": "'It's altered mental status — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Severe Hypoglycemia.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Insulin Glargine 18 units SubQ QHS; Insulin Lispro 4 units SubQ before meals; Amlodipine 5mg daily; Losartan 50mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Clopidogrel 75mg daily; Levothyroxine 50mcg daily.'",
-      "allergies": "'My allergies are Metformin, Glipizide.'",
-      "family": "Father: T2DM, CAD, deceased at 72  Mother: Hypertension, Osteoporosis, deceased at 88  Sister: T2DM, alive at 77",
-      "social": "Occupation: Retired elementary school librarian; retired 2010  Marital: Widowed (husband deceased 2019); daughter Susan checks daily  Tobacco: Never smoker  Alcohol: Rare; 1 glass wine occasionally  Drugs: Denies"
+      "default": "I'm sorry, I'm not sure I understand what you're asking. Could you explain that differently?",
+      "onset": "My daughter found me around 8 AM this morning sitting in my kitchen chair, confused and sweaty. I don't really remember much about it, but she said I didn't recognize her at first and was talking nonsense.",
+      "character": "I felt very shaky, sweaty, and confused - like my mind was in a fog. My heart was racing and I felt weak all over.",
+      "location": "The shakiness was all over my body, but I felt particularly weak in my legs and arms.",
+      "severity": "When it happens, it's terrible - probably an 8 out of 10. I can't think straight and I feel like I might pass out. It really scares me.",
+      "aggravating": "It seems to happen in the morning, especially if I haven't eaten much the night before. Taking my insulin and then not eating enough seems to make it worse.",
+      "relieving": "My daughter gave me some orange juice and crackers, and I started feeling better within about 15-20 minutes.",
+      "associated": "I've been having less appetite lately, some nausea, and I've been more tired than usual. Sometimes I feel dizzy when I stand up.",
+      "denies": "I haven't had chest pain, shortness of breath, or any falls. No fever or chills. I'm not having any vision changes or numbness.",
+      "history": "This is the third time in six months. The other times were similar - found confused and sweaty in the morning by my daughter. Each time got better with food or juice.",
+      "medications": "Insulin Glargine 18 units SubQ QHS; Insulin Lispro 4 units SubQ before meals; Amlodipine 5mg daily; Losartan 50mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Clopidogrel 75mg daily; Levothyroxine 50mcg daily",
+      "allergies": "Metformin, Glipizide",
+      "family": "My father had diabetes and died of a heart attack at 72. My mother had high blood pressure. My sister also has diabetes but she's doing well.",
+      "social": "I'm a retired elementary school librarian, been retired since 2010. My husband passed away in 2019 and since then my daughter Susan checks on me daily. I never smoked and only rarely have a glass of wine. No drugs."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "General appearance and mental status",
+      "Vital signs including orthostatic measurements",
+      "Cardiovascular examination",
+      "Neurological examination including cognitive assessment",
+      "Skin examination for diaphoresis and temperature",
       "Abdominal examination",
-      "Extremity assessment",
-      "Skin examination",
-      "Targeted system examination"
+      "Assessment for dehydration and volume status",
+      "Extremity examination for edema",
+      "Point-of-care glucose measurement"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with Severe Hypoglycemia. Document specifically what you observe."
+      "General appearance and mental status": "Alert and oriented x3 now, but appears fatigued. Mild anxiety present. No acute distress currently.",
+      "Vital signs including orthostatic measurements": "BP 128/68 sitting, 118/62 standing; HR 72 sitting, 88 standing. Temperature 97.8°F, SpO2 96% on room air.",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, rubs, or gallops. Capillary refill <2 seconds. No JVD.",
+      "Neurological examination including cognitive assessment": "CN II-XII intact, strength 5/5 throughout, reflexes 2+ and symmetric. No focal deficits. MMSE 28/30.",
+      "Skin examination for diaphoresis and temperature": "Skin is cool and slightly clammy. No rash or lesions. Good turgor for age.",
+      "Abdominal examination": "Soft, non-tender, non-distended. Bowel sounds present. No hepatosplenomegaly.",
+      "Assessment for dehydration and volume status": "Mild volume depletion suggested by orthostatic changes. Mucous membranes slightly dry.",
+      "Extremity examination for edema": "Trace bilateral ankle edema, consistent with known CKD. No cyanosis or clubbing.",
+      "Point-of-care glucose measurement": "Current glucose 78 mg/dL (normal now after treatment, but history consistent with severe hypoglycemia)"
     },
     "ddxTargets": [
-      "Severe Hypoglycemia (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Severe Hypoglycemia (Insulin-Induced, CKD-Related) (correct diagnosis)",
+      "Hypoglycemia due to decreased oral intake with continued insulin",
+      "Insulin overdose or medication error",
+      "Acute coronary syndrome",
+      "Stroke or transient ischemic attack",
+      "Delirium from infection or metabolic cause",
+      "Medication-induced altered mental status"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Hypoglycemia, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Severe Hypoglycemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Severe Hypoglycemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'confusion in elderly' and pursuing dementia or delirium workup while missing the hypoglycemic episodes pattern",
+      "prematureClosure": "Risk of stopping at 'diabetes with hypoglycemia' without recognizing the role of CKD in reducing insulin clearance and need for dose adjustment",
+      "availabilityBias": "Recent cases of elderly patients with falls or UTIs causing confusion may lead away from considering metabolic causes"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Dorothy Campbell's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Severe Hypoglycemia (Insulin-Induced, CKD-Related). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider what additional information would help you differentiate between the various causes of altered mental status in an elderly diabetic patient. What specific questions about her diabetes management and recent changes would be most revealing?",
+      "phase5": "Now that you've gathered your history and physical exam findings, think about the pattern of these episodes and the patient's medication regimen. How might her chronic kidney disease affect her insulin metabolism? What laboratory studies would help confirm your suspected diagnosis?",
+      "finalDebrief": "This case highlights the importance of recognizing how comorbid conditions like CKD can affect medication metabolism in elderly patients. The combination of decreased appetite, continued insulin dosing, and reduced insulin clearance due to kidney disease created a perfect setup for recurrent hypoglycemia. How does this change your approach to diabetes management in elderly patients with multiple comorbidities?"
     }
   }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Brianna Thompson",
-  "patientHPI": "My throat started hurting four days ago, mainly on the left side, and it's gotten so much worse - yesterday I could barely swallow my food, and now even drinking water is painful. I had a fever of over 102 at home, and people are telling me my voice sounds funny and muffled.",
+    "patientHPI": "My throat started hurting four days ago, mainly on the left side, and it's gotten so much worse - yesterday I could barely swallow my food, and now even drinking water is painful. I had a fever of over 102 at home, and people are telling me my voice sounds funny and muffled.",
     "dob": "08/28/1997",
     "age": 27,
     "sex": "Female",
@@ -174,25 +174,109 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "16.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "82", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Bands", "value": "6", "unit": "%", "range": "0-5", "flag": "H" },
-            { "test": "Lymphocytes", "value": "10", "unit": "%", "range": "20-40", "flag": "L" },
-            { "test": "Hemoglobin", "value": "13.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.2", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "312", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "16.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "82",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "6",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "10",
+              "unit": "%",
+              "range": "20-40",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "312",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "98", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -253,15 +337,42 @@ window.EMR_DATA = {
     "Maternal grandmother: T2DM, alive at 78"
   ],
   "socialHistory": [
-    ["Occupation", "Elementary school teacher"],
-    ["Marital", "Single, in relationship"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 1-2 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Runs 3x/week; yoga 2x/week"],
-    ["Housing", "Lives alone in apartment"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Elementary school teacher"
+    ],
+    [
+      "Marital",
+      "Single, in relationship"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 1-2 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Runs 3x/week; yoga 2x/week"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "peritonsillar-abscess-v2",
@@ -272,75 +383,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Brianna Thompson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Brianna appears anxious and uncomfortable, frequently touching her neck and speaking in a muffled, 'hot potato' voice. She is cooperative but clearly in significant distress, wincing with each swallow and appearing fatigued from the illness. She readily provides information but seems worried about the severity of her symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did ent / airway emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when and how your throat pain started?",
+      "Is the pain worse on one side compared to the other?",
+      "How would you rate your pain on a scale of 1-10?",
+      "Have you noticed any difficulty swallowing or changes in your voice?",
+      "Have you had any fevers, and what was the highest temperature?",
+      "Have you noticed any swelling in your neck or jaw area?",
+      "Do you have any difficulty opening your mouth fully?",
+      "Have you had similar throat infections before?",
+      "What medications are you currently taking?",
+      "Do you have any known allergies to medications?",
+      "Have you tried anything to relieve the pain?",
+      "Any nausea, vomiting, or difficulty breathing?",
+      "Does anyone in your family have a history of throat problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My throat started hurting four days ago, mainly on the left side, and it's gotte.'",
-        "character": "'It's ent / airway emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Peritonsillar Abscess.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Omeprazole 20mg daily; Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies are Erythromycin.'",
-        "family": "Mother: Asthma, GERD, alive at 52  Father: Hypertension, alive at 55  Brother: Recurrent tonsillitis (tonsillectomy age 12), age 24",
-        "social": "Occupation: Elementary school teacher  Marital: Single, in relationship  Tobacco: Never smoker  Alcohol: Social, 1-2 drinks/week  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? My head feels a bit foggy from the fever and pain.",
+      "onset": "It started four days ago as just a mild sore throat, but by day two it was clearly worse on my left side, and yesterday it became excruciating.",
+      "character": "It's a deep, throbbing pain that feels like there's something swollen and pressing inside my throat, especially when I try to swallow.",
+      "location": "Definitely worse on the left side of my throat, and the pain shoots up toward my left ear whenever I swallow.",
+      "severity": "Right now it's a 9 out of 10 - I can barely swallow water, and even my own saliva is painful. I haven't been able to eat solid food since yesterday.",
+      "aggravating": "Swallowing anything makes it much worse, even just saliva. Opening my mouth wide is really difficult and painful too.",
+      "relieving": "I've been taking ibuprofen which helps a tiny bit, but nothing really makes it better. Ice chips seemed to help at first but now even cold hurts.",
+      "associated": "I've had a fever up to 102.5, chills, and people keep telling me my voice sounds muffled and strange. I'm drooling more because swallowing hurts so much.",
+      "denies": "No trouble breathing, no rash, no stomach pain. I'm not having chest pain or difficulty with anything other than my throat.",
+      "history": "I've had strep throat several times over the past few years - probably four or five times. I usually get antibiotics and it clears up, but this feels much worse than those times.",
+      "medications": "Omeprazole 20mg daily; Ibuprofen 400mg PRN",
+      "allergies": "Erythromycin",
+      "family": "My mom has GERD and asthma, my dad has high blood pressure, and my younger brother used to get tonsillitis all the time until he had his tonsils out when he was 12.",
+      "social": "I'm an elementary school teacher, so I'm exposed to lots of germs. I'm single but in a relationship, I don't smoke, and I only drink socially maybe once or twice a week. No drugs."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "Oral cavity and oropharyngeal inspection",
+      "Palpation of cervical lymph nodes",
+      "Assessment of trismus (mouth opening)",
+      "Inspection of tonsillar pillars and soft palate",
+      "Palpation of submandibular and parotid glands",
+      "Assessment of voice quality and speech",
+      "Examination of external neck for swelling",
+      "Vital signs assessment",
+      "General appearance and toxicity assessment",
+      "Assessment of drooling and ability to handle secretions"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Peritonsillar Abscess. Document specifically what you observe."
+      "Oral cavity and oropharyngeal inspection": "Left tonsillar pillar significantly swollen and erythematous with visible bulging mass, uvula deviated to the right, difficulty visualizing left tonsil",
+      "Palpation of cervical lymph nodes": "Tender, enlarged lymph nodes palpable on left anterior cervical chain, approximately 2-3cm, mobile",
+      "Assessment of trismus (mouth opening)": "Limited mouth opening to approximately 2.5cm due to pain and muscle spasm, patient unable to open fully",
+      "Inspection of tonsillar pillars and soft palate": "Marked asymmetry with left-sided bulging of anterior tonsillar pillar, soft palate edematous on left, possible fluctuance",
+      "Palpation of submandibular and parotid glands": "Left submandibular gland mildly tender and enlarged, parotid glands normal bilaterally",
+      "Assessment of voice quality and speech": "Muffled 'hot potato' voice, difficulty articulating clearly, patient sounds like speaking with mouth full",
+      "Examination of external neck for swelling": "No obvious external neck swelling or masses visible, no erythema of overlying skin",
+      "Vital signs assessment": "Temperature 101.4°F, BP 122/76, HR 96, SpO2 98% on room air, appears mildly dehydrated",
+      "General appearance and toxicity assessment": "Ill-appearing but not toxic, sitting upright, occasionally spitting saliva into tissue, looks uncomfortable",
+      "Assessment of drooling and ability to handle secretions": "Mild drooling noted, patient frequently dabbing mouth with tissue, able to handle secretions but with difficulty"
     },
     "ddxTargets": [
-        "Peritonsillar Abscess (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Peritonsillar Abscess (correct diagnosis)",
+      "Severe Streptococcal Pharyngitis",
+      "Parapharyngeal Abscess",
+      "Epiglottitis",
+      "Ludwig's Angina",
+      "Infectious Mononucleosis",
+      "Retropharyngeal Abscess"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Peritonsillar Abscess, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Peritonsillar Abscess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Peritonsillar Abscess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Don't anchor on 'just another strep throat' given the patient's history of recurrent streptococcal pharyngitis - the unilateral presentation and severity suggest a complication",
+      "prematureClosure": "Avoid stopping at strep pharyngitis without considering why this episode is more severe with unilateral findings, trismus, and voice changes",
+      "availabilityBias": "Elementary school teachers commonly get viral URIs and strep, but the constellation of unilateral pain, trismus, and muffled voice should raise suspicion for abscess"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Brianna Thompson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Peritonsillar Abscess. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good differential list. I notice you included both simple pharyngitis and more serious deep space infections. As you interview this patient, pay particular attention to the timeline, laterality, and any signs that might suggest this is more than just pharyngitis. What specific questions will help you differentiate between these diagnoses?",
+      "phase5": "Excellent history and physical. You've identified some key findings - the unilateral presentation, trismus, and voice changes are particularly significant. How do these findings help narrow your differential? What's the most likely diagnosis given the constellation of unilateral throat pain, limited mouth opening, and muffled voice in a patient with recurrent strep?",
+      "finalDebrief": "This case illustrates how a common presentation can evolve into a serious complication. Your initial differential appropriately included both simple pharyngitis and more complex infections. The key discriminating features here were the unilateral nature, trismus, voice changes, and the severity despite the patient's history of recurrent strep. This demonstrates why we must always consider complications when familiar presentations seem more severe than usual."
     }
-}
+  }
 };

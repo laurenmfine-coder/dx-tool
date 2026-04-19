@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Aaliyah Robinson",
-  "patientHPI": "I was at school and they gave me rice even though I'm not supposed to have it, and then I started throwing up really bad for like two hours straight - now I feel so weak and dizzy I can barely sit up.",
+      "patientHPI": "I was at school and they gave me rice even though I'm not supposed to have it, and then I started throwing up really bad for like two hours straight - now I feel so weak and dizzy I can barely sit up.",
       "dob": "02/24/2019",
       "age": "7",
       "sex": "Female",
@@ -1029,95 +1029,102 @@ window.EMR_DATA = {
       "Teaching",
       "FPIES is NON-IgE, T-cell mediated — EpiPen does NOT work, ondansetron is first-line"
     ]
-  ]
-,"references":[
-  {
-    "id": "FPIES-Consensus-2017",
-    "title": "International consensus guidelines for FPIES: executive summary",
-    "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2017,
-    "doi": "10.1016/j.jaci.2016.12.966",
-    "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "FPIES criteria: major + minor",
-      "Ondansetron first-line (NOT epi)",
-      "Chronic FPIES: insidious FTT",
-      "Non-IgE, T-cell mediated",
-      "60% resolution by age 3-5"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "FPIES-Consensus-2017",
+      "title": "International consensus guidelines for FPIES: executive summary",
+      "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2017,
+      "doi": "10.1016/j.jaci.2016.12.966",
+      "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "FPIES criteria: major + minor",
+        "Ondansetron first-line (NOT epi)",
+        "Chronic FPIES: insidious FTT",
+        "Non-IgE, T-cell mediated",
+        "60% resolution by age 3-5"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Aaliyah Robinson is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Aaliyah appears pale and lethargic, lying quietly with her mother who is visibly upset and frustrated about the school's mistake. The child responds weakly but cooperatively to questions, while mother provides most details about the FPIES history and today's incident.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what happened at school today?",
+      "What did Aaliyah eat and when?",
+      "When did the vomiting start after eating?",
+      "How many times has she vomited and what did it look like?",
+      "Has she had any rash, hives, or breathing problems?",
+      "What treatment did the school nurse give?",
+      "Has Aaliyah had reactions like this before?",
+      "What foods is she allergic to?",
+      "How was her FPIES originally diagnosed?",
+      "Does she have a 504 plan at school?",
+      "Has she been able to keep any fluids down?",
+      "Any fever, diarrhea, or blood in vomit?",
+      "What medications work for her FPIES episodes?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Ondansetron; NS bolus; Epinephrine.'",
-        "allergies": "'My allergies: Rice, Oat.'",
-        "family": "Mother: eczema",
-        "social": "History: Diagnosed FPIES to rice/oat at 5 months \u2014 multiple ER visits before diagnosis  Issue: School gave rice despite 504 plan \u2014 school nurse gave EpiPen (wrong treatment for FPIES)  Teaching: FPIES is NON-IgE, T-cell mediated \u2014 EpiPen does NOT work, ondansetron is first-line"
+      "default": "I feel really sick... mommy can you tell them?",
+      "onset": "I ate the rice at lunch and then my tummy started hurting really bad about an hour later, then I threw up a lot",
+      "character": "It's like throwing up everything in my stomach over and over, and I feel so weak and dizzy",
+      "location": "My whole tummy hurts and I feel sick all over",
+      "severity": "It's a 9 out of 10 - I feel terrible and can't even sit up",
+      "aggravating": "Any movement makes me feel more sick, and I can't keep anything down",
+      "relieving": "Nothing helped - the shot the nurse gave me didn't do anything",
+      "associated": "I'm really tired, dizzy, and everything looks blurry. No itching or trouble breathing though",
+      "denies": "No rash, no trouble breathing, no hives, no fever, no diarrhea yet",
+      "history": "Yes, this happened before with rice and oats when I was a baby - that's how we found out about my FPIES",
+      "medications": "Ondansetron; NS bolus; Epinephrine",
+      "allergies": "Rice, Oat",
+      "family": "My mom has eczema but no food allergies like mine",
+      "social": "I'm in second grade and usually the lunch ladies know not to give me rice, but there was a substitute today"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and mental status",
+      "Vital signs assessment",
+      "Skin examination for rash or hives",
+      "HEENT exam for dehydration signs",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Capillary refill and peripheral perfusion",
+      "Neurologic assessment",
+      "Lymph node examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and mental status": "Pale, lethargic 7-year-old lying supine, appears ill but responds appropriately",
+      "Vital signs assessment": "BP 78/48 (hypotensive), HR 142 (tachycardic), Temp 36.2°C, SpO2 96%, weight appears decreased",
+      "Skin examination for rash or hives": "Pale, cool skin with delayed capillary refill, no urticaria, angioedema, or rash present",
+      "HEENT exam for dehydration signs": "Dry mucous membranes, sunken eyes, no lymphadenopathy or oral lesions",
+      "Cardiovascular examination": "Tachycardic regular rhythm, weak peripheral pulses, no murmur",
+      "Pulmonary examination": "Clear breath sounds bilaterally, no wheezing, stridor, or respiratory distress",
+      "Abdominal examination": "Soft, mildly tender diffusely, hypoactive bowel sounds, no organomegaly",
+      "Capillary refill and peripheral perfusion": "Capillary refill 3-4 seconds, cool extremities, weak peripheral pulses",
+      "Neurologic assessment": "Alert but lethargic, appropriate responses, no focal deficits",
+      "Lymph node examination": "No significant lymphadenopathy palpated"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "FPIES (Food Protein-Induced Enterocolitis Syndrome) (correct diagnosis)",
+      "Viral gastroenteritis",
+      "Food poisoning/bacterial gastroenteritis",
+      "IgE-mediated food allergy with anaphylaxis",
+      "Sepsis",
+      "Cyclic vomiting syndrome",
+      "Acute appendicitis"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Don't anchor on the EpiPen administration - FPIES is non-IgE mediated and won't respond to epinephrine",
+      "prematureClosure": "Don't assume this is typical anaphylaxis because EpiPen was given - the delayed onset and GI-predominant symptoms suggest FPIES",
+      "availabilityBias": "FPIES is less common than viral gastroenteritis, but the known history and specific food trigger make it most likely"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Aaliyah Robinson: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified several possibilities including FPIES and anaphylaxis. What key historical features will help you distinguish between IgE-mediated and non-IgE mediated food reactions? Think about timing, symptoms, and response to treatment.",
+      "phase5": "Your exam shows hypotension and dehydration without urticaria or respiratory symptoms. The EpiPen was ineffective. How does this clinical picture, combined with the known FPIES history and rice exposure, help narrow your differential?",
+      "finalDebrief": "This case highlights the critical difference between IgE-mediated food allergies and FPIES. FPIES presents with delayed GI symptoms, doesn't respond to epinephrine, and requires ondansetron and IV fluids. How will you ensure proper school education to prevent future episodes?"
     }
-}
+  }
 };

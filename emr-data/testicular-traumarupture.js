@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dylan Oconnor",
-  "patientHPI": "I was playing lacrosse during practice yesterday when I took a really hard hit from another player's stick right between my legs, and now I'm having severe pain and swelling down there. The pain is getting worse instead of better, and I'm worried something might be seriously wrong because it doesn't feel like a normal sports injury.",
+    "patientHPI": "I was playing lacrosse during practice yesterday when I took a really hard hit from another player's stick right between my legs, and now I'm having severe pain and swelling down there. The pain is getting worse instead of better, and I'm worried something might be seriously wrong because it doesn't feel like a normal sports injury.",
     "dob": "10/28/2001",
     "age": 23,
     "sex": "Male",
@@ -136,10 +136,34 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.0", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "16.0", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "47.2", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "238", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.0",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "16.0",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "47.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "238",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -207,15 +231,42 @@ window.EMR_DATA = {
     "No family history of sudden cardiac death or cardiomyopathy"
   ],
   "socialHistory": [
-    ["Occupation", "College student (Senior) / NCAA lacrosse player"],
-    ["Marital", "Single"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Social — weekends, 3-4 drinks"],
-    ["Drugs", "Denies"],
-    ["Exercise", "NCAA Division II lacrosse; weight training 5x/week"],
-    ["Housing", "Off-campus apartment with teammates"],
-    ["Safety", "Wears protective equipment (lacrosse); seatbelt; no helmet for cycling"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "College student (Senior) / NCAA lacrosse player"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Social — weekends, 3-4 drinks"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "NCAA Division II lacrosse; weight training 5x/week"
+    ],
+    [
+      "Housing",
+      "Off-campus apartment with teammates"
+    ],
+    [
+      "Safety",
+      "Wears protective equipment (lacrosse); seatbelt; no helmet for cycling"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "testicular-traumarupture",
@@ -226,75 +277,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Dylan Oconnor is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Dylan appears anxious and in significant distress, frequently shifting position trying to find comfort. He is cooperative and forthcoming with information, clearly concerned about potential impact on his athletic career and fertility, speaking in a strained voice due to pain.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did urologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened during the lacrosse practice?",
+      "How would you rate your pain on a scale of 1 to 10?",
+      "Can you describe the quality of the pain you're experiencing?",
+      "Where exactly is the pain located and does it spread anywhere?",
+      "What does the swelling look like - can you describe any color changes?",
+      "Have you noticed any nausea or vomiting since the injury?",
+      "Are you able to walk normally or does movement make it worse?",
+      "Have you tried any pain medications or ice since yesterday?",
+      "Have you noticed any changes in urination or blood in your urine?",
+      "Have you ever had any previous injuries to this area?",
+      "Are you currently taking any medications or have any allergies?",
+      "Is there any family history of testicular problems or cancer?",
+      "Do you use any performance enhancing substances or steroids?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was playing lacrosse during practice yesterday when I took a really hard hit f.'",
-        "character": "'It's urologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Testicular Trauma with Rupture.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Albuterol MDI 90mcg 2 puffs PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Hypertension, alive at 52  Mother: Healthy, alive at 50  Brother: Healthy, age 20",
-        "social": "Occupation: College student (Senior) / NCAA lacrosse player  Marital: Single  Tobacco: Never  Alcohol: Social \u2014 weekends, 3-4 drinks  Drugs: Denies"
+      "default": "I'm not sure what you mean by that - could you ask it differently? The pain is really distracting me right now.",
+      "onset": "It happened yesterday afternoon during lacrosse practice, around 3 PM. Another player's stick hit me directly in the groin during a collision. The pain was immediate and intense.",
+      "character": "It's a deep, crushing, throbbing pain that feels like someone is squeezing my testicle in a vise. It's constant and really intense.",
+      "location": "The pain is mainly in my left testicle, but it also radiates up into my lower abdomen and sometimes I feel it in my back.",
+      "severity": "Right now it's easily a 9 out of 10. I can barely concentrate on anything else. It's worse than when I tore my ACL.",
+      "aggravating": "Any movement makes it worse, especially walking or standing up. Even light touch or my underwear rubbing against it is excruciating.",
+      "relieving": "Nothing really helps. I tried ice yesterday but couldn't tolerate it touching the area. Ibuprofen barely took the edge off.",
+      "associated": "I've been nauseous since it happened and threw up twice last night. I'm also feeling lightheaded when I stand up.",
+      "denies": "No fever, no burning with urination, no discharge. I haven't seen any blood in my urine, but I've been avoiding drinking much because urinating is painful.",
+      "history": "Never had anything like this before. I've taken hits down there playing sports but nothing ever this bad or that lasted this long.",
+      "medications": "Albuterol MDI 90mcg 2 puffs PRN",
+      "allergies": "NKDA",
+      "family": "No family history of testicular problems or cancer that I know of. My dad has high blood pressure but that's it.",
+      "social": "I'm a senior in college and play NCAA Division I lacrosse. I don't smoke, drink socially on weekends maybe 3-4 drinks, and don't use any drugs or steroids."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of external genitalia",
+      "Gentle palpation of affected testicle",
+      "Assessment of cremasteric reflex",
+      "Palpation of spermatic cord",
+      "Assessment of testicular lie and position",
+      "Examination of contralateral testicle",
+      "Abdominal examination",
+      "Assessment for inguinal lymphadenopathy",
+      "Evaluation for scrotal hematoma",
+      "Assessment of scrotal skin changes"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Testicular Trauma with Rupture. Document specifically what you observe."
+      "Inspection of external genitalia": "Left hemiscrotum markedly swollen and ecchymotic with dark purple discoloration. Obvious asymmetry compared to right side.",
+      "Gentle palpation of affected testicle": "Left testicle enlarged, firm, and exquisitely tender. Irregular contour suggests loss of normal smooth ovoid shape. Patient unable to tolerate thorough palpation due to severe pain.",
+      "Assessment of cremasteric reflex": "Absent cremasteric reflex on the left side. Right cremasteric reflex intact.",
+      "Palpation of spermatic cord": "Left spermatic cord thickened and tender. Difficult to assess due to swelling and patient's pain.",
+      "Assessment of testicular lie and position": "Left testicle appears to lie in normal horizontal position, though assessment limited by swelling and pain.",
+      "Examination of contralateral testicle": "Right testicle normal in size, consistency, and position. No tenderness or masses palpated.",
+      "Abdominal examination": "Lower abdominal tenderness present, particularly in left lower quadrant. No rebound or guarding. Bowel sounds normal.",
+      "Assessment for inguinal lymphadenopathy": "No palpable inguinal lymphadenopathy bilaterally.",
+      "Evaluation for scrotal hematoma": "Large scrotal hematoma present with tense swelling of left hemiscrotum. Skin appears stretched and shiny.",
+      "Assessment of scrotal skin changes": "Scrotal skin on left shows significant ecchymosis extending from base to dependent portion. No signs of infection or skin breakdown."
     },
     "ddxTargets": [
-        "Testicular Trauma with Rupture (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Testicular Trauma with Rupture (correct diagnosis)",
+      "Testicular Hematoma without Rupture",
+      "Epididymal Injury",
+      "Testicular Torsion (must-not-miss)",
+      "Torsion of Testicular Appendix (must-not-miss)",
+      "Epididymitis (common mimic)",
+      "Incarcerated Inguinal Hernia (common mimic)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Testicular Trauma with Rupture, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Testicular Trauma with Rupture, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Testicular Trauma with Rupture based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'sports injury' and assuming simple contusion, missing the severity of potential testicular rupture requiring emergent surgical intervention",
+      "prematureClosure": "May stop at diagnosis of testicular contusion without considering rupture, especially if pain seems proportional to mechanism - testicular rupture can present similarly to less severe trauma",
+      "availabilityBias": "Common experience with minor sports injuries may lead to underestimating severity - testicular rupture is urologic emergency but may be overlooked if recent cases involved minor trauma"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dylan Oconnor's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Testicular Trauma with Rupture. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview Dylan, let's think through testicular trauma systematically. What are the key historical features that would help you differentiate between simple contusion, hematoma, and testicular rupture? Also, what other acute scrotal conditions could present similarly, even with a clear trauma history?",
+      "phase5": "Now that you've completed your history and physical, let's analyze your findings. Dylan has severe pain, marked swelling, and ecchymosis after blunt trauma. What specific physical exam findings are most concerning for testicular rupture versus simple hematoma? How does the severity and character of his symptoms guide your differential diagnosis?",
+      "finalDebrief": "Testicular rupture is a urologic emergency requiring immediate surgical exploration and repair. The key differentiating features were the severe, persistent pain disproportionate to simple contusion, irregular testicular contour suggesting capsular disruption, and large hematoma formation. How did your differential diagnosis evolve from initial trauma assessment to recognizing this surgical emergency? What would have been the consequences of misdiagnosing this as simple contusion?"
     }
-}
+  }
 };

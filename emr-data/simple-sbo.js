@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ricardo Fernandez",
-  "patientHPI": "I've been having some stomach cramps around my belly button after I eat big meals - they come on about 15-30 minutes after eating and feel kind of crampy, but they go away on their own after a while and I don't throw up or anything.",
+    "patientHPI": "I've been having some stomach cramps around my belly button after I eat big meals - they come on about 15-30 minutes after eating and feel kind of crampy, but they go away on their own after a while and I don't throw up or anything.",
     "dob": "04/25/1970",
     "age": 54,
     "sex": "Male",
@@ -91,42 +91,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "12/12/2024",
-        "bp": "126/78",
-        "hr": 72,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "98%",
-        "wt": "192 lbs",
-        "ht": "5'10\"",
-        "bmi": 27.5,
-        "setting": "PCP Office"
+      "date": "12/12/2024",
+      "bp": "126/78",
+      "hr": 72,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "98%",
+      "wt": "192 lbs",
+      "ht": "5'10\"",
+      "bmi": 27.5,
+      "setting": "PCP Office"
     },
     {
-        "date": "06/08/2024",
-        "bp": "128/80",
-        "hr": 74,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "99%",
-        "wt": "190 lbs",
-        "ht": "5'10\"",
-        "bmi": 27.3,
-        "setting": "PCP Office"
+      "date": "06/08/2024",
+      "bp": "128/80",
+      "hr": 74,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "99%",
+      "wt": "190 lbs",
+      "ht": "5'10\"",
+      "bmi": 27.3,
+      "setting": "PCP Office"
     },
     {
-        "date": "12/06/2023",
-        "bp": "130/82",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "98%",
-        "wt": "188 lbs",
-        "ht": "5'10\"",
-        "bmi": 27.0,
-        "setting": "PCP Office"
+      "date": "12/06/2023",
+      "bp": "130/82",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "98%",
+      "wt": "188 lbs",
+      "ht": "5'10\"",
+      "bmi": 27,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -166,25 +166,109 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.3", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.3",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.6", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "234", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.6",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "234",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -245,15 +329,42 @@ window.EMR_DATA = {
     "Sister: IBS, alive at 50"
   ],
   "socialHistory": [
-    ["Occupation", "IT project manager at telecommunications company"],
-    ["Marital", "Married — 22 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 2-3 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Gym 3x/week — weight training and cardio"],
-    ["Housing", "Lives with wife and 2 children in single-family home"],
-    ["Safety", "Wears seatbelt; smoke detectors; no firearms"],
-    ["Advance Directive", "None — discussed"]
+    [
+      "Occupation",
+      "IT project manager at telecommunications company"
+    ],
+    [
+      "Marital",
+      "Married — 22 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Gym 3x/week — weight training and cardio"
+    ],
+    [
+      "Housing",
+      "Lives with wife and 2 children in single-family home"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; smoke detectors; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed"
+    ]
   ],
   "meta": {
     "caseId": "simple-sbo",
@@ -264,75 +375,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Ricardo Fernandez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Ricardo appears mildly uncomfortable but cooperative, sitting forward slightly and occasionally rubbing his abdomen. He's articulate and forthcoming about his symptoms, showing some concern given his history of bowel obstruction but not appearing acutely distressed.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when these stomach cramps started?",
+      "What does the cramping pain feel like - is it sharp, dull, squeezing?",
+      "Can you point to exactly where the pain is located?",
+      "On a scale of 1-10, how severe is the pain at its worst?",
+      "You mentioned it happens after big meals - does anything else make it worse?",
+      "Have you found anything that helps relieve the cramping?",
+      "Are you having any nausea, vomiting, or changes in bowel movements?",
+      "When was your last bowel movement and was it normal?",
+      "Have you had any similar episodes since your last bowel obstruction?",
+      "Are you passing gas normally?",
+      "Have you noticed any abdominal bloating or distention?",
+      "Any fever, chills, or feeling generally unwell?",
+      "What medications are you currently taking?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having some stomach cramps around my belly button after I eat big meal.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Simple Small Bowel Obstruction.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Losartan 50mg daily; Omeprazole 20mg daily; Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Hypertension, T2DM, alive at 80  Father: Colon cancer (age 68), deceased at 74  Brother: Healthy, age 52",
-        "social": "Occupation: IT project manager at telecommunications company  Marital: Married \u2014 22 years  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 beers on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you rephrase that?",
+      "onset": "The cramping started about 3 days ago, maybe Tuesday evening after dinner. At first I thought it was just something I ate, but it's been happening consistently after larger meals since then.",
+      "character": "It's a crampy, squeezing kind of pain - like my intestines are trying to work extra hard. It comes in waves, gets intense for a few minutes, then eases up a bit.",
+      "location": "It's mainly around my belly button, right in the center. Sometimes it feels like it spreads across my whole mid-abdomen, but it always starts right here in the middle.",
+      "severity": "At its worst, I'd say it's about a 6 out of 10. It's definitely uncomfortable and makes me stop what I'm doing, but it's not excruciating like my appendicitis was.",
+      "aggravating": "Definitely eating larger meals makes it worse. Even drinking a lot of fluids at once seems to trigger it. Moving around doesn't seem to affect it much either way.",
+      "relieving": "I've tried taking some of my ibuprofen and it helps a little. Lying down and waiting it out seems to work - the pain usually subsides on its own after 30-45 minutes.",
+      "associated": "I've been feeling a bit bloated and my stomach feels fuller than usual even after smaller meals. No nausea or vomiting though, which is different from my last obstruction.",
+      "denies": "No vomiting, no fever, no chills. I'm still passing gas, though maybe not as much as usual. No blood in my stool or anything like that.",
+      "history": "Yes, I had a complete bowel obstruction about 3 years ago from adhesions after my appendectomy. That was much worse - I was vomiting everything and couldn't keep anything down. This feels similar but much milder.",
+      "medications": "Losartan 50mg daily; Omeprazole 20mg daily; Ibuprofen 400mg PRN",
+      "allergies": "NKDA",
+      "family": "My father had colon cancer when he was 68, which is part of why I'm concerned about any abdominal symptoms. My mother has diabetes and high blood pressure but no bowel problems.",
+      "social": "I work in IT project management, so I spend a lot of time at a desk. I'm married, don't smoke, and just have a couple beers on weekends. The stress at work has been pretty high lately with a big project deadline."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "Inspection of abdomen for distention and surgical scars",
+      "Auscultation for bowel sounds",
+      "Light palpation of all four quadrants",
+      "Deep palpation for masses or organomegaly",
+      "Percussion of abdomen for tympany",
+      "Assessment for rebound tenderness and guarding",
+      "McBurney's point tenderness",
+      "Digital rectal examination",
+      "Assessment of vital signs and general appearance"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Simple Small Bowel Obstruction. Document specifically what you observe."
+      "Inspection of abdomen for distention and surgical scars": "Mild abdominal distention present, three small laparoscopic scars visible in RLQ consistent with prior appendectomy",
+      "Auscultation for bowel sounds": "Hyperactive, high-pitched bowel sounds present in all quadrants with occasional tinkling quality",
+      "Light palpation of all four quadrants": "Mild tenderness in periumbilical region, soft throughout, no guarding",
+      "Deep palpation for masses or organomegaly": "No masses palpable, liver and spleen not enlarged, mild deep tenderness in central abdomen",
+      "Percussion of abdomen for tympany": "Increased tympany throughout abdomen consistent with gaseous distention",
+      "Assessment for rebound tenderness and guarding": "No rebound tenderness or involuntary guarding present",
+      "McBurney's point tenderness": "No tenderness at McBurney's point",
+      "Digital rectal examination": "Normal tone, no masses, no blood on examining finger, rectal vault empty",
+      "Assessment of vital signs and general appearance": "Patient appears mildly uncomfortable but not toxic, vital signs stable and normal"
     },
     "ddxTargets": [
-        "Simple Small Bowel Obstruction (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Simple Small Bowel Obstruction (Adhesive) (correct diagnosis)",
+      "Functional bowel obstruction/ileus",
+      "Gastroenteritis",
+      "Strangulated bowel obstruction",
+      "Appendicitis (recurrent/stump appendicitis)",
+      "Irritable bowel syndrome exacerbation",
+      "Peptic ulcer disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Simple Small Bowel Obstruction, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Simple Small Bowel Obstruction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Simple Small Bowel Obstruction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the patient's history of previous bowel obstruction and assuming this episode is identical, potentially missing that this is a milder, partial obstruction",
+      "prematureClosure": "Risk of stopping evaluation too early given normal vital signs and lack of vomiting, missing the significance of hyperactive bowel sounds and mild distention",
+      "availabilityBias": "Recent cases of gastroenteritis or IBS might lead to attributing cramping to more common, benign causes rather than considering mechanical obstruction"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Ricardo Fernandez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Simple Small Bowel Obstruction (Adhesive). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, what key historical features would help you differentiate between mechanical small bowel obstruction and other causes of cramping abdominal pain? Consider how this patient's surgical history might influence your questioning.",
+      "phase5": "You've found hyperactive bowel sounds and mild distention in a patient with prior abdominal surgery. How do these findings, combined with the history, help narrow your differential? What's the significance of the absence of vomiting in this case?",
+      "finalDebrief": "This case illustrates how adhesive small bowel obstruction can present on a spectrum from complete obstruction with vomiting to partial obstruction with cramping. How did the patient's surgical history and the classic triad findings (cramping, distention, hyperactive bowel sounds) guide your diagnosis? What imaging would you order next?"
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Patricia Nguyen",
-  "patientHPI": "Within a few minutes of getting the dye for my CT scan, I broke out in hives all over my body and my face started swelling up - I was getting scared because it was hard to breathe.",
+      "patientHPI": "Within a few minutes of getting the dye for my CT scan, I broke out in hives all over my body and my face started swelling up - I was getting scared because it was hard to breathe.",
       "dob": "01/09/1961",
       "age": "65",
       "sex": "Female",
@@ -1075,140 +1075,147 @@ window.EMR_DATA = {
       "Prior",
       "Had contrast reaction 10 years ago — no premedication protocol given today"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "ACR-Contrast-2024",
-    "title": "ACR Manual on Contrast Media",
-    "authors": "ACR Committee on Drugs and Contrast Media.",
-    "journal": "ACR Manual",
-    "year": 2024,
-    "doi": "",
-    "url": "https://www.acr.org/Clinical-Resources/Contrast-Manual",
-    "openAccess": true,
-    "validates": [
-      "Premedication: prednisone -13h/-7h/-1h + diphenhydramine -1h",
-      "Anaphylactoid = non-IgE",
-      "Reduces recurrence 35% → <1%"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "ACR-Contrast-2024",
+      "title": "ACR Manual on Contrast Media",
+      "authors": "ACR Committee on Drugs and Contrast Media.",
+      "journal": "ACR Manual",
+      "year": 2024,
+      "doi": "",
+      "url": "https://www.acr.org/Clinical-Resources/Contrast-Manual",
+      "openAccess": true,
+      "validates": [
+        "Premedication: prednisone -13h/-7h/-1h + diphenhydramine -1h",
+        "Anaphylactoid = non-IgE",
+        "Reduces recurrence 35% → <1%"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Patricia Nguyen is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Patricia appears anxious and confused, speaking limited English with obvious distress from her recent frightening reaction. She keeps asking for a Vietnamese interpreter and seems hesitant to provide details without proper translation support. Her affect shows residual fear from the contrast reaction and concern about what happened during the procedure.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me what happened during your CT scan today?",
+      "Have you ever had a reaction to contrast dye before?",
+      "What symptoms did you experience during or after the contrast injection?",
+      "Did anyone give you any medications before the CT scan today?",
+      "Are you having any trouble breathing or swallowing right now?",
+      "Do you have any chest pain or tightness?",
+      "Are you feeling dizzy or lightheaded?",
+      "Do you have any skin changes like rash, hives, or itching?",
+      "What medications are you currently taking?",
+      "Do you have any kidney problems or diabetes?",
+      "Why were you getting the CT scan today?",
+      "Do you understand why this reaction happened?",
+      "Have you been told about premedication for contrast in the past?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Diphenhydramine; Methylprednisolone; NS bolus.'",
-        "allergies": "'My allergies: Contrast dye.'",
-        "family": "Non-contributory",
-        "social": "Language: Vietnamese \u2014 limited English  Comorbidity: CKD stage 3b, diabetes  Context: Needed CT with contrast for pulmonary embolism workup \u2014 reacted to contrast  Prior: Had contrast reaction 10 years ago \u2014 no premedication protocol given today"
+      "default": "I'm sorry, I don't understand. Can I have Vietnamese interpreter please? This is very confusing for me.",
+      "onset": "Right after they put the dye in my arm for the CT scan, maybe 2-3 minutes later I felt very sick and scared",
+      "character": "I felt like I couldn't breathe well, my skin was burning and itchy, felt like my throat was getting tight",
+      "location": "The itching was everywhere, throat felt tight, chest felt heavy",
+      "severity": "Very scary, maybe 8 out of 10. I thought I was going to die, couldn't catch my breath",
+      "aggravating": "Nothing specific makes it worse now, but I'm still scared it will come back",
+      "relieving": "The doctors gave me shots and IV medicine, that helped me feel better",
+      "associated": "I had nausea, felt dizzy, heart was beating very fast, skin was red and bumpy",
+      "denies": "No chest pain now, no vomiting, no loss of consciousness, no prior heart problems",
+      "history": "Yes, this happened before about 10 years ago when I had CT scan. Doctor told me to tell people about allergy to dye",
+      "medications": "Epinephrine; Diphenhydramine; Methylprednisolone; NS bolus",
+      "allergies": "Contrast dye",
+      "family": "Nothing important in family for allergies or reactions like this",
+      "social": "I am retired, live with daughter, don't smoke, don't drink alcohol, need Vietnamese interpreter for medical visits"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Vital signs assessment",
+      "Skin examination for urticaria or angioedema",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Upper airway assessment",
+      "Neurological assessment",
+      "Abdominal examination",
+      "Assessment of peripheral perfusion",
+      "Lymph node examination",
+      "Mental status evaluation"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Vital signs assessment": "BP 86/52, HR 118, RR 22, SpO2 92% on room air, afebrile at 36.8°C",
+      "Skin examination for urticaria or angioedema": "Diffuse urticarial rash on trunk and extremities, mild facial flushing, no significant angioedema of lips or eyelids",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak peripheral pulses consistent with hypotension",
+      "Pulmonary examination": "Mild expiratory wheeze bilaterally, good air movement, no stridor",
+      "Upper airway assessment": "No stridor, voice clear, no visible tongue or lip swelling, mild throat erythema",
+      "Neurological assessment": "Alert and oriented, anxious but appropriate, no focal deficits",
+      "Abdominal examination": "Soft, non-tender, normal bowel sounds, no hepatosplenomegaly",
+      "Assessment of peripheral perfusion": "Capillary refill 3 seconds, cool extremities, consistent with mild shock",
+      "Lymph node examination": "No lymphadenopathy",
+      "Mental status evaluation": "Anxious but coherent, language barrier present, requesting interpreter"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Anaphylactoid reaction to IV contrast (correct diagnosis)",
+      "IgE-mediated anaphylaxis to contrast",
+      "Acute asthma exacerbation",
+      "Pulmonary embolism",
+      "Acute myocardial infarction",
+      "Vasovagal reaction",
+      "Medication adverse reaction"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on the obvious contrast reaction and missing evaluation of the underlying PE that prompted the study, or assuming all contrast reactions are IgE-mediated",
+      "prematureClosure": "May stop thinking after diagnosing contrast reaction without considering the systems failure (lack of premedication despite documented allergy) and patient safety implications",
+      "availabilityBias": "Recent cases of allergic reactions might influence interpretation, but this appears to be anaphylactoid rather than true IgE-mediated anaphylaxis"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Patricia Nguyen: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview the patient, think about what key information you need regarding the timeline of events, previous contrast exposure, and what protocols should have been followed. What patient safety issues might be at play here?",
+      "phase5": "You've identified a contrast reaction, but consider: What type of reaction is this based on the clinical presentation? What systems failure occurred? How does this patient's CKD factor into the decision-making? What are the immediate next steps?",
+      "finalDebrief": "This case highlights a preventable patient safety event. The documented prior reaction should have triggered premedication protocols. Discuss the difference between anaphylaxis and anaphylactoid reactions, and how systems-based approaches prevent such errors. What would you implement to prevent this in the future?"
     }
-}
+  }
 };

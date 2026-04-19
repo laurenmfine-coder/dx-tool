@@ -503,75 +503,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Frank DeLuca appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Frank appears visibly anxious and fatigued, sitting forward to ease his breathing. He's forthcoming about his symptoms but defensive about his continued smoking, expressing both fear about his deteriorating condition and guilt about not quitting despite knowing the risks.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did shortness of breath start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
+      "Can you describe your cough in detail - has it changed recently?",
+      "Tell me about the blood you're coughing up - what does it look like?",
+      "How has your shortness of breath progressed over time?",
+      "You mentioned losing 18 pounds - over what time period was this?",
+      "Have you had any chest pain or discomfort?",
+      "Any fevers, chills, or night sweats?",
+      "How is your appetite and energy level?",
+      "Any hoarseness or voice changes?",
+      "Tell me about your smoking history in detail",
+      "Any exposure to asbestos or other chemicals at work?",
       "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Any medication allergies?",
+      "Family history of cancer or lung disease?"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started My cough has really changed over the past couple weeks - now I'm coughing up blo.'",
-      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Fluticasone Furoate/Umeclidinium/Vilanterol (Trelegy Ellipta) 1 puff daily; Albuterol HFA 90mcg 2 puffs PRN; Lisinopril 10mg daily; Tamsulosin 0.4mg QHS; Acetaminophen 500mg PRN; Home Oxygen 2L NC PRN.'",
-      "allergies": "'My allergies are Azithromycin, NKDA (other).'",
-      "family": "Father: Lung cancer (diagnosed age 68, deceased age 70) — 40+ pack-year smoker  Mother: COPD, deceased at 82 (respiratory failure)  Brother: Bladder cancer at age 64, alive at 67",
-      "social": "Occupation: Retired auto mechanic (42 years) — significant occupational exposure to asbestos brake pads, exhaust fumes, solvents  Marital: Married 44 years  Tobacco: Active smoker — 1/2 PPD currently; 50+ pack-year history; started age 18; multiple quit attempts  Alcohol: 2-3 beers daily; more on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - can you be more specific about my breathing or cough?",
+      "onset": "The cough has been getting worse over the past 2-3 months, but the blood started showing up about 2 weeks ago. The shortness of breath really ramped up in the last month.",
+      "character": "It's a deep, harsh cough that brings up thick, yellow-green stuff now, sometimes with streaks of bright red blood. My usual COPD cough was never like this.",
+      "location": "The cough comes from deep in my chest, right side mostly. Sometimes I get a dull ache on the right side of my chest too.",
+      "severity": "The shortness of breath is about an 8 out of 10 - I can barely walk to the bathroom without getting winded. The cough keeps me up at night.",
+      "aggravating": "Any activity makes the breathing worse. Lying flat is terrible. The cough gets worse when I try to talk for too long.",
+      "relieving": "Sitting up helps a little with breathing. My albuterol isn't helping like it used to. The oxygen helps some.",
+      "associated": "I've been having night sweats, no appetite, and I'm exhausted all the time. Sometimes I feel nauseous and have been more confused lately.",
+      "denies": "No chest pain that's sharp or stabbing. No leg swelling. No recent travel or long car rides.",
+      "history": "I've had COPD flare-ups before, but nothing like this. Never coughed up blood before.",
+      "medications": "Fluticasone Furoate/Umeclidinium/Vilanterol (Trelegy Ellipta) 1 puff daily; Albuterol HFA 90mcg 2 puffs PRN; Lisinopril 10mg daily; Tamsulosin 0.4mg QHS; Acetaminophen 500mg PRN; Home Oxygen 2L NC PRN",
+      "allergies": "Azithromycin, NKDA (other)",
+      "family": "My dad died of lung cancer at 70 - he was a heavy smoker too. My mom had COPD and died from breathing problems. My brother had bladder cancer but he's doing okay now.",
+      "social": "I worked as an auto mechanic for 42 years - lots of exposure to brake dust and asbestos, exhaust fumes. Been smoking since I was 18, about half a pack a day now, tried to quit many times. I drink a couple beers daily, more on weekends."
     },
     "examManeuvers": [
-      "General appearance and respiratory effort",
-      "Vital signs and pulse oximetry",
+      "General appearance and respiratory distress assessment",
+      "Lymph node examination (cervical, supraclavicular, axillary)",
+      "Pulmonary inspection and chest wall assessment",
+      "Pulmonary percussion",
       "Pulmonary auscultation",
-      "Percussion of lung fields",
-      "Accessory muscle use",
-      "Cardiovascular auscultation",
-      "Lower extremity DVT assessment",
-      "Tracheal position"
+      "Cardiovascular examination",
+      "Abdominal examination",
+      "Extremity examination for clubbing and edema",
+      "Neurological assessment for confusion/altered mental status"
     ],
     "examFindings": {
-      "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Percussion of lung fields": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Accessory muscle use": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-      "Tracheal position": "Clinical finding consistent with Lung Cancer. Document specifically what you observe."
+      "General appearance and respiratory distress assessment": "Thin, cachectic-appearing male using accessory muscles to breathe, sitting tripod position, appears chronically ill",
+      "Lymph node examination (cervical, supraclavicular, axillary)": "Palpable firm, non-tender right supraclavicular lymph node, approximately 2cm",
+      "Pulmonary inspection and chest wall assessment": "Increased AP diameter consistent with COPD, decreased chest wall movement on right side",
+      "Pulmonary percussion": "Dullness to percussion over right upper lobe",
+      "Pulmonary auscultation": "Decreased breath sounds right upper lobe with coarse crackles, expiratory wheeze bilateral lower lobes",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, JVP not elevated",
+      "Abdominal examination": "Soft, non-tender, no organomegaly appreciated",
+      "Extremity examination for clubbing and edema": "Digital clubbing present bilateral fingers, no lower extremity edema",
+      "Neurological assessment for confusion/altered mental status": "Mild confusion with delayed responses, oriented x 2 (person, place but not time)"
     },
     "ddxTargets": [
-      "Lung Cancer (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Lung Cancer (Suspected Squamous Cell Carcinoma, RUL) with Post-Obstructive Pneumonia and Hypercalcemia of Malignancy (correct diagnosis)",
+      "COPD Exacerbation with Secondary Bacterial Pneumonia",
+      "Pulmonary Tuberculosis with Secondary Bacterial Infection",
+      "Pulmonary Embolism with Infarction",
+      "Lung Abscess",
+      "Pneumonia (Community-Acquired) with Complications",
+      "Bronchiectasis with Secondary Infection"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Lung Cancer, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Lung Cancer based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on COPD exacerbation given established diagnosis, missing the hemoptysis and weight loss as red flags for malignancy",
+      "prematureClosure": "May stop at pneumonia diagnosis without considering underlying obstructing lesion given the classic infectious symptoms",
+      "availabilityBias": "Recent cases of COPD exacerbation or pneumonia may overshadow the constellation of findings suggesting malignancy"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Frank DeLuca's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Lung Cancer (Suspected Squamous Cell Carcinoma, RUL) with Post-Obstructive Pneumonia and Hypercalcemia of Malignancy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some key possibilities. As you interview Mr. DeLuca, pay particular attention to the timeline and character of his symptoms. What specific questions would help you distinguish between an infectious process, COPD exacerbation, and something more concerning like malignancy?",
+      "phase5": "You've gathered comprehensive information. The combination of hemoptysis, weight loss, and new respiratory symptoms in a heavy smoker with occupational exposures is quite concerning. What does the physical finding of the supraclavicular lymph node suggest, and how does this change your differential diagnosis prioritization?",
+      "finalDebrief": "This case illustrates how lung cancer can present with post-obstructive pneumonia, making the infectious component prominent while the underlying malignancy drives the process. The key red flags - hemoptysis, unintentional weight loss, supraclavicular lymphadenopathy, and refractory respiratory symptoms in a high-risk patient - should elevate suspicion beyond simple COPD exacerbation. The hypercalcemia likely explains his confusion and GI symptoms."
     }
   }
 };

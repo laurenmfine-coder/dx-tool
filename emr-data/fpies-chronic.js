@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ethan Reyes",
-  "patientHPI": "My 7-month-old has had watery diarrhea for days now and he's so tired he won't even lift his head - I can tell he's getting dehydrated because his lips look dry.",
+      "patientHPI": "My 7-month-old has had watery diarrhea for days now and he's so tired he won't even lift his head - I can tell he's getting dehydrated because his lips look dry.",
       "dob": "09/25/2026",
       "age": "0",
       "sex": "Male",
@@ -900,27 +900,26 @@ window.EMR_DATA = {
       "Key",
       "IgE-negative, skin prick test to milk negative — this is non-IgE mediated"
     ]
-  ]
-,"references":[
-  {
-    "id": "FPIES-Consensus-2017",
-    "title": "International consensus guidelines for FPIES: executive summary",
-    "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2017,
-    "doi": "10.1016/j.jaci.2016.12.966",
-    "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "FPIES criteria: major + minor",
-      "Ondansetron first-line (NOT epi)",
-      "Chronic FPIES: insidious FTT",
-      "Non-IgE, T-cell mediated",
-      "60% resolution by age 3-5"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "FPIES-Consensus-2017",
+      "title": "International consensus guidelines for FPIES: executive summary",
+      "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2017,
+      "doi": "10.1016/j.jaci.2016.12.966",
+      "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "FPIES criteria: major + minor",
+        "Ondansetron first-line (NOT epi)",
+        "Chronic FPIES: insidious FTT",
+        "Non-IgE, T-cell mediated",
+        "60% resolution by age 3-5"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Chronic FPIES (daily exposure to trigger food) presents differently from acute FPIES: intermittent vomiting, diarrhea, poor weight gain, irritability — mimicking GERD, formula intolerance, or failure to thrive. No single dramatic episode.",
@@ -937,75 +936,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Ethan Reyes appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "The parent appears anxious and concerned about Ethan's poor growth and persistent symptoms. They are very forthcoming with details about feeding patterns and symptoms, having kept careful notes. The parent expresses frustration with previous evaluations and is seeking answers for their child's ongoing issues.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the diarrhea and how has it changed over time?",
+      "Can you describe the vomiting episodes - when do they occur and what do they look like?",
+      "What type of formula is Ethan currently receiving and when was it introduced?",
+      "How has Ethan's weight gain been since birth?",
+      "Are there any specific triggers you've noticed that worsen the symptoms?",
+      "Has Ethan tried any other formulas or foods?",
+      "How many wet diapers does Ethan have per day and what do the stools look like?",
+      "Does Ethan seem uncomfortable or in pain during or after feeding?",
+      "Have you noticed any skin rashes or other symptoms?",
+      "How is Ethan's energy level and developmental progress?",
+      "Has anyone in the family had food allergies or digestive problems?",
+      "What happens when Ethan doesn't have formula for a period of time?",
+      "Have any previous doctors suggested formula changes or special diets?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Ethan Reyes presents with 7-month-old with chronic diarrhea, poor weight gain, a.'",
-        "character": "'It's 7-month-old with chronic diarrhea, poor weight gain, and intermittent vomiting on cow's milk formula \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies are Cow's milk (suspected FPIES).'",
-        "family": "Non-contributory",
-        "social": "Feeding: Cow's milk formula since 3 months  Key: IgE-negative, skin prick test to milk negative \u2014 this is non-IgE mediated"
+      "default": "I'm not sure what you mean by that. Can you ask it a different way?",
+      "onset": "The diarrhea started about 2 weeks after we switched to cow's milk formula at 3 months old. The vomiting began around the same time but happens less frequently.",
+      "character": "The diarrhea is loose, watery, and sometimes mucousy. The vomiting usually happens 1-3 hours after feeding and can be projectile.",
+      "location": "The stomach cramping seems to be in his belly area. He pulls his legs up and cries.",
+      "severity": "I'd say it's about a 7 out of 10 for how much it affects him. He's not gaining weight like he should and seems uncomfortable most days.",
+      "aggravating": "The symptoms definitely get worse after formula feedings, especially larger volumes. Stress or being overtired also seems to make things worse.",
+      "relieving": "When we tried stopping formula for a day, he seemed better, but then he was so hungry. Nothing else really helps consistently.",
+      "associated": "He's irritable, has trouble sleeping, and his growth has really slowed down. Sometimes he gets a mild rash around his mouth after feeding.",
+      "denies": "No fever, no blood in stool that I've seen, no breathing problems, and he doesn't have typical hives or swelling that you'd expect with allergies.",
+      "history": "This has been ongoing since we started cow's milk formula. We tried switching brands but it didn't help.",
+      "medications": "no medications",
+      "allergies": "Cow's milk (suspected FPIES)",
+      "family": "No one in our family has food allergies that we know of. My sister had some digestive issues as a baby but outgrew them.",
+      "social": "I'm breastfeeding partially but supplementing with formula. We don't smoke and live in a clean environment. No daycare exposures yet."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and growth assessment",
+      "Abdominal inspection and palpation",
+      "Assessment of hydration status",
+      "Skin examination for rashes or dermatitis",
+      "Oral examination",
+      "Lymph node examination",
+      "Heart and lung auscultation",
+      "Developmental milestone assessment",
+      "Weight and length plotting on growth chart",
+      "Assessment of muscle tone and subcutaneous fat"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and growth assessment": "Alert but irritable infant, appears small for age with decreased subcutaneous fat stores",
+      "Abdominal inspection and palpation": "Abdomen soft, mildly distended, no masses or organomegaly, mild tenderness to palpation",
+      "Assessment of hydration status": "Mucous membranes slightly dry, normal skin turgor, adequate urine output reported",
+      "Skin examination for rashes or dermatitis": "Mild perioral erythema, no eczematous changes, no urticaria",
+      "Oral examination": "Normal oral cavity, no thrush or lesions",
+      "Lymph node examination": "No significant lymphadenopathy",
+      "Heart and lung auscultation": "Regular rate and rhythm, clear lung fields bilaterally",
+      "Developmental milestone assessment": "Appropriate for age but may be slightly delayed in gross motor skills",
+      "Weight and length plotting on growth chart": "Weight below 10th percentile, crossing growth percentiles downward since 3 months",
+      "Assessment of muscle tone and subcutaneous fat": "Normal tone but decreased muscle mass and subcutaneous fat consistent with failure to thrive"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Food Protein-Induced Enterocolitis Syndrome (FPIES) (correct diagnosis)",
+      "Cow's milk protein allergy (IgE-mediated)",
+      "Lactose intolerance",
+      "Gastroenteritis with prolonged course",
+      "Malabsorption syndrome",
+      "Gastroesophageal reflux disease",
+      "Inflammatory bowel disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on typical IgE-mediated milk allergy when negative allergy tests might falsely reassure, missing non-IgE mediated FPIES",
+      "prematureClosure": "May quickly diagnose simple lactose intolerance or reflux without considering the delayed, non-IgE immune response pattern of FPIES",
+      "availabilityBias": "FPIES is less commonly encountered than typical milk allergy, leading to consideration of more familiar diagnoses first"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Ethan Reyes's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Consider the timing of symptom onset in relation to formula introduction. What types of immune-mediated reactions to food proteins exist beyond the typical IgE-mediated responses? How might negative standard allergy tests affect your diagnostic thinking?",
+      "phase5": "The growth pattern and symptom timeline are key here. With negative IgE testing but clear temporal relationship to cow's milk formula, what non-IgE mediated food reactions should you consider? How does the delayed presentation fit with different pathophysiologic mechanisms?",
+      "finalDebrief": "FPIES represents a non-IgE mediated food protein reaction that typically presents with delayed GI symptoms including vomiting, diarrhea, and failure to thrive. The negative skin tests and IgE levels are characteristic because this involves T-cell mediated immunity rather than IgE antibodies. Recognition is important because standard allergy testing will be negative, and management involves strict avoidance of the trigger protein with gradual reintroduction trials under medical supervision."
     }
-}
+  }
 };

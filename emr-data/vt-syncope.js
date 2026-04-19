@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dennis Crawford",
-  "patientHPI": "I was just sitting at home when I felt my heart racing really fast and then I blacked out completely - when I came to my family was standing over me asking if I was okay.",
+    "patientHPI": "I was just sitting at home when I felt my heart racing really fast and then I blacked out completely - when I came to my family was standing over me asking if I was okay.",
     "dob": "06/15/1964",
     "age": "62",
     "sex": "Male",
@@ -15,13 +15,13 @@ window.EMR_DATA = {
     "address": "1209 N Western Ave, Phoenix, AZ 85013",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Rite Aid \u2014 Pines Blvd",
+    "pharmacy": "Rite Aid — Pines Blvd",
     "emergencyContact": {
       "name": "Gloria Carter",
       "phone": "(617) 555-6908",
       "relationship": "Adult Child"
     },
-    "chiefComplaint": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+    "chiefComplaint": "Passed out No specific pain location — felt palpitations in chest before passing out",
     "diagnosis": "Ventricular Tachycardia with Syncope"
   },
   "problems": [
@@ -125,7 +125,7 @@ window.EMR_DATA = {
       "bp": "108/72",
       "hr": "78",
       "rr": "16",
-      "temp": "36.9\u00b0C",
+      "temp": "36.9°C",
       "spo2": "96%",
       "pain": "/10",
       "bmi": "33",
@@ -138,10 +138,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
-      "hpi": "Dennis Crawford is a 62-year-old male presenting with passed out no specific pain location \u2014 felt palpitations in chest before passing out. Past medical history includes Myocardial infarction 3 years ago, Heart failure, Hypertension, Hyperlipidemia. See chart for full details.",
+      "cc": "Passed out No specific pain location — felt palpitations in chest before passing out",
+      "hpi": "Dennis Crawford is a 62-year-old male presenting with passed out no specific pain location — felt palpitations in chest before passing out. Past medical history includes Myocardial infarction 3 years ago, Heart failure, Hypertension, Hyperlipidemia. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Ventricular Tachycardia with Syncope \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Ventricular Tachycardia with Syncope — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -163,7 +163,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "8.8",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -184,7 +184,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "267",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -298,7 +298,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-263501",
-      "clinical": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "clinical": "Passed out No specific pain location — felt palpitations in chest before passing out",
       "technique": "Standard protocol",
       "findings": "Cardiomegaly. Mild bilateral pleural effusions. Cephalization of pulmonary vasculature. No focal consolidation.",
       "impression": "Cardiomegaly with mild CHF changes",
@@ -308,14 +308,14 @@ window.EMR_DATA = {
     {
       "id": "img-2",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 Cardiac",
+      "study": "POCUS – Cardiac",
       "status": "Final",
       "priority": "Routine",
       "orderedBy": "Dr. ED Physician",
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-605713",
-      "clinical": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "clinical": "Passed out No specific pain location — felt palpitations in chest before passing out",
       "technique": "Standard protocol",
       "findings": "Severely reduced LV systolic function. Dilated LV. Anterior wall akinesis. Mild pericardial effusion. No RV dilation.",
       "impression": "Severe LV dysfunction consistent with known cardiomyopathy",
@@ -332,10 +332,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-981448",
-      "clinical": "Passed out No specific pain location \u2014 felt palpitations in chest before passing out",
+      "clinical": "Passed out No specific pain location — felt palpitations in chest before passing out",
       "technique": "Standard 12-lead",
       "findings": "Normal sinus rhythm at 78 bpm currently. Old Q waves in V1-V4 (prior anterior MI). Prolonged QTc at 510ms. Frequent PVCs (3 seen on rhythm strip). Non-sustained VT run captured: 8-beat wide complex tachycardia at 180 bpm",
-      "impression": "NSR with prior anterior MI changes, prolonged QTc, frequent PVCs with NSVT \u2014 HIGH RISK for sustained VT/cardiac arrest",
+      "impression": "NSR with prior anterior MI changes, prolonged QTc, frequent PVCs with NSVT — HIGH RISK for sustained VT/cardiac arrest",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -388,75 +388,78 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Dennis Crawford appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Dennis appears anxious and somewhat shaken by the syncopal episode, frequently touching his chest while speaking. He's cooperative and forthcoming with information but shows visible concern about his heart given his cardiac history. His affect is appropriate but worried, and he keeps asking if this means his heart is getting worse.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did passed out no specific pain location \u2014 felt palpitations in chest before passing out start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what you felt in your chest before you passed out?",
+      "How long did the palpitations last before you lost consciousness?",
+      "Do you remember feeling dizzy or lightheaded before passing out?",
+      "How long were you unconscious according to your family?",
+      "Have you had any chest pain, shortness of breath, or nausea recently?",
+      "Have you experienced similar episodes of palpitations or passing out before?",
+      "Have you been taking all your heart medications as prescribed?",
+      "Have you had any recent changes in your weight or swelling in your legs?",
+      "Have you been more tired or short of breath with normal activities lately?",
+      "Do you recall if you jerked or shook while you were unconscious?",
+      "Did you bite your tongue or lose control of your bladder during the episode?",
+      "Have you had any recent illness, fever, or medication changes?",
+      "How has your heart failure been controlled recently?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was just sitting at home when I felt my heart racing really fast and then I bl.'",
-        "character": "'It's passed out no specific pain location \u2014 felt palpitations in chest before passing out \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Carvedilol; Lisinopril; Furosemide; Atorvastatin; Aspirin; Clopidogrel.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: sudden cardiac death at age 52  Brother: heart failure",
-        "social": "Tobacco: Quit after MI (20 pack-year history)  Alcohol: Rare  Drugs: Denies  Occupation: Retired bus driver  Living: Lives with wife"
+      "default": "I'm not sure I understand what you're asking - can you explain that differently? I'm still pretty shaken up by what happened.",
+      "onset": "I was just sitting in my recliner watching TV around 2 PM when suddenly my heart started racing really fast, then within maybe 30 seconds I was out cold.",
+      "character": "It felt like my heart was beating so fast and hard that it might pound right out of my chest - not like the normal irregular beats I sometimes get.",
+      "location": "The racing feeling was right here in the center of my chest, didn't go anywhere else, just felt like my whole chest was vibrating.",
+      "severity": "The palpitations were really intense, maybe an 8 out of 10, but I don't have any pain now - I'm just worried about my heart.",
+      "aggravating": "I wasn't doing anything when it started - just sitting there relaxed. I haven't noticed anything that makes it worse.",
+      "relieving": "Well, I passed out so I don't know what stopped it, but when I woke up my heart felt normal again.",
+      "associated": "Right before I passed out I felt really dizzy and kind of nauseous, but no chest pain or trouble breathing.",
+      "denies": "No chest pain, no shortness of breath, no sweating or arm pain. I didn't bite my tongue or wet myself, and my family said I didn't shake or jerk around.",
+      "history": "I've had some irregular heartbeats since my heart attack, but nothing like this racing feeling and I've never passed out before.",
+      "medications": "Carvedilol; Lisinopril; Furosemide; Atorvastatin; Aspirin; Clopidogrel",
+      "allergies": "NKDA",
+      "family": "My dad dropped dead suddenly at 52 - they said it was his heart. My brother has heart failure like me. That's why this really scares me.",
+      "social": "I'm retired from driving buses, quit smoking after my heart attack three years ago - used to smoke a pack a day for 20 years. I hardly drink and don't use drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Cardiac auscultation",
+      "Jugular venous pressure assessment",
+      "Peripheral pulse examination",
+      "Lower extremity edema assessment",
+      "Orthostatic vital signs",
+      "Neurologic examination",
+      "Carotid pulse and bruit assessment",
+      "Pulmonary auscultation",
+      "Abdominal examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Cardiac auscultation": "Regular rate and rhythm, normal S1 and S2, no murmurs, rubs, or gallops currently present",
+      "Jugular venous pressure assessment": "JVP elevated to 8 cm H2O, consistent with mild volume overload",
+      "Peripheral pulse examination": "Radial and dorsalis pedis pulses 2+ bilaterally, regular rhythm",
+      "Lower extremity edema assessment": "Trace bilateral pedal edema, chronic venous stasis changes present",
+      "Orthostatic vital signs": "No orthostatic changes - BP and HR stable from supine to standing",
+      "Neurologic examination": "Alert and oriented x3, no focal neurologic deficits, normal gait and coordination",
+      "Carotid pulse and bruit assessment": "Carotid upstrokes normal, no bruits appreciated bilaterally",
+      "Pulmonary auscultation": "Clear to auscultation bilaterally, no crackles or wheezes",
+      "Abdominal examination": "Soft, non-tender, no hepatomegaly or ascites"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Ventricular tachycardia (correct diagnosis)",
+      "Atrial fibrillation with rapid ventricular response",
+      "Supraventricular tachycardia",
+      "Myocardial infarction",
+      "Sudden cardiac death/ventricular fibrillation",
+      "Vasovagal syncope",
+      "Medication-induced arrhythmia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on heart failure history and assuming this is simply worsening CHF rather than considering life-threatening arrhythmias",
+      "prematureClosure": "May stop diagnostic workup after noting stable vitals and normal current exam, missing the need for cardiac monitoring and ECG",
+      "availabilityBias": "Recent cases of vasovagal syncope might lead to underestimating arrhythmic causes in a patient with structural heart disease"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dennis Crawford's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possible causes of syncope. Given this patient's history of MI and current heart failure, which arrhythmic causes should be highest on your differential? What specific questions about the palpitations and witnessed events will help you distinguish between these?",
+      "phase5": "Your exam shows a stable patient now, but the history describes a very concerning episode. How does the combination of structural heart disease, palpitations followed by syncope, and family history of sudden cardiac death narrow your differential? What's the most urgent diagnostic test needed?",
+      "finalDebrief": "This case illustrates how patients with structural heart disease are at high risk for ventricular arrhythmias. The key clinical clues were the rapid palpitations immediately preceding syncope in someone with prior MI. How did the normal current exam potentially create diagnostic challenges, and why is continuous cardiac monitoring essential even when the patient appears stable?"
     }
-}
+  }
 };

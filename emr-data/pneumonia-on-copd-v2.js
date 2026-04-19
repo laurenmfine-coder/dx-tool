@@ -471,75 +471,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Walter Briggs appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Walter appears mildly anxious and somewhat short of breath even while talking, frequently pausing mid-sentence to catch his breath. He's cooperative and detailed in his responses, clearly concerned about this being worse than his usual COPD flares. Despite his respiratory distress, he remains engaged and wants to provide accurate information to help with his care.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did shortness of breath start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you describe how your breathing has changed over the past few days?",
+      "Tell me about the sputum you've been coughing up - what does it look like?",
+      "Have you had any fever or chills?",
+      "How often are you using your rescue inhaler compared to usual?",
+      "Have you had any chest pain or chest tightness?",
+      "Any nausea, vomiting, or changes in appetite?",
+      "Have you been taking all your regular medications as prescribed?",
+      "Any recent changes to your oxygen requirements at home?",
+      "Have you been around anyone who's been sick recently?",
+      "Any swelling in your legs or weight gain?",
+      "How has this affected your ability to do daily activities?",
+      "Have you had pneumonia or similar infections before?",
+      "Any recent hospitalizations or antibiotic use?"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've been coughing up thick green stuff for about four days now, and it's gettin.'",
-      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia Superimposed on Severe COPD.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Fluticasone-Salmeterol (Advair) 250/50 INH BID; Albuterol 90mcg MDI PRN; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Furosemide 40mg daily; Alendronate 70mg weekly.'",
-      "allergies": "'My allergies are Azithromycin, Iodinated Contrast.'",
-      "family": "Father: COPD, lung cancer (diagnosed age 70, deceased age 73). Smoker.  Mother: Congestive heart failure, hypertension, deceased age 84  Brother: Emphysema, current smoker, age 70",
-      "social": "Occupation: Retired electrician (40 years). Occupational asbestos exposure possible.  Marital: Married, lives with wife. She is primary caregiver.  Tobacco: Former smoker — quit 2018. 50 pack-year history (1.5 PPD x 33 years).  Alcohol: Rare — 1-2 beers per month  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you rephrase that? I'm having a bit of trouble concentrating with this breathing.",
+      "onset": "It started about four days ago. I woke up Monday morning with this terrible cough and thick green phlegm, and by Tuesday I could barely walk to the bathroom without getting winded.",
+      "character": "The shortness of breath is much worse than my usual COPD - I can't even sit in my chair without feeling like I'm suffocating. The cough is deep and wet, bringing up thick green-yellow mucus.",
+      "location": "The breathing difficulty is all over my chest, but I do have some aching on the right side of my chest when I cough really hard.",
+      "severity": "The breathing is about an 8 out of 10 - this is the worst I've felt since my last hospitalization two years ago. I can't do anything without getting completely winded.",
+      "aggravating": "Any activity makes it worse - even talking like this is making me short of breath. Lying flat is impossible, I have to sleep propped up on three pillows.",
+      "relieving": "I've been using my albuterol inhaler six to eight times a day instead of my usual once or twice, and I had to turn up my home oxygen from 2 liters to 3 liters.",
+      "associated": "I've had some low-grade fever - around 99 to 100 degrees - and I'm just exhausted. Lost my appetite completely and have been getting some chills.",
+      "denies": "No chest pain like a heart attack, no leg swelling that's new, no blood in the sputum, and no recent weight gain.",
+      "history": "I had pneumonia about three years ago that put me in the hospital for five days. I get COPD flares maybe twice a year, but this feels different - much worse.",
+      "medications": "Tiotropium (Spiriva) 18mcg INH daily; Fluticasone-Salmeterol (Advair) 250/50 INH BID; Albuterol 90mcg MDI PRN; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Furosemide 40mg daily; Alendronate 70mg weekly",
+      "allergies": "Azithromycin, Iodinated Contrast",
+      "family": "My father had COPD and lung cancer - he was a heavy smoker like I was. My brother also has emphysema and still smokes, unfortunately.",
+      "social": "I'm a retired electrician, worked for 40 years and may have had some asbestos exposure. I quit smoking in 2018 after smoking a pack and a half a day for over 30 years. My wife takes good care of me at home."
     },
     "examManeuvers": [
-      "General appearance and respiratory effort",
-      "Vital signs and pulse oximetry",
-      "Pulmonary auscultation",
-      "Percussion of lung fields",
-      "Accessory muscle use",
-      "Cardiovascular auscultation",
-      "Lower extremity DVT assessment",
-      "Tracheal position"
+      "Inspection of respiratory effort and accessory muscle use",
+      "Auscultation of lung fields",
+      "Percussion of chest",
+      "Palpation for tactile fremitus",
+      "Assessment of jugular venous pressure",
+      "Cardiac auscultation",
+      "Examination of lower extremities for edema",
+      "Assessment of oxygen saturation on room air and supplemental oxygen",
+      "Evaluation of sputum characteristics"
     ],
     "examFindings": {
-      "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-      "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe."
+      "Inspection of respiratory effort and accessory muscle use": "Increased work of breathing with use of accessory muscles, tripod positioning, pursed lip breathing",
+      "Auscultation of lung fields": "Decreased breath sounds bilaterally with expiratory wheezing, coarse crackles in right lower lobe, prolonged expiratory phase",
+      "Percussion of chest": "Hyperresonant throughout most lung fields, dullness to percussion over right lower lobe",
+      "Palpation for tactile fremitus": "Increased tactile fremitus over right lower lobe, decreased elsewhere",
+      "Assessment of jugular venous pressure": "JVP normal at 6 cm, no acute elevation",
+      "Cardiac auscultation": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs or gallops",
+      "Examination of lower extremities for edema": "Trace pedal edema bilaterally, unchanged from baseline per patient",
+      "Assessment of oxygen saturation on room air and supplemental oxygen": "91% on 3L nasal cannula, drops to 87% on room air",
+      "Evaluation of sputum characteristics": "Thick, purulent green-yellow sputum production"
     },
     "ddxTargets": [
       "Community-Acquired Pneumonia Superimposed on Severe COPD (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "COPD Exacerbation without pneumonia",
+      "Congestive Heart Failure Exacerbation",
+      "Pulmonary Embolism",
+      "Pneumothorax",
+      "Acute Coronary Syndrome with pulmonary edema",
+      "Lung Cancer with post-obstructive pneumonia"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia Superimposed on Severe COPD, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Community-Acquired Pneumonia Superimposed on Severe COPD, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia Superimposed on Severe COPD based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on COPD exacerbation given patient's severe COPD history and missing the superimposed pneumonia, which requires different antibiotic treatment",
+      "prematureClosure": "Risk of stopping evaluation after identifying COPD exacerbation without fully investigating the purulent sputum and focal findings suggesting pneumonia",
+      "availabilityBias": "Recent experience with COPD patients may lead to dismissing this as 'just another COPD flare' rather than recognizing the infectious component"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Walter Briggs's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Community-Acquired Pneumonia Superimposed on Severe COPD. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for acute dyspnea in this COPD patient. As you interview Mr. Briggs, pay particular attention to any features that might help you distinguish between these diagnoses. What specific historical elements would be most helpful in differentiating a simple COPD exacerbation from other causes of acute dyspnea?",
+      "phase5": "You've gathered comprehensive history and exam findings. I notice you found some focal findings on exam along with the generalized COPD changes. How do the purulent sputum, focal crackles, and dullness to percussion in the right lower lobe influence your thinking? What's the significance of these findings in a patient with underlying severe COPD?",
+      "finalDebrief": "This case illustrates the challenge of diagnosing pneumonia in patients with severe underlying COPD. The key was recognizing that while Mr. Briggs has chronic severe COPD, his acute presentation with purulent sputum, fever, and focal exam findings suggested a superimposed infection. How did your differential diagnosis evolve as you gathered more information, and what clinical clues ultimately pointed you toward pneumonia rather than just a COPD exacerbation?"
     }
   }
 };

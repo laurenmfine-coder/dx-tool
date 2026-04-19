@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Mateo Delgado",
-  "patientHPI": "I was eating and something got stuck in my throat and now I can't swallow anything, not even water. It feels like there's a big lump stuck in my chest and every time I try to drink something it just comes right back up.",
+      "patientHPI": "I was eating and something got stuck in my throat and now I can't swallow anything, not even water. It feels like there's a big lump stuck in my chest and every time I try to drink something it just comes right back up.",
       "dob": "01/12/2016",
       "age": "10",
       "sex": "Male",
@@ -1012,26 +1012,25 @@ window.EMR_DATA = {
       "Growth",
       "25th percentile height and weight, was 50th at age 5"
     ]
-  ]
-,"references":[
-  {
-    "id": "EoE-AGA-2020",
-    "title": "AGA clinical practice update on dietary management of EoE",
-    "authors": "Hirano I, Chan ES, Rank MA, et al.",
-    "journal": "Gastroenterology",
-    "year": 2020,
-    "doi": "10.1053/j.gastro.2020.02.038",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
-    "openAccess": true,
-    "validates": [
-      "≥15 eos/HPF diagnostic threshold",
-      "1-food (milk) elimination first-line",
-      "Swallowed budesonide/fluticasone",
-      "Repeat EGD 8-12 weeks"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "EoE-AGA-2020",
+      "title": "AGA clinical practice update on dietary management of EoE",
+      "authors": "Hirano I, Chan ES, Rank MA, et al.",
+      "journal": "Gastroenterology",
+      "year": 2020,
+      "doi": "10.1053/j.gastro.2020.02.038",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
+      "openAccess": true,
+      "validates": [
+        "≥15 eos/HPF diagnostic threshold",
+        "1-food (milk) elimination first-line",
+        "Swallowed budesonide/fluticasone",
+        "Repeat EGD 8-12 weeks"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Pediatric EoE presentation differs from adults: infants/toddlers — feeding refusal, vomiting, poor weight gain. School-age children — vomiting, abdominal pain, food refusal. Adolescents/adults — dysphagia, food impaction (adult pattern).",
@@ -1049,75 +1048,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Mateo Delgado appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mateo appears anxious and somewhat withdrawn, clinging to his mother during the interview. He becomes visibly distressed when discussing eating and will look to his mother for reassurance before answering questions about food.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 10-year-old with chronic abdominal pain, vomiting, and refusal to eat solid foods start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about when the stomach pain happens?",
+      "What does the pain feel like?",
+      "Where exactly does your stomach hurt?",
+      "How bad is the pain on a scale of 1 to 10?",
+      "What happens when you try to eat different foods?",
+      "Do you ever feel like food gets stuck when you swallow?",
+      "Tell me about the vomiting - when does it happen?",
+      "Have you noticed any foods that make you feel worse?",
+      "Do you have any trouble breathing or wheezing?",
+      "Have you had any heartburn or chest pain?",
+      "What medications are you taking?",
+      "Do you have any allergies?",
+      "Has anyone in your family had similar problems with eating or stomach issues?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Mateo Delgado presents with 10-year-old with chronic abdominal pain, vomiting, a.'",
-        "character": "'It's 10-year-old with chronic abdominal pain, vomiting, and refusal to eat solid foods \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone nasal; Cetirizine.'",
-        "allergies": "'My allergies are Egg.'",
-        "family": "Father: asthma  Sister: food allergies",
-        "social": "Feeding: Prefers soft foods, avoids meat and bread \u2014 'food gets stuck'  Growth: 25th percentile height and weight, was 50th at age 5"
+      "default": "I don't know... it just hurts. Can you ask my mom?",
+      "onset": "It's been happening for a really long time, maybe since I was little. It got worse over the past couple years.",
+      "character": "It feels like burning and cramping in my stomach. Sometimes it feels tight in my chest too.",
+      "location": "Right here in my stomach, and sometimes up here in my chest behind my ribs.",
+      "severity": "It's like a 7 or 8 when it's really bad. I can't eat anything when it hurts like that.",
+      "aggravating": "Eating makes it much worse, especially things like meat or bread. Even some fruits make it hurt.",
+      "relieving": "If I only eat soft things like yogurt or soup, it's not as bad. Sometimes nothing helps though.",
+      "associated": "I throw up a lot, especially after trying to eat. Food feels like it gets stuck in my throat. I get really full fast.",
+      "denies": "I don't have diarrhea or fever. I don't think I'm losing weight but I'm not growing like my friends.",
+      "history": "This has been going on for years. My mom says I've always been a picky eater but it's gotten much worse.",
+      "medications": "Fluticasone nasal; Cetirizine",
+      "allergies": "Egg",
+      "family": "My dad has asthma and my sister has food allergies. My mom says there might be other allergies in the family too.",
+      "social": "I'm in 4th grade. I don't like eating lunch at school because it hurts. I mostly eat soft foods like mac and cheese or smoothies."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and growth assessment",
+      "Abdominal inspection",
+      "Abdominal palpation",
+      "Auscultation of bowel sounds",
+      "Examination of oral cavity and throat",
+      "Lymph node palpation",
+      "Skin examination for eczematous changes",
+      "Pulmonary examination",
+      "Assessment of hydration status",
+      "Weight and height percentiles"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and growth assessment": "Thin-appearing child, height and weight at 25th percentile, appears younger than stated age",
+      "Abdominal inspection": "Mildly distended, no visible masses or hernias",
+      "Abdominal palpation": "Mild epigastric tenderness, no organomegaly or masses",
+      "Auscultation of bowel sounds": "Normal bowel sounds present in all quadrants",
+      "Examination of oral cavity and throat": "Mild erythema of posterior pharynx, no obvious lesions or thrush",
+      "Lymph node palpation": "No significant lymphadenopathy",
+      "Skin examination for eczematous changes": "Mild eczematous changes on flexural surfaces, consistent with known atopic dermatitis",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezing or stridor",
+      "Assessment of hydration status": "Adequate hydration, normal skin turgor",
+      "Weight and height percentiles": "Both height and weight dropped from 50th percentile at age 5 to 25th percentile currently"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Eosinophilic esophagitis (correct diagnosis)",
+      "Gastroesophageal reflux disease (GERD)",
+      "Food protein-induced enterocolitis syndrome (FPIES)",
+      "Esophageal stricture or web",
+      "Crohn's disease",
+      "Functional dyspepsia",
+      "Peptic ulcer disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'picky eating' or behavioral feeding issues given the chronic nature and young age, missing the underlying inflammatory process",
+      "prematureClosure": "May stop at GERD diagnosis given reflux-like symptoms without considering the allergic/eosinophilic component suggested by atopic history",
+      "availabilityBias": "Common conditions like viral gastroenteritis or functional abdominal pain may overshadow the less common but serious eosinophilic esophagitis"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Mateo Delgado's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at this 10-year-old with chronic symptoms, what aspects of his medical history particularly stand out to you? How might his allergic conditions relate to his GI symptoms?",
+      "phase5": "You've gathered comprehensive information about Mateo's eating difficulties and growth concerns. Given his atopic history and the specific pattern of food intolerance, what inflammatory conditions should you consider? How does the 'food getting stuck' sensation guide your thinking?",
+      "finalDebrief": "This case illustrates how eosinophilic esophagitis can present as chronic feeding difficulties in children with atopic disease. Notice how the combination of dysphagia, food impaction sensation, atopic comorbidities, and growth deceleration pointed toward this diagnosis rather than simple GERD or behavioral feeding issues."
     }
-}
+  }
 };

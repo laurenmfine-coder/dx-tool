@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Liam O'Brien",
-  "patientHPI": "My son is doing great - he's so full of energy and eating everything in sight! We're here for his regular checkup before he starts school in January, and honestly we don't have any concerns right now.",
+    "patientHPI": "My son is doing great - he's so full of energy and eating everything in sight! We're here for his regular checkup before he starts school in January, and honestly we don't have any concerns right now.",
     "dob": "07/22/2020",
     "age": 4,
     "sex": "Male",
@@ -151,40 +151,154 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC) WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "9.4", "unit": "x10³/µL", "range": "5.0-13.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "7.8", "unit": "g/dL", "range": "11.5-14.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "23.4", "unit": "%", "range": "34-42", "flag": "L" },
-            { "test": "MCV", "value": "72", "unit": "fL", "range": "75-87", "flag": "L" },
-            { "test": "RDW", "value": "16.2", "unit": "%", "range": "11.5-14.5", "flag": "H" },
-            { "test": "Platelets", "value": "342", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Reticulocyte Count", "value": "4.8", "unit": "%", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "9.4",
+              "unit": "x10³/µL",
+              "range": "5.0-13.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "7.8",
+              "unit": "g/dL",
+              "range": "11.5-14.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "23.4",
+              "unit": "%",
+              "range": "34-42",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "72",
+              "unit": "fL",
+              "range": "75-87",
+              "flag": "L"
+            },
+            {
+              "test": "RDW",
+              "value": "16.2",
+              "unit": "%",
+              "range": "11.5-14.5",
+              "flag": "H"
+            },
+            {
+              "test": "Platelets",
+              "value": "342",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Reticulocyte Count",
+              "value": "4.8",
+              "unit": "%",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-110", "flag": "" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "5-18", "flag": "H" },
-            { "test": "Creatinine", "value": "0.3", "unit": "mg/dL", "range": "0.2-0.5", "flag": "" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.5", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "20-28", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-110",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "5-18",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.3",
+              "unit": "mg/dL",
+              "range": "0.2-0.5",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.5",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "20-28",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "TYPE AND SCREEN",
           "results": [
-            { "test": "Blood Type", "value": "O Positive", "unit": "", "range": "", "flag": "" },
-            { "test": "Antibody Screen", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "Blood Type",
+              "value": "O Positive",
+              "unit": "",
+              "range": "",
+              "flag": ""
+            },
+            {
+              "test": "Antibody Screen",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION STUDIES",
           "results": [
-            { "test": "PT", "value": "12.8", "unit": "sec", "range": "11.0-14.0", "flag": "" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.9-1.1", "flag": "" },
-            { "test": "PTT", "value": "28", "unit": "sec", "range": "25-35", "flag": "" }
+            {
+              "test": "PT",
+              "value": "12.8",
+              "unit": "sec",
+              "range": "11.0-14.0",
+              "flag": ""
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.9-1.1",
+              "flag": ""
+            },
+            {
+              "test": "PTT",
+              "value": "28",
+              "unit": "sec",
+              "range": "25-35",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -203,10 +317,34 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "8.9", "unit": "x10³/µL", "range": "5.0-13.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.2", "unit": "g/dL", "range": "11.5-14.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "30.6", "unit": "%", "range": "34-42", "flag": "L" },
-            { "test": "Platelets", "value": "318", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.9",
+              "unit": "x10³/µL",
+              "range": "5.0-13.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.2",
+              "unit": "g/dL",
+              "range": "11.5-14.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "30.6",
+              "unit": "%",
+              "range": "34-42",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "318",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -231,11 +369,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "DTaP (Daptacel)", "date": "11/18/2024", "site": "Left deltoid IM", "lot": "DA472R", "mfr": "Sanofi" },
-    { "vaccine": "IPV (IPOL)", "date": "11/18/2024", "site": "Right deltoid IM", "lot": "IP402T", "mfr": "Sanofi" },
-    { "vaccine": "MMR (M-M-R II)", "date": "11/18/2024", "site": "Left deltoid SC", "lot": "MM688K", "mfr": "Merck" },
-    { "vaccine": "Varicella (Varivax)", "date": "11/18/2024", "site": "Right deltoid SC", "lot": "VV419L", "mfr": "Merck" },
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/01/2024", "site": "Left deltoid IM", "lot": "FL801P", "mfr": "GSK" }
+    {
+      "vaccine": "DTaP (Daptacel)",
+      "date": "11/18/2024",
+      "site": "Left deltoid IM",
+      "lot": "DA472R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "IPV (IPOL)",
+      "date": "11/18/2024",
+      "site": "Right deltoid IM",
+      "lot": "IP402T",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "MMR (M-M-R II)",
+      "date": "11/18/2024",
+      "site": "Left deltoid SC",
+      "lot": "MM688K",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Varicella (Varivax)",
+      "date": "11/18/2024",
+      "site": "Right deltoid SC",
+      "lot": "VV419L",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/01/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL801P",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother (age 34): Celiac disease — diagnosed at age 28; well-controlled on gluten-free diet",
@@ -245,14 +413,38 @@ window.EMR_DATA = {
     "Sibling (brother, age 6): Healthy, no GI issues"
   ],
   "socialHistory": [
-    ["Guardian", "Lives with both parents and older brother"],
-    ["Childcare/School", "Attends pre-K at local elementary school"],
-    ["Tobacco Exposure", "None — no smokers in household"],
-    ["Pets", "One golden retriever, outdoor cat"],
-    ["Home Environment", "Single-family home; well water with filtration system"],
-    ["Diet", "Generally good eater; eats meat, dairy, fruits, vegetables; no dietary restrictions; no recent dietary changes"],
-    ["Development", "Age-appropriate; pre-reading skills, counts to 20, rides bicycle with training wheels"],
-    ["Safety", "Booster seat in car; bicycle helmet worn; swim lessons completed"]
+    [
+      "Guardian",
+      "Lives with both parents and older brother"
+    ],
+    [
+      "Childcare/School",
+      "Attends pre-K at local elementary school"
+    ],
+    [
+      "Tobacco Exposure",
+      "None — no smokers in household"
+    ],
+    [
+      "Pets",
+      "One golden retriever, outdoor cat"
+    ],
+    [
+      "Home Environment",
+      "Single-family home; well water with filtration system"
+    ],
+    [
+      "Diet",
+      "Generally good eater; eats meat, dairy, fruits, vegetables; no dietary restrictions; no recent dietary changes"
+    ],
+    [
+      "Development",
+      "Age-appropriate; pre-reading skills, counts to 20, rides bicycle with training wheels"
+    ],
+    [
+      "Safety",
+      "Booster seat in car; bicycle helmet worn; swim lessons completed"
+    ]
   ],
   "meta": {
     "caseId": "meckel-diverticulum",
@@ -263,75 +455,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Liam O'Brien is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "4-year-old Liam appears acutely uncomfortable and pale, clinging to his mother while intermittently crying due to abdominal pain. His mother is visibly anxious and confused, as this acute illness contradicts her stated reason for the visit (routine checkup), suggesting she may be providing inaccurate history due to stress or misunderstanding of the severity.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pediatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me what's been happening with Liam today that brought you to the emergency department?",
+      "Has Liam had any vomiting or nausea recently?",
+      "Have you noticed any changes in his bowel movements, including any blood in his stool?",
+      "When did you first notice Liam having abdominal pain?",
+      "Can you describe the abdominal pain - where is it located and how severe does it seem?",
+      "Has Liam been eating and drinking normally today?",
+      "Have you noticed Liam appearing more pale or tired than usual?",
+      "Has he had any fever or felt warm to touch?",
+      "Has Liam ever had episodes of abdominal pain like this before?",
+      "What medications does Liam currently take?",
+      "Does Liam have any known allergies?",
+      "Is there any family history of bowel problems or bleeding disorders?",
+      "Has Liam had any recent injuries or trauma to his abdomen?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My son is doing great - he's so full of energy and eating everything in sight! W.'",
-        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cetirizine 5mg/5mL \u2014 5mL daily PRN; Children's Ibuprofen 100mg/5mL \u2014 7.5mL Q6-8h PRN.'",
-        "allergies": "'My allergies are Tree pollen (birch, oak).'",
-        "family": "Mother (age 34): Celiac disease \u2014 diagnosed at age 28; well-controlled on gluten-free diet  Father (age 36): No significant medical history  Maternal grandmother (age 62): Colon polyps \u2014 surveillance colonoscopies",
-        "social": "Guardian: Lives with both parents and older brother  Childcare/School: Attends pre-K at local elementary school  Tobacco Exposure: None \u2014 no smokers in household  Pets: One golden retriever, outdoor cat  Home Environment: Single-family home; well water with filtration system"
+      "default": "I'm sorry, I'm just so worried about him right now. Can you repeat that question?",
+      "onset": "He was fine this morning, but about 2 hours ago he started crying and holding his belly. The pain seemed to come on suddenly while he was playing.",
+      "character": "He keeps pointing to his belly button area and says it hurts really bad. He's crying more than usual and won't let me touch his tummy.",
+      "location": "He keeps holding the area around his belly button, and sometimes he points lower toward his right side.",
+      "severity": "He's crying constantly and won't play or eat anything. This is a 9 out of 10 for him - I've never seen him in this much pain.",
+      "aggravating": "Moving around seems to make it worse. He doesn't want to walk and cries harder when I try to pick him up.",
+      "relieving": "Nothing seems to help. I tried giving him some of his ibuprofen but he threw it up almost immediately.",
+      "associated": "He threw up twice, and the second time there was some red in it. He also had a bowel movement about an hour ago that looked really dark, almost black.",
+      "denies": "No fever that I've noticed. He hasn't been sick recently and was completely fine yesterday.",
+      "history": "He's never had anything like this before. He's usually such a healthy, active kid.",
+      "medications": "Cetirizine 5mg/5mL — 5mL daily PRN; Children's Ibuprofen 100mg/5mL — 7.5mL Q6-8h PRN",
+      "allergies": "Tree pollen (birch, oak)",
+      "family": "I have celiac disease, but that's different from this. My mother has had some colon polyps found during her screenings.",
+      "social": "He goes to pre-K and loves playing outside. No one in our house smokes. We have a dog and a cat, but he's never had problems with them."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and vital signs assessment",
+      "Abdominal inspection",
+      "Gentle abdominal palpation starting away from painful area",
+      "Assessment for periumbilical tenderness",
+      "Assessment for right lower quadrant tenderness",
+      "Assessment for rebound tenderness and guarding",
+      "Rectal examination for blood",
+      "Assessment of skin color and capillary refill",
+      "Lymph node examination",
+      "Heart and lung examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. Document specifically what you observe."
+      "General appearance and vital signs assessment": "Pale, uncomfortable-appearing 4-year-old with tachycardia (HR 142) and borderline hypotension (84/52) concerning for volume depletion",
+      "Abdominal inspection": "Abdomen appears slightly distended with visible discomfort when child moves",
+      "Gentle abdominal palpation starting away from painful area": "Soft abdomen with focal tenderness in periumbilical region, child guards and cries with palpation",
+      "Assessment for periumbilical tenderness": "Marked tenderness in periumbilical area with involuntary guarding",
+      "Assessment for right lower quadrant tenderness": "Mild tenderness in right lower quadrant, less severe than periumbilical area",
+      "Assessment for rebound tenderness and guarding": "Positive rebound tenderness in periumbilical region with voluntary guarding",
+      "Rectal examination for blood": "Dark, melanotic stool present on examination with trace bright red blood",
+      "Assessment of skin color and capillary refill": "Pale skin with capillary refill of 3 seconds, suggesting mild volume depletion",
+      "Lymph node examination": "No palpable lymphadenopathy",
+      "Heart and lung examination": "Tachycardic but regular rhythm, lungs clear to auscultation bilaterally"
     },
     "ddxTargets": [
-        "Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage (correct diagnosis)",
+      "Acute appendicitis",
+      "Intussusception",
+      "Bowel obstruction with strangulation",
+      "Upper gastrointestinal bleeding from peptic ulcer disease",
+      "Viral gastroenteritis with dehydration",
+      "Food poisoning or infectious gastroenteritis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on mother's initial statement about routine checkup rather than focusing on acute presentation of abdominal pain and GI bleeding",
+      "prematureClosure": "Risk of immediately diagnosing appendicitis based on abdominal pain and stopping workup before considering GI bleeding sources",
+      "availabilityBias": "Risk of overweighting common diagnoses like viral gastroenteritis while missing rare but serious conditions like Meckel diverticulum"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Liam O'Brien's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Symptomatic Meckel Diverticulum with Ectopic Gastric Mucosa and Acute GI Hemorrhage. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Consider the discrepancy between the mother's stated reason for visit and your clinical assessment. What key historical elements would help differentiate between surgical and medical causes of acute abdominal pain in a 4-year-old?",
+      "phase5": "You've identified concerning features including hematemesis, melena, and periumbilical pain in a young child. How does this constellation of findings help narrow your differential diagnosis, and what imaging or laboratory studies would be most helpful?",
+      "finalDebrief": "This case demonstrates the classic presentation of symptomatic Meckel diverticulum with ectopic gastric mucosa causing both upper and lower GI bleeding. Reflect on how the initial history discrepancy could have led to diagnostic delay, and discuss the importance of systematic evaluation for GI bleeding in pediatric patients with acute abdominal pain."
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Sophia Martinez-Lee",
-  "patientHPI": "I was at swim practice and about an hour and a half after taking my daily peanut treatment dose, I started feeling my throat get tight during warm-ups. Then I broke out in hives all over and got bad stomach cramps, so my coach called an ambulance and they gave me a shot.",
+      "patientHPI": "I was at swim practice and about an hour and a half after taking my daily peanut treatment dose, I started feeling my throat get tight during warm-ups. Then I broke out in hives all over and got bad stomach cramps, so my coach called an ambulance and they gave me a shot.",
       "dob": "07/11/2012",
       "age": "14",
       "sex": "Female",
@@ -1000,108 +1000,115 @@ window.EMR_DATA = {
       "Social",
       "Peer at school recently hospitalized for anaphylaxis after OIT reaction — parents worried about continuing"
     ]
-  ]
-,"references":[
-  {
-    "id": "NIAID-FA-2010",
-    "title": "Guidelines for diagnosis and management of food allergy in the US",
-    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2010,
-    "doi": "10.1016/j.jaci.2010.10.008",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
-    "openAccess": true,
-    "validates": [
-      "IgE-mediated food allergy criteria",
-      "Component testing (Ara h 2)",
-      "OFC as gold standard"
-    ]
-  },
-  {
-    "id": "PALISADE-2018",
-    "title": "AR101 oral immunotherapy for peanut allergy",
-    "authors": "PALISADE Group.",
-    "journal": "N Engl J Med",
-    "year": 2018,
-    "doi": "10.1056/NEJMoa1812856",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
-    "openAccess": true,
-    "validates": [
-      "OIT efficacy",
-      "Exercise restriction 2h window",
-      "OIT = protection, not cure"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "NIAID-FA-2010",
+      "title": "Guidelines for diagnosis and management of food allergy in the US",
+      "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2010,
+      "doi": "10.1016/j.jaci.2010.10.008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+      "openAccess": true,
+      "validates": [
+        "IgE-mediated food allergy criteria",
+        "Component testing (Ara h 2)",
+        "OFC as gold standard"
+      ]
+    },
+    {
+      "id": "PALISADE-2018",
+      "title": "AR101 oral immunotherapy for peanut allergy",
+      "authors": "PALISADE Group.",
+      "journal": "N Engl J Med",
+      "year": 2018,
+      "doi": "10.1056/NEJMoa1812856",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
+      "openAccess": true,
+      "validates": [
+        "OIT efficacy",
+        "Exercise restriction 2h window",
+        "OIT = protection, not cure"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Sophia Martinez-Lee is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Sophia appears anxious and slightly embarrassed about violating her OIT protocol by exercising too soon after her dose. She's cooperative but initially minimizes the severity of her symptoms, worried her parents will want to discontinue the treatment she's worked hard on for 6 months.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what happened today, step by step?",
+      "What time did you take your peanut dose and when did you start swimming?",
+      "Describe the throat tightness - when did it start and how severe is it?",
+      "Are you having any trouble breathing or swallowing?",
+      "When did you first notice the hives and where are they located?",
+      "Tell me about the abdominal pain - where is it and how bad is it?",
+      "Have you used your epinephrine auto-injector today?",
+      "How long have you been on peanut OIT and what's your current dose?",
+      "Do you remember being told about exercise restrictions with your OIT?",
+      "Have you had any reactions like this before during your treatment?",
+      "Are you experiencing any nausea, vomiting, or dizziness?",
+      "How are you feeling right now compared to when this started?",
+      "Besides the peanut dose, did you eat anything else unusual today?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Cetirizine; Albuterol.'",
-        "allergies": "'My allergies: Peanut, Tree nuts.'",
-        "family": "Mother: asthma  Father: no allergies",
-        "social": "OIT status: 6 months into peanut OIT \u2014 up-dosing phase  Trigger: Had OIT reaction after exercising within 2 hours of dose (exercise amplifies absorption)  Exercise: Competitive swimmer \u2014 exercise-induced anaphylaxis risk during OIT  Social: Peer at school recently hospitalized for anaphylaxis after OIT reaction \u2014 parents worried about continuing"
+      "default": "I'm not sure what you mean. Can you ask that differently?",
+      "onset": "It started about 30 minutes ago while I was doing warm-up laps in the pool. First my throat felt tight, then I noticed the hives on my arms.",
+      "character": "My throat feels like it's closing up, kind of scratchy and tight. It's scary because it's hard to swallow.",
+      "location": "The throat tightness is right here in the front of my neck. The stomach pain is crampy all over my belly.",
+      "severity": "The throat tightness is maybe a 6 out of 10, and the belly pain is about a 4. It's definitely worse than any reaction I've had before.",
+      "aggravating": "The symptoms seemed to get worse when I kept trying to swim. Moving around made the stomach cramps worse.",
+      "relieving": "I took my antihistamine and got out of the pool. The hives aren't spreading as much now, but my throat still feels tight.",
+      "associated": "I have these red bumpy hives on my arms and some on my chest. My stomach is cramping and I feel kind of nauseous.",
+      "denies": "I'm not having trouble breathing exactly, and I'm not dizzy or feeling faint. No vomiting.",
+      "history": "I've had some mild stomach upset with dose increases before, but never throat tightness or hives like this.",
+      "medications": "Epinephrine; Cetirizine; Albuterol",
+      "allergies": "Peanut, Tree nuts",
+      "family": "My mom has asthma but no food allergies. My dad doesn't have any allergies.",
+      "social": "I'm a competitive swimmer and train almost every day. I don't smoke or drink. I've been doing peanut OIT for 6 months and I'm up to 200mg doses."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect skin for urticaria distribution and characteristics",
+      "Examine oropharynx and neck for swelling or erythema",
+      "Auscultate lungs for wheeze or decreased air entry",
+      "Palpate abdomen for tenderness or distension",
+      "Assess voice quality and ability to swallow",
+      "Check capillary refill and peripheral perfusion",
+      "Palpate neck for lymphadenopathy or swelling",
+      "Examine conjunctiva for injection or swelling",
+      "Assess mental status and anxiety level",
+      "Check pulse quality and rhythm"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect skin for urticaria distribution and characteristics": "Raised, erythematous wheals on bilateral forearms and anterior chest, some confluent, blanching with pressure",
+      "Examine oropharynx and neck for swelling or erythema": "Mild pharyngeal erythema, no visible tongue or lip swelling, uvula appears normal",
+      "Auscultate lungs for wheeze or decreased air entry": "Clear breath sounds bilaterally, no wheeze or stridor audible",
+      "Palpate abdomen for tenderness or distension": "Mild diffuse tenderness to palpation, no guarding or rebound, normal bowel sounds",
+      "Assess voice quality and ability to swallow": "Voice slightly hoarse, patient able to swallow saliva but reports discomfort",
+      "Check capillary refill and peripheral perfusion": "Capillary refill 2 seconds, extremities warm and well-perfused",
+      "Palpate neck for lymphadenopathy or swelling": "No palpable lymphadenopathy, no obvious neck swelling or induration",
+      "Examine conjunctiva for injection or swelling": "Mild conjunctival injection, no periorbital edema",
+      "Assess mental status and anxiety level": "Alert and oriented, anxious but cooperative, no altered mental status",
+      "Check pulse quality and rhythm": "Regular tachycardia, pulses strong and equal bilaterally"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Exercise-enhanced food allergic reaction (OIT-related anaphylaxis) (correct diagnosis)",
+      "Food-dependent exercise-induced anaphylaxis",
+      "OIT dose reaction without exercise component",
+      "Anaphylaxis - idiopathic or from unknown trigger",
+      "Systemic mastocytosis with trigger",
+      "Exercise-induced asthma with urticaria",
+      "Anxiety reaction with psychosomatic symptoms"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'just an OIT reaction' and missing the exercise amplification component that makes this more serious",
+      "prematureClosure": "May diagnose simple OIT reaction and miss that exercise within 2 hours significantly increases absorption and reaction severity",
+      "availabilityBias": "Recent case of peer hospitalized for OIT reaction may bias toward either over-treatment or normalization of reactions"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Sophia Martinez-Lee: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient is on oral immunotherapy for peanut allergy. What questions will help you understand the relationship between her OIT dosing, exercise timing, and current symptoms? Consider the pathophysiology of how exercise affects allergen absorption and reaction severity.",
+      "phase5": "You've identified a patient with urticaria, throat symptoms, and GI symptoms after OIT dosing. What's significant about the timing of her exercise relative to her dose? How does this change your assessment of severity and management approach?",
+      "finalDebrief": "This case highlights exercise-enhanced allergic reactions during OIT. Exercise within 2 hours of dosing increases absorption and can trigger more severe reactions. How did recognizing this specific trigger help differentiate from simple OIT reactions? What does this mean for her treatment plan and patient education?"
     }
-}
+  }
 };

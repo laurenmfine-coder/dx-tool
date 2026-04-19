@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Steinberg",
-  "patientHPI": "My right knee arthritis has been acting up more lately and it's keeping me off the golf course, plus I've had a couple episodes this year where my knee got all hot, red, and swollen up like a balloon - really painful when that happens.",
+    "patientHPI": "My right knee arthritis has been acting up more lately and it's keeping me off the golf course, plus I've had a couple episodes this year where my knee got all hot, red, and swollen up like a balloon - really painful when that happens.",
     "dob": "01/12/1947",
     "age": 77,
     "sex": "Male",
@@ -141,7 +141,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "188 lbs",
       "ht": "5'10\"",
-      "bmi": 27.0,
+      "bmi": 27,
       "setting": "PCP Office"
     }
   ],
@@ -173,18 +173,60 @@ window.EMR_DATA = {
         {
           "name": "METABOLIC PANEL",
           "results": [
-            { "test": "Calcium", "value": "10.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" },
-            { "test": "Phosphorus", "value": "2.4", "unit": "mg/dL", "range": "2.5-4.5", "flag": "L" },
-            { "test": "Magnesium", "value": "1.8", "unit": "mg/dL", "range": "1.7-2.2", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Uric Acid", "value": "5.2", "unit": "mg/dL", "range": "3.0-7.0", "flag": "" }
+            {
+              "test": "Calcium",
+              "value": "10.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            },
+            {
+              "test": "Phosphorus",
+              "value": "2.4",
+              "unit": "mg/dL",
+              "range": "2.5-4.5",
+              "flag": "L"
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Uric Acid",
+              "value": "5.2",
+              "unit": "mg/dL",
+              "range": "3.0-7.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ENDOCRINE",
           "results": [
-            { "test": "PTH, Intact", "value": "78", "unit": "pg/mL", "range": "15-65", "flag": "H" },
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" }
+            {
+              "test": "PTH, Intact",
+              "value": "78",
+              "unit": "pg/mL",
+              "range": "15-65",
+              "flag": "H"
+            },
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -252,15 +294,42 @@ window.EMR_DATA = {
     "No family history of hyperparathyroidism or MEN syndromes"
   ],
   "socialHistory": [
-    ["Occupation", "Retired accountant"],
-    ["Marital", "Married, 3 adult children"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "1 glass of wine with dinner daily"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Golf 2x/week (cart); daily walking"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "No firearms; handrails installed"],
-    ["Advance Directive", "Living will on file; HCP: wife Ruth Steinberg; Full code"]
+    [
+      "Occupation",
+      "Retired accountant"
+    ],
+    [
+      "Marital",
+      "Married, 3 adult children"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "1 glass of wine with dinner daily"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Golf 2x/week (cart); daily walking"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "No firearms; handrails installed"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file; HCP: wife Ruth Steinberg; Full code"
+    ]
   ],
   "meta": {
     "caseId": "pseudogout",
@@ -271,75 +340,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Harold Steinberg appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Harold appears mildly frustrated and concerned about his worsening knee pain interfering with his golf activities. He's generally cooperative and forthcoming but somewhat dismissive of his symptoms, attributing them to 'just getting older' and his known arthritis.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did musculoskeletal emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when these knee episodes started and how often they occur?",
+      "What does the pain feel like during these flare-ups?",
+      "How long do these episodes of swelling and redness typically last?",
+      "On a scale of 1-10, how severe is the pain during these episodes?",
+      "What makes the knee pain and swelling worse?",
+      "What helps relieve the pain during these episodes?",
+      "Have you noticed any fever, chills, or feeling unwell during these episodes?",
+      "Any recent injuries or trauma to the knee?",
+      "How is your baseline knee pain between these acute episodes?",
+      "Any similar episodes in other joints?",
+      "Have you had any kidney stones or bone problems?",
+      "Any family history of gout or joint problems?",
+      "What medications are you currently taking?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My right knee arthritis has been acting up more lately and it's keeping me off t.'",
-        "character": "'It's musculoskeletal emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute CPPD Crystal Arthropathy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Levothyroxine 88mcg daily; Lisinopril 20mg daily; Amlodipine 5mg daily; Tamsulosin 0.4mg QHS; Acetaminophen 500mg TID PRN.'",
-        "allergies": "'My allergies are Ibuprofen, Shellfish.'",
-        "family": "Mother: OA, hypothyroidism, deceased at 88  Father: CAD, deceased at 74  Brother: BPH, gout, alive at 74",
-        "social": "Occupation: Retired accountant  Marital: Married, 3 adult children  Tobacco: Never smoker  Alcohol: 1 glass of wine with dinner daily  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Can you be more specific about my knee?",
+      "onset": "The really bad episodes started about 6 months ago. I've had maybe 3 or 4 of them since then. My regular knee arthritis has been bothering me for years, but these flare-ups are different - much worse.",
+      "character": "During the bad episodes, it's like a deep, throbbing, burning pain. Much worse than my usual arthritis ache. The knee gets so swollen I can barely bend it.",
+      "location": "It's my right knee, mainly on the inside and front. The whole knee gets swollen and hot to touch. No shooting pain anywhere else.",
+      "severity": "My usual arthritis is maybe a 3 or 4, but during these flare-ups it's easily an 8 or 9. I can barely walk and definitely can't play golf.",
+      "aggravating": "Any movement makes it worse during the bad episodes. Even just walking to the bathroom is agony. Weight-bearing is terrible.",
+      "relieving": "The Tylenol barely touches it during the flares. Rest and ice help a little. The episodes seem to get better on their own after a few days.",
+      "associated": "During the bad episodes, the knee is hot and red, really swollen. No fever that I've noticed. Sometimes I feel a bit tired when it's acting up.",
+      "denies": "No fever or chills. No other joints involved. No recent injuries. No rash or skin changes elsewhere.",
+      "history": "Like I said, about 3 or 4 episodes in the past 6 months. Each one lasts about 3-5 days then gradually gets better. Between episodes, just my usual arthritis pain.",
+      "medications": "Levothyroxine 88mcg daily; Lisinopril 20mg daily; Amlodipine 5mg daily; Tamsulosin 0.4mg QHS; Acetaminophen 500mg TID PRN",
+      "allergies": "Ibuprofen, Shellfish",
+      "family": "My brother has gout, actually. My mother had bad arthritis in her knees too. My father had heart problems.",
+      "social": "I'm a retired accountant, married with three kids. I try to play golf twice a week when my knee allows. Never smoked. I have one glass of wine with dinner most nights. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of right knee",
+      "Palpation of right knee joint line and surrounding structures",
+      "Range of motion assessment - active and passive",
+      "Knee stability testing (McMurray, drawer tests)",
+      "Assessment of joint effusion (ballottement test)",
+      "Temperature assessment of affected joint",
+      "Examination of other major joints",
+      "Lymph node examination",
+      "Assessment for tophi or other crystal deposits"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute CPPD Crystal Arthropathy. Document specifically what you observe."
+      "Inspection of right knee": "Moderate swelling and erythema of right knee with visible joint effusion. No obvious deformity or skin lesions.",
+      "Palpation of right knee joint line and surrounding structures": "Warmth noted over entire joint. Moderate tenderness along medial and lateral joint lines. Palpable effusion present.",
+      "Range of motion assessment - active and passive": "Limited active flexion to 90 degrees due to pain and swelling. Passive range of motion 0-95 degrees with pain at extremes.",
+      "Knee stability testing (McMurray, drawer tests)": "Difficult to assess due to pain and effusion, but no gross instability noted. McMurray test negative.",
+      "Assessment of joint effusion (ballottement test)": "Positive ballottement test indicating moderate joint effusion.",
+      "Temperature assessment of affected joint": "Right knee noticeably warmer than left knee and surrounding tissue.",
+      "Examination of other major joints": "Left knee shows mild crepitus consistent with osteoarthritis but no acute inflammation. Other joints unremarkable.",
+      "Lymph node examination": "No lymphadenopathy in inguinal or popliteal regions.",
+      "Assessment for tophi or other crystal deposits": "No visible tophi on ears, fingers, or elbows. No subcutaneous nodules noted."
     },
     "ddxTargets": [
-        "Acute CPPD Crystal Arthropathy (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute CPPD Crystal Arthropathy (Pseudogout) — Right Knee, Associated with Primary Hyperparathyroidism",
+      "Gouty arthritis (acute gout attack)",
+      "Osteoarthritis flare with inflammatory component",
+      "Septic arthritis",
+      "Cellulitis with reactive joint effusion",
+      "Crystalline arthropathy (uric acid vs CPPD unclear)",
+      "Rheumatoid arthritis (late-onset monoarticular presentation)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute CPPD Crystal Arthropathy, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute CPPD Crystal Arthropathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute CPPD Crystal Arthropathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'arthritis' from patient's known OA history and missing the acute crystalline component, or assuming this is just OA progression",
+      "prematureClosure": "Risk of stopping at 'gout' given family history and acute monoarticular presentation without considering CPPD, especially with underlying hyperparathyroidism",
+      "availabilityBias": "Gout is more commonly discussed than pseudogout; may not consider CPPD crystal arthropathy despite the metabolic predisposition"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Steinberg's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute CPPD Crystal Arthropathy (Pseudogout) \u2014 Right Knee, Associated with Primary Hyperparathyroidism. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're considering both infectious and crystalline causes - that's important for an acute monoarticular arthritis. What specific historical features would help you differentiate between gout, pseudogout, and septic arthritis? Also, consider what this patient's metabolic history might contribute to crystal formation.",
+      "phase5": "You've identified an acute inflammatory monoarthritis with effusion. The lack of fever and systemic symptoms, along with the episodic pattern, points away from infection. Given the patient's family history and your exam findings, what's your leading crystalline arthropathy? How might his known hyperparathyroidism factor into crystal deposition diseases?",
+      "finalDebrief": "This case highlights the importance of considering CPPD crystal arthropathy (pseudogout), especially in elderly patients with metabolic conditions like hyperparathyroidism. While gout was reasonable given the family history, the patient's calcium metabolism disorder predisposes to calcium pyrophosphate dihydrate crystal formation. The episodic acute inflammatory pattern with complete resolution between attacks is classic for crystalline arthropathies. Joint aspiration with polarized microscopy and imaging for chondrocalcinosis would confirm the diagnosis."
     }
-}
+  }
 };

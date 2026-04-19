@@ -460,75 +460,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Margaret Finley appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Margaret appears tired and somewhat slow to respond, with a flat affect consistent with both depression and hypothyroidism. She is generally forthcoming but seems mildly confused at times and may need questions repeated or clarified. Her distress level is moderate - she's concerned about her symptoms but attributes much of it to grief and aging.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me more about when this fatigue and confusion started?",
+      "You mentioned running out of your thyroid medication - how long has it been since you last took it?",
+      "Have you been taking all your other medications regularly?",
+      "Have you noticed any changes in your thinking or memory recently?",
+      "Tell me about the weight gain - how much and over what time period?",
+      "Have you had any changes in your bowel habits?",
+      "Have you noticed feeling colder than usual?",
+      "Any changes in your skin or hair?",
+      "Have you had any chest pain, shortness of breath, or heart palpitations?",
+      "Any nausea, vomiting, or changes in appetite?",
+      "How has your mood been, especially since your husband passed?",
+      "Have you had any falls or episodes of dizziness?",
+      "Any headaches or visual changes?"
     ],
     "patientResponses": {
-      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've been feeling really down and tired lately, sleeping way more than usual, an.'",
-      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Severe Hypothyroidism.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Levothyroxine 75mcg daily; Amlodipine 5mg daily; Sertraline 100mg daily; Acetaminophen 500mg Q6h PRN.'",
-      "allergies": "'My allergies are NSAIDs (Ibuprofen, Naproxen).'",
-      "family": "Mother: Deceased at 84 — hypothyroidism, dementia  Father: Deceased at 78 — MI, hypertension  Sister (age 70): Hashimoto thyroiditis, osteoporosis",
-      "social": "Occupation: Retired — former librarian (30 years)  Marital: Widowed x 4 years; husband died of lung cancer in 2020; lives alone  Tobacco: Never  Alcohol: Rare — occasional wine with daughter at dinner  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble concentrating today.",
+      "onset": "The fatigue has been getting worse over the past month or so, but looking back, I think I've been slowing down for a few months. The confusion is newer - maybe the last two weeks.",
+      "character": "The fatigue is like a heavy blanket - I just feel so sluggish and tired all the time, even after sleeping 10-12 hours. The confusion is hard to describe - I feel foggy, like I can't think clearly.",
+      "location": "The fatigue is all over - my whole body feels heavy and weak.",
+      "severity": "The fatigue is about an 8 out of 10 - it's really affecting my daily activities. I've been staying in bed most days and barely cooking for myself.",
+      "aggravating": "Cold weather seems to make me feel worse, and any activity, even light housework, completely exhausts me.",
+      "relieving": "Sleep helps a little with the fatigue, but I wake up still feeling tired. Nothing really helps the mental fog.",
+      "associated": "I've been more constipated than usual, gained about 4 pounds, my hair seems thinner, and I feel cold all the time even with the heat up.",
+      "denies": "No chest pain, no shortness of breath at rest, no palpitations, no headaches, no vision changes, no recent falls.",
+      "history": "I've never felt this tired before, even when I was first diagnosed with hypothyroidism years ago.",
+      "medications": "Levothyroxine 75mcg daily; Amlodipine 5mg daily; Sertraline 100mg daily; Acetaminophen 500mg Q6h PRN",
+      "allergies": "NSAIDs (Ibuprofen, Naproxen)",
+      "family": "My mother had thyroid problems too and developed dementia later in life. My sister has Hashimoto's thyroiditis. Both parents had heart problems.",
+      "social": "I'm a retired librarian, widowed four years ago. I live alone and don't smoke or drink much - just occasional wine with my daughter. No drugs."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "Thyroid palpation",
+      "Assessment of reflexes (ankle jerk with delayed relaxation phase)",
+      "Skin examination (texture, temperature, dryness)",
+      "Hair and eyebrow assessment",
+      "Cardiovascular examination (heart rate, rhythm, murmurs)",
+      "Mental status examination",
+      "Assessment for peripheral edema",
       "Abdominal examination",
-      "Extremity assessment",
-      "Skin examination",
-      "Targeted system examination"
+      "Neurological assessment (cranial nerves, motor strength)"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with Severe Hypothyroidism. Document specifically what you observe."
+      "Thyroid palpation": "Thyroid gland is diffusely enlarged, firm, and non-tender without discrete nodules",
+      "Assessment of reflexes (ankle jerk with delayed relaxation phase)": "Ankle reflexes present but with markedly delayed relaxation phase bilaterally, classic for hypothyroidism",
+      "Skin examination (texture, temperature, dryness)": "Skin is cool, dry, and rough with a slightly yellowish tint; non-pitting edema noted",
+      "Hair and eyebrow assessment": "Hair appears thin and brittle; outer third of eyebrows are notably sparse bilaterally",
+      "Cardiovascular examination (heart rate, rhythm, murmurs)": "Bradycardic at 54 bpm, regular rhythm, no murmurs, distant heart sounds",
+      "Mental status examination": "Alert but appears slowed; mild difficulty with attention and concentration; MMSE 26/30 with points lost on attention/calculation",
+      "Assessment for peripheral edema": "Mild non-pitting edema in lower extremities bilaterally",
+      "Abdominal examination": "Soft, non-tender, hypoactive bowel sounds consistent with constipation",
+      "Neurological assessment (cranial nerves, motor strength)": "Cranial nerves intact, muscle strength 4+/5 throughout with generally slowed movements"
     },
     "ddxTargets": [
-      "Severe Hypothyroidism (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Severe Hypothyroidism (TSH 68) with Symptomatic Hyponatremia (Na 119) — Secondary to Medication Non-Adherence with Contributing Sertraline Use (correct diagnosis)",
+      "Major Depressive Episode with psychomotor retardation",
+      "Early dementia or mild cognitive impairment",
+      "Syndrome of Inappropriate ADH (SIADH) from sertraline",
+      "Adrenal insufficiency (Addison's disease)",
+      "Medication-induced encephalopathy",
+      "Chronic kidney disease with uremic symptoms"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Hypothyroidism, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Severe Hypothyroidism, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Severe Hypothyroidism based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on depression given her recent widowhood and sertraline use, potentially overlooking the severe hypothyroidism from medication non-adherence",
+      "prematureClosure": "May stop at depression diagnosis without investigating the medication non-adherence and thyroid function given obvious psychosocial stressor",
+      "availabilityBias": "Recent cases of depression in elderly patients may overshadow consideration of endocrine causes of fatigue and cognitive changes"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Margaret Finley's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Severe Hypothyroidism (TSH 68) with Symptomatic Hyponatremia (Na 119) — Secondary to Medication Non-Adherence with Contributing Sertraline Use. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, I see you're considering both psychiatric and medical causes. What specific historical details would help you distinguish between depression and an organic cause? Also, think about how medication adherence might factor into this presentation.",
+      "phase5": "Excellent work on the history and physical. You found some classic findings - the delayed reflexes, skin changes, and hair loss are particularly telling. How do these physical findings help you rank your differential diagnosis? What's your next step in workup?",
+      "finalDebrief": "This case highlights how medication non-adherence can lead to life-threatening complications in hypothyroidism. The combination of severe hypothyroidism and hyponatremia created a perfect storm of symptoms that could easily be mistaken for depression or dementia. The key learning points are recognizing myxedema-related findings on exam and always checking medication adherence in chronic conditions."
     }
   }
 };

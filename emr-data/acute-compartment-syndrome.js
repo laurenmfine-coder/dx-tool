@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Rivera",
-  "patientHPI": "I was riding my bike home from work when I hit this huge pothole and went down - wasn't going very fast, maybe 25 miles per hour. My right leg is killing me and looks all twisted, but what's really scaring me is that it feels like it's going to burst. The pain keeps getting worse and my foot feels all tingly and numb.",
+    "patientHPI": "I was riding my bike home from work when I hit this huge pothole and went down - wasn't going very fast, maybe 25 miles per hour. My right leg is killing me and looks all twisted, but what's really scaring me is that it feels like it's going to burst. The pain keeps getting worse and my foot feels all tingly and numb.",
     "dob": "06/14/1998",
     "age": 26,
     "sex": "Male",
@@ -140,19 +140,67 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "14.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "42.0", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "268", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "42.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "268",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "128", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "CK (Creatine Kinase)", "value": "420", "unit": "U/L", "range": "30-200", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "CK (Creatine Kinase)",
+              "value": "420",
+              "unit": "U/L",
+              "range": "30-200",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -229,15 +277,42 @@ window.EMR_DATA = {
     "No family history of bleeding disorders or DVT"
   ],
   "socialHistory": [
-    ["Occupation", "Electrician apprentice (IBEW Local 728)"],
-    ["Marital", "Single, lives with roommate"],
-    ["Tobacco", "Denies"],
-    ["Alcohol", "Social, 3-4 beers on weekends"],
-    ["Drugs", "Marijuana — occasional"],
-    ["Exercise", "CrossFit 5x/week; recreational motorcyclist"],
-    ["Housing", "Apartment with roommate"],
-    ["Safety", "Motorcycle helmet always; no firearms"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Electrician apprentice (IBEW Local 728)"
+    ],
+    [
+      "Marital",
+      "Single, lives with roommate"
+    ],
+    [
+      "Tobacco",
+      "Denies"
+    ],
+    [
+      "Alcohol",
+      "Social, 3-4 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Marijuana — occasional"
+    ],
+    [
+      "Exercise",
+      "CrossFit 5x/week; recreational motorcyclist"
+    ],
+    [
+      "Housing",
+      "Apartment with roommate"
+    ],
+    [
+      "Safety",
+      "Motorcycle helmet always; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "acute-compartment-syndrome",
@@ -248,75 +323,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Rivera appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Marcus is visibly distressed and anxious, grimacing with pain and frequently shifting position. He's cooperative but increasingly agitated as the pain worsens, describing his symptoms with urgency and fear that something is seriously wrong. He's forthcoming about his injury mechanism and pain but becomes more restless and distressed as the interview progresses.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did musculoskeletal emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly how the accident happened?",
+      "When did you first notice the pain in your leg getting worse?",
+      "What does the pain feel like - is it sharp, dull, throbbing?",
+      "On a scale of 1-10, how would you rate your pain right now?",
+      "Is the pain getting better, staying the same, or getting worse?",
+      "What makes the pain worse?",
+      "Have you tried anything to relieve the pain?",
+      "Are you having any numbness or tingling in your foot or toes?",
+      "Can you move your foot and toes normally?",
+      "Have you noticed any changes in sensation in your leg or foot?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Have you ever had any serious injuries like this before?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was riding my bike home from work when I hit this huge pothole and went down -.'",
-        "character": "'It's musculoskeletal emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Albuterol HFA 90mcg PRN; Oxycodone 5mg Q6H PRN (post-fracture); Ibuprofen 600mg Q8H PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Asthma, HTN, alive at 52  Father: T2DM, CAD, alive at 56  Brother: Healthy, age 23",
-        "social": "Occupation: Electrician apprentice (IBEW Local 728)  Marital: Single, lives with roommate  Tobacco: Denies  Alcohol: Social, 3-4 beers on weekends  Drugs: Marijuana \u2014 occasional"
+      "default": "I'm sorry, I'm having trouble focusing - this pain is really intense and getting worse. Can you repeat that?",
+      "onset": "The pain started right after I crashed about 2 hours ago, but it's gotten so much worse in the last hour. It went from bad to absolutely unbearable.",
+      "character": "It feels like my leg is going to explode - like there's this intense pressure building up inside. It's not just bone pain, it's like everything is being squeezed too tight.",
+      "location": "The pain is mainly in the front part of my right leg, below the knee. It's not really shooting anywhere else, just this intense pressure right there.",
+      "severity": "Right now it's easily a 9 out of 10 - I can barely think straight. When I first got hurt it was maybe a 6, but it just keeps getting worse no matter what I do.",
+      "aggravating": "Any movement makes it worse, especially trying to flex my foot up. Even just touching the area lightly makes me want to scream.",
+      "relieving": "Nothing helps. I tried the pain meds from my fracture, elevated it, ice - nothing touches this pain. It just keeps getting worse.",
+      "associated": "My foot feels numb and tingly, like it's falling asleep. I'm having trouble moving my toes normally, and my foot feels weird - like it's not getting enough blood.",
+      "denies": "No chest pain, no trouble breathing unless you count from the pain. No nausea or vomiting. No back pain or neck pain.",
+      "history": "Just the tibial fracture I had a few weeks ago - that's healing fine. Never had anything like this burning, pressure feeling before.",
+      "medications": "Albuterol HFA 90mcg PRN; Oxycodone 5mg Q6H PRN (post-fracture); Ibuprofen 600mg Q8H PRN",
+      "allergies": "NKDA",
+      "family": "Nothing really relevant - my mom has asthma like me, dad has diabetes and heart problems, but no one's had serious injuries like this.",
+      "social": "I'm an electrician apprentice with IBEW Local 728. I live with a roommate, I'm single. I don't smoke, drink a few beers on weekends, and smoke weed occasionally to relax."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of right lower leg",
+      "Palpation of anterior compartment",
+      "Assessment of compartment tenseness",
+      "Passive dorsiflexion of foot",
+      "Active dorsiflexion strength testing",
+      "Sensation testing - deep peroneal nerve distribution",
+      "Dorsalis pedis pulse palpation",
+      "Capillary refill of toes",
+      "Two-point discrimination testing",
+      "Pain with passive toe flexion"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg. Document specifically what you observe."
+      "Inspection of right lower leg": "Right anterior leg appears swollen and tense compared to left. Skin is taut and shiny over the anterior compartment. No obvious deformity or open wounds.",
+      "Palpation of anterior compartment": "Anterior compartment is firm and woody to palpation. Patient experiences severe pain with light palpation over the compartment.",
+      "Assessment of compartment tenseness": "Compartment feels rock-hard and non-compressible. Marked increase in tension compared to contralateral leg.",
+      "Passive dorsiflexion of foot": "Severe pain with passive dorsiflexion of the foot - patient unable to tolerate full range of motion due to pain.",
+      "Active dorsiflexion strength testing": "Marked weakness in dorsiflexion - patient can barely lift foot against gravity, significant decrease from baseline.",
+      "Sensation testing - deep peroneal nerve distribution": "Decreased sensation in the first web space between great toe and second toe. Patient reports numbness and tingling.",
+      "Dorsalis pedis pulse palpation": "Dorsalis pedis pulse is diminished but present. Pulse weaker than contralateral foot.",
+      "Capillary refill of toes": "Capillary refill slightly delayed at 3-4 seconds. Toes appear slightly pale compared to contralateral foot.",
+      "Two-point discrimination testing": "Impaired two-point discrimination in deep peroneal nerve distribution - unable to distinguish points less than 8mm apart.",
+      "Pain with passive toe flexion": "Severe pain with passive flexion of the great toe, consistent with stretching of muscles in the anterior compartment."
     },
     "ddxTargets": [
-        "Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Compartment Syndrome — Anterior Compartment, Right Leg (Post-Tibial Fracture) (correct diagnosis)",
+      "Deep Vein Thrombosis with acute swelling",
+      "Cellulitis or soft tissue infection",
+      "Acute arterial occlusion/thrombosis",
+      "Fat embolism syndrome",
+      "Severe contusion with hematoma formation",
+      "Delayed union fracture with acute displacement"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on recent tibial fracture and assuming pain is simply fracture-related, missing the acute compartment syndrome development",
+      "prematureClosure": "Risk of stopping at 'post-fracture pain' without recognizing the acute change in pain character and associated neurological symptoms",
+      "availabilityBias": "May focus on more common post-trauma diagnoses like DVT or infection rather than recognizing the classic constellation of compartment syndrome findings"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg (Post-Tibial Fracture). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some solid differentials for acute leg pain post-trauma. As you interview this patient, pay particular attention to the timeline and character of his pain - how has it changed since the initial injury? Also consider what specific physical findings would help you distinguish between vascular, infectious, and pressure-related causes.",
+      "phase5": "Excellent work gathering the history and physical findings. You've noted the patient's severe pain, the firm compartment, weakness with dorsiflexion, and sensory changes. What do these findings tell you about the pathophysiology occurring in his leg? How do the physical exam findings help narrow your differential diagnosis?",
+      "finalDebrief": "This case highlights the critical importance of recognizing compartment syndrome early. Notice how the diagnosis became clear when you combined the timeline (pain worsening rather than improving), the character (pressure-like rather than typical fracture pain), and the classic pentad of findings. The key teaching point is that compartment syndrome is a surgical emergency - the 5 P's (Pain, Pressure, Paresthesias, Pallor, Pulselessness) progress in order, and waiting for late findings like absent pulses means irreversible damage has occurred."
     }
-}
+  }
 };

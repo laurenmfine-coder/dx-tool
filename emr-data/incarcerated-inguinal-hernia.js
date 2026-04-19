@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jayden Williams",
-  "patientHPI": "My baby seems fussy today and I noticed a little bump in his groin area that wasn't there before. He's been spitting up more than usual and seems uncomfortable when I change his diaper. I'm not sure if this is normal since he was born early, but something just doesn't feel right.",
+    "patientHPI": "My baby seems fussy today and I noticed a little bump in his groin area that wasn't there before. He's been spitting up more than usual and seems uncomfortable when I change his diaper. I'm not sure if this is normal since he was born early, but something just doesn't feel right.",
     "dob": "11/28/2024",
     "age": 0,
     "sex": "Male",
@@ -158,30 +158,114 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC) WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "16.2", "unit": "x10³/µL", "range": "5.0-19.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.8", "unit": "g/dL", "range": "9.5-14.0", "flag": "" },
-            { "test": "Hematocrit", "value": "32.4", "unit": "%", "range": "28-42", "flag": "" },
-            { "test": "Platelets", "value": "398", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Neutrophils", "value": "58", "unit": "%", "range": "15-45", "flag": "H" },
-            { "test": "Lymphocytes", "value": "32", "unit": "%", "range": "40-70", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "16.2",
+              "unit": "x10³/µL",
+              "range": "5.0-19.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.8",
+              "unit": "g/dL",
+              "range": "9.5-14.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "32.4",
+              "unit": "%",
+              "range": "28-42",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "398",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Neutrophils",
+              "value": "58",
+              "unit": "%",
+              "range": "15-45",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "32",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "72", "unit": "mg/dL", "range": "50-90", "flag": "" },
-            { "test": "BUN", "value": "8", "unit": "mg/dL", "range": "3-12", "flag": "" },
-            { "test": "Creatinine", "value": "0.2", "unit": "mg/dL", "range": "0.1-0.4", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-6.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "20", "unit": "mEq/L", "range": "18-25", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "72",
+              "unit": "mg/dL",
+              "range": "50-90",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "8",
+              "unit": "mg/dL",
+              "range": "3-12",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.2",
+              "unit": "mg/dL",
+              "range": "0.1-0.4",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-6.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "20",
+              "unit": "mEq/L",
+              "range": "18-25",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "3.8", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "3.8",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -222,12 +306,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Hepatitis B (Engerix-B)", "date": "11/28/2024", "site": "Right thigh IM", "lot": "HB612T", "mfr": "GSK" },
-    { "vaccine": "DTaP (Daptacel)", "date": "01/28/2025", "site": "Right thigh IM", "lot": "DA501K", "mfr": "Sanofi" },
-    { "vaccine": "IPV (IPOL)", "date": "01/28/2025", "site": "Left thigh IM", "lot": "IP331R", "mfr": "Sanofi" },
-    { "vaccine": "Hib (ActHIB)", "date": "01/28/2025", "site": "Right thigh IM", "lot": "AH218P", "mfr": "Sanofi" },
-    { "vaccine": "PCV15 (Vaxneuvance)", "date": "01/28/2025", "site": "Left thigh IM", "lot": "PV119L", "mfr": "Merck" },
-    { "vaccine": "Rotavirus (RotaTeq)", "date": "01/28/2025", "site": "Oral", "lot": "RV814M", "mfr": "Merck" }
+    {
+      "vaccine": "Hepatitis B (Engerix-B)",
+      "date": "11/28/2024",
+      "site": "Right thigh IM",
+      "lot": "HB612T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "DTaP (Daptacel)",
+      "date": "01/28/2025",
+      "site": "Right thigh IM",
+      "lot": "DA501K",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "IPV (IPOL)",
+      "date": "01/28/2025",
+      "site": "Left thigh IM",
+      "lot": "IP331R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "Hib (ActHIB)",
+      "date": "01/28/2025",
+      "site": "Right thigh IM",
+      "lot": "AH218P",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "PCV15 (Vaxneuvance)",
+      "date": "01/28/2025",
+      "site": "Left thigh IM",
+      "lot": "PV119L",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Rotavirus (RotaTeq)",
+      "date": "01/28/2025",
+      "site": "Oral",
+      "lot": "RV814M",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother (age 22): Asthma — well-controlled",
@@ -237,14 +357,38 @@ window.EMR_DATA = {
     "No family history of cystic fibrosis, metabolic disorders, or congenital heart disease"
   ],
   "socialHistory": [
-    ["Guardian", "Lives with mother and maternal grandmother; father visits regularly"],
-    ["Childcare", "Cared for at home by mother and grandmother; no daycare"],
-    ["Tobacco Exposure", "None — no smokers in household"],
-    ["Pets", "None"],
-    ["Home Environment", "Apartment; infant sleeps in bassinet in mother's room on back per safe sleep counseling"],
-    ["Feeding", "Formula-fed (Enfamil NeuroPro Gentlease), 4 oz every 3 hours; no solid foods yet"],
-    ["Development", "Social smile at 8 weeks, tracking objects, lifting head briefly — age-appropriate for corrected gestational age"],
-    ["Safety", "Rear-facing infant car seat; no crib bumpers; water heater set below 120°F"]
+    [
+      "Guardian",
+      "Lives with mother and maternal grandmother; father visits regularly"
+    ],
+    [
+      "Childcare",
+      "Cared for at home by mother and grandmother; no daycare"
+    ],
+    [
+      "Tobacco Exposure",
+      "None — no smokers in household"
+    ],
+    [
+      "Pets",
+      "None"
+    ],
+    [
+      "Home Environment",
+      "Apartment; infant sleeps in bassinet in mother's room on back per safe sleep counseling"
+    ],
+    [
+      "Feeding",
+      "Formula-fed (Enfamil NeuroPro Gentlease), 4 oz every 3 hours; no solid foods yet"
+    ],
+    [
+      "Development",
+      "Social smile at 8 weeks, tracking objects, lifting head briefly — age-appropriate for corrected gestational age"
+    ],
+    [
+      "Safety",
+      "Rear-facing infant car seat; no crib bumpers; water heater set below 120°F"
+    ]
   ],
   "meta": {
     "caseId": "incarcerated-inguinal-hernia",
@@ -255,75 +399,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jayden Williams is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "The mother appears anxious and concerned, repeatedly looking at her infant son who is fussy and crying intermittently. She is forthcoming with information but seems overwhelmed, asking frequent questions about whether this is related to his prematurity and expressing guilt about not bringing him in sooner.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pediatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the bump in his groin area?",
+      "Has the bump gotten larger or changed in appearance?",
+      "Can you push the bump back in, or does it stay out all the time?",
+      "Has he been feeding normally or refusing feeds?",
+      "Tell me about his bowel movements - any changes in frequency or appearance?",
+      "Has he been vomiting or spitting up more than his usual reflux?",
+      "How has his crying pattern changed - is it different from his normal fussiness?",
+      "Has he had any fever that you've noticed?",
+      "Was this bump present at birth or did it develop later?",
+      "Does the bump seem to bother him more during certain activities like crying or straining?",
+      "Has he been having wet diapers as usual?",
+      "Any changes in his skin color or breathing patterns?",
+      "Has anyone else noticed the bump or commented on his behavior today?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My baby seems fussy today and I noticed a little bump in his groin area that was.'",
-        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Vitamin D 400 IU drops daily; Iron Supplement (Fer-In-Sol) 15mg/mL \u2014 0.5mL daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother (age 22): Asthma \u2014 well-controlled  Father (age 24): No significant medical history  Maternal grandmother (age 48): Hypertension, obesity",
-        "social": "Guardian: Lives with mother and maternal grandmother; father visits regularly  Childcare: Cared for at home by mother and grandmother; no daycare  Tobacco Exposure: None \u2014 no smokers in household  Pets: None  Home Environment: Apartment; infant sleeps in bassinet in mother's room on back per safe sleep counseling"
+      "default": "I'm not sure what you mean by that - can you explain it differently? I'm still learning about all of this since he was born early.",
+      "onset": "I first noticed the little bump this morning when I was changing his diaper around 7 AM. It definitely wasn't there yesterday evening during his bath.",
+      "character": "It's like a small, firm bump that sticks out from his groin area. It feels harder than I would expect and doesn't seem soft like his belly.",
+      "location": "It's on his right side, down in the groin area where his leg meets his body. It doesn't seem to go anywhere else.",
+      "severity": "He seems really uncomfortable, maybe a 7 out of 10. He's crying more than usual and pulls his legs up when I try to examine the area.",
+      "aggravating": "He seems to cry more when I touch the area or when he's straining, like when he's trying to have a bowel movement or when he cries hard.",
+      "relieving": "Nothing really seems to help. Even holding him in different positions doesn't calm him down like it usually does.",
+      "associated": "He's been spitting up more than his normal reflux, and I don't think he's had a bowel movement since yesterday. He also feels a little warm to me.",
+      "denies": "No, he hasn't been vomiting forcefully, and his breathing seems okay. I haven't noticed any color changes, and he's still having wet diapers.",
+      "history": "No, I've never seen anything like this before. The doctors told us to watch for hernias because of his prematurity, but I wasn't sure what to look for.",
+      "medications": "Vitamin D 400 IU drops daily; Iron Supplement (Fer-In-Sol) 15mg/mL — 0.5mL daily",
+      "allergies": "NKDA",
+      "family": "No one in our family has had hernias that I know of. My mom has high blood pressure and I have asthma, but that's about it.",
+      "social": "I'm 22 and stay home with him full-time. My mom helps me take care of him. No one in the house smokes, and we don't have any pets. His father visits regularly and is involved."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of bilateral inguinal regions",
+      "Palpation of right inguinal region and hernia sac",
+      "Assessment of hernia reducibility",
+      "Palpation of bilateral femoral pulses",
+      "Abdominal inspection for distension",
+      "Auscultation of bowel sounds",
+      "Assessment of testicular position and size",
+      "Evaluation of skin color and perfusion over hernia",
+      "Gentle attempt at manual reduction",
+      "Assessment of crying response to palpation"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. Document specifically what you observe."
+      "Inspection of bilateral inguinal regions": "Right inguinal bulge present extending into upper scrotum, approximately 2cm in diameter. Left inguinal region normal.",
+      "Palpation of right inguinal region and hernia sac": "Firm, tense, non-compressible mass in right inguinal canal extending to upper scrotum. Tender to palpation.",
+      "Assessment of hernia reducibility": "Hernia sac is irreducible with gentle pressure. No reduction with positioning or gentle manipulation.",
+      "Palpation of bilateral femoral pulses": "Bilateral femoral pulses 2+ and symmetric. No evidence of vascular compromise to lower extremities.",
+      "Abdominal inspection for distension": "Mild abdominal distension present. Abdomen appears fuller than expected for age and feeding status.",
+      "Auscultation of bowel sounds": "Bowel sounds present but high-pitched and tinkling in quality, particularly in right lower quadrant.",
+      "Assessment of testicular position and size": "Left testis normal size and position. Right testis appears slightly enlarged and firm compared to left.",
+      "Evaluation of skin color and perfusion over hernia": "Skin overlying hernia sac appears slightly dusky with early erythematous changes. Capillary refill 2-3 seconds.",
+      "Gentle attempt at manual reduction": "No reduction achieved with gentle sustained pressure. Patient becomes more distressed with manipulation attempts.",
+      "Assessment of crying response to palpation": "Patient exhibits significant distress and increased crying with palpation of right inguinal region. Pulls legs up defensively."
     },
     "ddxTargets": [
-        "Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant",
+      "Incarcerated inguinal hernia without ischemia",
+      "Strangulated inguinal hernia",
+      "Testicular torsion",
+      "Necrotizing enterocolitis with perforation",
+      "Hydrocele",
+      "Inguinal lymphadenopathy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the mother's concern about prematurity-related issues and missing the surgical urgency of an incarcerated hernia, or focusing solely on GER symptoms",
+      "prematureClosure": "Risk of stopping evaluation after identifying a hernia without assessing for incarceration or ischemic changes, potentially missing the need for emergent surgical intervention",
+      "availabilityBias": "Risk of being influenced by recent cases of simple reducible hernias in premature infants and underestimating the severity of this presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jayden Williams's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Right Incarcerated Inguinal Hernia with Early Bowel Ischemia in Premature Infant. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified this as a potential hernia case in a premature infant. Before you interview the patient, think about what specific historical features would help you differentiate between a simple hernia and one that might require emergent intervention. What questions will help you assess the acuity and severity of this presentation?",
+      "phase5": "Your history and physical exam findings are concerning for an incarcerated hernia. Walk me through your clinical reasoning - what specific findings suggest this hernia is not simply reducible? What are the implications of the skin changes and the infant's distress level? How does the timing of symptom onset influence your management approach?",
+      "finalDebrief": "This case highlights the importance of recognizing surgical emergencies in premature infants. Your initial differential appropriately included hernia, but the key was identifying the signs of incarceration and early ischemia - the irreducibility, skin changes, patient distress, and high-pitched bowel sounds. How did your differential diagnosis evolve as you gathered more information, and what clinical pearls will you remember about evaluating inguinal masses in premature infants?"
     }
-}
+  }
 };

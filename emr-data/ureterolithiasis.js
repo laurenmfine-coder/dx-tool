@@ -460,75 +460,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Carlos Mendez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Carlos appears visibly distressed and restless, unable to find a comfortable position due to severe colicky pain. He is cooperative and forthcoming about his symptoms but becomes increasingly anxious between pain waves, frequently asking for pain relief while expressing concern about missing work and his family responsibilities.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did abdominal pain start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
+      "Can you tell me more about when this pain started and how it developed?",
+      "Can you describe the quality of the pain you're experiencing?",
+      "Where exactly is the pain located and does it radiate anywhere?",
+      "On a scale of 1-10, how would you rate your pain?",
+      "What makes the pain better or worse?",
+      "Have you had any nausea, vomiting, or changes in urination?",
+      "Have you noticed any blood in your urine or changes in urine color?",
+      "Have you had similar episodes of pain like this before?",
       "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Do you have any medication allergies?",
+      "How much water do you typically drink per day?",
+      "Have you had any recent dietary changes or eaten anything unusual?",
+      "Any family history of kidney stones or similar problems?"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've been so busy at work that I haven't been eating right or drinking enough wa.'",
-      "character": "'It's abdominal pain — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Ureterolithiasis.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Metformin 1000mg BID; Lisinopril 10mg daily; Potassium Citrate 15mEq BID; Allopurinol 200mg daily; Tamsulosin 0.4mg daily.'",
-      "allergies": "'My allergies are Morphine.'",
-      "family": "Father: T2DM, Nephrolithiasis, Gout, alive at 65  Mother: Hypertension, Obesity, alive at 62  Brother: T2DM, alive at 42",
-      "social": "Occupation: Warehouse operations manager  Marital: Married, 1 child (age 4)  Tobacco: Never smoker  Alcohol: Social, 3-4 beers/week; occasional red meat and shellfish heavy meals  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble focusing because of this pain - could you ask that again?",
+      "onset": "It started around 6 AM this morning - I woke up from a dead sleep with this horrible pain. It came on suddenly, like someone flipped a switch.",
+      "character": "It's the most intense, sharp, stabbing pain - like someone's twisting a knife in my side. It comes in waves, gets really bad for a few minutes, then eases up slightly before hitting again.",
+      "location": "It starts in my right flank, right here below my ribs, and shoots down toward my groin and into my right testicle.",
+      "severity": "Right now it's about a 9 out of 10 when the waves hit - I can't sit still, can't find any position that helps. Between waves it drops to maybe a 6 or 7.",
+      "aggravating": "Movement seems to make it worse, and drinking fluids makes me more nauseous. The pain seems to get worse when I try to lie flat.",
+      "relieving": "Nothing really helps - I've tried different positions, hot shower, nothing. The ibuprofen I took at home didn't even touch it.",
+      "associated": "I'm nauseous and threw up twice this morning. I feel like I need to urinate frequently but only small amounts come out, and it burns a little. I also feel feverish and sweaty.",
+      "denies": "No chest pain, no shortness of breath, no diarrhea or constipation, no recent trauma or injury.",
+      "history": "Yes, I've had kidney stones before - this feels exactly like my last episode about 8 months ago, but this one seems worse. I've had maybe 4 or 5 episodes over the past 3 years.",
+      "medications": "Metformin 1000mg BID; Lisinopril 10mg daily; Potassium Citrate 15mEq BID; Allopurinol 200mg daily; Tamsulosin 0.4mg daily",
+      "allergies": "Morphine",
+      "family": "My dad has diabetes and has had kidney stones too, and he has gout. My brother also has diabetes.",
+      "social": "I'm a warehouse operations manager, so I'm on my feet a lot but it's been really busy lately. I'm married with a 4-year-old. I don't smoke, drink maybe 3-4 beers a week. I've been eating a lot of takeout lately because of work - probably too much red meat and not drinking enough water."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
-      "Abdominal examination",
-      "Extremity assessment",
-      "Skin examination",
-      "Targeted system examination"
+      "Costovertebral angle tenderness assessment",
+      "Abdominal palpation for masses or tenderness",
+      "Murphy's punch sign",
+      "Rovsing's sign",
+      "McBurney's point tenderness",
+      "Suprapubic percussion and palpation",
+      "Assessment of patient's positioning and movement",
+      "Testicular examination",
+      "Skin examination for rash or lesions"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with Ureterolithiasis. Document specifically what you observe."
+      "Costovertebral angle tenderness assessment": "Severe right CVA tenderness with positive punch test - patient winces and guards when right flank is percussed",
+      "Abdominal palpation for masses or tenderness": "Soft abdomen without guarding or rebound, no palpable masses, mild right lower quadrant tenderness without peritoneal signs",
+      "Murphy's punch sign": "Positive on the right side with severe tenderness",
+      "Rovsing's sign": "Negative",
+      "McBurney's point tenderness": "Negative",
+      "Suprapubic percussion and palpation": "No suprapubic tenderness or distension",
+      "Assessment of patient's positioning and movement": "Patient restless, constantly changing positions, unable to lie still, pacing when pain intensifies",
+      "Testicular examination": "Normal bilateral testicular size and consistency, no masses or tenderness",
+      "Skin examination for rash or lesions": "No rash, diaphoretic appearance"
     },
     "ddxTargets": [
-      "Ureterolithiasis (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Ureterolithiasis (Ureteral Stone with Obstruction) (correct diagnosis)",
+      "Acute pyelonephritis",
+      "Renal colic from non-obstructing nephrolithiasis",
+      "Abdominal aortic aneurysm rupture",
+      "Acute myocardial infarction",
+      "Acute appendicitis",
+      "Cholecystitis/cholelithiasis"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ureterolithiasis, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Ureterolithiasis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Ureterolithiasis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Strong history of recurrent uric acid stones may cause early anchoring on ureterolithiasis without considering other serious causes of acute flank pain, particularly in a diabetic patient with cardiovascular risk factors",
+      "prematureClosure": "Classic presentation of renal colic might lead to premature closure without adequately ruling out vascular emergencies like AAA or atypical MI presentations, especially given his diabetes and hypertension",
+      "availabilityBias": "Recent cases of kidney stones or common emergency department presentations might overshadow the need to consider less common but more serious diagnoses in this demographic"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Carlos Mendez's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Ureterolithiasis (Ureteral Stone with Obstruction). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, let's think systematically about acute flank pain. While his history is suggestive, what are the most serious diagnoses you absolutely cannot miss in a 38-year-old male with diabetes and hypertension presenting with severe flank pain? How will your history and physical exam help differentiate between urologic, vascular, and other causes?",
+      "phase5": "Excellent work gathering the history and physical findings. The restlessness, CVA tenderness, and radiation pattern strongly support your leading diagnosis. However, given his diabetes and hypertension, walk me through how you've ruled out vascular emergencies. What specific physical exam findings give you confidence in proceeding with your urologic workup, and what immediate next steps are needed to confirm diagnosis and assess for complications?",
+      "finalDebrief": "This case demonstrates how a strong history of recurrent stones can be both helpful and potentially misleading. While Carlos's presentation was classic for ureterolithiasis, his comorbidities required you to maintain a broader differential initially. The key learning points: never let a prior history completely close your differential until you've excluded emergent diagnoses, recognize that diabetic patients may have atypical presentations of serious conditions, and remember that recurrent stone formers need evaluation for metabolic causes and preventive management."
     }
   }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Simmons",
-  "patientHPI": "For the past two weeks, I've had this terrible burning headache on both sides of my temples that just won't go away, and it's worse on the right side. When I try to chew tough foods like steak, my jaw starts hurting so bad I have to stop eating, and even putting on my favorite hat makes my scalp feel sore and tender.",
+    "patientHPI": "For the past two weeks, I've had this terrible burning headache on both sides of my temples that just won't go away, and it's worse on the right side. When I try to chew tough foods like steak, my jaw starts hurting so bad I have to stop eating, and even putting on my favorite hat makes my scalp feel sore and tender.",
     "dob": "06/30/1952",
     "age": 72,
     "sex": "Female",
@@ -182,30 +182,114 @@ window.EMR_DATA = {
         {
           "name": "INFLAMMATORY MARKERS (STAT)",
           "results": [
-            { "test": "ESR", "value": "98", "unit": "mm/hr", "range": "0-30", "flag": "H" },
-            { "test": "CRP", "value": "9.2", "unit": "mg/dL", "range": "<0.3", "flag": "H" }
+            {
+              "test": "ESR",
+              "value": "98",
+              "unit": "mm/hr",
+              "range": "0-30",
+              "flag": "H"
+            },
+            {
+              "test": "CRP",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "<0.3",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "10.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "31.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "445", "unit": "x10³/µL", "range": "150-400", "flag": "H" },
-            { "test": "MCV", "value": "88", "unit": "fL", "range": "80-100", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "10.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "31.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "445",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "H"
+            },
+            {
+              "test": "MCV",
+              "value": "88",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "102", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "38", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "34", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Alk Phos", "value": "172", "unit": "U/L", "range": "44-147", "flag": "H" },
-            { "test": "Albumin", "value": "3.2", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "102",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "34",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Alk Phos",
+              "value": "172",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            },
+            {
+              "test": "Albumin",
+              "value": "3.2",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -273,15 +357,42 @@ window.EMR_DATA = {
     "Brother: T2DM, alive at 68"
   ],
   "socialHistory": [
-    ["Occupation", "Retired high school English teacher"],
-    ["Marital", "Widowed (husband deceased 2020)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 20 min daily; water aerobics 2x/week"],
-    ["Housing", "Lives alone in 55+ community; son visits weekly"],
-    ["Safety", "No firearms; grab bars; fall prevention measures in place"],
-    ["Advance Directive", "Health care proxy: son Thomas Simmons; Full code"]
+    [
+      "Occupation",
+      "Retired high school English teacher"
+    ],
+    [
+      "Marital",
+      "Widowed (husband deceased 2020)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 20 min daily; water aerobics 2x/week"
+    ],
+    [
+      "Housing",
+      "Lives alone in 55+ community; son visits weekly"
+    ],
+    [
+      "Safety",
+      "No firearms; grab bars; fall prevention measures in place"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: son Thomas Simmons; Full code"
+    ]
   ],
   "meta": {
     "caseId": "temporal-arteritis",
@@ -292,75 +403,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Dorothy Simmons is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Dorothy appears anxious and frustrated, frequently touching her temples while speaking. She's very forthcoming about her symptoms but expresses significant worry about her vision changes, stating 'I can't lose my sight - reading is all I have left.' Her distress level is high, rating her overall concern as 8/10.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the headache pain in more detail?",
+      "Have you noticed any changes in your vision?",
+      "Tell me more about the jaw pain when chewing.",
+      "Have you had any muscle aches or stiffness, especially in your shoulders or hips?",
+      "Any scalp tenderness when brushing your hair or wearing hats?",
+      "Have you had any fever, chills, or feeling unwell?",
+      "Any weakness or fatigue that's unusual for you?",
+      "Have you lost any weight recently without trying?",
+      "Any neck stiffness or difficulty moving your neck?",
+      "Have you ever had episodes like this before?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Any family history of autoimmune or rheumatologic conditions?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started For the past two weeks, I've had this terrible burning headache on both sides of.'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Giant Cell.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Atorvastatin 20mg QHS; Alendronate 70mg weekly; Sertraline 50mg daily; Acetaminophen 500mg TID PRN; Calcium Carbonate 600mg with Vitamin D 400 IU BID.'",
-        "allergies": "'My allergies are NSAIDs (Ibuprofen, Naproxen).'",
-        "family": "Mother: RA, osteoporosis, deceased at 84  Father: CAD, deceased at 76  Sister: PMR diagnosed at 70, alive at 75",
-        "social": "Occupation: Retired high school English teacher  Marital: Widowed (husband deceased 2020)  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that? I'm having trouble concentrating with this headache.",
+      "onset": "It started about two weeks ago, just gradually got worse each day. At first I thought it was just stress from the anniversary of my husband's passing, but it's different from any headache I've ever had.",
+      "character": "It's a deep, burning, throbbing pain that feels like someone is squeezing my temples in a vice. The right side is definitely worse than the left.",
+      "location": "Mainly in both temples, but the right side is much worse. Sometimes it spreads up toward the top of my head and down toward my jaw.",
+      "severity": "The headache is easily an 8 out of 10. I can barely function. I haven't been able to grade papers or even read my usual books. The jaw pain when chewing is about a 7.",
+      "aggravating": "Chewing makes both the headache and jaw pain much worse. Even soft foods like pasta can trigger jaw pain. Bright lights bother me more than usual, and any pressure on my scalp is terrible.",
+      "relieving": "The acetaminophen I take for my knees barely touches it. I've tried cold compresses and they don't help at all. Rest in a dark room helps a tiny bit.",
+      "associated": "Yes, I've been having terrible stiffness in my shoulders and hips, especially in the mornings. It takes me over an hour to limber up. I've also been more tired than usual and I think I've lost some weight. Oh, and yesterday I noticed some blurriness in my right eye that scared me.",
+      "denies": "No neck stiffness like meningitis, no nausea or vomiting, no weakness in my arms or legs, no rash anywhere.",
+      "history": "Never anything like this before. I get occasional headaches, but nothing even close to this severe or persistent.",
+      "medications": "Atorvastatin 20mg QHS; Alendronate 70mg weekly; Sertraline 50mg daily; Acetaminophen 500mg TID PRN; Calcium Carbonate 600mg with Vitamin D 400 IU BID",
+      "allergies": "NSAIDs (Ibuprofen, Naproxen)",
+      "family": "My sister was diagnosed with polymyalgia rheumatica when she was 70, and she's 75 now. My mother had rheumatoid arthritis. I remember my sister describing similar shoulder and hip stiffness when she was first diagnosed.",
+      "social": "I'm a retired high school English teacher, been widowed since 2020. I've never smoked and don't drink alcohol. I live alone but stay active with book clubs and volunteer work, though I haven't been able to do much lately with these symptoms."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Temporal artery palpation",
+      "Visual acuity testing",
+      "Fundoscopic examination",
+      "Visual field testing by confrontation",
+      "Shoulder range of motion assessment",
+      "Hip range of motion assessment",
+      "Jaw opening and lateral movement",
+      "Scalp palpation for tenderness",
+      "Neck range of motion",
+      "Neurologic examination for focal deficits"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Giant Cell. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Giant Cell. Document specifically what you observe."
+      "Temporal artery palpation": "Right temporal artery is prominent, firm, tender, and non-pulsatile. Left temporal artery shows mild prominence with decreased pulsation.",
+      "Visual acuity testing": "Right eye 20/40, Left eye 20/25 (baseline 20/25 bilateral per patient)",
+      "Fundoscopic examination": "Right optic disc appears slightly pale with blurred margins; left optic disc normal",
+      "Visual field testing by confrontation": "Subtle superior visual field defect in right eye",
+      "Shoulder range of motion assessment": "Bilateral limitation in active range of motion, particularly abduction and forward flexion, due to stiffness and discomfort",
+      "Hip range of motion assessment": "Bilateral hip flexion and internal rotation limited by stiffness, patient reports significant morning stiffness",
+      "Jaw opening and lateral movement": "Jaw opening limited to 3.5 cm (normal >4 cm), with pain on opening and lateral movement",
+      "Scalp palpation for tenderness": "Marked tenderness over bilateral temporal and occipital regions, patient winces with light touch",
+      "Neck range of motion": "Full range of motion without stiffness or pain",
+      "Neurologic examination for focal deficits": "No focal motor or sensory deficits, cranial nerves II-XII intact except for visual changes noted above"
     },
     "ddxTargets": [
-        "Giant Cell (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Giant Cell (Temporal) Arteritis with Concurrent Polymyalgia Rheumatica — Vision Threatened (correct diagnosis)",
+      "Polymyalgia Rheumatica without arteritis",
+      "Tension-type headache with concurrent osteoarthritis flare",
+      "Acute angle-closure glaucoma",
+      "Stroke or TIA with headache",
+      "Trigeminal neuralgia",
+      "Medication overuse headache"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Giant Cell, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Giant Cell, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Giant Cell based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on 'headache' and miss the systemic inflammatory picture, or focus solely on depression/grief given recent anniversary of husband's death",
+      "prematureClosure": "Risk of stopping at tension headache or TMJ dysfunction without recognizing the vision-threatening emergency and systemic inflammatory syndrome",
+      "availabilityBias": "Common headache presentations may overshadow this less common but serious diagnosis, especially if student recently saw many primary headache cases"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dorothy Simmons's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Giant Cell (Temporal) Arteritis with Concurrent Polymyalgia Rheumatica \u2014 Vision Threatened. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you've included some headache differentials. Given the patient's age and presentation, what systemic conditions should we be particularly concerned about in elderly patients with new-onset severe headaches? What red flags would make you worry about something more serious than a primary headache?",
+      "phase5": "Now that you've gathered your history and physical exam findings, let's think through this systematically. You found temporal artery abnormalities, visual changes, jaw claudication, and proximal muscle stiffness in a 72-year-old woman. What syndrome does this constellation suggest, and why is this a medical emergency?",
+      "finalDebrief": "This case illustrates how Giant Cell Arteritis can present with the classic triad of headache, jaw claudication, and visual symptoms, often concurrent with PMR. The key learning points are recognizing that new-onset severe headache in patients over 50 requires consideration of GCA, that visual symptoms represent an ophthalmologic emergency requiring immediate steroids, and that family history of PMR increases suspicion. How has your approach to elderly patients with headache evolved after working through this case?"
     }
-}
+  }
 };

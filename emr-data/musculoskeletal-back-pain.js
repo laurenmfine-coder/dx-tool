@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Camille Baptiste",
-  "patientHPI": "Three days ago I was lifting a heavy box at work and felt something in my lower back - now I have this constant aching pain that gets worse when I bend or sit too long.",
+    "patientHPI": "Three days ago I was lifting a heavy box at work and felt something in my lower back - now I have this constant aching pain that gets worse when I bend or sit too long.",
     "dob": "10/04/1990",
     "age": 35,
     "sex": "Female",
@@ -151,16 +151,46 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.2", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "248", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "248",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID",
           "results": [
-            { "test": "TSH", "value": "2.1", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.1",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -204,15 +234,42 @@ window.EMR_DATA = {
     "No family history of cancer, autoimmune disease, or spinal pathology"
   ],
   "socialHistory": [
-    ["Occupation", "Office manager at accounting firm; desk job with occasional lifting"],
-    ["Marital", "Married 5 years; husband Pierre; no children; planning pregnancy"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 1-2 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Runs 3x/week (5K); yoga 2x/week; currently unable due to back pain"],
-    ["Housing", "Townhouse with husband"],
-    ["Safety", "Denies IPV; seatbelt always; ergonomic workstation evaluation requested"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Office manager at accounting firm; desk job with occasional lifting"
+    ],
+    [
+      "Marital",
+      "Married 5 years; husband Pierre; no children; planning pregnancy"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 1-2 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Runs 3x/week (5K); yoga 2x/week; currently unable due to back pain"
+    ],
+    [
+      "Housing",
+      "Townhouse with husband"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always; ergonomic workstation evaluation requested"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "musculoskeletal-back-pain",
@@ -223,75 +280,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Camille Baptiste appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Camille appears mildly anxious and somewhat uncomfortable, shifting position frequently while speaking. She is cooperative and forthcoming with information, expressing concern about how the injury might affect her work productivity and future pregnancy plans.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened when you injured your back?",
+      "What does the pain feel like - is it sharp, dull, burning, or cramping?",
+      "Where exactly is the pain located and does it travel anywhere?",
+      "On a scale of 1-10, how would you rate your pain right now?",
+      "What makes your back pain worse?",
+      "What helps relieve your pain?",
+      "Have you noticed any numbness, tingling, or weakness in your legs?",
+      "Any bowel or bladder problems since this started?",
+      "Have you had back injuries like this before?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Tell me about your work - what does a typical day look like?",
+      "Any family history of back problems or spine issues?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Three days ago I was lifting a heavy box at work and felt something in my lower .'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Lumbosacral Muscle Strain.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sertraline 50mg daily; Oral Contraceptive (Levonorgestrel/Ethinyl Estradiol).'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Hypertension, alive at 62  Mother: Anxiety disorder, alive at 60  Sister: Healthy, alive at 32",
-        "social": "Occupation: Office manager at accounting firm; desk job with occasional lifting  Marital: Married 5 years; husband Pierre; no children; planning pregnancy  Tobacco: Never smoker  Alcohol: Social, 1-2 drinks/week  Drugs: Denies"
+      "default": "I'm not sure what you mean by that. Could you ask that differently?",
+      "onset": "It happened three days ago at work. I was lifting a heavy box of files from the floor to put on a shelf, and I felt this sudden sharp pain shoot across my lower back. The pain has been constant since then.",
+      "character": "It's mostly a deep, dull aching pain that sometimes becomes sharp when I move the wrong way. It feels like my muscles are really tight and knotted up.",
+      "location": "The pain is right in my lower back, mainly on the left side just above my belt line. It doesn't really travel down my legs or anything.",
+      "severity": "Right now it's about a 6 out of 10. When I first hurt it, it was probably an 8. It's worst when I try to bend forward or get up from sitting.",
+      "aggravating": "Bending forward is the worst, especially when I try to pick something up. Sitting at my desk for more than 30 minutes makes it really stiff. Coughing or sneezing also makes it hurt more.",
+      "relieving": "Heat helps a little bit, and I've been taking ibuprofen which takes the edge off. Lying flat on my back with my knees bent gives me some relief.",
+      "associated": "Just the back pain and stiffness. I haven't had any other symptoms really.",
+      "denies": "No numbness or tingling in my legs, no weakness, no problems with going to the bathroom. My legs feel fine, it's just my back.",
+      "history": "I had something similar about two years ago when I helped my husband move furniture. That time it got better in about a week with rest and ibuprofen.",
+      "medications": "Sertraline 50mg daily; Oral Contraceptive (Levonorgestrel/Ethinyl Estradiol)",
+      "allergies": "NKDA",
+      "family": "My dad has high blood pressure and my mom has anxiety, but I don't think anyone in my family has had serious back problems or spine issues.",
+      "social": "I'm an office manager at an accounting firm. I spend most of my day at a computer, but I do have to lift files and supplies occasionally. I'm married and we're hoping to start a family soon. I don't smoke, maybe have a glass of wine on weekends, no drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of back and posture",
+      "Palpation of paraspinal muscles",
+      "Range of motion testing (flexion, extension, lateral bending)",
+      "Straight leg raise test",
+      "Neurological exam of lower extremities",
+      "Deep tendon reflexes",
+      "Strength testing of hip flexors, knee extension, ankle dorsiflexion",
+      "Sensory testing of lower extremities",
+      "Patrick's test (FABER)",
+      "Gait assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Lumbosacral Muscle Strain. Document specifically what you observe."
+      "Inspection of back and posture": "Patient stands with slight forward lean and favors left side. No obvious deformity or swelling visible.",
+      "Palpation of paraspinal muscles": "Tender to palpation over left paraspinal muscles at L3-L5 level with palpable muscle spasm. No midline tenderness.",
+      "Range of motion testing (flexion, extension, lateral bending)": "Forward flexion limited to 45 degrees due to pain, extension normal, left lateral bending restricted and painful.",
+      "Straight leg raise test": "Negative bilaterally - no radicular pain reproduced with leg elevation to 70 degrees.",
+      "Neurological exam of lower extremities": "Motor strength 5/5 throughout, sensation intact to light touch and pinprick.",
+      "Deep tendon reflexes": "Patellar and Achilles reflexes 2+ and symmetric bilaterally.",
+      "Strength testing of hip flexors, knee extension, ankle dorsiflexion": "All muscle groups demonstrate 5/5 strength without pain or weakness.",
+      "Sensory testing of lower extremities": "Light touch and pinprick sensation intact and symmetric in all dermatomes L1-S1.",
+      "Patrick's test (FABER)": "Negative bilaterally - no hip or sacroiliac pain reproduced.",
+      "Gait assessment": "Antalgic gait favoring left side, but able to walk without assistance. No foot drop or neurologic abnormalities."
     },
     "ddxTargets": [
-        "Acute Lumbosacral Muscle Strain (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Lumbosacral Muscle Strain (Mechanical) (correct diagnosis)",
+      "Lumbar Facet Joint Syndrome",
+      "Lumbar Disc Herniation without Radiculopathy",
+      "Cauda Equina Syndrome",
+      "Lumbar Compression Fracture",
+      "Sacroiliac Joint Dysfunction",
+      "Lumbar Spinal Stenosis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Lumbosacral Muscle Strain, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Lumbosacral Muscle Strain, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Lumbosacral Muscle Strain based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the obvious mechanism of injury (lifting) and missing other causes of acute back pain, especially in a young woman of childbearing age",
+      "prematureClosure": "Risk of stopping evaluation after confirming muscle strain without considering more serious pathology that could present similarly",
+      "availabilityBias": "Risk of overweighting common mechanical causes while underconsidering less common but serious causes like infection or malignancy"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Camille Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Lumbosacral Muscle Strain (Mechanical). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Before you interview the patient, think about what specific historical features would help you differentiate between mechanical back pain and more concerning causes. What red flag symptoms should you specifically ask about?",
+      "phase5": "Nice work gathering the history and physical exam. Looking at your findings - what does the combination of localized muscle tenderness, limited range of motion, but normal neurological exam tell you? How does this help narrow your differential diagnosis?",
+      "finalDebrief": "This case illustrates how a systematic approach helps distinguish benign mechanical back pain from more serious pathology. The key differentiating features were the clear mechanism, localized muscle tenderness, absence of neurological deficits, and lack of red flag symptoms. How did your thinking evolve as you gathered more information?"
     }
-}
+  }
 };

@@ -273,73 +273,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Jennifer Wu is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Jennifer is visibly distressed and frightened, describing her pain with urgency and fear in her voice. She is very forthcoming about her symptoms because she's terrified this might be like what happened to her mother. Her anxiety is palpable as she repeatedly emphasizes this is the worst headache of her life.",
     "interviewQuestions": [
-      "When did your symptoms start and how?",
-      "Describe the main symptom — location, character, severity.",
-      "What makes it worse? What makes it better?",
-      "Any other symptoms you've noticed?",
-      "Any prior similar episodes?",
-      "Tell me about your medical history.",
+      "Can you describe exactly how this headache started?",
+      "On a scale of 1-10, how would you rate this headache?",
+      "Where exactly is the pain located?",
+      "Have you ever had a headache like this before?",
+      "Are you experiencing any nausea, vomiting, or vision changes?",
+      "Do you have any neck stiffness or pain when you bend your neck forward?",
+      "Have you had any weakness, numbness, or difficulty speaking?",
+      "Have you lost consciousness or had any confusion?",
       "What medications are you currently taking?",
-      "Any medication allergies?",
-      "Relevant family history?",
-      "Tell me about your lifestyle."
+      "Do you have any drug allergies?",
+      "Tell me about your family history, especially regarding headaches or brain problems",
+      "Do you use tobacco, alcohol, or any recreational drugs?",
+      "Have you had any recent head trauma or unusual physical exertion?"
     ],
     "patientResponses": {
-      "default": "He pauses. 'Can you clarify what you mean?'",
-      "onset": "'Gradually — over the past several days.'",
-      "character": "'The symptom has been significant and affecting my ability to function.'",
-      "location": "'The main problem is in the expected area for my condition.'",
-      "severity": "'Six or seven out of ten.'",
-      "aggravating": "'Activity and movement worsen it.'",
-      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-      "associated": "'Some associated symptoms consistent with this condition.'",
-      "denies": "'No fever, chills, or unexplained weight loss.'",
-      "history": "'I have not had exactly this before.'",
-      "medications": "'I take Lisinopril.'",
-      "allergies": "'My allergies: NKDA.'",
-      "family": "Mother: ruptured aneurysm at age 48",
-      "social": "Tobacco: Current, 25 pack-years  Cocaine: Denies"
+      "default": "I'm sorry, I'm having trouble focusing because of this terrible pain - can you repeat that?",
+      "onset": "It hit me like a thunderclap while I was just sitting at my computer - went from zero to the worst pain imaginable in literally seconds",
+      "character": "It's like someone took a baseball bat to the back of my head - sharp, explosive, nothing like any headache I've ever had",
+      "location": "It started at the back of my head and feels like it's spreading everywhere, but the worst part is definitely the back and base of my skull",
+      "severity": "This is easily a 10 out of 10 - I can barely think straight and I'm terrified something is seriously wrong",
+      "aggravating": "Any movement makes it worse, even turning my head slightly, and bright lights are really bothering me",
+      "relieving": "Nothing helps - I tried holding my head but nothing touches this pain",
+      "associated": "I feel really nauseous and the light in here is bothering me, but no vomiting yet",
+      "denies": "No weakness in my arms or legs, no trouble speaking, I didn't pass out, and no recent injuries to my head",
+      "history": "Never, ever had anything even close to this - I get occasional tension headaches but this is completely different",
+      "medications": "Lisinopril",
+      "allergies": "NKDA",
+      "family": "My mother had a brain aneurysm that ruptured when she was 48 - that's exactly what I'm terrified this might be",
+      "social": "I work in accounting, pretty sedentary job. I smoke about a pack a day, have for years. I have maybe a glass of wine with dinner, no illegal drugs"
     },
     "examManeuvers": [
-      "General appearance",
-      "Vital signs",
-      "Cardiovascular",
-      "Pulmonary",
-      "Abdominal",
-      "Extremities",
-      "Skin",
-      "Targeted exam"
+      "General appearance and vital signs",
+      "Neurological assessment - mental status and orientation",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Deep tendon reflexes",
+      "Neck stiffness assessment (nuchal rigidity)",
+      "Fundoscopic examination",
+      "Coordination testing",
+      "Gait assessment",
+      "Kernig's and Brudzinski's signs"
     ],
     "examFindings": {
-      "General appearance": "Finding consistent with this condition.",
-      "Vital signs": "Finding consistent with this condition.",
-      "Cardiovascular": "Finding consistent with this condition.",
-      "Pulmonary": "Finding consistent with this condition.",
-      "Abdominal": "Finding consistent with this condition.",
-      "Extremities": "Finding consistent with this condition.",
-      "Skin": "Finding consistent with this condition.",
-      "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs": "Patient appears acutely distressed, holding head, photophobic; BP 192/108, HR 68, afebrile",
+      "Neurological assessment - mental status and orientation": "Alert and oriented x3, but appears anxious and in significant distress",
+      "Cranial nerve examination": "Cranial nerves II-XII grossly intact, pupils equal and reactive",
+      "Motor strength testing": "5/5 strength in all extremities",
+      "Deep tendon reflexes": "2+ and symmetric throughout",
+      "Neck stiffness assessment (nuchal rigidity)": "Mild nuchal rigidity present, patient resists passive neck flexion",
+      "Fundoscopic examination": "Difficult to assess due to photophobia, but no obvious papilledema visualized",
+      "Coordination testing": "Finger-to-nose intact bilaterally, though patient has difficulty with testing due to head pain",
+      "Gait assessment": "Steady gait but moves cautiously, holding head",
+      "Kernig's and Brudzinski's signs": "Brudzinski's sign negative, Kernig's sign equivocal due to patient guarding"
     },
     "ddxTargets": [
-      "this condition (correct)",
-      "Most likely alternative",
-      "Third differential",
-      "Must-not-miss 1",
-      "Must-not-miss 2",
-      "Common mimic 1",
-      "Common mimic 2"
+      "Subarachnoid hemorrhage (correct diagnosis)",
+      "Intracerebral hemorrhage",
+      "Meningitis",
+      "Cerebral aneurysm rupture",
+      "Hypertensive emergency",
+      "Migraine with aura",
+      "Tension headache"
     ],
     "biasFlags": {
-      "anchoring": "Consider the full differential for this condition.",
-      "prematureClosure": "Complete your workup before narrowing focus.",
-      "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on family history of aneurysm and immediately assuming SAH without considering other causes of thunderclap headache",
+      "prematureClosure": "Risk of stopping evaluation after noting hypertension and attributing headache to hypertensive crisis without recognizing thunderclap onset",
+      "availabilityBias": "May focus on more common headache causes (migraine, tension) rather than considering the specific thunderclap presentation suggesting SAH"
     },
     "coachPrompts": {
-      "phase2": "Before interviewing Jennifer Wu: what does the chart suggest? Top 3 diagnoses?",
-      "phase5": "After history and exam: how has your differential changed?",
-      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified several concerning differentials. Given this patient's presentation of sudden-onset severe headache, what specific historical features will help you distinguish between these diagnoses? Think about the timeline and character of symptom onset.",
+      "phase5": "Now that you've completed your evaluation, let's think through your findings systematically. You have a patient with thunderclap headache onset, family history of aneurysm, hypertension, and some nuchal rigidity. How do these findings help narrow your differential diagnosis?",
+      "finalDebrief": "This case highlights the classic presentation of subarachnoid hemorrhage - thunderclap headache onset, family history, and nuchal rigidity were key clues. Notice how the dramatic symptom onset and patient's description of 'worst headache of life' should immediately raise concern for SAH, despite the temptation to attribute symptoms to her known hypertension."
     }
   }
 };

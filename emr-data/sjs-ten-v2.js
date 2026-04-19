@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Aisha Okonkwo",
-  "patientHPI": "About three weeks ago I started taking this new seizure medicine, and now I have this terrible rash that started as red spots but is getting much worse - my skin is actually peeling off in sheets and my mouth is full of painful sores that are bleeding.",
+      "patientHPI": "About three weeks ago I started taking this new seizure medicine, and now I have this terrible rash that started as red spots but is getting much worse - my skin is actually peeling off in sheets and my mouth is full of painful sores that are bleeding.",
       "dob": "09/14/1998",
       "age": "28",
       "sex": "Female",
@@ -1182,93 +1182,100 @@ window.EMR_DATA = {
       "Ophthalmology",
       "Corneal involvement — risk of permanent visual impairment"
     ]
-  ]
-,"references":[
-  {
-    "id": "SCORTEN-2000",
-    "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
-    "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
-    "journal": "J Invest Dermatol",
-    "year": 2000,
-    "doi": "10.1046/j.1523-1747.2000.00061.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
-    "openAccess": true,
-    "validates": [
-      "SCORTEN mortality prediction",
-      "7 clinical parameters",
-      "Score 3 = 35.3% mortality"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "SCORTEN-2000",
+      "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
+      "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
+      "journal": "J Invest Dermatol",
+      "year": 2000,
+      "doi": "10.1046/j.1523-1747.2000.00061.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
+      "openAccess": true,
+      "validates": [
+        "SCORTEN mortality prediction",
+        "7 clinical parameters",
+        "Score 3 = 35.3% mortality"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Aisha Okonkwo is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Aisha appears anxious and in significant pain, with visible skin lesions and difficulty speaking due to oral erosions. She is cooperative but distressed, frequently touching her face and eyes, and speaks in short sentences due to discomfort.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me about the rash and when it first started?",
+      "What did the rash look like when it first appeared?",
+      "Have you started any new medications recently?",
+      "How quickly did the rash spread and change?",
+      "Are you having any mouth pain or difficulty swallowing?",
+      "Are you experiencing any eye pain or vision changes?",
+      "Have you had any fever or feeling unwell?",
+      "Are you having any trouble breathing?",
+      "Have you ever had a reaction like this before?",
+      "Do you have any family history of drug allergies or skin reactions?",
+      "What medications are you currently taking?",
+      "Do you have any known drug allergies?",
+      "Why were you started on the new seizure medication?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Lamotrigine; Cyclosporine; Morphine PCA; IV Fluids; Moxifloxacin eye drops.'",
-        "allergies": "'My allergies: Lamotrigine.'",
-        "family": "Non-contributory",
-        "social": "Context: Epilepsy \u2014 started lamotrigine 3 weeks ago, titrated too fast  Severity: 30% BSA detachment, oral mucosa, conjunctival involvement  HLA: West African descent \u2014 higher prevalence HLA-B*15:13 associated with lamotrigine SJS  Ophthalmology: Corneal involvement \u2014 risk of permanent visual impairment"
+      "default": "I'm sorry, I'm having trouble talking because my mouth hurts so much. Can you repeat that?",
+      "onset": "The rash started about 5 days ago, maybe a week after I increased my seizure medication dose. It began on my chest and face.",
+      "character": "It started as red spots that looked like targets, then the skin started peeling off in sheets. My mouth and lips are covered in painful sores.",
+      "location": "It's all over my chest, back, arms, and face. My mouth, lips, and eyes are really affected too.",
+      "severity": "The pain is about 8 out of 10. I can barely eat or drink anything. Even opening my eyes hurts.",
+      "aggravating": "Any movement makes the skin hurt more. Light bothers my eyes terribly. I can't eat anything.",
+      "relieving": "The pain medication helps a little, but nothing really makes it better. Cold compresses make it worse.",
+      "associated": "I've had fever, chills, and feel really weak. My eyes are burning and tearing constantly.",
+      "denies": "No trouble breathing, no joint pain, no previous skin problems like this ever.",
+      "history": "Never had anything like this before. I've never had bad reactions to medications.",
+      "medications": "Lamotrigine; Cyclosporine; Morphine PCA; IV Fluids; Moxifloxacin eye drops",
+      "allergies": "Lamotrigine",
+      "family": "No family history of drug allergies or skin problems that I know of.",
+      "social": "I work as a teacher. I don't smoke or drink alcohol. I was just diagnosed with epilepsy last month after having my first seizure."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Assess percentage of body surface area involvement",
+      "Examine skin for epidermal detachment and Nikolsky sign",
+      "Inspect oral mucosa and lips",
+      "Ophthalmologic examination of conjunctiva and cornea",
+      "Assess for lymphadenopathy",
+      "Examine for targetoid lesions",
+      "Check vital signs and hemodynamic stability",
+      "Assess hydration status",
+      "Listen to lung sounds",
+      "Neurologic examination for seizure history"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Assess percentage of body surface area involvement": "Approximately 30% BSA with epidermal detachment involving trunk, arms, and face",
+      "Examine skin for epidermal detachment and Nikolsky sign": "Positive Nikolsky sign with easy separation of epidermis, large areas of denuded skin with serous drainage",
+      "Inspect oral mucosa and lips": "Severe erosions of buccal mucosa, lips, and tongue with hemorrhagic crusting, unable to open mouth fully",
+      "Ophthalmologic examination of conjunctiva and cornea": "Bilateral conjunctival injection and erosions, early corneal epithelial defects, photophobia",
+      "Assess for lymphadenopathy": "No significant lymphadenopathy palpated",
+      "Examine for targetoid lesions": "Few remaining targetoid lesions on extremities, most areas now show confluent epidermal loss",
+      "Check vital signs and hemodynamic stability": "Tachycardic, hypotensive, febrile - consistent with systemic inflammatory response",
+      "Assess hydration status": "Signs of dehydration with poor skin turgor in unaffected areas, dry mucous membranes",
+      "Listen to lung sounds": "Clear bilaterally, no respiratory involvement",
+      "Neurologic examination for seizure history": "Alert and oriented, no focal neurologic deficits, no recent seizure activity"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis (correct diagnosis)",
+      "Erythema multiforme major",
+      "Staphylococcal scalded skin syndrome",
+      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
+      "Pemphigus vulgaris",
+      "Thermal burn injury",
+      "Viral exanthem with secondary bacterial infection"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on 'skin rash' and miss the severity and systemic nature of SJS/TEN, or focus only on dermatologic causes",
+      "prematureClosure": "Might stop at erythema multiforme without recognizing the mucosal involvement and BSA percentage indicating SJS/TEN",
+      "availabilityBias": "Common skin conditions like eczema or contact dermatitis may come to mind first, missing the drug-induced severe cutaneous reaction"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Aisha Okonkwo: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified some concerning skin findings. What specific historical details would help you distinguish between different severe cutaneous drug reactions? Think about timing, medication history, and the pattern of involvement.",
+      "phase5": "Now that you've examined the patient and noted the extensive skin detachment, mucosal involvement, and systemic signs - what classification criteria might help you determine the severity and guide urgent management needs?",
+      "finalDebrief": "This case highlights SJS/TEN from rapid lamotrigine titration. How did the 30% BSA involvement, mucosal erosions, and medication timing help distinguish this from other vesiculobullous disorders? What immediate interventions does this patient need, and why is ophthalmology consultation emergent?"
     }
-}
+  }
 };

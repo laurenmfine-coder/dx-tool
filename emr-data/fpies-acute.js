@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Amara Williams",
-  "patientHPI": "We tried giving our baby rice cereal for the first time this morning, and about two hours later she started throwing up over and over again - now she's just lying there so sleepy and won't wake up much.",
+      "patientHPI": "We tried giving our baby rice cereal for the first time this morning, and about two hours later she started throwing up over and over again - now she's just lying there so sleepy and won't wake up much.",
       "dob": "06/09/2026",
       "age": "0",
       "sex": "Female",
@@ -762,27 +762,26 @@ window.EMR_DATA = {
       "Key feature",
       "No urticaria, no respiratory symptoms — GI-isolated"
     ]
-  ]
-,"references":[
-  {
-    "id": "FPIES-Consensus-2017",
-    "title": "International consensus guidelines for FPIES: executive summary",
-    "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2017,
-    "doi": "10.1016/j.jaci.2016.12.966",
-    "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "FPIES criteria: major + minor",
-      "Ondansetron first-line (NOT epi)",
-      "Chronic FPIES: insidious FTT",
-      "Non-IgE, T-cell mediated",
-      "60% resolution by age 3-5"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "FPIES-Consensus-2017",
+      "title": "International consensus guidelines for FPIES: executive summary",
+      "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2017,
+      "doi": "10.1016/j.jaci.2016.12.966",
+      "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "FPIES criteria: major + minor",
+        "Ondansetron first-line (NOT epi)",
+        "Chronic FPIES: insidious FTT",
+        "Non-IgE, T-cell mediated",
+        "60% resolution by age 3-5"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "FPIES is non-IgE mediated — SPT and sIgE are negative. Misdiagnosis as viral gastroenteritis or sepsis is common because the presentation (profuse vomiting, lethargy, pallor) is dramatic and occurs without urticaria.",
@@ -800,75 +799,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Amara Williams appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Amara's mother appears anxious and protective, holding her lethargic infant close while providing detailed information about the feeding timeline. She is very forthcoming about symptoms and family history, particularly noting the older sibling's similar reaction to foods, and expresses moderate distress about her baby's sudden decline after introducing solid food.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 4-month-old with repetitive vomiting 2 hours after first rice cereal feeding, progressing to lethargy start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly when Amara's symptoms started in relation to feeding?",
+      "What specific food did you introduce and how much did she eat?",
+      "Describe the vomiting - how many times and what did it look like?",
+      "Has Amara had any skin changes, rash, or hives?",
+      "Any breathing problems, wheezing, or coughing?",
+      "How has her energy level and alertness changed?",
+      "Has she had any diarrhea or changes in bowel movements?",
+      "What was Amara eating before today?",
+      "Has she ever had reactions to any foods before?",
+      "Tell me about your older child's milk problems",
+      "Has Amara been sick recently or had any fever?",
+      "Any family history of food allergies or reactions?",
+      "How is she acting now compared to this morning?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Amara Williams presents with 4-month-old with repetitive vomiting 2 hours after .'",
-        "character": "'It's 4-month-old with repetitive vomiting 2 hours after first rice cereal feeding, progressing to lethargy \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Older sibling: milk FPIES (resolved)",
-        "social": "Trigger: First introduction of rice cereal \u2014 repetitive vomiting began ~2h later  Feeding history: Exclusively breastfed until today  Key feature: No urticaria, no respiratory symptoms \u2014 GI-isolated"
+      "default": "I'm not sure what you mean - can you ask that differently? I'm worried about my baby.",
+      "onset": "She ate the rice cereal around 10 AM for the first time, and the vomiting started about 2 hours later, around noon.",
+      "character": "It's been repetitive projectile vomiting - she can't keep anything down, not even breast milk now.",
+      "location": "Just vomiting from her stomach - nothing else seems to bother her physically.",
+      "severity": "I'd say 8 out of 10 - she's become so listless and weak, this isn't like her at all.",
+      "aggravating": "Trying to feed her anything, even breast milk, seems to make the vomiting worse now.",
+      "relieving": "Nothing seems to help - I've tried holding her upright, but she just keeps vomiting.",
+      "associated": "She's become very lethargic and sleepy, not her usual active self, but no fever or other symptoms.",
+      "denies": "No rash, no hives, no breathing problems, no wheezing, no fever, no diarrhea yet.",
+      "history": "This is the first time anything like this has happened - she's never had food reactions before.",
+      "medications": "no medications",
+      "allergies": "NKDA",
+      "family": "Her older brother had severe vomiting reactions to milk when he was a baby - the doctor called it FPIES, but he outgrew it.",
+      "social": "She's been exclusively breastfed until today when I started introducing rice cereal as her pediatrician recommended."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and responsiveness",
+      "Skin examination for urticaria or rash",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Assessment of hydration status",
+      "Neurologic responsiveness",
+      "Vital signs assessment",
+      "Growth parameters",
+      "Oral examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and responsiveness": "Lethargic 4-month-old infant, less interactive than expected, appears mildly ill",
+      "Skin examination for urticaria or rash": "No urticaria, angioedema, or rash present; skin appears normal",
+      "Cardiovascular examination": "Tachycardic at 168 bpm, regular rhythm, normal heart sounds, capillary refill 2 seconds",
+      "Pulmonary examination": "Clear breath sounds bilaterally, no wheezing, retractions, or respiratory distress",
+      "Abdominal examination": "Soft, non-distended, no masses, normal bowel sounds, no tenderness",
+      "Assessment of hydration status": "Mild dehydration with slightly tacky mucous membranes, fontanelle soft",
+      "Neurologic responsiveness": "Decreased alertness and activity level, responds to stimuli but less vigorously",
+      "Vital signs assessment": "HR 168, Temp 36.2°C, SpO2 97%, BP not obtained in infant",
+      "Growth parameters": "Appropriate weight for age on growth curve",
+      "Oral examination": "Mucous membranes slightly tacky, no oral lesions"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Food Protein-Induced Enterocolitis Syndrome (FPIES) (correct diagnosis)",
+      "Acute gastroenteritis",
+      "IgE-mediated food allergy",
+      "Sepsis",
+      "Intussusception",
+      "Milk protein allergy",
+      "Reflux disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on common viral gastroenteritis and miss the temporal relationship to new food introduction",
+      "prematureClosure": "Might stop at 'food allergy' without distinguishing between IgE-mediated allergy and non-IgE FPIES",
+      "availabilityBias": "May focus on more familiar IgE-mediated reactions with urticaria rather than considering delayed GI-only presentations"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Amara Williams's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Before you interview the patient, think about what key historical features would help you distinguish between IgE-mediated food reactions versus non-IgE mediated reactions. What timing patterns would you expect for each?",
+      "phase5": "Excellent history taking. You've identified a clear temporal relationship to rice cereal introduction, family history of FPIES, and notably absent urticaria or respiratory symptoms. How does this constellation of findings help narrow your differential diagnosis?",
+      "finalDebrief": "This case highlights the importance of recognizing FPIES as a distinct entity from IgE-mediated food allergy. The delayed onset (2+ hours), GI-only symptoms, absence of urticaria, and family history were key distinguishing features. How might your approach differ if this patient had presented with immediate onset and urticaria?"
     }
-}
+  }
 };

@@ -463,75 +463,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gloria Santana appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Gloria appears fatigued and mildly distressed, speaking in a somewhat flat tone but cooperative. She's forthcoming about her symptoms but seems genuinely worried about feeling so unwell, occasionally pausing to steady herself when speaking.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did endocrine emergency start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me more about when these symptoms started and how they've progressed?",
+      "You mentioned having a stomach bug - can you describe that illness in detail?",
+      "Have you been able to keep your medications down during and after your illness?",
+      "Tell me about the dizziness - when exactly does it happen?",
+      "Have you noticed any changes in your urination or thirst?",
+      "Any chest pain, palpitations, or irregular heartbeat?",
+      "Have you had any fevers, chills, or signs of infection?",
+      "Any abdominal pain, cramping, or changes in bowel movements?",
+      "Have you experienced episodes like this before with your Addison's disease?",
+      "Are you familiar with stress dosing of your steroids during illness?",
+      "Any recent medication changes or missed doses?",
+      "Have you noticed any skin changes or darkening recently?",
+      "Any muscle weakness, cramps, or joint pain?"
     ],
     "patientResponses": {
-      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've been feeling awful for about a week now - just completely exhausted, nauseo.'",
-      "character": "'It's endocrine emergency — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Hyperkalemic Cardiac Emergency.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Metformin 500mg BID; Amlodipine 5mg daily; Alendronate 70mg weekly.'",
-      "allergies": "'My allergies are Penicillin.'",
-      "family": "Mother: Hypothyroidism, T2DM, deceased at 80 (CHF)  Father: Hypertension, deceased at 72 (MI)  Sister: Vitiligo, Hashimoto's thyroiditis, alive at 65",
-      "social": "Occupation: Retired administrative assistant  Marital: Widowed since 2020  Tobacco: Never smoker  Alcohol: Rare — occasional glass of wine  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently?",
+      "onset": "It started about a week ago, maybe 3-4 days after I got over that stomach bug. At first I just felt tired, but it's gotten much worse - now I can barely function.",
+      "character": "It's this overwhelming weakness and fatigue, like my body just has no energy at all. The nausea comes in waves and makes me not want to eat anything.",
+      "location": "The weakness is all over my body, but I feel it most when I try to stand up or walk around. The nausea is just general, not really localized anywhere.",
+      "severity": "I'd say the weakness is about an 8 out of 10 - I can barely do my normal activities. I've been staying in bed most of the time because I feel so awful.",
+      "aggravating": "Standing up makes the dizziness much worse, and any physical activity makes me feel completely drained. Even light seems to bother me sometimes.",
+      "relieving": "Lying down helps with the dizziness a little, but nothing really makes me feel better. I've tried sipping ginger tea for the nausea but it doesn't help much.",
+      "associated": "Yes, I've been having this lightheadedness, especially when I stand up, and I feel nauseous most of the time. I've also noticed I'm not urinating as much as usual, and when I do, it's darker.",
+      "denies": "No chest pain, no shortness of breath, no fever that I've noticed. No abdominal pain specifically, just the nausea.",
+      "history": "I had one episode a few years ago when I had the flu and didn't increase my steroids - I ended up in the hospital then too. My endocrinologist told me I need to increase my hydrocortisone when I'm sick.",
+      "medications": "Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Metformin 500mg BID; Amlodipine 5mg daily; Alendronate 70mg weekly",
+      "allergies": "Penicillin",
+      "family": "My mother had diabetes and thyroid problems like me, and my sister also has autoimmune thyroid disease. There's definitely a pattern of autoimmune conditions in my family.",
+      "social": "I'm a retired administrative assistant, been widowed for about 4 years now. I don't smoke and rarely drink alcohol, maybe just a glass of wine occasionally. No drugs."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "Orthostatic vital signs",
+      "Cardiovascular examination including rhythm assessment",
+      "Skin examination for hyperpigmentation",
+      "Mucous membrane examination",
+      "Neurologic examination including reflexes",
+      "Assessment of volume status and skin turgor",
       "Abdominal examination",
-      "Extremity assessment",
-      "Skin examination",
-      "Targeted system examination"
+      "Pulmonary examination",
+      "Assessment of muscle strength and tone"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe."
+      "Orthostatic vital signs": "Lying: BP 104/62, HR 88; Sitting: BP 92/58, HR 102; Standing: BP 86/54, HR 118 with patient reporting significant lightheadedness",
+      "Cardiovascular examination including rhythm assessment": "Regular rate and rhythm, no murmurs, rubs, or gallops. Heart sounds somewhat distant. No peripheral edema.",
+      "Skin examination for hyperpigmentation": "Increased pigmentation noted at palmar creases, knuckles, and old surgical scar. Skin appears dry with poor turgor.",
+      "Mucous membrane examination": "Oral mucosa appears dry, gums show some hyperpigmentation at the gum line",
+      "Neurologic examination including reflexes": "Alert and oriented but appears fatigued. Deep tendon reflexes are diminished throughout. No focal neurologic deficits.",
+      "Assessment of volume status and skin turgor": "Poor skin turgor with tenting, dry mucous membranes, sunken eyes suggesting moderate dehydration",
+      "Abdominal examination": "Soft, non-tender, non-distended. Bowel sounds present but hypoactive. No masses or organomegaly appreciated.",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi. Respiratory effort appears normal.",
+      "Assessment of muscle strength and tone": "Generalized weakness, approximately 4/5 strength in all major muscle groups. Patient has difficulty rising from seated position without assistance."
     },
     "ddxTargets": [
-      "Hyperkalemic Cardiac Emergency (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Hyperkalemic Cardiac Emergency (Adrenal Crisis with Acute Kidney Injury) (correct diagnosis)",
+      "Acute adrenal crisis without significant hyperkalemia",
+      "Acute kidney injury from dehydration/prerenal causes",
+      "Hyperkalemic periodic paralysis",
+      "Acute myocardial infarction with cardiogenic shock",
+      "Medication-induced hyperkalemia (ACE inhibitor/ARB toxicity)",
+      "Viral gastroenteritis with severe dehydration"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hyperkalemic Cardiac Emergency, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Hyperkalemic Cardiac Emergency, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Hyperkalemic Cardiac Emergency based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the recent GI illness and attributing everything to viral gastroenteritis recovery, missing the underlying adrenal crisis triggered by inadequate stress-dose steroids",
+      "prematureClosure": "May stop at diagnosing simple dehydration or viral syndrome without recognizing the life-threatening hyperkalemia and adrenal crisis in this patient with known Addison's disease",
+      "availabilityBias": "Common presentations like viral gastroenteritis or medication non-compliance may overshadow the recognition of adrenal crisis, especially if the provider recently saw similar 'simple' cases"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Gloria Santana's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Hyperkalemic Cardiac Emergency (Adrenal Crisis with Acute Kidney Injury). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for weakness and nausea in an elderly patient. Looking at this patient's past medical history, what specific condition should make you particularly concerned about how she managed her recent illness? What key historical details would help you determine if she's at risk for a life-threatening complication?",
+      "phase5": "Your history and physical reveal significant orthostatic changes and signs of volume depletion in a patient with known adrenal insufficiency who recently had GI illness. The hyperpigmentation and her previous similar episode are telling. What specific laboratory abnormality are you most concerned about given her clinical presentation, and what immediate interventions might be needed?",
+      "finalDebrief": "This case illustrates how a common illness can trigger a life-threatening crisis in patients with adrenal insufficiency. The key was recognizing that her recent GI illness likely prevented adequate stress-dosing of steroids, leading to adrenal crisis with dangerous hyperkalemia affecting cardiac conduction. How did your differential diagnosis evolve when you learned about her medication history and previous similar episode?"
     }
   }
 };

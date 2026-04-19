@@ -476,75 +476,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Harold Washington appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Harold appears tired and mildly anxious, speaking in short phrases due to dyspnea but cooperative and forthcoming about his symptoms. He seems concerned about his worsening condition and acknowledges poor dietary compliance recently.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me more about when this weakness and fatigue started?",
+      "Describe the chest pressure - where exactly do you feel it?",
+      "How severe is your shortness of breath on a scale of 1-10?",
+      "What makes your symptoms worse or better?",
+      "Have you noticed any swelling in your legs or feet?",
+      "Any nausea, vomiting, or changes in urination?",
+      "Tell me about your recent diet - any changes in salt intake?",
+      "Have you been taking all your medications as prescribed?",
+      "Any chest pain, palpitations, or irregular heartbeats?",
+      "Have you had episodes like this before?",
+      "Any recent illness, fever, or infections?",
+      "What's your current medication list and any allergies?",
+      "Tell me about your family history of heart or kidney problems"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've been getting more and more tired over the past few weeks, and now I get sho.'",
-      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Severe Hyperkalemia.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Sacubitril-Valsartan (Entresto) 49/51mg BID; Carvedilol 12.5mg BID; Spironolactone 25mg daily; Furosemide 40mg BID; Insulin Glargine 28 units QHS; Insulin Lispro — sliding scale with meals; Atorvastatin 80mg QHS; Aspirin 81mg daily.'",
-      "allergies": "'My allergies are Lisinopril, IV Contrast (iodinated).'",
-      "family": "Mother: Deceased at 72 — CHF, T2DM, CKD requiring dialysis  Father: Deceased at 68 — MI at age 68  Sister (age 66): Type 2 Diabetes, hypertension, CKD Stage 3",
-      "social": "Occupation: Retired postal worker (USPS, 35 years)  Marital: Married x 42 years; wife Dorothy assists with medication management and dietary compliance  Tobacco: Former — quit 15 years ago; previously 1.5 PPD x 30 years (45 pack-years)  Alcohol: Abstinent x 10 years; hx of heavy use  Drugs: Denies"
+      "default": "I'm sorry, could you ask that differently? I'm having trouble focusing with feeling so tired.",
+      "onset": "The weakness has been building up over the past 2-3 weeks, but it got much worse the last few days. The chest pressure started yesterday.",
+      "character": "It's this heavy, tight feeling in my chest, not really sharp pain. The weakness is like my muscles just don't have any strength.",
+      "location": "The pressure is right in the center of my chest, doesn't really go anywhere else.",
+      "severity": "The weakness is about a 7 out of 10 - I can barely climb stairs. The chest pressure is maybe a 5 or 6.",
+      "aggravating": "Any activity makes it worse. Even getting dressed this morning was exhausting. The chest pressure gets worse when I try to do anything.",
+      "relieving": "Sitting down and resting helps a little, but not much. Nothing really makes the weakness go away.",
+      "associated": "I've been short of breath, gained about 4 pounds, and my heart feels like it skips beats sometimes. A little nauseous too.",
+      "denies": "No fever, no sharp chest pain, no fainting. Haven't noticed any changes in my urination.",
+      "history": "I've had some weakness before when my heart failure acts up, but never this bad. Never had chest pressure like this.",
+      "medications": "Sacubitril-Valsartan (Entresto) 49/51mg BID; Carvedilol 12.5mg BID; Spironolactone 25mg daily; Furosemide 40mg BID; Insulin Glargine 28 units QHS; Insulin Lispro — sliding scale with meals; Atorvastatin 80mg QHS; Aspirin 81mg daily",
+      "allergies": "Lisinopril, IV Contrast (iodinated)",
+      "family": "My mother died at 72 from heart failure - she also had diabetes and kidney problems and ended up on dialysis. My father had a heart attack at 68 and died from it.",
+      "social": "I'm a retired postal worker, married 42 years. My wife Dorothy helps me with my medications. I quit smoking 15 years ago but smoked heavily for 30 years. Haven't had alcohol in 10 years."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Assessment for volume overload",
+      "Neurologic examination for weakness",
       "Abdominal examination",
-      "Extremity assessment",
+      "Extremity examination",
       "Skin examination",
-      "Targeted system examination"
+      "Vital signs assessment",
+      "Cardiac rhythm assessment"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe."
+      "Cardiovascular examination": "Bradycardic irregular rhythm at 48 bpm, S3 gallop present, 2/6 systolic murmur at apex, JVD elevated to 8cm",
+      "Pulmonary examination": "Bibasilar crackles, decreased breath sounds at bases, mild respiratory distress",
+      "Assessment for volume overload": "2+ pitting edema bilateral lower extremities to mid-shin, positive hepatojugular reflux",
+      "Neurologic examination for weakness": "Generalized muscle weakness 4/5 in all extremities, decreased deep tendon reflexes, intact sensation",
+      "Abdominal examination": "Soft, mild right upper quadrant tenderness, liver edge palpable 2cm below costal margin",
+      "Extremity examination": "Cool extremities, delayed capillary refill >3 seconds, weak peripheral pulses",
+      "Skin examination": "Pale, cool, dry skin, no rash or lesions",
+      "Vital signs assessment": "Hypotensive 92/58, bradycardic 48, mild hypoxemia SpO2 92% on room air",
+      "Cardiac rhythm assessment": "Irregular bradycardia with occasional peaked T-waves visible on monitor"
     },
     "ddxTargets": [
-      "Severe Hyperkalemia (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Severe Hyperkalemia (7.8 mEq/L) with Concurrent Type 2 NSTEMI, Acute-on-Chronic Kidney Injury, and Decompensated Heart Failure (correct diagnosis)",
+      "Acute decompensated heart failure with cardiorenal syndrome",
+      "Acute coronary syndrome with cardiogenic shock",
+      "Hyperkalemia with cardiac toxicity",
+      "Complete heart block or high-grade AV block",
+      "Sepsis with cardiovascular compromise",
+      "Medication-induced bradycardia and hypotension"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Hyperkalemia, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Severe Hyperkalemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Severe Hyperkalemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on heart failure given obvious volume overload signs, missing the critical hyperkalemia driving the cardiac toxicity and bradycardia",
+      "prematureClosure": "Could stop at decompensated heart failure without recognizing the need for urgent electrolyte evaluation and concurrent ACS",
+      "availabilityBias": "Recent cases of heart failure may overshadow the recognition of hyperkalemia as the most immediately life-threatening component"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Harold Washington's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Severe Hyperkalemia (7.8 mEq/L) with Concurrent Type 2 NSTEMI, Acute-on-Chronic Kidney Injury, and Decompensated Heart Failure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Given this 69-year-old with CKD, diabetes, and heart failure presenting with weakness and chest pressure, what are your primary concerns? Consider how his medication regimen and comorbidities might interact to create this presentation.",
+      "phase5": "You've identified significant volume overload and cardiovascular compromise. The bradycardia and weakness pattern are concerning - what laboratory studies are most urgent? How might his ACE inhibitor allergy and current medications contribute to his presentation?",
+      "finalDebrief": "This case demonstrates the complexity of cardiorenal syndrome with multiple concurrent pathologies. The hyperkalemia from spironolactone in setting of worsening kidney function created cardiac toxicity, while the acute kidney injury triggered both heart failure decompensation and demand ischemia. How did the clinical clues guide you toward recognizing this wasn't just simple heart failure exacerbation?"
     }
   }
 };

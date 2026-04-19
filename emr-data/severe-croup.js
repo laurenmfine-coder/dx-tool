@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Olivia Desmond",
-  "patientHPI": "She's been making this weird barking sound when she coughs since yesterday, and her voice sounds hoarse and scratchy. She seems to be having trouble breathing, especially when she gets upset, and the sound gets louder when she cries.",
+    "patientHPI": "She's been making this weird barking sound when she coughs since yesterday, and her voice sounds hoarse and scratchy. She seems to be having trouble breathing, especially when she gets upset, and the sound gets louder when she cries.",
     "dob": "03/30/2022",
     "age": 2,
     "sex": "Female",
@@ -112,7 +112,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "23 lbs",
       "ht": "2'9\"",
-      "bmi": 15.0,
+      "bmi": 15,
       "setting": "PCP Office"
     }
   ],
@@ -155,32 +155,128 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "5.5-15.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.0", "unit": "g/dL", "range": "11.0-14.0", "flag": "" },
-            { "test": "Hematocrit", "value": "36.1", "unit": "%", "range": "33-39", "flag": "" },
-            { "test": "Platelets", "value": "268", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Lymphocytes", "value": "52", "unit": "%", "range": "25-50", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "5.5-15.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.0",
+              "unit": "g/dL",
+              "range": "11.0-14.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "36.1",
+              "unit": "%",
+              "range": "33-39",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "268",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "52",
+              "unit": "%",
+              "range": "25-50",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "98", "unit": "mg/dL", "range": "60-110", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "5-18", "flag": "" },
-            { "test": "Creatinine", "value": "0.3", "unit": "mg/dL", "range": "0.2-0.4", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.5", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "21", "unit": "mEq/L", "range": "20-28", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "60-110",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "5-18",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.3",
+              "unit": "mg/dL",
+              "range": "0.2-0.4",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.5",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "21",
+              "unit": "mEq/L",
+              "range": "20-28",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BLOOD GAS (VENOUS)",
           "results": [
-            { "test": "pH", "value": "7.34", "unit": "", "range": "7.32-7.42", "flag": "" },
-            { "test": "pCO2", "value": "48", "unit": "mmHg", "range": "35-45", "flag": "H" },
-            { "test": "pO2", "value": "42", "unit": "mmHg", "range": "30-50", "flag": "" },
-            { "test": "Base Excess", "value": "-2", "unit": "mEq/L", "range": "-2 to +2", "flag": "" }
+            {
+              "test": "pH",
+              "value": "7.34",
+              "unit": "",
+              "range": "7.32-7.42",
+              "flag": ""
+            },
+            {
+              "test": "pCO2",
+              "value": "48",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": "H"
+            },
+            {
+              "test": "pO2",
+              "value": "42",
+              "unit": "mmHg",
+              "range": "30-50",
+              "flag": ""
+            },
+            {
+              "test": "Base Excess",
+              "value": "-2",
+              "unit": "mEq/L",
+              "range": "-2 to +2",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -205,12 +301,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/15/2024", "site": "Right deltoid IM", "lot": "FL892T", "mfr": "GSK" },
-    { "vaccine": "DTaP (Daptacel) — 4th dose", "date": "03/30/2023", "site": "Right thigh IM", "lot": "DA418K", "mfr": "Sanofi" },
-    { "vaccine": "Hepatitis A (Havrix) — 1st dose", "date": "06/14/2023", "site": "Left thigh IM", "lot": "HA302R", "mfr": "GSK" },
-    { "vaccine": "Hepatitis A (Havrix) — 2nd dose", "date": "12/14/2023", "site": "Left thigh IM", "lot": "HA318P", "mfr": "GSK" },
-    { "vaccine": "MMR (M-M-R II)", "date": "03/30/2023", "site": "Left thigh SC", "lot": "MM592L", "mfr": "Merck" },
-    { "vaccine": "Varicella (Varivax)", "date": "03/30/2023", "site": "Right thigh SC", "lot": "VV281M", "mfr": "Merck" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/15/2024",
+      "site": "Right deltoid IM",
+      "lot": "FL892T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "DTaP (Daptacel) — 4th dose",
+      "date": "03/30/2023",
+      "site": "Right thigh IM",
+      "lot": "DA418K",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "Hepatitis A (Havrix) — 1st dose",
+      "date": "06/14/2023",
+      "site": "Left thigh IM",
+      "lot": "HA302R",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Hepatitis A (Havrix) — 2nd dose",
+      "date": "12/14/2023",
+      "site": "Left thigh IM",
+      "lot": "HA318P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "MMR (M-M-R II)",
+      "date": "03/30/2023",
+      "site": "Left thigh SC",
+      "lot": "MM592L",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Varicella (Varivax)",
+      "date": "03/30/2023",
+      "site": "Right thigh SC",
+      "lot": "VV281M",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother (age 32): Seasonal allergies, mild asthma in childhood (outgrown)",
@@ -220,14 +352,38 @@ window.EMR_DATA = {
     "Sibling (brother, age 5): Had croup x 2 episodes at ages 2 and 3; no current respiratory issues"
   ],
   "socialHistory": [
-    ["Guardian", "Lives with both parents and older brother"],
-    ["Childcare/School", "Attends daycare center 4 days/week"],
-    ["Tobacco Exposure", "None — no smokers in household; grandfather smokes but does not smoke around children"],
-    ["Pets", "One cat (indoor)"],
-    ["Home Environment", "Single-family home, central air/heat, no mold"],
-    ["Diet", "Table foods; good variety; tolerates all foods including dairy (CMPI outgrown)"],
-    ["Development", "Speaking in 3-4 word sentences, toilet training in progress, running, jumping — age-appropriate"],
-    ["Safety", "Rear-facing car seat; fence around backyard pool; smoke detectors"]
+    [
+      "Guardian",
+      "Lives with both parents and older brother"
+    ],
+    [
+      "Childcare/School",
+      "Attends daycare center 4 days/week"
+    ],
+    [
+      "Tobacco Exposure",
+      "None — no smokers in household; grandfather smokes but does not smoke around children"
+    ],
+    [
+      "Pets",
+      "One cat (indoor)"
+    ],
+    [
+      "Home Environment",
+      "Single-family home, central air/heat, no mold"
+    ],
+    [
+      "Diet",
+      "Table foods; good variety; tolerates all foods including dairy (CMPI outgrown)"
+    ],
+    [
+      "Development",
+      "Speaking in 3-4 word sentences, toilet training in progress, running, jumping — age-appropriate"
+    ],
+    [
+      "Safety",
+      "Rear-facing car seat; fence around backyard pool; smoke detectors"
+    ]
   ],
   "meta": {
     "caseId": "severe-croup",
@@ -238,75 +394,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Olivia Desmond is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersonsa": "Olivia is moderately distressed and clingy to her parent, becoming more agitated when examined which worsens her stridor. She appears tired from increased work of breathing but is still interactive and alert.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pediatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did the cough and breathing difficulty first start?",
+      "Can you describe the sound she makes when coughing?",
+      "Has her voice changed or does she sound hoarse?",
+      "Does the breathing difficulty get worse when she's upset or lying down?",
+      "Has she had a fever, and if so, how high?",
+      "Is she eating and drinking normally?",
+      "Has she had any cold symptoms like runny nose or congestion?",
+      "Has she ever had breathing problems or croup before?",
+      "Has she been around other sick children recently?",
+      "Is she drooling more than usual or having trouble swallowing?",
+      "Has she been pulling at her neck or throat?",
+      "What medications have you given her at home?",
+      "Does she have any known allergies to medications?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started She's been making this weird barking sound when she coughs since yesterday, and .'",
-        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Severe Viral Croup.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Children's Acetaminophen 160mg/5mL \u2014 5mL Q4-6h PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother (age 32): Seasonal allergies, mild asthma in childhood (outgrown)  Father (age 34): No significant medical history  Maternal grandfather (age 64): COPD, former smoker",
-        "social": "Guardian: Lives with both parents and older brother  Childcare/School: Attends daycare center 4 days/week  Tobacco Exposure: None \u2014 no smokers in household; grandfather smokes but does not smoke around children  Pets: One cat (indoor)  Home Environment: Single-family home, central air/heat, no mold"
+      "default": "I'm not sure what you mean - can you ask that differently?",
+      "onset": "The cough started yesterday morning, but the breathing trouble got much worse overnight. She woke us up around 2 AM making these scary breathing sounds.",
+      "character": "It's like a seal barking when she coughs, and when she breathes in it makes this harsh, loud sound - especially when she gets upset or cries.",
+      "location": "The sound seems to come from her throat and chest area, and you can hear it across the room.",
+      "severity": "I'd say it's an 8 out of 10 - she's really struggling to breathe and the sounds are getting scarier. She can't sleep well and gets exhausted easily.",
+      "aggravating": "The breathing gets much worse when she cries or gets agitated, and it seems worse when she's lying flat.",
+      "relieving": "Steam from the shower seemed to help a little bit last night, and sitting her upright helps some, but nothing really makes it go away.",
+      "associated": "She's had a fever up to 101.6, her voice is very hoarse and raspy, and she's been more tired than usual. She had some runny nose for a day or two before this started.",
+      "denies": "She's not drooling more than usual, she can still swallow okay, and she's not pulling at her throat. No rash or difficulty with feeding completely.",
+      "history": "She had croup once before when she was about 18 months old, but it wasn't this bad. She also had a milk protein intolerance as a baby but outgrew that.",
+      "medications": "Children's Acetaminophen 160mg/5mL — 5mL Q4-6h PRN",
+      "allergies": "NKDA",
+      "family": "Her mom had mild asthma as a child but outgrew it, and has seasonal allergies. Her maternal grandfather has COPD from smoking, but he doesn't smoke around the kids.",
+      "social": "She goes to daycare 4 days a week where several kids have been sick lately with colds. No one in our house smokes, and we have one indoor cat."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Assess for inspiratory stridor at rest",
+      "Evaluate level of consciousness and alertness",
+      "Observe work of breathing and use of accessory muscles",
+      "Auscultate lung fields for air entry and adventitious sounds",
+      "Examine throat without instrumentation",
+      "Assess for suprasternal and subcostal retractions",
+      "Evaluate hydration status and general appearance",
+      "Check for cervical lymphadenopathy",
+      "Assess oxygen saturation",
+      "Observe patient's positioning preference"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Severe Viral Croup. Document specifically what you observe."
+      "Assess for inspiratory stridor at rest": "Loud inspiratory stridor audible at rest, worsening with agitation",
+      "Evaluate level of consciousness and alertness": "Alert and responsive but appears tired, becomes more distressed with examination",
+      "Observe work of breathing and use of accessory muscles": "Moderate increase in work of breathing with visible use of accessory muscles",
+      "Auscultate lung fields for air entry and adventitious sounds": "Decreased air entry bilaterally with transmitted upper airway sounds, no wheeze or crackles",
+      "Examine throat without instrumentation": "Visible without instrumentation - no tonsillar exudate, no drooling",
+      "Assess for suprasternal and subcostal retractions": "Moderate suprasternal, intercostal, and subcostal retractions present",
+      "Evaluate hydration status and general appearance": "Appears well-hydrated but fatigued, sitting upright preferentially",
+      "Check for cervical lymphadenopathy": "Mild bilateral anterior cervical lymphadenopathy",
+      "Assess oxygen saturation": "SpO2 90% on room air, improving to 94% with supplemental oxygen",
+      "Observe patient's positioning preference": "Prefers upright positioning, becomes more distressed when supine"
     },
     "ddxTargets": [
-        "Severe Viral Croup (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Severe Viral Croup (Laryngotracheobronchitis) — Westley Score 8, Requiring Nebulized Epinephrine and Observation",
+      "Bacterial Tracheitis",
+      "Viral Bronchiolitis",
+      "Acute Epiglottitis",
+      "Foreign Body Aspiration",
+      "Spasmodic Croup",
+      "Asthma Exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Viral Croup, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Severe Viral Croup, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Severe Viral Croup based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'just another croup case' given history and classic barky cough, missing the severity indicated by stridor at rest and low oxygen saturation",
+      "prematureClosure": "Risk of discharging with steroids alone without recognizing this meets criteria for nebulized epinephrine and observation",
+      "availabilityBias": "Recent experience with milder croup cases may lead to underestimating severity of this presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Olivia Desmond's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Severe Viral Croup (Laryngotracheobronchitis) \u2014 Westley Score 8, Requiring Nebulized Epinephrine and Observation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're considering croup - what specific historical features would help you distinguish between mild and severe croup? Also, what life-threatening conditions present similarly in this age group that you absolutely cannot miss?",
+      "phase5": "You've identified classic croup features, but let's discuss severity assessment. What elements of this presentation suggest this isn't a typical mild case? How would you quantify the severity, and what would that mean for your management approach?",
+      "finalDebrief": "This case highlights the importance of severity assessment in croup. While the barky cough and stridor pointed toward croup early, the key was recognizing that stridor at rest, retractions, and hypoxemia indicated severe disease requiring epinephrine and observation rather than simple steroid treatment and discharge."
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Nguyen Thi Pham",
-  "patientHPI": "I've been having some crampy belly discomfort on and off, but today the pain got much worse and more constant. I feel bloated and haven't had a bowel movement since yesterday, which isn't normal for me.",
+    "patientHPI": "I've been having some crampy belly discomfort on and off, but today the pain got much worse and more constant. I feel bloated and haven't had a bowel movement since yesterday, which isn't normal for me.",
     "dob": "09/18/1948",
     "age": 76,
     "sex": "Female",
@@ -160,7 +160,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "122 lbs",
       "ht": "5'1\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "PCP Office"
     }
   ],
@@ -203,26 +203,116 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Albumin", "value": "3.8", "unit": "g/dL", "range": "3.5-5.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.8",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.6", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "37.8", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "210", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.6",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "210",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -290,15 +380,42 @@ window.EMR_DATA = {
     "Daughter: Healthy, age 48"
   ],
   "socialHistory": [
-    ["Occupation", "Retired seamstress; formerly owned alteration shop"],
-    ["Marital", "Widowed — husband deceased 2018"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Tai chi 3x/week at community center; daily walks"],
-    ["Housing", "Lives with daughter's family; own bedroom and bathroom on first floor"],
-    ["Safety", "No falls in past year; grab bars in bathroom; no throw rugs"],
-    ["Advance Directive", "Yes — healthcare proxy: daughter Linh Pham-Nguyen; DNR/DNI"]
+    [
+      "Occupation",
+      "Retired seamstress; formerly owned alteration shop"
+    ],
+    [
+      "Marital",
+      "Widowed — husband deceased 2018"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Tai chi 3x/week at community center; daily walks"
+    ],
+    [
+      "Housing",
+      "Lives with daughter's family; own bedroom and bathroom on first floor"
+    ],
+    [
+      "Safety",
+      "No falls in past year; grab bars in bathroom; no throw rugs"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: daughter Linh Pham-Nguyen; DNR/DNI"
+    ]
   ],
   "meta": {
     "caseId": "sbo-with-strangulation",
@@ -309,75 +426,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Nguyen Thi Pham appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Mrs. Pham appears uncomfortable and slightly anxious, shifting in bed frequently due to abdominal pain. She is cooperative and forthcoming with information, speaking clearly despite her discomfort, and expresses concern about the worsening nature of her symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did your abdominal pain first start and how has it changed?",
+      "Can you describe what the pain feels like?",
+      "Where exactly is the pain located and does it move anywhere?",
+      "On a scale of 1-10, how would you rate your pain right now?",
+      "What makes the pain better or worse?",
+      "Have you been able to pass gas or have a bowel movement recently?",
+      "Have you had any nausea or vomiting?",
+      "When was the last time you ate and were you able to keep it down?",
+      "Have you had similar episodes of abdominal pain before?",
+      "Have you had any abdominal surgeries in the past?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications or other substances?",
+      "Have you noticed any bloating or changes in your abdomen?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having some crampy belly discomfort on and off, but today the pain got.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Small Bowel Obstruction with Strangulation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 5mg daily; Metoprolol Succinate 50mg daily; Apixaban 5mg BID; Alendronate 70mg weekly; Calcium-Vitamin D 600mg/400IU BID.'",
-        "allergies": "'My allergies are Morphine, Latex.'",
-        "family": "Mother: Hypertension, stroke at age 80, deceased at 82  Father: Gastric cancer, deceased at 70  Sister: Osteoporosis, atrial fibrillation, alive at 78",
-        "social": "Occupation: Retired seamstress; formerly owned alteration shop  Marital: Widowed \u2014 husband deceased 2018  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble focusing because of this pain.",
+      "onset": "The crampy pain started about two days ago, but it was mild and came and went. This morning around 6 AM it became much worse and constant, and it's been getting progressively more severe throughout the day.",
+      "character": "It started as crampy pain that would come in waves, but now it's a constant, severe cramping pain with sharp stabbing episodes. It feels like my intestines are twisting.",
+      "location": "The pain is mostly around my belly button and lower abdomen. Sometimes I feel it more on the right side, but it's pretty much all over my belly now.",
+      "severity": "Right now it's about an 8 out of 10. I can barely concentrate on anything else, and I haven't been able to find a comfortable position.",
+      "aggravating": "Any movement makes it worse, and I think eating or drinking anything makes the cramping more intense. Even taking deep breaths hurts.",
+      "relieving": "Nothing really helps. I tried lying still, changing positions, even tried some antacids, but nothing gives me relief.",
+      "associated": "I've been feeling nauseous since this morning and I vomited twice - once around 9 AM and again about an hour ago. My belly feels very bloated and tight. I haven't been able to pass gas since yesterday evening.",
+      "denies": "I don't have any fever or chills. No diarrhea - actually the opposite, I'm completely constipated. No blood in my vomit. No chest pain or shortness of breath.",
+      "history": "Yes, I had something similar about three years ago after one of my surgeries. They said it was a bowel obstruction from scar tissue. I was in the hospital for several days, but it resolved without surgery.",
+      "medications": "Amlodipine 5mg daily; Metoprolol Succinate 50mg daily; Apixaban 5mg BID; Alendronate 70mg weekly; Calcium-Vitamin D 600mg/400IU BID",
+      "allergies": "Morphine, Latex",
+      "family": "My father died from stomach cancer, but I don't think anyone in my family has had bowel problems like this.",
+      "social": "I'm a retired seamstress - I used to own an alteration shop. I've been widowed since 2018. I've never smoked and don't drink alcohol or use any drugs."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "General appearance and vital signs assessment",
+      "Abdominal inspection",
+      "Auscultation for bowel sounds",
+      "Abdominal palpation for tenderness and masses",
+      "Assessment for rebound tenderness and guarding",
+      "Percussion of abdomen",
+      "Assessment for abdominal distention",
+      "Examination of surgical scars",
+      "Digital rectal examination",
+      "Assessment for hernias"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Small Bowel Obstruction with Strangulation. Document specifically what you observe."
+      "General appearance and vital signs assessment": "Patient appears uncomfortable, restless, with mild tachycardia. BP 134/72, HR 68, but patient appears more distressed than vitals suggest",
+      "Abdominal inspection": "Moderate abdominal distention with visible surgical scars from previous hysterectomy and appendectomy. No visible peristalsis or hernias",
+      "Auscultation for bowel sounds": "High-pitched, hyperactive bowel sounds with metallic tinkling quality in all quadrants",
+      "Abdominal palpation for tenderness and masses": "Diffuse abdominal tenderness, most severe in periumbilical and right lower quadrant regions. Abdomen feels firm and distended",
+      "Assessment for rebound tenderness and guarding": "Positive rebound tenderness in right lower quadrant with voluntary guarding. Patient winces with release of pressure",
+      "Percussion of abdomen": "Tympanitic throughout most of abdomen consistent with gaseous distention",
+      "Assessment for abdominal distention": "Moderate symmetric abdominal distention with tight, firm feeling on palpation",
+      "Examination of surgical scars": "Well-healed midline vertical scar from hysterectomy and right lower quadrant scar from appendectomy, both with good healing",
+      "Digital rectal examination": "Empty rectal vault, no masses palpated. No blood on examining finger",
+      "Assessment for hernias": "No inguinal, femoral, or incisional hernias palpated"
     },
     "ddxTargets": [
-        "Small Bowel Obstruction with Strangulation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Small Bowel Obstruction with Strangulation",
+      "Adhesive Small Bowel Obstruction (simple)",
+      "Large Bowel Obstruction",
+      "Mesenteric Ischemia",
+      "Bowel Perforation with Peritonitis",
+      "Severe Gastroenteritis",
+      "Inflammatory Bowel Disease Flare"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Small Bowel Obstruction with Strangulation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Small Bowel Obstruction with Strangulation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Small Bowel Obstruction with Strangulation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's history of prior bowel obstruction and assuming this is another simple adhesive obstruction, potentially missing signs of strangulation",
+      "prematureClosure": "May stop diagnostic workup after confirming bowel obstruction without adequately assessing for complications like strangulation or perforation",
+      "availabilityBias": "Recent cases of simple bowel obstruction may lead to underestimating the possibility of strangulated bowel or other surgical emergencies"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Nguyen Thi Pham's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Small Bowel Obstruction with Strangulation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possible causes of acute abdominal pain. Given this patient's surgical history and current presentation, what specific historical details and physical exam findings will help you differentiate between simple obstruction and more emergent conditions requiring immediate surgical intervention?",
+      "phase5": "Now that you've completed your assessment, let's think critically about the constellation of findings. You have a patient with prior abdominal surgery, classic obstruction symptoms, and some concerning exam findings. What specific features might suggest this is more than a simple adhesive obstruction? What would make you worried about compromised bowel viability?",
+      "finalDebrief": "This case demonstrates the importance of recognizing when a common diagnosis like bowel obstruction has developed complications. The combination of the patient's surgical history, progressive symptoms, rebound tenderness, and high-pitched bowel sounds suggested strangulation. How did your differential diagnosis evolve as you gathered more information, and what red flags indicated this needed emergent surgical evaluation rather than conservative management?"
     }
-}
+  }
 };

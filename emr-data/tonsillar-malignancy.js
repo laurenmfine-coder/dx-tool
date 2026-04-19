@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Parsons",
-  "patientHPI": "I've had this stubborn sore throat on my right side for about two months now that just won't go away, even though my doctor gave me two different antibiotics. The pain sometimes shoots up to my right ear, and about a month ago I noticed a lump on the right side of my neck that seems to be getting bigger. My voice sounds a little different too, kind of hoarse, and people have been asking me if I have a cold.",
+    "patientHPI": "I've had this stubborn sore throat on my right side for about two months now that just won't go away, even though my doctor gave me two different antibiotics. The pain sometimes shoots up to my right ear, and about a month ago I noticed a lump on the right side of my neck that seems to be getting bigger. My voice sounds a little different too, kind of hoarse, and people have been asking me if I have a cold.",
     "dob": "05/03/1960",
     "age": 64,
     "sex": "Male",
@@ -98,54 +98,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/20/2025",
-        "bp": "142/88",
-        "hr": 78,
-        "rr": 16,
-        "temp": "98.8\u00b0F",
-        "spo2": "96%",
-        "wt": "168 lbs",
-        "ht": "6'0\"",
-        "bmi": 22.8,
-        "setting": "PCP Office"
+      "date": "01/20/2025",
+      "bp": "142/88",
+      "hr": 78,
+      "rr": 16,
+      "temp": "98.8°F",
+      "spo2": "96%",
+      "wt": "168 lbs",
+      "ht": "6'0\"",
+      "bmi": 22.8,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/15/2024",
-        "bp": "138/84",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "97%",
-        "wt": "178 lbs",
-        "ht": "6'0\"",
-        "bmi": 24.1,
-        "setting": "PCP Office"
+      "date": "07/15/2024",
+      "bp": "138/84",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "97%",
+      "wt": "178 lbs",
+      "ht": "6'0\"",
+      "bmi": 24.1,
+      "setting": "PCP Office"
     },
     {
-        "date": "01/10/2024",
-        "bp": "136/82",
-        "hr": 72,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "97%",
-        "wt": "182 lbs",
-        "ht": "6'0\"",
-        "bmi": 24.7,
-        "setting": "PCP Office"
+      "date": "01/10/2024",
+      "bp": "136/82",
+      "hr": 72,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "97%",
+      "wt": "182 lbs",
+      "ht": "6'0\"",
+      "bmi": 24.7,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/05/2023",
-        "bp": "134/80",
-        "hr": 74,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "97%",
-        "wt": "184 lbs",
-        "ht": "6'0\"",
-        "bmi": 25.0,
-        "setting": "PCP Office"
+      "date": "07/05/2023",
+      "bp": "134/80",
+      "hr": 74,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "97%",
+      "wt": "184 lbs",
+      "ht": "6'0\"",
+      "bmi": 25,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -196,30 +196,144 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "11.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.6", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "MCV", "value": "88", "unit": "fL", "range": "80-100", "flag": "" },
-            { "test": "Platelet Count", "value": "388", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "11.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.6",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "88",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "388",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "10.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Albumin", "value": "3.2", "unit": "g/dL", "range": "3.5-5.0", "flag": "L" },
-            { "test": "Total Protein", "value": "6.0", "unit": "g/dL", "range": "6.0-8.3", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "42", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "48", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "Alkaline Phosphatase", "value": "118", "unit": "U/L", "range": "44-147", "flag": "" },
-            { "test": "LDH", "value": "248", "unit": "U/L", "range": "140-280", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.2",
+              "unit": "g/dL",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Total Protein",
+              "value": "6.0",
+              "unit": "g/dL",
+              "range": "6.0-8.3",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "42",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "48",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "118",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            },
+            {
+              "test": "LDH",
+              "value": "248",
+              "unit": "U/L",
+              "range": "140-280",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -310,15 +424,42 @@ window.EMR_DATA = {
     "Sister: Breast cancer (age 58, in remission), alive at 62"
   ],
   "socialHistory": [
-    ["Occupation", "Auto mechanic — 38 years; solvent and chemical exposure"],
-    ["Marital", "Married — 35 years"],
-    ["Tobacco", "Current smoker — 1 PPD x 46 years (46 pack-years); multiple failed quit attempts"],
-    ["Alcohol", "3-4 drinks nightly — beer and whiskey; CAGE 2/4"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — occasional walking"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; wears seatbelt; occupational PPE inconsistently used"],
-    ["Advance Directive", "None — discussed, wife to be DPOA if formalized"]
+    [
+      "Occupation",
+      "Auto mechanic — 38 years; solvent and chemical exposure"
+    ],
+    [
+      "Marital",
+      "Married — 35 years"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 46 years (46 pack-years); multiple failed quit attempts"
+    ],
+    [
+      "Alcohol",
+      "3-4 drinks nightly — beer and whiskey; CAGE 2/4"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — occasional walking"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; occupational PPE inconsistently used"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed, wife to be DPOA if formalized"
+    ]
   ],
   "meta": {
     "caseId": "tonsillar-malignancy",
@@ -329,75 +470,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Richard Parsons appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mr. Parsons appears anxious and somewhat withdrawn, with a hoarse voice and visible discomfort when speaking. He is forthcoming about his symptoms but becomes defensive when discussing his smoking and drinking habits. He displays moderate distress and seems worried that his symptoms aren't improving despite treatment.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did ent / airway emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the sore throat pain in more detail?",
+      "When did you first notice the lump in your neck?",
+      "Have you had any difficulty swallowing food or liquids?",
+      "Any weight loss over the past few months?",
+      "How long have you had the hoarseness?",
+      "Any bleeding from your mouth or throat?",
+      "Tell me about your smoking history",
+      "How much alcohol do you typically drink?",
+      "Any fevers, chills, or night sweats?",
+      "Any changes in your voice besides hoarseness?",
+      "Have you had any dental problems recently?",
+      "Any family history of cancer?",
+      "What antibiotics did you try and for how long?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've had this stubborn sore throat on my right side for about two months now tha.'",
-        "character": "'It's ent / airway emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Tonsillar Malignancy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 20mg daily; Omeprazole 40mg daily; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Lung cancer (smoker), deceased at 62  Mother: Hypertension, alive at 86  Brother: GERD, Barrett's esophagus, alive at 67",
-        "social": "Occupation: Auto mechanic \u2014 38 years; solvent and chemical exposure  Marital: Married \u2014 35 years  Tobacco: Current smoker \u2014 1 PPD x 46 years (46 pack-years); multiple failed quit attempts  Alcohol: 3-4 drinks nightly \u2014 beer and whiskey; CAGE 2/4  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Can you ask that a different way?",
+      "onset": "The sore throat started about two months ago, just on the right side. At first I thought it was just a cold, but it never went away. The neck lump I noticed about a month ago.",
+      "character": "It's a constant aching pain, sometimes sharp, especially when I swallow. It's different from any sore throat I've had before - more persistent and deeper.",
+      "location": "The pain is mainly on the right side of my throat, and it shoots up to my right ear pretty regularly. The lump is on the right side of my neck, below my jaw.",
+      "severity": "I'd say the throat pain is about a 6 out of 10, but when it shoots to my ear it can be an 8. It's definitely affecting my sleep and eating.",
+      "aggravating": "Swallowing makes it worse, especially solid foods. Hot liquids seem to bother it more than cold ones. Even my own saliva hurts to swallow sometimes.",
+      "relieving": "Nothing really helps much. I've tried throat lozenges, warm salt water gargles, ibuprofen. The pain medicine takes the edge off but doesn't make it go away.",
+      "associated": "I've lost about 15 pounds without trying, and my voice has gotten more hoarse than usual. Sometimes I have this metallic taste in my mouth, and I've had some bad breath that won't go away.",
+      "denies": "No fever, no chills, no trouble breathing, no chest pain. Haven't coughed up any blood, though sometimes my saliva has a pinkish tinge.",
+      "history": "I've had a hoarse voice for years - thought it was from smoking and working around chemicals. But this throat pain and the lump, that's all new.",
+      "medications": "Lisinopril 20mg daily; Omeprazole 40mg daily; Aspirin 81mg daily",
+      "allergies": "NKDA",
+      "family": "My dad died of lung cancer at 62 - he was a heavy smoker too. My mom has high blood pressure, and my brother has acid reflux problems.",
+      "social": "I've been an auto mechanic for 38 years, exposed to lots of solvents and chemicals. I smoke about a pack a day - have for 46 years. I've tried to quit several times but can't stick with it. I drink 3-4 beers or shots most nights to unwind."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of oropharynx and tonsillar pillars",
+      "Palpation of cervical lymph nodes",
+      "Palpation of submandibular and submental nodes",
+      "Inspection of oral cavity and tongue mobility",
+      "Laryngeal palpation and thyroid examination",
+      "Otoscopic examination",
+      "Assessment of cranial nerves IX, X, XII",
+      "Palpation of supraclavicular nodes",
+      "Inspection for trismus or limited mouth opening"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Tonsillar Malignancy. Document specifically what you observe."
+      "Inspection of oropharynx and tonsillar pillars": "Right tonsillar pillar shows an irregular, ulcerative lesion approximately 2cm with raised borders and central necrosis. Left tonsil appears normal.",
+      "Palpation of cervical lymph nodes": "Enlarged, firm, fixed lymph node approximately 3cm in right level II cervical chain. Non-tender to palpation.",
+      "Palpation of submandibular and submental nodes": "Right submandibular node enlarged to 2cm, firm and mobile. Left submandibular nodes normal.",
+      "Inspection of oral cavity and tongue mobility": "Tongue mobility intact bilaterally. No lesions on tongue or floor of mouth. Mild erythema of right lateral pharyngeal wall.",
+      "Laryngeal palpation and thyroid examination": "Laryngeal crepitus present. Thyroid gland normal size and consistency. No thyroid nodules palpated.",
+      "Otoscopic examination": "Right tympanic membrane normal. Left tympanic membrane normal. No evidence of referred pathology.",
+      "Assessment of cranial nerves IX, X, XII": "Cranial nerves IX and X intact with normal gag reflex. Cranial nerve XII intact with normal tongue protrusion and movement.",
+      "Palpation of supraclavicular nodes": "No supraclavicular lymphadenopathy palpated bilaterally.",
+      "Inspection for trismus or limited mouth opening": "Mouth opening slightly limited to approximately 4cm. Mild trismus present on right side."
     },
     "ddxTargets": [
-        "Tonsillar Malignancy (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Tonsillar Malignancy (Oropharyngeal Squamous Cell Carcinoma) (correct diagnosis)",
+      "Peritonsillar abscess",
+      "Chronic tonsillitis with lymphadenitis",
+      "Epiglottitis with airway compromise",
+      "Retropharyngeal abscess",
+      "Viral pharyngitis with reactive lymphadenopathy",
+      "Bacterial pharyngitis (Group A Streptococcus)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Tonsillar Malignancy, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Tonsillar Malignancy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Tonsillar Malignancy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on recent antibiotic treatment and assuming infectious etiology, potentially missing the malignant process despite concerning features like weight loss and fixed lymphadenopathy.",
+      "prematureClosure": "After noting sore throat and lymph nodes, may prematurely close on infectious causes without fully exploring the chronicity, associated weight loss, and patient's significant risk factors.",
+      "availabilityBias": "Tendency to think of common infectious causes of sore throat rather than considering malignancy, especially given the patient's significant smoking history and occupational exposures."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Richard Parsons's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Tonsillar Malignancy (Oropharyngeal Squamous Cell Carcinoma). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "What risk factors does this patient have that might predispose him to more serious pathology? Given the chronicity and failure to respond to antibiotics, what other categories of disease should be on your differential?",
+      "phase5": "Now that you've found an ulcerative tonsillar lesion with fixed cervical lymphadenopathy in a patient with significant smoking history, how has your differential diagnosis changed? What's the most concerning diagnosis that fits this clinical picture?",
+      "finalDebrief": "This case highlights the importance of considering malignancy in patients with chronic throat symptoms, especially those with significant tobacco and alcohol exposure. The combination of unilateral throat pain, weight loss, and fixed lymphadenopathy should raise red flags for oropharyngeal cancer. How might anchoring on the recent antibiotic treatments have delayed recognition of the true diagnosis?"
     }
-}
+  }
 };

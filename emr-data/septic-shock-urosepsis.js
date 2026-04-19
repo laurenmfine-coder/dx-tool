@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Edna Fitzgerald",
-  "patientHPI": "My daughter found me this morning shaking and confused - I've been having this terrible burning pain in my lower back and belly that's been getting worse over the past couple days.",
+    "patientHPI": "My daughter found me this morning shaking and confused - I've been having this terrible burning pain in my lower back and belly that's been getting worse over the past couple days.",
     "dob": "02/01/1947",
     "age": "79",
     "sex": "Female",
@@ -383,75 +383,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Edna Fitzgerald appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Edna appears confused and disoriented, frequently losing track of questions mid-conversation. She appears acutely ill and distressed, alternating between shivering and attempting to answer questions while clearly struggling with cognitive clarity due to her septic state.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did daughter called ems: 'found her confused and shaking' low belly and back pain \u2014 flanks start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the burning pain in your back and belly?",
+      "Can you describe what the pain feels like?",
+      "Does the pain move anywhere else in your body?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "Have you had any fever or chills?",
+      "Any nausea or vomiting?",
+      "Have you noticed any changes in your urination - burning, frequency, or blood?",
+      "When was your last normal meal and bowel movement?",
+      "Have you had urinary tract infections before?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Have you been taking all your medications as prescribed?",
+      "Has anyone in your family had kidney problems or frequent infections?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My daughter found me this morning shaking and confused - I've been having this t.'",
-        "character": "'It's daughter called ems: 'found her confused and shaking' low belly and back pain \u2014 flanks \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin; Glipizide; Lisinopril; Nitrofurantoin.'",
-        "allergies": "'My allergies are Sulfa drugs.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Alcohol: Rare  Drugs: Denies  Occupation: Retired librarian  Living: Lives alone, daughter visits twice weekly"
+      "default": "I'm sorry, I'm having trouble concentrating... what was the question again?",
+      "onset": "I think it started maybe two days ago... or was it three? The pain just kept getting worse, and this morning my daughter said I wasn't making sense",
+      "character": "It's like a deep, constant burning and aching that just won't stop",
+      "location": "It's mostly in my lower back on both sides and wraps around to my belly",
+      "severity": "Right now it's about an 8 out of 10, I can barely think straight",
+      "aggravating": "Moving makes it worse, and I feel terrible when I try to stand up",
+      "relieving": "Nothing really helps... I tried some Tylenol yesterday but it didn't touch it",
+      "associated": "I've been shaking and feeling so cold, and I think I've been running a fever. I've been nauseous too",
+      "denies": "No chest pain, no trouble breathing really, no headache that I remember",
+      "history": "Oh yes, I get bladder infections quite often. I think I had one a few weeks ago",
+      "medications": "Metformin; Glipizide; Lisinopril; Nitrofurantoin",
+      "allergies": "Sulfa drugs",
+      "family": "My mother had kidney problems when she was older, but I don't remember the details",
+      "social": "I'm a retired librarian, I live alone but my daughter checks on me. I don't smoke or drink much, maybe wine at holidays"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Costovertebral angle tenderness",
+      "Abdominal palpation",
+      "Suprapubic tenderness assessment",
+      "Mental status examination",
+      "Heart rate and rhythm assessment",
+      "Blood pressure measurement",
+      "Temperature assessment",
+      "Skin assessment for warmth and perfusion",
+      "Mucous membrane examination",
+      "Capillary refill time"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Costovertebral angle tenderness": "Marked bilateral CVA tenderness, patient grimaces and pulls away with gentle percussion",
+      "Abdominal palpation": "Mild diffuse lower abdominal tenderness, no guarding or masses palpated",
+      "Suprapubic tenderness assessment": "Moderate suprapubic tenderness on palpation",
+      "Mental status examination": "Disoriented to time, slow to respond, appears confused and lethargic",
+      "Heart rate and rhythm assessment": "Tachycardic at 118 bpm, regular rhythm",
+      "Blood pressure measurement": "Hypotensive at 78/48 mmHg",
+      "Temperature assessment": "Febrile at 39.9°C (103.8°F)",
+      "Skin assessment for warmth and perfusion": "Skin is warm and flushed, poor skin turgor suggesting dehydration",
+      "Mucous membrane examination": "Dry mucous membranes, delayed capillary refill",
+      "Capillary refill time": "Prolonged at 4 seconds"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Pyelonephritis with sepsis (correct diagnosis)",
+      "Complicated urinary tract infection",
+      "Urosepsis with acute kidney injury",
+      "Septic shock from any source",
+      "Meningitis",
+      "Nephrolithiasis with infection",
+      "Acute cystitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'UTI' and missing the severity - this is pyelonephritis with sepsis requiring immediate intervention",
+      "prematureClosure": "May stop at simple UTI diagnosis without recognizing septic presentation and hemodynamic instability",
+      "availabilityBias": "Elderly women commonly get UTIs, but this presentation with altered mental status and hypotension indicates serious systemic infection"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Edna Fitzgerald's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You're thinking about this 79-year-old woman with confusion, flank pain, and fever. Given her vital signs showing hypotension and tachycardia, what are you most concerned about? How might her history of recurrent UTIs and current presentation guide your questioning?",
+      "phase5": "Now that you've examined Edna and found bilateral CVA tenderness with signs of sepsis, how has your differential diagnosis evolved? What's the most likely diagnosis, and what immediate interventions does this patient need?",
+      "finalDebrief": "This case demonstrates how a 'simple UTI' in an elderly patient can progress to life-threatening pyelonephritis with sepsis. The key teaching points are recognizing sepsis in elderly patients who may present with altered mental status, understanding that hypotension and tachycardia indicate systemic involvement requiring immediate treatment, and remembering that recurrent UTIs can predispose to more serious ascending infections."
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Simmons",
-  "patientHPI": "I'm back for another steroid injection in my spine because my back pain came back. The first shot I got a few months ago worked great for about three months, but now that shooting pain down my right leg is back just as bad as before.",
+    "patientHPI": "I'm back for another steroid injection in my spine because my back pain came back. The first shot I got a few months ago worked great for about three months, but now that shooting pain down my right leg is back just as bad as before.",
     "dob": "01/25/1983",
     "age": 43,
     "sex": "Male",
@@ -138,7 +138,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "172 lbs",
       "ht": "5'11\"",
-      "bmi": 24.0,
+      "bmi": 24,
       "setting": "PCP Office"
     },
     {
@@ -193,36 +193,126 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "18.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "86", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Bands", "value": "8", "unit": "%", "range": "0-5", "flag": "H" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "39.6", "unit": "%", "range": "38.0-50.0", "flag": "" },
-            { "test": "Platelet Count", "value": "342", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "18.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "86",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "8",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.6",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "342",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "INFLAMMATORY MARKERS",
           "results": [
-            { "test": "ESR", "value": "82", "unit": "mm/hr", "range": "0-22", "flag": "H" },
-            { "test": "CRP", "value": "14.8", "unit": "mg/dL", "range": "<0.5", "flag": "H" },
-            { "test": "Procalcitonin", "value": "2.4", "unit": "ng/mL", "range": "<0.1", "flag": "H" }
+            {
+              "test": "ESR",
+              "value": "82",
+              "unit": "mm/hr",
+              "range": "0-22",
+              "flag": "H"
+            },
+            {
+              "test": "CRP",
+              "value": "14.8",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
+            },
+            {
+              "test": "Procalcitonin",
+              "value": "2.4",
+              "unit": "ng/mL",
+              "range": "<0.1",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "Sodium", "value": "137", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "137",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BLOOD CULTURES",
           "results": [
-            { "test": "Blood Culture x2", "value": "Pending", "unit": "", "range": "No growth", "flag": "" }
+            {
+              "test": "Blood Culture x2",
+              "value": "Pending",
+              "unit": "",
+              "range": "No growth",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -290,15 +380,42 @@ window.EMR_DATA = {
     "No known family history of autoimmune, cancer, or neurologic disease"
   ],
   "socialHistory": [
-    ["Occupation", "Part-time auto parts store clerk; formerly construction laborer"],
-    ["Marital", "Single; never married; lives alone"],
-    ["Tobacco", "Current smoker — 1/2 PPD x 20 years (10 pack-year)"],
-    ["Alcohol", "Sober 3 years; prior heavy use"],
-    ["Drugs", "History IV heroin use (2010-2022); in remission on buprenorphine/naloxone; last use >3 years ago"],
-    ["Exercise", "Walks daily; gym 2x/week when pain allows"],
-    ["Housing", "Studio apartment; lives alone"],
-    ["Safety", "Denies IPV; safe injection education provided historically; no current use"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Part-time auto parts store clerk; formerly construction laborer"
+    ],
+    [
+      "Marital",
+      "Single; never married; lives alone"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1/2 PPD x 20 years (10 pack-year)"
+    ],
+    [
+      "Alcohol",
+      "Sober 3 years; prior heavy use"
+    ],
+    [
+      "Drugs",
+      "History IV heroin use (2010-2022); in remission on buprenorphine/naloxone; last use >3 years ago"
+    ],
+    [
+      "Exercise",
+      "Walks daily; gym 2x/week when pain allows"
+    ],
+    [
+      "Housing",
+      "Studio apartment; lives alone"
+    ],
+    [
+      "Safety",
+      "Denies IPV; safe injection education provided historically; no current use"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "epidural-abscess",
@@ -309,75 +426,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Derek Simmons is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Derek appears anxious and in moderate distress, fidgeting and shifting positions frequently due to discomfort. He's cooperative but somewhat defensive about his substance use history, initially focused on getting another steroid injection rather than considering other causes for his worsening symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did your back pain start getting worse again?",
+      "How would you describe the pain - is it the same as before or different?",
+      "Where exactly is the pain located and does it radiate anywhere?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "What makes your pain worse or better?",
+      "Have you had any fever, chills, or feeling unwell?",
+      "Any numbness, tingling, or weakness in your legs?",
+      "Any bowel or bladder problems?",
+      "Tell me about the steroid injection you had - when was it exactly?",
+      "Have you had any skin infections or other infections recently?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Any family history of back problems or infections?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm back for another steroid injection in my spine because my back pain came bac.'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Spinal Epidural Abscess.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Buprenorphine/Naloxone 8/2mg SL BID; Escitalopram 20mg daily; Cyclobenzaprine 10mg TID PRN; Naproxen 500mg BID.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Father: Unknown medical history (estranged)  Mother: Depression, T2DM, alive at 65  Brother: Substance use disorder (alcohol), alive at 45",
-        "social": "Occupation: Part-time auto parts store clerk; formerly construction laborer  Marital: Single; never married; lives alone  Tobacco: Current smoker \u2014 1/2 PPD x 20 years (10 pack-year)  Alcohol: Sober 3 years; prior heavy use  Drugs: History IV heroin use (2010-2022); in remission on buprenorphine/naloxone; last use >3 years ago"
+      "default": "I'm not sure what you mean doc, I just need another shot for my back like I got before.",
+      "onset": "The pain started coming back about 2 weeks ago, but it's gotten much worse over the past 4-5 days. It's different this time - more constant and deeper.",
+      "character": "It's a deep, throbbing ache that's constant, not just the sharp shooting pain I used to get. It feels like something is eating away at my spine.",
+      "location": "It's right in my lower back, same spot as always around L4-L5, but now it radiates around to my belly too, not just down my leg.",
+      "severity": "Right now it's a solid 8 out of 10. I can barely sleep and it hurts even when I'm just sitting still. Before it was only bad when I moved.",
+      "aggravating": "Everything makes it worse - sitting, standing, walking, even lying down. Coughing or sneezing is excruciating.",
+      "relieving": "Nothing really helps anymore. The naproxen and muscle relaxers aren't touching it. I've been wanting to take more but I know I can't.",
+      "associated": "I've been feeling really run down and achy all over. Had some chills and been sweating at night. My right leg feels weaker than usual.",
+      "denies": "No numbness or tingling, no problems with my bowel or bladder, no skin rashes or wounds that I can see.",
+      "history": "I've had chronic back pain for years from the disc herniation, but this feels completely different. Never had fever with my back pain before.",
+      "medications": "Buprenorphine/Naloxone 8/2mg SL BID; Escitalopram 20mg daily; Cyclobenzaprine 10mg TID PRN; Naproxen 500mg BID",
+      "allergies": "Penicillin",
+      "family": "My mom has diabetes and depression, but no back problems that I know of. Don't know much about my dad's side.",
+      "social": "I work part-time at an auto parts store now, used to do construction. I'm in recovery from heroin, been clean over 3 years on the buprenorphine. Still smoke about half a pack a day."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "Inspection of injection site",
+      "Palpation of lumbar spine",
+      "Straight leg raise test",
+      "Motor strength testing lower extremities",
+      "Deep tendon reflexes",
+      "Sensory examination",
+      "Rectal examination for sphincter tone",
+      "Percussion tenderness over spinous processes",
+      "Range of motion testing",
+      "Neurological examination for upper motor neuron signs"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Spinal Epidural Abscess. Document specifically what you observe."
+      "Inspection of injection site": "No obvious erythema, swelling, or drainage at previous ESI site, but patient reports tenderness",
+      "Palpation of lumbar spine": "Marked tenderness and warmth over L4-L5 spinous processes and paraspinal muscles",
+      "Straight leg raise test": "Positive bilaterally at 30 degrees, limited by severe back pain rather than radicular symptoms",
+      "Motor strength testing lower extremities": "4/5 strength in right ankle dorsiflexion and plantarflexion, otherwise 5/5",
+      "Deep tendon reflexes": "Diminished right Achilles reflex, otherwise symmetric",
+      "Sensory examination": "Intact to light touch and pinprick in all dermatomes",
+      "Rectal examination for sphincter tone": "Normal sphincter tone, no saddle anesthesia",
+      "Percussion tenderness over spinous processes": "Severe percussion tenderness over L4-L5 spinous processes",
+      "Range of motion testing": "Severely limited lumbar flexion and extension due to pain",
+      "Neurological examination for upper motor neuron signs": "No pathologic reflexes, no clonus"
     },
     "ddxTargets": [
-        "Spinal Epidural Abscess (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Spinal Epidural Abscess (Post-ESI, MSSA) (correct diagnosis)",
+      "Recurrent disc herniation with radiculopathy",
+      "Lumbar osteomyelitis",
+      "Cauda equina syndrome",
+      "Spinal cord compression",
+      "Mechanical low back pain exacerbation",
+      "Drug-seeking behavior/pseudoaddiction"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Spinal Epidural Abscess, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Spinal Epidural Abscess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Spinal Epidural Abscess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's substance use history and dismissing pain as drug-seeking behavior rather than investigating serious pathology",
+      "prematureClosure": "Risk of immediately assuming recurrent disc herniation given recent ESI and chronic back pain history without considering infectious complications",
+      "availabilityBias": "Risk of focusing on common mechanical causes of back pain rather than considering rare but serious post-procedural complications like epidural abscess"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Derek Simmons's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Spinal Epidural Abscess (Post-ESI, MSSA). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview this patient, consider the timeline and quality of his symptoms. What red flags might distinguish serious spinal pathology from routine mechanical back pain? How might his recent procedure and medical history influence your approach?",
+      "phase5": "Now that you've completed your history and exam, what key features distinguish this presentation from typical mechanical back pain? What specific combination of findings should prompt urgent imaging and specialist consultation?",
+      "finalDebrief": "This case highlights the importance of recognizing post-procedural complications and avoiding bias based on substance use history. How did the fever, constant pain quality, and percussion tenderness help differentiate epidural abscess from mechanical causes? What systemic factors in this patient's history may have predisposed him to this complication?"
     }
-}
+  }
 };

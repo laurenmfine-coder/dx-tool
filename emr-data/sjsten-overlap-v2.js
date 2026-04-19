@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Hannah Rodriguez",
-  "patientHPI": "I started taking an antibiotic about two weeks ago after being diagnosed with HIV, and now I have this horrible rash with red target-like spots that's gotten much worse - my skin is peeling off and I have painful sores in my mouth.",
+      "patientHPI": "I started taking an antibiotic about two weeks ago after being diagnosed with HIV, and now I have this horrible rash with red target-like spots that's gotten much worse - my skin is peeling off and I have painful sores in my mouth.",
       "dob": "09/05/2002",
       "age": "24",
       "sex": "Female",
@@ -1121,93 +1121,100 @@ window.EMR_DATA = {
       "Adherence",
       "New HIV diagnosis — overwhelmed, now terrified of medications"
     ]
-  ]
-,"references":[
-  {
-    "id": "SCORTEN-2000",
-    "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
-    "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
-    "journal": "J Invest Dermatol",
-    "year": 2000,
-    "doi": "10.1046/j.1523-1747.2000.00061.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
-    "openAccess": true,
-    "validates": [
-      "SCORTEN mortality prediction",
-      "7 clinical parameters",
-      "Score 3 = 12.1% mortality"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "SCORTEN-2000",
+      "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
+      "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
+      "journal": "J Invest Dermatol",
+      "year": 2000,
+      "doi": "10.1046/j.1523-1747.2000.00061.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
+      "openAccess": true,
+      "validates": [
+        "SCORTEN mortality prediction",
+        "7 clinical parameters",
+        "Score 3 = 12.1% mortality"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Hannah Rodriguez is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Hannah appears anxious and withdrawn, with visible distress from both physical pain and overwhelming fear about her new HIV diagnosis. She is hesitant to discuss medications, expressing terror about taking anything new after developing this severe reaction, but will provide information when approached with patience and reassurance.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did you first notice the rash and how has it changed?",
+      "Can you describe what the rash looked like when it first appeared?",
+      "Are you having any pain or burning with the skin lesions?",
+      "Do you have any sores or pain in your mouth or throat?",
+      "Have you had any eye irritation, burning, or vision changes?",
+      "Are you having any difficulty swallowing or eating?",
+      "Have you had any fever, chills, or feeling unwell?",
+      "What medications were you taking when the rash started?",
+      "Have you ever had reactions to medications before?",
+      "When were you diagnosed with HIV and how are you coping?",
+      "Have you had any recent infections or illnesses?",
+      "Are you having any breathing problems or chest tightness?",
+      "Have you noticed any blistering or peeling of your skin?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take TMP-SMX; Cyclosporine; IV Fluids; Morphine PCA.'",
-        "allergies": "'My allergies: Sulfamethoxazole.'",
-        "family": "Non-contributory",
-        "social": "Context: HIV positive \u2014 started Bactrim prophylaxis, SJS at day 14  Issue: Sulfa drugs are first-line PCP prophylaxis in HIV \u2014 now needs alternatives  Severity: 15% BSA detachment (SJS/TEN overlap zone: 10-30%)  Adherence: New HIV diagnosis \u2014 overwhelmed, now terrified of medications"
+      "default": "I'm sorry, I'm having trouble focusing because of the pain and everything that's happening. Could you ask that differently?",
+      "onset": "The rash started about 4 days ago, maybe 10 days after I began the Bactrim. It started as red spots on my chest and arms, but then it got much worse with blistering and my skin started peeling off.",
+      "character": "It started as red, target-like spots that looked like bullseyes, but then turned into these terrible blisters that burst and left raw, painful areas where my skin just came off.",
+      "location": "It started on my chest and arms, but now it's spread to my back, face, and I have painful sores in my mouth and throat too.",
+      "severity": "The pain is about an 8 out of 10, especially when anything touches my skin or when I try to eat or drink. I can barely function.",
+      "aggravating": "Any touch or movement makes it worse, and trying to eat or drink anything is agony because of the mouth sores.",
+      "relieving": "The morphine helps some, but not completely. Cool, wet dressings feel a little better, but I'm still in constant pain.",
+      "associated": "I have fever, chills, and terrible pain in my mouth and throat. I can barely swallow and eating is almost impossible. I feel weak and exhausted.",
+      "denies": "I don't have any breathing problems, chest pain, or vision changes, but my eyes do feel a bit irritated and dry.",
+      "history": "No, I've never had anything like this before. I've never had bad reactions to medications, which is why this is so scary.",
+      "medications": "TMP-SMX; Cyclosporine; IV Fluids; Morphine PCA",
+      "allergies": "Sulfamethoxazole",
+      "family": "No one in my family has had skin problems like this or medication allergies that I know of.",
+      "social": "I work as a teacher, don't smoke, drink occasionally socially. I was just diagnosed with HIV last month and started the Bactrim for prevention. I'm terrified of taking any medications now."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Skin examination for rash distribution and characteristics",
+      "Assessment of body surface area involvement",
+      "Oral cavity and mucous membrane examination",
+      "Conjunctival and ocular examination",
+      "Lymph node palpation",
+      "Assessment for Nikolsky sign",
+      "Temperature and vital signs assessment",
+      "Respiratory examination",
+      "Cardiac examination",
+      "Evaluation of hydration status"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Skin examination for rash distribution and characteristics": "Widespread erythematous and purpuric macules with atypical targetoid lesions, extensive areas of epidermal detachment with bullae and erosions across chest, back, arms, and face",
+      "Assessment of body surface area involvement": "Approximately 15% body surface area with epidermal detachment, consistent with SJS/TEN overlap syndrome",
+      "Oral cavity and mucous membrane examination": "Severe oral erosions with crusted lips, erythematous and ulcerated buccal mucosa, difficulty opening mouth fully due to pain",
+      "Conjunctival and ocular examination": "Mild conjunctival erythema and irritation, no corneal involvement or severe ocular complications noted",
+      "Lymph node palpation": "Mild cervical and axillary lymphadenopathy, mobile and tender",
+      "Assessment for Nikolsky sign": "Positive Nikolsky sign - lateral pressure causes separation of epidermis",
+      "Temperature and vital signs assessment": "Febrile at 38.4°C, tachycardic at 104 bpm, blood pressure 102/62 suggesting mild dehydration",
+      "Respiratory examination": "Clear breath sounds bilaterally, no respiratory distress or pulmonary involvement",
+      "Cardiac examination": "Tachycardic but regular rhythm, no murmurs or gallops",
+      "Evaluation of hydration status": "Signs of mild dehydration with dry mucous membranes, poor skin turgor in unaffected areas"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis overlap (correct diagnosis)",
+      "Drug-induced hypersensitivity syndrome (DRESS)",
+      "Erythema multiforme major",
+      "Staphylococcal scalded skin syndrome",
+      "Necrotizing fasciitis",
+      "Viral exanthem with secondary bacterial infection",
+      "Pemphigus vulgaris or bullous pemphigoid"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on HIV status and assuming all symptoms are HIV-related rather than recognizing the severe drug reaction requiring immediate intervention",
+      "prematureClosure": "Risk of stopping evaluation at simple drug rash without recognizing the severity and life-threatening nature of SJS/TEN overlap syndrome",
+      "availabilityBias": "Risk of being influenced by recent cases of common viral exanthems rather than recognizing this rare but critical dermatologic emergency"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Hannah Rodriguez: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This young woman has a new HIV diagnosis and developed a rash after starting prophylactic antibiotics. What key features in the history would help you distinguish between a simple drug rash and a more serious condition? Think about the timeline, morphology, and associated symptoms that would be concerning.",
+      "phase5": "You've identified targetoid lesions with significant epidermal detachment and mucous membrane involvement. What does the 15% body surface area involvement tell you about classification? How does this change your urgency and management approach, particularly in an immunocompromised patient?",
+      "finalDebrief": "This case illustrates the challenge of SJS/TEN overlap in HIV patients who need sulfa-based PCP prophylaxis. The 15% BSA puts her in the overlap zone between SJS and TEN. Key learning points include recognizing the clinical progression from targetoid lesions to epidermal detachment, the psychological impact of severe drug reactions in newly diagnosed HIV patients, and the need for alternative PCP prophylaxis options like dapsone or atovaquone."
     }
-}
+  }
 };

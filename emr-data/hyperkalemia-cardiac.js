@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ahmed Hassan",
-  "patientHPI": "I missed my dialysis appointment yesterday and now I'm feeling really weak and my heart is beating funny - like it's skipping or racing. I know I'm supposed to go three times a week but I just couldn't make it in, and now I'm worried something bad is happening.",
+    "patientHPI": "I missed my dialysis appointment yesterday and now I'm feeling really weak and my heart is beating funny - like it's skipping or racing. I know I'm supposed to go three times a week but I just couldn't make it in, and now I'm worried something bad is happening.",
     "dob": "08/21/1962",
     "age": "64",
     "sex": "Male",
@@ -290,158 +290,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Ahmed Hassan is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Ahmed appears anxious and fatigued, speaking slowly but cooperatively about his missed dialysis sessions. He shows visible distress about his symptoms and readily admits to dietary indiscretions, expressing genuine concern that 'something bad is happening' to his body.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what the palpitations feel like?",
+      "When did you last have dialysis and when was it supposed to be?",
+      "Have you been following your renal diet restrictions?",
+      "Any chest pain, shortness of breath, or difficulty breathing?",
+      "Have you had any nausea, vomiting, or changes in appetite?",
+      "Any muscle cramps, twitching, or numbness?",
+      "How much urine are you making, if any?",
+      "Have you experienced any confusion or changes in thinking?",
+      "Any swelling in your legs, feet, or around your eyes?",
+      "Are you taking all your prescribed medications?",
+      "Have you had similar symptoms before when missing dialysis?",
+      "Any recent illness, fever, or infections?",
+      "How has your blood sugar been running lately?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Sevelamer; Insulin Glargine; Amlodipine; Epoetin alfa.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Dialysis: Missed last 2 sessions \u2014 car broke down  Diet: Ate bananas, oranges, and potatoes yesterday"
+      "default": "I'm not sure I understand what you're asking - can you explain that differently? I'm feeling pretty weak right now.",
+      "onset": "The weakness started yesterday evening after I missed my dialysis, and the heart racing began this morning when I woke up.",
+      "character": "My heart feels like it's skipping beats sometimes, then racing really fast, and I feel so weak I can barely stand up.",
+      "location": "I feel it right in my chest, like my heart is jumping around, and the weakness is all over my whole body.",
+      "severity": "The weakness is about a 7 out of 10 - I can barely get around my apartment, and the heart thing is really scary, maybe 8 out of 10.",
+      "aggravating": "When I try to stand up or walk around, both the weakness and the heart racing get much worse.",
+      "relieving": "Nothing really helps - sitting down makes the heart thing a little better but I still feel terrible overall.",
+      "associated": "I've been feeling a little nauseous this morning and my legs feel heavy, but no chest pain or trouble breathing.",
+      "denies": "No chest pain, no shortness of breath, no fever, no cough, and I'm not making much urine anymore.",
+      "history": "I've felt weak before when I've had to delay dialysis, but never this heart racing thing - that's new and scary.",
+      "medications": "Sevelamer; Insulin Glargine; Amlodipine; Epoetin alfa",
+      "allergies": "NKDA",
+      "family": "Nothing really runs in my family that would cause this - my parents had diabetes but that's about it.",
+      "social": "I'm retired, don't smoke or drink, and usually I'm good about getting to dialysis three times a week, but my car broke down."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Cardiac auscultation",
+      "ECG interpretation",
+      "Pulmonary auscultation",
+      "Assessment for peripheral edema",
+      "Neurologic assessment including reflexes",
+      "AV fistula examination",
+      "Blood pressure measurement",
+      "Assessment for volume overload",
+      "Skin and mucous membrane examination",
+      "Abdominal examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Cardiac auscultation": "Bradycardic irregular rhythm with occasional premature beats, no murmurs or gallops",
+      "ECG interpretation": "Sinus bradycardia with peaked T waves, prolonged PR interval, and occasional PVCs",
+      "Pulmonary auscultation": "Clear to auscultation bilaterally, no rales or wheezes",
+      "Assessment for peripheral edema": "2+ pitting edema bilateral lower extremities to mid-shins",
+      "Neurologic assessment including reflexes": "Diminished deep tendon reflexes, mild weakness in extremities",
+      "AV fistula examination": "Left arm AV fistula with good thrill and bruit, no signs of infection",
+      "Blood pressure measurement": "Hypertensive at 172/98 mmHg, consistent on repeat",
+      "Assessment for volume overload": "Elevated JVP, dependent edema, no S3 gallop audible",
+      "Skin and mucous membrane examination": "Pale conjunctiva, dry mucous membranes, no rash or uremic frost",
+      "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Hyperkalemia (correct diagnosis)",
+      "Uremic pericarditis",
+      "Volume overload/fluid retention",
+      "Acute myocardial infarction",
+      "Arrhythmia secondary to electrolyte imbalance",
+      "Medication toxicity",
+      "Hypoglycemia from insulin"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'missed dialysis' and immediately assuming volume overload without considering life-threatening hyperkalemia from dietary indiscretions",
+      "prematureClosure": "May stop at 'fluid overload' diagnosis without recognizing the cardiac rhythm changes suggesting dangerous hyperkalemia requiring immediate treatment",
+      "availabilityBias": "Recent cases of heart failure or MI may overshadow the classic hyperkalemia presentation in ESRD patients with dietary non-compliance"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Ahmed Hassan: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This dialysis patient has concerning cardiac symptoms after missing sessions. What specific complications of missed dialysis should you be most worried about? Consider both volume-related and electrolyte-related causes - which could be immediately life-threatening?",
+      "phase5": "You've identified a dialysis patient with bradycardia, irregular rhythm, and ECG changes after dietary indiscretion with high-potassium foods. What does this constellation of findings suggest, and what's your most urgent concern for this patient's immediate management?",
+      "finalDebrief": "This case illustrates how hyperkalemia in ESRD patients can present with life-threatening cardiac effects. Notice how the combination of missed dialysis, high-potassium food intake, bradycardia, and ECG changes pointed to hyperkalemia rather than simple volume overload. What early clues helped differentiate this from other post-dialysis complications?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['hyperkalemia-cardiac'] = {
-  id: 'hyperkalemia-cardiac', name: 'Ahmed Hassan',
-  chiefComplaint: 'Hyperkalemia with EKG Changes — Calcium and Kayexalate vs Patiromer',
-  diagnosis: 'Hyperkalemia with EKG Changes — Calcium and Kayexalate vs Patiromer',
-  orders: {
-    correct: [{ id: 'calcium-gluconate', name: 'IV calcium gluconate 1g (or calcium chloride 1g) — stabilize cardiac membrane immediately', rationale: 'Calcium antagonizes the toxic effects of hyperkalemia on cardiac membrane potential — does NOT lower potassium. Onset within minutes. Duration: 30-60 minutes. Give immediately for K >6.5 or any EKG changes. If no IV access: IM calcium gluconate (NOT calcium chloride — causes tissue necrosis IM). Repeat if EKG changes persist.' },{ id: 'insulin-glucose-hk', name: 'Regular insulin 10 units IV + dextrose 50g — shift K into cells within 15-30 min', rationale: 'Insulin stimulates Na-K-ATPase → shifts K into cells. Onset 15-30 min, duration 2-6h, lowers K by 0.5-1.0 mEq/L. Always give with glucose to prevent hypoglycemia. Check glucose at 1h post-insulin. Monitor for recurrent hyperkalemia as insulin effect wanes.' }],
-    incorrect: [{ id: 'kayexalate', name: 'Sodium polystyrene sulfonate (Kayexalate) — eliminate potassium immediately', rationale: 'Kayexalate has a DELAYED onset (6-24h) — it eliminates K through the GI tract but does not work acutely. Use only for non-emergent hyperkalemia or as part of definitive management after acute stabilization. Also: associated with intestinal necrosis (especially sorbitol preparation, post-operative patients). Patiromer and sodium zirconium cyclosilicate are safer alternatives with similar onset.' },{ id: 'bicarb-hk', name: 'Sodium bicarbonate — lower potassium in acidotic patients', rationale: 'Bicarbonate for hyperkalemia is controversial and less effective than previously thought. In patients with metabolic acidosis: may help shift K intracellularly. In dialysis patients or non-acidotic patients: ineffective. Do NOT rely on bicarb as primary treatment for cardiac-threatening hyperkalemia.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['EKG changes in hyperkalemia (in order of severity): peaked T waves → prolonged PR interval → wide QRS → sine wave pattern → ventricular fibrillation. Peaked T waves begin at K ~5.5-6.5 mEq/L. Sine wave = immediately life-threatening → dialysis.','Hyperkalemia treatment: (1) Cardiac membrane stabilization: calcium. (2) Redistribution: insulin+glucose, albuterol (β2 agonist — shifts K into cells, adjunct, not monotherapy), bicarbonate (in acidotic patients). (3) Elimination: kayexalate/patiromer (GI), furosemide (urine), dialysis (fastest, definitive).','Pseudohyperkalemia: hemolysis during phlebotomy releases intracellular K — always recheck if EKG is normal and level is unexpected. Thrombocytosis and leukocytosis also cause pseudohyperkalemia.'],
-    boardPearls: ['STOP nephrotoxins and K-sparing agents: ACEi, ARBs, NSAIDs, potassium supplements, TMP-SMX (blocks tubular K secretion), heparin (blocks aldosterone), beta-blockers — all worsen hyperkalemia.','Patiromer (Veltassa): potassium binder that exchanges potassium for calcium in the GI tract. Onset 7-12h. Safer than kayexalate (no sorbitol, lower risk of GI necrosis). For outpatient management of chronic hyperkalemia (CKD, HF on ACEi/ARB).','Sodium zirconium cyclosilicate (Lokelma): newer K binder, onset 1-4h (faster than patiromer). Approved for acute and chronic hyperkalemia. Does not require stool for elimination — works in colon.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Ahmed Hassan is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Sevelamer; Insulin Glargine; Amlodipine; Epoetin alfa.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Ahmed Hassan \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

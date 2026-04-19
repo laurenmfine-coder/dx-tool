@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sergio Moreno",
-  "patientHPI": "This pain in my stomach is the worst thing I've ever felt - it's like someone is stabbing me right through to my back and I can't find any position that makes it better. I've been throwing up and I'm scared something is really wrong.",
+    "patientHPI": "This pain in my stomach is the worst thing I've ever felt - it's like someone is stabbing me right through to my back and I can't find any position that makes it better. I've been throwing up and I'm scared something is really wrong.",
     "dob": "06/20/1966",
     "age": "60",
     "sex": "Male",
@@ -387,75 +387,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Sergio Moreno appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Sergio appears visibly distressed and diaphoretic, holding his abdomen and frequently shifting positions despite stating nothing helps. He is cooperative but anxious, speaking in short sentences interrupted by grimaces of pain. His obvious discomfort and fear that 'something is really wrong' makes him forthcoming about his symptoms as he desperately wants relief.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did worst stomach pain of my life epigastric \u2014 boring through to the back start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did this pain start and how did it begin?",
+      "Can you describe the quality or character of the pain?",
+      "Where exactly is the pain located and does it go anywhere else?",
+      "On a scale of 1-10, how severe is this pain?",
+      "What makes the pain worse?",
+      "Have you found anything that helps the pain?",
+      "Are you experiencing any nausea, vomiting, or other symptoms?",
+      "Have you had any similar episodes of pain before?",
+      "What medications are you currently taking?",
+      "Do you have any known allergies?",
+      "Have you eaten anything unusual or had any alcohol recently?",
+      "Does anyone in your family have similar stomach problems?",
+      "Do you smoke or drink alcohol regularly?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started This pain in my stomach is the worst thing I've ever felt - it's like someone is.'",
-        "character": "'It's worst stomach pain of my life epigastric \u2014 boring through to the back \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin; Amlodipine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: gallstones and cholecystectomy  Father: pancreatitis (alcohol-related)",
-        "social": "Tobacco: Never  Alcohol: Social \u2014 1-2 drinks per week (not a heavy drinker)  Drugs: Denies  Occupation: Bank teller  Living: Lives with family"
+      "default": "I'm sorry, I'm having trouble focusing because of this pain. Can you repeat that?",
+      "onset": "It started about 6 hours ago, right after I finished dinner. It came on suddenly and has just gotten worse and worse.",
+      "character": "It's a deep, boring pain - like someone is drilling right through me from my stomach to my back. It's constant and severe.",
+      "location": "It's right here in my upper stomach area, but it goes straight through to my back. The back pain is almost as bad as the front.",
+      "severity": "This is definitely a 10 out of 10. I've never felt pain like this in my life. I can't even think straight.",
+      "aggravating": "Lying flat makes it worse, and eating or even thinking about food makes me feel sick. Moving around doesn't really change it much.",
+      "relieving": "I've tried everything - sitting, lying down, walking around, antacids - absolutely nothing helps. Nothing.",
+      "associated": "I've been throwing up several times, and I feel nauseous and sweaty. I also feel like I have a fever.",
+      "denies": "I haven't had any chest pain, shortness of breath, or diarrhea. No blood in my vomit.",
+      "history": "I've had some stomach discomfort before related to my gallstones, but nothing even close to this severe.",
+      "medications": "Metformin; Amlodipine",
+      "allergies": "NKDA",
+      "family": "My mother had gallstones and needed her gallbladder removed, and my father actually had pancreatitis from drinking, but I'm not a heavy drinker like he was.",
+      "social": "I work as a bank teller, live with my family. I don't smoke and only have 1-2 drinks per week socially. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and vital signs",
+      "Abdominal inspection",
+      "Epigastric palpation",
+      "Murphy's sign",
+      "Cullen's sign",
+      "Grey Turner's sign",
+      "Bowel sounds auscultation",
+      "Costovertebral angle tenderness",
+      "Cardiovascular examination",
+      "Pulmonary examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and vital signs": "Patient appears acutely ill, diaphoretic, and in significant distress. Positioned leaning forward. BP 142/88, HR 112, Temp 38.0°C, SpO2 94%",
+      "Abdominal inspection": "Abdomen appears mildly distended, no obvious masses or discoloration visible",
+      "Epigastric palpation": "Severe epigastric tenderness with guarding, patient winces and pulls away with gentle palpation",
+      "Murphy's sign": "Negative - no arrest of inspiration with palpation under right costal margin",
+      "Cullen's sign": "Negative - no periumbilical discoloration",
+      "Grey Turner's sign": "Negative - no flank discoloration",
+      "Bowel sounds auscultation": "Hypoactive bowel sounds throughout all quadrants",
+      "Costovertebral angle tenderness": "No costovertebral angle tenderness bilaterally",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, rubs, or gallops",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no respiratory distress"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute pancreatitis (correct diagnosis)",
+      "Acute cholangitis",
+      "Peptic ulcer disease with perforation",
+      "Myocardial infarction",
+      "Aortic dissection",
+      "Acute cholecystitis",
+      "Gastroesophageal reflux disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on gallstone history and assuming cholecystitis despite negative Murphy's sign and atypical pain radiation pattern",
+      "prematureClosure": "May stop thinking after identifying epigastric pain and nausea without considering the specific boring quality and back radiation that suggests pancreatic involvement",
+      "availabilityBias": "Recent cases of GERD or peptic ulcer disease might overshadow consideration of less common but more serious pancreatic pathology"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Sergio Moreno's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, I see you're thinking about several abdominal conditions. What specific historical questions would help you differentiate between cholecystitis, pancreatitis, and peptic ulcer disease? Think about the classic presentations and what makes each condition unique.",
+      "phase5": "Now that you've completed your history and physical, let's think through your findings systematically. You noted severe epigastric pain radiating to the back, negative Murphy's sign, and a family history of both gallstones and pancreatitis. How do these findings help refine your differential diagnosis?",
+      "finalDebrief": "This case illustrates how acute pancreatitis can present with classic boring epigastric pain radiating to the back. Notice how the family history of both gallstones and pancreatitis provided important clues, but the specific pain character and radiation pattern, along with the negative Murphy's sign, helped differentiate this from cholecystitis. What key diagnostic tests would you want to confirm this diagnosis?"
     }
-}
+  }
 };

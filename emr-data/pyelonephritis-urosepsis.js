@@ -386,75 +386,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Hazel Thompson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Hazel appears mildly confused and disoriented, frequently pausing mid-sentence and asking for questions to be repeated. She seems frustrated by her mental fogginess but remains cooperative, though her responses are sometimes delayed or incomplete.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did fever/sepsis start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me about the confusion you've been experiencing?",
+      "When did you first notice feeling confused or different mentally?",
+      "Have you had any fever, chills, or feeling hot?",
+      "Are you having any pain or burning when you urinate?",
+      "How often are you urinating, and what does your urine look like?",
+      "Have you had any nausea, vomiting, or loss of appetite?",
+      "Are you having any back pain or flank pain?",
+      "How has your self-catheterization routine been going lately?",
+      "When was your last urinary tract infection and how was it treated?",
+      "Have you been taking all your medications as prescribed?",
+      "Have you had any falls or injuries recently?",
+      "Are you eating and drinking normally?",
+      "Have you noticed any changes in your energy level or weakness?"
     ],
     "patientResponses": {
-      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started 79-year-old female for follow-up.'",
-      "character": "'It's fever/sepsis — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Acute Pyelonephritis with Urosepsis.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Metformin 500mg BID; Sitagliptin 100mg daily; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Amlodipine 5mg daily; Vaginal Estradiol Cream 0.01% — 2x/week; Acetaminophen 500mg TID PRN.'",
-      "allergies": "'My allergies are Nitrofurantoin, Fluoroquinolones (Ciprofloxacin).'",
-      "family": "Mother: UTIs (recurrent), breast cancer at 70, deceased at 82  Father: CAD, deceased at 75  Sister: T2DM, kidney stones, alive at 76",
-      "social": "Occupation: Retired school administrator  Marital: Widowed (husband deceased 2020)  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? My mind feels a bit foggy today and I'm having trouble concentrating.",
+      "onset": "The confusion started about 2-3 days ago. My daughter noticed I was repeating myself and seemed 'off.' I've been feeling more tired than usual too.",
+      "character": "It's like my brain is in a fog. I'll start to say something and forget what I was talking about. I feel spacey and not quite myself.",
+      "location": "The confusion is just... everywhere in my head. I also have some aching in my lower back, but that might be my usual arthritis.",
+      "severity": "The confusion is maybe a 6 out of 10 - it's really bothering me and my daughter. The back discomfort is about a 4 out of 10.",
+      "aggravating": "I think I feel more confused when I'm tired. Standing for too long makes my back ache more.",
+      "relieving": "Sitting down helps my back a little. Nothing really helps the mental fog - it's just there.",
+      "associated": "I've been feeling weak and tired. Not really hungry either. I think I might have had some chills yesterday but no real fever that I noticed.",
+      "denies": "No chest pain, no shortness of breath, no headache. No recent falls or injuries.",
+      "history": "I've had several UTIs - just had one in September treated with cephalexin, and another in June. My doctor says my bladder doesn't empty completely.",
+      "medications": "Metformin 500mg BID; Sitagliptin 100mg daily; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Amlodipine 5mg daily; Vaginal Estradiol Cream 0.01% — 2x/week; Acetaminophen 500mg TID PRN",
+      "allergies": "Nitrofurantoin, Fluoroquinolones (Ciprofloxacin)",
+      "family": "My mother had lots of bladder infections like me, and my sister has diabetes and kidney stones. Mother also had breast cancer.",
+      "social": "I'm a retired school administrator, been widowed since 2020. I've never smoked and don't drink alcohol."
     },
     "examManeuvers": [
-      "General appearance and toxicity",
-      "Vital signs with temperature",
-      "Skin for rash, lesions, or signs of infection",
-      "Lymph node palpation",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "General appearance and mental status",
+      "Vital signs including orthostatic measurements",
+      "Costovertebral angle tenderness",
       "Abdominal examination",
-      "Source-specific examination"
+      "Suprapubic palpation",
+      "Neurological screening exam",
+      "Skin examination for signs of dehydration",
+      "Heart and lung examination",
+      "Lower extremity edema assessment"
     ],
     "examFindings": {
-      "General appearance and toxicity": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Vital signs with temperature": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Lymph node palpation": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe.",
-      "Source-specific examination": "Clinical finding consistent with Acute Pyelonephritis with Urosepsis. Document specifically what you observe."
+      "General appearance and mental status": "Appears mildly ill, periodically confused and disoriented to time, but oriented to person and place. Delayed responses to questions.",
+      "Vital signs including orthostatic measurements": "BP 132/76, HR 72, Temp 98.2°F, SpO2 97%. Mild orthostatic changes with HR increase of 15 bpm on standing.",
+      "Costovertebral angle tenderness": "Moderate tenderness to percussion over right CVA, mild tenderness over left CVA.",
+      "Abdominal examination": "Soft, non-distended, mild tenderness in suprapubic region, no guarding or rebound.",
+      "Suprapubic palpation": "Mild fullness and tenderness over bladder region consistent with incomplete emptying.",
+      "Neurological screening exam": "Mild cognitive impairment with attention deficits, otherwise grossly normal strength and sensation.",
+      "Skin examination for signs of dehydration": "Mild decreased skin turgor, dry mucous membranes suggesting mild dehydration.",
+      "Heart and lung examination": "Irregular rhythm consistent with known atrial fibrillation, lungs clear to auscultation.",
+      "Lower extremity edema assessment": "No peripheral edema, pulses intact."
     },
     "ddxTargets": [
-      "Acute Pyelonephritis with Urosepsis (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Acute Pyelonephritis with Urosepsis (E. coli, Complicated by Neurogenic Bladder and Limited Antibiotic Options) (correct diagnosis)",
+      "Complicated Urinary Tract Infection with delirium",
+      "Acute cystitis with altered mental status",
+      "Urosepsis with septic shock",
+      "Bacterial meningitis",
+      "Medication-induced delirium or hypoglycemia",
+      "Dehydration with electrolyte imbalance"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Pyelonephritis with Urosepsis, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Acute Pyelonephritis with Urosepsis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Acute Pyelonephritis with Urosepsis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'routine UTI in elderly woman' and missing the severity of urosepsis, or focusing solely on confusion and missing the urologic source.",
+      "prematureClosure": "May prematurely diagnose simple UTI without recognizing systemic involvement and complications from neurogenic bladder and antibiotic limitations.",
+      "availabilityBias": "Recent experience with simple UTIs or dementia patients may overshadow recognition of acute pyelonephritis with urosepsis presentation."
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Hazel Thompson's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Acute Pyelonephritis with Urosepsis (E. coli, Complicated by Neurogenic Bladder and Limited Antibiotic Options). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Consider this elderly patient presenting with confusion and fever. What are your thoughts about the most concerning causes of acute confusion in an elderly patient? How does her past medical history of recurrent UTIs and neurogenic bladder factor into your differential diagnosis?",
+      "phase5": "Now that you've gathered your history and physical exam findings, what do you make of the combination of altered mental status, CVA tenderness, and her complex urologic history? How do her antibiotic allergies complicate her clinical picture?",
+      "finalDebrief": "This case demonstrates how urosepsis can present subtly in elderly patients, with confusion often being the primary presenting symptom rather than classic urinary symptoms. Her neurogenic bladder creates a perfect storm for recurrent infections and treatment challenges. How did the antibiotic allergies and recurrent infection history help you recognize this wasn't a simple UTI?"
     }
   }
 };

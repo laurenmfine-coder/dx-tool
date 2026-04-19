@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jordan Mitchell",
-  "patientHPI": "When I was five years old, I got a rash all over my body while taking medicine for an ear infection - my mom thinks it was from the antibiotic but I'm not sure.",
+      "patientHPI": "When I was five years old, I got a rash all over my body while taking medicine for an ear infection - my mom thinks it was from the antibiotic but I'm not sure.",
       "dob": "10/08/2004",
       "age": "22",
       "sex": "Male",
@@ -872,143 +872,146 @@ window.EMR_DATA = {
       "Concern",
       "Amoxicillin allergy label forcing surgeon to use clindamycin prophylaxis (inferior, C. diff risk)"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "Drug-Allergy-PP-2022",
-    "title": "Drug allergy: A 2022 practice parameter update",
-    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2022,
-    "doi": "10.1016/j.jaci.2022.08.028",
-    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
-    "openAccess": true,
-    "validates": [
-      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
-      "Single-dose amoxicillin challenge for low-risk",
-      "Vancomycin RMS management",
-      "AERD aspirin desensitization protocol",
-      "Sulfonamide challenge protocols"
-    ]
-  },
-  {
-    "id": "PCN-NEJM-2019",
-    "title": "Penicillin allergy",
-    "authors": "Castells M, Khan DA, Phillips EJ.",
-    "journal": "N Engl J Med",
-    "year": 2019,
-    "doi": "10.1056/NEJMra1807761",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
-    "openAccess": true,
-    "validates": [
-      ">90% with PCN label NOT truly allergic",
-      ">80% lose sensitivity after 10 years",
-      "Morbilliform rash in children = usually viral exanthem",
-      "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "Drug-Allergy-PP-2022",
+      "title": "Drug allergy: A 2022 practice parameter update",
+      "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2022,
+      "doi": "10.1016/j.jaci.2022.08.028",
+      "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+      "openAccess": true,
+      "validates": [
+        "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+        "Single-dose amoxicillin challenge for low-risk",
+        "Vancomycin RMS management",
+        "AERD aspirin desensitization protocol",
+        "Sulfonamide challenge protocols"
+      ]
+    },
+    {
+      "id": "PCN-NEJM-2019",
+      "title": "Penicillin allergy",
+      "authors": "Castells M, Khan DA, Phillips EJ.",
+      "journal": "N Engl J Med",
+      "year": 2019,
+      "doi": "10.1056/NEJMra1807761",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
+      "openAccess": true,
+      "validates": [
+        ">90% with PCN label NOT truly allergic",
+        ">80% lose sensitivity after 10 years",
+        "Morbilliform rash in children = usually viral exanthem",
+        "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Jordan Mitchell is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Jordan appears frustrated and anxious about the delayed surgery affecting his basketball season. He's cooperative but dismissive of the allergy concern, stating 'it was just a rash when I was little' and expressing urgency to get cleared for the procedure.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what happened when you had the reaction to amoxicillin?",
+      "How old were you when this allergic reaction occurred?",
+      "What did the rash look like - was it raised, flat, itchy, or painful?",
+      "Were you sick with anything else when you took the amoxicillin?",
+      "Did you have any trouble breathing, swelling of face or throat, or dizziness?",
+      "How long after taking the medication did the rash appear?",
+      "Did the rash go away on its own or did you need treatment?",
+      "Have you ever taken penicillin or similar antibiotics since then?",
+      "Why are you needing the wisdom tooth surgery now?",
+      "What has the oral surgeon told you about antibiotic options?",
+      "Are you having any current symptoms or problems?",
+      "Has anyone in your family had serious drug allergies?",
+      "Are you taking any medications or supplements currently?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: Amoxicillin.'",
-        "family": "Non-contributory",
-        "social": "Context: College athlete (basketball) \u2014 needs wisdom tooth extraction, surgeon won't operate without \"clearing\" amoxicillin allergy  History: Rash at age 5 during ear infection \u2014 likely viral exanthem, not true drug allergy  Impact: Surgery delayed 3 weeks waiting for allergy evaluation  Concern: Amoxicillin allergy label forcing surgeon to use clindamycin prophylaxis (inferior, C. diff risk)"
+      "default": "I'm not sure what that has to do with my allergy. I just need to get cleared so I can have my surgery and get back to playing basketball.",
+      "onset": "I was about 5 years old, had an ear infection, and got a rash a few days after starting the antibiotic. My mom says it was amoxicillin.",
+      "character": "It was just a red rash all over my body - flat red spots, not really raised. It wasn't super itchy, just looked bad.",
+      "location": "The rash was pretty much everywhere - my chest, back, arms, legs. It was most noticeable on my trunk.",
+      "severity": "The rash wasn't painful or anything, maybe 2 out of 10 for being bothersome. It just looked scary to my parents.",
+      "aggravating": "I don't remember anything making it worse. I was just a little kid with an ear infection.",
+      "relieving": "I think it just went away on its own after a few days. I don't remember taking anything special for it.",
+      "associated": "I had the ear infection - fever, ear pain. I was pretty sick with what my mom said was a bad cold or virus too.",
+      "denies": "No trouble breathing, no swelling of my face or throat, no dizziness or feeling faint. Just the rash.",
+      "history": "This was the only time. I've been avoiding penicillin-type antibiotics my whole life because of this allergy label.",
+      "medications": "no medications",
+      "allergies": "Amoxicillin",
+      "family": "No one in my family has serious drug allergies. My mom has some seasonal allergies but that's it.",
+      "social": "I'm a college basketball player, starter on the team. Don't smoke, maybe drink socially on weekends, no drugs. I need this surgery done before conference play starts."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and vital signs",
+      "HEENT examination",
+      "Lymph node examination",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Skin examination for current rashes or lesions",
+      "Neurological screening examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs": "Well-appearing, athletic young male in no distress. Vital signs stable and normal.",
+      "HEENT examination": "Normal head and neck exam. Oropharynx clear, no dental pain currently, wisdom teeth visible but not impacted.",
+      "Lymph node examination": "No lymphadenopathy in cervical, axillary, or inguinal regions.",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, rubs, or gallops. Normal heart sounds.",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi. Normal respiratory effort.",
+      "Abdominal examination": "Soft, non-tender, non-distended. Normal bowel sounds, no organomegaly.",
+      "Skin examination for current rashes or lesions": "No current rash, lesions, or signs of allergic dermatitis. Skin appears normal.",
+      "Neurological screening examination": "Alert and oriented, normal speech and cognition. No focal neurological deficits."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Mislabeled drug allergy - viral exanthem (correct diagnosis)",
+      "True IgE-mediated penicillin allergy",
+      "Delayed-type hypersensitivity reaction",
+      "Stevens-Johnson syndrome history",
+      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
+      "Concurrent viral illness with coincidental rash",
+      "Contact dermatitis misattributed to medication"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on the 'allergy' label without questioning the validity of a childhood reaction that occurred during concurrent viral illness",
+      "prematureClosure": "Risk of accepting the allergy history at face value without exploring the clinical details that suggest viral exanthem rather than true drug allergy",
+      "availabilityBias": "May overestimate probability of true penicillin allergy due to common knowledge of penicillin reactions, rather than recognizing the high frequency of mislabeled allergies"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Jordan Mitchell: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient has been labeled with an amoxicillin allergy since childhood. What key historical features would help you distinguish between a true IgE-mediated drug allergy versus a viral exanthem that was coincidentally attributed to the antibiotic?",
+      "phase5": "Based on your history and physical exam, what elements of this patient's story make you more or less concerned about a true penicillin allergy? Consider the timing, clinical context, and description of the reaction.",
+      "finalDebrief": "This case highlights how false drug allergy labels create downstream clinical problems. What red flags suggested this was likely a viral exanthem rather than true drug allergy? How does this mislabeling impact antibiotic selection and surgical prophylaxis decisions?"
     }
-}
+  }
 };

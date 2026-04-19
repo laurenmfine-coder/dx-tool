@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dylan Morales",
-  "patientHPI": "My friend brought me here - he says I collapsed during the marathon today and I'm not thinking clearly, but I don't really remember what happened.",
+    "patientHPI": "My friend brought me here - he says I collapsed during the marathon today and I'm not thinking clearly, but I don't really remember what happened.",
     "dob": "06/15/2004",
     "age": "22",
     "sex": "Male",
@@ -15,19 +15,19 @@ window.EMR_DATA = {
     "address": "456 Maple St, Indianapolis, IN 46222",
     "insurance": "Tricare",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
+    "pharmacy": "Walmart Pharmacy — Broward Blvd",
     "emergencyContact": {
       "name": "David Carter",
       "phone": "(704) 555-6049",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+    "chiefComplaint": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain — global altered mental status",
     "diagnosis": "Exertional Heat Stroke"
   },
   "problems": [
     {
       "id": "prob-1",
-      "description": "None \u2014 previously healthy and fit athlete",
+      "description": "None — previously healthy and fit athlete",
       "status": "Active",
       "onset": "Chronic",
       "icd10": ""
@@ -84,7 +84,7 @@ window.EMR_DATA = {
       "bp": "92/58",
       "hr": "142",
       "rr": "32",
-      "temp": "107.2\u00b0F (41.8\u00b0C) rectal",
+      "temp": "107.2°F (41.8°C) rectal",
       "spo2": "93%",
       "pain": "/10",
       "bmi": "32",
@@ -97,10 +97,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
-      "hpi": "Dylan Morales is a 22-year-old male presenting with friend: 'he collapsed during the marathon and won't wake up properly' no specific pain \u2014 global altered mental status. Past medical history includes None \u2014 previously healthy and fit athlete, Prior marathon completions. See chart for full details.",
+      "cc": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain — global altered mental status",
+      "hpi": "Dylan Morales is a 22-year-old male presenting with friend: 'he collapsed during the marathon and won't wake up properly' no specific pain — global altered mental status. Past medical history includes None — previously healthy and fit athlete, Prior marathon completions. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Exertional Heat Stroke \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Exertional Heat Stroke — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -122,7 +122,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.4",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -143,7 +143,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "157",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -215,9 +215,9 @@ window.EMR_DATA = {
           "results": [
             {
               "test": "Core Temperature",
-              "value": "107.2\u00b0F (41.8\u00b0C)",
+              "value": "107.2°F (41.8°C)",
               "unit": "",
-              "range": "97-99\u00b0F",
+              "range": "97-99°F",
               "flag": "H"
             },
             {
@@ -278,10 +278,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-895220",
-      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain — global altered mental status",
       "technique": "Standard protocol",
       "findings": "No acute intracranial pathology. No hemorrhage. No edema.",
-      "impression": "Normal \u2014 AMS from thermal injury to CNS, not structural cause",
+      "impression": "Normal — AMS from thermal injury to CNS, not structural cause",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -295,7 +295,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-971682",
-      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain — global altered mental status",
       "technique": "Standard protocol",
       "findings": "Clear lungs. Normal cardiac silhouette.",
       "impression": "No acute pulmonary pathology",
@@ -312,10 +312,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-218126",
-      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain \u2014 global altered mental status",
+      "clinical": "Friend: 'He collapsed during the marathon and won't wake up properly' No specific pain — global altered mental status",
       "technique": "Standard 12-lead",
       "findings": "Sinus tachycardia at 142 bpm. Diffuse ST depression (demand ischemia). QTc prolonged at 490ms",
-      "impression": "Sinus tachycardia with demand ischemia. Prolonged QTc from hyperthermia \u2014 arrhythmia risk.",
+      "impression": "Sinus tachycardia with demand ischemia. Prolonged QTc from hyperthermia — arrhythmia risk.",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -351,7 +351,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social \u2014 had beers at pre-race dinner last night"
+      "Social — had beers at pre-race dinner last night"
     ],
     [
       "Drugs",
@@ -368,75 +368,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Dylan Morales appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Dylan appears confused and disoriented, struggling to focus on questions and frequently losing his train of thought. He seems cooperative but frustrated by his inability to remember clearly what happened, with a flat affect and delayed responses suggesting significant cognitive impairment.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did friend: 'he collapsed during the marathon and won't wake up properly' no specific pain \u2014 global altered mental status start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me what you remember about today's marathon?",
+      "How long were you running before you collapsed?",
+      "What was the weather like during the race?",
+      "How much water or sports drinks did you consume during the race?",
+      "Did you feel dizzy, nauseous, or have a headache before collapsing?",
+      "Have you been sweating normally today?",
+      "What did you eat and drink in the past 24 hours?",
+      "How many hours did you sleep last night?",
+      "Have you been taking any medications or supplements recently?",
+      "Do you have any medical conditions or take any regular medications?",
+      "Have you ever collapsed or had heat-related illness before?",
+      "Are you currently experiencing any chest pain, shortness of breath, or palpitations?",
+      "Do you have any headache, neck stiffness, or vision changes right now?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My friend brought me here - he says I collapsed during the marathon today and I'.'",
-        "character": "'It's friend: 'he collapsed during the marathon and won't wake up properly' no specific pain \u2014 global altered mental status \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take None routine; Ibuprofen; Caffeine pills.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "No malignant hyperthermia history  No cardiac history",
-        "social": "Tobacco: Never  Alcohol: Social \u2014 had beers at pre-race dinner last night  Drugs: Denies  Occupation: Software developer, recreational athlete  Living: Fit 32-year-old male, well-trained"
+      "default": "I'm sorry, I'm having trouble thinking clearly right now. Can you repeat that?",
+      "onset": "My friend says I collapsed around mile 20, but I don't really remember. I think I was feeling weird for maybe the last few miles before that.",
+      "character": "I don't have pain anywhere specific. I just feel really confused and like my head is in a fog. Everything feels slow.",
+      "location": "It's not really pain - more like my whole body feels off and my head feels cloudy.",
+      "severity": "I can't really rate it because it's not pain. But I feel really out of it, like maybe 8 out of 10 confused.",
+      "aggravating": "Trying to think hard makes me feel worse. The lights in here are bothering me too.",
+      "relieving": "Nothing really. I've been trying to drink water but I still feel terrible.",
+      "associated": "I feel really hot and my heart is racing. I think I might have thrown up but I'm not sure.",
+      "denies": "No chest pain, no trouble breathing really. No headache exactly, just foggy.",
+      "history": "No, I've never had anything like this. I've run three marathons before with no problems.",
+      "medications": "None routine; Ibuprofen; Caffeine pills",
+      "allergies": "NKDA",
+      "family": "No one in my family has had problems with anesthesia or anything like that. No heart problems either.",
+      "social": "I'm a software developer but I train seriously. I don't smoke, had a couple beers last night at the pre-race dinner. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Core body temperature measurement",
+      "Neurological assessment including mental status",
+      "Skin examination for sweating and moisture",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Assessment of mucous membranes and skin turgor",
+      "Orthostatic vital signs",
+      "Fundoscopic examination",
+      "Assessment for neck stiffness",
+      "Muscle tone and reflexes"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Core body temperature measurement": "Rectal temperature 107.2°F (41.8°C) - critically elevated",
+      "Neurological assessment including mental status": "Altered mental status with confusion, disorientation, slow response to commands, Glasgow Coma Scale 13",
+      "Skin examination for sweating and moisture": "Hot, dry skin with absent sweating - anhidrosis present",
+      "Cardiovascular examination": "Tachycardic at 142 bpm, hypotensive 92/58, weak pulses",
+      "Pulmonary examination": "Tachypneic, clear lungs bilaterally, no distress",
+      "Assessment of mucous membranes and skin turgor": "Dry mucous membranes, delayed skin turgor suggesting dehydration",
+      "Orthostatic vital signs": "Unable to assess due to altered mental status and collapse",
+      "Fundoscopic examination": "Difficult to assess due to patient cooperation, no obvious papilledema",
+      "Assessment for neck stiffness": "No nuchal rigidity, neck supple",
+      "Muscle tone and reflexes": "Normal muscle tone, reflexes intact but delayed"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Heat stroke (correct diagnosis)",
+      "Heat exhaustion",
+      "Exercise-associated hyponatremia",
+      "Cardiac arrhythmia with collapse",
+      "Sepsis with hyperthermia",
+      "Drug intoxication or withdrawal",
+      "Hypoglycemia with altered mental status"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'marathon collapse' and immediately think cardiac without considering hyperthermia given the critical temperature elevation",
+      "prematureClosure": "Risk of stopping at heat exhaustion given the athletic context without recognizing the severity indicated by anhidrosis and altered mental status",
+      "availabilityBias": "May overweight recent cases of cardiac arrest in athletes or underweight heat stroke if not commonly seen in practice"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dylan Morales's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You're thinking about a young athlete who collapsed during a marathon. What environmental factors should you be considering? How might the body's thermoregulatory system respond to prolonged exercise in different conditions?",
+      "phase5": "You've identified critical hyperthermia with altered mental status and anhidrosis in a collapsed marathoner. What's the pathophysiology that distinguishes heat exhaustion from heat stroke? What does the absence of sweating tell you about this patient's condition?",
+      "finalDebrief": "Heat stroke is a medical emergency characterized by hyperthermia >104°F with CNS dysfunction. The key differentiator from heat exhaustion is the altered mental status and often anhidrosis, indicating failure of thermoregulatory mechanisms. How did the patient's presentation and vital signs guide you from your initial differential toward this life-threatening diagnosis?"
     }
-}
+  }
 };

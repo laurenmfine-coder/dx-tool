@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Olivia Nguyen",
-  "patientHPI": "I was at my allergy doctor's office getting my usual peanut treatment when I started having a reaction, and even though they treated me there, I'm still not feeling right and my parents are worried.",
+      "patientHPI": "I was at my allergy doctor's office getting my usual peanut treatment when I started having a reaction, and even though they treated me there, I'm still not feeling right and my parents are worried.",
       "dob": "08/10/2014",
       "age": "12",
       "sex": "Female",
@@ -967,40 +967,39 @@ window.EMR_DATA = {
       "Cofactors",
       "Has viral URI symptoms — may lower threshold"
     ]
-  ]
-,"references":[
-  {
-    "id": "NIAID-FA-2010",
-    "title": "Guidelines for diagnosis and management of food allergy in the US",
-    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2010,
-    "doi": "10.1016/j.jaci.2010.10.008",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
-    "openAccess": true,
-    "validates": [
-      "IgE-mediated food allergy criteria",
-      "Component testing (Ara h 2)",
-      "OFC as gold standard"
-    ]
-  },
-  {
-    "id": "PALISADE-2018",
-    "title": "AR101 oral immunotherapy for peanut allergy",
-    "authors": "PALISADE Group.",
-    "journal": "N Engl J Med",
-    "year": 2018,
-    "doi": "10.1056/NEJMoa1812856",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
-    "openAccess": true,
-    "validates": [
-      "OIT efficacy",
-      "Exercise restriction 2h window",
-      "OIT = protection, not cure"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "NIAID-FA-2010",
+      "title": "Guidelines for diagnosis and management of food allergy in the US",
+      "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2010,
+      "doi": "10.1016/j.jaci.2010.10.008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+      "openAccess": true,
+      "validates": [
+        "IgE-mediated food allergy criteria",
+        "Component testing (Ara h 2)",
+        "OFC as gold standard"
+      ]
+    },
+    {
+      "id": "PALISADE-2018",
+      "title": "AR101 oral immunotherapy for peanut allergy",
+      "authors": "PALISADE Group.",
+      "journal": "N Engl J Med",
+      "year": 2018,
+      "doi": "10.1056/NEJMoa1812856",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
+      "openAccess": true,
+      "validates": [
+        "OIT efficacy",
+        "Exercise restriction 2h window",
+        "OIT = protection, not cure"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "OIT reactions most commonly occur during up-dosing or with cofactors (exercise, illness, fever, menses, alcohol, NSAIDs). Cofactors lower the threshold for mast cell activation — patients must hold OIT dose during any cofactor state.",
@@ -1017,75 +1016,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Olivia Nguyen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Olivia is anxious but cooperative, frightened by the reaction during her routine OIT visit. She's articulate for her age but looks to her mother for reassurance, becoming more distressed when describing the spreading hives and stomach cramping.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did abdominal pain, hives during peanut oral immunotherapy updose visit start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me exactly what happened during your peanut dose today",
+      "When did you first notice the hives and stomach pain?",
+      "Can you describe what the hives look like and where they are?",
+      "How bad is your stomach pain on a scale of 1-10?",
+      "Are you having any trouble breathing or swallowing?",
+      "Have you been feeling sick with a cold or anything lately?",
+      "Did you exercise or do any physical activity before coming here today?",
+      "When was your last peanut dose at home and how did it go?",
+      "Have you ever had a reaction like this before during OIT?",
+      "Are you taking all your regular medications?",
+      "Have you eaten anything different today?",
+      "Are you feeling dizzy, nauseous, or having any other symptoms?",
+      "Has anyone in your family had severe allergic reactions?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Olivia Nguyen presents with abdominal pain, hives during peanut oral immunothera.'",
-        "character": "'It's abdominal pain, hives during peanut oral immunotherapy updose visit \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Peanut OIT; Cetirizine; EpiPen Jr.'",
-        "allergies": "'My allergies are Peanut.'",
-        "family": "Brother: egg allergy",
-        "social": "OIT status: Tolerating 100mg daily doses at home, here for updose to 200mg  Exercise: Did NOT exercise within 2 hours (per protocol)  Cofactors: Has viral URI symptoms \u2014 may lower threshold"
+      "default": "I'm not sure what you mean. Can you ask that differently?",
+      "onset": "Right after I took the 200mg peanut dose here at the clinic, maybe 10-15 minutes ago. First my tummy started hurting, then I saw red bumps on my arms",
+      "character": "My stomach feels crampy and twisty, like really bad gas pains. The hives are raised red bumps that are really itchy",
+      "location": "My whole stomach hurts, not just one spot. The hives started on my arms but now they're on my chest and back too",
+      "severity": "The stomach pain is like a 6 out of 10, and the itching is really bothering me, maybe 7 out of 10",
+      "aggravating": "The hives get more itchy when I scratch them, and my stomach hurts more when I move around",
+      "relieving": "Nothing is helping right now. I haven't taken anything yet",
+      "associated": "I feel a little nauseous and my nose has been stuffy. I don't think I'm having trouble breathing though",
+      "denies": "No trouble swallowing, no dizziness, no vomiting yet, no face swelling that I can tell",
+      "history": "I've had some mild stomach upset with higher doses before, but never hives like this. This is the worst reaction I've had during OIT",
+      "medications": "Peanut OIT; Cetirizine; EpiPen Jr",
+      "allergies": "Peanut",
+      "family": "My little brother has an egg allergy but he's never had a really bad reaction",
+      "social": "I'm in 7th grade. I made sure not to exercise before coming here like you always tell us. But I have had a stuffy nose and sore throat for a couple days"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for urticaria distribution and characteristics",
+      "Examine oropharynx and neck for angioedema",
+      "Auscultate lungs for wheezing or decreased air entry",
+      "Palpate abdomen for tenderness, distension, or masses",
+      "Check vital signs including blood pressure and heart rate",
+      "Assess mental status and overall appearance",
+      "Examine conjunctiva for injection or swelling",
+      "Palpate lymph nodes in neck",
+      "Listen to heart sounds for rate and rhythm",
+      "Assess capillary refill and peripheral perfusion"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin for urticaria distribution and characteristics": "Multiple raised, erythematous, blanching wheals 5-15mm diameter on bilateral arms, chest, and upper back. Some wheals are confluent",
+      "Examine oropharynx and neck for angioedema": "Oropharynx clear, no lip or tongue swelling, no cervical swelling or stridor",
+      "Auscultate lungs for wheezing or decreased air entry": "Clear breath sounds bilaterally, no wheezing, good air entry throughout",
+      "Palpate abdomen for tenderness, distension, or masses": "Mild diffuse tenderness without guarding or rebound, normal bowel sounds, no distension",
+      "Check vital signs including blood pressure and heart rate": "BP 108/68, HR 98 (baseline), RR 18, no hypotension or tachycardia",
+      "Assess mental status and overall appearance": "Alert, oriented, anxious but appropriate. No signs of shock or severe distress",
+      "Examine conjunctiva for injection or swelling": "Conjunctiva clear, no periorbital edema",
+      "Palpate lymph nodes in neck": "No lymphadenopathy",
+      "Listen to heart sounds for rate and rhythm": "Regular rate and rhythm, no murmurs",
+      "Assess capillary refill and peripheral perfusion": "Capillary refill <2 seconds, warm extremities, good perfusion"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Allergic reaction to OIT updose (correct diagnosis)",
+      "Food protein-induced enterocolitis syndrome",
+      "Viral gastroenteritis with coincidental urticaria",
+      "Anaphylaxis",
+      "Systemic mastocytosis",
+      "Acute gastritis",
+      "Cholinergic urticaria"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'routine OIT visit' and miss that viral illness lowered reaction threshold, or anchor on abdominal pain and miss systemic allergic reaction",
+      "prematureClosure": "May quickly assume mild OIT reaction and not fully assess for signs of progression to anaphylaxis or consider cofactor effects",
+      "availabilityBias": "Recent cases of viral gastroenteritis might overshadow allergic reaction, or recent anaphylaxis cases might cause overestimation of severity"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Olivia Nguyen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This 12-year-old is having symptoms during an OIT updose visit. Before you interview her, think about the key factors that can influence OIT reactions. What cofactors might lower her reaction threshold? What's your approach to assessing reaction severity?",
+      "phase5": "You've identified urticaria with GI symptoms during OIT updose. How does her concurrent viral illness factor into this reaction? What are your next steps for management, and what signs would make you concerned about progression?",
+      "finalDebrief": "This case highlights how cofactors like viral illness can significantly lower the threshold for OIT reactions. The combination of systemic urticaria and GI symptoms represents a moderate allergic reaction requiring treatment and protocol adjustment. How did recognizing the viral cofactor change your management approach?"
     }
-}
+  }
 };

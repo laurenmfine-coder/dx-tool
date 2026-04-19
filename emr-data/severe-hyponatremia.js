@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Linda Petrowski",
-  "patientHPI": "I've been feeling so confused and dizzy lately, and I keep feeling sick to my stomach. My family says I'm not making sense when I talk, and I feel unsteady when I try to walk around the house.",
+    "patientHPI": "I've been feeling so confused and dizzy lately, and I keep feeling sick to my stomach. My family says I'm not making sense when I talk, and I feel unsteady when I try to walk around the house.",
     "dob": "03/18/1956",
     "age": "70",
     "sex": "Female",
@@ -324,75 +324,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Linda Petrowski appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Linda appears mildly confused and disoriented, speaking slowly with occasional word-finding difficulties. She seems cooperative but frustrated by her symptoms, frequently touching her head and appearing nauseated. Her responses may be somewhat delayed or incomplete due to her altered mental status.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did confusion, nausea, and unsteady gait start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice feeling confused or having trouble thinking clearly?",
+      "Can you describe what the confusion feels like - do you forget things or have trouble finding words?",
+      "Tell me more about the nausea - when does it occur and how severe is it?",
+      "Have you been vomiting or just feeling nauseated?",
+      "Describe your unsteady gait - do you feel dizzy or like the room is spinning?",
+      "How much water do you typically drink in a day?",
+      "Have you had any changes in your urination patterns?",
+      "Any headaches or changes in your vision?",
+      "Have you had any recent medication changes or new prescriptions?",
+      "Any muscle weakness, cramps, or twitching?",
+      "Have you had any seizures or episodes of losing consciousness?",
+      "Any recent infections, illnesses, or hospitalizations?",
+      "Have family members or staff noticed changes in your behavior or personality?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been feeling so confused and dizzy lately, and I keep feeling sick to my st.'",
-        "character": "'It's confusion, nausea, and unsteady gait \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take SSRI (Escitalopram); Levothyroxine; HCTZ; Lisinopril.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Alcohol: None  Water intake: Drinks excessive water \u2014 4-5 liters daily  Living: Assisted living facility"
+      "default": "I'm sorry, I'm having trouble understanding what you're asking. Could you repeat that? My head feels so foggy right now.",
+      "onset": "It's been getting worse over the past week or two. At first I just felt a little off, but now I feel confused most of the time and my family says I'm not making sense.",
+      "character": "It's like my brain is in a fog. I have trouble finding the right words sometimes, and I feel like I'm moving through thick water. Everything seems slower.",
+      "location": "The confusion is just everywhere in my head. The nausea is mostly in my stomach, and the unsteadiness affects my whole body when I try to walk.",
+      "severity": "The confusion is probably a 7 out of 10 - it's really interfering with my daily activities. I can't concentrate on anything and feel unsafe walking alone.",
+      "aggravating": "I think it might be worse in the morning when I first wake up. Moving around too quickly makes the nausea and unsteadiness worse.",
+      "relieving": "Sitting still helps a little with the nausea and dizziness, but nothing really helps with the confusion. I just have to wait for clearer moments.",
+      "associated": "I've been feeling weak and tired, and I think I've been urinating less than usual even though I drink a lot of water. No headaches or vision changes.",
+      "denies": "No chest pain, shortness of breath, fever, or seizures. No recent falls or head injuries. No changes in bowel movements.",
+      "history": "I've never had symptoms quite like this before. I've always been pretty sharp mentally until recently.",
+      "medications": "SSRI (Escitalopram); Levothyroxine; HCTZ; Lisinopril",
+      "allergies": "NKDA",
+      "family": "Nothing really runs in my family that would cause this. My parents lived to old age without major problems like this.",
+      "social": "I'm retired and live in assisted living. I've never smoked and don't drink alcohol. I do drink a lot of water - probably 4-5 liters a day because I'm always thirsty."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Mental status examination (orientation, attention, memory)",
+      "Neurological assessment (cranial nerves, motor, sensory, reflexes)",
+      "Gait and balance assessment",
+      "Assessment of mucous membranes and skin turgor",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Assessment for edema",
+      "Fundoscopic examination",
+      "Assessment of muscle strength and tone"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Mental status examination (orientation, attention, memory)": "Oriented to person and place but uncertain of date. Impaired attention and concentration. Short-term memory deficits present.",
+      "Neurological assessment (cranial nerves, motor, sensory, reflexes)": "Cranial nerves intact. Mild generalized weakness. Reflexes diminished but symmetric. Sensory examination normal.",
+      "Gait and balance assessment": "Unsteady gait with wide-based stance. Positive Romberg test. Difficulty with heel-to-toe walking.",
+      "Assessment of mucous membranes and skin turgor": "Mucous membranes appear moist. Normal skin turgor without evidence of dehydration.",
+      "Cardiovascular examination": "Regular rate and rhythm. No murmurs, gallops, or rubs. Normal jugular venous pressure.",
+      "Pulmonary examination": "Clear to auscultation bilaterally. No crackles, wheezes, or rhonchi.",
+      "Abdominal examination": "Soft, non-tender, non-distended. Normal bowel sounds. No organomegaly.",
+      "Assessment for edema": "No peripheral edema noted in extremities.",
+      "Fundoscopic examination": "Normal optic discs without papilledema.",
+      "Assessment of muscle strength and tone": "Mild generalized weakness, worse proximally. Normal muscle tone."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hyponatremia/SIADH (correct diagnosis)",
+      "Medication-induced encephalopathy",
+      "Thyroid dysfunction",
+      "Subdural hematoma",
+      "Meningitis/encephalitis",
+      "Urinary tract infection with delirium",
+      "Electrolyte imbalance (other than sodium)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on age-related cognitive decline or dementia given the patient's age and assisted living residence, potentially missing acute metabolic causes",
+      "prematureClosure": "Risk of stopping evaluation after noting depression and psychiatric medications without considering SSRI-induced SIADH as a cause of her neurological symptoms",
+      "availabilityBias": "Recent cases of UTI-related delirium in elderly patients might bias toward infectious causes rather than considering metabolic etiologies"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Linda Petrowski's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for altered mental status in an elderly patient. Before interviewing the patient, consider what specific historical details might help you differentiate between metabolic, infectious, and structural causes. Pay particular attention to any clues about fluid balance and medication effects.",
+      "phase5": "Now that you've gathered history and physical findings, think about the constellation of confusion, nausea, and gait instability in the context of this patient's medications and excessive water intake. What laboratory studies would be most helpful to confirm your leading hypothesis? Consider how certain medications might predispose to electrolyte abnormalities.",
+      "finalDebrief": "This case illustrates how SIADH can present with subtle neurological symptoms that might initially be attributed to age-related changes. The key was recognizing the triad of altered mental status, nausea, and unsteady gait in a patient taking an SSRI with excessive water intake. This highlights the importance of considering medication-induced metabolic disturbances, particularly in elderly patients on multiple drugs."
     }
-}
+  }
 };

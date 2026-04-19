@@ -449,75 +449,76 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Angela Torres-Vega appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Angela appears anxious and uncomfortable, frequently shifting position and speaking in short phrases due to breathlessness. She is cooperative but clearly distressed, repeatedly asking if this is related to her previous blood clot. Her husband Miguel is present and appears very worried, occasionally answering for her when she needs to catch her breath.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did cardiac emergency start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "When did your shortness of breath and chest tightness begin?",
+      "Can you describe what the chest tightness feels like?",
+      "Have you had any chest pain, and if so, where is it located?",
+      "What were you doing when these symptoms started?",
+      "Have you had any recent long flights or periods of immobility?",
+      "When did you stop taking your blood thinner medication?",
+      "Have you had any leg pain, swelling, or cramping recently?",
+      "Have you coughed up any blood or noticed blood when you cough?",
+      "Have you felt lightheaded, dizzy, or like you might pass out?",
+      "Have you had any nausea, vomiting, or sweating?",
+      "Have you had any similar episodes since your DVT in February?",
+      "Are you currently taking any hormonal medications or birth control?",
+      "Have you had any recent surgeries, injuries, or been bedridden?"
     ],
     "patientResponses": {
-      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started 47-year-old female with provoked left LE DVT (02/2025) for follow-up.'",
-      "character": "'It's cardiac emergency — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Omeprazole 20mg daily; Sumatriptan 50mg PRN; Norethindrone 0.35mg daily; Rivaroxaban 20mg daily.'",
-      "allergies": "'My allergies are Heparin, Latex.'",
-      "family": "Mother: DVT at age 52 (provoked by hip surgery), Factor V Leiden heterozygous, alive at 72  Father: HTN, T2DM, alive at 74  Sister: Healthy, alive at 44",
-      "social": "Occupation: Travel nurse recruiter; frequent air travel for work (8-10 flights/month)  Marital: Married 18 years; husband Miguel; 2 children ages 12, 15  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble breathing... can you repeat that? I'm just so scared this is another blood clot.",
+      "onset": "It started about 2 hours ago, very suddenly. I was just sitting at my desk working when I suddenly couldn't catch my breath and felt like someone was squeezing my chest.",
+      "character": "The chest tightness feels like a heavy weight pressing down on my chest. The shortness of breath is like I can't get enough air no matter how hard I try to breathe.",
+      "location": "The tightness is right in the center of my chest, and I have some sharp pain on the right side that gets worse when I breathe in deeply.",
+      "severity": "The breathing difficulty is probably a 9 out of 10 - I feel like I'm suffocating. The chest tightness is about a 7. I can barely walk to the bathroom without getting completely winded.",
+      "aggravating": "Any movement makes it worse, even just sitting up straight. Taking deep breaths makes the chest pain sharper. I feel more short of breath when I try to lie flat.",
+      "relieving": "Nothing really helps. Sitting forward slightly seems a little better than lying back, but I still can't breathe normally.",
+      "associated": "I feel really lightheaded and dizzy, especially when I stand up. My heart feels like it's racing. I'm also nauseous and have been sweating even though I don't feel hot.",
+      "denies": "I haven't coughed up any blood, but I do have a dry cough that just started. No fever, no leg swelling that I've noticed recently, no recent injuries.",
+      "history": "Nothing exactly like this since my DVT in February, but I've been worried about it happening again. This feels much worse than how I felt with the leg clot.",
+      "medications": "Omeprazole 20mg daily; Sumatriptan 50mg PRN; Norethindrone 0.35mg daily; Rivaroxaban 20mg daily",
+      "allergies": "Heparin, Latex",
+      "family": "My mother had a DVT after her hip surgery when she was 52, and we both have Factor V Leiden. That's why I was on blood thinners after my clot.",
+      "social": "I work as a travel nurse recruiter and fly 8-10 times a month for work. I just got back from a long flight to Denver yesterday - about 4 hours each way. I'm married with two kids. I don't smoke and only drink socially on weekends."
     },
     "examManeuvers": [
-      "General appearance and hemodynamic assessment",
-      "Vital signs review",
-      "Jugular venous pressure",
-      "Cardiovascular auscultation",
-      "Peripheral pulses and perfusion",
-      "Pulmonary auscultation",
-      "Lower extremity edema",
-      "Skin perfusion and temperature"
+      "General appearance and respiratory distress assessment",
+      "Cardiovascular examination including heart sounds and murmurs",
+      "Pulmonary examination including breath sounds",
+      "Assessment of jugular venous pressure",
+      "Lower extremity examination for DVT signs",
+      "Assessment of peripheral pulses and capillary refill",
+      "Abdominal examination",
+      "Neurological assessment for altered mental status"
     ],
     "examFindings": {
-      "General appearance and hemodynamic assessment": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Jugular venous pressure": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Peripheral pulses and perfusion": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Lower extremity edema": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-      "Skin perfusion and temperature": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe."
+      "General appearance and respiratory distress assessment": "Patient appears acutely ill and in moderate to severe respiratory distress, using accessory muscles, sitting forward in tripod position, speaking in 3-4 word sentences",
+      "Cardiovascular examination including heart sounds and murmurs": "Tachycardic regular rhythm, prominent S2 with fixed splitting, S3 gallop present, no murmurs appreciated, point of maximal impulse displaced laterally",
+      "Pulmonary examination including breath sounds": "Tachypneic with shallow respirations, breath sounds clear bilaterally, no wheezes or crackles, decreased breath sounds at right base",
+      "Assessment of jugular venous pressure": "Jugular venous distension to angle of jaw at 45 degrees, prominent v-waves visible",
+      "Lower extremity examination for DVT signs": "No obvious swelling, warmth, or erythema of lower extremities bilaterally, negative Homans sign, distal pulses present but weak",
+      "Assessment of peripheral pulses and capillary refill": "Weak peripheral pulses throughout, capillary refill delayed at 4 seconds, cool extremities",
+      "Abdominal examination": "Soft, non-tender, no hepatosplenomegaly appreciated, bowel sounds present",
+      "Neurological assessment for altered mental status": "Alert and oriented to person, place, and time but appears anxious, no focal neurological deficits, moves all extremities"
     },
     "ddxTargets": [
-      "Massive Pulmonary Embolism with Acute Right Ventricular Failure (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Massive Pulmonary Embolism with Acute Right Ventricular Failure",
+      "Acute Myocardial Infarction",
+      "Pneumothorax",
+      "Aortic Dissection",
+      "Acute Decompensated Heart Failure",
+      "Panic Attack",
+      "Pneumonia"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Massive Pulmonary Embolism with Acute Right Ventricular Failure, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Massive Pulmonary Embolism with Acute Right Ventricular Failure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Massive Pulmonary Embolism with Acute Right Ventricular Failure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Student may anchor on patient's known DVT history and Factor V Leiden, potentially missing the severity of current presentation or considering only minor PE rather than massive PE with hemodynamic compromise",
+      "prematureClosure": "Given obvious PE risk factors, student might stop gathering information before recognizing signs of right heart strain and hemodynamic instability that indicate massive PE requiring immediate intervention",
+      "availabilityBias": "Recent exposure to stable PE cases might lead student to underestimate severity, or conversely, recent MI cases might lead to overweighting cardiac causes despite clear PE risk factors"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Angela Torres-Vega's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Massive Pulmonary Embolism with Acute Right Ventricular Failure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you've identified some key possibilities given her presentation. As you interview this patient, pay particular attention to the timeline of her symptoms and any recent risk factors. Also consider - what vital signs findings might help you distinguish between these diagnoses? What would make you more or less concerned about each possibility?",
+      "phase5": "Excellent history and physical examination. You've gathered compelling evidence for your leading diagnosis. Now let's think critically about what you've found - what do her vital signs tell you about the severity of her condition? How do her physical exam findings, particularly the cardiovascular findings, help you risk-stratify this patient? What immediate interventions might this patient need?",
+      "finalDebrief": "This case demonstrates the evolution from recognizing classic risk factors to identifying hemodynamic compromise. Your initial differential appropriately included PE given her clear risk factors - recent air travel, Factor V Leiden, and prior DVT. The key learning point is recognizing when PE becomes massive and life-threatening. The combination of hypotension, tachycardia, elevated JVP, and signs of right heart strain indicated this wasn't just PE, but massive PE with acute right heart failure requiring emergent intervention. How might this change your approach to future patients with PE risk factors?"
     }
   }
 };

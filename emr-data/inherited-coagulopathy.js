@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ethan Goldberg",
-  "patientHPI": "I was playing basketball yesterday when I landed wrong and felt something pop in my knee. Now it's really swollen and painful, much worse than my usual joint aches, and I'm worried because I know I have to be careful about bleeding. The pain is different this time and the swelling came on really fast.",
+    "patientHPI": "I was playing basketball yesterday when I landed wrong and felt something pop in my knee. Now it's really swollen and painful, much worse than my usual joint aches, and I'm worried because I know I have to be careful about bleeding. The pain is different this time and the swelling came on really fast.",
     "dob": "01/20/2005",
     "age": 20,
     "sex": "Male",
@@ -159,38 +159,140 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.6", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "43.5", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "242", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.6",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "43.5",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "242",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION PANEL",
           "results": [
-            { "test": "PT", "value": "12.0", "unit": "seconds", "range": "11.0-13.5", "flag": "" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.8-1.1", "flag": "" },
-            { "test": "aPTT", "value": "52", "unit": "seconds", "range": "25-35", "flag": "H" },
-            { "test": "Factor VIII Activity", "value": "3", "unit": "%", "range": "50-150", "flag": "L" },
-            { "test": "Factor VIII Inhibitor", "value": "<0.5", "unit": "BU/mL", "range": "<0.5", "flag": "" }
+            {
+              "test": "PT",
+              "value": "12.0",
+              "unit": "seconds",
+              "range": "11.0-13.5",
+              "flag": ""
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": ""
+            },
+            {
+              "test": "aPTT",
+              "value": "52",
+              "unit": "seconds",
+              "range": "25-35",
+              "flag": "H"
+            },
+            {
+              "test": "Factor VIII Activity",
+              "value": "3",
+              "unit": "%",
+              "range": "50-150",
+              "flag": "L"
+            },
+            {
+              "test": "Factor VIII Inhibitor",
+              "value": "<0.5",
+              "unit": "BU/mL",
+              "range": "<0.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEPATITIS PANEL",
           "results": [
-            { "test": "Hepatitis B Surface Ag", "value": "Nonreactive", "unit": "", "range": "Nonreactive", "flag": "" },
-            { "test": "Hepatitis B Surface Ab", "value": ">100", "unit": "mIU/mL", "range": ">10 immune", "flag": "" },
-            { "test": "Hepatitis C Ab", "value": "Nonreactive", "unit": "", "range": "Nonreactive", "flag": "" }
+            {
+              "test": "Hepatitis B Surface Ag",
+              "value": "Nonreactive",
+              "unit": "",
+              "range": "Nonreactive",
+              "flag": ""
+            },
+            {
+              "test": "Hepatitis B Surface Ab",
+              "value": ">100",
+              "unit": "mIU/mL",
+              "range": ">10 immune",
+              "flag": ""
+            },
+            {
+              "test": "Hepatitis C Ab",
+              "value": "Nonreactive",
+              "unit": "",
+              "range": "Nonreactive",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -266,15 +368,42 @@ window.EMR_DATA = {
     "Sister: Hemophilia A carrier (FVIII 55%), age 17"
   ],
   "socialHistory": [
-    ["Occupation", "College student (sophomore, pre-med biology)"],
-    ["Marital", "Single"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Rare — avoids due to bleeding risk"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Swimming 3x/week; light weightlifting; avoids contact sports"],
-    ["Housing", "University dormitory; parents 20 minutes away"],
-    ["Safety", "Wears medical alert bracelet; carries factor concentrate; avoids NSAIDs/aspirin"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "College student (sophomore, pre-med biology)"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Rare — avoids due to bleeding risk"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Swimming 3x/week; light weightlifting; avoids contact sports"
+    ],
+    [
+      "Housing",
+      "University dormitory; parents 20 minutes away"
+    ],
+    [
+      "Safety",
+      "Wears medical alert bracelet; carries factor concentrate; avoids NSAIDs/aspirin"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "inherited-coagulopathy",
@@ -285,75 +414,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Ethan Goldberg is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Ethan appears anxious but knowledgeable about his condition, speaking clearly about his symptoms with medical awareness typical of a pre-med student. He's cooperative and detailed in his responses, showing appropriate concern about potential bleeding complications. His distress level is moderate - worried but not panicked, demonstrating familiarity with managing his hemophilia.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened when you were playing basketball?",
+      "How does this knee pain and swelling compare to your usual hemophilic joint symptoms?",
+      "When did you last take your Hemlibra injection and any Factor VIII?",
+      "Have you had any other bleeding episodes recently - nosebleeds, bruising, or gum bleeding?",
+      "Are you experiencing any numbness, tingling, or inability to move your knee?",
+      "What does the pain feel like - sharp, throbbing, constant, or does it come and go?",
+      "Have you noticed any warmth or skin color changes around your knee?",
+      "How much has this limited your ability to walk or bear weight?",
+      "Have you had any recent illnesses, infections, or medication changes?",
+      "Any family history of severe bleeding complications I should know about?",
+      "Are you experiencing any headache, dizziness, or unusual fatigue?",
+      "Have you taken anything for the pain, and has it helped?",
+      "Any recent trauma to other parts of your body I should examine?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was playing basketball yesterday when I landed wrong and felt something pop in.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Hemophilia A with Acute Hemorrhagic Episode.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Emicizumab (Hemlibra) 150mg SQ every 2 weeks; Recombinant Factor VIII (Advate) 2000 IU IV PRN; Acetaminophen 500mg PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Hemophilia A carrier (Factor VIII 48%), alive at 50  Maternal uncle: Hemophilia A, severe (FVIII <1%), alive at 55 \u2014 on prophylaxis  Maternal grandfather: Hemophilia A, deceased at 62 (intracranial hemorrhage)",
-        "social": "Occupation: College student (sophomore, pre-med biology)  Marital: Single  Tobacco: Never  Alcohol: Rare \u2014 avoids due to bleeding risk  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you be more specific about my knee injury?",
+      "onset": "It happened yesterday afternoon around 3 PM during pickup basketball. I was going for a rebound, came down awkwardly on my right leg, and immediately felt a sharp pop in my knee followed by intense pain.",
+      "character": "The pain is deep, throbbing, and constant - much more intense than my usual joint aches from hemophilia. It feels like there's pressure building up inside my knee joint.",
+      "location": "The pain is centered right in my right knee joint, mainly on the inside, but the whole knee area is tender. It doesn't really radiate anywhere else.",
+      "severity": "Right now it's about an 8 out of 10. I can barely put any weight on it, and even sitting still it throbs. This is way worse than my chronic knee pain, which is usually around a 3 or 4.",
+      "aggravating": "Any movement makes it much worse, especially trying to bend or straighten my leg. Even light touch or pressure on the swollen area is really painful.",
+      "relieving": "I took some acetaminophen last night and this morning, which helped a little bit. Keeping it elevated and still seems to help somewhat, but the pain is still pretty intense.",
+      "associated": "The knee is really swollen and feels warm to touch. I haven't noticed any fever, and I'm not having bleeding anywhere else right now.",
+      "denies": "No headaches, no nosebleeds, no unusual bruising elsewhere, no dizziness or weakness. No chest pain or shortness of breath. No other joint pain besides my usual chronic knee stuff.",
+      "history": "I've had several joint bleeds before, mostly in this same knee, but this feels different - more sudden and severe. My last serious joint bleed was about 8 months ago, also in this knee.",
+      "medications": "Emicizumab (Hemlibra) 150mg SQ every 2 weeks; Recombinant Factor VIII (Advate) 2000 IU IV PRN; Acetaminophen 500mg PRN",
+      "allergies": "NKDA",
+      "family": "My mom is a carrier for hemophilia A. My maternal uncle has severe hemophilia A and is on prophylaxis. My maternal grandfather also had hemophilia A and died from an intracranial hemorrhage when he was 62.",
+      "social": "I'm a sophomore in college studying pre-med biology. I'm single, never smoke, and rarely drink alcohol because of my bleeding risk. I don't use any recreational drugs."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "Visual inspection of right knee",
+      "Palpation of right knee joint and surrounding structures",
+      "Assessment of knee range of motion",
+      "Evaluation of knee joint stability",
+      "Neurovascular assessment of lower extremity",
+      "Weight-bearing assessment",
+      "Measurement of knee circumference",
+      "Assessment for joint effusion",
+      "Examination of other joints",
+      "Evaluation for additional bleeding sites"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Hemophilia A with Acute Hemorrhagic Episode. Document specifically what you observe."
+      "Visual inspection of right knee": "Marked swelling and erythema of right knee with obvious joint distension. Knee appears larger than baseline with visible effusion.",
+      "Palpation of right knee joint and surrounding structures": "Significant warmth and tenderness to palpation over joint line. Tense, fluctuant swelling consistent with hemarthrosis.",
+      "Assessment of knee range of motion": "Severely limited active and passive range of motion due to pain and swelling. Flexion limited to approximately 45 degrees.",
+      "Evaluation of knee joint stability": "Unable to adequately assess ligamentous stability due to pain, swelling, and guarding. No gross instability apparent.",
+      "Neurovascular assessment of lower extremity": "Dorsalis pedis and posterior tibial pulses intact. Normal sensation and motor function in foot and ankle.",
+      "Weight-bearing assessment": "Patient unable to bear full weight on right leg due to significant pain. Requires assistance with ambulation.",
+      "Measurement of knee circumference": "Right knee circumference 2.5 cm greater than left knee, measured 10 cm above patella.",
+      "Assessment for joint effusion": "Positive ballottement sign. Obvious joint distension with fluid wave palpable.",
+      "Examination of other joints": "Left knee shows mild chronic changes consistent with hemophilic arthropathy but no acute findings. Other joints unremarkable.",
+      "Evaluation for additional bleeding sites": "No evidence of bleeding at other sites. No petechiae, ecchymoses, or mucosal bleeding noted."
     },
     "ddxTargets": [
-        "Hemophilia A with Acute Hemorrhagic Episode (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hemophilia A with Acute Hemorrhagic Episode (correct diagnosis)",
+      "Traumatic knee injury with hemarthrosis",
+      "Acute exacerbation of hemophilic arthropathy",
+      "Compartment syndrome of the leg",
+      "Septic arthritis",
+      "Meniscal tear with joint effusion",
+      "Acute ligamentous injury (ACL/MCL tear)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hemophilia A with Acute Hemorrhagic Episode, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Hemophilia A with Acute Hemorrhagic Episode, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Hemophilia A with Acute Hemorrhagic Episode based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on 'sports injury' and focus on mechanical causes rather than considering the underlying bleeding disorder as the primary driver of symptoms",
+      "prematureClosure": "May quickly assume this is just routine joint bleeding without fully assessing severity or considering complications like compartment syndrome",
+      "availabilityBias": "Common sports injuries like ACL tears may come to mind first, potentially overshadowing the hemophilia-specific pathophysiology"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Ethan Goldberg's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Hemophilia A with Acute Hemorrhagic Episode. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider this: What unique aspects of this patient's underlying condition should guide your history-taking? How might a hemophilia patient's joint bleed differ from a typical sports injury, and what complications should you be most concerned about?",
+      "phase5": "Now that you've gathered your history and physical exam findings, let's think critically: How does the severity and presentation help you distinguish between routine hemophilic joint bleeding versus a more serious hemorrhagic complication? What key factors determine your next management steps?",
+      "finalDebrief": "This case illustrates how pre-existing conditions can dramatically alter the significance of seemingly routine trauma. Notice how your differential likely evolved from considering typical sports injuries to recognizing this as a hemophilia-specific emergency requiring urgent factor replacement. What clinical pearls will help you recognize and manage acute bleeding episodes in patients with inherited bleeding disorders?"
     }
-}
+  }
 };

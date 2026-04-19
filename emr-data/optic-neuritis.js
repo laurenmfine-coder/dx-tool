@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jessica Brennan",
-  "patientHPI": "For three days now, my left eye has been getting blurry - it's like looking through fog, and it hurts behind my eye especially when I look to the side. Colors don't look as bright in that eye anymore.",
+    "patientHPI": "For three days now, my left eye has been getting blurry - it's like looking through fog, and it hurts behind my eye especially when I look to the side. Colors don't look as bright in that eye anymore.",
     "dob": "07/14/1994",
     "age": 30,
     "sex": "Female",
@@ -151,18 +151,60 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.0", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.6", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.6", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "240", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.0",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.6",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.6",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "240",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID AND VITAMINS",
           "results": [
-            { "test": "TSH", "value": "2.2", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Vitamin D, 25-OH", "value": "28", "unit": "ng/mL", "range": "30-100", "flag": "L" },
-            { "test": "Vitamin B12", "value": "485", "unit": "pg/mL", "range": "200-900", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.2",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Vitamin D, 25-OH",
+              "value": "28",
+              "unit": "ng/mL",
+              "range": "30-100",
+              "flag": "L"
+            },
+            {
+              "test": "Vitamin B12",
+              "value": "485",
+              "unit": "pg/mL",
+              "range": "200-900",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -223,15 +265,42 @@ window.EMR_DATA = {
     "Maternal aunt: Rheumatoid arthritis"
   ],
   "socialHistory": [
-    ["Occupation", "Registered nurse — hospital med-surg unit (12-hour shifts)"],
-    ["Marital", "Single, in relationship"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 1-2 drinks on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Running 3x/week; gym 2x/week"],
-    ["Housing", "Lives alone in apartment"],
-    ["Safety", "Denies IPV; seatbelt; occupational safety training current"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Registered nurse — hospital med-surg unit (12-hour shifts)"
+    ],
+    [
+      "Marital",
+      "Single, in relationship"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 1-2 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Running 3x/week; gym 2x/week"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; occupational safety training current"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "optic-neuritis",
@@ -242,75 +311,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jessica Brennan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Jessica appears anxious and concerned about her vision changes, particularly given her nursing background and family history of MS. She is forthcoming with information but clearly worried about the implications of her symptoms, frequently asking if this could be related to her mother's condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when your vision changes started?",
+      "How would you characterize the visual loss - is it complete darkness, blurriness, or something else?",
+      "Tell me about the pain behind your eye - when does it occur?",
+      "Have you noticed any changes in how colors appear in your left eye?",
+      "Have you had any numbness, tingling, or weakness anywhere in your body recently or in the past?",
+      "Any recent infections, vaccinations, or illnesses?",
+      "Have you experienced any double vision?",
+      "Any headaches, nausea, or vomiting?",
+      "Tell me about your family history, particularly your mother's MS diagnosis",
+      "What medications are you currently taking?",
+      "Any known allergies?",
+      "Have you had any similar episodes with your vision before?",
+      "Any recent stress, fatigue, or heat exposure that seemed to worsen symptoms?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started For three days now, my left eye has been getting blurry - it's like looking thro.'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Optic Neuritis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cholecalciferol 2000 IU daily; Oral Contraceptive (Levonorgestrel 0.1mg/Ethinyl Estradiol 20mcg).'",
-        "allergies": "'My allergies are Amoxicillin.'",
-        "family": "Mother: Multiple sclerosis diagnosed at age 38, alive at 58  Father: HTN, alive at 62  Brother: Healthy, age 27",
-        "social": "Occupation: Registered nurse \u2014 hospital med-surg unit (12-hour shifts)  Marital: Single, in relationship  Tobacco: Never smoker  Alcohol: Social, 1-2 drinks on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you rephrase that? I'm pretty worried about what's happening with my eye.",
+      "onset": "It started three days ago, Tuesday morning when I woke up for my shift. At first I thought I was just tired, but it got worse throughout the day.",
+      "character": "It's like looking through thick fog or a dirty window in my left eye. Everything is dim and blurry, not sharp like my right eye.",
+      "location": "The vision problem is only in my left eye, and there's a deep aching pain right behind that eye, especially when I move it side to side or up and down.",
+      "severity": "The pain is about a 6 out of 10 when I move my eye, maybe 3 when it's still. The vision loss is really concerning - I'd say it's affecting about 70% of what I can normally see clearly.",
+      "aggravating": "The pain gets much worse when I look to either side or up and down. The vision seems worse when I'm tired or at the end of a long shift.",
+      "relieving": "Ibuprofen helps the pain a little bit. Closing my eye and resting helps some, but the vision doesn't really improve.",
+      "associated": "I've been more fatigued than usual lately, even before this started. Sometimes I get tingling in my right hand, but that comes and goes - it happened a few months ago too.",
+      "denies": "No double vision, no headaches, no nausea or vomiting, no fever, no neck stiffness. No weakness in my arms or legs.",
+      "history": "Never had anything like this with my vision before. The hand tingling happened maybe 6 months ago but went away on its own.",
+      "medications": "Cholecalciferol 2000 IU daily; Oral Contraceptive (Levonorgestrel 0.1mg/Ethinyl Estradiol 20mcg)",
+      "allergies": "Amoxicillin",
+      "family": "My mom was diagnosed with multiple sclerosis when she was 38 - that's what really has me worried about this. My dad has high blood pressure, and my younger brother is healthy.",
+      "social": "I'm a registered nurse working 12-hour shifts on a med-surg unit. I'm single but in a relationship. I don't smoke, drink socially on weekends - maybe 1 or 2 drinks, and I don't use any drugs."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Visual acuity testing (Snellen chart)",
+      "Pupillary light reflex and relative afferent pupillary defect (RAPD) testing",
+      "Color vision assessment (Ishihara plates or red desaturation)",
+      "Visual field testing by confrontation",
+      "Fundoscopic examination",
+      "Extraocular movement assessment",
+      "Neurological examination of cranial nerves",
+      "Motor and sensory examination of extremities",
+      "Deep tendon reflexes",
+      "Cerebellar function testing (finger-to-nose, heel-to-shin)"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Optic Neuritis. Document specifically what you observe."
+      "Visual acuity testing (Snellen chart)": "Right eye 20/20, Left eye 20/60 with difficulty reading smaller lines",
+      "Pupillary light reflex and relative afferent pupillary defect (RAPD) testing": "Positive RAPD in left eye - left pupil dilates when light swings from right to left eye",
+      "Color vision assessment (Ishihara plates or red desaturation)": "Significant red desaturation in left eye - red appears pink or washed out compared to right eye",
+      "Visual field testing by confrontation": "Central scotoma in left eye with decreased peripheral sensitivity",
+      "Fundoscopic examination": "Left optic disc appears mildly swollen with blurred margins, right disc normal",
+      "Extraocular movement assessment": "Full range of motion both eyes, but patient reports increased retro-orbital pain with left eye movement in all directions",
+      "Neurological examination of cranial nerves": "Cranial nerves II-XII grossly intact except for visual changes noted above",
+      "Motor and sensory examination of extremities": "Normal muscle strength 5/5 throughout, mild subjective decreased sensation to light touch over right hand dorsum",
+      "Deep tendon reflexes": "2+ and symmetric throughout, no pathologic reflexes",
+      "Cerebellar function testing (finger-to-nose, heel-to-shin)": "Normal coordination and balance"
     },
     "ddxTargets": [
-        "Optic Neuritis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Optic Neuritis (Likely Demyelinating — Clinically Isolated Syndrome, Possible MS) (correct diagnosis)",
+      "Ischemic Optic Neuropathy (AION)",
+      "Retrobulbar Neuritis",
+      "Temporal Arteritis/Giant Cell Arteritis",
+      "Acute Angle Closure Glaucoma",
+      "Migraine with Visual Aura",
+      "Functional/Conversion Visual Loss"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Optic Neuritis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Optic Neuritis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Optic Neuritis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on family history of MS and immediately assuming this is MS-related without fully evaluating other optic neuropathies or considering age-inappropriate diagnoses",
+      "prematureClosure": "Risk of stopping evaluation after finding RAPD and assuming optic neuritis without considering vascular causes, especially given patient's young age and oral contraceptive use",
+      "availabilityBias": "Recent cases of migraine or tension headaches might lead to minimizing the significance of unilateral vision loss with pain on eye movement"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jessica Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Optic Neuritis (Likely Demyelinating \u2014 Clinically Isolated Syndrome, Possible MS). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start with your differential. Given this patient's age, presentation, and family history, what specific historical features would help you distinguish between inflammatory demyelinating causes versus vascular or compressive etiologies? What key elements of the timeline and character of symptoms should you focus on?",
+      "phase5": "Excellent work identifying the RAPD and optic disc changes. How does the combination of subacute monocular visual loss, pain with eye movement, RAPD, and family history fit together? What additional workup would you want to pursue, and how does this patient's demographic profile influence your diagnostic thinking?",
+      "finalDebrief": "This case nicely illustrates how optic neuritis often presents as the first manifestation of demyelinating disease. The classic triad of subacute monocular visual loss, pain with eye movement, and RAPD should trigger consideration of inflammatory causes. Her family history and previous episodes of paresthesias suggest this may represent a clinically isolated syndrome with high risk for future MS development. What red flags would make you reconsider this diagnosis?"
     }
-}
+  }
 };

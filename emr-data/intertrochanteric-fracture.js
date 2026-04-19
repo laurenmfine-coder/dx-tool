@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gladys Marie Johnson",
-  "patientHPI": "I've been having more trouble with my balance lately, and my daughter is worried because I fell again a few weeks ago - I caught my foot on the little step between my kitchen and living room and went down pretty hard. My hip has been aching ever since, especially when I try to get up from my chair or walk to the bathroom.",
+    "patientHPI": "I've been having more trouble with my balance lately, and my daughter is worried because I fell again a few weeks ago - I caught my foot on the little step between my kitchen and living room and went down pretty hard. My hip has been aching ever since, especially when I try to get up from my chair or walk to the bathroom.",
     "dob": "07/22/1936",
     "age": 88,
     "sex": "Female",
@@ -211,30 +211,114 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "32", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.6", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "38", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "38",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "32.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "176", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "5.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "32.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "176",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            { "test": "BNP", "value": "380", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "BNP",
+              "value": "380",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -295,15 +379,42 @@ window.EMR_DATA = {
     "Brother: CAD, deceased at 76"
   ],
   "socialHistory": [
-    ["Occupation", "Retired elementary school teacher — 35 years in Broward County"],
-    ["Marital", "Widowed — husband deceased 2010"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited — walks short distances indoors with walker; seated exercises"],
-    ["Housing", "Lives with daughter Karen in single-story home; daughter is primary caregiver; exploring assisted living options"],
-    ["Safety", "Uses rolling walker (sometimes forgets); grab bars in bathroom; raised toilet seat; magnifying glass for reading; poor night vision; medical alert pendant worn"],
-    ["Advance Directive", "Yes — healthcare proxy: daughter Karen Johnson; DNR/DNI; comfort care preferred if catastrophic event"]
+    [
+      "Occupation",
+      "Retired elementary school teacher — 35 years in Broward County"
+    ],
+    [
+      "Marital",
+      "Widowed — husband deceased 2010"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — walks short distances indoors with walker; seated exercises"
+    ],
+    [
+      "Housing",
+      "Lives with daughter Karen in single-story home; daughter is primary caregiver; exploring assisted living options"
+    ],
+    [
+      "Safety",
+      "Uses rolling walker (sometimes forgets); grab bars in bathroom; raised toilet seat; magnifying glass for reading; poor night vision; medical alert pendant worn"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: daughter Karen Johnson; DNR/DNI; comfort care preferred if catastrophic event"
+    ]
   ],
   "meta": {
     "caseId": "intertrochanteric-fracture",
@@ -314,75 +425,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gladys Marie Johnson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Mrs. Johnson appears anxious and somewhat embarrassed about falling again, but is cooperative and forthcoming about her symptoms. She minimizes her pain initially but becomes more distressed when discussing functional limitations and fear of losing independence.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened when you fell a few weeks ago?",
+      "Where exactly is your hip pain located and does it go anywhere else?",
+      "How would you rate your pain on a scale of 1 to 10?",
+      "What makes the pain worse - walking, sitting, lying down?",
+      "Is there anything that helps relieve the pain?",
+      "Have you been able to walk normally since the fall?",
+      "Have you noticed any swelling, bruising, or changes in the appearance of your leg?",
+      "Have you had any numbness, tingling, or weakness in your leg?",
+      "How many falls have you had in the past year?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Has anyone in your family had hip fractures or bone problems?",
+      "Tell me about your living situation and daily activities"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having more trouble with my balance lately, and my daughter is worried.'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Intertrochanteric Hip Fracture.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Carvedilol 12.5mg BID; Furosemide 20mg daily; Amlodipine 5mg daily; Alendronate 70mg weekly; Calcium-Vitamin D 600mg/800IU BID; Potassium Chloride 10mEq daily.'",
-        "allergies": "'My allergies are Denosumab (Prolia), ACE Inhibitors (Lisinopril).'",
-        "family": "Mother: Osteoporosis, hip fracture at age 80, CHF, deceased at 85  Father: Hypertension, stroke, deceased at 70  Sister: Osteoporosis, alive at 84",
-        "social": "Occupation: Retired elementary school teacher \u2014 35 years in Broward County  Marital: Widowed \u2014 husband deceased 2010  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking, doctor. Could you explain that differently?",
+      "onset": "It happened about three weeks ago when I caught my toe on that little step between my kitchen and living room. I went down hard on my right side and the pain started right away.",
+      "character": "It's a deep, aching pain that sometimes feels sharp when I try to move. It's different from my usual arthritis pain - much worse and constant.",
+      "location": "The pain is deep in my right hip, around the groin area, and sometimes goes down toward my knee. It's worst right in the hip joint area.",
+      "severity": "Well, I don't like to complain, but it's probably a 7 out of 10. I can barely get out of my chair without help, and I haven't been able to walk to my mailbox since it happened.",
+      "aggravating": "Any weight bearing makes it terrible - trying to stand up, walking, even rolling over in bed. Stairs are impossible now.",
+      "relieving": "I've been taking Tylenol and using ice, but honestly nothing really helps much. Sitting still is about the only thing that's tolerable.",
+      "associated": "I feel a bit more short of breath than usual, probably because I'm not moving around much. My right leg feels weaker and I'm scared to put weight on it.",
+      "denies": "No fever, no numbness or tingling, no back pain, no problems with my bowels or bladder. The other leg is fine.",
+      "history": "I've fallen three times in the past six months. My vision isn't what it used to be with the macular degeneration, and I think that's part of the problem. Never had pain like this before though.",
+      "medications": "Carvedilol 12.5mg BID; Furosemide 20mg daily; Amlodipine 5mg daily; Alendronate 70mg weekly; Calcium-Vitamin D 600mg/800IU BID; Potassium Chloride 10mEq daily",
+      "allergies": "Denosumab (Prolia), ACE Inhibitors (Lisinopril)",
+      "family": "My mother broke her hip when she was 80, just like me. She had terrible osteoporosis. My sister is 84 and also has thin bones but hasn't fallen yet, thank goodness.",
+      "social": "I taught elementary school for 35 years here in Broward County. I've been widowed since 2010. I live alone in a small house and I'm terrified I won't be able to stay independent. I never smoked or drank alcohol."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of right hip and leg",
+      "Palpation of greater trochanter and hip joint",
+      "Assessment of leg length discrepancy",
+      "Evaluation of external rotation deformity",
+      "Active range of motion of hip",
+      "Passive range of motion of hip",
+      "Log roll test",
+      "Assessment of weight bearing ability",
+      "Neurovascular examination of lower extremity",
+      "Examination for other injuries from fall"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Intertrochanteric Hip Fracture. Document specifically what you observe."
+      "Inspection of right hip and leg": "Right lower extremity appears shortened and externally rotated. Mild swelling over the right hip region. No obvious deformity or open wounds.",
+      "Palpation of greater trochanter and hip joint": "Significant tenderness over the right greater trochanter and groin. No crepitus appreciated. Unable to palpate femoral pulse clearly due to patient discomfort.",
+      "Assessment of leg length discrepancy": "Right lower extremity appears approximately 2 cm shorter than left when measured from anterior superior iliac spine to medial malleolus.",
+      "Evaluation of external rotation deformity": "Right lower extremity resting in approximately 45 degrees of external rotation compared to neutral position of left leg.",
+      "Active range of motion of hip": "Patient unable to perform active hip flexion, abduction, or internal rotation due to severe pain. Minimal active movement attempted.",
+      "Passive range of motion of hip": "Passive range of motion severely limited and causes significant pain. Hip flexion limited to 20 degrees, internal rotation impossible.",
+      "Log roll test": "Positive - passive rotation of entire leg causes severe hip pain, suggesting intracapsular pathology.",
+      "Assessment of weight bearing ability": "Patient unable to bear weight on right lower extremity. Requires assistance to maintain sitting position.",
+      "Neurovascular examination of lower extremity": "Dorsalis pedis and posterior tibial pulses present. Sensation intact to light touch. Motor strength limited by pain but no obvious neurologic deficits.",
+      "Examination for other injuries from fall": "No evidence of head trauma, no other obvious injuries. Skin intact without lacerations or significant bruising elsewhere."
     },
     "ddxTargets": [
-        "Intertrochanteric Hip Fracture (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Intertrochanteric Hip Fracture (correct diagnosis)",
+      "Femoral Neck Fracture",
+      "Greater Trochanteric Bursitis",
+      "Hip Dislocation",
+      "Pathologic Fracture secondary to malignancy",
+      "Severe Hip Osteoarthritis exacerbation",
+      "Pelvic Fracture"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Intertrochanteric Hip Fracture, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Intertrochanteric Hip Fracture, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Intertrochanteric Hip Fracture based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'elderly fall' and assuming simple bruising or arthritis flare, missing the fracture due to patient's initial minimization of symptoms",
+      "prematureClosure": "May stop at trochanteric bursitis given tenderness over greater trochanter, without considering fracture in this high-risk osteoporotic patient",
+      "availabilityBias": "Recent cases of simple falls without fracture may lead to underestimating injury severity in this patient with multiple risk factors"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gladys Marie Johnson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Intertrochanteric Hip Fracture. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Consider this elderly patient's risk factors carefully. What aspects of her medical history and current presentation should heighten your suspicion for serious injury? Think about the mechanism and her bone health.",
+      "phase5": "You've identified some concerning physical exam findings. How do the shortened, externally rotated leg and inability to bear weight fit with your differential diagnosis? What's the most likely diagnosis given her risk factors?",
+      "finalDebrief": "This case highlights the importance of maintaining high suspicion for fractures in elderly patients with osteoporosis, even when they minimize symptoms. The classic triad of shortened, externally rotated leg with inability to bear weight after a fall should immediately suggest hip fracture. How did your thinking evolve as you gathered more information?"
     }
-}
+  }
 };

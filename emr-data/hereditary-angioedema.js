@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Nicole Dubois",
-  "patientHPI": "My throat started swelling up this morning and I can barely swallow, plus I'm having these terrible stomach cramps that feel like someone is stabbing me from the inside. I've dealt with these attacks before so I know what's happening, but this one feels worse than usual and I'm really scared.",
+      "patientHPI": "My throat started swelling up this morning and I can barely swallow, plus I'm having these terrible stomach cramps that feel like someone is stabbing me from the inside. I've dealt with these attacks before so I know what's happening, but this one feels worse than usual and I'm really scared.",
       "dob": "05/06/2002",
       "age": "24",
       "sex": "Female",
@@ -953,27 +953,26 @@ window.EMR_DATA = {
       "Tobacco",
       "Never"
     ]
-  ]
-,"references":[
-  {
-    "id": "WAO-HAE-2022",
-    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
-    "authors": "Maurer M, Magerl M, Betschel S, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15214",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
-    "openAccess": true,
-    "validates": [
-      "HAE diagnosis: C4 screening, C1-INH level/function",
-      "C1q distinguishes acquired from hereditary",
-      "On-demand icatibant",
-      "Lanadelumab prophylaxis",
-      "Estrogen triggers: OCPs contraindicated"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "WAO-HAE-2022",
+      "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+      "authors": "Maurer M, Magerl M, Betschel S, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15214",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+      "openAccess": true,
+      "validates": [
+        "HAE diagnosis: C4 screening, C1-INH level/function",
+        "C1q distinguishes acquired from hereditary",
+        "On-demand icatibant",
+        "Lanadelumab prophylaxis",
+        "Estrogen triggers: OCPs contraindicated"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "HAE is caused by C1-inhibitor deficiency (Type I — low C1-INH level; Type II — dysfunctional C1-INH) or FXII mutation (Type III, estrogen-dependent, normal complement). Bradykinin accumulation (NOT histamine) drives edema — this is why antihistamines and epinephrine do NOT treat HAE attacks.",
@@ -991,75 +990,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Nicole Dubois appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Nicole appears anxious and distressed, frequently touching her throat and speaking in a slightly hoarse, strained voice. She is cooperative but clearly frightened, having experienced similar life-threatening episodes before. She demonstrates appropriate concern given her family history of death from laryngeal edema.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did acute laryngeal swelling and severe abdominal pain \u2014 known hae start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did your throat swelling and abdominal pain begin?",
+      "Have you had episodes like this before?",
+      "What triggers have you noticed for your HAE attacks?",
+      "Are you having any difficulty breathing or swallowing?",
+      "How would you rate your pain on a scale of 1-10?",
+      "Have you taken any of your rescue medications today?",
+      "What does your throat feel like right now?",
+      "Are you experiencing any nausea or vomiting?",
+      "Have you had any recent dental work, trauma, or stress?",
+      "What happened during your previous HAE attacks?",
+      "How quickly did your symptoms come on?",
+      "Are you having any skin swelling elsewhere?",
+      "What medications do you normally take for your condition?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Nicole Dubois presents with acute laryngeal swelling and severe abdominal pain \u2014.'",
-        "character": "'It's acute laryngeal swelling and severe abdominal pain \u2014 known hae \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take C1-INH concentrate; Icatibant.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: similar episodes  Maternal uncle: died from laryngeal edema",
-        "social": "Tobacco: Never"
+      "default": "I'm sorry, I'm having trouble concentrating because of the pain and worry about my throat closing up.",
+      "onset": "It started about 3 hours ago, first with cramping stomach pain, then my throat began feeling tight and swollen.",
+      "character": "My throat feels thick and swollen inside, like there's something blocking it. The abdominal pain is deep, cramping, and comes in waves.",
+      "location": "The swelling is in my throat and voice box area. The abdominal pain is all over my belly, mostly around my navel.",
+      "severity": "The throat swelling is terrifying - maybe 8/10 for concern. The abdominal pain is 9/10, much worse than my usual attacks.",
+      "aggravating": "Trying to swallow makes the throat sensation worse. The abdominal pain gets worse when I move or press on it.",
+      "relieving": "Nothing has helped yet. I'm scared to take anything by mouth because of my throat.",
+      "associated": "I feel nauseous and have been dry heaving. My voice sounds different and hoarse. No skin swelling this time.",
+      "denies": "No fever, no hives or skin rash, no diarrhea yet, no chest pain, no recent infections.",
+      "history": "I've had HAE attacks since I was 16, usually every few months. Most involve stomach pain or facial swelling, but I've had throat swelling twice before.",
+      "medications": "C1-INH concentrate; Icatibant",
+      "allergies": "NKDA",
+      "family": "My mother has the same condition with similar attacks. My maternal uncle died when I was young from throat swelling that blocked his breathing completely.",
+      "social": "I work as a teacher, don't smoke or drink much. I've been stressed lately with work deadlines, which sometimes triggers my attacks."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Oropharyngeal and laryngeal inspection",
+      "Neck palpation and lymph node assessment",
+      "Abdominal inspection and palpation",
+      "Auscultation of lungs and heart",
+      "Assessment of voice quality and stridor",
+      "Skin examination for angioedema",
+      "Vital signs assessment",
+      "Oxygen saturation monitoring",
+      "Assessment of swallowing ability",
+      "Evaluation for accessory muscle use"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Oropharyngeal and laryngeal inspection": "Visible swelling of posterior pharynx and soft palate, uvula appears enlarged, no visible laryngeal edema on indirect examination",
+      "Neck palpation and lymph node assessment": "Neck feels full and slightly tender, no discrete lymphadenopathy, no subcutaneous edema",
+      "Abdominal inspection and palpation": "Abdomen appears normal, diffusely tender to palpation without guarding or rebound, bowel sounds hypoactive",
+      "Auscultation of lungs and heart": "Clear lungs bilaterally, regular heart rhythm, slight tachycardia at 102 bpm",
+      "Assessment of voice quality and stridor": "Voice hoarse and muffled, no audible stridor at rest, no biphasic sounds",
+      "Skin examination for angioedema": "No facial, lip, or extremity swelling noted, no urticaria present",
+      "Vital signs assessment": "BP 108/68, HR 102, afebrile at 36.8°C, stable but tachycardic",
+      "Oxygen saturation monitoring": "SpO2 96% on room air, maintained without supplemental oxygen",
+      "Assessment of swallowing ability": "Patient reports difficulty swallowing, appears hesitant to swallow saliva",
+      "Evaluation for accessory muscle use": "Minimal accessory muscle use, no obvious respiratory distress at rest"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hereditary Angioedema (HAE) attack (correct diagnosis)",
+      "Acquired angioedema",
+      "Anaphylaxis",
+      "Epiglottitis",
+      "Laryngeal edema from other causes",
+      "Acute abdomen with coincidental throat symptoms",
+      "Viral laryngitis with gastroenteritis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the known HAE diagnosis without considering other causes of laryngeal swelling, or conversely, overlooking HAE severity due to familiarity",
+      "prematureClosure": "May immediately assume this is routine HAE without assessing airway compromise severity or considering alternative diagnoses in a young patient",
+      "availabilityBias": "Recent cases of viral illness or common throat infections may lead to underestimating the seriousness of hereditary angioedema presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Nicole Dubois's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some key possibilities in your differential. Given that this patient has a known diagnosis of HAE, what specific aspects of the history and examination will help you determine the severity and immediate management priorities? What other conditions might present similarly that you'd want to rule out?",
+      "phase5": "Now that you've gathered your history and physical exam findings, how does the combination of laryngeal swelling and abdominal pain in this HAE patient guide your assessment of severity? What are your immediate priorities, and what additional information might help confirm your suspected diagnosis?",
+      "finalDebrief": "This case illustrates how hereditary angioedema can present with life-threatening laryngeal involvement. Notice how the family history, combination of symptoms, and known diagnosis guided the evaluation, but required careful assessment of airway compromise. How did your differential diagnosis evolve as you gathered more information about the patient's HAE history and current presentation?"
     }
-}
+  }
 };

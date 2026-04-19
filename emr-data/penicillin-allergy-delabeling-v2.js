@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Keisha Williams",
-  "patientHPI": "I'm pregnant and due in about six weeks, but I'm worried because I think I might be allergic to penicillin and my doctor wants to make sure before delivery in case I need antibiotics.",
+      "patientHPI": "I'm pregnant and due in about six weeks, but I'm worried because I think I might be allergic to penicillin and my doctor wants to make sure before delivery in case I need antibiotics.",
       "dob": "03/12/1988",
       "age": "38",
       "sex": "Female",
@@ -828,111 +828,118 @@ window.EMR_DATA = {
       "Concern",
       "Very anxious about allergy testing while pregnant"
     ]
-  ]
-,"references":[
-  {
-    "id": "Drug-Allergy-PP-2022",
-    "title": "Drug allergy: A 2022 practice parameter update",
-    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2022,
-    "doi": "10.1016/j.jaci.2022.08.028",
-    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
-    "openAccess": true,
-    "validates": [
-      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
-      "Single-dose amoxicillin challenge for low-risk",
-      "Vancomycin RMS management",
-      "AERD aspirin desensitization protocol",
-      "Sulfonamide challenge protocols"
-    ]
-  },
-  {
-    "id": "PCN-NEJM-2019",
-    "title": "Penicillin allergy",
-    "authors": "Castells M, Khan DA, Phillips EJ.",
-    "journal": "N Engl J Med",
-    "year": 2019,
-    "doi": "10.1056/NEJMra1807761",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
-    "openAccess": true,
-    "validates": [
-      ">90% with PCN label NOT truly allergic",
-      ">80% lose sensitivity after 10 years",
-      "Morbilliform rash in children = usually viral exanthem",
-      "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "Drug-Allergy-PP-2022",
+      "title": "Drug allergy: A 2022 practice parameter update",
+      "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2022,
+      "doi": "10.1016/j.jaci.2022.08.028",
+      "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+      "openAccess": true,
+      "validates": [
+        "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+        "Single-dose amoxicillin challenge for low-risk",
+        "Vancomycin RMS management",
+        "AERD aspirin desensitization protocol",
+        "Sulfonamide challenge protocols"
+      ]
+    },
+    {
+      "id": "PCN-NEJM-2019",
+      "title": "Penicillin allergy",
+      "authors": "Castells M, Khan DA, Phillips EJ.",
+      "journal": "N Engl J Med",
+      "year": 2019,
+      "doi": "10.1056/NEJMra1807761",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
+      "openAccess": true,
+      "validates": [
+        ">90% with PCN label NOT truly allergic",
+        ">80% lose sensitivity after 10 years",
+        "Morbilliform rash in children = usually viral exanthem",
+        "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Keisha Williams is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Keisha appears anxious and worried, frequently placing her hands on her belly protectively. She is very forthcoming about her concerns but becomes visibly distressed when discussing potential allergy testing, expressing fear about harming her baby while also wanting to do what's best for delivery.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what happened when you had a reaction to penicillin?",
+      "How old were you when this penicillin reaction occurred?",
+      "Who told you that you were allergic to penicillin?",
+      "What specific symptoms did you experience with penicillin?",
+      "Have you ever actually taken penicillin or amoxicillin yourself?",
+      "What other antibiotics have you taken without problems?",
+      "Tell me about your mother's penicillin allergy - what happened to her?",
+      "Have you ever been tested for penicillin allergy by an allergist?",
+      "What did your OB doctor tell you about GBS and why you need antibiotics?",
+      "Are you having any contractions or signs of labor starting?",
+      "How has this pregnancy been going overall?",
+      "Do you have any other drug allergies or food allergies?",
+      "Have you ever had severe allergic reactions to anything else?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Prenatal vitamins.'",
-        "allergies": "'My allergies: Penicillin.'",
-        "family": "Mother: \"penicillin allergy\" (also unconfirmed)",
-        "social": "Tobacco: Never  Pregnancy: 34 weeks pregnant \u2014 GBS positive, needs intrapartum penicillin  Obstetrics: G2P1 at 34 weeks, GBS screen positive  Prior antibiotics: Has avoided all beta-lactams entire life based on mother's report  Concern: Very anxious about allergy testing while pregnant"
+      "default": "I'm not sure about that - I'm just really worried about what's safe for my baby right now.",
+      "onset": "I've never actually taken penicillin myself. My mom told me when I was little that I was allergic because she is, and I've avoided it my whole life.",
+      "character": "I don't really know what my reaction would be like since I've never had one myself. My mom said she got a rash.",
+      "location": "I've never had any reaction myself, but my mom said she got a rash all over her body.",
+      "severity": "I don't know how severe it would be - that's what scares me. I've just been told to avoid it completely.",
+      "aggravating": "My anxiety gets worse when I think about having to take something I've been told could hurt me, especially while I'm pregnant.",
+      "relieving": "Nothing really helps my worry except knowing that whatever we do will be safe for the baby.",
+      "associated": "I don't have any symptoms right now. I just feel anxious and scared about the delivery and needing antibiotics.",
+      "denies": "I've never had trouble breathing, swelling of my face or throat, or any severe reactions to anything. No hives or severe rashes.",
+      "history": "I've never actually taken penicillin, so I've never had a reaction myself. This is all based on what my family told me.",
+      "medications": "Prenatal vitamins",
+      "allergies": "Penicillin",
+      "family": "My mother says she's allergic to penicillin and got a rash, but I don't think she was ever properly tested either.",
+      "social": "I work as a teacher, don't smoke or drink. This is my second pregnancy - my first delivery went well. I'm 34 weeks along and my GBS test came back positive."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and vital signs",
+      "Skin examination for rashes or urticaria",
+      "HEENT examination for angioedema",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Lymph node examination",
+      "Fundal height measurement",
+      "Fetal heart tones assessment",
+      "Assessment for signs of preterm labor",
+      "Extremity examination for edema"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs": "Well-appearing pregnant woman in no distress, vital signs stable and normal for pregnancy",
+      "Skin examination for rashes or urticaria": "No rashes, urticaria, or other skin lesions present",
+      "HEENT examination for angioedema": "No facial swelling, lip swelling, or tongue swelling present",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, normal S1 and S2",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezing or respiratory distress",
+      "Lymph node examination": "No lymphadenopathy palpated",
+      "Fundal height measurement": "Fundal height appropriate for 34 weeks gestation",
+      "Fetal heart tones assessment": "Fetal heart rate 140s, regular rhythm, reassuring",
+      "Assessment for signs of preterm labor": "No contractions, cervix closed, no signs of preterm labor",
+      "Extremity examination for edema": "Trace pedal edema, normal for third trimester"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Unverified penicillin allergy (family history based) (correct diagnosis)",
+      "Low-risk penicillin allergy (remote childhood rash)",
+      "Penicillin intolerance rather than true allergy",
+      "True IgE-mediated penicillin allergy (must-not-miss diagnosis 1)",
+      "Severe penicillin allergy with anaphylaxis risk (must-not-miss diagnosis 2)",
+      "Non-allergic drug reaction misattributed to penicillin (common mimic 1)",
+      "Anxiety-related symptoms misinterpreted as allergic reaction (common mimic 2)"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on the documented 'penicillin allergy' without exploring that patient has never actually taken penicillin or had a reaction herself",
+      "prematureClosure": "Risk of immediately accepting family-reported allergy without detailed history-taking to determine if this is a true allergy versus family assumption",
+      "availabilityBias": "Recent cases of severe penicillin allergy may influence assessment, when most reported penicillin allergies are actually unverified or low-risk"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Keisha Williams: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview the patient, consider what specific details about her allergy history would be most important to determine the actual risk. What questions would help you distinguish between a true IgE-mediated reaction, a family assumption, and other possibilities?",
+      "phase5": "Based on your history and exam, what does it tell you that she's never actually taken penicillin herself? How does this change your risk assessment, and what are the implications for her GBS-positive pregnancy management?",
+      "finalDebrief": "This case highlights how many 'penicillin allergies' are unverified family assumptions rather than true allergies. Notice how your differential evolved from accepting the allergy label to questioning its validity. What systematic approach would you use for all patients with reported drug allergies?"
     }
-}
+  }
 };

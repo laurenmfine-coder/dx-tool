@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Bennett",
-  "patientHPI": "I came in for my regular checkup, but I've been having this terrible pain in my groin that started yesterday morning and keeps getting worse. It feels like something is stuck and won't go back in like it usually does, and now I'm feeling nauseous and can't seem to pass gas. The pain is so bad I can barely walk.",
+    "patientHPI": "I came in for my regular checkup, but I've been having this terrible pain in my groin that started yesterday morning and keeps getting worse. It feels like something is stuck and won't go back in like it usually does, and now I'm feeling nauseous and can't seem to pass gas. The pain is so bad I can barely walk.",
     "dob": "07/22/1953",
     "age": 71,
     "sex": "Male",
@@ -227,39 +227,147 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.5", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "137", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "23", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.5",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "137",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "23",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.2", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "160", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "7.2",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "160",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.0", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "205", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "205",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            { "test": "NT-proBNP", "value": "480", "unit": "pg/mL", "range": "<300", "flag": "H" }
+            {
+              "test": "NT-proBNP",
+              "value": "480",
+              "unit": "pg/mL",
+              "range": "<300",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -327,15 +435,42 @@ window.EMR_DATA = {
     "Son: Healthy, age 42"
   ],
   "socialHistory": [
-    ["Occupation", "Retired accountant"],
-    ["Marital", "Married"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional — 1 glass wine with dinner"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 15-20 min daily; limited by dyspnea and hernia discomfort"],
-    ["Housing", "Lives with wife in single-story home"],
-    ["Safety", "Denies IPV; wears seatbelt; no fall risk assessment concerns"],
-    ["Advance Directive", "Living will and HCP on file — wife designated"]
+    [
+      "Occupation",
+      "Retired accountant"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional — 1 glass wine with dinner"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 15-20 min daily; limited by dyspnea and hernia discomfort"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; no fall risk assessment concerns"
+    ],
+    [
+      "Advance Directive",
+      "Living will and HCP on file — wife designated"
+    ]
   ],
   "meta": {
     "caseId": "incarcerated-hernia-with-strangulation",
@@ -346,75 +481,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Harold Bennett is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Harold appears distressed and uncomfortable, frequently shifting position and grimacing with pain. He's cooperative but clearly anxious about his worsening symptoms, particularly concerned that his usual hernia 'trick' of pushing it back in isn't working this time. He's forthcoming with information but speaks in short bursts due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did urologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when this groin pain started and how it's different from usual?",
+      "You mentioned something won't go back in like it usually does - can you explain what you mean?",
+      "Have you had problems with a hernia in this area before?",
+      "Can you rate your pain from 1-10 and tell me if it's getting worse?",
+      "You mentioned nausea - have you vomited or had any bowel movements today?",
+      "When was your last bowel movement and have you been passing gas normally?",
+      "Does the pain stay in your groin or does it go anywhere else?",
+      "What makes the pain worse - movement, coughing, touching the area?",
+      "Have you tried anything to relieve the pain or reduce the bulge?",
+      "Any fever, chills, or feeling generally unwell?",
+      "Are you having any urinary symptoms - difficulty urinating or blood in urine?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies I should know about?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I came in for my regular checkup, but I've been having this terrible pain in my .'",
-        "character": "'It's urologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Incarcerated Inguinal Hernia with Strangulation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Lisinopril 20mg daily; Amlodipine 5mg daily; Furosemide 20mg daily; Metformin 500mg BID; Empagliflozin 10mg daily; Atorvastatin 40mg QHS.'",
-        "allergies": "'My allergies are Morphine, Shellfish.'",
-        "family": "Father: MI at age 68 (deceased at 72)  Mother: Atrial fibrillation, CHF, deceased at 84  Brother: HTN, T2DM, alive at 68",
-        "social": "Occupation: Retired accountant  Marital: Married  Tobacco: Never smoker  Alcohol: Occasional \u2014 1 glass wine with dinner  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble focusing with this pain. Could you ask that differently?",
+      "onset": "It started yesterday morning when I was getting dressed. At first it felt like my usual hernia acting up, but by afternoon it was much worse and I couldn't push it back in like I normally do.",
+      "character": "It's a constant, severe aching pain that feels like something is trapped and being squeezed. It's much different from my usual hernia discomfort.",
+      "location": "It's right here in my right groin, in the same spot where I've had hernia problems before. Sometimes I feel it in my lower belly too.",
+      "severity": "Right now it's about an 8 out of 10. Yesterday it started as maybe a 4, but it just keeps getting worse. I can barely walk normally.",
+      "aggravating": "Any movement makes it worse - coughing, standing up, even laughing. Touching the area is very painful.",
+      "relieving": "Nothing is helping. Usually I can push the bulge back in and get relief, but that's not working at all now. Even lying down doesn't help much.",
+      "associated": "I've been nauseous since last night and threw up once this morning. I haven't been able to pass gas since yesterday, and I'm feeling bloated.",
+      "denies": "No fever or chills. No blood in my urine. No chest pain or trouble breathing beyond my usual.",
+      "history": "I've had a right inguinal hernia for about 3 years. Usually I can push it back in and it gives me relief, but my doctor said I'd probably need surgery eventually.",
+      "medications": "Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Lisinopril 20mg daily; Amlodipine 5mg daily; Furosemide 20mg daily; Metformin 500mg BID; Empagliflozin 10mg daily; Atorvastatin 40mg QHS",
+      "allergies": "Morphine, Shellfish",
+      "family": "My father had heart problems and my mother had heart failure too. My brother has diabetes like me.",
+      "social": "I'm a retired accountant, married. I never smoked and just have an occasional glass of wine with dinner. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual inspection of inguinal region",
+      "Palpation of inguinal canal and external ring",
+      "Assessment of hernia reducibility",
+      "Percussion of abdomen for distension",
+      "Auscultation for bowel sounds",
+      "Assessment of hernia contents and bowel viability",
+      "Cough impulse test",
+      "Examination of contralateral inguinal region",
+      "Digital rectal examination",
+      "Assessment of scrotal contents"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Incarcerated Inguinal Hernia with Strangulation. Document specifically what you observe."
+      "Visual inspection of inguinal region": "Obvious bulge in right inguinal region extending toward scrotum, appears tense and discolored with slight dusky appearance",
+      "Palpation of inguinal canal and external ring": "Firm, tender, non-reducible mass in right inguinal canal, patient grimaces with gentle palpation",
+      "Assessment of hernia reducibility": "Hernia cannot be reduced with gentle pressure, remains firm and fixed in position",
+      "Percussion of abdomen for distension": "Tympanitic percussion notes over distended abdomen, suggesting bowel obstruction",
+      "Auscultation for bowel sounds": "High-pitched, tinkling bowel sounds with periods of silence, consistent with obstruction",
+      "Assessment of hernia contents and bowel viability": "Hernia sac feels firm and warm, concerning for compromised bowel within the sac",
+      "Cough impulse test": "No cough impulse appreciated, and patient experiences severe pain with coughing",
+      "Examination of contralateral inguinal region": "Left inguinal region normal, no masses or bulges palpated",
+      "Digital rectal examination": "Empty rectal vault, no stool palpated, normal prostate",
+      "Assessment of scrotal contents": "Right scrotal extension of hernia noted, testes normal bilaterally"
     },
     "ddxTargets": [
-        "Incarcerated Inguinal Hernia with Strangulation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Incarcerated Inguinal Hernia with Strangulation (correct diagnosis)",
+      "Incarcerated Inguinal Hernia without Strangulation",
+      "Small Bowel Obstruction from other cause",
+      "Testicular Torsion",
+      "Appendicitis with atypical presentation",
+      "Inguinal Lymphadenitis",
+      "Femoral Hernia with Incarceration"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Incarcerated Inguinal Hernia with Strangulation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Incarcerated Inguinal Hernia with Strangulation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Incarcerated Inguinal Hernia with Strangulation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known hernia history and assuming this is just a routine exacerbation rather than recognizing signs of strangulation",
+      "prematureClosure": "May stop evaluation after confirming non-reducible hernia without fully assessing for signs of strangulation and bowel compromise",
+      "availabilityBias": "Recent cases of simple hernias or common abdominal pain may overshadow recognition of this surgical emergency"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Bennett's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Incarcerated Inguinal Hernia with Strangulation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some key possibilities in your differential. Given this patient's presentation of acute groin pain, what specific historical details would help you distinguish between a simple hernia issue and something more urgent? What red flags should you be listening for?",
+      "phase5": "Your examination reveals a non-reducible hernia with concerning associated findings. Walk me through your clinical reasoning - what combination of history and physical findings is making you think about the urgency of this case? How does the presence of nausea, inability to pass gas, and bowel sound changes factor into your assessment?",
+      "finalDebrief": "This case illustrates how a known chronic condition can present as a surgical emergency. The key was recognizing that this wasn't just another hernia episode - the inability to reduce it, along with obstructive symptoms and examination findings suggesting compromised bowel, pointed to strangulation. How did your differential evolve as you gathered more information, and what clinical pearls will help you recognize strangulated hernias in the future?"
     }
-}
+  }
 };

@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Daniel Okafor",
-  "patientHPI": "I started getting this sharp, stabbing pain in my chest yesterday that gets much worse when I take a deep breath or when I lie down flat. I had a really bad cold about two weeks ago, and now this chest pain is making me worry something's seriously wrong.",
+    "patientHPI": "I started getting this sharp, stabbing pain in my chest yesterday that gets much worse when I take a deep breath or when I lie down flat. I had a really bad cold about two weeks ago, and now this chest pain is making me worry something's seriously wrong.",
     "dob": "08/02/2000",
     "age": "26",
     "sex": "Male",
@@ -283,158 +283,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Daniel Okafor is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Daniel appears anxious and concerned, frequently shifting position to find comfort and avoiding lying flat during the interview. He's articulate and forthcoming about his symptoms, clearly worried this could be something serious like a heart attack despite his young age.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly when this chest pain started?",
+      "What does the pain feel like - sharp, crushing, burning?",
+      "Can you point to where the pain is located?",
+      "Does the pain move or spread anywhere else?",
+      "On a scale of 1-10, how severe is the pain?",
+      "What makes the pain worse?",
+      "What makes the pain better, if anything?",
+      "Have you noticed any other symptoms like shortness of breath, fever, or palpitations?",
+      "Have you had any chest pain like this before?",
+      "Tell me about the cold you had two weeks ago",
+      "Are you taking any medications currently?",
+      "Do you have any known allergies?",
+      "Any family history of heart problems or sudden death?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Alcohol: Social  Occupation: Graduate student  Exercise: Runs 3-4x/week"
+      "default": "I'm not sure what you mean by that. Could you ask it differently?",
+      "onset": "The pain started yesterday morning when I woke up. It came on gradually at first but got much sharper throughout the day.",
+      "character": "It's a really sharp, stabbing pain - like someone is sticking a knife right into my chest.",
+      "location": "It's right here in the center of my chest, maybe slightly to the left side. Sometimes I feel it in my left shoulder too.",
+      "severity": "Right now it's about a 7 out of 10, but when I take a deep breath or try to lie down it becomes a 9. It's really hard to sleep.",
+      "aggravating": "Deep breathing makes it much worse, and lying flat is almost impossible. Coughing or sneezing is excruciating.",
+      "relieving": "Sitting up and leaning forward helps some. Ibuprofen took the edge off a little bit.",
+      "associated": "I've had a low-grade fever and feel pretty tired. No real shortness of breath unless the pain is really bad.",
+      "denies": "No nausea, no arm pain, no sweating or dizziness. My breathing is fine when the pain isn't bad.",
+      "history": "Never had chest pain like this before. I'm young and healthy, I run regularly.",
+      "medications": "no medications",
+      "allergies": "NKDA",
+      "family": "No family history of heart problems or anything like that. Everyone's pretty healthy.",
+      "social": "I'm a graduate student in engineering. I run 3-4 times a week, never smoked, just drink socially on weekends."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Vital signs assessment",
+      "Cardiac auscultation",
+      "Lung auscultation",
+      "Chest wall palpation",
+      "Pericardial friction rub assessment",
+      "JVD evaluation",
+      "Lower extremity edema check",
+      "Hepatojugular reflux test",
+      "Pulsus paradoxus measurement",
+      "ECG interpretation"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Vital signs assessment": "BP 122/76, HR 92, RR 18, Temp 38.2°C, O2 sat 99% on room air",
+      "Cardiac auscultation": "Three-component pericardial friction rub best heard at left sternal border with patient leaning forward",
+      "Lung auscultation": "Clear breath sounds bilaterally, no rales or wheezes",
+      "Chest wall palpation": "No chest wall tenderness, no crepitus",
+      "Pericardial friction rub assessment": "High-pitched scratching sound present during inspiration, expiration, and ventricular systole",
+      "JVD evaluation": "No jugular venous distention at 45 degrees",
+      "Lower extremity edema check": "No peripheral edema present",
+      "Hepatojugular reflux test": "Negative",
+      "Pulsus paradoxus measurement": "8 mmHg (normal)",
+      "ECG interpretation": "Diffuse ST elevation in leads I, II, aVF, V2-V6 with PR depression"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Acute pericarditis (correct diagnosis)",
+      "Viral myocarditis",
+      "Pleuritis/pleurisy",
+      "Acute myocardial infarction",
+      "Pulmonary embolism",
+      "Costochondritis",
+      "GERD with chest pain"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on recent URI and dismissing cardiac causes, or conversely anchoring on chest pain and over-investigating for MI in young patient",
+      "prematureClosure": "May stop at costochondritis or viral syndrome without recognizing the classic pericarditis triad of chest pain, fever, and friction rub",
+      "availabilityBias": "Recent emphasis on MI protocols may lead to over-focus on acute coronary syndrome despite atypical presentation for age group"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Daniel Okafor: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified some good differentials for chest pain in a young adult. Given his recent viral illness, what post-viral complications should you specifically explore? What key historical features will help you distinguish between inflammatory and ischemic causes?",
+      "phase5": "Excellent work identifying the friction rub and positional chest pain. How do the ECG changes and clinical presentation fit together? What's your assessment of this patient's hemodynamic stability, and what would make you concerned about complications?",
+      "finalDebrief": "This case demonstrates classic acute pericarditis following viral URI. Notice how the combination of pleuritic chest pain, fever, friction rub, and diffuse ST elevation with PR depression clinched the diagnosis. What red flags would prompt you to worry about cardiac tamponade in pericarditis patients?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['pericarditis-v1'] = {
-  id: 'pericarditis-v1', name: 'Daniel Okafor',
-  chiefComplaint: 'Pericarditis — NSAID Therapy and Colchicine',
-  diagnosis: 'Pericarditis — NSAID Therapy and Colchicine',
-  orders: {
-    correct: [{ id: 'nsaid-colchicine', name: 'Ibuprofen 600mg TID × 1-2 weeks + colchicine 0.5mg BID × 3 months', rationale: 'NSAIDs are first-line for acute pericarditis. Ibuprofen 600mg TID (with food/PPI) or aspirin 750-1000mg TID. COLCHICINE is added to reduce recurrence (COPE trial, ICAP trial): 0.5mg BID × 3 months (or 0.5mg daily if <70kg). Reduces recurrence rate from 30-50% to 10-15%.' },{ id: 'activity-restriction', name: 'Restrict physical activity until asymptomatic + CRP normalized', rationale: 'Athletes with pericarditis: restrict from competitive sports for minimum 3 months after symptom resolution + CRP normalization. Non-athletes: avoid strenuous activity until asymptomatic. Activity restriction reduces recurrence risk.' }],
-    incorrect: [{ id: 'steroids-pericarditis', name: 'Prednisone — first-line treatment for pericarditis', rationale: 'Corticosteroids are NOT first-line for pericarditis — they increase recurrence rate (COPPS trial showed higher recurrence with corticosteroids). Reserve steroids for: pericarditis refractory to NSAIDs + colchicine, connective tissue disease-associated pericarditis, uremic pericarditis, or specific autoimmune causes.' },{ id: 'antibiotics-pericarditis', name: 'Antibiotics — pericarditis is likely infectious', rationale: 'Most pericarditis in developed countries is viral or idiopathic — antibiotics are NOT indicated. Specific antibiotic indications: bacterial (purulent) pericarditis (rare, <5%), TB pericarditis (endemic areas). Purulent pericarditis requires pericardiocentesis + drainage + IV antibiotics.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['ECG in pericarditis: Stage I (diffuse ST elevation + PR depression — ALL leads except aVR and V1). Stage II (ST returns to baseline). Stage III (T-wave inversions). Stage IV (normalization). Saddle-shaped ST elevation in ALL leads (vs STEMI: localized, concave upward).','Pericarditis vs STEMI distinction: pericarditis — diffuse ST elevation in multiple leads, no reciprocal changes (aVR may have ST depression), PR depression, friction rub, pleuritic chest pain, young age, recent viral illness. STEMI — localized leads, reciprocal changes, no PR depression.','Colchicine mechanism: inhibits microtubule polymerization → inhibits neutrophil migration and cytokine release → reduces pericardial inflammation. Most effective if started at the onset of first episode (ICAP trial: 0.5mg BID × 3 months).'],
-    boardPearls: ['Constrictive pericarditis: fibrocalcific pericardium → impaired ventricular filling. Causes: TB (worldwide), prior cardiac surgery, radiation, idiopathic/viral. Kussmaul sign (JVP rises with inspiration), pericardial knock on auscultation. Treatment: pericardiectomy.','Cardiac tamponade: pericardial effusion → elevated intrapericardial pressure → impaired cardiac filling. Beck Triad: hypotension + muffled heart sounds + distended neck veins. Pulsus paradoxus >10 mmHg. Pericardiocentesis is life-saving.','Elevated CRP in pericarditis: used to monitor treatment response and guide duration. CRP normalization before stopping NSAIDs/colchicine reduces recurrence. Do not stop treatment based on symptoms alone.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Daniel Okafor is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Daniel Okafor \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

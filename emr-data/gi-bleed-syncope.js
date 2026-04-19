@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Hansen",
-  "patientHPI": "I was in the bathroom this morning and the next thing I knew I was on the floor - I've been feeling really dizzy and lightheaded lately, and this isn't the first time I've passed out like this.",
+    "patientHPI": "I was in the bathroom this morning and the next thing I knew I was on the floor - I've been feeling really dizzy and lightheaded lately, and this isn't the first time I've passed out like this.",
     "dob": "09/27/1960",
     "age": "66",
     "sex": "Female",
@@ -361,75 +361,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Dorothy Hansen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Dorothy appears anxious and concerned about her recurrent episodes of syncope, frequently touching her forehead and speaking with a shaky voice. She is cooperative but somewhat embarrassed about falling in the bathroom and worried about her ability to live safely alone.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did passed out in the bathroom no pain location \u2014 main issue is dizziness and passing out start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened before you passed out?",
+      "Have you had episodes of dizziness or fainting before this?",
+      "Do you notice the dizziness when you change positions, like standing up?",
+      "Have you had any black, tarry stools or blood in your stool recently?",
+      "Any nausea, vomiting, or stomach pain?",
+      "Have you noticed any unusual fatigue or weakness lately?",
+      "Any chest pain, palpitations, or shortness of breath?",
+      "How much ibuprofen do you typically take for your arthritis pain?",
+      "Have you had any recent injuries or noticed unusual bruising?",
+      "Any changes in your appetite or weight recently?",
+      "How has your chronic back pain been lately?",
+      "Have you increased any of your medications recently?",
+      "Any recent illnesses or infections?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was in the bathroom this morning and the next thing I knew I was on the floor .'",
-        "character": "'It's passed out in the bathroom no pain location \u2014 main issue is dizziness and passing out \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Ibuprofen; Aspirin; Omeprazole.'",
-        "allergies": "'My allergies are Codeine.'",
-        "family": "Father: colon cancer at 68  Mother: stroke",
-        "social": "Tobacco: 20 pack-years, current smoker  Alcohol: 2-3 whiskeys daily for 30+ years  Drugs: Denies  Occupation: Retired factory worker  Living: Lives alone"
+      "default": "I'm not sure I understand what you mean - could you ask that differently?",
+      "onset": "The dizziness has been going on for about 2-3 weeks, getting worse. This morning I stood up from the toilet and everything went black.",
+      "character": "It's like the room is spinning and I feel very lightheaded, especially when I stand up or move around quickly.",
+      "location": "The dizziness is in my head, and I feel weak all over my body.",
+      "severity": "The dizziness is about a 7 out of 10 - it's really affecting my daily activities and I'm scared to be alone.",
+      "aggravating": "It gets much worse when I stand up quickly or walk around. Even just sitting up in bed makes me dizzy.",
+      "relieving": "Lying down helps some, and I've been trying to move more slowly, but it's still there.",
+      "associated": "I've been feeling very tired and weak lately, and my stomach has been bothering me more than usual.",
+      "denies": "No chest pain, no shortness of breath, no palpitations that I've noticed.",
+      "history": "I've had a few dizzy spells over the past month, and I think I may have blacked out once before about a week ago.",
+      "medications": "Ibuprofen; Aspirin; Omeprazole",
+      "allergies": "Codeine",
+      "family": "My father had colon cancer and my mother had a stroke, but I don't think that's related to this.",
+      "social": "I'm retired from factory work, live alone, smoke about a pack a day, and have a couple whiskeys each evening - have for years."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Orthostatic vital signs",
+      "Cardiac auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Rectal examination for occult blood",
+      "Conjunctival pallor assessment",
+      "Capillary refill",
+      "Neurological assessment including cranial nerves",
+      "Skin examination for pallor or petechiae",
+      "Lymph node examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Orthostatic vital signs": "Positive orthostatic changes: BP drops from 94/62 supine to 72/48 sitting with HR increase from 118 to 136",
+      "Cardiac auscultation": "Tachycardic rate, regular rhythm, no murmurs, rubs, or gallops appreciated",
+      "Pulmonary auscultation": "Clear to auscultation bilaterally, no adventitious sounds",
+      "Abdominal examination": "Soft, non-distended, mild epigastric tenderness, no masses or organomegaly",
+      "Rectal examination for occult blood": "Stool positive for occult blood",
+      "Conjunctival pallor assessment": "Marked conjunctival pallor present bilaterally",
+      "Capillary refill": "Delayed capillary refill of 3-4 seconds",
+      "Neurological assessment including cranial nerves": "Cranial nerves intact, no focal deficits, mild generalized weakness",
+      "Skin examination for pallor or petechiae": "Generalized pallor, no petechiae or ecchymoses noted",
+      "Lymph node examination": "No lymphadenopathy appreciated"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Gastrointestinal bleeding with anemia (correct diagnosis)",
+      "Orthostatic hypotension secondary to dehydration",
+      "Medication-induced bleeding",
+      "Myocardial infarction",
+      "Aortic stenosis",
+      "Vasovagal syncope",
+      "Vertigo/vestibular disorder"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'dizziness' and pursue vestibular causes without considering systemic causes like bleeding",
+      "prematureClosure": "Risk of stopping at orthostatic hypotension without investigating the underlying cause of volume depletion",
+      "availabilityBias": "May focus on common causes of syncope in elderly patients while missing GI bleeding from NSAID use"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dorothy Hansen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at this 66-year-old woman with syncope and your differential diagnosis, what key historical points would help you distinguish between these possibilities? Consider her medication list carefully - what complications might arise from her current regimen?",
+      "phase5": "Now that you've completed your history and physical exam, let's reconsider your differential diagnosis. What do the orthostatic vital signs and physical findings tell you? How does the combination of her medications, positive occult blood, and pallor change your thinking about the underlying pathophysiology?",
+      "finalDebrief": "This case illustrates how medication-induced GI bleeding can present as syncope in elderly patients. The combination of dual antiplatelet therapy (aspirin and ibuprofen) significantly increased her bleeding risk despite PPI use. How did your differential diagnosis evolve as you gathered more clinical data? What red flags should have pointed you toward GI bleeding early in the evaluation?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jerome Carter",
-  "patientHPI": "I know my diabetes hasn't been well controlled lately and I've been skipping my insulin sometimes and not eating right, plus I've missed my eye doctor appointments because I've been busy at work.",
+    "patientHPI": "I know my diabetes hasn't been well controlled lately and I've been skipping my insulin sometimes and not eating right, plus I've missed my eye doctor appointments because I've been busy at work.",
     "dob": "02/14/1960",
     "age": 64,
     "sex": "Male",
@@ -167,7 +167,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "210 lbs",
       "ht": "5'9\"",
-      "bmi": 31.0,
+      "bmi": 31,
       "setting": "PCP Office"
     },
     {
@@ -234,34 +234,112 @@ window.EMR_DATA = {
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "9.4", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "223", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "9.4",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "223",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "198", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "32", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "38", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Potassium", "value": "5.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "198",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "38",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "URINE ALBUMIN/CREATININE RATIO",
           "results": [
-            { "test": "Urine Albumin/Creatinine", "value": "320", "unit": "mg/g", "range": "<30", "flag": "H" }
+            {
+              "test": "Urine Albumin/Creatinine",
+              "value": "320",
+              "unit": "mg/g",
+              "range": "<30",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.0", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "245", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -329,15 +407,42 @@ window.EMR_DATA = {
     "Brother: T2DM, CKD, alive at 58"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker (disability — neuropathy)"],
-    ["Marital", "Married, 3 adult children"],
-    ["Tobacco", "Former smoker — 15 pack-years; quit 2010"],
-    ["Alcohol", "Denies — stopped per physician recommendation"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — limited by neuropathy and vision; short walks with wife"],
-    ["Housing", "Lives with wife in single-family home; limited transportation — relies on family for medical appointments"],
-    ["Safety", "No firearms; non-slip mats; adequate lighting (fall prevention for neuropathy)"],
-    ["Advance Directive", "Health care proxy: wife Denise Carter; Full code"]
+    [
+      "Occupation",
+      "Retired postal worker (disability — neuropathy)"
+    ],
+    [
+      "Marital",
+      "Married, 3 adult children"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 15 pack-years; quit 2010"
+    ],
+    [
+      "Alcohol",
+      "Denies — stopped per physician recommendation"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — limited by neuropathy and vision; short walks with wife"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home; limited transportation — relies on family for medical appointments"
+    ],
+    [
+      "Safety",
+      "No firearms; non-slip mats; adequate lighting (fall prevention for neuropathy)"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: wife Denise Carter; Full code"
+    ]
   ],
   "meta": {
     "caseId": "vitreous-hemorrhage",
@@ -348,75 +453,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jerome Carter is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Jerome appears anxious and somewhat embarrassed about his poor diabetes management, frequently apologizing for missing appointments and admitting to medication non-compliance. He's cooperative but clearly distressed about his sudden vision loss, speaking in a worried tone and asking repeatedly if he's going to go blind.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened with your vision?",
+      "When did you first notice the vision changes?",
+      "Is this affecting one eye or both eyes?",
+      "Can you describe what you're seeing - is it blurry, dark, or something else?",
+      "Have you had any eye pain or headache?",
+      "Have you noticed any flashing lights or floating spots?",
+      "How has your blood sugar control been lately?",
+      "When was your last eye exam with an ophthalmologist?",
+      "Have you had any recent injuries or trauma to your head or eyes?",
+      "Are you experiencing any nausea or vomiting?",
+      "Have you had any similar episodes before?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I know my diabetes hasn't been well controlled lately and I've been skipping my .'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Insulin Glargine (Lantus) 32 units SQ QHS; Insulin Lispro (Humalog) sliding scale AC; Metformin 1000mg BID; Amlodipine 10mg daily; Lisinopril 40mg daily; Rosuvastatin 20mg QHS; Gabapentin 300mg TID; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Penicillin, ACE Inhibitor Cough.'",
-        "family": "Mother: T2DM, CKD (on dialysis), deceased at 70  Father: T2DM, glaucoma, HTN, deceased at 72  Sister: T2DM with retinopathy, alive at 60",
-        "social": "Occupation: Retired postal worker (disability \u2014 neuropathy)  Marital: Married, 3 adult children  Tobacco: Former smoker \u2014 15 pack-years; quit 2010  Alcohol: Denies \u2014 stopped per physician recommendation  Drugs: Denies"
+      "default": "I'm sorry, can you ask that a different way? I'm really worried about my eyes right now and having trouble concentrating.",
+      "onset": "It started suddenly this morning when I woke up. I opened my eyes and my right eye was like looking through dark, murky water. It scared me so much I came straight here.",
+      "character": "It's like there's a dark curtain or cloud in my right eye. Everything looks murky and dark, like looking through dirty water or thick smoke.",
+      "location": "It's just my right eye. My left eye seems okay, though it's not perfect either - it's been getting blurry over the past few months.",
+      "severity": "I'd say it's a 9 out of 10 for how worried I am. I can barely see shapes and light with my right eye. I'm terrified I'm going blind.",
+      "aggravating": "Moving my eyes around or looking in different directions doesn't seem to make it better or worse. It's just constantly dark and murky.",
+      "relieving": "Nothing helps. I tried closing my eyes and resting, but when I open them it's still the same.",
+      "associated": "No pain in my eyes, but I've been having more headaches lately. My feet have been more numb than usual, and I've been urinating a lot more.",
+      "denies": "No eye pain, no flashing lights today, no nausea or vomiting, no recent injuries to my head or eyes.",
+      "history": "I've never had anything this sudden before, but my vision has been getting worse gradually over the past year. I know I have diabetic eye problems already.",
+      "medications": "Insulin Glargine (Lantus) 32 units SQ QHS; Insulin Lispro (Humalog) sliding scale AC; Metformin 1000mg BID; Amlodipine 10mg daily; Lisinopril 40mg daily; Rosuvastatin 20mg QHS; Gabapentin 300mg TID; Aspirin 81mg daily",
+      "allergies": "Penicillin, ACE Inhibitor Cough",
+      "family": "My mother and father both had diabetes and eye problems. My father actually had glaucoma, and my sister has diabetic retinopathy too. My mother ended up on dialysis before she died.",
+      "social": "I'm retired from the postal service on disability because of my neuropathy. I'm married with three grown kids. I used to smoke about a pack a day for 15 years but quit in 2010. I don't drink anymore - my doctor told me to stop."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual acuity testing both eyes",
+      "Pupillary light reflex and relative afferent pupillary defect (RAPD) testing",
+      "Extraocular movements",
+      "Visual field testing by confrontation",
+      "Direct ophthalmoscopy",
+      "Intraocular pressure measurement (tonometry)",
+      "Slit lamp examination",
+      "Fundoscopic examination with dilated pupils",
+      "Blood pressure measurement",
+      "Blood glucose check"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy. Document specifically what you observe."
+      "Visual acuity testing both eyes": "Right eye: count fingers at 3 feet, Left eye: 20/60",
+      "Pupillary light reflex and relative afferent pupillary defect (RAPD) testing": "Right pupil shows sluggish response to direct light, positive RAPD in right eye",
+      "Extraocular movements": "Full and intact bilaterally, no pain with movement",
+      "Visual field testing by confrontation": "Right eye shows significant superior and nasal field defects, left eye shows mild peripheral defects",
+      "Direct ophthalmoscopy": "Right eye: red reflex significantly diminished, fundus details obscured by vitreous opacity",
+      "Intraocular pressure measurement (tonometry)": "Right eye: 16 mmHg, Left eye: 14 mmHg",
+      "Slit lamp examination": "Right eye shows vitreous debris and hemorrhage, left eye shows early cataract changes",
+      "Fundoscopic examination with dilated pupils": "Right eye: dense vitreous hemorrhage obscuring fundus view, Left eye: proliferative diabetic retinopathy with neovascularization, dot-blot hemorrhages, hard exudates",
+      "Blood pressure measurement": "158/94 mmHg",
+      "Blood glucose check": "284 mg/dL"
     },
     "ddxTargets": [
-        "Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy (Untreated) (correct diagnosis)",
+      "Retinal Detachment",
+      "Central Retinal Vein Occlusion",
+      "Acute Angle-Closure Glaucoma",
+      "Giant Cell Arteritis with Anterior Ischemic Optic Neuropathy",
+      "Posterior Vitreous Detachment with Retinal Tear",
+      "Hypertensive Retinopathy with Acute Changes"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'eye emergency' and immediately jumping to acute glaucoma or retinal detachment without considering diabetic complications in this poorly controlled diabetic patient",
+      "prematureClosure": "Risk of stopping evaluation after finding elevated blood pressure and attributing vision loss to hypertensive emergency without proper fundoscopic examination",
+      "availabilityBias": "Risk of being influenced by recent cases of acute glaucoma or stroke rather than considering the most likely diagnosis in a poorly controlled diabetic with known retinopathy"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jerome Carter's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Vitreous Hemorrhage Secondary to Proliferative Diabetic Retinopathy (Untreated). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified this as an acute vision loss in a diabetic patient. Before you interview Jerome, think about the different causes of sudden vision loss. What specific aspects of his diabetes history and current control might be most relevant? What questions will help you distinguish between vascular, mechanical, and inflammatory causes?",
+      "phase5": "Your examination findings show vitreous hemorrhage in the right eye with evidence of proliferative diabetic retinopathy. How does this fit with Jerome's history of poor glycemic control and missed ophthalmology appointments? What does the presence of neovascularization in the left eye tell you about disease progression? Consider how his other diabetic complications support your diagnosis.",
+      "finalDebrief": "This case demonstrates how uncontrolled diabetes leads to progressive retinal complications. Jerome's vitreous hemorrhage resulted from bleeding of fragile neovascular vessels in proliferative diabetic retinopathy. Notice how his missed appointments, poor glycemic control, and existing diabetic complications all pointed toward this diagnosis. The key was recognizing that sudden vision loss in a poorly controlled diabetic most commonly results from diabetic retinopathy complications rather than other acute causes."
     }
-}
+  }
 };

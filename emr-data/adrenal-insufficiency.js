@@ -420,75 +420,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Diane Charpentier is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Diane appears noticeably fatigued and anxious, sitting slumped in her chair with a worried expression. She is cooperative but seems somewhat confused about the severity of her symptoms, minimizing her condition while appearing visibly unwell. Her speech is slow and she occasionally pauses mid-sentence as if struggling to concentrate.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me more about this weakness and feeling sick - when did it start and how has it progressed?",
+      "Have you been taking your hydrocortisone and fludrocortisone as prescribed?",
+      "Have you had any recent illness, infection, or stressful events?",
+      "Have you had any nausea, vomiting, or diarrhea recently?",
+      "Any abdominal pain or cramping?",
+      "Have you been able to eat and drink normally?",
+      "Any dizziness, especially when standing up?",
+      "Have you had any salt cravings or changes in appetite?",
+      "Any skin changes or darkening you've noticed?",
+      "When was the last time you used your emergency injection?",
+      "Have you ever had episodes like this before?",
+      "Any chest pain, shortness of breath, or palpitations?",
+      "Have you been urinating normally?"
     ],
     "patientResponses": {
-      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've been doing well on my usual medications and my energy has been stable, but .'",
-      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Acute Adrenal Crisis.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM — Emergency Kit.'",
-      "allergies": "'My allergies are Prednisone.'",
-      "family": "Mother (age 82): Hashimoto thyroiditis, pernicious anemia  Father (age 84): Type 2 Diabetes, CAD  Sister (age 53): Graves disease, vitiligo",
-      "social": "Occupation: Freelance translator (French/English) — works from home  Marital: Married x 28 years; husband Philippe is aware of sick-day rules and emergency injection  Tobacco: Never  Alcohol: Rare — occasional glass of wine  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble concentrating right now. Could you repeat that or ask it differently?",
+      "onset": "It started about 2-3 weeks ago, just feeling more tired than usual. But this past week it's gotten much worse - I can barely get out of bed and everything feels like such an effort.",
+      "character": "It's this overwhelming weakness and fatigue, like my whole body is just shutting down. I feel nauseated most of the time and everything tastes awful.",
+      "location": "The weakness is everywhere - my arms, legs, I can barely lift my head sometimes. My stomach has been cramping on and off.",
+      "severity": "The weakness is probably an 8 out of 10 - I couldn't even make it to the kitchen this morning without sitting down. It's completely disrupting my work.",
+      "aggravating": "Standing up makes me incredibly dizzy, and any physical activity just wipes me out completely. I feel worse when I haven't eaten, but eating is so hard.",
+      "relieving": "Nothing really helps. Lying down helps a little with the dizziness, but the weakness and nausea are always there.",
+      "associated": "I've been having nausea and vomiting for the past few days, some diarrhea, terrible stomach cramps, and I'm craving salt like crazy. I've been dizzy and my heart feels like it's racing.",
+      "denies": "No chest pain, no trouble breathing at rest, no fever that I know of, no headaches, no vision changes.",
+      "history": "I had something similar about 3 years ago when I had the flu and ended up in the hospital. They said I needed to increase my medications when I'm sick, but I've been feeling so awful I keep forgetting doses.",
+      "medications": "Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM — Emergency Kit",
+      "allergies": "Prednisone",
+      "family": "My mother has Hashimoto's thyroiditis and pernicious anemia. My father has diabetes and heart disease. My sister has Graves' disease and vitiligo like me.",
+      "social": "I'm a freelance translator working from home, married for 28 years. My husband Philippe knows about my condition and the emergency injection. I don't smoke, rarely drink alcohol, no drugs."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "Orthostatic vital signs",
+      "Skin examination for hyperpigmentation",
       "Abdominal examination",
-      "Extremity assessment",
-      "Skin examination",
-      "Targeted system examination"
+      "Cardiovascular examination",
+      "Neurological examination focusing on mental status",
+      "Assessment of skin turgor and mucous membranes",
+      "Examination for signs of vitiligo",
+      "Deep tendon reflexes",
+      "Inspection of palmar creases and buccal mucosa"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe."
+      "Orthostatic vital signs": "Significant orthostatic hypotension - BP drops from 78/48 supine to 58/40 standing with HR increase to 135, patient nearly faints",
+      "Skin examination for hyperpigmentation": "Diffuse hyperpigmentation noted, especially prominent on knuckles, elbows, and surgical scars",
+      "Abdominal examination": "Soft, diffusely tender without rebound or guarding, hypoactive bowel sounds",
+      "Cardiovascular examination": "Tachycardic, regular rhythm, no murmurs, weak pulses, delayed capillary refill >3 seconds",
+      "Neurological examination focusing on mental status": "Alert but confused and slow to respond, difficulty with concentration, no focal deficits",
+      "Assessment of skin turgor and mucous membranes": "Poor skin turgor, dry mucous membranes indicating dehydration",
+      "Examination for signs of vitiligo": "Patches of depigmented skin visible on hands and arms consistent with known vitiligo",
+      "Deep tendon reflexes": "Hypoactive reflexes throughout, consistent with electrolyte abnormalities",
+      "Inspection of palmar creases and buccal mucosa": "Dark pigmentation visible in palmar creases and along gum line"
     },
     "ddxTargets": [
-      "Acute Adrenal Crisis (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia — Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement (correct diagnosis)",
+      "Gastroenteritis with severe dehydration",
+      "Sepsis with distributive shock",
+      "Diabetic ketoacidosis",
+      "Acute myocardial infarction with cardiogenic shock",
+      "Medication non-compliance in chronic adrenal insufficiency",
+      "Thyroid storm"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Adrenal Crisis, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Acute Adrenal Crisis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Acute Adrenal Crisis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the patient's downplaying of symptoms and missing the life-threatening nature of adrenal crisis in a known Addison's patient",
+      "prematureClosure": "May stop at simple medication non-compliance without recognizing this is acute adrenal crisis requiring immediate IV steroids",
+      "availabilityBias": "Common presentations like gastroenteritis may overshadow the less common but critical adrenal crisis diagnosis"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Diane Charpentier's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia — Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some concerning differentials. This patient has known Addison's disease - what specific questions about her medication adherence and recent stressors would be most critical? What red flags in adrenal insufficiency should you be listening for?",
+      "phase5": "Given her known adrenal insufficiency, hypotension, and recent GI illness, what is the most likely diagnosis? What immediate interventions does this patient need, and what lab abnormalities would you expect to see?",
+      "finalDebrief": "This case illustrates how patients with adrenal insufficiency can rapidly decompensate during stress. The key learning points are recognizing adrenal crisis, understanding sick-day rules, and the importance of immediate IV steroids before lab confirmation. How did your differential evolve as you gathered more information about her missed medications and recent illness?"
     }
   }
 };

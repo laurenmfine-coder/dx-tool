@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andrew Chen",
-  "patientHPI": "I started this new medication for my depression about a week ago, and now I'm feeling really jittery and sweaty with muscle twitches, and I can't seem to sit still.",
+    "patientHPI": "I started this new medication for my depression about a week ago, and now I'm feeling really jittery and sweaty with muscle twitches, and I can't seem to sit still.",
     "dob": "08/10/1986",
     "age": "40",
     "sex": "Male",
@@ -270,158 +270,79 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Andrew Chen is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Andrew appears anxious and restless, unable to sit still during the interview with visible tremor and diaphoresis. He is cooperative and forthcoming but seems confused about why he's feeling so unwell, expressing concern that his new medication might be causing problems. His distress level is moderate to high as he's experiencing uncomfortable physical symptoms that are interfering with his daily activities.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly when these symptoms started?",
+      "What medications are you currently taking for your depression?",
+      "When did you start the new antidepressant and did you stop the old one?",
+      "How would you rate the severity of your symptoms on a scale of 1-10?",
+      "Are you experiencing any muscle stiffness or jaw clenching?",
+      "Have you had any changes in your mental status or confusion?",
+      "Are you having any nausea, vomiting, or diarrhea?",
+      "Have you noticed any changes in your reflexes or muscle jerking?",
+      "Are you experiencing any headaches or visual changes?",
+      "Have you taken any other medications or supplements recently?",
+      "Do you have any drug allergies?",
+      "Have you ever had a reaction like this before to any medications?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Sertraline; Phenelzine.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Medication error: New psychiatrist started MAOI without washout from SSRI  Tobacco: Never"
+      "default": "I'm not sure what you mean by that. I'm just really shaky and can't seem to calm down.",
+      "onset": "The symptoms started about 3-4 days ago, maybe Tuesday, and they've been getting progressively worse. It started with just feeling jittery but now I'm sweating constantly and can't stop shaking.",
+      "character": "It's like I can't control my muscles - they're twitching and jerking on their own. I feel like I'm revved up inside, like I've had way too much caffeine, but much worse.",
+      "location": "The muscle twitching is mainly in my arms and legs, and my jaw feels tight. The sweating is all over my body.",
+      "severity": "I'd say it's about an 8 out of 10. I can barely function at work and I'm not sleeping because of all the twitching and sweating.",
+      "aggravating": "Moving around seems to make the muscle jerking worse, and any loud noises or bright lights make me feel more agitated.",
+      "relieving": "Nothing really helps. I tried taking some ibuprofen thinking I was getting sick, but it didn't do anything. Sitting still is impossible.",
+      "associated": "I've been having some nausea and my heart feels like it's racing. I also have this pounding headache and feel really hot all the time.",
+      "denies": "I haven't had any chest pain, shortness of breath, or fainting. No vomiting, just nausea. I'm not confused, just really agitated.",
+      "history": "No, I've never experienced anything like this before. I've been on antidepressants for a few years without any major problems.",
+      "medications": "Sertraline; Phenelzine",
+      "allergies": "NKDA",
+      "family": "No family history of medication reactions or psychiatric conditions that I know of. My parents are generally healthy.",
+      "social": "I work as an accountant, pretty sedentary job. I don't smoke and only drink occasionally on weekends. No recreational drugs. This all started after I saw a new psychiatrist who wanted to try a different medication approach."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Vital signs assessment",
+      "Mental status examination",
+      "Deep tendon reflexes",
+      "Ankle clonus testing",
+      "Muscle rigidity assessment",
+      "Tremor observation",
+      "Diaphoresis assessment",
+      "Ocular clonus testing",
+      "Skin temperature and moisture",
+      "Cardiovascular examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Vital signs assessment": "BP 168/102, HR 128, Temp 39.8°C, RR 22, SpO2 96% on room air",
+      "Mental status examination": "Alert and oriented but restless, anxious affect, no confusion or altered consciousness",
+      "Deep tendon reflexes": "Hyperreflexia 3+ throughout, most pronounced in lower extremities",
+      "Ankle clonus testing": "Sustained clonus present bilaterally, more than 5 beats",
+      "Muscle rigidity assessment": "Mild muscle rigidity in extremities, lead-pipe quality",
+      "Tremor observation": "Fine tremor of hands at rest, worsens with movement",
+      "Diaphoresis assessment": "Profuse diaphoresis, clothing visibly damp",
+      "Ocular clonus testing": "Intermittent ocular clonus present",
+      "Skin temperature and moisture": "Skin hot and diaphoretic to touch",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, elevated blood pressure"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Serotonin syndrome (correct diagnosis)",
+      "Neuroleptic malignant syndrome",
+      "Anticholinergic toxicity",
+      "Malignant hyperthermia",
+      "Thyrotoxicosis",
+      "Sympathomimetic intoxication",
+      "Withdrawal syndrome"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on psychiatric history and assume this is anxiety or panic disorder, missing the medication interaction",
+      "prematureClosure": "Might stop at 'medication side effect' without recognizing the specific dangerous interaction between MAOI and SSRI",
+      "availabilityBias": "May think of more common antidepressant side effects rather than the rare but serious serotonin syndrome"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Andrew Chen: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient has concerning vital signs and neurologic symptoms after starting a new psychiatric medication. Before you interview him, think about what specific medication interactions might cause this constellation of findings. What questions would help you identify a potentially dangerous drug combination?",
+      "phase5": "You've identified hyperreflexia, clonus, hyperthermia, and autonomic instability in a patient on multiple psychiatric medications. This triad of findings should make you think of a specific toxidrome. How do the physical findings help narrow your differential diagnosis, and what's the most likely explanation for this patient's presentation?",
+      "finalDebrief": "This case demonstrates classic serotonin syndrome from concurrent MAOI and SSRI use. The key teaching points are recognizing the triad of altered mental status, neuromuscular abnormalities (clonus, hyperreflexia), and autonomic instability. This highlights the critical importance of medication reconciliation and proper washout periods when switching between antidepressant classes. How did your thinking evolve as you gathered more history about the medication timing and physical exam findings?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['serotonin-syndrome'] = {
-  id: 'serotonin-syndrome', name: 'Andrew Chen',
-  chiefComplaint: 'Serotonin Syndrome — Hunter Criteria and Cyproheptadine',
-  diagnosis: 'Serotonin Syndrome — Hunter Criteria and Cyproheptadine',
-  orders: {
-    correct: [{ id: 'cyproheptadine', name: 'Cyproheptadine 12mg PO/NGT — serotonin antagonist, first-line specific treatment', rationale: 'Cyproheptadine is a histamine H1/serotonin 5-HT2A antagonist. It is the only specific antidote for serotonin syndrome. Give 12mg immediately, then 2mg every 2h until symptoms resolve (max 32mg/24h). Also supportive: benzodiazepines for agitation, cooling for hyperthermia, IV fluids.' },{ id: 'discontinue-serotonergic', name: 'Identify and discontinue ALL serotonergic agents immediately', rationale: 'Serotonin syndrome requires stopping all causative agents: SSRIs, SNRIs, MAOIs, TCAs, tramadol, fentanyl (weak serotonergic), linezolid (MAOI activity), methylene blue (MAOI activity), triptans, dextromethorphan, ondansetron (at high doses), St. John Wort, MDMA.' }],
-    incorrect: [{ id: 'dopamine-blockers', name: 'Haloperidol — antipsychotic for agitation in NMS/serotonin syndrome', rationale: 'Do NOT give typical antipsychotics (haloperidol) for serotonin syndrome — they worsen hyperthermia and may cause NMS on top of SS. SS is treated with serotonin antagonists and benzos. Distinguish SS from NMS: SS = fast onset (hours), hyperreflexia, clonus. NMS = slow onset (days), rigidity, hyporeflexia.' },{ id: 'fluids-only', name: 'IV fluids and monitoring — will resolve spontaneously', rationale: 'Mild serotonin syndrome may resolve with drug discontinuation and supportive care, but moderate-severe SS requires cyproheptadine. Life-threatening SS (hyperthermia >41.1°C, severe rigidity, cardiovascular instability): intubation + paralysis (rocuronium — avoid succinylcholine due to rhabdomyolysis/hyperkalemia risk).' }]
-  },
-  teachingPoints: {
-    keyLearning: ['Hunter Criteria for serotonin syndrome (high specificity): patient has taken serotonergic agent AND has ANY of: spontaneous clonus, inducible clonus + agitation or diaphoresis, ocular clonus + agitation or diaphoresis, tremor + hyperreflexia, or hypertonia + temperature >38°C + ocular or inducible clonus.','Serotonin syndrome vs NMS: SS onset hours, neuromuscular hyperactivity (clonus, hyperreflexia, mydriasis), hyperthermia. NMS onset days-weeks, muscle rigidity (lead-pipe), hyporeflexia, bradykinesia, encephalopathy, CK very elevated. Both can cause hyperthermia and rhabdomyolysis.','Linezolid and methylene blue: both have MAOI activity — do NOT combine with serotonergic drugs. Metaxalone (muscle relaxant) has weak serotonergic activity. Ondansetron at standard doses is safe (5-HT3 antagonist actually may reduce SS risk) but can trigger SS in overdose.'],
-    boardPearls: ['Serotonin toxicity spectrum: mild (tremor, tachycardia, diaphoresis), moderate (agitation, hyperreflexia, hyperthermia <40°C, clonus), severe (rigidity, hyperthermia >41°C, rhabdomyolysis, renal failure, DIC).','Temperature >41°C in SS: immediately cool with ice packs, cooling blankets, IV fluids. Life-threatening — associated with seizures, rhabdomyolysis, DIC, death. Intubate and paralyze if severe rigidity.','MAOI + SSRI or any serotonergic: potentially fatal combination. Washout period: fluoxetine (long half-life Prozac) requires 5 weeks before starting MAOI. All other SSRIs: 2 weeks. MAOIs: 2 weeks before starting SSRIs.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Andrew Chen is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Sertraline; Phenelzine.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Andrew Chen \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Patricia O'Brien",
-  "patientHPI": "I'm supposed to have surgery next week, but I got really anxious thinking about whether I might be allergic to penicillin since I'm not really sure, and I ended up in the emergency room because I was so worried about it.",
+      "patientHPI": "I'm supposed to have surgery next week, but I got really anxious thinking about whether I might be allergic to penicillin since I'm not really sure, and I ended up in the emergency room because I was so worried about it.",
       "dob": "04/24/1968",
       "age": "58",
       "sex": "Female",
@@ -911,43 +911,42 @@ window.EMR_DATA = {
       "Teaching point",
       "90%+ of labeled penicillin allergies are not true allergies"
     ]
-  ]
-,"references":[
-  {
-    "id": "Drug-Allergy-PP-2022",
-    "title": "Drug allergy: A 2022 practice parameter update",
-    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2022,
-    "doi": "10.1016/j.jaci.2022.08.028",
-    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
-    "openAccess": true,
-    "validates": [
-      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
-      "Single-dose amoxicillin challenge for low-risk",
-      "Vancomycin RMS management",
-      "AERD aspirin desensitization protocol",
-      "Sulfonamide challenge protocols"
-    ]
-  },
-  {
-    "id": "PCN-NEJM-2019",
-    "title": "Penicillin allergy",
-    "authors": "Castells M, Khan DA, Phillips EJ.",
-    "journal": "N Engl J Med",
-    "year": 2019,
-    "doi": "10.1056/NEJMra1807761",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
-    "openAccess": true,
-    "validates": [
-      ">90% with PCN label NOT truly allergic",
-      ">80% lose sensitivity after 10 years",
-      "Morbilliform rash in children = usually viral exanthem",
-      "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "Drug-Allergy-PP-2022",
+      "title": "Drug allergy: A 2022 practice parameter update",
+      "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2022,
+      "doi": "10.1016/j.jaci.2022.08.028",
+      "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+      "openAccess": true,
+      "validates": [
+        "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+        "Single-dose amoxicillin challenge for low-risk",
+        "Vancomycin RMS management",
+        "AERD aspirin desensitization protocol",
+        "Sulfonamide challenge protocols"
+      ]
+    },
+    {
+      "id": "PCN-NEJM-2019",
+      "title": "Penicillin allergy",
+      "authors": "Castells M, Khan DA, Phillips EJ.",
+      "journal": "N Engl J Med",
+      "year": 2019,
+      "doi": "10.1056/NEJMra1807761",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448069/",
+      "openAccess": true,
+      "validates": [
+        ">90% with PCN label NOT truly allergic",
+        ">80% lose sensitivity after 10 years",
+        "Morbilliform rash in children = usually viral exanthem",
+        "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "10% of patients are labeled penicillin-allergic but >95% can tolerate penicillin on formal evaluation. IgE to penicillin wanes over time: 80% lose SPT reactivity within 5 years, 98% within 10 years. The most common reason for false labels: viral rash misattributed to amoxicillin (especially EBV + amoxicillin — maculopapular rash in 80–100% of EBV/amoxicillin patients is NOT IgE).",
@@ -967,75 +966,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Patricia O'Brien appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Patricia is anxious about her upcoming surgery and concerned about the allergy issue, but cooperative and eager to resolve the situation safely. She appears somewhat frustrated having avoided many antibiotics her whole life based on a childhood incident she barely remembers.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pre-surgical evaluation \u2014 labeled penicillin allergy, needs cefazolin for prophylaxis start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened when you had the reaction to penicillin?",
+      "How old were you when this reaction occurred?",
+      "What type of rash did you develop - was it itchy, raised, flat, or widespread?",
+      "How quickly after taking the medication did the rash appear?",
+      "Did you have any trouble breathing, swelling of face or throat, or dizziness?",
+      "Have you ever accidentally taken penicillin or related antibiotics since then?",
+      "What antibiotics have you safely taken in the past for infections?",
+      "Do you have any other drug allergies or reactions?",
+      "Have you ever been tested by an allergist for penicillin allergy?",
+      "Are you aware that you might need a specific antibiotic for your surgery?",
+      "Do you have any family history of drug allergies?",
+      "Have you had any recent infections or illnesses?",
+      "Are you having any current symptoms like rash, itching, or breathing problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Patricia O'Brien presents with pre-surgical evaluation \u2014 labeled penicillin alle.'",
-        "character": "'It's pre-surgical evaluation \u2014 labeled penicillin allergy, needs cefazolin for prophylaxis \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine; Acetaminophen.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Non-contributory",
-        "social": "History: Told she had rash with amoxicillin at age 5 \u2014 mother's report, no details  Impact: Has avoided all penicillins and cephalosporins for 53 years  Surgery: Orthopedic surgeon requests A/I clearance for cefazolin use  Teaching point: 90%+ of labeled penicillin allergies are not true allergies"
+      "default": "I'm not sure about that - I just know I need to be careful with antibiotics because of my allergy.",
+      "onset": "I was told this happened when I was about 5 years old, so I don't really remember it myself.",
+      "character": "My mother said I got some kind of rash, but I honestly don't remember the details - it was over 50 years ago.",
+      "location": "I think it was on my body somewhere, but I really can't recall exactly where the rash was.",
+      "severity": "I don't know how bad it was - my mother handled everything and just told me to always avoid penicillin.",
+      "aggravating": "I've been very careful to avoid all penicillins since then, so I haven't had any problems.",
+      "relieving": "I assume it went away on its own, but I really don't have details about the treatment.",
+      "associated": "No, I don't remember having trouble breathing, swelling, or anything like that - just a rash.",
+      "denies": "No difficulty breathing, no swelling of my face or throat, no dizziness or fainting.",
+      "history": "This was just the one time as a child - I've successfully avoided penicillin ever since.",
+      "medications": "Amlodipine; Acetaminophen",
+      "allergies": "Penicillin",
+      "family": "Not that I'm aware of - my mother never mentioned anyone else in the family having drug allergies.",
+      "social": "I'm a retired teacher, don't smoke, maybe one glass of wine with dinner, no drugs. I'm quite active which is why I need this knee replacement."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and vital signs review",
+      "Skin examination for current rash or lesions",
+      "Lymph node examination",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Examination of knee requiring surgery",
+      "Assessment of current medication tolerance",
+      "Review of any current allergic symptoms",
+      "Documentation of historical reaction details"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and vital signs review": "Well-appearing woman in no acute distress, vitals stable with mild hypertension",
+      "Skin examination for current rash or lesions": "No acute rash, urticaria, or skin lesions present",
+      "Lymph node examination": "No lymphadenopathy palpated",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezing",
+      "Abdominal examination": "Soft, non-tender, no organomegaly",
+      "Examination of knee requiring surgery": "Right knee with degenerative changes, limited range of motion",
+      "Assessment of current medication tolerance": "Reports tolerating current medications without issue",
+      "Review of any current allergic symptoms": "No current symptoms suggestive of allergic reaction",
+      "Documentation of historical reaction details": "Patient unable to provide specific details of childhood reaction"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Questionable penicillin allergy requiring evaluation (correct diagnosis)",
+      "True IgE-mediated penicillin allergy",
+      "Non-allergic drug reaction in childhood",
+      "Anaphylaxis risk with beta-lactam exposure",
+      "Stevens-Johnson syndrome risk",
+      "Viral exanthem misattributed to antibiotic",
+      "Simple drug intolerance rather than allergy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the documented 'penicillin allergy' without questioning its validity or investigating the vague historical details",
+      "prematureClosure": "Risk of immediately accepting the allergy label and pursuing alternatives without considering penicillin allergy testing or delabeling",
+      "availabilityBias": "Risk of overestimating true penicillin allergy prevalence when most childhood 'allergic' reactions are actually viral rashes or non-IgE mediated"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Patricia O'Brien's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before interviewing the patient, consider what specific details about this 'penicillin allergy' would help you determine if it's a true IgE-mediated reaction. What percentage of labeled penicillin allergies are actually true allergies? What are the implications for surgical prophylaxis?",
+      "phase5": "Now that you've gathered the history, what does the vague nature of this childhood reaction tell you? Consider the timeline, the lack of systemic symptoms, and the patient's inability to provide details. How might this influence your approach to surgical antibiotic prophylaxis?",
+      "finalDebrief": "This case illustrates how healthcare providers can help delabel inappropriate drug allergies. Most childhood penicillin 'allergies' are viral rashes coinciding with antibiotic use. The lack of detail, absence of systemic symptoms, and remote timing suggest this patient could likely receive cefazolin safely, potentially after allergy consultation or testing. How did your assessment of this allergy evolve during the case?"
     }
-}
+  }
 };

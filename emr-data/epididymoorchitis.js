@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank Petrov",
-  "patientHPI": "I'm here for my regular checkup about my prostate issues. Even with the medications I'm taking, I'm still getting up three or four times every night to urinate, and the stream is still pretty weak. I had a bladder infection a couple months ago that we treated with antibiotics.",
+    "patientHPI": "I'm here for my regular checkup about my prostate issues. Even with the medications I'm taking, I'm still getting up three or four times every night to urinate, and the stream is still pretty weak. I had a bladder infection a couple months ago that we treated with antibiotics.",
     "dob": "12/05/1958",
     "age": 66,
     "sex": "Male",
@@ -189,35 +189,149 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.3", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.3",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "PSA",
           "results": [
-            { "test": "PSA, Total", "value": "3.2", "unit": "ng/mL", "range": "<4.0", "flag": "" }
+            {
+              "test": "PSA, Total",
+              "value": "3.2",
+              "unit": "ng/mL",
+              "range": "<4.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Yellow", "unit": "", "range": "Yellow", "flag": "" },
-            { "test": "Clarity", "value": "Clear", "unit": "", "range": "Clear", "flag": "" },
-            { "test": "Specific Gravity", "value": "1.018", "unit": "", "range": "1.005-1.030", "flag": "" },
-            { "test": "pH", "value": "6.0", "unit": "", "range": "5.0-8.0", "flag": "" },
-            { "test": "Leukocyte Esterase", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Nitrites", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "WBC", "value": "2", "unit": "/HPF", "range": "0-5", "flag": "" },
-            { "test": "Bacteria", "value": "None", "unit": "", "range": "None", "flag": "" }
+            {
+              "test": "Color",
+              "value": "Yellow",
+              "unit": "",
+              "range": "Yellow",
+              "flag": ""
+            },
+            {
+              "test": "Clarity",
+              "value": "Clear",
+              "unit": "",
+              "range": "Clear",
+              "flag": ""
+            },
+            {
+              "test": "Specific Gravity",
+              "value": "1.018",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            },
+            {
+              "test": "pH",
+              "value": "6.0",
+              "unit": "",
+              "range": "5.0-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Leukocyte Esterase",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Nitrites",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "WBC",
+              "value": "2",
+              "unit": "/HPF",
+              "range": "0-5",
+              "flag": ""
+            },
+            {
+              "test": "Bacteria",
+              "value": "None",
+              "unit": "",
+              "range": "None",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -292,15 +406,42 @@ window.EMR_DATA = {
     "Son: No significant medical history, age 38"
   ],
   "socialHistory": [
-    ["Occupation", "Retired electrical engineer"],
-    ["Marital", "Married"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional — 1-2 glasses wine with dinner"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 30 min daily; limited by knee pain"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "Health care proxy designated — wife"]
+    [
+      "Occupation",
+      "Retired electrical engineer"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional — 1-2 glasses wine with dinner"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 30 min daily; limited by knee pain"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy designated — wife"
+    ]
   ],
   "meta": {
     "caseId": "epididymoorchitis",
@@ -311,75 +452,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Frank Petrov appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Frank appears calm but somewhat uncomfortable, occasionally shifting in his seat. He's cooperative and forthcoming about his symptoms, though seems a bit embarrassed discussing urologic issues. Shows mild distress when describing the severity of his current pain.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did urologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me about the pain you're experiencing?",
+      "When did this pain start and how has it progressed?",
+      "Where exactly is the pain located?",
+      "On a scale of 1-10, how severe is the pain?",
+      "What makes the pain better or worse?",
+      "Have you noticed any swelling in the area?",
+      "Any fever, chills, or feeling unwell?",
+      "Have you had any changes in urination?",
+      "Any nausea or vomiting?",
+      "Have you had any recent sexual activity or trauma?",
+      "Any discharge from the penis?",
+      "Have you experienced anything like this before?",
+      "What medications are you currently taking?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my regular checkup about my prostate issues.'",
-        "character": "'It's urologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Epididymo-orchitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Tamsulosin 0.4mg QHS; Finasteride 5mg daily; Lisinopril 20mg daily; Rosuvastatin 10mg QHS; Acetaminophen 500mg PRN.'",
-        "allergies": "'My allergies are Fluoroquinolones.'",
-        "family": "Father: BPH, prostate cancer at 74 (Gleason 6, treated with radiation; alive at 88)  Mother: Osteoarthritis, HTN, alive at 86  Brother: BPH, age 62",
-        "social": "Occupation: Retired electrical engineer  Marital: Married  Tobacco: Never smoker  Alcohol: Occasional \u2014 1-2 glasses wine with dinner  Drugs: Denies"
+      "default": "I'm not sure what you mean by that. Could you ask me more specifically about my symptoms?",
+      "onset": "The pain started about two days ago, gradually getting worse. It began as a dull ache but now it's constant and sharp.",
+      "character": "It's a deep, throbbing pain that sometimes feels like someone is squeezing my testicle. Very different from anything I've felt before.",
+      "location": "The pain is mainly in my left testicle and the area just above and behind it. Sometimes it radiates up toward my lower abdomen.",
+      "severity": "Right now it's about a 7 out of 10. It's bad enough that I can barely walk normally, and it kept me up most of last night.",
+      "aggravating": "Walking, sitting down, or any movement makes it worse. Even wearing underwear puts pressure on it that hurts.",
+      "relieving": "The acetaminophen helps a little bit, maybe brings it down to a 5 or 6. Lying very still with my legs slightly apart seems to help some.",
+      "associated": "I've been feeling a bit feverish and had some chills yesterday. My urine seems cloudier than usual, and it burns a little when I urinate.",
+      "denies": "No nausea or vomiting. No discharge from my penis. No recent injuries or trauma to the area.",
+      "history": "I've never had anything like this before. I've had those bladder infections, but this is completely different.",
+      "medications": "Tamsulosin 0.4mg QHS; Finasteride 5mg daily; Lisinopril 20mg daily; Rosuvastatin 10mg QHS; Acetaminophen 500mg PRN",
+      "allergies": "Fluoroquinolones",
+      "family": "My father had prostate cancer, and both my brother and I have prostate issues. No family history of testicular problems that I know of.",
+      "social": "I'm a retired electrical engineer, married for 40 years. I don't smoke, drink wine occasionally with dinner. No drug use."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and vital signs assessment",
+      "Abdominal examination",
+      "Inspection of external genitalia",
+      "Palpation of testicles",
+      "Palpation of epididymis",
+      "Assessment of cremasteric reflex",
+      "Evaluation for inguinal lymphadenopathy",
+      "Digital rectal examination",
+      "Assessment of costovertebral angle tenderness",
+      "Prehn's sign evaluation"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Epididymo-orchitis. Document specifically what you observe."
+      "General appearance and vital signs assessment": "Patient appears uncomfortable, walking with a slight waddle. Vitals stable with mild tachycardia HR 88, low-grade fever 100.2°F",
+      "Abdominal examination": "Soft, non-tender, no masses or organomegaly. Bowel sounds normal.",
+      "Inspection of external genitalia": "Left hemiscrotum appears swollen and erythematous. No obvious skin lesions or discharge from urethral meatus.",
+      "Palpation of testicles": "Left testicle tender to palpation, normal size and consistency. Right testicle normal, non-tender.",
+      "Palpation of epididymis": "Left epididymis markedly swollen, indurated, and exquisitely tender, especially at the tail. Right epididymis normal.",
+      "Assessment of cremasteric reflex": "Present bilaterally, though slightly diminished on the left due to swelling.",
+      "Evaluation for inguinal lymphadenopathy": "Mild left inguinal lymphadenopathy, nodes mobile and slightly tender.",
+      "Digital rectal examination": "Prostate moderately enlarged, consistent with known BPH. No focal nodules or tenderness.",
+      "Assessment of costovertebral angle tenderness": "No costovertebral angle tenderness bilaterally.",
+      "Prehn's sign evaluation": "Elevation of left testicle provides partial relief of pain, positive Prehn's sign."
     },
     "ddxTargets": [
-        "Epididymo-orchitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Epididymo-orchitis (correct diagnosis)",
+      "Testicular torsion",
+      "Torsion of testicular appendix",
+      "Testicular cancer",
+      "Incarcerated inguinal hernia",
+      "Urinary tract infection with referred pain",
+      "Prostatitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Epididymo-orchitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Epididymo-orchitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Epididymo-orchitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known BPH and recent UTI history, potentially missing acute testicular pathology requiring urgent evaluation",
+      "prematureClosure": "May prematurely diagnose simple UTI recurrence without proper genital examination, missing the epididymal involvement",
+      "availabilityBias": "Recent cases of UTI or prostatitis may bias toward those diagnoses rather than considering acute scrotal pathology"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Frank Petrov's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Epididymo-orchitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified testicular torsion as a possibility - excellent, that's a must-not-miss diagnosis. What key historical features would help you differentiate between torsion and epididymitis? What questions might help clarify the onset and progression?",
+      "phase5": "Your physical exam reveals some key findings. How does the positive Prehn's sign and the patient's age help narrow your differential? Given his fluoroquinolone allergy, what are your antibiotic options for treatment?",
+      "finalDebrief": "This case highlights the importance of not anchoring on known conditions like BPH. While Frank's urologic history was relevant, the acute presentation required focused evaluation of scrotal pathology. The positive Prehn's sign and gradual onset helped distinguish this from testicular torsion, which would have been urologic emergency requiring immediate surgery."
     }
-}
+  }
 };

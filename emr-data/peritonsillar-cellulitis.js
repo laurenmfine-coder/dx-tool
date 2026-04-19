@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jason Ngo",
-  "patientHPI": "Three days ago I started getting this really bad sore throat on just the right side, and now it hurts so much to swallow that I'm avoiding solid food completely. I've had a low fever around 100 degrees and my right ear is aching too - this is the fourth time this year I've had throat problems like this.",
+    "patientHPI": "Three days ago I started getting this really bad sore throat on just the right side, and now it hurts so much to swallow that I'm avoiding solid food completely. I've had a low fever around 100 degrees and my right ear is aching too - this is the fourth time this year I've had throat problems like this.",
     "dob": "10/12/1990",
     "age": 34,
     "sex": "Male",
@@ -174,29 +174,107 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "14.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "78", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Lymphocytes", "value": "15", "unit": "%", "range": "20-40", "flag": "L" },
-            { "test": "Hemoglobin", "value": "15.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.4", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "288", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "14.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "78",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "15",
+              "unit": "%",
+              "range": "20-40",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "288",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "RAPID STREP / THROAT CULTURE",
           "results": [
-            { "test": "Rapid Strep Antigen", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Throat Culture", "value": "Pending", "unit": "", "range": "—", "flag": "" }
+            {
+              "test": "Rapid Strep Antigen",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Throat Culture",
+              "value": "Pending",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "102", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "15", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "102",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "15",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -257,15 +335,42 @@ window.EMR_DATA = {
     "Paternal grandfather: Oral cancer, deceased at 70"
   ],
   "socialHistory": [
-    ["Occupation", "Software engineer — sedentary desk work"],
-    ["Marital", "Married"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 2-3 drinks on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — walks dog 20 min daily; no structured exercise"],
-    ["Housing", "Lives with wife in townhouse"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Software engineer — sedentary desk work"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — walks dog 20 min daily; no structured exercise"
+    ],
+    [
+      "Housing",
+      "Lives with wife in townhouse"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "peritonsillar-cellulitis",
@@ -276,75 +381,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jason Ngo appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Jason appears uncomfortable and anxious, speaking with a muffled voice and repeatedly swallowing with visible discomfort. He's cooperative but clearly distressed, holding his neck and appearing worried about his breathing given his history of sleep apnea.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did ent / airway emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly when this sore throat started and how it's progressed?",
+      "Is the pain worse on one side of your throat than the other?",
+      "On a scale of 1-10, how would you rate your throat pain right now?",
+      "Are you having any difficulty swallowing saliva or are you drooling?",
+      "Have you noticed any changes in your voice or how you sound?",
+      "Are you having any trouble breathing or feeling short of breath?",
+      "Have you had any fever or chills with this illness?",
+      "Is there any ear pain associated with your throat pain?",
+      "Have you had similar throat infections before, and how often?",
+      "What medications are you currently taking?",
+      "Do you have any known allergies to medications?",
+      "Have you tried any treatments at home for this throat pain?",
+      "Are you able to open your mouth fully or does it feel limited?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Three days ago I started getting this really bad sore throat on just the right s.'",
-        "character": "'It's ent / airway emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Peritonsillar Cellulitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone nasal spray 50mcg daily; Amoxicillin 500mg TID.'",
-        "allergies": "'My allergies are Clindamycin.'",
-        "family": "Father: Obstructive sleep apnea, hypertension, alive at 62  Mother: T2DM, alive at 59  Brother: Healthy, age 31",
-        "social": "Occupation: Software engineer \u2014 sedentary desk work  Marital: Married  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks on weekends  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? My throat hurts so much it's hard to concentrate on anything else right now.",
+      "onset": "It started three days ago as just a regular sore throat, but by yesterday it got much worse and now it's mainly on my right side. This morning I could barely swallow my coffee.",
+      "character": "It's like a sharp, stabbing pain that shoots through the right side of my throat every time I try to swallow. It feels hot and swollen back there.",
+      "location": "Definitely worse on the right side of my throat, and the pain shoots up into my right ear whenever I swallow or talk too much.",
+      "severity": "Right now it's about an 8 out of 10. I can't eat solid food at all, and even swallowing liquids is really painful. It's affecting my sleep too.",
+      "aggravating": "Swallowing anything makes it much worse, especially solid food. Talking for more than a few minutes also makes it hurt more. Hot drinks seem to make it worse too.",
+      "relieving": "Cold liquids help a little bit, and I've been taking ibuprofen which takes the edge off slightly, but nothing really makes it go away.",
+      "associated": "I've had a low-grade fever around 100-101 degrees, my right ear aches, and I feel generally run down. My voice sounds different - kind of muffled. I've been having some bad breath too.",
+      "denies": "No trouble breathing so far, no rash, no nausea or vomiting, no neck stiffness. I'm not drooling but I am swallowing less because it hurts so much.",
+      "history": "This is the fourth time this year I've had throat problems. Usually they get better with antibiotics, but this one feels different - much more severe and one-sided.",
+      "medications": "Fluticasone nasal spray 50mcg daily; Amoxicillin 500mg TID",
+      "allergies": "Clindamycin",
+      "family": "My dad has sleep apnea like me and high blood pressure. My mom has diabetes. My brother is healthy. No family history of serious throat problems that I know of.",
+      "social": "I work as a software engineer so I sit at a desk all day. I'm married, never smoked, and only drink socially on weekends - maybe 2-3 drinks. No drugs. The stress from work has been high lately with a big project deadline."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "Oropharyngeal inspection",
+      "Neck palpation for lymphadenopathy",
+      "Assessment of mouth opening/trismus",
+      "Voice quality assessment",
+      "Palpation for neck masses or swelling",
+      "Examination of ears",
+      "Assessment of uvular deviation",
+      "Evaluation for drooling or pooled secretions",
+      "Inspection of tonsillar pillars",
+      "Assessment of respiratory effort"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Peritonsillar Cellulitis. Document specifically what you observe."
+      "Oropharyngeal inspection": "Right tonsillar pillar is markedly erythematous and swollen without discrete abscess formation. Left tonsil appears normal. Throat is erythematous with asymmetric swelling.",
+      "Neck palpation for lymphadenopathy": "Tender, enlarged lymph nodes palpable in the right anterior cervical chain. No fluctuance or masses detected.",
+      "Assessment of mouth opening/trismus": "Mild limitation in mouth opening - patient can open approximately 3 finger-breadths with discomfort.",
+      "Voice quality assessment": "Muffled, 'hot potato' voice quality present but not as severe as typically seen with peritonsillar abscess.",
+      "Palpation for neck masses or swelling": "No discrete masses palpated. Mild diffuse swelling on right side of neck.",
+      "Examination of ears": "Right tympanic membrane appears normal but patient reports referred pain. Left ear examination normal.",
+      "Assessment of uvular deviation": "Uvula is slightly deviated to the left, away from the affected right side.",
+      "Evaluation for drooling or pooled secretions": "No active drooling observed. Patient swallowing appropriately but with obvious discomfort.",
+      "Inspection of tonsillar pillars": "Right anterior tonsillar pillar is significantly swollen and erythematous extending into soft palate. No visible purulence or abscess formation.",
+      "Assessment of respiratory effort": "Respirations appear comfortable at rest with no stridor or signs of airway compromise."
     },
     "ddxTargets": [
-        "Peritonsillar Cellulitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Peritonsillar Cellulitis (correct diagnosis)",
+      "Peritonsillar Abscess",
+      "Bacterial Tonsillitis/Pharyngitis",
+      "Retropharyngeal Abscess",
+      "Epiglottitis",
+      "Infectious Mononucleosis",
+      "Parapharyngeal Space Infection"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Peritonsillar Cellulitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Peritonsillar Cellulitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Peritonsillar Cellulitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'just another tonsillitis episode' given patient's history of recurrent throat infections, potentially missing the severity and cellulitis component",
+      "prematureClosure": "May quickly assume peritonsillar abscess due to unilateral symptoms and stop looking for cellulitis vs abscess distinction, missing need for different management approach",
+      "availabilityBias": "Recent cases of simple pharyngitis may lead to underestimating this more serious soft tissue infection requiring aggressive antibiotic therapy"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jason Ngo's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Peritonsillar Cellulitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you've included both peritonsillar cellulitis and abscess - what key clinical features will help you distinguish between these two conditions? Also, given this patient's history of OSA and recurrent throat infections, what complications should you be most concerned about?",
+      "phase5": "Nice job on the history and physical. You found some key findings - the unilateral swelling, uvular deviation, and hot potato voice. Now, what specific physical exam findings help you differentiate cellulitis from abscess formation? How does the absence of certain findings influence your diagnosis?",
+      "finalDebrief": "Excellent work identifying peritonsillar cellulitis. This case highlights the importance of recognizing the spectrum of peritonsillar infections - from cellulitis to abscess formation. The key distinguishing features you identified were the diffuse swelling without fluctuance or discrete abscess formation. How did your differential evolve as you gathered more information, and what would be your next steps in management?"
     }
-}
+  }
 };

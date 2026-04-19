@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Amanda Lewis",
-  "patientHPI": "I've been feeling really confused and out of it for the past couple days, and this morning I noticed these little red spots all over my arms and legs. I also have a fever and when I went to the bathroom, my urine looked really dark, almost like tea. I was completely healthy before this started, so I'm really scared about what's happening to me.",
+    "patientHPI": "I've been feeling really confused and out of it for the past couple days, and this morning I noticed these little red spots all over my arms and legs. I also have a fever and when I went to the bathroom, my urine looked really dark, almost like tea. I was completely healthy before this started, so I'm really scared about what's happening to me.",
     "dob": "01/09/1993",
     "age": "33",
     "sex": "Female",
@@ -282,158 +282,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Amanda Lewis is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Amanda appears anxious and confused, frequently asking if she's going to be okay. She's cooperative but sometimes has difficulty following complex questions due to her altered mental status. She seems genuinely frightened by the sudden onset of her symptoms.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me more about when the confusion started?",
+      "How would you describe the confusion - are you having trouble remembering things or thinking clearly?",
+      "When did you first notice the red spots on your skin?",
+      "Have the spots spread or changed since you first noticed them?",
+      "Tell me about the dark urine - when did that start?",
+      "Have you had any bleeding from your gums, nose, or anywhere else?",
+      "Any abdominal pain or cramping?",
+      "Have you had any nausea or vomiting?",
+      "Any headaches or vision changes?",
+      "Have you taken any new medications or supplements recently?",
+      "Any recent travel or tick exposures?",
+      "Have you had any weakness or difficulty moving parts of your body?",
+      "Any chest pain or shortness of breath?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Combined OCP.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Recent illness: Had a viral URI 2 weeks ago"
+      "default": "I'm sorry, I'm having trouble concentrating right now. Could you ask that in a different way?",
+      "onset": "The confusion started about 2 days ago, just feeling really foggy and not myself. The spots appeared yesterday morning when I woke up.",
+      "character": "It's like my brain is in a fog - I can't think clearly and I feel really out of it, like I'm not fully present.",
+      "location": "The red spots are mainly on my arms and legs, but I've noticed some on my chest too.",
+      "severity": "The confusion is maybe a 6 or 7 out of 10 - it's really scary not feeling like myself. I can't work like this.",
+      "aggravating": "Nothing specific makes it worse, but trying to concentrate on complex tasks is really difficult.",
+      "relieving": "Nothing seems to help the confusion. Rest doesn't make a difference.",
+      "associated": "I have a fever, the dark urine, and I've been feeling really weak and tired. My gums bled a little when I brushed my teeth this morning.",
+      "denies": "No chest pain, no shortness of breath, no severe headache, no neck stiffness, no rash elsewhere.",
+      "history": "Never had anything like this before. I'm usually completely healthy.",
+      "medications": "Combined OCP",
+      "allergies": "NKDA",
+      "family": "No family history of bleeding disorders or similar problems. Everyone's pretty healthy.",
+      "social": "I work as a marketing coordinator, don't smoke, drink maybe a glass of wine on weekends. No drugs. I did have a cold about 2 weeks ago but got over it fine."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Skin examination for petechiae and purpura",
+      "Oral examination for mucosal bleeding",
+      "Neurologic examination including mental status",
+      "Abdominal examination for splenomegaly",
+      "Lymph node examination",
+      "Fundoscopic examination",
+      "Assessment for jaundice",
+      "Cardiovascular examination",
+      "Temperature assessment",
+      "Assessment for neck stiffness"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Skin examination for petechiae and purpura": "Numerous petechiae on bilateral arms, legs, and trunk. Several larger purpuric lesions on lower extremities.",
+      "Oral examination for mucosal bleeding": "Mild gingival bleeding, petechiae on buccal mucosa and soft palate.",
+      "Neurologic examination including mental status": "Altered mental status with confusion and disorientation. Otherwise focal neurologic deficits absent.",
+      "Abdominal examination for splenomegaly": "Soft, non-tender abdomen. No splenomegaly or hepatomegaly appreciated.",
+      "Lymph node examination": "No significant lymphadenopathy in cervical, axillary, or inguinal regions.",
+      "Fundoscopic examination": "Retinal hemorrhages present bilaterally.",
+      "Assessment for jaundice": "Mild scleral icterus present.",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, rubs, or gallops.",
+      "Temperature assessment": "Febrile at 38.6°C",
+      "Assessment for neck stiffness": "No nuchal rigidity or meningeal signs."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Thrombotic thrombocytopenic purpura (TTP) (correct diagnosis)",
+      "Immune thrombocytopenic purpura (ITP)",
+      "Hemolytic uremic syndrome (HUS)",
+      "Acute leukemia",
+      "Disseminated intravascular coagulation (DIC)",
+      "Drug-induced thrombocytopenia",
+      "Viral syndrome with thrombocytopenia"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on recent viral illness and attributing symptoms to post-viral syndrome, missing the urgency of TTP",
+      "prematureClosure": "Risk of stopping at ITP diagnosis due to thrombocytopenia and bleeding, without recognizing the pentad of neurologic symptoms, fever, and hemolysis",
+      "availabilityBias": "More common conditions like viral illness or ITP may overshadow the less common but life-threatening diagnosis of TTP"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Amanda Lewis: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Good start on your differential. I notice you're considering several causes of thrombocytopenia. What key historical features would help you distinguish between these possibilities? Think about what combinations of symptoms might point toward specific diagnoses.",
+      "phase5": "Excellent work gathering the history and physical. You've identified thrombocytopenia with bleeding, altered mental status, fever, and evidence of hemolysis. What syndrome classically presents with this constellation of findings? How does this change your diagnostic priorities?",
+      "finalDebrief": "This case illustrates the classic pentad of TTP: thrombocytopenia, microangiopathic hemolytic anemia, neurologic symptoms, fever, and renal involvement. Notice how the initial presentation could easily be mistaken for ITP or a post-viral syndrome. What key features helped distinguish TTP as the most likely diagnosis?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['ttp'] = {
-  id: 'ttp', name: 'Amanda Lewis',
-  chiefComplaint: 'TTP — PLASMIC Score and Plasma Exchange',
-  diagnosis: 'TTP — PLASMIC Score and Plasma Exchange',
-  orders: {
-    correct: [{ id: 'plex', name: 'Emergent plasma exchange — do not delay for biopsy', rationale: 'Therapeutic plasma exchange (PLEX/TPE) is the definitive treatment for TTP. Removes ADAMTS13 antibodies and replaces ADAMTS13 enzyme. Start WITHIN HOURS of diagnosis — mortality without PLEX >90%, with PLEX <20%. Do not wait for ADAMTS13 levels to confirm diagnosis before starting PLEX.' },{ id: 'steroids-ttp', name: 'Prednisone 1mg/kg/day — added to PLEX for immune modulation', rationale: 'Glucocorticoids added to PLEX: suppress autoantibody production. Daily PLEX until remission (usually 7-14 days) — defined as platelet count >150,000 for 2 consecutive days after cessation of PLEX.' }],
-    incorrect: [{ id: 'platelets-ttp', name: 'Platelet transfusion — thrombocytopenia needs platelets', rationale: 'AVOID platelet transfusion in TTP — it fuels the microthrombi and can cause acute deterioration and death. There are reports of cardiovascular events and death following platelet transfusion in TTP. Give platelets ONLY for life-threatening hemorrhage.' },{ id: 'heparin-ttp', name: 'Heparin for thrombosis — microthrombi are clots that need anticoagulation', rationale: 'Heparin does NOT treat TTP. The microthrombi in TTP are composed of VWF-platelet aggregates — they form independently of the coagulation cascade that heparin targets. Heparin increases bleeding risk without benefit in TTP.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['TTP pentad (rarely all 5 present): microangiopathic hemolytic anemia (MAHA) + thrombocytopenia + neurologic symptoms + renal dysfunction + fever. Modern teaching: MAHA + thrombocytopenia with no alternative cause = TTP until proven otherwise.','ADAMTS13: VWF-cleaving protease. In TTP, autoantibodies (or congenital deficiency in Upshaw-Schulman syndrome) → ADAMTS13 activity <10% → ultra-large VWF multimers → platelet microthrombi in small vessels.','PLASMIC score: identifies TTP probability in MAHA. Predicts ADAMTS13 <10%: platelet count <30k (1) + hemolysis labs (1) + no active cancer (1) + no stem cell/solid organ transplant (1) + MCV <90 fL (1) + INR <1.5 (1) + Cr <2 mg/dL (1). Score ≥6 = high probability TTP.'],
-    boardPearls: ['HUS vs TTP: HUS = MAHA + thrombocytopenia + predominantly RENAL involvement (Cr usually >2). TTP = MAHA + thrombocytopenia + predominantly NEUROLOGIC involvement. Complement-mediated aHUS: ADAMTS13 normal, complement factor mutations, treat with eculizumab.','Rituximab in TTP: anti-CD20 monoclonal antibody. Used as adjunct to PLEX for refractory/relapsing TTP to reduce ADAMTS13 autoantibody production. Can achieve complete remission in refractory cases.','Congenital TTP (Upshaw-Schulman syndrome): autosomal recessive ADAMTS13 gene mutation. Presents in childhood, triggered by infection or pregnancy. Treat with fresh frozen plasma infusions (replaces ADAMTS13 without needing PLEX).']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Amanda Lewis is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Combined OCP.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Amanda Lewis \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

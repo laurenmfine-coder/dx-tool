@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Kenneth Douglas",
-  "patientHPI": "I've been seeing these little floating spots in my right eye for a while now, and today I noticed what looks like a dark shadow or curtain coming down from the top of my vision. It's gotten bigger throughout the day and I'm worried something's really wrong.",
+    "patientHPI": "I've been seeing these little floating spots in my right eye for a while now, and today I noticed what looks like a dark shadow or curtain coming down from the top of my vision. It's gotten bigger throughout the day and I'm worried something's really wrong.",
     "dob": "12/08/1964",
     "age": 60,
     "sex": "Male",
@@ -118,7 +118,7 @@ window.EMR_DATA = {
       "spo2": "98%",
       "wt": "188 lbs",
       "ht": "5'10\"",
-      "bmi": 27.0,
+      "bmi": 27,
       "setting": "PCP Office"
     },
     {
@@ -173,28 +173,100 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "PSA",
           "results": [
-            { "test": "PSA, Total", "value": "2.8", "unit": "ng/mL", "range": "<4.0", "flag": "" }
+            {
+              "test": "PSA, Total",
+              "value": "2.8",
+              "unit": "ng/mL",
+              "range": "<4.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "198", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "118", "unit": "mg/dL", "range": "<100 optimal", "flag": "H" },
-            { "test": "HDL Cholesterol", "value": "52", "unit": "mg/dL", "range": ">40", "flag": "" },
-            { "test": "Triglycerides", "value": "140", "unit": "mg/dL", "range": "<150", "flag": "" }
+            {
+              "test": "Total Cholesterol",
+              "value": "198",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "<100 optimal",
+              "flag": "H"
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "52",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "140",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -255,15 +327,42 @@ window.EMR_DATA = {
     "Sister: Healthy, age 55"
   ],
   "socialHistory": [
-    ["Occupation", "CPA — office work"],
-    ["Marital", "Married, 2 adult children"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 2-3 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Golf 2x/week; walking daily"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies firearms; seatbelt"],
-    ["Advance Directive", "Living will on file; HCP: wife Patricia Douglas"]
+    [
+      "Occupation",
+      "CPA — office work"
+    ],
+    [
+      "Marital",
+      "Married, 2 adult children"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Golf 2x/week; walking daily"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies firearms; seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file; HCP: wife Patricia Douglas"
+    ]
   ],
   "meta": {
     "caseId": "retinal-detachment",
@@ -274,75 +373,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Kenneth Douglas is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Kenneth appears visibly anxious and concerned, frequently touching his right eye area while describing symptoms. He's very forthcoming with details and asks multiple questions about whether he'll lose vision permanently, demonstrating high distress about potential blindness.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did you first notice the shadow or curtain in your vision?",
+      "Can you describe the floaters you've been seeing - when did they start and have they changed?",
+      "Did you notice any flashing lights in your vision before or during these symptoms?",
+      "Is the shadow or curtain getting bigger, and which direction is it moving?",
+      "Have you had any recent trauma or injury to your head or eye?",
+      "Are you experiencing any eye pain or headache?",
+      "Have you noticed any changes in your vision quality or sharpness?",
+      "Given your family history, have you had regular eye exams?",
+      "When was your last comprehensive eye examination?",
+      "Have you noticed these symptoms in your left eye at all?",
+      "Are you having any nausea, vomiting, or other associated symptoms?",
+      "What medications are you currently taking?",
+      "Do you have any known drug allergies?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been seeing these little floating spots in my right eye for a while now, an.'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Rhegmatogenous Retinal Detachment.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 10mg daily; Tamsulosin 0.4mg daily; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: High myopia, macular degeneration at 78, alive at 85  Father: Glaucoma, HTN, deceased at 80  Brother: Retinal tear (lasered), high myopia, age 57",
-        "social": "Occupation: CPA \u2014 office work  Marital: Married, 2 adult children  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - can you explain that differently? I'm really worried about my vision right now.",
+      "onset": "The floaters started about 2-3 weeks ago, just a few at first. But this morning I woke up and noticed a dark area at the top of my right eye's vision, and it's definitely gotten bigger throughout the day.",
+      "character": "It's like a dark curtain or shadow that's blocking part of my vision. The floaters look like little dark spots or cobwebs floating around, especially when I look at bright backgrounds.",
+      "location": "It's only in my right eye. The shadow started at the top and seems to be coming down, and the floaters are scattered throughout my right visual field.",
+      "severity": "I'd say the concern level is a 9 out of 10 - I can't see normally out of that eye anymore. I can still see, but there's this big dark area blocking my vision.",
+      "aggravating": "It seems worse when I move my eye around quickly, and I notice it more in bright light or when looking at light-colored walls.",
+      "relieving": "Nothing seems to help. I tried closing my eyes and resting, but when I open them, it's still there. Actually, it might be getting worse.",
+      "associated": "I did see some flashing lights yesterday evening, like little lightning bolts in my peripheral vision. No eye pain though, which surprised me.",
+      "denies": "No eye pain, no headache, no nausea or vomiting, no changes in my left eye vision, no recent injuries that I can think of.",
+      "history": "Never had anything like this before. I did have that posterior vitreous detachment in this same eye about 6 months ago that my eye doctor told me about.",
+      "medications": "Lisinopril 10mg daily; Tamsulosin 0.4mg daily; Aspirin 81mg daily",
+      "allergies": "NKDA",
+      "family": "My mother has severe nearsightedness like me and developed macular degeneration. My brother actually had a retinal tear that had to be lasered a few years ago - he's also very nearsighted. My father had glaucoma.",
+      "social": "I'm a CPA, so I spend long hours at the computer. I'm married with two grown kids. I've never smoked, and I only drink socially, maybe 2-3 drinks per week. No drug use."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual acuity testing (both eyes)",
+      "Visual field assessment by confrontation",
+      "Pupillary light reflex testing",
+      "Direct ophthalmoscopy",
+      "Indirect ophthalmoscopy",
+      "Slit lamp examination",
+      "Intraocular pressure measurement",
+      "Assessment of red reflex",
+      "Extraocular movement testing",
+      "Amsler grid testing"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Rhegmatogenous Retinal Detachment. Document specifically what you observe."
+      "Visual acuity testing (both eyes)": "Right eye 20/60, Left eye 20/25 (baseline with glasses)",
+      "Visual field assessment by confrontation": "Superior temporal quadrant defect in right eye, left eye normal",
+      "Pupillary light reflex testing": "Right pupil shows mild relative afferent pupillary defect (Marcus Gunn pupil)",
+      "Direct ophthalmoscopy": "Difficult to visualize retinal details due to media opacity and patient movement",
+      "Indirect ophthalmoscopy": "Elevated, mobile retinal tissue in superior temporal quadrant with visible retinal tear",
+      "Slit lamp examination": "Anterior chamber clear, lens shows previous surgical changes, vitreous shows pigmented cells",
+      "Intraocular pressure measurement": "Right eye 14 mmHg, Left eye 16 mmHg",
+      "Assessment of red reflex": "Diminished and irregular red reflex in right eye compared to left",
+      "Extraocular movement testing": "Full range of motion both eyes, no pain with movement",
+      "Amsler grid testing": "Distortion and missing areas in right eye, left eye normal"
     },
     "ddxTargets": [
-        "Rhegmatogenous Retinal Detachment (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Rhegmatogenous Retinal Detachment (Right Eye, Post-PVD in High Myopia) (correct diagnosis)",
+      "Vitreous Hemorrhage",
+      "Posterior Vitreous Detachment with Retinal Tear",
+      "Giant Retinal Tear",
+      "Acute Angle-Closure Glaucoma",
+      "Migraine with Visual Aura",
+      "Vitreous Floaters (Benign)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Rhegmatogenous Retinal Detachment, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Rhegmatogenous Retinal Detachment, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Rhegmatogenous Retinal Detachment based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'floaters' as benign when combined with known PVD history, missing the progression to retinal detachment",
+      "prematureClosure": "May stop at PVD diagnosis without recognizing progression to retinal detachment, especially if patient doesn't emphasize curtain/shadow",
+      "availabilityBias": "Recent cases of benign floaters or migraine might overshadow this true ophthalmologic emergency requiring immediate intervention"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Kenneth Douglas's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Rhegmatogenous Retinal Detachment (Right Eye, Post-PVD in High Myopia). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has multiple risk factors that should guide your history taking. Consider his age, refractive error, and recent ocular history. What specific questions will help you differentiate between benign post-PVD changes and a sight-threatening emergency?",
+      "phase5": "Your exam findings show clear asymmetry between the two eyes. The combination of RAPD, visual field defect, and fundoscopic findings should point toward a specific diagnosis. How do this patient's risk factors and the timeline of symptoms fit with your current differential?",
+      "finalDebrief": "This case illustrates the progression from PVD to retinal detachment in a high-risk patient. The key was recognizing that new visual field defects and curtain-like vision loss represent progression beyond simple floaters. Early recognition and urgent ophthalmology referral are critical for visual preservation."
     }
-}
+  }
 };

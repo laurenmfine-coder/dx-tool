@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Virginia Obregon",
-  "patientHPI": "My mid-back pain has been getting so much worse lately - it's about an 8 out of 10 now and really hurts when I move or try to do anything, which is concerning since I'm being treated for my breast cancer that spread to my bones.",
+    "patientHPI": "My mid-back pain has been getting so much worse lately - it's about an 8 out of 10 now and really hurts when I move or try to do anything, which is concerning since I'm being treated for my breast cancer that spread to my bones.",
     "dob": "02/28/1963",
     "age": 63,
     "sex": "Female",
@@ -239,29 +239,107 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "3.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "L" },
-            { "test": "ANC", "value": "1.8", "unit": "x10³/µL", "range": ">1.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "31.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "142", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "3.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "L"
+            },
+            {
+              "test": "ANC",
+              "value": "1.8",
+              "unit": "x10³/µL",
+              "range": ">1.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "31.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "142",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "148", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "10.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "148",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "TUMOR MARKERS",
           "results": [
-            { "test": "CA 27-29", "value": "186", "unit": "U/mL", "range": "<38", "flag": "H" },
-            { "test": "Alkaline Phosphatase", "value": "268", "unit": "U/L", "range": "44-147", "flag": "H" }
+            {
+              "test": "CA 27-29",
+              "value": "186",
+              "unit": "U/mL",
+              "range": "<38",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "268",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -330,15 +408,42 @@ window.EMR_DATA = {
     "Maternal aunt: Ovarian cancer, deceased at 64"
   ],
   "socialHistory": [
-    ["Occupation", "Retired elementary school teacher; retired 2022 after diagnosis"],
-    ["Marital", "Divorced (2015); lives with adult daughter"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare; stopped since chemotherapy"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Gentle walking 15 min daily when pain allows; previously more active"],
-    ["Housing", "Townhouse with daughter; first floor bedroom"],
-    ["Safety", "Fall risk — uses handrail; daughter provides daily support"],
-    ["Advance Directive", "POLST on file — DNR/DNI; HCP: daughter Daniela Obregon-Ruiz"]
+    [
+      "Occupation",
+      "Retired elementary school teacher; retired 2022 after diagnosis"
+    ],
+    [
+      "Marital",
+      "Divorced (2015); lives with adult daughter"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare; stopped since chemotherapy"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Gentle walking 15 min daily when pain allows; previously more active"
+    ],
+    [
+      "Housing",
+      "Townhouse with daughter; first floor bedroom"
+    ],
+    [
+      "Safety",
+      "Fall risk — uses handrail; daughter provides daily support"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — DNR/DNI; HCP: daughter Daniela Obregon-Ruiz"
+    ]
   ],
   "meta": {
     "caseId": "spinal-metastasis",
@@ -349,75 +454,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Virginia Obregon is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Virginia appears anxious and grimaces with movement, clearly in significant discomfort. She is cooperative but distressed, speaking in measured tones due to pain. Given her oncology history, she demonstrates appropriate concern about symptom progression and is forthcoming about her symptoms while trying to maintain composure.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when this back pain started and how it has progressed?",
+      "What does the pain feel like - is it sharp, dull, burning, or stabbing?",
+      "Where exactly is the pain located and does it radiate anywhere?",
+      "On a scale of 1-10, how would you rate your current pain?",
+      "What makes the pain worse - movement, coughing, lying down?",
+      "What have you tried to relieve the pain and how well has it worked?",
+      "Have you noticed any weakness, numbness, or tingling in your legs?",
+      "Any changes in your bowel or bladder function?",
+      "Have you had any falls or injuries recently?",
+      "When was your last oncology appointment and imaging?",
+      "Are you taking your pain medications as prescribed?",
+      "Have you had any fever, chills, or night sweats?",
+      "Any new neurological symptoms like difficulty walking or balance problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My mid-back pain has been getting so much worse lately - it's about an 8 out of .'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Spinal Metastasis with Pathologic Fracture.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Letrozole 2.5mg daily; Palbociclib 125mg daily (21 days on/7 days off); Denosumab 120mg SubQ q4weeks; Oxycodone IR 10mg q4h PRN; Metformin 1000mg BID; Amlodipine 5mg daily; Levothyroxine 75mcg daily; Calcium/Vitamin D 600mg/400IU BID.'",
-        "allergies": "'My allergies are Tamoxifen, Ibuprofen.'",
-        "family": "Mother: Breast cancer (diagnosed age 58), T2DM, deceased at 72  Father: Hypertension, CAD, deceased at 76  Sister: Breast cancer (diagnosed age 50, BRCA2+), alive at 56",
-        "social": "Occupation: Retired elementary school teacher; retired 2022 after diagnosis  Marital: Divorced (2015); lives with adult daughter  Tobacco: Never smoker  Alcohol: Rare; stopped since chemotherapy  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you rephrase that? I'm having trouble concentrating because of this pain.",
+      "onset": "The pain started about 3 weeks ago as a dull ache, but it's gotten much worse over the past week. It used to be manageable with my regular pain medication, but now it's constant and severe.",
+      "character": "It's a deep, constant aching pain that sometimes becomes sharp and stabbing when I move. It feels like something is grinding in my spine.",
+      "location": "The pain is right in the middle of my back, around my shoulder blade level. Sometimes it wraps around to my chest on the right side.",
+      "severity": "Right now it's about an 8 out of 10. I can barely get out of bed without help from my daughter. Even sitting here talking to you is difficult.",
+      "aggravating": "Any movement makes it worse - turning, bending, coughing, even taking a deep breath. Lying flat on my back is almost impossible now.",
+      "relieving": "My oxycodone used to help, but even taking it every 4 hours barely takes the edge off now. Heat pads help a little bit, but not much.",
+      "associated": "I've been feeling weaker overall, and I think I've lost some weight. I've had some trouble sleeping because I can't find a comfortable position. No fever though.",
+      "denies": "No numbness or tingling in my legs, no problems with bowel or bladder control, no weakness in my arms or legs that I've noticed.",
+      "history": "I've had bone pain since my cancer spread about a year ago, but this is different - much more severe and localized. I've never had pain this bad before.",
+      "medications": "Letrozole 2.5mg daily; Palbociclib 125mg daily (21 days on/7 days off); Denosumab 120mg SubQ q4weeks; Oxycodone IR 10mg q4h PRN; Metformin 1000mg BID; Amlodipine 5mg daily; Levothyroxine 75mcg daily; Calcium/Vitamin D 600mg/400IU BID",
+      "allergies": "Tamoxifen, Ibuprofen",
+      "family": "My mother and sister both had breast cancer - my sister tested positive for BRCA2, but I haven't been tested yet. My mother's cancer also spread to her bones before she passed.",
+      "social": "I'm a retired elementary school teacher - had to retire early after my diagnosis. I live with my daughter now since my divorce. I never smoked and rarely drink anymore since starting treatment."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of posture and gait",
+      "Palpation of thoracic and lumbar spinous processes",
+      "Percussion over thoracic spine",
+      "Range of motion testing (flexion, extension, lateral bending)",
+      "Straight leg raise test",
+      "Neurological assessment of lower extremities",
+      "Assessment of thoracic expansion",
+      "Palpation for point tenderness",
+      "Assessment of spinal alignment",
+      "Evaluation of paraspinal muscle spasm"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Spinal Metastasis with Pathologic Fracture. Document specifically what you observe."
+      "Inspection of posture and gait": "Patient stands with forward-flexed posture, guarding movements, antalgic gait with shortened stride length",
+      "Palpation of thoracic and lumbar spinous processes": "Severe point tenderness over T8-T9 spinous processes with mild step-off deformity palpable",
+      "Percussion over thoracic spine": "Exquisite tenderness to percussion over T8-T9 vertebrae",
+      "Range of motion testing (flexion, extension, lateral bending)": "Markedly limited in all planes due to pain, less than 25% of normal range",
+      "Straight leg raise test": "Negative bilaterally, no radicular pain reproduction",
+      "Neurological assessment of lower extremities": "Strength 5/5 bilaterally, reflexes 2+ and symmetric, sensation intact to light touch",
+      "Assessment of thoracic expansion": "Reduced chest expansion due to splinting from pain",
+      "Palpation for point tenderness": "Focal severe tenderness over T8-T9 with surrounding paraspinal muscle spasm",
+      "Assessment of spinal alignment": "Mild thoracic kyphosis with loss of normal lordotic curve",
+      "Evaluation of paraspinal muscle spasm": "Moderate bilateral paraspinal muscle spasm in thoracic region"
     },
     "ddxTargets": [
-        "Spinal Metastasis with Pathologic Fracture (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Spinal Metastasis with Pathologic Fracture (ER+ Breast Cancer) (correct diagnosis)",
+      "Progressive osseous metastatic disease without fracture",
+      "Spinal cord compression from metastatic disease",
+      "Epidural abscess with sepsis",
+      "Cauda equina syndrome",
+      "Compression fracture from osteoporosis",
+      "Mechanical back strain or muscle spasm"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Spinal Metastasis with Pathologic Fracture, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Spinal Metastasis with Pathologic Fracture, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Spinal Metastasis with Pathologic Fracture based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known metastatic disease without considering acute complications like pathologic fracture or spinal cord compression that require immediate intervention",
+      "prematureClosure": "Risk of attributing all pain to expected progression of known bone metastases without investigating the acute worsening and focal findings",
+      "availabilityBias": "Risk of focusing on common back pain causes while missing the oncologic emergency of pathologic fracture in a patient with known osseous metastases"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Virginia Obregon's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Spinal Metastasis with Pathologic Fracture (ER+ Breast Cancer). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Given this patient's known metastatic breast cancer with osseous involvement, what acute complications should you be most concerned about when she presents with worsening back pain? What specific questions would help you distinguish between disease progression and an acute pathologic process?",
+      "phase5": "The focal point tenderness, step-off deformity, and functional decline in a patient with known spinal metastases should raise your concern. What imaging would be most appropriate urgently, and what oncologic emergencies are you considering in your differential?",
+      "finalDebrief": "This case highlights how patients with known metastatic disease can develop acute complications like pathologic fractures. The key was recognizing that the acute worsening, focal findings, and functional decline suggested more than just disease progression. How did your differential evolve from considering routine back pain to recognizing this as a potential oncologic emergency requiring urgent imaging and intervention?"
     }
-}
+  }
 };

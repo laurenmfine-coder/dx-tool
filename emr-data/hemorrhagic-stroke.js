@@ -471,75 +471,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Hyun-Soo Kim appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Mr. Kim appears acutely distressed and confused, with periods of agitation alternating with lethargy. He is only partially responsive to questions and may give inconsistent or fragmented answers due to his altered mental status.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did altered mental status start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
+      "When did this headache start and how did it come on?",
+      "Can you describe what this headache feels like?",
+      "Where exactly is the pain located?",
+      "On a scale of 1-10, how severe is this headache?",
+      "Have you ever had a headache this severe before?",
+      "Are you experiencing any nausea, vomiting, or vision changes?",
+      "Have you noticed any weakness or numbness in your arms or legs?",
+      "Are you having any difficulty speaking or understanding?",
+      "When did your family first notice the confusion?",
+      "Have you been taking your blood pressure medications as prescribed?",
       "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Do you have any drug allergies?",
+      "Does anyone in your family have a history of stroke?"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I'm here for my regular visit to check on my blood pressure and diabetes - I kno.'",
-      "character": "'It's altered mental status — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Hemorrhagic Stroke.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
-      "allergies": "'My allergies are Clonidine.'",
-      "family": "Father: Hemorrhagic stroke at age 68 (deceased), Hypertension  Mother: Hypertension, T2DM, alive at 88  Brother: Hypertension, alive at 62",
-      "social": "Occupation: Dry cleaning business owner; works 60+ hrs/week  Marital: Married 38 years; wife Minji, age 63  Tobacco: Former smoker — quit 2005; 15 pack-year history  Alcohol: Social, 2-3 drinks/week; occasional soju  Drugs: Denies"
+      "default": "I'm... I'm not sure... my head hurts so much, can you repeat that?",
+      "onset": "It started suddenly this morning around 7 AM when I was getting ready for work - felt like something exploded in my head",
+      "character": "It's the worst headache of my life - like someone is hammering inside my skull, throbbing and pounding",
+      "location": "Right here on the left side of my head, behind my eye, and it goes down my neck",
+      "severity": "This is definitely a 10 out of 10 - I've never felt pain like this, I can barely think straight",
+      "aggravating": "Any light makes it worse, and when I try to move my head or when people talk loudly",
+      "relieving": "Nothing helps - I tried some Tylenol but it didn't touch it at all",
+      "associated": "I've been throwing up twice, and Minji says I'm not making sense when I talk... everything seems blurry",
+      "denies": "No chest pain, no recent injuries to my head, no fever or chills that I know of",
+      "history": "Never had anything like this before - I get headaches sometimes when my pressure is up, but nothing like this",
+      "medications": "Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily",
+      "allergies": "Clonidine",
+      "family": "My father died from a brain hemorrhage when he was 68, and both my parents had high blood pressure problems",
+      "social": "I own a dry cleaning business, work long hours, used to smoke but quit in 2005, just drink socially on weekends"
     },
     "examManeuvers": [
-      "Level of consciousness and GCS",
+      "Neurological assessment - Glasgow Coma Scale",
       "Cranial nerve examination",
       "Motor strength testing",
-      "Sensory testing",
-      "Coordination and cerebellar testing",
-      "Gait assessment if applicable",
-      "Meningeal signs",
-      "Vital signs"
+      "Deep tendon reflexes",
+      "Cerebellar testing (coordination)",
+      "Speech and language assessment",
+      "Fundoscopic examination",
+      "Neck stiffness/meningeal signs",
+      "Blood pressure measurement",
+      "Cardiovascular examination"
     ],
     "examFindings": {
-      "Level of consciousness and GCS": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Cranial nerve examination": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Motor strength testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Sensory testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Coordination and cerebellar testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Gait assessment if applicable": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Meningeal signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-      "Vital signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe."
+      "Neurological assessment - Glasgow Coma Scale": "GCS 13 (E4, V4, M5) - confused and disoriented to time and situation",
+      "Cranial nerve examination": "Left facial droop, dysarthria, right homonymous hemianopsia",
+      "Motor strength testing": "Right-sided hemiparesis - right arm 2/5 strength, right leg 3/5 strength",
+      "Deep tendon reflexes": "Hyperreflexive on the right side, positive Babinski sign on right",
+      "Cerebellar testing (coordination)": "Unable to perform finger-to-nose testing on right side due to weakness",
+      "Speech and language assessment": "Slurred speech, difficulty with word finding, follows simple commands inconsistently",
+      "Fundoscopic examination": "Papilledema present, arterial narrowing, AV nicking consistent with hypertensive retinopathy",
+      "Neck stiffness/meningeal signs": "Mild neck stiffness, negative Kernig and Brudzinski signs",
+      "Blood pressure measurement": "192/108 mmHg, confirmed on repeat measurement",
+      "Cardiovascular examination": "Regular rate and rhythm, S4 gallop present, no murmurs"
     },
     "ddxTargets": [
-      "Hemorrhagic Stroke (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Hemorrhagic Stroke (Hypertensive Intracerebral Hemorrhage) (correct diagnosis)",
+      "Ischemic stroke with hemorrhagic transformation",
+      "Hypertensive encephalopathy",
+      "Subarachnoid hemorrhage",
+      "Meningitis or encephalitis",
+      "Severe migraine with aura",
+      "Metabolic encephalopathy"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hemorrhagic Stroke, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Hemorrhagic Stroke, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Hemorrhagic Stroke based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on hypertension as simply needing medication adjustment rather than recognizing acute stroke presentation",
+      "prematureClosure": "May focus on migraine or hypertensive crisis without considering intracranial hemorrhage given the focal neurological deficits",
+      "availabilityBias": "Recent cases of medication non-compliance might lead to attributing symptoms to uncontrolled hypertension alone"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Hyun-Soo Kim's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Hemorrhagic Stroke (Hypertensive Intracerebral Hemorrhage). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, I notice you're considering several possibilities. Given this patient's presentation of sudden severe headache with confusion, what key historical elements and physical exam findings would help you distinguish between your top differentials? What would be the most concerning diagnosis you absolutely cannot miss?",
+      "phase5": "Excellent work gathering the history and physical exam. You've identified focal neurological deficits in the setting of sudden-onset severe headache and significantly elevated blood pressure. How does the combination of right-sided weakness, speech difficulties, and this patient's risk factors help narrow your differential? What imaging study would be most appropriate as your next step?",
+      "finalDebrief": "This case demonstrates the importance of recognizing hemorrhagic stroke in patients with poorly controlled hypertension. The combination of sudden-onset severe headache, focal neurological deficits, and markedly elevated blood pressure in a patient with multiple vascular risk factors should immediately raise suspicion for intracranial hemorrhage. How did your differential diagnosis evolve as you gathered more information, and what key features ultimately pointed you toward the correct diagnosis?"
     }
   }
 };

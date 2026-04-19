@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Thomas Rivera",
-  "patientHPI": "About an hour after taking my first dose of antibiotic for my sinus infection, I started getting itchy bumps everywhere and my lips and around my eyes started puffing up.",
+      "patientHPI": "About an hour after taking my first dose of antibiotic for my sinus infection, I started getting itchy bumps everywhere and my lips and around my eyes started puffing up.",
       "dob": "11/04/1984",
       "age": "42",
       "sex": "Male",
@@ -694,57 +694,56 @@ window.EMR_DATA = {
       "Occupation",
       "Accountant"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Drug-induced anaphylaxis: IgE-mediated (requires prior sensitization — not first exposure) vs non-IgE pseudo-allergic (direct mast cell activation — can occur on first exposure, e.g., vancomycin RMS, radiocontrast, NSAIDs).",
@@ -761,75 +760,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Thomas Rivera appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Thomas appears anxious but cooperative, frequently touching his swollen face and asking if this is serious. He's forthcoming with information and clearly concerned about the visible swelling, though relieved he can breathe normally.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did you notice the hives and swelling start?",
+      "Had you taken any medications before the symptoms began?",
+      "Have you ever had a reaction like this before?",
+      "Are you having any trouble breathing or swallowing?",
+      "Do you feel dizzy or lightheaded?",
+      "Are you having any nausea, vomiting, or diarrhea?",
+      "Have you eaten anything unusual today?",
+      "Do you have any known drug allergies?",
+      "Has anyone in your family had drug allergies?",
+      "Are the hives itchy or painful?",
+      "Have you taken anything to treat the symptoms?",
+      "Were you aware you might be allergic to penicillin antibiotics?",
+      "Besides the antibiotic, have you been exposed to anything new today?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 42M with diffuse urticaria and bilateral periorbital/lip edema 1h after first do.'",
-        "character": "'It's diffuse urticaria, facial swelling 1 hour after first dose of amoxicillin-clavulanate \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amoxicillin-Clavulanate.'",
-        "allergies": "'My allergies are Sulfa, Amoxicillin-Clavulanate.'",
-        "family": "Sister: penicillin allergy",
-        "social": "Tobacco: Never  Alcohol: Social  Occupation: Accountant"
+      "default": "I'm not sure what you mean, can you ask that differently? I'm just worried about my face being so swollen.",
+      "onset": "It started about an hour ago, maybe 45 minutes after I took the first pill of that antibiotic for my sinus infection. The hives came first, then my face started swelling up.",
+      "character": "The hives are raised red bumps all over, really itchy. My face feels tight and puffy, especially around my eyes and lips.",
+      "location": "The hives are everywhere - my arms, chest, back, legs. The swelling is mainly around my eyes and lips, both sides equally.",
+      "severity": "The itching is probably a 7 out of 10, really bothersome. The swelling is scary looking but doesn't hurt, maybe a 3 for discomfort.",
+      "aggravating": "Nothing seems to make it worse, but I'm afraid to move around too much in case it gets worse.",
+      "relieving": "Nothing has helped yet. I haven't tried anything except coming straight here.",
+      "associated": "Just the hives and facial swelling. No trouble breathing, no stomach problems, no dizziness.",
+      "denies": "No trouble breathing, no throat tightness, no nausea or vomiting, no dizziness, no chest pain.",
+      "history": "Never had anything like this before. I don't think I've ever taken penicillin-type antibiotics before today.",
+      "medications": "Amoxicillin-Clavulanate",
+      "allergies": "Sulfa, Amoxicillin-Clavulanate",
+      "family": "My sister is allergic to penicillin - she gets hives too. I should have remembered that before taking the antibiotic.",
+      "social": "I'm an accountant, don't smoke, drink socially on weekends. No drug use. Pretty stressful job but nothing unusual lately."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of skin for urticarial lesions",
+      "Assessment of facial swelling and angioedema",
+      "Oropharyngeal examination for tongue/uvular swelling",
+      "Lung auscultation for wheezing or stridor",
+      "Cardiovascular examination",
+      "Lymph node palpation",
+      "Abdominal examination",
+      "Neurological assessment including mental status",
+      "Vital signs assessment",
+      "Assessment of mucous membranes"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspection of skin for urticarial lesions": "Diffuse raised erythematous wheals of varying sizes covering trunk, extremities, and face. Lesions are well-demarcated with central pallor.",
+      "Assessment of facial swelling and angioedema": "Bilateral periorbital edema and lip swelling, non-pitting, asymmetric with more prominent involvement of lower lip.",
+      "Oropharyngeal examination for tongue/uvular swelling": "Mild tongue edema present, uvula appears normal, no obvious airway compromise.",
+      "Lung auscultation for wheezing or stridor": "Clear bilateral breath sounds, no wheezing, stridor, or respiratory distress.",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, adequate perfusion, capillary refill <2 seconds.",
+      "Lymph node palpation": "No lymphadenopathy palpated in cervical, axillary, or inguinal regions.",
+      "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds.",
+      "Neurological assessment including mental status": "Alert and oriented x3, anxious but appropriate affect, no focal neurological deficits.",
+      "Vital signs assessment": "BP 118/72 stable, HR 98 regular, afebrile at 37.2°C, SpO2 98% on room air.",
+      "Assessment of mucous membranes": "Pink and moist, no cyanosis or pallor noted."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Drug-induced allergic reaction/urticaria (correct diagnosis)",
+      "Angioedema (hereditary or acquired)",
+      "Anaphylaxis (mild/early)",
+      "Stevens-Johnson syndrome/TEN (must-not-miss)",
+      "Acute severe asthma with urticaria (must-not-miss)",
+      "Viral exanthem with facial swelling",
+      "Contact dermatitis with secondary angioedema"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "The clear temporal relationship with antibiotic administration may cause anchoring on drug allergy, potentially missing other causes like food allergies or environmental exposures that coincidentally occurred around the same time.",
+      "prematureClosure": "The obvious presentation of urticaria and angioedema after drug administration may lead to stopping evaluation too early without considering progression to anaphylaxis or assessing for systemic involvement.",
+      "availabilityBias": "Recent cases of drug allergies or dramatic anaphylactic reactions may influence assessment of severity and urgency of this particular presentation."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Thomas Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider the key features that distinguish different types of allergic reactions. What historical elements would help you differentiate between localized drug reaction, angioedema, and early anaphylaxis? Think about the timeline and systemic involvement.",
+      "phase5": "Now that you've completed your assessment, reflect on the constellation of findings. How do the physical exam findings help risk-stratify this patient? What features suggest this is localized versus systemic? Consider what monitoring or escalation might be needed.",
+      "finalDebrief": "This case illustrates a classic IgE-mediated drug hypersensitivity reaction. Notice how the family history, timing, and distribution of symptoms supported the diagnosis. Discuss how you differentiated this from anaphylaxis and what your monitoring plan would include. What patient education about future antibiotic use is crucial here?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jaylen Cooper",
-  "patientHPI": "I'm here for my football physical so I can play my senior year as starting wide receiver. I feel great and can keep up with all the drills, though I sometimes use my inhaler before practice for my asthma. I take medication for my ADHD that helps me focus in school and I've never had any problems with passing out or chest pain during sports.",
+    "patientHPI": "I'm here for my football physical so I can play my senior year as starting wide receiver. I feel great and can keep up with all the drills, though I sometimes use my inhaler before practice for my asthma. I take medication for my ADHD that helps me focus in school and I've never had any problems with passing out or chest pain during sports.",
     "dob": "01/30/2007",
     "age": 18,
     "sex": "Male",
@@ -76,42 +76,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "08/12/2024",
-        "bp": "118/68",
-        "hr": 66,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "99%",
-        "wt": "178 lbs",
-        "ht": "6'2\"",
-        "bmi": 22.9,
-        "setting": "PCP Office"
+      "date": "08/12/2024",
+      "bp": "118/68",
+      "hr": 66,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "178 lbs",
+      "ht": "6'2\"",
+      "bmi": 22.9,
+      "setting": "PCP Office"
     },
     {
-        "date": "02/20/2024",
-        "bp": "114/66",
-        "hr": 62,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "99%",
-        "wt": "174 lbs",
-        "ht": "6'2\"",
-        "bmi": 22.3,
-        "setting": "PCP Office"
+      "date": "02/20/2024",
+      "bp": "114/66",
+      "hr": 62,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "99%",
+      "wt": "174 lbs",
+      "ht": "6'2\"",
+      "bmi": 22.3,
+      "setting": "PCP Office"
     },
     {
-        "date": "08/08/2023",
-        "bp": "112/64",
-        "hr": 60,
-        "rr": 12,
-        "temp": "98.2\u00b0F",
-        "spo2": "100%",
-        "wt": "170 lbs",
-        "ht": "6'2\"",
-        "bmi": 21.8,
-        "setting": "PCP Office"
+      "date": "08/08/2023",
+      "bp": "112/64",
+      "hr": 60,
+      "rr": 12,
+      "temp": "98.2°F",
+      "spo2": "100%",
+      "wt": "170 lbs",
+      "ht": "6'2\"",
+      "bmi": 21.8,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -151,19 +151,67 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.6", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "43.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "244", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.6",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "43.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "244",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN ELECTROPHORESIS",
           "results": [
-            { "test": "Hemoglobin A", "value": "58.2", "unit": "%", "range": "95-98", "flag": "L" },
-            { "test": "Hemoglobin S", "value": "39.5", "unit": "%", "range": "0", "flag": "H" },
-            { "test": "Hemoglobin A2", "value": "2.3", "unit": "%", "range": "2.0-3.5", "flag": "" },
-            { "test": "Interpretation", "value": "Hemoglobin AS — Sickle Cell Trait", "unit": "", "range": "—", "flag": "" }
+            {
+              "test": "Hemoglobin A",
+              "value": "58.2",
+              "unit": "%",
+              "range": "95-98",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin S",
+              "value": "39.5",
+              "unit": "%",
+              "range": "0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin A2",
+              "value": "2.3",
+              "unit": "%",
+              "range": "2.0-3.5",
+              "flag": ""
+            },
+            {
+              "test": "Interpretation",
+              "value": "Hemoglobin AS — Sickle Cell Trait",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -231,15 +279,42 @@ window.EMR_DATA = {
     "Maternal uncle: Sickle cell disease (HbSS), alive at 38"
   ],
   "socialHistory": [
-    ["Occupation", "High school senior; varsity football wide receiver"],
-    ["Marital", "Single"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Varsity football — practices 5 days/week in summer heat; weightlifting 3x/week"],
-    ["Housing", "Lives with mother and sister in apartment"],
-    ["Safety", "Wears seatbelt; football helmet and pads; hydration plan at practice"],
-    ["Advance Directive", "Minor — mother is legal guardian"]
+    [
+      "Occupation",
+      "High school senior; varsity football wide receiver"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Varsity football — practices 5 days/week in summer heat; weightlifting 3x/week"
+    ],
+    [
+      "Housing",
+      "Lives with mother and sister in apartment"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; football helmet and pads; hydration plan at practice"
+    ],
+    [
+      "Advance Directive",
+      "Minor — mother is legal guardian"
+    ]
   ],
   "meta": {
     "caseId": "exertional-heat-stroke",
@@ -250,75 +325,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jaylen Cooper appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Jaylen is enthusiastic and cooperative, eager to get cleared for his senior football season. He appears healthy and athletic, minimizing any concerns about his risk factors, and is very forthcoming about his desire to play football despite his medical history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did environmental emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me about what brings you in today and your football participation",
+      "Have you ever had any problems during sports or exercise in hot weather?",
+      "When you exercise hard, do you ever feel overheated, dizzy, or confused?",
+      "Have you ever collapsed or felt like you might pass out during practice?",
+      "How much water do you typically drink during practice and games?",
+      "Have you ever had any complications from your sickle cell trait?",
+      "Tell me about your ADHD medication - when do you take it and any side effects?",
+      "Do you ever practice or play in very hot weather? How do you handle it?",
+      "Have any family members had problems exercising in the heat?",
+      "Have you ever been told to limit your physical activity because of your medical conditions?",
+      "Do you ever feel your heart racing or have trouble cooling down after exercise?",
+      "Have you had any recent illnesses, fever, or been dehydrated?",
+      "What does a typical practice day look like for you in terms of intensity and duration?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my football physical so I can play my senior year as starting wide .'",
-        "character": "'It's environmental emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Exertional Heat Stroke.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisdexamfetamine (Vyvanse) 50mg daily; Albuterol 90mcg MDI PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Sickle cell trait (HbAS), hypertension, alive at 42  Father: Healthy, alive at 44  Sister: Sickle cell trait (HbAS), age 15",
-        "social": "Occupation: High school senior; varsity football wide receiver  Marital: Single  Tobacco: Never  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm not sure what you mean - I'm just here to get cleared for football so I can play my senior year",
+      "onset": "I'm here for my pre-participation physical for football. I haven't had any specific problems, just want to make sure I'm cleared to play as starting wide receiver",
+      "character": "I feel great most of the time. Sometimes I get a little winded during intense drills but that's normal, right? I use my inhaler before practice and that helps",
+      "location": "No specific pain or problems anywhere. Sometimes my chest feels tight before I use my inhaler but that's my asthma",
+      "severity": "I don't really have symptoms to rate. I feel fine and can keep up with all the other players during practice and games",
+      "aggravating": "Hot weather practices are definitely harder, especially in full pads during August. Sometimes I feel more tired than usual on really hot days",
+      "relieving": "Getting in the shade and drinking water helps when I'm hot. My inhaler helps with breathing. Taking breaks during practice helps too",
+      "associated": "Sometimes I feel really thirsty during hot practices and my heart pounds pretty hard. Occasionally I get a headache after really intense practices",
+      "denies": "I've never passed out or collapsed. No chest pain. Never had a seizure or anything like that. No family history of sudden death in sports",
+      "history": "This is just my regular physical. I've been playing football for 4 years without any major problems. Never been hospitalized for anything sports-related",
+      "medications": "Lisdexamfetamine (Vyvanse) 50mg daily; Albuterol 90mcg MDI PRN",
+      "allergies": "NKDA",
+      "family": "My mom and sister both have sickle cell trait like me, but they don't do sports. Mom has high blood pressure. Dad's healthy. No one in my family has had heat stroke or problems with exercise",
+      "social": "I'm a high school senior and starting wide receiver. I've been playing varsity for two years. I don't smoke, drink, or do drugs. Football is my life - I'm hoping for a college scholarship"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Vital signs including core temperature",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Neurological assessment including mental status",
+      "Skin examination for heat injury signs",
+      "Hydration status assessment",
+      "Musculoskeletal examination",
+      "Abdominal examination",
+      "Assessment of heat tolerance and thermoregulation"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Exertional Heat Stroke. Document specifically what you observe."
+      "Vital signs including core temperature": "BP 118/68, HR 66, Temp 98.4°F, RR 16, SpO2 99% - currently normal at rest",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, gallops, or rubs. Normal S1/S2. No signs of cardiomyopathy",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes or rales, normal respiratory effort at rest",
+      "Neurological assessment including mental status": "Alert and oriented x3, normal cognitive function, no focal deficits, appropriate affect",
+      "Skin examination for heat injury signs": "Normal skin color and temperature, good turgor, no signs of current heat injury",
+      "Hydration status assessment": "Mucous membranes moist, normal skin turgor, no signs of current dehydration",
+      "Musculoskeletal examination": "Well-developed athlete, normal range of motion, no acute injuries",
+      "Abdominal examination": "Soft, non-tender, no masses or organomegaly",
+      "Assessment of heat tolerance and thermoregulation": "Patient appears to have normal thermoregulation at rest, but multiple risk factors for heat illness present"
     },
     "ddxTargets": [
-        "Exertional Heat Stroke (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Exertional Heat Stroke (with Sickle Cell Trait and Stimulant Medication as Risk Factors) (correct diagnosis)",
+      "Exercise-induced sickling/vaso-occlusive crisis",
+      "Stimulant-induced hyperthermia",
+      "Exertional rhabdomyolysis",
+      "Sudden cardiac death in athletes",
+      "Exercise-induced asthma exacerbation",
+      "Dehydration/heat exhaustion"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Exertional Heat Stroke, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Exertional Heat Stroke, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Exertional Heat Stroke based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'routine sports physical' and miss the significant risk factor constellation of sickle cell trait + stimulant medication + high-intensity sports",
+      "prematureClosure": "May focus only on asthma management and ADHD medication compliance without considering heat stroke risk stratification in this high-risk patient",
+      "availabilityBias": "May underestimate heat stroke risk because patient currently appears healthy and has been playing without obvious complications"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jaylen Cooper's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Exertional Heat Stroke (with Sickle Cell Trait and Stimulant Medication as Risk Factors). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview this patient, consider what risk factors might be present for serious complications during athletic participation. What combination of conditions and medications might create a perfect storm for heat-related illness?",
+      "phase5": "Now that you've completed your history and physical, think about this patient's risk stratification. How do sickle cell trait, stimulant medications, and intense athletics interact? What specific recommendations does this patient need?",
+      "finalDebrief": "This case highlights how multiple seemingly manageable conditions can create compounding risk. Discuss how sickle cell trait increases heat stroke susceptibility, how stimulants impair thermoregulation, and why pre-participation physicals must identify high-risk combinations rather than just individual diagnoses."
     }
-}
+  }
 };

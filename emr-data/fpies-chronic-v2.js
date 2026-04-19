@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Baby Ethan Kowalski",
-  "patientHPI": "My baby has been throwing up after almost every bottle for the past couple months, and now he's having bloody diarrhea too - he used to be a chunky baby but now he looks so skinny and weak.",
+      "patientHPI": "My baby has been throwing up after almost every bottle for the past couple months, and now he's having bloody diarrhea too - he used to be a chunky baby but now he looks so skinny and weak.",
       "dob": "08/27/2025.6",
       "age": "0.4",
       "sex": "Male",
@@ -1084,95 +1084,102 @@ window.EMR_DATA = {
       "Key",
       "Chronic FPIES is more subtle than acute — insidious FTT, chronic diarrhea, not dramatic vomiting episodes"
     ]
-  ]
-,"references":[
-  {
-    "id": "FPIES-Consensus-2017",
-    "title": "International consensus guidelines for FPIES: executive summary",
-    "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2017,
-    "doi": "10.1016/j.jaci.2016.12.966",
-    "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "FPIES criteria: major + minor",
-      "Ondansetron first-line (NOT epi)",
-      "Chronic FPIES: insidious FTT",
-      "Non-IgE, T-cell mediated",
-      "60% resolution by age 3-5"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "FPIES-Consensus-2017",
+      "title": "International consensus guidelines for FPIES: executive summary",
+      "authors": "Nowak-Wegrzyn A, Chehade M, Groetch ME, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2017,
+      "doi": "10.1016/j.jaci.2016.12.966",
+      "url": "https://www.jacionline.org/article/S0091-6749(17)30153-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "FPIES criteria: major + minor",
+        "Ondansetron first-line (NOT epi)",
+        "Chronic FPIES: insidious FTT",
+        "Non-IgE, T-cell mediated",
+        "60% resolution by age 3-5"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Baby Ethan Kowalski is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Mother appears exhausted and frustrated, having been told for 2 months this was just 'reflux' while watching her baby continue to lose weight and have bloody stools. She's very forthcoming about symptoms but emotional about the lack of improvement despite following previous medical advice.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly when Ethan's symptoms first started?",
+      "What type of formula is Ethan currently on?",
+      "Has he ever been breastfed or tried different formulas?",
+      "Can you describe the vomiting - is it projectile or more like spitting up?",
+      "Tell me about the diarrhea - what does it look like?",
+      "How has his weight gain been since birth?",
+      "What treatments have you tried so far and how did they work?",
+      "Does he seem to be in pain, especially around feeding times?",
+      "How is his appetite and feeding behavior?",
+      "Any fever or signs of dehydration?",
+      "Does anyone in the family have food allergies or similar problems?",
+      "How are his sleep patterns and overall activity level?",
+      "Have you noticed if symptoms are better or worse at certain times?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Formula change; IV Fluids; PPI discontinued.'",
-        "allergies": "'My allergies: Cow milk.'",
-        "family": "Non-contributory",
-        "social": "Context: 4-month-old with chronic vomiting, bloody diarrhea, and FTT on cow milk formula  Misdiagnosis: Initially told it was \"colic\" and \"reflux\" \u2014 treated with acid suppressants for 2 months  Key: Chronic FPIES is more subtle than acute \u2014 insidious FTT, chronic diarrhea, not dramatic vomiting episodes"
+      "default": "I'm not sure I understand - can you ask that differently? I'm just so worried about him not gaining weight.",
+      "onset": "It started about 2 months ago, maybe 6 weeks after we switched him to cow milk formula. At first I thought it was normal baby stuff, but it just kept getting worse.",
+      "character": "The vomiting isn't the projectile kind - it's more like he spits up after every feeding, and the diarrhea is loose and watery with streaks of blood and mucus.",
+      "location": "It's mostly stomach upset and frequent dirty diapers - he doesn't seem to have pain in any specific spot.",
+      "severity": "I'd say 7 out of 10 - he's dropped from the 50th percentile to barely on the growth chart. I'm terrified he's not getting enough nutrition.",
+      "aggravating": "It definitely seems worse right after feeding, and the cow milk formula seems to make everything worse.",
+      "relieving": "Nothing has helped so far. The acid medicine they gave us did absolutely nothing after 2 months of trying it.",
+      "associated": "He's fussy, not sleeping well, seems uncomfortable after eating, and has lost so much weight. His diapers are always messy.",
+      "denies": "No fever, no projectile vomiting, no severe abdominal distension, and he's not completely refusing to eat.",
+      "history": "No, nothing like this before. He was fine when he was breastfeeding the first 6 weeks.",
+      "medications": "Formula change; IV Fluids; PPI discontinued",
+      "allergies": "Cow milk",
+      "family": "No one in our family has food allergies that I know of, but my sister had some digestive issues as a baby.",
+      "social": "I'm a first-time mom, don't smoke or drink. I had to stop breastfeeding because of supply issues and went to cow milk formula."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and nutritional status",
+      "Weight and growth parameters",
+      "Abdominal inspection",
+      "Abdominal palpation",
+      "Bowel sounds",
+      "Assessment for dehydration",
+      "Skin examination",
+      "Perianal examination",
+      "Fontanelles and muscle tone",
+      "Lymph node examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and nutritional status": "Thin appearing 4-month-old, alert but irritable, evidence of poor weight gain",
+      "Weight and growth parameters": "Weight dropped from 50th percentile at 2 months to 3rd percentile currently",
+      "Abdominal inspection": "Mildly distended but soft, no visible masses or abnormal contours",
+      "Abdominal palpation": "Soft, non-tender, no hepatosplenomegaly or masses palpated",
+      "Bowel sounds": "Hyperactive bowel sounds present in all quadrants",
+      "Assessment for dehydration": "Mild dehydration with slightly tacky mucous membranes, normal skin turgor",
+      "Skin examination": "Pale, no rashes or eczema noted",
+      "Perianal examination": "Erythema and irritation consistent with chronic diarrhea",
+      "Fontanelles and muscle tone": "Anterior fontanelle soft and flat, muscle tone appropriate",
+      "Lymph node examination": "No significant lymphadenopathy"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Food Protein-Induced Enterocolitis Syndrome (FPIES) (correct diagnosis)",
+      "Cow milk protein allergy (IgE-mediated)",
+      "Inflammatory bowel disease",
+      "Intussusception (must-not-miss diagnosis 1)",
+      "Malrotation with intermittent volvulus (must-not-miss diagnosis 2)",
+      "Gastroesophageal reflux disease (common mimic 1)",
+      "Viral gastroenteritis (common mimic 2)"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on initial 'reflux' diagnosis and continuing acid suppression despite lack of improvement and presence of bloody stools",
+      "prematureClosure": "Risk of stopping evaluation after common diagnosis like GERD without considering food protein intolerance given the bloody diarrhea and failure to thrive",
+      "availabilityBias": "GERD is much more commonly diagnosed than FPIES, leading to potential missed diagnosis of this less familiar condition"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Baby Ethan Kowalski: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Looking at this 4-month-old with chronic vomiting and bloody diarrhea, what key historical details would help you distinguish between your differential diagnoses? Think about the timeline, feeding history, and what's been tried therapeutically.",
+      "phase5": "You've gathered good information about the temporal relationship with formula introduction and lack of response to acid suppression. Given the combination of failure to thrive, bloody diarrhea, and cow milk formula exposure, what specific type of food protein reaction should you be considering?",
+      "finalDebrief": "This case highlights how FPIES can be subtle and chronic, unlike the acute dramatic presentations we often hear about. The key clues were the temporal relationship with cow milk formula, chronic bloody diarrhea, failure to thrive, and lack of response to reflux treatment. How might you counsel families about the difference between chronic FPIES and typical food allergies?"
     }
-}
+  }
 };

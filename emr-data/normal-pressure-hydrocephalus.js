@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Robert Edward Brennan",
-  "patientHPI": "My wife says I walk like my feet are stuck to the floor - I take these tiny shuffling steps and sometimes I just can't get started walking at all. I've fallen twice in the past few months, and now I'm having accidents with my bladder that never happened before.",
+    "patientHPI": "My wife says I walk like my feet are stuck to the floor - I take these tiny shuffling steps and sometimes I just can't get started walking at all. I've fallen twice in the past few months, and now I'm having accidents with my bladder that never happened before.",
     "dob": "10/08/1944",
     "age": 80,
     "sex": "Male",
@@ -188,31 +188,121 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "42.6", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "224", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "42.6",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "224",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID / METABOLIC",
           "results": [
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Vitamin B12", "value": "480", "unit": "pg/mL", "range": "200-900", "flag": "" },
-            { "test": "RPR", "value": "Nonreactive", "unit": "", "range": "Nonreactive", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Vitamin B12",
+              "value": "480",
+              "unit": "pg/mL",
+              "range": "200-900",
+              "flag": ""
+            },
+            {
+              "test": "RPR",
+              "value": "Nonreactive",
+              "unit": "",
+              "range": "Nonreactive",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -280,15 +370,42 @@ window.EMR_DATA = {
     "Sister: Parkinson disease, alive at 75"
   ],
   "socialHistory": [
-    ["Occupation", "Retired accountant — 40 years with CPA firm"],
-    ["Marital", "Married — 54 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — glass of scotch on holidays"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Previously active — golf 2x/week, daily walks; now mostly sedentary due to gait difficulty"],
-    ["Housing", "Lives with wife in single-story home; wife is able caregiver currently"],
-    ["Safety", "Using rolling walker (new); no falls in past 2 months since starting walker; bathroom modifications pending"],
-    ["Advance Directive", "Yes — healthcare proxy: wife Margaret Brennan; full code; son Michael Brennan as alternate"]
+    [
+      "Occupation",
+      "Retired accountant — 40 years with CPA firm"
+    ],
+    [
+      "Marital",
+      "Married — 54 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — glass of scotch on holidays"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Previously active — golf 2x/week, daily walks; now mostly sedentary due to gait difficulty"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home; wife is able caregiver currently"
+    ],
+    [
+      "Safety",
+      "Using rolling walker (new); no falls in past 2 months since starting walker; bathroom modifications pending"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: wife Margaret Brennan; full code; son Michael Brennan as alternate"
+    ]
   ],
   "meta": {
     "caseId": "normal-pressure-hydrocephalus",
@@ -299,75 +416,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Robert Edward Brennan appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mr. Brennan appears mildly frustrated and embarrassed, particularly when discussing his bladder accidents and mobility issues. He's cooperative but somewhat dejected about his declining independence, frequently deferring to what his wife has observed about his condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe how your walking has changed over the past few months?",
+      "Tell me more about these episodes where you can't get started walking.",
+      "When did you first notice problems with bladder control?",
+      "Have you experienced any changes in your thinking or memory?",
+      "Can you tell me about the falls you mentioned?",
+      "Do you have headaches or any head pressure?",
+      "Have you noticed any weakness in your arms or legs?",
+      "Are you having any problems with balance or dizziness?",
+      "Has your handwriting or fine motor skills changed?",
+      "Do you have any tremor or shaking?",
+      "Have family members noticed changes in your personality or behavior?",
+      "Are you taking any medications currently?",
+      "Do you have any known allergies to medications?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My wife says I walk like my feet are stuck to the floor - I take these tiny shuf.'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Normal Pressure Hydrocephalus.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 20mg daily; Atorvastatin 20mg daily; Tamsulosin 0.4mg daily; Vitamin D3 2000 IU daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Alzheimer disease (age 82), deceased at 90  Father: Stroke, hypertension, deceased at 74  Brother: Healthy, alive at 77",
-        "social": "Occupation: Retired accountant \u2014 40 years with CPA firm  Marital: Married \u2014 54 years  Tobacco: Never smoker  Alcohol: Rare \u2014 glass of scotch on holidays  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
+      "onset": "My wife first noticed the walking problems about 8 months ago. The bladder issues started maybe 4 months ago. It's all gotten gradually worse, not sudden.",
+      "character": "It feels like my feet are glued to the floor. I take these tiny shuffling steps, and sometimes I just freeze up completely when I try to start walking.",
+      "location": "The walking problem affects both legs equally. The bladder issue is just not being able to hold it like I used to.",
+      "severity": "The walking is probably a 7 out of 10 for how much it bothers me. I need help getting around now, and I'm afraid to go places alone.",
+      "aggravating": "The walking gets worse when I'm tired or stressed. Stairs are nearly impossible now. The bladder problems are worse when I'm trying to hurry to the bathroom.",
+      "relieving": "Nothing really helps the walking. Sometimes if I tap my foot first, I can get going. For the bladder, I just go more frequently now.",
+      "associated": "My wife says I'm more forgetful lately - losing my keys, forgetting appointments. I feel like my thinking is a bit slower too.",
+      "denies": "No headaches, no vision changes, no weakness in my arms, no tremor or shaking, no slurred speech.",
+      "history": "I've never had anything like this before. I was always pretty active until this started.",
+      "medications": "Lisinopril 20mg daily; Atorvastatin 20mg daily; Tamsulosin 0.4mg daily; Vitamin D3 2000 IU daily",
+      "allergies": "NKDA",
+      "family": "My mother had Alzheimer's disease and my father had a stroke. I'm worried this might be the start of dementia like my mother.",
+      "social": "I'm a retired CPA, worked for 40 years. Married 54 years. Never smoked, rarely drink alcohol except maybe scotch on holidays. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Gait assessment",
+      "Tandem gait testing",
+      "Pull test for postural instability",
+      "Cognitive assessment (Mini-Mental State or Montreal Cognitive Assessment)",
+      "Neurologic examination of cranial nerves",
+      "Motor strength testing",
+      "Deep tendon reflexes",
+      "Coordination testing (finger-nose-finger, heel-shin)",
+      "Romberg test",
+      "Assessment for primitive reflexes (grasp, glabellar)"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Normal Pressure Hydrocephalus. Document specifically what you observe."
+      "Gait assessment": "Magnetic gait with short, shuffling steps, wide-based stance, and difficulty with gait initiation and turning",
+      "Tandem gait testing": "Unable to perform tandem gait, loses balance after 2-3 steps",
+      "Pull test for postural instability": "Mild retropulsion but able to recover balance with 1-2 steps backward",
+      "Cognitive assessment (Mini-Mental State or Montreal Cognitive Assessment)": "MMSE 24/30 - points lost on attention, calculation, and delayed recall",
+      "Neurologic examination of cranial nerves": "Cranial nerves II-XII intact, no focal deficits",
+      "Motor strength testing": "5/5 strength in all muscle groups bilaterally",
+      "Deep tendon reflexes": "2+ and symmetric throughout, plantar reflexes flexor bilaterally",
+      "Coordination testing (finger-nose-finger, heel-shin)": "Intact coordination bilaterally, no dysmetria",
+      "Romberg test": "Negative - no increase in sway with eyes closed",
+      "Assessment for primitive reflexes (grasp, glabellar)": "Positive glabellar reflex, grasp reflex absent"
     },
     "ddxTargets": [
-        "Normal Pressure Hydrocephalus (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Normal Pressure Hydrocephalus (correct diagnosis)",
+      "Parkinson's disease",
+      "Vascular dementia",
+      "Subdural hematoma",
+      "Brain tumor",
+      "Alzheimer's disease with parkinsonism",
+      "Multi-system atrophy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Normal Pressure Hydrocephalus, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Normal Pressure Hydrocephalus, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Normal Pressure Hydrocephalus based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on family history of Alzheimer's disease and focus primarily on dementia workup while missing the classic triad of NPH",
+      "prematureClosure": "The combination of gait issues and incontinence in an elderly male might lead to premature diagnosis of normal aging or benign prostatic hyperplasia without considering neurologic causes",
+      "availabilityBias": "Parkinson's disease may come to mind quickly due to gait disturbance, but the magnetic gait pattern and incontinence are more suggestive of NPH"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Robert Edward Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Normal Pressure Hydrocephalus. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for an elderly patient with gait disturbance. As you interview Mr. Brennan, pay particular attention to the specific characteristics of his gait problem and any associated symptoms. What classic symptom triads should you be considering in geriatric neurology?",
+      "phase5": "Excellent work gathering the history and physical findings. You've identified the classic triad of gait disturbance, urinary incontinence, and cognitive decline. What does this constellation suggest, and what imaging study would be most helpful to confirm your suspicion?",
+      "finalDebrief": "This case illustrates the importance of recognizing classic symptom patterns in geriatric neurology. Normal pressure hydrocephalus presents with the classic Hakim triad, and the magnetic gait with wide base and short steps is quite characteristic. How did your differential diagnosis evolve as you gathered more information about the temporal progression and specific gait characteristics?"
     }
-}
+  }
 };

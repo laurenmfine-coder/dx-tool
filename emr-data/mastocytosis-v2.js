@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Chelsea Whitfield",
-  "patientHPI": "This keeps happening to me during exercise - my face gets all red and flushed, my heart starts racing over 140, I get terrible stomach cramps and feel like I'm going to pass out. I've seen eight different doctors in three years and they all say my tests are normal, but this is my twelfth episode.",
+      "patientHPI": "This keeps happening to me during exercise - my face gets all red and flushed, my heart starts racing over 140, I get terrible stomach cramps and feel like I'm going to pass out. I've seen eight different doctors in three years and they all say my tests are normal, but this is my twelfth episode.",
       "dob": "01/07/1992",
       "age": "34",
       "sex": "Female",
@@ -1102,111 +1102,116 @@ window.EMR_DATA = {
       "Validation",
       "First time tryptase drawn during episode — elevated"
     ]
-  ]
-,"references":[
-  {
-    "id": "MCAS-Consensus-2019",
-    "title": "Mast cell activation syndrome: clinicopathological approach",
-    "authors": "Weiler CR, Austen KF, Akin C, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2019,
-    "doi": "10.1016/j.anai.2019.09.025",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6920833/",
-    "openAccess": true,
-    "validates": [
-      "MCAS consensus criteria",
-      "Tryptase formula: acute ≥ (1.2 × baseline) + 2",
-      "24h urine mediators",
-      "KIT D816V for SM vs MCAS",
-      "Quadruple therapy"
-    ]
-  },
-  {
-    "id": "Valent-MCD-2012",
-    "title": "Definitions, criteria and classification of mast cell disorders",
-    "authors": "Valent P, Akin C, Arock M, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2012,
-    "doi": "10.1016/j.jaci.2012.09.002",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3742415/",
-    "openAccess": true,
-    "validates": [
-      "SM classification",
-      "WHO criteria",
-      "KIT D816V",
-      "Baseline tryptase >20 suggests SM"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "MCAS-Consensus-2019",
+      "title": "Mast cell activation syndrome: clinicopathological approach",
+      "authors": "Weiler CR, Austen KF, Akin C, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2019,
+      "doi": "10.1016/j.anai.2019.09.025",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6920833/",
+      "openAccess": true,
+      "validates": [
+        "MCAS consensus criteria",
+        "Tryptase formula: acute ≥ (1.2 × baseline) + 2",
+        "24h urine mediators",
+        "KIT D816V for SM vs MCAS",
+        "Quadruple therapy"
+      ]
+    },
+    {
+      "id": "Valent-MCD-2012",
+      "title": "Definitions, criteria and classification of mast cell disorders",
+      "authors": "Valent P, Akin C, Arock M, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2012,
+      "doi": "10.1016/j.jaci.2012.09.002",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3742415/",
+      "openAccess": true,
+      "validates": [
+        "SM classification",
+        "WHO criteria",
+        "KIT D816V",
+        "Baseline tryptase >20 suggests SM"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Chelsea Whitfield is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Chelsea is initially guarded and frustrated, having been dismissed by multiple specialists who attributed her symptoms to anxiety. She becomes more forthcoming when she senses the provider is taking her seriously, showing both relief and residual distress from her 3-year diagnostic odyssey.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what happens during these episodes?",
+      "What does the flushing look like and where does it occur?",
+      "Tell me about the abdominal pain - where is it and what does it feel like?",
+      "What seems to trigger these episodes?",
+      "How long do the episodes typically last?",
+      "What happens to your heart rate and blood pressure during episodes?",
+      "Have you noticed any skin changes or hives during episodes?",
+      "Do certain foods, medications, or situations make this worse?",
+      "What provides relief when you're having an episode?",
+      "Have you had any laboratory tests drawn during an actual episode?",
+      "Tell me about your experience with the previous specialists you've seen",
+      "Have you noticed any patterns with your menstrual cycle?",
+      "Do you have any known drug allergies or reactions?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Diphenhydramine; Famotidine; NS bolus.'",
-        "allergies": "'My allergies: Morphine, NSAIDs.'",
-        "family": "Non-contributory",
-        "social": "History: 3-year diagnostic odyssey \u2014 8 specialists, told anxiety  Symptoms: Episodic flushing, tachycardia, abdominal cramping, near-syncope  Triggers: Heat, exercise, alcohol, stress, menstruation  Frustration: \"Everyone thinks I'm making this up\"  Validation: First time tryptase drawn during episode \u2014 elevated"
+      "default": "I'm sorry, could you clarify what you mean? I want to make sure I give you accurate information since so many doctors have dismissed this.",
+      "onset": "The first episode was about 3 years ago during a hot yoga class. I thought maybe I just overheated, but then it kept happening in different situations.",
+      "character": "It starts with this intense flushing - my face and chest turn bright red and feel like they're burning. Then my heart starts racing and I get severe cramping in my abdomen.",
+      "location": "The flushing is mainly my face, neck, and upper chest. The abdominal pain is crampy and all over my belly, not in one specific spot.",
+      "severity": "During episodes it's an 8 or 9 out of 10. I feel like I'm going to pass out and sometimes I have to sit down immediately. Between episodes I'm completely fine.",
+      "aggravating": "Heat definitely triggers it - hot weather, hot showers, exercise. Also alcohol, especially wine. Stress makes it worse, and I've noticed it's worse around my period.",
+      "relieving": "The ER gave me Benadryl and Pepcid once and it actually helped, which surprised everyone. Cold compresses help a little with the flushing.",
+      "associated": "During episodes I get lightheaded, sometimes nauseous, my heart pounds, and I feel this sense of doom. Sometimes I get diarrhea afterward.",
+      "denies": "No chest pain, no trouble breathing, no hives or rash that I can see. No fevers between episodes.",
+      "history": "This is my 12th episode in 3 years. I've seen 8 different specialists - cardiology, GI, endocrine, even psychiatry. Everyone says it's anxiety but this doesn't feel like anxiety.",
+      "medications": "Diphenhydramine; Famotidine; NS bolus",
+      "allergies": "Morphine, NSAIDs",
+      "family": "Nothing similar in my family. No one has allergies or episodes like this.",
+      "social": "I'm a high school teacher, don't smoke, rarely drink now because it triggers episodes. This has really affected my work - I've had to leave class several times."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect skin for flushing, urticaria, or mastocytosis lesions",
+      "Palpate for lymphadenopathy",
+      "Abdominal examination for hepatosplenomegaly",
+      "Cardiac examination for murmurs or gallops",
+      "Blood pressure and orthostatic vital signs",
+      "Dermatographism testing",
+      "Examination of conjunctivae and mucous membranes",
+      "Palpation for masses or organomegaly",
+      "Assessment of volume status and perfusion"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect skin for flushing, urticaria, or mastocytosis lesions": "Persistent erythema of face, neck, and upper chest; no visible urticaria currently; no obvious mastocytosis lesions",
+      "Palpate for lymphadenopathy": "No palpable lymphadenopathy in cervical, axillary, or inguinal regions",
+      "Abdominal examination for hepatosplenomegaly": "Soft abdomen with mild diffuse tenderness; no hepatosplenomegaly or masses palpated",
+      "Cardiac examination for murmurs or gallops": "Tachycardic regular rhythm, no murmurs, gallops, or rubs; PMI not displaced",
+      "Blood pressure and orthostatic vital signs": "Hypotensive at 92/58, HR 142; mild orthostatic changes present",
+      "Dermatographism testing": "Positive dermatographism - raised wheal appears within 2-3 minutes of firm stroking",
+      "Examination of conjunctivae and mucous membranes": "Conjunctivae slightly injected; mucous membranes appear normal",
+      "Palpation for masses or organomegaly": "No palpable masses; liver and spleen not enlarged",
+      "Assessment of volume status and perfusion": "Appears mildly volume depleted; capillary refill 2-3 seconds; skin warm despite hypotension"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Mast cell activation syndrome (correct diagnosis)",
+      "Systemic mastocytosis",
+      "Carcinoid syndrome",
+      "Pheochromocytoma",
+      "Anaphylaxis",
+      "Panic disorder",
+      "Vasovagal syncope"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'anxiety' diagnosis given multiple prior specialists reached this conclusion, potentially missing organic pathology",
+      "prematureClosure": "May stop investigation after normal basic workup, failing to consider rare disorders or obtain episode-specific testing",
+      "availabilityBias": "Anxiety and panic disorders are common in young women, making it easy to dismiss episodic symptoms without considering mast cell disorders"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Chelsea Whitfield: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient has had 12 similar episodes over 3 years with multiple specialists attributing symptoms to anxiety. What red flags in the presentation suggest you should consider organic causes? Think about the pattern, triggers, and objective findings that distinguish this from psychiatric conditions.",
+      "phase5": "You've identified episodic flushing, tachycardia, and hypotension with positive dermatographism. The patient responds to H1 and H2 blockers. What does this suggest about the underlying pathophysiology? Consider what mediators could cause this constellation of findings.",
+      "finalDebrief": "This case illustrates mast cell activation syndrome, often misdiagnosed as anxiety. Key teaching points: the importance of obtaining tryptase levels during episodes, recognizing that response to antihistamines suggests mast cell degranulation, and understanding how diagnostic odysseys affect patient trust. What anchoring biases contributed to the delayed diagnosis?"
     }
-}
+  }
 };

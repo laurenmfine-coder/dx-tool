@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Liam Foster",
-  "patientHPI": "My 6-month-old has been having bloody stools and seems dehydrated even though he's been drinking his formula.",
+      "patientHPI": "My 6-month-old has been having bloody stools and seems dehydrated even though he's been drinking his formula.",
       "dob": "07/14/2026",
       "age": "0",
       "sex": "Male",
@@ -950,42 +950,41 @@ window.EMR_DATA = {
       "Growth",
       "Dropped from 50th to 15th percentile weight-for-age"
     ]
-  ]
-,"references":[
-  {
-    "id": "NIAID-FA-2010",
-    "title": "Guidelines for diagnosis and management of food allergy in the US",
-    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2010,
-    "doi": "10.1016/j.jaci.2010.10.008",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
-    "openAccess": true,
-    "validates": [
-      "IgE-mediated food allergy criteria",
-      "Component testing (Ara h 2)",
-      "OFC as gold standard"
-    ]
-  },
-  {
-    "id": "DRACMA-2010",
-    "title": "WAO DRACMA: cow's milk allergy diagnosis",
-    "authors": "Fiocchi A, Brozek J, Schunemann H, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2010,
-    "doi": "10.1097/WOX.0b013e3181defeb9",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3488907/",
-    "openAccess": true,
-    "validates": [
-      "CMP in breast milk",
-      "Maternal elimination counseling",
-      "Hydrolyzed vs amino acid formula",
-      "Baked milk ladder",
-      "75% tolerate baked milk by age 1"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "NIAID-FA-2010",
+      "title": "Guidelines for diagnosis and management of food allergy in the US",
+      "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2010,
+      "doi": "10.1016/j.jaci.2010.10.008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+      "openAccess": true,
+      "validates": [
+        "IgE-mediated food allergy criteria",
+        "Component testing (Ara h 2)",
+        "OFC as gold standard"
+      ]
+    },
+    {
+      "id": "DRACMA-2010",
+      "title": "WAO DRACMA: cow's milk allergy diagnosis",
+      "authors": "Fiocchi A, Brozek J, Schunemann H, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2010,
+      "doi": "10.1097/WOX.0b013e3181defeb9",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3488907/",
+      "openAccess": true,
+      "validates": [
+        "CMP in breast milk",
+        "Maternal elimination counseling",
+        "Hydrolyzed vs amino acid formula",
+        "Baked milk ladder",
+        "75% tolerate baked milk by age 1"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Cow's milk protein allergy (CMPA) affects 2–3% of infants and is the most common food allergy in infancy. IgE-mediated CMPA presents within 30 min of exposure (urticaria, vomiting, anaphylaxis). Non-IgE CMPA presents with GI symptoms hours later (FPIES, proctocolitis).",
@@ -1003,75 +1002,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Liam Foster appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Parents are anxious and frustrated, having tried multiple interventions without improvement. They appear tired from sleep disruption due to baby's discomfort and are very forthcoming with detailed feeding and symptom logs. Mother shows guilt about stopping breastfeeding early.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 6-month-old with bloody stools, eczema, and poor weight gain after formula switch start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice blood in the stools?",
+      "What does the blood look like - streaky, mixed in, or coating the stool?",
+      "Tell me about the feeding history and when you switched from breast milk",
+      "How has Liam's weight gain been since birth?",
+      "Describe the eczema - when did it start and how severe is it?",
+      "How frequent are the bowel movements and what do they look like?",
+      "Is Liam fussy or colicky, especially after feeding?",
+      "Have you tried any dietary changes or different formulas?",
+      "Any vomiting or spitting up more than usual?",
+      "How is Liam's appetite and feeding behavior?",
+      "Any family history of food allergies or gastrointestinal problems?",
+      "Have you noticed the symptoms getting better or worse over time?",
+      "Any fever, lethargy, or other concerning symptoms?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Liam Foster presents with 6-month-old with bloody stools, eczema, and poor weigh.'",
-        "character": "'It's 6-month-old with bloody stools, eczema, and poor weight gain after formula switch \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrocortisone 1% cream.'",
-        "allergies": "'My allergies are Cow's milk (suspected).'",
-        "family": "Mother: allergic rhinitis  Father: eczema as child",
-        "social": "Feeding: Switched from breast milk to cow's milk formula at 4 months  Growth: Dropped from 50th to 15th percentile weight-for-age"
+      "default": "I'm not sure what you mean by that - could you ask it differently? We're really worried about him.",
+      "onset": "We first saw blood in his diapers about 6 weeks ago, maybe 2 weeks after we fully switched to formula. The eczema started when he was about 3 months old.",
+      "character": "The blood looks like little streaks mixed through the stool, sometimes bright red. The stools are often loose and mucousy.",
+      "location": "It's in his bowel movements - we see it in the diaper. The eczema is worst on his cheeks and in the creases of his arms and legs.",
+      "severity": "It's really concerning - maybe 7 out of 10 for our worry level. He seems uncomfortable and cranky, especially after eating.",
+      "aggravating": "The symptoms seem worse after he drinks his formula. The eczema gets worse when he's fussy and scratching.",
+      "relieving": "Nothing really helps the bloody stools. The hydrocortisone cream helps the eczema a little bit.",
+      "associated": "He's been more fussy than usual, especially after feeds. His weight gain has really slowed down, and he seems hungrier but more uncomfortable after eating.",
+      "denies": "No fever, no projectile vomiting, no severe lethargy. He's still interactive and playful between episodes of fussiness.",
+      "history": "This is the first time we've seen anything like this. He was perfectly fine when I was breastfeeding him.",
+      "medications": "Hydrocortisone 1% cream",
+      "allergies": "Cow's milk (suspected)",
+      "family": "I have seasonal allergies and my husband had eczema as a baby that he outgrew. My sister's daughter has some food allergies.",
+      "social": "I had to stop breastfeeding at 4 months when I went back to work. We switched to a regular cow's milk formula. No smoking in the house, we're both professional parents."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and growth assessment",
+      "Skin examination for eczema severity and distribution",
+      "Abdominal inspection and palpation",
+      "Digital rectal examination or perirectal inspection",
+      "Lymph node examination",
+      "Oral examination for thrush or other findings",
+      "Cardiac examination",
+      "Assessment of hydration status",
+      "Weight and length plotting on growth curves",
+      "Assessment of muscle mass and subcutaneous fat"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and growth assessment": "Alert, interactive infant who appears mildly irritable. Appears thin with decreased subcutaneous fat for age.",
+      "Skin examination for eczema severity and distribution": "Moderate to severe atopic dermatitis involving bilateral cheeks, antecubital and popliteal fossae with erythema, scaling, and some excoriation.",
+      "Abdominal inspection and palpation": "Soft, non-distended abdomen. No masses, hepatosplenomegaly, or tenderness. Normal bowel sounds.",
+      "Digital rectal examination or perirectal inspection": "Perirectal area shows mild erythema. No visible fissures or external lesions.",
+      "Lymph node examination": "No significant lymphadenopathy palpated.",
+      "Oral examination for thrush or other findings": "Oral cavity clear, no thrush, normal sucking reflex.",
+      "Cardiac examination": "Regular rate and rhythm, no murmurs audible. Capillary refill less than 2 seconds.",
+      "Assessment of hydration status": "Mucous membranes moist, good skin turgor, normal fontanelle.",
+      "Weight and length plotting on growth curves": "Weight dropped from 50th percentile at birth to 15th percentile currently. Length remains 25th percentile.",
+      "Assessment of muscle mass and subcutaneous fat": "Mildly decreased subcutaneous fat and muscle mass consistent with mild failure to thrive."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Cow's milk protein allergy (correct diagnosis)",
+      "Food protein-induced enterocolitis syndrome (FPIES)",
+      "Inflammatory bowel disease",
+      "Intussusception",
+      "Necrotizing enterocolitis",
+      "Lactose intolerance",
+      "Infectious gastroenteritis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on the bloody stools and consider more serious conditions like IBD or intussusception without fully considering the feeding history and allergic presentation",
+      "prematureClosure": "Risk of stopping at 'formula intolerance' without considering the systemic nature of food protein allergy and need for specific management",
+      "availabilityBias": "May overweight infectious causes if recently seeing gastroenteritis cases, or underweight food allergies if unfamiliar with presentation in infants"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Liam Foster's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several concerning possibilities for bloody stools in an infant. As you interview the parents, pay particular attention to the temporal relationship between symptoms and any changes in diet. What questions will help you understand if this might be related to an immune response versus an infectious or anatomical cause?",
+      "phase5": "Now that you have the history of symptoms beginning after formula introduction, along with the eczema and growth concerns, what pattern are you seeing? Consider how food protein allergies can present systemically in infants. What would be your next step in narrowing down between your differential diagnoses?",
+      "finalDebrief": "This case illustrates how cow's milk protein allergy can present with multiple system involvement - GI symptoms, skin manifestations, and growth issues. The key was recognizing the temporal relationship with formula introduction and the constellation of atopic findings. How did your thinking evolve from considering anatomical emergencies to recognizing this as an allergic phenomenon?"
     }
-}
+  }
 };

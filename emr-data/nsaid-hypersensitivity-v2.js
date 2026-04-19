@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Lucia Fernandez",
-  "patientHPI": "I grabbed some pain medication from my coworker's bag for my headache without looking at the label, and within half an hour I couldn't breathe properly - my chest got so tight and my nose started running like crazy.",
+      "patientHPI": "I grabbed some pain medication from my coworker's bag for my headache without looking at the label, and within half an hour I couldn't breathe properly - my chest got so tight and my nose started running like crazy.",
       "dob": "08/20/1988",
       "age": "38",
       "sex": "Female",
@@ -1189,112 +1189,119 @@ window.EMR_DATA = {
       "Occupation",
       "Chef — cannot smell or taste, career threatened"
     ]
-  ]
-,"references":[
-  {
-    "id": "Drug-Allergy-PP-2022",
-    "title": "Drug allergy: A 2022 practice parameter update",
-    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2022,
-    "doi": "10.1016/j.jaci.2022.08.028",
-    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
-    "openAccess": true,
-    "validates": [
-      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
-      "Single-dose amoxicillin challenge for low-risk",
-      "Vancomycin RMS management",
-      "AERD aspirin desensitization protocol",
-      "Sulfonamide challenge protocols"
-    ]
-  },
-  {
-    "id": "AERD-Review-2021",
-    "title": "Aspirin-exacerbated respiratory disease: comprehensive review",
-    "authors": "Laidlaw TM, Mullol J, Woessner KM, et al.",
-    "journal": "J Allergy Clin Immunol Pract",
-    "year": 2021,
-    "doi": "10.1016/j.jaip.2020.09.016",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855559/",
-    "openAccess": true,
-    "validates": [
-      "AERD triad",
-      "Aspirin desensitization 2-day protocol",
-      "Maintenance 650mg BID",
-      "Zileuton for AERD",
-      "Anosmia recovery 30-60%"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "Drug-Allergy-PP-2022",
+      "title": "Drug allergy: A 2022 practice parameter update",
+      "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2022,
+      "doi": "10.1016/j.jaci.2022.08.028",
+      "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+      "openAccess": true,
+      "validates": [
+        "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+        "Single-dose amoxicillin challenge for low-risk",
+        "Vancomycin RMS management",
+        "AERD aspirin desensitization protocol",
+        "Sulfonamide challenge protocols"
+      ]
+    },
+    {
+      "id": "AERD-Review-2021",
+      "title": "Aspirin-exacerbated respiratory disease: comprehensive review",
+      "authors": "Laidlaw TM, Mullol J, Woessner KM, et al.",
+      "journal": "J Allergy Clin Immunol Pract",
+      "year": 2021,
+      "doi": "10.1016/j.jaip.2020.09.016",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855559/",
+      "openAccess": true,
+      "validates": [
+        "AERD triad",
+        "Aspirin desensitization 2-day protocol",
+        "Maintenance 650mg BID",
+        "Zileuton for AERD",
+        "Anosmia recovery 30-60%"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Lucia Fernandez is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Lucia appears anxious and frustrated, breathing with visible effort but eager to explain what happened. She's articulate about her condition but emotionally distressed about both the current episode and how her anosmia has devastated her career as a chef.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what medication you took and when?",
+      "How quickly did your symptoms start after taking the ibuprofen?",
+      "Describe your breathing difficulty - is it getting worse?",
+      "Are you having any chest pain or tightness?",
+      "What does your peak flow usually run, and what was it today?",
+      "Have you had episodes like this before with NSAIDs?",
+      "Tell me about your nasal polyps and surgeries",
+      "When did you lose your sense of smell completely?",
+      "What medications are you currently taking for your AERD?",
+      "Have you ever been hospitalized for severe bronchospasm?",
+      "Are you considering aspirin desensitization therapy?",
+      "How has losing your sense of smell affected your work as a chef?",
+      "Any family history of asthma or aspirin sensitivity?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Continuous albuterol; Ipratropium; Methylprednisolone; Magnesium sulfate.'",
-        "allergies": "'My allergies: Aspirin, Ibuprofen, All NSAIDs.'",
-        "family": "Non-contributory",
-        "social": "Context: AERD triad: asthma + nasal polyps + NSAID sensitivity  Anosmia: Lost sense of smell 2 years ago \u2014 devastating for someone who loved cooking  Surgeries: 3 polypectomies in 5 years \u2014 polyps always recur  Aspirin desensitization: Candidate \u2014 would allow daily aspirin to suppress polyp recurrence  Occupation: Chef \u2014 cannot smell or taste, career threatened"
+      "default": "I'm sorry, I'm having trouble focusing with my breathing being so tight. Can you repeat that?",
+      "onset": "I took the ibuprofen about 45 minutes ago for a headache. Within 20-30 minutes I started getting short of breath and my chest got really tight.",
+      "character": "It feels like someone is squeezing my chest in a vice. I'm wheezing and can barely get air in. My nose is running like crazy too.",
+      "location": "The tightness is all across my chest, front and back. It's not sharp pain, just this crushing feeling.",
+      "severity": "This is about an 8 out of 10. I can barely talk in full sentences. My peak flow dropped from my usual 380 to 180.",
+      "aggravating": "Trying to lie flat makes it worse. Any exertion makes the wheezing terrible. Even talking makes me more short of breath.",
+      "relieving": "The continuous albuterol is helping a little, but not much. Usually my rescue inhaler works better than this.",
+      "associated": "My nose is pouring clear fluid, my eyes are watery, and I feel this burning sensation in my chest. No fever or chills.",
+      "denies": "No chest pain like a heart attack, no leg swelling, no cough with blood, no recent travel or illness.",
+      "history": "This is my fourth severe episode. The worst was three years ago with aspirin - I nearly got intubated. I've learned to avoid all NSAIDs religiously.",
+      "medications": "Continuous albuterol; Ipratropium; Methylprednisolone; Magnesium sulfate",
+      "allergies": "Aspirin, Ibuprofen, All NSAIDs",
+      "family": "No family history of asthma or aspirin sensitivity. My parents and siblings are all healthy.",
+      "social": "I'm a chef, or was. I lost my sense of smell two years ago from the polyps. I can't taste properly anymore, so my career is basically over. I don't smoke, rarely drink."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Pulmonary auscultation",
+      "Respiratory rate and effort assessment",
+      "Peak flow measurement",
+      "Oxygen saturation monitoring",
+      "Nasal examination",
+      "Accessory muscle use evaluation",
+      "Cardiac auscultation",
+      "Blood pressure monitoring",
+      "General appearance and distress level",
+      "Skin examination for urticaria"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Pulmonary auscultation": "Diffuse expiratory wheezing bilaterally, decreased air entry throughout, prolonged expiratory phase",
+      "Respiratory rate and effort assessment": "Respiratory rate 28, using accessory muscles, sitting upright in tripod position",
+      "Peak flow measurement": "180 L/min (baseline 380 L/min) - 53% reduction from personal best",
+      "Oxygen saturation monitoring": "SpO2 88% on room air, improves to 92% with supplemental oxygen",
+      "Nasal examination": "Profuse clear rhinorrhea, visible nasal polyps bilaterally, complete nasal obstruction",
+      "Accessory muscle use evaluation": "Prominent sternocleidomastoid and intercostal muscle retractions",
+      "Cardiac auscultation": "Tachycardic regular rhythm, no murmurs, no S3 gallop",
+      "Blood pressure monitoring": "Hypertensive at 138/82, likely related to bronchodilator therapy and distress",
+      "General appearance and distress level": "Moderate distress, alert and oriented, speaking in 3-4 word sentences",
+      "Skin examination for urticaria": "No rash, hives, or angioedema present"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "AERD exacerbation (NSAID-induced bronchospasm) (correct diagnosis)",
+      "Acute asthma exacerbation",
+      "Anaphylaxis",
+      "Acute coronary syndrome",
+      "Pulmonary embolism",
+      "Vocal cord dysfunction",
+      "Pneumonia with bronchospasm"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Don't anchor on 'just another asthma attack' - the NSAID trigger and triad of symptoms (bronchospasm + rhinorrhea + known polyps) points specifically to AERD",
+      "prematureClosure": "Avoid stopping at 'asthma exacerbation' without identifying the specific NSAID trigger and AERD pathophysiology",
+      "availabilityBias": "AERD is less common than typical asthma, so don't default to standard asthma protocols without recognizing this specific syndrome"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Lucia Fernandez: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified bronchospasm as the primary issue. Now think about what might make this different from typical asthma - what specific triggers or associated symptoms would point you toward a particular subtype of reactive airway disease?",
+      "phase5": "You've gathered great information about the NSAID trigger and her history of nasal polyps. How do these findings together point to a specific syndrome rather than just coincidental asthma and rhinitis? What's the pathophysiology here?",
+      "finalDebrief": "This case illustrates AERD - the classic triad of asthma, nasal polyposis, and NSAID hypersensitivity. Notice how the rapid onset after ibuprofen, the severe bronchospasm with concurrent rhinorrhea, and her history of recurrent polyps all fit together. The key learning is recognizing this as a distinct syndrome requiring specific management, including consideration for aspirin desensitization therapy."
     }
-}
+  }
 };

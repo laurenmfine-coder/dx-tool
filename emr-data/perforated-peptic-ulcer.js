@@ -185,25 +185,79 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.4", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "MCV", "value": "78", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "274", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "MCV",
+              "value": "78",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "274",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron", "value": "42", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "TIBC", "value": "380", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "18", "unit": "ng/mL", "range": "30-400", "flag": "L" }
+            {
+              "test": "Iron",
+              "value": "42",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "380",
+              "unit": "µg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Ferritin",
+              "value": "18",
+              "unit": "ng/mL",
+              "range": "30-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "H. PYLORI",
           "results": [
-            { "test": "H. pylori Stool Antigen", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" }
+            {
+              "test": "H. pylori Stool Antigen",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -264,15 +318,42 @@ window.EMR_DATA = {
     "Sister: Healthy, age 58"
   ],
   "socialHistory": [
-    ["Occupation", "Retired auto mechanic"],
-    ["Marital", "Married — 38 years"],
-    ["Tobacco", "Current smoker — 1 PPD x 44 years (44 pack-years); declined cessation"],
-    ["Alcohol", "2-3 beers daily"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited by knee pain; walks to corner store"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Wears seatbelt; no fall history"],
-    ["Advance Directive", "None — discussed; patient deferred"]
+    [
+      "Occupation",
+      "Retired auto mechanic"
+    ],
+    [
+      "Marital",
+      "Married — 38 years"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 44 years (44 pack-years); declined cessation"
+    ],
+    [
+      "Alcohol",
+      "2-3 beers daily"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited by knee pain; walks to corner store"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; no fall history"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed; patient deferred"
+    ]
   ],
   "meta": {
     "caseId": "perforated-peptic-ulcer",
@@ -283,75 +364,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Vincent Morales appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Vincent appears anxious and is holding his abdomen, with occasional grimacing indicating significant discomfort. He is cooperative but somewhat guarded when discussing his smoking and NSAID use, knowing they may be contributing factors. His speech is measured due to pain, but he provides detailed responses when asked directly.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when this stomach pain started and how it's different from your usual ulcer symptoms?",
+      "What does the pain feel like - is it sharp, burning, cramping, or something else?",
+      "Where exactly is the pain located and does it spread anywhere else?",
+      "On a scale of 1-10, how severe is this pain compared to your previous ulcer episodes?",
+      "What makes the pain worse - eating, moving, lying down?",
+      "Have you found anything that helps relieve the pain?",
+      "Are you experiencing any nausea, vomiting, or changes in your bowel movements?",
+      "Have you noticed any blood in your vomit or stool, or any black tarry stools?",
+      "How long have you been taking naproxen for your knee pain, and how often?",
+      "Are you still taking your omeprazole as prescribed?",
+      "Have you had any fever, chills, or feeling faint?",
+      "When was your last meal and how has your appetite been?",
+      "Have you had any similar severe episodes like this before?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 64-year-old male with PUD history, OA bilateral knees, and CAD presenting with w.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Perforated Peptic Ulcer.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Omeprazole 20mg daily; Naproxen 500mg BID; Aspirin 81mg daily; Lisinopril 10mg daily; Atorvastatin 20mg daily.'",
-        "allergies": "'My allergies are Tramadol.'",
-        "family": "Mother: Gastric cancer, deceased at 68  Father: Hypertension, T2DM, deceased at 75 (MI)  Brother: PUD (H. pylori), alive at 62",
-        "social": "Occupation: Retired auto mechanic  Marital: Married \u2014 38 years  Tobacco: Current smoker \u2014 1 PPD x 44 years (44 pack-years); declined cessation  Alcohol: 2-3 beers daily  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you be more specific about my stomach pain?",
+      "onset": "The pain started about 6 hours ago, really suddenly while I was watching TV. It's much worse than my usual heartburn - this feels different, more intense and constant.",
+      "character": "It's a sharp, stabbing pain that's constant. Not like the burning I usually get with my ulcer - this is more like someone's stabbing me with a knife.",
+      "location": "It's right here in my upper stomach area, just below my ribs in the center. Sometimes it seems to go through to my back.",
+      "severity": "This is easily a 9 out of 10. My usual ulcer pain is maybe a 4 or 5, but this is excruciating. I can barely move without it getting worse.",
+      "aggravating": "Any movement makes it worse - sitting up, walking, even taking a deep breath. Pressing on my stomach is agony.",
+      "relieving": "Nothing helps. I tried antacids, my usual position changes, even tried some milk. Nothing touches this pain.",
+      "associated": "I feel nauseous and had some dry heaving earlier. I feel dizzy when I stand up and I'm sweating even though I don't think I have a fever.",
+      "denies": "No vomiting blood, no black stools, no actual vomiting yet - just the nausea and dry heaves. No chest pain or shortness of breath.",
+      "history": "I've had peptic ulcer disease for about 8 years, but nothing like this. Usually antacids or my omeprazole help, and the pain comes and goes. This just won't stop.",
+      "medications": "Omeprazole 20mg daily; Naproxen 500mg BID; Aspirin 81mg daily; Lisinopril 10mg daily; Atorvastatin 20mg daily",
+      "allergies": "Tramadol",
+      "family": "My mother died of stomach cancer at 68, and my brother had H. pylori ulcers. My father had heart problems and diabetes.",
+      "social": "I'm a retired auto mechanic, married 38 years. I smoke a pack a day for 44 years now. I have 2-3 beers daily, no illegal drugs. My knees are killing me from all those years under cars."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "Abdominal inspection",
+      "Auscultation of bowel sounds",
+      "Light abdominal palpation",
+      "Deep abdominal palpation",
+      "Rebound tenderness testing",
+      "Percussion of abdomen",
+      "Murphy's sign",
+      "Rovsing's sign",
+      "Psoas sign",
+      "Assessment for rigidity"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Perforated Peptic Ulcer. Document specifically what you observe."
+      "Abdominal inspection": "Abdomen appears slightly distended, patient guarding and appears in significant distress",
+      "Auscultation of bowel sounds": "Bowel sounds are diminished to absent in all four quadrants",
+      "Light abdominal palpation": "Extreme tenderness in epigastric region, patient winces and guards with minimal pressure",
+      "Deep abdominal palpation": "Unable to perform due to severe tenderness and voluntary guarding",
+      "Rebound tenderness testing": "Positive rebound tenderness in epigastric region, patient cries out with release",
+      "Percussion of abdomen": "Loss of liver dullness, suggesting free air under diaphragm",
+      "Murphy's sign": "Negative",
+      "Rovsing's sign": "Negative",
+      "Psoas sign": "Negative",
+      "Assessment for rigidity": "Board-like rigidity present in upper abdomen, consistent with peritoneal irritation"
     },
     "ddxTargets": [
-        "Perforated Peptic Ulcer (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Perforated Peptic Ulcer (correct diagnosis)",
+      "Acute Pancreatitis",
+      "Acute Cholangitis",
+      "Myocardial Infarction",
+      "Aortic Dissection",
+      "Acute Cholecystitis",
+      "Gastroesophageal Reflux Disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Perforated Peptic Ulcer, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Perforated Peptic Ulcer, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Perforated Peptic Ulcer based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known peptic ulcer disease history and missing the acute perforation, treating as routine PUD exacerbation",
+      "prematureClosure": "May stop at 'ulcer flare-up' given clear PUD history without recognizing the surgical emergency of perforation",
+      "availabilityBias": "Recent cases of GERD or routine PUD may overshadow recognition of this life-threatening complication requiring immediate surgery"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Vincent Morales's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Perforated Peptic Ulcer. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possibilities for acute abdominal pain. Given Mr. Morales' medication history, what specific complications should you be most concerned about? How might his NSAID use factor into your differential diagnosis?",
+      "phase5": "Your physical exam reveals some concerning findings - loss of liver dullness and board-like rigidity. How do these findings change your assessment of his peptic ulcer disease? What's the most likely complication that's occurred?",
+      "finalDebrief": "This case demonstrates how chronic conditions can develop life-threatening complications. The combination of NSAID use, known PUD, and classic perforation signs (sudden onset, rigid abdomen, loss of liver dullness) should have pointed toward perforated peptic ulcer. How did your differential evolve from routine PUD to surgical emergency?"
     }
-}
+  }
 };

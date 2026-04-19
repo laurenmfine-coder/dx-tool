@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Campbell",
-  "patientHPI": "I've been having terrible diarrhea for three days now, started watery but now there's blood in it, and my stomach is cramping so bad I can barely stand up. I think it might be from that chicken sandwich I got from a food truck last week - it didn't taste quite right and my coworker got sick too.",
+    "patientHPI": "I've been having terrible diarrhea for three days now, started watery but now there's blood in it, and my stomach is cramping so bad I can barely stand up. I think it might be from that chicken sandwich I got from a food truck last week - it didn't taste quite right and my coworker got sick too.",
     "dob": "08/25/1995",
     "age": 29,
     "sex": "Male",
@@ -124,18 +124,60 @@ window.EMR_DATA = {
         {
           "name": "STOOL STUDIES",
           "results": [
-            { "test": "Stool Culture", "value": "Campylobacter jejuni isolated", "unit": "—", "range": "No pathogen isolated", "flag": "H" },
-            { "test": "Stool WBC", "value": "Many", "unit": "/hpf", "range": "None", "flag": "H" },
-            { "test": "Stool Occult Blood", "value": "Positive", "unit": "—", "range": "Negative", "flag": "H" }
+            {
+              "test": "Stool Culture",
+              "value": "Campylobacter jejuni isolated",
+              "unit": "—",
+              "range": "No pathogen isolated",
+              "flag": "H"
+            },
+            {
+              "test": "Stool WBC",
+              "value": "Many",
+              "unit": "/hpf",
+              "range": "None",
+              "flag": "H"
+            },
+            {
+              "test": "Stool Occult Blood",
+              "value": "Positive",
+              "unit": "—",
+              "range": "Negative",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -179,15 +221,42 @@ window.EMR_DATA = {
     "Family history significant for HLA-B27-associated disease"
   ],
   "socialHistory": [
-    ["Occupation", "Software developer — desk job; works from home 3 days/week"],
-    ["Marital", "Single; sexually active with male and female partners"],
-    ["Tobacco", "Denies"],
-    ["Alcohol", "Social, 3-4 drinks on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Weight lifting 4x/week; running 2x/week"],
-    ["Housing", "Studio apartment"],
-    ["Safety", "No firearms; seatbelt"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Software developer — desk job; works from home 3 days/week"
+    ],
+    [
+      "Marital",
+      "Single; sexually active with male and female partners"
+    ],
+    [
+      "Tobacco",
+      "Denies"
+    ],
+    [
+      "Alcohol",
+      "Social, 3-4 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Weight lifting 4x/week; running 2x/week"
+    ],
+    [
+      "Housing",
+      "Studio apartment"
+    ],
+    [
+      "Safety",
+      "No firearms; seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "reactive-arthritis",
@@ -198,158 +267,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Derek Campbell is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Derek appears anxious and visibly uncomfortable, frequently shifting in his chair due to joint pain. He's forthcoming about his symptoms but somewhat embarrassed discussing his sexual history and urinary symptoms, requiring gentle encouragement to provide complete information.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me more about when your joint pain started and which joints are affected?",
+      "Have you noticed any eye irritation, redness, or discharge recently?",
+      "Are you experiencing any burning with urination or urethral discharge?",
+      "How long ago did you have the diarrheal illness, and was it diagnosed?",
+      "Have you had any skin changes or rashes, particularly on your palms or soles?",
+      "Do you have any back pain or morning stiffness?",
+      "Can you describe your recent sexual activity and any new partners?",
+      "Have you traveled recently or eaten anything unusual?",
+      "Do you have any family history of arthritis or autoimmune conditions?",
+      "What medications are you currently taking for your symptoms?",
+      "Have you ever been tested for sexually transmitted infections?",
+      "Are you experiencing any fever, chills, or night sweats?",
+      "Have you had any mouth sores or genital ulcers?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The musculoskeletal emergency has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with Reactive Arthritis.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies: Amoxicillin.'",
-        "family": "Mother: Psoriasis, alive at 56  Father: Ankylosing spondylitis (HLA-B27 positive), alive at 60  Sister: Healthy, age 26",
-        "social": "Occupation: Software developer \u2014 desk job; works from home 3 days/week  Marital: Single; sexually active with male and female partners  Tobacco: Denies  Alcohol: Social, 3-4 drinks on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
+      "onset": "The joint pain started about a week ago, maybe 5-6 days after my stomach problems began. It came on gradually but has gotten much worse over the past few days.",
+      "character": "My knees and ankles feel hot, swollen, and really stiff. It's like a deep aching pain that's constant, and my lower back is killing me too.",
+      "location": "Mainly my knees and ankles - both sides but the right knee is definitely worse. My lower back pain goes down into my buttocks sometimes.",
+      "severity": "The joint pain is easily an 8 out of 10 right now. I can barely walk normally, and getting up from sitting is terrible.",
+      "aggravating": "Any movement makes it worse, especially first thing in the morning. Sitting at my computer all day doesn't help either.",
+      "relieving": "The ibuprofen helps a little bit, but not much. Heat seems to help my back somewhat.",
+      "associated": "My eyes have been really red and irritated the past few days, and I've been having some burning when I pee. I feel feverish and just generally awful.",
+      "denies": "No chest pain, no shortness of breath, no rash that I've noticed, no mouth sores.",
+      "history": "I've had some back pain on and off for a couple years, but nothing like this joint pain. This is completely new for me.",
+      "medications": "Ibuprofen 400mg PRN",
+      "allergies": "Amoxicillin",
+      "family": "My dad has ankylosing spondylitis and tested positive for something called HLA-B27. My mom has psoriasis.",
+      "social": "I'm a software developer, work from home mostly. I'm single and sexually active. I don't smoke, drink socially on weekends, no drugs."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Joint inspection",
-        "Joint palpation",
-        "Range of motion",
-        "Extra-articular",
-        "Skin",
-        "Neurological"
+      "Joint examination of knees and ankles",
+      "Sacroiliac joint compression and distraction tests",
+      "Schober test for spinal mobility",
+      "Conjunctival examination",
+      "Urethral examination for discharge",
+      "Skin examination for keratoderma blennorrhagicum",
+      "Achilles tendon and plantar fascia palpation",
+      "Hip flexor and range of motion testing",
+      "Lymph node examination",
+      "Abdominal examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with Reactive Arthritis.",
-        "Vital signs": "Finding consistent with Reactive Arthritis.",
-        "Joint inspection": "Finding consistent with Reactive Arthritis.",
-        "Joint palpation": "Finding consistent with Reactive Arthritis.",
-        "Range of motion": "Finding consistent with Reactive Arthritis.",
-        "Extra-articular": "Finding consistent with Reactive Arthritis.",
-        "Skin": "Finding consistent with Reactive Arthritis.",
-        "Neurological": "Finding consistent with Reactive Arthritis."
+      "Joint examination of knees and ankles": "Bilateral knee effusions with warmth and erythema, right worse than left. Both ankles swollen with limited dorsiflexion due to pain and stiffness.",
+      "Sacroiliac joint compression and distraction tests": "Positive bilateral SI joint compression test with significant tenderness. Patient reports deep aching pain with distraction maneuvers.",
+      "Schober test for spinal mobility": "Limited lumbar spine flexion, Schober test 3cm (normal >5cm), indicating reduced spinal mobility.",
+      "Conjunctival examination": "Bilateral conjunctival injection and mild purulent discharge, more prominent in the right eye.",
+      "Urethral examination for discharge": "Minimal clear urethral discharge noted, patient reports dysuria and urinary frequency.",
+      "Skin examination for keratoderma blennorrhagicum": "No obvious keratoderma on palms or soles, but mild scaling noted on plantar surfaces.",
+      "Achilles tendon and plantar fascia palpation": "Bilateral Achilles tendon tenderness and thickening, positive heel squeeze test.",
+      "Hip flexor and range of motion testing": "Limited hip internal rotation bilaterally, positive FABER test on the right.",
+      "Lymph node examination": "No significant lymphadenopathy in cervical, axillary, or inguinal regions.",
+      "Abdominal examination": "Soft, non-tender abdomen, normal bowel sounds, no organomegaly or masses."
     },
     "ddxTargets": [
-        "Reactive Arthritis (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Reactive Arthritis (Post-Campylobacter, HLA-B27-Associated) — Classic Triad: Arthritis, Conjunctivitis, Urethritis",
+      "Gonococcal Arthritis",
+      "Inflammatory Bowel Disease with Arthritis",
+      "Septic Arthritis",
+      "Acute Rheumatic Fever",
+      "Psoriatic Arthritis",
+      "Early Ankylosing Spondylitis"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for Reactive Arthritis.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on the recent GI illness and miss the classic triad of reactive arthritis, or focus solely on infectious causes given the fever and recent illness.",
+      "prematureClosure": "Risk of diagnosing simple post-infectious arthritis without considering the full constellation of symptoms including conjunctivitis and urethritis.",
+      "availabilityBias": "May overweight sexually transmitted infections given patient's sexual activity, or underweight reactive arthritis if not recently encountered."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Derek Campbell: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is Reactive Arthritis (Post-Campylobacter, HLA-B27-Associated) \u2014 Classic Triad: Arthritis, Conjunctivitis, Urethritis. How did your reasoning evolve?"
+      "phase2": "Good start on your differential. I notice you're thinking about post-infectious processes. Given this patient's age, recent illness, and family history, what specific syndromic diagnoses should you be considering? What key historical elements will help you differentiate between infectious and post-infectious causes?",
+      "phase5": "Excellent history and physical. You've identified the classic triad - let's walk through how this fits together. How does the timeline of symptoms, family history, and physical findings support your leading diagnosis? What's the pathophysiology connecting the recent Campylobacter infection to his current presentation?",
+      "finalDebrief": "This case beautifully illustrates reactive arthritis with the classic Reiter's triad. Notice how the family history of HLA-B27 positive ankylosing spondylitis was a key clue, and the temporal relationship between the GI infection and symptom onset. How did your differential diagnosis evolve as you gathered more information, and what clinical pearls will you remember for future cases?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['reactive-arthritis'] = {
-  id: 'reactive-arthritis', name: 'Derek Campbell',
-  chiefComplaint: 'Reactive Arthritis — Chlamydia Trigger and NSAIDs',
-  diagnosis: 'Reactive Arthritis — Chlamydia Trigger and NSAIDs',
-  orders: {
-    correct: [{ id: 'nsaids-rea', name: 'NSAIDs — first-line for joint inflammation', rationale: 'NSAIDs (naproxen, indomethacin) are first-line for reactive arthritis joint symptoms. Treat for weeks to months. For severe or refractory cases: intra-articular corticosteroids, systemic steroids, or DMARDs (sulfasalazine for persistent disease). Do not use steroids as first-line.' },{ id: 'sti-testing', name: 'STI testing and treatment — treat Chlamydia if positive', rationale: 'Chlamydia trachomatis is the most common trigger in developed countries. Test and treat active infection (even if reactive arthritis has started — treating the trigger may reduce disease duration). Doxycycline 100mg BID × 7-10 days for uncomplicated Chlamydia. Treat partner simultaneously.' }],
-    incorrect: [{ id: 'antibiotics-joint', name: 'Antibiotics for joint infection — septic arthritis', rationale: 'Reactive arthritis is a sterile joint inflammation — the pathogen is NOT in the joint (unlike septic arthritis). Antibiotics do not treat the joint inflammation. Arthrocentesis of a reactive arthritis joint: inflammatory fluid (WBC 5,000-50,000) with NEGATIVE gram stain and culture. Treat underlying STI if active, not the joint itself.' },{ id: 'anti-tnf', name: 'Infliximab — start biologic immediately for reactive arthritis', rationale: 'Anti-TNF therapy is reserved for CHRONIC reactive arthritis (>6 months) refractory to conventional therapy. Most reactive arthritis resolves within 3-12 months without biologic therapy. First-line: NSAIDs → DMARDs (sulfasalazine) → biologic only if truly refractory.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['Reactive arthritis (formerly Reiter syndrome): asymmetric oligoarthritis + urethritis + conjunctivitis/uveitis + mucocutaneous lesions (keratoderma blennorrhagica on palms/soles, circinate balanitis). Triggered by STI (Chlamydia most common) or enteric infection (Salmonella, Shigella, Campylobacter, Yersinia).','HLA-B27 association: 60-80% of patients with reactive arthritis are HLA-B27 positive. HLA-B27 is also associated with other seronegative spondyloarthropathies (ankylosing spondylitis, psoriatic arthritis, IBD-associated arthritis).','Prognosis: most resolve within 12 months. 15-20% develop chronic disease. 15-20% develop sacroiliitis. Screen for HLA-B27 in chronic cases (predicts ankylosing spondylitis risk).'],
-    boardPearls: ['Classic triggers: Chlamydia (sexually active adults, urogenital reactive arthritis), Salmonella/Shigella/Campylobacter/Yersinia (post-enteric reactive arthritis). Reactive arthritis typically follows infection by 1-4 weeks.','Uveitis in reactive arthritis: anterior uveitis — eye pain, photophobia, redness, blurred vision. Refer to ophthalmology for slit-lamp evaluation and topical steroids. Untreated uveitis causes blindness.','Psoriatic arthritis vs reactive arthritis: both are seronegative spondyloarthropathies with oligoarthritis. Psoriatic: nail changes (pitting, onycholysis), dactylitis (sausage finger), skin psoriasis. Reactive: urethritis/conjunctivitis, triggered by infection, mucocutaneous lesions without psoriasis plaques.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Derek Campbell is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like reactive arthritis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies: Amoxicillin.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with Reactive Arthritis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with Reactive Arthritis."
-    },
-    "ddxTargets": [
-        "Reactive Arthritis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for Reactive Arthritis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Derek Campbell \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is Reactive Arthritis (Post-Campylobacter, HLA-B27-Associated) \u2014 Classic Triad: Arthritis, Conjunctivitis, Urethritis. How did your reasoning evolve?"
-    }
-}
+  }
 };

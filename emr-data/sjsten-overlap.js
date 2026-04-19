@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ananya Patel",
-  "patientHPI": "Three weeks ago I started a new seizure medication and now I have this terrible blistering rash all over my body - my skin is peeling off in large areas and I have painful sores in my mouth that make it hard to eat or drink.",
+      "patientHPI": "Three weeks ago I started a new seizure medication and now I have this terrible blistering rash all over my body - my skin is peeling off in large areas and I have painful sores in my mouth that make it hard to eat or drink.",
       "dob": "05/11/2001",
       "age": "25",
       "sex": "Female",
@@ -1020,93 +1020,100 @@ window.EMR_DATA = {
       "Medication timeline",
       "Lamotrigine started 3 weeks ago with too-rapid uptitration"
     ]
-  ]
-,"references":[
-  {
-    "id": "SCORTEN-2000",
-    "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
-    "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
-    "journal": "J Invest Dermatol",
-    "year": 2000,
-    "doi": "10.1046/j.1523-1747.2000.00061.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
-    "openAccess": true,
-    "validates": [
-      "SCORTEN mortality prediction",
-      "7 clinical parameters",
-      "Score 3 = 12.1% mortality"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "SCORTEN-2000",
+      "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
+      "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
+      "journal": "J Invest Dermatol",
+      "year": 2000,
+      "doi": "10.1046/j.1523-1747.2000.00061.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
+      "openAccess": true,
+      "validates": [
+        "SCORTEN mortality prediction",
+        "7 clinical parameters",
+        "Score 3 = 12.1% mortality"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Ananya Patel is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Ananya appears anxious and in significant distress, speaking softly due to painful oral lesions. She is cooperative but frightened by the severity of her skin condition and is very concerned about her appearance and prognosis.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did you first notice the rash and how did it start?",
+      "Can you describe what the rash looks like and how it has changed?",
+      "Are you having any pain or burning with the rash?",
+      "Do you have any sores or pain in your mouth, eyes, or genital area?",
+      "Have you started any new medications recently?",
+      "When exactly did you start the lamotrigine and how was the dose increased?",
+      "Have you had any fever, chills, or feeling unwell?",
+      "Are you having any difficulty swallowing or eating?",
+      "Have you ever had a reaction like this before?",
+      "Have you been exposed to any new soaps, detergents, or chemicals?",
+      "Is there any family history of severe drug reactions?",
+      "Are you taking any other medications or supplements?",
+      "Do you have any known drug allergies?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Lamotrigine; Levetiracetam.'",
-        "allergies": "'My allergies: Penicillin.'",
-        "family": "Non-contributory",
-        "social": "Medication timeline: Lamotrigine started 3 weeks ago with too-rapid uptitration"
+      "default": "I'm not sure what you mean. Could you ask that differently? My mouth really hurts when I talk.",
+      "onset": "It started about 4 days ago with what looked like a bad sunburn on my chest, then quickly spread everywhere with these awful blisters.",
+      "character": "The skin feels like it's burning and the blisters are filled with fluid. When they break, the skin just peels off in sheets. My mouth has these painful sores.",
+      "location": "It's everywhere - my face, chest, back, arms, legs. The worst parts are my mouth, lips, and around my eyes. Even my genital area is affected.",
+      "severity": "The pain is probably an 8 out of 10. I can barely eat or drink because my mouth hurts so much, and any movement makes my skin feel like it's on fire.",
+      "aggravating": "Any touch or movement makes it worse. Even the hospital gown rubbing against my skin is agony.",
+      "relieving": "Nothing really helps. Cool compresses give a tiny bit of relief but not much.",
+      "associated": "I've had fever and chills for the past two days, and I feel weak and dizzy. My eyes are red and painful, and it hurts to swallow.",
+      "denies": "No joint pain, no breathing problems, no rash before this episode. I haven't been sick with a cold or infection recently.",
+      "history": "Never had anything like this before. I've had my seizure disorder for two years but never had skin problems.",
+      "medications": "Lamotrigine; Levetiracetam",
+      "allergies": "Penicillin",
+      "family": "No family history of drug allergies or severe skin reactions that I know of.",
+      "social": "I work as a graphic designer, mostly from home. I don't smoke, drink maybe a glass of wine occasionally, no illegal drugs. I was doing well until this rash started."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect skin for distribution and morphology of lesions",
+      "Assess body surface area involvement",
+      "Examine oral mucosa and lips",
+      "Examine conjunctiva and ocular involvement",
+      "Check for Nikolsky sign",
+      "Examine genital mucosa",
+      "Assess hydration status and skin turgor",
+      "Palpate lymph nodes",
+      "Cardiovascular examination",
+      "Pulmonary examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect skin for distribution and morphology of lesions": "Widespread erythematous patches with flaccid bullae and areas of epidermal detachment. Target-like lesions on trunk with dusky centers.",
+      "Assess body surface area involvement": "Approximately 18% body surface area with epidermal detachment, involving face, trunk, and extremities.",
+      "Examine oral mucosa and lips": "Severe erosions and ulcerations of oral mucosa, lips with hemorrhagic crusting, difficulty opening mouth fully.",
+      "Examine conjunctiva and ocular involvement": "Bilateral conjunctival erythema and erosions, no corneal involvement noted.",
+      "Check for Nikolsky sign": "Positive Nikolsky sign - gentle lateral pressure causes epidermis to separate.",
+      "Examine genital mucosa": "Erosions present on vulvar mucosa with fibrinous exudate.",
+      "Assess hydration status and skin turgor": "Signs of dehydration with poor skin turgor, dry mucous membranes.",
+      "Palpate lymph nodes": "No significant lymphadenopathy palpated.",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak pulses consistent with dehydration.",
+      "Pulmonary examination": "Clear breath sounds bilaterally, no respiratory distress."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis (correct diagnosis)",
+      "Staphylococcal Scalded Skin Syndrome",
+      "Bullous pemphigoid",
+      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
+      "Pemphigus vulgaris",
+      "Erythema multiforme major",
+      "Acute generalized exanthematous pustulosis (AGEP)"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on 'rash' and consider common dermatologic conditions rather than recognizing the severity suggesting SJS/TEN",
+      "prematureClosure": "Might stop at 'drug reaction' without recognizing the life-threatening nature and need for immediate dermatology/burn unit consultation",
+      "availabilityBias": "May think of more common skin conditions like eczema or contact dermatitis rather than the less common but serious SJS/TEN"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Ananya Patel: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified some key differentials for blistering rash. What specific historical details about medication timing and the progression of skin findings would help you narrow this list? What questions about mucosal involvement are critical here?",
+      "phase5": "Now that you've noted the extensive epidermal detachment, mucosal involvement, and recent lamotrigine initiation, how does this constellation of findings refine your differential? What is the significance of 18% BSA involvement in your diagnostic thinking?",
+      "finalDebrief": "This case illustrates classic SJS/TEN from lamotrigine with rapid uptitration. How did the triad of mucosal involvement, epidermal detachment, and recent high-risk drug exposure guide your diagnosis? What made you consider or dismiss other blistering disorders along the way?"
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Brandon Kowalski",
-  "patientHPI": "I was eating dinner and a piece of food got stuck in my throat again and just won't go down. This keeps happening to me, especially with meat and bread - it feels like the food just sits there in my chest. Usually I can get it down eventually, but this time it's been stuck for hours and I'm starting to panic.",
+      "patientHPI": "I was eating dinner and a piece of food got stuck in my throat again and just won't go down. This keeps happening to me, especially with meat and bread - it feels like the food just sits there in my chest. Usually I can get it down eventually, but this time it's been stuck for hours and I'm starting to panic.",
       "dob": "02/09/1998",
       "age": "28",
       "sex": "Male",
@@ -1132,26 +1132,25 @@ window.EMR_DATA = {
       "Atopic triad",
       "Allergic rhinitis + asthma + EoE"
     ]
-  ]
-,"references":[
-  {
-    "id": "EoE-AGA-2020",
-    "title": "AGA clinical practice update on dietary management of EoE",
-    "authors": "Hirano I, Chan ES, Rank MA, et al.",
-    "journal": "Gastroenterology",
-    "year": 2020,
-    "doi": "10.1053/j.gastro.2020.02.038",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
-    "openAccess": true,
-    "validates": [
-      "≥15 eos/HPF diagnostic threshold",
-      "1-food (milk) elimination first-line",
-      "Swallowed budesonide/fluticasone",
-      "Repeat EGD 8-12 weeks"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "EoE-AGA-2020",
+      "title": "AGA clinical practice update on dietary management of EoE",
+      "authors": "Hirano I, Chan ES, Rank MA, et al.",
+      "journal": "Gastroenterology",
+      "year": 2020,
+      "doi": "10.1053/j.gastro.2020.02.038",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
+      "openAccess": true,
+      "validates": [
+        "≥15 eos/HPF diagnostic threshold",
+        "1-food (milk) elimination first-line",
+        "Swallowed budesonide/fluticasone",
+        "Repeat EGD 8-12 weeks"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "EoE is diagnosed by ≥15 eosinophils/hpf on esophageal biopsy (≥6 biopsies from proximal + distal esophagus) after 8-week PPI trial. PPI trial first excludes PPI-responsive esophageal eosinophilia (GERD-related), which is not true EoE.",
@@ -1169,75 +1168,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Brandon Kowalski appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Brandon appears anxious and somewhat embarrassed about his recurring food impactions. He's cooperative but admits to poor medication adherence with his swallowed fluticasone, showing frustration with the chronic nature of his condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 28-year-old with recurrent dysphagia and food impaction at dinner start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened when you were eating dinner tonight?",
+      "How long have you been having problems with food getting stuck?",
+      "What types of foods typically cause problems for you?",
+      "Have you been taking your medications as prescribed?",
+      "Do you have any chest pain or heartburn with the swallowing difficulties?",
+      "Have you noticed any regurgitation or bringing food back up?",
+      "Any weight loss or changes in appetite recently?",
+      "Do you have to drink liquids to help food go down?",
+      "Have you had any recent allergy flares or asthma symptoms?",
+      "When was your last endoscopy or follow-up for your EoE?",
+      "Are you following any dietary restrictions for your food allergies?",
+      "Any nausea, vomiting, or abdominal pain with this episode?",
+      "Have you tried anything to relieve the current impaction?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Brandon Kowalski presents with 28-year-old with recurrent dysphagia and food imp.'",
-        "character": "'It's 28-year-old with recurrent dysphagia and food impaction at dinner \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone swallowed; Omeprazole; Cetirizine.'",
-        "allergies": "'My allergies are Wheat, Milk.'",
-        "family": "Brother: EoE  Mother: seasonal allergies",
-        "social": "Diet: Was eating steak \u2014 piece became impacted  Medication adherence: Admits to inconsistent use of swallowed fluticasone  Atopic triad: Allergic rhinitis + asthma + EoE"
+      "default": "I'm not sure what you mean by that. Can you ask it differently?",
+      "onset": "This started about 2 hours ago when I was eating steak at dinner. The piece just got stuck and won't go down.",
+      "character": "It feels like there's a solid piece of food stuck in my chest, like it's lodged behind my breastbone.",
+      "location": "The stuck feeling is right here in the middle of my chest, behind my sternum. It doesn't move or radiate anywhere.",
+      "severity": "I'd say it's about a 7 out of 10 for discomfort. I can't eat or drink anything without it coming back up.",
+      "aggravating": "Any attempt to eat or drink makes it worse. Even swallowing my saliva is uncomfortable.",
+      "relieving": "I've tried drinking water and even tried to make myself throw up, but nothing has helped so far.",
+      "associated": "I'm having some chest discomfort and I keep producing extra saliva. No real pain, just pressure and the feeling of fullness.",
+      "denies": "No chest pain, no heartburn right now, no trouble breathing, no abdominal pain, and no fever.",
+      "history": "This has happened twice before in the past year, both times with meat. I have eosinophilic esophagitis that was diagnosed about 2 years ago.",
+      "medications": "Fluticasone swallowed; Omeprazole; Cetirizine",
+      "allergies": "Wheat, Milk",
+      "family": "My brother also has EoE, and my mom has really bad seasonal allergies. That's about all I know.",
+      "social": "I work in IT, so mostly desk work. I don't smoke, drink maybe 2-3 beers on weekends. I try to avoid wheat and milk but it's really hard to stick to the diet all the time."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Vital signs assessment",
+      "General appearance and distress level",
+      "Head and neck examination",
+      "Lymph node palpation",
+      "Chest inspection and palpation",
+      "Cardiac auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Oropharyngeal inspection",
+      "Assessment of drooling or inability to handle secretions"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Vital signs assessment": "BP 128/78, HR 82, Temp 36.8°C, SpO2 99% - stable vital signs",
+      "General appearance and distress level": "Alert, anxious-appearing male in mild distress, sitting upright, occasionally spitting into cup",
+      "Head and neck examination": "No masses, no lymphadenopathy, no thyromegaly",
+      "Lymph node palpation": "No cervical, supraclavicular, or axillary lymphadenopathy",
+      "Chest inspection and palpation": "No visible deformity, no tenderness to palpation over sternum or chest wall",
+      "Cardiac auscultation": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+      "Pulmonary auscultation": "Clear to auscultation bilaterally, no wheezes or crackles",
+      "Abdominal examination": "Soft, non-tender, non-distended, normal bowel sounds",
+      "Oropharyngeal inspection": "No erythema, no exudate, no visible foreign body, normal dentition",
+      "Assessment of drooling or inability to handle secretions": "Patient occasionally spits saliva, reports difficulty swallowing even liquids"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Eosinophilic esophagitis with food impaction (correct diagnosis)",
+      "Esophageal stricture",
+      "Achalasia",
+      "Esophageal perforation",
+      "Boerhaave syndrome",
+      "GERD with esophagitis",
+      "Esophageal carcinoma"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on the known EoE diagnosis and miss complications like perforation or other causes of dysphagia that could develop secondarily",
+      "prematureClosure": "Risk of immediately attributing symptoms to known EoE without considering that food impaction could lead to serious complications requiring urgent intervention",
+      "availabilityBias": "Recent cases of GERD or common causes of chest pain might overshadow the specific presentation of food impaction in EoE"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Brandon Kowalski's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given this patient's age and the acute nature of his presentation, what specific historical details would help you differentiate between mechanical obstruction and motility disorders? Also consider - what are the potential complications of food impaction that you need to rule out?",
+      "phase5": "Now that you've gathered your history and physical, let's think about this systematically. You have a known EoE patient with food impaction - what does this tell you about his disease control? What immediate management concerns do you have, and what would be your next diagnostic step?",
+      "finalDebrief": "This case highlights the importance of medication adherence in EoE management. Brandon's inconsistent use of swallowed fluticasone likely contributed to ongoing esophageal inflammation and food impaction. How did your differential evolve as you learned about his established diagnosis and medication non-adherence? What key teaching points about EoE management and complications would you emphasize?"
     }
-}
+  }
 };

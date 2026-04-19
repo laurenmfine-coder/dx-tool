@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Brianna Torres",
-  "patientHPI": "I came in for my yearly visit and things have been okay mostly, just the usual ups and downs with my mood, though I did stop going to therapy a few weeks ago because I didn't think it was really helping me.",
+    "patientHPI": "I came in for my yearly visit and things have been okay mostly, just the usual ups and downs with my mood, though I did stop going to therapy a few weeks ago because I didn't think it was really helping me.",
     "dob": "02/14/2004",
     "age": 22,
     "sex": "Female",
@@ -111,7 +111,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "128 lbs",
       "ht": "5'4\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     },
     {
@@ -166,27 +166,93 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "86", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "86",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEPATIC PANEL",
           "results": [
-            { "test": "ALT", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Total Bilirubin", "value": "0.6", "unit": "mg/dL", "range": "0.1-1.2", "flag": "" }
+            {
+              "test": "ALT",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "0.6",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Platelets", "value": "268", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "268",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -194,11 +260,41 @@ window.EMR_DATA = {
   ],
   "imaging": [],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-8944", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "09/2025", "site": "Right deltoid IM", "lot": "CV25-2048", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "08/2022", "site": "Left deltoid IM", "lot": "TD22-510", "mfr": "GSK" },
-    { "vaccine": "HPV (Gardasil 9) — Series Complete", "date": "2019", "site": "Left deltoid IM", "lot": "HP19-448", "mfr": "Merck" },
-    { "vaccine": "Meningococcal ACWY Booster", "date": "2022", "site": "Right deltoid IM", "lot": "MN22-394", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-8944",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "09/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2048",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "08/2022",
+      "site": "Left deltoid IM",
+      "lot": "TD22-510",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "HPV (Gardasil 9) — Series Complete",
+      "date": "2019",
+      "site": "Left deltoid IM",
+      "lot": "HP19-448",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Meningococcal ACWY Booster",
+      "date": "2022",
+      "site": "Right deltoid IM",
+      "lot": "MN22-394",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother: Depression, anxiety, alive at 48",
@@ -207,15 +303,42 @@ window.EMR_DATA = {
     "Half-brother (paternal): Unknown medical history; no contact"
   ],
   "socialHistory": [
-    ["Occupation", "Part-time barista at coffee shop; community college student (stopped attending classes 2 months ago)"],
-    ["Marital", "Single; recent breakup with boyfriend (1 week ago) — described as 'volatile' relationship"],
-    ["Tobacco", "Social vaping (JUUL) — 'a few times a week'"],
-    ["Alcohol", "Increasing — reports drinking wine 'a few glasses' most evenings over past month; tonight's ingestion included approximately half a bottle of vodka"],
-    ["Drugs", "Denies illicit drugs; occasional marijuana edibles ('a couple times a month')"],
-    ["Exercise", "None currently"],
-    ["Housing", "Lives with mother in townhouse; recently moved back in after breakup with boyfriend"],
-    ["Safety", "Prior suicide attempt (2021); tonight's presentation is an intentional overdose; safety plan was in place but patient did not use it"],
-    ["Advance Directive", "None — not discussed (age 22)"]
+    [
+      "Occupation",
+      "Part-time barista at coffee shop; community college student (stopped attending classes 2 months ago)"
+    ],
+    [
+      "Marital",
+      "Single; recent breakup with boyfriend (1 week ago) — described as 'volatile' relationship"
+    ],
+    [
+      "Tobacco",
+      "Social vaping (JUUL) — 'a few times a week'"
+    ],
+    [
+      "Alcohol",
+      "Increasing — reports drinking wine 'a few glasses' most evenings over past month; tonight's ingestion included approximately half a bottle of vodka"
+    ],
+    [
+      "Drugs",
+      "Denies illicit drugs; occasional marijuana edibles ('a couple times a month')"
+    ],
+    [
+      "Exercise",
+      "None currently"
+    ],
+    [
+      "Housing",
+      "Lives with mother in townhouse; recently moved back in after breakup with boyfriend"
+    ],
+    [
+      "Safety",
+      "Prior suicide attempt (2021); tonight's presentation is an intentional overdose; safety plan was in place but patient did not use it"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed (age 22)"
+    ]
   ],
   "meta": {
     "caseId": "mixed-overdose",
@@ -226,75 +349,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Brianna Torres appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Brianna appears emotionally labile with alternating periods of tearfulness and flat affect, demonstrating poor eye contact and psychomotor agitation. She is initially guarded about the intentional nature of her ingestion but becomes more forthcoming when approached with empathy, expressing significant distress about her recent breakup and feelings of hopelessness.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did toxicologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened tonight and what brought you to the emergency department?",
+      "What medications or substances did you take tonight, and approximately how much?",
+      "What time did you take these substances?",
+      "Was this intentional, and if so, what were you hoping to achieve?",
+      "Have you had any thoughts of hurting yourself or others recently?",
+      "Can you tell me about your mood over the past few weeks or months?",
+      "Have you experienced any nausea, vomiting, or abdominal pain since taking these substances?",
+      "Are you experiencing any drowsiness, confusion, or changes in your vision?",
+      "Tell me about the recent breakup you mentioned - how has that affected you?",
+      "Have you attempted to hurt yourself before?",
+      "Are you currently taking any prescribed medications?",
+      "How much alcohol do you typically drink, and how much did you have tonight?",
+      "Do you have any drug allergies I should know about?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I came in for my yearly visit and things have been okay mostly, just the usual u.'",
-        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Intentional Mixed Overdose.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sertraline 150mg daily; Buspirone 10mg BID; Ortho Tri-Cyclen Lo (norgestimate-ethinyl estradiol) daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Depression, anxiety, alive at 48  Father: Alcohol use disorder (estranged; left family when patient was 8), alive at 52  Maternal grandmother: Bipolar disorder, suicide attempt (survived), alive at 72",
-        "social": "Occupation: Part-time barista at coffee shop; community college student (stopped attending classes 2 months ago)  Marital: Single; recent breakup with boyfriend (1 week ago) \u2014 described as 'volatile' relationship  Tobacco: Social vaping (JUUL) \u2014 'a few times a week'  Alcohol: Increasing \u2014 reports drinking wine 'a few glasses' most evenings over past month; tonight's ingestion included approximately half a bottle of vodka  Drugs: Denies illicit drugs; occasional marijuana edibles ('a couple times a month')"
+      "default": "I'm sorry, I'm having trouble focusing right now... can you ask me that again?",
+      "onset": "It was around 9 PM tonight... I took everything at once after my ex called me and said some really hurtful things. I just couldn't take it anymore.",
+      "character": "I feel really dizzy and my heart is racing. My mouth is so dry and I keep feeling like I might throw up but I haven't yet.",
+      "location": "My stomach hurts right here in the upper part, and I have this pounding headache that won't go away.",
+      "severity": "The emotional pain is like a 10 out of 10... I just wanted it to stop. Physically I'd say maybe a 6 or 7 - I feel really sick.",
+      "aggravating": "Thinking about him, about how worthless I am... bright lights make my head pound worse. Moving around makes me more dizzy.",
+      "relieving": "Nothing helps the emotional pain... I tried sleeping pills before but tonight I just took everything I could find.",
+      "associated": "I'm really thirsty but drinking makes me nauseous. I feel confused and my vision seems a little blurry. I can't stop my hands from shaking.",
+      "denies": "I haven't thrown up yet, no chest pain, no trouble breathing really except my heart racing. No fever or chills.",
+      "history": "I tried to overdose about two years ago with just my antidepressants, but my roommate found me and brought me to the hospital. I've been in therapy on and off since then.",
+      "medications": "Sertraline 150mg daily; Buspirone 10mg BID; Ortho Tri-Cyclen Lo (norgestimate-ethinyl estradiol) daily",
+      "allergies": "NKDA",
+      "family": "My mom has depression like me, and my grandmother actually tried to kill herself once too when I was little. My dad is an alcoholic and left us when I was 8.",
+      "social": "I work part-time at a coffee shop and was going to community college but stopped going to classes about two months ago. I've been drinking more wine lately, especially after the breakup. Tonight I drank about half a bottle of vodka with the pills."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Vital signs assessment and orthostatic measurements",
+      "Mental status examination and Glasgow Coma Scale",
+      "HEENT examination for anticholinergic signs",
+      "Cardiac examination",
+      "Abdominal examination for hepatic tenderness",
+      "Neurological examination including reflexes",
+      "Skin examination for diaphoresis or flushing",
+      "Pupillary examination",
+      "Assessment for nystagmus",
+      "Suicide risk assessment and mental health evaluation"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Intentional Mixed Overdose. Document specifically what you observe."
+      "Vital signs assessment and orthostatic measurements": "BP 98/58 lying, 88/52 standing with HR increase from 118 to 135, indicating volume depletion and possible toxicity",
+      "Mental status examination and Glasgow Coma Scale": "GCS 14 (E4V4M6), mildly confused with slow responses, oriented to person and place but uncertain of time",
+      "HEENT examination for anticholinergic signs": "Dry mucous membranes, dilated pupils (5mm bilaterally), minimal response to light, flushed face",
+      "Cardiac examination": "Tachycardic regular rhythm, no murmurs, gallops, or rubs appreciated",
+      "Abdominal examination for hepatic tenderness": "Mild epigastric tenderness, no hepatomegaly appreciated on palpation, bowel sounds hypoactive",
+      "Neurological examination including reflexes": "Reflexes symmetrically diminished, mild tremor of hands, no focal deficits, gait unsteady",
+      "Skin examination for diaphoresis or flushing": "Warm, dry skin with flushing consistent with anticholinergic toxidrome",
+      "Pupillary examination": "Pupils dilated at 5mm bilaterally with sluggish light response",
+      "Assessment for nystagmus": "No nystagmus present, but patient reports mild blurred vision",
+      "Suicide risk assessment and mental health evaluation": "High suicide risk with ongoing ideation, poor insight, recent stressor, prior attempt, impulsive personality features"
     },
     "ddxTargets": [
-        "Intentional Mixed Overdose (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Intentional Mixed Overdose (Acetaminophen ~15g + Diphenhydramine ~1.5g + Alcohol — Suicidal Intent in Patient with MDD, BPD, Prior SA, and Recent Relationship Crisis; Rumack-Matthew Nomogram Indicates NAC Treatment Required) (correct diagnosis)",
+      "Anticholinergic toxidrome from diphenhydramine overdose alone",
+      "Acute alcohol intoxication with concurrent psychiatric crisis",
+      "Acetaminophen poisoning requiring immediate NAC therapy",
+      "Serotonin syndrome from medication interaction",
+      "Acute psychotic episode or manic episode",
+      "Sepsis or other infectious process with altered mental status"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Intentional Mixed Overdose, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Intentional Mixed Overdose, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Intentional Mixed Overdose based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on psychiatric history and missing the serious toxicologic emergency requiring immediate antidote therapy",
+      "prematureClosure": "May focus only on suicide risk assessment without fully evaluating the specific substances ingested and their treatment requirements",
+      "availabilityBias": "Recent cases of simple overdose or psychiatric presentations may overshadow the complexity of this mixed ingestion requiring specific antidotes"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Brianna Torres's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Intentional Mixed Overdose (Acetaminophen ~15g + Diphenhydramine ~1.5g + Alcohol \u2014 Suicidal Intent in Patient with MDD, BPD, Prior SA, and Recent Relationship Crisis; Rumack-Matthew Nomogram Indicates NAC Treatment Required). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Before you interview the patient, think about what specific information you need to risk-stratify this overdose. What details about timing, quantity, and specific substances will be crucial for your management decisions?",
+      "phase5": "You've identified concerning anticholinergic signs and a history of mixed ingestion. What's your next step in determining the severity of each component of this overdose? How will you decide which antidotes or treatments are needed urgently?",
+      "finalDebrief": "This case highlights the complexity of mixed overdoses requiring multiple treatment considerations. How did your differential evolve from a general overdose to recognizing the specific need for NAC therapy? What clues helped you identify the anticholinergic toxidrome, and how do you balance acute medical management with psychiatric safety concerns?"
     }
-}
+  }
 };

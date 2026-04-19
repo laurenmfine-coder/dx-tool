@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Michael Chang",
-  "patientHPI": "I don't remember what happened, but my wife says I had a seizure that went on for several minutes and I'm still feeling really confused and out of it. I know I haven't been great about taking my seizure medicine lately, which was probably stupid of me.",
+    "patientHPI": "I don't remember what happened, but my wife says I had a seizure that went on for several minutes and I'm still feeling really confused and out of it. I know I haven't been great about taking my seizure medicine lately, which was probably stupid of me.",
     "dob": "11/22/1993",
     "age": "33",
     "sex": "Male",
@@ -285,158 +285,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Michael Chang is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Michael appears confused and disoriented, frequently rubbing his temples and squinting as if experiencing a headache. He seems genuinely remorseful about stopping his medications and is cooperative but has difficulty concentrating on questions, often asking for clarification or pausing mid-sentence.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me what you remember about what happened today?",
+      "How long has it been since your last seizure before today?",
+      "When did you stop taking your seizure medications and why?",
+      "Have you been feeling unwell or feverish recently?",
+      "Are you experiencing any headache, confusion, or difficulty thinking right now?",
+      "Have you had any recent head injuries or trauma?",
+      "How much alcohol do you typically drink, and when was your last drink?",
+      "Have you been getting adequate sleep recently?",
+      "Are you taking any other medications or substances?",
+      "Have you had any recent illnesses or infections?",
+      "How well controlled were your seizures when you were taking medication?",
+      "Have you ever had seizures that lasted this long before?",
+      "Are you experiencing any weakness, numbness, or vision changes?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Levetiracetam; Lacosamide.'",
-        "allergies": "'My allergies: Phenytoin.'",
-        "family": "Brother: epilepsy",
-        "social": "Tobacco: Current smoker  Alcohol: 6-pack beer daily  Medication adherence: Stopped taking seizure meds 2 weeks ago \u2014 felt fine  Occupation: Construction worker"
+      "default": "I'm sorry, I'm still feeling pretty foggy. Can you repeat that or ask it differently?",
+      "onset": "My wife said it started about an hour ago while I was watching TV. I don't remember any of it happening.",
+      "character": "I don't remember the seizure itself, but right now I feel really confused and have a pounding headache.",
+      "location": "The headache is all over my head, and I just feel generally awful and confused.",
+      "severity": "The confusion and headache are probably a 7 out of 10. I can barely think straight right now.",
+      "aggravating": "Bright lights and loud noises are making my headache worse. Trying to think hard makes me feel more confused.",
+      "relieving": "Nothing really helps. I just want to close my eyes and rest.",
+      "associated": "I have a terrible headache, I feel hot and sweaty, and everything seems foggy. My whole body aches.",
+      "denies": "No chest pain, no trouble breathing normally, no numbness or weakness that I can tell, no vision problems.",
+      "history": "I've had epilepsy for about 10 years, but my seizures usually only last a minute or two and I bounce back pretty quickly.",
+      "medications": "Levetiracetam; Lacosamide",
+      "allergies": "Phenytoin",
+      "family": "My older brother has epilepsy too, but his seems better controlled than mine.",
+      "social": "I work construction, smoke about a pack a day, and drink a 6-pack of beer most nights. I stopped taking my seizure meds about two weeks ago because I was feeling fine and thought maybe I didn't need them anymore."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Mental status examination and Glasgow Coma Scale",
+      "Cranial nerve examination",
+      "Motor strength and tone assessment",
+      "Deep tendon reflexes",
+      "Plantar reflexes (Babinski sign)",
+      "Coordination testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment",
+      "Neck stiffness/meningeal signs",
+      "Fundoscopic examination",
+      "Skin examination for trauma or tongue biting"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Mental status examination and Glasgow Coma Scale": "GCS 14 (E4 V4 M6), confused and disoriented to time, oriented to person and place, difficulty with attention and concentration",
+      "Cranial nerve examination": "Pupils equal, round, reactive to light, extraocular movements intact, facial sensation and strength symmetric, hearing intact",
+      "Motor strength and tone assessment": "Mild generalized weakness 4/5 throughout, normal muscle tone, no focal deficits",
+      "Deep tendon reflexes": "Hyperreflexia 3+ bilaterally at biceps, triceps, patellar, and Achilles",
+      "Plantar reflexes (Babinski sign)": "Equivocal plantar responses bilaterally",
+      "Coordination testing (finger-to-nose, heel-to-shin)": "Mildly impaired coordination bilaterally, consistent with postictal state",
+      "Gait assessment": "Unsteady, broad-based gait with assistance required",
+      "Neck stiffness/meningeal signs": "No nuchal rigidity, negative Kernig and Brudzinski signs",
+      "Fundoscopic examination": "No papilledema, normal optic discs and vessels",
+      "Skin examination for trauma or tongue biting": "Lateral tongue laceration present, minor abrasions on forehead, no other trauma"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Status epilepticus (correct diagnosis)",
+      "Prolonged postictal state",
+      "Intracranial infection (meningitis/encephalitis)",
+      "Intracranial hemorrhage",
+      "Hypoglycemia or metabolic encephalopathy",
+      "Alcohol withdrawal seizures",
+      "Drug intoxication or withdrawal"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on known epilepsy history and missing secondary causes like infection or metabolic disorders that could precipitate status epilepticus",
+      "prematureClosure": "Risk of assuming this is simple medication non-compliance without investigating fever and altered mental status that suggest possible underlying precipitant",
+      "availabilityBias": "Risk of focusing on obvious medication non-compliance while missing signs of infection or other acute medical conditions that require immediate treatment"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Michael Chang: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified some key possibilities in your differential. This patient has a seizure lasting over 5 minutes with persistent altered mental status. What specific historical elements would help you distinguish between simple medication non-compliance versus an acute precipitating factor? Consider his vital signs - what might the fever and altered mental status suggest?",
+      "phase5": "Now that you've completed your assessment, let's think through this systematically. You found evidence of a prolonged seizure with persistent confusion, fever, and hyperreflexia. How does this clinical picture help narrow your differential? What's the most concerning diagnosis you need to rule out immediately, and what would be your next steps in management?",
+      "finalDebrief": "This case illustrates status epilepticus precipitated by medication non-adherence but complicated by possible infection. Your DDx likely evolved from simple seizure to considering status epilepticus, then incorporating the fever and altered mental status. The key learning points are recognizing status epilepticus criteria, identifying potential precipitants beyond just medication non-compliance, and understanding that fever in this context requires immediate investigation for CNS infection. How might you counsel this patient about medication adherence going forward?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['status-epilepticus'] = {
-  id: 'status-epilepticus', name: 'Michael Chang',
-  chiefComplaint: 'Status Epilepticus — Benzodiazepine → Levetiracetam → Intubation',
-  diagnosis: 'Status Epilepticus — Benzodiazepine → Levetiracetam → Intubation',
-  orders: {
-    correct: [{ id: 'benzo-first', name: 'Lorazepam 0.1mg/kg IV (max 4mg) or diazepam 0.15mg/kg IV — first-line IMMEDIATELY', rationale: 'Benzodiazepines are the proven first-line treatment for status epilepticus. If no IV access: midazolam 10mg IM (RAMPART trial — superior to IV lorazepam in prehospital setting). Diazepam 20mg rectal (Diastat) for home use. Act within minutes — each minute of seizure increases brain injury.' },{ id: '2nd-line-ase', name: 'Levetiracetam 60mg/kg IV (max 4500mg) OR valproate 40mg/kg IV — if benzodiazepines fail', rationale: 'ESETT trial: levetiracetam, fosphenytoin, and valproate are equally effective as second-line agents. Levetiracetam preferred (no cardiac monitoring required, no CYP450 interactions, pregnancy safe). Fosphenytoin: load 20 PE/kg IV — requires cardiac monitoring (hypotension, arrhythmia risk).' }],
-    incorrect: [{ id: 'phenytoin-oral', name: 'Oral phenytoin — titrate up over days for status epilepticus', rationale: 'Oral medications have NO role in treating active status epilepticus — therapeutic levels cannot be achieved fast enough. IV fosphenytoin (phenytoin prodrug) is the parenteral option if phenytoin is selected for second-line treatment.' },{ id: 'wait-spontaneous', name: 'Watch and wait — most seizures self-terminate within 5 minutes', rationale: 'Refractory seizures lasting >5 minutes are unlikely to stop spontaneously and MUST be treated. CONVSE status epilepticus (convulsive) lasting >30 minutes causes progressive neuronal death. Status epilepticus is defined as >5 minutes duration OR 2+ seizures without return to baseline.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['SE treatment timeline: 0-5 min (airway, IV access, glucose check) → 5 min (lorazepam/midazolam/diazepam) → 10-20 min (if not stopped, repeat benzo once) → 20-30 min (2nd-line: levetiracetam or valproate or fosphenytoin) → 30-40 min (refractory SE — intubation + midazolam or propofol infusion).','Refractory status epilepticus (RSE): fails 2 agents. Super-refractory SE: fails propofol/midazolam × 24h. RSE treatment: midazolam infusion (0.05-0.2 mg/kg/hr), propofol infusion, ketamine, pentobarbital coma. Continuous EEG monitoring required for RSE.','Identify and treat underlying cause simultaneously: hypoglycemia (always check glucose first!), electrolyte abnormalities (hyponatremia — do NOT correct too rapidly), CNS infection (empirical antibiotics if any suspicion of meningitis), stroke, toxins (isoniazid → pyridoxine 5g IV), medication non-compliance, AED toxicity.'],
-    boardPearls: ['Non-convulsive status epilepticus (NCSE): altered consciousness without motor activity — diagnosed by EEG only. Must consider in any unexplained altered consciousness. Treat as convulsive SE once confirmed on EEG.','Pyridoxine (B6) for status epilepticus: give empirically if isoniazid toxicity suspected (SLUD toxidrome absent, refractory to benzos). Dose 5g IV or equal to estimated INH ingestion.','Ketamine for RSE: 0.5-1 mg/kg IV bolus → 0.3-0.5 mg/kg/hr infusion. Dissociative anesthetic with NMDA receptor antagonism — anticonvulsant mechanism different from GABA-ergic agents. May be effective when benzodiazepines/propofol/barbiturates fail. Does not increase ICP when used in mechanically ventilated patients.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Michael Chang is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Levetiracetam; Lacosamide.'",
-        "allergies": "'My allergies: Phenytoin.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Michael Chang \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

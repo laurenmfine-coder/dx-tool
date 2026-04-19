@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Vanessa Takahashi",
-  "patientHPI": "I accidentally took aspirin and now I can barely breathe - my chest feels like it's in a vise and my airways are closing up.",
+      "patientHPI": "I accidentally took aspirin and now I can barely breathe - my chest feels like it's in a vise and my airways are closing up.",
       "dob": "02/27/1988",
       "age": "38",
       "sex": "Female",
@@ -1170,44 +1170,43 @@ window.EMR_DATA = {
       "Samter's triad",
       "Asthma + nasal polyps + ASA sensitivity"
     ]
-  ]
-,"references":[
-  {
-    "id": "Drug-Allergy-PP-2022",
-    "title": "Drug allergy: A 2022 practice parameter update",
-    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2022,
-    "doi": "10.1016/j.jaci.2022.08.028",
-    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
-    "openAccess": true,
-    "validates": [
-      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
-      "Single-dose amoxicillin challenge for low-risk",
-      "Vancomycin RMS management",
-      "AERD aspirin desensitization protocol",
-      "Sulfonamide challenge protocols"
-    ]
-  },
-  {
-    "id": "AERD-Review-2021",
-    "title": "Aspirin-exacerbated respiratory disease: comprehensive review",
-    "authors": "Laidlaw TM, Mullol J, Woessner KM, et al.",
-    "journal": "J Allergy Clin Immunol Pract",
-    "year": 2021,
-    "doi": "10.1016/j.jaip.2020.09.016",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855559/",
-    "openAccess": true,
-    "validates": [
-      "AERD triad",
-      "Aspirin desensitization 2-day protocol",
-      "Maintenance 650mg BID",
-      "Zileuton for AERD",
-      "Anosmia recovery 30-60%"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "Drug-Allergy-PP-2022",
+      "title": "Drug allergy: A 2022 practice parameter update",
+      "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2022,
+      "doi": "10.1016/j.jaci.2022.08.028",
+      "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+      "openAccess": true,
+      "validates": [
+        "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+        "Single-dose amoxicillin challenge for low-risk",
+        "Vancomycin RMS management",
+        "AERD aspirin desensitization protocol",
+        "Sulfonamide challenge protocols"
+      ]
+    },
+    {
+      "id": "AERD-Review-2021",
+      "title": "Aspirin-exacerbated respiratory disease: comprehensive review",
+      "authors": "Laidlaw TM, Mullol J, Woessner KM, et al.",
+      "journal": "J Allergy Clin Immunol Pract",
+      "year": 2021,
+      "doi": "10.1016/j.jaip.2020.09.016",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7855559/",
+      "openAccess": true,
+      "validates": [
+        "AERD triad",
+        "Aspirin desensitization 2-day protocol",
+        "Maintenance 650mg BID",
+        "Zileuton for AERD",
+        "Anosmia recovery 30-60%"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "AERD (Aspirin-Exacerbated Respiratory Disease / Samter's Triad): asthma + CRSwNP + NSAID hypersensitivity via COX-1 inhibition → reduced PGE₂ (which normally inhibits mast cells) → mast cell activation → LTC4/LTD4 release → bronchospasm + nasal edema. Urinary LTE₄ is constitutively elevated in AERD — even without NSAID exposure.",
@@ -1226,75 +1225,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Vanessa Takahashi appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Vanessa appears anxious and slightly short of breath, speaking in brief sentences due to mild respiratory distress. She is very cooperative and forthcoming about her symptoms, expressing concern about the connection between her aspirin use and worsening breathing. She seems knowledgeable about her chronic conditions but worried about this acute episode.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did nasal polyps, asthma, and severe bronchospasm after taking aspirin start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly when your symptoms started and what you were doing?",
+      "What exactly did you take before your symptoms began?",
+      "Describe the breathing difficulty you're experiencing right now.",
+      "How would you rate your current breathing difficulty on a scale of 1-10?",
+      "Have you ever had this type of reaction to aspirin or similar medications before?",
+      "Tell me about your nasal symptoms - congestion, drainage, sense of smell.",
+      "How long have you had nasal polyps and asthma?",
+      "What medications are you currently taking for your asthma and nasal problems?",
+      "Do you have any known allergies to medications?",
+      "Have you used your rescue inhaler today, and did it help?",
+      "Besides the breathing and nasal symptoms, are you having any other problems?",
+      "Have any family members had similar reactions to aspirin or breathing problems?",
+      "Do you smoke, and are there other triggers that worsen your asthma?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Vanessa Takahashi presents with nasal polyps, asthma, and severe bronchospasm af.'",
-        "character": "'It's nasal polyps, asthma, and severe bronchospasm after taking aspirin \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone/Salmeterol; Montelukast; Fluticasone nasal; Budesonide rinse.'",
-        "allergies": "'My allergies are Aspirin, Ibuprofen, All NSAIDs.'",
-        "family": "Non-contributory",
-        "social": "Trigger: Took aspirin 325mg for headache \u2014 developed wheezing, nasal congestion, and chest tightness within 1 hour  Key: Candidate for aspirin desensitization after stabilization  Samter's triad: Asthma + nasal polyps + ASA sensitivity"
+      "default": "I'm not sure I understand - could you ask that differently? I'm having trouble concentrating with my breathing being off.",
+      "onset": "About an hour ago I took an aspirin for a headache, and within maybe 30-45 minutes I started getting really congested and my chest got tight. The wheezing started shortly after that.",
+      "character": "It's like my chest is being squeezed tight, and I can hear myself wheezing when I breathe out. My nose feels completely blocked, worse than usual.",
+      "location": "The tightness is right across my whole chest, and my nose feels completely stuffed up. No pain radiating anywhere else.",
+      "severity": "I'd say the breathing is about a 6 or 7 out of 10 right now - definitely worse than my usual asthma symptoms. The nasal congestion is probably an 8.",
+      "aggravating": "It definitely got worse after I took that aspirin. Talking makes the breathing a bit harder, and lying flat makes the congestion worse.",
+      "relieving": "I used my rescue inhaler twice but it's not helping as much as it usually does. Sitting upright helps a little with the breathing.",
+      "associated": "My nose is completely blocked, more than usual, and I have this tight feeling in my chest with wheezing. I feel a bit anxious because my breathing isn't responding to my inhaler like normal.",
+      "denies": "No fever, no chest pain, no palpitations. I'm not coughing up blood or having any skin rash or swelling.",
+      "history": "I've had problems with nasal polyps and asthma for about 10 years. I think I had some breathing trouble with ibuprofen once before, but never this severe.",
+      "medications": "Fluticasone/Salmeterol; Montelukast; Fluticasone nasal; Budesonide rinse",
+      "allergies": "Aspirin, Ibuprofen, All NSAIDs",
+      "family": "No family history of asthma or breathing problems that I know of. My parents are both healthy.",
+      "social": "I work as a graphic designer, mostly desk work. I don't smoke and never have. I have maybe one drink a week, no other substances. I know strong scents and cold air usually trigger my asthma."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Pulmonary auscultation",
+      "Nasal examination",
+      "Assessment of respiratory effort",
+      "Peak flow measurement",
+      "Vital signs assessment",
+      "Cardiac examination",
+      "Skin examination for urticaria/angioedema",
+      "Upper airway inspection",
+      "Accessory muscle use evaluation",
+      "Percussion of lung fields"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Pulmonary auscultation": "Bilateral expiratory wheeze throughout both lung fields, decreased air movement, prolonged expiratory phase",
+      "Nasal examination": "Bilateral nasal polyps visible, severe mucosal edema, complete nasal obstruction",
+      "Assessment of respiratory effort": "Mild tachypnea, use of accessory muscles, tripod positioning",
+      "Peak flow measurement": "240 L/min (reduced from baseline of approximately 380 L/min)",
+      "Vital signs assessment": "BP 128/78, HR 102, RR 24, Temp 37.0°C, SpO2 91% on room air",
+      "Cardiac examination": "Tachycardic but regular rhythm, no murmurs, rubs, or gallops",
+      "Skin examination for urticaria/angioedema": "No visible rash, urticaria, or angioedema",
+      "Upper airway inspection": "No stridor, voice clear, no visible upper airway swelling",
+      "Accessory muscle use evaluation": "Mild use of sternocleidomastoid and intercostal muscles",
+      "Percussion of lung fields": "Hyperresonant bilaterally consistent with air trapping"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Aspirin-Exacerbated Respiratory Disease (AERD)/Samter's Triad (correct diagnosis)",
+      "Acute asthma exacerbation",
+      "Allergic rhinosinusitis with asthma",
+      "Anaphylaxis",
+      "Acute coronary syndrome",
+      "Vocal cord dysfunction",
+      "COPD exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'simple asthma attack' and miss the classic triad of asthma, nasal polyps, and NSAID sensitivity that defines AERD",
+      "prematureClosure": "Might stop at 'aspirin allergy' without recognizing this as a distinct syndrome requiring specific management and desensitization consideration",
+      "availabilityBias": "Common asthma exacerbations are frequent, may not immediately consider the specific NSAID-respiratory disease connection"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Vanessa Takahashi's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some key differentials. This patient has a classic triad of findings - can you think about what connects her chronic nasal polyps, asthma, and this acute reaction to aspirin? What specific syndrome should you be considering?",
+      "phase5": "Excellent history and exam. You've documented the classic triad: asthma, nasal polyps, and NSAID sensitivity. This constellation has a specific name and important management implications. What is this syndrome called, and what does this mean for her future treatment options?",
+      "finalDebrief": "This case demonstrates Aspirin-Exacerbated Respiratory Disease (AERD), also known as Samter's Triad. The key teaching points are recognizing this specific syndrome versus simple drug allergy, understanding that these patients can benefit from aspirin desensitization after stabilization, and knowing that avoidance of all NSAIDs is crucial. How did your differential evolve as you gathered more information about her chronic conditions?"
     }
-}
+  }
 };

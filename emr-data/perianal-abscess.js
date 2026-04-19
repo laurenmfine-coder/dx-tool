@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Rasheed Thompson",
-  "patientHPI": "I've been doing pretty well lately with my bowel issues - just going 2-3 times a day which is normal for me, and no cramping or urgency like I used to have. There's still that little opening near my bottom that's been there for months with some clear drainage, but it's not bothering me much and my weight has been steady.",
+    "patientHPI": "I've been doing pretty well lately with my bowel issues - just going 2-3 times a day which is normal for me, and no cramping or urgency like I used to have. There's still that little opening near my bottom that's been there for months with some clear drainage, but it's not bothering me much and my weight has been steady.",
     "dob": "03/10/1985",
     "age": 39,
     "sex": "Male",
@@ -182,28 +182,100 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "MCV", "value": "78.4", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "342", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "78.4",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "342",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron, Serum", "value": "42", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "TIBC", "value": "390", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "18", "unit": "ng/mL", "range": "30-400", "flag": "L" },
-            { "test": "Transferrin Saturation", "value": "11", "unit": "%", "range": "20-50", "flag": "L" }
+            {
+              "test": "Iron, Serum",
+              "value": "42",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "390",
+              "unit": "µg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Ferritin",
+              "value": "18",
+              "unit": "ng/mL",
+              "range": "30-400",
+              "flag": "L"
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "11",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "INFLAMMATORY MARKERS",
           "results": [
-            { "test": "CRP", "value": "1.2", "unit": "mg/dL", "range": "<0.5", "flag": "H" },
-            { "test": "ESR", "value": "22", "unit": "mm/hr", "range": "0-15", "flag": "H" },
-            { "test": "Fecal Calprotectin", "value": "165", "unit": "µg/g", "range": "<50", "flag": "H" }
+            {
+              "test": "CRP",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
+            },
+            {
+              "test": "ESR",
+              "value": "22",
+              "unit": "mm/hr",
+              "range": "0-15",
+              "flag": "H"
+            },
+            {
+              "test": "Fecal Calprotectin",
+              "value": "165",
+              "unit": "µg/g",
+              "range": "<50",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -271,15 +343,42 @@ window.EMR_DATA = {
     "Maternal aunt: Crohn's disease, age 58"
   ],
   "socialHistory": [
-    ["Occupation", "IT systems administrator"],
-    ["Marital", "Married"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — avoids due to GI symptoms"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Light jogging 2x/week; limited by perianal symptoms"],
-    ["Housing", "Lives with wife and 2 children"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "IT systems administrator"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — avoids due to GI symptoms"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Light jogging 2x/week; limited by perianal symptoms"
+    ],
+    [
+      "Housing",
+      "Lives with wife and 2 children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "perianal-abscess",
@@ -290,75 +389,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Rasheed Thompson appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Rasheed appears mildly uncomfortable but cooperative, shifting slightly when seated. He's forthcoming about his symptoms and medical history, though somewhat embarrassed discussing the perianal area. He shows mild distress from pain but maintains composure given his experience managing chronic Crohn's disease.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did urologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the pain you're experiencing near your bottom?",
+      "When did this current pain and swelling start?",
+      "Has the drainage from your fistula changed in color, amount, or smell recently?",
+      "Have you noticed any fever, chills, or feeling unwell?",
+      "How would you rate your pain on a scale of 1-10?",
+      "Does sitting, walking, or having a bowel movement make the pain worse?",
+      "Have you tried anything to relieve the pain?",
+      "How have your Crohn's symptoms been lately - any changes in bowel movements?",
+      "When did you last take your Crohn's medications?",
+      "Have you had similar episodes of perianal pain or swelling before?",
+      "Any difficulty urinating or blood in your urine?",
+      "Have you noticed any new lumps or bumps in the area?",
+      "Any nausea, vomiting, or abdominal pain different from your usual Crohn's symptoms?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been doing pretty well lately with my bowel issues - just going 2-3 times a.'",
-        "character": "'It's urologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Perianal Abscess.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Adalimumab 40mg SQ every 2 weeks; Mesalamine 800mg TID; Ferrous Sulfate 325mg daily; Vitamin D3 2000 IU daily; Metronidazole 500mg TID.'",
-        "allergies": "'My allergies are Azathioprine.'",
-        "family": "Father: HTN, T2DM, alive at 62  Mother: Ulcerative colitis, alive at 60  Sister: No significant medical history, age 36",
-        "social": "Occupation: IT systems administrator  Marital: Married  Tobacco: Never smoker  Alcohol: Rare \u2014 avoids due to GI symptoms  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that? I'm mainly concerned about this pain and swelling near my bottom.",
+      "onset": "The pain started getting really bad yesterday evening, but I noticed some increased swelling and tenderness starting about 3 days ago. It's gotten much worse since then.",
+      "character": "It's a deep, throbbing pain that feels like pressure building up. It's constant now, not like the cramping I get with my Crohn's flares.",
+      "location": "It's right next to my anal opening, on the left side. The pain stays in that area - doesn't really spread anywhere else.",
+      "severity": "Right now it's about an 7 out of 10. It's hard to sit comfortably and walking makes it throb more. I couldn't sleep well last night because of it.",
+      "aggravating": "Sitting makes it worse, especially on hard surfaces. Walking and having bowel movements definitely increase the pain. Even touching the area lightly is very tender.",
+      "relieving": "I tried ibuprofen and sitting on a heating pad, which helped a little bit. Lying on my side seems to be the most comfortable position.",
+      "associated": "I've had some chills today, not really a fever I don't think. The drainage from my old fistula has increased and looks more yellowish than usual. No nausea or vomiting.",
+      "denies": "No blood in my urine, no trouble urinating. No severe abdominal pain - my bowel movements have been normal for me. No rectal bleeding beyond what I sometimes see with the fistula.",
+      "history": "I had something similar about 2 years ago that needed to be drained by a surgeon. The fistula has been there for about 8 months with on-and-off drainage, but this swelling and pain is new.",
+      "medications": "Adalimumab 40mg SQ every 2 weeks; Mesalamine 800mg TID; Ferrous Sulfate 325mg daily; Vitamin D3 2000 IU daily; Metronidazole 500mg TID",
+      "allergies": "Azathioprine",
+      "family": "My mother has ulcerative colitis, so IBD runs in the family. My father has diabetes and high blood pressure but no bowel issues.",
+      "social": "I work in IT, so I sit at a desk most of the day which has been really uncomfortable. I'm married, don't smoke, and rarely drink alcohol because it bothers my stomach. No drug use."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual inspection of perianal area",
+      "Gentle palpation of perianal region",
+      "Assessment of perianal swelling and erythema",
+      "Digital rectal examination",
+      "Evaluation of existing fistula tract",
+      "Assessment of inguinal lymph nodes",
+      "Abdominal palpation for tenderness",
+      "Vital signs assessment",
+      "General appearance and distress level"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Perianal Abscess. Document specifically what you observe."
+      "Visual inspection of perianal area": "Visible fluctuant swelling and erythema at 9 o'clock position relative to anal verge, approximately 3cm in diameter. Existing fistula opening visible at 7 o'clock position with purulent drainage.",
+      "Gentle palpation of perianal region": "Tender, fluctuant mass in left posterolateral position. Warmth and induration surrounding the swelling. Patient winces with light palpation.",
+      "Assessment of perianal swelling and erythema": "Well-demarcated area of erythema extending 4cm from anal verge. Skin appears taut and shiny over the fluctuant area.",
+      "Digital rectal examination": "Deferred due to severe tenderness and likely abscess - would cause unnecessary pain and potential complications.",
+      "Evaluation of existing fistula tract": "Patent external opening at 7 o'clock position with thick, purulent drainage. Surrounding tissue appears inflamed.",
+      "Assessment of inguinal lymph nodes": "Mild bilateral inguinal lymphadenopathy, mobile, non-tender, approximately 1cm in size.",
+      "Abdominal palpation for tenderness": "Soft, non-distended abdomen. Mild tenderness in left lower quadrant consistent with known Crohn's disease. No guarding or rebound.",
+      "Vital signs assessment": "BP 122/76, HR 74, Temperature 98.6°F, SpO2 99% - stable vital signs without fever currently.",
+      "General appearance and distress level": "Patient appears uncomfortable, favoring left side when sitting. Alert and oriented, mild distress from pain but hemodynamically stable."
     },
     "ddxTargets": [
-        "Perianal Abscess (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Perianal Abscess (correct diagnosis)",
+      "Crohn's disease flare with perianal complications",
+      "Complex perianal fistula with secondary infection",
+      "Fournier's gangrene",
+      "Pilonidal abscess",
+      "Thrombosed external hemorrhoid",
+      "Perianal hematoma"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Perianal Abscess, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Perianal Abscess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Perianal Abscess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on patient's known Crohn's disease and attribute all perianal symptoms to IBD complications rather than recognizing acute abscess requiring urgent drainage",
+      "prematureClosure": "Might stop investigation after noting existing fistula and assume symptoms are related to chronic condition rather than new acute process",
+      "availabilityBias": "Recent experience with other Crohn's patients might lead to attributing symptoms to disease flare rather than recognizing surgical emergency"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Rasheed Thompson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Perianal Abscess. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has a complex history of Crohn's disease with known perianal complications. What specific features in his presentation would help you distinguish between a chronic fistula, an acute flare, and a new surgical emergency? Consider the timeline and character of his symptoms.",
+      "phase5": "You've identified some key physical findings. Given the fluctuant mass, erythema, and patient's immunosuppressed state, what is your leading diagnosis and what immediate management would this patient need? How does his Crohn's disease and current medications influence your approach?",
+      "finalDebrief": "This case highlights how patients with chronic conditions like Crohn's can develop acute complications that require urgent surgical intervention. The key was recognizing that despite his stable IBD, the acute onset of severe pain with a fluctuant mass indicated abscess formation requiring immediate drainage, not just medical management of his underlying disease."
     }
-}
+  }
 };

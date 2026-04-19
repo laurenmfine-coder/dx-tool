@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andre Williams",
-  "patientHPI": "I'm here for my usual follow-up - my blood pressure is doing better with the medication and diet changes, and my shoulder pain from that injury is much improved after physical therapy. My asthma has been great too, hardly needed my inhaler at all this month.",
+    "patientHPI": "I'm here for my usual follow-up - my blood pressure is doing better with the medication and diet changes, and my shoulder pain from that injury is much improved after physical therapy. My asthma has been great too, hardly needed my inhaler at all this month.",
     "dob": "08/25/1988",
     "age": 36,
     "sex": "Male",
@@ -84,42 +84,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "12/12/2024",
-        "bp": "134/84",
-        "hr": 74,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "98%",
-        "wt": "205 lbs",
-        "ht": "6'1\"",
-        "bmi": 27.0,
-        "setting": "PCP Office"
+      "date": "12/12/2024",
+      "bp": "134/84",
+      "hr": 74,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "98%",
+      "wt": "205 lbs",
+      "ht": "6'1\"",
+      "bmi": 27,
+      "setting": "PCP Office"
     },
     {
-        "date": "06/18/2024",
-        "bp": "138/86",
-        "hr": 70,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "99%",
-        "wt": "208 lbs",
-        "ht": "6'1\"",
-        "bmi": 27.4,
-        "setting": "PCP Office"
+      "date": "06/18/2024",
+      "bp": "138/86",
+      "hr": 70,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "208 lbs",
+      "ht": "6'1\"",
+      "bmi": 27.4,
+      "setting": "PCP Office"
     },
     {
-        "date": "12/05/2023",
-        "bp": "140/88",
-        "hr": 76,
-        "rr": 16,
-        "temp": "98.6\u00b0F",
-        "spo2": "98%",
-        "wt": "210 lbs",
-        "ht": "6'1\"",
-        "bmi": 27.7,
-        "setting": "PCP Office"
+      "date": "12/05/2023",
+      "bp": "140/88",
+      "hr": 76,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "98%",
+      "wt": "210 lbs",
+      "ht": "6'1\"",
+      "bmi": 27.7,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -159,23 +159,95 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "90", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "99", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.5", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "90",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "99",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.5",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.0", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "255", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.0",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "255",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -236,15 +308,42 @@ window.EMR_DATA = {
     "Maternal grandfather: Lung cancer, deceased at 71"
   ],
   "socialHistory": [
-    ["Occupation", "HVAC technician"],
-    ["Marital", "Single, in a relationship"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 3-4 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Weight lifting 3x/week; basketball weekends"],
-    ["Housing", "Lives alone in apartment"],
-    ["Safety", "Denies IPV; wears seatbelt; uses PPE at work"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "HVAC technician"
+    ],
+    [
+      "Marital",
+      "Single, in a relationship"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 3-4 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Weight lifting 3x/week; basketball weekends"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; uses PPE at work"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "massive-hemothorax",
@@ -255,75 +354,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Andre Williams appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Andre appears anxious and confused, repeatedly stating he's here for routine follow-up while clearly in respiratory distress. He seems bewildered by questions about chest pain or breathing problems, insisting his chronic conditions are well-controlled and he feels fine despite obvious signs of trauma.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did trauma start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me what happened today and how you got here?",
+      "Are you having any chest pain or discomfort right now?",
+      "Are you having any trouble breathing or shortness of breath?",
+      "Have you had any recent trauma, accidents, or injuries?",
+      "When did you first notice feeling unwell today?",
+      "Have you coughed up any blood or noticed blood anywhere?",
+      "Are you experiencing any dizziness or lightheadedness?",
+      "Have you had any falls or been hit in the chest recently?",
+      "Is the pain sharp, dull, crushing, or stabbing?",
+      "Does the pain get worse when you take a deep breath?",
+      "Have you had any nausea or vomiting?",
+      "Are you taking all your regular medications as prescribed?",
+      "Has your asthma been bothering you more than usual lately?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my usual follow-up - my blood pressure is doing better with the med.'",
-        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Massive Hemothorax.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrochlorothiazide 25mg daily; Albuterol MDI 90mcg 2 puffs PRN; Ibuprofen 600mg TID PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: HTN, T2DM, alive at 62  Mother: Asthma, alive at 60  Brother: No significant medical history, age 33",
-        "social": "Occupation: HVAC technician  Marital: Single, in a relationship  Tobacco: Never smoker  Alcohol: Social \u2014 3-4 drinks/week  Drugs: Denies"
+      "default": "I'm not sure what you mean... I'm just here for my regular check-up. Everything's been going really well with my treatment plan.",
+      "onset": "I don't know what you're talking about - I've been feeling great! I came in around 2 PM for my scheduled appointment like always.",
+      "character": "I keep telling you, I don't have any chest pain. Maybe a little tightness but that's probably just my asthma acting up a bit.",
+      "location": "Well, if I had to say... maybe some pressure on my right side, but it's nothing serious. Probably just slept wrong.",
+      "severity": "Maybe a 3 out of 10? It's really not bothering me. I'm more concerned about making sure my blood pressure numbers look good today.",
+      "aggravating": "I guess it might be a little worse when I breathe really deep, but that's normal for asthma, right?",
+      "relieving": "Nothing really helps because there's nothing wrong. I took a puff of my inhaler earlier just in case.",
+      "associated": "I feel a little dizzy but I think I'm just nervous about the appointment. Maybe a little tired, but I worked a long shift yesterday.",
+      "denies": "No fever, no real pain, no problems breathing - well, maybe a little short of breath but that's my asthma. No nausea or anything like that.",
+      "history": "Never had anything like this because there's nothing happening! My asthma has been great, barely using my inhaler.",
+      "medications": "Hydrochlorothiazide 25mg daily; Albuterol MDI 90mcg 2 puffs PRN; Ibuprofen 600mg TID PRN",
+      "allergies": "NKDA",
+      "family": "My mom has asthma too, and my dad has high blood pressure like me. That's why I'm here - to make sure we're staying on top of it.",
+      "social": "I'm an HVAC technician, work can be physical sometimes. I don't smoke, just have a few drinks on weekends. Single but in a good relationship."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Vital signs assessment",
+      "General appearance and distress level",
+      "Chest inspection for asymmetry or trauma signs",
+      "Chest palpation for tenderness or crepitus",
+      "Percussion of chest fields",
+      "Auscultation of lung fields bilaterally",
+      "Heart sounds auscultation",
+      "Assessment of jugular venous distention",
+      "Tracheal position assessment",
+      "Peripheral perfusion and capillary refill"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Massive Hemothorax. Document specifically what you observe."
+      "Vital signs assessment": "BP 85/50, HR 118, RR 28, Temp 98.6°F, SpO2 88% on room air - significant hemodynamic instability",
+      "General appearance and distress level": "Patient appears pale, diaphoretic, and in moderate respiratory distress despite claiming to feel fine",
+      "Chest inspection for asymmetry or trauma signs": "Right chest appears flattened with decreased respiratory excursion, possible bruising over right lateral chest wall",
+      "Chest palpation for tenderness or crepitus": "Significant tenderness over right posterior and lateral chest, no crepitus palpated",
+      "Percussion of chest fields": "Marked dullness to percussion over right chest fields from base to mid-lung",
+      "Auscultation of lung fields bilaterally": "Absent breath sounds over right chest, clear breath sounds on left side",
+      "Heart sounds auscultation": "Tachycardic rate, heart sounds distant, no obvious murmurs",
+      "Assessment of jugular venous distention": "JVD present, suggesting possible mediastinal shift or volume overload",
+      "Tracheal position assessment": "Trachea deviated toward the left, away from affected side",
+      "Peripheral perfusion and capillary refill": "Capillary refill delayed at 4 seconds, extremities cool and pale"
     },
     "ddxTargets": [
-        "Massive Hemothorax (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Massive Hemothorax (correct diagnosis)",
+      "Pneumothorax with mediastinal shift",
+      "Pleural effusion, large",
+      "Aortic dissection with hemothorax",
+      "Cardiac tamponade",
+      "Pneumonia with parapneumonic effusion",
+      "Asthma exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Massive Hemothorax, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Massive Hemothorax, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Massive Hemothorax based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Patient's insistence on routine follow-up and denial of acute symptoms may cause anchoring on chronic conditions rather than recognizing acute trauma presentation",
+      "prematureClosure": "Normal temperature and patient's reassuring history might lead to premature closure on asthma exacerbation without considering life-threatening chest pathology",
+      "availabilityBias": "Recent experience with routine hypertension and asthma follow-ups might make clinician less likely to consider acute traumatic causes"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Andre Williams's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Massive Hemothorax. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient presents with what seems like a routine visit, but something doesn't quite fit. What aspects of the presentation should make you dig deeper? Consider what vital signs and physical findings would be most important to assess early in a patient claiming to feel well but appearing distressed.",
+      "phase5": "Now that you have the history and physical findings, there's a significant discrepancy between what the patient reports and what you're observing. How do you reconcile the patient's denial of symptoms with your objective findings? What does the combination of hemodynamic instability, unilateral chest findings, and tracheal deviation suggest?",
+      "finalDebrief": "This case highlights the importance of objective assessment over subjective reporting, especially in trauma. The patient's confusion and denial may have been early signs of shock. How did your differential evolve from considering routine follow-up to recognizing a surgical emergency? What red flags should have triggered immediate intervention regardless of the patient's reported symptoms?"
     }
-}
+  }
 };

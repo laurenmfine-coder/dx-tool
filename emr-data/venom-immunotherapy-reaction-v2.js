@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Karen Lindquist",
-  "patientHPI": "I was getting my regular allergy shot today like I have been for over a year now, and about 20 minutes after the injection I started breaking out in hives all over my body and my throat felt like it was closing up. I got really dizzy and felt like I was going to pass out, so they gave me a shot right away in the office.",
+      "patientHPI": "I was getting my regular allergy shot today like I have been for over a year now, and about 20 minutes after the injection I started breaking out in hives all over my body and my throat felt like it was closing up. I got really dizzy and felt like I was going to pass out, so they gave me a shot right away in the office.",
       "dob": "02/07/1968",
       "age": "58",
       "sex": "Female",
@@ -987,110 +987,117 @@ window.EMR_DATA = {
       "Issue",
       "ACE inhibitor must be switched before continuing VIT — drugs amplify VIT reactions"
     ]
-  ]
-,"references":[
-  {
-    "id": "AIT-PP-2011",
-    "title": "Allergen immunotherapy: practice parameter 3rd update",
-    "authors": "Cox L, Nelson H, Lockey R, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2011,
-    "doi": "10.1016/j.jaci.2010.09.034",
-    "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCIT protocols",
-      "Cluster/rush protocols",
-      "ACE inhibitors increase VIT reactions",
-      "VIT ≥5 years"
-    ]
-  },
-  {
-    "id": "Insect-PP-2017",
-    "title": "Stinging insect hypersensitivity: practice parameter 2016",
-    "authors": "Golden DBK, Demain J, Freeman T, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2017,
-    "doi": "10.1016/j.anai.2016.10.031",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/28007086/",
-    "openAccess": true,
-    "validates": [
-      "60% recurrence without VIT",
-      "VIT reduces to <5%",
-      "Baseline tryptase screening",
-      "Cluster VIT protocol"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "AIT-PP-2011",
+      "title": "Allergen immunotherapy: practice parameter 3rd update",
+      "authors": "Cox L, Nelson H, Lockey R, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2011,
+      "doi": "10.1016/j.jaci.2010.09.034",
+      "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCIT protocols",
+        "Cluster/rush protocols",
+        "ACE inhibitors increase VIT reactions",
+        "VIT ≥5 years"
+      ]
+    },
+    {
+      "id": "Insect-PP-2017",
+      "title": "Stinging insect hypersensitivity: practice parameter 2016",
+      "authors": "Golden DBK, Demain J, Freeman T, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2017,
+      "doi": "10.1016/j.anai.2016.10.031",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28007086/",
+      "openAccess": true,
+      "validates": [
+        "60% recurrence without VIT",
+        "VIT reduces to <5%",
+        "Baseline tryptase screening",
+        "Cluster VIT protocol"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Karen Lindquist is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Karen appears anxious but cooperative, still recovering from the frightening systemic reaction she experienced 20 minutes ago. She's eager to understand what went wrong with her usually well-tolerated VIT injections and is concerned about her ability to continue beekeeping safely.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what happened after your injection today?",
+      "What symptoms did you experience and in what order?",
+      "How long after the injection did your symptoms start?",
+      "Have you ever had a reaction like this to your VIT injections before?",
+      "How long have you been getting these maintenance injections?",
+      "What medications are you currently taking?",
+      "Have you started any new medications recently?",
+      "Are you taking any blood pressure medications?",
+      "Have you had any recent bee stings outside of your treatment?",
+      "How is your beekeeping going - any recent exposures?",
+      "Have you been feeling unwell or stressed lately?",
+      "Did you exercise before or after previous injections?",
+      "Have you had any changes in your allergy medications?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Cetirizine; Observation.'",
-        "allergies": "'My allergies: Honeybee venom.'",
-        "family": "Non-contributory",
-        "social": "Context: On honeybee VIT for 18 months \u2014 had systemic reaction to maintenance dose injection  Comorbidity: ACE inhibitor for HTN \u2014 increases VIT reaction risk (bradykinin pathway)  Hobby: Beekeeper \u2014 occupational AND hobby exposure  Issue: ACE inhibitor must be switched before continuing VIT \u2014 drugs amplify VIT reactions"
+      "default": "I'm not sure I understand - can you ask me that in a different way?",
+      "onset": "About 20 minutes after my injection, I started feeling itchy all over and my throat felt tight. It came on pretty quickly.",
+      "character": "I had hives breaking out everywhere and my throat felt like it was closing up. I felt dizzy and weak.",
+      "location": "The hives were all over my body - my arms, chest, back. The throat tightness was the scariest part.",
+      "severity": "I'd say it was an 8 out of 10 - it was really frightening. I couldn't think about anything else and felt like I might pass out.",
+      "aggravating": "Nothing specific made it worse - it just kept getting worse on its own until they gave me the epinephrine.",
+      "relieving": "The epinephrine shot helped a lot. The hives are still there but much better, and my throat feels more open.",
+      "associated": "I felt dizzy, weak, and nauseous. My heart was racing and I felt like I might faint.",
+      "denies": "No chest pain, no wheezing or trouble breathing beyond the throat tightness, no abdominal pain or vomiting.",
+      "history": "I've been getting these injections for 18 months now and never had a reaction like this. Maybe some mild local swelling before, but nothing systemic.",
+      "medications": "Epinephrine; Cetirizine; Observation",
+      "allergies": "Honeybee venom",
+      "family": "No family history of severe allergies or anaphylaxis that I know of.",
+      "social": "I'm a beekeeper - it's both my job and hobby. That's why I need these shots. I don't smoke, drink occasionally, no drugs. I've been doing this treatment so I can keep working with my bees safely."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Vital signs assessment",
+      "Skin examination for urticaria",
+      "Head and neck examination",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Injection site examination",
+      "Neurological assessment",
+      "Assessment of perfusion",
+      "Lymph node examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Vital signs assessment": "BP 96/62, HR 108, Temp 36.8°C, SpO2 95% - hypotensive and tachycardic",
+      "Skin examination for urticaria": "Diffuse urticarial rash across trunk and extremities, some lesions fading after epinephrine treatment",
+      "Head and neck examination": "Mild periorbital edema, no stridor, throat appears normal now post-epinephrine",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak pulses consistent with hypotension",
+      "Pulmonary examination": "Clear breath sounds bilaterally, no wheezing or stridor, adequate air movement",
+      "Abdominal examination": "Soft, non-tender, normal bowel sounds, no organomegaly",
+      "Injection site examination": "Left deltoid injection site with minimal erythema and swelling, no induration",
+      "Neurological assessment": "Alert and oriented, anxious but appropriate, no focal deficits",
+      "Assessment of perfusion": "Capillary refill 3 seconds, skin cool and clammy, improving after treatment",
+      "Lymph node examination": "No lymphadenopathy palpated"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "VIT systemic reaction exacerbated by ACE inhibitor (correct diagnosis)",
+      "Anaphylaxis to VIT",
+      "Vasovagal reaction to injection",
+      "Septic shock from contaminated injection",
+      "Cardiogenic shock",
+      "Acute allergic reaction to excipients",
+      "Anxiety/panic attack"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on typical VIT reaction and miss the ACE inhibitor contribution, or focus solely on allergy without considering drug interactions",
+      "prematureClosure": "May diagnose simple allergic reaction without investigating why this patient who previously tolerated VIT suddenly had a severe reaction",
+      "availabilityBias": "Recent cases of anaphylaxis might overshadow the specific mechanism of ACE inhibitor potentiation of allergic reactions"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Karen Lindquist: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient has been tolerating VIT maintenance doses for 18 months. What factors might predispose someone to suddenly develop a more severe reaction to a previously tolerated treatment?",
+      "phase5": "You've identified a systemic reaction in a patient on VIT maintenance. Her vital signs show hypotension and she required epinephrine. What medication interactions should you specifically ask about that might amplify allergic reactions?",
+      "finalDebrief": "This case illustrates how ACE inhibitors can amplify VIT reactions through bradykinin pathway interference. The patient's established tolerance broke down due to this drug interaction. How does this change your approach to patients starting VIT who are on cardiovascular medications?"
     }
-}
+  }
 };

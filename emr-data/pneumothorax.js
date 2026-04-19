@@ -293,73 +293,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Tyler Reeves is visibly uncomfortable and anxious, cooperative but pauses due to discomfort.",
+    "patientPersona": "Tyler appears mildly anxious but cooperative, speaking in short sentences due to subtle breathing discomfort. He's forthcoming about his symptoms but initially downplays their severity, attributing them to anxiety. He demonstrates mild distress and sits leaning slightly forward.",
     "interviewQuestions": [
-      "When did your symptoms start and how?",
-      "Describe the main symptom — location, character, severity.",
-      "What makes it worse? What makes it better?",
-      "Any other symptoms you've noticed?",
-      "Any prior similar episodes?",
-      "Tell me about your medical history.",
+      "When did your shortness of breath start?",
+      "Can you describe what the shortness of breath feels like?",
+      "Are you having any chest pain right now?",
+      "Where exactly in your chest do you feel discomfort?",
+      "On a scale of 1-10, how severe is your breathing difficulty?",
+      "Does anything make your breathing worse or better?",
+      "Have you had any coughing, fever, or wheezing?",
+      "Have you ever had this type of breathing problem before?",
       "What medications are you currently taking?",
-      "Any medication allergies?",
-      "Relevant family history?",
-      "Tell me about your lifestyle."
+      "Do you have any drug allergies?",
+      "Tell me about your family medical history",
+      "Do you smoke cigarettes or vape?",
+      "What were you doing when this started?"
     ],
     "patientResponses": {
-      "default": "He pauses. 'Can you clarify what you mean?'",
-      "onset": "'Suddenly — over the past day or two.'",
-      "character": "'The shortness of breath has been significant and affecting my ability to function.'",
-      "location": "'The main problem is in the expected area for my condition.'",
-      "severity": "'Eight or nine out of ten.'",
-      "aggravating": "'Activity and movement worsen it.'",
-      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-      "associated": "'Some associated symptoms consistent with Primary Spontaneous Pneumothorax.'",
-      "denies": "'No fever, chills, or unexplained weight loss.'",
-      "history": "'I have not had exactly this before.'",
-      "medications": "'I take Sertraline 50mg daily; Albuterol 90mcg MDI PRN.'",
-      "allergies": "'My allergies: NKDA.'",
-      "family": "Father: Marfan syndrome suspected but never diagnosed, tall (6'5\"), mild mitral valve prolapse, age 52, alive  Mother: Anxiety disorder, migraines, age 50, alive  Brother: Healthy, age 20",
-      "social": "Occupation: College student (senior) at State University, studying exercise science  Marital: Single, lives with roommate in off-campus apartment  Tobacco: No cigarette smoking. Daily nicotine vaping (5% pods) since age 18. Approximately 1 pod per day.  Alcohol: Social — weekends, 4-6 drinks  Drugs: Occasional marijuana (edibles, 1-2x/month)"
+      "default": "I'm not sure what you mean. Could you ask that differently? I'm mainly just having trouble catching my breath.",
+      "onset": "It started suddenly about 2 hours ago while I was sitting in my dorm room studying. I was just reading and suddenly felt like I couldn't get enough air.",
+      "character": "It feels like I can't take a deep breath, like there's not enough room in my chest. It's hard to describe - like my lung isn't expanding all the way.",
+      "location": "It's mainly on my right side, kind of sharp when I try to breathe deeply. The pain is right here on the right side of my chest.",
+      "severity": "The breathing difficulty is about a 6 out of 10. The chest pain is maybe a 4, but it's sharp when I breathe in deep.",
+      "aggravating": "Taking deep breaths makes the pain worse. Lying flat makes me feel more short of breath.",
+      "relieving": "Sitting up and taking shallow breaths helps a little. I tried my inhaler but it didn't really help much.",
+      "associated": "No cough, no fever. I feel a little lightheaded sometimes but I think that's just from not breathing well.",
+      "denies": "No cough, no fever, no sputum. No leg swelling. Haven't been sick recently. No recent travel or long car rides.",
+      "history": "I've had some mild chest discomfort before, maybe once or twice in the past year, but nothing this bad or this sudden.",
+      "medications": "Sertraline 50mg daily; Albuterol 90mcg MDI PRN",
+      "allergies": "NKDA",
+      "family": "My dad is really tall like me, about 6'5\", and doctors have mentioned he might have Marfan syndrome but he's never been officially diagnosed. He has some heart valve issue but it's mild.",
+      "social": "I'm a senior at State University studying exercise science. I don't smoke cigarettes but I do vape daily - nicotine pods, about one a day since I was 18. I drink socially on weekends and occasionally use edibles."
     },
     "examManeuvers": [
-      "General appearance",
-      "Vital signs and oximetry",
-      "Pulmonary auscultation",
-      "Percussion",
-      "Accessory muscles",
-      "Cardiovascular auscultation",
-      "DVT check",
-      "Trachea"
+      "General appearance and respiratory distress assessment",
+      "Vital signs including oxygen saturation",
+      "Chest inspection for symmetry and respiratory effort",
+      "Palpation for chest wall tenderness and tactile fremitus",
+      "Percussion of both lung fields",
+      "Auscultation of bilateral lung fields",
+      "Cardiac auscultation",
+      "Assessment for Marfanoid features",
+      "Tracheal position assessment",
+      "Chest wall expansion assessment"
     ],
     "examFindings": {
-      "General appearance": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "Vital signs and oximetry": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "Pulmonary auscultation": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "Percussion": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "Accessory muscles": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "Cardiovascular auscultation": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "DVT check": "Finding consistent with Primary Spontaneous Pneumothorax.",
-      "Trachea": "Finding consistent with Primary Spontaneous Pneumothorax."
+      "General appearance and respiratory distress assessment": "Tall, thin male in mild respiratory distress, sitting upright and leaning forward slightly",
+      "Vital signs including oxygen saturation": "BP 118/72, HR 68, RR 22, Temp 98.4°F, SpO2 99% on room air",
+      "Chest inspection for symmetry and respiratory effort": "Decreased chest wall movement on right side, using accessory muscles mildly",
+      "Palpation for chest wall tenderness and tactile fremitus": "No chest wall tenderness, decreased tactile fremitus over right upper chest",
+      "Percussion of both lung fields": "Hyperresonant percussion note over right upper chest, normal on left",
+      "Auscultation of bilateral lung fields": "Decreased breath sounds over right upper lobe, clear breath sounds on left",
+      "Cardiac auscultation": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+      "Assessment for Marfanoid features": "Tall stature (6'2\"), arm span greater than height, arachnodactyly present",
+      "Tracheal position assessment": "Trachea midline, no deviation",
+      "Chest wall expansion assessment": "Asymmetric expansion with decreased movement on right side"
     },
     "ddxTargets": [
-      "Primary Spontaneous Pneumothorax (correct)",
-      "Most likely alternative",
-      "Third differential",
-      "Must-not-miss 1",
-      "Must-not-miss 2",
-      "Common mimic 1",
-      "Common mimic 2"
+      "Primary Spontaneous Pneumothorax (correct diagnosis)",
+      "Anxiety/Panic Attack",
+      "Exercise-induced Asthma",
+      "Pulmonary Embolism",
+      "Myocardial Infarction",
+      "Pneumonia",
+      "Costochondritis"
     ],
     "biasFlags": {
-      "anchoring": "Consider the full differential for Primary Spontaneous Pneumothorax.",
-      "prematureClosure": "Complete your workup before narrowing focus.",
-      "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on anxiety given patient's psychiatric history and initial presentation for anxiety follow-up, missing the acute respiratory pathology",
+      "prematureClosure": "May stop investigating after noting anxiety history and young age, failing to perform thorough respiratory examination",
+      "availabilityBias": "Recent cases of anxiety or asthma may lead to missing the classic presentation of pneumothorax in a tall, thin young male who vapes"
     },
     "coachPrompts": {
-      "phase2": "Before interviewing Tyler Reeves: what does the chart suggest? Top 3 diagnoses?",
-      "phase5": "After history and exam: how has your differential changed?",
-      "finalDebrief": "The diagnosis is Primary Spontaneous Pneumothorax. How did your reasoning evolve?"
+      "phase2": "Before interviewing Tyler, consider his physical characteristics and risk factors. What specific questions will help you differentiate between respiratory causes and anxiety? Think about the classic patient profile for spontaneous pneumothorax.",
+      "phase5": "Your exam findings show asymmetric chest findings on the right side. How do the percussion and auscultation findings fit together? What does hyperresonance with decreased breath sounds suggest, especially in this patient population?",
+      "finalDebrief": "This case highlights how psychiatric comorbidities can create diagnostic challenges. Tyler's Marfanoid habitus and vaping history were key risk factors for spontaneous pneumothorax. The combination of sudden onset, unilateral chest findings, and patient demographics should have elevated this diagnosis. How did the physical exam findings help differentiate this from anxiety or other respiratory conditions?"
     }
   }
 };

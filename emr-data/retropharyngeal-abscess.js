@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Aaliyah Baptiste",
-  "patientHPI": "My little girl has had a runny nose for about four days, but yesterday she started pulling at her right ear and crying a lot more than usual. She's had a fever up to almost 102 and isn't eating much, though she's still drinking her milk okay.",
+    "patientHPI": "My little girl has had a runny nose for about four days, but yesterday she started pulling at her right ear and crying a lot more than usual. She's had a fever up to almost 102 and isn't eating much, though she's still drinking her milk okay.",
     "dob": "06/14/2022",
     "age": 2,
     "sex": "Female",
@@ -166,38 +166,140 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC) WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "24.8", "unit": "x10³/µL", "range": "5.5-15.5", "flag": "H" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "11.0-14.0", "flag": "" },
-            { "test": "Hematocrit", "value": "34.2", "unit": "%", "range": "33-39", "flag": "" },
-            { "test": "Platelets", "value": "428", "unit": "x10³/µL", "range": "150-400", "flag": "H" },
-            { "test": "Neutrophils", "value": "78", "unit": "%", "range": "25-62", "flag": "H" },
-            { "test": "Bands", "value": "10", "unit": "%", "range": "0-5", "flag": "H" },
-            { "test": "Lymphocytes", "value": "8", "unit": "%", "range": "25-50", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "24.8",
+              "unit": "x10³/µL",
+              "range": "5.5-15.5",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "11.0-14.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.2",
+              "unit": "%",
+              "range": "33-39",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "428",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "78",
+              "unit": "%",
+              "range": "25-62",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "10",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "8",
+              "unit": "%",
+              "range": "25-50",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "C-REACTIVE PROTEIN",
           "results": [
-            { "test": "CRP", "value": "18.4", "unit": "mg/dL", "range": "0.0-0.5", "flag": "H" }
+            {
+              "test": "CRP",
+              "value": "18.4",
+              "unit": "mg/dL",
+              "range": "0.0-0.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BLOOD CULTURE",
           "results": [
-            { "test": "Blood Culture (Aerobic)", "value": "Pending", "unit": "", "range": "No growth", "flag": "" },
-            { "test": "Blood Culture (Anaerobic)", "value": "Pending", "unit": "", "range": "No growth", "flag": "" }
+            {
+              "test": "Blood Culture (Aerobic)",
+              "value": "Pending",
+              "unit": "",
+              "range": "No growth",
+              "flag": ""
+            },
+            {
+              "test": "Blood Culture (Anaerobic)",
+              "value": "Pending",
+              "unit": "",
+              "range": "No growth",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "60-110", "flag": "" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "5-18", "flag": "" },
-            { "test": "Creatinine", "value": "0.3", "unit": "mg/dL", "range": "0.2-0.4", "flag": "" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.5", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "20-28", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "60-110",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "5-18",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.3",
+              "unit": "mg/dL",
+              "range": "0.2-0.4",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.5",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "20-28",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -238,11 +340,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Hepatitis A (Havrix) — 2nd dose", "date": "09/14/2024", "site": "Left thigh IM", "lot": "HA412K", "mfr": "GSK" },
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/10/2024", "site": "Right deltoid IM", "lot": "FL819R", "mfr": "GSK" },
-    { "vaccine": "DTaP (Daptacel) — 4th dose", "date": "06/14/2023", "site": "Right thigh IM", "lot": "DA392T", "mfr": "Sanofi" },
-    { "vaccine": "MMR (M-M-R II)", "date": "06/14/2023", "site": "Left thigh SC", "lot": "MM641P", "mfr": "Merck" },
-    { "vaccine": "Varicella (Varivax)", "date": "06/14/2023", "site": "Right thigh SC", "lot": "VV312M", "mfr": "Merck" }
+    {
+      "vaccine": "Hepatitis A (Havrix) — 2nd dose",
+      "date": "09/14/2024",
+      "site": "Left thigh IM",
+      "lot": "HA412K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/10/2024",
+      "site": "Right deltoid IM",
+      "lot": "FL819R",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "DTaP (Daptacel) — 4th dose",
+      "date": "06/14/2023",
+      "site": "Right thigh IM",
+      "lot": "DA392T",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "MMR (M-M-R II)",
+      "date": "06/14/2023",
+      "site": "Left thigh SC",
+      "lot": "MM641P",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Varicella (Varivax)",
+      "date": "06/14/2023",
+      "site": "Right thigh SC",
+      "lot": "VV312M",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother (age 30): Asthma, eczema — both well-controlled",
@@ -252,14 +384,38 @@ window.EMR_DATA = {
     "Strong family history of atopy (asthma, eczema, allergic rhinitis)"
   ],
   "socialHistory": [
-    ["Guardian", "Lives with both parents and older brother"],
-    ["Childcare/School", "Attends large daycare center (25+ children)"],
-    ["Tobacco Exposure", "None — no smokers in household"],
-    ["Pets", "None"],
-    ["Home Environment", "Townhouse; no mold, good ventilation"],
-    ["Diet", "Eats table foods, avoids eggs per allergy; drinks whole milk; eats rice, beans, chicken, plantains, tropical fruits"],
-    ["Development", "Speaking in 2-word phrases, running, climbing stairs with rail, names body parts — age-appropriate"],
-    ["Safety", "Rear-facing car seat (still within weight limit); cabinet locks; pool fence"]
+    [
+      "Guardian",
+      "Lives with both parents and older brother"
+    ],
+    [
+      "Childcare/School",
+      "Attends large daycare center (25+ children)"
+    ],
+    [
+      "Tobacco Exposure",
+      "None — no smokers in household"
+    ],
+    [
+      "Pets",
+      "None"
+    ],
+    [
+      "Home Environment",
+      "Townhouse; no mold, good ventilation"
+    ],
+    [
+      "Diet",
+      "Eats table foods, avoids eggs per allergy; drinks whole milk; eats rice, beans, chicken, plantains, tropical fruits"
+    ],
+    [
+      "Development",
+      "Speaking in 2-word phrases, running, climbing stairs with rail, names body parts — age-appropriate"
+    ],
+    [
+      "Safety",
+      "Rear-facing car seat (still within weight limit); cabinet locks; pool fence"
+    ]
   ],
   "meta": {
     "caseId": "retropharyngeal-abscess",
@@ -270,75 +426,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Aaliyah Baptiste is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Parent is extremely anxious and distressed, speaking rapidly about their child's worsening condition. They appear forthcoming but focused primarily on the ear pain and fever, may not immediately mention subtle breathing changes or swallowing difficulties unless directly asked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pediatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about when Aaliyah's symptoms first started?",
+      "Has she been having any difficulty swallowing or refusing to eat solids?",
+      "Have you noticed any changes in her voice or crying sound?",
+      "Is she having any trouble breathing or breathing faster than usual?",
+      "Has she been drooling more than normal or keeping her head in any particular position?",
+      "Can you describe the ear pain - which ear and how severe does it seem?",
+      "What has her fever pattern been like over the past few days?",
+      "Has she had any recent illness or cold symptoms before this started?",
+      "Has she been taking any medications for these symptoms?",
+      "Does she have any known allergies to medications?",
+      "Has she had ear infections before, and how were they treated?",
+      "Are there any other children at her daycare who have been sick recently?",
+      "Is she still having wet diapers and drinking fluids normally?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My little girl has had a runny nose for about four days, but yesterday she start.'",
-        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Retropharyngeal Abscess.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Triamcinolone 0.025% cream \u2014 apply BID PRN; Children's Acetaminophen 160mg/5mL \u2014 5mL Q4-6h PRN; Amoxicillin 250mg/5mL \u2014 5mL TID x 10 days.'",
-        "allergies": "'My allergies are Cefdinir, Egg.'",
-        "family": "Mother (age 30): Asthma, eczema \u2014 both well-controlled  Father (age 33): Hypertension, sickle cell trait  Maternal grandmother (age 58): Type 2 Diabetes, obesity",
-        "social": "Guardian: Lives with both parents and older brother  Childcare/School: Attends large daycare center (25+ children)  Tobacco Exposure: None \u2014 no smokers in household  Pets: None  Home Environment: Townhouse; no mold, good ventilation"
+      "default": "I'm sorry, I'm just so worried about her fever and crying - can you explain what you mean?",
+      "onset": "She started with just a runny nose about four days ago, but yesterday the ear pain got really bad and she's been much more fussy. The fever started yesterday too.",
+      "character": "She keeps pulling at her right ear and crying, especially when she tries to lie down. Her cry sounds a little different, maybe more hoarse?",
+      "location": "It's definitely her right ear that's bothering her. She won't let me touch that side of her head at all.",
+      "severity": "The pain seems really severe - she's crying more than I've ever seen, maybe 8 or 9 out of 10. She's not sleeping well at all.",
+      "aggravating": "Lying flat makes her much worse. She seems more comfortable sitting up or in my arms. Touching her neck or ear area makes her scream.",
+      "relieving": "The Tylenol helps a little bit with the fever but doesn't seem to touch the pain much. Sitting upright helps some.",
+      "associated": "She's been drooling more than usual and doesn't want to eat her regular food, just wants her bottle. I think she might be breathing a little faster too.",
+      "denies": "No vomiting, no diarrhea, no rash except her usual eczema. She's still having wet diapers.",
+      "history": "She's had ear infections before - maybe three times in the past year. We just finished antibiotics for the last one about a month ago.",
+      "medications": "Triamcinolone 0.025% cream — apply BID PRN; Children's Acetaminophen 160mg/5mL — 5mL Q4-6h PRN; Amoxicillin 250mg/5mL — 5mL TID x 10 days",
+      "allergies": "Cefdinir, Egg",
+      "family": "I have asthma and eczema, her dad has high blood pressure and sickle cell trait. My mom has diabetes.",
+      "social": "She goes to a big daycare with lots of kids - there's always something going around there. No smoking in our house, no pets."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and positioning preference",
+      "Vital signs assessment including respiratory rate",
+      "Otoscopic examination bilateral",
+      "Oropharyngeal examination",
+      "Neck examination for lymphadenopathy and range of motion",
+      "Palpation of neck for masses or tenderness",
+      "Auscultation of lungs and assessment for stridor",
+      "Assessment for drooling and voice changes",
+      "Evaluation of hydration status",
+      "Skin examination for rash or petechiae"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Retropharyngeal Abscess. Document specifically what you observe."
+      "General appearance and positioning preference": "Toxic-appearing toddler, preferring to sit upright with neck slightly extended, appears anxious and irritable",
+      "Vital signs assessment including respiratory rate": "Tachycardic, febrile to 104.2°F, mild tachypnea with respiratory rate 32, oxygen saturation 96% on room air",
+      "Otoscopic examination bilateral": "Right tympanic membrane erythematous and bulging with decreased mobility; left TM normal",
+      "Oropharyngeal examination": "Posterior pharyngeal wall appears asymmetrically swollen, uvula deviated to left, limited mouth opening due to patient discomfort",
+      "Neck examination for lymphadenopathy and range of motion": "Markedly limited neck flexion and rotation, patient cries with attempted movement, enlarged tender right cervical lymph nodes",
+      "Palpation of neck for masses or tenderness": "Significant tenderness over right neck and throat area, patient protective of neck region",
+      "Auscultation of lungs and assessment for stridor": "Clear lung sounds bilaterally, no audible stridor at rest but mild inspiratory noise with agitation",
+      "Assessment for drooling and voice changes": "Increased drooling noted, muffled cry quality, appears to have difficulty swallowing",
+      "Evaluation of hydration status": "Mucous membranes slightly dry, skin turgor adequate, still producing tears",
+      "Skin examination for rash or petechiae": "Mild eczematous changes on extremities consistent with atopic dermatitis, no petechiae or other concerning rashes"
     },
     "ddxTargets": [
-        "Retropharyngeal Abscess (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Retropharyngeal Abscess (C2-C4) with Airway Compromise — Complication of Acute Otitis Media/URI (correct diagnosis)",
+      "Peritonsillar Abscess",
+      "Severe Acute Otitis Media with Mastoiditis",
+      "Epiglottitis",
+      "Bacterial Tracheitis",
+      "Cervical Lymphadenitis",
+      "Viral Upper Respiratory Infection with Secondary Bacterial Otitis Media"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Retropharyngeal Abscess, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Retropharyngeal Abscess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Retropharyngeal Abscess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'just another ear infection' given the clear otitis media and recent antibiotic course, potentially missing the deeper neck space infection",
+      "prematureClosure": "May stop investigation after confirming otitis media without fully evaluating the neck positioning, limited range of motion, and pharyngeal asymmetry",
+      "availabilityBias": "Simple otitis media is much more common in this age group, potentially leading to underestimation of the severity and missing the retropharyngeal component"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Aaliyah Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Retropharyngeal Abscess (C2-C4) with Airway Compromise \u2014 Complication of Acute Otitis Media/URI. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're considering several causes of fever and ear pain in a toddler. Before you talk with the family, think about what red flags might suggest this is more than a simple ear infection. What specific history questions could help you identify a deeper neck space infection?",
+      "phase5": "Excellent history and physical exam. You've identified some concerning findings - the neck positioning, limited range of motion, and pharyngeal asymmetry. How do these findings change your assessment of what initially appeared to be otitis media? What's the most concerning diagnosis you need to rule out, and why is airway management a priority?",
+      "finalDebrief": "This case illustrates how retropharyngeal abscesses can develop as complications of common pediatric infections like otitis media. The key learning points are recognizing the subtle signs of airway compromise, understanding that neck positioning and limited ROM are red flags, and knowing that what appears to be a simple ear infection can progress to a life-threatening deep space infection requiring urgent intervention."
     }
-}
+  }
 };

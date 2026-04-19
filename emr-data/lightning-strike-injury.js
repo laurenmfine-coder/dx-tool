@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Whitfield",
-  "patientHPI": "I'm here for my yearly physical and work clearance - I spend all day outside maintaining the golf course, so I need to make sure everything's good for my job. I feel great, stay active coaching kids' sports on weekends, and my breathing has been fine with my usual inhaler.",
+    "patientHPI": "I'm here for my yearly physical and work clearance - I spend all day outside maintaining the golf course, so I need to make sure everything's good for my job. I feel great, stay active coaching kids' sports on weekends, and my breathing has been fine with my usual inhaler.",
     "dob": "09/14/1992",
     "age": 32,
     "sex": "Male",
@@ -129,34 +129,142 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "84", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "84",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "228", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "228",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "172", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "96", "unit": "mg/dL", "range": "<130", "flag": "" },
-            { "test": "HDL Cholesterol", "value": "58", "unit": "mg/dL", "range": ">40", "flag": "" },
-            { "test": "Triglycerides", "value": "90", "unit": "mg/dL", "range": "<150", "flag": "" }
+            {
+              "test": "Total Cholesterol",
+              "value": "172",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "<130",
+              "flag": ""
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "58",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "90",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -217,15 +325,42 @@ window.EMR_DATA = {
     "Paternal grandfather: MI at age 62, deceased at 68"
   ],
   "socialHistory": [
-    ["Occupation", "Golf course groundskeeper — outdoor work 8-10 hrs/day in South Florida"],
-    ["Marital", "Married — 5 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 2-3 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Active at work; coaches youth flag football weekends; gym 2x/week"],
-    ["Housing", "Lives with wife and infant daughter in townhouse"],
-    ["Safety", "Wears seatbelt; uses hearing protection with mowers; trained in lightning safety protocols"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Golf course groundskeeper — outdoor work 8-10 hrs/day in South Florida"
+    ],
+    [
+      "Marital",
+      "Married — 5 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Active at work; coaches youth flag football weekends; gym 2x/week"
+    ],
+    [
+      "Housing",
+      "Lives with wife and infant daughter in townhouse"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; uses hearing protection with mowers; trained in lightning safety protocols"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "lightning-strike-injury",
@@ -236,75 +371,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Whitfield appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Marcus appears confused and disoriented, with periods of memory gaps about recent events. He seems cooperative but struggles to provide coherent details about what happened, showing mild anxiety about his condition. Despite his confusion, he tries to be helpful but often gives inconsistent responses about the timeline of events.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did environmental emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened today?",
+      "Where were you when this incident occurred?",
+      "Do you remember being struck by lightning?",
+      "Did you lose consciousness at any point?",
+      "Are you experiencing any pain right now?",
+      "Do you have any burns or marks on your body?",
+      "Are you having any trouble with your vision or hearing?",
+      "Do you feel any numbness or tingling anywhere?",
+      "Are you having any chest pain or difficulty breathing?",
+      "Do you remember what the weather was like?",
+      "Has anyone told you what happened to you?",
+      "Are you having any headache or dizziness?",
+      "Do you feel weak in your arms or legs?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my yearly physical and work clearance - I spend all day outside mai.'",
-        "character": "'It's environmental emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Lightning Strike Injury.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Albuterol 90mcg MDI PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Hypertension, T2DM, alive at 60  Mother: Asthma, alive at 58  Sister: Healthy, age 28",
-        "social": "Occupation: Golf course groundskeeper \u2014 outdoor work 8-10 hrs/day in South Florida  Marital: Married \u2014 5 years  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 beers on weekends  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble remembering things clearly right now. Can you ask me that a different way?",
+      "onset": "I think it happened this morning while I was working on the course... there was a bad thunderstorm that came through suddenly. I don't really remember the exact moment it happened.",
+      "character": "It felt like I got hit by a truck or something massive. There was this incredible force that went through my whole body.",
+      "location": "The pain is mostly in my chest and back, and I have these weird marks on my arm and leg where it might have entered and exited.",
+      "severity": "Right after it happened, the pain was probably a 9 out of 10. Now it's more like a 6, but I feel really confused and my memory is fuzzy.",
+      "aggravating": "Moving around seems to make the chest pain worse, and bright lights are bothering my eyes more than usual.",
+      "relieving": "Sitting still helps with the pain a little bit. The paramedics gave me something that helped too.",
+      "associated": "I've had a headache since it happened, and my hearing seems muffled. I also feel really tired and confused about what time it is.",
+      "denies": "I don't think I have any trouble breathing with my asthma right now, and I don't feel nauseous or like I'm going to throw up.",
+      "history": "No, nothing like this has ever happened to me before. I've worked outside for years but always tried to get inside when storms come through.",
+      "medications": "Albuterol 90mcg MDI PRN",
+      "allergies": "NKDA",
+      "family": "My mom has asthma like me, and my dad has high blood pressure and diabetes, but nothing like this has ever happened to anyone in my family.",
+      "social": "I'm a golf course groundskeeper, so I'm outside 8-10 hours a day in South Florida. I'm married, don't smoke, and just have a few beers on weekends. I coach kids' sports too, so I stay pretty active."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for Lichtenberg figures or burn patterns",
+      "Neurological assessment including Glasgow Coma Scale",
+      "Cardiovascular examination including heart sounds and rhythm",
+      "Pulmonary examination including breath sounds",
+      "Examine tympanic membranes for rupture",
+      "Test visual acuity and pupillary responses",
+      "Assess motor strength and reflexes",
+      "Examine extremities for entry/exit wounds",
+      "Palpate for compartment syndrome",
+      "Mental status and cognitive assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Lightning Strike Injury. Document specifically what you observe."
+      "Inspect skin for Lichtenberg figures or burn patterns": "Fern-like, reddish branching patterns (Lichtenberg figures) visible on left arm and right leg, consistent with lightning strike pathway",
+      "Neurological assessment including Glasgow Coma Scale": "GCS 14 (E4, V4, M6) - mild confusion and disorientation to time, but appropriate responses to commands",
+      "Cardiovascular examination including heart sounds and rhythm": "Regular rate and rhythm, no murmurs, peripheral pulses intact bilaterally",
+      "Pulmonary examination including breath sounds": "Clear breath sounds bilaterally, no wheeze or respiratory distress",
+      "Examine tympanic membranes for rupture": "Right tympanic membrane shows small perforation, left TM intact",
+      "Test visual acuity and pupillary responses": "Pupils equal, round, reactive to light; mild photophobia present, visual acuity slightly decreased",
+      "Assess motor strength and reflexes": "Motor strength 5/5 throughout, reflexes somewhat hyperactive, no focal neurologic deficits",
+      "Examine extremities for entry/exit wounds": "Small burn mark on left hand consistent with entry point, larger burn area on right foot sole consistent with exit point",
+      "Palpate for compartment syndrome": "No swelling or firmness in extremities, compartments soft and compressible",
+      "Mental status and cognitive assessment": "Alert but confused about timeline, short-term memory impairment, difficulty with concentration tasks"
     },
     "ddxTargets": [
-        "Lightning Strike Injury (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Lightning Strike Injury (correct diagnosis)",
+      "Electrical burn injury from power line",
+      "Heat stroke with neurologic symptoms",
+      "Cardiac arrhythmia with syncope",
+      "Traumatic brain injury from fall",
+      "Seizure disorder with postictal confusion",
+      "Acute myocardial infarction"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lightning Strike Injury, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Lightning Strike Injury, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Lightning Strike Injury based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "The patient's occupation and outdoor work history might anchor thinking toward heat-related illness or typical work injuries rather than considering lightning strike",
+      "prematureClosure": "Normal vital signs and relatively stable appearance might lead to premature closure, missing the need for cardiac monitoring and neurologic assessment",
+      "availabilityBias": "Lightning strikes are rare, so more common causes of confusion and burns (like workplace accidents or heat illness) might seem more likely"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Whitfield's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Lightning Strike Injury. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given that this patient works outdoors in South Florida, what specific environmental hazards should you be thinking about? What key historical details would help you distinguish between your top differentials?",
+      "phase5": "Excellent work gathering the history and physical exam findings. The Lichtenberg figures are pathognomonic - what do they tell you about the diagnosis? How do the neurologic findings and tympanic membrane perforation fit with your leading diagnosis? What immediate complications should you be monitoring for?",
+      "finalDebrief": "This case highlights how rare diagnoses like lightning strike can present with classic findings if you know what to look for. The Lichtenberg figures, neurologic confusion, and tympanic membrane rupture created a clear pattern. How did your thinking evolve from considering more common causes of outdoor work injuries to recognizing this environmental emergency? What management priorities would be most critical in the ED?"
     }
-}
+  }
 };

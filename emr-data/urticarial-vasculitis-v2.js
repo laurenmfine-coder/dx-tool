@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Margaret Thornton",
-  "patientHPI": "For the past four months, I keep getting these raised, itchy bumps all over my skin that burn and sting. They come and go, but lately I've also been running fevers and my joints ache all over, especially my hands and knees.",
+      "patientHPI": "For the past four months, I keep getting these raised, itchy bumps all over my skin that burn and sting. They come and go, but lately I've also been running fevers and my joints ache all over, especially my hands and knees.",
       "dob": "11/19/1974",
       "age": "52",
       "sex": "Female",
@@ -1088,94 +1088,101 @@ window.EMR_DATA = {
       "Comorbidity",
       "Arthralgia, fatigue — systemic features"
     ]
-  ]
-,"references":[
-  {
-    "id": "EAACI-Urticaria-2022",
-    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
-    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15090",
-    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
-    "openAccess": true,
-    "validates": [
-      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
-      "UAS7 scoring",
-      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
-      "Post-viral urticaria in children: no allergy testing needed"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "EAACI-Urticaria-2022",
+      "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+      "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15090",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+      "openAccess": true,
+      "validates": [
+        "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+        "UAS7 scoring",
+        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Post-viral urticaria in children: no allergy testing needed"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Margaret Thornton is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Margaret appears frustrated and concerned, having dealt with painful lesions for months without relief. She is articulate and forthcoming about symptoms but visibly tired from the chronic discomfort and systemic symptoms. She emphasizes that these aren't typical 'hives' and expresses relief that someone is finally taking her seriously.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "How long do individual lesions last before they completely disappear?",
+      "Do the lesions leave any marks or discoloration when they heal?",
+      "Are the lesions more painful or itchy?",
+      "Have you noticed any joint pain or stiffness?",
+      "Do you experience unusual fatigue or feeling unwell overall?",
+      "What treatments have you tried and how effective were they?",
+      "Have you had any fever, weight loss, or night sweats?",
+      "Do you have any muscle aches or weakness?",
+      "Have you noticed any changes in your urine color?",
+      "Any family history of autoimmune conditions like lupus?",
+      "Have you had any recent infections or started new medications?",
+      "Do you have any kidney problems or high blood pressure?",
+      "Have you noticed any eye irritation or dry mouth?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Prednisone; Colchicine.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Key distinction: Wheals last >24 hours and leave bruising \u2014 NOT regular urticaria  Workup: Low complement (hypocomplementemic UV) \u2014 screen for SLE  Biopsy: Skin biopsy shows leukocytoclastic vasculitis \u2014 confirms UV, not CSU  Comorbidity: Arthralgia, fatigue \u2014 systemic features"
+      "default": "I'm not sure I understand what you're asking. Can you rephrase that?",
+      "onset": "This started about 4 months ago. At first I thought they were just hives from something I ate, but they kept coming back and lasting much longer than any hives I'd had before.",
+      "character": "These are definitely not like regular hives. They're painful, not itchy, and they feel deeper under the skin. They're raised and red, but they hurt rather than itch.",
+      "location": "They appear mostly on my arms and legs, sometimes on my trunk. They seem to come and go in different areas, but each spot lasts for days.",
+      "severity": "The pain is about a 6 out of 10 when they're active. What's really frustrating is the fatigue - I'm exhausted all the time, maybe 7 out of 10 for how much it affects my daily activities.",
+      "aggravating": "I haven't noticed anything specific that triggers them. They seem to come and go on their own schedule. Standing for long periods makes my joints ache more.",
+      "relieving": "Nothing really helps. I've tried Benadryl, Claritin, even got prescribed some stronger antihistamines and that shot, omalizumab, but none of it worked. The prednisone helps a little.",
+      "associated": "Yes, I've been having joint pain, especially in my hands and knees. I'm also exhausted all the time, which isn't normal for me. Sometimes I feel like I have a low-grade fever.",
+      "denies": "No trouble breathing, no swelling of my face or throat. No abdominal pain or diarrhea. No rash on my face or sun sensitivity that I've noticed.",
+      "history": "Never had anything like this before. I've had regular hives once or twice in my life from shellfish, but those went away in hours and were itchy, not painful.",
+      "medications": "Prednisone; Colchicine",
+      "allergies": "NKDA",
+      "family": "No family history of lupus or other autoimmune diseases that I know of. My mother had arthritis but just the regular kind from aging.",
+      "social": "I work as an accountant, mostly desk work. I don't smoke, drink maybe a glass of wine on weekends. No recreational drugs. This has really affected my work - I'm too tired to concentrate some days."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect skin lesions for morphology and distribution",
+      "Palpate active lesions for tenderness and consistency",
+      "Look for residual hyperpigmentation or purpura at resolved lesion sites",
+      "Examine joints for swelling, warmth, or effusion",
+      "Check lymph nodes for enlargement",
+      "Assess for splenomegaly",
+      "Examine mucous membranes and conjunctiva",
+      "Check for peripheral edema",
+      "Assess muscle strength and tenderness",
+      "Look for signs of nephritis (hypertension, edema)"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect skin lesions for morphology and distribution": "Multiple erythematous, edematous plaques on bilateral arms and legs, some with central pallor, measuring 2-4 cm in diameter",
+      "Palpate active lesions for tenderness and consistency": "Lesions are tender to palpation with firm, indurated feel, distinct from typical urticarial wheals",
+      "Look for residual hyperpigmentation or purpura at resolved lesion sites": "Several areas of residual purpura and hyperpigmentation where previous lesions have resolved, particularly on forearms",
+      "Examine joints for swelling, warmth, or effusion": "Mild swelling and tenderness of bilateral wrists and MCPs, no obvious effusions",
+      "Check lymph nodes for enlargement": "No significant lymphadenopathy palpated",
+      "Assess for splenomegaly": "No splenomegaly appreciated on examination",
+      "Examine mucous membranes and conjunctiva": "Mucous membranes appear normal, no oral ulcers, mild conjunctival pallor",
+      "Check for peripheral edema": "Trace bilateral lower extremity edema",
+      "Assess muscle strength and tenderness": "Normal muscle strength, mild diffuse muscle tenderness",
+      "Look for signs of nephritis (hypertension, edema)": "Blood pressure 132/82, trace edema noted, no obvious signs of significant nephritis"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Urticarial vasculitis (correct diagnosis)",
+      "Chronic spontaneous urticaria",
+      "Systemic lupus erythematosus",
+      "Serum sickness-like syndrome",
+      "Hypersensitivity vasculitis",
+      "Erythema migrans",
+      "Sweet syndrome"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'hives' and missing the key distinguishing features of urticarial vasculitis - duration >24 hours, pain vs itch, and residual purpura",
+      "prematureClosure": "May stop at chronic urticaria without exploring the systemic symptoms, joint pain, and atypical features that suggest vasculitis",
+      "availabilityBias": "Common urticaria is much more frequently seen than urticarial vasculitis, leading to potential misdiagnosis of this rare condition"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Margaret Thornton: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient describes 'hives' that aren't responding to standard treatments. What specific historical features would help you distinguish between common chronic urticaria and other urticarial disorders? Think about the timeline and characteristics that might suggest a different pathophysiology.",
+      "phase5": "You've identified some key features that distinguish this from typical chronic urticaria. The painful lesions lasting >24 hours with residual purpura, plus systemic symptoms, should raise your suspicion. What's the pathophysiology difference between regular urticaria and what this patient likely has?",
+      "finalDebrief": "Urticarial vasculitis is often misdiagnosed as chronic urticaria. The key distinguishing features are: lesions lasting >24 hours, pain rather than itch, residual purpura/hyperpigmentation, and systemic symptoms. Hypocomplementemic UV requires screening for SLE. This case highlights how atypical presentations of common-appearing symptoms require careful attention to subtle but important differences."
     }
-}
+  }
 };

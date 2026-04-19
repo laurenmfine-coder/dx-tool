@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Samantha Torres",
-  "patientHPI": "Three days ago I had one of my usual visual episodes with the zigzag lights, but this time it went on for almost an hour instead of the usual 15-30 minutes, and then my left hand got all tingly for about 10 minutes before my headache started.",
+    "patientHPI": "Three days ago I had one of my usual visual episodes with the zigzag lights, but this time it went on for almost an hour instead of the usual 15-30 minutes, and then my left hand got all tingly for about 10 minutes before my headache started.",
     "dob": "01/25/1991",
     "age": 33,
     "sex": "Female",
@@ -181,19 +181,67 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.6", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.0", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "232", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.0",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "232",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "86", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "21", "unit": "mEq/L", "range": "23-29", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "86",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "21",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -254,15 +302,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Stroke at age 72 (deceased)"
   ],
   "socialHistory": [
-    ["Occupation", "Digital marketing manager"],
-    ["Marital", "Single, lives alone"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "1-2 drinks/week; avoids red wine (migraine trigger)"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Yoga 3x/week; jogging 2x/week"],
-    ["Housing", "Studio apartment"],
-    ["Safety", "Denies IPV; seatbelt"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Digital marketing manager"
+    ],
+    [
+      "Marital",
+      "Single, lives alone"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "1-2 drinks/week; avoids red wine (migraine trigger)"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Yoga 3x/week; jogging 2x/week"
+    ],
+    [
+      "Housing",
+      "Studio apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "migraine-with-aura",
@@ -273,75 +348,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Samantha Torres appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Samantha appears anxious but cooperative, speaking clearly about her symptoms with obvious concern about the prolonged nature of this episode compared to her usual migraines. She maintains good eye contact and provides detailed responses, though she fidgets with her hands when describing the new sensory symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what you saw during the visual episode three days ago?",
+      "How long did the visual symptoms last compared to your usual episodes?",
+      "Tell me about the tingling in your left hand - when did it start and what did it feel like?",
+      "Did you have any weakness or numbness anywhere else in your body?",
+      "What was different about the headache that followed compared to your typical migraines?",
+      "Have you had any recent changes in your migraine pattern or triggers?",
+      "Did you take your sumatriptan during this episode? If so, when and did it help?",
+      "Have you had any speech difficulties, confusion, or trouble finding words?",
+      "Any recent travel, particularly air travel, or changes in activity level?",
+      "Have you had any recent stress, sleep changes, or hormonal changes?",
+      "Any recent illnesses, infections, or new medications?",
+      "Have you ever had neurological symptoms lasting this long with your migraines before?",
+      "Any family history of stroke, blood clots, or heart problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Three days ago I had one of my usual visual episodes with the zigzag lights, but.'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Migraine with Prolonged Visual Aura and Sensory Extension.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Topiramate 50mg BID; Sumatriptan 50mg PRN; Buspirone 10mg BID; Magnesium Oxide 400mg daily.'",
-        "allergies": "'My allergies are Propranolol, Combined Oral Contraceptives.'",
-        "family": "Mother: Migraine with aura, Raynaud phenomenon, alive at 60  Father: HTN, CAD, alive at 64  Sister: Migraine without aura, age 30",
-        "social": "Occupation: Digital marketing manager  Marital: Single, lives alone  Tobacco: Never smoker  Alcohol: 1-2 drinks/week; avoids red wine (migraine trigger)  Drugs: Denies"
+      "default": "I'm not sure what you mean by that. Can you ask it a different way?",
+      "onset": "It started three days ago around 2 PM while I was at work. The visual symptoms came on gradually like my usual migraines, but then everything just kept going much longer than normal.",
+      "character": "The visual part was the same zigzag, shimmering lights I always get - like looking through broken glass. But then my left hand started tingling like it was falling asleep, which has never happened before.",
+      "location": "The visual symptoms were in both eyes, more on the right side of my vision. The tingling started in my left fingertips and spread up to my wrist.",
+      "severity": "The headache was about a 7 out of 10, similar to my usual migraines. But I'm more worried about how long everything lasted - the visual stuff went on for almost an hour instead of my usual 15-30 minutes.",
+      "aggravating": "Bright lights and computer screens made the headache worse. Moving around seemed to make the tingling more noticeable.",
+      "relieving": "I took my sumatriptan when the headache started and it helped with the pain, but by then the visual and tingling symptoms were already resolving. Dark room and rest helped.",
+      "associated": "After the tingling stopped, I had my usual throbbing headache with nausea and sensitivity to light and sound. No vomiting this time though.",
+      "denies": "No weakness, no trouble speaking or understanding, no confusion, no double vision, no dizziness or balance problems, no fever.",
+      "history": "I've had migraines with visual aura since college, usually 2-3 times a month. They always follow the same pattern - visual symptoms for 15-30 minutes, then headache. I've never had the hand tingling or such prolonged visual symptoms before.",
+      "medications": "Topiramate 50mg BID; Sumatriptan 50mg PRN; Buspirone 10mg BID; Magnesium Oxide 400mg daily",
+      "allergies": "Propranolol, Combined Oral Contraceptives",
+      "family": "My mother has migraines with aura like me, and she also has Raynaud's. My dad has high blood pressure and heart disease. My younger sister gets migraines too but without the visual symptoms.",
+      "social": "I work in digital marketing, so I'm on computers all day. I live alone, never smoked, and have maybe 1-2 drinks per week - I avoid red wine because it triggers my migraines. No drugs."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Visual field testing by confrontation",
+      "Extraocular movements and pupillary response",
+      "Fundoscopic examination",
+      "Motor strength testing bilateral upper and lower extremities",
+      "Sensory testing including light touch and pinprick bilateral",
+      "Deep tendon reflexes bilateral",
+      "Coordination testing (finger-to-nose, rapid alternating movements)",
+      "Gait assessment",
+      "Cardiovascular examination including heart murmur assessment",
+      "Neck examination for carotid bruits"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Migraine with Prolonged Visual Aura and Sensory Extension. Document specifically what you observe."
+      "Visual field testing by confrontation": "Visual fields full to confrontation bilaterally, no persistent defects",
+      "Extraocular movements and pupillary response": "Extraocular movements intact, pupils equal, round, reactive to light and accommodation",
+      "Fundoscopic examination": "Optic discs sharp, no papilledema, normal vasculature, no retinal abnormalities",
+      "Motor strength testing bilateral upper and lower extremities": "Motor strength 5/5 throughout all extremities, no focal weakness",
+      "Sensory testing including light touch and pinprick bilateral": "Sensation intact to light touch and pinprick bilaterally, no residual sensory deficits",
+      "Deep tendon reflexes bilateral": "Deep tendon reflexes 2+ and symmetric throughout",
+      "Coordination testing (finger-to-nose, rapid alternating movements)": "Coordination intact, no dysmetria or dysdiadochokinesia",
+      "Gait assessment": "Gait normal, able to walk heel-to-toe without difficulty",
+      "Cardiovascular examination including heart murmur assessment": "Regular rate and rhythm, no murmurs appreciated on routine auscultation",
+      "Neck examination for carotid bruits": "No carotid bruits, neck supple, no lymphadenopathy"
     },
     "ddxTargets": [
-        "Migraine with Prolonged Visual Aura and Sensory Extension (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Migraine with Prolonged Visual Aura and Sensory Extension (PFO-Associated) (correct diagnosis)",
+      "Complex migraine with atypical aura",
+      "Migraine with brainstem aura",
+      "Transient ischemic attack",
+      "Cerebral infarction",
+      "Retinal migraine",
+      "Vertebrobasilar insufficiency"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Migraine with Prolonged Visual Aura and Sensory Extension, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Migraine with Prolonged Visual Aura and Sensory Extension, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Migraine with Prolonged Visual Aura and Sensory Extension based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'typical migraine' given patient's known history, potentially dismissing the significance of prolonged aura duration and new sensory symptoms",
+      "prematureClosure": "May quickly attribute symptoms to 'just another migraine episode' without exploring the atypical features that suggest possible PFO-related paradoxical embolism",
+      "availabilityBias": "Recent cases of typical migraine may overshadow recognition that prolonged aura (>60 minutes) with new sensory symptoms warrants stroke workup regardless of age"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Samantha Torres's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Migraine with Prolonged Visual Aura and Sensory Extension (PFO-Associated). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're considering both benign and serious causes. Given this patient's presentation, what specific historical features would help you differentiate between a complex migraine and a more concerning vascular event? What's the significance of prolonged aura duration in migraine evaluation?",
+      "phase5": "You've gathered comprehensive history and physical findings. The normal neurological exam is reassuring, but let's think critically about the timeline and character of her symptoms. How does the duration of her visual aura and the addition of sensory symptoms change your risk stratification? What does her past medical history of PFO add to your clinical reasoning?",
+      "finalDebrief": "This case illustrates how established diagnoses like migraine can present with concerning variations. The key teaching points are: prolonged aura (>60 minutes) warrants stroke evaluation regardless of age, PFO increases risk of paradoxical embolism presenting as stroke-like symptoms, and new neurological symptoms in migraine patients should prompt reassessment rather than assumption of 'typical' episodes. How has this case changed your approach to evaluating migraine patients with atypical features?"
     }
-}
+  }
 };

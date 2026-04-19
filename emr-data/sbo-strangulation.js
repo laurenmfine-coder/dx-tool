@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Kowalski",
-  "patientHPI": "I've been having terrible cramping belly pain that comes in waves, and I haven't been able to have a bowel movement for two days now. My stomach feels bloated and tight, and I keep throwing up everything I try to eat or drink.",
+    "patientHPI": "I've been having terrible cramping belly pain that comes in waves, and I haven't been able to have a bowel movement for two days now. My stomach feels bloated and tight, and I keep throwing up everything I try to eat or drink.",
     "dob": "07/13/1948",
     "age": "78",
     "sex": "Male",
@@ -266,158 +266,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Richard Kowalski is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Richard appears uncomfortable and restless, frequently shifting position and grimacing during waves of pain. He is cooperative but clearly distressed, speaking in short sentences between episodes of cramping. His anxiety is evident as he worries about his worsening symptoms and inability to keep anything down.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your abdominal pain first start?",
+      "Can you describe the quality of the pain?",
+      "Where exactly is the pain located?",
+      "How severe is the pain on a scale of 1-10?",
+      "Does anything make the pain better or worse?",
+      "When was your last bowel movement?",
+      "Have you been passing gas?",
+      "Tell me about the vomiting - what does it look like?",
+      "Have you had episodes like this before?",
+      "Any fever or chills?",
+      "What medications are you currently taking?",
+      "Do you have any allergies?",
+      "Tell me about your previous surgeries"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Lisinopril; Aspirin.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Surgical history: Appendectomy age 25, cholecystectomy age 52"
+      "default": "I'm not sure I understand... could you ask that differently? This pain is making it hard to focus.",
+      "onset": "The pain started gradually yesterday morning but got much worse overnight. I woke up around 3 AM with terrible cramping.",
+      "character": "It's a sharp, cramping pain that comes in waves. It builds up, gets really intense, then eases off for a minute before starting again.",
+      "location": "It's mostly around my belly button and lower abdomen, but sometimes it feels like my whole stomach is involved.",
+      "severity": "During the worst cramps it's easily a 9 out of 10. I can barely stand up straight. Between episodes it drops to maybe a 4 or 5.",
+      "aggravating": "Trying to eat or drink anything makes me vomit immediately. Moving around seems to make the cramping worse.",
+      "relieving": "Nothing really helps. I tried some antacids but threw them up. Sometimes curling up in a ball gives me a tiny bit of relief.",
+      "associated": "I've been vomiting constantly since yesterday afternoon. My belly is really swollen and tight. I feel feverish and weak from not keeping anything down.",
+      "denies": "No diarrhea - I haven't had any bowel movement at all. No blood in the vomit. No chest pain or shortness of breath.",
+      "history": "I've had some minor episodes of cramping before, usually related to my hernia, but nothing this severe or lasting this long.",
+      "medications": "Lisinopril; Aspirin",
+      "allergies": "NKDA",
+      "family": "Nothing runs in my family that would cause this. My parents lived into their 80s without major health problems.",
+      "social": "I'm retired from construction work. I don't smoke and only have an occasional beer. I live with my wife who's been worried sick about me."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and vital signs assessment",
+      "Abdominal inspection",
+      "Auscultation of bowel sounds",
+      "Abdominal palpation",
+      "Assessment for rebound tenderness",
+      "Examination of hernia sites",
+      "Digital rectal examination",
+      "Assessment for dehydration signs",
+      "Percussion of abdomen",
+      "Assessment for masses or organomegaly"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs assessment": "Patient appears ill and dehydrated, restless with tachycardia and low-grade fever. Mild hypotension consistent with volume depletion.",
+      "Abdominal inspection": "Visible abdominal distension with a known incisional hernia at the right lower quadrant. No obvious strangulation of the hernia.",
+      "Auscultation of bowel sounds": "High-pitched, hyperactive bowel sounds with metallic tinkling quality characteristic of mechanical obstruction.",
+      "Abdominal palpation": "Diffuse tenderness without rigidity. Palpable loops of distended bowel. The incisional hernia is reducible and non-tender.",
+      "Assessment for rebound tenderness": "No significant rebound tenderness or guarding, suggesting absence of peritonitis.",
+      "Examination of hernia sites": "Incisional hernia present but easily reducible, soft, and non-tender. No evidence of incarceration at hernia site.",
+      "Digital rectal examination": "Empty rectal vault, no masses palpated, no blood on examining finger.",
+      "Assessment for dehydration signs": "Dry mucous membranes, poor skin turgor, and sunken eyes consistent with moderate dehydration.",
+      "Percussion of abdomen": "Tympanitic throughout, consistent with gaseous distension of bowel loops.",
+      "Assessment for masses or organomegaly": "No palpable masses or organomegaly detected through the distended abdomen."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Adhesive small bowel obstruction (correct diagnosis)",
+      "Incarcerated incisional hernia",
+      "Large bowel obstruction",
+      "Mesenteric ischemia",
+      "Bowel perforation with peritonitis",
+      "Severe gastroenteritis",
+      "Inflammatory bowel disease flare"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on the visible incisional hernia and assuming it's the cause of obstruction, when adhesions from prior surgeries are more likely culprit.",
+      "prematureClosure": "May stop thinking after identifying hernia without considering that reducible hernias rarely cause obstruction, missing adhesive etiology.",
+      "availabilityBias": "Recent cases of incarcerated hernias may overshadow the more common cause of adhesive obstruction in patients with multiple prior surgeries."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Richard Kowalski: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Good start on your differential diagnosis. I notice you're considering mechanical causes of bowel obstruction. Given this patient's surgical history of appendectomy and cholecystectomy, what's the most common cause of small bowel obstruction in patients with prior abdominal surgery? Also, when you examine him, pay special attention to the characteristics of his hernia - what findings would suggest it's causing his obstruction versus being an incidental finding?",
+      "phase5": "Excellent history and physical exam. Your findings of high-pitched bowel sounds, abdominal distension, and the clinical picture strongly suggest mechanical small bowel obstruction. I noticed the incisional hernia was easily reducible and non-tender - what does this tell you about its role in his current presentation? Given his extensive surgical history, what's the most likely anatomical cause of his obstruction?",
+      "finalDebrief": "This case highlights the importance of not being misled by obvious findings like hernias when they don't fit the clinical picture. The key was recognizing that a reducible, non-tender hernia is unlikely to cause obstruction, while adhesions from prior surgeries (appendectomy and cholecystectomy) are the most common cause of small bowel obstruction in patients with surgical history. The high-pitched bowel sounds and classic cramping pain pattern were your diagnostic clues for mechanical obstruction. How might imaging help confirm the diagnosis and guide management decisions?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['sbo-strangulation'] = {
-  id: 'sbo-strangulation', name: 'Richard Kowalski',
-  chiefComplaint: 'Small Bowel Obstruction with Strangulation — Emergent Surgery',
-  diagnosis: 'Small Bowel Obstruction with Strangulation — Emergent Surgery',
-  orders: {
-    correct: [{ id: 'emergency-or', name: 'Emergent surgery — strangulation means ischemic bowel', rationale: 'Strangulated SBO (closed-loop obstruction + vascular compromise): emergent surgery is the ONLY treatment. Signs of strangulation: fever, peritoneal signs, free air, pneumatosis intestinalis, portal venous gas on CT, lactate elevation, WBC >15k, pain out of proportion to exam. Bowel ischemia is irreversible — every hour of delay = more bowel loss.' },{ id: 'ngt-ivf-sbo', name: 'NGT decompression + IV fluids while preparing OR', rationale: 'Immediate gastric decompression (NGT) reduces aspiration risk and abdominal distension. Aggressive IV fluid resuscitation for third-spacing and sepsis from translocation. Broad-spectrum antibiotics (piperacillin-tazobactam) for peritonitis. These are concurrent with OR preparation, not alternatives to surgery.' }],
-    incorrect: [{ id: 'conservative-management', name: 'NGT + NPO — trial of non-operative management', rationale: 'Non-operative management is ONLY appropriate for SIMPLE (non-strangulated) partial SBO. Strangulation signs (fever, peritonitis, ischemia on CT, lactate elevation) = EMERGENT SURGERY. No trial of conservative management when strangulation is suspected. Death from bowel gangrene/perforation results from delay.' },{ id: 'water-soluble-contrast', name: 'Gastrografin (water-soluble contrast) — diagnostic and therapeutic for SBO', rationale: 'Gastrografin is therapeutic only for SIMPLE (non-strangulated, adhesive, partial) SBO — works by osmotically drawing fluid into the bowel lumen, facilitating resolution. Do NOT give contrast in strangulated SBO — the bowel cannot handle the osmotic load and perforation risk is increased. CT showing strangulation → OR, not more contrast studies.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['SBO causes: adhesions (60-70%), hernias (10-15%), neoplasms (10-15%), intussusception, volvulus, Meckel diverticulum, IBD. History of abdominal surgery = adhesions until proven otherwise.','Strangulation signs (any = emergent surgery): fever, peritoneal signs (rebound, guarding), WBC >15k, lactate elevation, free air (perforated), portal venous gas (advanced ischemia), pneumatosis intestinalis, mesenteric edema on CT, closed-loop configuration.','Non-operative SBO management (simple, partial): NGT decompression + NPO + IV fluids + serial exams. If no improvement at 24-48h or any deterioration → surgery. Gastrografin water-soluble contrast: therapeutic (osmotic effect) AND diagnostic (if contrast reaches colon within 4-6h = high chance of resolution).'],
-    boardPearls: ['Closed-loop SBO: both proximal and distal points of obstruction (e.g., internal hernia, volvulus) = highest strangulation risk. CT shows C-shaped or U-shaped dilated loop, whirl sign (mesenteric twisting), beak sign.','Adhesion prevention: no effective pharmacologic prevention. Hyaluronate/carboxymethylcellulose (Seprafilm) placed during surgery reduces adhesion formation. Laparoscopic approach reduces de novo adhesion formation.','Richter hernia: lateral wall of bowel herniated (not full circumference) — may not cause complete obstruction but strangulation of the herniated wall can occur silently. Often missed until perforation.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Richard Kowalski is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Lisinopril; Aspirin.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Richard Kowalski \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Sullivan",
-  "patientHPI": "I fell down at home this morning and now I can't get up because my right hip and groin area hurt so badly. I was just walking to the kitchen when I lost my balance, and now every time I try to move that leg the pain shoots through me.",
+    "patientHPI": "I fell down at home this morning and now I can't get up because my right hip and groin area hurt so badly. I was just walking to the kitchen when I lost my balance, and now every time I try to move that leg the pain shoots through me.",
     "dob": "06/15/1944",
     "age": "82",
     "sex": "Female",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "4072 Magnolia Blvd, Kansas City, MO 64101",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
+    "pharmacy": "Walmart Pharmacy — Pines Blvd",
     "emergencyContact": {
       "name": "Henry Sanchez",
       "phone": "(630) 555-4920",
@@ -123,7 +123,7 @@ window.EMR_DATA = {
       "bp": "108/62",
       "hr": "92",
       "rr": "18",
-      "temp": "36.2\u00b0C",
+      "temp": "36.2°C",
       "spo2": "94%",
       "pain": "/10",
       "bmi": "25",
@@ -139,7 +139,7 @@ window.EMR_DATA = {
       "cc": "I fell and I can't get up Right hip and groin",
       "hpi": "Margaret Sullivan is a 82-year-old female presenting with i fell and i can't get up right hip and groin. Past medical history includes Atrial fibrillation, Osteoporosis, Mild dementia, Hypertension, Chronic kidney disease stage 3. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Hip Fracture on Anticoagulation \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Hip Fracture on Anticoagulation — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -161,7 +161,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -182,7 +182,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "272",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -323,7 +323,7 @@ window.EMR_DATA = {
       "clinical": "I fell and I can't get up Right hip and groin",
       "technique": "Standard protocol",
       "findings": "DISPLACED LEFT FEMORAL NECK FRACTURE (Garden type III/IV). Femoral head displaced posteriorly with significant angulation. No pathologic bone lesion. Severe osteopenia. Degenerative changes in hip joint.",
-      "impression": "Displaced femoral neck fracture \u2014 orthopedic surgery consultation for surgical repair (likely hemiarthroplasty or total hip arthroplasty given displacement and patient age).",
+      "impression": "Displaced femoral neck fracture — orthopedic surgery consultation for surgical repair (likely hemiarthroplasty or total hip arthroplasty given displacement and patient age).",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -340,7 +340,7 @@ window.EMR_DATA = {
       "clinical": "I fell and I can't get up Right hip and groin",
       "technique": "Standard protocol",
       "findings": "No acute intracranial hemorrhage. Mild chronic small vessel ischemic changes. Generalized volume loss consistent with age and known dementia. No skull fracture.",
-      "impression": "No acute intracranial pathology \u2014 delirium is from pain, dehydration, and immobility, not head injury",
+      "impression": "No acute intracranial pathology — delirium is from pain, dehydration, and immobility, not head injury",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -357,7 +357,7 @@ window.EMR_DATA = {
       "clinical": "I fell and I can't get up Right hip and groin",
       "technique": "Standard 12-lead",
       "findings": "Atrial fibrillation at 92 bpm. No ST changes. Normal intervals",
-      "impression": "Chronic AFib \u2014 need to manage anticoagulation perioperatively",
+      "impression": "Chronic AFib — need to manage anticoagulation perioperatively",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -410,75 +410,78 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Margaret Sullivan appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Margaret appears anxious and in significant discomfort, frequently wincing when attempting to shift position. She is cooperative and forthcoming with information, though occasionally needs questions repeated due to her mild dementia. She expresses frustration about losing her independence and worry about being a burden.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did i fell and i can't get up right hip and groin start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly how you fell this morning?",
+      "What were you doing just before you lost your balance?",
+      "Did you feel dizzy, lightheaded, or have any other symptoms before falling?",
+      "Can you describe the pain in your hip and groin?",
+      "On a scale of 1-10, how would you rate your pain?",
+      "Does the pain get worse when you try to move your leg or bear weight?",
+      "Have you been able to walk at all since the fall?",
+      "Did you hit your head or lose consciousness when you fell?",
+      "Have you had any falls in the past year?",
+      "Have you noticed any changes in your balance or walking recently?",
+      "Are you having any numbness or tingling in your leg?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I fell down at home this morning and now I can't get up because my right hip and.'",
-        "character": "'It's i fell and i can't get up right hip and groin \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Warfarin; Alendronate; Donepezil; Amlodipine; Metoprolol.'",
-        "allergies": "'My allergies are Codeine.'",
-        "family": "Mother: hip fracture at 80  Sister: osteoporosis",
-        "social": "Tobacco: Never  Alcohol: Glass of wine with dinner occasionally  Drugs: Denies  Occupation: Retired school principal  Living: Lives alone with home aide 4 hours daily. Independent with ADLs at baseline. No fall in past year."
+      "default": "I'm sorry, could you repeat that? I'm having trouble concentrating with all this pain.",
+      "onset": "It happened this morning around 8 AM. I was walking from my bedroom to the kitchen for breakfast when I just lost my balance and went down hard on my right side.",
+      "character": "It's a sharp, shooting pain that goes right through my hip and down into my groin. It feels like something is really wrong in there.",
+      "location": "The pain is mainly in my right hip area and groin, but it also hurts in my upper thigh.",
+      "severity": "It's easily a 9 out of 10 when I try to move. Even lying still it's about a 6 or 7. I've never had pain this bad.",
+      "aggravating": "Any movement makes it much worse, especially trying to lift my leg or roll over. Even the slightest movement sends shooting pain through me.",
+      "relieving": "Nothing really helps. I've been trying to stay as still as possible, but it still throbs constantly.",
+      "associated": "I feel a bit nauseous from the pain, and I'm worried I might have hurt something else when I fell.",
+      "denies": "I didn't hit my head or black out. No chest pain, no shortness of breath other than from the pain.",
+      "history": "I haven't fallen in over a year. I've been pretty steady on my feet until this morning.",
+      "medications": "Warfarin; Alendronate; Donepezil; Amlodipine; Metoprolol",
+      "allergies": "Codeine",
+      "family": "My mother broke her hip when she was about my age, and my sister has osteoporosis too. It runs in our family.",
+      "social": "I'm a retired school principal. I live alone but have a home aide who comes for 4 hours daily. I don't smoke, never have. I have a glass of wine with dinner sometimes but that's all."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of right hip and leg positioning",
+      "Palpation of right hip and greater trochanter",
+      "Assessment of right leg length",
+      "Evaluation of external rotation of right leg",
+      "Passive range of motion of right hip",
+      "Log roll test of right hip",
+      "Neurovascular assessment of right lower extremity",
+      "Palpation of femoral pulse",
+      "Assessment of ability to bear weight"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspection of right hip and leg positioning": "Right leg appears shortened and externally rotated compared to left leg",
+      "Palpation of right hip and greater trochanter": "Severe tenderness over right greater trochanter and lateral hip",
+      "Assessment of right leg length": "Right leg appears 2-3 cm shorter than left leg",
+      "Evaluation of external rotation of right leg": "Right leg held in external rotation at approximately 45 degrees",
+      "Passive range of motion of right hip": "Unable to perform due to severe pain with minimal movement",
+      "Log roll test of right hip": "Severe pain with gentle log rolling of right hip",
+      "Neurovascular assessment of right lower extremity": "Sensation intact, dorsalis pedis and posterior tibial pulses present",
+      "Palpation of femoral pulse": "Strong femoral pulse palpable bilaterally",
+      "Assessment of ability to bear weight": "Unable to bear weight on right leg due to severe pain"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hip fracture (femoral neck or intertrochanteric) (correct diagnosis)",
+      "Greater trochanteric fracture",
+      "Pelvic fracture",
+      "Hip dislocation",
+      "Femoral shaft fracture",
+      "Severe hip contusion",
+      "Lumbar compression fracture with radicular pain"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'typical' elderly fall presentation and missing other causes of altered mental status or medication effects that contributed to fall",
+      "prematureClosure": "Risk of assuming hip fracture without considering pelvic fractures, hip dislocation, or pathologic fractures given her multiple comorbidities",
+      "availabilityBias": "Recent cases of hip fractures in elderly patients may bias toward this diagnosis without proper systematic evaluation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Margaret Sullivan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified an elderly patient with a fall and hip pain. Before you interview her, what key historical elements would help you differentiate between the various causes of hip pain after trauma? Consider her age, medications, and risk factors.",
+      "phase5": "Your history and physical findings strongly suggest a hip fracture. What specific examination findings support this diagnosis? How do her risk factors and medications influence your management considerations, particularly regarding anticoagulation?",
+      "finalDebrief": "This case demonstrates the classic presentation of hip fracture in an elderly patient with osteoporosis. The shortened, externally rotated leg with inability to bear weight after a mechanical fall is pathognomonic. How did her warfarin therapy and renal disease influence your diagnostic and treatment approach?"
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Rosemary Baptiste",
-  "patientHPI": "I've been dealing with these painful, burning hives that keep appearing on my skin, and I've been running fevers off and on. My joints hurt so much, especially in the morning when I wake up - it's hard to even get out of bed some days.",
+      "patientHPI": "I've been dealing with these painful, burning hives that keep appearing on my skin, and I've been running fevers off and on. My joints hurt so much, especially in the morning when I wake up - it's hard to even get out of bed some days.",
       "dob": "07/03/1978",
       "age": "48",
       "sex": "Female",
@@ -974,26 +974,25 @@ window.EMR_DATA = {
       "Biopsy",
       "Skin biopsy pending from dermatology"
     ]
-  ]
-,"references":[
-  {
-    "id": "EAACI-Urticaria-2022",
-    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
-    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15090",
-    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
-    "openAccess": true,
-    "validates": [
-      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
-      "UAS7 scoring",
-      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
-      "Post-viral urticaria in children: no allergy testing needed"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "EAACI-Urticaria-2022",
+      "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+      "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15090",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+      "openAccess": true,
+      "validates": [
+        "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+        "UAS7 scoring",
+        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Post-viral urticaria in children: no allergy testing needed"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Urticarial vasculitis (UV) mimics CSU but is a distinct small-vessel vasculitis. Key distinguishing features: wheals lasting >24 hours, residual bruising/hyperpigmentation after resolution, burning > pruritus, elevated ESR/CRP.",
@@ -1011,75 +1010,79 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Rosemary Baptiste appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Rosemary appears frustrated and somewhat anxious about her persistent skin condition that hasn't responded to usual treatments. She's articulate and forthcoming about her symptoms, expressing particular concern about the painful, burning quality and bruising that's different from her usual hives. Her distress level is moderate, as she's seeking answers for this change in her chronic condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did painful, burning hives lasting >24 hours with residual bruising start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did these current hives first appear and how are they different from your usual ones?",
+      "Can you describe the pain and burning sensation in detail?",
+      "How long do individual hives typically last before resolving?",
+      "Do the hives leave any marks or discoloration when they fade?",
+      "Have you noticed any triggers that bring on these episodes?",
+      "Are you experiencing any joint pain, muscle aches, or systemic symptoms?",
+      "Have you had any recent infections, new medications, or stress?",
+      "How well has your cetirizine been controlling your usual urticaria lately?",
+      "Have you noticed any fever, weight loss, or fatigue recently?",
+      "Do you have any abdominal pain, nausea, or breathing difficulties with the hives?",
+      "Has anyone in your family had similar skin conditions or autoimmune diseases?",
+      "Are you taking your hydroxychloroquine regularly for your lupus?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Rosemary Baptiste presents with painful, burning hives lasting >24 hours with re.'",
-        "character": "'It's painful, burning hives lasting >24 hours with residual bruising \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydroxychloroquine; Cetirizine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Key finding: Individual lesions persist >24h and leave bruise-like marks  Biopsy: Skin biopsy pending from dermatology"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "These different hives started about 3 weeks ago. They're much more painful and burning compared to my usual itchy ones, and they seem to last much longer.",
+      "character": "These hives burn and ache rather than just itch. They feel deep and painful, almost like a bruise while they're there.",
+      "location": "They appear mainly on my arms, legs, and trunk. They don't seem to favor any particular area.",
+      "severity": "The pain is about a 6 out of 10 when they're active. It really interferes with my sleep and daily activities because of the burning sensation.",
+      "aggravating": "I haven't noticed any specific triggers. Even avoiding my usual triggers doesn't seem to help with these new ones.",
+      "relieving": "My usual cetirizine isn't helping at all with these. Even when I take extra doses, the pain and burning continue.",
+      "associated": "I've been feeling more tired lately, and I think I've had some low-grade fevers. My joints have been a bit more achy too.",
+      "denies": "No trouble breathing, no swelling of my face or throat, no severe abdominal pain or vomiting.",
+      "history": "I've had regular hives for years that usually respond well to antihistamines, but these are completely different - more painful and they last so much longer.",
+      "medications": "Hydroxychloroquine; Cetirizine",
+      "allergies": "NKDA",
+      "family": "Nothing significant in my family for skin problems or autoimmune conditions besides my own lupus.",
+      "social": "I work as a teacher, don't smoke, have an occasional glass of wine, no drugs. The stress of these new symptoms has been affecting my work."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin lesions for morphology and distribution",
+      "Palpate skin lesions for depth and tenderness",
+      "Assess for dermographism",
+      "Examine for lymphadenopathy",
+      "Assess mucous membranes",
+      "Palpate abdomen for hepatosplenomegaly",
+      "Check for joint swelling or tenderness",
+      "Examine for purpura or petechiae",
+      "Assess for angioedema",
+      "Take temperature and assess for fever"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin lesions for morphology and distribution": "Multiple raised, erythematous plaques on arms and trunk, some with central clearing and irregular borders, lasting >24 hours",
+      "Palpate skin lesions for depth and tenderness": "Lesions are firm, deep, and tender to palpation with underlying induration",
+      "Assess for dermographism": "Negative dermographism",
+      "Examine for lymphadenopathy": "No significant lymphadenopathy palpated",
+      "Assess mucous membranes": "Oral mucosa appears normal, no lesions",
+      "Palpate abdomen for hepatosplenomegaly": "Soft abdomen, no hepatosplenomegaly appreciated",
+      "Check for joint swelling or tenderness": "Mild tenderness in metacarpophalangeal joints bilaterally, no obvious swelling",
+      "Examine for purpura or petechiae": "Fading brownish discoloration noted at sites of resolved lesions, consistent with post-inflammatory changes",
+      "Assess for angioedema": "No facial, lip, or tongue swelling present",
+      "Take temperature and assess for fever": "Low-grade fever at 37.2°C, patient appears mildly ill"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Urticarial vasculitis (correct diagnosis)",
+      "Chronic spontaneous urticaria",
+      "SLE cutaneous manifestation",
+      "Drug-induced hypersensitivity syndrome",
+      "Systemic vasculitis",
+      "Contact dermatitis",
+      "Erythema multiforme"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known history of recurrent urticaria and assuming this is just a flare of chronic urticaria rather than recognizing the distinct features of urticarial vasculitis",
+      "prematureClosure": "May stop investigating after noting urticarial lesions without fully exploring the key differentiating features of duration >24 hours, pain/burning vs itching, and residual bruising",
+      "availabilityBias": "Common urticaria is much more frequently encountered than urticarial vasculitis, potentially leading to missed diagnosis of this less common but important condition"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Rosemary Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possible causes for urticarial lesions. As you gather more history, pay particular attention to the timeline and characteristics that might distinguish between different types of urticaria. What specific features would help you differentiate between common chronic urticaria and other urticarial conditions?",
+      "phase5": "Now that you've completed your history and physical exam, consider the constellation of findings: lesions lasting >24 hours, burning pain rather than itching, residual bruising, and poor response to antihistamines in a patient with SLE. How do these features fit together, and what does this suggest about the underlying pathophysiology?",
+      "finalDebrief": "This case illustrates the importance of recognizing urticarial vasculitis, which can be easily mistaken for chronic urticaria. The key distinguishing features - individual lesions lasting >24 hours, burning/painful quality, residual bruising, and poor antihistamine response - point to small vessel inflammation rather than simple mast cell degranulation. In patients with SLE, urticarial vasculitis may represent increased disease activity and requires different management approaches."
     }
-}
+  }
 };

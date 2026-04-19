@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Brown",
-  "patientHPI": "Two weeks ago I started taking a new gout medication, and now I have this awful rash that's spreading and my skin is coming off in places - I also have a fever and feel really sick overall.",
+      "patientHPI": "Two weeks ago I started taking a new gout medication, and now I have this awful rash that's spreading and my skin is coming off in places - I also have a fever and feel really sick overall.",
       "dob": "09/12/1970",
       "age": "56",
       "sex": "Male",
@@ -1234,25 +1234,24 @@ window.EMR_DATA = {
       "Tobacco",
       "Never"
     ]
-  ]
-,"references":[
-  {
-    "id": "SCORTEN-2000",
-    "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
-    "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
-    "journal": "J Invest Dermatol",
-    "year": 2000,
-    "doi": "10.1046/j.1523-1747.2000.00061.x",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
-    "openAccess": true,
-    "validates": [
-      "SCORTEN mortality prediction",
-      "7 clinical parameters",
-      "Score 3 = 12.1% mortality"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "SCORTEN-2000",
+      "title": "SCORTEN: severity-of-illness score for toxic epidermal necrolysis",
+      "authors": "Bastuji-Garin S, Fouchard N, Bertocchi M, et al.",
+      "journal": "J Invest Dermatol",
+      "year": 2000,
+      "doi": "10.1046/j.1523-1747.2000.00061.x",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/10998259/",
+      "openAccess": true,
+      "validates": [
+        "SCORTEN mortality prediction",
+        "7 clinical parameters",
+        "Score 3 = 12.1% mortality"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "SJS/TEN mechanism: Type IVc — CD8+ cytotoxic T lymphocytes recognize drug/metabolite on MHC-I on keratinocytes → granulysin (principal cytotoxin) + perforin/granzyme B → keratinocyte apoptosis → epidermal detachment. Granulysin levels in blister fluid correlate with severity.",
@@ -1271,75 +1270,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Brown appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Marcus appears visibly distressed and anxious about his rapidly worsening skin condition. He is very forthcoming with information and eager to get help, frequently mentioning his concern about the painful blisters and whether this could be related to his new gout medication.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did progressive painful rash, skin sloughing, fever \u2014 started allopurinol 2 weeks ago start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when and how this rash started?",
+      "What did the rash look like initially compared to now?",
+      "Where on your body did it first appear and how has it spread?",
+      "Are you experiencing any mouth sores, eye irritation, or genital lesions?",
+      "What does the pain feel like and how severe is it on a scale of 1-10?",
+      "Have you had any difficulty swallowing or eating?",
+      "What medications are you currently taking?",
+      "Do you have any known drug allergies?",
+      "Have you ever had genetic testing done, particularly HLA typing?",
+      "What is your ethnic background?",
+      "Have you had any similar skin reactions in the past?",
+      "Are you experiencing chills, fatigue, or feeling generally unwell?",
+      "Have any family members had severe drug reactions?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Marcus Brown is a 56-year-old male presenting with progressive painful rash, ski.'",
-        "character": "'It's progressive painful rash, skin sloughing, fever \u2014 started allopurinol 2 weeks ago \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Allopurinol; Colchicine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Race: Southeast Asian descent (HLA-B*5801 high prevalence)  Tobacco: Never"
+      "default": "I'm not sure I understand what you're asking. Can you explain that differently? I'm really worried about this rash.",
+      "onset": "It started about 10 days ago, just a few days after I began taking that new gout medicine, allopurinol. First it was just some red spots on my chest, but it's gotten much worse.",
+      "character": "The rash is extremely painful, like burning pain. The skin is blistering and peeling off in sheets. It's the most painful thing I've ever experienced.",
+      "location": "It started on my chest and back, but now it's spread to my arms, face, and even inside my mouth. The worst areas are my torso and face.",
+      "severity": "The pain is easily a 9 out of 10. I can barely move without agony, and eating is almost impossible because of the mouth sores.",
+      "aggravating": "Any movement or touching the skin makes it worse. Even wearing clothes is excruciating.",
+      "relieving": "Nothing really helps. Cool compresses provide minimal relief for a few minutes, but that's it.",
+      "associated": "I have a high fever, chills, and feel completely exhausted. My mouth and lips have painful sores, and my eyes are red and irritated.",
+      "denies": "No nausea, vomiting, diarrhea, or shortness of breath. No joint pain right now, which is unusual for my gout.",
+      "history": "I've never had anything like this before. I've had plenty of gout flares, but nothing involving my skin.",
+      "medications": "Allopurinol; Colchicine",
+      "allergies": "NKDA",
+      "family": "No family history of severe drug reactions or skin conditions that I know of.",
+      "social": "I'm a retired accountant. I'm of Southeast Asian descent - my parents immigrated from Thailand. I've never smoked and rarely drink alcohol."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Skin examination of affected areas",
+      "Mucous membrane examination",
+      "Ophthalmologic examination",
+      "Assessment of body surface area involvement",
+      "Nikolsky sign testing",
+      "Lymph node palpation",
+      "Vital signs assessment",
+      "General appearance and toxicity assessment",
+      "Examination of palms and soles",
+      "Assessment for target lesions"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Skin examination of affected areas": "Extensive erythematous rash with confluent areas of epidermal necrosis and detachment involving approximately 35% of body surface area, particularly chest, back, arms, and face",
+      "Mucous membrane examination": "Severe erosive lesions of oral mucosa, lips with hemorrhagic crusting, and conjunctival erythema with pseudomembrane formation",
+      "Ophthalmologic examination": "Bilateral conjunctival injection with purulent discharge and early pseudomembrane formation",
+      "Assessment of body surface area involvement": "Approximately 35% total body surface area involved with epidermal detachment",
+      "Nikolsky sign testing": "Positive Nikolsky sign - lateral pressure causes extension of blistering and skin sloughing",
+      "Lymph node palpation": "Mild cervical and axillary lymphadenopathy",
+      "Vital signs assessment": "Tachycardia 112 bpm, fever 39.2°C, mild hypotension 108/62, adequate oxygen saturation 96%",
+      "General appearance and toxicity assessment": "Patient appears acutely ill and toxic, in obvious distress",
+      "Examination of palms and soles": "Palmar and plantar surfaces show early erythema but minimal desquamation",
+      "Assessment for target lesions": "No classic target lesions identified; rash is predominantly confluent erythema with necrosis"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis (correct diagnosis)",
+      "Drug Reaction with Eosinophilia and Systemic Symptoms (DRESS)",
+      "Erythema multiforme major",
+      "Staphylococcal scalded skin syndrome",
+      "Necrotizing fasciitis",
+      "Severe contact dermatitis",
+      "Bullous pemphigoid"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'drug rash' and not recognizing the life-threatening nature of SJS/TEN, or attributing symptoms to gout flare",
+      "prematureClosure": "Risk of stopping at 'allergic reaction' without considering the severity and specific syndrome of SJS/TEN requiring immediate intervention",
+      "availabilityBias": "May think of more common drug rashes or contact dermatitis rather than the rare but serious SJS/TEN, especially given recent allopurinol initiation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Brown's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "I see you're considering drug-related causes given the recent allopurinol initiation. What specific features in this presentation would help you differentiate between a simple drug rash versus something more serious? Consider the patient's ethnicity and what you know about allopurinol pharmacogenomics.",
+      "phase5": "Now that you've gathered your history and physical findings, what concerns you most about this presentation? How does the extent of skin involvement, mucous membrane findings, and systemic symptoms guide your thinking about severity and urgency of management?",
+      "finalDebrief": "This case highlights the importance of pharmacogenomic screening, particularly HLA-B*5801 testing in Southeast Asian patients before starting allopurinol. SJS/TEN is a dermatologic emergency with high mortality. How did the evolution of your differential diagnosis change as you gathered more information about the extent of involvement and mucous membrane findings?"
     }
-}
+  }
 };

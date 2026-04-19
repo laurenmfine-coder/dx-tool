@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jayden Park",
-  "patientHPI": "My son was at a birthday party and after eating some cake, his face started swelling up and he began throwing up. Then he started having trouble breathing with wheezing sounds, which terrified me.",
+      "patientHPI": "My son was at a birthday party and after eating some cake, his face started swelling up and he began throwing up. Then he started having trouble breathing with wheezing sounds, which terrified me.",
       "dob": "03/18/2018",
       "age": "8",
       "sex": "Male",
@@ -901,40 +901,39 @@ window.EMR_DATA = {
       "Age-appropriate",
       "Third grade, carries EpiPen at school"
     ]
-  ]
-,"references":[
-  {
-    "id": "NIAID-FA-2010",
-    "title": "Guidelines for diagnosis and management of food allergy in the US",
-    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2010,
-    "doi": "10.1016/j.jaci.2010.10.008",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
-    "openAccess": true,
-    "validates": [
-      "IgE-mediated food allergy criteria",
-      "Component testing (Ara h 2)",
-      "OFC as gold standard"
-    ]
-  },
-  {
-    "id": "PALISADE-2018",
-    "title": "AR101 oral immunotherapy for peanut allergy",
-    "authors": "PALISADE Group.",
-    "journal": "N Engl J Med",
-    "year": 2018,
-    "doi": "10.1056/NEJMoa1812856",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
-    "openAccess": true,
-    "validates": [
-      "OIT efficacy",
-      "Exercise restriction 2h window",
-      "OIT = protection, not cure"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "NIAID-FA-2010",
+      "title": "Guidelines for diagnosis and management of food allergy in the US",
+      "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2010,
+      "doi": "10.1016/j.jaci.2010.10.008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+      "openAccess": true,
+      "validates": [
+        "IgE-mediated food allergy criteria",
+        "Component testing (Ara h 2)",
+        "OFC as gold standard"
+      ]
+    },
+    {
+      "id": "PALISADE-2018",
+      "title": "AR101 oral immunotherapy for peanut allergy",
+      "authors": "PALISADE Group.",
+      "journal": "N Engl J Med",
+      "year": 2018,
+      "doi": "10.1056/NEJMoa1812856",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7643555/",
+      "openAccess": true,
+      "validates": [
+        "OIT efficacy",
+        "Exercise restriction 2h window",
+        "OIT = protection, not cure"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Peanut allergy is the leading cause of fatal food anaphylaxis. Ara h 2 (2S albumin storage protein) is the most clinically relevant component — heat-stable, resistant to digestion, strongly predicts systemic reactions.",
@@ -952,75 +951,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Jayden Park appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Jayden is anxious and clinging to his mother, speaking in short sentences between episodes of wheezing. He appears frightened by his swollen face and difficulty breathing, requiring gentle reassurance and simple questions.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 8-year-old with facial swelling, vomiting, and wheezing after birthday party start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me what happened at the birthday party?",
+      "What did you eat or drink at the party?",
+      "When did you first notice something was wrong?",
+      "How did your face feel when it started swelling?",
+      "Are you having trouble breathing or does your chest feel tight?",
+      "Did you throw up? When did that start?",
+      "Does your throat feel funny or scratchy?",
+      "Have you ever felt like this before?",
+      "Did mommy give you your EpiPen? When?",
+      "What medicines do you usually take?",
+      "What foods are you allergic to?",
+      "Does your tummy hurt or feel itchy anywhere?",
+      "Are you feeling dizzy or like you might faint?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Jayden Park presents with 8-year-old with facial swelling, vomiting, and wheezin.'",
-        "character": "'It's 8-year-old with facial swelling, vomiting, and wheezing after birthday party \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone; Albuterol.'",
-        "allergies": "'My allergies are Peanut, Tree nuts.'",
-        "family": "Mother: allergic rhinitis  Father: asthma",
-        "social": "Exposure: Ate cake at birthday party \u2014 unknown peanut ingredient  EpiPen: Mother gave EpiPen Jr in the car en route  Age-appropriate: Third grade, carries EpiPen at school"
+      "default": "I don't know... mommy, what does that mean?",
+      "onset": "Right after I ate the chocolate cake at Tommy's party... maybe like 10 minutes? My face started feeling tingly and then it got puffy",
+      "character": "My chest feels really tight and it's hard to breathe... like when I have my asthma but way worse",
+      "location": "My face is all swollen, especially around my eyes and lips, and my throat feels scratchy and tight",
+      "severity": "It's really scary... like a 9. I can't breathe good and I threw up twice in the car",
+      "aggravating": "It got worse really fast after I ate the cake, and when I try to take deep breaths it's harder",
+      "relieving": "Mommy gave me my EpiPen in the car and it helped a little bit, but I still feel bad",
+      "associated": "I threw up twice, my tummy hurts, and I feel really itchy all over, especially my arms",
+      "denies": "My chest doesn't hurt like sharp pain, just tight... I don't feel dizzy right now",
+      "history": "I had something like this before when I accidentally ate a peanut butter cookie at school last year",
+      "medications": "Fluticasone; Albuterol",
+      "allergies": "Peanut, Tree nuts",
+      "family": "Mommy gets sneezy from flowers and daddy has asthma like me",
+      "social": "I'm in third grade and I always carry my EpiPen at school. The teacher knows about my allergies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect face and neck for angioedema",
+      "Examine oral cavity and throat",
+      "Auscultate lungs bilaterally",
+      "Inspect skin for urticaria or rash",
+      "Assess respiratory effort and accessory muscle use",
+      "Palpate lymph nodes",
+      "Auscultate heart sounds",
+      "Assess mental status and anxiety level",
+      "Check capillary refill",
+      "Inspect conjunctiva and periorbital area"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect face and neck for angioedema": "Significant periorbital edema and lip swelling, mild neck swelling",
+      "Examine oral cavity and throat": "Tongue edema present, throat appears erythematous, no visible obstruction",
+      "Auscultate lungs bilaterally": "Diffuse expiratory wheeze bilaterally, decreased air movement in lower lobes",
+      "Inspect skin for urticaria or rash": "Multiple raised urticarial lesions on arms and trunk, some confluent",
+      "Assess respiratory effort and accessory muscle use": "Moderate respiratory distress with supraclavicular retractions",
+      "Palpate lymph nodes": "No significant lymphadenopathy palpated",
+      "Auscultate heart sounds": "Tachycardic but regular rhythm, no murmurs appreciated",
+      "Assess mental status and anxiety level": "Alert and oriented but anxious, clinging to parent",
+      "Check capillary refill": "Capillary refill 2-3 seconds, slightly prolonged",
+      "Inspect conjunctiva and periorbital area": "Conjunctival injection with significant periorbital swelling"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Anaphylaxis (correct diagnosis)",
+      "Severe allergic reaction without anaphylaxis",
+      "Acute asthma exacerbation",
+      "Angioedema from ACE inhibitor",
+      "Hereditary angioedema",
+      "Viral upper respiratory infection with wheeze",
+      "Food poisoning with dehydration"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Don't anchor on the known asthma history and miss the systemic allergic reaction - the wheeze could be from bronchospasm due to anaphylaxis",
+      "prematureClosure": "Having a known peanut allergy and EpiPen use might make you quickly assume anaphylaxis without fully assessing the severity and systemic involvement",
+      "availabilityBias": "Recent cases of simple food allergies or asthma exacerbations might bias away from recognizing this as true anaphylaxis requiring immediate treatment"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jayden Park's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possibilities including anaphylaxis. What specific historical features would help you distinguish between a severe allergic reaction and true anaphylaxis? What systems need to be involved?",
+      "phase5": "Now that you've completed your assessment, let's think systematically about this presentation. You found facial swelling, urticaria, wheezing, vomiting, and hypotension. How do these findings help narrow your differential? What criteria define anaphylaxis?",
+      "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement: skin (urticaria, angioedema), respiratory (wheeze, dyspnea), GI (vomiting), and cardiovascular (hypotension, tachycardia). The key learning point is recognizing that anaphylaxis requires involvement of two or more organ systems. How did your thinking evolve from considering simple allergic reaction to recognizing anaphylaxis?"
     }
-}
+  }
 };

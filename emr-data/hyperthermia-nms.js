@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andres Villareal",
-  "patientHPI": "I got my monthly shot at the psychiatry clinic two weeks ago, and they increased the dose because I was hearing voices again, but now I'm feeling really strange and different than usual.",
+    "patientHPI": "I got my monthly shot at the psychiatry clinic two weeks ago, and they increased the dose because I was hearing voices again, but now I'm feeling really strange and different than usual.",
     "dob": "04/06/1988",
     "age": 36,
     "sex": "Male",
@@ -118,7 +118,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "244 lbs",
       "ht": "5'10\"",
-      "bmi": 35.0,
+      "bmi": 35,
       "setting": "PCP Office"
     },
     {
@@ -196,34 +196,142 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "116", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "34", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "30", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "116",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "34",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "30",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "218", "unit": "mg/dL", "range": "<200", "flag": "H" },
-            { "test": "LDL Cholesterol", "value": "128", "unit": "mg/dL", "range": "<130", "flag": "" },
-            { "test": "HDL Cholesterol", "value": "32", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "288", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "218",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": "H"
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "<130",
+              "flag": ""
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "288",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "44.6", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "252", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "44.6",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "252",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -284,15 +392,42 @@ window.EMR_DATA = {
     "Maternal grandmother: T2DM, deceased at 70"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed; attends community mental health day program"],
-    ["Marital", "Single"],
-    ["Tobacco", "Current smoker — 1 PPD x 16 years (16 pack-years)"],
-    ["Alcohol", "Denies current use; history of binge drinking in early 20s"],
-    ["Drugs", "Denies current; remote cannabis use"],
-    ["Exercise", "Sedentary; walks to day program (10 min)"],
-    ["Housing", "Lives with mother in apartment"],
-    ["Safety", "Denies SI/HI; no weapons access; mother supervises medications"],
-    ["Advance Directive", "None; mother is informal decision-maker"]
+    [
+      "Occupation",
+      "Unemployed; attends community mental health day program"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 16 years (16 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "Denies current use; history of binge drinking in early 20s"
+    ],
+    [
+      "Drugs",
+      "Denies current; remote cannabis use"
+    ],
+    [
+      "Exercise",
+      "Sedentary; walks to day program (10 min)"
+    ],
+    [
+      "Housing",
+      "Lives with mother in apartment"
+    ],
+    [
+      "Safety",
+      "Denies SI/HI; no weapons access; mother supervises medications"
+    ],
+    [
+      "Advance Directive",
+      "None; mother is informal decision-maker"
+    ]
   ],
   "meta": {
     "caseId": "hyperthermia-nms",
@@ -303,75 +438,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Andres Villareal appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Andres appears anxious and confused, with a flat affect and somewhat rigid posture. He is cooperative but speaks slowly and seems to have difficulty organizing his thoughts, appearing genuinely distressed by his worsening symptoms. He provides information willingly but sometimes needs questions repeated or clarified.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did environmental emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what you mean by feeling 'strange and different'?",
+      "Have you noticed any muscle stiffness or rigidity in your body?",
+      "Are you experiencing any tremors or involuntary movements?",
+      "Have you had any fever or felt overheated recently?",
+      "How has your sweating been - more than usual?",
+      "Have you noticed any changes in your mental clarity or confusion?",
+      "Are you having trouble swallowing or speaking clearly?",
+      "Have you experienced any nausea, vomiting, or changes in appetite?",
+      "When exactly did you receive your last haloperidol injection and at what dose?",
+      "Have you been taking your benztropine as prescribed?",
+      "Have you missed any doses of your regular medications recently?",
+      "Have you been exposed to hot weather or done any strenuous activity?",
+      "Have you ever experienced symptoms like this before after medication changes?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I got my monthly shot at the psychiatry clinic two weeks ago, and they increased.'",
-        "character": "'It's environmental emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Neuroleptic Malignant Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Haloperidol decanoate 200mg IM monthly; Benztropine 1mg BID; Metformin 500mg BID.'",
-        "allergies": "'My allergies are Olanzapine.'",
-        "family": "Mother: T2DM, hypertension, alive at 60  Father: Schizophrenia (untreated), alcohol use disorder, deceased at 52 (liver cirrhosis)  Brother: Bipolar disorder, alive at 33",
-        "social": "Occupation: Unemployed; attends community mental health day program  Marital: Single  Tobacco: Current smoker \u2014 1 PPD x 16 years (16 pack-years)  Alcohol: Denies current use; history of binge drinking in early 20s  Drugs: Denies current; remote cannabis use"
+      "default": "I'm sorry, I'm having trouble thinking clearly right now. Could you ask that again?",
+      "onset": "It started about 3-4 days ago, maybe Tuesday or Wednesday. At first I just felt tired and achy, but it's gotten worse each day.",
+      "character": "My whole body feels stiff and heavy, like I'm moving through thick mud. My muscles feel tight and I can't seem to relax them.",
+      "location": "It's mostly in my arms and legs, but my neck and jaw feel tight too. Sometimes my whole body just feels locked up.",
+      "severity": "Maybe a 7 out of 10. I can barely do simple things like getting dressed or making food. I feel like I'm trapped in my own body.",
+      "aggravating": "Moving around seems to make the stiffness worse, and I feel worse when I try to do things quickly or when I'm stressed.",
+      "relieving": "Nothing really helps much. Even when I try to rest or stretch, the muscles stay tight. The benztropine doesn't seem to be working like it usually does.",
+      "associated": "I've been sweating a lot even when it's not hot, and I feel confused and foggy. Sometimes I feel nauseous and my heart feels like it's racing.",
+      "denies": "I haven't had any chest pain or trouble breathing. No headache or vision problems. I'm not hearing voices right now like I was before the shot.",
+      "history": "No, I've never felt anything like this before. I've had some side effects from medications in the past, but nothing this severe or scary.",
+      "medications": "Haloperidol decanoate 200mg IM monthly; Benztropine 1mg BID; Metformin 500mg BID",
+      "allergies": "Olanzapine",
+      "family": "My father had schizophrenia but never got proper treatment. My mother has diabetes and high blood pressure. My brother has bipolar disorder.",
+      "social": "I'm unemployed but go to a day program for people with mental health issues. I smoke about a pack a day. I don't drink alcohol anymore, used to have problems with it when I was younger."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and mental status assessment",
+      "Temperature measurement and assessment for hyperthermia",
+      "Assessment of muscle rigidity (lead pipe rigidity)",
+      "Evaluation for tremor and extrapyramidal symptoms",
+      "Assessment of diaphoresis and autonomic instability",
+      "Cardiovascular examination including heart rate and rhythm",
+      "Neurological examination including reflexes and clonus",
+      "Assessment of speech and swallowing function",
+      "Evaluation of level of consciousness and cognitive function"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Neuroleptic Malignant Syndrome. Document specifically what you observe."
+      "General appearance and mental status assessment": "Patient appears acutely ill with altered mental status, diaphoretic, and demonstrates psychomotor slowing with delayed responses",
+      "Temperature measurement and assessment for hyperthermia": "Temperature elevated to 101.8°F (38.8°C), patient reports feeling hot and is visibly diaphoretic",
+      "Assessment of muscle rigidity (lead pipe rigidity)": "Severe generalized muscle rigidity present, consistent with lead pipe rigidity in all extremities, particularly pronounced in neck and trunk",
+      "Evaluation for tremor and extrapyramidal symptoms": "Coarse tremor present in upper extremities, cogwheel rigidity noted, bradykinesia evident in voluntary movements",
+      "Assessment of diaphoresis and autonomic instability": "Profuse diaphoresis present, skin flushed and warm, blood pressure elevated to 148/94 mmHg",
+      "Cardiovascular examination including heart rate and rhythm": "Tachycardia present with heart rate of 112 bpm, regular rhythm, no murmurs appreciated",
+      "Neurological examination including reflexes and clonus": "Hyperreflexia present bilaterally, sustained clonus elicited at ankles, muscle tone markedly increased throughout",
+      "Assessment of speech and swallowing function": "Speech is slow and hypophonic with mild dysarthria, patient reports some difficulty swallowing",
+      "Evaluation of level of consciousness and cognitive function": "Alert but confused and disoriented to time, difficulty with attention and concentration, responds appropriately to commands but with delay"
     },
     "ddxTargets": [
-        "Neuroleptic Malignant Syndrome (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Neuroleptic Malignant Syndrome (correct diagnosis)",
+      "Serotonin Syndrome",
+      "Malignant Hyperthermia",
+      "Meningitis/Encephalitis",
+      "Sepsis with altered mental status",
+      "Acute dystonic reaction",
+      "Heat stroke"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Neuroleptic Malignant Syndrome, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Neuroleptic Malignant Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Neuroleptic Malignant Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on psychiatric history and attributing symptoms to worsening psychosis or typical antipsychotic side effects rather than recognizing life-threatening NMS",
+      "prematureClosure": "May jump to simple extrapyramidal side effects given recent dose increase without fully evaluating the constellation of fever, rigidity, and altered mental status that defines NMS",
+      "availabilityBias": "Common extrapyramidal side effects from antipsychotics may overshadow recognition of rare but serious NMS, especially if clinician has recently seen typical medication side effects"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Andres Villareal's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Neuroleptic Malignant Syndrome. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient recently had an increase in his haloperidol dose and is now experiencing concerning symptoms. What specific constellation of findings would help you differentiate between common antipsychotic side effects and more serious complications? Think about the timeline and severity of his presentation.",
+      "phase5": "You've identified key findings of hyperthermia, severe rigidity, altered mental status, and autonomic instability in a patient on high-dose haloperidol. How do these findings fit together, and what does this suggest about the urgency of this presentation? What laboratory studies might help confirm your suspicions?",
+      "finalDebrief": "NMS is a rare but life-threatening complication of antipsychotic medications, particularly with high-potency agents like haloperidol and especially after dose increases. The classic tetrad of hyperthermia, muscle rigidity, altered mental status, and autonomic dysfunction distinguishes it from common extrapyramidal side effects. Early recognition is crucial as mortality can be 10-20% without prompt treatment including discontinuation of the offending agent and supportive care."
     }
-}
+  }
 };

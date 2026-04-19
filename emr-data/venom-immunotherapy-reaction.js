@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Catherine Brennan",
-  "patientHPI": "I was at my allergy doctor's office getting my regular shot when I started having a really bad reaction with hives and trouble breathing, and even after they gave me the emergency shot I wasn't getting better so they sent me here to the hospital.",
+      "patientHPI": "I was at my allergy doctor's office getting my regular shot when I started having a really bad reaction with hives and trouble breathing, and even after they gave me the emergency shot I wasn't getting better so they sent me here to the hospital.",
       "dob": "04/27/1981",
       "age": "45",
       "sex": "Female",
@@ -836,42 +836,41 @@ window.EMR_DATA = {
       "Management question",
       "Pre-treat next visit? Slow build-up? Split doses?"
     ]
-  ]
-,"references":[
-  {
-    "id": "AIT-PP-2011",
-    "title": "Allergen immunotherapy: practice parameter 3rd update",
-    "authors": "Cox L, Nelson H, Lockey R, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2011,
-    "doi": "10.1016/j.jaci.2010.09.034",
-    "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCIT protocols",
-      "Cluster/rush protocols",
-      "ACE inhibitors increase VIT reactions",
-      "VIT ≥5 years"
-    ]
-  },
-  {
-    "id": "Insect-PP-2017",
-    "title": "Stinging insect hypersensitivity: practice parameter 2016",
-    "authors": "Golden DBK, Demain J, Freeman T, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2017,
-    "doi": "10.1016/j.anai.2016.10.031",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/28007086/",
-    "openAccess": true,
-    "validates": [
-      "60% recurrence without VIT",
-      "VIT reduces to <5%",
-      "Baseline tryptase screening",
-      "Cluster VIT protocol"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "AIT-PP-2011",
+      "title": "Allergen immunotherapy: practice parameter 3rd update",
+      "authors": "Cox L, Nelson H, Lockey R, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2011,
+      "doi": "10.1016/j.jaci.2010.09.034",
+      "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCIT protocols",
+        "Cluster/rush protocols",
+        "ACE inhibitors increase VIT reactions",
+        "VIT ≥5 years"
+      ]
+    },
+    {
+      "id": "Insect-PP-2017",
+      "title": "Stinging insect hypersensitivity: practice parameter 2016",
+      "authors": "Golden DBK, Demain J, Freeman T, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2017,
+      "doi": "10.1016/j.anai.2016.10.031",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28007086/",
+      "openAccess": true,
+      "validates": [
+        "60% recurrence without VIT",
+        "VIT reduces to <5%",
+        "Baseline tryptase screening",
+        "Cluster VIT protocol"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Systemic reactions occur in ~0.5–2% of VIT injections, most commonly during build-up phase. Management: epinephrine IM immediately, observe 30+ min, reduce subsequent dose 50% and build back up.",
@@ -890,75 +889,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Catherine Brennan appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Catherine appears anxious but cooperative, frequently touching her chest and rubbing her arms where the hives are visible. She is articulate and forthcoming about her symptoms, clearly concerned about having another severe allergic reaction like her previous anaphylaxis episode.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened after your injection today?",
+      "When did you first notice the hives and chest tightness?",
+      "How would you rate your breathing difficulty on a scale of 1-10?",
+      "Are you experiencing any throat swelling or difficulty swallowing?",
+      "Do you have any nausea, vomiting, or abdominal cramping?",
+      "How does this compare to your original yellow jacket sting reaction?",
+      "Have you had any reactions to previous VIT injections?",
+      "Did you take any medications or eat anything unusual today before coming in?",
+      "Are you feeling dizzy or lightheaded right now?",
+      "Do you have your EpiPen with you today?",
+      "Have you been under any unusual stress or illness recently?",
+      "Are the hives spreading or staying in the same areas?",
+      "Is the chest tightness getting worse, better, or staying the same?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Catherine Brennan presents with generalized urticaria and chest tightness 20 min.'",
-        "character": "'It's generalized urticaria and chest tightness 20 minutes after venom immunotherapy injection \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Yellow jacket VIT; EpiPen.'",
-        "allergies": "'My allergies are Yellow jacket venom.'",
-        "family": "Non-contributory",
-        "social": "VIT status: Week 8 of build-up, received 20mcg dose today  Reaction timing: Urticaria and mild chest tightness 20 min post-injection  Management question: Pre-treat next visit? Slow build-up? Split doses?"
+      "default": "I'm sorry, could you repeat that? I'm a bit distracted by these hives and my breathing.",
+      "onset": "The hives started appearing about 20 minutes after I got my allergy shot. The chest tightness began around the same time, maybe a few minutes after the hives.",
+      "character": "The chest tightness feels like someone is squeezing my chest, not super tight but definitely noticeable. The hives are raised, red, and very itchy.",
+      "location": "The hives are all over - my arms, chest, back, and legs. The chest tightness is right in the center of my chest.",
+      "severity": "I'd say the chest tightness is about a 4 out of 10, and the itching from the hives is about a 6 out of 10. I can still breathe okay but I'm worried it might get worse.",
+      "aggravating": "The itching gets worse when I scratch. The chest tightness seems about the same, maybe slightly worse when I think about my last reaction.",
+      "relieving": "Nothing really helps the hives. Taking slow, deep breaths helps me feel a bit less anxious about the chest tightness.",
+      "associated": "I feel a bit anxious and my heart is racing, but I think that's from being scared. No nausea, vomiting, or throat swelling that I can tell.",
+      "denies": "No throat swelling, no trouble swallowing, no dizziness, no abdominal pain, no shortness of breath at rest, no wheezing that I can hear.",
+      "history": "This is my first reaction to the VIT shots. My original yellow jacket sting was much worse - my whole face swelled up, I couldn't breathe, and I passed out.",
+      "medications": "Yellow jacket VIT; EpiPen",
+      "allergies": "Yellow jacket venom",
+      "family": "No family history of severe allergies or anaphylaxis that I know of.",
+      "social": "I work as a librarian, don't smoke, maybe have a glass of wine on weekends. I've been doing well with the shots until today - this is week 8 of the build-up phase."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for urticarial lesions",
+      "Assess upper airway for angioedema",
+      "Auscultate lungs for wheezing or stridor",
+      "Check blood pressure and pulse",
+      "Examine throat and neck for swelling",
+      "Assess mental status and anxiety level",
+      "Palpate for lymphadenopathy",
+      "Check injection site",
+      "Assess peripheral perfusion",
+      "Monitor respiratory effort"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin for urticarial lesions": "Multiple raised, erythematous, blanching wheals 0.5-3cm in diameter distributed over arms, chest, abdomen, and legs",
+      "Assess upper airway for angioedema": "No visible lip, tongue, or facial swelling; uvula normal",
+      "Auscultate lungs for wheezing or stridor": "Clear breath sounds bilaterally, no wheezing or stridor, normal respiratory effort",
+      "Check blood pressure and pulse": "BP 108/68, HR 96 regular, no orthostatic changes",
+      "Examine throat and neck for swelling": "Throat clear, no palpable neck swelling, normal voice",
+      "Assess mental status and anxiety level": "Alert and oriented, appropriately anxious but cooperative",
+      "Palpate for lymphadenopathy": "No significant lymphadenopathy",
+      "Check injection site": "Left upper arm injection site with minimal local erythema, no significant swelling",
+      "Assess peripheral perfusion": "Normal capillary refill, warm extremities",
+      "Monitor respiratory effort": "Normal respiratory rate and effort, speaking in full sentences"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Systemic allergic reaction to VIT (mild/moderate) (correct diagnosis)",
+      "Anxiety reaction to VIT procedure",
+      "Idiopathic urticaria coincidental to VIT",
+      "Anaphylaxis (must-not-miss)",
+      "Biphasic anaphylactic reaction (must-not-miss)",
+      "Serum sickness-like reaction",
+      "Medication reaction to adjuvants"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'just anxiety' given patient's known history and mild presentation, missing the true systemic allergic component",
+      "prematureClosure": "Risk of stopping evaluation after noting stable vital signs without fully assessing for progression of allergic reaction",
+      "availabilityBias": "Recent cases of anxiety reactions may overshadow recognition of true systemic allergic reaction requiring modified VIT protocol"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Catherine Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider the spectrum of allergic reactions to immunotherapy. What key features would help you distinguish between different severity levels? What timeline factors are important in VIT reactions?",
+      "phase5": "Now that you've gathered your history and exam, think about the clinical criteria for grading allergic reactions. What specific findings support your leading diagnosis? How does this presentation guide your immediate management and future VIT protocol decisions?",
+      "finalDebrief": "Let's trace through your diagnostic reasoning. How did the combination of timing, symptoms, and exam findings lead you to the correct diagnosis? What key decision points will determine how to proceed with this patient's immunotherapy protocol? Consider the balance between continuing potentially life-saving treatment while minimizing reaction risk."
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Liam O'Sullivan",
-  "patientHPI": "I was eating chicken nuggets and one got stuck in my throat and I can't swallow it down. I've been drooling because I can't even swallow my spit. My mom says this has been happening since I was little - food getting stuck when I eat, and she's always had to cut my food up really small or give me soft things to eat.",
+      "patientHPI": "I was eating chicken nuggets and one got stuck in my throat and I can't swallow it down. I've been drooling because I can't even swallow my spit. My mom says this has been happening since I was little - food getting stuck when I eat, and she's always had to cut my food up really small or give me soft things to eat.",
       "dob": "08/14/2015",
       "age": "11",
       "sex": "Male",
@@ -1087,94 +1087,101 @@ window.EMR_DATA = {
       "Nutrition",
       "Underweight — 10th percentile, avoiding foods that \"get stuck\""
     ]
-  ]
-,"references":[
-  {
-    "id": "EoE-AGA-2020",
-    "title": "AGA clinical practice update on dietary management of EoE",
-    "authors": "Hirano I, Chan ES, Rank MA, et al.",
-    "journal": "Gastroenterology",
-    "year": 2020,
-    "doi": "10.1053/j.gastro.2020.02.038",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
-    "openAccess": true,
-    "validates": [
-      "≥15 eos/HPF diagnostic threshold",
-      "1-food (milk) elimination first-line",
-      "Swallowed budesonide/fluticasone",
-      "Repeat EGD 8-12 weeks"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "EoE-AGA-2020",
+      "title": "AGA clinical practice update on dietary management of EoE",
+      "authors": "Hirano I, Chan ES, Rank MA, et al.",
+      "journal": "Gastroenterology",
+      "year": 2020,
+      "doi": "10.1053/j.gastro.2020.02.038",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
+      "openAccess": true,
+      "validates": [
+        "≥15 eos/HPF diagnostic threshold",
+        "1-food (milk) elimination first-line",
+        "Swallowed budesonide/fluticasone",
+        "Repeat EGD 8-12 weeks"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Liam O'Sullivan is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Liam appears uncomfortable and anxious, frequently swallowing and unable to manage his saliva well. He's cooperative but clearly distressed about not being able to swallow, and his mother is very concerned, mentioning this has been building up for years with his 'difficult' eating habits.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did you first notice you couldn't swallow the chicken nugget?",
+      "Can you describe what it feels like right now in your throat or chest?",
+      "Where exactly do you feel the food is stuck?",
+      "On a scale of 1-10, how uncomfortable are you right now?",
+      "Tell me about your eating habits - do you have trouble with certain foods?",
+      "How long does it usually take you to finish a meal?",
+      "Do you need to drink a lot of water when you eat?",
+      "Have you ever had food get stuck like this before?",
+      "Do you have any allergies to foods or medications?",
+      "What medications are you currently taking?",
+      "Has anyone in your family had trouble swallowing or food allergies?",
+      "Do you ever have heartburn or chest pain when eating?",
+      "Have you been losing weight or avoiding certain foods?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Glucagon; Endoscopy.'",
-        "allergies": "'My allergies: Milk, Egg.'",
-        "family": "Mother: food allergies  Father: asthma",
-        "social": "Context: Picky eater since toddlerhood \u2014 actually dysphagia from EoE  Behavior: Takes 45 min to eat meals, cuts food into tiny pieces, drinks excessively with meals  Missed diagnosis: Labeled \"picky eater\" and \"behavioral\" for 6 years \u2014 actually had EoE the whole time  Nutrition: Underweight \u2014 10th percentile, avoiding foods that \"get stuck\""
+      "default": "I don't know... it just feels weird and I can't swallow right now.",
+      "onset": "About 2 hours ago when I was eating dinner. The chicken nugget just got stuck and won't go down.",
+      "character": "It feels like there's a big lump stuck in my chest that won't move. I keep trying to swallow but it just stays there.",
+      "location": "Right here in my chest, behind my breastbone. It doesn't hurt exactly, but it feels really uncomfortable and full.",
+      "severity": "Maybe a 7 out of 10. It's really bothering me and I'm scared it won't come out.",
+      "aggravating": "Trying to swallow makes it worse. Even my spit won't go down properly.",
+      "relieving": "Nothing helps. We tried drinking water but that just made me feel more full.",
+      "associated": "I'm drooling a lot because I can't swallow my saliva. My chest feels tight and I'm kind of scared.",
+      "denies": "No chest pain, no trouble breathing, no fever, no throwing up blood.",
+      "history": "Well... food gets stuck sometimes, but usually I can get it down with water. Mom says I'm just a picky eater.",
+      "medications": "Glucagon; Endoscopy",
+      "allergies": "Milk, Egg",
+      "family": "My mom has food allergies to nuts and shellfish, and my dad has asthma and uses an inhaler.",
+      "social": "I'm in 5th grade. I don't like most foods - they're hard to swallow. Meals take me like 45 minutes and I cut everything really small and drink lots of water."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and distress level",
+      "Vital signs assessment",
+      "Oropharyngeal examination",
+      "Neck palpation for masses or lymphadenopathy",
+      "Chest auscultation",
+      "Abdominal examination",
+      "Assessment of hydration status",
+      "Nutritional assessment/growth parameters",
+      "Skin examination for eczema or atopic dermatitis",
+      "Neurological assessment of cranial nerves"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and distress level": "Thin, anxious-appearing 11-year-old boy in mild distress, drooling and frequently attempting to swallow",
+      "Vital signs assessment": "HR 112 bpm, temp 37.0°C, SpO2 99%, appears well-perfused",
+      "Oropharyngeal examination": "Normal dentition, no visible food in mouth, excessive pooled saliva, no erythema or swelling",
+      "Neck palpation for masses or lymphadenopathy": "No masses, lymphadenopathy, or tenderness to palpation",
+      "Chest auscultation": "Clear breath sounds bilaterally, no stridor, no wheeze",
+      "Abdominal examination": "Soft, non-tender, no masses, normal bowel sounds",
+      "Assessment of hydration status": "Mucous membranes slightly dry, good skin turgor, appears mildly dehydrated from drooling",
+      "Nutritional assessment/growth parameters": "Appears underweight for age, height and weight at 10th percentile",
+      "Skin examination for eczema or atopic dermatitis": "Mild eczematous patches on flexural surfaces of arms, suggesting atopic tendency",
+      "Neurological assessment of cranial nerves": "Cranial nerves intact, normal gag reflex, no focal deficits"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Eosinophilic esophagitis with food impaction (correct diagnosis)",
+      "Esophageal stricture with food impaction",
+      "Achalasia",
+      "Foreign body ingestion with airway compromise",
+      "Esophageal perforation",
+      "Simple food impaction in normal esophagus",
+      "Gastroesophageal reflux disease with esophagitis"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'picky eating' as purely behavioral rather than recognizing it as adaptive behavior for underlying dysphagia from EoE",
+      "prematureClosure": "Risk of stopping investigation after treating the acute food impaction without exploring the underlying chronic swallowing difficulties",
+      "availabilityBias": "May focus on more common causes of food impaction rather than considering EoE, especially given the patient's age and chronic history"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Liam O'Sullivan: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Good start on your differential. This 11-year-old has acute food impaction, but I want you to think broader. What questions might help you understand if this is an isolated incident or part of a larger pattern? Consider why an 11-year-old might develop food impaction in the first place.",
+      "phase5": "Excellent history and exam. You've identified key features: chronic 'picky eating,' prolonged meal times, need for excessive fluids, underweight status, and food allergies. How do these findings change your differential diagnosis? What underlying condition might explain both the acute presentation AND the 6-year history of eating difficulties?",
+      "finalDebrief": "This case illustrates how eosinophilic esophagitis often presents. The 'picky eating' was actually adaptive behavior - Liam learned to avoid foods that caused dysphagia. The food allergies, eczema, and family history of atopy were clues to the underlying allergic mechanism. How might recognizing this pattern earlier have changed Liam's last 6 years of being labeled as having behavioral problems rather than a medical condition?"
     }
-}
+  }
 };

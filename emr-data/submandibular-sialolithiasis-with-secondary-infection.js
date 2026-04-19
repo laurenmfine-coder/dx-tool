@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank Castellano",
-  "patientHPI": "For the past two days I've had this awful pain and swelling under my jaw on the right side that gets much worse when I eat. Every time I take a bite of food, I get this sharp pain and my face swells up, then it goes down a little between meals - yesterday I started running a fever too.",
+    "patientHPI": "For the past two days I've had this awful pain and swelling under my jaw on the right side that gets much worse when I eat. Every time I take a bite of food, I get this sharp pain and my face swells up, then it goes down a little between meals - yesterday I started running a fever too.",
     "dob": "01/18/1966",
     "age": 59,
     "sex": "Male",
@@ -208,27 +208,123 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "13.6", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "76", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Lymphocytes", "value": "16", "unit": "%", "range": "20-40", "flag": "L" },
-            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "44.0", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "274", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "13.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "76",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "16",
+              "unit": "%",
+              "range": "20-40",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "44.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "274",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "eGFR", "value": "66", "unit": "mL/min/1.73m²", "range": ">60", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "10.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Uric Acid", "value": "5.8", "unit": "mg/dL", "range": "3.5-7.2", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "24", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "26", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "eGFR",
+              "value": "66",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Uric Acid",
+              "value": "5.8",
+              "unit": "mg/dL",
+              "range": "3.5-7.2",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "26",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -312,15 +408,42 @@ window.EMR_DATA = {
     "Son: Healthy, age 30"
   ],
   "socialHistory": [
-    ["Occupation", "Electrician — active work"],
-    ["Marital", "Married — 32 years"],
-    ["Tobacco", "Former smoker — quit 2010; 10 pack-year history"],
-    ["Alcohol", "1-2 beers with dinner nightly"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Active at work; walks 2x/week recreationally"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; wears seatbelt; uses PPE at work"],
-    ["Advance Directive", "DPOA — wife Angela Castellano"]
+    [
+      "Occupation",
+      "Electrician — active work"
+    ],
+    [
+      "Marital",
+      "Married — 32 years"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2010; 10 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "1-2 beers with dinner nightly"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Active at work; walks 2x/week recreationally"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; uses PPE at work"
+    ],
+    [
+      "Advance Directive",
+      "DPOA — wife Angela Castellano"
+    ]
   ],
   "meta": {
     "caseId": "submandibular-sialolithiasis-with-secondary-infection",
@@ -331,75 +454,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Frank Castellano appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Frank appears moderately distressed and frequently touches the right side of his jaw while speaking. He's cooperative and forthcoming with information but becomes noticeably uncomfortable when discussing eating or opening his mouth wide. His affect is somewhat anxious as he's concerned about the worsening symptoms and fever.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did ent / airway emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did the pain and swelling first begin?",
+      "Can you describe the quality of the pain?",
+      "Where exactly is the pain located and does it spread anywhere?",
+      "How severe is the pain on a scale of 1-10?",
+      "What makes the pain worse?",
+      "Is there anything that helps relieve the pain?",
+      "Have you noticed any other symptoms besides pain and swelling?",
+      "Have you had similar episodes before?",
+      "Any difficulty swallowing or changes in taste?",
+      "Have you noticed any discharge from your mouth?",
+      "Any recent dental work or trauma to your face?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started For the past two days I've had this awful pain and swelling under my jaw on the .'",
-        "character": "'It's ent / airway emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Submandibular Sialolithiasis with Secondary Sialadenitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 5mg daily; Losartan 50mg daily; Tamsulosin 0.4mg daily; Allopurinol 300mg daily; Potassium citrate 15mEq BID.'",
-        "allergies": "'My allergies are Sulfonamides, Colchicine.'",
-        "family": "Father: Kidney stones, hypertension, deceased at 74 (MI)  Mother: Osteoporosis, alive at 84  Brother: Gout, kidney stones, alive at 62",
-        "social": "Occupation: Electrician \u2014 active work  Marital: Married \u2014 32 years  Tobacco: Former smoker \u2014 quit 2010; 10 pack-year history  Alcohol: 1-2 beers with dinner nightly  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Can you be more specific about what you want to know?",
+      "onset": "It started two days ago, pretty gradually at first, but it's gotten much worse since yesterday when the fever started.",
+      "character": "It's a sharp, stabbing pain that comes on suddenly, especially when I eat or drink anything. Between episodes it's more of a dull ache.",
+      "location": "It's right here under my jaw on the right side, and sometimes it shoots up toward my ear and down my neck.",
+      "severity": "When I'm eating it's easily a 8 or 9 out of 10 - it's excruciating. Between meals it's more like a 4 or 5.",
+      "aggravating": "Eating or drinking anything makes it much worse, even just thinking about food seems to trigger it. Opening my mouth wide also hurts.",
+      "relieving": "I've been taking ibuprofen which helps a little, and avoiding eating as much as possible. Cold drinks seem to help more than warm ones.",
+      "associated": "I've had a fever since yesterday, around 100 degrees, and I feel generally unwell. My mouth feels dry and I think I taste something metallic sometimes.",
+      "denies": "No nausea, vomiting, or difficulty breathing. No rash or other swelling. No recent dental problems or tooth pain.",
+      "history": "I've never had anything like this before. I get kidney stones occasionally and gout flares, but this is completely different.",
+      "medications": "Amlodipine 5mg daily; Losartan 50mg daily; Tamsulosin 0.4mg daily; Allopurinol 300mg daily; Potassium citrate 15mEq BID",
+      "allergies": "Sulfonamides, Colchicine",
+      "family": "My father and brother both had kidney stones like me, and my dad had high blood pressure. Nothing with jaw or mouth problems that I know of.",
+      "social": "I'm an electrician, still working full time. Been married 32 years. I quit smoking about 13 years ago after smoking for about 10 years. I have a beer or two with dinner most nights."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "Inspection of submandibular area",
+      "Palpation of submandibular glands bilaterally",
+      "Palpation of cervical lymph nodes",
+      "Intraoral examination of floor of mouth",
+      "Palpation of Wharton's duct openings",
+      "Bimanual palpation of submandibular gland",
+      "Assessment of trismus/mouth opening",
+      "Inspection of oral mucosa and tongue",
+      "Palpation for submandibular masses",
+      "Assessment of salivary flow"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Submandibular Sialolithiasis with Secondary Sialadenitis. Document specifically what you observe."
+      "Inspection of submandibular area": "Visible swelling and erythema of right submandibular region, more prominent than left side",
+      "Palpation of submandibular glands bilaterally": "Right submandibular gland markedly enlarged, firm, and tender; left gland normal size and non-tender",
+      "Palpation of cervical lymph nodes": "Right submandibular and upper cervical lymph nodes enlarged and tender",
+      "Intraoral examination of floor of mouth": "Right floor of mouth appears swollen and erythematous compared to left",
+      "Palpation of Wharton's duct openings": "Right Wharton's duct opening appears inflamed and indurated, minimal purulent discharge expressed with pressure",
+      "Bimanual palpation of submandibular gland": "Hard, mobile mass palpable within right submandibular gland consistent with stone",
+      "Assessment of trismus/mouth opening": "Mild limitation in mouth opening due to pain and swelling, approximately 35mm interincisal distance",
+      "Inspection of oral mucosa and tongue": "Right side of tongue and floor of mouth edematous, no obvious lesions or ulcerations",
+      "Palpation for submandibular masses": "Firm, non-fluctuant swelling of right submandibular gland, no other masses palpated",
+      "Assessment of salivary flow": "Decreased salivary flow from right submandibular duct, mild purulent discharge with gland massage"
     },
     "ddxTargets": [
-        "Submandibular Sialolithiasis with Secondary Sialadenitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Submandibular Sialolithiasis with Secondary Sialadenitis (correct diagnosis)",
+      "Bacterial sialadenitis without stone",
+      "Submandibular space infection (Ludwig's angina)",
+      "Parotid gland pathology",
+      "Cervical lymphadenitis",
+      "Dental abscess with facial swelling",
+      "Submandibular tumor or mass"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Submandibular Sialolithiasis with Secondary Sialadenitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Submandibular Sialolithiasis with Secondary Sialadenitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Submandibular Sialolithiasis with Secondary Sialadenitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'jaw pain' and immediately think dental pathology, missing the classic meal-related pattern and glandular involvement of sialolithiasis",
+      "prematureClosure": "Fever and facial swelling might lead to quick assumption of simple cellulitis or dental abscess without considering salivary gland pathology",
+      "availabilityBias": "Dental problems are much more commonly seen than sialolithiasis, leading to overestimation of dental causes of jaw pain and swelling"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Frank Castellano's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Submandibular Sialolithiasis with Secondary Sialadenitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some key differentials for unilateral facial pain and swelling. As you interview Mr. Castellano, pay particular attention to the temporal relationship between his symptoms and specific activities. What questions might help you distinguish between dental, infectious, and glandular causes?",
+      "phase5": "Excellent work gathering the history and physical findings. The meal-related pattern and your physical exam findings are quite telling. How do the bimanual palpation findings and the intraoral examination help narrow your differential? What specific anatomical structure do you think is involved?",
+      "finalDebrief": "This case demonstrates the classic presentation of submandibular sialolithiasis - the pathognomonic meal-related pain and swelling, the palpable stone, and secondary bacterial sialadenitis. Notice how the initial presentation could easily be mistaken for dental pathology or simple facial cellulitis. The key was recognizing the relationship to eating and the specific glandular involvement through targeted physical examination."
     }
-}
+  }
 };

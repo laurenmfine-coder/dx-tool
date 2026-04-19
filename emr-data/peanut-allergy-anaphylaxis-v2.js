@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Oliver Thompson",
-  "patientHPI": "My son was playing at his friend's house and ate some crackers with peanut butter, and within minutes his face started breaking out in red bumps around his mouth. He threw up twice and became really fussy and upset, so the other parent gave him some children's Benadryl before we rushed him here.",
+      "patientHPI": "My son was playing at his friend's house and ate some crackers with peanut butter, and within minutes his face started breaking out in red bumps around his mouth. He threw up twice and became really fussy and upset, so the other parent gave him some children's Benadryl before we rushed him here.",
       "dob": "08/08/2023",
       "age": "3",
       "sex": "Male",
@@ -1083,93 +1083,99 @@ window.EMR_DATA = {
       "Eczema history",
       "Mild eczema as infant — resolved by age 2"
     ]
-  ]
-,"references":[
-  {
-    "id": "NIAID-FA-2010",
-    "title": "Guidelines for diagnosis and management of food allergy in the US",
-    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2010,
-    "doi": "10.1016/j.jaci.2010.10.008",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
-    "openAccess": true,
-    "validates": [
-      "IgE-mediated food allergy criteria",
-      "Component testing (Ara h 2)",
-      "OFC as gold standard"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "NIAID-FA-2010",
+      "title": "Guidelines for diagnosis and management of food allergy in the US",
+      "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2010,
+      "doi": "10.1016/j.jaci.2010.10.008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+      "openAccess": true,
+      "validates": [
+        "IgE-mediated food allergy criteria",
+        "Component testing (Ara h 2)",
+        "OFC as gold standard"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Oliver Thompson is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Oliver is crying intermittently and clinging to his mother, clearly uncomfortable with lingering hives and nausea. His parents are anxious but cooperative, providing detailed information about the reaction timeline and expressing concern about whether this was truly a peanut allergy since he's eaten peanut butter before without problems.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what Oliver ate before the reaction started?",
+      "How much time passed between eating and the first symptoms appearing?",
+      "What were the very first symptoms you noticed?",
+      "Has Oliver ever eaten peanut butter or peanuts before today?",
+      "Can you describe the hives - where did they appear first and how did they spread?",
+      "How many times did he vomit and what did it look like?",
+      "Did you notice any breathing problems, wheezing, or changes in his voice?",
+      "What did you do when you first noticed the symptoms?",
+      "Has Oliver ever had any reaction like this before to any food?",
+      "Does anyone in your family have food allergies or severe allergic reactions?",
+      "What medications have you given Oliver today?",
+      "How has he been acting since the reaction started - more fussy, sleepy, or normal?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Diphenhydramine; Epinephrine.'",
-        "allergies": "'My allergies: Peanut.'",
-        "family": "Father: seasonal allergies  Mother: eczema (resolved)  No known food allergies in family",
-        "social": "Living: Suburban home, both parents present  Diet: Previously eating peanut butter without issue \u2014 parents unsure if today's reaction is truly peanut  Daycare: Home with nanny  Eczema history: Mild eczema as infant \u2014 resolved by age 2"
+      "default": "I'm not sure about that - this all happened so fast and we're still pretty shaken up about it",
+      "onset": "It was really quick - maybe 10 to 15 minutes after he finished eating the crackers at our friend's house. The hives around his mouth appeared first, then he threw up",
+      "character": "He got these raised red bumps around his mouth first, then on his arms and chest. He became really fussy and clingy, more than his usual tantrums",
+      "location": "The hives started right around his mouth and lips, then spread to his arms, chest, and back. His face got a little puffy too",
+      "severity": "This was definitely scary - maybe an 8 out of 10 for how worried we were. He was miserable and we'd never seen anything like this before",
+      "aggravating": "He seemed to get more upset when we tried to wipe his face or when he moved around a lot. The hives looked worse when he was crying",
+      "relieving": "Holding him seemed to calm him down a little, but the hives didn't really go away until we got some medicine",
+      "associated": "He threw up twice, was really fussy and clingy, and seemed a bit tired. His breathing seemed okay though, thank goodness",
+      "denies": "No wheezing or trouble breathing that we could tell. No swelling of his lips or tongue. He didn't seem dizzy or pass out",
+      "history": "This has never happened before. He's had peanut butter sandwiches at home without any problems, which is why we're so confused",
+      "medications": "Diphenhydramine; Epinephrine",
+      "allergies": "Peanut",
+      "family": "My husband has seasonal allergies and I had eczema when I was younger. But nobody in our families has food allergies that we know of",
+      "social": "He stays home with our nanny during the day. He eats pretty much everything - we've never had to avoid any foods before today"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and level of distress",
+      "Examination of skin for urticaria and distribution",
+      "Assessment of facial and periorbital edema",
+      "Examination of oropharynx and tongue",
+      "Auscultation of lungs for wheezing or stridor",
+      "Cardiac examination for tachycardia",
+      "Abdominal examination for tenderness",
+      "Assessment of capillary refill and perfusion",
+      "Vital signs including oxygen saturation",
+      "Neurologic assessment for alertness and irritability"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and level of distress": "Fussy 3-year-old male, intermittently crying, clinging to mother but consolable, appears uncomfortable but not in severe distress",
+      "Examination of skin for urticaria and distribution": "Multiple erythematous, raised wheals on face, arms, chest, and back; perioral distribution most prominent; individual lesions 0.5-2cm in diameter",
+      "Assessment of facial and periorbital edema": "Mild periorbital puffiness, no significant lip or tongue swelling",
+      "Examination of oropharynx and tongue": "Oropharynx clear, tongue normal size and color, no obvious swelling or erythema",
+      "Auscultation of lungs for wheezing or stridor": "Clear breath sounds bilaterally, no wheezing, stridor, or respiratory distress",
+      "Cardiac examination for tachycardia": "Tachycardic but regular rhythm, no murmurs, good heart sounds",
+      "Abdominal examination for tenderness": "Soft, non-tender, no organomegaly, normal bowel sounds",
+      "Assessment of capillary refill and perfusion": "Capillary refill <2 seconds, warm extremities, good peripheral perfusion",
+      "Vital signs including oxygen saturation": "HR 148, Temp 37.0°C, SpO2 95% on room air, BP age-appropriate",
+      "Neurologic assessment for alertness and irritability": "Alert and interactive when not crying, appropriate for age, no focal neurologic deficits"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "IgE-mediated food allergy to peanut (correct diagnosis)",
+      "IgE-mediated food allergy to other ingredient in crackers",
+      "Viral gastroenteritis with coincidental urticaria",
+      "Anaphylaxis with early presentation",
+      "Angioedema with airway compromise risk",
+      "Contact dermatitis from topical exposure",
+      "Drug reaction or medication allergy"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'peanut allergy' from chief complaint without considering other ingredients in crackers or alternative diagnoses for urticaria and vomiting",
+      "prematureClosure": "May conclude food allergy too quickly without adequate assessment for signs of anaphylaxis or consideration of viral illness with coincidental hives",
+      "availabilityBias": "Peanut allergy is commonly discussed in pediatrics, but other allergens in processed foods or non-allergic causes of urticaria may be overlooked"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Oliver Thompson: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview the family, consider what key features would help you distinguish between a localized allergic reaction versus early anaphylaxis. What historical details about timing, progression, and associated symptoms will be most important? Also think about what else besides peanuts could cause this presentation.",
+      "phase5": "Now that you've gathered your history and exam findings, let's think through this systematically. You found urticaria and GI symptoms but no respiratory or cardiovascular compromise. How does this help narrow your differential? What features make you more or less concerned about anaphylaxis versus a localized food allergy?",
+      "finalDebrief": "This case illustrates classic IgE-mediated food allergy with rapid onset after ingestion. The key teaching points are recognizing the difference between localized allergic reaction and anaphylaxis, understanding that prior tolerance doesn't rule out new allergies, and considering all ingredients in processed foods. The absence of respiratory or cardiovascular symptoms helped distinguish this from anaphylaxis, but the rapid onset and typical urticarial pattern confirmed IgE-mediated allergy."
     }
-}
+  }
 };

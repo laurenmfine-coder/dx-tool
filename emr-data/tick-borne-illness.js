@@ -323,75 +323,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Daniel Marsh appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Daniel appears mildly fatigued but is cooperative and detailed in his responses. He's somewhat concerned about his persistent symptoms but maintains a calm demeanor, readily volunteering information about his recent hiking trip and tick exposures.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did fever/sepsis start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Can you tell me more about your recent hiking trip and any tick exposures?",
+      "When exactly did your fever and body aches start in relation to your trip?",
+      "What is your temperature running and have you measured it at home?",
+      "Can you describe the body aches - where do you feel them most?",
+      "Have you had any headaches, and if so, how severe?",
+      "Have you noticed any rash anywhere on your body?",
+      "Any nausea, vomiting, or loss of appetite?",
+      "Have you felt more tired than usual or had any confusion?",
+      "Any muscle pain or joint aches beyond the general body aches?",
+      "Have you taken any medications for these symptoms?",
+      "Do you remember what the ticks looked like or how long they were attached?",
+      "Have you had any similar illness after outdoor activities before?",
+      "Any night sweats or chills with your fever?"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I just got back from an amazing week-long hiking trip on the Appalachian Trail i.'",
-      "character": "'It's fever/sepsis — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Ehrlichiosis.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Lisinopril 10mg daily; Cetirizine 10mg daily PRN.'",
-      "allergies": "'My allergies are NKDA.'",
-      "family": "Mother: HTN, hypothyroidism, alive at 72  Father: CAD (CABG at 65), HTN, alive at 74  Brother: Healthy, age 43",
-      "social": "Occupation: Environmental engineer — field work includes outdoor site assessments  Marital: Married, 2 children (ages 12, 9)  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you be more specific about what you want to know?",
+      "onset": "The fever and body aches started about 10 days after I got back from my hiking trip in North Carolina. It's been going on for about a week now, getting progressively worse.",
+      "character": "It's this deep, aching pain all over my body, like I've been hit by a truck. The fever comes and goes but makes me feel really wiped out.",
+      "location": "The aches are pretty much everywhere - my back, legs, arms, even my neck feels stiff. No particular area hurts more than others.",
+      "severity": "I'd say the body aches are about a 6 out of 10, and the fatigue is really what's getting to me. I can barely get through a workday.",
+      "aggravating": "Moving around seems to make the aches worse, and I feel terrible when my fever spikes in the evenings.",
+      "relieving": "I've been taking ibuprofen which helps a little with the aches, and rest seems to help somewhat, but nothing really makes it go away.",
+      "associated": "I've had some headaches, loss of appetite, and I just feel incredibly tired. Sometimes I get chills when my fever goes up.",
+      "denies": "No rash that I can see, no cough, no shortness of breath, no abdominal pain, no diarrhea or urinary symptoms.",
+      "history": "I've never had anything like this before. Usually when I go camping I might get a few bug bites but nothing that made me sick.",
+      "medications": "Lisinopril 10mg daily; Cetirizine 10mg daily PRN",
+      "allergies": "NKDA",
+      "family": "My parents both have high blood pressure like me, and my dad had heart surgery, but nobody in my family has had anything like this.",
+      "social": "I'm an environmental engineer so I do spend time outdoors for work, but this hiking trip was more extensive than usual. I'm married with two kids, don't smoke, and just have a couple drinks on weekends."
     },
     "examManeuvers": [
-      "General appearance and toxicity",
-      "Vital signs with temperature",
-      "Skin for rash, lesions, or signs of infection",
-      "Lymph node palpation",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
+      "General appearance and mental status",
+      "Lymph node examination",
+      "Skin examination for rash or eschar",
       "Abdominal examination",
-      "Source-specific examination"
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Neurological examination",
+      "Musculoskeletal examination",
+      "HEENT examination"
     ],
     "examFindings": {
-      "General appearance and toxicity": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Vital signs with temperature": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Lymph node palpation": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe.",
-      "Source-specific examination": "Clinical finding consistent with Ehrlichiosis. Document specifically what you observe."
+      "General appearance and mental status": "Alert and oriented, appears mildly ill and fatigued but not in acute distress",
+      "Lymph node examination": "Mild bilateral cervical lymphadenopathy, nodes are mobile and non-tender",
+      "Skin examination for rash or eschar": "No visible rash or eschar identified, several small healing tick bite marks on lower extremities",
+      "Abdominal examination": "Soft, non-distended, mild splenomegaly palpable 2cm below left costal margin, no hepatomegaly",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no adventitious sounds",
+      "Neurological examination": "Cranial nerves intact, no focal deficits, mild neck stiffness without true meningeal signs",
+      "Musculoskeletal examination": "Generalized muscle tenderness without joint swelling or erythema",
+      "HEENT examination": "Normocephalic, atraumatic, pupils equal and reactive, no conjunctival injection, throat without erythema"
     },
     "ddxTargets": [
-      "Ehrlichiosis (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Ehrlichiosis (Ehrlichia chaffeensis — Human Monocytic Ehrlichiosis) (correct diagnosis)",
+      "Rocky Mountain Spotted Fever",
+      "Anaplasmosis",
+      "Bacterial meningitis",
+      "Sepsis from bacterial source",
+      "Viral syndrome (EBV, CMV)",
+      "Influenza"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ehrlichiosis, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Ehrlichiosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Ehrlichiosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on common viral syndrome given fever and myalgias without considering tick-borne illness despite clear exposure history",
+      "prematureClosure": "Risk of stopping at 'flu-like illness' without pursuing the specific tick exposure and outdoor activity timeline",
+      "availabilityBias": "May focus on more commonly seen viral illnesses rather than less common tick-borne diseases like ehrlichiosis"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Daniel Marsh's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Ehrlichiosis (Ehrlichia chaffeensis — Human Monocytic Ehrlichiosis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "What key epidemiological factors should you explore given this patient's presentation of fever and myalgias? Think about his recent activities and what exposures might be relevant to narrow your differential diagnosis.",
+      "phase5": "Now that you've identified tick exposure and found splenomegaly with lymphadenopathy, how does this change your thinking about tick-borne illnesses? What distinguishes ehrlichiosis from other tick-borne diseases in this region?",
+      "finalDebrief": "This case highlights the importance of detailed exposure history in febrile patients. Ehrlichiosis often presents as a non-specific viral-like syndrome, but the combination of tick exposure, splenomegaly, and the geographic/seasonal context should raise suspicion. How did your differential evolve as you gathered more information about his outdoor activities?"
     }
   }
 };

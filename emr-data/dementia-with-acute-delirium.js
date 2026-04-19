@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "George Alton Mitchell",
-  "patientHPI": "I'm here with my daughter because she's worried about me - I've been more confused lately and forgetting things more than usual. She has to help me with a lot of things now like getting dressed and taking my medicines, and sometimes I don't remember where I am or what day it is, which is scary for both of us.",
+    "patientHPI": "I'm here with my daughter because she's worried about me - I've been more confused lately and forgetting things more than usual. She has to help me with a lot of things now like getting dressed and taking my medicines, and sometimes I don't remember where I am or what day it is, which is scary for both of us.",
     "dob": "03/28/1940",
     "age": 84,
     "sex": "Male",
@@ -234,39 +234,147 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "9.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.6", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "39.6", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.6",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.2", "unit": "%", "range": "<5.7 normal", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.2",
+              "unit": "%",
+              "range": "<5.7 normal",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Yellow", "unit": "", "range": "Yellow", "flag": "" },
-            { "test": "Clarity", "value": "Clear", "unit": "", "range": "Clear", "flag": "" },
-            { "test": "Specific Gravity", "value": "1.020", "unit": "", "range": "1.005-1.030", "flag": "" },
-            { "test": "pH", "value": "6.0", "unit": "", "range": "5.0-8.0", "flag": "" },
-            { "test": "Leukocyte Esterase", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Nitrite", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "WBC (urine)", "value": "2-5", "unit": "/HPF", "range": "0-5", "flag": "" }
+            {
+              "test": "Color",
+              "value": "Yellow",
+              "unit": "",
+              "range": "Yellow",
+              "flag": ""
+            },
+            {
+              "test": "Clarity",
+              "value": "Clear",
+              "unit": "",
+              "range": "Clear",
+              "flag": ""
+            },
+            {
+              "test": "Specific Gravity",
+              "value": "1.020",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            },
+            {
+              "test": "pH",
+              "value": "6.0",
+              "unit": "",
+              "range": "5.0-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Leukocyte Esterase",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Nitrite",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "WBC (urine)",
+              "value": "2-5",
+              "unit": "/HPF",
+              "range": "0-5",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -327,15 +435,42 @@ window.EMR_DATA = {
     "Sister: Healthy, deceased at 82 (accidental fall)"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal service supervisor — 35 years"],
-    ["Marital", "Widowed — wife deceased 2016 (breast cancer)"],
-    ["Tobacco", "Former pipe smoker — quit 1990"],
-    ["Alcohol", "Denies current; social drinker in past"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited — walks inside home with rolling walker; seated exercises with home PT 2x/week"],
-    ["Housing", "Lives with daughter Sandra in her home; own bedroom on first floor; 24/7 supervision"],
-    ["Safety", "Uses rolling walker; grab bars installed; bed rails; medical alert not reliable — patient removes bracelet; daughter is primary supervisor; wanders at night occasionally"],
-    ["Advance Directive", "Yes — Durable Power of Attorney: daughter Sandra Mitchell; DNR/DNI per family discussion"]
+    [
+      "Occupation",
+      "Retired postal service supervisor — 35 years"
+    ],
+    [
+      "Marital",
+      "Widowed — wife deceased 2016 (breast cancer)"
+    ],
+    [
+      "Tobacco",
+      "Former pipe smoker — quit 1990"
+    ],
+    [
+      "Alcohol",
+      "Denies current; social drinker in past"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited — walks inside home with rolling walker; seated exercises with home PT 2x/week"
+    ],
+    [
+      "Housing",
+      "Lives with daughter Sandra in her home; own bedroom on first floor; 24/7 supervision"
+    ],
+    [
+      "Safety",
+      "Uses rolling walker; grab bars installed; bed rails; medical alert not reliable — patient removes bracelet; daughter is primary supervisor; wanders at night occasionally"
+    ],
+    [
+      "Advance Directive",
+      "Yes — Durable Power of Attorney: daughter Sandra Mitchell; DNR/DNI per family discussion"
+    ]
   ],
   "meta": {
     "caseId": "dementia-with-acute-delirium",
@@ -346,75 +481,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "George Alton Mitchell is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "George appears anxious and confused, frequently looking to his daughter for reassurance and clarification. He demonstrates fluctuating alertness, sometimes engaging appropriately but other times appearing distracted or disoriented. He is cooperative but clearly distressed by his worsening cognitive symptoms and increasing dependence on others.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about how your confusion has changed recently?",
+      "Have you noticed any problems with urination - burning, frequency, or urgency?",
+      "Are you having any trouble sleeping or changes in your sleep pattern?",
+      "Have you had any fever, chills, or feeling unwell recently?",
+      "Are you eating and drinking normally?",
+      "Have you had any falls or accidents lately?",
+      "Are you taking all your medications as prescribed?",
+      "Have you had any hallucinations or seeing things that aren't there?",
+      "How is your appetite and have you lost any weight recently?",
+      "Are you having any abdominal pain or changes in bowel movements?",
+      "Have you had any recent infections or illnesses?",
+      "Do you know what day it is today and where you are right now?",
+      "Have there been any recent changes to your medications or living situation?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here with my daughter because she's worried about me - I've been more confus.'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Dementia with Acute Delirium.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Donepezil 10mg daily; Memantine 10mg BID; Tamsulosin 0.4mg daily; Lisinopril 10mg daily; Hydrochlorothiazide 12.5mg daily; Metformin 500mg BID; Docusate Sodium 100mg BID; Polyethylene Glycol 3350 17g daily.'",
-        "allergies": "'My allergies are Fluoroquinolones (Ciprofloxacin), Oxycodone.'",
-        "family": "Mother: Alzheimer disease (onset age 78), deceased at 88  Father: Stroke, deceased at 72  Brother: Mild cognitive impairment, alive at 80",
-        "social": "Occupation: Retired postal service supervisor \u2014 35 years  Marital: Widowed \u2014 wife deceased 2016 (breast cancer)  Tobacco: Former pipe smoker \u2014 quit 1990  Alcohol: Denies current; social drinker in past  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble understanding... could you ask me that differently? My daughter might know better than I do.",
+      "onset": "My daughter says it's been about a week now that I've been much more confused than usual. I was doing okay with my memory problems, but then suddenly everything got much worse.",
+      "character": "It's like my mind is in a fog. Sometimes I don't know where I am or what time it is. I get mixed up about things that used to be automatic, like getting dressed.",
+      "location": "It's all in my head - the confusion, the foggy feeling. Sometimes I feel like I'm not really here, like I'm watching everything from far away.",
+      "severity": "I'd say it's about an 8 out of 10 for how much it's affecting me. I can't do basic things anymore without help, and that's new even for me.",
+      "aggravating": "It seems worse at night, and when there's a lot of noise or activity around me. When I'm tired, everything gets more confusing.",
+      "relieving": "Quiet environments help a little, and when my daughter is here to remind me of things. But nothing really makes the confusion go away completely.",
+      "associated": "I've been having some trouble when I urinate - it burns a little and I feel like I need to go more often. I've also been more restless and not sleeping well.",
+      "denies": "No chest pain, no shortness of breath, no headaches. I don't think I've had a fever, but I'm not really sure.",
+      "history": "I've had urinary infections before because of my prostate problems. My confusion has been getting worse gradually over the past few years, but never this sudden and severe.",
+      "medications": "Donepezil 10mg daily; Memantine 10mg BID; Tamsulosin 0.4mg daily; Lisinopril 10mg daily; Hydrochlorothiazide 12.5mg daily; Metformin 500mg BID; Docusate Sodium 100mg BID; Polyethylene Glycol 3350 17g daily",
+      "allergies": "Fluoroquinolones (Ciprofloxacin), Oxycodone",
+      "family": "My mother had Alzheimer's disease too, started when she was about 78. My brother has some memory problems but not as bad as mine. My father had a stroke.",
+      "social": "I worked for the postal service for 35 years as a supervisor. My wife passed away in 2016 from breast cancer. I used to smoke a pipe but quit in 1990. I don't drink alcohol anymore."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Mini-Mental State Exam (MMSE) or cognitive assessment",
+      "Attention and concentration testing (digit span, days of week backward)",
+      "Level of consciousness and alertness assessment",
+      "Suprapubic tenderness and bladder percussion",
+      "Costovertebral angle tenderness",
+      "Neurological examination including focal deficits",
+      "Gait and balance assessment",
+      "Vital signs including orthostatic measurements",
+      "General appearance and hygiene assessment",
+      "Speech and language evaluation"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Dementia with Acute Delirium. Document specifically what you observe."
+      "Mini-Mental State Exam (MMSE) or cognitive assessment": "MMSE score 16/30, significant impairment in orientation (knows name but unsure of date, location), attention severely impaired, difficulty with three-word recall",
+      "Attention and concentration testing (digit span, days of week backward)": "Unable to recite days of week backward, can only repeat 3 digits forward and 0 backward, easily distractible during testing",
+      "Level of consciousness and alertness assessment": "Fluctuating alertness, sometimes attentive and responsive, other times appears to drift off or stare blankly",
+      "Suprapubic tenderness and bladder percussion": "Mild suprapubic tenderness on palpation, bladder slightly distended but not significantly enlarged",
+      "Costovertebral angle tenderness": "No CVA tenderness bilaterally, no flank pain or tenderness",
+      "Neurological examination including focal deficits": "No focal neurological deficits, cranial nerves intact, reflexes symmetrically diminished consistent with age",
+      "Gait and balance assessment": "Unsteady gait, requires assistance for safety, increased fall risk, slow and cautious movements",
+      "Vital signs including orthostatic measurements": "No significant orthostatic changes, BP 138/74 sitting and 132/70 standing, no dizziness",
+      "General appearance and hygiene assessment": "Appears disheveled, clothing mismatched, poor grooming suggesting functional decline, appears older than stated age",
+      "Speech and language evaluation": "Speech clear but sometimes tangential, word-finding difficulties, occasionally loses train of thought mid-sentence"
     },
     "ddxTargets": [
-        "Dementia with Acute Delirium (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Dementia with Acute Delirium (UTI Precipitant) (correct diagnosis)",
+      "Urinary Tract Infection with systemic effects",
+      "Medication-induced delirium or polypharmacy effects",
+      "Stroke or transient ischemic attack",
+      "Sepsis or systemic infection",
+      "Depression with pseudodementia",
+      "Normal progression of Alzheimer's disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Dementia with Acute Delirium, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Dementia with Acute Delirium, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Dementia with Acute Delirium based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known Alzheimer's diagnosis and attributing acute changes to normal disease progression rather than considering reversible causes like UTI-induced delirium",
+      "prematureClosure": "Risk of stopping evaluation after confirming dementia without investigating the acute precipitant, missing the treatable UTI component",
+      "availabilityBias": "Recent exposure to dementia cases might lead to over-emphasizing psychiatric causes while under-investigating infectious precipitants in elderly patients"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed George Alton Mitchell's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Dementia with Acute Delirium (UTI Precipitant). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some concerning possibilities in your differential. In an elderly patient with known dementia presenting with acute worsening, what reversible causes should you specifically investigate? How might you differentiate between chronic dementia progression and acute delirium?",
+      "phase5": "Now that you've gathered your history and physical exam findings, you have evidence of both chronic cognitive impairment and acute changes. What specific clues point toward a precipitating factor? How do the urinary symptoms and fluctuating mental status guide your diagnostic thinking?",
+      "finalDebrief": "This case highlights the importance of recognizing delirium superimposed on dementia. The key was identifying that acute worsening in a dementia patient often has a reversible precipitant - here, a UTI. Notice how the fluctuating consciousness, urinary symptoms, and acute functional decline pointed away from simple dementia progression toward delirium with an infectious trigger."
     }
-}
+  }
 };

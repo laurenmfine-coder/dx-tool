@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Elijah Crawford",
-  "patientHPI": "My son's skin has been really bad lately and now he has a fever too. His usual red, itchy patches are much worse and some spots are oozing this yellowish stuff, especially in his elbow creases and around his neck. I've been trying so hard to keep up with all his creams but nothing seems to be helping anymore.",
+      "patientHPI": "My son's skin has been really bad lately and now he has a fever too. His usual red, itchy patches are much worse and some spots are oozing this yellowish stuff, especially in his elbow creases and around his neck. I've been trying so hard to keep up with all his creams but nothing seems to be helping anymore.",
       "dob": "07/06/2022",
       "age": "4",
       "sex": "Male",
@@ -1307,95 +1307,100 @@ window.EMR_DATA = {
       "Prior treatment",
       "Mother reports trying \"every cream\" — adherence inconsistent due to cost and complexity"
     ]
-  ]
-,"references":[
-  {
-    "id": "AAD-AD-2023",
-    "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
-    "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
-    "journal": "J Am Acad Dermatol",
-    "year": 2023,
-    "doi": "10.1016/j.jaad.2022.12.029",
-    "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCORAD scoring",
-      "TCS potency ladder",
-      "Wet wrap therapy",
-      "Simplified regimens",
-      "Eczema herpeticum as emergency"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "AAD-AD-2023",
+      "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
+      "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
+      "journal": "J Am Acad Dermatol",
+      "year": 2023,
+      "doi": "10.1016/j.jaad.2022.12.029",
+      "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCORAD scoring",
+        "TCS potency ladder",
+        "Wet wrap therapy",
+        "Simplified regimens",
+        "Eczema herpeticum as emergency"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Elijah Crawford is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Elijah is irritable, uncomfortable, and frequently scratching at his skin lesions. His mother appears exhausted and stressed, speaking for him most of the time while trying to keep his hands away from the infected areas. Both seem distressed by the worsening condition and new fever.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did you first notice the fever?",
+      "How has the skin rash changed over the past few days?",
+      "Are the honey-crusted areas new or getting worse?",
+      "Has he been more irritable or having trouble sleeping?",
+      "What treatments have you been using at home?",
+      "Has he been around other sick children at daycare?",
+      "Are you able to keep up with his skin care routine?",
+      "Has he been eating and drinking normally?",
+      "Any new exposures at home or daycare?",
+      "How bad is his scratching - is he breaking the skin?",
+      "Have you noticed any red streaking from the infected areas?",
+      "Is the fever responding to any medications?",
+      "How long have the crusty, weeping areas been present?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Cephalexin; Mupirocin 2%; Hydrocortisone 2.5%; Cetirizine.'",
-        "allergies": "'My allergies: Egg, Milk.'",
-        "family": "Mother: asthma, eczema  Father: allergic rhinitis  Sister (7): peanut allergy",
-        "social": "Living: Public housing \u2014 roach and mold exposure  Environmental: Heavy dust mite, cockroach, and mold exposure in apartment  Childcare: Daycare \u2014 frequent skin infections from other children  Family stress: Single mother, 2 jobs, difficulty maintaining complex skin regimen  Sleep: Scratches through the night \u2014 mother sleeps next to him to hold his hands"
+      "default": "His skin is just so itchy and now he feels hot. I don't know what else to tell you.",
+      "onset": "The fever started yesterday morning, but his skin has been getting worse for about a week. The crusty, weepy spots started 3-4 days ago.",
+      "character": "His usual red, dry patches turned into these wet, honey-colored crusty areas that keep spreading. The fever is continuous.",
+      "location": "The worst crusty areas are in his elbow creases and around his neck, but the regular eczema covers most of his body.",
+      "severity": "His itching is a 10 out of 10 - he can't stop scratching. The fever makes him feel miserable, maybe 7 out of 10 for how sick he seems.",
+      "aggravating": "The scratching makes everything worse. The heat in our apartment, him being around other kids at daycare, and when I can't do his skin routine properly.",
+      "relieving": "The antibiotic cream helps a little on the crusty spots. Cool baths used to help but not anymore. Nothing really stops the itching.",
+      "associated": "He's been more cranky, not sleeping well, and his appetite is down since the fever started. No vomiting or diarrhea.",
+      "denies": "No trouble breathing, no spreading red lines from the sores, no swollen glands that I can feel, no other kids in daycare are sick right now.",
+      "history": "He's had eczema since he was a baby, and this is the third time it's gotten infected like this. Usually happens when he scratches too much or is exposed to his food allergies.",
+      "medications": "Cephalexin; Mupirocin 2%; Hydrocortisone 2.5%; Cetirizine",
+      "allergies": "Egg, Milk",
+      "family": "I have asthma and eczema too, his father has bad allergies, and his sister has a peanut allergy. Allergies run in both sides of the family.",
+      "social": "I work two jobs so it's hard to keep up with his skin routine. We live in public housing with roach and mold problems. He goes to daycare where kids share everything."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and vital signs",
+      "Skin examination of affected areas",
+      "Assessment of body surface area involvement",
+      "Examination of honey-crusted lesions",
+      "Palpation for lymphadenopathy",
+      "Assessment for cellulitis signs",
+      "Examination of unaffected skin",
+      "Evaluation of excoriation severity",
+      "Assessment for signs of systemic infection"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs": "Ill-appearing, irritable child, frequently scratching. HR 128, Temp 38.2°C, appears uncomfortable but not toxic.",
+      "Skin examination of affected areas": "Diffuse excoriated eczematous plaques with lichenification, erythema, and scaling covering approximately 60% body surface area.",
+      "Assessment of body surface area involvement": "Extensive involvement of bilateral antecubital and popliteal fossae, neck, wrists, and scattered patches on trunk and extremities.",
+      "Examination of honey-crusted lesions": "Thick honey-colored crusted lesions with surrounding erythema and purulent discharge, most prominent in antecubital fossae and neck.",
+      "Palpation for lymphadenopathy": "Bilateral anterior cervical lymphadenopathy, nodes approximately 1.5cm, mobile and tender.",
+      "Assessment for cellulitis signs": "Localized warmth and tenderness around crusted areas, no obvious spreading erythema or red streaking.",
+      "Examination of unaffected skin": "Areas of normal skin show mild xerosis, no active lesions in typically spared areas like central face.",
+      "Evaluation of excoriation severity": "Multiple linear excoriations with some bleeding, evidence of chronic scratching with post-inflammatory hyperpigmentation.",
+      "Assessment for signs of systemic infection": "Fever present, mild irritability, no signs of sepsis or toxic appearance, mucous membranes moist."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Impetiginized eczema (correct diagnosis)",
+      "Secondary bacterial cellulitis",
+      "Contact dermatitis with secondary infection",
+      "Staphylococcal scalded skin syndrome",
+      "Kawasaki disease",
+      "Seborrheic dermatitis",
+      "Scabies with secondary infection"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'eczema flare' and missing the significant bacterial superinfection requiring systemic antibiotic therapy",
+      "prematureClosure": "May stop at eczema diagnosis without fully evaluating the impetiginization and need for culture-directed antibiotic therapy",
+      "availabilityBias": "Recent cases of simple eczema flares may lead to underestimating the severity of bacterial superinfection"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Elijah Crawford: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You're considering both impetiginized eczema and cellulitis. What specific historical features and physical exam findings would help you differentiate between a localized bacterial superinfection versus spreading cellulitis? What are the implications for treatment?",
+      "phase5": "Now that you've identified the honey-crusted lesions and fever in the context of chronic eczema, how does this change your management approach? What are the key factors contributing to recurrent bacterial superinfection in this patient?",
+      "finalDebrief": "This case illustrates impetiginized eczema in a high-risk patient with multiple predisposing factors. How did the honey-crusted lesions, fever, and social history guide your diagnosis? What comprehensive management strategies address both the acute infection and underlying risk factors for recurrence?"
     }
-}
+  }
 };

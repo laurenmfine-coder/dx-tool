@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jasmine Thompson",
-  "patientHPI": "I don't really remember what happened - someone said they found me outside and I was really cold. I feel confused and everything seems foggy, and I can't stop shivering even though they've been warming me up.",
+    "patientHPI": "I don't really remember what happened - someone said they found me outside and I was really cold. I feel confused and everything seems foggy, and I can't stop shivering even though they've been warming me up.",
     "dob": "06/06/1964",
     "age": "62",
     "sex": "Female",
@@ -342,75 +342,76 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Jasmine Thompson appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Jasmine appears confused and disoriented, speaking slowly with slurred speech. She seems cooperative but has significant difficulty concentrating and remembering details. She appears frightened and grateful for warmth, frequently mentioning feeling cold despite rewarming efforts.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did ems report: 'found unresponsive in alley, ambient temp 18\u00b0f. appears homeless. slow pulse.' no specific pain reported \u2014 global obtundation start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Do you remember where you were or what you were doing before someone found you?",
+      "How long do you think you were outside in the cold?",
+      "Are you experiencing any chest pain or difficulty breathing?",
+      "Have you had anything to eat or drink in the past day or two?",
+      "When did you last use alcohol or any substances?",
+      "Do you have any medical conditions or take any medications regularly?",
+      "Have you ever experienced something like this before from cold exposure?",
+      "Are you having any numbness or tingling in your hands or feet?",
+      "Do you have a safe place to stay when you're discharged?",
+      "Have you been feeling more tired or weak than usual recently?",
+      "Do you remember feeling confused or having trouble thinking clearly before this?",
+      "Have you had any recent infections or illnesses?",
+      "Are you experiencing any nausea or vomiting?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I don't really remember what happened - someone said they found me outside and I.'",
-        "character": "'It's ems report: 'found unresponsive in alley, ambient temp 18\u00b0f. appears homeless. slow pulse.' no specific pain reported \u2014 global obtundation \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Unknown.'",
-        "allergies": "'My allergies are Unknown.'",
-        "family": "Unknown",
-        "social": "Tobacco: Unknown \u2014 nicotine-stained fingers  Alcohol: Possible \u2014 alcohol odor on breath (alcohol causes peripheral vasodilation \u2192 faster heat loss)  Drugs: Track marks suggest IV drug use (possible heroin/fentanyl \u2014 opioids impair thermoregulation)  Occupation: Unknown \u2014 appears homeless  Living: Likely unhoused"
+      "default": "I'm sorry, I'm having trouble thinking clearly right now. Everything feels foggy and I can't really remember.",
+      "onset": "I don't really know... someone said they found me this morning, but I don't remember how long I was out there. Maybe all night?",
+      "character": "I just feel so cold, even now. I can't stop shivering and everything feels slow and heavy. My thinking is all mixed up.",
+      "location": "I feel cold all over, but especially my hands and feet. They feel numb and tingly.",
+      "severity": "The cold feeling is maybe 8 out of 10. I've never felt this cold before, and I can barely think straight.",
+      "aggravating": "Being outside made it worse. I think I might have gotten wet too, but I can't remember clearly.",
+      "relieving": "The blankets here are helping a little, but I still feel cold deep inside.",
+      "associated": "I feel really confused and dizzy. I think I might have fallen because my knee hurts. I feel weak and tired.",
+      "denies": "I don't think I have chest pain, but it's hard to tell. I don't feel short of breath exactly, just slow.",
+      "history": "I've been cold before living outside, but never like this. Never felt this confused or slow.",
+      "medications": "Unknown",
+      "allergies": "Unknown",
+      "family": "I don't really have contact with my family anymore. Don't know about their medical history.",
+      "social": "I've been on the streets for about two years. I drink when I can get it, and I used to use heroin but trying to stay clean. I smoke cigarettes when I can afford them."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Core temperature measurement",
+      "Cardiovascular exam including heart rate and rhythm",
+      "Neurologic assessment including mental status",
+      "Respiratory exam",
+      "Skin examination for frostbite or other cold injuries",
+      "Extremity examination for peripheral perfusion",
+      "Abdominal examination",
+      "Assessment for trauma or injuries from falls"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Core temperature measurement": "Rectal temperature 82.4°F (28°C), confirming severe hypothermia",
+      "Cardiovascular exam including heart rate and rhythm": "Heart rate 34 bpm, regular but bradycardic. Blood pressure 78/50. Weak peripheral pulses due to vasoconstriction.",
+      "Neurologic assessment including mental status": "Altered mental status with confusion, slowed speech, and decreased responsiveness. Reflexes diminished.",
+      "Respiratory exam": "Respirations slow and shallow at 8-10 per minute. Lung sounds difficult to assess due to shivering.",
+      "Skin examination for frostbite or other cold injuries": "Skin pale and cold to touch. Mild frostbite noted on fingers and toes with waxy appearance.",
+      "Extremity examination for peripheral perfusion": "Extremities cold with delayed capillary refill >4 seconds. Decreased sensation in hands and feet.",
+      "Abdominal examination": "Abdomen soft, bowel sounds hypoactive. Difficult to assess due to patient condition.",
+      "Assessment for trauma or injuries from falls": "Minor abrasions on knees and hands consistent with falls. No obvious major trauma."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Severe hypothermia (correct diagnosis)",
+      "Opioid overdose",
+      "Alcohol intoxication",
+      "Sepsis with shock",
+      "Diabetic ketoacidosis",
+      "Stroke or intracranial event",
+      "Acute myocardial infarction"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on substance use history and homeless status, potentially delaying recognition of life-threatening hypothermia",
+      "prematureClosure": "May prematurely attribute altered mental status to intoxication without measuring core temperature or considering environmental exposure",
+      "availabilityBias": "May focus on more commonly seen overdose presentations rather than considering hypothermia in homeless populations during cold weather"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jasmine Thompson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several concerning findings in this unresponsive patient found in freezing weather. What key vital sign measurement is essential in this environmental context, and how might the patient's social situation and the ambient temperature of 18°F guide your initial assessment priorities?",
+      "phase5": "Now that you've identified severe hypothermia with a core temperature of 82.4°F and bradycardia, what are the immediate life-threatening complications you're most concerned about? How do the track marks and possible substance use history factor into your management priorities compared to the hypothermia?",
+      "finalDebrief": "This case highlights how environmental factors and social determinants can create life-threatening medical emergencies. The key was recognizing that the combination of altered mental status, bradycardia, and cold exposure required immediate core temperature assessment. How did your differential diagnosis evolve from considering overdose to recognizing severe hypothermia as the primary problem requiring urgent rewarming?"
     }
-}
+  }
 };

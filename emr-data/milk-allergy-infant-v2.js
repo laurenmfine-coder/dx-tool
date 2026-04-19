@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Grace Okafor",
-  "patientHPI": "My baby has been having bloody bowel movements and isn't gaining weight like she should - she used to be doing so well but now she's really fallen behind on the growth charts.",
+      "patientHPI": "My baby has been having bloody bowel movements and isn't gaining weight like she should - she used to be doing so well but now she's really fallen behind on the growth charts.",
       "dob": "08/04/2025.5",
       "age": "0.5",
       "sex": "Female",
@@ -1098,110 +1098,117 @@ window.EMR_DATA = {
       "Social",
       "First-time mother, 19 years old, limited support system"
     ]
-  ]
-,"references":[
-  {
-    "id": "NIAID-FA-2010",
-    "title": "Guidelines for diagnosis and management of food allergy in the US",
-    "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2010,
-    "doi": "10.1016/j.jaci.2010.10.008",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
-    "openAccess": true,
-    "validates": [
-      "IgE-mediated food allergy criteria",
-      "Component testing (Ara h 2)",
-      "OFC as gold standard"
-    ]
-  },
-  {
-    "id": "DRACMA-2010",
-    "title": "WAO DRACMA: cow's milk allergy diagnosis",
-    "authors": "Fiocchi A, Brozek J, Schunemann H, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2010,
-    "doi": "10.1097/WOX.0b013e3181defeb9",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3488907/",
-    "openAccess": true,
-    "validates": [
-      "CMP in breast milk",
-      "Maternal elimination counseling",
-      "Hydrolyzed vs amino acid formula",
-      "Baked milk ladder",
-      "75% tolerate baked milk by age 1"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "NIAID-FA-2010",
+      "title": "Guidelines for diagnosis and management of food allergy in the US",
+      "authors": "Boyce JA, Assa'ad A, Burks AW, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2010,
+      "doi": "10.1016/j.jaci.2010.10.008",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4241964/",
+      "openAccess": true,
+      "validates": [
+        "IgE-mediated food allergy criteria",
+        "Component testing (Ara h 2)",
+        "OFC as gold standard"
+      ]
+    },
+    {
+      "id": "DRACMA-2010",
+      "title": "WAO DRACMA: cow's milk allergy diagnosis",
+      "authors": "Fiocchi A, Brozek J, Schunemann H, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2010,
+      "doi": "10.1097/WOX.0b013e3181defeb9",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3488907/",
+      "openAccess": true,
+      "validates": [
+        "CMP in breast milk",
+        "Maternal elimination counseling",
+        "Hydrolyzed vs amino acid formula",
+        "Baked milk ladder",
+        "75% tolerate baked milk by age 1"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Grace Okafor is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Young, first-time mother appears anxious and overwhelmed, speaking rapidly about her concerns. She is forthcoming but defensive when questioned about dietary habits, insisting she 'eliminated dairy' while clearly misunderstanding the difference between her lactose intolerance and her baby's milk protein allergy.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what you mean when you say the stools are bloody?",
+      "When did you first notice blood in the stools and how has it changed?",
+      "Tell me exactly what you've eliminated from your diet since the pediatrician's recommendation",
+      "What does a typical day of eating look like for you while breastfeeding?",
+      "How has Grace's weight gain been since birth - do you have her growth chart?",
+      "Describe Grace's feeding patterns - frequency, duration, any fussiness during or after feeds?",
+      "What makes Grace's irritability better or worse throughout the day?",
+      "Has Grace had any vomiting, skin rashes, or breathing problems?",
+      "Tell me about your own lactose intolerance - when did it start and what are your symptoms?",
+      "Have you considered or tried any formula, and what concerns do you have about formula feeding?",
+      "What support do you have at home for feeding and caring for Grace?",
+      "Has anyone in your family had food allergies or similar problems as babies?",
+      "What questions or concerns do you have about Grace's condition?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Maternal dairy elimination; Iron supplement.'",
-        "allergies": "'My allergies: Cow milk protein.'",
-        "family": "Mother: lactose intolerance (different mechanism \u2014 mother confuses this with baby's allergy)",
-        "social": "Feeding: Breastfed \u2014 mother has NOT eliminated dairy from own diet despite pediatrician's recommendation  Mother misconception: Mother thinks her lactose intolerance = baby's milk allergy (different mechanisms)  WIC: On WIC program \u2014 hypoallergenic formula expensive even with WIC  Growth: Falling off growth curve \u2014 now <5th percentile weight  Social: First-time mother, 19 years old, limited support system"
+      "default": "I'm not sure what you mean... I just want to know why Grace isn't gaining weight and keeps having these awful diapers",
+      "onset": "The bloody stools started about 6 weeks ago, maybe a little longer. At first I thought it was normal but then it got worse and she became so fussy",
+      "character": "It's like streaks of bright red blood mixed with mucus in her stool, sometimes more blood than stool. The diapers are just terrible to change",
+      "location": "Just in her diapers, the blood is mixed throughout the stool, not just on the outside",
+      "severity": "It's really bad - maybe 7 out of 10. She cries constantly, arches her back during feeds, and I'm barely sleeping. She's not the happy baby she used to be",
+      "aggravating": "She seems worse after I eat certain foods, maybe pizza or ice cream, but I thought I stopped dairy. The crying gets worse in the evenings",
+      "relieving": "Nothing really helps. Sometimes holding her upright after feeding helps a little, but she's still so irritable most of the time",
+      "associated": "She's really fussy and irritable, especially during and after breastfeeding. She arches her back and seems uncomfortable. No fever or vomiting though",
+      "denies": "No fever, no vomiting, no rash that I've noticed. She doesn't seem to have trouble breathing",
+      "history": "This is the first time anything like this has happened. She was fine for the first few months",
+      "medications": "Maternal dairy elimination; Iron supplement",
+      "allergies": "Cow milk protein",
+      "family": "I have lactose intolerance - I get bloated and gassy when I drink milk. That's why I understand what Grace is going through",
+      "social": "I'm 19, this is my first baby, and I don't have much help. We're on WIC but I heard the special formula is really expensive. I really want to keep breastfeeding if possible"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Growth parameters and plotting on growth chart",
+      "General appearance and nutritional status",
+      "Abdominal inspection and palpation",
+      "Diaper examination for blood/mucus",
+      "Skin examination for eczema or rashes",
+      "Lymph node examination",
+      "Cardiovascular examination",
+      "Assessment of hydration status",
+      "Perianal examination",
+      "Overall developmental assessment"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Growth parameters and plotting on growth chart": "Weight 6.2 kg (<5th percentile, dropped from 25th percentile at 2 months), length 65 cm (25th percentile), head circumference normal",
+      "General appearance and nutritional status": "Alert but appears thin with decreased subcutaneous fat, mild irritability during exam",
+      "Abdominal inspection and palpation": "Soft, non-distended, no masses or organomegaly, normal bowel sounds, no tenderness",
+      "Diaper examination for blood/mucus": "Visible streaks of bright red blood with mucus in stool sample",
+      "Skin examination for eczema or rashes": "No eczema or allergic rashes noted",
+      "Lymph node examination": "No lymphadenopathy",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, normal capillary refill",
+      "Assessment of hydration status": "Well-hydrated, normal mucous membranes and skin turgor",
+      "Perianal examination": "No fissures, normal perianal skin",
+      "Overall developmental assessment": "Meets developmental milestones for age, interactive and alert"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Cow's milk protein allergy (CMPA) - non-IgE mediated proctocolitis (correct diagnosis)",
+      "Food protein-induced enterocolitis syndrome (FPIES)",
+      "Infectious colitis",
+      "Necrotizing enterocolitis",
+      "Intussusception",
+      "Lactose intolerance",
+      "Normal infant growth variation with coincidental blood"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on mother's self-reported 'dairy elimination' without thoroughly exploring what she actually eats daily",
+      "prematureClosure": "Risk of accepting 'failure to thrive' as primary diagnosis without investigating the underlying CMPA causing both bloody stools and poor growth",
+      "availabilityBias": "Risk of being influenced by mother's lactose intolerance history and assuming similar mechanism rather than recognizing different pathophysiology of infant CMPA"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Grace Okafor: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified several possible causes for bloody stools in an infant. Before interviewing the patient, what specific questions would help you differentiate between infectious causes, anatomical problems, and food-related issues? What details about the maternal diet would be most important to explore?",
+      "phase5": "Now that you have the history and physical findings, what stands out about the timeline of symptoms, the mother's dietary history, and the growth pattern? How does the mother's understanding of her own lactose intolerance potentially complicate this case? What would be your next steps?",
+      "finalDebrief": "This case highlights how CMPA can present with both GI symptoms and failure to thrive in breastfed infants. Notice how the mother's confusion between lactose intolerance and milk protein allergy led to inadequate dietary elimination. What does this teach us about patient education and the importance of detailed dietary history? How would you counsel this family moving forward?"
     }
-}
+  }
 };

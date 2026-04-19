@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mason Williams",
-  "patientHPI": "My little boy can't breathe right and keeps making scary sounds when he tries to swallow. He's been drooling a lot because it hurts too much to swallow, and he has a fever that started this morning. He won't lie down and just wants to sit up leaning forward.",
+    "patientHPI": "My little boy can't breathe right and keeps making scary sounds when he tries to swallow. He's been drooling a lot because it hurts too much to swallow, and he has a fever that started this morning. He won't lie down and just wants to sit up leaning forward.",
     "dob": "06/15/2022",
     "age": "4",
     "sex": "Male",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "6425 Willow Way, Denver, CO 80201",
     "insurance": "Cigna",
     "pcp": "Dr. James Wilson, MD",
-    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
+    "pharmacy": "Walmart Pharmacy — Broward Blvd",
     "emergencyContact": {
       "name": "Kenneth Parker",
       "phone": "(713) 555-7246",
@@ -73,7 +73,7 @@ window.EMR_DATA = {
       "bp": "90/60",
       "hr": "156",
       "rr": "32",
-      "temp": "40.1\u00b0C",
+      "temp": "40.1°C",
       "spo2": "92%",
       "pain": "/10",
       "bmi": "32",
@@ -89,7 +89,7 @@ window.EMR_DATA = {
       "cc": "My child can't breathe right Throat/neck",
       "hpi": "Mason Williams is a 4-year-old male presenting with my child can't breathe right throat/neck. Past medical history includes Up to date on vaccinations, No prior hospitalizations, No immune deficiency. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Epiglottitis \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Epiglottitis — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -111,7 +111,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "22.4",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
@@ -132,7 +132,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "314",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -241,8 +241,8 @@ window.EMR_DATA = {
       "accession": "IMG-964734",
       "clinical": "My child can't breathe right Throat/neck",
       "technique": "Standard protocol",
-      "findings": "THUMBPRINT SIGN \u2014 enlarged, rounded epiglottis visible on lateral soft tissue neck view. Thickened aryepiglottic folds. Narrowed vallecular space. Subglottic region normal (not croup).",
-      "impression": "EPIGLOTTITIS \u2014 thumbprint sign confirms swollen epiglottis. Prepare for emergent airway management.",
+      "findings": "THUMBPRINT SIGN — enlarged, rounded epiglottis visible on lateral soft tissue neck view. Thickened aryepiglottic folds. Narrowed vallecular space. Subglottic region normal (not croup).",
+      "impression": "EPIGLOTTITIS — thumbprint sign confirms swollen epiglottis. Prepare for emergent airway management.",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -276,7 +276,7 @@ window.EMR_DATA = {
       "clinical": "My child can't breathe right Throat/neck",
       "technique": "Standard 12-lead",
       "findings": "Sinus tachycardia at 156 bpm. Normal pediatric morphology. No arrhythmia",
-      "impression": "Sinus tachycardia \u2014 age-appropriate for fever and distress",
+      "impression": "Sinus tachycardia — age-appropriate for fever and distress",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -308,7 +308,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Tobacco",
-      "N/A \u2014 no household smokers"
+      "N/A — no household smokers"
     ],
     [
       "Alcohol",
@@ -320,7 +320,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "N/A \u2014 preschool student"
+      "N/A — preschool student"
     ],
     [
       "Living",
@@ -329,75 +329,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Mason Williams appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mason appears acutely ill and distressed, sitting upright in a tripod position and refusing to lie down. He is drooling continuously, makes minimal vocalizations due to pain, and demonstrates clear respiratory distress with inspiratory stridor. His parents are extremely anxious and answer most questions as Mason is too uncomfortable to speak much.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did my child can't breathe right throat/neck start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did the breathing problems and throat pain start?",
+      "Has Mason had any recent cold symptoms or runny nose?",
+      "Is he making any unusual sounds when breathing?",
+      "Can he swallow liquids or is he refusing all food and drink?",
+      "Has he been drooling more than usual?",
+      "What position does he prefer to sit or lie in?",
+      "Has he had a fever and when did it start?",
+      "Has he been exposed to anyone sick recently?",
+      "Is his voice different or muffled compared to normal?",
+      "Has he had any rash or other symptoms?",
+      "Is he up to date on all his vaccinations including Hib?",
+      "Has he ever had breathing problems like this before?",
+      "Are there any smokers in the household?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My little boy can't breathe right and keeps making scary sounds when he tries to.'",
-        "character": "'It's my child can't breathe right throat/neck \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Acetaminophen.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "No immune deficiency  No recurrent infections",
-        "social": "Tobacco: N/A \u2014 no household smokers  Alcohol: N/A  Drugs: N/A  Occupation: N/A \u2014 preschool student  Living: Lives with both parents and older sibling. Attends daycare."
+      "default": "Mason just whimpers and his mom says 'He's too sick to answer much right now'",
+      "onset": "It started suddenly this morning around 6 AM. He woke up crying and couldn't breathe right. The fever came on fast too.",
+      "character": "He's making this scary whistling sound when he breathes in, and his throat hurts so bad he won't even try to swallow his own spit",
+      "location": "The pain is in his throat and neck area. He keeps pointing to his throat and won't let us touch his neck",
+      "severity": "This is a 10 out of 10 - he's never been this sick. He can barely breathe and is terrified",
+      "aggravating": "Lying down makes the breathing much worse. Even trying to swallow his own saliva makes him cry",
+      "relieving": "Only sitting up leaning forward helps a little bit. The acetaminophen isn't helping much with the fever or pain",
+      "associated": "High fever that started this morning, lots of drooling because he can't swallow, and he sounds different when he tries to talk - kind of muffled",
+      "denies": "No runny nose, no cough, no rash, no vomiting. This isn't like a regular cold at all",
+      "history": "Never anything like this before. He's usually a healthy kid with just normal childhood colds",
+      "medications": "Acetaminophen",
+      "allergies": "NKDA",
+      "family": "No family history of immune problems or recurrent infections. Everyone else in the family is healthy",
+      "social": "He goes to daycare and there have been some kids out sick lately. No smokers in the house. Lives with mom, dad, and his older sister"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and positioning",
+      "Respiratory effort and pattern assessment",
+      "Auscultation for stridor",
+      "Voice and speech quality assessment",
+      "Oral cavity inspection (if tolerated)",
+      "Neck palpation for lymphadenopathy",
+      "Lung auscultation",
+      "Heart rate and rhythm assessment",
+      "Skin assessment for cyanosis",
+      "Drooling and swallowing assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and positioning": "Acutely ill-appearing child in tripod position, anxious, refusing to lie supine",
+      "Respiratory effort and pattern assessment": "Tachypneic with visible supraclavicular and intercostal retractions, use of accessory muscles",
+      "Auscultation for stridor": "Loud inspiratory stridor audible without stethoscope, biphasic stridor with stethoscope",
+      "Voice and speech quality assessment": "Muffled voice quality, reluctant to speak, no hoarseness",
+      "Oral cavity inspection (if tolerated)": "Limited view shows erythematous posterior pharynx, patient very resistant to examination",
+      "Neck palpation for lymphadenopathy": "Tender anterior cervical lymphadenopathy, patient resistant to neck manipulation",
+      "Lung auscultation": "Transmitted upper airway sounds, otherwise clear lung fields bilaterally",
+      "Heart rate and rhythm assessment": "Tachycardic regular rhythm consistent with fever and respiratory distress",
+      "Skin assessment for cyanosis": "Mild circumoral pallor, no frank cyanosis, warm and flushed",
+      "Drooling and swallowing assessment": "Continuous drooling, refuses to attempt swallowing, holds neck in extended position"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute epiglottitis (correct diagnosis)",
+      "Severe croup (laryngotracheobronchitis)",
+      "Bacterial tracheitis",
+      "Foreign body aspiration",
+      "Retropharyngeal abscess",
+      "Severe viral pharyngitis",
+      "Peritonsillar abscess"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'breathing problems' and immediately thinking croup, missing the key differentiating features of drooling, tripod positioning, and refusal to lie down that suggest epiglottitis",
+      "prematureClosure": "May stop at croup diagnosis after hearing stridor without fully exploring the severity of dysphagia, positioning preferences, and rapid onset that distinguish epiglottitis",
+      "availabilityBias": "Croup is much more commonly seen than epiglottitis in the post-Hib vaccine era, leading to availability bias toward the more familiar diagnosis despite classic epiglottitis presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Mason Williams's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, I notice you're considering several causes of stridor in children. What key clinical features would help you distinguish between epiglottitis and croup? Think about positioning, drooling, and voice changes - how might these guide your interview questions?",
+      "phase5": "Now that you've gathered your history and physical findings, let's think through the classic presentations. You noted the tripod positioning, drooling, and muffled voice. How does this constellation of findings help narrow your differential? What's concerning about this particular combination of symptoms?",
+      "finalDebrief": "This case demonstrates the classic presentation of acute epiglottitis - the 4 D's: drooling, dysphagia, distress, and dysphonia. Notice how the tripod positioning and refusal to lie down were key differentiating features from croup. While rare in the Hib vaccine era, epiglottitis remains a true pediatric emergency requiring immediate airway management. How did your thinking evolve as you gathered more data?"
     }
-}
+  }
 };

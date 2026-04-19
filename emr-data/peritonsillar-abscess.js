@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Jameson Ortiz",
-  "patientHPI": "This is hands down the worst sore throat I've ever had in my life - it's all concentrated on the left side and the pain is absolutely unbearable. I've had throat problems before, but nothing like this intense burning and stabbing pain that makes it hard to even swallow my own spit.",
+    "patientHPI": "This is hands down the worst sore throat I've ever had in my life - it's all concentrated on the left side and the pain is absolutely unbearable. I've had throat problems before, but nothing like this intense burning and stabbing pain that makes it hard to even swallow my own spit.",
     "dob": "02/09/1976",
     "age": "50",
     "sex": "Male",
@@ -316,75 +316,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Jameson Ortiz appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mr. Ortiz appears visibly uncomfortable and anxious, frequently touching his neck and speaking in a hoarse, pained voice. He is cooperative but clearly distressed, describing his symptoms with urgency and concern. He seems genuinely frightened by the severity of his current throat pain compared to his previous episodes.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did worst sore throat of my life \u2014 all on the left side left-sided throat/pharyngeal pain \u2014 unilateral start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did this throat pain start and how quickly did it develop?",
+      "Can you describe the quality of the pain - is it sharp, burning, throbbing?",
+      "Is the pain only on the left side or does it radiate anywhere?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "What makes the pain worse - swallowing, talking, moving your head?",
+      "Have you tried anything that helps relieve the pain?",
+      "Are you having any difficulty swallowing or opening your mouth fully?",
+      "Do you have any ear pain, particularly on the left side?",
+      "Have you noticed any voice changes or difficulty speaking?",
+      "Any fevers, chills, or feeling generally unwell?",
+      "How does this compare to your previous throat infections?",
+      "Have you had any recent dental work or mouth injuries?",
+      "Are you having any trouble breathing or shortness of breath?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started This is hands down the worst sore throat I've ever had in my life - it's all con.'",
-        "character": "'It's worst sore throat of my life \u2014 all on the left side left-sided throat/pharyngeal pain \u2014 unilateral \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amoxicillin; Ibuprofen.'",
-        "allergies": "'My allergies are Clindamycin.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Current, 10 pack-years  Alcohol: Social, 3-4 drinks weekends  Drugs: Marijuana occasionally  Occupation: Bartender  Living: Lives with roommate"
+      "default": "I'm sorry, could you repeat that? This pain is really distracting and I'm having trouble focusing on anything else right now.",
+      "onset": "It started about 2 days ago, but it got dramatically worse overnight. Yesterday morning it was just a little sore, but by evening I could barely swallow, and today it's absolutely excruciating.",
+      "character": "It's like a deep, throbbing pain with sharp stabbing when I swallow. There's also this constant burning sensation that never lets up, even when I'm not swallowing.",
+      "location": "It's completely on the left side of my throat - I can pinpoint exactly where it hurts. The pain shoots up toward my left ear whenever I try to swallow.",
+      "severity": "This is easily a 9 out of 10. I've called in sick to work because I literally cannot function. I can barely swallow my own saliva without wincing.",
+      "aggravating": "Swallowing anything - even water - makes it dramatically worse. Talking hurts, and I noticed that opening my mouth wide or turning my head to the right makes the pain shoot up.",
+      "relieving": "Honestly, nothing really helps. I've been taking ibuprofen and it barely takes the edge off. Ice chips help a tiny bit, but even getting them down hurts.",
+      "associated": "I've had a fever and chills since yesterday, and I feel generally awful - like I'm getting sicker by the hour. My voice sounds different, kind of muffled, and my left ear is aching.",
+      "denies": "No cough, no runny nose, no chest pain. I'm not having trouble breathing, but I am worried about how much worse this is getting so quickly.",
+      "history": "I've had throat infections before - that's why I have the amoxicillin - but this is completely different. My usual sore throats are on both sides and never this severe or one-sided.",
+      "medications": "Amoxicillin; Ibuprofen",
+      "allergies": "Clindamycin",
+      "family": "Nobody in my family has had throat problems like this. My dad had some heart issues, but nothing related to infections or throat problems.",
+      "social": "I'm a bartender so I'm around people and smoke a lot - about half a pack a day for 20 years. I drink socially on weekends and smoke marijuana occasionally. I live with a roommate who hasn't been sick."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Oral cavity and oropharyngeal examination",
+      "Neck palpation for lymphadenopathy",
+      "Assessment of trismus (mouth opening)",
+      "Palpation of tonsillar region and soft palate",
+      "Otoscopic examination",
+      "Assessment of voice quality and speech",
+      "Evaluation of uvular deviation",
+      "Neck range of motion assessment",
+      "Vital signs assessment",
+      "General appearance and toxicity assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Oral cavity and oropharyngeal examination": "Left tonsillar region shows marked erythema and swelling with purulent exudate. Left tonsil appears pushed medially with significant peritonsillar fullness and inflammation.",
+      "Neck palpation for lymphadenopathy": "Tender, enlarged left anterior cervical and submandibular lymph nodes, approximately 2-3 cm, mobile and firm.",
+      "Assessment of trismus (mouth opening)": "Limited mouth opening to approximately 2.5 cm due to pain and muscle spasm, patient unable to open fully.",
+      "Palpation of tonsillar region and soft palate": "Marked tenderness and fluctuance in left peritonsillar area, soft palate swollen and erythematous on left side.",
+      "Otoscopic examination": "Left tympanic membrane appears normal but patient reports significant referred otalgia on left side.",
+      "Assessment of voice quality and speech": "Muffled voice quality with 'hot potato' voice, patient speaks with obvious discomfort and altered articulation.",
+      "Evaluation of uvular deviation": "Uvula deviated to the right away from the affected left side due to peritonsillar swelling.",
+      "Neck range of motion assessment": "Limited neck rotation to the right due to pain, patient holds head tilted slightly to the left.",
+      "Vital signs assessment": "Elevated temperature 38.8°C, mild tachycardia HR 102, elevated BP likely due to pain and stress.",
+      "General appearance and toxicity assessment": "Patient appears ill and uncomfortable but not toxic, sitting upright and leaning forward slightly, frequent swallowing attempts."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Peritonsillar abscess (correct diagnosis)",
+      "Severe bacterial tonsillitis",
+      "Parapharyngeal abscess",
+      "Epiglottitis (must-not-miss)",
+      "Retropharyngeal abscess (must-not-miss)",
+      "Infectious mononucleosis",
+      "Viral pharyngitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's history of recurrent tonsillitis and assuming this is just another episode of bacterial tonsillitis, missing the progression to abscess formation.",
+      "prematureClosure": "May stop investigation after noting severe unilateral throat pain and fever, prescribing antibiotics without recognizing the need for urgent ENT consultation or drainage.",
+      "availabilityBias": "Common experience with routine strep throat may lead to underestimating the severity and missing the peritonsillar abscess, which requires immediate intervention."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Jameson Ortiz's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're considering both infectious and structural causes. Given this patient's presentation of severe unilateral throat pain, what specific anatomical complications of tonsillitis should you be most concerned about? What questions will help you differentiate between simple tonsillitis and more serious deep space infections?",
+      "phase5": "Excellent work on the history and physical. You've identified several key findings - the unilateral presentation, uvular deviation, trismus, and that characteristic 'hot potato' voice. How do these findings fit together anatomically? What does the combination of these signs suggest about the progression from simple tonsillitis to a more serious complication?",
+      "finalDebrief": "This case illustrates how peritonsillar abscess can develop from recurrent tonsillitis. The key distinguishing features you identified - unilateral severe pain, trismus, uvular deviation, muffled voice, and fluctuance - form the classic presentation. Notice how the patient's history of recurrent tonsillitis could have led to anchoring bias. What made you consider abscess over simple tonsillitis, and why is early recognition and ENT consultation crucial here?"
     }
-}
+  }
 };

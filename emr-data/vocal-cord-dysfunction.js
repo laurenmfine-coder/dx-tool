@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Alyssa Chen",
-  "patientHPI": "I've been working with a speech therapist for the past few months learning breathing exercises after they found out what was causing my breathing problems when I kept going to the emergency room thinking I had asthma.",
+    "patientHPI": "I've been working with a speech therapist for the past few months learning breathing exercises after they found out what was causing my breathing problems when I kept going to the emergency room thinking I had asthma.",
     "dob": "10/22/2003",
     "age": 22,
     "sex": "Female",
@@ -203,23 +203,95 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Eosinophils", "value": "2", "unit": "%", "range": "1-4", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.6", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.8", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "234", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Eosinophils",
+              "value": "2",
+              "unit": "%",
+              "range": "1-4",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.6",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "234",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -287,15 +359,42 @@ window.EMR_DATA = {
     "Maternal grandmother: COPD, alive at 74"
   ],
   "socialHistory": [
-    ["Occupation", "College senior (exercise science major); part-time campus fitness center trainer"],
-    ["Marital", "Single"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare, 1-2 drinks at social events"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Competitive cross-country runner (limited by VCD); weight training 3x/week; using warm-up protocol"],
-    ["Housing", "University apartment with 1 roommate"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "College senior (exercise science major); part-time campus fitness center trainer"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare, 1-2 drinks at social events"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Competitive cross-country runner (limited by VCD); weight training 3x/week; using warm-up protocol"
+    ],
+    [
+      "Housing",
+      "University apartment with 1 roommate"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "vocal-cord-dysfunction",
@@ -303,9 +402,7 @@ window.EMR_DATA = {
     "acuity": 3,
     "presentation": "Allergic Reaction",
     "category": "pulmonary"
-  }
-,
-
+  },
   "teachingPoints": {
     "keyLearning": [
       "VCD/PVFM (paradoxical vocal fold motion) causes inspiratory stridor and dyspnea from paradoxical adduction of vocal folds during inspiration. It is frequently misdiagnosed as asthma — patients are often on unnecessary high-dose inhaled corticosteroids and bronchodilators.",
@@ -324,75 +421,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Alyssa Chen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Alyssa appears anxious but relieved to finally have an explanation for her symptoms after multiple ER visits. She's articulate and engaged, eager to discuss her recent speech therapy work, though still somewhat frustrated about the diagnostic journey and concerned about symptom management during her fitness training activities.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did allergic reaction start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe what your breathing difficulty feels like when it happens?",
+      "What triggers these episodes of breathing trouble?",
+      "Do the symptoms occur more with inspiration or expiration?",
+      "How long do these episodes typically last?",
+      "What makes the breathing difficulty better or worse?",
+      "Have you noticed any relationship between stress and your symptoms?",
+      "Do you experience any throat tightness or choking sensation?",
+      "How often are you using your albuterol inhaler?",
+      "Tell me about your work at the fitness center - do symptoms occur during exercise?",
+      "Have you had any recent exposure to strong odors or irritants?",
+      "What breathing exercises has your speech therapist taught you?",
+      "Have you noticed any voice changes during episodes?",
+      "Are you experiencing any heartburn or acid reflux symptoms lately?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been working with a speech therapist for the past few months learning breat.'",
-        "character": "'It's allergic reaction \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Vocal Cord Dysfunction.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Albuterol 90mcg INH PRN; Omeprazole 20mg daily; Escitalopram 10mg daily.'",
-        "allergies": "'My allergies are Strong Perfumes/Fragrances.'",
-        "family": "Mother: Asthma, Anxiety disorder, alive at 50  Father: GERD, Hypertension, alive at 53  Brother: Healthy, age 19",
-        "social": "Occupation: College senior (exercise science major); part-time campus fitness center trainer  Marital: Single  Tobacco: Never smoker  Alcohol: Rare, 1-2 drinks at social events  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "This started about 8 months ago. I'd suddenly feel like I couldn't breathe, especially when I was stressed or working out at the gym. I went to the ER three times thinking I was having severe asthma attacks.",
+      "character": "It feels like my throat is closing up and I can't get air in. It's different from regular shortness of breath - it's like there's an obstruction right here in my throat. I make this weird wheezing sound when I try to breathe in.",
+      "location": "The tightness is right here in my throat and upper chest area, not deep in my lungs like you'd expect with asthma.",
+      "severity": "During an episode it's about an 8 out of 10 - really scary. I feel like I'm going to suffocate. Right now I'm fine, maybe a 2 just from talking about it and feeling a little anxious.",
+      "aggravating": "Stress definitely makes it worse, intense exercise, and strong smells like cleaning products or perfumes. Sometimes it happens when I'm demonstrating exercises to clients at the gym.",
+      "relieving": "The albuterol doesn't really help much, which confused everyone. The breathing exercises my speech therapist taught me work much better - focusing on breathing through my nose and relaxing my throat muscles.",
+      "associated": "I get really anxious during episodes, my heart races, and sometimes I feel dizzy. My voice gets hoarse afterward, and I have this feeling like something is stuck in my throat.",
+      "denies": "I don't have chest pain, no cough with blood, no fever, and no swelling in my legs or face. I don't wheeze on breathing out, just on breathing in.",
+      "history": "Like I mentioned, this has been going on for 8 months. The ER visits were really frustrating because they kept treating me for asthma, but I never really felt like that's what it was.",
+      "medications": "Albuterol 90mcg INH PRN; Omeprazole 20mg daily; Escitalopram 10mg daily",
+      "allergies": "Strong Perfumes/Fragrances",
+      "family": "My mom has asthma and anxiety, so initially everyone thought I inherited her asthma. My dad has GERD, and my brother is healthy.",
+      "social": "I'm a college senior majoring in exercise science and work part-time at the campus fitness center as a trainer. I've never smoked, rarely drink - maybe 1-2 drinks at social events. No drugs."
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "Vital signs assessment",
+      "Pulmonary auscultation",
+      "Upper airway inspection and palpation",
+      "Neck examination for masses or lymphadenopathy",
+      "Cardiovascular examination",
+      "Speech and voice assessment",
+      "Inspiratory stridor assessment",
+      "Forced inspiratory maneuver",
+      "Assessment during speech therapy breathing exercises",
+      "Peak flow measurement if available"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Vocal Cord Dysfunction. Document specifically what you observe."
+      "Vital signs assessment": "BP 118/72, HR 104, RR 18, Temp 98.4°F, SpO2 98% on room air - tachycardia present but other vitals stable",
+      "Pulmonary auscultation": "Clear bilateral breath sounds, no wheezes, rales, or rhonchi in lung fields. No prolonged expiratory phase.",
+      "Upper airway inspection and palpation": "Throat appears normal, no visible obstruction, no stridor at rest, trachea midline, no palpable masses",
+      "Neck examination for masses or lymphadenopathy": "No cervical lymphadenopathy, no thyromegaly, no masses palpated",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, rubs, or gallops, no peripheral edema",
+      "Speech and voice assessment": "Voice slightly hoarse, able to speak in full sentences without distress currently",
+      "Inspiratory stridor assessment": "Mild inspiratory stridor audible when patient demonstrates forced inspiration",
+      "Forced inspiratory maneuver": "Patient demonstrates inspiratory difficulty with audible stridor when asked to take deep breath in quickly",
+      "Assessment during speech therapy breathing exercises": "Symptoms improve with controlled nasal breathing and throat relaxation techniques patient demonstrates",
+      "Peak flow measurement if available": "Peak flow within normal range for age and height, suggesting lower airway function is intact"
     },
     "ddxTargets": [
-        "Vocal Cord Dysfunction (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Vocal Cord Dysfunction (Paradoxical Vocal Fold Motion) (correct diagnosis)",
+      "Exercise-induced asthma",
+      "Anxiety-induced dyspnea/panic attacks",
+      "Anaphylaxis or severe allergic reaction",
+      "Foreign body aspiration",
+      "Laryngeal edema or angioedema",
+      "Asthma exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Vocal Cord Dysfunction, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Vocal Cord Dysfunction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Vocal Cord Dysfunction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Chief complaint of 'allergic reaction' may anchor thinking toward anaphylaxis or acute allergic processes, missing the chronic vocal cord dysfunction",
+      "prematureClosure": "History of asthma diagnosis and albuterol use may lead to premature closure on asthma exacerbation without considering vocal cord dysfunction",
+      "availabilityBias": "Recent cases of anaphylaxis or common presentations of asthma may overshadow the less common diagnosis of vocal cord dysfunction"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Alyssa Chen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Vocal Cord Dysfunction (Paradoxical Vocal Fold Motion). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "The patient presents with 'allergic reaction' but has a complex pulmonary history. Before interviewing her, consider: What questions will help you distinguish between upper and lower airway pathology? How might anxiety and exercise relate to her presentation?",
+      "phase5": "You've gathered significant history and exam findings. Notice the pattern of inspiratory stridor, poor response to albuterol, but improvement with speech therapy techniques. How does this constellation of findings help narrow your differential? What's the significance of the timing with stress and exercise?",
+      "finalDebrief": "This case illustrates how vocal cord dysfunction can masquerade as asthma or allergic reactions. Key distinguishing features included inspiratory stridor, throat-focused symptoms, poor albuterol response, and improvement with breathing techniques. The chief complaint of 'allergic reaction' was likely triggered by fragrance exposure causing VCD symptoms. How will you remember to consider VCD in future patients with 'difficult to treat asthma'?"
     }
-}
+  }
 };

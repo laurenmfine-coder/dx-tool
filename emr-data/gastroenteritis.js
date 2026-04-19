@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sophia Petit-Frère",
-  "patientHPI": "My mom brought me in for my regular checkup - I've been doing really well lately, walking around everywhere and saying mama, dada, and a few other words that make everyone so excited, and I love eating the same food as everyone else at the table.",
+    "patientHPI": "My mom brought me in for my regular checkup - I've been doing really well lately, walking around everywhere and saying mama, dada, and a few other words that make everyone so excited, and I love eating the same food as everyone else at the table.",
     "dob": "09/03/2023",
     "age": 1,
     "sex": "Female",
@@ -159,32 +159,128 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "68", "unit": "mg/dL", "range": "60-110", "flag": "" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "5-18", "flag": "H" },
-            { "test": "Creatinine", "value": "0.4", "unit": "mg/dL", "range": "0.1-0.4", "flag": "" },
-            { "test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "3.2", "unit": "mEq/L", "range": "3.5-5.5", "flag": "L" },
-            { "test": "Chloride", "value": "98", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "16", "unit": "mEq/L", "range": "20-28", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "68",
+              "unit": "mg/dL",
+              "range": "60-110",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "5-18",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.4",
+              "unit": "mg/dL",
+              "range": "0.1-0.4",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.5",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "98",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "16",
+              "unit": "mEq/L",
+              "range": "20-28",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "12.8", "unit": "x10³/µL", "range": "6.0-14.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "10.5-13.5", "flag": "" },
-            { "test": "Hematocrit", "value": "40.1", "unit": "%", "range": "33-39", "flag": "H" },
-            { "test": "Platelets", "value": "284", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.8",
+              "unit": "x10³/µL",
+              "range": "6.0-14.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "10.5-13.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.1",
+              "unit": "%",
+              "range": "33-39",
+              "flag": "H"
+            },
+            {
+              "test": "Platelets",
+              "value": "284",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Specific Gravity", "value": "1.032", "unit": "", "range": "1.005-1.030", "flag": "H" },
-            { "test": "Ketones", "value": "Moderate", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Glucose", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "WBC", "value": "0-2", "unit": "/HPF", "range": "0-5", "flag": "" },
-            { "test": "Bacteria", "value": "None", "unit": "", "range": "None", "flag": "" }
+            {
+              "test": "Specific Gravity",
+              "value": "1.032",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": "H"
+            },
+            {
+              "test": "Ketones",
+              "value": "Moderate",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "WBC",
+              "value": "0-2",
+              "unit": "/HPF",
+              "range": "0-5",
+              "flag": ""
+            },
+            {
+              "test": "Bacteria",
+              "value": "None",
+              "unit": "",
+              "range": "None",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -209,12 +305,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "DTaP (Daptacel)", "date": "12/10/2024", "site": "Right thigh IM", "lot": "DA411R", "mfr": "Sanofi" },
-    { "vaccine": "Hepatitis A (Havrix)", "date": "12/10/2024", "site": "Left thigh IM", "lot": "HA329T", "mfr": "GSK" },
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/08/2024", "site": "Left thigh IM", "lot": "FL812K", "mfr": "GSK" },
-    { "vaccine": "PCV15 (Vaxneuvance)", "date": "09/03/2024", "site": "Right thigh IM", "lot": "PV241M", "mfr": "Merck" },
-    { "vaccine": "Hepatitis B (Engerix-B)", "date": "09/03/2023", "site": "Right thigh IM", "lot": "HB518R", "mfr": "GSK" },
-    { "vaccine": "Rotavirus (RotaTeq)", "date": "03/03/2024", "site": "Oral", "lot": "RV722P", "mfr": "Merck" }
+    {
+      "vaccine": "DTaP (Daptacel)",
+      "date": "12/10/2024",
+      "site": "Right thigh IM",
+      "lot": "DA411R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "Hepatitis A (Havrix)",
+      "date": "12/10/2024",
+      "site": "Left thigh IM",
+      "lot": "HA329T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/08/2024",
+      "site": "Left thigh IM",
+      "lot": "FL812K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "PCV15 (Vaxneuvance)",
+      "date": "09/03/2024",
+      "site": "Right thigh IM",
+      "lot": "PV241M",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Hepatitis B (Engerix-B)",
+      "date": "09/03/2023",
+      "site": "Right thigh IM",
+      "lot": "HB518R",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Rotavirus (RotaTeq)",
+      "date": "03/03/2024",
+      "site": "Oral",
+      "lot": "RV722P",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother (age 26): Sickle cell trait — asymptomatic carrier",
@@ -224,14 +356,38 @@ window.EMR_DATA = {
     "No known family history of IBD, celiac disease, or GI malignancy"
   ],
   "socialHistory": [
-    ["Guardian", "Lives with mother and maternal grandmother; father involved but lives separately"],
-    ["Childcare/School", "Attends home daycare with 6 other children"],
-    ["Tobacco Exposure", "None — no smokers in household"],
-    ["Pets", "None"],
-    ["Home Environment", "Apartment, city water supply, no well water"],
-    ["Diet", "Whole milk, table foods; picky with vegetables; still uses bottle at bedtime (mother counseled to wean)"],
-    ["Development", "Walking independently since 13 months, says 'mama,' 'dada,' 3 other words; points to wants"],
-    ["Safety", "Rear-facing car seat; cabinet locks; no pool access"]
+    [
+      "Guardian",
+      "Lives with mother and maternal grandmother; father involved but lives separately"
+    ],
+    [
+      "Childcare/School",
+      "Attends home daycare with 6 other children"
+    ],
+    [
+      "Tobacco Exposure",
+      "None — no smokers in household"
+    ],
+    [
+      "Pets",
+      "None"
+    ],
+    [
+      "Home Environment",
+      "Apartment, city water supply, no well water"
+    ],
+    [
+      "Diet",
+      "Whole milk, table foods; picky with vegetables; still uses bottle at bedtime (mother counseled to wean)"
+    ],
+    [
+      "Development",
+      "Walking independently since 13 months, says 'mama,' 'dada,' 3 other words; points to wants"
+    ],
+    [
+      "Safety",
+      "Rear-facing car seat; cabinet locks; no pool access"
+    ]
   ],
   "meta": {
     "caseId": "gastroenteritis",
@@ -242,75 +398,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Sophia Petit-Fr\u00e8re appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mother appears anxious and tired, speaking for her 1-year-old daughter who is listless and clinging to mom. Mother is very forthcoming with details but clearly worried about her baby's condition. The child appears uncomfortable, fussy, and less interactive than usual.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pediatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did Sophia first start having diarrhea and vomiting?",
+      "How many episodes of diarrhea and vomiting has she had in the last 24 hours?",
+      "What does the diarrhea look like - color, consistency, any blood or mucus?",
+      "Has she been able to keep any fluids or food down?",
+      "When was her last wet diaper and how does it compare to normal?",
+      "Has she had a fever and when did you first notice it?",
+      "How is her energy level compared to normal?",
+      "Has anyone else at daycare or at home been sick recently?",
+      "What have you been giving her to drink or eat since this started?",
+      "Has she had any breathing problems or unusual sleepiness?",
+      "Any recent changes in her normal routine or new foods?",
+      "When did she last have a normal bowel movement?",
+      "Is she still taking her regular medications and vitamins?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My mom brought me in for my regular checkup - I've been doing really well lately.'",
-        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrocortisone 1% cream \u2014 apply BID PRN; Infant Acetaminophen 160mg/5mL \u2014 3.75mL Q4-6h PRN; Vitamin D 400 IU drops daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother (age 26): Sickle cell trait \u2014 asymptomatic carrier  Father (age 29): Hypertension, pre-diabetes  Maternal grandmother (age 54): Type 2 Diabetes, hypertension, obesity",
-        "social": "Guardian: Lives with mother and maternal grandmother; father involved but lives separately  Childcare/School: Attends home daycare with 6 other children  Tobacco Exposure: None \u2014 no smokers in household  Pets: None  Home Environment: Apartment, city water supply, no well water"
+      "default": "I'm not sure what you mean - can you ask that differently? I'm just worried about my baby.",
+      "onset": "It started yesterday morning around 6 AM with vomiting, then the diarrhea started a few hours later. She seemed fine the night before.",
+      "character": "The vomiting is just her formula and food coming back up, and the diarrhea is very watery, yellowish-green, and much more frequent than normal.",
+      "location": "She's having stomach cramping - she keeps pulling her knees up to her chest and crying, especially before she has diarrhea.",
+      "severity": "I'd say this is really bad for her - maybe an 8 out of 10. She's not herself at all and won't play or even smile much.",
+      "aggravating": "Trying to give her anything to drink seems to make the vomiting worse, and she gets more crampy when I try to feed her.",
+      "relieving": "The only thing that helps a little is holding her, but even then she's still fussy. I tried giving her small sips of water but she threw that up too.",
+      "associated": "She's been really tired and sleepy, her fever started this morning, and she feels warm. She's been very clingy and crying more than usual.",
+      "denies": "No blood in the stool or vomit, no trouble breathing, no rash, and she hasn't hit her head or fallen recently.",
+      "history": "She had something similar when she was about 8 months old but not this bad. That time it only lasted a day and she didn't get dehydrated.",
+      "medications": "Hydrocortisone 1% cream — apply BID PRN; Infant Acetaminophen 160mg/5mL — 3.75mL Q4-6h PRN; Vitamin D 400 IU drops daily",
+      "allergies": "NKDA",
+      "family": "Her dad has high blood pressure and pre-diabetes, I have sickle cell trait but no problems, and my mom has diabetes. No one in the family has had stomach problems like this.",
+      "social": "She goes to a small home daycare with 6 other kids. No one smokes around her, and we live in an apartment with my mother. Her dad visits regularly but lives separately."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and level of alertness",
+      "Assessment of mucous membranes and capillary refill",
+      "Skin turgor and skin tent test",
+      "Anterior fontanelle assessment",
+      "Abdominal examination for tenderness and bowel sounds",
+      "Assessment for signs of peritoneal irritation",
+      "Heart rate and rhythm assessment",
+      "Respiratory effort and pattern",
+      "Extremity perfusion and warmth",
+      "Weight comparison to previous visits if available"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. Document specifically what you observe."
+      "General appearance and level of alertness": "Listless, less interactive than expected for age, appears ill but arousable and recognizes mother",
+      "Assessment of mucous membranes and capillary refill": "Mucous membranes are tacky and slightly dry, capillary refill is 3 seconds",
+      "Skin turgor and skin tent test": "Mild skin tenting present, skin turgor slightly decreased indicating moderate dehydration",
+      "Anterior fontanelle assessment": "Soft and slightly depressed, consistent with mild to moderate dehydration",
+      "Abdominal examination for tenderness and bowel sounds": "Abdomen soft, mild diffuse tenderness, hyperactive bowel sounds present, no masses or organomegaly",
+      "Assessment for signs of peritoneal irritation": "No rebound tenderness, no guarding, no rigidity - no signs of peritoneal irritation",
+      "Heart rate and rhythm assessment": "Tachycardic at 178 bpm, regular rhythm, no murmurs audible",
+      "Respiratory effort and pattern": "Mild tachypnea with slightly increased work of breathing, suggesting compensation for metabolic acidosis",
+      "Extremity perfusion and warmth": "Hands and feet are cool to touch, pulses present but weaker than normal",
+      "Weight comparison to previous visits if available": "Weight is down approximately 8% from last well-child visit 2 months ago"
     },
     "ddxTargets": [
-        "Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis (correct diagnosis)",
+      "Bacterial gastroenteritis (Salmonella, Shigella, Campylobacter)",
+      "Rotavirus gastroenteritis with dehydration",
+      "Intussusception",
+      "Appendicitis (atypical presentation in toddler)",
+      "Food poisoning or dietary indiscretion",
+      "Urinary tract infection with associated GI symptoms"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'routine checkup' mentioned in HPI and missing acute illness, or anchoring on fever alone without recognizing dehydration severity",
+      "prematureClosure": "Risk of stopping at 'simple viral gastroenteritis' without fully assessing hydration status and acid-base balance, especially given tachycardia and respiratory findings",
+      "availabilityBias": "May focus on common viral illness and miss more serious causes like intussusception or bacterial causes that require different management in this age group"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Sophia Petit-Fr\u00e8re's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Viral Gastroenteritis with Moderate Dehydration and Non-Anion Gap Metabolic Acidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Before you interview the patient, think about what key historical features would help you distinguish between viral and bacterial causes, and what questions would help you assess the severity of dehydration. Also consider what 'must-not-miss' diagnoses you need to rule out in a 1-year-old with vomiting and apparent abdominal pain.",
+      "phase5": "Nice work gathering the history and exam findings. You've identified signs of dehydration, but let's think deeper about the physiology here. What do the vital signs tell you about her compensatory mechanisms? The tachycardia and tachypnea pattern, combined with her hydration status - what might her acid-base status be, and why?",
+      "finalDebrief": "This case illustrates how gastroenteritis in young children can quickly lead to dehydration and metabolic consequences. The key was recognizing that her tachycardia and mild tachypnea weren't just from fever, but represented compensation for non-anion gap metabolic acidosis from bicarbonate losses. Her history of prematurity may have made her more susceptible to rapid dehydration. How did your differential evolve as you gathered more data about her hydration status?"
     }
-}
+  }
 };

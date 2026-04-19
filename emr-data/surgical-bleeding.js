@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Fernando Alvarez-Diaz",
-  "patientHPI": "I had my hip replacement surgery three days ago and everything seemed to be going well until this morning when I started feeling really dizzy and weak. My surgical site has been oozing more blood than the nurses expected, and I've been having trouble getting out of bed without feeling like I'm going to faint.",
+    "patientHPI": "I had my hip replacement surgery three days ago and everything seemed to be going well until this morning when I started feeling really dizzy and weak. My surgical site has been oozing more blood than the nurses expected, and I've been having trouble getting out of bed without feeling like I'm going to faint.",
     "dob": "08/25/1968",
     "age": 56,
     "sex": "Male",
@@ -149,7 +149,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "215 lbs",
       "ht": "5'11\"",
-      "bmi": 30.0,
+      "bmi": 30,
       "setting": "PCP Office"
     },
     {
@@ -204,40 +204,124 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "42.4", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "218", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "42.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "218",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION PANEL",
           "results": [
-            { "test": "PT", "value": "14.8", "unit": "seconds", "range": "11.0-13.5", "flag": "H" },
-            { "test": "INR", "value": "1.3", "unit": "", "range": "0.8-1.1", "flag": "H" },
-            { "test": "aPTT", "value": "34", "unit": "seconds", "range": "25-35", "flag": "" }
+            {
+              "test": "PT",
+              "value": "14.8",
+              "unit": "seconds",
+              "range": "11.0-13.5",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.3",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "aPTT",
+              "value": "34",
+              "unit": "seconds",
+              "range": "25-35",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.0", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.0",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "TYPE AND SCREEN",
           "results": [
-            { "test": "ABO/Rh", "value": "B Positive", "unit": "", "range": "—", "flag": "" },
-            { "test": "Antibody Screen", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "ABO/Rh",
+              "value": "B Positive",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "Antibody Screen",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -305,15 +389,42 @@ window.EMR_DATA = {
     "Sister: Healthy, age 52"
   ],
   "socialHistory": [
-    ["Occupation", "Restaurant owner/manager"],
-    ["Marital", "Married, 3 children (ages 28, 25, 20)"],
-    ["Tobacco", "Former smoker — 10 pack-years; quit 2015"],
-    ["Alcohol", "Social, 2-3 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited by hip pain; previously active (walking, cycling)"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; seatbelt; uses cane for ambulation"],
-    ["Advance Directive", "None on file — pre-op discussion planned"]
+    [
+      "Occupation",
+      "Restaurant owner/manager"
+    ],
+    [
+      "Marital",
+      "Married, 3 children (ages 28, 25, 20)"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 10 pack-years; quit 2015"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited by hip pain; previously active (walking, cycling)"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; uses cane for ambulation"
+    ],
+    [
+      "Advance Directive",
+      "None on file — pre-op discussion planned"
+    ]
   ],
   "meta": {
     "caseId": "surgical-bleeding",
@@ -324,75 +435,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Fernando Alvarez-Diaz is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Fernando appears anxious and somewhat pale, frequently shifting uncomfortably in bed and expressing worry about his recovery timeline. He is forthcoming with information but shows visible distress when discussing his weakness and bleeding, particularly concerned about how this might affect his restaurant business.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the increased bleeding and weakness?",
+      "How would you describe the amount of bleeding from your surgical site?",
+      "Have you noticed any blood in your urine or bowel movements?",
+      "Are you experiencing any chest pain or shortness of breath?",
+      "Have you had any episodes of nausea or vomiting?",
+      "When did you last take your blood thinner medication?",
+      "Have you noticed any unusual bruising since your surgery?",
+      "Are you experiencing any abdominal pain or swelling?",
+      "Have you been able to urinate normally?",
+      "How is your pain level at the surgical site compared to yesterday?",
+      "Have you had any episodes of rapid heartbeat or palpitations?",
+      "Are you experiencing any confusion or difficulty concentrating?",
+      "Have you noticed any swelling in your legs or feet?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I had my hip replacement surgery three days ago and everything seemed to be goin.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Post-Operative Surgical Bleeding.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Lisinopril 20mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Celecoxib 200mg daily.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Mother: T2DM, osteoarthritis, alive at 80  Father: CAD, MI at 62, deceased at 70  Brother: AFib, age 60",
-        "social": "Occupation: Restaurant owner/manager  Marital: Married, 3 children (ages 28, 25, 20)  Tobacco: Former smoker \u2014 10 pack-years; quit 2015  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you explain that differently? I'm feeling pretty foggy right now.",
+      "onset": "I started feeling really dizzy and weak this morning around 6 AM when I tried to get up to use the bathroom. The bleeding seemed heavier than yesterday when the nurses changed my dressing.",
+      "character": "The dizziness feels like the room is spinning a bit, and I have this overwhelming weakness like all my energy has been drained out of me. The bleeding is steady oozing, not spurting.",
+      "location": "The bleeding is coming from my right hip surgical site, and the weakness is all over my body, especially when I try to stand or move around.",
+      "severity": "The weakness is about an 8 out of 10 - I can barely stand without help. The dizziness is maybe a 6 out of 10, but it's really concerning me.",
+      "aggravating": "The weakness and dizziness get much worse when I try to stand up or move around. Even sitting up in bed makes me feel lightheaded.",
+      "relieving": "Lying flat seems to help a little with the dizziness, but the weakness doesn't really improve with anything I've tried.",
+      "associated": "I've been feeling nauseous on and off, and I noticed my heart seems to be beating faster than usual. I also feel cold and clammy.",
+      "denies": "No chest pain, no shortness of breath, no blood in my urine or stool that I've noticed, no abdominal pain, no confusion or mental changes.",
+      "history": "I've never had surgery before, so this is all new to me. I did have some bleeding issues when I had dental work done a few years ago while on my blood thinner.",
+      "medications": "Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Lisinopril 20mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Celecoxib 200mg daily",
+      "allergies": "Penicillin",
+      "family": "My father had heart problems and my brother has the same heart rhythm issue I do. My mother has diabetes like me but no bleeding problems that I know of.",
+      "social": "I own and manage a restaurant, so I'm usually very active and on my feet all day. I quit smoking about 8 years ago and only drink socially. I really need to get back to work soon - my staff is counting on me."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "Vital signs assessment including orthostatic measurements",
+      "Inspection of surgical site and dressing",
+      "Assessment of mucous membranes and conjunctiva",
+      "Capillary refill time",
+      "Heart rate and rhythm assessment",
+      "Abdominal examination for distension or masses",
+      "Assessment for peripheral edema",
+      "Neurological assessment including mental status",
+      "Inspection for petechiae or ecchymoses",
+      "Assessment of skin temperature and moisture"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Post-Operative Surgical Bleeding. Document specifically what you observe."
+      "Vital signs assessment including orthostatic measurements": "Supine: BP 138/82, HR 78; Sitting: BP 124/76, HR 92; Standing: BP 108/68, HR 108 with patient reporting significant dizziness",
+      "Inspection of surgical site and dressing": "Right hip surgical dressing saturated with bright red blood, requiring reinforcement. Moderate serosanguineous drainage visible around dressing edges",
+      "Assessment of mucous membranes and conjunctiva": "Pale conjunctiva and mucous membranes, consistent with anemia",
+      "Capillary refill time": "Delayed capillary refill of 4 seconds",
+      "Heart rate and rhythm assessment": "Irregularly irregular rhythm consistent with atrial fibrillation, rate 78-92 bpm",
+      "Abdominal examination for distension or masses": "Soft, non-distended abdomen without masses or tenderness",
+      "Assessment for peripheral edema": "Trace bilateral lower extremity edema, unchanged from pre-operative baseline",
+      "Neurological assessment including mental status": "Alert and oriented x3, but appears fatigued and slightly anxious",
+      "Inspection for petechiae or ecchymoses": "Multiple small ecchymoses on arms and legs, some pre-existing, some new since surgery",
+      "Assessment of skin temperature and moisture": "Skin cool and slightly clammy to touch"
     },
     "ddxTargets": [
-        "Post-Operative Surgical Bleeding (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Post-Operative Surgical Bleeding (Post-THA Hemorrhage with Anticoagulation Complication) (correct diagnosis)",
+      "Hypovolemic shock secondary to hemorrhage",
+      "Medication-induced coagulopathy",
+      "Retroperitoneal hemorrhage",
+      "Pulmonary embolism",
+      "Post-operative infection/sepsis",
+      "Cardiac arrhythmia exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Post-Operative Surgical Bleeding, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Post-Operative Surgical Bleeding, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Post-Operative Surgical Bleeding based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on normal post-operative course and dismissing bleeding as typical surgical oozing rather than recognizing anticoagulation-related hemorrhage",
+      "prematureClosure": "Risk of stopping at 'post-operative bleeding' without considering the anticoagulation complication and need for urgent hemostasis measures",
+      "availabilityBias": "May overemphasize atrial fibrillation or diabetes complications due to prominent medical history rather than focusing on the acute bleeding scenario"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Fernando Alvarez-Diaz's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Post-Operative Surgical Bleeding (Post-THA Hemorrhage with Anticoagulation Complication). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient presents with weakness and dizziness 3 days post-THA. What key factors in his medication list might complicate post-operative recovery? How might his medical history influence your diagnostic approach and what red flags should you be most concerned about?",
+      "phase5": "You've identified significant orthostatic changes and ongoing surgical site bleeding in a patient on anticoagulation. What does this constellation of findings suggest about his volume status and hemostasis? How do you reconcile his relatively stable vital signs with his symptomatic presentation?",
+      "finalDebrief": "This case demonstrates how anticoagulation management in the perioperative period requires careful balance between thrombotic and bleeding risks. The patient's apixaban therapy, combined with surgical trauma, created a perfect storm for post-operative hemorrhage. Notice how the orthostatic vital signs and clinical presentation were more revealing than the baseline vital signs alone - this emphasizes the importance of functional assessment in detecting early shock states."
     }
-}
+  }
 };

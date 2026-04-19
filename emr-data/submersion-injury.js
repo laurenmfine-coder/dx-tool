@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sofia Ramirez",
-  "patientHPI": "She's been doing so well - talking up a storm with over 50 words now and even putting two words together, running around everywhere and climbing the stairs with just a little help from me. She sleeps great through the night and her skin rash has been much better lately.",
+    "patientHPI": "She's been doing so well - talking up a storm with over 50 words now and even putting two words together, running around everywhere and climbing the stairs with just a little help from me. She sleeps great through the night and her skin rash has been much better lately.",
     "dob": "07/12/2022",
     "age": 2,
     "sex": "Female",
@@ -167,20 +167,74 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "5.0-17.0 (age 1-3)", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "10.5-13.5 (age 1-3)", "flag": "" },
-            { "test": "Hematocrit", "value": "35.4", "unit": "%", "range": "33-39 (age 1-3)", "flag": "" },
-            { "test": "Platelet Count", "value": "310", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "5.0-17.0 (age 1-3)",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "10.5-13.5 (age 1-3)",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.4",
+              "unit": "%",
+              "range": "33-39 (age 1-3)",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "310",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "60-100", "flag": "" },
-            { "test": "BUN", "value": "8", "unit": "mg/dL", "range": "5-18", "flag": "" },
-            { "test": "Creatinine", "value": "0.2", "unit": "mg/dL", "range": "0.2-0.4 (age 1-3)", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "60-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "8",
+              "unit": "mg/dL",
+              "range": "5-18",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.2",
+              "unit": "mg/dL",
+              "range": "0.2-0.4 (age 1-3)",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.5",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -255,15 +309,42 @@ window.EMR_DATA = {
     "Maternal grandmother: T2DM, alive at 55"
   ],
   "socialHistory": [
-    ["Occupation", "Toddler — stays home with maternal grandmother while parents work"],
-    ["Marital", "N/A — minor"],
-    ["Tobacco", "N/A; no household smokers"],
-    ["Alcohol", "N/A"],
-    ["Drugs", "N/A"],
-    ["Exercise", "Active toddler — running, climbing, outdoor play daily"],
-    ["Housing", "Lives with parents and older brother in single-family home WITH UNFENCED BACKYARD POOL"],
-    ["Safety", "Car seat — rear-facing convertible; pool safety counseled extensively; cabinet locks installed; medications out of reach"],
-    ["Advance Directive", "Minor — parents are legal guardians"]
+    [
+      "Occupation",
+      "Toddler — stays home with maternal grandmother while parents work"
+    ],
+    [
+      "Marital",
+      "N/A — minor"
+    ],
+    [
+      "Tobacco",
+      "N/A; no household smokers"
+    ],
+    [
+      "Alcohol",
+      "N/A"
+    ],
+    [
+      "Drugs",
+      "N/A"
+    ],
+    [
+      "Exercise",
+      "Active toddler — running, climbing, outdoor play daily"
+    ],
+    [
+      "Housing",
+      "Lives with parents and older brother in single-family home WITH UNFENCED BACKYARD POOL"
+    ],
+    [
+      "Safety",
+      "Car seat — rear-facing convertible; pool safety counseled extensively; cabinet locks installed; medications out of reach"
+    ],
+    [
+      "Advance Directive",
+      "Minor — parents are legal guardians"
+    ]
   ],
   "meta": {
     "caseId": "submersion-injury",
@@ -274,75 +355,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Sofia Ramirez appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "The maternal grandmother appears anxious and distraught, speaking rapidly with tearful eyes as she holds the quiet, clingy toddler. Sofia is alert but unusually subdued, staying close to her grandmother and not displaying her typical active behavior described in the developmental history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did environmental emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened today?",
+      "How long was Sofia underwater or submerged?",
+      "What type of water was this - pool, lake, bathtub?",
+      "Was Sofia unconscious at any point?",
+      "Did Sofia vomit or cough up water?",
+      "Has Sofia been breathing normally since the incident?",
+      "How long ago did this happen?",
+      "Who pulled Sofia out of the water?",
+      "Was CPR performed or any rescue breathing?",
+      "Has Sofia seemed different since - less active, sleepy, confused?",
+      "Any chest pain or difficulty breathing?",
+      "Has she been eating or drinking normally since?",
+      "Any fever, chills, or other symptoms since the incident?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started She's been doing so well - talking up a storm with over 50 words now and even pu.'",
-        "character": "'It's environmental emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Submersion Injury.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrocortisone cream 1% PRN; Cetirizine syrup 2.5mg daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Eczema, asthma, alive at 28  Father: Healthy, alive at 30  Brother: Healthy, age 5",
-        "social": "Occupation: Toddler \u2014 stays home with maternal grandmother while parents work  Marital: N/A \u2014 minor  Tobacco: N/A; no household smokers  Alcohol: N/A  Drugs: N/A"
+      "default": "I'm sorry, I'm so shaken up right now. Can you ask me that again? I just want to make sure Sofia is okay.",
+      "onset": "It happened about 2 hours ago at the community pool. I turned away for just a second to get her towel and when I looked back, she had slipped and was face down in the shallow end.",
+      "character": "She wasn't moving at first when I pulled her out, but then she coughed up a lot of water and started crying. She's been very quiet since then, not her usual chatty self.",
+      "location": "It was the shallow end of the community pool, maybe 2 feet of water. She must have slipped on the wet concrete and fallen in face first.",
+      "severity": "I don't know how to rate it, but I've never been so scared in my life. She's breathing fine now but she's just not acting like herself - so quiet and clingy.",
+      "aggravating": "She seems more tired when she tries to run around like usual. She keeps wanting to sit on my lap instead of playing.",
+      "relieving": "Holding her close seems to help her feel better. She drank some water and that seemed okay.",
+      "associated": "She coughed up water right after I pulled her out, and she's had a few more coughs since. She seems a little more tired than usual but no fever.",
+      "denies": "No fever, no blue lips, she's been breathing fine since we got here. No vomiting after the initial water came up. No complaints of chest pain, but she's only 2 so hard to know.",
+      "history": "Never anything like this before. She's had a febrile seizure once when she was 18 months old but recovered completely from that.",
+      "medications": "Hydrocortisone cream 1% PRN; Cetirizine syrup 2.5mg daily",
+      "allergies": "NKDA",
+      "family": "Her mother has asthma and eczema, but no family history of heart problems or lung issues. No one in the family has had any drowning incidents.",
+      "social": "I watch Sofia during the day while both her parents work. We go to the community pool twice a week - she loves the water usually. No smokers in the house."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and mental status",
+      "Vital signs including oxygen saturation",
+      "Pulmonary examination with auscultation",
+      "Cardiac examination",
+      "Neurological assessment including Glasgow Coma Scale",
+      "Skin examination for cyanosis or pallor",
+      "Abdominal examination",
+      "Examination of oropharynx",
+      "Assessment of work of breathing",
+      "Temperature measurement"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Submersion Injury. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Submersion Injury. Document specifically what you observe."
+      "General appearance and mental status": "Alert, quiet 2-year-old female appearing tired but responsive to voice and visual stimuli, staying close to grandmother",
+      "Vital signs including oxygen saturation": "HR 118, RR 24, SpO2 99% on room air, afebrile at 98.6°F, BP unable to obtain due to patient cooperation",
+      "Pulmonary examination with auscultation": "Clear breath sounds bilaterally, no rales or rhonchi, occasional nonproductive cough",
+      "Cardiac examination": "Regular rate and rhythm, no murmurs, gallops, or rubs, capillary refill <2 seconds",
+      "Neurological assessment including Glasgow Coma Scale": "GCS 15 (age-appropriate), pupils equal and reactive, moving all extremities appropriately",
+      "Skin examination for cyanosis or pallor": "Pink mucous membranes, no cyanosis, mild chronic eczematous changes on arms consistent with history",
+      "Abdominal examination": "Soft, non-tender, no distension, normal bowel sounds",
+      "Examination of oropharynx": "Moist mucous membranes, no foreign material or froth visible",
+      "Assessment of work of breathing": "No retractions, nasal flaring, or accessory muscle use, breathing comfortably",
+      "Temperature measurement": "98.6°F, normothermic"
     },
     "ddxTargets": [
-        "Submersion Injury (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Submersion Injury (Freshwater Near-Drowning, Pediatric) (correct diagnosis)",
+      "Aspiration pneumonia secondary to submersion",
+      "Post-hypoxic encephalopathy",
+      "Acute respiratory distress syndrome (ARDS)",
+      "Secondary drowning syndrome",
+      "Upper respiratory infection with behavioral changes",
+      "Viral syndrome with fatigue"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Submersion Injury, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Submersion Injury, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Submersion Injury based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on normal vital signs and current stability, missing potential for delayed complications like secondary drowning or aspiration pneumonia",
+      "prematureClosure": "May discharge too quickly based on current stability without considering 24-48 hour observation period needed for potential delayed respiratory complications",
+      "availabilityBias": "If unfamiliar with pediatric submersion injuries, may treat as simple 'got water in lungs' rather than recognizing need for monitoring period"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Sofia Ramirez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Submersion Injury (Freshwater Near-Drowning, Pediatric). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider what specific details about the submersion event will help you assess severity and risk. What timeline factors and clinical signs would be most concerning in a pediatric near-drowning case?",
+      "phase5": "Now that you've gathered your history and exam findings, think about the natural progression of submersion injuries. Even though Sofia appears stable now, what delayed complications should you be concerned about in the next 24-48 hours?",
+      "finalDebrief": "This case illustrates the critical concept that submersion injuries can have a biphasic presentation. How did your differential diagnosis evolve from the initial presentation? What made you consider delayed complications even with normal initial findings?"
     }
-}
+  }
 };

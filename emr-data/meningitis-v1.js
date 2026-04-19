@@ -283,73 +283,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Emily Johnson is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Emily appears acutely ill and distressed, lying still with eyes closed to avoid light, speaking in a quiet, strained voice. She is cooperative but clearly suffering, wincing with any head movement and appearing anxious about her worsening symptoms. She's forthcoming about her symptoms but seems scared and wants to know what's wrong with her.",
     "interviewQuestions": [
-      "When did your symptoms start and how?",
-      "Describe the main symptom — location, character, severity.",
-      "What makes it worse? What makes it better?",
-      "Any other symptoms you've noticed?",
-      "Any prior similar episodes?",
-      "Tell me about your medical history.",
+      "When did your symptoms start and how quickly did they develop?",
+      "Can you describe the quality of your headache?",
+      "Where is the headache located and does it radiate anywhere?",
+      "On a scale of 1-10, how severe is your headache?",
+      "What makes your headache and neck stiffness worse?",
+      "Have you tried anything that helps with the pain?",
+      "Besides the headache, fever, neck stiffness, and light sensitivity, what other symptoms are you experiencing?",
+      "Have you had any rash or skin changes?",
+      "Have you ever had symptoms like this before?",
       "What medications are you currently taking?",
-      "Any medication allergies?",
-      "Relevant family history?",
-      "Tell me about your lifestyle."
+      "Do you have any drug allergies?",
+      "Has anyone else in your dorm been sick recently?",
+      "Do you use tobacco, alcohol, or other substances?"
     ],
     "patientResponses": {
-      "default": "He pauses. 'Can you clarify what you mean?'",
-      "onset": "'Gradually — over the past several days.'",
-      "character": "'The symptom has been significant and affecting my ability to function.'",
-      "location": "'The main problem is in the expected area for my condition.'",
-      "severity": "'Six or seven out of ten.'",
-      "aggravating": "'Activity and movement worsen it.'",
-      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-      "associated": "'Some associated symptoms consistent with this condition.'",
-      "denies": "'No fever, chills, or unexplained weight loss.'",
-      "history": "'I have not had exactly this before.'",
-      "medications": "'I take Combined OCP.'",
-      "allergies": "'My allergies: NKDA.'",
-      "family": "Non-contributory",
-      "social": "Tobacco: Never  Alcohol: Social — college parties  Living: College dormitory  Vaccination: Meningococcal vaccine up to date — serogroup B not covered"
+      "default": "I'm sorry, I'm having trouble focusing with this headache. Could you repeat that?",
+      "onset": "It started yesterday morning with just feeling tired, but by last night the headache was getting really bad. This morning I woke up with the fever and my neck was so stiff and painful.",
+      "character": "It's like the worst headache of my life - throbbing and pounding, like my head is going to explode. It's not like any headache I've ever had before.",
+      "location": "It's all over my head but worst in the back and sides. It doesn't really radiate anywhere, it's just this intense pressure everywhere.",
+      "severity": "It's definitely a 9 out of 10. I can barely function - I can't go to class, can't concentrate on anything, and even lying still hurts.",
+      "aggravating": "Any light makes it so much worse - that's why I have the lights off. Moving my head or neck is excruciating, and loud noises make me feel sick.",
+      "relieving": "I took some Tylenol and ibuprofen but they barely touched it. Lying still in a dark room helps a little bit but not much.",
+      "associated": "I've been really nauseous and threw up twice this morning. I feel weak and shaky, and I've been really confused and having trouble thinking clearly.",
+      "denies": "No rash that I've noticed, no ear pain, no sore throat, no cough, no problems with my vision other than the light hurting.",
+      "history": "No, never anything like this. I get occasional headaches during finals but nothing even close to this severe.",
+      "medications": "Combined OCP",
+      "allergies": "NKDA",
+      "family": "No one in my family has had meningitis or anything like that. Pretty healthy family overall.",
+      "social": "I'm a junior here at college, live in the dorms. I don't smoke, I drink socially at parties but not heavily. No drugs. I've been stressed with midterms but this isn't just stress."
     },
     "examManeuvers": [
-      "General appearance",
-      "Vital signs",
-      "Cardiovascular",
-      "Pulmonary",
-      "Abdominal",
-      "Extremities",
-      "Skin",
-      "Targeted exam"
+      "General appearance and mental status",
+      "Neck flexion (Brudzinski sign)",
+      "Hip flexion with knee extension (Kernig sign)",
+      "Fundoscopic examination",
+      "Neurological examination - cranial nerves",
+      "Skin examination for petechial rash",
+      "Neurological examination - motor and reflexes",
+      "Assessment of photophobia",
+      "Vital signs assessment",
+      "Lymph node examination"
     ],
     "examFindings": {
-      "General appearance": "Finding consistent with this condition.",
-      "Vital signs": "Finding consistent with this condition.",
-      "Cardiovascular": "Finding consistent with this condition.",
-      "Pulmonary": "Finding consistent with this condition.",
-      "Abdominal": "Finding consistent with this condition.",
-      "Extremities": "Finding consistent with this condition.",
-      "Skin": "Finding consistent with this condition.",
-      "Targeted exam": "Finding consistent with this condition."
+      "General appearance and mental status": "Acutely ill-appearing, lethargic but arousable, mild confusion and difficulty concentrating",
+      "Neck flexion (Brudzinski sign)": "Positive - passive neck flexion causes involuntary hip and knee flexion, patient reports severe pain",
+      "Hip flexion with knee extension (Kernig sign)": "Positive - unable to fully extend knee when hip is flexed at 90 degrees due to pain and resistance",
+      "Fundoscopic examination": "No papilledema, discs appear normal",
+      "Neurological examination - cranial nerves": "Cranial nerves II-XII grossly intact, no focal deficits noted",
+      "Skin examination for petechial rash": "No petechial or purpuric rash noted on trunk, extremities, or mucous membranes",
+      "Neurological examination - motor and reflexes": "Motor strength 5/5 throughout, reflexes 2+ and symmetric, no focal neurologic deficits",
+      "Assessment of photophobia": "Severe photophobia - patient unable to tolerate room lights, squints and turns away from penlight",
+      "Vital signs assessment": "Febrile at 39.8°C, tachycardic at 118 bpm, blood pressure 108/62, appears dehydrated",
+      "Lymph node examination": "No significant lymphadenopathy in cervical, axillary, or inguinal regions"
     },
     "ddxTargets": [
-      "this condition (correct)",
-      "Most likely alternative",
-      "Third differential",
-      "Must-not-miss 1",
-      "Must-not-miss 2",
-      "Common mimic 1",
-      "Common mimic 2"
+      "Bacterial meningitis (correct diagnosis)",
+      "Viral meningitis",
+      "Subarachnoid hemorrhage",
+      "Brain abscess",
+      "Viral encephalitis",
+      "Severe migraine headache",
+      "Tension headache with viral syndrome"
     ],
     "biasFlags": {
-      "anchoring": "Consider the full differential for this condition.",
-      "prematureClosure": "Complete your workup before narrowing focus.",
-      "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'college student headache' and dismissing as stress, hangover, or typical headache without recognizing the severity and constellation of meningeal signs",
+      "prematureClosure": "Risk of stopping at viral meningitis diagnosis without considering bacterial meningitis, or attributing symptoms to common college ailments like dehydration or sleep deprivation",
+      "availabilityBias": "Recent cases of migraine or tension headaches might make clinician less likely to consider life-threatening causes like bacterial meningitis in a young, otherwise healthy patient"
     },
     "coachPrompts": {
-      "phase2": "Before interviewing Emily Johnson: what does the chart suggest? Top 3 diagnoses?",
-      "phase5": "After history and exam: how has your differential changed?",
-      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified some concerning features in this case. Given this patient's setting and symptom constellation, what are the most serious diagnoses you need to rule out immediately? What specific historical details and physical exam findings will help you differentiate between your differential diagnoses?",
+      "phase5": "Your physical exam reveals positive meningeal signs in a febrile college student. How does this change your differential diagnosis prioritization? What is your most concerning diagnosis now, and what immediate next steps are warranted? Consider both diagnostic workup and treatment implications.",
+      "finalDebrief": "This case demonstrates the classic presentation of bacterial meningitis in a college student. Notice how the rapid symptom progression, positive meningeal signs, and dormitory setting created a high-risk scenario. Discuss how this case highlights the importance of not anchoring on 'typical college headache' and maintaining suspicion for life-threatening conditions when the clinical picture doesn't fit common benign causes."
     }
   }
 };

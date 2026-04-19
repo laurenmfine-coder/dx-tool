@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Green",
-  "patientHPI": "I was having dinner with my team tonight and took a bite of steak that just got stuck in my throat and won't go down. It's been about six hours now and I can't swallow anything, not even water. This has actually happened to me a few times before over the years when I eat meat or bread, but it usually goes down on its own after a while.",
+      "patientHPI": "I was having dinner with my team tonight and took a bite of steak that just got stuck in my throat and won't go down. It's been about six hours now and I can't swallow anything, not even water. This has actually happened to me a few times before over the years when I eat meat or bread, but it usually goes down on its own after a while.",
       "dob": "09/28/1997",
       "age": "29",
       "sex": "Male",
@@ -1124,94 +1124,99 @@ window.EMR_DATA = {
       "Presentation bias",
       "Diagnosed with GERD 3 years ago — PPI not helping, no one considered EoE"
     ]
-  ]
-,"references":[
-  {
-    "id": "EoE-AGA-2020",
-    "title": "AGA clinical practice update on dietary management of EoE",
-    "authors": "Hirano I, Chan ES, Rank MA, et al.",
-    "journal": "Gastroenterology",
-    "year": 2020,
-    "doi": "10.1053/j.gastro.2020.02.038",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
-    "openAccess": true,
-    "validates": [
-      "≥15 eos/HPF diagnostic threshold",
-      "1-food (milk) elimination first-line",
-      "Swallowed budesonide/fluticasone",
-      "Repeat EGD 8-12 weeks"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "EoE-AGA-2020",
+      "title": "AGA clinical practice update on dietary management of EoE",
+      "authors": "Hirano I, Chan ES, Rank MA, et al.",
+      "journal": "Gastroenterology",
+      "year": 2020,
+      "doi": "10.1053/j.gastro.2020.02.038",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
+      "openAccess": true,
+      "validates": [
+        "≥15 eos/HPF diagnostic threshold",
+        "1-food (milk) elimination first-line",
+        "Swallowed budesonide/fluticasone",
+        "Repeat EGD 8-12 weeks"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Green is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Marcus appears anxious and somewhat embarrassed about his eating habits, frequently apologizing for being a 'weird eater.' He's been minimizing his symptoms for years, thinking his slow eating and food avoidance were normal quirks. Currently experiencing moderate distress from the impaction but is cooperative and increasingly concerned this might represent something more serious.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what happened when you were eating the steak?",
+      "How long have you been having trouble swallowing foods?",
+      "What types of foods typically give you problems?",
+      "Do you have any chest pain or difficulty swallowing liquids?",
+      "Have you lost any weight recently or changed your eating habits?",
+      "Do you have any allergies or history of asthma?",
+      "Have you ever had food get stuck like this before?",
+      "Do you experience heartburn or acid reflux symptoms?",
+      "Has anyone in your family had similar swallowing problems?",
+      "Do you take any medications regularly?",
+      "Have you noticed any regurgitation of undigested food?",
+      "Do you have any nausea or vomiting right now?",
+      "Are you able to swallow your own saliva currently?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Glucagon; Omeprazole.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Brother: Crohn's disease  Mother: asthma",
-        "social": "Tobacco: Never  Alcohol: Social  Occupation: High school teacher and football coach  Diet: Reports long history of eating slowly, drinking lots of water with meals \u2014 thought this was normal  Coping: Has been cutting food into tiny pieces and avoiding steak/bread for years"
+      "default": "I'm sorry, could you repeat that? I'm a bit anxious about this whole situation.",
+      "onset": "It started about 6 hours ago during our team dinner. I was eating steak and it just got stuck - worse than usual. I tried drinking water but it wouldn't go down.",
+      "character": "It feels like there's a big piece of meat stuck right in the middle of my chest. I can't swallow anything, even water just comes back up.",
+      "location": "Right here in my chest, behind my breastbone. It doesn't move or radiate anywhere, just sits there.",
+      "severity": "Right now it's about a 7 out of 10. I can't swallow anything and I'm really worried. Usually when food gets stuck it's more like a 3 or 4.",
+      "aggravating": "Trying to swallow anything makes it worse. Even my own saliva is hard to get down now.",
+      "relieving": "Nothing is helping right now. Usually drinking lots of water helps, but not this time. That's why I came in.",
+      "associated": "I'm nauseous and I've been spitting up saliva and water. No chest pain really, just this stuck feeling.",
+      "denies": "No fever, no trouble breathing, no heartburn right now. I can breathe fine, it's just swallowing that's the problem.",
+      "history": "Honestly, I've always been a slow eater. For years I've avoided steak and bread because they get stuck. I thought everyone had to chew food this much.",
+      "medications": "Glucagon; Omeprazole",
+      "allergies": "NKDA",
+      "family": "My brother has Crohn's disease and my mom has asthma. No one else has swallowing problems that I know of.",
+      "social": "I'm a high school teacher and football coach. I don't smoke, drink socially. I've been cutting my food into tiny pieces for years and drinking tons of water with meals - thought that was normal."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect oropharynx and neck",
+      "Palpate neck for lymphadenopathy",
+      "Auscultate heart sounds",
+      "Auscultate lung fields",
+      "Inspect chest wall and assess respiratory effort",
+      "Palpate abdomen for tenderness or masses",
+      "Assess for signs of dehydration",
+      "Evaluate ability to handle secretions",
+      "Check for halitosis or regurgitated food odor"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect oropharynx and neck": "Oropharynx clear, no visible food debris, mild pooling of saliva, neck appears normal",
+      "Palpate neck for lymphadenopathy": "No cervical, supraclavicular, or submandibular lymphadenopathy palpated",
+      "Auscultate heart sounds": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+      "Auscultate lung fields": "Clear to auscultation bilaterally, no wheezes, crackles, or stridor",
+      "Inspect chest wall and assess respiratory effort": "No respiratory distress, normal chest wall movement, no accessory muscle use",
+      "Palpate abdomen for tenderness or masses": "Soft, non-tender, no masses or organomegaly, normal bowel sounds",
+      "Assess for signs of dehydration": "Mucous membranes slightly dry, skin turgor normal, appears mildly dehydrated",
+      "Evaluate ability to handle secretions": "Patient intermittently spitting into cup, difficulty managing saliva",
+      "Check for halitosis or regurgitated food odor": "Mild halitosis present, no obvious food odor"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Eosinophilic esophagitis with food impaction (correct diagnosis)",
+      "Esophageal stricture with food impaction",
+      "Achalasia",
+      "Esophageal perforation",
+      "Foreign body aspiration with airway obstruction",
+      "Gastroesophageal reflux disease with esophagitis",
+      "Esophageal carcinoma"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on simple food impaction without considering underlying esophageal pathology, especially given the long history of dysphagia and adaptive eating behaviors",
+      "prematureClosure": "May focus only on immediate impaction management without investigating the pattern of chronic dysphagia, food avoidance, and failure to respond to PPI therapy",
+      "availabilityBias": "Might default to GERD as explanation for chronic symptoms, missing the classic EoE presentation in a young male with food impaction and atopic family history"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Marcus Green: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview the patient, let's think about this case systematically. You have a young male with acute food impaction, but notice his history of being a 'slow eater' and avoiding certain foods. What underlying esophageal pathology might predispose someone to recurrent food impaction? Consider both structural and functional causes.",
+      "phase5": "Now that you've gathered more history and examined the patient, you've learned about his chronic adaptive eating behaviors and family history of atopic disease. His PPI-refractory symptoms and specific food triggers are telling. How does this change your differential diagnosis from simple food impaction to something more systemic?",
+      "finalDebrief": "This case illustrates how acute presentations can reveal chronic underlying pathology. Marcus's EoE was hiding in plain sight - the food avoidance, slow eating, and family atopy history were classic. Many patients adapt so well to their symptoms that the underlying disease goes undiagnosed for years. What red flags should make you think beyond simple GERD in young patients with dysphagia?"
     }
-}
+  }
 };

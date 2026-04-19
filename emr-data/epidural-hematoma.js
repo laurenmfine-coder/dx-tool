@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Reeves",
-  "patientHPI": "I fell and hit the left side of my head pretty hard. It happened earlier today and now I'm starting to feel really drowsy and confused, which is getting worse. My head is pounding and I feel like I might throw up.",
+    "patientHPI": "I fell and hit the left side of my head pretty hard. It happened earlier today and now I'm starting to feel really drowsy and confused, which is getting worse. My head is pounding and I feel like I might throw up.",
     "dob": "06/15/2004",
     "age": "22",
     "sex": "Male",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "9797 Oak Ave, Memphis, TN 38112",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Sarah Mitchell, MD",
-    "pharmacy": "Walmart Pharmacy \u2014 Federal Hwy",
+    "pharmacy": "Walmart Pharmacy — Federal Hwy",
     "emergencyContact": {
       "name": "Michael Walker",
       "phone": "(212) 555-7455",
@@ -49,7 +49,7 @@ window.EMR_DATA = {
       "bp": "162/88",
       "hr": "56",
       "rr": "14",
-      "temp": "36.8\u00b0C",
+      "temp": "36.8°C",
       "spo2": "98%",
       "pain": "4/10",
       "bmi": "34",
@@ -65,7 +65,7 @@ window.EMR_DATA = {
       "cc": "Fell and hit my head Left side of my head where I hit it",
       "hpi": "Tyler Reeves is a 22-year-old male presenting with fell and hit my head left side of my head where i hit it. Past medical history includes None significant. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Epidural Hematoma \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Epidural Hematoma — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -87,7 +87,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "12.1",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
@@ -108,7 +108,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "268",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -228,7 +228,7 @@ window.EMR_DATA = {
       "clinical": "Fell and hit my head Left side of my head where I hit it",
       "technique": "Standard protocol",
       "findings": "Large BICONVEX (lens-shaped) hyperdense collection in the left temporal-parietal region measuring approximately 15mm in maximal thickness. Mass effect with 8mm leftward-to-rightward midline shift. Effacement of the left lateral ventricle. Left temporal bone fracture crossing the middle meningeal artery groove. No underlying parenchymal contusion.",
-      "impression": "ACUTE EPIDURAL HEMATOMA \u2014 left temporal-parietal, 15mm thick, 8mm midline shift. NEUROSURGICAL EMERGENCY \u2014 requires emergent craniotomy.",
+      "impression": "ACUTE EPIDURAL HEMATOMA — left temporal-parietal, 15mm thick, 8mm midline shift. NEUROSURGICAL EMERGENCY — requires emergent craniotomy.",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -245,7 +245,7 @@ window.EMR_DATA = {
       "clinical": "Fell and hit my head Left side of my head where I hit it",
       "technique": "Standard protocol",
       "findings": "No fracture or subluxation. Normal alignment. No prevertebral soft tissue swelling.",
-      "impression": "No acute cervical spine injury \u2014 clear c-spine",
+      "impression": "No acute cervical spine injury — clear c-spine",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -262,7 +262,7 @@ window.EMR_DATA = {
       "clinical": "Fell and hit my head Left side of my head where I hit it",
       "technique": "Standard 12-lead",
       "findings": "Sinus bradycardia at 56 bpm. Normal intervals. No ST changes",
-      "impression": "Sinus bradycardia \u2014 Cushing response (bradycardia + hypertension = increased ICP)",
+      "impression": "Sinus bradycardia — Cushing response (bradycardia + hypertension = increased ICP)",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -315,75 +315,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Tyler Reeves appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Tyler appears increasingly confused and drowsy during the interview, with a flat affect and slow responses. He seems concerned but his mental status is clearly declining, making him less reliable as a historian. His wife may need to provide additional history as his confusion worsens.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did fell and hit my head left side of my head where i hit it start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened when you fell?",
+      "What time did the fall occur and when did your symptoms start?",
+      "Did you lose consciousness at any time?",
+      "How has your confusion and drowsiness changed since the injury?",
+      "Can you describe your headache - where is it and what does it feel like?",
+      "Have you vomited or just felt nauseous?",
+      "Any vision changes, dizziness, or weakness?",
+      "Were you drinking alcohol or using any substances today?",
+      "Have you ever had a head injury before?",
+      "Any bleeding problems in your family?",
+      "Are you taking any medications or blood thinners?",
+      "How high was the fall and what did you hit your head on?",
+      "Any numbness, tingling, or weakness in your arms or legs?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I fell and hit the left side of my head pretty hard.'",
-        "character": "'It's fell and hit my head left side of my head where i hit it \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies are Sulfa drugs.'",
-        "family": "Father: hypertension  No bleeding disorders",
-        "social": "Tobacco: Never  Alcohol: 1-2 beers occasionally  Drugs: Denies  Occupation: Electrician  Living: Lives with wife and two children"
+      "default": "I'm sorry, I'm having trouble concentrating... can you repeat that? My head really hurts.",
+      "onset": "I fell this morning around 10 AM off a ladder at work, hit the left side of my head on concrete. The drowsiness started maybe 2 hours ago and keeps getting worse.",
+      "character": "It's a severe, constant throbbing pain on the left side of my head, like someone's hitting me with a hammer.",
+      "location": "Left side of my head where I hit it, doesn't really go anywhere else.",
+      "severity": "The pain is about an 8 out of 10, and I can barely think straight. I couldn't finish work today.",
+      "aggravating": "Moving my head makes it worse, bright lights bother me a lot.",
+      "relieving": "Nothing really helps. I tried lying down but I just feel more confused.",
+      "associated": "I feel really nauseous like I might throw up, and I'm so drowsy I can barely keep my eyes open. Everything seems foggy.",
+      "denies": "No vision changes, no weakness in my arms or legs, no seizures.",
+      "history": "Never had a head injury like this before, maybe minor bumps but nothing serious.",
+      "medications": "no medications",
+      "allergies": "Sulfa drugs",
+      "family": "My dad has high blood pressure but no bleeding problems or anything like that in the family.",
+      "social": "I'm an electrician, fell off a 6-foot ladder. I never smoke, maybe have 1-2 beers on weekends but none today. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Glasgow Coma Scale assessment",
+      "Pupillary examination",
+      "Fundoscopic examination",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Deep tendon reflexes",
+      "Coordination testing",
+      "Inspection and palpation of head/scalp",
+      "Neck examination for meningeal signs",
+      "Vital signs assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Glasgow Coma Scale assessment": "GCS 13 (Eyes 4, Verbal 4, Motor 5) - patient is drowsy but arousable, slightly confused",
+      "Pupillary examination": "Left pupil 4mm and sluggishly reactive, right pupil 2mm and briskly reactive",
+      "Fundoscopic examination": "Difficult to visualize due to patient cooperation, no obvious papilledema seen",
+      "Cranial nerve examination": "CN II-XII grossly intact, though patient has difficulty with complex commands",
+      "Motor strength testing": "5/5 strength in all extremities, no focal weakness",
+      "Deep tendon reflexes": "2+ and symmetric throughout",
+      "Coordination testing": "Finger-to-nose intact bilaterally, though patient moves slowly",
+      "Inspection and palpation of head/scalp": "Large hematoma and tenderness over left temporal region, no obvious skull depression",
+      "Neck examination for meningeal signs": "No neck stiffness, negative Kernig and Brudzinski signs",
+      "Vital signs assessment": "Hypertensive at 162/88, bradycardic at 56 - concerning for Cushing's triad"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Epidural hematoma (correct diagnosis)",
+      "Subdural hematoma",
+      "Traumatic brain injury with cerebral contusion",
+      "Intracranial hemorrhage",
+      "Skull fracture with brain injury",
+      "Concussion with post-concussive syndrome",
+      "Intoxication or substance use"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'simple concussion' in a young, healthy patient and missing the lucid interval and evolving epidural hematoma",
+      "prematureClosure": "May stop evaluation after normal initial mental status, missing the classic 'talk and die' progression of epidural hematoma",
+      "availabilityBias": "Concussion is much more common than epidural hematoma, may not consider the more serious diagnosis despite classic presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Tyler Reeves's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified head trauma as the key issue. This patient is showing neurological decline hours after injury. What specific complications of head trauma should you be most concerned about in someone with this timeline? Think about the classic patterns of intracranial bleeding.",
+      "phase5": "You've found anisocoria, declining mental status, and hypertension with bradycardia hours after temporal impact. This constellation of findings should make you think of a specific neurosurgical emergency. What's the most likely anatomical location and type of bleeding?",
+      "finalDebrief": "This case illustrates the classic 'lucid interval' of epidural hematoma - initial relatively normal function followed by rapid deterioration. The temporal impact, anisocoria, Cushing's triad, and timeline all point to arterial bleeding requiring emergent neurosurgical intervention. How did your differential diagnosis evolve as you gathered more data?"
     }
-}
+  }
 };

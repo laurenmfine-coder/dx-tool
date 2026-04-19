@@ -470,75 +470,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Richard Fontaine appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mr. Fontaine appears anxious and visibly concerned about his worsening symptoms, particularly the blood-streaked sputum. Despite his tough exterior from years as a mechanic, he's forthcoming about his symptoms but defensive about his continued smoking, showing clear distress when discussing his breathing difficulties.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did shortness of breath start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
+      "Can you describe when this cough first started and how it's changed?",
+      "Tell me about the sputum you're coughing up - what does it look like?",
+      "How much blood have you seen in your sputum?",
+      "Describe your shortness of breath - when does it occur?",
+      "Have you had any chest pain with breathing or coughing?",
+      "Tell me about the fevers and night sweats you mentioned.",
+      "Have you lost any weight recently without trying?",
+      "How does this compare to your usual COPD symptoms?",
       "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Do you have any drug allergies?",
+      "Tell me about your smoking history and any quit attempts.",
+      "What's your family history of lung or other cancers?",
+      "Describe your work history and any exposures you've had."
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started I've had this awful cough for about two weeks now that just keeps getting worse,.'",
-      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer with Post-Obstructive Pneumonia.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Albuterol 90mcg MDI PRN; Lisinopril 20mg daily; Omeprazole 20mg daily; Aspirin 81mg daily.'",
-      "allergies": "'My allergies are NKDA.'",
-      "family": "Father: Lung cancer (small cell, diagnosed age 62, deceased age 63). Heavy smoker.  Mother: COPD, deceased age 78 (respiratory failure)  Brother: Bladder cancer (age 65, in remission), smoker",
-      "social": "Occupation: Auto mechanic (45 years). Occupational exposure to asbestos (brake linings), solvents, and exhaust fumes. Currently semi-retired, works 2 days/week.  Marital: Married, lives with wife  Tobacco: Active smoker — 1 PPD x 55 years (55 pack-years). Multiple quit attempts, always returns within weeks.  Alcohol: Social — 2-3 beers daily  Drugs: Denies"
+      "default": "I'm not sure what you're asking, doc. Can you be more specific about what you want to know?",
+      "onset": "This cough started about two weeks ago and has gotten progressively worse. It's different from my usual COPD cough - much more persistent and productive.",
+      "character": "It's a deep, wet cough that brings up thick yellow-green mucus. Sometimes there are streaks of bright red blood mixed in, which really scares me.",
+      "location": "The cough feels like it's coming from deep in my chest, and I get this aching pain on the right side when I cough hard.",
+      "severity": "I'd say the cough is about an 8 out of 10 - it keeps me up at night. The shortness of breath is maybe a 7 - I can barely walk 50 feet without stopping.",
+      "aggravating": "The cough gets worse when I lie flat, and any exertion makes my breathing terrible. Cold air also seems to trigger coughing fits.",
+      "relieving": "My albuterol helps a little with the breathing, but nothing really stops this cough. Even cough drops don't help much.",
+      "associated": "I've had low-grade fevers around 100-101°F, night sweats that soak my sheets, and I've lost about 15 pounds in the last month without trying.",
+      "denies": "No chest pain at rest, no swelling in my legs, no nausea or vomiting. Haven't had any recent travel or sick contacts.",
+      "history": "I've never had anything like this before. My usual COPD flares are different - more wheezing, less sputum production, and definitely no blood.",
+      "medications": "Tiotropium (Spiriva) 18mcg INH daily; Albuterol 90mcg MDI PRN; Lisinopril 20mg daily; Omeprazole 20mg daily; Aspirin 81mg daily",
+      "allergies": "NKDA",
+      "family": "My dad died of small cell lung cancer at 63 - he was a heavy smoker too. My mom had COPD and died of respiratory failure. My brother had bladder cancer but he's doing okay now.",
+      "social": "I've been an auto mechanic for 45 years, exposed to asbestos in brake linings, solvents, and exhaust fumes daily. I smoke a pack a day for 55 years - tried to quit many times but always go back. I drink 2-3 beers daily."
     },
     "examManeuvers": [
-      "General appearance and respiratory effort",
-      "Vital signs and pulse oximetry",
-      "Pulmonary auscultation",
-      "Percussion of lung fields",
-      "Accessory muscle use",
-      "Cardiovascular auscultation",
-      "Lower extremity DVT assessment",
-      "Tracheal position"
+      "General appearance and distress level",
+      "Lymph node examination (cervical, supraclavicular, axillary)",
+      "Chest inspection and respiratory effort",
+      "Chest percussion",
+      "Chest auscultation",
+      "Heart sounds and rhythm",
+      "Extremity examination for clubbing and edema",
+      "Abdominal examination for hepatomegaly",
+      "Neurologic screening for focal deficits"
     ],
     "examFindings": {
-      "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Percussion of lung fields": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Accessory muscle use": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-      "Tracheal position": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe."
+      "General appearance and distress level": "Ill-appearing male in mild respiratory distress, using accessory muscles, speaking in short sentences",
+      "Lymph node examination (cervical, supraclavicular, axillary)": "Enlarged, firm, non-tender right supraclavicular lymph node approximately 2cm",
+      "Chest inspection and respiratory effort": "Increased anteroposterior diameter consistent with COPD, asymmetric chest expansion with decreased movement on right side",
+      "Chest percussion": "Dullness to percussion over right lower lobe",
+      "Chest auscultation": "Diminished breath sounds right lower lobe with coarse crackles, expiratory wheeze bilaterally",
+      "Heart sounds and rhythm": "Regular rate and rhythm, no murmurs, gallops, or rubs",
+      "Extremity examination for clubbing and edema": "Digital clubbing present, no peripheral edema",
+      "Abdominal examination for hepatomegaly": "Soft, non-tender, liver edge palpable 2cm below costal margin",
+      "Neurologic screening for focal deficits": "Alert and oriented, no focal neurologic deficits, normal strength and reflexes"
     },
     "ddxTargets": [
       "Lung Cancer with Post-Obstructive Pneumonia (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "COPD Exacerbation with Secondary Bacterial Infection",
+      "Primary Bacterial Pneumonia",
+      "Pulmonary Embolism with Infarction",
+      "Tuberculosis",
+      "Lung Abscess",
+      "Bronchiectasis with Acute Infection"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer with Post-Obstructive Pneumonia, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Lung Cancer with Post-Obstructive Pneumonia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Lung Cancer with Post-Obstructive Pneumonia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on COPD exacerbation given patient's known history, potentially missing the underlying malignancy causing post-obstructive pneumonia",
+      "prematureClosure": "May stop investigation after finding pneumonia on imaging without looking for underlying obstruction or considering malignancy in high-risk patient",
+      "availabilityBias": "Recent cases of COPD exacerbation or community-acquired pneumonia might overshadow consideration of lung cancer despite classic presentation"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Richard Fontaine's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Lung Cancer with Post-Obstructive Pneumonia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has concerning features beyond a typical COPD exacerbation. What red flags in the history should make you think about underlying pathology? Consider his risk factors and the constellation of symptoms.",
+      "phase5": "You've found some key physical findings including the supraclavicular lymph node and asymmetric chest findings. How do these findings, combined with his symptom complex and risk factors, help narrow your differential diagnosis?",
+      "finalDebrief": "This case illustrates how lung cancer can present with post-obstructive pneumonia, creating a complex clinical picture. The key was recognizing that this wasn't a typical COPD exacerbation - the hemoptysis, weight loss, and supraclavicular lymphadenopathy were crucial red flags pointing toward malignancy."
     }
   }
 };

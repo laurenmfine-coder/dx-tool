@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Mateo Rivera",
-  "patientHPI": "My parents brought me in for my regular checkup - I've been eating well and they say I'm pretty active for my age, though I did spit up once yesterday which worried them a little.",
+    "patientHPI": "My parents brought me in for my regular checkup - I've been eating well and they say I'm pretty active for my age, though I did spit up once yesterday which worried them a little.",
     "dob": "12/05/2024",
     "age": 0,
     "sex": "Male",
@@ -136,39 +136,147 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC) WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "18.6", "unit": "x10³/µL", "range": "5.0-19.5", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "9.5-14.0", "flag": "" },
-            { "test": "Hematocrit", "value": "37.2", "unit": "%", "range": "28-42", "flag": "" },
-            { "test": "Platelets", "value": "188", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Neutrophils", "value": "68", "unit": "%", "range": "15-45", "flag": "H" },
-            { "test": "Bands", "value": "6", "unit": "%", "range": "0-5", "flag": "H" },
-            { "test": "Lymphocytes", "value": "20", "unit": "%", "range": "40-70", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "18.6",
+              "unit": "x10³/µL",
+              "range": "5.0-19.5",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "9.5-14.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.2",
+              "unit": "%",
+              "range": "28-42",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "188",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Neutrophils",
+              "value": "68",
+              "unit": "%",
+              "range": "15-45",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "6",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "20",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "58", "unit": "mg/dL", "range": "50-90", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "3-12", "flag": "H" },
-            { "test": "Creatinine", "value": "0.3", "unit": "mg/dL", "range": "0.1-0.4", "flag": "" },
-            { "test": "Sodium", "value": "133", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "5.4", "unit": "mEq/L", "range": "3.5-6.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "14", "unit": "mEq/L", "range": "18-25", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "58",
+              "unit": "mg/dL",
+              "range": "50-90",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "3-12",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.3",
+              "unit": "mg/dL",
+              "range": "0.1-0.4",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "133",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.4",
+              "unit": "mEq/L",
+              "range": "3.5-6.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "14",
+              "unit": "mEq/L",
+              "range": "18-25",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "6.8", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "6.8",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BLOOD GAS (VENOUS)",
           "results": [
-            { "test": "pH", "value": "7.22", "unit": "", "range": "7.32-7.42", "flag": "L" },
-            { "test": "pCO2", "value": "32", "unit": "mmHg", "range": "35-45", "flag": "L" },
-            { "test": "Base Excess", "value": "-12", "unit": "mEq/L", "range": "-2 to +2", "flag": "L" }
+            {
+              "test": "pH",
+              "value": "7.22",
+              "unit": "",
+              "range": "7.32-7.42",
+              "flag": "L"
+            },
+            {
+              "test": "pCO2",
+              "value": "32",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": "L"
+            },
+            {
+              "test": "Base Excess",
+              "value": "-12",
+              "unit": "mEq/L",
+              "range": "-2 to +2",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -209,12 +317,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Hepatitis B (Engerix-B)", "date": "12/05/2024", "site": "Right thigh IM", "lot": "HB721K", "mfr": "GSK" },
-    { "vaccine": "DTaP (Daptacel)", "date": "02/04/2025", "site": "Right thigh IM", "lot": "DA518R", "mfr": "Sanofi" },
-    { "vaccine": "IPV (IPOL)", "date": "02/04/2025", "site": "Left thigh IM", "lot": "IP342T", "mfr": "Sanofi" },
-    { "vaccine": "Hib (ActHIB)", "date": "02/04/2025", "site": "Right thigh IM", "lot": "AH229P", "mfr": "Sanofi" },
-    { "vaccine": "PCV15 (Vaxneuvance)", "date": "02/04/2025", "site": "Left thigh IM", "lot": "PV128L", "mfr": "Merck" },
-    { "vaccine": "Rotavirus (RotaTeq)", "date": "02/04/2025", "site": "Oral", "lot": "RV831M", "mfr": "Merck" }
+    {
+      "vaccine": "Hepatitis B (Engerix-B)",
+      "date": "12/05/2024",
+      "site": "Right thigh IM",
+      "lot": "HB721K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "DTaP (Daptacel)",
+      "date": "02/04/2025",
+      "site": "Right thigh IM",
+      "lot": "DA518R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "IPV (IPOL)",
+      "date": "02/04/2025",
+      "site": "Left thigh IM",
+      "lot": "IP342T",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "Hib (ActHIB)",
+      "date": "02/04/2025",
+      "site": "Right thigh IM",
+      "lot": "AH229P",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "PCV15 (Vaxneuvance)",
+      "date": "02/04/2025",
+      "site": "Left thigh IM",
+      "lot": "PV128L",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Rotavirus (RotaTeq)",
+      "date": "02/04/2025",
+      "site": "Oral",
+      "lot": "RV831M",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother (age 24): Healthy, no significant medical history",
@@ -224,14 +368,38 @@ window.EMR_DATA = {
     "No family history of congenital GI anomalies, Hirschsprung disease, or cystic fibrosis"
   ],
   "socialHistory": [
-    ["Guardian", "Lives with both parents; first child"],
-    ["Childcare", "Cared for at home by mother (on maternity leave)"],
-    ["Tobacco Exposure", "None — no smokers in household"],
-    ["Pets", "One small dog (Chihuahua)"],
-    ["Home Environment", "Apartment; infant sleeps in crib in parent bedroom"],
-    ["Feeding", "Breastfeeding with occasional formula supplement (Similac Advance); was taking 4-5 oz every 2-3 hours until onset of vomiting"],
-    ["Development", "Social smile, tracking objects, lifting head — age-appropriate at 2-month visit"],
-    ["Safety", "Rear-facing infant car seat; safe sleep practiced; no co-sleeping"]
+    [
+      "Guardian",
+      "Lives with both parents; first child"
+    ],
+    [
+      "Childcare",
+      "Cared for at home by mother (on maternity leave)"
+    ],
+    [
+      "Tobacco Exposure",
+      "None — no smokers in household"
+    ],
+    [
+      "Pets",
+      "One small dog (Chihuahua)"
+    ],
+    [
+      "Home Environment",
+      "Apartment; infant sleeps in crib in parent bedroom"
+    ],
+    [
+      "Feeding",
+      "Breastfeeding with occasional formula supplement (Similac Advance); was taking 4-5 oz every 2-3 hours until onset of vomiting"
+    ],
+    [
+      "Development",
+      "Social smile, tracking objects, lifting head — age-appropriate at 2-month visit"
+    ],
+    [
+      "Safety",
+      "Rear-facing infant car seat; safe sleep practiced; no co-sleeping"
+    ]
   ],
   "meta": {
     "caseId": "midgut-volvulus",
@@ -242,75 +410,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Mateo Rivera appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "As an infant, I appear lethargic and inconsolable with periods of irritability, showing signs of significant distress through crying and restlessness. My parents are extremely worried as I seem different from my usual self, and they're having difficulty comforting me despite their best efforts.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did pediatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the baby seemed unwell or different?",
+      "Has the baby been vomiting, and if so, what does it look like?",
+      "How has the baby's feeding been - taking bottles normally?",
+      "Has the baby had any bowel movements today, and what did they look like?",
+      "Is the baby's abdomen appearing swollen or distended?",
+      "How has the baby's energy level and alertness been?",
+      "Has the baby been crying more than usual or inconsolable?",
+      "Any fever or changes in temperature you've noticed?",
+      "Has the baby been pulling legs up toward the belly?",
+      "Any changes in the baby's color or breathing?",
+      "What medications is the baby currently taking?",
+      "Any known allergies?",
+      "Any family history of bowel problems or birth defects?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My parents brought me in for my regular checkup - I've been eating well and they.'",
-        "character": "'It's pediatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Vitamin D 400 IU drops daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother (age 24): Healthy, no significant medical history  Father (age 27): Childhood appendectomy; otherwise healthy  Maternal grandmother (age 52): Type 2 Diabetes, hypertension",
-        "social": "Guardian: Lives with both parents; first child  Childcare: Cared for at home by mother (on maternity leave)  Tobacco Exposure: None \u2014 no smokers in household  Pets: One small dog (Chihuahua)  Home Environment: Apartment; infant sleeps in crib in parent bedroom"
+      "default": "The baby can't tell us, but we've noticed some changes that worry us",
+      "onset": "He started acting fussy about 6 hours ago, then began vomiting green stuff about 3 hours ago - it's gotten much worse",
+      "character": "The vomit is bright green and projectile - nothing like normal spit-up",
+      "location": "His whole belly seems swollen and tight, and he screams when we touch it",
+      "severity": "He's never been this sick - 9/10 - he won't stop crying and seems so weak now",
+      "aggravating": "Any movement or touching his belly makes him scream louder",
+      "relieving": "Nothing helps - not feeding, not rocking, not anything we usually do",
+      "associated": "He's very lethargic now, hasn't had a bowel movement since yesterday, and his breathing seems faster",
+      "denies": "No fever, no recent illness, he was fine this morning at feeding time",
+      "history": "He had some mild jaundice as a newborn but that resolved - never anything like this",
+      "medications": "Vitamin D 400 IU drops daily",
+      "allergies": "NKDA",
+      "family": "No family history of bowel problems - my grandmother has diabetes but nothing related to this",
+      "social": "First baby, I'm home on maternity leave, no smoking in the house, he sleeps in our room"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Abdominal inspection for distension",
+      "Abdominal palpation for masses or tenderness",
+      "Bowel sounds auscultation",
+      "Assessment of hydration status",
+      "Cardiac examination for tachycardia",
+      "Respiratory examination",
+      "Neurologic assessment for lethargy",
+      "Inspection for cyanosis or color changes",
+      "Digital rectal examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. Document specifically what you observe."
+      "General appearance and level of distress": "Lethargic infant with periods of inconsolable crying, appears ill and dehydrated",
+      "Abdominal inspection for distension": "Moderate abdominal distension with visible loops of bowel",
+      "Abdominal palpation for masses or tenderness": "Diffuse abdominal tenderness, possible sausage-shaped mass in right upper quadrant",
+      "Bowel sounds auscultation": "Diminished to absent bowel sounds throughout",
+      "Assessment of hydration status": "Signs of moderate dehydration - dry mucous membranes, delayed capillary refill >3 seconds",
+      "Cardiac examination for tachycardia": "Tachycardic at 204 bpm, regular rhythm",
+      "Respiratory examination": "Tachypneic with shallow respirations, no retractions",
+      "Neurologic assessment for lethargy": "Decreased responsiveness, weak cry, hypotonic",
+      "Inspection for cyanosis or color changes": "Mild pallor, no frank cyanosis",
+      "Digital rectal examination": "Empty rectal vault, no stool present"
     },
     "ddxTargets": [
-        "Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Intestinal Malrotation with Midgut Volvulus — Acute Presentation with Metabolic Acidosis",
+      "Intussusception",
+      "Necrotizing Enterocolitis",
+      "Sepsis with Shock",
+      "Congenital Heart Disease with Heart Failure",
+      "Pyloric Stenosis",
+      "Viral Gastroenteritis with Dehydration"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Don't anchor on the 'routine checkup' chief complaint - the parents may not recognize the severity of surgical emergency",
+      "prematureClosure": "Bilious vomiting in an infant is a surgical emergency until proven otherwise - don't settle for medical causes without imaging",
+      "availabilityBias": "While pyloric stenosis is more common, malrotation with volvulus is the can't-miss diagnosis with bilious vomiting"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Mateo Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Intestinal Malrotation with Midgut Volvulus \u2014 Acute Presentation with Metabolic Acidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some concerning differentials. In a newborn with bilious vomiting, what's the most critical distinction you need to make between medical and surgical causes? What questions will help you determine the acuity?",
+      "phase5": "Your physical exam reveals concerning findings. Given the combination of bilious vomiting, abdominal distension, and this infant's clinical appearance, what imaging study would you order immediately and why?",
+      "finalDebrief": "This case highlights the critical importance of recognizing bilious vomiting as a surgical emergency in infants. How did your differential evolve from considering common medical causes to focusing on surgical emergencies? What clinical pearls will you remember about malrotation with volvulus?"
     }
-}
+  }
 };

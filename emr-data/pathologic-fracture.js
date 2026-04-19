@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "William Henry Davenport",
-  "patientHPI": "The pain in my right thigh has been getting much worse lately - it used to only hurt when I walked, but now it aches even when I'm sitting still. When I try to put weight on it, I get this sharp, shooting pain that makes me need to use my cane more often.",
+    "patientHPI": "The pain in my right thigh has been getting much worse lately - it used to only hurt when I walked, but now it aches even when I'm sitting still. When I try to put weight on it, I get this sharp, shooting pain that makes me need to use my cane more often.",
     "dob": "08/30/1948",
     "age": 76,
     "sex": "Male",
@@ -153,7 +153,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "158 lbs",
       "ht": "5'11\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "Oncology Office"
     },
     {
@@ -220,37 +220,133 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "98", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "20", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "10.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" },
-            { "test": "Alkaline Phosphatase", "value": "312", "unit": "U/L", "range": "44-147", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "42", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "38", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Albumin", "value": "3.2", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "20",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "312",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "42",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.2",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "9.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "29.4", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "142", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "5.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "9.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "29.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "142",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "TUMOR MARKERS",
           "results": [
-            { "test": "PSA (Total)", "value": "68.4", "unit": "ng/mL", "range": "<4.0", "flag": "H" }
+            {
+              "test": "PSA (Total)",
+              "value": "68.4",
+              "unit": "ng/mL",
+              "range": "<4.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LDH",
           "results": [
-            { "test": "Lactate Dehydrogenase", "value": "342", "unit": "U/L", "range": "140-280", "flag": "H" }
+            {
+              "test": "Lactate Dehydrogenase",
+              "value": "342",
+              "unit": "U/L",
+              "range": "140-280",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -327,15 +423,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 72"
   ],
   "socialHistory": [
-    ["Occupation", "Retired real estate attorney"],
-    ["Marital", "Married — 48 years"],
-    ["Tobacco", "Former smoker — 15 pack-years; quit 2000"],
-    ["Alcohol", "Rare — stopped since diagnosis"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited — walks with cane; mostly sedentary due to pain and fatigue"],
-    ["Housing", "Lives with wife in single-story home; wife is primary caregiver; hospice discussed but not yet enrolled"],
-    ["Safety", "Uses cane; falls precautions in place; aware of pathologic fracture risk — told to avoid twisting/heavy lifting"],
-    ["Advance Directive", "Yes — healthcare proxy: wife Laura Davenport; DNR/DNI; comfort-focused care preferred; hospice discussion pending"]
+    [
+      "Occupation",
+      "Retired real estate attorney"
+    ],
+    [
+      "Marital",
+      "Married — 48 years"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 15 pack-years; quit 2000"
+    ],
+    [
+      "Alcohol",
+      "Rare — stopped since diagnosis"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — walks with cane; mostly sedentary due to pain and fatigue"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home; wife is primary caregiver; hospice discussed but not yet enrolled"
+    ],
+    [
+      "Safety",
+      "Uses cane; falls precautions in place; aware of pathologic fracture risk — told to avoid twisting/heavy lifting"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: wife Laura Davenport; DNR/DNI; comfort-focused care preferred; hospice discussion pending"
+    ]
   ],
   "meta": {
     "caseId": "pathologic-fracture",
@@ -346,75 +469,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "William Henry Davenport is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "William appears worried and slightly fatigued, speaking in measured tones as he describes his worsening pain. He's forthcoming about his symptoms and medical history, understanding the seriousness of his cancer diagnosis, but shows visible distress when discussing his declining mobility. He maintains composure but occasionally winces when shifting position, clearly experiencing significant discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the pain in your right thigh getting worse?",
+      "Can you describe the quality of the pain you're experiencing?",
+      "Where exactly is the pain located, and does it travel anywhere else?",
+      "On a scale of 1-10, how would you rate your pain right now?",
+      "What makes the pain worse or better?",
+      "Have you had any falls or injuries recently?",
+      "Are you experiencing any other symptoms like fever, chills, or night sweats?",
+      "How has this pain affected your daily activities and mobility?",
+      "Have you noticed any changes in your leg strength or ability to bear weight?",
+      "When was your last oncology appointment and imaging studies?",
+      "Are your current pain medications still helping?",
+      "Have you had similar episodes of bone pain before?",
+      "Any numbness, tingling, or changes in sensation in your leg?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started The pain in my right thigh has been getting much worse lately - it used to only .'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Pathologic Fracture.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Enzalutamide 160mg daily; Denosumab (Xgeva) 120mg SC monthly; Oxycodone ER 20mg BID; Oxycodone IR 5mg q4h PRN; Gabapentin 300mg TID; Docusate Sodium 100mg BID; Senna 8.6mg BID; Amlodipine 5mg daily.'",
-        "allergies": "'My allergies are Hydromorphone.'",
-        "family": "Mother: Breast cancer, deceased at 74  Father: Prostate cancer (age 72), deceased at 80  Brother: Prostate cancer (age 68), alive at 74 \u2014 localized, treated with radiation",
-        "social": "Occupation: Retired real estate attorney  Marital: Married \u2014 48 years  Tobacco: Former smoker \u2014 15 pack-years; quit 2000  Alcohol: Rare \u2014 stopped since diagnosis  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently? I want to make sure I give you the right information about what's been happening.",
+      "onset": "The pain really started ramping up about 2-3 weeks ago. It used to be manageable with my regular pain medication, but lately it's been getting progressively worse, especially over the past week.",
+      "character": "It's a deep, aching pain most of the time, but when I try to put weight on my right leg, it becomes this sharp, stabbing pain that takes my breath away. Sometimes it feels like the bone itself is being crushed.",
+      "location": "The pain is mainly in my right thigh, about mid-thigh to upper thigh area. Sometimes it seems to radiate down toward my knee, but the worst part is definitely in the upper part of my thigh bone.",
+      "severity": "Right now, just sitting here, it's about a 6 out of 10. But when I try to stand or put weight on it, it shoots up to an 8 or 9. It's really limiting what I can do.",
+      "aggravating": "Weight-bearing is definitely the worst - trying to stand up, walk, or even shift my weight from one leg to the other. Even rolling over in bed at night can trigger the sharp pain.",
+      "relieving": "My regular pain medications help a little, but not like they used to. Sitting still and keeping weight off the leg helps somewhat, but even then there's still that constant ache.",
+      "associated": "I've been more tired lately, and I think I've lost a little weight. No fever or chills, but I have been having more trouble sleeping because of the pain.",
+      "denies": "No recent falls or injuries that I can remember. No numbness or tingling in my leg. No bowel or bladder problems. No back pain.",
+      "history": "I've had bone pain from my cancer before, but this feels different - more intense and constant. My previous bone pain was more manageable with medication.",
+      "medications": "Enzalutamide 160mg daily; Denosumab (Xgeva) 120mg SC monthly; Oxycodone ER 20mg BID; Oxycodone IR 5mg q4h PRN; Gabapentin 300mg TID; Docusate Sodium 100mg BID; Senna 8.6mg BID; Amlodipine 5mg daily",
+      "allergies": "Hydromorphone",
+      "family": "My father had prostate cancer when he was 72 - he lived until 80. My brother also has prostate cancer but his was caught early and treated with radiation. My mother had breast cancer and passed away at 74.",
+      "social": "I'm a retired real estate attorney, married for 48 years. I smoked for about 15 pack-years but quit back in 2000. I used to have an occasional drink but stopped when I was diagnosed with cancer. No illicit drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of right thigh",
+      "Palpation of right femur",
+      "Range of motion testing of right hip",
+      "Weight-bearing assessment",
+      "Straight leg raise test",
+      "Neurological examination of lower extremities",
+      "Palpation of lymph nodes",
+      "Assessment of leg length discrepancy",
+      "Percussion test of right femur",
+      "Functional mobility assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Pathologic Fracture. Document specifically what you observe."
+      "Inspection of right thigh": "No obvious deformity or swelling, but patient favors the right leg and avoids weight-bearing",
+      "Palpation of right femur": "Exquisite tenderness over the proximal right femur, particularly over the greater trochanter region",
+      "Range of motion testing of right hip": "Limited active and passive range of motion due to pain, with internal rotation particularly painful",
+      "Weight-bearing assessment": "Unable to bear full weight on right leg without severe pain, requires support",
+      "Straight leg raise test": "Positive for pain in right hip/thigh region with attempted elevation",
+      "Neurological examination of lower extremities": "Intact sensation, normal reflexes bilaterally, motor strength limited by pain",
+      "Palpation of lymph nodes": "No palpable inguinal or femoral lymphadenopathy",
+      "Assessment of leg length discrepancy": "No obvious leg length discrepancy noted",
+      "Percussion test of right femur": "Positive percussion sign with tenderness over proximal femur",
+      "Functional mobility assessment": "Requires assistive device, antalgic gait pattern, difficulty with sit-to-stand transfers"
     },
     "ddxTargets": [
-        "Pathologic Fracture (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Pathologic Fracture (Metastatic Prostate Cancer) (correct diagnosis)",
+      "Progression of bone metastases without fracture",
+      "Avascular necrosis of femoral head",
+      "Spinal cord compression with referred pain",
+      "Septic arthritis or osteomyelitis",
+      "Stress fracture of femur",
+      "Trochanteric bursitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Pathologic Fracture, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Pathologic Fracture, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Pathologic Fracture based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known cancer diagnosis and missing other acute causes of hip pain, or assuming all pain is simply cancer progression rather than considering pathologic fracture",
+      "prematureClosure": "May stop investigating after confirming bone metastases without recognizing the acute change suggesting pathologic fracture requiring immediate orthopedic intervention",
+      "availabilityBias": "Recent cases of simple cancer pain progression might overshadow recognition of this surgical emergency requiring urgent stabilization"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed William Henry Davenport's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Pathologic Fracture (Metastatic Prostate Cancer). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview Mr. Davenport, consider his complex oncological history. What specific questions will help you differentiate between progression of his known bone metastases versus an acute complication? Think about what red flags might indicate a surgical emergency in a patient with metastatic disease to bone.",
+      "phase5": "You've gathered comprehensive history and physical findings. Mr. Davenport's pain pattern has clearly changed from his baseline cancer-related discomfort. What do his examination findings - particularly the inability to bear weight and exquisite tenderness over the proximal femur - suggest about the structural integrity of his bone? How does this change your diagnostic thinking and urgency?",
+      "finalDebrief": "This case illustrates the critical importance of recognizing when cancer-related symptoms represent acute complications rather than disease progression. Mr. Davenport's pathologic fracture required immediate orthopedic evaluation and surgical stabilization. How did your differential diagnosis evolve as you recognized the acute change in his pain pattern and functional status? What key examination findings helped distinguish this surgical emergency from routine cancer pain progression?"
     }
-}
+  }
 };
