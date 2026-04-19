@@ -203,7 +203,8 @@
           _state.ddxRevisedAt = saved.ddxRevisedAt || null;
         }
       } catch(e) {}
-      if (this.isFirstCase()) _state.open = true;
+      // MC starts closed — students open it intentionally
+      _state.open = false;
       _injectHelpFab();
       _updateTabArrow();
       setTimeout(_pulseOnce, 1400);
@@ -217,8 +218,9 @@
       _state.startTime = Date.now();
       _injectHelpFab();
       _updateTabArrow();
+      // MC starts closed for guests too — tip bar guides them instead
+      _state.open = false;
       if (!localStorage.getItem('rdx-mc-guest-seen')) {
-        _state.open = true;
         localStorage.setItem('rdx-mc-guest-seen', '1');
       }
       setTimeout(_pulseOnce, 1400);
@@ -349,12 +351,17 @@
       }
       html += '</div>';
 
-      // Welcome / guest orientation
+      // Welcome / orientation — brief, actionable
       if (this.isFirstCase()||isGuest) {
-        html += '<div style="margin:14px 16px 0;padding:14px;background:#EBF5FB;border-radius:10px;border-left:4px solid #2874A6">';
-        html += '<div style="font-size:13px;font-weight:700;color:#2874A6;margin-bottom:6px">\uD83D\uDC4B Welcome to the ReasonDx Virtual EMR</div>';
-        html += '<div style="font-size:12px;color:#1B4F72;line-height:1.65">Use the <strong>sidebar tabs on the left</strong> to navigate the chart \u2014 just like a real EMR. When ready, write your note in Documentation and submit for AI feedback. CoachDx is available anytime for reasoning coaching.</div>';
-        if (isGuest) html += '<div style="margin-top:10px;padding:7px 10px;background:rgba(40,116,166,.1);border-radius:6px;font-size:11px;color:#1B4F72"><strong>Free account:</strong> <a href="/auth/register.html" style="color:#2874A6;font-weight:600">Create one</a> to save progress and get profession-specific feedback.</div>';
+        html += '<div style="margin:14px 16px 0;padding:12px 14px;background:#EBF5FB;border-radius:10px;border-left:3px solid #2874A6">';
+        html += '<div style="font-size:12px;font-weight:700;color:#2874A6;margin-bottom:5px">\uD83D\uDC4B How this works</div>';
+        html += '<div style="font-size:11px;color:#1B4F72;line-height:1.7">';
+        html += '<div>\u2460 Follow the <strong>5 steps</strong> in the top bar</div>';
+        html += '<div>\u2461 Hover the sidebar icons for chart sections</div>';
+        html += '<div>\u2462 Use CoachDx to talk through your reasoning</div>';
+        html += '<div>\u2463 Submit your note for AI feedback</div>';
+        html += '</div>';
+        if (isGuest) html += '<div style="margin-top:8px;font-size:11px;color:#1B4F72"><a href="/auth/register.html" style="color:#2874A6;font-weight:600">Create a free account</a> to save progress.</div>';
         html += '</div>';
       }
 
@@ -372,36 +379,6 @@
         html += '</div>';
       }
 
-      // Nav menu — every tab, tappable
-      html += '<div style="margin:14px 16px 0;padding:12px 12px 8px;background:#f8fafc;border-radius:10px;border:1px solid #e2ecf4">';
-      html += '<div style="font-size:10px;font-weight:700;color:#9aafbf;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Navigate the Chart</div>';
-      var navItems=[
-        // Chart Review
-        {tab:'demographics',label:'Patient Info',         icon:'\uD83D\uDC64'},
-        {tab:'problems',    label:'Problem List',         icon:'\uD83D\uDCCB'},
-        {tab:'medications', label:'Medications',          icon:'\uD83D\uDC8A'},
-        {tab:'vitals',      label:'Vitals',               icon:'\uD83D\uDCCA'},
-        {tab:'visits',      label:'Visit History',        icon:'\uD83D\uDCDD'},
-        {tab:'labs',        label:'Labs',                 icon:'\uD83E\uDDEA'},
-        {tab:'imaging',     label:'Imaging',              icon:'\uD83E\uDE7B'},
-        // Clinical Actions (in order)
-        {tab:'interview',   label:'Patient Interview',    icon:'\uD83D\uDCAC'},
-        {tab:'ddx',         label:'My Differential',      icon:'\uD83E\uDDE0'},
-        {tab:'orders',      label:'Order Tests',          icon:'\uD83D\uDCE4'},
-        {tab:'documentation',label:'Write Note',          icon:'\u270F\uFE0F'},
-        // Debrief
-        {tab:'coach',       label:'CoachDx Attending',    icon:'\uD83E\uDDE0'},
-        {tab:'autofeedback',label:'AI Feedback',          icon:'\uD83C\uDFAF'}
-      ];
-      navItems.forEach(function(item){
-        var isActive = item.tab===activeTab;
-        html += '<button type="button" onclick="MissionControl.toggle();if(window.switchTab)switchTab(\''+item.tab+'\');if(window.render)render();" style="display:flex;align-items:center;gap:9px;width:100%;padding:7px 8px;margin-bottom:2px;border-radius:6px;border:none;background:'+(isActive?'rgba(40,116,166,.12)':'transparent')+';cursor:pointer;text-align:left;'+FF+'">';
-        html += '<span style="font-size:14px;width:20px;text-align:center;flex-shrink:0">'+item.icon+'</span>';
-        html += '<span style="font-size:12px;font-weight:'+(isActive?'700':'500')+';color:'+(isActive?'#2874A6':'#2d3748')+'">'+item.label+'</span>';
-        if (isActive) html += '<span style="margin-left:auto;font-size:10px;color:#2874A6;font-weight:700">\u25c4 here</span>';
-        html += '</button>';
-      });
-      html += '</div>';
 
       // Task checklist (authenticated students only)
       if (!isGuest && _state.initialized && _state.role==='student') {

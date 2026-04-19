@@ -503,9 +503,10 @@
     if (btn) btn.textContent = _iconMode ? '›' : '‹';
   };
 
-  // Restore from pref
+  // Default: icon-only sidebar. Expanded only if user explicitly set '0'.
   try {
-    if (localStorage.getItem('rdx-icon-sidebar') === '1') {
+    var _iconPref = localStorage.getItem('rdx-icon-sidebar');
+    if (_iconPref !== '0') {  // default ON unless user explicitly expanded
       _iconMode = true;
       var sb = document.querySelector('.sidebar');
       if (sb) sb.classList.add('rdx-icon-sidebar');
