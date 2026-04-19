@@ -348,5 +348,78 @@ window.EMR_DATA = {
     "acuity": 2,
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Winston speaks slowly and with great effort, pausing frequently to catch his breath. He is a retired music teacher who is embarrassed and frustrated \u2014 he knows his condition well and feels he has 'failed' by ending up in the ER again. He is cooperative but fatigued, and his wife is present and provides additional history.",
+    "interviewQuestions": [
+        "Walk me through what's been happening over the past week.",
+        "How many pillows are you sleeping with? Can you lie flat?",
+        "Have you been waking up at night short of breath?",
+        "How far can you walk before you have to stop?",
+        "Have you been weighing yourself at home? How much have you gained?",
+        "Have you been taking all your medications \u2014 especially the furosemide?",
+        "Have you been sticking to your fluid and salt restrictions?",
+        "Have you had any fevers, infections, or illnesses recently?",
+        "Any chest pain or palpitations?",
+        "Have you noticed your heart racing or beating irregularly?",
+        "Any new medications recently \u2014 including over-the-counter?",
+        "When were you last hospitalized?"
+    ],
+    "patientResponses": {
+        "default": "(takes a slow breath) 'Give me just a moment.' (pauses) 'Okay. Yes, so...'",
+        "onset": "'It started about five days ago. I noticed I was more short of breath than usual. Then the legs started swelling. And the last two nights I couldn't sleep \u2014 I had to sit straight up. This morning I couldn't get across the room without stopping.'",
+        "character": "'It's like... breathing through a wet blanket. Heavy. Tight. Especially when I lie down. My wife made me sleep in the recliner but even that wasn't enough.'",
+        "location": "'The shortness of breath is everywhere. And the legs \u2014 both legs, up to my knees, real tight and heavy.'",
+        "severity": "'At rest, maybe a six. Trying to walk, nine. I've been through this before but this feels worse than last time.'",
+        "aggravating": "'Lying flat is the worst. Any activity at all. Even getting dressed left me breathless this morning.'",
+        "relieving": "'Sitting up helps a little. I've been sleeping in the chair for three nights.'",
+        "associated": "'The swelling in my legs. I've gained about eight pounds this week \u2014 I weigh myself every morning like they told me. I've been coughing at night \u2014 I thought it was a cold but it's not going away. And I've been going to the bathroom less.'",
+        "denies": "'No fever. No chest pain right now. No coughing up blood. I haven't had any new infections that I know of.'",
+        "history": "'I have heart failure \u2014 known for six years now. I've been hospitalized three times. Last time was eight months ago. They told me my ejection fraction is 25 percent.'",
+        "medications": "'Carvedilol twice a day. Furosemide 80 once a day \u2014 though I'll admit I took it late a few days this week. The sacubitril-valsartan twice a day. Spironolactone. Rivaroxaban for my atrial fibrillation. And insulin at night.'",
+        "allergies": "'Penicillin. I had anaphylaxis years ago \u2014 throat closed up. It's in my chart.'",
+        "family": "'Father had heart disease. Mother had diabetes. Brother has heart failure too, actually.'",
+        "social": "'I'm retired \u2014 I was a music teacher for 32 years. Married to Renata for 40 years. Non-smoker. I don't drink. I try to follow the low-salt diet but I'll be honest \u2014 Renata made a big pot of soup last weekend and I had more than I should have.'"
+    },
+    "examManeuvers": [
+        "General appearance and work of breathing",
+        "Vital signs review",
+        "Jugular venous pressure assessment",
+        "Cardiovascular \u2014 auscultation (S3 gallop, murmurs)",
+        "Pulmonary \u2014 auscultation (crackles/rales)",
+        "Abdominal \u2014 hepatojugular reflux, hepatomegaly",
+        "Lower extremities \u2014 pitting edema assessment",
+        "Skin \u2014 perfusion, temperature, diaphoresis"
+    ],
+    "examFindings": {
+        "General appearance and work of breathing": "Elderly obese male sitting upright on stretcher, tripoding. Speaking in 3-4 word sentences due to dyspnea. Appears fatigued and in moderate respiratory distress.",
+        "Vital signs review": "BP 158/96 mmHg, HR 98 bpm (irregularly irregular), RR 26/min, SpO2 88% on room air \u2192 94% on 4L NC, Temp 98.2\u00b0F. Weight 218 lbs (baseline ~210 lbs).",
+        "Jugular venous pressure assessment": "JVP markedly elevated at 14 cm H2O at 45 degrees. Hepatojugular reflux present \u2014 JVP rises with abdominal compression and sustained for >10 seconds.",
+        "Cardiovascular \u2014 auscultation (S3 gallop, murmurs)": "Irregularly irregular rhythm consistent with atrial fibrillation. S1 S2 present. Prominent S3 gallop heard at apex. 2/6 holosystolic murmur at apex radiating to axilla (mitral regurgitation). No pericardial rub.",
+        "Pulmonary \u2014 auscultation (crackles/rales)": "Bilateral basilar crackles (rales) extending to mid-lung fields. Dullness to percussion at bilateral bases. No wheezes.",
+        "Abdominal \u2014 hepatojugular reflux, hepatomegaly": "Soft, mildly distended. Liver palpable 3 cm below right costal margin, mildly tender. Positive hepatojugular reflux. No ascites on initial exam.",
+        "Lower extremities \u2014 pitting edema assessment": "Bilateral pitting edema 3+ to the knee. Skin tight, shiny. No erythema or warmth to suggest cellulitis. No calf tenderness.",
+        "Skin \u2014 perfusion, temperature, diaphoresis": "Cool extremities. Pallor. Mild diaphoresis. Prolonged capillary refill (3 seconds). No rash or breakdown."
+    },
+    "ddxTargets": [
+        "Acute Decompensated Heart Failure (HFrEF exacerbation)",
+        "Cardiac Tamponade",
+        "Pulmonary Embolism",
+        "COPD/Asthma Exacerbation",
+        "Pneumonia with Respiratory Failure",
+        "Cardiorenal Syndrome (AKI in setting of HF)",
+        "New Arrhythmia causing decompensation"
+    ],
+    "biasFlags": {
+        "anchoring": "Students with a known CHF patient may anchor on 'CHF exacerbation' and miss a precipitating cause \u2014 new AFib with RVR, ischemia, infection, or medication non-compliance. The trigger is as important as the diagnosis.",
+        "prematureClosure": "Students may start diuresis immediately without identifying why this decompensation occurred. If an ACS triggered this (troponin leak in HF), aggressive diuresis without revascularization could worsen outcomes.",
+        "availabilityBias": "Bilateral crackles and edema strongly suggest CHF, but the same picture can occur with ARDS, bilateral pneumonia, or lymphangitic carcinomatosis. The history, JVP, and S3 differentiate."
+    },
+    "coachPrompts": {
+        "phase2": "Winston has known HFrEF with EF 25% and has been through this before. Before you speak with him \u2014 what are the five most common precipitating triggers of CHF decompensation? Which triggers are you most concerned about in his specific case based on the chart alone?",
+        "phase5": "JVP 14 cm, S3 gallop, bilateral rales, 3+ pitting edema, SpO2 88% on room air. He's in atrial fibrillation. What is the Stevenson profile for this patient (wet/dry, warm/cold)? How does that change your initial management? And what are you checking on the troponin and BNP?",
+        "finalDebrief": "Acute decompensated HFrEF \u2014 precipitated by dietary indiscretion and medication non-adherence. His Stevenson profile was 'wet and cold' \u2014 volume overloaded with poor perfusion. How did your management plan account for both? How would you counsel him before discharge to prevent the next admission?"
+    }
+}
 };

@@ -325,5 +325,78 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Back Pain",
     "category": "cardiovascular"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Richard is pale, diaphoretic, and in severe pain. He speaks in clipped sentences and grips the bed rail. He is a stoic retired engineer who describes symptoms precisely but is clearly terrified. He keeps asking 'What's wrong with me?' between answers.",
+    "interviewQuestions": [
+        "Tell me about this pain \u2014 when did it start and exactly where is it?",
+        "How would you describe the pain \u2014 is it tearing, ripping, sharp, or pressure?",
+        "Did it come on suddenly or gradually?",
+        "Does the pain go anywhere \u2014 to your back, arm, or neck?",
+        "Have you ever had pain like this before?",
+        "Any history of heart problems or high blood pressure?",
+        "Any history of aortic aneurysm in yourself or your family?",
+        "Do you have any numbness, weakness, or paralysis anywhere?",
+        "Any difficulty urinating or change in urine output?",
+        "Are you on any blood pressure medications?",
+        "Any recent trauma or strenuous activity before this?",
+        "Have you had any dizziness or near-fainting?"
+    ],
+    "patientResponses": {
+        "default": "'Just \u2014 just a second.' (grimaces) 'Okay. Go ahead.'",
+        "onset": "'Exactly 45 minutes ago. I was in my garage, not doing anything strenuous. Then it hit me like nothing I've ever felt. Like an explosion in my chest.'",
+        "character": "'Tearing. That's the word. Like someone is tearing my chest apart from the inside. I've never felt anything like it. I've had kidney stones \u2014 this is worse.'",
+        "location": "'Started right here in the front \u2014 center of the chest. Then immediately \u2014 within seconds \u2014 it moved to between my shoulder blades. Both places at once now.'",
+        "severity": "'Ten out of ten. Absolute ten. I almost called 911 because I couldn't walk.'",
+        "aggravating": "'Just existing makes it worse. Any movement. Even breathing deeply.'",
+        "relieving": "'Nothing. I tried nitroglycerin \u2014 my wife had some from her heart condition. Did absolutely nothing.'",
+        "associated": "'I feel dizzy. My left arm feels a little weak \u2014 I don't know if that's from the pain. I'm sweating through my shirt.'",
+        "denies": "'No fever. No cough. No shortness of breath. No prior chest pain.'",
+        "history": "'Never anything like this. I've had high blood pressure for years \u2014 been bad at taking my medications, I'll admit. My cardiologist keeps yelling at me about it.'",
+        "medications": "'Amlodipine \u2014 I take it most days. And the water pill \u2014 hydrochlorothiazide. I forget sometimes.'",
+        "allergies": "'None that I know of.'",
+        "family": "'My father had an aortic aneurysm \u2014 they found it on a scan and watched it. He died of something else. My brother has a bicuspid aortic valve like me.'",
+        "social": "'Retired civil engineer. Married 35 years. I smoked for 25 years, quit 10 years ago. Drink maybe two beers a week. I walk the dog but otherwise not very active.'"
+    },
+    "examManeuvers": [
+        "General appearance",
+        "Blood pressure \u2014 bilateral arms simultaneously",
+        "Pulse assessment \u2014 all four extremities",
+        "Cardiovascular \u2014 auscultation for murmurs",
+        "Neurological \u2014 rapid assessment, focal deficits",
+        "Pulmonary \u2014 auscultation",
+        "Abdominal aorta \u2014 auscultation and palpation",
+        "Skin \u2014 color, diaphoresis, mottling"
+    ],
+    "examFindings": {
+        "General appearance": "Tall, muscular male appearing his stated age, in severe distress. Pale, diaphoretic. Sitting upright, gripping the stretcher railing. Anxious affect.",
+        "Blood pressure \u2014 bilateral arms simultaneously": "Right arm: 188/102 mmHg. Left arm: 156/88 mmHg. Difference of 32 mmHg systolic. This is a critical finding.",
+        "Pulse assessment \u2014 all four extremities": "Radial pulses: right 2+, left 1+ (diminished). Femoral pulses 2+ bilaterally. Dorsalis pedis 1+ bilateral. No absent pulses.",
+        "Cardiovascular \u2014 auscultation for murmurs": "Tachycardic, regular. S1 S2. Early diastolic murmur heard at right upper sternal border (aortic regurgitation \u2014 suggests involvement of aortic root). No pericardial rub.",
+        "Neurological \u2014 rapid assessment, focal deficits": "Alert and oriented x4. Mild left arm weakness (4/5 grip strength). No facial droop. No speech deficit. Pupils equal and reactive.",
+        "Pulmonary \u2014 auscultation": "Clear to auscultation bilaterally. No wheezes or crackles.",
+        "Abdominal aorta \u2014 auscultation and palpation": "No audible bruit. Aorta not palpable (patient is large). No abdominal tenderness.",
+        "Skin \u2014 color, diaphoresis, mottling": "Diaphoretic. Pallor. Skin cool and clammy. No mottling. No rash or bruising."
+    },
+    "ddxTargets": [
+        "Acute Aortic Dissection (Stanford Type A)",
+        "Acute Myocardial Infarction (STEMI)",
+        "Pulmonary Embolism",
+        "Hypertensive Emergency",
+        "Aortic Aneurysm Rupture",
+        "Acute Pericarditis",
+        "Musculoskeletal Pain"
+    ],
+    "biasFlags": {
+        "anchoring": "Students may anchor on chest pain + EKG changes \u2192 STEMI and initiate thrombolytics, which would be catastrophically dangerous in aortic dissection. The 'tearing' character and BP differential must trigger dissection workup before anticoagulation.",
+        "prematureClosure": "Once the BP differential is found, students may close on 'dissection' but fail to recognize the Type A involvement (aortic regurgitation murmur, neurological signs) which changes management from surveillance to emergency surgery.",
+        "availabilityBias": "Students who have seen more ACS than dissection may default to the more common diagnosis. Bicuspid aortic valve and family history of aneurysm should raise dissection risk regardless."
+    },
+    "coachPrompts": {
+        "phase2": "Richard has hypertension, a bicuspid aortic valve, and a family history of aortic disease. He presents with sudden severe chest pain. What three diagnoses are most time-critical? Why is the character of the pain \u2014 'tearing' vs 'pressure' \u2014 diagnostically important here?",
+        "phase5": "You've found a 32 mmHg BP differential and an aortic regurgitation murmur. Richard's left arm is slightly weak. What does this constellation tell you about the extent of dissection? Why is the next step CT-angiography urgently and NOT anticoagulation?",
+        "finalDebrief": "Type A aortic dissection requiring emergency surgery. How did your DDx handle the STEMI vs dissection dilemma? The BP differential was the key physical exam finding \u2014 did you check both arms? What's the mortality difference between thrombolytics given to a dissection vs delayed CT-A?"
+    }
+}
 };

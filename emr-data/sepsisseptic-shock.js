@@ -385,5 +385,80 @@ window.EMR_DATA = {
     "acuity": 1,
     "presentation": "Endocrine Emergency",
     "category": "infectious"
-  }
+  },
+  "guided": {
+    "supported": true,
+    "patientPersona": "Reginald is visibly confused and disoriented, answering questions with short, fragmented sentences. His wife speaks for him frequently. He appears diaphoretic, flushed, and is struggling to maintain eye contact. Despite his confusion, he becomes agitated when asked about pain.",
+    "interviewQuestions": [
+        "Tell me what's been going on. When did you start feeling sick?",
+        "Do you have any pain right now? Where?",
+        "Have you had a fever? Chills or shaking?",
+        "Any burning with urination? Going more often than usual?",
+        "How long have you been confused \u2014 when did your wife notice?",
+        "Have you been drinking fluids? Eating?",
+        "Any nausea, vomiting, or diarrhea?",
+        "Has your blood sugar been higher than usual?",
+        "Are you taking all your medications?",
+        "Any recent hospitalizations or procedures?",
+        "Any skin wounds, dental work, or infections recently?",
+        "Any cough, shortness of breath, or chest pain?"
+    ],
+    "patientResponses": {
+        "default": "Reginald looks at his wife. 'I don't... I'm not sure. Margaret, what did they ask?'",
+        "onset": "'Started maybe... two days ago? Burning when I go to the bathroom. Then I started feeling real bad yesterday.' Wife adds: 'He had a fever last night \u2014 102. This morning I couldn't wake him up right.'",
+        "character": "'It burns when I go. And my lower belly hurts. And I'm just... I feel awful all over.'",
+        "location": "'Down low. In the belly. And it hurts to pee.'",
+        "severity": "'Eight out of ten. Maybe nine. I've never felt this bad.'",
+        "aggravating": "'Moving makes it worse. Trying to walk to the bathroom.'",
+        "relieving": "'Nothing's helping. Tylenol didn't do anything.'",
+        "associated": "'I've been sweating a lot. Chills earlier. I threw up this morning. I'm very thirsty but too tired to drink much.'",
+        "denies": "'No cough. No chest pain. No rash.' Wife: 'His legs look a little puffy but that's been going on a while.'",
+        "history": "'I get UTIs sometimes. Because of my prostate. But never this bad. Never with the confusion.'",
+        "medications": "'Metformin \u2014 twice a day for the diabetes. Lisinopril for blood pressure. The tamsulosin for my prostate. And amlodipine.' Wife confirms: 'He takes them every morning. He was good about it.'",
+        "allergies": "'Sulfa drugs. I break out in a rash. They put it in my chart.'",
+        "family": "'My brother had diabetes too. Passed from kidney failure. My father had heart problems.'",
+        "social": "'I'm retired. Used to be a postal worker. I live with Margaret. I don't smoke. Maybe a beer on weekends. I try to walk but with my knees it's hard.'"
+    },
+    "examManeuvers": [
+        "General appearance and mental status",
+        "Vital signs review",
+        "Skin assessment \u2014 temperature, color, capillary refill",
+        "Cardiovascular \u2014 auscultation and pulse assessment",
+        "Pulmonary \u2014 auscultation",
+        "Abdominal \u2014 palpation with focus on suprapubic and CVA tenderness",
+        "CVA percussion (costovertebral angle tenderness)",
+        "Extremities \u2014 edema and perfusion",
+        "Neurological \u2014 orientation, Glasgow Coma Scale"
+    ],
+    "examFindings": {
+        "General appearance and mental status": "Elderly male appearing acutely ill. Alert but disoriented to time and situation. Answers questions slowly with prompting. Diaphoretic. GCS 13 (E4V4M5).",
+        "Vital signs review": "BP 88/54 mmHg (MAP 65), HR 118 bpm (regular), RR 24/min, Temp 38.8\u00b0C (101.8\u00b0F), SpO2 94% on room air. Orthostatic hypotension confirmed.",
+        "Skin assessment \u2014 temperature, color, capillary refill": "Skin warm and flushed. Capillary refill 3 seconds. Mild diaphoresis. No petechiae or purpura. No rash.",
+        "Cardiovascular \u2014 auscultation and pulse assessment": "Tachycardic, regular rhythm. S1 S2 present. No murmurs. Peripheral pulses diminished bilaterally. JVP not elevated.",
+        "Pulmonary \u2014 auscultation": "Clear to auscultation bilaterally. No wheezes or crackles. Tachypneic.",
+        "Abdominal \u2014 palpation with focus on suprapubic and CVA tenderness": "Soft, mildly distended. Suprapubic tenderness on palpation \u2014 moderate, guarding absent. No rebound. Bowel sounds hypoactive.",
+        "CVA percussion (costovertebral angle tenderness)": "Positive right CVA tenderness on percussion. Negative on left.",
+        "Extremities \u2014 edema and perfusion": "Mild bilateral pitting edema to ankles (1+). Extremities cool distally. Mottling at knees bilaterally.",
+        "Neurological \u2014 orientation, Glasgow Coma Scale": "Alert, oriented to person only. Disoriented to time and place. PERRL. No focal deficits. GCS 13."
+    },
+    "ddxTargets": [
+        "Sepsis / Septic Shock (Urinary Source)",
+        "Urosepsis with underlying UTI / Pyelonephritis",
+        "Diabetic Ketoacidosis (DKA)",
+        "Hypovolemic Shock (dehydration from poor PO intake)",
+        "Meningitis / Encephalitis",
+        "Ischemic Stroke / Metabolic Encephalopathy",
+        "Acute Kidney Injury (uremic encephalopathy)"
+    ],
+    "biasFlags": {
+        "anchoring": "If the student immediately anchors on 'UTI' based on urinary symptoms and fails to recognize the hemodynamic instability and organ dysfunction criteria for septic shock, they may underestimate acuity and delay resuscitation.",
+        "prematureClosure": "Students may stop the workup after identifying a urinary source and miss concurrent bacteremia, metastatic infection, or an alternative source (pneumonia, SBP) in an immunocompromised diabetic.",
+        "availabilityBias": "Students familiar with simple UTI may default to oral antibiotics and discharge, missing the sepsis diagnosis. The hypotension and altered mental status must trigger a systemic framing."
+    },
+    "coachPrompts": {
+        "phase2": "You've reviewed the chart. Reginald has HTN, DM2, BPH, and CKD. He presents with fever and urinary symptoms. Before you talk to him \u2014 what are the three most life-threatening diagnoses you need to keep on your list? What in the chart raises your concern about systemic illness beyond a simple UTI?",
+        "phase5": "You've examined Reginald. BP 88/54, HR 118, temp 38.8, confused. Positive CVA tenderness and suprapubic tenderness. Where does this fit on the sepsis continuum? What are your immediate resuscitation priorities before you even have lab results?",
+        "finalDebrief": "The diagnosis is Sepsis / Septic Shock from a urinary source. How did your differential evolve? Did you have septic shock on your initial list? At what point did the picture click? What would have happened if you treated this as a simple UTI and discharged him?"
+    }
+}
 };

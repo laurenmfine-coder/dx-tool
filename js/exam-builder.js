@@ -1261,7 +1261,7 @@
 
   function _buildManeuverRow(key, indent) {
     var isSel = !!_selected[key], isRev = !!_revealed[key];
-    var safe = JSON.stringify(key);
+    var safe = JSON.stringify(key).replace(/"/g, '&quot;');
     var pad = indent ? 'padding-left:28px;' : '';
     var html = '<div style="margin-bottom:' + (isRev ? '10' : '4') + 'px;' + pad + '">';
     html += '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
@@ -1347,7 +1347,7 @@
           } else {
             // Parent with sub-items
             var isSubExp = !!_subExpanded[m.name];
-            var safeM = JSON.stringify(m.name);
+            var safeM = JSON.stringify(m.name).replace(/"/g, '&quot;');
             var subSelCount = m.subs.filter(function (s) { return _selected[s]; }).length;
 
             html += '<div style="margin-bottom:6px;border:1px solid ' + (subSelCount > 0 ? '#BFD7ED' : '#E9EFF5') + ';border-radius:6px;overflow:hidden">';
