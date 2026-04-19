@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Washington",
-  "patientHPI": "I've been getting more and more tired over the past few weeks, and now I get short of breath just walking up one flight of stairs. I've gained about four pounds and my heart feels like it's skipping beats sometimes - I know I haven't been good about watching what I eat lately.",
+    "patientHPI": "I've been getting more and more tired over the past few weeks, and now I get short of breath just walking up one flight of stairs. I've gained about four pounds and my heart feels like it's skipping beats sometimes - I know I haven't been good about watching what I eat lately.",
     "dob": "12/04/1955",
     "age": 69,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Dorothy Washington (Wife)",
       "phone": "(954) 555-6185"
-    }
+    },
+    "chiefComplaint": "Weakness and chest pressure"
   },
   "problems": [
     {
@@ -220,40 +221,154 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "242", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "68", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "4.8", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "Sodium", "value": "132", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "7.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "98", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "14", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "8.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "L" },
-            { "test": "Phosphate", "value": "7.4", "unit": "mg/dL", "range": "2.5-4.5", "flag": "H" },
-            { "test": "Magnesium", "value": "2.4", "unit": "mg/dL", "range": "1.7-2.2", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "242",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "68",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "4.8",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "132",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "7.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "98",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "14",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "8.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "L"
+            },
+            {
+              "test": "Phosphate",
+              "value": "7.4",
+              "unit": "mg/dL",
+              "range": "2.5-4.5",
+              "flag": "H"
+            },
+            {
+              "test": "Magnesium",
+              "value": "2.4",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CARDIAC BIOMARKERS",
           "results": [
-            { "test": "Troponin I (High Sensitivity)", "value": "2.84", "unit": "ng/mL", "range": "<0.04", "flag": "H" },
-            { "test": "BNP", "value": "1,840", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "Troponin I (High Sensitivity)",
+              "value": "2.84",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": "H"
+            },
+            {
+              "test": "BNP",
+              "value": "1,840",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "9.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "29.4", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelets", "value": "178", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "9.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "29.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "178",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "VENOUS BLOOD GAS",
           "results": [
-            { "test": "pH", "value": "7.18", "unit": "", "range": "7.32-7.42", "flag": "L" },
-            { "test": "pCO2", "value": "28", "unit": "mmHg", "range": "35-45", "flag": "L" },
-            { "test": "Base Excess", "value": "-16", "unit": "mEq/L", "range": "-2 to +2", "flag": "L" }
+            {
+              "test": "pH",
+              "value": "7.18",
+              "unit": "",
+              "range": "7.32-7.42",
+              "flag": "L"
+            },
+            {
+              "test": "pCO2",
+              "value": "28",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": "L"
+            },
+            {
+              "test": "Base Excess",
+              "value": "-16",
+              "unit": "mEq/L",
+              "range": "-2 to +2",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -278,10 +393,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Right deltoid IM", "lot": "FL872P", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Left deltoid IM", "lot": "PF481T", "mfr": "Pfizer" },
-    { "vaccine": "Pneumococcal (PCV20 — Prevnar 20)", "date": "01/2024", "site": "Left deltoid IM", "lot": "PV318K", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "08/2022", "site": "Left deltoid IM", "lot": "SH204R", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "FL872P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "PF481T",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "01/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV318K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "08/2022",
+      "site": "Left deltoid IM",
+      "lot": "SH204R",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother: Deceased at 72 — CHF, T2DM, CKD requiring dialysis",
@@ -291,15 +430,42 @@ window.EMR_DATA = {
     "Strong family history of cardiorenal-metabolic disease"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker (USPS, 35 years)"],
-    ["Marital", "Married x 42 years; wife Dorothy assists with medication management and dietary compliance"],
-    ["Tobacco", "Former — quit 15 years ago; previously 1.5 PPD x 30 years (45 pack-years)"],
-    ["Alcohol", "Abstinent x 10 years; hx of heavy use"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited — walks around house; limited by dyspnea and fatigue"],
-    ["Housing", "Single-story home with wife; bathroom modifications in place"],
-    ["Safety", "No firearms; fall risk — uses cane occasionally"],
-    ["Advance Directive", "Healthcare proxy: Dorothy Washington (wife); discussed code status — currently FULL CODE but open to re-discussing if health declines"]
+    [
+      "Occupation",
+      "Retired postal worker (USPS, 35 years)"
+    ],
+    [
+      "Marital",
+      "Married x 42 years; wife Dorothy assists with medication management and dietary compliance"
+    ],
+    [
+      "Tobacco",
+      "Former — quit 15 years ago; previously 1.5 PPD x 30 years (45 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "Abstinent x 10 years; hx of heavy use"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited — walks around house; limited by dyspnea and fatigue"
+    ],
+    [
+      "Housing",
+      "Single-story home with wife; bathroom modifications in place"
+    ],
+    [
+      "Safety",
+      "No firearms; fall risk — uses cane occasionally"
+    ],
+    [
+      "Advance Directive",
+      "Healthcare proxy: Dorothy Washington (wife); discussed code status — currently FULL CODE but open to re-discussing if health declines"
+    ]
   ],
   "meta": {
     "caseId": "hyperkalemia-with-concurrent-acs",
@@ -312,73 +478,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Harold Washington appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been getting more and more tired over the past few weeks, and now I get sho.'",
-        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Severe Hyperkalemia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sacubitril-Valsartan (Entresto) 49/51mg BID; Carvedilol 12.5mg BID; Spironolactone 25mg daily; Furosemide 40mg BID; Insulin Glargine 28 units QHS; Insulin Lispro \u2014 sliding scale with meals; Atorvastatin 80mg QHS; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Lisinopril, IV Contrast (iodinated).'",
-        "family": "Mother: Deceased at 72 \u2014 CHF, T2DM, CKD requiring dialysis  Father: Deceased at 68 \u2014 MI at age 68  Sister (age 66): Type 2 Diabetes, hypertension, CKD Stage 3",
-        "social": "Occupation: Retired postal worker (USPS, 35 years)  Marital: Married x 42 years; wife Dorothy assists with medication management and dietary compliance  Tobacco: Former \u2014 quit 15 years ago; previously 1.5 PPD x 30 years (45 pack-years)  Alcohol: Abstinent x 10 years; hx of heavy use  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been getting more and more tired over the past few weeks, and now I get sho.'",
+      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Severe Hyperkalemia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Sacubitril-Valsartan (Entresto) 49/51mg BID; Carvedilol 12.5mg BID; Spironolactone 25mg daily; Furosemide 40mg BID; Insulin Glargine 28 units QHS; Insulin Lispro — sliding scale with meals; Atorvastatin 80mg QHS; Aspirin 81mg daily.'",
+      "allergies": "'My allergies are Lisinopril, IV Contrast (iodinated).'",
+      "family": "Mother: Deceased at 72 — CHF, T2DM, CKD requiring dialysis  Father: Deceased at 68 — MI at age 68  Sister (age 66): Type 2 Diabetes, hypertension, CKD Stage 3",
+      "social": "Occupation: Retired postal worker (USPS, 35 years)  Marital: Married x 42 years; wife Dorothy assists with medication management and dietary compliance  Tobacco: Former — quit 15 years ago; previously 1.5 PPD x 30 years (45 pack-years)  Alcohol: Abstinent x 10 years; hx of heavy use  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Severe Hyperkalemia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Severe Hyperkalemia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Severe Hyperkalemia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Hyperkalemia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Severe Hyperkalemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Severe Hyperkalemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Hyperkalemia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Severe Hyperkalemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Severe Hyperkalemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Severe Hyperkalemia (7.8 mEq/L) with Concurrent Type 2 NSTEMI, Acute-on-Chronic Kidney Injury, and Decompensated Heart Failure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Harold Washington's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Severe Hyperkalemia (7.8 mEq/L) with Concurrent Type 2 NSTEMI, Acute-on-Chronic Kidney Injury, and Decompensated Heart Failure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

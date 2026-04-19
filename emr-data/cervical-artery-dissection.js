@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Jean-Marc Pierre-Louis (Husband)",
       "phone": "(954) 555-2215"
-    }
+    },
+    "chiefComplaint": "Headache and neck pain after chiropractic visit"
   },
   "problems": [
     {

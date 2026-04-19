@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Espinoza",
-  "patientHPI": "My movements have been getting much worse lately - about an hour after I take my pills, I start having these uncontrollable jerky movements in my head and body that last for hours. I've also been falling more often and yesterday I developed a fever and feel really weak and confused.",
+    "patientHPI": "My movements have been getting much worse lately - about an hour after I take my pills, I start having these uncontrollable jerky movements in my head and body that last for hours. I've also been falling more often and yesterday I developed a fever and feel really weak and confused.",
     "dob": "08/22/1958",
     "age": 66,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carlos Espinoza (Son)",
       "phone": "(954) 555-3894"
-    }
+    },
+    "chiefComplaint": "Fever and severe stiffness"
   },
   "problems": [
     {
@@ -121,42 +122,42 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "02/26/2025",
-        "bp": "88/52",
-        "hr": 118,
-        "rr": 24,
-        "temp": "103.4\u00b0F",
-        "spo2": "93%",
-        "wt": "138 lbs",
-        "ht": "5'3\"",
-        "bmi": 24.4,
-        "setting": "ED"
+      "date": "02/26/2025",
+      "bp": "88/52",
+      "hr": 118,
+      "rr": 24,
+      "temp": "103.4°F",
+      "spo2": "93%",
+      "wt": "138 lbs",
+      "ht": "5'3\"",
+      "bmi": 24.4,
+      "setting": "ED"
     },
     {
-        "date": "02/10/2025",
-        "bp": "132/78",
-        "hr": 76,
-        "rr": 16,
-        "temp": "98.2\u00b0F",
-        "spo2": "97%",
-        "wt": "140 lbs",
-        "ht": "5'3\"",
-        "bmi": 24.8,
-        "setting": "Specialist"
+      "date": "02/10/2025",
+      "bp": "132/78",
+      "hr": 76,
+      "rr": 16,
+      "temp": "98.2°F",
+      "spo2": "97%",
+      "wt": "140 lbs",
+      "ht": "5'3\"",
+      "bmi": 24.8,
+      "setting": "Specialist"
     },
     {
-        "date": "11/20/2024",
-        "bp": "138/82",
-        "hr": 72,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "98%",
-        "wt": "142 lbs",
-        "ht": "5'3\"",
-        "bmi": 25.2,
-        "setting": "PCP Office"
+      "date": "11/20/2024",
+      "bp": "138/82",
+      "hr": 72,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "98%",
+      "wt": "142 lbs",
+      "ht": "5'3\"",
+      "bmi": 25.2,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -196,61 +197,211 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "162", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "34", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "Sodium", "value": "144", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "106", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "19", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "AST (SGOT)", "value": "68", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "48", "unit": "U/L", "range": "7-56", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "162",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "34",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "144",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "106",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "19",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "68",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "48",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC) WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "16.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "11.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "33.6", "unit": "%", "range": "36-46", "flag": "L" },
-            { "test": "Platelets", "value": "182", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Neutrophils", "value": "86", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Bands", "value": "12", "unit": "%", "range": "0-5", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "16.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "33.6",
+              "unit": "%",
+              "range": "36-46",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "182",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Neutrophils",
+              "value": "86",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "12",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "4.2", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "4.2",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CREATINE KINASE",
           "results": [
-            { "test": "CK Total", "value": "1,420", "unit": "U/L", "range": "30-135", "flag": "H" }
+            {
+              "test": "CK Total",
+              "value": "1,420",
+              "unit": "U/L",
+              "range": "30-135",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "PROCALCITONIN",
           "results": [
-            { "test": "Procalcitonin", "value": "8.4", "unit": "ng/mL", "range": "<0.05", "flag": "H" }
+            {
+              "test": "Procalcitonin",
+              "value": "8.4",
+              "unit": "ng/mL",
+              "range": "<0.05",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINALYSIS WITH CULTURE",
           "results": [
-            { "test": "Appearance", "value": "Cloudy", "unit": "", "range": "Clear", "flag": "" },
-            { "test": "WBC", "value": "Too numerous to count", "unit": "/HPF", "range": "0-5", "flag": "H" },
-            { "test": "Bacteria", "value": "Many", "unit": "", "range": "None", "flag": "H" },
-            { "test": "Nitrite", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Leukocyte Esterase", "value": "3+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Culture (preliminary)", "value": "E. coli — >100,000 CFU/mL", "unit": "", "range": "No growth", "flag": "H" }
+            {
+              "test": "Appearance",
+              "value": "Cloudy",
+              "unit": "",
+              "range": "Clear",
+              "flag": ""
+            },
+            {
+              "test": "WBC",
+              "value": "Too numerous to count",
+              "unit": "/HPF",
+              "range": "0-5",
+              "flag": "H"
+            },
+            {
+              "test": "Bacteria",
+              "value": "Many",
+              "unit": "",
+              "range": "None",
+              "flag": "H"
+            },
+            {
+              "test": "Nitrite",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Leukocyte Esterase",
+              "value": "3+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Culture (preliminary)",
+              "value": "E. coli — >100,000 CFU/mL",
+              "unit": "",
+              "range": "No growth",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BLOOD CULTURE",
           "results": [
-            { "test": "Blood Culture x2", "value": "Pending", "unit": "", "range": "No growth", "flag": "" }
+            {
+              "test": "Blood Culture x2",
+              "value": "Pending",
+              "unit": "",
+              "range": "No growth",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -291,11 +442,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL871T", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "PF491K", "mfr": "Pfizer" },
-    { "vaccine": "Pneumococcal (PCV20 — Prevnar 20)", "date": "01/2024", "site": "Left deltoid IM", "lot": "PV312R", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "04/2023", "site": "Left deltoid IM", "lot": "SH214P", "mfr": "GSK" },
-    { "vaccine": "Tdap (Adacel)", "date": "11/2020", "site": "Right deltoid IM", "lot": "TA182K", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL871T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "PF491K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "01/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV312R",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "04/2023",
+      "site": "Left deltoid IM",
+      "lot": "SH214P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "11/2020",
+      "site": "Right deltoid IM",
+      "lot": "TA182K",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother (age 88): Alzheimer disease, hypertension",
@@ -305,15 +486,42 @@ window.EMR_DATA = {
     "Family history significant for neurodegenerative disease (father with PD, mother with AD)"
   ],
   "socialHistory": [
-    ["Occupation", "Retired — former high school Spanish teacher (35 years)"],
-    ["Marital", "Widowed x 5 years; lives with son Carlos who is primary caregiver"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Rare — occasional glass of wine with dinner"],
-    ["Drugs", "Denies"],
-    ["Exercise", "PT exercises at home for balance; walks with rollator in neighborhood when weather permits"],
-    ["Housing", "Lives with son in single-story house; grab bars installed in bathroom; hospital bed rented for bedroom"],
-    ["Safety", "No firearms; medication management by son; falls prevention measures in place; medical alert bracelet worn"],
-    ["Advance Directive", "Healthcare proxy: Carlos Espinoza (son); DNR/DNI NOT in place; full code"]
+    [
+      "Occupation",
+      "Retired — former high school Spanish teacher (35 years)"
+    ],
+    [
+      "Marital",
+      "Widowed x 5 years; lives with son Carlos who is primary caregiver"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional glass of wine with dinner"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "PT exercises at home for balance; walks with rollator in neighborhood when weather permits"
+    ],
+    [
+      "Housing",
+      "Lives with son in single-story house; grab bars installed in bathroom; hospital bed rented for bedroom"
+    ],
+    [
+      "Safety",
+      "No firearms; medication management by son; falls prevention measures in place; medical alert bracelet worn"
+    ],
+    [
+      "Advance Directive",
+      "Healthcare proxy: Carlos Espinoza (son); DNR/DNI NOT in place; full code"
+    ]
   ],
   "meta": {
     "caseId": "sepsis-with-rigidity",
@@ -326,73 +534,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Gloria Espinoza is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did psychiatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did psychiatric emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My movements have been getting much worse lately - about an hour after I take my.'",
-        "character": "'It's psychiatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Urosepsis with Parkinson-Akinetic Crisis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Carbidopa-Levodopa 25/100mg TID; Ropinirole 4mg TID; Amlodipine 5mg daily; Alendronate 70mg weekly; Calcium Carbonate 600mg + Vitamin D3 800 IU BID.'",
-        "allergies": "'My allergies are Metoclopramide, Sulfa drugs (Trimethoprim-Sulfamethoxazole).'",
-        "family": "Mother (age 88): Alzheimer disease, hypertension  Father: Deceased at 72 \u2014 Parkinson disease and complications  Sister (age 63): Essential tremor, hypertension",
-        "social": "Occupation: Retired \u2014 former high school Spanish teacher (35 years)  Marital: Widowed x 5 years; lives with son Carlos who is primary caregiver  Tobacco: Never  Alcohol: Rare \u2014 occasional glass of wine with dinner  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started My movements have been getting much worse lately - about an hour after I take my.'",
+      "character": "'It's psychiatric emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Urosepsis with Parkinson-Akinetic Crisis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Carbidopa-Levodopa 25/100mg TID; Ropinirole 4mg TID; Amlodipine 5mg daily; Alendronate 70mg weekly; Calcium Carbonate 600mg + Vitamin D3 800 IU BID.'",
+      "allergies": "'My allergies are Metoclopramide, Sulfa drugs (Trimethoprim-Sulfamethoxazole).'",
+      "family": "Mother (age 88): Alzheimer disease, hypertension  Father: Deceased at 72 — Parkinson disease and complications  Sister (age 63): Essential tremor, hypertension",
+      "social": "Occupation: Retired — former high school Spanish teacher (35 years)  Marital: Widowed x 5 years; lives with son Carlos who is primary caregiver  Tobacco: Never  Alcohol: Rare — occasional glass of wine with dinner  Drugs: Denies"
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Level of consciousness and GCS",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Sensory testing",
+      "Coordination and cerebellar testing",
+      "Gait assessment if applicable",
+      "Meningeal signs",
+      "Vital signs"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe."
+      "Level of consciousness and GCS": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Cranial nerve examination": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Motor strength testing": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Sensory testing": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Coordination and cerebellar testing": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Gait assessment if applicable": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Meningeal signs": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Urosepsis with Parkinson-Akinetic Crisis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Urosepsis with Parkinson-Akinetic Crisis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Urosepsis with Parkinson-Akinetic Crisis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Urosepsis with Parkinson-Akinetic Crisis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Urosepsis with Parkinson-Akinetic Crisis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Urosepsis with Parkinson-Akinetic Crisis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Urosepsis with Parkinson-Akinetic Crisis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Urosepsis with Parkinson-Akinetic Crisis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Urosepsis with Parkinson-Akinetic Crisis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gloria Espinoza's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Urosepsis with Parkinson-Akinetic Crisis (Dopaminergic Withdrawal) \u2014 Confounding Presentation Mimicking NMS. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Gloria Espinoza's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Urosepsis with Parkinson-Akinetic Crisis (Dopaminergic Withdrawal) — Confounding Presentation Mimicking NMS. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

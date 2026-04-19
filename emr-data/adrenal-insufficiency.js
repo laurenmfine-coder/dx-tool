@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Diane Charpentier",
-  "patientHPI": "I've been doing well on my usual medications and my energy has been stable, but I realized I forgot to refill my emergency injection that you told me to always keep with me. Everything else seems to be going fine though.",
+    "patientHPI": "I've been doing well on my usual medications and my energy has been stable, but I realized I forgot to refill my emergency injection that you told me to always keep with me. Everything else seems to be going fine though.",
     "dob": "03/28/1968",
     "age": 56,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Philippe Charpentier (Husband)",
       "phone": "(954) 555-2420"
-    }
+    },
+    "chiefComplaint": "Weakness and feeling sick for weeks"
   },
   "problems": [
     {
@@ -167,44 +168,152 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "52", "unit": "mg/dL", "range": "70-100", "flag": "L" },
-            { "test": "BUN", "value": "32", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.6", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "Sodium", "value": "124", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "6.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "92", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "18", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "10.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "52",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "L"
+            },
+            {
+              "test": "BUN",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "124",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "6.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "92",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "18",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "3.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "L" },
-            { "test": "Hemoglobin", "value": "14.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "43.8", "unit": "%", "range": "36-46", "flag": "" },
-            { "test": "Platelets", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Eosinophils", "value": "12", "unit": "%", "range": "1-4", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "3.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "43.8",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Eosinophils",
+              "value": "12",
+              "unit": "%",
+              "range": "1-4",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CORTISOL AND ACTH",
           "results": [
-            { "test": "Random Cortisol", "value": "1.2", "unit": "µg/dL", "range": "6.0-18.0 (AM)", "flag": "L" },
-            { "test": "ACTH", "value": "892", "unit": "pg/mL", "range": "7-63", "flag": "H" }
+            {
+              "test": "Random Cortisol",
+              "value": "1.2",
+              "unit": "µg/dL",
+              "range": "6.0-18.0 (AM)",
+              "flag": "L"
+            },
+            {
+              "test": "ACTH",
+              "value": "892",
+              "unit": "pg/mL",
+              "range": "7-63",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "THYROID FUNCTION",
           "results": [
-            { "test": "TSH", "value": "8.4", "unit": "mIU/L", "range": "0.5-4.5", "flag": "H" },
-            { "test": "Free T4", "value": "0.6", "unit": "ng/dL", "range": "0.8-1.8", "flag": "L" }
+            {
+              "test": "TSH",
+              "value": "8.4",
+              "unit": "mIU/L",
+              "range": "0.5-4.5",
+              "flag": "H"
+            },
+            {
+              "test": "Free T4",
+              "value": "0.6",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "3.8", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "3.8",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -229,10 +338,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL852K", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "PF472R", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "06/2023", "site": "Left deltoid IM", "lot": "SH221P", "mfr": "GSK" },
-    { "vaccine": "Tdap (Adacel)", "date": "03/2022", "site": "Left deltoid IM", "lot": "TA212K", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL852K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "PF472R",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "06/2023",
+      "site": "Left deltoid IM",
+      "lot": "SH221P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "03/2022",
+      "site": "Left deltoid IM",
+      "lot": "TA212K",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother (age 82): Hashimoto thyroiditis, pernicious anemia",
@@ -241,15 +374,42 @@ window.EMR_DATA = {
     "Strong family history of autoimmune disorders — polyautoimmune clustering"
   ],
   "socialHistory": [
-    ["Occupation", "Freelance translator (French/English) — works from home"],
-    ["Marital", "Married x 28 years; husband Philippe is aware of sick-day rules and emergency injection"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Rare — occasional glass of wine"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 30 min daily; yoga 2x/week"],
-    ["Housing", "Single-family home with husband"],
-    ["Safety", "Medical alert bracelet (does not always wear); emergency Solu-Cortef kit (EXPIRED); husband trained on IM injection"],
-    ["Advance Directive", "Healthcare proxy: Philippe Charpentier (husband)"]
+    [
+      "Occupation",
+      "Freelance translator (French/English) — works from home"
+    ],
+    [
+      "Marital",
+      "Married x 28 years; husband Philippe is aware of sick-day rules and emergency injection"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional glass of wine"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 30 min daily; yoga 2x/week"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband"
+    ],
+    [
+      "Safety",
+      "Medical alert bracelet (does not always wear); emergency Solu-Cortef kit (EXPIRED); husband trained on IM injection"
+    ],
+    [
+      "Advance Directive",
+      "Healthcare proxy: Philippe Charpentier (husband)"
+    ]
   ],
   "meta": {
     "caseId": "adrenal-insufficiency",
@@ -262,73 +422,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Diane Charpentier is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been doing well on my usual medications and my energy has been stable, but .'",
-        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Adrenal Crisis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM \u2014 Emergency Kit.'",
-        "allergies": "'My allergies are Prednisone.'",
-        "family": "Mother (age 82): Hashimoto thyroiditis, pernicious anemia  Father (age 84): Type 2 Diabetes, CAD  Sister (age 53): Graves disease, vitiligo",
-        "social": "Occupation: Freelance translator (French/English) \u2014 works from home  Marital: Married x 28 years; husband Philippe is aware of sick-day rules and emergency injection  Tobacco: Never  Alcohol: Rare \u2014 occasional glass of wine  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been doing well on my usual medications and my energy has been stable, but .'",
+      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Acute Adrenal Crisis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Solu-Cortef (Hydrocortisone Sodium Succinate) 100mg IM — Emergency Kit.'",
+      "allergies": "'My allergies are Prednisone.'",
+      "family": "Mother (age 82): Hashimoto thyroiditis, pernicious anemia  Father (age 84): Type 2 Diabetes, CAD  Sister (age 53): Graves disease, vitiligo",
+      "social": "Occupation: Freelance translator (French/English) — works from home  Marital: Married x 28 years; husband Philippe is aware of sick-day rules and emergency injection  Tobacco: Never  Alcohol: Rare — occasional glass of wine  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Acute Adrenal Crisis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Acute Adrenal Crisis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Adrenal Crisis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Adrenal Crisis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Adrenal Crisis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Adrenal Crisis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Adrenal Crisis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Acute Adrenal Crisis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Acute Adrenal Crisis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Diane Charpentier's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia \u2014 Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Diane Charpentier's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Acute Adrenal Crisis (Addisonian Crisis) with Life-Threatening Hyperkalemia, Hyponatremia, and Hypoglycemia — Precipitated by GI Illness and Missed Glucocorticoid/Mineralocorticoid Replacement. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

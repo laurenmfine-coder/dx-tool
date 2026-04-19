@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Miguel Fernandez (Husband)",
       "phone": "(954) 555-4490"
-    }
+    },
+    "chiefComplaint": "Sudden severe pain in both legs"
   },
   "problems": [
     {

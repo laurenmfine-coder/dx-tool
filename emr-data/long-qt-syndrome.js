@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Giselle Laurent",
-  "patientHPI": "I've had this sinus infection that just won't quit - thick green stuff coming out of my nose for over a week now, my face feels all heavy and pressured, and I've had this low fever that comes and goes. I haven't felt like eating much lately, just no appetite for anything.",
+    "patientHPI": "I've had this sinus infection that just won't quit - thick green stuff coming out of my nose for over a week now, my face feels all heavy and pressured, and I've had this low fever that comes and goes. I haven't felt like eating much lately, just no appetite for anything.",
     "dob": "11/28/1968",
     "age": 57,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Pierre Laurent (Husband)",
       "phone": "(954) 555-4480"
-    }
+    },
+    "chiefComplaint": "Passed out after feeling my heart race"
   },
   "problems": [
     {
@@ -204,21 +205,81 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.2", "unit": "mEq/L", "range": "3.5-5.1", "flag": "L" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Magnesium", "value": "1.6", "unit": "mg/dL", "range": "1.7-2.2", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "ADDITIONAL LABS",
           "results": [
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -243,11 +304,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9108", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-2122", "mfr": "Moderna" },
-    { "vaccine": "Tdap", "date": "08/2021", "site": "Left deltoid IM", "lot": "TD21-440", "mfr": "GSK" },
-    { "vaccine": "Shingrix (1/2)", "date": "01/2024", "site": "Right deltoid IM", "lot": "SX24-044", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "03/2024", "site": "Right deltoid IM", "lot": "SX24-204", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9108",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2122",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "08/2021",
+      "site": "Left deltoid IM",
+      "lot": "TD21-440",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "01/2024",
+      "site": "Right deltoid IM",
+      "lot": "SX24-044",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "03/2024",
+      "site": "Right deltoid IM",
+      "lot": "SX24-204",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother: Hypertension, T2DM, deceased at 78 (heart failure)",
@@ -256,15 +347,42 @@ window.EMR_DATA = {
     "Brother: HTN, alive at 54"
   ],
   "socialHistory": [
-    ["Occupation", "Medical records technician at hospital; full-time"],
-    ["Marital", "Married 28 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — occasional glass of wine at social events"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 3x/week; reduced recently due to depression and fatigue"],
-    ["Housing", "Single-family home with husband; adult son lives nearby"],
-    ["Safety", "Denies IPV; seatbelt; no firearms"],
-    ["Advance Directive", "None — discussed but not completed"]
+    [
+      "Occupation",
+      "Medical records technician at hospital; full-time"
+    ],
+    [
+      "Marital",
+      "Married 28 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional glass of wine at social events"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 3x/week; reduced recently due to depression and fatigue"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband; adult son lives nearby"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed but not completed"
+    ]
   ],
   "meta": {
     "caseId": "long-qt-syndrome",
@@ -277,73 +395,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Giselle Laurent appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did syncope start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did syncope start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've had this sinus infection that just won't quit - thick green stuff coming ou.'",
-        "character": "'It's syncope \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Citalopram 40mg daily; Hydroxyzine 25mg PRN; Amlodipine 5mg daily; Omeprazole 20mg daily; Azithromycin 250mg (Z-pack); Potassium Chloride 20mEq daily.'",
-        "allergies": "'My allergies are Amoxicillin.'",
-        "family": "Mother: Hypertension, T2DM, deceased at 78 (heart failure)  Father: Unknown \u2014 emigrated from Haiti, deceased young (details limited)  Sister: Depression, anxiety, alive at 60",
-        "social": "Occupation: Medical records technician at hospital; full-time  Marital: Married 28 years  Tobacco: Never smoker  Alcohol: Rare \u2014 occasional glass of wine at social events  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've had this sinus infection that just won't quit - thick green stuff coming ou.'",
+      "character": "'It's syncope — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Citalopram 40mg daily; Hydroxyzine 25mg PRN; Amlodipine 5mg daily; Omeprazole 20mg daily; Azithromycin 250mg (Z-pack); Potassium Chloride 20mEq daily.'",
+      "allergies": "'My allergies are Amoxicillin.'",
+      "family": "Mother: Hypertension, T2DM, deceased at 78 (heart failure)  Father: Unknown — emigrated from Haiti, deceased young (details limited)  Sister: Depression, anxiety, alive at 60",
+      "social": "Occupation: Medical records technician at hospital; full-time  Marital: Married 28 years  Tobacco: Never smoker  Alcohol: Rare — occasional glass of wine at social events  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Drug-Induced Long QT Syndrome with Torsades de Pointes. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Drug-Induced Long QT Syndrome with Torsades de Pointes (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Drug-Induced Long QT Syndrome with Torsades de Pointes (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Drug-Induced Long QT Syndrome with Torsades de Pointes, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Drug-Induced Long QT Syndrome with Torsades de Pointes, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Drug-Induced Long QT Syndrome with Torsades de Pointes based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Drug-Induced Long QT Syndrome with Torsades de Pointes, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Drug-Induced Long QT Syndrome with Torsades de Pointes, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Drug-Induced Long QT Syndrome with Torsades de Pointes based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Giselle Laurent's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Drug-Induced Long QT Syndrome with Torsades de Pointes (Citalopram 40mg + Azithromycin + Hypokalemia + Hypomagnesemia \u2014 Synergistic QT Prolongation Causing Polymorphic VT and Syncope). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Giselle Laurent's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Drug-Induced Long QT Syndrome with Torsades de Pointes (Citalopram 40mg + Azithromycin + Hypokalemia + Hypomagnesemia — Synergistic QT Prolongation Causing Polymorphic VT and Syncope). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

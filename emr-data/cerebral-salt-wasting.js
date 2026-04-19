@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Elena Ramírez (Wife)",
       "phone": "(954) 555-7294"
-    }
+    },
+    "chiefComplaint": "Weakness and confusion during hospital recovery"
   },
   "problems": [
     {

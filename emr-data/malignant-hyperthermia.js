@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ryan Kowalski",
-  "patientHPI": "The pain started around my belly button yesterday and then moved down to my lower right side and keeps getting worse. I've been throwing up and have no appetite at all, plus I had a fever of 101 at home last night.",
+    "patientHPI": "The pain started around my belly button yesterday and then moved down to my lower right side and keeps getting worse. I've been throwing up and have no appetite at all, plus I had a fever of 101 at home last night.",
     "dob": "11/08/1996",
     "age": 28,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Jennifer Kowalski (Wife)",
       "phone": "(954) 555-1850"
-    }
+    },
+    "chiefComplaint": "High fever after surgery"
   },
   "problems": [
     {
@@ -90,7 +91,7 @@ window.EMR_DATA = {
       "spo2": "88%",
       "wt": "192 lbs",
       "ht": "6'0\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "OR → SICU"
     },
     {
@@ -102,7 +103,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "192 lbs",
       "ht": "6'0\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "SICU — post-dantrolene"
     },
     {
@@ -114,7 +115,7 @@ window.EMR_DATA = {
       "spo2": "98%",
       "wt": "192 lbs",
       "ht": "6'0\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "ED — pre-op"
     },
     {
@@ -169,54 +170,222 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "198", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "32", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "2.8", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "Sodium", "value": "148", "unit": "mEq/L", "range": "136-145", "flag": "H" },
-            { "test": "Potassium", "value": "6.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "108", "unit": "mEq/L", "range": "98-106", "flag": "H" },
-            { "test": "CO2 (Bicarbonate)", "value": "14", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium (ionized)", "value": "5.8", "unit": "mg/dL", "range": "4.6-5.3", "flag": "H" },
-            { "test": "Phosphate", "value": "7.2", "unit": "mg/dL", "range": "2.5-4.5", "flag": "H" },
-            { "test": "AST (SGOT)", "value": "892", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "412", "unit": "U/L", "range": "7-56", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "198",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.8",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "148",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "H"
+            },
+            {
+              "test": "Potassium",
+              "value": "6.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "108",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "H"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "14",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium (ionized)",
+              "value": "5.8",
+              "unit": "mg/dL",
+              "range": "4.6-5.3",
+              "flag": "H"
+            },
+            {
+              "test": "Phosphate",
+              "value": "7.2",
+              "unit": "mg/dL",
+              "range": "2.5-4.5",
+              "flag": "H"
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "892",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "412",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CREATINE KINASE",
           "results": [
-            { "test": "CK Total", "value": "48,200", "unit": "U/L", "range": "30-200", "flag": "H" },
-            { "test": "CK-MB", "value": "42", "unit": "ng/mL", "range": "0-5", "flag": "H" }
+            {
+              "test": "CK Total",
+              "value": "48,200",
+              "unit": "U/L",
+              "range": "30-200",
+              "flag": "H"
+            },
+            {
+              "test": "CK-MB",
+              "value": "42",
+              "unit": "ng/mL",
+              "range": "0-5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "ARTERIAL BLOOD GAS",
           "results": [
-            { "test": "pH", "value": "7.12", "unit": "", "range": "7.35-7.45", "flag": "L" },
-            { "test": "pCO2", "value": "72", "unit": "mmHg", "range": "35-45", "flag": "H" },
-            { "test": "pO2", "value": "68", "unit": "mmHg", "range": "80-100", "flag": "L" },
-            { "test": "HCO3", "value": "14", "unit": "mEq/L", "range": "22-26", "flag": "L" },
-            { "test": "Base Excess", "value": "-14", "unit": "mEq/L", "range": "-2 to +2", "flag": "L" },
-            { "test": "Lactate", "value": "8.4", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "pH",
+              "value": "7.12",
+              "unit": "",
+              "range": "7.35-7.45",
+              "flag": "L"
+            },
+            {
+              "test": "pCO2",
+              "value": "72",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": "H"
+            },
+            {
+              "test": "pO2",
+              "value": "68",
+              "unit": "mmHg",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "HCO3",
+              "value": "14",
+              "unit": "mEq/L",
+              "range": "22-26",
+              "flag": "L"
+            },
+            {
+              "test": "Base Excess",
+              "value": "-14",
+              "unit": "mEq/L",
+              "range": "-2 to +2",
+              "flag": "L"
+            },
+            {
+              "test": "Lactate",
+              "value": "8.4",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COAGULATION STUDIES",
           "results": [
-            { "test": "PT", "value": "18.2", "unit": "sec", "range": "11.0-14.0", "flag": "H" },
-            { "test": "INR", "value": "1.6", "unit": "", "range": "0.9-1.1", "flag": "H" },
-            { "test": "PTT", "value": "48", "unit": "sec", "range": "25-35", "flag": "H" },
-            { "test": "Fibrinogen", "value": "128", "unit": "mg/dL", "range": "200-400", "flag": "L" },
-            { "test": "D-Dimer", "value": "4.2", "unit": "µg/mL", "range": "<0.5", "flag": "H" }
+            {
+              "test": "PT",
+              "value": "18.2",
+              "unit": "sec",
+              "range": "11.0-14.0",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.6",
+              "unit": "",
+              "range": "0.9-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "PTT",
+              "value": "48",
+              "unit": "sec",
+              "range": "25-35",
+              "flag": "H"
+            },
+            {
+              "test": "Fibrinogen",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "200-400",
+              "flag": "L"
+            },
+            {
+              "test": "D-Dimer",
+              "value": "4.2",
+              "unit": "µg/mL",
+              "range": "<0.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Dark brown (cola-colored)", "unit": "", "range": "Yellow", "flag": "" },
-            { "test": "Myoglobin", "value": "Positive (>1000)", "unit": "ng/mL", "range": "Negative", "flag": "H" },
-            { "test": "Blood (dipstick)", "value": "3+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "RBC", "value": "0-2", "unit": "/HPF", "range": "0-3", "flag": "" }
+            {
+              "test": "Color",
+              "value": "Dark brown (cola-colored)",
+              "unit": "",
+              "range": "Yellow",
+              "flag": ""
+            },
+            {
+              "test": "Myoglobin",
+              "value": "Positive (>1000)",
+              "unit": "ng/mL",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Blood (dipstick)",
+              "value": "3+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "RBC",
+              "value": "0-2",
+              "unit": "/HPF",
+              "range": "0-3",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -257,9 +426,27 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL861K", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "PF482R", "mfr": "Pfizer" },
-    { "vaccine": "Tdap (Adacel)", "date": "11/2021", "site": "Left deltoid IM", "lot": "TA198P", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL861K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "PF482R",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "11/2021",
+      "site": "Left deltoid IM",
+      "lot": "TA198P",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Father (age 58): Hx of 'unusual reaction to anesthesia' during knee arthroscopy (~age 45) — developed fever and 'muscle problems' in PACU; transferred to ICU; recovered after 3 days; details unclear but HIGHLY SUSPICIOUS FOR MH",
@@ -269,15 +456,42 @@ window.EMR_DATA = {
     "No other known family history of anesthetic reactions"
   ],
   "socialHistory": [
-    ["Occupation", "Software developer — works remotely"],
-    ["Marital", "Married x 2 years; wife Jennifer present at bedside"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Social — 2-4 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very active — recreational soccer league, gym 4x/week, runs 3x/week"],
-    ["Housing", "Owns townhouse with wife"],
-    ["Safety", "No firearms"],
-    ["Advance Directive", "None prior to admission — wife designated as healthcare proxy during SICU admission"]
+    [
+      "Occupation",
+      "Software developer — works remotely"
+    ],
+    [
+      "Marital",
+      "Married x 2 years; wife Jennifer present at bedside"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-4 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very active — recreational soccer league, gym 4x/week, runs 3x/week"
+    ],
+    [
+      "Housing",
+      "Owns townhouse with wife"
+    ],
+    [
+      "Safety",
+      "No firearms"
+    ],
+    [
+      "Advance Directive",
+      "None prior to admission — wife designated as healthcare proxy during SICU admission"
+    ]
   ],
   "meta": {
     "caseId": "malignant-hyperthermia",
@@ -290,73 +504,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Ryan Kowalski appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did psychiatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did psychiatric emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started The pain started around my belly button yesterday and then moved down to my lowe.'",
-        "character": "'It's psychiatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cetirizine 10mg daily PRN.'",
-        "allergies": "'My allergies are NKDA (prior to this admission), Volatile anesthetic agents (sevoflurane, desflurane, isoflurane, halothane), Succinylcholine.'",
-        "family": "Father (age 58): Hx of 'unusual reaction to anesthesia' during knee arthroscopy (~age 45) \u2014 developed fever and 'muscle problems' in PACU; transferred to ICU; recovered after 3 days; details unclear but HIGHLY SUSPICIOUS FOR MH  Mother (age 56): Hypertension, hypothyroidism \u2014 no surgical complications  Brother (age 25): Healthy; has never had surgery",
-        "social": "Occupation: Software developer \u2014 works remotely  Marital: Married x 2 years; wife Jennifer present at bedside  Tobacco: Never  Alcohol: Social \u2014 2-4 beers on weekends  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started The pain started around my belly button yesterday and then moved down to my lowe.'",
+      "character": "'It's psychiatric emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Cetirizine 10mg daily PRN.'",
+      "allergies": "'My allergies are NKDA (prior to this admission), Volatile anesthetic agents (sevoflurane, desflurane, isoflurane, halothane), Succinylcholine.'",
+      "family": "Father (age 58): Hx of 'unusual reaction to anesthesia' during knee arthroscopy (~age 45) — developed fever and 'muscle problems' in PACU; transferred to ICU; recovered after 3 days; details unclear but HIGHLY SUSPICIOUS FOR MH  Mother (age 56): Hypertension, hypothyroidism — no surgical complications  Brother (age 25): Healthy; has never had surgery",
+      "social": "Occupation: Software developer — works remotely  Marital: Married x 2 years; wife Jennifer present at bedside  Tobacco: Never  Alcohol: Social — 2-4 beers on weekends  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Ryan Kowalski's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Malignant Hyperthermia \u2014 Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Ryan Kowalski's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Malignant Hyperthermia — Triggered by Sevoflurane/Succinylcholine During Emergency Appendectomy, with Rhabdomyolysis, AKI, DIC, and Mixed Acidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

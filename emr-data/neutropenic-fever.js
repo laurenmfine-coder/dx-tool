@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "David Nakamura (Husband)",
       "phone": "(561) 555-8230"
-    }
+    },
+    "chiefComplaint": "Fever during chemotherapy"
   },
   "problems": [
     {
@@ -182,22 +183,88 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "3.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "L" },
-            { "test": "ANC (Absolute Neutrophil Count)", "value": "1.8", "unit": "x10³/µL", "range": "1.5-8.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "30.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "148", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "3.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "L"
+            },
+            {
+              "test": "ANC (Absolute Neutrophil Count)",
+              "value": "1.8",
+              "unit": "x10³/µL",
+              "range": "1.5-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "30.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "148",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "32", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Albumin", "value": "3.4", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "32",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.4",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -265,15 +332,42 @@ window.EMR_DATA = {
     "Daughter: Healthy, age 34; genetic counseling recommended"
   ],
   "socialHistory": [
-    ["Occupation", "Retired pharmacist; currently focused on cancer treatment"],
-    ["Marital", "Married, lives with husband"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies — stopped during chemotherapy"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 15 min daily when able; fatigue-limited during chemo"],
-    ["Housing", "Single-family home with husband"],
-    ["Safety", "Denies IPV; no firearms; fall risk low"],
-    ["Advance Directive", "Health care proxy: husband David Nakamura; Full code"]
+    [
+      "Occupation",
+      "Retired pharmacist; currently focused on cancer treatment"
+    ],
+    [
+      "Marital",
+      "Married, lives with husband"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies — stopped during chemotherapy"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 15 min daily when able; fatigue-limited during chemo"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband"
+    ],
+    [
+      "Safety",
+      "Denies IPV; no firearms; fall risk low"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: husband David Nakamura; Full code"
+    ]
   ],
   "meta": {
     "caseId": "neutropenic-fever",
@@ -286,73 +380,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Linda Chen-Nakamura is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did fever/sepsis start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did fever/sepsis start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 63-year-old female status post left MRM for stage IIA IDC, on dose-dense AC cycl.'",
-        "character": "'It's fever/sepsis \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Febrile Neutropenia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Doxorubicin/Cyclophosphamide (AC) \u2014 adjuvant chemotherapy; Pegfilgrastim (Neulasta) 6mg SQ \u2014 day 2 post-chemo; Ondansetron 8mg Q8H PRN; Dexamethasone 4mg BID x 3 days post-chemo; Lisinopril 10mg daily; Levothyroxine 75mcg daily; Calcium Carbonate 600mg with Vitamin D 400 IU BID.'",
-        "allergies": "'My allergies are Latex.'",
-        "family": "Mother: Breast cancer diagnosed at 58 (deceased at 72), ovarian cancer  Father: Lung cancer (smoker), deceased at 70  Sister: BRCA2 positive, prophylactic mastectomy, alive at 60",
-        "social": "Occupation: Retired pharmacist; currently focused on cancer treatment  Marital: Married, lives with husband  Tobacco: Never smoker  Alcohol: Denies \u2014 stopped during chemotherapy  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started 63-year-old female status post left MRM for stage IIA IDC, on dose-dense AC cycl.'",
+      "character": "'It's fever/sepsis — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Febrile Neutropenia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Doxorubicin/Cyclophosphamide (AC) — adjuvant chemotherapy; Pegfilgrastim (Neulasta) 6mg SQ — day 2 post-chemo; Ondansetron 8mg Q8H PRN; Dexamethasone 4mg BID x 3 days post-chemo; Lisinopril 10mg daily; Levothyroxine 75mcg daily; Calcium Carbonate 600mg with Vitamin D 400 IU BID.'",
+      "allergies": "'My allergies are Latex.'",
+      "family": "Mother: Breast cancer diagnosed at 58 (deceased at 72), ovarian cancer  Father: Lung cancer (smoker), deceased at 70  Sister: BRCA2 positive, prophylactic mastectomy, alive at 60",
+      "social": "Occupation: Retired pharmacist; currently focused on cancer treatment  Marital: Married, lives with husband  Tobacco: Never smoker  Alcohol: Denies — stopped during chemotherapy  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Febrile Neutropenia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Febrile Neutropenia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Febrile Neutropenia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Febrile Neutropenia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Febrile Neutropenia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Febrile Neutropenia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Febrile Neutropenia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Febrile Neutropenia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Febrile Neutropenia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Linda Chen-Nakamura's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Febrile Neutropenia (Post-Chemotherapy, AC Regimen for Breast Cancer). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Linda Chen-Nakamura's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Febrile Neutropenia (Post-Chemotherapy, AC Regimen for Breast Cancer). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

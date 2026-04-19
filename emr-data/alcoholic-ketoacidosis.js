@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Kevin Brennan (Brother)",
       "phone": "(954) 555-6208"
-    }
+    },
+    "chiefComplaint": "Confusion and vomiting after heavy drinking"
   },
   "problems": [
     {

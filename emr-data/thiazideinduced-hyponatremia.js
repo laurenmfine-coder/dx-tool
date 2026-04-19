@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Connolly",
-  "patientHPI": "I've been checking my blood pressure at home like you told me to, and it's still running high even though I'm taking my medicine every day. When we tried to increase that pill a few months ago, my ankles got so swollen I could barely get my shoes on, so we had to go back to the lower dose. I know you mentioned adding another medication, and honestly I'm worried about taking too many pills, but I understand my pressure needs to come down.",
+    "patientHPI": "I've been checking my blood pressure at home like you told me to, and it's still running high even though I'm taking my medicine every day. When we tried to increase that pill a few months ago, my ankles got so swollen I could barely get my shoes on, so we had to go back to the lower dose. I know you mentioned adding another medication, and honestly I'm worried about taking too many pills, but I understand my pressure needs to come down.",
     "dob": "03/28/1947",
     "age": 77,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Brian Connolly (Son)",
       "phone": "(954) 555-3421"
-    }
+    },
+    "chiefComplaint": "Dizziness and feeling off"
   },
   "problems": [
     {
@@ -224,38 +225,140 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "118", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "3.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "L" },
-            { "test": "Chloride", "value": "82", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "30", "unit": "mEq/L", "range": "23-29", "flag": "H" },
-            { "test": "Calcium", "value": "10.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Uric Acid", "value": "2.8", "unit": "mg/dL", "range": "2.5-7.0", "flag": "" },
-            { "test": "AST (SGOT)", "value": "22", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "118",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "82",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "30",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "H"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Uric Acid",
+              "value": "2.8",
+              "unit": "mg/dL",
+              "range": "2.5-7.0",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "SERUM OSMOLALITY",
           "results": [
-            { "test": "Serum Osmolality", "value": "248", "unit": "mOsm/kg", "range": "275-295", "flag": "L" }
+            {
+              "test": "Serum Osmolality",
+              "value": "248",
+              "unit": "mOsm/kg",
+              "range": "275-295",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "URINE STUDIES",
           "results": [
-            { "test": "Urine Sodium", "value": "68", "unit": "mEq/L", "range": "", "flag": "H" },
-            { "test": "Urine Osmolality", "value": "420", "unit": "mOsm/kg", "range": "", "flag": "H" },
-            { "test": "Urine Potassium", "value": "42", "unit": "mEq/L", "range": "", "flag": "" }
+            {
+              "test": "Urine Sodium",
+              "value": "68",
+              "unit": "mEq/L",
+              "range": "",
+              "flag": "H"
+            },
+            {
+              "test": "Urine Osmolality",
+              "value": "420",
+              "unit": "mOsm/kg",
+              "range": "",
+              "flag": "H"
+            },
+            {
+              "test": "Urine Potassium",
+              "value": "42",
+              "unit": "mEq/L",
+              "range": "",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID AND CORTISOL",
           "results": [
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Cortisol (Random)", "value": "14.2", "unit": "µg/dL", "range": "6.0-18.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Cortisol (Random)",
+              "value": "14.2",
+              "unit": "µg/dL",
+              "range": "6.0-18.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -274,13 +377,55 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP) — BASELINE BEFORE HCTZ",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -305,12 +450,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (High-Dose — Fluzone)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FH812R", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV724T", "mfr": "Pfizer" },
-    { "vaccine": "Pneumococcal (PCV20 — Prevnar 20)", "date": "04/2023", "site": "Left deltoid IM", "lot": "PV712K", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (1st dose)", "date": "03/2020", "site": "Right deltoid IM", "lot": "SH291P", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "05/2020", "site": "Right deltoid IM", "lot": "SH298P", "mfr": "GSK" },
-    { "vaccine": "Tdap (Adacel)", "date": "06/2019", "site": "Left deltoid IM", "lot": "TA142R", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (High-Dose — Fluzone)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FH812R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV724T",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "04/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV712K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (1st dose)",
+      "date": "03/2020",
+      "site": "Right deltoid IM",
+      "lot": "SH291P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "05/2020",
+      "site": "Right deltoid IM",
+      "lot": "SH298P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "06/2019",
+      "site": "Left deltoid IM",
+      "lot": "TA142R",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother: Deceased at age 88 — Alzheimer disease, osteoporosis, hip fracture",
@@ -320,15 +501,42 @@ window.EMR_DATA = {
     "Daughter (age 52): Healthy"
   ],
   "socialHistory": [
-    ["Occupation", "Retired — former elementary school teacher"],
-    ["Marital", "Widowed x 8 years; husband died of lung cancer; lives alone"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Rare — occasional glass of wine with dinner"],
-    ["Drugs", "None"],
-    ["Exercise", "Walks in neighborhood daily (weather permitting); gentle stretching"],
-    ["Housing", "Condo, ground floor; son lives 10 min away and checks in daily"],
-    ["Safety", "Uses cane for stability; has Life Alert pendant; son has key to condo"],
-    ["Advance Directive", "Yes — full code but has discussed goals of care with son"]
+    [
+      "Occupation",
+      "Retired — former elementary school teacher"
+    ],
+    [
+      "Marital",
+      "Widowed x 8 years; husband died of lung cancer; lives alone"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional glass of wine with dinner"
+    ],
+    [
+      "Drugs",
+      "None"
+    ],
+    [
+      "Exercise",
+      "Walks in neighborhood daily (weather permitting); gentle stretching"
+    ],
+    [
+      "Housing",
+      "Condo, ground floor; son lives 10 min away and checks in daily"
+    ],
+    [
+      "Safety",
+      "Uses cane for stability; has Life Alert pendant; son has key to condo"
+    ],
+    [
+      "Advance Directive",
+      "Yes — full code but has discussed goals of care with son"
+    ]
   ],
   "meta": {
     "caseId": "thiazideinduced-hyponatremia",
@@ -341,73 +549,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Margaret Connolly appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been checking my blood pressure at home like you told me to, and it's still.'",
-        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Thiazide-Induced Hyponatremia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrochlorothiazide 25mg daily; Amlodipine 5mg daily; Alendronate 70mg weekly; Calcium Carbonate 600mg + Vitamin D 400 IU BID; Omeprazole 20mg daily; Acetaminophen 500mg TID PRN; Diclofenac 1% topical gel \u2014 apply QID PRN.'",
-        "allergies": "'My allergies are Codeine, NSAIDs (oral \u2014 ibuprofen, naproxen).'",
-        "family": "Mother: Deceased at age 88 \u2014 Alzheimer disease, osteoporosis, hip fracture  Father: Deceased at age 75 \u2014 MI, hypertension  Sister (age 74): Hypertension, osteoarthritis, depression",
-        "social": "Occupation: Retired \u2014 former elementary school teacher  Marital: Widowed x 8 years; husband died of lung cancer; lives alone  Tobacco: Never  Alcohol: Rare \u2014 occasional glass of wine with dinner  Drugs: None"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been checking my blood pressure at home like you told me to, and it's still.'",
+      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Thiazide-Induced Hyponatremia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Hydrochlorothiazide 25mg daily; Amlodipine 5mg daily; Alendronate 70mg weekly; Calcium Carbonate 600mg + Vitamin D 400 IU BID; Omeprazole 20mg daily; Acetaminophen 500mg TID PRN; Diclofenac 1% topical gel — apply QID PRN.'",
+      "allergies": "'My allergies are Codeine, NSAIDs (oral — ibuprofen, naproxen).'",
+      "family": "Mother: Deceased at age 88 — Alzheimer disease, osteoporosis, hip fracture  Father: Deceased at age 75 — MI, hypertension  Sister (age 74): Hypertension, osteoarthritis, depression",
+      "social": "Occupation: Retired — former elementary school teacher  Marital: Widowed x 8 years; husband died of lung cancer; lives alone  Tobacco: Never  Alcohol: Rare — occasional glass of wine with dinner  Drugs: None"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Thiazide-Induced Hyponatremia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Thiazide-Induced Hyponatremia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Thiazide-Induced Hyponatremia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Thiazide-Induced Hyponatremia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Thiazide-Induced Hyponatremia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Thiazide-Induced Hyponatremia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Thiazide-Induced Hyponatremia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Thiazide-Induced Hyponatremia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Thiazide-Induced Hyponatremia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Margaret Connolly's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Thiazide-Induced Hyponatremia (Na 118) \u2014 6 Weeks After HCTZ Initiation in Elderly Female with Symptomatic Hyponatremic Encephalopathy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Margaret Connolly's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Thiazide-Induced Hyponatremia (Na 118) — 6 Weeks After HCTZ Initiation in Elderly Female with Symptomatic Hyponatremic Encephalopathy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

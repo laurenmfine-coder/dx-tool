@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Diane Carter-Johnson (Daughter)",
       "phone": "(954) 555-1260"
-    }
+    },
+    "chiefComplaint": "Shortness of breath and leg swelling"
   },
   "problems": [
     {

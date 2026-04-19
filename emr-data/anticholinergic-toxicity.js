@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Patricia Hanson (Mother)",
       "phone": "(954) 555-9284"
-    }
+    },
+    "chiefComplaint": "Agitation and confusion"
   },
   "problems": [
     {

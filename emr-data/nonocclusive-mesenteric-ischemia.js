@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Edna Marshall",
-  "patientHPI": "My daughter brought me in because I've been so tired and confused this past week - I just can't seem to think straight. I haven't been eating much, maybe half of what I usually do, and I've lost seven pounds this month without trying. I just don't feel like myself.",
+    "patientHPI": "My daughter brought me in because I've been so tired and confused this past week - I just can't seem to think straight. I haven't been eating much, maybe half of what I usually do, and I've lost seven pounds this month without trying. I just don't feel like myself.",
     "dob": "03/15/1944",
     "age": 80,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Deborah Marshall (Daughter)",
       "phone": "(954) 555-1880"
-    }
+    },
+    "chiefComplaint": "Severe belly pain in the ICU"
   },
   "problems": [
     {
@@ -242,34 +243,142 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "145", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "58", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "2.8", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "18", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "131", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "5.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "96", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "18", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "8.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "L" },
-            { "test": "ALT (SGPT)", "value": "48", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "52", "unit": "U/L", "range": "10-40", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "145",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "58",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "18",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "131",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "96",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "18",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "8.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "L"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "48",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "52",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "9.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "27.8", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "158", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "9.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "27.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "158",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ADDITIONAL LABS",
           "results": [
-            { "test": "Lactate", "value": "4.2", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" },
-            { "test": "NT-proBNP", "value": "8500", "unit": "pg/mL", "range": "<300", "flag": "H" },
-            { "test": "Digoxin Level", "value": "1.6", "unit": "ng/mL", "range": "0.8-2.0", "flag": "" }
+            {
+              "test": "Lactate",
+              "value": "4.2",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "NT-proBNP",
+              "value": "8500",
+              "unit": "pg/mL",
+              "range": "<300",
+              "flag": "H"
+            },
+            {
+              "test": "Digoxin Level",
+              "value": "1.6",
+              "unit": "ng/mL",
+              "range": "0.8-2.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -337,15 +446,42 @@ window.EMR_DATA = {
     "Brother: CKD (dialysis), alive at 77"
   ],
   "socialHistory": [
-    ["Occupation", "Retired home health aide"],
-    ["Marital", "Widowed"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "None"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — ADLs with assistance; wheelchair for longer distances"],
-    ["Housing", "Lives with daughter; home health aide 3x/week"],
-    ["Safety", "Fall risk — uses walker; bed rails; daughter provides supervision"],
-    ["Advance Directive", "Living will on file — DNR/DNI discussed; HCP — daughter Deborah"]
+    [
+      "Occupation",
+      "Retired home health aide"
+    ],
+    [
+      "Marital",
+      "Widowed"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "None"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — ADLs with assistance; wheelchair for longer distances"
+    ],
+    [
+      "Housing",
+      "Lives with daughter; home health aide 3x/week"
+    ],
+    [
+      "Safety",
+      "Fall risk — uses walker; bed rails; daughter provides supervision"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file — DNR/DNI discussed; HCP — daughter Deborah"
+    ]
   ],
   "meta": {
     "caseId": "nonocclusive-mesenteric-ischemia",
@@ -358,73 +494,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Edna Marshall appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did vascular emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My daughter brought me in because I've been so tired and confused this past week.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Nonocclusive Mesenteric Ischemia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 2.5mg BID; Carvedilol 12.5mg BID; Sacubitril/Valsartan 24/26mg BID; Furosemide 80mg BID; Spironolactone 12.5mg daily; Insulin Glargine 18 units QHS; Epoetin Alfa 10,000 units SQ weekly; Atorvastatin 40mg QHS.'",
-        "allergies": "'My allergies are Penicillin, NSAIDs (Ibuprofen).'",
-        "family": "Father: CHF, deceased at 72  Mother: HTN, stroke, deceased at 78  Sister: T2DM, CHF, deceased at 76",
-        "social": "Occupation: Retired home health aide  Marital: Widowed  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started My daughter brought me in because I've been so tired and confused this past week.'",
+      "character": "'It's vascular emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Nonocclusive Mesenteric Ischemia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Apixaban 2.5mg BID; Carvedilol 12.5mg BID; Sacubitril/Valsartan 24/26mg BID; Furosemide 80mg BID; Spironolactone 12.5mg daily; Insulin Glargine 18 units QHS; Epoetin Alfa 10,000 units SQ weekly; Atorvastatin 40mg QHS.'",
+      "allergies": "'My allergies are Penicillin, NSAIDs (Ibuprofen).'",
+      "family": "Father: CHF, deceased at 72  Mother: HTN, stroke, deceased at 78  Sister: T2DM, CHF, deceased at 76",
+      "social": "Occupation: Retired home health aide  Marital: Widowed  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Nonocclusive Mesenteric Ischemia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Nonocclusive Mesenteric Ischemia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Nonocclusive Mesenteric Ischemia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Nonocclusive Mesenteric Ischemia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Nonocclusive Mesenteric Ischemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Nonocclusive Mesenteric Ischemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Nonocclusive Mesenteric Ischemia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Nonocclusive Mesenteric Ischemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Nonocclusive Mesenteric Ischemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Edna Marshall's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Nonocclusive Mesenteric Ischemia (NOMI). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Edna Marshall's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Nonocclusive Mesenteric Ischemia (NOMI). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

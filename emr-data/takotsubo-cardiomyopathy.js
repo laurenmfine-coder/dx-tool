@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Carmen Delgado",
-  "patientHPI": "Ever since my daughter started going through her messy divorce two months ago, I've been having these episodes where my heart pounds so hard I can feel it in my throat. The stress has been overwhelming - I cry at the smallest things and can barely sleep, and sometimes I get this crushing feeling in my chest like someone is sitting on it.",
+    "patientHPI": "Ever since my daughter started going through her messy divorce two months ago, I've been having these episodes where my heart pounds so hard I can feel it in my throat. The stress has been overwhelming - I cry at the smallest things and can barely sleep, and sometimes I get this crushing feeling in my chest like someone is sitting on it.",
     "dob": "02/08/1957",
     "age": 67,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Isabel Delgado (Daughter)",
       "phone": "(954) 555-2910"
-    }
+    },
+    "chiefComplaint": "Chest pain"
   },
   "problems": [
     {
@@ -227,41 +228,161 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "19", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "21", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "19",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "21",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID PANEL",
           "results": [
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Free T4", "value": "1.1", "unit": "ng/dL", "range": "0.8-1.8", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Free T4",
+              "value": "1.1",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.5", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.0", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "39.0", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "256", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.5",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.0",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.0",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "256",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "198", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "118", "unit": "mg/dL", "range": "<130", "flag": "" },
-            { "test": "HDL Cholesterol", "value": "62", "unit": "mg/dL", "range": ">50", "flag": "" },
-            { "test": "Triglycerides", "value": "92", "unit": "mg/dL", "range": "<150", "flag": "" }
+            {
+              "test": "Total Cholesterol",
+              "value": "198",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "<130",
+              "flag": ""
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "62",
+              "unit": "mg/dL",
+              "range": ">50",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -353,15 +474,42 @@ window.EMR_DATA = {
     "Husband: Deceased at 67 (pancreatic cancer, 2019)"
   ],
   "socialHistory": [
-    ["Occupation", "Retired elementary school teacher"],
-    ["Marital", "Widowed since 2019"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare glass of wine"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 3x/week; attends gentle yoga class"],
-    ["Housing", "Lives alone in single-family home; daughter nearby"],
-    ["Safety", "Denies IPV; wears seatbelt; no fall hazards addressed"],
-    ["Advance Directive", "Living will and DPOA — daughter Isabel Delgado"]
+    [
+      "Occupation",
+      "Retired elementary school teacher"
+    ],
+    [
+      "Marital",
+      "Widowed since 2019"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare glass of wine"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 3x/week; attends gentle yoga class"
+    ],
+    [
+      "Housing",
+      "Lives alone in single-family home; daughter nearby"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; no fall hazards addressed"
+    ],
+    [
+      "Advance Directive",
+      "Living will and DPOA — daughter Isabel Delgado"
+    ]
   ],
   "meta": {
     "caseId": "takotsubo-cardiomyopathy",
@@ -374,73 +522,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Carmen Delgado is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did chest pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did chest pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Ever since my daughter started going through her messy divorce two months ago, I.'",
-        "character": "'It's chest pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Takotsubo Cardiomyopathy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Escitalopram 20mg daily; Amlodipine 5mg daily; Hydrochlorothiazide 25mg daily; Levothyroxine 75mcg daily; Alendronate 70mg weekly; Calcium 600mg + Vitamin D3 800 IU BID.'",
-        "allergies": "'My allergies are Lisinopril, Shellfish.'",
-        "family": "Mother: Hypertension, osteoporosis, deceased at 84 (CHF)  Father: T2DM, deceased at 72 (MI)  Sister: Anxiety disorder, hypothyroidism, alive at 70",
-        "social": "Occupation: Retired elementary school teacher  Marital: Widowed since 2019  Tobacco: Never smoker  Alcohol: Rare glass of wine  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started Ever since my daughter started going through her messy divorce two months ago, I.'",
+      "character": "'It's chest pain — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Takotsubo Cardiomyopathy.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Escitalopram 20mg daily; Amlodipine 5mg daily; Hydrochlorothiazide 25mg daily; Levothyroxine 75mcg daily; Alendronate 70mg weekly; Calcium 600mg + Vitamin D3 800 IU BID.'",
+      "allergies": "'My allergies are Lisinopril, Shellfish.'",
+      "family": "Mother: Hypertension, osteoporosis, deceased at 84 (CHF)  Father: T2DM, deceased at 72 (MI)  Sister: Anxiety disorder, hypothyroidism, alive at 70",
+      "social": "Occupation: Retired elementary school teacher  Marital: Widowed since 2019  Tobacco: Never smoker  Alcohol: Rare glass of wine  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Takotsubo Cardiomyopathy. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Takotsubo Cardiomyopathy (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Takotsubo Cardiomyopathy (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Takotsubo Cardiomyopathy, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Takotsubo Cardiomyopathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Takotsubo Cardiomyopathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Takotsubo Cardiomyopathy, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Takotsubo Cardiomyopathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Takotsubo Cardiomyopathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Carmen Delgado's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Takotsubo Cardiomyopathy (Stress Cardiomyopathy). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Carmen Delgado's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Takotsubo Cardiomyopathy (Stress Cardiomyopathy). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

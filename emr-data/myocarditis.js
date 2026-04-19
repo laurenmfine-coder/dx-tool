@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Jean-Baptiste",
-  "patientHPI": "I've had this cold for about five days now - stuffy nose, scratchy throat, and this annoying dry cough that won't go away. I had a fever at home that got up to 100 degrees, and my whole body has been aching. I'm training for a half-marathon so I've been pushing through and still going on my runs, but I'm feeling pretty wiped out.",
+    "patientHPI": "I've had this cold for about five days now - stuffy nose, scratchy throat, and this annoying dry cough that won't go away. I had a fever at home that got up to 100 degrees, and my whole body has been aching. I'm training for a half-marathon so I've been pushing through and still going on my runs, but I'm feeling pretty wiped out.",
     "dob": "11/04/1999",
     "age": 25,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Marie Jean-Baptiste (Mother)",
       "phone": "(954) 555-3044"
-    }
+    },
+    "chiefComplaint": "Chest pain and fatigue"
   },
   "problems": [
     {
@@ -182,34 +183,142 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "82", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.3", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "24", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "82",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.3",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.2", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "228", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "228",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "168", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "95", "unit": "mg/dL", "range": "<100", "flag": "" },
-            { "test": "HDL Cholesterol", "value": "58", "unit": "mg/dL", "range": ">40", "flag": "" },
-            { "test": "Triglycerides", "value": "76", "unit": "mg/dL", "range": "<150", "flag": "" }
+            {
+              "test": "Total Cholesterol",
+              "value": "168",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "95",
+              "unit": "mg/dL",
+              "range": "<100",
+              "flag": ""
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "58",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "76",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -277,15 +386,42 @@ window.EMR_DATA = {
     "Paternal uncle: Sudden cardiac death at age 42 (cause unknown)"
   ],
   "socialHistory": [
-    ["Occupation", "IT support technician"],
-    ["Marital", "Single"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional, 2-3 drinks/week socially"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Competitive recreational runner; trains 5-6x/week; half-marathon training"],
-    ["Housing", "Lives alone in apartment"],
-    ["Safety", "Denies concerns; wears seatbelt"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "IT support technician"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional, 2-3 drinks/week socially"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Competitive recreational runner; trains 5-6x/week; half-marathon training"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment"
+    ],
+    [
+      "Safety",
+      "Denies concerns; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "myocarditis",
@@ -298,73 +434,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Marcus Jean-Baptiste appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did chest pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did chest pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've had this cold for about five days now - stuffy nose, scratchy throat, and t.'",
-        "character": "'It's chest pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Myocarditis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cetirizine 10mg daily; Albuterol 90mcg MDI PRN; Fluticasone nasal spray 50mcg.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: Hypertension, T2DM, alive at 52  Father: Healthy, alive at 55  Brother: Asthma, age 22",
-        "social": "Occupation: IT support technician  Marital: Single  Tobacco: Never smoker  Alcohol: Occasional, 2-3 drinks/week socially  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've had this cold for about five days now - stuffy nose, scratchy throat, and t.'",
+      "character": "'It's chest pain — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Acute Myocarditis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Cetirizine 10mg daily; Albuterol 90mcg MDI PRN; Fluticasone nasal spray 50mcg.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Mother: Hypertension, T2DM, alive at 52  Father: Healthy, alive at 55  Brother: Asthma, age 22",
+      "social": "Occupation: IT support technician  Marital: Single  Tobacco: Never smoker  Alcohol: Occasional, 2-3 drinks/week socially  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Acute Myocarditis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Acute Myocarditis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Myocarditis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Myocarditis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Myocarditis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Myocarditis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Myocarditis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Acute Myocarditis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Acute Myocarditis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Jean-Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Myocarditis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Marcus Jean-Baptiste's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Acute Myocarditis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

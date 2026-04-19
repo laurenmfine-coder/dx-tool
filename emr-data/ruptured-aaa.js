@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Diane Kowalski (Wife)",
       "phone": "(954) 555-1088"
-    }
+    },
+    "chiefComplaint": "Sudden severe belly and back pain"
   },
   "problems": [
     {

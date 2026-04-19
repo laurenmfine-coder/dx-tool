@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Briggs",
-  "patientHPI": "I've been coughing up thick green stuff for about four days now, and it's getting harder to breathe even when I'm just sitting around. I've been running a little fever and using my inhaler way more than usual - maybe six or eight times a day instead of once or twice. I even turned up my oxygen tank but it's not helping much, and my wife says I seem more mixed up than normal.",
+    "patientHPI": "I've been coughing up thick green stuff for about four days now, and it's getting harder to breathe even when I'm just sitting around. I've been running a little fever and using my inhaler way more than usual - maybe six or eight times a day instead of once or twice. I even turned up my oxygen tank but it's not helping much, and my wife says I seem more mixed up than normal.",
     "dob": "12/09/1951",
     "age": 73,
     "sex": "Male",
@@ -13,7 +13,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part B + Humana Supplement",
     "pcp": "Dr. Angela Foster, MD",
-    "pharmacy": "CVS Pharmacy \u2014 2200 N Federal Hwy, Hollywood, FL",
+    "pharmacy": "CVS Pharmacy — 2200 N Federal Hwy, Hollywood, FL",
     "language": "English",
     "race": "White",
     "address": "7273 Poplar Ave, Birmingham, AL 35207",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Nancy Briggs (Wife)",
       "phone": "(954) 555-6110"
-    }
+    },
+    "chiefComplaint": "Worse shortness of breath than usual"
   },
   "problems": [
     {
@@ -156,7 +157,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": 82,
       "rr": 20,
-      "temp": "98.8\u00b0F",
+      "temp": "98.8°F",
       "spo2": "91%",
       "wt": "168 lbs",
       "ht": "5'10\"",
@@ -168,7 +169,7 @@ window.EMR_DATA = {
       "bp": "132/80",
       "hr": 78,
       "rr": 18,
-      "temp": "98.4\u00b0F",
+      "temp": "98.4°F",
       "spo2": "93%",
       "wt": "172 lbs",
       "ht": "5'10\"",
@@ -180,11 +181,11 @@ window.EMR_DATA = {
       "bp": "126/76",
       "hr": 80,
       "rr": 18,
-      "temp": "98.6\u00b0F",
+      "temp": "98.6°F",
       "spo2": "92%",
       "wt": "174 lbs",
       "ht": "5'10\"",
-      "bmi": 25.0,
+      "bmi": 25,
       "setting": "PCP Office"
     },
     {
@@ -192,7 +193,7 @@ window.EMR_DATA = {
       "bp": "140/86",
       "hr": 98,
       "rr": 22,
-      "temp": "100.2\u00b0F",
+      "temp": "100.2°F",
       "spo2": "88%",
       "wt": "170 lbs",
       "ht": "5'10\"",
@@ -209,7 +210,7 @@ window.EMR_DATA = {
       "cc": "Increased cough, worsening dyspnea",
       "hpi": "Mr. Briggs presents with 4 days of worsening cough productive of green-yellow sputum, increased dyspnea at rest, and low-grade fever. Increased rescue inhaler use from 1-2x/day to 6-8x/day. Reports he turned up his home O2 to 3L from 2L without improvement. Wife notes he seems more confused than usual. Denies chest pain, hemoptysis, or leg swelling.",
       "exam": "Chronically ill, thin male using accessory muscles. Pursed-lip breathing. Lungs: diffuse expiratory wheezes bilaterally, scattered rhonchi, decreased breath sounds at right base with egophony. CV: irregularly irregular (baseline afib), rate controlled. Ext: no edema.",
-      "assessment": "1. Acute COPD exacerbation with probable superimposed pneumonia (right lower lobe)\n2. Chronic afib \u2014 rate controlled\n3. CHF \u2014 compensated, no volume overload today\n4. Baseline hypoxemia worsened",
+      "assessment": "1. Acute COPD exacerbation with probable superimposed pneumonia (right lower lobe)\n2. Chronic afib — rate controlled\n3. CHF — compensated, no volume overload today\n4. Baseline hypoxemia worsened",
       "plan": "1. Refer to ED for admission given severity, baseline lung disease, and comorbidities\n2. Portable CXR, CBC, BMP, procalcitonin, sputum culture\n3. Anticipate IV antibiotics (levofloxacin given azithromycin allergy), systemic steroids, nebulizers\n4. Hold apixaban if procalcitonin elevated and considering invasive procedures"
     },
     {
@@ -239,29 +240,107 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            {"test": "WBC", "value": "14.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "H"},
-            {"test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L"},
-            {"test": "Hematocrit", "value": "39.6", "unit": "%", "range": "38.0-50.0", "flag": ""},
-            {"test": "Platelets", "value": "198", "unit": "K/uL", "range": "150-400", "flag": ""},
-            {"test": "Neutrophils", "value": "82", "unit": "%", "range": "40-70", "flag": "H"},
-            {"test": "Bands", "value": "6", "unit": "%", "range": "0-5", "flag": "H"}
+            {
+              "test": "WBC",
+              "value": "14.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.6",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "198",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Neutrophils",
+              "value": "82",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Bands",
+              "value": "6",
+              "unit": "%",
+              "range": "0-5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            {"test": "Glucose", "value": "132", "unit": "mg/dL", "range": "70-100", "flag": "H"},
-            {"test": "BUN", "value": "24", "unit": "mg/dL", "range": "7-20", "flag": "H"},
-            {"test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.7-1.3", "flag": ""},
-            {"test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": ""},
-            {"test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": ""},
-            {"test": "CO2", "value": "30", "unit": "mEq/L", "range": "21-31", "flag": ""}
+            {
+              "test": "Glucose",
+              "value": "132",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "24",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "CO2",
+              "value": "30",
+              "unit": "mEq/L",
+              "range": "21-31",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "PROCALCITONIN",
           "results": [
-            {"test": "Procalcitonin", "value": "1.8", "unit": "ng/mL", "range": "<0.1", "flag": "H"}
+            {
+              "test": "Procalcitonin",
+              "value": "1.8",
+              "unit": "ng/mL",
+              "range": "<0.1",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -280,7 +359,7 @@ window.EMR_DATA = {
       "clinical": "COPD exacerbation, fever, rule out pneumonia",
       "technique": "PA and lateral chest radiographs.",
       "findings": "Hyperinflated lungs with flattened diaphragms consistent with known COPD. Increased interstitial markings bilaterally. No focal consolidation. Heart is enlarged. Small bilateral pleural effusions. No pneumothorax. Thoracic spine demonstrates multilevel degenerative changes.",
-      "impression": "1. Hyperinflated lungs consistent with COPD.\n2. No focal consolidation to suggest pneumonia at this time.\n3. Cardiomegaly.\n4. Small bilateral pleural effusions \u2014 likely related to heart failure.",
+      "impression": "1. Hyperinflated lungs consistent with COPD.\n2. No focal consolidation to suggest pneumonia at this time.\n3. Cardiomegaly.\n4. Small bilateral pleural effusions — likely related to heart failure.",
       "dictated": "04/08/2024 06:15 PM",
       "verified": "04/08/2024 08:00 PM"
     },
@@ -346,15 +425,42 @@ window.EMR_DATA = {
     "No family history of venous thromboembolism or bleeding disorders"
   ],
   "socialHistory": [
-    ["Occupation", "Retired electrician (40 years). Occupational asbestos exposure possible."],
-    ["Marital", "Married, lives with wife. She is primary caregiver."],
-    ["Tobacco", "Former smoker \u2014 quit 2018. 50 pack-year history (1.5 PPD x 33 years)."],
-    ["Alcohol", "Rare \u2014 1-2 beers per month"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited due to dyspnea. Uses rollator for ambulation outside home."],
-    ["Housing", "Single-story home, Hollywood, FL. Central A/C. Home oxygen 2L NC at night."],
-    ["Safety", "Wears seatbelt. No firearms. Fall risk \u2014 has grab bars in bathroom."],
-    ["Advance Directive", "DNR/DNI per discussion 2023. Wife is healthcare proxy. Document on file."]
+    [
+      "Occupation",
+      "Retired electrician (40 years). Occupational asbestos exposure possible."
+    ],
+    [
+      "Marital",
+      "Married, lives with wife. She is primary caregiver."
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2018. 50 pack-year history (1.5 PPD x 33 years)."
+    ],
+    [
+      "Alcohol",
+      "Rare — 1-2 beers per month"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited due to dyspnea. Uses rollator for ambulation outside home."
+    ],
+    [
+      "Housing",
+      "Single-story home, Hollywood, FL. Central A/C. Home oxygen 2L NC at night."
+    ],
+    [
+      "Safety",
+      "Wears seatbelt. No firearms. Fall risk — has grab bars in bathroom."
+    ],
+    [
+      "Advance Directive",
+      "DNR/DNI per discussion 2023. Wife is healthcare proxy. Document on file."
+    ]
   ],
   "meta": {
     "caseId": "pneumonia-on-copd",
@@ -367,73 +473,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Walter Briggs appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did shortness of breath start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been coughing up thick green stuff for about four days now, and it's gettin.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia Superimposed on Severe COPD.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Fluticasone-Salmeterol (Advair) 250/50 INH BID; Albuterol 90mcg MDI PRN; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Furosemide 40mg daily; Alendronate 70mg weekly.'",
-        "allergies": "'My allergies are Azithromycin, Iodinated Contrast.'",
-        "family": "Father: COPD, lung cancer (diagnosed age 70, deceased age 73). Smoker.  Mother: Congestive heart failure, hypertension, deceased age 84  Brother: Emphysema, current smoker, age 70",
-        "social": "Occupation: Retired electrician (40 years). Occupational asbestos exposure possible.  Marital: Married, lives with wife. She is primary caregiver.  Tobacco: Former smoker \u2014 quit 2018. 50 pack-year history (1.5 PPD x 33 years).  Alcohol: Rare \u2014 1-2 beers per month  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been coughing up thick green stuff for about four days now, and it's gettin.'",
+      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia Superimposed on Severe COPD.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Fluticasone-Salmeterol (Advair) 250/50 INH BID; Albuterol 90mcg MDI PRN; Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Furosemide 40mg daily; Alendronate 70mg weekly.'",
+      "allergies": "'My allergies are Azithromycin, Iodinated Contrast.'",
+      "family": "Father: COPD, lung cancer (diagnosed age 70, deceased age 73). Smoker.  Mother: Congestive heart failure, hypertension, deceased age 84  Brother: Emphysema, current smoker, age 70",
+      "social": "Occupation: Retired electrician (40 years). Occupational asbestos exposure possible.  Marital: Married, lives with wife. She is primary caregiver.  Tobacco: Former smoker — quit 2018. 50 pack-year history (1.5 PPD x 33 years).  Alcohol: Rare — 1-2 beers per month  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "General appearance and respiratory effort",
+      "Vital signs and pulse oximetry",
+      "Pulmonary auscultation",
+      "Percussion of lung fields",
+      "Accessory muscle use",
+      "Cardiovascular auscultation",
+      "Lower extremity DVT assessment",
+      "Tracheal position"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe."
+      "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe.",
+      "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on Severe COPD. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Community-Acquired Pneumonia Superimposed on Severe COPD (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Community-Acquired Pneumonia Superimposed on Severe COPD (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia Superimposed on Severe COPD, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Community-Acquired Pneumonia Superimposed on Severe COPD, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia Superimposed on Severe COPD based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia Superimposed on Severe COPD, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Community-Acquired Pneumonia Superimposed on Severe COPD, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia Superimposed on Severe COPD based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Walter Briggs's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Community-Acquired Pneumonia Superimposed on Severe COPD. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Walter Briggs's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Community-Acquired Pneumonia Superimposed on Severe COPD. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

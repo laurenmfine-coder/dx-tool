@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Marie-Claire Desmond (Wife)",
       "phone": "(954) 555-3024"
-    }
+    },
+    "chiefComplaint": "Shortness of breath on exertion"
   },
   "problems": [
     {

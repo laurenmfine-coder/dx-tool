@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Brianna Townsend",
-  "patientHPI": "I've been taking extra of my ADHD medication because one pill wasn't lasting through my long study days, but now I can't sleep at all and my heart feels like it's racing constantly. I've been jittery and anxious, and I think I might have taken too much today because I feel really shaky and keep having chest tightness.",
+    "patientHPI": "I've been taking extra of my ADHD medication because one pill wasn't lasting through my long study days, but now I can't sleep at all and my heart feels like it's racing constantly. I've been jittery and anxious, and I think I might have taken too much today because I feel really shaky and keep having chest tightness.",
     "dob": "07/11/2001",
     "age": 23,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Sharon Townsend (Mother)",
       "phone": "(954) 555-4718"
-    }
+    },
+    "chiefComplaint": "Agitation and racing heart"
   },
   "problems": [
     {
@@ -124,7 +125,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "PCP Office"
     }
   ],
@@ -167,58 +168,190 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "168", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "24", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "L" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "20", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "AST (SGOT)", "value": "52", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "38", "unit": "U/L", "range": "7-56", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "168",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "24",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "20",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "52",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "14.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "13.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "41.4", "unit": "%", "range": "36-46", "flag": "" },
-            { "test": "Platelets", "value": "268", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "14.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.4",
+              "unit": "%",
+              "range": "36-46",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "268",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "TROPONIN",
           "results": [
-            { "test": "Troponin I (High Sensitivity)", "value": "0.08", "unit": "ng/mL", "range": "<0.04", "flag": "H" }
+            {
+              "test": "Troponin I (High Sensitivity)",
+              "value": "0.08",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CREATINE KINASE",
           "results": [
-            { "test": "CK Total", "value": "620", "unit": "U/L", "range": "30-135", "flag": "H" }
+            {
+              "test": "CK Total",
+              "value": "620",
+              "unit": "U/L",
+              "range": "30-135",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "3.2", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "3.2",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINE DRUG SCREEN",
           "results": [
-            { "test": "Amphetamines", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Benzodiazepines", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Cocaine", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Opiates", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "THC", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "Amphetamines",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Benzodiazepines",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Cocaine",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Opiates",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "THC",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINE PREGNANCY TEST",
           "results": [
-            { "test": "hCG (Urine)", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "hCG (Urine)",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -259,11 +392,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL882P", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "PF498K", "mfr": "Pfizer" },
-    { "vaccine": "Tdap (Adacel)", "date": "08/2019", "site": "Left deltoid IM", "lot": "TA172R", "mfr": "Sanofi" },
-    { "vaccine": "HPV (Gardasil 9) — series complete", "date": "07/2017", "site": "Left deltoid IM", "lot": "HP141T", "mfr": "Merck" },
-    { "vaccine": "Meningococcal B (Bexsero) — 2nd dose", "date": "09/2019", "site": "Right deltoid IM", "lot": "MB218K", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL882P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "PF498K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "08/2019",
+      "site": "Left deltoid IM",
+      "lot": "TA172R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "HPV (Gardasil 9) — series complete",
+      "date": "07/2017",
+      "site": "Left deltoid IM",
+      "lot": "HP141T",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Meningococcal B (Bexsero) — 2nd dose",
+      "date": "09/2019",
+      "site": "Right deltoid IM",
+      "lot": "MB218K",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother (age 48): Hypertension, anxiety disorder",
@@ -273,15 +436,42 @@ window.EMR_DATA = {
     "No family history of sudden cardiac death, cardiomyopathy, or arrhythmias"
   ],
   "socialHistory": [
-    ["Occupation", "Graduate student — PhD program in biomedical sciences"],
-    ["Marital", "Single; lives in apartment near campus with roommate"],
-    ["Tobacco", "Occasional social vaping (nicotine) — 1-2x/week at social events"],
-    ["Alcohol", "Social — 3-4 drinks on weekends"],
-    ["Drugs", "Denies illicit drugs; ADMITS to taking extra Adderall (2 capsules = 60mg today) + multiple energy drinks for study marathon"],
-    ["Exercise", "Runs 3x/week; recently reduced due to academic workload"],
-    ["Housing", "Apartment near university campus"],
-    ["Safety", "No firearms; no SI/HI"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Graduate student — PhD program in biomedical sciences"
+    ],
+    [
+      "Marital",
+      "Single; lives in apartment near campus with roommate"
+    ],
+    [
+      "Tobacco",
+      "Occasional social vaping (nicotine) — 1-2x/week at social events"
+    ],
+    [
+      "Alcohol",
+      "Social — 3-4 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies illicit drugs; ADMITS to taking extra Adderall (2 capsules = 60mg today) + multiple energy drinks for study marathon"
+    ],
+    [
+      "Exercise",
+      "Runs 3x/week; recently reduced due to academic workload"
+    ],
+    [
+      "Housing",
+      "Apartment near university campus"
+    ],
+    [
+      "Safety",
+      "No firearms; no SI/HI"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "sympathomimetic-toxicity",
@@ -294,73 +484,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Brianna Townsend is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did psychiatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did psychiatric emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been taking extra of my ADHD medication because one pill wasn't lasting thr.'",
-        "character": "'It's psychiatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Mixed Amphetamine Salts (Adderall XR) 30mg QAM; Escitalopram 10mg daily; Sumatriptan 50mg PRN; Oral Contraceptive (Lo Loestrin Fe).'",
-        "allergies": "'My allergies are Codeine.'",
-        "family": "Mother (age 48): Hypertension, anxiety disorder  Father (age 50): ADHD (diagnosed as adult), hypertension, hyperlipidemia  Maternal grandmother (age 72): Type 2 Diabetes, stroke at age 68",
-        "social": "Occupation: Graduate student \u2014 PhD program in biomedical sciences  Marital: Single; lives in apartment near campus with roommate  Tobacco: Occasional social vaping (nicotine) \u2014 1-2x/week at social events  Alcohol: Social \u2014 3-4 drinks on weekends  Drugs: Denies illicit drugs; ADMITS to taking extra Adderall (2 capsules = 60mg today) + multiple energy drinks for study marathon"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been taking extra of my ADHD medication because one pill wasn't lasting thr.'",
+      "character": "'It's psychiatric emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Mixed Amphetamine Salts (Adderall XR) 30mg QAM; Escitalopram 10mg daily; Sumatriptan 50mg PRN; Oral Contraceptive (Lo Loestrin Fe).'",
+      "allergies": "'My allergies are Codeine.'",
+      "family": "Mother (age 48): Hypertension, anxiety disorder  Father (age 50): ADHD (diagnosed as adult), hypertension, hyperlipidemia  Maternal grandmother (age 72): Type 2 Diabetes, stroke at age 68",
+      "social": "Occupation: Graduate student — PhD program in biomedical sciences  Marital: Single; lives in apartment near campus with roommate  Tobacco: Occasional social vaping (nicotine) — 1-2x/week at social events  Alcohol: Social — 3-4 drinks on weekends  Drugs: Denies illicit drugs; ADMITS to taking extra Adderall (2 capsules = 60mg today) + multiple energy drinks for study marathon"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Sympathomimetic Toxidrome — Prescription Amphetamine Excess. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Sympathomimetic Toxidrome — Prescription Amphetamine Excess (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Sympathomimetic Toxidrome — Prescription Amphetamine Excess, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Sympathomimetic Toxidrome — Prescription Amphetamine Excess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Sympathomimetic Toxidrome — Prescription Amphetamine Excess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Brianna Townsend's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Sympathomimetic Toxidrome \u2014 Prescription Amphetamine Excess (60mg) + Excessive Caffeine with Demand Ischemia and Mild Rhabdomyolysis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Brianna Townsend's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Sympathomimetic Toxidrome — Prescription Amphetamine Excess (60mg) + Excessive Caffeine with Demand Ischemia and Mild Rhabdomyolysis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

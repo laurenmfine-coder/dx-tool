@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Thibodeaux",
-  "patientHPI": "I've been pretty good about taking my medications, though I'll admit I sometimes forget my mood pills on the weekends when my routine gets messed up. I'm here for my regular check-up and everything seems fine - sleeping okay, eating well, my blood sugars have been running a bit high but not terrible.",
+    "patientHPI": "I've been pretty good about taking my medications, though I'll admit I sometimes forget my mood pills on the weekends when my routine gets messed up. I'm here for my regular check-up and everything seems fine - sleeping okay, eating well, my blood sugars have been running a bit high but not terrible.",
     "dob": "01/20/1990",
     "age": 35,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Denise Thibodeaux (Sister)",
       "phone": "(954) 555-6148"
-    }
+    },
+    "chiefComplaint": "Fever and rigid muscles"
   },
   "problems": [
     {
@@ -174,62 +175,218 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "218", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "38", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "2.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "Sodium", "value": "152", "unit": "mEq/L", "range": "136-145", "flag": "H" },
-            { "test": "Potassium", "value": "5.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "112", "unit": "mEq/L", "range": "98-106", "flag": "H" },
-            { "test": "CO2 (Bicarbonate)", "value": "18", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "10.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" },
-            { "test": "AST (SGOT)", "value": "284", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "162", "unit": "U/L", "range": "7-56", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "218",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "38",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "152",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "H"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "112",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "H"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "18",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "284",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "162",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC) WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "18.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "16.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "50.4", "unit": "%", "range": "38.3-48.6", "flag": "H" },
-            { "test": "Platelets", "value": "142", "unit": "x10³/µL", "range": "150-400", "flag": "L" },
-            { "test": "Neutrophils", "value": "84", "unit": "%", "range": "40-70", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "18.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "16.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "50.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "H"
+            },
+            {
+              "test": "Platelets",
+              "value": "142",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "84",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CREATINE KINASE",
           "results": [
-            { "test": "CK Total", "value": "12,840", "unit": "U/L", "range": "30-200", "flag": "H" },
-            { "test": "CK-MB", "value": "18", "unit": "ng/mL", "range": "0-5", "flag": "H" }
+            {
+              "test": "CK Total",
+              "value": "12,840",
+              "unit": "U/L",
+              "range": "30-200",
+              "flag": "H"
+            },
+            {
+              "test": "CK-MB",
+              "value": "18",
+              "unit": "ng/mL",
+              "range": "0-5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LITHIUM LEVEL",
           "results": [
-            { "test": "Lithium", "value": "1.8", "unit": "mEq/L", "range": "0.6-1.2", "flag": "H" }
+            {
+              "test": "Lithium",
+              "value": "1.8",
+              "unit": "mEq/L",
+              "range": "0.6-1.2",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "5.4", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "5.4",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Serum Iron", "value": "18", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "Ferritin", "value": "1,842", "unit": "ng/mL", "range": "20-250", "flag": "H" }
+            {
+              "test": "Serum Iron",
+              "value": "18",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "Ferritin",
+              "value": "1,842",
+              "unit": "ng/mL",
+              "range": "20-250",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Dark amber", "unit": "", "range": "Yellow", "flag": "" },
-            { "test": "Specific Gravity", "value": "1.034", "unit": "", "range": "1.005-1.030", "flag": "H" },
-            { "test": "Myoglobin", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Blood (dipstick)", "value": "3+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "RBC", "value": "0-2", "unit": "/HPF", "range": "0-3", "flag": "" }
+            {
+              "test": "Color",
+              "value": "Dark amber",
+              "unit": "",
+              "range": "Yellow",
+              "flag": ""
+            },
+            {
+              "test": "Specific Gravity",
+              "value": "1.034",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": "H"
+            },
+            {
+              "test": "Myoglobin",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Blood (dipstick)",
+              "value": "3+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "RBC",
+              "value": "0-2",
+              "unit": "/HPF",
+              "range": "0-3",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -270,9 +427,27 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL891R", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Moderna, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV884P", "mfr": "Moderna" },
-    { "vaccine": "Tdap (Adacel)", "date": "01/2022", "site": "Left deltoid IM", "lot": "TA219K", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL891R",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Moderna, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV884P",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "01/2022",
+      "site": "Left deltoid IM",
+      "lot": "TA219K",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother (age 60): Bipolar II Disorder, hypertension, obesity",
@@ -282,15 +457,42 @@ window.EMR_DATA = {
     "Strong family history of mood disorders and psychotic spectrum illness"
   ],
   "socialHistory": [
-    ["Occupation", "Disability — SSI; unable to work consistently due to psychiatric illness"],
-    ["Marital", "Single; lives with sister who serves as informal caregiver"],
-    ["Tobacco", "Former — quit 2 years ago; previously 1 PPD x 8 years"],
-    ["Alcohol", "Denies current use; hx of heavy use during manic episodes"],
-    ["Drugs", "Denies current use; hx of cocaine use during manic episodes (last use 2022)"],
-    ["Exercise", "Walks in neighborhood occasionally; mostly sedentary"],
-    ["Housing", "Lives with sister in apartment"],
-    ["Safety", "No firearms; sister monitors medications; has psychiatric advance directive naming sister as healthcare proxy"],
-    ["Advance Directive", "Psychiatric advance directive on file — sister (Denise) is designated decision-maker"]
+    [
+      "Occupation",
+      "Disability — SSI; unable to work consistently due to psychiatric illness"
+    ],
+    [
+      "Marital",
+      "Single; lives with sister who serves as informal caregiver"
+    ],
+    [
+      "Tobacco",
+      "Former — quit 2 years ago; previously 1 PPD x 8 years"
+    ],
+    [
+      "Alcohol",
+      "Denies current use; hx of heavy use during manic episodes"
+    ],
+    [
+      "Drugs",
+      "Denies current use; hx of cocaine use during manic episodes (last use 2022)"
+    ],
+    [
+      "Exercise",
+      "Walks in neighborhood occasionally; mostly sedentary"
+    ],
+    [
+      "Housing",
+      "Lives with sister in apartment"
+    ],
+    [
+      "Safety",
+      "No firearms; sister monitors medications; has psychiatric advance directive naming sister as healthcare proxy"
+    ],
+    [
+      "Advance Directive",
+      "Psychiatric advance directive on file — sister (Denise) is designated decision-maker"
+    ]
   ],
   "meta": {
     "caseId": "lethal-catatonia",
@@ -303,73 +505,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Marcus Thibodeaux appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did psychiatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did psychiatric emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been pretty good about taking my medications, though I'll admit I sometimes.'",
-        "character": "'It's psychiatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Lethal.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lithium 600mg BID; Quetiapine 400mg QHS; Metformin 1000mg BID; Lisinopril 20mg daily.'",
-        "allergies": "'My allergies are Carbamazepine.'",
-        "family": "Mother (age 60): Bipolar II Disorder, hypertension, obesity  Father (age 63): Deceased \u2014 MI at age 58; hx of T2DM, HTN, hyperlipidemia  Sister (age 32): Anxiety disorder \u2014 on sertraline",
-        "social": "Occupation: Disability \u2014 SSI; unable to work consistently due to psychiatric illness  Marital: Single; lives with sister who serves as informal caregiver  Tobacco: Former \u2014 quit 2 years ago; previously 1 PPD x 8 years  Alcohol: Denies current use; hx of heavy use during manic episodes  Drugs: Denies current use; hx of cocaine use during manic episodes (last use 2022)"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been pretty good about taking my medications, though I'll admit I sometimes.'",
+      "character": "'It's psychiatric emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Lethal.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Lithium 600mg BID; Quetiapine 400mg QHS; Metformin 1000mg BID; Lisinopril 20mg daily.'",
+      "allergies": "'My allergies are Carbamazepine.'",
+      "family": "Mother (age 60): Bipolar II Disorder, hypertension, obesity  Father (age 63): Deceased — MI at age 58; hx of T2DM, HTN, hyperlipidemia  Sister (age 32): Anxiety disorder — on sertraline",
+      "social": "Occupation: Disability — SSI; unable to work consistently due to psychiatric illness  Marital: Single; lives with sister who serves as informal caregiver  Tobacco: Former — quit 2 years ago; previously 1 PPD x 8 years  Alcohol: Denies current use; hx of heavy use during manic episodes  Drugs: Denies current use; hx of cocaine use during manic episodes (last use 2022)"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Lethal. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Lethal. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Lethal. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Lethal. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Lethal (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Lethal (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lethal, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Lethal, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Lethal based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lethal, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Lethal, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Lethal based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Thibodeaux's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Lethal (Malignant) Catatonia with Autonomic Instability, Rhabdomyolysis, and Concurrent Lithium Toxicity. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Marcus Thibodeaux's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Lethal (Malignant) Catatonia with Autonomic Instability, Rhabdomyolysis, and Concurrent Lithium Toxicity. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Vincent Moreau",
-  "patientHPI": "I've been having this weird swelling in my face and neck that's gotten worse over the past few weeks, and my voice sounds hoarse even though I don't have a cold. My face looks puffy in the mirror, especially around my eyes, and my shirts feel tight around my neck. I've also been more short of breath when I walk up stairs, which isn't normal for me.",
+    "patientHPI": "I've been having this weird swelling in my face and neck that's gotten worse over the past few weeks, and my voice sounds hoarse even though I don't have a cold. My face looks puffy in the mirror, especially around my eyes, and my shirts feel tight around my neck. I've also been more short of breath when I walk up stairs, which isn't normal for me.",
     "dob": "07/22/1958",
     "age": 67,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Michelle Moreau (Wife)",
       "phone": "(954) 555-6517"
-    }
+    },
+    "chiefComplaint": "Face and arm swelling for 3 weeks"
   },
   "problems": [
     {
@@ -196,7 +197,7 @@ window.EMR_DATA = {
       "spo2": "93%",
       "wt": "174 lbs",
       "ht": "5'10\"",
-      "bmi": 25.0,
+      "bmi": 25,
       "setting": "PCP Office"
     }
   ],
@@ -239,28 +240,100 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "26", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.5", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "46", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "26",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.5",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "46",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "11.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.2", "unit": "%", "range": "38.0-50.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "11.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.2",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "D-Dimer", "value": "2800", "unit": "ng/mL FEU", "range": "<500", "flag": "H" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.8-1.1", "flag": "" }
+            {
+              "test": "D-Dimer",
+              "value": "2800",
+              "unit": "ng/mL FEU",
+              "range": "<500",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -328,15 +401,42 @@ window.EMR_DATA = {
     "Sister: Breast cancer (diagnosed age 58), alive at 62"
   ],
   "socialHistory": [
-    ["Occupation", "Retired electrician (asbestos exposure documented); retired 2020; filed workers' comp claim"],
-    ["Marital", "Married 40 years; wife Michelle, age 65"],
-    ["Tobacco", "Former smoker — quit 2020; 45 pack-year (1 PPD x 45 years)"],
-    ["Alcohol", "Stopped since cancer diagnosis; previously moderate"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited — walks inside home only; oxygen-dependent with exertion"],
-    ["Housing", "Single-family home with wife; single-story"],
-    ["Safety", "Fall risk — uses walker for ambulation; home oxygen; no firearms"],
-    ["Advance Directive", "POLST on file — DNR/DNI; HCP: wife Michelle Moreau"]
+    [
+      "Occupation",
+      "Retired electrician (asbestos exposure documented); retired 2020; filed workers' comp claim"
+    ],
+    [
+      "Marital",
+      "Married 40 years; wife Michelle, age 65"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2020; 45 pack-year (1 PPD x 45 years)"
+    ],
+    [
+      "Alcohol",
+      "Stopped since cancer diagnosis; previously moderate"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — walks inside home only; oxygen-dependent with exertion"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife; single-story"
+    ],
+    [
+      "Safety",
+      "Fall risk — uses walker for ambulation; home oxygen; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — DNR/DNI; HCP: wife Michelle Moreau"
+    ]
   ],
   "meta": {
     "caseId": "superior-vena-cava-syndrome",
@@ -349,73 +449,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Vincent Moreau is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did cardiac emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did cardiac emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having this weird swelling in my face and neck that's gotten worse ove.'",
-        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Superior Vena Cava Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Pembrolizumab 200mg IV q3weeks; Tiotropium/Olodaterol 2.5/2.5mcg inhaled daily; Fluticasone Furoate 100mcg inhaled daily; Albuterol MDI PRN; Aspirin 81mg daily; Atorvastatin 40mg QHS; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily.'",
-        "allergies": "'My allergies are Cisplatin, Shellfish.'",
-        "family": "Father: Lung cancer (smoker), deceased at 62  Mother: COPD, HTN, deceased at 74  Brother: Healthy, non-smoker, alive at 64",
-        "social": "Occupation: Retired electrician (asbestos exposure documented); retired 2020; filed workers' comp claim  Marital: Married 40 years; wife Michelle, age 65  Tobacco: Former smoker \u2014 quit 2020; 45 pack-year (1 PPD x 45 years)  Alcohol: Stopped since cancer diagnosis; previously moderate  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been having this weird swelling in my face and neck that's gotten worse ove.'",
+      "character": "'It's cardiac emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Superior Vena Cava Syndrome.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Pembrolizumab 200mg IV q3weeks; Tiotropium/Olodaterol 2.5/2.5mcg inhaled daily; Fluticasone Furoate 100mcg inhaled daily; Albuterol MDI PRN; Aspirin 81mg daily; Atorvastatin 40mg QHS; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily.'",
+      "allergies": "'My allergies are Cisplatin, Shellfish.'",
+      "family": "Father: Lung cancer (smoker), deceased at 62  Mother: COPD, HTN, deceased at 74  Brother: Healthy, non-smoker, alive at 64",
+      "social": "Occupation: Retired electrician (asbestos exposure documented); retired 2020; filed workers' comp claim  Marital: Married 40 years; wife Michelle, age 65  Tobacco: Former smoker — quit 2020; 45 pack-year (1 PPD x 45 years)  Alcohol: Stopped since cancer diagnosis; previously moderate  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Superior Vena Cava Syndrome. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Superior Vena Cava Syndrome (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Superior Vena Cava Syndrome (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Superior Vena Cava Syndrome, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Superior Vena Cava Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Superior Vena Cava Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Superior Vena Cava Syndrome, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Superior Vena Cava Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Superior Vena Cava Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Vincent Moreau's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Superior Vena Cava Syndrome (NSCLC-Related Extrinsic Compression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Vincent Moreau's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Superior Vena Cava Syndrome (NSCLC-Related Extrinsic Compression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

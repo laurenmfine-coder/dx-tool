@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carlos Menendez (Son)",
       "phone": "(954) 555-8180"
-    }
+    },
+    "chiefComplaint": "Sudden severe leg pain"
   },
   "problems": [
     {

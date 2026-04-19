@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudette Baptiste",
-  "patientHPI": "My blood pressure pills aren't working like they should, and I'll be honest - I forget to take the afternoon one pretty often. I've been getting these headaches at the back of my head for the past couple months, especially when I'm stressed, but my vision seems fine.",
+    "patientHPI": "My blood pressure pills aren't working like they should, and I'll be honest - I forget to take the afternoon one pretty often. I've been getting these headaches at the back of my head for the past couple months, especially when I'm stressed, but my vision seems fine.",
     "dob": "09/12/1961",
     "age": 63,
     "sex": "Female",
@@ -19,7 +19,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Marie-Claire Desrosiers (Daughter)",
       "phone": "(954) 555-6078"
-    }
+    },
+    "chiefComplaint": "Headache and feeling unwell"
   },
   "problems": [
     {
@@ -239,39 +240,147 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "142", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.8", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "177", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "7.8",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "177",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINALYSIS WITH MICROSCOPY",
           "results": [
-            { "test": "Protein", "value": "1+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Glucose", "value": "1+", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Blood", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Urine Albumin/Creatinine Ratio", "value": "82", "unit": "mg/g", "range": "<30", "flag": "H" }
+            {
+              "test": "Protein",
+              "value": "1+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Glucose",
+              "value": "1+",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Blood",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Urine Albumin/Creatinine Ratio",
+              "value": "82",
+              "unit": "mg/g",
+              "range": "<30",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "245", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -363,15 +472,42 @@ window.EMR_DATA = {
     "Son: HTN, age 38"
   ],
   "socialHistory": [
-    ["Occupation", "Retired home health aide"],
-    ["Marital", "Widowed; lives with daughter"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal; walks around the block occasionally"],
-    ["Housing", "Lives with daughter in apartment; limited transportation"],
-    ["Safety", "Denies IPV; no firearms"],
-    ["Advance Directive", "Health care proxy: daughter Marie-Claire Desrosiers"]
+    [
+      "Occupation",
+      "Retired home health aide"
+    ],
+    [
+      "Marital",
+      "Widowed; lives with daughter"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal; walks around the block occasionally"
+    ],
+    [
+      "Housing",
+      "Lives with daughter in apartment; limited transportation"
+    ],
+    [
+      "Safety",
+      "Denies IPV; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: daughter Marie-Claire Desrosiers"
+    ]
   ],
   "meta": {
     "caseId": "hypertensive-emergency",
@@ -384,73 +520,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Claudette Baptiste is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did headache start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did headache start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My blood pressure pills aren't working like they should, and I'll be honest - I .'",
-        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Hypertensive Emergency with End-Organ Damage.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Lisinopril, Shellfish.'",
-        "family": "Mother: HTN, stroke at age 70, deceased at 75  Father: HTN, T2DM, MI at age 65, deceased at 68  Sister: HTN, CKD, alive at 65",
-        "social": "Occupation: Retired home health aide  Marital: Widowed; lives with daughter  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started My blood pressure pills aren't working like they should, and I'll be honest - I .'",
+      "character": "'It's headache — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Hypertensive Emergency with End-Organ Damage.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
+      "allergies": "'My allergies are Lisinopril, Shellfish.'",
+      "family": "Mother: HTN, stroke at age 70, deceased at 75  Father: HTN, T2DM, MI at age 65, deceased at 68  Sister: HTN, CKD, alive at 65",
+      "social": "Occupation: Retired home health aide  Marital: Widowed; lives with daughter  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Hypertensive Emergency with End-Organ Damage. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Hypertensive Emergency with End-Organ Damage (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hypertensive Emergency with End-Organ Damage (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hypertensive Emergency with End-Organ Damage, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Hypertensive Emergency with End-Organ Damage, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Hypertensive Emergency with End-Organ Damage based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hypertensive Emergency with End-Organ Damage, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Hypertensive Emergency with End-Organ Damage, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Hypertensive Emergency with End-Organ Damage based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Claudette Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Hypertensive Emergency with End-Organ Damage (Encephalopathy, CKD Progression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Claudette Baptiste's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Hypertensive Emergency with End-Organ Damage (Encephalopathy, CKD Progression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

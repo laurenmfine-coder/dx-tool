@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Maria Delgado (Mother)",
       "phone": "(954) 555-6160"
-    }
+    },
+    "chiefComplaint": "Fever and severe headache"
   },
   "problems": [
     {

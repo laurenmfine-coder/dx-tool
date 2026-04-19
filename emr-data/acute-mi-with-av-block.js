@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Diane Brooks (Wife)",
       "phone": "(954) 555-1856"
-    }
+    },
+    "chiefComplaint": "Chest pain and lightheadedness"
   },
   "problems": [
     {

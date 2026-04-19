@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Roberto Herrera (Husband)",
       "phone": "(954) 555-8490"
-    }
+    },
+    "chiefComplaint": "Sudden confusion and weakness"
   },
   "problems": [
     {

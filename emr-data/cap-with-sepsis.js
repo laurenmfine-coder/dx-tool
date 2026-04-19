@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Diane Higgins (Wife)",
       "phone": "(954) 555-3290"
-    }
+    },
+    "chiefComplaint": "Fever and cough for 3 days"
   },
   "problems": [
     {

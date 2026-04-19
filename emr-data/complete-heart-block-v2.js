@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Anthony Marchetti (Son)",
       "phone": "(954) 555-7437"
-    }
+    },
+    "chiefComplaint": "Fatigue and near-fainting episodes"
   },
   "problems": [
     {

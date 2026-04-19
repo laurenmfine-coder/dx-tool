@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Rachel Dominguez",
-  "patientHPI": "About three weeks ago I had the strangest experience - I suddenly felt like I'd lived that exact moment before, and then I smelled something like burning rubber that wasn't really there. It only lasted about 30 seconds but it was really weird and unlike anything I've ever experienced.",
+    "patientHPI": "About three weeks ago I had the strangest experience - I suddenly felt like I'd lived that exact moment before, and then I smelled something like burning rubber that wasn't really there. It only lasted about 30 seconds but it was really weird and unlike anything I've ever experienced.",
     "dob": "11/20/1989",
     "age": 35,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carlos Dominguez (Husband)",
       "phone": "(954) 555-4815"
-    }
+    },
+    "chiefComplaint": "Sudden seizure"
   },
   "problems": [
     {
@@ -131,7 +132,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "PCP Office"
     }
   ],
@@ -174,31 +175,121 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "9.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Magnesium", "value": "1.9", "unit": "mg/dL", "range": "1.7-2.2", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.9",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "78", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelets", "value": "248", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Ferritin", "value": "14", "unit": "ng/mL", "range": "12-150", "flag": "" },
-            { "test": "Iron", "value": "42", "unit": "µg/dL", "range": "60-170", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "78",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "248",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Ferritin",
+              "value": "14",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": ""
+            },
+            {
+              "test": "Iron",
+              "value": "42",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "ANTIEPILEPTIC DRUG LEVEL",
           "results": [
-            { "test": "Levetiracetam Level", "value": "8.2", "unit": "µg/mL", "range": "12-46 (therapeutic)", "flag": "L" }
+            {
+              "test": "Levetiracetam Level",
+              "value": "8.2",
+              "unit": "µg/mL",
+              "range": "12-46 (therapeutic)",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -223,10 +314,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL818K", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Moderna, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV762T", "mfr": "Moderna" },
-    { "vaccine": "Tdap (Adacel)", "date": "09/2021", "site": "Left deltoid IM", "lot": "TA242R", "mfr": "Sanofi" },
-    { "vaccine": "HPV (Gardasil 9) — series complete", "date": "2012", "site": "Left deltoid IM", "lot": "HP412K", "mfr": "Merck" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL818K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Moderna, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV762T",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "09/2021",
+      "site": "Left deltoid IM",
+      "lot": "TA242R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "HPV (Gardasil 9) — series complete",
+      "date": "2012",
+      "site": "Left deltoid IM",
+      "lot": "HP412K",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother (age 62): Hypertension, anxiety disorder",
@@ -236,15 +351,42 @@ window.EMR_DATA = {
     "No family history of seizure disorder, brain tumors, or multiple cavernous malformations"
   ],
   "socialHistory": [
-    ["Occupation", "Elementary school teacher — full-time; on medical leave since seizure"],
-    ["Marital", "Married x 8 years; lives with husband; trying to conceive (planning to stop OCP)"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Social — 1-2 glasses wine per week (stopped since seizure diagnosis)"],
-    ["Drugs", "None"],
-    ["Exercise", "Yoga 3x/week, running 2x/week"],
-    ["Housing", "Townhouse"],
-    ["Safety", "Not driving per neurology instruction; husband provides transportation"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Elementary school teacher — full-time; on medical leave since seizure"
+    ],
+    [
+      "Marital",
+      "Married x 8 years; lives with husband; trying to conceive (planning to stop OCP)"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Social — 1-2 glasses wine per week (stopped since seizure diagnosis)"
+    ],
+    [
+      "Drugs",
+      "None"
+    ],
+    [
+      "Exercise",
+      "Yoga 3x/week, running 2x/week"
+    ],
+    [
+      "Housing",
+      "Townhouse"
+    ],
+    [
+      "Safety",
+      "Not driving per neurology instruction; husband provides transportation"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "structural-lesion",
@@ -257,73 +399,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Rachel Dominguez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did seizure start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started About three weeks ago I had the strangest experience - I suddenly felt like I'd .'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Cerebral Cavernous Malformation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sertraline 100mg daily; Ferrous Sulfate 325mg daily; Ibuprofen 400mg Q6h PRN; Combined Oral Contraceptive (Levonorgestrel/EE).'",
-        "allergies": "'My allergies are Latex.'",
-        "family": "Mother (age 62): Hypertension, anxiety disorder  Father (age 64): Type 2 Diabetes, hyperlipidemia  Sister (age 32): Healthy",
-        "social": "Occupation: Elementary school teacher \u2014 full-time; on medical leave since seizure  Marital: Married x 8 years; lives with husband; trying to conceive (planning to stop OCP)  Tobacco: Never  Alcohol: Social \u2014 1-2 glasses wine per week (stopped since seizure diagnosis)  Drugs: None"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started About three weeks ago I had the strangest experience - I suddenly felt like I'd .'",
+      "character": "'It's seizure — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Cerebral Cavernous Malformation.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Sertraline 100mg daily; Ferrous Sulfate 325mg daily; Ibuprofen 400mg Q6h PRN; Combined Oral Contraceptive (Levonorgestrel/EE).'",
+      "allergies": "'My allergies are Latex.'",
+      "family": "Mother (age 62): Hypertension, anxiety disorder  Father (age 64): Type 2 Diabetes, hyperlipidemia  Sister (age 32): Healthy",
+      "social": "Occupation: Elementary school teacher — full-time; on medical leave since seizure  Marital: Married x 8 years; lives with husband; trying to conceive (planning to stop OCP)  Tobacco: Never  Alcohol: Social — 1-2 glasses wine per week (stopped since seizure diagnosis)  Drugs: None"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Cerebral Cavernous Malformation. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Cerebral Cavernous Malformation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Cerebral Cavernous Malformation (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cerebral Cavernous Malformation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Cerebral Cavernous Malformation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Cerebral Cavernous Malformation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cerebral Cavernous Malformation, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Cerebral Cavernous Malformation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Cerebral Cavernous Malformation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Rachel Dominguez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Cerebral Cavernous Malformation (Left Mesial Temporal) with Acute Hemorrhage and Focal-to-Bilateral Tonic-Clonic Seizure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Rachel Dominguez's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Cerebral Cavernous Malformation (Left Mesial Temporal) with Acute Hemorrhage and Focal-to-Bilateral Tonic-Clonic Seizure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

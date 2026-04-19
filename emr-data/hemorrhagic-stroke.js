@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Hyun-Soo Kim",
-  "patientHPI": "I'm here for my regular visit to check on my blood pressure and diabetes - I know my pressure readings at home have been really high even though I'm on three medications, but I'll be honest, I skip my afternoon water pill a lot because it makes me have to go to the bathroom too much at work.",
+    "patientHPI": "I'm here for my regular visit to check on my blood pressure and diabetes - I know my pressure readings at home have been really high even though I'm on three medications, but I'll be honest, I skip my afternoon water pill a lot because it makes me have to go to the bathroom too much at work.",
     "dob": "09/08/1960",
     "age": 65,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Minji Kim (Wife)",
       "phone": "(954) 555-3770"
-    }
+    },
+    "chiefComplaint": "Sudden severe headache and confusion"
   },
   "problems": [
     {
@@ -209,39 +210,147 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "148", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "26", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "54", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "23", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "148",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "26",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "54",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "23",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.6", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "171", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "7.6",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "171",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.0", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "41.4", "unit": "%", "range": "38.0-50.0", "flag": "" },
-            { "test": "Platelet Count", "value": "218", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.0",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.4",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "218",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINE",
           "results": [
-            { "test": "Urine Albumin/Creatinine Ratio", "value": "180", "unit": "mg/g", "range": "<30", "flag": "H" }
+            {
+              "test": "Urine Albumin/Creatinine Ratio",
+              "value": "180",
+              "unit": "mg/g",
+              "range": "<30",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -316,15 +425,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 58"
   ],
   "socialHistory": [
-    ["Occupation", "Dry cleaning business owner; works 60+ hrs/week"],
-    ["Marital", "Married 38 years; wife Minji, age 63"],
-    ["Tobacco", "Former smoker — quit 2005; 15 pack-year history"],
-    ["Alcohol", "Social, 2-3 drinks/week; occasional soju"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — reports no time due to work schedule"],
-    ["Housing", "Single-family home with wife; adult children nearby"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "None on file — discussed, patient defers"]
+    [
+      "Occupation",
+      "Dry cleaning business owner; works 60+ hrs/week"
+    ],
+    [
+      "Marital",
+      "Married 38 years; wife Minji, age 63"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2005; 15 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks/week; occasional soju"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — reports no time due to work schedule"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife; adult children nearby"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "None on file — discussed, patient defers"
+    ]
   ],
   "meta": {
     "caseId": "hemorrhagic-stroke",
@@ -337,73 +473,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Hyun-Soo Kim appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did altered mental status start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did altered mental status start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my regular visit to check on my blood pressure and diabetes - I kno.'",
-        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Hemorrhagic Stroke.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Clonidine.'",
-        "family": "Father: Hemorrhagic stroke at age 68 (deceased), Hypertension  Mother: Hypertension, T2DM, alive at 88  Brother: Hypertension, alive at 62",
-        "social": "Occupation: Dry cleaning business owner; works 60+ hrs/week  Marital: Married 38 years; wife Minji, age 63  Tobacco: Former smoker \u2014 quit 2005; 15 pack-year history  Alcohol: Social, 2-3 drinks/week; occasional soju  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I'm here for my regular visit to check on my blood pressure and diabetes - I kno.'",
+      "character": "'It's altered mental status — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Hemorrhagic Stroke.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Amlodipine 10mg daily; Lisinopril 40mg daily; Hydrochlorothiazide 25mg daily; Metformin 1000mg BID; Atorvastatin 40mg QHS; Aspirin 81mg daily.'",
+      "allergies": "'My allergies are Clonidine.'",
+      "family": "Father: Hemorrhagic stroke at age 68 (deceased), Hypertension  Mother: Hypertension, T2DM, alive at 88  Brother: Hypertension, alive at 62",
+      "social": "Occupation: Dry cleaning business owner; works 60+ hrs/week  Marital: Married 38 years; wife Minji, age 63  Tobacco: Former smoker — quit 2005; 15 pack-year history  Alcohol: Social, 2-3 drinks/week; occasional soju  Drugs: Denies"
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Level of consciousness and GCS",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Sensory testing",
+      "Coordination and cerebellar testing",
+      "Gait assessment if applicable",
+      "Meningeal signs",
+      "Vital signs"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe."
+      "Level of consciousness and GCS": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Cranial nerve examination": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Motor strength testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Sensory testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Coordination and cerebellar testing": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Gait assessment if applicable": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Meningeal signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Hemorrhagic Stroke. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Hemorrhagic Stroke (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hemorrhagic Stroke (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hemorrhagic Stroke, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Hemorrhagic Stroke, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Hemorrhagic Stroke based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hemorrhagic Stroke, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Hemorrhagic Stroke, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Hemorrhagic Stroke based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Hyun-Soo Kim's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Hemorrhagic Stroke (Hypertensive Intracerebral Hemorrhage). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Hyun-Soo Kim's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Hemorrhagic Stroke (Hypertensive Intracerebral Hemorrhage). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

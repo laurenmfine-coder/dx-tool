@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Jennifer Mitchell (Wife)",
       "phone": "(954) 555-8119"
-    }
+    },
+    "chiefComplaint": "Severe flank pain"
   },
   "problems": [
     {
@@ -117,54 +118,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "02/24/2026",
-        "bp": "158/94",
-        "hr": 102,
-        "rr": 20,
-        "temp": "98.8\u00b0F",
-        "spo2": "98%",
-        "wt": "195 lbs",
-        "ht": "5'10\"",
-        "bmi": 28.0,
-        "setting": "ED"
+      "date": "02/24/2026",
+      "bp": "158/94",
+      "hr": 102,
+      "rr": 20,
+      "temp": "98.8°F",
+      "spo2": "98%",
+      "wt": "195 lbs",
+      "ht": "5'10\"",
+      "bmi": 28,
+      "setting": "ED"
     },
     {
-        "date": "11/06/2025",
-        "bp": "138/86",
-        "hr": 78,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "99%",
-        "wt": "194 lbs",
-        "ht": "5'10\"",
-        "bmi": 27.8,
-        "setting": "PCP Office"
+      "date": "11/06/2025",
+      "bp": "138/86",
+      "hr": 78,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "194 lbs",
+      "ht": "5'10\"",
+      "bmi": 27.8,
+      "setting": "PCP Office"
     },
     {
-        "date": "05/14/2025",
-        "bp": "134/82",
-        "hr": 74,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "99%",
-        "wt": "192 lbs",
-        "ht": "5'10\"",
-        "bmi": 27.5,
-        "setting": "PCP Office"
+      "date": "05/14/2025",
+      "bp": "134/82",
+      "hr": 74,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "99%",
+      "wt": "192 lbs",
+      "ht": "5'10\"",
+      "bmi": 27.5,
+      "setting": "PCP Office"
     },
     {
-        "date": "11/20/2024",
-        "bp": "142/88",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "99%",
-        "wt": "196 lbs",
-        "ht": "5'10\"",
-        "bmi": 28.1,
-        "setting": "PCP Office"
+      "date": "11/20/2024",
+      "bp": "142/88",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "99%",
+      "wt": "196 lbs",
+      "ht": "5'10\"",
+      "bmi": 28.1,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -215,35 +216,149 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "eGFR", "value": "82", "unit": "mL/min/1.73m²", "range": ">60", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "32", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "eGFR",
+              "value": "82",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "32",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URIC ACID",
           "results": [
-            { "test": "Uric Acid", "value": "5.8", "unit": "mg/dL", "range": "3.5-7.2", "flag": "" }
+            {
+              "test": "Uric Acid",
+              "value": "5.8",
+              "unit": "mg/dL",
+              "range": "3.5-7.2",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Yellow", "unit": "", "range": "Yellow", "flag": "" },
-            { "test": "Clarity", "value": "Clear", "unit": "", "range": "Clear", "flag": "" },
-            { "test": "Specific Gravity", "value": "1.012", "unit": "", "range": "1.005-1.030", "flag": "" },
-            { "test": "pH", "value": "6.5", "unit": "", "range": "5.0-8.0", "flag": "" },
-            { "test": "Blood", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Protein", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Leukocyte Esterase", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "Color",
+              "value": "Yellow",
+              "unit": "",
+              "range": "Yellow",
+              "flag": ""
+            },
+            {
+              "test": "Clarity",
+              "value": "Clear",
+              "unit": "",
+              "range": "Clear",
+              "flag": ""
+            },
+            {
+              "test": "Specific Gravity",
+              "value": "1.012",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            },
+            {
+              "test": "pH",
+              "value": "6.5",
+              "unit": "",
+              "range": "5.0-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Blood",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Protein",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Leukocyte Esterase",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -304,15 +419,42 @@ window.EMR_DATA = {
     "Paternal uncle: Renal cell carcinoma at age 65 (deceased)"
   ],
   "socialHistory": [
-    ["Occupation", "IT project manager"],
-    ["Marital", "Married, 2 children (ages 12, 9)"],
-    ["Tobacco", "Former smoker — quit 2015 (10 pack-year history)"],
-    ["Alcohol", "Moderate, 4-6 beers/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Sporadic; walks 2x/week, occasional cycling"],
-    ["Housing", "Single-family home with wife and children"],
-    ["Safety", "Denies IPV; seatbelt always; firearms secured"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "IT project manager"
+    ],
+    [
+      "Marital",
+      "Married, 2 children (ages 12, 9)"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2015 (10 pack-year history)"
+    ],
+    [
+      "Alcohol",
+      "Moderate, 4-6 beers/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Sporadic; walks 2x/week, occasional cycling"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife and children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always; firearms secured"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "renal-colic",
@@ -325,73 +467,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Brian Mitchell appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did abdominal pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did abdominal pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 45-year-old male presenting for routine follow-up of hypertension, gout, and rec.'",
-        "character": "'It's abdominal pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Renal Colic.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 20mg daily; Allopurinol 300mg daily; Potassium Citrate 10mEq TID; Omeprazole 20mg daily; Hydrochlorothiazide 25mg daily.'",
-        "allergies": "'My allergies are Ketorolac, Sulfa Drugs.'",
-        "family": "Father: Nephrolithiasis (recurrent), Hypertension, alive at 72  Mother: Type 2 Diabetes Mellitus, Osteoarthritis, alive at 70  Brother: Gout, alive at 48",
-        "social": "Occupation: IT project manager  Marital: Married, 2 children (ages 12, 9)  Tobacco: Former smoker \u2014 quit 2015 (10 pack-year history)  Alcohol: Moderate, 4-6 beers/week  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started 45-year-old male presenting for routine follow-up of hypertension, gout, and rec.'",
+      "character": "'It's abdominal pain — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Renal Colic.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Lisinopril 20mg daily; Allopurinol 300mg daily; Potassium Citrate 10mEq TID; Omeprazole 20mg daily; Hydrochlorothiazide 25mg daily.'",
+      "allergies": "'My allergies are Ketorolac, Sulfa Drugs.'",
+      "family": "Father: Nephrolithiasis (recurrent), Hypertension, alive at 72  Mother: Type 2 Diabetes Mellitus, Osteoarthritis, alive at 70  Brother: Gout, alive at 48",
+      "social": "Occupation: IT project manager  Marital: Married, 2 children (ages 12, 9)  Tobacco: Former smoker — quit 2015 (10 pack-year history)  Alcohol: Moderate, 4-6 beers/week  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Renal Colic. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Renal Colic. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Renal Colic. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Renal Colic (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Renal Colic (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Renal Colic, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Renal Colic, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Renal Colic based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Renal Colic, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Renal Colic, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Renal Colic based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Brian Mitchell's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Renal Colic (Nephrolithiasis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Brian Mitchell's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Renal Colic (Nephrolithiasis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

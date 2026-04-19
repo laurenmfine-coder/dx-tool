@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "William Okafor",
-  "patientHPI": "For the past three weeks, I get this tightness in my chest whenever I walk uphill or carry heavy groceries, but it goes away when I sit down and rest for a few minutes.",
+    "patientHPI": "For the past three weeks, I get this tightness in my chest whenever I walk uphill or carry heavy groceries, but it goes away when I sit down and rest for a few minutes.",
     "dob": "06/14/1961",
     "age": 63,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Grace Okafor (Wife)",
       "phone": "(954) 555-6188"
-    }
+    },
+    "chiefComplaint": "Recurring chest pressure"
   },
   "problems": [
     {
@@ -159,54 +160,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/06/2025",
-        "bp": "148/88",
-        "hr": 82,
-        "rr": 16,
-        "temp": "98.2\u00b0F",
-        "spo2": "96%",
-        "wt": "212 lbs",
-        "ht": "5'10\"",
-        "bmi": 30.4,
-        "setting": "PCP Office"
+      "date": "01/06/2025",
+      "bp": "148/88",
+      "hr": 82,
+      "rr": 16,
+      "temp": "98.2°F",
+      "spo2": "96%",
+      "wt": "212 lbs",
+      "ht": "5'10\"",
+      "bmi": 30.4,
+      "setting": "PCP Office"
     },
     {
-        "date": "10/14/2024",
-        "bp": "152/92",
-        "hr": 78,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "97%",
-        "wt": "210 lbs",
-        "ht": "5'10\"",
-        "bmi": 30.1,
-        "setting": "PCP Office"
+      "date": "10/14/2024",
+      "bp": "152/92",
+      "hr": 78,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "97%",
+      "wt": "210 lbs",
+      "ht": "5'10\"",
+      "bmi": 30.1,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/08/2024",
-        "bp": "144/86",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "97%",
-        "wt": "208 lbs",
-        "ht": "5'10\"",
-        "bmi": 29.8,
-        "setting": "PCP Office"
+      "date": "07/08/2024",
+      "bp": "144/86",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "97%",
+      "wt": "208 lbs",
+      "ht": "5'10\"",
+      "bmi": 29.8,
+      "setting": "PCP Office"
     },
     {
-        "date": "01/15/2024",
-        "bp": "140/84",
-        "hr": 74,
-        "rr": 16,
-        "temp": "98.4\u00b0F",
-        "spo2": "97%",
-        "wt": "206 lbs",
-        "ht": "5'10\"",
-        "bmi": 29.6,
-        "setting": "Specialist"
+      "date": "01/15/2024",
+      "bp": "140/84",
+      "hr": 74,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "97%",
+      "wt": "206 lbs",
+      "ht": "5'10\"",
+      "bmi": 29.6,
+      "setting": "Specialist"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -257,42 +258,168 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "158", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "26", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "158",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "26",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "8.1", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "186", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "8.1",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "186",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.0", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "39.0", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.0",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "182", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "78", "unit": "mg/dL", "range": "<70 (high risk)", "flag": "H" },
-            { "test": "HDL Cholesterol", "value": "36", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "210", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "182",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "78",
+              "unit": "mg/dL",
+              "range": "<70 (high risk)",
+              "flag": "H"
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "36",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "210",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -384,15 +511,42 @@ window.EMR_DATA = {
     "Son: Healthy, age 35"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker"],
-    ["Marital", "Married — 38 years"],
-    ["Tobacco", "Former smoker — quit 2018; 30 pack-year history"],
-    ["Alcohol", "Rare, 1-2 beers/month"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 20-30 min daily; has noticed decreased exercise tolerance recently"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; wears seatbelt; firearms in home (locked safe)"],
-    ["Advance Directive", "DPOA — wife Grace Okafor"]
+    [
+      "Occupation",
+      "Retired postal worker"
+    ],
+    [
+      "Marital",
+      "Married — 38 years"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2018; 30 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "Rare, 1-2 beers/month"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 20-30 min daily; has noticed decreased exercise tolerance recently"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; firearms in home (locked safe)"
+    ],
+    [
+      "Advance Directive",
+      "DPOA — wife Grace Okafor"
+    ]
   ],
   "meta": {
     "caseId": "nstemiunstable-angina",
@@ -405,73 +559,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "William Okafor is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did chest pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did chest pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started For the past three weeks, I get this tightness in my chest whenever I walk uphil.'",
-        "character": "'It's chest pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with NSTEMI / Unstable Angina.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Aspirin 81mg daily; Clopidogrel 75mg daily; Metoprolol succinate 50mg daily; Rosuvastatin 40mg daily; Lisinopril 20mg daily; Amlodipine 10mg daily; Metformin 1000mg BID; Nitroglycerin 0.4mg SL PRN.'",
-        "allergies": "'My allergies are Sulfa drugs, IV contrast dye.'",
-        "family": "Father: MI at age 56, T2DM, deceased at 68 (stroke)  Mother: Hypertension, hyperlipidemia, alive at 86  Brother: T2DM, CAD with CABG at age 58, alive at 65",
-        "social": "Occupation: Retired postal worker  Marital: Married \u2014 38 years  Tobacco: Former smoker \u2014 quit 2018; 30 pack-year history  Alcohol: Rare, 1-2 beers/month  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started For the past three weeks, I get this tightness in my chest whenever I walk uphil.'",
+      "character": "'It's chest pain — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with NSTEMI / Unstable Angina.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Aspirin 81mg daily; Clopidogrel 75mg daily; Metoprolol succinate 50mg daily; Rosuvastatin 40mg daily; Lisinopril 20mg daily; Amlodipine 10mg daily; Metformin 1000mg BID; Nitroglycerin 0.4mg SL PRN.'",
+      "allergies": "'My allergies are Sulfa drugs, IV contrast dye.'",
+      "family": "Father: MI at age 56, T2DM, deceased at 68 (stroke)  Mother: Hypertension, hyperlipidemia, alive at 86  Brother: T2DM, CAD with CABG at age 58, alive at 65",
+      "social": "Occupation: Retired postal worker  Marital: Married — 38 years  Tobacco: Former smoker — quit 2018; 30 pack-year history  Alcohol: Rare, 1-2 beers/month  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with NSTEMI / Unstable Angina. Document specifically what you observe."
     },
     "ddxTargets": [
-        "NSTEMI / Unstable Angina (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "NSTEMI / Unstable Angina (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For NSTEMI / Unstable Angina, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying NSTEMI / Unstable Angina, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight NSTEMI / Unstable Angina based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For NSTEMI / Unstable Angina, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying NSTEMI / Unstable Angina, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight NSTEMI / Unstable Angina based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed William Okafor's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is NSTEMI / Unstable Angina (In-Stent Restenosis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed William Okafor's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is NSTEMI / Unstable Angina (In-Stent Restenosis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

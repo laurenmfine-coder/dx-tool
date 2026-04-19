@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Michael Brennan",
-  "patientHPI": "I've been drinking about 12 to 18 beers every day and I haven't been taking those vitamins you recommended in months. I know I need to stop but it's been really hard since my last attempt at getting sober a couple years ago.",
+    "patientHPI": "I've been drinking about 12 to 18 beers every day and I haven't been taking those vitamins you recommended in months. I know I need to stop but it's been really hard since my last attempt at getting sober a couple years ago.",
     "dob": "01/22/1978",
     "age": 47,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Sean Brennan (Brother)",
       "phone": "(954) 555-7294"
-    }
+    },
+    "chiefComplaint": "Seizure after stopping drinking"
   },
   "problems": [
     {
@@ -196,51 +197,201 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "68", "unit": "mg/dL", "range": "70-100", "flag": "L" },
-            { "test": "BUN", "value": "8", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "3.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "L" },
-            { "test": "Chloride", "value": "96", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "20", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "8.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "L" },
-            { "test": "Magnesium", "value": "1.2", "unit": "mg/dL", "range": "1.7-2.2", "flag": "L" },
-            { "test": "Phosphorus", "value": "2.0", "unit": "mg/dL", "range": "2.5-4.5", "flag": "L" },
-            { "test": "AST (SGOT)", "value": "128", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "62", "unit": "U/L", "range": "7-56", "flag": "H" },
-            { "test": "Total Bilirubin", "value": "3.2", "unit": "mg/dL", "range": "0.1-1.2", "flag": "H" },
-            { "test": "Albumin", "value": "2.8", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "68",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "L"
+            },
+            {
+              "test": "BUN",
+              "value": "8",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "L"
+            },
+            {
+              "test": "Chloride",
+              "value": "96",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "20",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "8.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "L"
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": "L"
+            },
+            {
+              "test": "Phosphorus",
+              "value": "2.0",
+              "unit": "mg/dL",
+              "range": "2.5-4.5",
+              "flag": "L"
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "128",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "62",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": "H"
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "3.2",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Albumin",
+              "value": "2.8",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "11.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "33.8", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "MCV", "value": "108", "unit": "fL", "range": "80-100", "flag": "H" },
-            { "test": "Platelets", "value": "98", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "33.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "108",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "H"
+            },
+            {
+              "test": "Platelets",
+              "value": "98",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COAGULATION STUDIES",
           "results": [
-            { "test": "PT", "value": "16.8", "unit": "sec", "range": "11.0-14.0", "flag": "H" },
-            { "test": "INR", "value": "1.4", "unit": "", "range": "0.9-1.1", "flag": "H" },
-            { "test": "PTT", "value": "34", "unit": "sec", "range": "25-35", "flag": "" }
+            {
+              "test": "PT",
+              "value": "16.8",
+              "unit": "sec",
+              "range": "11.0-14.0",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.4",
+              "unit": "",
+              "range": "0.9-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "PTT",
+              "value": "34",
+              "unit": "sec",
+              "range": "25-35",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ETHANOL AND TOXICOLOGY",
           "results": [
-            { "test": "Blood Alcohol Level", "value": "28", "unit": "mg/dL", "range": "0", "flag": "H" },
-            { "test": "GGT", "value": "412", "unit": "U/L", "range": "0-65", "flag": "H" }
+            {
+              "test": "Blood Alcohol Level",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "0",
+              "flag": "H"
+            },
+            {
+              "test": "GGT",
+              "value": "412",
+              "unit": "U/L",
+              "range": "0-65",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LACTIC ACID",
           "results": [
-            { "test": "Lactate", "value": "4.2", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "4.2",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -265,9 +416,27 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "11/2024", "site": "Left deltoid IM", "lot": "FL842T", "mfr": "GSK" },
-    { "vaccine": "Tdap (Adacel)", "date": "03/2021", "site": "Left deltoid IM", "lot": "TA218R", "mfr": "Sanofi" },
-    { "vaccine": "Hepatitis A (Havrix) — 1st dose", "date": "03/2021", "site": "Right deltoid IM", "lot": "HA281P", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "11/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL842T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "03/2021",
+      "site": "Left deltoid IM",
+      "lot": "TA218R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "Hepatitis A (Havrix) — 1st dose",
+      "date": "03/2021",
+      "site": "Right deltoid IM",
+      "lot": "HA281P",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother (age 72): Hypertension, anxiety disorder",
@@ -277,15 +446,42 @@ window.EMR_DATA = {
     "Strong family history of alcohol use disorder (paternal lineage)"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed — formerly worked in landscaping; lost job due to drinking"],
-    ["Marital", "Divorced x 6 years; lives alone in efficiency apartment; brother nearby"],
-    ["Tobacco", "1 PPD x 25 years"],
-    ["Alcohol", "12-18 beers daily x 15 years; last drink approximately 48 hours ago (stopped when he ran out)"],
-    ["Drugs", "Denies current illicit drug use; remote history of cocaine use (stopped 2015)"],
-    ["Exercise", "None"],
-    ["Housing", "Efficiency apartment — no air conditioning"],
-    ["Safety", "History of falls when intoxicated; no firearms"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Unemployed — formerly worked in landscaping; lost job due to drinking"
+    ],
+    [
+      "Marital",
+      "Divorced x 6 years; lives alone in efficiency apartment; brother nearby"
+    ],
+    [
+      "Tobacco",
+      "1 PPD x 25 years"
+    ],
+    [
+      "Alcohol",
+      "12-18 beers daily x 15 years; last drink approximately 48 hours ago (stopped when he ran out)"
+    ],
+    [
+      "Drugs",
+      "Denies current illicit drug use; remote history of cocaine use (stopped 2015)"
+    ],
+    [
+      "Exercise",
+      "None"
+    ],
+    [
+      "Housing",
+      "Efficiency apartment — no air conditioning"
+    ],
+    [
+      "Safety",
+      "History of falls when intoxicated; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "alcohol-withdrawal-seizures",
@@ -298,73 +494,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Michael Brennan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did seizure start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been drinking about 12 to 18 beers every day and I haven't been taking thos.'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Alcohol Withdrawal Seizure.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 20mg daily; Omeprazole 20mg daily; Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother (age 72): Hypertension, anxiety disorder  Father: Deceased at age 58 \u2014 alcohol-related cirrhosis, variceal hemorrhage  Brother (age 50): History of alcohol use disorder \u2014 in recovery x 5 years",
-        "social": "Occupation: Unemployed \u2014 formerly worked in landscaping; lost job due to drinking  Marital: Divorced x 6 years; lives alone in efficiency apartment; brother nearby  Tobacco: 1 PPD x 25 years  Alcohol: 12-18 beers daily x 15 years; last drink approximately 48 hours ago (stopped when he ran out)  Drugs: Denies current illicit drug use; remote history of cocaine use (stopped 2015)"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been drinking about 12 to 18 beers every day and I haven't been taking thos.'",
+      "character": "'It's seizure — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Alcohol Withdrawal Seizure.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Lisinopril 20mg daily; Omeprazole 20mg daily; Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Mother (age 72): Hypertension, anxiety disorder  Father: Deceased at age 58 — alcohol-related cirrhosis, variceal hemorrhage  Brother (age 50): History of alcohol use disorder — in recovery x 5 years",
+      "social": "Occupation: Unemployed — formerly worked in landscaping; lost job due to drinking  Marital: Divorced x 6 years; lives alone in efficiency apartment; brother nearby  Tobacco: 1 PPD x 25 years  Alcohol: 12-18 beers daily x 15 years; last drink approximately 48 hours ago (stopped when he ran out)  Drugs: Denies current illicit drug use; remote history of cocaine use (stopped 2015)"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Alcohol Withdrawal Seizure. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Alcohol Withdrawal Seizure (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Alcohol Withdrawal Seizure (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Alcohol Withdrawal Seizure, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Alcohol Withdrawal Seizure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Alcohol Withdrawal Seizure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Alcohol Withdrawal Seizure, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Alcohol Withdrawal Seizure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Alcohol Withdrawal Seizure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Michael Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Alcohol Withdrawal Seizure (GTC) \u2014 48 Hours Post-Cessation with High Risk for Delirium Tremens (Prior DTs History, Kindling). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Michael Brennan's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Alcohol Withdrawal Seizure (GTC) — 48 Hours Post-Cessation with High Risk for Delirium Tremens (Prior DTs History, Kindling). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

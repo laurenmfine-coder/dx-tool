@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Mae Sinclair",
-  "patientHPI": "I've been having some dizzy spells and my son says I seem more confused lately, especially since my blood sugar numbers have been getting better. I had to go to the emergency room twice recently because I felt really weak and shaky.",
+    "patientHPI": "I've been having some dizzy spells and my son says I seem more confused lately, especially since my blood sugar numbers have been getting better. I had to go to the emergency room twice recently because I felt really weak and shaky.",
     "dob": "07/14/1943",
     "age": 81,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "James Sinclair Jr. (Son)",
       "phone": "(954) 555-2152"
-    }
+    },
+    "chiefComplaint": "Seizure found down at home"
   },
   "problems": [
     {
@@ -211,37 +212,133 @@ window.EMR_DATA = {
         {
           "name": "POINT-OF-CARE GLUCOSE (ON ARRIVAL)",
           "results": [
-            { "test": "Glucose (POC)", "value": "28", "unit": "mg/dL", "range": "70-100", "flag": "L" }
+            {
+              "test": "Glucose (POC)",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose (Serum — post D50)", "value": "148", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "38", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "eGFR", "value": "28", "unit": "mL/min", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "124", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "5.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "90", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "18", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "8.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "L" },
-            { "test": "Magnesium", "value": "1.6", "unit": "mg/dL", "range": "1.7-2.2", "flag": "L" }
+            {
+              "test": "Glucose (Serum — post D50)",
+              "value": "148",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "38",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "28",
+              "unit": "mL/min",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "124",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "90",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "18",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "8.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "L"
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "8.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "32.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelets", "value": "212", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "32.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "212",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "SERUM OSMOLALITY",
           "results": [
-            { "test": "Serum Osmolality", "value": "258", "unit": "mOsm/kg", "range": "275-295", "flag": "L" }
+            {
+              "test": "Serum Osmolality",
+              "value": "258",
+              "unit": "mOsm/kg",
+              "range": "275-295",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -266,11 +363,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (High-Dose — Fluzone)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FH818R", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV712T", "mfr": "Pfizer" },
-    { "vaccine": "Pneumococcal (PCV20 — Prevnar 20)", "date": "06/2023", "site": "Left deltoid IM", "lot": "PV782K", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (1st dose)", "date": "01/2020", "site": "Right deltoid IM", "lot": "SH262P", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "03/2020", "site": "Right deltoid IM", "lot": "SH268P", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (High-Dose — Fluzone)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FH818R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV712T",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "06/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV782K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (1st dose)",
+      "date": "01/2020",
+      "site": "Right deltoid IM",
+      "lot": "SH262P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "03/2020",
+      "site": "Right deltoid IM",
+      "lot": "SH268P",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother: Deceased at age 76 — stroke, T2DM",
@@ -280,15 +407,42 @@ window.EMR_DATA = {
     "Strong family history of diabetes and cardiovascular disease"
   ],
   "socialHistory": [
-    ["Occupation", "Retired — former postal worker"],
-    ["Marital", "Widowed x 12 years; lives alone; son lives 15 min away and checks daily"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "None"],
-    ["Drugs", "None"],
-    ["Exercise", "Minimal — walks to mailbox; limited by fatigue and mild dyspnea"],
-    ["Housing", "Ground-floor apartment; Life Alert pendant worn"],
-    ["Safety", "Son manages pill boxes; meals-on-wheels delivers lunch M-F; often skips dinner"],
-    ["Advance Directive", "Yes — DNR/comfort care if terminal; son is healthcare proxy"]
+    [
+      "Occupation",
+      "Retired — former postal worker"
+    ],
+    [
+      "Marital",
+      "Widowed x 12 years; lives alone; son lives 15 min away and checks daily"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "None"
+    ],
+    [
+      "Drugs",
+      "None"
+    ],
+    [
+      "Exercise",
+      "Minimal — walks to mailbox; limited by fatigue and mild dyspnea"
+    ],
+    [
+      "Housing",
+      "Ground-floor apartment; Life Alert pendant worn"
+    ],
+    [
+      "Safety",
+      "Son manages pill boxes; meals-on-wheels delivers lunch M-F; often skips dinner"
+    ],
+    [
+      "Advance Directive",
+      "Yes — DNR/comfort care if terminal; son is healthcare proxy"
+    ]
   ],
   "meta": {
     "caseId": "metabolic",
@@ -301,73 +455,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Dorothy Mae Sinclair is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did seizure start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having some dizzy spells and my son says I seem more confused lately, .'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Insulin Glargine 18 units QHS; Glipizide 10mg BID; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Furosemide 20mg daily; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Metformin, ACE Inhibitors (Lisinopril).'",
-        "family": "Mother: Deceased at age 76 \u2014 stroke, T2DM  Father: Deceased at age 72 \u2014 CHF, hypertension  Sister (age 78): T2DM, CKD on dialysis",
-        "social": "Occupation: Retired \u2014 former postal worker  Marital: Widowed x 12 years; lives alone; son lives 15 min away and checks daily  Tobacco: Never  Alcohol: None  Drugs: None"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been having some dizzy spells and my son says I seem more confused lately, .'",
+      "character": "'It's seizure — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Insulin Glargine 18 units QHS; Glipizide 10mg BID; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Furosemide 20mg daily; Aspirin 81mg daily.'",
+      "allergies": "'My allergies are Metformin, ACE Inhibitors (Lisinopril).'",
+      "family": "Mother: Deceased at age 76 — stroke, T2DM  Father: Deceased at age 72 — CHF, hypertension  Sister (age 78): T2DM, CKD on dialysis",
+      "social": "Occupation: Retired — former postal worker  Marital: Widowed x 12 years; lives alone; son lives 15 min away and checks daily  Tobacco: Never  Alcohol: None  Drugs: None"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Metabolic Seizure — Dual Etiology: Severe Hypoglycemia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Metabolic Seizure — Dual Etiology: Severe Hypoglycemia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Metabolic Seizure — Dual Etiology: Severe Hypoglycemia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Metabolic Seizure — Dual Etiology: Severe Hypoglycemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Metabolic Seizure — Dual Etiology: Severe Hypoglycemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dorothy Mae Sinclair's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Metabolic Seizure \u2014 Dual Etiology: Severe Hypoglycemia (BG 28, Glipizide/Insulin + CKD) and Hyponatremia (Na 124, HCTZ + CKD). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Dorothy Mae Sinclair's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Metabolic Seizure — Dual Etiology: Severe Hypoglycemia (BG 28, Glipizide/Insulin + CKD) and Hyponatremia (Na 124, HCTZ + CKD). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

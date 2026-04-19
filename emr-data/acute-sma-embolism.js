@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Brenda Chambers-Lee (Daughter)",
       "phone": "(954) 555-6058"
-    }
+    },
+    "chiefComplaint": "Sudden severe belly pain"
   },
   "problems": [
     {

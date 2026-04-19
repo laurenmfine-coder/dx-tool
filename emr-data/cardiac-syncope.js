@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Margaret Livingston (Wife)",
       "phone": "(954) 555-1488"
-    }
+    },
+    "chiefComplaint": "Passed out while walking upstairs"
   },
   "problems": [
     {

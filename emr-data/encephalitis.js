@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Angela Washington (Mother)",
       "phone": "(954) 555-8490"
-    }
+    },
+    "chiefComplaint": "Headache and fever"
   },
   "problems": [
     {

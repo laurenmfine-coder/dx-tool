@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Rebecca Stein (Daughter)",
       "phone": "(954) 555-6162"
-    }
+    },
+    "chiefComplaint": "Nausea and feeling slow for a week"
   },
   "problems": [
     {

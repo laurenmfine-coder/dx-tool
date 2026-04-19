@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carmen Reyes (Mother)",
       "phone": "(954) 555-3197"
-    }
+    },
+    "chiefComplaint": "Worsening belly pain and diarrhea for 2 weeks"
   },
   "problems": [
     {

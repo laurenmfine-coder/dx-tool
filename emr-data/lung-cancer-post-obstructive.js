@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Fontaine",
-  "patientHPI": "I've had this awful cough for about two weeks now that just keeps getting worse, and I'm bringing up thick yellow stuff that sometimes has streaks of blood in it. I get so winded now just walking to the mailbox, and I've been running low fevers and waking up soaked in sweat at night. What really worries me is I've lost 18 pounds in the last six months even though I'm eating normally.",
+    "patientHPI": "I've had this awful cough for about two weeks now that just keeps getting worse, and I'm bringing up thick yellow stuff that sometimes has streaks of blood in it. I get so winded now just walking to the mailbox, and I've been running low fevers and waking up soaked in sweat at night. What really worries me is I've lost 18 pounds in the last six months even though I'm eating normally.",
     "dob": "07/30/1955",
     "age": 69,
     "sex": "Male",
@@ -13,7 +13,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Cigna Medicare Advantage PPO",
     "pcp": "Dr. Margaret Okafor, MD",
-    "pharmacy": "CVS Pharmacy \u2014 3080 Stirling Rd, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy — 3080 Stirling Rd, Fort Lauderdale, FL",
     "language": "English",
     "race": "White",
     "address": "2041 Jasmine Way, Albuquerque, NM 87111",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Christine Fontaine (Wife)",
       "phone": "(954) 555-4741"
-    }
+    },
+    "chiefComplaint": "Shortness of breath and persistent cough"
   },
   "problems": [
     {
@@ -118,11 +119,11 @@ window.EMR_DATA = {
       "bp": "134/82",
       "hr": 92,
       "rr": 20,
-      "temp": "100.8\u00b0F",
+      "temp": "100.8°F",
       "spo2": "91%",
       "wt": "162 lbs",
       "ht": "6'0\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     },
     {
@@ -130,7 +131,7 @@ window.EMR_DATA = {
       "bp": "138/86",
       "hr": 84,
       "rr": 18,
-      "temp": "98.6\u00b0F",
+      "temp": "98.6°F",
       "spo2": "93%",
       "wt": "168 lbs",
       "ht": "6'0\"",
@@ -142,7 +143,7 @@ window.EMR_DATA = {
       "bp": "142/88",
       "hr": 78,
       "rr": 16,
-      "temp": "98.4\u00b0F",
+      "temp": "98.4°F",
       "spo2": "95%",
       "wt": "176 lbs",
       "ht": "6'0\"",
@@ -154,7 +155,7 @@ window.EMR_DATA = {
       "bp": "140/84",
       "hr": 76,
       "rr": 16,
-      "temp": "98.2\u00b0F",
+      "temp": "98.2°F",
       "spo2": "96%",
       "wt": "180 lbs",
       "ht": "6'0\"",
@@ -169,9 +170,9 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Margaret Okafor, MD",
       "cc": "Worsening cough, dyspnea, low-grade fever",
-      "hpi": "Mr. Fontaine presents with 2 weeks of worsening cough productive of purulent, occasionally blood-tinged sputum. Progressive dyspnea now present with minimal exertion. Low-grade fevers to 100.8\u00b0F at home. Night sweats. Reports 18-lb weight loss over the past 6 months despite maintained appetite. Increasing fatigue and right-sided chest discomfort described as dull ache. Continues smoking. Was treated with amoxicillin 10 days ago for presumed pneumonia without improvement.",
+      "hpi": "Mr. Fontaine presents with 2 weeks of worsening cough productive of purulent, occasionally blood-tinged sputum. Progressive dyspnea now present with minimal exertion. Low-grade fevers to 100.8°F at home. Night sweats. Reports 18-lb weight loss over the past 6 months despite maintained appetite. Increasing fatigue and right-sided chest discomfort described as dull ache. Continues smoking. Was treated with amoxicillin 10 days ago for presumed pneumonia without improvement.",
       "exam": "Thin, cachectic-appearing male in mild respiratory distress. Tachycardic, low-grade fever. Lungs: decreased breath sounds over right middle and lower lobe with dullness to percussion, focal rhonchi, and egophony. Left lung clear. CV: tachycardic, RRR. Mild digital clubbing noted. No cervical or supraclavicular lymphadenopathy appreciated on exam. Temporal wasting.",
-      "assessment": "1. Non-resolving pneumonia with hemoptysis, weight loss, and clubbing \u2014 HIGH SUSPICION for endobronchial malignancy with post-obstructive pneumonia\n2. Significant unintentional weight loss \u2014 cancer screening urgent\n3. COPD \u2014 baseline dyspnea worsened\n4. Active tobacco use disorder",
+      "assessment": "1. Non-resolving pneumonia with hemoptysis, weight loss, and clubbing — HIGH SUSPICION for endobronchial malignancy with post-obstructive pneumonia\n2. Significant unintentional weight loss — cancer screening urgent\n3. COPD — baseline dyspnea worsened\n4. Active tobacco use disorder",
       "plan": "1. STAT CT chest with contrast\n2. CBC, CMP, LDH, sputum cytology, AFB cultures\n3. Refer to ED if hypoxemia worsens\n4. Urgent pulmonology referral for bronchoscopy\n5. Anticipate PET/CT and tissue biopsy pending CT results\n6. Smoking cessation counseling"
     },
     {
@@ -182,7 +183,7 @@ window.EMR_DATA = {
       "cc": "Weight loss, persistent cough",
       "hpi": "Returns reporting continued unintentional weight loss (8 lbs since last visit). Persistent cough, worse in the morning, productive of white-gray sputum. Occasional mild hemoptysis (streaks in sputum). Denies significant dyspnea beyond baseline COPD. Appetite is fair. Night sweats intermittently. States cough has been present for 3+ months and is not improving.",
       "exam": "Thin male, weight loss from prior visit. Lungs: bilateral scattered rhonchi, decreased air entry at right base. No wheezing. CV: RRR. No lymphadenopathy. No clubbing at this time.",
-      "assessment": "1. Chronic cough with hemoptysis and weight loss \u2014 concerning for malignancy in heavy smoker\n2. COPD \u2014 stable per spirometry\n3. Weight loss workup initiated",
+      "assessment": "1. Chronic cough with hemoptysis and weight loss — concerning for malignancy in heavy smoker\n2. COPD — stable per spirometry\n3. Weight loss workup initiated",
       "plan": "1. Low-dose CT chest ordered (LDCT lung cancer screening overdue)\n2. CBC, CMP, LDH, UA\n3. Sputum cytology ordered\n4. TSH, HIV to rule out other causes of weight loss\n5. Follow-up in 2 weeks with results\n6. If LDCT abnormal, urgent pulmonology referral"
     },
     {
@@ -193,8 +194,8 @@ window.EMR_DATA = {
       "cc": "COPD follow-up, new complaint of weight loss",
       "hpi": "Routine COPD follow-up. Reports increased morning cough over past 2 months. Notes weight loss of approximately 6-8 lbs without dieting. Appetite slightly decreased. Denies dysphagia, hemoptysis, or GI symptoms. Continues smoking 1 PPD.",
       "exam": "Thin male, weight down 4 lbs from prior. Lungs: mild rhonchi bilaterally, no focal findings. CV: RRR.",
-      "assessment": "1. COPD \u2014 stable spirometry\n2. Unintentional weight loss \u2014 4 lbs from last visit, needs monitoring",
-      "plan": "1. Monitor weight at next visit\n2. If continues to lose, initiate workup\n3. Smoking cessation counseling \u2014 patient declines"
+      "assessment": "1. COPD — stable spirometry\n2. Unintentional weight loss — 4 lbs from last visit, needs monitoring",
+      "plan": "1. Monitor weight at next visit\n2. If continues to lose, initiate workup\n3. Smoking cessation counseling — patient declines"
     }
   ],
   "labs": [
@@ -212,35 +213,149 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            {"test": "WBC", "value": "11.2", "unit": "K/uL", "range": "4.5-11.0", "flag": "H"},
-            {"test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L"},
-            {"test": "Hematocrit", "value": "37.2", "unit": "%", "range": "38.0-50.0", "flag": "L"},
-            {"test": "Platelets", "value": "412", "unit": "K/uL", "range": "150-400", "flag": "H"},
-            {"test": "MCV", "value": "88", "unit": "fL", "range": "80-100", "flag": ""},
-            {"test": "RDW", "value": "14.2", "unit": "%", "range": "11.5-14.5", "flag": ""}
+            {
+              "test": "WBC",
+              "value": "11.2",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.2",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "412",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": "H"
+            },
+            {
+              "test": "MCV",
+              "value": "88",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": ""
+            },
+            {
+              "test": "RDW",
+              "value": "14.2",
+              "unit": "%",
+              "range": "11.5-14.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            {"test": "Glucose", "value": "98", "unit": "mg/dL", "range": "70-100", "flag": ""},
-            {"test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": ""},
-            {"test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": ""},
-            {"test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L"},
-            {"test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": ""},
-            {"test": "Calcium", "value": "10.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H"},
-            {"test": "Albumin", "value": "3.2", "unit": "g/dL", "range": "3.5-5.5", "flag": "L"},
-            {"test": "AST", "value": "32", "unit": "U/L", "range": "10-40", "flag": ""},
-            {"test": "ALT", "value": "28", "unit": "U/L", "range": "7-56", "flag": ""},
-            {"test": "Alk Phos", "value": "168", "unit": "U/L", "range": "44-147", "flag": "H"},
-            {"test": "LDH", "value": "342", "unit": "U/L", "range": "140-280", "flag": "H"}
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            },
+            {
+              "test": "Albumin",
+              "value": "3.2",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            },
+            {
+              "test": "AST",
+              "value": "32",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "ALT",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "Alk Phos",
+              "value": "168",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            },
+            {
+              "test": "LDH",
+              "value": "342",
+              "unit": "U/L",
+              "range": "140-280",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "ADDITIONAL",
           "results": [
-            {"test": "TSH", "value": "1.8", "unit": "mIU/L", "range": "0.4-4.0", "flag": ""},
-            {"test": "HIV 1/2 Ag/Ab", "value": "Non-reactive", "unit": "", "range": "Non-reactive", "flag": ""}
+            {
+              "test": "TSH",
+              "value": "1.8",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "HIV 1/2 Ag/Ab",
+              "value": "Non-reactive",
+              "unit": "",
+              "range": "Non-reactive",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -259,7 +374,7 @@ window.EMR_DATA = {
       "clinical": "Lung cancer screening. 55 pack-year smoker. Weight loss, chronic cough, hemoptysis.",
       "technique": "Low-dose non-contrast helical CT of the chest.",
       "findings": "RIGHT LUNG: A 4.2 x 3.8 cm spiculated mass is present in the right hilum extending into the right middle lobe bronchus, causing near-complete obstruction of the right middle lobe bronchus with post-obstructive atelectasis and consolidation of the right middle lobe. Associated right hilar lymphadenopathy (largest node 2.8 cm). Subcarinal lymph node 2.2 cm.\n\nLEFT LUNG: Clear. No masses or nodules.\n\nMEDIASTINUM: Right paratracheal lymph node 1.4 cm. No pericardial effusion. Aortic atherosclerosis.\n\nOTHER: Moderate centrilobular emphysema, upper lobe predominant. No pleural effusion. No osseous lesions suspicious for metastatic disease. Liver and adrenal glands not fully included but appear grossly normal on included images.",
-      "impression": "1. 4.2 cm spiculated right hilar mass with endobronchial extension causing right middle lobe bronchial obstruction and post-obstructive atelectasis/consolidation \u2014 HIGHLY SUSPICIOUS FOR PRIMARY LUNG MALIGNANCY (Lung-RADS 4B).\n2. Right hilar and mediastinal lymphadenopathy \u2014 concerning for nodal metastatic disease.\n3. Moderate emphysema.\n4. RECOMMEND: Urgent tissue sampling (bronchoscopy with biopsy). PET/CT for staging. Multidisciplinary thoracic oncology evaluation.",
+      "impression": "1. 4.2 cm spiculated right hilar mass with endobronchial extension causing right middle lobe bronchial obstruction and post-obstructive atelectasis/consolidation — HIGHLY SUSPICIOUS FOR PRIMARY LUNG MALIGNANCY (Lung-RADS 4B).\n2. Right hilar and mediastinal lymphadenopathy — concerning for nodal metastatic disease.\n3. Moderate emphysema.\n4. RECOMMEND: Urgent tissue sampling (bronchoscopy with biopsy). PET/CT for staging. Multidisciplinary thoracic oncology evaluation.",
       "dictated": "11/18/2024 04:00 PM",
       "verified": "11/18/2024 06:30 PM"
     }
@@ -309,15 +424,42 @@ window.EMR_DATA = {
     "Strong family history of tobacco-related malignancies"
   ],
   "socialHistory": [
-    ["Occupation", "Auto mechanic (45 years). Occupational exposure to asbestos (brake linings), solvents, and exhaust fumes. Currently semi-retired, works 2 days/week."],
-    ["Marital", "Married, lives with wife"],
-    ["Tobacco", "Active smoker \u2014 1 PPD x 55 years (55 pack-years). Multiple quit attempts, always returns within weeks."],
-    ["Alcohol", "Social \u2014 2-3 beers daily"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited by dyspnea. Walks short distances around the shop."],
-    ["Housing", "Single-story home, Fort Lauderdale. Central A/C."],
-    ["Safety", "Wears seatbelt. Firearms in home (locked safe)."],
-    ["Advance Directive", "Full code. No advance directive on file. Wife is healthcare proxy."]
+    [
+      "Occupation",
+      "Auto mechanic (45 years). Occupational exposure to asbestos (brake linings), solvents, and exhaust fumes. Currently semi-retired, works 2 days/week."
+    ],
+    [
+      "Marital",
+      "Married, lives with wife"
+    ],
+    [
+      "Tobacco",
+      "Active smoker — 1 PPD x 55 years (55 pack-years). Multiple quit attempts, always returns within weeks."
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 beers daily"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited by dyspnea. Walks short distances around the shop."
+    ],
+    [
+      "Housing",
+      "Single-story home, Fort Lauderdale. Central A/C."
+    ],
+    [
+      "Safety",
+      "Wears seatbelt. Firearms in home (locked safe)."
+    ],
+    [
+      "Advance Directive",
+      "Full code. No advance directive on file. Wife is healthcare proxy."
+    ]
   ],
   "meta": {
     "caseId": "lung-cancer-post-obstructive",
@@ -330,73 +472,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Richard Fontaine appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did shortness of breath start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've had this awful cough for about two weeks now that just keeps getting worse,.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer with Post-Obstructive Pneumonia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Albuterol 90mcg MDI PRN; Lisinopril 20mg daily; Omeprazole 20mg daily; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Lung cancer (small cell, diagnosed age 62, deceased age 63). Heavy smoker.  Mother: COPD, deceased age 78 (respiratory failure)  Brother: Bladder cancer (age 65, in remission), smoker",
-        "social": "Occupation: Auto mechanic (45 years). Occupational exposure to asbestos (brake linings), solvents, and exhaust fumes. Currently semi-retired, works 2 days/week.  Marital: Married, lives with wife  Tobacco: Active smoker \u2014 1 PPD x 55 years (55 pack-years). Multiple quit attempts, always returns within weeks.  Alcohol: Social \u2014 2-3 beers daily  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've had this awful cough for about two weeks now that just keeps getting worse,.'",
+      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer with Post-Obstructive Pneumonia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Tiotropium (Spiriva) 18mcg INH daily; Albuterol 90mcg MDI PRN; Lisinopril 20mg daily; Omeprazole 20mg daily; Aspirin 81mg daily.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Father: Lung cancer (small cell, diagnosed age 62, deceased age 63). Heavy smoker.  Mother: COPD, deceased age 78 (respiratory failure)  Brother: Bladder cancer (age 65, in remission), smoker",
+      "social": "Occupation: Auto mechanic (45 years). Occupational exposure to asbestos (brake linings), solvents, and exhaust fumes. Currently semi-retired, works 2 days/week.  Marital: Married, lives with wife  Tobacco: Active smoker — 1 PPD x 55 years (55 pack-years). Multiple quit attempts, always returns within weeks.  Alcohol: Social — 2-3 beers daily  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "General appearance and respiratory effort",
+      "Vital signs and pulse oximetry",
+      "Pulmonary auscultation",
+      "Percussion of lung fields",
+      "Accessory muscle use",
+      "Cardiovascular auscultation",
+      "Lower extremity DVT assessment",
+      "Tracheal position"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe."
+      "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Percussion of lung fields": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Accessory muscle use": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe.",
+      "Tracheal position": "Clinical finding consistent with Lung Cancer with Post-Obstructive Pneumonia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Lung Cancer with Post-Obstructive Pneumonia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Lung Cancer with Post-Obstructive Pneumonia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer with Post-Obstructive Pneumonia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Lung Cancer with Post-Obstructive Pneumonia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Lung Cancer with Post-Obstructive Pneumonia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer with Post-Obstructive Pneumonia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Lung Cancer with Post-Obstructive Pneumonia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Lung Cancer with Post-Obstructive Pneumonia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Richard Fontaine's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Lung Cancer with Post-Obstructive Pneumonia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Richard Fontaine's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Lung Cancer with Post-Obstructive Pneumonia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

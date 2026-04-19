@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Beverly Coleman",
-  "patientHPI": "Ever since I retired a few months ago, I just can't shake this overwhelming sadness and I don't enjoy anything anymore. I barely want to leave my house or see anyone, and my daughter is worried because I'm not eating much and can't sleep through the night.",
+    "patientHPI": "Ever since I retired a few months ago, I just can't shake this overwhelming sadness and I don't enjoy anything anymore. I barely want to leave my house or see anyone, and my daughter is worried because I'm not eating much and can't sleep through the night.",
     "dob": "11/03/1957",
     "age": 67,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Denise Coleman (Daughter)",
       "phone": "(954) 555-7848"
-    }
+    },
+    "chiefComplaint": "New confusion and fatigue"
   },
   "problems": [
     {
@@ -152,29 +153,107 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "8", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "121", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "90", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Uric Acid", "value": "2.8", "unit": "mg/dL", "range": "2.5-7.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "8",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "121",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "90",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Uric Acid",
+              "value": "2.8",
+              "unit": "mg/dL",
+              "range": "2.5-7.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "SERUM AND URINE OSMOLALITY",
           "results": [
-            { "test": "Serum Osmolality", "value": "254", "unit": "mOsm/kg", "range": "275-295", "flag": "L" },
-            { "test": "Urine Osmolality", "value": "520", "unit": "mOsm/kg", "range": "300-900", "flag": "" },
-            { "test": "Urine Sodium", "value": "82", "unit": "mEq/L", "range": "20-200", "flag": "" }
+            {
+              "test": "Serum Osmolality",
+              "value": "254",
+              "unit": "mOsm/kg",
+              "range": "275-295",
+              "flag": "L"
+            },
+            {
+              "test": "Urine Osmolality",
+              "value": "520",
+              "unit": "mOsm/kg",
+              "range": "300-900",
+              "flag": ""
+            },
+            {
+              "test": "Urine Sodium",
+              "value": "82",
+              "unit": "mEq/L",
+              "range": "20-200",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID AND CORTISOL",
           "results": [
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.5-4.5", "flag": "" },
-            { "test": "AM Cortisol", "value": "12.8", "unit": "µg/dL", "range": "6.0-18.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.5-4.5",
+              "flag": ""
+            },
+            {
+              "test": "AM Cortisol",
+              "value": "12.8",
+              "unit": "µg/dL",
+              "range": "6.0-18.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -199,10 +278,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL921P", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "PF522K", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "03/2022", "site": "Left deltoid IM", "lot": "SH208R", "mfr": "GSK" },
-    { "vaccine": "Pneumococcal (PCV20)", "date": "11/2023", "site": "Left deltoid IM", "lot": "PV312T", "mfr": "Pfizer" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL921P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "PF522K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "03/2022",
+      "site": "Left deltoid IM",
+      "lot": "SH208R",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20)",
+      "date": "11/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV312T",
+      "mfr": "Pfizer"
+    }
   ],
   "familyHistory": [
     "Mother: Deceased at 82 — stroke, hypertension",
@@ -211,15 +314,42 @@ window.EMR_DATA = {
     "Daughter (age 42): Healthy"
   ],
   "socialHistory": [
-    ["Occupation", "Recently retired — former school counselor (32 years); struggling with transition"],
-    ["Marital", "Divorced x 15 years; lives alone; daughter visits weekly"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Rare — occasional wine"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 20 min/day — decreased since depression worsened"],
-    ["Housing", "Condo; lives alone; daughter has key"],
-    ["Safety", "No firearms; no SI currently; daughter checks on her regularly"],
-    ["Advance Directive", "Healthcare proxy: Denise Coleman (daughter)"]
+    [
+      "Occupation",
+      "Recently retired — former school counselor (32 years); struggling with transition"
+    ],
+    [
+      "Marital",
+      "Divorced x 15 years; lives alone; daughter visits weekly"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional wine"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 20 min/day — decreased since depression worsened"
+    ],
+    [
+      "Housing",
+      "Condo; lives alone; daughter has key"
+    ],
+    [
+      "Safety",
+      "No firearms; no SI currently; daughter checks on her regularly"
+    ],
+    [
+      "Advance Directive",
+      "Healthcare proxy: Denise Coleman (daughter)"
+    ]
   ],
   "meta": {
     "caseId": "siadh",
@@ -232,73 +362,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Beverly Coleman appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did renal / electrolyte emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did renal / electrolyte emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Ever since I retired a few months ago, I just can't shake this overwhelming sadn.'",
-        "character": "'It's renal / electrolyte emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with SIADH \u2014 Drug-Induced.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sertraline 150mg daily; Hydrochlorothiazide 25mg daily; Lisinopril 20mg daily; Alendronate 70mg weekly; Calcium 600mg + Vitamin D 800 IU daily.'",
-        "allergies": "'My allergies are Fluoxetine.'",
-        "family": "Mother: Deceased at 82 \u2014 stroke, hypertension  Father: Deceased at 75 \u2014 prostate cancer  Sister (age 64): Depression, hypertension",
-        "social": "Occupation: Recently retired \u2014 former school counselor (32 years); struggling with transition  Marital: Divorced x 15 years; lives alone; daughter visits weekly  Tobacco: Never  Alcohol: Rare \u2014 occasional wine  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started Ever since I retired a few months ago, I just can't shake this overwhelming sadn.'",
+      "character": "'It's renal / electrolyte emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with SIADH — Drug-Induced.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Sertraline 150mg daily; Hydrochlorothiazide 25mg daily; Lisinopril 20mg daily; Alendronate 70mg weekly; Calcium 600mg + Vitamin D 800 IU daily.'",
+      "allergies": "'My allergies are Fluoxetine.'",
+      "family": "Mother: Deceased at 82 — stroke, hypertension  Father: Deceased at 75 — prostate cancer  Sister (age 64): Depression, hypertension",
+      "social": "Occupation: Recently retired — former school counselor (32 years); struggling with transition  Marital: Divorced x 15 years; lives alone; daughter visits weekly  Tobacco: Never  Alcohol: Rare — occasional wine  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with SIADH \u2014 Drug-Induced. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with SIADH — Drug-Induced. Document specifically what you observe."
     },
     "ddxTargets": [
-        "SIADH \u2014 Drug-Induced (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "SIADH — Drug-Induced (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For SIADH \u2014 Drug-Induced, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying SIADH \u2014 Drug-Induced, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight SIADH \u2014 Drug-Induced based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For SIADH — Drug-Induced, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying SIADH — Drug-Induced, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight SIADH — Drug-Induced based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Beverly Coleman's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is SIADH \u2014 Drug-Induced (Sertraline Dose Increase + HCTZ Synergy) with Symptomatic Hyponatremia (Na 121). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Beverly Coleman's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is SIADH — Drug-Induced (Sertraline Dose Increase + HCTZ Synergy) with Symptomatic Hyponatremia (Na 121). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

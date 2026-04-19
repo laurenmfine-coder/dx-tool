@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Roberto Hernandez (Husband)",
       "phone": "(954) 555-3920"
-    }
+    },
+    "chiefComplaint": "Shortness of breath"
   },
   "problems": [
     {

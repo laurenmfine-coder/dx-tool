@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Isabella Restrepo (Mother)",
       "phone": "(954) 555-2210"
-    }
+    },
+    "chiefComplaint": "Shortness of breath"
   },
   "problems": [
     {

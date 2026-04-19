@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carol Whitmore (Wife)",
       "phone": "(954) 555-2921"
-    }
+    },
+    "chiefComplaint": "Seizure and confusion for weeks"
   },
   "problems": [
     {

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marie-Claire Jean-Baptiste",
-  "patientHPI": "I've been having this dull, crampy pain on my right side that comes and goes - it seems to get worse around my period. It's not terrible pain, but it's been bothering me for a while now, so my doctor sent me for an ultrasound to see what might be causing it.",
+    "patientHPI": "I've been having this dull, crampy pain on my right side that comes and goes - it seems to get worse around my period. It's not terrible pain, but it's been bothering me for a while now, so my doctor sent me for an ultrasound to see what might be causing it.",
     "dob": "11/08/1993",
     "age": 32,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Fabienne Jean-Baptiste (Mother)",
       "phone": "(954) 555-2958"
-    }
+    },
+    "chiefComplaint": "Sudden severe pelvic pain"
   },
   "problems": [
     {
@@ -185,43 +186,175 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "13.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "38.4", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "274", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "13.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "274",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "102", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "21", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "102",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "21",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "PREGNANCY AND HORMONAL",
           "results": [
-            { "test": "Urine hCG", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Serum hCG (Quantitative)", "value": "<2", "unit": "mIU/mL", "range": "<5 not pregnant", "flag": "" }
+            {
+              "test": "Urine hCG",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Serum hCG (Quantitative)",
+              "value": "<2",
+              "unit": "mIU/mL",
+              "range": "<5 not pregnant",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Color", "value": "Yellow", "unit": "", "range": "Yellow", "flag": "" },
-            { "test": "Clarity", "value": "Clear", "unit": "", "range": "Clear", "flag": "" },
-            { "test": "Specific Gravity", "value": "1.018", "unit": "", "range": "1.005-1.030", "flag": "" },
-            { "test": "pH", "value": "6.0", "unit": "", "range": "5.0-8.0", "flag": "" },
-            { "test": "Leukocyte Esterase", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Nitrite", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Blood", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "Color",
+              "value": "Yellow",
+              "unit": "",
+              "range": "Yellow",
+              "flag": ""
+            },
+            {
+              "test": "Clarity",
+              "value": "Clear",
+              "unit": "",
+              "range": "Clear",
+              "flag": ""
+            },
+            {
+              "test": "Specific Gravity",
+              "value": "1.018",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            },
+            {
+              "test": "pH",
+              "value": "6.0",
+              "unit": "",
+              "range": "5.0-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Leukocyte Esterase",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Nitrite",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Blood",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -240,17 +373,53 @@ window.EMR_DATA = {
         {
           "name": "THYROID PANEL",
           "results": [
-            { "test": "TSH", "value": "2.1", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Free T4", "value": "1.2", "unit": "ng/dL", "range": "0.8-1.8", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.1",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Free T4",
+              "value": "1.2",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "39.5", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "248", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.5",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "248",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -327,15 +496,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Ovarian cancer at age 72 (deceased)"
   ],
   "socialHistory": [
-    ["Occupation", "Registered Nurse (hospital med-surg unit)"],
-    ["Marital", "Single, in a relationship"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 2-3 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Running 3x/week, strength training 2x/week"],
-    ["Housing", "Rents apartment, lives alone"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Registered Nurse (hospital med-surg unit)"
+    ],
+    [
+      "Marital",
+      "Single, in a relationship"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Running 3x/week, strength training 2x/week"
+    ],
+    [
+      "Housing",
+      "Rents apartment, lives alone"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "ovarian-pathology",
@@ -348,73 +544,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Marie-Claire Jean-Baptiste appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did abdominal pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did abdominal pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having this dull, crampy pain on my right side that comes and goes - i.'",
-        "character": "'It's abdominal pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Ovarian Torsion.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Levothyroxine 75mcg daily; Ibuprofen 600mg PRN; Sumatriptan 50mg PRN.'",
-        "allergies": "'My allergies are Codeine, Shellfish.'",
-        "family": "Mother: Uterine fibroids (hysterectomy at 45), Hypertension, alive at 60  Father: Type 2 Diabetes Mellitus, alive at 63  Sister: Ovarian cyst (resolved), alive at 29",
-        "social": "Occupation: Registered Nurse (hospital med-surg unit)  Marital: Single, in a relationship  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been having this dull, crampy pain on my right side that comes and goes - i.'",
+      "character": "'It's abdominal pain — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Ovarian Torsion.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Levothyroxine 75mcg daily; Ibuprofen 600mg PRN; Sumatriptan 50mg PRN.'",
+      "allergies": "'My allergies are Codeine, Shellfish.'",
+      "family": "Mother: Uterine fibroids (hysterectomy at 45), Hypertension, alive at 60  Father: Type 2 Diabetes Mellitus, alive at 63  Sister: Ovarian cyst (resolved), alive at 29",
+      "social": "Occupation: Registered Nurse (hospital med-surg unit)  Marital: Single, in a relationship  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Ovarian Torsion. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Ovarian Torsion (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Ovarian Torsion (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ovarian Torsion, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Ovarian Torsion, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Ovarian Torsion based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Ovarian Torsion, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Ovarian Torsion, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Ovarian Torsion based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marie-Claire Jean-Baptiste's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Ovarian Torsion. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Marie-Claire Jean-Baptiste's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Ovarian Torsion. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

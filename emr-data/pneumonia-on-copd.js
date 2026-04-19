@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eugene Whitfield",
-  "patientHPI": "I was in the hospital about a month ago because my breathing got really bad - they had to put me on that breathing machine for a few days. I'm supposed to be back to my usual self now after finishing those steroid pills, but I still get short of breath pretty easily when I try to do things around the house.",
+    "patientHPI": "I was in the hospital about a month ago because my breathing got really bad - they had to put me on that breathing machine for a few days. I'm supposed to be back to my usual self now after finishing those steroid pills, but I still get short of breath pretty easily when I try to do things around the house.",
     "dob": "04/02/1953",
     "age": 72,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carol Jenkins (Daughter)",
       "phone": "(954) 555-3310"
-    }
+    },
+    "chiefComplaint": "Worse shortness of breath than usual"
   },
   "problems": [
     {
@@ -262,32 +263,128 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "9.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "48.2", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "210", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "9.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "48.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "210",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "98", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
-            { "test": "Chloride", "value": "96", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2", "value": "32", "unit": "mEq/L", "range": "23-29", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "96",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2",
+              "value": "32",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "ARTERIAL BLOOD GAS (BASELINE)",
           "results": [
-            { "test": "pH", "value": "7.36", "unit": "", "range": "7.35-7.45", "flag": "" },
-            { "test": "pCO2", "value": "52", "unit": "mmHg", "range": "35-45", "flag": "H" },
-            { "test": "pO2", "value": "62", "unit": "mmHg", "range": "80-100", "flag": "L" },
-            { "test": "HCO3", "value": "30", "unit": "mEq/L", "range": "22-26", "flag": "H" },
-            { "test": "O2 Sat", "value": "89", "unit": "%", "range": "95-100", "flag": "L" }
+            {
+              "test": "pH",
+              "value": "7.36",
+              "unit": "",
+              "range": "7.35-7.45",
+              "flag": ""
+            },
+            {
+              "test": "pCO2",
+              "value": "52",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": "H"
+            },
+            {
+              "test": "pO2",
+              "value": "62",
+              "unit": "mmHg",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "HCO3",
+              "value": "30",
+              "unit": "mEq/L",
+              "range": "22-26",
+              "flag": "H"
+            },
+            {
+              "test": "O2 Sat",
+              "value": "89",
+              "unit": "%",
+              "range": "95-100",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -328,13 +425,55 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-8718", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-1602", "mfr": "Moderna" },
-    { "vaccine": "Prevnar 20", "date": "02/2024", "site": "Left deltoid IM", "lot": "PV20-702", "mfr": "Pfizer" },
-    { "vaccine": "Pneumovax 23", "date": "04/2024", "site": "Right deltoid IM", "lot": "PV23-844", "mfr": "Merck" },
-    { "vaccine": "Tdap", "date": "05/2022", "site": "Left deltoid IM", "lot": "TD22-448", "mfr": "GSK" },
-    { "vaccine": "Shingrix (1/2)", "date": "09/2023", "site": "Right deltoid IM", "lot": "SX23-488", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "11/2023", "site": "Right deltoid IM", "lot": "SX23-660", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-8718",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-1602",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "02/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV20-702",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumovax 23",
+      "date": "04/2024",
+      "site": "Right deltoid IM",
+      "lot": "PV23-844",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "05/2022",
+      "site": "Left deltoid IM",
+      "lot": "TD22-448",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "09/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-488",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "11/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-660",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Father: COPD (45+ pack-year smoker), deceased at 64 (respiratory failure)",
@@ -343,15 +482,42 @@ window.EMR_DATA = {
     "Daughter: Healthy, age 46"
   ],
   "socialHistory": [
-    ["Occupation", "Retired commercial painter (38 years) — significant exposure to paint fumes, solvents, isocyanates; no respirator use for first 20 years"],
-    ["Marital", "Divorced x 15 years; lives alone"],
-    ["Tobacco", "Former — 60+ pack-year history (1.5 PPD x 45 years); quit 2018 after ICU admission"],
-    ["Alcohol", "Former heavy drinker; sober x 10 years (AA participant)"],
-    ["Drugs", "Remote cocaine use in 30s; denies current use"],
-    ["Exercise", "Bedside exercises only; cannot walk more than 20 feet without severe dyspnea even on O2"],
-    ["Housing", "One-bedroom apartment, ground floor; daughter visits 3x/week; home health aide 5 days/week for meal prep and ADL assistance"],
-    ["Safety", "Fall risk — uses walker; no rugs; grab bars in bathroom; Lifeline medical alert button"],
-    ["Advance Directive", "DNR/DNI — signed and in chart; comfort care preferred; DPOA designated (daughter Carol); palliative care consulted"]
+    [
+      "Occupation",
+      "Retired commercial painter (38 years) — significant exposure to paint fumes, solvents, isocyanates; no respirator use for first 20 years"
+    ],
+    [
+      "Marital",
+      "Divorced x 15 years; lives alone"
+    ],
+    [
+      "Tobacco",
+      "Former — 60+ pack-year history (1.5 PPD x 45 years); quit 2018 after ICU admission"
+    ],
+    [
+      "Alcohol",
+      "Former heavy drinker; sober x 10 years (AA participant)"
+    ],
+    [
+      "Drugs",
+      "Remote cocaine use in 30s; denies current use"
+    ],
+    [
+      "Exercise",
+      "Bedside exercises only; cannot walk more than 20 feet without severe dyspnea even on O2"
+    ],
+    [
+      "Housing",
+      "One-bedroom apartment, ground floor; daughter visits 3x/week; home health aide 5 days/week for meal prep and ADL assistance"
+    ],
+    [
+      "Safety",
+      "Fall risk — uses walker; no rugs; grab bars in bathroom; Lifeline medical alert button"
+    ],
+    [
+      "Advance Directive",
+      "DNR/DNI — signed and in chart; comfort care preferred; DPOA designated (daughter Carol); palliative care consulted"
+    ]
   ],
   "meta": {
     "caseId": "pneumonia-on-copd",
@@ -364,73 +530,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Eugene Whitfield is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did shortness of breath start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was in the hospital about a month ago because my breathing got really bad - th.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone Furoate/Umeclidinium/Vilanterol (Trelegy Ellipta) 1 puff daily; Ipratropium/Albuterol (DuoNeb) nebulized QID; Roflumilast 500mcg daily; Diltiazem ER 180mg daily; Apixaban 5mg BID; Furosemide 40mg daily; Supplemental Oxygen 2-4L NC; Cholecalciferol (Vitamin D3) 2000 IU daily.'",
-        "allergies": "'My allergies are Levofloxacin, Latex.'",
-        "family": "Father: COPD (45+ pack-year smoker), deceased at 64 (respiratory failure)  Mother: Hypertension, CHF, deceased at 77  Brother: Lung cancer at age 62, deceased at 63",
-        "social": "Occupation: Retired commercial painter (38 years) \u2014 significant exposure to paint fumes, solvents, isocyanates; no respirator use for first 20 years  Marital: Divorced x 15 years; lives alone  Tobacco: Former \u2014 60+ pack-year history (1.5 PPD x 45 years); quit 2018 after ICU admission  Alcohol: Former heavy drinker; sober x 10 years (AA participant)  Drugs: Remote cocaine use in 30s; denies current use"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I was in the hospital about a month ago because my breathing got really bad - th.'",
+      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Fluticasone Furoate/Umeclidinium/Vilanterol (Trelegy Ellipta) 1 puff daily; Ipratropium/Albuterol (DuoNeb) nebulized QID; Roflumilast 500mcg daily; Diltiazem ER 180mg daily; Apixaban 5mg BID; Furosemide 40mg daily; Supplemental Oxygen 2-4L NC; Cholecalciferol (Vitamin D3) 2000 IU daily.'",
+      "allergies": "'My allergies are Levofloxacin, Latex.'",
+      "family": "Father: COPD (45+ pack-year smoker), deceased at 64 (respiratory failure)  Mother: Hypertension, CHF, deceased at 77  Brother: Lung cancer at age 62, deceased at 63",
+      "social": "Occupation: Retired commercial painter (38 years) — significant exposure to paint fumes, solvents, isocyanates; no respirator use for first 20 years  Marital: Divorced x 15 years; lives alone  Tobacco: Former — 60+ pack-year history (1.5 PPD x 45 years); quit 2018 after ICU admission  Alcohol: Former heavy drinker; sober x 10 years (AA participant)  Drugs: Remote cocaine use in 30s; denies current use"
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "General appearance and respiratory effort",
+      "Vital signs and pulse oximetry",
+      "Pulmonary auscultation",
+      "Percussion of lung fields",
+      "Accessory muscle use",
+      "Cardiovascular auscultation",
+      "Lower extremity DVT assessment",
+      "Tracheal position"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe."
+      "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe.",
+      "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Eugene Whitfield's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV (Acute Hypercapnic Respiratory Failure with Sepsis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Eugene Whitfield's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Community-Acquired Pneumonia Superimposed on COPD GOLD Stage IV (Acute Hypercapnic Respiratory Failure with Sepsis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

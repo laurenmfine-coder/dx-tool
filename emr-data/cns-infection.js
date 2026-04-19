@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Fatima Hassan (Wife)",
       "phone": "(954) 555-8415"
-    }
+    },
+    "chiefComplaint": "Seizure with fever"
   },
   "problems": [
     {

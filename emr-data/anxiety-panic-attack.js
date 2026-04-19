@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Maria Delgado (Mother)",
       "phone": "(954) 555-8490"
-    }
+    },
+    "chiefComplaint": "Shortness of breath"
   },
   "problems": [
     {

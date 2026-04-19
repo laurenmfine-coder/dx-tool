@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank DeLuca",
-  "patientHPI": "My cough has really changed over the past couple weeks - now I'm coughing up blood-streaked stuff, which is new for me even with my breathing problems from smoking. I'm getting short of breath just walking across the room now, and I've dropped 18 pounds in four months without trying to lose weight.",
+    "patientHPI": "My cough has really changed over the past couple weeks - now I'm coughing up blood-streaked stuff, which is new for me even with my breathing problems from smoking. I'm getting short of breath just walking across the room now, and I've dropped 18 pounds in four months without trying to lose weight.",
     "dob": "01/14/1957",
     "age": 69,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Patricia DeLuca (Wife)",
       "phone": "(954) 555-6160"
-    }
+    },
+    "chiefComplaint": "Shortness of breath and persistent cough"
   },
   "problems": [
     {
@@ -223,35 +224,149 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "14.2", "unit": "K/uL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "11.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.0", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelets", "value": "412", "unit": "K/uL", "range": "150-400", "flag": "H" },
-            { "test": "MCV", "value": "88", "unit": "fL", "range": "80-100", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "14.2",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "412",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": "H"
+            },
+            {
+              "test": "MCV",
+              "value": "88",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
-            { "test": "Calcium", "value": "11.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" },
-            { "test": "Albumin", "value": "3.0", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" },
-            { "test": "Corrected Calcium", "value": "12.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" },
-            { "test": "ALT", "value": "32", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Alk Phos", "value": "142", "unit": "U/L", "range": "44-147", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "11.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            },
+            {
+              "test": "Albumin",
+              "value": "3.0",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            },
+            {
+              "test": "Corrected Calcium",
+              "value": "12.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            },
+            {
+              "test": "ALT",
+              "value": "32",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST",
+              "value": "28",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Alk Phos",
+              "value": "142",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ADDITIONAL LABS",
           "results": [
-            { "test": "LDH", "value": "310", "unit": "U/L", "range": "140-280", "flag": "H" },
-            { "test": "ESR", "value": "68", "unit": "mm/hr", "range": "0-20", "flag": "H" },
-            { "test": "CRP", "value": "4.8", "unit": "mg/dL", "range": "<0.5", "flag": "H" }
+            {
+              "test": "LDH",
+              "value": "310",
+              "unit": "U/L",
+              "range": "140-280",
+              "flag": "H"
+            },
+            {
+              "test": "ESR",
+              "value": "68",
+              "unit": "mm/hr",
+              "range": "0-20",
+              "flag": "H"
+            },
+            {
+              "test": "CRP",
+              "value": "4.8",
+              "unit": "mg/dL",
+              "range": "<0.5",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -292,12 +407,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9004", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-2014", "mfr": "Pfizer" },
-    { "vaccine": "Prevnar 20", "date": "06/2023", "site": "Left deltoid IM", "lot": "PV20-618", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "04/2021", "site": "Left deltoid IM", "lot": "TD21-284", "mfr": "GSK" },
-    { "vaccine": "Shingrix (1/2)", "date": "08/2023", "site": "Right deltoid IM", "lot": "SX23-442", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "10/2023", "site": "Right deltoid IM", "lot": "SX23-610", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9004",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2014",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "06/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV20-618",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "04/2021",
+      "site": "Left deltoid IM",
+      "lot": "TD21-284",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "08/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-442",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "10/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-610",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Father: Lung cancer (diagnosed age 68, deceased age 70) — 40+ pack-year smoker",
@@ -306,15 +457,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 72"
   ],
   "socialHistory": [
-    ["Occupation", "Retired auto mechanic (42 years) — significant occupational exposure to asbestos brake pads, exhaust fumes, solvents"],
-    ["Marital", "Married 44 years"],
-    ["Tobacco", "Active smoker — 1/2 PPD currently; 50+ pack-year history; started age 18; multiple quit attempts"],
-    ["Alcohol", "2-3 beers daily; more on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Severely limited by dyspnea; no structured exercise; uses scooter at stores"],
-    ["Housing", "Lives with wife in single-family home; one-story; has 3 steps to entrance"],
-    ["Safety", "Denies IPV; seatbelt; firearms in home (locked gun safe)"],
-    ["Advance Directive", "Living will signed; Full code currently but open to discussion; DPOA designated (wife Patricia)"]
+    [
+      "Occupation",
+      "Retired auto mechanic (42 years) — significant occupational exposure to asbestos brake pads, exhaust fumes, solvents"
+    ],
+    [
+      "Marital",
+      "Married 44 years"
+    ],
+    [
+      "Tobacco",
+      "Active smoker — 1/2 PPD currently; 50+ pack-year history; started age 18; multiple quit attempts"
+    ],
+    [
+      "Alcohol",
+      "2-3 beers daily; more on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Severely limited by dyspnea; no structured exercise; uses scooter at stores"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home; one-story; has 3 steps to entrance"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; firearms in home (locked gun safe)"
+    ],
+    [
+      "Advance Directive",
+      "Living will signed; Full code currently but open to discussion; DPOA designated (wife Patricia)"
+    ]
   ],
   "meta": {
     "caseId": "lung-cancer-with-postobstructive-process",
@@ -327,73 +505,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Frank DeLuca appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did shortness of breath start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My cough has really changed over the past couple weeks - now I'm coughing up blo.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone Furoate/Umeclidinium/Vilanterol (Trelegy Ellipta) 1 puff daily; Albuterol HFA 90mcg 2 puffs PRN; Lisinopril 10mg daily; Tamsulosin 0.4mg QHS; Acetaminophen 500mg PRN; Home Oxygen 2L NC PRN.'",
-        "allergies": "'My allergies are Azithromycin, NKDA (other).'",
-        "family": "Father: Lung cancer (diagnosed age 68, deceased age 70) \u2014 40+ pack-year smoker  Mother: COPD, deceased at 82 (respiratory failure)  Brother: Bladder cancer at age 64, alive at 67",
-        "social": "Occupation: Retired auto mechanic (42 years) \u2014 significant occupational exposure to asbestos brake pads, exhaust fumes, solvents  Marital: Married 44 years  Tobacco: Active smoker \u2014 1/2 PPD currently; 50+ pack-year history; started age 18; multiple quit attempts  Alcohol: 2-3 beers daily; more on weekends  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started My cough has really changed over the past couple weeks - now I'm coughing up blo.'",
+      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Lung Cancer.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Fluticasone Furoate/Umeclidinium/Vilanterol (Trelegy Ellipta) 1 puff daily; Albuterol HFA 90mcg 2 puffs PRN; Lisinopril 10mg daily; Tamsulosin 0.4mg QHS; Acetaminophen 500mg PRN; Home Oxygen 2L NC PRN.'",
+      "allergies": "'My allergies are Azithromycin, NKDA (other).'",
+      "family": "Father: Lung cancer (diagnosed age 68, deceased age 70) — 40+ pack-year smoker  Mother: COPD, deceased at 82 (respiratory failure)  Brother: Bladder cancer at age 64, alive at 67",
+      "social": "Occupation: Retired auto mechanic (42 years) — significant occupational exposure to asbestos brake pads, exhaust fumes, solvents  Marital: Married 44 years  Tobacco: Active smoker — 1/2 PPD currently; 50+ pack-year history; started age 18; multiple quit attempts  Alcohol: 2-3 beers daily; more on weekends  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "General appearance and respiratory effort",
+      "Vital signs and pulse oximetry",
+      "Pulmonary auscultation",
+      "Percussion of lung fields",
+      "Accessory muscle use",
+      "Cardiovascular auscultation",
+      "Lower extremity DVT assessment",
+      "Tracheal position"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Lung Cancer. Document specifically what you observe."
+      "General appearance and respiratory effort": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Vital signs and pulse oximetry": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Percussion of lung fields": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Accessory muscle use": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Lower extremity DVT assessment": "Clinical finding consistent with Lung Cancer. Document specifically what you observe.",
+      "Tracheal position": "Clinical finding consistent with Lung Cancer. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Lung Cancer (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Lung Cancer (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Lung Cancer, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Lung Cancer based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Lung Cancer, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Lung Cancer, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Lung Cancer based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Frank DeLuca's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Lung Cancer (Suspected Squamous Cell Carcinoma, RUL) with Post-Obstructive Pneumonia and Hypercalcemia of Malignancy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Frank DeLuca's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Lung Cancer (Suspected Squamous Cell Carcinoma, RUL) with Post-Obstructive Pneumonia and Hypercalcemia of Malignancy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

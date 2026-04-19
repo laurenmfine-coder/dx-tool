@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Marco Castellano (Father)",
       "phone": "(954) 555-4234"
-    }
+    },
+    "chiefComplaint": "Passed out at the doctor's office"
   },
   "problems": [
     {
@@ -104,7 +105,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "132 lbs",
       "ht": "5'5\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     }
   ],
@@ -147,20 +148,74 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.0", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "76", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelets", "value": "318", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.0",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "76",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "318",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron", "value": "32", "unit": "mcg/dL", "range": "50-170", "flag": "L" },
-            { "test": "TIBC", "value": "388", "unit": "mcg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "10", "unit": "ng/mL", "range": "12-150", "flag": "L" },
-            { "test": "Transferrin Saturation", "value": "8", "unit": "%", "range": "20-50", "flag": "L" }
+            {
+              "test": "Iron",
+              "value": "32",
+              "unit": "mcg/dL",
+              "range": "50-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "388",
+              "unit": "mcg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Ferritin",
+              "value": "10",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": "L"
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "8",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -185,11 +240,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-8840", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-2044", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "09/2021", "site": "Left deltoid IM", "lot": "TD21-548", "mfr": "GSK" },
-    { "vaccine": "HPV (Gardasil 9) — Series Complete", "date": "2017", "site": "Left deltoid IM", "lot": "HP17-292", "mfr": "Merck" },
-    { "vaccine": "Meningococcal ACWY", "date": "2019", "site": "Right deltoid IM", "lot": "MN19-180", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-8840",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2044",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "09/2021",
+      "site": "Left deltoid IM",
+      "lot": "TD21-548",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "HPV (Gardasil 9) — Series Complete",
+      "date": "2017",
+      "site": "Left deltoid IM",
+      "lot": "HP17-292",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Meningococcal ACWY",
+      "date": "2019",
+      "site": "Right deltoid IM",
+      "lot": "MN19-180",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Father: Vasovagal syncope (fainted at blood draws — multiple episodes), alive at 56",
@@ -198,15 +283,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Iron deficiency anemia, alive at 78"
   ],
   "socialHistory": [
-    ["Occupation", "Elementary school art teacher — first year teaching"],
-    ["Marital", "Single; lives alone"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 2-3 drinks on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Yoga 3x/week; hiking on weekends"],
-    ["Housing", "1-bedroom apartment"],
-    ["Safety", "Denies IPV; seatbelt; no firearms"],
-    ["Advance Directive", "None — not discussed (age 24)"]
+    [
+      "Occupation",
+      "Elementary school art teacher — first year teaching"
+    ],
+    [
+      "Marital",
+      "Single; lives alone"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Yoga 3x/week; hiking on weekends"
+    ],
+    [
+      "Housing",
+      "1-bedroom apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed (age 24)"
+    ]
   ],
   "meta": {
     "caseId": "vasovagal-syncope",
@@ -219,73 +331,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Sophia Castellano appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did syncope start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did syncope start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 24F presents with 3-month history of progressive fatigue, exertional dyspnea goi.'",
-        "character": "'It's syncope \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Vasovagal Syncope.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Ferrous Sulfate 325mg daily; Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Vasovagal syncope (fainted at blood draws \u2014 multiple episodes), alive at 56  Mother: Uterine fibroids requiring hysterectomy at age 42, alive at 52  Sister: Heavy periods, alive at 22",
-        "social": "Occupation: Elementary school art teacher \u2014 first year teaching  Marital: Single; lives alone  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 drinks on weekends  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started 24F presents with 3-month history of progressive fatigue, exertional dyspnea goi.'",
+      "character": "'It's syncope — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Vasovagal Syncope.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Ferrous Sulfate 325mg daily; Ibuprofen 400mg PRN.'",
+      "allergies": "'My allergies are NKDA.'",
+      "family": "Father: Vasovagal syncope (fainted at blood draws — multiple episodes), alive at 56  Mother: Uterine fibroids requiring hysterectomy at age 42, alive at 52  Sister: Heavy periods, alive at 22",
+      "social": "Occupation: Elementary school art teacher — first year teaching  Marital: Single; lives alone  Tobacco: Never smoker  Alcohol: Social — 2-3 drinks on weekends  Drugs: Denies"
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Level of consciousness and GCS",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Sensory testing",
+      "Coordination and cerebellar testing",
+      "Gait assessment if applicable",
+      "Meningeal signs",
+      "Vital signs"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe."
+      "Level of consciousness and GCS": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Cranial nerve examination": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Motor strength testing": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Sensory testing": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Coordination and cerebellar testing": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Gait assessment if applicable": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Meningeal signs": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Vasovagal Syncope. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Vasovagal Syncope (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Vasovagal Syncope (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Vasovagal Syncope, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Vasovagal Syncope, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Vasovagal Syncope based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Vasovagal Syncope, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Vasovagal Syncope, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Vasovagal Syncope based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Sophia Castellano's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Vasovagal Syncope (Situational \u2014 Post-Phlebotomy Episode with Classic Prodrome in Patient with Recurrent NMS History, Compounded by Mild Iron Deficiency Anemia). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Sophia Castellano's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Vasovagal Syncope (Situational — Post-Phlebotomy Episode with Classic Prodrome in Patient with Recurrent NMS History, Compounded by Mild Iron Deficiency Anemia). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

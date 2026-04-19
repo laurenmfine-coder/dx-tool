@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Janet Hawkins (Wife)",
       "phone": "(954) 555-7298"
-    }
+    },
+    "chiefComplaint": "Sudden severe leg pain"
   },
   "problems": [
     {

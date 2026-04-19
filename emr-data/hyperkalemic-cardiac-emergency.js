@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Santana",
-  "patientHPI": "I've been feeling awful for about a week now - just completely exhausted, nauseous, and not wanting to eat anything. I had a stomach bug about ten days ago where I was throwing up, and ever since then I get really dizzy when I stand up and feel like I might pass out.",
+    "patientHPI": "I've been feeling awful for about a week now - just completely exhausted, nauseous, and not wanting to eat anything. I had a stomach bug about ten days ago where I was throwing up, and ever since then I get really dizzy when I stand up and feel like I might pass out.",
     "dob": "11/22/1956",
     "age": 68,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Miguel Santana (Son)",
       "phone": "(954) 555-1492"
-    }
+    },
+    "chiefComplaint": "Weakness and feeling sick for days"
   },
   "problems": [
     {
@@ -227,31 +228,121 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "62", "unit": "mg/dL", "range": "70-100", "flag": "L" },
-            { "test": "BUN", "value": "32", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.6", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "34", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "128", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "6.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Chloride", "value": "96", "unit": "mEq/L", "range": "98-106", "flag": "L" },
-            { "test": "CO2 (Bicarbonate)", "value": "18", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "10.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "62",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "L"
+            },
+            {
+              "test": "BUN",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "34",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "128",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "6.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "96",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "18",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CORTISOL, AM RANDOM",
           "results": [
-            { "test": "Cortisol", "value": "1.2", "unit": "µg/dL", "range": "6.2-19.4 (AM)", "flag": "L" }
+            {
+              "test": "Cortisol",
+              "value": "1.2",
+              "unit": "µg/dL",
+              "range": "6.2-19.4 (AM)",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "38.8", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "218", "unit": "x10³/µL", "range": "150-400", "flag": "" },
-            { "test": "Eosinophils", "value": "8", "unit": "%", "range": "1-4", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "5.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "218",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "Eosinophils",
+              "value": "8",
+              "unit": "%",
+              "range": "1-4",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -326,15 +417,42 @@ window.EMR_DATA = {
     "Son: Healthy, age 42"
   ],
   "socialHistory": [
-    ["Occupation", "Retired administrative assistant"],
-    ["Marital", "Widowed since 2020"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — occasional glass of wine"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 20 min 3x/week when feeling well"],
-    ["Housing", "Lives alone in condo; son nearby"],
-    ["Safety", "Denies IPV; wears medical alert bracelet (Addison's)"],
-    ["Advance Directive", "DPOA — son Miguel Santana"]
+    [
+      "Occupation",
+      "Retired administrative assistant"
+    ],
+    [
+      "Marital",
+      "Widowed since 2020"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional glass of wine"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 20 min 3x/week when feeling well"
+    ],
+    [
+      "Housing",
+      "Lives alone in condo; son nearby"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears medical alert bracelet (Addison's)"
+    ],
+    [
+      "Advance Directive",
+      "DPOA — son Miguel Santana"
+    ]
   ],
   "meta": {
     "caseId": "hyperkalemic-cardiac-emergency",
@@ -347,73 +465,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Gloria Santana appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did endocrine emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did endocrine emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been feeling awful for about a week now - just completely exhausted, nauseo.'",
-        "character": "'It's endocrine emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Hyperkalemic Cardiac Emergency.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Metformin 500mg BID; Amlodipine 5mg daily; Alendronate 70mg weekly.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Mother: Hypothyroidism, T2DM, deceased at 80 (CHF)  Father: Hypertension, deceased at 72 (MI)  Sister: Vitiligo, Hashimoto's thyroiditis, alive at 65",
-        "social": "Occupation: Retired administrative assistant  Marital: Widowed since 2020  Tobacco: Never smoker  Alcohol: Rare \u2014 occasional glass of wine  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been feeling awful for about a week now - just completely exhausted, nauseo.'",
+      "character": "'It's endocrine emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Hyperkalemic Cardiac Emergency.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Hydrocortisone 15mg AM / 5mg PM; Fludrocortisone 0.1mg daily; Levothyroxine 88mcg daily; Metformin 500mg BID; Amlodipine 5mg daily; Alendronate 70mg weekly.'",
+      "allergies": "'My allergies are Penicillin.'",
+      "family": "Mother: Hypothyroidism, T2DM, deceased at 80 (CHF)  Father: Hypertension, deceased at 72 (MI)  Sister: Vitiligo, Hashimoto's thyroiditis, alive at 65",
+      "social": "Occupation: Retired administrative assistant  Marital: Widowed since 2020  Tobacco: Never smoker  Alcohol: Rare — occasional glass of wine  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Hyperkalemic Cardiac Emergency. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Hyperkalemic Cardiac Emergency (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Hyperkalemic Cardiac Emergency (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hyperkalemic Cardiac Emergency, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Hyperkalemic Cardiac Emergency, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Hyperkalemic Cardiac Emergency based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Hyperkalemic Cardiac Emergency, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Hyperkalemic Cardiac Emergency, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Hyperkalemic Cardiac Emergency based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gloria Santana's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Hyperkalemic Cardiac Emergency (Adrenal Crisis with Acute Kidney Injury). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Gloria Santana's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Hyperkalemic Cardiac Emergency (Adrenal Crisis with Acute Kidney Injury). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "David Lawson (Husband)",
       "phone": "(954) 555-4820"
-    }
+    },
+    "chiefComplaint": "First-ever seizure at home"
   },
   "problems": [
     {

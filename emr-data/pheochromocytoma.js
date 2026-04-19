@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Ana Medina (Wife)",
       "phone": "(954) 555-5890"
-    }
+    },
+    "chiefComplaint": "Recurring episodes of sweating and palpitations"
   },
   "problems": [
     {

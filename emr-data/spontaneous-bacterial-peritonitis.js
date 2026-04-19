@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gerald Moreau",
-  "patientHPI": "My belly has been getting bigger and bigger over the past couple weeks, even though I've been taking my water pills and watching my salt like the doctor said. I've gained 7 pounds and my pants don't fit anymore - it's really uncomfortable and I'm worried something's wrong.",
+    "patientHPI": "My belly has been getting bigger and bigger over the past couple weeks, even though I've been taking my water pills and watching my salt like the doctor said. I've gained 7 pounds and my pants don't fit anymore - it's really uncomfortable and I'm worried something's wrong.",
     "dob": "04/22/1967",
     "age": 57,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Christine Moreau (Sister)",
       "phone": "(954) 555-3730"
-    }
+    },
+    "chiefComplaint": "Fever and belly swelling"
   },
   "problems": [
     {
@@ -189,43 +190,175 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "4.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "31.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "72", "unit": "x10³/µL", "range": "150-400", "flag": "L" },
-            { "test": "MCV", "value": "104", "unit": "fL", "range": "80-100", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "4.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "31.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "72",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "104",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "HEPATIC PANEL",
           "results": [
-            { "test": "Total Bilirubin", "value": "3.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "H" },
-            { "test": "Direct Bilirubin", "value": "2.2", "unit": "mg/dL", "range": "0.0-0.3", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "38", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "62", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "Alk Phos", "value": "132", "unit": "U/L", "range": "44-147", "flag": "" },
-            { "test": "Albumin", "value": "2.4", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" },
-            { "test": "INR", "value": "1.6", "unit": "—", "range": "0.8-1.1", "flag": "H" }
+            {
+              "test": "Total Bilirubin",
+              "value": "3.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Direct Bilirubin",
+              "value": "2.2",
+              "unit": "mg/dL",
+              "range": "0.0-0.3",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "62",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "Alk Phos",
+              "value": "132",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "2.4",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            },
+            {
+              "test": "INR",
+              "value": "1.6",
+              "unit": "—",
+              "range": "0.8-1.1",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "RENAL",
           "results": [
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "130", "unit": "mEq/L", "range": "136-145", "flag": "L" }
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "130",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "ASCITIC FLUID ANALYSIS (FROM PARACENTESIS)",
           "results": [
-            { "test": "Appearance", "value": "Straw-colored, slightly turbid", "unit": "—", "range": "—", "flag": "" },
-            { "test": "WBC (Ascitic Fluid)", "value": "120", "unit": "cells/mm³", "range": "<500", "flag": "" },
-            { "test": "PMN (Ascitic Fluid)", "value": "45", "unit": "cells/mm³", "range": "<250", "flag": "" },
-            { "test": "Albumin (Ascitic Fluid)", "value": "0.6", "unit": "g/dL", "range": "—", "flag": "" },
-            { "test": "Total Protein (Ascitic Fluid)", "value": "1.2", "unit": "g/dL", "range": "—", "flag": "" },
-            { "test": "SAAG (Calculated)", "value": "1.8", "unit": "g/dL", "range": ">1.1 = portal HTN", "flag": "" },
-            { "test": "Culture (Ascitic Fluid)", "value": "Pending", "unit": "—", "range": "—", "flag": "" }
+            {
+              "test": "Appearance",
+              "value": "Straw-colored, slightly turbid",
+              "unit": "—",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "WBC (Ascitic Fluid)",
+              "value": "120",
+              "unit": "cells/mm³",
+              "range": "<500",
+              "flag": ""
+            },
+            {
+              "test": "PMN (Ascitic Fluid)",
+              "value": "45",
+              "unit": "cells/mm³",
+              "range": "<250",
+              "flag": ""
+            },
+            {
+              "test": "Albumin (Ascitic Fluid)",
+              "value": "0.6",
+              "unit": "g/dL",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "Total Protein (Ascitic Fluid)",
+              "value": "1.2",
+              "unit": "g/dL",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "SAAG (Calculated)",
+              "value": "1.8",
+              "unit": "g/dL",
+              "range": ">1.1 = portal HTN",
+              "flag": ""
+            },
+            {
+              "test": "Culture (Ascitic Fluid)",
+              "value": "Pending",
+              "unit": "—",
+              "range": "—",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -300,15 +433,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 60"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed; formerly a line cook; on disability"],
-    ["Marital", "Divorced; lives alone"],
-    ["Tobacco", "Former smoker — 20 pack-years; quit 2022"],
-    ["Alcohol", "In early remission — last drink 09/2024; heavy use 2005-2024 (12-18 drinks/day); AA 3x/week"],
-    ["Drugs", "History of cocaine use (remote); denies current use"],
-    ["Exercise", "Minimal — limited by ascites and fatigue"],
-    ["Housing", "Studio apartment; sister Christine lives 10 min away"],
-    ["Safety", "No firearms; fall risk low; emergency contacts updated"],
-    ["Advance Directive", "Health care proxy: sister Christine Moreau; Full code"]
+    [
+      "Occupation",
+      "Unemployed; formerly a line cook; on disability"
+    ],
+    [
+      "Marital",
+      "Divorced; lives alone"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 20 pack-years; quit 2022"
+    ],
+    [
+      "Alcohol",
+      "In early remission — last drink 09/2024; heavy use 2005-2024 (12-18 drinks/day); AA 3x/week"
+    ],
+    [
+      "Drugs",
+      "History of cocaine use (remote); denies current use"
+    ],
+    [
+      "Exercise",
+      "Minimal — limited by ascites and fatigue"
+    ],
+    [
+      "Housing",
+      "Studio apartment; sister Christine lives 10 min away"
+    ],
+    [
+      "Safety",
+      "No firearms; fall risk low; emergency contacts updated"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: sister Christine Moreau; Full code"
+    ]
   ],
   "meta": {
     "caseId": "spontaneous-bacterial-peritonitis",
@@ -321,73 +481,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Gerald Moreau is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did fever/sepsis start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did fever/sepsis start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My belly has been getting bigger and bigger over the past couple weeks, even tho.'",
-        "character": "'It's fever/sepsis \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Spontaneous Bacterial Peritonitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Spironolactone 100mg daily; Furosemide 40mg daily; Nadolol 20mg daily; Lactulose 30mL BID-TID; Rifaximin 550mg BID; Multivitamin with Folic Acid daily; Thiamine 100mg daily.'",
-        "allergies": "'My allergies are Trimethoprim-Sulfamethoxazole.'",
-        "family": "Mother: Alive at 82, HTN  Father: Alcohol use disorder, liver disease, deceased at 58  Brother: Alcohol use disorder, alive at 54",
-        "social": "Occupation: Unemployed; formerly a line cook; on disability  Marital: Divorced; lives alone  Tobacco: Former smoker \u2014 20 pack-years; quit 2022  Alcohol: In early remission \u2014 last drink 09/2024; heavy use 2005-2024 (12-18 drinks/day); AA 3x/week  Drugs: History of cocaine use (remote); denies current use"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started My belly has been getting bigger and bigger over the past couple weeks, even tho.'",
+      "character": "'It's fever/sepsis — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Spontaneous Bacterial Peritonitis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Spironolactone 100mg daily; Furosemide 40mg daily; Nadolol 20mg daily; Lactulose 30mL BID-TID; Rifaximin 550mg BID; Multivitamin with Folic Acid daily; Thiamine 100mg daily.'",
+      "allergies": "'My allergies are Trimethoprim-Sulfamethoxazole.'",
+      "family": "Mother: Alive at 82, HTN  Father: Alcohol use disorder, liver disease, deceased at 58  Brother: Alcohol use disorder, alive at 54",
+      "social": "Occupation: Unemployed; formerly a line cook; on disability  Marital: Divorced; lives alone  Tobacco: Former smoker — 20 pack-years; quit 2022  Alcohol: In early remission — last drink 09/2024; heavy use 2005-2024 (12-18 drinks/day); AA 3x/week  Drugs: History of cocaine use (remote); denies current use"
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and toxicity",
+      "Vital signs with temperature",
+      "Skin for rash, lesions, or signs of infection",
+      "Lymph node palpation",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Source-specific examination"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe."
+      "General appearance and toxicity": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Vital signs with temperature": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Lymph node palpation": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe.",
+      "Source-specific examination": "Clinical finding consistent with Spontaneous Bacterial Peritonitis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Spontaneous Bacterial Peritonitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Spontaneous Bacterial Peritonitis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Spontaneous Bacterial Peritonitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Spontaneous Bacterial Peritonitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Spontaneous Bacterial Peritonitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Spontaneous Bacterial Peritonitis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Spontaneous Bacterial Peritonitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Spontaneous Bacterial Peritonitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gerald Moreau's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Spontaneous Bacterial Peritonitis (E. coli, in Decompensated Cirrhosis with Low-Protein Ascites). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Gerald Moreau's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Spontaneous Bacterial Peritonitis (E. coli, in Decompensated Cirrhosis with Low-Protein Ascites). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

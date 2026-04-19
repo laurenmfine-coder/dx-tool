@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Sofia Jimenez (Wife)",
       "phone": "(954) 555-7340"
-    }
+    },
+    "chiefComplaint": "Headache and fever for a week"
   },
   "problems": [
     {

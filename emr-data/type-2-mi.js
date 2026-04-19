@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Nadine Charles",
-  "patientHPI": "I've been feeling so exhausted lately, and even walking to get my mail makes me feel like I can't catch my breath. About a month ago I could still walk down to the corner store, but now I get winded just going from my bedroom to the kitchen. I've been trying to take those iron pills my doctor gave me, but they make my stomach hurt and I get all backed up, so I haven't been taking them regularly.",
+    "patientHPI": "I've been feeling so exhausted lately, and even walking to get my mail makes me feel like I can't catch my breath. About a month ago I could still walk down to the corner store, but now I get winded just going from my bedroom to the kitchen. I've been trying to take those iron pills my doctor gave me, but they make my stomach hurt and I get all backed up, so I haven't been taking them regularly.",
     "dob": "09/30/1950",
     "age": 74,
     "sex": "Female",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Pierre Charles (Son)",
       "phone": "(954) 555-8801"
-    }
+    },
+    "chiefComplaint": "Chest discomfort and fatigue"
   },
   "problems": [
     {
@@ -159,54 +160,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/20/2025",
-        "bp": "142/86",
-        "hr": 88,
-        "rr": 18,
-        "temp": "98.0\u00b0F",
-        "spo2": "93%",
-        "wt": "164 lbs",
-        "ht": "5'3\"",
-        "bmi": 29.0,
-        "setting": "PCP Office"
+      "date": "01/20/2025",
+      "bp": "142/86",
+      "hr": 88,
+      "rr": 18,
+      "temp": "98.0°F",
+      "spo2": "93%",
+      "wt": "164 lbs",
+      "ht": "5'3\"",
+      "bmi": 29,
+      "setting": "PCP Office"
     },
     {
-        "date": "09/16/2024",
-        "bp": "148/90",
-        "hr": 92,
-        "rr": 18,
-        "temp": "98.4\u00b0F",
-        "spo2": "94%",
-        "wt": "168 lbs",
-        "ht": "5'3\"",
-        "bmi": 29.8,
-        "setting": "PCP Office"
+      "date": "09/16/2024",
+      "bp": "148/90",
+      "hr": 92,
+      "rr": 18,
+      "temp": "98.4°F",
+      "spo2": "94%",
+      "wt": "168 lbs",
+      "ht": "5'3\"",
+      "bmi": 29.8,
+      "setting": "PCP Office"
     },
     {
-        "date": "05/14/2024",
-        "bp": "138/82",
-        "hr": 84,
-        "rr": 16,
-        "temp": "98.6\u00b0F",
-        "spo2": "95%",
-        "wt": "170 lbs",
-        "ht": "5'3\"",
-        "bmi": 30.1,
-        "setting": "PCP Office"
+      "date": "05/14/2024",
+      "bp": "138/82",
+      "hr": 84,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "95%",
+      "wt": "170 lbs",
+      "ht": "5'3\"",
+      "bmi": 30.1,
+      "setting": "PCP Office"
     },
     {
-        "date": "11/08/2023",
-        "bp": "134/80",
-        "hr": 80,
-        "rr": 16,
-        "temp": "98.2\u00b0F",
-        "spo2": "95%",
-        "wt": "172 lbs",
-        "ht": "5'3\"",
-        "bmi": 30.5,
-        "setting": "PCP Office"
+      "date": "11/08/2023",
+      "bp": "134/80",
+      "hr": 80,
+      "rr": 16,
+      "temp": "98.2°F",
+      "spo2": "95%",
+      "wt": "172 lbs",
+      "ht": "5'3\"",
+      "bmi": 30.5,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -257,37 +258,163 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.1", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "8.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "26.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "72.8", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "MCH", "value": "23.4", "unit": "pg", "range": "27-33", "flag": "L" },
-            { "test": "RDW", "value": "18.2", "unit": "%", "range": "11.5-14.5", "flag": "H" },
-            { "test": "Platelet Count", "value": "310", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.1",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "8.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "26.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "72.8",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "MCH",
+              "value": "23.4",
+              "unit": "pg",
+              "range": "27-33",
+              "flag": "L"
+            },
+            {
+              "test": "RDW",
+              "value": "18.2",
+              "unit": "%",
+              "range": "11.5-14.5",
+              "flag": "H"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "310",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron", "value": "28", "unit": "µg/dL", "range": "60-170", "flag": "L" },
-            { "test": "TIBC", "value": "420", "unit": "µg/dL", "range": "250-370", "flag": "H" },
-            { "test": "Ferritin", "value": "8", "unit": "ng/mL", "range": "12-150", "flag": "L" },
-            { "test": "Transferrin Saturation", "value": "7", "unit": "%", "range": "20-50", "flag": "L" }
+            {
+              "test": "Iron",
+              "value": "28",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "420",
+              "unit": "µg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Ferritin",
+              "value": "8",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": "L"
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "7",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "16", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "16",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -379,15 +506,42 @@ window.EMR_DATA = {
     "Son: Healthy, age 48"
   ],
   "socialHistory": [
-    ["Occupation", "Retired home health aide"],
-    ["Marital", "Widowed since 2012"],
-    ["Tobacco", "Former smoker — quit 2016; 40 pack-year history (1 PPD x 40 years)"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited by dyspnea and knee OA; walks short distances with rest breaks"],
-    ["Housing", "Lives alone in apartment; son visits weekly"],
-    ["Safety", "Denies IPV; has medical alert pendant; no fall history"],
-    ["Advance Directive", "DPOA — son Pierre Charles; DNR not in place"]
+    [
+      "Occupation",
+      "Retired home health aide"
+    ],
+    [
+      "Marital",
+      "Widowed since 2012"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2016; 40 pack-year history (1 PPD x 40 years)"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited by dyspnea and knee OA; walks short distances with rest breaks"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment; son visits weekly"
+    ],
+    [
+      "Safety",
+      "Denies IPV; has medical alert pendant; no fall history"
+    ],
+    [
+      "Advance Directive",
+      "DPOA — son Pierre Charles; DNR not in place"
+    ]
   ],
   "meta": {
     "caseId": "type-2-mi",
@@ -400,73 +554,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Nadine Charles is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did chest pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did chest pain start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been feeling so exhausted lately, and even walking to get my mail makes me .'",
-        "character": "'It's chest pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Type 2 Myocardial Infarction.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol succinate 100mg daily; Losartan 100mg daily; Atorvastatin 40mg daily; Budesonide/Formoterol 160/4.5mcg MDI BID; Tiotropium 18mcg daily; Ferrous sulfate 325mg BID; Acetaminophen 500mg PRN.'",
-        "allergies": "'My allergies are Aspirin, NSAIDs.'",
-        "family": "Mother: Hypertension, stroke at 70, deceased at 74  Father: Unknown \u2014 emigrated from Haiti, limited records  Sister: Hypertension, T2DM, alive at 78",
-        "social": "Occupation: Retired home health aide  Marital: Widowed since 2012  Tobacco: Former smoker \u2014 quit 2016; 40 pack-year history (1 PPD x 40 years)  Alcohol: Denies  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I've been feeling so exhausted lately, and even walking to get my mail makes me .'",
+      "character": "'It's chest pain — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Type 2 Myocardial Infarction.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Apixaban 5mg BID; Metoprolol succinate 100mg daily; Losartan 100mg daily; Atorvastatin 40mg daily; Budesonide/Formoterol 160/4.5mcg MDI BID; Tiotropium 18mcg daily; Ferrous sulfate 325mg BID; Acetaminophen 500mg PRN.'",
+      "allergies": "'My allergies are Aspirin, NSAIDs.'",
+      "family": "Mother: Hypertension, stroke at 70, deceased at 74  Father: Unknown — emigrated from Haiti, limited records  Sister: Hypertension, T2DM, alive at 78",
+      "social": "Occupation: Retired home health aide  Marital: Widowed since 2012  Tobacco: Former smoker — quit 2016; 40 pack-year history (1 PPD x 40 years)  Alcohol: Denies  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Type 2 Myocardial Infarction. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Type 2 Myocardial Infarction (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Type 2 Myocardial Infarction (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Type 2 Myocardial Infarction, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Type 2 Myocardial Infarction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Type 2 Myocardial Infarction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Type 2 Myocardial Infarction, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Type 2 Myocardial Infarction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Type 2 Myocardial Infarction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Nadine Charles's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Type 2 Myocardial Infarction (Demand Ischemia \u2014 Severe Anemia with AFib/RVR). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Nadine Charles's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Type 2 Myocardial Infarction (Demand Ischemia — Severe Anemia with AFib/RVR). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Miguel Torres-Vega (Husband)",
       "phone": "(954) 555-8231"
-    }
+    },
+    "chiefComplaint": "Sudden shortness of breath and chest tightness"
   },
   "problems": [
     {
@@ -109,54 +110,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "02/26/2026",
-        "bp": "84/52",
-        "hr": 128,
-        "rr": 28,
-        "temp": "98.2\u00b0F",
-        "spo2": "88%",
-        "wt": "190 lbs",
-        "ht": "5'5\"",
-        "bmi": 31.6,
-        "setting": "ED"
+      "date": "02/26/2026",
+      "bp": "84/52",
+      "hr": 128,
+      "rr": 28,
+      "temp": "98.2°F",
+      "spo2": "88%",
+      "wt": "190 lbs",
+      "ht": "5'5\"",
+      "bmi": 31.6,
+      "setting": "ED"
     },
     {
-        "date": "08/15/2025",
-        "bp": "126/78",
-        "hr": 78,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "98%",
-        "wt": "192 lbs",
-        "ht": "5'5\"",
-        "bmi": 31.9,
-        "setting": "Specialist"
+      "date": "08/15/2025",
+      "bp": "126/78",
+      "hr": 78,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "98%",
+      "wt": "192 lbs",
+      "ht": "5'5\"",
+      "bmi": 31.9,
+      "setting": "Specialist"
     },
     {
-        "date": "05/20/2025",
-        "bp": "128/80",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "98%",
-        "wt": "194 lbs",
-        "ht": "5'5\"",
-        "bmi": 32.3,
-        "setting": "PCP Office"
+      "date": "05/20/2025",
+      "bp": "128/80",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "98%",
+      "wt": "194 lbs",
+      "ht": "5'5\"",
+      "bmi": 32.3,
+      "setting": "PCP Office"
     },
     {
-        "date": "02/10/2025",
-        "bp": "132/84",
-        "hr": 104,
-        "rr": 18,
-        "temp": "99.0\u00b0F",
-        "spo2": "94%",
-        "wt": "196 lbs",
-        "ht": "5'5\"",
-        "bmi": 32.6,
-        "setting": "ED"
+      "date": "02/10/2025",
+      "bp": "132/84",
+      "hr": 104,
+      "rr": 18,
+      "temp": "99.0°F",
+      "spo2": "94%",
+      "wt": "196 lbs",
+      "ht": "5'5\"",
+      "bmi": 32.6,
+      "setting": "ED"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -196,44 +197,152 @@ window.EMR_DATA = {
         {
           "name": "ARTERIAL BLOOD GAS (ABG)",
           "results": [
-            { "test": "pH", "value": "7.48", "unit": "", "range": "7.35-7.45", "flag": "H" },
-            { "test": "pCO2", "value": "28", "unit": "mmHg", "range": "35-45", "flag": "L" },
-            { "test": "pO2", "value": "58", "unit": "mmHg", "range": "80-100", "flag": "L" },
-            { "test": "HCO3", "value": "21", "unit": "mEq/L", "range": "22-26", "flag": "L" },
-            { "test": "A-a Gradient", "value": "52", "unit": "mmHg", "range": "<15", "flag": "H" }
+            {
+              "test": "pH",
+              "value": "7.48",
+              "unit": "",
+              "range": "7.35-7.45",
+              "flag": "H"
+            },
+            {
+              "test": "pCO2",
+              "value": "28",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": "L"
+            },
+            {
+              "test": "pO2",
+              "value": "58",
+              "unit": "mmHg",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "HCO3",
+              "value": "21",
+              "unit": "mEq/L",
+              "range": "22-26",
+              "flag": "L"
+            },
+            {
+              "test": "A-a Gradient",
+              "value": "52",
+              "unit": "mmHg",
+              "range": "<15",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CARDIAC MARKERS",
           "results": [
-            { "test": "Troponin I (hs)", "value": "0.42", "unit": "ng/mL", "range": "<0.04", "flag": "H" },
-            { "test": "BNP", "value": "820", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "Troponin I (hs)",
+              "value": "0.42",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": "H"
+            },
+            {
+              "test": "BNP",
+              "value": "820",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "142", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Lactate", "value": "4.6", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Lactate",
+              "value": "4.6",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "12.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "13.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Platelet Count", "value": "238", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "238",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "D-Dimer", "value": "8400", "unit": "ng/mL FEU", "range": "<500", "flag": "H" },
-            { "test": "INR", "value": "1.1", "unit": "", "range": "0.8-1.1", "flag": "" }
+            {
+              "test": "D-Dimer",
+              "value": "8400",
+              "unit": "ng/mL FEU",
+              "range": "<500",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.1",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -294,15 +403,42 @@ window.EMR_DATA = {
     "Maternal grandmother: PE at age 65, deceased at 68"
   ],
   "socialHistory": [
-    ["Occupation", "Travel nurse recruiter; frequent air travel for work (8-10 flights/month)"],
-    ["Marital", "Married 18 years; husband Miguel; 2 children ages 12, 15"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 2-3 drinks/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 30 min daily; Zumba 2x/week (discontinued past month due to travel schedule)"],
-    ["Housing", "Single-family home with husband and children"],
-    ["Safety", "Denies IPV; wears compression stockings on flights since DVT"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Travel nurse recruiter; frequent air travel for work (8-10 flights/month)"
+    ],
+    [
+      "Marital",
+      "Married 18 years; husband Miguel; 2 children ages 12, 15"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 30 min daily; Zumba 2x/week (discontinued past month due to travel schedule)"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband and children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears compression stockings on flights since DVT"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "massive-pe-with-rv-failure",
@@ -315,73 +451,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Angela Torres-Vega appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did cardiac emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did cardiac emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 47-year-old female with provoked left LE DVT (02/2025) for follow-up.'",
-        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Omeprazole 20mg daily; Sumatriptan 50mg PRN; Norethindrone 0.35mg daily; Rivaroxaban 20mg daily.'",
-        "allergies": "'My allergies are Heparin, Latex.'",
-        "family": "Mother: DVT at age 52 (provoked by hip surgery), Factor V Leiden heterozygous, alive at 72  Father: HTN, T2DM, alive at 74  Sister: Healthy, alive at 44",
-        "social": "Occupation: Travel nurse recruiter; frequent air travel for work (8-10 flights/month)  Marital: Married 18 years; husband Miguel; 2 children ages 12, 15  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started 47-year-old female with provoked left LE DVT (02/2025) for follow-up.'",
+      "character": "'It's cardiac emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Omeprazole 20mg daily; Sumatriptan 50mg PRN; Norethindrone 0.35mg daily; Rivaroxaban 20mg daily.'",
+      "allergies": "'My allergies are Heparin, Latex.'",
+      "family": "Mother: DVT at age 52 (provoked by hip surgery), Factor V Leiden heterozygous, alive at 72  Father: HTN, T2DM, alive at 74  Sister: Healthy, alive at 44",
+      "social": "Occupation: Travel nurse recruiter; frequent air travel for work (8-10 flights/month)  Marital: Married 18 years; husband Miguel; 2 children ages 12, 15  Tobacco: Never smoker  Alcohol: Social, 2-3 drinks/week  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Massive Pulmonary Embolism with Acute Right Ventricular Failure. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Massive Pulmonary Embolism with Acute Right Ventricular Failure (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Massive Pulmonary Embolism with Acute Right Ventricular Failure (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Massive Pulmonary Embolism with Acute Right Ventricular Failure, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Massive Pulmonary Embolism with Acute Right Ventricular Failure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Massive Pulmonary Embolism with Acute Right Ventricular Failure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Massive Pulmonary Embolism with Acute Right Ventricular Failure, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Massive Pulmonary Embolism with Acute Right Ventricular Failure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Massive Pulmonary Embolism with Acute Right Ventricular Failure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Angela Torres-Vega's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Massive Pulmonary Embolism with Acute Right Ventricular Failure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Angela Torres-Vega's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Massive Pulmonary Embolism with Acute Right Ventricular Failure. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

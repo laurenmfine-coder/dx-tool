@@ -18,7 +18,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Jean-Pierre Toussaint (Husband)",
       "phone": "(954) 555-8850"
-    }
+    },
+    "chiefComplaint": "Shortness of breath and cough"
   },
   "problems": [
     {
@@ -130,7 +131,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "198 lbs",
       "ht": "5'6\"",
-      "bmi": 32.0,
+      "bmi": 32,
       "setting": "PCP Office"
     },
     {
@@ -197,30 +198,114 @@ window.EMR_DATA = {
         {
           "name": "HEMOGLOBIN A1C",
           "results": [
-            { "test": "HbA1c", "value": "7.2", "unit": "%", "range": "<5.7", "flag": "H" },
-            { "test": "Estimated Average Glucose", "value": "160", "unit": "mg/dL", "range": "", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "7.2",
+              "unit": "%",
+              "range": "<5.7",
+              "flag": "H"
+            },
+            {
+              "test": "Estimated Average Glucose",
+              "value": "160",
+              "unit": "mg/dL",
+              "range": "",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "128", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "eGFR", "value": ">90", "unit": "mL/min/1.73m²", "range": ">60", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "eGFR",
+              "value": ">90",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.2", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelets", "value": "244", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "244",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -245,10 +330,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "11/2025", "site": "Left deltoid IM", "lot": "FL25-8912", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "11/2025", "site": "Right deltoid IM", "lot": "CV25-2108", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "08/2022", "site": "Left deltoid IM", "lot": "TD22-508", "mfr": "GSK" },
-    { "vaccine": "Hepatitis B Series", "date": "1998", "site": "Right deltoid IM", "lot": "HB98-112", "mfr": "Merck" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "11/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-8912",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "11/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2108",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "08/2022",
+      "site": "Left deltoid IM",
+      "lot": "TD22-508",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Hepatitis B Series",
+      "date": "1998",
+      "site": "Right deltoid IM",
+      "lot": "HB98-112",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother: Asthma, T2DM, HTN, alive at 72",
@@ -257,15 +366,42 @@ window.EMR_DATA = {
     "Maternal grandmother: T2DM, deceased at 78 (stroke)"
   ],
   "socialHistory": [
-    ["Occupation", "Daycare center director — frequent exposure to childhood respiratory infections"],
-    ["Marital", "Married 18 years; 3 children (ages 8, 12, 15)"],
-    ["Tobacco", "Never smoker; no secondhand exposure at home"],
-    ["Alcohol", "Occasional — glass of wine at dinner 1-2x/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 3x/week (30 min); limited by knee pain on longer walks"],
-    ["Housing", "Single-family home with husband and 3 children; carpeted bedrooms; HEPA filter in bedroom for dust mite allergy"],
-    ["Safety", "Denies IPV; seatbelt; children in car seats/boosters appropriate for age"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Daycare center director — frequent exposure to childhood respiratory infections"
+    ],
+    [
+      "Marital",
+      "Married 18 years; 3 children (ages 8, 12, 15)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker; no secondhand exposure at home"
+    ],
+    [
+      "Alcohol",
+      "Occasional — glass of wine at dinner 1-2x/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 3x/week (30 min); limited by knee pain on longer walks"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband and 3 children; carpeted bedrooms; HEPA filter in bedroom for dust mite allergy"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; children in car seats/boosters appropriate for age"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "pneumonia",
@@ -278,73 +414,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Nadine Toussaint appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did shortness of breath start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 45F with moderate persistent asthma, T2DM presents for routine follow-up.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone/Salmeterol (Advair Diskus) 250/50 1 puff BID; Albuterol HFA 90mcg 2 puffs PRN; Metformin 1000mg BID; Pantoprazole 40mg daily; Montelukast 10mg QHS.'",
-        "allergies": "'My allergies are Penicillin, Dust Mites.'",
-        "family": "Mother: Asthma, T2DM, HTN, alive at 72  Father: Hypertension, prostate cancer at age 65, alive at 74  Sister: Asthma, sickle cell trait, alive at 48",
-        "social": "Occupation: Daycare center director \u2014 frequent exposure to childhood respiratory infections  Marital: Married 18 years; 3 children (ages 8, 12, 15)  Tobacco: Never smoker; no secondhand exposure at home  Alcohol: Occasional \u2014 glass of wine at dinner 1-2x/week  Drugs: Denies"
+      "default": "She pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started 45F with moderate persistent asthma, T2DM presents for routine follow-up.'",
+      "character": "'It's shortness of breath — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Fluticasone/Salmeterol (Advair Diskus) 250/50 1 puff BID; Albuterol HFA 90mcg 2 puffs PRN; Metformin 1000mg BID; Pantoprazole 40mg daily; Montelukast 10mg QHS.'",
+      "allergies": "'My allergies are Penicillin, Dust Mites.'",
+      "family": "Mother: Asthma, T2DM, HTN, alive at 72  Father: Hypertension, prostate cancer at age 65, alive at 74  Sister: Asthma, sickle cell trait, alive at 48",
+      "social": "Occupation: Daycare center director — frequent exposure to childhood respiratory infections  Marital: Married 18 years; 3 children (ages 8, 12, 15)  Tobacco: Never smoker; no secondhand exposure at home  Alcohol: Occasional — glass of wine at dinner 1-2x/week  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "General appearance and respiratory effort",
+      "Vital signs and pulse oximetry",
+      "Pulmonary auscultation",
+      "Percussion of lung fields",
+      "Accessory muscle use",
+      "Cardiovascular auscultation",
+      "Lower extremity DVT assessment",
+      "Tracheal position"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe."
+      "General appearance and respiratory effort": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Vital signs and pulse oximetry": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Percussion of lung fields": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Accessory muscle use": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Lower extremity DVT assessment": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe.",
+      "Tracheal position": "Clinical finding consistent with Community-Acquired Pneumonia. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Community-Acquired Pneumonia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Community-Acquired Pneumonia (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Community-Acquired Pneumonia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Community-Acquired Pneumonia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Nadine Toussaint's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Community-Acquired Pneumonia (RLL Lobar Consolidation, Likely Streptococcus pneumoniae) in Asthmatic Patient with Penicillin Allergy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Nadine Toussaint's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Community-Acquired Pneumonia (RLL Lobar Consolidation, Likely Streptococcus pneumoniae) in Asthmatic Patient with Penicillin Allergy. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

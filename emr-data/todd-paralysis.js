@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Andre Beaumont",
-  "patientHPI": "I had another one of my seizures last month, and my wife said it looked like the usual kind where I shake all over for a couple minutes. But this time was different - after I came to, my right arm and leg felt really weak and heavy, like they weren't working right. My wife was worried because I couldn't move them normally for several hours, and even though the weakness is mostly better now, I'm still concerned about what happened.",
+    "patientHPI": "I had another one of my seizures last month, and my wife said it looked like the usual kind where I shake all over for a couple minutes. But this time was different - after I came to, my right arm and leg felt really weak and heavy, like they weren't working right. My wife was worried because I couldn't move them normally for several hours, and even though the weakness is mostly better now, I'm still concerned about what happened.",
     "dob": "12/05/1988",
     "age": 37,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Chantal Beaumont (Wife)",
       "phone": "(954) 555-5261"
-    }
+    },
+    "chiefComplaint": "Confused after what looked like a seizure"
   },
   "problems": [
     {
@@ -234,38 +235,140 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "134", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "20", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "134",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "20",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "14.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "72", "unit": "%", "range": "40-70", "flag": "H" },
-            { "test": "Hemoglobin", "value": "15.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "46.2", "unit": "%", "range": "38.0-50.0", "flag": "" },
-            { "test": "Platelet Count", "value": "248", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "14.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "72",
+              "unit": "%",
+              "range": "40-70",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "46.2",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "248",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "AED LEVELS",
           "results": [
-            { "test": "Levetiracetam Level", "value": "8.2", "unit": "µg/mL", "range": "12-46", "flag": "L" },
-            { "test": "Lacosamide Level", "value": "6.8", "unit": "µg/mL", "range": "1-10", "flag": "" }
+            {
+              "test": "Levetiracetam Level",
+              "value": "8.2",
+              "unit": "µg/mL",
+              "range": "12-46",
+              "flag": "L"
+            },
+            {
+              "test": "Lacosamide Level",
+              "value": "6.8",
+              "unit": "µg/mL",
+              "range": "1-10",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ADDITIONAL",
           "results": [
-            { "test": "Lactate", "value": "4.2", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" },
-            { "test": "CK Total", "value": "680", "unit": "U/L", "range": "30-200", "flag": "H" },
-            { "test": "Prolactin", "value": "42", "unit": "ng/mL", "range": "4-15", "flag": "H" }
+            {
+              "test": "Lactate",
+              "value": "4.2",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            },
+            {
+              "test": "CK Total",
+              "value": "680",
+              "unit": "U/L",
+              "range": "30-200",
+              "flag": "H"
+            },
+            {
+              "test": "Prolactin",
+              "value": "42",
+              "unit": "ng/mL",
+              "range": "4-15",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -342,15 +445,42 @@ window.EMR_DATA = {
     "Maternal uncle: Epilepsy (surgery at age 35, seizure-free), alive at 58"
   ],
   "socialHistory": [
-    ["Occupation", "IT project manager; remote work (cannot drive due to seizure frequency)"],
-    ["Marital", "Married, 1 child (age 4)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Avoids — seizure trigger"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Gym 3x/week (avoids swimming alone due to seizure risk); walking daily"],
-    ["Housing", "Single-family home with wife and daughter"],
-    ["Safety", "Does not drive (seizure restrictions); wife or rideshare for transportation; wears medical alert bracelet; seizure action plan at home and child's daycare"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "IT project manager; remote work (cannot drive due to seizure frequency)"
+    ],
+    [
+      "Marital",
+      "Married, 1 child (age 4)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Avoids — seizure trigger"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Gym 3x/week (avoids swimming alone due to seizure risk); walking daily"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife and daughter"
+    ],
+    [
+      "Safety",
+      "Does not drive (seizure restrictions); wife or rideshare for transportation; wears medical alert bracelet; seizure action plan at home and child's daycare"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "todd-paralysis",
@@ -363,73 +493,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Andre Beaumont is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did altered mental status start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did altered mental status start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I had another one of my seizures last month, and my wife said it looked like the.'",
-        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Todd's Paralysis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Levetiracetam 1500mg BID; Lacosamide 200mg BID; Clobazam 10mg QHS; Omeprazole 20mg daily; Diazepam 10mg Rectal Gel PRN; Sumatriptan 100mg PRN.'",
-        "allergies": "'My allergies are Carbamazepine, Phenytoin.'",
-        "family": "Father: Epilepsy (onset age 40, controlled), alive at 67  Mother: Hypertension, T2DM, alive at 65  Brother: Febrile seizures (childhood, outgrown), alive at 34",
-        "social": "Occupation: IT project manager; remote work (cannot drive due to seizure frequency)  Marital: Married, 1 child (age 4)  Tobacco: Never smoker  Alcohol: Avoids \u2014 seizure trigger  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I had another one of my seizures last month, and my wife said it looked like the.'",
+      "character": "'It's altered mental status — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Todd's Paralysis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Levetiracetam 1500mg BID; Lacosamide 200mg BID; Clobazam 10mg QHS; Omeprazole 20mg daily; Diazepam 10mg Rectal Gel PRN; Sumatriptan 100mg PRN.'",
+      "allergies": "'My allergies are Carbamazepine, Phenytoin.'",
+      "family": "Father: Epilepsy (onset age 40, controlled), alive at 67  Mother: Hypertension, T2DM, alive at 65  Brother: Febrile seizures (childhood, outgrown), alive at 34",
+      "social": "Occupation: IT project manager; remote work (cannot drive due to seizure frequency)  Marital: Married, 1 child (age 4)  Tobacco: Never smoker  Alcohol: Avoids — seizure trigger  Drugs: Denies"
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Level of consciousness and GCS",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Sensory testing",
+      "Coordination and cerebellar testing",
+      "Gait assessment if applicable",
+      "Meningeal signs",
+      "Vital signs"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe."
+      "Level of consciousness and GCS": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Cranial nerve examination": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Motor strength testing": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Sensory testing": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Coordination and cerebellar testing": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Gait assessment if applicable": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Meningeal signs": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe.",
+      "Vital signs": "Clinical finding consistent with Todd's Paralysis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Todd's Paralysis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Todd's Paralysis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Todd's Paralysis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Todd's Paralysis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Todd's Paralysis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Todd's Paralysis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Todd's Paralysis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Todd's Paralysis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Andre Beaumont's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Todd's Paralysis (Postictal Paresis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Andre Beaumont's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Todd's Paralysis (Postictal Paresis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

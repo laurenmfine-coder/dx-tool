@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Reginald Holloway",
-  "patientHPI": "I was sitting in my recliner watching TV when the doorbell rang, so I got up to answer it and suddenly felt really dizzy and lightheaded. Next thing I knew, I was on the floor - thankfully it was just carpet so I didn't get hurt. This has happened a couple times before when I stand up too fast, and it's starting to worry me.",
+    "patientHPI": "I was sitting in my recliner watching TV when the doorbell rang, so I got up to answer it and suddenly felt really dizzy and lightheaded. Next thing I knew, I was on the floor - thankfully it was just carpet so I didn't get hurt. This has happened a couple times before when I stand up too fast, and it's starting to worry me.",
     "dob": "01/24/1940",
     "age": 86,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Barbara Holloway (Wife)",
       "phone": "(954) 555-6142"
-    }
+    },
+    "chiefComplaint": "Passed out standing up"
   },
   "problems": [
     {
@@ -235,27 +236,93 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "78", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "26", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.5", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "78",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "26",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.5",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1C",
           "results": [
-            { "test": "HbA1c", "value": "6.4", "unit": "%", "range": "<5.7", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "6.4",
+              "unit": "%",
+              "range": "<5.7",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "6.2", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "37.8", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelets", "value": "198", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.2",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "198",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -280,12 +347,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (High-Dose, 2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-HD904", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "09/2025", "site": "Right deltoid IM", "lot": "CV25-2210", "mfr": "Moderna" },
-    { "vaccine": "Prevnar 20", "date": "03/2024", "site": "Left deltoid IM", "lot": "PV20-740", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (1/2)", "date": "01/2021", "site": "Right deltoid IM", "lot": "SX21-020", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "03/2021", "site": "Right deltoid IM", "lot": "SX21-168", "mfr": "GSK" },
-    { "vaccine": "Tdap", "date": "06/2020", "site": "Left deltoid IM", "lot": "TD20-380", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (High-Dose, 2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-HD904",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "09/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2210",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "03/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV20-740",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "01/2021",
+      "site": "Right deltoid IM",
+      "lot": "SX21-020",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "03/2021",
+      "site": "Right deltoid IM",
+      "lot": "SX21-168",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "06/2020",
+      "site": "Left deltoid IM",
+      "lot": "TD20-380",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Father: HTN, stroke at 72, deceased at 74",
@@ -294,15 +397,42 @@ window.EMR_DATA = {
     "Sister: HTN, alive at 83"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker (USPS) — retired 2005"],
-    ["Marital", "Married 60 years; wife Barbara is primary caregiver"],
-    ["Tobacco", "Former — 15 pack-years; quit 1985"],
-    ["Alcohol", "Denies current use"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited — walks with rolling walker indoors; wife assists with transfers"],
-    ["Housing", "Condo (ground floor) with wife; grab bars installed; no stairs; medical alert system"],
-    ["Safety", "High fall risk; rolling walker; grab bars; medical alert pendant; no rugs; no firearms"],
-    ["Advance Directive", "Living will and DPOA completed; DNR per patient and family discussion; DPOA (wife Barbara)"]
+    [
+      "Occupation",
+      "Retired postal worker (USPS) — retired 2005"
+    ],
+    [
+      "Marital",
+      "Married 60 years; wife Barbara is primary caregiver"
+    ],
+    [
+      "Tobacco",
+      "Former — 15 pack-years; quit 1985"
+    ],
+    [
+      "Alcohol",
+      "Denies current use"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — walks with rolling walker indoors; wife assists with transfers"
+    ],
+    [
+      "Housing",
+      "Condo (ground floor) with wife; grab bars installed; no stairs; medical alert system"
+    ],
+    [
+      "Safety",
+      "High fall risk; rolling walker; grab bars; medical alert pendant; no rugs; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "Living will and DPOA completed; DNR per patient and family discussion; DPOA (wife Barbara)"
+    ]
   ],
   "meta": {
     "caseId": "orthostatic-hypotension",
@@ -315,73 +445,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Reginald Holloway appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did syncope start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did syncope start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was sitting in my recliner watching TV when the doorbell rang, so I got up to .'",
-        "character": "'It's syncope \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Orthostatic Syncope.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 10mg daily; Lisinopril 20mg daily; Doxazosin 4mg QHS; Metformin 500mg BID; Glipizide 5mg BID; Carbidopa-Levodopa 25/100mg TID; Mirtazapine 15mg QHS; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Hydrochlorothiazide.'",
-        "family": "Father: HTN, stroke at 72, deceased at 74  Mother: T2DM, Alzheimer disease, deceased at 88  Brother: Deceased at 80 (prostate cancer)",
-        "social": "Occupation: Retired postal worker (USPS) \u2014 retired 2005  Marital: Married 60 years; wife Barbara is primary caregiver  Tobacco: Former \u2014 15 pack-years; quit 1985  Alcohol: Denies current use  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started I was sitting in my recliner watching TV when the doorbell rang, so I got up to .'",
+      "character": "'It's syncope — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Orthostatic Syncope.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Amlodipine 10mg daily; Lisinopril 20mg daily; Doxazosin 4mg QHS; Metformin 500mg BID; Glipizide 5mg BID; Carbidopa-Levodopa 25/100mg TID; Mirtazapine 15mg QHS; Aspirin 81mg daily.'",
+      "allergies": "'My allergies are Hydrochlorothiazide.'",
+      "family": "Father: HTN, stroke at 72, deceased at 74  Mother: T2DM, Alzheimer disease, deceased at 88  Brother: Deceased at 80 (prostate cancer)",
+      "social": "Occupation: Retired postal worker (USPS) — retired 2005  Marital: Married 60 years; wife Barbara is primary caregiver  Tobacco: Former — 15 pack-years; quit 1985  Alcohol: Denies current use  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "General appearance and hemodynamic assessment",
+      "Vital signs review",
+      "Jugular venous pressure",
+      "Cardiovascular auscultation",
+      "Peripheral pulses and perfusion",
+      "Pulmonary auscultation",
+      "Lower extremity edema",
+      "Skin perfusion and temperature"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe."
+      "General appearance and hemodynamic assessment": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Jugular venous pressure": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Peripheral pulses and perfusion": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Lower extremity edema": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe.",
+      "Skin perfusion and temperature": "Clinical finding consistent with Orthostatic Syncope. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Orthostatic Syncope (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Orthostatic Syncope (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Orthostatic Syncope, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Orthostatic Syncope, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Orthostatic Syncope based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Orthostatic Syncope, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Orthostatic Syncope, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Orthostatic Syncope based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Reginald Holloway's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Orthostatic Syncope (Polypharmacy-Induced Orthostatic Hypotension \u2014 Doxazosin + Amlodipine + Lisinopril + Carbidopa-Levodopa + Mirtazapine in Elderly Parkinson Patient with Recurrent Falls). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Reginald Holloway's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Orthostatic Syncope (Polypharmacy-Induced Orthostatic Hypotension — Doxazosin + Amlodipine + Lisinopril + Carbidopa-Levodopa + Mirtazapine in Elderly Parkinson Patient with Recurrent Falls). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Simmons",
-  "patientHPI": "Every time I eat, about 20 or 30 minutes later I get terrible cramping pain around my belly button that lasts for hours. It's gotten so bad that I'm afraid to eat normal meals - I've been sticking to tiny portions and I've lost quite a bit of weight.",
+    "patientHPI": "Every time I eat, about 20 or 30 minutes later I get terrible cramping pain around my belly button that lasts for hours. It's gotten so bad that I'm afraid to eat normal meals - I've been sticking to tiny portions and I've lost quite a bit of weight.",
     "dob": "01/06/1955",
     "age": 70,
     "sex": "Male",
@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Barbara Simmons (Wife)",
       "phone": "(954) 555-3602"
-    }
+    },
+    "chiefComplaint": "Worsening belly pain after meals"
   },
   "problems": [
     {
@@ -227,32 +228,128 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "137", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "8.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "26", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Albumin", "value": "3.0", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "137",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "8.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "26",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.0",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "NUTRITIONAL MARKERS",
           "results": [
-            { "test": "Prealbumin", "value": "12", "unit": "mg/dL", "range": "20-40", "flag": "L" }
+            {
+              "test": "Prealbumin",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "20-40",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "230", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "230",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -320,15 +417,42 @@ window.EMR_DATA = {
     "Sister: Stroke at age 65, deceased"
   ],
   "socialHistory": [
-    ["Occupation", "Retired plumber"],
-    ["Marital", "Married"],
-    ["Tobacco", "Current smoker — 1 PPD x 50 years (50 pack-years)"],
-    ["Alcohol", "Former — quit 2015; prior heavy use"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited — walks to mailbox; severe claudication"],
-    ["Housing", "Lives with wife in single-story home"],
-    ["Safety", "Denies IPV; wears seatbelt; fall risk due to deconditioning"],
-    ["Advance Directive", "Living will on file — Full code; HCP designated — wife Barbara"]
+    [
+      "Occupation",
+      "Retired plumber"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 50 years (50 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "Former — quit 2015; prior heavy use"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — walks to mailbox; severe claudication"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; fall risk due to deconditioning"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file — Full code; HCP designated — wife Barbara"
+    ]
   ],
   "meta": {
     "caseId": "acute-sma-thrombosis",
@@ -341,73 +465,73 @@ window.EMR_DATA = {
     "supported": true,
     "patientPersona": "Walter Simmons appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me what brought you in today. When did vascular emergency start?",
+      "Can you describe exactly how it started — sudden or gradual?",
+      "Where is the problem located? Does it spread anywhere?",
+      "How would you rate the severity on a scale of 1 to 10?",
+      "What makes it worse? What makes it better?",
+      "Do you have any other symptoms along with this?",
+      "Have you had anything like this before?",
+      "Tell me about your medical history — any chronic conditions?",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications?",
+      "Tell me about your family medical history.",
+      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Every time I eat, about 20 or 30 minutes later I get terrible cramping pain arou.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Superior Mesenteric Artery Thrombosis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg QHS; Lisinopril 40mg daily; Amlodipine 10mg daily; Metformin 1000mg BID; Cilostazol 100mg BID; Nitroglycerin 0.4mg SL PRN.'",
-        "allergies": "'My allergies are Iodinated Contrast.'",
-        "family": "Father: MI at age 58 (deceased at 62)  Mother: PAD, amputation at age 72 (deceased at 76)  Brother: CAD, CABG at age 60, alive",
-        "social": "Occupation: Retired plumber  Marital: Married  Tobacco: Current smoker \u2014 1 PPD x 50 years (50 pack-years)  Alcohol: Former \u2014 quit 2015; prior heavy use  Drugs: Denies"
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "onset": "'The symptoms started Every time I eat, about 20 or 30 minutes later I get terrible cramping pain arou.'",
+      "character": "'It's vascular emergency — it's been bothering me quite a bit.'",
+      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
+      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
+      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
+      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
+      "associated": "'Yes, I've had some associated symptoms consistent with Acute Superior Mesenteric Artery Thrombosis.'",
+      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
+      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
+      "medications": "'I take Aspirin 81mg daily; Clopidogrel 75mg daily; Atorvastatin 80mg QHS; Lisinopril 40mg daily; Amlodipine 10mg daily; Metformin 1000mg BID; Cilostazol 100mg BID; Nitroglycerin 0.4mg SL PRN.'",
+      "allergies": "'My allergies are Iodinated Contrast.'",
+      "family": "Father: MI at age 58 (deceased at 62)  Mother: PAD, amputation at age 72 (deceased at 76)  Brother: CAD, CABG at age 60, alive",
+      "social": "Occupation: Retired plumber  Marital: Married  Tobacco: Current smoker — 1 PPD x 50 years (50 pack-years)  Alcohol: Former — quit 2015; prior heavy use  Drugs: Denies"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and level of distress",
+      "Vital signs review",
+      "Cardiovascular auscultation",
+      "Pulmonary auscultation",
+      "Abdominal examination",
+      "Extremity assessment",
+      "Skin examination",
+      "Targeted system examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe."
+      "General appearance and level of distress": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Vital signs review": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Cardiovascular auscultation": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Pulmonary auscultation": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Abdominal examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Extremity assessment": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Skin examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe.",
+      "Targeted system examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Thrombosis. Document specifically what you observe."
     },
     "ddxTargets": [
-        "Acute Superior Mesenteric Artery Thrombosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Superior Mesenteric Artery Thrombosis (correct diagnosis)",
+      "Most likely alternative diagnosis",
+      "Third differential diagnosis",
+      "Must-not-miss diagnosis",
+      "Second must-not-miss",
+      "Common clinical mimic",
+      "Alternative presentation to consider"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Superior Mesenteric Artery Thrombosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Superior Mesenteric Artery Thrombosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Superior Mesenteric Artery Thrombosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Superior Mesenteric Artery Thrombosis, carefully consider the full differential including must-not-miss conditions.",
+      "prematureClosure": "After identifying Acute Superior Mesenteric Artery Thrombosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
+      "availabilityBias": "Students may overweight or underweight Acute Superior Mesenteric Artery Thrombosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Walter Simmons's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Superior Mesenteric Artery Thrombosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've reviewed Walter Simmons's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
+      "finalDebrief": "The diagnosis is Acute Superior Mesenteric Artery Thrombosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
     }
-}
+  }
 };

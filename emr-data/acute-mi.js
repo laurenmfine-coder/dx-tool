@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Carlos Vasquez (Son)",
       "phone": "(954) 555-7830"
-    }
+    },
+    "chiefComplaint": "Shortness of breath and can't lie flat"
   },
   "problems": [
     {

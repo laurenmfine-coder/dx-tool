@@ -22,7 +22,8 @@ window.EMR_DATA = {
     "emergencyContact": {
       "name": "Barbara Washington (Wife)",
       "phone": "(954) 555-2061"
-    }
+    },
+    "chiefComplaint": "Sudden confusion and weakness on one side"
   },
   "problems": [
     {
