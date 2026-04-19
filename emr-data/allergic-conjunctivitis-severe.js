@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Aiden Morales",
-  "patientHPI": "My eyes have been bothering me for a while, but today I woke up with really sharp pain in my left eye and it feels like something is scratching it every time I blink. The light makes it hurt even worse.",
+      "patientHPI": "My eyes have been bothering me for a while, but today I woke up with really sharp pain in my left eye and it feels like something is scratching it every time I blink. The light makes it hurt even worse.",
       "dob": "02/04/2012",
       "age": "14",
       "sex": "Male",
@@ -1084,26 +1084,25 @@ window.EMR_DATA = {
       "Concern",
       "Prior shield ulcer — needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
     ]
-  ]
-,"references":[
-  {
-    "id": "VKC-Leonardi-2007",
-    "title": "Vernal keratoconjunctivitis: severe allergic eye disease with remodeling",
-    "authors": "Leonardi A, De Dominicis C, Motterle L.",
-    "journal": "Pediatr Allergy Immunol",
-    "year": 2007,
-    "doi": "10.1111/j.1399-3038.2007.00658.x",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448118/",
-    "openAccess": true,
-    "validates": [
-      "Giant papillae, shield ulcers, Horner-Trantas dots",
-      "Young males, African American/Middle Eastern",
-      "Steroid-sparing: tacrolimus/cyclosporine",
-      "Shield ulcers → permanent corneal scarring"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "VKC-Leonardi-2007",
+      "title": "Vernal keratoconjunctivitis: severe allergic eye disease with remodeling",
+      "authors": "Leonardi A, De Dominicis C, Motterle L.",
+      "journal": "Pediatr Allergy Immunol",
+      "year": 2007,
+      "doi": "10.1111/j.1399-3038.2007.00658.x",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448118/",
+      "openAccess": true,
+      "validates": [
+        "Giant papillae, shield ulcers, Horner-Trantas dots",
+        "Young males, African American/Middle Eastern",
+        "Steroid-sparing: tacrolimus/cyclosporine",
+        "Shield ulcers → permanent corneal scarring"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Vernal keratoconjunctivitis (VKC) is the most severe form of allergic conjunctivitis — predominantly in young males, perennial, can cause corneal scarring and vision loss if untreated. Giant papillae ('cobblestone') on tarsal conjunctiva are pathognomonic.",
@@ -1121,75 +1120,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Aiden Morales appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Aiden is anxious and frustrated about his recurring eye symptoms, frequently rubbing his eyes despite being told not to. He appears distressed and worried about missing school activities, and is forthcoming about his symptoms but sometimes downplays the severity to avoid more restrictions on outdoor activities.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did 14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did your current eye symptoms start and how do they compare to previous episodes?",
+      "Can you describe exactly what your eyes feel like right now?",
+      "Which eye bothers you more, or are they both equally affected?",
+      "On a scale of 1-10, how severe is the itching and how much does it interfere with school?",
+      "What makes your eye symptoms worse - being outside, certain times of day, or specific activities?",
+      "What treatments have you tried and which ones help the most?",
+      "Besides the itching, what other eye symptoms do you have?",
+      "Have you had any eye pain, vision changes, or felt like something was scratching your eye?",
+      "Do you remember having any eye problems last year around this same time?",
+      "What medications are you currently taking for your eyes and allergies?",
+      "Do you have any known allergies that trigger these symptoms?",
+      "Does anyone in your family have similar eye or allergy problems?",
+      "Do you play sports or spend a lot of time outdoors, especially in spring?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Aiden Morales presents with 14-year-old with severe bilateral eye itching, teari.'",
-        "character": "'It's 14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Olopatadine 0.2%; Prednisolone acetate 1%; Cetirizine.'",
-        "allergies": "'My allergies are Grass pollen, Tree pollen.'",
-        "family": "Father: seasonal allergies",
-        "social": "Season: Worst March-June, improves in fall  Eye exam: Giant papillae on upper tarsal conjunctiva (cobblestoning)  Concern: Prior shield ulcer \u2014 needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
+      "default": "I'm not sure what you mean. Can you ask that differently? My eyes just really itch a lot.",
+      "onset": "It started about 2 weeks ago when it got warmer outside. This happens every spring around March and gets really bad through June.",
+      "character": "My eyes itch so badly I can't stop rubbing them. They feel like there's sand in them and they water constantly with thick, stringy discharge.",
+      "location": "Both eyes are affected, but maybe my right eye is slightly worse since I had that ulcer problem before.",
+      "severity": "The itching is like an 8 out of 10. I can't concentrate in class and I have to keep my eyes closed sometimes because bright lights hurt.",
+      "aggravating": "Being outside makes it much worse, especially on windy days or when I play soccer. Bright sunlight really bothers me too.",
+      "relieving": "The eye drops help some, and staying inside with air conditioning. Cool compresses feel good but don't last long.",
+      "associated": "I have a lot of watery discharge that's thick and stringy. My nose is also stuffy and itchy, and my eczema is flaring up on my arms.",
+      "denies": "No fever, no vision changes, no eye pain exactly - just really uncomfortable. No discharge that looks infected or yellow-green.",
+      "history": "This is my fourth spring with these symptoms. Three years ago was the first time, and last year I got that ulcer in my right eye that scared everyone.",
+      "medications": "Olopatadine 0.2%; Prednisolone acetate 1%; Cetirizine",
+      "allergies": "Grass pollen, Tree pollen",
+      "family": "My dad gets watery eyes and sneezes a lot in spring too, but not as bad as mine.",
+      "social": "I'm in 8th grade and play soccer. I don't smoke or drink. I really want to keep playing sports but my eyes make it hard to see the ball sometimes."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual acuity testing both eyes",
+      "External eye inspection for swelling and erythema",
+      "Upper eyelid eversion to examine tarsal conjunctiva",
+      "Lower conjunctival examination",
+      "Corneal examination with fluorescein staining",
+      "Pupillary light reflex testing",
+      "Extraocular movement assessment",
+      "Slit lamp examination if available",
+      "Nasal examination for concurrent allergic rhinitis",
+      "Skin examination for atopic dermatitis"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Visual acuity testing both eyes": "20/25 both eyes, slightly reduced from baseline due to tearing and discharge",
+      "External eye inspection for swelling and erythema": "Moderate periorbital edema and erythema bilaterally, more pronounced in morning",
+      "Upper eyelid eversion to examine tarsal conjunctiva": "Classic giant papillae with cobblestone appearance on upper tarsal conjunctiva bilaterally",
+      "Lower conjunctival examination": "Mild injection and chemosis of lower conjunctiva, less prominent than upper",
+      "Corneal examination with fluorescein staining": "No active epithelial defects, but mild punctate staining superiorly, history of shield ulcer OD",
+      "Pupillary light reflex testing": "Normal and symmetric, though patient exhibits photophobia",
+      "Extraocular movement assessment": "Full range of motion bilaterally without pain",
+      "Slit lamp examination if available": "Thick, ropey mucus discharge, giant papillae visible, no active ulceration",
+      "Nasal examination for concurrent allergic rhinitis": "Pale, boggy nasal turbinates with clear discharge",
+      "Skin examination for atopic dermatitis": "Active eczematous patches on antecubital fossae, typical atopic distribution"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Vernal keratoconjunctivitis (correct diagnosis)",
+      "Allergic conjunctivitis (seasonal)",
+      "Atopic keratoconjunctivitis",
+      "Bacterial conjunctivitis with superinfection",
+      "Viral conjunctivitis with secondary bacterial infection",
+      "Contact lens-related giant papillary conjunctivitis",
+      "Dry eye syndrome with secondary inflammation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'pink eye' or simple allergic conjunctivitis given the seasonal pattern and known allergies, potentially missing the severity and chronicity of vernal disease",
+      "prematureClosure": "May stop at allergic conjunctivitis diagnosis without recognizing the giant papillae and risk for shield ulcer formation that defines vernal disease",
+      "availabilityBias": "Common allergic conjunctivitis is much more frequently seen than vernal keratoconjunctivitis, leading to under-recognition of this more severe variant"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Aiden Morales's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. You've identified the seasonal allergic component - now think about what key physical finding would distinguish between simple allergic conjunctivitis and more severe variants like vernal disease. What specific examination maneuver is critical here?",
+      "phase5": "Excellent work identifying the giant papillae. Given this finding plus the history of shield ulcer, you're dealing with vernal keratoconjunctivitis. Why is this distinction from simple allergic conjunctivitis clinically important, and what does this mean for treatment approach?",
+      "finalDebrief": "This case illustrates how the same basic presentation - seasonal eye allergies - can range from mild allergic conjunctivitis to severe vernal disease. The giant papillae on upper lid eversion was your key differentiating finding. Remember that vernal patients need careful steroid management due to ulcer risk and may require steroid-sparing agents like cyclosporine or biologics."
     }
-}
+  }
 };

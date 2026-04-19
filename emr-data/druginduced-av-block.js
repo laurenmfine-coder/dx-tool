@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Miriam Goldstein",
-  "patientHPI": "I've been managing my heart rhythm problems pretty well - I can still do my housework and walk a few blocks without too much trouble. Lately though, I've been feeling more tired than usual and sometimes dizzy, especially when I stand up quickly.",
+    "patientHPI": "I've been managing my heart rhythm problems pretty well - I can still do my housework and walk a few blocks without too much trouble. Lately though, I've been feeling more tired than usual and sometimes dizzy, especially when I stand up quickly.",
     "dob": "06/30/1948",
     "age": 77,
     "sex": "Female",
@@ -223,36 +223,126 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "38", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "2.2", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "22", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "5.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Magnesium", "value": "1.4", "unit": "mg/dL", "range": "1.7-2.2", "flag": "L" },
-            { "test": "Calcium", "value": "10.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "38",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.2",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "22",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Magnesium",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "10.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "DIGOXIN LEVEL",
           "results": [
-            { "test": "Digoxin", "value": "3.2", "unit": "ng/mL", "range": "0.8-2.0 therapeutic", "flag": "H" }
+            {
+              "test": "Digoxin",
+              "value": "3.2",
+              "unit": "ng/mL",
+              "range": "0.8-2.0 therapeutic",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CARDIAC MARKERS",
           "results": [
-            { "test": "Troponin I", "value": "0.02", "unit": "ng/mL", "range": "<0.04", "flag": "" },
-            { "test": "BNP", "value": "420", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "Troponin I",
+              "value": "0.02",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": ""
+            },
+            {
+              "test": "BNP",
+              "value": "420",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "33.6", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "204", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "5.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "33.6",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "204",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -320,15 +410,42 @@ window.EMR_DATA = {
     "No family history of sudden cardiac death"
   ],
   "socialHistory": [
-    ["Occupation", "Retired accountant; retired 2010"],
-    ["Marital", "Widowed (2022); husband deceased of dementia"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "None"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Gentle walks in neighborhood with neighbor; chair yoga 2x/week"],
-    ["Housing", "Condo with daughter nearby; independent ADLs"],
-    ["Safety", "Denies IPV; fall risk — uses grab bars in bathroom; wears medical alert device"],
-    ["Advance Directive", "POLST on file — Full Code; HCP: daughter Rebecca Stein"]
+    [
+      "Occupation",
+      "Retired accountant; retired 2010"
+    ],
+    [
+      "Marital",
+      "Widowed (2022); husband deceased of dementia"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "None"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Gentle walks in neighborhood with neighbor; chair yoga 2x/week"
+    ],
+    [
+      "Housing",
+      "Condo with daughter nearby; independent ADLs"
+    ],
+    [
+      "Safety",
+      "Denies IPV; fall risk — uses grab bars in bathroom; wears medical alert device"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code; HCP: daughter Rebecca Stein"
+    ]
   ],
   "meta": {
     "caseId": "druginduced-av-block",
@@ -339,75 +456,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Miriam Goldstein is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Miriam appears mildly anxious but cooperative, speaking in measured tones about her symptoms. She's forthcoming with information but downplays her symptoms initially, typical of someone accustomed to chronic illness. She shows mild distress when discussing her recent decline in energy levels.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did cardiac emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the fatigue you've been experiencing - when did it start and how has it progressed?",
+      "Tell me more about the dizziness - when does it happen and how severe is it?",
+      "Have you had any episodes of feeling like you might pass out or actually fainting?",
+      "Are you experiencing any chest pain, shortness of breath, or palpitations?",
+      "Have you noticed any changes in your appetite, nausea, or vision problems recently?",
+      "When was your last visit with your cardiologist and any recent medication changes?",
+      "Have you been taking all your medications as prescribed, including the digoxin?",
+      "Have you had any recent lab work done, particularly checking your kidney function?",
+      "Are you experiencing any swelling in your legs or weight gain?",
+      "Have you had any confusion or memory problems lately?",
+      "Any recent illnesses, dehydration, or changes in your fluid intake?",
+      "Have you noticed your heart beating differently - faster, slower, or irregularly?",
+      "Are you having any difficulty with activities you could normally do?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been managing my heart rhythm problems pretty well - I can still do my hous.'",
-        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Drug-Induced Complete AV Block.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Diltiazem ER 240mg daily; Digoxin 0.25mg daily; Apixaban 5mg BID; Furosemide 20mg daily; Levothyroxine 75mcg daily; Acetaminophen 500mg q6h PRN.'",
-        "allergies": "'My allergies are Amiodarone, Sulfa Drugs.'",
-        "family": "Father: Atrial fibrillation, CHF, deceased at 82  Mother: Hypertension, Alzheimer's disease, deceased at 90  Sister: AFib (pacemaker at 76), alive at 80",
-        "social": "Occupation: Retired accountant; retired 2010  Marital: Widowed (2022); husband deceased of dementia  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently?",
+      "onset": "The fatigue started about 2-3 weeks ago and has gotten progressively worse. The dizziness began about a week ago.",
+      "character": "It's a heavy, overwhelming tiredness - different from my usual fatigue. The dizziness feels like the room is spinning briefly.",
+      "location": "The fatigue is all over my body. The dizziness is in my head, sometimes with a brief feeling like I might fall.",
+      "severity": "The fatigue is about a 7 out of 10 - it's really limiting what I can do. The dizziness is about a 6 when it happens.",
+      "aggravating": "Standing up quickly makes the dizziness worse. Any activity makes the fatigue much worse than it used to.",
+      "relieving": "Sitting down helps the dizziness. Nothing really helps the fatigue - even rest doesn't restore my energy.",
+      "associated": "I've had some mild nausea and my appetite isn't great. Sometimes I feel a bit confused or forgetful.",
+      "denies": "No chest pain, no fainting spells, no shortness of breath at rest, no leg swelling or weight gain.",
+      "history": "I've never felt this tired before, even when my heart failure was acting up. This is different.",
+      "medications": "Diltiazem ER 240mg daily; Digoxin 0.25mg daily; Apixaban 5mg BID; Furosemide 20mg daily; Levothyroxine 75mcg daily; Acetaminophen 500mg q6h PRN",
+      "allergies": "Amiodarone, Sulfa Drugs",
+      "family": "My father had heart problems and my sister needed a pacemaker for her atrial fibrillation when she was 76.",
+      "social": "I'm a retired accountant, widowed since 2022. I live alone but manage well usually. I don't smoke or drink alcohol."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Cardiac auscultation",
+      "Pulse palpation and rhythm assessment",
+      "Blood pressure measurement in supine and standing positions",
+      "Jugular venous pressure assessment",
+      "Pulmonary auscultation",
+      "Lower extremity edema assessment",
+      "Neurologic assessment including orientation and cognition",
+      "Fundoscopic examination",
+      "Abdominal examination",
+      "Skin examination for color and perfusion"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Drug-Induced Complete AV Block. Document specifically what you observe."
+      "Cardiac auscultation": "Regular rhythm with bradycardia, normal S1 and S2, no murmurs, rubs, or gallops",
+      "Pulse palpation and rhythm assessment": "Radial pulse 38 bpm, regular rhythm, good volume when present",
+      "Blood pressure measurement in supine and standing positions": "Supine 96/58, standing 88/52 with mild dizziness",
+      "Jugular venous pressure assessment": "JVP normal at 6 cm H2O, no cannon waves visible",
+      "Pulmonary auscultation": "Clear to auscultation bilaterally, no rales or wheezes",
+      "Lower extremity edema assessment": "No pedal edema, good distal pulses",
+      "Neurologic assessment including orientation and cognition": "Alert and oriented x3, mild confusion with complex tasks",
+      "Fundoscopic examination": "Mild arteriovenous nicking, no papilledema or hemorrhages",
+      "Abdominal examination": "Soft, non-tender, no organomegaly",
+      "Skin examination for color and perfusion": "Slightly pale, cool extremities, capillary refill 3 seconds"
     },
     "ddxTargets": [
-        "Drug-Induced Complete AV Block (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Drug-Induced Complete AV Block (Digoxin Toxicity with CKD Progression) (correct diagnosis)",
+      "Diltiazem-induced bradycardia",
+      "Progressive heart failure decompensation",
+      "Acute myocardial infarction with conduction block",
+      "Hyperkalemia with cardiac conduction abnormalities",
+      "Sick sinus syndrome progression",
+      "Hypothyroidism exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Drug-Induced Complete AV Block, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Drug-Induced Complete AV Block, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Drug-Induced Complete AV Block based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on heart failure exacerbation given her established HFpEF, missing the medication toxicity component",
+      "prematureClosure": "May stop at 'elderly patient with known heart disease having fatigue' without considering drug levels and interactions",
+      "availabilityBias": "Recent cases of heart failure may overshadow consideration of digoxin toxicity, which is less commonly seen"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Miriam Goldstein's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Drug-Induced Complete AV Block (Digoxin Toxicity with CKD Progression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good differential thinking. Given her medication regimen and kidney disease history, what specific drug interactions or toxicities should you be most concerned about in an elderly patient? How might her renal function impact her current medications?",
+      "phase5": "Excellent history and physical. You found bradycardia with fatigue and mild confusion in a patient on both digoxin and diltiazem with known CKD. What's the next most important step in your evaluation, and what specific lab values would help differentiate your top differentials?",
+      "finalDebrief": "This case highlights how chronic kidney disease can lead to drug accumulation over time. Notice how the combination of digoxin and diltiazem in the setting of declining renal function created a perfect storm for toxicity. The key learning point is always considering medication toxicity in elderly patients with multiple cardiac drugs, especially when renal function may be declining."
     }
-}
+  }
 };

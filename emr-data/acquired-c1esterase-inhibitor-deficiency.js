@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Harold Jefferson",
-  "patientHPI": "My face has been swelling up lately, especially around my lips and eyes, and it's been happening more often since my cancer diagnosis - the swelling comes and goes but it's really bothersome.",
+      "patientHPI": "My face has been swelling up lately, especially around my lips and eyes, and it's been happening more often since my cancer diagnosis - the swelling comes and goes but it's really bothersome.",
       "dob": "08/18/1962",
       "age": "64",
       "sex": "Male",
@@ -915,43 +915,42 @@ window.EMR_DATA = {
       "Oncology",
       "Rituximab for B-cell lymphoma"
     ]
-  ]
-,"references":[
-  {
-    "id": "WAO-HAE-2022",
-    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
-    "authors": "Maurer M, Magerl M, Betschel S, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15214",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
-    "openAccess": true,
-    "validates": [
-      "HAE diagnosis: C4 screening, C1-INH level/function",
-      "C1q distinguishes acquired from hereditary",
-      "On-demand icatibant",
-      "Lanadelumab prophylaxis",
-      "Estrogen triggers: OCPs contraindicated"
-    ]
-  },
-  {
-    "id": "Acquired-C1INH-2010",
-    "title": "Acquired angioedema",
-    "authors": "Cicardi M, Zanichelli A.",
-    "journal": "Allergy Asthma Clin Immunol",
-    "year": 2010,
-    "doi": "10.1186/1710-1492-6-14",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2904712/",
-    "openAccess": true,
-    "validates": [
-      "C1q LOW in acquired, NORMAL in HAE",
-      "Anti-C1-INH antibodies",
-      "MGUS/lymphoproliferative association",
-      "Rituximab for refractory"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "WAO-HAE-2022",
+      "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+      "authors": "Maurer M, Magerl M, Betschel S, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15214",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+      "openAccess": true,
+      "validates": [
+        "HAE diagnosis: C4 screening, C1-INH level/function",
+        "C1q distinguishes acquired from hereditary",
+        "On-demand icatibant",
+        "Lanadelumab prophylaxis",
+        "Estrogen triggers: OCPs contraindicated"
+      ]
+    },
+    {
+      "id": "Acquired-C1INH-2010",
+      "title": "Acquired angioedema",
+      "authors": "Cicardi M, Zanichelli A.",
+      "journal": "Allergy Asthma Clin Immunol",
+      "year": 2010,
+      "doi": "10.1186/1710-1492-6-14",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2904712/",
+      "openAccess": true,
+      "validates": [
+        "C1q LOW in acquired, NORMAL in HAE",
+        "Anti-C1-INH antibodies",
+        "MGUS/lymphoproliferative association",
+        "Rituximab for refractory"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Acquired C1-INH deficiency (AAE) presents identically to hereditary HAE but occurs in adults >40 years with no family history. Mechanism: consumption of C1-INH by autoantibodies (anti-C1-INH IgG) OR consumption by malignant B-cell clones expressing C1-INH substrate.",
@@ -969,75 +968,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Harold Jefferson appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Harold appears anxious and concerned about his swollen face and lips, worried this might be related to his cancer treatment. He is cooperative and forthcoming with information, speaking clearly despite mild facial swelling, and expresses fear that his lymphoma treatment may need to be stopped.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did new-onset angioedema in patient with b-cell lymphoma start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the swelling in your face and lips?",
+      "How quickly did the swelling develop - over minutes, hours, or days?",
+      "Have you had any difficulty breathing or swallowing?",
+      "Is there any itching, hives, or skin rash anywhere on your body?",
+      "Have you ever had swelling like this before?",
+      "When was your last rituximab infusion?",
+      "Have you started any new medications recently?",
+      "Have you eaten any new foods or been exposed to anything unusual?",
+      "Do you have any abdominal pain, nausea, or vomiting?",
+      "Has anyone in your family ever had unexplained swelling episodes?",
+      "Have you had any recent infections or illnesses?",
+      "Are you experiencing any tongue swelling or voice changes?",
+      "How is your lymphoma treatment going overall?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Harold Jefferson presents with new-onset angioedema in patient with b-cell lymph.'",
-        "character": "'It's new-onset angioedema in patient with b-cell lymphoma \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Rituximab.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "No family history of angioedema",
-        "social": "Oncology: Rituximab for B-cell lymphoma"
+      "default": "I'm not sure I understand the question. Could you ask that differently? I'm mainly worried about this swelling.",
+      "onset": "I noticed my lips starting to swell yesterday evening, and when I woke up this morning my whole face was puffy. It's gotten worse throughout the day.",
+      "character": "It's a painless swelling, mostly in my lips, around my eyes, and my face feels tight and heavy. No burning or stinging sensation.",
+      "location": "Mainly my lips, eyelids, and cheeks. The swelling is on both sides of my face, pretty symmetric.",
+      "severity": "I'd say it's about a 6 out of 10 for how concerning it is. It's not painful, but it's making it harder to eat and I look pretty swollen.",
+      "aggravating": "I haven't really noticed anything that makes it worse. It just seems to keep getting more swollen as time goes on.",
+      "relieving": "Nothing I've tried helps. I took some Benadryl this morning but it didn't seem to make any difference.",
+      "associated": "No trouble breathing, thank goodness. No hives or itching. I do feel a little nauseous but that might just be from being worried.",
+      "denies": "No difficulty breathing or wheezing, no throat tightness, no abdominal pain, no hives or rash anywhere, no tongue swelling.",
+      "history": "Never had anything like this before in my life. This is completely new for me.",
+      "medications": "Rituximab",
+      "allergies": "NKDA",
+      "family": "No one in my family has ever had problems with swelling like this. No known allergies that run in the family either.",
+      "social": "I'm retired from teaching. I don't smoke, have maybe one glass of wine with dinner occasionally. No drugs. I've been getting rituximab treatments for my B-cell lymphoma."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect face and lips for asymmetric swelling",
+      "Examine oropharynx and tongue for swelling",
+      "Palpate neck for lymphadenopathy",
+      "Auscultate lungs for wheezing or stridor",
+      "Inspect skin for urticaria or rash",
+      "Palpate abdomen for organomegaly",
+      "Assess voice quality and speech clarity",
+      "Examine hands and feet for swelling",
+      "Check mucous membranes for pallor",
+      "Assess for signs of respiratory distress"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect face and lips for asymmetric swelling": "Symmetric non-pitting swelling of bilateral eyelids, lips, and cheeks without erythema or warmth",
+      "Examine oropharynx and tongue for swelling": "Oropharynx clear, tongue normal size without swelling, uvula midline and normal",
+      "Palpate neck for lymphadenopathy": "No cervical lymphadenopathy, no neck swelling",
+      "Auscultate lungs for wheezing or stridor": "Clear breath sounds bilaterally, no wheezing, stridor, or respiratory distress",
+      "Inspect skin for urticaria or rash": "No urticaria, hives, or rash on trunk, arms, or legs",
+      "Palpate abdomen for organomegaly": "Soft abdomen, no hepatosplenomegaly, no tenderness",
+      "Assess voice quality and speech clarity": "Voice clear and normal, no hoarseness or muffled quality",
+      "Examine hands and feet for swelling": "No swelling of hands, fingers, feet, or ankles",
+      "Check mucous membranes for pallor": "Mucous membranes pink and well-perfused",
+      "Assess for signs of respiratory distress": "No use of accessory muscles, normal respiratory rate and effort"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acquired C1-INH deficiency (correct diagnosis)",
+      "Drug-induced angioedema from rituximab",
+      "Idiopathic angioedema",
+      "Hereditary angioedema (must-not-miss diagnosis 1)",
+      "Anaphylaxis (must-not-miss diagnosis 2)",
+      "Allergic reaction (common mimic 1)",
+      "Superior vena cava syndrome (common mimic 2)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on rituximab as the cause and missing the underlying acquired C1-INH deficiency associated with B-cell lymphoma",
+      "prematureClosure": "Risk of stopping at 'drug reaction' without considering the connection between B-cell lymphoma and acquired complement deficiencies",
+      "availabilityBias": "May focus on common allergic reactions rather than considering rare complement disorders associated with hematologic malignancies"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Jefferson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified angioedema in a patient with B-cell lymphoma on rituximab. What's the relationship between B-cell lymphomas and complement system disorders? How might this influence your differential diagnosis beyond just drug reactions?",
+      "phase5": "The patient has non-urticarial angioedema without respiratory compromise. Given his B-cell lymphoma history, what acquired complement disorder should you be considering? How would you differentiate between drug-induced angioedema and complement-mediated angioedema?",
+      "finalDebrief": "This case illustrates acquired C1-INH deficiency secondary to B-cell lymphoma. How did the absence of urticaria and the lymphoma history point you toward complement-mediated rather than allergic angioedema? What's the mechanism by which B-cell lymphomas cause C1-INH consumption?"
     }
-}
+  }
 };

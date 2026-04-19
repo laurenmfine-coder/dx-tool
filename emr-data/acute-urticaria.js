@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Sofia Gutierrez",
-  "patientHPI": "I started this new antibiotic this morning and about three hours later I noticed these red bumpy patches all over my arms and chest. They're really itchy and seem to be spreading - I've never had anything like this before and I'm worried it might be from the medicine.",
+      "patientHPI": "I started this new antibiotic this morning and about three hours later I noticed these red bumpy patches all over my arms and chest. They're really itchy and seem to be spreading - I've never had anything like this before and I'm worried it might be from the medicine.",
       "dob": "06/14/1992",
       "age": "34",
       "sex": "Female",
@@ -729,26 +729,25 @@ window.EMR_DATA = {
       "Tobacco",
       "Never"
     ]
-  ]
-,"references":[
-  {
-    "id": "EAACI-Urticaria-2022",
-    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
-    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15090",
-    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
-    "openAccess": true,
-    "validates": [
-      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
-      "UAS7 scoring",
-      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
-      "Post-viral urticaria in children: no allergy testing needed"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "EAACI-Urticaria-2022",
+      "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+      "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15090",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+      "openAccess": true,
+      "validates": [
+        "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+        "UAS7 scoring",
+        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Post-viral urticaria in children: no allergy testing needed"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Acute urticaria (<6 weeks) is most commonly triggered by: viral infection (most common cause in children), food (IgE-mediated), drugs (NSAIDs, antibiotics), or is idiopathic. In adults, underlying infection workup is rarely needed for acute urticaria.",
@@ -765,75 +764,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Sofia Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Sofia is anxious and concerned about the widespread rash that appeared suddenly. She is forthcoming with information and eager to understand if this reaction is serious, frequently touching the affected areas and asking if she should continue the antibiotic.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did widespread hives for 3 hours after starting new antibiotic start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did the hives first appear in relation to taking the medication?",
+      "Can you describe what the rash looks like and where it started?",
+      "Are you experiencing any itching, burning, or pain with the rash?",
+      "Have you had any difficulty breathing, swallowing, or throat tightness?",
+      "Are you experiencing any nausea, vomiting, or stomach pain?",
+      "Have you ever had a reaction like this to any medication before?",
+      "Have you taken TMP-SMX or sulfa antibiotics previously?",
+      "Did you take anything else new today - foods, other medications, or supplements?",
+      "Have you been exposed to any new soaps, detergents, or other substances?",
+      "Do you have any history of allergies or skin conditions?",
+      "Has anyone in your family had drug allergies or chronic hives?",
+      "Are you feeling dizzy, lightheaded, or having any other symptoms?",
+      "Have you taken anything to treat the rash so far?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Sofia Gutierrez presents with widespread hives for 3 hours after starting new an.'",
-        "character": "'It's widespread hives for 3 hours after starting new antibiotic \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take TMP-SMX.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: chronic urticaria",
-        "social": "Trigger: TMP-SMX started 3 hours ago for UTI  Tobacco: Never"
+      "default": "I'm not sure about that. I'm just really worried about this rash and whether it's serious.",
+      "onset": "The hives started about 3 hours ago, maybe 2-3 hours after I took the first dose of the antibiotic this morning around 9 AM.",
+      "character": "They're raised, red, itchy bumps that seem to come and go. Some areas look like welts or mosquito bites but much bigger.",
+      "location": "It started on my arms and chest, but now it's spread to my back, legs, and even a little on my face and neck.",
+      "severity": "The itching is about a 7 out of 10 - it's really bothering me and hard to ignore. I keep wanting to scratch but I'm trying not to.",
+      "aggravating": "The itching seems worse when I'm warm or when I touch the areas. Moving around seems to make new ones appear.",
+      "relieving": "I tried taking a cool shower which helped a little temporarily, but they came right back. I haven't taken anything else yet.",
+      "associated": "Just the itching and the rash. I feel a little anxious about it, but no trouble breathing or swallowing.",
+      "denies": "No trouble breathing, no swelling of my face or lips, no nausea or vomiting, no dizziness or feeling faint.",
+      "history": "I've never had anything like this before. I've never had hives or a drug reaction.",
+      "medications": "TMP-SMX",
+      "allergies": "NKDA",
+      "family": "My mother has chronic hives that come and go, but doctors never found a specific cause for hers.",
+      "social": "I work as a teacher, don't smoke or drink much. I haven't been exposed to anything new except this antibiotic."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for distribution and morphology of lesions",
+      "Assess for urticarial wheals and blanching",
+      "Examine face and lips for angioedema",
+      "Assess oral cavity and tongue for swelling",
+      "Auscultate lungs for wheezing or stridor",
+      "Palpate neck for lymphadenopathy",
+      "Assess mucous membranes and conjunctiva",
+      "Check capillary refill and peripheral perfusion",
+      "Palpate abdomen for tenderness or organomegaly",
+      "Assess overall appearance and respiratory distress"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin for distribution and morphology of lesions": "Multiple raised, erythematous, well-demarcated wheals of varying sizes (0.5-3 cm) distributed across arms, chest, back, legs, and neck",
+      "Assess for urticarial wheals and blanching": "Classic urticarial lesions that blanch with pressure and have surrounding erythema; some lesions appear to be resolving while new ones are forming",
+      "Examine face and lips for angioedema": "No facial swelling, lip swelling, or periorbital edema observed",
+      "Assess oral cavity and tongue for swelling": "Oral cavity and tongue appear normal without swelling or erythema",
+      "Auscultate lungs for wheezing or stridor": "Lungs clear to auscultation bilaterally, no wheezing or stridor",
+      "Palpate neck for lymphadenopathy": "No cervical, supraclavicular, or axillary lymphadenopathy",
+      "Assess mucous membranes and conjunctiva": "Mucous membranes pink and moist, conjunctiva clear without injection",
+      "Check capillary refill and peripheral perfusion": "Capillary refill <2 seconds, good peripheral perfusion",
+      "Palpate abdomen for tenderness or organomegaly": "Abdomen soft, non-tender, no hepatosplenomegaly",
+      "Assess overall appearance and respiratory distress": "Patient appears well but anxious, no respiratory distress, speaking in full sentences"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Drug-induced urticaria (correct diagnosis)",
+      "Acute spontaneous urticaria",
+      "Contact dermatitis",
+      "Anaphylaxis (must-not-miss diagnosis 1)",
+      "Angioedema (must-not-miss diagnosis 2)",
+      "Viral exanthem (common mimic 1)",
+      "Food allergy reaction (common mimic 2)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'NKDA' in chart and dismissing drug reaction, or focusing only on TMP-SMX while missing other potential triggers",
+      "prematureClosure": "Risk of stopping evaluation after identifying hives without fully assessing for systemic anaphylactic signs or considering alternative causes",
+      "availabilityBias": "May overweight common causes like food allergies while underestimating sulfa antibiotic reactions, especially if recently seen food allergy cases"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Sofia Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified urticaria as a key finding. What are the most important historical elements you need to gather to differentiate between the various causes of acute hives? Consider both the timing and the potential triggers in this case.",
+      "phase5": "Now that you've completed your history and exam, walk me through your assessment of this patient's risk stratification. What findings help you determine the severity and urgency of this reaction?",
+      "finalDebrief": "This case demonstrates a classic drug-induced urticaria from sulfa antibiotics. How did the temporal relationship and absence of systemic signs help narrow your differential? What would change your management approach if she had developed respiratory symptoms or facial swelling?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dwayne Jackson",
-  "patientHPI": "I've been having these headaches on and off, and I feel tired during the day even though I'm sleeping okay. My blood pressure medicine isn't working as well as it should be, and I'll admit I sometimes forget to take one of them. I know I should quit smoking but it's been really hard.",
+    "patientHPI": "I've been having these headaches on and off, and I feel tired during the day even though I'm sleeping okay. My blood pressure medicine isn't working as well as it should be, and I'll admit I sometimes forget to take one of them. I know I should quit smoking but it's been really hard.",
     "dob": "11/14/1979",
     "age": 45,
     "sex": "Male",
@@ -158,7 +158,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "236 lbs",
       "ht": "6'0\"",
-      "bmi": 32.0,
+      "bmi": 32,
       "setting": "PCP Office"
     }
   ],
@@ -201,32 +201,128 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "158", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.5", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "38", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "32", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "158",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.5",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "32",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "8.1", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "186", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "8.1",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "186",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "44.0", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "262", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "44.0",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "262",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -287,15 +383,42 @@ window.EMR_DATA = {
     "Paternal uncle: MI at age 55"
   ],
   "socialHistory": [
-    ["Occupation", "Warehouse supervisor"],
-    ["Marital", "Single"],
-    ["Tobacco", "1 PPD x 25 years (25 pack-years)"],
-    ["Alcohol", "6-8 beers/week, mostly weekends"],
-    ["Drugs", "Denies; remote marijuana use in 20s"],
-    ["Exercise", "Minimal — reports walking at work"],
-    ["Housing", "Lives alone in apartment"],
-    ["Safety", "Denies IPV; wears seatbelt sometimes"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Warehouse supervisor"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "1 PPD x 25 years (25 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "6-8 beers/week, mostly weekends"
+    ],
+    [
+      "Drugs",
+      "Denies; remote marijuana use in 20s"
+    ],
+    [
+      "Exercise",
+      "Minimal — reports walking at work"
+    ],
+    [
+      "Housing",
+      "Lives alone in apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt sometimes"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "cerebral-contusion",
@@ -306,75 +429,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Dwayne Jackson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Dwayne appears anxious and disoriented, with slow responses and difficulty concentrating. He's cooperative but somewhat confused about recent events, showing signs of cognitive impairment. He demonstrates mild distress and fatigue, speaking in short sentences with occasional pauses to gather his thoughts.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did trauma start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened before you started having these symptoms?",
+      "Did you hit your head or have any kind of accident recently?",
+      "When did these headaches first start and how have they changed?",
+      "Are you experiencing any nausea, vomiting, or dizziness?",
+      "Have you noticed any changes in your vision or hearing?",
+      "Are you having any trouble with balance or coordination?",
+      "Have you had any episodes of confusion or memory problems?",
+      "Any weakness or numbness in your arms or legs?",
+      "Have you lost consciousness at any point?",
+      "Are you experiencing any neck pain or stiffness?",
+      "How would you rate your headache pain on a scale of 1 to 10?",
+      "What makes the headache better or worse?",
+      "Have you taken anything for the pain?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having these headaches on and off, and I feel tired during the day eve.'",
-        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Cerebral Contusion.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 10mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Atorvastatin 20mg QHS; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are Sulfonamides.'",
-        "family": "Father: T2DM, HTN, stroke at age 62 (deceased at 68)  Mother: HTN, hyperlipidemia, alive at 70  Brother: T2DM, age 42",
-        "social": "Occupation: Warehouse supervisor  Marital: Single  Tobacco: 1 PPD x 25 years (25 pack-years)  Alcohol: 6-8 beers/week, mostly weekends  Drugs: Denies; remote marijuana use in 20s"
+      "default": "I'm sorry, I'm having trouble focusing right now. Could you ask that again?",
+      "onset": "I think it was about 6 hours ago... I was at work moving some heavy equipment and I slipped and hit my head on a concrete floor. The headache started right after that.",
+      "character": "It's this constant, dull aching pain that feels like pressure in my head. Sometimes it gets really sharp and pounding.",
+      "location": "It's mostly on the right side of my head, kind of behind my eye and temple area. Sometimes it feels like it goes down into my neck.",
+      "severity": "Right now it's about a 7 out of 10. It's making it hard for me to think clearly and I feel pretty awful.",
+      "aggravating": "Moving my head quickly makes it much worse, and bright lights really bother me. Bending over or coughing makes the pain shoot up.",
+      "relieving": "Nothing really helps much. I took some ibuprofen earlier but it barely touched it. Lying still in a dark room helps a little.",
+      "associated": "I've been feeling pretty nauseous and dizzy, especially when I stand up. I'm having trouble remembering things that happened today.",
+      "denies": "No vision changes or double vision. No ringing in my ears. No weakness in my arms or legs that I've noticed.",
+      "history": "Never had anything like this before. I mean, I get regular headaches sometimes, but nothing this bad or after hitting my head.",
+      "medications": "Amlodipine 10mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Atorvastatin 20mg QHS; Aspirin 81mg daily",
+      "allergies": "Sulfonamides",
+      "family": "My dad had a stroke when he was 62 and died at 68. Both my parents have high blood pressure. My brother has diabetes too.",
+      "social": "I'm a warehouse supervisor, so I'm on my feet a lot and do some heavy lifting. I smoke about a pack a day and have been for 25 years. I drink maybe 6-8 beers a week on weekends mostly."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Glasgow Coma Scale assessment",
+      "Pupillary response and symmetry",
+      "Fundoscopic examination",
+      "Cranial nerve examination",
+      "Motor strength testing bilateral upper and lower extremities",
+      "Deep tendon reflexes",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)",
+      "Romberg test and gait assessment",
+      "Neck stiffness and meningeal signs",
+      "Inspection of head and scalp for trauma"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Cerebral Contusion. Document specifically what you observe."
+      "Glasgow Coma Scale assessment": "GCS 14 (Eyes 4, Verbal 4, Motor 6) - mild confusion and disorientation",
+      "Pupillary response and symmetry": "Pupils equal, round, reactive to light bilaterally, 3mm diameter",
+      "Fundoscopic examination": "No papilledema, normal optic discs bilaterally",
+      "Cranial nerve examination": "CN II-XII grossly intact, no focal deficits noted",
+      "Motor strength testing bilateral upper and lower extremities": "5/5 strength bilaterally in all muscle groups",
+      "Deep tendon reflexes": "2+ and symmetric throughout, no pathologic reflexes",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)": "Mild dysmetria on right side, otherwise coordinated movements",
+      "Romberg test and gait assessment": "Negative Romberg, mild unsteadiness with tandem gait",
+      "Neck stiffness and meningeal signs": "No nuchal rigidity, negative Kernig's and Brudzinski's signs",
+      "Inspection of head and scalp for trauma": "Tender right temporal area with small abrasion and mild swelling, no active bleeding"
     },
     "ddxTargets": [
-        "Cerebral Contusion (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Cerebral Contusion (correct diagnosis)",
+      "Traumatic subarachnoid hemorrhage",
+      "Epidural hematoma",
+      "Subdural hematoma",
+      "Diffuse axonal injury",
+      "Post-concussion syndrome",
+      "Tension headache with trauma history"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cerebral Contusion, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Cerebral Contusion, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Cerebral Contusion based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's chronic medical conditions (hypertension, diabetes) and attributing symptoms to medication non-compliance rather than acute trauma",
+      "prematureClosure": "May focus on routine headache evaluation and miss the significance of the head trauma mechanism and evolving neurological symptoms",
+      "availabilityBias": "Common presentation of headache may lead to considering typical primary headache disorders rather than traumatic brain injury"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dwayne Jackson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Cerebral Contusion. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some concerning possibilities. Before interviewing the patient, what key historical elements would help you differentiate between these diagnoses? Consider the mechanism of injury and timeline - what specific questions about the trauma itself would be most important?",
+      "phase5": "Based on your history and physical exam, you have a patient with head trauma and neurological symptoms. Walk me through your clinical reasoning - what findings support traumatic brain injury versus other causes? What's your biggest concern for this patient right now?",
+      "finalDebrief": "This case highlights the importance of trauma history in headache evaluation. Notice how the mechanism (fall onto concrete), timing (acute onset), associated symptoms (confusion, nausea), and focal findings (right temporal tenderness, mild dysmetria) all pointed toward cerebral contusion. What would have happened if you anchored on his chronic conditions instead of the acute trauma presentation?"
     }
-}
+  }
 };

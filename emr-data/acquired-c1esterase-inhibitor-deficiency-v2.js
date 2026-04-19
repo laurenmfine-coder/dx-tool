@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Walter Brennan",
-  "patientHPI": "These swelling episodes started happening when I was around 68 and they keep coming back every few months - my face puffs up, especially around my eyes and lips, but nobody else in my family has ever had anything like this.",
+      "patientHPI": "These swelling episodes started happening when I was around 68 and they keep coming back every few months - my face puffs up, especially around my eyes and lips, but nobody else in my family has ever had anything like this.",
       "dob": "05/14/1955",
       "age": "71",
       "sex": "Male",
@@ -1091,111 +1091,118 @@ window.EMR_DATA = {
       "Distinction",
       "HAE = low C1-INH from birth + family history; Acquired = low C1-INH from underlying lymphoproliferative/autoimmune disease"
     ]
-  ]
-,"references":[
-  {
-    "id": "WAO-HAE-2022",
-    "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
-    "authors": "Maurer M, Magerl M, Betschel S, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15214",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
-    "openAccess": true,
-    "validates": [
-      "HAE diagnosis: C4 screening, C1-INH level/function",
-      "C1q distinguishes acquired from hereditary",
-      "On-demand icatibant",
-      "Lanadelumab prophylaxis",
-      "Estrogen triggers: OCPs contraindicated"
-    ]
-  },
-  {
-    "id": "Acquired-C1INH-2010",
-    "title": "Acquired angioedema",
-    "authors": "Cicardi M, Zanichelli A.",
-    "journal": "Allergy Asthma Clin Immunol",
-    "year": 2010,
-    "doi": "10.1186/1710-1492-6-14",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2904712/",
-    "openAccess": true,
-    "validates": [
-      "C1q LOW in acquired, NORMAL in HAE",
-      "Anti-C1-INH antibodies",
-      "MGUS/lymphoproliferative association",
-      "Rituximab for refractory"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "WAO-HAE-2022",
+      "title": "International WAO/EAACI guideline for management of hereditary angioedema — 2021 revision",
+      "authors": "Maurer M, Magerl M, Betschel S, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15214",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9541881/",
+      "openAccess": true,
+      "validates": [
+        "HAE diagnosis: C4 screening, C1-INH level/function",
+        "C1q distinguishes acquired from hereditary",
+        "On-demand icatibant",
+        "Lanadelumab prophylaxis",
+        "Estrogen triggers: OCPs contraindicated"
+      ]
+    },
+    {
+      "id": "Acquired-C1INH-2010",
+      "title": "Acquired angioedema",
+      "authors": "Cicardi M, Zanichelli A.",
+      "journal": "Allergy Asthma Clin Immunol",
+      "year": 2010,
+      "doi": "10.1186/1710-1492-6-14",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2904712/",
+      "openAccess": true,
+      "validates": [
+        "C1q LOW in acquired, NORMAL in HAE",
+        "Anti-C1-INH antibodies",
+        "MGUS/lymphoproliferative association",
+        "Rituximab for refractory"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Walter Brennan is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Walter appears anxious and frustrated about his recurring episodes of facial swelling, particularly concerned about breathing difficulties. He's cooperative but worried, having been through multiple ER visits and specialist consultations since his symptoms began three years ago.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your swelling episodes first start and how often do they occur?",
+      "Can you describe what the swelling looks like and where it occurs?",
+      "Have you ever had trouble breathing or swallowing during these episodes?",
+      "Does anyone in your family have similar swelling problems?",
+      "What triggers seem to bring on your swelling episodes?",
+      "How long do the episodes typically last?",
+      "What medications have you tried for these episodes?",
+      "Have you had any recent infections or started new medications?",
+      "Do you get hives or itching along with the swelling?",
+      "Have you been told about any blood test abnormalities?",
+      "What usually helps resolve your swelling episodes?",
+      "Have you had any other health problems discovered recently?",
+      "Did you have any swelling problems as a child or young adult?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take C1-INH concentrate; Icatibant.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "No family history of angioedema (distinguishes acquired from hereditary)",
-        "social": "Key: Angioedema starting at age 68 \u2014 NO family history (acquired, not hereditary)  Comorbidity: Monoclonal gammopathy (MGUS) found on workup \u2014 driving the acquired C1-INH consumption  Distinction: HAE = low C1-INH from birth + family history; Acquired = low C1-INH from underlying lymphoproliferative/autoimmune disease"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "The swelling started about three years ago when I was 68. It comes and goes, maybe once or twice a month, sometimes more frequently.",
+      "character": "It's a deep, non-pitting swelling mainly in my lips, sometimes my eyelids and face. It's not red or itchy like a rash.",
+      "location": "Mostly my lips and sometimes around my eyes. A few times my throat felt tight which really scared me.",
+      "severity": "The swelling itself is maybe a 4 out of 10 for pain, but my anxiety about breathing problems makes it feel like an 8 or 9.",
+      "aggravating": "I can't identify specific triggers. It seems random - no particular foods, stress, or activities that I can pinpoint.",
+      "relieving": "The doctors give me C1-INH concentrate in the ER, and sometimes icatibant shots. Those seem to help it resolve faster.",
+      "associated": "No hives or itching. Sometimes I feel like my throat is tight, but no other symptoms really.",
+      "denies": "No itching, no hives, no stomach problems, no joint pain. Never had allergic reactions to foods or medications before this started.",
+      "history": "Never had anything like this before age 68. I've been healthy most of my life with just high blood pressure.",
+      "medications": "C1-INH concentrate; Icatibant",
+      "allergies": "NKDA",
+      "family": "No one in my family has ever had swelling problems like this. My parents lived into their 80s without anything like this.",
+      "social": "I'm retired from construction work. I drink a glass of wine with dinner most nights, never smoked. Live with my wife of 45 years."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect lips and perioral area",
+      "Palpate facial swelling",
+      "Examine oropharynx and tongue",
+      "Assess voice quality and stridor",
+      "Palpate neck for lymphadenopathy",
+      "Auscultate lungs",
+      "Examine skin for urticaria",
+      "Palpate abdomen for hepatosplenomegaly",
+      "Assess peripheral edema",
+      "Check vital signs and oxygen saturation"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect lips and perioral area": "Mild residual asymmetric swelling of lower lip, non-erythematous, non-tender",
+      "Palpate facial swelling": "Soft, non-pitting edema of lower lip and minimal periorbital involvement",
+      "Examine oropharynx and tongue": "No acute swelling of tongue, uvula, or soft palate; oropharynx clear",
+      "Assess voice quality and stridor": "Voice clear, no stridor or hoarseness",
+      "Palpate neck for lymphadenopathy": "No significant cervical lymphadenopathy",
+      "Auscultate lungs": "Clear to auscultation bilaterally, no wheezes",
+      "Examine skin for urticaria": "No urticarial lesions, no dermatographism",
+      "Palpate abdomen for hepatosplenomegaly": "Soft abdomen, no hepatosplenomegaly appreciated",
+      "Assess peripheral edema": "No peripheral edema in extremities",
+      "Check vital signs and oxygen saturation": "BP 148/86, HR 82, afebrile, SpO2 98% on room air"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Acquired C1-esterase inhibitor deficiency (correct diagnosis)",
+      "Hereditary angioedema",
+      "ACE inhibitor-induced angioedema",
+      "Anaphylaxis with laryngeal edema",
+      "Acute allergic reaction",
+      "Idiopathic angioedema",
+      "Hypothyroidism with myxedema"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on hereditary angioedema due to similar presentation, missing the key distinguishing features of late onset and absent family history",
+      "prematureClosure": "Risk of stopping at 'angioedema' without distinguishing acquired vs hereditary forms, missing the underlying MGUS",
+      "availabilityBias": "More likely to consider common allergic angioedema or ACE inhibitor effects rather than rare acquired C1-INH deficiency"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Walter Brennan: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Good start on your differential. I notice you're considering various causes of angioedema. What key historical features would help you distinguish between hereditary and acquired forms of complement-mediated angioedema? Think about timing of onset and family history patterns.",
+      "phase5": "Nice work gathering the history and exam. You've identified recurrent angioedema with late onset and no family history. Given these features and the lack of urticaria, what laboratory studies would help distinguish the different complement-mediated causes? What underlying conditions might drive acquired C1-inhibitor deficiency?",
+      "finalDebrief": "This case highlights the importance of distinguishing acquired from hereditary C1-inhibitor deficiency. The key differentiators were late onset (age 68 vs childhood), absent family history, and low C1q levels. The underlying MGUS represents a lymphoproliferative condition consuming C1-inhibitor. How did your thinking evolve as you gathered more clinical information?"
     }
-}
+  }
 };

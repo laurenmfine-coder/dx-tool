@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Mariana Chen-Vasquez",
-  "patientHPI": "These hives just won't go away no matter what I take - they're covering my arms and body again and my face is starting to swell up even though I'm taking my allergy pills.",
+      "patientHPI": "These hives just won't go away no matter what I take - they're covering my arms and body again and my face is starting to swell up even though I'm taking my allergy pills.",
       "dob": "03/11/1984",
       "age": "42",
       "sex": "Female",
@@ -1020,26 +1020,25 @@ window.EMR_DATA = {
       "Medication trial",
       "Failed cetirizine 10mg daily, uptitrated to 20mg with partial response"
     ]
-  ]
-,"references":[
-  {
-    "id": "EAACI-Urticaria-2022",
-    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
-    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15090",
-    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
-    "openAccess": true,
-    "validates": [
-      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
-      "UAS7 scoring",
-      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
-      "Post-viral urticaria in children: no allergy testing needed"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "EAACI-Urticaria-2022",
+      "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+      "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15090",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+      "openAccess": true,
+      "validates": [
+        "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+        "UAS7 scoring",
+        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Post-viral urticaria in children: no allergy testing needed"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "CSU is defined by urticaria (wheals and/or angioedema) present for >6 weeks without identifiable external trigger. In ~35–40% of cases, an autoimmune mechanism is identified: IgG autoantibodies against IgE (Type IIb) or FcεRIα (the high-affinity IgE receptor, Type IIb) — causing direct mast cell activation.",
@@ -1057,75 +1056,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Mariana Chen-Vasquez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mariana appears frustrated and anxious about her persistent symptoms that haven't responded to treatment. She is very forthcoming with information and eager to find answers, expressing concern about the daily impact on her quality of life. Her affect is cooperative but shows visible distress when describing the unpredictable nature of her hives.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did daily hives for 8 weeks with no identifiable trigger, refractory to h1 antihistamines start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when and how these hives first started 8 weeks ago?",
+      "What do the hives look like and where do they typically appear on your body?",
+      "How long do individual hives last before they disappear?",
+      "Have you noticed any patterns or triggers that seem to bring on the hives?",
+      "On a scale of 1-10, how would you rate the itching and how much is this affecting your daily life?",
+      "What makes the hives worse or better?",
+      "Have you had any other symptoms like swelling of your face, lips, or throat?",
+      "Have you tried any new foods, medications, soaps, or detergents in the past few months?",
+      "Have you had any recent infections, illnesses, or stressful events?",
+      "Do you have any family history of allergies or autoimmune conditions?",
+      "What is your current work and living situation?",
+      "Have you traveled anywhere recently or been exposed to anything unusual?",
+      "How has your thyroid condition been managed lately?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Mariana Chen-Vasquez presents with daily hives for 8 weeks with no identifiable .'",
-        "character": "'It's daily hives for 8 weeks with no identifiable trigger, refractory to h1 antihistamines \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cetirizine; Famotidine; Levothyroxine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Sister: autoimmune thyroiditis",
-        "social": "Duration: Daily wheals for 8+ weeks  Prior workup: Negative for infection, normal CBC, ESR, CRP  Medication trial: Failed cetirizine 10mg daily, uptitrated to 20mg with partial response"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that? I just want to figure out what's causing these hives.",
+      "onset": "It started about 8 weeks ago completely out of nowhere. I woke up one morning with these raised, red welts on my arms and they just haven't stopped coming since then.",
+      "character": "They're raised, red welts that are really itchy. They're different sizes - some small like a quarter, others bigger. They feel hot and swollen when I touch them.",
+      "location": "They appear all over - arms, legs, trunk, sometimes on my face. They don't seem to favor any particular area and move around to different spots.",
+      "severity": "The itching is about a 7 out of 10 most days. It's really disrupting my sleep and I'm constantly distracted at work. I find myself scratching until I bleed sometimes.",
+      "aggravating": "They seem worse when I'm stressed or hot. Sometimes tight clothing or pressure makes them more noticeable, but honestly, they come and go randomly.",
+      "relieving": "The cetirizine helps a little bit, especially since we increased the dose, but they're still there every day. Cool compresses give temporary relief.",
+      "associated": "No swelling of my face or throat, thankfully. Sometimes I feel a little more tired than usual, but that might just be from the poor sleep and constant itching.",
+      "denies": "No difficulty breathing, no swelling of my lips or tongue, no joint pain, no fever, no weight changes recently.",
+      "history": "I've never had anything like this before. I've had occasional seasonal allergies but nothing persistent like this.",
+      "medications": "Cetirizine; Famotidine; Levothyroxine",
+      "allergies": "NKDA",
+      "family": "My sister has the same thyroid condition I do - Hashimoto's thyroiditis. My mother had some food allergies but nothing like this.",
+      "social": "I work as a marketing manager, mostly desk work. I don't smoke, drink maybe a glass of wine on weekends. No recreational drugs. I live with my husband and our cat - we've had the cat for 3 years though."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for active urticarial lesions",
+      "Assess distribution pattern of lesions",
+      "Palpate lesions for warmth and blanching",
+      "Perform dermographism test",
+      "Examine for angioedema of face, lips, eyelids",
+      "Palpate lymph nodes",
+      "Examine thyroid gland",
+      "Assess for signs of systemic disease",
+      "Check conjunctiva for pallor",
+      "Auscultate heart and lungs"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin for active urticarial lesions": "Multiple erythematous, raised wheals of varying sizes (0.5-3 cm) present on bilateral arms and trunk, some with central pallor",
+      "Assess distribution pattern of lesions": "Scattered distribution without dermatome pattern, affecting trunk and extremities, sparing palms and soles",
+      "Palpate lesions for warmth and blanching": "Lesions are warm to touch, blanch with pressure, and have well-demarcated raised borders",
+      "Perform dermographism test": "Positive dermographism - linear wheal develops within 5 minutes of firm stroking with tongue depressor",
+      "Examine for angioedema of face, lips, eyelids": "No evidence of angioedema; face, lips, and eyelids appear normal",
+      "Palpate lymph nodes": "No lymphadenopathy detected in cervical, axillary, or inguinal regions",
+      "Examine thyroid gland": "Thyroid slightly enlarged, consistent with known Hashimoto's thyroiditis, no new nodules palpated",
+      "Assess for signs of systemic disease": "No hepatosplenomegaly, no joint swelling or tenderness",
+      "Check conjunctiva for pallor": "Conjunctiva pink, no pallor noted",
+      "Auscultate heart and lungs": "Regular rate and rhythm, lungs clear to auscultation bilaterally"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Chronic spontaneous urticaria (correct diagnosis)",
+      "Chronic inducible urticaria",
+      "Autoimmune urticaria",
+      "Drug-induced urticaria",
+      "Systemic mastocytosis",
+      "Contact dermatitis",
+      "Atopic dermatitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Don't anchor on the patient's existing autoimmune condition (Hashimoto's) and assume this is necessarily autoimmune-related urticaria without considering the broader differential",
+      "prematureClosure": "Avoid immediately attributing this to a simple allergic reaction since the history reveals no clear triggers and standard antihistamines have been partially effective",
+      "availabilityBias": "Don't focus only on common food or environmental allergens; chronic spontaneous urticaria often has no identifiable trigger despite thorough investigation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Mariana Chen-Vasquez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider what key features distinguish acute from chronic urticaria, and what red flags you'd want to rule out. What specific questions will help you determine if this is spontaneous versus inducible urticaria?",
+      "phase5": "Now that you've gathered your history and physical findings, what does the 8-week duration tell you about classification? How does the positive dermographism and response pattern to antihistamines help narrow your differential diagnosis?",
+      "finalDebrief": "This case illustrates chronic spontaneous urticaria, where lesions persist >6 weeks without identifiable triggers. Notice how the history of autoimmune thyroiditis might have initially suggested autoimmune urticaria, but the clinical presentation and partial antihistamine response point toward the more common chronic spontaneous form. The positive dermographism indicates she also has inducible urticaria, which can coexist."
     }
-}
+  }
 };

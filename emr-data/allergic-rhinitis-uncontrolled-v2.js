@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Samantha O'Brien",
-  "patientHPI": "My nose has been completely stuffed up for months and I'm sneezing constantly with watery, itchy eyes that are affecting my daily activities.",
+      "patientHPI": "My nose has been completely stuffed up for months and I'm sneezing constantly with watery, itchy eyes that are affecting my daily activities.",
       "dob": "04/04/1995",
       "age": "31",
       "sex": "Female",
@@ -974,110 +974,117 @@ window.EMR_DATA = {
       "Sleep",
       "OSA screening positive — nasal congestion contributing to mouth breathing and snoring"
     ]
-  ]
-,"references":[
-  {
-    "id": "ARIA-2020",
-    "title": "ARIA guideline 2019: treatment of allergic rhinitis",
-    "authors": "Bousquet J, Schunemann HJ, Togias A, et al.",
-    "journal": "Allergy",
-    "year": 2020,
-    "doi": "10.1111/all.14049",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/31473041/",
-    "openAccess": true,
-    "validates": [
-      "Step-up pharmacotherapy",
-      "INCS + antihistamine combo",
-      "SCIT/SLIT for refractory",
-      "United airway (rhinitis + asthma)"
-    ]
-  },
-  {
-    "id": "AIT-PP-2011",
-    "title": "Allergen immunotherapy: practice parameter 3rd update",
-    "authors": "Cox L, Nelson H, Lockey R, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2011,
-    "doi": "10.1016/j.jaci.2010.09.034",
-    "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCIT protocols",
-      "Cluster/rush protocols",
-      "ACE inhibitors increase VIT reactions",
-      "VIT ≥5 years"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "ARIA-2020",
+      "title": "ARIA guideline 2019: treatment of allergic rhinitis",
+      "authors": "Bousquet J, Schunemann HJ, Togias A, et al.",
+      "journal": "Allergy",
+      "year": 2020,
+      "doi": "10.1111/all.14049",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31473041/",
+      "openAccess": true,
+      "validates": [
+        "Step-up pharmacotherapy",
+        "INCS + antihistamine combo",
+        "SCIT/SLIT for refractory",
+        "United airway (rhinitis + asthma)"
+      ]
+    },
+    {
+      "id": "AIT-PP-2011",
+      "title": "Allergen immunotherapy: practice parameter 3rd update",
+      "authors": "Cox L, Nelson H, Lockey R, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2011,
+      "doi": "10.1016/j.jaci.2010.09.034",
+      "url": "https://www.jacionline.org/article/S0091-6749(10)01502-0/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCIT protocols",
+        "Cluster/rush protocols",
+        "ACE inhibitors increase VIT reactions",
+        "VIT ≥5 years"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Samantha O'Brien is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Samantha appears tired and frustrated, with visible nasal congestion and frequent sniffling. She's very forthcoming about her symptoms and eager to find solutions, expressing genuine distress about how her condition affects both her beloved career and quality of life. She seems well-informed about her condition but overwhelmed by treatment failures.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe your nasal symptoms in detail?",
+      "How long have you been experiencing these symptoms?",
+      "What specific triggers have you identified?",
+      "Tell me about your work environment and daily animal exposure",
+      "What medications have you tried and how did they work?",
+      "How are your symptoms affecting your work performance?",
+      "Are you experiencing any breathing problems or wheezing?",
+      "How is your sleep quality? Any snoring or breathing interruptions?",
+      "Have you noticed any eye symptoms - itching, tearing, redness?",
+      "Do you have headaches or facial pressure?",
+      "Have you ever considered changing jobs or reducing animal exposure?",
+      "What's your biggest concern about continuing in your current role?",
+      "Have you been evaluated by an allergist or ENT specialist?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Mother: asthma  Father: allergic rhinitis",
-        "social": "Context: Failed 5 medications \u2014 still miserable, affecting work and sleep  Comorbidity: Asthma \u2014 undertreated, rhinitis and asthma are one airway  Occupational: Veterinary technician \u2014 animal dander exposure 8h/day is THE trigger  Dilemma: Loves her job, animals are her trigger \u2014 immunotherapy candidate?  Sleep: OSA screening positive \u2014 nasal congestion contributing to mouth breathing and snoring"
+      "default": "I'm not sure I understand the question. Could you be more specific about my nasal symptoms or work situation?",
+      "onset": "I've had allergic rhinitis since childhood, but it became severe about 3 years ago when I started working as a veterinary technician. It's gotten progressively worse despite trying multiple treatments.",
+      "character": "Constant nasal congestion, clear runny nose, intense itching in my nose and throat. The congestion is so bad I can barely breathe through my nose most days.",
+      "location": "Primarily nasal congestion and rhinorrhea, but the itching extends to my throat and soft palate. Sometimes I get sinus pressure in my forehead and cheeks.",
+      "severity": "I'd say 8 out of 10 most days. It's severely impacting my work - I can't focus, I'm constantly blowing my nose, and I'm worried about my job performance. My sleep is terrible too.",
+      "aggravating": "Animal dander is definitely the main trigger - cats and dogs especially. I'm exposed 8 hours a day at work. Dusty environments and seasonal pollens make it worse too.",
+      "relieving": "I've tried 5 different medications and none have given me adequate relief. Nasal saline rinses help a little temporarily. Getting away from animals helps, but that's not realistic.",
+      "associated": "I've been wheezing more lately, especially at work. My sleep is awful - I snore now and wake up tired. My eyes get itchy and watery too. I'm getting frequent headaches from the sinus pressure.",
+      "denies": "No fever, no colored nasal discharge, no facial pain or tooth pain, no recent upper respiratory infections.",
+      "history": "I've had allergic rhinitis since I was a kid, but it was manageable until I started working with animals daily. My asthma used to be mild but it's gotten worse along with the rhinitis.",
+      "medications": "no medications",
+      "allergies": "NKDA",
+      "family": "My mother has asthma and my father has allergic rhinitis, so it definitely runs in the family.",
+      "social": "I'm a veterinary technician and I love working with animals - it's my passion. I don't smoke or drink much. The irony is that my dream job is making me miserable, but I can't imagine doing anything else."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Nasal inspection and anterior rhinoscopy",
+      "Palpation of sinuses",
+      "Examination of conjunctiva and eyes",
+      "Oropharynx examination",
+      "Lymph node palpation",
+      "Pulmonary auscultation",
+      "Assessment for allergic shiners and nasal crease",
+      "Peak flow or respiratory assessment",
+      "Inspection for mouth breathing signs",
+      "Examination of nasal turbinates"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Nasal inspection and anterior rhinoscopy": "Bilateral nasal congestion with pale, boggy, edematous nasal turbinates and clear rhinorrhea. Visible nasal crease from chronic rubbing.",
+      "Palpation of sinuses": "Mild tenderness over maxillary and frontal sinuses bilaterally, no acute pain",
+      "Examination of conjunctiva and eyes": "Mild conjunctival injection and chemosis, allergic shiners present under both eyes",
+      "Oropharynx examination": "Posterior pharyngeal cobblestoning consistent with chronic postnasal drip, no erythema or exudate",
+      "Lymph node palpation": "No significant lymphadenopathy",
+      "Pulmonary auscultation": "Mild expiratory wheeze bilaterally, otherwise clear lung fields",
+      "Assessment for allergic shiners and nasal crease": "Prominent allergic shiners and horizontal nasal crease from chronic nose rubbing - classic allergic facies",
+      "Peak flow or respiratory assessment": "Slightly reduced peak flow compared to predicted, suggests mild airway obstruction",
+      "Inspection for mouth breathing signs": "Evidence of chronic mouth breathing with dry oral mucosa",
+      "Examination of nasal turbinates": "Markedly enlarged and pale inferior turbinates with watery discharge"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Severe allergic rhinitis with occupational trigger (correct diagnosis)",
+      "Allergic rhinitis with asthma (united airway disease)",
+      "Chronic rhinosinusitis",
+      "Nasal polyps",
+      "Vasomotor rhinitis",
+      "Medication overuse rhinitis",
+      "Upper respiratory infection"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'just allergies' and missing the severity, occupational component, and associated asthma that requires comprehensive management including immunotherapy consideration",
+      "prematureClosure": "May stop at diagnosing allergic rhinitis without recognizing this as severe occupational allergic rhinitis with united airway disease requiring specialized treatment",
+      "availabilityBias": "Common to see simple seasonal allergies, may miss that this is severe persistent disease requiring immunotherapy and occupational modification considerations"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Samantha O'Brien: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This is an interesting case of someone whose career passion conflicts with their health. What questions would help you understand the severity and impact of her symptoms, and what would you want to know about her work environment and previous treatments?",
+      "phase5": "You've identified classic signs of allergic rhinitis, but consider the bigger picture. What does the combination of her occupational exposure, treatment failures, associated symptoms, and exam findings tell you about disease severity and management needs?",
+      "finalDebrief": "This case illustrates severe persistent allergic rhinitis with occupational triggers and united airway disease. How did the patient's work environment, treatment history, and associated asthma change your approach? What management strategies would you consider for someone whose trigger is integral to their career?"
     }
-}
+  }
 };

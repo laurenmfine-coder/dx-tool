@@ -889,75 +889,76 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Noah Sullivan appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersonsa": "Noah appears uncomfortable and irritable, crying intermittently due to pain and fever. His mother is anxious and forthcoming with information, noting the dramatic change in his usual eczema appearance over the past 2 days.",
     "interviewQuestions": [
-      "Tell me what brought you in today. When did acute worsening of eczema with punched-out erosions, vesicles, and fever start?",
-      "Can you describe exactly how it started — sudden or gradual?",
-      "Where is the problem located? Does it spread anywhere?",
-      "How would you rate the severity on a scale of 1 to 10?",
-      "What makes it worse? What makes it better?",
-      "Do you have any other symptoms along with this?",
-      "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
-      "What medications are you currently taking?",
-      "Do you have any allergies to medications?",
-      "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "When did you first notice the rash getting worse?",
+      "How does this rash look different from his usual eczema?",
+      "Has Noah had any fever with this rash?",
+      "Are the lesions painful or itchy?",
+      "Has Noah been exposed to anyone with cold sores or similar infections recently?",
+      "What treatments have you tried for the worsening rash?",
+      "Has Noah ever had cold sores or similar blistering rashes before?",
+      "How has Noah been eating and drinking?",
+      "Has Noah seemed unusually tired or lethargic?",
+      "Are there any other symptoms like eye irritation or mouth sores?",
+      "What medications is Noah currently taking?",
+      "Does Noah have any known allergies?",
+      "Is there any family history of skin conditions or cold sores?"
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
-      "onset": "'The symptoms started Noah Sullivan presents with acute worsening of eczema with punched-out erosions,.'",
-      "character": "'It's acute worsening of eczema with punched-out erosions, vesicles, and fever — it's been bothering me quite a bit.'",
-      "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-      "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-      "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-      "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-      "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-      "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-      "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-      "medications": "'I take Hydrocortisone 2.5% ointment.'",
-      "allergies": "'My allergies are NKDA.'",
-      "family": "Mother: eczema",
-      "social": "Exposure: Daycare classmate had cold sores 5 days ago  Key finding: Monomorphic punched-out vesicles and erosions superimposed on eczematous skin  Urgent: Requires IV acyclovir — can disseminate"
+      "default": "I'm not sure what you mean, can you ask that differently?",
+      "onset": "His eczema started getting much worse about 2 days ago. It looked completely different - these painful looking sores appeared on top of his usual dry patches.",
+      "character": "These aren't like his normal eczema bumps. They're like little blisters that break open and leave these punched-out sores. They look really angry and painful.",
+      "location": "The sores are mainly on his face, neck, and arms where his eczema usually is. They seem to be spreading to new areas too.",
+      "severity": "His pain seems like an 8 out of 10 - he's crying more than usual and won't let me touch the areas. His regular eczema never hurt this much.",
+      "aggravating": "Any touching or washing makes him scream. The fever seems to make everything worse.",
+      "relieving": "Nothing seems to help. Even his usual eczema cream doesn't seem to be working this time.",
+      "associated": "He's had a high fever since yesterday, around 102-103°F. He's been more tired than usual and not eating as well.",
+      "denies": "No vomiting, no diarrhea, no trouble breathing. His eyes look okay and I don't see sores in his mouth.",
+      "history": "He's had eczema since he was a baby, but it's never looked like this before. Usually it's just dry, red patches that are itchy.",
+      "medications": "Hydrocortisone 2.5% ointment",
+      "allergies": "NKDA",
+      "family": "I have eczema too, and my mother had it. No one in our family gets cold sores though.",
+      "social": "He goes to daycare during the week. Actually, there was a child there last week who had cold sores around their mouth."
     },
     "examManeuvers": [
-      "General appearance and level of distress",
-      "Vital signs review",
-      "Cardiovascular auscultation",
-      "Pulmonary auscultation",
-      "Abdominal examination",
-      "Extremity assessment",
-      "Skin examination",
-      "Targeted system examination"
+      "Inspect facial skin and perioral area",
+      "Examine affected eczematous areas on arms and neck",
+      "Assess vesicle and erosion morphology",
+      "Examine conjunctivae and oral mucosa",
+      "Palpate cervical lymph nodes",
+      "Assess overall appearance and toxicity",
+      "Examine unaffected skin areas",
+      "Check for signs of secondary bacterial infection"
     ],
     "examFindings": {
-      "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-      "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect facial skin and perioral area": "Multiple monomorphic punched-out erosions and vesicles on cheeks and chin, superimposed on erythematous eczematous plaques",
+      "Examine affected eczematous areas on arms and neck": "Numerous small vesicles and shallow erosions with hemorrhagic crusts overlying chronic eczematous changes",
+      "Assess vesicle and erosion morphology": "Uniform punched-out appearance of erosions, vesicles are small and clustered, distinct from typical eczematous lesions",
+      "Examine conjunctivae and oral mucosa": "Conjunctivae clear, no oral lesions visible",
+      "Palpate cervical lymph nodes": "Bilateral tender cervical lymphadenopathy",
+      "Assess overall appearance and toxicity": "Child appears ill, irritable, and febrile but not toxic",
+      "Examine unaffected skin areas": "Normal skin appears healthy without lesions",
+      "Check for signs of secondary bacterial infection": "No purulent drainage or cellulitis, lesions appear viral in nature"
     },
     "ddxTargets": [
-      "Working diagnosis (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Eczema herpeticum (correct diagnosis)",
+      "Impetigo",
+      "Contact dermatitis",
+      "Disseminated herpes simplex",
+      "Varicella (chickenpox)",
+      "Atopic dermatitis flare",
+      "Hand-foot-mouth disease"
     ],
     "biasFlags": {
-      "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-      "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-      "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'eczema flare' given patient's known atopic dermatitis history, missing the superimposed viral infection",
+      "prematureClosure": "May stop at impetigo diagnosis without considering viral etiology, especially given the daycare exposure history",
+      "availabilityBias": "Common skin infections like impetigo may come to mind more readily than eczema herpeticum in pediatric patients"
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Noah Sullivan's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-      "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given this 3-year-old's known eczema, what specific historical details would help you distinguish between a simple flare versus a superimposed infection? What questions about recent exposures might be particularly important?",
+      "phase5": "Excellent history and exam. You've identified the key finding of monomorphic punched-out lesions superimposed on eczematous skin, plus the daycare cold sore exposure. How does this clinical picture help you narrow your differential? What's the urgency level for this diagnosis?",
+      "finalDebrief": "This case highlights eczema herpeticum - a dermatologic emergency requiring immediate antiviral therapy. The key was recognizing that the lesion morphology was different from typical eczema, plus the exposure history. How did your thinking evolve from eczema flare to considering viral superinfection? What clinical clues were most important?"
     }
   }
 };

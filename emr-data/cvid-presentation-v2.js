@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Ryan Fitzgerald",
-  "patientHPI": "I keep getting these awful lung infections - this is my fourth one in just two years, and I'm only 26. The doctors finally did some blood work and found out my immune system isn't working right, which explains why I've been sick so much. Now I'm panicking because I'm about to lose my parents' insurance in two months and the treatment I need costs tens of thousands of dollars a year.",
+      "patientHPI": "I keep getting these awful lung infections - this is my fourth one in just two years, and I'm only 26. The doctors finally did some blood work and found out my immune system isn't working right, which explains why I've been sick so much. Now I'm panicking because I'm about to lose my parents' insurance in two months and the treatment I need costs tens of thousands of dollars a year.",
       "dob": "09/26/2000",
       "age": "26",
       "sex": "Male",
@@ -1084,111 +1084,116 @@ window.EMR_DATA = {
       "Prior",
       "Told he \"just catches colds easily\""
     ]
-  ]
-,"references":[
-  {
-    "id": "AAAAI-PID-PP-2015",
-    "title": "Practice parameter for the diagnosis and management of primary immunodeficiency",
-    "authors": "Bonilla FA, Barlan I, Chapel H, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2015,
-    "doi": "10.1016/j.jaci.2015.04.049",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4837186/",
-    "openAccess": true,
-    "validates": [
-      "CVID criteria: low IgG + low IgA/IgM + poor vaccine responses",
-      "IgA deficiency → CVID spectrum",
-      "IVIG/SCIG replacement",
-      "IgA-depleted products",
-      "Trough IgG >500"
-    ]
-  },
-  {
-    "id": "SCIG-Review-2008",
-    "title": "Subcutaneous immunoglobulin replacement: a new paradigm",
-    "authors": "Berger M.",
-    "journal": "Immunol Allergy Clin North Am",
-    "year": 2008,
-    "doi": "10.1016/j.iac.2008.07.002",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3576822/",
-    "openAccess": true,
-    "validates": [
-      "SCIG vs IVIG",
-      "Weekly home infusion",
-      "Stable IgG levels",
-      "Patient preference"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "AAAAI-PID-PP-2015",
+      "title": "Practice parameter for the diagnosis and management of primary immunodeficiency",
+      "authors": "Bonilla FA, Barlan I, Chapel H, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2015,
+      "doi": "10.1016/j.jaci.2015.04.049",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4837186/",
+      "openAccess": true,
+      "validates": [
+        "CVID criteria: low IgG + low IgA/IgM + poor vaccine responses",
+        "IgA deficiency → CVID spectrum",
+        "IVIG/SCIG replacement",
+        "IgA-depleted products",
+        "Trough IgG >500"
+      ]
+    },
+    {
+      "id": "SCIG-Review-2008",
+      "title": "Subcutaneous immunoglobulin replacement: a new paradigm",
+      "authors": "Berger M.",
+      "journal": "Immunol Allergy Clin North Am",
+      "year": 2008,
+      "doi": "10.1016/j.iac.2008.07.002",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3576822/",
+      "openAccess": true,
+      "validates": [
+        "SCIG vs IVIG",
+        "Weekly home infusion",
+        "Stable IgG levels",
+        "Patient preference"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Ryan Fitzgerald is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Ryan appears anxious and fatigued, with visible distress about both his recurring illness and looming insurance crisis. He's highly forthcoming about his symptoms and frustrated that his immunodeficiency went undiagnosed for years despite multiple infections. He's particularly worried about affording IVIG treatment once he loses parental insurance coverage.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me about your current breathing problems and cough?",
+      "How many pneumonias have you had in the past few years?",
+      "What other types of infections have you been getting?",
+      "How often have you been on antibiotics recently?",
+      "Tell me about your chronic diarrhea - when did it start?",
+      "Have you had any sinus infections or ear infections?",
+      "What did doctors tell you before about why you kept getting sick?",
+      "Do you have any family history of frequent infections or immune problems?",
+      "Are you taking any medications currently?",
+      "Do you have any drug allergies?",
+      "What's your insurance situation like?",
+      "Have you had any recent imaging or lab work done?",
+      "Do you smoke, drink alcohol, or use any substances?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Ceftriaxone; Azithromycin.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Brother: IgA deficiency  Mother: autoimmune thyroiditis",
-        "social": "Infections: 6 sinusitis, 3 pneumonias, 2 otitis in 3 years  Antibiotics: On antibiotics more than off for 2 years  Insurance: Aging off parents' plan \u2014 panicking about IVIG coverage ($30-60K/yr)  GI: Chronic diarrhea \u2014 nodular lymphoid hyperplasia on colonoscopy  Prior: Told he \"just catches colds easily\""
+      "default": "I'm sorry, could you repeat that? I'm pretty tired from being sick so much lately.",
+      "onset": "This pneumonia started about a week ago with fever and cough, but honestly I've been getting pneumonias every 6 months for the past 2 years. The breathing got worse over the past few days despite the antibiotics.",
+      "character": "It's a productive cough with thick yellow-green sputum, and I have this tight chest pain when I breathe deeply or cough hard.",
+      "location": "The chest pain is on both sides, mainly in the front of my chest, and it doesn't really go anywhere else.",
+      "severity": "The breathing difficulty is probably a 7 out of 10 right now - I get winded just walking to the bathroom. The cough keeps me up at night.",
+      "aggravating": "Lying flat makes the breathing worse, and any exertion like climbing stairs makes me really short of breath. Cold air seems to trigger more coughing.",
+      "relieving": "Sitting up helps a little with breathing. The antibiotics usually help eventually, but this time they're not working like they used to.",
+      "associated": "I've had fever up to 101°F, chills, and I'm exhausted all the time. Plus I've had this chronic diarrhea for about 2 years that never really goes away.",
+      "denies": "No chest pain at rest, no blood in my sputum, no leg swelling. No nausea or vomiting with this episode.",
+      "history": "This is my 4th pneumonia in 2 years. I've also had 6 sinus infections, 3 ear infections, and I'm basically on antibiotics more than I'm off them. They finally checked my immune system and found my antibody levels are critically low.",
+      "medications": "Ceftriaxone; Azithromycin",
+      "allergies": "NKDA",
+      "family": "My brother has IgA deficiency - some kind of immune problem. My mom has autoimmune thyroid disease. Nobody else in the family gets infections like I do.",
+      "social": "I work in an office, don't smoke, drink maybe 2-3 beers on weekends. No drugs. The big problem is I'm aging off my parents' insurance and those IVIG treatments cost like $30,000 to $60,000 a year - I'm honestly panicking about how I'll afford it."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and vital signs assessment",
+      "Pulmonary inspection and percussion",
+      "Pulmonary auscultation",
+      "Cardiac auscultation",
+      "Lymph node examination",
+      "Abdominal examination",
+      "Skin and mucous membrane examination",
+      "Extremity examination for clubbing or edema",
+      "HEENT examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs assessment": "Ill-appearing young man in mild respiratory distress, using accessory muscles. BP 108/68, HR 98, Temp 38.6°C, SpO2 92% on room air.",
+      "Pulmonary inspection and percussion": "Bilateral chest expansion decreased, dullness to percussion over bilateral lower lobes",
+      "Pulmonary auscultation": "Bilateral crackles and rhonchi, diminished breath sounds at bilateral bases, scattered expiratory wheeze",
+      "Cardiac auscultation": "Regular rate and rhythm, no murmurs, gallops, or rubs",
+      "Lymph node examination": "No significant lymphadenopathy in cervical, axillary, or inguinal regions",
+      "Abdominal examination": "Soft, mild diffuse tenderness, normal bowel sounds, no organomegaly",
+      "Skin and mucous membrane examination": "Pale conjunctivae, no rashes, no oral thrush or ulcerations",
+      "Extremity examination for clubbing or edema": "No digital clubbing yet, no peripheral edema, capillary refill 2 seconds",
+      "HEENT examination": "Mild sinus tenderness, tympanic membranes clear, no tonsillar enlargement or exudate"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Common Variable Immunodeficiency with recurrent pneumonia (correct diagnosis)",
+      "Recurrent community-acquired pneumonia with underlying immunodeficiency",
+      "Hypogammaglobulinemia with secondary bronchiectasis",
+      "Atypical pneumonia with treatment failure",
+      "Primary immunodeficiency syndrome",
+      "Chronic granulomatous disease",
+      "Cystic fibrosis with recurrent pulmonary infections"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'just another pneumonia' without recognizing the pattern of recurrent infections suggesting underlying immunodeficiency",
+      "prematureClosure": "May focus solely on treating current pneumonia without investigating the underlying cause of recurrent infections",
+      "availabilityBias": "Young healthy adults rarely have serious immunodeficiencies, leading to delayed recognition of CVID"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Ryan Fitzgerald: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "A 26-year-old with recurrent pneumonia is concerning. What pattern of illness would make you think about underlying immunodeficiency? What questions would help you identify if this is more than just bad luck with infections?",
+      "phase5": "Now that you've heard about 9 sinopulmonary infections in 3 years, chronic diarrhea, and a brother with IgA deficiency, how does this change your thinking? What's the unifying diagnosis that explains this entire constellation of findings?",
+      "finalDebrief": "This case illustrates how CVID often goes undiagnosed for years, with patients told they 'just catch colds easily.' The key was recognizing the pattern: recurrent sinopulmonary infections, chronic diarrhea, family history of immunodeficiency, and critically low immunoglobulins. How might earlier recognition have prevented complications like bronchiectasis?"
     }
-}
+  }
 };

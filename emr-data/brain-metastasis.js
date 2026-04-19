@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Lawson",
-  "patientHPI": "I've been coming in regularly for my cancer treatments and generally feeling pretty good. I still have that cough from my lung condition, but it's nothing new. My appetite could be better, but my weight has stayed the same, and I'm not having any trouble breathing or pain anywhere.",
+    "patientHPI": "I've been coming in regularly for my cancer treatments and generally feeling pretty good. I still have that cough from my lung condition, but it's nothing new. My appetite could be better, but my weight has stayed the same, and I'm not having any trouble breathing or pain anywhere.",
     "dob": "09/08/1962",
     "age": 62,
     "sex": "Female",
@@ -204,32 +204,128 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "132", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "AST (SGOT)", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "132",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelets", "value": "212", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "212",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION STUDIES",
           "results": [
-            { "test": "PT", "value": "12.2", "unit": "sec", "range": "11.0-14.0", "flag": "" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.9-1.1", "flag": "" }
+            {
+              "test": "PT",
+              "value": "12.2",
+              "unit": "sec",
+              "range": "11.0-14.0",
+              "flag": ""
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.9-1.1",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -270,11 +366,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (High-Dose — Fluzone)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FH828R", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV792T", "mfr": "Pfizer" },
-    { "vaccine": "Pneumococcal (PCV20 — Prevnar 20)", "date": "01/2024", "site": "Left deltoid IM", "lot": "PV841K", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (1st dose)", "date": "09/2022", "site": "Right deltoid IM", "lot": "SH382P", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "11/2022", "site": "Right deltoid IM", "lot": "SH388P", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (High-Dose — Fluzone)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FH828R",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV792T",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "01/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV841K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (1st dose)",
+      "date": "09/2022",
+      "site": "Right deltoid IM",
+      "lot": "SH382P",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "11/2022",
+      "site": "Right deltoid IM",
+      "lot": "SH388P",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother (age 86): Hypertension, osteoarthritis — alive and well",
@@ -284,15 +410,42 @@ window.EMR_DATA = {
     "Strong family history of tobacco-related malignancy"
   ],
   "socialHistory": [
-    ["Occupation", "Part-time office manager; reduced hours since diagnosis"],
-    ["Marital", "Married x 38 years; lives with husband"],
-    ["Tobacco", "Former smoker — 35 pack-years (1 PPD x 35 years); quit 09/2023 at diagnosis"],
-    ["Alcohol", "Social — 1-2 glasses wine per week"],
-    ["Drugs", "None"],
-    ["Exercise", "Walks daily; limited by mild dyspnea on exertion"],
-    ["Housing", "Single-family home"],
-    ["Safety", "No concerns; husband is primary support; daughter visits weekly"],
-    ["Advance Directive", "Yes — full code; healthcare proxy: husband (David Lawson)"]
+    [
+      "Occupation",
+      "Part-time office manager; reduced hours since diagnosis"
+    ],
+    [
+      "Marital",
+      "Married x 38 years; lives with husband"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 35 pack-years (1 PPD x 35 years); quit 09/2023 at diagnosis"
+    ],
+    [
+      "Alcohol",
+      "Social — 1-2 glasses wine per week"
+    ],
+    [
+      "Drugs",
+      "None"
+    ],
+    [
+      "Exercise",
+      "Walks daily; limited by mild dyspnea on exertion"
+    ],
+    [
+      "Housing",
+      "Single-family home"
+    ],
+    [
+      "Safety",
+      "No concerns; husband is primary support; daughter visits weekly"
+    ],
+    [
+      "Advance Directive",
+      "Yes — full code; healthcare proxy: husband (David Lawson)"
+    ]
   ],
   "meta": {
     "caseId": "brain-metastasis",
@@ -303,75 +456,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Patricia Lawson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Patricia appears anxious but cooperative, clearly shaken by this new symptom. She's forthcoming with information but seems worried about what this seizure means for her cancer prognosis. Her distress level is moderate - she's maintaining composure but you can sense her underlying fear.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened during the seizure?",
+      "How long did the seizure last?",
+      "Did you lose consciousness or have any memory loss?",
+      "Have you had any headaches recently?",
+      "Any vision changes or visual disturbances?",
+      "Have you noticed any weakness or numbness in your arms or legs?",
+      "Any confusion, difficulty speaking, or trouble finding words?",
+      "Have you had any nausea or vomiting?",
+      "Any changes in your balance or coordination?",
+      "Have you been taking all your cancer medications as prescribed?",
+      "Any recent changes in your cancer treatment?",
+      "Have you had any recent imaging studies of your brain?",
+      "Any family history of seizures or brain tumors?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been coming in regularly for my cancer treatments and generally feeling pre.'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Brain Metastases.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Durvalumab 10mg/kg IV q2 weeks; Tiotropium (Spiriva) 18mcg inhaled daily; Albuterol MDI 90mcg 2 puffs Q4-6h PRN; Lisinopril 10mg daily; Denosumab (Prolia) 60mg SC q6 months; Ondansetron 4mg Q8h PRN.'",
-        "allergies": "'My allergies are Penicillin, Shellfish.'",
-        "family": "Mother (age 86): Hypertension, osteoarthritis \u2014 alive and well  Father: Deceased at age 71 \u2014 lung cancer (small cell), 50 pack-year smoker  Sister (age 58): Breast cancer \u2014 stage I, treated with lumpectomy/radiation 2021, NED",
-        "social": "Occupation: Part-time office manager; reduced hours since diagnosis  Marital: Married x 38 years; lives with husband  Tobacco: Former smoker \u2014 35 pack-years (1 PPD x 35 years); quit 09/2023 at diagnosis  Alcohol: Social \u2014 1-2 glasses wine per week  Drugs: None"
+      "default": "I'm sorry, I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "It happened about 2 hours ago while I was sitting at the kitchen table having breakfast. My husband said I just started shaking all over and my eyes rolled back.",
+      "character": "My husband described it as my whole body shaking and jerking. I was making some kind of grunting sounds. It was terrifying for him to watch.",
+      "location": "The shaking was all over my body, but my husband said it seemed to start on the right side of my face and then spread.",
+      "severity": "I don't remember the seizure itself, but the aftermath has been awful - about an 8 out of 10. I'm exhausted, confused, and have a terrible headache.",
+      "aggravating": "The headache gets worse when I move my head quickly or when the lights are bright.",
+      "relieving": "Nothing really helps the headache. I tried some Tylenol but it didn't touch it.",
+      "associated": "I've had this nagging headache for about a week now, and I've been feeling a bit more confused lately. Sometimes I have trouble finding the right words.",
+      "denies": "No fever, no chest pain, no shortness of breath beyond my usual COPD symptoms. No recent falls or head injuries.",
+      "history": "Never had anything like this before in my life. No seizures, no fainting spells, nothing.",
+      "medications": "Durvalumab 10mg/kg IV q2 weeks; Tiotropium (Spiriva) 18mcg inhaled daily; Albuterol MDI 90mcg 2 puffs Q4-6h PRN; Lisinopril 10mg daily; Denosumab (Prolia) 60mg SC q6 months; Ondansetron 4mg Q8h PRN",
+      "allergies": "Penicillin, Shellfish",
+      "family": "My father died from lung cancer, but no one in my family has ever had seizures or brain problems that I know of.",
+      "social": "I work part-time as an office manager but had to reduce my hours since my cancer diagnosis. I'm married and live with my husband. I quit smoking when I was diagnosed in September 2023 - I smoked a pack a day for 35 years. I only drink socially, maybe 1-2 glasses of wine per week."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Mental status examination",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Deep tendon reflexes",
+      "Coordination testing",
+      "Gait assessment",
+      "Fundoscopic examination",
+      "Sensory examination",
+      "Babinski reflex",
+      "Speech and language assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Brain Metastases. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Brain Metastases. Document specifically what you observe."
+      "Mental status examination": "Alert but mildly confused, oriented to person and place but unsure of date. Difficulty with attention and short-term memory. Mild word-finding difficulty.",
+      "Cranial nerve examination": "Subtle right facial droop, mild right homonymous hemianopsia on visual field testing. Other cranial nerves intact.",
+      "Motor strength testing": "Mild right-sided weakness - right arm 4/5, right leg 4+/5. Left side strength 5/5 throughout.",
+      "Deep tendon reflexes": "Hyperreflexic on the right (3+), normal on the left (2+). Right ankle clonus present.",
+      "Coordination testing": "Mild dysmetria on right finger-to-nose testing. Left side coordination normal.",
+      "Gait assessment": "Unsteady with mild right leg weakness, favoring left side. Requires minimal assistance.",
+      "Fundoscopic examination": "Mild papilledema bilaterally consistent with increased intracranial pressure.",
+      "Sensory examination": "Decreased light touch and pinprick sensation on right side compared to left.",
+      "Babinski reflex": "Upgoing on the right, downgoing on the left.",
+      "Speech and language assessment": "Mild expressive aphasia with word-finding difficulties. Comprehension intact."
     },
     "ddxTargets": [
-        "Brain Metastases (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Brain Metastases (3 Lesions) from NSCLC with New-Onset Seizure — Left Frontal Dominant Lesion with Midline Shift",
+      "Primary brain tumor (glioblastoma)",
+      "Stroke (ischemic or hemorrhagic)",
+      "Meningitis or encephalitis",
+      "Hypoglycemia or other metabolic encephalopathy",
+      "Drug toxicity or withdrawal seizure",
+      "Hypertensive encephalopathy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Brain Metastases, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Brain Metastases, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Brain Metastases based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known cancer diagnosis and missing other acute causes of seizure like stroke or infection",
+      "prematureClosure": "Risk of immediately assuming brain metastases without considering other intracranial processes or systemic causes",
+      "availabilityBias": "Recent cases of simple seizure disorders might lead to underestimating the significance of focal neurological findings"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Patricia Lawson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Brain Metastases (3 Lesions) from NSCLC with New-Onset Seizure \u2014 Left Frontal Dominant Lesion with Midline Shift. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given that this is a new-onset seizure in a 62-year-old with known lung cancer, what specific features in your history and physical exam will help you distinguish between metastatic disease and other serious intracranial processes?",
+      "phase5": "Now that you've identified focal neurological deficits and signs of increased intracranial pressure, how does this change your differential? What's the most likely explanation for a new seizure with these findings in a patient with known NSCLC?",
+      "finalDebrief": "This case demonstrates how new neurological symptoms in cancer patients require urgent evaluation. The combination of new-onset seizure, focal deficits, and signs of increased ICP in a patient with NSCLC strongly suggests brain metastases. Notice how the initial presentation could have been attributed to various causes, but the focal findings and known primary malignancy guided us to the correct diagnosis."
     }
-}
+  }
 };

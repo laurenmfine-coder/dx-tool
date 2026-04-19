@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gerald Whitmore",
-  "patientHPI": "My wife keeps saying I'm more forgetful lately and sometimes I lose track of what day it is, but I think that's just normal aging. I have been getting these headaches in the front of my head on and off for the past month though.",
+    "patientHPI": "My wife keeps saying I'm more forgetful lately and sometimes I lose track of what day it is, but I think that's just normal aging. I have been getting these headaches in the front of my head on and off for the past month though.",
     "dob": "12/04/1954",
     "age": 70,
     "sex": "Male",
@@ -197,22 +197,88 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "162", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "LDH", "value": "342", "unit": "U/L", "range": "120-246", "flag": "H" },
-            { "test": "Uric Acid", "value": "8.2", "unit": "mg/dL", "range": "3.5-7.2", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "162",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "LDH",
+              "value": "342",
+              "unit": "U/L",
+              "range": "120-246",
+              "flag": "H"
+            },
+            {
+              "test": "Uric Acid",
+              "value": "8.2",
+              "unit": "mg/dL",
+              "range": "3.5-7.2",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "5.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.4", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "5.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -237,11 +303,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (High-Dose — Fluzone)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FH821K", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV798R", "mfr": "Pfizer" },
-    { "vaccine": "Pneumococcal (PCV20 — Prevnar 20)", "date": "12/2023", "site": "Left deltoid IM", "lot": "PV812T", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (1st dose)", "date": "01/2020", "site": "Right deltoid IM", "lot": "SH281K", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2nd dose)", "date": "03/2020", "site": "Right deltoid IM", "lot": "SH287K", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (High-Dose — Fluzone)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FH821K",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV798R",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "date": "12/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV812T",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (1st dose)",
+      "date": "01/2020",
+      "site": "Right deltoid IM",
+      "lot": "SH281K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2nd dose)",
+      "date": "03/2020",
+      "site": "Right deltoid IM",
+      "lot": "SH287K",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Mother: Deceased at age 84 — Alzheimer disease",
@@ -251,15 +347,42 @@ window.EMR_DATA = {
     "No family history of brain tumors or lymphoma"
   ],
   "socialHistory": [
-    ["Occupation", "Retired — former high school principal"],
-    ["Marital", "Married x 44 years; lives with wife"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Social — 1 glass wine with dinner most evenings"],
-    ["Drugs", "None"],
-    ["Exercise", "Daily walks with wife (prior to cognitive decline); now limited"],
-    ["Housing", "Single-family home; one level"],
-    ["Safety", "Wife reports she has hidden car keys due to driving concern; no falls; no wandering"],
-    ["Advance Directive", "Yes — full code; healthcare proxy: wife (Carol Whitmore)"]
+    [
+      "Occupation",
+      "Retired — former high school principal"
+    ],
+    [
+      "Marital",
+      "Married x 44 years; lives with wife"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Social — 1 glass wine with dinner most evenings"
+    ],
+    [
+      "Drugs",
+      "None"
+    ],
+    [
+      "Exercise",
+      "Daily walks with wife (prior to cognitive decline); now limited"
+    ],
+    [
+      "Housing",
+      "Single-family home; one level"
+    ],
+    [
+      "Safety",
+      "Wife reports she has hidden car keys due to driving concern; no falls; no wandering"
+    ],
+    [
+      "Advance Directive",
+      "Yes — full code; healthcare proxy: wife (Carol Whitmore)"
+    ]
   ],
   "meta": {
     "caseId": "cns-lymphoma",
@@ -270,75 +393,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gerald Whitmore is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Gerald appears mildly confused and somewhat irritated, frequently downplaying his symptoms and attributing them to 'normal aging.' He becomes defensive when pressed about cognitive changes but is more forthcoming about physical symptoms like headaches.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the seizure episode that brought you to the hospital today?",
+      "Tell me more about these headaches you've been having",
+      "Your wife mentioned memory problems - can you give me some examples?",
+      "Have you noticed any weakness, numbness, or trouble with coordination?",
+      "Any changes in your vision, speech, or hearing?",
+      "Have you had any nausea, vomiting, or changes in appetite?",
+      "Any recent weight loss or night sweats?",
+      "Have you had any infections recently or felt run down?",
+      "Tell me about your rheumatoid arthritis - how long have you had it and how is it treated?",
+      "Any family history of cancer or neurological problems?",
+      "Have you ever had seizures before today?",
+      "Any recent changes to your medications?",
+      "Have you been taking your methotrexate as prescribed?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My wife keeps saying I'm more forgetful lately and sometimes I lose track of wha.'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Primary CNS Lymphoma.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Methotrexate 15mg weekly (oral); Folic Acid 1mg daily (except methotrexate day); Metformin 1000mg BID; Glipizide 5mg BID; Losartan/HCTZ 50/12.5mg daily; Tamsulosin 0.4mg QHS.'",
-        "allergies": "'My allergies are Sulfa drugs (Sulfamethoxazole).'",
-        "family": "Mother: Deceased at age 84 \u2014 Alzheimer disease  Father: Deceased at age 78 \u2014 prostate cancer (indolent)  Sister (age 68): Rheumatoid arthritis, hypothyroidism",
-        "social": "Occupation: Retired \u2014 former high school principal  Marital: Married x 44 years; lives with wife  Tobacco: Never  Alcohol: Social \u2014 1 glass wine with dinner most evenings  Drugs: None"
+      "default": "I'm not sure what you're getting at. Can you ask me something more specific?",
+      "onset": "The headaches started maybe a month ago, just occasionally at first. My wife says the memory thing has been going on for a few months, but I think she's exaggerating.",
+      "character": "The headaches feel like pressure, mainly in the front of my head. As for the seizure, I don't really remember it - I just woke up in the ambulance.",
+      "location": "The headaches are mostly right here in the front, above my eyebrows. Sometimes they seem to go toward the back of my head too.",
+      "severity": "The headaches are maybe a 5 or 6 out of 10 when they're bad. They don't completely stop me from doing things, but they're annoying.",
+      "aggravating": "The headaches seem worse in the morning when I first get up. Bright lights bother me more than usual too.",
+      "relieving": "Tylenol helps a little with the headaches, but not completely. Lying down in a dark room seems to help some.",
+      "associated": "Now that you mention it, I have been feeling more tired lately, and sometimes I feel a little nauseous with the headaches. My wife says I've been walking a bit unsteady.",
+      "denies": "No fever that I know of, no vision changes, no trouble speaking. I haven't lost weight - if anything I think I've gained a little.",
+      "history": "I've had rheumatoid arthritis for about 8 years now. Started the methotrexate about 3 years ago when my joints got worse. It's helped a lot with the joint pain and swelling.",
+      "medications": "Methotrexate 15mg weekly (oral); Folic Acid 1mg daily (except methotrexate day); Metformin 1000mg BID; Glipizide 5mg BID; Losartan/HCTZ 50/12.5mg daily; Tamsulosin 0.4mg QHS",
+      "allergies": "Sulfa drugs (Sulfamethoxazole)",
+      "family": "My mother had Alzheimer's, which is why my wife is so worried about the memory thing. My father died of prostate cancer, but it was slow-growing. My sister has rheumatoid arthritis like me.",
+      "social": "I'm retired - used to be a high school principal. Been married 44 years. Never smoked, just have a glass of wine with dinner most nights. No drugs or anything like that."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Mental status examination including orientation and cognitive assessment",
+      "Cranial nerve examination",
+      "Motor strength testing of upper and lower extremities",
+      "Deep tendon reflexes",
+      "Coordination testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment",
+      "Fundoscopic examination",
+      "Neck stiffness assessment",
+      "Joint examination for RA activity",
+      "Lymph node examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Primary CNS Lymphoma. Document specifically what you observe."
+      "Mental status examination including orientation and cognitive assessment": "Oriented to person and place but unsure of exact date. Mini-mental status exam shows mild deficits in attention and short-term memory. Appears mildly confused during complex tasks.",
+      "Cranial nerve examination": "Pupils equal, reactive to light. Mild left facial weakness (CN VII). Other cranial nerves intact. No papilledema on fundoscopy.",
+      "Motor strength testing of upper and lower extremities": "Mild left-sided weakness, 4+/5 in left arm and leg. Right side strength normal 5/5.",
+      "Deep tendon reflexes": "Hyperreflexive on the left side (3+), normal on right (2+). Positive Babinski sign on left.",
+      "Coordination testing (finger-to-nose, heel-to-shin)": "Mild left-sided dysmetria and ataxia. Right side coordination normal.",
+      "Gait assessment": "Slightly unsteady gait with tendency to veer to the left. No obvious ataxia but mildly cautious stepping.",
+      "Fundoscopic examination": "No papilledema or retinal hemorrhages. Mild arteriolar narrowing consistent with hypertensive changes.",
+      "Neck stiffness assessment": "No nuchal rigidity. Full range of motion without pain.",
+      "Joint examination for RA activity": "Mild synovitis in MCPs and PIPs bilaterally, consistent with well-controlled RA. No acute flare.",
+      "Lymph node examination": "No palpable lymphadenopathy in cervical, axillary, or inguinal regions."
     },
     "ddxTargets": [
-        "Primary CNS Lymphoma (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Primary CNS Lymphoma (Suspected) — Periventricular Butterfly Lesion with Corpus Callosum Involvement in Immunosuppressed Patient on Methotrexate",
+      "Glioblastoma multiforme",
+      "Brain metastases from unknown primary",
+      "Bacterial brain abscess",
+      "Subdural hematoma",
+      "Alzheimer disease with seizure",
+      "Metabolic encephalopathy with seizure"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Primary CNS Lymphoma, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Primary CNS Lymphoma, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Primary CNS Lymphoma based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'normal aging' explanation for cognitive symptoms, especially given family history of Alzheimer's, while missing the immunosuppression context",
+      "prematureClosure": "May stop at common diagnoses like stroke or Alzheimer's without considering oncologic causes in this immunosuppressed patient",
+      "availabilityBias": "Might focus on more common causes of seizure in elderly rather than considering CNS lymphoma, which is rare but more likely in immunosuppressed patients"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gerald Whitmore's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Primary CNS Lymphoma (Suspected) \u2014 Periventricular Butterfly Lesion with Corpus Callosum Involvement in Immunosuppressed Patient on Methotrexate. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you've included both common and serious causes of new-onset seizure in a 70-year-old. Before you interview the patient, think about what specific risk factors this patient might have that could guide your questioning. What do you know about his medical history that might be relevant?",
+      "phase5": "Excellent history and physical exam. You've identified some concerning focal neurological findings and cognitive changes in an immunosuppressed patient. Given his medication regimen and the pattern of symptoms, what does this constellation suggest to you? How does his immunosuppression change your thinking about the most likely diagnoses?",
+      "finalDebrief": "This case highlights the importance of considering medication-induced immunosuppression as a major risk factor. Primary CNS lymphoma, while rare in the general population, has a much higher incidence in immunosuppressed patients like those on methotrexate. The bilateral periventricular location and butterfly pattern across the corpus callosum are classic imaging findings. How did your differential evolve as you gathered more information about his immunosuppression and focal findings?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Nguyen",
-  "patientHPI": "I've been taking my ADHD medication for a while now and it's been working great for school - I can focus in class and my grades are good. I play soccer with friends and feel pretty healthy overall, though I did hit my head pretty hard during a game last week and felt a bit foggy afterward.",
+    "patientHPI": "I've been taking my ADHD medication for a while now and it's been working great for school - I can focus in class and my grades are good. I play soccer with friends and feel pretty healthy overall, though I did hit my head pretty hard during a game last week and felt a bit foggy afterward.",
     "dob": "06/08/2003",
     "age": 21,
     "sex": "Male",
@@ -115,7 +115,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "160 lbs",
       "ht": "5'10\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "PCP Office"
     }
   ],
@@ -158,23 +158,95 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.6", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "46.2", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "230", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.6",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "46.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "230",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -225,15 +297,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Stroke at age 74"
   ],
   "socialHistory": [
-    ["Occupation", "College student (Junior)"],
-    ["Marital", "Single"],
-    ["Tobacco", "Occasional vaping; denies cigarettes"],
-    ["Alcohol", "Social — weekends only, 3-4 drinks"],
-    ["Drugs", "Occasional marijuana"],
-    ["Exercise", "Intramural soccer 2x/week; gym 3x/week"],
-    ["Housing", "Off-campus apartment with roommates"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "College student (Junior)"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Occasional vaping; denies cigarettes"
+    ],
+    [
+      "Alcohol",
+      "Social — weekends only, 3-4 drinks"
+    ],
+    [
+      "Drugs",
+      "Occasional marijuana"
+    ],
+    [
+      "Exercise",
+      "Intramural soccer 2x/week; gym 3x/week"
+    ],
+    [
+      "Housing",
+      "Off-campus apartment with roommates"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "diffuse-axonal-injury",
@@ -244,75 +343,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Tyler Nguyen appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Tyler appears anxious and somewhat confused, with periods of disorientation and delayed responses to questions. He seems cooperative but struggles to recall details clearly, often pausing mid-sentence or losing his train of thought. His affect is flat with intermittent agitation when discussing the incident.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did trauma start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened during the soccer game last week?",
+      "Did you lose consciousness at any point during or after the head injury?",
+      "How have you been feeling since the head injury - any changes in thinking or memory?",
+      "Are you experiencing any headaches, nausea, or vomiting?",
+      "Have you noticed any changes in your vision or hearing?",
+      "Are you having trouble sleeping or feeling more tired than usual?",
+      "Have you had any seizures or episodes where you felt like you were going to pass out?",
+      "How has your balance and coordination been since the injury?",
+      "Are you having difficulty concentrating, even more than your usual ADHD symptoms?",
+      "Have you noticed any changes in your personality or mood since the injury?",
+      "Are you taking all your usual medications as prescribed?",
+      "Have you used marijuana or alcohol since the head injury?",
+      "Have you had any other head injuries besides your previous concussion?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been taking my ADHD medication for a while now and it's been working great .'",
-        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Diffuse Axonal Injury.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Adderall XR 20mg daily; Fluticasone nasal spray 50mcg 2 sprays each nostril daily.'",
-        "allergies": "'My allergies are Amoxicillin, Tree pollen.'",
-        "family": "Father: Hypertension, alive at 52  Mother: Migraine headaches, alive at 49  Sister: ADHD, age 18",
-        "social": "Occupation: College student (Junior)  Marital: Single  Tobacco: Occasional vaping; denies cigarettes  Alcohol: Social \u2014 weekends only, 3-4 drinks  Drugs: Occasional marijuana"
+      "default": "Sorry, I'm having trouble focusing right now... can you repeat that question?",
+      "onset": "It happened about a week ago during a pickup soccer game. I collided with another player and hit my head on the ground pretty hard. I've been feeling off ever since then.",
+      "character": "It's hard to describe... I feel foggy, like I'm thinking through cotton. Everything takes more effort and I get confused easily. It's different from my usual ADHD symptoms.",
+      "location": "The impact was on the left side of my head, but the fogginess and confusion affects everything - my whole brain feels slow.",
+      "severity": "I'd say it's about a 6 or 7 out of 10 for how much it's affecting my daily life. I can't focus in class at all, which is saying something since my Adderall usually helps a lot.",
+      "aggravating": "Bright lights make it worse, and trying to concentrate on schoolwork or having conversations makes the mental fatigue much worse.",
+      "relieving": "Resting in a dark, quiet room helps a little, but nothing really makes it go away completely.",
+      "associated": "I've had some headaches, not terrible but persistent. I'm sleeping more but don't feel rested. Sometimes I feel dizzy when I stand up quickly.",
+      "denies": "I don't think I lost consciousness, but honestly I'm not completely sure. No vomiting, no seizures that I know of, no vision changes that I've noticed.",
+      "history": "I had a concussion in high school during football, but that resolved completely after a few weeks. This feels different and more severe.",
+      "medications": "Adderall XR 20mg daily; Fluticasone nasal spray 50mcg 2 sprays each nostril daily",
+      "allergies": "Amoxicillin, Tree pollen",
+      "family": "No family history of brain injuries or neurological problems, just my dad's high blood pressure and mom's migraines. My sister also has ADHD like me.",
+      "social": "I'm a junior in college studying business. I live in the dorms. I vape occasionally and drink socially on weekends, maybe 3-4 drinks. I smoke marijuana sometimes but haven't since the injury because I'm worried about making things worse."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Glasgow Coma Scale assessment",
+      "Neurological focal deficit examination",
+      "Cranial nerve examination",
+      "Cerebellar function testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment and balance testing",
+      "Cognitive assessment (orientation, memory, attention)",
+      "Fundoscopic examination",
+      "Assessment for signs of increased intracranial pressure",
+      "Pupillary light reflex and accommodation",
+      "Deep tendon reflexes and pathological reflexes"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Diffuse Axonal Injury. Document specifically what you observe."
+      "Glasgow Coma Scale assessment": "GCS 14 - opens eyes spontaneously, confused verbal response with some disorientation, follows commands appropriately",
+      "Neurological focal deficit examination": "No obvious focal motor or sensory deficits, but subtle bilateral coordination difficulties noted",
+      "Cranial nerve examination": "Cranial nerves II-XII grossly intact, though patient has difficulty with rapid alternating movements",
+      "Cerebellar function testing (finger-to-nose, heel-to-shin)": "Mild bilateral dysmetria present, more pronounced with eyes closed, suggesting diffuse cerebellar involvement",
+      "Gait assessment and balance testing": "Mildly unsteady gait with increased sway, positive Romberg test indicating balance dysfunction",
+      "Cognitive assessment (orientation, memory, attention)": "Oriented to person and place but uncertain of exact date, short-term memory impaired, sustained attention markedly decreased even compared to baseline ADHD",
+      "Fundoscopic examination": "No papilledema or retinal hemorrhages observed",
+      "Assessment for signs of increased intracranial pressure": "No obvious signs of elevated ICP - no papilledema, no Cushing's triad",
+      "Pupillary light reflex and accommodation": "Pupils equal, round, reactive to light and accommodation, no anisocoria",
+      "Deep tendon reflexes and pathological reflexes": "Deep tendon reflexes 2+ bilaterally, no pathological reflexes elicited"
     },
     "ddxTargets": [
-        "Diffuse Axonal Injury (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Diffuse Axonal Injury (correct diagnosis)",
+      "Post-concussive syndrome",
+      "Traumatic brain injury with contusion",
+      "Intracranial hemorrhage (subdural/epidural hematoma)",
+      "Brain tumor or space-occupying lesion",
+      "Medication-related cognitive changes",
+      "Substance abuse-related cognitive impairment"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Diffuse Axonal Injury, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Diffuse Axonal Injury, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Diffuse Axonal Injury based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the patient's known ADHD and attributing cognitive symptoms to baseline attention difficulties rather than recognizing new traumatic brain injury",
+      "prematureClosure": "May jump to simple concussion diagnosis given the clear trauma history without considering more severe diffuse brain injury patterns",
+      "availabilityBias": "Recent cases of substance abuse in college students might lead to overemphasis on drug/alcohol causes rather than structural brain injury"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Tyler Nguyen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Diffuse Axonal Injury. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview Tyler, consider what specific aspects of his cognitive presentation might help you differentiate between different types of traumatic brain injury. How might diffuse axonal injury present differently from a simple concussion or focal brain injury?",
+      "phase5": "Now that you've gathered your history and physical exam findings, what patterns do you notice in Tyler's cognitive and neurological presentation? How do his bilateral, non-focal findings and persistent cognitive impairment a week after injury inform your differential diagnosis?",
+      "finalDebrief": "Diffuse axonal injury represents widespread damage to white matter tracts throughout the brain, explaining Tyler's global cognitive dysfunction without focal deficits. How did his bilateral cerebellar signs, persistent cognitive impairment beyond typical concussion, and lack of focal findings support this diagnosis? What imaging would you order next, and how might this case have evolved differently if you had anchored on his ADHD history?"
     }
-}
+  }
 };

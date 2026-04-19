@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Gutierrez",
-  "patientHPI": "The shooting pain down both my legs has been getting much worse over the past month and a half, especially the left side. It goes down the outside of my calves into my feet, and now I'm getting numbness too. The pain gets worse when I walk, especially for longer distances.",
+    "patientHPI": "The shooting pain down both my legs has been getting much worse over the past month and a half, especially the left side. It goes down the outside of my calves into my feet, and now I'm getting numbness too. The pain gets worse when I walk, especially for longer distances.",
     "dob": "08/30/1969",
     "age": 56,
     "sex": "Female",
@@ -223,26 +223,86 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "162", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "162",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.8", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.8",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "38.4", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "264", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "264",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -310,15 +370,42 @@ window.EMR_DATA = {
     "Brother: Disc herniation (L4-L5, nonsurgical), alive at 58"
   ],
   "socialHistory": [
-    ["Occupation", "School cafeteria supervisor; on medical leave x 4 weeks for back pain"],
-    ["Marital", "Married 30 years; husband Carlos, age 58"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare; social occasions only"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited due to pain; previously walked 30 min daily; now only 1 block"],
-    ["Housing", "Single-family home with husband; one flight of stairs (increasingly difficult)"],
-    ["Safety", "Denies IPV; fall risk — uses handrail on stairs"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "School cafeteria supervisor; on medical leave x 4 weeks for back pain"
+    ],
+    [
+      "Marital",
+      "Married 30 years; husband Carlos, age 58"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare; social occasions only"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited due to pain; previously walked 30 min daily; now only 1 block"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband; one flight of stairs (increasingly difficult)"
+    ],
+    [
+      "Safety",
+      "Denies IPV; fall risk — uses handrail on stairs"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "bilateral-lumbar-radiculopathy",
@@ -329,75 +416,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Patricia Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Patricia appears anxious and frustrated about her worsening symptoms, particularly concerned about the new foot weakness affecting her ability to work. She is forthcoming with information but shows visible distress when describing the impact on her daily activities and fear about needing surgery like her father did.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when your current symptoms first started?",
+      "What does the pain feel like - sharp, burning, aching?",
+      "Where exactly do you feel the pain and does it travel anywhere?",
+      "On a scale of 1-10, how would you rate your pain?",
+      "What makes your pain and leg symptoms worse?",
+      "Have you found anything that helps relieve your symptoms?",
+      "Have you noticed any weakness in your legs or feet?",
+      "Any bowel or bladder problems?",
+      "Have you had similar episodes before?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Any family history of back problems?",
+      "Tell me about your work and daily activities"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started The shooting pain down both my legs has been getting much worse over the past mo.'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Bilateral Lumbar Radiculopathy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Gabapentin 600mg TID; Duloxetine 60mg daily; Meloxicam 15mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Acetaminophen 500mg q6h PRN.'",
-        "allergies": "'My allergies are Tramadol, Sulfa Drugs.'",
-        "family": "Father: T2DM, Spinal stenosis (surgery age 65), deceased at 78  Mother: HTN, Osteoarthritis, alive at 82  Sister: T2DM, Obesity, alive at 54",
-        "social": "Occupation: School cafeteria supervisor; on medical leave x 4 weeks for back pain  Marital: Married 30 years; husband Carlos, age 58  Tobacco: Never smoker  Alcohol: Rare; social occasions only  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Can you explain that differently?",
+      "onset": "The shooting pains started about 6 weeks ago, but they've gotten much worse in the last month. The foot weakness on my left side is new - just started about 2 weeks ago.",
+      "character": "It's like electrical shocks shooting down both legs, but worse on the left. Sometimes it's burning, sometimes sharp stabbing pain.",
+      "location": "The pain starts in my lower back and shoots down the outside of both legs to my calves and into my feet. The left side goes all the way to my big toe.",
+      "severity": "The pain is about 7 out of 10 most days, but when it shoots down my leg it can be a 9. I can barely walk across the cafeteria at work anymore.",
+      "aggravating": "Walking makes it much worse, especially going more than a block. Standing for long periods is terrible - I used to be on my feet all day at work. Bending forward sometimes helps a little.",
+      "relieving": "Sitting down helps some, and leaning forward on a shopping cart. My medications help a little but not like they used to.",
+      "associated": "My left foot feels weak - I've been tripping more and I can't lift my toes up properly. Both feet get numb and tingly, especially when the pain is bad.",
+      "denies": "No bowel or bladder problems. No fever or chills. The pain doesn't get worse with coughing or sneezing.",
+      "history": "I've had back problems for about 3 years, but never this bad with the leg pain and weakness. Usually it was just stiffness and some aching.",
+      "medications": "Gabapentin 600mg TID; Duloxetine 60mg daily; Meloxicam 15mg daily; Metformin 1000mg BID; Lisinopril 20mg daily; Acetaminophen 500mg q6h PRN",
+      "allergies": "Tramadol, Sulfa Drugs",
+      "family": "My father had spinal stenosis and had to have surgery when he was 65. He also had diabetes like me.",
+      "social": "I'm a school cafeteria supervisor but I've been on medical leave for 4 weeks because I can't stand and walk like I need to. I'm married, don't smoke, and rarely drink alcohol."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Straight leg raise test bilateral",
+      "Dorsiflexion strength testing bilateral",
+      "Plantarflexion strength testing bilateral",
+      "L5 dermatome sensation testing",
+      "S1 dermatome sensation testing",
+      "Achilles reflex testing bilateral",
+      "Patellar reflex testing bilateral",
+      "Gait assessment including heel walking",
+      "Lumbar spine range of motion",
+      "Lumbar extension test"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Bilateral Lumbar Radiculopathy. Document specifically what you observe."
+      "Straight leg raise test bilateral": "Positive bilaterally at 45 degrees, more pronounced on left with reproduction of radicular pain",
+      "Dorsiflexion strength testing bilateral": "Left ankle dorsiflexion 3/5 strength, right ankle dorsiflexion 4/5 strength",
+      "Plantarflexion strength testing bilateral": "Bilateral plantarflexion 4/5 strength, symmetric",
+      "L5 dermatome sensation testing": "Decreased sensation over dorsal aspect of both feet, more pronounced on left",
+      "S1 dermatome sensation testing": "Mildly decreased sensation over lateral aspects of both feet",
+      "Achilles reflex testing bilateral": "Diminished bilaterally, left more than right",
+      "Patellar reflex testing bilateral": "Normal and symmetric bilaterally",
+      "Gait assessment including heel walking": "Antalgic gait favoring left leg, unable to perform heel walking on left due to foot drop",
+      "Lumbar spine range of motion": "Limited lumbar flexion and extension due to pain, mild scoliosis",
+      "Lumbar extension test": "Reproduces bilateral lower extremity symptoms, worse with extension"
     },
     "ddxTargets": [
-        "Bilateral Lumbar Radiculopathy (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop) (correct diagnosis)",
+      "Lumbar Spinal Stenosis with Neurogenic Claudication",
+      "L5-S1 Disc Herniation with Nerve Root Compression",
+      "Cauda Equina Syndrome",
+      "Spinal Epidural Abscess",
+      "Peripheral Neuropathy (Diabetic)",
+      "Piriformis Syndrome"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Bilateral Lumbar Radiculopathy, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Bilateral Lumbar Radiculopathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Bilateral Lumbar Radiculopathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known diabetes and attributing symptoms to diabetic neuropathy rather than structural spine pathology",
+      "prematureClosure": "May stop at general 'sciatica' diagnosis without recognizing progressive neurologic deficit requiring urgent intervention",
+      "availabilityBias": "Common back pain presentations may overshadow the significance of progressive foot drop and bilateral involvement"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Patricia Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Bilateral Lumbar Radiculopathy (L5, with Progressive Left Foot Drop). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your initial differential diagnosis, what key historical features would help you distinguish between mechanical back pain and neurologic compromise? What red flags should you specifically ask about given this presentation?",
+      "phase5": "Based on your history and physical exam findings, what do the bilateral symptoms with asymmetric foot drop tell you about the anatomical level and urgency? How does this change your diagnostic thinking and next steps?",
+      "finalDebrief": "Let's trace how this case evolved from your initial DDx. The key was recognizing that bilateral radiculopathy with progressive foot drop represents significant neurologic compromise requiring urgent imaging and possible surgical consultation, not just medical management of chronic back pain. What clinical features distinguished this from diabetic neuropathy or simple mechanical back pain?"
     }
-}
+  }
 };

@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jayden Thomas",
-  "patientHPI": "My eyes have been really bothering me for weeks now — there's this thick, stringy stuff coming out of them and the light hurts so much I have to cover my eyes when I walk around. They feel like there's sand in them and they're so itchy I can't stop rubbing them.",
+      "patientHPI": "My eyes have been really bothering me for weeks now — there's this thick, stringy stuff coming out of them and the light hurts so much I have to cover my eyes when I walk around. They feel like there's sand in them and they're so itchy I can't stop rubbing them.",
       "dob": "02/04/2017",
       "age": "9",
       "sex": "Male",
@@ -976,94 +976,100 @@ window.EMR_DATA = {
       "Comorbidity",
       "Asthma and eczema — atopic triad"
     ]
-  ]
-,"references":[
-  {
-    "id": "VKC-Leonardi-2007",
-    "title": "Vernal keratoconjunctivitis: severe allergic eye disease with remodeling",
-    "authors": "Leonardi A, De Dominicis C, Motterle L.",
-    "journal": "Pediatr Allergy Immunol",
-    "year": 2007,
-    "doi": "10.1111/j.1399-3038.2007.00658.x",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK448118/",
-    "openAccess": true,
-    "validates": [
-      "Giant papillae, shield ulcers, Horner-Trantas dots",
-      "Young males, African American/Middle Eastern",
-      "Steroid-sparing: tacrolimus/cyclosporine",
-      "Shield ulcers → permanent corneal scarring"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "VKC-Leonardi-2007",
+      "title": "Vernal keratoconjunctivitis: severe allergic eye disease with remodeling",
+      "authors": "Leonardi A, De Dominicis C, Motterle L.",
+      "journal": "Pediatr Allergy Immunol",
+      "year": 2007,
+      "doi": "10.1111/j.1399-3038.2007.00658.x",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK448118/",
+      "openAccess": true,
+      "validates": [
+        "Giant papillae, shield ulcers, Horner-Trantas dots",
+        "Young males, African American/Middle Eastern",
+        "Steroid-sparing: tacrolimus/cyclosporine",
+        "Shield ulcers → permanent corneal scarring"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Jayden Thomas is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Jayden appears uncomfortable and distressed, frequently rubbing his swollen, red eyes despite being told not to. He squints and shields his eyes from light, speaking quietly and seeming withdrawn due to the persistent discomfort and inability to participate in normal activities. He's cooperative but clearly frustrated by missing school and being unable to play outside.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did your eye symptoms first start and how have they changed?",
+      "Can you describe what comes out of your eyes?",
+      "How bad is the itching in your eyes on a scale of 1-10?",
+      "Does light bother your eyes?",
+      "Have you had eye problems like this before?",
+      "What makes your eye symptoms worse?",
+      "What helps your eyes feel better?",
+      "Are you having trouble seeing clearly?",
+      "Do you have any skin rashes or breathing problems?",
+      "What medications are you currently taking for your eyes?",
+      "Do you have any allergies?",
+      "Has anyone in your family had severe eye allergies or asthma?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Olopatadine 0.2%; Prednisolone acetate 1%; Cold compresses; Cetirizine.'",
-        "allergies": "'My allergies: Grass pollen, Dust mite.'",
-        "family": "Mother: seasonal allergies  Father: eczema",
-        "social": "Context: Vernal keratoconjunctivitis (VKC) \u2014 severe form of allergic eye disease, not simple seasonal allergies  Risk: Giant papillae on tarsal conjunctiva \u2014 can cause corneal shield ulcers and permanent vision loss  Impact: Missing school \u2014 eyes swollen shut some mornings, photophobia  Comorbidity: Asthma and eczema \u2014 atopic triad"
+      "default": "I'm not sure what you mean. My eyes just really hurt and itch all the time.",
+      "onset": "My eyes started getting really bad about 2 weeks ago when it got warmer outside. They've been swollen shut some mornings and the itching is terrible.",
+      "character": "There's this thick, stringy stuff that comes out of my eyes - it's like clear snot but really thick. My eyes feel like there's sand in them.",
+      "location": "Both of my eyes hurt, but my right eye feels worse. The itching is mainly on the inside of my upper eyelids.",
+      "severity": "The itching is like a 9 out of 10 - I can't stop rubbing them even though it makes it worse. I can't even go to school some days because I can't see properly.",
+      "aggravating": "Being outside makes it much worse, especially when it's windy or sunny. Rubbing my eyes feels good for a second but then makes everything worse.",
+      "relieving": "The cold washcloths my mom puts on my eyes help a little, and the eye drops the doctor gave me help some too.",
+      "associated": "My nose has been stuffy and runny too. Sometimes my asthma gets worse when my eyes are really bad. My eczema on my arms is also acting up.",
+      "denies": "I don't have a fever or headache. My eyes don't hurt when I'm not looking at light. No double vision.",
+      "history": "This happens every spring and summer but this year is the worst it's ever been. Last year the eye drops worked better than they are now.",
+      "medications": "Olopatadine 0.2%; Prednisolone acetate 1%; Cold compresses; Cetirizine",
+      "allergies": "Grass pollen, Dust mite",
+      "family": "My mom gets bad seasonal allergies every spring and my dad has eczema like me.",
+      "social": "I'm in 4th grade but I've missed a lot of school lately because my eyes are swollen shut in the mornings. I can't play outside much anymore."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "External inspection of eyelids and periorbital area",
+      "Eversion of upper eyelids to examine tarsal conjunctiva",
+      "Examination of bulbar conjunctiva and limbus",
+      "Pupillary light reflex testing",
+      "Visual acuity assessment",
+      "Corneal examination with penlight",
+      "Assessment of conjunctival discharge",
+      "Examination of lower eyelids and fornices",
+      "Lymph node palpation (preauricular)",
+      "Basic fundoscopic examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "External inspection of eyelids and periorbital area": "Marked bilateral upper eyelid edema and erythema, more severe on right. Lichenified skin around eyes from chronic rubbing.",
+      "Eversion of upper eyelids to examine tarsal conjunctiva": "Giant papillae with classic cobblestone appearance on superior tarsal conjunctiva bilaterally, more prominent on right upper lid.",
+      "Examination of bulbar conjunctiva and limbus": "Bilateral conjunctival hyperemia and chemosis. Horner-Trantas dots visible at superior limbus bilaterally - pathognomonic whitish dots.",
+      "Pupillary light reflex testing": "Pupils reactive but patient demonstrates severe photophobia with consensual tearing and blepharospasm when light applied.",
+      "Visual acuity assessment": "Decreased visual acuity due to thick mucoid film over cornea and photophobia - approximately 20/40 both eyes when able to cooperate.",
+      "Corneal examination with penlight": "Early epithelial defect visible on superior cornea of right eye consistent with developing shield ulcer from papillae trauma.",
+      "Assessment of conjunctival discharge": "Thick, ropy, mucoid discharge bilaterally - classic stringy appearance that can be pulled into long strands.",
+      "Examination of lower eyelids and fornices": "Mild papillary reaction on lower tarsal conjunctiva but much less severe than upper lids.",
+      "Lymph node palpation (preauricular)": "No lymphadenopathy - helps distinguish from infectious conjunctivitis.",
+      "Basic fundoscopic examination": "Difficult due to photophobia and discharge, but no obvious retinal abnormalities when glimpsed."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Vernal keratoconjunctivitis with corneal involvement (correct diagnosis)",
+      "Atopic keratoconjunctivitis",
+      "Seasonal allergic conjunctivitis (severe)",
+      "Bacterial conjunctivitis with secondary allergic component",
+      "Viral keratoconjunctivitis",
+      "Contact dermatitis with secondary conjunctivitis",
+      "Giant papillary conjunctivitis from contact lens use"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'allergic conjunctivitis' and missing the severity of VKC with corneal involvement that requires urgent ophthalmology referral.",
+      "prematureClosure": "May stop at seasonal allergies without recognizing giant papillae and shield ulcer development that distinguishes VKC from simple allergic conjunctivitis.",
+      "availabilityBias": "Common seasonal allergies may overshadow recognition of this severe sight-threatening condition that requires immediate subspecialty care."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Jayden Thomas: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Good start with your differential. I notice you're considering allergic causes - that's appropriate given the seasonal pattern and family history. As you interview Jayden, pay special attention to the character and severity of symptoms. What specific findings would help you distinguish between simple seasonal allergies versus more severe forms of allergic eye disease?",
+      "phase5": "Excellent work identifying the giant papillae and Horner-Trantas dots - those are key findings. The thick ropy discharge and corneal changes you found are concerning. How does this clinical picture compare to typical seasonal allergic conjunctivitis? What are the implications of the corneal involvement you identified?",
+      "finalDebrief": "This case illustrates how VKC differs dramatically from simple allergic conjunctivitis. The giant papillae, Horner-Trantas dots, and developing shield ulcer make this diagnosis. The corneal involvement requires urgent ophthalmology referral as shield ulcers can cause permanent vision loss. Remember that severe atopic disease like VKC often presents as part of the atopic triad and requires aggressive management beyond typical allergy treatments."
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "James Brennan",
-  "patientHPI": "I've been sober for about six weeks now after I relapsed back in October, and I'm going to AA meetings three times a week. My appetite is coming back and I'm slowly gaining some weight back, plus I'm taking those vitamins you prescribed again.",
+    "patientHPI": "I've been sober for about six weeks now after I relapsed back in October, and I'm going to AA meetings three times a week. My appetite is coming back and I'm slowly gaining some weight back, plus I'm taking those vitamins you prescribed again.",
     "dob": "06/28/1979",
     "age": 46,
     "sex": "Male",
@@ -227,37 +227,163 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "78", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "8.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Albumin", "value": "3.2", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" },
-            { "test": "ALT (SGPT)", "value": "48", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "62", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "Alkaline Phosphatase", "value": "88", "unit": "U/L", "range": "44-147", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "78",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "8.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.2",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "48",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "62",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "88",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.4", "unit": "%", "range": "38.0-50.0", "flag": "L" },
-            { "test": "MCV", "value": "104.2", "unit": "fL", "range": "80-100", "flag": "H" },
-            { "test": "Platelet Count", "value": "142", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "5.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.4",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "104.2",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "H"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "142",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "ADDITIONAL",
           "results": [
-            { "test": "Magnesium", "value": "1.6", "unit": "mg/dL", "range": "1.7-2.2", "flag": "L" },
-            { "test": "Phosphorus", "value": "2.4", "unit": "mg/dL", "range": "2.5-4.5", "flag": "L" },
-            { "test": "Lipase", "value": "42", "unit": "U/L", "range": "0-60", "flag": "" },
-            { "test": "GGT", "value": "128", "unit": "U/L", "range": "0-65", "flag": "H" }
+            {
+              "test": "Magnesium",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "1.7-2.2",
+              "flag": "L"
+            },
+            {
+              "test": "Phosphorus",
+              "value": "2.4",
+              "unit": "mg/dL",
+              "range": "2.5-4.5",
+              "flag": "L"
+            },
+            {
+              "test": "Lipase",
+              "value": "42",
+              "unit": "U/L",
+              "range": "0-60",
+              "flag": ""
+            },
+            {
+              "test": "GGT",
+              "value": "128",
+              "unit": "U/L",
+              "range": "0-65",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -325,15 +451,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 43"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed; formerly auto mechanic; last worked 2024"],
-    ["Marital", "Divorced (2020); no children"],
-    ["Tobacco", "Current smoker — 1 PPD x 20 years (20 pack-year)"],
-    ["Alcohol", "Severe AUD — binge pattern; vodka primarily; currently 6 weeks sober"],
-    ["Drugs", "Denies current; prior marijuana use"],
-    ["Exercise", "Minimal; short walks occasionally"],
-    ["Housing", "Rents efficiency apartment; lives alone; brother nearby"],
-    ["Safety", "Denies IPV; fall risk when intoxicated; seatbelt usually"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Unemployed; formerly auto mechanic; last worked 2024"
+    ],
+    [
+      "Marital",
+      "Divorced (2020); no children"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 20 years (20 pack-year)"
+    ],
+    [
+      "Alcohol",
+      "Severe AUD — binge pattern; vodka primarily; currently 6 weeks sober"
+    ],
+    [
+      "Drugs",
+      "Denies current; prior marijuana use"
+    ],
+    [
+      "Exercise",
+      "Minimal; short walks occasionally"
+    ],
+    [
+      "Housing",
+      "Rents efficiency apartment; lives alone; brother nearby"
+    ],
+    [
+      "Safety",
+      "Denies IPV; fall risk when intoxicated; seatbelt usually"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "alcoholic-ketoacidosis",
@@ -344,75 +497,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "James Brennan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "James appears tired and somewhat withdrawn but cooperative, with mild confusion and difficulty concentrating. He speaks slowly but is forthcoming about his medical history, showing some anxiety about his condition while maintaining hope about his recent sobriety.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did altered mental status start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me what brought you in today and when you first noticed feeling unwell?",
+      "Have you been eating and drinking normally over the past few days?",
+      "Any nausea, vomiting, or abdominal pain recently?",
+      "How has your breathing been - any shortness of breath or rapid breathing?",
+      "Have you had any chest pain or heart palpitations?",
+      "When was your last drink of alcohol, and have you had any withdrawal symptoms?",
+      "Have you been taking your prescribed medications regularly?",
+      "Any recent infections, fever, or feeling sick?",
+      "Have you had episodes like this before?",
+      "Any changes in urination or excessive thirst?",
+      "Have you lost any weight recently or had decreased appetite?",
+      "Any family history of diabetes or metabolic conditions?",
+      "Have you been under any unusual stress or had any major life changes recently?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been sober for about six weeks now after I relapsed back in October, and I'.'",
-        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Alcoholic Ketoacidosis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily; Omeprazole 20mg daily; Sertraline 100mg daily; Pancrelipase 10,000 units with meals.'",
-        "allergies": "'My allergies are Disulfiram.'",
-        "family": "Father: Alcohol use disorder, Liver cirrhosis, deceased at 62  Mother: Depression, Hypertension, alive at 72  Brother: Alcohol use disorder (in recovery), alive at 49",
-        "social": "Occupation: Unemployed; formerly auto mechanic; last worked 2024  Marital: Divorced (2020); no children  Tobacco: Current smoker \u2014 1 PPD x 20 years (20 pack-year)  Alcohol: Severe AUD \u2014 binge pattern; vodka primarily; currently 6 weeks sober  Drugs: Denies current; prior marijuana use"
+      "default": "I'm sorry, I'm having trouble focusing right now. Could you repeat that or ask it differently?",
+      "onset": "I started feeling really weak and confused yesterday morning. My friend found me acting strange and brought me here because I wasn't making much sense.",
+      "character": "I feel really weak and tired, like I can barely think straight. Everything feels foggy and I'm having trouble concentrating on what you're saying.",
+      "location": "It's not really pain anywhere specific, just feeling awful all over. Maybe some mild stomach discomfort but nothing sharp.",
+      "severity": "I'd say the confusion and weakness is about a 7 out of 10. I can barely function normally and feel like I might pass out.",
+      "aggravating": "I think not eating much the past few days made it worse. I've been stressed about staying sober and lost my appetite.",
+      "relieving": "Nothing really helps. I tried lying down but still feel terrible. Maybe drinking some water helped a little.",
+      "associated": "I've been breathing a bit faster than usual and feeling nauseous. Haven't thrown up but came close a few times.",
+      "denies": "No fever, no chest pain, no diarrhea. Haven't been urinating more than usual and no vision changes.",
+      "history": "I've never had anything exactly like this before, though I've had bad withdrawal episodes in the past when I stopped drinking.",
+      "medications": "Thiamine 100mg daily; Folic Acid 1mg daily; Multivitamin daily; Omeprazole 20mg daily; Sertraline 100mg daily; Pancrelipase 10,000 units with meals",
+      "allergies": "Disulfiram",
+      "family": "My dad died from liver problems related to drinking when he was 62. My mom has depression and high blood pressure. My brother also struggles with alcohol but he's been sober for three years now.",
+      "social": "I'm unemployed right now, used to be an auto mechanic. I'm divorced and smoke about a pack a day. I've been sober for six weeks now after my last relapse in October. I go to AA three times a week and I'm really trying to stay clean this time."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Mental status examination and Glasgow Coma Scale",
+      "Vital signs including respiratory rate and pattern",
+      "Cardiovascular examination including heart rate and rhythm",
+      "Abdominal examination for tenderness and organomegaly",
+      "Assessment for dehydration and volume status",
+      "Neurological examination including reflexes and coordination",
+      "Respiratory examination and assessment of breathing pattern",
+      "Skin examination for jaundice or other stigmata",
+      "Assessment for alcohol withdrawal signs",
+      "Orthostatic vital signs"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Alcoholic Ketoacidosis. Document specifically what you observe."
+      "Mental status examination and Glasgow Coma Scale": "GCS 14 (E4V4M6), confused and disoriented to time, slow to respond to questions, difficulty with concentration",
+      "Vital signs including respiratory rate and pattern": "RR 22, slightly tachypneic with deep respirations suggestive of compensatory hyperventilation",
+      "Cardiovascular examination including heart rate and rhythm": "Regular rate and rhythm, no murmurs, mild tachycardia at 76 bpm",
+      "Abdominal examination for tenderness and organomegaly": "Mild epigastric tenderness, liver edge palpable 2cm below costal margin, no rebound or guarding",
+      "Assessment for dehydration and volume status": "Mild dehydration with slightly dry mucous membranes, skin tenting present",
+      "Neurological examination including reflexes and coordination": "Reflexes intact but slightly hyperreflexic, mild tremor in hands, coordination intact",
+      "Respiratory examination and assessment of breathing pattern": "Clear lung fields bilaterally, deep regular respirations with slight fruity odor to breath",
+      "Skin examination for jaundice or other stigmata": "Mild scleral icterus, no spider angiomata, some muscle wasting consistent with chronic illness",
+      "Assessment for alcohol withdrawal signs": "Mild tremor present, no hallucinations or seizure activity, CIWA score 8",
+      "Orthostatic vital signs": "Mild orthostatic changes: lying 132/78 HR 76, standing 128/82 HR 84"
     },
     "ddxTargets": [
-        "Alcoholic Ketoacidosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Alcoholic Ketoacidosis (correct diagnosis)",
+      "Diabetic Ketoacidosis",
+      "Acute alcohol withdrawal",
+      "Sepsis with altered mental status",
+      "Acute myocardial infarction",
+      "Starvation ketosis",
+      "Hepatic encephalopathy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Alcoholic Ketoacidosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Alcoholic Ketoacidosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Alcoholic Ketoacidosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on alcohol withdrawal given his history of AUD and recent sobriety, potentially missing the metabolic ketoacidosis component",
+      "prematureClosure": "May quickly assume this is simple withdrawal or intoxication without fully investigating the metabolic derangement causing altered mental status",
+      "availabilityBias": "Tendency to think of diabetic ketoacidosis first when seeing ketoacidosis, potentially overlooking alcoholic ketoacidosis in non-diabetic patients"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed James Brennan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Alcoholic Ketoacidosis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at this 46-year-old man with altered mental status and a significant alcohol history, what metabolic complications might you be concerned about in someone who recently stopped drinking? Consider both the direct effects of alcohol cessation and the metabolic consequences of poor nutrition.",
+      "phase5": "You've identified a patient with altered mental status, mild dehydration, and compensatory hyperventilation. Given his alcohol history and recent poor oral intake, what specific laboratory studies would help you differentiate between the various causes of metabolic acidosis?",
+      "finalDebrief": "This case illustrates how alcoholic ketoacidosis can present similarly to diabetic ketoacidosis but occurs in non-diabetic patients with alcohol use disorder. The key differentiators include the absence of significant hyperglycemia, the association with recent cessation of alcohol and poor oral intake, and the presence of ketosis with anion gap acidosis. How did your differential diagnosis evolve as you gathered more information about his recent sobriety and nutritional status?"
     }
-}
+  }
 };

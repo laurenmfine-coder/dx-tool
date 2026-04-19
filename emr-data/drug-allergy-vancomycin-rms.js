@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Gerald Hagen",
-  "patientHPI": "About halfway through getting my IV antibiotic, my skin started turning red and I began itching all over my upper body. The itching was really intense and uncomfortable, so they called for the allergy team to come check on me.",
+      "patientHPI": "About halfway through getting my IV antibiotic, my skin started turning red and I began itching all over my upper body. The itching was really intense and uncomfortable, so they called for the allergy team to come check on me.",
       "dob": "11/09/1961",
       "age": "65",
       "sex": "Male",
@@ -885,42 +885,41 @@ window.EMR_DATA = {
       "Plan consideration",
       "Slower infusion rate, premedication, vs desensitization protocol"
     ]
-  ]
-,"references":[
-  {
-    "id": "Drug-Allergy-PP-2022",
-    "title": "Drug allergy: A 2022 practice parameter update",
-    "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2022,
-    "doi": "10.1016/j.jaci.2022.08.028",
-    "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
-    "openAccess": true,
-    "validates": [
-      "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
-      "Single-dose amoxicillin challenge for low-risk",
-      "Vancomycin RMS management",
-      "AERD aspirin desensitization protocol",
-      "Sulfonamide challenge protocols"
-    ]
-  },
-  {
-    "id": "Vanc-RMS-2003",
-    "title": "Red man syndrome",
-    "authors": "Sivagnanam S, Deleu D.",
-    "journal": "Crit Care",
-    "year": 2003,
-    "doi": "10.1186/cc1871",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC270697/",
-    "openAccess": true,
-    "validates": [
-      "RMS = histamine release, NOT IgE",
-      "Slow infusion ≥2h + premedication",
-      "NOT a true allergy"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "Drug-Allergy-PP-2022",
+      "title": "Drug allergy: A 2022 practice parameter update",
+      "authors": "Khan DA, Banerji A, Blumenthal KG, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2022,
+      "doi": "10.1016/j.jaci.2022.08.028",
+      "url": "https://www.jacionline.org/article/S0091-6749(22)01186-1/fulltext",
+      "openAccess": true,
+      "validates": [
+        "PCN skin testing for anaphylaxis history; direct challenge for remote benign reactions",
+        "Single-dose amoxicillin challenge for low-risk",
+        "Vancomycin RMS management",
+        "AERD aspirin desensitization protocol",
+        "Sulfonamide challenge protocols"
+      ]
+    },
+    {
+      "id": "Vanc-RMS-2003",
+      "title": "Red man syndrome",
+      "authors": "Sivagnanam S, Deleu D.",
+      "journal": "Crit Care",
+      "year": 2003,
+      "doi": "10.1186/cc1871",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC270697/",
+      "openAccess": true,
+      "validates": [
+        "RMS = histamine release, NOT IgE",
+        "Slow infusion ≥2h + premedication",
+        "NOT a true allergy"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Red Man Syndrome (RMS) is a non-IgE, non-immune pharmacologic mast cell activation via MRGPRX2 receptor by vancomycin. Flushing, pruritus, erythema of face/neck/upper torso occur during or within 4–10 minutes of infusion. NOT an allergic reaction — NOT a contraindication to future vancomycin use.",
@@ -939,75 +938,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gerald Hagen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Gerald appears anxious and slightly frustrated about his reaction to the antibiotic he needs for his serious infection. He is cooperative and detailed in describing his symptoms but worried about whether he can safely receive the treatment his doctors say is necessary for his MRSA bacteremia.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate rms from allergy start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened during your vancomycin infusion?",
+      "How quickly did your symptoms start after the infusion began?",
+      "What did the flushing and rash look like?",
+      "Where on your body did you notice the flushing and rash?",
+      "Did you have any difficulty breathing or throat tightness?",
+      "How long did it take for the infusion to run?",
+      "Did you have any nausea, vomiting, or abdominal cramping?",
+      "Have you ever had vancomycin before this admission?",
+      "Do you have any known drug allergies?",
+      "Did your blood pressure drop or did you feel dizzy?",
+      "How long did the symptoms last after stopping the infusion?",
+      "Did you receive any medications like Benadryl that helped?",
+      "Have you had similar reactions to any other antibiotics?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Gerald Hagen presents with flushing, pruritus, and rash during vancomycin infusi.'",
-        "character": "'It's flushing, pruritus, and rash during vancomycin infusion \u2014 consult to differentiate rms from allergy \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Vancomycin.'",
-        "allergies": "'My allergies are Vancomycin.'",
-        "family": "Non-contributory",
-        "social": "Infusion details: 1g infused over 30 minutes (too fast) \u2014 flushing appeared in upper body  Key question: Rate-related RMS vs true IgE-mediated allergy?  Plan consideration: Slower infusion rate, premedication, vs desensitization protocol"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "The flushing started about 15-20 minutes after they started the IV antibiotic. It came on pretty quickly.",
+      "character": "My face and neck got really red and warm, like a sunburn, and I felt itchy all over. It was uncomfortable but not painful.",
+      "location": "The redness started on my face and neck, then spread down to my chest and arms. The itching was mostly on my upper body too.",
+      "severity": "I'd say about a 6 out of 10 for discomfort. It was definitely bothersome and made me worried, but not excruciating.",
+      "aggravating": "It seemed to get worse as more of the medicine went in. Nothing specific made it worse after that.",
+      "relieving": "The nurses stopped the IV right away and gave me some Benadryl. That seemed to help within about 30 minutes.",
+      "associated": "I felt a bit itchy and my skin was warm to touch. No trouble breathing or swallowing though.",
+      "denies": "No, I didn't have any trouble breathing, no throat swelling, no dizziness or feeling faint, no nausea or stomach problems.",
+      "history": "This is the first time I've ever had vancomycin. Never had a reaction like this to any medication before.",
+      "medications": "Vancomycin",
+      "allergies": "Vancomycin",
+      "family": "No one in my family has drug allergies that I know of.",
+      "social": "I'm retired from construction work. I don't smoke, have maybe one beer on weekends. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for erythema and rash pattern",
+      "Palpate skin for warmth and texture",
+      "Examine oropharynx for edema",
+      "Auscultate lungs for wheezing",
+      "Check vital signs including blood pressure",
+      "Assess lymph nodes for enlargement",
+      "Examine conjunctiva for injection",
+      "Assess capillary refill and peripheral perfusion",
+      "Check for urticaria or hives",
+      "Examine IV site for local reaction"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin for erythema and rash pattern": "Mild residual erythema on upper chest and neck, no raised lesions or urticaria",
+      "Palpate skin for warmth and texture": "Skin temperature normal, no increased warmth, normal texture without edema",
+      "Examine oropharynx for edema": "Oropharynx clear, no erythema or edema of lips, tongue, or posterior pharynx",
+      "Auscultate lungs for wheezing": "Clear breath sounds bilaterally, no wheezing or stridor",
+      "Check vital signs including blood pressure": "BP 138/82, stable from baseline, HR 88 regular",
+      "Assess lymph nodes for enlargement": "No cervical, axillary, or inguinal lymphadenopathy",
+      "Examine conjunctiva for injection": "Conjunctiva clear, no injection or tearing",
+      "Assess capillary refill and peripheral perfusion": "Capillary refill <2 seconds, good peripheral perfusion",
+      "Check for urticaria or hives": "No urticarial lesions, wheals, or raised erythematous patches",
+      "Examine IV site for local reaction": "IV site clean without erythema, induration, or local reaction"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Red Man Syndrome (correct diagnosis)",
+      "IgE-mediated vancomycin allergy",
+      "Non-specific drug hypersensitivity reaction",
+      "Anaphylaxis",
+      "Angioedema",
+      "Contact dermatitis from IV materials",
+      "Systemic inflammatory response syndrome"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'vancomycin allergy' label without considering rate-dependent Red Man Syndrome as more likely given rapid infusion time and symptom pattern",
+      "prematureClosure": "May jump to conclude true allergy without carefully examining infusion rate, timing, and absence of IgE-mediated features like urticaria or respiratory symptoms",
+      "availabilityBias": "Recent cases of drug allergies may overshadow the more common but less dramatic Red Man Syndrome diagnosis"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gerald Hagen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Before you interview the patient, think about the key distinguishing features between Red Man Syndrome and a true IgE-mediated allergic reaction. What specific historical details and timeline would help you differentiate these two conditions?",
+      "phase5": "Excellent history and physical exam. Now let's think through this systematically - you noted the rapid infusion rate and the specific symptom pattern. How does the absence of urticaria, respiratory symptoms, and hypotension help narrow your differential? What does this tell you about the underlying mechanism?",
+      "finalDebrief": "This case highlights the importance of distinguishing Red Man Syndrome from true vancomycin allergy. The key differentiators were the rapid infusion rate (30 minutes vs recommended 60+ minutes), the specific pattern of upper body flushing without urticaria, and the absence of IgE-mediated features. This distinction is clinically crucial because Red Man Syndrome can be prevented with slower infusion rates and premedication, allowing continued vancomycin use for serious MRSA infections."
     }
-}
+  }
 };

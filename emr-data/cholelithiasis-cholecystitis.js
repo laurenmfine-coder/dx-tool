@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Natasha Pierre-Louis",
-  "patientHPI": "I keep getting these awful pains in my upper right side, especially after I eat anything greasy or fatty. It usually lasts about an hour and shoots around to my back, and I feel really nauseous when it happens. This has happened three times in the past few months.",
+    "patientHPI": "I keep getting these awful pains in my upper right side, especially after I eat anything greasy or fatty. It usually lasts about an hour and shoots around to my back, and I feel really nauseous when it happens. This has happened three times in the past few months.",
     "dob": "08/06/1982",
     "age": 43,
     "sex": "Female",
@@ -173,26 +173,86 @@ window.EMR_DATA = {
         {
           "name": "HEPATIC PANEL",
           "results": [
-            { "test": "ALT", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "ALP", "value": "82", "unit": "U/L", "range": "44-147", "flag": "" },
-            { "test": "Total Bilirubin", "value": "0.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "" },
-            { "test": "Direct Bilirubin", "value": "0.2", "unit": "mg/dL", "range": "0.0-0.3", "flag": "" }
+            {
+              "test": "ALT",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "ALP",
+              "value": "82",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Direct Bilirubin",
+              "value": "0.2",
+              "unit": "mg/dL",
+              "range": "0.0-0.3",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "7.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "38.4", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelets", "value": "264", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "264",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPASE",
           "results": [
-            { "test": "Lipase", "value": "42", "unit": "U/L", "range": "10-140", "flag": "" }
+            {
+              "test": "Lipase",
+              "value": "42",
+              "unit": "U/L",
+              "range": "10-140",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -217,10 +277,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9612", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-2614", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "08/2023", "site": "Left deltoid IM", "lot": "TD23-518", "mfr": "GSK" },
-    { "vaccine": "Hepatitis B Series", "date": "2005", "site": "Right deltoid IM", "lot": "HB05-402", "mfr": "Merck" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9612",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2614",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "08/2023",
+      "site": "Left deltoid IM",
+      "lot": "TD23-518",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Hepatitis B Series",
+      "date": "2005",
+      "site": "Right deltoid IM",
+      "lot": "HB05-402",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother: Gallstones — cholecystectomy at age 40; HTN; alive at 68",
@@ -229,15 +313,42 @@ window.EMR_DATA = {
     "Brother: Sickle cell disease (SS); alive at 38 (frequent crises)"
   ],
   "socialHistory": [
-    ["Occupation", "Administrative assistant at law firm; full-time, sedentary work"],
-    ["Marital", "Married 16 years; 2 children (ages 8 and 11)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — occasional wine at holidays"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 2x/week; limited by knee pain (weight-related)"],
-    ["Housing", "Townhouse with husband and children"],
-    ["Safety", "Denies IPV; seatbelt; no firearms"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Administrative assistant at law firm; full-time, sedentary work"
+    ],
+    [
+      "Marital",
+      "Married 16 years; 2 children (ages 8 and 11)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional wine at holidays"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 2x/week; limited by knee pain (weight-related)"
+    ],
+    [
+      "Housing",
+      "Townhouse with husband and children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "cholelithiasis-cholecystitis",
@@ -248,75 +359,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Natasha Pierre-Louis is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Natasha appears anxious and uncomfortable, frequently shifting in her chair and holding her right upper abdomen. She is cooperative and articulate but clearly distressed, speaking in a slightly strained voice and occasionally pausing to grimace when pain flares. She seems frustrated that these episodes keep recurring despite knowing about her gallstones.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did toxicologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the pain you're experiencing right now?",
+      "When did this current episode of pain begin?",
+      "Have you noticed any yellowing of your skin or eyes recently?",
+      "What color has your urine been lately?",
+      "Have you had any fever, chills, or night sweats?",
+      "Tell me about your bowel movements - any changes in color or consistency?",
+      "Have you experienced any nausea or vomiting with this episode?",
+      "You mentioned previous episodes - how does this compare to those?",
+      "I see you have a history of gallstones - have you been recommended for surgery?",
+      "Are you taking any medications regularly?",
+      "Do you have any medication allergies?",
+      "Tell me about your family history, particularly regarding gallbladder problems",
+      "Have you eaten anything specific that might have triggered this episode?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I keep getting these awful pains in my upper right side, especially after I eat .'",
-        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Calculous Cholecystitis with Choledocholithiasis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 5mg daily; Acetaminophen 500mg PRN; Omeprazole 20mg daily.'",
-        "allergies": "'My allergies are Erythromycin.'",
-        "family": "Mother: Gallstones \u2014 cholecystectomy at age 40; HTN; alive at 68  Father: Sickle cell trait; T2DM; alive at 72  Sister: Gallstones; sickle cell trait; alive at 40",
-        "social": "Occupation: Administrative assistant at law firm; full-time, sedentary work  Marital: Married 16 years; 2 children (ages 8 and 11)  Tobacco: Never smoker  Alcohol: Rare \u2014 occasional wine at holidays  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble focusing because of this pain.",
+      "onset": "This pain started yesterday evening around 8 PM, about two hours after I had fried chicken for dinner. It's been constant since then, not like my usual episodes that come and go.",
+      "character": "It's a sharp, cramping pain that feels like someone is squeezing my right side with a vice. It's much more intense and constant than my previous episodes.",
+      "location": "The pain is right here under my right ribs and shoots straight through to my back, right between my shoulder blades. Sometimes I feel it up in my right shoulder too.",
+      "severity": "Right now it's about an 8 out of 10. My previous episodes were maybe a 6, but this is much worse and it won't go away. I can barely concentrate at work.",
+      "aggravating": "Any fatty or greasy food makes it worse. Even thinking about food makes me nauseous. Moving around or taking deep breaths makes the pain sharper.",
+      "relieving": "Nothing seems to help this time. Usually acetaminophen would take the edge off my previous episodes, but I've taken it twice and it's not touching this pain.",
+      "associated": "I've been feeling really nauseous and threw up twice yesterday. I've also noticed my urine is much darker than usual, almost like tea. I've had chills and feel feverish.",
+      "denies": "I haven't had any chest pain, shortness of breath, or diarrhea. No blood in my vomit or stool.",
+      "history": "I've had three similar episodes in the past six months, but they were milder and went away after a few hours. My doctor found gallstones on an ultrasound three months ago and recommended surgery, but I kept putting it off because of work and the kids.",
+      "medications": "Amlodipine 5mg daily; Acetaminophen 500mg PRN; Omeprazole 20mg daily",
+      "allergies": "Erythromycin",
+      "family": "My mother had her gallbladder removed when she was 40 because of gallstones. My sister also has gallstones and has the sickle cell trait like me. My father has the sickle cell trait too.",
+      "social": "I work as an administrative assistant at a law firm - mostly desk work. I'm married with two kids. I don't smoke, and I only drink wine occasionally during holidays. No drugs."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "Murphy's sign",
+      "Abdominal inspection",
+      "Right upper quadrant palpation",
+      "Scleral and skin examination for jaundice",
+      "Courvoisier's sign assessment",
+      "Rovsing's sign",
+      "Psoas sign",
+      "Bowel sounds auscultation",
+      "Vital signs assessment",
+      "Charcot's triad evaluation"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Acute Calculous Cholecystitis with Choledocholithiasis. Document specifically what you observe."
+      "Murphy's sign": "Positive - patient experiences severe pain and inspiratory arrest when palpating right subcostal area during deep inspiration",
+      "Abdominal inspection": "Mild distention, patient guards right upper quadrant, no visible masses or hernias",
+      "Right upper quadrant palpation": "Severe tenderness with guarding and rigidity in right subcostal area, no palpable gallbladder",
+      "Scleral and skin examination for jaundice": "Pronounced scleral icterus and mild jaundice of skin, particularly noticeable in natural light",
+      "Courvoisier's sign assessment": "Negative - no palpable gallbladder despite jaundice",
+      "Rovsing's sign": "Negative - no right lower quadrant pain with left lower quadrant palpation",
+      "Psoas sign": "Negative - no pain with hip flexion against resistance",
+      "Bowel sounds auscultation": "Hypoactive bowel sounds throughout all quadrants",
+      "Vital signs assessment": "BP 148/92, HR 104 (tachycardic), Temp 102.4°F (febrile), SpO2 97%",
+      "Charcot's triad evaluation": "Present - fever, jaundice, and right upper quadrant pain consistent with ascending cholangitis"
     },
     "ddxTargets": [
-        "Acute Calculous Cholecystitis with Choledocholithiasis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone with Obstructive Jaundice — Patient Who Deferred Elective Cholecystectomy, Sickle Cell Trait with Pigmented Stones) (correct diagnosis)",
+      "Ascending cholangitis",
+      "Acute pancreatitis",
+      "Hepatitis (viral or drug-induced)",
+      "Perforated peptic ulcer",
+      "Right lower lobe pneumonia",
+      "Acute appendicitis (retrocecal)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Calculous Cholecystitis with Choledocholithiasis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Calculous Cholecystitis with Choledocholithiasis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Calculous Cholecystitis with Choledocholithiasis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known gallstones and missing the CBD stone component and developing cholangitis, or focusing only on cholecystitis without recognizing biliary obstruction",
+      "prematureClosure": "May stop at simple cholecystitis diagnosis without recognizing the more serious choledocholithiasis and obstructive jaundice requiring urgent intervention",
+      "availabilityBias": "Recent cases of simple biliary colic might lead to underestimating severity, or unfamiliarity with sickle cell trait predisposition to pigmented stones"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Natasha Pierre-Louis's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Calculous Cholecystitis with Choledocholithiasis (CBD Stone with Obstructive Jaundice \u2014 Patient Who Deferred Elective Cholecystectomy, Sickle Cell Trait with Pigmented Stones). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider what additional information would help you differentiate between uncomplicated cholecystitis and more serious biliary complications. What specific questions about the character and evolution of her symptoms might be most revealing given her known gallstone history?",
+      "phase5": "Now that you've completed your history and physical, let's think through what you've found. You have a patient with known gallstones who presents with Charcot's triad. How does this change your assessment of urgency, and what does the presence of jaundice tell you about the location of the problem?",
+      "finalDebrief": "This case illustrates the progression from asymptomatic cholelithiasis to acute cholecystitis with choledocholithiasis. Notice how the patient's sickle cell trait predisposed her to pigmented stones, and her decision to defer elective surgery led to this emergency presentation. The presence of Charcot's triad indicated ascending cholangitis requiring urgent decompression. What clues in the history and physical examination helped distinguish this from uncomplicated cholecystitis?"
     }
-}
+  }
 };

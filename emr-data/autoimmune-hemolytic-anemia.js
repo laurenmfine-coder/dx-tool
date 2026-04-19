@@ -169,31 +169,121 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "18.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Lymphocytes", "value": "78", "unit": "%", "range": "20-40", "flag": "H" },
-            { "test": "ALC", "value": "14.2", "unit": "x10³/µL", "range": "1.0-4.8", "flag": "H" },
-            { "test": "Hemoglobin", "value": "13.0", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "38.8", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "185", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "18.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Lymphocytes",
+              "value": "78",
+              "unit": "%",
+              "range": "20-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALC",
+              "value": "14.2",
+              "unit": "x10³/µL",
+              "range": "1.0-4.8",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.0",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "185",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID FUNCTION",
           "results": [
-            { "test": "TSH", "value": "2.4", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Free T4", "value": "1.2", "unit": "ng/dL", "range": "0.8-1.8", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.4",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Free T4",
+              "value": "1.2",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "90", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Total Bilirubin", "value": "0.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "26", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "LDH", "value": "195", "unit": "U/L", "range": "140-280", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "90",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "26",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "LDH",
+              "value": "195",
+              "unit": "U/L",
+              "range": "140-280",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -254,15 +344,42 @@ window.EMR_DATA = {
     "Brother: Healthy, age 52"
   ],
   "socialHistory": [
-    ["Occupation", "Elementary school teacher"],
-    ["Marital", "Married, 2 children (ages 18 and 15)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional wine, 1-2/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 3x/week, 30 minutes"],
-    ["Housing", "Lives with husband and children in single-family home"],
-    ["Safety", "Denies IPV; seatbelt"],
-    ["Advance Directive", "None on file — discussed"]
+    [
+      "Occupation",
+      "Elementary school teacher"
+    ],
+    [
+      "Marital",
+      "Married, 2 children (ages 18 and 15)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional wine, 1-2/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 3x/week, 30 minutes"
+    ],
+    [
+      "Housing",
+      "Lives with husband and children in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None on file — discussed"
+    ]
   ],
   "meta": {
     "caseId": "autoimmune-hemolytic-anemia",
@@ -273,75 +390,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Nadine Toussaint is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Nadine appears tired and concerned, frequently touching her abdomen and shifting uncomfortably in her chair. She's cooperative but anxious about her symptoms worsening, particularly worried this means her CLL is progressing. She provides detailed responses but keeps asking if she needs immediate treatment.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about when your fatigue and shortness of breath started?",
+      "Have you noticed any changes in your urine color?",
+      "Are you experiencing any abdominal pain or fullness?",
+      "Have you had any fevers, chills, or night sweats recently?",
+      "When was your last hematology appointment and blood work?",
+      "Have you noticed any unusual bruising or bleeding?",
+      "Are you having any chest pain or palpitations?",
+      "Have you had any recent infections or illnesses?",
+      "Are you taking any new medications or supplements?",
+      "Have you been eating normally and maintaining your weight?",
+      "Any nausea, vomiting, or changes in bowel movements?",
+      "Have you traveled anywhere recently or been exposed to any chemicals?",
+      "Are you having any back pain or bone pain?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 49-year-old female with CLL (watch-and-wait) presents with 1 week of progressive.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Warm Autoimmune Hemolytic Anemia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Levothyroxine 75mcg daily; Omeprazole 20mg daily; Calcium Carbonate 600mg with Vitamin D 400 IU BID.'",
-        "allergies": "'My allergies are Aspirin, Shellfish.'",
-        "family": "Mother: Breast cancer at 62, alive at 76  Father: CLL diagnosed at 70, deceased at 78  Sister: Hashimoto thyroiditis, age 45",
-        "social": "Occupation: Elementary school teacher  Marital: Married, 2 children (ages 18 and 15)  Tobacco: Never smoker  Alcohol: Occasional wine, 1-2/week  Drugs: Denies"
+      "default": "I'm not sure I understand the question. Can you ask it differently? I'm mainly worried about feeling so tired and my husband saying I look yellow.",
+      "onset": "It started about a week ago gradually. At first I just thought I was tired from work, but by Wednesday I was getting short of breath just walking up the stairs. My husband noticed my eyes looked yellow on Saturday.",
+      "character": "The fatigue is overwhelming - not like my usual CLL tiredness. I feel weak and dizzy, especially when I stand up. The shortness of breath happens even with light activity now.",
+      "location": "The fatigue is all over. I have some mild aching in my left side under my ribs, and my back has been sore, but mainly it's the exhaustion and breathing trouble.",
+      "severity": "The fatigue is about an 8 out of 10 - I had to call in sick yesterday and today. I can barely do basic activities without getting winded. It's much worse than my usual CLL fatigue.",
+      "aggravating": "Any physical activity makes the shortness of breath worse. Even getting dressed or walking to the kitchen leaves me breathless. The fatigue is worst in the afternoon.",
+      "relieving": "Rest helps a little with the breathing, but the fatigue doesn't really improve even after sleeping. I've been trying to drink more fluids but it's not helping much.",
+      "associated": "Yes, I've been dizzy when standing up, and my urine has been very dark - almost brown - for the past 3 days. My husband says I look pale and my eyes are yellow. I've had some mild nausea too.",
+      "denies": "No chest pain, no unusual bleeding or bruising more than my usual CLL spots. No fever or chills. No leg swelling. No recent infections that I know of.",
+      "history": "I've had fatigue from my CLL for years, but this is completely different - much more severe. I've never had yellow eyes or dark urine before. My CLL has been stable on watch-and-wait.",
+      "medications": "Levothyroxine 75mcg daily; Omeprazole 20mg daily; Calcium Carbonate 600mg with Vitamin D 400 IU BID",
+      "allergies": "Aspirin, Shellfish",
+      "family": "My father had CLL too - he was diagnosed at 70 and died at 78, though I think it was from a heart attack, not the leukemia. My mother had breast cancer but she's still alive. My sister has thyroid problems like me.",
+      "social": "I'm an elementary school teacher, married with two teenagers. I've never smoked and only have a glass of wine once or twice a week. No drug use. This is affecting my ability to work - I had to take sick days."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "General appearance and vital signs assessment",
+      "Conjunctival and scleral examination for icterus",
+      "Cardiovascular examination including heart rate and murmurs",
+      "Pulmonary examination for signs of heart failure",
+      "Abdominal examination for splenomegaly and hepatomegaly",
+      "Lymph node examination",
+      "Skin examination for pallor and jaundice",
+      "Orthostatic vital signs",
+      "Neurologic assessment for signs of severe anemia"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Warm Autoimmune Hemolytic Anemia. Document specifically what you observe."
+      "General appearance and vital signs assessment": "Appears fatigued and mildly distressed, notable pallor. BP 136/82, HR 104, RR 20, Temp 99.4°F, SpO2 96% on room air",
+      "Conjunctival and scleral examination for icterus": "Marked conjunctival pallor bilaterally, obvious scleral icterus present",
+      "Cardiovascular examination including heart rate and murmurs": "Tachycardic at 104 bpm, regular rhythm, II/VI systolic flow murmur at LUSB, no gallops or rubs",
+      "Pulmonary examination for signs of heart failure": "Clear to auscultation bilaterally, no crackles, wheezes, or signs of fluid overload",
+      "Abdominal examination for splenomegaly and hepatomegaly": "Spleen palpable 3 cm below left costal margin, liver edge palpable 2 cm below right costal margin, mild LUQ tenderness",
+      "Lymph node examination": "Small, mobile lymph nodes palpable in cervical and axillary regions, consistent with known CLL",
+      "Skin examination for pallor and jaundice": "Marked pallor of skin and mucous membranes, mild jaundice visible in natural light",
+      "Orthostatic vital signs": "Lying: 104/68 HR 104; Standing: 118/74 HR 118, mild orthostatic changes present",
+      "Neurologic assessment for signs of severe anemia": "Alert and oriented, mild difficulty with concentration, no focal deficits, normal gait when not short of breath"
     },
     "ddxTargets": [
-        "Warm Autoimmune Hemolytic Anemia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Warm Autoimmune Hemolytic Anemia (CLL-Associated) (correct diagnosis)",
+      "CLL transformation to aggressive lymphoma (Richter syndrome)",
+      "Drug-induced hemolytic anemia",
+      "Acute leukemia or blast crisis",
+      "Sepsis with hemolysis",
+      "Hepatitis with anemia",
+      "Iron deficiency anemia with concurrent illness"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Warm Autoimmune Hemolytic Anemia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Warm Autoimmune Hemolytic Anemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Warm Autoimmune Hemolytic Anemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known CLL diagnosis and attributing all symptoms to disease progression rather than considering secondary autoimmune complications",
+      "prematureClosure": "May stop thinking after identifying hemolytic anemia without determining the specific type (warm vs cold autoimmune vs other causes)",
+      "availabilityBias": "Recent cases of CLL progression or common causes of anemia may overshadow consideration of autoimmune hemolytic anemia as CLL complication"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Nadine Toussaint's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Warm Autoimmune Hemolytic Anemia (CLL-Associated). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before interviewing the patient, consider what complications can arise in CLL patients beyond disease progression. What does the combination of fatigue, dyspnea, and the husband's observation of pallor and yellow eyes suggest? Think about both hematologic and non-hematologic causes.",
+      "phase5": "Now you have evidence of hemolysis - icterus, splenomegaly, and dark urine. Combined with the anemia symptoms in a CLL patient, what specific type of hemolytic process should you be thinking about? What test would definitively establish this diagnosis?",
+      "finalDebrief": "This case illustrates how CLL patients can develop secondary autoimmune complications, particularly warm autoimmune hemolytic anemia. The key was recognizing hemolysis signs (icterus, dark urine, splenomegaly) in the setting of severe anemia symptoms, rather than attributing everything to CLL progression. This emphasizes the importance of considering complications of the primary disease, not just progression of the disease itself."
     }
-}
+  }
 };

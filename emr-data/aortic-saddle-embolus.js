@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Claudia Fernandez",
-  "patientHPI": "I had to stop taking my blood thinner three weeks ago because my insurance changed and now it costs $180 a month, which I just can't afford on my fixed income. I know it's important for my heart rhythm problem, but I don't know what else to do - that's more than I spend on groceries some weeks.",
+    "patientHPI": "I had to stop taking my blood thinner three weeks ago because my insurance changed and now it costs $180 a month, which I just can't afford on my fixed income. I know it's important for my heart rhythm problem, but I don't know what else to do - that's more than I spend on groceries some weeks.",
     "dob": "08/20/1958",
     "age": 66,
     "sex": "Female",
@@ -154,7 +154,7 @@ window.EMR_DATA = {
       "spo2": "98%",
       "wt": "142 lbs",
       "ht": "5'2\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "PCP Office"
     }
   ],
@@ -197,32 +197,128 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "102", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "102",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.0", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "154", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "7.0",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "154",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.6", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "37.2", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "245", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -290,15 +386,42 @@ window.EMR_DATA = {
     "Brother: No significant medical history, age 62"
   ],
   "socialHistory": [
-    ["Occupation", "Retired seamstress"],
-    ["Marital", "Married"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "None"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Light housework; walking 15-20 min 3x/week"],
-    ["Housing", "Lives with husband in condo"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "Health care proxy — husband Miguel"]
+    [
+      "Occupation",
+      "Retired seamstress"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "None"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Light housework; walking 15-20 min 3x/week"
+    ],
+    [
+      "Housing",
+      "Lives with husband in condo"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy — husband Miguel"
+    ]
   ],
   "meta": {
     "caseId": "aortic-saddle-embolus",
@@ -309,75 +432,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Claudia Fernandez appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Claudia appears anxious and tearful, clearly distressed about both her symptoms and financial situation. She is forthcoming about her medication non-compliance due to cost, though somewhat embarrassed and defensive about it. She displays visible pain and panic about her sudden loss of leg function.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly when your leg symptoms started?",
+      "Describe what your legs feel like right now",
+      "Are both legs affected equally, or is one worse than the other?",
+      "Can you move your legs or toes at all?",
+      "What does the pain feel like - sharp, cramping, burning?",
+      "Have you noticed any color changes in your legs or feet?",
+      "Do your legs feel cold or numb?",
+      "When exactly did you stop taking your blood thinner?",
+      "Have you had any chest pain or shortness of breath?",
+      "Any recent palpitations or irregular heartbeats?",
+      "Have you been taking all your other medications regularly?",
+      "Any recent falls, injuries, or prolonged immobility?",
+      "Have you ever had anything like this happen before?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I had to stop taking my blood thinner three weeks ago because my insurance chang.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Aortic Saddle Embolus.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Metformin 500mg BID; Alendronate 70mg weekly; Atorvastatin 20mg QHS.'",
-        "allergies": "'My allergies are Lisinopril.'",
-        "family": "Father: Rheumatic heart disease, deceased at 68  Mother: HTN, T2DM, alive at 88  Sister: Stroke at age 60, alive with residual deficits",
-        "social": "Occupation: Retired seamstress  Marital: Married  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble focusing because of this terrible pain in my legs - could you repeat that?",
+      "onset": "It started suddenly about 2 hours ago while I was watching TV. I went to get up to go to the bathroom and my legs just wouldn't work - the pain was excruciating and they felt completely dead.",
+      "character": "It's the most severe pain I've ever felt - like someone is crushing my legs in a vice, but they also feel completely numb and dead at the same time. It's terrifying.",
+      "location": "Both legs are affected, but it seems worse below my hips. The pain starts deep in my lower back and goes all the way down to my toes.",
+      "severity": "This is definitely a 10 out of 10. I can barely think straight, and I can't move my legs at all. I'm completely helpless.",
+      "aggravating": "Any attempt to move makes it worse. Even light touch is excruciating. Lying flat seems to make the pain more intense too.",
+      "relieving": "Nothing helps. I tried changing positions but I can barely move. The pain medication they gave me here hasn't touched it.",
+      "associated": "My legs feel ice cold and I can't feel my feet at all. I think my legs look pale or maybe bluish. I feel nauseous from the pain and I'm having trouble catching my breath.",
+      "denies": "No chest pain, no recent falls or injuries, no recent long car rides or flights. No fever or chills. No back injury that I know of.",
+      "history": "Never had anything like this before. I've had some cramping in my calves before, but nothing even close to this severe.",
+      "medications": "Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Lisinopril 10mg daily; Metformin 500mg BID; Alendronate 70mg weekly; Atorvastatin 20mg QHS",
+      "allergies": "Lisinopril",
+      "family": "My father had rheumatic heart disease and died young, and my sister had a stroke. I worry this runs in my family - is this related to my heart problems?",
+      "social": "I'm a retired seamstress, married, never smoked or drank alcohol. I've been pretty sedentary since retiring, mostly just watching TV and doing light housework."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Bilateral lower extremity pulse palpation (femoral, popliteal, dorsalis pedis, posterior tibial)",
+      "Lower extremity color and temperature assessment",
+      "Motor function testing (hip flexion, knee extension, ankle dorsiflexion, plantar flexion)",
+      "Sensory examination (light touch, pinprick, vibration)",
+      "Capillary refill assessment",
+      "Cardiac auscultation for murmurs and rhythm",
+      "Abdominal examination for pulsatile masses",
+      "Lower extremity reflexes (patellar, Achilles)",
+      "Assessment for lower extremity edema",
+      "Skin mottling or livedo reticularis assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Aortic Saddle Embolus. Document specifically what you observe."
+      "Bilateral lower extremity pulse palpation": "Femoral pulses present but diminished bilaterally, no palpable popliteal, dorsalis pedis, or posterior tibial pulses bilaterally",
+      "Lower extremity color and temperature assessment": "Both legs appear pale and mottled below the inguinal ligament, markedly cold to touch compared to upper extremities",
+      "Motor function testing": "Severe weakness in bilateral hip flexion (2/5), knee extension (1/5), and absent ankle dorsiflexion and plantar flexion (0/5)",
+      "Sensory examination": "Markedly diminished light touch and pinprick sensation below the knees bilaterally, absent vibration sense at ankles",
+      "Capillary refill assessment": "Capillary refill >5 seconds in bilateral toes, nail beds appear cyanotic",
+      "Cardiac auscultation": "Irregular rhythm consistent with atrial fibrillation, grade 3/6 diastolic rumble at apex consistent with mitral stenosis",
+      "Abdominal examination": "Soft, non-tender, no pulsatile masses palpated, normal bowel sounds",
+      "Lower extremity reflexes": "Absent patellar and Achilles reflexes bilaterally",
+      "Assessment for lower extremity edema": "No significant edema present in either lower extremity",
+      "Skin mottling or livedo reticularis assessment": "Pronounced mottling and livedo reticularis pattern from mid-thigh distally, more pronounced on the right"
     },
     "ddxTargets": [
-        "Aortic Saddle Embolus (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Aortic Saddle Embolus (correct diagnosis)",
+      "Acute Aortic Thrombosis",
+      "Bilateral Acute Limb Ischemia",
+      "Acute Aortic Dissection with Malperfusion",
+      "Massive Pulmonary Embolism with Shock",
+      "Acute Cauda Equina Syndrome",
+      "Bilateral Deep Vein Thrombosis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Aortic Saddle Embolus, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Aortic Saddle Embolus, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Aortic Saddle Embolus based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the social history of medication non-compliance and missing the acute vascular emergency nature of this presentation",
+      "prematureClosure": "Risk of stopping at 'medication non-compliance' without fully appreciating the acute arterial occlusion requiring immediate intervention",
+      "availabilityBias": "May focus on more common conditions like DVT or back pain rather than considering the rare but catastrophic saddle embolus"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Claudia Fernandez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Aortic Saddle Embolus. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview this patient, consider her known cardiac conditions and recent medication change. What vascular complications should you be most concerned about in someone with atrial fibrillation who stopped anticoagulation? How might this influence your history-taking priorities?",
+      "phase5": "Now that you've completed your assessment, let's think through the key findings. You have a patient with known afib off anticoagulation presenting with acute bilateral leg pain, absent pulses, and motor/sensory deficits. What anatomical location could explain this bilateral presentation? What's the most likely pathophysiology here?",
+      "finalDebrief": "This case illustrates how social determinants of health can directly lead to medical emergencies. Claudia's saddle embolus resulted from medication non-compliance due to cost - a preventable tragedy. Notice how the bilateral nature of her symptoms, absent distal pulses, and cardiac history should have pointed you toward this diagnosis. What systems issues contributed to this outcome, and how might we prevent similar cases?"
     }
-}
+  }
 };

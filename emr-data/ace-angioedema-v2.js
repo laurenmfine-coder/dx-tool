@@ -1170,73 +1170,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Evelyn Washington-Carter is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Anxious and distressed, pointing to her protruding tongue and drooling, unable to speak clearly due to muffled speech. She appears frightened about her breathing and is highly motivated to communicate her symptoms despite speech difficulties.",
     "interviewQuestions": [
-      "When did your symptoms start and how?",
-      "Describe the main symptom — location, character, severity.",
-      "What makes it worse? What makes it better?",
-      "Any other symptoms you've noticed?",
-      "Any prior similar episodes?",
-      "Tell me about your medical history.",
+      "When did the tongue swelling start and how has it progressed?",
+      "Are you having any difficulty breathing or swallowing?",
+      "Have you noticed any rash, hives, or itching anywhere on your body?",
       "What medications are you currently taking?",
-      "Any medication allergies?",
-      "Relevant family history?",
-      "Tell me about your lifestyle."
+      "Have you eaten any new foods or been exposed to anything unusual today?",
+      "Have you had any recent dental work or injuries to your mouth?",
+      "Do you have any known allergies to medications or foods?",
+      "Have you ever had swelling like this before?",
+      "Are you having any chest pain, shortness of breath, or wheezing?",
+      "Has anyone in your family had similar reactions to medications?",
+      "How long have you been taking your current heart medications?",
+      "Have you had any recent changes to your medications?",
+      "Are you having any abdominal pain or cramping?"
     ],
     "patientResponses": {
-      "default": "He pauses. 'Can you clarify what you mean?'",
-      "onset": "'Gradually — over the past several days.'",
-      "character": "'The symptom has been significant and affecting my ability to function.'",
-      "location": "'The main problem is in the expected area for my condition.'",
-      "severity": "'Six or seven out of ten.'",
-      "aggravating": "'Activity and movement worsen it.'",
-      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-      "associated": "'Some associated symptoms consistent with this condition.'",
-      "denies": "'No fever, chills, or unexplained weight loss.'",
-      "history": "'I have not had exactly this before.'",
-      "medications": "'I take Icatibant; Epinephrine; Dexamethasone; Lisinopril.'",
-      "allergies": "'My allergies: ACE inhibitors.'",
-      "family": "Sister: also had ACE inhibitor angioedema",
-      "social": "Race: African American — 3-5x higher risk of ACE angioedema  Comorbidity: CHF with EF 35% — ACE inhibitors are guideline-directed therapy, losing them hurts  Timing: On lisinopril for 8 YEARS — late-onset ACE angioedema (can occur years after starting)  ARB question: Can she take losartan? Cross-reactivity risk is 2-10%"
+      "default": "I'm sorry, it's hard for me to talk clearly with my tongue like this. Can you repeat that?",
+      "onset": "It started about 6 hours ago, just gradually got worse and worse. My tongue kept getting bigger and now it won't fit in my mouth.",
+      "character": "My tongue feels thick and heavy, like it's made of rubber. It's so swollen I can barely move it.",
+      "location": "It's mainly my tongue, but I think my lips might be a little puffy too. The swelling is worst at the tip of my tongue.",
+      "severity": "This is a 9 out of 10 - I'm really scared. I can't swallow my spit and I'm worried about breathing.",
+      "aggravating": "It seems to be getting worse on its own. Nothing I do makes it worse, it just keeps progressing.",
+      "relieving": "Nothing has helped. I tried ice chips but I can't really swallow them anyway.",
+      "associated": "I'm drooling constantly because I can't swallow. My voice sounds funny and muffled. No other symptoms though.",
+      "denies": "No rash anywhere, no itching, no hives. No chest pain or wheezing. No stomach pain or vomiting.",
+      "history": "Never had anything like this before in my life. This is completely new and terrifying.",
+      "medications": "Icatibant; Epinephrine; Dexamethasone; Lisinopril",
+      "allergies": "ACE inhibitors",
+      "family": "Actually, my sister had something similar happen to her a few years ago. She was taking the same heart medication I am - lisinopril.",
+      "social": "I'm retired, used to work as a teacher. I don't smoke or drink much, maybe a glass of wine on weekends."
     },
     "examManeuvers": [
-      "General appearance",
-      "Vital signs",
-      "Cardiovascular",
-      "Pulmonary",
-      "Abdominal",
-      "Extremities",
-      "Skin",
-      "Targeted exam"
+      "Inspect oral cavity and tongue",
+      "Assess airway patency and voice quality",
+      "Examine skin for urticaria or angioedema",
+      "Auscultate lungs for stridor or wheezing",
+      "Palpate neck for lymphadenopathy",
+      "Examine lips and perioral area",
+      "Assess ability to swallow",
+      "Cardiovascular examination",
+      "Abdominal examination",
+      "Neurological assessment of cranial nerves"
     ],
     "examFindings": {
-      "General appearance": "Finding consistent with this condition.",
-      "Vital signs": "Finding consistent with this condition.",
-      "Cardiovascular": "Finding consistent with this condition.",
-      "Pulmonary": "Finding consistent with this condition.",
-      "Abdominal": "Finding consistent with this condition.",
-      "Extremities": "Finding consistent with this condition.",
-      "Skin": "Finding consistent with this condition.",
-      "Targeted exam": "Finding consistent with this condition."
+      "Inspect oral cavity and tongue": "Markedly swollen tongue protruding from mouth, unable to retract fully, asymmetric swelling worse on right side",
+      "Assess airway patency and voice quality": "Patent airway but compromised, muffled voice, excessive drooling, difficulty handling secretions",
+      "Examine skin for urticaria or angioedema": "No urticaria or hives anywhere on body, mild lip swelling, no other areas of angioedema",
+      "Auscultate lungs for stridor or wheezing": "Clear breath sounds bilaterally, no stridor or wheeze, normal respiratory effort",
+      "Palpate neck for lymphadenopathy": "No cervical lymphadenopathy or neck swelling",
+      "Examine lips and perioral area": "Mild bilateral lip swelling, no periorbital involvement",
+      "Assess ability to swallow": "Unable to swallow secretions effectively, pooling saliva, gag reflex intact",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, elevated blood pressure consistent with CHF",
+      "Abdominal examination": "Soft, non-tender, no organomegaly or masses",
+      "Neurological assessment of cranial nerves": "Cranial nerves intact except for mechanical limitation from tongue swelling"
     },
     "ddxTargets": [
-      "this condition (correct)",
-      "Most likely alternative",
-      "Third differential",
-      "Must-not-miss 1",
-      "Must-not-miss 2",
-      "Common mimic 1",
-      "Common mimic 2"
+      "ACE inhibitor-induced angioedema (correct diagnosis)",
+      "Hereditary angioedema",
+      "Allergic angioedema",
+      "Anaphylaxis",
+      "Superior vena cava syndrome",
+      "Cellulitis of floor of mouth",
+      "Medication-induced angioedema (non-ACE)"
     ],
     "biasFlags": {
-      "anchoring": "Consider the full differential for this condition.",
-      "prematureClosure": "Complete your workup before narrowing focus.",
-      "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on allergic reaction and miss ACE inhibitor angioedema, especially given 8-year medication history",
+      "prematureClosure": "Might stop at 'allergic reaction' without identifying specific causative agent and mechanism",
+      "availabilityBias": "More likely to think of acute allergic reactions rather than delayed drug-induced angioedema"
     },
     "coachPrompts": {
-      "phase2": "Before interviewing Evelyn Washington-Carter: what does the chart suggest? Top 3 diagnoses?",
-      "phase5": "After history and exam: how has your differential changed?",
-      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You're thinking about tongue swelling in a 68-year-old. What are the key categories of angioedema, and how might you differentiate between them? Consider both the timeline and associated findings you'd want to explore.",
+      "phase5": "Now you have a patient with isolated tongue swelling, no urticaria, on lisinopril for 8 years, and a family history of similar reaction. What does the absence of hives tell you about the mechanism? How does the medication duration factor into your thinking?",
+      "finalDebrief": "This case highlights ACE inhibitor angioedema - note how it can occur after years of safe use, disproportionately affects African Americans, and lacks urticaria because it's bradykinin-mediated, not histamine-mediated. The key teaching point is that long-term medication use doesn't exclude drug-induced reactions, and this patient will need alternative heart failure management since ACE inhibitors are now contraindicated."
     }
   }
 };

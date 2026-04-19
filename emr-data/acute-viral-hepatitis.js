@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Rafael Guzmán",
-  "patientHPI": "I'm here for my regular checkup - I've been working hard on eating better and getting to the gym more often, and I'm down four pounds since my last visit. The medication you gave me for my blood sugar isn't bothering my stomach anymore, which is great.",
+    "patientHPI": "I'm here for my regular checkup - I've been working hard on eating better and getting to the gym more often, and I'm down four pounds since my last visit. The medication you gave me for my blood sugar isn't bothering my stomach anymore, which is great.",
     "dob": "04/18/1990",
     "age": 35,
     "sex": "Male",
@@ -151,27 +151,93 @@ window.EMR_DATA = {
         {
           "name": "HEPATIC PANEL",
           "results": [
-            { "test": "ALT", "value": "52", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST", "value": "36", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "ALP", "value": "78", "unit": "U/L", "range": "44-147", "flag": "" },
-            { "test": "Total Bilirubin", "value": "0.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "" },
-            { "test": "Direct Bilirubin", "value": "0.2", "unit": "mg/dL", "range": "0.0-0.3", "flag": "" },
-            { "test": "Albumin", "value": "4.2", "unit": "g/dL", "range": "3.5-5.5", "flag": "" }
+            {
+              "test": "ALT",
+              "value": "52",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST",
+              "value": "36",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "ALP",
+              "value": "78",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Direct Bilirubin",
+              "value": "0.2",
+              "unit": "mg/dL",
+              "range": "0.0-0.3",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "4.2",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1C",
           "results": [
-            { "test": "HbA1c", "value": "6.0", "unit": "%", "range": "<5.7", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "6.0",
+              "unit": "%",
+              "range": "<5.7",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "210", "unit": "mg/dL", "range": "<200", "flag": "H" },
-            { "test": "LDL", "value": "128", "unit": "mg/dL", "range": "<100", "flag": "H" },
-            { "test": "HDL", "value": "38", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "188", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "210",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": "H"
+            },
+            {
+              "test": "LDL",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "<100",
+              "flag": "H"
+            },
+            {
+              "test": "HDL",
+              "value": "38",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "188",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -196,10 +262,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9408", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "09/2025", "site": "Right deltoid IM", "lot": "CV25-2410", "mfr": "Moderna" },
-    { "vaccine": "Tdap", "date": "08/2022", "site": "Left deltoid IM", "lot": "TD22-522", "mfr": "GSK" },
-    { "vaccine": "Hepatitis B Series", "date": "2008", "site": "Right deltoid IM", "lot": "HB08-220", "mfr": "Merck" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9408",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "09/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2410",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "08/2022",
+      "site": "Left deltoid IM",
+      "lot": "TD22-522",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Hepatitis B Series",
+      "date": "2008",
+      "site": "Right deltoid IM",
+      "lot": "HB08-220",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Father: T2DM, NAFLD → NASH cirrhosis (diagnosed age 58), alive at 66",
@@ -208,15 +298,42 @@ window.EMR_DATA = {
     "Sister: PCOS, obesity, alive at 30"
   ],
   "socialHistory": [
-    ["Occupation", "Restaurant line cook at seafood restaurant in Hollywood; handles raw shellfish regularly"],
-    ["Marital", "Married 8 years; 2 children (ages 4 and 6)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "2-3 beers on weekends; stopped for weight loss attempt"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 30 min 3x/week; recently started"],
-    ["Housing", "Apartment with wife and children"],
-    ["Safety", "Denies IPV; seatbelt; no firearms"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Restaurant line cook at seafood restaurant in Hollywood; handles raw shellfish regularly"
+    ],
+    [
+      "Marital",
+      "Married 8 years; 2 children (ages 4 and 6)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "2-3 beers on weekends; stopped for weight loss attempt"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 30 min 3x/week; recently started"
+    ],
+    [
+      "Housing",
+      "Apartment with wife and children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "acute-viral-hepatitis",
@@ -227,75 +344,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Rafael Guzm\u00e1n appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Rafael initially appears calm and cooperative, believing he's here for routine follow-up about his weight loss progress. He becomes increasingly concerned and anxious as questioning reveals his worsening symptoms, particularly when realizing the severity of his jaundice and fatigue.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did toxicologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe any changes in your skin color or the color of your eyes recently?",
+      "Have you noticed any changes in your urine color or bowel movements?",
+      "Tell me about any nausea, vomiting, or abdominal pain you've been experiencing",
+      "How has your energy level been over the past week or two?",
+      "Have you had any fever, chills, or feeling unwell recently?",
+      "At work, do you handle raw seafood or shellfish? Have you eaten any recently?",
+      "Have you received vaccination for hepatitis A or hepatitis B?",
+      "Has anyone else at work or in your family been sick with similar symptoms?",
+      "Have you noticed any unusual bruising or bleeding recently?",
+      "Tell me about your alcohol intake - has it changed recently?",
+      "Have you taken any new medications, supplements, or herbal remedies?",
+      "Have you traveled anywhere recently or eaten at any new restaurants?",
+      "Rate your abdominal pain on a scale of 1-10 and show me where it hurts"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my regular checkup - I've been working hard on eating better and ge.'",
-        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Hepatitis A.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 500mg BID; Vitamin D3 2000 IU daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: T2DM, NAFLD \u2192 NASH cirrhosis (diagnosed age 58), alive at 66  Mother: Obesity, HTN, alive at 64  Brother: Healthy, alive at 32",
-        "social": "Occupation: Restaurant line cook at seafood restaurant in Hollywood; handles raw shellfish regularly  Marital: Married 8 years; 2 children (ages 4 and 6)  Tobacco: Never smoker  Alcohol: 2-3 beers on weekends; stopped for weight loss attempt  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - can you explain that differently?",
+      "onset": "Now that you mention it, I started feeling tired and a bit nauseous about 10 days ago. My wife said my eyes looked yellow 3-4 days ago, but I thought it was just the lighting at home.",
+      "character": "It's this deep, aching tiredness that's different from just being tired from work. The nausea comes and goes, and I have this dull ache in my upper belly.",
+      "location": "The pain is here, under my right ribs, and sometimes it feels like it goes to my back. It's not sharp, just a constant ache.",
+      "severity": "The fatigue is probably a 7 out of 10 - I can barely get through my shifts. The belly pain is maybe a 4, but it's always there now.",
+      "aggravating": "The nausea gets worse when I smell food cooking at work, especially seafood. The fatigue is worse in the mornings.",
+      "relieving": "Nothing really helps the tiredness. I tried taking Tums for my stomach but it didn't help much.",
+      "associated": "I've been having dark urine for about a week, and my stools have been really pale, almost clay-colored. I've had some low-grade fever and chills too.",
+      "denies": "No chest pain, no shortness of breath, no rash. I haven't been vomiting blood or having black stools.",
+      "history": "I've never had anything like this before. My liver tests were a bit high at my last visit because of my weight, but nothing like this.",
+      "medications": "Metformin 500mg BID; Vitamin D3 2000 IU daily",
+      "allergies": "NKDA",
+      "family": "My dad has diabetes and fatty liver disease that progressed to cirrhosis - he was diagnosed at 58. My mom has high blood pressure and weight issues too.",
+      "social": "I work as a line cook at a seafood restaurant in Hollywood - I handle raw oysters, clams, and mussels every day. I'm married with two young kids. I don't smoke, and I cut back on drinking to just 2-3 beers on weekends to help with weight loss."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "General appearance and mental status",
+      "Skin and scleral examination for jaundice",
+      "Abdominal palpation for hepatomegaly",
+      "Right upper quadrant percussion and palpation",
+      "Murphy's sign assessment",
+      "Lymph node examination (cervical, axillary, inguinal)",
+      "Skin examination for spider angiomata and palmar erythema",
+      "Assessment for ascites (shifting dullness, fluid wave)",
+      "Examination for peripheral edema",
+      "Neurological assessment for asterixis or confusion"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Acute Hepatitis A. Document specifically what you observe."
+      "General appearance and mental status": "Alert and oriented, appears fatigued and mildly uncomfortable, obvious icteric appearance",
+      "Skin and scleral examination for jaundice": "Marked scleral icterus bilaterally, diffuse jaundice of skin most prominent in face and trunk",
+      "Abdominal palpation for hepatomegaly": "Hepatomegaly with liver edge palpable 4cm below right costal margin, firm and tender",
+      "Right upper quadrant percussion and palpation": "Tenderness to palpation in RUQ, hepatic dullness extends to 6cm below costal margin",
+      "Murphy's sign assessment": "Negative Murphy's sign",
+      "Lymph node examination (cervical, axillary, inguinal)": "No significant lymphadenopathy detected",
+      "Skin examination for spider angiomata and palmar erythema": "No spider angiomata, mild palmar erythema present",
+      "Assessment for ascites (shifting dullness, fluid wave)": "No ascites detected",
+      "Examination for peripheral edema": "Trace bilateral lower extremity edema",
+      "Neurological assessment for asterixis or confusion": "No asterixis, alert and oriented x3"
     },
     "ddxTargets": [
-        "Acute Hepatitis A (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Hepatitis A (Foodborne — Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD, Presenting with Jaundice, Transaminitis >2000, and Coagulopathy) (correct diagnosis)",
+      "Acute Hepatitis B infection",
+      "Drug-induced liver injury (DILI)",
+      "Acute Hepatitis E infection",
+      "Acetaminophen toxicity",
+      "Acute cholangitis",
+      "Autoimmune hepatitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Hepatitis A, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Hepatitis A, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Hepatitis A based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known NAFLD and dismissing acute symptoms as progression of chronic disease rather than recognizing acute viral hepatitis superimposed on baseline liver disease",
+      "prematureClosure": "May prematurely diagnose alcoholic hepatitis given social history or drug-induced hepatitis from metformin without fully exploring occupational exposure history",
+      "availabilityBias": "Recent cases of drug-induced liver injury may overshadow consideration of foodborne viral hepatitis despite clear occupational risk factors"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Rafael Guzm\u00e1n's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Hepatitis A (Foodborne \u2014 Occupational Shellfish Exposure in Unvaccinated Patient with Baseline NAFLD, Presenting with Jaundice, Transaminitis >2000, and Coagulopathy). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient presents with jaundice and constitutional symptoms. Given his occupational exposure and the pattern of presentation, what specific exposures and risk factors should you explore? Consider both infectious and toxic etiologies in someone with baseline liver disease.",
+      "phase5": "You've identified significant hepatomegaly, jaundice, and RUQ tenderness in a restaurant worker with shellfish exposure. How does his occupational history and vaccination status influence your differential? What laboratory studies would help distinguish between viral hepatitides?",
+      "finalDebrief": "This case demonstrates how occupational exposures can lead to serious infectious diseases, especially in unvaccinated individuals. The key was recognizing that acute symptoms in someone with chronic liver disease warranted investigation for acute causes rather than attributing everything to NAFLD progression. How did the patient's work environment and the specific pattern of illness guide your diagnostic thinking?"
     }
-}
+  }
 };

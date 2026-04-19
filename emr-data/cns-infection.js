@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Omar Hassan",
-  "patientHPI": "I've been pretty good about taking my HIV medication, though I'll admit I forget maybe once or twice a week. Everything's been going well with my treatment, but lately I've had a couple episodes where I just blank out for a few seconds and my wife says I was shaking.",
+    "patientHPI": "I've been pretty good about taking my HIV medication, though I'll admit I forget maybe once or twice a week. Everything's been going well with my treatment, but lately I've had a couple episodes where I just blank out for a few seconds and my wife says I was shaking.",
     "dob": "06/30/1991",
     "age": 33,
     "sex": "Male",
@@ -108,7 +108,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "176 lbs",
       "ht": "5'9\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "Specialist"
     }
   ],
@@ -151,38 +151,140 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "3.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "L" },
-            { "test": "Hemoglobin", "value": "12.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "36.8", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelets", "value": "142", "unit": "x10³/µL", "range": "150-400", "flag": "L" },
-            { "test": "Lymphocytes (Absolute)", "value": "0.4", "unit": "x10³/µL", "range": "1.0-4.8", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "3.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "36.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "142",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            },
+            {
+              "test": "Lymphocytes (Absolute)",
+              "value": "0.4",
+              "unit": "x10³/µL",
+              "range": "1.0-4.8",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "HIV LABS",
           "results": [
-            { "test": "CD4 Count", "value": "82", "unit": "cells/µL", "range": ">500", "flag": "L" },
-            { "test": "CD4 Percentage", "value": "6", "unit": "%", "range": ">29", "flag": "L" },
-            { "test": "HIV Viral Load", "value": "184,000", "unit": "copies/mL", "range": "<20 (undetectable)", "flag": "H" }
+            {
+              "test": "CD4 Count",
+              "value": "82",
+              "unit": "cells/µL",
+              "range": ">500",
+              "flag": "L"
+            },
+            {
+              "test": "CD4 Percentage",
+              "value": "6",
+              "unit": "%",
+              "range": ">29",
+              "flag": "L"
+            },
+            {
+              "test": "HIV Viral Load",
+              "value": "184,000",
+              "unit": "copies/mL",
+              "range": "<20 (undetectable)",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "INFECTIOUS MARKERS",
           "results": [
-            { "test": "Toxoplasma IgG", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Toxoplasma IgM", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Cryptococcal Antigen (Serum)", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "Toxoplasma IgG",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Toxoplasma IgM",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Cryptococcal Antigen (Serum)",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "98", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "LDH", "value": "248", "unit": "U/L", "range": "120-246", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "LDH",
+              "value": "248",
+              "unit": "U/L",
+              "range": "120-246",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -207,10 +309,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL832T", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Pfizer, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV782K", "mfr": "Pfizer" },
-    { "vaccine": "Hepatitis B (Engerix-B, booster)", "date": "03/2020", "site": "Right deltoid IM", "lot": "HB412R", "mfr": "GSK" },
-    { "vaccine": "Tdap (Adacel)", "date": "06/2021", "site": "Left deltoid IM", "lot": "TA228P", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL832T",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Pfizer, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV782K",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Hepatitis B (Engerix-B, booster)",
+      "date": "03/2020",
+      "site": "Right deltoid IM",
+      "lot": "HB412R",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "06/2021",
+      "site": "Left deltoid IM",
+      "lot": "TA228P",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother (age 62): Type 2 Diabetes, hypertension",
@@ -219,15 +345,42 @@ window.EMR_DATA = {
     "No family history of seizure disorder, cancer, or autoimmune disease"
   ],
   "socialHistory": [
-    ["Occupation", "Software developer — remote work; recently reduced hours due to symptoms"],
-    ["Marital", "Married x 5 years; wife aware of HIV status; wife HIV-negative (on PrEP)"],
-    ["Tobacco", "Never"],
-    ["Alcohol", "Rare — occasional beer"],
-    ["Drugs", "None"],
-    ["Exercise", "Gym 3x/week (prior to symptom onset); not exercising past 3 weeks"],
-    ["Housing", "Condo with wife"],
-    ["Safety", "No concerns"],
-    ["Advance Directive", "None — discussed with wife during this admission"]
+    [
+      "Occupation",
+      "Software developer — remote work; recently reduced hours due to symptoms"
+    ],
+    [
+      "Marital",
+      "Married x 5 years; wife aware of HIV status; wife HIV-negative (on PrEP)"
+    ],
+    [
+      "Tobacco",
+      "Never"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional beer"
+    ],
+    [
+      "Drugs",
+      "None"
+    ],
+    [
+      "Exercise",
+      "Gym 3x/week (prior to symptom onset); not exercising past 3 weeks"
+    ],
+    [
+      "Housing",
+      "Condo with wife"
+    ],
+    [
+      "Safety",
+      "No concerns"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed with wife during this admission"
+    ]
   ],
   "meta": {
     "caseId": "cns-infection",
@@ -238,75 +391,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Omar Hassan is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Omar appears anxious and somewhat embarrassed about his medication adherence lapses, speaking quietly but cooperatively. He's clearly concerned about the seizure episodes affecting his work and marriage, showing appropriate worry but maintaining composure during the interview.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did seizure start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happens during these episodes where you 'blank out'?",
+      "How long do these episodes typically last?",
+      "What do you remember before and after the episodes?",
+      "Has your wife noticed any specific triggers for these episodes?",
+      "Have you had any headaches, fever, or vision changes recently?",
+      "How often are you missing your HIV medications each week?",
+      "When was your last CD4 count and viral load checked?",
+      "Have you had any weakness, numbness, or difficulty speaking?",
+      "Any nausea, vomiting, or changes in appetite lately?",
+      "Have you noticed any changes in your thinking or memory?",
+      "Any recent weight loss or night sweats?",
+      "Are you taking any prophylaxis medications for opportunistic infections?",
+      "Have you traveled recently or been exposed to any sick contacts?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been pretty good about taking my HIV medication, though I'll admit I forget.'",
-        "character": "'It's seizure \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Bictegravir/Emtricitabine/TAF (Biktarvy) 1 tablet daily; Cetirizine 10mg daily PRN.'",
-        "allergies": "'My allergies are Sulfonamides (TMP-SMX).'",
-        "family": "Mother (age 62): Type 2 Diabetes, hypertension  Father (age 65): Coronary artery disease \u2014 CABG at age 60  Sister (age 30): Healthy",
-        "social": "Occupation: Software developer \u2014 remote work; recently reduced hours due to symptoms  Marital: Married x 5 years; wife aware of HIV status; wife HIV-negative (on PrEP)  Tobacco: Never  Alcohol: Rare \u2014 occasional beer  Drugs: None"
+      "default": "I'm not sure I understand what you're asking. Can you explain that differently?",
+      "onset": "The first episode happened about 3 weeks ago. My wife said I just stopped talking mid-sentence and started shaking for maybe 30 seconds. It's happened 3 more times since then.",
+      "character": "My wife says I go completely blank, like I'm not there, and then my arms and legs start jerking. I don't remember any of it happening.",
+      "location": "The shaking seems to be all over, but I've also been getting these dull headaches, mostly on the right side of my head.",
+      "severity": "The headaches are maybe a 4 out of 10, but the seizures are really scary. I can't work when this happens and I'm afraid to drive now.",
+      "aggravating": "The headaches seem worse when I'm stressed or looking at my computer screen for too long. I haven't noticed specific triggers for the seizures.",
+      "relieving": "Ibuprofen helps the headaches a little. Nothing seems to prevent the seizures - they just happen randomly.",
+      "associated": "I've been having headaches, some mild nausea, and I feel more tired than usual. Also running a low fever on and off.",
+      "denies": "No vision problems, no trouble speaking between episodes, no weakness in my arms or legs that I've noticed.",
+      "history": "Never had anything like this before. No seizures, no major neurological problems. This is completely new for me.",
+      "medications": "Bictegravir/Emtricitabine/TAF (Biktarvy) 1 tablet daily; Cetirizine 10mg daily PRN",
+      "allergies": "Sulfonamides (TMP-SMX)",
+      "family": "No family history of seizures or neurological problems. My parents have heart disease and diabetes, but nothing like this.",
+      "social": "I'm a software developer working from home. I've had to cut back my hours because of these episodes and headaches. I'm married, don't smoke, rarely drink alcohol, no illegal drugs."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "Neurological assessment including mental status",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Deep tendon reflexes",
+      "Sensory examination",
+      "Cerebellar function testing",
+      "Fundoscopic examination",
+      "Neck stiffness assessment",
+      "Lymph node examination",
+      "Skin examination for lesions"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with CNS Toxoplasmosis with New-Onset Seizure in AIDS. Document specifically what you observe."
+      "Neurological assessment including mental status": "Alert and oriented x3, but mild difficulty with attention and concentration. Mini-mental status exam shows subtle deficits in working memory.",
+      "Cranial nerve examination": "Cranial nerves II-XII grossly intact. Pupils equal, round, reactive to light. No focal cranial nerve deficits.",
+      "Motor strength testing": "5/5 strength in all major muscle groups bilaterally. No focal motor weakness detected.",
+      "Deep tendon reflexes": "2+ reflexes bilaterally and symmetrically. No hyperreflexia or pathological reflexes.",
+      "Sensory examination": "Intact to light touch, vibration, and position sense. No sensory deficits noted.",
+      "Cerebellar function testing": "Finger-to-nose and heel-to-shin testing normal. No ataxia or coordination problems.",
+      "Fundoscopic examination": "Optic discs appear normal. No papilledema or retinal lesions consistent with toxoplasmosis.",
+      "Neck stiffness assessment": "Mild nuchal rigidity present. Negative Kernig's and Brudzinski's signs.",
+      "Lymph node examination": "No significant lymphadenopathy in cervical, axillary, or inguinal regions.",
+      "Skin examination for lesions": "No obvious Kaposi's sarcoma lesions. Skin appears normal without opportunistic infection signs."
     },
     "ddxTargets": [
-        "CNS Toxoplasmosis with New-Onset Seizure in AIDS (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "CNS Toxoplasmosis with New-Onset Seizure in AIDS (CD4 82) — Multiple Ring-Enhancing Lesions with Basal Ganglia Predilection (correct diagnosis)",
+      "Primary CNS Lymphoma in AIDS patient",
+      "Progressive Multifocal Leukoencephalopathy (PML)",
+      "Cryptococcal meningoencephalitis",
+      "CNS tuberculosis with tuberculomas",
+      "HIV encephalopathy with seizures",
+      "Cytomegalovirus encephalitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For CNS Toxoplasmosis with New-Onset Seizure in AIDS, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying CNS Toxoplasmosis with New-Onset Seizure in AIDS, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight CNS Toxoplasmosis with New-Onset Seizure in AIDS based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on HIV status and assuming any CNS symptoms are HIV-related without considering the specific CD4 count and opportunistic infection risks",
+      "prematureClosure": "Risk of stopping at 'seizure disorder' without investigating the underlying CNS pathology in an immunocompromised patient",
+      "availabilityBias": "May focus on common seizure causes rather than opportunistic CNS infections specific to AIDS patients with low CD4 counts"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Omar Hassan's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is CNS Toxoplasmosis with New-Onset Seizure in AIDS (CD4 82) \u2014 Multiple Ring-Enhancing Lesions with Basal Ganglia Predilection. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given that this is a 33-year-old with HIV presenting with new-onset seizures, what specific aspects of his HIV history would be most important to explore? What does his current immune status tell you about the types of opportunistic infections he might be at risk for?",
+      "phase5": "You've gathered good information about his seizures and HIV history. His medication adherence issues and the focal neurological symptoms are concerning. Given his likely low CD4 count based on the medication non-adherence, what CNS opportunistic infections should be highest on your differential? What imaging would be most helpful here?",
+      "finalDebrief": "This case highlights the importance of considering opportunistic CNS infections in AIDS patients with low CD4 counts. The combination of new-onset seizures, headaches, and mild fever in someone with likely poor HIV control should immediately raise concern for toxoplasmosis, CNS lymphoma, or other opportunistic infections. The key learning point is that neurological symptoms in immunocompromised patients require urgent evaluation and empiric treatment while awaiting definitive diagnosis."
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Harold Nguyen",
-  "patientHPI": "I'm scheduled for surgery next week to fix the large bulge in my artery that keeps growing, and my doctors want to make sure everything is ready. I've had some heart problems before and my legs get tired when I walk more than a couple blocks, but overall I'm feeling prepared for the procedure.",
+    "patientHPI": "I'm scheduled for surgery next week to fix the large bulge in my artery that keeps growing, and my doctors want to make sure everything is ready. I've had some heart problems before and my legs get tired when I walk more than a couple blocks, but overall I'm feeling prepared for the procedure.",
     "dob": "05/09/1955",
     "age": 69,
     "sex": "Male",
@@ -211,35 +211,119 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.2", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "195", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.2",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "195",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION PANEL",
           "results": [
-            { "test": "PT", "value": "12.2", "unit": "seconds", "range": "11.0-13.5", "flag": "" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.8-1.1", "flag": "" },
-            { "test": "aPTT", "value": "28", "unit": "seconds", "range": "25-35", "flag": "" }
+            {
+              "test": "PT",
+              "value": "12.2",
+              "unit": "seconds",
+              "range": "11.0-13.5",
+              "flag": ""
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": ""
+            },
+            {
+              "test": "aPTT",
+              "value": "28",
+              "unit": "seconds",
+              "range": "25-35",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "98", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "26", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "55", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "98",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "26",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "55",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "TYPE AND SCREEN",
           "results": [
-            { "test": "ABO/Rh", "value": "A Positive", "unit": "", "range": "—", "flag": "" },
-            { "test": "Antibody Screen", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "ABO/Rh",
+              "value": "A Positive",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "Antibody Screen",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -307,15 +391,42 @@ window.EMR_DATA = {
     "Sister: Healthy, age 62"
   ],
   "socialHistory": [
-    ["Occupation", "Retired mechanical engineer"],
-    ["Marital", "Widowed; late wife deceased 2021 (breast cancer)"],
-    ["Tobacco", "Former smoker — 40 pack-years (1975-2019); quit after MI"],
-    ["Alcohol", "Rare, 1-2 drinks/month"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 15-20 min daily, limited by claudication"],
-    ["Housing", "Lives alone in condo; daughter nearby"],
-    ["Safety", "No firearms; grab bars in bathroom; seatbelt"],
-    ["Advance Directive", "Living will on file; HCP: daughter Lisa Nguyen; Full code"]
+    [
+      "Occupation",
+      "Retired mechanical engineer"
+    ],
+    [
+      "Marital",
+      "Widowed; late wife deceased 2021 (breast cancer)"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 40 pack-years (1975-2019); quit after MI"
+    ],
+    [
+      "Alcohol",
+      "Rare, 1-2 drinks/month"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 15-20 min daily, limited by claudication"
+    ],
+    [
+      "Housing",
+      "Lives alone in condo; daughter nearby"
+    ],
+    [
+      "Safety",
+      "No firearms; grab bars in bathroom; seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file; HCP: daughter Lisa Nguyen; Full code"
+    ]
   ],
   "meta": {
     "caseId": "dilutional-coagulopathy",
@@ -326,75 +437,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Harold Nguyen appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Harold appears anxious but cooperative, initially focused on his pre-operative preparation before becoming increasingly concerned as bleeding complications develop during his EVAR procedure. He's forthcoming about his symptoms but becomes visibly distressed as he realizes the severity of his post-operative bleeding.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me what happened during your surgery today?",
+      "When did you first notice bleeding or unusual symptoms after the procedure?",
+      "Are you experiencing any pain, and if so, where?",
+      "Have you noticed any swelling in your abdomen or groin area?",
+      "Are you feeling dizzy, lightheaded, or weak?",
+      "Have you had any nausea or vomiting?",
+      "Are you having any difficulty breathing or chest pain?",
+      "Have you noticed any changes in your urine color or output?",
+      "Do you have any history of bleeding disorders or easy bruising?",
+      "What medications were you taking before surgery?",
+      "Do you have any drug allergies?",
+      "Have you ever had problems with anesthesia or surgery before?",
+      "Is there any family history of bleeding disorders?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm scheduled for surgery next week to fix the large bulge in my artery that kee.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Dilutional Coagulopathy.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Aspirin 81mg daily; Metoprolol Succinate 50mg daily; Atorvastatin 80mg QHS; Lisinopril 20mg daily; Amlodipine 5mg daily; Cilostazol 100mg BID.'",
-        "allergies": "'My allergies are Clopidogrel.'",
-        "family": "Father: AAA, died of ruptured aneurysm at age 72  Mother: Stroke at 78, alive at 82  Brother: CAD, CABG at 65, alive",
-        "social": "Occupation: Retired mechanical engineer  Marital: Widowed; late wife deceased 2021 (breast cancer)  Tobacco: Former smoker \u2014 40 pack-years (1975-2019); quit after MI  Alcohol: Rare, 1-2 drinks/month  Drugs: Denies"
+      "default": "I'm not sure I understand - I'm mainly concerned about all this bleeding after my surgery and feeling so weak.",
+      "onset": "The surgery started this morning around 7 AM. Everything seemed to go well initially, but then the doctors said there was more bleeding than expected and they needed to give me a lot of blood products.",
+      "character": "I feel extremely weak and dizzy, almost like all my energy has been drained. There's persistent bleeding from my surgical sites that won't seem to stop properly.",
+      "location": "The main bleeding is from my groin where they put in the device, but I'm also noticing bleeding from my IV sites and even my gums when they suction my mouth.",
+      "severity": "The weakness is about an 8 out of 10 - I can barely lift my head. The bleeding itself isn't painful, but it's very concerning because it won't stop like it should.",
+      "aggravating": "Any movement seems to make the bleeding worse, and I notice more oozing whenever they adjust my position or check my incisions.",
+      "relieving": "The doctors have been applying pressure and giving me blood products, but nothing seems to make it completely stop.",
+      "associated": "I'm feeling very dizzy, nauseous, and short of breath. My heart feels like it's racing, and I'm having trouble staying warm even with blankets.",
+      "denies": "I don't have chest pain, but I do feel short of breath. No severe abdominal pain beyond the surgical site discomfort. No changes in my vision, but I do feel confused at times.",
+      "history": "I've never had problems with bleeding before. Even when I had my heart attack a few years ago, I didn't have unusual bleeding issues, though I was on blood thinners then.",
+      "medications": "Aspirin 81mg daily; Metoprolol Succinate 50mg daily; Atorvastatin 80mg QHS; Lisinopril 20mg daily; Amlodipine 5mg daily; Cilostazol 100mg BID",
+      "allergies": "Clopidogrel",
+      "family": "No family history of bleeding disorders that I know of. My father had an aneurysm like mine and died when his ruptured, but no bleeding problems during his treatment.",
+      "social": "I'm a retired mechanical engineer, widowed since 2021. I quit smoking after my heart attack a few years ago - used to smoke for about 40 years. I rarely drink alcohol, maybe once or twice a month."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "Vital signs assessment",
+      "Cardiovascular examination",
+      "Abdominal examination",
+      "Groin/femoral access site inspection",
+      "Peripheral pulse assessment",
+      "Skin and mucous membrane examination",
+      "Neurological assessment",
+      "Respiratory examination",
+      "Assessment of IV sites and puncture sites",
+      "Evaluation for signs of shock"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Dilutional Coagulopathy. Document specifically what you observe."
+      "Vital signs assessment": "BP 90/55 (dropped from pre-op 148/86), HR 118, RR 24, Temp 97.2°F, SpO2 92% on 2L NC",
+      "Cardiovascular examination": "Tachycardic, regular rhythm, no murmurs, delayed capillary refill >3 seconds, weak peripheral pulses",
+      "Abdominal examination": "Soft, mild tenderness, no obvious hematoma, bowel sounds present but diminished",
+      "Groin/femoral access site inspection": "Persistent oozing from bilateral femoral access sites despite pressure dressings, surrounding ecchymosis",
+      "Peripheral pulse assessment": "Weakly palpable dorsalis pedis and posterior tibial pulses bilaterally, consistent with known PAD",
+      "Skin and mucous membrane examination": "Pale, cool, clammy skin; petechiae on arms and chest; oozing from venipuncture sites; bleeding gums",
+      "Neurological assessment": "Alert but appears confused intermittently, follows commands, no focal deficits",
+      "Respiratory examination": "Tachypneic, clear lung fields, no rales or wheezes",
+      "Assessment of IV sites and puncture sites": "Active oozing from multiple IV insertion sites and arterial line puncture site",
+      "Evaluation for signs of shock": "Signs of hypovolemic shock: hypotension, tachycardia, delayed cap refill, altered mental status, oliguria"
     },
     "ddxTargets": [
-        "Dilutional Coagulopathy (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Dilutional Coagulopathy (Massive Transfusion During EVAR Complicated by Hemorrhage) (correct diagnosis)",
+      "Disseminated Intravascular Coagulation (DIC)",
+      "Medication-induced coagulopathy",
+      "Retroperitoneal hematoma with ongoing bleeding",
+      "Vascular injury with arterial bleeding",
+      "Thrombocytopenia (drug-induced or dilutional)",
+      "Hereditary bleeding disorder (previously undiagnosed)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Dilutional Coagulopathy, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Dilutional Coagulopathy, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Dilutional Coagulopathy based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on surgical bleeding as simply technical/mechanical rather than considering systemic coagulopathy from massive transfusion protocol",
+      "prematureClosure": "May focus only on local bleeding control without recognizing the systemic nature of dilutional coagulopathy affecting multiple sites",
+      "availabilityBias": "Common post-surgical bleeding may overshadow recognition of the specific coagulopathy pattern from massive transfusion and factor dilution"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Nguyen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Dilutional Coagulopathy (Massive Transfusion During EVAR Complicated by Hemorrhage). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This is a post-operative bleeding case following EVAR. Consider what happens to coagulation factors when patients require massive transfusion. What lab studies would help differentiate between mechanical bleeding versus coagulopathy? Think about the timeline and pattern of bleeding.",
+      "phase5": "You've identified multiple bleeding sites and signs of shock. The pattern of generalized oozing from multiple puncture sites is key. What does this suggest about the coagulation cascade? How does massive transfusion affect clotting factors, platelets, and fibrinogen levels?",
+      "finalDebrief": "This case demonstrates dilutional coagulopathy from massive transfusion during complicated EVAR. The key was recognizing that bleeding from multiple sites (surgical, IV sites, gums) indicated systemic coagulopathy rather than just surgical bleeding. Massive transfusion dilutes clotting factors, platelets, and fibrinogen, requiring replacement with FFP, platelets, and cryoprecipitate guided by coagulation studies and thromboelastography when available."
     }
-}
+  }
 };

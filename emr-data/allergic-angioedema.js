@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Priya Nair",
-  "patientHPI": "About an hour after I took some ibuprofen for my headache, my lips started puffing up and I got these red bumps all over my arms and chest. I've never had anything like this happen with pain medication before.",
+      "patientHPI": "About an hour after I took some ibuprofen for my headache, my lips started puffing up and I got these red bumps all over my arms and chest. I've never had anything like this happen with pain medication before.",
       "dob": "09/12/1991",
       "age": "35",
       "sex": "Female",
@@ -898,27 +898,24 @@ window.EMR_DATA = {
       "Tobacco",
       "Never"
     ]
-  ]
-,
+  ],
   "references": [
-  {
-    "id": "REF-AE-004",
-    "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
-    "doi": "10.1186/1865-1380-5-39",
-    "pmid": "23131076",
-    "access": "Open Access (CC BY)",
-    "validates": [
-      "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
-      "C4 screening to distinguish HAE from other causes",
-      "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
-      "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
-      "Anti-C1-INH autoantibodies in acquired form"
-    ]
-  }
-]
-,
-
+    {
+      "id": "REF-AE-004",
+      "citation": "Bernstein JA, Moellman J. Emerging concepts in the diagnosis and treatment of patients with undifferentiated angioedema. Int J Emerg Med. 2012;5:39.",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3518246/",
+      "doi": "10.1186/1865-1380-5-39",
+      "pmid": "23131076",
+      "access": "Open Access (CC BY)",
+      "validates": [
+        "Differential diagnosis of angioedema: allergic vs bradykinin-mediated vs idiopathic",
+        "C4 screening to distinguish HAE from other causes",
+        "C1q levels distinguish acquired (low) from hereditary (normal) C1-INH deficiency",
+        "Acquired C1-INH deficiency association with lymphoproliferative disorders (MGUS, lymphoma)",
+        "Anti-C1-INH autoantibodies in acquired form"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "IgE-mediated (allergic) angioedema is histamine-driven and occurs within 30 minutes of allergen exposure. It commonly accompanies urticaria (combined urticaria + angioedema in ~50% of anaphylaxis cases).",
@@ -935,75 +932,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Priya Nair appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Priya appears anxious and concerned about her facial swelling, frequently touching her lips while speaking. She is very forthcoming with information and clearly distressed about the visible nature of her symptoms. She speaks quickly and seems eager to find a solution to prevent future episodes.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did lip swelling and hives after ibuprofen start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did the lip swelling and hives begin after taking ibuprofen?",
+      "How long after taking the ibuprofen did your symptoms start?",
+      "What dose of ibuprofen did you take and why did you take it?",
+      "Have you ever had a reaction like this to ibuprofen or similar medications before?",
+      "Are you experiencing any difficulty breathing, swallowing, or throat tightness?",
+      "Where exactly are the hives located on your body?",
+      "Have the hives or swelling gotten worse since they started?",
+      "Have you taken any medications or done anything to treat the symptoms?",
+      "Do you have any known allergies to medications?",
+      "Have you been exposed to any new foods, soaps, or other substances recently?",
+      "Have you had any recent illnesses or infections?",
+      "Does anyone in your family have medication allergies or similar reactions?",
+      "Have you ever carried an EpiPen or been told you need one?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Priya Nair presents with lip swelling and hives after ibuprofen.'",
-        "character": "'It's lip swelling and hives after ibuprofen \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies are Aspirin, Ibuprofen.'",
-        "family": "Father: aspirin sensitivity",
-        "social": "Tobacco: Never"
+      "default": "I'm not sure what you mean by that. Can you ask me something else about my swelling?",
+      "onset": "The swelling started about 2 hours after I took the ibuprofen this morning. The hives appeared maybe 30 minutes after the swelling began.",
+      "character": "My lips feel tight and swollen, almost like they're going to burst. The hives are raised red welts that are very itchy.",
+      "location": "The swelling is mainly in my upper and lower lips. The hives started on my arms and chest but now they're spreading to my back and stomach.",
+      "severity": "The swelling is maybe a 6 out of 10 - it's very noticeable and uncomfortable. The itching from the hives is about an 8 out of 10, it's driving me crazy.",
+      "aggravating": "The itching gets worse when I scratch or when I'm stressed. The swelling seems to get a bit worse when I talk a lot.",
+      "relieving": "I tried putting ice on my lips which helped a little with the swelling. Nothing really helps the itching much.",
+      "associated": "Just the hives and lip swelling. No trouble breathing or swallowing, thank goodness. Maybe feeling a little anxious but I think that's just from being worried.",
+      "denies": "No difficulty breathing, no throat tightness, no dizziness, no nausea or vomiting, no abdominal pain. My tongue isn't swollen.",
+      "history": "I had a similar but milder reaction to aspirin about 5 years ago - just some hives on my arms. That's when I found out I was allergic to aspirin.",
+      "medications": "no medications",
+      "allergies": "Aspirin, Ibuprofen",
+      "family": "My father has an aspirin sensitivity - he gets stomach upset and some skin reactions when he takes it.",
+      "social": "I work as a graphic designer, mostly at a computer. I don't smoke, drink maybe a glass of wine on weekends, no recreational drugs. Pretty healthy lifestyle overall."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect lips and perioral area",
+      "Examine skin for urticarial lesions",
+      "Palpate neck for lymphadenopathy",
+      "Auscultate lungs",
+      "Examine oropharynx and tongue",
+      "Check vital signs including oxygen saturation",
+      "Assess for laryngeal edema",
+      "Examine conjunctiva for edema",
+      "Palpate for facial edema",
+      "Assess skin temperature and perfusion"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect lips and perioral area": "Moderate bilateral lip edema, more prominent in upper lip, no cyanosis or ulceration",
+      "Examine skin for urticarial lesions": "Multiple raised erythematous wheals 0.5-2cm in diameter on arms, chest, and back with visible scratch marks",
+      "Palpate neck for lymphadenopathy": "No cervical lymphadenopathy palpated",
+      "Auscultate lungs": "Clear bilateral breath sounds, no wheezing or stridor",
+      "Examine oropharynx and tongue": "Normal tongue size and position, no pharyngeal edema, uvula normal",
+      "Check vital signs including oxygen saturation": "BP 122/76, HR 96, RR 18, Temp 37.0°C, SpO2 98% on room air",
+      "Assess for laryngeal edema": "Voice clear, no hoarseness, no inspiratory stridor",
+      "Examine conjunctiva for edema": "No periorbital edema, conjunctiva normal",
+      "Palpate for facial edema": "Mild facial fullness, no significant cheek or eyelid swelling",
+      "Assess skin temperature and perfusion": "Skin warm and well-perfused, normal capillary refill"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Drug-induced angioedema with urticaria (correct diagnosis)",
+      "Hereditary angioedema",
+      "Food allergy reaction",
+      "Anaphylaxis",
+      "Laryngeal edema",
+      "Contact dermatitis with secondary edema",
+      "Idiopathic urticaria and angioedema"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the obvious drug allergy and missing progression to anaphylaxis or other systemic involvement that requires immediate intervention",
+      "prematureClosure": "May quickly conclude this is simple drug allergy without adequately assessing for airway compromise or systemic anaphylactic reaction",
+      "availabilityBias": "Common drug allergies may overshadow consideration of hereditary angioedema or other non-allergic causes of similar presentations"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Priya Nair's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Before you interview the patient, think about what key historical features would help you distinguish between a localized allergic reaction versus a more serious systemic reaction. What specific questions about timing, progression, and associated symptoms would be most critical to ask?",
+      "phase5": "Now that you've gathered your history and exam findings, let's think through this systematically. What features point toward drug-induced angioedema versus other causes? How does the timeline, family history, and physical findings help narrow your differential? What's your assessment of this patient's immediate risk?",
+      "finalDebrief": "This case illustrates classic drug-induced angioedema with urticaria from NSAID hypersensitivity. Notice how the family history, prior aspirin reaction, and temporal relationship supported this diagnosis. The key teaching point is recognizing when angioedema is localized versus when it might progress to airway involvement. How did your differential evolve as you gathered more information, and what red flags would make you more concerned about anaphylaxis?"
     }
-}
+  }
 };

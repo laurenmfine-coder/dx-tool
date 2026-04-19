@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gabriela Herrera",
-  "patientHPI": "Three months ago I had the scariest experience of my life - I was making breakfast when suddenly my right arm and leg went completely weak and I couldn't speak properly, plus I was seeing these weird flashing lights. It lasted about an hour and a half, then I got this terrible headache on the left side that was so bad my husband rushed me to the emergency room. They did a brain scan but said it looked normal, which was confusing because I felt so terrible.",
+    "patientHPI": "Three months ago I had the scariest experience of my life - I was making breakfast when suddenly my right arm and leg went completely weak and I couldn't speak properly, plus I was seeing these weird flashing lights. It lasted about an hour and a half, then I got this terrible headache on the left side that was so bad my husband rushed me to the emergency room. They did a brain scan but said it looked normal, which was confusing because I felt so terrible.",
     "dob": "04/15/1992",
     "age": 33,
     "sex": "Female",
@@ -122,7 +122,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "ED"
     },
     {
@@ -212,31 +212,121 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "78.4", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "286", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "78.4",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "286",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "92", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "BUN", "value": "10", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "92",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "10",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "PT", "value": "12.8", "unit": "sec", "range": "11.0-13.5", "flag": "" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.8-1.1", "flag": "" },
-            { "test": "PTT", "value": "28", "unit": "sec", "range": "25-35", "flag": "" }
+            {
+              "test": "PT",
+              "value": "12.8",
+              "unit": "sec",
+              "range": "11.0-13.5",
+              "flag": ""
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": ""
+            },
+            {
+              "test": "PTT",
+              "value": "28",
+              "unit": "sec",
+              "range": "25-35",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -297,15 +387,42 @@ window.EMR_DATA = {
     "No family history of hemiplegic migraine, stroke, or early cardiac death"
   ],
   "socialHistory": [
-    ["Occupation", "Graphic designer (works from home)"],
-    ["Marital", "Married, no children; planning family"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Avoids — alcohol is a known migraine trigger"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Yoga 3x/week; walking 4x/week; avoids high-intensity (trigger)"],
-    ["Housing", "Townhouse with husband"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Graphic designer (works from home)"
+    ],
+    [
+      "Marital",
+      "Married, no children; planning family"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Avoids — alcohol is a known migraine trigger"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Yoga 3x/week; walking 4x/week; avoids high-intensity (trigger)"
+    ],
+    [
+      "Housing",
+      "Townhouse with husband"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "complex-migraine",
@@ -316,75 +433,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gabriela Herrera is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Gabriela appears anxious and hypervigilant, frequently touching her right arm while speaking. She's very forthcoming about symptoms but becomes visibly distressed when describing the weakness episodes, worried they might indicate something serious like a stroke.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did altered mental status start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened during your most recent episode?",
+      "How long did the weakness in your right arm and leg last?",
+      "Did you have any visual symptoms like flashing lights or blind spots?",
+      "What did your speech difficulties sound like - slurred, unable to find words, or something else?",
+      "Did you lose consciousness at any point during these episodes?",
+      "How severe was the headache that followed, on a scale of 1-10?",
+      "Which side of your head was the headache on?",
+      "Have you noticed any triggers that seem to bring on these episodes?",
+      "How many similar episodes have you had in the past few months?",
+      "Do you have any numbness or tingling in your face, arm, or leg during episodes?",
+      "Have you had any recent infections, illnesses, or medication changes?",
+      "Is there any family history of similar episodes or unusual migraines?",
+      "How have these episodes affected your work and daily activities?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Three months ago I had the scariest experience of my life - I was making breakfa.'",
-        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Complex Migraine.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Verapamil ER 240mg daily; Topiramate 50mg BID; Naproxen 500mg PRN; Metoclopramide 10mg PRN; Ferrous Sulfate 325mg daily.'",
-        "allergies": "'My allergies are Triptans (All classes), Ergotamine.'",
-        "family": "Mother: Migraine with aura, alive at 60  Father: Hypertension, Type 2 Diabetes Mellitus, alive at 64  Sister: Migraine without aura, alive at 30",
-        "social": "Occupation: Graphic designer (works from home)  Marital: Married, no children; planning family  Tobacco: Never smoker  Alcohol: Avoids \u2014 alcohol is a known migraine trigger  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you rephrase that? I'm still pretty shaken up about all this.",
+      "onset": "It started about three months ago while I was making breakfast. I was just standing at the stove when suddenly my right arm felt like it weighed a thousand pounds and I couldn't move it properly.",
+      "character": "The weakness comes on suddenly and it's complete - I can't lift my arm or leg at all. Then I get these zigzag flashing lights in my vision, and I can't get words out even though I know what I want to say.",
+      "location": "The weakness is always on my right side - my arm, leg, and sometimes my face feels droopy. The headache that follows is always on the left side of my head.",
+      "severity": "During the episode, the weakness is complete - I'd say 10/10. The headache afterward is usually about 8/10, throbbing and awful. I have to lie down in a dark room.",
+      "aggravating": "Stress definitely makes them more likely to happen. Also lack of sleep, bright lights during the episode make everything worse, and I think my period might be a trigger too.",
+      "relieving": "Nothing helps the weakness - I just have to wait it out. For the headache afterward, I take my naproxen and metoclopramide, and lie down in a dark, quiet room.",
+      "associated": "I get these shimmering zigzag lights in my vision, trouble speaking - not slurred but I can't find the right words, and sometimes tingling in my face. Then comes the horrible headache with nausea.",
+      "denies": "No, I never lose consciousness, no fever, no neck stiffness, no recent head trauma, no double vision, and no problems with coordination between episodes.",
+      "history": "I've had regular migraines with aura since I was a teenager, but these episodes with weakness only started three months ago. I've had four episodes total, and they're always the same pattern.",
+      "medications": "Verapamil ER 240mg daily; Topiramate 50mg BID; Naproxen 500mg PRN; Metoclopramide 10mg PRN; Ferrous Sulfate 325mg daily",
+      "allergies": "Triptans (All classes), Ergotamine",
+      "family": "My mother has migraines with aura like I've always had, and my sister gets migraines too but without the visual symptoms. Nobody in my family has ever had episodes with weakness like this though.",
+      "social": "I'm a graphic designer working from home, which is good because I can control my environment. I'm married and we're trying to start a family. I've never smoked, and I completely avoid alcohol because it triggers my regular migraines."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Neurological assessment during interictal period",
+      "Cranial nerve examination",
+      "Motor strength testing bilateral upper and lower extremities",
+      "Deep tendon reflexes",
+      "Sensory examination to light touch and pinprick",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment",
+      "Fundoscopic examination",
+      "Neck examination for meningeal signs",
+      "Cardiovascular examination including cardiac auscultation"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Complex Migraine. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Complex Migraine. Document specifically what you observe."
+      "Neurological assessment during interictal period": "Alert and oriented x3, normal mental status, no focal deficits currently present",
+      "Cranial nerve examination": "Cranial nerves II-XII intact bilaterally, no visual field defects, normal pupillary responses",
+      "Motor strength testing bilateral upper and lower extremities": "5/5 strength in all muscle groups bilaterally, no weakness detected between episodes",
+      "Deep tendon reflexes": "2+ reflexes bilaterally and symmetrically at biceps, triceps, patellar, and Achilles",
+      "Sensory examination to light touch and pinprick": "Intact sensation to light touch and pinprick in all extremities bilaterally",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)": "Normal coordination, no dysmetria or ataxia observed",
+      "Gait assessment": "Normal gait, no ataxia or weakness noted during ambulation",
+      "Fundoscopic examination": "Normal optic discs, no papilledema, normal retinal vasculature",
+      "Neck examination for meningeal signs": "No neck stiffness, negative Kernig's and Brudzinski's signs",
+      "Cardiovascular examination including cardiac auscultation": "Regular rate and rhythm, soft mid-systolic click consistent with known mitral valve prolapse, no murmurs"
     },
     "ddxTargets": [
-        "Complex Migraine (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Complex Migraine (Sporadic Hemiplegic Migraine) (correct diagnosis)",
+      "Transient Ischemic Attack (TIA)",
+      "Focal Seizure with Todd's Paralysis",
+      "Acute Cerebrovascular Accident (Stroke)",
+      "Intracranial Mass Lesion",
+      "Multiple Sclerosis",
+      "Conversion Disorder"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Complex Migraine, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Complex Migraine, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Complex Migraine based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Young healthy female with known migraine history may anchor thinking to 'just migraines' and miss the complexity of hemiplegic migraine requiring workup",
+      "prematureClosure": "The dramatic weakness may immediately suggest stroke, leading to premature closure without considering the full temporal pattern and migraine features",
+      "availabilityBias": "Recent stroke cases may make stroke seem more likely, while hemiplegic migraine is rare and may not come to mind readily"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gabriela Herrera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Complex Migraine (Sporadic Hemiplegic Migraine). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified some key differentials for acute weakness. What specific historical features would help you distinguish between a vascular event, seizure disorder, and a complex migraine? What questions about the temporal pattern and associated symptoms will be most crucial?",
+      "phase5": "The normal interictal exam is important - what does this tell you about vascular causes? Given the patient's age, stereotyped episodes, and migraine history, how has your differential evolved? What workup would you want before making a definitive diagnosis?",
+      "finalDebrief": "This case highlights sporadic hemiplegic migraine, a rare but important migraine variant that can mimic stroke. Notice how the family history, stereotyped nature of episodes, and complete interictal recovery pointed toward migraine. What red flags would have made you more concerned for stroke, and how do the diagnostic criteria for hemiplegic migraine help distinguish it from other causes of transient weakness?"
     }
-}
+  }
 };

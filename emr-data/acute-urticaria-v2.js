@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Jasmine Cooper",
-  "patientHPI": "My daughter broke out in these bumpy red patches all over her body three days ago - they come and go and move around to different spots. She had a cold with a runny nose last week, but we haven't given her any new foods or medicines.",
+      "patientHPI": "My daughter broke out in these bumpy red patches all over her body three days ago - they come and go and move around to different spots. She had a cold with a runny nose last week, but we haven't given her any new foods or medicines.",
       "dob": "10/24/2021",
       "age": "5",
       "sex": "Female",
@@ -907,94 +907,97 @@ window.EMR_DATA = {
       "Issue",
       "Overdiagnosis — post-viral urticaria does NOT need allergy workup, but parents demanding it"
     ]
-  ]
-,"references":[
-  {
-    "id": "EAACI-Urticaria-2022",
-    "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
-    "authors": "Zuberbier T, Abdul Latiff AH, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15090",
-    "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
-    "openAccess": true,
-    "validates": [
-      "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
-      "UAS7 scoring",
-      "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
-      "Post-viral urticaria in children: no allergy testing needed"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "EAACI-Urticaria-2022",
+      "title": "EAACI/GA2LEN/EuroGuiDerm/APAAACI urticaria guideline",
+      "authors": "Zuberbier T, Abdul Latiff AH, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15090",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/all.15090",
+      "openAccess": true,
+      "validates": [
+        "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
+        "UAS7 scoring",
+        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Post-viral urticaria in children: no allergy testing needed"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Jasmine Cooper is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Jasmine is a tired but cooperative 5-year-old who appears mildly uncomfortable from itching but is otherwise well-appearing. Her parents are visibly anxious, frequently interrupting to mention their concerns about food allergies and their insistence on comprehensive allergy testing.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did the hives first appear and how did they start?",
+      "Has Jasmine been sick recently with any cold or viral symptoms?",
+      "What do the hives look like and do they move around on her body?",
+      "How long do individual hives last before disappearing?",
+      "Has Jasmine had any swelling of her face, lips, or tongue?",
+      "Has she eaten any new foods in the past week?",
+      "Is she taking any new medications or vitamins?",
+      "Has she been exposed to any new soaps, detergents, or pets?",
+      "Does Jasmine have any trouble breathing or wheezing?",
+      "Has she had hives like this before?",
+      "What treatments have you tried and do they help?",
+      "Are there any known food allergies in the family?",
+      "How is Jasmine's energy level and appetite?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Cetirizine; Diphenhydramine.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Context: Post-viral urticaria \u2014 parents think it's food allergy and want extensive testing  Viral illness: URI 5 days ago, now diffuse hives for 3 days  Parental anxiety: Parents restricting diet to rice and chicken \u2014 unnecessary food restriction  Issue: Overdiagnosis \u2014 post-viral urticaria does NOT need allergy workup, but parents demanding it"
+      "default": "I'm not sure about that. The main thing is these hives appeared after her cold and we're worried it might be a food allergy.",
+      "onset": "The hives started 3 days ago, about 2 days after her cold symptoms were getting better. They appeared all over her body pretty suddenly.",
+      "character": "They're raised, red welts that are really itchy. They seem to come and go in different spots throughout the day.",
+      "location": "They're everywhere - her trunk, arms, legs, and back. They move around and new ones appear while others fade away.",
+      "severity": "The itching is about a 6 out of 10. She's uncomfortable but can still play and sleep with the antihistamines.",
+      "aggravating": "They seem worse when she gets warm or excited. Scratching makes them look more red and irritated.",
+      "relieving": "The Benadryl and Zyrtec help with the itching quite a bit. Cool baths also seem to provide some relief.",
+      "associated": "She just got over a runny nose and low fever from a cold 5 days ago. No other symptoms right now.",
+      "denies": "No facial swelling, no trouble breathing, no wheezing, no vomiting or diarrhea, and no fever with the hives.",
+      "history": "She's never had hives before. She's generally a healthy kid with just the usual colds.",
+      "medications": "Cetirizine; Diphenhydramine",
+      "allergies": "NKDA",
+      "family": "No known food allergies in the family. Her older brother gets eczema sometimes but no hives.",
+      "social": "She goes to preschool where there was a cold going around last week. We haven't changed anything in her diet or household products."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and vital signs assessment",
+      "Skin examination for urticarial lesions",
+      "Assessment for angioedema of face, lips, and tongue",
+      "Lymph node examination",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Assessment of individual wheals for duration and characteristics"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and vital signs assessment": "Well-appearing child, mildly uncomfortable from pruritus, afebrile, HR 108, normal for age",
+      "Skin examination for urticarial lesions": "Multiple erythematous, raised wheals of varying sizes (0.5-3cm) scattered across trunk, extremities, and back",
+      "Assessment for angioedema of face, lips, and tongue": "No facial, lip, or tongue swelling observed",
+      "Lymph node examination": "No lymphadenopathy palpated",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezing or stridor",
+      "Abdominal examination": "Soft, non-tender, no organomegaly",
+      "Assessment of individual wheals for duration and characteristics": "Individual lesions blanch with pressure, none present >24 hours per parent report"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Post-viral acute urticaria (correct diagnosis)",
+      "Food-induced allergic urticaria",
+      "Contact dermatitis",
+      "Anaphylaxis (must-not-miss)",
+      "Hereditary angioedema (must-not-miss)",
+      "Viral exanthem",
+      "Drug-induced urticaria"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on parents' insistence about food allergy and ordering unnecessary extensive allergy testing",
+      "prematureClosure": "Risk of immediately attributing to food allergy without considering temporal relationship to recent viral illness",
+      "availabilityBias": "May overestimate food allergy probability due to parental anxiety and recent cases of food allergies seen"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Jasmine Cooper: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Good start on your differential. I notice the parents are quite concerned about food allergies. What key historical details will help you determine if this is truly food-related versus another cause? Think about timing and associated symptoms.",
+      "phase5": "Excellent history and physical. You've noted the temporal relationship to the viral illness and absence of angioedema. How does this clinical picture fit with post-viral urticaria versus food allergy? What's your approach to the parents' request for extensive allergy testing?",
+      "finalDebrief": "This case highlights post-viral urticaria, the most common cause of acute hives in children. Notice how your differential evolved from considering food allergies to recognizing the viral trigger. What did you learn about when allergy testing is appropriate versus potentially harmful?"
     }
-}
+  }
 };

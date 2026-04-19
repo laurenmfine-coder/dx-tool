@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Howard Kim",
-  "patientHPI": "About three weeks ago I started taking a new medication for my joint pain, and now I have this terrible rash all over my body with a fever. My face feels swollen, my neck glands are enlarged, and my skin has turned yellow - I'm really worried something is seriously wrong.",
+      "patientHPI": "About three weeks ago I started taking a new medication for my joint pain, and now I have this terrible rash all over my body with a fever. My face feels swollen, my neck glands are enlarged, and my skin has turned yellow - I'm really worried something is seriously wrong.",
       "dob": "06/13/1974",
       "age": "52",
       "sex": "Male",
@@ -1177,122 +1177,129 @@ window.EMR_DATA = {
       "Organ involvement",
       "Hepatitis (ALT 680), eosinophilia, rash"
     ]
-  ]
-,"references":[
-  {
-    "id": "RegiSCAR-2013",
-    "title": "DRESS: results from the prospective RegiSCAR study",
-    "authors": "Kardaun SH, Sekula P, Valeyrie-Allanore L, et al.",
-    "journal": "Br J Dermatol",
-    "year": 2013,
-    "doi": "10.1111/bjd.12501",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
-    "openAccess": true,
-    "validates": [
-      "RegiSCAR score ≥5 = definite DRESS",
-      "HHV-6 reactivation",
-      "Organ involvement patterns",
-      "Slow steroid taper 8-12 weeks"
-    ]
-  },
-  {
-    "id": "HLA-B5801-ACR-2020",
-    "title": "2020 ACR guideline for management of gout",
-    "authors": "FitzGerald JD, Dalbeth N, Mikuls T, et al.",
-    "journal": "Arthritis Care Res",
-    "year": 2020,
-    "doi": "10.1002/acr.24180",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10563586/",
-    "openAccess": true,
-    "validates": [
-      "HLA-B*58:01 testing before allopurinol in SE Asian, Korean, African American patients"
-    ]
-  },
-  {
-    "id": "DRESS-Autoimmunity-2019",
-    "title": "DRESS syndrome and long-term risk of autoimmunity",
-    "authors": "Chen YC, Chang CY, Cho YT, et al.",
-    "journal": "J Allergy Clin Immunol Pract",
-    "year": 2019,
-    "doi": "10.1016/j.jaip.2018.08.004",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
-    "openAccess": true,
-    "validates": [
-      "Autoimmune thyroiditis ~40% post-DRESS",
-      "TSH monitoring at 3, 6, 12 months",
-      "Type 1 DM risk"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "RegiSCAR-2013",
+      "title": "DRESS: results from the prospective RegiSCAR study",
+      "authors": "Kardaun SH, Sekula P, Valeyrie-Allanore L, et al.",
+      "journal": "Br J Dermatol",
+      "year": 2013,
+      "doi": "10.1111/bjd.12501",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
+      "openAccess": true,
+      "validates": [
+        "RegiSCAR score ≥5 = definite DRESS",
+        "HHV-6 reactivation",
+        "Organ involvement patterns",
+        "Slow steroid taper 8-12 weeks"
+      ]
+    },
+    {
+      "id": "HLA-B5801-ACR-2020",
+      "title": "2020 ACR guideline for management of gout",
+      "authors": "FitzGerald JD, Dalbeth N, Mikuls T, et al.",
+      "journal": "Arthritis Care Res",
+      "year": 2020,
+      "doi": "10.1002/acr.24180",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10563586/",
+      "openAccess": true,
+      "validates": [
+        "HLA-B*58:01 testing before allopurinol in SE Asian, Korean, African American patients"
+      ]
+    },
+    {
+      "id": "DRESS-Autoimmunity-2019",
+      "title": "DRESS syndrome and long-term risk of autoimmunity",
+      "authors": "Chen YC, Chang CY, Cho YT, et al.",
+      "journal": "J Allergy Clin Immunol Pract",
+      "year": 2019,
+      "doi": "10.1016/j.jaip.2018.08.004",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
+      "openAccess": true,
+      "validates": [
+        "Autoimmune thyroiditis ~40% post-DRESS",
+        "TSH monitoring at 3, 6, 12 months",
+        "Type 1 DM risk"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Howard Kim is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Howard appears anxious and concerned about his worsening symptoms, particularly the facial swelling and jaundice. He is cooperative and forthcoming with information but expresses frustration that his gout medication seems to have made him sicker than before.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did you first notice the rash and how has it changed?",
+      "Tell me about the facial swelling - when did it start?",
+      "Have you noticed any yellowing of your eyes or skin?",
+      "What medications were you started on recently?",
+      "Do you have any known kidney problems?",
+      "Have you had any genetic testing done before starting medications?",
+      "Are you of Asian descent, particularly Korean or Chinese?",
+      "Have you noticed any swollen lymph nodes in your neck or armpits?",
+      "Tell me about your fever pattern",
+      "Have you had any nausea, vomiting, or abdominal pain?",
+      "Any difficulty breathing or chest pain?",
+      "Have you ever had a reaction like this to medications before?",
+      "What was the original reason you were prescribed allopurinol?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Allopurinol; Methylprednisolone; IV Fluids; N-acetylcysteine.'",
-        "allergies": "'My allergies: Allopurinol.'",
-        "family": "Non-contributory",
-        "social": "Context: Korean descent \u2014 HLA-B*58:01 prevalence 12% in Korean population  Comorbidity: CKD stage 3 \u2014 increased allopurinol DRESS risk  Timing: Started allopurinol 3 weeks ago for gout \u2014 should have been HLA-tested first  Organ involvement: Hepatitis (ALT 680), eosinophilia, rash"
+      "default": "I'm not sure what you mean - could you ask that differently? I'm mainly worried about this rash and swelling.",
+      "onset": "The rash started about 4-5 days ago, maybe a week after I noticed some fever. The facial swelling came on more recently, maybe 2-3 days ago. Everything seemed to start about 2-3 weeks after I began the gout medication.",
+      "character": "The rash is red and bumpy all over my body, kind of like measles I guess. My face feels puffy and tight, especially around my eyes and cheeks.",
+      "location": "The rash is everywhere - my chest, back, arms, legs. The swelling is mainly in my face but I've noticed some lumps in my neck and under my arms too.",
+      "severity": "The fever makes me feel about 6 out of 10 sick, but I'm most worried about how I look - the swelling and yellowing is really concerning me.",
+      "aggravating": "The rash seems worse when I'm warm or after showering. The swelling doesn't seem to change much with position.",
+      "relieving": "Nothing really helps. I tried some Tylenol for the fever which helped a little, but the rash and swelling haven't improved.",
+      "associated": "I've had fever up to 102°F, chills, fatigue, and I noticed my urine is darker and my eyes look yellow. I feel some lumps in my neck and armpits.",
+      "denies": "No chest pain, no trouble breathing, no severe abdominal pain, no diarrhea or bloody stools.",
+      "history": "I've never had anything like this before. Never had problems with medications.",
+      "medications": "Allopurinol; Methylprednisolone; IV Fluids; N-acetylcysteine",
+      "allergies": "Allopurinol",
+      "family": "Nothing really runs in my family that I know of. My parents are both from Korea originally.",
+      "social": "I work in accounting, don't smoke, maybe 1-2 drinks per week. My parents immigrated from Korea. I was started on allopurinol for gout attacks I was having."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Skin examination for rash distribution and characteristics",
+      "Facial examination for edema and icterus",
+      "Scleral examination for jaundice",
+      "Lymph node palpation (cervical, axillary, inguinal)",
+      "Abdominal examination for hepatosplenomegaly",
+      "Vital signs including temperature",
+      "Cardiovascular examination",
+      "Pulmonary examination for crackles or effusion",
+      "Mucous membrane examination",
+      "Assessment for peripheral edema"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Skin examination for rash distribution and characteristics": "Diffuse morbilliform eruption covering trunk, extremities, and face with some areas of confluence. No vesicles or pustules.",
+      "Facial examination for edema and icterus": "Significant periorbital and facial edema with obvious jaundice of facial skin",
+      "Scleral examination for jaundice": "Marked scleral icterus bilaterally",
+      "Lymph node palpation (cervical, axillary, inguinal)": "Bilateral cervical and axillary lymphadenopathy, nodes 1-2cm, mobile, non-tender",
+      "Abdominal examination for hepatosplenomegaly": "Hepatomegaly with liver edge palpable 3cm below right costal margin, mild tenderness",
+      "Vital signs including temperature": "Temperature 39.2°C, BP 118/72, HR 96, SpO2 97% on room air",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs or gallops",
+      "Pulmonary examination for crackles or effusion": "Clear to auscultation bilaterally, no adventitious sounds",
+      "Mucous membrane examination": "Oral mucosa shows mild erythema but no ulcerations or enanthem",
+      "Assessment for peripheral edema": "Trace bilateral lower extremity edema"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "DRESS syndrome (Drug Reaction with Eosinophilia and Systemic Symptoms) (correct diagnosis)",
+      "Stevens-Johnson syndrome/Toxic epidermal necrolysis",
+      "Acute viral hepatitis with drug reaction",
+      "Sepsis with multi-organ involvement",
+      "Acute leukemia or lymphoma",
+      "Infectious mononucleosis",
+      "Serum sickness-like syndrome"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on common causes of fever and rash like viral syndrome, missing the drug reaction component and severity of systemic involvement",
+      "prematureClosure": "Risk of stopping at 'drug allergy' without recognizing this as life-threatening DRESS syndrome requiring immediate drug discontinuation and systemic treatment",
+      "availabilityBias": "May think of more common drug reactions or viral illnesses rather than the rare but serious DRESS syndrome, especially missing the pharmacogenetic component in Korean patients"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Howard Kim: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This patient presents with a constellation of symptoms following recent medication initiation. What key features in the timeline and patient demographics should influence your diagnostic approach? Consider both the temporal relationship and any population-specific risk factors.",
+      "phase5": "You've identified significant systemic involvement with hepatitis, eosinophilia, and lymphadenopathy in addition to the fever and rash. How does this pattern of multi-organ involvement change your differential diagnosis? What specific medication-related syndrome should you be most concerned about?",
+      "finalDebrief": "This case illustrates DRESS syndrome, a severe delayed hypersensitivity reaction. Key learning points: the importance of HLA-B*58:01 testing in Korean patients before allopurinol initiation, recognition of the 2-6 week onset pattern, and the systemic nature distinguishing DRESS from simple drug rash. How might this case change your approach to prescribing allopurinol in the future?"
     }
-}
+  }
 };

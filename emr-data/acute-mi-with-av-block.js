@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Raymond Brooks",
-  "patientHPI": "I've been having trouble catching my breath when I climb stairs or walk more than a couple blocks these past few weeks. Sometimes my jaw feels tight and heavy when I'm walking, but it goes away when I sit down and rest. I'm worried because this is new for me.",
+    "patientHPI": "I've been having trouble catching my breath when I climb stairs or walk more than a couple blocks these past few weeks. Sometimes my jaw feels tight and heavy when I'm walking, but it goes away when I sit down and rest. I'm worried because this is new for me.",
     "dob": "09/14/1958",
     "age": 67,
     "sex": "Male",
@@ -196,7 +196,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "216 lbs",
       "ht": "5'10\"",
-      "bmi": 31.0,
+      "bmi": 31,
       "setting": "Specialist"
     }
   ],
@@ -239,34 +239,112 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "172", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "172",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "8.1", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "8.1",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CARDIAC MARKERS",
           "results": [
-            { "test": "BNP", "value": "280", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "BNP",
+              "value": "280",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "168", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "88", "unit": "mg/dL", "range": "<70 optimal for CAD", "flag": "H" },
-            { "test": "HDL Cholesterol", "value": "34", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "230", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "168",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "<70 optimal for CAD",
+              "flag": "H"
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "34",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "230",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -334,15 +412,42 @@ window.EMR_DATA = {
     "Sister: T2DM, Hypertension, alive at 60"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker; retired 2023"],
-    ["Marital", "Married 40 years; wife Diane, age 65"],
-    ["Tobacco", "Former smoker — quit 2010; 20 pack-year history"],
-    ["Alcohol", "Rare; 1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 20 min daily; limited by dyspnea recently"],
-    ["Housing", "Single-family home with wife; two-story (bedroom upstairs — struggling)"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "POLST on file — Full Code; HCP: wife Diane Brooks"]
+    [
+      "Occupation",
+      "Retired postal worker; retired 2023"
+    ],
+    [
+      "Marital",
+      "Married 40 years; wife Diane, age 65"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2010; 20 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "Rare; 1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 20 min daily; limited by dyspnea recently"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife; two-story (bedroom upstairs — struggling)"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code; HCP: wife Diane Brooks"
+    ]
   ],
   "meta": {
     "caseId": "acute-mi-with-av-block",
@@ -353,75 +458,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Raymond Brooks appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Raymond appears anxious and slightly pale, frequently placing his hand on his chest during the conversation. He's cooperative and forthcoming but clearly concerned about his worsening symptoms, especially given his family history of heart disease. He speaks in measured tones, occasionally pausing to catch his breath.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did cardiac emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when these symptoms started?",
+      "What does the jaw tightness feel like - heavy, squeezing, or sharp?",
+      "How many blocks could you walk before without symptoms?",
+      "Have you had any chest pain or pressure?",
+      "Do you feel dizzy, lightheaded, or have you fainted?",
+      "Any nausea, vomiting, or sweating with the symptoms?",
+      "Have you used your nitroglycerin for these episodes?",
+      "Any swelling in your legs or ankles recently?",
+      "Are you taking all your medications as prescribed?",
+      "Any recent changes in your diabetes control?",
+      "Have you had any recent illness or infections?",
+      "Any palpitations or feeling like your heart skips beats?",
+      "Do the symptoms wake you up at night or occur at rest?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having trouble catching my breath when I climb stairs or walk more tha.'",
-        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Inferior STEMI with Complete Heart Block.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Aspirin 81mg daily; Atorvastatin 80mg QHS; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Insulin Glargine 24 units QHS; Metformin 1000mg BID; Gabapentin 300mg TID; Nitroglycerin 0.4mg SL PRN.'",
-        "allergies": "'My allergies are Clopidogrel, IV Contrast Dye.'",
-        "family": "Father: Fatal MI at age 54 (deceased)  Mother: T2DM, HTN, Stroke at 70, deceased at 76  Brother: CAD (CABG age 58), alive at 62",
-        "social": "Occupation: Retired postal worker; retired 2023  Marital: Married 40 years; wife Diane, age 65  Tobacco: Former smoker \u2014 quit 2010; 20 pack-year history  Alcohol: Rare; 1-2 beers on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you explain that differently?",
+      "onset": "It started about three weeks ago. At first it was just when I was doing yard work or going up two flights of stairs, but now it happens when I walk just a couple blocks to the mailbox.",
+      "character": "The jaw feeling is hard to describe - it's like a heavy, tight sensation, almost like someone is pressing down on it. The shortness of breath feels like I just can't get enough air in.",
+      "location": "The jaw tightness is mostly on the left side and sometimes spreads to my neck. The breathing trouble is just... everywhere, like my whole chest is tight.",
+      "severity": "I'd say the jaw thing is about a 6 out of 10 when it happens, and the shortness of breath makes me feel like I have to stop what I'm doing completely. It's really limiting what I can do.",
+      "aggravating": "Any physical activity makes it worse - walking, climbing stairs, even carrying groceries. It seems to come on faster now than it did a few weeks ago.",
+      "relieving": "When I sit down and rest for about 5-10 minutes, the jaw tightness goes away and I can breathe better. I haven't tried my nitroglycerin yet - should I have?",
+      "associated": "Sometimes I feel a little nauseous when the jaw tightness is bad, and I've been more tired than usual. My wife says I look pale lately.",
+      "denies": "No sharp chest pain, no fainting, no leg swelling that I've noticed. No fever or chills.",
+      "history": "I've never had symptoms quite like this before. I had some chest tightness a few years ago that led to my heart catheterization, but this feels different.",
+      "medications": "Aspirin 81mg daily; Atorvastatin 80mg QHS; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Insulin Glargine 24 units QHS; Metformin 1000mg BID; Gabapentin 300mg TID; Nitroglycerin 0.4mg SL PRN",
+      "allergies": "Clopidogrel, IV Contrast Dye",
+      "family": "My father died of a massive heart attack when he was only 54. My brother had bypass surgery at 58. Heart disease definitely runs in my family, which is why I'm so worried about these new symptoms.",
+      "social": "I just retired last year from the postal service after 35 years. I quit smoking in 2010 - smoked for about 20 years before that. I barely drink, maybe a beer or two on weekends. Never used drugs."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Cardiac auscultation",
+      "Lung auscultation",
+      "Blood pressure measurement",
+      "Heart rate and rhythm assessment",
+      "Jugular venous pressure",
+      "Lower extremity edema assessment",
+      "Peripheral pulse examination",
+      "Carotid pulse assessment",
+      "Abdominal examination",
+      "Neurological assessment for focal deficits"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Acute Inferior STEMI with Complete Heart Block. Document specifically what you observe."
+      "Cardiac auscultation": "Bradycardic regular rhythm at 58 bpm, S1 and S2 present, no murmurs, rubs, or gallops appreciated",
+      "Lung auscultation": "Clear to auscultation bilaterally, no crackles, wheezes, or rhonchi",
+      "Blood pressure measurement": "132/78 mmHg, consistent with baseline hypertension",
+      "Heart rate and rhythm assessment": "58 bpm, regular but notably bradycardic, strong peripheral pulses",
+      "Jugular venous pressure": "Mildly elevated at 8-9 cm H2O",
+      "Lower extremity edema assessment": "No pedal edema, no calf tenderness or swelling",
+      "Peripheral pulse examination": "2+ radial and dorsalis pedis pulses bilaterally, no bruits",
+      "Carotid pulse assessment": "2+ carotid pulses bilaterally without bruits, no delay",
+      "Abdominal examination": "Soft, non-tender, no hepatomegaly or masses palpated",
+      "Neurological assessment for focal deficits": "Alert and oriented, no focal neurological deficits, sensation intact in hands and feet despite diabetic neuropathy history"
     },
     "ddxTargets": [
-        "Acute Inferior STEMI with Complete Heart Block (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Inferior STEMI with Complete Heart Block (correct diagnosis)",
+      "Unstable Angina/NSTEMI",
+      "Acute Decompensated Heart Failure",
+      "Pulmonary Embolism",
+      "Aortic Dissection",
+      "Gastroesophageal Reflux Disease",
+      "Anxiety/Panic Disorder"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Inferior STEMI with Complete Heart Block, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Inferior STEMI with Complete Heart Block, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Inferior STEMI with Complete Heart Block based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on stable angina given the classic exertional pattern and known CAD history, potentially missing the acute nature and heart block component",
+      "prematureClosure": "May stop investigating after finding exertional symptoms in a known CAD patient without obtaining ECG or considering complete heart block as cause of symptoms",
+      "availabilityBias": "Recent cases of stable angina or GERD might lead to underestimating the acute cardiac nature of jaw pain and dyspnea in this diabetic patient"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Raymond Brooks's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Inferior STEMI with Complete Heart Block. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, what key historical features would help you distinguish between stable angina and an acute coronary syndrome? Given his diabetes and known CAD, what atypical presentations should you be considering?",
+      "phase5": "You've identified concerning symptoms in a high-risk patient. His bradycardia of 58 bpm is notable - what could cause both his symptoms and this heart rate? What immediate diagnostic test would be most helpful, and what findings might explain both his presentation and vital signs?",
+      "finalDebrief": "This case illustrates how inferior STEMI can present with atypical symptoms like jaw discomfort and dyspnea, especially in diabetic patients. The complete heart block caused his bradycardia and contributed to his symptoms. How did your differential evolve from stable angina to acute MI? What clues pointed toward heart block as a complication?"
     }
-}
+  }
 };

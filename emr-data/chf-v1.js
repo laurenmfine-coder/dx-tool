@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "William Turner",
-  "patientHPI": "I just can't breathe when I try to lay down flat anymore - it's not pain anywhere specific, I just feel like I'm suffocating. I have to prop myself up with a bunch of pillows just to get any rest at all.",
+    "patientHPI": "I just can't breathe when I try to lay down flat anymore - it's not pain anywhere specific, I just feel like I'm suffocating. I have to prop myself up with a bunch of pillows just to get any rest at all.",
     "dob": "06/15/1958",
     "age": "68",
     "sex": "Male",
@@ -15,13 +15,13 @@ window.EMR_DATA = {
     "address": "5769 Peachtree Rd, Memphis, TN 38108",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
+    "pharmacy": "CVS Pharmacy — Federal Hwy",
     "emergencyContact": {
       "name": "Michael Cook",
       "phone": "(713) 555-4694",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+    "chiefComplaint": "Can't breathe when I lay down No specific spot — just can't breathe",
     "diagnosis": "Acute Decompensated Heart Failure"
   },
   "problems": [
@@ -111,7 +111,7 @@ window.EMR_DATA = {
   "allergies": [
     {
       "allergen": "ACE inhibitors",
-      "reaction": "Angioedema \u2014 switched from enalapril to lisinopril without issue but reports this",
+      "reaction": "Angioedema — switched from enalapril to lisinopril without issue but reports this",
       "severity": "Moderate",
       "type": "Drug"
     }
@@ -123,7 +123,7 @@ window.EMR_DATA = {
       "bp": "168/98",
       "hr": "110 (irregularly irregular)",
       "rr": "28",
-      "temp": "36.8\u00b0C",
+      "temp": "36.8°C",
       "spo2": "88%",
       "pain": "9/10",
       "bmi": "32",
@@ -136,10 +136,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
-      "hpi": "William Turner is a 68-year-old male presenting with can't breathe when i lay down no specific spot \u2014 just can't breathe. Past medical history includes Heart failure with reduced EF, Atrial fibrillation, Type 2 Diabetes, Hypertension, Prior MI 5 years ago. See chart for full details.",
+      "cc": "Can't breathe when I lay down No specific spot — just can't breathe",
+      "hpi": "William Turner is a 68-year-old male presenting with can't breathe when i lay down no specific spot — just can't breathe. Past medical history includes Heart failure with reduced EF, Atrial fibrillation, Type 2 Diabetes, Hypertension, Prior MI 5 years ago. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Decompensated Heart Failure \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Decompensated Heart Failure — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -161,7 +161,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.1",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -182,7 +182,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "229",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -296,24 +296,24 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-186165",
-      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
       "technique": "Standard protocol",
       "findings": "Cardiomegaly. Bilateral pleural effusions (right > left). Cephalization of pulmonary vasculature. Kerley B lines. Bilateral alveolar infiltrates in butterfly pattern.",
-      "impression": "Pulmonary edema with bilateral pleural effusions \u2014 acute decompensated heart failure",
+      "impression": "Pulmonary edema with bilateral pleural effusions — acute decompensated heart failure",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
     {
       "id": "img-2",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 Cardiac",
+      "study": "POCUS – Cardiac",
       "status": "Final",
       "priority": "Routine",
       "orderedBy": "Dr. ED Physician",
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-978996",
-      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
       "technique": "Standard protocol",
       "findings": "Severely reduced LV systolic function (EF ~20%). Dilated LV. Moderate mitral regurgitation. Small pericardial effusion. Dilated IVC without respiratory variation.",
       "impression": "Severely reduced EF with volume overload",
@@ -323,14 +323,14 @@ window.EMR_DATA = {
     {
       "id": "img-3",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 Lung",
+      "study": "POCUS – Lung",
       "status": "Final",
       "priority": "Routine",
       "orderedBy": "Dr. ED Physician",
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-750659",
-      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
       "technique": "Standard protocol",
       "findings": "Bilateral B-lines in >3 lung zones (>3 B-lines per intercostal space). Small bilateral pleural effusions.",
       "impression": "Pulmonary edema confirmed by lung ultrasound",
@@ -347,10 +347,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-163338",
-      "clinical": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
       "technique": "Standard 12-lead",
       "findings": "Atrial fibrillation with rapid ventricular response at 110 bpm. Left ventricular hypertrophy. Old Q waves in V1-V3 (prior anterior MI). No acute ST changes",
-      "impression": "AFib with RVR, LVH, old anterior MI \u2014 no new acute ischemia",
+      "impression": "AFib with RVR, LVH, old anterior MI — no new acute ischemia",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -403,75 +403,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "William Turner appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "William appears visibly anxious and slightly short of breath even while sitting upright. He's cooperative and forthcoming with information but shows clear distress when describing his inability to lie flat, frequently adjusting his position during the interview.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did can't breathe when i lay down no specific spot \u2014 just can't breathe start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice you couldn't breathe when lying down?",
+      "How many pillows do you need to sleep comfortably now?",
+      "Have you noticed any swelling in your legs, ankles, or feet?",
+      "Are you having any chest pain or pressure?",
+      "Have you been more tired than usual lately?",
+      "Are you waking up at night gasping for air?",
+      "Have you gained any weight recently?",
+      "Are you taking your heart medications as prescribed?",
+      "Have you been urinating more or less than usual?",
+      "Do you get short of breath with walking or climbing stairs?",
+      "Have you had any recent changes to your medications?",
+      "Are you following a low-salt diet?",
+      "Have you had any recent illnesses or infections?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I just can't breathe when I try to lay down flat anymore - it's not pain anywher.'",
-        "character": "'It's can't breathe when i lay down no specific spot \u2014 just can't breathe \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Furosemide; Lisinopril; Carvedilol; Apixaban; Metformin.'",
-        "allergies": "'My allergies are ACE inhibitors.'",
-        "family": "Mother died of heart failure at 72  Father had MI at 60",
-        "social": "Tobacco: Quit 5 years ago, 20 pack-years  Alcohol: Stopped drinking 3 years ago at diagnosis  Drugs: Denies  Occupation: Retired bus driver  Living: Lives with adult daughter"
+      "default": "I'm not sure what you mean by that - could you ask it a different way?",
+      "onset": "This has been getting worse over the past 2-3 weeks, but I really noticed it badly about a week ago when I couldn't sleep at all lying flat",
+      "character": "It's not pain - it's like I'm drowning or suffocating when I try to lay back. I just can't get enough air in my lungs",
+      "location": "It's not in any particular spot - it's just my whole chest and breathing that feels wrong when I'm flat",
+      "severity": "When I try to lie flat it's probably an 8 out of 10 - I feel like I'm going to die. Sitting up it's maybe a 4 or 5",
+      "aggravating": "Lying flat makes it terrible. Even slight activity like walking to the bathroom makes me more winded than it used to",
+      "relieving": "Sitting up helps a lot. I'm sleeping in my recliner now with it pretty much upright",
+      "associated": "My legs have been more swollen lately, and I'm more tired than usual. I think I've gained some weight but I don't weigh myself regularly",
+      "denies": "No chest pain, no fever, no cough really - maybe a little dry cough at night",
+      "history": "I've had some breathing trouble before with my heart condition, but never this bad where I couldn't lie down at all",
+      "medications": "Furosemide; Lisinopril; Carvedilol; Apixaban; Metformin",
+      "allergies": "ACE inhibitors",
+      "family": "My mother died of heart failure when she was 72, and my father had a heart attack at 60",
+      "social": "I'm retired from driving buses. I quit smoking 5 years ago after my heart attack - I smoked about a pack a day for 20 years. I stopped drinking 3 years ago when they diagnosed my heart failure. I live with my daughter now"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Jugular venous pressure assessment",
+      "Cardiac auscultation",
+      "Pulmonary auscultation",
+      "Lower extremity edema assessment",
+      "Hepatojugular reflux test",
+      "Point of maximal impulse palpation",
+      "Abdominal examination for hepatomegaly",
+      "Assessment for S3 gallop",
+      "Peripheral pulse examination",
+      "Weight measurement if available"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Jugular venous pressure assessment": "JVP elevated to 12 cm H2O with visible jugular venous distention",
+      "Cardiac auscultation": "Irregularly irregular rhythm, tachycardic, S3 gallop present, no murmurs",
+      "Pulmonary auscultation": "Fine bilateral crackles at both lung bases extending up to mid-lung fields",
+      "Lower extremity edema assessment": "3+ pitting edema bilaterally to mid-shins",
+      "Hepatojugular reflux test": "Positive hepatojugular reflux",
+      "Point of maximal impulse palpation": "PMI displaced laterally to anterior axillary line, sustained and diffuse",
+      "Abdominal examination for hepatomegaly": "Liver edge palpable 3 cm below right costal margin",
+      "Assessment for S3 gallop": "S3 gallop clearly audible at cardiac apex",
+      "Peripheral pulse examination": "Peripheral pulses intact but weak",
+      "Weight measurement if available": "Patient reports 8-10 pound weight gain over past 3 weeks"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute decompensated heart failure (correct diagnosis)",
+      "Pulmonary edema",
+      "Atrial fibrillation with rapid ventricular response",
+      "Acute coronary syndrome",
+      "Pulmonary embolism",
+      "Pneumonia",
+      "COPD exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on heart failure history and missing acute coronary syndrome or new arrhythmias that could be precipitating the decompensation",
+      "prematureClosure": "May assume it's just medication non-compliance without investigating precipitating factors like dietary indiscretion, medication changes, or new cardiac events",
+      "availabilityBias": "Recent exposure to heart failure cases might make you overconfident in the diagnosis without considering pulmonary embolism or pneumonia in this high-risk patient"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed William Turner's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given this patient's known heart failure history, what specific questions will help you determine if this is decompensated heart failure versus a new acute process? Think about precipitating factors and the timeline of symptom progression.",
+      "phase5": "Excellent history and physical. You've identified clear signs of volume overload. Now consider: what might have precipitated this decompensation in a patient who was previously stable? How does the irregular heart rhythm factor into your assessment and management priorities?",
+      "finalDebrief": "This case demonstrates classic acute decompensated heart failure with the triad of orthopnea, volume overload, and known reduced EF. Notice how the patient's known heart failure history could have led to premature closure - it was important to consider precipitating factors like atrial fibrillation with RVR, medication non-adherence, or dietary indiscretion. The physical exam findings of elevated JVP, S3 gallop, and bilateral edema clinched the diagnosis."
     }
-}
+  }
 };

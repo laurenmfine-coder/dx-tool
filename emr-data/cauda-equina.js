@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frances Yamamoto",
-  "patientHPI": "My lower back is killing me, and now the pain is shooting down the back of both my legs all the way to my calves. It's different from my usual back problems - this pain goes much further down than before.",
+    "patientHPI": "My lower back is killing me, and now the pain is shooting down the back of both my legs all the way to my calves. It's different from my usual back problems - this pain goes much further down than before.",
     "dob": "05/17/1964",
     "age": "62",
     "sex": "Female",
@@ -364,75 +364,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Frances Yamamoto appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Frances appears uncomfortable and slightly irritable from chronic pain, frequently shifting position during the interview. She is forthcoming about her symptoms but shows frustration about her worsening condition affecting her work responsibilities.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain shooting down both legs low back, radiating down both legs \u2014 back of thighs and into calves start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did this leg pain first start and how has it progressed?",
+      "Can you describe exactly where the pain travels down your legs?",
+      "On a scale of 1-10, how would you rate your current pain?",
+      "What makes the pain better or worse?",
+      "Do you have any numbness, tingling, or weakness in your legs?",
+      "Any problems with bowel or bladder control?",
+      "How does this compare to your previous back problems?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Has anyone in your family had similar back problems?",
+      "Tell me about your work and daily activities",
+      "Any recent falls, injuries, or heavy lifting?",
+      "Do you have any fever, chills, or night sweats?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My lower back is killing me, and now the pain is shooting down the back of both .'",
-        "character": "'It's back pain shooting down both legs low back, radiating down both legs \u2014 back of thighs and into calves \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Ibuprofen; Cyclobenzaprine; Hydrochlorothiazide.'",
-        "allergies": "'My allergies are Morphine.'",
-        "family": "Father: degenerative disc disease  No cancer history",
-        "social": "Tobacco: Current smoker, 15 pack-years  Alcohol: 2-3 beers daily  Drugs: Denies  Occupation: Warehouse supervisor \u2014 on modified duty for back pain  Living: Lives with spouse"
+      "default": "I'm not sure what you mean by that - can you ask me differently?",
+      "onset": "The leg pain started about 3 weeks ago and has been getting progressively worse. It began as just my usual lower back ache, but then the shooting pain down both legs started.",
+      "character": "It's like a sharp, burning, electric shock that shoots down the back of both my legs. Sometimes it feels like someone is stabbing me with a hot knife.",
+      "location": "The pain starts in my lower back, right in the center, and shoots down the back of both thighs all the way into my calves. It's pretty much equal on both sides.",
+      "severity": "Right now it's about an 8 out of 10. I can barely walk to the bathroom without wanting to cry. I haven't been able to work my regular duties for weeks.",
+      "aggravating": "Sitting makes it much worse, especially in my car or at my desk. Coughing or sneezing sends shooting pain down both legs. Standing up from sitting is excruciating.",
+      "relieving": "Nothing really helps much anymore. I've been taking ibuprofen and my muscle relaxer but they barely take the edge off. Lying flat sometimes helps a little.",
+      "associated": "My legs feel weak, especially when I try to stand up. There's some numbness and tingling in both feet. I feel like my legs might give out on me.",
+      "denies": "No fever, no problems with my bowel or bladder, no night sweats. The pain doesn't go into my groin or front of my legs.",
+      "history": "I've had lower back pain on and off for about 10 years from a herniated disc, but it never went down my legs like this before. This is completely different and much worse.",
+      "medications": "Ibuprofen; Cyclobenzaprine; Hydrochlorothiazide",
+      "allergies": "Morphine",
+      "family": "My father had terrible back problems - degenerative disc disease. He ended up needing surgery when he was in his 70s.",
+      "social": "I supervise at a warehouse but I'm on modified duty now because I can't do the physical parts of my job. I smoke about a pack a day and have a couple beers most nights to help with the pain."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Straight leg raise test bilaterally",
+      "Neurologic exam - strength testing of lower extremities",
+      "Reflex testing (patellar and Achilles)",
+      "Sensory testing of lower extremities",
+      "Lumbar spine range of motion",
+      "Palpation of lumbar spine",
+      "Assessment of gait",
+      "Rectal exam for sphincter tone",
+      "Hip range of motion",
+      "Crossed straight leg raise test"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Straight leg raise test bilaterally": "Positive bilaterally at 30 degrees, reproducing radiating leg pain",
+      "Neurologic exam - strength testing of lower extremities": "Mild weakness in bilateral plantarflexion (4/5), otherwise intact",
+      "Reflex testing (patellar and Achilles)": "Diminished Achilles reflexes bilaterally, patellar reflexes normal",
+      "Sensory testing of lower extremities": "Decreased sensation to light touch in bilateral S1 distribution",
+      "Lumbar spine range of motion": "Severely limited flexion and extension due to pain",
+      "Palpation of lumbar spine": "Tenderness over L5-S1 region with mild paraspinal muscle spasm",
+      "Assessment of gait": "Antalgic gait, walks slowly with forward-flexed posture",
+      "Rectal exam for sphincter tone": "Normal sphincter tone, no saddle anesthesia",
+      "Hip range of motion": "Full and pain-free bilaterally",
+      "Crossed straight leg raise test": "Negative bilaterally"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Central lumbar spinal stenosis (correct diagnosis)",
+      "Lumbar disc herniation with bilateral radiculopathy",
+      "Spondylolisthesis with neurogenic claudication",
+      "Cauda equina syndrome (must-not-miss diagnosis 1)",
+      "Spinal tumor or metastases (must-not-miss diagnosis 2)",
+      "Peripheral arterial disease with claudication (common mimic 1)",
+      "Piriformis syndrome (common mimic 2)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on previous diagnosis of lumbar disc herniation and not considering spinal stenosis as the primary pathology causing bilateral symptoms",
+      "prematureClosure": "May stop thinking after confirming radiculopathy without considering the specific pattern of bilateral symptoms and neurogenic claudication",
+      "availabilityBias": "Recent cases of disc herniation may make that diagnosis seem more likely than the actual diagnosis of spinal stenosis"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Frances Yamamoto's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at this 62-year-old patient with bilateral leg pain, what questions would help you distinguish between different causes of neurogenic vs vascular claudication? What red flags do you need to rule out given the bilateral nature of her symptoms?",
+      "phase5": "Now that you've found bilateral positive straight leg raises with S1 distribution findings, how does the bilateral nature of her symptoms and her age influence your differential diagnosis? What anatomical structure could cause this pattern of bilateral radiculopathy?",
+      "finalDebrief": "This case illustrates how spinal stenosis can present similarly to disc herniation but with key differences - the bilateral symptoms, age of patient, and positional worsening with sitting are classic for central stenosis. How did the bilateral presentation help narrow your differential from your initial disc herniation consideration?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Isabella Reyes",
-  "patientHPI": "I've been having really bad stomach cramps for the past few weeks, especially around my belly button and on my right side, and it's been getting worse. I'm going to the bathroom way more often than usual, maybe 5 or 6 times a day, and sometimes I see blood which really scares me. I've been waking up at night drenched in sweat, and I think I've lost some weight because my clothes feel looser.",
+    "patientHPI": "I've been having really bad stomach cramps for the past few weeks, especially around my belly button and on my right side, and it's been getting worse. I'm going to the bathroom way more often than usual, maybe 5 or 6 times a day, and sometimes I see blood which really scares me. I've been waking up at night drenched in sweat, and I think I've lost some weight because my clothes feel looser.",
     "dob": "06/15/1997",
     "age": 28,
     "sex": "Female",
@@ -153,7 +153,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "128 lbs",
       "ht": "5'4\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     },
     {
@@ -219,41 +219,161 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "137", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "8.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "L" },
-            { "test": "Albumin", "value": "3.0", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" },
-            { "test": "Total Protein", "value": "5.8", "unit": "g/dL", "range": "6.0-8.3", "flag": "L" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "19", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "137",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "8.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "L"
+            },
+            {
+              "test": "Albumin",
+              "value": "3.0",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            },
+            {
+              "test": "Total Protein",
+              "value": "5.8",
+              "unit": "g/dL",
+              "range": "6.0-8.3",
+              "flag": "L"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "19",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "11.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "10.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "30.8", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "74.2", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "412", "unit": "x10³/µL", "range": "150-400", "flag": "H" }
+            {
+              "test": "WBC",
+              "value": "11.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "30.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "74.2",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "412",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "INFLAMMATORY MARKERS",
           "results": [
-            { "test": "C-Reactive Protein (CRP)", "value": "48.6", "unit": "mg/L", "range": "<5.0", "flag": "H" },
-            { "test": "ESR", "value": "62", "unit": "mm/hr", "range": "0-20", "flag": "H" }
+            {
+              "test": "C-Reactive Protein (CRP)",
+              "value": "48.6",
+              "unit": "mg/L",
+              "range": "<5.0",
+              "flag": "H"
+            },
+            {
+              "test": "ESR",
+              "value": "62",
+              "unit": "mm/hr",
+              "range": "0-20",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "FECAL CALPROTECTIN",
           "results": [
-            { "test": "Calprotectin, Fecal", "value": "680", "unit": "µg/g", "range": "<50 normal; 50-200 borderline", "flag": "H" }
+            {
+              "test": "Calprotectin, Fecal",
+              "value": "680",
+              "unit": "µg/g",
+              "range": "<50 normal; 50-200 borderline",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -272,18 +392,60 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.6", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.9", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "78.4", "unit": "fL", "range": "80-100", "flag": "L" },
-            { "test": "Platelet Count", "value": "285", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.6",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.9",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "78.4",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "285",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "INFLAMMATORY MARKERS",
           "results": [
-            { "test": "C-Reactive Protein (CRP)", "value": "4.2", "unit": "mg/L", "range": "<5.0", "flag": "" },
-            { "test": "ESR", "value": "18", "unit": "mm/hr", "range": "0-20", "flag": "" }
+            {
+              "test": "C-Reactive Protein (CRP)",
+              "value": "4.2",
+              "unit": "mg/L",
+              "range": "<5.0",
+              "flag": ""
+            },
+            {
+              "test": "ESR",
+              "value": "18",
+              "unit": "mm/hr",
+              "range": "0-20",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -351,15 +513,42 @@ window.EMR_DATA = {
     "Brother: Healthy, age 25"
   ],
   "socialHistory": [
-    ["Occupation", "Elementary school teacher"],
-    ["Marital", "Single, in a relationship"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional, 1-2 drinks/month; avoids during flares"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Yoga 3x/week; running when in remission"],
-    ["Housing", "Apartment with roommate"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Elementary school teacher"
+    ],
+    [
+      "Marital",
+      "Single, in a relationship"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional, 1-2 drinks/month; avoids during flares"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Yoga 3x/week; running when in remission"
+    ],
+    [
+      "Housing",
+      "Apartment with roommate"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "crohn-flare",
@@ -370,75 +559,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Isabella Reyes appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Isabella appears anxious and visibly uncomfortable, frequently shifting position and grimacing during episodes of cramping. She is very forthcoming about her symptoms and medication history, speaking quickly due to her distress and concern about the blood in her stool, which particularly frightens her given her family history of colon cancer.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did abdominal pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when your current symptoms started and how they've progressed?",
+      "What does the abdominal pain feel like - is it cramping, sharp, or burning?",
+      "Where exactly is the pain located and does it move anywhere else?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "What makes your pain and symptoms worse?",
+      "Is there anything that helps relieve your symptoms?",
+      "Besides the pain and frequent bowel movements, what other symptoms have you noticed?",
+      "Have you had any fever, chills, or night sweats?",
+      "When was your last Crohn's flare and how does this compare?",
+      "Have you been taking all your medications as prescribed?",
+      "Have you had any recent changes in diet, stress, or missed medications?",
+      "Any recent travel, new foods, or sick contacts?",
+      "How has this affected your work and daily activities?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having really bad stomach cramps for the past few weeks, especially ar.'",
-        "character": "'It's abdominal pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Crohn's Disease Flare.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Adalimumab 40mg SubQ every 2 weeks; Ferrous Sulfate 325mg BID; Cholecalciferol 2000 IU daily; Sertraline 50mg daily; Ondansetron 4mg PRN.'",
-        "allergies": "'My allergies are Sulfasalazine, Latex.'",
-        "family": "Mother: Ulcerative colitis, alive at 54  Father: Type 2 Diabetes Mellitus, Hypertension, alive at 58  Maternal grandmother: Colon cancer at age 68 (deceased)",
-        "social": "Occupation: Elementary school teacher  Marital: Single, in a relationship  Tobacco: Never smoker  Alcohol: Occasional, 1-2 drinks/month; avoids during flares  Drugs: Denies"
+      "default": "I'm sorry, could you rephrase that? I'm having trouble concentrating because of the pain.",
+      "onset": "It started about three weeks ago with mild cramping, but it's gotten much worse over the past week. The blood in my stool started about five days ago and that's when I knew I needed to come in.",
+      "character": "It's really intense cramping, like someone is squeezing my intestines. Sometimes it's so sharp it takes my breath away, especially right before I have to run to the bathroom.",
+      "location": "Most of the pain is around my belly button and then moves to my lower right side. Sometimes it feels like it goes all the way through to my back.",
+      "severity": "Right now it's about a 7 out of 10. When the cramping hits, it can be a 9. I've had to call in sick to work twice this week because I couldn't function.",
+      "aggravating": "Eating makes it much worse, especially anything with fiber or dairy. Stress definitely makes it worse too, and I've been really anxious about the bleeding.",
+      "relieving": "Heat helps a little bit, and I've been taking the ondansetron for nausea. Lying in a fetal position seems to help during the worst cramps, but nothing really makes it go away.",
+      "associated": "I've been having a lot of nausea, some vomiting yesterday, and I feel really tired and weak. I've also been having some night sweats and I think I've lost a few pounds because I'm afraid to eat.",
+      "denies": "I haven't had any chest pain, shortness of breath, or urinary symptoms. No recent rashes or joint pain either.",
+      "history": "My last big flare was about eight months ago, but this feels worse. I usually have minor symptoms that come and go, but nothing like this amount of bleeding or this severe pain.",
+      "medications": "Adalimumab 40mg SubQ every 2 weeks; Ferrous Sulfate 325mg BID; Cholecalciferol 2000 IU daily; Sertraline 50mg daily; Ondansetron 4mg PRN",
+      "allergies": "Sulfasalazine, Latex",
+      "family": "My mom has ulcerative colitis, so IBD runs in my family. My grandmother died of colon cancer, which is why the bleeding scares me so much. My dad has diabetes and high blood pressure.",
+      "social": "I'm an elementary school teacher, which has been stressful lately with end-of-year activities. I'm single but in a relationship. I don't smoke, and I usually have a glass of wine maybe once or twice a month, but I've been avoiding alcohol completely during this flare."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "General appearance and vital signs assessment",
+      "Abdominal inspection",
+      "Auscultation of bowel sounds",
+      "Light palpation of abdomen",
+      "Deep palpation of abdomen",
+      "Assessment for rebound tenderness and guarding",
+      "Palpation of right lower quadrant and McBurney's point",
+      "Assessment for masses or organomegaly",
+      "Perianal examination",
+      "Assessment for extraintestinal manifestations"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Crohn's Disease Flare. Document specifically what you observe."
+      "General appearance and vital signs assessment": "Appears uncomfortable and anxious, low-grade fever at 100.4°F, mild tachycardia at 98 bpm, blood pressure stable at 108/68",
+      "Abdominal inspection": "Abdomen appears slightly distended, no visible masses, scars, or skin changes noted",
+      "Auscultation of bowel sounds": "Hyperactive bowel sounds present in all four quadrants",
+      "Light palpation of abdomen": "Diffuse tenderness most pronounced in periumbilical and right lower quadrant regions",
+      "Deep palpation of abdomen": "Significant tenderness in right iliac fossa with possible fullness or thickening of bowel wall, patient grimaces with deep palpation",
+      "Assessment for rebound tenderness and guarding": "Mild voluntary guarding present, no frank rebound tenderness",
+      "Palpation of right lower quadrant and McBurney's point": "Tenderness at McBurney's point but more diffuse than typical appendicitis, consistent with ileocecal involvement",
+      "Assessment for masses or organomegaly": "No discrete masses palpated, liver and spleen not enlarged",
+      "Perianal examination": "Evidence of prior perianal fistula with some induration, no active drainage or new fistulous openings",
+      "Assessment for extraintestinal manifestations": "No current arthritis, skin lesions, or ocular findings; appears mildly pale consistent with known iron deficiency"
     },
     "ddxTargets": [
-        "Crohn's Disease Flare (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Crohn's Disease Flare (correct diagnosis)",
+      "Infectious colitis/gastroenteritis",
+      "Small bowel obstruction",
+      "Appendicitis",
+      "Bowel perforation",
+      "Ulcerative colitis",
+      "Irritable bowel syndrome"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Crohn's Disease Flare, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Crohn's Disease Flare, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Crohn's Disease Flare based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Don't anchor solely on the known Crohn's diagnosis - consider that new symptoms could represent complications like perforation, abscess, or even unrelated conditions like appendicitis",
+      "prematureClosure": "The combination of known IBD and typical symptoms may lead to premature closure without considering serious complications or alternative diagnoses that require different management",
+      "availabilityBias": "Recent cases of appendicitis or gastroenteritis might overshadow the likelihood of IBD flare, or conversely, the known Crohn's history might make you dismiss other acute conditions"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Isabella Reyes's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Crohn's Disease Flare. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for abdominal pain in a young woman. As you interview Isabella, pay particular attention to the timeline, character of symptoms, and any historical clues. What specific historical elements would help you differentiate between inflammatory conditions, infectious causes, and surgical emergencies?",
+      "phase5": "Now that you've gathered your history and physical findings, consider how Isabella's known medical history fits with her current presentation. What findings support inflammatory bowel disease versus other causes? Are there any red flags that might suggest complications or require urgent intervention?",
+      "finalDebrief": "This case illustrates how chronic conditions can present with acute exacerbations that mimic other diseases. Isabella's presentation was classic for a Crohn's flare with ileocecal involvement, but notice how the differential included both related complications and unrelated conditions like appendicitis. The key distinguishing features were the gradual onset, bloody diarrhea, known IBD history, and examination findings consistent with terminal ileal inflammation rather than isolated appendiceal involvement."
     }
-}
+  }
 };

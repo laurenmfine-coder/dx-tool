@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Destiny Johnson",
-  "patientHPI": "I was at a school event and ate a cookie without asking what was in it because I felt embarrassed to ask in front of everyone, but now my throat is closing up and I can't breathe. I've been told to avoid peanuts since I was little and I have an emergency pen, but I left it in my locker because I hate carrying it around.",
+      "patientHPI": "I was at a school event and ate a cookie without asking what was in it because I felt embarrassed to ask in front of everyone, but now my throat is closing up and I can't breathe. I've been told to avoid peanuts since I was little and I have an emergency pen, but I left it in my locker because I hate carrying it around.",
       "dob": "08/18/2010",
       "age": "16",
       "sex": "Female",
@@ -1143,140 +1143,143 @@ window.EMR_DATA = {
       "EpiPen",
       "Has EpiPen but left it in locker — embarrassed to carry it"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "EAACI-Anaph-2021",
-    "title": "EAACI guidelines: Anaphylaxis (2021 update)",
-    "authors": "Muraro A, Worm M, Alviani C, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15032",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
-    "openAccess": true,
-    "validates": [
-      "Discharge planning with EpiPen",
-      "Patient action plans",
-      "Allergist referral 4-6 weeks"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "EAACI-Anaph-2021",
+      "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+      "authors": "Muraro A, Worm M, Alviani C, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15032",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+      "openAccess": true,
+      "validates": [
+        "Discharge planning with EpiPen",
+        "Patient action plans",
+        "Allergist referral 4-6 weeks"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Destiny Johnson is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Destiny appears anxious and embarrassed, frequently apologizing and looking down. She's forthcoming about her symptoms but clearly distressed about the social circumstances that led to this episode. She shows moderate respiratory distress with intermittent throat clearing.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what happened at school today?",
+      "What did you eat and when did you eat it?",
+      "When did your symptoms start and how did they progress?",
+      "Did you ask about the ingredients in the cookie?",
+      "Where was your EpiPen when this happened?",
+      "Have you used your EpiPen before?",
+      "What symptoms are you experiencing right now?",
+      "Any difficulty breathing or swallowing?",
+      "Have you had reactions like this before?",
+      "Do you always carry your EpiPen with you?",
+      "What medications do you normally take?",
+      "Any family history of allergies?",
+      "Do you avoid eating at social events because of your allergies?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Diphenhydramine; Methylprednisolone.'",
-        "allergies": "'My allergies: Peanut, Tree nuts.'",
-        "family": "Mother: eczema, food allergies  Brother (12): peanut allergy",
-        "social": "Tobacco: Never  Alcohol: Denies  School: 11th grade, cheerleader  Social: Ate unlabeled cookie at school event \u2014 didn't want to ask about ingredients in front of friends  Mental health: Anxiety about food allergies \u2014 avoids eating at social events"
+      "default": "I'm sorry, I don't understand what you're asking. I'm still feeling pretty scared about what happened.",
+      "onset": "It started maybe 10-15 minutes after I ate the cookie. First my mouth got tingly, then my throat started feeling tight and I got these hives on my arms.",
+      "character": "My throat feels like it's closing up and getting tighter. It's hard to swallow and my voice sounds different.",
+      "location": "The tightness is right here in my throat and neck area. The hives started on my arms but now they're spreading to my chest.",
+      "severity": "The throat tightness is like an 8 out of 10 - it's really scary. I can still breathe but it feels like it's getting harder.",
+      "aggravating": "It seems to be getting worse on its own. Talking makes me feel more out of breath.",
+      "relieving": "Nothing has helped yet. I usually use my EpiPen but it was in my locker and I couldn't get to it in time.",
+      "associated": "I have these hives all over my arms and chest, I feel nauseous, and I'm getting dizzy. My heart is beating really fast too.",
+      "denies": "No chest pain, no vomiting yet, no loss of consciousness. I can still breathe but it's getting harder.",
+      "history": "I've had reactions before but never this bad without my EpiPen. Usually I catch it early and use my EpiPen right away.",
+      "medications": "Epinephrine; Diphenhydramine; Methylprednisolone",
+      "allergies": "Peanut, Tree nuts",
+      "family": "My mom has eczema and food allergies too, and my little brother also has a peanut allergy. My mom is always on us about carrying our EpiPens.",
+      "social": "I'm in 11th grade and on the cheerleading team. I don't smoke or drink. I honestly didn't ask about the cookie ingredients because I didn't want to seem weird in front of my friends. I know that was stupid."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect oropharynx and throat",
+      "Palpate neck for lymphadenopathy or swelling",
+      "Auscultate heart sounds",
+      "Auscultate lung sounds",
+      "Inspect skin for urticaria",
+      "Assess voice quality and stridor",
+      "Check capillary refill",
+      "Assess mental status and anxiety level"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect oropharynx and throat": "Mild pharyngeal erythema and edema, uvula appears slightly swollen",
+      "Palpate neck for lymphadenopathy or swelling": "No lymphadenopathy, mild anterior neck tenderness",
+      "Auscultate heart sounds": "Tachycardic regular rhythm, no murmurs, gallops, or rubs",
+      "Auscultate lung sounds": "Clear bilaterally, no wheeze or stridor at rest",
+      "Inspect skin for urticaria": "Raised erythematous wheals on bilateral arms, chest, and neck",
+      "Assess voice quality and stridor": "Slightly hoarse voice, no audible stridor",
+      "Check capillary refill": "Capillary refill 2-3 seconds, mildly delayed",
+      "Assess mental status and anxiety level": "Alert and oriented, anxious but appropriate, no confusion"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Anaphylaxis (correct diagnosis)",
+      "Food allergy with urticaria",
+      "Anxiety/panic attack",
+      "Angioedema",
+      "Laryngeal edema",
+      "Acute asthma exacerbation",
+      "Vocal cord dysfunction"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on 'anxiety' given patient's age and social embarrassment, missing the severity of allergic reaction",
+      "prematureClosure": "Might stop at 'food allergy' without recognizing progression to anaphylaxis requiring immediate treatment",
+      "availabilityBias": "May recall teenage patients with anxiety/panic attacks rather than focusing on objective signs of anaphylaxis"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Destiny Johnson: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview Destiny, consider what information you need to distinguish between a mild allergic reaction and anaphylaxis. What historical details and symptom progression would be most concerning? How will you assess the severity and urgency?",
+      "phase5": "Now that you've gathered your history and exam findings, let's think about the clinical picture. You have a known allergen exposure, progressive symptoms involving multiple systems, and objective findings. How do the vital signs and physical findings help you determine the severity and next steps?",
+      "finalDebrief": "This case highlights how anaphylaxis can present with varying severity and the importance of psychosocial factors in adolescent care. The patient's embarrassment led to both the exposure and delayed treatment. How did your differential evolve as you gathered more information, and what teaching points about EpiPen adherence and social situations would you address?"
     }
-}
+  }
 };

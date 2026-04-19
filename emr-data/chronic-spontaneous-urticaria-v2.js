@@ -1209,73 +1209,78 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "James O'Connell is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "James appears frustrated and exhausted, with visible scratch marks on his arms. He's forthcoming about his symptoms but increasingly agitated about the lack of effective treatment, stating this is disrupting his work and personal life during an already stressful divorce.",
     "interviewQuestions": [
-      "When did your symptoms start and how?",
-      "Describe the main symptom — location, character, severity.",
-      "What makes it worse? What makes it better?",
-      "Any other symptoms you've noticed?",
-      "Any prior similar episodes?",
-      "Tell me about your medical history.",
-      "What medications are you currently taking?",
-      "Any medication allergies?",
-      "Relevant family history?",
-      "Tell me about your lifestyle."
+      "Can you describe when these hives first started appearing?",
+      "What do the hives look like and where do they appear?",
+      "Have you noticed any swelling of your face, lips, or tongue?",
+      "On a scale of 1-10, how would you rate the itching?",
+      "What seems to trigger or worsen your hives?",
+      "Does pressure from clothing, belts, or work equipment make it worse?",
+      "Have you tried any medications for this condition?",
+      "Do you have any known allergies to medications?",
+      "Have you had any difficulty breathing or throat tightness?",
+      "How has this affected your sleep and daily activities?",
+      "Is there any family history of allergies or autoimmune conditions?",
+      "Tell me about your work environment and any recent stressors",
+      "How much alcohol do you typically drink per day?"
     ],
     "patientResponses": {
-      "default": "He pauses. 'Can you clarify what you mean?'",
-      "onset": "'Gradually — over the past several days.'",
-      "character": "'The symptom has been significant and affecting my ability to function.'",
-      "location": "'The main problem is in the expected area for my condition.'",
-      "severity": "'Six or seven out of ten.'",
-      "aggravating": "'Activity and movement worsen it.'",
-      "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-      "associated": "'Some associated symptoms consistent with this condition.'",
-      "denies": "'No fever, chills, or unexplained weight loss.'",
-      "history": "'I have not had exactly this before.'",
-      "medications": "'I take Diphenhydramine; Methylprednisolone; Cetirizine.'",
-      "allergies": "'My allergies: NKDA.'",
-      "family": "Sister: thyroid disease",
-      "social": "Tobacco: Never  Alcohol: 2-3 beers daily  Occupation: Construction foreman — physical urticaria component (pressure, heat)  Stress: Going through divorce, custody battle  Mental health: Not sleeping due to itch — affecting job performance"
+      "default": "I'm not sure I understand what you're asking. Can you be more specific about my hives?",
+      "onset": "This started about 4 months ago, just appeared out of nowhere one morning. At first I thought it was something I ate, but they keep coming back every single day.",
+      "character": "They're these raised, red, itchy welts that can get pretty large - some are the size of quarters. They're incredibly itchy, like nothing I've ever experienced before.",
+      "location": "Mainly on my trunk, arms, and legs. Sometimes they appear on my back where I can't even reach to scratch. My lips also swell up, which is really concerning.",
+      "severity": "The itching is easily a 9 out of 10. It's so bad I can't sleep at night, and it's affecting my work performance. I'm constantly distracted.",
+      "aggravating": "They definitely get worse with stress, and I've noticed they flare up more at work when I'm wearing my tool belt or after physical labor. Heat seems to make them worse too.",
+      "relieving": "Nothing really helps much. The Benadryl gives me maybe an hour of relief but makes me drowsy. The steroid helped temporarily but I can't stay on that forever.",
+      "associated": "My lips swell up regularly, especially in the morning. I feel tired all the time from not sleeping, and honestly, I'm getting pretty depressed about this whole situation.",
+      "denies": "No trouble breathing, no throat tightness, no nausea or vomiting. I haven't had any new foods or changed soaps or detergents.",
+      "history": "Never had anything like this before in my life. No history of allergies or skin problems. This is completely new for me.",
+      "medications": "Diphenhydramine; Methylprednisolone; Cetirizine",
+      "allergies": "NKDA",
+      "family": "My sister has some kind of thyroid problem, but I don't think anyone in my family has had hives like this.",
+      "social": "I'm a construction foreman, so I'm around dust, equipment, and do a lot of physical work. Never smoked. I drink 2-3 beers daily, maybe more lately with the divorce stress. Going through a messy divorce and custody battle right now."
     },
     "examManeuvers": [
-      "General appearance",
-      "Vital signs",
-      "Cardiovascular",
-      "Pulmonary",
-      "Abdominal",
-      "Extremities",
-      "Skin",
-      "Targeted exam"
+      "Inspect skin for urticarial lesions",
+      "Assess for angioedema of face and lips",
+      "Perform dermographism test",
+      "Check for delayed pressure urticaria",
+      "Examine lymph nodes",
+      "Assess respiratory status and airway",
+      "Check vital signs for signs of anaphylaxis",
+      "Palpate thyroid gland",
+      "Examine for hepatosplenomegaly"
     ],
     "examFindings": {
-      "General appearance": "Finding consistent with this condition.",
-      "Vital signs": "Finding consistent with this condition.",
-      "Cardiovascular": "Finding consistent with this condition.",
-      "Pulmonary": "Finding consistent with this condition.",
-      "Abdominal": "Finding consistent with this condition.",
-      "Extremities": "Finding consistent with this condition.",
-      "Skin": "Finding consistent with this condition.",
-      "Targeted exam": "Finding consistent with this condition."
+      "Inspect skin for urticarial lesions": "Multiple raised, erythematous wheals of varying sizes (0.5-3 cm) scattered across trunk and extremities with central pallor and surrounding erythema",
+      "Assess for angioedema of face and lips": "Mild asymmetric swelling of lower lip, no periorbital edema or tongue involvement",
+      "Perform dermographism test": "Positive dermographism - linear wheal formation within 2-3 minutes of firm stroking",
+      "Check for delayed pressure urticaria": "Areas of induration and erythema noted where clothing/belt contact occurs, patient reports these areas are particularly symptomatic",
+      "Examine lymph nodes": "No significant lymphadenopathy palpated",
+      "Assess respiratory status and airway": "Clear breath sounds bilaterally, no stridor or wheeze, airway patent",
+      "Check vital signs for signs of anaphylaxis": "BP 148/88, HR 92, stable vitals without signs of systemic anaphylaxis",
+      "Palpate thyroid gland": "Thyroid not enlarged, no nodules palpated",
+      "Examine for hepatosplenomegaly": "Abdomen soft, no hepatosplenomegaly detected"
     },
     "ddxTargets": [
-      "this condition (correct)",
-      "Most likely alternative",
-      "Third differential",
-      "Must-not-miss 1",
-      "Must-not-miss 2",
-      "Common mimic 1",
-      "Common mimic 2"
+      "Chronic spontaneous urticaria with physical urticaria component (correct diagnosis)",
+      "Chronic inducible urticaria (pressure/dermographic)",
+      "Drug-induced urticaria",
+      "Hereditary angioedema",
+      "Systemic mastocytosis",
+      "Contact dermatitis",
+      "Urticarial vasculitis"
     ],
     "biasFlags": {
-      "anchoring": "Consider the full differential for this condition.",
-      "prematureClosure": "Complete your workup before narrowing focus.",
-      "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on 'recurrent hives' and missing the chronic spontaneous nature with physical triggers, or focusing too heavily on angioedema component",
+      "prematureClosure": "May stop at simple urticaria diagnosis without recognizing the refractory chronic spontaneous urticaria requiring specialized management",
+      "availabilityBias": "Tendency to attribute to common triggers like food or medication allergies rather than recognizing chronic spontaneous urticaria pattern"
     },
     "coachPrompts": {
-      "phase2": "Before interviewing James O'Connell: what does the chart suggest? Top 3 diagnoses?",
-      "phase5": "After history and exam: how has your differential changed?",
-      "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview this patient, consider the different types of urticaria and their triggers. What specific history would help you distinguish between acute allergic reactions, chronic spontaneous urticaria, and physical urticarias? Think about the timeline and pattern of symptoms.",
+      "phase5": "You've identified chronic urticaria with physical components and angioedema. What does the refractory nature to standard antihistamines tell you about next steps? Consider how his occupational and psychosocial stressors might be contributing to the chronicity.",
+      "finalDebrief": "This case illustrates chronic spontaneous urticaria (CSU) with physical urticaria components - a complex condition that's often refractory to standard antihistamine doses. Note how the physical triggers, stress, and alcohol consumption all contribute. The key learning is recognizing when standard urticaria treatment fails and considering step-up therapy or specialist referral for conditions like CSU."
     }
   }
 };

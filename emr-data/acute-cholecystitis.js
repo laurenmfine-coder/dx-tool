@@ -180,33 +180,135 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Total Bilirubin", "value": "0.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Alkaline Phosphatase", "value": "72", "unit": "U/L", "range": "44-147", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "72",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "40.2", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "268", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "268",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPASE",
           "results": [
-            { "test": "Lipase", "value": "32", "unit": "U/L", "range": "0-160", "flag": "" }
+            {
+              "test": "Lipase",
+              "value": "32",
+              "unit": "U/L",
+              "range": "0-160",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -267,15 +369,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Gallbladder cancer, deceased at 72"
   ],
   "socialHistory": [
-    ["Occupation", "Office manager at law firm"],
-    ["Marital", "Married — 18 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 1-2 glasses wine on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 2-3x/week; trying to lose weight"],
-    ["Housing", "Lives with husband and 2 teenage children in single-family home"],
-    ["Safety", "Wears seatbelt; no IPV concerns"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Office manager at law firm"
+    ],
+    [
+      "Marital",
+      "Married — 18 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 1-2 glasses wine on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 2-3x/week; trying to lose weight"
+    ],
+    [
+      "Housing",
+      "Lives with husband and 2 teenage children in single-family home"
+    ],
+    [
+      "Safety",
+      "Wears seatbelt; no IPV concerns"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "acute-cholecystitis",
@@ -286,75 +415,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Maria Elena Gutierrez appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Maria appears moderately distressed and anxious, describing her symptoms with concern but in detail. She is forthcoming about her symptoms and history, though visibly uncomfortable with intermittent grimacing from persistent RUQ discomfort.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when your current pain started?",
+      "What does the pain feel like - sharp, dull, cramping?",
+      "Where exactly is the pain located?",
+      "Does the pain move or radiate anywhere?",
+      "On a scale of 1-10, how severe is your pain?",
+      "What makes the pain worse or better?",
+      "Have you had fever, chills, or sweats?",
+      "Any nausea, vomiting, or changes in appetite?",
+      "Have you noticed any changes in your urine or stool color?",
+      "Tell me about your previous episodes of similar pain",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Any family history of gallbladder problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 44-year-old female with known cholelithiasis presenting after third episode of p.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Cholecystitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Atorvastatin 20mg daily; Norgestimate-Ethinyl Estradiol 0.25mg/35mcg daily; Ibuprofen 600mg PRN.'",
-        "allergies": "'My allergies are Sulfa drugs.'",
-        "family": "Mother: Cholelithiasis (cholecystectomy age 48), T2DM, alive at 68  Father: Hypertension, hyperlipidemia, alive at 70  Sister: Gallstones (cholecystectomy age 40), alive at 46",
-        "social": "Occupation: Office manager at law firm  Marital: Married \u2014 18 years  Tobacco: Never smoker  Alcohol: Social \u2014 1-2 glasses wine on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "The pain started suddenly 3 days ago after I ate fried chicken at dinner, around 8 PM. It's been constant since then, not coming and going like my previous episodes.",
+      "character": "It's a deep, constant aching pain, different from my usual crampy gallbladder attacks. It feels like a steady, dull pressure that won't go away.",
+      "location": "It's right here under my right ribcage, in my upper abdomen. Sometimes I feel it in my right shoulder blade too.",
+      "severity": "Right now it's about a 6 out of 10, but when it first started it was easily an 8. It's affecting my sleep and I can't focus at work.",
+      "aggravating": "Any food makes it worse, especially fatty foods. Even moving around or taking deep breaths increases the pain.",
+      "relieving": "The ibuprofen helps a little bit, maybe brings it from a 6 to a 4. Heat pads don't help like they used to with my previous attacks.",
+      "associated": "I've had some nausea and threw up twice yesterday. I've also had chills and feel feverish. My appetite is completely gone.",
+      "denies": "No yellowing of my skin or eyes, no dark urine, no severe vomiting, no chest pain or shortness of breath.",
+      "history": "I've had two similar episodes in the past 6 months, but they only lasted a few hours and went away on their own. This time it's not going away and feels much worse.",
+      "medications": "Atorvastatin 20mg daily; Norgestimate-Ethinyl Estradiol 0.25mg/35mcg daily; Ibuprofen 600mg PRN",
+      "allergies": "Sulfa drugs",
+      "family": "My mother had her gallbladder removed when she was 48, and my younger sister just had hers out 4 years ago when she was 40. Both had gallstones.",
+      "social": "I work as an office manager at a law firm. I'm married with two kids. I don't smoke, and I only have a glass or two of wine on weekends. No drugs."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "Murphy's sign",
+      "RUQ palpation",
+      "Abdominal inspection",
+      "Bowel sounds auscultation",
+      "Percussion of RUQ",
+      "Assessment for rebound tenderness",
+      "Evaluation for jaundice (sclera and skin)",
+      "Vital sign assessment",
+      "CVA tenderness",
+      "Rovsing's sign"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Acute Cholecystitis. Document specifically what you observe."
+      "Murphy's sign": "Positive - patient stops inspiration abruptly due to pain when palpating RUQ during deep inspiration",
+      "RUQ palpation": "Tender to palpation with voluntary guarding in RUQ, no palpable mass",
+      "Abdominal inspection": "No visible distension, no surgical scars, patient guards RUQ area",
+      "Bowel sounds auscultation": "Hypoactive bowel sounds throughout all quadrants",
+      "Percussion of RUQ": "Tenderness to percussion over RUQ, normal elsewhere",
+      "Assessment for rebound tenderness": "Mild rebound tenderness in RUQ, negative in other quadrants",
+      "Evaluation for jaundice (sclera and skin)": "No scleral icterus, no skin yellowing noted",
+      "Vital sign assessment": "Low-grade fever 99.2°F, mild tachycardia HR 88, BP 132/84",
+      "CVA tenderness": "Negative bilaterally",
+      "Rovsing's sign": "Negative - no RUQ pain with LLQ palpation"
     },
     "ddxTargets": [
-        "Acute Cholecystitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Cholecystitis (correct diagnosis)",
+      "Biliary Colic",
+      "Choledocholithiasis",
+      "Acute Pancreatitis",
+      "Acute Myocardial Infarction",
+      "Peptic Ulcer Disease",
+      "Hepatitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Cholecystitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Cholecystitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Cholecystitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known cholelithiasis history and assuming this is just another episode of biliary colic, potentially missing the progression to acute cholecystitis",
+      "prematureClosure": "May stop at biliary colic diagnosis without recognizing persistent symptoms, fever, and positive Murphy's sign indicating inflammatory progression",
+      "availabilityBias": "Recent cases of simple biliary colic might lead to underestimating this presentation's severity and missing acute cholecystitis"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Maria Elena Gutierrez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Cholecystitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Consider Maria's presenting symptoms carefully. While she has a history of gallstones, how might her current presentation differ from simple biliary colic? What key features in her history should guide your interview?",
+      "phase5": "You've gathered good history and physical exam data. How do Maria's current symptoms and findings compare to her previous gallstone episodes? What does the presence of fever, persistent pain, and positive Murphy's sign suggest about disease progression?",
+      "finalDebrief": "Let's trace your diagnostic evolution. Initially, Maria's known gallstone history suggested biliary colic, but several red flags pointed toward acute cholecystitis: persistent pain beyond typical colic duration, fever, positive Murphy's sign, and failure of symptoms to resolve. How did recognizing these inflammatory signs help differentiate between uncomplicated biliary colic and acute cholecystitis?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Fontaine",
-  "patientHPI": "I came in for my regular blood transfusion yesterday and felt fine during it, but about six hours later I started feeling awful - really hot and cold at the same time, my back was killing me, and I felt like I was going to throw up. My urine this morning looked like dark tea, which really scared me.",
+    "patientHPI": "I came in for my regular blood transfusion yesterday and felt fine during it, but about six hours later I started feeling awful - really hot and cold at the same time, my back was killing me, and I felt like I was going to throw up. My urine this morning looked like dark tea, which really scared me.",
     "dob": "12/05/1958",
     "age": 66,
     "sex": "Female",
@@ -136,7 +136,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "158 lbs",
       "ht": "5'3\"",
-      "bmi": 28.0,
+      "bmi": 28,
       "setting": "ED"
     },
     {
@@ -203,39 +203,147 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "3.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "L" },
-            { "test": "Hemoglobin", "value": "6.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "19.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "MCV", "value": "102", "unit": "fL", "range": "80-100", "flag": "H" },
-            { "test": "Platelet Count", "value": "88", "unit": "x10³/µL", "range": "150-400", "flag": "L" },
-            { "test": "ANC", "value": "1.8", "unit": "x10³/µL", "range": "1.5-8.0", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "3.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "6.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "19.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "102",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "H"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "88",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            },
+            {
+              "test": "ANC",
+              "value": "1.8",
+              "unit": "x10³/µL",
+              "range": "1.5-8.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "TYPE AND SCREEN / CROSSMATCH",
           "results": [
-            { "test": "ABO/Rh", "value": "O Positive", "unit": "", "range": "—", "flag": "" },
-            { "test": "Antibody Screen", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "Antibody Identification", "value": "Anti-E, Anti-Kell", "unit": "", "range": "—", "flag": "" },
-            { "test": "Crossmatch", "value": "Compatible (E-neg, K-neg units)", "unit": "", "range": "—", "flag": "" }
+            {
+              "test": "ABO/Rh",
+              "value": "O Positive",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "Antibody Screen",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "Antibody Identification",
+              "value": "Anti-E, Anti-Kell",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            },
+            {
+              "test": "Crossmatch",
+              "value": "Compatible (E-neg, K-neg units)",
+              "unit": "",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Ferritin", "value": "1680", "unit": "ng/mL", "range": "12-150", "flag": "H" },
-            { "test": "Serum Iron", "value": "185", "unit": "µg/dL", "range": "60-170", "flag": "H" },
-            { "test": "TIBC", "value": "210", "unit": "µg/dL", "range": "250-370", "flag": "L" },
-            { "test": "Transferrin Saturation", "value": "88", "unit": "%", "range": "20-50", "flag": "H" }
+            {
+              "test": "Ferritin",
+              "value": "1680",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": "H"
+            },
+            {
+              "test": "Serum Iron",
+              "value": "185",
+              "unit": "µg/dL",
+              "range": "60-170",
+              "flag": "H"
+            },
+            {
+              "test": "TIBC",
+              "value": "210",
+              "unit": "µg/dL",
+              "range": "250-370",
+              "flag": "L"
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "88",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -303,15 +411,42 @@ window.EMR_DATA = {
     "Brother: HTN, alive at 62"
   ],
   "socialHistory": [
-    ["Occupation", "Retired nurse"],
-    ["Marital", "Widowed; lives with son"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies — stopped due to MDS"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited due to fatigue; walks short distances"],
-    ["Housing", "Lives with son in single-family home"],
-    ["Safety", "Denies IPV; no firearms; fall precautions discussed"],
-    ["Advance Directive", "Health care proxy: son Pierre Fontaine; DNR/DNI NOT designated"]
+    [
+      "Occupation",
+      "Retired nurse"
+    ],
+    [
+      "Marital",
+      "Widowed; lives with son"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies — stopped due to MDS"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited due to fatigue; walks short distances"
+    ],
+    [
+      "Housing",
+      "Lives with son in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; no firearms; fall precautions discussed"
+    ],
+    [
+      "Advance Directive",
+      "Health care proxy: son Pierre Fontaine; DNR/DNI NOT designated"
+    ]
   ],
   "meta": {
     "caseId": "acute-hemolytic-transfusion-reaction",
@@ -322,75 +457,79 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gloria Fontaine appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Gloria appears anxious and shaken by her symptoms, particularly the dark urine which frightened her given her medical background as a nurse. She is cooperative and articulate about her symptoms, speaking with clinical precision but showing visible distress about this deviation from her usual transfusion routine.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Tell me more about when your symptoms started after the transfusion",
+      "Can you describe the back pain you experienced?",
+      "What did your urine look like this morning compared to normal?",
+      "Did you have any fever, chills, or shaking after the transfusion?",
+      "Have you ever had a reaction to a blood transfusion before?",
+      "Did you experience any nausea, vomiting, or shortness of breath?",
+      "How many blood transfusions have you received for your MDS?",
+      "Did the nursing staff mention anything unusual about yesterday's transfusion?",
+      "Are you experiencing any chest pain or difficulty breathing now?",
+      "Have you noticed any yellowing of your skin or eyes?",
+      "What medications are you currently taking?",
+      "Do you have any known drug allergies?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I came in for my regular blood transfusion yesterday and felt fine during it, bu.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Hemolytic Transfusion Reaction.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 5mg daily; Metformin 500mg BID; Deferasirox 360mg daily; Folic Acid 1mg daily; Acetaminophen 650mg PRN.'",
-        "allergies": "'My allergies are Ibuprofen, IV Contrast (Iodinated).'",
-        "family": "Mother: Sickle cell trait, HTN, deceased at 72 (stroke)  Father: T2DM, prostate cancer, deceased at 70  Sister: Breast cancer at age 60, alive",
-        "social": "Occupation: Retired nurse  Marital: Widowed; lives with son  Tobacco: Never smoker  Alcohol: Denies \u2014 stopped due to MDS  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "It started about six hours after my transfusion finished yesterday evening. I was home watching TV when I suddenly felt terrible - the chills and back pain hit me like a truck.",
+      "character": "The back pain was this deep, severe aching in my lower back, different from any back pain I've had before. The chills were intense - I couldn't get warm no matter how many blankets I used.",
+      "location": "The pain was mainly in my lower back, right around my kidneys. It didn't really radiate anywhere else, just stayed right there.",
+      "severity": "The back pain was about an 8 out of 10 - really severe. The chills were awful too. I could barely function, just had to lie down.",
+      "aggravating": "Nothing really made it worse, it was just constant and severe from the start.",
+      "relieving": "I tried some acetaminophen but it barely touched the pain. Nothing really helped much.",
+      "associated": "Yes, I had severe chills, felt nauseous, and this morning my urine was dark brown like tea. I've also felt weak and dizzy.",
+      "denies": "No chest pain, no trouble breathing, no rash or itching. No diarrhea or abdominal pain.",
+      "history": "Never. I've been getting transfusions every 3-4 weeks for the past two years and never had anything like this happen.",
+      "medications": "Amlodipine 5mg daily; Metformin 500mg BID; Deferasirox 360mg daily; Folic Acid 1mg daily; Acetaminophen 650mg PRN",
+      "allergies": "Ibuprofen, IV Contrast (Iodinated)",
+      "family": "My mother had sickle cell trait and high blood pressure. My father had diabetes and prostate cancer. My sister had breast cancer.",
+      "social": "I'm a retired nurse, widowed, living with my son. I never smoked and stopped drinking when I was diagnosed with MDS. No drug use."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "Vital signs assessment",
+      "Conjunctival and scleral examination",
+      "Skin color and jaundice assessment",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination with hepatosplenomegaly assessment",
+      "Costovertebral angle tenderness",
+      "Lymph node examination",
+      "Neurologic assessment for confusion or altered mental status",
+      "Urine dipstick examination"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Acute Hemolytic Transfusion Reaction. Document specifically what you observe."
+      "Vital signs assessment": "BP 145/85 (elevated from baseline), HR 105 (tachycardic), Temp 100.2°F (low-grade fever), RR 18, SpO2 97% on room air",
+      "Conjunctival and scleral examination": "Mild scleral icterus present, conjunctival pallor consistent with known anemia",
+      "Skin color and jaundice assessment": "Subtle yellow discoloration of skin, particularly noticeable in natural light",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, gallops, or rubs. No peripheral edema.",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi",
+      "Abdominal examination with hepatosplenomegaly assessment": "Soft, non-tender, mild splenomegaly palpable (known from MDS), no hepatomegaly",
+      "Costovertebral angle tenderness": "Mild bilateral CVA tenderness, more pronounced on the right",
+      "Lymph node examination": "No significant lymphadenopathy",
+      "Neurologic assessment for confusion or altered mental status": "Alert and oriented x3, no focal neurologic deficits, appears fatigued but mentally clear",
+      "Urine dipstick examination": "Dark amber/brown urine, positive for hemoglobin, trace protein, no nitrites or leukocyte esterase"
     },
     "ddxTargets": [
-        "Acute Hemolytic Transfusion Reaction (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Hemolytic Transfusion Reaction (ABO Incompatibility) (correct diagnosis)",
+      "Delayed Hemolytic Transfusion Reaction",
+      "Transfusion-Related Acute Lung Injury (TRALI)",
+      "Septic Transfusion Reaction",
+      "Acute Kidney Injury from other causes",
+      "Febrile Non-Hemolytic Transfusion Reaction",
+      "Hemolytic Crisis from underlying MDS progression"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Hemolytic Transfusion Reaction, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Hemolytic Transfusion Reaction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Hemolytic Transfusion Reaction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on the patient's known MDS and assume symptoms are related to disease progression rather than considering transfusion-related complications",
+      "prematureClosure": "The delayed onset (6 hours post-transfusion) might lead to dismissing transfusion reaction as the cause, settling on other diagnoses too quickly",
+      "availabilityBias": "Recent exposure to sepsis cases might bias toward infectious causes, overlooking the hemolytic component suggested by dark urine and back pain"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gloria Fontaine's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Hemolytic Transfusion Reaction (ABO Incompatibility). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, let's think about transfusion reactions. What types exist, and how might their timing and presentation differ? Consider both immediate and delayed reactions in your differential.",
+      "phase5": "You've gathered excellent information about the timing and constellation of symptoms. The dark urine is particularly telling - what does hemoglobinuria suggest about the underlying pathophysiology? How does this help narrow your differential?",
+      "finalDebrief": "This case illustrates how acute hemolytic transfusion reactions present with the classic triad of fever, back pain, and hemoglobinuria. Notice how the timing, symptom constellation, and physical findings all pointed toward intravascular hemolysis. What key steps in the transfusion process might have prevented this ABO incompatibility?"
     }
-}
+  }
 };

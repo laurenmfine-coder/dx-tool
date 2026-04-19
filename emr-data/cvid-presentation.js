@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Okafor",
-  "patientHPI": "I'm so frustrated because I keep getting these chest infections over and over - this is my fifth one just this year. I feel like something's really wrong with me because normal people don't get sick this much, and I'm worried about what's happening to my body.",
+      "patientHPI": "I'm so frustrated because I keep getting these chest infections over and over - this is my fifth one just this year. I feel like something's really wrong with me because normal people don't get sick this much, and I'm worried about what's happening to my body.",
       "dob": "12/04/1998",
       "age": "28",
       "sex": "Male",
@@ -1134,43 +1134,42 @@ window.EMR_DATA = {
       "Key",
       "Meets diagnostic criteria for CVID — needs IVIG/SCIG"
     ]
-  ]
-,"references":[
-  {
-    "id": "AAAAI-PID-PP-2015",
-    "title": "Practice parameter for the diagnosis and management of primary immunodeficiency",
-    "authors": "Bonilla FA, Barlan I, Chapel H, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2015,
-    "doi": "10.1016/j.jaci.2015.04.049",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4837186/",
-    "openAccess": true,
-    "validates": [
-      "CVID criteria: low IgG + low IgA/IgM + poor vaccine responses",
-      "IgA deficiency → CVID spectrum",
-      "IVIG/SCIG replacement",
-      "IgA-depleted products",
-      "Trough IgG >500"
-    ]
-  },
-  {
-    "id": "SCIG-Review-2008",
-    "title": "Subcutaneous immunoglobulin replacement: a new paradigm",
-    "authors": "Berger M.",
-    "journal": "Immunol Allergy Clin North Am",
-    "year": 2008,
-    "doi": "10.1016/j.iac.2008.07.002",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3576822/",
-    "openAccess": true,
-    "validates": [
-      "SCIG vs IVIG",
-      "Weekly home infusion",
-      "Stable IgG levels",
-      "Patient preference"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "AAAAI-PID-PP-2015",
+      "title": "Practice parameter for the diagnosis and management of primary immunodeficiency",
+      "authors": "Bonilla FA, Barlan I, Chapel H, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2015,
+      "doi": "10.1016/j.jaci.2015.04.049",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4837186/",
+      "openAccess": true,
+      "validates": [
+        "CVID criteria: low IgG + low IgA/IgM + poor vaccine responses",
+        "IgA deficiency → CVID spectrum",
+        "IVIG/SCIG replacement",
+        "IgA-depleted products",
+        "Trough IgG >500"
+      ]
+    },
+    {
+      "id": "SCIG-Review-2008",
+      "title": "Subcutaneous immunoglobulin replacement: a new paradigm",
+      "authors": "Berger M.",
+      "journal": "Immunol Allergy Clin North Am",
+      "year": 2008,
+      "doi": "10.1016/j.iac.2008.07.002",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC3576822/",
+      "openAccess": true,
+      "validates": [
+        "SCIG vs IVIG",
+        "Weekly home infusion",
+        "Stable IgG levels",
+        "Patient preference"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "CVID is the most common symptomatic primary antibody deficiency in adults — median diagnosis age 30s. Diagnostic criteria: low IgG (<2 SD below mean for age) + low IgA and/or IgM + poor vaccine responses + exclusion of other causes. B cells present (differentiate from XLA where B cells are absent).",
@@ -1188,75 +1187,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Okafor appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Marcus appears frustrated and somewhat anxious about his recurring infections, stating he's tired of being sick all the time. He is forthcoming about his symptoms and eager to find answers, expressing concern that something more serious might be wrong given the frequency of his infections.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did recurrent sinopulmonary infections, 4 courses of antibiotics in 6 months start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about these infections you've been having?",
+      "When did you first start noticing you were getting sick more often than usual?",
+      "What types of infections have you had specifically?",
+      "How severe have these infections been compared to when you were younger?",
+      "Have you noticed any other symptoms like diarrhea or digestive issues?",
+      "Do you have any family history of frequent infections or immune problems?",
+      "Have you had any recent vaccinations, and do you know if they were effective?",
+      "Have you traveled anywhere recently or been exposed to anyone sick?",
+      "Do you have any other medical conditions or take any medications regularly?",
+      "Have you noticed any swelling in your abdomen or feeling full quickly when eating?",
+      "Do you smoke, drink alcohol, or use any recreational drugs?",
+      "What is your occupation and living situation?",
+      "Have you had any weight loss or night sweats?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Marcus Okafor presents with recurrent sinopulmonary infections, 4 courses of ant.'",
-        "character": "'It's recurrent sinopulmonary infections, 4 courses of antibiotics in 6 months \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amoxicillin-Clavulanate.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Sister: IgA deficiency",
-        "social": "Infection history: 4 sinusitis, 2 pneumonia, 1 GI infection in 12 months  Vaccination response: Received pneumococcal and tetanus vaccines \u2014 non-protective titers  Key: Meets diagnostic criteria for CVID \u2014 needs IVIG/SCIG"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "I started noticing I was getting sick more often about a year ago. Before that, I rarely got sick, maybe once a year at most.",
+      "character": "These aren't just minor colds - they're real infections that knock me out. The sinus infections cause terrible pressure and thick, colored discharge, and the pneumonias left me really short of breath.",
+      "location": "The sinus infections hit my face, especially around my cheeks and forehead. The pneumonias were in my chest with deep coughing.",
+      "severity": "I'd say the severity is about 7-8 out of 10 when they hit. I've had to miss weeks of work and feel completely drained.",
+      "aggravating": "Stress seems to make me more susceptible, and once I get sick, it takes forever to recover even with antibiotics.",
+      "relieving": "The antibiotics help eventually, but it takes longer than it should, and I often need multiple courses or stronger ones.",
+      "associated": "I've been having chronic diarrhea for months now, and I feel full really quickly when I eat. I've also been more tired than usual.",
+      "denies": "No fever right now, no night sweats, no significant weight loss, no rashes or joint pain.",
+      "history": "Like I mentioned, in the past year I've had 4 sinus infections and 2 pneumonias. I also had one bad stomach bug that lasted weeks.",
+      "medications": "Amoxicillin-Clavulanate",
+      "allergies": "NKDA",
+      "family": "My sister was diagnosed with IgA deficiency a few years ago. She also used to get a lot of infections before they figured that out.",
+      "social": "I work in an office, don't smoke, have maybe 2-3 drinks per week, no drugs. I live with my girlfriend in an apartment."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Vital signs assessment",
+      "Head and neck examination including sinuses",
+      "Pulmonary examination",
+      "Abdominal examination with palpation for splenomegaly",
+      "Lymph node examination",
+      "Cardiac examination",
+      "Skin examination for rashes or lesions",
+      "Oropharyngeal examination",
+      "General appearance and constitutional assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Vital signs assessment": "BP 118/72, HR 76, Temperature 37.0°C, SpO2 98%, appears stable",
+      "Head and neck examination including sinuses": "Mild tenderness over maxillary sinuses, no acute drainage, lymph nodes small and mobile",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes or crackles, good air movement",
+      "Abdominal examination with palpation for splenomegaly": "Spleen palpable 3 cm below left costal margin, non-tender, liver not enlarged",
+      "Lymph node examination": "Small, mobile lymph nodes in cervical and axillary regions, none enlarged or concerning",
+      "Cardiac examination": "Regular rate and rhythm, no murmurs, rubs, or gallops",
+      "Skin examination for rashes or lesions": "No rashes, petechiae, or unusual lesions noted",
+      "Oropharyngeal examination": "Mild erythema of posterior pharynx, no exudate or thrush",
+      "General appearance and constitutional assessment": "Well-appearing but somewhat fatigued-looking young man, no acute distress"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Common Variable Immunodeficiency (CVID) (correct diagnosis)",
+      "Selective IgA deficiency",
+      "Chronic granulomatous disease",
+      "Acute leukemia",
+      "HIV infection",
+      "Chronic sinusitis with secondary immune dysfunction",
+      "Hypogammaglobulinemia secondary to medication or malignancy"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on recurrent sinusitis as simple chronic sinus disease rather than considering underlying immunodeficiency",
+      "prematureClosure": "May stop at diagnosis of chronic sinusitis without investigating the pattern of recurrent infections and family history",
+      "availabilityBias": "Common infections may overshadow consideration of rare primary immunodeficiency disorders"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Okafor's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified recurrent sinopulmonary infections in a young healthy male. What specific aspects of the history would help you distinguish between common causes of recurrent infections versus primary immunodeficiency? Think about the pattern, severity, and what family history might be relevant.",
+      "phase5": "Now you have the history of recurrent serious infections, family history of IgA deficiency, splenomegaly, and chronic diarrhea. How does this constellation of findings change your differential diagnosis? What does the splenomegaly suggest about the underlying pathophysiology?",
+      "finalDebrief": "This case illustrates how a pattern of recurrent sinopulmonary infections, especially with poor vaccine response and splenomegaly, should raise suspicion for primary immunodeficiency. The family history of IgA deficiency was a key clue, as CVID can cluster in families. How did your thinking evolve from considering simple recurrent sinusitis to recognizing the signs of immunodeficiency?"
     }
-}
+  }
 };

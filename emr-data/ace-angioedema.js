@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Darnell Washington",
-  "patientHPI": "My lips and tongue have been swelling up and I look like I got punched in the face, but there's no rash anywhere else on my body - it just came on suddenly and won't go down.",
+      "patientHPI": "My lips and tongue have been swelling up and I look like I got punched in the face, but there's no rash anywhere else on my body - it just came on suddenly and won't go down.",
       "dob": "04/01/1968",
       "age": "58",
       "sex": "Male",
@@ -941,27 +941,26 @@ window.EMR_DATA = {
       "Race",
       "African American"
     ]
-  ]
-,"references":[
-  {
-    "id": "ACE-AE-Byrd-2006",
-    "title": "ACE inhibitor-associated angioedema",
-    "authors": "Byrd JB, Adam A, Brown NJ.",
-    "journal": "Immunol Allergy Clin North Am",
-    "year": 2006,
-    "doi": "10.1016/j.iac.2006.08.001",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4039077/",
-    "openAccess": true,
-    "validates": [
-      "3-5x higher risk in African Americans",
-      "Late-onset possible years after starting",
-      "Bradykinin mechanism",
-      "ARB cross-reactivity 2-10%",
-      "Icatibant for ACE angioedema"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "ACE-AE-Byrd-2006",
+      "title": "ACE inhibitor-associated angioedema",
+      "authors": "Byrd JB, Adam A, Brown NJ.",
+      "journal": "Immunol Allergy Clin North Am",
+      "year": 2006,
+      "doi": "10.1016/j.iac.2006.08.001",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4039077/",
+      "openAccess": true,
+      "validates": [
+        "3-5x higher risk in African Americans",
+        "Late-onset possible years after starting",
+        "Bradykinin mechanism",
+        "ARB cross-reactivity 2-10%",
+        "Icatibant for ACE angioedema"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "ACE inhibitor angioedema occurs in 0.1–0.7% of patients on ACEi, more common in Black patients (3-4× higher risk), and can occur years after starting the medication. Mechanism: ACEi inhibits bradykinin degradation → bradykinin accumulates → B2 receptor activation → angioedema.",
@@ -979,75 +978,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Darnell Washington appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Darnell appears anxious and concerned about his facial swelling, frequently touching his lips while speaking. He is cooperative and forthcoming with information, expressing worry about whether this could be something serious. His speech is slightly affected by the swelling, making him somewhat self-conscious during the interview.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did lip/tongue swelling without urticaria start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the swelling in your lips and tongue?",
+      "How quickly did the swelling develop - over minutes, hours, or days?",
+      "Have you noticed any difficulty breathing or swallowing?",
+      "Do you have any itching, rash, or hives anywhere on your body?",
+      "Have you eaten anything new or unusual recently?",
+      "Have you been exposed to any new medications, soaps, or chemicals?",
+      "Have you had any similar episodes of swelling before?",
+      "Are you currently taking any medications?",
+      "Do you have any known allergies?",
+      "Have you had any recent dental work or mouth injuries?",
+      "Do you feel any tightness in your throat or chest?",
+      "Have you had any nausea, vomiting, or abdominal pain?",
+      "Does anyone in your family have similar reactions or allergies?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Darnell Washington presents with lip/tongue swelling without urticaria.'",
-        "character": "'It's lip/tongue swelling without urticaria \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril; Amlodipine.'",
-        "allergies": "'My allergies are ACE Inhibitors (now).'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Race: African American"
+      "default": "I'm not sure what you mean by that. Could you ask that in a different way?",
+      "onset": "I woke up this morning and noticed my lips felt funny. When I looked in the mirror about 6 hours ago, they were swollen. My tongue started swelling a couple hours later.",
+      "character": "It's just swelling - no pain really, just feels tight and uncomfortable. My lips feel thick and my tongue feels too big for my mouth.",
+      "location": "It's mainly my upper and lower lips, and the front part of my tongue. Nothing else on my face is swollen.",
+      "severity": "I'd say it's about a 6 out of 10 for discomfort. It's hard to talk normally and I'm worried about eating or drinking.",
+      "aggravating": "I haven't really noticed anything that makes it worse. Maybe talking makes me more aware of it.",
+      "relieving": "I tried some ice and it helped a little bit, but the swelling is still there. I took some Benadryl but it didn't seem to help much.",
+      "associated": "No other symptoms really. No rash, no itching, no trouble breathing. Maybe my blood pressure feels a little high but that's been an issue lately.",
+      "denies": "No difficulty breathing, no chest tightness, no rash or hives anywhere, no abdominal pain, no nausea or vomiting.",
+      "history": "Never had anything like this before. This is completely new for me.",
+      "medications": "Lisinopril; Amlodipine",
+      "allergies": "ACE Inhibitors (now)",
+      "family": "No one in my family has had allergic reactions like this that I know of.",
+      "social": "I work in an office, don't smoke, maybe a beer or two on weekends. I'm African American if that matters for anything medical."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect lips and oral cavity",
+      "Examine tongue and floor of mouth",
+      "Palpate neck for lymphadenopathy",
+      "Assess airway patency and voice quality",
+      "Examine skin for urticaria or rash",
+      "Auscultate lungs for stridor or wheezing",
+      "Check blood pressure",
+      "Examine pharynx and uvula",
+      "Assess facial symmetry",
+      "Palpate for facial tenderness"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect lips and oral cavity": "Marked non-pitting edema of upper and lower lips, more pronounced on lower lip. No erythema or ulceration. Oral mucosa appears normal.",
+      "Examine tongue and floor of mouth": "Moderate swelling of anterior tongue with normal color. Floor of mouth appears normal without induration.",
+      "Palpate neck for lymphadenopathy": "No cervical, submandibular, or submental lymphadenopathy detected.",
+      "Assess airway patency and voice quality": "Voice slightly muffled due to lip swelling but no stridor. Airway appears patent.",
+      "Examine skin for urticaria or rash": "No urticaria, rash, or other skin lesions noted on face, neck, arms, or trunk.",
+      "Auscultate lungs for stridor or wheezing": "Lung sounds clear bilaterally, no stridor or wheezing. Good air movement.",
+      "Check blood pressure": "152/88 mmHg, consistent with stated vitals.",
+      "Examine pharynx and uvula": "Pharynx and uvula appear normal without edema or erythema.",
+      "Assess facial symmetry": "Face symmetric aside from lip swelling. No focal neurologic deficits.",
+      "Palpate for facial tenderness": "No tenderness to palpation of swollen areas or facial bones."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "ACE inhibitor-induced angioedema (correct diagnosis)",
+      "Hereditary angioedema",
+      "Allergic angioedema",
+      "Anaphylaxis",
+      "Airway obstruction",
+      "Cellulitis",
+      "Contact dermatitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on 'allergic reaction' and focus extensively on allergen exposure, missing the medication-induced etiology despite ACE inhibitor use.",
+      "prematureClosure": "The absence of urticaria and typical allergic symptoms may lead students to prematurely close on non-allergic causes without considering angioedema.",
+      "availabilityBias": "Students may overweight recent cases of food allergies or bee stings, missing the classic presentation of ACE inhibitor angioedema in an African American patient."
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Darnell Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "I see you're considering several causes of facial swelling. What specific historical features would help you differentiate between allergic and non-allergic angioedema? How might this patient's demographic and medication profile influence your thinking?",
+      "phase5": "You've gathered good information about the swelling pattern and associated symptoms. What's significant about the absence of urticaria in this presentation? How does the patient's medication list and ethnic background factor into your diagnostic reasoning?",
+      "finalDebrief": "This case illustrates classic ACE inhibitor-induced angioedema, which occurs more frequently in African American patients and can develop even after months or years of stable therapy. How did the absence of urticaria help distinguish this from IgE-mediated allergic reactions? What's your approach to managing this patient's hypertension going forward?"
     }
-}
+  }
 };

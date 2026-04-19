@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Maria Santos-Reyes",
-  "patientHPI": "I was cleaning a house today wearing my usual rubber gloves when my lips and face started swelling up, and then I couldn't breathe right and felt like I was going to pass out. I had an emergency pen in my purse but it was old, and it helped a little but I still feel awful - I've gotten rashes from those gloves before but nothing like this.",
+      "patientHPI": "I was cleaning a house today wearing my usual rubber gloves when my lips and face started swelling up, and then I couldn't breathe right and felt like I was going to pass out. I had an emergency pen in my purse but it was old, and it helped a little but I still feel awful - I've gotten rashes from those gloves before but nothing like this.",
       "dob": "08/25/1994",
       "age": "32",
       "sex": "Female",
@@ -1198,140 +1198,147 @@ window.EMR_DATA = {
       "Financial",
       "Cannot afford EpiPen ($600+) — has been using expired one"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "EAACI-Anaph-2021",
-    "title": "EAACI guidelines: Anaphylaxis (2021 update)",
-    "authors": "Muraro A, Worm M, Alviani C, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15032",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
-    "openAccess": true,
-    "validates": [
-      "Discharge planning with EpiPen",
-      "Patient action plans",
-      "Allergist referral 4-6 weeks"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "EAACI-Anaph-2021",
+      "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+      "authors": "Muraro A, Worm M, Alviani C, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15032",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+      "openAccess": true,
+      "validates": [
+        "Discharge planning with EpiPen",
+        "Patient action plans",
+        "Allergist referral 4-6 weeks"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Maria Santos-Reyes is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Maria is anxious and breathing rapidly, speaking in short phrases between breaths. She's cooperative but frightened, particularly worried about missing work and affording treatment. She appears embarrassed about using an expired EpiPen and not having proper asthma medications.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly what happened at work today?",
+      "When did you first notice the lip swelling and other symptoms?",
+      "How quickly did the symptoms progress?",
+      "Have you had reactions like this to latex before?",
+      "Tell me about your breathing - when did the wheezing start?",
+      "You mentioned using an EpiPen - when did you use it and what happened?",
+      "Are you having any chest pain or throat tightness?",
+      "How is your asthma usually controlled?",
+      "What medications do you normally take for your asthma?",
+      "Have you had any recent respiratory infections?",
+      "Do you have access to latex-free gloves at work?",
+      "Any nausea, vomiting, or abdominal cramping?",
+      "Have you ever been intubated or hospitalized for asthma or allergic reactions?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Albuterol; Methylprednisolone; Diphenhydramine.'",
-        "allergies": "'My allergies: Penicillin, Latex.'",
-        "family": "Mother: asthma  Grandmother: died from asthma attack",
-        "social": "Tobacco: Never  Alcohol: Rare  Occupation: House cleaner \u2014 chemical exposures  Insurance: Uninsured \u2014 works 2 jobs, no employer coverage  Living: Shares apartment with 3 roommates, no AC"
+      "default": "I'm sorry, I'm having trouble concentrating right now - could you repeat that?",
+      "onset": "It started about 45 minutes ago when I put on latex gloves to clean a bathroom. My lips started tingling first, then swelling.",
+      "character": "My lips feel huge and numb, and I'm wheezing badly - worse than my usual asthma. I feel dizzy and weak.",
+      "location": "The swelling is mainly in my lips and around my eyes. The wheezing is all through my chest.",
+      "severity": "This is definitely a 9 out of 10 - I've never felt this scared about breathing before.",
+      "aggravating": "It got much worse very quickly after I touched my face with the gloves on.",
+      "relieving": "The EpiPen helped some but not as much as it should have. Nothing else has helped.",
+      "associated": "I'm dizzy, weak, nauseous, and my heart is racing. I almost passed out at work.",
+      "denies": "No rash or hives, no vomiting, no chest pain, but I do feel like my throat is tight.",
+      "history": "I've had latex reactions before but never this bad. Usually just contact dermatitis on my hands.",
+      "medications": "Epinephrine; Albuterol; Methylprednisolone; Diphenhydramine",
+      "allergies": "Penicillin, Latex",
+      "family": "My mom has asthma and my grandmother actually died from a severe asthma attack when I was little.",
+      "social": "I clean houses for work, so I'm exposed to latex gloves and cleaning chemicals daily. I don't smoke or drink much. I'm uninsured and work two jobs but still can't afford my controller inhalers."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect lips, face, and throat for angioedema",
+      "Auscultate lungs for wheezing and air movement",
+      "Assess respiratory effort and accessory muscle use",
+      "Examine skin for urticaria or erythema",
+      "Palpate neck for lymphadenopathy or masses",
+      "Cardiovascular examination for tachycardia",
+      "Neurologic assessment for altered mental status",
+      "Inspect hands for contact dermatitis from latex",
+      "Assess peak expiratory flow if possible",
+      "Monitor oxygen saturation and vital signs"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect lips, face, and throat for angioedema": "Marked bilateral lip swelling and mild periorbital edema. Uvula appears swollen but airway patent.",
+      "Auscultate lungs for wheezing and air movement": "Diffuse expiratory wheeze bilaterally with good air movement. No stridor.",
+      "Assess respiratory effort and accessory muscle use": "Mild increased work of breathing with slight accessory muscle use, speaking in short phrases.",
+      "Examine skin for urticaria or erythema": "No generalized urticaria or rash visible on trunk or extremities.",
+      "Palpate neck for lymphadenopathy or masses": "No lymphadenopathy or masses palpated. No neck swelling.",
+      "Cardiovascular examination for tachycardia": "Tachycardic regular rhythm, no murmurs. Pulses strong but rapid.",
+      "Neurologic assessment for altered mental status": "Alert and oriented but anxious. No focal deficits.",
+      "Inspect hands for contact dermatitis from latex": "Mild erythema and scaling on bilateral hands consistent with chronic contact dermatitis.",
+      "Assess peak expiratory flow if possible": "Peak flow 60% of predicted, consistent with moderate airway obstruction.",
+      "Monitor oxygen saturation and vital signs": "SpO2 90% on room air, BP 96/58, HR 118, appears volume depleted."
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Anaphylaxis (correct diagnosis)",
+      "Severe asthma exacerbation",
+      "Angioedema (hereditary or ACE inhibitor-induced)",
+      "Vocal cord dysfunction",
+      "Foreign body aspiration",
+      "Panic attack with hyperventilation",
+      "Acute allergic reaction without systemic involvement"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on 'asthma exacerbation' given her asthma history and wheezing, missing the systemic anaphylactic features like hypotension and angioedema.",
+      "prematureClosure": "Risk of stopping evaluation after noting wheezing and asthma history without fully assessing for anaphylaxis criteria or considering latex exposure context.",
+      "availabilityBias": "May focus on common asthma presentations rather than recognizing occupational anaphylaxis pattern in uninsured patient with expired medications."
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Maria Santos-Reyes: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Before you interview the patient, consider what key historical elements would help you differentiate between your differential diagnoses. What specific questions about the exposure, timeline, and progression of symptoms will be most important? How might her occupational and social history influence both her presentation and your management?",
+      "phase5": "Now that you've gathered history and physical findings, let's think through this systematically. You have a patient with known latex allergy who had occupational exposure, followed by rapid onset of angioedema, wheezing, and hypotension. How do these findings fit together? What criteria are you using to evaluate for anaphylaxis versus other diagnoses?",
+      "finalDebrief": "This case illustrates classic anaphylaxis with both respiratory and cardiovascular involvement following known allergen exposure. Notice how the combination of angioedema, bronchospasm, and hypotension distinguished this from isolated asthma or local allergic reaction. The social determinants - being uninsured with expired medications and ongoing occupational exposure - are crucial for both understanding the presentation and planning appropriate follow-up care."
     }
-}
+  }
 };

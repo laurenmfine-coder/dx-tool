@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Tyler Nguyen",
-  "patientHPI": "This pain started around my belly button yesterday and was just annoying at first, but now it's moved down to my lower right side and it's getting really sharp and intense. I also feel nauseous and threw up once this morning, and now I'm worried something serious is going on.",
+    "patientHPI": "This pain started around my belly button yesterday and was just annoying at first, but now it's moved down to my lower right side and it's getting really sharp and intense. I also feel nauseous and threw up once this morning, and now I'm worried something serious is going on.",
     "dob": "06/12/2007",
     "age": "19",
     "sex": "Male",
@@ -236,158 +236,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Tyler Nguyen is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Tyler appears uncomfortable and anxious, frequently shifting position and holding his right lower abdomen. He is cooperative and eager to provide information, clearly concerned that something serious is happening. His distress is evident through grimacing when the pain intensifies.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me exactly when this pain started and how it has changed?",
+      "Can you describe what the pain feels like now?",
+      "Where exactly is the pain located now, and can you point to it?",
+      "On a scale of 1-10, how would you rate your current pain?",
+      "What makes the pain worse or better?",
+      "Have you had any fever, chills, or felt hot?",
+      "Besides nausea and vomiting, have you had any other symptoms?",
+      "Have you had any changes in your bowel movements or urination?",
+      "Have you eaten anything unusual or had any recent travel?",
+      "Have you ever had pain like this before?",
+      "Are you taking any medications or have any allergies?",
+      "Does anyone in your family have a history of abdominal problems?",
+      "Do you use tobacco, alcohol, or any recreational substances?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Never  Occupation: College student"
+      "default": "I'm not sure what you mean by that - could you ask that differently? I'm just really focused on this pain right now.",
+      "onset": "It started yesterday afternoon around my belly button, just kind of a dull ache. But overnight it got worse and this morning it moved down to my right side and became much sharper.",
+      "character": "It's a sharp, stabbing pain now. When it first started it was just a dull ache, but now it feels like someone is poking me with a knife.",
+      "location": "Right now it's right here in my lower right side. I can point to exactly where it hurts most - it's not spread out anymore like it was yesterday.",
+      "severity": "Right now it's about an 8 out of 10. Yesterday it was maybe a 3 or 4, but it's gotten so much worse. I can barely move without it hurting more.",
+      "aggravating": "Any movement makes it worse - walking, coughing, even laughing. I've been trying to stay as still as possible.",
+      "relieving": "Nothing really helps. I tried some ibuprofen last night but it didn't do much. Lying still helps a little bit.",
+      "associated": "I feel nauseous and threw up once this morning. I also feel like I might have a fever - I've been feeling hot and kind of shaky.",
+      "denies": "No diarrhea, no blood in stool or urine, no burning when I pee. I haven't had any chest pain or trouble breathing.",
+      "history": "Never had anything like this before. I'm usually pretty healthy and rarely get sick.",
+      "medications": "no medications",
+      "allergies": "NKDA",
+      "family": "Not really anything that I know of. My parents are pretty healthy. Maybe my dad had his gallbladder out a few years ago but that's about it.",
+      "social": "I'm a college student, sophomore year. I don't smoke and I drink occasionally at parties but nothing crazy. No drugs."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspection of abdomen",
+      "Auscultation of bowel sounds",
+      "Light palpation of all quadrants",
+      "Deep palpation of RLQ",
+      "McBurney's point tenderness",
+      "Rovsing's sign",
+      "Psoas sign",
+      "Obturator sign",
+      "Rebound tenderness",
+      "Percussion tenderness"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspection of abdomen": "Abdomen appears flat, no visible distension, no obvious masses or hernias, patient guarding RLQ",
+      "Auscultation of bowel sounds": "Bowel sounds present but hypoactive in all quadrants",
+      "Light palpation of all quadrants": "Soft in LUQ, LLQ, and RUQ with no tenderness, marked tenderness and guarding in RLQ",
+      "Deep palpation of RLQ": "Exquisite tenderness with voluntary guarding, patient winces and pulls away",
+      "McBurney's point tenderness": "Positive - maximal tenderness at McBurney's point with deep palpation",
+      "Rovsing's sign": "Positive - palpation of LLQ elicits pain in RLQ",
+      "Psoas sign": "Positive - passive extension of right hip while patient lies on left side elicits RLQ pain",
+      "Obturator sign": "Positive - passive internal rotation of flexed right hip elicits RLQ pain",
+      "Rebound tenderness": "Positive - sudden release of deep palpation in RLQ causes sharp increase in pain",
+      "Percussion tenderness": "Positive over RLQ, patient reports increased pain with gentle percussion"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Acute appendicitis (correct diagnosis)",
+      "Mesenteric adenitis",
+      "Inflammatory bowel disease",
+      "Testicular torsion",
+      "Bowel obstruction",
+      "Gastroenteritis",
+      "Ureterolithiasis"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "The classic presentation may cause immediate anchoring on appendicitis without adequately considering other causes of RLQ pain in young males",
+      "prematureClosure": "The textbook history and exam findings may lead to premature closure without considering atypical presentations or alternative diagnoses",
+      "availabilityBias": "Recent cases of appendicitis or common teaching about 'classic appendicitis' may overshadow consideration of less common but serious conditions"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Tyler Nguyen: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "You've identified appendicitis in your differential - that's good pattern recognition for RLQ pain. What other conditions can present with similar pain migration patterns? Think about what else could cause periumbilical pain that moves to the RLQ, and don't forget to consider must-not-miss diagnoses in a young male.",
+      "phase5": "Your history and physical exam show classic findings. Walk me through how each positive finding supports or refutes your differential diagnoses. What's the significance of the pain migration pattern, and how do the positive inflammatory signs help narrow your diagnosis?",
+      "finalDebrief": "This case demonstrates the evolution from visceral to somatic pain in appendicitis - the periumbilical pain represents visceral innervation, while RLQ localization indicates parietal peritoneal irritation. Notice how your differential appropriately narrowed as you gathered classic findings like McBurney's point tenderness and positive inflammatory signs. The key was systematically evaluating each possibility rather than anchoring on the obvious diagnosis immediately."
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['appendicitis-v1'] = {
-  id: 'appendicitis-v1', name: 'Tyler Nguyen',
-  chiefComplaint: 'Acute Appendicitis — McBurney Point and Perforation Risk',
-  diagnosis: 'Acute Appendicitis — McBurney Point and Perforation Risk',
-  orders: {
-    correct: [{ id: 'ct-abdomen', name: 'CT abdomen/pelvis with IV contrast — confirms appendicitis', rationale: 'CT sensitivity >95% for appendicitis. Findings: appendix >6mm diameter, periappendiceal fat stranding, appendicolith (20-40%), fluid. Ultrasound in children and pregnant patients first (no radiation). MRI in pregnancy if US equivocal.' },{ id: 'appendectomy', name: 'Laparoscopic appendectomy — surgical consultation for definitive treatment', rationale: 'Laparoscopic appendectomy is the gold standard. For uncomplicated appendicitis: antibiotics alone (non-operative management) is an option per CODA trial — comparable outcomes at 90 days but 30% required appendectomy at 1 year. Most US surgeons still offer surgery.' }],
-    incorrect: [{ id: 'antibiotics-only', name: 'Antibiotics only — avoid surgery for appendicitis', rationale: 'Antibiotics alone (non-operative management) is a valid option for UNCOMPLICATED appendicitis (no perforation, no abscess, no fecalith). CODA trial: non-operative management non-inferior at 90 days. However, 30% crossover to surgery at 1 year. Not appropriate for complicated appendicitis or patient preference.' },{ id: 'observe-peritonitis', name: 'Observe and reassess — the pain will localize more definitively', rationale: 'Classic appendicitis migrates from periumbilical to McBurney point (RLQ) — this migration has already occurred. Observation risks perforation (occurs in 20-30% of cases within 24-72h). Perforation increases morbidity significantly. Act on clinical diagnosis plus imaging.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['Classic appendicitis: periumbilical pain migrating to McBurney point (2/3 of the way from umbilicus to ASIS). Anorexia + nausea. Low-grade fever. Rebound tenderness. WBC elevated (75% of cases). Rovsing sign (RLQ pain with LLQ palpation). Psoas sign (hip extension pain). Obturator sign (hip internal rotation pain).','Alvarado score: Migratory pain (1) + Anorexia (1) + Nausea/vomiting (1) + Tenderness RLQ (2) + Rebound tenderness (1) + Temperature >37.3°C (1) + WBC >10 (2) + Shift to left (1). Score ≥7 = high probability, surgery without imaging.','Complicated vs uncomplicated appendicitis: complicated (perforated, gangrenous, abscess) = surgery required. Uncomplicated = non-operative management (NOM) is an evidence-based option (CODA, APPAC trials).'],
-    boardPearls: ['Appendix variants: retrocecal appendix (26%) — pain may be more posterior/flank, psoas sign positive. Pelvic appendix (30%) — pain suprapubic, confused with gynecologic pathology. Subhepatic appendix — rare, RUQ pain.','Fecalith (appendicolith): present in 20-40% on CT. Associated with higher perforation rates and higher failure rates of NOM. Some consider fecalith a relative indication for surgery over NOM.','Perforation risk: increases significantly after 24-36h from symptom onset. Mortality for uncomplicated appendicitis is <1%. Perforated appendicitis mortality: elderly (up to 5-10%).']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Tyler Nguyen is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take no medications.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Tyler Nguyen \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

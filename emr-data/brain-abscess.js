@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Ricardo Jimenez",
-  "patientHPI": "I started having this really bad headache about 10 days ago, right across my forehead and around my cheeks, and it just keeps getting worse. My doctor thought it was another sinus infection and gave me antibiotics 5 days ago, but honestly I don't feel any better. Now I'm getting nauseous and feel feverish, and I'm having trouble focusing at work - it's like my brain is in a fog.",
+    "patientHPI": "I started having this really bad headache about 10 days ago, right across my forehead and around my cheeks, and it just keeps getting worse. My doctor thought it was another sinus infection and gave me antibiotics 5 days ago, but honestly I don't feel any better. Now I'm getting nauseous and feel feverish, and I'm having trouble focusing at work - it's like my brain is in a fog.",
     "dob": "11/04/1978",
     "age": 46,
     "sex": "Male",
@@ -114,54 +114,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/20/2025",
-        "bp": "142/88",
-        "hr": 92,
-        "rr": 16,
-        "temp": "100.8\u00b0F",
-        "spo2": "97%",
-        "wt": "248 lbs",
-        "ht": "5'10\"",
-        "bmi": 35.6,
-        "setting": "Urgent Care"
+      "date": "01/20/2025",
+      "bp": "142/88",
+      "hr": 92,
+      "rr": 16,
+      "temp": "100.8°F",
+      "spo2": "97%",
+      "wt": "248 lbs",
+      "ht": "5'10\"",
+      "bmi": 35.6,
+      "setting": "Urgent Care"
     },
     {
-        "date": "11/05/2024",
-        "bp": "138/86",
-        "hr": 78,
-        "rr": 14,
-        "temp": "98.6\u00b0F",
-        "spo2": "98%",
-        "wt": "245 lbs",
-        "ht": "5'10\"",
-        "bmi": 35.1,
-        "setting": "PCP Office"
+      "date": "11/05/2024",
+      "bp": "138/86",
+      "hr": 78,
+      "rr": 14,
+      "temp": "98.6°F",
+      "spo2": "98%",
+      "wt": "245 lbs",
+      "ht": "5'10\"",
+      "bmi": 35.1,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/15/2024",
-        "bp": "144/90",
-        "hr": 82,
-        "rr": 16,
-        "temp": "98.4\u00b0F",
-        "spo2": "98%",
-        "wt": "242 lbs",
-        "ht": "5'10\"",
-        "bmi": 34.7,
-        "setting": "PCP Office"
+      "date": "07/15/2024",
+      "bp": "144/90",
+      "hr": 82,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "98%",
+      "wt": "242 lbs",
+      "ht": "5'10\"",
+      "bmi": 34.7,
+      "setting": "PCP Office"
     },
     {
-        "date": "01/22/2024",
-        "bp": "136/84",
-        "hr": 76,
-        "rr": 14,
-        "temp": "98.2\u00b0F",
-        "spo2": "99%",
-        "wt": "238 lbs",
-        "ht": "5'10\"",
-        "bmi": 34.1,
-        "setting": "PCP Office"
+      "date": "01/22/2024",
+      "bp": "136/84",
+      "hr": 76,
+      "rr": 14,
+      "temp": "98.2°F",
+      "spo2": "99%",
+      "wt": "238 lbs",
+      "ht": "5'10\"",
+      "bmi": 34.1,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -212,32 +212,128 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "158", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.5", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "32", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "28", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "158",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.5",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "32",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "8.1", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "186", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "8.1",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "186",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "11.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "14.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "44.1", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "282", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "11.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "14.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "44.1",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "282",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -298,15 +394,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Brain tumor (type unknown), deceased at 60"
   ],
   "socialHistory": [
-    ["Occupation", "Construction foreman"],
-    ["Marital", "Married, 2 children"],
-    ["Tobacco", "Former smoker — 10 pack-years; quit 2017"],
-    ["Alcohol", "Social, 3-4 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal; physically active at work"],
-    ["Housing", "Lives with wife and children in single-family home"],
-    ["Safety", "Denies IPV; wears hard hat at work"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Construction foreman"
+    ],
+    [
+      "Marital",
+      "Married, 2 children"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 10 pack-years; quit 2017"
+    ],
+    [
+      "Alcohol",
+      "Social, 3-4 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal; physically active at work"
+    ],
+    [
+      "Housing",
+      "Lives with wife and children in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears hard hat at work"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "brain-abscess",
@@ -317,75 +440,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Ricardo Jimenez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Ricardo appears visibly uncomfortable and holds his head frequently, showing moderate distress from his worsening headache. He's cooperative but seems somewhat confused and sluggish in his responses, occasionally needing questions repeated. He expresses frustration that the antibiotics haven't helped and is increasingly worried about his deteriorating condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did headache start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when your headache started and how it has changed?",
+      "Where specifically is the pain located and does it radiate anywhere?",
+      "On a scale of 1-10, how severe is your headache now compared to when it started?",
+      "Have you had any fever, chills, or night sweats?",
+      "Are you experiencing any nausea, vomiting, or changes in vision?",
+      "Have you noticed any weakness, numbness, or difficulty speaking?",
+      "How long have you been dealing with sinus problems?",
+      "Tell me about the antibiotics you're taking - when did you start them?",
+      "Have you had any recent dental problems or procedures?",
+      "Are you having any neck stiffness or pain with bright lights?",
+      "Have you noticed any changes in your thinking or memory?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies I should know about?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I started having this really bad headache about 10 days ago, right across my for.'",
-        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Brain Abscess.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 1000mg BID; Lisinopril 20mg daily; Fluticasone 50mcg nasal spray BID; Amoxicillin-Clavulanate 875mg/125mg BID; Atorvastatin 20mg QHS.'",
-        "allergies": "'My allergies are Sulfonamides.'",
-        "family": "Mother: T2DM, HTN, alive at 72  Father: Stroke at age 64, deceased at 68  Brother: T2DM, age 50",
-        "social": "Occupation: Construction foreman  Marital: Married, 2 children  Tobacco: Former smoker \u2014 10 pack-years; quit 2017  Alcohol: Social, 3-4 beers on weekends  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble concentrating with this headache. Could you repeat that?",
+      "onset": "It started about 10 days ago as what I thought was just another sinus headache, but it's gotten much worse over the past 3-4 days. Now it's constant and throbbing.",
+      "character": "It's a deep, throbbing pain that feels like pressure building up inside my head. It's different from my usual sinus headaches - much more intense.",
+      "location": "It's mainly across my forehead and around my right eye and cheek area, but now it feels like it's spreading to the whole right side of my head.",
+      "severity": "When it started, maybe a 4 or 5, but now it's easily an 8 or 9. I can barely function at work, and I had to come home early yesterday.",
+      "aggravating": "Bending over or coughing makes it much worse. Bright lights bother me too, and any jarring movement sends shooting pain through my head.",
+      "relieving": "Nothing really helps anymore. I've tried ibuprofen, acetaminophen, even lying in a dark room, but the pain just keeps getting worse.",
+      "associated": "I've been nauseous for the past few days and threw up twice yesterday. I feel feverish and just generally awful, like I have the flu.",
+      "denies": "I haven't had any seizures or passed out, but I do feel more confused than usual and my wife says I seem 'off' lately.",
+      "history": "I've had sinus infections before with my chronic sinusitis, but nothing like this. Usually the antibiotics clear it up in a few days.",
+      "medications": "Metformin 1000mg BID; Lisinopril 20mg daily; Fluticasone 50mcg nasal spray BID; Amoxicillin-Clavulanate 875mg/125mg BID; Atorvastatin 20mg QHS",
+      "allergies": "Sulfonamides",
+      "family": "My mom has diabetes and high blood pressure, and my dad had a stroke when he was 64. My brother also has diabetes.",
+      "social": "I work as a construction foreman, so I'm around dust and debris a lot. I'm married with two kids. I quit smoking about 6 years ago after 10 pack-years, and I have a few beers on weekends."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Neurological assessment including mental status",
+      "Fundoscopic examination",
+      "Assessment for nuchal rigidity and meningeal signs",
+      "Cranial nerve examination",
+      "Motor strength and reflexes testing",
+      "Coordination and gait assessment",
+      "Sinus percussion and palpation",
+      "Temperature and vital signs assessment",
+      "Assessment for focal neurological deficits",
+      "Examination for papilledema"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Brain Abscess. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Brain Abscess. Document specifically what you observe."
+      "Neurological assessment including mental status": "Patient appears mildly confused and has delayed responses; oriented to person and place but uncertain of date",
+      "Fundoscopic examination": "Mild papilledema present bilaterally, suggesting increased intracranial pressure",
+      "Assessment for nuchal rigidity and meningeal signs": "Mild neck stiffness present; Kernig's and Brudzinski's signs are negative",
+      "Cranial nerve examination": "Cranial nerves II-XII intact, though patient reports some decreased smell on right side",
+      "Motor strength and reflexes testing": "Motor strength 5/5 throughout; reflexes 2+ and symmetric",
+      "Coordination and gait assessment": "Mild unsteadiness noted; finger-to-nose testing shows slight intention tremor on right",
+      "Sinus percussion and palpation": "Marked tenderness over right frontal and maxillary sinuses with dullness to percussion",
+      "Temperature and vital signs assessment": "Temperature 100.8°F, BP 142/88, HR 92, appears mildly diaphoretic",
+      "Assessment for focal neurological deficits": "No obvious focal motor or sensory deficits identified",
+      "Examination for papilledema": "Optic disc margins appear blurred bilaterally consistent with mild papilledema"
     },
     "ddxTargets": [
-        "Brain Abscess (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Brain Abscess (Secondary to Sinusitis with Contiguous Spread) (correct diagnosis)",
+      "Bacterial Meningitis",
+      "Complicated Acute Sinusitis with Intracranial Extension",
+      "Subdural Empyema",
+      "Cavernous Sinus Thrombosis",
+      "Migraine with Aura",
+      "Tension-Type Headache with Medication Overuse"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Brain Abscess, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Brain Abscess, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Brain Abscess based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'just another sinus infection' given patient's chronic sinusitis history and recent antibiotic treatment, potentially missing the intracranial complication",
+      "prematureClosure": "May stop at complicated sinusitis diagnosis without considering intracranial spread, especially given patient's ongoing antibiotic treatment",
+      "availabilityBias": "Common presentation of headache and sinus symptoms may lead to considering only routine diagnoses rather than life-threatening intracranial complications"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Ricardo Jimenez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Brain Abscess (Secondary to Sinusitis with Contiguous Spread). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has chronic sinusitis and is on antibiotics, but his headache is worsening. What red flags in his presentation should make you concerned about complications beyond simple sinusitis? Consider what intracranial complications can arise from untreated or inadequately treated sinus infections.",
+      "phase5": "You've identified concerning neurological signs including papilledema and altered mental status in a patient with chronic sinusitis. How do these findings change your differential diagnosis? What is the most likely mechanism by which his sinus infection could cause these neurological symptoms?",
+      "finalDebrief": "This case demonstrates how chronic sinusitis can lead to serious intracranial complications through contiguous spread. The key learning points include recognizing red flags like altered mental status, papilledema, and neurological symptoms in the setting of refractory sinusitis. Early recognition is crucial as brain abscesses require immediate neurosurgical consultation and prolonged antibiotic therapy."
     }
-}
+  }
 };

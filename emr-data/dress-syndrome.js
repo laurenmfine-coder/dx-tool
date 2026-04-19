@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Marcus Jefferson",
-  "patientHPI": "I started taking a new seizure medication about a month ago, and now I have this awful rash spreading all over my body along with a fever. My face feels puffy and swollen, and I can feel enlarged lumps in my neck - this all started after I began the new pills.",
+      "patientHPI": "I started taking a new seizure medication about a month ago, and now I have this awful rash spreading all over my body along with a fever. My face feels puffy and swollen, and I can feel enlarged lumps in my neck - this all started after I began the new pills.",
       "dob": "12/14/1984",
       "age": "42",
       "sex": "Male",
@@ -1163,41 +1163,40 @@ window.EMR_DATA = {
       "Timeline",
       "Rash started 3 days ago, fever for 5 days, facial swelling 2 days"
     ]
-  ]
-,"references":[
-  {
-    "id": "RegiSCAR-2013",
-    "title": "DRESS: results from the prospective RegiSCAR study",
-    "authors": "Kardaun SH, Sekula P, Valeyrie-Allanore L, et al.",
-    "journal": "Br J Dermatol",
-    "year": 2013,
-    "doi": "10.1111/bjd.12501",
-    "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
-    "openAccess": true,
-    "validates": [
-      "RegiSCAR score ≥5 = definite DRESS",
-      "HHV-6 reactivation",
-      "Organ involvement patterns",
-      "Slow steroid taper 8-12 weeks"
-    ]
-  },
-  {
-    "id": "DRESS-Autoimmunity-2019",
-    "title": "DRESS syndrome and long-term risk of autoimmunity",
-    "authors": "Chen YC, Chang CY, Cho YT, et al.",
-    "journal": "J Allergy Clin Immunol Pract",
-    "year": 2019,
-    "doi": "10.1016/j.jaip.2018.08.004",
-    "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
-    "openAccess": true,
-    "validates": [
-      "Autoimmune thyroiditis ~40% post-DRESS",
-      "TSH monitoring at 3, 6, 12 months",
-      "Type 1 DM risk"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "RegiSCAR-2013",
+      "title": "DRESS: results from the prospective RegiSCAR study",
+      "authors": "Kardaun SH, Sekula P, Valeyrie-Allanore L, et al.",
+      "journal": "Br J Dermatol",
+      "year": 2013,
+      "doi": "10.1111/bjd.12501",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK459327/",
+      "openAccess": true,
+      "validates": [
+        "RegiSCAR score ≥5 = definite DRESS",
+        "HHV-6 reactivation",
+        "Organ involvement patterns",
+        "Slow steroid taper 8-12 weeks"
+      ]
+    },
+    {
+      "id": "DRESS-Autoimmunity-2019",
+      "title": "DRESS syndrome and long-term risk of autoimmunity",
+      "authors": "Chen YC, Chang CY, Cho YT, et al.",
+      "journal": "J Allergy Clin Immunol Pract",
+      "year": 2019,
+      "doi": "10.1016/j.jaip.2018.08.004",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30145342/",
+      "openAccess": true,
+      "validates": [
+        "Autoimmune thyroiditis ~40% post-DRESS",
+        "TSH monitoring at 3, 6, 12 months",
+        "Type 1 DM risk"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "DRESS has a latency of 2–8 weeks after drug initiation — the longest latency of any severe cutaneous adverse reaction. HHV-6 reactivation is a distinguishing pathogenic feature (not seen in SJS/TEN) and correlates with disease severity.",
@@ -1216,75 +1215,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Jefferson appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Marcus appears anxious and concerned about his appearance, frequently touching his swollen face. He is cooperative and forthcoming with information, clearly distressed by the rapid onset of symptoms and worried about the connection to his seizure medication.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did diffuse morbilliform rash, fever, facial edema, lymphadenopathy \u2014 started phenytoin 4 weeks ago start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did you first notice the rash and how has it changed?",
+      "Can you describe the appearance and feel of the rash?",
+      "Tell me about the facial swelling - when did it start and how severe is it?",
+      "Have you had any difficulty breathing or swallowing?",
+      "What other symptoms have you experienced along with the rash?",
+      "Have you noticed any swollen lymph nodes or glands?",
+      "Any nausea, vomiting, or abdominal pain?",
+      "Have you had any joint pain or muscle aches?",
+      "Any changes in your urine color or urination?",
+      "Have you started any new medications recently?",
+      "Any recent infections, illnesses, or hospitalizations?",
+      "Have you ever had a reaction like this before?",
+      "Any family history of drug allergies or autoimmune conditions?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Marcus Jefferson is a 42-year-old male presenting with diffuse morbilliform rash.'",
-        "character": "'It's diffuse morbilliform rash, fever, facial edema, lymphadenopathy \u2014 started phenytoin 4 weeks ago \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Phenytoin.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Non-contributory",
-        "social": "Timeline: Rash started 3 days ago, fever for 5 days, facial swelling 2 days"
+      "default": "I'm not sure what you mean by that. Can you ask me in a different way?",
+      "onset": "The rash started about 3 days ago on my chest and spread everywhere. The fever began 5 days ago, and my face started swelling 2 days ago.",
+      "character": "The rash is red and bumpy, like measles I guess. It's really itchy and feels hot. My face feels tight and puffy, especially around my eyes.",
+      "location": "The rash covers my whole body - chest, back, arms, legs. The swelling is mainly in my face and neck area.",
+      "severity": "The fever makes me feel terrible, like 7 out of 10. The rash is so itchy I can barely sleep. The face swelling is scary - I look like a different person.",
+      "aggravating": "Heat makes the rash worse and more itchy. I feel sicker in the evenings when my fever spikes higher.",
+      "relieving": "Cool compresses help the itching a little. Tylenol barely touches the fever. Nothing really helps much.",
+      "associated": "I've had high fevers up to 103, chills, swollen glands in my neck and armpits, and I feel weak and tired all the time.",
+      "denies": "No trouble breathing or swallowing yet. No chest pain. No joint swelling. No blood in urine but it might be a bit darker.",
+      "history": "Never had anything like this before. I've never had problems with medications or bad allergic reactions.",
+      "medications": "Phenytoin",
+      "allergies": "NKDA",
+      "family": "My mom has some kind of autoimmune thing - lupus I think. No one else has drug allergies that I know of.",
+      "social": "I work in construction. Don't smoke, drink maybe a beer on weekends. No drugs. Haven't been around anyone sick or traveled anywhere."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect skin for rash distribution and characteristics",
+      "Palpate cervical lymph nodes",
+      "Palpate axillary lymph nodes",
+      "Examine face and periorbital area for edema",
+      "Inspect oral mucosa and conjunctiva",
+      "Auscultate lungs",
+      "Palpate abdomen for hepatosplenomegaly",
+      "Assess for joint swelling or tenderness",
+      "Check for peripheral edema",
+      "Examine for Nikolsky sign"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect skin for rash distribution and characteristics": "Diffuse erythematous morbilliform eruption involving trunk, extremities, and face with some confluent areas. No vesicles or bullae.",
+      "Palpate cervical lymph nodes": "Multiple enlarged, tender lymph nodes bilaterally, largest approximately 2cm",
+      "Palpate axillary lymph nodes": "Bilateral axillary lymphadenopathy, mobile and tender",
+      "Examine face and periorbital area for edema": "Marked facial edema with periorbital swelling, more pronounced on left side",
+      "Inspect oral mucosa and conjunctiva": "Mild erythema of oral mucosa, conjunctival injection present",
+      "Auscultate lungs": "Clear to auscultation bilaterally, no wheezes or stridor",
+      "Palpate abdomen for hepatosplenomegaly": "Mild hepatomegaly, liver edge palpable 2cm below costal margin",
+      "Assess for joint swelling or tenderness": "No obvious joint swelling, mild arthralgias on movement",
+      "Check for peripheral edema": "Mild bilateral lower extremity edema, non-pitting",
+      "Examine for Nikolsky sign": "Negative Nikolsky sign"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Drug Reaction with Eosinophilia and Systemic Symptoms (DRESS) (correct diagnosis)",
+      "Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis",
+      "Acute Generalized Exanthematous Pustulosis (AGEP)",
+      "Viral exanthem with secondary bacterial infection",
+      "Serum sickness-like syndrome",
+      "Morbilliform drug eruption",
+      "Infectious mononucleosis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on simple drug rash given recent phenytoin start, missing the systemic involvement that defines DRESS syndrome",
+      "prematureClosure": "Might stop at 'drug allergy' without recognizing the multi-organ involvement requiring immediate phenytoin discontinuation",
+      "availabilityBias": "Common viral rashes may come to mind first, overlooking the severe drug hypersensitivity syndrome"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Jefferson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient started a new anti-seizure medication a month ago and now has a rash with systemic symptoms. What key features in the history would help you distinguish between a simple drug rash and a more serious hypersensitivity syndrome? What timing considerations are important with phenytoin reactions?",
+      "phase5": "You've identified facial edema, lymphadenopathy, fever, and a diffuse rash in someone on phenytoin. This constellation suggests a systemic drug hypersensitivity syndrome. What laboratory studies would you want, and what's the most important immediate management step? How does this differ from SJS/TEN?",
+      "finalDebrief": "DRESS syndrome is a delayed T-cell mediated hypersensitivity reaction that typically occurs 2-8 weeks after drug initiation. The key features are the tetrad of rash, fever, lymphadenopathy, and internal organ involvement. How did the timeline, facial edema, and hepatomegaly help distinguish this from other drug reactions? What makes phenytoin a high-risk medication for this syndrome?"
     }
-}
+  }
 };

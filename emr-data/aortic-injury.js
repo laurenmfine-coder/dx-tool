@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Marcus Rivera",
-  "patientHPI": "I'm here for my yearly check-up and feeling great overall. I've been keeping up with my cycling and weight training routine, and I haven't had any health issues or injuries lately. No complaints at all - just want to make sure everything looks good.",
+    "patientHPI": "I'm here for my yearly check-up and feeling great overall. I've been keeping up with my cycling and weight training routine, and I haven't had any health issues or injuries lately. No complaints at all - just want to make sure everything looks good.",
     "dob": "03/22/1991",
     "age": 33,
     "sex": "Male",
@@ -151,34 +151,142 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "88", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "22", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "22",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "15.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.1", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "245", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.1",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "188", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL-C", "value": "110", "unit": "mg/dL", "range": "<130", "flag": "" },
-            { "test": "HDL-C", "value": "52", "unit": "mg/dL", "range": ">40", "flag": "" },
-            { "test": "Triglycerides", "value": "130", "unit": "mg/dL", "range": "<150", "flag": "" }
+            {
+              "test": "Total Cholesterol",
+              "value": "188",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL-C",
+              "value": "110",
+              "unit": "mg/dL",
+              "range": "<130",
+              "flag": ""
+            },
+            {
+              "test": "HDL-C",
+              "value": "52",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "130",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -239,15 +347,42 @@ window.EMR_DATA = {
     "Brother: No significant medical history, age 30"
   ],
   "socialHistory": [
-    ["Occupation", "Construction project manager"],
-    ["Marital", "Married"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 2-3 beers/week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Cycling and weight training 4x/week"],
-    ["Housing", "Lives with wife and 2 children"],
-    ["Safety", "Denies IPV; wears seatbelt; wears helmet cycling"],
-    ["Advance Directive", "None — not discussed"]
+    [
+      "Occupation",
+      "Construction project manager"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 beers/week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Cycling and weight training 4x/week"
+    ],
+    [
+      "Housing",
+      "Lives with wife and 2 children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt; wears helmet cycling"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed"
+    ]
   ],
   "meta": {
     "caseId": "aortic-injury",
@@ -258,75 +393,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Marcus Rivera appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Marcus appears anxious and uncomfortable, frequently shifting position and grimacing. Despite trying to downplay his symptoms initially, he becomes more forthcoming when pressed about details, clearly in significant distress from chest and back pain following his motor vehicle accident.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did trauma start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened in the accident?",
+      "Where specifically is your pain located?",
+      "How would you rate your pain on a scale of 1-10?",
+      "Can you describe the quality of your chest pain?",
+      "Does the pain radiate anywhere else?",
+      "What makes the pain better or worse?",
+      "Are you having any trouble breathing or shortness of breath?",
+      "Have you noticed any numbness or weakness in your legs?",
+      "Are you experiencing any nausea, vomiting, or dizziness?",
+      "Have you had any similar chest pain before this accident?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Have you lost consciousness at any point today?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my yearly check-up and feeling great overall.'",
-        "character": "'It's trauma \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Blunt Traumatic Aortic Injury.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Cetirizine 10mg daily; Ibuprofen 400mg PRN.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: Hypertension, alive at 62  Mother: Hyperlipidemia, alive at 58  Paternal grandfather: MI at age 70 (deceased)",
-        "social": "Occupation: Construction project manager  Marital: Married  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 beers/week  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble focusing because of this pain in my chest and back.",
+      "onset": "The pain started immediately after my truck was rear-ended by a semi at high speed about 2 hours ago. I was thrown forward against my seatbelt pretty hard.",
+      "character": "It's a sharp, tearing pain in my chest that feels like something is ripping inside. The back pain is more of a constant ache between my shoulder blades.",
+      "location": "The worst pain is in the center of my chest, and I have significant pain between my shoulder blades in my back. Sometimes I feel it in my left arm too.",
+      "severity": "The chest pain is easily a 8 out of 10, and it's making it hard for me to take deep breaths. The back pain is about a 6 or 7.",
+      "aggravating": "Any movement makes it worse, especially trying to sit up or take a deep breath. Even talking makes the chest pain sharper.",
+      "relieving": "Nothing really helps. I tried changing positions but that just made it worse. Even staying completely still, the pain is still there.",
+      "associated": "I feel short of breath and a little dizzy when I try to stand. My heart feels like it's racing, and I'm sweating more than usual.",
+      "denies": "I haven't passed out, no nausea or vomiting, no numbness in my legs, and I haven't coughed up any blood.",
+      "history": "Never had chest pain like this before. I'm usually very healthy and active with no heart problems or injuries.",
+      "medications": "Cetirizine 10mg daily; Ibuprofen 400mg PRN",
+      "allergies": "NKDA",
+      "family": "My dad has high blood pressure and my grandfather had a heart attack, but I've never had any heart problems myself.",
+      "social": "I work in construction management, so I'm usually pretty physical. I'm married, don't smoke, and only drink 2-3 beers a week socially. No drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Blood pressure in both arms",
+      "Pulse quality in upper and lower extremities",
+      "Cardiac auscultation",
+      "Pulmonary auscultation",
+      "Chest wall inspection and palpation",
+      "Back inspection for external trauma",
+      "Neurological assessment of lower extremities",
+      "Abdominal examination",
+      "Assessment for pulse deficits",
+      "Evaluation for signs of shock"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Blunt Traumatic Aortic Injury. Document specifically what you observe."
+      "Blood pressure in both arms": "Right arm 95/60, Left arm 110/70 - significant differential between arms",
+      "Pulse quality in upper and lower extremities": "Weak radial pulses bilaterally, diminished femoral pulses, delayed capillary refill",
+      "Cardiac auscultation": "Tachycardic at 110 bpm, new harsh systolic murmur heard best at left sternal border",
+      "Pulmonary auscultation": "Decreased breath sounds at left base, otherwise clear bilaterally",
+      "Chest wall inspection and palpation": "Seat belt sign across chest, no obvious deformity, tenderness over sternum",
+      "Back inspection for external trauma": "Bruising and tenderness over thoracic spine region, no obvious deformity",
+      "Neurological assessment of lower extremities": "Normal sensation and motor function in both legs",
+      "Abdominal examination": "Soft, non-tender, no masses or organomegaly",
+      "Assessment for pulse deficits": "Pulse deficit between upper and lower extremities noted",
+      "Evaluation for signs of shock": "Mild tachycardia, cool extremities, delayed capillary refill suggesting early shock"
     },
     "ddxTargets": [
-        "Blunt Traumatic Aortic Injury (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Blunt Traumatic Aortic Injury (correct diagnosis)",
+      "Myocardial contusion",
+      "Hemothorax/pneumothorax",
+      "Aortic dissection",
+      "Cardiac tamponade",
+      "Pulmonary contusion",
+      "Rib fractures with pneumothorax"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Blunt Traumatic Aortic Injury, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Blunt Traumatic Aortic Injury, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Blunt Traumatic Aortic Injury based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on more common chest pain causes like myocardial contusion or rib fractures, missing the subtle signs of aortic injury such as pulse differentials",
+      "prematureClosure": "May quickly diagnose musculoskeletal chest pain from seatbelt trauma without recognizing the constellation of findings suggesting major vascular injury",
+      "availabilityBias": "Tendency to think of more commonly seen trauma presentations rather than considering rare but life-threatening aortic injury which requires immediate surgical intervention"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Marcus Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Blunt Traumatic Aortic Injury. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This is a trauma patient with chest pain - what are your immediate priorities in assessment? Think about the mechanism of injury and what life-threatening conditions you need to rule out first. What specific physical exam findings would help you differentiate between the various causes of traumatic chest pain?",
+      "phase5": "You've identified some concerning findings including pulse differentials and a new murmur in a trauma patient. How do these findings fit together? What does the blood pressure difference between arms tell you, and what imaging would you want next? Consider the mechanism of high-speed deceleration injury.",
+      "finalDebrief": "Blunt traumatic aortic injury is a classic result of rapid deceleration trauma. The key clues were the mechanism, pulse differentials between arms, new murmur, and early shock signs. This case highlights why systematic evaluation of pulses and blood pressures in both arms is crucial in major trauma. What made this challenging was the initial presentation could mimic more common conditions, but the constellation of vascular findings pointed to this life-threatening diagnosis requiring immediate surgical consultation."
     }
-}
+  }
 };

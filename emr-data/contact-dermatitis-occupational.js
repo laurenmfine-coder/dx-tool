@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Danielle Rivera",
-  "patientHPI": "I work in healthcare and yesterday my hands suddenly puffed up like balloons right after I put on my gloves at work. They're swollen, red, and itchy, and this has never happened to me before. I'm really concerned because I need my hands to do my job properly.",
+      "patientHPI": "I work in healthcare and yesterday my hands suddenly puffed up like balloons right after I put on my gloves at work. They're swollen, red, and itchy, and this has never happened to me before. I'm really concerned because I need my hands to do my job properly.",
       "dob": "10/05/1991",
       "age": "35",
       "sex": "Female",
@@ -896,26 +896,25 @@ window.EMR_DATA = {
       "Key considerations",
       "Differentiate irritant vs allergic contact dermatitis, latex IgE-mediated vs Type IV to rubber accelerators"
     ]
-  ]
-,"references":[
-  {
-    "id": "Patch-Testing-PP-2015",
-    "title": "Patch testing",
-    "authors": "Fonacier L, Bernstein DI, Borish L, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2015,
-    "doi": "10.1016/j.jaci.2015.02.033",
-    "url": "https://www.jacionline.org/article/S0091-6749(15)00322-9/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Patch test interpretation",
-      "PPD as common occupational allergen",
-      "PPD-free alternatives for hairstylists",
-      "Nitrile vs latex gloves"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "Patch-Testing-PP-2015",
+      "title": "Patch testing",
+      "authors": "Fonacier L, Bernstein DI, Borish L, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2015,
+      "doi": "10.1016/j.jaci.2015.02.033",
+      "url": "https://www.jacionline.org/article/S0091-6749(15)00322-9/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Patch test interpretation",
+        "PPD as common occupational allergen",
+        "PPD-free alternatives for hairstylists",
+        "Nitrile vs latex gloves"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Allergic contact dermatitis (ACD) is Type IV (T-cell mediated, delayed hypersensitivity) — NOT IgE-mediated. SPT will be negative. Patch testing is the diagnostic gold standard.",
@@ -937,75 +936,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Danielle Rivera appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Danielle appears frustrated and tired, frequently looking at her hands with visible distress. She's very forthcoming about her symptoms and work demands, expressing concern about her ability to continue working as an ICU nurse. She demonstrates moderate anxiety about the persistent nature of her condition despite multiple interventions.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did healthcare worker with chronic hand eczema worsening despite glove changes start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when your hand problems first started?",
+      "What do your hands look like right now - can you describe the appearance?",
+      "Where exactly on your hands are the symptoms worst?",
+      "On a scale of 1-10, how would you rate your current hand discomfort?",
+      "What makes your hand symptoms worse during your work shifts?",
+      "Have you found anything that provides relief for your hands?",
+      "Do you have any itching, burning, or other sensations in your hands?",
+      "Have you noticed any triggers outside of work that affect your hands?",
+      "Tell me about your typical work routine and glove use",
+      "Have you had any similar skin problems in other areas of your body?",
+      "What treatments have you tried so far for your hands?",
+      "Do you have any known allergies, especially to materials you work with?",
+      "Does anyone in your family have similar skin conditions?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Danielle Rivera presents with healthcare worker with chronic hand eczema worseni.'",
-        "character": "'It's healthcare worker with chronic hand eczema worsening despite glove changes \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Clobetasol 0.05% ointment; Petroleum jelly.'",
-        "allergies": "'My allergies are Latex.'",
-        "family": "Mother: eczema",
-        "social": "Occupation: ICU nurse \u2014 wears nitrile gloves 8+ hours/day, washes hands 40+ times/shift  Patch testing: Pending \u2014 referred for TRUE test and extended panel  Key considerations: Differentiate irritant vs allergic contact dermatitis, latex IgE-mediated vs Type IV to rubber accelerators"
+      "default": "I'm not sure I understand what you're asking. Could you clarify how that relates to my hand problem?",
+      "onset": "It started about 8 months ago, maybe a month after I transferred to the ICU. At first I thought it was just from all the extra hand washing, but it's gotten progressively worse.",
+      "character": "My hands are red, dry, and cracked. The skin feels thick and rough in some areas, and there are small blisters that come and go. Sometimes the skin actually splits open.",
+      "location": "It's worst on my fingers and the backs of my hands, especially between my fingers and around my knuckles. My palms are less affected but still dry.",
+      "severity": "Right now it's about a 6 or 7 out of 10. It's really interfering with my work and even simple tasks at home like washing dishes or opening jars.",
+      "aggravating": "Definitely gets worse during work - all the hand washing, sanitizer, and wearing gloves for long periods. Even the nitrile gloves seem to make it worse now.",
+      "relieving": "The prescription ointment helps some, and I've been using petroleum jelly at night. Taking breaks from gloves when possible helps a little.",
+      "associated": "Yes, there's constant itching, especially at night. Sometimes burning when I wash my hands or use sanitizer. My hands feel tight and uncomfortable.",
+      "denies": "No rash anywhere else on my body, no fever, no joint pain, no eye or respiratory symptoms.",
+      "history": "I've had some mild eczema as a child, but nothing like this. Never had hand problems before starting in the ICU.",
+      "medications": "Clobetasol 0.05% ointment; Petroleum jelly",
+      "allergies": "Latex",
+      "family": "My mother has eczema, has had it since she was young. She gets flare-ups on her arms and legs.",
+      "social": "I'm an ICU nurse, wearing nitrile gloves 8-10 hours per shift, washing my hands probably 40-50 times per shift. I don't smoke, drink occasionally on weekends, no drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect dorsal surfaces of hands",
+      "Inspect palmar surfaces and fingertips",
+      "Inspect web spaces between fingers",
+      "Inspect wrists and forearms",
+      "Palpate affected areas for thickness/lichenification",
+      "Assess for fissuring or cracking",
+      "Look for vesicles or pustules",
+      "Check fingernails for changes",
+      "Examine other potential eczema sites (antecubital fossae)",
+      "Assess severity using standardized scoring"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect dorsal surfaces of hands": "Bilateral erythematous, scaly plaques with areas of lichenification, most prominent over knuckles and finger joints",
+      "Inspect palmar surfaces and fingertips": "Mild erythema and scaling on palms, fingertips show fissuring and dry, thickened skin",
+      "Inspect web spaces between fingers": "Significant erythema, scaling, and small fissures in web spaces, particularly between index and middle fingers bilaterally",
+      "Inspect wrists and forearms": "Mild erythema extending 2-3cm proximal to wrists bilaterally, consistent with glove contact pattern",
+      "Palpate affected areas for thickness/lichenification": "Palpable thickening and lichenification over dorsal knuckles and web spaces",
+      "Assess for fissuring or cracking": "Multiple small fissures present in web spaces and at fingertips, no active bleeding",
+      "Look for vesicles or pustules": "Few small vesicles on lateral aspects of fingers, no pustules identified",
+      "Check fingernails for changes": "Nails appear normal without pitting, ridging, or dystrophy",
+      "Examine other potential eczema sites (antecubital fossae)": "Antecubital fossae clear, no evidence of atopic dermatitis elsewhere",
+      "Assess severity using standardized scoring": "Moderate to severe hand dermatitis with significant functional impairment"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Occupational contact dermatitis (irritant) (correct diagnosis)",
+      "Allergic contact dermatitis",
+      "Atopic dermatitis with occupational exacerbation",
+      "Contact urticaria/latex allergy (must-not-miss)",
+      "Dyshidrotic eczema (must-not-miss)",
+      "Psoriasis (common mimic)",
+      "Fungal infection/tinea manuum (common mimic)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on latex allergy history and missing that nitrile gloves can cause both irritant and allergic contact dermatitis through rubber accelerators",
+      "prematureClosure": "May prematurely close on 'latex allergy' without considering that current symptoms are likely due to irritant contact dermatitis from frequent handwashing and occlusion, not latex exposure",
+      "availabilityBias": "Healthcare worker hand dermatitis is common, but may miss considering less common causes like dyshidrotic eczema or psoriasis in this occupational context"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Danielle Rivera's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before interviewing the patient, think about the different mechanisms that can cause hand dermatitis in healthcare workers. What are the main categories of contact dermatitis, and how might they present differently? Consider both immediate and delayed hypersensitivity reactions.",
+      "phase5": "Now that you've gathered your history and physical findings, consider the timeline and pattern of this patient's dermatitis. How do the distribution, morphology, and occupational factors help you differentiate between irritant versus allergic contact dermatitis? What role might her latex allergy play in her current presentation?",
+      "finalDebrief": "This case highlights occupational irritant contact dermatitis, which is often multifactorial in healthcare workers. While the patient has a known latex allergy, her current symptoms are primarily due to irritant effects from frequent handwashing, sanitizers, and glove occlusion. The pending patch testing will help identify any additional contact allergens like rubber accelerators in nitrile gloves. How did your differential diagnosis evolve as you gathered more clinical information?"
     }
-}
+  }
 };

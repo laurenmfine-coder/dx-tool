@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Daniela Restrepo",
-  "patientHPI": "I've been doing pretty well with my anxiety medication, but last month I had this really scary episode at work when we had a big deadline coming up. My heart started racing out of nowhere, I felt like I couldn't catch my breath, and I got really dizzy and sweaty. I thought something was seriously wrong with me, but I used the breathing techniques my therapist taught me and it went away after about twenty minutes.",
+    "patientHPI": "I've been doing pretty well with my anxiety medication, but last month I had this really scary episode at work when we had a big deadline coming up. My heart started racing out of nowhere, I felt like I couldn't catch my breath, and I got really dizzy and sweaty. I thought something was seriously wrong with me, but I used the breathing techniques my therapist taught me and it went away after about twenty minutes.",
     "dob": "07/19/1998",
     "age": 27,
     "sex": "Female",
@@ -114,7 +114,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "ED"
     },
     {
@@ -193,27 +193,93 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "37.8", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelets", "value": "262", "unit": "K/uL", "range": "150-400", "flag": "" },
-            { "test": "MCV", "value": "84", "unit": "fL", "range": "80-100", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "262",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "MCV",
+              "value": "84",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            { "test": "Iron", "value": "72", "unit": "mcg/dL", "range": "60-170", "flag": "" },
-            { "test": "TIBC", "value": "320", "unit": "mcg/dL", "range": "250-370", "flag": "" },
-            { "test": "Ferritin", "value": "38", "unit": "ng/mL", "range": "12-150", "flag": "" },
-            { "test": "Transferrin Saturation", "value": "22", "unit": "%", "range": "20-50", "flag": "" }
+            {
+              "test": "Iron",
+              "value": "72",
+              "unit": "mcg/dL",
+              "range": "60-170",
+              "flag": ""
+            },
+            {
+              "test": "TIBC",
+              "value": "320",
+              "unit": "mcg/dL",
+              "range": "250-370",
+              "flag": ""
+            },
+            {
+              "test": "Ferritin",
+              "value": "38",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": ""
+            },
+            {
+              "test": "Transferrin Saturation",
+              "value": "22",
+              "unit": "%",
+              "range": "20-50",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID PANEL",
           "results": [
-            { "test": "TSH", "value": "2.1", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" },
-            { "test": "Free T4", "value": "1.2", "unit": "ng/dL", "range": "0.8-1.8", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.1",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Free T4",
+              "value": "1.2",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -254,10 +320,34 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-7704", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-1890", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "09/2020", "site": "Left deltoid IM", "lot": "TD20-540", "mfr": "GSK" },
-    { "vaccine": "HPV (Gardasil 9) — Series Complete", "date": "2016", "site": "Left deltoid IM", "lot": "HP16-220", "mfr": "Merck" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-7704",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-1890",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "09/2020",
+      "site": "Left deltoid IM",
+      "lot": "TD20-540",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "HPV (Gardasil 9) — Series Complete",
+      "date": "2016",
+      "site": "Left deltoid IM",
+      "lot": "HP16-220",
+      "mfr": "Merck"
+    }
   ],
   "familyHistory": [
     "Mother: Generalized Anxiety Disorder, Hypothyroidism, alive at 54",
@@ -266,15 +356,42 @@ window.EMR_DATA = {
     "Paternal grandfather: MI at age 70 — deceased"
   ],
   "socialHistory": [
-    ["Occupation", "Marketing coordinator at a healthcare tech startup; high-stress role; recently promoted"],
-    ["Marital", "Single; lives with roommate"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social — 2-3 drinks on weekends; denies binge drinking"],
-    ["Drugs", "Occasional marijuana edibles for anxiety (1-2x/month); denies other substances"],
-    ["Exercise", "Yoga 2x/week; jogging 1-2x/week; recently decreased due to work schedule"],
-    ["Housing", "Apartment in Fort Lauderdale; safe neighborhood"],
-    ["Safety", "Denies IPV; seatbelt; no firearms"],
-    ["Advance Directive", "None — not discussed (age 27)"]
+    [
+      "Occupation",
+      "Marketing coordinator at a healthcare tech startup; high-stress role; recently promoted"
+    ],
+    [
+      "Marital",
+      "Single; lives with roommate"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — 2-3 drinks on weekends; denies binge drinking"
+    ],
+    [
+      "Drugs",
+      "Occasional marijuana edibles for anxiety (1-2x/month); denies other substances"
+    ],
+    [
+      "Exercise",
+      "Yoga 2x/week; jogging 1-2x/week; recently decreased due to work schedule"
+    ],
+    [
+      "Housing",
+      "Apartment in Fort Lauderdale; safe neighborhood"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed (age 27)"
+    ]
   ],
   "meta": {
     "caseId": "anxietypanic-attack",
@@ -285,75 +402,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Daniela Restrepo appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Daniela appears anxious and somewhat embarrassed about her symptoms, frequently fidgeting and speaking rapidly. She's cooperative and forthcoming but tends to minimize her psychiatric history, hoping for a \"medical\" explanation for her breathing difficulties.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened during this episode at work?",
+      "How long did the breathing difficulty and other symptoms last?",
+      "Have you had similar episodes before, either recently or in the past?",
+      "What were you doing or thinking about right before the symptoms started?",
+      "Did you feel like you were going to die or lose control during the episode?",
+      "Have you been more stressed than usual lately?",
+      "Are you taking your anxiety medication regularly?",
+      "Do you have any chest pain, pressure, or tightness?",
+      "Have you noticed any triggers for your anxiety or panic symptoms?",
+      "Any recent changes in your sleep, appetite, or energy levels?",
+      "Have you had any palpitations or irregular heartbeats?",
+      "Any numbness, tingling, or pins-and-needles sensations?",
+      "Have you avoided any situations since this episode happened?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been doing pretty well with my anxiety medication, but last month I had thi.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Panic Attack with Hyperventilation Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sertraline 100mg daily; Ferrous Sulfate 325mg daily; Omeprazole 20mg PRN; Norgestimate-Ethinyl Estradiol (Sprintec) daily.'",
-        "allergies": "'My allergies are Amoxicillin.'",
-        "family": "Mother: Generalized Anxiety Disorder, Hypothyroidism, alive at 54  Father: Hypertension, T2DM, alive at 57  Maternal grandmother: Panic Disorder, Depression \u2014 deceased at 78 (stroke)",
-        "social": "Occupation: Marketing coordinator at a healthcare tech startup; high-stress role; recently promoted  Marital: Single; lives with roommate  Tobacco: Never smoker  Alcohol: Social \u2014 2-3 drinks on weekends; denies binge drinking  Drugs: Occasional marijuana edibles for anxiety (1-2x/month); denies other substances"
+      "default": "I'm not sure I understand what you mean. Can you ask that differently? I just want to know why I can't breathe properly.",
+      "onset": "It started about a month ago during a really stressful week at work. We had this huge product launch deadline, and I was working 12-hour days. It came on suddenly - one minute I was fine, the next I felt like I was suffocating.",
+      "character": "It feels like I can't get enough air, like I'm breathing through a straw. My breathing gets really fast and shallow, and the harder I try to breathe, the worse it gets.",
+      "location": "It's mainly the feeling that I can't breathe deeply enough. Sometimes I get a tight feeling across my chest, but it's not really painful.",
+      "severity": "During the episode it was probably a 9 out of 10 - I genuinely thought something was seriously wrong with me. It completely stopped me from being able to work or think clearly.",
+      "aggravating": "Stress definitely makes it worse. When I start thinking about having another episode, sometimes that alone makes me feel short of breath. Caffeine seems to make it worse too.",
+      "relieving": "Sitting down and trying to calm myself helps a little. My roommate talked me through some breathing exercises during the worst episode, and that seemed to help.",
+      "associated": "My heart races really fast, I get sweaty and dizzy, and I have this tingling sensation in my hands and around my mouth. I also feel really scared, like something terrible is going to happen.",
+      "denies": "No chest pain or pressure, no cough, no fever, no leg swelling. I haven't been wheezing and I don't have any allergies acting up.",
+      "history": "I've had anxiety for years, and I remember having some episodes in college that were similar, but nothing this intense. I thought I had it under control with my medication.",
+      "medications": "Sertraline 100mg daily; Ferrous Sulfate 325mg daily; Omeprazole 20mg PRN; Norgestimate-Ethinyl Estradiol (Sprintec) daily",
+      "allergies": "Amoxicillin",
+      "family": "My mom has anxiety too, and my maternal grandmother had panic attacks and depression. She always said they were the worst thing she ever experienced.",
+      "social": "I work as a marketing coordinator at a healthcare tech startup - it's pretty high-stress, especially since I got promoted last month. I don't smoke, drink socially on weekends, and sometimes use marijuana edibles for anxiety but not very often."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Cardiac auscultation",
+      "Pulmonary auscultation",
+      "Assessment of respiratory effort and pattern",
+      "Examination of extremities for cyanosis or clubbing",
+      "Neurological assessment for paresthesias",
+      "Thyroid palpation",
+      "Mental status examination",
+      "Assessment for signs of hyperventilation",
+      "Blood pressure and pulse assessment",
+      "General appearance and anxiety level"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Panic Attack with Hyperventilation Syndrome. Document specifically what you observe."
+      "Cardiac auscultation": "Regular rhythm with mild tachycardia, occasional mid-systolic click consistent with known mitral valve prolapse, no murmurs or gallops",
+      "Pulmonary auscultation": "Clear breath sounds bilaterally, no wheezes, rales, or rhonchi, good air movement throughout",
+      "Assessment of respiratory effort and pattern": "Mild tachypnea at rest, tendency toward shallow breathing, no use of accessory muscles, no retractions",
+      "Examination of extremities for cyanosis or clubbing": "No cyanosis, clubbing, or edema, normal capillary refill, mild pallor consistent with known anemia",
+      "Neurological assessment for paresthesias": "Patient reports intermittent tingling in fingertips and perioral area, normal sensation to light touch and pinprick",
+      "Thyroid palpation": "Normal size and consistency, no nodules or tenderness palpated",
+      "Mental status examination": "Alert and oriented, anxious affect, slightly pressured speech, no thought disorder, expresses fear of having serious medical condition",
+      "Assessment for signs of hyperventilation": "Patient demonstrates rapid, shallow breathing pattern when discussing symptoms, classic signs of acute hyperventilation syndrome",
+      "Blood pressure and pulse assessment": "Elevated BP 142/88, tachycardic at 118 bpm, regular rhythm",
+      "General appearance and anxiety level": "Well-appearing young woman in no acute distress at rest, appears anxious when discussing symptoms, frequent fidgeting and hand wringing"
     },
     "ddxTargets": [
-        "Acute Panic Attack with Hyperventilation Syndrome (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Panic Attack with Hyperventilation Syndrome (Presenting as Dyspnea, Tachycardia, and Paresthesias) (correct diagnosis)",
+      "Generalized Anxiety Disorder with somatic symptoms",
+      "Adjustment disorder with anxiety",
+      "Pulmonary embolism",
+      "Acute coronary syndrome",
+      "Asthma or reactive airway disease",
+      "Hyperthyroidism"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Panic Attack with Hyperventilation Syndrome, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Panic Attack with Hyperventilation Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Panic Attack with Hyperventilation Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Students may anchor on 'shortness of breath' and focus primarily on cardiopulmonary causes, overlooking the psychiatric etiology despite clear anxiety history",
+      "prematureClosure": "May settle on 'anxiety' too quickly without adequately ruling out serious medical causes, or conversely, may pursue extensive cardiac/pulmonary workup while dismissing psychiatric causes",
+      "availabilityBias": "Recent emphasis on PE and MI in medical education may lead to overweighting these diagnoses despite low pretest probability in this demographic"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Daniela Restrepo's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Panic Attack with Hyperventilation Syndrome (Presenting as Dyspnea, Tachycardia, and Paresthesias). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, let's think about this systematically. You have a 27-year-old woman with known anxiety disorders presenting with acute dyspnea. What are the broad categories of conditions that could cause her presentation? How might her psychiatric history both help and potentially bias your thinking?",
+      "phase5": "Now that you've gathered more information, let's reconsider your differential diagnosis. What key features from the history and physical exam help you distinguish between medical and psychiatric causes of her dyspnea? How do the associated symptoms and triggers inform your thinking?",
+      "finalDebrief": "This case highlights the importance of considering psychiatric causes in the differential diagnosis of dyspnea, especially in patients with known anxiety disorders. Notice how the classic triad of dyspnea, paresthesias, and panic symptoms, triggered by stress, pointed toward hyperventilation syndrome. However, it was still important to consider and appropriately rule out serious medical causes. How did your differential diagnosis evolve as you gathered more information?"
     }
-}
+  }
 };

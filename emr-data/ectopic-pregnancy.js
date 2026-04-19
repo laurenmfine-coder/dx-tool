@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Aisha Mohammed",
-  "patientHPI": "I suddenly got this sharp, stabbing pain in my lower right belly that came out of nowhere and won't go away. It's getting worse and I feel dizzy and nauseous - something is definitely not right.",
+    "patientHPI": "I suddenly got this sharp, stabbing pain in my lower right belly that came out of nowhere and won't go away. It's getting worse and I feel dizzy and nauseous - something is definitely not right.",
     "dob": "06/15/1997",
     "age": "29",
     "sex": "Female",
@@ -15,13 +15,13 @@ window.EMR_DATA = {
     "address": "2499 Hickory Rd, Albuquerque, NM 87103",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "Walmart Pharmacy \u2014 University Dr",
+    "pharmacy": "Walmart Pharmacy — University Dr",
     "emergencyContact": {
       "name": "William Hill",
       "phone": "(414) 555-2684",
       "relationship": "Parent"
     },
-    "chiefComplaint": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+    "chiefComplaint": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
     "diagnosis": "Ruptured Ectopic Pregnancy"
   },
   "problems": [
@@ -51,7 +51,7 @@ window.EMR_DATA = {
     {
       "id": "med-1",
       "name": "Norethindrone",
-      "dose": "0.35mg daily (progestin-only pill \u2014 started 4 months ago)",
+      "dose": "0.35mg daily (progestin-only pill — started 4 months ago)",
       "route": "PO",
       "frequency": "Daily",
       "status": "Active",
@@ -73,7 +73,7 @@ window.EMR_DATA = {
       "bp": "92/58",
       "hr": "124",
       "rr": "22",
-      "temp": "36.8\u00b0C",
+      "temp": "36.8°C",
       "spo2": "98%",
       "pain": "9/10",
       "bmi": "33",
@@ -86,10 +86,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
-      "hpi": "Aisha Mohammed is a 29-year-old female presenting with really bad pain in my lower belly right lower abdomen and pelvis \u2014 sudden onset. Past medical history includes Chlamydia infection, No prior pregnancies, Endometriosis. See chart for full details.",
+      "cc": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
+      "hpi": "Aisha Mohammed is a 29-year-old female presenting with really bad pain in my lower belly right lower abdomen and pelvis — sudden onset. Past medical history includes Chlamydia infection, No prior pregnancies, Endometriosis. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Ruptured Ectopic Pregnancy \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Ruptured Ectopic Pregnancy — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -111,7 +111,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "13.4",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": "H"
             },
@@ -132,7 +132,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "198",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -203,7 +203,7 @@ window.EMR_DATA = {
           "name": "CASE-SPECIFIC STUDIES",
           "results": [
             {
-              "test": "\u03b2-hCG",
+              "test": "β-hCG",
               "value": "4,200",
               "unit": "mIU/mL",
               "range": "Negative",
@@ -246,7 +246,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-728537",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
       "technique": "Standard protocol",
       "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
       "impression": "No acute cardiopulmonary process.",
@@ -256,34 +256,34 @@ window.EMR_DATA = {
     {
       "id": "img-1",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 FAST Exam",
+      "study": "POCUS – FAST Exam",
       "status": "Final",
       "priority": "STAT",
       "orderedBy": "Dr. ED Physician",
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-926737",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
       "technique": "Standard protocol",
       "findings": "POSITIVE FREE FLUID in Morrison pouch and pelvis. Moderate amount of free fluid in pelvis (cul-de-sac). No intrauterine pregnancy visible in uterus. EMPTY UTERUS with endometrial stripe.",
-      "impression": "FREE INTRAPERITONEAL FLUID + positive \u03b2-hCG + empty uterus = RUPTURED ECTOPIC PREGNANCY. OB/GYN to OR emergently.",
+      "impression": "FREE INTRAPERITONEAL FLUID + positive β-hCG + empty uterus = RUPTURED ECTOPIC PREGNANCY. OB/GYN to OR emergently.",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
     {
       "id": "img-2",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 Cardiac",
+      "study": "POCUS – Cardiac",
       "status": "Final",
       "priority": "Routine",
       "orderedBy": "Dr. ED Physician",
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-148980",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
       "technique": "Standard protocol",
       "findings": "Hyperdynamic LV function. Small, underfilled chambers (hypovolemia). No pericardial effusion.",
-      "impression": "Hyperdynamic and volume-depleted \u2014 consistent with hemorrhagic shock",
+      "impression": "Hyperdynamic and volume-depleted — consistent with hemorrhagic shock",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -297,10 +297,10 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-317314",
-      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis \u2014 sudden onset",
+      "clinical": "Really bad pain in my lower belly Right lower abdomen and pelvis — sudden onset",
       "technique": "Standard 12-lead",
       "findings": "Sinus tachycardia at 124 bpm. No ST changes",
-      "impression": "Sinus tachycardia \u2014 hemorrhagic shock",
+      "impression": "Sinus tachycardia — hemorrhagic shock",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     }
@@ -353,75 +353,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Aisha Mohammed appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Aisha appears anxious and distressed, clutching her abdomen and speaking in short sentences due to pain. She is forthcoming with information but becomes increasingly worried as she describes her worsening symptoms and dizziness.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did really bad pain in my lower belly right lower abdomen and pelvis \u2014 sudden onset start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did this pain start and what were you doing when it began?",
+      "Can you describe the quality of the pain - is it sharp, cramping, constant?",
+      "Where exactly is the pain located and does it radiate anywhere?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "What makes the pain worse or better?",
+      "Are you experiencing any nausea, vomiting, or dizziness?",
+      "When was your last menstrual period?",
+      "Have you had any vaginal bleeding or spotting recently?",
+      "Is there any chance you could be pregnant?",
+      "Have you had any fever, chills, or urinary symptoms?",
+      "Have you ever had pain like this before?",
+      "Are you currently taking any medications?",
+      "Do you have any known allergies to medications?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I suddenly got this sharp, stabbing pain in my lower right belly that came out o.'",
-        "character": "'It's really bad pain in my lower belly right lower abdomen and pelvis \u2014 sudden onset \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Norethindrone.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: ectopic pregnancy (age 26)  No other relevant history",
-        "social": "Tobacco: Social smoker, 2-3 cigarettes/day  Alcohol: Social  Drugs: Denies  Occupation: Restaurant server  Living: Lives with partner, sexually active, not using barrier contraception"
+      "default": "I'm sorry, I'm having trouble focusing because of this pain - can you ask that differently?",
+      "onset": "It started about 4 hours ago while I was at work. I was carrying a tray and suddenly felt this sharp pain that made me double over - it came out of nowhere.",
+      "character": "It's a sharp, stabbing pain that's constant. Sometimes it gets even more intense and takes my breath away.",
+      "location": "It's mainly in my lower right belly, but now it's spreading to my pelvis and I feel it in my shoulder too, which is weird.",
+      "severity": "Right now it's about an 8 out of 10. I can barely stand up straight and it's getting worse.",
+      "aggravating": "Any movement makes it worse - walking, coughing, even breathing deeply. I have to stay very still.",
+      "relieving": "Nothing helps. I tried sitting, lying down, even took some ibuprofen but nothing touches it.",
+      "associated": "I feel really dizzy and nauseous. I haven't thrown up yet but I feel like I might. I also feel weak and lightheaded when I stand.",
+      "denies": "No fever, no burning when I pee, no diarrhea. I haven't been vomiting.",
+      "history": "I've never had pain exactly like this before. I get bad period cramps because of my endometriosis, but this is completely different.",
+      "medications": "Norethindrone",
+      "allergies": "NKDA",
+      "family": "My mom had an ectopic pregnancy when she was young, around 26. That's actually why I'm worried - she told me to watch out for sudden belly pain.",
+      "social": "I work as a server at a restaurant. I smoke a few cigarettes a day and drink socially. I live with my boyfriend and we're sexually active."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and vital signs assessment",
+      "Abdominal inspection",
+      "Auscultation of bowel sounds",
+      "Light palpation of abdomen",
+      "Deep palpation of right lower quadrant",
+      "McBurney's point tenderness",
+      "Rebound tenderness assessment",
+      "Pelvic examination",
+      "Cervical motion tenderness",
+      "Adnexal mass assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and vital signs assessment": "Patient appears pale, diaphoretic, and in acute distress. Tachycardic at 124 bpm, hypotensive at 92/58 mmHg.",
+      "Abdominal inspection": "Abdomen appears flat, no obvious distension or masses visible. Patient guards abdomen with hands.",
+      "Auscultation of bowel sounds": "Bowel sounds present but diminished in all quadrants.",
+      "Light palpation of abdomen": "Marked tenderness in right lower quadrant and suprapubic region. Patient winces and guards with minimal pressure.",
+      "Deep palpation of right lower quadrant": "Severe tenderness with guarding and rigidity. Patient unable to tolerate deep palpation.",
+      "McBurney's point tenderness": "Positive tenderness at McBurney's point, but pain is more diffuse than typical appendicitis.",
+      "Rebound tenderness assessment": "Positive rebound tenderness in right lower quadrant and pelvis.",
+      "Pelvic examination": "Small amount of dark blood in vaginal vault. Cervix appears closed.",
+      "Cervical motion tenderness": "Severe cervical motion tenderness present.",
+      "Adnexal mass assessment": "Possible right adnexal fullness and tenderness, difficult to assess due to patient discomfort."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Ruptured ectopic pregnancy (correct diagnosis)",
+      "Ovarian torsion",
+      "Ruptured ovarian cyst",
+      "Appendicitis (must-not-miss diagnosis 1)",
+      "Septic abortion (must-not-miss diagnosis 2)",
+      "Pelvic inflammatory disease (common mimic 1)",
+      "Endometriosis flare (common mimic 2)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on appendicitis due to right lower quadrant pain and McBurney's point tenderness, potentially missing gynecologic causes",
+      "prematureClosure": "May stop considering other diagnoses after finding abdominal tenderness without fully exploring menstrual history and pregnancy possibility",
+      "availabilityBias": "Common conditions like appendicitis or ovarian cysts may overshadow consideration of ectopic pregnancy despite family history"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Aisha Mohammed's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I notice you're considering both GI and GYN causes - that's appropriate for this presentation. What key historical elements will help you differentiate between these diagnoses? Think about what additional information might be most crucial given her demographics and presentation.",
+      "phase5": "Excellent work gathering the history and physical findings. Let's synthesize what you've learned - you have a young woman with acute pelvic pain, hemodynamic instability, and some key examination findings. How do her vital signs and physical exam findings help narrow your differential? What's the most likely diagnosis given the constellation of findings?",
+      "finalDebrief": "This case highlights the importance of considering ectopic pregnancy in any woman of reproductive age with abdominal pain, especially with risk factors like endometriosis, prior chlamydia, and family history. The combination of acute onset pain, hemodynamic instability, shoulder pain, and cervical motion tenderness should raise immediate concern for rupture. How did the patient's presentation and your examination findings guide you toward the correct diagnosis?"
     }
-}
+  }
 };

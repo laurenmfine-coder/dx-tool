@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Zara Thompson",
-  "patientHPI": "My eczema has been terrible for months, and now the skin on my arm where I've been scratching is really hot, swollen, and spreading red streaks. It hurts to touch and feels warm, which is different from my usual itchy patches.",
+      "patientHPI": "My eczema has been terrible for months, and now the skin on my arm where I've been scratching is really hot, swollen, and spreading red streaks. It hurts to touch and feels warm, which is different from my usual itchy patches.",
       "dob": "09/18/2010",
       "age": "16",
       "sex": "Female",
@@ -1159,27 +1159,26 @@ window.EMR_DATA = {
       "Prior treatment",
       "Failed medium-potency topicals, tacrolimus, and short course of cyclosporine"
     ]
-  ]
-,"references":[
-  {
-    "id": "AAD-AD-2023",
-    "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
-    "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
-    "journal": "J Am Acad Dermatol",
-    "year": 2023,
-    "doi": "10.1016/j.jaad.2022.12.029",
-    "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
-    "openAccess": true,
-    "validates": [
-      "SCORAD scoring",
-      "TCS potency ladder",
-      "Wet wrap therapy",
-      "Simplified regimens",
-      "Eczema herpeticum as emergency"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "AAD-AD-2023",
+      "title": "AAD guidelines for management of atopic dermatitis with topical therapies",
+      "authors": "Sidbury R, Alikhan A, Bercovitch L, et al.",
+      "journal": "J Am Acad Dermatol",
+      "year": 2023,
+      "doi": "10.1016/j.jaad.2022.12.029",
+      "url": "https://www.jaad.org/article/S0190-9622(22)03243-4/fulltext",
+      "openAccess": true,
+      "validates": [
+        "SCORAD scoring",
+        "TCS potency ladder",
+        "Wet wrap therapy",
+        "Simplified regimens",
+        "Eczema herpeticum as emergency"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Severe AD (SCORAD >50 or IGA 3–4) failing topical therapy warrants systemic treatment. Dupilumab (anti-IL-4Rα) is first-line systemic biologic — approved for ages ≥6 months, excellent long-term safety profile.",
@@ -1197,75 +1196,83 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Zara Thompson appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Zara appears visibly distressed and self-conscious, frequently scratching visible lesions and keeping her arms crossed. She seems tired and frustrated, speaking quietly but willing to discuss her symptoms when asked directly. She becomes more withdrawn when discussing the social impact of her condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did widespread eczema refractory to topical steroids, affecting sleep and school performance start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe your current skin symptoms and how they've changed recently?",
+      "How is your sleep being affected by the itching?",
+      "What treatments have you tried and how well have they worked?",
+      "Are there specific triggers that make your eczema worse?",
+      "How is this affecting your school and social activities?",
+      "Have you had any recent infections or illnesses?",
+      "Are you experiencing any stress or anxiety about your condition?",
+      "What moisturizers or skincare products do you use?",
+      "Have you noticed any new areas of involvement?",
+      "Are you having any other symptoms like eye irritation or breathing problems?",
+      "How compliant have you been with your current medications?",
+      "Have you had any recent changes in diet or environment?",
+      "Are you experiencing any mood changes or depression?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Zara Thompson presents with widespread eczema refractory to topical steroids, af.'",
-        "character": "'It's widespread eczema refractory to topical steroids, affecting sleep and school performance \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Triamcinolone 0.1% ointment; Tacrolimus 0.03% ointment; Cetirizine; Fluticasone nasal.'",
-        "allergies": "'My allergies are Peanut, Egg.'",
-        "family": "Mother: asthma  Father: eczema (childhood)  Brother: peanut allergy",
-        "social": "SCORAD: 62 (severe)  Sleep: Wakes 3-4x/night scratching  Quality of life: Missing school, avoids social activities  Prior treatment: Failed medium-potency topicals, tacrolimus, and short course of cyclosporine"
+      "default": "I'm not sure what you mean... can you ask that differently?",
+      "onset": "I've had eczema since I was a baby, but it's gotten much worse over the past 6 months. It used to be just small patches, but now it's everywhere.",
+      "character": "The itching is constant and intense, like my skin is on fire. The patches are red, scaly, and sometimes weepy. I can't stop scratching even when it hurts.",
+      "location": "It's on my face, neck, arms, hands, behind my knees, and on my feet. It used to just be in the creases, but now it's spreading to new areas.",
+      "severity": "The itching is definitely a 9 out of 10. I can't concentrate in school and I'm embarrassed to be around people because of how I look.",
+      "aggravating": "Stress makes it worse, and I think certain fabrics irritate it. Heat and sweating definitely flare it up. I've noticed it gets worse during exams or when I'm anxious.",
+      "relieving": "The prescription creams help a little bit, but not much anymore. Cool compresses feel good temporarily. Nothing really gives me lasting relief.",
+      "associated": "My nose is always stuffy, and my eyes get watery and itchy sometimes. I've been feeling really down about how I look lately.",
+      "denies": "No fever, no joint pain, no hair loss. I haven't had any serious infections, just some areas that get a bit crusty sometimes.",
+      "history": "It's been getting progressively worse. I had one really bad flare when I was 12 that needed stronger medicine, but this is the worst it's ever been.",
+      "medications": "Triamcinolone 0.1% ointment; Tacrolimus 0.03% ointment; Cetirizine; Fluticasone nasal",
+      "allergies": "Peanut, Egg",
+      "family": "My dad had eczema when he was little but grew out of it. My mom has asthma, and my little brother is allergic to peanuts too.",
+      "social": "I'm a junior in high school but I've been missing a lot of days because I'm embarrassed. I don't hang out with friends much anymore. I don't smoke or drink.",
+      "sleep": "I wake up 3 or 4 times every night scratching. Sometimes I don't even realize I'm doing it until I see blood under my nails in the morning.",
+      "triggers": "I think stress is a big trigger. Also certain soaps or detergents, and when I get sweaty from sports. I had to quit the soccer team.",
+      "compliance": "I try to use the creams like I'm supposed to, but sometimes they sting so much I can't stand it. I use the antihistamine every day though."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect face and scalp for lesions",
+      "Examine neck and flexural areas",
+      "Inspect arms and hands including fingernails",
+      "Examine legs and feet",
+      "Assess for secondary bacterial infection",
+      "Examine conjunctiva and nasal mucosa",
+      "Palpate lymph nodes",
+      "Assess for lichenification",
+      "Check for Dennie-Morgan folds",
+      "Evaluate overall skin dryness and barrier function"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect face and scalp for lesions": "Erythematous, scaly patches on cheeks and forehead with some excoriations. Perioral sparing noted. Scalp shows mild scaling.",
+      "Examine neck and flexural areas": "Severe lichenified plaques in neck creases, antecubital and popliteal fossae with hyperpigmentation from chronic inflammation.",
+      "Inspect arms and hands including fingernails": "Widespread eczematous lesions on forearms and dorsal hands. Multiple excoriations present. Fingernails show evidence of chronic picking with some dried blood.",
+      "Examine legs and feet": "Erythematous, dry patches on shins and dorsal feet. Some areas show early lichenification.",
+      "Assess for secondary bacterial infection": "Few areas of mild crusting on arms but no purulent drainage, significant warmth, or spreading erythema suggestive of cellulitis.",
+      "Examine conjunctiva and nasal mucosa": "Mild conjunctival injection bilaterally. Nasal mucosa appears boggy and pale consistent with allergic rhinitis.",
+      "Palpate lymph nodes": "Mild bilateral cervical and axillary lymphadenopathy, likely reactive to chronic skin inflammation.",
+      "Assess for lichenification": "Significant lichenification present in chronic areas, particularly neck, antecubital and popliteal fossae indicating chronic rubbing and scratching.",
+      "Check for Dennie-Morgan folds": "Prominent infraorbital folds (Dennie-Morgan lines) present bilaterally, consistent with atopic dermatitis.",
+      "Evaluate overall skin dryness and barrier function": "Generalized xerosis with impaired skin barrier function. Skin appears dull and feels rough to palpation."
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Severe atopic dermatitis with treatment resistance (correct diagnosis)",
+      "Contact dermatitis (allergic or irritant)",
+      "Seborrheic dermatitis",
+      "Cutaneous T-cell lymphoma (mycosis fungoides)",
+      "Immunodeficiency disorder",
+      "Psoriasis",
+      "Scabies"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "May anchor on 'refractory eczema' and miss considering systemic causes, malignancy, or the need to evaluate treatment adherence and proper application technique",
+      "prematureClosure": "Might immediately assume medication non-compliance or inadequate potency without considering immunodeficiency, malignancy, or need for systemic therapy in severe atopic dermatitis",
+      "availabilityBias": "Recent cases of contact dermatitis or psoriasis might influence thinking, or underestimating severity due to young age and assuming topicals should be sufficient"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Zara Thompson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential diagnosis, what key historical features would help you distinguish between these conditions? Consider the chronicity, distribution pattern, and treatment response. What red flags should you be particularly alert for in a case of 'treatment-resistant' eczema?",
+      "phase5": "Now that you've completed your history and physical exam, how does the SCORAD severity score and treatment failure pattern influence your thinking? What are the implications of severe atopic dermatitis that's refractory to standard therapy, and what would be your next steps in management?",
+      "finalDebrief": "This case illustrates severe atopic dermatitis requiring systemic therapy consideration. Notice how the distribution, chronicity, family history, and associated atopic conditions supported the diagnosis, while the severity and treatment resistance indicated need for escalated care. What systemic options would you consider for this patient, and how would you address the psychosocial impacts?"
     }
-}
+  }
 };

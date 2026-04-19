@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Menendez",
-  "patientHPI": "Doctor, I woke up this morning and my right leg felt completely different - it's ice cold and the pain is unbearable. I can barely feel my toes and the leg looks almost white compared to my other one. I've had leg pain before when I walk, but this came on suddenly while I was sleeping.",
+    "patientHPI": "Doctor, I woke up this morning and my right leg felt completely different - it's ice cold and the pain is unbearable. I can barely feel my toes and the leg looks almost white compared to my other one. I've had leg pain before when I walk, but this came on suddenly while I was sleeping.",
     "dob": "09/14/1952",
     "age": 72,
     "sex": "Female",
@@ -227,46 +227,166 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "128", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "24", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "48", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "128",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "24",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "48",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "PT", "value": "15.8", "unit": "seconds", "range": "11.0-13.5", "flag": "H" },
-            { "test": "INR", "value": "1.4", "unit": "", "range": "2.0-3.0 (therapeutic)", "flag": "L" }
+            {
+              "test": "PT",
+              "value": "15.8",
+              "unit": "seconds",
+              "range": "11.0-13.5",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.4",
+              "unit": "",
+              "range": "2.0-3.0 (therapeutic)",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.6", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "171", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "7.6",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "171",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.0", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "33.8", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "210", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.0",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "33.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "210",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            { "test": "NT-proBNP", "value": "1250", "unit": "pg/mL", "range": "<300", "flag": "H" }
+            {
+              "test": "NT-proBNP",
+              "value": "1250",
+              "unit": "pg/mL",
+              "range": "<300",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -334,15 +454,42 @@ window.EMR_DATA = {
     "Sister: T2DM, HTN, alive at 68"
   ],
   "socialHistory": [
-    ["Occupation", "Retired elementary school teacher"],
-    ["Marital", "Widowed (husband deceased 2019)"],
-    ["Tobacco", "Former — 15 pack-years; quit 2004"],
-    ["Alcohol", "Rare — occasional glass of wine with family"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 10-15 min daily; limited by claudication and dyspnea"],
-    ["Housing", "Lives alone in condo; son visits daily"],
-    ["Safety", "Denies IPV; fall risk — uses walker for longer distances"],
-    ["Advance Directive", "Living will on file — DNR/DNI; HCP designated — son Carlos"]
+    [
+      "Occupation",
+      "Retired elementary school teacher"
+    ],
+    [
+      "Marital",
+      "Widowed (husband deceased 2019)"
+    ],
+    [
+      "Tobacco",
+      "Former — 15 pack-years; quit 2004"
+    ],
+    [
+      "Alcohol",
+      "Rare — occasional glass of wine with family"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 10-15 min daily; limited by claudication and dyspnea"
+    ],
+    [
+      "Housing",
+      "Lives alone in condo; son visits daily"
+    ],
+    [
+      "Safety",
+      "Denies IPV; fall risk — uses walker for longer distances"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file — DNR/DNI; HCP designated — son Carlos"
+    ]
   ],
   "meta": {
     "caseId": "acute-embolic-limb-ischemia",
@@ -353,75 +500,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gloria Menendez is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Gloria appears anxious and distressed, frequently shifting position due to severe leg pain. She is cooperative and forthcoming with information, clearly worried about losing her leg. Her distress is evident as she describes the sudden onset and severity of symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did you first notice the pain and coldness in your right leg?",
+      "Can you describe the quality of the pain you're experiencing?",
+      "Where exactly is the pain located and does it travel anywhere?",
+      "On a scale of 1-10, how would you rate your pain right now?",
+      "What makes the pain worse or better?",
+      "Have you noticed any changes in sensation or ability to move your leg?",
+      "Have you had any similar episodes before?",
+      "Are you experiencing any chest pain, shortness of breath, or palpitations?",
+      "Have you missed any doses of your medications recently?",
+      "When was your last INR check?",
+      "Have you had any recent procedures or prolonged immobility?",
+      "Are you experiencing any weakness or numbness elsewhere?",
+      "Have you noticed any color changes in your leg?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started Doctor, I woke up this morning and my right leg felt completely different - it's.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Embolic Limb Ischemia.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Warfarin 5mg daily; Carvedilol 25mg BID; Sacubitril/Valsartan 49/51mg BID; Spironolactone 25mg daily; Furosemide 40mg daily; Metformin 1000mg BID; Atorvastatin 80mg QHS; Cilostazol 100mg BID.'",
-        "allergies": "'My allergies are ACE Inhibitors (Enalapril), Aspirin.'",
-        "family": "Father: MI at age 60 (deceased at 65)  Mother: Stroke at age 75, T2DM (deceased at 82)  Brother: CAD, CABG at age 64, alive",
-        "social": "Occupation: Retired elementary school teacher  Marital: Widowed (husband deceased 2019)  Tobacco: Former \u2014 15 pack-years; quit 2004  Alcohol: Rare \u2014 occasional glass of wine with family  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble focusing because of this terrible pain in my leg.",
+      "onset": "I woke up around 6 AM with this excruciating pain. It came on suddenly while I was sleeping - went to bed fine last night and woke up to this nightmare.",
+      "character": "It's like someone is crushing my leg in a vice - constant, severe cramping pain that just won't let up. It's different from my usual walking pain.",
+      "location": "The pain starts in my right calf and goes all the way down to my toes. My whole lower leg feels like it's being squeezed.",
+      "severity": "This is easily a 9 out of 10. I can barely think straight. I can't put any weight on it and even lying still is agony.",
+      "aggravating": "Any movement makes it worse, even trying to wiggle my toes. The pain is constant but gets worse when I try to move.",
+      "relieving": "Nothing helps. I tried elevating it, tried putting it down, took some Tylenol - nothing touches this pain.",
+      "associated": "My leg feels ice cold and numb, almost like it's not part of my body. I can barely feel my toes and they look almost blue-white.",
+      "denies": "No chest pain right now, no shortness of breath more than usual. No fever or chills. The other leg feels normal.",
+      "history": "I get leg pain when I walk sometimes from my circulation problems, but nothing like this. This came out of nowhere and is much, much worse.",
+      "medications": "Warfarin 5mg daily; Carvedilol 25mg BID; Sacubitril/Valsartan 49/51mg BID; Spironolactone 25mg daily; Furosemide 40mg daily; Metformin 1000mg BID; Atorvastatin 80mg QHS; Cilostazol 100mg BID",
+      "allergies": "ACE Inhibitors (Enalapril), Aspirin",
+      "family": "My father had a heart attack at 60 and my mother had a stroke. My brother has had heart surgery. There's a lot of heart and circulation problems in my family.",
+      "social": "I'm a retired teacher, widowed since 2019. I used to smoke but quit almost 20 years ago. I rarely drink, maybe wine at family gatherings."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of bilateral lower extremities",
+      "Palpation of bilateral dorsalis pedis pulses",
+      "Palpation of bilateral posterior tibial pulses",
+      "Palpation of bilateral popliteal pulses",
+      "Assessment of capillary refill in toes",
+      "Temperature comparison between legs",
+      "Sensory examination of affected limb",
+      "Motor function assessment of affected limb",
+      "Cardiac auscultation",
+      "Assessment for signs of heart failure"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Embolic Limb Ischemia. Document specifically what you observe."
+      "Inspection of bilateral lower extremities": "Right lower extremity appears pale and mottled compared to left. Right foot and toes have bluish-white discoloration.",
+      "Palpation of bilateral dorsalis pedis pulses": "Left dorsalis pedis pulse 2+, right dorsalis pedis pulse absent",
+      "Palpation of bilateral posterior tibial pulses": "Left posterior tibial pulse 1+, right posterior tibial pulse absent",
+      "Palpation of bilateral popliteal pulses": "Left popliteal pulse 1+, right popliteal pulse weak/barely palpable",
+      "Assessment of capillary refill in toes": "Left foot capillary refill 3 seconds, right foot capillary refill >5 seconds",
+      "Temperature comparison between legs": "Right lower extremity notably cooler to touch compared to left leg",
+      "Sensory examination of affected limb": "Decreased sensation to light touch and pinprick in right foot and lower leg",
+      "Motor function assessment of affected limb": "Weakness in right foot dorsiflexion and plantarflexion, patient unable to wiggle toes effectively",
+      "Cardiac auscultation": "Irregularly irregular rhythm consistent with atrial fibrillation, no new murmurs",
+      "Assessment for signs of heart failure": "Mild bilateral lower extremity edema, no acute distress at rest"
     },
     "ddxTargets": [
-        "Acute Embolic Limb Ischemia (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Embolic Limb Ischemia (correct diagnosis)",
+      "Acute Thrombotic Limb Ischemia",
+      "Acute Arterial Thrombosis",
+      "Aortic Dissection with limb involvement",
+      "Compartment Syndrome",
+      "Severe Peripheral Arterial Disease exacerbation",
+      "Deep Vein Thrombosis with arterial compromise"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Embolic Limb Ischemia, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Embolic Limb Ischemia, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Embolic Limb Ischemia based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known PAD history and attributing symptoms to chronic disease progression rather than recognizing acute embolic event",
+      "prematureClosure": "May stop at PAD exacerbation without considering acute embolic source given patient's atrial fibrillation and anticoagulation status",
+      "availabilityBias": "Recent cases of DVT or chronic PAD may overshadow recognition of acute arterial emergency requiring immediate intervention"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gloria Menendez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Embolic Limb Ischemia. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable differentials. Given this patient's significant cardiac history and the acute nature of presentation, what specific historical details about her cardiac conditions might be most relevant? What would you want to know about her anticoagulation management?",
+      "phase5": "Your physical exam reveals absent pulses and the classic '5 P's' of acute limb ischemia. Given her atrial fibrillation history and exam findings, how does this change your differential diagnosis? What is the most likely source of an acute arterial occlusion in this patient?",
+      "finalDebrief": "This case highlights acute embolic limb ischemia in a patient with atrial fibrillation. The key was recognizing the acute presentation with the 5 P's (Pain, Pallor, Pulselessness, Paresthesias, Paralysis) rather than attributing symptoms to her chronic PAD. Her irregular anticoagulation likely contributed to embolic risk. How did your thinking evolve from chronic to acute pathology?"
     }
-}
+  }
 };

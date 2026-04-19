@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dolores Eriksen",
-  "patientHPI": "I woke up this morning and I can't see anything out of my left eye - it's like someone just turned off the lights on that side. It happened suddenly and completely, and I'm terrified because I've never had anything like this happen before.",
+    "patientHPI": "I woke up this morning and I can't see anything out of my left eye - it's like someone just turned off the lights on that side. It happened suddenly and completely, and I'm terrified because I've never had anything like this happen before.",
     "dob": "07/10/1976",
     "age": "50",
     "sex": "Female",
@@ -380,75 +380,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Dolores Eriksen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Dolores is visibly anxious and frightened about her sudden complete vision loss, speaking quickly and seeking frequent reassurance. She is very forthcoming with information as she desperately wants answers, but her anxiety sometimes makes her responses scattered. Her distress level is high as she fears this might be related to a stroke like her father had.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did i can't see out of my left eye left eye \u2014 complete start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened when you first noticed the vision loss this morning?",
+      "Was the vision loss gradual or did it happen all at once?",
+      "Do you have any pain in or around your left eye?",
+      "Have you noticed any headaches, especially severe ones?",
+      "Are you experiencing any weakness, numbness, or difficulty speaking?",
+      "Have you had any recent changes in your vision before today?",
+      "Do you see any flashing lights, floaters, or curtain-like shadows?",
+      "Have you had any recent trauma to your head or eye?",
+      "Are you having any nausea, vomiting, or dizziness?",
+      "Have you been taking all your medications as prescribed?",
+      "Have you had any recent changes in your heart rhythm or palpitations?",
+      "Do you have any jaw pain or headaches when chewing?",
+      "Have you experienced any recent weight loss or fatigue?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I woke up this morning and I can't see anything out of my left eye - it's like s.'",
-        "character": "'It's i can't see out of my left eye left eye \u2014 complete \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban; Metoprolol; Atorvastatin; Lisinopril.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: stroke at 68  Mother: MI at 72",
-        "social": "Tobacco: 30 pack-years, quit 5 years ago  Alcohol: Occasional  Drugs: Denies  Occupation: Retired engineer  Living: Lives with wife"
+      "default": "I'm sorry, could you repeat that? I'm just so worried about my eye and having trouble focusing on what you're asking.",
+      "onset": "I woke up around 7 AM and when I opened my eyes, I immediately noticed I couldn't see anything out of my left eye. It was completely sudden - like someone flipped a switch off.",
+      "character": "It's complete darkness in my left eye. Not blurry or dim - just nothing. Like that eye isn't even there anymore.",
+      "location": "Just my left eye. My right eye is fine and I can see normally with it.",
+      "severity": "This is a 10 out of 10 for how scared I am. I can't see anything at all from that eye, so functionally it's completely useless right now.",
+      "aggravating": "Nothing makes it worse because it's already completely gone. Moving my eye around doesn't change anything.",
+      "relieving": "Nothing helps. I tried closing and opening my eyes, rubbing it gently, but nothing brings the vision back.",
+      "associated": "I don't have any eye pain, headache, or other symptoms. Just the complete vision loss.",
+      "denies": "No eye pain, no headache, no weakness in my arms or legs, no trouble speaking, no nausea or vomiting.",
+      "history": "I've never had anything like this happen before. My vision has been stable with just reading glasses.",
+      "medications": "Apixaban; Metoprolol; Atorvastatin; Lisinopril",
+      "allergies": "NKDA",
+      "family": "My father had a stroke when he was 68, and my mother had a heart attack at 72. That's why I'm so scared this might be a stroke.",
+      "social": "I'm a retired engineer, live with my wife. I smoked for many years but quit 5 years ago - about 30 pack-years total. I drink occasionally, no drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual acuity testing both eyes",
+      "Pupillary light reflex testing",
+      "Fundoscopic examination",
+      "Visual field testing by confrontation",
+      "Extraocular movement testing",
+      "Temporal artery palpation",
+      "Carotid auscultation",
+      "Blood pressure measurement",
+      "Cardiac rhythm assessment",
+      "Neurological screening examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Visual acuity testing both eyes": "Right eye 20/30, left eye no light perception",
+      "Pupillary light reflex testing": "Right pupil reactive, left pupil has relative afferent pupillary defect (Marcus Gunn pupil)",
+      "Fundoscopic examination": "Left optic disc appears pale and swollen with cherry-red spot at macula, right fundus normal",
+      "Visual field testing by confrontation": "Complete left eye visual field loss, right eye normal",
+      "Extraocular movement testing": "Full range of motion both eyes, no diplopia",
+      "Temporal artery palpation": "Temporal arteries soft, non-tender, pulsatile bilaterally",
+      "Carotid auscultation": "Left carotid bruit present, right carotid clear",
+      "Blood pressure measurement": "158/86 mmHg",
+      "Cardiac rhythm assessment": "Irregularly irregular rhythm consistent with atrial fibrillation",
+      "Neurological screening examination": "No focal motor or sensory deficits, speech clear, facial symmetry intact"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Central retinal artery occlusion (correct diagnosis)",
+      "Retinal detachment",
+      "Acute angle-closure glaucoma",
+      "Stroke with homonymous hemianopia",
+      "Giant cell arteritis",
+      "Optic neuritis",
+      "Vitreous hemorrhage"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on stroke given family history and cardiovascular risk factors, potentially missing the ophthalmologic emergency",
+      "prematureClosure": "May stop at 'vision loss = stroke' without proper ophthalmologic examination and considering retinal causes",
+      "availabilityBias": "Recent cases of stroke or more common causes of vision loss might overshadow the less common but time-critical retinal artery occlusion"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dolores Eriksen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several concerning possibilities for acute vision loss. As you prepare to interview Dolores, what key historical features would help you differentiate between retinal, optic nerve, and cerebrovascular causes? Consider her cardiovascular risk factors - how might they predispose to different mechanisms of vision loss?",
+      "phase5": "Now that you've completed your history and physical, let's analyze your findings. You found complete monocular vision loss with a relative afferent pupillary defect and fundoscopic changes. What does this constellation of findings tell you about the anatomical location of the problem? How does the time course and her cardiovascular history fit with your leading diagnosis?",
+      "finalDebrief": "This case highlights how cardiovascular risk factors like atrial fibrillation and carotid stenosis can lead to embolic central retinal artery occlusion - truly an 'eye stroke.' Notice how the complete monocular vision loss, RAPD, and fundoscopic findings pointed to retinal rather than cortical pathology. The key was recognizing this as a retinal emergency requiring immediate intervention, not just another stroke workup. What does this teach you about the importance of a focused ophthalmologic examination in acute vision loss?"
     }
-}
+  }
 };

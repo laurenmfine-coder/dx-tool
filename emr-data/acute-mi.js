@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Gloria Vasquez",
-  "patientHPI": "I can still walk about a block before I get winded, which is my usual. I sleep with two pillows like I always have, and I'm not waking up short of breath or anything like that. Overall I feel about the same as my last visit.",
+    "patientHPI": "I can still walk about a block before I get winded, which is my usual. I sleep with two pillows like I always have, and I'm not waking up short of breath or anything like that. Overall I feel about the same as my last visit.",
     "dob": "11/04/1952",
     "age": 73,
     "sex": "Female",
@@ -168,7 +168,7 @@ window.EMR_DATA = {
       "spo2": "88%",
       "wt": "158 lbs",
       "ht": "5'3\"",
-      "bmi": 28.0,
+      "bmi": 28,
       "setting": "ED"
     },
     {
@@ -247,30 +247,114 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "138", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H" },
-            { "test": "eGFR", "value": "48", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "138",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "48",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            { "test": "BNP", "value": "342", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "BNP",
+              "value": "342",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.8", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelets", "value": "198", "unit": "K/uL", "range": "150-400", "flag": "" },
-            { "test": "MCV", "value": "86", "unit": "fL", "range": "80-100", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "198",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "MCV",
+              "value": "86",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -311,12 +395,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9102", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "09/2025", "site": "Right deltoid IM", "lot": "CV25-2240", "mfr": "Pfizer" },
-    { "vaccine": "Prevnar 20", "date": "04/2024", "site": "Left deltoid IM", "lot": "PV20-774", "mfr": "Pfizer" },
-    { "vaccine": "Tdap", "date": "06/2021", "site": "Left deltoid IM", "lot": "TD21-338", "mfr": "GSK" },
-    { "vaccine": "Shingrix (1/2)", "date": "01/2023", "site": "Right deltoid IM", "lot": "SX23-115", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "03/2023", "site": "Right deltoid IM", "lot": "SX23-287", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9102",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "09/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2240",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "04/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV20-774",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "06/2021",
+      "site": "Left deltoid IM",
+      "lot": "TD21-338",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "01/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-115",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "03/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-287",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Father: MI at age 68 (deceased), T2DM",
@@ -325,15 +445,42 @@ window.EMR_DATA = {
     "Sister: Hypertension, alive at 76"
   ],
   "socialHistory": [
-    ["Occupation", "Retired school cafeteria manager; retired 2017"],
-    ["Marital", "Widowed (husband deceased 2021 — lung cancer); lives with son's family"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — wine at family gatherings only"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited to light household activity; walks slowly around block when feeling well"],
-    ["Housing", "Lives with son, daughter-in-law, and two grandchildren in single-family home"],
-    ["Safety", "Denies IPV; seatbelt; uses handrails on stairs"],
-    ["Advance Directive", "Full code; DPOA designated (son Carlos)"]
+    [
+      "Occupation",
+      "Retired school cafeteria manager; retired 2017"
+    ],
+    [
+      "Marital",
+      "Widowed (husband deceased 2021 — lung cancer); lives with son's family"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — wine at family gatherings only"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited to light household activity; walks slowly around block when feeling well"
+    ],
+    [
+      "Housing",
+      "Lives with son, daughter-in-law, and two grandchildren in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; uses handrails on stairs"
+    ],
+    [
+      "Advance Directive",
+      "Full code; DPOA designated (son Carlos)"
+    ]
   ],
   "meta": {
     "caseId": "acute-mi",
@@ -344,75 +491,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Gloria Vasquez appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Gloria appears mildly anxious and uncomfortable, speaking in short sentences due to her breathing difficulty. She is cooperative and forthcoming with information, though she seems somewhat surprised by the sudden change from her baseline functioning. She maintains composure despite obvious distress from her dyspnea.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did your shortness of breath start today?",
+      "Can you describe what the shortness of breath feels like?",
+      "Are you having any chest pain or pressure?",
+      "Have you noticed any swelling in your legs or feet?",
+      "Are you coughing up anything, like foam or blood?",
+      "Have you been taking all your medications as prescribed?",
+      "When was your last heart catheterization or stress test?",
+      "Have you had any nausea, sweating, or jaw pain?",
+      "How does this compare to your usual shortness of breath?",
+      "Have you been weighing yourself daily?",
+      "Did anything trigger this episode?",
+      "Are you having any palpitations or irregular heartbeats?",
+      "Have you been more tired than usual lately?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I can still walk about a block before I get winded, which is my usual.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Myocardial Infarction.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Insulin Glargine 28 units QHS; Metformin 500mg BID; Losartan 100mg daily; Amlodipine 5mg daily; Metoprolol Succinate 50mg daily; Rosuvastatin 20mg QHS; Apixaban 5mg BID; Furosemide 40mg daily.'",
-        "allergies": "'My allergies are Lisinopril, Codeine.'",
-        "family": "Father: MI at age 68 (deceased), T2DM  Mother: Hypertension, stroke at age 80, alive at 92  Brother: T2DM, CABG at age 65, alive at 71",
-        "social": "Occupation: Retired school cafeteria manager; retired 2017  Marital: Widowed (husband deceased 2021 \u2014 lung cancer); lives with son's family  Tobacco: Never smoker  Alcohol: Rare \u2014 wine at family gatherings only  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble focusing right now because it's hard to catch my breath. Could you ask that differently?",
+      "onset": "It started suddenly about 2 hours ago when I was sitting watching TV. I went from feeling fine to barely being able to breathe within minutes.",
+      "character": "It feels like I can't get enough air in, like I'm drowning or suffocating. I keep trying to take deep breaths but I can't fill my lungs.",
+      "location": "The breathing trouble is all over my chest. I do have some pressure in my chest, but it's not like sharp pain.",
+      "severity": "The shortness of breath is about an 8 out of 10. I can barely walk to the bathroom without getting completely winded.",
+      "aggravating": "Lying flat makes it much worse. Even trying to talk makes me more short of breath. Any movement makes it harder.",
+      "relieving": "Sitting up helps a little bit, but nothing really makes it go away. I tried my usual things but nothing worked.",
+      "associated": "I'm coughing up some pink, foamy stuff which really scared me. I feel nauseous and a bit sweaty. My heart feels like it's racing.",
+      "denies": "No sharp chest pain, no leg swelling that I've noticed, no fever. I haven't had any falls or injuries.",
+      "history": "I've never had breathing this bad before. My usual shortness of breath comes on gradually with walking, but this was completely different - sudden and severe.",
+      "medications": "Insulin Glargine 28 units QHS; Metformin 500mg BID; Losartan 100mg daily; Amlodipine 5mg daily; Metoprolol Succinate 50mg daily; Rosuvastatin 20mg QHS; Apixaban 5mg BID; Furosemide 40mg daily",
+      "allergies": "Lisinopril, Codeine",
+      "family": "My father had a heart attack at 68 and died from it. My mother had a stroke. My brother had to have bypass surgery. Heart problems run in our family.",
+      "social": "I'm retired from working in school cafeteria. I live with my son's family since my husband passed. I never smoked, rarely drink, and don't use drugs."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "JVD assessment",
+      "Peripheral edema check",
+      "Skin examination",
+      "Abdominal examination",
+      "Neurological assessment",
+      "Oxygen saturation monitoring",
+      "Blood pressure in both arms"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Acute Myocardial Infarction. Document specifically what you observe."
+      "Cardiovascular examination": "Tachycardic irregular rhythm at 112 bpm, S3 gallop present, displaced PMI, no murmurs audible over lung sounds",
+      "Pulmonary examination": "Bilateral fine crackles extending to mid-lung fields, increased work of breathing, accessory muscle use",
+      "JVD assessment": "Jugular venous distension to 8 cm at 45 degrees",
+      "Peripheral edema check": "Trace bilateral lower extremity edema, no cyanosis of extremities",
+      "Skin examination": "Diaphoretic, pale, cool and clammy skin",
+      "Abdominal examination": "Soft, non-tender, no hepatomegaly appreciated",
+      "Neurological assessment": "Alert and oriented, anxious appearing, no focal deficits",
+      "Oxygen saturation monitoring": "88% on room air, improves to 92% with supplemental oxygen",
+      "Blood pressure in both arms": "Left arm 92/58, right arm 90/56"
     },
     "ddxTargets": [
-        "Acute Myocardial Infarction (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema — Presenting as Sudden-Onset Dyspnea in Known HFrEF) (correct diagnosis)",
+      "Acute decompensated heart failure",
+      "Pulmonary embolism",
+      "Acute coronary syndrome without STEMI",
+      "Cardiogenic shock",
+      "Pneumonia with sepsis",
+      "Atrial fibrillation with rapid ventricular response"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Myocardial Infarction, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Myocardial Infarction, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Myocardial Infarction based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known heart failure history and attributing dyspnea solely to CHF exacerbation, missing the acute MI component driving the pulmonary edema",
+      "prematureClosure": "May stop investigation after identifying pulmonary edema and heart failure, failing to recognize this as acute cardiogenic pulmonary edema from new MI",
+      "availabilityBias": "Recent cases of CHF exacerbation may lead to assuming this is another routine decompensation rather than recognizing acute MI presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Gloria Vasquez's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema \u2014 Presenting as Sudden-Onset Dyspnea in Known HFrEF). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for acute dyspnea in this patient with known heart failure. What specific historical details would help you distinguish between an acute coronary event versus other causes? Consider her risk factors and the acuity of presentation.",
+      "phase5": "Your examination reveals signs of acute heart failure, but consider the constellation of findings: sudden onset, hemodynamic compromise, and pink frothy sputum in a high-risk patient. What does this clinical picture suggest about the underlying etiology driving her pulmonary edema?",
+      "finalDebrief": "This case demonstrates how acute MI can present as isolated dyspnea, especially in elderly patients with diabetes and known CAD. The key was recognizing that her 'usual' heart failure suddenly becoming severe suggested an acute precipitant. The pink frothy sputum, hemodynamic compromise, and sudden onset distinguished this from typical CHF exacerbation."
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Priya Mehta",
-  "patientHPI": "I'm here for my yearly visit and everything's been going well. I wear contacts every day and sometimes fall asleep in them even though I know I shouldn't - my eye doctor always tells me not to do that. My seasonal allergies bother my eyes sometimes but the drops I buy at the pharmacy help with that.",
+    "patientHPI": "I'm here for my yearly visit and everything's been going well. I wear contacts every day and sometimes fall asleep in them even though I know I shouldn't - my eye doctor always tells me not to do that. My seasonal allergies bother my eyes sometimes but the drops I buy at the pharmacy help with that.",
     "dob": "09/02/1996",
     "age": 28,
     "sex": "Female",
@@ -158,18 +158,60 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "41.0", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "245", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "41.0",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "245",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "84", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.7", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "84",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.7",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -213,15 +255,42 @@ window.EMR_DATA = {
     "Maternal grandmother: Cataracts, T2DM, deceased at 78"
   ],
   "socialHistory": [
-    ["Occupation", "Accountant — office work; extensive screen time"],
-    ["Marital", "Single, lives with roommate"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 1-2 drinks on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Running 3x/week; Pilates 2x/week"],
-    ["Housing", "Apartment with roommate"],
-    ["Safety", "Denies IPV; seatbelt"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Accountant — office work; extensive screen time"
+    ],
+    [
+      "Marital",
+      "Single, lives with roommate"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 1-2 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Running 3x/week; Pilates 2x/week"
+    ],
+    [
+      "Housing",
+      "Apartment with roommate"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "corneal-abrasionkeratitis",
@@ -232,75 +301,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Priya Mehta appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Priya appears anxious and concerned, holding her hand partially over her right eye. She's cooperative but clearly in discomfort, speaking softly and wincing occasionally when looking toward light sources.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did eye emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly when your eye symptoms started?",
+      "Describe what your eye feels like right now",
+      "Which eye is bothering you, or is it both eyes?",
+      "On a scale of 1-10, how would you rate your eye pain?",
+      "Have you noticed any changes in your vision?",
+      "Are you having any discharge from your eye?",
+      "When did you last wear your contact lenses?",
+      "How long do you typically wear your contacts each day?",
+      "Have you been sleeping in your contact lenses recently?",
+      "Are you experiencing any light sensitivity?",
+      "Have you had any recent eye infections or injuries?",
+      "What medications are you currently taking?",
+      "Do you have any allergies I should know about?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my yearly visit and everything's been going well.'",
-        "character": "'It's eye emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Contact Lens-Related Bacterial Keratitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Ketotifen 0.025% ophthalmic drops BID PRN; Oral Contraceptive (Levonorgestrel-Ethinyl Estradiol).'",
-        "allergies": "'My allergies are Erythromycin, Dust mites.'",
-        "family": "Mother: Myopia, T2DM, alive at 56  Father: HTN, glaucoma (open-angle), alive at 58  Sister: Myopia, asthma, age 24",
-        "social": "Occupation: Accountant \u2014 office work; extensive screen time  Marital: Single, lives with roommate  Tobacco: Never smoker  Alcohol: Social, 1-2 drinks on weekends  Drugs: Denies"
+      "default": "I'm not sure what you mean. Could you ask that differently? My eye is really hurting right now.",
+      "onset": "It started yesterday morning when I woke up. My right eye felt scratchy at first, but by afternoon it was really painful and red.",
+      "character": "It feels like there's something sharp stuck in my eye, like sand or glass. It's a constant burning and stabbing pain.",
+      "location": "It's my right eye only. The pain is mostly in the center and spreads across the whole eye when I blink.",
+      "severity": "The pain is about an 8 out of 10 right now. I can barely keep my eye open and it's hard to focus on work.",
+      "aggravating": "Any light makes it much worse - even dim lighting hurts. Blinking is terrible, and trying to look around makes the pain shoot through my eye.",
+      "relieving": "I've tried keeping my eye closed and using some old eye drops I had, but nothing really helps. Ice seemed to help a tiny bit.",
+      "associated": "My eye is very red and watery, and there's some thick yellowish discharge, especially when I wake up. My vision in that eye is definitely blurry.",
+      "denies": "No fever, no headache, the other eye is fine. No nausea or vomiting. No recent trauma to my eye.",
+      "history": "I've never had anything like this before. I get seasonal allergy symptoms but this is completely different - much more painful.",
+      "medications": "Ketotifen 0.025% ophthalmic drops BID PRN; Oral Contraceptive (Levonorgestrel-Ethinyl Estradiol)",
+      "allergies": "Erythromycin, Dust mites",
+      "family": "My father has glaucoma and both my parents and sister are nearsighted like me, but no one's had serious eye infections.",
+      "social": "I'm an accountant so I'm on the computer all day. I wear contacts daily, usually 12-14 hours. I know I shouldn't, but I fall asleep in them probably 2-3 times a week. I don't smoke, just drink socially on weekends."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual acuity testing both eyes",
+      "Pupillary light reflex and accommodation",
+      "Extraocular movement assessment",
+      "Conjunctival and scleral inspection",
+      "Corneal examination with penlight",
+      "Fluorescein staining of cornea",
+      "Eyelid eversion and inspection",
+      "Preauricular lymph node palpation",
+      "Intraocular pressure assessment",
+      "Fundoscopic examination"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Contact Lens-Related Bacterial Keratitis. Document specifically what you observe."
+      "Visual acuity testing both eyes": "Right eye: 20/80, Left eye: 20/25 (baseline with correction)",
+      "Pupillary light reflex and accommodation": "Right pupil sluggishly reactive, left normal. Significant photophobia in right eye.",
+      "Extraocular movement assessment": "Full range of motion both eyes, but patient reports increased pain with right eye movement",
+      "Conjunctival and scleral inspection": "Right eye: marked conjunctival injection, ciliary flush present. Left eye: normal",
+      "Corneal examination with penlight": "Right cornea appears hazy with central opacity and surrounding edema. Left cornea clear.",
+      "Fluorescein staining of cornea": "Right eye shows central epithelial defect with irregular borders and underlying stromal involvement",
+      "Eyelid eversion and inspection": "No foreign body seen, moderate mucopurulent discharge in right eye",
+      "Preauricular lymph node palpation": "Right preauricular node slightly enlarged and tender",
+      "Intraocular pressure assessment": "Unable to obtain reliable measurement due to patient discomfort and corneal involvement",
+      "Fundoscopic examination": "Left eye normal, right eye view obscured by corneal opacity"
     },
     "ddxTargets": [
-        "Contact Lens-Related Bacterial Keratitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Contact Lens-Related Bacterial Keratitis (Pseudomonas Suspected) (correct diagnosis)",
+      "Acanthamoeba Keratitis",
+      "Viral Keratitis (HSV)",
+      "Corneal Perforation",
+      "Endophthalmitis",
+      "Allergic Conjunctivitis",
+      "Contact Lens-Induced Giant Papillary Conjunctivitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Contact Lens-Related Bacterial Keratitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Contact Lens-Related Bacterial Keratitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Contact Lens-Related Bacterial Keratitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Student may anchor on the patient's history of allergic conjunctivitis and initially dismiss this as a more severe allergic reaction, missing the infectious component",
+      "prematureClosure": "The clear contact lens overwear history might lead to quick assumption of simple contact lens irritation without fully exploring the infectious keratitis possibility",
+      "availabilityBias": "Students may focus on more commonly seen conditions like conjunctivitis rather than considering the serious sight-threatening bacterial keratitis that requires urgent treatment"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Priya Mehta's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Contact Lens-Related Bacterial Keratitis (Pseudomonas Suspected). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified this as an eye emergency in a contact lens wearer. What specific historical details will help you distinguish between mechanical irritation, infectious keratitis, and other contact lens complications? Consider what questions might reveal high-risk behaviors.",
+      "phase5": "Your exam findings show corneal involvement with epithelial defect and stromal changes in a contact lens overwear patient. How does this constellation of findings help narrow your differential? What makes this particularly concerning for Pseudomonas infection?",
+      "finalDebrief": "This case highlights how contact lens overwear, especially sleeping in lenses, creates an ideal environment for Pseudomonas keratitis. The rapid onset, severe pain, and central corneal involvement were key distinguishing features from simple irritation or viral causes. How did the patient's risk factors and clinical presentation guide your diagnostic reasoning?"
     }
-}
+  }
 };

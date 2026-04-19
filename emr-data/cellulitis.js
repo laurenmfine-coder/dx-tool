@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "James Crawford",
-  "patientHPI": "I'm here for my regular check-up for my diabetes and blood pressure. My feet have been getting numb and burning lately, especially at night. I know my blood sugar hasn't been great - I've been struggling to stick to my diet and haven't been exercising much.",
+    "patientHPI": "I'm here for my regular check-up for my diabetes and blood pressure. My feet have been getting numb and burning lately, especially at night. I know my blood sugar hasn't been great - I've been struggling to stick to my diet and haven't been exercising much.",
     "dob": "01/30/1970",
     "age": 55,
     "sex": "Male",
@@ -157,7 +157,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "258 lbs",
       "ht": "5'10\"",
-      "bmi": 37.0,
+      "bmi": 37,
       "setting": "PCP Office"
     },
     {
@@ -212,33 +212,135 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "198", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "eGFR", "value": "62", "unit": "mL/min/1.73m²", "range": ">60", "flag": "" },
-            { "test": "Sodium", "value": "137", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "100", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "42", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "35", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "198",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "eGFR",
+              "value": "62",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "137",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "100",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "42",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "35",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "8.8", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "206", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "8.8",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "206",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "9.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.6", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "40.5", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "278", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "9.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.6",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.5",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "278",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -289,15 +391,42 @@ window.EMR_DATA = {
     "Sister: Prediabetes, age 50"
   ],
   "socialHistory": [
-    ["Occupation", "Office administrator"],
-    ["Marital", "Married"],
-    ["Tobacco", "Former — 10 pack-years; quit 2010"],
-    ["Alcohol", "1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — sedentary lifestyle"],
-    ["Housing", "Lives with wife in single-family home"],
-    ["Safety", "Denies IPV; wears seatbelt"],
-    ["Advance Directive", "None — discussed"]
+    [
+      "Occupation",
+      "Office administrator"
+    ],
+    [
+      "Marital",
+      "Married"
+    ],
+    [
+      "Tobacco",
+      "Former — 10 pack-years; quit 2010"
+    ],
+    [
+      "Alcohol",
+      "1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — sedentary lifestyle"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home"
+    ],
+    [
+      "Safety",
+      "Denies IPV; wears seatbelt"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed"
+    ]
   ],
   "meta": {
     "caseId": "cellulitis",
@@ -308,75 +437,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "James Crawford appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mr. Crawford appears anxious and uncomfortable, frequently shifting position and grimacing when discussing his scrotal pain. He is cooperative but somewhat embarrassed about his symptoms, requiring gentle encouragement to provide details about his genital examination findings. His distress level is moderate, with visible concern about the severity of his condition.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did urologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the pain or discomfort you're experiencing in your scrotal area?",
+      "When did you first notice these symptoms in your scrotum?",
+      "Have you noticed any redness, swelling, or warmth in the scrotal area?",
+      "Have you had any fever, chills, or feeling unwell recently?",
+      "Have you noticed any discharge or unusual odor?",
+      "Have you had any recent injuries or trauma to the genital area?",
+      "Have you had any urinary symptoms like burning, frequency, or difficulty urinating?",
+      "Have you had any nausea or vomiting with this pain?",
+      "How has your diabetes control been lately?",
+      "Have you had any similar skin infections in the past?",
+      "Are you sexually active, and if so, any new partners recently?",
+      "Have you been doing any activities that might cause chafing or irritation?",
+      "On a scale of 1-10, how would you rate your pain right now?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm here for my regular check-up for my diabetes and blood pressure.'",
-        "character": "'It's urologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Scrotal Cellulitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Amlodipine 5mg daily; Gabapentin 300mg TID; Tamsulosin 0.4mg QHS; Mupirocin 2% ointment.'",
-        "allergies": "'My allergies are Penicillin.'",
-        "family": "Father: T2DM, MI at age 64 (deceased at 72)  Mother: HTN, osteoarthritis, alive at 80  Brother: T2DM, age 52",
-        "social": "Occupation: Office administrator  Marital: Married  Tobacco: Former \u2014 10 pack-years; quit 2010  Alcohol: 1-2 beers on weekends  Drugs: Denies"
+      "default": "I'm not sure what you mean by that. Could you ask me more specifically about my scrotal pain or symptoms?",
+      "onset": "I first noticed some tenderness and redness in my scrotum about 3 days ago. It started as just mild irritation but has gotten progressively worse and more painful.",
+      "character": "It's a constant, throbbing, burning pain that feels hot and tender to touch. The skin feels tight and stretched.",
+      "location": "The pain is mainly on the left side of my scrotum, but it's starting to spread to the right side too. It doesn't really radiate anywhere else.",
+      "severity": "Right now it's about a 7 out of 10. It's really interfering with my ability to walk normally or sit comfortably. I can barely touch the area.",
+      "aggravating": "Any movement, walking, or touching the area makes it much worse. Even having clothing rub against it is very uncomfortable.",
+      "relieving": "I've been trying to keep the area clean and dry, and ibuprofen helps a little bit, but nothing really makes it feel better.",
+      "associated": "I've felt a bit warm and tired the past day or so, maybe slightly feverish. I haven't had any nausea or vomiting though.",
+      "denies": "No testicular pain deep inside, no severe nausea or vomiting, no urinary burning or frequency, no penile discharge.",
+      "history": "I've had some skin infections before, especially on my legs and feet, probably related to my diabetes. But I've never had anything like this in the genital area.",
+      "medications": "Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Amlodipine 5mg daily; Gabapentin 300mg TID; Tamsulosin 0.4mg QHS; Mupirocin 2% ointment",
+      "allergies": "Penicillin",
+      "family": "My dad and brother both have diabetes like me, and my dad had heart problems. My mom has high blood pressure and arthritis.",
+      "social": "I work as an office administrator, so I sit a lot. I'm married. I quit smoking about 14 years ago after smoking for 10 pack-years. I have 1-2 beers on weekends and don't use any drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual inspection of scrotum",
+      "Palpation of scrotal skin and contents",
+      "Assessment for lymphadenopathy in inguinal regions",
+      "Testicular examination and cremasteric reflex",
+      "Abdominal examination",
+      "Assessment of vital signs including temperature",
+      "Inspection for other areas of skin infection",
+      "Urethral meatus examination",
+      "Assessment of scrotal elevation (negative Prehn's sign)",
+      "Transillumination test"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Scrotal Cellulitis. Document specifically what you observe."
+      "Visual inspection of scrotum": "Significant erythema, edema, and induration of the left scrotal skin extending to the right side. Skin appears hot, red, and inflamed with some areas of scaling.",
+      "Palpation of scrotal skin and contents": "Scrotal skin is markedly tender, warm, and thickened. Testes are palpable and non-tender. No fluctuance or crepitus noted.",
+      "Assessment for lymphadenopathy in inguinal regions": "Mild bilateral inguinal lymphadenopathy with small, tender lymph nodes palpable.",
+      "Testicular examination and cremasteric reflex": "Both testes are normal in size, shape, and position. Cremasteric reflex is intact bilaterally. No testicular tenderness.",
+      "Abdominal examination": "Soft, non-tender, non-distended. No masses or organomegaly. Normal bowel sounds.",
+      "Assessment of vital signs including temperature": "Temperature 98.8°F, BP 144/88, HR 82, SpO2 97%. Patient appears mildly uncomfortable but not toxic.",
+      "Inspection for other areas of skin infection": "No other obvious areas of active skin infection. Some evidence of prior diabetic skin changes on lower extremities.",
+      "Urethral meatus examination": "Normal appearance, no discharge, no erythema or swelling.",
+      "Assessment of scrotal elevation (negative Prehn's sign)": "Elevating the scrotum does not provide significant pain relief, helping to rule out epididymitis.",
+      "Transillumination test": "No transillumination of scrotal contents, ruling out hydrocele or other fluid collections."
     },
     "ddxTargets": [
-        "Scrotal Cellulitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Scrotal Cellulitis (correct diagnosis)",
+      "Epididymitis",
+      "Orchitis",
+      "Testicular Torsion",
+      "Fournier's Gangrene",
+      "Scrotal Abscess",
+      "Incarcerated Inguinal Hernia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Scrotal Cellulitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Scrotal Cellulitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Scrotal Cellulitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on diabetes routine visit and missing the acute urologic emergency, or focusing only on diabetic complications rather than the presenting scrotal symptoms",
+      "prematureClosure": "May stop at simple cellulitis without considering more serious conditions like Fournier's gangrene, especially given patient's diabetes and immunocompromised state",
+      "availabilityBias": "Recent cases of epididymitis or testicular torsion may lead to premature focus on these diagnoses rather than considering skin and soft tissue infection"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed James Crawford's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Scrotal Cellulitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This 55-year-old diabetic male presents with scrotal pain and erythema. What are your thoughts about the most concerning diagnoses you need to rule out first, particularly given his diabetes and immunocompromised state? How will your history help you differentiate between testicular pathology versus skin and soft tissue infection?",
+      "phase5": "Based on your history and physical examination findings, how do the physical exam findings help you narrow your differential diagnosis? What specific features help you distinguish cellulitis from more serious conditions like Fournier's gangrene or testicular pathology? What additional risk factors does this patient have?",
+      "finalDebrief": "This case demonstrates scrotal cellulitis in a diabetic patient. Notice how the key differentiating features were the superficial skin involvement, absence of deep testicular tenderness, negative Prehn's sign, and lack of systemic toxicity. The patient's diabetes puts him at higher risk for skin and soft tissue infections and potentially more serious complications like necrotizing fasciitis, making prompt recognition and treatment crucial."
     }
-}
+  }
 };

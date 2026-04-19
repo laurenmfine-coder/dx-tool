@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Amira Hassan",
-  "patientHPI": "My parents got some dip from the food bank and gave it to me, but they couldn't read the label since it was only in English, and now my face is swelling and I can't breathe right. We didn't know it had sesame in it, which I'm not supposed to have.",
+      "patientHPI": "My parents got some dip from the food bank and gave it to me, but they couldn't read the label since it was only in English, and now my face is swelling and I can't breathe right. We didn't know it had sesame in it, which I'm not supposed to have.",
       "dob": "02/23/2018",
       "age": "8",
       "sex": "Female",
@@ -1168,140 +1168,147 @@ window.EMR_DATA = {
       "Food security",
       "Family uses food bank — limited control over ingredients"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "EAACI-Anaph-2021",
-    "title": "EAACI guidelines: Anaphylaxis (2021 update)",
-    "authors": "Muraro A, Worm M, Alviani C, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15032",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
-    "openAccess": true,
-    "validates": [
-      "Discharge planning with EpiPen",
-      "Patient action plans",
-      "Allergist referral 4-6 weeks"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "EAACI-Anaph-2021",
+      "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+      "authors": "Muraro A, Worm M, Alviani C, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15032",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+      "openAccess": true,
+      "validates": [
+        "Discharge planning with EpiPen",
+        "Patient action plans",
+        "Allergist referral 4-6 weeks"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Amira Hassan is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Amira appears visibly distressed with facial swelling and labored breathing, speaking in short phrases due to respiratory distress. She is cooperative but frightened, frequently looking to her parents who appear anxious and communicate primarily through gestures due to language barriers.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me what you ate before you started feeling sick?",
+      "When did you first notice your face starting to swell?",
+      "Are you having trouble breathing or does your chest feel tight?",
+      "Does your throat feel scratchy or like it's closing up?",
+      "Are you feeling itchy anywhere on your body?",
+      "Have you had a reaction like this before?",
+      "Do you have an EpiPen or epinephrine injector?",
+      "Did anyone give you any medicine before coming to the hospital?",
+      "Are you feeling dizzy or lightheaded?",
+      "Is your stomach hurting or do you feel like throwing up?",
+      "What allergies do you have that you know about?",
+      "What medicines do you usually take?",
+      "Has anyone in your family had allergic reactions like this?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Albuterol; Diphenhydramine; Dexamethasone.'",
-        "allergies": "'My allergies: Sesame, Eggs.'",
-        "family": "Father: asthma  Mother: sesame allergy",
-        "social": "Living: Recent immigrant family from Syria \u2014 in US 2 years  Language: Parents speak Arabic only \u2014 patient speaks English learned at school  Diet: Middle Eastern diet heavy in sesame/tahini \u2014 major dietary disruption  Religion: Muslim \u2014 halal dietary requirements intersect with allergy avoidance  School: 3rd grade \u2014 504 plan in place"
+      "default": "I don't understand... my face feels puffy and it's hard to breathe",
+      "onset": "My lips started getting big maybe 20 minutes after I ate the hummus, then my face got puffy and I started wheezing",
+      "character": "My face feels really swollen and tight, and when I breathe it sounds wheezy like when my asthma gets bad",
+      "location": "My whole face is puffy, especially around my eyes and lips, and my chest feels tight",
+      "severity": "It's really scary, like 8 out of 10. I can't breathe good and my face looks weird",
+      "aggravating": "It keeps getting worse even though we came to the hospital. Moving around makes me more out of breath",
+      "relieving": "Nothing is helping. Mama and Baba are really scared and I don't know what to do",
+      "associated": "I'm really itchy on my arms and my tummy hurts a little. I feel kind of dizzy when I stand up",
+      "denies": "I'm not throwing up and I don't have a rash everywhere, just some red bumps on my arms",
+      "history": "I had this happen once before when I was little and ate something with sesame. That's why I'm supposed to stay away from sesame stuff",
+      "medications": "Epinephrine; Albuterol; Diphenhydramine; Dexamethasone",
+      "allergies": "Sesame, Eggs",
+      "family": "My mama is allergic to sesame too, and my baba has asthma like me",
+      "social": "I'm in third grade and we moved here from Syria. My parents don't speak English very well and sometimes the food from the food bank has labels they can't read"
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect face and lips for angioedema",
+      "Examine oropharynx and assess for laryngeal edema",
+      "Auscultate lungs for wheezing or stridor",
+      "Inspect skin for urticaria or flushing",
+      "Assess heart rate and rhythm",
+      "Check blood pressure for hypotension",
+      "Evaluate capillary refill and peripheral perfusion",
+      "Assess mental status and level of distress",
+      "Examine neck for lymphadenopathy or swelling",
+      "Palpate abdomen for tenderness or organomegaly"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect face and lips for angioedema": "Significant periorbital and lip swelling with facial puffiness, most pronounced around eyes and mouth",
+      "Examine oropharynx and assess for laryngeal edema": "Mild tongue swelling visible, no obvious uvular swelling, voice slightly muffled but no stridor",
+      "Auscultate lungs for wheezing or stridor": "Bilateral expiratory wheezing throughout lung fields, no stridor, decreased air entry",
+      "Inspect skin for urticaria or flushing": "Scattered urticarial lesions on bilateral arms, generalized erythema of face and neck",
+      "Assess heart rate and rhythm": "Tachycardic at 142 bpm, regular rhythm, no murmurs",
+      "Check blood pressure for hypotension": "Hypotensive at 88/52 mmHg, consistent with distributive shock",
+      "Evaluate capillary refill and peripheral perfusion": "Capillary refill 3-4 seconds, hands feel cool, pulses present but weak",
+      "Assess mental status and level of distress": "Alert and oriented, visibly anxious, using accessory muscles for breathing",
+      "Examine neck for lymphadenopathy or swelling": "No lymphadenopathy, no obvious neck swelling or masses",
+      "Palpate abdomen for tenderness or organomegaly": "Soft, non-tender, no organomegaly, bowel sounds present"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Anaphylaxis secondary to sesame exposure (correct diagnosis)",
+      "Severe asthma exacerbation",
+      "Angioedema (hereditary or acquired)",
+      "Septic shock",
+      "Cardiogenic shock",
+      "Acute allergic reaction without anaphylaxis",
+      "Upper airway obstruction"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on known asthma history and treating as isolated asthma exacerbation rather than recognizing multi-system anaphylactic reaction",
+      "prematureClosure": "May focus solely on respiratory symptoms and miss cardiovascular involvement (hypotension) that defines anaphylaxis",
+      "availabilityBias": "Language barriers and food insecurity may distract from immediate life-threatening allergic reaction requiring emergent treatment"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Amira Hassan: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This 8-year-old has known allergies and presents with respiratory distress after food exposure. What key system-based questions will help you differentiate between an isolated allergic reaction versus anaphylaxis? Consider what makes anaphylaxis life-threatening.",
+      "phase5": "You've identified facial swelling, wheezing, and hypotension in a child with known sesame allergy after exposure. How do these findings fit together, and what does the blood pressure tell you about the severity? What's your next immediate step?",
+      "finalDebrief": "This case demonstrates classic anaphylaxis with multi-system involvement. Notice how the combination of cutaneous (angioedema, urticaria), respiratory (wheezing), and cardiovascular (hypotension) symptoms after known allergen exposure clinched the diagnosis. The social determinants - language barriers and food insecurity - contributed to the exposure but shouldn't delay recognition of this medical emergency."
     }
-}
+  }
 };

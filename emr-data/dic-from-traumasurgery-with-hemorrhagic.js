@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Robinson",
-  "patientHPI": "I was riding my motorcycle when an SUV hit me, and I remember flying through the air before everything went black for a moment. My right leg is in terrible pain and I could see bone sticking out with a lot of blood, but the paramedics put something tight around my leg to stop the bleeding. I'm scared about what this means for my leg and whether I'll be able to walk normally again.",
+    "patientHPI": "I was riding my motorcycle when an SUV hit me, and I remember flying through the air before everything went black for a moment. My right leg is in terrible pain and I could see bone sticking out with a lot of blood, but the paramedics put something tight around my leg to stop the bleeding. I'm scared about what this means for my leg and whether I'll be able to walk normally again.",
     "dob": "10/30/1982",
     "age": 42,
     "sex": "Male",
@@ -123,7 +123,7 @@ window.EMR_DATA = {
       "spo2": "98%",
       "wt": "222 lbs",
       "ht": "5'11\"",
-      "bmi": 31.0,
+      "bmi": 31,
       "setting": "PCP Office"
     }
   ],
@@ -166,37 +166,133 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "16.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "9.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "27.6", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "Platelet Count", "value": "112", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "16.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "9.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "27.6",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "112",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COAGULATION PANEL",
           "results": [
-            { "test": "PT", "value": "16.2", "unit": "seconds", "range": "11.0-13.5", "flag": "H" },
-            { "test": "INR", "value": "1.4", "unit": "", "range": "0.8-1.1", "flag": "H" },
-            { "test": "aPTT", "value": "42", "unit": "seconds", "range": "25-35", "flag": "H" },
-            { "test": "Fibrinogen", "value": "148", "unit": "mg/dL", "range": "200-400", "flag": "L" },
-            { "test": "D-Dimer", "value": "8.4", "unit": "µg/mL FEU", "range": "<0.5", "flag": "H" }
+            {
+              "test": "PT",
+              "value": "16.2",
+              "unit": "seconds",
+              "range": "11.0-13.5",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "1.4",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "aPTT",
+              "value": "42",
+              "unit": "seconds",
+              "range": "25-35",
+              "flag": "H"
+            },
+            {
+              "test": "Fibrinogen",
+              "value": "148",
+              "unit": "mg/dL",
+              "range": "200-400",
+              "flag": "L"
+            },
+            {
+              "test": "D-Dimer",
+              "value": "8.4",
+              "unit": "µg/mL FEU",
+              "range": "<0.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "142", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "24", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "Potassium", "value": "5.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Lactate", "value": "4.8", "unit": "mmol/L", "range": "0.5-2.0", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "24",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Lactate",
+              "value": "4.8",
+              "unit": "mmol/L",
+              "range": "0.5-2.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "HEMOLYSIS MARKERS",
           "results": [
-            { "test": "LDH", "value": "420", "unit": "U/L", "range": "140-280", "flag": "H" },
-            { "test": "Haptoglobin", "value": "18", "unit": "mg/dL", "range": "30-200", "flag": "L" }
+            {
+              "test": "LDH",
+              "value": "420",
+              "unit": "U/L",
+              "range": "140-280",
+              "flag": "H"
+            },
+            {
+              "test": "Haptoglobin",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "30-200",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -257,15 +353,42 @@ window.EMR_DATA = {
     "Paternal uncle: DVT at age 50"
   ],
   "socialHistory": [
-    ["Occupation", "Electrician"],
-    ["Marital", "Married, 2 children (ages 10 and 7)"],
-    ["Tobacco", "Former smoker — 5 pack-years; quit 2019"],
-    ["Alcohol", "Social, 2-3 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Gym 2x/week; recreational motorcycle riding"],
-    ["Housing", "Lives with wife and children in single-family home"],
-    ["Safety", "Wears helmet for motorcycle; seatbelt in car"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Electrician"
+    ],
+    [
+      "Marital",
+      "Married, 2 children (ages 10 and 7)"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 5 pack-years; quit 2019"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Gym 2x/week; recreational motorcycle riding"
+    ],
+    [
+      "Housing",
+      "Lives with wife and children in single-family home"
+    ],
+    [
+      "Safety",
+      "Wears helmet for motorcycle; seatbelt in car"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "dic-from-traumasurgery-with-hemorrhagic",
@@ -276,75 +399,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Derek Robinson appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Derek is anxious and frightened, speaking in rushed sentences about the motorcycle accident. He's cooperative but clearly in distress, wincing frequently and expressing fear about bleeding and whether he'll be okay.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened in the motorcycle accident?",
+      "How much blood did you lose at the scene?",
+      "Are you having any unusual bleeding from your gums, nose, or other sites?",
+      "Have you noticed any unusual bruising or skin changes?",
+      "Are you experiencing any chest pain or difficulty breathing?",
+      "Have you had any nausea, vomiting, or abdominal pain?",
+      "Are you feeling dizzy, lightheaded, or confused?",
+      "Have you had any similar bleeding problems in the past?",
+      "Do you take any blood thinners or medications that affect clotting?",
+      "Has anyone in your family had bleeding disorders or clotting problems?",
+      "How long ago did the accident occur?",
+      "Have you noticed any changes in your urine color?",
+      "Are you having any numbness or tingling anywhere?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I was riding my motorcycle when an SUV hit me, and I remember flying through the.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Disseminated Intravascular Coagulation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 10mg daily; Ibuprofen 600mg TID PRN; Multivitamin daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: HTN, T2DM, alive at 66  Father: Sickle cell trait carrier, HTN, alive at 68  Brother: Healthy, age 38",
-        "social": "Occupation: Electrician  Marital: Married, 2 children (ages 10 and 7)  Tobacco: Former smoker \u2014 5 pack-years; quit 2019  Alcohol: Social, 2-3 beers on weekends  Drugs: Denies"
+      "default": "I'm sorry, I'm having trouble focusing right now - could you ask that again? I'm really worried about all this bleeding.",
+      "onset": "The accident happened about 2 hours ago. I was thrown from my bike when the SUV hit me, and I think I blacked out briefly.",
+      "character": "The leg pain is excruciating, like nothing I've ever felt. But I'm more scared about all the bleeding - it seems like it won't stop.",
+      "location": "My right leg is the worst - that's where the bone is sticking out. But I'm noticing bleeding from my IV site and my gums feel weird.",
+      "severity": "The pain is definitely a 9 out of 10, but the bleeding is what's really scaring me. I feel weak and dizzy.",
+      "aggravating": "Any movement makes the leg pain worse, and I feel more lightheaded when I try to sit up.",
+      "relieving": "The tourniquet helped with the leg bleeding initially, but nothing seems to be helping now.",
+      "associated": "I feel really weak and dizzy, my heart is racing, and I noticed my gums started bleeding when I was in the ambulance.",
+      "denies": "No chest pain, but I am short of breath. No abdominal pain, but I feel nauseous. No headache.",
+      "history": "I've never had anything like this before. I've never had problems with bleeding or bruising easily.",
+      "medications": "Lisinopril 10mg daily; Ibuprofen 600mg TID PRN; Multivitamin daily",
+      "allergies": "NKDA",
+      "family": "My dad has sickle cell trait like me, but no bleeding problems in the family. Mom and dad both have high blood pressure.",
+      "social": "I'm an electrician, married with two kids. I quit smoking in 2019 after 5 pack-years. I only drink socially on weekends, no drugs."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "Inspection of skin for petechiae and ecchymoses",
+      "Assessment of IV insertion sites for bleeding",
+      "Examination of oral mucosa and gums",
+      "Palpation for organomegaly",
+      "Neurologic assessment including mental status",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Assessment of extremity perfusion and pulses",
+      "Inspection of urine if catheterized",
+      "Assessment of wound bleeding and clot formation"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Disseminated Intravascular Coagulation. Document specifically what you observe."
+      "Inspection of skin for petechiae and ecchymoses": "Multiple petechiae on chest and arms, large ecchymoses around fracture site extending beyond expected trauma pattern",
+      "Assessment of IV insertion sites for bleeding": "Active oozing from both IV sites despite proper insertion, blood not clotting normally",
+      "Examination of oral mucosa and gums": "Spontaneous gingival bleeding, mucosal petechiae on buccal surfaces",
+      "Palpation for organomegaly": "No hepatosplenomegaly appreciated",
+      "Neurologic assessment including mental status": "Alert but anxious, no focal deficits, slightly confused about time",
+      "Cardiovascular examination": "Tachycardic, hypotensive, weak pulses, no murmurs appreciated",
+      "Pulmonary examination": "Tachypneic, clear to auscultation bilaterally, no acute distress",
+      "Assessment of extremity perfusion and pulses": "Cool extremities, delayed capillary refill >3 seconds, weak distal pulses",
+      "Inspection of urine if catheterized": "Dark amber urine with trace hematuria",
+      "Assessment of wound bleeding and clot formation": "Fracture site continues to ooze despite pressure, clots appear friable and break down easily"
     },
     "ddxTargets": [
-        "Disseminated Intravascular Coagulation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Disseminated Intravascular Coagulation (Trauma-Induced with Hemorrhagic Complications) (correct diagnosis)",
+      "Acute blood loss anemia secondary to trauma",
+      "Thrombocytopenia (trauma-induced or idiopathic)",
+      "Fat embolism syndrome",
+      "Acute compartment syndrome",
+      "Primary coagulopathy (hemophilia, von Willebrand disease)",
+      "Medication-induced bleeding (ibuprofen-related)"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Disseminated Intravascular Coagulation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Disseminated Intravascular Coagulation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Disseminated Intravascular Coagulation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on obvious tibial fracture and missing systemic coagulopathy - the dramatic orthopedic injury may overshadow subtle signs of DIC",
+      "prematureClosure": "May stop at 'trauma with blood loss' without recognizing the pathologic bleeding pattern suggesting consumption coagulopathy",
+      "availabilityBias": "Recent cases of simple trauma may lead to overlooking complex hematologic complications of severe injury"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Derek Robinson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Disseminated Intravascular Coagulation (Trauma-Induced with Hemorrhagic Complications). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview the patient, consider this: What makes bleeding 'pathologic' versus expected blood loss from trauma? What patterns would suggest a systemic coagulopathy rather than simple hemorrhage?",
+      "phase5": "You've identified concerning bleeding patterns beyond the fracture site. What laboratory studies would help differentiate between different causes of coagulopathy? How does the timeline and mechanism connect to your differential?",
+      "finalDebrief": "This case illustrates how major trauma can trigger DIC through tissue factor release and consumption of clotting factors. How did the pattern of bleeding - spontaneous gingival bleeding, IV site oozing, and poor clot formation - point you toward systemic coagulopathy rather than simple blood loss?"
     }
-}
+  }
 };

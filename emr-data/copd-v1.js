@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Bernard Collins",
-  "patientHPI": "My breathing has been getting worse over the past three days, and my cough is bringing up more junk than usual. I know I have lung problems from smoking, but this feels different - I'm more short of breath than normal even when I'm just sitting around the house.",
+    "patientHPI": "My breathing has been getting worse over the past three days, and my cough is bringing up more junk than usual. I know I have lung problems from smoking, but this feels different - I'm more short of breath than normal even when I'm just sitting around the house.",
     "dob": "02/26/1955",
     "age": "71",
     "sex": "Male",
@@ -322,75 +322,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Bernard Collins appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Mr. Collins appears anxious and mildly distressed, sitting forward slightly to ease his breathing. He is cooperative and forthcoming about his symptoms but occasionally pauses mid-sentence to catch his breath. He acknowledges his long smoking history with some defensiveness but expresses genuine concern that this episode feels different from his usual COPD flares.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did worsening cough and dyspnea for 3 days start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when these symptoms started and how they've progressed?",
+      "What does your cough sound like and what are you bringing up?",
+      "How does this compare to your usual COPD symptoms?",
+      "Have you had any fever, chills, or night sweats?",
+      "Are you having any chest pain or chest tightness?",
+      "How much can you walk before getting short of breath now compared to usual?",
+      "Have you been using your rescue inhaler more than normal?",
+      "Any recent changes in your medications or missed doses?",
+      "Have you been around anyone who's been sick recently?",
+      "Any leg swelling, weight gain, or changes in appetite?",
+      "How has your sleep been affected?",
+      "Any nausea, vomiting, or changes in bowel movements?",
+      "Have you traveled anywhere recently or been exposed to unusual dust or fumes?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My breathing has been getting worse over the past three days, and my cough is br.'",
-        "character": "'It's worsening cough and dyspnea for 3 days \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Tiotropium; Fluticasone/Salmeterol; Albuterol; Amlodipine; Prednisone.'",
-        "allergies": "'My allergies are Codeine.'",
-        "family": "Non-contributory",
-        "social": "Tobacco: Current, 45 pack-years  Oxygen: Home O2 2L NC at night  Occupation: Retired mechanic"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently?",
+      "onset": "It started about three days ago and has been getting progressively worse each day. At first I thought it was just my usual lung problems acting up, but it's definitely gotten worse than my normal bad days.",
+      "character": "The cough is deeper and more frequent than usual, and I'm bringing up thick yellow-green mucus that's definitely more than normal. My breathing feels tight and labored even when I'm sitting still.",
+      "location": "The breathing difficulty is all through my chest, and I have this tight feeling across my whole chest area. No specific pain shooting anywhere else.",
+      "severity": "I'd say the breathing is about a 7 out of 10 - it's definitely worse than my usual 4 or 5. I can barely walk to the bathroom without getting winded, and normally I can at least get around the house okay.",
+      "aggravating": "Any movement makes it worse, even just getting up from a chair. Lying flat is really hard - I've been sleeping in my recliner for two nights now.",
+      "relieving": "My albuterol inhaler helps a little bit but not nearly as much as it usually does. The oxygen at night helps some, but I've been needing it during the day too.",
+      "associated": "I've had some low-grade fever and chills, feel more tired than usual, and my appetite has been poor. I've also noticed my heart seems to be beating faster.",
+      "denies": "No chest pain like a heart attack, no leg swelling, no blood in what I'm coughing up, and no sudden onset - it's been gradual over three days.",
+      "history": "I have flare-ups of my COPD maybe 2-3 times a year, but this feels worse and different. Usually my inhaler works better and I don't get the fever and colored sputum like this.",
+      "medications": "Tiotropium; Fluticasone/Salmeterol; Albuterol; Amlodipine; Prednisone",
+      "allergies": "Codeine",
+      "family": "Nothing really runs in my family that would relate to this - my parents both lived to their 80s without major lung problems.",
+      "social": "I'm a retired mechanic, been smoking about a pack and a half daily for over 30 years. I know I should quit but it's hard. I use oxygen at home at night, 2 liters through a nasal cannula. No recent travel or unusual exposures."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "General appearance and respiratory distress assessment",
+      "Pulmonary auscultation",
+      "Percussion of chest",
+      "Assessment of accessory muscle use",
+      "Cardiac auscultation",
+      "Lower extremity edema assessment",
+      "Jugular venous pressure assessment",
+      "Lymph node examination",
+      "Abdominal examination",
+      "Neurologic assessment including mental status"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "General appearance and respiratory distress assessment": "Appears mildly distressed, sitting upright, using pursed-lip breathing, speaking in short phrases due to dyspnea",
+      "Pulmonary auscultation": "Decreased breath sounds bilaterally with expiratory wheeze and scattered rhonchi throughout, particularly in bilateral lower lobes",
+      "Percussion of chest": "Hyperresonant to percussion consistent with underlying emphysema, no dullness to suggest consolidation",
+      "Assessment of accessory muscle use": "Mild use of accessory muscles of respiration, intercostal retractions present",
+      "Cardiac auscultation": "Tachycardic regular rhythm, no murmurs, rubs, or gallops appreciated",
+      "Lower extremity edema assessment": "No peripheral edema, pulses intact bilaterally",
+      "Jugular venous pressure assessment": "JVP not elevated, no signs of right heart failure",
+      "Lymph node examination": "No cervical, supraclavicular, or axillary lymphadenopathy",
+      "Abdominal examination": "Soft, non-tender, no organomegaly or masses",
+      "Neurologic assessment including mental status": "Alert and oriented, no focal neurologic deficits, appropriate affect"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "COPD exacerbation with bacterial superinfection (correct diagnosis)",
+      "Pneumonia",
+      "Congestive heart failure exacerbation",
+      "Pulmonary embolism",
+      "Pneumothorax",
+      "Acute bronchitis",
+      "Lung cancer with post-obstructive pneumonia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on known COPD diagnosis and missing bacterial superinfection or other serious causes of acute decompensation in this high-risk patient",
+      "prematureClosure": "May stop at 'COPD flare' without considering infectious etiology given fever, purulent sputum, and poor response to usual bronchodilator therapy",
+      "availabilityBias": "Recent experience with simple COPD exacerbations may lead to under-recognition of the infectious component requiring antibiotic therapy"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Bernard Collins's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given that this is a 71-year-old with severe COPD presenting with acute worsening, what key historical features would help you distinguish between a simple exacerbation versus one requiring additional intervention? What red flags might suggest a more serious process?",
+      "phase5": "Nice work gathering the history and exam. You found fever, purulent sputum production, and poor response to his usual bronchodilator. How does this clinical picture help refine your differential diagnosis? What does the combination of his underlying COPD with these acute infectious signs suggest for management?",
+      "finalDebrief": "This case illustrates a classic COPD exacerbation with bacterial superinfection. The key distinguishing features from a simple exacerbation were the fever, change in sputum character to purulent, and inadequate response to bronchodilators. This combination in a severe COPD patient indicates need for both bronchodilator optimization and antibiotic therapy. How might you approach antibiotic selection and what other supportive measures would you consider?"
     }
-}
+  }
 };

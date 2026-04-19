@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Esperanza Ruiz",
-  "patientHPI": "I just had surgery a few days ago, and now I'm bleeding from everywhere - my incision won't stop oozing, blood keeps coming from where they put my IV in, and even my catheter has blood in it. The nurses keep changing my bandages but nothing seems to be clotting like it should, and I'm really scared because this isn't normal.",
+    "patientHPI": "I just had surgery a few days ago, and now I'm bleeding from everywhere - my incision won't stop oozing, blood keeps coming from where they put my IV in, and even my catheter has blood in it. The nurses keep changing my bandages but nothing seems to be clotting like it should, and I'm really scared because this isn't normal.",
     "dob": "11/16/1966",
     "age": "60",
     "sex": "Female",
@@ -357,75 +357,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Esperanza Ruiz appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Esperanza appears anxious and frightened, speaking in a worried tone about the persistent bleeding that won't stop despite medical interventions. She is cooperative and forthcoming with information, clearly distressed by the alarming nature of her symptoms and seeking reassurance that this can be fixed.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did surgical team: 'patient is oozing from everywhere \u2014 wound, iv sites, ng tube. blood isn't clotting.' diffuse \u2014 bleeding from surgical wound, peripheral iv insertion sites, nasogastric tube, foley catheter (hematuria) start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did you first notice the bleeding starting after your surgery?",
+      "Can you describe what the bleeding looks like - is it oozing slowly or more active?",
+      "Have you ever had problems with bleeding or bruising before this surgery?",
+      "What surgery did you have and when exactly was it performed?",
+      "Have you received any blood products or transfusions recently?",
+      "Are you experiencing any chest pain, shortness of breath, or dizziness?",
+      "Have you noticed any new bruising or petechiae on your skin?",
+      "Did you take any blood thinners or aspirin before your surgery?",
+      "Have you had any recent infections or felt feverish?",
+      "Are you experiencing any abdominal pain or nausea?",
+      "Have you noticed the bleeding getting worse or staying the same?",
+      "Did anyone in your family ever have problems with bleeding during surgery?",
+      "Have you been eating and drinking normally since your surgery?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I just had surgery a few days ago, and now I'm bleeding from everywhere - my inc.'",
-        "character": "'It's surgical team: 'patient is oozing from everywhere \u2014 wound, iv sites, ng tube. blood isn't clotting.' diffuse \u2014 bleeding from surgical wound, peripheral iv insertion sites, nasogastric tube, foley catheter (hematuria) \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take None routine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "No bleeding disorders  No clotting disorders",
-        "social": "Tobacco: Social  Alcohol: Occasional  Drugs: Denies  Occupation: Construction worker  Living: Lives with girlfriend"
+      "default": "I'm not sure what you mean by that - can you ask it differently? I'm just really worried about all this bleeding.",
+      "onset": "It started about 12 hours ago, maybe yesterday evening. At first I thought it was normal after surgery, but then it just kept getting worse and wouldn't stop.",
+      "character": "It's like a steady oozing that won't clot. Even when they put pressure on it, it starts bleeding again as soon as they let go. It's not spurting, just constant seeping.",
+      "location": "It's coming from my surgical incision on my abdomen, both IV sites on my arms, around my nose tube, and there's blood in my urine from the catheter.",
+      "severity": "I'd say it's really scary, maybe an 8 out of 10 for how worried I am. I can't do anything because I'm bleeding from so many places.",
+      "aggravating": "Any movement or touching seems to make it worse. Even gentle pressure doesn't seem to help it clot.",
+      "relieving": "Nothing seems to help. The nurses keep changing bandages and applying pressure, but it just keeps bleeding.",
+      "associated": "I feel really weak and dizzy, and I'm cold. My heart feels like it's racing, and I'm short of breath.",
+      "denies": "No chest pain, no severe abdominal pain beyond the surgical site, no headache, no vision changes.",
+      "history": "Never had anything like this before. I've had minor cuts that healed normally, never had surgery before this one.",
+      "medications": "None routine",
+      "allergies": "NKDA",
+      "family": "No bleeding disorders in my family, no clotting disorders that I know of. My parents and siblings never had problems with surgery.",
+      "social": "I work construction, so I'm used to minor cuts and bruises that heal fine. I smoke socially on weekends, drink occasionally with friends, no drugs. I live with my girlfriend who's been really worried."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect surgical wound",
+      "Assess IV insertion sites",
+      "Check for petechiae and ecchymoses",
+      "Examine mucous membranes",
+      "Palpate for hepatosplenomegaly",
+      "Assess mental status and neurological function",
+      "Evaluate skin temperature and capillary refill",
+      "Auscultate heart and lung sounds",
+      "Check for lymphadenopathy",
+      "Assess for signs of volume depletion"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect surgical wound": "Abdominal incision with continuous oozing of blood, unable to achieve hemostasis despite pressure dressing",
+      "Assess IV insertion sites": "Active bleeding from bilateral antecubital IV sites with hematoma formation",
+      "Check for petechiae and ecchymoses": "Scattered petechiae on arms and trunk, multiple ecchymoses at venipuncture sites",
+      "Examine mucous membranes": "Pale conjunctiva and mucous membranes, oozing from gum line",
+      "Palpate for hepatosplenomegaly": "No hepatosplenomegaly appreciated, abdomen tender at surgical site",
+      "Assess mental status and neurological function": "Alert but anxious, no focal neurological deficits",
+      "Evaluate skin temperature and capillary refill": "Cool, clammy skin with delayed capillary refill >3 seconds",
+      "Auscultate heart and lung sounds": "Tachycardic with regular rhythm, lungs clear to auscultation bilaterally",
+      "Check for lymphadenopathy": "No significant lymphadenopathy palpated",
+      "Assess for signs of volume depletion": "Hypotensive, tachycardic, poor skin turgor, dry mucous membranes"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Disseminated Intravascular Coagulation (DIC) (correct diagnosis)",
+      "Dilutional coagulopathy from massive transfusion",
+      "Medication-induced coagulopathy",
+      "Acute leukemia with thrombocytopenia",
+      "Thrombotic thrombocytopenic purpura (TTP)",
+      "Surgical bleeding with inadequate hemostasis",
+      "Platelet dysfunction disorder"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'surgical bleeding' and missing the systemic coagulopathy affecting multiple sites simultaneously",
+      "prematureClosure": "May focus only on surgical complications without considering underlying consumptive coagulopathy triggered by trauma and surgery",
+      "availabilityBias": "Common surgical bleeding may overshadow recognition of the pathognomonic pattern of diffuse bleeding from multiple sites characteristic of DIC"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Esperanza Ruiz's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has concerning diffuse bleeding after surgery. What systemic conditions could cause bleeding from multiple unrelated sites simultaneously? Think about what might be triggered by major trauma and surgical stress.",
+      "phase5": "You've identified diffuse bleeding from multiple sites with signs of shock. What laboratory studies would help distinguish between different coagulopathies? Consider what processes consume clotting factors and platelets.",
+      "finalDebrief": "This case illustrates DIC triggered by splenic trauma and surgery. The key was recognizing the pattern of diffuse bleeding from multiple sites, not just surgical bleeding. How did the combination of consumed clotting factors, thrombocytopenia, and paradoxical fibrinolysis create this clinical picture?"
     }
-}
+  }
 };

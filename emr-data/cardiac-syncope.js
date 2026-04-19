@@ -184,28 +184,100 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "54", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.4", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "54",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.4",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            { "test": "BNP", "value": "482", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "BNP",
+              "value": "482",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "38.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "188", "unit": "K/uL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "188",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -230,12 +302,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-9218", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Pfizer)", "date": "09/2025", "site": "Right deltoid IM", "lot": "CV25-2218", "mfr": "Pfizer" },
-    { "vaccine": "Prevnar 20", "date": "04/2024", "site": "Left deltoid IM", "lot": "PV20-822", "mfr": "Pfizer" },
-    { "vaccine": "Shingrix (1/2)", "date": "06/2023", "site": "Right deltoid IM", "lot": "SX23-348", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "08/2023", "site": "Right deltoid IM", "lot": "SX23-504", "mfr": "GSK" },
-    { "vaccine": "Tdap", "date": "05/2021", "site": "Left deltoid IM", "lot": "TD21-322", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9218",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Pfizer)",
+      "date": "09/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2218",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "04/2024",
+      "site": "Left deltoid IM",
+      "lot": "PV20-822",
+      "mfr": "Pfizer"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "06/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-348",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "08/2023",
+      "site": "Right deltoid IM",
+      "lot": "SX23-504",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "05/2021",
+      "site": "Left deltoid IM",
+      "lot": "TD21-322",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Father: Aortic stenosis requiring AVR at 72, deceased at 84 (CHF)",
@@ -244,15 +352,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 74"
   ],
   "socialHistory": [
-    ["Occupation", "Retired civil engineer; retired 2012"],
-    ["Marital", "Married 54 years"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "1 glass of red wine with dinner most evenings"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Previously walked 2 miles daily; now limited to half-block by dyspnea; uses cane for stability"],
-    ["Housing", "Two-story home with wife; bedroom on second floor — considering bedroom relocation to first floor"],
-    ["Safety", "Fall risk — uses cane; handrails on all stairs; no rugs; no firearms"],
-    ["Advance Directive", "Living will and DPOA completed; Full code; DPOA (wife Margaret)"]
+    [
+      "Occupation",
+      "Retired civil engineer; retired 2012"
+    ],
+    [
+      "Marital",
+      "Married 54 years"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "1 glass of red wine with dinner most evenings"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Previously walked 2 miles daily; now limited to half-block by dyspnea; uses cane for stability"
+    ],
+    [
+      "Housing",
+      "Two-story home with wife; bedroom on second floor — considering bedroom relocation to first floor"
+    ],
+    [
+      "Safety",
+      "Fall risk — uses cane; handrails on all stairs; no rugs; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "Living will and DPOA completed; Full code; DPOA (wife Margaret)"
+    ]
   ],
   "meta": {
     "caseId": "cardiac-syncope",
@@ -263,75 +398,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Arthur Livingston is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Arthur appears mildly anxious but cooperative, speaking in measured tones and providing detailed responses about his declining activity tolerance. He's clearly concerned about his worsening symptoms but maintains composure, occasionally pausing to catch his breath during longer explanations.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did syncope start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe what happened when you lost consciousness?",
+      "What were you doing just before you passed out?",
+      "How has your exercise tolerance changed recently?",
+      "Do you experience chest pain or pressure with activity?",
+      "Have you noticed any shortness of breath, especially with exertion?",
+      "Have you had any similar episodes of passing out before?",
+      "Do you ever feel dizzy or lightheaded when standing up?",
+      "Have you noticed any swelling in your legs or feet?",
+      "Are you taking all your medications as prescribed?",
+      "Do you have any known allergies to medications?",
+      "Has anyone in your family had heart valve problems?",
+      "Do you use tobacco, alcohol, or other substances?",
+      "Have you had any recent changes in your medications?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 79M with known severe AS (bicuspid valve) presents for interval echocardiogram a.'",
-        "character": "'It's syncope \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Cardiac Syncope.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 2.5mg daily; Rosuvastatin 10mg QHS; Allopurinol 200mg daily; Aspirin 81mg daily.'",
-        "allergies": "'My allergies are ACE Inhibitors (class).'",
-        "family": "Father: Aortic stenosis requiring AVR at 72, deceased at 84 (CHF)  Mother: Hypertension, alive at 98  Brother: Bicuspid aortic valve (incidental), alive at 76",
-        "social": "Occupation: Retired civil engineer; retired 2012  Marital: Married 54 years  Tobacco: Never smoker  Alcohol: 1 glass of red wine with dinner most evenings  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "The fainting spell happened three days ago. I was walking up the stairs to our bedroom when I suddenly felt very lightheaded and the next thing I knew, my wife was helping me up from the floor.",
+      "character": "It was sudden - no warning really. One moment I was climbing the stairs, feeling a bit winded, and then everything went black. I came to within a minute or two.",
+      "location": "The episode happened on our staircase. I don't have pain anywhere specific, but I do get short of breath with any kind of exertion now.",
+      "severity": "I'd say the impact on my life is about a 7 out of 10. I used to be very active, but now I get winded just walking to the mailbox. The fainting really scared my wife and me.",
+      "aggravating": "Any physical activity makes me short of breath now. Even light housework or walking more than a block leaves me gasping. Stairs are particularly difficult.",
+      "relieving": "Sitting down and resting helps with the shortness of breath. I haven't had another fainting episode since I've been more careful about not overexerting myself.",
+      "associated": "I've been getting more and more short of breath over the past six months. Sometimes I feel dizzy with exertion, and occasionally I get chest tightness when I push myself too hard.",
+      "denies": "No chest pain at rest, no palpitations, no swelling in my legs or feet, no nausea or vomiting with the episode, and no confusion after I came to.",
+      "history": "I've never fainted before this episode three days ago. I have been getting progressively more short of breath over the past six months, which my cardiologist has been monitoring.",
+      "medications": "Amlodipine 2.5mg daily; Rosuvastatin 10mg QHS; Allopurinol 200mg daily; Aspirin 81mg daily",
+      "allergies": "ACE Inhibitors (class)",
+      "family": "My father had severe aortic stenosis and needed a valve replacement when he was 72. He passed away at 84 from heart failure. My brother also has a bicuspid aortic valve, though his hasn't caused problems yet.",
+      "social": "I'm a retired civil engineer - retired in 2012. Been married 54 years to a wonderful woman. Never smoked cigarettes. I enjoy a glass of red wine with dinner most evenings. No illicit drugs."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Cardiac auscultation in all positions",
+      "Carotid pulse palpation and auscultation",
+      "Blood pressure measurement in both arms",
+      "Assessment for jugular venous distension",
+      "Pulmonary auscultation",
+      "Lower extremity edema assessment",
+      "Orthostatic vital signs",
+      "Apical impulse palpation",
+      "Assessment for hepatojugular reflux"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Cardiac Syncope. Document specifically what you observe."
+      "Cardiac auscultation in all positions": "Harsh 4/6 systolic ejection murmur best heard at right sternal border, radiating to carotids and apex. Murmur increases with squatting and decreases with Valsalva.",
+      "Carotid pulse palpation and auscultation": "Delayed, weak carotid upstroke bilaterally (pulsus tardus et parvus). Transmitted murmur heard over both carotid arteries.",
+      "Blood pressure measurement in both arms": "Right arm 104/72, Left arm 102/70 - narrow pulse pressure consistent with severe aortic stenosis",
+      "Assessment for jugular venous distension": "JVP estimated at 8 cm H2O, no obvious elevation",
+      "Pulmonary auscultation": "Clear to auscultation bilaterally, no rales or wheezes",
+      "Lower extremity edema assessment": "No peripheral edema, distal pulses present but weak",
+      "Orthostatic vital signs": "Supine 104/72 HR 58, Standing 98/68 HR 62 - mild orthostatic changes",
+      "Apical impulse palpation": "Sustained, laterally displaced apical impulse suggesting left ventricular hypertrophy",
+      "Assessment for hepatojugular reflux": "Negative hepatojugular reflux, liver not enlarged"
     },
     "ddxTargets": [
-        "Cardiac Syncope (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Cardiac Syncope (Exertional Syncope Secondary to Severe Aortic Stenosis — Bicuspid Valve, AVA 0.8 cm², Pending TAVR Evaluation) (correct diagnosis)",
+      "Hypertrophic Cardiomyopathy with Outflow Obstruction",
+      "Vasovagal Syncope",
+      "Complete Heart Block or High-Grade AV Block",
+      "Ventricular Tachycardia/Sudden Cardiac Death",
+      "Orthostatic Hypotension",
+      "Pulmonary Embolism"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Cardiac Syncope, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Cardiac Syncope, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Cardiac Syncope based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the patient's age and assuming syncope is simply due to orthostatic hypotension or medication effects, missing the critical cardiac etiology",
+      "prematureClosure": "Risk of stopping evaluation after finding known aortic stenosis without recognizing this represents progression to symptomatic severe disease requiring urgent intervention",
+      "availabilityBias": "Recent cases of vasovagal syncope or orthostatic hypotension might bias away from recognizing this as high-risk cardiac syncope requiring immediate cardiology evaluation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Arthur Livingston's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Cardiac Syncope (Exertional Syncope Secondary to Severe Aortic Stenosis \u2014 Bicuspid Valve, AVA 0.8 cm\u00b2, Pending TAVR Evaluation). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This elderly gentleman presents with syncope. Before you interview him, consider: What are the most concerning causes of syncope in his age group? How will you differentiate between cardiac, neurologic, and vasovagal etiologies? What red flags would indicate immediate life-threatening conditions?",
+      "phase5": "You've identified classic findings of severe aortic stenosis in a patient with exertional syncope. What does this constellation of findings tell you about disease progression and urgency? How does the family history of bicuspid valve disease and the physical exam findings change your risk stratification?",
+      "finalDebrief": "This case illustrates exertional syncope as a cardinal symptom of severe aortic stenosis - one of the classic triad indicating need for valve intervention. The combination of known bicuspid valve, family history, classic murmur with delayed carotid upstrokes, and exertional symptoms represents a surgical emergency. How did your differential evolve as you gathered more data about the exertional nature and cardiac findings?"
     }
-}
+  }
 };

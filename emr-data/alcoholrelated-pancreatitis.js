@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Terrence Jackson",
-  "patientHPI": "I'm still drinking heavily - about a pint of vodka and six beers a day - and I keep getting this terrible stomach pain that goes right through to my back, especially after I eat. Even with those enzyme pills you gave me, I'm still having problems with loose, fatty stools.",
+    "patientHPI": "I'm still drinking heavily - about a pint of vodka and six beers a day - and I keep getting this terrible stomach pain that goes right through to my back, especially after I eat. Even with those enzyme pills you gave me, I'm still having problems with loose, fatty stools.",
     "dob": "06/14/1978",
     "age": 46,
     "sex": "Male",
@@ -122,7 +122,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "158 lbs",
       "ht": "5'11\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     },
     {
@@ -189,41 +189,161 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "12", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.9", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "134", "unit": "mEq/L", "range": "136-145", "flag": "L" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Total Bilirubin", "value": "1.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "H" },
-            { "test": "Direct Bilirubin", "value": "0.6", "unit": "mg/dL", "range": "0-0.3", "flag": "H" },
-            { "test": "ALT (SGPT)", "value": "68", "unit": "U/L", "range": "7-56", "flag": "H" },
-            { "test": "AST (SGOT)", "value": "112", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "Alkaline Phosphatase", "value": "148", "unit": "U/L", "range": "44-147", "flag": "H" },
-            { "test": "Albumin", "value": "3.0", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.9",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "134",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Direct Bilirubin",
+              "value": "0.6",
+              "unit": "mg/dL",
+              "range": "0-0.3",
+              "flag": "H"
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "68",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": "H"
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "112",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "148",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            },
+            {
+              "test": "Albumin",
+              "value": "3.0",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.4", "unit": "%", "range": "38.3-48.6", "flag": "L" },
-            { "test": "MCV", "value": "104", "unit": "fL", "range": "80-100", "flag": "H" },
-            { "test": "Platelet Count", "value": "118", "unit": "x10³/µL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "104",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "H"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "118",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "PANCREATIC ENZYMES",
           "results": [
-            { "test": "Lipase", "value": "82", "unit": "U/L", "range": "0-160", "flag": "" },
-            { "test": "Amylase", "value": "48", "unit": "U/L", "range": "28-100", "flag": "" }
+            {
+              "test": "Lipase",
+              "value": "82",
+              "unit": "U/L",
+              "range": "0-160",
+              "flag": ""
+            },
+            {
+              "test": "Amylase",
+              "value": "48",
+              "unit": "U/L",
+              "range": "28-100",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "ADDITIONAL",
           "results": [
-            { "test": "GGT", "value": "286", "unit": "U/L", "range": "0-65", "flag": "H" },
-            { "test": "Prealbumin", "value": "12", "unit": "mg/dL", "range": "18-45", "flag": "L" }
+            {
+              "test": "GGT",
+              "value": "286",
+              "unit": "U/L",
+              "range": "0-65",
+              "flag": "H"
+            },
+            {
+              "test": "Prealbumin",
+              "value": "12",
+              "unit": "mg/dL",
+              "range": "18-45",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -291,15 +411,42 @@ window.EMR_DATA = {
     "Paternal uncle: Alcohol use disorder, pancreatitis, deceased at 50"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed; former warehouse worker — lost job due to absenteeism"],
-    ["Marital", "Divorced — 2020"],
-    ["Tobacco", "Current smoker — 1 PPD x 24 years (24 pack-years)"],
-    ["Alcohol", "Heavy daily use — approximately 1 pint vodka + 6 beers daily x 15+ years; prior detox x2 without sustained sobriety"],
-    ["Drugs", "Denies current; remote marijuana use"],
-    ["Exercise", "Sedentary"],
-    ["Housing", "Lives alone in efficiency apartment; sister checks on him weekly"],
-    ["Safety", "Falls risk when intoxicated; no firearms; no IPV"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Unemployed; former warehouse worker — lost job due to absenteeism"
+    ],
+    [
+      "Marital",
+      "Divorced — 2020"
+    ],
+    [
+      "Tobacco",
+      "Current smoker — 1 PPD x 24 years (24 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "Heavy daily use — approximately 1 pint vodka + 6 beers daily x 15+ years; prior detox x2 without sustained sobriety"
+    ],
+    [
+      "Drugs",
+      "Denies current; remote marijuana use"
+    ],
+    [
+      "Exercise",
+      "Sedentary"
+    ],
+    [
+      "Housing",
+      "Lives alone in efficiency apartment; sister checks on him weekly"
+    ],
+    [
+      "Safety",
+      "Falls risk when intoxicated; no firearms; no IPV"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "alcoholrelated-pancreatitis",
@@ -310,75 +457,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Terrence Jackson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Terrence appears visibly uncomfortable, holding his abdomen and shifting positions frequently. He's forthcoming about his drinking habits with minimal shame or defensiveness, though shows obvious distress from pain. His affect is somewhat flat, consistent with chronic illness and ongoing substance use.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did gi emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me more about when this pain started and how it's different from your usual discomfort?",
+      "On a scale of 1-10, how would you rate your current pain?",
+      "Does the pain go anywhere else besides your stomach?",
+      "What makes the pain better or worse?",
+      "Have you had any nausea or vomiting with this episode?",
+      "You mentioned loose, fatty stools - how long has this been going on?",
+      "Have you been taking your pancreatic enzymes as prescribed?",
+      "When was your last drink of alcohol?",
+      "Have you tried to cut back on drinking recently?",
+      "Any fever, chills, or feeling generally unwell?",
+      "Have you lost any weight recently?",
+      "Are you having any trouble breathing or chest pain?",
+      "Have you been eating normally despite the pain?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm still drinking heavily - about a pint of vodka and six beers a day - and I k.'",
-        "character": "'It's gi emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Alcohol-Related Acute Pancreatitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Omeprazole 40mg daily; Pancrelipase (Creon) 36,000 units TID; Folic acid 1mg daily; Thiamine 100mg daily; Multivitamin daily.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Mother: T2DM, hypertension, alive at 70  Father: Alcohol use disorder, cirrhosis, deceased at 56  Sister: Healthy, age 42",
-        "social": "Occupation: Unemployed; former warehouse worker \u2014 lost job due to absenteeism  Marital: Divorced \u2014 2020  Tobacco: Current smoker \u2014 1 PPD x 24 years (24 pack-years)  Alcohol: Heavy daily use \u2014 approximately 1 pint vodka + 6 beers daily x 15+ years; prior detox x2 without sustained sobriety  Drugs: Denies current; remote marijuana use"
+      "default": "I'm sorry, I'm having trouble focusing because of this pain. Can you ask that again?",
+      "onset": "This flare started about 2 days ago, but it's gotten much worse since last night. I've had chronic pain for years, but this is definitely an acute worsening.",
+      "character": "It's a deep, boring pain - like someone's drilling into me. It's constant and gnawing, different from the crampy pain I sometimes get.",
+      "location": "Right here in my upper belly, but it goes straight through to my back between my shoulder blades. Sometimes it feels like a band around my middle.",
+      "severity": "Right now it's about an 8 or 9 out of 10. I can barely sit still, and it's keeping me from sleeping or eating anything.",
+      "aggravating": "Eating makes it much worse, especially anything fatty. Lying flat on my back is unbearable. Even drinking seems to make it worse now.",
+      "relieving": "Leaning forward helps a little bit, or sitting hunched over. The pain pills from my last ER visit helped some, but I ran out.",
+      "associated": "I've been throwing up since yesterday - can't keep much down. The loose, greasy stools have been going on for months. I feel weak and dizzy when I stand up.",
+      "denies": "No chest pain, no shortness of breath, no blood in my vomit or stool that I've noticed. No fever that I know of.",
+      "history": "I've had similar episodes before - this is probably my fourth or fifth time in the ER for this kind of pain. Usually happens when I'm drinking more than usual or eating poorly.",
+      "medications": "Omeprazole 40mg daily; Pancrelipase (Creon) 36,000 units TID; Folic acid 1mg daily; Thiamine 100mg daily; Multivitamin daily",
+      "allergies": "NKDA",
+      "family": "My dad died from liver problems related to drinking when he was 56. My mom has diabetes and high blood pressure but she's still alive.",
+      "social": "I'm unemployed right now - lost my warehouse job because I was missing too much work. I'm divorced as of 2020. I smoke a pack a day and yeah, I'm still drinking heavily - about a pint of vodka and six beers every day."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "Abdominal inspection",
+      "Abdominal palpation",
+      "Epigastric tenderness assessment",
+      "Murphy's sign",
+      "Cullen's sign assessment",
+      "Grey Turner's sign assessment",
+      "Bowel sounds auscultation",
+      "Costovertebral angle tenderness",
+      "General appearance and distress level",
+      "Vital signs assessment"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Alcohol-Related Acute Pancreatitis. Document specifically what you observe."
+      "Abdominal inspection": "Abdomen appears mildly distended, patient guarding and positioning himself leaning forward",
+      "Abdominal palpation": "Marked epigastric tenderness with voluntary guarding, no rebound tenderness, no masses palpated",
+      "Epigastric tenderness assessment": "Severe tenderness in epigastrium with radiation to back, patient winces with light palpation",
+      "Murphy's sign": "Negative - no inspiratory arrest with right subcostal palpation",
+      "Cullen's sign assessment": "Negative - no periumbilical ecchymosis present",
+      "Grey Turner's sign assessment": "Negative - no flank ecchymosis observed",
+      "Bowel sounds auscultation": "Hypoactive bowel sounds in all quadrants",
+      "Costovertebral angle tenderness": "No costovertebral angle tenderness bilaterally",
+      "General appearance and distress level": "Patient appears uncomfortable, restless, leaning forward in obvious distress",
+      "Vital signs assessment": "BP 136/88 suggests mild hypertension, HR 92 regular, low-grade fever at 99.0°F, SpO2 96% on room air"
     },
     "ddxTargets": [
-        "Alcohol-Related Acute Pancreatitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Alcohol-Related Acute Pancreatitis (correct diagnosis)",
+      "Acute cholangitis",
+      "Peptic ulcer disease with perforation",
+      "Myocardial infarction",
+      "Mesenteric ischemia",
+      "Acute cholecystitis",
+      "Gastritis/GERD exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Alcohol-Related Acute Pancreatitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Alcohol-Related Acute Pancreatitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Alcohol-Related Acute Pancreatitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on patient's known chronic pancreatitis and missing acute complications or alternative diagnoses requiring immediate intervention",
+      "prematureClosure": "May quickly assume this is just another pancreatitis flare without fully evaluating for complications like pseudocyst, necrosis, or alternative diagnoses",
+      "availabilityBias": "Recent cases of pancreatitis or common association between alcohol and pancreatitis might prevent consideration of other serious abdominal pathology"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Terrence Jackson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Alcohol-Related Acute Pancreatitis. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview this patient, consider his complex medical history. What key historical elements will help you distinguish between an acute exacerbation of his chronic condition versus a new acute process? How might his ongoing alcohol use complicate your assessment?",
+      "phase5": "You've gathered substantial information about this patient's presentation. His pain characteristics and examination findings are quite specific. What does the combination of epigastric pain radiating to the back, along with his risk factors, suggest? How do you differentiate this from other causes of severe abdominal pain?",
+      "finalDebrief": "This case demonstrates classic acute pancreatitis in the setting of chronic alcohol use. Notice how the pain characteristics - epigastric with back radiation, worse with eating, better leaning forward - were key diagnostic clues. The patient's risk factors and chronic pancreatitis history supported this diagnosis, but you still needed to rule out complications and other serious causes of abdominal pain."
     }
-}
+  }
 };

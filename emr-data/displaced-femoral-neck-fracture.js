@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Doris Jean Campbell",
-  "patientHPI": "I've been feeling really unsteady on my feet lately and almost fell twice last month - luckily I grabbed onto furniture both times. My hip has been aching more than usual, especially when I try to get up from sitting, and walking feels more difficult than it used to.",
+    "patientHPI": "I've been feeling really unsteady on my feet lately and almost fell twice last month - luckily I grabbed onto furniture both times. My hip has been aching more than usual, especially when I try to get up from sitting, and walking feels more difficult than it used to.",
     "dob": "11/14/1941",
     "age": 83,
     "sex": "Female",
@@ -164,7 +164,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "126 lbs",
       "ht": "5'2\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "PCP Office"
     },
     {
@@ -219,35 +219,119 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "106", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.3", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "9.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "106",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.3",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "34.2", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "182", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "34.2",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "182",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "PT", "value": "24.8", "unit": "seconds", "range": "11.0-13.5", "flag": "H" },
-            { "test": "INR", "value": "2.6", "unit": "", "range": "2.0-3.0 (target AF)", "flag": "" }
+            {
+              "test": "PT",
+              "value": "24.8",
+              "unit": "seconds",
+              "range": "11.0-13.5",
+              "flag": "H"
+            },
+            {
+              "test": "INR",
+              "value": "2.6",
+              "unit": "",
+              "range": "2.0-3.0 (target AF)",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.0", "unit": "%", "range": "<5.7 normal", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.0",
+              "unit": "%",
+              "range": "<5.7 normal",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -308,15 +392,42 @@ window.EMR_DATA = {
     "Daughter: Healthy, age 56"
   ],
   "socialHistory": [
-    ["Occupation", "Retired librarian — 30 years at Broward County Library"],
-    ["Marital", "Widowed — husband deceased 2012"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Limited — walks indoors with cane; seated exercises"],
-    ["Housing", "Lives alone in ground-floor condo; daughter visits 3x/week; considering assisted living"],
-    ["Safety", "Uses cane (should use walker); grab bars in bathroom; medical alert pendant; area rugs still present (daughter plans to remove); night light in hallway"],
-    ["Advance Directive", "Yes — healthcare proxy: daughter Patricia Campbell-Ross; full code"]
+    [
+      "Occupation",
+      "Retired librarian — 30 years at Broward County Library"
+    ],
+    [
+      "Marital",
+      "Widowed — husband deceased 2012"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Limited — walks indoors with cane; seated exercises"
+    ],
+    [
+      "Housing",
+      "Lives alone in ground-floor condo; daughter visits 3x/week; considering assisted living"
+    ],
+    [
+      "Safety",
+      "Uses cane (should use walker); grab bars in bathroom; medical alert pendant; area rugs still present (daughter plans to remove); night light in hallway"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: daughter Patricia Campbell-Ross; full code"
+    ]
   ],
   "meta": {
     "caseId": "displaced-femoral-neck-fracture",
@@ -327,75 +438,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Doris Jean Campbell is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Doris is anxious and somewhat embarrassed about her increasing frailty, speaking softly but cooperatively. She appears uncomfortable and slightly distressed, favoring her left side when moving, but tries to downplay her pain out of concern about being a burden.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened when you injured your hip?",
+      "Did you fall or have any trauma to your hip recently?",
+      "When did the hip pain first start and has it gotten worse?",
+      "Can you describe the pain - is it sharp, dull, aching, or burning?",
+      "Where exactly does it hurt and does the pain go anywhere else?",
+      "On a scale of 1 to 10, how would you rate your pain right now?",
+      "What makes the pain worse - walking, sitting, lying down?",
+      "Have you tried anything that helps with the pain?",
+      "Are you having any other symptoms like nausea, dizziness, or shortness of breath?",
+      "Have you had any similar hip problems or fractures before?",
+      "Can you tell me about all the medications you're currently taking?",
+      "Do you have any allergies to medications or other substances?",
+      "Has anyone in your family had problems with broken bones or osteoporosis?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been feeling really unsteady on my feet lately and almost fell twice last m.'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Displaced Femoral Neck Fracture.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Warfarin 3mg daily (dose varies per INR); Metoprolol Succinate 50mg daily; Losartan 50mg daily; Metformin 500mg BID; Glipizide 5mg daily; Zoledronic Acid 5mg IV annually; Calcium-Vitamin D 600mg/800IU BID.'",
-        "allergies": "'My allergies are Aspirin, Iodinated Contrast.'",
-        "family": "Mother: Osteoporosis, hip fracture at age 82, deceased at 86  Father: Hypertension, MI, deceased at 68  Sister: Osteoporosis, vertebral fracture, alive at 80",
-        "social": "Occupation: Retired librarian \u2014 30 years at Broward County Library  Marital: Widowed \u2014 husband deceased 2012  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently?",
+      "onset": "I fell this morning around 8 AM when I was trying to get out of bed. My foot got caught in the bedsheet and I went down hard on my left side. The pain started immediately and hasn't let up since then.",
+      "character": "It's a deep, severe aching pain that feels like it's coming from deep inside my hip joint. Sometimes it feels like a sharp stabbing when I try to move.",
+      "location": "The pain is right here in my left hip and groin area, and it seems to shoot down toward my knee sometimes when I try to move my leg.",
+      "severity": "Right now it's about an 8 out of 10, especially when I try to move. Even lying still it's about a 6. I can barely put any weight on my left leg at all.",
+      "aggravating": "Any movement makes it much worse - trying to stand, walk, or even shift in bed. Rolling over is excruciating. Weight bearing on my left leg is almost impossible.",
+      "relieving": "Nothing really helps much. I tried taking some Tylenol but it barely touched it. Staying perfectly still helps a little bit, but even then it still aches constantly.",
+      "associated": "I feel a bit nauseous from the pain, and I've been feeling dizzy when I try to stand up. My left leg feels shorter somehow and it wants to turn outward.",
+      "denies": "No chest pain, no shortness of breath, no headache, no numbness or tingling in my legs. No loss of consciousness when I fell.",
+      "history": "I broke two vertebrae in my back about 3 years ago, and I've always been told I have severe osteoporosis. I've never broken a hip before though. I've been more unsteady lately and almost fell twice last month.",
+      "medications": "Warfarin 3mg daily (dose varies per INR); Metoprolol Succinate 50mg daily; Losartan 50mg daily; Metformin 500mg BID; Glipizide 5mg daily; Zoledronic Acid 5mg IV annually; Calcium-Vitamin D 600mg/800IU BID",
+      "allergies": "Aspirin, Iodinated Contrast",
+      "family": "My mother broke her hip when she was 82, just like me, and had severe osteoporosis. My sister is 80 and has had vertebral fractures from osteoporosis too. It seems to run in our family unfortunately.",
+      "social": "I'm a retired librarian - worked at the Broward County Library for 30 years. I've been widowed since 2012 when my husband passed. I never smoked and don't drink alcohol or use any drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspection of lower extremities positioning",
+      "Hip range of motion testing",
+      "Weight bearing assessment",
+      "Palpation of greater trochanter",
+      "Palpation of femoral triangle/groin",
+      "Log roll test",
+      "Straight leg raise test",
+      "Distal neurovascular examination",
+      "Assessment of leg length discrepancy",
+      "Patrick's test (FABER)"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Displaced Femoral Neck Fracture. Document specifically what you observe."
+      "Inspection of lower extremities positioning": "Left lower extremity is shortened, externally rotated approximately 45 degrees, and patient holds it in slight flexion",
+      "Hip range of motion testing": "Active range of motion severely limited by pain in all directions. Passive movement causes severe pain and is limited",
+      "Weight bearing assessment": "Unable to bear weight on left lower extremity. Patient experiences severe pain with any attempt at weight bearing",
+      "Palpation of greater trochanter": "Tenderness to palpation over the greater trochanter region with possible prominence/deformity",
+      "Palpation of femoral triangle/groin": "Significant tenderness to palpation in the groin and femoral triangle area",
+      "Log roll test": "Positive - passive internal and external rotation of the hip causes severe pain",
+      "Straight leg raise test": "Unable to perform active straight leg raise on the left side due to pain and weakness",
+      "Distal neurovascular examination": "Dorsalis pedis and posterior tibial pulses palpable, capillary refill <2 seconds, sensation intact, able to wiggle toes",
+      "Assessment of leg length discrepancy": "Apparent leg length discrepancy with left leg appearing approximately 2cm shorter than right",
+      "Patrick's test (FABER)": "Unable to perform due to severe pain with hip flexion and external rotation"
     },
     "ddxTargets": [
-        "Displaced Femoral Neck Fracture (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Displaced Femoral Neck Fracture (correct diagnosis)",
+      "Intertrochanteric Hip Fracture",
+      "Hip Dislocation",
+      "Septic Arthritis of Hip",
+      "Pathological Fracture from Metastatic Disease",
+      "Severe Hip Osteoarthritis with Acute Exacerbation",
+      "Greater Trochanteric Bursitis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Displaced Femoral Neck Fracture, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Displaced Femoral Neck Fracture, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Displaced Femoral Neck Fracture based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'typical elderly fall' and missing the specific fracture pattern, or focusing solely on osteoporosis history without considering other pathological causes",
+      "prematureClosure": "Risk of stopping at 'hip fracture' without determining the specific type and displacement, which is crucial for surgical planning and prognosis",
+      "availabilityBias": "May overweight common hip pathology like arthritis or bursitis in elderly patients, potentially delaying recognition of the fracture severity"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Doris Jean Campbell's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Displaced Femoral Neck Fracture. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Before you interview Mrs. Campbell, think about the key historical features that would help you differentiate between the various causes of hip pain in an elderly patient with osteoporosis. What specific mechanism of injury details and functional limitations would be most concerning for fracture versus other conditions?",
+      "phase5": "Now that you've gathered your history and physical exam findings, let's think through this systematically. Mrs. Campbell has classic signs - what does the combination of external rotation, shortening, and inability to bear weight tell you? How does her osteoporosis history and the mechanism of injury factor into your diagnostic reasoning?",
+      "finalDebrief": "This case illustrates the importance of recognizing the classic presentation of displaced femoral neck fractures - the external rotation and shortening are pathognomonic signs. Notice how your differential evolved from considering various hip pathologies to focusing on fracture types based on the mechanism and physical findings. The patient's osteoporosis, anticoagulation status, and comorbidities all factor into surgical planning and prognosis."
     }
-}
+  }
 };

@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Alejandro Gutierrez",
-  "patientHPI": "My family found me really confused and throwing up this morning, and I honestly don't remember much about what happened. I've been feeling more tired than usual lately and haven't been great about taking my insulin like I should.",
+    "patientHPI": "My family found me really confused and throwing up this morning, and I honestly don't remember much about what happened. I've been feeling more tired than usual lately and haven't been great about taking my insulin like I should.",
     "dob": "08/01/1998",
     "age": "28",
     "sex": "Male",
@@ -309,158 +309,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Alejandro Gutierrez is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Alejandro appears anxious and somewhat embarrassed about his non-adherence to insulin, speaking quietly and avoiding eye contact when discussing his financial struggles. He is cooperative but still recovering from confusion, occasionally needing questions repeated and showing mild cognitive sluggishness from recent DKA.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you tell me more about when your family found you this morning?",
+      "How long have you been without insulin?",
+      "Have you been urinating more frequently than usual?",
+      "Have you been drinking more water or feeling very thirsty?",
+      "Have you had any abdominal pain?",
+      "How has your breathing been - any shortness of breath?",
+      "Have you had any chest pain?",
+      "When did you last eat and what did you eat?",
+      "Have you been sick with any infections recently?",
+      "How has your mood been lately with your depression?",
+      "Have you had episodes like this before?",
+      "What prevented you from getting your insulin refilled?",
+      "Have you been taking your sertraline regularly?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Insulin Glargine; Insulin Lispro; Sertraline.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "Mother: Type 2 Diabetes  Father: Hypertension",
-        "social": "Tobacco: Never  Alcohol: Binge drinking on weekends  Insulin: Admits to not taking insulin for 4 days \u2014 ran out and couldn't afford refill  Occupation: Works two part-time jobs, no insurance"
+      "default": "I'm sorry, I'm still feeling a bit foggy. Can you ask that again?",
+      "onset": "My sister found me around 8 AM this morning throwing up in the bathroom and I was really confused, couldn't remember where I was. She said I'd been vomiting for a while.",
+      "character": "The vomiting just won't stop, and I feel incredibly weak and dizzy. My head feels foggy and I'm having trouble concentrating.",
+      "location": "The nausea is mostly in my stomach, and I have this dull ache in my belly. No real pain shooting anywhere else.",
+      "severity": "The confusion and vomiting are about an 8 out of 10 - it's really scary not being able to think clearly. The weakness is probably a 7.",
+      "aggravating": "Trying to drink anything makes me throw up more. Moving around makes me feel more dizzy.",
+      "relieving": "Nothing really helps. Lying still helps a little with the dizziness but the nausea is constant.",
+      "associated": "I've been peeing constantly and drinking tons of water for the past few days. I've been really tired and weak. My breathing feels a bit heavy.",
+      "denies": "No fever, no chest pain, no diarrhea, no recent infections that I know of.",
+      "history": "I had something similar about two years ago when I ran out of insulin and ended up in the ER. They said something about ketones being high.",
+      "medications": "Insulin Glargine; Insulin Lispro; Sertraline",
+      "allergies": "NKDA",
+      "family": "My mom has type 2 diabetes and my dad has high blood pressure. My mom actually helps me sometimes when I can't afford my insulin.",
+      "social": "I work two part-time jobs - one at a restaurant and one doing delivery driving. No insurance right now. I don't smoke, but I do drink on weekends, sometimes pretty heavily. I ran out of insulin four days ago and couldn't afford the refill until I got paid."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "General appearance and mental status",
+      "Vital signs assessment",
+      "HEENT examination",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Neurological examination",
+      "Skin examination",
+      "Assessment for dehydration",
+      "Kussmaul respirations assessment"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "General appearance and mental status": "Alert but mildly lethargic, appears dehydrated and ill-appearing, responds appropriately but with slight delay",
+      "Vital signs assessment": "BP 98/62 (orthostatic), HR 128 regular, Temp 36.4°C, SpO2 99%, RR 24 with deep respirations",
+      "HEENT examination": "Dry mucous membranes, sunken eyes, poor skin turgor, fruity odor on breath",
+      "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, weak peripheral pulses, capillary refill 3 seconds",
+      "Pulmonary examination": "Deep, labored respirations (Kussmaul pattern), lungs clear to auscultation bilaterally",
+      "Abdominal examination": "Soft, mild diffuse tenderness, no rebound or guarding, hypoactive bowel sounds",
+      "Neurological examination": "Oriented x3 but sluggish responses, no focal deficits, reflexes intact but diminished",
+      "Skin examination": "Poor turgor, warm and dry, no rashes or lesions",
+      "Assessment for dehydration": "Severe dehydration evidenced by dry mucous membranes, poor skin turgor, orthostatic hypotension",
+      "Kussmaul respirations assessment": "Deep, rapid respirations consistent with metabolic acidosis compensation"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Diabetic Ketoacidosis (correct diagnosis)",
+      "Hyperosmolar Hyperglycemic State",
+      "Severe Hypoglycemia",
+      "Sepsis with DKA",
+      "Acute Myocardial Infarction",
+      "Gastroenteritis with dehydration",
+      "Alcohol Ketoacidosis"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on gastroenteritis due to prominent vomiting and dehydration, missing the underlying metabolic crisis",
+      "prematureClosure": "May stop at 'medication non-compliance' without fully appreciating the severity of DKA and need for immediate intervention",
+      "availabilityBias": "Recent cases of viral gastroenteritis or alcohol-related illness may overshadow consideration of diabetic emergency"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Alejandro Gutierrez: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "Looking at this 28-year-old with diabetes presenting with confusion and vomiting, what key historical elements would help you differentiate between the various causes of altered mental status in a diabetic patient? Think about what his medication non-adherence might lead to.",
+      "phase5": "You've identified classic signs of severe dehydration and Kussmaul respirations in a non-adherent diabetic. How do these physical findings help narrow your differential? What's the pathophysiology behind the breathing pattern you observed?",
+      "finalDebrief": "This case demonstrates how social determinants of health directly impact medical outcomes. The combination of insulin non-adherence, classic symptoms of polyuria and polydipsia, Kussmaul respirations, and altered mental status pointed clearly to DKA. How might you address both the acute medical crisis and the underlying access issues that led to this presentation?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['dka-v1'] = {
-  id: 'dka-v1', name: 'Alejandro Gutierrez',
-  chiefComplaint: 'DKA — Fluid + Insulin Protocol and Monitoring',
-  diagnosis: 'DKA — Fluid + Insulin Protocol and Monitoring',
-  orders: {
-    correct: [{ id: 'ivf-protocol', name: 'IV fluids — 0.9% NS 1L bolus, then 250-500 mL/hr based on sodium', rationale: '1L 0.9% NS over 30-60 min for initial resuscitation. Then: if corrected Na is normal → continue 0.9% NS. If corrected Na rising → switch to 0.45% NaCl. Add D5 when glucose reaches 200-250 mg/dL. Total fluid deficit 3-6L typically.' },{ id: 'insulin-drip', name: 'Insulin drip 0.1 u/kg/hr — after K ≥3.5', rationale: 'Do NOT start insulin if K <3.5 — risk of fatal hypokalemia as insulin drives K into cells. Replete potassium first. Insulin 0.1 u/kg/hr regular insulin infusion. Goal: glucose falls 50-100 mg/dL/hr. Switch to SQ insulin + overlap with drip for at least 2h before stopping drip to prevent rebound ketosis.' }],
-    incorrect: [{ id: 'insulin-bolus', name: 'Insulin bolus 10 units IV push — rapid correction of hyperglycemia', rationale: 'IV insulin boluses are NOT used in DKA management. Continuous infusion provides controlled glucose reduction (target 50-100 mg/dL/hr). Rapid correction risks cerebral edema (especially in children) and profound hypokalemia.' },{ id: 'bicarb-acidosis', name: 'Sodium bicarbonate for pH <7.3', rationale: 'Bicarbonate is NOT routinely recommended for DKA unless pH <6.9. In children: avoid bicarb entirely — increases cerebral edema risk. Bicarbonate may worsen CNS acidosis (paradoxical CSF acidosis from CO2 diffusion), worsens hypokalemia, and delays ketone clearance. Insulin and fluids correct the acidosis.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['DKA diagnostic criteria: glucose >250 mg/dL + pH <7.3 or HCO3 <18 + positive ketones (serum or urine). Mild: pH 7.25-7.3. Moderate: pH 7.1-7.24. Severe: pH <7.1.','Potassium in DKA: despite total body depletion, serum K is often normal or HIGH initially (acidosis drives K out of cells). As insulin is given and pH corrects, K falls rapidly. Replace K aggressively: if K 3.5-5: 20-40 mEq/hr. If K <3.5: replace before starting insulin. If K >5.5: monitor closely.','Resolution criteria (not glucose): glucose <200 + bicarbonate ≥15 + pH >7.3 + anion gap closed. THEN transition to SQ insulin. Do NOT stop drip without subcutaneous overlap.'],
-    boardPearls: ['Anion gap in DKA: Na - (Cl + HCO3). Normal 8-12 mEq/L. DKA causes elevated AG metabolic acidosis from ketones. As DKA resolves, AG normalizes before pH does (hyperchloremic non-AG acidosis from NS-heavy resuscitation is common during DKA resolution).','HHS (hyperosmolar hyperglycemic state): hyperglycemia >600 + osmolality >320 + NO significant ketosis (pH >7.3, bicarbonate >15) + profound dehydration (average 8-10L deficit). Treat: aggressive fluids (0.9% NS then 0.45% NS), gentle insulin (lower rate than DKA), correct Na and osmolality slowly.','Identify DKA precipitant: infection (30-40%), new-onset DM (20-25%), insulin omission (15-20%), medications (corticosteroids, SGLT2 inhibitors — euglycemic DKA). Treat the precipitant, not just the DKA.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Alejandro Gutierrez is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like working diagnosis \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Insulin Glargine; Insulin Lispro; Sertraline.'",
-        "allergies": "'My allergies: NKDA.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with working diagnosis.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with working diagnosis."
-    },
-    "ddxTargets": [
-        "working diagnosis (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for working diagnosis.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Alejandro Gutierrez \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
-    }
-}
+  }
 };

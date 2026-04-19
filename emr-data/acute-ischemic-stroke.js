@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eugene Washington",
-  "patientHPI": "My wife says I was acting strange this morning - I couldn't get the words out right and kept dropping things with my left hand. I feel confused and frustrated because I know what I want to say but it comes out all jumbled. My left arm and leg feel heavy and clumsy.",
+    "patientHPI": "My wife says I was acting strange this morning - I couldn't get the words out right and kept dropping things with my left hand. I feel confused and frustrated because I know what I want to say but it comes out all jumbled. My left arm and leg feel heavy and clumsy.",
     "dob": "11/03/1958",
     "age": 67,
     "sex": "Male",
@@ -159,54 +159,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/20/2026",
-        "bp": "168/98",
-        "hr": 88,
-        "rr": 16,
-        "temp": "98.6\u00b0F",
-        "spo2": "95%",
-        "wt": "238 lbs",
-        "ht": "5'11\"",
-        "bmi": 33.2,
-        "setting": "PCP Office"
+      "date": "01/20/2026",
+      "bp": "168/98",
+      "hr": 88,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "95%",
+      "wt": "238 lbs",
+      "ht": "5'11\"",
+      "bmi": 33.2,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/15/2025",
-        "bp": "162/94",
-        "hr": 82,
-        "rr": 16,
-        "temp": "98.4\u00b0F",
-        "spo2": "96%",
-        "wt": "240 lbs",
-        "ht": "5'11\"",
-        "bmi": 33.5,
-        "setting": "PCP Office"
+      "date": "07/15/2025",
+      "bp": "162/94",
+      "hr": 82,
+      "rr": 16,
+      "temp": "98.4°F",
+      "spo2": "96%",
+      "wt": "240 lbs",
+      "ht": "5'11\"",
+      "bmi": 33.5,
+      "setting": "PCP Office"
     },
     {
-        "date": "01/08/2025",
-        "bp": "158/92",
-        "hr": 78,
-        "rr": 14,
-        "temp": "98.4\u00b0F",
-        "spo2": "96%",
-        "wt": "236 lbs",
-        "ht": "5'11\"",
-        "bmi": 32.9,
-        "setting": "Specialist"
+      "date": "01/08/2025",
+      "bp": "158/92",
+      "hr": 78,
+      "rr": 14,
+      "temp": "98.4°F",
+      "spo2": "96%",
+      "wt": "236 lbs",
+      "ht": "5'11\"",
+      "bmi": 32.9,
+      "setting": "Specialist"
     },
     {
-        "date": "07/10/2024",
-        "bp": "172/100",
-        "hr": 84,
-        "rr": 16,
-        "temp": "98.6\u00b0F",
-        "spo2": "95%",
-        "wt": "242 lbs",
-        "ht": "5'11\"",
-        "bmi": 33.7,
-        "setting": "PCP Office"
+      "date": "07/10/2024",
+      "bp": "172/100",
+      "hr": 84,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "95%",
+      "wt": "242 lbs",
+      "ht": "5'11\"",
+      "bmi": 33.7,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -246,42 +246,168 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "188", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "34", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "38", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "5.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "9.0", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "188",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "34",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "38",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "5.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "9.0",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "8.2", "unit": "%", "range": "<5.7 normal; 5.7-6.4 prediabetes", "flag": "H" },
-            { "test": "Est. Avg Glucose (eAG)", "value": "189", "unit": "mg/dL", "range": "—", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "8.2",
+              "unit": "%",
+              "range": "<5.7 normal; 5.7-6.4 prediabetes",
+              "flag": "H"
+            },
+            {
+              "test": "Est. Avg Glucose (eAG)",
+              "value": "189",
+              "unit": "mg/dL",
+              "range": "—",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "36.6", "unit": "%", "range": "38.0-50.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "204", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "36.6",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "204",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "182", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "88", "unit": "mg/dL", "range": "<100", "flag": "" },
-            { "test": "HDL Cholesterol", "value": "36", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "198", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "182",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "88",
+              "unit": "mg/dL",
+              "range": "<100",
+              "flag": ""
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "36",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "198",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -372,15 +498,42 @@ window.EMR_DATA = {
     "Sister: T2DM, Hypertension, alive at 62"
   ],
   "socialHistory": [
-    ["Occupation", "Retired bus driver (Broward County Transit); retired 2023"],
-    ["Marital", "Married 40 years; wife Barbara, age 65"],
-    ["Tobacco", "Former smoker — quit 2010; 20 pack-year history"],
-    ["Alcohol", "Occasional, 1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 10-15 min daily; limited by dyspnea and fatigue"],
-    ["Housing", "Single-family home with wife; single-story"],
-    ["Safety", "Denies IPV; seatbelt always; fall risk screening positive (unsteady gait)"],
-    ["Advance Directive", "POLST on file — Full Code; HCP: wife Barbara Washington"]
+    [
+      "Occupation",
+      "Retired bus driver (Broward County Transit); retired 2023"
+    ],
+    [
+      "Marital",
+      "Married 40 years; wife Barbara, age 65"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2010; 20 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "Occasional, 1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 10-15 min daily; limited by dyspnea and fatigue"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife; single-story"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always; fall risk screening positive (unsteady gait)"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code; HCP: wife Barbara Washington"
+    ]
   ],
   "meta": {
     "caseId": "acute-ischemic-stroke",
@@ -391,75 +544,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Eugene Washington appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Eugene appears confused and frustrated, speaking in broken sentences with noticeable word-finding difficulties. He becomes emotional when trying to communicate, alternating between determination to express himself and visible distress when words don't come out right. He is cooperative but relies heavily on gesturing and simple responses.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did altered mental status start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When exactly did you first notice these symptoms this morning?",
+      "Can you describe what it feels like when you try to speak?",
+      "Tell me about the weakness in your left arm and leg - when did that start?",
+      "Have you had any headache, dizziness, or vision changes?",
+      "Did you have any chest pain, palpitations, or shortness of breath?",
+      "Have you ever had symptoms like this before?",
+      "Are you taking your medications as prescribed, especially your blood thinner?",
+      "When was your last meal and did you take your diabetes medications?",
+      "Have you had any recent falls, injuries, or procedures?",
+      "Any recent changes in your medications or missed doses?",
+      "Have you had any nausea, vomiting, or difficulty swallowing?",
+      "Tell me about your atrial fibrillation - how long have you had it?",
+      "Any recent illness, fever, or infections?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My wife says I was acting strange this morning - I couldn't get the words out ri.'",
-        "character": "'It's altered mental status \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Ischemic Stroke.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 80mg QHS.'",
-        "allergies": "'My allergies are Warfarin, Sulfa Drugs.'",
-        "family": "Father: Stroke at age 62 (deceased), Hypertension, T2DM  Mother: Hypertension, CHF, deceased at 80  Brother: MI at age 58, AFib, alive at 64",
-        "social": "Occupation: Retired bus driver (Broward County Transit); retired 2023  Marital: Married 40 years; wife Barbara, age 65  Tobacco: Former smoker \u2014 quit 2010; 20 pack-year history  Alcohol: Occasional, 1-2 beers on weekends  Drugs: Denies"
+      "default": "I... I don't... *gestures frustratedly* Hard to... words don't come right.",
+      "onset": "This morning... maybe 7, 8 o'clock? Barbara... she saw me... coffee cup, dropped it. Words all... *makes jumbled gesture*",
+      "character": "Like my tongue is... thick? Know what I want... but comes out wrong. Left side feels... heavy, like dead weight.",
+      "location": "Left arm, left leg... heavy. Face feels... different too, left side.",
+      "severity": "Scared... maybe 8, 9? Can't write, can't... *shows difficulty with left hand* Very frustrating.",
+      "aggravating": "When I try to talk fast... gets worse. Moving left side... very hard.",
+      "relieving": "Nothing helps. Sitting still... maybe little better, but still can't talk right.",
+      "associated": "Left side numb... tingling. Little dizzy. No pain though.",
+      "denies": "No headache, no chest pain, no... *shakes head* vision okay. No throwing up.",
+      "history": "Never like this... sometimes dizzy with heart thing, but never... never couldn't talk.",
+      "medications": "Apixaban 5mg BID; Metoprolol Succinate 100mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 25mg daily; Metformin 1000mg BID; Glipizide 10mg BID; Atorvastatin 80mg QHS",
+      "allergies": "Warfarin, Sulfa Drugs",
+      "family": "Dad had stroke... 62, died. Mom had heart problems too. Brother... heart attack and heart rhythm like me.",
+      "social": "Bus driver... retired last year. Smoked long time, quit 2010. Barbara and me... married 40 years. Weekend beer sometimes."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Speech assessment and language evaluation",
+      "Cranial nerve examination",
+      "Motor strength testing bilateral upper and lower extremities",
+      "Sensory examination",
+      "Deep tendon reflexes",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment",
+      "NIH Stroke Scale assessment",
+      "Cardiovascular examination including rhythm",
+      "Fundoscopic examination"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Acute Ischemic Stroke. Document specifically what you observe."
+      "Speech assessment and language evaluation": "Expressive aphasia with word-finding difficulty, comprehension intact, able to follow complex commands",
+      "Cranial nerve examination": "Left facial droop with forehead sparing, mild left sided facial weakness",
+      "Motor strength testing bilateral upper and lower extremities": "Left upper extremity 3/5 strength, left lower extremity 3/5 strength, right side 5/5 throughout",
+      "Sensory examination": "Decreased light touch and pinprick sensation on left side",
+      "Deep tendon reflexes": "Hyperreflexive on left side, positive Babinski on left",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)": "Intact on right, impaired coordination on left due to weakness",
+      "Gait assessment": "Unable to assess due to left-sided weakness, patient requires assistance",
+      "NIH Stroke Scale assessment": "NIHSS score of 8 (1 for facial palsy, 3 for left arm motor, 2 for left leg motor, 1 for aphasia, 1 for dysarthria)",
+      "Cardiovascular examination including rhythm": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs",
+      "Fundoscopic examination": "Normal optic discs, no papilledema, mild arteriovenous nicking consistent with hypertension"
     },
     "ddxTargets": [
-        "Acute Ischemic Stroke (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Ischemic Stroke (Cardioembolic) (correct diagnosis)",
+      "Transient Ischemic Attack (TIA)",
+      "Hemorrhagic Stroke",
+      "Hypoglycemia",
+      "Seizure with Todd's paralysis",
+      "Complicated Migraine",
+      "Conversion Disorder"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Ischemic Stroke, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Ischemic Stroke, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Ischemic Stroke based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the obvious stroke presentation and missing other causes of altered mental status like hypoglycemia in a diabetic patient",
+      "prematureClosure": "May rush to stroke diagnosis without considering metabolic causes or ensuring this isn't a TIA that could rapidly resolve",
+      "availabilityBias": "Recent cases of stroke or dramatic presentations may overshadow the need to rule out treatable mimics like hypoglycemia or seizure"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Eugene Washington's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Ischemic Stroke (Cardioembolic). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified stroke as a leading concern - excellent recognition of the classic triad. Before you proceed, what other conditions could present with acute onset aphasia and unilateral weakness? Consider this patient's comorbidities, particularly his diabetes. What time-sensitive conditions must you not miss?",
+      "phase5": "Your examination confirms focal neurologic deficits consistent with stroke. Given his atrial fibrillation and the pattern of deficits, what type of stroke mechanism are you most concerned about? What does the NIHSS score tell you about urgency? How does his current anticoagulation status factor into your differential?",
+      "finalDebrief": "This case illustrates a classic cardioembolic stroke in a patient with atrial fibrillation. Notice how the clinical presentation - acute onset aphasia with left-sided weakness - pointed toward a right MCA territory infarct. The key teaching points: recognizing stroke mimics in diabetic patients, understanding cardioembolic risk despite anticoagulation, and using structured assessments like NIHSS. How did your differential evolve as you gathered more information?"
     }
-}
+  }
 };

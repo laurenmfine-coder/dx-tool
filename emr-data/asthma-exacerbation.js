@@ -144,7 +144,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "216 lbs",
       "ht": "5'10\"",
-      "bmi": 31.0,
+      "bmi": 31,
       "setting": "PCP Office"
     },
     {
@@ -222,34 +222,142 @@ window.EMR_DATA = {
         {
           "name": "ARTERIAL BLOOD GAS (ABG)",
           "results": [
-            { "test": "pH", "value": "7.42", "unit": "", "range": "7.35-7.45", "flag": "" },
-            { "test": "pCO2", "value": "38", "unit": "mmHg", "range": "35-45", "flag": "" },
-            { "test": "pO2", "value": "68", "unit": "mmHg", "range": "80-100", "flag": "L" },
-            { "test": "HCO3", "value": "24", "unit": "mEq/L", "range": "22-26", "flag": "" },
-            { "test": "O2 Saturation", "value": "91", "unit": "%", "range": "95-100", "flag": "L" }
+            {
+              "test": "pH",
+              "value": "7.42",
+              "unit": "",
+              "range": "7.35-7.45",
+              "flag": ""
+            },
+            {
+              "test": "pCO2",
+              "value": "38",
+              "unit": "mmHg",
+              "range": "35-45",
+              "flag": ""
+            },
+            {
+              "test": "pO2",
+              "value": "68",
+              "unit": "mmHg",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "HCO3",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "22-26",
+              "flag": ""
+            },
+            {
+              "test": "O2 Saturation",
+              "value": "91",
+              "unit": "%",
+              "range": "95-100",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "12.6", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Neutrophils", "value": "62", "unit": "%", "range": "40-70", "flag": "" },
-            { "test": "Eosinophils", "value": "6", "unit": "%", "range": "1-4", "flag": "H" },
-            { "test": "Hemoglobin", "value": "15.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "45.6", "unit": "%", "range": "38.0-50.0", "flag": "" },
-            { "test": "Platelet Count", "value": "288", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "12.6",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Neutrophils",
+              "value": "62",
+              "unit": "%",
+              "range": "40-70",
+              "flag": ""
+            },
+            {
+              "test": "Eosinophils",
+              "value": "6",
+              "unit": "%",
+              "range": "1-4",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "45.6",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "288",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "3.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.0", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "3.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.0",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -317,15 +425,42 @@ window.EMR_DATA = {
     "Maternal grandmother: COPD, deceased at 70"
   ],
   "socialHistory": [
-    ["Occupation", "Warehouse associate (Amazon)"],
-    ["Marital", "Single"],
-    ["Tobacco", "Denies cigarettes; occasional marijuana 1-2x/month (smoked)"],
-    ["Alcohol", "Social, 2-3 drinks on weekends"],
-    ["Drugs", "Marijuana as above; denies other substances"],
-    ["Exercise", "Irregular; plays pickup basketball 1x/week"],
-    ["Housing", "Apartment with 2 roommates; older building with known mold/cockroach issues"],
-    ["Safety", "Denies IPV; seatbelt usually"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Warehouse associate (Amazon)"
+    ],
+    [
+      "Marital",
+      "Single"
+    ],
+    [
+      "Tobacco",
+      "Denies cigarettes; occasional marijuana 1-2x/month (smoked)"
+    ],
+    [
+      "Alcohol",
+      "Social, 2-3 drinks on weekends"
+    ],
+    [
+      "Drugs",
+      "Marijuana as above; denies other substances"
+    ],
+    [
+      "Exercise",
+      "Irregular; plays pickup basketball 1x/week"
+    ],
+    [
+      "Housing",
+      "Apartment with 2 roommates; older building with known mold/cockroach issues"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt usually"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "asthma-exacerbation",
@@ -336,75 +471,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Deshawn Carter is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Deshawn appears anxious and slightly embarrassed about his medication non-adherence, speaking in short sentences between breaths. He's cooperative but minimizes his symptoms initially, concerned about missing work and appearing weak.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did allergic reaction start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happened when your symptoms started?",
+      "How severe is your shortness of breath right now on a scale of 1-10?",
+      "What makes your breathing worse or better?",
+      "How many times have you used your rescue inhaler today?",
+      "Have you been taking your daily controller medications as prescribed?",
+      "What specific allergen or trigger do you think caused this episode?",
+      "Are you having any chest pain or tightness?",
+      "Have you had any recent upper respiratory infections?",
+      "How has your sleep been affected by your breathing?",
+      "Are you coughing up any sputum or phlegm?",
+      "Have you ever been hospitalized or intubated for asthma before?",
+      "Any recent changes in your work environment or exposures?",
+      "Are you having any nausea, vomiting, or abdominal pain?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 24-year-old male with moderate persistent asthma presenting for follow-up.'",
-        "character": "'It's allergic reaction \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Severe Asthma Exacerbation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone/Salmeterol 250/50mcg INH BID; Montelukast 10mg QHS; Albuterol 90mcg INH PRN; Omeprazole 20mg daily; Cetirizine 10mg daily.'",
-        "allergies": "'My allergies are Aspirin, NSAIDs (Ibuprofen), Cockroach.'",
-        "family": "Mother: Asthma, Obesity, alive at 48  Father: Hypertension, alive at 50  Brother: Asthma (childhood, outgrown), alive at 22",
-        "social": "Occupation: Warehouse associate (Amazon)  Marital: Single  Tobacco: Denies cigarettes; occasional marijuana 1-2x/month (smoked)  Alcohol: Social, 2-3 drinks on weekends  Drugs: Marijuana as above; denies other substances"
+      "default": "I'm sorry, I'm having trouble catching my breath. Can you repeat that?",
+      "onset": "Started about 3 hours ago at work in the warehouse. Was moving some old inventory and suddenly felt like I couldn't breathe well.",
+      "character": "It feels like someone is sitting on my chest and I can't get enough air in. My chest feels really tight.",
+      "location": "The tightness is right here in my chest, doesn't really go anywhere else.",
+      "severity": "Right now it's about a 7 out of 10. I've never had it this bad before where my inhaler isn't really helping.",
+      "aggravating": "Any movement makes it worse. Talking makes me more short of breath. I think there was a lot of dust where I was working today.",
+      "relieving": "My albuterol helped a little bit but not like it usually does. I've used it maybe 6 times since this started.",
+      "associated": "I'm wheezing a lot and coughing. My nose has been really stuffy too. I feel kind of dizzy when I stand up.",
+      "denies": "No fever, no chest pain like heart pain, no leg swelling. Not coughing up blood or anything gross.",
+      "history": "I've had asthma since I was a kid but it's usually pretty controlled. Never been to the ER for it before.",
+      "medications": "Fluticasone/Salmeterol 250/50mcg INH BID; Montelukast 10mg QHS; Albuterol 90mcg INH PRN; Omeprazole 20mg daily; Cetirizine 10mg daily. But honestly, I don't use the purple inhaler every day like I should.",
+      "allergies": "Aspirin, NSAIDs like Ibuprofen, and Cockroach. The cockroach thing is really bad - makes my asthma terrible.",
+      "family": "My mom has asthma too and she's pretty overweight like me. My little brother had asthma when we were kids but he grew out of it.",
+      "social": "I work at Amazon warehouse, pretty dusty sometimes. I'm single. I don't smoke cigarettes but I do smoke weed maybe once or twice a month. I drink socially on weekends."
     },
     "examManeuvers": [
-        "General appearance and respiratory effort",
-        "Vital signs and pulse oximetry",
-        "Pulmonary auscultation",
-        "Percussion of lung fields",
-        "Accessory muscle use",
-        "Cardiovascular auscultation",
-        "Lower extremity DVT assessment",
-        "Tracheal position"
+      "Inspect respiratory effort and use of accessory muscles",
+      "Auscultate bilateral lung fields",
+      "Assess peak expiratory flow rate",
+      "Examine nasal passages and sinuses",
+      "Palpate for lymphadenopathy",
+      "Inspect skin for eczematous changes",
+      "Assess mental status and ability to speak in full sentences",
+      "Examine extremities for cyanosis or clubbing",
+      "Percuss chest for hyperresonance",
+      "Assess for pulsus paradoxus"
     ],
     "examFindings": {
-        "General appearance and respiratory effort": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Vital signs and pulse oximetry": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Percussion of lung fields": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Accessory muscle use": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Lower extremity DVT assessment": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe.",
-        "Tracheal position": "Clinical finding consistent with Acute Severe Asthma Exacerbation. Document specifically what you observe."
+      "Inspect respiratory effort and use of accessory muscles": "Moderate respiratory distress with use of accessory muscles, tripod positioning, speaking in 3-4 word sentences",
+      "Auscultate bilateral lung fields": "Diffuse expiratory wheezing bilaterally with prolonged expiratory phase, decreased air movement at bases",
+      "Assess peak expiratory flow rate": "Peak flow 180 L/min (predicted ~600 L/min for age/height), 30% of predicted",
+      "Examine nasal passages and sinuses": "Nasal mucosa erythematous and edematous with clear discharge, no sinus tenderness",
+      "Palpate for lymphadenopathy": "No cervical, supraclavicular, or axillary lymphadenopathy",
+      "Inspect skin for eczematous changes": "Mild eczematous patches on bilateral antecubital fossae, no acute urticaria",
+      "Assess mental status and ability to speak in full sentences": "Alert and oriented, anxious appearing, unable to complete full sentences without pausing for breath",
+      "Examine extremities for cyanosis or clubbing": "No cyanosis or clubbing, capillary refill <2 seconds",
+      "Percuss chest for hyperresonance": "Hyperresonant percussion notes bilaterally suggesting air trapping",
+      "Assess for pulsus paradoxus": "Pulsus paradoxus of 15 mmHg indicating moderate airway obstruction"
     },
     "ddxTargets": [
-        "Acute Severe Asthma Exacerbation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Severe Asthma Exacerbation (correct diagnosis)",
+      "Allergic bronchopulmonary aspergillosis",
+      "Vocal cord dysfunction",
+      "Pulmonary embolism",
+      "Anaphylaxis",
+      "COPD exacerbation",
+      "Pneumonia with bronchospasm"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Severe Asthma Exacerbation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Severe Asthma Exacerbation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Severe Asthma Exacerbation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the chief complaint of 'allergic reaction' and missing that this is primarily an asthma exacerbation triggered by occupational allergen exposure",
+      "prematureClosure": "May focus only on acute allergic reaction and miss the underlying poor asthma control due to medication non-adherence",
+      "availabilityBias": "Recent cases of anaphylaxis or food allergies might bias toward systemic allergic reaction rather than respiratory-focused asthma exacerbation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Deshawn Carter's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Severe Asthma Exacerbation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for acute dyspnea in a young adult. Given this patient's chief complaint of 'allergic reaction,' what specific historical details would help you differentiate between systemic allergy and respiratory-focused pathology? What questions about his baseline asthma control would be most important?",
+      "phase5": "Your examination reveals significant bronchospasm and air trapping with a very low peak flow. How does this constellation of findings, combined with his admission of medication non-adherence and occupational trigger exposure, help refine your differential? What key features make this more likely asthma exacerbation rather than anaphylaxis?",
+      "finalDebrief": "This case demonstrates how a chief complaint can sometimes mislead us. While the patient described an 'allergic reaction,' the clinical picture was most consistent with acute severe asthma exacerbation triggered by occupational allergen exposure and complicated by poor baseline control. The key teaching points are recognizing severe asthma markers, the importance of medication adherence, and how occupational exposures can trigger life-threatening exacerbations even in young patients."
     }
-}
+  }
 };

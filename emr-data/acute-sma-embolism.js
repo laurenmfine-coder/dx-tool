@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dorothy Chambers",
-  "patientHPI": "I'm worried about when I can start my blood thinner again after being in the hospital for bleeding in my stomach. The black stools stopped and my stomach feels better on these acid pills, but I'm nervous about my heart without the medication.",
+    "patientHPI": "I'm worried about when I can start my blood thinner again after being in the hospital for bleeding in my stomach. The black stools stopped and my stomach feels better on these acid pills, but I'm nervous about my heart without the medication.",
     "dob": "12/28/1948",
     "age": 76,
     "sex": "Female",
@@ -165,7 +165,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "180 lbs",
       "ht": "5'5\"",
-      "bmi": 30.0,
+      "bmi": 30,
       "setting": "PCP Office"
     },
     {
@@ -220,26 +220,116 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "142", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "34", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "36", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.9", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "104", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "21", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "8.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "20", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "34",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "36",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.9",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "104",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "21",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "8.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "9.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "29.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "225", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "9.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "29.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "225",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -307,15 +397,42 @@ window.EMR_DATA = {
     "Brother: T2DM, CKD, alive at 70"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker"],
-    ["Marital", "Widowed (husband deceased 2016)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "None — lifelong abstainer"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 10 min daily; limited by fatigue and dyspnea"],
-    ["Housing", "Lives alone; daughter lives nearby and assists with ADLs"],
-    ["Safety", "Denies IPV; fall risk — uses cane; home safety assessment done"],
-    ["Advance Directive", "Living will and HCP on file — daughter Brenda designated; Full code"]
+    [
+      "Occupation",
+      "Retired postal worker"
+    ],
+    [
+      "Marital",
+      "Widowed (husband deceased 2016)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "None — lifelong abstainer"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 10 min daily; limited by fatigue and dyspnea"
+    ],
+    [
+      "Housing",
+      "Lives alone; daughter lives nearby and assists with ADLs"
+    ],
+    [
+      "Safety",
+      "Denies IPV; fall risk — uses cane; home safety assessment done"
+    ],
+    [
+      "Advance Directive",
+      "Living will and HCP on file — daughter Brenda designated; Full code"
+    ]
   ],
   "meta": {
     "caseId": "acute-sma-embolism",
@@ -326,75 +443,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Dorothy Chambers appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Dorothy appears anxious and somewhat distressed, frequently touching her abdomen and shifting uncomfortably in her chair. She is cooperative and forthcoming but clearly worried about her cardiac risks without anticoagulation, speaking in a concerned but measured tone about her recent GI bleeding hospitalization.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did vascular emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the abdominal pain you're experiencing?",
+      "When did this abdominal pain first start?",
+      "What does the pain feel like - is it sharp, cramping, or constant?",
+      "Where exactly is the pain located and does it spread anywhere?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "Have you had any nausea, vomiting, or changes in bowel movements?",
+      "When was your last bowel movement and what did it look like?",
+      "Have you noticed any blood in your stool recently?",
+      "When did you stop taking your blood thinner and why?",
+      "Have you had any chest pain, shortness of breath, or palpitations?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Have you had severe abdominal pain like this before?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm worried about when I can start my blood thinner again after being in the hos.'",
-        "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Superior Mesenteric Artery Embolism.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 12.5mg daily; Metformin 500mg BID; Pantoprazole 40mg BID; Atorvastatin 40mg QHS.'",
-        "allergies": "'My allergies are Sulfa drugs (Trimethoprim-Sulfamethoxazole).'",
-        "family": "Father: Stroke at age 72 (deceased)  Mother: HTN, CHF, deceased at 80  Sister: Atrial fibrillation, DVT, alive at 74",
-        "social": "Occupation: Retired postal worker  Marital: Widowed (husband deceased 2016)  Tobacco: Never smoker  Alcohol: None \u2014 lifelong abstainer  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble focusing because of this pain in my belly.",
+      "onset": "The pain started about 6 hours ago, maybe around 2 AM. It woke me up from sleep and has been getting worse since then.",
+      "character": "It's a terrible cramping pain that comes in waves, but there's also this constant deep aching that won't go away. It's unlike anything I've felt before.",
+      "location": "The pain is mostly around my belly button and upper abdomen, but it seems to spread across my whole stomach area.",
+      "severity": "Right now it's about an 8 out of 10. I can barely sit still and it's making me feel sick to my stomach.",
+      "aggravating": "Any movement makes it worse, and I think eating something earlier today made it much more intense.",
+      "relieving": "Nothing seems to help. I tried some antacids and changing positions, but the pain just keeps getting worse.",
+      "associated": "I've been feeling nauseous and I vomited twice this morning. I also feel like I need to have a bowel movement but nothing comes out when I try.",
+      "denies": "No chest pain or trouble breathing right now. No blood in my vomit. No fever that I've noticed.",
+      "history": "I've never had abdominal pain this severe before. My recent stomach bleeding was different - more like burning pain up high, not this cramping.",
+      "medications": "Apixaban 5mg BID; Metoprolol Succinate 50mg daily; Amlodipine 10mg daily; Losartan 100mg daily; Chlorthalidone 12.5mg daily; Metformin 500mg BID; Pantoprazole 40mg BID; Atorvastatin 40mg QHS",
+      "allergies": "Sulfa drugs (Trimethoprim-Sulfamethoxazole)",
+      "family": "My father had a stroke and my sister has had blood clots, so I worry about my circulation. My mother had heart problems too.",
+      "social": "I'm a retired postal worker, been widowed since 2016. I've never smoked and don't drink alcohol. I live alone but my daughter checks on me."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Abdominal inspection",
+      "Abdominal auscultation for bowel sounds",
+      "Abdominal palpation - light and deep",
+      "Assessment for abdominal distension",
+      "Percussion of abdomen",
+      "Assessment for rebound tenderness and guarding",
+      "Rectal examination",
+      "Assessment of peripheral pulses",
+      "Cardiac auscultation",
+      "Vital signs assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Acute Superior Mesenteric Artery Embolism. Document specifically what you observe."
+      "Abdominal inspection": "Abdomen appears mildly distended with patient guarding and appearing uncomfortable",
+      "Abdominal auscultation for bowel sounds": "Bowel sounds are hypoactive to absent, particularly in the periumbilical region",
+      "Abdominal palpation - light and deep": "Diffuse tenderness with voluntary guarding, most pronounced in periumbilical and epigastric regions, no obvious masses",
+      "Assessment for abdominal distension": "Mild to moderate abdominal distension present",
+      "Percussion of abdomen": "Tympanitic throughout with some areas of dullness",
+      "Assessment for rebound tenderness and guarding": "Mild rebound tenderness present, voluntary guarding noted",
+      "Rectal examination": "No gross blood, empty rectal vault, guaiac test pending",
+      "Assessment of peripheral pulses": "Peripheral pulses palpable but diminished, no obvious peripheral emboli",
+      "Cardiac auscultation": "Irregularly irregular rhythm consistent with atrial fibrillation, no murmurs",
+      "Vital signs assessment": "BP 146/84, HR 88 irregular, temp 98.2°F, SpO2 95%, patient appears uncomfortable"
     },
     "ddxTargets": [
-        "Acute Superior Mesenteric Artery Embolism (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Superior Mesenteric Artery Embolism (correct diagnosis)",
+      "Acute mesenteric ischemia (thrombotic)",
+      "Small bowel obstruction",
+      "Acute mesenteric venous thrombosis",
+      "Ruptured abdominal aortic aneurysm",
+      "Acute pancreatitis",
+      "Peptic ulcer disease with complications"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Superior Mesenteric Artery Embolism, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Superior Mesenteric Artery Embolism, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Superior Mesenteric Artery Embolism based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on recent GI bleeding history and focusing only on peptic ulcer complications while missing acute mesenteric ischemia",
+      "prematureClosure": "May prematurely close on common causes like bowel obstruction without considering embolic events in this high-risk AF patient off anticoagulation",
+      "availabilityBias": "Recent experience with GI bleeding patients may bias toward gastric/duodenal pathology rather than vascular emergencies"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dorothy Chambers's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Superior Mesenteric Artery Embolism. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This 76-year-old patient has multiple cardiovascular risk factors and was recently off anticoagulation. As you prepare to interview her, what high-risk vascular conditions should you keep in mind given her cardiac history and current presentation?",
+      "phase5": "You've identified severe abdominal pain with hypoactive bowel sounds in a patient with atrial fibrillation who recently stopped anticoagulation. What does the combination of her cardiac rhythm, recent medication changes, and current presentation suggest about potential embolic complications?",
+      "finalDebrief": "This case illustrates how a patient's medication history and underlying cardiac conditions create windows of vulnerability. Dorothy's recent discontinuation of anticoagulation for GI bleeding created the perfect setup for arterial embolism. How did the constellation of atrial fibrillation, severe abdominal pain, and hypoactive bowel sounds point toward mesenteric ischemia rather than more common abdominal pathology?"
     }
-}
+  }
 };

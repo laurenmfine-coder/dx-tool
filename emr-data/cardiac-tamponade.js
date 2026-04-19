@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Moreno",
-  "patientHPI": "I can't catch my breath and there's this heavy pressure feeling all across my chest. It's not sharp pain, just this awful fullness that makes it hard to breathe, and it seems to be getting worse.",
+    "patientHPI": "I can't catch my breath and there's this heavy pressure feeling all across my chest. It's not sharp pain, just this awful fullness that makes it hard to breathe, and it seems to be getting worse.",
     "dob": "06/15/1962",
     "age": "64",
     "sex": "Female",
@@ -15,13 +15,13 @@ window.EMR_DATA = {
     "address": "8147 Spruce St, Memphis, TN 38114",
     "insurance": "Medicare",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Walmart Pharmacy \u2014 Broward Blvd",
+    "pharmacy": "Walmart Pharmacy — Broward Blvd",
     "emergencyContact": {
       "name": "James Morris",
       "phone": "(412) 555-5678",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+    "chiefComplaint": "I can't breathe Chest — pressure/fullness sensation, diffuse",
     "diagnosis": "Cardiac Tamponade (Malignant Pericardial Effusion)"
   },
   "problems": [
@@ -34,7 +34,7 @@ window.EMR_DATA = {
     },
     {
       "id": "prob-2",
-      "description": "Completed 4 cycles of carboplatin/pemetrexed 2 months ago \u2014 disease progression",
+      "description": "Completed 4 cycles of carboplatin/pemetrexed 2 months ago — disease progression",
       "status": "Active",
       "onset": "Chronic",
       "icd10": ""
@@ -97,10 +97,10 @@ window.EMR_DATA = {
     {
       "date": "03/03/2026",
       "time": "09:43",
-      "bp": "94/78 (NARROW PULSE PRESSURE \u2014 16mmHg; normal >25-30mmHg)",
+      "bp": "94/78 (NARROW PULSE PRESSURE — 16mmHg; normal >25-30mmHg)",
       "hr": "118",
       "rr": "26",
-      "temp": "36.8\u00b0C",
+      "temp": "36.8°C",
       "spo2": "92%",
       "pain": "34/10",
       "bmi": "31",
@@ -113,10 +113,10 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
-      "hpi": "Patricia Moreno is a 64-year-old female presenting with i can't breathe chest \u2014 pressure/fullness sensation, diffuse. Past medical history includes Non-small cell lung cancer, Completed 4 cycles of carboplatin/pemetrexed 2 months ago \u2014 disease progression, Brain metastases. See chart for full details.",
+      "cc": "I can't breathe Chest — pressure/fullness sensation, diffuse",
+      "hpi": "Patricia Moreno is a 64-year-old female presenting with i can't breathe chest — pressure/fullness sensation, diffuse. Past medical history includes Non-small cell lung cancer, Completed 4 cycles of carboplatin/pemetrexed 2 months ago — disease progression, Brain metastases. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Cardiac Tamponade (Malignant Pericardial Effusion) \u2014 clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Cardiac Tamponade (Malignant Pericardial Effusion) — clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
@@ -138,7 +138,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "8.4",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -159,7 +159,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "290",
-              "unit": "x10\u00b3/\u00b5L",
+              "unit": "x10³/µL",
               "range": "150-400",
               "flag": ""
             }
@@ -259,17 +259,17 @@ window.EMR_DATA = {
     {
       "id": "img-1",
       "date": "03/03/2026",
-      "study": "POCUS \u2013 Cardiac",
+      "study": "POCUS – Cardiac",
       "status": "Final",
       "priority": "STAT",
       "orderedBy": "Dr. ED Physician",
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-937131",
-      "clinical": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "clinical": "I can't breathe Chest — pressure/fullness sensation, diffuse",
       "technique": "Standard protocol",
-      "findings": "LARGE CIRCUMFERENTIAL PERICARDIAL EFFUSION (>2cm). RIGHT ATRIAL COLLAPSE in diastole (earliest sign of tamponade \u2014 RA has lowest intracardiac pressure). RIGHT VENTRICULAR DIASTOLIC COLLAPSE (confirms hemodynamic significance). IVC plethoric (>2.1cm) with <50% respirophasic variation (elevated RA pressure). SWINGING HEART within effusion (corresponds to electrical alternans). No left-sided collapse. LV function appears hyperdynamic (small, underfilled ventricle contracting vigorously).",
-      "impression": "LARGE PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY \u2014 RA and RV diastolic collapse, plethoric IVC. EMERGENT PERICARDIOCENTESIS REQUIRED.",
+      "findings": "LARGE CIRCUMFERENTIAL PERICARDIAL EFFUSION (>2cm). RIGHT ATRIAL COLLAPSE in diastole (earliest sign of tamponade — RA has lowest intracardiac pressure). RIGHT VENTRICULAR DIASTOLIC COLLAPSE (confirms hemodynamic significance). IVC plethoric (>2.1cm) with <50% respirophasic variation (elevated RA pressure). SWINGING HEART within effusion (corresponds to electrical alternans). No left-sided collapse. LV function appears hyperdynamic (small, underfilled ventricle contracting vigorously).",
+      "impression": "LARGE PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY — RA and RV diastolic collapse, plethoric IVC. EMERGENT PERICARDIOCENTESIS REQUIRED.",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
     },
@@ -283,7 +283,7 @@ window.EMR_DATA = {
       "readBy": "Dr. Radiologist",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-527314",
-      "clinical": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "clinical": "I can't breathe Chest — pressure/fullness sensation, diffuse",
       "technique": "Standard protocol",
       "findings": "ENLARGED CARDIAC SILHOUETTE with 'water-bottle' configuration. Bilateral small pleural effusions. Left hilar mass (known primary lung cancer). No pneumothorax.",
       "impression": "Massive pericardial effusion with enlarged silhouette. Known lung cancer.",
@@ -300,9 +300,9 @@ window.EMR_DATA = {
       "readBy": "Dr. Cardiology",
       "facility": "ReasonDx Medical Center",
       "accession": "IMG-174726",
-      "clinical": "I can't breathe Chest \u2014 pressure/fullness sensation, diffuse",
+      "clinical": "I can't breathe Chest — pressure/fullness sensation, diffuse",
       "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 118 bpm. LOW VOLTAGE throughout (QRS amplitude <5mm in limb leads \u2014 pericardial fluid attenuates signal). ELECTRICAL ALTERNANS (QRS amplitude alternates beat-to-beat \u2014 swinging heart within fluid). No ST changes",
+      "findings": "Sinus tachycardia at 118 bpm. LOW VOLTAGE throughout (QRS amplitude <5mm in limb leads — pericardial fluid attenuates signal). ELECTRICAL ALTERNANS (QRS amplitude alternates beat-to-beat — swinging heart within fluid). No ST changes",
       "impression": "Classic ECG triad: tachycardia + low voltage + electrical alternans = PERICARDIAL EFFUSION WITH TAMPONADE PHYSIOLOGY",
       "dictated": "03/03/2026 08:30",
       "verified": "03/03/2026 09:15"
@@ -346,7 +346,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "On disability \u2014 former construction supervisor"
+      "On disability — former construction supervisor"
     ],
     [
       "Living",
@@ -355,75 +355,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Patricia Moreno appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Patricia appears visibly anxious and short of breath, speaking in brief phrases between breaths. She is cooperative but clearly distressed, frequently shifting position trying to find relief from her breathing difficulty.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did i can't breathe chest \u2014 pressure/fullness sensation, diffuse start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did this breathing difficulty and chest pressure start?",
+      "How would you describe the chest pressure - is it sharp, dull, crushing?",
+      "On a scale of 1-10, how severe is your breathing difficulty?",
+      "What makes your breathing worse or better?",
+      "Have you had any chest pain, palpitations, or racing heart?",
+      "Any swelling in your legs, ankles, or feet?",
+      "Have you been coughing or bringing up any blood?",
+      "Any lightheadedness, dizziness, or feeling faint?",
+      "Have you had any recent fevers or chills?",
+      "When was your last oncology visit and imaging?",
+      "Are you taking all your prescribed medications?",
+      "Have you experienced anything like this before?",
+      "Any recent changes in your activity level or ability to lie flat?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I can't catch my breath and there's this heavy pressure feeling all across my ch.'",
-        "character": "'It's i can't breathe chest \u2014 pressure/fullness sensation, diffuse \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Dexamethasone; Levetiracetam; Ondansetron; Oxycodone.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Father: lung cancer (smoker)",
-        "social": "Tobacco: 30 pack-years, quit at diagnosis 1 year ago  Alcohol: None since diagnosis  Drugs: Denies  Occupation: On disability \u2014 former construction supervisor  Living: Lives with wife and adult daughter"
+      "default": "I'm sorry, I'm having trouble focusing because I can't catch my breath. Could you repeat that?",
+      "onset": "It started gradually about 3-4 days ago, but it's gotten much worse since yesterday. Now I can barely walk across the room without getting winded.",
+      "character": "It's not a sharp pain, it's more like someone is sitting on my chest. Heavy pressure all across here, and I just can't get enough air in.",
+      "location": "Right across my whole chest, from side to side. It doesn't really go anywhere else, just sits right here on my chest.",
+      "severity": "The breathing is about an 8 out of 10 - I'm really struggling. The pressure feeling is maybe a 6, but it's the breathing that's scaring me.",
+      "aggravating": "Any movement makes it worse. Even talking like this is hard. Lying flat is impossible - I've been sleeping propped up on three pillows.",
+      "relieving": "Nothing really helps. Sitting up is a little better than lying down, but I still can't breathe right.",
+      "associated": "My heart feels like it's racing all the time now. I've been feeling dizzy when I stand up, and my legs look a little puffy.",
+      "denies": "No fever, no sharp chest pain, no cough or blood. No nausea or vomiting beyond what's normal from my treatments.",
+      "history": "Never had breathing problems like this before, even during my chemo treatments. This is completely new and scary.",
+      "medications": "Dexamethasone; Levetiracetam; Ondansetron; Oxycodone",
+      "allergies": "NKDA",
+      "family": "My father had lung cancer too - he was a heavy smoker. That's actually what got me to finally quit smoking when I was diagnosed.",
+      "social": "I'm on disability now from my construction job. Used to smoke about a pack and a half a day for 20 years - quit when I got diagnosed a year ago. Stopped drinking too. My wife and daughter are taking good care of me at home."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Jugular venous pressure assessment",
+      "Cardiac auscultation",
+      "Pulsus paradoxus measurement",
+      "Hepatojugular reflux test",
+      "Lower extremity edema assessment",
+      "Pulmonary auscultation",
+      "Assessment for distant heart sounds",
+      "Kussmaul sign evaluation",
+      "Peripheral pulse assessment",
+      "Abdominal examination for hepatomegaly"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Jugular venous pressure assessment": "JVD elevated to 12-14 cm H2O with patient at 45 degrees",
+      "Cardiac auscultation": "Heart sounds are notably distant and muffled, regular rhythm, no murmurs appreciated",
+      "Pulsus paradoxus measurement": "Pulsus paradoxus of 22 mmHg present",
+      "Hepatojugular reflux test": "Positive hepatojugular reflux with sustained elevation",
+      "Lower extremity edema assessment": "2+ bilateral lower extremity pitting edema to mid-shins",
+      "Pulmonary auscultation": "Clear lung fields bilaterally, no rales or wheeze",
+      "Assessment for distant heart sounds": "Heart sounds markedly diminished in intensity",
+      "Kussmaul sign evaluation": "JVD increases with inspiration (positive Kussmaul sign)",
+      "Peripheral pulse assessment": "Weak peripheral pulses, tachycardic at 118 bpm",
+      "Abdominal examination for hepatomegaly": "Mild hepatomegaly with tender liver edge palpable 2 cm below costal margin"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Pericardial effusion with tamponade (correct diagnosis)",
+      "Congestive heart failure",
+      "Pulmonary embolism",
+      "Superior vena cava syndrome",
+      "Tension pneumothorax",
+      "Pleural effusion",
+      "Pneumonia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on cancer history and assuming all symptoms are progression of malignancy rather than cardiac emergency",
+      "prematureClosure": "May quickly attribute dyspnea to lung metastases without considering pericardial involvement from cancer",
+      "availabilityBias": "Recent cases of CHF or PE may overshadow recognition of classic tamponade physiology"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Patricia Moreno's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for dyspnea in a cancer patient. As you interview Patricia, pay particular attention to the timeline and associated cardiovascular symptoms. What specific physical exam findings would help you distinguish between these diagnoses?",
+      "phase5": "You've gathered excellent information about Patricia's presentation. The combination of her narrow pulse pressure (16 mmHg), elevated JVD, and distant heart sounds should be raising red flags. What do these findings together suggest about her cardiovascular status, and how does this change your diagnostic thinking?",
+      "finalDebrief": "This case highlights pericardial tamponade as a oncologic emergency that can develop in cancer patients, particularly with lung cancer. The classic Beck's triad (elevated JVP, distant heart sounds, hypotension) along with pulsus paradoxus and narrow pulse pressure pointed to tamponade. How did recognizing these findings help you move from thinking about primary pulmonary causes to this cardiac emergency?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Patricia Duval",
-  "patientHPI": "I've been feeling fine and my blood pressure is under control, but I'm a bit nervous about this upcoming trip to Jamaica. I'm still on my birth control pills because they really help with my heavy periods, and even though my doctor mentioned some risks because of my weight, I want to keep taking them since they work so well for me.",
+    "patientHPI": "I've been feeling fine and my blood pressure is under control, but I'm a bit nervous about this upcoming trip to Jamaica. I'm still on my birth control pills because they really help with my heavy periods, and even though my doctor mentioned some risks because of my weight, I want to keep taking them since they work so well for me.",
     "dob": "03/22/1980",
     "age": 44,
     "sex": "Female",
@@ -143,19 +143,67 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.0", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "38.8", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "275", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.0",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "38.8",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "275",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "218", "unit": "mg/dL", "range": "<200", "flag": "H" },
-            { "test": "LDL Cholesterol", "value": "138", "unit": "mg/dL", "range": "<100 optimal", "flag": "H" },
-            { "test": "HDL Cholesterol", "value": "48", "unit": "mg/dL", "range": ">50", "flag": "L" },
-            { "test": "Triglycerides", "value": "160", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "218",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": "H"
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "138",
+              "unit": "mg/dL",
+              "range": "<100 optimal",
+              "flag": "H"
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "48",
+              "unit": "mg/dL",
+              "range": ">50",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "160",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -199,15 +247,42 @@ window.EMR_DATA = {
     "No family history of PE or unprovoked clots"
   ],
   "socialHistory": [
-    ["Occupation", "Office manager — sedentary desk job; 8+ hours sitting daily"],
-    ["Marital", "Married, 2 children (ages 10, 7)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social, 1-2 glasses of wine on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 2-3x/week; limited by schedule"],
-    ["Housing", "Single-family home with husband and children"],
-    ["Safety", "Denies IPV; seatbelt; no firearms"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Office manager — sedentary desk job; 8+ hours sitting daily"
+    ],
+    [
+      "Marital",
+      "Married, 2 children (ages 10, 7)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social, 1-2 glasses of wine on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 2-3x/week; limited by schedule"
+    ],
+    [
+      "Housing",
+      "Single-family home with husband and children"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "deep-vein-thrombosis",
@@ -218,158 +293,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Patricia Duval is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Patricia appears mildly anxious and concerned about her leg symptoms but is cooperative and forthcoming with information. She seems particularly worried about whether this might affect her upcoming travel plans and appears relieved to finally have someone take her leg pain seriously.",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "When did you first notice the leg pain and swelling?",
+      "Can you describe what the pain feels like?",
+      "Which leg is affected and where exactly does it hurt?",
+      "On a scale of 1-10, how severe is the pain?",
+      "What makes the pain worse?",
+      "Have you found anything that helps relieve the pain?",
+      "Have you noticed any other symptoms like shortness of breath or chest pain?",
+      "Have you had any recent long trips or periods of immobility?",
+      "Have you ever had blood clots before?",
+      "Are you currently taking any medications, especially birth control?",
+      "Do you have any drug allergies?",
+      "Does anyone in your family have a history of blood clots?",
+      "Tell me about your work and daily activity level"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The musculoskeletal emergency has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Ethinyl Estradiol/Norgestimate (Sprintec) daily; Lisinopril 10mg daily; Vitamin D3 2000 IU daily.'",
-        "allergies": "'My allergies: Sulfa drugs.'",
-        "family": "Mother: DVT at age 50 (provoked \u2014 post-surgical), HTN, alive at 70  Father: T2DM, CAD, alive at 72  Sister: Factor V Leiden heterozygous (diagnosed during pregnancy), alive at 41",
-        "social": "Occupation: Office manager \u2014 sedentary desk job; 8+ hours sitting daily  Marital: Married, 2 children (ages 10, 7)  Tobacco: Never smoker  Alcohol: Social, 1-2 glasses of wine on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Can you rephrase that?",
+      "onset": "I first noticed my left leg feeling heavy and achy about 3 days ago, the day after I got back from a 6-hour flight from Seattle for work. It's gotten progressively worse and more swollen since then.",
+      "character": "It's a deep, constant aching pain, almost like a charley horse that won't go away. The whole leg feels heavy and tight.",
+      "location": "It's my entire left leg, but the worst pain is in my thigh and behind my knee. The pain doesn't really shoot anywhere else.",
+      "severity": "I'd say it's about a 6 out of 10 right now. It's making it hard to walk normally and I'm limping. I couldn't sleep well last night because of it.",
+      "aggravating": "Walking makes it worse, especially going up stairs. Standing for long periods is really uncomfortable. Touching or pressing on my thigh is quite tender.",
+      "relieving": "Elevating my leg helps a little bit, and I tried some ibuprofen which took the edge off but didn't make it go away.",
+      "associated": "I haven't had any chest pain or trouble breathing. No fever or anything like that. Just the leg pain and swelling.",
+      "denies": "No chest pain, no shortness of breath, no coughing up blood, no fever or chills. My other leg is completely fine.",
+      "history": "I've never had anything like this before. My legs sometimes get a bit swollen at the end of long work days, but nothing like this.",
+      "medications": "Ethinyl Estradiol/Norgestimate (Sprintec) daily; Lisinopril 10mg daily; Vitamin D3 2000 IU daily",
+      "allergies": "Sulfa drugs",
+      "family": "My mother had a blood clot in her leg after surgery when she was about 50, and my sister was told she has some kind of clotting disorder - Factor V something - when she was pregnant.",
+      "social": "I work as an office manager so I sit at a desk most of the day, probably 8-9 hours. I'm married with two kids. I don't smoke and just have a glass or two of wine on weekends. No drugs."
     },
     "examManeuvers": [
-        "General appearance",
-        "Bilateral arm BP",
-        "Peripheral pulses",
-        "Cardiovascular",
-        "Abdominal auscultation",
-        "Extremity perfusion",
-        "Skin",
-        "Neurological screen"
+      "Inspection of bilateral lower extremities",
+      "Palpation of left leg for warmth and tenderness",
+      "Measurement of bilateral calf and thigh circumference",
+      "Assessment of bilateral lower extremity pulses",
+      "Homan's sign",
+      "Wells score assessment",
+      "Examination for pitting edema",
+      "Assessment of skin color and temperature",
+      "Palpation of inguinal lymph nodes",
+      "Basic cardiopulmonary examination"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Bilateral arm BP": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Peripheral pulses": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Cardiovascular": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Abdominal auscultation": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Extremity perfusion": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Skin": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Neurological screen": "Finding consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein."
+      "Inspection of bilateral lower extremities": "Left leg notably swollen compared to right, particularly in thigh and calf. No visible varicosities or skin changes.",
+      "Palpation of left leg for warmth and tenderness": "Left thigh markedly tender to palpation, especially along medial aspect. Left leg warmer than right.",
+      "Measurement of bilateral calf and thigh circumference": "Left calf 2.5 cm larger than right at largest point. Left thigh 3 cm larger than right at 15 cm above knee.",
+      "Assessment of bilateral lower extremity pulses": "Dorsalis pedis and posterior tibial pulses 2+ and equal bilaterally. No pulse deficits noted.",
+      "Homan's sign": "Positive on left - dorsiflexion of left foot elicits posterior calf pain",
+      "Wells score assessment": "Clinical features suggest DVT likely - swelling, tenderness, pitting edema, alternative diagnosis less likely",
+      "Examination for pitting edema": "2+ pitting edema of left lower extremity from foot to mid-thigh. Right leg without edema.",
+      "Assessment of skin color and temperature": "Left leg appears slightly erythematous and is warm to touch compared to right leg",
+      "Palpation of inguinal lymph nodes": "No palpable lymphadenopathy bilaterally",
+      "Basic cardiopulmonary examination": "Heart rate regular, lungs clear to auscultation bilaterally, no signs of pulmonary embolism"
     },
     "ddxTargets": [
-        "Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Acute Proximal Deep Vein Thrombosis — Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel) (correct diagnosis)",
+      "Superficial thrombophlebitis",
+      "Cellulitis of left lower extremity",
+      "Pulmonary embolism with associated DVT",
+      "Acute arterial occlusion",
+      "Muscle strain or hematoma",
+      "Chronic venous insufficiency exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "May anchor on musculoskeletal injury given chief complaint category rather than considering vascular emergency given multiple thrombotic risk factors",
+      "prematureClosure": "May stop at superficial thrombophlebitis or cellulitis without considering proximal DVT requiring immediate anticoagulation",
+      "availabilityBias": "May be influenced by recent cases of muscle strains or cellulitis rather than recognizing classic DVT presentation in high-risk patient"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Patricia Duval: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel). How did your reasoning evolve?"
+      "phase2": "Good start on your differential. Before you interview the patient, what specific risk factors for venous thromboembolism should you be thinking about given what you know about this 44-year-old woman? How might her medications and recent activities influence your questioning?",
+      "phase5": "Now that you've completed your history and physical, let's think about risk stratification. What scoring system could help you here, and what are the key clinical features you've identified that point toward your leading diagnosis? What would be your next immediate step?",
+      "finalDebrief": "This case highlights the importance of recognizing provoked DVT in patients with multiple risk factors. How did the combination of oral contraceptives, obesity, prolonged travel, and family history influence the clinical presentation? What does this teach us about managing patients on estrogen-containing contraceptives?"
     }
-}
-};
-
-/* ── CASES format extension ─────────── */
-window.CASES = window.CASES || {};
-window.CASES['deep-vein-thrombosis'] = {
-  id: 'deep-vein-thrombosis', name: 'Patricia Duval',
-  chiefComplaint: 'DVT — Wells Score and DOAC Therapy',
-  diagnosis: 'DVT — Wells Score and DOAC Therapy',
-  orders: {
-    correct: [{ id: 'duplex-ultrasound', name: 'Compression duplex ultrasound — first-line imaging for suspected DVT', rationale: 'Lower extremity duplex ultrasound: sensitivity >95% for proximal DVT (popliteal and above). Compress the vein — if compressible = no clot. Non-compressible = DVT. Less sensitive for distal DVT (calf veins). If negative with high pretest probability: repeat in 5-7 days or advance to venography.' },{ id: 'anticoagulation-dvt', name: 'Anticoagulate — DOACs (rivaroxaban or apixaban) preferred for DVT', rationale: 'DOACs (rivaroxaban, apixaban, edoxaban) are first-line for DVT (EINSTEIN, AMPLIFY trials): comparable efficacy to LMWH/warfarin with lower bleeding risk. Rivaroxaban: 15mg BID × 21 days → 20mg daily. Apixaban: 10mg BID × 7 days → 5mg BID. Duration: provoked (3 months), unprovoked (indefinite, individualize).' }],
-    incorrect: [{ id: 'empirical-anticoag', name: 'Anticoagulate based on clinical suspicion alone without imaging', rationale: 'Imaging is required to confirm DVT before initiating anticoagulation — DVT must be confirmed radiographically. Use Wells score to pre-test stratify: low score + negative D-dimer = no DVT, no imaging needed. Moderate-high score: proceed to duplex ultrasound regardless of D-dimer.' },{ id: 'compression-only', name: 'Compression stockings only — DVT does not need anticoagulation', rationale: 'Anticoagulation is required for DVT to prevent PE and extension. Compression stockings alone are used for PTS prevention AFTER anticoagulation is established. The SOX trial showed elastic compression stockings do NOT prevent PTS — routine use for PTS prevention is no longer standard.' }]
-  },
-  teachingPoints: {
-    keyLearning: ['Wells DVT score: active cancer (1), paralysis/plaster cast (1), recently bedridden >3 days or surgery <12 weeks (1), localized tenderness along deep venous system (1), entire leg swollen (1), calf swelling >3cm compared to other leg (1), pitting edema (1), collateral superficial veins (1), previously documented DVT (1), alternative diagnosis at least as likely (-2). Score ≥2 = high probability.','D-dimer: highly sensitive but non-specific. A negative D-dimer (<500 ng/mL) with LOW pre-test probability (Wells score <2) essentially rules out DVT (negative predictive value >99%). Elevated in pregnancy, cancer, infection, post-surgery — cannot rule out DVT with positive D-dimer alone.','Duration of anticoagulation: first provoked DVT (transient risk factor like surgery, trauma, immobility) = 3 months. First unprovoked DVT = 3-6 months minimum, then indefinite if low bleeding risk. Recurrent unprovoked DVT = indefinite. Cancer-associated DVT = LMWH or DOAC (edoxaban/rivaroxaban per CARAVAGGIO, Hokusai-VTE Cancer).'],
-    boardPearls: ['Post-thrombotic syndrome (PTS): occurs in 20-50% of proximal DVT. Chronic pain, swelling, skin changes, ulceration. Risk reduced by: adequate anticoagulation, graduated compression stockings (for symptom relief, not prevention per SOX trial). Iliac/femoral DVT highest PTS risk.','Phlegmasia cerulea dolens: massive iliofemoral DVT causing venous gangrene. Extreme swelling, cyanosis, arterial compromise from compartment syndrome. Emergency CDT or surgical thrombectomy.','Superficial thrombophlebitis: inflammation of superficial vein with clot. If <5cm from saphenofemoral junction: treat as DVT (risk of propagation to deep system). Otherwise: NSAIDs, warmth, compression.']
-  },
-  "guided": {
-    "supported": true,
-    "patientPersona": "Patricia Duval is cooperative and provides a clear history. He is appropriately concerned about their symptoms.",
-    "interviewQuestions": [
-        "When did your symptoms start?",
-        "Describe the main symptom.",
-        "How severe is it?",
-        "What makes it worse or better?",
-        "Any other symptoms?",
-        "Any prior episodes?",
-        "What medications do you take?",
-        "Any allergies?"
-    ],
-    "patientResponses": {
-        "default": "He thinks for a moment. 'Can you clarify what you mean?'",
-        "onset": "'My symptoms started recently, getting worse over the past day or two.'",
-        "character": "'It feels like acute proximal deep vein thrombosis \u2014 left femoral vein \u2014 fairly significant.'",
-        "location": "'The problem is primarily in the affected area.'",
-        "severity": "'About a seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat.'",
-        "associated": "'I have some associated symptoms consistent with my condition.'",
-        "denies": "'No fever, chills, or weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Ethinyl Estradiol/Norgestimate (Sprintec) daily; Lisinopril 10mg daily; Vitamin D3 2000 IU daily.'",
-        "allergies": "'My allergies: Sulfa drugs.'",
-        "family": "'No significant family history relevant to this presentation.'",
-        "social": "'I am a working adult. Non-smoker. Social drinker.'"
-    },
-    "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted examination"
-    ],
-    "examFindings": {
-        "General appearance": "Patient appears consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "Vital signs": "Vital signs appropriate to the acuity of presentation.",
-        "Cardiovascular auscultation": "Cardiovascular exam as appropriate.",
-        "Pulmonary auscultation": "Pulmonary exam as appropriate.",
-        "Abdominal examination": "Abdomen as appropriate.",
-        "Extremity assessment": "Extremities as appropriate.",
-        "Skin examination": "Skin as appropriate.",
-        "Targeted examination": "Targeted findings consistent with Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein."
-    },
-    "ddxTargets": [
-        "Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (correct)",
-        "Alternative diagnosis 1",
-        "Alternative diagnosis 2",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
-    ],
-    "biasFlags": {
-        "anchoring": "Consider the full differential for Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein.",
-        "prematureClosure": "Complete your workup even after forming a hypothesis.",
-        "availabilityBias": "Apply systematic reasoning."
-    },
-    "coachPrompts": {
-        "phase2": "Before interviewing Patricia Duval \u2014 what are your top 3 diagnoses from chart review?",
-        "phase5": "How has your differential changed after history and exam?",
-        "finalDebrief": "The diagnosis is Acute Proximal Deep Vein Thrombosis \u2014 Left Femoral Vein (Provoked by OCP + Obesity + Prolonged Travel). How did your reasoning evolve?"
-    }
-}
+  }
 };

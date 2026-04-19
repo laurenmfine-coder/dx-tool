@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Robert Chen",
-  "patientHPI": "I was gardening this morning when a bee stung my right arm, and about thirty minutes later I started feeling really dizzy and flushed all over, and now I'm having trouble breathing. This happened to me before about five years ago with a bee sting and it was really scary, but my emergency pen expired and I haven't gotten a new one yet.",
+      "patientHPI": "I was gardening this morning when a bee stung my right arm, and about thirty minutes later I started feeling really dizzy and flushed all over, and now I'm having trouble breathing. This happened to me before about five years ago with a bee sting and it was really scary, but my emergency pen expired and I haven't gotten a new one yet.",
       "dob": "12/10/1954",
       "age": "72",
       "sex": "Male",
@@ -1176,140 +1176,147 @@ window.EMR_DATA = {
       "Language",
       "Primary Mandarin, limited English — daughter translates"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "EAACI-Anaph-2021",
-    "title": "EAACI guidelines: Anaphylaxis (2021 update)",
-    "authors": "Muraro A, Worm M, Alviani C, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15032",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
-    "openAccess": true,
-    "validates": [
-      "Discharge planning with EpiPen",
-      "Patient action plans",
-      "Allergist referral 4-6 weeks"
-    ]
-  }
-],
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "EAACI-Anaph-2021",
+      "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+      "authors": "Muraro A, Worm M, Alviani C, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15032",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+      "openAccess": true,
+      "validates": [
+        "Discharge planning with EpiPen",
+        "Patient action plans",
+        "Allergist referral 4-6 weeks"
+      ]
+    }
+  ],
   "guided": {
     "supported": true,
-    "patientPersona": "Robert Chen is alert and cooperative, clearly concerned but provides a clear history.",
+    "patientPersona": "Robert appears anxious and slightly confused, frequently touching his flushed face and neck. He's cooperative but keeps mentioning he doesn't understand why he feels so weak since his heart rate seems normal. He's moderately distressed but trying to downplay symptoms, saying he's 'probably just getting old.'",
     "interviewQuestions": [
-        "When did your symptoms start and how?",
-        "Describe the main symptom \u2014 location, character, severity.",
-        "What makes it worse? What makes it better?",
-        "Any other symptoms you've noticed?",
-        "Any prior similar episodes?",
-        "Tell me about your medical history.",
-        "What medications are you currently taking?",
-        "Any medication allergies?",
-        "Relevant family history?",
-        "Tell me about your lifestyle."
+      "Can you describe exactly what happened when you were stung?",
+      "What symptoms did you notice first after the bee sting?",
+      "Have you ever been stung by a bee before, and if so, what happened?",
+      "Are you experiencing any difficulty breathing or throat tightness?",
+      "Do you have any itching, hives, or skin changes besides the flushing?",
+      "Are you feeling nauseous or having any abdominal cramping?",
+      "What medications are you currently taking?",
+      "Do you have any known allergies?",
+      "Have you ever had a severe allergic reaction before?",
+      "Are you experiencing any chest pain or palpitations?",
+      "How would you rate your current breathing difficulty on a scale of 1-10?",
+      "Have you taken anything for these symptoms since the sting?",
+      "Do you have an EpiPen or any emergency medications at home?"
     ],
     "patientResponses": {
-        "default": "He pauses. 'Can you clarify what you mean?'",
-        "onset": "'Gradually \u2014 over the past several days.'",
-        "character": "'The symptom has been significant and affecting my ability to function.'",
-        "location": "'The main problem is in the expected area for my condition.'",
-        "severity": "'Six or seven out of ten.'",
-        "aggravating": "'Activity and movement worsen it.'",
-        "relieving": "'Rest helps somewhat. Nothing has fully resolved it.'",
-        "associated": "'Some associated symptoms consistent with this condition.'",
-        "denies": "'No fever, chills, or unexplained weight loss.'",
-        "history": "'I have not had exactly this before.'",
-        "medications": "'I take Epinephrine; Glucagon; Diphenhydramine; NS bolus.'",
-        "allergies": "'My allergies: Bee venom.'",
-        "family": "Wife: no allergies  Son: asthma",
-        "social": "Tobacco: Former (40 pack-years, quit 10y ago)  Alcohol: None  Occupation: Retired teacher  Medications: Takes metoprolol 50mg BID and lisinopril \u2014 beta-blocker masks tachycardia  Living: Lives alone, wife deceased 2 years ago"
+      "default": "I'm sorry, I'm feeling a bit lightheaded and confused right now. Could you repeat that?",
+      "onset": "I was pruning my roses about 30 minutes ago when a bee stung my right forearm. Within 5-10 minutes I started feeling dizzy and weak.",
+      "character": "I feel very lightheaded and weak, like I might faint. My skin feels hot and flushed all over.",
+      "location": "The sting is on my right forearm, but I'm feeling flushed and weak all over my body.",
+      "severity": "The dizziness is about a 7 out of 10 - I'm worried I might pass out. The breathing difficulty is maybe a 5 or 6.",
+      "aggravating": "Standing up makes the dizziness much worse. I feel worse when I try to take deep breaths.",
+      "relieving": "Sitting down helps a little with the dizziness, but nothing really makes me feel better.",
+      "associated": "I'm having trouble catching my breath, my whole body feels flushed and hot, and I'm feeling nauseous.",
+      "denies": "I don't have any hives or itchy bumps, no chest pain, no throat swelling that I can tell, and my heart doesn't feel like it's racing.",
+      "history": "I've been stung before about 5 years ago and had a bad reaction - went to the ER that time too with similar symptoms.",
+      "medications": "Epinephrine; Glucagon; Diphenhydramine; NS bolus",
+      "allergies": "Bee venom",
+      "family": "My son has asthma, but my wife never had any allergies when she was alive.",
+      "social": "I'm a retired teacher, live alone since my wife passed two years ago. I used to smoke for many years but quit 10 years ago - about 2 packs a day for 20 years. I don't drink alcohol."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Cardiovascular",
-        "Pulmonary",
-        "Abdominal",
-        "Extremities",
-        "Skin",
-        "Targeted exam"
+      "Inspect skin for urticaria or angioedema",
+      "Examine sting site on right forearm",
+      "Auscultate heart sounds and rhythm",
+      "Auscultate lung sounds bilaterally",
+      "Assess mucous membranes and conjunctiva",
+      "Examine oropharynx for swelling",
+      "Palpate lymph nodes",
+      "Assess peripheral perfusion and capillary refill",
+      "Check orthostatic vital signs",
+      "Neurologic assessment including mental status"
     ],
     "examFindings": {
-        "General appearance": "Finding consistent with this condition.",
-        "Vital signs": "Finding consistent with this condition.",
-        "Cardiovascular": "Finding consistent with this condition.",
-        "Pulmonary": "Finding consistent with this condition.",
-        "Abdominal": "Finding consistent with this condition.",
-        "Extremities": "Finding consistent with this condition.",
-        "Skin": "Finding consistent with this condition.",
-        "Targeted exam": "Finding consistent with this condition."
+      "Inspect skin for urticaria or angioedema": "Diffuse erythematous flushing of face, neck, and chest without discrete urticarial lesions or angioedema",
+      "Examine sting site on right forearm": "Single puncture wound with mild local erythema and swelling, stinger not visible",
+      "Auscultate heart sounds and rhythm": "Regular rate and rhythm, no murmurs, rate 58 bpm consistent with beta-blocker effect",
+      "Auscultate lung sounds bilaterally": "Decreased air movement bilaterally with mild expiratory wheeze, consistent with bronchospasm",
+      "Assess mucous membranes and conjunctiva": "Pale mucous membranes, conjunctival injection present",
+      "Examine oropharynx for swelling": "No obvious uvular or tongue swelling, mild erythema of posterior pharynx",
+      "Palpate lymph nodes": "No lymphadenopathy appreciated",
+      "Assess peripheral perfusion and capillary refill": "Cool extremities with capillary refill 4 seconds, weak peripheral pulses",
+      "Check orthostatic vital signs": "Unable to obtain standing BP due to patient dizziness, sitting BP remains 92/54",
+      "Neurologic assessment including mental status": "Alert and oriented but appears anxious, no focal neurologic deficits"
     },
     "ddxTargets": [
-        "this condition (correct)",
-        "Most likely alternative",
-        "Third differential",
-        "Must-not-miss 1",
-        "Must-not-miss 2",
-        "Common mimic 1",
-        "Common mimic 2"
+      "Anaphylaxis - beta-blocker blunted (correct diagnosis)",
+      "Vasovagal reaction to bee sting",
+      "Medication-induced hypotension",
+      "Acute myocardial infarction",
+      "Septic shock from secondary infection",
+      "Large local allergic reaction",
+      "Anxiety reaction to bee sting"
     ],
     "biasFlags": {
-        "anchoring": "Consider the full differential for this condition.",
-        "prematureClosure": "Complete your workup before narrowing focus.",
-        "availabilityBias": "Apply systematic clinical reasoning."
+      "anchoring": "Risk of anchoring on normal heart rate and absence of classic urticaria, missing anaphylaxis diagnosis due to beta-blocker masking typical tachycardic response",
+      "prematureClosure": "Risk of premature closure on vasovagal reaction or simple allergic reaction without considering the severity indicated by hypotension and bronchospasm",
+      "availabilityBias": "Risk of availability bias toward common presentations of anaphylaxis with tachycardia and hives, missing atypical presentation in patient on beta-blockers"
     },
     "coachPrompts": {
-        "phase2": "Before interviewing Robert Chen: what does the chart suggest? Top 3 diagnoses?",
-        "phase5": "After history and exam: how has your differential changed?",
-        "finalDebrief": "The diagnosis is . How did your reasoning evolve?"
+      "phase2": "This is an interesting case of a bee sting with some concerning vital signs. Before you talk to the patient, what are your thoughts about the significance of his blood pressure and heart rate? How might his medications affect the typical presentation of allergic reactions?",
+      "phase5": "You've gathered good information about his history and physical findings. Let's think about this systematically - he has hypotension, flushing, dyspnea with wheeze, and a history of prior severe reaction to bee stings. What's particularly notable about his heart rate in this context, and how does his medication regimen factor into your diagnostic thinking?",
+      "finalDebrief": "This case highlights how beta-blockers can mask the classic tachycardic response in anaphylaxis, making the diagnosis more challenging. The key was recognizing that hypotension, bronchospasm, and flushing after known allergen exposure constitutes anaphylaxis even without urticaria or tachycardia. His prior severe reaction and current beta-blocker therapy were crucial historical elements. How did your differential diagnosis evolve as you gathered more information?"
     }
-}
+  }
 };

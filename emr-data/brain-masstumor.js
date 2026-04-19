@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Eleanor Whitfield",
-  "patientHPI": "For the past three months, I've been waking up every morning with these terrible headaches that feel like pressure all over my head. They're worst when I first get up, and I often feel sick to my stomach too. I've never had headaches like this before - they're really wearing me down.",
+    "patientHPI": "For the past three months, I've been waking up every morning with these terrible headaches that feel like pressure all over my head. They're worst when I first get up, and I often feel sick to my stomach too. I've never had headaches like this before - they're really wearing me down.",
     "dob": "05/12/1947",
     "age": 77,
     "sex": "Female",
@@ -189,37 +189,133 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "94", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "16", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.2", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.1", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "10.4", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "38", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "34", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Alkaline Phosphatase", "value": "142", "unit": "U/L", "range": "44-147", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "94",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "16",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.1",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.4",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "34",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "142",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "8.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "35.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "312", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "8.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "312",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "TUMOR MARKERS",
           "results": [
-            { "test": "CA 27-29", "value": "48", "unit": "U/mL", "range": "<38", "flag": "H" },
-            { "test": "CEA", "value": "6.2", "unit": "ng/mL", "range": "<3.0", "flag": "H" }
+            {
+              "test": "CA 27-29",
+              "value": "48",
+              "unit": "U/mL",
+              "range": "<38",
+              "flag": "H"
+            },
+            {
+              "test": "CEA",
+              "value": "6.2",
+              "unit": "ng/mL",
+              "range": "<3.0",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "THYROID FUNCTION",
           "results": [
-            { "test": "TSH", "value": "2.8", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "2.8",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -287,15 +383,42 @@ window.EMR_DATA = {
     "Daughter: Healthy, age 50 — BRCA testing negative"
   ],
   "socialHistory": [
-    ["Occupation", "Retired high school English teacher"],
-    ["Marital", "Widowed — husband deceased 2019 (MI)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — glass of wine at holidays"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Daily walks with neighbor; book club; active at church"],
-    ["Housing", "Lives alone in condo; son lives 10 minutes away; checks on her daily"],
-    ["Safety", "Grab bars in bathroom; no throw rugs; medical alert pendant; drives (son concerned about recent near-misses)"],
-    ["Advance Directive", "Yes — healthcare proxy: son Thomas Whitfield; full code"]
+    [
+      "Occupation",
+      "Retired high school English teacher"
+    ],
+    [
+      "Marital",
+      "Widowed — husband deceased 2019 (MI)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — glass of wine at holidays"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Daily walks with neighbor; book club; active at church"
+    ],
+    [
+      "Housing",
+      "Lives alone in condo; son lives 10 minutes away; checks on her daily"
+    ],
+    [
+      "Safety",
+      "Grab bars in bathroom; no throw rugs; medical alert pendant; drives (son concerned about recent near-misses)"
+    ],
+    [
+      "Advance Directive",
+      "Yes — healthcare proxy: son Thomas Whitfield; full code"
+    ]
   ],
   "meta": {
     "caseId": "brain-masstumor",
@@ -306,75 +429,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Eleanor Whitfield is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Eleanor appears anxious and fatigued, with visible worry lines deepened by chronic pain. She's articulate and forthcoming about her symptoms, having been a teacher, but shows clear distress about the worsening headaches. She maintains composure but her voice wavers when discussing how the pain affects her daily activities.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did geriatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when and how these headaches started?",
+      "What do the headaches feel like - throbbing, pressure, sharp, or burning?",
+      "Where exactly do you feel the pain in your head?",
+      "On a scale of 1-10, how severe are these headaches?",
+      "What makes the headaches worse or better?",
+      "Have you noticed any other symptoms along with the headaches?",
+      "Have you had any vision changes, weakness, or numbness anywhere?",
+      "Have you experienced any confusion, memory problems, or personality changes?",
+      "Have you had any seizures or episodes of losing consciousness?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?",
+      "Tell me about your breast cancer history and treatment",
+      "Has anyone in your family had similar headaches or neurological problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started For the past three months, I've been waking up every morning with these terrible.'",
-        "character": "'It's geriatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Brain Mass/Tumor.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 5mg daily; Levothyroxine 75mcg daily; Denosumab (Prolia) 60mg SC q6months; Calcium-Vitamin D 600mg/400IU BID; Acetaminophen 1000mg TID PRN.'",
-        "allergies": "'My allergies are Sulfa drugs.'",
-        "family": "Mother: Breast cancer (age 64), deceased at 78 (CHF)  Father: Lung cancer, deceased at 70  Sister: Breast cancer (age 58), alive at 72 \u2014 BRCA negative",
-        "social": "Occupation: Retired high school English teacher  Marital: Widowed \u2014 husband deceased 2019 (MI)  Tobacco: Never smoker  Alcohol: Rare \u2014 glass of wine at holidays  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that? These headaches have me feeling pretty scattered.",
+      "onset": "It started about three months ago, gradually at first. I'd wake up with a mild headache maybe twice a week, but now it's every single morning and getting worse each day.",
+      "character": "It feels like intense pressure, like my head is in a vise that's being tightened. Sometimes it feels like my head might explode from the pressure building up inside.",
+      "location": "It's all over my head - the whole thing throbs with pressure. Sometimes it feels worse on the left side, but really it's everywhere.",
+      "severity": "They're about an 8 out of 10 when I first wake up. The pain is so bad some mornings I can barely get out of bed. It interferes with everything I try to do.",
+      "aggravating": "They're definitely worst in the morning when I first wake up. Bending over to pick something up makes the pressure much worse, and coughing or sneezing is excruciating.",
+      "relieving": "The acetaminophen I take helps a little bit, maybe brings it down to a 6, but it never goes away completely anymore. Sitting upright for a while after I wake up seems to help some.",
+      "associated": "I feel nauseous almost every morning with the headache, and I've vomited a few times. I've been more tired than usual, and my daughter says I seem more forgetful lately.",
+      "denies": "I haven't had any seizures or passed out. No fever or neck stiffness. I don't think I've had any weakness in my arms or legs, though everything feels harder when my head hurts this much.",
+      "history": "Never. I've never been a headache person. Maybe an occasional tension headache years ago, but nothing like this. That's why I'm so worried.",
+      "medications": "Amlodipine 5mg daily; Levothyroxine 75mcg daily; Denosumab (Prolia) 60mg SC q6months; Calcium-Vitamin D 600mg/400IU BID; Acetaminophen 1000mg TID PRN",
+      "allergies": "Sulfa drugs",
+      "family": "My mother had breast cancer at 64 and died at 78 from heart failure. My sister also had breast cancer at 58 but she's doing well now at 72. We were both tested and we're BRCA negative. No family history of brain tumors or neurological problems that I know of.",
+      "social": "I'm a retired high school English teacher. I've been widowed since 2019 when my husband died of a heart attack. I never smoked and only have an occasional glass of wine at holidays. I live alone but my daughter checks on me regularly."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Fundoscopic examination",
+      "Cranial nerve examination",
+      "Motor strength testing",
+      "Deep tendon reflexes",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment",
+      "Mental status examination",
+      "Romberg test",
+      "Sensation testing",
+      "Neck stiffness assessment"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Brain Mass/Tumor. Document specifically what you observe."
+      "Fundoscopic examination": "Bilateral papilledema with blurred disc margins and venous engorgement, consistent with increased intracranial pressure",
+      "Cranial nerve examination": "Mild left facial weakness (CN VII), otherwise cranial nerves II-XII intact",
+      "Motor strength testing": "Subtle weakness in right upper extremity (4+/5), otherwise 5/5 strength throughout",
+      "Deep tendon reflexes": "Hyperreflexia on the right side (3+ biceps, triceps, patellar), left side 2+ and symmetric",
+      "Cerebellar testing (finger-to-nose, heel-to-shin)": "Mild dysmetria on right side, left side normal",
+      "Gait assessment": "Slightly unsteady with tendency to favor left side, no obvious ataxia",
+      "Mental status examination": "Alert and oriented x3, mild word-finding difficulty, otherwise cognitively intact",
+      "Romberg test": "Negative, able to maintain balance with eyes closed",
+      "Sensation testing": "Intact to light touch, pinprick, and vibration bilaterally",
+      "Neck stiffness assessment": "No nuchal rigidity, full range of motion without pain"
     },
     "ddxTargets": [
-        "Brain Mass/Tumor (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Brain Mass/Tumor (Metastatic Breast Cancer) (correct diagnosis)",
+      "Primary brain tumor (glioblastoma)",
+      "Tension-type headache with medication overuse",
+      "Meningitis",
+      "Subarachnoid hemorrhage",
+      "Migraine with aura",
+      "Temporal arteritis"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Brain Mass/Tumor, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Brain Mass/Tumor, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Brain Mass/Tumor based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'typical' tension headaches in elderly patients or assuming headaches are medication-related, missing the critical morning pattern and associated neurological signs",
+      "prematureClosure": "Risk of stopping evaluation after finding hypertension as a cause for headaches, without considering the breast cancer history and progressive nature",
+      "availabilityBias": "May focus on more common headache causes (tension, migraine) rather than considering metastatic disease in a patient with known cancer history"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Eleanor Whitfield's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Brain Mass/Tumor (Metastatic Breast Cancer). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possible causes for Mrs. Whitfield's headaches. Before you interview her, think about what specific historical features would help you distinguish between primary headache disorders and secondary causes. What aspects of her past medical history might be particularly relevant to her current presentation?",
+      "phase5": "Now that you've completed your history and physical exam, let's discuss what you've found. The combination of morning headaches, nausea, and your physical exam findings should point you toward a specific category of pathology. How do these findings change your differential diagnosis, and what's your next step?",
+      "finalDebrief": "This case illustrates the importance of considering a patient's oncologic history when evaluating new neurological symptoms. Mrs. Whitfield's morning headaches with nausea, combined with papilledema and focal neurological signs, created a classic presentation for increased intracranial pressure from brain metastases. How did recognizing the pattern of secondary headache features help narrow your differential from your initial assessment?"
     }
-}
+  }
 };

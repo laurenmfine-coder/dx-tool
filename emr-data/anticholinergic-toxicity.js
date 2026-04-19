@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Derek Hanson",
-  "patientHPI": "I haven't been able to have a bowel movement in four days even though I'm taking the stool softeners, and I've been taking a lot of those pink sleep pills at night because I can't sleep - maybe three of them most nights.",
+    "patientHPI": "I haven't been able to have a bowel movement in four days even though I'm taking the stool softeners, and I've been taking a lot of those pink sleep pills at night because I can't sleep - maybe three of them most nights.",
     "dob": "05/14/1998",
     "age": 26,
     "sex": "Male",
@@ -182,52 +182,208 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "142", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "28", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "Sodium", "value": "146", "unit": "mEq/L", "range": "136-145", "flag": "H" },
-            { "test": "Potassium", "value": "3.8", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "108", "unit": "mEq/L", "range": "98-106", "flag": "H" },
-            { "test": "CO2 (Bicarbonate)", "value": "24", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "AST (SGOT)", "value": "38", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "42", "unit": "U/L", "range": "7-56", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "28",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "Sodium",
+              "value": "146",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "H"
+            },
+            {
+              "test": "Potassium",
+              "value": "3.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "108",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "H"
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "24",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "38",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "42",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT (CBC)",
           "results": [
-            { "test": "WBC", "value": "11.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "15.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "46.8", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelets", "value": "224", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "11.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "15.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "46.8",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelets",
+              "value": "224",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CREATINE KINASE",
           "results": [
-            { "test": "CK Total", "value": "280", "unit": "U/L", "range": "30-200", "flag": "H" }
+            {
+              "test": "CK Total",
+              "value": "280",
+              "unit": "U/L",
+              "range": "30-200",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINALYSIS",
           "results": [
-            { "test": "Specific Gravity", "value": "1.028", "unit": "", "range": "1.005-1.030", "flag": "" },
-            { "test": "pH", "value": "5.5", "unit": "", "range": "5.0-8.0", "flag": "" },
-            { "test": "Ketones", "value": "Trace", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "WBC", "value": "0-2", "unit": "/HPF", "range": "0-5", "flag": "" },
-            { "test": "Bacteria", "value": "None", "unit": "", "range": "None", "flag": "" }
+            {
+              "test": "Specific Gravity",
+              "value": "1.028",
+              "unit": "",
+              "range": "1.005-1.030",
+              "flag": ""
+            },
+            {
+              "test": "pH",
+              "value": "5.5",
+              "unit": "",
+              "range": "5.0-8.0",
+              "flag": ""
+            },
+            {
+              "test": "Ketones",
+              "value": "Trace",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "WBC",
+              "value": "0-2",
+              "unit": "/HPF",
+              "range": "0-5",
+              "flag": ""
+            },
+            {
+              "test": "Bacteria",
+              "value": "None",
+              "unit": "",
+              "range": "None",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "URINE DRUG SCREEN",
           "results": [
-            { "test": "Amphetamines", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Benzodiazepines", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Cocaine", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "Opiates", "value": "Negative", "unit": "", "range": "Negative", "flag": "" },
-            { "test": "THC", "value": "Positive", "unit": "", "range": "Negative", "flag": "H" },
-            { "test": "PCP", "value": "Negative", "unit": "", "range": "Negative", "flag": "" }
+            {
+              "test": "Amphetamines",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Benzodiazepines",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Cocaine",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "Opiates",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            },
+            {
+              "test": "THC",
+              "value": "Positive",
+              "unit": "",
+              "range": "Negative",
+              "flag": "H"
+            },
+            {
+              "test": "PCP",
+              "value": "Negative",
+              "unit": "",
+              "range": "Negative",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -246,12 +402,48 @@ window.EMR_DATA = {
         {
           "name": "METABOLIC SCREENING (FASTING)",
           "results": [
-            { "test": "Fasting Glucose", "value": "108", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "HbA1c", "value": "5.9", "unit": "%", "range": "4.0-5.6", "flag": "H" },
-            { "test": "Total Cholesterol", "value": "224", "unit": "mg/dL", "range": "<200", "flag": "H" },
-            { "test": "LDL", "value": "142", "unit": "mg/dL", "range": "<100", "flag": "H" },
-            { "test": "HDL", "value": "36", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "230", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Fasting Glucose",
+              "value": "108",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "HbA1c",
+              "value": "5.9",
+              "unit": "%",
+              "range": "4.0-5.6",
+              "flag": "H"
+            },
+            {
+              "test": "Total Cholesterol",
+              "value": "224",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": "H"
+            },
+            {
+              "test": "LDL",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "<100",
+              "flag": "H"
+            },
+            {
+              "test": "HDL",
+              "value": "36",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "230",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -276,9 +468,27 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (Fluarix Quadrivalent)", "date": "10/2024", "site": "Left deltoid IM", "lot": "FL841K", "mfr": "GSK" },
-    { "vaccine": "COVID-19 (Moderna, updated)", "date": "10/2024", "site": "Right deltoid IM", "lot": "CV892T", "mfr": "Moderna" },
-    { "vaccine": "Tdap (Adacel)", "date": "05/2023", "site": "Left deltoid IM", "lot": "TA281R", "mfr": "Sanofi" }
+    {
+      "vaccine": "Influenza (Fluarix Quadrivalent)",
+      "date": "10/2024",
+      "site": "Left deltoid IM",
+      "lot": "FL841K",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "COVID-19 (Moderna, updated)",
+      "date": "10/2024",
+      "site": "Right deltoid IM",
+      "lot": "CV892T",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap (Adacel)",
+      "date": "05/2023",
+      "site": "Left deltoid IM",
+      "lot": "TA281R",
+      "mfr": "Sanofi"
+    }
   ],
   "familyHistory": [
     "Mother (age 54): Major depressive disorder, hypothyroidism",
@@ -288,15 +498,42 @@ window.EMR_DATA = {
     "Brother (age 29): No psychiatric history; healthy"
   ],
   "socialHistory": [
-    ["Occupation", "Part-time warehouse associate; works 20 hrs/week"],
-    ["Marital", "Single; lives alone in apartment"],
-    ["Tobacco", "Cigarettes — 0.5 PPD x 4 years"],
-    ["Alcohol", "Occasional — 2-3 beers on weekends"],
-    ["Drugs", "Cannabis — 3-4x/week for sleep; denies other substances"],
-    ["Exercise", "Minimal — sedentary lifestyle"],
-    ["Housing", "Apartment; subsidized housing program"],
-    ["Safety", "No firearms; occasional SI in past (2021) but denies current; safety plan in place"],
-    ["Advance Directive", "None"]
+    [
+      "Occupation",
+      "Part-time warehouse associate; works 20 hrs/week"
+    ],
+    [
+      "Marital",
+      "Single; lives alone in apartment"
+    ],
+    [
+      "Tobacco",
+      "Cigarettes — 0.5 PPD x 4 years"
+    ],
+    [
+      "Alcohol",
+      "Occasional — 2-3 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Cannabis — 3-4x/week for sleep; denies other substances"
+    ],
+    [
+      "Exercise",
+      "Minimal — sedentary lifestyle"
+    ],
+    [
+      "Housing",
+      "Apartment; subsidized housing program"
+    ],
+    [
+      "Safety",
+      "No firearms; occasional SI in past (2021) but denies current; safety plan in place"
+    ],
+    [
+      "Advance Directive",
+      "None"
+    ]
   ],
   "meta": {
     "caseId": "anticholinergic-toxicity",
@@ -307,75 +544,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Derek Hanson is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Derek appears confused and agitated, with dilated pupils and flushed skin. He is somewhat paranoid and suspicious but cooperative enough to answer questions, though his responses may be disorganized due to his altered mental status.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did psychiatric emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "How many diphenhydramine pills have you been taking each night?",
+      "When did you start increasing the diphenhydramine dose?",
+      "Are you experiencing any confusion, hallucinations, or seeing things that aren't there?",
+      "Have you had any fever, hot flashes, or feeling overheated?",
+      "Are you having trouble urinating or any urinary retention?",
+      "Have you noticed your mouth being unusually dry?",
+      "Are you experiencing any muscle stiffness or tremors?",
+      "Have you been taking your schizophrenia medication as prescribed?",
+      "When did the constipation start getting worse?",
+      "Are you having any chest pain, palpitations, or racing heart?",
+      "Have you used any other medications or substances recently?",
+      "Are you experiencing any nausea or abdominal pain?",
+      "Have you had any seizures or muscle twitching?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I haven't been able to have a bowel movement in four days even though I'm taking.'",
-        "character": "'It's psychiatric emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Olanzapine 20mg QHS; Benztropine 2mg BID; Diphenhydramine 50mg QHS PRN; Docusate Sodium 100mg BID; Senna 8.6mg QHS PRN.'",
-        "allergies": "'My allergies are Haloperidol.'",
-        "family": "Mother (age 54): Major depressive disorder, hypothyroidism  Father (age 56): Alcohol use disorder \u2014 in recovery x 10 years; hypertension  Maternal aunt (age 48): Bipolar disorder type I",
-        "social": "Occupation: Part-time warehouse associate; works 20 hrs/week  Marital: Single; lives alone in apartment  Tobacco: Cigarettes \u2014 0.5 PPD x 4 years  Alcohol: Occasional \u2014 2-3 beers on weekends  Drugs: Cannabis \u2014 3-4x/week for sleep; denies other substances"
+      "default": "I'm sorry, I'm having trouble concentrating right now. Can you repeat that?",
+      "onset": "The constipation got really bad about four days ago, and I've been feeling hot and confused since yesterday. I started taking more of the pink pills about a week ago.",
+      "character": "I feel really hot and dry, my heart is racing, and everything seems blurry. I can't think straight and I feel like people are watching me.",
+      "location": "My whole body feels hot and I have a headache. My stomach hurts from not being able to go to the bathroom.",
+      "severity": "The confusion is really bad, maybe 8 out of 10. I can barely focus and I'm scared something is really wrong with me.",
+      "aggravating": "Being in bright lights makes me feel worse, and trying to think hard makes the confusion worse.",
+      "relieving": "Nothing really helps. I tried drinking water but my mouth stays dry.",
+      "associated": "I can't pee very well either, and my vision is blurry. I feel like my skin is burning up but I'm not sweating.",
+      "denies": "I haven't had any seizures or chest pain, but I do feel like my heart is going really fast.",
+      "history": "I've never felt like this before. Sometimes I get side effects from medications but nothing this bad.",
+      "medications": "Olanzapine 20mg QHS; Benztropine 2mg BID; Diphenhydramine 50mg QHS PRN; Docusate Sodium 100mg BID; Senna 8.6mg QHS PRN",
+      "allergies": "Haloperidol",
+      "family": "My mom has depression and my dad had drinking problems. My aunt has bipolar disorder but nobody's had anything like this.",
+      "social": "I work part-time at a warehouse, live alone, smoke about half a pack a day, drink a few beers on weekends, and use marijuana to help me sleep."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Pupillary examination",
+      "Skin examination for diaphoresis and flushing",
+      "Mental status examination",
+      "Cardiac examination and rhythm assessment",
+      "Neurological examination for tremor and rigidity",
+      "Abdominal examination",
+      "Mucous membrane examination",
+      "Temperature assessment",
+      "Blood pressure and heart rate monitoring",
+      "Assessment for urinary retention"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden. Document specifically what you observe."
+      "Pupillary examination": "Pupils are markedly dilated (6mm) and poorly reactive to light bilaterally",
+      "Skin examination for diaphoresis and flushing": "Skin is hot, dry, and flushed with absence of sweating despite elevated temperature",
+      "Mental status examination": "Patient is confused, disoriented to time and place, with altered mental status and mild agitation",
+      "Cardiac examination and rhythm assessment": "Tachycardic with regular rhythm, no murmurs, but heart rate consistently >120 bpm",
+      "Neurological examination for tremor and rigidity": "Mild tremor present, decreased muscle tone, hyperreflexia in lower extremities",
+      "Abdominal examination": "Distended abdomen with decreased bowel sounds, consistent with ileus",
+      "Mucous membrane examination": "Mucous membranes are notably dry with decreased salivation",
+      "Temperature assessment": "Elevated temperature 101.4°F with hot, dry skin",
+      "Blood pressure and heart rate monitoring": "Hypertensive at 148/92 with persistent tachycardia at 128 bpm",
+      "Assessment for urinary retention": "Palpable bladder distension with patient reporting difficulty urinating"
     },
     "ddxTargets": [
-        "Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Anticholinergic Toxidrome — Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine) (correct diagnosis)",
+      "Neuroleptic Malignant Syndrome",
+      "Acute psychotic episode or schizophrenia exacerbation",
+      "Serotonin syndrome",
+      "Sepsis or systemic infection",
+      "Sympathomimetic toxidrome",
+      "Heat stroke or hyperthermia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on psychiatric history and assuming symptoms are related to schizophrenia exacerbation rather than medication toxicity",
+      "prematureClosure": "May prematurely diagnose psychiatric decompensation without fully exploring the medication history and anticholinergic side effects",
+      "availabilityBias": "Recent cases of psychiatric emergencies may overshadow recognition of toxicological causes in patients with known mental illness"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Derek Hanson's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Anticholinergic Toxidrome \u2014 Cumulative Anticholinergic Burden (Benztropine + Diphenhydramine Excess + Olanzapine). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Consider the constellation of symptoms Derek is presenting with - altered mental status, hyperthermia, and autonomic instability. What medication-related causes should you explore given his psychiatric medication regimen?",
+      "phase5": "You've identified classic anticholinergic findings - hot, dry skin, dilated pupils, altered mental status, and urinary retention. How does Derek's medication history, particularly his self-reported increase in diphenhydramine use, fit with these examination findings?",
+      "finalDebrief": "This case illustrates anticholinergic toxidrome from cumulative medication effects. Derek's combination of prescribed anticholinergics (benztropine, olanzapine) plus self-medication with excessive diphenhydramine created a perfect storm. Remember the anticholinergic mnemonic: 'blind as a bat, mad as a hatter, red as a beet, hot as a hare, dry as a bone.' How will you counsel patients about over-the-counter medication interactions?"
     }
-}
+  }
 };

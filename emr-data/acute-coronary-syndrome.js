@@ -168,7 +168,7 @@ window.EMR_DATA = {
       "spo2": "96%",
       "wt": "230 lbs",
       "ht": "5'10\"",
-      "bmi": 33.0,
+      "bmi": 33,
       "setting": "PCP Office"
     },
     {
@@ -246,42 +246,168 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL",
           "results": [
-            { "test": "Glucose", "value": "188", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "32", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.6", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "139", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.8", "unit": "mEq/L", "range": "3.5-5.1", "flag": "" },
-            { "test": "Chloride", "value": "101", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2", "value": "22", "unit": "mEq/L", "range": "23-29", "flag": "L" },
-            { "test": "Calcium", "value": "9.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "Total Protein", "value": "6.8", "unit": "g/dL", "range": "6.0-8.3", "flag": "" },
-            { "test": "Albumin", "value": "3.6", "unit": "g/dL", "range": "3.5-5.5", "flag": "" },
-            { "test": "ALT", "value": "28", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST", "value": "24", "unit": "U/L", "range": "10-40", "flag": "" },
-            { "test": "Alk Phos", "value": "78", "unit": "U/L", "range": "44-147", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "188",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "32",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.6",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "139",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.8",
+              "unit": "mEq/L",
+              "range": "3.5-5.1",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "101",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": "L"
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "Total Protein",
+              "value": "6.8",
+              "unit": "g/dL",
+              "range": "6.0-8.3",
+              "flag": ""
+            },
+            {
+              "test": "Albumin",
+              "value": "3.6",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT",
+              "value": "28",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST",
+              "value": "24",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Alk Phos",
+              "value": "78",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1C",
           "results": [
-            { "test": "HbA1c", "value": "8.9", "unit": "%", "range": "<5.7", "flag": "H" },
-            { "test": "Estimated Average Glucose", "value": "209", "unit": "mg/dL", "range": "", "flag": "" }
+            {
+              "test": "HbA1c",
+              "value": "8.9",
+              "unit": "%",
+              "range": "<5.7",
+              "flag": "H"
+            },
+            {
+              "test": "Estimated Average Glucose",
+              "value": "209",
+              "unit": "mg/dL",
+              "range": "",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "228", "unit": "mg/dL", "range": "<200", "flag": "H" },
-            { "test": "LDL", "value": "142", "unit": "mg/dL", "range": "<100", "flag": "H" },
-            { "test": "HDL", "value": "36", "unit": "mg/dL", "range": ">40", "flag": "L" },
-            { "test": "Triglycerides", "value": "250", "unit": "mg/dL", "range": "<150", "flag": "H" }
+            {
+              "test": "Total Cholesterol",
+              "value": "228",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": "H"
+            },
+            {
+              "test": "LDL",
+              "value": "142",
+              "unit": "mg/dL",
+              "range": "<100",
+              "flag": "H"
+            },
+            {
+              "test": "HDL",
+              "value": "36",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": "L"
+            },
+            {
+              "test": "Triglycerides",
+              "value": "250",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            { "test": "BNP", "value": "188", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "BNP",
+              "value": "188",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -306,12 +432,48 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "10/2025", "site": "Left deltoid IM", "lot": "FL25-8804", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "10/2025", "site": "Right deltoid IM", "lot": "CV25-1120", "mfr": "Moderna" },
-    { "vaccine": "Tdap", "date": "03/2022", "site": "Left deltoid IM", "lot": "TD22-440", "mfr": "GSK" },
-    { "vaccine": "Pneumovax 23", "date": "11/2023", "site": "Left deltoid IM", "lot": "PV23-661", "mfr": "Merck" },
-    { "vaccine": "Shingrix (1/2)", "date": "05/2024", "site": "Right deltoid IM", "lot": "SX24-218", "mfr": "GSK" },
-    { "vaccine": "Shingrix (2/2)", "date": "07/2024", "site": "Right deltoid IM", "lot": "SX24-390", "mfr": "GSK" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "10/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-8804",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "10/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-1120",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "03/2022",
+      "site": "Left deltoid IM",
+      "lot": "TD22-440",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Pneumovax 23",
+      "date": "11/2023",
+      "site": "Left deltoid IM",
+      "lot": "PV23-661",
+      "mfr": "Merck"
+    },
+    {
+      "vaccine": "Shingrix (1/2)",
+      "date": "05/2024",
+      "site": "Right deltoid IM",
+      "lot": "SX24-218",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Shingrix (2/2)",
+      "date": "07/2024",
+      "site": "Right deltoid IM",
+      "lot": "SX24-390",
+      "mfr": "GSK"
+    }
   ],
   "familyHistory": [
     "Father: MI at age 62 (deceased at 64 from second MI)",
@@ -320,15 +482,42 @@ window.EMR_DATA = {
     "Sister: Hyperlipidemia, alive at 70"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal worker (37 years); sedentary since retirement 2023"],
-    ["Marital", "Married 40 years"],
-    ["Tobacco", "Former smoker — 20 pack-years; quit 2019"],
-    ["Alcohol", "Occasional — 1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — walks to mailbox; limited by claudication and fatigue"],
-    ["Housing", "Lives with wife in single-family home; one-story"],
-    ["Safety", "Denies IPV; seatbelt; no firearms in home"],
-    ["Advance Directive", "DPOA designated (wife) — no formal living will"]
+    [
+      "Occupation",
+      "Retired postal worker (37 years); sedentary since retirement 2023"
+    ],
+    [
+      "Marital",
+      "Married 40 years"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 20 pack-years; quit 2019"
+    ],
+    [
+      "Alcohol",
+      "Occasional — 1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — walks to mailbox; limited by claudication and fatigue"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-family home; one-story"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; no firearms in home"
+    ],
+    [
+      "Advance Directive",
+      "DPOA designated (wife) — no formal living will"
+    ]
   ],
   "meta": {
     "caseId": "acute-coronary-syndrome",
@@ -339,75 +528,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Harold Desmond is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Harold appears mildly anxious but cooperative, initially minimizing his symptoms and attributing them to being \"out of shape\" since retirement. He becomes more engaged when asked specific questions about his activities, though he seems hesitant to admit the extent of his limitations.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when you first noticed the shortness of breath?",
+      "What specific activities trigger your breathing difficulty?",
+      "Do you experience any chest discomfort, pressure, or pain with the shortness of breath?",
+      "Have you noticed any arm, jaw, or back discomfort during these episodes?",
+      "Do you get short of breath at rest or only with activity?",
+      "Have you experienced any nausea, sweating, or dizziness with these episodes?",
+      "How many stairs can you climb before becoming short of breath?",
+      "Have you had any swelling in your legs or feet recently?",
+      "Are you sleeping well, or do you wake up short of breath at night?",
+      "Have you had any recent weight gain?",
+      "When was your last blood sugar check and what were the results?",
+      "Have you been taking all your medications as prescribed?",
+      "Have you ever had symptoms like this before?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 67M with T2DM, HTN, CKD 3a presents for quarterly check.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Coronary Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Gabapentin 300mg TID.'",
-        "allergies": "'My allergies are Sulfonamides, Shellfish.'",
-        "family": "Father: MI at age 62 (deceased at 64 from second MI)  Mother: T2DM, HTN, CVA at age 74, alive at 88  Brother: T2DM, coronary stenting at age 59, alive at 64",
-        "social": "Occupation: Retired postal worker (37 years); sedentary since retirement 2023  Marital: Married 40 years  Tobacco: Former smoker \u2014 20 pack-years; quit 2019  Alcohol: Occasional \u2014 1-2 beers on weekends  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Can you be more specific?",
+      "onset": "I first noticed it about 2 months ago, maybe a little longer. It started gradually - I thought I was just getting winded because I haven't been as active since I retired last year.",
+      "character": "It's hard to catch my breath, like I can't get enough air in. Sometimes I feel like I need to take deeper breaths but can't quite fill my lungs completely.",
+      "location": "It's mainly just the breathing difficulty. Sometimes I feel a little tightness across my chest, but nothing sharp or stabbing.",
+      "severity": "I'd say it's about a 4 or 5 out of 10 when it happens. It's not terrible, but it definitely stops me from doing what I want to do.",
+      "aggravating": "Definitely when I go up stairs - I can barely make it halfway up our staircase now. Also when I'm doing yard work or walking uphill.",
+      "relieving": "If I sit down and rest for a few minutes, it gets better. I haven't really tried anything else.",
+      "associated": "I've been more tired than usual, especially in the afternoons. Sometimes I feel a little sweaty when I get short of breath, but I figured that was just from the exertion.",
+      "denies": "No sharp chest pain, no palpitations or racing heart that I've noticed. No leg swelling or waking up at night gasping for air.",
+      "history": "Nothing exactly like this before. I've always been able to handle stairs and walking fine until recently.",
+      "medications": "Metformin 1000mg BID; Glipizide 10mg BID; Lisinopril 40mg daily; Amlodipine 10mg daily; Hydrochlorothiazide 25mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Gabapentin 300mg TID",
+      "allergies": "Sulfonamides, Shellfish",
+      "family": "My father had two heart attacks - the first one when he was 62, and the second one killed him at 64. My brother had to get stents in his heart when he was 59. My mother had a stroke but she's still alive.",
+      "social": "I worked for the postal service for 37 years, just retired in 2023. I'm married 40 years. I used to smoke about a pack a day for 20 years but quit in 2019. I have a couple beers on weekends, nothing heavy."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Cardiac auscultation",
+      "Pulmonary auscultation",
+      "Assessment for jugular venous distension",
+      "Examination for peripheral edema",
+      "Carotid pulse assessment",
+      "Assessment of peripheral pulses",
+      "Abdominal examination for hepatomegaly",
+      "Skin examination for diaphoresis or cyanosis",
+      "Neurological assessment including diabetic neuropathy evaluation"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Acute Coronary Syndrome. Document specifically what you observe."
+      "Cardiac auscultation": "Regular rate and rhythm, no murmurs, rubs, or gallops appreciated. S1 and S2 normal.",
+      "Pulmonary auscultation": "Bilateral breath sounds clear to auscultation, no rales, wheezes, or rhonchi. No increased work of breathing at rest.",
+      "Assessment for jugular venous distension": "JVD not elevated, estimated at 6 cm H2O.",
+      "Examination for peripheral edema": "No lower extremity edema present bilaterally. No sacral edema.",
+      "Carotid pulse assessment": "Carotid upstrokes normal bilaterally, no bruits appreciated.",
+      "Assessment of peripheral pulses": "Dorsalis pedis and posterior tibial pulses diminished bilaterally, consistent with known PAD.",
+      "Abdominal examination for hepatomegaly": "Abdomen soft, non-tender, no hepatosplenomegaly or masses palpated.",
+      "Skin examination for diaphoresis or cyanosis": "Skin warm and dry, no cyanosis or pallor. No acute distress.",
+      "Neurological assessment including diabetic neuropathy evaluation": "Decreased sensation to monofilament testing in stocking distribution bilaterally, consistent with known diabetic neuropathy."
     },
     "ddxTargets": [
-        "Acute Coronary Syndrome (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea — Anginal Equivalent in Diabetic Patient) (correct diagnosis)",
+      "Heart failure with preserved ejection fraction",
+      "Pulmonary embolism",
+      "Aortic stenosis",
+      "Unstable angina",
+      "Deconditioning/physical inactivity",
+      "Chronic obstructive pulmonary disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Coronary Syndrome, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Coronary Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Coronary Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on deconditioning given recent retirement and patient's own attribution, missing the atypical anginal equivalent presentation in a diabetic patient",
+      "prematureClosure": "May stop workup after normal lung exam and attribute symptoms to deconditioning without considering cardiac causes in high-risk diabetic patient",
+      "availabilityBias": "Recent cases of simple deconditioning or respiratory causes may overshadow consideration of ACS presenting as dyspnea in diabetic patients"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Harold Desmond's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea \u2014 Anginal Equivalent in Diabetic Patient). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient has multiple cardiovascular risk factors and is presenting with exertional dyspnea. What are you thinking about the significance of his diabetes in how cardiac conditions might present? What key historical points will help you differentiate between your top differentials?",
+      "phase5": "Your exam doesn't reveal obvious heart failure signs, but this patient has classic risk factors for coronary disease. How does diabetic neuropathy potentially alter the presentation of acute coronary syndromes? What's your next step in evaluation given his risk profile and symptoms?",
+      "finalDebrief": "This case illustrates how ACS can present as an 'anginal equivalent' in diabetic patients, where dyspnea replaces typical chest pain due to cardiac neuropathy. Notice how the gradual onset and attribution to deconditioning could easily lead to anchoring bias. The key was recognizing the high pretest probability for coronary disease in this patient with diabetes, family history, and multiple risk factors."
     }
-}
+  }
 };

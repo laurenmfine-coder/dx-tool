@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Frank DiMaggio",
-  "patientHPI": "I've been having this dull ache in my lower back for the past few weeks that sometimes spreads around to my left side. It's not like I pulled something or hurt myself - it just started happening and comes and goes throughout the day. I've also been feeling more tired than usual lately, which isn't like me.",
+    "patientHPI": "I've been having this dull ache in my lower back for the past few weeks that sometimes spreads around to my left side. It's not like I pulled something or hurt myself - it just started happening and comes and goes throughout the day. I've also been feeling more tired than usual lately, which isn't like me.",
     "dob": "11/20/1952",
     "age": 73,
     "sex": "Male",
@@ -149,7 +149,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "176 lbs",
       "ht": "5'9\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "Specialist"
     },
     {
@@ -173,7 +173,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "176 lbs",
       "ht": "5'9\"",
-      "bmi": 26.0,
+      "bmi": 26,
       "setting": "Specialist"
     }
   ],
@@ -227,31 +227,121 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "96", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "20", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "102", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "25", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.2", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "96",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "20",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "102",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "25",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.2",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.6", "unit": "g/dL", "range": "13.5-17.5", "flag": "" },
-            { "test": "Hematocrit", "value": "40.8", "unit": "%", "range": "38.0-50.0", "flag": "" },
-            { "test": "Platelet Count", "value": "192", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.6",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "40.8",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "192",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "PT", "value": "12.4", "unit": "sec", "range": "11.0-13.5", "flag": "" },
-            { "test": "INR", "value": "1.0", "unit": "", "range": "0.8-1.1", "flag": "" },
-            { "test": "PTT", "value": "30", "unit": "sec", "range": "25-35", "flag": "" }
+            {
+              "test": "PT",
+              "value": "12.4",
+              "unit": "sec",
+              "range": "11.0-13.5",
+              "flag": ""
+            },
+            {
+              "test": "INR",
+              "value": "1.0",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": ""
+            },
+            {
+              "test": "PTT",
+              "value": "30",
+              "unit": "sec",
+              "range": "25-35",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -319,15 +409,42 @@ window.EMR_DATA = {
     "Sister: HTN, alive at 68"
   ],
   "socialHistory": [
-    ["Occupation", "Retired postal carrier; retired 2017"],
-    ["Marital", "Married 48 years; wife Maria, age 71"],
-    ["Tobacco", "Former smoker — quit 2016; 45 pack-year history"],
-    ["Alcohol", "Occasional, 1 glass wine with dinner"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walks 20 min daily; limited by claudication at 2 blocks"],
-    ["Housing", "Single-family home with wife; single-story"],
-    ["Safety", "Denies IPV; seatbelt always"],
-    ["Advance Directive", "POLST on file — Full Code; HCP: wife Maria DiMaggio"]
+    [
+      "Occupation",
+      "Retired postal carrier; retired 2017"
+    ],
+    [
+      "Marital",
+      "Married 48 years; wife Maria, age 71"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — quit 2016; 45 pack-year history"
+    ],
+    [
+      "Alcohol",
+      "Occasional, 1 glass wine with dinner"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walks 20 min daily; limited by claudication at 2 blocks"
+    ],
+    [
+      "Housing",
+      "Single-family home with wife; single-story"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt always"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code; HCP: wife Maria DiMaggio"
+    ]
   ],
   "meta": {
     "caseId": "aortic-aneurysm",
@@ -338,75 +455,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Frank DiMaggio is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Frank appears mildly anxious and concerned about his persistent back pain, particularly given his family history of AAA. He is cooperative and forthcoming with information, though somewhat worried about what might be causing his symptoms that feel different from typical back pain.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when this back pain started?",
+      "What does the pain feel like - sharp, dull, throbbing, or burning?",
+      "Where exactly do you feel the pain and does it spread anywhere?",
+      "On a scale of 1-10, how would you rate your pain?",
+      "What makes the pain worse or better?",
+      "Have you noticed any other symptoms like nausea, changes in urination, or leg pain?",
+      "Have you had any episodes of dizziness or feeling faint?",
+      "Have you noticed any pulsing sensation in your abdomen?",
+      "Tell me about your family history, particularly your father's condition",
+      "What medications are you currently taking?",
+      "Do you have any allergies to medications or contrast dye?",
+      "How has this pain affected your daily activities?",
+      "Have you had any recent imaging of your abdomen or back?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been having this dull ache in my lower back for the past few weeks that som.'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Symptomatic Abdominal Aortic Aneurysm.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Clopidogrel 75mg daily; Cilostazol 100mg BID.'",
-        "allergies": "'My allergies are Iodinated Contrast Dye.'",
-        "family": "Father: AAA (ruptured at age 72, deceased), HTN  Mother: Stroke at 78, HTN, deceased at 82  Brother: Peripheral artery disease, alive at 70",
-        "social": "Occupation: Retired postal carrier; retired 2017  Marital: Married 48 years; wife Maria, age 71  Tobacco: Former smoker \u2014 quit 2016; 45 pack-year history  Alcohol: Occasional, 1 glass wine with dinner  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "It started about 3 weeks ago, maybe a little longer. Just came on gradually - no specific injury or event I can think of.",
+      "character": "It's a deep, dull ache most of the time. Sometimes it feels like a gnawing sensation, and occasionally it throbs a bit.",
+      "location": "Mostly in my lower back, around the belt line area, but it wraps around to my left side and sometimes into my left flank.",
+      "severity": "I'd say it's about a 4 or 5 out of 10 most days, but it can get up to a 6 or 7. It's definitely affecting my sleep and I'm moving more carefully.",
+      "aggravating": "It seems worse when I've been active, like walking around the neighborhood, and sometimes when I'm lying flat at night.",
+      "relieving": "Sitting in my recliner seems to help some. Tylenol takes the edge off but doesn't make it go away completely.",
+      "associated": "I've been feeling more tired than usual, and sometimes I feel a little queasy. No fever though, and I haven't noticed any problems urinating.",
+      "denies": "No sharp shooting pain down my legs, no numbness or tingling in my legs, no chest pain or shortness of breath with the episodes.",
+      "history": "I've never had back pain like this before. I know I have that aneurysm that they've been watching, but this feels different from anything I've experienced.",
+      "medications": "Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Atorvastatin 80mg QHS; Aspirin 81mg daily; Clopidogrel 75mg daily; Cilostazol 100mg BID",
+      "allergies": "Iodinated Contrast Dye",
+      "family": "My father had an abdominal aortic aneurysm that ruptured when he was 72 - that's how he died. That's actually how they found mine a few years ago. My mother had high blood pressure and a stroke, and my brother has circulation problems in his legs.",
+      "social": "I'm a retired postal carrier, quit working in 2017. Been married to Maria for 48 years. I used to smoke for about 30 years, pack and a half a day, but I quit in 2016. I might have a glass of wine with dinner occasionally, but that's about it."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Abdominal inspection",
+      "Abdominal palpation for masses",
+      "Abdominal auscultation",
+      "Assessment for abdominal pulsatile mass",
+      "Lumbar spine range of motion",
+      "Straight leg raise test",
+      "Peripheral pulse examination",
+      "Blood pressure in both arms",
+      "Costovertebral angle tenderness",
+      "Abdominal bruits assessment"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Symptomatic Abdominal Aortic Aneurysm. Document specifically what you observe."
+      "Abdominal inspection": "Mild abdominal distention, no obvious masses or pulsations visible",
+      "Abdominal palpation for masses": "Palpable pulsatile mass in epigastrium extending slightly to the left, approximately 5-6cm in diameter",
+      "Abdominal auscultation": "Audible bruit over the epigastrium and left paraumbilical area",
+      "Assessment for abdominal pulsatile mass": "Prominent pulsatile mass palpable in epigastrium, expansile in nature, tender to deep palpation",
+      "Lumbar spine range of motion": "Slightly limited flexion due to discomfort, normal extension and lateral bending",
+      "Straight leg raise test": "Negative bilaterally, no radicular symptoms reproduced",
+      "Peripheral pulse examination": "Diminished femoral pulses bilaterally, weak dorsalis pedis and posterior tibial pulses",
+      "Blood pressure in both arms": "Right arm 138/82, left arm 142/84 - no significant difference",
+      "Costovertebral angle tenderness": "Mild tenderness on left side, no significant pain on percussion",
+      "Abdominal bruits assessment": "Prominent systolic bruit audible over epigastrium, extending toward left flank"
     },
     "ddxTargets": [
-        "Symptomatic Abdominal Aortic Aneurysm (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Symptomatic Abdominal Aortic Aneurysm (correct diagnosis)",
+      "Lumbar muscle strain/mechanical back pain",
+      "Nephrolithiasis",
+      "Ruptured abdominal aortic aneurysm",
+      "Acute aortic dissection",
+      "Lumbar disc herniation with radiculopathy",
+      "Retroperitoneal hemorrhage"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Symptomatic Abdominal Aortic Aneurysm, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Symptomatic Abdominal Aortic Aneurysm, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Symptomatic Abdominal Aortic Aneurysm based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'back pain' and focusing solely on musculoskeletal causes while missing the vascular emergency, especially given patient's known AAA history",
+      "prematureClosure": "Risk of stopping evaluation after finding some lumbar spine tenderness without considering the systemic nature and family history of AAA",
+      "availabilityBias": "Common back pain presentations may overshadow consideration of less common but more serious vascular causes, particularly in elderly male with risk factors"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Frank DiMaggio's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Symptomatic Abdominal Aortic Aneurysm. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "What key risk factors and historical elements make this case particularly concerning? Given his known AAA and family history, what specific questions will help you differentiate between mechanical back pain and vascular causes?",
+      "phase5": "You've identified some important findings on examination. What is the significance of the palpable pulsatile mass combined with his symptoms and risk factors? How does this change your differential diagnosis prioritization?",
+      "finalDebrief": "This case illustrates how AAA can present as back pain, mimicking musculoskeletal conditions. The combination of his known AAA, family history, risk factors, and key exam findings of pulsatile mass with bruit should have elevated vascular causes to the top of your differential. What red flags in the history and physical should prompt urgent vascular imaging in similar cases?"
     }
-}
+  }
 };

@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Wilbert Jean-Louis",
-  "patientHPI": "My back pain has been getting much worse lately, going from manageable to an 8 out of 10, and I'm really worried because I know my cancer has spread to my bones. The pain is constant now and different from before - it's this deep, gnawing ache that keeps me up at night. My last blood test showed my numbers are going up again even though I'm taking all my medications.",
+    "patientHPI": "My back pain has been getting much worse lately, going from manageable to an 8 out of 10, and I'm really worried because I know my cancer has spread to my bones. The pain is constant now and different from before - it's this deep, gnawing ache that keeps me up at night. My last blood test showed my numbers are going up again even though I'm taking all my medications.",
     "dob": "05/12/1970",
     "age": 55,
     "sex": "Male",
@@ -225,28 +225,100 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "156", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "22", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.2", "unit": "mg/dL", "range": "0.7-1.3", "flag": "" },
-            { "test": "Sodium", "value": "138", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.6", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Calcium", "value": "10.8", "unit": "mg/dL", "range": "8.5-10.5", "flag": "H" }
+            {
+              "test": "Glucose",
+              "value": "156",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "22",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.2",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "138",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.6",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "10.8",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.4", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "30.6", "unit": "%", "range": "38.0-50.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "178", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.4",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "30.6",
+              "unit": "%",
+              "range": "38.0-50.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "178",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "TUMOR MARKER",
           "results": [
-            { "test": "PSA, Total", "value": "38.4", "unit": "ng/mL", "range": "0-4.0", "flag": "H" },
-            { "test": "Alkaline Phosphatase", "value": "312", "unit": "U/L", "range": "44-147", "flag": "H" }
+            {
+              "test": "PSA, Total",
+              "value": "38.4",
+              "unit": "ng/mL",
+              "range": "0-4.0",
+              "flag": "H"
+            },
+            {
+              "test": "Alkaline Phosphatase",
+              "value": "312",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -314,15 +386,42 @@ window.EMR_DATA = {
     "Sister: Breast cancer (diagnosed age 52), alive at 54"
   ],
   "socialHistory": [
-    ["Occupation", "Former warehouse supervisor; on disability since 2024"],
-    ["Marital", "Married 28 years; wife Claudette, age 53"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare; stopped entirely since diagnosis"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Minimal — limited by pain and fatigue; short walks in neighborhood"],
-    ["Housing", "Apartment with wife; first floor"],
-    ["Safety", "Denies IPV; fall risk — uses cane for ambulation"],
-    ["Advance Directive", "POLST on file — Full Code transitioning to DNR discussion; HCP: wife Claudette"]
+    [
+      "Occupation",
+      "Former warehouse supervisor; on disability since 2024"
+    ],
+    [
+      "Marital",
+      "Married 28 years; wife Claudette, age 53"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare; stopped entirely since diagnosis"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Minimal — limited by pain and fatigue; short walks in neighborhood"
+    ],
+    [
+      "Housing",
+      "Apartment with wife; first floor"
+    ],
+    [
+      "Safety",
+      "Denies IPV; fall risk — uses cane for ambulation"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code transitioning to DNR discussion; HCP: wife Claudette"
+    ]
   ],
   "meta": {
     "caseId": "conus-medullaris-syndrome",
@@ -333,75 +432,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Wilbert Jean-Louis is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Wilbert appears anxious and distressed, frequently shifting position trying to find comfort from his severe back pain. He is very forthcoming about his symptoms and medical history, demonstrating good insight into his oncologic condition and expressing genuine fear that his cancer is progressing.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did back pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe when this worsening back pain started?",
+      "What does the pain feel like - sharp, dull, burning?",
+      "Where exactly is the pain located and does it travel anywhere?",
+      "On a scale of 1-10, how severe is your pain right now?",
+      "What makes your back pain worse?",
+      "What helps relieve the pain, if anything?",
+      "Have you noticed any weakness in your legs?",
+      "Any numbness or tingling in your legs or groin area?",
+      "Have you had any problems with urination or bowel movements?",
+      "Any sexual dysfunction or problems with erections?",
+      "Have you had any falls or difficulty walking?",
+      "When was your last oncology appointment and PSA level?",
+      "What medications are you currently taking?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My back pain has been getting much worse lately, going from manageable to an 8 o.'",
-        "character": "'It's back pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Conus Medullaris Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Leuprolide 22.5mg IM q3months; Abiraterone 1000mg daily; Prednisone 5mg BID; Denosumab 120mg SubQ q4weeks; Oxycodone ER 20mg BID; Oxycodone IR 5mg q4h PRN; Metformin 500mg BID; Amlodipine 5mg daily.'",
-        "allergies": "'My allergies are Morphine.'",
-        "family": "Father: Prostate cancer (diagnosed age 65), HTN, deceased at 74  Mother: T2DM, HTN, alive at 82  Brother: Prostate cancer (diagnosed age 58, treated with prostatectomy), alive at 60",
-        "social": "Occupation: Former warehouse supervisor; on disability since 2024  Marital: Married 28 years; wife Claudette, age 53  Tobacco: Never smoker  Alcohol: Rare; stopped entirely since diagnosis  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? The pain is making it hard for me to concentrate right now.",
+      "onset": "The pain really started getting much worse about 2-3 weeks ago. It went from my usual manageable bone pain to this intense, constant agony that nothing seems to help.",
+      "character": "It's this deep, gnawing, burning pain that feels like it's coming from inside my bones. It's different from my usual cancer pain - much more intense and constant.",
+      "location": "The worst pain is in my lower back, right at the base of my spine. Sometimes it shoots down into my buttocks and the back of both thighs.",
+      "severity": "Right now it's an 8 out of 10, maybe even a 9. I can barely sleep and I'm having trouble walking. Even my strongest pain pills aren't helping much anymore.",
+      "aggravating": "Any movement makes it worse - sitting, standing, walking, even lying down. Coughing or sneezing is excruciating. I feel like I can't get comfortable in any position.",
+      "relieving": "Honestly, nothing really helps anymore. My oxycodone takes the edge off slightly, but the pain is still there. Heat pads don't help like they used to.",
+      "associated": "I've been having some weakness in my legs, especially when I try to stand up. My wife noticed I've been walking funny. I've also had some numbness in my groin area and it's been harder to start urinating.",
+      "denies": "I haven't had any fever, but I have been more tired than usual. No chest pain or shortness of breath beyond what I normally have.",
+      "history": "I've had bone pain since my cancer spread to my spine and pelvis last year, but it was always manageable with my medications. This is completely different - much more severe.",
+      "medications": "Leuprolide 22.5mg IM q3months; Abiraterone 1000mg daily; Prednisone 5mg BID; Denosumab 120mg SubQ q4weeks; Oxycodone ER 20mg BID; Oxycodone IR 5mg q4h PRN; Metformin 500mg BID; Amlodipine 5mg daily",
+      "allergies": "Morphine",
+      "family": "My father and brother both had prostate cancer. My dad was diagnosed at 65 and died at 74, though not directly from the cancer. My younger brother was diagnosed at 58 but caught it early and had surgery.",
+      "social": "I used to be a warehouse supervisor but went on disability this year because of my cancer. I'm married to Claudette for 28 years. I never smoked and stopped drinking completely when I was diagnosed. No drug use."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Lumbar spine inspection and palpation",
+      "Straight leg raise test bilateral",
+      "Lower extremity motor strength testing (hip flexors, knee extensors, ankle dorsiflexion/plantarflexion)",
+      "Lower extremity sensory examination",
+      "Deep tendon reflexes (patellar and Achilles)",
+      "Perianal sensation testing",
+      "Anal sphincter tone assessment",
+      "Bulbocavernosus reflex testing",
+      "Gait assessment",
+      "Romberg test"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Conus Medullaris Syndrome. Document specifically what you observe."
+      "Lumbar spine inspection and palpation": "Tenderness to palpation over L1-L3 spinous processes with mild paraspinal muscle spasm. No visible deformity or swelling.",
+      "Straight leg raise test bilateral": "Positive bilaterally at 45 degrees, reproducing back and posterior thigh pain.",
+      "Lower extremity motor strength testing (hip flexors, knee extensors, ankle dorsiflexion/plantarflexion)": "Hip flexors 4/5 bilaterally, knee extensors 4/5 bilaterally, ankle dorsiflexion 3/5 bilaterally, plantarflexion 4/5 bilaterally.",
+      "Lower extremity sensory examination": "Decreased sensation to light touch and pinprick in L2-S2 distribution bilaterally, particularly in saddle distribution.",
+      "Deep tendon reflexes (patellar and Achilles)": "Patellar reflexes 1+ bilaterally, Achilles reflexes absent bilaterally.",
+      "Perianal sensation testing": "Markedly diminished perianal sensation in saddle distribution.",
+      "Anal sphincter tone assessment": "Decreased anal sphincter tone on digital rectal examination.",
+      "Bulbocavernosus reflex testing": "Absent bulbocavernosus reflex.",
+      "Gait assessment": "Unsteady gait with bilateral lower extremity weakness, requires assistance for ambulation.",
+      "Romberg test": "Negative for cerebellar dysfunction, but patient has difficulty maintaining balance due to weakness."
     },
     "ddxTargets": [
-        "Conus Medullaris Syndrome (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Conus Medullaris Syndrome (Metastatic Epidural Spinal Cord Compression) (correct diagnosis)",
+      "Cauda Equina Syndrome",
+      "Pathologic vertebral compression fracture",
+      "Spinal epidural abscess",
+      "Cauda equina syndrome due to central disc herniation",
+      "Mechanical low back pain with radiculopathy",
+      "Spinal stenosis with neurogenic claudication"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Conus Medullaris Syndrome, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Conus Medullaris Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Conus Medullaris Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'chronic cancer pain progression' and missing acute neurologic emergency requiring immediate intervention",
+      "prematureClosure": "Risk of stopping evaluation at 'worsening bone pain from known metastases' without recognizing cord compression syndrome",
+      "availabilityBias": "Recent cases of mechanical back pain may lead to underestimating oncologic emergency in known cancer patient"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Wilbert Jean-Louis's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Conus Medullaris Syndrome (Metastatic Epidural Spinal Cord Compression). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given this patient's oncologic history and the acute change in his pain pattern, what specific neurologic emergencies should you be most concerned about? What key symptoms would help you differentiate between conus medullaris and cauda equina syndromes?",
+      "phase5": "Excellent history and physical exam. You've identified several concerning neurologic findings including saddle anesthesia, decreased sphincter tone, and bilateral lower extremity weakness. How do these findings help narrow your differential? What is the most likely anatomical location of this patient's pathology based on the pattern of deficits?",
+      "finalDebrief": "This case demonstrates the importance of recognizing conus medullaris syndrome as an oncologic emergency. The key clinical clues were the acute worsening of pain in a patient with known spinal metastases, combined with saddle anesthesia, bowel/bladder dysfunction, and bilateral lower extremity weakness. Early recognition and emergent MRI with immediate neurosurgical consultation are critical for optimal outcomes."
     }
-}
+  }
 };

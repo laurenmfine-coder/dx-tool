@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dennis O'Brien",
-  "patientHPI": "I'm still drinking about a pint of liquor and some beers daily, and lately my stomach pain has been getting worse, especially right here under my ribs. I've lost my appetite and I'm only eating once a day - lost about four pounds recently.",
+    "patientHPI": "I'm still drinking about a pint of liquor and some beers daily, and lately my stomach pain has been getting worse, especially right here under my ribs. I've lost my appetite and I'm only eating once a day - lost about four pounds recently.",
     "dob": "12/02/1969",
     "age": 56,
     "sex": "Male",
@@ -153,7 +153,7 @@ window.EMR_DATA = {
       "spo2": "97%",
       "wt": "158 lbs",
       "ht": "5'11\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     }
   ],
@@ -196,29 +196,107 @@ window.EMR_DATA = {
         {
           "name": "HEPATIC PANEL",
           "results": [
-            { "test": "AST", "value": "186", "unit": "U/L", "range": "10-40", "flag": "H" },
-            { "test": "ALT", "value": "68", "unit": "U/L", "range": "7-56", "flag": "H" },
-            { "test": "ALP", "value": "210", "unit": "U/L", "range": "44-147", "flag": "H" },
-            { "test": "GGT", "value": "528", "unit": "U/L", "range": "9-48", "flag": "H" },
-            { "test": "Total Bilirubin", "value": "6.8", "unit": "mg/dL", "range": "0.1-1.2", "flag": "H" },
-            { "test": "Direct Bilirubin", "value": "4.2", "unit": "mg/dL", "range": "0.0-0.3", "flag": "H" },
-            { "test": "Albumin", "value": "2.8", "unit": "g/dL", "range": "3.5-5.5", "flag": "L" }
+            {
+              "test": "AST",
+              "value": "186",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": "H"
+            },
+            {
+              "test": "ALT",
+              "value": "68",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": "H"
+            },
+            {
+              "test": "ALP",
+              "value": "210",
+              "unit": "U/L",
+              "range": "44-147",
+              "flag": "H"
+            },
+            {
+              "test": "GGT",
+              "value": "528",
+              "unit": "U/L",
+              "range": "9-48",
+              "flag": "H"
+            },
+            {
+              "test": "Total Bilirubin",
+              "value": "6.8",
+              "unit": "mg/dL",
+              "range": "0.1-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "Direct Bilirubin",
+              "value": "4.2",
+              "unit": "mg/dL",
+              "range": "0.0-0.3",
+              "flag": "H"
+            },
+            {
+              "test": "Albumin",
+              "value": "2.8",
+              "unit": "g/dL",
+              "range": "3.5-5.5",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "COAGULATION",
           "results": [
-            { "test": "INR", "value": "1.8", "unit": "", "range": "0.8-1.1", "flag": "H" },
-            { "test": "PT", "value": "21.2", "unit": "sec", "range": "11.0-13.5", "flag": "H" }
+            {
+              "test": "INR",
+              "value": "1.8",
+              "unit": "",
+              "range": "0.8-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "PT",
+              "value": "21.2",
+              "unit": "sec",
+              "range": "11.0-13.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            { "test": "WBC", "value": "14.8", "unit": "K/uL", "range": "4.5-11.0", "flag": "H" },
-            { "test": "Hemoglobin", "value": "10.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "MCV", "value": "108", "unit": "fL", "range": "80-100", "flag": "H" },
-            { "test": "Platelets", "value": "98", "unit": "K/uL", "range": "150-400", "flag": "L" }
+            {
+              "test": "WBC",
+              "value": "14.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": "H"
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "108",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "H"
+            },
+            {
+              "test": "Platelets",
+              "value": "98",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": "L"
+            }
           ]
         }
       ]
@@ -243,11 +321,41 @@ window.EMR_DATA = {
     }
   ],
   "immunizations": [
-    { "vaccine": "Influenza (2025-2026)", "date": "11/2025", "site": "Left deltoid IM", "lot": "FL25-9518", "mfr": "Sanofi" },
-    { "vaccine": "COVID-19 Booster (Moderna)", "date": "09/2025", "site": "Right deltoid IM", "lot": "CV25-2508", "mfr": "Moderna" },
-    { "vaccine": "Hepatitis A+B (Twinrix) — Series Complete", "date": "2020", "site": "Right deltoid IM", "lot": "TW20-310", "mfr": "GSK" },
-    { "vaccine": "Tdap", "date": "04/2020", "site": "Left deltoid IM", "lot": "TD20-268", "mfr": "GSK" },
-    { "vaccine": "Prevnar 20", "date": "04/2025", "site": "Left deltoid IM", "lot": "PV20-908", "mfr": "Pfizer" }
+    {
+      "vaccine": "Influenza (2025-2026)",
+      "date": "11/2025",
+      "site": "Left deltoid IM",
+      "lot": "FL25-9518",
+      "mfr": "Sanofi"
+    },
+    {
+      "vaccine": "COVID-19 Booster (Moderna)",
+      "date": "09/2025",
+      "site": "Right deltoid IM",
+      "lot": "CV25-2508",
+      "mfr": "Moderna"
+    },
+    {
+      "vaccine": "Hepatitis A+B (Twinrix) — Series Complete",
+      "date": "2020",
+      "site": "Right deltoid IM",
+      "lot": "TW20-310",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Tdap",
+      "date": "04/2020",
+      "site": "Left deltoid IM",
+      "lot": "TD20-268",
+      "mfr": "GSK"
+    },
+    {
+      "vaccine": "Prevnar 20",
+      "date": "04/2025",
+      "site": "Left deltoid IM",
+      "lot": "PV20-908",
+      "mfr": "Pfizer"
+    }
   ],
   "familyHistory": [
     "Father: Alcoholism, cirrhosis, deceased at 62 (variceal hemorrhage)",
@@ -256,15 +364,42 @@ window.EMR_DATA = {
     "Sister: Healthy, alive at 52"
   ],
   "socialHistory": [
-    ["Occupation", "Unemployed; formerly worked in construction; unable to work due to chronic pain and alcohol use"],
-    ["Marital", "Divorced (2019); lives alone"],
-    ["Tobacco", "Current — 1 PPD x 30 years (30 pack-years)"],
-    ["Alcohol", "Active heavy use — approximately 1 pint vodka + 6-8 beers daily x 15+ years"],
-    ["Drugs", "Denies current use; remote cocaine use in 20s"],
-    ["Exercise", "None — deconditioned"],
-    ["Housing", "Efficiency apartment; brother checks on him weekly"],
-    ["Safety", "Fall risk (unsteady gait when drinking); denies IPV; no firearms; no seatbelt use reported"],
-    ["Advance Directive", "None — not discussed; brother is informal next of kin"]
+    [
+      "Occupation",
+      "Unemployed; formerly worked in construction; unable to work due to chronic pain and alcohol use"
+    ],
+    [
+      "Marital",
+      "Divorced (2019); lives alone"
+    ],
+    [
+      "Tobacco",
+      "Current — 1 PPD x 30 years (30 pack-years)"
+    ],
+    [
+      "Alcohol",
+      "Active heavy use — approximately 1 pint vodka + 6-8 beers daily x 15+ years"
+    ],
+    [
+      "Drugs",
+      "Denies current use; remote cocaine use in 20s"
+    ],
+    [
+      "Exercise",
+      "None — deconditioned"
+    ],
+    [
+      "Housing",
+      "Efficiency apartment; brother checks on him weekly"
+    ],
+    [
+      "Safety",
+      "Fall risk (unsteady gait when drinking); denies IPV; no firearms; no seatbelt use reported"
+    ],
+    [
+      "Advance Directive",
+      "None — not discussed; brother is informal next of kin"
+    ]
   ],
   "meta": {
     "caseId": "alcoholic-hepatitis",
@@ -275,75 +410,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Dennis O'Brien is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Dennis appears visibly ill and jaundiced, speaking in a tired, monotone voice with periods of confusion. He is cooperative but somewhat defensive about his drinking, alternating between minimizing his alcohol use and expressing genuine concern about feeling 'really sick this time.'",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did toxicologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe the abdominal pain you're experiencing?",
+      "When did you first notice the pain getting worse?",
+      "Have you noticed any changes in your skin color or the whites of your eyes?",
+      "Tell me about your current alcohol use - how much and how often?",
+      "When was your last drink?",
+      "Have you had any nausea, vomiting, or changes in your bowel movements?",
+      "Have you noticed any swelling in your legs or abdomen?",
+      "Are you taking all your prescribed medications regularly?",
+      "Have you had any recent infections or felt feverish?",
+      "How has your appetite and weight been recently?",
+      "Have you had episodes like this before?",
+      "Are you experiencing any confusion or mental cloudiness?",
+      "Have you noticed any unusual bleeding or bruising?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm still drinking about a pint of liquor and some beers daily, and lately my st.'",
-        "character": "'It's toxicologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Severe Alcoholic Hepatitis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Lisinopril 20mg daily; Sertraline 100mg daily; Pancrelipase (Creon) 36,000 units TID; Thiamine 100mg daily; Folic Acid 1mg daily.'",
-        "allergies": "'My allergies are Disulfiram.'",
-        "family": "Father: Alcoholism, cirrhosis, deceased at 62 (variceal hemorrhage)  Mother: HTN, alive at 80  Brother: Recovering alcoholic (sober 10 years), alive at 58",
-        "social": "Occupation: Unemployed; formerly worked in construction; unable to work due to chronic pain and alcohol use  Marital: Divorced (2019); lives alone  Tobacco: Current \u2014 1 PPD x 30 years (30 pack-years)  Alcohol: Active heavy use \u2014 approximately 1 pint vodka + 6-8 beers daily x 15+ years  Drugs: Denies current use; remote cocaine use in 20s"
+      "default": "I'm sorry, I'm having trouble concentrating right now. Could you ask that a different way?",
+      "onset": "The pain has been getting much worse over the past 2-3 weeks. I've always had some discomfort from my liver problems, but this is different - much more intense.",
+      "character": "It's a deep, constant aching pain that sometimes feels like burning. It's not sharp, just this heavy, gnawing feeling that won't go away.",
+      "location": "Right here under my right ribs, and it spreads across my upper belly. Sometimes I feel it in my back too.",
+      "severity": "It's about a 7 out of 10 most days, but when it flares up it can be an 8 or 9. I can barely eat when it's bad, and I can't sleep on my right side anymore.",
+      "aggravating": "Eating makes it worse, especially anything greasy. Even thinking about food sometimes makes me nauseous. The pain seems worse when I try to cut back on drinking.",
+      "relieving": "Honestly, alcohol used to help dull the pain, but lately even that doesn't help much. Heat pads provide a little relief, but nothing really makes it go away.",
+      "associated": "I've been feeling nauseous a lot, especially in the mornings. I've lost my appetite completely and I'm only forcing myself to eat once a day. I feel weak and tired all the time.",
+      "denies": "No vomiting blood, no black stools, no severe confusion yet. I haven't had any chest pain or shortness of breath, and no recent falls or injuries.",
+      "history": "I've had flare-ups before, but nothing this severe or lasting this long. Usually I could manage with rest and... well, drinking less for a few days.",
+      "medications": "Lisinopril 20mg daily; Sertraline 100mg daily; Pancrelipase (Creon) 36,000 units TID; Thiamine 100mg daily; Folic Acid 1mg daily",
+      "allergies": "Disulfiram",
+      "family": "My dad died from liver problems when he was 62 - he had varices that bled. He was a heavy drinker like me. My mom's still alive but has high blood pressure.",
+      "social": "I used to work construction but can't work anymore because of my health and drinking. I'm divorced, live alone. I smoke a pack a day and drink about a pint of vodka plus 6-8 beers daily for the past 15 years or so."
     },
     "examManeuvers": [
-        "General appearance",
-        "Vital signs",
-        "Abdominal inspection",
-        "Abdominal auscultation",
-        "Abdominal palpation light and deep",
-        "Rebound and guarding assessment",
-        "Rectal examination if indicated",
-        "Skin for jaundice or stigmata"
+      "Abdominal inspection",
+      "Right upper quadrant palpation",
+      "Liver edge palpation",
+      "Spleen palpation",
+      "Assessment for ascites (shifting dullness/fluid wave)",
+      "Scleral icterus examination",
+      "Skin examination for jaundice",
+      "Examination for spider angiomata",
+      "Assessment for asterixis",
+      "Lower extremity edema assessment"
     ],
     "examFindings": {
-        "General appearance": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Abdominal inspection": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Abdominal auscultation": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Abdominal palpation light and deep": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Rebound and guarding assessment": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Rectal examination if indicated": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe.",
-        "Skin for jaundice or stigmata": "Clinical finding consistent with Severe Alcoholic Hepatitis. Document specifically what you observe."
+      "Abdominal inspection": "Distended abdomen with visible jaundice of the skin, no visible collateral circulation",
+      "Right upper quadrant palpation": "Tender to palpation with voluntary guarding, no rebound tenderness",
+      "Liver edge palpation": "Hepatomegaly with liver edge palpable 4cm below right costal margin, firm and tender",
+      "Spleen palpation": "Spleen tip just palpable below left costal margin",
+      "Assessment for ascites (shifting dullness/fluid wave)": "Mild ascites present with shifting dullness positive",
+      "Scleral icterus examination": "Pronounced scleral icterus bilaterally",
+      "Skin examination for jaundice": "Obvious jaundice of skin and mucous membranes",
+      "Examination for spider angiomata": "Multiple spider angiomata on chest and upper arms",
+      "Assessment for asterixis": "Mild asterixis present bilaterally",
+      "Lower extremity edema assessment": "1+ pitting edema bilateral lower extremities to mid-shin"
     },
     "ddxTargets": [
-        "Severe Alcoholic Hepatitis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Severe Alcoholic Hepatitis (Maddrey Discriminant Function >32, AST:ALT >2:1, Leukocytosis, Coagulopathy, Jaundice — Prednisolone Candidate Pending LILLE Score) (correct diagnosis)",
+      "Acute on chronic liver failure with decompensated cirrhosis",
+      "Drug-induced liver injury with acute hepatitis",
+      "Acute cholangitis with biliary obstruction",
+      "Hepatic encephalopathy with metabolic decompensation",
+      "Acute pancreatitis with secondary hepatitis",
+      "Viral hepatitis superimposed on chronic liver disease"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Severe Alcoholic Hepatitis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Severe Alcoholic Hepatitis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Severe Alcoholic Hepatitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on chronic alcohol use and missing acute decompensation requiring immediate intervention, or focusing only on addiction rather than severe hepatitis",
+      "prematureClosure": "Risk of stopping at 'chronic alcoholic liver disease' without recognizing this as severe alcoholic hepatitis requiring specific scoring and potential steroid therapy",
+      "availabilityBias": "May focus on more common presentations of alcohol withdrawal or chronic liver disease rather than recognizing acute severe alcoholic hepatitis with high mortality risk"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dennis O'Brien's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Severe Alcoholic Hepatitis (Maddrey Discriminant Function >32, AST:ALT >2:1, Leukocytosis, Coagulopathy, Jaundice \u2014 Prednisolone Candidate Pending LILLE Score). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. This patient has multiple concerning features - what specific aspects of his presentation worry you most about acute decompensation? What key historical points will help you distinguish between chronic stable disease versus acute severe alcoholic hepatitis?",
+      "phase5": "You've identified significant findings consistent with acute liver dysfunction. Given his Maddrey discriminant function calculation and clinical presentation, what specific scoring systems should you consider? How will your management differ if this is severe alcoholic hepatitis versus decompensated cirrhosis?",
+      "finalDebrief": "This case highlights severe alcoholic hepatitis with Maddrey DF >32, requiring consideration of corticosteroid therapy. Notice how the AST:ALT ratio >2:1, leukocytosis, and coagulopathy with jaundice created the classic constellation. The key was recognizing this as an acute process requiring immediate scoring and potential intervention, not just chronic liver disease."
     }
-}
+  }
 };

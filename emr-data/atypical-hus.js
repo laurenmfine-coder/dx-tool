@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Camila Restrepo",
-  "patientHPI": "I've been feeling completely exhausted for the past few days, and my urine looks like dark cola, which really scared me. I'm not peeing as much as usual, and I have this dull headache with some nausea. I also noticed these weird bruises on my arms and legs that just appeared out of nowhere.",
+    "patientHPI": "I've been feeling completely exhausted for the past few days, and my urine looks like dark cola, which really scared me. I'm not peeing as much as usual, and I have this dull headache with some nausea. I also noticed these weird bruises on my arms and legs that just appeared out of nowhere.",
     "dob": "03/14/1990",
     "age": 34,
     "sex": "Female",
@@ -162,7 +162,7 @@ window.EMR_DATA = {
       "spo2": "99%",
       "wt": "138 lbs",
       "ht": "5'5\"",
-      "bmi": 23.0,
+      "bmi": 23,
       "setting": "PCP Office"
     }
   ],
@@ -205,35 +205,119 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "5.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "12.4", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "37.0", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "198", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "5.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "12.4",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "37.0",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "198",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "86", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "18", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "1.1", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "140", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "86",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "18",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.1",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "140",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "COMPLEMENT AND AUTOIMMUNE MARKERS",
           "results": [
-            { "test": "C3", "value": "82", "unit": "mg/dL", "range": "90-180", "flag": "L" },
-            { "test": "C4", "value": "14", "unit": "mg/dL", "range": "10-40", "flag": "" },
-            { "test": "Anti-dsDNA Ab", "value": "45", "unit": "IU/mL", "range": "<30", "flag": "H" },
-            { "test": "ESR", "value": "28", "unit": "mm/hr", "range": "0-20", "flag": "H" }
+            {
+              "test": "C3",
+              "value": "82",
+              "unit": "mg/dL",
+              "range": "90-180",
+              "flag": "L"
+            },
+            {
+              "test": "C4",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "10-40",
+              "flag": ""
+            },
+            {
+              "test": "Anti-dsDNA Ab",
+              "value": "45",
+              "unit": "IU/mL",
+              "range": "<30",
+              "flag": "H"
+            },
+            {
+              "test": "ESR",
+              "value": "28",
+              "unit": "mm/hr",
+              "range": "0-20",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "URINE PROTEIN/CREATININE RATIO",
           "results": [
-            { "test": "Urine Protein/Creatinine", "value": "0.6", "unit": "mg/mg", "range": "<0.2", "flag": "H" }
+            {
+              "test": "Urine Protein/Creatinine",
+              "value": "0.6",
+              "unit": "mg/mg",
+              "range": "<0.2",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -301,15 +385,42 @@ window.EMR_DATA = {
     "Maternal aunt: SLE with ESRD, deceased at 55"
   ],
   "socialHistory": [
-    ["Occupation", "Marketing manager — office work"],
-    ["Marital", "Married, no children"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Rare — avoids due to medications"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 3x/week; avoids sun exposure per lupus precautions"],
-    ["Housing", "Lives with husband in apartment"],
-    ["Safety", "Denies IPV; seatbelt; uses sunscreen daily"],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Marketing manager — office work"
+    ],
+    [
+      "Marital",
+      "Married, no children"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Rare — avoids due to medications"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 3x/week; avoids sun exposure per lupus precautions"
+    ],
+    [
+      "Housing",
+      "Lives with husband in apartment"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; uses sunscreen daily"
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "atypical-hus",
@@ -320,75 +431,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Camila Restrepo is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Camila appears anxious and frightened by her symptoms, particularly the dark urine and spontaneous bruising. She is cooperative and detailed in her responses, clearly motivated to find answers given her established lupus diagnosis and fear that something serious is happening.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did hematologic emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first notice the dark urine and how has it changed?",
+      "Can you describe the bruising - where is it located and when did it appear?",
+      "Tell me more about your fatigue - how does it compare to your usual lupus fatigue?",
+      "Have you noticed any changes in your urination frequency or amount?",
+      "Are you experiencing any visual changes or confusion?",
+      "Have you had any recent infections, illnesses, or medication changes?",
+      "Any abdominal pain, particularly in your belly or back?",
+      "Have you noticed any swelling in your face, hands, or feet?",
+      "Any recent fevers, chills, or night sweats?",
+      "How has your lupus been controlled lately - any flares?",
+      "Have you had any recent blood work or kidney function tests?",
+      "Any shortness of breath or chest pain?",
+      "Have you experienced any bleeding from your gums or nose?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been feeling completely exhausted for the past few days, and my urine looks.'",
-        "character": "'It's hematologic emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Atypical Hemolytic Uremic Syndrome.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Hydroxychloroquine 200mg BID; Mycophenolate Mofetil 1000mg BID; Prednisone 5mg daily; Losartan 50mg daily; Aspirin 81mg daily; Cholecalciferol 2000 IU daily; Calcium Carbonate 600mg BID.'",
-        "allergies": "'My allergies are Trimethoprim-Sulfamethoxazole.'",
-        "family": "Mother: SLE, Sj\u00f6gren syndrome, alive at 60  Father: HTN, T2DM, alive at 64  Sister: Hypothyroidism (autoimmune), age 30",
-        "social": "Occupation: Marketing manager \u2014 office work  Marital: Married, no children  Tobacco: Never smoker  Alcohol: Rare \u2014 avoids due to medications  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking - could you explain that differently? I'm really worried about what's happening to me.",
+      "onset": "The dark urine started about 3 days ago - it was shocking, like dark cola or tea. The fatigue has been building for about a week, and the bruises just appeared yesterday on my arms and legs.",
+      "character": "The urine is definitely darker than I've ever seen - almost brown. The fatigue feels different from my usual lupus tiredness - it's more profound, like I can barely get out of bed.",
+      "location": "The bruises are mainly on my arms, especially my forearms, and on my shins. The headache is across my forehead and temples.",
+      "severity": "The fatigue is probably an 8 out of 10 - I can barely function at work. The headache is about a 6, and the nausea makes it hard to eat anything.",
+      "aggravating": "Moving around makes me feel more tired and dizzy. Bright lights seem to make my headache worse.",
+      "relieving": "Rest helps a little with the fatigue, but nothing seems to help the headache. I tried Tylenol but it didn't do much.",
+      "associated": "I've been nauseous, especially in the mornings. I feel dizzy when I stand up sometimes. My appetite has been poor, and I think I might have had a low fever yesterday.",
+      "denies": "No chest pain, no shortness of breath, no abdominal pain, no diarrhea, no rash beyond the bruising, no joint pain beyond my usual lupus aches.",
+      "history": "I've never had symptoms exactly like this before. My lupus has been pretty well controlled on my current medications, though I did have some kidney involvement a couple years ago.",
+      "medications": "Hydroxychloroquine 200mg BID; Mycophenolate Mofetil 1000mg BID; Prednisone 5mg daily; Losartan 50mg daily; Aspirin 81mg daily; Cholecalciferol 2000 IU daily; Calcium Carbonate 600mg BID",
+      "allergies": "Trimethoprim-Sulfamethoxazole",
+      "family": "My mother has lupus and Sjögren's syndrome, so autoimmune diseases run in our family. My father has high blood pressure and diabetes.",
+      "social": "I work as a marketing manager, mostly office work. I'm married with no children. I don't smoke, rarely drink alcohol because of my medications, and I don't use any recreational drugs."
     },
     "examManeuvers": [
-        "General appearance and pallor",
-        "Vital signs",
-        "Skin for pallor, jaundice, petechiae, or purpura",
-        "Lymph node assessment",
-        "Spleen palpation",
-        "Liver assessment",
-        "Cardiovascular auscultation",
-        "Neurological assessment"
+      "Blood pressure measurement",
+      "Fundoscopic examination",
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Abdominal examination",
+      "Neurologic examination including mental status",
+      "Skin examination for petechiae and purpura",
+      "Assessment for peripheral edema",
+      "Lymph node examination",
+      "Assessment for pallor and jaundice"
     ],
     "examFindings": {
-        "General appearance and pallor": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Skin for pallor, jaundice, petechiae, or purpura": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Lymph node assessment": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Spleen palpation": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Liver assessment": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe.",
-        "Neurological assessment": "Clinical finding consistent with Atypical Hemolytic Uremic Syndrome. Document specifically what you observe."
+      "Blood pressure measurement": "148/92 mmHg - elevated, consistent with hypertensive component of microangiopathic process",
+      "Fundoscopic examination": "Mild arteriovenous nicking, few cotton wool spots, no hemorrhages or papilledema",
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs, gallops, or rubs. Capillary refill 3 seconds.",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no crackles or wheezes",
+      "Abdominal examination": "Soft, non-tender, no hepatosplenomegaly, normal bowel sounds",
+      "Neurologic examination including mental status": "Alert and oriented, mild difficulty with concentration, no focal deficits, reflexes normal",
+      "Skin examination for petechiae and purpura": "Multiple ecchymoses on bilateral forearms and shins, few scattered petechiae on lower extremities",
+      "Assessment for peripheral edema": "Mild bilateral lower extremity edema, 1+ pitting",
+      "Lymph node examination": "No lymphadenopathy",
+      "Assessment for pallor and jaundice": "Notable pallor of conjunctiva and nail beds, mild scleral icterus"
     },
     "ddxTargets": [
-        "Atypical Hemolytic Uremic Syndrome (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE) (correct diagnosis)",
+      "Thrombotic Thrombocytopenic Purpura (TTP)",
+      "Lupus Nephritis Flare",
+      "Acute Glomerulonephritis",
+      "Drug-Induced Hemolytic Anemia",
+      "Autoimmune Hemolytic Anemia",
+      "Acute Kidney Injury from Dehydration"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Atypical Hemolytic Uremic Syndrome, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Atypical Hemolytic Uremic Syndrome, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Atypical Hemolytic Uremic Syndrome based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on lupus nephritis flare given her established SLE history, potentially missing the thrombotic microangiopathy component that requires urgent plasma exchange",
+      "prematureClosure": "May stop investigating after identifying hemolysis and assume simple autoimmune hemolytic anemia without recognizing the triad of microangiopathic hemolytic anemia, thrombocytopenia, and acute kidney injury",
+      "availabilityBias": "TTP may come to mind more readily than atypical HUS, but complement-mediated TMA in lupus patients is an important distinct entity requiring different treatment approaches"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Camila Restrepo's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Atypical Hemolytic Uremic Syndrome (Complement-Mediated TMA in SLE). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "This patient with established SLE presents with a concerning triad of symptoms. What specific laboratory studies would help you differentiate between the various causes of hemolysis and thrombocytopenia in lupus patients? Consider both lupus-related complications and thrombotic microangiopathies.",
+      "phase5": "You've identified signs consistent with hemolysis, thrombocytopenia, and kidney injury in a lupus patient. How do you differentiate between a lupus nephritis flare, TTP, and complement-mediated atypical HUS? What urgent interventions might be needed while awaiting confirmatory studies?",
+      "finalDebrief": "This case illustrates how complement-mediated thrombotic microangiopathy can present in SLE patients, requiring recognition of the classic triad plus understanding of complement pathway involvement. How did your differential evolve from considering simple lupus flare to recognizing this hematologic emergency requiring plasma exchange?"
     }
-}
+  }
 };

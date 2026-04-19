@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Evelyn Carter",
-  "patientHPI": "This past week I've been getting more and more short of breath, and now I can barely walk to the bathroom without huffing and puffing. I've gained about 14 pounds in three weeks, my legs are swollen up to my knees, and I had to add another pillow because I can't breathe lying flat. I woke up gasping for air twice last night.",
+    "patientHPI": "This past week I've been getting more and more short of breath, and now I can barely walk to the bathroom without huffing and puffing. I've gained about 14 pounds in three weeks, my legs are swollen up to my knees, and I had to add another pillow because I can't breathe lying flat. I woke up gasping for air twice last night.",
     "dob": "04/15/1947",
     "age": 77,
     "sex": "Female",
@@ -13,7 +13,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B + AARP Supplement",
     "pcp": "Dr. William Grant, MD",
-    "pharmacy": "Walgreens \u2014 4600 Sheridan St, Hollywood, FL",
+    "pharmacy": "Walgreens — 4600 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "Black or African American",
     "address": "1092 Sycamore Dr, Baltimore, MD 21214",
@@ -152,54 +152,54 @@ window.EMR_DATA = {
   ],
   "vitals": [
     {
-        "date": "01/13/2025",
-        "bp": "148/92",
-        "hr": 94,
-        "rr": 22,
-        "temp": "98.2\u00b0F",
-        "spo2": "90%",
-        "wt": "192 lbs",
-        "ht": "5'6\"",
-        "bmi": 31.0,
-        "setting": "PCP Office"
+      "date": "01/13/2025",
+      "bp": "148/92",
+      "hr": 94,
+      "rr": 22,
+      "temp": "98.2°F",
+      "spo2": "90%",
+      "wt": "192 lbs",
+      "ht": "5'6\"",
+      "bmi": 31,
+      "setting": "PCP Office"
     },
     {
-        "date": "10/21/2024",
-        "bp": "132/82",
-        "hr": 78,
-        "rr": 18,
-        "temp": "98.4\u00b0F",
-        "spo2": "94%",
-        "wt": "178 lbs",
-        "ht": "5'6\"",
-        "bmi": 28.7,
-        "setting": "PCP Office"
+      "date": "10/21/2024",
+      "bp": "132/82",
+      "hr": 78,
+      "rr": 18,
+      "temp": "98.4°F",
+      "spo2": "94%",
+      "wt": "178 lbs",
+      "ht": "5'6\"",
+      "bmi": 28.7,
+      "setting": "PCP Office"
     },
     {
-        "date": "07/08/2024",
-        "bp": "128/78",
-        "hr": 76,
-        "rr": 16,
-        "temp": "98.6\u00b0F",
-        "spo2": "95%",
-        "wt": "176 lbs",
-        "ht": "5'6\"",
-        "bmi": 28.4,
-        "setting": "PCP Office"
+      "date": "07/08/2024",
+      "bp": "128/78",
+      "hr": 76,
+      "rr": 16,
+      "temp": "98.6°F",
+      "spo2": "95%",
+      "wt": "176 lbs",
+      "ht": "5'6\"",
+      "bmi": 28.4,
+      "setting": "PCP Office"
     },
     {
-        "date": "04/15/2024",
-        "bp": "136/86",
-        "hr": 82,
-        "rr": 18,
-        "temp": "98.4\u00b0F",
-        "spo2": "93%",
-        "wt": "180 lbs",
-        "ht": "5'6\"",
-        "bmi": 29.0,
-        "setting": "PCP Office"
+      "date": "04/15/2024",
+      "bp": "136/86",
+      "hr": 82,
+      "rr": 18,
+      "temp": "98.4°F",
+      "spo2": "93%",
+      "wt": "180 lbs",
+      "ht": "5'6\"",
+      "bmi": 29,
+      "setting": "PCP Office"
     }
-],
+  ],
   "visits": [
     {
       "id": "V001",
@@ -209,7 +209,7 @@ window.EMR_DATA = {
       "cc": "Weight gain, worsening dyspnea, leg swelling",
       "hpi": "Mrs. Carter presents with 1 week of progressive dyspnea, now present at rest. Reports 14-lb weight gain over 3 weeks (178 to 192 lbs). Two-pillow orthopnea (baseline one pillow). Woke up gasping for air twice last night (PND). Bilateral lower extremity swelling to mid-calf. Admits she ran out of furosemide 10 days ago and did not refill due to transportation issues. Also ate high-sodium foods over the holidays. Denies chest pain, fever, or cough.",
       "exam": "Moderate respiratory distress at rest. JVP elevated to 12 cm. Lungs: bilateral crackles to mid-lung fields. CV: irregularly irregular (afib), S3 gallop present, II/VI systolic murmur at apex (mitral regurgitation). Abdomen: mildly distended, hepatomegaly 3 cm below costal margin. Ext: 3+ bilateral pitting edema to knees.",
-      "assessment": "1. Acute decompensated HFrEF (NYHA IV) \u2014 triggered by medication nonadherence + dietary indiscretion\n2. Afib with uncontrolled rate\n3. Volume overload with pulmonary congestion\n4. CKD 3b \u2014 monitor during diuresis",
+      "assessment": "1. Acute decompensated HFrEF (NYHA IV) — triggered by medication nonadherence + dietary indiscretion\n2. Afib with uncontrolled rate\n3. Volume overload with pulmonary congestion\n4. CKD 3b — monitor during diuresis",
       "plan": "1. Direct to ED for IV diuresis, telemetry monitoring\n2. Anticipate IV furosemide 80mg bolus, then drip vs. BID dosing\n3. Daily weights, strict I&O, 1.5L fluid restriction, low-sodium diet\n4. Cardiology consult for medication optimization\n5. Social work referral for medication access and transportation"
     },
     {
@@ -218,9 +218,9 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. William Grant, MD",
       "cc": "HF and DM follow-up",
-      "hpi": "Routine follow-up. Reports stable symptoms at NYHA Class III. One-pillow orthopnea, no PND. Walking to kitchen and bathroom without significant dyspnea. Medication compliant. Weight stable at 178 lbs. CPAP compliance poor \u2014 uses 3-4 nights per week.",
+      "hpi": "Routine follow-up. Reports stable symptoms at NYHA Class III. One-pillow orthopnea, no PND. Walking to kitchen and bathroom without significant dyspnea. Medication compliant. Weight stable at 178 lbs. CPAP compliance poor — uses 3-4 nights per week.",
       "exam": "Comfortable at rest. JVP 8 cm. Lungs: bibasilar crackles, mild. CV: irregularly irregular, S3 present, no new murmurs. Ext: trace bilateral ankle edema.",
-      "assessment": "1. HFrEF \u2014 NYHA III, compensated\n2. DM \u2014 A1c 7.2%, at goal\n3. Afib \u2014 rate controlled\n4. OSA \u2014 suboptimal CPAP compliance",
+      "assessment": "1. HFrEF — NYHA III, compensated\n2. DM — A1c 7.2%, at goal\n3. Afib — rate controlled\n4. OSA — suboptimal CPAP compliance",
       "plan": "1. Continue current HF regimen\n2. Reinforce CPAP use every night\n3. A1c recheck in 6 months\n4. Renal function check in 3 months"
     }
   ],
@@ -239,26 +239,86 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL",
           "results": [
-            {"test": "Glucose", "value": "148", "unit": "mg/dL", "range": "70-100", "flag": "H"},
-            {"test": "BUN", "value": "38", "unit": "mg/dL", "range": "7-20", "flag": "H"},
-            {"test": "Creatinine", "value": "2.1", "unit": "mg/dL", "range": "0.6-1.1", "flag": "H"},
-            {"test": "eGFR", "value": "28", "unit": "mL/min/1.73m2", "range": ">60", "flag": "L"},
-            {"test": "Sodium", "value": "132", "unit": "mEq/L", "range": "136-145", "flag": "L"},
-            {"test": "Potassium", "value": "5.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H"},
-            {"test": "Chloride", "value": "96", "unit": "mEq/L", "range": "98-106", "flag": "L"},
-            {"test": "CO2", "value": "22", "unit": "mEq/L", "range": "21-31", "flag": ""}
+            {
+              "test": "Glucose",
+              "value": "148",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "38",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "2.1",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "28",
+              "unit": "mL/min/1.73m2",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "132",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": "L"
+            },
+            {
+              "test": "Potassium",
+              "value": "5.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Chloride",
+              "value": "96",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": "L"
+            },
+            {
+              "test": "CO2",
+              "value": "22",
+              "unit": "mEq/L",
+              "range": "21-31",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BNP",
           "results": [
-            {"test": "BNP", "value": "1840", "unit": "pg/mL", "range": "<100", "flag": "H"}
+            {
+              "test": "BNP",
+              "value": "1840",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "TROPONIN",
           "results": [
-            {"test": "Troponin I, High Sensitivity", "value": "0.018", "unit": "ng/mL", "range": "<0.04", "flag": ""}
+            {
+              "test": "Troponin I, High Sensitivity",
+              "value": "0.018",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -277,7 +337,7 @@ window.EMR_DATA = {
       "clinical": "HFrEF, annual surveillance",
       "technique": "Complete 2D, M-mode, and Doppler echocardiogram.",
       "findings": "LV: Severely dilated. EF 30% by biplane Simpson method. Global hypokinesis. LV end-diastolic diameter 6.4 cm. Diastolic dysfunction Grade 3 (restrictive pattern). LA: Severely dilated (5.2 cm). RV: Mildly dilated, TAPSE 1.5 cm (borderline reduced). Valves: Moderate mitral regurgitation (functional). Mild tricuspid regurgitation. Estimated RVSP 48 mmHg (elevated). Small pericardial effusion, not hemodynamically significant.",
-      "impression": "1. Severely reduced LV systolic function, EF 30% \u2014 unchanged from prior.\n2. Severe LV and LA dilation. Global hypokinesis.\n3. Moderate functional mitral regurgitation.\n4. Elevated RVSP suggesting pulmonary hypertension.\n5. Small pericardial effusion.",
+      "impression": "1. Severely reduced LV systolic function, EF 30% — unchanged from prior.\n2. Severe LV and LA dilation. Global hypokinesis.\n3. Moderate functional mitral regurgitation.\n4. Elevated RVSP suggesting pulmonary hypertension.\n5. Small pericardial effusion.",
       "dictated": "07/08/2024 11:00 AM",
       "verified": "07/08/2024 02:15 PM"
     }
@@ -320,15 +380,42 @@ window.EMR_DATA = {
     "Strong family history of cardiomyopathy and sudden cardiac death"
   ],
   "socialHistory": [
-    ["Occupation", "Retired registered nurse (35 years at Memorial Regional Hospital)"],
-    ["Marital", "Widowed (husband deceased 2016). Lives alone. Daughter visits 3x/week."],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Denies"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited \u2014 walks within home. Gets dyspneic with any exertion beyond ADLs."],
-    ["Housing", "Single-story home, Hollywood, FL. Lives alone. Has medical alert pendant."],
-    ["Safety", "Fall risk. Grab bars in bathroom. Non-slip mats."],
-    ["Advance Directive", "DNR/DNI. Written advance directive on file. Daughter is healthcare proxy."]
+    [
+      "Occupation",
+      "Retired registered nurse (35 years at Memorial Regional Hospital)"
+    ],
+    [
+      "Marital",
+      "Widowed (husband deceased 2016). Lives alone. Daughter visits 3x/week."
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Denies"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — walks within home. Gets dyspneic with any exertion beyond ADLs."
+    ],
+    [
+      "Housing",
+      "Single-story home, Hollywood, FL. Lives alone. Has medical alert pendant."
+    ],
+    [
+      "Safety",
+      "Fall risk. Grab bars in bathroom. Non-slip mats."
+    ],
+    [
+      "Advance Directive",
+      "DNR/DNI. Written advance directive on file. Daughter is healthcare proxy."
+    ]
   ],
   "meta": {
     "caseId": "chf-exacerbation",
@@ -339,75 +426,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Evelyn Carter appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Evelyn appears anxious and somewhat distressed, speaking in short sentences due to dyspnea but remaining cooperative. As a retired nurse, she is knowledgeable about her conditions and provides detailed, accurate information about her symptoms and medications.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did your shortness of breath begin and how has it progressed?",
+      "Can you describe the quality of your breathing difficulty?",
+      "How many pillows do you need to sleep comfortably now?",
+      "Have you had any episodes of waking up gasping for air?",
+      "How much weight have you gained and over what time period?",
+      "Where is the swelling located and how far up does it extend?",
+      "What is your current exercise tolerance compared to baseline?",
+      "Have you had any chest pain, palpitations, or racing heart?",
+      "Have you been compliant with your medications, especially your water pill?",
+      "Have you had any recent dietary indiscretions or increased salt intake?",
+      "Have you had any recent illness, infection, or medication changes?",
+      "Have you experienced any nausea, abdominal bloating, or decreased appetite?",
+      "Do you have any cough, and if so, is it productive?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started This past week I've been getting more and more short of breath, and now I can ba.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Acute Decompensated Heart Failure.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sacubitril-Valsartan (Entresto) 49-51mg BID; Carvedilol 12.5mg BID; Furosemide 80mg BID; Spironolactone 25mg daily; Apixaban 5mg BID; Empagliflozin 10mg daily; Metformin 500mg BID; Potassium Chloride 20mEq daily.'",
-        "allergies": "'My allergies are Lisinopril, Morphine.'",
-        "family": "Mother: Congestive heart failure (dilated cardiomyopathy), hypertension, deceased age 72  Father: Hypertension, stroke (age 68), deceased age 70  Sister: Hypertension, heart failure, age 74",
-        "social": "Occupation: Retired registered nurse (35 years at Memorial Regional Hospital)  Marital: Widowed (husband deceased 2016). Lives alone. Daughter visits 3x/week.  Tobacco: Never smoker  Alcohol: Denies  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that? I'm having trouble concentrating because of my breathing.",
+      "onset": "The shortness of breath started gradually about a week ago but has gotten much worse over the past 3-4 days. It's been steadily getting worse each day.",
+      "character": "It feels like I can't get enough air, like I'm suffocating. Even talking makes me feel winded, and I have to stop to catch my breath.",
+      "location": "It's mainly in my chest - I feel like my lungs just can't expand properly. There's no specific pain, just this terrible feeling of not getting enough air.",
+      "severity": "I'd say it's an 8 out of 10 right now. I can barely walk to the bathroom without stopping to rest, and I used to be able to do light housework.",
+      "aggravating": "Any physical activity makes it worse, even just getting dressed. Lying flat is impossible - I start gasping immediately.",
+      "relieving": "Sitting upright helps somewhat, and I've been sleeping in my recliner the past two nights. Rest helps a little but doesn't make it go away.",
+      "associated": "I've gained 14 pounds in three weeks, my legs are swollen up to my knees, and I've been more tired than usual. I've had some trouble sleeping because of the breathing.",
+      "denies": "No chest pain, no fever, no cough with blood. I haven't had any severe palpitations or fainting spells.",
+      "history": "I was hospitalized about 8 months ago for similar symptoms when my heart failure flared up. This feels very similar but maybe worse.",
+      "medications": "Sacubitril-Valsartan (Entresto) 49-51mg BID; Carvedilol 12.5mg BID; Furosemide 80mg BID; Spironolactone 25mg daily; Apixaban 5mg BID; Empagliflozin 10mg daily; Metformin 500mg BID; Potassium Chloride 20mEq daily",
+      "allergies": "Lisinopril, Morphine",
+      "family": "My mother had heart failure too - dilated cardiomyopathy - and died at 72. My sister also has heart failure and is still managing it at 74.",
+      "social": "I'm a retired registered nurse, worked 35 years at Memorial Regional. I live alone since my husband passed in 2016, but my daughter checks on me regularly. I never smoked and don't drink alcohol."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Jugular venous pressure assessment",
+      "Cardiac auscultation for gallops and murmurs",
+      "Pulmonary auscultation",
+      "Lower extremity edema assessment",
+      "Hepatojugular reflux test",
+      "Point of maximal impulse palpation",
+      "Abdominal examination for hepatomegaly and ascites",
+      "Assessment of peripheral pulses",
+      "Skin temperature and color assessment",
+      "Weight measurement and comparison to baseline"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Acute Decompensated Heart Failure. Document specifically what you observe."
+      "Jugular venous pressure assessment": "JVP elevated to 12 cm H2O with prominent v-waves visible",
+      "Cardiac auscultation for gallops and murmurs": "S3 gallop present, irregular rhythm consistent with atrial fibrillation, no significant murmurs",
+      "Pulmonary auscultation": "Bilateral basilar crackles extending halfway up both lung fields, decreased air entry at bases",
+      "Lower extremity edema assessment": "3+ pitting edema bilaterally extending to mid-shin level",
+      "Hepatojugular reflux test": "Positive hepatojugular reflux with sustained JVP elevation",
+      "Point of maximal impulse palpation": "PMI displaced laterally to anterior axillary line, diffuse and sustained",
+      "Abdominal examination for hepatomegaly and ascites": "Mild hepatomegaly palpable 2 cm below costal margin, no obvious ascites",
+      "Assessment of peripheral pulses": "Peripheral pulses present but diminished, no peripheral cyanosis",
+      "Skin temperature and color assessment": "Cool extremities, mild pallor, capillary refill 3 seconds",
+      "Weight measurement and comparison to baseline": "Current weight 14 pounds above documented dry weight from last clinic visit"
     },
     "ddxTargets": [
-        "Acute Decompensated Heart Failure (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute Decompensated Heart Failure (HFrEF Exacerbation) (correct diagnosis)",
+      "Pneumonia with secondary heart failure exacerbation",
+      "Pulmonary embolism",
+      "Acute coronary syndrome",
+      "Acute kidney injury with fluid retention",
+      "Medication non-compliance",
+      "COPD exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Decompensated Heart Failure, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Acute Decompensated Heart Failure, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Acute Decompensated Heart Failure based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of immediately anchoring on heart failure given known history without considering acute precipitants like PE, ACS, or pneumonia that could trigger decompensation",
+      "prematureClosure": "Risk of stopping evaluation at 'heart failure exacerbation' without investigating underlying triggers or complications that require specific treatment",
+      "availabilityBias": "Recent cases of respiratory complaints may bias toward infectious causes, potentially overlooking the cardiovascular etiology of dyspnea"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Evelyn Carter's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Acute Decompensated Heart Failure (HFrEF Exacerbation). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified heart failure exacerbation in your differential, which makes sense given her history. Before you interview the patient, what specific precipitating factors should you explore that might have triggered this decompensation? Also, what life-threatening conditions could present similarly in a 77-year-old with cardiovascular risk factors?",
+      "phase5": "Your examination findings strongly support volume overload. Now let's think systematically - you have clear evidence of heart failure exacerbation, but what are the common precipitants you should investigate? Consider the triad of medication compliance, dietary indiscretion, and intercurrent illness. What diagnostic studies would help you both confirm the diagnosis and identify any triggers?",
+      "finalDebrief": "This case illustrates how acute decompensated heart failure often presents with a classic constellation of symptoms. Notice how your differential evolved from considering various causes of dyspnea to recognizing the volume overload picture. The key teaching points are recognizing the signs of right heart failure, understanding precipitants of decompensation, and the importance of investigating triggers even when the primary diagnosis seems obvious."
     }
-}
+  }
 };

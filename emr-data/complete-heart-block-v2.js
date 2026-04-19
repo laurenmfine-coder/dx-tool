@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Edith Marchetti",
-  "patientHPI": "I'm getting so winded just getting dressed or taking a shower now, and twice in the past couple months I've felt like I was going to faint when I stood up - everything went gray for a moment but then I was okay.",
+    "patientHPI": "I'm getting so winded just getting dressed or taking a shower now, and twice in the past couple months I've felt like I was going to faint when I stood up - everything went gray for a moment but then I was okay.",
     "dob": "04/22/1941",
     "age": 84,
     "sex": "Female",
@@ -223,35 +223,119 @@ window.EMR_DATA = {
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "106", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "34", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.8", "unit": "mg/dL", "range": "0.6-1.2", "flag": "H" },
-            { "test": "eGFR", "value": "28", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" },
-            { "test": "Sodium", "value": "136", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "5.2", "unit": "mEq/L", "range": "3.5-5.0", "flag": "H" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "106",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "34",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.2",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "28",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            },
+            {
+              "test": "Sodium",
+              "value": "136",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "5.2",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": "H"
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CARDIAC MARKERS",
           "results": [
-            { "test": "Troponin I", "value": "0.04", "unit": "ng/mL", "range": "<0.04", "flag": "" },
-            { "test": "BNP", "value": "680", "unit": "pg/mL", "range": "<100", "flag": "H" }
+            {
+              "test": "Troponin I",
+              "value": "0.04",
+              "unit": "ng/mL",
+              "range": "<0.04",
+              "flag": ""
+            },
+            {
+              "test": "BNP",
+              "value": "680",
+              "unit": "pg/mL",
+              "range": "<100",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.2", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "10.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L" },
-            { "test": "Hematocrit", "value": "32.4", "unit": "%", "range": "36.0-46.0", "flag": "L" },
-            { "test": "Platelet Count", "value": "196", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.2",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "10.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "32.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "Platelet Count",
+              "value": "196",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "THYROID",
           "results": [
-            { "test": "TSH", "value": "3.8", "unit": "mIU/L", "range": "0.4-4.0", "flag": "" }
+            {
+              "test": "TSH",
+              "value": "3.8",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -319,15 +403,42 @@ window.EMR_DATA = {
     "No family history of sudden cardiac death"
   ],
   "socialHistory": [
-    ["Occupation", "Retired school librarian; retired 2001"],
-    ["Marital", "Widowed (2019); husband deceased of heart failure"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "None"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Very limited — short walks with walker; chair exercises"],
-    ["Housing", "Assisted living facility — independent room with daily check-ins"],
-    ["Safety", "Fall risk — uses walker; wears personal emergency response device; 2 falls in past year (no fracture)"],
-    ["Advance Directive", "POLST on file — Full Code; HCP: son Anthony Marchetti"]
+    [
+      "Occupation",
+      "Retired school librarian; retired 2001"
+    ],
+    [
+      "Marital",
+      "Widowed (2019); husband deceased of heart failure"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "None"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Very limited — short walks with walker; chair exercises"
+    ],
+    [
+      "Housing",
+      "Assisted living facility — independent room with daily check-ins"
+    ],
+    [
+      "Safety",
+      "Fall risk — uses walker; wears personal emergency response device; 2 falls in past year (no fracture)"
+    ],
+    [
+      "Advance Directive",
+      "POLST on file — Full Code; HCP: son Anthony Marchetti"
+    ]
   ],
   "meta": {
     "caseId": "complete-heart-block-v2",
@@ -338,75 +449,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Edith Marchetti appears critically ill and in severe distress. They are cooperative but answers are brief due to pain or respiratory compromise. Family members may be at bedside providing additional history.",
+    "patientPersona": "Mrs. Marchetti appears anxious but cooperative, speaking in short sentences due to mild dyspnea. She's forthcoming about her symptoms and expresses concern about becoming like her late husband who died of heart failure. She demonstrates moderate distress, frequently pausing to catch her breath.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did cardiac emergency start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happens when you feel short of breath?",
+      "Tell me more about these episodes where you felt faint - what were you doing when they occurred?",
+      "Have you noticed your heart beating irregularly or skipping beats?",
+      "Do you get chest pain or pressure with the shortness of breath?",
+      "How far can you walk now compared to a few months ago?",
+      "Have you had any swelling in your legs or feet?",
+      "Do you get short of breath when lying flat or wake up gasping for air?",
+      "Have you noticed feeling more tired or fatigued lately?",
+      "Any dizziness or lightheadedness besides those two episodes?",
+      "Have you had any recent changes to your medications?",
+      "Any recent infections, fevers, or illnesses?",
+      "What medications are you currently taking?",
+      "Do you have any drug allergies?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I'm getting so winded just getting dressed or taking a shower now, and twice in .'",
-        "character": "'It's cardiac emergency \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Complete Heart Block.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine 5mg daily; Losartan 50mg daily; Levothyroxine 50mcg daily; Denosumab 60mg SubQ q6months; Calcium/Vitamin D 600mg/400IU BID; Acetaminophen 500mg q6h PRN.'",
-        "allergies": "'My allergies are Beta-Blockers (Metoprolol), NSAIDs.'",
-        "family": "Father: Aortic stenosis (valve replacement age 78), deceased at 82  Mother: HTN, Osteoporosis, deceased at 88  Sister: Pacemaker at age 80, alive at 86",
-        "social": "Occupation: Retired school librarian; retired 2001  Marital: Widowed (2019); husband deceased of heart failure  Tobacco: Never smoker  Alcohol: None  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble concentrating with feeling so winded.",
+      "onset": "The shortness of breath has been getting worse over the past 3-4 months, but really noticeable the last 6 weeks. The near-fainting spells happened about 2 months ago and then again 3 weeks ago.",
+      "character": "It's like I just can't catch my breath, even with simple things like getting dressed. My heart feels like it's beating so slowly and irregularly.",
+      "location": "The shortness of breath is just everywhere - my whole chest feels tight. No pain really, just can't get enough air.",
+      "severity": "The shortness of breath is about a 7 out of 10 now. I can barely walk from my bedroom to the kitchen without stopping to rest. I used to be able to walk around the block.",
+      "aggravating": "Any activity makes it worse - even just talking for too long like this. Standing up quickly definitely makes the dizziness worse.",
+      "relieving": "Sitting down and resting helps a little, but not like it used to. Nothing really makes it go away completely anymore.",
+      "associated": "I've been so tired lately, and my ankles have been a bit swollen. Sometimes I feel dizzy when I stand up, and I've noticed my heart beating very slowly.",
+      "denies": "No chest pain, no palpitations or racing heart, no fever, no cough, no nausea or vomiting. I haven't fainted completely, just felt like I might.",
+      "history": "I've had heart problems before - they told me I have severe narrowing of my heart valve and some rhythm problems. My sister got a pacemaker when she was 80.",
+      "medications": "Amlodipine 5mg daily; Losartan 50mg daily; Levothyroxine 50mcg daily; Denosumab 60mg SubQ q6months; Calcium/Vitamin D 600mg/400IU BID; Acetaminophen 500mg q6h PRN",
+      "allergies": "Beta-Blockers (Metoprolol), NSAIDs",
+      "family": "My father had severe aortic stenosis and needed valve replacement at 78. My sister has a pacemaker and she's doing well at 86. My husband died of heart failure in 2019.",
+      "social": "I'm a retired school librarian, been widowed since 2019. I've never smoked and don't drink alcohol. I live alone but my daughter checks on me daily."
     },
     "examManeuvers": [
-        "General appearance and hemodynamic assessment",
-        "Vital signs review",
-        "Jugular venous pressure",
-        "Cardiovascular auscultation",
-        "Peripheral pulses and perfusion",
-        "Pulmonary auscultation",
-        "Lower extremity edema",
-        "Skin perfusion and temperature"
+      "Heart rate and rhythm assessment",
+      "Cardiac auscultation",
+      "Jugular venous pressure",
+      "Carotid pulse character",
+      "Peripheral edema assessment",
+      "Lung auscultation",
+      "Blood pressure in both arms",
+      "Orthostatic vital signs",
+      "Assessment of peripheral perfusion",
+      "Abdominal examination for hepatomegaly"
     ],
     "examFindings": {
-        "General appearance and hemodynamic assessment": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Jugular venous pressure": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Peripheral pulses and perfusion": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Lower extremity edema": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe.",
-        "Skin perfusion and temperature": "Clinical finding consistent with Complete Heart Block. Document specifically what you observe."
+      "Heart rate and rhythm assessment": "Heart rate 34 bpm, regular but very slow rhythm, no extra beats or irregularity",
+      "Cardiac auscultation": "Loud harsh systolic murmur 4/6 heard best at right sternal border radiating to carotids, S4 gallop present, no S3",
+      "Jugular venous pressure": "Elevated JVP to 8 cm with prominent 'a' waves",
+      "Carotid pulse character": "Weak, delayed upstroke with diminished amplitude bilaterally, murmur audible over both carotid arteries",
+      "Peripheral edema assessment": "1+ pitting edema bilateral lower extremities to mid-shin level",
+      "Lung auscultation": "Bibasilar fine crackles, no wheeze or rhonchi",
+      "Blood pressure in both arms": "Right arm 108/62, left arm 106/64, narrow pulse pressure",
+      "Orthostatic vital signs": "Lying: 108/62 HR 34, Standing: 98/58 HR 36 with mild dizziness",
+      "Assessment of peripheral perfusion": "Cool extremities, capillary refill 3 seconds, weak peripheral pulses",
+      "Abdominal examination for hepatomegaly": "Liver edge palpable 2 cm below costal margin, no ascites or splenomegaly"
     },
     "ddxTargets": [
-        "Complete Heart Block (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Complete Heart Block (Degenerative Conduction Disease with Severe Aortic Stenosis) (correct diagnosis)",
+      "Severe Aortic Stenosis with Heart Failure",
+      "Sick Sinus Syndrome with Bradycardia",
+      "Acute Myocardial Infarction with Heart Block",
+      "Hyperkalemia or Drug-Induced Bradycardia",
+      "Decompensated Heart Failure with Bradycardia",
+      "Medication-Induced Bradycardia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Complete Heart Block, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Complete Heart Block, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Complete Heart Block based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on the obvious bradycardia and missing the underlying complete heart block, or focusing solely on aortic stenosis without recognizing the conduction disease component requiring urgent intervention",
+      "prematureClosure": "May stop at 'heart failure from aortic stenosis' without recognizing the complete heart block that requires immediate pacemaker placement before any other interventions",
+      "availabilityBias": "Recent cases of simple bradycardia or heart failure may lead to missing the complete heart block, or assuming all elderly patients with murmurs just need medical management"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Edith Marchetti's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Complete Heart Block (Degenerative Conduction Disease with Severe Aortic Stenosis). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. I see you're thinking about cardiac causes for her presentation. Given her age, known cardiac history, and the combination of symptoms, what specific aspects of the cardiac conduction system might you want to explore? How might her severe aortic stenosis interact with potential rhythm disorders?",
+      "phase5": "Excellent work gathering the history and physical findings. You've identified bradycardia, signs of heart failure, and severe aortic stenosis. Now, looking at that heart rate of 34 with her symptoms - what does this constellation tell you about her conduction system? How does this change your management priorities?",
+      "finalDebrief": "This case illustrates the importance of recognizing complete heart block in elderly patients with structural heart disease. Notice how the combination of severe aortic stenosis with degenerative conduction disease created a perfect storm - the stenosis limited cardiac output while the heart block prevented compensatory tachycardia. The family history of both aortic stenosis and pacemaker placement was a crucial clue. This patient needs urgent pacemaker placement before any consideration of valve intervention."
     }
-}
+  }
 };

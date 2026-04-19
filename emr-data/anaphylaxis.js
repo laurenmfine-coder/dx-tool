@@ -3,7 +3,7 @@ window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Priya Sharma",
-  "patientHPI": "I was eating at a restaurant and accidentally got some shrimp in my food, and about twenty minutes later my lips started swelling, I broke out in hives all over, my throat feels tight, and I'm getting dizzy. I had an emergency pen but it expired, so the ambulance people had to give me a shot.",
+      "patientHPI": "I was eating at a restaurant and accidentally got some shrimp in my food, and about twenty minutes later my lips started swelling, I broke out in hives all over, my throat feels tight, and I'm getting dizzy. I had an emergency pen but it expired, so the ambulance people had to give me a shot.",
       "dob": "08/03/1998",
       "age": "28",
       "sex": "Female",
@@ -1014,72 +1014,71 @@ window.EMR_DATA = {
       "EpiPen",
       "Had EpiPen but expired 6 months ago"
     ]
-  ]
-,"references":[
-  {
-    "id": "GA2LEN-2025",
-    "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
-    "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
-    "journal": "J Allergy Clin Immunol",
-    "year": 2025,
-    "doi": "10.1016/j.jaci.2025.01.021",
-    "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
-    "openAccess": true,
-    "validates": [
-      "Anaphylaxis diagnostic criteria",
-      "Epinephrine IM dosing",
-      "Biphasic reaction monitoring",
-      "Neffy nasal epinephrine"
-    ]
-  },
-  {
-    "id": "WAO-2020",
-    "title": "World Allergy Organization anaphylaxis guidance 2020",
-    "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
-    "journal": "World Allergy Organ J",
-    "year": 2020,
-    "doi": "10.1016/j.waojou.2020.100472",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
-    "openAccess": true,
-    "validates": [
-      "WAO diagnostic criteria",
-      "Epinephrine positioning",
-      "Cofactors: exercise, beta-blockers, ACE inhibitors"
-    ]
-  },
-  {
-    "id": "JTFPP-Anaph-2023",
-    "title": "Anaphylaxis: A 2023 practice parameter update",
-    "authors": "Golden DBK, Wang J, Waserman S, et al.",
-    "journal": "Ann Allergy Asthma Immunol",
-    "year": 2023,
-    "doi": "10.1016/j.anai.2023.09.015",
-    "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
-    "openAccess": true,
-    "validates": [
-      "Glucagon for beta-blocker patients",
-      "Tryptase measurement timing",
-      "0.1/0.15mg epi for infants",
-      "MCAS screening after anaphylaxis"
-    ]
-  },
-  {
-    "id": "EAACI-Anaph-2021",
-    "title": "EAACI guidelines: Anaphylaxis (2021 update)",
-    "authors": "Muraro A, Worm M, Alviani C, et al.",
-    "journal": "Allergy",
-    "year": 2022,
-    "doi": "10.1111/all.15032",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
-    "openAccess": true,
-    "validates": [
-      "Discharge planning with EpiPen",
-      "Patient action plans",
-      "Allergist referral 4-6 weeks"
-    ]
-  }
-],
-
+  ],
+  "references": [
+    {
+      "id": "GA2LEN-2025",
+      "title": "Anaphylaxis definition, overview, and clinical support tool: 2024 consensus report",
+      "authors": "Dribin TE, Muraro A, Camargo CA, Turner PJ, Wang J, et al.",
+      "journal": "J Allergy Clin Immunol",
+      "year": 2025,
+      "doi": "10.1016/j.jaci.2025.01.021",
+      "url": "https://www.jacionline.org/article/S0091-6749(25)00072-7/fulltext",
+      "openAccess": true,
+      "validates": [
+        "Anaphylaxis diagnostic criteria",
+        "Epinephrine IM dosing",
+        "Biphasic reaction monitoring",
+        "Neffy nasal epinephrine"
+      ]
+    },
+    {
+      "id": "WAO-2020",
+      "title": "World Allergy Organization anaphylaxis guidance 2020",
+      "authors": "Cardona V, Ansotegui IJ, Ebisawa M, et al.",
+      "journal": "World Allergy Organ J",
+      "year": 2020,
+      "doi": "10.1016/j.waojou.2020.100472",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7607509/",
+      "openAccess": true,
+      "validates": [
+        "WAO diagnostic criteria",
+        "Epinephrine positioning",
+        "Cofactors: exercise, beta-blockers, ACE inhibitors"
+      ]
+    },
+    {
+      "id": "JTFPP-Anaph-2023",
+      "title": "Anaphylaxis: A 2023 practice parameter update",
+      "authors": "Golden DBK, Wang J, Waserman S, et al.",
+      "journal": "Ann Allergy Asthma Immunol",
+      "year": 2023,
+      "doi": "10.1016/j.anai.2023.09.015",
+      "url": "https://www.aaaai.org/Aaaai/media/Media-Library-PDFs/Allergist%20Resources/Statements%20and%20Practice%20Parameters/Anaphylaxis-Practice-Paramaters-2023.pdf",
+      "openAccess": true,
+      "validates": [
+        "Glucagon for beta-blocker patients",
+        "Tryptase measurement timing",
+        "0.1/0.15mg epi for infants",
+        "MCAS screening after anaphylaxis"
+      ]
+    },
+    {
+      "id": "EAACI-Anaph-2021",
+      "title": "EAACI guidelines: Anaphylaxis (2021 update)",
+      "authors": "Muraro A, Worm M, Alviani C, et al.",
+      "journal": "Allergy",
+      "year": 2022,
+      "doi": "10.1111/all.15032",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9285065/",
+      "openAccess": true,
+      "validates": [
+        "Discharge planning with EpiPen",
+        "Patient action plans",
+        "Allergist referral 4-6 weeks"
+      ]
+    }
+  ],
   "teachingPoints": {
     "keyLearning": [
       "Anaphylaxis is a severe, life-threatening generalized hypersensitivity reaction requiring rapid recognition. Diagnosis is clinical — epinephrine should not be delayed for lab confirmation.",
@@ -1100,75 +1099,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Priya Sharma appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Priya appears anxious and frightened, speaking in short phrases due to throat tightness and difficulty breathing. She is cooperative but visibly distressed, frequently touching her swollen lips and pointing to her throat when describing symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did lip/tongue swelling, diffuse hives, throat tightness after eating shrimp start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you tell me exactly what happened and when your symptoms started?",
+      "What did you eat at the restaurant tonight?",
+      "Did you know there was shellfish in the food when you ate it?",
+      "How quickly did the symptoms develop after eating?",
+      "Can you describe how your throat feels right now?",
+      "Are you having any trouble breathing or wheezing?",
+      "Have you had reactions like this before to shellfish?",
+      "Do you carry an EpiPen with you?",
+      "Have you taken any medications since the symptoms started?",
+      "Are you experiencing any nausea, vomiting, or abdominal pain?",
+      "Do you have any chest pain or dizziness?",
+      "Have you ever been hospitalized for allergic reactions before?",
+      "Besides shellfish, what other allergies do you have?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started 28F presenting with acute anaphylaxis after accidental shellfish exposure at res.'",
-        "character": "'It's lip/tongue swelling, diffuse hives, throat tightness after eating shrimp \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Albuterol; Combined OCP.'",
-        "allergies": "'My allergies are Shellfish, Tree nuts.'",
-        "family": "Mother: seasonal allergies  Brother: peanut allergy",
-        "social": "Tobacco: Never  Alcohol: Social  Occupation: Software developer  EpiPen: Had EpiPen but expired 6 months ago"
+      "default": "I'm sorry, I'm having trouble focusing right now because my throat feels so tight and I'm scared",
+      "onset": "It started about 20 minutes after I ate the pasta - I didn't realize it had shrimp in the sauce until it was too late",
+      "character": "My lips and tongue feel huge and swollen, my throat feels like it's closing up, and I have these itchy bumps all over my body",
+      "location": "The swelling is mainly in my lips and tongue, the hives are everywhere - arms, chest, back - and the tightness is right here in my throat",
+      "severity": "This is definitely a 9 out of 10 - I can barely swallow and I'm really scared I can't breathe properly",
+      "aggravating": "It seems to be getting worse as time goes on, and touching the hives makes them more itchy",
+      "relieving": "Nothing is helping - I tried drinking water but it's hard to swallow",
+      "associated": "Yes, I feel dizzy and lightheaded, my heart is racing, and I feel nauseous",
+      "denies": "No chest pain, no loss of consciousness, no vomiting yet, no abdominal cramping",
+      "history": "I've had shellfish reactions before but never this severe - usually just hives and some lip swelling",
+      "medications": "Albuterol; Combined OCP",
+      "allergies": "Shellfish, Tree nuts",
+      "family": "My mother has seasonal allergies and my brother is allergic to peanuts",
+      "social": "I work as a software developer, I don't smoke, I drink socially on weekends, no drugs"
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Inspect lips, tongue, and oral cavity",
+      "Examine skin for urticaria and angioedema",
+      "Auscultate lungs for wheezing or stridor",
+      "Assess voice quality and ability to swallow",
+      "Palpate neck for swelling",
+      "Auscultate heart for rate and rhythm",
+      "Check capillary refill and peripheral perfusion",
+      "Assess mental status and anxiety level",
+      "Examine conjunctiva for swelling",
+      "Assess work of breathing and use of accessory muscles"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Inspect lips, tongue, and oral cavity": "Marked angioedema of lips and tongue, tongue appears enlarged and protrudes slightly, oral mucosa erythematous",
+      "Examine skin for urticaria and angioedema": "Diffuse raised erythematous wheals across trunk, arms, and neck, some confluent areas, no facial angioedema beyond lips",
+      "Auscultate lungs for wheezing or stridor": "Bilateral expiratory wheezes throughout lung fields, no stridor at rest",
+      "Assess voice quality and ability to swallow": "Voice slightly muffled due to tongue swelling, patient reports difficulty swallowing saliva",
+      "Palpate neck for swelling": "No palpable neck swelling or lymphadenopathy, no subcutaneous emphysema",
+      "Auscultate heart for rate and rhythm": "Tachycardic regular rhythm, no murmurs, gallops, or rubs",
+      "Check capillary refill and peripheral perfusion": "Capillary refill 3-4 seconds, cool extremities, weak peripheral pulses",
+      "Assess mental status and anxiety level": "Alert and oriented, anxious but appropriate, follows commands",
+      "Examine conjunctiva for swelling": "Mild conjunctival erythema and slight periorbital edema",
+      "Assess work of breathing and use of accessory muscles": "Mild increased work of breathing, no accessory muscle use at rest"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Anaphylaxis (correct diagnosis)",
+      "Severe allergic reaction without anaphylaxis",
+      "Hereditary angioedema",
+      "Acute asthma exacerbation",
+      "Septic shock",
+      "ACE inhibitor induced angioedema",
+      "Scombroid poisoning"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on obvious shellfish allergy history and missing severity assessment or alternative causes of shock",
+      "prematureClosure": "May stop evaluation after confirming allergic reaction without fully assessing for anaphylaxis criteria and hemodynamic instability",
+      "availabilityBias": "Recent cases of simple allergic reactions may lead to underestimating the severity of this patient's systemic involvement"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Priya Sharma's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Looking at your differential, I notice you're considering allergic reactions. What specific clinical criteria help distinguish between a localized allergic reaction versus anaphylaxis? What key history and exam findings will you prioritize to make this distinction?",
+      "phase5": "Now that you've gathered your history and physical exam findings, walk me through how you're weighing the evidence for anaphylaxis. What combination of systems are involved here, and how does that inform your diagnosis and urgency of treatment?",
+      "finalDebrief": "This case highlights the critical distinction between allergic reactions and anaphylaxis. Notice how the combination of cutaneous symptoms, respiratory involvement, and cardiovascular compromise met the criteria for anaphylaxis. How did the expired EpiPen detail and vital signs guide your assessment of severity? What does this teach us about not anchoring on 'just another allergic reaction'?"
     }
-}
+  }
 };

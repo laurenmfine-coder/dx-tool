@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Sofia Delgado",
-  "patientHPI": "These panic episodes are getting worse and happening way more often now, like three or four times a week, where suddenly my chest gets tight, I can't get enough air, my hands and mouth get tingly, my heart races, and I feel like something terrible is about to happen.",
+    "patientHPI": "These panic episodes are getting worse and happening way more often now, like three or four times a week, where suddenly my chest gets tight, I can't get enough air, my hands and mouth get tingly, my heart races, and I feel like something terrible is about to happen.",
     "dob": "11/03/1996",
     "age": 28,
     "sex": "Female",
@@ -13,7 +13,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Aetna PPO",
     "pcp": "Dr. Rachel Kim, MD",
-    "pharmacy": "Walgreens \u2014 3100 Broward Blvd, Fort Lauderdale, FL",
+    "pharmacy": "Walgreens — 3100 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic or Latino",
     "address": "2354 S Halsted St, Milwaukee, WI 53209",
@@ -103,11 +103,11 @@ window.EMR_DATA = {
       "bp": "112/70",
       "hr": 78,
       "rr": 14,
-      "temp": "98.4\u00b0F",
+      "temp": "98.4°F",
       "spo2": "99%",
       "wt": "128 lbs",
       "ht": "5'4\"",
-      "bmi": 22.0,
+      "bmi": 22,
       "setting": "PCP Office"
     },
     {
@@ -115,7 +115,7 @@ window.EMR_DATA = {
       "bp": "118/74",
       "hr": 82,
       "rr": 16,
-      "temp": "98.6\u00b0F",
+      "temp": "98.6°F",
       "spo2": "99%",
       "wt": "126 lbs",
       "ht": "5'4\"",
@@ -127,7 +127,7 @@ window.EMR_DATA = {
       "bp": "108/66",
       "hr": 74,
       "rr": 14,
-      "temp": "98.2\u00b0F",
+      "temp": "98.2°F",
       "spo2": "100%",
       "wt": "125 lbs",
       "ht": "5'4\"",
@@ -144,8 +144,8 @@ window.EMR_DATA = {
       "cc": "Anxiety follow-up, increasing panic attacks",
       "hpi": "Ms. Delgado reports increased frequency of panic attacks over the past 2 months, now 3-4 per week (previously 3-4 per month). Episodes include sudden onset chest tightness, feeling of air hunger, tingling in hands and around mouth, racing heart, and sense of impending doom lasting 10-20 minutes. Triggers include work deadlines and crowded spaces. Denies suicidal ideation. Using lorazepam 2-3 times per week.",
       "exam": "Anxious-appearing young woman. Vitals normal. Lungs: CTA. CV: RRR, mid-systolic click (known MVP), no murmur. Neuro: intact. No tremor.",
-      "assessment": "1. Panic disorder \u2014 worsening, increased frequency\n2. GAD \u2014 contributing to panic escalation\n3. Iron deficiency anemia \u2014 improving on supplementation",
-      "plan": "1. Increase escitalopram to 15mg daily (discussed titration)\n2. CBT referral for panic disorder \u2014 patient agreeable\n3. Continue lorazepam PRN but limit to 2x/week max\n4. Recheck CBC/ferritin in 3 months\n5. If no improvement in 6 weeks, consider adding buspirone"
+      "assessment": "1. Panic disorder — worsening, increased frequency\n2. GAD — contributing to panic escalation\n3. Iron deficiency anemia — improving on supplementation",
+      "plan": "1. Increase escitalopram to 15mg daily (discussed titration)\n2. CBT referral for panic disorder — patient agreeable\n3. Continue lorazepam PRN but limit to 2x/week max\n4. Recheck CBC/ferritin in 3 months\n5. If no improvement in 6 weeks, consider adding buspirone"
     },
     {
       "id": "V002",
@@ -174,28 +174,100 @@ window.EMR_DATA = {
         {
           "name": "COMPLETE BLOOD COUNT",
           "results": [
-            {"test": "WBC", "value": "6.8", "unit": "K/uL", "range": "4.5-11.0", "flag": ""},
-            {"test": "Hemoglobin", "value": "11.8", "unit": "g/dL", "range": "12.0-16.0", "flag": "L"},
-            {"test": "Hematocrit", "value": "35.4", "unit": "%", "range": "36.0-46.0", "flag": "L"},
-            {"test": "MCV", "value": "78", "unit": "fL", "range": "80-100", "flag": "L"},
-            {"test": "Platelets", "value": "282", "unit": "K/uL", "range": "150-400", "flag": ""},
-            {"test": "RDW", "value": "15.8", "unit": "%", "range": "11.5-14.5", "flag": "H"}
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "K/uL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "11.8",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "35.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": "L"
+            },
+            {
+              "test": "MCV",
+              "value": "78",
+              "unit": "fL",
+              "range": "80-100",
+              "flag": "L"
+            },
+            {
+              "test": "Platelets",
+              "value": "282",
+              "unit": "K/uL",
+              "range": "150-400",
+              "flag": ""
+            },
+            {
+              "test": "RDW",
+              "value": "15.8",
+              "unit": "%",
+              "range": "11.5-14.5",
+              "flag": "H"
+            }
           ]
         },
         {
           "name": "IRON STUDIES",
           "results": [
-            {"test": "Ferritin", "value": "18", "unit": "ng/mL", "range": "12-150", "flag": ""},
-            {"test": "Iron", "value": "48", "unit": "mcg/dL", "range": "60-170", "flag": "L"},
-            {"test": "TIBC", "value": "420", "unit": "mcg/dL", "range": "250-370", "flag": "H"},
-            {"test": "Iron Saturation", "value": "11", "unit": "%", "range": "20-50", "flag": "L"}
+            {
+              "test": "Ferritin",
+              "value": "18",
+              "unit": "ng/mL",
+              "range": "12-150",
+              "flag": ""
+            },
+            {
+              "test": "Iron",
+              "value": "48",
+              "unit": "mcg/dL",
+              "range": "60-170",
+              "flag": "L"
+            },
+            {
+              "test": "TIBC",
+              "value": "420",
+              "unit": "mcg/dL",
+              "range": "250-370",
+              "flag": "H"
+            },
+            {
+              "test": "Iron Saturation",
+              "value": "11",
+              "unit": "%",
+              "range": "20-50",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "THYROID PANEL",
           "results": [
-            {"test": "TSH", "value": "2.1", "unit": "mIU/L", "range": "0.4-4.0", "flag": ""},
-            {"test": "Free T4", "value": "1.2", "unit": "ng/dL", "range": "0.8-1.8", "flag": ""}
+            {
+              "test": "TSH",
+              "value": "2.1",
+              "unit": "mIU/L",
+              "range": "0.4-4.0",
+              "flag": ""
+            },
+            {
+              "test": "Free T4",
+              "value": "1.2",
+              "unit": "ng/dL",
+              "range": "0.8-1.8",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -250,15 +322,42 @@ window.EMR_DATA = {
     "No family history of sudden cardiac death or cardiomyopathy"
   ],
   "socialHistory": [
-    ["Occupation", "Marketing coordinator at a tech startup. High-stress environment, long hours."],
-    ["Marital", "Single, lives alone in apartment"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Social \u2014 wine 2-3 glasses on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Yoga 2x/week, occasional jogging"],
-    ["Housing", "One-bedroom apartment, Fort Lauderdale. Second floor."],
-    ["Safety", "Feels safe at home. No IPV."],
-    ["Advance Directive", "None on file"]
+    [
+      "Occupation",
+      "Marketing coordinator at a tech startup. High-stress environment, long hours."
+    ],
+    [
+      "Marital",
+      "Single, lives alone in apartment"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Social — wine 2-3 glasses on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Yoga 2x/week, occasional jogging"
+    ],
+    [
+      "Housing",
+      "One-bedroom apartment, Fort Lauderdale. Second floor."
+    ],
+    [
+      "Safety",
+      "Feels safe at home. No IPV."
+    ],
+    [
+      "Advance Directive",
+      "None on file"
+    ]
   ],
   "meta": {
     "caseId": "anxiety-panic-attack",
@@ -269,75 +368,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Sofia Delgado appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Sofia appears visibly anxious and hypervigilant, frequently touching her chest and taking deep breaths during the conversation. She is very forthcoming about her symptoms and medical history, speaking rapidly and expressing significant distress about the increasing frequency of her episodes.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did shortness of breath start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly what happens during these episodes?",
+      "How long do these episodes typically last?",
+      "What triggers these episodes, if anything?",
+      "Have you noticed any pattern to when they occur?",
+      "Are you taking your prescribed medications regularly?",
+      "Have you been under any additional stress lately?",
+      "Do you experience chest pain during these episodes?",
+      "Have you had any recent changes in your work or personal life?",
+      "Do you feel like you're going to die or lose control during episodes?",
+      "Have you tried using your Lorazepam when symptoms start?",
+      "Are you experiencing any sleep difficulties?",
+      "Have you had any recent medical appointments or changes to medications?",
+      "Do you avoid certain situations because you're afraid of having an episode?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started These panic episodes are getting worse and happening way more often now, like th.'",
-        "character": "'It's shortness of breath \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Panic Attack with Hyperventilation.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Escitalopram 10mg daily; Ferrous Sulfate 325mg daily; Lorazepam 0.5mg PRN; Norethindrone-Ethinyl Estradiol (Junel 1/20).'",
-        "allergies": "'My allergies are Amoxicillin.'",
-        "family": "Mother: Generalized anxiety disorder, panic disorder, hypothyroidism, age 56, alive  Father: Hypertension, hyperlipidemia, age 60, alive  Maternal grandmother: Depression, died age 78 (stroke)",
-        "social": "Occupation: Marketing coordinator at a tech startup. High-stress environment, long hours.  Marital: Single, lives alone in apartment  Tobacco: Never smoker  Alcohol: Social \u2014 wine 2-3 glasses on weekends  Drugs: Denies"
+      "default": "I'm sorry, could you repeat that? I'm having trouble focusing right now.",
+      "onset": "These started about three years ago after I got my current job, but they've gotten so much worse in the past two months. They come on suddenly, like out of nowhere.",
+      "character": "It feels like I can't get enough air, like I'm suffocating. My chest feels tight and heavy, and I start breathing really fast but it doesn't help.",
+      "location": "The tightness is right here in my chest, and the tingling starts in my hands and then spreads to around my mouth and lips.",
+      "severity": "During an episode, it's easily a 9 out of 10. I feel like I'm going to die. It's affecting my work because I'm constantly worried about when the next one will happen.",
+      "aggravating": "Stress at work definitely makes them worse, especially big presentations or tight deadlines. Crowded places seem to trigger them too, and lack of sleep.",
+      "relieving": "The Lorazepam helps if I take it early enough, and sometimes deep breathing exercises work, but usually I just have to wait for it to pass.",
+      "associated": "During episodes I get dizzy, nauseous, sweaty, and my heart pounds so hard I can feel it in my throat. I also get this overwhelming sense of dread.",
+      "denies": "No fever, no cough, no recent illness, no leg swelling, no fainting, and no chest pain that feels like pressure or squeezing.",
+      "history": "Yes, I was diagnosed with panic disorder three years ago. These episodes are exactly like my previous ones, just happening much more frequently now.",
+      "medications": "Escitalopram 10mg daily; Ferrous Sulfate 325mg daily; Lorazepam 0.5mg PRN; Norethindrone-Ethinyl Estradiol (Junel 1/20)",
+      "allergies": "Amoxicillin",
+      "family": "My mom has the same issues - panic disorder and generalized anxiety. She's been dealing with it for years and also takes medication for it.",
+      "social": "I work as a marketing coordinator at a tech startup, and it's been incredibly stressful lately with a major product launch. I'm single, live alone, don't smoke, and only drink wine socially on weekends."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Cardiovascular examination",
+      "Pulmonary examination",
+      "Mental status examination",
+      "Thyroid palpation",
+      "Neurological examination focusing on cranial nerves",
+      "Assessment for signs of hyperventilation",
+      "Extremity examination for cyanosis or edema",
+      "Vital signs assessment",
+      "Cardiac auscultation in multiple positions"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with Panic Attack with Hyperventilation. Document specifically what you observe."
+      "Cardiovascular examination": "Regular rate and rhythm, no murmurs appreciated, normal S1 and S2, no gallops or rubs",
+      "Pulmonary examination": "Clear to auscultation bilaterally, no wheezes, rales, or rhonchi, normal respiratory effort at rest",
+      "Mental status examination": "Alert and oriented, anxious affect, speech is rapid and pressured, no suicidal ideation",
+      "Thyroid palpation": "Thyroid normal in size and consistency, no nodules or tenderness",
+      "Neurological examination focusing on cranial nerves": "Cranial nerves II-XII grossly intact, no focal neurological deficits",
+      "Assessment for signs of hyperventilation": "Patient demonstrates rapid, shallow breathing pattern when describing episodes, no current carpopedal spasm",
+      "Extremity examination for cyanosis or edema": "No cyanosis, clubbing, or edema noted, capillary refill less than 2 seconds",
+      "Vital signs assessment": "BP 112/70, HR 78 and regular, RR 16, SpO2 99% on room air, temperature 98.4°F",
+      "Cardiac auscultation in multiple positions": "Soft mid-systolic click heard best at apex, consistent with known mitral valve prolapse, no murmur"
     },
     "ddxTargets": [
-        "Panic Attack with Hyperventilation (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Panic Attack with Hyperventilation",
+      "Generalized Anxiety Disorder exacerbation",
+      "Hyperthyroidism",
+      "Myocardial Infarction",
+      "Pulmonary Embolism",
+      "Asthma exacerbation",
+      "Mitral valve prolapse with arrhythmia"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Panic Attack with Hyperventilation, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Panic Attack with Hyperventilation, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Panic Attack with Hyperventilation based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on psychiatric history and missing organic causes like hyperthyroidism, cardiac arrhythmias, or medication-induced symptoms",
+      "prematureClosure": "May quickly assume recurrent panic attacks without considering why frequency has increased - could miss thyroid dysfunction or medication non-adherence",
+      "availabilityBias": "Young female with anxiety history may bias toward psychiatric diagnosis, potentially overlooking cardiac causes or substance use"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Sofia Delgado's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Panic Attack with Hyperventilation. How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several possibilities for her shortness of breath. Given her psychiatric history, what additional questions would help you determine if this represents a worsening of her known condition versus a new organic process? Consider what might cause her symptoms to worsen recently.",
+      "phase5": "Your history and physical exam findings are consistent with your leading diagnosis. How do the normal vital signs and physical exam help differentiate between your psychiatric and organic differentials? What aspects of the history are most supportive of panic disorder exacerbation?",
+      "finalDebrief": "This case highlights the importance of not dismissing symptoms in patients with known psychiatric conditions, while also recognizing when clinical presentation fits established patterns. How did the patient's description of symptom onset, triggers, and previous similar episodes support the diagnosis of panic attack with hyperventilation?"
     }
-}
+  }
 };

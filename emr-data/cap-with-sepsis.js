@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Walter Higgins",
-  "patientHPI": "I've been managing my breathing problems and other health issues pretty well lately. I can still get short of breath when I climb stairs, but that's been normal for me. My blood sugar seems stable, and I haven't had any chest pain or heart racing.",
+    "patientHPI": "I've been managing my breathing problems and other health issues pretty well lately. I can still get short of breath when I climb stairs, but that's been normal for me. My blood sugar seems stable, and I haven't had any chest pain or heart racing.",
     "dob": "11/03/1950",
     "age": 74,
     "sex": "Male",
@@ -198,25 +198,79 @@ window.EMR_DATA = {
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "7.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "13.5-17.5", "flag": "L" },
-            { "test": "Hematocrit", "value": "39.4", "unit": "%", "range": "38.3-48.6", "flag": "" },
-            { "test": "Platelet Count", "value": "210", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "7.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "13.5-17.5",
+              "flag": "L"
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.4",
+              "unit": "%",
+              "range": "38.3-48.6",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "210",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "BASIC METABOLIC PANEL (BMP)",
           "results": [
-            { "test": "Glucose", "value": "118", "unit": "mg/dL", "range": "70-100", "flag": "H" },
-            { "test": "BUN", "value": "24", "unit": "mg/dL", "range": "7-20", "flag": "H" },
-            { "test": "Creatinine", "value": "1.4", "unit": "mg/dL", "range": "0.7-1.3", "flag": "H" },
-            { "test": "eGFR", "value": "52", "unit": "mL/min/1.73m²", "range": ">60", "flag": "L" }
+            {
+              "test": "Glucose",
+              "value": "118",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": "H"
+            },
+            {
+              "test": "BUN",
+              "value": "24",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": "H"
+            },
+            {
+              "test": "Creatinine",
+              "value": "1.4",
+              "unit": "mg/dL",
+              "range": "0.7-1.3",
+              "flag": "H"
+            },
+            {
+              "test": "eGFR",
+              "value": "52",
+              "unit": "mL/min/1.73m²",
+              "range": ">60",
+              "flag": "L"
+            }
           ]
         },
         {
           "name": "HEMOGLOBIN A1c",
           "results": [
-            { "test": "HbA1c", "value": "7.2", "unit": "%", "range": "<5.7 normal", "flag": "H" }
+            {
+              "test": "HbA1c",
+              "value": "7.2",
+              "unit": "%",
+              "range": "<5.7 normal",
+              "flag": "H"
+            }
           ]
         }
       ]
@@ -284,15 +338,42 @@ window.EMR_DATA = {
     "Sister: T2DM, alive at 68"
   ],
   "socialHistory": [
-    ["Occupation", "Retired electrician (IBEW)"],
-    ["Marital", "Married, 3 adult children"],
-    ["Tobacco", "Former smoker — 40 pack-years; quit 2015"],
-    ["Alcohol", "1-2 beers on weekends"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Walking 15-20 min daily; limited by dyspnea"],
-    ["Housing", "Lives with wife in single-story home"],
-    ["Safety", "No firearms; home O2 not currently needed"],
-    ["Advance Directive", "Living will on file; HCP: wife Diane Higgins; DNR/DNI discussed but NOT elected — Full code"]
+    [
+      "Occupation",
+      "Retired electrician (IBEW)"
+    ],
+    [
+      "Marital",
+      "Married, 3 adult children"
+    ],
+    [
+      "Tobacco",
+      "Former smoker — 40 pack-years; quit 2015"
+    ],
+    [
+      "Alcohol",
+      "1-2 beers on weekends"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Walking 15-20 min daily; limited by dyspnea"
+    ],
+    [
+      "Housing",
+      "Lives with wife in single-story home"
+    ],
+    [
+      "Safety",
+      "No firearms; home O2 not currently needed"
+    ],
+    [
+      "Advance Directive",
+      "Living will on file; HCP: wife Diane Higgins; DNR/DNI discussed but NOT elected — Full code"
+    ]
   ],
   "meta": {
     "caseId": "cap-with-sepsis",
@@ -303,75 +384,78 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Walter Higgins is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Walter appears fatigued and mildly anxious but cooperative. He's breathing somewhat laboriously and seems genuinely concerned about feeling worse than usual. He's forthcoming with information but occasionally needs prompting for details.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did fever/sepsis start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did you first start feeling unwell, and how have your symptoms progressed?",
+      "Can you describe your breathing difficulties - how are they different from your usual COPD symptoms?",
+      "Have you had any fever, chills, or night sweats recently?",
+      "Are you producing any sputum or phlegm? If so, what color and consistency?",
+      "Have you experienced any chest pain or discomfort?",
+      "How has your energy level been lately? Any unusual fatigue or weakness?",
+      "Have you had any nausea, vomiting, or changes in appetite?",
+      "Any confusion or changes in your mental clarity?",
+      "Have you been taking all your regular medications as prescribed?",
+      "Any recent travel, sick contacts, or hospitalizations?",
+      "How well have you been able to perform your usual daily activities?",
+      "Any changes in urination or other symptoms?",
+      "Have you used your rescue inhaler more than usual lately?"
     ],
     "patientResponses": {
-        "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started I've been managing my breathing problems and other health issues pretty well lat.'",
-        "character": "'It's fever/sepsis \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Community-Acquired Pneumonia with Sepsis.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Fluticasone-Salmeterol (Advair Diskus) 250/50 BID; Tiotropium (Spiriva HandiHaler) 18mcg daily; Albuterol HFA 90mcg PRN; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Aspirin 81mg daily; Atorvastatin 40mg QHS; Metformin 1000mg BID.'",
-        "allergies": "'My allergies are Sulfa drugs (Trimethoprim-Sulfamethoxazole).'",
-        "family": "Mother: CHF, COPD, deceased at 78  Father: MI at 62, T2DM, deceased at 70  Brother: COPD, CAD, alive at 71",
-        "social": "Occupation: Retired electrician (IBEW)  Marital: Married, 3 adult children  Tobacco: Former smoker \u2014 40 pack-years; quit 2015  Alcohol: 1-2 beers on weekends  Drugs: Denies"
+      "default": "I'm not sure what you mean by that. Could you ask it a different way?",
+      "onset": "I started feeling run down about 4 days ago. At first I thought it was just my usual breathing acting up, but yesterday I started feeling feverish and really weak. This morning I could barely get out of bed.",
+      "character": "My breathing feels different than usual - it's harder work and I feel like I can't get enough air even when I'm just sitting. I've also been having some aching in my chest when I cough.",
+      "location": "The chest discomfort is mostly on my right side, kind of deep inside. It's not like the heart pain I had before my surgery.",
+      "severity": "The breathing trouble is probably a 7 out of 10 - much worse than my usual 3 or 4. The fatigue is really bad, maybe an 8. I can barely make it to the bathroom without getting winded.",
+      "aggravating": "Any movement makes the breathing worse. Lying flat makes it harder to breathe. Coughing really brings on the chest pain.",
+      "relieving": "My rescue inhaler helps a little bit but not like it usually does. Sitting up helps some with the breathing.",
+      "associated": "I've had chills and felt feverish, been coughing up thick yellowish-green mucus, and I'm so tired I can barely function. My appetite is gone and I've been a bit confused about what day it is.",
+      "denies": "No chest pain like my heart problems, no leg swelling, no blood in the sputum, and no severe headache.",
+      "history": "I've had COPD flares before, but this feels different. I've never felt this sick and weak with my breathing problems. Had pneumonia once about 10 years ago but it wasn't this bad.",
+      "medications": "Fluticasone-Salmeterol (Advair Diskus) 250/50 BID; Tiotropium (Spiriva HandiHaler) 18mcg daily; Albuterol HFA 90mcg PRN; Metoprolol Succinate 50mg daily; Lisinopril 20mg daily; Aspirin 81mg daily; Atorvastatin 40mg QHS; Metformin 1000mg BID",
+      "allergies": "Sulfa drugs (Trimethoprim-Sulfamethoxazole)",
+      "family": "My mother had COPD and lung problems, and my father and brother both had heart disease. My mother died of breathing and heart problems.",
+      "social": "I'm a retired electrician, been married 45 years with three kids. I smoked for 40 years but quit about 8 years ago. I have a couple beers on weekends but nothing heavy. No illegal drugs."
     },
     "examManeuvers": [
-        "General appearance and toxicity",
-        "Vital signs with temperature",
-        "Skin for rash, lesions, or signs of infection",
-        "Lymph node palpation",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Source-specific examination"
+      "General appearance and mental status",
+      "Vital signs including orthostatics",
+      "Pulmonary examination including percussion",
+      "Cardiac examination",
+      "Lymph node examination",
+      "Abdominal examination",
+      "Extremity examination for edema and perfusion",
+      "Neurological assessment",
+      "Skin examination"
     ],
     "examFindings": {
-        "General appearance and toxicity": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Vital signs with temperature": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Skin for rash, lesions, or signs of infection": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Lymph node palpation": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe.",
-        "Source-specific examination": "Clinical finding consistent with Community-Acquired Pneumonia with Sepsis. Document specifically what you observe."
+      "General appearance and mental status": "Ill-appearing elderly male in mild respiratory distress, alert but appears fatigued and mildly confused about date",
+      "Vital signs including orthostatics": "BP 102/58 (orthostatic drop), HR 98, RR 24, Temp 101.8°F, SpO2 88% on room air",
+      "Pulmonary examination including percussion": "Dullness to percussion over right lower lobe, decreased breath sounds and bronchial breathing right base, inspiratory crackles right lower lobe",
+      "Cardiac examination": "Tachycardic regular rhythm, no murmurs, rubs, or gallops, normal S1/S2",
+      "Lymph node examination": "No palpable lymphadenopathy",
+      "Abdominal examination": "Soft, non-tender, no organomegaly, normal bowel sounds",
+      "Extremity examination for edema and perfusion": "No peripheral edema, capillary refill 3 seconds, pulses present but weak",
+      "Neurological assessment": "Alert, oriented to person and place but not time, no focal neurological deficits",
+      "Skin examination": "Warm and dry, no rashes or lesions, mild pallor"
     },
     "ddxTargets": [
-        "Community-Acquired Pneumonia with Sepsis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae, CURB-65 Score 3) (correct diagnosis)",
+      "COPD Exacerbation with bacterial superinfection",
+      "Healthcare-associated pneumonia",
+      "Pulmonary embolism with pneumonia",
+      "Acute myocardial infarction",
+      "Sepsis from urinary tract infection",
+      "Congestive heart failure exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Community-Acquired Pneumonia with Sepsis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Community-Acquired Pneumonia with Sepsis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Community-Acquired Pneumonia with Sepsis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on COPD exacerbation given patient's history, missing signs of pneumonia and sepsis",
+      "prematureClosure": "May stop at COPD flare without considering infectious etiology and systemic illness severity",
+      "availabilityBias": "Recent COPD cases may overshadow recognition of pneumonia with septic presentation"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Walter Higgins's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Community-Acquired Pneumonia with Sepsis (Streptococcus pneumoniae, CURB-65 Score 3). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. Given this patient's presentation, what specific historical elements would help you distinguish between a COPD exacerbation and pneumonia? How might his multiple comorbidities affect your assessment?",
+      "phase5": "Now that you've gathered your history and exam findings, let's think about the clinical picture. What combination of findings suggests this goes beyond a simple COPD exacerbation? Consider his vital signs, mental status, and physical findings - what scoring system might help you assess severity?",
+      "finalDebrief": "This case demonstrates how pneumonia in elderly patients with COPD can present with sepsis. The CURB-65 score of 3 indicated high risk requiring hospitalization. Notice how the initial presentation could easily be mistaken for COPD exacerbation, but the fever, purulent sputum, focal exam findings, and septic physiology pointed to bacterial pneumonia. What would have happened if we anchored on COPD alone?"
     }
-}
+  }
 };

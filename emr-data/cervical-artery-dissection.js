@@ -5,7 +5,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Danielle Pierre-Louis",
-  "patientHPI": "About a week ago I went to my chiropractor for my usual neck adjustment, and a few days later I started getting this dull ache on the right side of my neck that goes up behind my ear. It's not terrible pain, just this constant nagging feeling that wasn't there before.",
+    "patientHPI": "About a week ago I went to my chiropractor for my usual neck adjustment, and a few days later I started getting this dull ache on the right side of my neck that goes up behind my ear. It's not terrible pain, just this constant nagging feeling that wasn't there before.",
     "dob": "06/18/1986",
     "age": 38,
     "sex": "Female",
@@ -181,34 +181,142 @@ window.EMR_DATA = {
         {
           "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
           "results": [
-            { "test": "Glucose", "value": "82", "unit": "mg/dL", "range": "70-100", "flag": "" },
-            { "test": "BUN", "value": "14", "unit": "mg/dL", "range": "7-20", "flag": "" },
-            { "test": "Creatinine", "value": "0.8", "unit": "mg/dL", "range": "0.6-1.1", "flag": "" },
-            { "test": "Sodium", "value": "141", "unit": "mEq/L", "range": "136-145", "flag": "" },
-            { "test": "Potassium", "value": "4.0", "unit": "mEq/L", "range": "3.5-5.0", "flag": "" },
-            { "test": "Chloride", "value": "103", "unit": "mEq/L", "range": "98-106", "flag": "" },
-            { "test": "CO2 (Bicarbonate)", "value": "26", "unit": "mEq/L", "range": "23-29", "flag": "" },
-            { "test": "Calcium", "value": "9.6", "unit": "mg/dL", "range": "8.5-10.5", "flag": "" },
-            { "test": "ALT (SGPT)", "value": "18", "unit": "U/L", "range": "7-56", "flag": "" },
-            { "test": "AST (SGOT)", "value": "20", "unit": "U/L", "range": "10-40", "flag": "" }
+            {
+              "test": "Glucose",
+              "value": "82",
+              "unit": "mg/dL",
+              "range": "70-100",
+              "flag": ""
+            },
+            {
+              "test": "BUN",
+              "value": "14",
+              "unit": "mg/dL",
+              "range": "7-20",
+              "flag": ""
+            },
+            {
+              "test": "Creatinine",
+              "value": "0.8",
+              "unit": "mg/dL",
+              "range": "0.6-1.1",
+              "flag": ""
+            },
+            {
+              "test": "Sodium",
+              "value": "141",
+              "unit": "mEq/L",
+              "range": "136-145",
+              "flag": ""
+            },
+            {
+              "test": "Potassium",
+              "value": "4.0",
+              "unit": "mEq/L",
+              "range": "3.5-5.0",
+              "flag": ""
+            },
+            {
+              "test": "Chloride",
+              "value": "103",
+              "unit": "mEq/L",
+              "range": "98-106",
+              "flag": ""
+            },
+            {
+              "test": "CO2 (Bicarbonate)",
+              "value": "26",
+              "unit": "mEq/L",
+              "range": "23-29",
+              "flag": ""
+            },
+            {
+              "test": "Calcium",
+              "value": "9.6",
+              "unit": "mg/dL",
+              "range": "8.5-10.5",
+              "flag": ""
+            },
+            {
+              "test": "ALT (SGPT)",
+              "value": "18",
+              "unit": "U/L",
+              "range": "7-56",
+              "flag": ""
+            },
+            {
+              "test": "AST (SGOT)",
+              "value": "20",
+              "unit": "U/L",
+              "range": "10-40",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "CBC WITH DIFFERENTIAL",
           "results": [
-            { "test": "WBC", "value": "6.8", "unit": "x10³/µL", "range": "4.5-11.0", "flag": "" },
-            { "test": "Hemoglobin", "value": "13.2", "unit": "g/dL", "range": "12.0-16.0", "flag": "" },
-            { "test": "Hematocrit", "value": "39.4", "unit": "%", "range": "36.0-46.0", "flag": "" },
-            { "test": "Platelet Count", "value": "238", "unit": "x10³/µL", "range": "150-400", "flag": "" }
+            {
+              "test": "WBC",
+              "value": "6.8",
+              "unit": "x10³/µL",
+              "range": "4.5-11.0",
+              "flag": ""
+            },
+            {
+              "test": "Hemoglobin",
+              "value": "13.2",
+              "unit": "g/dL",
+              "range": "12.0-16.0",
+              "flag": ""
+            },
+            {
+              "test": "Hematocrit",
+              "value": "39.4",
+              "unit": "%",
+              "range": "36.0-46.0",
+              "flag": ""
+            },
+            {
+              "test": "Platelet Count",
+              "value": "238",
+              "unit": "x10³/µL",
+              "range": "150-400",
+              "flag": ""
+            }
           ]
         },
         {
           "name": "LIPID PANEL",
           "results": [
-            { "test": "Total Cholesterol", "value": "188", "unit": "mg/dL", "range": "<200", "flag": "" },
-            { "test": "LDL Cholesterol", "value": "112", "unit": "mg/dL", "range": "<100 optimal", "flag": "H" },
-            { "test": "HDL Cholesterol", "value": "62", "unit": "mg/dL", "range": ">40", "flag": "" },
-            { "test": "Triglycerides", "value": "70", "unit": "mg/dL", "range": "<150", "flag": "" }
+            {
+              "test": "Total Cholesterol",
+              "value": "188",
+              "unit": "mg/dL",
+              "range": "<200",
+              "flag": ""
+            },
+            {
+              "test": "LDL Cholesterol",
+              "value": "112",
+              "unit": "mg/dL",
+              "range": "<100 optimal",
+              "flag": "H"
+            },
+            {
+              "test": "HDL Cholesterol",
+              "value": "62",
+              "unit": "mg/dL",
+              "range": ">40",
+              "flag": ""
+            },
+            {
+              "test": "Triglycerides",
+              "value": "70",
+              "unit": "mg/dL",
+              "range": "<150",
+              "flag": ""
+            }
           ]
         }
       ]
@@ -269,15 +377,42 @@ window.EMR_DATA = {
     "Maternal aunt: Ruptured cerebral aneurysm at age 52 (deceased)"
   ],
   "socialHistory": [
-    ["Occupation", "Physical therapist"],
-    ["Marital", "Married, 1 child (age 4)"],
-    ["Tobacco", "Never smoker"],
-    ["Alcohol", "Occasional, 1-2 glasses of wine per week"],
-    ["Drugs", "Denies"],
-    ["Exercise", "Pilates 3x/week; avoids high-impact activities per EDS precautions"],
-    ["Housing", "Lives with husband and daughter in townhouse"],
-    ["Safety", "Denies IPV; seatbelt; car seat for child"],
-    ["Advance Directive", "None — discussed"]
+    [
+      "Occupation",
+      "Physical therapist"
+    ],
+    [
+      "Marital",
+      "Married, 1 child (age 4)"
+    ],
+    [
+      "Tobacco",
+      "Never smoker"
+    ],
+    [
+      "Alcohol",
+      "Occasional, 1-2 glasses of wine per week"
+    ],
+    [
+      "Drugs",
+      "Denies"
+    ],
+    [
+      "Exercise",
+      "Pilates 3x/week; avoids high-impact activities per EDS precautions"
+    ],
+    [
+      "Housing",
+      "Lives with husband and daughter in townhouse"
+    ],
+    [
+      "Safety",
+      "Denies IPV; seatbelt; car seat for child"
+    ],
+    [
+      "Advance Directive",
+      "None — discussed"
+    ]
   ],
   "meta": {
     "caseId": "cervical-artery-dissection",
@@ -288,75 +423,80 @@ window.EMR_DATA = {
   },
   "guided": {
     "supported": true,
-    "patientPersona": "Danielle Pierre-Louis is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
+    "patientPersona": "Danielle appears mildly anxious and concerned about her persistent neck discomfort, speaking clearly but with obvious worry about whether this is related to her recent chiropractic visit. She's cooperative and detailed in her responses, though hesitant to seem like she's blaming her chiropractor, and shows subtle signs of distress when describing how the pain differs from her usual migraines.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did headache start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "Can you describe exactly when this neck pain started in relation to your chiropractic visit?",
+      "How does this pain differ from your usual migraine headaches?",
+      "Have you noticed any changes in your vision or hearing?",
+      "Are you experiencing any weakness or numbness in your face, arms, or legs?",
+      "Have you had any dizziness, balance problems, or coordination issues?",
+      "What type of neck manipulation did your chiropractor perform?",
+      "Have you had any difficulty swallowing or changes in your voice?",
+      "Are you having any nausea or vomiting with this pain?",
+      "Have you noticed the pain getting worse or changing over the past few days?",
+      "With your Ehlers-Danlos syndrome, have you had problems with neck adjustments before?",
+      "Are you having any unusual fatigue or confusion?",
+      "Have you taken anything for this pain, and did it help?",
+      "Any family history of stroke or blood vessel problems?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started About a week ago I went to my chiropractor for my usual neck adjustment, and a f.'",
-        "character": "'It's headache \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with Internal Carotid Artery Dissection.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Sumatriptan 50mg PRN; Escitalopram 10mg daily; Ibuprofen 400mg PRN; Oral Contraceptive (Norethindrone 0.35mg daily).'",
-        "allergies": "'My allergies are Codeine, Latex.'",
-        "family": "Mother: Ehlers-Danlos Syndrome (hypermobility type), migraines, alive at 64  Father: HTN, T2DM, alive at 66  Sister: Migraines, age 35",
-        "social": "Occupation: Physical therapist  Marital: Married, 1 child (age 4)  Tobacco: Never smoker  Alcohol: Occasional, 1-2 glasses of wine per week  Drugs: Denies"
+      "default": "I'm not sure I understand what you're asking. Could you rephrase that?",
+      "onset": "It started about 3-4 days after my chiropractic appointment last week. I went in on Tuesday for my usual monthly adjustment, and by Friday I noticed this dull ache starting in my neck.",
+      "character": "It's this constant, dull, aching pain that's different from my migraines. It feels like a deep ache that pulses sometimes, not the sharp throbbing I get with migraines.",
+      "location": "It starts in the right side of my neck and goes up behind my right ear, sometimes extending toward the back of my head. It's very localized to that right side.",
+      "severity": "I'd say it's about a 4 or 5 out of 10 for pain, but it's the constant nature that's really bothering me. It's not debilitating like my migraines can be, but it's always there.",
+      "aggravating": "Turning my head to the right seems to make it worse, and I've noticed it's more prominent when I'm working at my computer or looking down at patients.",
+      "relieving": "The ibuprofen helps a little bit, but not nearly as much as it usually does for my other aches and pains. Rest doesn't seem to make much difference either.",
+      "associated": "I've been feeling a bit more tired than usual, and yesterday I had a brief moment where I felt slightly dizzy when I stood up quickly. No nausea or vomiting though.",
+      "denies": "No vision changes, no weakness in my arms or legs, no difficulty speaking or swallowing. No numbness or tingling anywhere.",
+      "history": "I've never had neck pain like this before. My migraines are completely different - they're usually on the left side and come with nausea and light sensitivity.",
+      "medications": "Sumatriptan 50mg PRN; Escitalopram 10mg daily; Ibuprofen 400mg PRN; Oral Contraceptive (Norethindrone 0.35mg daily)",
+      "allergies": "Codeine, Latex",
+      "family": "My mom has the same type of Ehlers-Danlos that I do, and she gets migraines too. My dad has high blood pressure and diabetes. No family history of strokes that I know of.",
+      "social": "I'm a physical therapist, so I'm on my feet a lot and work with patients doing manual therapy. I'm married with a 4-year-old. I don't smoke, maybe have a glass of wine once or twice a week, no drugs."
     },
     "examManeuvers": [
-        "Level of consciousness and GCS",
-        "Cranial nerve examination",
-        "Motor strength testing",
-        "Sensory testing",
-        "Coordination and cerebellar testing",
-        "Gait assessment if applicable",
-        "Meningeal signs",
-        "Vital signs"
+      "Neurological screening exam (cranial nerves II-XII)",
+      "Neck inspection and palpation",
+      "Cervical range of motion testing",
+      "Carotid artery auscultation",
+      "Fundoscopic examination",
+      "Motor strength testing (upper and lower extremities)",
+      "Deep tendon reflexes",
+      "Coordination testing (finger-to-nose, heel-to-shin)",
+      "Gait assessment",
+      "Assessment of joint hypermobility (Beighton score)"
     ],
     "examFindings": {
-        "Level of consciousness and GCS": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Cranial nerve examination": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Motor strength testing": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Sensory testing": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Coordination and cerebellar testing": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Gait assessment if applicable": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Meningeal signs": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe.",
-        "Vital signs": "Clinical finding consistent with Internal Carotid Artery Dissection. Document specifically what you observe."
+      "Neurological screening exam (cranial nerves II-XII)": "Cranial nerves II-XII grossly intact, no focal deficits noted, pupils equal and reactive to light",
+      "Neck inspection and palpation": "Mild tenderness along right sternocleidomastoid muscle, no visible swelling or deformity, no lymphadenopathy",
+      "Cervical range of motion testing": "Slightly limited right rotation due to discomfort, otherwise full range of motion",
+      "Carotid artery auscultation": "Possible subtle right carotid bruit, left carotid clear, no obvious murmurs",
+      "Fundoscopic examination": "Optic discs appear normal, no papilledema, no retinal hemorrhages",
+      "Motor strength testing (upper and lower extremities)": "5/5 strength throughout all major muscle groups bilaterally",
+      "Deep tendon reflexes": "2+ and symmetric throughout, no pathologic reflexes",
+      "Coordination testing (finger-to-nose, heel-to-shin)": "Intact coordination bilaterally, no dysmetria or ataxia",
+      "Gait assessment": "Normal gait, no ataxia or instability",
+      "Assessment of joint hypermobility (Beighton score)": "Beighton score 7/9, consistent with known Ehlers-Danlos syndrome hypermobility type"
     },
     "ddxTargets": [
-        "Internal Carotid Artery Dissection (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome) (correct diagnosis)",
+      "Cervical strain/sprain from chiropractic manipulation",
+      "Migraine variant or atypical migraine",
+      "Vertebral artery dissection",
+      "Acute stroke or TIA",
+      "Tension-type headache",
+      "Temporomandibular joint dysfunction exacerbation"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Internal Carotid Artery Dissection, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Internal Carotid Artery Dissection, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Internal Carotid Artery Dissection based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on migraine history and dismissing this as another headache variant, missing the critical timing relationship to chiropractic manipulation in a patient with connective tissue disorder",
+      "prematureClosure": "Risk of stopping at cervical strain diagnosis without considering vascular causes, especially given the subtle presentation and absence of dramatic neurological deficits",
+      "availabilityBias": "Common presentations like tension headaches or migraine variants may overshadow the less common but serious diagnosis of arterial dissection"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Danielle Pierre-Louis's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is Internal Carotid Artery Dissection (Post-Chiropractic Manipulation in Ehlers-Danlos Syndrome). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "You've identified several reasonable possibilities for headache and neck pain. Given this patient's presentation, what specific risk factors might make certain diagnoses more or less likely? Think about the timing of symptom onset and any predisposing conditions this patient might have.",
+      "phase5": "You've gathered good history and physical exam data. The subtle carotid bruit is an important finding. In a patient with Ehlers-Danlos syndrome who recently had cervical manipulation, what vascular complications should you be most concerned about? How might the connective tissue disorder affect your differential diagnosis?",
+      "finalDebrief": "This case highlights the importance of recognizing high-risk patients for arterial dissection. The combination of Ehlers-Danlos syndrome (connective tissue fragility) and recent neck manipulation created the perfect storm for carotid dissection. The subtle presentation without obvious stroke symptoms can make this diagnosis challenging, but the timing, character of pain, and subtle carotid bruit were key clues. How has your approach to post-manipulation complaints evolved after seeing this case?"
     }
-}
+  }
 };

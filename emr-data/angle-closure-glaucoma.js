@@ -2,7 +2,7 @@
 window.EMR_DATA = {
   "patient": {
     "name": "Dolores Eriksen",
-  "patientHPI": "My right eye is killing me with this deep, terrible pain that just came on suddenly, and I feel sick to my stomach and everything looks blurry.",
+    "patientHPI": "My right eye is killing me with this deep, terrible pain that just came on suddenly, and I feel sick to my stomach and everything looks blurry.",
     "dob": "09/22/1974",
     "age": "52",
     "sex": "Female",
@@ -321,75 +321,80 @@ window.EMR_DATA = {
   ],
   "guided": {
     "supported": true,
-    "patientPersona": "Dolores Eriksen appears uncomfortable but is alert and cooperative. They provide a clear history and seem appropriately concerned about their symptoms without being panicked.",
+    "patientPersona": "Dolores appears distressed and anxious, holding her right eye and speaking in a pained voice. She is cooperative but clearly suffering, frequently mentioning the severity of her pain and nausea. She seems eager for relief and is forthcoming about her symptoms.",
     "interviewQuestions": [
-        "Tell me what brought you in today. When did my right eye is killing me right eye \u2014 deep, severe pain start?",
-        "Can you describe exactly how it started \u2014 sudden or gradual?",
-        "Where is the problem located? Does it spread anywhere?",
-        "How would you rate the severity on a scale of 1 to 10?",
-        "What makes it worse? What makes it better?",
-        "Do you have any other symptoms along with this?",
-        "Have you had anything like this before?",
-        "Tell me about your medical history \u2014 any chronic conditions?",
-        "What medications are you currently taking?",
-        "Do you have any allergies to medications?",
-        "Tell me about your family medical history.",
-        "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
+      "When did this eye pain start?",
+      "Can you describe the quality of the pain?",
+      "Is the pain constant or does it come and go?",
+      "On a scale of 1-10, how severe is your pain?",
+      "Are you experiencing any nausea or vomiting?",
+      "How is your vision in the affected eye?",
+      "Do you see halos around lights?",
+      "Have you had any recent eye trauma or procedures?",
+      "Have you ever had episodes like this before?",
+      "What medications are you currently taking?",
+      "Do you have any known allergies?",
+      "Does anyone in your family have eye problems?",
+      "Have you been using any eye drops or medications?"
     ],
     "patientResponses": {
-        "default": "She pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
-        "onset": "'The symptoms started My right eye is killing me with this deep, terrible pain that just came on sudde.'",
-        "character": "'It's my right eye is killing me right eye \u2014 deep, severe pain \u2014 it's been bothering me quite a bit.'",
-        "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
-        "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
-        "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
-        "relieving": "'Rest helps somewhat, but nothing has fully relieved it. I've tried some home remedies without success.'",
-        "associated": "'Yes, I've had some associated symptoms consistent with my condition.'",
-        "denies": "'I do not have fever, chills, weight loss, or other constitutional symptoms. No rash or skin changes.'",
-        "history": "'I have not had anything exactly like this before, though I do have my usual medical conditions.'",
-        "medications": "'I take Amlodipine; Omeprazole; Diphenhydramine.'",
-        "allergies": "'My allergies are NKDA.'",
-        "family": "Sister: glaucoma (type unknown)  Mother: cataracts",
-        "social": "Tobacco: Never  Alcohol: Social  Drugs: Denies  Occupation: Retired secretary  Living: Lives with husband"
+      "default": "I'm sorry, I'm having trouble concentrating because of this terrible pain in my eye.",
+      "onset": "It started about 3 hours ago, very suddenly while I was watching TV. One minute I was fine, the next minute I had this excruciating pain.",
+      "character": "It's a deep, boring pain, like someone is pushing a hot poker into my eye. It's not on the surface, it's deep inside.",
+      "location": "It's in my right eye, deep inside, and the pain goes back into my head on that side.",
+      "severity": "This is easily a 9 out of 10. I can barely function. I've never had pain like this before.",
+      "aggravating": "Any light makes it worse, even dim light. Moving my eye or touching around it makes the pain unbearable.",
+      "relieving": "Nothing helps. I tried closing my eyes, putting a cold cloth on it, even took some Tylenol, but nothing touches this pain.",
+      "associated": "I feel very nauseous and actually vomited once on the way here. Everything looks blurry and I'm seeing rainbow halos around lights.",
+      "denies": "No discharge from my eye, no recent injury, no headache anywhere else, no fever.",
+      "history": "Never had anything like this before. I've had some minor eye irritation but nothing even close to this severe.",
+      "medications": "Amlodipine; Omeprazole; Diphenhydramine",
+      "allergies": "NKDA",
+      "family": "My sister has glaucoma, though I'm not sure what type, and my mother had cataracts.",
+      "social": "I'm a retired secretary, live with my husband. I don't smoke, drink socially, and don't use drugs."
     },
     "examManeuvers": [
-        "General appearance and level of distress",
-        "Vital signs review",
-        "Cardiovascular auscultation",
-        "Pulmonary auscultation",
-        "Abdominal examination",
-        "Extremity assessment",
-        "Skin examination",
-        "Targeted system examination"
+      "Visual acuity testing",
+      "Pupillary light reflex",
+      "Intraocular pressure measurement",
+      "Slit lamp examination",
+      "Fundoscopic examination",
+      "Corneal examination",
+      "Anterior chamber depth assessment",
+      "Conjunctival examination",
+      "Extraocular movements",
+      "Visual field assessment by confrontation"
     ],
     "examFindings": {
-        "General appearance and level of distress": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Vital signs review": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Cardiovascular auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Pulmonary auscultation": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Abdominal examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Extremity assessment": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Skin examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe.",
-        "Targeted system examination": "Clinical finding consistent with the working diagnosis. Document specifically what you observe."
+      "Visual acuity testing": "Right eye 20/80, left eye 20/30 (baseline with hyperopia)",
+      "Pupillary light reflex": "Right pupil mid-dilated (5mm), poorly reactive to light; left pupil normal and reactive",
+      "Intraocular pressure measurement": "Right eye 45 mmHg, left eye 14 mmHg",
+      "Slit lamp examination": "Right eye shows corneal edema and shallow anterior chamber; left eye normal",
+      "Fundoscopic examination": "Difficult to visualize right fundus due to corneal edema; left disc appears normal",
+      "Corneal examination": "Right cornea appears hazy and edematous; left cornea clear",
+      "Anterior chamber depth assessment": "Right anterior chamber markedly shallow; left anterior chamber normal depth",
+      "Conjunctival examination": "Right eye shows mild conjunctival injection; left eye normal",
+      "Extraocular movements": "Full but patient reports increased pain with movement of right eye",
+      "Visual field assessment by confrontation": "Difficult to assess accurately due to pain and visual disturbance"
     },
     "ddxTargets": [
-        "Working diagnosis (correct diagnosis)",
-        "Most likely alternative diagnosis",
-        "Third differential diagnosis",
-        "Must-not-miss diagnosis",
-        "Second must-not-miss",
-        "Common clinical mimic",
-        "Alternative presentation to consider"
+      "Acute angle-closure glaucoma (correct diagnosis)",
+      "Acute iritis/anterior uveitis",
+      "Corneal abrasion or ulcer",
+      "Optic neuritis",
+      "Temporal arteritis",
+      "Migraine with visual aura",
+      "Cluster headache"
     ],
     "biasFlags": {
-        "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Working diagnosis, carefully consider the full differential including must-not-miss conditions.",
-        "prematureClosure": "After identifying Working diagnosis, students may not adequately look for complications or co-existing conditions. Complete your workup even after forming a leading hypothesis.",
-        "availabilityBias": "Students may overweight or underweight Working diagnosis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
+      "anchoring": "Risk of anchoring on 'eye pain' as simple conjunctivitis or dry eyes, missing the acute nature and systemic symptoms that suggest angle-closure glaucoma",
+      "prematureClosure": "Risk of stopping evaluation after noting eye pain and redness without measuring intraocular pressure or assessing for acute angle closure",
+      "availabilityBias": "May focus on more common causes of eye pain like conjunctivitis or dry eyes rather than considering sight-threatening acute angle-closure glaucoma"
     },
     "coachPrompts": {
-        "phase2": "You've reviewed Dolores Eriksen's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
-        "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-        "finalDebrief": "The diagnosis is . How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "phase2": "Good start on your differential. You've identified several causes of acute eye pain. Given this patient's age, family history, and the sudden onset with systemic symptoms like nausea, what sight-threatening condition should you be most concerned about? How will your history questions help distinguish between these possibilities?",
+      "phase5": "Excellent work gathering the history and physical findings. You found elevated intraocular pressure, a shallow anterior chamber, and corneal edema in a patient with acute severe eye pain and nausea. How do these findings help narrow your differential? What's the most likely diagnosis and what's your next step?",
+      "finalDebrief": "This case demonstrates classic acute angle-closure glaucoma - the triad of sudden severe eye pain, nausea/vomiting, and visual disturbances in a hyperopic patient with family history of glaucoma. The key was recognizing that not all 'eye pain' is benign and that the systemic symptoms were crucial clues. The elevated IOP and shallow anterior chamber confirmed the diagnosis. This is an ophthalmologic emergency requiring immediate treatment to prevent permanent vision loss."
     }
-}
+  }
 };
