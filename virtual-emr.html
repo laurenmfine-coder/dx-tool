@@ -5119,44 +5119,49 @@ function findMissing(text, terms) {
 }
 
 // --- CASE-SPECIFIC EXPECTED CONTENT ---
+// EXPECTED content is loaded dynamically from case data in runDocAnalysis().
+// This static fallback is for the STEMI-v1 case only and reflects
+// EXACTLY what is in the chart + what the patient reveals in interview.
 const EXPECTED = {
-  cc_terms: ["follow-up","follow up","hypertension","diabetes","HTN","DM","anxiety","routine"],
-  hpi_terms: ["headache","dizziness","blood sugar","glucose","fasting","compliance","adherence","sertraline","stress","sleep","140","180","standing","orthostatic"],
-  hpi_pertinent_pos: ["headaches","dizziness when standing","fasting glucose 140-180","stress at work","worry about finances"],
-  hpi_pertinent_neg: ["denies chest pain","denies palpitations","denies SOB","denies vision changes","denies polyuria","no chest pain","no palpitations"],
-  problems_expected: ["hypertension","HTN","diabetes","DM2","type 2","hyperlipidemia","obesity","migraine","anxiety","GAD","vitamin D","allergic rhinitis"],
+  // CC: chest pain/shortness of breath — exactly what's in the chart
+  cc_terms: ["chest pain","shortness of breath","chest","pain","dyspnea","SOB"],
+  // HPI: STEMI presentation — what Jennifer says in the interview
+  hpi_terms: ["pressure","heavy","chest","left arm","jaw","diaphoresis","nausea","onset","rest","two hours","aspirin","Tums"],
+  hpi_pertinent_pos: ["pressure-like","left arm","jaw","diaphoresis","nausea","sweating","at rest","sudden onset","no prior episodes"],
+  hpi_pertinent_neg: ["denies fever","denies cough","denies pleuritic","no recent travel","no prior cardiac","no palpitations"],
+  // PMH: exactly what's in Problems list
+  problems_expected: ["type 2 diabetes","diabetes mellitus","hypertension","HTN","hyperlipidemia"],
+  // Meds: exactly what's in the chart (4 meds only — no sertraline, cetirizine etc.)
   meds_expected: [
-    {name:"lisinopril",dose:"20",freq:"daily"},
-    {name:"metformin",dose:"1000",freq:"twice daily|BID|bid"},
-    {name:"atorvastatin",dose:"40",freq:"daily|bedtime|qhs"},
-    {name:"sertraline",dose:"50",freq:"daily"},
-    {name:"cetirizine",dose:"10",freq:"daily|PRN|prn"},
-    {name:"sumatriptan",dose:"50",freq:"PRN|prn|onset"},
-    {name:"vitamin D",altNames:["cholecalciferol","D3"],dose:"2000",freq:"daily"},
-    {name:"ibuprofen",dose:"400",freq:"PRN|prn|q6h"},
+    {name:"metformin",  dose:"500",  freq:"twice daily|BID|bid"},
+    {name:"lisinopril", dose:"10",   freq:"daily"},
+    {name:"atorvastatin",dose:"40",  freq:"QHS|bedtime|daily"},
+    {name:"aspirin",    dose:"81",   freq:"daily"},
   ],
-  allergies_expected: ["penicillin","sulfa","shellfish","dust mite","latex"],
-  allergy_reactions: {penicillin:"rash|urticaria|hives",sulfa:"nausea|rash",shellfish:"swelling|throat|anaphylaxis",latex:"dermatitis|contact"},
-  fh_terms: ["mother","father","diabetes","DM","CAD","MI","heart","hypertension","HTN","CVA","stroke","hypothyroid","depression","breast cancer"],
-  sh_terms: ["married","admin","law firm","never smoked","non-smoker","no tobacco","social","wine","1-2","denies drugs","walks","sedentary","stress","work"],
-  ros_systems: ["constitutional","HEENT","head","eye","cardiovascular","cardiac","CV","respiratory","pulmonary","GI","gastrointestinal","GU","genitourinary","musculoskeletal","MSK","neurologic","neuro","psychiatric","psych","skin","dermatologic","endocrine"],
+  // Allergies: only Penicillin (rash) — not sulfa, shellfish etc.
+  allergies_expected: ["penicillin"],
+  allergy_reactions: {penicillin:"rash|urticaria|hives|reaction"},
+  // FH: mother MI at 58, father T2DM, sister HTN
+  fh_terms: ["mother","MI","myocardial infarction","heart attack","father","diabetes","DM","sister","hypertension","HTN"],
+  // SH: teacher, married, never smoker (quit 5yr ago — revealed only in interview), occasional wine
+  sh_terms: ["teacher","married","never smoked","non-smoker","no tobacco","quit smoking","wine","occasional","denies drugs","exercise"],
+  // ROS: pertinent systems for chest pain
+  ros_systems: ["constitutional","cardiovascular","cardiac","CV","respiratory","pulmonary","GI","gastrointestinal","neurological","musculoskeletal"],
   pe_systems: {
-    general: ["well-appearing","NAD","no acute distress","obese"],
-    heent: ["PERRL","EOMI","TM","oropharynx","pupil"],
-    neck: ["supple","lymphadenopathy","LAD","thyromegaly","thyroid"],
-    cv: ["RRR","regular rate","rhythm","murmur","gallop","rub"],
-    lungs: ["CTA","clear","auscultation","wheezes","crackles","rhonchi"],
-    abdomen: ["soft","tender","distend","bowel sounds","hepatosplenomegaly","hepatomegaly","splenomegaly"],
-    extremities: ["edema","pulses","cyanosis","clubbing"],
-    neuro: ["alert","oriented","cranial nerve","CN","sensation","motor","strength"],
-    skin: ["acanthosis","rash","lesion"],
-    psych: ["affect","mood","pleasant","appropriate"],
+    general:     ["diaphoretic","uncomfortable","distress","moderate distress"],
+    cv:          ["RRR","regular rate","rhythm","murmur","S1","S2","JVD","peripheral pulses"],
+    lungs:       ["CTA","clear","auscultation","wheezes","crackles","rhonchi"],
+    abdomen:     ["soft","tender","distend","bowel sounds"],
+    extremities: ["edema","pulses","cyanosis"],
+    neuro:       ["alert","oriented"],
   },
-  pe_bad_terms: ["WNL","wnl","within normal limits","normal","unremarkable","benign","nonfocal","non-focal","grossly normal"],
-  assessment_problems: ["hypertension","HTN","blood pressure","diabetes","DM2","A1c","hyperlipidemia","cholesterol","LDL","obesity","BMI","anxiety","GAD","orthostatic","dizziness"],
-  ddx_terms: ["differential","ddx","DD","consider","rule out","versus","vs"],
-  plan_appropriate: ["lisinopril","increase","BP","blood pressure","recheck","metformin","A1c","GLP-1","semaglutide","statin","atorvastatin","diet","exercise","weight","sertraline","PHQ","counseling","follow up","follow-up","return","colonoscopy","referral","nutrition"],
-  plan_overtesting: ["MRI brain","CT chest","echocardiogram","cardiac catheterization","stress test"],
+  pe_bad_terms: ["WNL","wnl","within normal limits","unremarkable","benign","nonfocal"],
+  // Assessment: STEMI DDx
+  assessment_problems: ["STEMI","ST-elevation","myocardial infarction","ACS","acute coronary","NSTEMI","unstable angina","aortic dissection","pulmonary embolism","PE"],
+  ddx_terms: ["differential","DDx","most likely","consider","rule out","versus","vs","less likely"],
+  // Plan: appropriate STEMI workup and treatment
+  plan_appropriate: ["EKG","electrocardiogram","troponin","aspirin","cardiology","heparin","anticoagul","cath","PCI","NPO","IV access","monitoring","telemetry","oxygen"],
+  plan_overtesting: ["MRI brain","colonoscopy","thyroid","pap smear"],
 };
 
 // ===============================================================
@@ -5758,26 +5763,80 @@ function runDocAnalysis() {
   var diagnosis = (window.CRT_DATA && CASE_ID && CRT_DATA[CASE_ID]) ? (CRT_DATA[CASE_ID].diagnosis || '') : '';
   var setting   = (window.S && S.clinicalSetting) ? S.clinicalSetting.toUpperCase() : 'ED';
 
-  var systemPrompt = 'You are a clinical faculty member giving feedback on a medical student\'s H&P note. ' +
-    'Be specific, constructive, and educational. Focus on clinical reasoning quality, not just documentation style. ' +
-    'The patient is ' + ptName + ' presenting with: ' + ptCC + '. ' +
-    (diagnosis ? 'The correct diagnosis is: ' + diagnosis + '. ' : '') +
-    'Setting: ' + setting + '. ' +
-    'Specifically evaluate whether orders placed match what is documented in the Plan section — flag inconsistencies. ' + 'Give feedback in JSON with this exact structure: ' +
-    '{"overallScore":0-100,"grade":"A/B/C/D/F","summary":"2-3 sentence overall assessment",' +
-    '"strengths":["specific strength 1","specific strength 2"],' +
-    '"improvements":["specific improvement 1","specific improvement 2"],' +
-    '"sections":{"cc":{"score":0-5,"feedback":"specific feedback"},' +
-    '"hpi":{"score":0-15,"feedback":"specific feedback"},' +
-    '"pmh":{"score":0-5,"feedback":""},' +
-    '"meds":{"score":0-5,"feedback":""},' +
-    '"fhsh":{"score":0-5,"feedback":""},' +
-    '"ros":{"score":0-10,"feedback":""},' +
-    '"pe":{"score":0-15,"feedback":""},' +
-    '"assess":{"score":0-15,"feedback":""},' +
-    '"plan":{"score":0-15,"feedback":""},' +
-    '"prof":{"score":0-10,"feedback":""}' +
-    '}}. Return ONLY valid JSON, no other text.';
+  // Build comprehensive case context from loaded EMR data
+  // so the AI only grades on what was actually available to the student
+  var _caseCtx = (function() {
+    var ctx = {};
+    // Patient demographics
+    if (window.PATIENT) {
+      ctx.name = PATIENT.name; ctx.age = PATIENT.age; ctx.sex = PATIENT.sex;
+      ctx.cc   = PATIENT.chiefComplaint || '';
+    }
+    // Problems list
+    if (window.PROBLEMS && PROBLEMS.length) {
+      ctx.problems = PROBLEMS.map(function(p){ return (p.problem||p.description||'') + (p.onset?' ('+p.onset+')':''); });
+    }
+    // Medications — exact names/doses from chart
+    if (window.MEDICATIONS && MEDICATIONS.length) {
+      ctx.medications = MEDICATIONS.map(function(m){ return m.name || m.medication || ''; });
+    }
+    // Allergies
+    if (window.ALLERGIES && ALLERGIES.length) {
+      ctx.allergies = ALLERGIES.filter(function(a){ return a.allergen && a.allergen !== 'NKDA'; })
+        .map(function(a){ return a.allergen + (a.reaction ? ' — ' + a.reaction : ''); });
+    }
+    // Family and social history
+    if (window.FAMILY_HISTORY) ctx.familyHistory = FAMILY_HISTORY;
+    if (window.SOCIAL_HISTORY) ctx.socialHistory = SOCIAL_HISTORY.map ? SOCIAL_HISTORY.map(function(s){ return Array.isArray(s) ? s.join(': ') : s; }) : [];
+    // Vitals — most recent
+    if (window.VITALS && VITALS.length) {
+      var v = VITALS[0];
+      ctx.vitals = 'BP ' + v.bp + ', HR ' + v.hr + ', RR ' + v.rr + ', Temp ' + v.temp + ', SpO2 ' + (v.spo2||'');
+    }
+    // Interview responses (what the patient actually said — grade based on this)
+    if (window.EMR_DATA && EMR_DATA.guided && EMR_DATA.guided.patientResponses) {
+      ctx.interviewResponses = EMR_DATA.guided.patientResponses;
+    }
+    // Exam findings (what was available in guided mode)
+    if (window.EMR_DATA && EMR_DATA.guided && EMR_DATA.guided.examFindings) {
+      ctx.examFindings = EMR_DATA.guided.examFindings;
+    }
+    // Orders placed and resulted (with actual result values)
+    ctx.ordersResulted = [];
+    (window.S && S.labOrders || []).filter(function(o){ return o.resulted; })
+      .forEach(function(o){ ctx.ordersResulted.push('Lab: ' + (o.name||o.id) + (o.resultData ? ' [resulted]' : '')); });
+    (window.S && S.imgOrders || []).filter(function(o){ return o.resulted; })
+      .forEach(function(o){ ctx.ordersResulted.push('Imaging: ' + (o.name||o.id)); });
+    return ctx;
+  })();
+
+  var _caseCtxStr = JSON.stringify(_caseCtx, null, 0);
+
+  var systemPrompt = 'You are a clinical faculty member grading a medical student H&P note. '
+    + 'CRITICAL GRADING RULE: Only penalize the student for omitting information that was actually available to them in the case. '
+    + 'The following is the COMPLETE case data available to the student — do NOT deduct points for anything not listed here.\n'
+    + 'CASE DATA: ' + _caseCtxStr + '\n\n'
+    + 'Correct diagnosis: ' + (diagnosis||'unknown') + '. Setting: ' + setting + '.\n'
+    + 'Grade on: accuracy relative to case data, OLDCARTS completeness, clinical reasoning quality, '
+    + 'assessment breadth and ranking, plan-order consistency. '
+    + 'Do NOT penalize for omitting: medications not in the chart, history not revealed in the interview responses, '
+    + 'exam findings not available, or diagnoses not in the ddxTargets list.\n'
+    + 'Return ONLY valid JSON: '
+    + '{"overallScore":0-100,"grade":"A/B/C/D/F","summary":"2-3 sentence assessment",'
+    + '"strengths":["specific strength 1","specific strength 2"],'
+    + '"improvements":["specific actionable improvement — cite what WAS available that they missed"],'
+    + '"sections":{"cc":{"score":0-5,"feedback":""},'
+    + '"hpi":{"score":0-15,"feedback":""},'
+    + '"pmh":{"score":0-5,"feedback":""},'
+    + '"meds":{"score":0-5,"feedback":""},'
+    + '"allergies":{"score":0-5,"feedback":""},'
+    + '"fhsh":{"score":0-5,"feedback":""},'
+    + '"ros":{"score":0-10,"feedback":""},'
+    + '"pe":{"score":0-15,"feedback":""},'
+    + '"assess":{"score":0-15,"feedback":""},'
+    + '"plan":{"score":0-15,"feedback":""},'
+    + '"prof":{"score":0-5,"feedback":""}'
+    + '}}';
 
   showToast('🤖 Generating AI feedback...');
 
