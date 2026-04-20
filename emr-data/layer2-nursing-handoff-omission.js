@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Night Float Handoff",
-      "icd": "Z00.00",
+      "problem": "PE diagnosed late \u2014 critical D-dimer missed in handoff",
+      "icd": "I26.99",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "D-dimer 3,400 resulted at 0300 \u2014 not communicated in morning handoff. Diagnosis delayed 6 hours."
+    },
+    {
+      "problem": "Night float handoff omission \u2014 'stable patient' framing",
+      "icd": "Y83.8",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Night nurse verbal: 'Stable, nothing new.' Pending critical result was not mentioned."
+    },
+    {
+      "problem": "DVT \u2014 source for PE",
+      "icd": "I82.401",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Post-surgical patient, Day 3 \u2014 DVT prophylaxis documented but subtherapeutic"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Heparin 80 units/kg IV bolus THEN 18 units/kg/hr infusion",
+      "sig": "Initiated after PE confirmed on CT \u2014 anti-factor Xa target 0.3-0.7",
+      "prescriber": "Medicine",
+      "start": "11/2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily \u2014 had been ordered for prophylaxis",
+      "sig": "DVT prophylaxis \u2014 was being given but PE occurred",
+      "prescriber": "Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 inadequate for treatment now"
     }
   ],
   "allergies": [
@@ -97,8 +119,51 @@ window.EMR_DATA = {
       "plan": "Referral to nursing. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "PE Workup",
+      "results": [
+        {
+          "test": "D-dimer (resulted 0300)",
+          "value": "3,400",
+          "unit": "ng/mL",
+          "ref": "<500",
+          "flag": "H"
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.12",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "BNP",
+          "value": "312",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "ABG \u2014 pO2",
+          "value": "68",
+          "unit": "mmHg",
+          "ref": "75-100",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "CT Pulmonary Angiography",
+      "indication": "Elevated D-dimer + tachycardia + hypoxia \u2014 delayed by handoff omission",
+      "findings": "Bilateral pulmonary emboli \u2014 right main pulmonary artery and right lower lobe segmental arteries. Right ventricular enlargement suggesting RV strain.",
+      "impression": "Bilateral PE with RV strain. Anticoagulation initiated. Consider catheter-directed thrombolysis consultation if hemodynamic deterioration."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +195,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "layer2-nursing-handoff-omission",
-    "diagnosis": "See diagnosis \u2014 Night Float Handoff",
+    "diagnosis": "Handoff Safety Failure \u2014 Critical Lab Value Missed in Night-to-Day Transition, PE Diagnosed Late",
     "acuity": 2,
     "presentation": "Night Float Handoff",
     "category": "other"
@@ -177,12 +242,12 @@ window.EMR_DATA = {
       "Fall Risk": "Morse Fall Scale calculated per case"
     },
     "ddxTargets": [
-      "Night Float Handoff \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "PE \u2014 handoff failure delayed diagnosis (correct)",
+      "Normal D-dimer \u2014 clearly elevated, diagnosis delayed not missed",
+      "Atelectasis \u2014 D-dimer + CT-PE positive",
+      "Post-op inflammation causing D-dimer elevation \u2014 magnitude 3,400 too high for non-clot",
+      "Sepsis causing RV strain \u2014 CT-PE confirms PE",
+      "DVT only without PE \u2014 CT confirms PE"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +257,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a nursing case with chief complaint: Night Float Handoff. What are the most important questions for a nursing to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a nursing perspective, what is the most critical finding that narrows this differential? What is the nursing-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the nursing's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for nursing. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) nursing assessment revealed the key discriminating features. (3) Handoff: 'Mr. Chen is a 74yo with pneumonia, doing well, plan to discharge tomorrow.' You review his chart and notice his last urine output was 120mL over 8 hours, he has been getting vancomycin for 4 days, and his creatinine today is 1.8 (was 1.1 on admission). The day team did not address this. What do you do? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: PE with diagnostic delay from handoff omission \u2014 critical patient safety case. Key nursing learning: (1) SBAR handoff requires: Situation + Background + Assessment + Recommendation. 'Stable' is not a handoff. For each patient: (a) Any new results overnight? (b) Any pending critical results? (c) Any medication changes? (d) What needs to happen in the next 4 hours? Pending results are explicit handoff items, not assumed to be seen. (2) Critical value follow-up: D-dimer 3,400 resulted at 0300. Night nurse received the result. Night nurse's responsibility: notify physician at 0300 (critical value = physician notification required), document call, document physician response or lack of. This is not optional at any hour. (3) The 'stable patient' cognitive shortcut: when a patient is 'expected' to be stable, nurses sometimes mentally filter abnormal data as likely irrelevant. This is availability bias + anchoring on prior assessment. New data requires fresh assessment, not contextual filtering. (4) Incident report: delay in PE diagnosis from handoff failure = reportable adverse event. This is a system failure, not individual blame. The incident report asks: What was the contributing system factor? Answer: no standardized written handoff with pending results field. (5) ISBAR-R (Introduce, Situation, Background, Assessment, Recommendation, Read-back): effective written + verbal handoff reduces handoff omissions by 30% in RCT evidence."
     }
   }
 };

@@ -23,20 +23,42 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Zone II Flexor Tendon Repair Week 6",
-      "icd": "Z00.00",
+      "problem": "Zone II flexor tendon repair \u2014 6 weeks post-op",
+      "icd": "S66.021A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Right index finger FDP + FDS repair. Week 6 = initiation of active composite fist. Adhesion prevention critical."
+    },
+    {
+      "problem": "Adhesion formation risk \u2014 Zone II 'no man's land'",
+      "icd": "M65.841",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Zone II (A2 pulley to FDS insertion) = highest adhesion risk due to tendon sheath anatomy"
+    },
+    {
+      "problem": "Extensor lag developing \u2014 proximal joint stiffness",
+      "icd": "M20.002",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "PIP joint -15\u00b0 extension lag \u2014 early sign of adhesion formation. Intervention window is now."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Ibuprofen 400mg TID PRN swelling/pain",
+      "sig": "Take 3 times daily with food as needed",
+      "prescriber": "Hand Surgery",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "PRN"
+    },
+    {
+      "name": "Vitamin E topical \u2014 scar management",
+      "sig": "Apply to scar with friction massage daily",
+      "prescriber": "OT recommendation",
+      "start": "11/2024",
+      "refills": 2,
       "status": "Active"
     }
   ],
@@ -130,7 +152,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "hand-injury-splinting-ot",
-    "diagnosis": "See diagnosis \u2014 Zone II Flexor Tendon Repair Week 6",
+    "diagnosis": "Zone II Flexor Tendon Repair Week 6 \u2014 OT Controlled Active Motion Protocol, Early Tenolysis Prevention",
     "acuity": 3,
     "presentation": "Zone II Flexor Tendon Repair Week 6",
     "category": "orthopedic"
@@ -175,12 +197,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "Zone II Flexor Tendon Repair Week 6 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Zone II FT repair \u2014 controlled active motion week 6 (correct)",
+      "Immobilization continued \u2014 adhesions will worsen if passive only",
+      "Tenolysis surgery required now \u2014 surgical option is premature at 6 weeks",
+      "Force passive extension \u2014 rupture risk with immature repair",
+      "No OT needed \u2014 self-directed exercise is insufficient for zone II",
+      "Rupture of repair \u2014 pain with active flexion and loss of distal joint motion would indicate"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +212,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: Zone II Flexor Tendon Repair Week 6. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) What splint protocol is evidence-based at week 6 \u2014 and which functional ADL goals are appropriate at this healing stage? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: zone II FT repair week 6 \u2014 controlled active motion protocol. Key OT learning: (1) Zone II anatomy: 'no man's land' (Bunnell's original term) because the FDP and FDS share a tight tendon sheath \u2014 ideal conditions for adhesion formation post-repair. Adhesions form within the sheath between tendon and sheath wall, blocking glide. (2) Timing of active motion: week 0-3 = place-and-hold (passive positioning, tendon moves passively), week 3-6 = early active motion (gentle active flexion), week 6+ = composite active fist, progressive resistance. Initiating active fist at week 6 is the critical OT intervention to break adhesions before they mature. (3) Splinting progression: dorsal blocking splint (DBS) wrist 20\u00b0 flexion, MPs 60\u00b0 flexion, IPs extended \u2014 worn between exercise sessions until week 8. Prevents rupture while allowing controlled motion. (4) Tenolysis indicator: if TAM (total active motion) does not improve over 4-6 weeks of protocol \u2192 consider tenolysis surgery at 3-4 months post-repair. OT documents progress \u2014 inadequate TAM progression is the referral criterion. (5) Scar management: silicone gel sheeting + massage + compression. Scars that adhere to tendon sheath restrict glide independent of intrinsic tendon adhesions \u2014 scar management is OT's concurrent priority."
     }
   }
 };

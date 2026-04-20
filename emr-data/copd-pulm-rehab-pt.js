@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: COPD GOLD III",
-      "icd": "Z00.00",
+      "problem": "COPD GOLD III \u2014 pulmonary rehab referral",
+      "icd": "J44.1",
+      "onset": "2016",
+      "status": "Active",
+      "notes": "FEV1 38% predicted, 6MWT 230m (55% predicted). PR = evidence-based standard of care."
+    },
+    {
+      "problem": "Exercise-induced desaturation \u2014 SpO2 drops to 84%",
+      "icd": "R09.02",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "SpO2 84% at peak exercise \u2014 supplemental O2 required during PR exercise sessions"
+    },
+    {
+      "problem": "Dyspnea catastrophizing \u2014 modified MRC grade 4",
+      "icd": "R06.00",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Avoids activity that causes breathlessness \u2014 fear-avoidance pattern worsens deconditioning"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. James Castillo, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Tiotropium 18mcg inhaled daily",
+      "sig": "1 capsule inhaled via HandiHaler daily",
+      "prescriber": "Pulmonology",
+      "start": "2020",
+      "refills": 5,
       "status": "Active"
+    },
+    {
+      "name": "Formoterol-Budesonide 160/4.5mcg inhaled BID",
+      "sig": "2 puffs twice daily \u2014 LABA/ICS combination",
+      "prescriber": "Pulmonology",
+      "start": "2021",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Albuterol 90mcg MDI 2-4 puffs PRN",
+      "sig": "2-4 puffs every 4-6 hours as needed for rescue",
+      "prescriber": "Pulmonology",
+      "start": "2016",
+      "refills": 3,
+      "status": "PRN"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pt. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "10/15/2024",
+      "panel": "COPD Pre-Rehab Assessment",
+      "results": [
+        {
+          "test": "FEV1 (% predicted)",
+          "value": "38",
+          "unit": "%",
+          "ref": ">80% normal",
+          "flag": "L"
+        },
+        {
+          "test": "FEV1/FVC ratio",
+          "value": "0.52",
+          "unit": "",
+          "ref": ">0.70",
+          "flag": "L"
+        },
+        {
+          "test": "6-Minute Walk Test",
+          "value": "230",
+          "unit": "meters",
+          "ref": ">450m normal",
+          "flag": "L"
+        },
+        {
+          "test": "Borg dyspnea at peak 6MWT",
+          "value": "8/10",
+          "unit": "",
+          "ref": "<5 normal",
+          "flag": "H"
+        },
+        {
+          "test": "SpO2 nadir during 6MWT",
+          "value": "84",
+          "unit": "%",
+          "ref": ">92",
+          "flag": "L"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "copd-pulm-rehab-pt",
-    "diagnosis": "See diagnosis \u2014 COPD GOLD III",
+    "diagnosis": "COPD GOLD III \u2014 Pulmonary Rehabilitation: 6MWT 230m, Dyspnea-Limited Exercise Capacity",
     "acuity": 3,
     "presentation": "COPD GOLD III",
     "category": "pulmonary"
@@ -180,12 +252,12 @@ window.EMR_DATA = {
       "Neurological": "Screen negative for radiculopathy unless case-specific"
     },
     "ddxTargets": [
-      "COPD GOLD III \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "COPD GOLD III \u2014 PR with O2 supplementation during exercise (correct)",
+      "Exercise-induced asthma \u2014 COPD with fixed obstruction, different pathophysiology",
+      "Deconditioning only \u2014 significant airflow limitation beyond deconditioning",
+      "Pulmonary hypertension limiting exercise \u2014 possible complication but PR still indicated",
+      "Cardiac limitation \u2014 dyspnea from COPD not cardiac dysfunction",
+      "Full exertion contraindicated \u2014 PR IS the treatment, not contraindication"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -195,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pt case with chief complaint: COPD GOLD III. What are the most important questions for a pt to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pt perspective, what is the most critical finding that narrows this differential? What is the pt-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pt's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pt. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pt assessment revealed the key discriminating features. (3) What is the MCID for 6MWT in COPD \u2014 and how do you structure the exercise prescription around this ventilatory limitation? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: COPD GOLD III \u2014 pulmonary rehabilitation. Key PT learning: (1) Pulmonary rehab is the highest-level evidence intervention in COPD (Level A): reduces dyspnea, improves exercise tolerance and quality of life, reduces hospitalizations. More effective than any bronchodilator for functional outcomes. Yet it is under-prescribed and under-utilized. (2) Exercise during desaturation: SpO2 drops to 84% with exercise. Protocol: prescribe supplemental O2 at 2-4 L/min during exercise sessions targeting SpO2 >90%. This is an O2 prescription \u2014 PT can write the exercise O2 order or call the pulmonologist. Do NOT exclude the patient from exercise because of desaturation. (3) Interval training vs continuous: COPD patients with severe dyspnea often tolerate interval training better than continuous (30s exercise, 30s rest). Lower ventilatory demand per bout, same total work. Progress toward continuous as tolerance improves. (4) Pursed-lip breathing: PT teaches this as standard \u2014 slows respiratory rate, increases positive end-expiratory pressure, prevents airway collapse, reduces dyspnea perception. Teach with every exercise session. (5) Dyspnea education: the fear-avoidance component. 'Breathlessness during exercise is safe \u2014 it will not harm your lungs. Your breathing will recover. The discomfort is expected and decreases as you get fitter.' Exposure and desensitization to exercise dyspnea is a PR goal."
     }
   }
 };

@@ -23,20 +23,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: C6 ASIA-B SCI Week 3",
-      "icd": "Z00.00",
+      "problem": "C6 ASIA-B incomplete SCI \u2014 week 3",
+      "icd": "S14.105A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Wrist extension present (C6 key muscle). Tenodesis grip functional. OT goal: maximum ADL independence."
+    },
+    {
+      "problem": "Neurogenic bladder \u2014 suprapubic catheter",
+      "icd": "N31.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Intermittent catheterization program to be established \u2014 OT trains on catheter management"
+    },
+    {
+      "problem": "Dependent edema \u2014 bilateral lower extremities",
+      "icd": "R60.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Lack of muscle pump \u2192 venous pooling. Compression stockings, positioning required."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
+      "name": "Baclofen 10mg TID",
+      "sig": "Take 3 times daily \u2014 spasticity management",
+      "prescriber": "PM&R",
+      "start": "11/2024",
       "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Oxybutynin 5mg BID",
+      "sig": "Take twice daily \u2014 neurogenic bladder management",
+      "prescriber": "Urology/PM&R",
+      "start": "11/2024",
+      "refills": 4,
+      "status": "Active"
+    },
+    {
+      "name": "Enoxaparin 40mg SQ daily \u2014 DVT prophylaxis",
+      "sig": "Subcutaneous daily \u2014 high DVT risk in SCI",
+      "prescriber": "PM&R",
+      "start": "11/2024",
+      "refills": 4,
       "status": "Active"
     }
   ],
@@ -98,7 +128,15 @@ window.EMR_DATA = {
     }
   ],
   "labs": [],
-  "imaging": [],
+  "imaging": [
+    {
+      "date": "10/30/2024",
+      "study": "MRI Cervical Spine",
+      "indication": "C6 SCI mechanism evaluation",
+      "findings": "C5-C6 fracture-dislocation. Cord signal change at C5-C6. No complete cord transection on MRI.",
+      "impression": "Incomplete SCI consistent with ASIA-B classification \u2014 some sensory preservation below lesion level."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +168,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "sci-adl-goals-ot",
-    "diagnosis": "See diagnosis \u2014 C6 ASIA-B SCI Week 3",
+    "diagnosis": "C6 ASIA-B Incomplete SCI \u2014 OT Goal Setting for ADL Independence with Upper Extremity Function",
     "acuity": 3,
     "presentation": "C6 ASIA-B SCI Week 3",
     "category": "neurologic"
@@ -175,12 +213,12 @@ window.EMR_DATA = {
       "Home Safety": "Risk factors identified per case context"
     },
     "ddxTargets": [
-      "C6 ASIA-B SCI Week 3 \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "C6 ASIA-B SCI \u2014 tenodesis grip, ADL retraining (correct)",
+      "Complete SCI (ASIA-A) \u2014 preserved sensory indicates incomplete",
+      "C5 SCI \u2014 C6 key muscle (wrist extension) present",
+      "Cervical disc herniation \u2014 no fracture-dislocation mechanism",
+      "Transverse myelitis \u2014 different mechanism",
+      "Central cord syndrome \u2014 upper > lower extremity weakness pattern"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -190,7 +228,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a ot case with chief complaint: C6 ASIA-B SCI Week 3. What are the most important questions for a ot to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a ot perspective, what is the most critical finding that narrows this differential? What is the ot-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the ot's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for ot. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) ot assessment revealed the key discriminating features. (3) At C6 level, which ADLs are realistic independence targets \u2014 and what adaptive equipment makes the most functional difference? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: C6 ASIA-B \u2014 OT tenodesis and ADL goal setting. Key OT learning: (1) C6 key muscle: wrist extensors (ECRL/ECRB). Tenodesis: passive wrist extension (gravity) \u2192 fingers naturally flex (passive tenodesis grip). Wrist flexion \u2192 fingers extend. This is the C6 SCI patient's primary hand function. OT trains tenodesis grip for object manipulation, dressing, self-care. (2) Functional expectations C6 ASIA-B: with intact wrist extension + some sensation, can achieve: independent feeding (adapted utensils), independent grooming, assisted upper-body dressing, manual wheelchair propulsion with quad pegs. (3) Equipment for C6: universal cuff (holds utensils/pencils), rocker knife, button hook, long-handled devices, manual wheelchair with quad pegs. OT orders ALL of this through occupational therapy prescription. (4) Pressure injury prevention: OT trains weight shifts q15-30 min in wheelchair. SCI patient cannot feel ischemia \u2014 must develop cognitive habit. Seat cushion selection is an OT decision (ROHO or Jay cushion for C6). (5) Bladder program: OT teaches clean intermittent catheterization (CIC) technique using wrist extension and adapted catheter holder \u2014 achieves independence despite limited hand function in many C6 patients."
     }
   }
 };

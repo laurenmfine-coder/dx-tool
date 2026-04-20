@@ -26,51 +26,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Central retinal artery occlusion \u2014 acute, 2 hours ago",
-      "icd": "H34.11",
+      "problem": "Central retinal artery occlusion \u2014 acute onset",
+      "icd": "H34.10",
       "onset": "2024",
       "status": "Active",
-      "notes": "Sudden painless vision loss. Cherry red spot. Within 4.5h treatment window."
+      "notes": "Painless monocular vision loss 1 hour ago \u2014 cherry red spot, retinal whitening \u2014 stroke of the eye"
     },
     {
-      "problem": "Carotid stenosis \u2014 likely embolic source",
-      "icd": "I65.21",
-      "onset": "2024",
+      "problem": "Hypertension \u2014 probable embolic source",
+      "icd": "I10",
+      "onset": "2018",
       "status": "Active",
-      "notes": "Carotid bruit on exam. Embolic source most probable."
+      "notes": "BP 178/108 in office \u2014 hypertensive retinopathy changes also noted. Embolus likely."
     },
     {
-      "problem": "Stroke risk \u2014 10-15% at 90 days post-CRAO",
-      "icd": "G45.9",
+      "problem": "Stroke risk \u2014 within 90-day CRAO window",
+      "icd": "Z87.39",
       "onset": "2024",
       "status": "Active",
-      "notes": "CRAO is equivalent to TIA/minor stroke for 90-day cerebrovascular risk"
+      "notes": "CRAO = ocular TIA. 10-15% stroke risk in first 90 days \u2014 highest in first 2 weeks"
     }
   ],
   "medications": [
     {
-      "name": "Aspirin 325mg loading dose \u2014 immediate",
-      "sig": "Antiplatelet loading \u2014 give while awaiting ED transfer",
+      "name": "Ocular massage \u2014 attempt in office (digital or 3-mirror)",
+      "sig": "Firm pressure for 5 seconds, release 5 seconds, repeat x3 minutes \u2014 may dislodge embolus",
       "prescriber": "Dr. Chen OD",
       "start": "11/2024",
       "refills": 0,
-      "status": "Given"
+      "status": "Attempted in office"
     },
     {
-      "name": "Ocular massage \u2014 digital IOP lowering",
-      "sig": "Firm digital pressure over closed eyelid for 5-10 seconds, release, repeat \u2014 dislodge embolus",
+      "name": "Carbogen inhalation or O2 100% \u2014 if available",
+      "sig": "Vasodilation attempt \u2014 minimal evidence but no harm",
       "prescriber": "Dr. Chen OD",
       "start": "11/2024",
       "refills": 0,
-      "status": "Performed"
+      "status": "If available"
     },
     {
-      "name": "IV tPA \u2014 if within 4.5 hour window (ED decision)",
-      "sig": "Systemic thrombolysis \u2014 OD starts transfer to ED immediately. ED team makes tPA decision.",
-      "prescriber": "ED Neurology",
+      "name": "Aspirin 325mg PO STAT \u2014 antiplatelet",
+      "sig": "Chew immediately \u2014 reduce further embolic risk",
+      "prescriber": "Dr. Chen OD",
       "start": "11/2024",
       "refills": 0,
-      "status": "ED decision"
+      "status": "Given in office"
     }
   ],
   "allergies": [
@@ -112,10 +112,10 @@ window.EMR_DATA = {
   "imaging": [
     {
       "date": "11/18/2024",
-      "study": "Fundoscopy + OCT Macula \u2014 Right Eye",
-      "indication": "Acute painless vision loss",
-      "findings": "Right eye: Diffuse inner retinal whitening (opacification) from ischemia. Cherry-red spot at fovea (intact choroidal perfusion through thin foveal tissue). Boxcar segmentation of blood column in arterioles. No visible emboli at disc. Left eye: Normal fundoscopy.",
-      "impression": "Central retinal artery occlusion right eye \u2014 acute. Cherry-red spot is diagnostic. Refer to ED immediately for stroke workup and tPA consideration if within 4.5h window."
+      "study": "Funduscopy + OCT Macula",
+      "indication": "Acute painless monocular vision loss",
+      "findings": "Left eye: Diffuse inner retinal whitening (opacification) from optic disc to periphery. Cherry red spot at fovea \u2014 intact choroidal circulation visible through thin foveal tissue. Boxcar segmentation of blood column (arterial non-perfusion). Right eye: Grade II hypertensive retinopathy, copper wiring, mild A-V nicking. OCT left eye: marked inner retinal layer thickening (edema from ischemia).",
+      "impression": "Central retinal artery occlusion left eye \u2014 acute presentation. Emergency referral to ED for stroke protocol. IV tPA consideration within 4.5-hour window."
     }
   ],
   "immunizations": [
@@ -223,12 +223,12 @@ window.EMR_DATA = {
       "Neurological screening examination": "No focal motor or sensory deficits, speech clear, facial symmetry intact"
     },
     "ddxTargets": [
-      "CRAO \u2014 acute, refer to ED for stroke protocol and tPA (correct)",
-      "Branch retinal artery occlusion \u2014 sectoral loss, not total",
-      "Anterior ischemic optic neuropathy (AION) \u2014 disc swelling, no cherry red spot",
-      "Giant cell arteritis CRAO \u2014 elevated ESR/CRP would distinguish",
-      "Central retinal vein occlusion \u2014 flame hemorrhages everywhere, very different picture",
-      "Functional vision loss \u2014 cherry red spot is objective, cannot be fabricated"
+      "CRAO \u2014 emergency stroke referral (correct)",
+      "Amaurosis fugax (TIA) \u2014 vision completely lost and not recovering, not transient",
+      "Retinal detachment \u2014 different fundus appearance, no cherry red spot",
+      "Anterior ischemic optic neuropathy \u2014 disc edema not diffuse retinal whitening",
+      "Giant cell arteritis \u2014 possible cause, ESR/CRP needed",
+      "Severe migraine with aura \u2014 typically monocular, not permanent"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on stroke given family history and cardiovascular risk factors, potentially missing the ophthalmologic emergency",
@@ -239,11 +239,11 @@ window.EMR_DATA = {
       "phase2": "You've identified several concerning possibilities for acute vision loss. As you prepare to interview Dolores, what key historical features would help you differentiate between retinal, optic nerve, and cerebrovascular causes? Consider her cardiovascular risk factors - how might they predispose to different mechanisms of vision loss?",
       "phase5": "Now that you've completed your history and physical, let's analyze your findings. You found complete monocular vision loss with a relative afferent pupillary defect and fundoscopic changes. What does this constellation of findings tell you about the anatomical location of the problem? How does the time course and her cardiovascular history fit with your leading diagnosis?",
       "finalDebrief": "This case highlights how cardiovascular risk factors like atrial fibrillation and carotid stenosis can lead to embolic central retinal artery occlusion - truly an 'eye stroke.' Notice how the complete monocular vision loss, RAPD, and fundoscopic findings pointed to retinal rather than cortical pathology. The key was recognizing this as a retinal emergency requiring immediate intervention, not just another stroke workup. What does this teach you about the importance of a focused ophthalmologic examination in acute vision loss?",
-      "final": "Diagnosis: acute CRAO \u2014 OD role is immediate referral and bridge treatment. Key OD learning: (1) The OD's window is narrow: CRAO without treatment causes permanent vision loss from retinal infarction. Inner retina tolerates ischemia ~100 minutes. After 4 hours: central vision rarely recovers. The OD's actions in the first 5 minutes determine whether this patient has any chance of visual recovery. (2) In-office bridge measures: (a) Ocular massage \u2014 digital pressure alternating with release, aims to dislodge embolus distally. Lowers IOP transiently to improve perfusion gradient. Low evidence but no harm. (b) Anterior chamber paracentesis \u2014 rapidly lowers IOP (specialist skill; OD can refer immediately). (c) Aspirin 325mg \u2014 antiplatelet, minimal benefit for retinal recovery but starts stroke prevention. (3) Transfer protocol: CRAO = stroke of the eye. Call 911 or drive directly to nearest comprehensive stroke center \u2014 NOT urgent care, NOT ophthalmology clinic. The treating team is neurology. (4) Why systemic thrombolysis (tPA): same mechanism as ischemic stroke \u2014 clot in retinal artery (embolic). Evidence for IV tPA is limited but emerging \u2014 EAGLE study. Benefit most likely if central embolic occlusion within 4.5h. (5) The 90-day stroke risk is real: 10-15% within 90 days \u2014 highest in first 2 weeks. Carotid ultrasound, echo, ECG, and antiplatelet/statin are initiated at the stroke visit."
+      "final": "Diagnosis: acute CRAO \u2014 emergency referral. Key OD learning: (1) CRAO = ocular stroke. Immediately: ocular massage in office, aspirin, call 911 or direct to ED. Do NOT schedule follow-up or wait to see if vision recovers. The 4.5-hour tPA window is real \u2014 OD has a role in getting the patient there. (2) Embolic evaluation: immediately after IV tPA window assessment, same-day evaluation for embolic source: ECG (AFib), carotid Doppler (stenosis), echo (cardiac embolus), lipids, CBC. This is the stroke workup \u2014 OD initiates and coordinates. (3) Giant cell arteritis: in patients >50 with CRAO + constitutional symptoms (jaw claudication, scalp tenderness, headache, ESR >50) \u2192 immediate IV steroids before biopsy. Missing GCA = bilateral blindness risk. This patient: no GCA symptoms, but check ESR/CRP. (4) 90-day stroke risk after CRAO: 10-15% overall, highest first 2 weeks (5-7%). This exceeds the stroke risk after amaurosis fugax. ABCD2 score does not apply \u2014 CRAO patients need neurology follow-up regardless of score. (5) Prognosis for vision recovery: poor without reperfusion. Final VA in most CRAO: counting fingers or worse. Macular sparing (cilioretinal artery) offers better prognosis \u2014 look for preserved foveal circulation on funduscopy."
     }
   },
   "meta": {
-    "diagnosis": "Central Retinal Artery Occlusion \u2014 Acute, Within Treatment Window, Urgent Stroke Protocol",
+    "diagnosis": "Central Retinal Artery Occlusion \u2014 Acute, Emergency Referral Protocol",
     "caseId": "crao"
   }
 };
