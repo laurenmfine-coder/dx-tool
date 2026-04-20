@@ -23,51 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "GAS pharyngitis \u2014 M protein virulence factor",
+      "problem": "Group A Streptococcal pharyngitis \u2014 confirmed",
       "icd": "J02.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "Positive RADT. Exudative tonsils, anterior cervical lymphadenopathy, fever 38.8\u00b0C. Centor score 4."
+      "notes": "Rapid strep positive \u2014 treatment to prevent rheumatic fever, not just symptomatic relief"
     },
     {
-      "problem": "Acute rheumatic fever risk \u2014 molecular mimicry",
-      "icd": "Z86.89",
+      "problem": "Rheumatic fever prevention \u2014 molecular mimicry mechanism",
+      "icd": "I00",
       "onset": "2024",
       "status": "Active",
-      "notes": "M protein epitopes mimic cardiac myosin \u2014 untreated GAS \u2192 ARF \u2192 rheumatic heart disease"
+      "notes": "Anti-M protein antibodies cross-react with cardiac myosin \u2014 antibiotics prevent this autoimmune cascade"
     },
     {
-      "problem": "Penicillin-sensitive organism \u2014 antibiotics indicated",
-      "icd": "B95.0",
+      "problem": "Family contact exposure \u2014 sibling with strep",
+      "icd": "Z20.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "GAS universally penicillin-sensitive \u2014 PCN never resists (no penicillinase gene in GAS)"
+      "notes": "Source identified \u2014 household exposure"
     }
   ],
   "medications": [
     {
       "name": "Amoxicillin 500mg PO BID x10 days",
-      "sig": "Take twice daily for 10 days \u2014 10-day course prevents ARF (shorter courses don't)",
+      "sig": "Take twice daily for 10 full days \u2014 do NOT stop early even if feeling better",
       "prescriber": "PA",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Ibuprofen 400mg TID PRN \u2014 pain and fever",
-      "sig": "With food as needed",
+      "name": "Ibuprofen 400mg TID PRN sore throat pain",
+      "sig": "Take 3 times daily with food as needed for pain",
       "prescriber": "PA",
       "start": "11/2024",
       "refills": 0,
       "status": "PRN"
-    },
-    {
-      "name": "Benzathine penicillin G 1.2M units IM x1 (alternative for compliance concern)",
-      "sig": "Single IM injection \u2014 guarantees full course compliance. Useful if patient unreliable with oral antibiotics.",
-      "prescriber": "PA",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "Alternative"
     }
   ],
   "allergies": [
@@ -130,42 +122,42 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "GAS Pharyngitis Panel",
+      "panel": "Strep Workup",
       "results": [
         {
-          "test": "Rapid antigen detection test (RADT) \u2014 GAS",
+          "test": "Rapid GAS antigen test",
           "value": "Positive",
           "unit": "",
           "ref": "Negative",
           "flag": "H"
         },
         {
-          "test": "Throat culture (backup \u2014 sent)",
-          "value": "Pending",
+          "test": "Throat culture",
+          "value": "Pending \u2014 sent for confirmation and sensitivity",
           "unit": "",
-          "ref": "No growth",
-          "flag": ""
+          "ref": "No GAS",
+          "flag": "H"
         },
         {
-          "test": "WBC",
+          "test": "CBC \u2014 WBC",
           "value": "14.2",
           "unit": "K/\u03bcL",
           "ref": "4.5-11",
           "flag": "H"
         },
         {
-          "test": "Monospot test",
-          "value": "Negative",
-          "unit": "",
-          "ref": "Negative",
-          "flag": ""
+          "test": "CRP",
+          "value": "2.8",
+          "unit": "mg/dL",
+          "ref": "<1.0",
+          "flag": "H"
         },
         {
-          "test": "Temperature",
-          "value": "38.8",
-          "unit": "\u00b0C",
-          "ref": "<38.0",
-          "flag": "H"
+          "test": "ASO titer (if chronic)",
+          "value": "Not indicated for acute infection",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         }
       ]
     }
@@ -202,7 +194,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "mbs-strep-virulence",
-    "diagnosis": "Group A Streptococcus Pharyngitis \u2014 M Protein Virulence, Molecular Mimicry, ARF Risk",
+    "diagnosis": "Group A Streptococcal Pharyngitis \u2014 Molecular Mimicry, M Protein Virulence, Rheumatic Fever Prevention",
     "acuity": 3,
     "presentation": "Strep Pharyngitis",
     "category": "infectious"
@@ -240,12 +232,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "GAS pharyngitis \u2014 10-day antibiotics to prevent ARF (correct)",
-      "Viral pharyngitis \u2014 RADT positive, antibiotics indicated",
-      "Infectious mononucleosis \u2014 monospot negative, RADT positive",
-      "5-day antibiotic course sufficient \u2014 10 days required for ARF prevention",
-      "No treatment needed \u2014 untreated GAS risks ARF and suppurative complications",
-      "Amoxicillin-clavulanate \u2014 unnecessary, GAS universally PCN-sensitive"
+      "Group A Strep pharyngitis \u2014 amoxicillin x10 days (correct)",
+      "Viral pharyngitis \u2014 rapid strep positive, not viral",
+      "Peritonsillar abscess \u2014 no uvular deviation, no muffled voice",
+      "Infectious mononucleosis \u2014 Monospot needed if amoxicillin causes rash",
+      "Epiglottitis \u2014 no drooling, no stridor, sits upright",
+      "Gonococcal pharyngitis \u2014 sexual history relevant, different organism"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -255,7 +247,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: Strep Pharyngitis. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Diagnosis: GAS pharyngitis \u2014 M protein virulence and ARF prevention. Key MBS learning: (1) M protein structure: M protein is the major GAS virulence factor \u2014 a fibrous surface protein that: (a) resists phagocytosis by inhibiting complement opsonization (binds Factor H, inhibits C3b deposition), (b) is antiphagocytic against neutrophils. Different M protein serotypes (M1, M3 being most virulent) mediate different disease patterns \u2014 invasive disease, toxic shock. (2) Molecular mimicry and ARF: M protein serotype epitopes (particularly M5, M18) share structural similarity with human cardiac myosin. GAS immune response generates M protein antibodies \u2192 cross-react with cardiac myosin \u2192 autoimmune myocarditis/valvulitis \u2192 acute rheumatic fever. This is the mechanism of rheumatic heart disease \u2014 a preventable autoimmune disease. (3) Why 10 days: the antibody response that cross-reacts with cardiac tissue takes 2-3 weeks to develop. Eradicating GAS within 10 days of symptom onset prevents the immune response from reaching cardiac-damaging levels. Shorter courses (5 days) have higher recurrence and do not reliably prevent ARF. (4) Universal penicillin sensitivity: GAS has never acquired penicillinase \u2014 the 'horror vacui' of antibiotic resistance. This is because the M protein immune evasion is so effective that GAS does not need beta-lactam resistance for survival. This makes amoxicillin/PCN ideal \u2014 always works, never needs to escalate. (5) Suppurative complications of untreated GAS: peritonsillar abscess, retropharyngeal abscess, otitis media, sinusitis, mastoiditis. Non-suppurative: ARF, post-streptococcal glomerulonephritis (PSGN \u2014 different M types from ARF, NOT prevented by antibiotics)."
+      "final": "Diagnosis: GAS pharyngitis \u2014 MBS pathophysiology focus. Key MBS learning: (1) M protein \u2014 primary GAS virulence factor: (a) Antiphagocytic \u2014 binds factor H, prevents complement activation and phagocytosis. (b) Antigen for molecular mimicry \u2014 anti-M protein antibodies cross-react with cardiac myosin, valve tissue, and neuronal cells (basal ganglia \u2192 Sydenham's chorea). This is the mechanism of rheumatic fever. (c) 100+ serotypes \u2014 M typing was the original GAS classification. (2) Why 10 days of antibiotics: penicillin-class antibiotics must eradicate GAS from the pharynx completely to prevent anti-M antibody generation. Partial treatment does NOT prevent rheumatic fever. 5-day azithromycin = equivalent bacterial eradication but resistance increasing. Standard: 10 days amoxicillin. (3) Rheumatic fever cascade: GAS infection \u2192 anti-M antibodies produced \u2192 antibodies cross-react with cardiac myosin (molecular mimicry) \u2192 pancarditis (pericarditis, myocarditis, endocarditis) \u2192 mitral valve scarring. Prevention window: antibiotics within 9 days of symptom onset prevent rheumatic fever. (4) Scarlet fever: GAS strains with pyrogenic exotoxin (SPE-A, SPE-B) \u2192 superantigen \u2192 massive T-cell activation \u2192 'sandpaper rash,' strawberry tongue. Same organism, different virulence factors. (5) Necrotizing fasciitis: invasive GAS strains (M1, M3) produce spreading factor (hyaluronidase), streptolysin O/S (pore-forming toxins), and DNases. Soft tissue infection can become life-threatening within hours \u2014 this is why soft tissue erythema always requires evaluation."
     }
   }
 };

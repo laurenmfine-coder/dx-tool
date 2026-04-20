@@ -23,48 +23,48 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Intermediate-risk chest pain \u2014 cardiology recommending cath",
-      "icd": "I20.0",
+      "problem": "Coronary artery disease \u2014 cardiology recommends cath",
+      "icd": "I25.10",
       "onset": "2024",
       "status": "Active",
-      "notes": "HEART score 6. Stress test equivocal. Cardiology recommends coronary angiography."
+      "notes": "PA explaining cath recommendation to patient. Patient confused about why invasive test needed."
     },
     {
-      "problem": "Patient hesitancy \u2014 doesn't understand recommendation",
+      "problem": "Stable angina \u2014 positive stress test",
+      "icd": "I20.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Positive nuclear stress test (reversible inferior perfusion defect) \u2014 cardiology recommends diagnostic cath"
+    },
+    {
+      "problem": "Decision capacity intact \u2014 patient asking questions",
       "icd": "Z71.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "Patient asking 'why do I need this test? Can't we just watch and wait?'"
-    },
-    {
-      "problem": "PA role \u2014 translate specialist recommendation, document shared decision-making",
-      "icd": "Z71.89",
-      "onset": "2024",
-      "status": "Active",
-      "notes": "Cardiologist wrote: 'proceed to cath' in note without patient discussion. PA is the communicator."
+      "notes": "Patient has right to know risks, benefits, alternatives before agreeing to procedure"
     }
   ],
   "medications": [
     {
-      "name": "Aspirin 325mg loading dose",
-      "sig": "Take 4 regular aspirin once \u2014 antiplatelet loading",
-      "prescriber": "PA",
+      "name": "Aspirin 325mg daily (pre-procedure)",
+      "sig": "Take daily \u2014 antiplatelet before possible intervention",
+      "prescriber": "Cardiology",
       "start": "11/2024",
-      "refills": 0,
+      "refills": 5,
       "status": "Active"
     },
     {
-      "name": "Metoprolol 25mg daily",
-      "sig": "Take 1 tablet daily \u2014 beta-blocker for chest pain management",
-      "prescriber": "PA",
+      "name": "Metoprolol succinate 50mg daily",
+      "sig": "Take daily \u2014 rate control, anti-anginal",
+      "prescriber": "Cardiology",
       "start": "11/2024",
       "refills": 5,
       "status": "Active"
     },
     {
       "name": "Atorvastatin 40mg QHS",
-      "sig": "Take at bedtime \u2014 cardiovascular risk reduction",
-      "prescriber": "PA",
+      "sig": "Take at bedtime",
+      "prescriber": "Cardiology",
       "start": "11/2024",
       "refills": 5,
       "status": "Active"
@@ -130,20 +130,27 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "Pre-Cath Assessment",
+      "panel": "Pre-Cath Labs",
       "results": [
         {
-          "test": "Troponin I x2",
-          "value": "Negative x2 at 0h and 3h",
-          "unit": "",
-          "ref": "<0.04",
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
           "flag": ""
         },
         {
-          "test": "Creatinine",
-          "value": "1.0",
-          "unit": "mg/dL",
-          "ref": "0.6-1.2",
+          "test": "Hemoglobin",
+          "value": "13.2",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
+        },
+        {
+          "test": "Platelets",
+          "value": "192",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
           "flag": ""
         },
         {
@@ -154,22 +161,22 @@ window.EMR_DATA = {
           "flag": ""
         },
         {
-          "test": "Potassium",
-          "value": "4.1",
-          "unit": "mEq/L",
-          "ref": "3.5-5.0",
-          "flag": ""
+          "test": "LDL",
+          "value": "98",
+          "unit": "mg/dL",
+          "ref": "<70 for CAD",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "11/17/2024",
-      "study": "Exercise Stress Test",
-      "indication": "Intermediate chest pain probability",
-      "findings": "Achieved 85% max HR. 1mm ST depression V4-V5 at peak exercise, resolved at 3 min recovery. No chest pain during test. Normal wall motion by echo.",
-      "impression": "Equivocal stress test \u2014 non-diagnostic ST changes. Intermediate-risk patient. Cardiology recommends coronary angiography for definitive evaluation."
+      "date": "11/15/2024",
+      "study": "Nuclear Stress Test (Adenosine MIBI)",
+      "indication": "Stable angina, positive ETT \u2014 evaluate for ischemia",
+      "findings": "Rest: Normal perfusion. Stress: Reversible inferior wall perfusion defect, moderate in size. Ejection fraction 52% rest, 48% stress.",
+      "impression": "Positive for inducible inferior wall ischemia \u2014 moderate-sized reversible defect. Findings suggest RCA territory ischemia. Diagnostic cardiac catheterization recommended for anatomical definition and revascularization planning."
     }
   ],
   "immunizations": [
@@ -203,7 +210,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pa-consult-interpretation",
-    "diagnosis": "Cardiology Recommends Cardiac Catheterization \u2014 PA Translating Specialist Recommendation to Patient",
+    "diagnosis": "Cardiology Consultation \u2014 PA Translating Catheterization Recommendation to Patient, Informed Consent Education",
     "acuity": 2,
     "presentation": "Cardiology Recommends Cath",
     "category": "cardiovascular"
@@ -248,12 +255,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Intermediate-risk ACS \u2014 cath recommended, PA explains plan to patient (correct)",
-      "Discharge home with aspirin \u2014 HEART score 6 is too high for discharge without further evaluation",
-      "Order CT coronary angiography instead \u2014 reasonable alternative but cardiologist has recommended invasive cath",
-      "PA can independently decide against cath recommendation \u2014 no, PA communicates and documents, escalates if patient declines",
-      "Patient refusal ends the conversation \u2014 patient refusal must be documented with full information given",
-      "Equivocal stress test = no disease \u2014 equivocal \u2260 normal; intermediate risk persists"
+      "PA explaining cath recommendation \u2014 informed consent education (correct)",
+      "Proceed without patient education \u2014 informed consent without comprehension is not consent",
+      "Disagree with cardiologist recommendation \u2014 PA does not have sufficient data to override",
+      "Reassure patient the test is simple \u2014 minimizes legitimate procedural risks",
+      "Refer to cardiologist to explain themselves \u2014 appropriate to involve but PA still educates",
+      "Medical management alone \u2014 option patient can choose, but PA presents it accurately"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -263,7 +270,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pa case with chief complaint: Cardiology Recommends Cath. What are the most important questions for a pa to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pa perspective, what is the most critical finding that narrows this differential? What is the pa-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pa's specific role in management? What interprofessional communication is needed?",
-      "final": "Diagnosis: intermediate-risk chest pain \u2014 PA role in consult interpretation. Key PA learning: (1) Translating specialist recommendations is a core PA skill: 'The cardiologist is recommending a heart catheterization. Here's what that means: a thin tube is placed in your groin or wrist, contrast dye is injected into your heart arteries, and we can see if any blockages are there. The procedure takes about 30-45 minutes. The risk of serious complications is about 1 in 500.' Use plain language. (2) HEART score 6 interpretation: History (2) + ECG (1) + Age (1) + Risk factors (1) + Troponin (1) = 6. High risk. 30-day MACE rate ~12% without further evaluation. The PA communicates this risk clearly. (3) Shared decision-making documentation: 'I explained the cardiology recommendation, risks and benefits of cath vs observation, and the patient's risk stratification. Patient understood and agreed/declined/requested time.' This protects both patient and PA. (4) If patient declines: document fully, involve attending, ensure patient understands they are declining against medical advice. Do not simply accept refusal without documentation. (5) PA scope here: PA can explain, obtain informed consent for procedures, and document SDM. PA cannot independently override cardiologist recommendation without attending involvement."
+      "final": "Diagnosis: PA consultation interpretation and patient education role. Key PA learning: (1) Explaining the stress test: 'Your stress test showed that part of your heart muscle isn't getting enough blood when you exercise. The catheterization is like a road map \u2014 it lets the cardiologist see exactly which artery is narrowed and by how much. You might need a stent to open it, or medication might be enough \u2014 but we can't know until we see inside.' (2) Informed consent elements: (a) What is the procedure and why, (b) Expected benefits, (c) Significant risks (contrast allergy, 0.1% mortality for diagnostic cath, stroke, bleeding at access site), (d) Alternatives (medical management \u2014 PA presents this as a real option), (e) Patient can refuse. Document this conversation. (3) PA scope in consult interpretation: this is EXACTLY the PA's role \u2014 translating specialty recommendations into patient-understandable language, answering questions, documenting decision, and coordinating follow-through. The PA does NOT need to defer everything to the cardiologist. (4) Medical management alternative: for stable angina with positive stress test, medical therapy (aspirin + statin + beta-blocker + ACEi) is a legitimate alternative to cath. COURAGE trial showed PCI not superior to medical therapy for mortality in stable angina. Presenting this option is ethically required. (5) Documentation: 'Patient counseled on nuclear stress test results, rationale for catheterization, risks/benefits/alternatives including medical management. Patient understands and agrees to proceed. Informed consent documented by cardiology prior to procedure.'"
     }
   }
 };

@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient on MTX for Psoriasis",
-      "icd": "Z00.00",
+      "problem": "Methotrexate exposure in early pregnancy \u2014 6 weeks",
+      "icd": "T45.1X1A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Patient on MTX for psoriasis, newly discovered pregnant 6 weeks \u2014 teratogen exposure"
+    },
+    {
+      "problem": "Psoriasis \u2014 moderate-severe, on methotrexate",
+      "icd": "L40.0",
+      "onset": "2021",
+      "status": "Active",
+      "notes": "MTX 15mg weekly for psoriasis \u2014 absolutely contraindicated in pregnancy"
+    },
+    {
+      "problem": "Spontaneous abortion risk elevated \u2014 MTX teratogenicity",
+      "icd": "O03.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "MTX inhibits folate metabolism \u2192 neural tube defects, craniofacial abnormalities, limb defects, spontaneous abortion"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Methotrexate 15mg PO weekly \u2014 STOP IMMEDIATELY",
+      "sig": "DISCONTINUE \u2014 absolutely contraindicated in pregnancy. Do not take another dose.",
+      "prescriber": "Dermatology",
+      "start": "2021",
+      "refills": 0,
+      "status": "HOLD \u2014 pregnancy"
+    },
+    {
+      "name": "Folic acid 5mg daily \u2014 start immediately",
+      "sig": "High-dose folic acid may partially mitigate MTX effect on folate metabolism \u2014 start now",
+      "prescriber": "OB referral",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active \u2014 urgent start"
+    },
+    {
+      "name": "Cyclosporine \u2014 alternative psoriasis treatment during pregnancy",
+      "sig": "Consider as bridge \u2014 safer pregnancy category than MTX",
+      "prescriber": "Dermatology/OB to co-manage",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Pending co-management"
     }
   ],
   "allergies": [
@@ -97,7 +127,49 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Pregnancy Labs",
+      "results": [
+        {
+          "test": "Urine hCG",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Quantitative beta-hCG",
+          "value": "14,200",
+          "unit": "mIU/mL",
+          "ref": "Varies by gestational age",
+          "flag": ""
+        },
+        {
+          "test": "CBC \u2014 WBC",
+          "value": "6.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": ""
+        },
+        {
+          "test": "ALT",
+          "value": "28",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "0.8",
+          "unit": "mg/dL",
+          "ref": "0.5-1.1 pregnant",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +202,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pharmacy-mtx-pregnancy",
-    "diagnosis": "See diagnosis \u2014 Patient on MTX for Psoriasis",
+    "diagnosis": "Methotrexate in Pregnancy \u2014 Absolute Contraindication, Urgent Teratogen Counseling and Discontinuation",
     "acuity": 1,
     "presentation": "Patient on MTX for Psoriasis",
     "category": "obstetric"
@@ -173,12 +245,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Patient on MTX for Psoriasis \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "MTX teratogen exposure \u2014 stop immediately, urgent OB referral (correct)",
+      "Continue MTX at reduced dose \u2014 NEVER, no safe dose in pregnancy",
+      "Wait until second trimester to discuss \u2014 INCORRECT, stop now",
+      "Reassure patient MTX is safe in first trimester \u2014 absolutely incorrect",
+      "Switch to leflunomide \u2014 also teratogenic category X",
+      "MTX washout before conception should have occurred \u2014 counseling failure"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +260,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: Patient on MTX for Psoriasis. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) Walk through teratogenicity mechanism, actual risk level, and who she calls in the next 24 hours \u2014 does she stop now? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: MTX teratogen exposure at 6 weeks \u2014 pharmacist's immediate action saves future complications. Key pharmacy learning: (1) MTX mechanism of teratogenicity: dihydrofolate reductase inhibitor \u2192 folate depletion \u2192 impaired DNA synthesis \u2192 teratogenicity. Peak risk: weeks 4-10 (organogenesis). This patient at week 6 is in the highest-risk window. MTX is FDA Pregnancy Category X (fetal risk clearly exceeds benefit). (2) Mandatory counseling before MTX prescribing: all patients on MTX must receive contraception counseling. Women: reliable contraception required DURING and for 1 menstrual cycle (at least 1 month) AFTER stopping MTX. Men: contraception for 3 months after stopping MTX (affects sperm). This counseling failure allowed this exposure. (3) Pharmacist action: call the prescriber immediately, call the OB/GYN immediately, document counseling, stop MTX prescription without another refill. Time is critical \u2014 every additional MTX dose increases fetal risk. (4) Folic acid 5mg (high dose): may partially mitigate folate-deficiency teratogenicity but does NOT make MTX safe. It is a harm reduction measure while the patient seeks OB consultation. (5) REMS programs: some high-risk teratogens have formal REMS (Risk Evaluation and Mitigation Strategy) programs with mandatory pregnancy testing and contraception verification (e.g., isotretinoin = iPLEDGE). MTX does not have a formal REMS but should."
     }
   }
 };

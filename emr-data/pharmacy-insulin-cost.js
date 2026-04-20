@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Patient Not Filling Insulin 2 Months",
-      "icd": "Z00.00",
+      "problem": "Insulin non-adherence \u2014 cost barrier, A1c 11.4%",
+      "icd": "E11.65",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Patient not filling insulin for 2 months \u2014 out-of-pocket cost $380/vial without insurance"
+    },
+    {
+      "problem": "Type 1 diabetes \u2014 insulin-dependent",
+      "icd": "E10.9",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "Cannot survive without insulin \u2014 this is a life-threatening access issue"
+    },
+    {
+      "problem": "Insurance gap \u2014 lost employer coverage",
+      "icd": "Z59.7",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Laid off 3 months ago \u2014 COBRA lapsed. Marketplace enrollment window open."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Insulin glargine U-100 (Lantus) \u2014 out of stock x2 months",
+      "sig": "Patient reports taking 'half doses' to stretch supply",
+      "prescriber": "Dr. Castillo",
+      "start": "2019",
+      "refills": 0,
+      "status": "Not filling \u2014 cost"
+    },
+    {
+      "name": "Insulin lispro (Humalog) \u2014 also unaffordable",
+      "sig": "Patient using expired pens from prior supply",
+      "prescriber": "Dr. Castillo",
+      "start": "2019",
+      "refills": 0,
+      "status": "Using expired supply"
     }
   ],
   "allergies": [
@@ -97,7 +119,49 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Diabetes Monitoring",
+      "results": [
+        {
+          "test": "HbA1c",
+          "value": "11.4",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "Fasting glucose",
+          "value": "342",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "Ketones (urine)",
+          "value": "Trace",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": ""
+        },
+        {
+          "test": "Potassium",
+          "value": "4.2",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +194,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "pharmacy-insulin-cost",
-    "diagnosis": "See diagnosis \u2014 Patient Not Filling Insulin 2 Months",
+    "diagnosis": "Insulin Non-Adherence from Cost Barrier \u2014 Pharmacist Intervention to Prevent DKA",
     "acuity": 3,
     "presentation": "Patient Not Filling Insulin 2 Months",
     "category": "endocrine"
@@ -173,12 +237,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Patient Not Filling Insulin 2 Months \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Insulin cost barrier \u2014 pharmacist patient advocacy and access programs (correct)",
+      "Patient non-compliance \u2014 this framing misses the social determinant",
+      "Intensify insulin regimen \u2014 inappropriate without first solving access",
+      "Switch to oral medications \u2014 T1DM cannot use oral medications alone",
+      "Accept poor control \u2014 dangerous, DKA risk is immediate",
+      "Hospitalize for glucose control \u2014 unnecessary if access problem is solved"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +252,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: Patient Not Filling Insulin 2 Months. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) Walk through manufacturer programs, biosimilar options, and formulary alternatives \u2014 and what you communicate to the prescriber. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: insulin non-adherence from cost barrier \u2014 pharmacist intervention point. Key pharmacy learning: (1) Manufacturer programs: Eli Lilly ($35/month insulin cap), Novo Nordisk (patient assistance program), Sanofi (Insulins Valyou savings program). These programs provide insulin free or nearly free for uninsured/underinsured patients. Pharmacist initiates enrollment \u2014 this takes 10-15 minutes. (2) Walmart ReliOn insulin: OTC human insulins (NPH, Regular) available for $25/vial. Not ideal for T1DM (human insulin has different PK than analogs) but it prevents DKA until access is restored. Pharmacist counsels on conversion: glargine \u2192 NPH requires different timing and dosing education. (3) Marketplace/ACA enrollment: pharmacist identifies open enrollment or special enrollment period (loss of employer coverage = special enrollment 60-day window). Navigate to Healthcare.gov \u2014 many patients don't know this exists. (4) Ketones trace: this patient is days away from DKA. Urgent intervention, not next week follow-up. (5) The pharmacist's documentation: 'Patient counseled on Lilly insulin assistance program \u2014 enrollment initiated during visit. Patient provided 1-month ReliOn NPH as bridge. Prescriber notified of access issue. Marketplace application assistance provided.' This note protects the pharmacist and creates a paper trail for the system."
     }
   }
 };

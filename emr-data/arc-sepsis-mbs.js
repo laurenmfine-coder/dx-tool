@@ -27,43 +27,43 @@ window.EMR_DATA = {
       "icd": "A41.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "Gerald Park. E. coli from urinary source. MBS focus: molecular mechanism from LPS to organ dysfunction."
+      "notes": "Gerald Park, E. coli pan-sensitive. MBS focus: molecular mechanism from LPS to SIRS to organ failure."
     },
     {
-      "problem": "Systemic inflammatory response \u2014 cytokine storm",
+      "problem": "Gram-negative sepsis pathophysiology \u2014 LPS-TLR4 cascade",
       "icd": "A41.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "IL-6 2400 pg/mL, TNF-\u03b1 elevated \u2014 downstream of TLR4 activation"
+      "notes": "Key MBS teaching: LPS \u2192 TLR4 \u2192 NF-\u03baB \u2192 cytokines (IL-1, IL-6, TNF-\u03b1) \u2192 endothelial dysfunction \u2192 DIC"
     },
     {
-      "problem": "Endothelial dysfunction \u2014 NO-mediated vasodilation",
-      "icd": "R57.2",
+      "problem": "Multi-organ dysfunction \u2014 sepsis-induced",
+      "icd": "R65.20",
       "onset": "2024",
       "status": "Active",
-      "notes": "iNOS induction by LPS \u2192 massive NO synthesis \u2192 refractory vasodilation \u2192 vasopressor requirement"
+      "notes": "AKI + hemodynamic instability + coagulopathy \u2014 all explainable by molecular cascade"
     }
   ],
   "medications": [
     {
-      "name": "Piperacillin-tazobactam 3.375g IV q8h",
-      "sig": "Beta-lactam/beta-lactamase inhibitor combination \u2014 empiric gram-negative coverage",
+      "name": "Piperacillin-tazobactam 4.5g IV q8h",
+      "sig": "IV extended infusion over 4h \u2014 maximize time above MIC for E. coli",
+      "prescriber": "ID",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Norepinephrine infusion \u2014 vasopressor for distributive shock",
+      "sig": "Alpha-1 agonist \u2014 counteracts vasodilation from eNOS activation",
       "prescriber": "ICU",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Norepinephrine 0.1 mcg/kg/min (titrating)",
-      "sig": "Alpha-1 agonist \u2014 vasoconstriction to restore MAP \u226565. First-line vasopressor in septic shock.",
-      "prescriber": "ICU",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "Active"
-    },
-    {
-      "name": "Hydrocortisone 200mg/day infusion (vasopressor-refractory)",
-      "sig": "Relative adrenal insufficiency \u2014 improves vasopressor response. Add if norepinephrine >0.25 mcg/kg/min.",
+      "name": "Dexamethasone 6mg IV daily x10 days",
+      "sig": "Corticosteroid \u2014 inhibits NF-\u03baB, reduces cytokine storm",
       "prescriber": "ICU",
       "start": "11/2024",
       "refills": 0,
@@ -133,46 +133,60 @@ window.EMR_DATA = {
       "panel": "Sepsis Molecular Markers",
       "results": [
         {
-          "test": "IL-6",
-          "value": "2400",
-          "unit": "pg/mL",
-          "ref": "<7",
+          "test": "Lactate",
+          "value": "4.2",
+          "unit": "mmol/L",
+          "ref": "<2.0",
           "flag": "H"
         },
         {
           "test": "Procalcitonin",
           "value": "42",
           "unit": "ng/mL",
-          "ref": "<0.25",
-          "flag": "H"
-        },
-        {
-          "test": "TNF-\u03b1",
-          "value": "Elevated",
-          "unit": "pg/mL",
-          "ref": "<8.1",
-          "flag": "H"
-        },
-        {
-          "test": "D-dimer",
-          "value": "12.4",
-          "unit": "\u03bcg/mL",
           "ref": "<0.5",
           "flag": "H"
         },
         {
-          "test": "Lactate",
-          "value": "4.8",
-          "unit": "mmol/L",
-          "ref": "<2.0",
+          "test": "IL-6 (research)",
+          "value": "Elevated \u2014 not quantified clinically",
+          "unit": "",
+          "ref": "",
           "flag": "H"
         },
         {
           "test": "Fibrinogen",
-          "value": "88",
+          "value": "680",
           "unit": "mg/dL",
           "ref": "200-400",
-          "flag": "L"
+          "flag": "H"
+        },
+        {
+          "test": "D-dimer",
+          "value": "8,400",
+          "unit": "ng/mL",
+          "ref": "<500",
+          "flag": "H"
+        },
+        {
+          "test": "PT",
+          "value": "18",
+          "unit": "sec",
+          "ref": "11-13.5",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "22.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Bands",
+          "value": "28",
+          "unit": "%",
+          "ref": "0-10",
+          "flag": "H"
         }
       ]
     }
@@ -209,7 +223,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-sepsis-mbs",
-    "diagnosis": "Urosepsis \u2014 E. coli LPS-TLR4 Pathway, Cytokine Storm, Complement Cascade MBS Focus",
+    "diagnosis": "E. coli Urosepsis \u2014 Pathophysiology: LPS-TLR4 Cascade to Cytokine Storm and Organ Failure",
     "acuity": 2,
     "presentation": "Gerald Park",
     "category": "infectious"
@@ -247,12 +261,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "E. coli urosepsis \u2014 LPS/TLR4/cytokine cascade (correct)",
-      "Gram-positive sepsis \u2014 LTA/peptidoglycan pathway, different PRR",
-      "SIRS from non-infectious cause \u2014 procalcitonin 42 and blood cultures confirm infectious etiology",
-      "Viral sepsis \u2014 different innate immune activation pathway",
-      "Fungal sepsis \u2014 beta-glucan/dectin-1 pathway",
-      "Sterile inflammatory syndrome \u2014 cultures growing gram-negative rods rule this out"
+      "E. coli urosepsis \u2014 LPS-TLR4 molecular cascade (correct)",
+      "Gram-positive sepsis \u2014 no LPS, different pattern receptor (TLR2/NOD)",
+      "Viral sepsis \u2014 no PAMPs, different innate immune activation",
+      "Fungal sepsis \u2014 beta-glucan receptor, different PRR",
+      "Sterile SIRS \u2014 no PAMPs, DAMP-mediated only",
+      "DIC as primary \u2014 DIC is consequence of sepsis, not primary diagnosis"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -262,7 +276,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: Gerald Park. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Diagnosis: E. coli urosepsis \u2014 molecular mechanism. Key MBS learning: (1) LPS \u2192 TLR4 pathway: E. coli outer membrane lipopolysaccharide (LPS/endotoxin) binds LPS-binding protein in plasma \u2192 transfers to CD14 on macrophage surface \u2192 CD14 presents to TLR4/MD-2 complex \u2192 MyD88 adaptor protein recruited \u2192 NF-\u03baB activation \u2192 transcription of TNF-\u03b1, IL-1\u03b2, IL-6, IL-12 \u2192 cytokine storm. (2) iNOS induction: LPS + TNF-\u03b1 + IL-1\u03b2 \u2192 iNOS (inducible nitric oxide synthase) gene transcription in endothelial cells, macrophages, smooth muscle \u2192 massive NO synthesis \u2192 soluble guanylyl cyclase \u2192 cGMP \u2192 vascular smooth muscle relaxation \u2192 profound vasodilation \u2192 refractory hypotension. Norepinephrine overcomes iNOS-mediated vasodilation via alpha-1 receptor. (3) Complement cascade in sepsis: LPS activates complement via the alternative pathway \u2192 C3a and C5a are anaphylatoxins \u2192 mast cell degranulation \u2192 more histamine/vasodilation \u2192 C5a also acts as opsonin but at high levels induces immunosuppression ('late sepsis immunoparalysis'). (4) Procalcitonin biology: normally calcitonin precursor made in thyroid C cells. In sepsis: LPS + cytokines induce ubiquitous procalcitonin expression in ALL tissues, dramatically elevating serum levels. PCT is a direct reporter of innate immune activation severity. Half-life 24h \u2192 useful for de-escalation decisions. (5) The DIC connection: fibrinogen 88 = consumption in microthrombi. Tissue factor released by endothelial damage \u2192 extrinsic pathway \u2192 thrombin \u2192 fibrin mesh \u2192 platelet consumption. Simultaneously, tPA released \u2192 fibrinolysis \u2192 D-dimer elevation. Classic DIC from sepsis = simultaneous clotting + lysis."
+      "final": "Diagnosis: E. coli urosepsis \u2014 MBS focus on molecular mechanism. Key MBS learning: (1) LPS (lipopolysaccharide) \u2192 Toll-Like Receptor 4 (TLR4) on macrophages/endothelium \u2192 MyD88 adaptor \u2192 NF-\u03baB activation \u2192 transcription of pro-inflammatory cytokines: TNF-\u03b1 (early, amplifier), IL-1\u03b2 (fever, endothelial activation), IL-6 (acute phase proteins, fever). This is the 'cytokine storm.' (2) Endothelial activation: TNF-\u03b1 + IL-1\u03b2 \u2192 upregulate ICAM-1, VCAM-1 \u2192 neutrophil adhesion and transmigration \u2192 tissue inflammation. Also activate eNOS \u2192 NO production \u2192 vasodilation \u2192 distributive shock (why norepinephrine works \u2014 alpha-1 agonist restores vasoconstriction). (3) Coagulopathy mechanism: LPS \u2192 tissue factor expression on endothelium + monocytes \u2192 extrinsic clotting cascade activation \u2192 fibrin formation \u2192 microthrombi \u2192 organ ischemia. Simultaneously, antithrombin and protein C depleted \u2192 DIC. (4) Lactate: reflects anaerobic metabolism from tissue hypoperfusion. Lactate 4.2 = cellular oxygen debt. Lactate clearance is the treatment response metric \u2014 target >10% reduction per hour with resuscitation. (5) Procalcitonin: produced by non-thyroidal cells (liver, lung, kidney) in response to bacterial infection (not viral). Rises within 6-12h, peaks 24h. Use for antibiotic de-escalation: procalcitonin <0.25 \u2192 consider stopping antibiotics at day 5-7."
     }
   }
 };

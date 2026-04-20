@@ -23,21 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Robert Diaz",
-      "icd": "Z00.00",
-      "onset": "2024",
+      "problem": "T2DM uncontrolled \u2014 A1c 9.8%",
+      "icd": "E11.65",
+      "onset": "2016",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Robert Diaz \u2014 intensification needed. eGFR 42 limits drug choices."
+    },
+    {
+      "problem": "CKD Stage 3 \u2014 eGFR 42",
+      "icd": "N18.3",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Limits SGLT2i (empagliflozin/dapagliflozin contraindicated below eGFR 45), affects metformin dosing"
+    },
+    {
+      "problem": "Microalbuminuria \u2014 ACR 110 mg/g",
+      "icd": "E11.65",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "GLP-1 agonist or SGLT2i preferred for nephroprotection \u2014 eGFR limits SGLT2i here"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Metformin 500mg BID (REDUCED from 1000mg BID for CKD)",
+      "sig": "Take twice daily \u2014 hold if eGFR falls below 30",
+      "prescriber": "Dr. Kim",
+      "start": "2017",
+      "refills": 5,
+      "status": "Active \u2014 dose reduced for eGFR 42"
+    },
+    {
+      "name": "Semaglutide 0.5mg SQ weekly (Ozempic) \u2014 NEW",
+      "sig": "Subcutaneous weekly \u2014 titrate to 1mg at 4 weeks if tolerated",
+      "prescriber": "Dr. Kim",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active \u2014 new (safe in CKD, no dose adjustment needed)"
+    },
+    {
+      "name": "Glipizide 5mg daily \u2014 CONTINUE but monitor for hypoglycemia",
+      "sig": "Take daily \u2014 sulfonylurea, hypoglycemia risk in CKD (reduced clearance)",
+      "prescriber": "Dr. Kim",
+      "start": "2021",
+      "refills": 4,
+      "status": "Active \u2014 hypoglycemia monitoring required"
     }
   ],
   "allergies": [
@@ -97,7 +127,56 @@ window.EMR_DATA = {
       "plan": "Referral to pharmacy. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/01/2024",
+      "panel": "Diabetes and Renal Panel",
+      "results": [
+        {
+          "test": "HbA1c",
+          "value": "9.8",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "eGFR",
+          "value": "42",
+          "unit": "mL/min/1.73m\u00b2",
+          "ref": ">60",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.6",
+          "unit": "mg/dL",
+          "ref": "0.6-1.2",
+          "flag": "H"
+        },
+        {
+          "test": "Urine ACR",
+          "value": "110",
+          "unit": "mg/g",
+          "ref": "<30",
+          "flag": "H"
+        },
+        {
+          "test": "Potassium",
+          "value": "4.9",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
+        },
+        {
+          "test": "Fasting glucose",
+          "value": "264",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +209,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-diabetes-pharmacy",
-    "diagnosis": "See diagnosis \u2014 Robert Diaz",
+    "diagnosis": "T2DM + CKD Stage 3 + A1c 9.8% \u2014 Pharmacy: SGLT2i Contraindicated, GLP-1 Dosing, Metformin Safety",
     "acuity": 3,
     "presentation": "Robert Diaz",
     "category": "endocrine"
@@ -173,12 +252,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Robert Diaz \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "GLP-1 agonist as intensification \u2014 safe in CKD, nephroprotective (correct)",
+      "Empagliflozin (SGLT2i) \u2014 CONTRAINDICATED at eGFR 42 for glycemic benefit",
+      "Insulin initiation now \u2014 reasonable but GLP-1 preferred given obesity and A1c",
+      "Increase metformin to 1000mg BID \u2014 contraindicated at eGFR 42",
+      "Sulfonylurea dose increase \u2014 hypoglycemia risk in CKD, avoid",
+      "ACEi needed \u2014 not a pharmacy intensification issue"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -188,7 +267,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a pharmacy case with chief complaint: Robert Diaz. What are the most important questions for a pharmacy to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a pharmacy perspective, what is the most critical finding that narrows this differential? What is the pharmacy-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the pharmacy's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for pharmacy. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) pharmacy assessment revealed the key discriminating features. (3) The physician wants to add dapagliflozin 10mg and semaglutide 0.5mg weekly to Robert's regimen. He is currently on metformin 1000mg BID and glipizide 10mg BID. His CrCl is 42. Walk through the CKD dose adjustments, the mechanism of SGLT2i renal protection at this GFR, the hypoglycemia risk from the glipizide combination, and what monitoring you set up. (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: T2DM intensification with CKD \u2014 key pharmacy drug selection. Key pharmacy learning: (1) SGLT2i eGFR thresholds: empagliflozin (Jardiance) \u2014 approved for cardiovascular/renal benefit down to eGFR 20 but for glycemic benefit requires eGFR \u226545. Dapagliflozin (Farxiga) \u2014 for glycemic benefit eGFR \u226545, for heart failure/CKD progression benefit eGFR \u226525. At eGFR 42, SGLT2i glycemic benefit is reduced \u2014 GLP-1 is preferred. (2) GLP-1 in CKD: semaglutide does NOT require dose adjustment for renal impairment (it is largely degraded by ubiquitous peptidases, not renally cleared). Safe in all stages of CKD. GLP-1s also have nephroprotective effects \u2014 FLOW trial (semaglutide) showed 24% reduction in CKD progression. (3) Metformin in CKD: safe to eGFR 30, use with caution 30-45 (reduce dose), HOLD if eGFR <30. Risk: lactic acidosis from accumulation (rare but serious). This patient at eGFR 42 \u2192 reduce dose to 500mg BID, acceptable. (4) Sulfonylurea (glipizide) in CKD: accumulation of active metabolites \u2192 prolonged hypoglycemia. If eGFR falls further, consider discontinuing. Monitor glucose more frequently. (5) Potassium monitoring: CKD + ACEi + possible new SGLT2i later \u2192 hyperkalemia risk. Recheck potassium 4-6 weeks after any renal-affecting drug change."
     }
   }
 };

@@ -23,59 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Cisplatin nephrotoxicity \u2014 AKI rising creatinine",
-      "icd": "T45.1X5A",
+      "problem": "Cisplatin nephrotoxicity \u2014 proximal tubule injury",
+      "icd": "N14.2",
       "onset": "2024",
       "status": "Active",
-      "notes": "Cycle 3 cisplatin. Creatinine 2.1 (baseline 0.9). Despite pre-hydration \u2014 tubular damage occurring."
+      "notes": "Creatinine 2.1 from baseline 0.9 after cisplatin cycle 2. Electrolyte wasting."
     },
     {
-      "problem": "Hypomagnesemia \u2014 cisplatin-induced tubular wasting",
+      "problem": "Hypomagnesemia \u2014 renal tubular wasting",
       "icd": "E83.42",
       "onset": "2024",
       "status": "Active",
-      "notes": "Mg 1.1 \u2014 cisplatin damages proximal tubule transporters including TRPM6 \u2192 magnesium wasting"
+      "notes": "Mg 1.1 \u2014 cisplatin damages Mg reabsorption in thick ascending limb. Symptomatic tetany risk."
     },
     {
-      "problem": "Hypokalemia \u2014 secondary to hypomagnesemia",
-      "icd": "E87.6",
+      "problem": "Cervical cancer \u2014 on cisplatin chemoradiation",
+      "icd": "C53.9",
       "onset": "2024",
       "status": "Active",
-      "notes": "K+ 3.0 \u2014 magnesium required for renal potassium retention (ROMK channel). Treat Mg first."
+      "notes": "Cisplatin 40mg/m\u00b2 weekly concurrent with radiation. Cannot switch \u2014 cisplatin is standard of care."
     }
   ],
   "medications": [
     {
-      "name": "NS 250 mL/hr IV pre-cisplatin and 6h post \u2014 hydration protocol",
-      "sig": "Aggressive pre/post-hydration \u2014 dilutes cisplatin in tubular lumen, reduces concentration",
+      "name": "Pre-hydration: NS 1-2L IV before cisplatin",
+      "sig": "IV bolus BEFORE each cisplatin dose \u2014 forced diuresis reduces tubule concentration",
+      "prescriber": "Oncology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active protocol"
+    },
+    {
+      "name": "Amifostine 910mg/m\u00b2 IV before cisplatin (if used)",
+      "sig": "IV 30 min before cisplatin \u2014 free radical scavenger, nephroprotective",
+      "prescriber": "Oncology",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Consider \u2014 evidence moderate"
+    },
+    {
+      "name": "Magnesium sulfate 2g IV over 1h \u2014 replacement",
+      "sig": "IV over 1 hour \u2014 renal wasting requires repeated replacement",
       "prescriber": "Oncology",
       "start": "11/2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Magnesium sulfate 2g IV over 2h \u2014 acute replacement",
-      "sig": "IV magnesium \u2014 replace before potassium (hypokalemia won't correct without magnesium)",
+      "name": "Oral magnesium oxide 400mg BID \u2014 maintenance",
+      "sig": "Take twice daily \u2014 ongoing replacement for renal wasting",
       "prescriber": "Oncology",
       "start": "11/2024",
-      "refills": 0,
+      "refills": 4,
       "status": "Active"
-    },
-    {
-      "name": "KCl 40mEq in IV fluids \u2014 potassium replacement",
-      "sig": "After magnesium replacement \u2014 K+ won't stay up without adequate Mg",
-      "prescriber": "Oncology",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "Active"
-    },
-    {
-      "name": "Amifostine 910 mg/m\u00b2 IV (if next cycle given)",
-      "sig": "Cytoprotective \u2014 free radical scavenger, reduces cisplatin nephrotoxicity. Selectively protects normal tissue.",
-      "prescriber": "Oncology",
-      "start": "11/2024",
-      "refills": 0,
-      "status": "Planned next cycle"
     }
   ],
   "allergies": [
@@ -138,7 +138,7 @@ window.EMR_DATA = {
   "labs": [
     {
       "date": "11/18/2024",
-      "panel": "Cisplatin Toxicity Panel",
+      "panel": "Cisplatin Nephrotoxicity Panel",
       "results": [
         {
           "test": "Creatinine",
@@ -146,6 +146,13 @@ window.EMR_DATA = {
           "unit": "mg/dL",
           "ref": "0.6-1.2",
           "flag": "H"
+        },
+        {
+          "test": "eGFR",
+          "value": "32",
+          "unit": "mL/min",
+          "ref": ">60",
+          "flag": "L"
         },
         {
           "test": "Magnesium",
@@ -162,24 +169,24 @@ window.EMR_DATA = {
           "flag": "L"
         },
         {
-          "test": "Urine magnesium (24h)",
-          "value": "Elevated \u2014 inappropriate magnesuria",
-          "unit": "",
-          "ref": "Should be low with serum Mg deficiency",
-          "flag": "H"
-        },
-        {
-          "test": "BUN",
-          "value": "36",
+          "test": "Phosphate",
+          "value": "1.8",
           "unit": "mg/dL",
-          "ref": "7-20",
+          "ref": "2.5-4.5",
+          "flag": "L"
+        },
+        {
+          "test": "Urine Mg (fractional excretion)",
+          "value": "Elevated \u2014 inappropriate renal wasting",
+          "unit": "",
+          "ref": "Should be <2%",
           "flag": "H"
         },
         {
-          "test": "Urine cast \u2014 granular casts",
-          "value": "Present",
-          "unit": "",
-          "ref": "None",
+          "test": "Urine NAG (tubular injury marker)",
+          "value": "Elevated",
+          "unit": "U/L",
+          "ref": "Elevated = tubular injury",
           "flag": "H"
         }
       ]
@@ -217,7 +224,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "mbs-cisplatin-tubule",
-    "diagnosis": "Cisplatin Nephrotoxicity \u2014 Proximal Tubule Oxidative Injury, Magnesium Wasting, AKI Prevention",
+    "diagnosis": "Cisplatin Nephrotoxicity \u2014 Proximal Tubule Mitochondrial Injury, Hypomagnesemia, Rising Creatinine",
     "acuity": 3,
     "presentation": "Cisplatin Nephrotoxicity",
     "category": "renal"
@@ -255,12 +262,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Cisplatin nephrotoxicity \u2014 tubular oxidative injury (correct)",
-      "Pre-renal AKI \u2014 granular casts and tubular wasting pattern indicate intrinsic injury, not pre-renal",
-      "Contrast nephropathy \u2014 no contrast given, cisplatin is the nephrotoxin",
-      "Aminoglycoside nephrotoxicity \u2014 not on aminoglycosides",
-      "Glomerulonephritis \u2014 tubular cast pattern, not nephritic",
-      "Tumor lysis syndrome \u2014 electrolytes wrong pattern (hyperkalemia/hyperphosphatemia in TLS)"
+      "Cisplatin nephrotoxicity \u2014 proximal tubule injury (correct)",
+      "Pre-renal AKI \u2014 forced hydration protocol should prevent; FENa distinguishes",
+      "Radiation nephropathy \u2014 later onset, different imaging pattern",
+      "Contrast nephropathy \u2014 if contrast CT used concurrently",
+      "ATN from another cause \u2014 cisplatin is the clear temporal relationship",
+      "Fanconi syndrome from cisplatin \u2014 aminoaciduria/glycosuria would confirm full proximal dysfunction"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -270,7 +277,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a mbs case with chief complaint: Cisplatin Nephrotoxicity. What are the most important questions for a mbs to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a mbs perspective, what is the most critical finding that narrows this differential? What is the mbs-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the mbs's specific role in management? What interprofessional communication is needed?",
-      "final": "Diagnosis: cisplatin nephrotoxicity. Key MBS learning: (1) Cisplatin mechanism of nephrotoxicity: cisplatin is concentrated 5x in proximal tubule cells \u2192 enters via organic cation transporters (OCT2) \u2192 reacts with cellular DNA and proteins \u2192 mitochondrial dysfunction \u2192 reactive oxygen species (ROS) generation \u2192 oxidative damage to tubule cell membranes \u2192 tubular cell apoptosis/necrosis \u2192 AKI. Granular casts = shed tubule cells confirming tubular injury. (2) Magnesium wasting mechanism: TRPM6 is the magnesium transporter in proximal and distal tubule. Cisplatin damages tubule cells \u2192 TRPM6 function lost \u2192 inability to reabsorb filtered magnesium \u2192 hypomagnesuria becomes inappropriate magnesuria. Chronic cisplatin causes irreversible TRPM6 damage \u2014 40-100% of patients develop lasting hypomagnesemia. (3) Hypokalemia from hypomagnesemia: ROMK channels (renal outer medullary potassium channels) in collecting duct require intracellular Mg++ to close and retain potassium. Without Mg: ROMK channels stay open \u2192 potassium wasted in urine. Classic presentation: hypokalemia resistant to potassium replacement until magnesium is corrected. ALWAYS replace magnesium first. (4) Hydration protocol: NS 250 mL/hr pre and post-cisplatin dilutes tubular cisplatin concentration and maintains high urine flow. Reduces nephrotoxicity 40%. Mannitol historically added \u2014 evidence less clear. (5) Amifostine (WR-2721): prodrug activated preferentially by alkaline phosphatase in normal tissues (vs lower phosphatase in tumors) \u2192 free radical scavenger. Selectively cytoprotective for kidneys, salivary glands, neurotoxicity \u2014 not tumor cells. FDA-approved for cisplatin nephrotoxicity prevention."
+      "final": "Diagnosis: cisplatin nephrotoxicity \u2014 proximal tubule + thick ascending limb injury. Key MBS learning: (1) Cisplatin mechanism of nephrotoxicity: cisplatin accumulates in proximal tubular cells (via OCT2 transporter, high expression in PT) \u2192 intracellular aquation \u2192 platinum-DNA adducts \u2192 mitochondrial dysfunction \u2192 ROS generation \u2192 tubular cell apoptosis. Also damages thick ascending limb \u2192 Mg and Ca wasting. (2) Electrolyte wasting pattern: cisplatin damages the Mg-reabsorbing transporter (TRPM6) in the thick ascending limb \u2192 renal Mg wasting \u2192 hypomagnesemia persists despite replacement. Also damages NaPi-IIa in proximal tubule \u2192 phosphate wasting \u2192 hypophosphatemia. (3) Prevention: forced diuresis with 1-2L saline pre-hydration and mannitol reduces tubular concentration of cisplatin. Amifostine (free radical scavenger) can reduce nephrotoxicity but is not universally used. (4) OCT2 transporter relevance: cisplatin selectivity for kidney is because OCT2 (organic cation transporter 2) is expressed highly in proximal tubule and not heart/nerve \u2192 explains why nephrotoxicity > cardiotoxicity at standard doses. Cimetidine inhibits OCT2 and has been studied as a protective strategy. (5) Management of established nephrotoxicity: cannot reverse tubular injury. Support: aggressive magnesium replacement (IV + oral), electrolyte replacement, hold cisplatin if creatinine >1.5x baseline \u2014 oncology decision. Most nephrotoxicity is reversible over weeks to months."
     }
   }
 };

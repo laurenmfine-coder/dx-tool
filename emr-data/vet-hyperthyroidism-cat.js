@@ -24,20 +24,50 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Weight Loss Despite Good Appetite",
-      "icd": "Z00.00",
+      "problem": "Hyperthyroidism \u2014 domestic shorthair cat, 14 years",
+      "icd": "E05.90",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "T4 12.8 \u03bcg/dL (severely elevated), weight loss 18% over 4 months despite good appetite"
+    },
+    {
+      "problem": "Hypertension \u2014 secondary to hyperthyroidism",
+      "icd": "I10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "BP 198/140 \u2014 systolic >200 = retinal detachment risk. Treat simultaneously."
+    },
+    {
+      "problem": "Cardiac changes \u2014 hyperthyroid cardiomyopathy",
+      "icd": "I43",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Gallop rhythm, cardiac hypertrophy on echo \u2014 hyperthyroid cardiomyopathy, may partially reverse with treatment"
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Ana Torres, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Methimazole 2.5mg PO BID \u2014 start low",
+      "sig": "Give orally twice daily \u2014 antithyroid drug. Recheck T4 in 2-4 weeks.",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Amlodipine 0.625mg PO daily \u2014 antihypertensive",
+      "sig": "Give orally once daily \u2014 calcium channel blocker, first-line for feline hypertension",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Atenolol 6.25mg PO q12h \u2014 heart rate control",
+      "sig": "Give orally twice daily \u2014 beta-blocker for cardiac protection",
+      "prescriber": "Dr. Chen DVM",
+      "start": "11/2024",
+      "refills": 2,
       "status": "Active"
     }
   ],
@@ -86,8 +116,72 @@ window.EMR_DATA = {
       "plan": "Referral to vet. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/18/2024",
+      "panel": "Feline Hyperthyroidism Panel",
+      "results": [
+        {
+          "test": "Total T4",
+          "value": "12.8",
+          "unit": "\u03bcg/dL",
+          "ref": "0.8-4.0",
+          "flag": "H"
+        },
+        {
+          "test": "BUN",
+          "value": "28",
+          "unit": "mg/dL",
+          "ref": "14-36",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.6-2.4",
+          "flag": ""
+        },
+        {
+          "test": "Phosphorus",
+          "value": "3.8",
+          "unit": "mg/dL",
+          "ref": "3.1-7.5",
+          "flag": ""
+        },
+        {
+          "test": "ALT",
+          "value": "88",
+          "unit": "U/L",
+          "ref": "12-130",
+          "flag": ""
+        },
+        {
+          "test": "Blood pressure (systolic)",
+          "value": "198",
+          "unit": "mmHg",
+          "ref": "<160",
+          "flag": "H"
+        },
+        {
+          "test": "Heart rate",
+          "value": "224",
+          "unit": "bpm",
+          "ref": "120-200",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/18/2024",
+      "study": "Echocardiogram + Thoracic Radiographs",
+      "indication": "Hyperthyroidism with gallop rhythm \u2014 cardiac evaluation",
+      "findings": "Echo: Mild left ventricular hypertrophy, mild left atrial enlargement, EF preserved 68%. No pleural effusion. HR 224 bpm \u2014 compensated. Thoracic radiographs: mild cardiac enlargement, no pulmonary edema.",
+      "impression": "Hyperthyroid cardiomyopathy, compensated. No heart failure currently. Expect partial regression of cardiac changes with hyperthyroidism treatment."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -119,7 +213,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "vet-hyperthyroidism-cat",
-    "diagnosis": "See diagnosis \u2014 Weight Loss Despite Good Appetite",
+    "diagnosis": "Feline Hyperthyroidism \u2014 T4 Markedly Elevated, Concurrent Hypertension and Cardiac Changes",
     "acuity": 3,
     "presentation": "Weight Loss Despite Good Appetite",
     "category": "endocrine"
@@ -166,12 +260,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Cat \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Feline hyperthyroidism \u2014 methimazole + antihypertensive (correct)",
+      "Chronic kidney disease \u2014 weight loss, elevated BUN (but T4 is diagnostic)",
+      "Diabetes mellitus \u2014 weight loss despite appetite (T4 markedly elevated)",
+      "Cardiac primary disease \u2014 cardiac changes secondary to hyperthyroidism",
+      "Lymphoma \u2014 weight loss in older cat (T4 diagnostic)",
+      "Hypertension from primary renal disease \u2014 hyperthyroidism causing both"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -181,7 +275,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a vet case with chief complaint: Weight Loss Despite Good Appetite. What are the most important questions for a vet to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a vet perspective, what is the most critical finding that narrows this differential? What is the vet-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the vet's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for vet. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) vet assessment revealed the key discriminating features. (3) Feline hyperthyroidism: why is this the most common endocrine disorder in older cats \u2014 and what is the one-health concern with the food can lining hypothesis? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: feline hyperthyroidism with secondary hypertension and cardiomyopathy. Key veterinary learning: (1) Feline hyperthyroidism = most common endocrine disease in older cats (>10 years). Caused by functional thyroid adenoma (benign). Classic: weight loss despite polyphagia, vomiting, diarrhea, hyperactivity, poor coat. One-health note: BPA (bisphenol-A) from can linings is one proposed environmental cause \u2014 affects thyroid receptor signaling. (2) Critical pre-treatment consideration: masked CKD. Hyperthyroidism increases GFR. Treating hyperthyroidism \u2192 GFR normalizes \u2192 previously masked CKD becomes apparent. ALWAYS recheck creatinine 3-4 weeks after starting methimazole \u2014 some cats have severe CKD 'unmasked.' If CKD severe, may need to balance hyperthyroid treatment vs. renal perfusion. (3) Treatment options: methimazole (reversible medical management \u2014 useful for staging), radioactive iodine I-131 (curative \u2014 gold standard), surgical thyroidectomy, Hill's y/d prescription diet (low iodine). Most referral-level practices recommend I-131. (4) Hypertension >200 mmHg systolic = end-organ damage risk: retinal detachment (blindness), hypertensive encephalopathy, cardiac damage. Treat WITH hyperthyroidism, not after. (5) Cardiac hypertrophy may reverse: 50-70% of hyperthyroid cardiomyopathy regresses with successful T4 normalization."
     }
   }
 };
