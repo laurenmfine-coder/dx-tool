@@ -507,7 +507,22 @@ window.RDX_CASE_TOKENS = {
     "cross-postop-deterioration": "a4cd-ef8b",
     "evali-vaping": "7dab-8970",
     "tb-immigration": "75e4-b422",
-    "pcp-hiv-adult": "11f9-f9fc"
+    "pcp-hiv-adult": "11f9-f9fc",
+    "vet-gastric-dilatation-volvulus": "fd7f-b4fd",
+    "vet-feline-urethral-obstruction": "4442-d579",
+    "vet-anaphylaxis-bee-sting": "3b2d-75f9",
+    "vet-diabetic-ketoacidosis-cat": "ac74-6ad6",
+    "vet-hemorrhagic-gastroenteritis": "a020-9ffc",
+    "vet-parvovirus": "83a9-4401",
+    "vet-cardiac-chf-dog": "368a-a910",
+    "vet-hyperthyroidism-cat": "5eac-047a",
+    "vet-equine-colic": "5abd-33ee",
+    "vet-salmonella-zoonosis": "6b73-01cd",
+    "vet-xylitol-toxicity": "1a91-c8ee",
+    "vet-rodenticide-coagulopathy": "0702-bb97",
+    "vet-gi-stasis-rabbit": "e8b5-99d4",
+    "vet-intervertebral-disc-disease": "a7f6-7920",
+    "vet-dystocia-dog": "c1cf-7c2e"
   },
   "tokenToSlug": {
     "0238-e580": "stemi-v1",
@@ -1014,6 +1029,21 @@ window.RDX_CASE_TOKENS = {
     "a4cd-ef8b": "cross-postop-deterioration",
     "7dab-8970": "evali-vaping",
     "75e4-b422": "tb-immigration",
-    "11f9-f9fc": "pcp-hiv-adult"
+    "11f9-f9fc": "pcp-hiv-adult",
+    "fd7f-b4fd": "vet-gastric-dilatation-volvulus",
+    "4442-d579": "vet-feline-urethral-obstruction",
+    "3b2d-75f9": "vet-anaphylaxis-bee-sting",
+    "ac74-6ad6": "vet-diabetic-ketoacidosis-cat",
+    "a020-9ffc": "vet-hemorrhagic-gastroenteritis",
+    "83a9-4401": "vet-parvovirus",
+    "368a-a910": "vet-cardiac-chf-dog",
+    "5eac-047a": "vet-hyperthyroidism-cat",
+    "5abd-33ee": "vet-equine-colic",
+    "6b73-01cd": "vet-salmonella-zoonosis",
+    "1a91-c8ee": "vet-xylitol-toxicity",
+    "0702-bb97": "vet-rodenticide-coagulopathy",
+    "e8b5-99d4": "vet-gi-stasis-rabbit",
+    "a7f6-7920": "vet-intervertebral-disc-disease",
+    "c1cf-7c2e": "vet-dystocia-dog"
   }
 };

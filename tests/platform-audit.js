@@ -121,6 +121,37 @@ KEY_CASES.forEach(cid => {
   } catch(e) { F(fp,cid+' parse error: '+e.message); }
 });
 
+// ── 4b. CRT index coverage (missing case JS files) ──────────────────────
+console.log('\n[4b] CRT index coverage');
+const crtIdxPath = path.join(root,'emr-data','crt-index.js');
+if (fs.existsSync(crtIdxPath)) {
+  try {
+    const crtSrc = fs.readFileSync(crtIdxPath,'utf8');
+    const crtData = JSON.parse(crtSrc.match(/window\.CRT_INDEX\s*=\s*(\{[\s\S]+\});/)[1]);
+    const emrDir = path.join(root,'emr-data');
+    const nonCaseFiles = new Set(['crt-index','case-tokens','manifest','patient-names',
+      'case-specialty-map','handoff-data','auto-handoff','day-progression',
+      'day-evolution','coachdx-analytics','crt-data','dx-database','rdx-case-results']);
+    const existingFiles = new Set(fs.readdirSync(emrDir)
+      .filter(f=>f.endsWith('.js')).map(f=>f.replace('.js','')));
+    const allSlugs = Object.keys(crtData);
+    const missingSlugs = allSlugs.filter(s => !existingFiles.has(s));
+    const coverage = allSlugs.length - missingSlugs.length;
+    console.log(`  CRT entries: ${allSlugs.length}, case files: ${coverage}, missing: ${missingSlugs.length}`);
+    if (missingSlugs.length === 0) {
+      P(crtIdxPath, 'all CRT cases have JS files'); console.log('  ✓ all cases have JS files');
+    } else {
+      // Warn, not fail — missing files are work in progress, not regressions
+      const byProf = {};
+      missingSlugs.forEach(s => { const p=crtData[s].profession||'unknown'; byProf[p]=(byProf[p]||0)+1; });
+      const profSummary = Object.entries(byProf).sort((a,b)=>b[1]-a[1]).map(([p,n])=>`${p}:${n}`).join(', ');
+      W(crtIdxPath, `${missingSlugs.length} CRT slugs missing JS files — ${profSummary}`);
+      console.log(`  🟡 ${missingSlugs.length} cases in index have no JS file (${profSummary})`);
+    }
+    P(crtIdxPath, `coverage: ${coverage}/${allSlugs.length}`);
+  } catch(e) { W(crtIdxPath, 'CRT coverage check failed: '+e.message); }
+} else { W(crtIdxPath, 'crt-index.js not found'); }
+
 // ── 5. node-test.js passes ───────────────────────────────────────────────
 console.log('\n[5] Core unit tests (node-test.js)');
 const nodeTestPath = path.join(root,'node-test.js');

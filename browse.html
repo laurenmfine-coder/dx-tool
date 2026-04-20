@@ -1079,7 +1079,7 @@ function setMode(m){ window._rdxBatchSize = 24; window._showAll = false; _rdxSor
   }
   var copy=SECTION_COPY[m];document.getElementById('sectionTitle').innerHTML=copy.title;document.getElementById('sectionMeta').textContent=copy.meta;document.getElementById('searchInput').placeholder=PLACEHOLDERS[m];document.getElementById('searchInput').value='';var cats=CAT_SETS[m]||[];var btns=document.getElementById('filterBtns');if(btns){btns.innerHTML=cats.map(function(c){return '<button class="fbtn" data-cat="'+c+'" onclick="setCat(\''+c+'\')">'+esc(CAT_LABELS[c]||c)+'</button>';}).join('');
   // Profession filter chip — show if user has a profession set
-  var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'Physical Therapy',ot:'Occupational Therapy',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'MBS'};
+  var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'Physical Therapy',ot:'Occupational Therapy',optometry:'Optometry',dentistry:'Dentistry',nursing:'Nursing',mbs:'MBS',vet:'Vet Medicine'};
   var userProfId=null;try{var _u=JSON.parse(localStorage.getItem('rdx_user')||localStorage.getItem('reasondx-user')||'{}');userProfId=(_u.professionProfile&&_u.professionProfile.professionId)||localStorage.getItem('rdx-profession');}catch(e){}
   if(userProfId&&userProfId!=='medicine'){
     var profChip=document.createElement('button');
@@ -1194,7 +1194,7 @@ grid.innerHTML=displayedItems.map(function(c){
           h+='<span class="tag" style="background:rgba(251,146,60,.15);color:#FDBA74;font-weight:700;border:1px solid rgba(251,146,60,.25)">🔒 Study</span>';
         }
         if(c.arcId && c.arcOrder){h+='<span class="tag" style="background:rgba(168,85,247,.15);color:#C4B5FD;font-weight:700;border:1px solid rgba(168,85,247,.25)">📚 Series · Case '+(c.arcOrder||1)+'</span>';}
-        if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS'};h+='<span class="tag" style="background:rgba(5,150,105,.15);color:#6EE7B7;font-weight:700;border:1px solid rgba(5,150,105,.25)">'+( profLabels[c.profession]||c.profession)+'</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div>';
+        if(c.profession){var profLabels={medicine:'Medicine',pa:'PA',pharmacy:'Pharmacy',pt:'PT',ot:'OT',optometry:'OD',dentistry:'DDS',nursing:'RN',mbs:'MBS','vet':'🐾 Vet'};h+='<span class="tag" style="background:rgba(5,150,105,.15);color:#6EE7B7;font-weight:700;border:1px solid rgba(5,150,105,.25)">'+( profLabels[c.profession]||c.profession)+'</span>';}if((MODE==='simulate'||MODE==='practice')&&c.acuity===1) h+='<span class="tag tag-acuity1">Critical</span>';else if((MODE==='simulate'||MODE==='practice')&&c.acuity===2) h+='<span class="tag tag-acuity2">Urgent</span>';h+='</div>';
   if (MODE === 'simulate' && window._socialProof && window._socialProof[c.id]) {
     var sp = window._socialProof[c.id];
     var spHtml = '<div class="card-social-proof">';
@@ -1429,12 +1429,12 @@ function doSemanticSearch(q) {
   var PROF_LABELS = {
     medicine:'Medicine', pa:'Physician Assistant', pharmacy:'Pharmacy',
     optometry:'Optometry', dentistry:'Dentistry', pt:'Physical Therapy',
-    ot:'Occupational Therapy', nursing:'Nursing', mbs:'Biomedical Sciences', vet:'Veterinary Medicine', other:'Health Professional'
+    ot:'Occupational Therapy', nursing:'Nursing', mbs:'Biomedical Sciences', 'vet':'Veterinary Medicine', other:'Health Professional'
   };
 
   var PROF_ICONS = {
     medicine:'🩺', pa:'🏥', pharmacy:'💊', optometry:'👁️', dentistry:'🦷',
-    pt:'🦴', ot:'🖐️', nursing:'💉', mbs:'🔬', other:'⚕️'
+    pt:'🦴', ot:'🖐️', nursing:'💉', mbs:'🔬', 'vet':'🐾', other:'⚕️'
   };
 
   // Priority case categories per profession (for smart default filter)
@@ -1448,6 +1448,7 @@ function doSemanticSearch(q) {
     ot:         'psychiatric',
     nursing:    null,
     mbs:        null,
+    'vet': null,
     other:      null
   };
 
