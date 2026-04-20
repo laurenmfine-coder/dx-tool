@@ -34,13 +34,18 @@ const MESSAGES = {
   },
 };
 
-// Rotating re-engagement cases
+// Rotating re-engagement cases — direct Virtual EMR deep links (cx= token format)
+// Each cx token routes directly into the full chart review experience.
+// To add cases: get the token from emr-data/case-tokens.js slugToToken map.
 const REENGAGEMENT_CASES = [
-  { title: "The Diagnostic Pivot", url: "https://reasondx.com/browse.html?mode=simulate&tag=cardiology&utm_source=email&utm_medium=reengage" },
-  { title: "The Lab That Doesn't Fit", url: "https://reasondx.com/browse.html?mode=simulate&tag=endocrinology&utm_source=email&utm_medium=reengage" },
-  { title: "The Atypical Presentation", url: "https://reasondx.com/browse.html?mode=simulate&tag=internal-medicine&utm_source=email&utm_medium=reengage" },
-  { title: "The Vital Sign You Almost Missed", url: "https://reasondx.com/browse.html?mode=simulate&tag=surgery&utm_source=email&utm_medium=reengage" },
-  { title: "The Silent History", url: "https://reasondx.com/browse.html?mode=simulate&tag=emergency&utm_source=email&utm_medium=reengage" },
+  { title: "The Chest Pain That Keeps Coming Back",   slug: "unstable-angina",          url: "https://reasondx.com/virtual-emr.html?cx=0635-3b52&utm_source=email&utm_medium=reengage" },
+  { title: "The Shortness of Breath Everyone Missed", slug: "pe-v1",                    url: "https://reasondx.com/virtual-emr.html?cx=1564-8611&utm_source=email&utm_medium=reengage" },
+  { title: "The Patient Who Stopped Eating",          slug: "dka-v1",                   url: "https://reasondx.com/virtual-emr.html?cx=4fda-d4d5&utm_source=email&utm_medium=reengage" },
+  { title: "The Fever That Wouldn't Break",           slug: "septic-shock-urosepsis",   url: "https://reasondx.com/virtual-emr.html?cx=3074-a1a5&utm_source=email&utm_medium=reengage" },
+  { title: "The Arm That Went Weak",                  slug: "stroke-v1",                url: "https://reasondx.com/virtual-emr.html?cx=b580-efc7&utm_source=email&utm_medium=reengage" },
+  { title: "The Pain That Tore Through",              slug: "acute-aortic-dissection",  url: "https://reasondx.com/virtual-emr.html?cx=abdb-e42a&utm_source=email&utm_medium=reengage" },
+  { title: "The Worst Headache of Her Life",          slug: "sah-v1",                   url: "https://reasondx.com/virtual-emr.html?cx=d38a-d433&utm_source=email&utm_medium=reengage" },
+  { title: "The Pain That Keeps Coming Back",         slug: "acute-cholecystitis",      url: "https://reasondx.com/virtual-emr.html?cx=98f0-4237&utm_source=email&utm_medium=reengage" },
 ];
 
 function getReengagementCase() {
@@ -73,15 +78,34 @@ function buildReengagementEmail(user, daysInactive) {
     <p style="font-size:16px;color:#1e293b;margin:0 0 6px">Hi ${firstName},</p>
     ${streakNote}
 
-    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:24px">
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:20px">
       <div style="font-family:Georgia,serif;font-size:18px;color:#0f172a;margin-bottom:10px;line-height:1.3">${msg.headline}</div>
       <p style="font-size:14px;color:#475569;line-height:1.7;margin:0 0 16px">${msg.body}</p>
-      <div style="font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#2874a6;margin-bottom:4px">Suggested Case</div>
+      <div style="font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#2874a6;margin-bottom:4px">This Week's Case</div>
       <div style="font-size:15px;font-weight:600;color:#1e293b">${reCase.title}</div>
     </div>
 
+    <!-- Virtual EMR explainer -->
+    <div style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:12px;padding:20px 24px;margin-bottom:20px">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#1d4ed8;margin-bottom:10px">What you're opening</div>
+      <div style="display:flex;gap:12px;align-items:flex-start;margin-bottom:8px">
+        <div style="font-size:22px;flex-shrink:0">📋</div>
+        <div>
+          <div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:4px">The Virtual EMR — not a quiz, not a chatbot</div>
+          <p style="font-size:13px;color:#475569;line-height:1.6;margin:0">You open a real patient chart. Read the H&amp;P, review labs and imaging, write orders, build your differential, and document your reasoning — just like on shift. Then an AI attending reviews your thinking and gives you specific feedback on where your reasoning was strong and where it drifted.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap">
+        <div style="font-size:12px;color:#1d4ed8;font-weight:600">⏱ 15–20 min</div>
+        <div style="font-size:12px;color:#1d4ed8;font-weight:600">🩺 Full chart + orders</div>
+        <div style="font-size:12px;color:#1d4ed8;font-weight:600">🧠 Personalized feedback</div>
+        <div style="font-size:12px;color:#1d4ed8;font-weight:600">🆓 Always free</div>
+      </div>
+    </div>
+
     <div style="text-align:center;margin-bottom:28px">
-      <a href="${reCase.url}" style="display:inline-block;background:#2874a6;color:#fff;padding:13px 28px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none">${msg.cta} →</a>
+      <a href="${reCase.url}" style="display:inline-block;background:#2874a6;color:#fff;padding:14px 32px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none">${msg.cta} →</a>
+      <p style="font-size:12px;color:#94a3b8;margin:8px 0 0">Opens the Virtual EMR — no signup required</p>
     </div>
 
     <div style="border-top:1px solid #f1f5f9;padding-top:16px;text-align:center">
