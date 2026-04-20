@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Myocardial Infarction (Presenting as Dyspnea)
-// Variant: acute-mi-dyspnea | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Humana Medicare Advantage HMO",
     "pcp": "Dr. David Reyes, MD",
-    "pharmacy": "Publix Pharmacy — 5100 S State Rd 7, Riverside, FL",
+    "pharmacy": "Publix Pharmacy \u2014 5100 S State Rd 7, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic or Latino",
     "address": "3039 Clover St, Pittsburgh, PA 15204",
@@ -27,112 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Type 2 Diabetes Mellitus",
+      "problem": "Anterior STEMI \u2014 dyspnea-predominant, no chest pain",
+      "icd": "I21.09",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Margaret Lee, 67F \u2014 T2DM, hypertension. Acute dyspnea at rest x2 hours, diaphoretic. No chest pain. ECG: ST elevation V1-V4. Diabetic neuropathy \u2192 atypical MI presentation."
+    },
+    {
+      "problem": "Acute pulmonary edema \u2014 from LV dysfunction",
+      "icd": "J81.0",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "LAD territory infarct \u2192 anterior wall dysfunction \u2192 acute LV failure \u2192 pulmonary edema. Dyspnea as chief complaint in STEMI."
+    },
+    {
+      "problem": "T2DM \u2014 anginal equivalent predisposing factor",
       "icd": "E11.65",
-      "onset": "2005",
+      "onset": "2014",
       "status": "Active",
-      "notes": "A1c 8.4% — poorly controlled"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2002",
-      "status": "Active",
-      "notes": "Difficult to control, on 3 agents"
-    },
-    {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2008",
-      "status": "Active",
-      "notes": "LDL 142 at last check despite statin"
-    },
-    {
-      "problem": "Obesity, Class II",
-      "icd": "E66.01",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "BMI 38.2"
-    },
-    {
-      "problem": "Peripheral Neuropathy",
-      "icd": "G62.9",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "Diabetic neuropathy, bilateral feet"
-    },
-    {
-      "problem": "Diabetic Retinopathy, Non-Proliferative",
-      "icd": "E11.319",
-      "onset": "2022",
-      "status": "Active",
-      "notes": ""
+      "notes": "Autonomic neuropathy blunts ischemic pain signal. A1c 9.2% \u2014 poorly controlled."
     }
   ],
   "medications": [
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Reyes",
-      "start": "01/2006",
-      "refills": 3,
-      "status": "Active"
+      "name": "Primary PCI \u2014 activate cath lab NOW",
+      "sig": "Door-to-balloon target 90 min. Every 30-minute delay increases mortality 7.5%. Do NOT delay PCI for workup \u2014 if ECG shows STEMI, activate cath lab.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "ACTIVATING"
     },
     {
-      "name": "Glipizide 10mg BID",
-      "sig": "Take 1 tablet by mouth twice daily before meals",
-      "prescriber": "Dr. Reyes",
-      "start": "04/2018",
-      "refills": 2,
-      "status": "Active"
+      "name": "Aspirin 325mg + Ticagrelor 180mg \u2014 loading doses",
+      "sig": "Dual antiplatelet loading before PCI. Aspirin \u2192 COX-1 inhibition. Ticagrelor \u2192 P2Y12 inhibition. Superior to aspirin alone in PLATO.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Administered"
     },
     {
-      "name": "Lisinopril 40mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "08/2010",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Hydrochlorothiazide 25mg daily",
-      "sig": "Take 1 tablet by mouth daily in the morning",
-      "prescriber": "Dr. Reyes",
-      "start": "03/2015",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "01/2020",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 40mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Reyes",
-      "start": "06/2009",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "01/2010",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Gabapentin 300mg TID",
-      "sig": "Take 1 capsule by mouth three times daily",
-      "prescriber": "Dr. Reyes",
-      "start": "09/2020",
-      "refills": 2,
-      "status": "Active"
+      "name": "Heparin UFH 60 units/kg IV bolus",
+      "sig": "Anticoagulation to prevent clot extension. Standard pre-PCI anticoagulation.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV push"
     }
   ],
   "allergies": [
@@ -157,7 +93,7 @@ window.EMR_DATA = {
       "bp": "168/98",
       "hr": 88,
       "rr": 18,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "95%",
       "wt": "224 lbs",
       "ht": "5'3\"",
@@ -169,7 +105,7 @@ window.EMR_DATA = {
       "bp": "162/94",
       "hr": 82,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "96%",
       "wt": "220 lbs",
       "ht": "5'3\"",
@@ -181,7 +117,7 @@ window.EMR_DATA = {
       "bp": "158/92",
       "hr": 80,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "96%",
       "wt": "218 lbs",
       "ht": "5'3\"",
@@ -193,7 +129,7 @@ window.EMR_DATA = {
       "bp": "170/100",
       "hr": 84,
       "rr": 18,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "95%",
       "wt": "216 lbs",
       "ht": "5'3\"",
@@ -210,8 +146,8 @@ window.EMR_DATA = {
       "cc": "Diabetes follow-up, increasing dyspnea",
       "hpi": "Mrs. Hernandez presents for DM follow-up. Reports increasing shortness of breath with exertion over the past 2-3 months. Previously could walk 2 blocks; now gets winded walking to the mailbox. Also notes increased fatigue and occasional bilateral ankle swelling in the evenings. Denies chest pain, orthopnea, or PND. Attributes symptoms to weight and deconditioning. A1c has been rising despite medication adjustments.",
       "exam": "Obese female, mildly dyspneic with ambulation to exam table. BP 168/98. Lungs: bibasilar crackles, mild. CV: RRR, S3 gallop noted, no murmurs. Ext: 1+ pitting edema bilaterally. Feet: decreased sensation to monofilament, no ulcers.",
-      "assessment": "1. T2DM — A1c 8.4%, worsening\n2. HTN — poorly controlled despite triple therapy\n3. New exertional dyspnea with S3 gallop — concerning for HF vs. ischemic disease\n4. Peripheral edema — new, likely related to cardiac etiology\n5. Diabetic neuropathy — stable",
-      "plan": "1. STAT echocardiogram ordered\n2. BNP, troponin, CBC, CMP ordered\n3. Cardiology referral placed — urgent\n4. Start furosemide 20mg daily for volume management\n5. Dietary sodium restriction counseling\n6. Consider adding insulin at cardiology follow-up\n7. Return in 2 weeks or sooner if worsening symptoms"
+      "assessment": "1. T2DM \u2014 A1c 8.4%, worsening\n2. HTN \u2014 poorly controlled despite triple therapy\n3. New exertional dyspnea with S3 gallop \u2014 concerning for HF vs. ischemic disease\n4. Peripheral edema \u2014 new, likely related to cardiac etiology\n5. Diabetic neuropathy \u2014 stable",
+      "plan": "1. STAT echocardiogram ordered\n2. BNP, troponin, CBC, CMP ordered\n3. Cardiology referral placed \u2014 urgent\n4. Start furosemide 20mg daily for volume management\n5. Dietary sodium restriction counseling\n6. Consider adding insulin at cardiology follow-up\n7. Return in 2 weeks or sooner if worsening symptoms"
     },
     {
       "id": "V002",
@@ -219,189 +155,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. David Reyes, MD",
       "cc": "Routine diabetes and HTN follow-up",
-      "hpi": "Returns for routine follow-up. Reports general fatigue but attributes to poor sleep. No chest pain or dyspnea at this visit. Medication compliance is fair — occasionally misses evening doses. Diet remains high in carbohydrates.",
+      "hpi": "Returns for routine follow-up. Reports general fatigue but attributes to poor sleep. No chest pain or dyspnea at this visit. Medication compliance is fair \u2014 occasionally misses evening doses. Diet remains high in carbohydrates.",
       "exam": "BP 162/94. Lungs: CTA. CV: RRR, no gallop, no murmur. No peripheral edema.",
-      "assessment": "1. T2DM — A1c 8.1%, up from 7.6%\n2. HTN — above goal",
+      "assessment": "1. T2DM \u2014 A1c 8.1%, up from 7.6%\n2. HTN \u2014 above goal",
       "plan": "1. Increase glipizide to 10mg BID\n2. Reinforce dietary counseling, referral to nutritionist\n3. Recheck A1c in 3 months"
     }
   ],
   "labs": [
     {
-      "date": "12/18/2024",
-      "time": "10:00 AM",
-      "orderedBy": "Dr. Reyes",
-      "collected": "12/18/2024 10:20 AM",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-277392",
-      "status": "Final",
-      "specimenType": "Serum/Plasma",
-      "fasting": "Yes (12 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "STEMI Workup",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "198",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.2",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "52",
-              "unit": "mL/min/1.73m2",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "23",
-              "unit": "mEq/L",
-              "range": "21-31",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.0",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "AST",
-              "value": "28",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "ALT",
-              "value": "32",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "0.6",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": ""
-            }
-          ]
+          "test": "ECG",
+          "value": "ST elevation 3mm V1-V4, reciprocal changes II/III/aVF",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1C",
-          "results": [
-            {
-              "test": "Hemoglobin A1c",
-              "value": "8.4",
-              "unit": "%",
-              "range": "<5.7",
-              "flag": "H"
-            }
-          ]
+          "test": "Troponin I \u2014 first draw",
+          "value": "0.12",
+          "unit": "ng/mL",
+          "ref": "<0.04 (too early for full rise)",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "234",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "HDL",
-              "value": "38",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "270",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "BNP",
+          "value": "520",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
         },
         {
-          "name": "BNP",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "380",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "CXR",
+          "value": "Bilateral pulmonary edema, cardiomegaly",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "SpO2",
+          "value": "89",
+          "unit": "% on room air",
+          "ref": "\u226595%",
+          "flag": "L"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "12/22/2024",
-      "study": "ECHOCARDIOGRAM, TRANSTHORACIC",
-      "accession": "IMG-2024-48291",
-      "status": "FINAL",
-      "orderedBy": "Dr. David Reyes, MD",
-      "readBy": "Dr. Karen Liu, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "New dyspnea, S3 gallop, elevated BNP",
-      "technique": "Complete 2D, M-mode, and Doppler echocardiogram.",
-      "findings": "LV: Mildly dilated. EF 40% by biplane Simpson method (reduced). Inferior and inferolateral hypokinesis noted. Diastolic dysfunction Grade 2 (pseudonormal pattern). LA: Mildly dilated. RV: Normal size and function. TAPSE 2.0 cm. Valves: Mild mitral regurgitation. Mild tricuspid regurgitation. Estimated RVSP 38 mmHg. No pericardial effusion.",
-      "impression": "1. Reduced LV systolic function, EF 40%.\n2. Regional wall motion abnormality — inferior and inferolateral hypokinesis, suggesting prior or active ischemic disease.\n3. Grade 2 diastolic dysfunction.\n4. Mild mitral and tricuspid regurgitation.\n5. Recommend cardiology follow-up and consideration of coronary evaluation.",
-      "dictated": "12/22/2024 03:00 PM",
-      "verified": "12/22/2024 05:15 PM"
+      "date": "04/2024",
+      "study": "ECG + Chest X-Ray",
+      "findings": "ECG: ST elevation V1-V4, reciprocal ST depression inferiorly. CXR: bilateral interstitial edema, cardiomegaly.",
+      "impression": "Anterior STEMI with acute pulmonary edema. Primary PCI indicated urgently."
     }
   ],
   "immunizations": [
@@ -463,7 +271,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Rare — occasional glass of wine at holidays"
+      "Rare \u2014 occasional glass of wine at holidays"
     ],
     [
       "Drugs",
@@ -488,7 +296,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "acute-mi-dyspnea",
-    "diagnosis": "Acute Myocardial Infarction (Dyspnea-Predominant Presentation)",
+    "diagnosis": "Acute STEMI \u2014 Dyspnea-Predominant Presentation (Silent MI in Diabetic Patient)",
     "acuity": 2,
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
@@ -552,13 +360,12 @@ window.EMR_DATA = {
       "Skin examination for pallor or diaphoresis": "Pale conjunctiva, no acute diaphoresis, skin cool and slightly moist"
     },
     "ddxTargets": [
-      "Acute Myocardial Infarction (Dyspnea-Predominant Presentation) (correct diagnosis)",
-      "Acute Heart Failure Exacerbation",
-      "Pulmonary Embolism",
-      "Acute Coronary Syndrome",
-      "Aortic Dissection",
-      "Pneumonia",
-      "Medication-induced Heart Failure"
+      "Anterior STEMI \u2014 dyspnea-predominant (correct)",
+      "Acute decompensated heart failure \u2014 BNP elevated and pulmonary edema present, but ECG shows STEMI as the PRIMARY driver of the decompensation",
+      "Pulmonary embolism \u2014 BNP and troponin can both be elevated; ECG S1Q3T3 vs anterior ST elevation distinguishes",
+      "Acute anterior STEMI without dyspnea \u2014 dyspnea IS the predominant presentation here; classic 'silent MI'",
+      "Hypertensive emergency with pulmonary edema \u2014 no ST elevation expected with pure hypertensive emergency",
+      "Stress cardiomyopathy (Takotsubo) \u2014 preceded by emotional/physical stress; usually in postmenopausal women; similar ECG changes"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'shortness of breath' and focusing only on pulmonary causes, missing atypical MI presentation especially in elderly diabetic women who often present without classic chest pain",
@@ -568,7 +375,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some good initial considerations for dyspnea. Given this patient's demographics, risk factors, and family history, what specific high-risk diagnoses should you be particularly concerned about? Think about how coronary artery disease might present differently in elderly women with diabetes.",
       "phase5": "Now that you've gathered your history and physical exam findings, let's think about the constellation of symptoms and signs. You found evidence of volume overload, but what could be the underlying cause? How do the S3 gallop, elevated JVP, and this patient's risk profile help narrow your differential?",
-      "finalDebrief": "This case illustrates the importance of recognizing atypical presentations of MI, particularly in elderly women with diabetes who may present with dyspnea rather than chest pain. The combination of new-onset heart failure symptoms, multiple cardiac risk factors, and strong family history should have raised your suspicion for acute coronary syndrome. How might your approach to dyspnea cases change based on patient demographics and risk factors?"
+      "finalDebrief": "This case illustrates the importance of recognizing atypical presentations of MI, particularly in elderly women with diabetes who may present with dyspnea rather than chest pain. The combination of new-onset heart failure symptoms, multiple cardiac risk factors, and strong family history should have raised your suspicion for acute coronary syndrome. How might your approach to dyspnea cases change based on patient demographics and risk factors?",
+      "final": "Diagnosis: STEMI \u2014 dyspnea-predominant. Key learning: (1) Silent and atypical MI: up to 20-35% of MIs in diabetic patients present without chest pain. Dyspnea (as here), diaphoresis alone, nausea/vomiting, syncope, or simply 'not feeling well' are anginal equivalents. The diabetic patient presenting with acute dyspnea deserves an immediate ECG. (2) ECG is the critical diagnostic step \u2014 takes 90 seconds and changes management immediately. Any ST elevation >1mm in \u22652 contiguous leads = STEMI = activate cath lab. Do not wait for troponin. (3) Troponin in early STEMI: may not be elevated in the first 1-2 hours (as here \u2014 0.12 ng/mL, slightly elevated early). A normal troponin does NOT rule out STEMI if ECG shows ST elevation. (4) Door-to-balloon time: primary PCI must occur within 90 minutes of first medical contact. Every 30 minutes of delay increases 1-year mortality by approximately 7.5%. Streamlining the STEMI pathway is a core quality metric. (5) Acute pulmonary edema in STEMI: anterior STEMI \u2192 LAD occlusion \u2192 LV anterior wall akinesis \u2192 acute LV failure \u2192 elevated LVEDP \u2192 pulmonary edema. The dyspnea is a consequence of the STEMI, not a separate diagnosis."
     }
   }
 };

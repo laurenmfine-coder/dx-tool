@@ -9,7 +9,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "BlueCross BlueShield FL PPO",
     "pcp": "Dr. Catherine Miller, MD",
-    "pharmacy": "Walgreens — 5701 Sheridan St, Hollywood, FL",
+    "pharmacy": "Walgreens \u2014 5701 Sheridan St, Hollywood, FL",
     "language": "English",
     "race": "White",
     "address": "3420 Sheridan St, Hollywood, FL 33021",
@@ -23,80 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Cholelithiasis",
-      "icd": "K80.20",
-      "onset": "2023",
+      "problem": "Acute pancreatitis \u2014 recurrent, alcoholic",
+      "icd": "K85.20",
+      "onset": "2020",
       "status": "Active",
-      "notes": "Multiple gallstones on US; declined cholecystectomy"
+      "notes": "Carlos Rivera, 42M \u2014 alcohol-induced pancreatitis, 3rd episode. Now day 7: sudden severe worsening pain, new hematemesis, Hgb drop from 12 to 7.8."
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2014",
+      "problem": "Splenic artery pseudoaneurysm \u2014 vascular complication of pancreatitis",
+      "icd": "I72.8",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Hypertriglyceridemia (TG 350-500 range); on fenofibrate"
+      "notes": "Pancreatic enzymes erode splenic artery wall \u2192 pseudoaneurysm. Risk of rupture \u2192 hemorrhagic pancreatitis. Most common vascular complication of AP."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2010",
+      "problem": "Alcohol use disorder \u2014 ongoing, driving recurrent pancreatitis",
+      "icd": "F10.20",
+      "onset": "2019",
       "status": "Active",
-      "notes": "Controlled on ACE inhibitor"
-    },
-    {
-      "problem": "Obesity, Class I",
-      "icd": "E66.01",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "BMI 32.0"
-    },
-    {
-      "problem": "Alcohol Use, Heavy",
-      "icd": "F10.10",
-      "onset": "2005",
-      "status": "Active",
-      "notes": "Reports 4-6 drinks daily; counseled on reduction at every visit"
-    },
-    {
-      "problem": "Acute Pancreatitis, history of",
-      "icd": "K85.9",
-      "onset": "2023",
-      "status": "Resolved",
-      "notes": "Single episode 2023 — mild; attributed to gallstones and alcohol"
+      "notes": "Three episodes in 4 years. AUDIT-C 10. Requires addiction counseling and support."
     }
   ],
   "medications": [
     {
-      "name": "Fenofibrate 145mg daily",
-      "sig": "Take 1 tablet by mouth daily with a meal",
-      "prescriber": "Dr. Miller",
-      "start": "06/2015",
-      "refills": 3,
-      "status": "Active"
+      "name": "Emergent angiography + embolization \u2014 splenic artery",
+      "sig": "Endovascular embolization is the first-line treatment for splenic artery pseudoaneurysm (coil embolization proximal and distal to pseudoaneurysm). Surgical ligation if embolization fails.",
+      "prescriber": "Interventional Radiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT"
     },
     {
-      "name": "Atorvastatin 20mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Miller",
-      "start": "01/2016",
-      "refills": 4,
-      "status": "Active"
+      "name": "pRBC transfusion \u2014 2 units",
+      "sig": "Hemoglobin dropped from 12 to 7.8 from bleeding into pseudoaneurysm/peritoneum.",
+      "prescriber": "Surgery/IR",
+      "start": "2024",
+      "refills": 0,
+      "status": "Transfusing"
     },
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Miller",
-      "start": "08/2011",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Omeprazole 20mg daily",
-      "sig": "Take 1 capsule by mouth daily before breakfast",
-      "prescriber": "Dr. Miller",
-      "start": "10/2023",
-      "refills": 3,
-      "status": "Active"
+      "name": "Alcohol cessation + naltrexone",
+      "sig": "Naltrexone reduces alcohol craving. Addiction counseling referral. Further alcohol use will cause recurrent pancreatitis and progression to chronic pancreatitis/exocrine insufficiency.",
+      "prescriber": "Medicine/Addiction",
+      "start": "2024",
+      "refills": 2,
+      "status": "Planned \u2014 post-acute"
     }
   ],
   "allergies": [
@@ -114,7 +85,7 @@ window.EMR_DATA = {
       "bp": "138/86",
       "hr": 78,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "222 lbs",
       "ht": "5'11\"",
@@ -126,7 +97,7 @@ window.EMR_DATA = {
       "bp": "142/88",
       "hr": 80,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "226 lbs",
       "ht": "5'11\"",
@@ -138,7 +109,7 @@ window.EMR_DATA = {
       "bp": "136/84",
       "hr": 76,
       "rr": 16,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "98%",
       "wt": "220 lbs",
       "ht": "5'11\"",
@@ -153,10 +124,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Catherine Miller, MD",
       "cc": "Follow-up: cholelithiasis, hyperlipidemia, alcohol use",
-      "hpi": "57-year-old male with cholelithiasis, severe hypertriglyceridemia, and heavy alcohol use presenting for routine follow-up. Triglycerides remain elevated at 480 despite fenofibrate — admits to dietary noncompliance and continued heavy alcohol use (4-6 drinks nightly). Had episode of acute pancreatitis in 2023 requiring 4-day hospitalization. Continues to decline cholecystectomy referral. Occasionally notes epigastric discomfort after heavy meals. Weight stable.",
+      "hpi": "57-year-old male with cholelithiasis, severe hypertriglyceridemia, and heavy alcohol use presenting for routine follow-up. Triglycerides remain elevated at 480 despite fenofibrate \u2014 admits to dietary noncompliance and continued heavy alcohol use (4-6 drinks nightly). Had episode of acute pancreatitis in 2023 requiring 4-day hospitalization. Continues to decline cholecystectomy referral. Occasionally notes epigastric discomfort after heavy meals. Weight stable.",
       "exam": "General: Obese male, mild facial plethora, NAD. CV: RRR, no murmurs. Lungs: CTAB. Abdomen: Soft, mild epigastric tenderness without rebound; positive Murphy's sign. Liver: Palpable 2 cm below costal margin. Extremities: No edema. Neuro: A&O x3; mild bilateral hand tremor.",
-      "assessment": "1. Cholelithiasis — symptomatic; again counseled on cholecystectomy\n2. Hypertriglyceridemia — poorly controlled (TG 480); pancreatitis risk\n3. Alcohol use disorder — continued heavy use; elevated recurrent pancreatitis risk\n4. Prior acute pancreatitis — at high risk for recurrence\n5. HTN — controlled",
-      "plan": "1. Strongly recommended cholecystectomy — patient declined again; documented risks\n2. Add omega-3 fatty acids (Lovaza 4g daily) for TG reduction\n3. Alcohol cessation counseling; offered referral to addiction medicine — declined\n4. Low-fat diet counseling\n5. Labs: lipid panel, LFTs, lipase, CBC\n6. RTC 3 months; ED precautions for abdominal pain reviewed"
+      "assessment": "1. Cholelithiasis \u2014 symptomatic; again counseled on cholecystectomy\n2. Hypertriglyceridemia \u2014 poorly controlled (TG 480); pancreatitis risk\n3. Alcohol use disorder \u2014 continued heavy use; elevated recurrent pancreatitis risk\n4. Prior acute pancreatitis \u2014 at high risk for recurrence\n5. HTN \u2014 controlled",
+      "plan": "1. Strongly recommended cholecystectomy \u2014 patient declined again; documented risks\n2. Add omega-3 fatty acids (Lovaza 4g daily) for TG reduction\n3. Alcohol cessation counseling; offered referral to addiction medicine \u2014 declined\n4. Low-fat diet counseling\n5. Labs: lipid panel, LFTs, lipase, CBC\n6. RTC 3 months; ED precautions for abdominal pain reviewed"
     },
     {
       "id": "V002",
@@ -165,188 +136,60 @@ window.EMR_DATA = {
       "provider": "Dr. Sarah Mitchell, MD (Emergency Medicine)",
       "cc": "Severe epigastric pain, nausea, vomiting x 12 hours",
       "hpi": "57-year-old male presenting with sudden onset severe epigastric pain radiating to the back x 12 hours. Reports heavy alcohol intake night before (8+ drinks). Nausea with multiple episodes of vomiting. Unable to tolerate PO. Reports prior biliary colic episodes. No fever.",
-      "exam": "General: Moderate distress, diaphoretic. Vitals: HR 112, BP 148/92, T 99.2°F. Abdomen: Severe epigastric tenderness with voluntary guarding; no rebound; diminished bowel sounds. No jaundice.",
-      "assessment": "1. Acute pancreatitis — lipase >3x ULN; likely gallstone and/or alcohol-related",
-      "plan": "1. Admitted to medicine service\n2. NPO, aggressive IV hydration, IV morphine for pain\n3. CT abdomen/pelvis: mild peripancreatic stranding, no necrosis\n4. Surgical consult for cholecystectomy — patient deferred\n5. Discharged day 4 with outpatient follow-up"
+      "exam": "General: Moderate distress, diaphoretic. Vitals: HR 112, BP 148/92, T 99.2\u00b0F. Abdomen: Severe epigastric tenderness with voluntary guarding; no rebound; diminished bowel sounds. No jaundice.",
+      "assessment": "1. Acute pancreatitis \u2014 lipase >3x ULN; likely gallstone and/or alcohol-related",
+      "plan": "1. Admitted to medicine service\n2. NPO, aggressive IV hydration, IV morphine for pain\n3. CT abdomen/pelvis: mild peripancreatic stranding, no necrosis\n4. Surgical consult for cholecystectomy \u2014 patient deferred\n5. Discharged day 4 with outpatient follow-up"
     }
   ],
   "labs": [
     {
-      "date": "12/16/2024",
-      "time": "09:30",
-      "orderedBy": "Dr. Catherine Miller, MD",
-      "collected": "12/16/2024 08:45",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-121641",
-      "status": "Final",
-      "specimenType": "Serum",
-      "fasting": "Yes (12 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Pancreatitis Vascular Complication",
+      "results": [
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "268",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL-C",
-              "value": "118",
-              "unit": "mg/dL",
-              "range": "<130",
-              "flag": ""
-            },
-            {
-              "test": "HDL-C",
-              "value": "34",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "480",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "7.8",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
         },
         {
-          "name": "HEPATIC FUNCTION PANEL",
-          "results": [
-            {
-              "test": "ALT (SGPT)",
-              "value": "68",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "82",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": "H"
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "128",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Direct Bilirubin",
-              "value": "0.5",
-              "unit": "mg/dL",
-              "range": "0.0-0.3",
-              "flag": "H"
-            },
-            {
-              "test": "GGT",
-              "value": "188",
-              "unit": "U/L",
-              "range": "8-61",
-              "flag": "H"
-            },
-            {
-              "test": "Albumin",
-              "value": "3.6",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": ""
-            }
-          ]
+          "test": "Lipase (baseline elevated)",
+          "value": "620",
+          "unit": "U/L",
+          "ref": "10-140",
+          "flag": "H"
         },
         {
-          "name": "PANCREATIC ENZYMES",
-          "results": [
-            {
-              "test": "Lipase",
-              "value": "42",
-              "unit": "U/L",
-              "range": "0-60",
-              "flag": ""
-            },
-            {
-              "test": "Amylase",
-              "value": "78",
-              "unit": "U/L",
-              "range": "28-100",
-              "flag": ""
-            }
-          ]
+          "test": "HR",
+          "value": "118",
+          "unit": "bpm",
+          "ref": "60-100 (hemorrhagic shock)",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "42.6",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "178",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "MCV",
-              "value": "102",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "H"
-            }
-          ]
+          "test": "BP",
+          "value": "96/62",
+          "unit": "mmHg",
+          "ref": "SBP >100",
+          "flag": "L"
+        },
+        {
+          "test": "Triglycerides",
+          "value": "820",
+          "unit": "mg/dL",
+          "ref": "<150 (hypertriglyceridemia AP)",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "06/10/2024",
-      "study": "ULTRASOUND ABDOMEN RUQ",
-      "accession": "IMG-2024-06101",
-      "status": "FINAL",
-      "orderedBy": "Dr. Catherine Miller, MD",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "57M cholelithiasis, elevated LFTs, alcohol use. Reassess gallbladder and liver.",
-      "technique": "Real-time ultrasound of the right upper quadrant.",
-      "findings": "Gallbladder: Multiple echogenic foci with posterior acoustic shadowing consistent with gallstones (largest 12 mm). No gallbladder wall thickening (3 mm). No pericholecystic fluid. CBD 5 mm (normal).\\n\\nLiver: Diffusely echogenic parenchyma consistent with hepatic steatosis. No focal hepatic mass. Normal hepatopetal portal venous flow.\\n\\nCommon bile duct: 5 mm, within normal limits.\\n\\nPancreas: Partially visualized; no gross abnormality seen.",
-      "impression": "1. Multiple gallstones without acute cholecystitis.\\n2. Hepatic steatosis.\\n3. No biliary ductal dilation.",
-      "dictated": "06/10/2024 14:30",
-      "verified": "06/10/2024 17:00"
+      "date": "04/2024",
+      "study": "CT Angiography Abdomen",
+      "findings": "Large pseudoaneurysm arising from splenic artery (3.2cm). Active extravasation into lesser sac on arterial phase. Extensive peripancreatic inflammatory changes. No free air.",
+      "impression": "Splenic artery pseudoaneurysm with active bleeding. Emergent interventional radiology consultation."
     }
   ],
   "immunizations": [
@@ -368,7 +211,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
@@ -403,11 +246,11 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former — 10 pack-years; quit 2010"
+      "Former \u2014 10 pack-years; quit 2010"
     ],
     [
       "Alcohol",
-      "Heavy — 4-6 drinks daily (beer and vodka); 30+ year history"
+      "Heavy \u2014 4-6 drinks daily (beer and vodka); 30+ year history"
     ],
     [
       "Drugs",
@@ -415,7 +258,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Minimal — on feet at work but no structured exercise"
+      "Minimal \u2014 on feet at work but no structured exercise"
     ],
     [
       "Housing",
@@ -427,12 +270,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "None — discussed"
+      "None \u2014 discussed"
     ]
   ],
   "meta": {
     "caseId": "acute-pancreatitis",
-    "diagnosis": "Acute Pancreatitis (Vascular Complication)",
+    "diagnosis": "Acute Pancreatitis with Vascular Complication (Splenic Artery Pseudoaneurysm)",
     "acuity": 2,
     "presentation": "Vascular Emergency",
     "category": "vascular"
@@ -442,22 +285,22 @@ window.EMR_DATA = {
     "patientPersona": "Nikolai Petrov is visibly uncomfortable and in moderate distress. They are anxious about their symptoms and eager to provide a history, though they occasionally wince or pause due to discomfort.",
     "interviewQuestions": [
       "Tell me what brought you in today. When did vascular emergency start?",
-      "Can you describe exactly how it started — sudden or gradual?",
+      "Can you describe exactly how it started \u2014 sudden or gradual?",
       "Where is the problem located? Does it spread anywhere?",
       "How would you rate the severity on a scale of 1 to 10?",
       "What makes it worse? What makes it better?",
       "Do you have any other symptoms along with this?",
       "Have you had anything like this before?",
-      "Tell me about your medical history — any chronic conditions?",
+      "Tell me about your medical history \u2014 any chronic conditions?",
       "What medications are you currently taking?",
       "Do you have any allergies to medications?",
       "Tell me about your family medical history.",
-      "Tell me about your lifestyle — work, tobacco, alcohol, substances."
+      "Tell me about your lifestyle \u2014 work, tobacco, alcohol, substances."
     ],
     "patientResponses": {
-      "default": "He pauses and thinks for a moment. 'I'm not sure exactly — can you be more specific?'",
+      "default": "He pauses and thinks for a moment. 'I'm not sure exactly \u2014 can you be more specific?'",
       "onset": "'The symptoms started 57-year-old male with cholelithiasis, severe hypertriglyceridemia, and heavy alc.'",
-      "character": "'It's vascular emergency — it's been bothering me quite a bit.'",
+      "character": "'It's vascular emergency \u2014 it's been bothering me quite a bit.'",
       "location": "'It's primarily in the area you would expect for this presentation. It may radiate somewhat.'",
       "severity": "'I'd say about a seven or eight out of ten. It's significantly affecting my daily activities.'",
       "aggravating": "'Activity and movement tend to make it worse. Certain positions are more uncomfortable.'",
@@ -468,7 +311,7 @@ window.EMR_DATA = {
       "medications": "'I take Fenofibrate 145mg daily; Atorvastatin 20mg QHS; Lisinopril 20mg daily; Omeprazole 20mg daily.'",
       "allergies": "'My allergies are NKDA.'",
       "family": "Father: Alcoholic liver disease, deceased at 62  Mother: Gallstones, cholecystectomy at age 55; alive at 84  Brother: Hyperlipidemia, pancreatitis at age 50, alive",
-      "social": "Occupation: Restaurant owner/chef  Marital: Married  Tobacco: Former — 10 pack-years; quit 2010  Alcohol: Heavy — 4-6 drinks daily (beer and vodka); 30+ year history  Drugs: Denies"
+      "social": "Occupation: Restaurant owner/chef  Marital: Married  Tobacco: Former \u2014 10 pack-years; quit 2010  Alcohol: Heavy \u2014 4-6 drinks daily (beer and vodka); 30+ year history  Drugs: Denies"
     },
     "examManeuvers": [
       "General appearance and level of distress",
@@ -491,13 +334,12 @@ window.EMR_DATA = {
       "Targeted system examination": "Clinical finding consistent with Acute Pancreatitis. Document specifically what you observe."
     },
     "ddxTargets": [
-      "Acute Pancreatitis (correct diagnosis)",
-      "Most likely alternative diagnosis",
-      "Third differential diagnosis",
-      "Must-not-miss diagnosis",
-      "Second must-not-miss",
-      "Common clinical mimic",
-      "Alternative presentation to consider"
+      "Splenic artery pseudoaneurysm from pancreatitis (correct)",
+      "Recurrent acute pancreatitis flare without vascular complication \u2014 Hgb drop + hemodynamic instability indicate bleeding",
+      "Peptic ulcer hemorrhage \u2014 hematemesis could suggest; but CT shows pancreatic/peripancreatic source",
+      "Splenic rupture \u2014 different mechanism, no AP history; blunt trauma usually involved",
+      "Gastric variceal bleeding \u2014 portal hypertension signs; no CT evidence here",
+      "Pancreatic pseudocyst rupture \u2014 could bleed; but CT shows pseudoaneurysm as definitive finding"
     ],
     "biasFlags": {
       "anchoring": "Students may anchor on the most obvious feature of this presentation and miss alternative diagnoses. For Acute Pancreatitis, carefully consider the full differential including must-not-miss conditions.",
@@ -505,9 +347,10 @@ window.EMR_DATA = {
       "availabilityBias": "Students may overweight or underweight Acute Pancreatitis based on recent cases seen. Apply systematic clinical reasoning rather than relying on pattern recognition alone."
     },
     "coachPrompts": {
-      "phase2": "You've reviewed Nikolai Petrov's chart. Before you interview them — what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
+      "phase2": "You've reviewed Nikolai Petrov's chart. Before you interview them \u2014 what does the chart suggest about the most likely diagnosis? What are your top three diagnoses? What specifically from the chart supports each one?",
       "phase5": "You've taken the history and performed the exam. How has your differential changed? What findings most influenced your thinking? Which diagnoses have you moved up or down, and why?",
-      "finalDebrief": "The diagnosis is Acute Pancreatitis (Vascular Complication). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?"
+      "finalDebrief": "The diagnosis is Acute Pancreatitis (Vascular Complication). How did your differential evolve through this case? At what point were you most confident? What would you do differently, and what did you do well?",
+      "final": "Diagnosis: acute pancreatitis complicated by splenic artery pseudoaneurysm. Key learning: (1) Vascular complications of pancreatitis: pancreatic enzymes (elastase) erode adjacent arterial walls. Splenic artery is most common (50%), followed by gastroduodenal, pancreaticoduodenal. They form pseudoaneurysms \u2192 rupture \u2192 hemorrhagic pancreatitis. (2) Pseudoaneurysm vs true aneurysm: true aneurysm involves all three vessel wall layers. Pseudoaneurysm = pulsatile hematoma contained by adventitia and perivascular tissue only \u2014 more prone to rupture. (3) Bleeding recognition in pancreatitis: sudden Hgb drop + hemodynamic instability in a patient with known pancreatitis = vascular complication until proven otherwise. CT angiography is the diagnostic and therapeutic gateway (can proceed directly to embolization). (4) Management: endovascular coil embolization first line \u2014 proximal and distal to the pseudoaneurysm (sandwich technique). Surgical ligation if embolization fails or patient unstable. (5) Recurrent alcoholic pancreatitis: three episodes = high risk for chronic pancreatitis (exocrine insufficiency \u2192 steatorrhea, malabsorption; endocrine insufficiency \u2192 brittle diabetes). Alcohol cessation is the only intervention that prevents progression."
     }
   }
 };

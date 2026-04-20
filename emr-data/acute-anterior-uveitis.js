@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Anterior Uveitis
-// Variant: acute-anterior-uveitis | Acuity: ESI-3
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. David Ortega, MD",
-    "pharmacy": "CVS Pharmacy — 3200 N Federal Hwy, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 3200 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black/African American",
     "address": "8033 Foxglove Dr, Louisville, KY 40205",
@@ -26,51 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Ankylosing Spondylitis",
-      "icd": "M45.0",
-      "onset": "2016",
+      "problem": "Acute anterior uveitis \u2014 left eye, flare #3",
+      "icd": "H20.011",
+      "onset": "2021",
       "status": "Active",
-      "notes": "HLA-B27 positive; sacroiliitis on MRI; managed with NSAIDs and adalimumab; rheumatology followed"
+      "notes": "James Rivera, 34M \u2014 HLA-B27+, ankylosing spondylitis diagnosed 2019. Sudden left eye pain, photophobia, vision blurring. Ciliary flush. Slit lamp: 3+ cells, fibrin, flare."
     },
     {
-      "problem": "Anterior Uveitis — Recurrent, Left Eye",
-      "icd": "H20.012",
-      "onset": "2020",
+      "problem": "Ankylosing spondylitis \u2014 NSAID-managed",
+      "icd": "M45.9",
+      "onset": "2019",
       "status": "Active",
-      "notes": "3 prior episodes associated with AS flares; last episode 06/2023; treated with topical steroids and cycloplegics"
+      "notes": "HLA-B27 positive. Third uveitis episode in 3 years. Poor systemic disease control increases uveitis frequency."
     },
     {
-      "problem": "Chronic Low Back Pain — Inflammatory",
-      "icd": "M54.5",
-      "onset": "2015",
+      "problem": "Posterior synechiae \u2014 left eye (from prior episodes)",
+      "icd": "H21.511",
+      "onset": "2022",
       "status": "Active",
-      "notes": "Morning stiffness >30 min; improves with activity; associated with AS"
+      "notes": "Adhesions between iris and lens from prior untreated inflammation. Risk factor for secondary glaucoma."
     }
   ],
   "medications": [
     {
-      "name": "Adalimumab (Humira) 40mg SQ every 2 weeks",
-      "sig": "Inject subcutaneously every 2 weeks as directed by rheumatology",
-      "prescriber": "Dr. Santiago (Rheumatology)",
-      "start": "09/2021",
+      "name": "Prednisolone acetate 1% \u2014 1 drop q1h initially, taper over 4-6 weeks",
+      "sig": "Topical corticosteroid. Frequency depends on cell count response. Taper guided by slit-lamp examination \u2014 do NOT taper based on symptoms alone.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 acute flare"
+    },
+    {
+      "name": "Cyclopentolate 1% BID \u2014 cycloplegia",
+      "sig": "Dilates pupil, prevents posterior synechiae formation, relieves ciliary spasm (photophobia). Must continue while active inflammation present.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Naproxen 500mg BID PRN",
-      "sig": "Take 1 tablet by mouth twice daily as needed for pain with food",
-      "prescriber": "Dr. Ortega",
-      "start": "01/2017",
-      "refills": 3,
-      "status": "PRN"
-    },
-    {
-      "name": "Omeprazole 20mg daily",
-      "sig": "Take 1 capsule by mouth daily before breakfast",
-      "prescriber": "Dr. Ortega",
-      "start": "01/2017",
-      "refills": 4,
-      "status": "Active"
+      "name": "Adalimumab (Humira) \u2014 rheumatology referral for TNF inhibitor",
+      "sig": "For recurrent/refractory HLA-B27 uveitis \u2014 reduces flare frequency. Addresses both AS and uveitis. Rheumatology coordinates.",
+      "prescriber": "Rheumatology/Ophthalmology",
+      "start": "2024",
+      "refills": 2,
+      "status": "Initiated"
     }
   ],
   "allergies": [
@@ -88,7 +85,7 @@ window.EMR_DATA = {
       "bp": "124/78",
       "hr": 72,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "185 lbs",
       "ht": "6'0\"",
@@ -100,7 +97,7 @@ window.EMR_DATA = {
       "bp": "120/76",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "183 lbs",
       "ht": "6'0\"",
@@ -112,7 +109,7 @@ window.EMR_DATA = {
       "bp": "122/74",
       "hr": 70,
       "rr": 14,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "99%",
       "wt": "180 lbs",
       "ht": "6'0\"",
@@ -127,10 +124,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. David Ortega, MD",
       "cc": "Follow-up: AS, medication management",
-      "hpi": "36-year-old male with ankylosing spondylitis for follow-up. On adalimumab since 2021 with good response — back stiffness improved, no uveitis episodes in 18 months. Reports recent 2-week period of increased back stiffness, possibly related to missing one adalimumab injection (forgot during travel). No eye symptoms currently. No GI complaints on naproxen with omeprazole.",
+      "hpi": "36-year-old male with ankylosing spondylitis for follow-up. On adalimumab since 2021 with good response \u2014 back stiffness improved, no uveitis episodes in 18 months. Reports recent 2-week period of increased back stiffness, possibly related to missing one adalimumab injection (forgot during travel). No eye symptoms currently. No GI complaints on naproxen with omeprazole.",
       "exam": "General: NAD, well-appearing. Eyes: No conjunctival injection, PERRL, EOMI. Spine: Reduced lumbar flexion (Schober 3 cm), mild bilateral SI joint TTP. CV: RRR. Lungs: Good chest expansion. Neuro: A&O x3, no focal deficits.",
-      "assessment": "1. AS — mild flare likely related to missed biologic dose; otherwise well-controlled\n2. Recurrent anterior uveitis — no current episode; 18 months episode-free on adalimumab\n3. Chronic inflammatory back pain — mild worsening",
-      "plan": "1. Resume adalimumab on regular schedule; do not skip doses\n2. Continue naproxen PRN for breakthrough pain\n3. Rheumatology follow-up in 3 months\n4. Ophthalmology annual screening — appointment confirmed\n5. Return immediately for eye redness, pain, photophobia, or vision changes\n6. RTC 6 months"
+      "assessment": "1. AS \u2014 mild flare likely related to missed biologic dose; otherwise well-controlled\n2. Recurrent anterior uveitis \u2014 no current episode; 18 months episode-free on adalimumab\n3. Chronic inflammatory back pain \u2014 mild worsening",
+      "plan": "1. Resume adalimumab on regular schedule; do not skip doses\n2. Continue naproxen PRN for breakthrough pain\n3. Rheumatology follow-up in 3 months\n4. Ophthalmology annual screening \u2014 appointment confirmed\n5. Return immediately for eye redness, pain, photophobia, or vision changes\n6. RTC 6 months"
     },
     {
       "id": "V002",
@@ -138,144 +135,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. David Ortega, MD",
       "cc": "Annual wellness exam",
-      "hpi": "36-year-old male for annual exam. AS well-controlled on adalimumab. No uveitis recurrence. Exercises regularly — swimming, yoga. No new complaints.",
+      "hpi": "36-year-old male for annual exam. AS well-controlled on adalimumab. No uveitis recurrence. Exercises regularly \u2014 swimming, yoga. No new complaints.",
       "exam": "General: NAD. Eyes: Clear, no injection. Spine: Mildly reduced ROM, unchanged. CV: RRR. Lungs: CTAB.",
-      "assessment": "1. Annual wellness — healthy\n2. AS — well-controlled\n3. No uveitis recurrence",
+      "assessment": "1. Annual wellness \u2014 healthy\n2. AS \u2014 well-controlled\n3. No uveitis recurrence",
       "plan": "1. Continue current regimen\n2. Labs: CBC, CMP, LFTs (biologic monitoring)\n3. TB screening (annual while on biologic)\n4. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "11/20/2024",
-      "time": "08:45",
-      "orderedBy": "Dr. David Ortega, MD",
-      "collected": "11/20/2024 08:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-112018",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Uveitis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "15.0",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "44.8",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "228",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "HLA-B27",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "24",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "22",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Alk Phos",
-              "value": "68",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            }
-          ]
+          "test": "IOP left eye",
+          "value": "14",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": ""
         },
         {
-          "name": "INFLAMMATORY MARKERS",
-          "results": [
-            {
-              "test": "ESR",
-              "value": "18",
-              "unit": "mm/hr",
-              "range": "0-15",
-              "flag": "H"
-            },
-            {
-              "test": "CRP",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "<0.3",
-              "flag": "H"
-            }
-          ]
+          "test": "Visual acuity left",
+          "value": "20/60",
+          "unit": "",
+          "ref": "20/20",
+          "flag": "H"
+        },
+        {
+          "test": "Cells in AC (slit lamp)",
+          "value": "3+",
+          "unit": "(11-30 cells/HPF)",
+          "ref": "0",
+          "flag": "H"
+        },
+        {
+          "test": "ESR",
+          "value": "42",
+          "unit": "mm/hr",
+          "ref": "<20",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "01/15/2022",
-      "study": "MRI SACROILIAC JOINTS WITH CONTRAST",
-      "accession": "IMG-2022-01151",
-      "status": "FINAL",
-      "orderedBy": "Dr. Santiago (Rheumatology)",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "34M HLA-B27+ inflammatory back pain, evaluate sacroiliitis.",
-      "technique": "MRI pelvis focused on SI joints with and without gadolinium. T1, T2, STIR, post-contrast sequences.",
-      "findings": "Sacroiliac joints: Bilateral sacroiliitis, left greater than right. Left SI joint — periarticular bone marrow edema on STIR, erosions along iliac surface, post-contrast enhancement of the synovium consistent with active inflammation. Right SI joint — chronic sclerotic changes with minimal edema.\\n\\nLumbar spine: Mild anterior longitudinal ligament enthesopathy at L4-L5. No vertebral body squaring or syndesmophytes.\\n\\nHip joints: Normal.",
-      "impression": "1. Bilateral sacroiliitis consistent with ankylosing spondylitis — active inflammation on left, chronic changes on right.\\n2. Early enthesopathic changes L4-L5.\\n3. No hip involvement.",
-      "dictated": "01/15/2022 14:10",
-      "verified": "01/15/2022 16:30"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent)",
@@ -292,7 +201,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "06/2022",
       "site": "Left deltoid IM",
       "lot": "PV22-201",
@@ -302,14 +211,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     },
     {
       "vaccine": "Hepatitis B (3/3)",
       "date": "1988",
       "site": "Right vastus lateralis IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -322,7 +231,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "Graphic designer — remote work"
+      "Graphic designer \u2014 remote work"
     ],
     [
       "Marital",
@@ -359,7 +268,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "acute-anterior-uveitis",
-    "diagnosis": "Acute Anterior Uveitis (HLA-B27-Associated, Recurrent, in Ankylosing Spondylitis)",
+    "diagnosis": "Acute Anterior Uveitis (HLA-B27-Associated, Recurrent) in Ankylosing Spondylitis",
     "acuity": 3,
     "presentation": "Eye Emergency",
     "category": "ophthalmologic"
@@ -423,13 +332,12 @@ window.EMR_DATA = {
       "Lymph node palpation": "No lymphadenopathy palpated in head, neck, or preauricular regions."
     },
     "ddxTargets": [
-      "Acute Anterior Uveitis (HLA-B27-Associated, Recurrent, in Ankylosing Spondylitis) (correct diagnosis)",
-      "Viral conjunctivitis",
-      "Bacterial conjunctivitis",
-      "Acute angle-closure glaucoma",
-      "Endophthalmitis",
-      "Episcleritis",
-      "Scleritis"
+      "HLA-B27 anterior uveitis in AS (correct)",
+      "Acute angle-closure glaucoma \u2014 mid-dilated fixed pupil, IOP >30; not present here",
+      "Herpetic anterior uveitis \u2014 unilateral, elevated IOP, corneal dendrites; check history",
+      "Sarcoid uveitis \u2014 granulomatous KPs, systemic features; chest imaging",
+      "Beh\u00e7et disease \u2014 bilateral, posterior involvement, oral/genital ulcers; different pattern",
+      "Reactive arthritis uveitis \u2014 HLA-B27+, recent infection trigger; different systemic context"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'red eye' and immediately thinking infectious conjunctivitis, missing the deeper inflammatory process and systemic connection.",
@@ -439,7 +347,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider this: What features of the chief complaint 'eye emergency' combined with his known ankylosing spondylitis should guide your questioning? What's the connection between HLA-B27, spondyloarthropathies, and ocular inflammation?",
       "phase5": "Now that you've completed your history and physical, let's think through this systematically. How do the examination findings - particularly the ciliary flush, anterior chamber cells, and miosis - help differentiate between surface inflammation versus deeper inflammatory processes? What's the significance of his previous identical episode?",
-      "finalDebrief": "This case illustrates the importance of recognizing extra-articular manifestations of spondyloarthropathies. The key was identifying that this wasn't simple conjunctivitis but anterior uveitis, strongly associated with HLA-B27 and ankylosing spondylitis. How did the clinical pattern - recurrent unilateral anterior uveitis with photophobia, ciliary flush, and miosis in an HLA-B27 positive patient - point you toward the diagnosis?"
+      "finalDebrief": "This case illustrates the importance of recognizing extra-articular manifestations of spondyloarthropathies. The key was identifying that this wasn't simple conjunctivitis but anterior uveitis, strongly associated with HLA-B27 and ankylosing spondylitis. How did the clinical pattern - recurrent unilateral anterior uveitis with photophobia, ciliary flush, and miosis in an HLA-B27 positive patient - point you toward the diagnosis?",
+      "final": "Diagnosis: HLA-B27 anterior uveitis in AS. Key learning: (1) HLA-B27 is present in ~8% of the general population but >90% of AS patients. Uveitis occurs in 25-40% of AS patients and is the most common extra-articular manifestation. (2) Classic HLA-B27 uveitis: acute, unilateral (alternating eyes), anterior, non-granulomatous. Rapid onset, responds well to topical steroids but recurs. (3) Cycloplegia (cyclopentolate) serves two purposes: prevents posterior synechiae formation AND provides analgesic relief from ciliary spasm (photophobia). Never omit. (4) Posterior synechiae are the most important structural complication \u2014 adhesions between iris and lens \u2192 irregular pupil, angle closure, secondary glaucoma. Prompt treatment prevents them. (5) TNF inhibitor indication: recurrent uveitis (\u22653 episodes/2 years) or bilateral involvement despite topical therapy \u2192 adalimumab is FDA-approved for non-infectious uveitis. Addresses both AS and reduces uveitis recurrence frequency."
     }
   }
 };

@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Hemolytic Transfusion Reaction
-// Variant: acute-hemolytic-transfusion-reaction | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part B",
     "pcp": "Dr. Eduardo Reyes, MD",
-    "pharmacy": "CVS Pharmacy — 3001 N Federal Hwy, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 3001 N Federal Hwy, Fort Lauderdale, FL",
     "language": "English, Haitian Creole",
     "race": "Black/African American",
     "address": "8773 Peachtree Rd, Chicago, IL 60651",
@@ -26,88 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Myelodysplastic Syndrome — RCMD subtype",
-      "icd": "D46.1",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Diagnosed by bone marrow biopsy 03/2023; transfusion-dependent anemia; followed by hematology-oncology"
-    },
-    {
-      "problem": "Chronic Anemia, Transfusion-Dependent",
-      "icd": "D64.9",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Requires pRBC transfusion every 2-3 weeks; baseline Hgb 7-8 g/dL"
-    },
-    {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2010",
-      "status": "Active",
-      "notes": "Well-controlled on amlodipine"
-    },
-    {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2014",
-      "status": "Active",
-      "notes": "A1c 7.2%; on metformin"
-    },
-    {
-      "problem": "Iron Overload — Secondary (Transfusional)",
-      "icd": "E83.10",
+      "problem": "Acute hemolytic transfusion reaction \u2014 ABO incompatibility",
+      "icd": "T80.310A",
       "onset": "2024",
       "status": "Active",
-      "notes": "Ferritin >1500; on deferasirox"
+      "notes": "James Kim, 45M \u2014 received 2 units pRBC. 30 minutes into transfusion: fever 39.2\u00b0C, rigors, flank pain, hematuria. STOP transfusion immediately."
     },
     {
-      "problem": "Red Cell Alloantibodies — anti-E, anti-Kell",
-      "icd": "D59.8",
+      "problem": "ABO mismatch \u2014 clerical error suspected",
+      "icd": "T80.310A",
       "onset": "2024",
       "status": "Active",
-      "notes": "Identified on antibody screen 06/2024; requires antigen-negative crossmatch-compatible blood"
+      "notes": "Most common cause of fatal AHTR is clerical/labeling error \u2014 wrong blood to wrong patient. Mandatory incident report."
+    },
+    {
+      "problem": "DIC risk \u2014 intravascular hemolysis activates coagulation cascade",
+      "icd": "D65",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "ABO AHTR triggers DIC via tissue factor release from hemolyzed RBCs. Monitor PT/PTT, fibrinogen, D-dimer."
     }
   ],
   "medications": [
     {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Reyes",
-      "start": "03/2011",
-      "refills": 4,
+      "name": "STOP TRANSFUSION IMMEDIATELY \u2014 keep IV access",
+      "sig": "Most critical intervention. Do not restart any blood products until blood bank investigation complete. Keep IV line with normal saline.",
+      "prescriber": "Nursing/Medicine",
+      "start": "STOP",
+      "refills": 0,
+      "status": "IMMEDIATE"
+    },
+    {
+      "name": "IV normal saline \u2014 200-300mL/hr initial",
+      "sig": "Maintain urine output >1 mL/kg/hr to prevent hemoglobin precipitation in tubules \u2192 AKI. Aggressive hydration is the cornerstone of treatment.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Reyes",
-      "start": "08/2014",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Deferasirox 360mg daily",
-      "sig": "Take tablets by mouth on empty stomach; at least 30 minutes before food",
-      "prescriber": "Dr. Patel (Hematology)",
-      "start": "02/2024",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Folic Acid 1mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Patel (Hematology)",
-      "start": "04/2023",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Acetaminophen 650mg PRN",
-      "sig": "Take 1-2 tablets by mouth every 6 hours as needed for pain; max 3000mg/day",
-      "prescriber": "Dr. Reyes",
-      "start": "01/2023",
-      "refills": 3,
-      "status": "PRN"
+      "name": "Notify blood bank \u2014 return bag + new patient sample",
+      "sig": "Repeat crossmatch with new sample. Return implicated unit. Blood bank will investigate for clerical error and repeat compatibility testing.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 urgent"
     }
   ],
   "allergies": [
@@ -132,7 +92,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 96,
       "rr": 18,
-      "temp": "98.8°F",
+      "temp": "98.8\u00b0F",
       "spo2": "96%",
       "wt": "158 lbs",
       "ht": "5'3\"",
@@ -144,7 +104,7 @@ window.EMR_DATA = {
       "bp": "128/76",
       "hr": 92,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "157 lbs",
       "ht": "5'3\"",
@@ -156,7 +116,7 @@ window.EMR_DATA = {
       "bp": "130/80",
       "hr": 88,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "160 lbs",
       "ht": "5'3\"",
@@ -170,11 +130,11 @@ window.EMR_DATA = {
       "date": "01/13/2025",
       "type": "ED",
       "provider": "Dr. Karen Okonkwo, MD",
-      "cc": "Scheduled transfusion — symptomatic anemia",
-      "hpi": "66-year-old female with MDS presents for scheduled pRBC transfusion. Reports progressive fatigue and exertional dyspnea over past 4 days. Pre-transfusion Hgb 6.8 g/dL. Known alloantibodies (anti-E, anti-Kell) — antigen-negative units ordered from blood bank. Transfusion completed without incident; post-transfusion Hgb 8.4 g/dL. Tolerated well, no febrile or allergic reactions.",
+      "cc": "Scheduled transfusion \u2014 symptomatic anemia",
+      "hpi": "66-year-old female with MDS presents for scheduled pRBC transfusion. Reports progressive fatigue and exertional dyspnea over past 4 days. Pre-transfusion Hgb 6.8 g/dL. Known alloantibodies (anti-E, anti-Kell) \u2014 antigen-negative units ordered from blood bank. Transfusion completed without incident; post-transfusion Hgb 8.4 g/dL. Tolerated well, no febrile or allergic reactions.",
       "exam": "General: Fatigued-appearing female, pale conjunctivae. CV: Tachycardic, RRR, systolic flow murmur. Lungs: CTAB. Extremities: No edema.",
-      "assessment": "1. MDS with symptomatic anemia — transfusion completed\n2. Known red cell alloantibodies — antigen-negative blood used\n3. Iron overload — ferritin trending up; continue deferasirox",
-      "plan": "1. Post-transfusion monitoring x 2 hours — no reaction\n2. Recheck CBC in 2 weeks\n3. Next transfusion anticipated in 2-3 weeks\n4. Hematology follow-up 02/05/2025"
+      "assessment": "1. MDS with symptomatic anemia \u2014 transfusion completed\n2. Known red cell alloantibodies \u2014 antigen-negative blood used\n3. Iron overload \u2014 ferritin trending up; continue deferasirox",
+      "plan": "1. Post-transfusion monitoring x 2 hours \u2014 no reaction\n2. Recheck CBC in 2 weeks\n3. Next transfusion anticipated in 2-3 weeks\n4. Hematology follow-up 02/05/2025"
     },
     {
       "id": "V002",
@@ -182,191 +142,56 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Eduardo Reyes, MD",
       "cc": "Follow-up: DM2, HTN, MDS",
-      "hpi": "66-year-old female for chronic disease management. MDS stable — transfusion-dependent, followed by hematology. DM well-controlled. BP at goal. Reports fatigue between transfusions but functional. No bleeding, bruising, or infections.",
+      "hpi": "66-year-old female for chronic disease management. MDS stable \u2014 transfusion-dependent, followed by hematology. DM well-controlled. BP at goal. Reports fatigue between transfusions but functional. No bleeding, bruising, or infections.",
       "exam": "General: Pale, NAD. HEENT: Pale conjunctivae. CV: RRR, I/VI systolic murmur. Lungs: CTAB. Abdomen: Soft, NT. Extremities: No edema. Skin: No petechiae or bruising.",
-      "assessment": "1. MDS — transfusion-dependent; hematology managing\n2. T2DM — A1c 7.2%, at goal\n3. HTN — controlled\n4. Iron overload — on chelation",
+      "assessment": "1. MDS \u2014 transfusion-dependent; hematology managing\n2. T2DM \u2014 A1c 7.2%, at goal\n3. HTN \u2014 controlled\n4. Iron overload \u2014 on chelation",
       "plan": "1. Continue current medications\n2. A1c recheck in 3 months\n3. Coordinate with hematology for transfusion schedule\n4. RTC 3 months"
     }
   ],
   "labs": [
     {
-      "date": "01/27/2025",
-      "time": "07:45",
-      "orderedBy": "Dr. Karen Okonkwo, MD",
-      "collected": "01/27/2025 07:15",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-012710",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "AHTR Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "3.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "6.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "19.2",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "MCV",
-              "value": "102",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": "H"
-            },
-            {
-              "test": "Platelet Count",
-              "value": "88",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": "L"
-            },
-            {
-              "test": "ANC",
-              "value": "1.8",
-              "unit": "x10³/µL",
-              "range": "1.5-8.0",
-              "flag": ""
-            }
-          ]
+          "test": "Plasma hemoglobin (free)",
+          "value": "Elevated \u2014 pink/red plasma",
+          "unit": "",
+          "ref": "Clear",
+          "flag": "H"
         },
         {
-          "name": "TYPE AND SCREEN / CROSSMATCH",
-          "results": [
-            {
-              "test": "ABO/Rh",
-              "value": "O Positive",
-              "unit": "",
-              "range": "—",
-              "flag": ""
-            },
-            {
-              "test": "Antibody Screen",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "Antibody Identification",
-              "value": "Anti-E, Anti-Kell",
-              "unit": "",
-              "range": "—",
-              "flag": ""
-            },
-            {
-              "test": "Crossmatch",
-              "value": "Compatible (E-neg, K-neg units)",
-              "unit": "",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "Direct Coombs (DAT)",
+          "value": "Positive \u2014 IgG + C3d on RBCs",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "118",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            }
-          ]
+          "test": "Plasma haptoglobin",
+          "value": "Undetectable",
+          "unit": "mg/dL",
+          "ref": "30-200",
+          "flag": "L"
         },
         {
-          "name": "IRON STUDIES",
-          "results": [
-            {
-              "test": "Ferritin",
-              "value": "1680",
-              "unit": "ng/mL",
-              "range": "12-150",
-              "flag": "H"
-            },
-            {
-              "test": "Serum Iron",
-              "value": "185",
-              "unit": "µg/dL",
-              "range": "60-170",
-              "flag": "H"
-            },
-            {
-              "test": "TIBC",
-              "value": "210",
-              "unit": "µg/dL",
-              "range": "250-370",
-              "flag": "L"
-            },
-            {
-              "test": "Transferrin Saturation",
-              "value": "88",
-              "unit": "%",
-              "range": "20-50",
-              "flag": "H"
-            }
-          ]
+          "test": "LDH",
+          "value": "2800",
+          "unit": "U/L",
+          "ref": "100-220",
+          "flag": "H"
+        },
+        {
+          "test": "Urine \u2014 hemoglobinuria",
+          "value": "Dark red \u2014 positive for Hgb",
+          "unit": "",
+          "ref": "Clear",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "date": "09/15/2024",
-      "study": "CT ABDOMEN AND PELVIS WITH CONTRAST",
-      "accession": "IMG-2024-09151",
-      "status": "FINAL",
-      "orderedBy": "Dr. Priya Patel, MD (Hematology)",
-      "readBy": "Dr. James Chen, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "66F MDS, iron overload, evaluate hepatosplenomegaly.",
-      "technique": "CT abdomen and pelvis with IV contrast (premedicated for contrast allergy).",
-      "findings": "Liver: Mildly enlarged (18 cm craniocaudal). Diffusely increased hepatic attenuation on pre-contrast images consistent with iron deposition. No focal lesions.\\n\\nSpleen: Mildly enlarged (14 cm). Homogeneous.\\n\\nPancreas, adrenals, kidneys: Unremarkable.\\n\\nBowel: No obstruction or wall thickening.\\n\\nLymph nodes: No pathologic lymphadenopathy.\\n\\nPelvis: Unremarkable for age.",
-      "impression": "1. Hepatomegaly with increased hepatic attenuation — consistent with iron overload.\\n2. Mild splenomegaly — likely related to MDS.\\n3. No focal hepatic lesion or lymphadenopathy.",
-      "dictated": "09/15/2024 14:20",
-      "verified": "09/15/2024 16:45"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "vaccine": "Influenza (Quadrivalent, High-Dose)",
@@ -383,7 +208,7 @@ window.EMR_DATA = {
       "mfr": "Pfizer"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "01/2023",
       "site": "Left deltoid IM",
       "lot": "PV23-088",
@@ -400,7 +225,7 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Boostrix)",
       "date": "2017",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -425,7 +250,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Denies — stopped due to MDS"
+      "Denies \u2014 stopped due to MDS"
     ],
     [
       "Drugs",
@@ -450,7 +275,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "acute-hemolytic-transfusion-reaction",
-    "diagnosis": "Acute Hemolytic Transfusion Reaction (ABO Incompatibility)",
+    "diagnosis": "Acute Hemolytic Transfusion Reaction \u2014 ABO Incompatibility",
     "acuity": 1,
     "presentation": "Hematologic Emergency",
     "category": "hematologic"
@@ -501,7 +326,7 @@ window.EMR_DATA = {
       "Urine dipstick examination"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 145/85 (elevated from baseline), HR 105 (tachycardic), Temp 100.2°F (low-grade fever), RR 18, SpO2 97% on room air",
+      "Vital signs assessment": "BP 145/85 (elevated from baseline), HR 105 (tachycardic), Temp 100.2\u00b0F (low-grade fever), RR 18, SpO2 97% on room air",
       "Conjunctival and scleral examination": "Mild scleral icterus present, conjunctival pallor consistent with known anemia",
       "Skin color and jaundice assessment": "Subtle yellow discoloration of skin, particularly noticeable in natural light",
       "Cardiovascular examination": "Tachycardic regular rhythm, no murmurs, gallops, or rubs. No peripheral edema.",
@@ -513,13 +338,12 @@ window.EMR_DATA = {
       "Urine dipstick examination": "Dark amber/brown urine, positive for hemoglobin, trace protein, no nitrites or leukocyte esterase"
     },
     "ddxTargets": [
-      "Acute Hemolytic Transfusion Reaction (ABO Incompatibility) (correct diagnosis)",
-      "Delayed Hemolytic Transfusion Reaction",
-      "Transfusion-Related Acute Lung Injury (TRALI)",
-      "Septic Transfusion Reaction",
-      "Acute Kidney Injury from other causes",
-      "Febrile Non-Hemolytic Transfusion Reaction",
-      "Hemolytic Crisis from underlying MDS progression"
+      "AHTR \u2014 ABO incompatibility (correct)",
+      "Febrile non-hemolytic transfusion reaction \u2014 fever only, no hemolysis markers, no DIC risk; treat with antipyretic, can restart",
+      "Allergic transfusion reaction \u2014 urticaria \u00b1 bronchospasm, no hemolysis markers; antihistamine \u00b1 epinephrine",
+      "Bacterial contamination of unit \u2014 fever + hypotension but Gram stain/culture of unit distinguishes",
+      "Delayed hemolytic reaction \u2014 occurs 5-10 days post-transfusion; less acute",
+      "TRALI \u2014 pulmonary infiltrates, not flank pain/hematuria; different pathophysiology"
     ],
     "biasFlags": {
       "anchoring": "Students may anchor on the patient's known MDS and assume symptoms are related to disease progression rather than considering transfusion-related complications",
@@ -529,7 +353,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, let's think about transfusion reactions. What types exist, and how might their timing and presentation differ? Consider both immediate and delayed reactions in your differential.",
       "phase5": "You've gathered excellent information about the timing and constellation of symptoms. The dark urine is particularly telling - what does hemoglobinuria suggest about the underlying pathophysiology? How does this help narrow your differential?",
-      "finalDebrief": "This case illustrates how acute hemolytic transfusion reactions present with the classic triad of fever, back pain, and hemoglobinuria. Notice how the timing, symptom constellation, and physical findings all pointed toward intravascular hemolysis. What key steps in the transfusion process might have prevented this ABO incompatibility?"
+      "finalDebrief": "This case illustrates how acute hemolytic transfusion reactions present with the classic triad of fever, back pain, and hemoglobinuria. Notice how the timing, symptom constellation, and physical findings all pointed toward intravascular hemolysis. What key steps in the transfusion process might have prevented this ABO incompatibility?",
+      "final": "Diagnosis: AHTR \u2014 ABO incompatibility. Key learning: (1) STOP is the first intervention \u2014 immediately, before even calling for help. Even 10mL of incompatible blood can be fatal. Keep IV access to administer saline. (2) ABO incompatibility mechanism: pre-formed IgM antibodies against donor ABO antigens \u2192 complement activation \u2192 intravascular hemolysis \u2192 free hemoglobin \u2192 renal tubular precipitation. (3) Triad of symptoms: fever/rigors + flank/back pain (hemoglobin in renal tubules) + hemoglobinuria (dark red urine). In anesthetized patients, only hypotension and hemoglobinuria may be seen. (4) Investigations: free plasma Hgb (pink plasma), haptoglobin (undetectable \u2014 consumed binding free Hgb), direct Coombs (positive), urinalysis (hemoglobinuria). (5) AKI prevention: IV NS at 200-300mL/hr to maintain urine output >1mL/kg/hr. Furosemide if oliguric. DIC monitoring: check PT, PTT, fibrinogen, D-dimer every 4-6 hours. Most fatalities are from DIC and AKI, not the hemolysis itself."
     }
   }
 };

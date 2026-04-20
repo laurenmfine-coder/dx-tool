@@ -9,7 +9,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Rosa Delgado, MD",
-    "pharmacy": "CVS Pharmacy — 2200 S University Dr, Riverside, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2200 S University Dr, Riverside, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
     "address": "3920 SW 52nd Ave, Riverside, FL 33100",
@@ -22,65 +22,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Cholelithiasis",
-      "icd": "K80.20",
-      "onset": "2023",
-      "status": "Active",
-      "notes": "Multiple gallstones on US; asymptomatic initially; declined elective cholecystectomy"
-    },
-    {
-      "problem": "Obesity, Class I",
-      "icd": "E66.01",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "BMI 32; dietary counseling"
-    },
-    {
-      "problem": "Dyslipidemia",
-      "icd": "E78.5",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "Elevated LDL; on statin"
-    },
-    {
-      "problem": "Oral Contraceptive Use",
-      "icd": "Z79.3",
-      "onset": "2016",
-      "status": "Active",
-      "notes": "Combined OCP; risk factor for gallstones"
-    },
-    {
-      "problem": "Biliary Colic, Recurrent",
-      "icd": "K80.20",
+      "problem": "Acute cholecystitis \u2014 Tokyo Grade II (moderate)",
+      "icd": "K81.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "3 episodes postprandial RUQ pain in past 6 months; self-limited; surgery again recommended"
+      "notes": "Susan Park, 52F \u2014 RUQ pain 12 hours, Murphy sign positive, fever 38.6\u00b0C, WBC 14.2. Ultrasound: gallstones, wall thickening, pericholecystic fluid."
+    },
+    {
+      "problem": "Cholelithiasis \u2014 multiple stones",
+      "icd": "K80.20",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Known gallstones. Classic 'fat, female, forty, fertile, fair' but applies to less than half of cases."
+    },
+    {
+      "problem": "Mild transaminase elevation \u2014 possible CBD stone",
+      "icd": "K80.50",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "ALT 68, AST 72 \u2014 biliary pattern. Check direct bilirubin and consider MRCP to rule out choledocholithiasis."
     }
   ],
   "medications": [
     {
-      "name": "Atorvastatin 20mg daily",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Delgado",
-      "start": "06/2020",
-      "refills": 3,
+      "name": "Piperacillin-tazobactam 3.375g IV q6h",
+      "sig": "Empiric coverage for gram-negative biliary pathogens (E. coli, Klebsiella). Tokyo guidelines recommend antibiotics for Grade II and III.",
+      "prescriber": "Surgery/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV"
+    },
+    {
+      "name": "IV hydration \u2014 LR 125mL/hr",
+      "sig": "NPO for potential surgery. Fluid resuscitation.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Norgestimate-Ethinyl Estradiol 0.25mg/35mcg daily",
-      "sig": "Take 1 tablet by mouth daily at same time each day",
-      "prescriber": "Dr. Delgado",
-      "start": "01/2016",
-      "refills": 6,
-      "status": "Active"
-    },
-    {
-      "name": "Ibuprofen 600mg PRN",
-      "sig": "Take 1 tablet by mouth every 6-8 hours as needed for pain with food",
-      "prescriber": "Dr. Delgado",
-      "start": "09/2024",
-      "refills": 1,
-      "status": "PRN"
+      "name": "Laparoscopic cholecystectomy \u2014 within 24-72 hours",
+      "sig": "Tokyo Grade II: early laparoscopic cholecystectomy preferred over interval. 72-hour window associated with lowest conversion-to-open rate.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Scheduled \u2014 24h"
     }
   ],
   "allergies": [
@@ -98,7 +84,7 @@ window.EMR_DATA = {
       "bp": "132/84",
       "hr": 88,
       "rr": 16,
-      "temp": "99.2°F",
+      "temp": "99.2\u00b0F",
       "spo2": "98%",
       "wt": "186 lbs",
       "ht": "5'5\"",
@@ -110,7 +96,7 @@ window.EMR_DATA = {
       "bp": "126/80",
       "hr": 76,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "184 lbs",
       "ht": "5'5\"",
@@ -122,7 +108,7 @@ window.EMR_DATA = {
       "bp": "124/78",
       "hr": 74,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "182 lbs",
       "ht": "5'5\"",
@@ -137,10 +123,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Rosa Delgado, MD",
       "cc": "Follow-up biliary colic; third episode in 6 months",
-      "hpi": "44-year-old female with known cholelithiasis presenting after third episode of postprandial RUQ pain in 6 months. Most recent episode 3 days ago — severe crampy pain after eating fried food, lasted 4 hours, associated with nausea and one episode of vomiting. Pain radiated to right scapula. Resolved spontaneously. Previous episodes similarly self-limited. Initially declined surgery due to work schedule concerns but now willing to consider.",
+      "hpi": "44-year-old female with known cholelithiasis presenting after third episode of postprandial RUQ pain in 6 months. Most recent episode 3 days ago \u2014 severe crampy pain after eating fried food, lasted 4 hours, associated with nausea and one episode of vomiting. Pain radiated to right scapula. Resolved spontaneously. Previous episodes similarly self-limited. Initially declined surgery due to work schedule concerns but now willing to consider.",
       "exam": "General: NAD currently. Abdomen: Soft, mild RUQ tenderness on deep palpation, no rebound, no guarding. Positive Murphy sign on deep inspiration. No jaundice. No palpable masses.",
-      "assessment": "1. Recurrent biliary colic — increasing frequency; positive Murphy sign; high risk for progression to acute cholecystitis\n2. Cholelithiasis — symptomatic\n3. Obesity — risk factor",
-      "plan": "1. URGENT surgical referral for elective laparoscopic cholecystectomy\n2. Dietary modification: low-fat diet strictly until surgery\n3. ED precautions: fever >101°F, persistent pain >6 hours, jaundice → ED immediately\n4. CBC, CMP, lipase ordered to establish baseline\n5. Patient agrees to surgical consultation — appointment pending"
+      "assessment": "1. Recurrent biliary colic \u2014 increasing frequency; positive Murphy sign; high risk for progression to acute cholecystitis\n2. Cholelithiasis \u2014 symptomatic\n3. Obesity \u2014 risk factor",
+      "plan": "1. URGENT surgical referral for elective laparoscopic cholecystectomy\n2. Dietary modification: low-fat diet strictly until surgery\n3. ED precautions: fever >101\u00b0F, persistent pain >6 hours, jaundice \u2192 ED immediately\n4. CBC, CMP, lipase ordered to establish baseline\n5. Patient agrees to surgical consultation \u2014 appointment pending"
     },
     {
       "id": "V002",
@@ -148,10 +134,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Rosa Delgado, MD",
       "cc": "RUQ pain episodes; medication refills",
-      "hpi": "44-year-old female with known asymptomatic cholelithiasis now reporting 2 episodes of postprandial RUQ pain in past 2 months. Each lasted 2-3 hours and resolved. Triggered by fatty meals. No fever, no jaundice. Discussed surgical options — patient prefers conservative management at this time.",
+      "hpi": "44-year-old female with known asymptomatic cholelithiasis now reporting 2 episodes of postprandial RUQ pain in past 2 months. Each lasted 2-3 hours and resolved. Triggered by fatty meals. No fever, no jaundice. Discussed surgical options \u2014 patient prefers conservative management at this time.",
       "exam": "Abdomen: Soft, NT currently, no guarding. No jaundice.",
-      "assessment": "1. Biliary colic — new onset symptomatic cholelithiasis\n2. Dyslipidemia — stable",
-      "plan": "1. Low-fat dietary counseling\n2. Surgical referral offered — patient declines at this time\n3. Return precautions for cholecystitis/cholangitis reviewed\n4. Continue atorvastatin"
+      "assessment": "1. Biliary colic \u2014 new onset symptomatic cholelithiasis\n2. Dyslipidemia \u2014 stable",
+      "plan": "1. Low-fat dietary counseling\n2. Surgical referral offered \u2014 patient declines at this time\n3. Return precautions for cholecystitis/cholangitis reviewed\n4. Continue atorvastatin"
     },
     {
       "id": "V003",
@@ -161,175 +147,59 @@ window.EMR_DATA = {
       "cc": "Annual physical; ultrasound results review",
       "hpi": "43-year-old female for annual exam. Incidental finding of cholelithiasis on RUQ ultrasound ordered for mild dyspepsia. No biliary symptoms at that time. Multiple gallstones identified. Asymptomatic.",
       "exam": "General: NAD. Abdomen: Soft, NT, no organomegaly.",
-      "assessment": "1. Incidental cholelithiasis — asymptomatic\n2. Obesity — stable\n3. Dyslipidemia — controlled on statin",
-      "plan": "1. Watchful waiting for asymptomatic gallstones\n2. Low-fat diet recommended\n3. Elective cholecystectomy discussed as option — patient declines\n4. Continue atorvastatin"
+      "assessment": "1. Incidental cholelithiasis \u2014 asymptomatic\n2. Obesity \u2014 stable\n3. Dyslipidemia \u2014 controlled on statin",
+      "plan": "1. Watchful waiting for asymptomatic gallstones\n2. Low-fat diet recommended\n3. Elective cholecystectomy discussed as option \u2014 patient declines\n4. Continue atorvastatin"
     }
   ],
   "labs": [
     {
-      "date": "01/10/2025",
-      "time": "10:00",
-      "orderedBy": "Dr. Rosa Delgado, MD",
-      "collected": "01/10/2025 09:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-246180",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Cholecystitis Workup",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.0",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "103",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "25",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "28",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "24",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "72",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "14.2",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.2",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "268",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Total bilirubin",
+          "value": "1.8",
+          "unit": "mg/dL",
+          "ref": "0.2-1.2",
+          "flag": "H"
         },
         {
-          "name": "LIPASE",
-          "results": [
-            {
-              "test": "Lipase",
-              "value": "32",
-              "unit": "U/L",
-              "range": "0-160",
-              "flag": ""
-            }
-          ]
+          "test": "Direct bilirubin",
+          "value": "0.9",
+          "unit": "mg/dL",
+          "ref": "0-0.3",
+          "flag": "H"
+        },
+        {
+          "test": "ALT",
+          "value": "68",
+          "unit": "U/L",
+          "ref": "7-56",
+          "flag": "H"
+        },
+        {
+          "test": "Lipase",
+          "value": "42",
+          "unit": "U/L",
+          "ref": "10-140",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "08/28/2023",
-      "study": "ULTRASOUND RIGHT UPPER QUADRANT",
-      "accession": "IMG-2023-24618",
-      "status": "FINAL",
-      "orderedBy": "Dr. Rosa Delgado, MD",
-      "readBy": "Dr. Lisa Nakamura, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "43F with dyspepsia. R/O gallbladder pathology.",
-      "technique": "Real-time grayscale and color Doppler sonography of the right upper quadrant.",
-      "findings": "Gallbladder: Multiple echogenic foci with posterior acoustic shadowing consistent with cholelithiasis. Largest stone measures approximately 1.2 cm. No gallbladder wall thickening (wall measures 2 mm). No pericholecystic fluid. No sonographic Murphy sign.\\n\\nCommon bile duct: 4 mm — normal caliber. No intrahepatic biliary ductal dilatation.\\n\\nLiver: Normal echogenicity and size. No focal lesions.\\n\\nRight kidney: Normal.",
-      "impression": "1. Cholelithiasis — multiple gallstones, largest 1.2 cm.\\n2. No signs of acute cholecystitis (no wall thickening, no pericholecystic fluid, negative sonographic Murphy sign).\\n3. Normal common bile duct caliber.",
-      "dictated": "08/28/2023 14:00",
-      "verified": "08/28/2023 16:30"
+      "date": "04/2024",
+      "study": "Right Upper Quadrant Ultrasound",
+      "findings": "Multiple echogenic gallstones with posterior shadowing. Gallbladder wall thickening 6mm. Pericholecystic fluid. Sonographic Murphy sign positive.",
+      "impression": "Acute calculous cholecystitis. No common bile duct dilation on ultrasound."
     }
   ],
   "immunizations": [
@@ -351,14 +221,14 @@ window.EMR_DATA = {
       "vaccine": "Tdap (Adacel)",
       "date": "2019",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
-      "vaccine": "Hepatitis B — Series complete",
+      "vaccine": "Hepatitis B \u2014 Series complete",
       "date": "1998",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -375,7 +245,7 @@ window.EMR_DATA = {
     ],
     [
       "Marital",
-      "Married — 18 years"
+      "Married \u2014 18 years"
     ],
     [
       "Tobacco",
@@ -383,7 +253,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — 1-2 glasses wine on weekends"
+      "Social \u2014 1-2 glasses wine on weekends"
     ],
     [
       "Drugs",
@@ -408,7 +278,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "acute-cholecystitis",
-    "diagnosis": "Acute Cholecystitis",
+    "diagnosis": "Acute Calculous Cholecystitis (Tokyo Grade II \u2014 Moderate)",
     "acuity": 3,
     "presentation": "GI Emergency",
     "category": "gastrointestinal"
@@ -467,18 +337,17 @@ window.EMR_DATA = {
       "Percussion of RUQ": "Tenderness to percussion over RUQ, normal elsewhere",
       "Assessment for rebound tenderness": "Mild rebound tenderness in RUQ, negative in other quadrants",
       "Evaluation for jaundice (sclera and skin)": "No scleral icterus, no skin yellowing noted",
-      "Vital sign assessment": "Low-grade fever 99.2°F, mild tachycardia HR 88, BP 132/84",
+      "Vital sign assessment": "Low-grade fever 99.2\u00b0F, mild tachycardia HR 88, BP 132/84",
       "CVA tenderness": "Negative bilaterally",
       "Rovsing's sign": "Negative - no RUQ pain with LLQ palpation"
     },
     "ddxTargets": [
-      "Acute Cholecystitis (correct diagnosis)",
-      "Biliary Colic",
-      "Choledocholithiasis",
-      "Acute Pancreatitis",
-      "Acute Myocardial Infarction",
-      "Peptic Ulcer Disease",
-      "Hepatitis"
+      "Acute cholecystitis \u2014 Tokyo Grade II (correct)",
+      "Choledocholithiasis \u2014 elevated direct bilirubin warrants MRCP; can coexist",
+      "Acute pancreatitis \u2014 lipase normal, pain epigastric not RUQ; different",
+      "Peptic ulcer disease \u2014 no stones, different pain location and character",
+      "Hepatic abscess \u2014 different fever pattern, no Murphy sign; CT distinguishes",
+      "Fitz-Hugh-Curtis syndrome \u2014 young women, right shoulder tip, sexual history"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's known cholelithiasis history and assuming this is just another episode of biliary colic, potentially missing the progression to acute cholecystitis",
@@ -488,7 +357,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Consider Maria's presenting symptoms carefully. While she has a history of gallstones, how might her current presentation differ from simple biliary colic? What key features in her history should guide your interview?",
       "phase5": "You've gathered good history and physical exam data. How do Maria's current symptoms and findings compare to her previous gallstone episodes? What does the presence of fever, persistent pain, and positive Murphy's sign suggest about disease progression?",
-      "finalDebrief": "Let's trace your diagnostic evolution. Initially, Maria's known gallstone history suggested biliary colic, but several red flags pointed toward acute cholecystitis: persistent pain beyond typical colic duration, fever, positive Murphy's sign, and failure of symptoms to resolve. How did recognizing these inflammatory signs help differentiate between uncomplicated biliary colic and acute cholecystitis?"
+      "finalDebrief": "Let's trace your diagnostic evolution. Initially, Maria's known gallstone history suggested biliary colic, but several red flags pointed toward acute cholecystitis: persistent pain beyond typical colic duration, fever, positive Murphy's sign, and failure of symptoms to resolve. How did recognizing these inflammatory signs help differentiate between uncomplicated biliary colic and acute cholecystitis?",
+      "final": "Diagnosis: acute cholecystitis \u2014 Tokyo Grade II. Key learning: (1) Tokyo Guidelines grading: Grade I (mild) = no organ dysfunction, responds to medical therapy. Grade II (moderate) = WBC >18, duration >72h, significant local inflammation. Grade III (severe) = organ dysfunction (hypotension, renal failure, jaundice). Grade determines urgency of surgery. (2) Murphy sign: inspiratory arrest on deep palpation of RUQ \u2014 high specificity for cholecystitis. Sonographic Murphy sign on ultrasound has similar value. (3) Early vs interval cholecystectomy: for Grade I/II, early laparoscopic cholecystectomy within 72 hours is preferred \u2014 lower conversion rate than delayed (>72h) and shorter hospital stay. The 'best timing window' is <24 hours from symptom onset. (4) CBD stone evaluation: elevated direct bilirubin + transaminases warrants MRCP before cholecystectomy. Preoperative ERCP if CBD stone confirmed. (5) Acalculous cholecystitis: occurs in critically ill ICU patients (sepsis, trauma, burns, TPN). Higher morbidity \u2014 often gangrenous."
     }
   }
 };

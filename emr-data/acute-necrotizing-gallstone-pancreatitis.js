@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Necrotizing Gallstone Pancreatitis
-// Variant: acute-necrotizing-gallstone-pancreatitis | Acuity: ESI-2
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. William Archer, MD",
-    "pharmacy": "Walgreens — 3100 N State Rd 7, Lauderdale Lakes, FL",
+    "pharmacy": "Walgreens \u2014 3100 N State Rd 7, Lauderdale Lakes, FL",
     "language": "English, Haitian Creole",
     "race": "Black/Caribbean American",
     "address": "6875 Elm St, San Antonio, TX 78212",
@@ -26,112 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Cholelithiasis",
-      "icd": "K80.20",
-      "onset": "2022",
+      "problem": "Necrotizing pancreatitis \u2014 pancreatic/peripancreatic necrosis",
+      "icd": "K85.10",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Known gallstones; declined surgery due to cardiac risk"
+      "notes": "Patricia Williams, 56F \u2014 gallstone pancreatitis, CTSI 7 (severe). CT: 50% pancreatic necrosis + peripancreatic fluid collection. Revised Atlanta: moderately severe (no persistent organ failure yet)."
     },
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2010",
+      "problem": "Choledocholithiasis \u2014 CBD stone on MRCP",
+      "icd": "K80.51",
+      "onset": "2024",
       "status": "Active",
-      "notes": "A1c 7.8%; on metformin and glipizide"
+      "notes": "MRCP: CBD stone causing biliary obstruction. ERCP indicated within 24 hours if cholangitis present (no cholangitis here \u2014 defer ERCP)."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2005",
+      "problem": "Infection risk \u2014 necrotizing pancreatitis",
+      "icd": "K85.10",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On lisinopril and amlodipine"
-    },
-    {
-      "problem": "Hypertriglyceridemia",
-      "icd": "E78.1",
-      "onset": "2018",
-      "status": "Active",
-      "notes": "TG 280-350 range; on fenofibrate — additional risk for pancreatitis"
-    },
-    {
-      "problem": "Coronary Artery Disease",
-      "icd": "I25.10",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "PCI with DES to LAD 2019; on DAPT"
-    },
-    {
-      "problem": "Obesity, Class II",
-      "icd": "E66.01",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "BMI 37"
+      "notes": "Infected necrosis (walled-off necrosis + fever + rising WBC at day 7-10) carries >30% mortality. FNA/CT-guided drainage when infected necrosis suspected."
     }
   ],
   "medications": [
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Archer",
-      "start": "03/2012",
-      "refills": 3,
-      "status": "Active"
+      "name": "Aggressive early IV fluid resuscitation \u2014 LR preferred",
+      "sig": "Lactated Ringer's superior to normal saline (reduces SIRS, acidosis). Goal-directed: 250-500mL/hr first 12-24h, targeting BUN decrease, urine output 0.5-1mL/kg/hr. Avoid over-resuscitation (abdominal compartment syndrome).",
+      "prescriber": "Surgery/GI",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 LR at 300mL/hr"
     },
     {
-      "name": "Glipizide 10mg BID",
-      "sig": "Take 1 tablet by mouth twice daily 30 minutes before meals",
-      "prescriber": "Dr. Archer",
-      "start": "08/2018",
-      "refills": 2,
-      "status": "Active"
+      "name": "Early enteral nutrition (NOT parenteral) \u2014 within 24-48h",
+      "sig": "Nasojejunal feeds if patient cannot tolerate oral. Early EN maintains gut barrier, reduces bacterial translocation, reduces infected necrosis risk. Avoid NPO + TPN unless EN truly impossible.",
+      "prescriber": "Surgery/GI/Nutrition",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 NJ feeds"
     },
     {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Archer",
-      "start": "01/2008",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Archer",
-      "start": "06/2015",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Archer",
-      "start": "04/2019",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Clopidogrel 75mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Archer",
-      "start": "04/2019",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 80mg daily",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Archer",
-      "start": "04/2019",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Fenofibrate 145mg daily",
-      "sig": "Take 1 tablet by mouth once daily with food",
-      "prescriber": "Dr. Archer",
-      "start": "01/2019",
-      "refills": 3,
-      "status": "Active"
+      "name": "Antibiotics only if infected necrosis confirmed \u2014 NOT prophylactic",
+      "sig": "Do NOT give prophylactic antibiotics for necrotizing pancreatitis. Only when infected necrosis proven (FNA positive or gas in necrosis on CT). Prophylactic antibiotics do not prevent infection.",
+      "prescriber": "Surgery/GI",
+      "start": "2024",
+      "refills": 0,
+      "status": "Hold \u2014 no infection yet"
     }
   ],
   "allergies": [
@@ -156,7 +92,7 @@ window.EMR_DATA = {
       "bp": "142/88",
       "hr": 82,
       "rr": 16,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "218 lbs",
       "ht": "5'4\"",
@@ -168,7 +104,7 @@ window.EMR_DATA = {
       "bp": "138/86",
       "hr": 78,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "216 lbs",
       "ht": "5'4\"",
@@ -180,7 +116,7 @@ window.EMR_DATA = {
       "bp": "140/84",
       "hr": 76,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "214 lbs",
       "ht": "5'4\"",
@@ -195,10 +131,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. William Archer, MD",
       "cc": "Diabetes follow-up; refills; discuss gallstone management",
-      "hpi": "62-year-old female with known gallstones, DM2, HTN, CAD, and hypertriglyceridemia for routine follow-up. A1c worsened to 7.8% from 7.2%. Triglycerides remain elevated at 320 despite fenofibrate. Reports occasional 'indigestion' after meals — described as epigastric fullness and bloating, worse with fatty foods. No acute RUQ pain, no fever, no jaundice. Discussed gallstone management — patient concerned about surgical risk given cardiac history. Counseled that hypertriglyceridemia AND gallstones create dual risk for pancreatitis.",
+      "hpi": "62-year-old female with known gallstones, DM2, HTN, CAD, and hypertriglyceridemia for routine follow-up. A1c worsened to 7.8% from 7.2%. Triglycerides remain elevated at 320 despite fenofibrate. Reports occasional 'indigestion' after meals \u2014 described as epigastric fullness and bloating, worse with fatty foods. No acute RUQ pain, no fever, no jaundice. Discussed gallstone management \u2014 patient concerned about surgical risk given cardiac history. Counseled that hypertriglyceridemia AND gallstones create dual risk for pancreatitis.",
       "exam": "General: Obese female, NAD. CV: RRR, no murmurs. Abdomen: Obese, soft, mild epigastric tenderness, no rebound, no guarding. Extremities: Trace bilateral pedal edema.",
-      "assessment": "1. T2DM — suboptimally controlled, A1c 7.8%\n2. Cholelithiasis — symptomatic dyspepsia; declining surgery\n3. Hypertriglyceridemia — persistent elevation despite fenofibrate; PANCREATITIS RISK\n4. CAD — stable post-PCI\n5. HTN — adequately controlled",
-      "plan": "1. Add sitagliptin 100mg daily for DM; continue metformin/glipizide\n2. Reinforce strict low-fat, low-sugar diet\n3. HIGH RISK COUNSELING: With gallstones AND TG >300, patient at significant risk for acute pancreatitis. Strongly recommend cholecystectomy. If severe epigastric pain → ED IMMEDIATELY\n4. Repeat lipid panel, A1c in 3 months\n5. General surgery re-referral placed"
+      "assessment": "1. T2DM \u2014 suboptimally controlled, A1c 7.8%\n2. Cholelithiasis \u2014 symptomatic dyspepsia; declining surgery\n3. Hypertriglyceridemia \u2014 persistent elevation despite fenofibrate; PANCREATITIS RISK\n4. CAD \u2014 stable post-PCI\n5. HTN \u2014 adequately controlled",
+      "plan": "1. Add sitagliptin 100mg daily for DM; continue metformin/glipizide\n2. Reinforce strict low-fat, low-sugar diet\n3. HIGH RISK COUNSELING: With gallstones AND TG >300, patient at significant risk for acute pancreatitis. Strongly recommend cholecystectomy. If severe epigastric pain \u2192 ED IMMEDIATELY\n4. Repeat lipid panel, A1c in 3 months\n5. General surgery re-referral placed"
     },
     {
       "id": "V002",
@@ -208,198 +144,59 @@ window.EMR_DATA = {
       "cc": "Annual cardiology follow-up post-PCI",
       "hpi": "62-year-old female with CAD s/p PCI with DES to LAD (2019) for annual follow-up. On DAPT. No chest pain, no dyspnea on exertion, no palpitations. Exercise tolerance limited by obesity and deconditioning. Echo EF 55%. Stress test not indicated at this time.",
       "exam": "CV: RRR, no murmurs, no S3/S4. JVP not elevated. Lungs: CTAB. Ext: Trace edema.",
-      "assessment": "1. CAD — stable post-PCI; EF preserved\n2. Continue DAPT (aspirin + clopidogrel); may consider aspirin monotherapy after 5+ years",
+      "assessment": "1. CAD \u2014 stable post-PCI; EF preserved\n2. Continue DAPT (aspirin + clopidogrel); may consider aspirin monotherapy after 5+ years",
       "plan": "1. Continue current cardiac medications\n2. Echo in 1 year\n3. Aggressive risk factor modification: weight loss, diabetic control, lipid management\n4. RTC 1 year"
     }
   ],
   "labs": [
     {
-      "date": "12/18/2024",
-      "time": "09:00",
-      "orderedBy": "Dr. William Archer, MD",
-      "collected": "12/18/2024 08:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2024-539470",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (12 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Necrotizing Pancreatitis Severity",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "148",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "101",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2 (Bicarbonate)",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "Total Bilirubin",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.1-1.2",
-              "flag": ""
-            },
-            {
-              "test": "ALT (SGPT)",
-              "value": "34",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST (SGOT)",
-              "value": "30",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Alkaline Phosphatase",
-              "value": "92",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            }
-          ]
+          "test": "Lipase",
+          "value": "4800",
+          "unit": "U/L",
+          "ref": "10-140",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "7.8",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            },
-            {
-              "test": "Est. Avg Glucose (eAG)",
-              "value": "177",
-              "unit": "mg/dL",
-              "range": "—",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "280",
+          "unit": "mg/L",
+          "ref": "<10 (peak at 48-72h)",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "210",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL Cholesterol",
-              "value": "84",
-              "unit": "mg/dL",
-              "range": "<70 (CAD)",
-              "flag": "H"
-            },
-            {
-              "test": "HDL Cholesterol",
-              "value": "38",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "320",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "BUN",
+          "value": "28",
+          "unit": "mg/dL",
+          "ref": "7-20",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.6",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Ca2+",
+          "value": "7.8",
+          "unit": "mg/dL",
+          "ref": "8.5-10.5 (saponification)",
+          "flag": "L"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "07/10/2022",
-      "study": "ULTRASOUND RIGHT UPPER QUADRANT",
-      "accession": "IMG-2022-53947",
-      "status": "FINAL",
-      "orderedBy": "Dr. William Archer, MD",
-      "readBy": "Dr. Lisa Nakamura, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "60F with dyspepsia and bloating. R/O gallbladder pathology.",
-      "technique": "Real-time grayscale and color Doppler sonography of the right upper quadrant.",
-      "findings": "Gallbladder: Multiple small gallstones with posterior acoustic shadowing. Largest measures 0.8 cm. No wall thickening. No pericholecystic fluid. CBD 5 mm — upper limits of normal.\\n\\nLiver: Mildly increased echogenicity consistent with hepatic steatosis.\\n\\nRight kidney: Normal.",
-      "impression": "1. Cholelithiasis — multiple small stones.\\n2. Hepatic steatosis — mild.\\n3. CBD at upper limits of normal (5 mm) — no ductal dilatation.",
-      "dictated": "07/10/2022 11:00",
-      "verified": "07/10/2022 14:00"
-    },
-    {
-      "date": "04/2019",
-      "study": "CARDIAC CATHETERIZATION",
-      "accession": "IMG-2019-53947",
-      "status": "FINAL",
-      "orderedBy": "Dr. David Chen, MD (Cardiology)",
-      "readBy": "Dr. David Chen, MD (Cardiology)",
-      "facility": "Memorial Regional Hospital — Cath Lab",
-      "priority": "Urgent",
-      "clinical": "57F with NSTEMI. Troponin 1.2 ng/mL.",
-      "technique": "Left heart catheterization via right radial artery access. Coronary angiography.",
-      "findings": "Left main: No significant stenosis.\\n\\nLAD: 90% focal stenosis mid-vessel — culprit lesion.\\n\\nLCx: 30% stenosis proximal — non-obstructive.\\n\\nRCA: 40% stenosis mid-vessel — non-obstructive.\\n\\nLVEF: 55%.",
-      "impression": "1. Significant single-vessel coronary artery disease — 90% LAD stenosis.\\n2. Successful PCI with DES to mid-LAD.\\n3. Preserved LV systolic function.",
-      "dictated": "04/18/2019 16:00",
-      "verified": "04/18/2019 18:00"
+      "date": "04/2024",
+      "study": "CT Abdomen/Pelvis with Contrast (CTSI)",
+      "findings": "Pancreatic necrosis involving 50% of pancreatic body/tail with peripancreatic fluid. CTSI score 7 (severe). No gas in necrosis. No organized walled-off collection yet (day 3).",
+      "impression": "Necrotizing pancreatitis \u2014 moderately severe (Revised Atlanta). No infected necrosis. CTSI 7."
     }
   ],
   "immunizations": [
@@ -418,24 +215,24 @@ window.EMR_DATA = {
       "mfr": "Moderna"
     },
     {
-      "vaccine": "Pneumococcal (PCV20 — Prevnar 20)",
+      "vaccine": "Pneumococcal (PCV20 \u2014 Prevnar 20)",
       "date": "2023",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Pfizer"
     },
     {
       "vaccine": "Tdap (Adacel)",
       "date": "2018",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Sanofi Pasteur"
     },
     {
       "vaccine": "Shingrix (2/2)",
       "date": "2022",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "GSK"
     }
   ],
@@ -453,11 +250,11 @@ window.EMR_DATA = {
     ],
     [
       "Marital",
-      "Widowed — husband deceased 2018"
+      "Widowed \u2014 husband deceased 2018"
     ],
     [
       "Tobacco",
-      "Former smoker — 10 pack-years; quit 2015"
+      "Former smoker \u2014 10 pack-years; quit 2015"
     ],
     [
       "Alcohol",
@@ -469,7 +266,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Limited — walks around block occasionally; limited by knee arthritis"
+      "Limited \u2014 walks around block occasionally; limited by knee arthritis"
     ],
     [
       "Housing",
@@ -481,12 +278,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "Yes — healthcare proxy: son Jean-Marc Pierre"
+      "Yes \u2014 healthcare proxy: son Jean-Marc Pierre"
     ]
   ],
   "meta": {
     "caseId": "acute-necrotizing-gallstone-pancreatitis",
-    "diagnosis": "Acute Necrotizing Gallstone Pancreatitis",
+    "diagnosis": "Acute Necrotizing Gallstone Pancreatitis (Revised Atlanta Classification \u2014 Moderately Severe)",
     "acuity": 2,
     "presentation": "GI Emergency",
     "category": "gastrointestinal"
@@ -548,13 +345,12 @@ window.EMR_DATA = {
       "Vital signs assessment": "BP 142/88 elevated from baseline, HR 82 regular, low-grade temperature, SpO2 96% on room air"
     },
     "ddxTargets": [
-      "Acute Necrotizing Gallstone Pancreatitis (correct diagnosis)",
-      "Acute Cholangitis",
-      "Acute Cholecystitis",
-      "Myocardial Infarction",
-      "Mesenteric Ischemia",
-      "Peptic Ulcer Disease",
-      "Gastroesophageal Reflux Disease"
+      "Acute necrotizing gallstone pancreatitis (correct)",
+      "Interstitial edematous pancreatitis \u2014 no necrosis on CT; different severity and management",
+      "Perforated peptic ulcer \u2014 amylase/lipase can be mildly elevated; CT shows free air, not pancreatic necrosis",
+      "Mesenteric ischemia \u2014 lactic acidosis, pain out of proportion; CT shows bowel wall ischemia",
+      "Acute cholecystitis \u2014 RUQ pain + gallstones, but lipase normal and no pancreatic necrosis",
+      "Ruptured AAA \u2014 pulsatile mass, hemodynamics; CT shows aortic pathology"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's initial description of 'just indigestion' and missing the severity of acute pancreatitis, especially given her stoic presentation",
@@ -564,7 +360,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient is describing her symptoms as 'just indigestion,' but look at her risk factors and presentation. What conditions should you be most concerned about in a diabetic patient with known gallstones presenting with epigastric pain? What questions will help you differentiate between the possibilities?",
       "phase5": "Your physical exam reveals significant findings beyond simple indigestion. The combination of her known gallstones, diabetes, severe epigastric tenderness, and constitutional symptoms should raise your concern. What's the most serious condition on your differential that fits this presentation?",
-      "finalDebrief": "This case illustrates how patients may minimize serious symptoms and how anchoring on their initial description can be dangerous. The combination of gallstones, diabetes, severe epigastric pain radiating to the back, and systemic symptoms should have pointed toward pancreatitis. What clinical clues differentiated this from simple cholecystitis or GERD?"
+      "finalDebrief": "This case illustrates how patients may minimize serious symptoms and how anchoring on their initial description can be dangerous. The combination of gallstones, diabetes, severe epigastric pain radiating to the back, and systemic symptoms should have pointed toward pancreatitis. What clinical clues differentiated this from simple cholecystitis or GERD?",
+      "final": "Diagnosis: necrotizing gallstone pancreatitis. Key learning: (1) Revised Atlanta Classification: mild (no organ failure, no local complications), moderately severe (transient organ failure <48h or local complications), severe (persistent organ failure >48h). The key prognostic factor is persistent organ failure, not necrosis alone. (2) Fluid resuscitation: LR is superior to normal saline \u2014 reduces SIRS and acidosis in AP (WATERFALL trial). Goal-directed fluid therapy (target BUN normalization + adequate urine output) is better than fixed-rate infusions. Avoid over-resuscitation \u2192 abdominal compartment syndrome. (3) Early enteral nutrition: nasojejunal tube feeds within 24-48h reduce infected necrosis risk by maintaining gut barrier. Early EN vs NPO+TPN: EN associated with lower mortality and organ failure. (4) Antibiotic rule: prophylactic antibiotics do NOT prevent infected necrosis (three RCTs showed no benefit). Only use when infected necrosis is confirmed by FNA or CT showing gas in necrosis. (5) Infected necrosis management: walled-off necrosis typically forms after 4 weeks. Drainage strategy: step-up approach (percutaneous drain \u2192 video-assisted retroperitoneal debridement/endoscopic transgastric drainage) preferred over open surgery \u2014 reduces morbidity (TENSION trial)."
     }
   }
 };

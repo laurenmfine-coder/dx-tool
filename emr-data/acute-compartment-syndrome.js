@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Compartment Syndrome
-// Variant: acute-compartment-syndrome | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Angela Torres, MD",
-    "pharmacy": "CVS Pharmacy — 2600 Broward Blvd, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2600 Broward Blvd, Fort Lauderdale, FL",
     "language": "English, Spanish",
     "race": "Hispanic/Latino",
     "address": "6831 Dogwood Ln, Minneapolis, MN 55411",
@@ -26,44 +23,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Closed Tibial Shaft Fracture — Right, Post-Reduction",
-      "icd": "S82.201A",
-      "onset": "01/2025",
+      "problem": "Acute compartment syndrome \u2014 anterior compartment R leg",
+      "icd": "M79.A21",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Closed mid-shaft tibial fracture right leg sustained in motorcycle accident; reduced in ED and placed in long leg cast 01/18/2025; ortho follow-up scheduled"
+      "notes": "Mike Johnson, 28M \u2014 tibial fracture MVA 6 hours ago. Worsening pain out of proportion, pain with passive toe extension, tense compartment. Compartment pressure 42 mmHg."
     },
     {
-      "problem": "Exercise-Induced Asthma",
-      "icd": "J45.990",
-      "onset": "2012",
+      "problem": "Tibial shaft fracture \u2014 R leg, awaiting repair",
+      "icd": "S82.201A",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Mild; albuterol PRN before exercise; no daily controller"
+      "notes": "Definitive fracture repair deferred pending fasciotomy. Fracture fixation after compartment pressure normalizes."
+    },
+    {
+      "problem": "Vascular status \u2014 dorsalis pedis present but weak",
+      "icd": "M79.A21",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Preserved Doppler signal does not rule out compartment syndrome \u2014 compartment pressure can be elevated with intact pulses early."
     }
   ],
   "medications": [
     {
-      "name": "Albuterol HFA 90mcg PRN",
-      "sig": "Inhale 2 puffs 15-20 minutes before exercise as needed",
-      "prescriber": "Dr. Torres",
-      "start": "06/2013",
-      "refills": 3,
-      "status": "PRN"
+      "name": "Emergency four-compartment fasciotomy \u2014 NOW",
+      "sig": "Indicated: compartment pressure >30 mmHg OR within 30 mmHg of diastolic BP (\u0394P <30). This patient \u0394P = 62-42 = 20 mmHg \u2192 IMMEDIATE fasciotomy. Every hour of delay risks permanent muscle necrosis.",
+      "prescriber": "Orthopedic Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT"
     },
     {
-      "name": "Oxycodone 5mg Q6H PRN (post-fracture)",
-      "sig": "Take 1 tablet by mouth every 6 hours as needed for severe pain",
-      "prescriber": "Dr. Patel (ED)",
-      "start": "01/2025",
+      "name": "IV morphine 4mg q4h \u2014 analgesia",
+      "sig": "Pain out of proportion to injury is the cardinal symptom. Adequate analgesia while arranging fasciotomy.",
+      "prescriber": "Emergency Medicine",
+      "start": "2024",
       "refills": 0,
       "status": "Active"
     },
     {
-      "name": "Ibuprofen 600mg Q8H PRN",
-      "sig": "Take 1 tablet by mouth every 8 hours as needed for pain with food",
-      "prescriber": "Dr. Patel (ED)",
-      "start": "01/2025",
+      "name": "Remove constrictive dressings/splints \u2014 IMMEDIATELY",
+      "sig": "First intervention: remove all circumferential dressings. Temporary pressure reduction while preparing for fasciotomy.",
+      "prescriber": "Emergency Medicine",
+      "start": "2024",
       "refills": 0,
-      "status": "Active"
+      "status": "Done"
     }
   ],
   "allergies": [
@@ -81,7 +85,7 @@ window.EMR_DATA = {
       "bp": "142/88",
       "hr": 102,
       "rr": 18,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "99%",
       "wt": "185 lbs",
       "ht": "5'11\"",
@@ -93,7 +97,7 @@ window.EMR_DATA = {
       "bp": "118/74",
       "hr": 68,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "99%",
       "wt": "183 lbs",
       "ht": "5'11\"",
@@ -110,8 +114,8 @@ window.EMR_DATA = {
       "cc": "Right leg pain and deformity after motorcycle accident",
       "hpi": "26-year-old male brought to ED after low-speed motorcycle accident (hit pothole, laid bike down at ~25 mph). Right leg deformity and severe pain. No LOC. Helmet worn. No chest, abdominal, or head complaints. Right lower leg visibly angulated. No open wound. Distal pulses present but diminished compared to left. Sensation intact but reports tingling in right foot.",
       "exam": "General: Alert, in moderate distress, pain 8/10. HEENT: WNL, no facial trauma. Chest: CTAB, no rib tenderness. Abdomen: Soft, NT. Pelvis: Stable. Right lower leg: Visible angulation mid-shaft, significant swelling, ecchymosis. Compartments soft but tense. Distal: DP pulse 1+ (left 2+), cap refill 3 sec, sensation intact (light touch), able to dorsiflex/plantarflex toes. Left leg: WNL.",
-      "assessment": "1. Closed right tibial shaft fracture — mid-diaphyseal, transverse pattern on XR\n2. Mild fibular fracture at same level\n3. Neurovascular status intact but must monitor for compartment syndrome",
-      "plan": "1. Closed reduction performed under procedural sedation\n2. Long leg cast applied — BIVALVED for swelling\n3. Post-reduction XR: acceptable alignment\n4. Admitted for overnight neurovascular checks Q2H\n5. COMPARTMENT SYNDROME PRECAUTIONS: elevate, ice, strict NV checks, if pain out of proportion or with passive stretch → STAT compartment pressures\n6. Pain: oxycodone 5mg Q6H PRN, ibuprofen 600mg Q8H\n7. Ortho consulted — OR for IM nail if alignment lost\n8. RETURN IMMEDIATELY after discharge if: increasing pain not relieved by meds, numbness, inability to move toes, cast feels too tight"
+      "assessment": "1. Closed right tibial shaft fracture \u2014 mid-diaphyseal, transverse pattern on XR\n2. Mild fibular fracture at same level\n3. Neurovascular status intact but must monitor for compartment syndrome",
+      "plan": "1. Closed reduction performed under procedural sedation\n2. Long leg cast applied \u2014 BIVALVED for swelling\n3. Post-reduction XR: acceptable alignment\n4. Admitted for overnight neurovascular checks Q2H\n5. COMPARTMENT SYNDROME PRECAUTIONS: elevate, ice, strict NV checks, if pain out of proportion or with passive stretch \u2192 STAT compartment pressures\n6. Pain: oxycodone 5mg Q6H PRN, ibuprofen 600mg Q8H\n7. Ortho consulted \u2014 OR for IM nail if alignment lost\n8. RETURN IMMEDIATELY after discharge if: increasing pain not relieved by meds, numbness, inability to move toes, cast feels too tight"
     },
     {
       "id": "V002",
@@ -119,125 +123,61 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. Angela Torres, MD",
       "cc": "Annual wellness exam",
-      "hpi": "26-year-old healthy male for annual exam. No complaints. Exercise-induced asthma well-controlled with PRN albuterol. Active lifestyle — CrossFit 5x/week, recreational motorcyclist. No medications other than albuterol.",
+      "hpi": "26-year-old healthy male for annual exam. No complaints. Exercise-induced asthma well-controlled with PRN albuterol. Active lifestyle \u2014 CrossFit 5x/week, recreational motorcyclist. No medications other than albuterol.",
       "exam": "General: Fit, athletic male, NAD. CV: RRR. Lungs: CTAB. MSK: Full ROM. Neuro: Intact.",
-      "assessment": "1. Wellness exam — healthy\n2. Exercise-induced asthma — well-controlled",
-      "plan": "1. Continue albuterol PRN\n2. Motorcycle safety discussed — helmet use emphasized\n3. RTC 1 year"
+      "assessment": "1. Wellness exam \u2014 healthy\n2. Exercise-induced asthma \u2014 well-controlled",
+      "plan": "1. Continue albuterol PRN\n2. Motorcycle safety discussed \u2014 helmet use emphasized\n3. RTC 1 year"
     }
   ],
   "labs": [
     {
-      "date": "01/18/2025",
-      "time": "19:30",
-      "orderedBy": "Dr. Anil Patel, MD (Emergency Medicine)",
-      "collected": "01/18/2025 19:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-011815",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "No",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Compartment Syndrome Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "12.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.2",
-              "unit": "g/dL",
-              "range": "13.5-17.5",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "42.0",
-              "unit": "%",
-              "range": "38.3-48.6",
-              "flag": ""
-            },
-            {
-              "test": "Platelet Count",
-              "value": "268",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Compartment pressure \u2014 anterior compartment",
+          "value": "42",
+          "unit": "mmHg",
+          "ref": "<30 mmHg (fasciotomy threshold)",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL (BMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "128",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.1",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": ""
-            },
-            {
-              "test": "CK (Creatine Kinase)",
-              "value": "420",
-              "unit": "U/L",
-              "range": "30-200",
-              "flag": "H"
-            }
-          ]
+          "test": "\u0394P (diastolic minus compartment pressure)",
+          "value": "20",
+          "unit": "mmHg",
+          "ref": ">30 mmHg (safe)",
+          "flag": "H"
+        },
+        {
+          "test": "CK",
+          "value": "4800",
+          "unit": "U/L",
+          "ref": "<200",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
+        },
+        {
+          "test": "Urine myoglobin",
+          "value": "Positive \u2014 dark urine",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "01/18/2025",
-      "study": "X-RAY RIGHT TIBIA/FIBULA — AP AND LATERAL",
-      "accession": "IMG-2025-01181",
-      "status": "FINAL",
-      "orderedBy": "Dr. Anil Patel, MD (Emergency Medicine)",
-      "readBy": "Dr. Lisa Moreno, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "26M motorcycle accident, right leg deformity.",
-      "technique": "AP and lateral views, right tibia/fibula.",
-      "findings": "Right tibia: Transverse fracture of the mid-diaphysis with mild lateral displacement (~5mm) and no significant angulation. No comminution. No intra-articular extension.\\n\\nRight fibula: Oblique fracture at the junction of mid and distal third.\\n\\nSoft tissues: Moderate swelling surrounding the fracture site.\\n\\nKnee and ankle joints: No effusion or dislocation.",
-      "impression": "1. Closed transverse mid-shaft tibial fracture with mild lateral displacement.\\n2. Associated fibular fracture at mid-distal junction.\\n3. Moderate soft tissue swelling — clinical correlation for compartment syndrome recommended.",
-      "dictated": "01/18/2025 19:45",
-      "verified": "01/18/2025 20:15"
-    },
-    {
-      "date": "01/18/2025",
-      "study": "X-RAY RIGHT TIBIA/FIBULA — POST-REDUCTION",
-      "accession": "IMG-2025-01182",
-      "status": "FINAL",
-      "orderedBy": "Dr. Anil Patel, MD (Emergency Medicine)",
-      "readBy": "Dr. Lisa Moreno, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "STAT",
-      "clinical": "26M status post closed reduction right tibial fracture — assess alignment.",
-      "technique": "AP and lateral views through cast.",
-      "findings": "Right tibia: Post-reduction alignment improved. Near-anatomic alignment with <2mm displacement and <5° angulation. Cast in place.\\n\\nRight fibula: Fracture unchanged.",
-      "impression": "1. Acceptable post-reduction alignment of right tibial shaft fracture.\\n2. Recommend close clinical follow-up and repeat imaging in 1 week.",
-      "dictated": "01/18/2025 21:30",
-      "verified": "01/18/2025 22:00"
+      "date": "04/2024",
+      "study": "X-Ray Right Tibia/Fibula AP and Lateral",
+      "findings": "Mid-shaft tibial fracture, non-comminuted, mild angulation. No vascular calcification. Soft tissue swelling.",
+      "impression": "Tibial shaft fracture. Clinical diagnosis of compartment syndrome \u2014 compartment pressure measurement is the gold standard."
     }
   ],
   "immunizations": [
@@ -263,10 +203,10 @@ window.EMR_DATA = {
       "mfr": "GSK"
     },
     {
-      "vaccine": "HPV (Gardasil 9) — series complete",
+      "vaccine": "HPV (Gardasil 9) \u2014 series complete",
       "date": "2014",
       "site": "Left deltoid IM",
-      "lot": "—",
+      "lot": "\u2014",
       "mfr": "Merck"
     }
   ],
@@ -295,7 +235,7 @@ window.EMR_DATA = {
     ],
     [
       "Drugs",
-      "Marijuana — occasional"
+      "Marijuana \u2014 occasional"
     ],
     [
       "Exercise",
@@ -316,7 +256,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "acute-compartment-syndrome",
-    "diagnosis": "Acute Compartment Syndrome — Anterior Compartment, Right Leg (Post-Tibial Fracture)",
+    "diagnosis": "Acute Compartment Syndrome \u2014 Anterior Compartment, Right Leg (Post-Tibial Fracture)",
     "acuity": 1,
     "presentation": "Musculoskeletal Emergency",
     "category": "orthopedic"
@@ -380,13 +320,12 @@ window.EMR_DATA = {
       "Pain with passive toe flexion": "Severe pain with passive flexion of the great toe, consistent with stretching of muscles in the anterior compartment."
     },
     "ddxTargets": [
-      "Acute Compartment Syndrome — Anterior Compartment, Right Leg (Post-Tibial Fracture) (correct diagnosis)",
-      "Deep Vein Thrombosis with acute swelling",
-      "Cellulitis or soft tissue infection",
-      "Acute arterial occlusion/thrombosis",
-      "Fat embolism syndrome",
-      "Severe contusion with hematoma formation",
-      "Delayed union fracture with acute displacement"
+      "Acute compartment syndrome \u2014 anterior compartment (correct)",
+      "Deep vein thrombosis \u2014 calf pain, but no tense compartment, pain with passive stretch",
+      "Arterial insufficiency \u2014 absent pulses distinguish; compartment syndrome can coexist",
+      "Rhabdomyolysis alone \u2014 rhabdo IS occurring but compartment syndrome is the driver",
+      "Normal post-fracture pain \u2014 pain out of proportion + tense compartment + \u0394P <30 mmHg = not normal",
+      "Infection/cellulitis \u2014 too early post-injury; infection risk increases with fasciotomy delay"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on recent tibial fracture and assuming pain is simply fracture-related, missing the acute compartment syndrome development",
@@ -396,7 +335,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some solid differentials for acute leg pain post-trauma. As you interview this patient, pay particular attention to the timeline and character of his pain - how has it changed since the initial injury? Also consider what specific physical findings would help you distinguish between vascular, infectious, and pressure-related causes.",
       "phase5": "Excellent work gathering the history and physical findings. You've noted the patient's severe pain, the firm compartment, weakness with dorsiflexion, and sensory changes. What do these findings tell you about the pathophysiology occurring in his leg? How do the physical exam findings help narrow your differential diagnosis?",
-      "finalDebrief": "This case highlights the critical importance of recognizing compartment syndrome early. Notice how the diagnosis became clear when you combined the timeline (pain worsening rather than improving), the character (pressure-like rather than typical fracture pain), and the classic pentad of findings. The key teaching point is that compartment syndrome is a surgical emergency - the 5 P's (Pain, Pressure, Paresthesias, Pallor, Pulselessness) progress in order, and waiting for late findings like absent pulses means irreversible damage has occurred."
+      "finalDebrief": "This case highlights the critical importance of recognizing compartment syndrome early. Notice how the diagnosis became clear when you combined the timeline (pain worsening rather than improving), the character (pressure-like rather than typical fracture pain), and the classic pentad of findings. The key teaching point is that compartment syndrome is a surgical emergency - the 5 P's (Pain, Pressure, Paresthesias, Pallor, Pulselessness) progress in order, and waiting for late findings like absent pulses means irreversible damage has occurred.",
+      "final": "Diagnosis: acute compartment syndrome. Key learning: (1) Six P's: Pain (out of proportion), Pressure (tense compartment), Paresthesias (nerve ischemia), Paralysis (late), Pallor, Pulselessness (very late \u2014 do not wait for this). Pain with passive stretch of muscles in the affected compartment is the most sensitive early sign. (2) Compartment pressure thresholds: absolute >30 mmHg OR \u0394P (diastolic BP minus compartment pressure) <30 mmHg \u2192 fasciotomy indicated. This patient \u0394P = 20 mmHg \u2192 immediate fasciotomy. (3) Normal pulses do NOT rule out compartment syndrome. Compartment pressure can cause muscle/nerve ischemia before arterial occlusion. Pulses present in >50% of confirmed compartment syndrome cases at presentation. (4) Fasciotomy: four-compartment fasciotomy of the leg (anterior, lateral, deep posterior, superficial posterior). Wounds left open 48-72 hours then closed. (5) Reperfusion injury and rhabdomyolysis: elevated CK (>5000) from muscle necrosis. Monitor urine output (target 1-2 mL/kg/hr), urine myoglobin, creatinine for myoglobinuric AKI."
     }
   }
 };

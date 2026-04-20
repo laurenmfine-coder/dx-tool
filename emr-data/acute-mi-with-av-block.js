@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute MI with AV Block
-// Variant: acute-mi-with-av-block | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part A/B with United Healthcare Supplement",
     "pcp": "Dr. David Tanaka, MD",
-    "pharmacy": "CVS Pharmacy — 2901 Stirling Rd, Fort Lauderdale, FL",
+    "pharmacy": "CVS Pharmacy \u2014 2901 Stirling Rd, Fort Lauderdale, FL",
     "language": "English",
     "race": "Black or African American",
     "address": "3462 Ash St, Memphis, TN 38107",
@@ -27,119 +24,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Coronary Artery Disease, Three-Vessel",
-      "icd": "I25.10",
-      "onset": "2017",
+      "problem": "Acute inferior STEMI \u2014 RCA occlusion",
+      "icd": "I21.19",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Cath 2017: 70% LAD, 60% LCx, 50% RCA; medical management elected; stress test 2024 showed inferior ischemia"
+      "notes": "Robert Chen, 64M \u2014 chest pressure, diaphoresis, nausea. ECG: ST elevation II, III, aVF + ST depression I, aVL. HR 38 bpm, complete heart block."
     },
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2008",
+      "problem": "Complete heart block \u2014 AV node ischemia from RCA",
+      "icd": "I44.2",
+      "onset": "2024",
       "status": "Active",
-      "notes": "HbA1c 8.1%; on insulin since 2020"
+      "notes": "RCA supplies AV node in 90% of patients. Inferior STEMI + complete heart block = high-grade complication requiring temporary pacing."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2002",
+      "problem": "Hemodynamic compromise from low heart rate",
+      "icd": "R00.1",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Controlled on dual therapy"
-    },
-    {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2005",
-      "status": "Active",
-      "notes": "LDL 88 on high-intensity statin"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "eGFR 52; DM/HTN nephropathy"
-    },
-    {
-      "problem": "Peripheral Neuropathy, Diabetic",
-      "icd": "E11.42",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "Bilateral feet; decreased protective sensation"
+      "notes": "BP 88/60 from low cardiac output. CO = HR \u00d7 SV. HR 38 \u2192 inadequate CO despite maintained SV."
     }
   ],
   "medications": [
     {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "03/2017",
-      "refills": 6,
-      "status": "Active"
+      "name": "Atropine 0.5mg IV \u2014 if hemodynamically unstable",
+      "sig": "Increases AV conduction via vagolytic effect. May partially restore conduction in inferior MI with AV block. Dose up to 3mg total. Note: often ineffective in complete AV block.",
+      "prescriber": "Cardiology/Emergency",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given \u2014 limited response"
     },
     {
-      "name": "Atorvastatin 80mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Singh",
-      "start": "03/2017",
-      "refills": 5,
-      "status": "Active"
+      "name": "Transcutaneous pacing \u2014 bridge to transvenous",
+      "sig": "External pacing pads. Uncomfortable \u2014 sedation with fentanyl/midazolam. Rate 60-80 bpm. Confirm capture (wide QRS with pacer spike + pulse).",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 transcutaneous"
     },
     {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Singh",
-      "start": "03/2017",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Lisinopril 20mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Tanaka",
-      "start": "06/2010",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Insulin Glargine 24 units QHS",
-      "sig": "Inject 24 units subcutaneously at bedtime",
-      "prescriber": "Dr. Tanaka",
-      "start": "08/2020",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Tanaka",
-      "start": "04/2009",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Gabapentin 300mg TID",
-      "sig": "Take 1 capsule by mouth three times daily",
-      "prescriber": "Dr. Tanaka",
-      "start": "06/2022",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Nitroglycerin 0.4mg SL PRN",
-      "sig": "Place 1 tablet under tongue for chest pain; may repeat every 5 min x3; call 911 if no relief",
-      "prescriber": "Dr. Singh",
-      "start": "03/2017",
-      "refills": 1,
-      "status": "PRN"
+      "name": "Primary PCI + transvenous pacing \u2014 cath lab",
+      "sig": "Reperfusion of RCA is definitive treatment. AV block usually resolves within 24-48 hours of reperfusion. Transvenous temporary pacer placed in cath lab.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Emergent"
     }
   ],
   "allergies": [
     {
       "allergen": "Clopidogrel",
       "type": "Drug",
-      "reaction": "CYP2C19 poor metabolizer — ineffective; ticagrelor used as alternative",
+      "reaction": "CYP2C19 poor metabolizer \u2014 ineffective; ticagrelor used as alternative",
       "severity": "Moderate",
       "verified": "Yes"
     },
@@ -157,7 +93,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 58,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "212 lbs",
       "ht": "5'10\"",
@@ -169,7 +105,7 @@ window.EMR_DATA = {
       "bp": "134/80",
       "hr": 62,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "210 lbs",
       "ht": "5'10\"",
@@ -181,7 +117,7 @@ window.EMR_DATA = {
       "bp": "136/82",
       "hr": 64,
       "rr": 14,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "214 lbs",
       "ht": "5'10\"",
@@ -193,7 +129,7 @@ window.EMR_DATA = {
       "bp": "138/84",
       "hr": 66,
       "rr": 14,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "216 lbs",
       "ht": "5'10\"",
@@ -208,10 +144,10 @@ window.EMR_DATA = {
       "type": "Primary Care",
       "provider": "Dr. David Tanaka, MD",
       "cc": "Chronic disease follow-up; new exertional dyspnea",
-      "hpi": "67-year-old male with 3-vessel CAD, T2DM, HTN, CKD presenting for follow-up. Reports new onset exertional dyspnea over past 3 weeks — occurs climbing stairs or walking > 2 blocks. No chest pain, but describes intermittent 'pressure' in jaw with exertion that resolves with rest. Denies NTG use. Has not contacted cardiology. HbA1c 8.1% — admits to inconsistent insulin dosing. Neuropathy symptoms stable. Reports feeling 'more tired than usual.'",
+      "hpi": "67-year-old male with 3-vessel CAD, T2DM, HTN, CKD presenting for follow-up. Reports new onset exertional dyspnea over past 3 weeks \u2014 occurs climbing stairs or walking > 2 blocks. No chest pain, but describes intermittent 'pressure' in jaw with exertion that resolves with rest. Denies NTG use. Has not contacted cardiology. HbA1c 8.1% \u2014 admits to inconsistent insulin dosing. Neuropathy symptoms stable. Reports feeling 'more tired than usual.'",
       "exam": "General: Obese male, appears fatigued. CV: Bradycardic (HR 58), regular, S4 gallop, no murmurs. Lungs: CTAB. Abdomen: Obese, soft, NT. Extremities: Trace bilateral pedal edema. Neuro: Decreased monofilament bilateral feet. Skin: No ulcers.",
-      "assessment": "1. CAD — new exertional symptoms with jaw pressure; concerning for unstable angina or progression\n2. T2DM — HbA1c 8.1%; suboptimal control\n3. CKD Stage 3a — stable\n4. New S4 gallop and trace edema — assess for LV dysfunction",
-      "plan": "1. Urgent cardiology referral — Dr. Singh; stress test vs cath\n2. Increase insulin glargine to 28 units QHS\n3. BMP, CBC, BNP\n4. ECG today — sinus bradycardia, HR 58, first-degree AV block (PR 240ms), no acute ST changes\n5. Instruct: use NTG for any chest/jaw pressure; call 911 if persistent\n6. RTC 2 weeks"
+      "assessment": "1. CAD \u2014 new exertional symptoms with jaw pressure; concerning for unstable angina or progression\n2. T2DM \u2014 HbA1c 8.1%; suboptimal control\n3. CKD Stage 3a \u2014 stable\n4. New S4 gallop and trace edema \u2014 assess for LV dysfunction",
+      "plan": "1. Urgent cardiology referral \u2014 Dr. Singh; stress test vs cath\n2. Increase insulin glargine to 28 units QHS\n3. BMP, CBC, BNP\n4. ECG today \u2014 sinus bradycardia, HR 58, first-degree AV block (PR 240ms), no acute ST changes\n5. Instruct: use NTG for any chest/jaw pressure; call 911 if persistent\n6. RTC 2 weeks"
     },
     {
       "id": "V002",
@@ -221,152 +157,59 @@ window.EMR_DATA = {
       "cc": "CAD follow-up; annual risk assessment",
       "hpi": "67-year-old male with known 3-vessel CAD for annual review. Stress test (06/2024) showed mild fixed inferior defect, no reversible ischemia. Reports no chest pain, no dyspnea at baseline level of activity. Continues daily walks 20 min. Medication compliance generally good. ECG: First-degree AV block (PR 220ms), unchanged from prior.",
       "exam": "General: NAD. CV: Bradycardic (HR 62), regular, no S3/S4 today. Lungs: CTAB. Extremities: No edema.",
-      "assessment": "1. Three-vessel CAD — stable angina on medical therapy\n2. First-degree AV block — stable; attributed to metoprolol\n3. Cardiovascular risk: ASCVD 10-year >20%",
-      "plan": "1. Continue current medications\n2. Repeat stress test in 12 months or sooner if symptoms\n3. Continue aspirin, statin, beta-blocker\n4. Discussed revascularization — patient defers\n5. RTC 6 months"
+      "assessment": "1. Three-vessel CAD \u2014 stable angina on medical therapy\n2. First-degree AV block \u2014 stable; attributed to metoprolol\n3. Cardiovascular risk: ASCVD 10-year >20%",
+      "plan": "1. Continue current medications\n2. Repeat stress test in 12 months or sooner if symptoms\n3. Continue aspirin, statin, beta-blocker\n4. Discussed revascularization \u2014 patient defers\n5. RTC 6 months"
     }
   ],
   "labs": [
     {
-      "date": "01/20/2026",
-      "time": "09:30",
-      "orderedBy": "Dr. David Tanaka, MD",
-      "collected": "01/20/2026 09:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2026-012045",
-      "status": "Final",
-      "specimenType": "Serum, Whole Blood (EDTA)",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "Inferior STEMI Assessment",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL (CMP)",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "172",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.4",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "52",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.0",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "ECG",
+          "value": "ST elevation II/III/aVF 3mm. ST depression I/aVL (reciprocal). HR 38 \u2014 complete heart block. Wide escape rhythm.",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1c",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "8.1",
-              "unit": "%",
-              "range": "<5.7 normal; 5.7-6.4 prediabetes",
-              "flag": "H"
-            }
-          ]
+          "test": "ECG V4R",
+          "value": "ST elevation V4R >1mm \u2014 RV infarct",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         },
         {
-          "name": "CARDIAC MARKERS",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "280",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.32",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "168",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": ""
-            },
-            {
-              "test": "LDL Cholesterol",
-              "value": "88",
-              "unit": "mg/dL",
-              "range": "<70 optimal for CAD",
-              "flag": "H"
-            },
-            {
-              "test": "HDL Cholesterol",
-              "value": "34",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "230",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "BP",
+          "value": "88/60",
+          "unit": "mmHg",
+          "ref": "SBP >90",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.3",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "06/20/2024",
-      "study": "NUCLEAR STRESS TEST (MYOCARDIAL PERFUSION IMAGING)",
-      "accession": "IMG-2024-06205",
-      "status": "FINAL",
-      "orderedBy": "Dr. Rajiv Singh, MD",
-      "readBy": "Dr. Rajiv Singh, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "67M with known 3-vessel CAD. Annual surveillance. Unable to exercise — pharmacologic stress.",
-      "technique": "Adenosine pharmacologic stress with Tc-99m sestamibi SPECT. Stress and rest images acquired.",
-      "findings": "Stress images: Fixed mild perfusion defect in the inferior wall. No reversible ischemia.\\n\\nRest images: Persistent mild inferior defect — consistent with prior infarct or attenuation artifact.\\n\\nLV function: EF estimated 50%. No wall motion abnormalities on gated images.\\n\\nTLID (transient LV dilation): Not present.\\n\\nECG during stress: First-degree AV block at baseline. No ST changes with stress.",
-      "impression": "1. Fixed mild inferior perfusion defect — likely small prior infarct vs diaphragmatic attenuation.\\n2. No reversible ischemia to suggest significant active ischemia.\\n3. EF approximately 50%.\\n4. Baseline first-degree AV block.",
-      "dictated": "06/20/2024 14:30",
-      "verified": "06/20/2024 16:50"
+      "date": "04/2024",
+      "study": "ECG",
+      "findings": "Inferior ST elevation pattern. Right-sided leads: ST elevation in V4R. Complete heart block with ventricular escape at 38 bpm.",
+      "impression": "Inferior STEMI with RV infarct and complete heart block. Emergent PCI + temporary pacing."
     }
   ],
   "immunizations": [
@@ -423,7 +266,7 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — quit 2010; 20 pack-year history"
+      "Former smoker \u2014 quit 2010; 20 pack-year history"
     ],
     [
       "Alcohol",
@@ -439,7 +282,7 @@ window.EMR_DATA = {
     ],
     [
       "Housing",
-      "Single-family home with wife; two-story (bedroom upstairs — struggling)"
+      "Single-family home with wife; two-story (bedroom upstairs \u2014 struggling)"
     ],
     [
       "Safety",
@@ -447,12 +290,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "POLST on file — Full Code; HCP: wife Diane Brooks"
+      "POLST on file \u2014 Full Code; HCP: wife Diane Brooks"
     ]
   ],
   "meta": {
     "caseId": "acute-mi-with-av-block",
-    "diagnosis": "Acute Inferior STEMI with Complete Heart Block",
+    "diagnosis": "Acute Inferior STEMI with Complete Heart Block (Third-Degree AV Block)",
     "acuity": 1,
     "presentation": "Cardiac Emergency",
     "category": "cardiovascular"
@@ -516,13 +359,12 @@ window.EMR_DATA = {
       "Neurological assessment for focal deficits": "Alert and oriented, no focal neurological deficits, sensation intact in hands and feet despite diabetic neuropathy history"
     },
     "ddxTargets": [
-      "Acute Inferior STEMI with Complete Heart Block (correct diagnosis)",
-      "Unstable Angina/NSTEMI",
-      "Acute Decompensated Heart Failure",
-      "Pulmonary Embolism",
-      "Aortic Dissection",
-      "Gastroesophageal Reflux Disease",
-      "Anxiety/Panic Disorder"
+      "Inferior STEMI + complete heart block (correct)",
+      "Anterior STEMI \u2014 ST elevation in V1-V4, not II/III/aVF; different territory",
+      "Hyperkalemia \u2014 wide QRS bradycardia but no ST elevation pattern; K+ level distinguishes",
+      "Drug-induced AV block \u2014 beta-blocker/calcium channel blocker overdose; medication history",
+      "High-grade (Mobitz II or 2:1) block \u2014 look for P wave relationship on rhythm strip; complete block has AV dissociation",
+      "Vagal syncope with bradycardia \u2014 no ST elevation; resolves spontaneously with position"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on stable angina given the classic exertional pattern and known CAD history, potentially missing the acute nature and heart block component",
@@ -532,7 +374,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential diagnosis, what key historical features would help you distinguish between stable angina and an acute coronary syndrome? Given his diabetes and known CAD, what atypical presentations should you be considering?",
       "phase5": "You've identified concerning symptoms in a high-risk patient. His bradycardia of 58 bpm is notable - what could cause both his symptoms and this heart rate? What immediate diagnostic test would be most helpful, and what findings might explain both his presentation and vital signs?",
-      "finalDebrief": "This case illustrates how inferior STEMI can present with atypical symptoms like jaw discomfort and dyspnea, especially in diabetic patients. The complete heart block caused his bradycardia and contributed to his symptoms. How did your differential evolve from stable angina to acute MI? What clues pointed toward heart block as a complication?"
+      "finalDebrief": "This case illustrates how inferior STEMI can present with atypical symptoms like jaw discomfort and dyspnea, especially in diabetic patients. The complete heart block caused his bradycardia and contributed to his symptoms. How did your differential evolve from stable angina to acute MI? What clues pointed toward heart block as a complication?",
+      "final": "Diagnosis: inferior STEMI with complete heart block. Key learning: (1) AV block anatomy: RCA supplies the AV node in 90% of people (right dominant circulation). Inferior STEMI from RCA occlusion \u2192 AV nodal ischemia \u2192 high-grade AV block. The block is usually at or above the bundle of His \u2192 narrow escape rhythm (unless bundle involvement). (2) High-degree AV block in inferior STEMI: often resolves within 24-72 hours of reperfusion. Most do NOT require permanent pacing. In contrast, AV block from anterior STEMI (below the His bundle) has worse prognosis and more often requires permanent pacing. (3) RV infarct recognition: V4R lead is critical \u2014 ST elevation >1mm in V4R is diagnostic. Clinical triad: hypotension + elevated JVP + clear lungs. AVOID nitrates in RV infarct \u2014 preload-dependent, nitrates cause severe hypotension. (4) Pacing sequence: atropine (may help in inferior MI) \u2192 transcutaneous pacing (bridge) \u2192 transvenous temporary pacing in cath lab \u2192 primary PCI. (5) Reciprocal changes: ST depression in I and aVL with inferior STEMI = reciprocal changes from the electrical vector, NOT a separate anterior ischemic territory."
     }
   }
 };

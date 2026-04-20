@@ -9,7 +9,7 @@ window.EMR_DATA = {
     "pronouns": "He/Him",
     "insurance": "Medicare Part B",
     "pcp": "Dr. Renee Augustin, MD",
-    "pharmacy": "Walgreens — 2701 Stirling Rd, Hollywood, FL",
+    "pharmacy": "Walgreens \u2014 2701 Stirling Rd, Hollywood, FL",
     "language": "English, Haitian Creole",
     "race": "Black (Haitian American)",
     "address": "1488 N 56th Ave, Hollywood, FL 33021",
@@ -23,112 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Type 2 Diabetes Mellitus with Neuropathy",
-      "icd": "E11.40",
-      "onset": "2010",
+      "problem": "NSTEMI \u2014 dyspnea-predominant, anginal equivalent",
+      "icd": "I21.4",
+      "onset": "2024",
       "status": "Active",
-      "notes": "A1c trending up from 7.1 to 8.9 over 18 months; peripheral neuropathy bilateral feet; may mask anginal symptoms"
+      "notes": "Dorothy Williams, 67F \u2014 T2DM, hypertension, smoker. Dyspnea at rest x3 hours, no chest pain. Diaphoretic. ECG: ST depression V4-V6. Troponin rising."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2005",
+      "problem": "T2DM \u2014 predisposes to silent/atypical MI presentation",
+      "icd": "E11.9",
+      "onset": "2015",
       "status": "Active",
-      "notes": "Poorly controlled despite triple therapy; last 3 readings >150 systolic"
+      "notes": "Diabetic neuropathy reduces pain signal \u2192 dyspnea, fatigue, nausea as ACS equivalents. High-risk feature."
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2012",
-      "status": "Active",
-      "notes": "LDL 142 at last check despite statin — dose uptitrated"
-    },
-    {
-      "problem": "Chronic Kidney Disease, Stage 3a",
-      "icd": "N18.31",
-      "onset": "2021",
-      "status": "Active",
-      "notes": "eGFR 52; attributed to diabetic nephropathy; on ACE inhibitor"
-    },
-    {
-      "problem": "Obesity, BMI 34.2",
-      "icd": "E66.01",
-      "onset": "2008",
-      "status": "Active",
-      "notes": "Weight gain progressive since retirement; dietary counseling ongoing"
-    },
-    {
-      "problem": "Peripheral Arterial Disease",
-      "icd": "I73.9",
+      "problem": "Prior PCI \u2014 stent thrombosis risk if antiplatelet stopped",
+      "icd": "Z95.5",
       "onset": "2022",
       "status": "Active",
-      "notes": "ABI 0.78 bilaterally; intermittent claudication at 2 blocks"
+      "notes": "LAD drug-eluting stent placed 2022. Dual antiplatelet continued. In-stent restenosis on differential."
     }
   ],
   "medications": [
     {
-      "name": "Metformin 1000mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Augustin",
-      "start": "03/2011",
-      "refills": 3,
-      "status": "Active"
+      "name": "Aspirin 325mg loading then 81mg daily",
+      "sig": "Dual antiplatelet loading. COX-1 inhibition prevents thromboxane-mediated platelet aggregation.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 loading"
     },
     {
-      "name": "Glipizide 10mg BID",
-      "sig": "Take 1 tablet by mouth twice daily before meals",
-      "prescriber": "Dr. Augustin",
-      "start": "09/2023",
-      "refills": 2,
-      "status": "Active"
+      "name": "Ticagrelor 180mg loading then 90mg BID",
+      "sig": "P2Y12 inhibitor \u2014 preferred over clopidogrel for NSTEMI (faster onset, reversible binding, superior outcomes in PLATO trial).",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active \u2014 loading"
     },
     {
-      "name": "Lisinopril 40mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Augustin",
-      "start": "06/2015",
-      "refills": 5,
-      "status": "Active"
+      "name": "Heparin UFH 60 units/kg bolus + infusion",
+      "sig": "Anticoagulation prevents further clot propagation. aPTT target 60-100 seconds. Bridge to PCI.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 infusion"
     },
     {
-      "name": "Amlodipine 10mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Augustin",
-      "start": "01/2020",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Hydrochlorothiazide 25mg daily",
-      "sig": "Take 1 tablet by mouth once daily in the morning",
-      "prescriber": "Dr. Augustin",
-      "start": "11/2018",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Atorvastatin 80mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Augustin",
-      "start": "02/2024",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Aspirin 81mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Augustin",
-      "start": "04/2018",
-      "refills": 11,
-      "status": "Active"
-    },
-    {
-      "name": "Gabapentin 300mg TID",
-      "sig": "Take 1 capsule by mouth three times daily",
-      "prescriber": "Dr. Augustin",
-      "start": "08/2022",
-      "refills": 2,
-      "status": "Active"
+      "name": "Early invasive strategy \u2014 cath within 24 hours",
+      "sig": "NSTEMI with high TIMI risk score \u2192 early PCI within 24 hours (not delayed >72h). TIMI score: age >65, prior CAD, ST deviation, positive troponin, 3+ risk factors.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Scheduled"
     }
   ],
   "allergies": [
@@ -153,7 +100,7 @@ window.EMR_DATA = {
       "bp": "168/94",
       "hr": 98,
       "rr": 22,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "93%",
       "wt": "232 lbs",
       "ht": "5'10\"",
@@ -165,7 +112,7 @@ window.EMR_DATA = {
       "bp": "158/92",
       "hr": 78,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "96%",
       "wt": "230 lbs",
       "ht": "5'10\"",
@@ -177,7 +124,7 @@ window.EMR_DATA = {
       "bp": "162/96",
       "hr": 82,
       "rr": 18,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "97%",
       "wt": "228 lbs",
       "ht": "5'10\"",
@@ -189,7 +136,7 @@ window.EMR_DATA = {
       "bp": "154/88",
       "hr": 76,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "226 lbs",
       "ht": "5'10\"",
@@ -206,7 +153,7 @@ window.EMR_DATA = {
       "cc": "Routine follow-up, diabetes management",
       "hpi": "67M with T2DM, HTN, CKD 3a presents for quarterly check. Reports increasing fatigue over past 2 months. Notes occasional exertional dyspnea when climbing stairs, which he attributes to deconditioning and weight. Denies chest pain. A1c up to 8.9 from 7.8 six months ago. Reports poor dietary adherence over holidays.",
       "exam": "NAD, obese habitus. CV: RRR, no m/r/g. Lungs: CTAB. Ext: 1+ pedal edema bilat, diminished DP pulses bilat. Neuro: decreased monofilament sensation bilateral feet.",
-      "assessment": "1. T2DM — worsening control, A1c 8.9\n2. HTN — suboptimally controlled\n3. CKD 3a — stable\n4. Exertional dyspnea — likely deconditioning vs cardiac; warrants workup",
+      "assessment": "1. T2DM \u2014 worsening control, A1c 8.9\n2. HTN \u2014 suboptimally controlled\n3. CKD 3a \u2014 stable\n4. Exertional dyspnea \u2014 likely deconditioning vs cardiac; warrants workup",
       "plan": "1. Add glipizide 10mg BID; reinforce dietary counseling; refer to diabetes educator\n2. Continue current antihypertensives; recheck in 4 weeks\n3. Order stress test given new exertional dyspnea + multiple cardiac risk factors\n4. Labs: CMP, CBC, HbA1c, lipid panel, BNP"
     },
     {
@@ -217,7 +164,7 @@ window.EMR_DATA = {
       "cc": "Follow-up HTN, diabetes",
       "hpi": "67M presents for routine follow-up. A1c improved to 7.8 from 8.2. BP remains elevated at 162/96. Reports good medication adherence but sedentary lifestyle since retiring. Denies chest pain, dyspnea, or edema at this visit.",
       "exam": "NAD. CV: RRR, no m/r/g. Lungs: CTAB. Ext: trace edema bilat. ABI 0.78 bilat.",
-      "assessment": "1. T2DM — improving\n2. HTN — uncontrolled on triple therapy\n3. PAD — stable, ABI unchanged",
+      "assessment": "1. T2DM \u2014 improving\n2. HTN \u2014 uncontrolled on triple therapy\n3. PAD \u2014 stable, ABI unchanged",
       "plan": "1. Continue current DM regimen\n2. Uptitrate atorvastatin to 80mg for LDL 142\n3. Reinforce exercise counseling\n4. Return 3 months"
     },
     {
@@ -228,208 +175,59 @@ window.EMR_DATA = {
       "cc": "Left calf pain with walking",
       "hpi": "66M presents with 3-week history of left calf cramping with walking 2 blocks, relieved by rest. No rest pain. No skin changes. Known diabetic with HTN. Smoker until 5 years ago.",
       "exam": "Left calf non-tender, no erythema/swelling. DP pulse diminished bilat, more on left. ABI ordered.",
-      "assessment": "1. Intermittent claudication — likely PAD given risk factor profile",
-      "plan": "1. ABI ordered — results: 0.78 bilat\n2. Refer back to PCP for PAD management\n3. Encourage walking program\n4. Smoking cessation confirmed"
+      "assessment": "1. Intermittent claudication \u2014 likely PAD given risk factor profile",
+      "plan": "1. ABI ordered \u2014 results: 0.78 bilat\n2. Refer back to PCP for PAD management\n3. Encourage walking program\n4. Smoking cessation confirmed"
     }
   ],
   "labs": [
     {
-      "date": "12/10/2025",
-      "time": "09:15",
-      "orderedBy": "Dr. Augustin",
-      "collected": "12/10/2025 09:30",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-881204",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "Yes (10 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "ACS Workup",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "188",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "32",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.7-1.3",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "52",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "101",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "22",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": "L"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.2",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            },
-            {
-              "test": "Total Protein",
-              "value": "6.8",
-              "unit": "g/dL",
-              "range": "6.0-8.3",
-              "flag": ""
-            },
-            {
-              "test": "Albumin",
-              "value": "3.6",
-              "unit": "g/dL",
-              "range": "3.5-5.5",
-              "flag": ""
-            },
-            {
-              "test": "ALT",
-              "value": "28",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": ""
-            },
-            {
-              "test": "AST",
-              "value": "24",
-              "unit": "U/L",
-              "range": "10-40",
-              "flag": ""
-            },
-            {
-              "test": "Alk Phos",
-              "value": "78",
-              "unit": "U/L",
-              "range": "44-147",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I (high-sensitivity) \u2014 first",
+          "value": "0.42",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "HEMOGLOBIN A1C",
-          "results": [
-            {
-              "test": "HbA1c",
-              "value": "8.9",
-              "unit": "%",
-              "range": "<5.7",
-              "flag": "H"
-            },
-            {
-              "test": "Estimated Average Glucose",
-              "value": "209",
-              "unit": "mg/dL",
-              "range": "",
-              "flag": ""
-            }
-          ]
+          "test": "Troponin I \u2014 3 hours later",
+          "value": "2.8",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "LIPID PANEL",
-          "results": [
-            {
-              "test": "Total Cholesterol",
-              "value": "228",
-              "unit": "mg/dL",
-              "range": "<200",
-              "flag": "H"
-            },
-            {
-              "test": "LDL",
-              "value": "142",
-              "unit": "mg/dL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "HDL",
-              "value": "36",
-              "unit": "mg/dL",
-              "range": ">40",
-              "flag": "L"
-            },
-            {
-              "test": "Triglycerides",
-              "value": "250",
-              "unit": "mg/dL",
-              "range": "<150",
-              "flag": "H"
-            }
-          ]
+          "test": "ECG",
+          "value": "ST depression 1.5mm V4-V6, T-wave inversions",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         },
         {
-          "name": "BNP",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "188",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "BNP",
+          "value": "380",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
+        },
+        {
+          "test": "LDL",
+          "value": "142",
+          "unit": "mg/dL",
+          "ref": "<70 for CAD",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "06/18/2025",
-      "study": "CHEST X-RAY PA AND LATERAL",
-      "accession": "IMG-2025-40318",
-      "status": "FINAL",
-      "orderedBy": "Dr. Augustin",
-      "readBy": "Dr. Patricia Gomez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "Hypertension, dyspnea evaluation",
-      "technique": "PA and lateral views of the chest obtained.",
-      "findings": "Heart: Mildly enlarged cardiac silhouette. Aortic calcifications noted.\n\nLungs: Clear bilaterally. No infiltrates, effusions, or pneumothorax.\n\nMediastinum: Unremarkable. No widening.\n\nBony structures: Degenerative changes thoracic spine.",
-      "impression": "1. Mild cardiomegaly.\n2. Aortic atherosclerotic calcifications.\n3. No acute pulmonary process.",
-      "dictated": "06/18/2025 14:22",
-      "verified": "06/18/2025 16:10"
+      "date": "04/2024",
+      "study": "Chest X-Ray",
+      "findings": "Mild pulmonary vascular congestion. No frank pulmonary edema. No pneumothorax. Cardiomegaly.",
+      "impression": "Pulmonary vascular congestion consistent with elevated LV filling pressures."
     }
   ],
   "immunizations": [
@@ -493,11 +291,11 @@ window.EMR_DATA = {
     ],
     [
       "Tobacco",
-      "Former smoker — 20 pack-years; quit 2019"
+      "Former smoker \u2014 20 pack-years; quit 2019"
     ],
     [
       "Alcohol",
-      "Occasional — 1-2 beers on weekends"
+      "Occasional \u2014 1-2 beers on weekends"
     ],
     [
       "Drugs",
@@ -505,7 +303,7 @@ window.EMR_DATA = {
     ],
     [
       "Exercise",
-      "Minimal — walks to mailbox; limited by claudication and fatigue"
+      "Minimal \u2014 walks to mailbox; limited by claudication and fatigue"
     ],
     [
       "Housing",
@@ -517,12 +315,12 @@ window.EMR_DATA = {
     ],
     [
       "Advance Directive",
-      "DPOA designated (wife) — no formal living will"
+      "DPOA designated (wife) \u2014 no formal living will"
     ]
   ],
   "meta": {
     "caseId": "acute-coronary-syndrome",
-    "diagnosis": "Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea — Anginal Equivalent in Diabetic Patient)",
+    "diagnosis": "Non-ST-Elevation ACS (NSTEMI \u2014 Dyspnea-Predominant, Diabetic Anginal Equivalent)",
     "acuity": 2,
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
@@ -584,13 +382,12 @@ window.EMR_DATA = {
       "Neurological assessment including diabetic neuropathy evaluation": "Decreased sensation to monofilament testing in stocking distribution bilaterally, consistent with known diabetic neuropathy."
     },
     "ddxTargets": [
-      "Acute Coronary Syndrome (NSTEMI Presenting as Dyspnea — Anginal Equivalent in Diabetic Patient) (correct diagnosis)",
-      "Heart failure with preserved ejection fraction",
-      "Pulmonary embolism",
-      "Aortic stenosis",
-      "Unstable angina",
-      "Deconditioning/physical inactivity",
-      "Chronic obstructive pulmonary disease"
+      "NSTEMI \u2014 dyspnea-predominant presentation (correct)",
+      "Acute decompensated heart failure \u2014 BNP elevated and some congestion, but troponin rise and ECG changes = ACS as the driver",
+      "Type 2 MI from demand ischemia \u2014 no clear precipitant here; Type 1 from plaque rupture more likely",
+      "Pulmonary embolism \u2014 may have ST changes; troponin pattern + ECG changes here more consistent with ACS",
+      "Unstable angina \u2014 no troponin rise; troponin rising = NSTEMI not UA",
+      "Esophageal spasm \u2014 can mimic angina; no ECG changes or troponin rise expected"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on deconditioning given recent retirement and patient's own attribution, missing the atypical anginal equivalent presentation in a diabetic patient",
@@ -600,7 +397,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "This patient has multiple cardiovascular risk factors and is presenting with exertional dyspnea. What are you thinking about the significance of his diabetes in how cardiac conditions might present? What key historical points will help you differentiate between your top differentials?",
       "phase5": "Your exam doesn't reveal obvious heart failure signs, but this patient has classic risk factors for coronary disease. How does diabetic neuropathy potentially alter the presentation of acute coronary syndromes? What's your next step in evaluation given his risk profile and symptoms?",
-      "finalDebrief": "This case illustrates how ACS can present as an 'anginal equivalent' in diabetic patients, where dyspnea replaces typical chest pain due to cardiac neuropathy. Notice how the gradual onset and attribution to deconditioning could easily lead to anchoring bias. The key was recognizing the high pretest probability for coronary disease in this patient with diabetes, family history, and multiple risk factors."
+      "finalDebrief": "This case illustrates how ACS can present as an 'anginal equivalent' in diabetic patients, where dyspnea replaces typical chest pain due to cardiac neuropathy. Notice how the gradual onset and attribution to deconditioning could easily lead to anchoring bias. The key was recognizing the high pretest probability for coronary disease in this patient with diabetes, family history, and multiple risk factors.",
+      "final": "Diagnosis: NSTEMI \u2014 dyspnea-predominant. Key learning: (1) Diabetic anginal equivalents: up to 40% of MIs in diabetic patients present without chest pain. Dyspnea, diaphoresis, fatigue, nausea/vomiting, or syncope are classic anginal equivalents. A high index of suspicion is mandatory for all diabetic patients with acute cardiorespiratory symptoms. (2) NSTEMI vs UA: both have ECG changes without ST elevation. Troponin rise distinguishes NSTEMI (positive) from UA (negative). (3) TIMI Risk Score (0-7): 7 variables (age \u226565, \u22653 CAD risk factors, prior coronary stenosis, ST deviation, \u22652 anginal events in 24h, aspirin use in past 7 days, elevated cardiac markers). Score \u22653 \u2192 early invasive strategy. (4) P2Y12 inhibitor choice: ticagrelor > clopidogrel for NSTEMI based on PLATO trial (reduced MACE, no increase in bleeding). Prasugrel used if PCI is definitive. (5) Timing of invasive strategy: immediate (<2h) for very high-risk features (ongoing ischemia, hemodynamic instability, sustained VT). Early (<24h) for high TIMI score. Delayed (<72h) for low-risk."
     }
   }
 };

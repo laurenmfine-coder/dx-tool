@@ -1,6 +1,3 @@
-// Virtual EMR Case: Acute Myocardial Infarction (Presenting as Dyspnea)
-// Variant: acute-mi | Acuity: ESI-1
-// Auto-generated from ED Board clinical data
 
 window.EMR_DATA = {
   "patient": {
@@ -13,7 +10,7 @@ window.EMR_DATA = {
     "pronouns": "She/Her",
     "insurance": "Medicare Advantage (Humana Gold Plus)",
     "pcp": "Dr. James Weatherly, MD",
-    "pharmacy": "Publix Pharmacy — 4895 Sheridan St, Hollywood, FL",
+    "pharmacy": "Publix Pharmacy \u2014 4895 Sheridan St, Hollywood, FL",
     "language": "English, Spanish",
     "race": "Hispanic (Cuban American)",
     "address": "575 Iris Blvd, Columbus, OH 43211",
@@ -27,120 +24,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Type 2 Diabetes Mellitus",
-      "icd": "E11.65",
-      "onset": "2004",
+      "problem": "Anterior STEMI \u2014 cardiogenic shock, Killip IV",
+      "icd": "I21.09",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Long-standing; on insulin since 2018; A1c 7.6; diabetic retinopathy — annual eye exams"
+      "notes": "Frank Miller, 68M \u2014 crushing chest pain + severe dyspnea, BP 76/50, HR 118, SpO2 84%. ECG: ST elevation V1-V5. Pulmonary edema. Cardiogenic shock from massive anterior MI."
     },
     {
-      "problem": "Hypertension",
-      "icd": "I10",
-      "onset": "2000",
+      "problem": "Cardiogenic shock \u2014 IABP + vasopressor dependent",
+      "icd": "R57.0",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On amlodipine and losartan; generally well controlled"
+      "notes": "CI <2.0 L/min/m\u00b2, PCWP >18 mmHg. Primary cardiogenic shock from acute MI. Mechanical circulatory support required."
     },
     {
-      "problem": "Hyperlipidemia",
-      "icd": "E78.5",
-      "onset": "2006",
+      "problem": "Acute pulmonary edema \u2014 from LV failure",
+      "icd": "J81.0",
+      "onset": "2024",
       "status": "Active",
-      "notes": "On rosuvastatin; LDL at goal"
-    },
-    {
-      "problem": "Coronary Artery Disease — Prior PCI",
-      "icd": "I25.10",
-      "onset": "2019",
-      "status": "Active",
-      "notes": "PCI with DES to LAD (2019); annual cardiology follow-up; last stress echo 2024 showed mild inferoapical hypokinesis"
-    },
-    {
-      "problem": "Chronic Systolic Heart Failure, NYHA II",
-      "icd": "I50.22",
-      "onset": "2020",
-      "status": "Active",
-      "notes": "EF 40% on last echo (06/2025); on guideline-directed medical therapy"
-    },
-    {
-      "problem": "Atrial Fibrillation — Paroxysmal",
-      "icd": "I48.0",
-      "onset": "2022",
-      "status": "Active",
-      "notes": "Rate-controlled with metoprolol; on apixaban for anticoagulation; CHA2DS2-VASc 6"
+      "notes": "Respiratory failure from elevated LVEDP. Intubation may be necessary if mask CPAP fails."
     }
   ],
   "medications": [
     {
-      "name": "Insulin Glargine 28 units QHS",
-      "sig": "Inject 28 units subcutaneously at bedtime",
-      "prescriber": "Dr. Weatherly",
-      "start": "01/2018",
-      "refills": 3,
-      "status": "Active"
+      "name": "Primary PCI \u2014 immediate cath lab activation",
+      "sig": "Door-to-balloon <90 min. Primary PCI reduces mortality in cardiogenic shock (SHOCK trial showed survival benefit at 6 months). Do not delay for hemodynamic stabilization before PCI.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "ACTIVATING"
     },
     {
-      "name": "Metformin 500mg BID",
-      "sig": "Take 1 tablet by mouth twice daily with meals",
-      "prescriber": "Dr. Weatherly",
-      "start": "06/2005",
-      "refills": 5,
-      "status": "Active"
+      "name": "Norepinephrine 0.1-0.5 mcg/kg/min \u2014 vasopressor",
+      "sig": "First-line vasopressor in cardiogenic shock. Superior to dopamine (less arrhythmogenic \u2014 SOAP II trial). Target MAP \u226565 mmHg.",
+      "prescriber": "Cardiology/ICU",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IV infusion"
     },
     {
-      "name": "Losartan 100mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Weatherly",
-      "start": "08/2020",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Amlodipine 5mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Weatherly",
-      "start": "03/2012",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Metoprolol Succinate 50mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Patel (Cardiology)",
-      "start": "05/2020",
-      "refills": 3,
-      "status": "Active"
-    },
-    {
-      "name": "Rosuvastatin 20mg QHS",
-      "sig": "Take 1 tablet by mouth at bedtime",
-      "prescriber": "Dr. Weatherly",
-      "start": "11/2019",
-      "refills": 5,
-      "status": "Active"
-    },
-    {
-      "name": "Apixaban 5mg BID",
-      "sig": "Take 1 tablet by mouth twice daily",
-      "prescriber": "Dr. Patel (Cardiology)",
-      "start": "09/2022",
-      "refills": 2,
-      "status": "Active"
-    },
-    {
-      "name": "Furosemide 40mg daily",
-      "sig": "Take 1 tablet by mouth once daily in the morning",
-      "prescriber": "Dr. Patel (Cardiology)",
-      "start": "01/2021",
-      "refills": 4,
-      "status": "Active"
-    },
-    {
-      "name": "Spironolactone 25mg daily",
-      "sig": "Take 1 tablet by mouth once daily",
-      "prescriber": "Dr. Patel (Cardiology)",
-      "start": "06/2021",
-      "refills": 3,
-      "status": "Active"
+      "name": "IABP or Impella \u2014 mechanical circulatory support",
+      "sig": "IABP: afterload reduction + coronary perfusion augmentation. Impella (CP or 5.0): actively unloads LV, increases cardiac output. Use before/during PCI in cardiogenic shock.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 pre-PCI"
     }
   ],
   "allergies": [
@@ -165,7 +93,7 @@ window.EMR_DATA = {
       "bp": "92/58",
       "hr": 112,
       "rr": 28,
-      "temp": "97.8°F",
+      "temp": "97.8\u00b0F",
       "spo2": "88%",
       "wt": "158 lbs",
       "ht": "5'3\"",
@@ -177,7 +105,7 @@ window.EMR_DATA = {
       "bp": "132/78",
       "hr": 72,
       "rr": 16,
-      "temp": "98.2°F",
+      "temp": "98.2\u00b0F",
       "spo2": "96%",
       "wt": "156 lbs",
       "ht": "5'3\"",
@@ -189,7 +117,7 @@ window.EMR_DATA = {
       "bp": "128/76",
       "hr": 68,
       "rr": 16,
-      "temp": "98.4°F",
+      "temp": "98.4\u00b0F",
       "spo2": "97%",
       "wt": "154 lbs",
       "ht": "5'3\"",
@@ -201,7 +129,7 @@ window.EMR_DATA = {
       "bp": "136/82",
       "hr": 74,
       "rr": 18,
-      "temp": "98.6°F",
+      "temp": "98.6\u00b0F",
       "spo2": "96%",
       "wt": "157 lbs",
       "ht": "5'3\"",
@@ -218,7 +146,7 @@ window.EMR_DATA = {
       "cc": "Routine cardiology follow-up, CHF management",
       "hpi": "73F with known CAD s/p LAD PCI (2019), HFrEF (EF 40%), paroxysmal AFib presents for routine cardiology follow-up. Reports functional class stable at NYHA II. Can walk one block on flat ground before dyspnea. Sleeps on 2 pillows (baseline). Denies PND, orthopnea worsening, chest pain, or palpitations. Reports good medication adherence. Weight stable.",
       "exam": "NAD, resting comfortably. CV: Irregularly irregular rhythm, rate controlled; S1/S2, no S3/S4; 2/6 systolic murmur apex. JVP ~8 cm. Lungs: Bibasilar fine crackles, L > R. Ext: Trace bilateral pedal edema (baseline). ",
-      "assessment": "1. HFrEF — NYHA II, stable on GDMT\n2. CAD s/p PCI — stable, no anginal symptoms\n3. Paroxysmal AFib — rate controlled, anticoagulated\n4. T2DM — deferred to PCP",
+      "assessment": "1. HFrEF \u2014 NYHA II, stable on GDMT\n2. CAD s/p PCI \u2014 stable, no anginal symptoms\n3. Paroxysmal AFib \u2014 rate controlled, anticoagulated\n4. T2DM \u2014 deferred to PCP",
       "plan": "1. Continue current GDMT: metoprolol, losartan, spironolactone, furosemide\n2. Echo in 6 months to reassess EF\n3. Continue apixaban\n4. Stress test if symptoms change\n5. Follow-up 6 months or sooner if worsening"
     },
     {
@@ -229,170 +157,59 @@ window.EMR_DATA = {
       "cc": "Diabetes management, routine follow-up",
       "hpi": "73F with T2DM on insulin + metformin presents for quarterly check. A1c improved to 7.6. Reports occasional hypoglycemic episodes (low 60s) in the morning. Denies chest pain or worsening dyspnea. Notes mild fatigue.",
       "exam": "NAD. CV: Irregular rhythm, rate ~72. Lungs: Bibasilar crackles (chronic). Ext: Trace edema bilat. Neuro: Intact.",
-      "assessment": "1. T2DM — A1c at goal, but hypoglycemic episodes\n2. CHF — stable per cardiology\n3. Fatigue — multifactorial (CHF, DM, age)",
+      "assessment": "1. T2DM \u2014 A1c at goal, but hypoglycemic episodes\n2. CHF \u2014 stable per cardiology\n3. Fatigue \u2014 multifactorial (CHF, DM, age)",
       "plan": "1. Reduce glargine from 30 to 28 units QHS given hypoglycemia\n2. Continue metformin\n3. Check CBC, TSH, iron studies for fatigue workup\n4. Return 3 months"
     }
   ],
   "labs": [
     {
-      "date": "11/20/2025",
-      "time": "08:45",
-      "orderedBy": "Dr. Patel",
-      "collected": "11/20/2025 09:00",
-      "facility": "ReasonDx Medical Center Lab",
-      "accession": "LAB-2025-901147",
-      "status": "Final",
-      "specimenType": "Venous Blood",
-      "fasting": "Yes (12 hrs)",
-      "groups": [
+      "date": "04/2024",
+      "panel": "STEMI Cardiogenic Shock",
+      "results": [
         {
-          "name": "COMPREHENSIVE METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Glucose",
-              "value": "138",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "BUN",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.3",
-              "unit": "mg/dL",
-              "range": "0.6-1.1",
-              "flag": "H"
-            },
-            {
-              "test": "eGFR",
-              "value": "48",
-              "unit": "mL/min/1.73m²",
-              "range": ">60",
-              "flag": "L"
-            },
-            {
-              "test": "Sodium",
-              "value": "136",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.1",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "23-29",
-              "flag": ""
-            }
-          ]
+          "test": "ECG",
+          "value": "ST elevation 4mm V1-V5. Reciprocal changes inferiorly.",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
         },
         {
-          "name": "BNP",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "342",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.28",
+          "unit": "ng/mL (early rise)",
+          "ref": "<0.04",
+          "flag": "H"
         },
         {
-          "name": "COMPLETE BLOOD COUNT",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "K/uL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "34.8",
-              "unit": "%",
-              "range": "36.0-46.0",
-              "flag": "L"
-            },
-            {
-              "test": "Platelets",
-              "value": "198",
-              "unit": "K/uL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "MCV",
-              "value": "86",
-              "unit": "fL",
-              "range": "80-100",
-              "flag": ""
-            }
-          ]
+          "test": "Lactate",
+          "value": "5.6",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "BP",
+          "value": "76/50",
+          "unit": "mmHg",
+          "ref": "SBP >90",
+          "flag": "L"
+        },
+        {
+          "test": "ScvO2",
+          "value": "52",
+          "unit": "%",
+          "ref": "\u226570%",
+          "flag": "L"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "date": "06/05/2025",
-      "study": "ECHOCARDIOGRAM — TRANSTHORACIC",
-      "accession": "IMG-2025-40520",
-      "status": "FINAL",
-      "orderedBy": "Dr. Patel",
-      "readBy": "Dr. Anil Patel, MD (Cardiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "HFrEF, CAD — routine surveillance",
-      "technique": "Complete 2D and Doppler echocardiogram performed with tissue Doppler imaging.",
-      "findings": "Left ventricle: Mildly dilated. Estimated EF 40% (Simpson biplane). Mild global hypokinesis with regional wall motion abnormality — inferoapical akinesis (territory of prior LAD intervention). No LV thrombus seen.\n\nRight ventricle: Normal size and function. TAPSE 2.0 cm.\n\nValves: Mild mitral regurgitation (functional). Aortic valve trileaflet, no stenosis. Trace tricuspid regurgitation.\n\nLeft atrium: Mildly dilated (LA volume index 38 mL/m²).\n\nPericardium: No effusion.\n\nDiastolic function: Grade II diastolic dysfunction (pseudonormal pattern).",
-      "impression": "1. EF 40% — unchanged from prior.\n2. Inferoapical akinesis — prior LAD territory.\n3. Mild functional mitral regurgitation.\n4. Grade II diastolic dysfunction.\n5. Mildly dilated left atrium.",
-      "dictated": "06/05/2025 11:30",
-      "verified": "06/05/2025 14:00"
-    },
-    {
-      "date": "11/20/2025",
-      "study": "CHEST X-RAY PA AND LATERAL",
-      "accession": "IMG-2025-90442",
-      "status": "FINAL",
-      "orderedBy": "Dr. Patel",
-      "readBy": "Dr. Patricia Gomez, MD (Radiology)",
-      "facility": "ReasonDx Medical Center Imaging",
-      "priority": "Routine",
-      "clinical": "CHF follow-up",
-      "technique": "PA and lateral views of the chest obtained.",
-      "findings": "Heart: Moderately enlarged cardiac silhouette, stable. Sternotomy wires not present. Sternal sutures absent.\n\nLungs: Mild bilateral interstitial prominence, likely chronic. Small bilateral pleural effusions. No focal consolidation.\n\nMediastinum: Unremarkable.",
-      "impression": "1. Stable cardiomegaly.\n2. Mild chronic interstitial changes consistent with CHF.\n3. Small bilateral pleural effusions, stable.",
-      "dictated": "11/20/2025 10:15",
-      "verified": "11/20/2025 12:40"
+      "date": "04/2024",
+      "study": "Emergent Echo (Bedside)",
+      "findings": "Anterior wall and apical akinesis. EF estimated 20-25%. No pericardial effusion. No mechanical complications (no VSD, no papillary muscle rupture).",
+      "impression": "Severe anterior wall motion abnormality consistent with acute anterior MI. EF 20-25%. Emergent PCI indicated."
     }
   ],
   "immunizations": [
@@ -452,7 +269,7 @@ window.EMR_DATA = {
     ],
     [
       "Marital",
-      "Widowed (husband deceased 2021 — lung cancer); lives with son's family"
+      "Widowed (husband deceased 2021 \u2014 lung cancer); lives with son's family"
     ],
     [
       "Tobacco",
@@ -460,7 +277,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Rare — wine at family gatherings only"
+      "Rare \u2014 wine at family gatherings only"
     ],
     [
       "Drugs",
@@ -485,7 +302,7 @@ window.EMR_DATA = {
   ],
   "meta": {
     "caseId": "acute-mi",
-    "diagnosis": "Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema — Presenting as Sudden-Onset Dyspnea in Known HFrEF)",
+    "diagnosis": "Acute STEMI \u2014 Cardiogenic Shock (Killip Class IV)",
     "acuity": 1,
     "presentation": "Shortness of Breath",
     "category": "cardiovascular"
@@ -547,13 +364,12 @@ window.EMR_DATA = {
       "Blood pressure in both arms": "Left arm 92/58, right arm 90/56"
     },
     "ddxTargets": [
-      "Acute Myocardial Infarction (STEMI with Acute Pulmonary Edema — Presenting as Sudden-Onset Dyspnea in Known HFrEF) (correct diagnosis)",
-      "Acute decompensated heart failure",
-      "Pulmonary embolism",
-      "Acute coronary syndrome without STEMI",
-      "Cardiogenic shock",
-      "Pneumonia with sepsis",
-      "Atrial fibrillation with rapid ventricular response"
+      "STEMI cardiogenic shock \u2014 Killip IV (correct)",
+      "Non-cardiogenic pulmonary edema (ARDS) \u2014 no ECG ST elevation; different mechanism",
+      "Aortic dissection with hemodynamic compromise \u2014 CT shows aortic dissection; ECG pattern + echo distinguish",
+      "Cardiac tamponade \u2014 pulsus paradoxus, no ST elevation, echo shows effusion/compression",
+      "Massive PE with cardiogenic shock \u2014 RV strain pattern on ECG, echo shows RV dilation not LV failure",
+      "Decompensated CHF without new MI \u2014 chronic history, no acute ST elevation, not acute troponin rise"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known heart failure history and attributing dyspnea solely to CHF exacerbation, missing the acute MI component driving the pulmonary edema",
@@ -563,7 +379,8 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several reasonable possibilities for acute dyspnea in this patient with known heart failure. What specific historical details would help you distinguish between an acute coronary event versus other causes? Consider her risk factors and the acuity of presentation.",
       "phase5": "Your examination reveals signs of acute heart failure, but consider the constellation of findings: sudden onset, hemodynamic compromise, and pink frothy sputum in a high-risk patient. What does this clinical picture suggest about the underlying etiology driving her pulmonary edema?",
-      "finalDebrief": "This case demonstrates how acute MI can present as isolated dyspnea, especially in elderly patients with diabetes and known CAD. The key was recognizing that her 'usual' heart failure suddenly becoming severe suggested an acute precipitant. The pink frothy sputum, hemodynamic compromise, and sudden onset distinguished this from typical CHF exacerbation."
+      "finalDebrief": "This case demonstrates how acute MI can present as isolated dyspnea, especially in elderly patients with diabetes and known CAD. The key was recognizing that her 'usual' heart failure suddenly becoming severe suggested an acute precipitant. The pink frothy sputum, hemodynamic compromise, and sudden onset distinguished this from typical CHF exacerbation.",
+      "final": "Diagnosis: STEMI with cardiogenic shock. Key learning: (1) Killip Classification: I = no HF signs, II = S3/rales, III = pulmonary edema, IV = cardiogenic shock (SBP <90 + end-organ hypoperfusion). Killip IV has 30-day mortality of ~60-80% without revascularization. (2) SHOCK trial: primary PCI in STEMI + cardiogenic shock improved 6-month and 1-year mortality compared to initial stabilization then PCI. Do NOT delay PCI to stabilize hemodynamics. (3) Vasopressor choice: norepinephrine over dopamine \u2014 SOAP II trial showed less arrhythmia and improved survival. Dopamine causes significantly more arrhythmias in cardiogenic shock. (4) Mechanical circulatory support: IABP reduces afterload and augments diastolic coronary filling but does not increase cardiac output. Impella CP/5.0 actively pumps blood from LV to aorta \u2014 true mechanical LV support. CS team activation for Impella-supported PCI. (5) Lactate as shock severity marker: lactate >4 mmol/L in cardiogenic shock = high mortality. Lactate clearance (reduction >10% at 2 hours) is associated with improved outcomes."
     }
   }
 };
