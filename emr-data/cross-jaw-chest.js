@@ -23,20 +23,58 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Left Jaw Ache AND Mild Substernal Tightness 2 Days",
-      "icd": "Z00.00",
+      "problem": "Jaw and left-sided chest discomfort \u2014 unstable angina vs STEMI equivalent",
+      "icd": "I20.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Charles Ito, 62M \u2014 45-min jaw tightness radiating to left chest and arm. Diaphoresis. EKG: ST depressions V4-V6."
+    },
+    {
+      "problem": "Acute coronary syndrome \u2014 high HEART score (8)",
+      "icd": "I21.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "HEART score 8 = high risk. Troponin pending. Cardiology activated. ACS until proven otherwise."
+    },
+    {
+      "problem": "Hypertension + T2DM \u2014 silent ischemia risk factors",
+      "icd": "I10",
+      "onset": "2014",
+      "status": "Active",
+      "notes": "Diabetics frequently present with atypical symptoms \u2014 jaw pain, epigastric pain, fatigue instead of chest pain."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Aspirin 324mg PO \u2014 loading dose",
+      "sig": "Non-enteric coated, chew and swallow. Antiplatelet loading for ACS.",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
+    },
+    {
+      "name": "Nitroglycerin 0.4mg SL q5min x3 \u2014 angina trial",
+      "sig": "SL nitroglycerin \u2014 if jaw/chest pain is angina, should improve. Hold if systolic <90 or right ventricular MI suspected.",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 trial"
+    },
+    {
+      "name": "Heparin UFH 60 units/kg IV bolus, then 12 units/kg/h infusion",
+      "sig": "Anticoagulation \u2014 NSTEMI/UA management. Titrate to aPTT 60-100 seconds.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 pending troponin"
+    },
+    {
+      "name": "Ticagrelor 180mg PO loading dose \u2014 DAPT",
+      "sig": "P2Y12 inhibitor \u2014 dual antiplatelet therapy with aspirin for ACS. Do NOT use ticagrelor if CABG planned (hold 5 days pre-op).",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
     }
   ],
@@ -97,8 +135,58 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "ACS Workup",
+      "results": [
+        {
+          "test": "Troponin I (hsTnI) \u2014 initial",
+          "value": "0.08",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "Troponin I \u2014 3h repeat",
+          "value": "0.48",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "ECG interpretation",
+          "value": "ST depressions V4-V6, 1-2mm \u2014 posterior ischemia pattern",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "Glucose",
+          "value": "218",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        },
+        {
+          "test": "BMP",
+          "value": "Na 138, K 4.1, Cr 1.0 \u2014 normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "Portable ECG",
+      "indication": "Jaw pain + chest pain \u2014 ACS workup",
+      "findings": "Normal sinus rhythm. ST depressions 1-2mm V4-V6. No ST elevation. No Q waves.",
+      "impression": "NSTEMI pattern \u2014 posterior ischemia. Cardiology activated."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +218,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "cross-jaw-chest",
-    "diagnosis": "See diagnosis \u2014 Left Jaw Ache AND Mild Substernal Tightness 2 Days",
+    "diagnosis": "Jaw Pain Radiating to Chest \u2014 Referred Cardiac Pain vs Dental Pain, STEMI Workup Required",
     "acuity": 1,
     "presentation": "Left Jaw Ache AND Mild Substernal Tightness 2 Days",
     "category": "cardiovascular"
@@ -177,12 +265,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "52yo \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "NSTEMI \u2014 jaw + chest pain, rising troponin, ST depressions (correct)",
+      "Dental pain with anxiety-driven chest symptoms \u2014 dental pain does NOT cause troponin rise or ECG changes",
+      "GERD \u2014 no temporal relationship to meals, diaphoresis not explained",
+      "Aortic dissection \u2014 tearing, back pain, BP differential; this presentation is more ACS",
+      "Musculoskeletal chest pain \u2014 reproducible on palpation; this is not",
+      "Inferior STEMI \u2014 right-sided leads needed; consider posterior leads (V7-V9)"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +280,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Left Jaw Ache AND Mild Substernal Tightness 2 Days. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) His dentist cleared him yesterday. He has been taking ibuprofen which helps slightly. His ECG shows 0.5mm ST depression in leads II, III, aVF. What is the most dangerous diagnostic error you could make here \u2014 and what role does the ibuprofen play in your reasoning? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: NSTEMI presenting as jaw pain. Key learning: (1) Atypical ACS presentations: jaw pain, epigastric pain, left arm/shoulder pain, back pain, fatigue, dyspnea \u2014 ALL can be the sole or primary presentation of MI. Women, elderly, and diabetics are most likely to present atypically. Never dismiss jaw pain without an ECG and troponin in patients with cardiac risk factors. (2) The HEART score: History (suspicious vs typical vs non-suspicious), ECG (LBBB/LVH/ischemia), Age, Risk factors, Troponin. Score 0-3 = low risk, 4-6 = moderate, 7-10 = high. Score 8 here = high risk \u2192 mandatory cardiology, heparin, DAPT, early cath. (3) Posterior MI: ST depressions in V4-V6 may represent a posterior STEMI (mirror image). Apply posterior leads V7-V9 \u2014 ST elevation >0.5mm in posterior leads = posterior STEMI = cath lab activation, not NSTEMI management. (4) DAPT in ACS: aspirin + P2Y12 inhibitor (ticagrelor preferred over clopidogrel per PLATO trial \u2014 faster onset, more consistent platelet inhibition). Prasugrel is alternative. Hold P2Y12 if CABG planned: ticagrelor 5 days, prasugrel 7 days, clopidogrel 5 days. (5) Dental referral AFTER cardiac clearance: this patient has concurrent dental disease but the acute priority is ACS workup. Never let dental pain diagnosis delay cardiac evaluation in a patient with risk factors and atypical symptoms."
     }
   }
 };

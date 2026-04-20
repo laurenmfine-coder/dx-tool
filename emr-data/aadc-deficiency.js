@@ -23,19 +23,56 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Infant",
-      "icd": "Z00.00",
+      "problem": "AADC deficiency \u2014 confirmed on enzyme assay",
+      "icd": "E70.89",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "DDC gene mutation confirmed. Urine vanillylactic acid elevated; HVA and 5-HIAA low."
+    },
+    {
+      "problem": "Oculogyric crises \u2014 episodic upward eye deviation",
+      "icd": "H51.8",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Triggered by stimulation or fever. Lasts minutes to hours. Hallmark of AADC deficiency."
+    },
+    {
+      "problem": "Hypotonia \u2014 severe axial and appendicular",
+      "icd": "P94.2",
+      "onset": "Birth",
+      "status": "Active",
+      "notes": "Unable to achieve head control. Feeding difficulties requiring NG tube supplementation."
+    },
+    {
+      "problem": "Autonomic instability \u2014 ptosis, mottling, temperature dysregulation",
+      "icd": "G90.9",
+      "onset": "Birth",
+      "status": "Active",
+      "notes": "Dopamine and serotonin deficiency affects autonomic nervous system globally."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Sandra Kim, MD",
-      "start": "01/2024",
+      "name": "Pyridoxine (B6) 30mg/kg/day divided TID",
+      "sig": "Cofactor for AADC enzyme \u2014 partial activity enhancement in some mutations",
+      "prescriber": "Neurology/Genetics",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active"
+    },
+    {
+      "name": "Selegiline 0.1mg/kg/day (MAO-B inhibitor)",
+      "sig": "Inhibits dopamine breakdown \u2014 compensates for reduced synthesis",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active"
+    },
+    {
+      "name": "Pramipexole 0.05mg/kg/day (dopamine agonist)",
+      "sig": "Direct dopamine receptor stimulation \u2014 bypasses synthesis defect",
+      "prescriber": "Neurology",
+      "start": "2024",
       "refills": 3,
       "status": "Active"
     }
@@ -97,8 +134,58 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "01/2024",
+      "panel": "AADC Diagnostic Panel",
+      "results": [
+        {
+          "test": "Plasma AADC enzyme activity",
+          "value": "2",
+          "unit": "nmol/hr/mL",
+          "ref": "5-25",
+          "flag": "L"
+        },
+        {
+          "test": "CSF HVA (homovanillic acid)",
+          "value": "18",
+          "unit": "nmol/L",
+          "ref": "90-250",
+          "flag": "L"
+        },
+        {
+          "test": "CSF 5-HIAA",
+          "value": "12",
+          "unit": "nmol/L",
+          "ref": "80-250",
+          "flag": "L"
+        },
+        {
+          "test": "Urine vanillylactic acid",
+          "value": "Elevated",
+          "unit": "",
+          "ref": "Undetectable",
+          "flag": "H"
+        },
+        {
+          "test": "CSF 3-O-methyldopa",
+          "value": "Elevated",
+          "unit": "",
+          "ref": "Undetectable",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "01/2024",
+      "study": "MRI Brain",
+      "indication": "Hypotonia and developmental delay workup",
+      "findings": "No structural abnormality. Cerebellum normal.",
+      "impression": "Normal MRI \u2014 structural causes of hypotonia excluded. Supports metabolic/enzymatic diagnosis."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +217,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "aadc-deficiency",
-    "diagnosis": "See diagnosis \u2014 Infant",
+    "diagnosis": "AADC Deficiency \u2014 Aromatic L-Amino Acid Decarboxylase Deficiency, Infant with Movement Disorder and Oculogyric Crises",
     "acuity": 2,
     "presentation": "Infant",
     "category": "pediatric"
@@ -177,12 +264,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Infant \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "AADC deficiency \u2014 oculogyric crises + hypotonia + low CSF HVA/5-HIAA (correct)",
+      "Cerebral palsy \u2014 normal MRI excludes structural cause",
+      "Spinal muscular atrophy \u2014 no oculogyric crises; EMG/genetic testing differs",
+      "Mitochondrial disease \u2014 different metabolic profile",
+      "Dopamine transporter deficiency (SLC6A3) \u2014 similar phenotype, different CSF profile",
+      "Infantile Parkinsonism-dystonia \u2014 related disorder, differentiated by enzyme assay"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +279,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Infant. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) Age-appropriate risk stratification. What differentiates serious bacterial infection from viral illness in this child? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: AADC deficiency. Key learning: (1) AADC converts L-DOPA \u2192 dopamine AND 5-HTP \u2192 serotonin. Deficiency = combined dopaminergic AND serotonergic failure \u2014 explains oculogyric crises, autonomic instability, and hypotonia. (2) CSF pattern is diagnostic: low HVA (dopamine metabolite), low 5-HIAA (serotonin metabolite), elevated 3-O-methyldopa (L-DOPA backs up upstream). Plasma enzyme activity confirms. (3) Oculogyric crises are pathognomonic \u2014 episodic sustained upward or lateral eye deviation, often with neck extension. In any infant with hypotonia + OGC, AADC deficiency must be excluded. (4) Treatment hierarchy: pyridoxine (cofactor) \u2192 MAO-B inhibitors \u2192 dopamine agonists \u2192 gene therapy (AAV2-DDC, approved in some countries). (5) Prognosis with gene therapy is dramatically improving \u2014 early diagnosis is critical for neurodevelopmental outcome."
     }
   }
 };

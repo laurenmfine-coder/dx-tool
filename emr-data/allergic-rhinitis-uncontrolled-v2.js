@@ -1,4 +1,4 @@
-/* emr-data/allergic-rhinitis-uncontrolled-v2.js — Variation: Allergic Rhinitis — Uncontrolled */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -811,51 +811,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Allergic rhinitis \u2014 perennial, uncontrolled",
+      "problem": "Perennial allergic rhinitis \u2014 uncontrolled on loratadine",
       "icd": "J30.9",
-      "onset": "2018",
+      "onset": "2020",
       "status": "Active",
-      "notes": "TNSS 9/12 (severe); failed intranasal corticosteroid + antihistamine combination; poorly controlled despite adherence"
+      "notes": "Daily congestion, rhinorrhea, sneezing despite antihistamine. Dust mite + cat sensitization."
     },
     {
-      "problem": "House dust mite sensitization (Der p 1, Der f 1)",
-      "icd": "J30.89",
-      "onset": "2018",
+      "problem": "INCS technique error \u2014 patient not using correctly",
+      "icd": "Z79.899",
+      "onset": "2024",
       "status": "Active",
-      "notes": "Dominant allergen \u2014 lives in humid climate; carpet at home; mattress covers not in place"
+      "notes": "Fluticasone started 2 weeks ago \u2014 'doesn't help.' Likely septum-directed spray and inadequate expectations."
     },
     {
-      "problem": "Cat dander sensitization (Fel d 1)",
-      "icd": "J30.1",
-      "onset": "2018",
+      "problem": "Comorbid allergic conjunctivitis \u2014 undertreated",
+      "icd": "H10.10",
+      "onset": "2021",
       "status": "Active",
-      "notes": "Owns 2 cats; cat avoidance counseled but declined; AIT covers cat dander"
+      "notes": "Concurrent eye symptoms \u2014 topical eye drop more effective than oral antihistamine."
     }
   ],
   "medications": [
     {
-      "name": "Fluticasone propionate nasal spray 2 sprays each nostril daily",
-      "sig": "2 sprays per nostril daily; begin 2 weeks before allergen season; use consistently",
-      "prescriber": "Dr. Rodriguez",
-      "start": "2020",
+      "name": "Fluticasone propionate 50mcg \u2014 2 sprays each nostril daily",
+      "sig": "AIM TOWARD EAR/EYE SIDE \u2014 NOT toward septum. Sniff gently. Takes 1-2 weeks for full effect. DAILY, not PRN.",
+      "prescriber": "Allergy",
+      "start": "2024",
       "refills": 5,
-      "status": "Active \u2014 inadequate control"
+      "status": "Active"
     },
     {
-      "name": "Cetirizine 10mg daily",
-      "sig": "Take 1 tablet by mouth daily",
-      "prescriber": "Dr. Rodriguez",
-      "start": "2020",
+      "name": "Loratadine 10mg PO daily \u2014 continue",
+      "sig": "Continue for systemic and ocular symptoms. INCS is superior for nasal congestion.",
+      "prescriber": "Allergy",
+      "start": "2024",
       "refills": 5,
-      "status": "Active \u2014 inadequate control"
+      "status": "Active"
     },
     {
-      "name": "Allergen immunotherapy \u2014 subcutaneous (SCIT) \u2014 House dust mite, cat, grass, tree mix",
-      "sig": "Escalation: weekly injections x15-30 weeks; maintenance: monthly x3-5 years; 30-min observation post-injection",
-      "prescriber": "Dr. Rodriguez",
-      "start": "11/2024",
-      "refills": 12,
-      "status": "Active \u2014 initiated"
+      "name": "Olopatadine 0.1% eye drops BID \u2014 add for ocular symptoms",
+      "sig": "Topical drop more effective than oral antihistamine for ocular allergy",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active \u2014 add on"
+    },
+    {
+      "name": "Saline nasal rinse daily \u2014 allergen clearance",
+      "sig": "Irrigate each nostril daily \u2014 reduces allergen load, improves INCS efficacy",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -893,70 +901,35 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "11/02/2024",
-      "panel": "Allergen Specific IgE Panel",
+      "date": "11/2024",
+      "panel": "Allergy Evaluation",
       "results": [
         {
-          "test": "Der p 1 (House dust mite \u2014 D. pteronyssinus)",
-          "value": "18.4",
-          "unit": "kUA/L",
+          "test": "Dust mite IgE (D. pteronyssinus)",
+          "value": "12.4",
+          "unit": "kU/L",
           "ref": "<0.35",
           "flag": "H"
         },
         {
-          "test": "Der f 1 (House dust mite \u2014 D. farinae)",
-          "value": "16.2",
-          "unit": "kUA/L",
-          "ref": "<0.35",
-          "flag": "H"
-        },
-        {
-          "test": "Fel d 1 (Cat dander)",
-          "value": "9.8",
-          "unit": "kUA/L",
-          "ref": "<0.35",
-          "flag": "H"
-        },
-        {
-          "test": "Timothy grass IgE",
-          "value": "4.2",
-          "unit": "kUA/L",
-          "ref": "<0.35",
-          "flag": "H"
-        },
-        {
-          "test": "Oak tree IgE",
-          "value": "3.1",
-          "unit": "kUA/L",
-          "ref": "<0.35",
-          "flag": "H"
-        },
-        {
-          "test": "Cockroach IgE",
-          "value": "1.4",
-          "unit": "kUA/L",
-          "ref": "<0.35",
-          "flag": "H"
-        },
-        {
-          "test": "Mold (Alternaria) IgE",
-          "value": "0.8",
-          "unit": "kUA/L",
+          "test": "Cat dander IgE (Fel d 1)",
+          "value": "6.8",
+          "unit": "kU/L",
           "ref": "<0.35",
           "flag": "H"
         },
         {
           "test": "Total IgE",
-          "value": "580",
+          "value": "220",
           "unit": "IU/mL",
           "ref": "<150",
           "flag": "H"
         },
         {
-          "test": "TNSS (Total Nasal Symptom Score)",
-          "value": "9",
-          "unit": "/12",
-          "ref": "<4 controlled",
+          "test": "Eosinophils",
+          "value": "0.5",
+          "unit": "K/\u03bcL",
+          "ref": "<0.5",
           "flag": "H"
         }
       ]
@@ -1090,12 +1063,12 @@ window.EMR_DATA = {
       "Examination of nasal turbinates": "Markedly enlarged and pale inferior turbinates with watery discharge"
     },
     "ddxTargets": [
-      "Perennial allergic rhinitis \u2014 uncontrolled, HDM and cat dominant, AIT indicated (correct)",
-      "Non-allergic rhinitis (vasomotor) \u2014 IgE negative; triggered by temperature, odors, not allergens",
-      "Nasal polyps \u2014 conductive hyposmia; nasal polyposis on scope; often NSAID-sensitive",
-      "Chronic sinusitis \u2014 purulent drainage; facial pressure; sinus imaging shows opacification",
-      "Seasonal allergic rhinitis \u2014 symptoms correlated strictly with pollen season; no perennial symptoms",
-      "Allergic fungal sinusitis \u2014 AFS has characteristic CT findings; fungal allergy predominant"
+      "Allergic rhinitis \u2014 INCS underutilized/technique error (correct)",
+      "Non-allergic rhinitis (vasomotor) \u2014 normal IgE, no sensitization",
+      "Nasal polyps \u2014 absent on exam; CT and ENT if suspected",
+      "Chronic sinusitis \u2014 pressure symptoms, purulent drainage, different workup",
+      "Rhinitis medicamentosa \u2014 topical decongestant overuse (not present here)",
+      "Immunodeficiency \u2014 recurrent sinopulmonary infections would prompt workup"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'just allergies' and missing the severity, occupational component, and associated asthma that requires comprehensive management including immunotherapy consideration",
@@ -1106,10 +1079,11 @@ window.EMR_DATA = {
       "phase2": "This is an interesting case of someone whose career passion conflicts with their health. What questions would help you understand the severity and impact of her symptoms, and what would you want to know about her work environment and previous treatments?",
       "phase5": "You've identified classic signs of allergic rhinitis, but consider the bigger picture. What does the combination of her occupational exposure, treatment failures, associated symptoms, and exam findings tell you about disease severity and management needs?",
       "finalDebrief": "This case illustrates severe persistent allergic rhinitis with occupational triggers and united airway disease. How did the patient's work environment, treatment history, and associated asthma change your approach? What management strategies would you consider for someone whose trigger is integral to their career?",
-      "final": "Diagnosis: uncontrolled perennial allergic rhinitis, HDM + cat dominant, AIT candidate. Key teaching points: (1) AIT is the only disease-modifying treatment for allergic rhinitis \u2014 reduces sensitivity, prevents asthma development, reduces new sensitizations. Minimum 3 years for lasting benefit. (2) Step-up criteria: uncontrolled on INCS + antihistamine combination = add INCS + antihistamine + LTRA, or proceed to AIT. Presence of comorbid asthma or animal sensitization are additional AIT indications. (3) SCIT vs. SLIT: SCIT = superior efficacy, requires office administration; SLIT (sublingual) = convenient at-home use, lower efficacy, good for HDM. HDM SLIT (Odactra) is FDA-approved. (4) Environmental control is synergistic with AIT: HEPA air purifiers, allergen-impermeable mattress/pillow covers, humidity control <50%. Cat ownership substantially reduces AIT success if exposure is ongoing. (5) TNSS 9/12 = severely uncontrolled; document TNSS at each visit to track AIT response \u2014 expect improvement after 6-12 months escalation."
+      "final": "Diagnosis: inadequately controlled allergic rhinitis \u2014 INCS underutilization. Key learning: (1) INCS are the most effective monotherapy for allergic rhinitis \u2014 superior to antihistamines for nasal congestion, rhinorrhea, AND sneezing. Antihistamines primarily address sneezing and rhinorrhea but not congestion. (2) Technique is everything \u2014 most patients aim toward the septum and get epistaxis and no benefit. Correct technique: angle the spray laterally (toward the same-side eye/ear), sniff gently, do not sniff forcefully. Demonstrate in office. (3) INCS takes 1-2 weeks for full benefit \u2014 set expectations. Patients stop early assuming it doesn't work. (4) Step-up algorithm: antihistamine alone \u2192 INCS \u2192 INCS + antihistamine \u2192 montelukast add-on (modest) \u2192 allergen immunotherapy (disease-modifying). (5) Topical eye drops outperform systemic antihistamines for ocular allergy \u2014 oral antihistamine penetration into the eye is limited."
     }
   },
   "meta": {
-    "diagnosis": "Uncontrolled Perennial Allergic Rhinitis \u2014 House Dust Mite and Pet Dander Sensitization; Allergen Immunotherapy Candidate"
+    "diagnosis": "Perennial Allergic Rhinitis \u2014 Inadequate Control on Antihistamine Alone, INCS Step-Up with Technique Counseling",
+    "caseId": "allergic-rhinitis-uncontrolled-v2"
   }
 };

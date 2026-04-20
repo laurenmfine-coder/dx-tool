@@ -1,4 +1,4 @@
-/* emr-data/chf-v1.js — EMR case data for Acute Decompensated Heart Failure */
+
 window.EMR_DATA = {
   "patient": {
     "name": "William Turner",
@@ -15,103 +15,76 @@ window.EMR_DATA = {
     "address": "5769 Peachtree Rd, Memphis, TN 38108",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Michael Torres, DO",
-    "pharmacy": "CVS Pharmacy — Federal Hwy",
+    "pharmacy": "CVS Pharmacy \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Michael Cook",
       "phone": "(713) 555-4694",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "Can't breathe when I lay down No specific spot — just can't breathe",
+    "chiefComplaint": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
     "diagnosis": "Acute Decompensated Heart Failure"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Heart failure with reduced EF",
+      "problem": "Acute decompensated HF \u2014 HFpEF (EF 60%)",
+      "icd": "I50.30",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Elena Vasquez, 74F \u2014 sudden onset dyspnea, flash pulmonary edema. BP 192/108 on arrival. EF preserved."
     },
     {
-      "id": "prob-2",
-      "description": "Atrial fibrillation",
+      "problem": "Hypertensive urgency \u2014 precipitant of flash pulmonary edema",
+      "icd": "I10",
+      "onset": "2018",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Hypertension is the primary driver \u2014 afterload reduction is key treatment."
     },
     {
-      "id": "prob-3",
-      "description": "Type 2 Diabetes",
+      "problem": "Diastolic dysfunction grade 3 \u2014 impaired relaxation + elevated filling pressures",
+      "icd": "I50.30",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Hypertension",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Prior MI 5 years ago",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Echo: LVH, E/e' ratio 18, LA enlargement. Poor diastolic compliance with acute load."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Furosemide",
-      "dose": "40mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michael Torres, DO"
+      "name": "Furosemide 40mg IV \u2014 diuresis",
+      "sig": "IV bolus \u2014 acute decongestion. Monitor urine output, electrolytes q4h.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Lisinopril",
-      "dose": "10mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "Nitroglycerin 10-200 mcg/min IV infusion \u2014 venodilator",
+      "sig": "Reduces preload rapidly in flash pulmonary edema. Titrate to BP and dyspnea relief.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 titrating"
     },
     {
-      "id": "med-3",
-      "name": "Carvedilol",
-      "dose": "12.5mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "CPAP or BiPAP \u2014 respiratory support",
+      "sig": "Non-invasive positive pressure ventilation \u2014 reduces work of breathing, improves oxygenation, decreases preload.",
+      "prescriber": "Medicine/Pulm",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Apixaban",
-      "dose": "5mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
-    },
-    {
-      "id": "med-5",
-      "name": "Metformin",
-      "dose": "1000mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "Amlodipine 10mg PO daily \u2014 add for chronic BP control",
+      "sig": "Calcium channel blocker \u2014 effective in HFpEF for BP. Add after acute stabilization.",
+      "prescriber": "Cardiology",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active \u2014 add outpatient"
     }
   ],
   "allergies": [
     {
       "allergen": "ACE inhibitors",
-      "reaction": "Angioedema — switched from enalapril to lisinopril without issue but reports this",
+      "reaction": "Angioedema \u2014 switched from enalapril to lisinopril without issue but reports this",
       "severity": "Moderate",
       "type": "Drug"
     }
@@ -123,7 +96,7 @@ window.EMR_DATA = {
       "bp": "168/98",
       "hr": "110 (irregularly irregular)",
       "rr": "28",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "88%",
       "pain": "9/10",
       "bmi": "32",
@@ -136,223 +109,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Can't breathe when I lay down No specific spot — just can't breathe",
-      "hpi": "William Turner is a 68-year-old male presenting with can't breathe when i lay down no specific spot — just can't breathe. Past medical history includes Heart failure with reduced EF, Atrial fibrillation, Type 2 Diabetes, Hypertension, Prior MI 5 years ago. See chart for full details.",
+      "cc": "Can't breathe when I lay down No specific spot \u2014 just can't breathe",
+      "hpi": "William Turner is a 68-year-old male presenting with can't breathe when i lay down no specific spot \u2014 just can't breathe. Past medical history includes Heart failure with reduced EF, Atrial fibrillation, Type 2 Diabetes, Hypertension, Prior MI 5 years ago. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Acute Decompensated Heart Failure — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Acute Decompensated Heart Failure \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-703715",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Acute HF Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.1",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "36",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "229",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "BNP",
+          "value": "1840",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "131",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "4.8",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "22",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "13",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "89",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "8.7",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.1",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "BNP",
-              "value": "2,840",
-              "unit": "pg/mL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "Troponin I",
-              "value": "0.06",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
-            },
-            {
-              "test": "TSH",
-              "value": "2.1",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            },
-            {
-              "test": "Hepatic Panel ALT",
-              "value": "68",
-              "unit": "U/L",
-              "range": "7-56",
-              "flag": "H"
-            }
-          ]
+          "test": "Troponin I",
+          "value": "0.06",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "138",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": ""
+        },
+        {
+          "test": "Potassium",
+          "value": "3.9",
+          "unit": "mEq/L",
+          "ref": "3.5-5.0",
+          "flag": ""
+        },
+        {
+          "test": "BNP",
+          "value": "1840",
+          "unit": "pg/mL",
+          "ref": "<100",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Chest X-ray",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-186165",
-      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
-      "technique": "Standard protocol",
-      "findings": "Cardiomegaly. Bilateral pleural effusions (right > left). Cephalization of pulmonary vasculature. Kerley B lines. Bilateral alveolar infiltrates in butterfly pattern.",
-      "impression": "Pulmonary edema with bilateral pleural effusions — acute decompensated heart failure",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "POCUS – Cardiac",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-978996",
-      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
-      "technique": "Standard protocol",
-      "findings": "Severely reduced LV systolic function (EF ~20%). Dilated LV. Moderate mitral regurgitation. Small pericardial effusion. Dilated IVC without respiratory variation.",
-      "impression": "Severely reduced EF with volume overload",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "POCUS – Lung",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-750659",
-      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
-      "technique": "Standard protocol",
-      "findings": "Bilateral B-lines in >3 lung zones (>3 B-lines per intercostal space). Small bilateral pleural effusions.",
-      "impression": "Pulmonary edema confirmed by lung ultrasound",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-4",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-163338",
-      "clinical": "Can't breathe when I lay down No specific spot — just can't breathe",
-      "technique": "Standard 12-lead",
-      "findings": "Atrial fibrillation with rapid ventricular response at 110 bpm. Left ventricular hypertrophy. Old Q waves in V1-V3 (prior anterior MI). No acute ST changes",
-      "impression": "AFib with RVR, LVH, old anterior MI — no new acute ischemia",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "Echo \u2014 Transthoracic",
+      "indication": "Acute HF \u2014 EF assessment and etiology",
+      "findings": "EF 60%. LVH. Grade 3 diastolic dysfunction. E/e' ratio 18. LA enlargement. No wall motion abnormality. Mild mitral regurgitation.",
+      "impression": "HFpEF \u2014 preserved EF with significantly elevated filling pressures. LVH consistent with chronic hypertension."
     }
   ],
   "immunizations": [
@@ -460,13 +280,12 @@ window.EMR_DATA = {
       "Weight measurement if available": "Patient reports 8-10 pound weight gain over past 3 weeks"
     },
     "ddxTargets": [
-      "Acute decompensated heart failure (correct diagnosis)",
-      "Pulmonary edema",
-      "Atrial fibrillation with rapid ventricular response",
-      "Acute coronary syndrome",
-      "Pulmonary embolism",
-      "Pneumonia",
-      "COPD exacerbation"
+      "HFpEF \u2014 hypertensive flash pulmonary edema (correct)",
+      "HFrEF \u2014 EF preserved on echo excludes",
+      "ARDS \u2014 cardiogenic edema pattern; BNP and response to diuresis distinguish",
+      "Pulmonary embolism \u2014 no right heart strain on echo, no pleuritic pain",
+      "Hypertensive emergency with target organ damage \u2014 BP 192, now with pulmonary edema = emergency",
+      "Aortic stenosis precipitating HF \u2014 no gradient on echo"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on heart failure history and missing acute coronary syndrome or new arrhythmias that could be precipitating the decompensation",
@@ -476,7 +295,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given this patient's known heart failure history, what specific questions will help you determine if this is decompensated heart failure versus a new acute process? Think about precipitating factors and the timeline of symptom progression.",
       "phase5": "Excellent history and physical. You've identified clear signs of volume overload. Now consider: what might have precipitated this decompensation in a patient who was previously stable? How does the irregular heart rhythm factor into your assessment and management priorities?",
-      "finalDebrief": "This case demonstrates classic acute decompensated heart failure with the triad of orthopnea, volume overload, and known reduced EF. Notice how the patient's known heart failure history could have led to premature closure - it was important to consider precipitating factors like atrial fibrillation with RVR, medication non-adherence, or dietary indiscretion. The physical exam findings of elevated JVP, S3 gallop, and bilateral edema clinched the diagnosis."
+      "finalDebrief": "This case demonstrates classic acute decompensated heart failure with the triad of orthopnea, volume overload, and known reduced EF. Notice how the patient's known heart failure history could have led to premature closure - it was important to consider precipitating factors like atrial fibrillation with RVR, medication non-adherence, or dietary indiscretion. The physical exam findings of elevated JVP, S3 gallop, and bilateral edema clinched the diagnosis.",
+      "final": "Diagnosis: HFpEF flash pulmonary edema, hypertensive exacerbation. Key learning: (1) HFpEF vs HFrEF: HFrEF = EF <40%, systolic dysfunction, responds to GDMT (ARNIs, beta-blockers, MRAs, SGLT-2i). HFpEF = EF \u226550%, diastolic dysfunction, GDMT is less effective except SGLT-2i (proven benefit) and spironolactone (modest). Treatment of HFpEF is primarily symptomatic and risk factor modification. (2) Flash pulmonary edema mechanism: acute hypertension \u2192 massive afterload increase \u2192 left ventricle cannot empty effectively \u2192 back pressure \u2192 acute pulmonary congestion. EF is preserved because this is a load-dependent phenomenon, not intrinsic contractile failure. (3) Treatment of flash pulmonary edema: rapid afterload reduction (IV nitroglycerin, nitroprusside), diuresis, non-invasive ventilation. Response is faster than in HFrEF decompensation. (4) Troponin elevation in HFpEF decompensation: demand ischemia from markedly elevated wall stress and tachycardia. Not always ACS \u2014 but ACS must be excluded, especially in patients with risk factors. (5) HFpEF management pillars: BP control (<130/80), rate control for AFib, diuresis for congestion, SGLT-2 inhibitors (empagliflozin, dapagliflozin \u2014 Class IIa/IIb for HFpEF), weight loss."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Decompensated Heart Failure \u2014 HFpEF, Hypertensive Exacerbation, Diastolic Dysfunction",
+    "caseId": "chf-v1"
   }
 };

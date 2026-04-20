@@ -23,21 +23,66 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Dementia",
-      "icd": "Z00.00",
+      "problem": "Recurrent falls \u2014 3 in past 6 months, polypharmacy contributor",
+      "icd": "Z91.81",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Dorothy Walsh, 82F \u2014 on 11 medications, 4 on Beers Criteria list. TUG test abnormal at 18 seconds."
+    },
+    {
+      "problem": "Polypharmacy \u2014 11 medications, Beer's Criteria violations",
+      "icd": "Z79.899",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "Diphenhydramine, lorazepam, nifedipine IR, cyclobenzaprine \u2014 all potentially inappropriate in elderly."
+    },
+    {
+      "problem": "Orthostatic hypotension \u2014 systolic drop 24 mmHg on standing",
+      "icd": "I95.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Supine 142/84 \u2192 standing 118/76. Medication-induced \u2014 multiple offenders."
+    },
+    {
+      "problem": "Cognitive impairment \u2014 MoCA 22 (mild)",
+      "icd": "G31.84",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "Mild cognitive impairment \u2014 increases fall risk and medication adherence problems."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
+      "name": "DISCONTINUE diphenhydramine (Benadryl) \u2014 Beer's Criteria",
+      "sig": "Highly anticholinergic in elderly \u2014 sedation, confusion, urinary retention, fall risk. Replace sleep complaints with melatonin or CBT-I.",
+      "prescriber": "Geriatrics",
+      "start": "DISCONTINUE",
+      "refills": 0,
+      "status": "DISCONTINUE"
+    },
+    {
+      "name": "TAPER and DISCONTINUE lorazepam \u2014 Beer's Criteria",
+      "sig": "Benzodiazepine in elderly \u2014 increases fall risk 2-3x, cognitive impairment, respiratory depression. Taper over 4-8 weeks to prevent withdrawal seizure.",
+      "prescriber": "Geriatrics/PCP",
+      "start": "TAPER",
+      "refills": 0,
+      "status": "TAPER to DISCONTINUE"
+    },
+    {
+      "name": "SWITCH nifedipine IR to amlodipine 5mg daily \u2014 Beer's Criteria",
+      "sig": "Short-acting nifedipine causes reflex tachycardia and BP swings contributing to orthostasis. Long-acting CCB is safer.",
+      "prescriber": "Geriatrics",
+      "start": "SWITCH",
+      "refills": 5,
+      "status": "SWITCH to amlodipine"
+    },
+    {
+      "name": "Melatonin 5mg at bedtime \u2014 replace diphenhydramine for sleep",
+      "sig": "Safer sleep aid for elderly \u2014 no anticholinergic side effects, no fall risk",
+      "prescriber": "Geriatrics",
+      "start": "2024",
       "refills": 3,
-      "status": "Active"
+      "status": "Active \u2014 replace Benadryl"
     }
   ],
   "allergies": [
@@ -97,7 +142,56 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Fall Risk Assessment",
+      "results": [
+        {
+          "test": "TUG test (Timed Up and Go)",
+          "value": "18",
+          "unit": "seconds",
+          "ref": "<12 normal, >13.5 high fall risk",
+          "flag": "H"
+        },
+        {
+          "test": "MoCA cognitive screen",
+          "value": "22",
+          "unit": "/30",
+          "ref": "\u226526 normal",
+          "flag": "L"
+        },
+        {
+          "test": "Orthostatic BP \u2014 supine",
+          "value": "142/84",
+          "unit": "mmHg",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "Orthostatic BP \u2014 standing 1 min",
+          "value": "118/76",
+          "unit": "mmHg",
+          "ref": "Drop <20 systolic",
+          "flag": "H"
+        },
+        {
+          "test": "Vitamin D (25-OH)",
+          "value": "18",
+          "unit": "ng/mL",
+          "ref": "\u226530",
+          "flag": "L"
+        },
+        {
+          "test": "TSH",
+          "value": "2.8",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
   "imaging": [],
   "immunizations": [
     {
@@ -130,7 +224,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "cross-falls-polypharmacy",
-    "diagnosis": "See diagnosis \u2014 Dementia",
+    "diagnosis": "Recurrent Falls \u2014 Polypharmacy-Induced, Beer's Criteria Medications, Comprehensive Medication Reconciliation",
     "acuity": 2,
     "presentation": "Dementia",
     "category": "geriatric"
@@ -177,12 +271,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "82yo Dementia \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Polypharmacy-induced falls \u2014 Beer's Criteria medications, orthostasis (correct)",
+      "Parkinson's disease \u2014 no rigidity, bradykinesia, or resting tremor",
+      "Cerebellar ataxia \u2014 TUG abnormal but gait not grossly ataxic",
+      "Vertebrobasilar insufficiency \u2014 episodic vertigo not the primary complaint",
+      "Cardiac syncope \u2014 no witnessed LOC, no palpitations preceding fall",
+      "Osteoporosis complicating falls \u2014 relevant for injury prevention but not the fall cause"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +286,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Dementia. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) She needs wound repair. The confusion is new since yesterday. Her daughter says she was sharp at breakfast. Before you repair the laceration, what in the medication list explains both the fall AND the acute confusion \u2014 and does anything on this list require a specific precaution for wound repair? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: polypharmacy-induced recurrent falls. Key learning: (1) Beers Criteria 2023 (American Geriatrics Society): medications potentially inappropriate in adults \u226565: anticholinergics (diphenhydramine, oxybutynin, TCAs), benzodiazepines, non-BZD hypnotics (zolpidem), short-acting nifedipine, muscle relaxants, first-generation antihistamines. These increase fall and cognitive impairment risk. (2) Orthostatic hypotension definition: systolic drop \u226520 mmHg or diastolic drop \u226510 mmHg within 3 minutes of standing. Medication causes: alpha-blockers, diuretics, short-acting CCBs, beta-blockers, antidepressants. Remove offending agents before adding midodrine or fludrocortisone. (3) Benzodiazepine deprescription: MUST taper \u2014 abrupt discontinuation after long-term use risks seizure. Reduce by 10-25% every 1-2 weeks. CIWA monitoring if heavy use. (4) Fall risk multifactorial: address medications, vision (cataracts, glasses prescription), footwear (non-slip), home safety (grab bars, bath mat), vitamin D deficiency, PT/OT evaluation. (5) Vitamin D deficiency (18 ng/mL) increases fall risk \u2014 supplement with vitamin D3 800-2000 IU daily. Combined calcium + vitamin D reduces fall and fracture risk in elderly."
     }
   }
 };

@@ -23,20 +23,65 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: James Okoye",
-      "icd": "Z00.00",
+      "problem": "Acute ischemic stroke \u2014 left MCA, NIHSS 14",
+      "icd": "I63.512",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Patricia Malone, 71F \u2014 right-sided weakness + aphasia, LKW 2.5 hours ago. tPA given. NIHSS improving."
+    },
+    {
+      "problem": "Post-tPA hemorrhagic transformation risk \u2014 BP management critical",
+      "icd": "I63.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "BP target <180/105 for 24h post-tPA. Labetalol PRN protocol active. No anticoagulation x24h."
+    },
+    {
+      "problem": "Atrial fibrillation \u2014 newly detected, likely cardioembolic source",
+      "icd": "I48.91",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "New AFib on telemetry post-stroke. Anticoagulation timing: 2-4 weeks post-stroke for moderate infarct size."
+    },
+    {
+      "problem": "Dysphagia \u2014 NPO, NG tube pending SLP evaluation",
+      "icd": "R13.10",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Bedside dysphagia screen failed. SLP evaluation tomorrow. NG tube for medications."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Robert Chen, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Alteplase 0.9mg/kg IV (max 90mg) \u2014 completed",
+      "sig": "10% bolus over 1 min, remainder over 60 min. Last dose given 45 min ago. Do NOT give antithrombotic x24h.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Completed"
+    },
+    {
+      "name": "Labetalol 10-20mg IV PRN \u2014 BP >180/105",
+      "sig": "PRN for post-tPA BP management. Target <180/105. Avoid BP <150 \u2014 preserve penumbra perfusion.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active PRN"
+    },
+    {
+      "name": "Aspirin 325mg via NG tube \u2014 start at 24h post-tPA",
+      "sig": "Hold x24h after tPA. Start only after 24h MRI confirms no hemorrhagic transformation.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Hold \u2014 start at 24h"
+    },
+    {
+      "name": "Atorvastatin 80mg via NG tube QHS",
+      "sig": "High-intensity statin for stroke \u2014 LDL target <70. Start immediately.",
+      "prescriber": "Neurology",
+      "start": "2024",
+      "refills": 5,
       "status": "Active"
     }
   ],
@@ -97,8 +142,65 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Acute Stroke Panel",
+      "results": [
+        {
+          "test": "Glucose",
+          "value": "148",
+          "unit": "mg/dL",
+          "ref": "70-140",
+          "flag": "H"
+        },
+        {
+          "test": "INR",
+          "value": "1.0",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": ""
+        },
+        {
+          "test": "Platelet count",
+          "value": "220",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.0",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
+        },
+        {
+          "test": "Troponin I (high sensitivity)",
+          "value": "0.08",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
+        },
+        {
+          "test": "LDL (fasting)",
+          "value": "128",
+          "unit": "mg/dL",
+          "ref": "<70 for stroke",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "CT Head Non-Contrast \u2014 Acute",
+      "indication": "Acute stroke symptoms \u2014 exclude hemorrhage before tPA",
+      "findings": "No acute hemorrhage. No large established infarct. Loss of gray-white differentiation in left MCA territory \u2014 early ischemic change.",
+      "impression": "No hemorrhage \u2014 tPA eligible. Early left MCA ischemia confirmed."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +232,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-stroke-medicine",
-    "diagnosis": "See diagnosis \u2014 James Okoye",
+    "diagnosis": "Acute Ischemic Stroke \u2014 Left MCA Territory, tPA Administered, Post-Thrombolysis Monitoring Protocol",
     "acuity": 1,
     "presentation": "James Okoye",
     "category": "neurologic"
@@ -177,12 +279,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "James Okoye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Left MCA ischemic stroke \u2014 tPA administered, post-thrombolysis monitoring (correct)",
+      "Hemorrhagic stroke \u2014 excluded by CT before tPA",
+      "Todd's paralysis post-seizure \u2014 no witnessed seizure, aphasia not postictal",
+      "Hypoglycemic hemiplegia \u2014 glucose 148, not hypoglycemic",
+      "Brain tumor with acute decompensation \u2014 no prior symptoms, acute onset",
+      "Complex migraine \u2014 no prior migraine history, NIHSS 14 too severe"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +294,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: James Okoye. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) James arrives 4 hours after onset. NIHSS 14. He is on warfarin \u2014 INR 1.8. CTA shows large vessel occlusion of the M1 segment. He is outside the tPA window but within the thrombectomy window. His INR means standard tPA is contraindicated. What is your exact management decision tree \u2014 and which reversal agent, if any, enables mechanical thrombectomy? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: left MCA ischemic stroke, post-tPA monitoring. Key medicine learning: (1) tPA eligibility criteria (simplified): onset <4.5h (some cases), no hemorrhage on CT, no recent major surgery, no anticoagulation, BP <185/110 controllable. Relative contraindications include glucose <50 or >400, INR >1.7, severe stroke (NIHSS >25) or very mild (NIHSS <4 in some guidelines. (2) Post-tPA BP management: maintain <180/105 for 24 hours \u2014 hemorrhagic transformation risk rises with uncontrolled hypertension. Do NOT lower BP aggressively \u2014 penumbral perfusion requires adequate pressure. Labetalol 10-20mg IV or nicardipine infusion for BP control. (3) Hemorrhagic transformation warning signs: sudden neurological worsening, new headache, decreased consciousness, new BP surge. If suspected: STAT CT, hold antithrombotics, reverse if needed. (4) Cardioembolic stroke and AFib: new AFib detected post-stroke \u2192 anticoagulation when safe. For moderate infarct: anticoagulate at 2-4 weeks (1-3-6-12 rule: TIA/minor = 1-3 days, moderate = 6-7 days, large = 2-4 weeks). (5) Elevated troponin post-stroke: stress cardiomyopathy or demand ischemia from sympathetic surge. Cardiology consultation, echo, and continuous telemetry."
     }
   }
 };

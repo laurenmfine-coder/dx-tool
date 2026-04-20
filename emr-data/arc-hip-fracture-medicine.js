@@ -23,21 +23,66 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Margaret Chen",
-      "icd": "Z00.00",
+      "problem": "Post-ORIF hip fracture \u2014 hospital day 2",
+      "icd": "S72.001A",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Walter Osei, 81M \u2014 ORIF yesterday. New confusion this morning. CAM positive."
+    },
+    {
+      "problem": "Acute delirium \u2014 post-operative, hyperactive subtype",
+      "icd": "F05",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Acute onset + inattention + disorganized thinking. Multifactorial: pain, opioids, sleep disruption, infection."
+    },
+    {
+      "problem": "VTE prophylaxis decision \u2014 timing after ORIF",
+      "icd": "Z79.01",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Chemical prophylaxis delayed 12h post-op. Enoxaparin started \u2014 monitor for HIT if prolonged."
+    },
+    {
+      "problem": "Pain management \u2014 opioid minimization in elderly",
+      "icd": "M16.11",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Scheduled acetaminophen + regional nerve block preferred. Minimize opioids \u2014 delirium risk."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Acetaminophen 1000mg PO q8h scheduled \u2014 primary analgesic",
+      "sig": "Scheduled around the clock \u2014 opioid-sparing. Maximum 3g/day in elderly with normal hepatic function.",
+      "prescriber": "Hospitalist",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Oxycodone 2.5mg PO q6h PRN \u2014 minimize",
+      "sig": "Low-dose PRN only \u2014 use acetaminophen first. Opioids cause delirium, fall risk, constipation.",
+      "prescriber": "Hospitalist",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active PRN \u2014 minimize"
+    },
+    {
+      "name": "Enoxaparin 30mg SQ daily \u2014 DVT prophylaxis (renally adjusted)",
+      "sig": "Renal dose adjustment for eGFR 42. Standard dose 40mg daily would over-anticoagulate.",
+      "prescriber": "Hospitalist",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Quetiapine 12.5mg PO QHS PRN \u2014 delirium agitation",
+      "sig": "Ultra-low dose for hyperactive delirium with safety risk only. Not routine.",
+      "prescriber": "Hospitalist/Geriatrics",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active PRN \u2014 last resort"
     }
   ],
   "allergies": [
@@ -97,8 +142,65 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Post-Op Delirium Workup",
+      "results": [
+        {
+          "test": "Hemoglobin",
+          "value": "9.4",
+          "unit": "g/dL",
+          "ref": "13.5-17.5",
+          "flag": "L"
+        },
+        {
+          "test": "Sodium",
+          "value": "131",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.5",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "eGFR",
+          "value": "42",
+          "unit": "mL/min/1.73m\u00b2",
+          "ref": ">60",
+          "flag": "L"
+        },
+        {
+          "test": "UA",
+          "value": "Positive nitrites, >50 WBC/hpf",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        },
+        {
+          "test": "TSH",
+          "value": "3.2",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "Hip X-ray Post-Op",
+      "indication": "ORIF verification",
+      "findings": "Hardware in good position. Femoral neck fracture reduced. No hardware complication.",
+      "impression": "Satisfactory ORIF result."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +232,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-hip-fracture-medicine",
-    "diagnosis": "See diagnosis \u2014 Margaret Chen",
+    "diagnosis": "Post-ORIF Hip Fracture \u2014 Hospitalist Management: Delirium Workup, DVT Prophylaxis, Geriatric Optimization",
     "acuity": 2,
     "presentation": "Margaret Chen",
     "category": "geriatric"
@@ -177,12 +279,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Margaret Chen \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Post-op delirium \u2014 multifactorial (CAUTI + hyponatremia + anemia + opioids) (correct)",
+      "Stroke \u2014 new focal deficit absent; neurological exam non-focal",
+      "Subdural hematoma \u2014 no head trauma, no progressive neuro deficit",
+      "Sepsis encephalopathy \u2014 culture pending, hemodynamics stable",
+      "Dementia exacerbation \u2014 acute onset argues for delirium, not baseline",
+      "Metabolic encephalopathy \u2014 hyponatremia contributing but not sole cause"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +294,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Margaret Chen. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) She is post-op day 3 from right hip ORIF. Her INR this morning is 1.4 \u2014 supratherapeutic for her usual AFib target. Her creatinine is 1.4 (baseline 1.1). She is also on a NSAID ordered by the orthopedic resident. What is the most dangerous drug interaction on her current list \u2014 and what is your anticoagulation plan for the remainder of the hospitalization? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: post-op delirium \u2014 multifactorial. Key medicine learning: (1) THINK mnemonic for delirium causes: Toxic (medications \u2014 opioids, benzos, anticholinergics), Hypoxia, Infection/Immobility, Nutritional/metabolic (hyponatremia Na 131, anemia Hgb 9.4), K+ and electrolytes. Address ALL contributors simultaneously. (2) Non-pharmacological delirium management is first line: reorient q2h (clock, date, whiteboard), mobilize out of bed with PT by post-op day 1, maintain sensory aids (glasses, hearing aids), sleep hygiene (noise reduction, lights off at night), minimize nighttime vitals if stable. (3) Enoxaparin dosing in CKD: eGFR <30 requires dose adjustment to 30mg SQ daily or anti-Xa monitoring. eGFR 42 in this elderly patient \u2014 reduce to 30mg and monitor. (4) Opioid minimization in elderly: scheduled acetaminophen, regional anesthesia (femoral nerve block), NSAIDs avoided due to renal function and GI risk. Each opioid dose increases delirium risk by ~20% in elderly hip fracture patients. (5) Quetiapine for delirium: only for agitation creating safety risk (removing lines, climbing out of bed). Use lowest effective dose, short duration. Not for quiet/hypoactive delirium."
     }
   }
 };

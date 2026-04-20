@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Gerald Park",
-      "icd": "Z00.00",
+      "problem": "Sepsis \u2014 urinary source, qSOFA 2",
+      "icd": "A41.51",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Sandra Kim, 67F \u2014 fever 38.9\u00b0C, BP 88/52, HR 118, dysuria. Foley removed 3 days ago. eGFR declining."
+    },
+    {
+      "problem": "Septic shock \u2014 MAP <65 despite 30mL/kg IVF",
+      "icd": "R65.21",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "MAP 54 after 2L crystalloid. Norepinephrine started via peripheral IV \u2014 central line being placed."
+    },
+    {
+      "problem": "Acute kidney injury \u2014 sepsis-related",
+      "icd": "N17.9",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Creatinine 2.1 from baseline 0.9. Urinary catheter placed to monitor UO. Target UO >0.5 mL/kg/h."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Norepinephrine 0.1-0.3 mcg/kg/min IV \u2014 vasopressor",
+      "sig": "First-line vasopressor for septic shock. Titrate to MAP >65 mmHg. Convert to central line ASAP.",
+      "prescriber": "ICU/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 titrating"
+    },
+    {
+      "name": "Ceftriaxone 2g IV q24h \u2014 empiric urosepsis",
+      "sig": "Empiric gram-negative coverage for urosepsis. Broaden if resistant organism suspected.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
       "status": "Active"
+    },
+    {
+      "name": "Normal saline 30mL/kg IV bolus \u2014 completed",
+      "sig": "2.1L given. Reassess fluid responsiveness before additional boluses \u2014 avoid fluid overload.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Completed \u2014 reassess"
+    },
+    {
+      "name": "Hydrocortisone 200mg IV continuous OR 50mg q6h \u2014 consider",
+      "sig": "If norepinephrine >0.25 mcg/kg/min despite adequate resuscitation \u2014 refractory shock. ACTH stim not required.",
+      "prescriber": "ICU",
+      "start": "2024",
+      "refills": 0,
+      "status": "Hold \u2014 consider if refractory"
     }
   ],
   "allergies": [
@@ -97,8 +135,72 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Sepsis Bundle Labs",
+      "results": [
+        {
+          "test": "Lactate (initial)",
+          "value": "4.2",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate (2h repeat)",
+          "value": "2.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "22.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Procalcitonin",
+          "value": "28",
+          "unit": "ng/mL",
+          "ref": "<0.25",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "2.1",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures x2",
+          "value": "Pending \u2014 drawn before antibiotics",
+          "unit": "",
+          "ref": "",
+          "flag": ""
+        },
+        {
+          "test": "UA",
+          "value": "Positive \u2014 >100 WBC, nitrites, bacteria",
+          "unit": "",
+          "ref": "Normal",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "CXR Portable",
+      "indication": "Sepsis \u2014 exclude pulmonary source",
+      "findings": "No consolidation. Mild vascular congestion \u2014 IVF.",
+      "impression": "No pneumonia. Lungs clear. Consistent with urinary source of sepsis."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +232,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "arc-sepsis-medicine",
-    "diagnosis": "See diagnosis \u2014 Gerald Park",
+    "diagnosis": "Sepsis \u2014 Urinary Source, Fluid Resuscitation, Vasopressor Initiation, Hour-1 Bundle Compliance",
     "acuity": 2,
     "presentation": "Gerald Park",
     "category": "infectious"
@@ -177,12 +279,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Gerald Park \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Septic shock \u2014 urosepsis (correct)",
+      "Hypovolemic shock \u2014 infection source and fever distinguish from pure volume loss",
+      "Cardiogenic shock \u2014 warm extremities, elevated lactate, no pulmonary edema",
+      "Adrenal crisis \u2014 possible contributor if refractory, cortisol check reasonable",
+      "Gram-negative bacteremia from another source \u2014 blood cultures will clarify",
+      "Obstructive shock (PE) \u2014 no respiratory distress, no right heart strain"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +294,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Gerald Park. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) Gerald's cultures grew E. coli pan-sensitive. He was started empirically on piperacillin-tazobactam. Blood cultures have been negative for 48 hours, urine culture is growing pan-sensitive E. coli. He is off vasopressors. His CrCl is 28. What is your antibiotic de-escalation decision \u2014 and what does the nosocomial AKI from pip-tazo (Augmentin effect) mean for your choice? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: septic shock \u2014 urosepsis. Key medicine learning: (1) Surviving Sepsis Campaign Hour-1 Bundle: (a) measure lactate, (b) blood cultures before antibiotics, (c) broad-spectrum antibiotics, (d) 30mL/kg crystalloid if hypotension or lactate \u22654, (e) vasopressors if MAP <65 after IVF. Each hour of delay in antibiotics increases mortality ~7%. (2) Norepinephrine is first-line vasopressor \u2014 \u03b11 predominant, increases SVR, minimal tachycardia. Dopamine is second-line (more arrhythmia risk). Vasopressin 0.03 units/min can be added as a steroid-sparing norepinephrine adjunct. (3) Fluid responsiveness assessment: after initial 30mL/kg, do not reflexively give more fluid. Use passive leg raise (PLR) test \u2014 increase in cardiac output confirms fluid responsiveness. Blind fluid boluses cause pulmonary edema without hemodynamic benefit in non-responders. (4) Lactate clearance: target >10% reduction per 2 hours. Persistent lactate elevation despite resuscitation = occult hypoperfusion or distributive physiology. Lactate 4.2 \u2192 2.8 = partial clearance \u2014 continue goal-directed resuscitation. (5) Hydrocortisone: evidence supports use if norepinephrine dose exceeds 0.25 mcg/kg/min \u2014 reduces vasopressor requirement, shortens shock duration. Does not improve mortality but improves hemodynamic rescue."
     }
   }
 };

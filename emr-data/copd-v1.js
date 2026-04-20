@@ -1,4 +1,4 @@
-/* emr-data/copd-v1.js — Auto-generated EMR case data for COPD Exacerbation */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Bernard Collins",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "3390 Hickory Rd, Cleveland, OH 44107",
     "insurance": "Cigna PPO",
     "pcp": "Dr. James Wu, MD",
-    "pharmacy": "Publix Pharmacy — Weston Rd",
+    "pharmacy": "Publix Pharmacy \u2014 Weston Rd",
     "emergencyContact": {
       "name": "Christina Collins",
       "phone": "(502) 555-6253",
@@ -26,79 +26,67 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "COPD (GOLD Stage 3)",
+      "problem": "COPD exacerbation \u2014 moderate-severe, hospitalization required",
+      "icd": "J44.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Frank Devereux, 68M \u2014 worsening dyspnea, increased sputum production, new hypercapnia. PaCO2 58."
     },
     {
-      "id": "prob-2",
-      "description": "Current smoker",
+      "problem": "Hypercapnic respiratory failure \u2014 CO2 retention",
+      "icd": "J96.01",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "pH 7.32, PaCO2 58 \u2014 type 2 respiratory failure. BiPAP reduces intubation risk significantly."
     },
     {
-      "id": "prob-3",
-      "description": "Hypertension",
+      "problem": "COPD \u2014 GOLD stage 3 (severe), FEV1 38% predicted",
+      "icd": "J44.1",
+      "onset": "2014",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Osteoporosis",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "10 pack-year history. On LABA/LAMA + ICS. 2 exacerbations last year \u2014 high-risk phenotype."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Tiotropium",
-      "dose": "18mcg",
-      "route": "INH",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "BiPAP \u2014 IPAP 14 / EPAP 6, titrate to comfort and CO2",
+      "sig": "Non-invasive ventilation \u2014 reduces intubation rate 65% in hypercapnic COPD exacerbation. Use for pH <7.35 + PaCO2 >45.",
+      "prescriber": "Pulmonology/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Fluticasone/Salmeterol",
-      "dose": "250/50",
-      "route": "INH",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Methylprednisolone 125mg IV q8h x3 days, then prednisone 40mg PO x5 days",
+      "sig": "Systemic steroid \u2014 reduces treatment failure and length of stay. 5-day course as effective as 14 days.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Albuterol",
-      "dose": "90mcg",
-      "route": "INH",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Azithromycin 500mg PO daily x5 days \u2014 antibiotic",
+      "sig": "Antibiotic for COPD exacerbation \u2014 Streptococcus, H. influenzae, Moraxella. Reduces exacerbation duration.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Amlodipine",
-      "dose": "5mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Ipratropium/albuterol (DuoNeb) nebulizer q4h",
+      "sig": "Short-acting bronchodilator \u2014 maximize airway opening. Nebulizer preferred over MDI in acute exacerbation.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-5",
-      "name": "Prednisone",
-      "dose": "5mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michelle Foster, MD"
+      "name": "Tiotropium (Spiriva) 18mcg inhaled daily \u2014 continue LAMA",
+      "sig": "Continue long-acting bronchodilator throughout admission \u2014 do not hold.",
+      "prescriber": "Pulmonology",
+      "start": "2018",
+      "refills": 5,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -116,7 +104,7 @@ window.EMR_DATA = {
       "bp": "142/86",
       "hr": "102",
       "rr": "28",
-      "temp": "38.0°C",
+      "temp": "38.0\u00b0C",
       "spo2": "86%",
       "pain": "4/10",
       "bmi": "29",
@@ -132,155 +120,67 @@ window.EMR_DATA = {
       "cc": "Worsening cough and dyspnea for 3 days",
       "hpi": "Bernard Collins is a 71-year-old male presenting with worsening cough and dyspnea for 3 days. Past medical history includes COPD (GOLD Stage 3), Current smoker, Hypertension, Osteoporosis. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "COPD Exacerbation — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "COPD Exacerbation \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-456247",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "COPD Exacerbation Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "14.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "ABG \u2014 pH",
+          "value": "7.32",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "L"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "ABG \u2014 PaCO2",
+          "value": "58",
+          "unit": "mmHg",
+          "ref": "35-45",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Ph",
-              "value": "7.32",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "L"
-            },
-            {
-              "test": "Pco2",
-              "value": "58",
-              "unit": "mmHg",
-              "range": "35-45",
-              "flag": "H"
-            }
-          ]
+          "test": "ABG \u2014 PaO2",
+          "value": "56",
+          "unit": "mmHg",
+          "ref": "80-100",
+          "flag": "L"
+        },
+        {
+          "test": "ABG \u2014 HCO3",
+          "value": "28",
+          "unit": "mEq/L",
+          "ref": "22-26",
+          "flag": "H"
+        },
+        {
+          "test": "WBC",
+          "value": "13.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
+        },
+        {
+          "test": "Procalcitonin",
+          "value": "0.18",
+          "unit": "ng/mL",
+          "ref": "<0.25",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "Chest X-Ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-643229",
-      "clinical": "Worsening cough and dyspnea for 3 days",
-      "technique": "Standard protocol",
-      "findings": "Hyperinflated lungs. Flattened diaphragms. Increased AP diameter. No consolidation. No pneumothorax.",
-      "impression": "Chronic emphysematous changes without acute infiltrate.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/2024",
+      "study": "CXR PA",
+      "indication": "COPD exacerbation \u2014 exclude pneumonia or pneumothorax",
+      "findings": "Hyperinflation. Flattened diaphragms. No infiltrate. No pneumothorax.",
+      "impression": "Consistent with COPD exacerbation without pneumonia. No pneumothorax."
     }
   ],
   "immunizations": [
@@ -379,13 +279,12 @@ window.EMR_DATA = {
       "Neurologic assessment including mental status": "Alert and oriented, no focal neurologic deficits, appropriate affect"
     },
     "ddxTargets": [
-      "COPD exacerbation with bacterial superinfection (correct diagnosis)",
-      "Pneumonia",
-      "Congestive heart failure exacerbation",
-      "Pulmonary embolism",
-      "Pneumothorax",
-      "Acute bronchitis",
-      "Lung cancer with post-obstructive pneumonia"
+      "COPD exacerbation \u2014 hypercapnic respiratory failure, NIV indicated (correct)",
+      "Pneumonia with COPD overlay \u2014 procalcitonin low, no infiltrate on CXR",
+      "Pneumothorax \u2014 excluded on CXR",
+      "Pulmonary embolism \u2014 pleuritic pain absent, different ABG pattern",
+      "Acute asthma \u2014 prior diagnosis of COPD, age, smoking history",
+      "Heart failure with COPD overlap \u2014 CXR no edema, BNP normal"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known COPD diagnosis and missing bacterial superinfection or other serious causes of acute decompensation in this high-risk patient",
@@ -395,7 +294,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given that this is a 71-year-old with severe COPD presenting with acute worsening, what key historical features would help you distinguish between a simple exacerbation versus one requiring additional intervention? What red flags might suggest a more serious process?",
       "phase5": "Nice work gathering the history and exam. You found fever, purulent sputum production, and poor response to his usual bronchodilator. How does this clinical picture help refine your differential diagnosis? What does the combination of his underlying COPD with these acute infectious signs suggest for management?",
-      "finalDebrief": "This case illustrates a classic COPD exacerbation with bacterial superinfection. The key distinguishing features from a simple exacerbation were the fever, change in sputum character to purulent, and inadequate response to bronchodilators. This combination in a severe COPD patient indicates need for both bronchodilator optimization and antibiotic therapy. How might you approach antibiotic selection and what other supportive measures would you consider?"
+      "finalDebrief": "This case illustrates a classic COPD exacerbation with bacterial superinfection. The key distinguishing features from a simple exacerbation were the fever, change in sputum character to purulent, and inadequate response to bronchodilators. This combination in a severe COPD patient indicates need for both bronchodilator optimization and antibiotic therapy. How might you approach antibiotic selection and what other supportive measures would you consider?",
+      "final": "Diagnosis: COPD exacerbation with hypercapnic respiratory failure. Key learning: (1) NIV (BiPAP) indications in COPD: pH <7.35 + PaCO2 >45 + respiratory distress. Reduces need for intubation by ~65%, reduces mortality, reduces ICU length of stay. Contraindications: obtunded, unable to protect airway, vomiting, hemodynamic instability, excessive secretions. (2) Steroid dosing in COPD exacerbation: 40mg prednisone x5 days is as effective as 14 days (REDUCE trial) \u2014 use the short course. Reduces hyperglycemia and steroid complications. IV methylprednisolone for unable-to-take-PO or severe exacerbation. (3) Antibiotic indications in COPD exacerbation: purulent sputum + increased dyspnea + increased sputum volume (Anthonisen criteria) \u2014 give antibiotics. Single criterion or non-purulent sputum \u2014 antibiotics may not help but low harm. Procalcitonin-guided therapy reduces antibiotic use without worse outcomes. (4) Oxygen titration in COPD: target SpO2 88-92%, NOT 100%. Hypoxic respiratory drive is a real (if sometimes overstated) phenomenon in chronic CO2 retainers \u2014 excessive O2 worsens hypercapnia via Haldane effect and V/Q changes. (5) Discharge planning: ensure inhaler technique reviewed, smoking cessation offered, pulmonary rehab referral, LAMA + LABA \u00b1 ICS therapy optimized."
     }
+  },
+  "meta": {
+    "diagnosis": "COPD Exacerbation \u2014 Moderate-Severe, Antibiotics and Steroids, NIV Candidate Assessment",
+    "caseId": "copd-v1"
   }
 };

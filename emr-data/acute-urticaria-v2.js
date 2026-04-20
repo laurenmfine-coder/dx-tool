@@ -1,4 +1,4 @@
-/* emr-data/acute-urticaria-v2.js — Variation: Acute Urticaria */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -709,43 +709,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Acute urticaria \u2014 likely post-viral (rhinovirus URI 5 days prior)",
+      "problem": "Acute urticaria \u2014 NSAID trigger",
       "icd": "L50.0",
       "onset": "2024",
       "status": "Active",
-      "notes": "5yo; diffuse hives x3 days starting 2 days after URI resolution; no angioedema, no anaphylaxis; food allergy evaluation negative"
+      "notes": "Pruritic wheals after ibuprofen \u2014 no angioedema, no systemic symptoms."
     },
     {
-      "problem": "Upper respiratory infection \u2014 resolved",
-      "icd": "J06.9",
+      "problem": "NSAID hypersensitivity \u2014 urticaria/angioedema phenotype (NECD)",
+      "icd": "T39.395A",
       "onset": "2024",
-      "status": "Resolved",
-      "notes": "Rhinovirus URI 5-7 days prior; fever x2 days, runny nose; resolved before hives started \u2014 post-viral urticaria pattern"
+      "status": "Active",
+      "notes": "NSAID-exacerbated cutaneous disease \u2014 COX-1 inhibition shifts to leukotriene pathway."
     },
     {
-      "problem": "Parental concern for food allergy \u2014 addressed",
+      "problem": "Analgesic counseling \u2014 safe alternatives required",
       "icd": "Z71.89",
       "onset": "2024",
-      "status": "Addressed",
-      "notes": "Parents believe peanut butter caused the hives; timeline does not support (ate PB 12h before hives); food allergy evaluation non-diagnostic"
+      "status": "Active",
+      "notes": "Acetaminophen is safe. COX-2 selective inhibitor challenge possible under supervision."
     }
   ],
   "medications": [
     {
-      "name": "Cetirizine 2.5mg daily (syrup, weight 18kg)",
-      "sig": "Give 2.5mg by mouth once daily; may give 5mg for breakthrough symptoms; maximum 10mg/day",
-      "prescriber": "Dr. Chen",
-      "start": "11/2024",
-      "refills": 1,
-      "status": "Active \u2014 2-week course"
+      "name": "Cetirizine 10mg PO daily (first-line antihistamine)",
+      "sig": "Once daily. Non-sedating at standard doses. Onset 1 hour, 24h duration.",
+      "prescriber": "ED/PCP",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
     },
     {
-      "name": "Diphenhydramine 12.5mg q6h PRN (rescue)",
-      "sig": "Give 12.5mg by mouth every 6 hours as needed for severe breakthrough itching only",
-      "prescriber": "Dr. Chen",
-      "start": "11/2024",
+      "name": "Hydroxyzine 25mg PO q6h PRN \u2014 breakthrough itch",
+      "sig": "PRN for severe itch \u2014 sedating, do not drive. Helpful at bedtime.",
+      "prescriber": "ED/PCP",
+      "start": "2024",
       "refills": 0,
-      "status": "Active \u2014 rescue"
+      "status": "PRN"
+    },
+    {
+      "name": "AVOID all NSAIDs \u2014 ibuprofen, naproxen, aspirin >81mg",
+      "sig": "Cross-reactivity among COX-1 inhibitors in NECD \u2014 avoid entire class",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Permanent avoidance"
+    },
+    {
+      "name": "Acetaminophen 500-1000mg q6h PRN \u2014 safe alternative",
+      "sig": "Does not inhibit COX-1 \u2014 safe in NSAID-exacerbated urticaria",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -783,49 +799,35 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "11/14/2024",
-      "panel": "Acute Urticaria Workup",
+      "date": "11/2024",
+      "panel": "Urticaria Evaluation",
       "results": [
         {
-          "test": "CBC \u2014 WBC",
-          "value": "11.2",
-          "unit": "K/\u03bcL",
-          "ref": "5.0-15.0",
-          "flag": ""
-        },
-        {
-          "test": "CBC \u2014 Eosinophils",
-          "value": "0.3",
-          "unit": "K/\u03bcL",
-          "ref": "0.0-0.7",
-          "flag": ""
-        },
-        {
-          "test": "CMP",
+          "test": "CBC with differential",
           "value": "Normal",
           "unit": "",
           "ref": "Normal",
           "flag": ""
         },
         {
-          "test": "Peanut IgE (Ara h 2) \u2014 obtained for parental concern",
-          "value": "<0.10",
-          "unit": "kUA/L",
-          "ref": "<0.35",
+          "test": "Tryptase (acute)",
+          "value": "4.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
           "flag": ""
         },
         {
           "test": "Total IgE",
-          "value": "22",
+          "value": "180",
           "unit": "IU/mL",
-          "ref": "<50 (pediatric)",
-          "flag": ""
+          "ref": "<150",
+          "flag": "H"
         },
         {
-          "test": "Rhinovirus/Enterovirus PCR (nasopharyngeal) \u2014 done for documentation",
-          "value": "Rhinovirus detected (resolved infection, carrier)",
+          "test": "CMP",
+          "value": "Normal",
           "unit": "",
-          "ref": "",
+          "ref": "Normal",
           "flag": ""
         }
       ]
@@ -934,12 +936,12 @@ window.EMR_DATA = {
       "Assessment of individual wheals for duration and characteristics": "Individual lesions blanch with pressure, none present >24 hours per parent report"
     },
     "ddxTargets": [
-      "Post-viral acute urticaria \u2014 rhinovirus trigger; food allergy NOT confirmed (correct)",
-      "IgE-mediated food allergy (peanut) \u2014 Ara h 2 IgE undetectable; timeline inconsistent with IgE reaction",
-      "Serum sickness-like reaction \u2014 urticaria + fever + joint pain after antibiotic; check medication history",
-      "Urticarial vasculitis \u2014 lesions >24h; painful; bruising; biopsy required; different from self-limited post-viral",
-      "Allergic urticaria \u2014 new allergen exposure correlating with onset; not present here",
-      "Drug reaction \u2014 review any new medications given for URI (amoxicillin, ibuprofen)"
+      "Acute NSAID-exacerbated urticaria \u2014 COX-1 inhibitor trigger (correct)",
+      "Anaphylaxis \u2014 no systemic features or hemodynamic compromise",
+      "Urticarial vasculitis \u2014 wheals >24h, burns not itches, abnormal biopsy",
+      "Serum sickness-like reaction \u2014 joint pain, fever, lymphadenopathy",
+      "Chronic spontaneous urticaria \u2014 too early, <6 weeks duration",
+      "Contact urticaria \u2014 localized, immediate contact-site distribution"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on parents' insistence about food allergy and ordering unnecessary extensive allergy testing",
@@ -950,10 +952,11 @@ window.EMR_DATA = {
       "phase2": "Good start on your differential. I notice the parents are quite concerned about food allergies. What key historical details will help you determine if this is truly food-related versus another cause? Think about timing and associated symptoms.",
       "phase5": "Excellent history and physical. You've noted the temporal relationship to the viral illness and absence of angioedema. How does this clinical picture fit with post-viral urticaria versus food allergy? What's your approach to the parents' request for extensive allergy testing?",
       "finalDebrief": "This case highlights post-viral urticaria, the most common cause of acute hives in children. Notice how your differential evolved from considering food allergies to recognizing the viral trigger. What did you learn about when allergy testing is appropriate versus potentially harmful?",
-      "final": "Diagnosis: post-viral acute urticaria \u2014 rhinovirus trigger; peanut allergy NOT confirmed. Key teaching points: (1) Viral infections are the most common cause of acute urticaria in children under 10 \u2014 accounting for 40-50% of pediatric cases. Mechanism: viral-induced mast cell activation via complement and TLR pathways, not IgE. (2) Timeline reasoning for food allergy: IgE-mediated food allergy causes urticaria within 2 hours of exposure. A 12-hour interval between peanut butter ingestion and hive onset is NOT consistent with IgE-mediated food allergy. Educate parents on allergy timelines. (3) Extensive food allergy testing for acute urticaria without a compelling history has a high false-positive rate and leads to unnecessary dietary restriction. AAAAI guidelines do not recommend food allergy testing without clinical suspicion. (4) Acute vs. chronic urticaria: acute = <6 weeks (usually infectious/drug trigger); chronic = >6 weeks (idiopathic/autoimmune). Only chronic urticaria warrants extensive workup. (5) Prognosis of post-viral urticaria: self-limited, typically resolves in 2-6 weeks. Antihistamines for symptom control. If recurs with subsequent infections, consider short antihistamine courses with viral illnesses."
+      "final": "Diagnosis: NSAID-exacerbated cutaneous disease (NECD). Key learning: (1) NSAID hypersensitivity phenotypes: NECD (urticaria/angioedema with any COX-1 inhibitor), NERD (nasal/bronchospasm \u2014 Samter's triad), and NSAID-induced urticaria in chronic urticaria patients. Each has different implications. (2) Mechanism: COX-1 inhibition \u2192 reduced prostaglandin E2 \u2192 disinhibits mast cell degranulation + shifts arachidonic acid to leukotriene pathway \u2192 urticaria. (3) Cross-reactivity: NECD affects ALL COX-1 inhibitors. COX-2 selective inhibitors (celecoxib) are usually tolerated \u2014 can confirm with supervised oral challenge. (4) Acute management: oral second-generation H1 antihistamines are first line. Up-dosing to 4x the licensed dose is safe and often more effective than adding hydroxyzine. (5) Tryptase normal confirms NOT anaphylaxis \u2014 important for management and patient education."
     }
   },
   "meta": {
-    "diagnosis": "Acute Urticaria \u2014 Post-Viral; Viral Trigger Most Likely; Food Allergy Not Confirmed"
+    "diagnosis": "Acute Urticaria \u2014 NSAID-Exacerbated Cutaneous Disease, Ibuprofen Trigger, Antihistamine Step-Up",
+    "caseId": "acute-urticaria-v2"
   }
 };

@@ -1,9 +1,9 @@
-/* emr-data/allergic-angioedema-v2.js — Variation: Allergic Angioedema */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
       "name": "Priscilla Moreno",
-      "patientHPI": "I was prepping shrimp at work yesterday when my lips started swelling up really bad and I broke out in hives all over — I know I'm allergic to shrimp but I work at a seafood restaurant so I can't really avoid it. I used my EpiPen but it didn't seem to help much, so I had to use a second one before coming here.",
+      "patientHPI": "I was prepping shrimp at work yesterday when my lips started swelling up really bad and I broke out in hives all over \u2014 I know I'm allergic to shrimp but I work at a seafood restaurant so I can't really avoid it. I used my EpiPen but it didn't seem to help much, so I had to use a second one before coming here.",
       "dob": "09/27/1984",
       "age": "42",
       "sex": "Female",
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6171 Chestnut Rd, New Orleans, LA 70115",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(503) 555-6231",
@@ -45,11 +45,11 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Context",
-        "Restaurant worker — shellfish exposure occupational + dietary"
+        "Restaurant worker \u2014 shellfish exposure occupational + dietary"
       ],
       [
         "Comorbidity",
-        "Obesity BMI 38 — epi dose questions"
+        "Obesity BMI 38 \u2014 epi dose questions"
       ],
       [
         "Language",
@@ -57,41 +57,41 @@ window.EMR_DATA = {
       ],
       [
         "Issue",
-        "Episode at work — workers comp vs personal insurance"
+        "Episode at work \u2014 workers comp vs personal insurance"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep — obese, epi dosing question",
+        "chiefComplaint": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep \u2014 obese, epi dosing question",
         "diagnosis": "Allergic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Allergic angioedema with urticaria — shrimp exposure (occupational)",
+          "description": "Allergic angioedema with urticaria \u2014 shrimp exposure (occupational)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Obesity BMI 38 — standard EpiPen 0.3mg may be insufficient, consider 0.5mg",
+          "description": "Obesity BMI 38 \u2014 standard EpiPen 0.3mg may be insufficient, consider 0.5mg",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Occupational exposure — restaurant cook handles shellfish daily",
+          "description": "Occupational exposure \u2014 restaurant cook handles shellfish daily",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Workers comp vs personal insurance — exposure at work",
+          "description": "Workers comp vs personal insurance \u2014 exposure at work",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -103,7 +103,7 @@ window.EMR_DATA = {
           "name": "Epinephrine",
           "dose": "0.3mg",
           "route": "IM",
-          "frequency": "Given in lateral thigh — may need repeat (underdosed for weight)",
+          "frequency": "Given in lateral thigh \u2014 may need repeat (underdosed for weight)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         },
@@ -142,7 +142,7 @@ window.EMR_DATA = {
           "bp": "92/58",
           "hr": "108",
           "rr": "22",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "94%",
           "pain": "7/10"
         }
@@ -165,7 +165,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -179,7 +179,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -254,8 +254,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep — obese, epi dosing question",
-          "hpi": "42F restaurant cook with angioedema of lips and tongue + diffuse urticaria after preparing shrimp. Known shrimp allergy but works in seafood restaurant — cannot avoid exposure. BMI 38 — first EpiPen 0.3mg had inadequate response, required second dose. Issue: 0.3mg is standard adult dose but may be subtherapeutic in obese patients. Literature supports 0.5mg for patients >100kg. Workers comp claim initiated — this is occupational exposure. Spanish interpreter needed for all counseling.",
+          "cc": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep \u2014 obese, epi dosing question",
+          "hpi": "42F restaurant cook with angioedema of lips and tongue + diffuse urticaria after preparing shrimp. Known shrimp allergy but works in seafood restaurant \u2014 cannot avoid exposure. BMI 38 \u2014 first EpiPen 0.3mg had inadequate response, required second dose. Issue: 0.3mg is standard adult dose but may be subtherapeutic in obese patients. Literature supports 0.5mg for patients >100kg. Workers comp claim initiated \u2014 this is occupational exposure. Spanish interpreter needed for all counseling.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -264,34 +264,34 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Observation after angioedema — occupational medicine consult",
+        "chiefComplaint": "Observation after angioedema \u2014 occupational medicine consult",
         "diagnosis": "Allergic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Allergic angioedema — resolved after 2 doses epi",
+          "description": "Allergic angioedema \u2014 resolved after 2 doses epi",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Obesity — need 0.5mg epi auto-injector (Symjepi 0.5mg or EpiPen via prefilled syringe)",
+          "description": "Obesity \u2014 need 0.5mg epi auto-injector (Symjepi 0.5mg or EpiPen via prefilled syringe)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Occupational exposure — needs job modification or reassignment",
+          "description": "Occupational exposure \u2014 needs job modification or reassignment",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Workers comp — workplace exposure documented",
+          "description": "Workers comp \u2014 workplace exposure documented",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -333,7 +333,7 @@ window.EMR_DATA = {
           "bp": "112/72",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "98%",
           "pain": "1/10"
         }
@@ -356,7 +356,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -370,7 +370,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -433,8 +433,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Observation after angioedema — occupational medicine consult",
-          "hpi": "42F stable. Occupational medicine consulted — employer must either reassign her away from shellfish prep or provide full PPE (nitrile gloves, N95 mask, separate work area). Workers comp covering this visit. Epi dosing discussion with A/I: for patients >100kg, consider 0.5mg epi. Options: (1) Symjepi 0.5mg auto-injector, (2) Prefilled epi syringe 0.5mg (more affordable), (3) Carry 2 standard EpiPens and use both if first insufficient.",
+          "cc": "Observation after angioedema \u2014 occupational medicine consult",
+          "hpi": "42F stable. Occupational medicine consulted \u2014 employer must either reassign her away from shellfish prep or provide full PPE (nitrile gloves, N95 mask, separate work area). Workers comp covering this visit. Epi dosing discussion with A/I: for patients >100kg, consider 0.5mg epi. Options: (1) Symjepi 0.5mg auto-injector, (2) Prefilled epi syringe 0.5mg (more affordable), (3) Carry 2 standard EpiPens and use both if first insufficient.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -443,34 +443,34 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — shellfish allergy management in restaurant worker, epi dosing for obesity",
+        "chiefComplaint": "A/I consult \u2014 shellfish allergy management in restaurant worker, epi dosing for obesity",
         "diagnosis": "Allergic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Shrimp allergy — confirmed, occupational exposure",
+          "description": "Shrimp allergy \u2014 confirmed, occupational exposure",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Epi dosing — 0.5mg recommended for BMI 38 (>100kg)",
+          "description": "Epi dosing \u2014 0.5mg recommended for BMI 38 (>100kg)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Occupational modification — reassignment letter or full PPE mandate",
+          "description": "Occupational modification \u2014 reassignment letter or full PPE mandate",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Cross-reactivity — test crab, lobster, other shellfish",
+          "description": "Cross-reactivity \u2014 test crab, lobster, other shellfish",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -510,7 +510,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -533,7 +533,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -547,7 +547,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -650,8 +650,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — shellfish allergy management in restaurant worker, epi dosing for obesity",
-          "hpi": "A/I: 42F with pan-crustacean allergy (tropomyosin positive — shrimp, crab, lobster all reactive). Mollusks negative — can eat clams/oysters. Epi 0.5mg prefilled syringes prescribed. Occupational modification letter: must not handle crustaceans; employer can reassign to non-shellfish prep stations. Spanish-language action plan provided.",
+          "cc": "A/I consult \u2014 shellfish allergy management in restaurant worker, epi dosing for obesity",
+          "hpi": "A/I: 42F with pan-crustacean allergy (tropomyosin positive \u2014 shrimp, crab, lobster all reactive). Mollusks negative \u2014 can eat clams/oysters. Epi 0.5mg prefilled syringes prescribed. Occupational modification letter: must not handle crustaceans; employer can reassign to non-shellfish prep stations. Spanish-language action plan provided.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -660,13 +660,13 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — occupational reassignment, weight management discussion, epi plan confirmed",
+        "chiefComplaint": "Follow-up \u2014 occupational reassignment, weight management discussion, epi plan confirmed",
         "diagnosis": "Allergic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Shellfish allergy — managed, occupational reassignment successful",
+          "description": "Shellfish allergy \u2014 managed, occupational reassignment successful",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -680,21 +680,21 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Reassigned to salad/dessert station — no shellfish contact",
+          "description": "Reassigned to salad/dessert station \u2014 no shellfish contact",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Workers comp closed — employer compliant",
+          "description": "Workers comp closed \u2014 employer compliant",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Weight management discussed — GLP-1 referral if interested",
+          "description": "Weight management discussed \u2014 GLP-1 referral if interested",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -727,7 +727,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -750,7 +750,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -764,7 +764,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -827,8 +827,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — occupational reassignment, weight management discussion, epi plan confirmed",
-          "hpi": "42F doing well. Reassigned to non-shellfish station at restaurant. No exposures in 6 weeks. Epi 0.5mg syringes at home and work. Employer providing separate prep area. Workers comp case resolved. Discussed weight management — if BMI decreases below obesity threshold, could transition back to standard 0.3mg epi.",
+          "cc": "Follow-up \u2014 occupational reassignment, weight management discussion, epi plan confirmed",
+          "hpi": "42F doing well. Reassigned to non-shellfish station at restaurant. No exposures in 6 weeks. Epi 0.5mg syringes at home and work. Employer providing separate prep area. Workers comp case resolved. Discussed weight management \u2014 if BMI decreases below obesity threshold, could transition back to standard 0.3mg epi.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -850,7 +850,7 @@ window.EMR_DATA = {
     "address": "7742 W Haddon Ave, Kansas City, MO 64109",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(505) 555-3142",
@@ -861,70 +861,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Allergic angioedema with urticaria — shrimp exposure (occupational)",
+      "problem": "IgE-mediated allergic angioedema \u2014 peanut",
+      "icd": "T78.1XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Lip/periorbital swelling + urticaria within 15 min of peanut exposure."
     },
     {
-      "id": "prob-2",
-      "description": "Obesity BMI 38 — standard EpiPen 0.3mg may be insufficient, consider 0.5mg",
+      "problem": "Anaphylaxis \u2014 multisystem (cutaneous + GI)",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Urticaria + angioedema + nausea = anaphylaxis by World Allergy Organization criteria. Epinephrine indicated."
     },
     {
-      "id": "prob-3",
-      "description": "Occupational exposure — restaurant cook handles shellfish daily",
+      "problem": "Peanut allergy \u2014 epinephrine auto-injector and allergy referral",
+      "icd": "Z91.010",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Workers comp vs personal insurance — exposure at work",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "EpiPen 0.3mg x2 prescribed. Oral immunotherapy evaluation at follow-up."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Epinephrine",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given in lateral thigh — may need repeat (underdosed for weight)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Epinephrine 0.3mg IM lateral thigh \u2014 administered",
+      "sig": "First-line anaphylaxis treatment \u2014 NOT optional for IgE-mediated multisystem reaction",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-2",
-      "name": "Epinephrine repeat",
-      "dose": "0.3mg",
-      "route": "IM",
-      "frequency": "Given 10 min later (inadequate response to first dose)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Diphenhydramine 25mg IV \u2014 adjunct after epinephrine",
+      "sig": "H1 antihistamine \u2014 treats urticaria/pruritus but does NOT treat anaphylaxis",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given"
     },
     {
-      "id": "med-3",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg auto-injector x2 \u2014 discharge prescription",
+      "sig": "Inject outer thigh at first sign of reaction. Call 911. Second dose after 5-10 min if no improvement. Carry 2 at all times.",
+      "prescriber": "ED/Allergy",
+      "start": "2024",
+      "refills": 1,
+      "status": "Active"
     },
     {
-      "id": "med-4",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Loratadine 10mg PO daily \u2014 ongoing antihistamine",
+      "sig": "Daily scheduled antihistamine \u2014 reduces breakthrough urticaria risk",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -942,7 +931,7 @@ window.EMR_DATA = {
       "bp": "92/58",
       "hr": "108",
       "rr": "22",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "94%",
       "pain": "7/10"
     }
@@ -953,8 +942,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep — obese, epi dosing question",
-      "hpi": "42F restaurant cook with angioedema of lips and tongue + diffuse urticaria after preparing shrimp. Known shrimp allergy but works in seafood restaurant — cannot avoid exposure. BMI 38 — first EpiPen 0.3mg had inadequate response, required second dose. Issue: 0.3mg is standard adult dose but may be subtherapeutic in obese patients. Literature supports 0.5mg for patients >100kg. Workers comp claim initiated — this is occupational exposure. Spanish interpreter needed for all counseling.",
+      "cc": "42yo restaurant cook with lip/tongue angioedema + urticaria after shrimp prep \u2014 obese, epi dosing question",
+      "hpi": "42F restaurant cook with angioedema of lips and tongue + diffuse urticaria after preparing shrimp. Known shrimp allergy but works in seafood restaurant \u2014 cannot avoid exposure. BMI 38 \u2014 first EpiPen 0.3mg had inadequate response, required second dose. Issue: 0.3mg is standard adult dose but may be subtherapeutic in obese patients. Literature supports 0.5mg for patients >100kg. Workers comp claim initiated \u2014 this is occupational exposure. Spanish interpreter needed for all counseling.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -962,100 +951,36 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-476971",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Anaphylaxis/Allergy Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "6",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Tryptase (drawn 1h post-reaction)",
+          "value": "22.4",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Baseline tryptase (24h post)",
+          "value": "4.1",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
         },
         {
-          "name": "ALLERGY",
-          "results": [
-            {
-              "test": "Tryptase",
-              "value": "26",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Peanut-specific IgE (ImmunoCAP)",
+          "value": "18.6",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Ara h 2 component IgE",
+          "value": "12.4",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         }
       ]
     }
@@ -1075,11 +1000,11 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Context",
-      "Restaurant worker — shellfish exposure occupational + dietary"
+      "Restaurant worker \u2014 shellfish exposure occupational + dietary"
     ],
     [
       "Comorbidity",
-      "Obesity BMI 38 — epi dose questions"
+      "Obesity BMI 38 \u2014 epi dose questions"
     ],
     [
       "Language",
@@ -1087,7 +1012,7 @@ window.EMR_DATA = {
     ],
     [
       "Issue",
-      "Episode at work — workers comp vs personal insurance"
+      "Episode at work \u2014 workers comp vs personal insurance"
     ]
   ],
   "references": [
@@ -1166,13 +1091,12 @@ window.EMR_DATA = {
       "Check capillary refill and peripheral perfusion": "Capillary refill 3 seconds, cool extremities"
     },
     "ddxTargets": [
-      "Allergic angioedema with anaphylaxis (correct diagnosis)",
-      "Hereditary angioedema",
-      "ACE inhibitor-induced angioedema",
-      "Laryngeal edema with airway compromise",
-      "Anaphylactic shock",
-      "Cellulitis of face and neck",
-      "Food poisoning with allergic reaction"
+      "IgE-mediated peanut anaphylaxis \u2014 urticaria + angioedema + GI (correct)",
+      "ACE inhibitor angioedema \u2014 no urticaria, bradykinin-mediated, different trigger",
+      "Hereditary angioedema \u2014 no urticaria, complement abnormal, different trigger",
+      "Scombroid fish poisoning \u2014 flushing after spoiled fish, not peanuts",
+      "Mastocytosis-triggered anaphylaxis \u2014 elevated baseline tryptase distinguishes",
+      "Vasovagal reaction \u2014 pallor/bradycardia without urticaria or angioedema"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on known shrimp allergy and missing inadequate epinephrine dosing due to obesity or considering other causes of treatment failure",
@@ -1182,7 +1106,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. This patient has known allergies but is presenting to the ED - what factors might make you concerned that standard treatment isn't working optimally? Think about patient-specific factors that might affect medication effectiveness.",
       "phase5": "You've identified anaphylaxis with angioedema. The patient used epinephrine but still came to the ED with ongoing symptoms. What patient factors might explain suboptimal response to standard dosing? Also consider the broader context of this patient's occupational exposure.",
-      "finalDebrief": "This case highlights the complexity of anaphylaxis management in obese patients where standard epinephrine dosing may be insufficient. The occupational exposure creates a challenging situation requiring both medical management and potentially workplace modifications or alternative employment considerations."
+      "finalDebrief": "This case highlights the complexity of anaphylaxis management in obese patients where standard epinephrine dosing may be insufficient. The occupational exposure creates a challenging situation requiring both medical management and potentially workplace modifications or alternative employment considerations.",
+      "final": "Diagnosis: IgE-mediated peanut anaphylaxis. Key learning: (1) Anaphylaxis diagnosis: 2+ organ systems OR known allergen exposure + hypotension/bronchospasm. This patient: skin (urticaria + angioedema) + GI (nausea) = anaphylaxis even without hypotension. (2) Epinephrine is ALWAYS first line \u2014 not antihistamines, not steroids. Delay in epinephrine is the #1 cause of anaphylaxis fatalities. Diphenhydramine treats itching, not anaphylaxis. Steroids prevent biphasic reaction but act too slowly for acute treatment. (3) Biphasic anaphylaxis: recurrence 1-72h after apparent resolution without re-exposure, in ~10-20% of cases. Observe 4-6 hours in ED. (4) Tryptase elevation: acute >baseline confirms mast cell-mediated mechanism. Elevated baseline tryptase (>20) suggests mastocytosis. (5) Ara h 2 IgE is the best predictor of systemic peanut reactivity. Palforzia (peanut OIT) is FDA-approved \u2014 refer to allergy for evaluation."
     }
+  },
+  "meta": {
+    "diagnosis": "Allergic Angioedema \u2014 IgE-Mediated Peanut Anaphylaxis, Epinephrine Required, EpiPen Discharge Prescription",
+    "caseId": "allergic-angioedema-v2"
   }
 };

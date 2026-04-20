@@ -1,4 +1,4 @@
-/* emr-data/allergic-conjunctivitis-severe.js — Multi-Setting Allergy Case: Vernal Keratoconjunctivitis */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "3851 Oak Ave, Louisville, KY 40213",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Lisa Morales",
         "phone": "(513) 555-6280",
@@ -59,14 +59,14 @@ window.EMR_DATA = {
       ],
       [
         "Concern",
-        "Prior shield ulcer — needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
+        "Prior shield ulcer \u2014 needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "14yo with acute eye pain — shield ulcer on vernal keratoconjunctivitis",
+        "chiefComplaint": "14yo with acute eye pain \u2014 shield ulcer on vernal keratoconjunctivitis",
         "diagnosis": "Vernal Keratoconjunctivitis"
       },
       "problems": [
@@ -153,7 +153,7 @@ window.EMR_DATA = {
           "bp": "108/62",
           "hr": "86",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "8/10"
         }
@@ -176,7 +176,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -190,7 +190,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -265,8 +265,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "14yo with acute eye pain — shield ulcer on vernal keratoconjunctivitis",
-          "hpi": "Aiden Morales — 14yo with acute eye pain — shield ulcer on vernal keratoconjunctivitis",
+          "cc": "14yo with acute eye pain \u2014 shield ulcer on vernal keratoconjunctivitis",
+          "hpi": "Aiden Morales \u2014 14yo with acute eye pain \u2014 shield ulcer on vernal keratoconjunctivitis",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -344,7 +344,7 @@ window.EMR_DATA = {
           "bp": "106/62",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -367,7 +367,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -381,7 +381,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -457,7 +457,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Admitted for ophthalmology co-management of shield ulcer in VKC",
-          "hpi": "Aiden Morales — Admitted for ophthalmology co-management of shield ulcer in VKC",
+          "hpi": "Aiden Morales \u2014 Admitted for ophthalmology co-management of shield ulcer in VKC",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -466,8 +466,8 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring",
-        "diagnosis": "Severe Allergic Conjunctivitis — Vernal Keratoconjunctivitis"
+        "chiefComplaint": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring",
+        "diagnosis": "Severe Allergic Conjunctivitis \u2014 Vernal Keratoconjunctivitis"
       },
       "problems": [
         {
@@ -535,7 +535,7 @@ window.EMR_DATA = {
           "bp": "108/62",
           "hr": "78",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "6/10"
         }
@@ -558,7 +558,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -572,7 +572,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -647,17 +647,17 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist (Consultant)",
-          "cc": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring",
-          "hpi": "Aiden Morales presents with 14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring.",
+          "cc": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring",
+          "hpi": "Aiden Morales presents with 14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring.",
           "exam": "See documentation.",
-          "assessment": "Severe Allergic Conjunctivitis — Vernal Keratoconjunctivitis",
+          "assessment": "Severe Allergic Conjunctivitis \u2014 Vernal Keratoconjunctivitis",
           "plan": "See orders."
         }
       ]
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "VKC follow-up — shield ulcer healed, transition to steroid-sparing agents",
+        "chiefComplaint": "VKC follow-up \u2014 shield ulcer healed, transition to steroid-sparing agents",
         "diagnosis": "Vernal Keratoconjunctivitis"
       },
       "problems": [
@@ -717,7 +717,7 @@ window.EMR_DATA = {
           "bp": "108/64",
           "hr": "78",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -740,7 +740,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -754,7 +754,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -829,8 +829,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "VKC follow-up — shield ulcer healed, transition to steroid-sparing agents",
-          "hpi": "Aiden Morales — VKC follow-up — shield ulcer healed, transition to steroid-sparing agents",
+          "cc": "VKC follow-up \u2014 shield ulcer healed, transition to steroid-sparing agents",
+          "hpi": "Aiden Morales \u2014 VKC follow-up \u2014 shield ulcer healed, transition to steroid-sparing agents",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -852,72 +852,70 @@ window.EMR_DATA = {
     "address": "759 Hickory Rd, Denver, CO 80211",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Lisa Morales",
       "phone": "(212) 555-2496",
       "relationship": "Parent"
     },
-    "chiefComplaint": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring",
-    "diagnosis": "Severe Allergic Conjunctivitis — Vernal Keratoconjunctivitis"
+    "chiefComplaint": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring",
+    "diagnosis": "Severe Allergic Conjunctivitis \u2014 Vernal Keratoconjunctivitis"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Vernal keratoconjunctivitis (3 years)",
+      "problem": "Vernal keratoconjunctivitis (VKC) \u2014 severe allergic eye disease",
+      "icd": "H10.13",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Giant cobblestone papillae under upper lid. Teenage male \u2014 peak demographic. Perennial, not seasonal."
     },
     {
-      "id": "prob-2",
-      "description": "Atopic dermatitis",
+      "problem": "Corneal shield ulcer \u2014 present on slit lamp",
+      "icd": "H16.009",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Whitish plaque superior cornea from papillae trauma. Urgent ophthalmology referral."
     },
     {
-      "id": "prob-3",
-      "description": "Allergic rhinitis",
+      "problem": "Steroid-induced IOP risk \u2014 monitoring required",
+      "icd": "H40.09",
+      "onset": "2023",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Shield ulcer right eye (prior)",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Long-term topical steroid use raises intraocular pressure. Annual IOP monitoring."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Olopatadine 0.2%",
-      "dose": "",
-      "route": "Ophthalmic",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Olopatadine 0.7% (Pataday Once Daily)",
+      "sig": "1 drop each eye once daily \u2014 H1 antagonist + mast cell stabilizer",
+      "prescriber": "Ophthalmology/Allergy",
+      "start": "2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Prednisolone acetate 1%",
-      "dose": "",
-      "route": "Ophthalmic",
-      "frequency": "QID (pulse)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Loteprednol 0.5% ophthalmic \u2014 pulsed steroid",
+      "sig": "1 drop each eye QID x5 days \u2014 loteprednol has lower IOP-raising potential than prednisolone",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 short course"
     },
     {
-      "id": "med-3",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Tacrolimus 0.03% ophthalmic (compounded) \u2014 steroid-sparing",
+      "sig": "1 drop each eye BID \u2014 calcineurin inhibitor, reduces steroid dependence in VKC",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Cool compresses + preservative-free artificial tears PRN",
+      "sig": "Cooling reduces mast cell degranulation. Frequent use throughout day.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -941,7 +939,7 @@ window.EMR_DATA = {
       "bp": "108/62",
       "hr": "78",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "6/10"
     }
@@ -952,109 +950,52 @@ window.EMR_DATA = {
       "type": "Consultation",
       "date": "03/02/2026",
       "provider": "Dr. Allergist (Consultant)",
-      "cc": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring",
-      "hpi": "Aiden Morales presents with 14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia — recurs every spring.",
+      "cc": "14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring",
+      "hpi": "Aiden Morales presents with 14-year-old with severe bilateral eye itching, tearing, mucus discharge, and photophobia \u2014 recurs every spring.",
       "exam": "See documentation.",
-      "assessment": "Severe Allergic Conjunctivitis — Vernal Keratoconjunctivitis",
+      "assessment": "Severe Allergic Conjunctivitis \u2014 Vernal Keratoconjunctivitis",
       "plan": "See orders."
     }
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-216877",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Allergy/Ocular Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "10",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "Total IgE",
+          "value": "420",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Dust mite specific IgE",
+          "value": "8.4",
+          "unit": "kU/L",
+          "ref": "<0.35",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Ige",
-              "value": "1200",
-              "unit": "IU/mL",
-              "range": "<100",
-              "flag": "H"
-            },
-            {
-              "test": "Tear Ig E",
-              "value": "Elevated",
-              "unit": "",
-              "range": "Normal",
-              "flag": "H"
-            }
-          ]
+          "test": "Eosinophil count",
+          "value": "0.8",
+          "unit": "K/\u03bcL",
+          "ref": "<0.5",
+          "flag": "H"
+        },
+        {
+          "test": "IOP right eye",
+          "value": "16",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": ""
+        },
+        {
+          "test": "IOP left eye",
+          "value": "17",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": ""
         }
       ]
     }
@@ -1082,7 +1023,7 @@ window.EMR_DATA = {
     ],
     [
       "Concern",
-      "Prior shield ulcer — needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
+      "Prior shield ulcer \u2014 needs steroid-sparing approach, consider dupilumab or cyclosporine ophthalmic"
     ]
   ],
   "references": [
@@ -1099,23 +1040,23 @@ window.EMR_DATA = {
         "Giant papillae, shield ulcers, Horner-Trantas dots",
         "Young males, African American/Middle Eastern",
         "Steroid-sparing: tacrolimus/cyclosporine",
-        "Shield ulcers → permanent corneal scarring"
+        "Shield ulcers \u2192 permanent corneal scarring"
       ]
     }
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Vernal keratoconjunctivitis (VKC) is the most severe form of allergic conjunctivitis — predominantly in young males, perennial, can cause corneal scarring and vision loss if untreated. Giant papillae ('cobblestone') on tarsal conjunctiva are pathognomonic.",
-      "VKC is primarily T-cell and eosinophil-driven (Th2). Treatment escalation: topical antihistamines/mast cell stabilizers → topical cyclosporine → topical tacrolimus → systemic immunosuppression for severe/refractory disease.",
-      "Shield ulcers: a serious VKC complication — eosinophilic debris deposits on cornea → sterile ulceration at 10–2 o'clock position. Requires urgent ophthalmology evaluation and aggressive anti-inflammatory treatment."
+      "Vernal keratoconjunctivitis (VKC) is the most severe form of allergic conjunctivitis \u2014 predominantly in young males, perennial, can cause corneal scarring and vision loss if untreated. Giant papillae ('cobblestone') on tarsal conjunctiva are pathognomonic.",
+      "VKC is primarily T-cell and eosinophil-driven (Th2). Treatment escalation: topical antihistamines/mast cell stabilizers \u2192 topical cyclosporine \u2192 topical tacrolimus \u2192 systemic immunosuppression for severe/refractory disease.",
+      "Shield ulcers: a serious VKC complication \u2014 eosinophilic debris deposits on cornea \u2192 sterile ulceration at 10\u20132 o'clock position. Requires urgent ophthalmology evaluation and aggressive anti-inflammatory treatment."
     ],
     "boardPearls": [
-      "AC spectrum: seasonal AC (SAC, mildest) → perennial AC (PAC) → atopic keratoconjunctivitis (AKC, adults with AD) → vernal keratoconjunctivitis (VKC, young males, most severe).",
+      "AC spectrum: seasonal AC (SAC, mildest) \u2192 perennial AC (PAC) \u2192 atopic keratoconjunctivitis (AKC, adults with AD) \u2192 vernal keratoconjunctivitis (VKC, young males, most severe).",
       "VKC: giant papillae (>1 mm) on tarsal conjunctiva = cobblestone appearance. Eosinophil-driven. Young males. Perennial.",
-      "VKC treatment: topical olopatadine (H1 + mast cell stabilizer) → topical cyclosporine → tacrolimus → systemic steroids for severe flares.",
+      "VKC treatment: topical olopatadine (H1 + mast cell stabilizer) \u2192 topical cyclosporine \u2192 tacrolimus \u2192 systemic steroids for severe flares.",
       "Shield ulcer: VKC complication. Eosinophil granule deposits on cornea. Urgent ophthalmology. Risk of corneal scarring/visual loss.",
-      "Topical steroids: effective for AC/VKC but risk of IOP elevation and cataract with prolonged use — limit duration, ophthalmology co-management.",
-      "Dupilumab-associated conjunctivitis: distinct from VKC. Eosinophilic mechanism. Manage with topical steroids — do NOT stop dupilumab."
+      "Topical steroids: effective for AC/VKC but risk of IOP elevation and cataract with prolonged use \u2014 limit duration, ophthalmology co-management.",
+      "Dupilumab-associated conjunctivitis: distinct from VKC. Eosinophilic mechanism. Manage with topical steroids \u2014 do NOT stop dupilumab."
     ]
   },
   "guided": {
@@ -1177,13 +1118,12 @@ window.EMR_DATA = {
       "Skin examination for atopic dermatitis": "Active eczematous patches on antecubital fossae, typical atopic distribution"
     },
     "ddxTargets": [
-      "Vernal keratoconjunctivitis (correct diagnosis)",
-      "Allergic conjunctivitis (seasonal)",
-      "Atopic keratoconjunctivitis",
-      "Bacterial conjunctivitis with superinfection",
-      "Viral conjunctivitis with secondary bacterial infection",
-      "Contact lens-related giant papillary conjunctivitis",
-      "Dry eye syndrome with secondary inflammation"
+      "Vernal keratoconjunctivitis \u2014 giant papillae + shield ulcer risk (correct)",
+      "Seasonal allergic conjunctivitis \u2014 seasonal, no giant papillae, less severe",
+      "Atopic keratoconjunctivitis \u2014 older adults, associated atopic dermatitis",
+      "Bacterial conjunctivitis \u2014 purulent discharge, acute, not eosinophilic",
+      "Giant papillary conjunctivitis \u2014 contact lens-associated, not IgE-mediated",
+      "HSV keratitis \u2014 dendritic ulcer on fluorescein, different morphology"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'pink eye' or simple allergic conjunctivitis given the seasonal pattern and known allergies, potentially missing the severity and chronicity of vernal disease",
@@ -1193,7 +1133,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. You've identified the seasonal allergic component - now think about what key physical finding would distinguish between simple allergic conjunctivitis and more severe variants like vernal disease. What specific examination maneuver is critical here?",
       "phase5": "Excellent work identifying the giant papillae. Given this finding plus the history of shield ulcer, you're dealing with vernal keratoconjunctivitis. Why is this distinction from simple allergic conjunctivitis clinically important, and what does this mean for treatment approach?",
-      "finalDebrief": "This case illustrates how the same basic presentation - seasonal eye allergies - can range from mild allergic conjunctivitis to severe vernal disease. The giant papillae on upper lid eversion was your key differentiating finding. Remember that vernal patients need careful steroid management due to ulcer risk and may require steroid-sparing agents like cyclosporine or biologics."
+      "finalDebrief": "This case illustrates how the same basic presentation - seasonal eye allergies - can range from mild allergic conjunctivitis to severe vernal disease. The giant papillae on upper lid eversion was your key differentiating finding. Remember that vernal patients need careful steroid management due to ulcer risk and may require steroid-sparing agents like cyclosporine or biologics.",
+      "final": "Diagnosis: vernal keratoconjunctivitis (VKC). Key learning: (1) VKC spectrum: seasonal AC (mild) \u2192 perennial AC \u2192 VKC (severe, sight-threatening). VKC is predominantly young males in tropical climates with atopy. Perennial \u2014 not seasonal. (2) Giant cobblestone papillae under upper eyelid are pathognomonic \u2014 must evert the upper lid to see. (3) Shield ulcer: papillae mechanically traumatize the cornea \u2192 epithelial breakdown \u2192 whitish plaque (fibrin/mucus) in superior cornea. Risk of permanent scarring \u2014 urgent ophthalmology. (4) Topical steroid caution: effective for flares but steroid-induced glaucoma and cataracts risk with prolonged use. Loteprednol preferred over prednisolone. Transition to tacrolimus for maintenance. (5) Allergen immunotherapy is effective when a specific trigger is identified \u2014 reduces disease severity and steroid dependence over time."
     }
+  },
+  "meta": {
+    "diagnosis": "Vernal Keratoconjunctivitis \u2014 Giant Cobblestone Papillae, Shield Ulcer Risk, Urgent Ophthalmology Referral",
+    "caseId": "allergic-conjunctivitis-severe"
   }
 };
