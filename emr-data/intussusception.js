@@ -1,4 +1,4 @@
-/* emr-data/intussusception.js — EMR case data for Ileocolic Intussusception */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Baby Liam Chen",
@@ -15,46 +15,64 @@ window.EMR_DATA = {
     "address": "1853 Willow Way, Kansas City, MO 64110",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Rite Aid — University Dr",
+    "pharmacy": "Rite Aid \u2014 University Dr",
     "emergencyContact": {
       "name": "Jennifer Morgan",
       "phone": "(804) 555-3937",
       "relationship": "Partner"
     },
-    "chiefComplaint": "Screaming and drawing knees up to chest Belly — child grabs at stomach and pulls knees up during episodes",
+    "chiefComplaint": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
     "diagnosis": "Ileocolic Intussusception"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Recent viral URI",
+      "problem": "Intussusception \u2014 ileocolic, ultrasound confirmed",
+      "icd": "K56.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Oliver Park, 14M \u2014 episodic inconsolable crying, knees to chest, vomiting. 'Currant jelly' stool passed once. Target sign on US."
     },
     {
-      "id": "prob-2",
-      "description": "No prior surgeries",
+      "problem": "Classic triad often incomplete \u2014 don't wait for all three",
+      "icd": "K56.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Triad: colicky pain + vomiting + currant jelly stool. Only 20-40% present with all three. High suspicion warranted."
     },
     {
-      "id": "prob-3",
-      "description": "Up to date on vaccinations",
+      "problem": "Air enema reduction \u2014 primary treatment if no perforation",
+      "icd": "K56.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "History of rotavirus gastroenteritis",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Air enema under fluoroscopy: 75-90% success rate. Surgery for failed reduction or perforation."
     }
   ],
-  "medications": [],
+  "medications": [
+    {
+      "name": "IV access + normal saline 20mL/kg bolus \u2014 resuscitation before reduction",
+      "sig": "Dehydrated from vomiting and pain. Volume resuscitation before procedural sedation for air enema.",
+      "prescriber": "Pediatric ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Morphine 0.1mg/kg IV PRN \u2014 pain management",
+      "sig": "Adequate analgesia before and during radiologic reduction. Child in significant distress.",
+      "prescriber": "Pediatric ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "NPO \u2014 preparation for air enema or possible surgery",
+      "sig": "NPO in case reduction fails and surgery required. Standard pre-procedural precaution.",
+      "prescriber": "Surgery/Radiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    }
+  ],
   "allergies": [
     {
       "allergen": "NKDA",
@@ -70,7 +88,7 @@ window.EMR_DATA = {
       "bp": "88/56",
       "hr": "148",
       "rr": "30",
-      "temp": "37.4°C",
+      "temp": "37.4\u00b0C",
       "spo2": "99%",
       "pain": "/10",
       "bmi": "27",
@@ -83,209 +101,63 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Screaming and drawing knees up to chest Belly — child grabs at stomach and pulls knees up during episodes",
-      "hpi": "Baby Liam Chen is a 1-year-old male presenting with screaming and drawing knees up to chest belly — child grabs at stomach and pulls knees up during episodes. Past medical history includes Recent viral URI, No prior surgeries, Up to date on vaccinations, History of rotavirus gastroenteritis. See chart for full details.",
+      "cc": "Screaming and drawing knees up to chest Belly \u2014 child grabs at stomach and pulls knees up during episodes",
+      "hpi": "Baby Liam Chen is a 1-year-old male presenting with screaming and drawing knees up to chest belly \u2014 child grabs at stomach and pulls knees up during episodes. Past medical history includes Recent viral URI, No prior surgeries, Up to date on vaccinations, History of rotavirus gastroenteritis. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Ileocolic Intussusception — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Ileocolic Intussusception \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-920390",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Intussusception Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "14.6",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "35",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "298",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "14.2",
+          "unit": "K/\u03bcL",
+          "ref": "5-15 for age",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "136",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "L"
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "26",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "22",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": "H"
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "72",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.5",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Sodium",
+          "value": "136",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.1",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "CRP",
-              "value": "3.2",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "12.4",
+          "unit": "g/dL",
+          "ref": "11-15",
+          "flag": ""
+        },
+        {
+          "test": "CRP",
+          "value": "22",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
+        },
+        {
+          "test": "BMP",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-984156",
-      "clinical": "Screaming and drawing knees up to chest Belly — child grabs at stomach and pulls knees up during episodes",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "Abdominal X-ray",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-342460",
-      "clinical": "Screaming and drawing knees up to chest Belly — child grabs at stomach and pulls knees up during episodes",
-      "technique": "Standard protocol",
-      "findings": "Paucity of gas in the right lower quadrant. Soft tissue density in the right upper quadrant. Mild small bowel dilation. No free air.",
-      "impression": "Findings suggestive of intussusception — recommend confirmatory ultrasound",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "POCUS – FAST Exam",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-708294",
-      "clinical": "Screaming and drawing knees up to chest Belly — child grabs at stomach and pulls knees up during episodes",
-      "technique": "Standard protocol",
-      "findings": "TARGET SIGN (donut sign) visualized in the right upper quadrant — concentric rings of bowel wall representing telescoped bowel within bowel. Approximately 3.5cm diameter. Small amount of trapped fluid within intussusceptum. No free peritoneal fluid.",
-      "impression": "ILEOCOLIC INTUSSUSCEPTION confirmed — target/donut sign. Pediatric surgery consult for air-contrast enema reduction vs operative intervention.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-604068",
-      "clinical": "Screaming and drawing knees up to chest Belly — child grabs at stomach and pulls knees up during episodes",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 148 bpm. Normal pediatric morphology",
-      "impression": "Sinus tachycardia — pain and dehydration",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "Abdominal Ultrasound",
+      "indication": "Episodic pain, vomiting, bloody stool in infant",
+      "findings": "Target sign (concentric rings) in right lower quadrant \u2014 ileocolic intussusception confirmed. Outer diameter 3.8cm. No free fluid. No lymph nodes >2cm.",
+      "impression": "Ileocolic intussusception confirmed on ultrasound. No perforation signs. Air enema reduction appropriate."
     }
   ],
   "immunizations": [
@@ -327,7 +199,7 @@ window.EMR_DATA = {
     ],
     [
       "Occupation",
-      "N/A — toddler"
+      "N/A \u2014 toddler"
     ],
     [
       "Living",
@@ -393,13 +265,12 @@ window.EMR_DATA = {
       "Inguinal examination": "No hernias palpated, no masses in inguinal regions"
     },
     "ddxTargets": [
-      "Intussusception (correct diagnosis)",
-      "Viral gastroenteritis",
-      "Constipation with fecal impaction",
-      "Volvulus",
-      "Incarcerated hernia",
-      "Infantile colic",
-      "Appendicitis"
+      "Intussusception \u2014 target sign on US, episodic colicky pain (correct)",
+      "Volvulus \u2014 malrotation-associated; bile-stained vomiting, different age peak, X-ray findings",
+      "Appendicitis \u2014 older children typically; RLQ pain with peritoneal signs, different US findings",
+      "Meckel's diverticulum \u2014 painless rectal bleeding; intussusception can be the lead point",
+      "Incarcerated inguinal hernia \u2014 inguinal bulge on exam; check groin in any infant with pain/vomiting",
+      "Hirschsprung disease \u2014 chronic constipation, older age, not episodic acute pain"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on recent viral URI and assuming continued gastroenteritis rather than considering mechanical obstruction",
@@ -409,7 +280,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several important differentials for an infant with intermittent abdominal pain. What specific historical details would help you distinguish between mechanical causes versus functional disorders? Consider the pattern and timing of symptoms.",
       "phase5": "Your physical exam revealed some key findings - particularly the palpable mass and the nature of the stool. How do these findings help narrow your differential? What is the most likely anatomical process occurring?",
-      "finalDebrief": "This case demonstrates the classic triad of intussusception: intermittent colicky pain, palpable abdominal mass, and bloody stool. How did the intermittent nature initially broaden your differential, and which examination findings were most crucial in reaching the correct diagnosis?"
+      "finalDebrief": "This case demonstrates the classic triad of intussusception: intermittent colicky pain, palpable abdominal mass, and bloody stool. How did the intermittent nature initially broaden your differential, and which examination findings were most crucial in reaching the correct diagnosis?",
+      "final": "Diagnosis: ileocolic intussusception. Key learning: (1) Classic presentation: 6 months\u20133 years (peak 9-12 months), episodic colicky pain (child intermittently draws up legs, screams, then appears well between episodes), vomiting, and currant jelly stool (blood + mucus = late sign of mucosal ischemia). ONLY 20-40% have the full triad \u2014 do not wait. (2) Ultrasound is the diagnostic modality of choice: target sign (concentric rings) on transverse view, pseudokidney sign on longitudinal view. Sensitivity ~98-100% in experienced hands. No radiation. (3) Air enema: performed by radiology under fluoroscopy or ultrasound guidance. Air insufflated into rectum \u2192 pushes intussusceptum retrograde. Success rate 75-90%. Complications: perforation (~1%). Contraindications: peritonitis, free air, hemodynamic instability. (4) Lead points: most pediatric intussusceptions are idiopathic (enlarged Peyer's patches following viral illness). In children >5 years or adults, consider lead point: Meckel's diverticulum, lymphoma, polyp, duplication cyst. (5) Recurrence: ~10% recurrence after enema reduction, typically within 24-48h. Most recurrences are also reducible by enema. Three or more recurrences \u2192 surgical evaluation for lead point."
     }
+  },
+  "meta": {
+    "diagnosis": "Intussusception \u2014 Ileocolic, Classic Triad Incomplete, Air Enema Reduction Successful",
+    "caseId": "intussusception"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/hip-fracture-anticoag.js — EMR case data for Hip Fracture on Anticoagulation */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Margaret Sullivan",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "4072 Magnolia Blvd, Kansas City, MO 64101",
     "insurance": "BlueCross BlueShield PPO",
     "pcp": "Dr. Robert Hughes, DO",
-    "pharmacy": "Walmart Pharmacy — Pines Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Pines Blvd",
     "emergencyContact": {
       "name": "Henry Sanchez",
       "phone": "(630) 555-4920",
@@ -26,86 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Atrial fibrillation",
+      "problem": "Hip fracture \u2014 on warfarin for AFib, INR 3.2",
+      "icd": "S72.001A",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Gloria Chen, 79F \u2014 fell on right hip, INR 3.2. OR team wants INR <1.5 before ORIF."
     },
     {
-      "id": "prob-2",
-      "description": "Osteoporosis",
+      "problem": "Warfarin reversal \u2014 4-factor PCC vs vitamin K",
+      "icd": "Z79.01",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "4-factor PCC reverses warfarin in minutes. Vitamin K acts over 12-24h. Urgent surgery needs PCC."
     },
     {
-      "id": "prob-3",
-      "description": "Mild dementia",
+      "problem": "AFib \u2014 CHA2DS2-VASc 5, anticoagulation restart timing",
+      "icd": "I48.19",
+      "onset": "2020",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Hypertension",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "Chronic kidney disease stage 3",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "High stroke risk \u2014 restart anticoagulation 24-72h post-op depending on surgical bleeding risk."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Warfarin",
-      "dose": "4mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, MD"
+      "name": "4-factor PCC (Kcentra) 25 units/kg IV \u2014 urgent warfarin reversal",
+      "sig": "Reverses INR to <1.5 within 30 min. Give with vitamin K 10mg IV to sustain reversal.",
+      "prescriber": "Hematology/Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Alendronate",
-      "dose": "70mg weekly",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Vitamin K 10mg IV slow infusion \u2014 sustained reversal",
+      "sig": "Given alongside PCC \u2014 prevents INR re-elevation when PCC wears off (6-8h). IV preferred for faster onset than PO.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Donepezil",
-      "dose": "10mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Enoxaparin 40mg SQ daily \u2014 restart 24-72h post-op",
+      "sig": "Bridge back to warfarin after ORIF. Timing based on surgical hemostasis \u2014 discuss with surgeon.",
+      "prescriber": "Medicine/Hematology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Hold \u2014 restart post-op"
     },
     {
-      "id": "med-4",
-      "name": "Amlodipine",
-      "dose": "5mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
-    },
-    {
-      "id": "med-5",
-      "name": "Metoprolol",
-      "dose": "25mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Warfarin \u2014 resume 5mg daily at post-op day 1-2",
+      "sig": "Resume prior dose. INR check at 3 days. Goal INR 2-3 for AFib.",
+      "prescriber": "Medicine",
+      "start": "2020",
+      "refills": 5,
+      "status": "Hold \u2014 resume post-op"
     }
   ],
   "allergies": [
@@ -123,7 +96,7 @@ window.EMR_DATA = {
       "bp": "108/62",
       "hr": "92",
       "rr": "18",
-      "temp": "36.2°C",
+      "temp": "36.2\u00b0C",
       "spo2": "94%",
       "pain": "/10",
       "bmi": "25",
@@ -139,227 +112,60 @@ window.EMR_DATA = {
       "cc": "I fell and I can't get up Right hip and groin",
       "hpi": "Margaret Sullivan is a 82-year-old female presenting with i fell and i can't get up right hip and groin. Past medical history includes Atrial fibrillation, Osteoporosis, Mild dementia, Hypertension, Chronic kidney disease stage 3. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Hip Fracture on Anticoagulation — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Hip Fracture on Anticoagulation \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-474026",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Pre-Op Reversal Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "10.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "43",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "272",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "INR",
+          "value": "3.2",
+          "unit": "",
+          "ref": "0.9-1.1",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "5.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": "H"
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "10",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.1",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "PT",
+          "value": "34",
+          "unit": "seconds",
+          "ref": "11-13.5",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "INR",
-              "value": "3.2",
-              "unit": "",
-              "range": "2.0-3.0",
-              "flag": "H"
-            },
-            {
-              "test": "CK Total",
-              "value": "2,400",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "2.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Troponin I",
-              "value": "0.06",
-              "unit": "ng/mL",
-              "range": "<0.04",
-              "flag": "H"
-            },
-            {
-              "test": "Urinalysis",
-              "value": "Dark amber, specific gravity 1.035, trace blood, trace protein",
-              "unit": "",
-              "range": "Normal",
-              "flag": "H"
-            }
-          ]
+          "test": "Hemoglobin",
+          "value": "10.2",
+          "unit": "g/dL",
+          "ref": "12-16",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.2",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": ""
+        },
+        {
+          "test": "Platelets",
+          "value": "188",
+          "unit": "K/\u03bcL",
+          "ref": "150-400",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-312683",
-      "clinical": "I fell and I can't get up Right hip and groin",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "X-ray Hip",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-757447",
-      "clinical": "I fell and I can't get up Right hip and groin",
-      "technique": "Standard protocol",
-      "findings": "DISPLACED LEFT FEMORAL NECK FRACTURE (Garden type III/IV). Femoral head displaced posteriorly with significant angulation. No pathologic bone lesion. Severe osteopenia. Degenerative changes in hip joint.",
-      "impression": "Displaced femoral neck fracture — orthopedic surgery consultation for surgical repair (likely hemiarthroplasty or total hip arthroplasty given displacement and patient age).",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-542904",
-      "clinical": "I fell and I can't get up Right hip and groin",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial hemorrhage. Mild chronic small vessel ischemic changes. Generalized volume loss consistent with age and known dementia. No skull fracture.",
-      "impression": "No acute intracranial pathology — delirium is from pain, dehydration, and immobility, not head injury",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-3",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-983839",
-      "clinical": "I fell and I can't get up Right hip and groin",
-      "technique": "Standard 12-lead",
-      "findings": "Atrial fibrillation at 92 bpm. No ST changes. Normal intervals",
-      "impression": "Chronic AFib — need to manage anticoagulation perioperatively",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "Hip X-ray Right",
+      "indication": "Fall, hip pain",
+      "findings": "Right femoral neck fracture \u2014 displaced, Garden type III.",
+      "impression": "Displaced femoral neck fracture. Requires ORIF or hemiarthroplasty. Warfarin reversal required pre-operatively."
     }
   ],
   "immunizations": [
@@ -465,13 +271,12 @@ window.EMR_DATA = {
       "Assessment of ability to bear weight": "Unable to bear weight on right leg due to severe pain"
     },
     "ddxTargets": [
-      "Hip fracture (femoral neck or intertrochanteric) (correct diagnosis)",
-      "Greater trochanteric fracture",
-      "Pelvic fracture",
-      "Hip dislocation",
-      "Femoral shaft fracture",
-      "Severe hip contusion",
-      "Lumbar compression fracture with radicular pain"
+      "Hip fracture on warfarin \u2014 PCC reversal required (correct)",
+      "Hip contusion \u2014 X-ray rules out",
+      "Pathologic fracture from metastasis \u2014 no prior malignancy history",
+      "Trochanteric bursitis \u2014 X-ray positive for fracture",
+      "Avascular necrosis \u2014 acute onset after fall; prior AVN possible but fracture is primary issue",
+      "Periprosthetic fracture \u2014 no prior hip prosthesis"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'typical' elderly fall presentation and missing other causes of altered mental status or medication effects that contributed to fall",
@@ -481,7 +286,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified an elderly patient with a fall and hip pain. Before you interview her, what key historical elements would help you differentiate between the various causes of hip pain after trauma? Consider her age, medications, and risk factors.",
       "phase5": "Your history and physical findings strongly suggest a hip fracture. What specific examination findings support this diagnosis? How do her risk factors and medications influence your management considerations, particularly regarding anticoagulation?",
-      "finalDebrief": "This case demonstrates the classic presentation of hip fracture in an elderly patient with osteoporosis. The shortened, externally rotated leg with inability to bear weight after a mechanical fall is pathognomonic. How did her warfarin therapy and renal disease influence your diagnostic and treatment approach?"
+      "finalDebrief": "This case demonstrates the classic presentation of hip fracture in an elderly patient with osteoporosis. The shortened, externally rotated leg with inability to bear weight after a mechanical fall is pathognomonic. How did her warfarin therapy and renal disease influence your diagnostic and treatment approach?",
+      "final": "Diagnosis: hip fracture requiring urgent warfarin reversal. Key learning: (1) INR reversal hierarchy for urgent surgery: 4-factor PCC (Kcentra) is preferred \u2014 reverses INR to \u22641.5 in ~30 minutes by replacing factors II, VII, IX, X. FFP requires large volumes (4+ units = 1L) and takes 1-2h. PCC is faster, smaller volume, lower infectious risk. ALWAYS give with vitamin K to sustain reversal after PCC wears off at ~6-8h. (2) Surgical timing for hip fracture: mortality increases with delay >48h, but operating with INR >1.5 increases bleeding and transfusion. PCC gets to OR faster than FFP \u2014 target INR <1.5 pre-op. (3) Post-op anticoagulation restart: AFib with CHA2DS2-VASc 5 has high stroke risk \u2014 restart anticoagulation as soon as surgically safe. Standard: 24h for high stroke risk patients with low bleeding risk, 48-72h if higher bleeding concern. Discuss with surgeon. (4) DOAC reversal: dabigatran \u2192 idarucizumab (Praxbind). Factor Xa inhibitors (apixaban, rivaroxaban) \u2192 andexanet alfa (Andexxa) or 4-factor PCC as alternative. (5) Bridging decision: AFib + warfarin: CHA2DS2-VASc \u22655 = high stroke risk, short interruption (hip fracture \u2192 restart within 24-72h) does NOT require bridging per current evidence \u2014 bridging increases bleeding without stroke benefit in most AFib patients."
     }
+  },
+  "meta": {
+    "diagnosis": "Hip Fracture on Anticoagulation \u2014 Warfarin Reversal, Surgical Timing, Bridging Decision",
+    "caseId": "hip-fracture-anticoag"
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/meningitis-v1.js — Auto-generated EMR case data for Bacterial Meningitis */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Emily Johnson",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "7670 Iris Blvd, Columbus, OH 43203",
     "insurance": "Oscar Health",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "James Johnson",
       "phone": "(503) 555-7985",
@@ -26,22 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "College student in dormitory",
+      "problem": "Bacterial meningitis \u2014 clinical diagnosis, treatment before LP",
+      "icd": "G00.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Samuel Park, 22M \u2014 fever 39.8\u00b0C, severe headache, neck stiffness, photophobia. Kernig and Brudzinski signs positive."
+    },
+    {
+      "problem": "LP delay \u2014 CT head ordered before LP",
+      "icd": "G00.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Focal neuro exam \u2192 CT first to exclude herniation. Do NOT delay antibiotics for CT \u2014 treat empirically first."
+    },
+    {
+      "problem": "Dexamethasone \u2014 adjunct reduces hearing loss and mortality in pneumococcal meningitis",
+      "icd": "G00.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Give dexamethasone 15-20 min BEFORE first antibiotic dose to reduce inflammatory cascade at time of bacterial lysis."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Combined OCP",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Ceftriaxone 2g IV q12h \u2014 empiric S. pneumoniae / N. meningitidis",
+      "sig": "Empiric treatment \u2014 DO NOT wait for LP or CT results. Give immediately after blood cultures drawn.",
+      "prescriber": "ED/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Vancomycin 25-30mg/kg IV q8-12h \u2014 add for resistant pneumococcus",
+      "sig": "Empiric coverage for penicillin-resistant S. pneumoniae until sensitivities available. Target AUC 400-600.",
+      "prescriber": "Medicine/ID",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 0.15mg/kg IV q6h x4 days \u2014 BEFORE antibiotics",
+      "sig": "Give 15-20 min before ceftriaxone. Reduces TNF-\u03b1 surge from bacterial lysis \u2192 less hearing loss and mortality in pneumococcal meningitis.",
+      "prescriber": "Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Ampicillin 2g IV q4h \u2014 add if Listeria suspected (age >50 or immunocompromised)",
+      "sig": "This 22-year-old does not require Listeria coverage. Add for immunocompromised, elderly, or neonates.",
+      "prescriber": "Medicine",
+      "start": "NOT given",
+      "refills": 0,
+      "status": "Not given \u2014 age 22, immunocompetent"
     }
   ],
   "allergies": [
@@ -59,7 +96,7 @@ window.EMR_DATA = {
       "bp": "108/62",
       "hr": "118",
       "rr": "22",
-      "temp": "39.8°C",
+      "temp": "39.8\u00b0C",
       "spo2": "97%",
       "pain": "9/10",
       "bmi": "33",
@@ -75,169 +112,67 @@ window.EMR_DATA = {
       "cc": "Severe headache, fever, neck stiffness, photophobia",
       "hpi": "Emily Johnson is a 27-year-old female presenting with severe headache, fever, neck stiffness, photophobia. Past medical history includes College student in dormitory. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Bacterial Meningitis — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Bacterial Meningitis \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-199463",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Meningitis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "22.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CSF \u2014 WBC",
+          "value": "4200",
+          "unit": "cells/\u03bcL",
+          "ref": "<5",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "CSF \u2014 protein",
+          "value": "280",
+          "unit": "mg/dL",
+          "ref": "15-45",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.6",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Csf Wbc",
-              "value": "2200",
-              "unit": "cells/µL",
-              "range": "0-5",
-              "flag": "H"
-            },
-            {
-              "test": "Csf Protein",
-              "value": "320",
-              "unit": "mg/dL",
-              "range": "15-45",
-              "flag": "H"
-            },
-            {
-              "test": "Csf Glucose",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "40-70",
-              "flag": "L"
-            }
-          ]
+          "test": "CSF \u2014 glucose",
+          "value": "22",
+          "unit": "mg/dL",
+          "ref": "50-80",
+          "flag": "L"
+        },
+        {
+          "test": "CSF \u2014 Gram stain",
+          "value": "Gram-positive diplococci \u2014 S. pneumoniae morphology",
+          "unit": "",
+          "ref": "No organisms",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures x2",
+          "value": "Pending \u2014 drawn before antibiotics",
+          "unit": "",
+          "ref": "No growth",
+          "flag": ""
+        },
+        {
+          "test": "Serum glucose",
+          "value": "108",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-234518",
-      "clinical": "Severe headache, fever, neck stiffness, photophobia",
-      "technique": "Standard protocol",
-      "findings": "No acute intracranial abnormality. No mass effect or hydrocephalus.",
-      "impression": "Normal. Safe for lumbar puncture.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Head Non-Contrast",
+      "indication": "Focal neuro exam before LP \u2014 herniation risk assessment",
+      "findings": "No mass lesion. No midline shift. No cerebral edema. Cisterns patent.",
+      "impression": "No contraindication to lumbar puncture. Proceed with LP."
     }
   ],
   "immunizations": [
@@ -270,7 +205,7 @@ window.EMR_DATA = {
     ],
     [
       "Alcohol",
-      "Social — college parties"
+      "Social \u2014 college parties"
     ],
     [
       "Living",
@@ -278,7 +213,7 @@ window.EMR_DATA = {
     ],
     [
       "Vaccination",
-      "Meningococcal vaccine up to date — serogroup B not covered"
+      "Meningococcal vaccine up to date \u2014 serogroup B not covered"
     ]
   ],
   "guided": {
@@ -336,17 +271,16 @@ window.EMR_DATA = {
       "Skin examination for petechial rash": "No petechial or purpuric rash noted on trunk, extremities, or mucous membranes",
       "Neurological examination - motor and reflexes": "Motor strength 5/5 throughout, reflexes 2+ and symmetric, no focal neurologic deficits",
       "Assessment of photophobia": "Severe photophobia - patient unable to tolerate room lights, squints and turns away from penlight",
-      "Vital signs assessment": "Febrile at 39.8°C, tachycardic at 118 bpm, blood pressure 108/62, appears dehydrated",
+      "Vital signs assessment": "Febrile at 39.8\u00b0C, tachycardic at 118 bpm, blood pressure 108/62, appears dehydrated",
       "Lymph node examination": "No significant lymphadenopathy in cervical, axillary, or inguinal regions"
     },
     "ddxTargets": [
-      "Bacterial meningitis (correct diagnosis)",
-      "Viral meningitis",
-      "Subarachnoid hemorrhage",
-      "Brain abscess",
-      "Viral encephalitis",
-      "Severe migraine headache",
-      "Tension headache with viral syndrome"
+      "Bacterial meningitis \u2014 S. pneumoniae, classic CSF profile (correct)",
+      "Viral meningitis \u2014 lymphocytic pleocytosis, normal glucose, lower protein; clinical overlap early",
+      "Subarachnoid hemorrhage \u2014 thunderclap headache, xanthochromia on LP, no fever typically",
+      "Herpes simplex encephalitis \u2014 temporal lobe involvement, seizures, CSF PCR HSV positive",
+      "Cryptococcal meningitis \u2014 immunocompromised, indolent course, India ink positive",
+      "Brain abscess \u2014 focal neuro signs, ring-enhancing lesion on CT, do NOT LP if mass present"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'college student headache' and dismissing as stress, hangover, or typical headache without recognizing the severity and constellation of meningeal signs",
@@ -356,7 +290,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified some concerning features in this case. Given this patient's setting and symptom constellation, what are the most serious diagnoses you need to rule out immediately? What specific historical details and physical exam findings will help you differentiate between your differential diagnoses?",
       "phase5": "Your physical exam reveals positive meningeal signs in a febrile college student. How does this change your differential diagnosis prioritization? What is your most concerning diagnosis now, and what immediate next steps are warranted? Consider both diagnostic workup and treatment implications.",
-      "finalDebrief": "This case demonstrates the classic presentation of bacterial meningitis in a college student. Notice how the rapid symptom progression, positive meningeal signs, and dormitory setting created a high-risk scenario. Discuss how this case highlights the importance of not anchoring on 'typical college headache' and maintaining suspicion for life-threatening conditions when the clinical picture doesn't fit common benign causes."
+      "finalDebrief": "This case demonstrates the classic presentation of bacterial meningitis in a college student. Notice how the rapid symptom progression, positive meningeal signs, and dormitory setting created a high-risk scenario. Discuss how this case highlights the importance of not anchoring on 'typical college headache' and maintaining suspicion for life-threatening conditions when the clinical picture doesn't fit common benign causes.",
+      "final": "Diagnosis: bacterial meningitis \u2014 S. pneumoniae. Key learning: (1) Never delay antibiotics for imaging or LP in suspected bacterial meningitis. The rule: draw blood cultures \u2192 give dexamethasone + antibiotics \u2192 then CT \u2192 then LP. Each hour of antibiotic delay increases mortality. A 30-minute delay to get a CT is acceptable only if there are focal neuro signs (papilledema, focal deficit, new seizure, immunocompromise, GCS <10). (2) CSF profile: bacterial = PMN pleocytosis (hundreds to thousands), low glucose (<40 or CSF:serum ratio <0.4), elevated protein (>100-200), positive Gram stain in ~60-80%. Viral = lymphocytic, normal glucose, mildly elevated protein, negative Gram stain. (3) Dexamethasone timing: benefit is specifically from reducing the inflammatory response triggered by antibiotic-induced bacterial lysis. Must be given BEFORE or WITH the first antibiotic dose \u2014 no benefit if given after. Reduces hearing loss and mortality specifically in S. pneumoniae meningitis. (4) Empiric antibiotic selection by age: neonates = ampicillin + gentamicin or cefotaxime. Infants\u201350yo = ceftriaxone + vancomycin. >50yo or immunocompromised = ceftriaxone + vancomycin + ampicillin (Listeria coverage). (5) Meningococcal meningitis (N. meningitidis): petechial or purpuric rash is pathognomonic \u2014 activate contact precautions immediately, notify public health for close contact prophylaxis (rifampin, ciprofloxacin, or ceftriaxone single dose)."
     }
+  },
+  "meta": {
+    "diagnosis": "Bacterial Meningitis \u2014 Streptococcus pneumoniae, Empiric Antibiotics Before LP, Dexamethasone Adjunct",
+    "caseId": "meningitis-v1"
   }
 };

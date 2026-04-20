@@ -1,4 +1,4 @@
-/* emr-data/ludwigs-angina.js — EMR case data for Ludwig Angina (Submandibular Space Infection) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Omar Hassan",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "3497 E Roosevelt Rd, New Orleans, LA 70119",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Lisa Chang, MD",
-    "pharmacy": "Rite Aid — Federal Hwy",
+    "pharmacy": "Rite Aid \u2014 Federal Hwy",
     "emergencyContact": {
       "name": "Susan Garcia",
       "phone": "(803) 555-5735",
@@ -26,67 +26,65 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Poorly controlled Type 2 Diabetes",
+      "problem": "Ludwig's angina \u2014 bilateral deep space neck infection",
+      "icd": "K12.2",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Antonio Rivera, 48M \u2014 jaw swelling, trismus, fever 39.1\u00b0C for 3 days. Bilateral submandibular induration. Submandibular space gas on CT."
     },
     {
-      "id": "prob-2",
-      "description": "Dental neglect",
+      "problem": "Airway compromise \u2014 imminent risk, anesthesia standby",
+      "icd": "J38.4",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Stridor developing. Muffled 'hot potato' voice. Anesthesia and ENT at bedside \u2014 awake fiberoptic intubation prepared."
     },
     {
-      "id": "prob-3",
-      "description": "IV drug use history",
+      "problem": "Diabetic immunocompromise \u2014 accelerated infection spread",
+      "icd": "E11.9",
+      "onset": "2018",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Hepatitis C",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "T2DM poorly controlled, A1c 10.8% \u2014 hyperglycemia impairs neutrophil function, accelerates deep space infection spread."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Methadone",
-      "dose": "80mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. James Wilson, MD"
+      "name": "Ampicillin-sulbactam 3g IV q6h \u2014 polymicrobial coverage",
+      "sig": "First-line coverage for mixed oral flora \u2014 Streptococcus, Staphylococcus, anaerobes. IV mandatory.",
+      "prescriber": "ENT/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Metformin",
-      "dose": "1000mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Metronidazole 500mg IV q8h \u2014 anaerobic augmentation",
+      "sig": "Deep space neck infections are polymicrobial with high anaerobic burden (Fusobacterium, Bacteroides).",
+      "prescriber": "ENT",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Glipizide",
-      "dose": "10mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Amy Patel, MD"
+      "name": "Dexamethasone 10mg IV q6h \u2014 airway edema reduction",
+      "sig": "Corticosteroid reduces cellulitis edema \u2014 buys time while antibiotics work. NOT a substitute for airway management.",
+      "prescriber": "ENT/Anesthesia",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Awake fiberoptic intubation \u2014 airway secured",
+      "sig": "Standard of care for Ludwig's with stridor \u2014 do NOT use direct laryngoscopy (rapid swelling can obscure view). Awake FOI before complete loss.",
+      "prescriber": "Anesthesia",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
     {
       "allergen": "Penicillin",
-      "reaction": "Anaphylaxis (documented — CANNOT use any penicillin or ampicillin-based antibiotics)",
+      "reaction": "Anaphylaxis (documented \u2014 CANNOT use any penicillin or ampicillin-based antibiotics)",
       "severity": "Moderate",
       "type": "Drug"
     }
@@ -98,8 +96,8 @@ window.EMR_DATA = {
       "bp": "158/92",
       "hr": "124",
       "rr": "28",
-      "temp": "39.6°C",
-      "spo2": "89% on room air → 93% on 15L NRB",
+      "temp": "39.6\u00b0C",
+      "spo2": "89% on room air \u2192 93% on 15L NRB",
       "pain": "/10",
       "bmi": "26",
       "weight": "71 kg"
@@ -111,199 +109,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Can barely breathe Bilateral submandibular/sublingual — floor of mouth and anterior neck",
-      "hpi": "Omar Hassan is a 56-year-old male presenting with can barely breathe bilateral submandibular/sublingual — floor of mouth and anterior neck. Past medical history includes Poorly controlled Type 2 Diabetes, Dental neglect, IV drug use history, Hepatitis C. See chart for full details.",
+      "cc": "Can barely breathe Bilateral submandibular/sublingual \u2014 floor of mouth and anterior neck",
+      "hpi": "Omar Hassan is a 56-year-old male presenting with can barely breathe bilateral submandibular/sublingual \u2014 floor of mouth and anterior neck. Past medical history includes Poorly controlled Type 2 Diabetes, Dental neglect, IV drug use history, Hepatitis C. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Ludwig Angina (Submandibular Space Infection) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Ludwig Angina (Submandibular Space Infection) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-949361",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Ludwig's Angina Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "24.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.1",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "35",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "178",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "28.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.4",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "100",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "27",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "8",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.6",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "342",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Glucose",
+          "value": "318",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "3.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Blood Cultures",
-              "value": "Pending — drawn before antibiotics",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            },
-            {
-              "test": "ABG pH",
-              "value": "7.32",
-              "unit": "",
-              "range": "7.35-7.45",
-              "flag": "H"
-            }
-          ]
+          "test": "HbA1c",
+          "value": "10.8",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "246",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
+        },
+        {
+          "test": "Blood cultures",
+          "value": "Streptococcus anginosus growing",
+          "unit": "",
+          "ref": "No growth",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-658128",
-      "clinical": "Can barely breathe Bilateral submandibular/sublingual — floor of mouth and anterior neck",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Neck with Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-306306",
-      "clinical": "Can barely breathe Bilateral submandibular/sublingual — floor of mouth and anterior neck",
-      "technique": "Standard protocol",
-      "findings": "BILATERAL SUBMANDIBULAR AND SUBLINGUAL SPACE CELLULITIS with diffuse soft tissue swelling and edema. Floor of mouth markedly thickened and elevated. Tongue base displaced superiorly and posteriorly, significantly narrowing the oropharyngeal airway (residual lumen <5mm). Airway patent but CRITICALLY NARROWED. Left lower molar periapical abscess (odontogenic source). Fat stranding throughout bilateral submandibular spaces. Small bilateral submandibular fluid collections (early abscess formation). No gas. No retropharyngeal extension. No mediastinal involvement (yet).",
-      "impression": "LUDWIG ANGINA — bilateral submandibular/sublingual cellulitis with CRITICAL AIRWAY NARROWING (<5mm). Odontogenic source (left lower molar). EMERGENT AIRWAY MANAGEMENT REQUIRED. ENT/oral surgery for source control.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-159526",
-      "clinical": "Can barely breathe Bilateral submandibular/sublingual — floor of mouth and anterior neck",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 124 bpm. No ST changes",
-      "impression": "Sinus tachycardia — sepsis and respiratory distress",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Neck With Contrast",
+      "indication": "Jaw swelling, trismus, fever \u2014 Ludwig's angina?",
+      "findings": "Bilateral submandibular and submental space involvement. Gas in right sublingual space. Airway: 4mm at base of tongue \u2014 significantly narrowed. No drainable abscess \u2014 phlegmon. Right mandibular second molar periapical lucency \u2014 source tooth.",
+      "impression": "Ludwig's angina with bilateral deep space involvement and airway narrowing. Airway urgency \u2014 anesthesia immediately. Source tooth identified."
     }
   ],
   "immunizations": [
@@ -410,13 +279,12 @@ window.EMR_DATA = {
       "Assess voice quality and speech": "Muffled 'hot potato' voice with difficulty articulating clearly"
     },
     "ddxTargets": [
-      "Ludwig's Angina (correct diagnosis)",
-      "Peritonsillar abscess",
-      "Parapharyngeal abscess",
-      "Epiglottitis",
-      "Angioedema",
-      "Cellulitis of neck",
-      "Retropharyngeal abscess"
+      "Ludwig's angina \u2014 bilateral deep space, airway narrowing, dental source (correct)",
+      "Peritonsillar abscess \u2014 unilateral, uvular deviation; does not cause submandibular induration bilaterally",
+      "Parapharyngeal abscess \u2014 unilateral, less submandibular involvement",
+      "Masticator space abscess \u2014 unilateral, trismus prominent, different space",
+      "Angioedema \u2014 no infection source, no gas on CT, responds to antihistamines/epinephrine",
+      "Epiglottitis \u2014 supraglottic involvement on CT, different presentation"
     ],
     "biasFlags": {
       "anchoring": "May anchor on patient's drug use history and assume this is related to injection site infection rather than odontogenic source",
@@ -426,7 +294,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You're seeing a patient with neck swelling and breathing difficulty. Before you interview him, what are the most concerning diagnoses you need to rule out, and what would make this an airway emergency? Think about the anatomical spaces involved.",
       "phase5": "Based on your history and physical exam, you've identified bilateral submandibular and sublingual space involvement with systemic toxicity. How does this pattern of infection help narrow your diagnosis? What's your biggest concern for this patient right now?",
-      "finalDebrief": "Ludwig's angina is a rapidly progressive cellulitis of the floor of the mouth involving bilateral submandibular spaces. Unlike other deep neck infections, it typically doesn't form an abscess but creates a woody induration that can compromise the airway. How did the patient's risk factors - diabetes, poor dentition, and immunocompromise - contribute to this presentation?"
+      "finalDebrief": "Ludwig's angina is a rapidly progressive cellulitis of the floor of the mouth involving bilateral submandibular spaces. Unlike other deep neck infections, it typically doesn't form an abscess but creates a woody induration that can compromise the airway. How did the patient's risk factors - diabetes, poor dentition, and immunocompromise - contribute to this presentation?",
+      "final": "Diagnosis: Ludwig's angina \u2014 airway emergency. Key learning: (1) Ludwig's angina = bilateral infection of submandibular, sublingual, AND submental spaces simultaneously. True surgical and airway emergency \u2014 mortality historically 50%, now <5% with early airway management and antibiotics. (2) Airway management is paramount: 'cool and calculate second, airway FIRST.' Signs of impending closure: muffled voice, drooling, stridor, inability to swallow, neck extension posturing. Awake fiberoptic intubation is gold standard \u2014 allows patient to maintain airway patency until tube secured. Crash intubation in Ludwig's can be fatal. (3) Gas on CT: indicates gas-producing organisms (polymicrobial anaerobic infection). Radiologic evidence of gas = surgical emergency \u2014 even without discrete abscess, gas suggests necrotizing fasciitis risk. (4) Diabetes as amplifier: hyperglycemia impairs neutrophil chemotaxis and killing \u2014 deep space infections spread faster and respond more slowly to antibiotics. Aggressive glucose control accelerates response. (5) Surgical drainage: if CT shows discrete abscess (not just phlegmon), ENT performs intraoral or transcervical I&D. Mandibular source tooth extracted after medical stabilization (not during acute crisis when airway is at risk)."
     }
+  },
+  "meta": {
+    "diagnosis": "Ludwig's Angina \u2014 Bilateral Submandibular Space Infection, Airway Emergency, Dental Source",
+    "caseId": "ludwigs-angina"
   }
 };

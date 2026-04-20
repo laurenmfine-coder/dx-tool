@@ -1,4 +1,4 @@
-/* emr-data/sbo-strangulation.js — Auto-generated EMR case data for SBO with Strangulation */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Richard Kowalski",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "8033 Peachtree Rd, Baltimore, MD 21206",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Maria Kowalski",
       "phone": "(412) 555-4545",
@@ -26,38 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Prior abdominal surgery (appendectomy, cholecystectomy)",
+      "problem": "SBO with strangulation \u2014 closed-loop obstruction",
+      "icd": "K56.69",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Henry Walsh, 68M \u2014 prior appendectomy. Sudden severe colicky pain, vomiting, distension. CT: closed-loop SBO, free fluid, wall thickening."
     },
     {
-      "id": "prob-2",
-      "description": "Incisional hernia (known)",
+      "problem": "Signs of strangulation \u2014 ischemic bowel, emergency surgery required",
+      "icd": "K56.69",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CT: free peritoneal fluid, closed-loop configuration, bowel wall thickening, pneumatosis intestinalis. Time-sensitive \u2014 ischemic bowel within hours."
+    },
+    {
+      "problem": "Adhesion \u2014 from prior appendectomy, most common SBO cause",
+      "icd": "K56.50",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Adhesions from prior abdominal surgery are the most common cause of SBO in adults. Closed-loop = more dangerous than simple partial obstruction."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Lisinopril",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "NGT decompression \u2014 immediate",
+      "sig": "NG tube to suction \u2014 decompresses proximal bowel, reduces vomiting and aspiration risk. Mandatory in SBO.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Aspirin",
-      "dose": "81mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "IV fluid resuscitation \u2014 NS 1L bolus, then maintenance",
+      "sig": "SBO causes significant third-spacing and dehydration from vomiting. Resuscitate before and during surgical prep.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Broad-spectrum antibiotics \u2014 cefazolin + metronidazole",
+      "sig": "Perioperative antibiotics \u2014 covers gram-positive (skin) and anaerobes. Bacterial translocation from ischemic bowel.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Emergency laparotomy \u2014 immediate OR activation",
+      "sig": "Strangulation = surgical emergency. Every hour of delay \u2192 more ischemic bowel \u2192 greater resection and morbidity.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 OR activated"
     }
   ],
   "allergies": [
@@ -75,7 +96,7 @@ window.EMR_DATA = {
       "bp": "98/62",
       "hr": "118",
       "rr": "24",
-      "temp": "38.4°C",
+      "temp": "38.4\u00b0C",
       "spo2": "96%",
       "pain": "10/10",
       "bmi": "35",
@@ -91,148 +112,67 @@ window.EMR_DATA = {
       "cc": "Colicky abdominal pain, distension, vomiting, no BM for 2 days",
       "hpi": "Richard Kowalski is a 78-year-old male presenting with colicky abdominal pain, distension, vomiting, no bm for 2 days. Past medical history includes Prior abdominal surgery (appendectomy, cholecystectomy), Incisional hernia (known). See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "SBO with Strangulation — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "SBO with Strangulation \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-913306",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "SBO Strangulation Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "18.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "18.6",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "18",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": "L"
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Lactate",
+          "value": "3.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "4.8",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "Creatinine",
+          "value": "1.6",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "133",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "ABG \u2014 pH",
+          "value": "7.28",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "L"
+        },
+        {
+          "test": "Lipase",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Abdomen/Pelvis with Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-853040",
-      "clinical": "Colicky abdominal pain, distension, vomiting, no BM for 2 days",
-      "technique": "Standard protocol",
-      "findings": "Dilated small bowel loops up to 4.5cm with decompressed distal bowel (transition point in RLQ). Closed-loop configuration with mesenteric swirl sign. Decreased bowel wall enhancement concerning for ischemia. Moderate free fluid.",
-      "impression": "Small bowel obstruction with closed-loop configuration and signs of strangulation. Emergent surgical consultation.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Abdomen/Pelvis With IV Contrast",
+      "indication": "Acute abdomen, prior appendectomy",
+      "findings": "Closed-loop small bowel obstruction \u2014 two transition points. Dilated small bowel loops, pneumatosis intestinalis. Free peritoneal fluid. Mesenteric fat stranding. Bowel wall thickening and reduced enhancement.",
+      "impression": "SBO with strangulation signs \u2014 pneumatosis, free fluid, reduced bowel wall enhancement. Emergency surgical consultation. Time-critical."
     }
   ],
   "immunizations": [
@@ -323,13 +263,12 @@ window.EMR_DATA = {
       "Assessment for masses or organomegaly": "No palpable masses or organomegaly detected through the distended abdomen."
     },
     "ddxTargets": [
-      "Adhesive small bowel obstruction (correct diagnosis)",
-      "Incarcerated incisional hernia",
-      "Large bowel obstruction",
-      "Mesenteric ischemia",
-      "Bowel perforation with peritonitis",
-      "Severe gastroenteritis",
-      "Inflammatory bowel disease flare"
+      "SBO with strangulation \u2014 closed-loop, pneumatosis, free fluid (correct)",
+      "Simple adhesive SBO without strangulation \u2014 no strangulation signs; NG decompression + observation possible",
+      "Large bowel obstruction \u2014 colon dilated, not small bowel; different CT pattern",
+      "Volvulus \u2014 sigmoid or cecal twisting; may be closed-loop; depends on CT findings",
+      "Incarcerated hernia \u2014 examine for inguinal/umbilical/incisional hernia; CT confirms",
+      "Mesenteric ischemia \u2014 similar CT findings possible; SBO creates secondary ischemia here"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the visible incisional hernia and assuming it's the cause of obstruction, when adhesions from prior surgeries are more likely culprit.",
@@ -339,7 +278,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential diagnosis. I notice you're considering mechanical causes of bowel obstruction. Given this patient's surgical history of appendectomy and cholecystectomy, what's the most common cause of small bowel obstruction in patients with prior abdominal surgery? Also, when you examine him, pay special attention to the characteristics of his hernia - what findings would suggest it's causing his obstruction versus being an incidental finding?",
       "phase5": "Excellent history and physical exam. Your findings of high-pitched bowel sounds, abdominal distension, and the clinical picture strongly suggest mechanical small bowel obstruction. I noticed the incisional hernia was easily reducible and non-tender - what does this tell you about its role in his current presentation? Given his extensive surgical history, what's the most likely anatomical cause of his obstruction?",
-      "finalDebrief": "This case highlights the importance of not being misled by obvious findings like hernias when they don't fit the clinical picture. The key was recognizing that a reducible, non-tender hernia is unlikely to cause obstruction, while adhesions from prior surgeries (appendectomy and cholecystectomy) are the most common cause of small bowel obstruction in patients with surgical history. The high-pitched bowel sounds and classic cramping pain pattern were your diagnostic clues for mechanical obstruction. How might imaging help confirm the diagnosis and guide management decisions?"
+      "finalDebrief": "This case highlights the importance of not being misled by obvious findings like hernias when they don't fit the clinical picture. The key was recognizing that a reducible, non-tender hernia is unlikely to cause obstruction, while adhesions from prior surgeries (appendectomy and cholecystectomy) are the most common cause of small bowel obstruction in patients with surgical history. The high-pitched bowel sounds and classic cramping pain pattern were your diagnostic clues for mechanical obstruction. How might imaging help confirm the diagnosis and guide management decisions?",
+      "final": "Diagnosis: SBO with strangulation \u2014 emergency surgery. Key learning: (1) SBO management algorithm: partial SBO without strangulation signs \u2192 NG decompression + IV fluids + observation 24-48h (Gastrografin study if non-operative management considered). Complete SBO or strangulation signs \u2192 emergency surgery. Strangulation signs mandate OR \u2014 no trial of non-operative management. (2) CT signs of strangulation: closed-loop configuration (two transition points), pneumatosis intestinalis (gas in bowel wall = mucosal necrosis), free peritoneal fluid (bowel leak or ischemia), reduced or absent bowel wall enhancement, mesenteric fat stranding. ANY of these = presumed strangulation = surgery. (3) Closed-loop obstruction: two points of obstruction with a loop of bowel trapped between \u2192 most dangerous configuration. Vascular supply to the trapped loop can twist with the bowel \u2192 strangulation develops rapidly. (4) Adhesions are the most common cause of SBO in adults (60-75%) \u2014 typically from prior abdominal surgery. Other causes: hernias, malignancy, Crohn's stricture, intussusception, volvulus. (5) Surgical approach: laparoscopic adhesiolysis if feasible for simple adhesion without strangulation. Open laparotomy for strangulation, extensive adhesions, or bowel resection needed. Damage control surgery if hemodynamically unstable \u2014 resect ischemic segment, leave bowel in discontinuity, return to OR in 24-48h when stable (Hartmann procedure concept)."
     }
+  },
+  "meta": {
+    "diagnosis": "Small Bowel Obstruction \u2014 Strangulation, Free Fluid, Emergency Laparotomy",
+    "caseId": "sbo-strangulation"
   }
 };

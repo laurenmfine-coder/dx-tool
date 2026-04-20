@@ -1,8 +1,8 @@
-/* emr-data/sah-v1.js — Auto-generated EMR case data for Subarachnoid Hemorrhage */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Jennifer Wu",
-    "patientHPI": "I was just sitting at my desk when suddenly I got hit with an incredibly severe headache — it came on in seconds. I've never experienced anything like this before, I'm terrified.",
+    "patientHPI": "I was just sitting at my desk when suddenly I got hit with an incredibly severe headache \u2014 it came on in seconds. I've never experienced anything like this before, I'm terrified.",
     "dob": "09/16/1984",
     "age": "42",
     "sex": "Female",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "8726 Clover St, Albuquerque, NM 87103",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Michelle Foster, MD",
-    "pharmacy": "Walmart Pharmacy — Sunrise Blvd",
+    "pharmacy": "Walmart Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Joseph Wu",
       "phone": "(617) 555-9843",
@@ -26,36 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Hypertension",
+      "problem": "Subarachnoid hemorrhage \u2014 aneurysmal, CT positive",
+      "icd": "I60.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Elena Reyes, 47F \u2014 sudden severe headache 'worst of my life' during exercise, vomiting, neck stiffness. Hemorrhage on CT."
     },
     {
-      "id": "prob-2",
-      "description": "Smoker",
+      "problem": "Berry aneurysm \u2014 8mm left MCA aneurysm on CTA",
+      "icd": "I67.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CT angiography: 8mm left MCA bifurcation aneurysm \u2014 likely source. Neurovascular surgery evaluating coiling vs clipping."
     },
     {
-      "id": "prob-3",
-      "description": "Family history of aneurysms",
+      "problem": "Vasospasm prevention \u2014 nimodipine protocol initiated",
+      "icd": "I60.9",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Cerebral vasospasm occurs 3-14 days post-SAH \u2014 leading cause of delayed morbidity. Nimodipine reduces vasospasm-related mortality."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Lisinopril",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Nimodipine 60mg PO q4h x21 days \u2014 vasospasm prevention",
+      "sig": "Oral calcium channel blocker \u2014 reduces cerebral vasospasm and improves neurologic outcome post-SAH. Give even if patient is NPO via NG tube (capsule contents via tube).",
+      "prescriber": "Neurosurgery/Neurology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Labetalol IV PRN \u2014 BP control <160 systolic",
+      "sig": "SBP target <160 before aneurysm secured. After securing: permissive hypertension to maintain cerebral perfusion.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active PRN"
+    },
+    {
+      "name": "Levetiracetam 1000mg IV BID \u2014 seizure prophylaxis",
+      "sig": "Short-term seizure prophylaxis (7 days) \u2014 reduces re-bleeding risk from seizure-induced BP surge before aneurysm is secured.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 7-day course"
+    },
+    {
+      "name": "Stool softeners + anti-emetics \u2014 prevent Valsalva",
+      "sig": "Valsalva maneuver increases ICP and can precipitate re-bleeding. Docusate sodium + ondansetron.",
+      "prescriber": "Neurosurgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -73,7 +96,7 @@ window.EMR_DATA = {
       "bp": "192/108",
       "hr": "68",
       "rr": "16",
-      "temp": "37.2°C",
+      "temp": "37.2\u00b0C",
       "spo2": "98%",
       "pain": "10/10",
       "bmi": "37",
@@ -86,156 +109,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/01/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Worst headache of my life — sudden onset thunderclap",
+      "cc": "Worst headache of my life \u2014 sudden onset thunderclap",
       "hpi": "Jennifer Wu is a 42-year-old female presenting with sudden severe headache. Past medical history includes Hypertension, Smoker, Family history of aneurysms. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Subarachnoid Hemorrhage — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Subarachnoid Hemorrhage \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-230499",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "SAH Assessment",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CT Head Non-Contrast \u2014 acute",
+          "value": "Blood in basal cisterns, sylvian fissure \u2014 SAH pattern",
+          "unit": "",
+          "ref": "No blood",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "CSF \u2014 xanthochromia",
+          "value": "Yellow \u2014 xanthochromia positive",
+          "unit": "",
+          "ref": "Clear",
+          "flag": "H"
+        },
+        {
+          "test": "CSF \u2014 RBC",
+          "value": "100,000",
+          "unit": "cells/\u03bcL",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "CSF \u2014 WBC",
+          "value": "50",
+          "unit": "cells/\u03bcL",
+          "ref": "<5",
+          "flag": "H"
+        },
+        {
+          "test": "Sodium",
+          "value": "134",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "Troponin I",
+          "value": "0.14",
+          "unit": "ng/mL",
+          "ref": "<0.04",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CT Head without Contrast",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-805265",
-      "clinical": "Worst headache of my life — sudden onset thunderclap",
-      "technique": "Standard protocol",
-      "findings": "Diffuse subarachnoid hemorrhage in the basal cisterns, Sylvian fissures, and interhemispheric fissure. Modified Fisher Grade 3. No hydrocephalus.",
-      "impression": "Acute subarachnoid hemorrhage. CTA recommended to identify aneurysm.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/01/2026",
-      "study": "CTA Head",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-175224",
-      "clinical": "Worst headache of my life — sudden onset thunderclap",
-      "technique": "Standard protocol",
-      "findings": "7mm saccular aneurysm at the anterior communicating artery bifurcation. No other aneurysms.",
-      "impression": "AComm aneurysm — likely source of SAH. Neurosurgery consultation.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Angiography Head",
+      "indication": "SAH \u2014 aneurysm identification",
+      "findings": "8mm left MCA bifurcation aneurysm \u2014 lobulated, irregular margins. No other aneurysms. No arteriovenous malformation.",
+      "impression": "Left MCA aneurysm \u2014 likely source of SAH. Neurovascular surgery urgent consultation. Coiling vs clipping decision pending."
     }
   ],
   "immunizations": [
@@ -330,13 +267,12 @@ window.EMR_DATA = {
       "Kernig's and Brudzinski's signs": "Brudzinski's sign negative, Kernig's sign equivocal due to patient guarding"
     },
     "ddxTargets": [
-      "Subarachnoid hemorrhage (correct diagnosis)",
-      "Intracerebral hemorrhage",
-      "Meningitis",
-      "Cerebral aneurysm rupture",
-      "Hypertensive emergency",
-      "Migraine with aura",
-      "Tension headache"
+      "Aneurysmal SAH \u2014 thunderclap headache, basal cistern blood, MCA aneurysm (correct)",
+      "Thunderclap headache \u2014 benign sentinel bleed is SAH until proven otherwise",
+      "Meningitis \u2014 fever, gradual onset, CSF differs (WBC higher, glucose low)",
+      "Hypertensive intracerebral hemorrhage \u2014 parenchymal blood, not cistern pattern",
+      "Cerebral venous sinus thrombosis \u2014 different headache pattern, different CT findings",
+      "Reversible cerebral vasoconstriction syndrome \u2014 similar presentation, repeat imaging needed"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on family history of aneurysm and immediately assuming SAH without considering other causes of thunderclap headache",
@@ -346,7 +282,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several concerning differentials. Given this patient's presentation of sudden-onset severe headache, what specific historical features will help you distinguish between these diagnoses? Think about the timeline and character of symptom onset.",
       "phase5": "Now that you've completed your evaluation, let's think through your findings systematically. You have a patient with thunderclap headache onset, family history of aneurysm, hypertension, and some nuchal rigidity. How do these findings help narrow your differential diagnosis?",
-      "finalDebrief": "This case highlights the classic presentation of subarachnoid hemorrhage - thunderclap headache onset, family history, and nuchal rigidity were key clues. Notice how the dramatic symptom onset and patient's description of 'worst headache of life' should immediately raise concern for SAH, despite the temptation to attribute symptoms to her known hypertension."
+      "finalDebrief": "This case highlights the classic presentation of subarachnoid hemorrhage - thunderclap headache onset, family history, and nuchal rigidity were key clues. Notice how the dramatic symptom onset and patient's description of 'worst headache of life' should immediately raise concern for SAH, despite the temptation to attribute symptoms to her known hypertension.",
+      "final": "Diagnosis: aneurysmal SAH. Key learning: (1) 'Worst headache of my life' + thunderclap onset = SAH until proven otherwise. Sensitivity of non-contrast CT within 6h of onset is ~98-99%. After 6h, sensitivity drops (blood is reabsorbed) \u2192 LP for xanthochromia required if CT negative. Xanthochromia (yellow CSF) from RBC breakdown is detectable within 2-4h and persists 2 weeks. (2) LP timing: if CT negative, LP should be performed at least 6h after headache onset \u2014 false negatives occur if LP done too early before xanthochromia develops. (3) Nimodipine mechanism: calcium channel blocker that reduces cerebral vasospasm \u2014 the leading cause of delayed morbidity (days 3-14 post-SAH). Does NOT prevent vasospasm radiographically but reduces neurologic deficits and mortality. Give 60mg q4h for 21 days regardless of vasospasm status. (4) Re-bleeding risk: highest in first 24h (~15%). Maintain SBP <160 before aneurysm is secured. Anti-emetics and stool softeners prevent Valsalva-induced re-bleeding. (5) Treatment \u2014 coiling vs clipping: endovascular coiling is preferred when feasible (less invasive, faster recovery, equivalent long-term durability per ISAT trial). Surgical clipping preferred for wide-necked aneurysms, MCA aneurysms with intracerebral hematoma requiring evacuation. Neurovascular team decides based on anatomy and patient factors."
     }
+  },
+  "meta": {
+    "diagnosis": "Subarachnoid Hemorrhage \u2014 'Thunderclap' Headache, Berry Aneurysm, Emergency Neurosurgical Evaluation",
+    "caseId": "sah-v1"
   }
 };

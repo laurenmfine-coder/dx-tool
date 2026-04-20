@@ -1,4 +1,4 @@
-/* emr-data/milk-allergy-infant-v2.js — Variation: Cow's Milk Protein Allergy */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "1519 W Haddon Ave, Kansas City, MO 64123",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Okafor",
         "phone": "(614) 555-8136",
@@ -40,12 +40,12 @@ window.EMR_DATA = {
       }
     ],
     "familyHistory": [
-      "Mother: lactose intolerance (different mechanism — mother confuses this with baby's allergy)"
+      "Mother: lactose intolerance (different mechanism \u2014 mother confuses this with baby's allergy)"
     ],
     "socialHistory": [
       [
         "Feeding",
-        "Breastfed — mother has NOT eliminated dairy from own diet despite pediatrician's recommendation"
+        "Breastfed \u2014 mother has NOT eliminated dairy from own diet despite pediatrician's recommendation"
       ],
       [
         "Mother misconception",
@@ -53,11 +53,11 @@ window.EMR_DATA = {
       ],
       [
         "WIC",
-        "On WIC program — hypoallergenic formula expensive even with WIC"
+        "On WIC program \u2014 hypoallergenic formula expensive even with WIC"
       ],
       [
         "Growth",
-        "Falling off growth curve — now <5th percentile weight"
+        "Falling off growth curve \u2014 now <5th percentile weight"
       ],
       [
         "Social",
@@ -68,13 +68,13 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "6-month-old with bloody stools, poor weight gain, and irritability — breastfed but mother eating dairy",
+        "chiefComplaint": "6-month-old with bloody stools, poor weight gain, and irritability \u2014 breastfed but mother eating dairy",
         "diagnosis": "Cow's Milk Protein Allergy"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CMPA — non-IgE (proctocolitis) in breastfed infant",
+          "description": "CMPA \u2014 non-IgE (proctocolitis) in breastfed infant",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -88,7 +88,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Failure to thrive — <5th percentile weight",
+          "description": "Failure to thrive \u2014 <5th percentile weight",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -102,7 +102,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-5",
-          "description": "WIC — need hypoallergenic formula coverage if breastfeeding fails",
+          "description": "WIC \u2014 need hypoallergenic formula coverage if breastfeeding fails",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -135,7 +135,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "148",
           "rr": "34",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -158,7 +158,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "8.2",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -172,7 +172,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -275,8 +275,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "6-month-old with bloody stools, poor weight gain, and irritability — breastfed but mother eating dairy",
-          "hpi": "6-month-old EBF female brought for bloody stools and poor weight gain. Falling off growth curve — <5th percentile weight (was 25th at 2 months). Mother reports she \"eliminated dairy\" but on detailed dietary review: still eating cheese on sandwiches, yogurt daily, and butter in cooking. She equates her own lactose intolerance (enzyme deficiency, affects HER) with baby's cow milk protein allergy (immune-mediated, affects BABY through breast milk). These are completely different mechanisms. Baby needs either TRUE maternal dairy elimination (every source of cow milk protein) or switch to extensively hydrolyzed formula. Iron deficiency from chronic GI blood loss.",
+          "cc": "6-month-old with bloody stools, poor weight gain, and irritability \u2014 breastfed but mother eating dairy",
+          "hpi": "6-month-old EBF female brought for bloody stools and poor weight gain. Falling off growth curve \u2014 <5th percentile weight (was 25th at 2 months). Mother reports she \"eliminated dairy\" but on detailed dietary review: still eating cheese on sandwiches, yogurt daily, and butter in cooking. She equates her own lactose intolerance (enzyme deficiency, affects HER) with baby's cow milk protein allergy (immune-mediated, affects BABY through breast milk). These are completely different mechanisms. Baby needs either TRUE maternal dairy elimination (every source of cow milk protein) or switch to extensively hydrolyzed formula. Iron deficiency from chronic GI blood loss.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -329,7 +329,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "142",
           "rr": "32",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -352,7 +352,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -366,7 +366,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -439,20 +439,20 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — CMPA management, breastfeeding support with TRUE elimination, growth monitoring",
+        "chiefComplaint": "A/I consult \u2014 CMPA management, breastfeeding support with TRUE elimination, growth monitoring",
         "diagnosis": "Cow's Milk Protein Allergy"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CMPA (non-IgE proctocolitis) — confirmed",
+          "description": "CMPA (non-IgE proctocolitis) \u2014 confirmed",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Maternal diet counseling — must eliminate ALL cow milk protein (not just \"milk\")",
+          "description": "Maternal diet counseling \u2014 must eliminate ALL cow milk protein (not just \"milk\")",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -466,14 +466,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-4",
-          "description": "Failure to thrive — nutritionist involved",
+          "description": "Failure to thrive \u2014 nutritionist involved",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Mother education: lactose intolerance ≠ cow milk protein allergy",
+          "description": "Mother education: lactose intolerance \u2260 cow milk protein allergy",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -487,7 +487,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-7",
-          "description": "WIC coverage for specialty formula — requires physician letter",
+          "description": "WIC coverage for specialty formula \u2014 requires physician letter",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -497,7 +497,7 @@ window.EMR_DATA = {
         {
           "id": "med-1",
           "name": "Maternal dairy elimination",
-          "dose": "Complete — including hidden dairy (casein, whey, lactoglobulin)",
+          "dose": "Complete \u2014 including hidden dairy (casein, whey, lactoglobulin)",
           "route": "",
           "frequency": "Minimum 2-4 weeks to see improvement",
           "status": "Active",
@@ -529,7 +529,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "138",
           "rr": "30",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -552,7 +552,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -566,7 +566,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -629,8 +629,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — CMPA management, breastfeeding support with TRUE elimination, growth monitoring",
-          "hpi": "A/I consult: 6-month-old with CMPA proctocolitis. Mother counseled extensively on TRUE dairy elimination — provided written list of ALL names for cow milk protein on food labels (casein, caseinates, whey, lactalbumin, lactoglobulin, ghee, curds). Mother initially resistant: \"but yogurt is different from milk, right?\" Education: the PROTEIN is what causes baby's reaction, and it's in ALL dairy products regardless of form. Gave 2-week strict elimination trial. WIC letter written for Nutramigen coverage as backup if breastfeeding + elimination fails. Nutritionist: ensuring mother gets adequate calcium and protein without dairy.",
+          "cc": "A/I consult \u2014 CMPA management, breastfeeding support with TRUE elimination, growth monitoring",
+          "hpi": "A/I consult: 6-month-old with CMPA proctocolitis. Mother counseled extensively on TRUE dairy elimination \u2014 provided written list of ALL names for cow milk protein on food labels (casein, caseinates, whey, lactalbumin, lactoglobulin, ghee, curds). Mother initially resistant: \"but yogurt is different from milk, right?\" Education: the PROTEIN is what causes baby's reaction, and it's in ALL dairy products regardless of form. Gave 2-week strict elimination trial. WIC letter written for Nutramigen coverage as backup if breastfeeding + elimination fails. Nutritionist: ensuring mother gets adequate calcium and protein without dairy.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -639,34 +639,34 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "CMPA follow-up — 4 weeks of true maternal dairy elimination, bloody stools resolved, weight improving",
+        "chiefComplaint": "CMPA follow-up \u2014 4 weeks of true maternal dairy elimination, bloody stools resolved, weight improving",
         "diagnosis": "Cow's Milk Protein Allergy"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "CMPA — bloody stools resolved within 10 days of true maternal dairy elimination",
+          "description": "CMPA \u2014 bloody stools resolved within 10 days of true maternal dairy elimination",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Weight — gaining well, now 8th percentile (was <5th)",
+          "description": "Weight \u2014 gaining well, now 8th percentile (was <5th)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Iron — supplementing, Hgb improving",
+          "description": "Iron \u2014 supplementing, Hgb improving",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Mother successfully maintaining dairy-free diet — using WIC-approved alternatives",
+          "description": "Mother successfully maintaining dairy-free diet \u2014 using WIC-approved alternatives",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -715,7 +715,7 @@ window.EMR_DATA = {
           "bp": "N/A",
           "hr": "128",
           "rr": "28",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "N/A/10"
         }
@@ -738,7 +738,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -752,7 +752,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -815,8 +815,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "CMPA follow-up — 4 weeks of true maternal dairy elimination, bloody stools resolved, weight improving",
-          "hpi": "6-month-old returns 4 weeks into true maternal dairy elimination. Stools completely normal — no blood. Weight catch-up beginning (8th percentile from <5th). Mother now reading every label — \"I had no idea cheese powder was in so many things.\" Lactation consultant involved to ensure adequate breast milk supply on dairy-free diet. Plan: continue elimination while breastfeeding, introduce baked milk (muffin with milk baked in) at age 12 months under supervision — 75% of CMPA infants tolerate baked milk by age 1. If tolerates baked → gradual milk ladder over months.",
+          "cc": "CMPA follow-up \u2014 4 weeks of true maternal dairy elimination, bloody stools resolved, weight improving",
+          "hpi": "6-month-old returns 4 weeks into true maternal dairy elimination. Stools completely normal \u2014 no blood. Weight catch-up beginning (8th percentile from <5th). Mother now reading every label \u2014 \"I had no idea cheese powder was in so many things.\" Lactation consultant involved to ensure adequate breast milk supply on dairy-free diet. Plan: continue elimination while breastfeeding, introduce baked milk (muffin with milk baked in) at age 12 months under supervision \u2014 75% of CMPA infants tolerate baked milk by age 1. If tolerates baked \u2192 gradual milk ladder over months.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -838,70 +838,62 @@ window.EMR_DATA = {
     "address": "9437 Hollyhock Rd, New Orleans, LA 70112",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Okafor",
       "phone": "(503) 555-5022",
       "relationship": "Parent"
     },
-    "chiefComplaint": "6-month-old with bloody stools, poor weight gain, and irritability — breastfed but mother eating dairy",
+    "chiefComplaint": "6-month-old with bloody stools, poor weight gain, and irritability \u2014 breastfed but mother eating dairy",
     "diagnosis": "Cow's Milk Protein Allergy"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "CMPA — non-IgE (proctocolitis) in breastfed infant",
+      "problem": "Cow's milk protein allergy \u2014 non-IgE proctocolitis, breastfed",
+      "icd": "K52.29",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Amara Johnson, 6W \u2014 bloody mucoid stools x10 days. Exclusively breastfed. Otherwise thriving (weight 75th %ile)."
     },
     {
-      "id": "prob-2",
-      "description": "Mother has NOT eliminated dairy from diet (says she did but still eating cheese and yogurt)",
+      "problem": "Rectal bleeding \u2014 eosinophilic proctocolitis from maternal dairy antigens",
+      "icd": "K92.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Cow's milk protein antigens pass through breast milk \u2192 eosinophilic infiltration of infant rectum/colon \u2192 mucosal bleeding."
     },
     {
-      "id": "prob-3",
-      "description": "Failure to thrive — <5th percentile weight",
+      "problem": "Thriving infant \u2014 CMPA proctocolitis does NOT cause weight loss",
+      "icd": "K52.29",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Mother confuses her own lactose intolerance with baby's CMPA (completely different)",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-5",
-      "description": "WIC — need hypoallergenic formula coverage if breastfeeding fails",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Key distinction: proctocolitis = bloody stool but well, growing infant. FPIES = vomiting, poor growth. Enteropathy = diarrhea, poor growth."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Maternal dairy elimination",
-      "dose": "",
-      "route": "",
-      "frequency": "Mother must eliminate ALL cow milk protein from HER diet while breastfeeding",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Maternal dairy elimination \u2014 all cow's milk products",
+      "sig": "Strict elimination of all dairy (milk, cheese, yogurt, butter, casein, whey in ingredient lists). Improvement in 2-4 weeks.",
+      "prescriber": "Allergy/Pediatrics",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Iron supplement",
-      "dose": "1mg/kg/day",
-      "route": "PO",
-      "frequency": "Daily (for iron deficiency from chronic GI blood loss)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Maternal calcium 1000mg + vitamin D 600 IU daily \u2014 supplementation",
+      "sig": "Replace calcium lost from dairy elimination.",
+      "prescriber": "Pediatrics/OB",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Continue breastfeeding \u2014 preferred over formula switch",
+      "sig": "Breastfeeding continues during maternal elimination \u2014 significant immunologic benefits. Only switch to amino acid formula if maternal elimination fails after 4 weeks strict adherence.",
+      "prescriber": "Pediatrics",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -919,7 +911,7 @@ window.EMR_DATA = {
       "bp": "N/A",
       "hr": "148",
       "rr": "34",
-      "temp": "37.0°C",
+      "temp": "37.0\u00b0C",
       "spo2": "99%",
       "pain": "N/A/10"
     }
@@ -930,8 +922,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "6-month-old with bloody stools, poor weight gain, and irritability — breastfed but mother eating dairy",
-      "hpi": "6-month-old EBF female brought for bloody stools and poor weight gain. Falling off growth curve — <5th percentile weight (was 25th at 2 months). Mother reports she \"eliminated dairy\" but on detailed dietary review: still eating cheese on sandwiches, yogurt daily, and butter in cooking. She equates her own lactose intolerance (enzyme deficiency, affects HER) with baby's cow milk protein allergy (immune-mediated, affects BABY through breast milk). These are completely different mechanisms. Baby needs either TRUE maternal dairy elimination (every source of cow milk protein) or switch to extensively hydrolyzed formula. Iron deficiency from chronic GI blood loss.",
+      "cc": "6-month-old with bloody stools, poor weight gain, and irritability \u2014 breastfed but mother eating dairy",
+      "hpi": "6-month-old EBF female brought for bloody stools and poor weight gain. Falling off growth curve \u2014 <5th percentile weight (was 25th at 2 months). Mother reports she \"eliminated dairy\" but on detailed dietary review: still eating cheese on sandwiches, yogurt daily, and butter in cooking. She equates her own lactose intolerance (enzyme deficiency, affects HER) with baby's cow milk protein allergy (immune-mediated, affects BABY through breast milk). These are completely different mechanisms. Baby needs either TRUE maternal dairy elimination (every source of cow milk protein) or switch to extensively hydrolyzed formula. Iron deficiency from chronic GI blood loss.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -939,128 +931,43 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-300564",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Infant CMPA Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "8.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "9.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Stool occult blood",
+          "value": "Positive",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Stool eosinophils",
+          "value": "Present \u2014 abundant",
+          "unit": "",
+          "ref": "Absent",
+          "flag": "H"
         },
         {
-          "name": "NUTRITION/GI",
-          "results": [
-            {
-              "test": "Iron",
-              "value": "28",
-              "unit": "mcg/dL",
-              "range": "50-120",
-              "flag": "L"
-            },
-            {
-              "test": "Ferritin",
-              "value": "8",
-              "unit": "ng/mL",
-              "range": "12-150",
-              "flag": "L"
-            },
-            {
-              "test": "Albumin",
-              "value": "3.0",
-              "unit": "g/dL",
-              "range": "3.5-5.0",
-              "flag": "L"
-            },
-            {
-              "test": "Stool occult blood",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            },
-            {
-              "test": "Stool calprotectin",
-              "value": "320",
-              "unit": "mcg/g",
-              "range": "<50",
-              "flag": "H"
-            }
-          ]
+          "test": "Cow's milk IgE (infant)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Total IgE (infant)",
+          "value": "2",
+          "unit": "IU/mL",
+          "ref": "<10",
+          "flag": ""
+        },
+        {
+          "test": "Weight",
+          "value": "75th percentile \u2014 well above average",
+          "unit": "",
+          "ref": "Following curve",
+          "flag": ""
         }
       ]
     }
@@ -1075,12 +982,12 @@ window.EMR_DATA = {
     }
   ],
   "familyHistory": [
-    "Mother: lactose intolerance (different mechanism — mother confuses this with baby's allergy)"
+    "Mother: lactose intolerance (different mechanism \u2014 mother confuses this with baby's allergy)"
   ],
   "socialHistory": [
     [
       "Feeding",
-      "Breastfed — mother has NOT eliminated dairy from own diet despite pediatrician's recommendation"
+      "Breastfed \u2014 mother has NOT eliminated dairy from own diet despite pediatrician's recommendation"
     ],
     [
       "Mother misconception",
@@ -1088,11 +995,11 @@ window.EMR_DATA = {
     ],
     [
       "WIC",
-      "On WIC program — hypoallergenic formula expensive even with WIC"
+      "On WIC program \u2014 hypoallergenic formula expensive even with WIC"
     ],
     [
       "Growth",
-      "Falling off growth curve — now <5th percentile weight"
+      "Falling off growth curve \u2014 now <5th percentile weight"
     ],
     [
       "Social",
@@ -1192,13 +1099,12 @@ window.EMR_DATA = {
       "Overall developmental assessment": "Meets developmental milestones for age, interactive and alert"
     },
     "ddxTargets": [
-      "Cow's milk protein allergy (CMPA) - non-IgE mediated proctocolitis (correct diagnosis)",
-      "Food protein-induced enterocolitis syndrome (FPIES)",
-      "Infectious colitis",
-      "Necrotizing enterocolitis",
-      "Intussusception",
-      "Lactose intolerance",
-      "Normal infant growth variation with coincidental blood"
+      "Cow's milk proctocolitis \u2014 breastfed, maternal dairy antigen, thriving infant (correct)",
+      "Infectious colitis \u2014 stool cultures negative; dairy timing is key",
+      "Necrotizing enterocolitis \u2014 preterm infant; this is term, exclusively breastfed",
+      "Anal fissure \u2014 localized bright blood without systemic inflammation or eosinophils",
+      "Intussusception \u2014 episodic pain, currant jelly; this is chronic mucoid blood",
+      "Meckel's diverticulum \u2014 painless, significant blood loss; not mucoid"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on mother's self-reported 'dairy elimination' without thoroughly exploring what she actually eats daily",
@@ -1208,7 +1114,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several possible causes for bloody stools in an infant. Before interviewing the patient, what specific questions would help you differentiate between infectious causes, anatomical problems, and food-related issues? What details about the maternal diet would be most important to explore?",
       "phase5": "Now that you have the history and physical findings, what stands out about the timeline of symptoms, the mother's dietary history, and the growth pattern? How does the mother's understanding of her own lactose intolerance potentially complicate this case? What would be your next steps?",
-      "finalDebrief": "This case highlights how CMPA can present with both GI symptoms and failure to thrive in breastfed infants. Notice how the mother's confusion between lactose intolerance and milk protein allergy led to inadequate dietary elimination. What does this teach us about patient education and the importance of detailed dietary history? How would you counsel this family moving forward?"
+      "finalDebrief": "This case highlights how CMPA can present with both GI symptoms and failure to thrive in breastfed infants. Notice how the mother's confusion between lactose intolerance and milk protein allergy led to inadequate dietary elimination. What does this teach us about patient education and the importance of detailed dietary history? How would you counsel this family moving forward?",
+      "final": "Diagnosis: cow's milk protein allergy proctocolitis \u2014 breastfed infant. Key learning: (1) CMPA proctocolitis presentation: healthy, thriving, exclusively breastfed infant with bloody or mucoid bloody stools \u2014 typically appears around 2-8 weeks of age. Weight gain normal. No vomiting. No irritability with feeds. This distinguishes proctocolitis from FPIES (vomiting, lethargy) and protein-losing enteropathy (poor weight gain, diarrhea). (2) Non-IgE-mediated mechanism: IgE testing (RAST, skin prick) is NEGATIVE \u2014 this is a T-cell/eosinophil-mediated reaction, not IgE. Do not use negative IgE testing to rule out CMPA proctocolitis. (3) Maternal elimination is first-line: strict dairy elimination by mother allows breastfeeding to continue. Improvement within 2-4 weeks. If no improvement after 4 weeks of strict elimination, also eliminate soy (10-15% of cow's milk CMPA also react to soy). (4) Resolution: most CMPA proctocolitis resolves by 12-18 months. Reintroduction under guidance at that time. (5) Formula-fed alternative: if maternal elimination fails or mother cannot eliminate dairy, switch to extensively hydrolyzed formula (Alimentum, Nutramigen) \u2014 ~90% tolerated. Amino acid formula (Neocate) for the ~10% who react to extensively hydrolyzed. Do NOT use soy formula in CMPA (cross-reactive in ~40% of non-IgE CMPA)."
     }
+  },
+  "meta": {
+    "diagnosis": "Cow's Milk Protein Allergy \u2014 Non-IgE-Mediated Proctocolitis, Breastfed Infant, Maternal Elimination Diet",
+    "caseId": "milk-allergy-infant-v2"
   }
 };

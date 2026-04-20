@@ -23,21 +23,43 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: IOP 28 OU",
-      "icd": "Z00.00",
+      "problem": "Ocular hypertension \u2014 IOP 26-28 mmHg bilaterally, no glaucoma yet",
+      "icd": "H40.051",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Marcus Johnson, 48M \u2014 referred for elevated IOP found on routine optometry exam. Optic nerves healthy. Visual fields normal."
+    },
+    {
+      "problem": "Central corneal thickness 620 microns bilaterally \u2014 thick corneas",
+      "icd": "H40.051",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Thick corneas cause IOP OVERESTIMATION by Goldmann tonometry. True IOP may be lower than measured. CCT adjusts risk calculation."
+    },
+    {
+      "problem": "OHTS risk calculation \u2014 5-year risk of glaucoma conversion <5%",
+      "icd": "H40.051",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Ocular Hypertension Treatment Study calculator: age, IOP, CCT, cup-to-disc ratio, visual field PSD. This patient: low-risk. Observation appropriate."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Marcus Johnson, MD",
-      "start": "01/2024",
-      "refills": 3,
-      "status": "Active"
+      "name": "Observation \u2014 no treatment yet (low OHTS risk score)",
+      "sig": "Annual IOP monitoring, optic nerve photos, visual field testing. Treat if risk increases or optic nerve change noted.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 monitor"
+    },
+    {
+      "name": "Latanoprost 0.005% (if treatment decided) \u2014 first-line prostaglandin",
+      "sig": "If treatment initiated: 1 drop affected eye(s) at bedtime. Prostaglandin analogue \u2014 increases uveoscleral outflow. Most effective IOP-lowering agent.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Hold \u2014 for future use if indicated"
     }
   ],
   "allergies": [
@@ -97,8 +119,65 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "Ocular Hypertension Assessment",
+      "results": [
+        {
+          "test": "IOP right eye (Goldmann)",
+          "value": "27",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": "H"
+        },
+        {
+          "test": "IOP left eye (Goldmann)",
+          "value": "26",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": "H"
+        },
+        {
+          "test": "CCT right eye",
+          "value": "620",
+          "unit": "microns",
+          "ref": "530-540 average",
+          "flag": "H"
+        },
+        {
+          "test": "CCT left eye",
+          "value": "618",
+          "unit": "microns",
+          "ref": "530-540 average",
+          "flag": "H"
+        },
+        {
+          "test": "Cup-to-disc ratio",
+          "value": "0.3 bilaterally",
+          "unit": "",
+          "ref": "<0.5 normal",
+          "flag": ""
+        },
+        {
+          "test": "Visual field \u2014 Humphrey 24-2",
+          "value": "Normal \u2014 no scotoma",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "Optic Nerve OCT (RNFL)",
+      "indication": "Elevated IOP \u2014 baseline structural assessment",
+      "findings": "Normal retinal nerve fiber layer thickness bilaterally. No superior or inferior thinning. Symmetric.",
+      "impression": "No structural glaucomatous damage. Consistent with ocular hypertension without glaucoma conversion."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +209,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "ocular-hypertension-corneal-thickness-od",
-    "diagnosis": "See diagnosis \u2014 IOP 28 OU",
+    "diagnosis": "Ocular Hypertension \u2014 Elevated IOP with Thick Corneas, Observation vs Treatment Decision Using OHTS Risk Calculator",
     "acuity": 3,
     "presentation": "IOP 28 OU",
     "category": "ophthalmic"
@@ -177,12 +256,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "IOP 28 OU \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Ocular hypertension \u2014 thick corneas, low OHTS risk, observation (correct)",
+      "Open-angle glaucoma \u2014 optic nerve and RNFL normal; no glaucoma yet",
+      "Pseudoexfoliation glaucoma \u2014 pseudoexfoliation material on lens not present",
+      "Secondary glaucoma from steroid use \u2014 no steroid history",
+      "Normal tension glaucoma \u2014 IOP normal or low with glaucomatous changes; this patient has elevated IOP with NORMAL optic nerve",
+      "Angle closure \u2014 open angle on gonioscopy; different mechanism"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +271,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: IOP 28 OU. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) Is this vision-threatening? What is the time-to-treatment window \u2014 and what is your ophthalmology referral urgency? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: ocular hypertension \u2014 low OHTS risk, observation. Key learning: (1) Ocular hypertension \u2260 glaucoma: OHT = elevated IOP without optic nerve damage or visual field loss. Glaucoma = structural optic nerve damage \u00b1 visual field loss. Most OHT patients NEVER develop glaucoma \u2014 treatment decision must balance progression risk vs treatment burden. (2) Central corneal thickness (CCT) and IOP: Goldmann tonometry (standard) was calibrated for CCT of ~540 microns. Thick corneas (>580) \u2192 IOP OVERESTIMATED (true IOP lower). Thin corneas (<480) \u2192 IOP UNDERESTIMATED (true IOP higher \u2014 more dangerous). CCT 620 \u2192 measured IOP 27 may reflect true IOP of ~22-23. (3) OHTS risk calculator: Ocular Hypertension Treatment Study developed a 5-year risk estimate using age, IOP, CCT, vertical C/D ratio, and visual field PSD. Low risk (<5%) = observe. High risk (>15-20%) = treat. This patient: young, thick corneas, small C/D, normal VF \u2192 low risk. (4) When to start treatment: progressive optic nerve change on photos/OCT, rising IOP beyond threshold, increased risk score, patient preference after risk counseling. (5) Glaucoma monitoring: optic nerve photos, RNFL OCT, and Humphrey visual fields annually in OHT. These structural tests detect damage before functional vision loss occurs \u2014 allowing earlier intervention."
     }
   }
 };

@@ -1,4 +1,4 @@
-/* emr-data/idiopathic-angioedema-v2.js — Variation: Idiopathic Angioedema */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "4189 Oak Ave, Columbus, OH 43211",
       "insurance": "UnitedHealthcare",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Family Contact",
         "phone": "(617) 555-7012",
@@ -45,32 +45,32 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "History",
-        "8 episodes of angioedema in 2 years — no trigger identified despite extensive workup"
+        "8 episodes of angioedema in 2 years \u2014 no trigger identified despite extensive workup"
       ],
       [
         "Workup",
-        "C4 normal, C1-INH normal, tryptase normal, no ACE inhibitor — truly idiopathic"
+        "C4 normal, C1-INH normal, tryptase normal, no ACE inhibitor \u2014 truly idiopathic"
       ],
       [
         "Mental health",
-        "Anxiety about unpredictable episodes — afraid to travel or be alone"
+        "Anxiety about unpredictable episodes \u2014 afraid to travel or be alone"
       ],
       [
         "Career",
-        "Sales representative — canceled 3 business trips due to fear of episode away from hospital"
+        "Sales representative \u2014 canceled 3 business trips due to fear of episode away from hospital"
       ]
     ]
   },
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative",
+        "chiefComplaint": "48yo with recurrent idiopathic angioedema \u2014 8th episode, lip swelling, no trigger identified, extensive workup negative",
         "diagnosis": "Idiopathic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Idiopathic angioedema — 8th episode in 2 years",
+          "description": "Idiopathic angioedema \u2014 8th episode in 2 years",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -84,14 +84,14 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-3",
-          "description": "Normal C4, C1-INH, tryptase — not HAE, not mast cell, not ACE",
+          "description": "Normal C4, C1-INH, tryptase \u2014 not HAE, not mast cell, not ACE",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Anxiety about unpredictable episodes — career and travel impaired",
+          "description": "Anxiety about unpredictable episodes \u2014 career and travel impaired",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -133,7 +133,7 @@ window.EMR_DATA = {
           "bp": "138/82",
           "hr": "92",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -156,7 +156,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -170,7 +170,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -224,7 +224,7 @@ window.EMR_DATA = {
               ]
             },
             {
-              "name": "ANGIOEDEMA WORKUP — ALL NEGATIVE",
+              "name": "ANGIOEDEMA WORKUP \u2014 ALL NEGATIVE",
               "results": [
                 {
                   "test": "C4",
@@ -273,8 +273,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative",
-          "hpi": "48M with 8th episode of angioedema in 2 years. Lips today. Prior episodes: face, hands, feet, one laryngeal. Exhaustive workup: C4 normal (not HAE), C1-INH normal, tryptase normal (not mast cell), not on ACE inhibitor, no food/drug trigger identified via diary. This is truly idiopathic angioedema. Responds partially to antihistamines + steroids (suggesting some histamine component but not fully allergic). Patient significantly distressed — canceled travel, afraid to be alone, checking mirror compulsively for swelling.",
+          "cc": "48yo with recurrent idiopathic angioedema \u2014 8th episode, lip swelling, no trigger identified, extensive workup negative",
+          "hpi": "48M with 8th episode of angioedema in 2 years. Lips today. Prior episodes: face, hands, feet, one laryngeal. Exhaustive workup: C4 normal (not HAE), C1-INH normal, tryptase normal (not mast cell), not on ACE inhibitor, no food/drug trigger identified via diary. This is truly idiopathic angioedema. Responds partially to antihistamines + steroids (suggesting some histamine component but not fully allergic). Patient significantly distressed \u2014 canceled travel, afraid to be alone, checking mirror compulsively for swelling.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -283,13 +283,13 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Observation after laryngeal episode — most concerning presentation",
+        "chiefComplaint": "Observation after laryngeal episode \u2014 most concerning presentation",
         "diagnosis": "Idiopathic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Idiopathic angioedema — laryngeal involvement",
+          "description": "Idiopathic angioedema \u2014 laryngeal involvement",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -313,7 +313,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "86",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "97%",
           "pain": "5/10"
         }
@@ -336,7 +336,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -350,7 +350,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -413,8 +413,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Observation after laryngeal episode — most concerning presentation",
-          "hpi": "48M admitted after laryngeal angioedema — voice change, mild stridor. Resolved with steroids + antihistamines. This was the episode that prompted A/I referral.",
+          "cc": "Observation after laryngeal episode \u2014 most concerning presentation",
+          "hpi": "48M admitted after laryngeal angioedema \u2014 voice change, mild stridor. Resolved with steroids + antihistamines. This was the episode that prompted A/I referral.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -423,41 +423,41 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — management of idiopathic recurrent angioedema, prophylaxis options",
+        "chiefComplaint": "A/I consult \u2014 management of idiopathic recurrent angioedema, prophylaxis options",
         "diagnosis": "Idiopathic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Idiopathic angioedema — confirmed after exhaustive workup",
+          "description": "Idiopathic angioedema \u2014 confirmed after exhaustive workup",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Prophylaxis needed — omalizumab off-label (evidence for idiopathic angioedema)",
+          "description": "Prophylaxis needed \u2014 omalizumab off-label (evidence for idiopathic angioedema)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Antihistamine prophylaxis — uptitrated cetirizine BID + famotidine BID",
+          "description": "Antihistamine prophylaxis \u2014 uptitrated cetirizine BID + famotidine BID",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Anxiety management — CBT referral for health anxiety",
+          "description": "Anxiety management \u2014 CBT referral for health anxiety",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-5",
-          "description": "Rescue plan for travel — icatibant empiric trial (may work even in non-HAE)",
+          "description": "Rescue plan for travel \u2014 icatibant empiric trial (may work even in non-HAE)",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -496,7 +496,7 @@ window.EMR_DATA = {
           "name": "Icatibant",
           "dose": "30mg",
           "route": "SC",
-          "frequency": "On-demand rescue (empiric — may help)",
+          "frequency": "On-demand rescue (empiric \u2014 may help)",
           "status": "Active",
           "prescriber": "Dr. Elena Rodriguez, MD"
         }
@@ -508,7 +508,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -531,7 +531,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -545,7 +545,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -608,8 +608,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — management of idiopathic recurrent angioedema, prophylaxis options",
-          "hpi": "A/I: 48M with confirmed idiopathic angioedema. Started prophylactic regimen: H1+H2 blockers daily plus omalizumab monthly (off-label but evidence supports use in refractory idiopathic angioedema). Icatibant prescribed as rescue — even though this isn't HAE, bradykinin may play a partial role, and having a self-injectable rescue medication dramatically reduces his anxiety. CBT referral for health anxiety and avoidance behavior.",
+          "cc": "A/I consult \u2014 management of idiopathic recurrent angioedema, prophylaxis options",
+          "hpi": "A/I: 48M with confirmed idiopathic angioedema. Started prophylactic regimen: H1+H2 blockers daily plus omalizumab monthly (off-label but evidence supports use in refractory idiopathic angioedema). Icatibant prescribed as rescue \u2014 even though this isn't HAE, bradykinin may play a partial role, and having a self-injectable rescue medication dramatically reduces his anxiety. CBT referral for health anxiety and avoidance behavior.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -618,20 +618,20 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Follow-up — 4 months on omalizumab, episode frequency assessment",
+        "chiefComplaint": "Follow-up \u2014 4 months on omalizumab, episode frequency assessment",
         "diagnosis": "Idiopathic Angioedema"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Idiopathic angioedema — episodes reduced from every 3 months to 1 in 4 months on omalizumab",
+          "description": "Idiopathic angioedema \u2014 episodes reduced from every 3 months to 1 in 4 months on omalizumab",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Anxiety improving — resumed business travel with rescue icatibant in bag",
+          "description": "Anxiety improving \u2014 resumed business travel with rescue icatibant in bag",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -687,7 +687,7 @@ window.EMR_DATA = {
           "bp": "126/76",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -710,7 +710,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -724,7 +724,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -787,8 +787,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Follow-up — 4 months on omalizumab, episode frequency assessment",
-          "hpi": "48M 4 months on omalizumab. Only 1 mild episode (lip, resolved with oral antihistamine alone — no ER visit). Previously averaging every 3 months with ER visits. Reports much less anxiety — carrying icatibant gives him confidence to travel. Completed 2 business trips without incident. Continue omalizumab 12-month trial, then consider tapering.",
+          "cc": "Follow-up \u2014 4 months on omalizumab, episode frequency assessment",
+          "hpi": "48M 4 months on omalizumab. Only 1 mild episode (lip, resolved with oral antihistamine alone \u2014 no ER visit). Previously averaging every 3 months with ER visits. Reports much less anxiety \u2014 carrying icatibant gives him confidence to travel. Completed 2 business trips without incident. Continue omalizumab 12-month trial, then consider tapering.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -810,7 +810,7 @@ window.EMR_DATA = {
     "address": "8582 Birch Ln, Louisville, KY 40206",
     "insurance": "UnitedHealthcare",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Family Contact",
       "phone": "(702) 555-5566",
@@ -821,61 +821,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Idiopathic angioedema — 8th episode in 2 years",
+      "problem": "Idiopathic histaminergic angioedema \u2014 recurrent, no trigger found",
+      "icd": "T78.3XXA",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Rebecca Kim, 38F \u2014 monthly episodes of lip and periorbital swelling, with urticaria. Responds to antihistamines."
     },
     {
-      "id": "prob-2",
-      "description": "No identifiable trigger despite comprehensive workup",
+      "problem": "Diagnostic workup negative \u2014 complement, C1-INH, allergen testing",
+      "icd": "T78.3XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "C4, C1-INH level/function, HAE gene panel, comprehensive allergen panel \u2014 all normal. Histaminergic mechanism confirmed by antihistamine response."
     },
     {
-      "id": "prob-3",
-      "description": "Normal C4, C1-INH, tryptase — not HAE, not mast cell, not ACE",
+      "problem": "Daily antihistamine therapy \u2014 suppressive regimen needed",
+      "icd": "T78.3XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Anxiety about unpredictable episodes — career and travel impaired",
-      "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Episodic antihistamines not enough. Daily high-dose antihistamine regimen or omalizumab step-up needed."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Diphenhydramine",
-      "dose": "50mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 20mg PO daily (double dose) \u2014 step-up",
+      "sig": "Double-dosing non-sedating antihistamine is safe and more effective for recurrent angioedema. Take daily, not PRN.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Famotidine",
-      "dose": "20mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Ranitidine (or famotidine 40mg) PO daily \u2014 H2 adjunct",
+      "sig": "H2 antihistamine adds modest benefit to H1 in refractory urticaria/angioedema. Combine with H1.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Methylprednisolone",
-      "dose": "125mg",
-      "route": "IV",
-      "frequency": "Once",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Omalizumab 300mg SQ q4 weeks \u2014 if antihistamine fails",
+      "sig": "Anti-IgE \u2014 dramatically effective for chronic spontaneous urticaria/angioedema refractory to antihistamines. Step up if monthly antihistamines fail.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Step up if antihistamines fail"
     }
   ],
   "allergies": [
@@ -893,7 +883,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": "92",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "4/10"
     }
@@ -904,8 +894,8 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "48yo with recurrent idiopathic angioedema — 8th episode, lip swelling, no trigger identified, extensive workup negative",
-      "hpi": "48M with 8th episode of angioedema in 2 years. Lips today. Prior episodes: face, hands, feet, one laryngeal. Exhaustive workup: C4 normal (not HAE), C1-INH normal, tryptase normal (not mast cell), not on ACE inhibitor, no food/drug trigger identified via diary. This is truly idiopathic angioedema. Responds partially to antihistamines + steroids (suggesting some histamine component but not fully allergic). Patient significantly distressed — canceled travel, afraid to be alone, checking mirror compulsively for swelling.",
+      "cc": "48yo with recurrent idiopathic angioedema \u2014 8th episode, lip swelling, no trigger identified, extensive workup negative",
+      "hpi": "48M with 8th episode of angioedema in 2 years. Lips today. Prior episodes: face, hands, feet, one laryngeal. Exhaustive workup: C4 normal (not HAE), C1-INH normal, tryptase normal (not mast cell), not on ACE inhibitor, no food/drug trigger identified via diary. This is truly idiopathic angioedema. Responds partially to antihistamines + steroids (suggesting some histamine component but not fully allergic). Patient significantly distressed \u2014 canceled travel, afraid to be alone, checking mirror compulsively for swelling.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -913,128 +903,50 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-304931",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Angioedema Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "C4 complement",
+          "value": "22",
+          "unit": "mg/dL",
+          "ref": "16-47",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "C1 esterase inhibitor level",
+          "value": "26",
+          "unit": "mg/dL",
+          "ref": "21-39",
+          "flag": ""
         },
         {
-          "name": "ANGIOEDEMA WORKUP — ALL NEGATIVE",
-          "results": [
-            {
-              "test": "C4",
-              "value": "32",
-              "unit": "mg/dL",
-              "range": "16-47",
-              "flag": ""
-            },
-            {
-              "test": "C1-INH level",
-              "value": "28",
-              "unit": "mg/dL",
-              "range": "21-39",
-              "flag": ""
-            },
-            {
-              "test": "C1-INH functional",
-              "value": "92",
-              "unit": "%",
-              "range": "68-132",
-              "flag": ""
-            },
-            {
-              "test": "Tryptase",
-              "value": "5.8",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": ""
-            },
-            {
-              "test": "TSH",
-              "value": "2.1",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": ""
-            }
-          ]
+          "test": "C1 esterase inhibitor function",
+          "value": "92",
+          "unit": "%",
+          "ref": ">68%",
+          "flag": ""
+        },
+        {
+          "test": "Tryptase (baseline)",
+          "value": "5.2",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": ""
+        },
+        {
+          "test": "ANA",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Thyroid peroxidase antibody",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         }
       ]
     }
@@ -1054,19 +966,19 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "History",
-      "8 episodes of angioedema in 2 years — no trigger identified despite extensive workup"
+      "8 episodes of angioedema in 2 years \u2014 no trigger identified despite extensive workup"
     ],
     [
       "Workup",
-      "C4 normal, C1-INH normal, tryptase normal, no ACE inhibitor — truly idiopathic"
+      "C4 normal, C1-INH normal, tryptase normal, no ACE inhibitor \u2014 truly idiopathic"
     ],
     [
       "Mental health",
-      "Anxiety about unpredictable episodes — afraid to travel or be alone"
+      "Anxiety about unpredictable episodes \u2014 afraid to travel or be alone"
     ],
     [
       "Career",
-      "Sales representative — canceled 3 business trips due to fear of episode away from hospital"
+      "Sales representative \u2014 canceled 3 business trips due to fear of episode away from hospital"
     ]
   ],
   "references": [
@@ -1145,13 +1057,12 @@ window.EMR_DATA = {
       "Assessment of extremities for swelling": "No peripheral edema, normal pulses"
     },
     "ddxTargets": [
-      "Idiopathic angioedema (correct diagnosis)",
-      "Allergic angioedema",
-      "ACE inhibitor-induced angioedema",
-      "Hereditary angioedema",
-      "Acquired C1 esterase inhibitor deficiency",
-      "Cellulitis",
-      "Contact dermatitis"
+      "Idiopathic histaminergic angioedema \u2014 responds to antihistamines, normal complement (correct)",
+      "Hereditary angioedema \u2014 normal C4 and C1-INH excludes",
+      "ACE inhibitor angioedema \u2014 not on ACEi",
+      "Allergic angioedema \u2014 no consistent trigger identified after extensive workup",
+      "Acquired C1-INH deficiency \u2014 normal C4, C1q excludes",
+      "Mast cell activation syndrome \u2014 borderline \u2014 normal baseline tryptase argues against"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the extensive negative workup and assuming nothing can be done, rather than focusing on acute management and patient support",
@@ -1161,7 +1072,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, think about what information would help you distinguish between the different types of angioedema. What historical features would point toward hereditary, acquired, allergic, or idiopathic causes? How might the patient's extensive negative workup influence your approach?",
       "phase5": "Now that you've gathered your history and exam findings, how do the normal C4, C1-INH, and tryptase levels help narrow your differential? What does the pattern of recurrent episodes without identifiable triggers suggest? Consider both the medical and psychosocial aspects of this patient's presentation.",
-      "finalDebrief": "This case highlights idiopathic angioedema, a diagnosis of exclusion that significantly impacts quality of life. Notice how the extensive negative workup actually supports this diagnosis. What management strategies beyond acute treatment might help this patient? How do you balance reassurance with appropriate monitoring for a condition that can occasionally involve the airway?"
+      "finalDebrief": "This case highlights idiopathic angioedema, a diagnosis of exclusion that significantly impacts quality of life. Notice how the extensive negative workup actually supports this diagnosis. What management strategies beyond acute treatment might help this patient? How do you balance reassurance with appropriate monitoring for a condition that can occasionally involve the airway?",
+      "final": "Diagnosis: idiopathic histaminergic angioedema. Key learning: (1) Angioedema classification by mechanism: histaminergic (responds to antihistamines, has urticaria, mast cell/IgE-driven) vs bradykinin-mediated (does NOT respond to antihistamines, no urticaria, normal complement or low in HAE). This patient's antihistamine responsiveness and urticaria = histaminergic. (2) Workup when no trigger found: C4 (screens for HAE), C1-INH level and function (confirms or excludes HAE), C1q (acquired C1-INH deficiency), tryptase (mast cell/systemic mastocytosis), thyroid antibodies (autoimmune urticaria/angioedema association), ANA. If all normal: idiopathic. (3) Antihistamine step-up: up to 4x the licensed dose of second-generation H1 antihistamines is safe and guideline-recommended for refractory disease. Adding H2 antihistamine provides modest additional benefit. (4) Omalizumab (Xolair): anti-IgE monoclonal antibody \u2014 300mg SQ monthly is FDA-approved for chronic spontaneous urticaria (and by extension recurrent idiopathic angioedema). Works in ~70% of antihistamine-refractory cases, often within 1-4 weeks. (5) Prognosis: idiopathic histaminergic angioedema often resolves spontaneously within 1-5 years; 50% remission at 5 years. Long-term antihistamine or omalizumab suppression is appropriate while active."
     }
+  },
+  "meta": {
+    "diagnosis": "Idiopathic Histaminergic Angioedema \u2014 Recurrent, No Identifiable Trigger, Daily Antihistamine Suppression",
+    "caseId": "idiopathic-angioedema-v2"
   }
 };

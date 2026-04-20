@@ -1,4 +1,4 @@
-/* emr-data/nec-fasciitis.js — EMR case data for Necrotizing Fasciitis (Group A Streptococcus — Extremity) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Deshawn Lewis",
@@ -15,65 +15,62 @@ window.EMR_DATA = {
     "address": "7701 W Haddon Ave, Memphis, TN 38127",
     "insurance": "Cigna",
     "pcp": "Dr. Amy Patel, MD",
-    "pharmacy": "Publix Pharmacy — Sunrise Blvd",
+    "pharmacy": "Publix Pharmacy \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Christopher Carter",
       "phone": "(404) 555-9095",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
-    "diagnosis": "Necrotizing Fasciitis (Group A Streptococcus — Extremity)"
+    "chiefComplaint": "My leg pain is unbearable Right lower leg \u2014 started at small shin laceration, now involves entire calf and extending above knee",
+    "diagnosis": "Necrotizing Fasciitis (Group A Streptococcus \u2014 Extremity)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Type 2 Diabetes",
+      "problem": "Necrotizing fasciitis \u2014 type I polymicrobial, lower extremity",
+      "icd": "M72.6",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Roberto Diaz, 58M \u2014 T2DM poorly controlled, A1c 11.2%. Right thigh cellulitis x3 days, now woody induration, crepitus on palpation, fever 39.6\u00b0C."
     },
     {
-      "id": "prob-2",
-      "description": "Peripheral neuropathy",
+      "problem": "Rapidly progressing \u2014 pain out of proportion, skin necrosis developing",
+      "icd": "M72.6",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "'Pain out of proportion to skin findings' is the classic NF warning. Skin appears relatively benign early \u2014 deep fascia necrosis is occult."
     },
     {
-      "id": "prob-3",
-      "description": "Obesity",
+      "problem": "Septic shock \u2014 from fascial plane infection and bacteremia",
+      "icd": "R65.21",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "BP 88/54, MAP 62. Lactate 4.8. Resuscitation ongoing. Surgery being activated simultaneously."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Metformin",
-      "dose": "1000mg BID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Vancomycin + piperacillin-tazobactam + clindamycin \u2014 empiric triple therapy",
+      "sig": "Vancomycin covers MRSA. Pip-tazo covers gram-negative and anaerobes. Clindamycin inhibits toxin production (anti-toxin effect beyond bactericidal).",
+      "prescriber": "Surgery/ID",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Gabapentin",
-      "dose": "300mg TID",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Michael Torres, DO"
+      "name": "Norepinephrine \u2014 vasopressor for septic shock",
+      "sig": "MAP target >65. Concurrent with surgical preparation.",
+      "prescriber": "ICU",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Lisinopril",
-      "dose": "20mg daily",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Karen Liu, DO"
+      "name": "Emergency surgical debridement \u2014 within 6 hours of recognition",
+      "sig": "Surgery is the ONLY treatment for NF. Antibiotics alone will not cure NF \u2014 debridement removes the necrotic tissue driving the infection. Every 1h delay increases mortality ~9%.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "EMERGENT \u2014 OR activated"
     }
   ],
   "allergies": [
@@ -91,7 +88,7 @@ window.EMR_DATA = {
       "bp": "96/62",
       "hr": "122",
       "rr": "24",
-      "temp": "40.0°C",
+      "temp": "40.0\u00b0C",
       "spo2": "95%",
       "pain": "10/10",
       "bmi": "34",
@@ -104,206 +101,70 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
-      "hpi": "Deshawn Lewis is a 63-year-old male presenting with my leg pain is unbearable right lower leg — started at small shin laceration, now involves entire calf and extending above knee. Past medical history includes Type 2 Diabetes, Peripheral neuropathy, Obesity. See chart for full details.",
+      "cc": "My leg pain is unbearable Right lower leg \u2014 started at small shin laceration, now involves entire calf and extending above knee",
+      "hpi": "Deshawn Lewis is a 63-year-old male presenting with my leg pain is unbearable right lower leg \u2014 started at small shin laceration, now involves entire calf and extending above knee. Past medical history includes Type 2 Diabetes, Peripheral neuropathy, Obesity. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Necrotizing Fasciitis (Group A Streptococcus — Extremity) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Necrotizing Fasciitis (Group A Streptococcus \u2014 Extremity) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-464426",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "NF Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "28.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "11.2",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": "L"
-            },
-            {
-              "test": "Hematocrit",
-              "value": "42",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "194",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "32.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "131",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": "L"
-            },
-            {
-              "test": "Potassium",
-              "value": "4.6",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "105",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "28",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "10",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "2.4",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": "H"
-            },
-            {
-              "test": "Glucose",
-              "value": "312",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": "H"
-            },
-            {
-              "test": "Calcium",
-              "value": "10.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "CRP",
+          "value": "380",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "CRP",
-              "value": "28.6",
-              "unit": "mg/dL",
-              "range": "<0.5",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "5.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "CK Total",
-              "value": "1,840",
-              "unit": "U/L",
-              "range": "22-198",
-              "flag": "H"
-            },
-            {
-              "test": "Blood Cultures",
-              "value": "Pending",
-              "unit": "",
-              "range": "No growth",
-              "flag": ""
-            }
-          ]
+          "test": "Sodium",
+          "value": "128",
+          "unit": "mEq/L",
+          "ref": "136-145",
+          "flag": "L"
+        },
+        {
+          "test": "Creatinine",
+          "value": "2.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Lactate",
+          "value": "4.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
+        },
+        {
+          "test": "LRINEC score",
+          "value": "11",
+          "unit": "/13",
+          "ref": "\u22656 = high risk",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-617523",
-      "clinical": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Abdomen/Pelvis with Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-451396",
-      "clinical": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
-      "technique": "Standard protocol",
-      "findings": "Right lower extremity: extensive subcutaneous edema and fascial thickening from mid-tibia to distal thigh. Fat stranding. Small pockets of fluid tracking along fascial planes. No discrete abscess. No subcutaneous gas. Muscle compartments enhancing but edematous.",
-      "impression": "Findings consistent with necrotizing soft tissue infection of right lower extremity — EMERGENT SURGICAL EXPLORATION AND DEBRIDEMENT.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-995470",
-      "clinical": "My leg pain is unbearable Right lower leg — started at small shin laceration, now involves entire calf and extending above knee",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 122 bpm. No ST changes",
-      "impression": "Sinus tachycardia — sepsis",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Right Thigh With Contrast",
+      "indication": "Severe cellulitis, crepitus, systemic toxicity",
+      "findings": "Gas in fascial planes of right thigh, extending from proximal thigh to knee. Fascial plane thickening and enhancement. No abscess \u2014 diffuse fascial involvement.",
+      "impression": "Necrotizing fasciitis \u2014 gas in fascial planes confirmed. Emergent surgical debridement required."
     }
   ],
   "immunizations": [
@@ -410,13 +271,12 @@ window.EMR_DATA = {
       "Measurement of calf circumference": "Right calf measures 3cm larger than left calf at the point of maximal swelling."
     },
     "ddxTargets": [
-      "Necrotizing fasciitis (correct diagnosis)",
-      "Cellulitis",
-      "Diabetic foot infection with ascending lymphangitis",
-      "Gas gangrene",
-      "Compartment syndrome",
-      "Deep vein thrombosis with secondary cellulitis",
-      "Severe allergic reaction or contact dermatitis"
+      "Necrotizing fasciitis \u2014 crepitus, gas on CT, LRINEC \u22656, septic shock (correct)",
+      "Severe cellulitis \u2014 no fascial gas on CT; no crepitus; less toxic",
+      "Gas gangrene (Clostridium myonecrosis) \u2014 rapidly progressive, severe pain, crepitus; type II NF variant",
+      "Fournier's gangrene \u2014 perineal NF specifically; same management",
+      "Pyomyositis \u2014 muscle involvement on CT, tropical infection; different compartment",
+      "Compartment syndrome \u2014 elevated compartment pressures, no infection/gas"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on 'diabetic with leg infection' and assuming simple cellulitis without recognizing the severity and rapid progression characteristic of necrotizing fasciitis.",
@@ -426,7 +286,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your initial differential, I notice you're considering several infectious processes. As you interview Mr. Lewis, pay particular attention to the timeline of symptom progression and any systemic symptoms. What specific features would help you distinguish between a simple soft tissue infection versus something more serious that requires emergency intervention?",
       "phase5": "Now that you've completed your history and physical exam, let's think about what you've found. Mr. Lewis has rapid progression over days, severe systemic toxicity, and some concerning physical exam findings including crepitus and woody induration. How does this clinical picture fit with each diagnosis in your differential? What's the most critical next step in management?",
-      "finalDebrief": "This case highlights the importance of recognizing necrotizing fasciitis early - the 'flesh-eating disease.' The key differentiating features from cellulitis include: rapid progression, severe systemic toxicity, pain out of proportion to appearance, crepitus, and woody induration. The LRINEC score can help risk-stratify, but clinical suspicion should drive immediate surgical consultation. Remember that diabetic patients are at higher risk, and delay in diagnosis significantly increases mortality. How will you remember to consider necrotizing fasciitis in future cases of severe soft tissue infections?"
+      "finalDebrief": "This case highlights the importance of recognizing necrotizing fasciitis early - the 'flesh-eating disease.' The key differentiating features from cellulitis include: rapid progression, severe systemic toxicity, pain out of proportion to appearance, crepitus, and woody induration. The LRINEC score can help risk-stratify, but clinical suspicion should drive immediate surgical consultation. Remember that diabetic patients are at higher risk, and delay in diagnosis significantly increases mortality. How will you remember to consider necrotizing fasciitis in future cases of severe soft tissue infections?",
+      "final": "Diagnosis: necrotizing fasciitis. Key learning: (1) NF diagnostic triad: pain out of proportion to skin appearance + rapid progression + systemic toxicity. The skin often LOOKS like cellulitis early \u2014 the necrosis is in the deep fascia and muscle fascia, not the skin. Crepitus (gas in tissues) and 'woody' induration are late signs that confirm NF but should not be waited for. (2) LRINEC score (Laboratory Risk Indicator for Necrotizing Fasciitis): CRP >150 (+4), WBC >25 (+2), hemoglobin <11 (+2), sodium <135 (+2), creatinine >1.6 (+2), glucose >180 (+1). Score \u22656 = high risk for NF. Score 11 here = very high risk. Useful but not definitive \u2014 clinical suspicion overrides. (3) The finger test: surgeons insert a finger at the edge of suspicious skin \u2192 if fascia separates without resistance ('finger test positive') \u2014 NF confirmed. Simple bedside test that should accompany CT in uncertain cases. (4) Surgical debridement timing: every hour of delay after recognition increases mortality by ~9%. Mortality rises from ~15% with early surgery to >30-50% with delayed debridement. No antibiotic regimen substitutes for surgery. Multiple return trips to OR for reassessment of tissue viability are standard. (5) Antibiotic rationale: clindamycin's role is anti-toxin (inhibits ribosomal translation \u2192 reduces production of streptococcal/staphylococcal exotoxins that drive toxic shock). It is added alongside bactericidal agents specifically for toxin suppression."
     }
+  },
+  "meta": {
+    "diagnosis": "Necrotizing Fasciitis \u2014 Type I Polymicrobial, Finger Test Positive, Emergency Surgical Debridement",
+    "caseId": "nec-fasciitis"
   }
 };

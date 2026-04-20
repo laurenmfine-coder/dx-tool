@@ -23,21 +23,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "problem": "Primary: Painful Red Eye",
-      "icd": "Z00.00",
+      "problem": "Neovascular glaucoma \u2014 IOP 48 mmHg, iris neovascularization",
+      "icd": "H40.63",
       "onset": "2024",
       "status": "Active",
-      "notes": "See HPI"
+      "notes": "Darnell Washington, 52M \u2014 T2DM x15 years, poor control. Sudden vision loss right eye, severe pain, red eye, IOP 48 mmHg."
+    },
+    {
+      "problem": "Proliferative diabetic retinopathy \u2014 underlying driver of neovascularization",
+      "icd": "E11.3591",
+      "onset": "2023",
+      "status": "Active",
+      "notes": "PDR with VEGF-driven neovascularization on iris (rubeosis iridis) \u2192 blocks trabecular meshwork \u2192 angle closure."
+    },
+    {
+      "problem": "Diabetic control \u2014 A1c 11.8%, IOP crisis from chronic neglect",
+      "icd": "E11.65",
+      "onset": "2009",
+      "status": "Active",
+      "notes": "Prolonged poor glycemic control \u2192 PDR \u2192 NVG. Annual eye exams were missed for 4 years."
     }
   ],
   "medications": [
     {
-      "name": "See medication list",
-      "sig": "As prescribed",
-      "prescriber": "Dr. Priya Sharma, MD",
-      "start": "01/2024",
-      "refills": 3,
+      "name": "Timolol 0.5% eye drops \u2014 IOP lowering",
+      "sig": "Beta-blocker: reduces aqueous production. 1 drop affected eye BID. First-line topical IOP reduction.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 2,
       "status": "Active"
+    },
+    {
+      "name": "Brimonidine 0.2% eye drops \u2014 adjunct IOP lowering",
+      "sig": "Alpha-2 agonist: reduces aqueous production AND increases outflow. 1 drop TID.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Acetazolamide 500mg PO stat \u2014 systemic carbonic anhydrase inhibitor",
+      "sig": "Systemic IOP reduction for acute crisis. Give stat for IOP >40.",
+      "prescriber": "Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 acute"
+    },
+    {
+      "name": "Intravitreal anti-VEGF (bevacizumab 1.25mg) \u2014 treat underlying NV",
+      "sig": "Anti-VEGF causes regression of iris and retinal neovascularization. Given before pan-retinal photocoagulation (PRP) to reduce neovascularization prior to laser.",
+      "prescriber": "Retina/Ophthalmology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 procedure"
     }
   ],
   "allergies": [
@@ -97,8 +135,58 @@ window.EMR_DATA = {
       "plan": "Referral to medicine. Follow up as needed."
     }
   ],
-  "labs": [],
-  "imaging": [],
+  "labs": [
+    {
+      "date": "11/2024",
+      "panel": "NVG/Diabetes Panel",
+      "results": [
+        {
+          "test": "IOP right eye",
+          "value": "48",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": "H"
+        },
+        {
+          "test": "IOP left eye",
+          "value": "16",
+          "unit": "mmHg",
+          "ref": "10-21",
+          "flag": ""
+        },
+        {
+          "test": "HbA1c",
+          "value": "11.8",
+          "unit": "%",
+          "ref": "<7.0",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.8",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "Fasting glucose",
+          "value": "268",
+          "unit": "mg/dL",
+          "ref": "70-100",
+          "flag": "H"
+        }
+      ]
+    }
+  ],
+  "imaging": [
+    {
+      "date": "11/2024",
+      "study": "Fundus Exam + Fluorescein Angiography",
+      "indication": "NVG workup \u2014 extent of PDR",
+      "findings": "Disc neovascularization, extensive peripheral NVD (neovascularization elsewhere). Rubeosis iridis (iris neovascularization). Vitreous hemorrhage small. No tractional retinal detachment yet.",
+      "impression": "Proliferative diabetic retinopathy with rubeosis iridis causing neovascular glaucoma. Anti-VEGF + PRP required urgently."
+    }
+  ],
   "immunizations": [
     {
       "vaccine": "Influenza",
@@ -130,7 +218,7 @@ window.EMR_DATA = {
   },
   "meta": {
     "caseId": "neovascular-glaucoma-od",
-    "diagnosis": "See diagnosis \u2014 Painful Red Eye",
+    "diagnosis": "Neovascular Glaucoma \u2014 Diabetic Retinopathy with Iris Neovascularization, IOP 48, Emergency Ophthalmology",
     "acuity": 2,
     "presentation": "Painful Red Eye",
     "category": "ophthalmic"
@@ -177,12 +265,12 @@ window.EMR_DATA = {
       "Additional": "Other pertinent findings per clinical context"
     },
     "ddxTargets": [
-      "Painful Red Eye \u2014 primary diagnosis (correct)",
-      "Alternative diagnosis 1 \u2014 shares key features",
-      "Alternative diagnosis 2 \u2014 different mechanism",
-      "Alternative diagnosis 3 \u2014 benign mimic",
-      "Alternative diagnosis 4 \u2014 important not to miss",
-      "Alternative diagnosis 5 \u2014 common diagnostic error"
+      "Neovascular glaucoma \u2014 PDR, rubeosis iridis, IOP 48 (correct)",
+      "Acute primary angle closure \u2014 fixed mid-dilated pupil, very narrow angle; no neovascularization",
+      "Open-angle glaucoma \u2014 chronic, insidious; not acute crisis with pain and vision loss",
+      "Uveitic glaucoma \u2014 inflammatory cells in anterior chamber; different workup",
+      "Central retinal vein occlusion \u2014 can also cause NVG; fundus exam distinguishes",
+      "Hyphema \u2014 blood in anterior chamber; blunt trauma history"
     ],
     "biasFlags": {
       "anchoring": "If student anchors on first impression without systematic evaluation, flag anchoring. Encourage broad differential exploration.",
@@ -192,7 +280,7 @@ window.EMR_DATA = {
       "phase2": "The student is reviewing a medicine case with chief complaint: Painful Red Eye. What are the most important questions for a medicine to ask \u2014 and what clinical findings would distinguish this from the top 2 alternatives on the differential?",
       "phase5": "History and exam complete. Phase 2 differential: {{ddx2}}. Phase 5 findings: {{ddx5}}. From a medicine perspective, what is the most critical finding that narrows this differential? What is the medicine-specific management priority?",
       "phase7": "After reviewing all data: {{ddx5}}. What is the diagnosis, and what is the medicine's specific role in management? What interprofessional communication is needed?",
-      "final": "Case debrief for medicine. Key learning points: (1) The diagnosis is consistent with the presenting findings. (2) medicine assessment revealed the key discriminating features. (3) Is this vision-threatening? What is the time-to-treatment window \u2014 and what is your ophthalmology referral urgency? (4) Interprofessional coordination is essential for optimal patient outcomes in this case type."
+      "final": "Diagnosis: neovascular glaucoma from PDR. Key learning: (1) NVG mechanism: chronic retinal ischemia (from PDR, CRVO, or other) \u2192 VEGF production \u2192 new vessel growth on iris (rubeosis iridis) and into the trabecular meshwork \u2192 angle closure \u2192 IOP rises acutely. IOP >40 causes acute pain, corneal edema, and rapid vision loss. (2) NVG is an ophthalmologic emergency: IOP 48 mmHg will cause permanent optic nerve damage within hours to days if not treated. Medical IOP lowering (timolol, brimonidine, acetazolamide, mannitol IV) buys time for definitive treatment. (3) Anti-VEGF + PRP sequence: intravitreal anti-VEGF causes regression of neovascularization within 24-72h \u2014 making PRP (pan-retinal photocoagulation) safer and more effective. PRP destroys ischemic peripheral retina, reducing VEGF drive. (4) Prevention of NVG: annual dilated fundus exam in all diabetics. PDR diagnosis \u2192 immediate PRP referral. A1c control <7% reduces PDR progression by 76% (DCCT trial). (5) Prognosis: NVG is associated with poor visual prognosis \u2014 even with treatment, significant permanent vision loss is common due to optic nerve damage from acute IOP elevation. Prevention through diabetic eye care compliance is critical."
     }
   }
 };

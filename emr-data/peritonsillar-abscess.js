@@ -1,4 +1,4 @@
-/* emr-data/peritonsillar-abscess.js — EMR case data for Peritonsillar Abscess (Quinsy) */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Jameson Ortiz",
@@ -15,49 +15,70 @@ window.EMR_DATA = {
     "address": "9145 Peachtree Rd, Cleveland, OH 44109",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Karen Liu, DO",
-    "pharmacy": "Rite Aid — Sunrise Blvd",
+    "pharmacy": "Rite Aid \u2014 Sunrise Blvd",
     "emergencyContact": {
       "name": "Charles Roberts",
       "phone": "(505) 555-4921",
       "relationship": "Sibling"
     },
-    "chiefComplaint": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
+    "chiefComplaint": "Worst sore throat of my life \u2014 all on the left side Left-sided throat/pharyngeal pain \u2014 unilateral",
     "diagnosis": "Peritonsillar Abscess (Quinsy)"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Recurrent tonsillitis",
+      "problem": "Peritonsillar abscess \u2014 right-sided, uvular deviation",
+      "icd": "J36",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Tyler Brooks, 24M \u2014 5 days progressive sore throat, trismus, muffled 'hot potato' voice. Right peritonsillar bulge, uvular deviation to left."
     },
     {
-      "id": "prob-2",
-      "description": "Tobacco use",
+      "problem": "Trismus \u2014 inability to open mouth >2cm",
+      "icd": "M26.65",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Trismus from medial pterygoid spasm from peritonsillar inflammation \u2014 limits exam and needle aspiration."
+    },
+    {
+      "problem": "Airway \u2014 risk of progression to parapharyngeal space or Ludwig's angina",
+      "icd": "J36",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "Most PTAs stay localized. Extension to parapharyngeal space or deep neck is uncommon but catastrophic."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Amoxicillin",
-      "dose": "500mg TID (started 4 days ago — failing treatment)",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Lisa Chang, MD"
+      "name": "Needle aspiration \u2014 primary treatment",
+      "sig": "Medial to anterior tonsillar pillar, lateral to palate. Aspirate pus. 85-95% success rate \u2014 avoids I&D in compliant patients.",
+      "prescriber": "ENT/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 procedure"
     },
     {
-      "id": "med-2",
-      "name": "Ibuprofen",
-      "dose": "600mg TID PRN",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "Penicillin VK 500mg PO QID x10 days \u2014 post-aspiration",
+      "sig": "First-line antibiotic for PTA \u2014 Streptococcus pyogenes, oral anaerobes. Amoxicillin-clavulanate for broader coverage.",
+      "prescriber": "ENT/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Dexamethasone 10mg IV/IM \u2014 single dose",
+      "sig": "Single steroid dose reduces pain, trismus, and swallowing dysfunction. Significantly improves patient-reported outcomes.",
+      "prescriber": "ENT/ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Given \u2014 one dose"
+    },
+    {
+      "name": "Magic mouthwash + analgesics \u2014 pain control",
+      "sig": "Viscous lidocaine + diphenhydramine + antacid: swish and spit. Systemic analgesics (ibuprofen + acetaminophen) scheduled.",
+      "prescriber": "ED",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -75,7 +96,7 @@ window.EMR_DATA = {
       "bp": "138/82",
       "hr": "102",
       "rr": "18",
-      "temp": "38.8°C",
+      "temp": "38.8\u00b0C",
       "spo2": "97%",
       "pain": "9/10",
       "bmi": "29",
@@ -88,185 +109,56 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/03/2026",
       "provider": "Dr. ED Attending",
-      "cc": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
-      "hpi": "Jameson Ortiz is a 50-year-old male presenting with worst sore throat of my life — all on the left side left-sided throat/pharyngeal pain — unilateral. Past medical history includes Recurrent tonsillitis, Tobacco use. See chart for full details.",
+      "cc": "Worst sore throat of my life \u2014 all on the left side Left-sided throat/pharyngeal pain \u2014 unilateral",
+      "hpi": "Jameson Ortiz is a 50-year-old male presenting with worst sore throat of my life \u2014 all on the left side left-sided throat/pharyngeal pain \u2014 unilateral. Past medical history includes Recurrent tonsillitis, Tobacco use. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Peritonsillar Abscess (Quinsy) — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Peritonsillar Abscess (Quinsy) \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/03/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-870443",
-      "collected": "03/03/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "PTA Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "16.2",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "14.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "48",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "235",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "16.8",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "138",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "3.9",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "104",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "23",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "18",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "1.0",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "81",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "10.1",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Monospot test",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "1.4",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": ""
-            }
-          ]
+          "test": "Throat culture",
+          "value": "Group A Streptococcus positive",
+          "unit": "",
+          "ref": "No pathogens",
+          "flag": "H"
+        },
+        {
+          "test": "CRP",
+          "value": "88",
+          "unit": "mg/L",
+          "ref": "<10",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-cxr",
-      "date": "03/03/2026",
-      "study": "Chest X-Ray PA/Lateral",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-915664",
-      "clinical": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
-      "technique": "Standard protocol",
-      "findings": "Heart size normal. No consolidation, pneumothorax, or effusion.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-1",
-      "date": "03/03/2026",
-      "study": "CT Neck with Contrast",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-835629",
-      "clinical": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
-      "technique": "Standard protocol",
-      "findings": "LEFT PERITONSILLAR ABSCESS — rim-enhancing fluid collection measuring 3.2 x 2.8cm in the left peritonsillar space. Left tonsil displaced medially. Mild left parapharyngeal fat stranding. No retropharyngeal extension. No vascular involvement (internal jugular vein patent — no Lemierre syndrome). Airway patent but mildly narrowed at oropharyngeal level. RIGHT side: normal.",
-      "impression": "LEFT PERITONSILLAR ABSCESS, 3.2cm. No deep space extension. No vascular thrombosis. Requires drainage.",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
-    },
-    {
-      "id": "img-2",
-      "date": "03/03/2026",
-      "study": "12-Lead ECG",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Cardiology",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-988181",
-      "clinical": "Worst sore throat of my life — all on the left side Left-sided throat/pharyngeal pain — unilateral",
-      "technique": "Standard 12-lead",
-      "findings": "Sinus tachycardia at 102 bpm. Normal intervals",
-      "impression": "Sinus tachycardia — infection and pain",
-      "dictated": "03/03/2026 08:30",
-      "verified": "03/03/2026 09:15"
+      "date": "11/2024",
+      "study": "Soft Tissue Neck Ultrasound (intraoral)",
+      "indication": "PTA vs peritonsillar cellulitis \u2014 confirm abscess before aspiration",
+      "findings": "4.2cm peritonsillar fluid collection right side \u2014 abscess confirmed. No extension into parapharyngeal space.",
+      "impression": "Peritonsillar abscess \u2014 localized. Needle aspiration appropriate."
     }
   ],
   "immunizations": [
@@ -369,17 +261,16 @@ window.EMR_DATA = {
       "Assessment of voice quality and speech": "Muffled voice quality with 'hot potato' voice, patient speaks with obvious discomfort and altered articulation.",
       "Evaluation of uvular deviation": "Uvula deviated to the right away from the affected left side due to peritonsillar swelling.",
       "Neck range of motion assessment": "Limited neck rotation to the right due to pain, patient holds head tilted slightly to the left.",
-      "Vital signs assessment": "Elevated temperature 38.8°C, mild tachycardia HR 102, elevated BP likely due to pain and stress.",
+      "Vital signs assessment": "Elevated temperature 38.8\u00b0C, mild tachycardia HR 102, elevated BP likely due to pain and stress.",
       "General appearance and toxicity assessment": "Patient appears ill and uncomfortable but not toxic, sitting upright and leaning forward slightly, frequent swallowing attempts."
     },
     "ddxTargets": [
-      "Peritonsillar abscess (correct diagnosis)",
-      "Severe bacterial tonsillitis",
-      "Parapharyngeal abscess",
-      "Epiglottitis (must-not-miss)",
-      "Retropharyngeal abscess (must-not-miss)",
-      "Infectious mononucleosis",
-      "Viral pharyngitis"
+      "Peritonsillar abscess \u2014 uvular deviation, hot potato voice, unilateral bulge (correct)",
+      "Peritonsillar cellulitis \u2014 no fluctuance, no definitive abscess on ultrasound; treat with antibiotics alone",
+      "Tonsillar malignancy \u2014 asymmetric tonsil in adult without acute infection features; biopsy if persistent",
+      "Epiglottitis \u2014 supraglottic, different symptoms, no peritonsillar bulge",
+      "Parapharyngeal abscess \u2014 deeper, no uvular deviation, CT/MRI distinguishes",
+      "Ludwig's angina \u2014 bilateral submandibular, trismus, different anatomy"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on patient's history of recurrent tonsillitis and assuming this is just another episode of bacterial tonsillitis, missing the progression to abscess formation.",
@@ -389,7 +280,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. I notice you're considering both infectious and structural causes. Given this patient's presentation of severe unilateral throat pain, what specific anatomical complications of tonsillitis should you be most concerned about? What questions will help you differentiate between simple tonsillitis and more serious deep space infections?",
       "phase5": "Excellent work on the history and physical. You've identified several key findings - the unilateral presentation, uvular deviation, trismus, and that characteristic 'hot potato' voice. How do these findings fit together anatomically? What does the combination of these signs suggest about the progression from simple tonsillitis to a more serious complication?",
-      "finalDebrief": "This case illustrates how peritonsillar abscess can develop from recurrent tonsillitis. The key distinguishing features you identified - unilateral severe pain, trismus, uvular deviation, muffled voice, and fluctuance - form the classic presentation. Notice how the patient's history of recurrent tonsillitis could have led to anchoring bias. What made you consider abscess over simple tonsillitis, and why is early recognition and ENT consultation crucial here?"
+      "finalDebrief": "This case illustrates how peritonsillar abscess can develop from recurrent tonsillitis. The key distinguishing features you identified - unilateral severe pain, trismus, uvular deviation, muffled voice, and fluctuance - form the classic presentation. Notice how the patient's history of recurrent tonsillitis could have led to anchoring bias. What made you consider abscess over simple tonsillitis, and why is early recognition and ENT consultation crucial here?",
+      "final": "Diagnosis: peritonsillar abscess. Key learning: (1) Classic PTA presentation: unilateral peritonsillar bulge + uvular deviation to contralateral side + 'hot potato' muffled voice + trismus + severe odynophagia + drooling. The combination of uvular deviation + hot potato voice is highly specific. (2) PTA vs cellulitis: peritonsillar cellulitis = erythema, swelling, no discrete fluid collection. PTA = fluctuant collection (clinical or ultrasound-confirmed). Distinction matters because cellulitis is treated with antibiotics alone; PTA requires drainage. Intraoral ultrasound is the most reliable bedside tool to differentiate. (3) Needle aspiration: the preferred treatment \u2014 85-95% success rate, avoids formal I&D. Landmark: medial to the anterior tonsillar pillar, never lateral (internal carotid artery is lateral). Aspirate pus, send for culture. If needle aspiration fails x2, proceed to formal I&D or quinsy tonsillectomy. (4) Dexamethasone single dose: randomized trials show single IM/IV dexamethasone dose significantly reduces pain, trismus, and swallowing dysfunction. Standard of care adjunct to drainage and antibiotics. (5) Recurrence: PTA recurs in ~10-15%. Tonsillectomy is recommended after second episode (quinsy tonsillectomy immediately vs interval tonsillectomy 4-6 weeks later). First episode in adults: drain and antibiotics, discuss tonsillectomy if symptomatic tonsillitis history."
     }
+  },
+  "meta": {
+    "diagnosis": "Peritonsillar Abscess \u2014 Needle Aspiration, Penicillin Treatment, Hot Potato Voice Pathognomonic",
+    "caseId": "peritonsillar-abscess"
   }
 };

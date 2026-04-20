@@ -1,4 +1,4 @@
-/* emr-data/mesenteric-ischemia.js — Auto-generated EMR case data for Mesenteric Ischemia */
+
 window.EMR_DATA = {
   "patient": {
     "name": "Helen Goldstein",
@@ -15,7 +15,7 @@ window.EMR_DATA = {
     "address": "5087 Birch Ln, Baltimore, MD 21206",
     "insurance": "Humana Gold Plus",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Alejandro Goldstein",
       "phone": "(312) 555-1609",
@@ -26,61 +26,59 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Atrial Fibrillation",
+      "problem": "Acute mesenteric ischemia \u2014 embolic, AFib source",
+      "icd": "K55.059",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Henrietta Osei, 72F \u2014 sudden severe periumbilical pain 'out of proportion to exam', AFib on ECG, not anticoagulated. Mesenteric CTA: SMA embolus."
     },
     {
-      "id": "prob-2",
-      "description": "Heart Failure",
+      "problem": "AFib without anticoagulation \u2014 thromboembolic source confirmed",
+      "icd": "I48.19",
+      "onset": "2020",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "CHA2DS2-VASc 5 \u2014 should have been anticoagulated. SMA embolism is a direct complication of untreated AFib."
     },
     {
-      "id": "prob-3",
-      "description": "Peripheral Vascular Disease",
+      "problem": "Time-critical \u2014 bowel viability window 6-8 hours from ischemia onset",
+      "icd": "K55.059",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "History of CVA",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Symptoms for 4 hours. Peritoneal signs not yet present. Intervention within 2 hours can salvage bowel."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Warfarin",
-      "dose": "5mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Sarah Mitchell, DO"
+      "name": "Heparin UFH 80 units/kg IV bolus \u2014 immediate anticoagulation",
+      "sig": "Prevents clot propagation. Do NOT wait for IR suite to start heparin. Begin in ED.",
+      "prescriber": "Vascular Surgery/Medicine",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Digoxin",
-      "dose": "0.125mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Robert Hughes, DO"
+      "name": "IV access x2 large bore \u2014 resuscitation",
+      "sig": "Mesenteric ischemia patients develop rapid third-spacing and sepsis from bowel necrosis. Aggressive IV access.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Furosemide",
-      "dose": "40mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. David Kim, MD"
+      "name": "Broad-spectrum antibiotics \u2014 cefepime + metronidazole",
+      "sig": "Prophylactic coverage for bacterial translocation during ischemic bowel reperfusion. Give before any intervention.",
+      "prescriber": "Surgery",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active"
+    },
+    {
+      "name": "Papaverine \u2014 intra-arterial vasodilator (IR)",
+      "sig": "Infused directly into SMA via IR catheter \u2014 relieves mesenteric vasospasm during and after thrombus removal.",
+      "prescriber": "Interventional Radiology",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 IR suite"
     }
   ],
   "allergies": [
@@ -98,7 +96,7 @@ window.EMR_DATA = {
       "bp": "108/58",
       "hr": "118",
       "rr": "26",
-      "temp": "37.8°C",
+      "temp": "37.8\u00b0C",
       "spo2": "94%",
       "pain": "10/10",
       "bmi": "31",
@@ -114,155 +112,67 @@ window.EMR_DATA = {
       "cc": "Severe abdominal pain out of proportion to exam",
       "hpi": "Helen Goldstein is a 70-year-old female presenting with severe abdominal pain out of proportion to exam. Past medical history includes Atrial Fibrillation, Heart Failure, Peripheral Vascular Disease, History of CVA. See chart for full details.",
       "exam": "See physical examination documentation.",
-      "assessment": "Mesenteric Ischemia — clinical presentation and workup consistent with diagnosis.",
+      "assessment": "Mesenteric Ischemia \u2014 clinical presentation and workup consistent with diagnosis.",
       "plan": "See orders and management plan."
     }
   ],
   "labs": [
     {
-      "date": "03/01/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. ED Attending",
-      "accession": "LAB-747741",
-      "collected": "03/01/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Mesenteric Ischemia Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "22.6",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": "H"
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.8",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "41.2",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "245",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Lactate",
+          "value": "5.8",
+          "unit": "mmol/L",
+          "ref": "<2.0",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "139",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.2",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2/Bicarb",
-              "value": "14",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": "L"
-            },
-            {
-              "test": "BUN",
-              "value": "16",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.9",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "98",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "WBC",
+          "value": "21.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11",
+          "flag": "H"
         },
         {
-          "name": "CASE-SPECIFIC STUDIES",
-          "results": [
-            {
-              "test": "Lactate",
-              "value": "7.2",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            },
-            {
-              "test": "Inr",
-              "value": "1.4",
-              "unit": "",
-              "range": "2.0-3.0 (therapeutic)",
-              "flag": ""
-            }
-          ]
+          "test": "Lipase",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
+        },
+        {
+          "test": "D-dimer",
+          "value": ">10",
+          "unit": "mg/L",
+          "ref": "<0.5",
+          "flag": "H"
+        },
+        {
+          "test": "Creatinine",
+          "value": "1.4",
+          "unit": "mg/dL",
+          "ref": "0.7-1.3",
+          "flag": "H"
+        },
+        {
+          "test": "ABG \u2014 pH",
+          "value": "7.26",
+          "unit": "",
+          "ref": "7.35-7.45",
+          "flag": "L"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/01/2026",
-      "study": "CTA Abdomen",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-882044",
-      "clinical": "Severe abdominal pain out of proportion to exam",
-      "technique": "Standard protocol",
-      "findings": "Acute thrombus in superior mesenteric artery (SMA) with decreased enhancement of jejunal and ileal loops. Pneumatosis intestinalis in several jejunal loops. Portal venous gas.",
-      "impression": "Acute SMA occlusion with bowel ischemia/necrosis. Emergent vascular surgery.",
-      "dictated": "03/01/2026 08:30",
-      "verified": "03/01/2026 09:15"
+      "date": "11/2024",
+      "study": "CT Angiography \u2014 Abdomen/Pelvis With IV Contrast",
+      "indication": "Severe abdominal pain out of proportion to exam, AFib",
+      "findings": "Filling defect in proximal SMA \u2014 embolus. Bowel wall thickening and pneumatosis intestinalis beginning in mid-jejunum. No free air.",
+      "impression": "Acute SMA embolism with early bowel ischemia \u2014 no perforation yet. Emergent intervention required within 2 hours to prevent irreversible infarction."
     }
   ],
   "immunizations": [
@@ -291,7 +201,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Warfarin compliance",
-      "Subtherapeutic INR — missed several doses"
+      "Subtherapeutic INR \u2014 missed several doses"
     ],
     [
       "Living",
@@ -357,13 +267,12 @@ window.EMR_DATA = {
       "Assessment for signs of dehydration or shock": "Patient appears mildly dehydrated with poor skin turgor; cool extremities"
     },
     "ddxTargets": [
-      "Acute mesenteric ischemia (correct diagnosis)",
-      "Bowel obstruction",
-      "Peptic ulcer disease",
-      "Abdominal aortic aneurysm",
-      "Myocardial infarction with atypical presentation",
-      "Gastroenteritis",
-      "Diverticulitis"
+      "Acute mesenteric ischemia \u2014 SMA embolus, AFib source (correct)",
+      "Aortic dissection \u2014 tearing back pain, BP differential; mesenteric involvement possible but CT clarifies",
+      "Bowel obstruction \u2014 different CT finding; no embolus",
+      "Acute pancreatitis \u2014 lipase normal, pain epigastric not periumbilical, no vascular occlusion",
+      "Ischemic colitis \u2014 colonic distribution, less dramatic, no SMA embolus",
+      "Peptic ulcer perforation \u2014 free air on CT, different history"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the patient's age and nursing home residence, potentially attributing symptoms to common geriatric conditions rather than considering vascular emergencies",
@@ -373,7 +282,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "You've identified several potential causes for severe abdominal pain in an elderly patient. Given her medical history of atrial fibrillation and the mention of subtherapeutic INR, what specific vascular complications should you be particularly concerned about? What key historical details will help you differentiate between your differential diagnoses?",
       "phase5": "You've noted a striking discrepancy between the patient's severe pain (9/10) and relatively benign physical exam findings. This pain-to-exam mismatch is a classic presentation pattern. Combined with her history of atrial fibrillation and subtherapeutic anticoagulation, what vascular emergency should move to the top of your differential? What urgent studies would you order to confirm this diagnosis?",
-      "finalDebrief": "This case illustrates the classic presentation of acute mesenteric ischemia - severe pain out of proportion to physical exam findings in a patient with atrial fibrillation and inadequate anticoagulation. The key teaching points are: recognizing pain-exam mismatch as a red flag, understanding that embolic mesenteric ischemia often occurs in patients with atrial fibrillation, and appreciating that early diagnosis is crucial as bowel viability decreases rapidly with time. What made this case challenging was avoiding anchoring on more common causes of abdominal pain in elderly patients."
+      "finalDebrief": "This case illustrates the classic presentation of acute mesenteric ischemia - severe pain out of proportion to physical exam findings in a patient with atrial fibrillation and inadequate anticoagulation. The key teaching points are: recognizing pain-exam mismatch as a red flag, understanding that embolic mesenteric ischemia often occurs in patients with atrial fibrillation, and appreciating that early diagnosis is crucial as bowel viability decreases rapidly with time. What made this case challenging was avoiding anchoring on more common causes of abdominal pain in elderly patients.",
+      "final": "Diagnosis: acute mesenteric ischemia \u2014 SMA embolus. Key learning: (1) Classic presentation: 'pain out of proportion to exam' \u2014 severe colicky periumbilical pain, but abdomen soft and non-tender early. This is because ischemia initially affects the visceral peritoneum (referred pain, non-localizing) before transmural necrosis produces peritoneal signs. When peritoneal signs appear \u2192 bowel infarction has occurred. Intervene BEFORE peritoneal signs. (2) Etiology types: embolic (~50%, from AFib or cardiac thrombus), thrombotic (~25%, atherosclerotic SMA plaque), non-occlusive (~25%, low-flow state \u2014 sepsis, shock, vasopressors), mesenteric venous thrombosis (hypercoagulable states). (3) Time is bowel: viable window is approximately 6-8 hours from occlusion to irreversible infarction. Mesenteric CTA is the diagnostic modality \u2014 fast and diagnostic. Treat immediately after CT, not after labs or consulting rounds. (4) Management: heparin immediately, then IR for catheter-directed thrombolysis or surgical embolectomy. Laparotomy for bowel assessment \u2014 non-viable bowel resected. Second-look laparotomy at 24-48h to reassess marginal bowel. (5) AFib and mesenteric ischemia: prevent, not just treat. This patient was not anticoagulated with a CHA2DS2-VASc of 5 \u2014 direct consequence. Every AFib patient with score \u22652 (male) or \u22653 (female) should be anticoagulated unless absolute contraindication."
     }
+  },
+  "meta": {
+    "diagnosis": "Acute Mesenteric Ischemia \u2014 AFib Embolus, Mesenteric CTA, Emergency Surgical/IR Intervention",
+    "caseId": "mesenteric-ischemia"
   }
 };

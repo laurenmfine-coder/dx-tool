@@ -1,4 +1,4 @@
-/* emr-data/penicillin-allergy-delabeling-v2.js — Multi-Setting Allergy Case Variation: Penicillin Allergy Evaluation */
+
 window.EMR_DATA = {
   "base": {
     "patient": {
@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "6214 S Halsted St, Denver, CO 80201",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "Walgreens — University Blvd",
+      "pharmacy": "Walgreens \u2014 University Blvd",
       "emergencyContact": {
         "name": "Michael Williams",
         "phone": "(313) 555-3474",
@@ -26,7 +26,7 @@ window.EMR_DATA = {
     "allergies": [
       {
         "allergen": "Penicillin",
-        "reaction": "Mother told me I broke out as a baby — no details",
+        "reaction": "Mother told me I broke out as a baby \u2014 no details",
         "severity": "Unknown",
         "type": "Drug"
       }
@@ -49,7 +49,7 @@ window.EMR_DATA = {
       ],
       [
         "Pregnancy",
-        "34 weeks pregnant — GBS positive, needs intrapartum penicillin"
+        "34 weeks pregnant \u2014 GBS positive, needs intrapartum penicillin"
       ],
       [
         "Obstetrics",
@@ -68,20 +68,20 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation — GBS positive",
+        "chiefComplaint": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation \u2014 GBS positive",
         "diagnosis": "Penicillin Allergy Evaluation"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Penicillin allergy — unverified",
+          "description": "Penicillin allergy \u2014 unverified",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "GBS positive — 34 weeks",
+          "description": "GBS positive \u2014 34 weeks",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -112,7 +112,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "88",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -135,7 +135,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -156,7 +156,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -219,7 +219,7 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation — GBS positive",
+          "cc": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation \u2014 GBS positive",
           "hpi": "38F G2P1 at 34 weeks referred urgently by OB for penicillin allergy evaluation.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
@@ -229,34 +229,34 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "Urgent A/I consult — penicillin allergy evaluation at 34 weeks pregnancy for GBS prophylaxis",
+        "chiefComplaint": "Urgent A/I consult \u2014 penicillin allergy evaluation at 34 weeks pregnancy for GBS prophylaxis",
         "diagnosis": "Penicillin Allergy Evaluation"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Penicillin allergy — unverified childhood report, >95% chance of tolerance",
+          "description": "Penicillin allergy \u2014 unverified childhood report, >95% chance of tolerance",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "GBS positive — needs optimal prophylaxis",
+          "description": "GBS positive \u2014 needs optimal prophylaxis",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "Pregnancy 34 weeks — skin testing safe in pregnancy",
+          "description": "Pregnancy 34 weeks \u2014 skin testing safe in pregnancy",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Maternal anxiety — needs thorough counseling",
+          "description": "Maternal anxiety \u2014 needs thorough counseling",
           "status": "Active",
           "onset": "Acute",
           "icd10": ""
@@ -270,7 +270,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "82",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -293,7 +293,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "11.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": "H"
                 },
@@ -314,7 +314,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -371,14 +371,14 @@ window.EMR_DATA = {
               "name": "ALLERGY TESTING",
               "results": [
                 {
-                  "test": "Penicillin SPT — Major determinant (PPL)",
+                  "test": "Penicillin SPT \u2014 Major determinant (PPL)",
                   "value": "Negative (2mm)",
                   "unit": "",
                   "range": "<3mm positive",
                   "flag": ""
                 },
                 {
-                  "test": "Penicillin SPT — Minor determinant (MDM)",
+                  "test": "Penicillin SPT \u2014 Minor determinant (MDM)",
                   "value": "Negative (1mm)",
                   "unit": "",
                   "range": "<3mm positive",
@@ -393,7 +393,7 @@ window.EMR_DATA = {
                 },
                 {
                   "test": "Amoxicillin oral challenge (250mg)",
-                  "value": "Tolerated — no reaction at 1 hour",
+                  "value": "Tolerated \u2014 no reaction at 1 hour",
                   "unit": "",
                   "range": "",
                   "flag": ""
@@ -424,8 +424,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "Urgent A/I consult — penicillin allergy evaluation at 34 weeks pregnancy for GBS prophylaxis",
-          "hpi": "A/I urgent consult: 38F at 34 weeks with unverified penicillin allergy, GBS positive. Counseled extensively: (1) childhood rash reports have >95% negative predictive value for true allergy, (2) skin testing is safe in pregnancy (performed routinely), (3) oral challenge with 250mg amoxicillin is standard of care, (4) if positive, alternatives exist but are inferior for GBS. Patient agreed to testing with OB nurse present for reassurance. RESULT: All skin tests NEGATIVE. Oral amoxicillin challenge tolerated without reaction. PCN allergy DELABELED. OB notified — can use penicillin G intrapartum. EMR allergy field updated. Patient and mother both informed that this was likely a non-allergic childhood rash.",
+          "cc": "Urgent A/I consult \u2014 penicillin allergy evaluation at 34 weeks pregnancy for GBS prophylaxis",
+          "hpi": "A/I urgent consult: 38F at 34 weeks with unverified penicillin allergy, GBS positive. Counseled extensively: (1) childhood rash reports have >95% negative predictive value for true allergy, (2) skin testing is safe in pregnancy (performed routinely), (3) oral challenge with 250mg amoxicillin is standard of care, (4) if positive, alternatives exist but are inferior for GBS. Patient agreed to testing with OB nurse present for reassurance. RESULT: All skin tests NEGATIVE. Oral amoxicillin challenge tolerated without reaction. PCN allergy DELABELED. OB notified \u2014 can use penicillin G intrapartum. EMR allergy field updated. Patient and mother both informed that this was likely a non-allergic childhood rash.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -434,34 +434,34 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "Post-delivery follow-up — confirm delabeling, update records permanently",
+        "chiefComplaint": "Post-delivery follow-up \u2014 confirm delabeling, update records permanently",
         "diagnosis": "Penicillin Allergy Evaluation"
       },
       "problems": [
         {
           "id": "prob-1",
-          "description": "Penicillin allergy — DELABELED (skin test negative, oral challenge tolerated, used intrapartum without reaction)",
+          "description": "Penicillin allergy \u2014 DELABELED (skin test negative, oral challenge tolerated, used intrapartum without reaction)",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-2",
-          "description": "Status post delivery at 37 weeks — used penicillin G intrapartum without issue",
+          "description": "Status post delivery at 37 weeks \u2014 used penicillin G intrapartum without issue",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-3",
-          "description": "GBS prophylaxis — successful",
+          "description": "GBS prophylaxis \u2014 successful",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
         },
         {
           "id": "prob-4",
-          "description": "Postpartum — doing well",
+          "description": "Postpartum \u2014 doing well",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -494,7 +494,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -517,7 +517,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.4",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -538,7 +538,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "242",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -601,8 +601,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Post-delivery follow-up — confirm delabeling, update records permanently",
-          "hpi": "38F returns 4 weeks postpartum. Delivered at 37 weeks, received penicillin G intrapartum for GBS prophylaxis — no allergic reaction. Baby born healthy. Penicillin allergy permanently removed from all records. Patient very grateful — \"I can't believe I avoided penicillin my whole life for nothing.\" Counseled that her mother's report was likely a childhood viral exanthem mistaken for drug reaction. Mother also referred for her own delabeling evaluation.",
+          "cc": "Post-delivery follow-up \u2014 confirm delabeling, update records permanently",
+          "hpi": "38F returns 4 weeks postpartum. Delivered at 37 weeks, received penicillin G intrapartum for GBS prophylaxis \u2014 no allergic reaction. Baby born healthy. Penicillin allergy permanently removed from all records. Patient very grateful \u2014 \"I can't believe I avoided penicillin my whole life for nothing.\" Counseled that her mother's report was likely a childhood viral exanthem mistaken for drug reaction. Mother also referred for her own delabeling evaluation.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -624,53 +624,68 @@ window.EMR_DATA = {
     "address": "209 Jasmine Way, Chicago, IL 60601",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "Walgreens — University Blvd",
+    "pharmacy": "Walgreens \u2014 University Blvd",
     "emergencyContact": {
       "name": "Michael Williams",
       "phone": "(617) 555-8471",
       "relationship": "Spouse"
     },
-    "chiefComplaint": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation — GBS positive",
+    "chiefComplaint": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation \u2014 GBS positive",
     "diagnosis": "Penicillin Allergy Evaluation"
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Penicillin allergy — unverified",
+      "problem": "Penicillin allergy label \u2014 low-risk history, 20 years ago",
+      "icd": "Z88.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "Sandra Wright, 58F \u2014 'penicillin allergy' from childhood rash. No urticaria, no angioedema, no anaphylaxis. Rash resolved. 20 years ago."
     },
     {
-      "id": "prob-2",
-      "description": "GBS positive — 34 weeks",
+      "problem": "Allergy label consequences \u2014 receiving vancomycin and fluoroquinolones instead of optimal therapy",
+      "icd": "Z88.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "MRSA screen positive \u2014 labeled penicillin allergy \u2192 getting vancomycin instead of optimal beta-lactam therapy. De-labeling would change management."
     },
     {
-      "id": "prob-3",
-      "description": "Pregnancy",
+      "problem": "Low-risk history \u2014 most penicillin allergy labels are incorrect",
+      "icd": "Z88.0",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Acute",
-      "icd10": ""
+      "notes": "~80-90% of patients labeled penicillin allergic are NOT truly allergic. Risk stratification and challenge eliminate most false labels."
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Prenatal vitamins",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Penicillin skin test (major and minor determinants) \u2014 if available",
+      "sig": "Negative skin test = <1-3% risk of immediate hypersensitivity. Proceed to oral challenge after negative skin test.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 test"
+    },
+    {
+      "name": "Amoxicillin 250mg PO oral challenge \u2014 after negative skin test or directly (low-risk)",
+      "sig": "Supervised 1-hour oral challenge \u2014 if no reaction in 1 hour, penicillin allergy label removed. Low-risk histories can proceed directly to oral challenge without skin testing.",
+      "prescriber": "Allergy",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 challenge"
+    },
+    {
+      "name": "Document: penicillin allergy REMOVED from chart",
+      "sig": "Update medical record across all systems. Specify drug and dates in allergy reconciliation note.",
+      "prescriber": "Allergy/PCP",
+      "start": "2024",
+      "refills": 0,
+      "status": "Active \u2014 documentation"
     }
   ],
   "allergies": [
     {
       "allergen": "Penicillin",
-      "reaction": "Mother told me I broke out as a baby — no details",
+      "reaction": "Mother told me I broke out as a baby \u2014 no details",
       "severity": "Unknown",
       "type": "Drug"
     }
@@ -682,7 +697,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "88",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "0/10"
     }
@@ -693,7 +708,7 @@ window.EMR_DATA = {
       "type": "Emergency Visit",
       "date": "03/02/2026",
       "provider": "Dr. Attending",
-      "cc": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation — GBS positive",
+      "cc": "34-week pregnant woman sent from OB for urgent penicillin allergy evaluation \u2014 GBS positive",
       "hpi": "38F G2P1 at 34 weeks referred urgently by OB for penicillin allergy evaluation.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
@@ -702,95 +717,36 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-872176",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/2024",
+      "panel": "Penicillin Allergy Evaluation",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "2",
-              "unit": "%",
-              "range": "1-4",
-              "flag": ""
-            }
-          ]
+          "test": "Penicilloyl-polylysine (PPL) skin test \u2014 major determinant",
+          "value": "Negative (wheal <3mm)",
+          "unit": "",
+          "ref": "<3mm = negative",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Minor determinant mixture skin test",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Amoxicillin oral challenge \u2014 250mg supervised",
+          "value": "No reaction at 1 hour",
+          "unit": "",
+          "ref": "No reaction",
+          "flag": ""
+        },
+        {
+          "test": "IgE cross-reactivity \u2014 cephalosporins",
+          "value": "Not tested \u2014 low cross-reactivity after de-labeling (<1%)",
+          "unit": "",
+          "ref": "",
+          "flag": ""
         }
       ]
     }
@@ -814,7 +770,7 @@ window.EMR_DATA = {
     ],
     [
       "Pregnancy",
-      "34 weeks pregnant — GBS positive, needs intrapartum penicillin"
+      "34 weeks pregnant \u2014 GBS positive, needs intrapartum penicillin"
     ],
     [
       "Obstetrics",
@@ -860,7 +816,7 @@ window.EMR_DATA = {
         ">90% with PCN label NOT truly allergic",
         ">80% lose sensitivity after 10 years",
         "Morbilliform rash in children = usually viral exanthem",
-        "False PCN allergy → MRSA, C. diff, longer stays, higher mortality"
+        "False PCN allergy \u2192 MRSA, C. diff, longer stays, higher mortality"
       ]
     }
   ],
@@ -923,13 +879,12 @@ window.EMR_DATA = {
       "Extremity examination for edema": "Trace pedal edema, normal for third trimester"
     },
     "ddxTargets": [
-      "Unverified penicillin allergy (family history based) (correct diagnosis)",
-      "Low-risk penicillin allergy (remote childhood rash)",
-      "Penicillin intolerance rather than true allergy",
-      "True IgE-mediated penicillin allergy (must-not-miss diagnosis 1)",
-      "Severe penicillin allergy with anaphylaxis risk (must-not-miss diagnosis 2)",
-      "Non-allergic drug reaction misattributed to penicillin (common mimic 1)",
-      "Anxiety-related symptoms misinterpreted as allergic reaction (common mimic 2)"
+      "Penicillin allergy \u2014 correctly de-labeled after negative skin test and oral challenge (correct)",
+      "True IgE-mediated penicillin allergy \u2014 negative skin test + successful oral challenge excludes",
+      "Cephalosporin cross-reactivity \u2014 after de-labeling, cephalosporins safe (<1% cross-reactivity in truly allergic; lower in de-labeled)",
+      "Non-IgE drug reaction \u2014 maculopapular rash from childhood; not immune-mediated hypersensitivity",
+      "Viral exanthem misattributed to amoxicillin \u2014 very common; EBV + amoxicillin = rash",
+      "Drug intolerance \u2014 GI symptoms; not allergic; safe to use penicillin"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on the documented 'penicillin allergy' without exploring that patient has never actually taken penicillin or had a reaction herself",
@@ -939,7 +894,12 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider what specific details about her allergy history would be most important to determine the actual risk. What questions would help you distinguish between a true IgE-mediated reaction, a family assumption, and other possibilities?",
       "phase5": "Based on your history and exam, what does it tell you that she's never actually taken penicillin herself? How does this change your risk assessment, and what are the implications for her GBS-positive pregnancy management?",
-      "finalDebrief": "This case highlights how many 'penicillin allergies' are unverified family assumptions rather than true allergies. Notice how your differential evolved from accepting the allergy label to questioning its validity. What systematic approach would you use for all patients with reported drug allergies?"
+      "finalDebrief": "This case highlights how many 'penicillin allergies' are unverified family assumptions rather than true allergies. Notice how your differential evolved from accepting the allergy label to questioning its validity. What systematic approach would you use for all patients with reported drug allergies?",
+      "final": "Diagnosis: penicillin allergy de-labeled \u2014 low-risk history. Key learning: (1) The penicillin allergy problem: ~10-15% of US patients carry a penicillin allergy label. Of these, ~80-90% are NOT truly allergic when formally evaluated. The label leads to use of broader-spectrum, more expensive, and more toxic alternative antibiotics (vancomycin, fluoroquinolones) with worse outcomes. (2) Risk stratification: HIGH risk histories (immediate urticaria, angioedema, anaphylaxis <1h after penicillin) \u2192 skin test before challenge. LOW risk (delayed non-urticarial rash, rash >72h after dose, remote history, family history only, unknown reaction type) \u2192 can proceed directly to oral challenge without skin testing. (3) Cross-reactivity myth: penicillin-cephalosporin cross-reactivity was historically quoted at 10%. Modern data shows it is ~1-2% in truly allergic patients, and even lower (~0.1-0.5%) in de-labeled patients. Do not avoid cephalosporins in a de-labeled patient. (4) Viral rash misattributed to amoxicillin: EBV infection (mono) + amoxicillin = 80-100% develop a widespread maculopapular rash. This is NOT a drug allergy \u2014 it is a virus-drug interaction (immune complex-mediated). These patients are NOT penicillin allergic. (5) De-labeling impact: penicillin allergy removal allows use of narrow-spectrum beta-lactams, reduces CDiff from fluoroquinolone use, reduces MRSA acquisition from vancomycin exposure, and improves surgical infection outcomes. A quality improvement and patient safety initiative."
     }
+  },
+  "meta": {
+    "diagnosis": "Penicillin Allergy De-Labeling \u2014 Low-Risk History, Skin Test and Oral Challenge Protocol, Allergy Removal",
+    "caseId": "penicillin-allergy-delabeling-v2"
   }
 };
