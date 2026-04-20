@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "610 S Halsted St, Cleveland, OH 44108",
       "insurance": "Medicaid",
       "pcp": "Dr. Sarah Mitchell, DO",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Sharma",
         "phone": "(414) 555-1710",
@@ -102,7 +102,7 @@ window.EMR_DATA = {
         "bp": "82/48",
         "hr": "132",
         "rr": "28",
-        "temp": "36.8°C",
+        "temp": "36.8\u00b0C",
         "spo2": "89%",
         "pain": "6/10"
       },
@@ -113,7 +113,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.4",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -134,7 +134,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "242",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             }
@@ -247,7 +247,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Lip/tongue swelling, hives, throat tightness after shellfish",
-          "hpi": "28F presenting with acute anaphylaxis after accidental shellfish exposure at restaurant. Symptoms began ~20 min after eating shrimp — progressive lip swelling, diffuse urticaria, throat tightness, lightheadedness. No EpiPen available (expired). EMS administered IM epinephrine en route.",
+          "hpi": "28F presenting with acute anaphylaxis after accidental shellfish exposure at restaurant. Symptoms began ~20 min after eating shrimp \u2014 progressive lip swelling, diffuse urticaria, throat tightness, lightheadedness. No EpiPen available (expired). EMS administered IM epinephrine en route.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -255,10 +255,10 @@ window.EMR_DATA = {
       ]
     },
     "inpatient": {
-      "cc": "Admitted for observation after anaphylaxis — received 2 doses epinephrine in ED",
-      "dx": "Anaphylaxis — post-episode observation",
+      "cc": "Admitted for observation after anaphylaxis \u2014 received 2 doses epinephrine in ED",
+      "dx": "Anaphylaxis \u2014 post-episode observation",
       "problems": [
-        "Anaphylaxis (shellfish) — resolved",
+        "Anaphylaxis (shellfish) \u2014 resolved",
         "Asthma (mild persistent)",
         "Biphasic reaction risk"
       ],
@@ -298,7 +298,7 @@ window.EMR_DATA = {
         "bp": "112/72",
         "hr": "88",
         "rr": "16",
-        "temp": "36.8°C",
+        "temp": "36.8\u00b0C",
         "spo2": "98%",
         "pain": "1/10"
       },
@@ -309,7 +309,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.4",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -330,7 +330,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "242",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             },
@@ -440,12 +440,12 @@ window.EMR_DATA = {
       ]
     },
     "consult": {
-      "cc": "A/I consult for anaphylaxis workup — inpatient, day 1 post-episode",
-      "dx": "Shellfish anaphylaxis — confirm triggers, risk-stratify",
+      "cc": "A/I consult for anaphylaxis workup \u2014 inpatient, day 1 post-episode",
+      "dx": "Shellfish anaphylaxis \u2014 confirm triggers, risk-stratify",
       "problems": [
         "Anaphylaxis (shellfish)",
         "Asthma",
-        "Expired EpiPen — non-adherence to carrying"
+        "Expired EpiPen \u2014 non-adherence to carrying"
       ],
       "meds": [
         {
@@ -471,7 +471,7 @@ window.EMR_DATA = {
         "bp": "118/72",
         "hr": "76",
         "rr": "14",
-        "temp": "36.8°C",
+        "temp": "36.8\u00b0C",
         "spo2": "99%",
         "pain": "0/10"
       },
@@ -482,7 +482,7 @@ window.EMR_DATA = {
             {
               "test": "WBC",
               "value": "7.4",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "4.5-11.0",
               "flag": ""
             },
@@ -503,7 +503,7 @@ window.EMR_DATA = {
             {
               "test": "Platelets",
               "value": "242",
-              "unit": "x10³/µL",
+              "unit": "x10\u00b3/\u00b5L",
               "range": "150-400",
               "flag": ""
             },
@@ -626,7 +626,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
           "cc": "A/I consult for anaphylaxis",
-          "hpi": "Consultant note: 28F with confirmed IgE-mediated shellfish anaphylaxis. Tropomyosin-positive (cross-reactive marker — advise all crustacean avoidance). Baseline tryptase normal — mastocytosis unlikely. Recommendations: strict shellfish avoidance, EpiPen 0.3mg x2 prescribed, anaphylaxis action plan provided, medic-alert bracelet recommended, follow-up in A/I clinic in 4 weeks.",
+          "hpi": "Consultant note: 28F with confirmed IgE-mediated shellfish anaphylaxis. Tropomyosin-positive (cross-reactive marker \u2014 advise all crustacean avoidance). Baseline tryptase normal \u2014 mastocytosis unlikely. Recommendations: strict shellfish avoidance, EpiPen 0.3mg x2 prescribed, anaphylaxis action plan provided, medic-alert bracelet recommended, follow-up in A/I clinic in 4 weeks.",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -635,7 +635,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "cc": "Follow-up 4 weeks after anaphylaxis hospitalization",
-      "dx": "Shellfish allergy — clinic follow-up",
+      "dx": "Shellfish allergy \u2014 clinic follow-up",
       "problems": [
         "Shellfish allergy (confirmed IgE-mediated)",
         "Asthma (mild, controlled)",
@@ -665,7 +665,7 @@ window.EMR_DATA = {
         "bp": "112/68",
         "hr": "72",
         "rr": "14",
-        "temp": "36.8°C",
+        "temp": "36.8\u00b0C",
         "spo2": "99%",
         "pain": "0/10"
       },
@@ -674,42 +674,42 @@ window.EMR_DATA = {
           "name": "ALLERGY TESTING",
           "results": [
             {
-              "test": "Skin prick — Shrimp",
+              "test": "Skin prick \u2014 Shrimp",
               "value": "12mm wheal",
               "unit": "",
               "range": "<3mm positive",
               "flag": "H"
             },
             {
-              "test": "Skin prick — Crab",
+              "test": "Skin prick \u2014 Crab",
               "value": "10mm wheal",
               "unit": "",
               "range": "<3mm positive",
               "flag": "H"
             },
             {
-              "test": "Skin prick — Lobster",
+              "test": "Skin prick \u2014 Lobster",
               "value": "8mm wheal",
               "unit": "",
               "range": "<3mm positive",
               "flag": "H"
             },
             {
-              "test": "Skin prick — Mollusk (clam)",
+              "test": "Skin prick \u2014 Mollusk (clam)",
               "value": "2mm wheal",
               "unit": "",
               "range": "<3mm positive",
               "flag": ""
             },
             {
-              "test": "Skin prick — Peanut",
+              "test": "Skin prick \u2014 Peanut",
               "value": "0mm",
               "unit": "",
               "range": "<3mm positive",
               "flag": ""
             },
             {
-              "test": "Skin prick — Tree nut panel",
+              "test": "Skin prick \u2014 Tree nut panel",
               "value": "Walnut 6mm, Cashew 5mm",
               "unit": "",
               "range": "<3mm positive",
@@ -748,7 +748,7 @@ window.EMR_DATA = {
     "address": "1868 W Haddon Ave, Memphis, TN 38104",
     "insurance": "Medicaid",
     "pcp": "Dr. Sarah Mitchell, DO",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Sharma",
       "phone": "(502) 555-8504",
@@ -759,38 +759,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Known shellfish allergy",
+      "problem": "Anaphylaxis \u2014 shrimp allergy",
+      "icd": "T78.2XXA",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Grade 3 anaphylaxis: urticaria, angioedema, throat tightness; epinephrine administered x1 in ED"
     },
     {
-      "id": "prob-2",
-      "description": "Asthma (mild persistent)",
+      "problem": "Shellfish allergy \u2014 shrimp (IgE-mediated)",
+      "icd": "Z91.018",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Newly diagnosed today; prior reactions unclear"
+    },
+    {
+      "problem": "Allergic rhinitis",
+      "icd": "J30.9",
+      "onset": "2019",
+      "status": "Active",
+      "notes": "Seasonal, on cetirizine PRN"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Albuterol",
-      "dose": "90mcg",
-      "route": "INH",
-      "frequency": "PRN",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 10mg daily PRN",
+      "sig": "Take 1 tablet by mouth daily as needed for allergy symptoms",
+      "prescriber": "Dr. Chen",
+      "start": "03/2020",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Combined OCP",
-      "dose": "",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "EpiPen 0.3mg IM x2 (NEW)",
+      "sig": "Inject 1 auto-injector into outer thigh at first sign of anaphylaxis; call 911; may repeat in 5-15 min",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 1,
+      "status": "Active \u2014 new prescription"
+    },
+    {
+      "name": "Diphenhydramine 25mg q6h PRN (ED discharge)",
+      "sig": "Take 1-2 tablets by mouth every 6 hours as needed x3 days",
+      "prescriber": "ED",
+      "start": "11/2024",
+      "refills": 0,
+      "status": "Active \u2014 short course"
     }
   ],
   "allergies": [
@@ -814,7 +827,7 @@ window.EMR_DATA = {
       "bp": "82/48",
       "hr": "132",
       "rr": "28",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "89%",
       "pain": "6/10"
     }
@@ -826,7 +839,7 @@ window.EMR_DATA = {
       "date": "03/02/2026",
       "provider": "Dr. Attending",
       "cc": "Lip/tongue swelling, hives, throat tightness after shellfish",
-      "hpi": "28F presenting with acute anaphylaxis after accidental shellfish exposure at restaurant. Symptoms began ~20 min after eating shrimp — progressive lip swelling, diffuse urticaria, throat tightness, lightheadedness. No EpiPen available (expired). EMS administered IM epinephrine en route.",
+      "hpi": "28F presenting with acute anaphylaxis after accidental shellfish exposure at restaurant. Symptoms began ~20 min after eating shrimp \u2014 progressive lip swelling, diffuse urticaria, throat tightness, lightheadedness. No EpiPen available (expired). EMS administered IM epinephrine en route.",
       "exam": "See documentation.",
       "assessment": "See assessment.",
       "plan": "See orders."
@@ -834,151 +847,62 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:00",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-218882",
-      "collected": "03/02/2026 07:50",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/14/2024",
+      "panel": "Anaphylaxis Workup",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.4",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.6",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Hematocrit",
-              "value": "40.8",
-              "unit": "%",
-              "range": "36-46",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "242",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Serum Tryptase (drawn 1h post-reaction)",
+          "value": "28.4",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Chloride",
-              "value": "102",
-              "unit": "mEq/L",
-              "range": "98-106",
-              "flag": ""
-            },
-            {
-              "test": "CO2",
-              "value": "24",
-              "unit": "mEq/L",
-              "range": "22-28",
-              "flag": ""
-            },
-            {
-              "test": "BUN",
-              "value": "14",
-              "unit": "mg/dL",
-              "range": "7-20",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "94",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            },
-            {
-              "test": "Calcium",
-              "value": "9.4",
-              "unit": "mg/dL",
-              "range": "8.5-10.5",
-              "flag": ""
-            }
-          ]
+          "test": "Baseline Tryptase (2h post)",
+          "value": "24.1",
+          "unit": "ng/mL",
+          "ref": "<11.4",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY STUDIES",
-          "results": [
-            {
-              "test": "Tryptase (acute)",
-              "value": "42",
-              "unit": "ng/mL",
-              "range": "<11.5",
-              "flag": "H"
-            },
-            {
-              "test": "Lactate",
-              "value": "3.1",
-              "unit": "mmol/L",
-              "range": "0.5-2.0",
-              "flag": "H"
-            }
-          ]
+          "test": "CBC \u2014 WBC",
+          "value": "12.4",
+          "unit": "K/\u03bcL",
+          "ref": "4.5-11.0",
+          "flag": "H"
+        },
+        {
+          "test": "CBC \u2014 Eosinophils",
+          "value": "0.6",
+          "unit": "K/\u03bcL",
+          "ref": "0.0-0.5",
+          "flag": "H"
+        },
+        {
+          "test": "Total IgE",
+          "value": "420",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
+        },
+        {
+          "test": "Shrimp-specific IgE (ImmunoCAP)",
+          "value": "8.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Tropomyosin IgE (shrimp allergen)",
+          "value": "6.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
         }
       ]
     }
   ],
-  "imaging": [
-    {
-      "id": "img-3580",
-      "date": "03/02/2026",
-      "study": "Chest X-Ray",
-      "status": "Final",
-      "priority": "STAT",
-      "orderedBy": "Dr. Attending",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-806175",
-      "clinical": "",
-      "technique": "Standard protocol",
-      "findings": "Clear lungs. No pulmonary edema.",
-      "impression": "No acute cardiopulmonary process.",
-      "dictated": "03/02/2026 08:30",
-      "verified": "03/02/2026 09:15"
-    }
-  ],
+  "imaging": [],
   "immunizations": [
     {
       "name": "Influenza",
@@ -1081,20 +1005,20 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Anaphylaxis is a severe, life-threatening generalized hypersensitivity reaction requiring rapid recognition. Diagnosis is clinical — epinephrine should not be delayed for lab confirmation.",
-      "Epinephrine is the ONLY first-line treatment for anaphylaxis. It simultaneously reverses vasodilation (alpha-1), bronchospasm (beta-2), and mediator release (beta-2 stabilizes mast cells). Antihistamines and steroids are adjuncts only — they do not treat the acute hemodynamic crisis.",
-      "Biphasic anaphylaxis occurs in 5–20% of cases: initial reaction resolves, then recurs 1–72 hours later (typically 8–10 hours) without re-exposure. Cannot be predicted by severity of first reaction. All anaphylaxis patients require observation for minimum 4–6 hours.",
+      "Anaphylaxis is a severe, life-threatening generalized hypersensitivity reaction requiring rapid recognition. Diagnosis is clinical \u2014 epinephrine should not be delayed for lab confirmation.",
+      "Epinephrine is the ONLY first-line treatment for anaphylaxis. It simultaneously reverses vasodilation (alpha-1), bronchospasm (beta-2), and mediator release (beta-2 stabilizes mast cells). Antihistamines and steroids are adjuncts only \u2014 they do not treat the acute hemodynamic crisis.",
+      "Biphasic anaphylaxis occurs in 5\u201320% of cases: initial reaction resolves, then recurs 1\u201372 hours later (typically 8\u201310 hours) without re-exposure. Cannot be predicted by severity of first reaction. All anaphylaxis patients require observation for minimum 4\u20136 hours.",
       "The World Allergy Organization (WAO) and AAAAI recommend 2 auto-injectors prescribed at discharge. First injection may not be sufficient (especially in obese patients) or may malfunction.",
-      "Anaphylaxis without urticaria occurs in ~20% of cases — absence of skin findings does NOT exclude anaphylaxis. Cardiovascular-dominant anaphylaxis (hypotension only) is particularly dangerous and commonly missed."
+      "Anaphylaxis without urticaria occurs in ~20% of cases \u2014 absence of skin findings does NOT exclude anaphylaxis. Cardiovascular-dominant anaphylaxis (hypotension only) is particularly dangerous and commonly missed."
     ],
     "boardPearls": [
-      "Anaphylaxis diagnostic criteria: acute onset + either (1) skin/mucosal + respiratory OR hypotension; or (2) ≥2 of: skin/mucosal, respiratory, hypotension, GI after allergen exposure.",
-      "Epinephrine dose: 0.3–0.5 mg IM (1:1000) in anterolateral mid-thigh. Repeat every 5–15 min. IV only if IM fails or cardiac arrest.",
-      "Position: supine with legs elevated for hypotension. NOT upright — sudden positional change in anaphylaxis → fatal cardiovascular collapse ('empty heart syndrome').",
-      "Biphasic anaphylaxis: occurs 1–72h later without re-exposure. Minimum observation: 4–6h mild/moderate; 24h if severe or prior biphasic history.",
-      "Tryptase peaks 60–90 min after anaphylaxis onset, returns to baseline at 6h. Baseline tryptase >11.4 suggests mastocytosis as comorbidity.",
-      "Protracted anaphylaxis: unresponsive to epinephrine → IV glucagon 1–5 mg (for patients on beta-blockers who are epinephrine-refractory).",
-      "Discharge: EpiPen × 2, anaphylaxis action plan, allergist referral, medical alert ID."
+      "Anaphylaxis diagnostic criteria: acute onset + either (1) skin/mucosal + respiratory OR hypotension; or (2) \u22652 of: skin/mucosal, respiratory, hypotension, GI after allergen exposure.",
+      "Epinephrine dose: 0.3\u20130.5 mg IM (1:1000) in anterolateral mid-thigh. Repeat every 5\u201315 min. IV only if IM fails or cardiac arrest.",
+      "Position: supine with legs elevated for hypotension. NOT upright \u2014 sudden positional change in anaphylaxis \u2192 fatal cardiovascular collapse ('empty heart syndrome').",
+      "Biphasic anaphylaxis: occurs 1\u201372h later without re-exposure. Minimum observation: 4\u20136h mild/moderate; 24h if severe or prior biphasic history.",
+      "Tryptase peaks 60\u201390 min after anaphylaxis onset, returns to baseline at 6h. Baseline tryptase >11.4 suggests mastocytosis as comorbidity.",
+      "Protracted anaphylaxis: unresponsive to epinephrine \u2192 IV glucagon 1\u20135 mg (for patients on beta-blockers who are epinephrine-refractory).",
+      "Discharge: EpiPen \u00d7 2, anaphylaxis action plan, allergist referral, medical alert ID."
     ]
   },
   "guided": {
@@ -1156,13 +1080,12 @@ window.EMR_DATA = {
       "Assess work of breathing and use of accessory muscles": "Mild increased work of breathing, no accessory muscle use at rest"
     },
     "ddxTargets": [
-      "Anaphylaxis (correct diagnosis)",
-      "Severe allergic reaction without anaphylaxis",
-      "Hereditary angioedema",
-      "Acute asthma exacerbation",
-      "Septic shock",
-      "ACE inhibitor induced angioedema",
-      "Scombroid poisoning"
+      "Anaphylaxis \u2014 IgE-mediated shellfish allergy (correct)",
+      "Scombroid fish poisoning \u2014 histamine toxicity, not IgE-mediated",
+      "Vasovagal syncope \u2014 no urticaria or angioedema",
+      "Hereditary angioedema \u2014 no urticaria, C4 low, family history",
+      "Acute urticaria without systemic involvement",
+      "Panic attack \u2014 no objective signs of allergic reaction"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on obvious shellfish allergy history and missing severity assessment or alternative causes of shock",
@@ -1172,7 +1095,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Looking at your differential, I notice you're considering allergic reactions. What specific clinical criteria help distinguish between a localized allergic reaction versus anaphylaxis? What key history and exam findings will you prioritize to make this distinction?",
       "phase5": "Now that you've gathered your history and physical exam findings, walk me through how you're weighing the evidence for anaphylaxis. What combination of systems are involved here, and how does that inform your diagnosis and urgency of treatment?",
-      "finalDebrief": "This case highlights the critical distinction between allergic reactions and anaphylaxis. Notice how the combination of cutaneous symptoms, respiratory involvement, and cardiovascular compromise met the criteria for anaphylaxis. How did the expired EpiPen detail and vital signs guide your assessment of severity? What does this teach us about not anchoring on 'just another allergic reaction'?"
+      "finalDebrief": "This case highlights the critical distinction between allergic reactions and anaphylaxis. Notice how the combination of cutaneous symptoms, respiratory involvement, and cardiovascular compromise met the criteria for anaphylaxis. How did the expired EpiPen detail and vital signs guide your assessment of severity? What does this teach us about not anchoring on 'just another allergic reaction'?",
+      "final": "Diagnosis: grade 3 anaphylaxis from IgE-mediated shrimp allergy. Key teaching points: (1) Anaphylaxis diagnosis is clinical \u2014 2 or more systems (skin/mucosal + respiratory/CV/GI) after allergen exposure. Tryptase >11.4 ng/mL confirms mast cell activation. (2) Epinephrine is FIRST-LINE \u2014 not antihistamines or steroids. IM epinephrine 0.3mg lateral thigh, no delay. (3) Biphasic reaction risk \u2014 4-12h post-initial reaction; 4-6h ED observation minimum. (4) Shrimp tropomyosin is the major cross-reactive allergen \u2014 patient should avoid all crustacean shellfish. (5) Discharge requirements: 2 EpiPens, written anaphylaxis action plan, allergen avoidance counseling, referral to allergist for confirmatory testing and VIT/immunotherapy discussion."
     }
+  },
+  "meta": {
+    "diagnosis": "Anaphylaxis \u2014 IgE-mediated, Shellfish (Shrimp) Allergy"
   }
 };

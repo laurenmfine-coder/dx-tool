@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "5211 Hollyhock Rd, Cleveland, OH 44105",
       "insurance": "Aetna HMO",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Lisa Kowalski",
         "phone": "(803) 555-3683",
@@ -52,7 +52,7 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Diet",
-        "Was eating steak — piece became impacted"
+        "Was eating steak \u2014 piece became impacted"
       ],
       [
         "Medication adherence",
@@ -136,7 +136,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "6/10"
         }
@@ -159,7 +159,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -173,7 +173,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -269,7 +269,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted after endoscopic food disimpaction — EoE with esophageal stricture",
+        "chiefComplaint": "Admitted after endoscopic food disimpaction \u2014 EoE with esophageal stricture",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
@@ -356,7 +356,7 @@ window.EMR_DATA = {
           "bp": "124/76",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -379,7 +379,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -393,7 +393,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -479,8 +479,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted after endoscopic food disimpaction — EoE with esophageal stricture",
-          "hpi": "Brandon Kowalski — Admitted after endoscopic food disimpaction — EoE with esophageal stricture",
+          "cc": "Admitted after endoscopic food disimpaction \u2014 EoE with esophageal stricture",
+          "hpi": "Brandon Kowalski \u2014 Admitted after endoscopic food disimpaction \u2014 EoE with esophageal stricture",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -489,7 +489,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — optimize EoE management, food allergy testing for elimination diet",
+        "chiefComplaint": "A/I consult \u2014 optimize EoE management, food allergy testing for elimination diet",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
@@ -558,7 +558,7 @@ window.EMR_DATA = {
           "bp": "122/76",
           "hr": "78",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "1/10"
         }
@@ -581,7 +581,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -595,7 +595,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -681,8 +681,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — optimize EoE management, food allergy testing for elimination diet",
-          "hpi": "Brandon Kowalski — A/I consult — optimize EoE management, food allergy testing for elimination diet",
+          "cc": "A/I consult \u2014 optimize EoE management, food allergy testing for elimination diet",
+          "hpi": "Brandon Kowalski \u2014 A/I consult \u2014 optimize EoE management, food allergy testing for elimination diet",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -691,7 +691,7 @@ window.EMR_DATA = {
     },
     "clinic": {
       "patient": {
-        "chiefComplaint": "EoE follow-up — repeat EGD results, medication adherence, elimination diet progress",
+        "chiefComplaint": "EoE follow-up \u2014 repeat EGD results, medication adherence, elimination diet progress",
         "diagnosis": "Eosinophilic Esophagitis"
       },
       "problems": [
@@ -742,7 +742,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "74",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "0/10"
         }
@@ -765,7 +765,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -779,7 +779,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 },
@@ -865,8 +865,8 @@ window.EMR_DATA = {
           "type": "Office Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "EoE follow-up — repeat EGD results, medication adherence, elimination diet progress",
-          "hpi": "Brandon Kowalski — EoE follow-up — repeat EGD results, medication adherence, elimination diet progress",
+          "cc": "EoE follow-up \u2014 repeat EGD results, medication adherence, elimination diet progress",
+          "hpi": "Brandon Kowalski \u2014 EoE follow-up \u2014 repeat EGD results, medication adherence, elimination diet progress",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -888,7 +888,7 @@ window.EMR_DATA = {
     "address": "1345 Dogwood Ln, Baltimore, MD 21210",
     "insurance": "Aetna HMO",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Lisa Kowalski",
       "phone": "(620) 555-1420",
@@ -899,61 +899,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Allergic rhinitis",
+      "problem": "Eosinophilic esophagitis \u2014 active, fibrostenotic",
+      "icd": "K20.0",
+      "onset": "2021",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Peak eos \u226515/hpf on biopsy (proximal and distal); esophageal rings and stricture on EGD"
     },
     {
-      "id": "prob-2",
-      "description": "Asthma",
+      "problem": "Dysphagia \u2014 solid food, progressive",
+      "icd": "R13.10",
+      "onset": "2021",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Recurrent food impactions x3 in past year; last impaction required endoscopic removal"
     },
     {
-      "id": "prob-3",
-      "description": "History of food impactions (2 prior)",
+      "problem": "Atopic triad \u2014 asthma, allergic rhinitis, atopic dermatitis",
+      "icd": "J45.20",
+      "onset": "2016",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
-    },
-    {
-      "id": "prob-4",
-      "description": "Known EoE diagnosis",
-      "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "IgE-mediated atopy predisposes to EoE; aeroallergen sensitization contributing"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Fluticasone swallowed",
-      "dose": "440mcg",
-      "route": "Swallowed",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Swallowed fluticasone propionate 880mcg BID (topical esophageal steroid)",
+      "sig": "Inhale 2 puffs (220mcg each) from MDI and SWALLOW \u2014 do not inhale; take on empty stomach; do not eat/drink for 30 min",
+      "prescriber": "Dr. Martinez",
+      "start": "08/2024",
+      "refills": 3,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Omeprazole",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Omeprazole 40mg BID",
+      "sig": "Take 1 capsule by mouth twice daily 30-60 min before meals",
+      "prescriber": "Dr. Martinez",
+      "start": "08/2024",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 10mg daily",
+      "sig": "Take 1 tablet by mouth daily for concomitant allergic rhinitis",
+      "prescriber": "Dr. Rodriguez",
+      "start": "04/2022",
+      "refills": 3,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -977,7 +967,7 @@ window.EMR_DATA = {
       "bp": "128/78",
       "hr": "82",
       "rr": "16",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "6/10"
     }
@@ -997,114 +987,75 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-227513",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "10/20/2024",
+      "panel": "EoE Workup and Allergy Testing",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            },
-            {
-              "test": "Eosinophils",
-              "value": "8",
-              "unit": "%",
-              "range": "1-4",
-              "flag": "H"
-            }
-          ]
+          "test": "CBC \u2014 Eosinophils",
+          "value": "0.8",
+          "unit": "K/\u03bcL",
+          "ref": "0.0-0.5",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Total IgE",
+          "value": "680",
+          "unit": "IU/mL",
+          "ref": "<150",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Ige",
-              "value": "380",
-              "unit": "IU/mL",
-              "range": "<100",
-              "flag": "H"
-            }
-          ]
+          "test": "Wheat IgE (ImmunoCAP)",
+          "value": "7.2",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Milk IgE",
+          "value": "2.1",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Egg IgE",
+          "value": "0.8",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Soy IgE",
+          "value": "0.4",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": "H"
+        },
+        {
+          "test": "Esophageal Biopsy \u2014 Peak Eosinophils",
+          "value": "42",
+          "unit": "eos/hpf",
+          "ref": "<15",
+          "flag": "H"
+        },
+        {
+          "test": "Esophageal Biopsy \u2014 Distribution",
+          "value": "Proximal: 38/hpf, Distal: 42/hpf",
+          "unit": "",
+          "ref": "<15",
+          "flag": "H"
         }
       ]
     }
   ],
   "imaging": [
     {
-      "id": "img-1",
-      "date": "03/02/2026",
-      "study": "EGD",
-      "status": "Final",
-      "priority": "Routine",
-      "orderedBy": "Dr. ED Physician",
-      "readBy": "Dr. Radiologist",
-      "facility": "ReasonDx Medical Center",
-      "accession": "IMG-704488",
-      "clinical": "28-year-old with recurrent dysphagia and food impaction at dinner",
-      "technique": "Standard protocol",
-      "findings": "Linear furrows, white exudates, concentric rings (trachealization) in proximal and mid-esophagus. Biopsies taken.",
-      "impression": "Endoscopic findings consistent with active EoE. Biopsy: >15 eos/hpf.",
-      "dictated": "03/02/2026 08:30",
-      "verified": "03/02/2026 09:15"
+      "date": "10/15/2024",
+      "study": "Upper Endoscopy (EGD) with Biopsy",
+      "indication": "Recurrent dysphagia and food impaction \u2014 evaluate for EoE",
+      "findings": "Esophageal rings (trachealization) throughout mid and distal esophagus. Fixed stricture at 30cm \u2014 12mm caliber, dilated to 15mm during procedure. Longitudinal furrows present. Mucosa friable and pale. Biopsies taken proximal, mid, and distal esophagus. Stomach and duodenum: normal.",
+      "impression": "Endoscopic features classic for fibrostenotic EoE. Fixed stricture requiring dilation. Recommend biopsies to confirm \u226515 eos/hpf for diagnosis. If confirmed: topical steroids and dietary elimination."
     }
   ],
   "immunizations": [
@@ -1122,7 +1073,7 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Diet",
-      "Was eating steak — piece became impacted"
+      "Was eating steak \u2014 piece became impacted"
     ],
     [
       "Medication adherence",
@@ -1144,7 +1095,7 @@ window.EMR_DATA = {
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7286571/",
       "openAccess": true,
       "validates": [
-        "≥15 eos/HPF diagnostic threshold",
+        "\u226515 eos/HPF diagnostic threshold",
         "1-food (milk) elimination first-line",
         "Swallowed budesonide/fluticasone",
         "Repeat EGD 8-12 weeks"
@@ -1153,17 +1104,17 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "EoE is diagnosed by ≥15 eosinophils/hpf on esophageal biopsy (≥6 biopsies from proximal + distal esophagus) after 8-week PPI trial. PPI trial first excludes PPI-responsive esophageal eosinophilia (GERD-related), which is not true EoE.",
-      "Most common trigger food: cow's milk (55–65%). 6-food elimination diet (milk, wheat, egg, soy, nuts, seafood) achieves histologic remission in 70–80%. Reintroduce one food at a time with repeat endoscopy to identify specific trigger.",
-      "Dupilumab (FDA 2022) is the first biologic approved for EoE — targets IL-4Rα, blocking IL-4/IL-13, which drives eotaxin-3 production in esophageal epithelium. Dupilumab-associated EoE: new EoE can develop in patients on dupilumab for asthma/AD."
+      "EoE is diagnosed by \u226515 eosinophils/hpf on esophageal biopsy (\u22656 biopsies from proximal + distal esophagus) after 8-week PPI trial. PPI trial first excludes PPI-responsive esophageal eosinophilia (GERD-related), which is not true EoE.",
+      "Most common trigger food: cow's milk (55\u201365%). 6-food elimination diet (milk, wheat, egg, soy, nuts, seafood) achieves histologic remission in 70\u201380%. Reintroduce one food at a time with repeat endoscopy to identify specific trigger.",
+      "Dupilumab (FDA 2022) is the first biologic approved for EoE \u2014 targets IL-4R\u03b1, blocking IL-4/IL-13, which drives eotaxin-3 production in esophageal epithelium. Dupilumab-associated EoE: new EoE can develop in patients on dupilumab for asthma/AD."
     ],
     "boardPearls": [
-      "EoE diagnostic threshold: ≥15 eos/hpf after 8-week PPI trial. PPI-responsive eosinophilia: normalizes on PPI → NOT true EoE.",
+      "EoE diagnostic threshold: \u226515 eos/hpf after 8-week PPI trial. PPI-responsive eosinophilia: normalizes on PPI \u2192 NOT true EoE.",
       "Endoscopic findings: rings (trachealization), longitudinal furrows, white exudates, edema, stricture. EREFS score used in trials.",
       "Most common adult EoE presentation: dysphagia + food impaction. Most common pediatric: feeding refusal, vomiting, abdominal pain.",
-      "Treatment options: 6FED (70–80% remission); swallowed topical budesonide/fluticasone (50–70%); dupilumab (59% remission, TREX trial); PPI (30–40%).",
-      "Dilation: for symptomatic strictures. Improves dysphagia but does NOT treat underlying eosinophilic inflammation — must combine with anti-inflammatory therapy.",
-      "Dupilumab-associated EoE: recognized adverse effect — eosinophils redirected to esophagus. Screen with symptom questionnaire."
+      "Treatment options: 6FED (70\u201380% remission); swallowed topical budesonide/fluticasone (50\u201370%); dupilumab (59% remission, TREX trial); PPI (30\u201340%).",
+      "Dilation: for symptomatic strictures. Improves dysphagia but does NOT treat underlying eosinophilic inflammation \u2014 must combine with anti-inflammatory therapy.",
+      "Dupilumab-associated EoE: recognized adverse effect \u2014 eosinophils redirected to esophagus. Screen with symptom questionnaire."
     ]
   },
   "guided": {
@@ -1213,7 +1164,7 @@ window.EMR_DATA = {
       "Assessment of drooling or inability to handle secretions"
     ],
     "examFindings": {
-      "Vital signs assessment": "BP 128/78, HR 82, Temp 36.8°C, SpO2 99% - stable vital signs",
+      "Vital signs assessment": "BP 128/78, HR 82, Temp 36.8\u00b0C, SpO2 99% - stable vital signs",
       "General appearance and distress level": "Alert, anxious-appearing male in mild distress, sitting upright, occasionally spitting into cup",
       "Head and neck examination": "No masses, no lymphadenopathy, no thyromegaly",
       "Lymph node palpation": "No cervical, supraclavicular, or axillary lymphadenopathy",
@@ -1225,13 +1176,12 @@ window.EMR_DATA = {
       "Assessment of drooling or inability to handle secretions": "Patient occasionally spits saliva, reports difficulty swallowing even liquids"
     },
     "ddxTargets": [
-      "Eosinophilic esophagitis with food impaction (correct diagnosis)",
-      "Esophageal stricture",
-      "Achalasia",
-      "Esophageal perforation",
-      "Boerhaave syndrome",
-      "GERD with esophagitis",
-      "Esophageal carcinoma"
+      "Eosinophilic esophagitis \u2014 active, fibrostenotic, wheat trigger (correct)",
+      "GERD \u2014 esophageal eosinophilia confined to distal esophagus; improves with PPI; rings absent",
+      "Esophageal carcinoma \u2014 dysphagia progressive; biopsy malignant; no eosinophilia",
+      "Achalasia \u2014 birds-beak on barium swallow; absent peristalsis on manometry; no rings",
+      "Eosinophilic gastroenteritis \u2014 systemic eosinophilia; GI eosinophilia beyond esophagus",
+      "Pill esophagitis \u2014 localized injury; history of bisphosphonate, doxycycline, NSAID use"
     ],
     "biasFlags": {
       "anchoring": "May anchor on the known EoE diagnosis and miss complications like perforation or other causes of dysphagia that could develop secondarily",
@@ -1241,7 +1191,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Good start on your differential. Given this patient's age and the acute nature of his presentation, what specific historical details would help you differentiate between mechanical obstruction and motility disorders? Also consider - what are the potential complications of food impaction that you need to rule out?",
       "phase5": "Now that you've gathered your history and physical, let's think about this systematically. You have a known EoE patient with food impaction - what does this tell you about his disease control? What immediate management concerns do you have, and what would be your next diagnostic step?",
-      "finalDebrief": "This case highlights the importance of medication adherence in EoE management. Brandon's inconsistent use of swallowed fluticasone likely contributed to ongoing esophageal inflammation and food impaction. How did your differential evolve as you learned about his established diagnosis and medication non-adherence? What key teaching points about EoE management and complications would you emphasize?"
+      "finalDebrief": "This case highlights the importance of medication adherence in EoE management. Brandon's inconsistent use of swallowed fluticasone likely contributed to ongoing esophageal inflammation and food impaction. How did your differential evolve as you learned about his established diagnosis and medication non-adherence? What key teaching points about EoE management and complications would you emphasize?",
+      "final": "Diagnosis: EoE, active, fibrostenotic phenotype, wheat as primary trigger. Key teaching points: (1) EoE diagnosis requires \u226515 eosinophils/hpf on esophageal biopsy AND clinical symptoms of esophageal dysfunction \u2014 biopsies from multiple esophageal levels (proximal, mid, distal) required since patchy. (2) Distinguish from GERD: in EoE, eosinophilia is paneso esophageal; in GERD, it's distal only and improves with PPI. A 6-8 week PPI trial before biopsy interpretation is recommended. (3) EoE is T-helper 2 driven (IL-4, IL-5, IL-13) \u2014 same pathway as asthma and atopic disease. Food antigen-driven, not IgE-mediated (hence skin test/RAST unreliable for trigger identification). (4) Treatment: topical swallowed steroids (first-line), elimination diet (6-food elimination or SFED), esophageal dilation for stricture. Dupilumab (IL-4R\u03b1 antagonist) is FDA-approved for EoE. (5) Fibrostenotic vs. inflammatory phenotype: inflammation = good response to steroids; fibrostenotic = rings/stricture may require dilation despite steroid response."
     }
+  },
+  "meta": {
+    "diagnosis": "Eosinophilic Esophagitis (EoE) \u2014 Active, Fibrostenotic Phenotype; Food Trigger Identified (Wheat)"
   }
 };

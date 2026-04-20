@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "9144 Foxglove Dr, Memphis, TN 38107",
       "insurance": "Medicare Part A/B",
       "pcp": "Dr. Raj Patel, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "David Chen-Vasquez",
         "phone": "(720) 555-8527",
@@ -133,7 +133,7 @@ window.EMR_DATA = {
           "bp": "128/78",
           "hr": "96",
           "rr": "18",
-          "temp": "37.0°C",
+          "temp": "37.0\u00b0C",
           "spo2": "98%",
           "pain": "6/10"
         }
@@ -156,7 +156,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -170,7 +170,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -246,7 +246,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "CSU flare with severe hives and angioedema despite antihistamines",
-          "hpi": "Mariana Chen-Vasquez — CSU flare with severe hives and angioedema despite antihistamines",
+          "hpi": "Mariana Chen-Vasquez \u2014 CSU flare with severe hives and angioedema despite antihistamines",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -255,7 +255,7 @@ window.EMR_DATA = {
     },
     "inpatient": {
       "patient": {
-        "chiefComplaint": "Admitted for refractory CSU flare — starting omalizumab",
+        "chiefComplaint": "Admitted for refractory CSU flare \u2014 starting omalizumab",
         "diagnosis": "Chronic Spontaneous Urticaria"
       },
       "problems": [
@@ -319,7 +319,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -342,7 +342,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -356,7 +356,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -431,8 +431,8 @@ window.EMR_DATA = {
           "type": "Admission",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Admitted for refractory CSU flare — starting omalizumab",
-          "hpi": "Mariana Chen-Vasquez — Admitted for refractory CSU flare — starting omalizumab",
+          "cc": "Admitted for refractory CSU flare \u2014 starting omalizumab",
+          "hpi": "Mariana Chen-Vasquez \u2014 Admitted for refractory CSU flare \u2014 starting omalizumab",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -441,7 +441,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — CSU refractory to high-dose antihistamines, biologic evaluation",
+        "chiefComplaint": "A/I consult \u2014 CSU refractory to high-dose antihistamines, biologic evaluation",
         "diagnosis": "Chronic Spontaneous Urticaria"
       },
       "problems": [
@@ -496,7 +496,7 @@ window.EMR_DATA = {
           "bp": "116/72",
           "hr": "76",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "3/10"
         }
@@ -519,7 +519,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -533,7 +533,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -608,8 +608,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — CSU refractory to high-dose antihistamines, biologic evaluation",
-          "hpi": "Mariana Chen-Vasquez — A/I consult — CSU refractory to high-dose antihistamines, biologic evaluation",
+          "cc": "A/I consult \u2014 CSU refractory to high-dose antihistamines, biologic evaluation",
+          "hpi": "Mariana Chen-Vasquez \u2014 A/I consult \u2014 CSU refractory to high-dose antihistamines, biologic evaluation",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -673,7 +673,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -696,7 +696,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -710,7 +710,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -808,7 +808,7 @@ window.EMR_DATA = {
     "address": "1239 Magnolia Blvd, Richmond, VA 23220",
     "insurance": "Medicare Part A/B",
     "pcp": "Dr. Raj Patel, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "David Chen-Vasquez",
       "phone": "(505) 555-2291",
@@ -819,47 +819,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Hashimoto's thyroiditis",
+      "problem": "Chronic spontaneous urticaria \u2014 refractory",
+      "icd": "L50.1",
+      "onset": "2024",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Daily hives >6 weeks; no identifiable trigger; UAS7=28 (severe); failed cetirizine 20mg daily"
     },
     {
-      "id": "prob-2",
-      "description": "Vitamin D deficiency",
+      "problem": "Thyroid autoimmunity (Hashimoto's thyroiditis)",
+      "icd": "E06.3",
+      "onset": "2021",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Anti-TPO positive; TSH normal; associated with autoimmune urticaria in ~30%"
+    },
+    {
+      "problem": "Autoimmune urticaria \u2014 positive autologous serum skin test",
+      "icd": "L50.1",
+      "onset": "2024",
+      "status": "Active",
+      "notes": "ASST positive; anti-Fc\u03b5RI antibodies suspected"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Cetirizine",
-      "dose": "10mg",
-      "route": "PO",
-      "frequency": "BID (uptitrated)",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Cetirizine 20mg daily (double-dose)",
+      "sig": "Take 2 tablets by mouth daily (2x standard dose per EAACI guidelines)",
+      "prescriber": "Dr. Rodriguez",
+      "start": "09/2024",
+      "refills": 3,
+      "status": "Active \u2014 inadequate control"
     },
     {
-      "id": "med-2",
-      "name": "Famotidine",
-      "dose": "20mg",
-      "route": "PO",
-      "frequency": "BID",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Levothyroxine 75mcg daily",
+      "sig": "Take 1 tablet by mouth daily on empty stomach",
+      "prescriber": "Dr. Kim",
+      "start": "03/2022",
+      "refills": 5,
+      "status": "Active"
     },
     {
-      "id": "med-3",
-      "name": "Levothyroxine",
-      "dose": "88mcg",
-      "route": "PO",
-      "frequency": "Daily",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Omalizumab (Xolair) 300mg SC q4 weeks (NEW)",
+      "sig": "Administer 300mg subcutaneously every 4 weeks in clinic; observe 30 min post-injection",
+      "prescriber": "Dr. Rodriguez",
+      "start": "11/2024",
+      "refills": 5,
+      "status": "Active \u2014 first injection today"
     }
   ],
   "allergies": [
@@ -877,7 +881,7 @@ window.EMR_DATA = {
       "bp": "118/72",
       "hr": "72",
       "rr": "14",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "5/10"
     }
@@ -897,100 +901,71 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-213666",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "11/01/2024",
+      "panel": "CSU Workup Panel",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "CBC with differential",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "CMP",
+          "value": "Normal",
+          "unit": "",
+          "ref": "Normal",
+          "flag": ""
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Ige",
-              "value": "45",
-              "unit": "IU/mL",
-              "range": "<100",
-              "flag": ""
-            },
-            {
-              "test": "Tsh",
-              "value": "4.8",
-              "unit": "mIU/L",
-              "range": "0.4-4.0",
-              "flag": "H"
-            },
-            {
-              "test": "Thyroid Ab",
-              "value": "Positive",
-              "unit": "",
-              "range": "Negative",
-              "flag": "H"
-            }
-          ]
+          "test": "TSH",
+          "value": "2.1",
+          "unit": "mIU/L",
+          "ref": "0.4-4.0",
+          "flag": ""
+        },
+        {
+          "test": "Anti-TPO antibody",
+          "value": "840",
+          "unit": "IU/mL",
+          "ref": "<35",
+          "flag": "H"
+        },
+        {
+          "test": "Anti-thyroglobulin",
+          "value": "210",
+          "unit": "IU/mL",
+          "ref": "<20",
+          "flag": "H"
+        },
+        {
+          "test": "ANA",
+          "value": "1:40, speckled",
+          "unit": "",
+          "ref": "<1:40",
+          "flag": ""
+        },
+        {
+          "test": "C4",
+          "value": "22",
+          "unit": "mg/dL",
+          "ref": "16-47",
+          "flag": ""
+        },
+        {
+          "test": "Autologous Serum Skin Test (ASST)",
+          "value": "Positive \u2014 4mm wheal at 30 min",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "UAS7 score",
+          "value": "28",
+          "unit": "points",
+          "ref": "<7 (well-controlled)",
+          "flag": "H"
         }
       ]
     }
@@ -1034,24 +1009,24 @@ window.EMR_DATA = {
       "validates": [
         "Wheals <24h = urticaria; >24h with bruising = biopsy for UV",
         "UAS7 scoring",
-        "Step-up: sgAH → updose 4x → omalizumab → cyclosporine",
+        "Step-up: sgAH \u2192 updose 4x \u2192 omalizumab \u2192 cyclosporine",
         "Post-viral urticaria in children: no allergy testing needed"
       ]
     }
   ],
   "teachingPoints": {
     "keyLearning": [
-      "CSU is defined by urticaria (wheals and/or angioedema) present for >6 weeks without identifiable external trigger. In ~35–40% of cases, an autoimmune mechanism is identified: IgG autoantibodies against IgE (Type IIb) or FcεRIα (the high-affinity IgE receptor, Type IIb) — causing direct mast cell activation.",
-      "Omalizumab (anti-IgE, Xolair) is FDA-approved for CSU refractory to antihistamines. Mechanism: binds free IgE → reduces FcεRI expression on mast cells → mast cell quiescence. Response typically within 1–4 weeks. 300 mg Q4W standard dose.",
-      "H1 antihistamines (up to 4× standard dose) are first-line before stepping up to omalizumab. H2 antihistamines and montelukast add minimal additional benefit beyond high-dose H1 antihistamines."
+      "CSU is defined by urticaria (wheals and/or angioedema) present for >6 weeks without identifiable external trigger. In ~35\u201340% of cases, an autoimmune mechanism is identified: IgG autoantibodies against IgE (Type IIb) or Fc\u03b5RI\u03b1 (the high-affinity IgE receptor, Type IIb) \u2014 causing direct mast cell activation.",
+      "Omalizumab (anti-IgE, Xolair) is FDA-approved for CSU refractory to antihistamines. Mechanism: binds free IgE \u2192 reduces Fc\u03b5RI expression on mast cells \u2192 mast cell quiescence. Response typically within 1\u20134 weeks. 300 mg Q4W standard dose.",
+      "H1 antihistamines (up to 4\u00d7 standard dose) are first-line before stepping up to omalizumab. H2 antihistamines and montelukast add minimal additional benefit beyond high-dose H1 antihistamines."
     ],
     "boardPearls": [
       "CSU definition: urticaria >6 weeks duration without identifiable trigger. Distinguish from inducible urticaria (physical triggers: cold, pressure, exercise).",
-      "Autoimmune CSU markers: positive autologous serum skin test (ASST), anti-FcεRIα IgG, anti-IgE IgG. Basophil activation test (BAT) best validated.",
-      "Treatment stepwise: H1 antihistamine (standard dose) → H1 antihistamine (2–4× dose) → omalizumab 300 mg Q4W → cyclosporine.",
-      "Omalizumab for CSU: 300 mg Q4W. Rapid responders (1–4 wks): IgE-mediated mechanism. Slow responders (8–12 wks): autoimmune mechanism.",
-      "Lab workup: CBC (eosinophilia?), TSH/anti-TPO (thyroid autoimmunity in 15–20% of CSU), ANA (SLE-associated urticaria), CRP/ESR (urticarial vasculitis if elevated + wheals lasting >24h).",
-      "Wheals lasting >24h + residual bruising → biopsy → urticarial vasculitis."
+      "Autoimmune CSU markers: positive autologous serum skin test (ASST), anti-Fc\u03b5RI\u03b1 IgG, anti-IgE IgG. Basophil activation test (BAT) best validated.",
+      "Treatment stepwise: H1 antihistamine (standard dose) \u2192 H1 antihistamine (2\u20134\u00d7 dose) \u2192 omalizumab 300 mg Q4W \u2192 cyclosporine.",
+      "Omalizumab for CSU: 300 mg Q4W. Rapid responders (1\u20134 wks): IgE-mediated mechanism. Slow responders (8\u201312 wks): autoimmune mechanism.",
+      "Lab workup: CBC (eosinophilia?), TSH/anti-TPO (thyroid autoimmunity in 15\u201320% of CSU), ANA (SLE-associated urticaria), CRP/ESR (urticarial vasculitis if elevated + wheals lasting >24h).",
+      "Wheals lasting >24h + residual bruising \u2192 biopsy \u2192 urticarial vasculitis."
     ]
   },
   "guided": {
@@ -1113,13 +1088,12 @@ window.EMR_DATA = {
       "Auscultate heart and lungs": "Regular rate and rhythm, lungs clear to auscultation bilaterally"
     },
     "ddxTargets": [
-      "Chronic spontaneous urticaria (correct diagnosis)",
-      "Chronic inducible urticaria",
-      "Autoimmune urticaria",
-      "Drug-induced urticaria",
-      "Systemic mastocytosis",
-      "Contact dermatitis",
-      "Atopic dermatitis"
+      "Chronic spontaneous urticaria \u2014 autoimmune subtype, refractory (correct)",
+      "Chronic inducible urticaria \u2014 triggered by physical stimuli (cold, pressure, heat); rule out by history",
+      "Urticarial vasculitis \u2014 lesions last >24h, bruise/resolve with pigmentation; biopsy shows leukocytoclasis",
+      "Hereditary angioedema \u2014 no urticaria; C4 low; different mechanism",
+      "Drug-induced urticaria \u2014 no new medications; must be considered in all new-onset urticaria",
+      "Mastocytosis \u2014 flushing, syncope; serum tryptase elevated; urticaria pigmentosa on skin"
     ],
     "biasFlags": {
       "anchoring": "Don't anchor on the patient's existing autoimmune condition (Hashimoto's) and assume this is necessarily autoimmune-related urticaria without considering the broader differential",
@@ -1129,7 +1103,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before you interview the patient, consider what key features distinguish acute from chronic urticaria, and what red flags you'd want to rule out. What specific questions will help you determine if this is spontaneous versus inducible urticaria?",
       "phase5": "Now that you've gathered your history and physical findings, what does the 8-week duration tell you about classification? How does the positive dermographism and response pattern to antihistamines help narrow your differential diagnosis?",
-      "finalDebrief": "This case illustrates chronic spontaneous urticaria, where lesions persist >6 weeks without identifiable triggers. Notice how the history of autoimmune thyroiditis might have initially suggested autoimmune urticaria, but the clinical presentation and partial antihistamine response point toward the more common chronic spontaneous form. The positive dermographism indicates she also has inducible urticaria, which can coexist."
+      "finalDebrief": "This case illustrates chronic spontaneous urticaria, where lesions persist >6 weeks without identifiable triggers. Notice how the history of autoimmune thyroiditis might have initially suggested autoimmune urticaria, but the clinical presentation and partial antihistamine response point toward the more common chronic spontaneous form. The positive dermographism indicates she also has inducible urticaria, which can coexist.",
+      "final": "Diagnosis: chronic spontaneous urticaria, autoimmune subtype, refractory to up-dosed antihistamines \u2014 omalizumab indicated. Key teaching points: (1) CSU = urticaria >6 weeks with no identifiable external trigger. UAS7 \u226516 = inadequately controlled. (2) Treatment ladder (EAACI/AAAAI): Step 1: H1 antihistamine standard dose \u2192 Step 2: H1 antihistamine up to 4x dose \u2192 Step 3: Omalizumab 300mg q4w \u2192 Step 4: cyclosporine. (3) Omalizumab mechanism in CSU: anti-IgE, but CSU response does NOT correlate with baseline IgE \u2014 different from asthma mechanism. ~65% complete response, ~80% significant response. (4) Positive ASST and anti-TPO support autoimmune urticaria subtype \u2014 may predict slower omalizumab response but does not change management. (5) Workup for CSU is focused (CBC, CMP, TSH) \u2014 extensive infection/malignancy workup is NOT routinely indicated and rarely identifies a cause."
     }
+  },
+  "meta": {
+    "diagnosis": "Chronic Spontaneous Urticaria (CSU) \u2014 Refractory to H1 Antihistamine; Candidate for Omalizumab"
   }
 };

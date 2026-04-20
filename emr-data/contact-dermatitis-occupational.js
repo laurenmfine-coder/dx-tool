@@ -16,7 +16,7 @@ window.EMR_DATA = {
       "address": "2679 Elm St, Memphis, TN 38108",
       "insurance": "Medicaid",
       "pcp": "Dr. Elena Rodriguez, MD",
-      "pharmacy": "CVS Pharmacy — Main St",
+      "pharmacy": "CVS Pharmacy \u2014 Main St",
       "emergencyContact": {
         "name": "Michael Rivera",
         "phone": "(720) 555-6314",
@@ -45,11 +45,11 @@ window.EMR_DATA = {
     "socialHistory": [
       [
         "Occupation",
-        "ICU nurse — wears nitrile gloves 8+ hours/day, washes hands 40+ times/shift"
+        "ICU nurse \u2014 wears nitrile gloves 8+ hours/day, washes hands 40+ times/shift"
       ],
       [
         "Patch testing",
-        "Pending — referred for TRUE test and extended panel"
+        "Pending \u2014 referred for TRUE test and extended panel"
       ],
       [
         "Key considerations",
@@ -60,7 +60,7 @@ window.EMR_DATA = {
   "encounters": {
     "ed": {
       "patient": {
-        "chiefComplaint": "Healthcare worker with acute hand swelling — latex contact urticaria",
+        "chiefComplaint": "Healthcare worker with acute hand swelling \u2014 latex contact urticaria",
         "diagnosis": "Occupational Contact Dermatitis"
       },
       "problems": [
@@ -73,7 +73,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Healthcare worker — frequent glove use and hand washing",
+          "description": "Healthcare worker \u2014 frequent glove use and hand washing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -124,7 +124,7 @@ window.EMR_DATA = {
           "bp": "122/76",
           "hr": "92",
           "rr": "18",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "5/10"
         }
@@ -147,7 +147,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -161,7 +161,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -222,8 +222,8 @@ window.EMR_DATA = {
           "type": "Emergency Visit",
           "date": "03/02/2026",
           "provider": "Dr. Attending",
-          "cc": "Healthcare worker with acute hand swelling — latex contact urticaria",
-          "hpi": "Danielle Rivera — Healthcare worker with acute hand swelling — latex contact urticaria",
+          "cc": "Healthcare worker with acute hand swelling \u2014 latex contact urticaria",
+          "hpi": "Danielle Rivera \u2014 Healthcare worker with acute hand swelling \u2014 latex contact urticaria",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -245,7 +245,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Healthcare worker — frequent glove use and hand washing",
+          "description": "Healthcare worker \u2014 frequent glove use and hand washing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -278,7 +278,7 @@ window.EMR_DATA = {
           "bp": "118/72",
           "hr": "82",
           "rr": "16",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "2/10"
         }
@@ -301,7 +301,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -315,7 +315,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -377,7 +377,7 @@ window.EMR_DATA = {
           "date": "03/02/2026",
           "provider": "Dr. Attending",
           "cc": "Brief observation after latex contact urticaria with mild systemic symptoms",
-          "hpi": "Danielle Rivera — Brief observation after latex contact urticaria with mild systemic symptoms",
+          "hpi": "Danielle Rivera \u2014 Brief observation after latex contact urticaria with mild systemic symptoms",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -386,7 +386,7 @@ window.EMR_DATA = {
     },
     "consult": {
       "patient": {
-        "chiefComplaint": "A/I consult — differentiate irritant vs allergic contact dermatitis, patch testing",
+        "chiefComplaint": "A/I consult \u2014 differentiate irritant vs allergic contact dermatitis, patch testing",
         "diagnosis": "Occupational Contact Dermatitis"
       },
       "problems": [
@@ -399,7 +399,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Healthcare worker — frequent glove use and hand washing",
+          "description": "Healthcare worker \u2014 frequent glove use and hand washing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -432,7 +432,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "2/10"
         }
@@ -455,7 +455,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -469,7 +469,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -530,8 +530,8 @@ window.EMR_DATA = {
           "type": "Consultation",
           "date": "03/02/2026",
           "provider": "Dr. Allergist",
-          "cc": "A/I consult — differentiate irritant vs allergic contact dermatitis, patch testing",
-          "hpi": "Danielle Rivera — A/I consult — differentiate irritant vs allergic contact dermatitis, patch testing",
+          "cc": "A/I consult \u2014 differentiate irritant vs allergic contact dermatitis, patch testing",
+          "hpi": "Danielle Rivera \u2014 A/I consult \u2014 differentiate irritant vs allergic contact dermatitis, patch testing",
           "exam": "See documentation.",
           "assessment": "See assessment.",
           "plan": "See orders."
@@ -553,7 +553,7 @@ window.EMR_DATA = {
         },
         {
           "id": "prob-2",
-          "description": "Healthcare worker — frequent glove use and hand washing",
+          "description": "Healthcare worker \u2014 frequent glove use and hand washing",
           "status": "Active",
           "onset": "Chronic",
           "icd10": ""
@@ -586,7 +586,7 @@ window.EMR_DATA = {
           "bp": "112/68",
           "hr": "72",
           "rr": "14",
-          "temp": "36.8°C",
+          "temp": "36.8\u00b0C",
           "spo2": "99%",
           "pain": "4/10"
         }
@@ -609,7 +609,7 @@ window.EMR_DATA = {
                 {
                   "test": "WBC",
                   "value": "7.8",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "4.5-11.0",
                   "flag": ""
                 },
@@ -623,7 +623,7 @@ window.EMR_DATA = {
                 {
                   "test": "Platelets",
                   "value": "248",
-                  "unit": "x10³/µL",
+                  "unit": "x10\u00b3/\u00b5L",
                   "range": "150-400",
                   "flag": ""
                 }
@@ -707,7 +707,7 @@ window.EMR_DATA = {
     "address": "7359 E Roosevelt Rd, Albuquerque, NM 87108",
     "insurance": "Medicaid",
     "pcp": "Dr. Elena Rodriguez, MD",
-    "pharmacy": "CVS Pharmacy — Main St",
+    "pharmacy": "CVS Pharmacy \u2014 Main St",
     "emergencyContact": {
       "name": "Michael Rivera",
       "phone": "(312) 555-3549",
@@ -718,38 +718,51 @@ window.EMR_DATA = {
   },
   "problems": [
     {
-      "id": "prob-1",
-      "description": "Chronic hand dermatitis for 8 months",
+      "problem": "Occupational allergic contact dermatitis \u2014 rubber accelerators (thiuram mix)",
+      "icd": "L23.5",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Patch test positive thiuram mix +3; negative latex; glove changes to nitrile insufficient if nitrile contains thiurams"
     },
     {
-      "id": "prob-2",
-      "description": "Healthcare worker — frequent glove use and hand washing",
+      "problem": "Hand eczema, chronic, refractory",
+      "icd": "L30.4",
+      "onset": "2022",
       "status": "Active",
-      "onset": "Chronic",
-      "icd10": ""
+      "notes": "Distributed at glove contact sites; worse after shifts; improved on vacation"
+    },
+    {
+      "problem": "Healthcare worker occupational exposure",
+      "icd": "Z77.110",
+      "onset": "2022",
+      "status": "Active",
+      "notes": "Nurse, 12-hour shifts; high-volume glove use"
     }
   ],
   "medications": [
     {
-      "id": "med-1",
-      "name": "Clobetasol 0.05% ointment",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "BID to hands",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Triamcinolone acetonide 0.1% cream BID",
+      "sig": "Apply thin layer to affected areas twice daily; do not use under occlusion",
+      "prescriber": "Dr. Rodriguez",
+      "start": "10/2024",
+      "refills": 2,
+      "status": "Active"
     },
     {
-      "id": "med-2",
-      "name": "Petroleum jelly",
-      "dose": "",
-      "route": "Topical",
-      "frequency": "After hand washing",
-      "status": "Active",
-      "prescriber": "Dr. Elena Rodriguez, MD"
+      "name": "Tacrolimus 0.1% ointment BID (maintenance)",
+      "sig": "Apply twice daily to hands for maintenance; steroid-sparing",
+      "prescriber": "Dr. Rodriguez",
+      "start": "10/2024",
+      "refills": 2,
+      "status": "Active"
+    },
+    {
+      "name": "Cetirizine 10mg daily",
+      "sig": "Take 1 tablet daily for itch control",
+      "prescriber": "Dr. Rodriguez",
+      "start": "10/2024",
+      "refills": 3,
+      "status": "Active"
     }
   ],
   "allergies": [
@@ -767,7 +780,7 @@ window.EMR_DATA = {
       "bp": "112/68",
       "hr": "72",
       "rr": "14",
-      "temp": "36.8°C",
+      "temp": "36.8\u00b0C",
       "spo2": "99%",
       "pain": "4/10"
     }
@@ -787,86 +800,57 @@ window.EMR_DATA = {
   ],
   "labs": [
     {
-      "date": "03/02/2026",
-      "time": "08:15",
-      "status": "Final",
-      "orderedBy": "Dr. Attending",
-      "accession": "LAB-331063",
-      "collected": "03/02/2026 08:10",
-      "fasting": "Not fasting",
-      "facility": "ReasonDx Medical Center",
-      "specimenType": "Blood",
-      "groups": [
+      "date": "10/28/2024",
+      "panel": "Patch Testing \u2014 Baseline Series plus Rubber Chemicals",
+      "results": [
         {
-          "name": "CBC WITH DIFFERENTIAL",
-          "results": [
-            {
-              "test": "WBC",
-              "value": "7.8",
-              "unit": "x10³/µL",
-              "range": "4.5-11.0",
-              "flag": ""
-            },
-            {
-              "test": "Hemoglobin",
-              "value": "13.4",
-              "unit": "g/dL",
-              "range": "12.0-16.0",
-              "flag": ""
-            },
-            {
-              "test": "Platelets",
-              "value": "248",
-              "unit": "x10³/µL",
-              "range": "150-400",
-              "flag": ""
-            }
-          ]
+          "test": "Thiuram mix (rubber accelerator)",
+          "value": "+++",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "BASIC METABOLIC PANEL",
-          "results": [
-            {
-              "test": "Sodium",
-              "value": "140",
-              "unit": "mEq/L",
-              "range": "136-145",
-              "flag": ""
-            },
-            {
-              "test": "Potassium",
-              "value": "4.1",
-              "unit": "mEq/L",
-              "range": "3.5-5.0",
-              "flag": ""
-            },
-            {
-              "test": "Creatinine",
-              "value": "0.8",
-              "unit": "mg/dL",
-              "range": "0.6-1.2",
-              "flag": ""
-            },
-            {
-              "test": "Glucose",
-              "value": "92",
-              "unit": "mg/dL",
-              "range": "70-100",
-              "flag": ""
-            }
-          ]
+          "test": "Carba mix (rubber accelerator)",
+          "value": "++",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
         },
         {
-          "name": "ALLERGY & IMMUNOLOGY STUDIES",
-          "results": [
-            {
-              "test": "Latex Ig E",
-              "value": "8.2",
-              "unit": "kU/L",
-              "range": "<0.35",
-              "flag": "H"
-            }
-          ]
+          "test": "Mercaptobenzothiazole",
+          "value": "+",
+          "unit": "",
+          "ref": "Negative",
+          "flag": "H"
+        },
+        {
+          "test": "Latex (Hevea brasiliensis)",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Nickel sulfate",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Formaldehyde",
+          "value": "Negative",
+          "unit": "",
+          "ref": "Negative",
+          "flag": ""
+        },
+        {
+          "test": "Latex RAST (IgE)",
+          "value": "<0.35",
+          "unit": "kUA/L",
+          "ref": "<0.35",
+          "flag": ""
         }
       ]
     }
@@ -886,11 +870,11 @@ window.EMR_DATA = {
   "socialHistory": [
     [
       "Occupation",
-      "ICU nurse — wears nitrile gloves 8+ hours/day, washes hands 40+ times/shift"
+      "ICU nurse \u2014 wears nitrile gloves 8+ hours/day, washes hands 40+ times/shift"
     ],
     [
       "Patch testing",
-      "Pending — referred for TRUE test and extended panel"
+      "Pending \u2014 referred for TRUE test and extended panel"
     ],
     [
       "Key considerations",
@@ -917,20 +901,20 @@ window.EMR_DATA = {
   ],
   "teachingPoints": {
     "keyLearning": [
-      "Allergic contact dermatitis (ACD) is Type IV (T-cell mediated, delayed hypersensitivity) — NOT IgE-mediated. SPT will be negative. Patch testing is the diagnostic gold standard.",
-      "Patch testing protocol: Finn chambers applied to upper back × 48h → removed at 48h (read 1) → re-read at 96h (read 2). BOTH readings required — late reactions (96h only) would be missed without second read.",
-      "Occupational ACD most common sensitizers: nickel (#1 overall), fragrance mix, balsam of Peru, rubber accelerators (thiurams, carbamates — latex gloves), epoxy resin (construction workers), paraphenylenediamine (PPD — hair dye, black henna).",
+      "Allergic contact dermatitis (ACD) is Type IV (T-cell mediated, delayed hypersensitivity) \u2014 NOT IgE-mediated. SPT will be negative. Patch testing is the diagnostic gold standard.",
+      "Patch testing protocol: Finn chambers applied to upper back \u00d7 48h \u2192 removed at 48h (read 1) \u2192 re-read at 96h (read 2). BOTH readings required \u2014 late reactions (96h only) would be missed without second read.",
+      "Occupational ACD most common sensitizers: nickel (#1 overall), fragrance mix, balsam of Peru, rubber accelerators (thiurams, carbamates \u2014 latex gloves), epoxy resin (construction workers), paraphenylenediamine (PPD \u2014 hair dye, black henna).",
       "Nickel ACD: elicited by nickel in costume jewelry, belt buckles, jeans buttons, cell phones, watchbands. Treatment: strict nickel avoidance. Dimethylglyoxime test can detect nickel in metal objects.",
       "Irritant contact dermatitis (ICD) vs ACD: ICD is non-immunologic (direct chemical damage). No sensitization needed. Occurs in anyone with sufficient exposure. Patch test NEGATIVE. ICD: hairdressers (detergents), healthcare workers (hand washing), food handlers.",
-      "Systemic contact dermatitis: after sensitization to a topical allergen, systemic exposure to the same chemical (oral, IV) can trigger widespread ACD — baboon syndrome (perianal + flexural erythema) with systemic nickel or balsam of Peru ingestion."
+      "Systemic contact dermatitis: after sensitization to a topical allergen, systemic exposure to the same chemical (oral, IV) can trigger widespread ACD \u2014 baboon syndrome (perianal + flexural erythema) with systemic nickel or balsam of Peru ingestion."
     ],
     "boardPearls": [
-      "ACD = Type IVa (Th1 / CD4+ contact hypersensitivity). Patch test positive at 48–96h.",
+      "ACD = Type IVa (Th1 / CD4+ contact hypersensitivity). Patch test positive at 48\u201396h.",
       "Patch test interpretation: erythema only = negative/irritant. Erythema + papules = 1+. Erythema + papules + vesicles = 2+. Confluent vesicles, spreading, bullae = 3+ (strong positive).",
       "Most common patch test positives: nickel, fragrance mix, balsam of Peru, thimerosal, cobalt, rubber mix, neomycin, quaternium-15.",
       "Neomycin ACD: topical antibiotic in wound care products. Classic: eczematous reaction to antibiotic ointment (Neosporin) used on wound.",
-      "PPD (paraphenylenediamine): hair dye + black henna tattoos. Sensitization → permanent hair dye allergy. Cross-reacts with azo dyes, sulfonamides, benzocaine.",
-      "Rubber accelerators (thiurams, carbamates): latex gloves → ACD on dorsal hands. Separate from latex protein (Type I IgE) anaphylaxis.",
+      "PPD (paraphenylenediamine): hair dye + black henna tattoos. Sensitization \u2192 permanent hair dye allergy. Cross-reacts with azo dyes, sulfonamides, benzocaine.",
+      "Rubber accelerators (thiurams, carbamates): latex gloves \u2192 ACD on dorsal hands. Separate from latex protein (Type I IgE) anaphylaxis.",
       "Treatment: identify and avoid allergen + potent TCS for acute flares. Long-term: barrier protection, allergen-free gloves/products."
     ]
   },
@@ -993,13 +977,12 @@ window.EMR_DATA = {
       "Assess severity using standardized scoring": "Moderate to severe hand dermatitis with significant functional impairment"
     },
     "ddxTargets": [
-      "Occupational contact dermatitis (irritant) (correct diagnosis)",
-      "Allergic contact dermatitis",
-      "Atopic dermatitis with occupational exacerbation",
-      "Contact urticaria/latex allergy (must-not-miss)",
-      "Dyshidrotic eczema (must-not-miss)",
-      "Psoriasis (common mimic)",
-      "Fungal infection/tinea manuum (common mimic)"
+      "Occupational allergic contact dermatitis \u2014 thiuram rubber accelerator hypersensitivity (correct)",
+      "Irritant contact dermatitis \u2014 patch test positive distinguishes allergic from irritant",
+      "Latex allergy (Type I, IgE-mediated) \u2014 latex IgE negative; patch test to latex negative",
+      "Atopic dermatitis \u2014 distribution at glove sites, occupational correlation argues against primary AD",
+      "Dyshidrotic eczema (pompholyx) \u2014 vesicular, palmar; not glove-distribution",
+      "Tinea manuum \u2014 KOH prep would confirm; unilateral more typical"
     ],
     "biasFlags": {
       "anchoring": "Risk of anchoring on latex allergy history and missing that nitrile gloves can cause both irritant and allergic contact dermatitis through rubber accelerators",
@@ -1009,7 +992,11 @@ window.EMR_DATA = {
     "coachPrompts": {
       "phase2": "Before interviewing the patient, think about the different mechanisms that can cause hand dermatitis in healthcare workers. What are the main categories of contact dermatitis, and how might they present differently? Consider both immediate and delayed hypersensitivity reactions.",
       "phase5": "Now that you've gathered your history and physical findings, consider the timeline and pattern of this patient's dermatitis. How do the distribution, morphology, and occupational factors help you differentiate between irritant versus allergic contact dermatitis? What role might her latex allergy play in her current presentation?",
-      "finalDebrief": "This case highlights occupational irritant contact dermatitis, which is often multifactorial in healthcare workers. While the patient has a known latex allergy, her current symptoms are primarily due to irritant effects from frequent handwashing, sanitizers, and glove occlusion. The pending patch testing will help identify any additional contact allergens like rubber accelerators in nitrile gloves. How did your differential diagnosis evolve as you gathered more clinical information?"
+      "finalDebrief": "This case highlights occupational irritant contact dermatitis, which is often multifactorial in healthcare workers. While the patient has a known latex allergy, her current symptoms are primarily due to irritant effects from frequent handwashing, sanitizers, and glove occlusion. The pending patch testing will help identify any additional contact allergens like rubber accelerators in nitrile gloves. How did your differential diagnosis evolve as you gathered more clinical information?",
+      "final": "Diagnosis: occupational allergic contact dermatitis from Type IV (T-cell mediated) hypersensitivity to thiuram mix rubber accelerators in gloves. Key teaching points: (1) Distinguish Type I (latex IgE-mediated, immediate, anaphylaxis risk) from Type IV (rubber chemical, delayed, eczematous). Latex IgE negative here \u2014 this is NOT latex allergy. (2) Thiuram accelerators are in most rubber gloves including many nitrile products \u2014 simply switching to 'nitrile' is insufficient. Must specify accelerator-free nitrile gloves (e.g., Dermaprene, Mapa) or vinyl. (3) Patch testing is the gold standard for Type IV contact hypersensitivity \u2014 48h and 96h readings required. PPD, thiurams, carbas are common occupational culprits in healthcare workers. (4) Work accommodation: document the occupational diagnosis (required for OSHA/workers comp). Discuss with employee health for glove substitution accommodation. (5) Ongoing exposure despite treatment will lead to sensitization spread and chronic hand eczema \u2014 allergen avoidance is curative if caught early."
     }
+  },
+  "meta": {
+    "diagnosis": "Occupational Allergic Contact Dermatitis \u2014 Rubber Accelerator (Thiuram) Hypersensitivity; Type IV (Delayed) Hypersensitivity"
   }
 };
